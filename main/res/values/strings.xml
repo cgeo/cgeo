@@ -35,6 +35,7 @@
   <string name="ape">Project APE Cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS Adventures Exhibit</string>
+  <string name="gc_live_map">Live Map</string>
   <string name="unknown">Unknown Type</string>
 
   <!-- cache sizes -->

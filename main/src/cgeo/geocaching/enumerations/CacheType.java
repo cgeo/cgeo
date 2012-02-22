@@ -30,7 +30,7 @@ public enum CacheType {
     GCHQ("gchq", "groundspeak hq", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.drawable.type_hq),
     GPS_EXHIBIT("gps", "gps cache exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.drawable.type_traditional), // icon missing
     // GC Live Map
-    GC_LIVE_MAP("live map", "live map", "", R.string.unknown, R.drawable.type_unknown),
+    GC_LIVE_MAP("live map", "live map", "", R.string.gc_live_map, R.drawable.type_unknown),
     UNKNOWN("unknown", "unknown", "", R.string.unknown, R.drawable.type_mystery), // icon missing
     /** No real cache type -> filter */
     ALL("all", "display all caches", "9a79e6ce-3344-409c-bbe9-496530baf758", R.string.all_types, R.drawable.type_mystery);

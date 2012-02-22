@@ -98,6 +98,7 @@ public class cgCache implements ICache {
     private String nameForSorting;
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
+    private int zoomlevel = -1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -1313,5 +1314,13 @@ public class cgCache implements ICache {
     public void store(Activity activity, CancellableHandler handler) {
         final int listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
         cgBase.storeCache(activity, this, null, listId, handler);
+    }
+
+    public int getZoomlevel() {
+        return this.zoomlevel;
+    }
+
+    public void setZoomlevel(int zoomlevel) {
+        this.zoomlevel = zoomlevel;
     }
 }

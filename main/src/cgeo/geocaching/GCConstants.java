@@ -139,5 +139,6 @@ public final class GCConstants {
     public final static Pattern PATTERN_USERTOKEN2 = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
 
     /** Live Map since 14.02.2012 */
+    public final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
     public final static Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
 }

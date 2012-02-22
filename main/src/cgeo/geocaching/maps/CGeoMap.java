@@ -114,7 +114,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private int[] mapStateIntent = null;
     // status data
     private SearchResult search = null;
-    private String token = null;
+    private String[] tokens = null;
     private boolean noMapTokenShowed = false;
     // map status data
     private boolean followMyLocation = false;
@@ -1265,9 +1265,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         throw new ThreadDeath();
                     }
 
-                    if (token == null) {
+                    if (tokens == null) {
                         // token = cgBase.getMapUserToken(noMapTokenHandler);
-                        token = GCBase.getSessionToken();
+                        tokens = GCBase.getTokens();
                     }
 
                     if (stop) {
@@ -1276,12 +1276,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     final Viewport viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
                     // search = cgBase.searchByViewport(token, viewport);
-                    search = GCBase.searchByViewport(viewport, 14, true, token);
+                    search = GCBase.searchByViewport(viewport, 14, true, tokens);
                     if (search != null) {
                         downloaded = true;
                         if (search.error == StatusCode.NOT_LOGGED_IN) {
                             cgBase.login();
-                            token = null;
+                            tokens = null;
                         } else {
                             break;
                         }

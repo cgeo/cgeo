@@ -376,7 +376,7 @@ public class cgeopopup extends AbstractActivity {
 
             final boolean moreDetails = cache.isDetailed();
             // more details
-            if (moreDetails) {
+            if (moreDetails || cache.getType() == CacheType.GC_LIVE_MAP) {
                 ((LinearLayout) findViewById(R.id.more_details_box)).setVisibility(View.VISIBLE);
 
                 Button buttonMore = (Button) findViewById(R.id.more_details);

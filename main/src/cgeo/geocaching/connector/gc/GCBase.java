@@ -3,13 +3,13 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,24 +39,25 @@ public class GCBase {
     protected final static long GC_BASE31 = 31;
     protected final static long GC_BASE16 = 16;
 
-    // TODO Valentine remove before merge
-    /** go online or use mocked data ? */
-    public static final boolean IS_ONLINE = true;
-
+    private static final LeastRecentlyUsedCache<String, cgCache> liveMapCache = new LeastRecentlyUsedCache<String, cgCache>(2000); // JSON id, cache
 
     // TODO Valentine move to connector before merge
     /**
      * @param viewport
      * @param zoomlevel
      *            initial zoomlevel
-     * @autoAdjust Auto-adjust zoomlevel
+     * @param autoAdjust
+     *            Auto-adjust zoomlevel
      * @param sessionToken
      * @return
      */
     @SuppressWarnings("null")
-    public static SearchResult searchByViewport(final Viewport viewport, final int zoomlevel, final boolean autoAdjust, final String sessionToken) {
+    public static SearchResult searchByViewport(final Viewport viewport, final int zoomlevel, final boolean autoAdjust, String[] tokens) {
 
         assert zoomlevel >= Tile.ZOOMLEVEL_MIN && zoomlevel <= Tile.ZOOMLEVEL_MAX : "zoomlevel out of bounds.";
+
+        // TODO Ignore tokens. They are not enough. Also "&_=xxxx" is needed !
+        tokens = null;
 
         Geopoint centerOfViewport = new Geopoint((viewport.getLatitudeMin() + viewport.getLatitudeMax()) / 2, (viewport.getLongitudeMin() + viewport.getLongitudeMax()) / 2);
         final String referer = GCConstants.URL_LIVE_MAP +
@@ -75,35 +76,37 @@ public class GCBase {
              * x=8634 --- x-tile
              * y=5381 --- y-tile
              * z=14 --- zoom
-             * _=1329484185663 --- token/filter, not required
+             * k=xxxx --- user session
+             * st=xx...xxx --- session token
+             * ep=1 --- ???
+             * _=1329484185663 --- timestamp (?)
              */
             String url = GCConstants.URL_MAP_INFO +
                     "?x=" + tile.getX() +
                     "&y=" + tile.getY() +
                     "&z=" + tile.getZoomlevel();
-            if (StringUtils.isNotEmpty(sessionToken)) {
-                url += "&st=" + sessionToken;
+            if (tokens != null) {
+                url += "&k=" + tokens[0];
+                url += "&st=" + tokens[1];
             }
+            // url += "&ep=1";
+            // url += "&_1329943867982";
 
-            String data = "";
-            if (IS_ONLINE) {
-                data = cgBase.requestJSON(url, referer);
-            } else {
-                data = "{\"grid\":[\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"               04$                                              \",\"               /5'                                              \",\"               .6&                                              \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                       %:(      \",\"                                                       #;,      \",\"                                                       !<)      \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"  8-1                                                           \",\"  9+2                                                           \",\"  7*3                                                           \",\"                                                                \"],\"keys\":[\"\",\"55_55\",\"55_54\",\"17_25\",\"55_53\",\"17_27\",\"17_26\",\"57_53\",\"57_55\",\"3_62\",\"3_61\",\"57_54\",\"3_60\",\"15_27\",\"15_26\",\"15_25\",\"4_60\",\"4_61\",\"4_62\",\"16_25\",\"16_26\",\"16_27\",\"2_62\",\"2_60\",\"2_61\",\"56_53\",\"56_54\",\"56_55\"],\"data\":{\"55_55\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"" +
-                        "55_54\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"17_25\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"55_53\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"17_27\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"17_26\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"57_53\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"57_55\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"3_62\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"3_61\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"57_54\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"3_60\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"15_27\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"15_26\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"15_25\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"4_60\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"4_61\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"4_62\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"16_25\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"16_26\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"16_27\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"2_62\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"2_60\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"2_61\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"56_53\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"56_54\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"56_55\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}]}}";
-            }
+            String data = cgBase.requestJSON(url, referer);
             if (StringUtils.isEmpty(data)) {
                 Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+            } else {
+                final SearchResult search = parseMapJSON(data, tile);
+                if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
+                    Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+                }
+                searchResult.addGeocodes(search.getGeocodes());
             }
-            final SearchResult search = parseMapJSON(data, tile);
-            if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
-                Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
-            }
-            searchResult.addGeocodes(search.getGeocodes());
         }
 
-        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID);
-        return search;
+        // we don't have enough informations about the caches to do a filtering
+        // final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID);
+        return searchResult;
     }
 
     /**
@@ -144,37 +147,39 @@ public class GCBase {
                 throw new JSONException("No data inside JSON");
             }
 
-            // attach all keys with the cache positions in the tile
-            Map<String, UTFGridPosition> keyPositions = new HashMap<String, UTFGridPosition>(); // JSON key, (x/y) in grid
-            for (int y = 0; y < grid.length(); y++) {
-                String rowUTF8 = grid.getString(y);
-                if (rowUTF8.length() != (UTFGrid.GRID_MAXX + 1)) {
-                    throw new JSONException("Grid has wrong size");
-                }
-
-                for (int x = 0; x < UTFGrid.GRID_MAXX; x++) {
-                    char c = rowUTF8.charAt(x);
-                    if (c != ' ') {
-                        short id = UTFGrid.getUTFGridId(c);
-                        keyPositions.put(keys.getString(id), new UTFGridPosition(x, y));
-                    }
-                }
-            }
-
-            // Optimization:
-            // the grid can get ignored. The keys are the grid position in the format x_y
+            /*
+             * // Optimization: the grid can get ignored. The keys are the grid position in the format x_y
+             *
+             * // attach all keys with the cache positions in the tile
+             * Map<String, UTFGridPosition> keyPositions = new HashMap<String, UTFGridPosition>(); // JSON key, (x/y) in
+             * grid
+             * for (int y = 0; y < grid.length(); y++) {
+             * String rowUTF8 = grid.getString(y);
+             * if (rowUTF8.length() != (UTFGrid.GRID_MAXX + 1)) {
+             * throw new JSONException("Grid has wrong size");
+             * }
+             *
+             * for (int x = 0; x < UTFGrid.GRID_MAXX; x++) {
+             * char c = rowUTF8.charAt(x);
+             * if (c != ' ') {
+             * short id = UTFGrid.getUTFGridId(c);
+             * keyPositions.put(keys.getString(id), new UTFGridPosition(x, y));
+             * }
+             * }
+             * }
+             */
 
             // iterate over the data and construct all caches in this tile
-            Map<String, cgCache> caches = new HashMap<String, cgCache>(); // JSON id, cache
             Map<String, List<UTFGridPosition>> positions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
             for (int i = 1; i < keys.length(); i++) { // index 0 is empty
                 String key = keys.getString(i);
                 if (StringUtils.isNotBlank(key)) {
+                    int[] xy = splitJSONKey(key);
                     JSONArray dataForKey = dataObject.getJSONArray(key);
                     for (int j = 0; j < dataForKey.length(); j++) {
                         JSONObject cacheInfo = dataForKey.getJSONObject(j);
                         String id = cacheInfo.getString("i");
-                        cgCache cache = caches.get(id);
+                        cgCache cache = liveMapCache.get(id);
                         if (cache == null) {
                             cache = new cgCache();
                             cache.setDetailed(false);
@@ -182,20 +187,21 @@ public class GCBase {
                             cache.setGeocode(newidToGeocode(id));
                             cache.setName(cacheInfo.getString("n"));
                             cache.setType(CacheType.GC_LIVE_MAP);
+                            cache.setZoomlevel(tile.getZoomlevel());
 
-                            caches.put(id, cache);
+                            liveMapCache.put(id, cache);
                         }
 
                         List<UTFGridPosition> listOfPositions = positions.get(id);
                         if (listOfPositions == null) {
                             listOfPositions = new ArrayList<UTFGridPosition>();
                         }
-                        UTFGridPosition pos = keyPositions.get(key);
-                        if (pos == null) {
-                            Log.e(Settings.tag, "key " + key + " not found in keyPositions");
-                        } else {
-                            listOfPositions.add(pos);
-                        }
+                        /*
+                         * Optimization
+                         * UTFGridPosition pos = keyPositions.get(key);
+                         */
+                        UTFGridPosition pos = new UTFGridPosition(xy[0], xy[1]);
+                        listOfPositions.add(pos);
                         positions.put(id, listOfPositions);
                     }
                 }
@@ -203,12 +209,17 @@ public class GCBase {
 
             for (String id : positions.keySet()) {
                 List<UTFGridPosition> pos = positions.get(id);
-                cgCache cache = caches.get(id);
-                cache.setCoords(getCoordsForUTFGrid(tile, pos));
+                cgCache cache = liveMapCache.get(id);
+                if (cache != null) {
+                    // if we have "better" coords from a previous search -> reuse them
+                    if (cache.getZoomlevel() < tile.getZoomlevel() ||
+                        cache.getCoords() == null) {
+                        cache.setCoords(getCoordsForUTFGrid(tile, pos));
 
-                Log.d(Settings.tag, "id=" + id + " geocode=" + cache.getGeocode() + " coords=" + cache.getCoords().toString());
-
-                searchResult.addCache(cache);
+                        // Log.d(Settings.tag, "id=" + id + " geocode=" + cache.getGeocode() + " coords=" + cache.getCoords().toString());
+                    }
+                    searchResult.addCache(cache);
+                }
             }
             Log.d(Settings.tag, "Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
@@ -370,11 +381,21 @@ public class GCBase {
          */
     }
 
-    /** Get session token from the Live Map. Needed for following requests */
-    public static String getSessionToken() {
+    /** Get user session & session token from the Live Map. Needed for following requests */
+    public static String[] getTokens() {
         final HttpResponse response = cgBase.request(GCConstants.URL_LIVE_MAP, null, false);
         final String data = cgBase.getResponseData(response);
-        return BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
+        String userSession = BaseUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
+        String sessionToken = BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
+        return new String[] { userSession, sessionToken };
+    }
+
+    private static int[] splitJSONKey(final String key) {
+        // two possible positions for the underscore
+        int underscore = key.charAt(1) == '_' ? 1 : 2;
+        int x = Integer.parseInt(key.substring(0, underscore));
+        int y = Integer.parseInt(key.substring(underscore + 1));
+        return new int[] { x, y };
     }
 
 }

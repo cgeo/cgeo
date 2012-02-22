@@ -6,6 +6,7 @@ import cgeo.geocaching.utils.BaseUtils;
 import android.test.AndroidTestCase;
 
 public class GCConstantsTest extends AndroidTestCase {
+
     public static void testLocation() {
         // GC37GFJ
         assertEquals("Bretagne, France", parseLocation("    <span id=\"ctl00_ContentBody_Location\">In Bretagne, France</span><br />"));
@@ -27,5 +28,11 @@ public class GCConstantsTest extends AndroidTestCase {
 
     private static void assertCacheCount(final int count, final String html) {
         assertEquals(count, Integer.parseInt(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll(",", "")));
+    }
+
+    public static void testConstants() {
+        String session = "userSession = new Groundspeak.Map.UserSession('aKWZ', userOptions:'XPTf', sessionToken:'123pNKwdktYGZL0xd-I7yqA6nm_JE1BDUtM4KcOkifin2TRCMutBd_PZE14Ohpffs2ZgkTnxTSnxYpBigK4hBA2', subscriberType: 3, enablePersonalization: true });";
+        assertEquals("aKWZ", BaseUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, ""));
+        assertTrue(BaseUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, "").startsWith("123pNK"));
     }
 }
