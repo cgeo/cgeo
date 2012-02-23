@@ -1,15 +1,11 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 
 import org.apache.commons.lang3.StringUtils;
-
-import android.util.Log;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * provides all the available templates for logging
@@ -131,29 +127,6 @@ public class LogTemplateProvider {
             return -1;
         }
 
-        int findCount = -1;
-
-        try {
-            final Pattern findPattern = Pattern.compile("<strong><img.+?icon_smile.+?title=\"Caches Found\" /> ([,\\d]+)", Pattern.CASE_INSENSITIVE);
-            final Matcher findMatcher = findPattern.matcher(page);
-            if (findMatcher.find()) {
-                if (findMatcher.groupCount() > 0) {
-                    String count = findMatcher.group(1);
-
-                    if (count != null) {
-                        if (count.length() == 0) {
-                            findCount = 0;
-                        } else {
-                            findCount = Integer.parseInt(count.replaceAll("[.,]", ""));
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            Log.w(Settings.tag, "cgBase.parseFindCount: " + e.toString());
-        }
-
-        return findCount;
+        return Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", ""));
     }
-
 }

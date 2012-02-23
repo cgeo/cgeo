@@ -22,7 +22,7 @@ public class cgBaseTest extends AndroidTestCase {
         assertEquals("blafoo", BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
         // TODO blafoo reactivate
         // assertEquals("Premium Member", BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"));
-        int cachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0"));
+        int cachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
         assertTrue(cachesFound >= 491);
     }
 
