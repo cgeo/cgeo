@@ -17,6 +17,8 @@ public final class GCConstants {
     public final static String URL_LIVE_MAP = "http://www.geocaching.com/map/default.aspx";
     /** Caches in a tile */
     public final static String URL_MAP_INFO = "http://www.geocaching.com/map/map.info";
+    /** Tile itself */
+    public final static String URL_MAP_TILE = "http://www.geocaching.com/map/map.tile";
 
     /**
      * Patterns for parsing the result of a (detailed) search

@@ -52,47 +52,48 @@ public class GCBase {
      * @return
      */
     @SuppressWarnings("null")
-    public static SearchResult searchByViewport(final Viewport viewport, final int zoomlevel, final boolean autoAdjust, String[] tokens) {
+    public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
 
-        assert zoomlevel >= Tile.ZOOMLEVEL_MIN && zoomlevel <= Tile.ZOOMLEVEL_MAX : "zoomlevel out of bounds.";
-
-        // TODO Ignore tokens. They are not enough. Also "&_=xxxx" is needed !
-        tokens = null;
-
-        Geopoint centerOfViewport = new Geopoint((viewport.getLatitudeMin() + viewport.getLatitudeMax()) / 2, (viewport.getLongitudeMin() + viewport.getLongitudeMax()) / 2);
-        final String referer = GCConstants.URL_LIVE_MAP +
-                "?ll=" + centerOfViewport.getLatitude() +
-                "," + centerOfViewport.getLongitude();
+        String referer = GCConstants.URL_LIVE_MAP;
 
         final SearchResult searchResult = new SearchResult();
-        searchResult.setUrl(referer);
+        searchResult.setUrl(referer + "?ll=" + viewport.getCenter().getLatitude() + "," + viewport.getCenter().getLongitude());
 
-        List<Tile> tiles = getTilesForViewport(viewport, zoomlevel, autoAdjust);
+        List<Tile> tiles = getTilesForViewport(viewport);
 
         for (Tile tile : tiles) {
+            String url =
+                    "?x=" + tile.getX() + // x tile
+                    "&y=" + tile.getY() + // y tile
+                    "&z=" + tile.getZoomlevel(); // zoom level
             /*
-             * http://www.geocaching.com/map/ --- map-url
-             * map.info? --- request for JSON
-             * x=8634 --- x-tile
-             * y=5381 --- y-tile
-             * z=14 --- zoom
-             * k=xxxx --- user session
-             * st=xx...xxx --- session token
-             * ep=1 --- ???
-             * _=1329484185663 --- timestamp (?)
+             * if (tokens != null) {
+             * url += "&k=" + tokens[0]; // user session
+             * url += "&st=" + tokens[1]; // session token
+             * }
+             * url += "&ep=1";
+             * /*
+             * if (true || Settings.isExcludeMyCaches()) {
+             * url += "&hf=1"; // hide found
+             * url += "&hh=1"; // hide hidden
+             * }
+             *
+             * if (Settings.getCacheType() == CacheType.TRADITIONAL) {
+             * url += "&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"; // 2 = tradi 3 = multi 8 = mystery
+             * }
+             * if (Settings.getCacheType() == CacheType.MULTI) {
+             * url += "&ect=9,5,2,6,453,13,1304,137,11,4,8,1858";
+             * }
+             * if (Settings.getCacheType() == CacheType.MYSTERY) {
+             * url += "&ect=9,5,3,6,453,13,1304,137,11,4,2,1858";
+             * }
              */
-            String url = GCConstants.URL_MAP_INFO +
-                    "?x=" + tile.getX() +
-                    "&y=" + tile.getY() +
-                    "&z=" + tile.getZoomlevel();
-            if (tokens != null) {
-                url += "&k=" + tokens[0];
-                url += "&st=" + tokens[1];
+            if (tile.getZoomlevel() != 14) {
+                url += "&_=" + String.valueOf(System.currentTimeMillis());
             }
-            // url += "&ep=1";
-            // url += "&_1329943867982";
 
-            String data = cgBase.requestJSON(url, referer);
+            cgBase.requestMapTile(GCConstants.URL_MAP_TILE + url, referer);
+            String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + url, referer);
             if (StringUtils.isEmpty(data)) {
                 Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
             } else {
@@ -104,8 +105,6 @@ public class GCBase {
             }
         }
 
-        // we don't have enough informations about the caches to do a filtering
-        // final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID);
         return searchResult;
     }
 
@@ -236,37 +235,10 @@ public class GCBase {
      * @param viewport
      * @return
      */
-    protected static List<Tile> getTilesForViewport(final Viewport viewport, final int zoomlevel, final boolean autoAdjust) {
-        Tile tileBottomLeft = new Tile(viewport.bottomLeft, zoomlevel);
-        Tile tileTopRight = new Tile(viewport.topRight, zoomlevel);
-
-        int minX = Math.min(tileBottomLeft.getX(), tileTopRight.getX());
-        int maxX = Math.max(tileBottomLeft.getX(), tileTopRight.getX());
-        int minY = Math.min(tileBottomLeft.getY(), tileTopRight.getY());
-        int maxY = Math.max(tileBottomLeft.getY(), tileTopRight.getY());
-
-        // The recursion is a compromise between number of requests and precision.
-        // The smaller the zoomlevel the smaller the number of requests the more inaccurate the coords are
-        // The bigger the zoomlevel the bigger the number of requests the more accurate the coords are
-        // For really usable coords a zoomlevel >= 13 is required
-        if (autoAdjust && zoomlevel >= Tile.ZOOMLEVEL_MIN && ((maxX - minX + 1) * (maxY - minY + 1) > 4)) {
-            return getTilesForViewport(viewport, zoomlevel - 1, autoAdjust);
-        }
-
+    protected static List<Tile> getTilesForViewport(final Viewport viewport) {
         List<Tile> tiles = new ArrayList<Tile>();
-
-        if (tileBottomLeft.getX() == tileTopRight.getX() &&
-                tileBottomLeft.getY() == tileTopRight.getY()) {
-            tiles.add(tileBottomLeft);
-            return tiles;
-        }
-
-        for (int x = minX; x <= maxX; x++) {
-            for (int y = minY; y <= maxY; y++) {
-                tiles.add(new Tile(x, y, zoomlevel));
-            }
-        }
-        Log.d(Settings.tag, "# tiles=" + tiles.size() + " " + minX + "/" + minY + " " + maxX + "/" + maxY);
+        tiles.add(new Tile(viewport.getCenter(), 14)); // precise coords for caches nearby
+        tiles.add(new Tile(viewport.getCenter(), 12)); // other caches around
         return tiles;
     }
 

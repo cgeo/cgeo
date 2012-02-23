@@ -1,9 +1,7 @@
-package cgeo.geocaching.connector;
+package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgBase;
-import cgeo.geocaching.connector.gc.GCBase;
-import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
@@ -19,21 +17,16 @@ public class GCConnectorTest extends AndroidTestCase {
 
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.371 E 9° 35.501"));
-            SearchResult searchResult = GCBase.searchByViewport(viewport, 14, false, tokens);
+            SearchResult searchResult = GCBase.searchByViewport(viewport, tokens);
             assertTrue(searchResult != null);
             assertEquals(7, searchResult.getCount());
             assertTrue(searchResult.getGeocodes().contains("GC211WG"));
-
-            /*
-             * Baumarktserie GC21F1W N 52° 25.370 E 009° 35.500
-             * Rathaus GC1J1CT N 52° 25.590 E 009° 35.636
-             * Spiel & Sport GC211WG N 52° 25.413 E 009° 36.049
-             */
+            // Spiel & Sport GC211WG N 52° 25.413 E 009° 36.049
         }
 
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
-            SearchResult searchResult = GCBase.searchByViewport(viewport, 14, false, tokens);
+            SearchResult searchResult = GCBase.searchByViewport(viewport, tokens);
             assertTrue(searchResult != null);
             assertTrue(searchResult.getGeocodes().contains("GC211WG"));
         }

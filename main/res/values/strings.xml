@@ -1005,6 +1005,7 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · Fix: Live Map
     · New: Calendar add-on. c:geo doesn\'t require calendar permissions anymore\n
     · Fix: Deletion of outdated caches did not work\n
     · Fix: Changed internal caching causing a better overall performance\n

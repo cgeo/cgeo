@@ -1909,12 +1909,23 @@ public class cgBase {
         return search;
     }
 
-    public static String requestJSON(final String url, final String referer) {
+    /** Request .png image for a tile. Ignore the image - just load it */
+    public static void requestMapTile(final String url, final String referer) {
         final HttpGet request = new HttpGet(url);
-        request.addHeader("Content-Type", "application/json; charset=UTF-8");
-        request.addHeader("X-Requested-With", "XMLHttpRequest");
-        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+        request.addHeader("Accept", "image/png,image/*;q=0.8,*/*;q=0.5");
+        request.addHeader("Accept-Encoding", "gzip, deflate");
         request.addHeader("Referer", referer);
+        request.addHeader("X-Requested-With", "XMLHttpRequest");
+        request(request);
+    }
+
+    /** Request JSON informations for a tile */
+    public static String requestMapInfo(final String url, final String referer) {
+        final HttpGet request = new HttpGet(url);
+        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+        // NO request.addHeader("Accept-Encoding", "gzip deflate");
+        request.addHeader("Referer", referer);
+        request.addHeader("X-Requested-With", "XMLHttpRequest");
         return getResponseData(request(request), false);
     }
 

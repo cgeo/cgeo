@@ -1276,7 +1276,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     final Viewport viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
                     // search = cgBase.searchByViewport(token, viewport);
-                    search = GCBase.searchByViewport(viewport, 14, true, tokens);
+                    search = GCBase.searchByViewport(viewport, tokens);
                     if (search != null) {
                         downloaded = true;
                         if (search.error == StatusCode.NOT_LOGGED_IN) {
