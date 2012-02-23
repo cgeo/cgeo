@@ -92,7 +92,9 @@ public class GCBase {
                 url += "&_=" + String.valueOf(System.currentTimeMillis());
             }
 
+            // The PNG must be request before ! Else the following request would return with 204 - No Content
             cgBase.requestMapTile(GCConstants.URL_MAP_TILE + url, referer);
+
             String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + url, referer);
             if (StringUtils.isEmpty(data)) {
                 Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
