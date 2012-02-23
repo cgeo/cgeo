@@ -29,6 +29,6 @@ public class GCConstantsTest extends AndroidTestCase {
     }
 
     private static void assertCacheCount(final int count, final String html) {
-        assertEquals(count, Integer.parseInt(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,\\.]", "")));
+        assertEquals(count, Integer.parseInt(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
     }
 }
