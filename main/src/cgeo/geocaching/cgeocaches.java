@@ -562,7 +562,13 @@ public class cgeocaches extends AbstractListActivity {
                     title = res.getString(R.string.stored_caches_button);
                 } else {
                     final StoredList list = app.getList(listId);
-                    title = list.title;
+                    // Check if list id is still valid
+                    if (null == list) {
+                        listId = StoredList.STANDARD_LIST_ID;
+                        title = res.getString(R.string.stored_caches_button);
+                    } else {
+                        title = list.title;
+                    }
                 }
 
                 setTitle(title);
