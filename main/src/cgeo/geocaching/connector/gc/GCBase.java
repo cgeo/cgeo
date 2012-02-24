@@ -148,8 +148,10 @@ public class GCBase {
             }
 
             /*
-             * // Optimization: the grid can get ignored. The keys are the grid position in the format x_y
-             *
+             * Optimization: the grid can get ignored. The keys are the grid position in the format x_y
+             * It's not used at the moment due to optimizations
+             * But maybe we need it some day...
+             * 
              * // attach all keys with the cache positions in the tile
              * Map<String, UTFGridPosition> keyPositions = new HashMap<String, UTFGridPosition>(); // JSON key, (x/y) in
              * grid
@@ -158,7 +160,7 @@ public class GCBase {
              * if (rowUTF8.length() != (UTFGrid.GRID_MAXX + 1)) {
              * throw new JSONException("Grid has wrong size");
              * }
-             *
+             * 
              * for (int x = 0; x < UTFGrid.GRID_MAXX; x++) {
              * char c = rowUTF8.charAt(x);
              * if (c != ' ') {
