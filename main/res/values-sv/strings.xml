@@ -35,6 +35,7 @@
   <string name="ape">Projekt APE cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS cache utställning</string>
+  <string name="gc_live_map">Live karta</string>
   <string name="unknown">Okänd typ</string>
 
   <!-- cache sizes -->
@@ -433,6 +434,7 @@
   <string name="init_default_navigation_tool">Förvald navigering</string>
   <string name="init_default_navigation_tool_description">Här kan du välja ditt förvalda navigeringsprogram.</string>
   <string name="init_default_navigation_tool_select">Välj program</string>
+  <string name="init_default_navigation_tool_2_description">Här kan du välja ditt andra förvalda navigeringsprogram. Det kan aktiveras genom att klicka länge på navigationsikonen i listen överst i en cachebeskrivning.</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
