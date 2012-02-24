@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class cgeo extends AbstractActivity {
 
@@ -306,13 +308,31 @@ public class cgeo extends AbstractActivity {
                 if (StringUtils.isBlank(scan)) {
                     return;
                 }
-                String host = "http://coord.info/";
-                if (scan.toLowerCase().startsWith(host)) {
-                    String geocode = scan.substring(host.length()).trim();
-                    CacheDetailActivity.startActivity(this, geocode);
-                }
-                else {
-                    showToast(res.getString(R.string.unknown_scan));
+
+                try {
+                    final Pattern gcCode = Pattern.compile("GC[0-9A-Z]*", Pattern.CASE_INSENSITIVE);
+                    Matcher matcher = gcCode.matcher(scan);
+                    if (matcher.find()) { // GC-code
+                        final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
+                        cachesIntent.putExtra("geocode", matcher.group().toUpperCase());
+                        startActivity(cachesIntent);
+                    } else {
+                        final Pattern tbCode = Pattern.compile("TB[0-9A-Z]*", Pattern.CASE_INSENSITIVE);
+                        matcher = tbCode.matcher(scan);
+                        if (matcher.find()) { // TB-code
+                            final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
+                            trackablesIntent.putExtra("geocode", matcher.group().toUpperCase());
+                            startActivity(trackablesIntent);
+                        } else {
+                            new AlertDialog.Builder(this)
+                                    .setMessage(res.getString(R.string.unknown_scan) + "\n\n" + scan)
+                                    .setPositiveButton(getString(android.R.string.ok), null)
+                                    .create()
+                                    .show();
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.w(Settings.tag, "cgeo.onActivityResult: " + e.toString());
                 }
             } else if (resultCode == RESULT_CANCELED) {
                 // do nothing
