@@ -24,9 +24,9 @@ public class LoadFlags {
     /** Retrieve cache from CacheCache only. Do not load from DB */
     public final static EnumSet<LoadFlag> LOAD_CACHE_ONLY = EnumSet.of(LoadFlag.LOAD_CACHE_BEFORE);
     /** Retrieve cache from CacheCache first. If not found load from DB */
-    public final static EnumSet<LoadFlag> LOAD_CACHE_OR_DB = EnumSet.of(LoadFlag.LOAD_CACHE_BEFORE, LoadFlag.LOAD_DB_MINIMAL);
+    public final static EnumSet<LoadFlag> LOAD_CACHE_OR_DB = EnumSet.of(LoadFlag.LOAD_CACHE_BEFORE, LoadFlag.LOAD_DB_MINIMAL, LoadFlag.LOAD_OFFLINE_LOG);
     /** Retrieve cache (minimalistic information including waypoints) from DB first. If not found load from CacheCache */
-    public final static EnumSet<LoadFlag> LOAD_WAYPOINTS = EnumSet.of(LoadFlag.LOAD_CACHE_AFTER, LoadFlag.LOAD_DB_MINIMAL, LoadFlag.LOAD_WAYPOINTS);
+    public final static EnumSet<LoadFlag> LOAD_WAYPOINTS = EnumSet.of(LoadFlag.LOAD_CACHE_AFTER, LoadFlag.LOAD_DB_MINIMAL, LoadFlag.LOAD_WAYPOINTS, LoadFlag.LOAD_OFFLINE_LOG);
     /** Retrieve cache (all stored informations) from DB only. Do not load from CacheCache */
     public final static EnumSet<LoadFlag> LOAD_ALL_DB_ONLY = EnumSet.range(LoadFlag.LOAD_DB_MINIMAL, LoadFlag.LOAD_OFFLINE_LOG);
 
