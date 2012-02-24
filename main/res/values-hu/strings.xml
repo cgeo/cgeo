@@ -44,7 +44,8 @@
   <string name="cache_size_other">egyéb</string>
   <string name="cache_size_virtual">virtuális</string>
   <string name="cache_size_notchosen">nincs megadva</string>
-
+  <string name="cache_size_unknown">ismeretlen</string>
+  
   <!-- waypoints -->
   <string name="wp_final">Végső helyszín</string>
   <string name="wp_stage">Multi-láda állomása</string>
