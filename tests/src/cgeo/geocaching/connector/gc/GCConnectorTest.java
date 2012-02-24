@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgBase;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
@@ -17,7 +18,7 @@ public class GCConnectorTest extends AndroidTestCase {
 
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.371 E 9° 35.501"));
-            SearchResult searchResult = GCBase.searchByViewport(viewport, tokens);
+            SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
             assertTrue(searchResult != null);
             assertTrue(searchResult.getCount() > 130);
             assertTrue(searchResult.getGeocodes().contains("GC211WG"));
@@ -26,7 +27,7 @@ public class GCConnectorTest extends AndroidTestCase {
 
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
-            SearchResult searchResult = GCBase.searchByViewport(viewport, tokens);
+            SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
             assertTrue(searchResult != null);
             assertTrue(searchResult.getGeocodes().contains("GC211WG"));
         }

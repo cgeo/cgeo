@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CancellableHandler;
 
 public interface IConnector {
@@ -86,6 +87,15 @@ public interface IConnector {
     public SearchResult searchByCoordinate(final Geopoint center);
 
     /**
+     * Search caches by viewport.
+     *
+     * @param viewport
+     * @param tokens
+     * @return
+     */
+    public SearchResult searchByViewport(final Viewport viewport, final String[] tokens);
+
+    /**
      * return true if this is a ZIP file containing a GPX file
      *
      * @param fileName
@@ -101,4 +111,12 @@ public interface IConnector {
      * @return
      */
     public boolean isReliableLatLon(boolean cacheHasReliableLatLon);
+
+    /**
+     * Return required tokens for specific following actions
+     *
+     * @return
+     */
+    public String[] getTokens();
+
 }

@@ -41,7 +41,6 @@ public class GCBase {
 
     private static final LeastRecentlyUsedCache<String, cgCache> liveMapCache = new LeastRecentlyUsedCache<String, cgCache>(2000); // JSON id, cache
 
-    // TODO Valentine move to connector before merge
     /**
      * @param viewport
      * @param zoomlevel
@@ -338,21 +337,6 @@ public class GCBase {
     public static String newidToGeocode(final String newid) {
         long gcid = GCBase.newidToGCId(newid);
         return GCBase.gcidToGCCode(gcid);
-    }
-
-    // TODO Valentine
-    /** Request further details in the live mapa for a given id */
-    public void requestDetailsFromMap(@SuppressWarnings("unused") String id) {
-        /**
-         * URL http://www.geocaching.com/map/map.details?i=gEaR
-         * Response: {"status":"success","data":[{"name":"Spiel & Sport","gc":"GC211WG","g":
-         * "872d7eda-7cb9-40d5-890d-5b344bce7302"
-         * ,"disabled":false,"subrOnly":false,"li":false,"fp":"0","difficulty":{"text"
-         * :3.0,"value":"3"},"terrain":{"text"
-         * :2.0,"value":"2"},"hidden":"11/15/2009","container":{"text":"Regular","value"
-         * :"regular.gif"},"type":{"text":"Multi-cache"
-         * ,"value":3},"owner":{"text":"kai2707","value":"5c4b0915-5cec-4fa1-8afd-4b3ca67e004e"}}]}
-         */
     }
 
     /** Get user session & session token from the Live Map. Needed for following requests */

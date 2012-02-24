@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CancellableHandler;
 
 public abstract class AbstractConnector implements IConnector {
@@ -53,6 +54,10 @@ public abstract class AbstractConnector implements IConnector {
         return null;
     }
 
+    public SearchResult searchByViewport(Viewport viewport, String tokens[]) {
+        return null;
+    }
+
     protected static boolean isNumericId(final String string) {
         try {
             return Integer.parseInt(string) > 0;
@@ -71,5 +76,10 @@ public abstract class AbstractConnector implements IConnector {
     public boolean isReliableLatLon(boolean cacheHasReliableLatLon) {
         // let every cache have reliable coordinates by default
         return true;
+    }
+
+    @Override
+    public String[] getTokens() {
+        return null;
     }
 }

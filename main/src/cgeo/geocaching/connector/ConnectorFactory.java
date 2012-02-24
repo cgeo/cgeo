@@ -1,8 +1,11 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.ICache;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.opencaching.ApiOpenCachingConnector;
 import cgeo.geocaching.connector.opencaching.OpenCachingConnector;
+import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -62,4 +65,19 @@ public final class ConnectorFactory {
     private static boolean isInvalidGeocode(final String geocode) {
         return StringUtils.isBlank(geocode) || !Character.isLetterOrDigit(geocode.charAt(0));
     }
+
+    /** @see IConnector#searchByCoordinate */
+    public static SearchResult searchByCoordinate(final Geopoint center) {
+        // We have only connector capable of doing a 'searchByCoordinate()'
+        // If there is a second connector the information has to be collected from all collectors
+        return GCConnector.getInstance().searchByCoordinate(center);
+    }
+
+    /** @see IConnector#searchByViewport */
+    public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
+        // We have only connector capable of doing a 'searchByViewport()'
+        // If there is a second connector the information has to be collected from all collectors
+        return GCConnector.getInstance().searchByViewport(viewport, tokens);
+    }
+
 }

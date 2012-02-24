@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -202,7 +203,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
             final String tokens[] = GCBase.getTokens();
             final Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-            final SearchResult search = GCBase.searchByViewport(viewport, tokens);
+            final SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
 
             // GC2JVEH is a premium members only cache. It can't be "found" by non-premium members
             if (Settings.isPremiumMember()) {
@@ -240,7 +241,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
                 Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-                SearchResult search = GCBase.searchByViewport(viewport, tokens);
+                SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
 
                 assertNotNull(search);
                 assertTrue(search.getGeocodes().contains(cache.getGeocode()));
@@ -255,7 +256,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
                 viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-                search = GCBase.searchByViewport(viewport, tokens);
+                search = ConnectorFactory.searchByViewport(viewport, tokens);
 
                 assertNotNull(search);
                 // It's a premium member cache only and thus not visible to guests

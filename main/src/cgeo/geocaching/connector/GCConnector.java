@@ -7,7 +7,10 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -133,6 +136,17 @@ public class GCConnector extends AbstractConnector {
     }
 
     @Override
+    public SearchResult searchByCoordinate(Geopoint center) {
+        // TODO Auto-generated method stub
+        return super.searchByCoordinate(center);
+    }
+
+    @Override
+    public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
+        return GCBase.searchByViewport(viewport, tokens);
+    }
+
+    @Override
     public boolean isZippedGPXFile(final String fileName) {
         return gpxZipFilePattern.matcher(fileName).matches();
     }
@@ -140,5 +154,10 @@ public class GCConnector extends AbstractConnector {
     @Override
     public boolean isReliableLatLon(boolean cacheHasReliableLatLon) {
         return cacheHasReliableLatLon;
+    }
+
+    @Override
+    public String[] getTokens() {
+        return GCBase.getTokens();
     }
 }
