@@ -65,28 +65,24 @@ public class GCBase {
                     "?x=" + tile.getX() + // x tile
                     "&y=" + tile.getY() + // y tile
                     "&z=" + tile.getZoomlevel(); // zoom level
-            /*
-             * if (tokens != null) {
-             * url += "&k=" + tokens[0]; // user session
-             * url += "&st=" + tokens[1]; // session token
-             * }
-             * url += "&ep=1";
-             * /*
-             * if (true || Settings.isExcludeMyCaches()) {
-             * url += "&hf=1"; // hide found
-             * url += "&hh=1"; // hide hidden
-             * }
-             *
-             * if (Settings.getCacheType() == CacheType.TRADITIONAL) {
-             * url += "&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"; // 2 = tradi 3 = multi 8 = mystery
-             * }
-             * if (Settings.getCacheType() == CacheType.MULTI) {
-             * url += "&ect=9,5,2,6,453,13,1304,137,11,4,8,1858";
-             * }
-             * if (Settings.getCacheType() == CacheType.MYSTERY) {
-             * url += "&ect=9,5,3,6,453,13,1304,137,11,4,2,1858";
-             * }
-             */
+            if (tokens != null) {
+                url += "&k=" + tokens[0]; // user session
+                url += "&st=" + tokens[1]; // session token
+            }
+            url += "&ep=1";
+            if (Settings.isExcludeMyCaches()) {
+                url += "&hf=1"; // hide found
+                url += "&hh=1"; // hide hidden
+            }
+            if (Settings.getCacheType() == CacheType.TRADITIONAL) {
+                url += "&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"; // 2 = tradi 3 = multi 8 = mystery
+            }
+            if (Settings.getCacheType() == CacheType.MULTI) {
+                url += "&ect=9,5,2,6,453,13,1304,137,11,4,8,1858";
+            }
+            if (Settings.getCacheType() == CacheType.MYSTERY) {
+                url += "&ect=9,5,3,6,453,13,1304,137,11,4,2,1858";
+            }
             if (tile.getZoomlevel() != 14) {
                 url += "&_=" + String.valueOf(System.currentTimeMillis());
             }
@@ -151,7 +147,7 @@ public class GCBase {
              * Optimization: the grid can get ignored. The keys are the grid position in the format x_y
              * It's not used at the moment due to optimizations
              * But maybe we need it some day...
-             * 
+             *
              * // attach all keys with the cache positions in the tile
              * Map<String, UTFGridPosition> keyPositions = new HashMap<String, UTFGridPosition>(); // JSON key, (x/y) in
              * grid
@@ -160,7 +156,7 @@ public class GCBase {
              * if (rowUTF8.length() != (UTFGrid.GRID_MAXX + 1)) {
              * throw new JSONException("Grid has wrong size");
              * }
-             * 
+             *
              * for (int x = 0; x < UTFGrid.GRID_MAXX; x++) {
              * char c = rowUTF8.charAt(x);
              * if (c != ' ') {
