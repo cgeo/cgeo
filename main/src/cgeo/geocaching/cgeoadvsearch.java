@@ -26,6 +26,8 @@ import java.util.regex.Pattern;
 
 public class cgeoadvsearch extends AbstractActivity {
 
+    public static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
+
     private static final int MENU_SEARCH_OWN_CACHES = 1;
     private cgGeo geo = null;
     private UpdateLocationCallback geoUpdate = new update();
@@ -48,7 +50,8 @@ public class cgeoadvsearch extends AbstractActivity {
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             final String query = intent.getStringExtra(SearchManager.QUERY);
-            final boolean found = instantSearch(query);
+            final boolean keywordSearch = intent.getBooleanExtra(EXTRAS_KEYWORDSEARCH, true);
+            final boolean found = instantSearch(query, keywordSearch);
 
             if (found) {
                 finish();
@@ -105,7 +108,7 @@ public class cgeoadvsearch extends AbstractActivity {
         super.onPause();
     }
 
-    private boolean instantSearch(final String queryIn) {
+    private boolean instantSearch(final String queryIn, final boolean keywordSearch) {
         final String query = queryIn.trim();
 
         try {
@@ -123,7 +126,7 @@ public class cgeoadvsearch extends AbstractActivity {
                     trackablesIntent.putExtra("geocode", query.toUpperCase());
                     startActivity(trackablesIntent);
                     return true;
-                } else { // keyword (fallback)
+                } else if (keywordSearch) { // keyword (fallback)
                     cgeocaches.startActivityKeyword(this, query);
                     return true;
                 }
