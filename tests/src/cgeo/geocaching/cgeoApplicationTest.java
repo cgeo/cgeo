@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -14,7 +15,6 @@ import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import android.os.Handler;
 import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
@@ -200,9 +200,9 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         if (LIVEMAPENABLED) {
             GC2JVEH cache = new GC2JVEH();
 
-            final String token = cgBase.getMapUserToken(new Handler());
+            final String tokens[] = GCBase.getTokens();
             final Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-            final SearchResult search = cgBase.searchByViewport(token, viewport);
+            final SearchResult search = GCBase.searchByViewport(viewport, tokens);
 
             // GC2JVEH is a premium members only cache. It can't be "found" by non-premium members
             if (Settings.isPremiumMember()) {
@@ -233,14 +233,14 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
             try {
 
-                final String token = null; // without a valid token we are "logged off"
+                final String tokens[] = null; // without a valid token we are "logged off"
 
                 // non premium cache
                 MockedCache cache = new GC2CJPF();
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
                 Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-                SearchResult search = cgBase.searchByViewport(token, viewport);
+                SearchResult search = GCBase.searchByViewport(viewport, tokens);
 
                 assertNotNull(search);
                 assertTrue(search.getGeocodes().contains(cache.getGeocode()));
@@ -255,7 +255,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
                 viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-                search = cgBase.searchByViewport(token, viewport);
+                search = GCBase.searchByViewport(viewport, tokens);
 
                 assertNotNull(search);
                 // It's a premium member cache only and thus not visible to guests

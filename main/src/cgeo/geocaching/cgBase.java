@@ -19,7 +19,6 @@ import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
-import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.Twitter;
@@ -41,7 +40,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
@@ -79,7 +77,6 @@ import android.widget.LinearLayout;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -690,101 +687,6 @@ public class cgBase {
                     Log.e(Settings.tag, "cgBase.parseSearch.GCvote: " + e.toString());
                 }
             }
-        }
-
-        return searchResult;
-    }
-
-    // TODO Valentine Remove with merge
-    @Deprecated
-    public static SearchResult parseMapJSON(final String uri, final String data) {
-        if (StringUtils.isEmpty(data)) {
-            Log.e(Settings.tag, "cgeoBase.parseMapJSON: No page given");
-            return null;
-        }
-
-        final SearchResult searchResult = new SearchResult();
-        searchResult.setUrl(uri);
-
-        try {
-            final JSONObject yoDawg = new JSONObject(data);
-            final String json = yoDawg.getString("d");
-
-            if (StringUtils.isBlank(json)) {
-                Log.e(Settings.tag, "cgeoBase.parseMapJSON: No JSON inside JSON");
-                return null;
-            }
-
-            final JSONObject dataJSON = new JSONObject(json);
-            final JSONObject extra = dataJSON.getJSONObject("cs");
-            if (extra != null && extra.length() > 0) {
-                int count = extra.getInt("count");
-                // currently unused: 'pm', true for premium members
-                // check login status
-                boolean li = extra.getBoolean("li");
-                if (!li) {
-                    searchResult.error = StatusCode.NOT_LOGGED_IN;
-                }
-
-                if (count > 0 && extra.has("cc")) {
-                    final JSONArray cachesData = extra.getJSONArray("cc");
-                    if (cachesData != null && cachesData.length() > 0) {
-                        JSONObject oneCache = null;
-                        for (int i = 0; i < count; i++) {
-                            oneCache = cachesData.getJSONObject(i);
-                            if (oneCache == null) {
-                                break;
-                            }
-
-                            final cgCache cacheToAdd = new cgCache();
-                            cacheToAdd.setDetailed(false);
-                            // coords are reliable if we are logged in
-                            cacheToAdd.setReliableLatLon(li);
-                            cacheToAdd.setGeocode(oneCache.getString("gc"));
-                            cacheToAdd.setCoords(new Geopoint(oneCache.getDouble("lat"), oneCache.getDouble("lon")));
-                            cacheToAdd.setName(oneCache.getString("nn"));
-                            cacheToAdd.setFound(oneCache.getBoolean("f"));
-                            cacheToAdd.setOwn(oneCache.getBoolean("o"));
-                            cacheToAdd.setDisabled(!oneCache.getBoolean("ia"));
-                            int ctid = oneCache.getInt("ctid");
-                            if (ctid == 2) {
-                                cacheToAdd.setType(CacheType.TRADITIONAL);
-                            } else if (ctid == 3) {
-                                cacheToAdd.setType(CacheType.MULTI);
-                            } else if (ctid == 4) {
-                                cacheToAdd.setType(CacheType.VIRTUAL);
-                            } else if (ctid == 5) {
-                                cacheToAdd.setType(CacheType.LETTERBOX);
-                            } else if (ctid == 6) {
-                                cacheToAdd.setType(CacheType.EVENT);
-                            } else if (ctid == 8) {
-                                cacheToAdd.setType(CacheType.MYSTERY);
-                            } else if (ctid == 11) {
-                                cacheToAdd.setType(CacheType.WEBCAM);
-                            } else if (ctid == 13) {
-                                cacheToAdd.setType(CacheType.CITO);
-                            } else if (ctid == 137) {
-                                cacheToAdd.setType(CacheType.EARTH);
-                            } else if (ctid == 453) {
-                                cacheToAdd.setType(CacheType.MEGA_EVENT);
-                            } else if (ctid == 1858) {
-                                cacheToAdd.setType(CacheType.WHERIGO);
-                            } else if (ctid == 3653) {
-                                cacheToAdd.setType(CacheType.LOSTANDFOUND);
-                            } else {
-                                cacheToAdd.setType(CacheType.UNKNOWN);
-                            }
-
-                            searchResult.addCache(cacheToAdd);
-                        }
-                    }
-                } else {
-                    Log.w(Settings.tag, "There are no caches in viewport. Probably the viewport is too big");
-                }
-                searchResult.totalCnt = searchResult.getGeocodes().size();
-            }
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.parseMapJSON", e);
         }
 
         return searchResult;
@@ -1880,35 +1782,6 @@ public class cgBase {
         return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
     }
 
-    // TODO Valentine Remove with merge
-    @Deprecated
-    public static SearchResult searchByViewport(final String userToken, final Viewport viewport) {
-
-        String page = null;
-
-        final String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" +
-                viewport.getLatitudeMax() + "|" + viewport.getLatitudeMin() + "|" +
-                viewport.getLongitudeMax() + "|" + viewport.getLongitudeMin() + "\"},\"ut\":\"" +
-                StringUtils.defaultString(userToken) + "\"}}";
-
-        final String uri = "http://www.geocaching.com/map/default.aspx/MapAction";
-        page = requestJSONgc(uri, params);
-
-        if (StringUtils.isBlank(page)) {
-            Log.e(Settings.tag, "cgeoBase.searchByViewport: No data from server");
-            return null;
-        }
-
-        final SearchResult searchResult = parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(), page);
-        if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e(Settings.tag, "cgeoBase.searchByViewport: No cache parsed for viewport " + viewport);
-            return null;
-        }
-
-        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID);
-        return search;
-    }
-
     /** Request .png image for a tile. Ignore the image - just load it */
     public static void requestMapTile(final String url, final String referer) {
         final HttpGet request = new HttpGet(url);
@@ -1927,24 +1800,6 @@ public class cgBase {
         request.addHeader("Referer", referer);
         request.addHeader("X-Requested-With", "XMLHttpRequest");
         return getResponseData(request(request), false);
-    }
-
-    // TODO Valentine Remove with merge
-    @Deprecated
-    public static String requestJSONgc(final String uri, final String params) {
-        final HttpPost request = new HttpPost("http://www.geocaching.com/map/default.aspx/MapAction");
-        try {
-            request.setEntity(new StringEntity(params, HTTP.UTF_8));
-        } catch (UnsupportedEncodingException e) {
-            Log.e(Settings.tag, "cgeoBase.searchByViewport", e);
-        }
-
-        request.addHeader("Content-Type", "application/json; charset=UTF-8");
-        request.addHeader("X-Requested-With", "XMLHttpRequest");
-        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
-        request.addHeader("Referer", uri);
-        String page = getResponseData(request(request));
-        return page;
     }
 
     public static cgTrackable searchTrackable(final String geocode, final String guid, final String id) {
@@ -2916,29 +2771,6 @@ public class cgBase {
         }
 
         return false;
-    }
-
-    // TODO Valentine Remove with merge
-    @Deprecated
-    public static String getMapUserToken(final Handler noTokenHandler) {
-        final HttpResponse response = request("http://www.geocaching.com/map/default.aspx", null, false);
-        final String data = getResponseData(response);
-        String usertoken = null;
-
-        if (StringUtils.isNotBlank(data)) {
-            final Matcher matcher = GCConstants.PATTERN_USERTOKEN.matcher(data);
-            while (matcher.find()) {
-                if (matcher.groupCount() > 0) {
-                    usertoken = matcher.group(1);
-                }
-            }
-        }
-
-        if (noTokenHandler != null && StringUtils.isBlank(usertoken)) {
-            noTokenHandler.sendEmptyMessage(0);
-        }
-
-        return usertoken;
     }
 
     public static Double getElevation(final Geopoint coords) {
