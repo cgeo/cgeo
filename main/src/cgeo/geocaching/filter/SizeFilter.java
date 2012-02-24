@@ -3,6 +3,8 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheSize;
 
+import java.util.ArrayList;
+
 public class SizeFilter extends AbstractFilter {
     private final CacheSize cacheSize;
 
@@ -23,10 +25,12 @@ public class SizeFilter extends AbstractFilter {
 
     public static AbstractFilter[] getAllFilters() {
         final CacheSize[] cacheSizes = CacheSize.values();
-        SizeFilter[] filters = new SizeFilter[cacheSizes.length];
-        for (int i = 0; i < cacheSizes.length; i++) {
-            filters[i] = new SizeFilter(cacheSizes[i]);
+        ArrayList<SizeFilter> filters = new ArrayList<SizeFilter>();
+        for (CacheSize cacheSize : cacheSizes) {
+            if (cacheSize != CacheSize.UNKNOWN) {
+                filters.add(new SizeFilter(cacheSize));
+            }
         }
-        return filters;
+        return filters.toArray(new SizeFilter[filters.size()]);
     }
 }
