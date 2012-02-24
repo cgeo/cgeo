@@ -36,6 +36,6 @@ public class GCConstantsTest extends AndroidTestCase {
     public static void testConstants() {
         String session = "userSession = new Groundspeak.Map.UserSession('aKWZ', userOptions:'XPTf', sessionToken:'123pNKwdktYGZL0xd-I7yqA6nm_JE1BDUtM4KcOkifin2TRCMutBd_PZE14Ohpffs2ZgkTnxTSnxYpBigK4hBA2', subscriberType: 3, enablePersonalization: true });";
         assertEquals("aKWZ", BaseUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, ""));
-        assertTrue(BaseUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, "").startsWith("123pNK"));
+        assertTrue(BaseUtils.getMatch(session, GCConstants.PATTERN_SESSIONTOKEN, "").startsWith("123pNK"));
     }
 }
