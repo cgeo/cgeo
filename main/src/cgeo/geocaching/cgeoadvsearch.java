@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,9 +23,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.regex.Pattern;
-
 public class cgeoadvsearch extends AbstractActivity {
+
+    public static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
 
     private static final int MENU_SEARCH_OWN_CACHES = 1;
     private cgGeo geo = null;
@@ -48,13 +49,17 @@ public class cgeoadvsearch extends AbstractActivity {
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             final String query = intent.getStringExtra(SearchManager.QUERY);
-            final boolean found = instantSearch(query);
+            final boolean keywordSearch = intent.getBooleanExtra(EXTRAS_KEYWORDSEARCH, true);
 
-            if (found) {
-                finish();
-
-                return;
+            if (instantSearch(query, keywordSearch)) {
+                setResult(RESULT_OK);
+            } else {
+                // send intent back so query string is known
+                setResult(RESULT_CANCELED, intent);
             }
+            finish();
+
+            return;
         }
 
         setTheme();
@@ -105,28 +110,39 @@ public class cgeoadvsearch extends AbstractActivity {
         super.onPause();
     }
 
-    private boolean instantSearch(final String queryIn) {
-        final String query = queryIn.trim();
-
+    /**
+     * Performs a search for query either as geocode, trackable code or keyword
+     *
+     * @param query
+     *            String to search for
+     * @param keywordSearch
+     *            Set to true if keyword search should be performed if query isn't GC or TB
+     * @return true if a search was performed, else false
+     */
+    private boolean instantSearch(final String query, final boolean keywordSearch) {
         try {
-            final Pattern gcCode = Pattern.compile("^GC[0-9A-Z]+$", Pattern.CASE_INSENSITIVE);
-            if (gcCode.matcher(query).find()) { // GC-code
+            String result = BaseUtils.getMatch(query, GCConstants.PATTERN_GC_CODE, true, 0, "", false);
+            if (StringUtils.isNotBlank(result)) {
                 final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-                cachesIntent.putExtra("geocode", query.toUpperCase());
+                cachesIntent.putExtra("geocode", result.toUpperCase());
                 startActivity(cachesIntent);
 
                 return true;
             } else {
-                final Pattern tbCode = Pattern.compile("^TB[0-9A-Z]+$", Pattern.CASE_INSENSITIVE);
-                if (tbCode.matcher(query).find()) { // TB-code
+                result = BaseUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
+                if (StringUtils.isNotBlank(result)) {
                     final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
-                    trackablesIntent.putExtra("geocode", query.toUpperCase());
+                    trackablesIntent.putExtra("geocode", result.toUpperCase());
                     startActivity(trackablesIntent);
+
                     return true;
-                } else { // keyword (fallback)
-                    cgeocaches.startActivityKeyword(this, query);
+                } else if (keywordSearch) { // keyword fallback, if desired by caller
+                    cgeocaches.startActivityKeyword(this, query.trim());
                     return true;
+                } else {
+                    return false;
                 }
+
             }
         } catch (Exception e) {
             Log.w(Settings.tag, "cgeoadvsearch.instantSearch: " + e.toString());

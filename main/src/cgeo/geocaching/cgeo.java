@@ -15,6 +15,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,6 +52,8 @@ public class cgeo extends AbstractActivity {
     private static final int MENU_SCAN = 4;
     private static final int SCAN_REQUEST_CODE = 1;
     private static final int MENU_OPEN_LIST = 100;
+
+    public static final int SEARCH_REQUEST_CODE = 2;
 
     private int version = 0;
     private cgGeo geo = null;
@@ -306,16 +309,28 @@ public class cgeo extends AbstractActivity {
                 if (StringUtils.isBlank(scan)) {
                     return;
                 }
-                String host = "http://coord.info/";
-                if (scan.toLowerCase().startsWith(host)) {
-                    String geocode = scan.substring(host.length()).trim();
-                    CacheDetailActivity.startActivity(this, geocode);
-                }
-                else {
-                    showToast(res.getString(R.string.unknown_scan));
-                }
+
+                Intent searchIntent = new Intent(this, cgeoadvsearch.class);
+                searchIntent.setAction(Intent.ACTION_SEARCH).
+                        putExtra(SearchManager.QUERY, scan).
+                        putExtra(cgeoadvsearch.EXTRAS_KEYWORDSEARCH, false);
+                startActivityForResult(searchIntent, SEARCH_REQUEST_CODE);
+
             } else if (resultCode == RESULT_CANCELED) {
                 // do nothing
+            }
+        } else if (requestCode == SEARCH_REQUEST_CODE) {
+            // cgeoadvsearch activity returned without making a search
+            if (resultCode == RESULT_CANCELED) {
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                if (query == null) {
+                    query = "";
+                }
+                new AlertDialog.Builder(this)
+                        .setMessage(res.getString(R.string.unknown_scan) + "\n\n" + query)
+                .setPositiveButton(getString(android.R.string.ok), null)
+                .create()
+                .show();
             }
         }
     }
