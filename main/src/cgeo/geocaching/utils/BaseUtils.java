@@ -31,33 +31,23 @@ public final class BaseUtils {
      * @return defaultValue or the n-th group if the pattern matches (trimed if wanted)
      */
     public static String getMatch(final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, final boolean last) {
-        String result = null;
+        if (data != null) {
 
-        boolean lastInternal = false; // Optimization 1: 'while (matcher.find())' returns the same result as 'mather.find()' (for the tested patterns so far)
+            String result = null;
+            final Matcher matcher = p.matcher(data);
 
-        final Matcher matcher = p.matcher(data);
-
-        if (lastInternal) {
-            while (matcher.find()) {
-                // Optimization 2: 'matcher.find && matcher.groupCount() >= xx' can be shortened to 'matcher.find()'
-                // if (matcher.groupCount() >= group) {
-                result = matcher.group(group);
-            }
-        } else {
-            // Optimization 2: 'matcher.find && matcher.groupCount() >= xx' can be shortened to 'matcher.find()'
-            // if (matcher.find() && matcher.groupCount() >= group) {
             if (matcher.find()) {
                 result = matcher.group(group);
             }
-        }
-        if (null != result) {
-            return trim ? new String(result).trim() : new String(result);
-            // Java copies the whole page String, when matching with regular expressions
-            // later this would block the garbage collector, as we only need tiny parts of the page
-            // see http://developer.android.com/reference/java/lang/String.html#backing_array
-            // Thus the creating of a new String via String constructor is necessary here!!
+            if (null != result) {
+                return trim ? new String(result).trim() : new String(result);
+                // Java copies the whole page String, when matching with regular expressions
+                // later this would block the garbage collector, as we only need tiny parts of the page
+                // see http://developer.android.com/reference/java/lang/String.html#backing_array
+                // Thus the creating of a new String via String constructor is necessary here!!
 
-            // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
+                // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
+            }
         }
         return defaultValue;
     }
