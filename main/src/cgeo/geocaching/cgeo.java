@@ -316,23 +316,21 @@ public class cgeo extends AbstractActivity {
                         putExtra(cgeoadvsearch.EXTRAS_KEYWORDSEARCH, false);
                 startActivityForResult(searchIntent, SEARCH_REQUEST_CODE);
 
-                /*
-                 * String host = "http://coord.info/";
-                 * if (scan.toLowerCase().startsWith(host)) {
-                 * String geocode = scan.substring(host.length()).trim();
-                 * CacheDetailActivity.startActivity(this, geocode);
-                 * }
-                 * else {
-                 * showToast(res.getString(R.string.unknown_scan));
-                 * }
-                 */
             } else if (resultCode == RESULT_CANCELED) {
                 // do nothing
             }
         } else if (requestCode == SEARCH_REQUEST_CODE) {
             // cgeoadvsearch activity returned without making a search
             if (resultCode == RESULT_CANCELED) {
-                showToast(res.getString(R.string.unknown_scan));
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                if (query == null) {
+                    query = "";
+                }
+                new AlertDialog.Builder(this)
+                        .setMessage(res.getString(R.string.unknown_scan) + "\n\n" + query)
+                .setPositiveButton(getString(android.R.string.ok), null)
+                .create()
+                .show();
             }
         }
     }
