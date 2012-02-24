@@ -858,7 +858,7 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     /**
-     * Opens a dialog to do actions on an username
+     * Listener for clicks on username
      */
     private class UserActionsClickListener implements View.OnClickListener {
 
@@ -871,34 +871,63 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             clickedItemText = ((TextView) view).getText().toString();
-
-            final CharSequence[] items = {res.getString(R.string.user_menu_view_hidden),
-                    res.getString(R.string.user_menu_view_found),
-                    res.getString(R.string.user_menu_open_browser)
-            };
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
-            builder.setTitle(res.getString(R.string.user_menu_title) + " " + clickedItemText);
-            builder.setItems(items, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int item) {
-                    switch (item) {
-                        case 0:
-                            cgeocaches.startActivityOwner(CacheDetailActivity.this, clickedItemText.toString());
-                            return;
-                        case 1:
-                            cgeocaches.startActivityUserName(CacheDetailActivity.this, clickedItemText.toString());
-                            return;
-                        case 2:
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(clickedItemText.toString()))));
-                            return;
-                        default:
-                            break;
-                    }
-                }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
+            showUserActionsDialog(clickedItemText);
         }
+    }
+
+    /**
+     * Listener for clicks on owner name
+     */
+    private class OwnerActionsClickListener implements View.OnClickListener {
+
+        public void onClick(View view) {
+            if (view == null) {
+                return;
+            }
+            if (!cache.supportsUserActions()) {
+                return;
+            }
+
+            // Use real owner name vice the one owner chose to display
+            if (StringUtils.isNotBlank(cache.getOwnerReal())) {
+                clickedItemText = cache.getOwnerReal();
+            } else {
+                clickedItemText = ((TextView) view).getText().toString();
+            }
+            showUserActionsDialog(clickedItemText);
+        }
+    }
+
+    /**
+     * Opens a dialog to do actions on an username
+     */
+    private void showUserActionsDialog(final CharSequence name) {
+        final CharSequence[] items = { res.getString(R.string.user_menu_view_hidden),
+                res.getString(R.string.user_menu_view_found),
+                res.getString(R.string.user_menu_open_browser)
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+        builder.setTitle(res.getString(R.string.user_menu_title) + " " + name);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                switch (item) {
+                    case 0:
+                        cgeocaches.startActivityOwner(CacheDetailActivity.this, name.toString());
+                        return;
+                    case 1:
+                        cgeocaches.startActivityUserName(CacheDetailActivity.this, name.toString());
+                        return;
+                    case 2:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(name.toString()))));
+                        return;
+                    default:
+                        break;
+                }
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public static void startActivity(final Context context, final String geocode) {
@@ -1394,10 +1423,10 @@ public class CacheDetailActivity extends AbstractActivity {
                 TextView ownerView = addCacheDetail(R.string.cache_owner, "");
                 if (StringUtils.isNotBlank(cache.getOwner())) {
                     ownerView.setText(Html.fromHtml(cache.getOwner()), TextView.BufferType.SPANNABLE);
-                } else if (StringUtils.isNotBlank(cache.getOwnerReal())) {
+                } else { // OwnerReal guaranteed to be not blank based on above
                     ownerView.setText(Html.fromHtml(cache.getOwnerReal()), TextView.BufferType.SPANNABLE);
                 }
-                ownerView.setOnClickListener(new UserActionsClickListener());
+                ownerView.setOnClickListener(new OwnerActionsClickListener());
             }
 
             // cache hidden
