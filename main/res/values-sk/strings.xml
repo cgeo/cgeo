@@ -45,7 +45,8 @@
   <string name="cache_size_other">iná</string>
   <string name="cache_size_virtual">virtuálna</string>
   <string name="cache_size_notchosen">nezvolené</string>
-
+  <string name="cache_size_unknown">neznámy</string>
+  
   <!-- waypoints -->
   <string name="wp_final">Cieľ</string>
   <string name="wp_stage">Časť multi-skrýše</string>

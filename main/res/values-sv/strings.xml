@@ -45,7 +45,8 @@
   <string name="cache_size_other">other</string>
   <string name="cache_size_virtual">virtual</string>
   <string name="cache_size_notchosen">not chosen</string>
-
+  <string name="cache_size_unknown">Okänd</string>
+  
   <!-- waypoints -->
   <string name="wp_final">Slutlig plats</string>
   <string name="wp_stage">Delsteg för multi-cache</string>
