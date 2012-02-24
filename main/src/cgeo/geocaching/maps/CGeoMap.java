@@ -1846,7 +1846,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
                 .append(cache.getType().id)
-                .append(cache.isDisabled())
+                    .append(cache.isDisabled() || cache.isArchived())
                 .append(cache.isOwn())
                 .append(cache.isFound())
                 .append(cache.hasUserModifiedCoords())
@@ -1866,7 +1866,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
             // background: disabled or not
             Drawable marker = getResources().getDrawable(R.drawable.marker);
-            if (cache.isDisabled()) {
+            if (cache.isDisabled() || cache.isArchived()) {
                 marker = getResources().getDrawable(R.drawable.marker_disabled);
             }
             layers.add(marker);
