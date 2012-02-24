@@ -1,8 +1,7 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.concurrent.PriorityThreadFactory;
 import cgeo.geocaching.concurrent.Task;
-import cgeo.geocaching.concurrent.ThreadPool;
+import cgeo.geocaching.concurrent.BlockingThreadPool;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
@@ -24,7 +23,7 @@ public class StaticMapsProvider {
     /** In my tests the "no image available" image had 5470 bytes, while "street only" maps had at least 20000 bytes */
     private static final int MIN_MAP_IMAGE_BYTES = 6000;
     /** ThreadPool restricting this to 1 Thread. **/
-    private static final ThreadPool pool = new ThreadPool(1, new PriorityThreadFactory(Thread.MIN_PRIORITY));
+    private static final BlockingThreadPool pool = new BlockingThreadPool(1, Thread.MIN_PRIORITY);
 
     public static File getMapFile(final String geocode, String prefix, final int level, final boolean createDirs) {
         return LocalStorage.getStorageFile(geocode, "map_" + prefix + level, false, createDirs);
