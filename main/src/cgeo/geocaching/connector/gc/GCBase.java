@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
@@ -53,6 +54,8 @@ public class GCBase {
     @SuppressWarnings("null")
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
 
+        Log.d(Settings.tag, "GCBase.searchByViewport" + viewport.toString());
+
         String referer = GCConstants.URL_LIVE_MAP;
 
         final SearchResult searchResult = new SearchResult();
@@ -100,6 +103,11 @@ public class GCBase {
                 }
                 searchResult.addGeocodes(search.getGeocodes());
             }
+        }
+
+        if (Settings.isPremiumMember()) {
+            SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID, Settings.isShowCaptcha());
+            searchResult.addGeocodes(search.getGeocodes());
         }
 
         return searchResult;
@@ -236,7 +244,9 @@ public class GCBase {
      */
     protected static List<Tile> getTilesForViewport(final Viewport viewport) {
         List<Tile> tiles = new ArrayList<Tile>();
-        tiles.add(new Tile(viewport.getCenter(), 14)); // precise coords for caches nearby
+        if (!Settings.isPremiumMember()) {
+            tiles.add(new Tile(viewport.getCenter(), 14)); // precise coords for caches nearby
+        }
         tiles.add(new Tile(viewport.getCenter(), 12)); // other caches around
         return tiles;
     }

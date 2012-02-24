@@ -1802,7 +1802,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByCoords(this, coords, cacheType, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByCoords(this, coords, cacheType, StoredList.TEMPORARY_LIST_ID, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }
