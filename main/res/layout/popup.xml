@@ -7,9 +7,11 @@
 	<LinearLayout style="@style/action_bar">
 		<TextView style="@style/action_bar_title" />
 		<View style="@style/action_bar_separator" />
-		<ImageView style="@style/action_bar_action"
+		<ImageView android:id="@+id/defaultNavigation" 
+		    	style="@style/action_bar_action"
 				android:src="@drawable/actionbar_compass"
-				android:onClick="goDefaultNavigation" />
+				android:onClick="goDefaultNavigation"
+				android:longClickable="true" />
 		<View style="@style/action_bar_separator"
 		 		android:id="@+id/separator"
 		 />
