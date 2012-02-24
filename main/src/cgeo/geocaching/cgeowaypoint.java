@@ -18,6 +18,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,7 +55,7 @@ public class cgeowaypoint extends AbstractActivity {
                 } else {
                     final TextView identification = (TextView) findViewById(R.id.identification);
                     final TextView coords = (TextView) findViewById(R.id.coordinates);
-                    final ImageView compass = (ImageView) findViewById(R.id.compass);
+                    final ImageView defaultNavigation = (ImageView) findViewById(R.id.defaultNavigation);
                     final View separator = findViewById(R.id.separator);
 
                     final View headline = findViewById(R.id.headline);
@@ -76,11 +77,11 @@ public class cgeowaypoint extends AbstractActivity {
 
                     if (waypoint.getCoords() != null) {
                         coords.setText(Html.fromHtml(waypoint.getCoords().toString()), TextView.BufferType.SPANNABLE);
-                        compass.setVisibility(View.VISIBLE);
+                        defaultNavigation.setVisibility(View.VISIBLE);
                         separator.setVisibility(View.VISIBLE);
                     } else {
                         coords.setText(res.getString(R.string.waypoint_unknown_coordinates));
-                        compass.setVisibility(View.GONE);
+                        defaultNavigation.setVisibility(View.GONE);
                         separator.setVisibility(View.GONE);
                     }
                     registerNavigationMenu(coords);
@@ -163,6 +164,15 @@ public class cgeowaypoint extends AbstractActivity {
         waitDialog.setCancelable(true);
 
         (new loadWaypoint()).start();
+
+        ImageView defaultNavigationImageView = (ImageView) findViewById(R.id.defaultNavigation);
+        defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startDefaultNavigation2();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -339,6 +349,17 @@ public class cgeowaypoint extends AbstractActivity {
         }
 
         NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, waypoint, null);
+    }
+
+    /**
+     * Tries to navigate to the {@link cgCache} of this activity.
+     */
+    private void startDefaultNavigation2() {
+        if (!navigationPossible()) {
+            return;
+        }
+
+        NavigationAppFactory.startDefaultNavigationApplication2(geo, this, null, waypoint, null);
     }
 
     private boolean navigationPossible() {

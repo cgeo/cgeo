@@ -90,7 +90,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Specialized way to handle selection of navigation tool.<br />
      * A dialog is created for tool selection and the selected tool is started afterwards.
-     * 
+     *
      * @param geo
      * @param activity
      * @param cache
@@ -103,7 +103,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      *            should be <code>false</code> only when called from within the internal map
      * @param showDefaultNavigation
      *            should be <code>false</code> by default
-     * 
+     *
      * @see #showNavigationMenu(cgGeo, Activity, cgCache, cgWaypoint, Geopoint)
      */
     public static void showNavigationMenu(final cgGeo geo, final Activity activity,
@@ -297,8 +297,31 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     /**
+     * Starts the second default navigation tool if correctly set and installed or the compass app as default fallback.
+     * 
+     * @param geo
+     * @param activity
+     * @param cache
+     * @param search
+     * @param waypoint
+     * @param destination
+     */
+    public static void startDefaultNavigationApplication2(final cgGeo geo, Activity activity, cgCache cache,
+            cgWaypoint waypoint, final Geopoint destination) {
+        final NavigationApp app = getDefaultNavigationApplication2(activity);
+
+        if (app != null) {
+            try {
+                app.invoke(geo, activity, cache, waypoint, destination);
+            } catch (Exception e) {
+                Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication2: " + e.toString());
+            }
+        }
+    }
+
+    /**
      * Returns the default navigation tool if correctly set and installed or the compass app as default fallback
-     *
+     * 
      * @param activity
      * @return never <code>null</code>
      */
@@ -313,6 +336,26 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             }
         }
         // default navigation tool wasn't set already or couldn't be found (not installed any more for example)
+        return NavigationAppsEnum.COMPASS.app;
+    }
+
+    /**
+     * Returns the second default navigation tool if correctly set and installed or the compass app as default fallback
+     * 
+     * @param activity
+     * @return never <code>null</code>
+     */
+    public static NavigationApp getDefaultNavigationApplication2(Activity activity) {
+        final int defaultNavigationTool = Settings.getDefaultNavigationTool2();
+
+        final List<NavigationAppsEnum> installedNavigationApps = getInstalledNavigationApps(activity);
+
+        for (NavigationAppsEnum navigationApp : installedNavigationApps) {
+            if (navigationApp.id == defaultNavigationTool) {
+                return navigationApp.app;
+            }
+        }
+        // second default navigation tool wasn't set already or couldn't be found (not installed any more for example)
         return NavigationAppsEnum.COMPASS.app;
     }
 

@@ -11,9 +11,10 @@
 		<TextView style="@style/action_bar_title" />
 		<View style="@style/action_bar_separator" />
 		<ImageView style="@style/action_bar_action"
-		 		android:id="@+id/compass"
+		 		android:id="@+id/defaultNavigation"
 				android:src="@drawable/actionbar_compass"
-				android:onClick="goDefaultNavigation" />
+				android:onClick="goDefaultNavigation"
+				android:longClickable="true" />
 		<View style="@style/action_bar_separator"
 		 		android:id="@+id/separator"
 		 />

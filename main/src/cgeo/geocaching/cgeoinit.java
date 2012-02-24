@@ -619,6 +619,50 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        // 2nd Default navigation tool settings
+        Spinner defaultNavigationTool2Selector = (Spinner) findViewById(R.id.default_navigation_tool_2);
+        //        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps(this);
+        ArrayAdapter<NavigationAppsEnum> navi2Adapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getView(position, convertView, parent);
+                textView.setText(getItem(position).app.getName());
+                return textView;
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
+                textView.setText(getItem(position).app.getName());
+                return textView;
+            }
+        };
+        navi2Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        defaultNavigationTool2Selector.setAdapter(navi2Adapter);
+        int defaultNavigationTool2 = Settings.getDefaultNavigationTool2();
+        int ordinal2 = 0;
+        for (int i = 0; i < apps.size(); i++) {
+            if (apps.get(i).id == defaultNavigationTool2) {
+                ordinal2 = i;
+                break;
+            }
+        }
+        defaultNavigationTool2Selector.setSelection(ordinal2);
+        defaultNavigationTool2Selector.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                NavigationAppsEnum item = (NavigationAppsEnum) parent.getItemAtPosition(position);
+                if (item != null) {
+                    Settings.setDefaultNavigationTool2(item.id);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // noop
+            }
+        });
+
         refreshBackupLabel();
 
     }
