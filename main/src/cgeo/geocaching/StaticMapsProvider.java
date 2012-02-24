@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.concurrent.PriorityThreadFactory;
+import cgeo.geocaching.concurrent.Task;
+import cgeo.geocaching.concurrent.ThreadPool;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
@@ -14,13 +17,14 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 public class StaticMapsProvider {
     private static final String MARKERS_URL = "http://cgeo.carnero.cc/_markers/";
-    /**
-     * in my tests the "no image available" image had 5470 bytes, while "street only" maps had at least 20000 bytes
-     */
+    /** In my tests the "no image available" image had 5470 bytes, while "street only" maps had at least 20000 bytes */
     private static final int MIN_MAP_IMAGE_BYTES = 6000;
+    /** ThreadPool restricting this to 1 Thread. **/
+    private static final ThreadPool pool = new ThreadPool(1, new PriorityThreadFactory(Thread.MIN_PRIORITY));
 
     public static File getMapFile(final String geocode, String prefix, final int level, final boolean createDirs) {
         return LocalStorage.getStorageFile(geocode, "map_" + prefix + level, false, createDirs);
@@ -51,12 +55,22 @@ public class StaticMapsProvider {
         }
     }
 
+    public static void downloadMaps(cgCache cache, cgeoapplication app) {
+        final Display display = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        downloadMaps(cache, display);
+    }
+
     public static void downloadMaps(cgCache cache, Activity activity) {
+        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        downloadMaps(cache, display);
+    }
+
+    public static void downloadMaps(cgCache cache, Display display) {
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
 
-        int edge = guessMinDisplaySide(activity);
+        int edge = guessMinDisplaySide(display);
 
         if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
             storeCacheStaticMap(cache, edge);
@@ -71,7 +85,8 @@ public class StaticMapsProvider {
     }
 
     public static void storeWaypointStaticMap(cgCache cache, Activity activity, cgWaypoint waypoint) {
-        int edge = StaticMapsProvider.guessMinDisplaySide(activity);
+        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int edge = StaticMapsProvider.guessMinDisplaySide(display);
         storeWaypointStaticMap(cache, edge, waypoint);
     }
 
@@ -86,7 +101,8 @@ public class StaticMapsProvider {
     }
 
     public static void storeCacheStaticMap(cgCache cache, Activity activity) {
-        int edge = StaticMapsProvider.guessMinDisplaySide(activity);
+        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int edge = StaticMapsProvider.guessMinDisplaySide(display);
         storeCacheStaticMap(cache, edge);
     }
 
@@ -110,8 +126,7 @@ public class StaticMapsProvider {
         downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints.toString());
     }
 
-    private static int guessMinDisplaySide(Activity activity) {
-        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+    private static int guessMinDisplaySide(Display display) {
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
         int edge = 0;
@@ -125,14 +140,18 @@ public class StaticMapsProvider {
 
     private static void downloadMaps(final cgCache cache, final String markerUrl, final String prefix, final String latlonMap, final int edge,
             final String waypoints) {
-        Thread staticMapsThread = new Thread("getting static map") {
+
+        Task currentTask = new Task("getting static map") {
             @Override
             public void run() {
                 downloadMapsInThread(cache, markerUrl, prefix, latlonMap, edge, waypoints);
             }
         };
-        staticMapsThread.setPriority(Thread.MIN_PRIORITY);
-        staticMapsThread.start();
+        try {
+            pool.add(currentTask, 20, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Log.e(Settings.tag, "StaticMapsProvider.downloadMaps error adding task: " + e.toString());
+        }
     }
 
     private static String getCacheMarkerUrl(final cgCache cache) {
@@ -165,7 +184,7 @@ public class StaticMapsProvider {
 
     /**
      * Check if at least one map file exists for the given geocode.
-     * 
+     *
      * @param geocode
      * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
      */
