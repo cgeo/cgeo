@@ -20,7 +20,7 @@ public enum CacheSize {
     VIRTUAL("virtual", 0, R.string.cache_size_virtual),
     NOT_CHOSEN("not chosen", 0, R.string.cache_size_notchosen),
     OTHER("other", 0, R.string.cache_size_other),
-    UNKNOWN("unknown", 0, R.string.err_unknown); // CacheSize not init. yet
+    UNKNOWN("unknown", 0, R.string.cache_size_unknown); // CacheSize not init. yet
 
     public final String id;
     public final int comparable;

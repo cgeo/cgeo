@@ -42,7 +42,8 @@
   <string name="cache_size_other">otro</string>
   <string name="cache_size_virtual">virtual</string>
   <string name="cache_size_notchosen">no elegido</string>
-
+  <string name="cache_size_unknown">desconocido</string>
+  
   <!-- waypoints -->
   <string name="wp_final">Ubicación final</string>
   <string name="wp_stage">Etapa de multi escondite</string>

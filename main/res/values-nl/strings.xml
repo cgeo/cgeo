@@ -45,7 +45,8 @@
   <string name="cache_size_other">other</string>
   <string name="cache_size_virtual">virtual</string>
   <string name="cache_size_notchosen">not chosen</string>
-
+  <string name="cache_size_unknown">Onbekend</string>
+  
   <!-- waypoints -->
   <string name="wp_final">Eindbestemming</string>
   <string name="wp_stage">Multi-cache punt</string>

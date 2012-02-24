@@ -42,7 +42,8 @@
   <string name="cache_size_other">inna</string>
   <string name="cache_size_virtual">wirtualna</string>
   <string name="cache_size_notchosen">nie wybrana</string>
-
+  <string name="cache_size_unknown">nieznany</string>
+    
   <!-- waypoints -->
   <string name="wp_final">Finał</string>
   <string name="wp_stage">Etap do skrzynki</string>
