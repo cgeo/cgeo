@@ -36,6 +36,22 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(trackable.getDetails());
     }
 
+    public void testTrackableWithLogImages() {
+        final cgTrackable trackable = getTBXATG();
+        assertEquals("TBXATG", trackable.getGeocode());
+
+        List<cgLog> log = trackable.getLogs();
+        // second log entry has several images; just check first two
+        assertEquals("http://img.geocaching.com/track/log/large/f2e24c50-394c-4d74-8fb4-87298d8bff1d.jpg", log.get(1).logImages.get(0).getUrl());
+        assertEquals("7b Welcome to Geowoodstock", log.get(1).logImages.get(0).getTitle());
+        assertEquals("http://img.geocaching.com/track/log/large/b57c29c3-134e-4202-a2a1-69ce8920b055.jpg", log.get(1).logImages.get(1).getUrl());
+        assertEquals("8 Crater Lake Natl Park Oregon", log.get(1).logImages.get(1).getTitle());
+
+        // third log entry has one image
+        assertEquals("http://img.geocaching.com/track/log/large/0096b42d-4d10-45fa-9be2-2d08c0d5cc61.jpg", log.get(2).logImages.get(0).getUrl());
+        assertEquals("Traverski&#39;s GC Univ coin on tour", log.get(2).logImages.get(0).getTitle());
+    }
+
     public void testParseTrackableWithoutReleaseDate() {
         cgTrackable trackable = cgBase.parseTrackable(getFileContent(R.raw.tb14wfv), null, null);
         assertNotNull(trackable);
@@ -52,4 +68,9 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     private cgTrackable getTB2R124() {
         return cgBase.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tb2r124)), null, null);
     }
+
+    private cgTrackable getTBXATG() {
+        return cgBase.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tbxatg)), null, null);
+    }
+
 }
