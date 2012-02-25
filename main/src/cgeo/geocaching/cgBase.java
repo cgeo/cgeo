@@ -704,7 +704,6 @@ public class cgBase {
                 return null;
             }
             // save full detailed caches
-            sendLoadProgressDetail(handler, R.string.cache_dialog_offline_save_message);
             cache.setListId(StoredList.TEMPORARY_LIST_ID);
             cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         }
