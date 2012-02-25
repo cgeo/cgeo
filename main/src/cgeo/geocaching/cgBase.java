@@ -1501,11 +1501,26 @@ public class cgBase {
                     logDone.cacheName = matcherLogs.group(6);
                 }
 
+                // Apply the pattern for images in a trackable log entry against each full log (group(0))
+                final Matcher matcherLogImages = GCConstants.PATTERN_TRACKABLE_LOG_IMAGES.matcher(matcherLogs.group(0));
+                /*
+                 * 1. Image URL
+                 * 2. Image title
+                 */
+                while (matcherLogImages.find())
+                {
+                    final cgImage logImage = new cgImage(matcherLogImages.group(1), matcherLogImages.group(2));
+                    if (logDone.logImages == null) {
+                        logDone.logImages = new ArrayList<cgImage>();
+                    }
+                    logDone.logImages.add(logImage);
+                }
+
                 trackable.getLogs().add(logDone);
             }
         } catch (Exception e) {
             // failed to parse logs
-            Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache logs");
+            Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache logs" + e.toString());
         }
 
         // trackingcode
