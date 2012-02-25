@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.network.HtmlImage;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
@@ -28,6 +29,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class cgeotrackable extends AbstractActivity {
@@ -441,7 +443,7 @@ public class cgeotrackable extends AbstractActivity {
 
         if (trackable != null && trackable.getLogs() != null) {
             for (cgLog log : trackable.getLogs()) {
-                rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logitem, null);
+                rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logs_item, null);
 
                 if (log.date > 0) {
                     ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
@@ -468,7 +470,39 @@ public class cgeotrackable extends AbstractActivity {
 
                 TextView logView = (TextView) rowView.findViewById(R.id.log);
                 logView.setMovementMethod(LinkMovementMethod.getInstance());
-                logView.setText(Html.fromHtml(log.log, new HtmlImage(cgeotrackable.this, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
+                logView.setText(Html.fromHtml(log.log, new HtmlImage(cgeotrackable.this, null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
+
+                // add LogImages
+                LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
+
+                if (CollectionUtils.isNotEmpty(log.logImages)) {
+
+                    final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
+
+                    final View.OnClickListener listener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            cgeoimages.startActivityLogImages(cgeotrackable.this, trackable.getGeocode(), logImages);
+                        }
+                    };
+
+                    ArrayList<String> titles = new ArrayList<String>();
+                    for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
+                        String img_title = log.logImages.get(i_img_cnt).getTitle();
+                        if (!StringUtils.isBlank(img_title)) {
+                            titles.add(img_title);
+                        }
+                    }
+                    if (titles.isEmpty()) {
+                        titles.add(res.getString(R.string.cache_log_image_default_title));
+                    }
+
+                    LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.trackable_logs_img, null);
+                    TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
+                    log_img_title.setText(StringUtils.join(titles.toArray(new String[titles.size()]), ", "));
+                    log_img_title.setOnClickListener(listener);
+                    logLayout.addView(log_imgView);
+                }
 
                 ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
                 listView.addView(rowView);
