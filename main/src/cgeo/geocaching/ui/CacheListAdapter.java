@@ -103,16 +103,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         Drawable modifiedCoordinatesMarker = activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
         for (final CacheType cacheType : CacheType.values()) {
             // unmodified icon
-            int hashCode = new HashCodeBuilder()
-                    .append(cacheType)
-                    .append(false)
-                    .toHashCode();
+            int hashCode = getIconHashCode(cacheType, false);
             gcIconDrawables.put(hashCode, activity.getResources().getDrawable(cacheType.markerId));
             // icon with flag for user modified coordinates
-            hashCode = new HashCodeBuilder()
-                    .append(cacheType)
-                    .append(true)
-                    .toHashCode();
+            hashCode = getIconHashCode(cacheType, true);
             Drawable[] layers = new Drawable[2];
             layers[0] = activity.getResources().getDrawable(cacheType.markerId);
             layers[1] = modifiedCoordinatesMarker;
@@ -133,6 +127,13 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             ratingBcgs[1] = R.drawable.favourite_background_orange_dark;
             ratingBcgs[2] = R.drawable.favourite_background_green_dark;
         }
+    }
+
+    private static int getIconHashCode(final CacheType cacheType, final boolean userModifiedOrFinal) {
+        return new HashCodeBuilder()
+                .append(cacheType)
+                .append(userModifiedOrFinal)
+                .toHashCode();
     }
 
     /**
@@ -480,13 +481,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         holder.text.setText(cache.getNameSp(), TextView.BufferType.SPANNABLE);
-        int hashCode = new HashCodeBuilder()
-                .append(cache.getType()).append(cache.hasUserModifiedCoords() || cache.hasFinalDefined()).toHashCode();
-        if (gcIconDrawables.containsKey(hashCode)) { // cache icon
-            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(hashCode), null, null, null);
-        } else { // unknown cache type, "mystery" icon
-            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY), null, null, null);
-        }
+        holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache), null, null, null);
 
         if (holder.inventory.getChildCount() > 0) {
             holder.inventory.removeAllViews();
@@ -628,6 +623,16 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         return v;
+    }
+
+    private static Drawable getCacheIcon(cgCache cache) {
+        int hashCode = getIconHashCode(cache.getType(), cache.hasUserModifiedCoords() || cache.hasFinalDefined());
+        if (!gcIconDrawables.containsKey(hashCode)) {
+            // fallback to mystery icon
+            hashCode = getIconHashCode(CacheType.MYSTERY, cache.hasUserModifiedCoords() || cache.hasFinalDefined());
+        }
+
+        return gcIconDrawables.get(hashCode);
     }
 
     @Override
