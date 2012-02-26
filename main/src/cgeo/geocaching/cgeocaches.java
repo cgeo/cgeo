@@ -562,13 +562,9 @@ public class cgeocaches extends AbstractListActivity {
                     title = res.getString(R.string.stored_caches_button);
                 } else {
                     final StoredList list = app.getList(listId);
-                    // Check if list id is still valid
-                    if (null == list) {
-                        listId = StoredList.STANDARD_LIST_ID;
-                        title = res.getString(R.string.stored_caches_button);
-                    } else {
-                        title = list.title;
-                    }
+                    // list.id may be different if listId was not valid
+                    listId = list.id;
+                    title = list.title;
                 }
 
                 setTitle(title);
@@ -2382,10 +2378,6 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        if (list == null) {
-            return;
-        }
-
         listId = list.id;
         title = list.title;
 
@@ -2493,7 +2485,7 @@ public class cgeocaches extends AbstractListActivity {
 
         if (status) {
             showToast(res.getString(R.string.list_dialog_remove_ok));
-            switchListById(1);
+            switchListById(StoredList.STANDARD_LIST_ID);
         } else {
             showToast(res.getString(R.string.list_dialog_remove_err));
         }
