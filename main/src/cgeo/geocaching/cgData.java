@@ -68,6 +68,7 @@ public class cgData {
     private SQLiteDatabase databaseRO = null;
     private SQLiteDatabase databaseRW = null;
     private static final int dbVersion = 62;
+    private static final int customListIdOffset = 10;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
     private static final String dbTableLists = "cg_lists";
@@ -3211,7 +3212,7 @@ public class cgData {
         try {
             String query = "SELECT l._id as _id, l.title as title, COUNT(c._id) as count" +
                     " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCaches + " c" +
-                    " ON l._id + 10 = c.reason" +
+                    " ON l._id + " + customListIdOffset + " = c.reason" +
                     " GROUP BY l._id" +
                     " ORDER BY l.title COLLATE NOCASE ASC";
 
@@ -3238,7 +3239,7 @@ public class cgData {
                     if (indexCount >= 0) {
                         count = cursor.getInt(indexCount);
                     }
-                    StoredList list = new StoredList(cursor.getInt(indexId) + 10, cursor.getString(indexTitle), count);
+                    StoredList list = new StoredList(cursor.getInt(indexId) + customListIdOffset, cursor.getString(indexTitle), count);
                     result.add(list);
                 } while (cursor.moveToNext());
             }
@@ -3250,13 +3251,11 @@ public class cgData {
 
     public StoredList getList(int id, Resources res) {
         init();
-        if (id == StoredList.STANDARD_LIST_ID) {
-            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong());
-        } else if (id >= 10) {
+        if (id >= customListIdOffset) {
             Cursor cursor = databaseRO.query(
                     dbTableLists,
                     new String[] { "_id", "title" },
-                    "_id = " + (id - 10),
+                    "_id = " + (id - customListIdOffset),
                     null,
                     null,
                     null,
@@ -3265,6 +3264,10 @@ public class cgData {
             if (!lists.isEmpty()) {
                 return lists.get(0);
             }
+        }
+        // fall back to standard list in case of invalid list id
+        if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
+            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong());
         }
 
         return null;
@@ -3300,7 +3303,7 @@ public class cgData {
         if (id < 0) {
             return -1;
         } else {
-            return (id + 10);
+            return (id + customListIdOffset);
         }
     }
 
@@ -3312,7 +3315,7 @@ public class cgData {
      * @return Number of lists changed
      */
     public int renameList(final int listId, final String name) {
-        if (StringUtils.isBlank(name)) {
+        if (StringUtils.isBlank(name) || StoredList.STANDARD_LIST_ID == listId) {
             return 0;
         }
 
@@ -3325,7 +3328,7 @@ public class cgData {
             values.put("title", name);
             values.put("updated", System.currentTimeMillis());
 
-            count = databaseRW.update(dbTableLists, values, "_id = " + (listId - 10), null);
+            count = databaseRW.update(dbTableLists, values, "_id = " + (listId - customListIdOffset), null);
             databaseRW.setTransactionSuccessful();
         } finally {
             databaseRW.endTransaction();
@@ -3336,7 +3339,7 @@ public class cgData {
 
     public boolean removeList(int listId) {
         boolean status = false;
-        if (listId < 10) {
+        if (listId < customListIdOffset) {
             return status;
         }
 
@@ -3344,7 +3347,7 @@ public class cgData {
 
         databaseRW.beginTransaction();
         try {
-            int cnt = databaseRW.delete(dbTableLists, "_id = " + (listId - 10), null);
+            int cnt = databaseRW.delete(dbTableLists, "_id = " + (listId - customListIdOffset), null);
 
             if (cnt > 0) {
                 ContentValues values = new ContentValues();
