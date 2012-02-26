@@ -7,7 +7,6 @@ import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
@@ -19,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -90,13 +90,16 @@ public class GCBase {
             }
 
             // The PNG must be request before ! Else the following request would return with 204 - No Content
-            cgBase.requestMapTile(GCConstants.URL_MAP_TILE + url, referer);
+            Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + url, referer);
+
+            assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
+            assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
 
             String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + url, referer);
             if (StringUtils.isEmpty(data)) {
                 Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
             } else {
-                final SearchResult search = parseMapJSON(data, tile);
+                final SearchResult search = parseMapJSON(data, tile, bitmap);
                 if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
                     Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
                 }
@@ -121,7 +124,7 @@ public class GCBase {
      *            Retrieved data.
      * @return SearchResult. Never null.
      */
-    public static SearchResult parseMapJSON(final String data, Tile tile) {
+    public static SearchResult parseMapJSON(final String data, Tile tile, Bitmap bitmap) {
 
         final SearchResult searchResult = new SearchResult();
 
@@ -221,8 +224,9 @@ public class GCBase {
                     // if we have "better" coords from a previous search -> reuse them
                     if (cache.getZoomlevel() < tile.getZoomlevel() ||
                         cache.getCoords() == null) {
-                        cache.setCoords(getCoordsForUTFGrid(tile, pos));
-
+                        UTFGridPosition xy = getPositionInGrid(pos);
+                        cache.setCoords(tile.getCoord(xy));
+                        parsePNG(cache, bitmap, xy);
                         // Log.d(Settings.tag, "id=" + id + " geocode=" + cache.getGeocode() + " coords=" + cache.getCoords().toString());
                     }
                     searchResult.addCache(cache);
@@ -235,6 +239,33 @@ public class GCBase {
         }
 
         return searchResult;
+    }
+
+    // Try to get the cache type from the PNG image for a tile */
+    private static void parsePNG(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
+        int posX = xy.getX() * 4;
+        int posY = xy.getY() * 4;
+        for (int x = posX; x <= posX + 3; x++) {
+            for (int y = posY; y <= posY + 3; y++) {
+                int color = bitmap.getPixel(x, y) & 0x00FFFFFF;
+                if (color == 0x80af64) { // green
+                    cache.setType(CacheType.TRADITIONAL);
+                    return;
+                }
+                if (color == 0xffde19) { // yellow
+                    cache.setType(CacheType.MULTI);
+                    return;
+                }
+                if (color == 0x001a86) { // blue
+                    cache.setType(CacheType.MYSTERY);
+                    return;
+                }
+                if (color == 0xb8682c) { // brown
+                    cache.setFound(true);
+                    return;
+                }
+            }
+        }
     }
 
     /**
@@ -253,7 +284,7 @@ public class GCBase {
     }
 
     /** Calculate from a list of positions (x/y) the coords */
-    protected static Geopoint getCoordsForUTFGrid(Tile tile, List<UTFGridPosition> positions) {
+    protected static UTFGridPosition getPositionInGrid(List<UTFGridPosition> positions) {
         int minX = UTFGrid.GRID_MAXX;
         int maxX = 0;
         int minY = UTFGrid.GRID_MAXY;
@@ -264,7 +295,7 @@ public class GCBase {
             minY = Math.min(minY, pos.y);
             maxY = Math.max(maxY, pos.y);
         }
-        return tile.getCoord(new UTFGridPosition((minX + maxX) / 2, (minY + maxY) / 2));
+        return new UTFGridPosition((minX + maxX) / 2, (minY + maxY) / 2);
     }
 
     /**

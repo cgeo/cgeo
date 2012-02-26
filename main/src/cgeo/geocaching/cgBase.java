@@ -31,6 +31,7 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
@@ -60,6 +61,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -1796,14 +1799,21 @@ public class cgBase {
         return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
     }
 
-    /** Request .png image for a tile. Ignore the image - just load it */
-    public static void requestMapTile(final String url, final String referer) {
+    /** Request .png image for a tile. */
+    public static Bitmap requestMapTile(final String url, final String referer) {
         final HttpGet request = new HttpGet(url);
         request.addHeader("Accept", "image/png,image/*;q=0.8,*/*;q=0.5");
-        request.addHeader("Accept-Encoding", "gzip, deflate");
+        //request.addHeader("Accept-Encoding", "gzip, deflate");
         request.addHeader("Referer", referer);
         request.addHeader("X-Requested-With", "XMLHttpRequest");
-        request(request);
+        final HttpResponse response = request(request);
+        try {
+            final HttpEntity entity = response.getEntity();
+            return BitmapFactory.decodeStream(entity.getContent());
+        } catch (IOException e) {
+            Log.e(Settings.tag, "cgBase.requestMapTile() " + e.getMessage());
+        }
+        return null;
     }
 
     /** Request JSON informations for a tile */
