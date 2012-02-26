@@ -322,6 +322,7 @@
   <string name="caches_filter_clear">Clear filters</string>
   <string name="caches_filter_size_title">Choose size</string>
   <string name="caches_filter_type_title">Choose type</string>
+  <string name="caches_filter_modified">With modified coordinates</string>
   <string name="caches_exporting_fieldnote">Exporting as Field Notes…</string>
   <string name="caches_removing_from_history">Removing from History…</string>
 
