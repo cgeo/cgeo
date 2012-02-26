@@ -102,6 +102,10 @@ import java.util.Map.Entry;
  */
 public class CacheDetailActivity extends AbstractActivity {
 
+    private static final int MENU_FIELD_COPY = 1;
+    private static final int MENU_FIELD_TRANSLATE = 2;
+    private static final int MENU_FIELD_TRANSLATE_EN = 3;
+    private static final int MENU_FIELD_SHARE = 4;
     private static final int MENU_SHARE = 12;
     private static final int MENU_CALENDAR = 11;
     private static final int MENU_CACHES_AROUND = 10;
@@ -443,17 +447,18 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private void buildOptionsContextmenu(ContextMenu menu, int viewId, String copyPrompt, boolean copyOnly) {
         menu.setHeaderTitle(res.getString(R.string.options_context_menu_title));
-        menu.add(viewId, 1, 0, copyPrompt);
+        menu.add(viewId, MENU_FIELD_COPY, 0, copyPrompt);
         if (!copyOnly) {
             if (clickedItemText.length() > TranslationUtils.translationTextLengthToWarn) {
                 showToast(res.getString(R.string.translate_length_warning));
             }
-            menu.add(viewId, 2, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
+            menu.add(viewId, MENU_FIELD_TRANSLATE, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
             if (Settings.isUseEnglish() && Locale.getDefault() != Locale.ENGLISH) {
-                menu.add(viewId, 3, 0, res.getString(R.string.translate_to_english));
+                menu.add(viewId, MENU_FIELD_TRANSLATE_EN, 0, res.getString(R.string.translate_to_english));
             }
 
         }
+        menu.add(viewId, MENU_FIELD_SHARE, 0, res.getString(R.string.cache_share_field));
     }
 
     @Override
@@ -468,14 +473,20 @@ public class CacheDetailActivity extends AbstractActivity {
             case R.id.hint:
             case R.id.log:
                 switch (index) {
-                    case 1: // copy
+                    case MENU_FIELD_COPY:
                         ClipboardUtils.copyToClipboard(clickedItemText);
                         return true;
-                    case 2: // translate to system language
+                    case MENU_FIELD_TRANSLATE:
                         TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), clickedItemText.toString());
                         return true;
-                    case 3: // translate to English
+                    case MENU_FIELD_TRANSLATE_EN:
                         TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), clickedItemText.toString());
+                        return true;
+                    case MENU_FIELD_SHARE:
+                        final Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
+                        startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
                         return true;
                     default:
                         break;
@@ -501,24 +512,21 @@ public class CacheDetailActivity extends AbstractActivity {
                     notifyDataSetChanged();
                 }
                 break;
-            case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
- {
+            case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
                     NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, null, waypoint, null);
                 }
-                }
+            }
                 break;
-            case CONTEXT_MENU_WAYPOINT_NAVIGATE:
- {
+            case CONTEXT_MENU_WAYPOINT_NAVIGATE: {
                 final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
                 if (waypoint != null) {
                     NavigationAppFactory.showNavigationMenu(geolocation, this, null, waypoint, null);
                 }
             }
                 break;
-            case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
- {
+            case CONTEXT_MENU_WAYPOINT_CACHES_AROUND: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
                     cgeocaches.startActivityCachesAround(this, waypoint.getCoords());

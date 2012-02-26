@@ -593,6 +593,7 @@
   <string name="cache_image">Image</string>
   <string name="cache_image_open_file">Open as file</string>
   <string name="cache_image_open_browser">Open in browser</string>
+  <string name="cache_share_field">Share</string>
       
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>

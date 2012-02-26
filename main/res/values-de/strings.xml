@@ -578,7 +578,8 @@
   <string name="cache_image">Bild</string>
   <string name="cache_image_open_file">Als Datei öffnen</string>
   <string name="cache_image_open_browser">Im Browser öffnen</string>
-
+  <string name="cache_share_field">Weiterleiten</string>
+  
   <!-- file list base -->
   <string name="file_searching_in">Suche nach Dateien\nin</string>
   <string name="file_searching_sdcard_in">Keine Dateien in Standardverzeichnissen gefunden:\n%1$s\n\nDurchsuche komplette SD-Karte:\n</string>
