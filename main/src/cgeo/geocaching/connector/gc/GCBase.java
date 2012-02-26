@@ -196,7 +196,6 @@ public class GCBase {
                             cache.setReliableLatLon(false);
                             cache.setGeocode(newidToGeocode(id));
                             cache.setName(cacheInfo.getString("n"));
-                            cache.setType(CacheType.GC_LIVE_MAP);
                             cache.setZoomlevel(tile.getZoomlevel());
 
                             liveMapCache.put(id, cache);
