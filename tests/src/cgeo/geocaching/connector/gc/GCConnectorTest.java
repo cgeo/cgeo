@@ -10,7 +10,6 @@ import android.test.AndroidTestCase;
 
 public class GCConnectorTest extends AndroidTestCase {
 
-    @SuppressWarnings("null")
     public static void testGetViewport() {
         cgBase.login();
 
@@ -19,7 +18,7 @@ public class GCConnectorTest extends AndroidTestCase {
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.371 E 9° 35.501"));
             SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
-            assertTrue(searchResult != null);
+            assertNotNull(searchResult);
             assertTrue(searchResult.getCount() > 130);
             assertTrue(searchResult.getGeocodes().contains("GC211WG"));
             // Spiel & Sport GC211WG N 52° 25.413 E 009° 36.049
@@ -28,7 +27,7 @@ public class GCConnectorTest extends AndroidTestCase {
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
             SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
-            assertTrue(searchResult != null);
+            assertNotNull(searchResult);
             assertTrue(searchResult.getGeocodes().contains("GC211WG"));
         }
     }

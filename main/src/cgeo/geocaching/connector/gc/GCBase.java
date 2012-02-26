@@ -51,7 +51,6 @@ public class GCBase {
      * @param sessionToken
      * @return
      */
-    @SuppressWarnings("null")
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
 
         Log.d(Settings.tag, "GCBase.searchByViewport" + viewport.toString());
@@ -101,7 +100,9 @@ public class GCBase {
                 if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
                     Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
                 }
-                searchResult.addGeocodes(search.getGeocodes());
+                else {
+                    searchResult.addGeocodes(search.getGeocodes());
+                }
             }
         }
 
