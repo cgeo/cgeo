@@ -31,7 +31,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class cgeopopup extends AbstractActivity {
@@ -233,7 +232,6 @@ public class cgeopopup extends AbstractActivity {
             inflater = getLayoutInflater();
             geocode = cache.getGeocode().toUpperCase();
 
-            ((ScrollView) findViewById(R.id.details_list_box)).setVisibility(View.VISIBLE);
             LinearLayout detailsList = (LinearLayout) findViewById(R.id.details_list);
             detailsList.removeAllViews();
 
@@ -385,74 +383,63 @@ public class cgeopopup extends AbstractActivity {
                 }
             }
 
-            final boolean moreDetails = cache.isDetailed();
             // more details
-            if (moreDetails || cache.getType() == CacheType.GC_LIVE_MAP) {
-                ((LinearLayout) findViewById(R.id.more_details_box)).setVisibility(View.VISIBLE);
+            Button buttonMore = (Button) findViewById(R.id.more_details);
+            buttonMore.setOnClickListener(new OnClickListener() {
 
-                Button buttonMore = (Button) findViewById(R.id.more_details);
-                buttonMore.setOnClickListener(new OnClickListener() {
+                public void onClick(View arg0) {
+                    Intent cachesIntent = new Intent(cgeopopup.this, CacheDetailActivity.class);
+                    cachesIntent.putExtra("geocode", geocode.toUpperCase());
+                    startActivity(cachesIntent);
 
-                    public void onClick(View arg0) {
-                        Intent cachesIntent = new Intent(cgeopopup.this, CacheDetailActivity.class);
-                        cachesIntent.putExtra("geocode", geocode.toUpperCase());
-                        startActivity(cachesIntent);
-
-                        finish();
-                        return;
-                    }
-                });
-            } else {
-                ((LinearLayout) findViewById(R.id.more_details_box)).setVisibility(View.GONE);
-            }
-
-            if (moreDetails) {
-                ((LinearLayout) findViewById(R.id.offline_box)).setVisibility(View.VISIBLE);
-
-                // offline use
-                final TextView offlineText = (TextView) findViewById(R.id.offline_text);
-                final Button offlineRefresh = (Button) findViewById(R.id.offline_refresh);
-                final Button offlineStore = (Button) findViewById(R.id.offline_store);
-
-                if (cache.getListId() > 0) {
-                    long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
-
-                    String ago = "";
-                    if (diff < 15) {
-                        ago = res.getString(R.string.cache_offline_time_mins_few);
-                    } else if (diff < 50) {
-                        ago = res.getString(R.string.cache_offline_time_about) + " " + diff + " " + res.getString(R.string.cache_offline_time_mins);
-                    } else if (diff < 90) {
-                        ago = res.getString(R.string.cache_offline_time_about) + " " + res.getString(R.string.cache_offline_time_hour);
-                    } else if (diff < (48 * 60)) {
-                        ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / 60) + " " + res.getString(R.string.cache_offline_time_hours);
-                    } else {
-                        ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60)) + " " + res.getString(R.string.cache_offline_time_days);
-                    }
-
-                    offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-
-                    offlineRefresh.setVisibility(View.VISIBLE);
-                    offlineRefresh.setEnabled(true);
-                    offlineRefresh.setOnClickListener(new storeCache());
-
-                    offlineStore.setText(res.getString(R.string.cache_offline_drop));
-                    offlineStore.setEnabled(true);
-                    offlineStore.setOnClickListener(new dropCache());
-                } else {
-                    offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-
-                    offlineRefresh.setVisibility(View.GONE);
-                    offlineRefresh.setEnabled(false);
-                    offlineRefresh.setOnTouchListener(null);
-                    offlineRefresh.setOnClickListener(null);
-
-                    offlineStore.setText(res.getString(R.string.cache_offline_store));
-                    offlineStore.setEnabled(true);
-                    offlineStore.setOnClickListener(new storeCache());
+                    finish();
+                    return;
                 }
+            });
+
+            ((LinearLayout) findViewById(R.id.offline_box)).setVisibility(View.VISIBLE);
+
+            // offline use
+            final TextView offlineText = (TextView) findViewById(R.id.offline_text);
+            final Button offlineRefresh = (Button) findViewById(R.id.offline_refresh);
+            final Button offlineStore = (Button) findViewById(R.id.offline_store);
+
+            if (cache.getListId() > 0) {
+                long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
+
+                String ago = "";
+                if (diff < 15) {
+                    ago = res.getString(R.string.cache_offline_time_mins_few);
+                } else if (diff < 50) {
+                    ago = res.getString(R.string.cache_offline_time_about) + " " + diff + " " + res.getString(R.string.cache_offline_time_mins);
+                } else if (diff < 90) {
+                    ago = res.getString(R.string.cache_offline_time_about) + " " + res.getString(R.string.cache_offline_time_hour);
+                } else if (diff < (48 * 60)) {
+                    ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / 60) + " " + res.getString(R.string.cache_offline_time_hours);
+                } else {
+                    ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60)) + " " + res.getString(R.string.cache_offline_time_days);
+                }
+
+                offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
+
+                offlineRefresh.setVisibility(View.VISIBLE);
+                offlineRefresh.setEnabled(true);
+                offlineRefresh.setOnClickListener(new storeCache());
+
+                offlineStore.setText(res.getString(R.string.cache_offline_drop));
+                offlineStore.setEnabled(true);
+                offlineStore.setOnClickListener(new dropCache());
             } else {
-                ((LinearLayout) findViewById(R.id.offline_box)).setVisibility(View.GONE);
+                offlineText.setText(res.getString(R.string.cache_offline_not_ready));
+
+                offlineRefresh.setVisibility(View.GONE);
+                offlineRefresh.setEnabled(false);
+                offlineRefresh.setOnTouchListener(null);
+                offlineRefresh.setOnClickListener(null);
+
+                offlineStore.setText(res.getString(R.string.cache_offline_store));
+                offlineStore.setEnabled(true);
+                offlineStore.setOnClickListener(new storeCache());
             }
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeopopup.init: " + e.toString());

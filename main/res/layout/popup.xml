@@ -20,7 +20,6 @@
 				android:onClick="goManual" />
 	</LinearLayout>
 	<ScrollView android:id="@+id/details_list_box"
-			android:visibility="gone"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:padding="4dip"
@@ -35,7 +34,6 @@
 					android:orientation="vertical" >
 			</LinearLayout>
 			<LinearLayout android:id="@+id/more_details_box"
-					android:visibility="gone"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:orientation="vertical"  >
@@ -44,7 +42,6 @@
 						android:text="@string/popup_more" />
 			</LinearLayout>
 			<LinearLayout android:id="@+id/offline_box"
-					android:visibility="gone"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:orientation="vertical"  >
