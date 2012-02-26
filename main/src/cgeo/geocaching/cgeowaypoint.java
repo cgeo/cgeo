@@ -32,7 +32,6 @@ public class cgeowaypoint extends AbstractActivity {
     private static final int MENU_ID_DEFAULT_NAVIGATION = 2;
     private static final int MENU_ID_OPEN_GEOCACHE = 6;
     private cgWaypoint waypoint = null;
-    private String geocode = null;
     private int id = -1;
     private ProgressDialog waitDialog = null;
     private cgGeo geo = null;
@@ -147,7 +146,6 @@ public class cgeowaypoint extends AbstractActivity {
         // try to get data from extras
         if (extras != null) {
             id = extras.getInt("waypoint");
-            geocode = extras.getString("geocode");
         }
 
         if (id <= 0) {
@@ -239,7 +237,7 @@ public class cgeowaypoint extends AbstractActivity {
             menu.findItem(MENU_ID_DEFAULT_NAVIGATION).setVisible(visible);
             menu.findItem(MENU_ID_CACHES_AROUND).setVisible(visible);
 
-            boolean openGeocache = StringUtils.isEmpty(geocode) && StringUtils.isNotEmpty(waypoint.getGeocode());
+            boolean openGeocache = waypoint != null && StringUtils.isNotEmpty(waypoint.getGeocode());
             menu.findItem(MENU_ID_OPEN_GEOCACHE).setVisible(openGeocache);
         } catch (Exception e) {
             // nothing
@@ -322,13 +320,10 @@ public class cgeowaypoint extends AbstractActivity {
 
         public void onClick(View arg0) {
             if (app.deleteWaypoint(id)) {
-                String tmpCode = geocode;
-                if (StringUtils.isEmpty(tmpCode)) {
-                    tmpCode = waypoint.getGeocode();
-                }
-                StaticMapsProvider.removeWpStaticMaps(id, tmpCode);
-                if (!StringUtils.isEmpty(tmpCode)) {
-                    app.removeCache(tmpCode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+                String geocode = waypoint.getGeocode();
+                StaticMapsProvider.removeWpStaticMaps(id, geocode);
+                if (!StringUtils.isEmpty(geocode)) {
+                    app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
                 }
 
                 finish();
