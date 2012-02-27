@@ -111,7 +111,9 @@ public class GCBase {
 
         if (Settings.isPremiumMember()) {
             SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID, Settings.isShowCaptcha());
-            searchResult.addGeocodes(search.getGeocodes());
+            if (search != null) {
+                searchResult.addGeocodes(search.getGeocodes());
+            }
         }
 
         return searchResult;
