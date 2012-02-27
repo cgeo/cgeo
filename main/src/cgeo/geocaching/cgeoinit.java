@@ -393,6 +393,7 @@ public class cgeoinit extends AbstractActivity {
         });
 
         final CheckBox captchaButton = (CheckBox) findViewById(R.id.captcha);
+        captchaButton.setEnabled(!Settings.isPremiumMember());
         captchaButton.setChecked(Settings.isShowCaptcha());
         captchaButton.setOnClickListener(new View.OnClickListener() {
 
