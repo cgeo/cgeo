@@ -121,7 +121,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".cgeoaddresses"
+			android:name=".AdressListActivity"
 			android:label="@string/app_name"
 			android:windowSoftInputMode="stateHidden"
 			android:configChanges="keyboardHidden|orientation" >

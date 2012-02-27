@@ -60,7 +60,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     final private Resources res;
     /** Resulting list of caches */
     final private List<cgCache> list;
-    private CacheView holder = null;
+    private CacheListView holder = null;
     private LayoutInflater inflater = null;
     private CacheComparator cacheComparator = null;
     private Geopoint coords = null;
@@ -387,7 +387,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         if (v == null) {
             v = inflater.inflate(R.layout.cache, null);
 
-            holder = new CacheView();
+            holder = new CacheListView();
             holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
             holder.oneInfo = (RelativeLayout) v.findViewById(R.id.one_info);
             holder.oneCheckbox = (RelativeLayout) v.findViewById(R.id.one_checkbox);
@@ -404,7 +404,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
             v.setTag(holder);
         } else {
-            holder = (CacheView) v.getTag();
+            holder = (CacheListView) v.getTag();
         }
 
         if (cache.isOwn()) {
@@ -729,10 +729,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     class detectGesture extends GestureDetector.SimpleOnGestureListener {
 
-        private CacheView holder = null;
+        private CacheListView holder = null;
         private cgCache cache = null;
 
-        public detectGesture(CacheView holderIn, cgCache cacheIn) {
+        public detectGesture(CacheListView holderIn, cgCache cacheIn) {
             holder = holderIn;
             cache = cacheIn;
         }
@@ -799,7 +799,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
     }
 
-    private void moveRight(CacheView holder, cgCache cache, boolean force) {
+    private void moveRight(CacheListView holder, cgCache cache, boolean force) {
         if (cache == null) {
             return;
         }
@@ -834,7 +834,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         cache.setStatusCheckedView(true);
     }
 
-    private void moveLeft(CacheView holder, cgCache cache, boolean force) {
+    private void moveLeft(CacheListView holder, cgCache cache, boolean force) {
         if (cache == null) {
             return;
         }
