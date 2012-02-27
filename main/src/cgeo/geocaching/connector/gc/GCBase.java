@@ -3,10 +3,10 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
@@ -23,8 +23,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * GC.com/Groundspeak (GS) specific stuff
@@ -41,6 +43,12 @@ public class GCBase {
     protected final static long GC_BASE16 = 16;
 
     private static final LeastRecentlyUsedCache<String, cgCache> liveMapCache = new LeastRecentlyUsedCache<String, cgCache>(2000); // JSON id, cache
+
+    private static final Set<Tile> TileCache = new HashSet<Tile>();
+
+    public static void ClearTileCache() {
+        TileCache.clear();
+    }
 
     /**
      * @param viewport
@@ -60,59 +68,64 @@ public class GCBase {
         final SearchResult searchResult = new SearchResult();
         searchResult.setUrl(referer + "?ll=" + viewport.getCenter().getLatitude() + "," + viewport.getCenter().getLongitude());
 
-        List<Tile> tiles = getTilesForViewport(viewport);
+        Set<Tile> tiles = getTilesForViewport(viewport);
 
         for (Tile tile : tiles) {
-            String url =
-                    "?x=" + tile.getX() + // x tile
-                    "&y=" + tile.getY() + // y tile
-                    "&z=" + tile.getZoomlevel(); // zoom level
-            if (tokens != null) {
-                url += "&k=" + tokens[0]; // user session
-                url += "&st=" + tokens[1]; // session token
-            }
-            url += "&ep=1";
-            if (Settings.isExcludeMyCaches()) {
-                url += "&hf=1"; // hide found
-                url += "&hh=1"; // hide hidden
-            }
-            if (Settings.getCacheType() == CacheType.TRADITIONAL) {
-                url += "&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"; // 2 = tradi 3 = multi 8 = mystery
-            }
-            if (Settings.getCacheType() == CacheType.MULTI) {
-                url += "&ect=9,5,2,6,453,13,1304,137,11,4,8,1858";
-            }
-            if (Settings.getCacheType() == CacheType.MYSTERY) {
-                url += "&ect=9,5,3,6,453,13,1304,137,11,4,2,1858";
-            }
-            if (tile.getZoomlevel() != 14) {
-                url += "&_=" + String.valueOf(System.currentTimeMillis());
-            }
 
-            // The PNG must be request before ! Else the following request would return with 204 - No Content
-            Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + url, referer);
-
-            assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
-            assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
-
-            String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + url, referer);
-            if (StringUtils.isEmpty(data)) {
-                Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
-            } else {
-                final SearchResult search = parseMapJSON(data, tile, bitmap);
-                if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
-                    Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+            if (!TileCache.contains(tile)) {
+                String url =
+                        "?x=" + tile.getX() + // x tile
+                        "&y=" + tile.getY() + // y tile
+                        "&z=" + tile.getZoomlevel(); // zoom level
+                if (tokens != null) {
+                    url += "&k=" + tokens[0]; // user session
+                    url += "&st=" + tokens[1]; // session token
                 }
-                else {
-                    searchResult.addGeocodes(search.getGeocodes());
+                url += "&ep=1";
+                if (Settings.isExcludeMyCaches()) {
+                    url += "&hf=1"; // hide found
+                    url += "&hh=1"; // hide hidden
                 }
+                if (Settings.getCacheType() == CacheType.TRADITIONAL) {
+                    url += "&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"; // 2 = tradi 3 = multi 8 = mystery
+                }
+                if (Settings.getCacheType() == CacheType.MULTI) {
+                    url += "&ect=9,5,2,6,453,13,1304,137,11,4,8,1858";
+                }
+                if (Settings.getCacheType() == CacheType.MYSTERY) {
+                    url += "&ect=9,5,3,6,453,13,1304,137,11,4,2,1858";
+                }
+                if (tile.getZoomlevel() != 14) {
+                    url += "&_=" + String.valueOf(System.currentTimeMillis());
+                }
+
+                // The PNG must be request before ! Else the following request would return with 204 - No Content
+                Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + url, referer);
+
+                assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
+                assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
+
+                String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + url, referer);
+                if (StringUtils.isEmpty(data)) {
+                    Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                } else {
+                    final SearchResult search = parseMapJSON(data, tile, bitmap);
+                    if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
+                        Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+                    }
+                    else {
+                        searchResult.addGeocodes(search.getGeocodes());
+                    }
+                }
+
+                TileCache.add(tile);
             }
         }
 
-        if (Settings.isPremiumMember()) {
-            SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID, Settings.isShowCaptcha());
-            searchResult.addGeocodes(search.getGeocodes());
-        }
+        //        if (Settings.isPremiumMember()) {
+        //            SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID, Settings.isShowCaptcha());
+        //            searchResult.addGeocodes(search.getGeocodes());
+        //        }
 
         return searchResult;
     }
@@ -273,12 +286,17 @@ public class GCBase {
      * @param viewport
      * @return
      */
-    protected static List<Tile> getTilesForViewport(final Viewport viewport) {
-        List<Tile> tiles = new ArrayList<Tile>();
-        if (!Settings.isPremiumMember()) {
-            tiles.add(new Tile(viewport.getCenter(), 14)); // precise coords for caches nearby
-        }
-        tiles.add(new Tile(viewport.getCenter(), 12)); // other caches around
+    protected static Set<Tile> getTilesForViewport(final Viewport viewport) {
+        Set<Tile> tiles = new HashSet<Tile>();
+
+        int zoom = Math.min(Tile.calcLonZoom(viewport.bottomLeft, viewport.topRight),
+                Tile.calcLatZoom(viewport.bottomLeft, viewport.topRight));
+
+        tiles.add(new Tile(viewport.bottomLeft, zoom));
+        tiles.add(new Tile(new Geopoint(viewport.getLatitudeMin(), viewport.getLongitudeMax()), zoom));
+        tiles.add(new Tile(new Geopoint(viewport.getLatitudeMax(), viewport.getLongitudeMin()), zoom));
+        tiles.add(new Tile(viewport.topRight, zoom));
+
         return tiles;
     }
 

@@ -38,7 +38,7 @@ public class Tile {
     public Tile(Geopoint origin, int zoomlevel) {
         assert zoomlevel >= ZOOMLEVEL_MIN && zoomlevel <= ZOOMLEVEL_MAX : "zoomlevel out of range";
 
-        this.zoomlevel = zoomlevel;
+        this.zoomlevel = Math.min(zoomlevel, ZOOMLEVEL_MAX);
         tileX = calcX(origin);
         tileY = calcY(origin);
     }
@@ -102,8 +102,74 @@ public class Tile {
         return new Geopoint(Math.toDegrees(latRad), lonDeg);
     }
 
+    public static int calcLonZoom(final Geopoint left, final Geopoint right) {
+
+        int zoom = (int) Math.floor(
+                Math.log(360.0 / Math.abs(left.getLongitude() - right.getLongitude()))
+                        / Math.log(2)
+                );
+
+        Tile tileLeft = new Tile(left, zoom);
+        Tile tileRight = new Tile(right, zoom);
+
+        if (tileLeft.getX() == tileRight.getX()) {
+            zoom = zoom + 1;
+        }
+
+        return Math.min(zoom, ZOOMLEVEL_MAX);
+    }
+
+    public static int calcLatZoom(final Geopoint bottom, final Geopoint top) {
+
+        int zoom = (int) Math.ceil(
+                Math.log(2 * Math.PI /
+                        Math.abs(
+                                asinh(tanGrad(bottom.getLatitude()))
+                                        - asinh(tanGrad(top.getLatitude()))
+                                )
+                        ) / Math.log(2)
+                );
+
+        Tile tileBottom = new Tile(bottom, zoom);
+        Tile tileTop = new Tile(top, zoom);
+
+        if (Math.abs(tileBottom.getX() - tileTop.getX()) > 1) {
+            zoom = zoom - 1;
+        }
+
+        return Math.min(zoom, ZOOMLEVEL_MAX);
+    }
+
+    private static double tanGrad(double angleGrad) {
+        return Math.tan(angleGrad / 180.0 * Math.PI);
+    }
+
+    private static double asinh(double x)
+    {
+        return Math.log(x + Math.sqrt(x * x + 1.0));
+    }
     @Override
     public String toString() {
         return String.format("(%d/%d), zoom=%d", tileX, tileY, zoomlevel).toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        return this.getX() == ((Tile) o).getX() && (this.getY() == ((Tile) o).getY());
+    }
+
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
+    }
+
 }
