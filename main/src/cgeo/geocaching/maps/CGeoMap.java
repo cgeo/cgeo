@@ -1244,6 +1244,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         public void run() {
             try {
                 working = true;
+                showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
 
                 double lat1 = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
                 double lat2 = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -1315,6 +1316,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             } finally {
                 stop = false;
                 working = false;
+                showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
             }
         }
     }
