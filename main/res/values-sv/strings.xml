@@ -119,11 +119,11 @@
 
   <!-- copy -->
   <string name="options_context_menu_title">Välj</string>
-  <string name="copy_coords">Kopiera Koordinaterna</string>
-  <string name="copy_desc">Kopiera Beskrivningen</string>
-  <string name="copy_personalnote">Kopiera Personliga anteckningen</string>
-  <string name="copy_hint">Kopiera Hint</string>
-  <string name="copy_log">Kopiera Logg</string>
+  <string name="copy_coords">Kopiera koordinaten</string>
+  <string name="copy_desc">Kopiera beskrivningen</string>
+  <string name="copy_personalnote">Kopiera personliga anteckningen</string>
+  <string name="copy_hint">Kopiera hinten</string>
+  <string name="copy_log">Kopiera loggen</string>
   
   <!-- translation -->
   <string name="translate_to_sys_lang">Översätt till %s</string>
@@ -316,12 +316,13 @@
   <string name="caches_recaptcha_continue">Fortsätt</string>
   <string name="caches_filter">Filter</string>
   <string name="caches_filter_title">Filtrera efter</string>
-  <string name="caches_filter_size">storlek</string>
-  <string name="caches_filter_type">typ</string>
-  <string name="caches_filter_track">med trackables</string>
-  <string name="caches_filter_clear">rensa filter</string>
+  <string name="caches_filter_size">Storlek</string>
+  <string name="caches_filter_type">Typ</string>
+  <string name="caches_filter_track">Med trackables</string>
+  <string name="caches_filter_clear">Rensa filter</string>
   <string name="caches_filter_size_title">Välj storlek</string>
   <string name="caches_filter_type_title">Välj typ</string>
+  <string name="caches_filter_modified">Med tillagda koordinater</string>
   <string name="caches_exporting_fieldnote">Exporterar som Field Notes…</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
 
@@ -391,7 +392,7 @@
   <string name="init_other">Övriga inställningar</string>
   <string name="init_skin">Vitt skal (kräver omstart av c:geo)</string>
   <string name="init_address">Visa adress på huvudskärmen</string>
-  <string name="init_captcha">Visa CAPTCHA (robotfällor) vid behov</string>
+  <string name="init_captcha">Visa CAPTCHA (robotfällor) vid behov (enbart för Basic Member)</string>
   <string name="init_useenglish">Använd engelska i c:geo (kräver omstart)</string>
   <string name="init_exclude">Dölj egna och hittade cacher</string>
   <string name="init_showwaypoints">Extra punkter på Live kartan</string>
@@ -585,6 +586,7 @@
   <string name="cache_image">Bild</string>
   <string name="cache_image_open_file">Öppna som fil</string>
   <string name="cache_image_open_browser">Öppna i webbläsare</string>
+  <string name="cache_share_field">Dela</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Söker efter filer\ni</string>
