@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
@@ -245,7 +244,7 @@ public class cgeopopup extends AbstractActivity {
 
             itemName.setText(res.getString(R.string.cache_type));
 
-            String cacheType = cache.getType() != CacheType.UNKNOWN ? cache.getType().getL10n() : CacheType.MYSTERY.getL10n();
+            String cacheType = cache.getType().getL10n();
             String cacheSize = cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
             itemValue.setText(cacheType + cacheSize);
             detailsList.addView(itemLayout);
