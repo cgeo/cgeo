@@ -1,14 +1,21 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.R;
 
-import android.test.AndroidTestCase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 
-public class GCConnectorTest extends AndroidTestCase {
+public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testGetViewport() {
         cgBase.login();
@@ -77,6 +84,46 @@ public class GCConnectorTest extends AndroidTestCase {
         // TODO ebenfalls nutzen in searchByViewport und KOs vergleichen
     }
 
+    public void testparseMapPNG() {
+        // createApplication();
+        // cgBase.initialize(getApplication());
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false;
+        Bitmap bitmap = BitmapFactory.decodeStream(getInstrumentation().getContext().getResources().openRawResource(R.raw.tile14));
+        assert bitmap.getWidth() == Tile.TILE_SIZE : "Wrong size";
+
+        Log.d(Settings.tag, "Bitmap=" + bitmap.getWidth() + "x" + bitmap.getHeight());
+
+        cgCache cache = new cgCache();
+
+        // Tradi
+        GCBase.parseMapPNG14(cache, bitmap, new UTFGridPosition(97 / 4, 136 / 4));
+        assertEquals(CacheType.TRADITIONAL, cache.getType());
+        // Mystery
+        GCBase.parseMapPNG14(cache, bitmap, new UTFGridPosition(226 / 4, 104 / 4));
+        assertEquals(CacheType.MYSTERY, cache.getType());
+        // Multi
+        GCBase.parseMapPNG14(cache, bitmap, new UTFGridPosition(54 / 4, 97 / 4));
+        assertEquals(CacheType.MULTI, cache.getType());
+        // Found
+        GCBase.parseMapPNG14(cache, bitmap, new UTFGridPosition(119 / 4, 108 / 4));
+        assertTrue(cache.isFound());
+        cache.setFound(false); // reset
+
+        bitmap = BitmapFactory.decodeStream(getInstrumentation().getContext().getResources().openRawResource(R.raw.tile13));
+
+        // Tradi
+        GCBase.parseMapPNG13(cache, bitmap, new UTFGridPosition(146 / 4, 225 / 4));
+        assertEquals(CacheType.TRADITIONAL, cache.getType());
+        // Mystery
+        GCBase.parseMapPNG13(cache, bitmap, new UTFGridPosition(181 / 4, 116 / 4));
+        assertEquals(CacheType.MYSTERY, cache.getType());
+        // Multi
+        GCBase.parseMapPNG13(cache, bitmap, new UTFGridPosition(118 / 4, 230 / 4));
+        assertEquals(CacheType.MULTI, cache.getType());
+        // Found - not available in parseMapPNG13
+    }
 
 }
 

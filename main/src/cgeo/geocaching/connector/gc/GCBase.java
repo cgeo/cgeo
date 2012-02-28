@@ -40,6 +40,25 @@ public class GCBase {
     protected final static long GC_BASE31 = 31;
     protected final static long GC_BASE16 = 16;
 
+    // Pixel colors in tile
+    private final static int BORDER_GRAY = 0x5F5F5F;
+    private final static int DARK_GREEN = 0x316013; // Tradi 14
+    private final static int LIGHT_GREEN = 0x80AF64; // Tradi 13
+    private final static int DARK_BLUE = 0x243C97; // Mystery
+    private final static int YELLOW = 0xFFDE19; // Multi 14,13
+    private final static int ORANGE = 0xE56200; // Multi
+    private final static int FOUND = 0xFBEA5D; // Found
+
+    // Offset inside cache icon
+    private final static int POSX_TRADI = 7;
+    private final static int POSY_TRADI = -12;
+    private final static int POSX_MULTI = 5; // for orange 8
+    private final static int POSY_MULTI = -9; // for orange 10
+    private final static int POSX_MYSTERY = 5;
+    private final static int POSY_MYSTERY = -13;
+    private final static int POSX_FOUND = 10;
+    private final static int POSY_FOUND = -8;
+
     private static final LeastRecentlyUsedCache<String, cgCache> liveMapCache = new LeastRecentlyUsedCache<String, cgCache>(2000); // JSON id, cache
 
     /**
@@ -227,7 +246,11 @@ public class GCBase {
                         cache.getCoords() == null) {
                         UTFGridPosition xy = getPositionInGrid(pos);
                         cache.setCoords(tile.getCoord(xy));
-                        parsePNG(cache, bitmap, xy);
+                        if (tile.getZoomlevel() >= 14) {
+                            parseMapPNG14(cache, bitmap, xy);
+                        } else {
+                            parseMapPNG13(cache, bitmap, xy);
+                        }
                         // Log.d(Settings.tag, "id=" + id + " geocode=" + cache.getGeocode() + " coords=" + cache.getCoords().toString());
                     }
                     searchResult.addCache(cache);
@@ -243,31 +266,90 @@ public class GCBase {
     }
 
     // Try to get the cache type from the PNG image for a tile */
-    private static void parsePNG(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
-        int posX = xy.getX() * 4;
-        int posY = xy.getY() * 4;
-        for (int x = posX; x <= posX + 3; x++) {
-            for (int y = posY; y <= posY + 3; y++) {
-                int color = bitmap.getPixel(x, y) & 0x00FFFFFF;
-                if (color == 0x80af64) { // green
-                    cache.setType(CacheType.TRADITIONAL);
-                    return;
-                }
-                if (color == 0xffde19) { // yellow
-                    cache.setType(CacheType.MULTI);
-                    return;
-                }
-                if (color == 0x001a86) { // blue
-                    cache.setType(CacheType.MYSTERY);
-                    return;
-                }
-                if (color == 0xb8682c) { // brown
-                    cache.setFound(true);
-                    return;
-                }
+    public static void parseMapPNG14(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
+
+        int x = xy.getX() * 4 + 2;
+        int y = xy.getY() * 4 + 2;
+        int countX = 0;
+        int countY = 0;
+
+        // search for left border
+        while ((bitmap.getPixel(x, y) & 0x00FFFFFF) != BORDER_GRAY) {
+            if (--x < 0 || ++countX > 20) {
+                return;
             }
         }
+        // search for bottom border
+        while ((bitmap.getPixel(x, y) & 0x00FFFFFF) != 0x000000) {
+            if (++y >= Tile.TILE_SIZE || ++countY > 20) {
+                return;
+            }
+        }
+
+        try {
+            if ((bitmap.getPixel(x + POSX_TRADI, y + POSY_TRADI) & 0x00FFFFFF) == DARK_GREEN) {
+                cache.setType(CacheType.TRADITIONAL);
+                return;
+            }
+            if ((bitmap.getPixel(x + POSX_MYSTERY, y + POSY_MYSTERY) & 0x00FFFFFF) == DARK_BLUE) {
+                cache.setType(CacheType.MYSTERY);
+                return;
+            }
+            if ((bitmap.getPixel(x + POSX_MULTI, y + POSY_MULTI) & 0x00FFFFFF) == YELLOW) {
+                cache.setType(CacheType.MULTI);
+                return;
+            }
+            if ((bitmap.getPixel(x + POSX_FOUND, y + POSY_FOUND) & 0x00FFFFFF) == FOUND) {
+                cache.setFound(true);
+                return;
+            }
+        }
+ catch (IllegalArgumentException e) {
+            // intentionally left blank
+        }
+
+        return;
     }
+
+    // Try to get the cache type from the PNG image for a tile */
+    public static void parseMapPNG13(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
+
+        int x = xy.getX() * 4 + 2;
+        int y = xy.getY() * 4 + 2;
+        int countY = 0;
+
+        // search for top border
+        while ((bitmap.getPixel(x, y) & 0x00FFFFFF) != BORDER_GRAY) {
+            if (--y < 0 || ++countY > 12) {
+                return;
+            }
+        }
+
+        try {
+            int color = bitmap.getPixel(x, y + 2) & 0x00FFFFFF;
+
+            switch (color) {
+                case LIGHT_GREEN:
+                    cache.setType(CacheType.TRADITIONAL);
+                    return;
+                case YELLOW:
+                    cache.setType(CacheType.MULTI);
+                    return;
+            }
+            if ((color | 0x00FFFF) == 0x00FFFF) { // BLUE
+                cache.setType(CacheType.MYSTERY);
+                return;
+            }
+            // Found consists out of too many different colors
+        }
+        catch (IllegalArgumentException e) {
+            // intentionally left blank
+        }
+
+        return;
+    }
+
+
 
     /**
      * Calculate needed tiles for the given viewport
