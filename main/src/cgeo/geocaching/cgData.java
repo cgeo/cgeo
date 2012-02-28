@@ -3188,15 +3188,8 @@ public class cgData {
         try {
             ContentValues values = new ContentValues();
             values.put("visiteddate", visitedDate);
-            int rows = databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
-            if (rows > 0) {
-                // update CacheCache
-                cgCache cache = cacheCache.getCacheFromCache(geocode);
-                if (cache != null) {
-                    cache.setFound(true);
-                    cacheCache.putCacheInCache(cache);
-                }
-            }
+
+            databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
             databaseRW.setTransactionSuccessful();
         } finally {
             databaseRW.endTransaction();
