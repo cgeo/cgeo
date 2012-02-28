@@ -38,7 +38,7 @@ public class Tile {
     public Tile(Geopoint origin, int zoomlevel) {
         assert zoomlevel >= ZOOMLEVEL_MIN && zoomlevel <= ZOOMLEVEL_MAX : "zoomlevel out of range";
 
-        this.zoomlevel = Math.min(zoomlevel, ZOOMLEVEL_MAX);
+        this.zoomlevel = Math.max(Math.min(zoomlevel, ZOOMLEVEL_MAX), ZOOMLEVEL_MIN);
         tileX = calcX(origin);
         tileY = calcY(origin);
     }
