@@ -135,7 +135,7 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public int getFavoritePoints() {
-        return 42;
+        return 30;
     }
 
     @Override
