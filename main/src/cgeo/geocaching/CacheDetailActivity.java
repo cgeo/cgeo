@@ -335,9 +335,6 @@ public class CacheDetailActivity extends AbstractActivity {
         if (geolocation == null) {
             geolocation = app.startGeo(locationUpdater);
         }
-        if (cache != null) {
-            cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
-        }
         if (refreshOnResume) {
             notifyDataSetChanged();
             refreshOnResume = false;
@@ -634,6 +631,11 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 // Data loaded, we're ready to show it!
                 notifyDataSetChanged();
+                // cache isn't available until after notifyDataSetChanged is called
+                if (cache != null) {
+                    cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
+                }
+
             }
         }
 

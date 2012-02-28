@@ -436,12 +436,13 @@ public class cgCache implements ICache {
         cgeoapplication app = (cgeoapplication) ((Activity) fromActivity).getApplication();
         final boolean status = app.saveLogOffline(geocode, date.getTime(), logType, log);
 
-        notifyChange();
-
         Resources res = ((Activity) fromActivity).getResources();
         if (status) {
             fromActivity.showToast(res.getString(R.string.info_log_saved));
             app.saveVisitDate(geocode);
+            logOffline = true;
+
+            notifyChange();
         } else {
             fromActivity.showToast(res.getString(R.string.err_log_post_failed));
         }
