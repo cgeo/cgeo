@@ -158,13 +158,12 @@ public class Tile {
         if (this == o) {
             return true;
         }
-        if (o == null) {
+        if (!(o instanceof Tile)) {
             return false;
         }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        return this.getX() == ((Tile) o).getX() && (this.getY() == ((Tile) o).getY());
+        return (this.getX() == ((Tile) o).getX())
+                && (this.getY() == ((Tile) o).getY())
+                && (this.getZoomlevel() == ((Tile) o).getZoomlevel());
     }
 
     @Override
