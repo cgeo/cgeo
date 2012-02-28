@@ -31,8 +31,14 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpException;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
@@ -41,6 +47,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.entity.HttpEntityWrapper;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
@@ -49,6 +56,7 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,6 +88,7 @@ import android.widget.LinearLayout;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -98,6 +107,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
+import java.util.zip.GZIPInputStream;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
@@ -2341,7 +2351,62 @@ public class cgBase {
         final DefaultHttpClient client = new DefaultHttpClient();
         client.setCookieStore(cookieStore);
         client.setParams(clientParams);
+
+        client.addRequestInterceptor(new HttpRequestInterceptor() {
+
+            @Override
+            public void process(
+                    final HttpRequest request,
+                    final HttpContext context) throws HttpException, IOException {
+                if (!request.containsHeader("Accept-Encoding")) {
+                    request.addHeader("Accept-Encoding", "gzip");
+                }
+            }
+        });
+        client.addResponseInterceptor(new HttpResponseInterceptor() {
+
+            public void process(
+                    final HttpResponse response,
+                    final HttpContext context) throws HttpException, IOException {
+                HttpEntity entity = response.getEntity();
+                if (null != entity) {
+                    Header ceheader = entity.getContentEncoding();
+                    if (ceheader != null) {
+                        HeaderElement[] codecs = ceheader.getElements();
+                        for (int i = 0; i < codecs.length; i++) {
+                            if (codecs[i].getName().equalsIgnoreCase("gzip")) {
+                                Log.d(Settings.tag, "Decompressing response");
+                                response.setEntity(
+                                        new GzipDecompressingEntity(response.getEntity()));
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
+        });
+
         return client;
+    }
+
+    static class GzipDecompressingEntity extends HttpEntityWrapper {
+        public GzipDecompressingEntity(final HttpEntity entity) {
+            super(entity);
+        }
+
+        @Override
+        public InputStream getContent() throws IOException, IllegalStateException {
+            // the wrapped entity's getContent() decides about repeatability
+            InputStream wrappedin = wrappedEntity.getContent();
+            return new GZIPInputStream(wrappedin);
+        }
+
+        @Override
+        public long getContentLength() {
+            // length of ungzipped content is not known
+            return -1;
+        }
     }
 
     public static void restoreCookieStore(final String oldCookies) {
