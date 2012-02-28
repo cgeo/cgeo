@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class CacheView {
+public class CacheListView {
     // layouts & views
     public RelativeLayout oneInfo;
     public RelativeLayout oneCheckbox;

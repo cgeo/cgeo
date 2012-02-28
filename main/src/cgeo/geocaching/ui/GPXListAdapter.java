@@ -17,14 +17,14 @@ import java.io.File;
 import java.util.List;
 
 public class GPXListAdapter extends ArrayAdapter<File> {
-    private GPXView holder = null;
-    private cgeogpxes parent = null;
+    private GPXListView holder = null;
+    private cgeogpxes activity = null;
     private LayoutInflater inflater = null;
 
     public GPXListAdapter(cgeogpxes parentIn, List<File> listIn) {
         super(parentIn, 0, listIn);
 
-        parent = parentIn;
+        activity = parentIn;
     }
 
     @Override
@@ -38,42 +38,33 @@ public class GPXListAdapter extends ArrayAdapter<File> {
             return null;
         }
 
-        File file = getItem(position);
+        final File file = getItem(position);
 
         View v = rowView;
 
         if (v == null) {
             v = inflater.inflate(R.layout.gpx_item, null);
 
-            holder = new GPXView();
+            holder = new GPXListView();
             holder.filepath = (TextView) v.findViewById(R.id.filepath);
             holder.filename = (TextView) v.findViewById(R.id.filename);
 
             v.setTag(holder);
         } else {
-            holder = (GPXView) v.getTag();
+            holder = (GPXListView) v.getTag();
         }
 
-        final touchListener touchLst = new touchListener(file);
-        v.setOnClickListener(touchLst);
+        v.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                (new GPXImporter(activity, activity.getListId(), null)).importGPX(file);
+            }
+        });
 
         holder.filepath.setText(file.getParent());
         holder.filename.setText(file.getName());
 
         return v;
-    }
-
-    private class touchListener implements View.OnClickListener {
-        private File file = null;
-
-        public touchListener(File fileIn) {
-            file = fileIn;
-        }
-
-        // tap on item
-        @Override
-        public void onClick(View view) {
-            (new GPXImporter(parent, parent.getListId(), null)).importGPX(file);
-        }
     }
 }

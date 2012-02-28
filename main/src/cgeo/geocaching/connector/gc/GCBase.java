@@ -120,6 +120,7 @@ public class GCBase {
 
                 TileCache.add(tile);
             }
+            }
         }
 
         //        if (Settings.isPremiumMember()) {

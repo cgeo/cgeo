@@ -352,7 +352,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        final Intent addressesIntent = new Intent(this, cgeoaddresses.class);
+        final Intent addressesIntent = new Intent(this, AdressListActivity.class);
         addressesIntent.putExtra("keyword", addText);
         startActivity(addressesIntent);
     }

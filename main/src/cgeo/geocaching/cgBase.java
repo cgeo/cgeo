@@ -1818,8 +1818,7 @@ public class cgBase {
         request.addHeader("X-Requested-With", "XMLHttpRequest");
         final HttpResponse response = request(request);
         try {
-            final HttpEntity entity = response.getEntity();
-            return BitmapFactory.decodeStream(entity.getContent());
+            return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
         } catch (IOException e) {
             Log.e(Settings.tag, "cgBase.requestMapTile() " + e.getMessage());
         }

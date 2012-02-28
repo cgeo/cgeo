@@ -491,7 +491,7 @@ public final class Settings {
     }
 
     public static boolean isShowCaptcha() {
-        return sharedPrefs.getBoolean(KEY_SHOW_CAPTCHA, false);
+        return isPremiumMember() ? false : sharedPrefs.getBoolean(KEY_SHOW_CAPTCHA, false);
     }
 
     public static void setShowCaptcha(final boolean showCaptcha) {

@@ -236,4 +236,12 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         return name + " " + waypointType.getL10n();
     }
 
+    /**
+     * Checks whether a given waypoint is a final and has coordinates
+     *
+     * @return True - waypoint is final and has coordinates, False - otherwise
+     */
+    public boolean isFinalWithCoords() {
+        return WaypointType.FINAL == getWaypointType() && null != getCoords();
+    }
 }

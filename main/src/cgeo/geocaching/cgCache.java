@@ -113,8 +113,9 @@ public class cgCache implements ICache {
      * Sends a change notification to interested parties
      */
     private void notifyChange() {
-        if (changeNotificationHandler != null)
+        if (changeNotificationHandler != null) {
             changeNotificationHandler.sendEmptyMessage(0);
+        }
     }
 
     /**
@@ -920,7 +921,7 @@ public class cgCache implements ICache {
         if (waypoints != null) {
             for (cgWaypoint waypoint : waypoints) {
                 waypoint.setGeocode(geocode);
-                if (isFinalWithCoords(waypoint)) {
+                if (waypoint.isFinalWithCoords()) {
                     finalDefined = true;
                 }
             }
@@ -1125,7 +1126,7 @@ public class cgCache implements ICache {
         }
         waypoints.add(waypoint);
         waypoint.setGeocode(geocode);
-        if (isFinalWithCoords(waypoint)) {
+        if (waypoint.isFinalWithCoords()) {
             finalDefined = true;
         }
     }
@@ -1141,23 +1142,6 @@ public class cgCache implements ICache {
     // Only for loading
     public void setFinalDefined(boolean finalDefined) {
         this.finalDefined = finalDefined;
-    }
-
-    /**
-     * Checks whether a given waypoint is a final and has coordinates
-     *
-     * @param waypoint
-     *            Waypoint to check
-     * @return True - waypoint is final and has coordinates, False - otherwise
-     */
-    private static boolean isFinalWithCoords(cgWaypoint waypoint) {
-        if (null != waypoint.getWaypointType() && WaypointType.FINAL == waypoint.getWaypointType()) {
-            if (null != waypoint.getCoords()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public boolean hasUserModifiedCoords() {
@@ -1209,11 +1193,12 @@ public class cgCache implements ICache {
             cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
             cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             // Check status if Final is defined
-            if (isFinalWithCoords(waypoint)) {
+            if (waypoint.isFinalWithCoords()) {
                 finalDefined = false;
                 for (cgWaypoint wp : waypoints) {
-                    if (isFinalWithCoords(wp)) {
+                    if (wp.isFinalWithCoords()) {
                         finalDefined = true;
+                        break;
                     }
                 }
             }
