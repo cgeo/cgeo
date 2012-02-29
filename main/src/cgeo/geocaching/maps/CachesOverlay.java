@@ -207,6 +207,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
                 popupIntent.putExtra("geocode", coordinate.getGeocode());
 
+                CGeoMap.markCacheAsDirty(coordinate.getGeocode());
                 context.startActivity(popupIntent);
             } else if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {
                 Intent popupIntent = new Intent(context, cgeowaypoint.class);

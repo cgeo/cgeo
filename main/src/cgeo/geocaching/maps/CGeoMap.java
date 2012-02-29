@@ -173,6 +173,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private boolean liveChanged = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
+    private static Set<String> dirtyCaches = null;
     // handlers
     /** Updates the titles */
     final private Handler displayHandler = new Handler() {
@@ -437,6 +438,18 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         if (dir != null) {
             dirUpdate.updateDirection(dir);
+        }
+
+        if (!CollectionUtils.isEmpty(dirtyCaches)) {
+            for (String geocode : dirtyCaches) {
+                cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                // remove to update the cache
+                caches.remove(cache);
+                caches.add(cache);
+            }
+            dirtyCaches.clear();
+            // force an update of the display. Includes a call to DownloadThread :-(
+            liveChanged = true;
         }
 
         startTimer();
@@ -1299,7 +1312,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
 
                 if (search != null) {
-                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+                    Set<cgCache> result = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                    // to update the caches they have to be removed first
+                    caches.removeAll(result);
+                    caches.addAll(result);
                 }
 
                 if (stop) {
@@ -1828,6 +1844,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         mapIntent.putExtra(EXTRAS_GEOCODE, geocode);
         mapIntent.putExtra(EXTRAS_MAP_TITLE, geocode);
         fromActivity.startActivity(mapIntent);
+    }
+
+    public static void markCacheAsDirty(final String geocode) {
+        if (dirtyCaches == null) {
+            dirtyCaches = new HashSet<String>();
+        }
+        dirtyCaches.add(geocode);
     }
 
     /**

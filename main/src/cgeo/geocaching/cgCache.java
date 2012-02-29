@@ -211,8 +211,12 @@ public class cgCache implements ICache {
             location = other.location;
         }
         if (coords == null) {
-            coords = other.getCoords();
+            coords = other.coords;
         }
+        if (zoomlevel < other.zoomlevel) {
+            coords = other.coords;
+        }
+
         if (elevation == null) {
             elevation = other.elevation;
         }
@@ -268,6 +272,9 @@ public class cgCache implements ICache {
         }
         if (reliableLatLon == false) {
             reliableLatLon = other.reliableLatLon;
+        }
+        if (zoomlevel == -1) {
+            zoomlevel = other.zoomlevel;
         }
 
         boolean isEqual = isEqualTo(other);

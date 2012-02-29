@@ -46,7 +46,6 @@ public class GCBase {
     private final static int LIGHT_GREEN = 0x80AF64; // Tradi 13
     private final static int DARK_BLUE = 0x243C97; // Mystery
     private final static int YELLOW = 0xFFDE19; // Multi 14,13
-    private final static int ORANGE = 0xE56200; // Multi
     private final static int FOUND = 0xFBEA5D; // Found
 
     // Offset inside cache icon
@@ -59,7 +58,7 @@ public class GCBase {
     private final static int POSX_FOUND = 10;
     private final static int POSY_FOUND = -8;
 
-    private static final LeastRecentlyUsedCache<String, cgCache> liveMapCache = new LeastRecentlyUsedCache<String, cgCache>(2000); // JSON id, cache
+    private static final LeastRecentlyUsedCache<String, String> geocodeCache = new LeastRecentlyUsedCache<String, String>(2000); // JSON id, geocode
 
     /**
      * @param viewport
@@ -107,6 +106,7 @@ public class GCBase {
             if (tile.getZoomlevel() != 14) {
                 url += "&_=" + String.valueOf(System.currentTimeMillis());
             }
+            // other types t.b.d
 
             // The PNG must be request before ! Else the following request would return with 204 - No Content
             Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + url, referer);
@@ -128,11 +128,9 @@ public class GCBase {
             }
         }
 
-        if (Settings.isPremiumMember()) {
-            SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID, Settings.isShowCaptcha());
-            if (search != null) {
-                searchResult.addGeocodes(search.getGeocodes());
-            }
+        SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID, false);
+        if (search != null) {
+            searchResult.addGeocodes(search.getGeocodes());
         }
 
         return searchResult;
@@ -150,6 +148,8 @@ public class GCBase {
         final SearchResult searchResult = new SearchResult();
 
         try {
+
+            final LeastRecentlyUsedCache<String, String> nameCache = new LeastRecentlyUsedCache<String, String>(2000); // JSON id, cache name
 
             if (StringUtils.isEmpty(data)) {
                 throw new JSONException("No page given");
@@ -210,17 +210,7 @@ public class GCBase {
                     for (int j = 0; j < dataForKey.length(); j++) {
                         JSONObject cacheInfo = dataForKey.getJSONObject(j);
                         String id = cacheInfo.getString("i");
-                        cgCache cache = liveMapCache.get(id);
-                        if (cache == null) {
-                            cache = new cgCache();
-                            cache.setDetailed(false);
-                            cache.setReliableLatLon(false);
-                            cache.setGeocode(newidToGeocode(id));
-                            cache.setName(cacheInfo.getString("n"));
-                            cache.setZoomlevel(tile.getZoomlevel());
-
-                            liveMapCache.put(id, cache);
-                        }
+                        nameCache.put(id, cacheInfo.getString("n"));
 
                         List<UTFGridPosition> listOfPositions = positions.get(id);
                         if (listOfPositions == null) {
@@ -238,23 +228,26 @@ public class GCBase {
             }
 
             for (String id : positions.keySet()) {
-                List<UTFGridPosition> pos = positions.get(id);
-                cgCache cache = liveMapCache.get(id);
-                if (cache != null) {
-                    // if we have "better" coords from a previous search -> reuse them
-                    if (cache.getZoomlevel() < tile.getZoomlevel() ||
-                        cache.getCoords() == null) {
-                        UTFGridPosition xy = getPositionInGrid(pos);
-                        cache.setCoords(tile.getCoord(xy));
-                        if (tile.getZoomlevel() >= 14) {
-                            parseMapPNG14(cache, bitmap, xy);
-                        } else {
-                            parseMapPNG13(cache, bitmap, xy);
-                        }
-                        // Log.d(Settings.tag, "id=" + id + " geocode=" + cache.getGeocode() + " coords=" + cache.getCoords().toString());
-                    }
-                    searchResult.addCache(cache);
+                String geocode = geocodeCache.get(id);
+                if (geocode == null) {
+                    geocode = newidToGeocode(id);
+                    geocodeCache.put(id, geocode);
                 }
+                List<UTFGridPosition> pos = positions.get(id);
+                UTFGridPosition xy = getPositionInGrid(pos);
+                cgCache cache = new cgCache();
+                cache.setDetailed(false);
+                cache.setReliableLatLon(false);
+                cache.setGeocode(geocode);
+                cache.setName(nameCache.get(id));
+                cache.setZoomlevel(tile.getZoomlevel());
+                cache.setCoords(tile.getCoord(xy));
+                if (tile.getZoomlevel() >= 14) {
+                    parseMapPNG14(cache, bitmap, xy);
+                } else {
+                    parseMapPNG13(cache, bitmap, xy);
+                }
+                searchResult.addCache(cache);
             }
             Log.d(Settings.tag, "Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
@@ -360,7 +353,7 @@ public class GCBase {
     protected static List<Tile> getTilesForViewport(final Viewport viewport) {
         List<Tile> tiles = new ArrayList<Tile>();
         if (!Settings.isPremiumMember()) {
-            tiles.add(new Tile(viewport.getCenter(), 14)); // precise coords for caches nearby
+            tiles.add(new Tile(viewport.getCenter(), 14)); // precise coords for caches nearby. searchByCoords() is used for PMs
         }
         tiles.add(new Tile(viewport.getCenter(), 12)); // other caches around
         return tiles;
