@@ -80,8 +80,6 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             assertEquals(7536, tile.getX());
             assertEquals(4915, tile.getY());
         }
-
-        // TODO ebenfalls nutzen in searchByViewport und KOs vergleichen
     }
 
     public void testparseMapPNG() {
