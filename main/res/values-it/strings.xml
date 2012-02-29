@@ -35,6 +35,7 @@
   <string name="ape">Project ape cache</string>
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">GPS cache exhibit</string>
+  <string name="gc_live_map">Live Map</string>
   <string name="unknown">Unknown type</string>
 
   <!-- cache sizes -->
@@ -126,9 +127,9 @@
   <string name="copy_log">Copia Log</string>
   
   <!-- translation -->
-  <string name="translate_to_sys_lang">Translate to %s</string>
-  <string name="translate_to_english">Translate to English</string>
-  <string name="translate_length_warning">Translate may fail with large amounts of text.</string>
+  <string name="translate_to_sys_lang">Traduci in %s</string>
+  <string name="translate_to_english">Traduci in inglese</string>
+  <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
   
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
@@ -323,6 +324,7 @@
   <string name="caches_filter_clear">senza filtri</string>
   <string name="caches_filter_size_title">Scegli dimensione</string>
   <string name="caches_filter_type_title">Scegli tipo</string>
+  <string name="caches_filter_modified">Con coordinate modificate</string>
   <string name="caches_exporting_fieldnote">Esportando le note…</string>
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
 
@@ -392,7 +394,7 @@
   <string name="init_other">Altre opzioni</string>
   <string name="init_skin">Tema chiaro\n(richiede riavvio di c:geo)</string>
   <string name="init_address">Visualizza indirizzo su pagina principale</string>
-  <string name="init_captcha">Visualizza CAPTCHA se necessario</string>
+  <string name="init_captcha">Visualizza CAPTCHA se necessario (solo membri Basic)</string>
   <string name="init_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
   <string name="init_exclude">Escludi le mie cache e quelle trovate</string>
   <string name="init_showwaypoints">Mostra waypoints sulla mappa</string>
@@ -435,7 +437,8 @@
   <string name="init_default_navigation_tool">Navigatore preferito</string>
   <string name="init_default_navigation_tool_description">Qui puoi scegliere il tuo strumento di navigazione preferito.</string>
   <string name="init_default_navigation_tool_select">Scegli navigatore</string>
-  
+  <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo cliccato l\'icona di navigazione nella action bar.</string>
+
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
   <string name="init_sendToCgeo_description">\"Send to c:geo\" permette di ricevere cache direttamente dal sito geocaching.com tramite un plugin speciale per Firefox o Chrome. Prima della registrazione leggere <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. È necessario registrare il dispositivo solo se intendi usare send2cgeo. C:geo funzionerà anche senza registrazione e senza send2cgeo.</string>
@@ -576,7 +579,8 @@
   <string name="cache_image">Immagine</string>
   <string name="cache_image_open_file">Apri un file</string>
   <string name="cache_image_open_browser">Apri nel browser</string>
-      
+  <string name="cache_share_field">Condividi</string>
+
   <!-- file list base -->
   <string name="file_searching_in">Ricerca file\nin</string>
   <string name="file_searching_sdcard_in">Nessun file trovato nella cartella di default:\n%1$s\n\nRicerca in tutta la SD i files:\n</string>
@@ -644,6 +648,13 @@
   <string name="search_history_cleared">Cronologia azzerata</string>
   
   <string name="waypoint_coordinate_formats_plain">Plain</string>
+
+  <!-- distance units -->
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">piedi</string>
+  <string name="unit_yd">iarde</string>
+  <string name="unit_mi">miglia</string>
 
   <!-- visit -->
   <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
