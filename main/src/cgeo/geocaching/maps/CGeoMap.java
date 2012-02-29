@@ -619,7 +619,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                             for (cgCache oneCache : cachesProtected) {
                                 if (oneCache != null && oneCache.getCoords() != null) {
-                                    if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.getCoords()) && !app.isOffline(oneCache.getGeocode(), null)) {
+                                    if (Viewport.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.getCoords()) && !app.isOffline(oneCache.getGeocode(), null)) {
                                         geocodes.add(oneCache.getGeocode());
                                     }
                                 }
@@ -927,7 +927,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         } else if (((Math.abs(spanLatitudeNow - spanLatitude) > 50) || (Math.abs(spanLongitudeNow - spanLongitude) > 50) || // changed zoom
                                 (Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow / 4)) || (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow / 4)) // map moved
                         ) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches)
-                                || !cgBase.isInViewPort(centerLatitude, centerLongitude, centerLatitudeNow, centerLongitudeNow, spanLatitude, spanLongitude, spanLatitudeNow, spanLongitudeNow))) {
+                                || !Viewport.isInViewPort(centerLatitude, centerLongitude, centerLatitudeNow, centerLongitudeNow, spanLatitude, spanLongitude, spanLatitudeNow, spanLongitudeNow))) {
                             moved = true;
                         }
 
@@ -1095,7 +1095,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             moved = true;
                         } else if (((Math.abs(spanLatitudeNow - spanLatitudeUsers) > 50) || (Math.abs(spanLongitudeNow - spanLongitudeUsers) > 50) || // changed zoom
                                 (Math.abs(centerLatitudeNow - centerLatitudeUsers) > (spanLatitudeNow / 4)) || (Math.abs(centerLongitudeNow - centerLongitudeUsers) > (spanLongitudeNow / 4)) // map moved
-                        ) && !cgBase.isInViewPort(centerLatitudeUsers, centerLongitudeUsers, centerLatitudeNow, centerLongitudeNow, spanLatitudeUsers, spanLongitudeUsers, spanLatitudeNow, spanLongitudeNow)) {
+                        ) && !Viewport.isInViewPort(centerLatitudeUsers, centerLongitudeUsers, centerLatitudeNow, centerLongitudeNow, spanLatitudeUsers, spanLongitudeUsers, spanLatitudeNow, spanLongitudeNow)) {
                             moved = true;
                         }
 
