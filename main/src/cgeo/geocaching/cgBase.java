@@ -96,6 +96,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 
 import javax.net.ssl.HostnameVerifier;
@@ -656,10 +657,10 @@ public class cgBase {
         // get direction images
         if (Settings.getLoadDirImg())
         {
-            for (String geocode : searchResult.getGeocodes()) {
-                cgCache oneCache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
-                    DirectionImage.getDrawable(oneCache.getGeocode(), oneCache.getDirectionImg());
+            final Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
+            for (cgCache cache : caches) {
+                if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
+                    DirectionImage.getDrawable(cache.getGeocode(), cache.getDirectionImg());
                 }
             }
         }
@@ -674,8 +675,8 @@ public class cgBase {
 
                     if (MapUtils.isNotEmpty(ratings)) {
                         // save found cache coordinates
-                        for (String geocode : searchResult.getGeocodes()) {
-                            cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                        final Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
+                        for (cgCache cache : caches) {
                             if (ratings.containsKey(cache.getGuid())) {
                                 GCVoteRating rating = ratings.get(cache.getGuid());
 

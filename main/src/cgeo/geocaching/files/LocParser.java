@@ -20,9 +20,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,13 +50,16 @@ public final class LocParser extends FileParser {
         final Map<String, cgCoord> cidCoords = parseCoordinates(fileContent);
 
         // save found cache coordinates
+        final HashSet<String> contained = new HashSet<String>();
         for (String geocode : searchResult.getGeocodes()) {
             if (cidCoords.containsKey(geocode)) {
-                cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                cgCoord coord = cidCoords.get(cache.getGeocode());
-
-                copyCoordToCache(coord, cache);
+                contained.add(geocode);
             }
+        }
+        Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
+        for (cgCache cache : caches) {
+            cgCoord coord = cidCoords.get(cache.getGeocode());
+            copyCoordToCache(coord, cache);
         }
     }
 

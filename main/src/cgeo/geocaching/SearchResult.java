@@ -145,8 +145,8 @@ public class SearchResult implements Parcelable {
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
 
-        for (final String geocode : geocodes) {
-            cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
+        for (cgCache cache : caches) {
             // Is there any reason to exclude the cache from the list?
             final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
                     (excludeMine && (cache.isOwn() || cache.isFound())) ||
