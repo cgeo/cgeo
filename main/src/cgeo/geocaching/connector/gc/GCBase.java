@@ -464,11 +464,16 @@ public class GCBase {
         return new String[] { userSession, sessionToken };
     }
 
-    private static int[] splitJSONKey(final String key) {
-        // two possible positions for the underscore
-        int underscore = key.charAt(1) == '_' ? 1 : 2;
-        int x = Integer.parseInt(key.substring(0, underscore));
-        int y = Integer.parseInt(key.substring(underscore + 1));
+    /**
+     * @param key
+     *            Key in the format (xx, xx)
+     * @return
+     */
+    private static int[] splitJSONKey(String key) {
+        // two possible positions for the ,
+        int seperator = key.charAt(2) == ',' ? 2 : 3;
+        int x = Integer.parseInt(key.substring(1, seperator));
+        int y = Integer.parseInt(key.substring(seperator + 2, key.length() - 1));
         return new int[] { x, y };
     }
 
