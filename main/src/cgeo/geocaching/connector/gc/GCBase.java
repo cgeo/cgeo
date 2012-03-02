@@ -58,8 +58,6 @@ public class GCBase {
     private final static int POSX_FOUND = 10;
     private final static int POSY_FOUND = -8;
 
-    private static final LeastRecentlyUsedCache<String, String> geocodeCache = new LeastRecentlyUsedCache<String, String>(2000); // JSON id, geocode
-
     /**
      * @param viewport
      * @param zoomlevel
@@ -228,17 +226,12 @@ public class GCBase {
             }
 
             for (String id : positions.keySet()) {
-                String geocode = geocodeCache.get(id);
-                if (geocode == null) {
-                    geocode = newidToGeocode(id);
-                    geocodeCache.put(id, geocode);
-                }
                 List<UTFGridPosition> pos = positions.get(id);
                 UTFGridPosition xy = getPositionInGrid(pos);
                 cgCache cache = new cgCache();
                 cache.setDetailed(false);
                 cache.setReliableLatLon(false);
-                cache.setGeocode(geocode);
+                cache.setGeocode(id);
                 cache.setName(nameCache.get(id));
                 cache.setZoomlevel(tile.getZoomlevel());
                 cache.setCoords(tile.getCoord(xy));
