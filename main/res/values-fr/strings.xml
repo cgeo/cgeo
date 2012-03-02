@@ -417,7 +417,6 @@
   <string name="map_source_google_map">Google Maps : plan</string>
   <string name="map_source_google_satellite">Google Maps : satellite</string>
   <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
-  <string name="map_source_osm_osmarender">OSM : rendu Osmarender</string>
   <string name="map_source_osm_cyclemap">OSM : pistes cyclables</string>
   <string name="map_source_osm_offline">OSM : hors-ligne</string>
 

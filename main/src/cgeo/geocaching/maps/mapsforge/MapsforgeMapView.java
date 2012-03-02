@@ -166,9 +166,6 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     public void setMapSource() {
 
         switch (MapsforgeMapProvider.getMapsforgeSource(Settings.getMapSource())) {
-            case MapsforgeMapProvider.OSMARENDER:
-                setMapViewMode(MapViewMode.OSMARENDER_TILE_DOWNLOAD);
-                break;
             case MapsforgeMapProvider.CYCLEMAP:
                 setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
                 break;

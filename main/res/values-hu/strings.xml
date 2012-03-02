@@ -396,7 +396,6 @@
   <string name="map_source_google_map">Google: Térkép</string>
   <string name="map_source_google_satellite">Google: Műholdkép</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
   <string name="map_source_osm_cyclemap">OSM: Biciklis térkép</string>
   <string name="map_source_osm_offline">OSM: Offline</string>
 
