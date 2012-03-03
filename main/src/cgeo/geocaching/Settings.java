@@ -4,6 +4,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -82,8 +83,8 @@ public final class Settings {
     private final static int unitsImperial = 2;
 
     // twitter api keys
-    private final static String keyConsumerPublic = "RFafPiNi3xRhcS1TPE3wTw";
-    private final static String keyConsumerSecret = "7iDJprNPI9hzRwWhpzycSr9SPZMFrdVdsxD2OauI9k";
+    private final static String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
+    private final static String keyConsumerSecret = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
     private interface PrefRunnable {
         void edit(final Editor edit);
