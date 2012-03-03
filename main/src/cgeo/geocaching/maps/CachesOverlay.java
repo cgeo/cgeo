@@ -214,6 +214,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
                 popupIntent.putExtra("waypoint", coordinate.getId());
 
+                CGeoMap.markCacheAsDirty(coordinate.getGeocode());
                 context.startActivity(popupIntent);
             } else {
                 waitDialog.dismiss();
