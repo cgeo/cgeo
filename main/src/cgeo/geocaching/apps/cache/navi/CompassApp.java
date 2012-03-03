@@ -30,7 +30,7 @@ class CompassApp extends AbstractNavigationApp {
             return true;
         }
         if (waypoint != null && waypoint.getCoords() != null) {
-            cgeonavigate.startActivity(activity, waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(), waypoint.getName(), waypoint.getCoords(), null);
+            cgeonavigate.startActivity(activity, waypoint.getPrefix() + "/" + waypoint.getLookup(), waypoint.getName(), waypoint.getCoords(), null);
             return true;
         }
         if (coords != null) {

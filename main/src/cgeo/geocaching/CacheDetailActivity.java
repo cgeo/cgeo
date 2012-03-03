@@ -2026,7 +2026,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
                 }
                 else {
-                    hintView.setText(CryptUtils.rot13(cache.getHint().trim()));
+                    hintView.setText(CryptUtils.rot13(cache.getHint()));
                 }
                 hintView.setVisibility(View.VISIBLE);
                 hintView.setClickable(true);
@@ -2108,7 +2108,7 @@ public class CacheDetailActivity extends AbstractActivity {
             @Override
             protected Void doInBackground(Object... params) {
                 try {
-                    descriptionString = ((String) params[0]).trim();
+                    descriptionString = ((String) params[0]);
                     descriptionView = (TextView) params[1];
                     loadingIndicatorView = (View) params[2];
                 } catch (Exception e) {
@@ -2460,10 +2460,10 @@ public class CacheDetailActivity extends AbstractActivity {
                         final TextView noteView = (TextView) waypointView.findViewById(R.id.note);
                         noteView.setVisibility(View.VISIBLE);
                         if (BaseUtils.containsHtml(wpt.getNote())) {
-                            noteView.setText(Html.fromHtml(wpt.getNote().trim()), TextView.BufferType.SPANNABLE);
+                            noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
                         }
                         else {
-                            noteView.setText(wpt.getNote().trim());
+                            noteView.setText(wpt.getNote());
                         }
                     }
 

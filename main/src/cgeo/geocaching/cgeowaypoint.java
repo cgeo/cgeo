@@ -61,13 +61,13 @@ public class cgeowaypoint extends AbstractActivity {
                     registerNavigationMenu(headline);
 
                     if (StringUtils.isNotBlank(waypoint.getName())) {
-                        setTitle(Html.fromHtml(waypoint.getName().trim()).toString());
+                        setTitle(Html.fromHtml(waypoint.getName()).toString());
                     } else {
                         setTitle(res.getString(R.string.waypoint_title));
                     }
 
                     if (!waypoint.getPrefix().equalsIgnoreCase("OWN")) {
-                        identification.setText(waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim());
+                        identification.setText(waypoint.getPrefix() + "/" + waypoint.getLookup());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
                     }
@@ -87,7 +87,7 @@ public class cgeowaypoint extends AbstractActivity {
 
                     if (StringUtils.isNotBlank(waypoint.getNote())) {
                         final TextView note = (TextView) findViewById(R.id.note);
-                        note.setText(Html.fromHtml(waypoint.getNote().trim()), TextView.BufferType.SPANNABLE);
+                        note.setText(Html.fromHtml(waypoint.getNote()), TextView.BufferType.SPANNABLE);
                         registerNavigationMenu(note);
                     }
 
