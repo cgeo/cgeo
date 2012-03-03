@@ -44,7 +44,7 @@ public class cgCoord implements IBasicCache, IWaypoint {
         id = waypoint.getId();
         disabled = false;
         found = false;
-        geocode = "";
+        geocode = waypoint.getGeocode();//"";
         coords = waypoint.getCoords();
         name = waypoint.getName();
         coordType = "waypoint";
