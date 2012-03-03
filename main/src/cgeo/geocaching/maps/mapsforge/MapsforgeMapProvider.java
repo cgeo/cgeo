@@ -22,7 +22,6 @@ import java.util.Map;
 public class MapsforgeMapProvider implements MapProvider {
 
     public final static int MAPNIK = 1;
-    public final static int OSMARENDER = 2;
     public final static int CYCLEMAP = 3;
     public final static int OFFLINE = 4;
 
@@ -36,7 +35,6 @@ public class MapsforgeMapProvider implements MapProvider {
 
         mapSources = new HashMap<Integer, String>();
         mapSources.put(baseId + MAPNIK, resources.getString(R.string.map_source_osm_mapnik));
-        mapSources.put(baseId + OSMARENDER, resources.getString(R.string.map_source_osm_osmarender));
         mapSources.put(baseId + CYCLEMAP, resources.getString(R.string.map_source_osm_cyclemap));
         mapSources.put(baseId + OFFLINE, resources.getString(R.string.map_source_osm_offline));
     }

@@ -441,7 +441,6 @@
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">OSM: Offline</string>
 
