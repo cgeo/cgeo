@@ -299,7 +299,7 @@ public class cgeowaypoint extends AbstractActivity {
         }
     }
 
-    private class update implements UpdateLocationCallback {
+    private static class update implements UpdateLocationCallback {
 
         @Override
         public void updateLocation(cgGeo geo) {

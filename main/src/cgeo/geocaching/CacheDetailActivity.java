@@ -1228,7 +1228,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 boolean strikethru = attributeName.endsWith("_no");
                 // cut off _yes / _no
                 if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
-                    attributeName = attributeName.substring(0, attributeName.lastIndexOf("_"));
+                    attributeName = attributeName.substring(0, attributeName.lastIndexOf('_'));
                 }
                 // check if another attribute icon fits in this row
                 attributeRow.measure(0, 0);

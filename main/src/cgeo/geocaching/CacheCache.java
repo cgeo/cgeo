@@ -76,11 +76,7 @@ public class CacheCache {
 
     @Override
     public String toString() {
-        String result = "";
-        for (String geocode : cachesCache.keySet()) {
-            result += geocode + " ";
-        }
-        return result;
+        return StringUtils.join(cachesCache.keySet(), ' ');
     }
 
 }

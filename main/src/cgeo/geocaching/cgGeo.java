@@ -67,7 +67,7 @@ public class cgGeo {
         }
     }
 
-    private abstract class AbstractLocationListener implements LocationListener {
+    private static abstract class AbstractLocationListener implements LocationListener {
         private final String locationProvider;
 
         protected AbstractLocationListener(String provider) {

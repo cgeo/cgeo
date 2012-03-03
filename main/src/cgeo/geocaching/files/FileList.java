@@ -52,7 +52,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             for (File f : getBaseFolders()) {
                 String fName = f.getPath();
                 if (sb.length() > 0) {
-                    sb.append("\n");
+                    sb.append('\n');
                 }
                 sb.append(fName);
             }

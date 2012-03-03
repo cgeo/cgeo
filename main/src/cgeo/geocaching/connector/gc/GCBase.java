@@ -78,40 +78,40 @@ public class GCBase {
         List<Tile> tiles = getTilesForViewport(viewport);
 
         for (Tile tile : tiles) {
-            String url =
-                    "?x=" + tile.getX() + // x tile
-                    "&y=" + tile.getY() + // y tile
-                    "&z=" + tile.getZoomlevel(); // zoom level
+            StringBuilder url = new StringBuilder();
+            url.append("?x=").append(tile.getX()) // x tile
+            .append("&y=").append(tile.getY()) // y tile
+            .append("&z=").append(tile.getZoomlevel()); // zoom level
             if (tokens != null) {
-                url += "&k=" + tokens[0]; // user session
-                url += "&st=" + tokens[1]; // session token
+                url.append("&k=").append(tokens[0]); // user session
+                url.append("&st=").append(tokens[1]); // session token
             }
-            url += "&ep=1";
+            url.append("&ep=1");
             if (Settings.isExcludeMyCaches()) {
-                url += "&hf=1"; // hide found
-                url += "&hh=1"; // hide hidden
+                url.append("&hf=1").append("&hh=1"); // hide found, hide hidden
             }
             if (Settings.getCacheType() == CacheType.TRADITIONAL) {
-                url += "&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"; // 2 = tradi 3 = multi 8 = mystery
+                url.append("&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
             }
             if (Settings.getCacheType() == CacheType.MULTI) {
-                url += "&ect=9,5,2,6,453,13,1304,137,11,4,8,1858";
+                url.append("&ect=9,5,2,6,453,13,1304,137,11,4,8,1858");
             }
             if (Settings.getCacheType() == CacheType.MYSTERY) {
-                url += "&ect=9,5,3,6,453,13,1304,137,11,4,2,1858";
+                url.append("&ect=9,5,3,6,453,13,1304,137,11,4,2,1858");
             }
             if (tile.getZoomlevel() != 14) {
-                url += "&_=" + String.valueOf(System.currentTimeMillis());
+                url.append("&_=").append(String.valueOf(System.currentTimeMillis()));
             }
             // other types t.b.d
+            final String urlString = url.toString();
 
             // The PNG must be request before ! Else the following request would return with 204 - No Content
-            Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + url, referer);
+            Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
 
             assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
             assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
 
-            String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + url, referer);
+            String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
             if (StringUtils.isEmpty(data)) {
                 Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
             } else {

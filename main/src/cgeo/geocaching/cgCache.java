@@ -267,10 +267,10 @@ public class cgCache implements ICache {
         if (logCounts.size() == 0) {
             logCounts = other.logCounts;
         }
-        if (userModifiedCoords == false) {
+        if (!userModifiedCoords) {
             userModifiedCoords = other.userModifiedCoords;
         }
-        if (reliableLatLon == false) {
+        if (!reliableLatLon) {
             reliableLatLon = other.reliableLatLon;
         }
         if (zoomlevel == -1) {
@@ -318,8 +318,8 @@ public class cgCache implements ICache {
                 listId == other.listId &&
                 owner.equalsIgnoreCase(other.owner) &&
                 ownerReal.equalsIgnoreCase(other.ownerReal) &&
-                (description != null ? description.equalsIgnoreCase(other.description) : description == other.description) &&
-                (personalNote != null ? personalNote.equalsIgnoreCase(other.personalNote) : personalNote == other.personalNote) &&
+                (description != null ? description.equalsIgnoreCase(other.description) : null == other.description) &&
+                (personalNote != null ? personalNote.equalsIgnoreCase(other.personalNote) : null == other.personalNote) &&
                 shortdesc.equalsIgnoreCase(other.shortdesc) &&
                 latlon.equalsIgnoreCase(other.latlon) &&
                 location.equalsIgnoreCase(other.location) &&

@@ -204,7 +204,7 @@ public class cgBase {
         final Matcher matcherViewstates = GCConstants.PATTERN_VIEWSTATES.matcher(page);
         while (matcherViewstates.find()) {
             String sno = matcherViewstates.group(1); // number of viewstate
-            if ("".equals(sno)) {
+            if (sno.length() == 0) {
                 no = 0;
             }
             else {
@@ -232,7 +232,7 @@ public class cgBase {
             for (int i = 1; i < viewstates.length; i++) {
                 params.put("__VIEWSTATE" + i, viewstates[i]);
             }
-            params.put("__VIEWSTATEFIELDCOUNT", viewstates.length + "");
+            params.put("__VIEWSTATEFIELDCOUNT", String.valueOf(viewstates.length));
         }
     }
 
@@ -438,7 +438,7 @@ public class cgBase {
                 final String recaptchaJs = cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge", params, true));
 
                 if (StringUtils.isNotBlank(recaptchaJs)) {
-                    recaptchaChallenge = BaseUtils.getMatch(recaptchaJs, GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE, true, 1, recaptchaChallenge, true);
+                    recaptchaChallenge = BaseUtils.getMatch(recaptchaJs, GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE, true, 1, null, true);
                 }
             }
             if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
@@ -460,7 +460,7 @@ public class cgBase {
 
         page = page.substring(startPos); // cut on <table
 
-        startPos = page.indexOf(">");
+        startPos = page.indexOf('>');
         int endPos = page.indexOf("ctl00_ContentBody_UnitTxt");
         if (startPos == -1 || endPos == -1) {
             Log.e(Settings.tag, "cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
@@ -622,7 +622,7 @@ public class cgBase {
                         for (int i = 1; i < searchResult.viewstates.length; i++) {
                             params.put("__VIEWSTATE" + i, searchResult.viewstates[i]);
                         }
-                        params.put("__VIEWSTATEFIELDCOUNT", "" + searchResult.viewstates.length);
+                        params.put("__VIEWSTATEFIELDCOUNT", String.valueOf(searchResult.viewstates.length));
                     }
                 }
                 for (String cid : cids) {

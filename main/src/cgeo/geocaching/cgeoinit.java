@@ -41,8 +41,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
-import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class cgeoinit extends AbstractActivity {
@@ -92,7 +92,7 @@ public class cgeoinit extends AbstractActivity {
                 }
 
                 if (msg.what > 0) {
-                    helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_ok).replace("####", "" + msg.what));
+                    helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_ok).replace("####", String.valueOf(msg.what)));
                 } else {
                     helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_fail));
                 }
@@ -546,9 +546,9 @@ public class cgeoinit extends AbstractActivity {
         webAuth.setOnClickListener(new webAuth());
 
         // Map source settings
-        SortedMap<Integer, String> mapSources = MapProviderFactory.getMapSources();
+        Collection<String> mapSourceValues = MapProviderFactory.getMapSources().values();
         Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSources.values().toArray(new String[] {}));
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSourceValues.toArray(new String[mapSourceValues.size()]));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mapSourceSelector.setAdapter(adapter);
         int mapsource = Settings.getMapSource();
