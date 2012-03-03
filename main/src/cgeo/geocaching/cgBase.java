@@ -413,7 +413,7 @@ public class cgBase {
         }
     }
 
-    private static SearchResult parseSearch(final cgSearchThread thread, final String url, final String pageContent, final boolean showCaptcha, final int listId) {
+    private static SearchResult parseSearch(final cgSearchThread thread, final String url, final String pageContent, final boolean showCaptcha) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e(Settings.tag, "cgeoBase.parseSearch: No page given");
             return null;
@@ -473,8 +473,7 @@ public class cgBase {
         final int rows_count = rows.length;
 
         for (int z = 1; z < rows_count; z++) {
-            cgCache cache = new cgCache();
-            cache.setListId(listId);
+            final cgCache cache = new cgCache();
             String row = rows[z];
 
             // check for cache type presence
@@ -695,8 +694,8 @@ public class cgBase {
         return searchResult;
     }
 
-    public static SearchResult parseCache(final String page, final int listId, final CancellableHandler handler) {
-        final SearchResult searchResult = parseCacheFromText(page, listId, handler);
+    public static SearchResult parseCache(final String page, final CancellableHandler handler) {
+        final SearchResult searchResult = parseCacheFromText(page, handler);
         if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
             final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             getExtraOnlineInfo(cache, page, handler);
@@ -707,13 +706,12 @@ public class cgBase {
                 return null;
             }
             // save full detailed caches
-            cache.setListId(StoredList.TEMPORARY_LIST_ID);
             cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         }
         return searchResult;
     }
 
-    static SearchResult parseCacheFromText(final String page, final int listId, final CancellableHandler handler) {
+    static SearchResult parseCacheFromText(final String page, final CancellableHandler handler) {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(page)) {
@@ -746,8 +744,6 @@ public class cgBase {
         cache.setPremiumMembersOnly(BaseUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
         cache.setFavorite(BaseUtils.matches(page, GCConstants.PATTERN_FAVORITE));
-
-        cache.setListId(listId);
 
         // cache geocode
         cache.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
@@ -1636,7 +1632,7 @@ public class cgBase {
         params.put("tx", cacheType.guid);
     }
 
-    public static SearchResult searchByNextPage(cgSearchThread thread, final SearchResult search, int listId, boolean showCaptcha) {
+    public static SearchResult searchByNextPage(cgSearchThread thread, final SearchResult search, boolean showCaptcha) {
         if (search == null) {
             return search;
         }
@@ -1681,7 +1677,7 @@ public class cgBase {
             return search;
         }
 
-        final SearchResult searchResult = parseSearch(thread, url, page, showCaptcha, listId);
+        final SearchResult searchResult = parseSearch(thread, url, page, showCaptcha);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e(Settings.tag, "cgeoBase.searchByNextPage: No cache parsed");
             return search;
@@ -1712,10 +1708,10 @@ public class cgBase {
 
         // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
         if (geocode == null && guid != null) {
-            return GCConnector.getInstance().searchByGeocode(null, guid, app, listId, handler);
+            return GCConnector.getInstance().searchByGeocode(null, guid, app, handler);
         }
 
-        return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode, guid, app, listId, handler);
+        return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode, guid, app, handler);
     }
 
     public static SearchResult searchByStored(final Geopoint coords, final CacheType cacheType, final int list) {
@@ -1732,7 +1728,7 @@ public class cgBase {
      *            the parameters to add to the request URI
      * @return
      */
-    private static SearchResult searchByAny(final cgSearchThread thread, final CacheType cacheType, final boolean my, final int listId, final boolean showCaptcha, final Parameters params) {
+    private static SearchResult searchByAny(final cgSearchThread thread, final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params) {
         insertCacheType(params, cacheType);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
@@ -1744,35 +1740,35 @@ public class cgBase {
             return null;
         }
 
-        final SearchResult searchResult = parseSearch(thread, fullUri, page, showCaptcha, listId);
+        final SearchResult searchResult = parseSearch(thread, fullUri, page, showCaptcha);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e(Settings.tag, "cgeoBase.searchByAny: No cache parsed");
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), false, cacheType, listId);
+        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), false, cacheType);
 
         getLoginStatus(page);
 
         return search;
     }
 
-    public static SearchResult searchByCoords(final cgSearchThread thread, final Geopoint coords, final CacheType cacheType, final int listId, final boolean showCaptcha) {
+    public static SearchResult searchByCoords(final cgSearchThread thread, final Geopoint coords, final CacheType cacheType, final boolean showCaptcha) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
+        return searchByAny(thread, cacheType, false, showCaptcha, params);
     }
 
-    public static SearchResult searchByKeyword(final cgSearchThread thread, final String keyword, final CacheType cacheType, final int listId, final boolean showCaptcha) {
+    public static SearchResult searchByKeyword(final cgSearchThread thread, final String keyword, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(keyword)) {
             Log.e(Settings.tag, "cgeoBase.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
+        return searchByAny(thread, cacheType, false, showCaptcha, params);
     }
 
-    public static SearchResult searchByUsername(final cgSearchThread thread, final String userName, final CacheType cacheType, final int listId, final boolean showCaptcha) {
+    public static SearchResult searchByUsername(final cgSearchThread thread, final String userName, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
             Log.e(Settings.tag, "cgeoBase.searchByUsername: No user name given");
             return null;
@@ -1786,17 +1782,17 @@ public class cgBase {
             Log.i(Settings.tag, "cgBase.searchByUsername: Overriding users choice, downloading all caches.");
         }
 
-        return searchByAny(thread, cacheType, my, listId, showCaptcha, params);
+        return searchByAny(thread, cacheType, my, showCaptcha, params);
     }
 
-    public static SearchResult searchByOwner(final cgSearchThread thread, final String userName, final CacheType cacheType, final int listId, final boolean showCaptcha) {
+    public static SearchResult searchByOwner(final cgSearchThread thread, final String userName, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
             Log.e(Settings.tag, "cgeoBase.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", userName);
-        return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
+        return searchByAny(thread, cacheType, false, showCaptcha, params);
     }
 
     /** Request .png image for a tile. */

@@ -84,7 +84,7 @@ public class GCConnector extends AbstractConnector {
     }
 
     @Override
-    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final CancellableHandler handler) {
 
         if (app == null) {
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No application found");
@@ -123,14 +123,14 @@ public class GCConnector extends AbstractConnector {
             return search;
         }
 
-        final SearchResult searchResult = cgBase.parseCache(page, listId, handler);
+        final SearchResult searchResult = cgBase.parseCache(page, handler);
 
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No cache parsed");
             return searchResult;
         }
 
-        SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType(), listId);
+        SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType());
 
         return search;
     }

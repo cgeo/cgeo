@@ -1779,7 +1779,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByNextPage(this, search, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByNextPage(this, search, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }
@@ -1806,7 +1806,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByCoords(this, coords, cacheType, StoredList.TEMPORARY_LIST_ID, Settings.isShowCaptcha());
+            search = cgBase.searchByCoords(this, coords, cacheType, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }
@@ -1833,7 +1833,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByKeyword(this, keyword, cacheType, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByKeyword(this, keyword, cacheType, Settings.isShowCaptcha());
             handler.sendMessage(new Message());
         }
     }
@@ -1859,7 +1859,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByUsername(this, username, cacheType, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByUsername(this, username, cacheType, Settings.isShowCaptcha());
             handler.sendMessage(new Message());
         }
     }
@@ -1891,7 +1891,7 @@ public class cgeocaches extends AbstractListActivity {
                 params.put("cacheType", cacheType.id);
             }
 
-            search = cgBase.searchByOwner(this, username, cacheType, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByOwner(this, username, cacheType, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }

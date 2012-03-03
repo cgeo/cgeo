@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
@@ -126,7 +125,7 @@ public class GCBase {
             }
         }
 
-        SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID, false);
+        SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), false);
         if (search != null) {
             searchResult.addGeocodes(search.getGeocodes());
         }

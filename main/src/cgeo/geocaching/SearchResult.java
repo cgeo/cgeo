@@ -140,7 +140,7 @@ public class SearchResult implements Parcelable {
      * @param cacheType
      * @return
      */
-    public SearchResult filterSearchResults(final boolean excludeDisabled, final boolean excludeMine, final CacheType cacheType, final int listId) {
+    public SearchResult filterSearchResults(final boolean excludeDisabled, final boolean excludeMine, final CacheType cacheType) {
 
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
@@ -152,7 +152,6 @@ public class SearchResult implements Parcelable {
                     (excludeMine && (cache.isOwn() || cache.isFound())) ||
                     (cacheType != CacheType.ALL && cacheType != cache.getType());
             if (!excludeCache) {
-                cache.setListId(listId);
                 result.addCache(cache);
             }
         }
@@ -190,13 +189,12 @@ public class SearchResult implements Parcelable {
     }
 
     /** Add the cache geocodes to the search and store them in the CacheCache */
-    public void addCaches(final Set<cgCache> caches, final int listId) {
+    public void addCaches(final Set<cgCache> caches) {
         if (CollectionUtils.isEmpty(caches)) {
             return;
         }
 
         for (final cgCache cache : caches) {
-            cache.setListId(listId);
             addCache(cache);
         }
     }

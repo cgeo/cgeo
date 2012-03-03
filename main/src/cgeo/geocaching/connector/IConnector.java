@@ -76,7 +76,7 @@ public interface IConnector {
      */
     public boolean supportsCachesAround();
 
-    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler);
+    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final CancellableHandler handler);
 
     /**
      * search caches by coordinate. must be implemented if {@link supportsCachesAround} returns <code>true</true>
