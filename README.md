@@ -24,7 +24,7 @@ Build
 
 ### Prerequisites ###
 
-- [Android SDK](http://developer.android.com/sdk) r14 including Google APIs V8
+- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V11 (although we target API 4)
 - [Ant](http://ant.apache.org) 1.6.0+ for building c:geo on the command line (not necessary when using only Eclipse)
 - If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
 
