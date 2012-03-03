@@ -454,12 +454,14 @@ public class cgeocaches extends AbstractListActivity {
 
             if (msg.what > -1) {
                 cacheList.get(msg.what).setStatusChecked(false);
+                waitDialog.setProgress(detailProgress);
             } else {
                 if (adapter != null) {
                     adapter.setSelectMode(false, true);
                 }
 
-                // TODO: Reload cacheList
+                // reload history list
+                (new LoadByHistoryThread(loadCachesHandler)).start();
 
                 if (waitDialog != null) {
                     waitDialog.dismiss();
@@ -2172,6 +2174,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     app.clearVisitDate(cache.getGeocode());
 
+                    detailProgress++;
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
                     yield();
