@@ -240,9 +240,7 @@ public class cgData {
             + "); ";
 
     private boolean initialized = false;
-    private SQLiteStatement statementDescription;
-    private SQLiteStatement statementLogCount;
-    private SQLiteStatement statementStandardList;
+    private HashMap<String, SQLiteStatement> statements = new HashMap<String, SQLiteStatement>();
     private static boolean newlyCreatedDatabase = false;
 
     public cgData(Context contextIn) {
@@ -346,17 +344,8 @@ public class cgData {
     }
 
     private void closePreparedStatements() {
-        if (statementDescription != null) {
-            statementDescription.close();
-            statementDescription = null;
-        }
-        if (statementLogCount != null) {
-            statementLogCount.close();
-            statementLogCount = null;
-        }
-        if (statementStandardList != null) {
-            statementStandardList.close();
-            statementStandardList = null;
+        for (SQLiteStatement statement : statements.values()) {
+            statement.close();
         }
     }
 
@@ -3144,18 +3133,21 @@ public class cgData {
         databaseRW.delete(dbTableLogsOffline, "geocode = ?", new String[] { geocode });
     }
 
-    private synchronized SQLiteStatement getStatementLogCount() {
-        if (statementLogCount == null) {
-            statementLogCount = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
-        }
-        return statementLogCount;
+    private SQLiteStatement getStatementLogCount() {
+        return getStatement("LogCountFromGeocode", "SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
     }
 
-    private synchronized SQLiteStatement getStatementStandardList() {
-        if (statementStandardList == null) {
-            statementStandardList = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
+    private synchronized SQLiteStatement getStatement(final String key, final String query) {
+        SQLiteStatement statement = statements.get(key);
+        if (statement == null) {
+            statement = databaseRO.compileStatement(query);
+            statements.put(key, statement);
         }
-        return statementStandardList;
+        return statement;
+    }
+
+    private SQLiteStatement getStatementCountStandardList() {
+        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
     }
 
     public boolean hasLogOffline(final String geocode) {
@@ -3167,8 +3159,8 @@ public class cgData {
         try {
             final SQLiteStatement logCount = getStatementLogCount();
             synchronized (logCount) {
-                statementLogCount.bindString(1, geocode);
-                return statementLogCount.simpleQueryForLong() > 0;
+                logCount.bindString(1, geocode);
+                return logCount.simpleQueryForLong() > 0;
             }
         } catch (Exception e) {
             Log.e(Settings.tag, "cgData.hasLogOffline", e);
@@ -3200,7 +3192,7 @@ public class cgData {
         init();
 
         List<StoredList> lists = new ArrayList<StoredList>();
-        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong()));
+        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementCountStandardList().simpleQueryForLong()));
 
         try {
             String query = "SELECT l._id as _id, l.title as title, COUNT(c._id) as count" +
@@ -3260,7 +3252,7 @@ public class cgData {
         }
         // fall back to standard list in case of invalid list id
         if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
-            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong());
+            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementCountStandardList().simpleQueryForLong());
         }
 
         return null;
@@ -3413,25 +3405,16 @@ public class cgData {
         return success;
     }
 
-    private synchronized SQLiteStatement getStatementDescription() {
-        if (statementDescription == null) {
-            statementDescription = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
-        }
-        return statementDescription;
+    private SQLiteStatement getStatementDescription() {
+        return getStatement("descriptionFromGeocode", "SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
     }
 
-    private synchronized SQLiteStatement getStatementCacheId() {
-        if (statementDescription == null) {
-            statementDescription = databaseRO.compileStatement("SELECT cacheid FROM " + dbTableCaches + " WHERE geocode = ?");
-        }
-        return statementDescription;
+    private SQLiteStatement getStatementCacheId() {
+        return getStatement("cacheIdFromGeocode", "SELECT cacheid FROM " + dbTableCaches + " WHERE geocode = ?");
     }
 
-    private synchronized SQLiteStatement getStatementGeocode() {
-        if (statementDescription == null) {
-            statementDescription = databaseRO.compileStatement("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?");
-        }
-        return statementDescription;
+    private SQLiteStatement getStatementGeocode() {
+        return getStatement("geocodeFromGuid", "SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?");
     }
 
     public String getCacheDescription(String geocode) {
