@@ -796,7 +796,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private void addToCalendarWithIntent() {
 
-        final boolean calendarAddOnAvailable = cgBase.isIntentAvailable(this, ICalendar.INTENT);
+        final boolean calendarAddOnAvailable = cgBase.isIntentAvailable(this, ICalendar.INTENT, Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST));
 
         if (calendarAddOnAvailable) {
             final Parameters params = new Parameters(
