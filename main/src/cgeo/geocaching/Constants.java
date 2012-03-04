@@ -20,4 +20,11 @@ public final class Constants {
     /** Text separator used for formatting texts */
     public static final String SEPARATOR = " · ";
 
+    /**
+     * Factor used to calculate distance from meters to foot;
+     * <p>
+     * ft = m * M2FT;
+     */
+    public static final double M2FT = 3.2808399d;
+
 }
