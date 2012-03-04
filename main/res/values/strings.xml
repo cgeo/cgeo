@@ -1000,17 +1000,26 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · New: Moved calendar operations to separate calendar add-on (available on Android Market).\n 
+      c:geo doesn\'t require calendar permissions anymore\n
+    · New: Login status and find count shown on start screen\n
+    · New: Improved markers in the map with additional information for stored caches:\n
+      Personal Note available, Modified coordinates, Saved on device, Offline log available, Non-reliable coordinates (orange circle)\n
+    · New: Copy, translate and forward available with long press for cache- and log-text\n
+    · New: User can select two preffered navigation tools for easier accessibility\n
+    · New: Type of waypoint can be selected for custom waypoints\n
+    · New: Day of week is now shown for event-caches\n
+    · New: Static maps can now also be stored for waypoints of a cache\n
     · Fix: Live Map\n
-    · New: Calendar add-on. c:geo doesn\'t require calendar permissions anymore\n
     · Fix: Deletion of outdated caches did not work\n
     · Fix: Changed internal caching causing a better overall performance\n
-    · New: Login status on start screen\n
-    · New: Changed markers in the map with additional informations for stored caches:\n
-       Personal Note available, Modified coordinates, non-reliable coordinates (orange circle)\n
-    · Fix: Caches with modified coordinates are displayed at the modified coords and not at the original coords\n
-    · New: Copy and translate available with long press\n
+    · Fix: Caches with modified coordinates are displayed at the modified coords and not at the original coords\n   
+    · Fix: Improved consistency for offline-logging operations\n
+    · Fix: Removed OSM:Osmarender map as it is no longer available\n
+    · Fix: Find-count not working in signature\n
+    · Fix: Keep screen on while viewing cache-lists\n
 \n
-    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=3&amp;state=closed">Detailed list of issues</a>\n
+    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=3&amp;state=closed">Detailed list of all Changes</a>\n
     \n\n
     <b>04.01.2012</b>\n
     · new: additional page in the details view for logs from friends\n
