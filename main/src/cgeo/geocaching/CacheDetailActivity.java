@@ -739,7 +739,7 @@ public class CacheDetailActivity extends AbstractActivity {
                             dist.append(Math.abs((int) diff));
                             dist.append(" m");
                         } else {
-                            dist.append(Math.abs((int) (diff * 3.2808399)));
+                            dist.append(Math.abs((int) (diff * Constants.M2FT)));
                             dist.append(" ft");
                         }
                     }
@@ -1401,36 +1401,23 @@ public class CacheDetailActivity extends AbstractActivity {
 
             // cache state
             if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
-                final StringBuilder state = new StringBuilder();
+                List<String> states = new ArrayList<String>(5);
                 if (cache.isLogOffline()) {
-                    state.append(res.getString(R.string.cache_status_offline_log));
+                    states.add(res.getString(R.string.cache_status_offline_log));
                 }
                 if (cache.isFound()) {
-                    if (state.length() > 0) {
-                        state.append(", ");
-                    }
-                    state.append(res.getString(R.string.cache_status_found));
+                    states.add(res.getString(R.string.cache_status_found));
                 }
                 if (cache.isArchived()) {
-                    if (state.length() > 0) {
-                        state.append(", ");
-                    }
-                    state.append(res.getString(R.string.cache_status_archived));
+                    states.add(res.getString(R.string.cache_status_archived));
                 }
                 if (cache.isDisabled()) {
-                    if (state.length() > 0) {
-                        state.append(", ");
-                    }
-                    state.append(res.getString(R.string.cache_status_disabled));
+                    states.add(res.getString(R.string.cache_status_disabled));
                 }
                 if (cache.isPremiumMembersOnly()) {
-                    if (state.length() > 0) {
-                        state.append(", ");
-                    }
-                    state.append(res.getString(R.string.cache_status_premium));
+                    states.add(res.getString(R.string.cache_status_premium));
                 }
-
-                addCacheDetail(R.string.cache_status, state.toString());
+                addCacheDetail(R.string.cache_status, StringUtils.join(states, ", "));
             }
 
             // distance

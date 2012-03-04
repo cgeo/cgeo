@@ -366,7 +366,7 @@ public class cgeonavigate extends AbstractActivity {
                         if (Settings.isUseMetricUnits()) {
                             navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * 3.2808399) + " ft");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * Constants.M2FT) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);
