@@ -427,7 +427,7 @@
   <string name="init_default_navigation_tool">Default Navigation</string>
   <string name="init_default_navigation_tool_description">Here you can select your preferred navigation tool.</string>
   <string name="init_default_navigation_tool_select">Select tool</string>
-  <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. It\'s activated by long clicking the navigation icon in the action bar.</string>
+  <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. It\'s activated by long clicking the navigation icon next to the title of the cache.</string>
   
   <!-- map sources -->
   <string-array name="map_sources">
