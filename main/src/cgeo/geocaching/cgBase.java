@@ -588,7 +588,7 @@ public class cgBase {
                 }
             }
 
-            // location is reliable because the search return correct coords independant of the login status
+            // location is reliable because the search return correct coordinates independent of the login status
             cache.setReliableLatLon(true);
 
             searchResult.addCache(cache);
@@ -639,7 +639,7 @@ public class cgBase {
                 }
                 params.put("ctl00$ContentBody$uxDownloadLoc", "Download Waypoints");
 
-                final String coordinates = getResponseData(postRequest("http://www.geocaching.com/seek/nearest.aspx", params));
+                final String coordinates = getResponseData(postRequest("http://www.geocaching.com/seek/nearest.aspx", params), false);
 
                 if (StringUtils.isNotBlank(coordinates)) {
                     if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
@@ -658,39 +658,11 @@ public class cgBase {
         }
 
         // get direction images
-        if (Settings.getLoadDirImg())
-        {
+        if (Settings.getLoadDirImg()) {
             final Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
             for (cgCache cache : caches) {
                 if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
                     DirectionImage.getDrawable(cache.getGeocode(), cache.getDirectionImg());
-                }
-            }
-        }
-
-        if (Settings.isRatingWanted()) {
-            // get ratings
-            if (guids.size() > 0) {
-                Log.i(Settings.tag, "Trying to get ratings for " + cids.size() + " caches");
-
-                try {
-                    final Map<String, GCVoteRating> ratings = GCVote.getRating(guids, null);
-
-                    if (MapUtils.isNotEmpty(ratings)) {
-                        // save found cache coordinates
-                        final Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
-                        for (cgCache cache : caches) {
-                            if (ratings.containsKey(cache.getGuid())) {
-                                GCVoteRating rating = ratings.get(cache.getGuid());
-
-                                cache.setRating(rating.getRating());
-                                cache.setVotes(rating.getVotes());
-                                cache.setMyVote(rating.getMyVote());
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.e(Settings.tag, "cgBase.parseSearch.GCvote: " + e.toString());
                 }
             }
         }
@@ -2246,7 +2218,7 @@ public class cgBase {
         return getViewstates(getResponseData(response));
     }
 
-    static public String getResponseDataOnError(final HttpResponse response, boolean replaceWhitespace) {
+    static private String getResponseDataNoError(final HttpResponse response, boolean replaceWhitespace) {
         try {
             String data = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
             return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
@@ -2264,7 +2236,7 @@ public class cgBase {
         if (!isSuccess(response)) {
             return null;
         }
-        return getResponseDataOnError(response, replaceWhitespace);
+        return getResponseDataNoError(response, replaceWhitespace);
     }
 
     /**
@@ -2520,7 +2492,7 @@ public class cgBase {
 
             if (cache == null) {
                 if (handler != null) {
-                    handler.sendMessage(new Message());
+                    handler.sendMessage(Message.obtain());
                 }
 
                 return;
@@ -2578,7 +2550,7 @@ public class cgBase {
             cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
             if (handler != null) {
-                handler.sendMessage(new Message());
+                handler.sendMessage(Message.obtain());
             }
         } catch (Exception e) {
             Log.e(Settings.tag, "cgBase.storeCache");
@@ -2590,7 +2562,7 @@ public class cgBase {
             cgeoapplication.getInstance().markDropped(cache.getGeocode());
             cgeoapplication.getInstance().removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
 
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         } catch (Exception e) {
             Log.e(Settings.tag, "cgBase.dropCache: " + e.toString());
         }

@@ -184,7 +184,7 @@ public class StaticMapsActivity extends AbstractActivity {
                     }
                 }
 
-                loadMapsHandler.sendMessage(new Message());
+                loadMapsHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
                 Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run: " + e.toString());
             }

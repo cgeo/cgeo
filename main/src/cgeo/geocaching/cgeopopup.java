@@ -365,13 +365,12 @@ public class cgeopopup extends AbstractActivity {
                         public void run() {
                             GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);
 
-                            Message msg = new Message();
-                            Bundle bundle = new Bundle();
-
                             if (rating == null) {
                                 return;
                             }
 
+                            Message msg = Message.obtain();
+                            Bundle bundle = new Bundle();
                             bundle.putFloat("rating", rating.getRating());
                             bundle.putInt("votes", rating.getVotes());
                             msg.setData(bundle);

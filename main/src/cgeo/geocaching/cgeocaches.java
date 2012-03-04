@@ -1750,7 +1750,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             search = cgBase.searchByStored(coords, Settings.getCacheType(), listId);
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         }
     }
 
@@ -1765,7 +1765,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             search = cgeoapplication.getInstance().getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         }
     }
 
@@ -1781,7 +1781,7 @@ public class cgeocaches extends AbstractListActivity {
         public void run() {
             search = cgBase.searchByNextPage(this, search, Settings.isShowCaptcha());
 
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         }
     }
 
@@ -1808,7 +1808,7 @@ public class cgeocaches extends AbstractListActivity {
         public void run() {
             search = cgBase.searchByCoords(this, coords, cacheType, Settings.isShowCaptcha());
 
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         }
     }
 
@@ -1834,7 +1834,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             search = cgBase.searchByKeyword(this, keyword, cacheType, Settings.isShowCaptcha());
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         }
     }
 
@@ -1860,7 +1860,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             search = cgBase.searchByUsername(this, username, cacheType, Settings.isShowCaptcha());
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         }
     }
 
@@ -1893,7 +1893,7 @@ public class cgeocaches extends AbstractListActivity {
 
             search = cgBase.searchByOwner(this, username, cacheType, Settings.isShowCaptcha());
 
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         }
     }
 
@@ -2035,7 +2035,7 @@ public class cgeocaches extends AbstractListActivity {
                         String GCcode = response;
 
                         delay = 1;
-                        Message mes = new Message();
+                        Message mes = Message.obtain();
                         mes.what = 1;
                         mes.obj = GCcode;
                         handler.sendMessage(mes);
@@ -2043,7 +2043,7 @@ public class cgeocaches extends AbstractListActivity {
 
                         cgBase.storeCache(cgeocaches.this, null, GCcode, listIdLFW, null);
 
-                        Message mes1 = new Message();
+                        Message mes1 = Message.obtain();
                         mes1.what = 2;
                         mes1.obj = GCcode;
                         handler.sendMessage(mes1);

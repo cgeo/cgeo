@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.gcvote.GCVote;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -144,6 +145,7 @@ public class SearchResult implements Parcelable {
 
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
+        final ArrayList<cgCache> cachesForVote = new ArrayList<cgCache>();
 
         final Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         for (cgCache cache : caches) {
@@ -153,8 +155,10 @@ public class SearchResult implements Parcelable {
                     (cacheType != CacheType.ALL && cacheType != cache.getType());
             if (!excludeCache) {
                 result.addCache(cache);
+                cachesForVote.add(cache);
             }
         }
+        GCVote.loadRatings(cachesForVote);
         return result;
     }
 

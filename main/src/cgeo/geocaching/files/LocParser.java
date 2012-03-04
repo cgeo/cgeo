@@ -8,6 +8,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -103,7 +104,7 @@ public final class LocParser extends FileParser {
             final Matcher matcherLat = patternLat.matcher(pointString);
             final Matcher matcherLon = patternLon.matcher(pointString);
             if (matcherLat.find() && matcherLon.find()) {
-                pointCoord.setCoords(GeopointParser.parse(matcherLat.group(1).trim(), matcherLon.group(1).trim()));
+                pointCoord.setCoords(parsePoint(matcherLat.group(1).trim(), matcherLon.group(1).trim()));
             }
             final Matcher matcherDifficulty = patternDifficulty.matcher(pointString);
             if (matcherDifficulty.find()) {
@@ -145,6 +146,17 @@ public final class LocParser extends FileParser {
         Log.i(Settings.tag,
                 "Coordinates found in .loc file: " + coords.size());
         return coords;
+    }
+
+    private static Geopoint parsePoint(String latitude, String longitude) {
+        // the loc file contains the coordinates as plain floating point values, therefore avoid using the GeopointParser
+        try {
+            return new Geopoint(Double.valueOf(latitude), Double.valueOf(longitude));
+        } catch (NumberFormatException e) {
+            Log.e(Settings.tag, "LOC format has changed");
+        }
+        // fall back to parser, just in case the format changes
+        return GeopointParser.parse(latitude, longitude);
     }
 
     public LocParser(int listId) {

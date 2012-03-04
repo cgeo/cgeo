@@ -6,6 +6,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -222,5 +223,38 @@ public final class GCVote {
         final String result = cgBase.getResponseData(cgBase.request("http://gcvote.com/setVote.php", params, false, false, false));
 
         return result.trim().equalsIgnoreCase("ok");
+    }
+
+    public static void loadRatings(ArrayList<cgCache> caches) {
+        if (!Settings.isRatingWanted()) {
+            return;
+        }
+
+        final ArrayList<String> guids = new ArrayList<String>(caches.size());
+        for (final cgCache cache : caches) {
+            String guid = cache.getGuid();
+            if (StringUtils.isNotBlank(guid)) {
+                guids.add(guid);
+            }
+        }
+
+        try {
+            final Map<String, GCVoteRating> ratings = GCVote.getRating(guids, null);
+
+            if (MapUtils.isNotEmpty(ratings)) {
+                // save found cache coordinates
+                for (cgCache cache : caches) {
+                    if (ratings.containsKey(cache.getGuid())) {
+                        GCVoteRating rating = ratings.get(cache.getGuid());
+
+                        cache.setRating(rating.getRating());
+                        cache.setVotes(rating.getVotes());
+                        cache.setMyVote(rating.getMyVote());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.e(Settings.tag, "GCvote.loadRatings: " + e.toString());
+        }
     }
 }

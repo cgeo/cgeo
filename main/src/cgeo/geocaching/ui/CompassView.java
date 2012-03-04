@@ -184,7 +184,7 @@ public class CompassView extends View {
                     cacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
                 }
 
-                changeHandler.sendMessage(new Message());
+                changeHandler.sendMessage(Message.obtain());
             }
         }
     }

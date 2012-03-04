@@ -422,7 +422,7 @@ public class cgeonavigate extends AbstractActivity {
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
                 if (handler != null) {
-                    handler.sendMessage(new Message());
+                    handler.sendMessage(Message.obtain());
                 }
 
                 try {

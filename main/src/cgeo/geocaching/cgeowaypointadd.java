@@ -266,7 +266,7 @@ public class cgeowaypointadd extends AbstractActivity {
             try {
                 waypoint = app.loadWaypoint(id);
 
-                loadWaypointHandler.sendMessage(new Message());
+                loadWaypointHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
                 Log.e(Settings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
             }

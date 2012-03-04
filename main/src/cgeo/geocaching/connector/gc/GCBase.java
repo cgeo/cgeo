@@ -462,9 +462,9 @@ public class GCBase {
      */
     private static int[] splitJSONKey(String key) {
         // two possible positions for the ,
-        int seperator = key.charAt(2) == ',' ? 2 : 3;
-        int x = Integer.parseInt(key.substring(1, seperator));
-        int y = Integer.parseInt(key.substring(seperator + 2, key.length() - 1));
+        int separator = key.charAt(2) == ',' ? 2 : 3;
+        int x = Integer.parseInt(key.substring(1, separator));
+        int y = Integer.parseInt(key.substring(separator + 2, key.length() - 1));
         return new int[] { x, y };
     }
 

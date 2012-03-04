@@ -17,8 +17,8 @@ import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.DecryptTextClickListener;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -781,7 +781,7 @@ public class CacheDetailActivity extends AbstractActivity {
         @Override
         public void run() {
             search = cgBase.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
-            handler.sendMessage(new Message());
+            handler.sendMessage(Message.obtain());
         }
     }
 
