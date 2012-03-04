@@ -38,7 +38,10 @@ public class GCConnector extends AbstractConnector {
 
     @Override
     public boolean canHandle(String geocode) {
-        return StringUtils.startsWithIgnoreCase(geocode, "GC");
+        if (geocode == null) {
+            return false;
+        }
+        return GCConstants.PATTERN_GC_CODE.matcher(geocode).matches();
     }
 
     @Override

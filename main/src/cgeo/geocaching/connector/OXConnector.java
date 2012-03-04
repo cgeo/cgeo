@@ -2,7 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.cgCache;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.regex.Pattern;
 
 /**
  * connector for OpenCaching.com
@@ -10,9 +10,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class OXConnector extends AbstractConnector {
 
+    private static final Pattern PATTERN_GEOCODE = Pattern.compile("OX[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
+
     @Override
     public boolean canHandle(String geocode) {
-        return StringUtils.startsWithIgnoreCase(geocode, "OX");
+        return PATTERN_GEOCODE.matcher(geocode).matches();
     }
 
     @Override

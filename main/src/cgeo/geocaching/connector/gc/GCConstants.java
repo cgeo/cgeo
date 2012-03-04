@@ -143,8 +143,8 @@ public final class GCConstants {
     /**
      * Patterns for GC and TB codes
      */
-    public final static Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z]*", Pattern.CASE_INSENSITIVE);
-    public final static Pattern PATTERN_TB_CODE = Pattern.compile("TB[0-9A-Z]*", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_TB_CODE = Pattern.compile("TB[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
 
     /** Live Map since 14.02.2012 */
     public final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");

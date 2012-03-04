@@ -21,7 +21,7 @@ public class cgBaseTest extends AndroidTestCase {
     public static void testRegEx() {
         String page = MockedCache.readCachePage("GC2CJPF");
         assertEquals("blafoo", BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
-        assertEquals("Premium Member", BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"));
+        assertTrue(page.contains("id=\"ctl00_hlRenew\"") || "Premium Member".equals(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???")));
         int cachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
         assertTrue(cachesFound >= 491);
     }
