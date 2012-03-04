@@ -59,7 +59,6 @@ public class cgBaseTest extends AndroidTestCase {
         assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
         assertEquals(expected.isFound(), actual.isFound());
         assertEquals(expected.isFavorite(), actual.isFavorite());
-        System.out.println(expected.getFavoritePoints() + " " + actual.getFavoritePoints());
         assertTrue(expected.getFavoritePoints() <= actual.getFavoritePoints());
         assertEquals(expected.isWatchlist(), actual.isWatchlist());
         assertEquals(expected.getHiddenDate().toString(), actual.getHiddenDate().toString());

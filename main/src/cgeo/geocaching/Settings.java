@@ -204,10 +204,8 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 if (StringUtils.isBlank(memberStatus)) {
-                    // erase password
                     edit.remove(KEY_MEMBER_STATUS);
                 } else {
-                    // save password
                     edit.putString(KEY_MEMBER_STATUS, memberStatus);
                 }
             }
