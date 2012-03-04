@@ -427,7 +427,7 @@
   <string name="init_default_navigation_tool">Standardnavigation</string>
   <string name="init_default_navigation_tool_description">Hier kannst du dein bevorzugtes Navigationswerkzeug festlegen.</string>
   <string name="init_default_navigation_tool_select">Wähle Werkzeug</string>
-  <string name="init_default_navigation_tool_2_description">Hier kannst du dein zweites bevorzugtes Navigationswerkzeug festlegen. Es ist durch langen Klick auf das Navigationssymbol in der Actionbar erreichbar.</string>
+  <string name="init_default_navigation_tool_2_description">Hier kannst du dein zweites bevorzugtes Navigationswerkzeug festlegen. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
   
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
