@@ -117,14 +117,6 @@
   <string name="log_new_log_text">Loggtext</string>
   <string name="log_announcement">Kungörelse</string>
 
-  <!-- copy -->
-  <string name="options_context_menu_title">Välj</string>
-  <string name="copy_coords">Kopiera koordinaten</string>
-  <string name="copy_desc">Kopiera beskrivningen</string>
-  <string name="copy_personalnote">Kopiera personliga anteckningen</string>
-  <string name="copy_hint">Kopiera hinten</string>
-  <string name="copy_log">Kopiera loggen</string>
-  
   <!-- translation -->
   <string name="translate_to_sys_lang">Översätt till %s</string>
   <string name="translate_to_english">Översätt till Engelska</string>

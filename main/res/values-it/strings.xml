@@ -118,14 +118,6 @@
   <string name="log_new_log_text">Testo Log</string>
   <string name="log_announcement">Annuncio</string>
 
-  <!-- copy -->
-  <string name="options_context_menu_title">Opzioni</string>
-  <string name="copy_coords">Copia Coordinate</string>
-  <string name="copy_desc">Copia Descrizione</string>
-  <string name="copy_personalnote">Copia Note Personali</string>
-  <string name="copy_hint">Copia Aiuto</string>
-  <string name="copy_log">Copia Log</string>
-  
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduci in %s</string>
   <string name="translate_to_english">Traduci in inglese</string>

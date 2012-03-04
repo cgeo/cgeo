@@ -116,14 +116,6 @@
   <string name="log_new_log_text">Text logu</string>
   <string name="log_announcement">Oznámenie</string>
 
-  <!-- copy -->
-  <string name="options_context_menu_title">Možnosti</string>
-  <string name="copy_coords">Kopírovať súradnice</string>
-  <string name="copy_desc">Kopírovať popis</string>
-  <string name="copy_personalnote">Kopírovať vlastnú poznámku</string>
-  <string name="copy_hint">Kopírovať nápovedu</string>
-  <string name="copy_log">Kopírovať log</string>
-
   <!-- translation -->
   <string name="translate_to_sys_lang">Preložiť do jazyka %s</string>
   <string name="translate_to_english">Preložiť do angličtiny</string>

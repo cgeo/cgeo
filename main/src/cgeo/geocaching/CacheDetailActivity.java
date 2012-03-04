@@ -380,11 +380,11 @@ public class CacheDetailActivity extends AbstractActivity {
         switch (viewId) {
             case R.id.value: // coordinates
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_coords), true);
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_coordinates), true);
                 break;
             case R.id.shortdesc:
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_desc), false);
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_description), false);
                 break;
             case R.id.longdesc:
                 // combine short and long description
@@ -394,19 +394,19 @@ public class CacheDetailActivity extends AbstractActivity {
                 } else {
                     clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
                 }
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_desc), false);
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_description), false);
                 break;
             case R.id.personalnote:
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_personalnote), true);
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_personal_note), true);
                 break;
             case R.id.hint:
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_hint), false);
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_hint), false);
                 break;
             case R.id.log:
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_log), false);
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_logs), false);
                 break;
             case -1:
                 if (null != cache.getWaypoints()) {
@@ -442,9 +442,9 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
-    private void buildOptionsContextmenu(ContextMenu menu, int viewId, String copyPrompt, boolean copyOnly) {
-        menu.setHeaderTitle(res.getString(R.string.options_context_menu_title));
-        menu.add(viewId, MENU_FIELD_COPY, 0, copyPrompt);
+    private void buildOptionsContextmenu(ContextMenu menu, int viewId, String fieldTitle, boolean copyOnly) {
+        menu.setHeaderTitle(fieldTitle);
+        menu.add(viewId, MENU_FIELD_COPY, 0, res.getString(android.R.string.copy));
         if (!copyOnly) {
             if (clickedItemText.length() > TranslationUtils.translationTextLengthToWarn) {
                 showToast(res.getString(R.string.translate_length_warning));
