@@ -3,6 +3,7 @@ package cgeo.geocaching.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Message;
+import android.view.WindowManager;
 
 /**
  * progress dialog wrapper for easier management of resources
@@ -41,6 +42,7 @@ public class Progress {
             } else {
                 dialog.setCancelable(false);
             }
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             dialog.show();
         }
     }
