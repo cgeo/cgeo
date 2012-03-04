@@ -23,7 +23,7 @@ public class HumanDistance {
                 return String.format("%.2f", Double.valueOf(Math.round(distanceKilometers * 1000.0 * 100.0) / 100.0)) + " m";
             }
         } else {
-            final float miles = distanceKilometers / IConversion.miles2km;
+            final float miles = distanceKilometers / IConversion.MILES_TO_KILOMETER;
             if (distanceKilometers > 100) {
                 return String.format("%d", Math.round(miles)) + " mi";
             } else if (distanceKilometers > 0.5) {

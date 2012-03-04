@@ -57,6 +57,10 @@ public class cgData {
             "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon", "coordsChanged", "finalDefined"
             // reason is replaced by listId in cgCache
     };
+
+    /** Number of days (as ms) after temporarily saved caches are deleted */
+    private static long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
+
     /**
      * holds the column indexes of the cache table to avoid lookups
      */
@@ -1001,7 +1005,7 @@ public class cgData {
         List<String> list = new ArrayList<String>();
 
         try {
-            long timestamp = System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED;
+            long timestamp = System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
             cursor = databaseRO.query(
                     dbTableCaches,
                     new String[] { "geocode" },
@@ -1102,12 +1106,12 @@ public class cgData {
                 return false;
             }
 
-            if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED)) {
+            if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
                 // we want to check time for detailed cache, but data are older than 3 hours
                 return false;
             }
 
-            if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED)) {
+            if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
                 // we want to check time for short cache, but data are older than 3 hours
                 return false;
             }
@@ -2925,7 +2929,7 @@ public class cgData {
                         null,
                         null);
             } else {
-                long timestamp = System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED;
+                long timestamp = System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
                 String timestampString = Long.toString(timestamp);
                 cursor = databaseRO.query(
                         dbTableCaches,

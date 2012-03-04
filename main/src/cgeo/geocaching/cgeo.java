@@ -9,7 +9,9 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.ui.Formatter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -73,17 +75,17 @@ public class cgeo extends AbstractActivity {
 
             TextView userInfoView = (TextView) findViewById(R.id.user_info);
 
-            String userInfo = "geocaching.com" + Constants.SEPARATOR;
+            StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
             if (cgBase.isActualLoginStatus()) {
-                userInfo += cgBase.getActualUserName();
+                userInfo.append(cgBase.getActualUserName());
                 if (cgBase.getActualCachesFound() >= 0) {
-                    userInfo += " (" + String.valueOf(cgBase.getActualCachesFound()) + ")";
+                    userInfo.append(" (").append(String.valueOf(cgBase.getActualCachesFound())).append(')');
                 }
-                userInfo += Constants.SEPARATOR;
+                userInfo.append(Formatter.SEPARATOR);
             }
-            userInfo += cgBase.getActualStatus();
+            userInfo.append(cgBase.getActualStatus());
 
-            userInfoView.setText(userInfo);
+            userInfoView.setText(userInfo.toString());
         }
     };
 
@@ -600,7 +602,7 @@ public class cgeo extends AbstractActivity {
                         if (Settings.isUseMetricUnits()) {
                             navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * Constants.M2FT) + " ft");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * IConversion.METERS_TO_FEET) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);

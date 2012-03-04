@@ -2,6 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.opencaching.ApiOpenCachingConnector;
 import cgeo.geocaching.connector.opencaching.OpenCachingConnector;
 import cgeo.geocaching.geopoint.Geopoint;

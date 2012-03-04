@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.connector.gc;
 
 import java.util.regex.Pattern;
 
@@ -149,4 +149,10 @@ public final class GCConstants {
     /** Live Map since 14.02.2012 */
     public final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
     public final static Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
+    /** Number of logs to retrieve from GC.com */
+    public final static int NUMBER_OF_LOGS = 35;
+
+    private GCConstants() {
+        // this class shall not have instances
+    }
 }

@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;

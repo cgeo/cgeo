@@ -86,7 +86,7 @@ public class ScaleOverlay implements GeneralOverlay {
                 units = "m";
             }
         } else {
-            distance /= IConversion.miles2km;
+            distance /= IConversion.MILES_TO_KILOMETER;
 
             if (distance > 100) { // 100+ mi > 1xx mi
                 distanceRound = Math.floor(distance / 100) * 100;

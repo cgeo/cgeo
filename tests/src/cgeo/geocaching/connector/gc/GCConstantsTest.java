@@ -1,5 +1,6 @@
-package cgeo.geocaching;
+package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.BaseUtils;
 

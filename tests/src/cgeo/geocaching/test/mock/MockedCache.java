@@ -1,9 +1,9 @@
 package cgeo.geocaching.test.mock;
 
-import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;

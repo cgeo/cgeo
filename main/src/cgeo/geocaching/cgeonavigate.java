@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.CompassView;
 
@@ -366,7 +367,7 @@ public class cgeonavigate extends AbstractActivity {
                         if (Settings.isUseMetricUnits()) {
                             navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * Constants.M2FT) + " ft");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * IConversion.METERS_TO_FEET) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);

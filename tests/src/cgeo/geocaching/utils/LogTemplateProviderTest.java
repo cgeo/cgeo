@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.utils;
 
 import cgeo.geocaching.utils.LogTemplateProvider;
 

@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;

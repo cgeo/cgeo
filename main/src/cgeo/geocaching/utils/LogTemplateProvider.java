@@ -1,9 +1,9 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
+import cgeo.geocaching.connector.gc.GCConstants;
 
 import org.apache.commons.lang3.StringUtils;
 

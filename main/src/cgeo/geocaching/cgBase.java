@@ -3,7 +3,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.GCConnector;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -143,6 +144,9 @@ public class cgBase {
     private static String actualMemberStatus = "";
     private static int actualCachesFound = -1;
     private static String actualStatus = "";
+
+    /** User agent id */
+    public final static String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
 
     private cgBase() {
         //initialize(app);
@@ -1155,7 +1159,7 @@ public class cgBase {
             final Parameters params = new Parameters(
                     "tkn", userToken,
                     "idx", "1",
-                    "num", String.valueOf(Constants.NUMBER_OF_LOGS),
+                    "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
                     "decrypt", "true",
                     // "sp", Boolean.toString(personal), // personal logs
                     "sf", Boolean.toString(friends));
@@ -2420,7 +2424,7 @@ public class cgBase {
     private static HttpResponse request(final HttpRequestBase request) {
         request.setHeader("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
         request.setHeader("Accept-Language", "en-US,*;q=0.9");
-        request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Constants.USER_AGENT);
+        request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, cgBase.USER_AGENT);
         return doRequest(request);
     }
 

@@ -35,12 +35,12 @@ public final class DistanceParser {
             return value;
         }
         if (unit.equals("yd")) {
-            return value * IConversion.yards2km;
+            return value * IConversion.YARDS_TO_KILOMETER;
         }
         if (unit.equals("mi")) {
-            return value * IConversion.miles2km;
+            return value * IConversion.MILES_TO_KILOMETER;
         }
-        return value * IConversion.feet2km;
+        return value * IConversion.FEET_TO_KILOMETER;
     }
 
 }

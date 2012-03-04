@@ -1,13 +1,12 @@
-package cgeo.geocaching.connector;
+package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.Constants;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.connector.gc.GCBase;
+import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -98,7 +97,7 @@ public class GCConnector extends AbstractConnector {
             params.put("guid", guid);
         }
         params.put("log", "y");
-        params.put("numlogs", String.valueOf(Constants.NUMBER_OF_LOGS));
+        params.put("numlogs", String.valueOf(GCConstants.NUMBER_OF_LOGS));
 
         cgBase.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 

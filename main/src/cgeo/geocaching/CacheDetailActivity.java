@@ -14,8 +14,10 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -739,7 +741,7 @@ public class CacheDetailActivity extends AbstractActivity {
                             dist.append(Math.abs((int) diff));
                             dist.append(" m");
                         } else {
-                            dist.append(Math.abs((int) (diff * Constants.M2FT)));
+                            dist.append(Math.abs((int) (diff * IConversion.METERS_TO_FEET)));
                             dist.append(" ft");
                         }
                     }
@@ -2427,7 +2429,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                     if (CollectionUtils.isNotEmpty(infoTextList)) {
                         final TextView infoView = (TextView) waypointView.findViewById(R.id.info);
-                        infoView.setText(StringUtils.join(infoTextList, " · "));
+                        infoView.setText(StringUtils.join(infoTextList, Formatter.SEPARATOR));
                         infoView.setVisibility(View.VISIBLE);
                     }
 
