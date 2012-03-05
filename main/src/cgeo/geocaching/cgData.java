@@ -1960,7 +1960,7 @@ public class cgData {
                         if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
                             final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(waypoints)) {
-                                cache.setWaypoints(waypoints);
+                                cache.setWaypoints(waypoints, false);
                             }
                         }
 

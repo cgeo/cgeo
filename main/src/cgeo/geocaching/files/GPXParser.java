@@ -320,7 +320,7 @@ public abstract class GPXParser extends FileParser {
                         mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
 
                         cgWaypoint.mergeWayPoints(mergedWayPoints, Collections.singletonList(waypoint), true);
-                        cacheForWaypoint.setWaypoints(mergedWayPoints);
+                        cacheForWaypoint.setWaypoints(mergedWayPoints, false);
                         result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
                         showProgressMessage(progressHandler, progressStream.getProgress());
                     }

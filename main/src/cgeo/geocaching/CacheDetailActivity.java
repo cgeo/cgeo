@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
@@ -503,11 +504,13 @@ public class CacheDetailActivity extends AbstractActivity {
                 break;
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
                 if (cache.duplicateWaypoint(index)) {
+                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DELETE:
                 if (cache.deleteWaypoint(index)) {
+                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;

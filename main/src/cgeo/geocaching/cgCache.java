@@ -923,7 +923,15 @@ public class cgCache implements ICache {
         return Collections.unmodifiableList(waypoints);
     }
 
-    public void setWaypoints(List<cgWaypoint> waypoints) {
+    /**
+     * @param waypoints
+     *            List of waypoints to set for cache
+     * @param saveToDatabase
+     *            Indicates whether to add the waypoints to the database. Should be false if
+     *            called while loading or building a cache
+     * @return <code>true</code> if waypoints successfully added to waypoint database
+     */
+    public boolean setWaypoints(List<cgWaypoint> waypoints, boolean saveToDatabase) {
         this.waypoints = waypoints;
         finalDefined = false;
         if (waypoints != null) {
@@ -934,6 +942,12 @@ public class cgCache implements ICache {
                 }
             }
         }
+
+        if (saveToDatabase) {
+            return cgeoapplication.getInstance().saveWaypoints(geocode, waypoints, false);
+        }
+
+        return false;
     }
 
     public List<cgLog> getLogs() {
@@ -1128,15 +1142,51 @@ public class cgCache implements ICache {
         this.storageLocation.add(sl);
     }
 
-    public void addWaypoint(final cgWaypoint waypoint) {
+    /**
+     * @param waypoint
+     *            Waypoint to add to the cache
+     * @param saveToDatabase
+     *            Indicates whether to add the waypoint to the database. Should be false if
+     *            called while loading or building a cache
+     * @return <code>true</code> if waypoint successfully added to waypoint database
+     */
+    public boolean addWaypoint(final cgWaypoint waypoint, boolean saveToDatabase) {
         if (null == waypoints) {
             waypoints = new ArrayList<cgWaypoint>();
         }
-        waypoints.add(waypoint);
+
         waypoint.setGeocode(geocode);
-        if (waypoint.isFinalWithCoords()) {
-            finalDefined = true;
+
+        if (waypoint.getId() <= 0) { // this is a new waypoint
+            waypoints.add(waypoint);
+            if (waypoint.isFinalWithCoords()) {
+                finalDefined = true;
+            }
+        } else { // this is a waypoint being edited
+            int index = 0;
+            for (cgWaypoint wp : waypoints) { // remove old version of waypoint
+                if (wp.getId() == waypoint.getId()) {
+                    waypoints.remove(index);
+                    break;
+                }
+                index++;
+            }
+            waypoints.add(waypoint);
+            // when waypoint was edited, finalDefined may have changed. check all waypoints and set again
+            finalDefined = false;
+            for (cgWaypoint wp : waypoints) {
+                if (wp.isFinalWithCoords()) {
+                    finalDefined = true;
+                    break;
+                }
+            }
         }
+
+        if (saveToDatabase) {
+            return cgeoapplication.getInstance().saveOwnWaypoint(waypoint.getId(), geocode, waypoint);
+        }
+
+        return false;
     }
 
     public boolean hasWaypoints() {
@@ -1189,6 +1239,7 @@ public class cgCache implements ICache {
      * delete a user defined waypoint
      *
      * @param index
+     *            of the waypoint in cache's waypoint list
      * @return <code>true</code>, if the waypoint was deleted
      */
     public boolean deleteWaypoint(int index) {
@@ -1212,6 +1263,30 @@ public class cgCache implements ICache {
             }
             return true;
         }
+        return false;
+    }
+
+    /**
+     * delete a user defined waypoint
+     *
+     * @param waypoint
+     *            to be removed from cache
+     * @return <code>true</code>, if the waypoint was deleted
+     */
+    public boolean deleteWaypoint(cgWaypoint waypoint) {
+        if (waypoint.getId() <= 0) {
+            return false;
+        }
+
+        int index = 0;
+
+        for (cgWaypoint wp : waypoints) {
+            if (wp.getId() == waypoint.getId()) {
+                return deleteWaypoint(index);
+            }
+            index++;
+        }
+
         return false;
     }
 
@@ -1256,7 +1331,7 @@ public class cgCache implements ICache {
                         final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
                         final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT, false);
                         waypoint.setCoords(point);
-                        addWaypoint(waypoint);
+                        addWaypoint(waypoint, false);
                         count++;
                     }
                 } catch (GeopointParser.ParseException e) {
