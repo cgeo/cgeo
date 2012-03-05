@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.concurrent.BlockingThreadPool;
+import cgeo.geocaching.concurrent.Task;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
@@ -14,13 +16,14 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 public class StaticMapsProvider {
     private static final String MARKERS_URL = "http://cgeo.carnero.cc/_markers/";
-    /**
-     * in my tests the "no image available" image had 5470 bytes, while "street only" maps had at least 20000 bytes
-     */
+    /** In my tests the "no image available" image had 5470 bytes, while "street only" maps had at least 20000 bytes */
     private static final int MIN_MAP_IMAGE_BYTES = 6000;
+    /** ThreadPool restricting this to 1 Thread. **/
+    private static final BlockingThreadPool pool = new BlockingThreadPool(1, Thread.MIN_PRIORITY);
 
     public static File getMapFile(final String geocode, String prefix, final int level, final boolean createDirs) {
         return LocalStorage.getStorageFile(geocode, "map_" + prefix + level, false, createDirs);
@@ -51,12 +54,22 @@ public class StaticMapsProvider {
         }
     }
 
+    public static void downloadMaps(cgCache cache, cgeoapplication app) {
+        final Display display = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        downloadMaps(cache, display);
+    }
+
     public static void downloadMaps(cgCache cache, Activity activity) {
+        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        downloadMaps(cache, display);
+    }
+
+    public static void downloadMaps(cgCache cache, Display display) {
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
 
-        int edge = guessMinDisplaySide(activity);
+        int edge = guessMinDisplaySide(display);
 
         if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
             storeCacheStaticMap(cache, edge, false);
@@ -110,8 +123,7 @@ public class StaticMapsProvider {
         downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints.toString(), waitForResult);
     }
 
-    private static int guessMinDisplaySide(Activity activity) {
-        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+    private static int guessMinDisplaySide(Display display) {
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
         int edge = 0;
@@ -123,20 +135,27 @@ public class StaticMapsProvider {
         return edge;
     }
 
+    private static int guessMinDisplaySide(Activity activity) {
+        return guessMinDisplaySide(((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay());
+    }
+
     private static void downloadMaps(final cgCache cache, final String markerUrl, final String prefix, final String latlonMap, final int edge,
             final String waypoints, boolean waitForResult) {
         if (waitForResult) {
             downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
         }
         else {
-            Thread staticMapsThread = new Thread("getting static map") {
+            Task currentTask = new Task("getting static map") {
                 @Override
                 public void run() {
                     downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
                 }
             };
-            staticMapsThread.setPriority(Thread.MIN_PRIORITY);
-            staticMapsThread.start();
+            try {
+                pool.add(currentTask, 20, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                Log.e(Settings.tag, "StaticMapsProvider.downloadMaps error adding task: " + e.toString());
+            }
         }
     }
 

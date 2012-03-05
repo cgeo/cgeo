@@ -595,6 +595,7 @@
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Loading caches from .gpx file</string>
   <string name="gpx_import_loading_waypoints">Loading waypoints file</string>
+  <string name="gpx_import_store_static_maps">Storing static maps</string>
   <string name="gpx_import_storing">Writing caches to database</string>
   <string name="gpx_import_caches_imported">caches imported</string>
   <string name="gpx_import_title">Import GPX</string>

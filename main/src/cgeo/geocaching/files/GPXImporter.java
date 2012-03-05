@@ -3,10 +3,12 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -32,6 +34,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -41,10 +44,11 @@ public class GPXImporter {
     static final int IMPORT_STEP_READ_FILE = 1;
     static final int IMPORT_STEP_READ_WPT_FILE = 2;
     static final int IMPORT_STEP_STORE_CACHES = 3;
-    static final int IMPORT_STEP_FINISHED = 4;
-    static final int IMPORT_STEP_FINISHED_WITH_ERROR = 5;
-    static final int IMPORT_STEP_CANCEL = 6;
-    static final int IMPORT_STEP_CANCELED = 7;
+    static final int IMPORT_STEP_STORE_STATIC_MAPS = 4;
+    static final int IMPORT_STEP_FINISHED = 5;
+    static final int IMPORT_STEP_FINISHED_WITH_ERROR = 6;
+    static final int IMPORT_STEP_CANCEL = 7;
+    static final int IMPORT_STEP_CANCELED = 8;
 
     public static final String GPX_FILE_EXTENSION = ".gpx";
     public static final String ZIP_FILE_EXTENSION = ".zip";
@@ -140,6 +144,11 @@ public class GPXImporter {
                 SearchResult search = storeParsedCaches(caches);
                 Log.i(Settings.tag, "Imported successfully " + caches.size() + " caches.");
 
+                if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {
+                    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_STATIC_MAPS, R.string.gpx_import_store_static_maps, search.getCount()));
+                    importStaticMaps(search);
+                }
+
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED, search.getCount(), 0, search));
             } catch (IOException e) {
                 Log.i(Settings.tag, "Importing caches failed - error reading data: " + e.getMessage());
@@ -174,6 +183,21 @@ public class GPXImporter {
                 progressHandler.sendMessage(progressHandler.obtainMessage(0, storedCaches, 0));
             }
             return search;
+        }
+
+        private void importStaticMaps(final SearchResult importedCaches) {
+            final cgeoapplication app = cgeoapplication.getInstance();
+            Set<cgCache> caches = importedCaches.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+            int storedCacheMaps = 0;
+            for (cgCache cache : caches) {
+                Log.d(Settings.tag, "GPXImporter.ImportThread.importStaticMaps start downloadMaps");
+                StaticMapsProvider.downloadMaps(cache, app);
+                storedCacheMaps++;
+                if (progressHandler.isCancelled()) {
+                    throw new CancellationException();
+                }
+                progressHandler.sendMessage(progressHandler.obtainMessage(0, storedCacheMaps, 0));
+            }
         }
     }
 
@@ -363,6 +387,11 @@ public class GPXImporter {
                 case IMPORT_STEP_READ_FILE:
                 case IMPORT_STEP_READ_WPT_FILE:
                 case IMPORT_STEP_STORE_CACHES:
+                    progress.setMessage(res.getString(msg.arg1));
+                    progress.setMaxProgressAndReset(msg.arg2);
+                    break;
+
+                case IMPORT_STEP_STORE_STATIC_MAPS:
                     progress.setMessage(res.getString(msg.arg1));
                     progress.setMaxProgressAndReset(msg.arg2);
                     break;
