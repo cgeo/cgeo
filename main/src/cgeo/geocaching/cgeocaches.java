@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -135,6 +136,9 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_NAVIGATION = 69;
     private static final int MENU_FILTER_MODIFIED = 70;
 
+    private static final int MSG_DONE = -1;
+    private static final int MSG_CANCEL = -99;
+
     private String action = null;
     private CacheListType type = null;
     private Geopoint coords = null;
@@ -148,7 +152,7 @@ public class cgeocaches extends AbstractListActivity {
     private LayoutInflater inflater = null;
     private View listFooter = null;
     private TextView listFooterText = null;
-    private ProgressDialog waitDialog = null;
+    private Progress progress = new Progress();
     private Float northHeading = 0f;
     private cgGeo geo = null;
     private cgDirection dir = null;
@@ -316,24 +320,34 @@ public class cgeocaches extends AbstractListActivity {
             setAdapter();
 
             if (msg.what > -1) {
-                if (waitDialog != null) {
-                    cacheList.get(msg.what).setStatusChecked(false);
+                cacheList.get(msg.what).setStatusChecked(false);
 
-                    if (adapter != null) {
-                        adapter.notifyDataSetChanged();
-                    }
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
 
-                    int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                    int minutesRemaining = ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
+                int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
+                int minutesRemaining = ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
 
-                    waitDialog.setProgress(detailProgress);
-                    if (minutesRemaining < 1) {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-                    } else if (minutesRemaining == 1) {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_min));
-                    } else {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_mins));
-                    }
+                progress.setProgress(detailProgress);
+                if (minutesRemaining < 1) {
+                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+                } else if (minutesRemaining == 1) {
+                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_min));
+                } else {
+                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_mins));
+                }
+            } else if (msg.what == MSG_CANCEL) {
+                if (threadDetails != null) {
+                    threadDetails.kill();
+                }
+
+                // TODO: does this make sense? kill results in DONE
+                if (geo == null) {
+                    geo = app.startGeo(geoUpdate);
+                }
+                if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
+                    dir = app.startDir(cgeocaches.this, dirUpdate);
                 }
             } else {
                 if (cacheList != null && search != null) {
@@ -352,10 +366,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
 
                 showProgress(false);
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                    waitDialog.setOnCancelListener(null);
-                }
+                progress.dismiss();
 
                 if (geo == null) {
                     geo = app.startGeo(geoUpdate);
@@ -376,28 +387,34 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             if (msg.what == 0) { //no caches
-                waitDialog.setMessage(res.getString(R.string.web_import_waiting));
+                progress.setMessage(res.getString(R.string.web_import_waiting));
             } else if (msg.what == 1) { //cache downloading
-                waitDialog.setMessage(res.getString(R.string.web_downloading) + " " + (String) msg.obj + "...");
+                progress.setMessage(res.getString(R.string.web_downloading) + " " + (String) msg.obj + "...");
             } else if (msg.what == 2) { //Cache downloaded
-                waitDialog.setMessage(res.getString(R.string.web_downloaded) + " " + (String) msg.obj + ".");
+                progress.setMessage(res.getString(R.string.web_downloaded) + " " + (String) msg.obj + ".");
                 refreshCurrentList();
             } else if (msg.what == -2) {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                    waitDialog.setOnCancelListener(null);
-                }
+                progress.dismiss();
                 showToast(res.getString(R.string.sendToCgeo_download_fail));
                 finish();
                 return;
             } else if (msg.what == -3) {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                    waitDialog.setOnCancelListener(null);
-                }
+                progress.dismiss();
                 showToast(res.getString(R.string.sendToCgeo_no_registration));
                 finish();
                 return;
+            } else if (msg.what == MSG_CANCEL) {
+                if (threadWeb != null) {
+                    threadWeb.kill();
+                }
+
+                // TODO: why on CANCEL and not on DONE?
+                if (geo == null) {
+                    geo = app.startGeo(geoUpdate);
+                }
+                if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
+                    dir = app.startDir(cgeocaches.this, dirUpdate);
+                }
             } else {
                 if (adapter != null) {
                     adapter.setSelectMode(false, true);
@@ -413,10 +430,7 @@ public class cgeocaches extends AbstractListActivity {
                     Collections.sort(cacheList, gcComparator);
                 }
 
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                    waitDialog.setOnCancelListener(null);
-                }
+                progress.dismiss();
             }
         }
     };
@@ -424,25 +438,28 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            if (adapter != null) {
-                adapter.setSelectMode(false, true);
-            }
+            if (msg.what == MSG_CANCEL) {
+                if (threadR != null) {
+                    threadR.kill();
+                }
+            } else {
+                if (adapter != null) {
+                    adapter.setSelectMode(false, true);
+                }
 
-            refreshCurrentList();
+                refreshCurrentList();
 
-            cacheList.clear();
+                cacheList.clear();
 
-            final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            if (CollectionUtils.isNotEmpty(cacheListTmp)) {
-                cacheList.addAll(cacheListTmp);
-                cacheListTmp.clear();
+                final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                if (CollectionUtils.isNotEmpty(cacheListTmp)) {
+                    cacheList.addAll(cacheListTmp);
+                    cacheListTmp.clear();
 
-                Collections.sort(cacheList, gcComparator);
-            }
+                    Collections.sort(cacheList, gcComparator);
+                }
 
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-                waitDialog.setOnCancelListener(null);
+                progress.dismiss();
             }
         }
     };
@@ -454,7 +471,11 @@ public class cgeocaches extends AbstractListActivity {
 
             if (msg.what > -1) {
                 cacheList.get(msg.what).setStatusChecked(false);
-                waitDialog.setProgress(detailProgress);
+                progress.setProgress(detailProgress);
+            } else if (msg.what == MSG_CANCEL) {
+                if (threadH != null) {
+                    threadH.kill();
+                }
             } else {
                 if (adapter != null) {
                     adapter.setSelectMode(false, true);
@@ -463,10 +484,7 @@ public class cgeocaches extends AbstractListActivity {
                 // reload history list
                 (new LoadByHistoryThread(loadCachesHandler)).start();
 
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                    waitDialog.setOnCancelListener(null);
-                }
+                progress.dismiss();
             }
         }
     };
@@ -480,7 +498,7 @@ public class cgeocaches extends AbstractListActivity {
             if (msg.what > -1)
             {
                 cacheList.get(msg.what).setStatusChecked(false);
-                waitDialog.setProgress(detailProgress);
+                progress.setProgress(detailProgress);
             }
             else if (-2 == msg.what)
             {
@@ -489,19 +507,17 @@ public class cgeocaches extends AbstractListActivity {
             else if (-3 == msg.what)
             {
                 showToast(res.getString(R.string.err_fieldnotes_export_failed));
-            }
-            else
-            {
+            } else if (msg.what == MSG_CANCEL) {
+                if (threadF != null) {
+                    threadF.kill();
+                }
+            } else {
                 if (adapter != null)
                 {
                     adapter.setSelectMode(false, true);
                 }
 
-                if (waitDialog != null)
-                {
-                    waitDialog.dismiss();
-                    waitDialog.setOnCancelListener(null);
-                }
+                progress.dismiss();
             }
         }
     };
@@ -1448,39 +1464,19 @@ public class cgeocaches extends AbstractListActivity {
         detailProgress = 0;
 
         showProgress(false);
-        waitDialog = new ProgressDialog(this);
-        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
-            public void onCancel(DialogInterface arg0) {
-                try {
-                    if (threadDetails != null) {
-                        threadDetails.kill();
-                    }
-
-                    if (geo == null) {
-                        geo = app.startGeo(geoUpdate);
-                    }
-                    if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-                        dir = app.startDir(cgeocaches.this, dirUpdate);
-                    }
-                } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.onOptionsItemSelected.onCancel: " + e.toString());
-                }
-            }
-        });
-
-        waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         int etaTime = ((detailTotal * 25) / 60);
+        String message;
         if (etaTime < 1) {
-            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+            message = res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
         } else if (etaTime == 1) {
-            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_min));
+            message = res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_min);
         } else {
-            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_mins));
+            message = res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_mins);
         }
-        waitDialog.setCancelable(true);
-        waitDialog.setMax(detailTotal);
-        waitDialog.show();
+
+        progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.obtainMessage(MSG_CANCEL));
+        progress.setMaxProgressAndReset(detailTotal);
 
         detailProgressTime = System.currentTimeMillis();
 
@@ -1526,30 +1522,8 @@ public class cgeocaches extends AbstractListActivity {
         detailProgress = 0;
 
         showProgress(false);
-        waitDialog = new ProgressDialog(this);
-        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            public void onCancel(DialogInterface arg0)
-            {
-                try
-                {
-                    if (threadH != null)
-                    {
-                        threadH.kill();
-                    }
-                } catch (Exception e)
-                {
-                    Log.e(Settings.tag, "cgeocaches.removeFromHistory.onCancel: " + e.toString());
-                }
-            }
-        });
-
-        waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        waitDialog.setMessage(res.getString(R.string.caches_removing_from_history));
-
-        waitDialog.setCancelable(true);
-        waitDialog.setMax(detailTotal);
-        waitDialog.show();
+        progress.show(this, null, res.getString(R.string.caches_removing_from_history), ProgressDialog.STYLE_HORIZONTAL, removeFromHistoryHandler.obtainMessage(MSG_CANCEL));
+        progress.setMaxProgressAndReset(detailTotal);
 
         threadH = new RemoveFromHistoryThread(removeFromHistoryHandler);
         threadH.start();
@@ -1570,30 +1544,9 @@ public class cgeocaches extends AbstractListActivity {
         detailProgress = 0;
 
         showProgress(false);
-        waitDialog = new ProgressDialog(this);
-        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
-            public void onCancel(DialogInterface arg0)
-            {
-                try
-                {
-                    if (threadF != null)
-                    {
-                        threadF.kill();
-                    }
-                } catch (Exception e)
-                {
-                    Log.e(Settings.tag, "cgeocaches.exportFieldNotes.onCancel: " + e.toString());
-                }
-            }
-        });
-
-        waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        waitDialog.setMessage(res.getString(R.string.caches_exporting_fieldnote));
-
-        waitDialog.setCancelable(true);
-        waitDialog.setMax(detailTotal);
-        waitDialog.show();
+        progress.show(this, null, res.getString(R.string.caches_exporting_fieldnote), ProgressDialog.STYLE_HORIZONTAL, exportFieldNotesHandler.obtainMessage(MSG_CANCEL));
+        progress.setMaxProgressAndReset(detailTotal);
 
         threadF = new ExportFieldNotesThread(exportFieldNotesHandler);
         threadF.start();
@@ -1603,31 +1556,7 @@ public class cgeocaches extends AbstractListActivity {
         detailProgress = 0;
 
         showProgress(false);
-        waitDialog = new ProgressDialog(this);
-        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            public void onCancel(DialogInterface arg0) {
-                try {
-                    if (threadWeb != null) {
-                        threadWeb.kill();
-                    }
-
-                    if (geo == null) {
-                        geo = app.startGeo(geoUpdate);
-                    }
-                    if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-                        dir = app.startDir(cgeocaches.this, dirUpdate);
-                    }
-                } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.importWeb.onCancel: " + e.toString());
-                }
-            }
-        });
-
-        waitDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        waitDialog.setMessage(res.getString(R.string.web_import_waiting));
-        waitDialog.setCancelable(true);
-        waitDialog.show();
+        progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.obtainMessage(MSG_CANCEL));
 
         threadWeb = new LoadFromWebThread(downloadFromWebHandler, listId);
         threadWeb.start();
@@ -1665,23 +1594,7 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     public void dropSelected() {
-        waitDialog = new ProgressDialog(this);
-        waitDialog.setMessage(res.getString(R.string.caches_drop_progress));
-        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            public void onCancel(DialogInterface arg0) {
-                try {
-                    if (threadR != null) {
-                        threadR.kill();
-                    }
-                } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.onOptionsItemSelected.onCancel: " + e.toString());
-                }
-            }
-        });
-
-        waitDialog.setCancelable(true);
-        waitDialog.show();
+        progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
 
         threadR = new DropDetailsThread(dropDetailsHandler);
         threadR.start();
@@ -1979,7 +1892,7 @@ public class cgeocaches extends AbstractListActivity {
             }
             cacheListTemp.clear();
 
-            handler.sendEmptyMessage(-1);
+            handler.sendEmptyMessage(MSG_DONE);
         }
     }
 
@@ -2080,7 +1993,7 @@ public class cgeocaches extends AbstractListActivity {
                     Log.e(Settings.tag, "cgeocaches.LoadFromWebThread.sleep: " + e.toString());
                 }
             }
-            handler.sendEmptyMessage(-1);
+            handler.sendEmptyMessage(MSG_DONE);
         }
     }
 
@@ -2132,7 +2045,7 @@ public class cgeocaches extends AbstractListActivity {
             }
             cacheListTemp.clear();
 
-            handler.sendEmptyMessage(-1);
+            handler.sendEmptyMessage(MSG_DONE);
         }
     }
 
@@ -2183,7 +2096,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             }
 
-            handler.sendEmptyMessage(-1);
+            handler.sendEmptyMessage(MSG_DONE);
         }
     }
 
@@ -2304,7 +2217,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             }
 
-            handler.sendEmptyMessage(-1);
+            handler.sendEmptyMessage(MSG_DONE);
         }
     }
 
