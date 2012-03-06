@@ -22,6 +22,7 @@ public class Progress {
     public synchronized void show(final Context context, final String title, final String message, final boolean indeterminate, final Message cancelMessage) {
         if (dialog == null) {
             dialog = ProgressDialog.show(context, title, message, indeterminate, cancelMessage != null);
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             dialog.setProgress(0);
             if (cancelMessage != null) {
                 dialog.setCancelMessage(cancelMessage);
