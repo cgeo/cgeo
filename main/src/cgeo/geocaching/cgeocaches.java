@@ -341,14 +341,6 @@ public class cgeocaches extends AbstractListActivity {
                 if (threadDetails != null) {
                     threadDetails.kill();
                 }
-
-                // TODO: does this make sense? kill results in DONE
-                if (geo == null) {
-                    geo = app.startGeo(geoUpdate);
-                }
-                if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-                    dir = app.startDir(cgeocaches.this, dirUpdate);
-                }
             } else {
                 if (cacheList != null && search != null) {
                     final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -368,12 +360,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(false);
                 progress.dismiss();
 
-                if (geo == null) {
-                    geo = app.startGeo(geoUpdate);
-                }
-                if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-                    dir = app.startDir(cgeocaches.this, dirUpdate);
-                }
+                startGeoAndDir();
             }
         }
     };
@@ -395,25 +382,17 @@ public class cgeocaches extends AbstractListActivity {
                 refreshCurrentList();
             } else if (msg.what == -2) {
                 progress.dismiss();
+                startGeoAndDir();
                 showToast(res.getString(R.string.sendToCgeo_download_fail));
                 finish();
-                return;
             } else if (msg.what == -3) {
                 progress.dismiss();
+                startGeoAndDir();
                 showToast(res.getString(R.string.sendToCgeo_no_registration));
                 finish();
-                return;
             } else if (msg.what == MSG_CANCEL) {
                 if (threadWeb != null) {
                     threadWeb.kill();
-                }
-
-                // TODO: why on CANCEL and not on DONE?
-                if (geo == null) {
-                    geo = app.startGeo(geoUpdate);
-                }
-                if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-                    dir = app.startDir(cgeocaches.this, dirUpdate);
                 }
             } else {
                 if (adapter != null) {
@@ -430,6 +409,7 @@ public class cgeocaches extends AbstractListActivity {
                     Collections.sort(cacheList, gcComparator);
                 }
 
+                startGeoAndDir();
                 progress.dismiss();
             }
         }
@@ -758,36 +738,21 @@ public class cgeocaches extends AbstractListActivity {
             adapter = null;
         }
 
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
+        removeGeoAndDir();
 
         super.onDestroy();
     }
 
     @Override
     public void onStop() {
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
+        removeGeoAndDir();
 
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
+        removeGeoAndDir();
 
         super.onPause();
     }
@@ -1420,13 +1385,7 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     private void init() {
-        // sensor & geolocation manager
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
-        if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-            dir = app.startDir(this, dirUpdate);
-        }
+        startGeoAndDir();
 
         if (CollectionUtils.isNotEmpty(cacheList)) {
             setMoreCaches();
@@ -1440,6 +1399,25 @@ public class cgeocaches extends AbstractListActivity {
         }
         if (dir != null) {
             dirUpdate.updateDirection(dir);
+        }
+    }
+
+    // sensor & geolocation manager
+    private void startGeoAndDir() {
+        if (geo == null) {
+            geo = app.startGeo(geoUpdate);
+        }
+        if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
+            dir = app.startDir(this, dirUpdate);
+        }
+    }
+
+    private void removeGeoAndDir() {
+        if (dir != null) {
+            dir = app.removeDir();
+        }
+        if (geo != null) {
+            geo = app.removeGeo();
         }
     }
 
@@ -1837,12 +1815,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            if (dir != null) {
-                dir = app.removeDir();
-            }
-            if (geo != null) {
-                geo = app.removeGeo();
-            }
+            removeGeoAndDir();
 
             final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
             for (cgCache cache : cacheListTemp) {
@@ -1915,24 +1888,15 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            if (dir != null) {
-                dir = app.removeDir();
-            }
-            if (geo != null) {
-                geo = app.removeGeo();
-            }
+            int ret = MSG_DONE;
+
+            removeGeoAndDir();
 
             int delay = -1;
             int times = 0;
 
-            while (times < 3 * 60 / 5) // maximum: 3 minutes, every 5 seconds
+            while (!needToStop && times < 3 * 60 / 5) // maximum: 3 minutes, every 5 seconds
             {
-                if (needToStop)
-                {
-                    handler.sendEmptyMessage(-1);
-                    break;
-                }
-
                 //download new code
                 String deviceCode = Settings.getWebDeviceCode();
                 if (deviceCode == null) {
@@ -1948,25 +1912,19 @@ public class cgeocaches extends AbstractListActivity {
                         String GCcode = response;
 
                         delay = 1;
-                        Message mes = Message.obtain();
-                        mes.what = 1;
-                        mes.obj = GCcode;
-                        handler.sendMessage(mes);
+                        handler.sendMessage(handler.obtainMessage(1, GCcode));
                         yield();
 
                         cgBase.storeCache(cgeocaches.this, null, GCcode, listIdLFW, null);
 
-                        Message mes1 = Message.obtain();
-                        mes1.what = 2;
-                        mes1.obj = GCcode;
-                        handler.sendMessage(mes1);
+                        handler.sendMessage(handler.obtainMessage(2, GCcode));
                         yield();
-                    } else if ("RG".equals(cgBase.getResponseData(responseFromWeb))) {
+                    } else if ("RG".equals(response)) {
                         //Server returned RG (registration) and this device no longer registered.
                         Settings.setWebNameCode(null, null);
+                        ret = -3;
                         needToStop = true;
-                        handler.sendEmptyMessage(-3);
-                        return;
+                        break;
                     } else {
                         delay = 0;
                         handler.sendEmptyMessage(0);
@@ -1974,9 +1932,9 @@ public class cgeocaches extends AbstractListActivity {
                     }
                 }
                 if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
+                    ret = -2;
                     needToStop = true;
-                    handler.sendEmptyMessage(-2);
-                    return;
+                    break;
                 }
 
                 try {
@@ -1993,7 +1951,8 @@ public class cgeocaches extends AbstractListActivity {
                     Log.e(Settings.tag, "cgeocaches.LoadFromWebThread.sleep: " + e.toString());
                 }
             }
-            handler.sendEmptyMessage(MSG_DONE);
+
+            handler.sendEmptyMessage(ret);
         }
     }
 
@@ -2019,12 +1978,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            if (dir != null) {
-                dir = app.removeDir();
-            }
-            if (geo != null) {
-                geo = app.removeGeo();
-            }
+            removeGeoAndDir();
 
             final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
             for (cgCache cache : cacheListTemp) {
