@@ -134,7 +134,7 @@ public class cgBaseTest extends AndroidTestCase {
 
     private static void assertWaypointsFromNote(final cgCache cache, Geopoint[] expected, String note) {
         cache.setPersonalNote(note);
-        cache.setWaypoints(new ArrayList<cgWaypoint>());
+        cache.setWaypoints(new ArrayList<cgWaypoint>(), false);
         cache.parseWaypointsFromNote();
         assertEquals(expected.length, cache.getWaypoints().size());
         for (int i = 0; i < expected.length; i++) {

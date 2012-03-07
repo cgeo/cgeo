@@ -2,7 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -319,12 +320,12 @@ public class cgeowaypoint extends AbstractActivity {
     private class deleteWaypointListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            if (app.deleteWaypoint(id)) {
-                String geocode = waypoint.getGeocode();
+            String geocode = waypoint.getGeocode();
+            cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+            if (null != cache && cache.deleteWaypoint(waypoint)) {
+                app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
-                if (!StringUtils.isEmpty(geocode)) {
-                    app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
-                }
 
                 finish();
                 return;
