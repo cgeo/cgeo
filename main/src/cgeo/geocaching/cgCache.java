@@ -1163,14 +1163,8 @@ public class cgCache implements ICache {
                 finalDefined = true;
             }
         } else { // this is a waypoint being edited
-            int index = 0;
-            for (cgWaypoint wp : waypoints) { // remove old version of waypoint
-                if (wp.getId() == waypoint.getId()) {
-                    waypoints.remove(index);
-                    break;
-                }
-                index++;
-            }
+            deleteWaypoint(waypoint);
+
             waypoints.add(waypoint);
             // when waypoint was edited, finalDefined may have changed. check all waypoints and set again
             finalDefined = false;
