@@ -1858,7 +1858,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
 
                 offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-                offlineRefresh.setOnClickListener(new StoreCacheClickListener());
+                offlineRefresh.setOnClickListener(new RefreshCacheClickListener());
 
                 offlineStore.setText(res.getString(R.string.cache_offline_drop));
                 offlineStore.setClickable(true);
