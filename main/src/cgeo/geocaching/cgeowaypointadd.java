@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -27,6 +28,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public class cgeowaypointadd extends AbstractActivity {
@@ -419,10 +421,12 @@ public class cgeowaypointadd extends AbstractActivity {
             waypoint.setNote(note);
             waypoint.setId(id);
 
-            if (app.saveOwnWaypoint(id, geocode, waypoint)) {
+            cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+            if (null != cache && cache.addWaypoint(waypoint, true)) {
+                app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
-                    StaticMapsProvider.storeWaypointStaticMap(app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB), cgeowaypointadd.this, waypoint, false);
+                    StaticMapsProvider.storeWaypointStaticMap(cache, cgeowaypointadd.this, waypoint, false);
                 }
                 finish();
                 return;

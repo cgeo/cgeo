@@ -976,7 +976,7 @@ public class cgBase {
                 // res is null during the unit tests
                 final cgWaypoint waypoint = new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "res = null", WaypointType.WAYPOINT, false);
                 waypoint.setCoords(new Geopoint(originalCoords));
-                cache.addWaypoint(waypoint);
+                cache.addWaypoint(waypoint, false);
                 cache.setUserModifiedCoords(true);
             }
         } catch (Geopoint.GeopointException e) {
@@ -1047,7 +1047,7 @@ public class cgBase {
                     // waypoint note
                     waypoint.setNote(BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
 
-                    cache.addWaypoint(waypoint);
+                    cache.addWaypoint(waypoint, false);
                 }
             }
         }
