@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
@@ -78,6 +79,7 @@ public final class Settings {
     private static final String KEY_DEBUG_INFORMATIONS = "debuginfos";
     private static final String KEY_DEFAULT_NAVIGATION_TOOL = "defaultNavigationTool";
     private static final String KEY_DEFAULT_NAVIGATION_TOOL_2 = "defaultNavigationTool2";
+    private static final String KEY_LIVE_MAP_STRATEGY = "livemapstrategy";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -1013,4 +1015,19 @@ public final class Settings {
             }
         });
     }
+
+    public static Strategy getLiveMapStrategy() {
+        return Strategy.getById(sharedPrefs.getInt(KEY_LIVE_MAP_STRATEGY, Strategy.AUTO.id));
+    }
+
+    public static void setLiveMapStrategy(final Strategy strategy) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_LIVE_MAP_STRATEGY, strategy.id);
+            }
+        });
+    }
+
 }

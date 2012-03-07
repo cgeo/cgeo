@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -469,6 +470,9 @@ public class cgeo extends AbstractActivity {
         for (WaypointType waypointType : WaypointType.values()) {
             waypointType.setL10n();
         }
+        for (Strategy strategy : Strategy.values()) {
+            strategy.setL10n();
+        }
 
         Settings.getLogin();
 
@@ -599,10 +603,11 @@ public class cgeo extends AbstractActivity {
                     navType.setText(res.getString(geo.locationProvider.resourceId));
 
                     if (geo.accuracyNow >= 0) {
+                        int speed = Math.round(geo.speedNow) * 60 * 60 / 1000;
                         if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m" + Formatter.SEPARATOR + speed + " km/h");
                         } else {
-                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * IConversion.METERS_TO_FEET) + " ft");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * IConversion.METERS_TO_FEET) + " ft" + Formatter.SEPARATOR + speed / IConversion.MILES_TO_KILOMETER + " mph");
                         }
                     } else {
                         navAccuracy.setText(null);

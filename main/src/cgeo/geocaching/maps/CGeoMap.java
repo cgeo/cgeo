@@ -18,6 +18,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -93,8 +94,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final int MENU_MAP_LIVE = 2;
     private static final int MENU_STORE_CACHES = 3;
     private static final int MENU_TRAIL_MODE = 4;
-    private static final int MENU_CIRCLE_MODE = 5;
-    private static final int MENU_AS_LIST = 6;
+    private static final int SUBMENU_STRATEGY = 5;
+    private static final int MENU_STRATEGY_FASTEST = 51;
+    private static final int MENU_STRATEGY_FAST = 52;
+    private static final int MENU_STRATEGY_AUTO = 53;
+    private static final int MENU_STRATEGY_DETAILED = 74;
+
+    private static final int MENU_CIRCLE_MODE = 6;
+    private static final int MENU_AS_LIST = 7;
 
     private static final String EXTRAS_MAP_TITLE = "mapTitle";
 
@@ -548,6 +555,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
         menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as).setEnabled(false);
         menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
+
+        Strategy strategy = Settings.getLiveMapStrategy();
+        SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy));
+        subMenuStrategy.setHeaderTitle("Live Map strategy");
+        subMenuStrategy.add(2, MENU_STRATEGY_FASTEST, 0, Strategy.FASTEST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FASTEST);
+        subMenuStrategy.add(2, MENU_STRATEGY_FAST, 0, Strategy.FAST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FAST);
+        subMenuStrategy.add(2, MENU_STRATEGY_AUTO, 0, Strategy.AUTO.getL10n()).setCheckable(true).setChecked(strategy == Strategy.AUTO);
+        subMenuStrategy.add(2, MENU_STRATEGY_DETAILED, 0, Strategy.DETAILED.getL10n()).setCheckable(true).setChecked(strategy == Strategy.DETAILED);
+        subMenuStrategy.setGroupCheckable(2, true, true);
+
         menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
         menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(android.R.drawable.ic_menu_agenda);
 
@@ -595,6 +612,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
             item = menu.findItem(MENU_AS_LIST);
             item.setEnabled(live && CollectionUtils.isNotEmpty(caches));
+
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeomap.onPrepareOptionsMenu: " + e.toString());
         }
@@ -710,6 +728,26 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     searchResult.addCache(cache);
                 }
                 cgeocaches.startActivityMap(activity, search);
+                return true;
+            }
+            case MENU_STRATEGY_FASTEST: {
+                item.setChecked(true);
+                Settings.setLiveMapStrategy(Strategy.FASTEST);
+                return true;
+            }
+            case MENU_STRATEGY_FAST: {
+                item.setChecked(true);
+                Settings.setLiveMapStrategy(Strategy.FAST);
+                return true;
+            }
+            case MENU_STRATEGY_AUTO: {
+                item.setChecked(true);
+                Settings.setLiveMapStrategy(Strategy.AUTO);
+                return true;
+            }
+            case MENU_STRATEGY_DETAILED: {
+                item.setChecked(true);
+                Settings.setLiveMapStrategy(Strategy.DETAILED);
                 return true;
             }
             default:

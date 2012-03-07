@@ -144,6 +144,10 @@ public class cgeoapplication extends Application {
         return geo;
     }
 
+    public float getSpeedFromGeo() {
+        return geo != null ? geo.speedNow : 0f;
+    }
+
     public cgGeo removeGeo() {
         if (geo != null) {
             geo.replaceUpdate(null);

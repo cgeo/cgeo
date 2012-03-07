@@ -4,12 +4,17 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
+import cgeo.geocaching.enumerations.LiveMapStrategy.StrategyFlag;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.SetUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.json.JSONArray;
@@ -21,8 +26,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * GC.com/Groundspeak (GS) specific stuff
@@ -58,15 +65,24 @@ public class GCBase {
 
     /**
      * @param viewport
-     * @param zoomlevel
-     *            initial zoomlevel
-     * @param autoAdjust
-     *            Auto-adjust zoomlevel
      * @param sessionToken
      * @return
      */
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
+        Strategy strategy = Settings.getLiveMapStrategy();
+        if (strategy == Strategy.AUTO) {
+            float speedNow = cgeoapplication.getInstance().getSpeedFromGeo();
+            strategy = speedNow >= 8 ? Strategy.FASTEST : Strategy.DETAILED; // 8 m/s = 30 km/h
+        }
+        return searchByViewport(viewport, tokens, strategy);
+    }
 
+    /**
+     * @param viewport
+     * @param sessionToken
+     * @return
+     */
+    public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens, Strategy strategy) {
         Log.d(Settings.tag, "GCBase.searchByViewport" + viewport.toString());
 
         String referer = GCConstants.URL_LIVE_MAP;
@@ -74,7 +90,7 @@ public class GCBase {
         final SearchResult searchResult = new SearchResult();
         searchResult.setUrl(referer + "?ll=" + viewport.getCenter().getLatitude() + "," + viewport.getCenter().getLongitude());
 
-        List<Tile> tiles = getTilesForViewport(viewport);
+        Set<Tile> tiles = strategy.flags.contains(StrategyFlag.LOAD_TILES) ? getTilesForViewport(viewport) : SetUtils.EMPTY_SET;
 
         for (Tile tile : tiles) {
             StringBuilder url = new StringBuilder();
@@ -114,7 +130,7 @@ public class GCBase {
             if (StringUtils.isEmpty(data)) {
                 Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
             } else {
-                final SearchResult search = parseMapJSON(data, tile, bitmap);
+                final SearchResult search = parseMapJSON(data, tile, bitmap, strategy);
                 if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
                     Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
                 }
@@ -124,9 +140,11 @@ public class GCBase {
             }
         }
 
-        SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), false);
-        if (search != null) {
-            searchResult.addGeocodes(search.getGeocodes());
+        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+            SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), false);
+            if (search != null) {
+                searchResult.addGeocodes(search.getGeocodes());
+            }
         }
 
         return searchResult;
@@ -139,7 +157,7 @@ public class GCBase {
      *            Retrieved data.
      * @return SearchResult. Never null.
      */
-    public static SearchResult parseMapJSON(final String data, Tile tile, Bitmap bitmap) {
+    public static SearchResult parseMapJSON(final String data, Tile tile, Bitmap bitmap, final Strategy strategy) {
 
         final SearchResult searchResult = new SearchResult();
 
@@ -233,10 +251,14 @@ public class GCBase {
                 cache.setName(nameCache.get(id));
                 cache.setZoomlevel(tile.getZoomlevel());
                 cache.setCoords(tile.getCoord(xy));
-                if (tile.getZoomlevel() >= 14) {
-                    parseMapPNG14(cache, bitmap, xy);
+                if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+                    if (tile.getZoomlevel() >= 14) {
+                        parseMapPNG14(cache, bitmap, xy);
+                    } else {
+                        parseMapPNG13(cache, bitmap, xy);
+                    }
                 } else {
-                    parseMapPNG13(cache, bitmap, xy);
+                    cache.setType(CacheType.UNKNOWN);
                 }
                 searchResult.addCache(cache);
             }
@@ -341,12 +363,14 @@ public class GCBase {
      * @param viewport
      * @return
      */
-    protected static List<Tile> getTilesForViewport(final Viewport viewport) {
-        List<Tile> tiles = new ArrayList<Tile>();
-        if (!Settings.isPremiumMember()) {
-            tiles.add(new Tile(viewport.getCenter(), 14)); // precise coords for caches nearby. searchByCoords() is used for PMs
-        }
-        tiles.add(new Tile(viewport.getCenter(), 12)); // other caches around
+    protected static Set<Tile> getTilesForViewport(final Viewport viewport) {
+        Set<Tile> tiles = new HashSet<Tile>();
+        int zoom = Math.min(Tile.calcZoomLon(viewport.bottomLeft, viewport.topRight),
+                Tile.calcZoomLat(viewport.bottomLeft, viewport.topRight));
+        tiles.add(new Tile(viewport.bottomLeft, zoom));
+        tiles.add(new Tile(new Geopoint(viewport.getLatitudeMin(), viewport.getLongitudeMax()), zoom));
+        tiles.add(new Tile(new Geopoint(viewport.getLatitudeMax(), viewport.getLongitudeMin()), zoom));
+        tiles.add(new Tile(viewport.topRight, zoom));
         return tiles;
     }
 
