@@ -2407,7 +2407,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.getWaypoints());
                 Collections.sort(sortedWaypoints);
 
-                for (cgWaypoint wpt : sortedWaypoints) {
+                for (final cgWaypoint wpt : sortedWaypoints) {
                     waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
 
                     // coordinates
@@ -2460,6 +2460,21 @@ public class CacheDetailActivity extends AbstractActivity {
                             noteView.setText(wpt.getNote());
                         }
                     }
+
+                    View wpNavView = waypointView.findViewById(R.id.wpDefaultNavigation);
+                    wpNavView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            NavigationAppFactory.startDefaultNavigationApplication(geolocation, CacheDetailActivity.this, null, wpt, null);
+                        }
+                    });
+                    wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            NavigationAppFactory.startDefaultNavigationApplication2(geolocation, CacheDetailActivity.this, null, wpt, null);
+                            return true;
+                        }
+                    });
 
                     registerForContextMenu(waypointView);
                     waypointView.setOnClickListener(new WaypointInfoClickListener());

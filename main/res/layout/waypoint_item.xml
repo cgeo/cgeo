@@ -5,27 +5,43 @@
     android:orientation="vertical"
     android:paddingTop="9dp" >
 
-    <TextView
-        android:id="@+id/name"
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="?text_color"
-        android:textSize="18dp" />
-
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="12dp"
-        android:ellipsize="marquee"
-        android:lines="1"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:textColor="?text_color_headline"
-        android:textSize="14dp"
-        android:visibility="gone" />
-
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+		<LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:orientation="vertical">
+		    <TextView
+		        android:id="@+id/name"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:textColor="?text_color"
+		        android:textSize="18dp" />
+		    <TextView
+		        android:id="@+id/info"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="left"
+		        android:layout_marginLeft="12dp"
+		        android:ellipsize="marquee"
+		        android:lines="1"
+		        android:scrollHorizontally="true"
+		        android:singleLine="true"
+		        android:textColor="?text_color_headline"
+		        android:textSize="14dp"
+		        android:visibility="gone" />
+	    </LinearLayout>
+		<ImageView style="@style/action_bar_action"
+		 		android:id="@+id/wpDefaultNavigation"
+				android:src="@drawable/actionbar_compass"
+				android:layout_gravity="right"
+				android:layout_alignParentRight="true"
+				android:clickable="true"
+				android:longClickable="true" />
+    </RelativeLayout>
     <TextView
         android:id="@+id/coordinates"
         android:layout_width="fill_parent"
