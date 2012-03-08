@@ -2245,6 +2245,9 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             view.setAdapter(new ArrayAdapter<cgLog>(CacheDetailActivity.this, R.layout.cacheview_logs_item, cache.getLogs(allLogs)) {
+                final UserActionsClickListener userActionsClickListener = new UserActionsClickListener();
+                final DecryptTextClickListener decryptTextClickListener = new DecryptTextClickListener();
+
                 @Override
                 public View getView(final int position, final View convertView, final ViewGroup parent) {
                     View rowView = convertView;
@@ -2337,9 +2340,9 @@ public class CacheDetailActivity extends AbstractActivity {
 
                     if (null == convertView) {
                         // if convertView != null then this listeners are already set
-                        holder.author.setOnClickListener(new UserActionsClickListener());
+                        holder.author.setOnClickListener(userActionsClickListener);
                         holder.text.setMovementMethod(LinkMovementMethod.getInstance());
-                        holder.text.setOnClickListener(new DecryptTextClickListener());
+                        holder.text.setOnClickListener(decryptTextClickListener);
                         registerForContextMenu(holder.text);
                     }
 
