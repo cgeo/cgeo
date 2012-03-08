@@ -165,7 +165,6 @@
   <string name="err_store_failed">Speichern des Caches fehlgeschlagen.</string>
   <string name="err_refresh_failed">Aktualisierung fehlgeschlagen.</string>
   <string name="err_dwld_details_failed">Download der Cache-Details fehlgeschlagen.</string>
-  <string name="err_dwld_details_failed_reason">Download der Cache-Details fehlgeschlagen, wegen</string>
   <string name="err_load_descr_failed">Laden der Cachebeschreibung fehlgeschlagen.</string>
   <string name="err_location_unknown">c:geo erkennt die Position des Caches nicht.</string>
   <string name="err_missing_device_name">Bitte lege einen Namen für dein Handy fest, bevor du dich registrierst.</string>
@@ -658,6 +657,11 @@
   <string name="map_static_loading">Lade statische Karte…</string>
   <string name="map_token_err">c:geo konnte nur Teildaten herunterladen, die Koordinaten der Caches könnten ungenau sein.</string>
   <string name="map_as_list">Als Liste anzeigen</string>
+  <string name="map_strategy">Strategie</string>
+  <string name="map_strategy_fastest">Schnellste</string>
+  <string name="map_strategy_fast">Schnell</string>
+  <string name="map_strategy_auto">Geschwindigkeitsabhängig</string>
+  <string name="map_strategy_detailed">Detailliert</string>
 
   <!-- search -->
   <string name="search_bar_hint">Suche nach Caches</string>
