@@ -14,7 +14,6 @@ import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.SetUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.json.JSONArray;
@@ -102,52 +101,54 @@ public class GCBase {
         final SearchResult searchResult = new SearchResult();
         searchResult.setUrl(referer + "?ll=" + viewport.getCenter().getLatitude() + "," + viewport.getCenter().getLongitude());
 
-        Set<Tile> tiles = strategy.flags.contains(StrategyFlag.LOAD_TILES) ? getTilesForViewport(viewport) : SetUtils.EMPTY_SET;
+        if (strategy.flags.contains(StrategyFlag.LOAD_TILES)) {
+            final Set<Tile> tiles = getTilesForViewport(viewport);
 
-        for (Tile tile : tiles) {
-            StringBuilder url = new StringBuilder();
-            url.append("?x=").append(tile.getX()) // x tile
-            .append("&y=").append(tile.getY()) // y tile
-            .append("&z=").append(tile.getZoomlevel()); // zoom level
-            if (tokens != null) {
-                url.append("&k=").append(tokens[0]); // user session
-                url.append("&st=").append(tokens[1]); // session token
-            }
-            url.append("&ep=1");
-            if (Settings.isExcludeMyCaches()) {
-                url.append("&hf=1").append("&hh=1"); // hide found, hide hidden
-            }
-            if (Settings.getCacheType() == CacheType.TRADITIONAL) {
-                url.append("&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
-            }
-            if (Settings.getCacheType() == CacheType.MULTI) {
-                url.append("&ect=9,5,2,6,453,13,1304,137,11,4,8,1858");
-            }
-            if (Settings.getCacheType() == CacheType.MYSTERY) {
-                url.append("&ect=9,5,3,6,453,13,1304,137,11,4,2,1858");
-            }
-            if (tile.getZoomlevel() != 14) {
-                url.append("&_=").append(String.valueOf(System.currentTimeMillis()));
-            }
-            // other types t.b.d
-            final String urlString = url.toString();
-
-            // The PNG must be request before ! Else the following request would return with 204 - No Content
-            Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
-
-            assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
-            assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
-
-            String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
-            if (StringUtils.isEmpty(data)) {
-                Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
-            } else {
-                final SearchResult search = parseMapJSON(data, tile, bitmap, strategy);
-                if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
-                    Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+            for (Tile tile : tiles) {
+                StringBuilder url = new StringBuilder();
+                url.append("?x=").append(tile.getX()) // x tile
+                .append("&y=").append(tile.getY()) // y tile
+                .append("&z=").append(tile.getZoomlevel()); // zoom level
+                if (tokens != null) {
+                    url.append("&k=").append(tokens[0]); // user session
+                    url.append("&st=").append(tokens[1]); // session token
                 }
-                else {
-                    searchResult.addGeocodes(search.getGeocodes());
+                url.append("&ep=1");
+                if (Settings.isExcludeMyCaches()) {
+                    url.append("&hf=1").append("&hh=1"); // hide found, hide hidden
+                }
+                if (Settings.getCacheType() == CacheType.TRADITIONAL) {
+                    url.append("&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
+                }
+                if (Settings.getCacheType() == CacheType.MULTI) {
+                    url.append("&ect=9,5,2,6,453,13,1304,137,11,4,8,1858");
+                }
+                if (Settings.getCacheType() == CacheType.MYSTERY) {
+                    url.append("&ect=9,5,3,6,453,13,1304,137,11,4,2,1858");
+                }
+                if (tile.getZoomlevel() != 14) {
+                    url.append("&_=").append(String.valueOf(System.currentTimeMillis()));
+                }
+                // other types t.b.d
+                final String urlString = url.toString();
+
+                // The PNG must be request before ! Else the following request would return with 204 - No Content
+                Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
+
+                assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
+                assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
+
+                String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
+                if (StringUtils.isEmpty(data)) {
+                    Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                } else {
+                    final SearchResult search = parseMapJSON(data, tile, bitmap, strategy);
+                    if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
+                        Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+                    }
+                    else {
+                        searchResult.addGeocodes(search.getGeocodes());
+                    }
                 }
             }
         }
@@ -170,7 +171,6 @@ public class GCBase {
      * @return SearchResult. Never null.
      */
     public static SearchResult parseMapJSON(final String data, Tile tile, Bitmap bitmap, final Strategy strategy) {
-
         final SearchResult searchResult = new SearchResult();
 
         try {
@@ -285,7 +285,6 @@ public class GCBase {
 
     // Try to get the cache type from the PNG image for a tile */
     public static void parseMapPNG14(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
-
         int x = xy.getX() * 4 + 2;
         int y = xy.getY() * 4 + 2;
         int countX = 0;
@@ -321,8 +320,7 @@ public class GCBase {
                 cache.setFound(true);
                 return;
             }
-        }
- catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             // intentionally left blank
         }
 
