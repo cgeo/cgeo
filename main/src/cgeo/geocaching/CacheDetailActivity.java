@@ -92,7 +92,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -2171,7 +2170,7 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private class LogsViewCreator implements PageViewCreator {
-        ScrollView view;
+        ListView view;
         boolean allLogs;
 
         LogsViewCreator(boolean allLogs) {
@@ -2187,7 +2186,7 @@ public class CacheDetailActivity extends AbstractActivity {
         @Override
         public View getView() {
             if (view == null) {
-                view = (ScrollView) getDispatchedView();
+                view = (ListView) getDispatchedView();
             }
 
             return view;
@@ -2200,171 +2199,174 @@ public class CacheDetailActivity extends AbstractActivity {
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_logs, null);
+            view = (ListView) getLayoutInflater().inflate(R.layout.cacheview_logs, null);
 
-            new LogInflaterTask().execute((Void) null);
+            // log count
+            if (cache != null && cache.getLogCounts() != null) {
+                boolean showLogCounter = false;
+
+                final StringBuilder text = new StringBuilder(200);
+                text.append(res.getString(R.string.cache_log_types));
+                text.append(": ");
+
+                // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
+                final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>();
+                for (Entry<LogType, Integer> entry : cache.getLogCounts().entrySet()) {
+                    sortedLogCounts.add(entry); // don't add these entries using addAll(), the iterator in the EntrySet can go wrong (see Findbugs)
+                }
+
+                Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
+
+                    @Override
+                    public int compare(Entry<LogType, Integer> logCountItem1, Entry<LogType, Integer> logCountItem2) {
+                        return logCountItem1.getKey().compareTo(logCountItem2.getKey());
+                    }
+                });
+
+                for (Entry<LogType, Integer> pair : sortedLogCounts) {
+                    String logTypeLabel = pair.getKey().getL10n();
+                    // it may happen that the label is unknown -> then avoid any output for this type
+                    if (logTypeLabel != null) {
+                        if (showLogCounter) {
+                            text.append(", ");
+                        }
+                        text.append(pair.getValue().intValue());
+                        text.append("× ");
+                        text.append(logTypeLabel);
+                    }
+                    showLogCounter = true;
+                }
+
+                if (showLogCounter) {
+                    final TextView countView = new TextView(CacheDetailActivity.this);
+                    countView.setText(text.toString());
+                    view.addHeaderView(countView, null, false);
+                }
+            }
+
+            view.setAdapter(new ArrayAdapter<cgLog>(CacheDetailActivity.this, R.layout.cacheview_logs_item, cache.getLogs(allLogs)) {
+                @Override
+                public View getView(final int position, final View convertView, final ViewGroup parent) {
+                    View rowView = convertView;
+                    if (null == rowView) {
+                        rowView = getLayoutInflater().inflate(R.layout.cacheview_logs_item, null);
+                    }
+                    LogViewHolder holder = (LogViewHolder) rowView.getTag();
+                    if (null == holder) {
+                        holder = new LogViewHolder(rowView);
+                        rowView.setTag(holder);
+                    }
+
+                    final cgLog log = getItem(position);
+
+                    if (log.date > 0) {
+                        holder.date.setText(cgBase.formatShortDate(log.date));
+                        holder.date.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.date.setVisibility(View.GONE);
+                    }
+
+                    holder.type.setText(log.type.getL10n());
+                    holder.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
+
+                    // finds count
+                    holder.count.setVisibility(View.VISIBLE);
+                    if (log.found == -1) {
+                        holder.count.setVisibility(View.GONE);
+                    } else if (log.found == 0) {
+                        holder.count.setText(res.getString(R.string.cache_count_no));
+                    } else if (log.found == 1) {
+                        holder.count.setText(res.getString(R.string.cache_count_one));
+                    } else {
+                        holder.count.setText(log.found + " " + res.getString(R.string.cache_count_more));
+                    }
+
+                    // logtext, avoid parsing HTML if not necessary
+                    if (BaseUtils.containsHtml(log.log)) {
+                        holder.text.setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                    }
+                    else {
+                        holder.text.setText(log.log);
+                    }
+
+                    // images
+                    if (CollectionUtils.isNotEmpty(log.logImages)) {
+
+                        List<String> titles = new ArrayList<String>(5);
+                        for (cgImage image : log.logImages) {
+                            if (StringUtils.isNotBlank(image.getTitle())) {
+                                titles.add(image.getTitle());
+                            }
+                        }
+                        if (titles.isEmpty()) {
+                            titles.add(res.getString(R.string.cache_log_image_default_title));
+                        }
+
+                        holder.images.setText(StringUtils.join(titles, ", "));
+                        holder.images.setVisibility(View.VISIBLE);
+                        holder.images.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cgeoimages.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), new ArrayList<cgImage>(log.logImages));
+                            }
+                        });
+                    } else {
+                        holder.images.setVisibility(View.GONE);
+                    }
+
+                    // colored marker
+                    holder.statusMarker.setVisibility(View.VISIBLE);
+                    if (log.type == LogType.LOG_FOUND_IT
+                            || log.type == LogType.LOG_WEBCAM_PHOTO_TAKEN
+                            || log.type == LogType.LOG_ATTENDED) {
+                        holder.statusMarker.setImageResource(R.drawable.mark_green);
+                    } else if (log.type == LogType.LOG_PUBLISH_LISTING
+                            || log.type == LogType.LOG_ENABLE_LISTING
+                            || log.type == LogType.LOG_OWNER_MAINTENANCE) {
+                        holder.statusMarker.setImageResource(R.drawable.mark_green_more);
+                    } else if (log.type == LogType.LOG_DIDNT_FIND_IT
+                            || log.type == LogType.LOG_NEEDS_MAINTENANCE
+                            || log.type == LogType.LOG_NEEDS_ARCHIVE) {
+                        holder.statusMarker.setImageResource(R.drawable.mark_red);
+                    } else if (log.type == LogType.LOG_TEMP_DISABLE_LISTING
+                            || log.type == LogType.LOG_ARCHIVE) {
+                        holder.statusMarker.setImageResource(R.drawable.mark_red_more);
+                    } else {
+                        holder.statusMarker.setVisibility(View.GONE);
+                    }
+
+                    if (null == convertView) {
+                        // if convertView != null then this listeners are already set
+                        holder.author.setOnClickListener(new UserActionsClickListener());
+                        holder.text.setMovementMethod(LinkMovementMethod.getInstance());
+                        holder.text.setOnClickListener(new DecryptTextClickListener());
+                        registerForContextMenu(holder.text);
+                    }
+
+                    return rowView;
+                }
+            });
 
             return view;
         }
 
-        private class LogInflaterTask extends AsyncTask<Void, Void, Void> {
-            private List<RelativeLayout> loglist = new LinkedList<RelativeLayout>();
-            private String logCounter;
-            private boolean showLogCounter = false;
+        private class LogViewHolder {
+            final TextView date;
+            final TextView type;
+            final TextView author;
+            final TextView count;
+            final TextView text;
+            final TextView images;
+            final ImageView statusMarker;
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                // log count
-                if (cache != null && cache.getLogCounts() != null) {
-                    final StringBuilder text = new StringBuilder(200);
-                    text.append(res.getString(R.string.cache_log_types));
-                    text.append(": ");
-
-                    // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                    List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>();
-                    for (Entry<LogType, Integer> entry : cache.getLogCounts().entrySet()) {
-                        sortedLogCounts.add(entry); // don't add these entries using addAll(), the iterator in the EntrySet can go wrong (see Findbugs)
-                    }
-                    Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
-
-                        @Override
-                        public int compare(Entry<LogType, Integer> logCountItem1,
-                                Entry<LogType, Integer> logCountItem2) {
-                            return logCountItem1.getKey().compareTo(logCountItem2.getKey());
-                        }
-                    });
-                    for (Entry<LogType, Integer> pair : sortedLogCounts) {
-                        String logTypeLabel = pair.getKey().getL10n();
-                        // it may happen that the label is unknown -> then avoid any output for this type
-                        if (logTypeLabel != null) {
-                            if (showLogCounter) {
-                                text.append(", ");
-                            }
-                            text.append(pair.getValue().intValue());
-                            text.append("× ");
-                            text.append(logTypeLabel);
-                        }
-                        showLogCounter = true;
-                    }
-                    logCounter = text.toString();
-                }
-
-                // cache logs
-                RelativeLayout rowView;
-
-                if (cache != null) {
-                    for (cgLog log : cache.getLogs(allLogs)) {
-                        rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.cacheview_logs_item, null);
-
-                        if (log.date > 0) {
-                            ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
-                        } else {
-                            ((TextView) rowView.findViewById(R.id.added)).setVisibility(View.GONE);
-                        }
-
-                        ((TextView) rowView.findViewById(R.id.type)).setText(log.type.getL10n());
-                        ((TextView) rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
-
-                        if (log.found == -1) {
-                            ((TextView) rowView.findViewById(R.id.count)).setVisibility(View.GONE);
-                        } else if (log.found == 0) {
-                            ((TextView) rowView.findViewById(R.id.count)).setText(res.getString(R.string.cache_count_no));
-                        } else if (log.found == 1) {
-                            ((TextView) rowView.findViewById(R.id.count)).setText(res.getString(R.string.cache_count_one));
-                        } else {
-                            ((TextView) rowView.findViewById(R.id.count)).setText(log.found + " " + res.getString(R.string.cache_count_more));
-                        }
-                        // avoid parsing HTML if not necessary
-                        if (BaseUtils.containsHtml(log.log)) {
-                            ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
-                        }
-                        else {
-                            ((TextView) rowView.findViewById(R.id.log)).setText(log.log);
-                        }
-                        // add LogImages
-                        LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
-
-                        if (CollectionUtils.isNotEmpty(log.logImages)) {
-
-                            final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
-
-                            final View.OnClickListener listener = new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    cgeoimages.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), logImages);
-                                }
-                            };
-
-                            ArrayList<String> titles = new ArrayList<String>();
-                            for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
-                                String img_title = log.logImages.get(i_img_cnt).getTitle();
-                                if (!StringUtils.isBlank(img_title)) {
-                                    titles.add(img_title);
-                                }
-                            }
-                            if (titles.isEmpty()) {
-                                titles.add(res.getString(R.string.cache_log_image_default_title));
-                            }
-
-                            LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.cacheview_logs_img, null);
-                            TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
-                            log_img_title.setText(StringUtils.join(titles.toArray(new String[titles.size()]), ", "));
-                            log_img_title.setOnClickListener(listener);
-                            logLayout.addView(log_imgView);
-                        }
-
-                        // Add colored mark
-                        final ImageView logMark = (ImageView) rowView.findViewById(R.id.log_mark);
-                        if (log.type == LogType.LOG_FOUND_IT
-                                || log.type == LogType.LOG_WEBCAM_PHOTO_TAKEN
-                                || log.type == LogType.LOG_ATTENDED) {
-                            logMark.setImageResource(R.drawable.mark_green);
-                        } else if (log.type == LogType.LOG_PUBLISH_LISTING
-                                || log.type == LogType.LOG_ENABLE_LISTING
-                                || log.type == LogType.LOG_OWNER_MAINTENANCE) {
-                            logMark.setImageResource(R.drawable.mark_green_more);
-                        } else if (log.type == LogType.LOG_DIDNT_FIND_IT
-                                || log.type == LogType.LOG_NEEDS_MAINTENANCE
-                                || log.type == LogType.LOG_NEEDS_ARCHIVE) {
-                            logMark.setImageResource(R.drawable.mark_red);
-                        } else if (log.type == LogType.LOG_TEMP_DISABLE_LISTING
-                                || log.type == LogType.LOG_ARCHIVE) {
-                            logMark.setImageResource(R.drawable.mark_red_more);
-                        } else {
-                            logMark.setVisibility(View.GONE);
-                        }
-
-                        ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new UserActionsClickListener());
-                        TextView logView = (TextView) logLayout.findViewById(R.id.log);
-                        logView.setMovementMethod(LinkMovementMethod.getInstance());
-                        logView.setOnClickListener(new DecryptTextClickListener());
-                        registerForContextMenu(logView);
-
-                        loglist.add(rowView);
-                    }
-                }
-
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void param) {
-                // hide loader
-                view.findViewById(R.id.loading).setVisibility(View.GONE);
-
-                // show log count
-                TextView logCounterView = (TextView) view.findViewById(R.id.log_count);
-                if (showLogCounter) {
-                    logCounterView.setText(logCounter);
-                    logCounterView.setVisibility(View.VISIBLE);
-                }
-
-                // show logs
-                LinearLayout loglistView = (LinearLayout) view.findViewById(R.id.log_list);
-                for (RelativeLayout log : loglist) {
-                    loglistView.addView(log);
-                }
-                loglistView.setVisibility(View.VISIBLE);
+            public LogViewHolder(View base) {
+                date = (TextView) base.findViewById(R.id.added);
+                type = (TextView) base.findViewById(R.id.type);
+                author = (TextView) base.findViewById(R.id.author);
+                count = (TextView) base.findViewById(R.id.count);
+                text = (TextView) base.findViewById(R.id.log);
+                images = (TextView) base.findViewById(R.id.log_images);
+                statusMarker = (ImageView) base.findViewById(R.id.log_mark);
             }
         }
     }

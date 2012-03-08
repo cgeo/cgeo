@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:padding="3dip" >
+		android:paddingTop="3dip"
+        android:paddingBottom="3dip" >
 	<TextView android:id="@+id/author"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -15,14 +16,13 @@
 			android:ellipsize="marquee"
 			android:textSize="18dip"
 			android:textColor="?text_color" />
-	<LinearLayout
+	<LinearLayout android:id="@+id/detail_box"
 			android:layout_width="82dip"
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
-			android:layout_alignParentTop="true"
-			android:layout_marginTop="22dip"
 			android:layout_gravity="left|top"
-			android:orientation="horizontal"  >
+			android:orientation="horizontal"
+            android:layout_below="@id/author"  >
 		<LinearLayout
 				android:layout_width="80dip"
 				android:layout_height="wrap_content"
@@ -75,18 +75,27 @@
 				android:layout_height="wrap_content"
 				android:layout_width="fill_parent" 
 				android:orientation="vertical"
-				android:padding="3dip"
+				android:paddingLeft="3dip"
 				android:textSize="14dip"
-				android:layout_marginLeft="84dip">
+                android:layout_toRightOf="@id/detail_box">
 			<TextView android:id="@+id/log"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="22dip"				
 				android:layout_gravity="left"
 				android:gravity="left"
-				android:padding="3dip"
 				android:textSize="14dip"
 				android:textColor="?text_color"
 				android:autoLink="web" />
+            <TextView
+                android:id="@+id/log_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:layout_marginTop="3dip"
+                android:drawableLeft="?log_img_icon"
+                android:drawablePadding="3dip"
+                android:textSize="14dip"
+                android:textColor="?text_color"/>
 	</LinearLayout>
 </RelativeLayout>
