@@ -589,6 +589,7 @@
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Läser in cacher från .gpx filen</string>
   <string name="gpx_import_loading_waypoints">Läser in punkter från .gpx file</string>
+  <string name="gpx_import_store_static_maps">Sparar kartor</string>
   <string name="gpx_import_storing">Skriver cacher till databasen</string>
   <string name="gpx_import_caches_imported">cacher importerade</string>
   <string name="gpx_import_title">Importera GPX</string>
@@ -664,6 +665,11 @@
   <string name="map_static_loading">Laddar sparade kartor…</string>
   <string name="map_token_err">Eftersom c:geo bara kunde hämta en del av informationen så kan positionen för cacher vara felaktig.</string>
   <string name="map_as_list">Visa som lista</string>
+  <string name="map_strategy">Strategi</string>
+  <string name="map_strategy_fastest">Snabbaste</string>
+  <string name="map_strategy_fast">Snabbt</string>
+  <string name="map_strategy_auto">Hastighetsberoende (gps)</string>
+  <string name="map_strategy_detailed">Exakta positioner</string>
 
   <!-- search -->
   <string name="search_bar_hint">Sök cache/TB</string>
