@@ -29,6 +29,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * GC.com/Groundspeak (GS) specific stuff
@@ -62,6 +64,7 @@ public class GCBase {
     private final static int POSX_FOUND = 10;
     private final static int POSY_FOUND = -8;
 
+    private final static Pattern PATTERN_JSON_KEY = Pattern.compile("[^\\d]*" + "(\\d+),\\s*(\\d+)" + "[^\\d]*"); // (12, 34)
     /**
      * Searches the view port on the live map with Strategy.AUTO
      *
@@ -494,12 +497,17 @@ public class GCBase {
      *            Key in the format (xx, xx)
      * @return
      */
-    private static int[] splitJSONKey(String key) {
-        // two possible positions for the ,
-        int separator = key.charAt(2) == ',' ? 2 : 3;
-        int x = Integer.parseInt(key.substring(1, separator));
-        int y = Integer.parseInt(key.substring(separator + 2, key.length() - 1));
-        return new int[] { x, y };
+    static int[] splitJSONKey(String key) {
+        final Matcher matcher = PATTERN_JSON_KEY.matcher(key);
+        try {
+            if (matcher.matches()) {
+                final int x = Integer.parseInt(matcher.group(1));
+                final int y = Integer.parseInt(matcher.group(2));
+                return new int[] { x, y };
+            }
+        } catch (NumberFormatException e) {
+        }
+        return new int[] { 0, 0 };
     }
 
 }
