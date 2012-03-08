@@ -39,7 +39,7 @@ public class Tile {
         assert zoomlevel >= ZOOMLEVEL_MIN && zoomlevel <= ZOOMLEVEL_MAX : "zoomlevel out of range";
 
         this.zoomlevel = Math.max(Math.min(zoomlevel, ZOOMLEVEL_MAX), ZOOMLEVEL_MIN);
-        ;
+
         tileX = calcX(origin);
         tileY = calcY(origin);
     }
@@ -108,6 +108,17 @@ public class Tile {
         return String.format("(%d/%d), zoom=%d", tileX, tileY, zoomlevel);
     }
 
+    /**
+     * Calculates the maximum possible zoom level where the supplied points
+     * are covered by adjacent tiles on the east/west axis.
+     * The order of the points (left/right) is irrelevant.
+     * 
+     * @param left
+     *            First point
+     * @param right
+     *            Second point
+     * @return
+     */
     public static int calcZoomLon(final Geopoint left, final Geopoint right) {
 
         int zoom = (int) Math.floor(
@@ -125,6 +136,17 @@ public class Tile {
         return Math.min(zoom, ZOOMLEVEL_MAX);
     }
 
+    /**
+     * Calculates the maximum possible zoom level where the supplied points
+     * are covered by adjacent tiles on the north/south axis.
+     * The order of the points (bottom/top) is irrelevant.
+     * 
+     * @param bottom
+     *            First point
+     * @param top
+     *            Second point
+     * @return
+     */
     public static int calcZoomLat(final Geopoint bottom, final Geopoint top) {
 
         int zoom = (int) Math.ceil(
@@ -139,7 +161,7 @@ public class Tile {
         Tile tileBottom = new Tile(bottom, zoom);
         Tile tileTop = new Tile(top, zoom);
 
-        if (Math.abs(tileBottom.getX() - tileTop.getX()) > 1) {
+        if (Math.abs(tileBottom.getY() - tileTop.getY()) > 1) {
             zoom = zoom - 1;
         }
 
@@ -150,6 +172,13 @@ public class Tile {
         return Math.tan(angleGrad / 180.0 * Math.PI);
     }
 
+    /**
+     * Calculates the inverted hyperbolic sine
+     * (after Bronstein, Semendjajew: Taschenbuch der Mathematik
+     * 
+     * @param x
+     * @return
+     */
     private static double asinh(double x) {
         return Math.log(x + Math.sqrt(x * x + 1.0));
     }

@@ -64,8 +64,12 @@ public class GCBase {
     private final static int POSY_FOUND = -8;
 
     /**
+     * Searches the view port on the live map with Strategy.AUTO
+     *
      * @param viewport
-     * @param sessionToken
+     *            Area to search
+     * @param tokens
+     *            Live map tokens
      * @return
      */
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
@@ -78,8 +82,16 @@ public class GCBase {
     }
 
     /**
+     * Searches the view port on the live map for caches.
+     * The strategy dictates if only live map information is used or if an additional
+     * searchByCoordinates query is issued.
+     *
      * @param viewport
-     * @param sessionToken
+     *            Area to search
+     * @param tokens
+     *            Live map tokens
+     * @param strategy
+     *            Strategy for data retrieval and parsing, @see Strategy
      * @return
      */
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens, Strategy strategy) {
@@ -251,7 +263,7 @@ public class GCBase {
                 cache.setName(nameCache.get(id));
                 cache.setZoomlevel(tile.getZoomlevel());
                 cache.setCoords(tile.getCoord(xy));
-                if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+                if (strategy.flags.contains(StrategyFlag.PARSE_TILES)) {
                     if (tile.getZoomlevel() >= 14) {
                         parseMapPNG14(cache, bitmap, xy);
                     } else {
