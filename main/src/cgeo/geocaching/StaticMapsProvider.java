@@ -44,7 +44,7 @@ public class StaticMapsProvider {
         final HttpResponse httpResponse = cgBase.request(url, null, false);
 
         if (httpResponse != null) {
-            if (LocalStorage.saveEntityToFile(httpResponse.getEntity(), file)) {
+            if (LocalStorage.saveEntityToFile(httpResponse, file)) {
                 // Delete image if it has no contents
                 final long fileSize = file.length();
                 if (fileSize < MIN_MAP_IMAGE_BYTES) {

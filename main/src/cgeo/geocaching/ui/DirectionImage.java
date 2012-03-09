@@ -19,7 +19,7 @@ public class DirectionImage {
         final HttpResponse httpResponse =
                     cgBase.request("http://www.geocaching.com/ImgGen/seek/CacheDir.ashx", new Parameters("k", code), false);
         if (httpResponse != null) {
-            LocalStorage.saveEntityToFile(httpResponse.getEntity(), getDirectionFile(geocode, true));
+            LocalStorage.saveEntityToFile(httpResponse, getDirectionFile(geocode, true));
         }
     }
 

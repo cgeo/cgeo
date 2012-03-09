@@ -4,7 +4,7 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 
 import android.os.Environment;
 import android.util.Log;
@@ -143,27 +143,49 @@ public class LocalStorage {
      *            the entity whose content will be saved
      * @param targetFile
      *            the target file, which will be created if necessary
-     * @return true if the operation was sucessful, false otherwise
+     * @return true if the operation was successful, false otherwise
      */
-    public static boolean saveEntityToFile(final HttpEntity entity, final File targetFile) {
-        if (entity == null) {
+    public static boolean saveEntityToFile(final HttpResponse response, final File targetFile) {
+        if (response == null) {
             return false;
         }
 
         try {
-            final InputStream is = entity.getContent();
+            return saveToFile(response.getEntity().getContent(), targetFile);
+        } catch (IOException e) {
+            Log.e(Settings.tag, "LocalStorage.saveEntityToFile", e);
+        }
+
+        return false;
+    }
+
+    /**
+     * Save an HTTP response to a file.
+     *
+     * @param entity
+     *            the entity whose content will be saved
+     * @param targetFile
+     *            the target file, which will be created if necessary
+     * @return true if the operation was successful, false otherwise
+     */
+    public static boolean saveToFile(final InputStream inputStream, final File targetFile) {
+        if (inputStream == null) {
+            return false;
+        }
+
+        try {
             try {
                 final FileOutputStream fos = new FileOutputStream(targetFile);
                 try {
-                    return copy(is, fos);
+                    return copy(inputStream, fos);
                 } finally {
                     fos.close();
                 }
             } finally {
-                is.close();
+                inputStream.close();
             }
         } catch (IOException e) {
-            Log.e(Settings.tag, "LocalStorage.saveEntityToFile", e);
+            Log.e(Settings.tag, "LocalStorage.saveToFile", e);
         }
         return false;
     }

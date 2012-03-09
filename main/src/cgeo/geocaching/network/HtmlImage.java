@@ -9,7 +9,6 @@ import cgeo.geocaching.files.LocalStorage;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
-import org.apache.http.entity.BufferedHttpEntity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -84,21 +83,18 @@ public class HtmlImage implements Html.ImageGetter {
         // Download image and save it to the cache
         if (imagePre == null || onlySave) {
             final String absoluteURL = makeAbsoluteURL(url);
-            BufferedHttpEntity bufferedEntity = null;
 
             if (absoluteURL != null) {
                 try {
                     final HttpResponse httpResponse = cgBase.request(absoluteURL, null, false);
                     if (httpResponse != null) {
-                        bufferedEntity = new BufferedHttpEntity(httpResponse.getEntity());
+                        final File file = LocalStorage.getStorageFile(geocode, url, true, true);
+                        LocalStorage.saveEntityToFile(httpResponse, file);
                     }
                 } catch (Exception e) {
                     Log.e(Settings.tag, "HtmlImage.getDrawable (downloading from web)", e);
                 }
             }
-
-            final File file = LocalStorage.getStorageFile(geocode, url, true, true);
-            LocalStorage.saveEntityToFile(bufferedEntity, file);
         }
 
         if (onlySave) {
