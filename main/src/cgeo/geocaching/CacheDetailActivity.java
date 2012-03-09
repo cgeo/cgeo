@@ -1990,7 +1990,7 @@ public class CacheDetailActivity extends AbstractActivity {
             if (StringUtils.isNotBlank(cache.getHint())) {
                 TextView hintView = ((TextView) view.findViewById(R.id.hint));
                 if (BaseUtils.containsHtml(cache.getHint())) {
-                    hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(CacheDetailActivity.this, null, false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                    hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                     hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
                 }
                 else {
@@ -2263,7 +2263,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                     // logtext, avoid parsing HTML if not necessary
                     if (BaseUtils.containsHtml(log.log)) {
-                        holder.text.setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                        holder.text.setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                     }
                     else {
                         holder.text.setText(log.log);
