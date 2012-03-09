@@ -455,8 +455,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 caches.add(cache);
             }
             dirtyCaches.clear();
-            // force an update of the display
-            mapView.repaintRequired(overlayCaches);
+            // force an update of the display. Includes a call to DownloadThread :-(
+            liveChanged = true;
         }
 
         startTimer();
