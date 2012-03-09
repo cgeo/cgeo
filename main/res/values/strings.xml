@@ -1006,17 +1006,22 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
-    · New: Moved calendar operations to separate calendar add-on (available on Android Market).\n 
+    · New: Moved calendar operations to separate calendar add-on (available on Android Market)\n 
       c:geo doesn\'t require calendar permissions anymore\n
     · New: Login status and find count shown on start screen\n
-    · New: Improved markers in the map with additional information for stored caches:\n
-      Personal Note available, Modified coordinates, Saved on device, Offline log available, Non-reliable coordinates (orange circle)\n
+    · New: Improved markers in the map and partly in lists with additional information for stored caches:\n
+      Personal Note available (Pen icon)\n
+      Modified coordinates available (Flagpost icon)\n
+      Caches is saved on device (Disk icon)\n
+      Offline log is available (Red smiley instead of yellow smiley)
+      Non-reliable coordinates (Cache icon encircled in Orange)\n
     · New: Copy, translate and forward available with long press for cache- and log-text\n
-    · New: User can select two preffered navigation tools for easier accessibility\n
+    · New: User can select two preferred navigation tools for easier accessibility\n
     · New: Type of waypoint can be selected for custom waypoints\n
     · New: Day of week is now shown for event-caches\n
     · New: Static maps can now also be stored for waypoints of a cache\n
-    · Fix: Live Map\n
+    · New: Static maps are stored while importing a GPX-file\n
+    · New: Live Map with definable loading strategy\n
     · Fix: Deletion of outdated caches did not work\n
     · Fix: Changed internal caching causing a better overall performance\n
     · Fix: Caches with modified coordinates are displayed at the modified coords and not at the original coords\n   
