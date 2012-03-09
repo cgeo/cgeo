@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,8 +50,14 @@ public final class CalendarActivity extends Activity {
             name = getParameter(ICalendar.PARAM_NAME);
             location = getParameter(ICalendar.PARAM_LOCATION);
             coords = getParameter(ICalendar.PARAM_COORDS);
+
             if (name.length() > 0 && hiddenDate.length() > 0) {
-                selectCalendarForAdding();
+                if (Compatibility.isLevel14()) {
+                    addToCalendarLevel14();
+                    finish();
+                } else {
+                    selectCalendarForAdding();
+                }
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, e.getMessage(), e);
@@ -81,33 +88,33 @@ public final class CalendarActivity extends Activity {
         // TODO: Handle missing provider
         final Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
 
-        final Map<Integer, String> calendars = new HashMap<Integer, String>();
-        if (cursor != null) {
-            if (cursor.getCount() > 0) {
-                cursor.moveToFirst();
-
-                final int indexId = cursor.getColumnIndex("_id");
-                final int indexName = cursor.getColumnIndex("displayName");
-
-                do {
-                    final String idString = cursor.getString(indexId);
-                    if (idString != null) {
-                        try {
-                            int id = Integer.parseInt(idString);
-                            final String calName = cursor.getString(indexName);
-
-                            if (id > 0 && calName != null) {
-                                calendars.put(id, calName);
-                            }
-                        } catch (NumberFormatException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                    }
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
+        if (cursor == null || cursor.getCount() <= 0) {
+            showToast(getResources().getString(R.string.event_fail));
+            return;
         }
+
+        final Map<Integer, String> calendars = new HashMap<Integer, String>();
+        cursor.moveToFirst();
+
+        final int indexId = cursor.getColumnIndex("_id");
+        final int indexName = cursor.getColumnIndex("displayName");
+
+        do {
+            final String idString = cursor.getString(indexId);
+            if (idString != null) {
+                try {
+                    int id = Integer.parseInt(idString);
+                    final String calName = cursor.getString(indexName);
+
+                    if (id > 0 && calName != null) {
+                        calendars.put(id, calName);
+                    }
+                } catch (NumberFormatException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        } while (cursor.moveToNext());
 
         if (calendars.isEmpty()) {
             return;
@@ -135,59 +142,79 @@ public final class CalendarActivity extends Activity {
     }
 
     /**
-     * @param calendars
-     *
-     * @param index
+     * @return <code>Date</code> based on hidden date. Time is set to 00:00:00.
+     */
+    private Date parseDate() {
+        final Date eventDate = new Date(Long.parseLong(hiddenDate));
+        eventDate.setHours(0);
+        eventDate.setMinutes(0);
+        eventDate.setSeconds(0);
+
+        return eventDate;
+    }
+
+    /**
+     * @return description string with images removed and personal note included
+     */
+    private String parseDescription() {
+        final StringBuilder description = new StringBuilder();
+        description.append(url);
+        if (shortDesc.length() > 0) {
+            // remove images in short description
+            final Spanned spanned = Html.fromHtml(shortDesc, null, null);
+            String text = spanned.toString();
+            final ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
+            for (int i = spans.length - 1; i >= 0; i--) {
+                text = text.substring(0, spanned.getSpanStart(spans[i])) + text.substring(spanned.getSpanEnd(spans[i]));
+            }
+            if (text.length() > 0) {
+                description.append("\n\n");
+                description.append(text);
+            }
+        }
+
+        if (personalNote.length() > 0) {
+            description.append("\n\n").append(Html.fromHtml(personalNote).toString());
+        }
+
+        return description.toString();
+    }
+
+    /**
+     * @return location string with coordinates and location
+     */
+    private String parseLocation() {
+        final StringBuilder locBuffer = new StringBuilder();
+        if (coords.length() > 0) {
+            locBuffer.append(coords);
+        }
+        if (location.length() > 0) {
+            boolean addParentheses = false;
+            if (locBuffer.length() > 0) {
+                addParentheses = true;
+                locBuffer.append(" (");
+            }
+
+            locBuffer.append(Html.fromHtml(location).toString());
+            if (addParentheses) {
+                locBuffer.append(')');
+            }
+        }
+
+        return locBuffer.toString();
+    }
+
+    /**
+     * @param calendarId
      *            The selected calendar
      */
     private void addToCalendar(Integer calendarId) {
         try {
-            final Uri calendarProvider = Compatibility.getCalenderEventsProviderURI();
+            final Uri calendarProvider = Compatibility.getCalendarEventsProviderURI();
 
-            // date
-            final Date eventDate = new Date(Long.parseLong(hiddenDate));
-            eventDate.setHours(0);
-            eventDate.setMinutes(0);
-            eventDate.setSeconds(0);
-
-            // description
-            final StringBuilder description = new StringBuilder();
-            description.append(url);
-            if (shortDesc.length() > 0) {
-                // remove images in short description
-                final Spanned spanned = Html.fromHtml(shortDesc, null, null);
-                String text = spanned.toString();
-                final ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
-                for (int i = spans.length - 1; i >= 0; i--) {
-                    text = text.substring(0, spanned.getSpanStart(spans[i])) + text.substring(spanned.getSpanEnd(spans[i]));
-                }
-                if (text.length() > 0) {
-                    description.append("\n\n");
-                    description.append(text);
-                }
-            }
-
-            if (personalNote.length() > 0) {
-                description.append("\n\n").append(Html.fromHtml(personalNote).toString());
-            }
-
-            // location
-            final StringBuilder locBuffer = new StringBuilder();
-            if (coords.length() > 0) {
-                locBuffer.append(coords);
-            }
-            if (location.length() > 0) {
-                boolean addParentheses = false;
-                if (locBuffer.length() > 0) {
-                    addParentheses = true;
-                    locBuffer.append(" (");
-                }
-
-                locBuffer.append(Html.fromHtml(location).toString());
-                if (addParentheses) {
-                    locBuffer.append(')');
-                }
-            }
+            final Date eventDate = parseDate();
+            final String description = parseDescription();
+            final String location = parseLocation();
 
             // values
             final ContentValues event = new ContentValues();
@@ -196,10 +223,10 @@ public final class CalendarActivity extends Activity {
             event.put("dtend", eventDate.getTime() + 43200000 + 3600000); // + one hour
             event.put("eventTimezone", "UTC");
             event.put("title", Html.fromHtml(name).toString());
-            event.put("description", description.toString());
+            event.put("description", description);
 
-            if (locBuffer.length() > 0) {
-                event.put("eventLocation", locBuffer.toString());
+            if (location.length() > 0) {
+                event.put("eventLocation", location);
             }
             event.put("allDay", 1);
             event.put("hasAlarm", 0);
@@ -211,6 +238,39 @@ public final class CalendarActivity extends Activity {
             showToast(getResources().getString(R.string.event_fail));
 
             Log.e(LOG_TAG, "CalendarActivity.addToCalendarFn: " + e.toString());
+        }
+    }
+
+    /**
+     * Add cache to calendar in Android versions 4.0 and greater using <code>Intent</code>. This does not require
+     * calendar permissions.
+     * TODO Does this work with apps other than default calendar app?
+     */
+    private void addToCalendarLevel14() {
+        try {
+            final Date eventDate = parseDate();
+            final String description = parseDescription();
+            final String location = parseLocation();
+
+            /*
+             * TODO These strings are available as constants starting with API 14 and can be used when
+             * targetSdkVersion changes to 14. For example CalendarContract.EXTRA_EVENT_BEGIN_TIME and
+             * Events.TITLE
+             */
+            Intent intent = new Intent(Intent.ACTION_INSERT)
+                    .setData(Compatibility.getCalendarEventsProviderURI())
+                    .putExtra("beginTime", eventDate.getTime() + 43200000)
+                    .putExtra("allDay", true)
+                    .putExtra("title", Html.fromHtml(name).toString())
+                    .putExtra("description", description)
+                    .putExtra("hasAlarm", false)
+                    .putExtra("eventTimezone", "UTC")
+                    .putExtra("eventLocation", location);
+            startActivity(intent);
+        } catch (Exception e) {
+            showToast(getResources().getString(R.string.event_fail));
+
+            Log.e(LOG_TAG, "CalendarActivity.addToCalendarLevel14: " + e.toString());
         }
     }
 
