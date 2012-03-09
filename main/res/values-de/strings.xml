@@ -422,7 +422,7 @@
   <string name="init_maptrail">Zeige Spur auf Karte</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Signatur automatisch einfügen</string>
-  <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig</string>
+  <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig (nur Basic Member)</string>
   <string name="init_default_navigation_tool">Standardnavigation</string>
   <string name="init_default_navigation_tool_description">Hier kannst du dein bevorzugtes Navigationswerkzeug festlegen.</string>
   <string name="init_default_navigation_tool_select">Wähle Werkzeug</string>
