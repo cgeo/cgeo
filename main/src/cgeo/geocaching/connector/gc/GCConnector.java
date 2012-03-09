@@ -8,7 +8,6 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -107,7 +106,7 @@ public class GCConnector extends AbstractConnector {
         final String page = cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
 
         if (StringUtils.isEmpty(page)) {
-            SearchResult search = new SearchResult();
+            final SearchResult search = new SearchResult();
             if (app.isThere(geocode, guid, true, false)) {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
                     Log.i(Settings.tag, "Loading old cache from cache.");
@@ -132,15 +131,9 @@ public class GCConnector extends AbstractConnector {
             return searchResult;
         }
 
-        SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType());
+        final SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType());
 
         return search;
-    }
-
-    @Override
-    public SearchResult searchByCoordinate(Geopoint center) {
-        // TODO Auto-generated method stub
-        return super.searchByCoordinate(center);
     }
 
     @Override

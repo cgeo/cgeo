@@ -110,8 +110,7 @@ public final class CalendarActivity extends Activity {
                         calendars.put(id, calName);
                     }
                 } catch (NumberFormatException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Log.e(LOG_TAG, "CalendarActivity.selectCalendarForAdding", e);
                 }
             }
         } while (cursor.moveToNext());
@@ -237,7 +236,7 @@ public final class CalendarActivity extends Activity {
         } catch (Exception e) {
             showToast(getResources().getString(R.string.event_fail));
 
-            Log.e(LOG_TAG, "CalendarActivity.addToCalendarFn: " + e.toString());
+            Log.e(LOG_TAG, "CalendarActivity.addToCalendarFn", e);
         }
     }
 
@@ -257,7 +256,7 @@ public final class CalendarActivity extends Activity {
              * targetSdkVersion changes to 14. For example CalendarContract.EXTRA_EVENT_BEGIN_TIME and
              * Events.TITLE
              */
-            Intent intent = new Intent(Intent.ACTION_INSERT)
+            final Intent intent = new Intent(Intent.ACTION_INSERT)
                     .setData(Compatibility.getCalendarEventsProviderURI())
                     .putExtra("beginTime", eventDate.getTime() + 43200000)
                     .putExtra("allDay", true)
