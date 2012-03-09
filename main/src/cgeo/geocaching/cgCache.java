@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -99,7 +100,7 @@ public class cgCache implements ICache {
     private String nameForSorting;
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
-    private int zoomlevel = -1;
+    private int zoomlevel = Tile.ZOOMLEVEL_MAX;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
