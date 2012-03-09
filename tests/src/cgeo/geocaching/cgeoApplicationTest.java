@@ -130,7 +130,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
         try {
             // non premium cache
-            MockedCache cache = new GC1ZXX2();
+            MockedCache cache = new GC2CJPF();
 
             deleteCacheFromDBAndLogout(cache.getGeocode());
 
@@ -148,6 +148,32 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             deleteCacheFromDBAndLogout(cache.getGeocode());
 
             search = cgBase.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+            assertNotNull(search);
+            assertEquals(0, search.getGeocodes().size());
+
+        } finally {
+            // restore user and password
+            Settings.setLogin(login.left, login.right);
+            Settings.setMemberStatus(memberStatus);
+            cgBase.login();
+        }
+    }
+
+    /**
+     * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     */
+    @MediumTest
+    public static void testSearchErrorOccured() {
+        ImmutablePair<String, String> login = Settings.getLogin();
+        String memberStatus = Settings.getMemberStatus();
+
+        try {
+            // non premium cache
+            MockedCache cache = new GC1ZXX2();
+
+            deleteCacheFromDBAndLogout(cache.getGeocode());
+
+            SearchResult search = cgBase.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
             assertNotNull(search);
             assertEquals(0, search.getGeocodes().size());
 
