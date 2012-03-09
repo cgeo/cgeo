@@ -692,6 +692,7 @@
   <string name="map_token_err">Since c:geo is able to download only partial data, coordinates of caches could be inaccurate.</string>
   <string name="map_as_list">Show as list</string>
   <string name="map_strategy">Strategy</string>
+  <string name="map_strategy_title">Live Map strategy</string>
   <string name="map_strategy_fastest">Fastest</string>
   <string name="map_strategy_fast">Fast</string>
   <string name="map_strategy_auto">Speed dependent</string>
