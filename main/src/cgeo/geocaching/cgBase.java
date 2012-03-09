@@ -722,6 +722,12 @@ public class cgBase {
             return searchResult;
         }
 
+        final String cacheName = Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_NAME, true, "")).toString();
+        if ("An Error Has Occurred".equalsIgnoreCase(cacheName)) {
+            searchResult.error = StatusCode.UNKNOWN_ERROR;
+            return searchResult;
+        }
+
         final cgCache cache = new cgCache();
         cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
 
@@ -741,7 +747,7 @@ public class cgBase {
         cache.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.getGuid()));
 
         // name
-        cache.setName(Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_NAME, true, cache.getName())).toString());
+        cache.setName(cacheName);
 
         // owner real name
         cache.setOwnerReal(URLDecoder.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNERREAL, true, cache.getOwnerReal())));
