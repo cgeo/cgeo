@@ -6,14 +6,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.UpdateDirectionCallback;
 import cgeo.geocaching.UpdateLocationCallback;
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.cgDirection;
-import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgWaypoint;
-import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCBase;
@@ -37,38 +29,11 @@ import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.bidimap.AbstractDualBidiMap.View;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
-import android.widget.TextView;
-import android.widget.ViewSwitcher.ViewFactory;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.support.v4.view.ViewPager.LayoutParams;
 
 /**
  * Class representing the Map in c:geo

@@ -666,6 +666,7 @@
   <string name="map_token_err">Eftersom c:geo bara kunde hämta en del av informationen så kan positionen för cacher vara felaktig.</string>
   <string name="map_as_list">Visa som lista</string>
   <string name="map_strategy">Strategi</string>
+  <string name="map_strategy_title">Strategi för Live karta</string>
   <string name="map_strategy_fastest">Snabbaste</string>
   <string name="map_strategy_fast">Snabbt</string>
   <string name="map_strategy_auto">Hastighetsberoende (gps)</string>
