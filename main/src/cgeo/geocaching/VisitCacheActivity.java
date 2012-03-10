@@ -8,7 +8,10 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.network.Login;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DateDialog;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
@@ -352,7 +355,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     private void insertIntoLog(String newText, final boolean moveCursor) {
         final EditText log = (EditText) findViewById(R.id.log);
-        cgBase.insertAtPosition(log, newText, moveCursor);
+        insertAtPosition(log, newText, moveCursor);
     }
 
     private static String ratingTextValue(final double rating) {
@@ -653,9 +656,9 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     return;
                 }
 
-                final String page = cgBase.getResponseData(cgBase.request("http://www.geocaching.com/seek/log.aspx", params, false, false, false));
+                final String page = Network.getResponseData(Network.request("http://www.geocaching.com/seek/log.aspx", params, false, false, false));
 
-                viewstates = cgBase.getViewstates(page);
+                viewstates = Login.getViewstates(page);
                 trackables = cgBase.parseTrackableLog(page);
 
                 final List<LogType> typesPre = cgBase.parseTypes(page);
@@ -729,7 +732,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isUseTwitter()
                     && Settings.isTwitterLoginValid()
                     && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                cgBase.postTweetCache(geocode);
+                Twitter.postTweetCache(geocode);
             }
 
             if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {

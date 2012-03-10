@@ -31,7 +31,7 @@ public class cgBaseTest extends AndroidTestCase {
     }
 
     public static void testElevation() {
-        assertEquals(125.663703918457, cgBase.getElevation(new Geopoint(48.0, 2.0)), 0.1);
+        assertEquals(125.663703918457, (new Geopoint(48.0, 2.0)).getElevation(), 0.1);
     }
 
     public static void testCompareCaches(ICache expected, cgCache actual) {

@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.network.Login;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
@@ -55,7 +56,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     @SuppressWarnings("static-method")
     @SmallTest
     public void testPreconditions() {
-        assertEquals(StatusCode.NO_ERROR, cgBase.login());
+        assertEquals(StatusCode.NO_ERROR, Login.login());
     }
 
     /**
@@ -155,7 +156,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             // restore user and password
             Settings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
-            cgBase.login();
+            Login.login();
         }
     }
 
@@ -181,7 +182,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             // restore user and password
             Settings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
-            cgBase.login();
+            Login.login();
         }
     }
 
@@ -300,7 +301,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             // restore user and password
             Settings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
-            cgBase.login();
+            Login.login();
             Settings.setLiveMapStrategy(strategy);
         }
     }
@@ -333,7 +334,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     private static void deleteCacheFromDBAndLogout(String geocode) {
         cgeoapplication.getInstance().removeCache(geocode, LoadFlags.REMOVE_ALL);
 
-        cgBase.logout();
+        Login.logout();
         // Modify login data to avoid an automatic login again
         Settings.setLogin("c:geo", "c:geo");
         Settings.setMemberStatus("Basic member");

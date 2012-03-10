@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LiveMapStrategy.StrategyFlag;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
@@ -136,12 +137,12 @@ public class GCBase {
                 final String urlString = url.toString();
 
                 // The PNG must be request before ! Else the following request would return with 204 - No Content
-                Bitmap bitmap = cgBase.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
+                Bitmap bitmap = Tile.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
 
                 assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
                 assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
 
-                String data = cgBase.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
+                String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
                 if (StringUtils.isEmpty(data)) {
                     Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
                 } else {
@@ -258,7 +259,7 @@ public class GCBase {
 
             for (String id : positions.keySet()) {
                 List<UTFGridPosition> pos = positions.get(id);
-                UTFGridPosition xy = getPositionInGrid(pos);
+                UTFGridPosition xy = UTFGrid.getPositionInGrid(pos);
                 cgCache cache = new cgCache();
                 cache.setDetailed(false);
                 cache.setReliableLatLon(false);
@@ -387,21 +388,6 @@ public class GCBase {
         return tiles;
     }
 
-    /** Calculate from a list of positions (x/y) the coords */
-    protected static UTFGridPosition getPositionInGrid(List<UTFGridPosition> positions) {
-        int minX = UTFGrid.GRID_MAXX;
-        int maxX = 0;
-        int minY = UTFGrid.GRID_MAXY;
-        int maxY = 0;
-        for (UTFGridPosition pos : positions) {
-            minX = Math.min(minX, pos.x);
-            maxX = Math.max(maxX, pos.x);
-            minY = Math.min(minY, pos.y);
-            maxY = Math.max(maxY, pos.y);
-        }
-        return new UTFGridPosition((minX + maxX) / 2, (minY + maxY) / 2);
-    }
-
     /**
      * Convert GCCode (geocode) to (old) GCIds
      *
@@ -485,8 +471,8 @@ public class GCBase {
 
     /** Get user session & session token from the Live Map. Needed for following requests */
     public static String[] getTokens() {
-        final HttpResponse response = cgBase.request(GCConstants.URL_LIVE_MAP, null, false);
-        final String data = cgBase.getResponseData(response);
+        final HttpResponse response = Network.request(GCConstants.URL_LIVE_MAP, null, false);
+        final String data = Network.getResponseData(response);
         String userSession = BaseUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
         String sessionToken = BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
         return new String[] { userSession, sessionToken };

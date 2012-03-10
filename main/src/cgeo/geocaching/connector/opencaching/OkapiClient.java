@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector.opencaching;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgLog;
@@ -13,6 +12,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 
 import org.apache.commons.lang3.StringUtils;
@@ -304,6 +304,6 @@ final public class OkapiClient {
 
         final String uri = "http://" + host + service;
         ((ApiOpenCachingConnector) connector).addAuthentication(params);
-        return cgBase.requestJSON(uri, params);
+        return Network.requestJSON(uri, params);
     }
 }

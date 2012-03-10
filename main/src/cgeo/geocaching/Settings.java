@@ -418,7 +418,7 @@ public final class Settings {
         return sharedPrefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
     }
 
-    static void setGcCustomDate(final String format) {
+    public static void setGcCustomDate(final String format) {
         editSharedSettings(new PrefRunnable() {
 
             @Override

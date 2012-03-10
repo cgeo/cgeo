@@ -969,7 +969,7 @@ public class cgData {
             public void run() {
                 for (final File dir : toRemove) {
                     Log.i(Settings.tag, "Removing obsolete cache directory for " + dir.getName());
-                    cgBase.deleteDirectory(dir);
+                    LocalStorage.deleteDirectory(dir);
                 }
             }
         }).start();
@@ -3047,7 +3047,7 @@ public class cgData {
 
             // Delete cache directories
             for (final String geocode : geocodes) {
-                cgBase.deleteDirectory(LocalStorage.getStorageDir(geocode));
+                LocalStorage.deleteDirectory(LocalStorage.getStorageDir(geocode));
             }
         }
     }

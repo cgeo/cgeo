@@ -12,6 +12,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.network.Login;
 import cgeo.geocaching.ui.Formatter;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -77,14 +78,14 @@ public class cgeo extends AbstractActivity {
             TextView userInfoView = (TextView) findViewById(R.id.user_info);
 
             StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
-            if (cgBase.isActualLoginStatus()) {
-                userInfo.append(cgBase.getActualUserName());
-                if (cgBase.getActualCachesFound() >= 0) {
-                    userInfo.append(" (").append(String.valueOf(cgBase.getActualCachesFound())).append(')');
+            if (Login.isActualLoginStatus()) {
+                userInfo.append(Login.getActualUserName());
+                if (Login.getActualCachesFound() >= 0) {
+                    userInfo.append(" (").append(String.valueOf(Login.getActualCachesFound())).append(')');
                 }
                 userInfo.append(Formatter.SEPARATOR);
             }
-            userInfo.append(cgBase.getActualStatus());
+            userInfo.append(Login.getActualStatus());
 
             userInfoView.setText(userInfo.toString());
         }
@@ -790,11 +791,11 @@ public class cgeo extends AbstractActivity {
             }
 
             // login
-            final StatusCode status = cgBase.login();
+            final StatusCode status = Login.login();
 
             if (status == StatusCode.NO_ERROR) {
                 app.firstRun = false;
-                cgBase.detectGcCustomDate();
+                Login.detectGcCustomDate();
                 updateUserInfoHandler.sendEmptyMessage(-1);
             }
 

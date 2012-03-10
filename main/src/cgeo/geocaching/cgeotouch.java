@@ -3,7 +3,10 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Login;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DateDialog;
 
 import org.apache.commons.lang3.StringUtils;
@@ -389,9 +392,9 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
                     return;
                 }
 
-                final String page = cgBase.getResponseData(cgBase.request("http://www.geocaching.com/track/log.aspx", params, false, false, false));
+                final String page = Network.getResponseData(Network.request("http://www.geocaching.com/track/log.aspx", params, false, false, false));
 
-                viewstates = cgBase.getViewstates(page);
+                viewstates = Login.getViewstates(page);
 
                 final List<LogType> typesPre = cgBase.parseTypes(page);
                 if (typesPre.size() > 0) {
@@ -444,7 +447,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
             if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
                     Settings.isTwitterLoginValid() &&
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                cgBase.postTweetTrackable(geocode);
+                Twitter.postTweetTrackable(geocode);
             }
 
             return status;

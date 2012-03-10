@@ -1,6 +1,17 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.network.Network;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * All about tiles.
@@ -199,5 +210,29 @@ public class Tile {
     @Override
     public int hashCode() {
         return toString().hashCode();
+    }
+
+    /** Request JSON informations for a tile */
+    public static String requestMapInfo(final String url, final String referer) {
+        final HttpGet request = new HttpGet(url);
+        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+        request.addHeader("Referer", referer);
+        request.addHeader("X-Requested-With", "XMLHttpRequest");
+        return Network.getResponseData(Network.request(request), false);
+    }
+
+    /** Request .png image for a tile. */
+    public static Bitmap requestMapTile(final String url, final String referer) {
+        final HttpGet request = new HttpGet(url);
+        request.addHeader("Accept", "image/png,image/*;q=0.8,*/*;q=0.5");
+        request.addHeader("Referer", referer);
+        request.addHeader("X-Requested-With", "XMLHttpRequest");
+        final HttpResponse response = Network.request(request);
+        try {
+            return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
+        } catch (IOException e) {
+            Log.e(Settings.tag, "cgBase.requestMapTile() " + e.getMessage());
+        }
+        return null;
     }
 }

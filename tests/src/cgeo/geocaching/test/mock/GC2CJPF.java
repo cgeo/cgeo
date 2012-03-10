@@ -1,11 +1,11 @@
 package cgeo.geocaching.test.mock;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.network.Login;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -122,7 +122,7 @@ public class GC2CJPF extends MockedCache {
     @Override
     public Date getHiddenDate() {
         try {
-            return cgBase.parseGcCustomDate("31/07/2010", getDateFormat());
+            return Login.parseGcCustomDate("31/07/2010", getDateFormat());
         } catch (ParseException e) {
             // intentionally left blank
         }

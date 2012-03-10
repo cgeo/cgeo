@@ -21,6 +21,7 @@ import cgeo.geocaching.filter.TrackablesFilter;
 import cgeo.geocaching.filter.TypeFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DateComparator;
@@ -205,14 +206,14 @@ public class cgeocaches extends AbstractListActivity {
                     dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            cgBase.clearCookies();
+                            Network.clearCookies();
                             dialog.cancel();
                         }
                     });
                     dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            cgBase.clearCookies();
+                            Network.clearCookies();
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
                         }
                     });
@@ -1903,10 +1904,10 @@ public class cgeocaches extends AbstractListActivity {
                     deviceCode = "";
                 }
                 final Parameters params = new Parameters("code", deviceCode);
-                HttpResponse responseFromWeb = cgBase.request("http://send2.cgeo.org/read.html", params, true);
+                HttpResponse responseFromWeb = Network.request("http://send2.cgeo.org/read.html", params, true);
 
                 if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
-                    final String response = cgBase.getResponseData(responseFromWeb);
+                    final String response = Network.getResponseData(responseFromWeb);
                     if (response.length() > 2) {
 
                         String GCcode = response;

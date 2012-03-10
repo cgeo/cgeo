@@ -2,8 +2,8 @@ package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.Parameters;
 
@@ -141,7 +141,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
         try {
             final Parameters params = new Parameters();
             OAuth.signOAuth(host, pathRequest, method, true, params, null, null);
-            final String line = cgBase.getResponseData(cgBase.request("https://" + host + pathRequest, params, false));
+            final String line = Network.getResponseData(Network.request("https://" + host + pathRequest, params, false));
 
 
             if (StringUtils.isNotBlank(line)) {
@@ -186,7 +186,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
             final Parameters params = new Parameters("oauth_verifier", pinEntry.getText().toString());
 
             OAuth.signOAuth(host, path, method, true, params, OAtoken, OAtokenSecret);
-            final String line = StringUtils.defaultString(cgBase.getResponseData(cgBase.postRequest("https://" + host + path, params)));
+            final String line = StringUtils.defaultString(Network.getResponseData(Network.postRequest("https://" + host + path, params)));
 
             OAtoken = "";
             OAtokenSecret = "";

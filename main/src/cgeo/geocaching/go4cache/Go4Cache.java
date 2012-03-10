@@ -6,6 +6,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CryptUtils;
 
@@ -99,7 +100,7 @@ public final class Go4Cache extends Thread {
                     params.put("v", cgBase.version);
                 }
 
-                cgBase.postRequest("http://api.go4cache.com/", params);
+                Network.postRequest("http://api.go4cache.com/", params);
 
                 // Update our coordinates even if the request was not successful, as not to hammer the server
                 // with invalid requests for every new GPS position.
@@ -134,7 +135,7 @@ public final class Go4Cache extends Thread {
                 "lnm", viewport.bottomLeft.format(Format.LON_DECDEGREE_RAW),
                 "lnx", viewport.topRight.format(Format.LON_DECDEGREE_RAW));
 
-        final String data = cgBase.getResponseData(cgBase.postRequest("http://api.go4cache.com/get.php", params));
+        final String data = Network.getResponseData(Network.postRequest("http://api.go4cache.com/get.php", params));
 
         if (StringUtils.isBlank(data)) {
             Log.e(Settings.tag, "cgeoBase.getGeocachersInViewport: No data from server");

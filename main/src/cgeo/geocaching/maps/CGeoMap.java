@@ -34,6 +34,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
+import cgeo.geocaching.network.Login;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -1335,7 +1336,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (search != null) {
                         downloaded = true;
                         if (search.error == StatusCode.NOT_LOGGED_IN) {
-                            cgBase.login();
+                            Login.login();
                             tokens = null;
                         } else {
                             break;

@@ -2,12 +2,12 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.network.Login;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
@@ -18,7 +18,7 @@ import android.util.Log;
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testGetViewport() {
-        cgBase.login();
+        Login.login();
 
         String[] tokens = GCBase.getTokens();
 

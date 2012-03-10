@@ -3,7 +3,6 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
 
@@ -86,7 +85,7 @@ public class HtmlImage implements Html.ImageGetter {
 
             if (absoluteURL != null) {
                 try {
-                    final HttpResponse httpResponse = cgBase.request(absoluteURL, null, false);
+                    final HttpResponse httpResponse = Network.request(absoluteURL, null, false);
                     if (httpResponse != null) {
                         final File file = LocalStorage.getStorageFile(geocode, url, true, true);
                         LocalStorage.saveEntityToFile(httpResponse, file);

@@ -1,8 +1,16 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
+
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.location.Location;
+import android.util.Log;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -234,7 +242,7 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     * 
+     *
      * @return formatted coordinates
      */
     @Override
@@ -475,4 +483,33 @@ public final class Geopoint
             super(msg);
         }
     }
+
+    public Double getElevation() {
+        try {
+            final String uri = "http://maps.googleapis.com/maps/api/elevation/json";
+            final Parameters params = new Parameters(
+                    "sensor", "false",
+                    "locations", format(Format.LAT_LON_DECDEGREE_COMMA));
+            final JSONObject response = Network.requestJSON(uri, params);
+
+            if (response == null) {
+                return null;
+            }
+
+            if (!StringUtils.equalsIgnoreCase(response.getString("status"), "OK")) {
+                return null;
+            }
+
+            if (response.has("results")) {
+                JSONArray results = response.getJSONArray("results");
+                JSONObject result = results.getJSONObject(0);
+                return result.getDouble("elevation");
+            }
+        } catch (Exception e) {
+            Log.w(Settings.tag, "cgBase.getElevation: " + e.toString());
+        }
+
+        return null;
+    }
+
 }

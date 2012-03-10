@@ -4,6 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.network.Login;
+import cgeo.geocaching.network.Network;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -81,12 +83,12 @@ public class LogTemplateProvider {
 
                         @Override
                         public String getValue(final boolean offline) {
-                            int current = cgBase.getActualCachesFound();
+                            int current = Login.getActualCachesFound();
                             if (current == 0) {
                                 if (offline) {
                                     return "";
                                 }
-                                final String page = cgBase.getResponseData(cgBase.request("http://www.geocaching.com/email/", null, false, false, false));
+                                final String page = Network.getResponseData(Network.request("http://www.geocaching.com/email/", null, false, false, false));
                                 current = parseFindCount(page);
                             }
 

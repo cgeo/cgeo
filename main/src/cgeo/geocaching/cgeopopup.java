@@ -605,7 +605,7 @@ public class cgeopopup extends AbstractActivity {
 
         itemName.setText(res.getString(R.string.cache_rating));
         itemValue.setText(String.format("%.1f", rating) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
-        itemStars.addView(cgBase.createStarRating(rating, 5, this), 1);
+        itemStars.addView(createStarRating(rating, 5, this), 1);
 
         if (votes > 0) {
             final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);

@@ -16,6 +16,7 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
@@ -1559,7 +1560,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             viewName.setText(res.getString(nameId));
             viewValue.setText(String.format("%.1f", value) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
-            layoutStars.addView(cgBase.createStarRating(value, 5, CacheDetailActivity.this), 1);
+            layoutStars.addView(createStarRating(value, 5, CacheDetailActivity.this), 1);
 
             detailsList.addView(layout);
             return layout;
@@ -1889,7 +1890,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     final int height = (int) (110 * metrics.density);
 
                     // TODO move this code to StaticMapProvider and use its constant values
-                    final String markerUrl = cgBase.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
+                    final String markerUrl = Network.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
 
                     final HtmlImage mapGetter = new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, 0, false);
                     image = mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?zoom=15&size=" + width + "x" + height + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7Cshadow:false%7C" + latlonMap + "&sensor=false");

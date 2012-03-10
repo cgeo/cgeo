@@ -4,6 +4,7 @@ import cgeo.geocaching.concurrent.BlockingThreadPool;
 import cgeo.geocaching.concurrent.Task;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.network.Network;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +42,7 @@ public class StaticMapsProvider {
         final String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + latlonMap;
         final String url = mapUrl + "&zoom=" + zoom + "&size=" + edge + "x" + edge + "&maptype=" + mapType + "&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints + "&sensor=false";
         final File file = getMapFile(cache.getGeocode(), prefix, level, true);
-        final HttpResponse httpResponse = cgBase.request(url, null, false);
+        final HttpResponse httpResponse = Network.request(url, null, false);
 
         if (httpResponse != null) {
             if (LocalStorage.saveEntityToFile(httpResponse, file)) {
@@ -167,12 +168,12 @@ public class StaticMapsProvider {
             type += "_disabled";
         }
 
-        return cgBase.urlencode_rfc3986(MARKERS_URL + "marker_cache_" + type + ".png");
+        return Network.urlencode_rfc3986(MARKERS_URL + "marker_cache_" + type + ".png");
     }
 
     private static String getWpMarkerUrl(final cgWaypoint waypoint) {
         String type = waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null;
-        return cgBase.urlencode_rfc3986(MARKERS_URL + "marker_waypoint_" + type + ".png");
+        return Network.urlencode_rfc3986(MARKERS_URL + "marker_waypoint_" + type + ".png");
     }
 
     public static void removeWpStaticMaps(int wp_id, String geocode) {

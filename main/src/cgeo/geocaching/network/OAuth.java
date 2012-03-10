@@ -1,7 +1,6 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,11 +23,11 @@ public class OAuth {
 
         final List<String> paramsEncoded = new ArrayList<String>();
         for (final NameValuePair nameValue : params) {
-            paramsEncoded.add(nameValue.getName() + "=" + cgBase.urlencode_rfc3986(nameValue.getValue()));
+            paramsEncoded.add(nameValue.getName() + "=" + Network.urlencode_rfc3986(nameValue.getValue()));
         }
 
         final String keysPacked = Settings.getKeyConsumerSecret() + "&" + StringUtils.defaultString(tokenSecret); // both even if empty some of them!
-        final String requestPacked = method + "&" + cgBase.urlencode_rfc3986((https ? "https" : "http") + "://" + host + path) + "&" + cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(), '&'));
+        final String requestPacked = method + "&" + Network.urlencode_rfc3986((https ? "https" : "http") + "://" + host + path) + "&" + Network.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(), '&'));
         params.put("oauth_signature", CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked)));
     }
 }

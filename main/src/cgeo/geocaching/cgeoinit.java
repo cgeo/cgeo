@@ -7,6 +7,8 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.network.Login;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 import cgeo.geocaching.utils.LogTemplateProvider;
@@ -213,7 +215,7 @@ public class cgeoinit extends AbstractActivity {
     private boolean insertSignatureTemplate(final LogTemplate template) {
         EditText sig = (EditText) findViewById(R.id.signature);
         String insertText = "[" + template.getTemplateString() + "]";
-        cgBase.insertAtPosition(sig, insertText, true);
+        insertAtPosition(sig, insertText, true);
         return true;
     }
 
@@ -807,17 +809,17 @@ public class cgeoinit extends AbstractActivity {
             loginDialog.setCancelable(false);
 
             Settings.setLogin(username, password);
-            cgBase.clearCookies();
+            Network.clearCookies();
 
             (new Thread() {
 
                 @Override
                 public void run() {
-                    final StatusCode loginResult = cgBase.login();
+                    final StatusCode loginResult = Login.login();
                     Object payload = loginResult;
                     if (loginResult == StatusCode.NO_ERROR) {
-                        cgBase.detectGcCustomDate();
-                        payload = cgBase.downloadAvatarAndGetMemberStatus(cgeoinit.this);
+                        Login.detectGcCustomDate();
+                        payload = Login.downloadAvatarAndGetMemberStatus(cgeoinit.this);
                     }
                     logInHandler.obtainMessage(0, payload).sendToTarget();
                 }
@@ -849,12 +851,12 @@ public class cgeoinit extends AbstractActivity {
                     final String cod = StringUtils.defaultString(deviceCode);
 
                     final Parameters params = new Parameters("name", nam, "code", cod);
-                    HttpResponse response = cgBase.request("http://send2.cgeo.org/auth.html", params, true);
+                    HttpResponse response = Network.request("http://send2.cgeo.org/auth.html", params, true);
 
                     if (response != null && response.getStatusLine().getStatusCode() == 200)
                     {
                         //response was OK
-                        String[] strings = cgBase.getResponseData(response).split(",");
+                        String[] strings = Network.getResponseData(response).split(",");
                         try {
                             pin = Integer.parseInt(strings[1].trim());
                         } catch (Exception e) {

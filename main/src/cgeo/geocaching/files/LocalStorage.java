@@ -257,4 +257,18 @@ public class LocalStorage {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
+    public static boolean deleteDirectory(File path) {
+        if (path.exists()) {
+            for (final File file : path.listFiles()) {
+                if (file.isDirectory()) {
+                    deleteDirectory(file);
+                } else {
+                    file.delete();
+                }
+            }
+        }
+    
+        return path.delete();
+    }
+
 }
