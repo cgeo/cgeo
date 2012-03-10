@@ -406,6 +406,7 @@ public class cgeoinit extends AbstractActivity {
         });
 
         final CheckBox dirImgButton = (CheckBox) findViewById(R.id.loaddirectionimg);
+        dirImgButton.setEnabled(!Settings.isPremiumMember());
         dirImgButton.setChecked(Settings.getLoadDirImg());
         dirImgButton.setOnClickListener(new View.OnClickListener() {
 
