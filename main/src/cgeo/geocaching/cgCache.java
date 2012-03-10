@@ -1164,17 +1164,13 @@ public class cgCache implements ICache {
                 finalDefined = true;
             }
         } else { // this is a waypoint being edited
-            deleteWaypoint(waypoint);
-
-            waypoints.add(waypoint);
-            // when waypoint was edited, finalDefined may have changed. check all waypoints and set again
-            finalDefined = false;
-            for (cgWaypoint wp : waypoints) {
-                if (wp.isFinalWithCoords()) {
-                    finalDefined = true;
-                    break;
-                }
+            final int index = getWaypointIndex(waypoint);
+            if (index >= 0) {
+                waypoints.remove(index);
             }
+            waypoints.add(waypoint);
+            // when waypoint was edited, finalDefined may have changed
+            resetFinalDefined();
         }
 
         if (saveToDatabase) {
@@ -1195,6 +1191,19 @@ public class cgCache implements ICache {
     // Only for loading
     public void setFinalDefined(boolean finalDefined) {
         this.finalDefined = finalDefined;
+    }
+
+    /**
+     * Reset <code>finalDefined</code> based on current list of stored waypoints
+     */
+    private void resetFinalDefined() {
+        finalDefined = false;
+        for (cgWaypoint wp : waypoints) {
+            if (wp.isFinalWithCoords()) {
+                finalDefined = true;
+                break;
+            }
+        }
     }
 
     public boolean hasUserModifiedCoords() {
@@ -1248,13 +1257,7 @@ public class cgCache implements ICache {
             cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             // Check status if Final is defined
             if (waypoint.isFinalWithCoords()) {
-                finalDefined = false;
-                for (cgWaypoint wp : waypoints) {
-                    if (wp.isFinalWithCoords()) {
-                        finalDefined = true;
-                        break;
-                    }
-                }
+                resetFinalDefined();
             }
             return true;
         }
@@ -1273,16 +1276,32 @@ public class cgCache implements ICache {
             return false;
         }
 
+        final int index = getWaypointIndex(waypoint);
+        if (index >= 0) {
+            return deleteWaypoint(index);
+        }
+
+        return false;
+    }
+
+    /**
+     * Find index of given <code>waypoint</code> in cache's <code>waypoints</code> list
+     *
+     * @param waypoint
+     *            to find index for
+     * @return index in <code>waypoints</code> if found, else -1
+     */
+    private int getWaypointIndex(cgWaypoint waypoint) {
         int index = 0;
 
         for (cgWaypoint wp : waypoints) {
             if (wp.getId() == waypoint.getId()) {
-                return deleteWaypoint(index);
+                return index;
             }
             index++;
         }
 
-        return false;
+        return -1;
     }
 
     /**
