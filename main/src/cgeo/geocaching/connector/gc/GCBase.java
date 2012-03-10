@@ -30,8 +30,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * GC.com/Groundspeak (GS) specific stuff
@@ -47,25 +45,6 @@ public class GCBase {
     protected final static long GC_BASE31 = 31;
     protected final static long GC_BASE16 = 16;
 
-    // Pixel colors in tile
-    private final static int BORDER_GRAY = 0x5F5F5F;
-    private final static int DARK_GREEN = 0x316013; // Tradi 14
-    private final static int LIGHT_GREEN = 0x80AF64; // Tradi 13
-    private final static int DARK_BLUE = 0x243C97; // Mystery
-    private final static int YELLOW = 0xFFDE19; // Multi 14,13
-    private final static int FOUND = 0xFBEA5D; // Found
-
-    // Offset inside cache icon
-    private final static int POSX_TRADI = 7;
-    private final static int POSY_TRADI = -12;
-    private final static int POSX_MULTI = 5; // for orange 8
-    private final static int POSY_MULTI = -9; // for orange 10
-    private final static int POSX_MYSTERY = 5;
-    private final static int POSY_MYSTERY = -13;
-    private final static int POSX_FOUND = 10;
-    private final static int POSY_FOUND = -8;
-
-    private final static Pattern PATTERN_JSON_KEY = Pattern.compile("[^\\d]*" + "(\\d+),\\s*(\\d+)" + "[^\\d]*"); // (12, 34)
     /**
      * Searches the view port on the live map with Strategy.AUTO
      *
@@ -235,7 +214,7 @@ public class GCBase {
             for (int i = 1; i < keys.length(); i++) { // index 0 is empty
                 String key = keys.getString(i);
                 if (StringUtils.isNotBlank(key)) {
-                    int[] xy = splitJSONKey(key);
+                    UTFGridPosition pos = UTFGridPosition.fromString(key);
                     JSONArray dataForKey = dataObject.getJSONArray(key);
                     for (int j = 0; j < dataForKey.length(); j++) {
                         JSONObject cacheInfo = dataForKey.getJSONObject(j);
@@ -245,14 +224,10 @@ public class GCBase {
                         List<UTFGridPosition> listOfPositions = positions.get(id);
                         if (listOfPositions == null) {
                             listOfPositions = new ArrayList<UTFGridPosition>();
+                            positions.put(id, listOfPositions);
                         }
-                        /*
-                         * Optimization
-                         * UTFGridPosition pos = keyPositions.get(key);
-                         */
-                        UTFGridPosition pos = new UTFGridPosition(xy[0], xy[1]);
+
                         listOfPositions.add(pos);
-                        positions.put(id, listOfPositions);
                     }
                 }
             }
@@ -269,9 +244,9 @@ public class GCBase {
                 cache.setCoords(tile.getCoord(xy));
                 if (strategy.flags.contains(StrategyFlag.PARSE_TILES)) {
                     if (tile.getZoomlevel() >= 14) {
-                        parseMapPNG14(cache, bitmap, xy);
+                        IconDecoder.parseMapPNG14(cache, bitmap, xy);
                     } else {
-                        parseMapPNG13(cache, bitmap, xy);
+                        IconDecoder.parseMapPNG13(cache, bitmap, xy);
                     }
                 } else {
                     cache.setType(CacheType.UNKNOWN);
@@ -286,89 +261,6 @@ public class GCBase {
 
         return searchResult;
     }
-
-    // Try to get the cache type from the PNG image for a tile */
-    public static void parseMapPNG14(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
-        int x = xy.getX() * 4 + 2;
-        int y = xy.getY() * 4 + 2;
-        int countX = 0;
-        int countY = 0;
-
-        // search for left border
-        while ((bitmap.getPixel(x, y) & 0x00FFFFFF) != BORDER_GRAY) {
-            if (--x < 0 || ++countX > 20) {
-                return;
-            }
-        }
-        // search for bottom border
-        while ((bitmap.getPixel(x, y) & 0x00FFFFFF) != 0x000000) {
-            if (++y >= Tile.TILE_SIZE || ++countY > 20) {
-                return;
-            }
-        }
-
-        try {
-            if ((bitmap.getPixel(x + POSX_TRADI, y + POSY_TRADI) & 0x00FFFFFF) == DARK_GREEN) {
-                cache.setType(CacheType.TRADITIONAL);
-                return;
-            }
-            if ((bitmap.getPixel(x + POSX_MYSTERY, y + POSY_MYSTERY) & 0x00FFFFFF) == DARK_BLUE) {
-                cache.setType(CacheType.MYSTERY);
-                return;
-            }
-            if ((bitmap.getPixel(x + POSX_MULTI, y + POSY_MULTI) & 0x00FFFFFF) == YELLOW) {
-                cache.setType(CacheType.MULTI);
-                return;
-            }
-            if ((bitmap.getPixel(x + POSX_FOUND, y + POSY_FOUND) & 0x00FFFFFF) == FOUND) {
-                cache.setFound(true);
-                return;
-            }
-        } catch (IllegalArgumentException e) {
-            // intentionally left blank
-        }
-
-        return;
-    }
-
-    // Try to get the cache type from the PNG image for a tile */
-    public static void parseMapPNG13(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
-
-        int x = xy.getX() * 4 + 2;
-        int y = xy.getY() * 4 + 2;
-        int countY = 0;
-
-        // search for top border
-        while ((bitmap.getPixel(x, y) & 0x00FFFFFF) != BORDER_GRAY) {
-            if (--y < 0 || ++countY > 12) {
-                return;
-            }
-        }
-
-        try {
-            int color = bitmap.getPixel(x, y + 2) & 0x00FFFFFF;
-
-            switch (color) {
-                case LIGHT_GREEN:
-                    cache.setType(CacheType.TRADITIONAL);
-                    return;
-                case YELLOW:
-                    cache.setType(CacheType.MULTI);
-                    return;
-            }
-            if ((color | 0x00FFFF) == 0x00FFFF) { // BLUE
-                cache.setType(CacheType.MYSTERY);
-                return;
-            }
-            // Found consists out of too many different colors
-        }
-        catch (IllegalArgumentException e) {
-            // intentionally left blank
-        }
-
-        return;
-    }
-
 
 
     /**
@@ -476,24 +368,6 @@ public class GCBase {
         String userSession = BaseUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
         String sessionToken = BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
         return new String[] { userSession, sessionToken };
-    }
-
-    /**
-     * @param key
-     *            Key in the format (xx, xx)
-     * @return
-     */
-    static int[] splitJSONKey(String key) {
-        final Matcher matcher = PATTERN_JSON_KEY.matcher(key);
-        try {
-            if (matcher.matches()) {
-                final int x = Integer.parseInt(matcher.group(1));
-                final int y = Integer.parseInt(matcher.group(2));
-                return new int[] { x, y };
-            }
-        } catch (NumberFormatException e) {
-        }
-        return new int[] { 0, 0 };
     }
 
 }
