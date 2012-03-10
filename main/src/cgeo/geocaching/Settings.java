@@ -415,7 +415,7 @@ public final class Settings {
     }
 
     public static boolean getLoadDirImg() {
-        return sharedPrefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
+        return isPremiumMember() ? false : sharedPrefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
     }
 
     static void setGcCustomDate(final String format) {
