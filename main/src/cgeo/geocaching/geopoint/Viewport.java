@@ -50,10 +50,9 @@ public class Viewport {
         return "(" + bottomLeft.toString() + "," + topRight.toString() + ")";
     }
 
-    // viewport is defined by center, span and some (10%) reserve on every side
     /**
      * Check if coordinates are located in a viewport (defined by its center and span
-     * in each direction). The viewport also includes a 10% extension on each side.
+     * in each direction).
      *
      * @param centerLat
      *            the viewport center latitude
@@ -68,39 +67,55 @@ public class Viewport {
      * @return true if the coordinates are in the viewport
      */
     public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, final Geopoint coords) {
-        return Math.abs(coords.getLatitudeE6() - centerLat) <= Math.abs(spanLat) * 0.6 &&
-                Math.abs(coords.getLongitudeE6() - centerLon) <= Math.abs(spanLon) * 0.6;
+        return 2 * Math.abs(coords.getLatitudeE6() - centerLat) <= Math.abs(spanLat) &&
+                2 * Math.abs(coords.getLongitudeE6() - centerLon) <= Math.abs(spanLon);
     }
 
+    /**
+     * Check if an area is located in a viewport (defined by its center and span
+     * in each direction).
+     *
+     * expects coordinates in E6 format
+     *
+     * @param centerLat1
+     * @param centerLon1
+     * @param centerLat2
+     * @param centerLon2
+     * @param spanLat1
+     * @param spanLon1
+     * @param spanLat2
+     * @param spanLon2
+     * @return
+     */
     public static boolean isInViewPort(int centerLat1, int centerLon1, int centerLat2, int centerLon2, int spanLat1, int spanLon1, int spanLat2, int spanLon2) {
         try {
-            // expects coordinates in E6 format
             final int left1 = centerLat1 - (spanLat1 / 2);
-            final int right1 = centerLat1 + (spanLat1 / 2);
-            final int top1 = centerLon1 + (spanLon1 / 2);
-            final int bottom1 = centerLon1 - (spanLon1 / 2);
-    
             final int left2 = centerLat2 - (spanLat2 / 2);
-            final int right2 = centerLat2 + (spanLat2 / 2);
-            final int top2 = centerLon2 + (spanLon2 / 2);
-            final int bottom2 = centerLon2 - (spanLon2 / 2);
-    
             if (left2 <= left1) {
                 return false;
             }
+
+            final int right1 = centerLat1 + (spanLat1 / 2);
+            final int right2 = centerLat2 + (spanLat2 / 2);
             if (right2 >= right1) {
                 return false;
             }
+
+            final int top1 = centerLon1 + (spanLon1 / 2);
+            final int top2 = centerLon2 + (spanLon2 / 2);
             if (top2 >= top1) {
                 return false;
             }
+
+            final int bottom1 = centerLon1 - (spanLon1 / 2);
+            final int bottom2 = centerLon2 - (spanLon2 / 2);
             if (bottom2 <= bottom1) {
                 return false;
             }
-    
+
             return true;
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.isInViewPort: " + e.toString());
+            Log.e(Settings.tag, "Viewport.isInViewPort: " + e.toString());
             return false;
         }
     }

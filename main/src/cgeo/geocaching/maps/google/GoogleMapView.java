@@ -60,7 +60,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
             super.draw(canvas);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgMapView.draw: " + e.toString());
+            Log.e(Settings.tag, "GoogleMapView.draw: " + e.toString());
         }
     }
 
@@ -74,7 +74,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
             super.displayZoomControls(takeFocus);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgMapView.displayZoomControls: " + e.toString());
+            Log.e(Settings.tag, "GoogleMapView.displayZoomControls: " + e.toString());
         }
     }
 

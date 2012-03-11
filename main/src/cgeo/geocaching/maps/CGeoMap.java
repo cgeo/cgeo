@@ -135,6 +135,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private Integer centerLongitudeUsers = null;
     private Integer spanLatitudeUsers = null;
     private Integer spanLongitudeUsers = null;
+    private int zoom = -100;
     // threads
     private LoadTimer loadTimer = null;
     private UsersTimer usersTimer = null;
@@ -165,7 +166,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static Map<Integer, LayerDrawable> overlaysCache = new HashMap<Integer, LayerDrawable>();
     private int cachesCnt = 0;
     /** List of caches in the viewport */
-    private Set<cgCache> caches = new HashSet<cgCache>();
+    private final Set<cgCache> caches = new HashSet<cgCache>();
     /** List of users in the viewport */
     private List<Go4CacheUser> users = new ArrayList<Go4CacheUser>();
     private List<cgCoord> coordinates = new ArrayList<cgCoord>();
@@ -201,9 +202,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         title.append(mapTitle);
                     }
 
+                    countVisibleCaches();
                     if (caches != null && caches.size() > 0 && !mapTitle.contains("[")) {
                         title.append(" [");
-                        title.append(caches.size());
+                        title.append(cachesCnt).append('/').append(caches.size());
                         title.append(']');
                     }
 
@@ -304,6 +306,28 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     public CGeoMap(MapActivityImpl activity) {
         super(activity);
+    }
+
+    protected void countVisibleCaches() {
+        final ArrayList<cgCache> protectedCaches = new ArrayList<cgCache>(caches);
+
+        int count = 0;
+        if (protectedCaches.size() > 0) {
+            final GeoPointImpl mapCenter = mapView.getMapViewCenter();
+            final int mapCenterLat = mapCenter.getLatitudeE6();
+            final int mapCenterLon = mapCenter.getLongitudeE6();
+            final int mapSpanLat = mapView.getLatitudeSpan();
+            final int mapSpanLon = mapView.getLongitudeSpan();
+
+            for (cgCache cache : protectedCaches) {
+                if (cache != null && cache.getCoords() != null) {
+                    if (Viewport.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, cache.getCoords())) {
+                        count++;
+                    }
+                }
+            }
+        }
+        cachesCnt = count;
     }
 
     @Override
@@ -649,10 +673,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             final int mapSpanLat = mapView.getLatitudeSpan();
                             final int mapSpanLon = mapView.getLongitudeSpan();
 
-                            for (cgCache oneCache : cachesProtected) {
-                                if (oneCache != null && oneCache.getCoords() != null) {
-                                    if (Viewport.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.getCoords()) && !app.isOffline(oneCache.getGeocode(), null)) {
-                                        geocodes.add(oneCache.getGeocode());
+                            for (cgCache cache : cachesProtected) {
+                                if (cache != null && cache.getCoords() != null) {
+                                    if (Viewport.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, cache.getCoords()) && !app.isOffline(cache.getGeocode(), null)) {
+                                        geocodes.add(cache.getGeocode());
                                     }
                                 }
                             }
@@ -946,6 +970,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             int centerLongitudeNow;
             int spanLatitudeNow;
             int spanLongitudeNow;
+            int zoomNow;
             boolean moved = false;
             boolean force = false;
             long currentTime = 0;
@@ -987,7 +1012,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             force = true;
                         }
 
-                        //LeeB
+                        // update title on any change
+                        zoomNow = mapView.getMapZoomLevel();
+                        if (moved || zoomNow != zoom || spanLatitudeNow != spanLatitude || spanLongitudeNow != spanLongitude || centerLatitudeNow != centerLatitude || centerLongitudeNow != centerLongitude) {
+                            displayHandler.sendEmptyMessage(UPDATE_TITLE);
+                        }
+                        zoom = zoomNow;
+
                         // save new values
                         if (moved) {
                             liveChanged = false;
@@ -1019,7 +1050,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                                 spanLatitude = spanLatitudeNow;
                                 spanLongitude = spanLongitudeNow;
 
-                                showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
+                                showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
 
                                 loadThread = new LoadThread(centerLatitude, centerLongitude, spanLatitude, spanLongitude);
                                 loadThread.start(); //loadThread will kick off downloadThread once it's done
@@ -1028,7 +1059,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                     if (!isLoading()) {
-                        showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
+                        showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
                     }
 
                     yield();
