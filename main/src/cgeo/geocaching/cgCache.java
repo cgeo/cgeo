@@ -136,9 +136,13 @@ public class cgCache implements ICache {
             detailed = true;
             detailedUpdate = other.detailedUpdate;
             coords = other.coords;
+            // boolean values must be enumerated here. Other types are assigned outside this if-statement
             premiumMembersOnly = other.premiumMembersOnly;
             reliableLatLon = other.reliableLatLon;
             archived = other.archived;
+            found = other.found;
+            own = other.own;
+            disabled = other.disabled;
             favorite = other.favorite;
             onWatchlist = other.onWatchlist;
             logOffline = other.logOffline;
@@ -146,7 +150,7 @@ public class cgCache implements ICache {
         }
 
         /*
-         * No gathering for boolean members
+         * No gathering for boolean members if a cache is not-detailed
          * - found
          * - own
          * - disabled
