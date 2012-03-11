@@ -1006,162 +1006,41 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>next release</b>\n
-    · New: Moved calendar operations to separate calendar add-on (available on Android Market)\n 
-      c:geo doesn\'t require calendar permissions anymore\n
-    · New: Login status and find count shown on start screen\n
-    · New: Improved markers in the map and partly in lists with additional information for stored caches:\n
+    <b>Next Release</b>\n\n
+    <b>New Features/Functions:</b>\n
+    · Live Map reimplementation with definable loading strategy:\n
+      Fastest : Load approximated cache-coords only\n
+      Fast : Load approximated cache-coords and try to identify cache-type\n
+      Detailed : Same as fast but additionally load reliable coords for 20 caches around the current position\n
+      Speed dependent : Automatic switch between detailed and fast strategy depending on speed\n
+    · Improved markers in the map and partly in lists with additional information for stored caches:\n
       Personal Note available (Pen icon)\n
       Modified coordinates available (Flagpost icon)\n
       Caches is saved on device (Disk icon)\n
       Offline log is available (Red smiley instead of yellow smiley)
-      Non-reliable coordinates (Cache icon encircled in Orange)\n
-    · New: Copy, translate and forward available with long press for cache- and log-text\n
-    · New: User can select two preferred navigation tools for easier accessibility\n
-    · New: Type of waypoint can be selected for custom waypoints\n
-    · New: Day of week is now shown for event-caches\n
-    · New: Static maps can now also be stored for waypoints of a cache\n
-    · New: Static maps are stored while importing a GPX-file\n
-    · New: Live Map with definable loading strategy\n
-    · Fix: Deletion of outdated caches did not work\n
-    · Fix: Changed internal caching causing a better overall performance\n
-    · Fix: Caches with modified coordinates are displayed at the modified coords and not at the original coords\n   
-    · Fix: Improved consistency for offline-logging operations\n
-    · Fix: Removed OSM:Osmarender map as it is no longer available\n
-    · Fix: Find-count not working in signature\n
-    · Fix: Keep screen on while viewing cache-lists\n
+      Cache coordinates are only approximated (Cache icon encircled in Orange)\n
+    · Moved calendar operations to separate calendar add-on (available on Android Market)\n 
+      c:geo doesn\'t require calendar permissions anymore\n
+    · Login status and find count shown on start screen\n
+    · Copy, translate and forward available with long press for cache- and log-text\n
+    · User can select two preferred navigation tools for easier accessibility\n
+    · Type of waypoint can be selected for custom waypoints\n
+    · Day of week is now shown for event-caches\n
+    · Static maps can now also be stored for waypoints of a cache\n
+    · Static maps are stored while importing a GPX-file\n\n
+    <b>Bugfixing:</b>\n
+    · Deletion of outdated caches did not work\n
+    · Changed internal caching causing a better overall performance\n
+    · Caches with modified coordinates are displayed at the modified coords and not at the original coords\n   
+    · Improved consistency for offline-logging operations\n
+    · Removed OSM:Osmarender map as it is no longer available\n
+    · Find-count not working in signature\n
+    · Keep screen on while viewing cache-lists\n
+    · TB-icons now shown in correct size\n
 \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=3&amp;state=closed">Detailed list of all Changes</a>\n
     \n\n
-    <b>04.01.2012</b>\n
-    · new: additional page in the details view for logs from friends\n
-    · new: horizontal scrollable pages for cache details\n
-    · new: click on cache coordinates to change format\n
-    · new: show own rating in cache details\n
-    · new: import zipped pocket queries\n
-    · new: import pocket queries from e-mail\n
-    · new: show original coordinates as waypoint if user has modified listing-coordinates on gc.com\n
-    · new: delete caches and list together\n
-    · new: have link from hint section to spoiler images\n
-    · new: edit and more options for any-location-history\n
-    · new: allow offline log without any login data stored\n
-    · new: ask for restore after reinstallation\n
-    · new: context menu to open spoiler/log images online\n
-    · new: create waypoints from personal cache note\n
-    · fix: several calendar bugs\n
-    · fix: some enhancement due to gc.com update\n
-    · fix: new translation IT, several translation-updates\n
-    · fix: lot of design enhancements (icons, font-size, autoresizing text-fields, auto-suggestion, seperators, inventory-actions, stars color and value, keyboard, colors, many more)\n
-    · fix: Refresh not stored caches\n
-    · fix: batch-actions for trackables not working\n
-    · fix: missing cache-name as title in cache details\n
-    · fix: some map-issues for gc.com-premium-members\n
-    · fix: edited waypoints are overwritten by cache update\n
-    · fix: spoiler images are too small\n
-    · fix: incorrect storage time in cache details\n
-    · fix: incorrect handling of GeoKrety trackables\n
-    · 100+ bugfixes and enhancements\n
-    \n\n
-    <b>08.11.2011</b>\n
-    · fix: adaption to GC.com changes\n
-    \n\n
-    <b>31.10.2011</b>\n
-    · fix: Store for offline from Live map\n
-    \n\n
-    <b>30.10.2011</b>\n
-    · new: cleanup the cgeo private cache directory when caches are removed from database\n
-    · new: display user avatar when checking login/password from geocaching.com\n
-    · new: support Geocaching Australia caches (GAxxxx, TPxxxx)\n
-    · new: import GPX from mail\n
-    · new: support geopeitus.ee caches\n
-    · new: verbose cache-loading\n
-    · fix: Twitter authorization\n
-    · fix: login problems\n
-    · fix: Google &amp; OSM maps consistency\n
-    · fix: readable cache description (black on black, white on white)\n
-    · fix: many other bugs\n
-    \n\n
-    <b>09.10.2011</b>\n
-    · fix: small bugs due to GC.com change\n
-    \n\n
-    <b>06.10.2011</b>\n
-    · new: import waypoint files from pocket query\n
-    · new: automatically filter out counter images from cache description\n
-    · new: show all the images belonging to a log entry at once\n
-    · new: make it possible to display intermediate waypoints on live map\n
-    · new: better progress information when importing GPX files\n
-    · new: better progress information during backup/restore of database\n
-    · new: better French, German, Hungarian, and Slovak translations\n
-    · new: better icon for caches needing maintenance\n
-    · fix: work again on all devices, it was broken on some Android 1.6 models\n
-    · fix: correctly display target on map when using any coordinates mode\n
-    · fix: forwarding of OC caches used wrong URL\n
-    · fix: better performance when parsing cache description\n
-    · fix: performance improvements when importing waypoints\n
-    · fix: reclaim bitmap memory earlier to prevent memory exhaustion\n
-    · fix: cleaner location names (no more HTML) in cache descriptions\n
-    · fix: load descriptions from database only when needed (lower memory consumption)\n
-    · fix: one of the coordinates entry mode was using the wrong coordinate when reediting\n
-    · fix: latitude and longitude are now localized\n
-    · fix: remove redundant fields in the database to reduce used space\n
-    · fix: various bug fixes and internal enhancements\n
-    \n\n
-    <b>24.09.2011</b>\n
-    · new: import of LOC files\n
-    · new: search for geo code supports OpenCaching.ORG.UK/.PL/.US\n
-    · new: restore settings after reinstallation (Android 2.3+)\n
-    · new: save the log locally when leaving the log activity\n
-    · new: insert signature after the cursor when logging\n
-    · fix: various bug fixes\n
-    \n\n
-    <b>18.09.2011</b>\n
-    · fix: Android 3+ compatibility\n
-    \n\n
-    <b>17.09.2011</b>\n
-    · fix: more small fixes\n
-    \n\n
-    <b>16.09.2011</b>\n
-    · fix: many small fixed due to GC.com changes\n
-    \n\n
-    <b>15.09.2011</b>\n
-    · new: sort by state, sort by find count\n
-    · new: experimental support for .gpx from opencaching.com\n
-    · new: scan QR code to open cache description (Barcode Scanner from Market)\n
-    · new: context menu on stored caches button (main screen)\n
-    · new: compass immediately shows the right direction\n
-    · new: active filters are shown in list mode\n
-    · fix: performance of GPX import\n
-    · fix: performance of deleting caches from list\n
-    · fix: performance of web traffic\n
-    · fix: return to list after GPX import\n
-    · fix: fill signature when logging offline\n
-    · fix: show strikethrough in caches\n
-    · fix: no more empty map previews\n
-    · fix: send2c:geo authorization\n
-    \n\n
-    <b>26.08.2011</b>\n
-    · new: street view\n
-    · new: attribute icons\n
-    · new: experimental support for .gpx from opencaching.de\n
-    · fix: log-dates\n
-    · fix: coordinates input\n
-    · fix: nearby list performance update\n
-    \n\n
-    <b>22.08.2011</b>\n
-    · fix: due to GC.com changes c:geo hangs in displaying cache detail\n
-    \n\n
-    <b>20.08.2011</b>\n
-    · fix: Additional adaption to GC.com changes\n
-    \n\n
-    <b>19.08.2011</b>\n
-    · new: Numeric entry for coordinates\n
-    · fix: adaption to GC.com changes\n
-    \n\n
-    <b>15.08.2011</b>\n
-    · new: OpenStreetMap support\n
-    · new: Send to c:geo from web\n
-    · new: Export field notes\n
-    · new: Clear history\n
-    · fix: A lot of bugs\n
+    <b>Old releases</b>\n
+    <a href="http://www.cgeo.org">Please refer to the release notes on the c:geo-website.</a>\n
     \n</string>
 </resources>
