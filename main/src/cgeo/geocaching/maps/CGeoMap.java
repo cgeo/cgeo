@@ -204,8 +204,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     countVisibleCaches();
                     if (caches != null && caches.size() > 0 && !mapTitle.contains("[")) {
-                        title.append(" [");
-                        title.append(cachesCnt).append('/').append(caches.size());
+                        title.append(" [").append(cachesCnt);
+                        if (cachesCnt != caches.size()) {
+                            title.append('/').append(caches.size());
+                        }
                         title.append(']');
                     }
 
