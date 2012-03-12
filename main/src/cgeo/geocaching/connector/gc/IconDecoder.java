@@ -7,9 +7,17 @@ import android.graphics.Bitmap;
 
 /**
  * icon decoder for cache icons
- * 
+ *
  */
 public abstract class IconDecoder {
+
+    public static void parseMapPNG(final cgCache cache, Bitmap bitmap, UTFGridPosition xy, int zoomlevel) {
+        if (zoomlevel >= 14) {
+            parseMapPNG14(cache, bitmap, xy);
+        } else {
+            parseMapPNG13(cache, bitmap, xy);
+        }
+    }
 
     private static final int[] OFFSET_X = new int[] { 0, -1, -1, 0, 1, 1, 1, 0, -1, -2, -2, -2, -2, -1, 0, 1, 2, 2, 2, 2, 2, 1, 0, -1, -2 };
     private static final int[] OFFSET_Y = new int[] { 0, 0, 1, 1, 1, 0, -1, -1, -1, -1, 0, 1, 2, 2, 2, 2, 2, 1, 0, -1, -2, -2, -2, -2, -2 };
@@ -22,7 +30,7 @@ public abstract class IconDecoder {
      * @param bitmap
      * @param xy
      */
-    public static void parseMapPNG13(final cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
+    private static void parseMapPNG13(final cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
         final int xCenter = xy.getX() * 4 + 2;
         final int yCenter = xy.getY() * 4 + 2;
         final int bitmapWidth = bitmap.getWidth();
@@ -111,7 +119,7 @@ public abstract class IconDecoder {
      * @param bitmap
      * @param xy
      */
-    public static void parseMapPNG14(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
+    private static void parseMapPNG14(cgCache cache, Bitmap bitmap, UTFGridPosition xy) {
         int x = xy.getX() * 4 + 2;
         int y = xy.getY() * 4 + 2;
 

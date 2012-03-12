@@ -210,6 +210,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
                         title.append(']');
                     }
+                    // testing purpose
+                    {
+                        if (search != null && StringUtils.isNotBlank(search.getUrl())) {
+                            title.append("[" + search.getUrl() + "]");
+                        }
+                    }
 
                     ActivityMixin.setTitle(activity, title.toString());
                     break;
@@ -1364,7 +1370,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                     final Viewport viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
-                    // search = cgBase.searchByViewport(token, viewport);
                     search = ConnectorFactory.searchByViewport(viewport, tokens);
                     if (search != null) {
                         downloaded = true;
@@ -1429,50 +1434,50 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
 
                 // display caches
-                final List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
-                final List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
+                final List<cgCache> cachesToDisplay = new ArrayList<cgCache>(caches);
+                final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
 
-                if (!cachesProtected.isEmpty()) {
-                    for (cgCache cacheOne : cachesProtected) {
+                if (!cachesToDisplay.isEmpty()) {
+                    for (cgCache cache : cachesToDisplay) {
                         if (stop) {
                             throw new ThreadDeath();
                         }
 
-                        if (cacheOne.getCoords() == null) {
+                        if (cache.getCoords() == null) {
                             continue;
                         }
 
                         // display cache waypoints
-                        if (cacheOne.hasWaypoints()
+                        if (cache.hasWaypoints()
                                 // Only show waypoints for single view or setting
                                 // when less than showWaypointsthreshold Caches shown
-                                && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold()))) {
-                            for (cgWaypoint oneWaypoint : cacheOne.getWaypoints()) {
-                                if (oneWaypoint.getCoords() == null) {
+                                && (cachesToDisplay.size() == 1 || (cachesToDisplay.size() < Settings.getWayPointsThreshold()))) {
+                            for (cgWaypoint waypoint : cache.getWaypoints()) {
+                                if (waypoint.getCoords() == null) {
                                     continue;
                                 }
 
-                                items.add(getItem(new cgCoord(oneWaypoint), null, oneWaypoint));
+                                itemsToDisplay.add(getItem(new cgCoord(waypoint), null, waypoint));
                             }
                         }
-                        items.add(getItem(new cgCoord(cacheOne), cacheOne, null));
+                        itemsToDisplay.add(getItem(new cgCoord(cache), cache, null));
                     }
 
-                    overlayCaches.updateItems(items);
+                    overlayCaches.updateItems(itemsToDisplay);
                     displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
-                    cachesCnt = cachesProtected.size();
+                    cachesCnt = cachesToDisplay.size();
 
                     if (stop) {
                         throw new ThreadDeath();
                     }
 
                 } else {
-                    overlayCaches.updateItems(items);
+                    overlayCaches.updateItems(itemsToDisplay);
                     displayHandler.sendEmptyMessage(INVALIDATE_MAP);
                 }
 
-                cachesProtected.clear();
+                cachesToDisplay.clear();
 
                 displayHandler.sendEmptyMessage(UPDATE_TITLE);
             } catch (ThreadDeath e) {

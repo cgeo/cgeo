@@ -9,8 +9,10 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LiveMapStrategy.StrategyFlag;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
@@ -60,7 +62,21 @@ public class GCBase {
             float speedNow = cgeoapplication.getInstance().getSpeedFromGeo();
             strategy = speedNow >= 8 ? Strategy.FASTEST : Strategy.DETAILED; // 8 m/s = 30 km/h
         }
-        return searchByViewport(viewport, tokens, strategy);
+        // return searchByViewport(viewport, tokens, strategy);
+
+        // testing purpose
+        {
+            SearchResult result = searchByViewport(viewport, tokens, strategy);
+            String text = Formatter.SEPARATOR + strategy.getL10n() + Formatter.SEPARATOR;
+            int speed = (int) cgeoapplication.getInstance().getSpeedFromGeo();
+            if (Settings.isUseMetricUnits()) {
+                text += speed + " km/h";
+            } else {
+                text += speed / IConversion.MILES_TO_KILOMETER + " mph";
+            }
+            result.setUrl(result.getUrl() + text);
+            return result;
+        }
     }
 
     /**
@@ -88,6 +104,12 @@ public class GCBase {
             final Set<Tile> tiles = getTilesForViewport(viewport);
 
             for (Tile tile : tiles) {
+
+                // testing purpose
+                {
+                    searchResult.setUrl("Zoom=" + tile.getZoomlevel());
+                }
+
                 StringBuilder url = new StringBuilder();
                 url.append("?x=").append(tile.getX()) // x tile
                 .append("&y=").append(tile.getY()) // y tile
@@ -242,12 +264,9 @@ public class GCBase {
                 cache.setName(nameCache.get(id));
                 cache.setZoomlevel(tile.getZoomlevel());
                 cache.setCoords(tile.getCoord(xy));
-                if (strategy.flags.contains(StrategyFlag.PARSE_TILES)) {
-                    if (tile.getZoomlevel() >= 14) {
-                        IconDecoder.parseMapPNG14(cache, bitmap, xy);
-                    } else {
-                        IconDecoder.parseMapPNG13(cache, bitmap, xy);
-                    }
+                if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && positions.size() < 64) {
+                    // don't parse if there are too many caches. The decoding would return too much wrong results
+                    IconDecoder.parseMapPNG(cache, bitmap, xy, tile.getZoomlevel());
                 } else {
                     cache.setType(CacheType.UNKNOWN);
                 }
