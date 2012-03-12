@@ -635,11 +635,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 // Data loaded, we're ready to show it!
                 notifyDataSetChanged();
-                // cache isn't available until after notifyDataSetChanged is called
-                if (cache != null) {
-                    cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
-                }
-
             }
         }
 
@@ -669,6 +664,9 @@ public class CacheDetailActivity extends AbstractActivity {
             finish();
             return;
         }
+
+        // allow cache to notify CacheDetailActivity when it changes so it can be reloaded
+        cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
 
         // notify all creators that the data has changed
         for (PageViewCreator creator : viewCreators.values()) {
