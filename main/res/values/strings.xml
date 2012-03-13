@@ -1009,19 +1009,19 @@
     <b>Next Release</b>\n\n
     <b>New Features/Functions:</b>\n
     · Live Map re-implementation with selectable strategy:\n
-    <pre>  Fastest: Load approximated cache coords only</pre>\n
-    <pre>  Fast: Same as fastest but also try to identify the cache type</pre>\n
-    <pre>  Detailed: Same as fast but also load more details for 20 caches around your position</pre>\n
-    <pre>  Speed dependent: Automatic switch between detailed and fast strategy depending on speed</pre>\n
+      Fastest: Load approximated cache coords only\n
+      Fast: Same as fastest but try to identify the cache type\n
+      Detailed: Same as fast but load details for 20 caches around your position\n
+      Speed dependent: Automatic switch from detailed to fastest at 30kmh\n
     · New markers in map and partly in lists:\n
-    <pre>  Personal Note available(Pen icon)</pre>\n
-    <pre>  Modified coordinates available (Flagpost icon)</pre>\n
-    <pre>  Caches is saved on device (Disk icon)</pre>\n
-    <pre>  Offline log is stored (Red smiley)</pre>\n
-    <pre>  Cache coords are approximated (Encircled in Orange)<pre>\n
-    · Calendar operations moved to calendar add-on (available on Android Market)\n 
-    <pre>  c:geo doesn\'t require calendar permissions anymore</pre>\n
-    · Login status and find count shown on start screen\n
+      Personal Note available(Pen icon)\n
+      Modified coordinates available (Flagpost icon)\n
+      Caches is saved on device (Disk icon)\n
+      Offline log is stored (Red smiley)\n
+      Cache coords are approximated (Encircled in Orange)\n
+    · Calendar operations moved to calendar add-on (Android Market)\n 
+      c:geo doesn\'t require calendar permissions anymore\n
+    · Login status and find count shown on main screen\n
     · Copy, translate, forward with long press for cache- and log-text\n
     · Two preferred navigation tools selectable\n
     · Type of waypoint can be selected on creation\n
@@ -1043,11 +1043,12 @@
     \n
     <b>Known Limitations/Bugs:</b>\n
     · Live map:\n
-    <pre>  Approximated coords due to limitations on the GC-website</pre>\n
-    <pre>  In fast mode the cache type might be wrong in rare cases</pre>\n
+      Approximated coords due to limitations on the GC-website\n
+      In fast mode the cache type might be wrong in rare cases\n
+      Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
     · Other:\n
-    <pre>  Log images with huge size will cause a long loading time</pre>\n\n\n
+      Log images with huge size will cause a long loading time\n\n\n
     <b>Old releases</b>\n
-    · Please refer to the release notes on the <a href=http://www.cgeo.org>c:geo-website</a>.\n
+    · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
 </resources>
