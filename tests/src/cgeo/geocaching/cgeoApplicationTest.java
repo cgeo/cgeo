@@ -264,7 +264,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         ImmutablePair<String, String> login = Settings.getLogin();
         String memberStatus = Settings.getMemberStatus();
         Strategy strategy = Settings.getLiveMapStrategy();
-        Settings.setLiveMapStrategy(Strategy.DETAILED);
+        Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
+        Settings.setLiveMapStrategy(testStrategy);
 
         try {
 
@@ -284,7 +285,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
             Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
             assertFalse(cache.getCoords().isEqualTo(cacheFromViewport.getCoords(), 1e-3));
-            // issue #1242 assertFalse(cacheFromViewport.isReliableLatLon());
+            // depending on the chosen strategy the coords can be reliable or not
+            assertEquals(testStrategy == Strategy.DETAILED, cacheFromViewport.isReliableLatLon());
 
             // premium cache
             cache = new GC2JVEH();
@@ -294,8 +296,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             search = ConnectorFactory.searchByViewport(viewport, tokens);
 
             assertNotNull(search);
-            // It's a premium member cache only and thus not visible to guests (old Live Map !). Visible in new Live Map
-            assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+            // depending on the chosen strategy the cache is part of the search or not
+            assertEquals(testStrategy == Strategy.DETAILED, search.getGeocodes().contains(cache.getGeocode()));
 
         } finally {
             // restore user and password
