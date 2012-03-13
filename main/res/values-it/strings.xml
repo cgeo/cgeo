@@ -117,6 +117,14 @@
   <string name="log_new_log">Log</string>
   <string name="log_new_log_text">Testo Log</string>
   <string name="log_announcement">Annuncio</string>
+  
+  <!-- copy -->
+  <string name="options_context_menu_title">Opzioni</string>
+  <string name="copy_coords">Copia Coordinate</string>
+  <string name="copy_desc">Copia Descrizione</string>
+  <string name="copy_personalnote">Copia Note personali</string>
+  <string name="copy_hint">Copia Aiuti</string>
+  <string name="copy_log">Copia Log</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -429,7 +437,7 @@
   <string name="init_default_navigation_tool">Navigatore preferito</string>
   <string name="init_default_navigation_tool_description">Qui puoi scegliere il tuo strumento di navigazione preferito.</string>
   <string name="init_default_navigation_tool_select">Scegli navigatore</string>
-  <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo cliccato l\'icona di navigazione nella action bar.</string>
+  <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo premuto l\'icona di navigazione vicino al titolo della cache.</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
