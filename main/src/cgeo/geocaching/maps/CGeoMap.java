@@ -36,6 +36,7 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import cgeo.geocaching.network.Login;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.LRUList;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -75,6 +76,9 @@ import java.util.Set;
  * Class representing the Map in c:geo
  */
 public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFactory {
+
+    /** max. number of caches displayed in the Live Map */
+    public static final int MAX_CACHES = 500;
 
     /** Handler Messages */
     private static final int HIDE_PROGRESS = 0;
@@ -166,7 +170,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static Map<Integer, LayerDrawable> overlaysCache = new HashMap<Integer, LayerDrawable>();
     private int cachesCnt = 0;
     /** List of caches in the viewport */
-    private final Set<cgCache> caches = new HashSet<cgCache>();
+    private final LRUList<cgCache> caches = new LRUList<cgCache>(MAX_CACHES);
     /** List of users in the viewport */
     private List<Go4CacheUser> users = new ArrayList<Go4CacheUser>();
     private List<cgCoord> coordinates = new ArrayList<cgCoord>();
