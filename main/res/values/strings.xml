@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo compass</string>
@@ -1036,7 +1036,7 @@
     · Removed OSM:Osmarender as it is no longer available\n
     · Find-count not working in signature\n
     · Keep screen on while viewing cache-lists\n
-    · TB-icons now shown in correct sizen\n
+    · TB-icons now shown in correct size\n
     · Cache count on live map corrected\n
     \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=3&amp;state=closed">Detailed list of all changes</a>\n
