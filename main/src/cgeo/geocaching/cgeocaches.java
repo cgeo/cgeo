@@ -2247,11 +2247,12 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     public void switchListById(int id) {
-        StoredList list = null;
+        if (id < 0) {
+            return;
+        }
 
-        if (id >= 0) {
-            list = app.getList(id);
-        } else {
+        StoredList list = app.getList(id);
+        if (list == null) {
             return;
         }
 
