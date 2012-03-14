@@ -135,6 +135,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private Integer centerLongitude = null;
     private Integer spanLatitude = null;
     private Integer spanLongitude = null;
+    private Integer zoom = null;
     private Integer centerLatitudeUsers = null;
     private Integer centerLongitudeUsers = null;
     private Integer spanLatitudeUsers = null;
@@ -453,6 +454,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         // removed startTimer since onResume is always called
 
         prepareFilterBar();
+
     }
 
     private void prepareFilterBar() {
@@ -998,6 +1000,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         centerLongitudeNow = mapCenterNow.getLongitudeE6();
                         spanLatitudeNow = mapView.getLatitudeSpan();
                         spanLongitudeNow = mapView.getLongitudeSpan();
+                        zoomNow = mapView.getMapZoomLevel();
 
                         // check if map moved or zoomed
                         //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
@@ -1013,10 +1016,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             moved = true;
                         } else if (spanLatitude == null || spanLongitude == null) {
                             moved = true;
+                        } else if (zoom == null) {
+                            moved = true;
                         } else if (((Math.abs(spanLatitudeNow - spanLatitude) > 50) || (Math.abs(spanLongitudeNow - spanLongitude) > 50) || // changed zoom
                                 (Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow / 4)) || (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow / 4)) // map moved
                         ) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches)
                                 || !Viewport.isInViewPort(centerLatitude, centerLongitude, centerLatitudeNow, centerLongitudeNow, spanLatitude, spanLongitude, spanLatitudeNow, spanLongitudeNow))) {
+                            moved = true;
+                        } else if ((zoomNow - zoom) >= 2) {
                             moved = true;
                         }
 
@@ -1061,6 +1068,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                                 centerLongitude = centerLongitudeNow;
                                 spanLatitude = spanLatitudeNow;
                                 spanLongitude = spanLongitudeNow;
+                                zoom = zoomNow;
 
                                 showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
 
