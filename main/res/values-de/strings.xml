@@ -584,8 +584,10 @@
   <string name="gpx_import_store_static_maps">Schreibe statische Karten</string>
   <string name="gpx_import_storing">Schreibe Caches in Datenbank</string>
   <string name="gpx_import_caches_imported">Caches importiert.</string>
+  <string name="gpx_import_caches_imported_maps_skipped">Caches importiert, Download statischer Karten abgebrochen.</string>
   <string name="gpx_import_title">Importiere GPX-Datei</string>
   <string name="gpx_import_title_reading_file">Lese Datei</string>
+  <string name="gpx_import_title_static_maps">Speichern statischer Karten</string>
   <string name="gpx_import_title_caches_imported">Ergebnis</string>
   <string name="gpx_import_title_caches_import_failed">Import-Fehler</string>
   <string name="gpx_import_error_io">Fehler beim Lesen der Datei</string>

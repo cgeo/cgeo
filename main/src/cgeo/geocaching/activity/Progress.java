@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Message;
 import android.view.WindowManager;
 
@@ -40,6 +41,7 @@ public class Progress {
             if (cancelMessage != null) {
                 dialog.setCancelable(true);
                 dialog.setCancelMessage(cancelMessage);
+                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getResources().getString(android.R.string.cancel), cancelMessage);
             } else {
                 dialog.setCancelable(false);
             }

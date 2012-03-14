@@ -49,6 +49,7 @@ public class GPXImporter {
     static final int IMPORT_STEP_FINISHED_WITH_ERROR = 6;
     static final int IMPORT_STEP_CANCEL = 7;
     static final int IMPORT_STEP_CANCELED = 8;
+    static final int IMPORT_STEP_STATIC_MAPS_SKIPPED = 9;
 
     public static final String GPX_FILE_EXTENSION = ".gpx";
     public static final String ZIP_FILE_EXTENSION = ".zip";
@@ -194,7 +195,7 @@ public class GPXImporter {
                 StaticMapsProvider.downloadMaps(cache, app);
                 storedCacheMaps++;
                 if (progressHandler.isCancelled()) {
-                    throw new CancellationException();
+                    return;
                 }
                 progressHandler.sendMessage(progressHandler.obtainMessage(0, storedCacheMaps, 0));
             }
@@ -392,8 +393,16 @@ public class GPXImporter {
                     break;
 
                 case IMPORT_STEP_STORE_STATIC_MAPS:
-                    progress.setMessage(res.getString(msg.arg1));
+                    progress.dismiss();
+                    Message skipMessage = importStepHandler.obtainMessage(IMPORT_STEP_STATIC_MAPS_SKIPPED);
+                    progress.show((Context) fromActivity, res.getString(R.string.gpx_import_title_static_maps), res.getString(R.string.gpx_import_store_static_maps), ProgressDialog.STYLE_HORIZONTAL, skipMessage);
                     progress.setMaxProgressAndReset(msg.arg2);
+                    break;
+
+                case IMPORT_STEP_STATIC_MAPS_SKIPPED:
+                    progress.dismiss();
+                    fromActivity.helpDialog(res.getString(R.string.gpx_import_title_caches_imported), msg.arg1 + " " + res.getString(R.string.gpx_import_caches_imported_maps_skipped));
+                    importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED:
