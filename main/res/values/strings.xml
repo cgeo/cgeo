@@ -1008,39 +1008,47 @@
   <string name="changelog">\n
     <b>Next Release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · Live Map reimplementation with definable loading strategy:\n
-      Fastest : Load approximated cache-coords only\n
-      Fast : Load approximated cache-coords and try to identify cache-type\n
-      Detailed : Same as fast but additionally load reliable coords for 20 caches around the current position\n
-      Speed dependent : Automatic switch between detailed and fast strategy depending on speed\n
-    · Improved markers in the map and partly in lists with additional information for stored caches:\n
-      Personal Note available (Pen icon)\n
+    · Live Map re-implementation with selectable strategy:\n
+      Fastest: Load approximated cache coords only\n
+      Fast: Same as fastest but try to identify the cache type\n
+      Detailed: Same as fast but load details for 20 caches around your position\n
+      Speed dependent: Automatic switch from detailed to fastest at 30kmh\n
+    · New markers in map and partly in lists:\n
+      Personal Note available(Pen icon)\n
       Modified coordinates available (Flagpost icon)\n
       Caches is saved on device (Disk icon)\n
-      Offline log is available (Red smiley instead of yellow smiley)
-      Cache coordinates are only approximated (Cache icon encircled in Orange)\n
-    · Moved calendar operations to separate calendar add-on (available on Android Market)\n 
+      Offline log is stored (Red smiley)\n
+      Cache coords are approximated (Encircled in Orange)\n
+    · Calendar operations moved to calendar add-on (Android Market)\n 
       c:geo doesn\'t require calendar permissions anymore\n
-    · Login status and find count shown on start screen\n
-    · Copy, translate and forward available with long press for cache- and log-text\n
-    · User can select two preferred navigation tools for easier accessibility\n
-    · Type of waypoint can be selected for custom waypoints\n
-    · Day of week is now shown for event-caches\n
-    · Static maps can now also be stored for waypoints of a cache\n
-    · Static maps are stored while importing a GPX-file\n\n
+    · Login status and find count shown on main screen\n
+    · Copy, translate, forward with long press for cache- and log-text\n
+    · Two preferred navigation tools selectable\n
+    · Type of waypoint can be selected on creation\n
+    · Day of week shown for event-caches\n
+    · Static maps can be saved for waypoints\n
+    · Static maps saved while importing GPX-files\n\n
     <b>Bugfixing:</b>\n
-    · Deletion of outdated caches did not work\n
-    · Changed internal caching causing a better overall performance\n
-    · Caches with modified coordinates are displayed at the modified coords and not at the original coords\n   
-    · Improved consistency for offline-logging operations\n
-    · Removed OSM:Osmarender map as it is no longer available\n
+    · Deletion of outdated caches improved\n
+    · Changed internal caching for better performance\n
+    · Caches with modified coords are displayed at the modified coords\n   
+    · Improved consistency for offline logging\n
+    · Removed OSM:Osmarender as it is no longer available\n
     · Find-count not working in signature\n
     · Keep screen on while viewing cache-lists\n
-    · TB-icons now shown in correct size\n
-\n
-    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=3&amp;state=closed">Detailed list of all Changes</a>\n
-    \n\n
+    · TB-icons now shown in correct sizen\n
+    · Cache count on live map corrected\n
+    \n
+    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=3&amp;state=closed">Detailed list of all changes</a>\n
+    \n
+    <b>Known Limitations/Bugs:</b>\n
+    · Live map:\n
+      Approximated coords due to limitations on the GC-website\n
+      In fast mode the cache type might be wrong in rare cases\n
+      Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
+    · Other:\n
+      Log images with huge size will cause a long loading time\n\n\n
     <b>Old releases</b>\n
-    <a href="http://www.cgeo.org">Please refer to the release notes on the c:geo-website.</a>\n
+    · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
 </resources>
