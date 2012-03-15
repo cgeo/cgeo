@@ -583,8 +583,8 @@
   <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
   <string name="gpx_import_store_static_maps">Schreibe statische Karten</string>
   <string name="gpx_import_storing">Schreibe Caches in Datenbank</string>
-  <string name="gpx_import_caches_imported">Caches importiert.</string>
-  <string name="gpx_import_caches_imported_maps_skipped">Caches importiert, Download statischer Karten abgebrochen.</string>
+  <string name="gpx_import_caches_imported">Caches importiert</string>
+  <string name="gpx_import_static_maps_skipped">Download statischer Karten abgebrochen</string>
   <string name="gpx_import_title">Importiere GPX-Datei</string>
   <string name="gpx_import_title_reading_file">Lese Datei</string>
   <string name="gpx_import_title_static_maps">Speichern statischer Karten</string>

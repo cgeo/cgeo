@@ -598,7 +598,7 @@
   <string name="gpx_import_store_static_maps">Storing static maps</string>
   <string name="gpx_import_storing">Writing caches to database</string>
   <string name="gpx_import_caches_imported">caches imported</string>
-  <string name="gpx_import_caches_imported_maps_skipped">caches imported, download of static maps aborted.</string>
+  <string name="gpx_import_static_maps_skipped">Download of static maps aborted</string>
   <string name="gpx_import_title_static_maps">Store static maps</string>
   <string name="gpx_import_title_reading_file">Reading file</string>
   <string name="gpx_import_title">Import GPX</string>
@@ -609,7 +609,7 @@
   <string name="gpx_import_error_unexpected">Unexpected error</string>
   <string name="gpx_import_confirm">Do you want to import the GPX file into c:geo?</string>
   <string name="gpx_import_canceled">GPX import was canceled</string>
-
+  
   <!-- map file select -->
   <string name="map_file_select_title">Select map file</string>
 
