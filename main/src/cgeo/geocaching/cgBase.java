@@ -293,9 +293,6 @@ public class cgBase {
                 }
             }
 
-            // location is reliable because the search return correct coordinates independent of the login status
-            cache.setReliableLatLon(true);
-
             searchResult.addCache(cache);
         }
 
@@ -357,6 +354,11 @@ public class cgBase {
                 }
 
                 LocParser.parseLoc(searchResult, coordinates);
+
+                // now we have the coords...
+                for (cgCache cache : searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)) {
+                    cache.setReliableLatLon(true);
+                }
             } catch (Exception e) {
                 Log.e(Settings.tag, "cgBase.parseSearch.CIDs: " + e.toString());
             }
@@ -364,7 +366,7 @@ public class cgBase {
 
         // get direction images
         if (Settings.getLoadDirImg()) {
-            final Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
+            final Set<cgCache> caches = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             for (cgCache cache : caches) {
                 if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
                     DirectionImage.getDrawable(cache.getGeocode(), cache.getDirectionImg());
