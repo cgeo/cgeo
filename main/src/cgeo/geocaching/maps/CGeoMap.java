@@ -186,16 +186,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static Set<String> dirtyCaches = null;
 
     // Thread pooling
-    BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<Runnable>(1);
-    ThreadPoolExecutor displayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, displayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    BlockingQueue<Runnable> downloadQueue = new ArrayBlockingQueue<Runnable>(1);
-    ThreadPoolExecutor downloadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, downloadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<Runnable>(1);
-    ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    BlockingQueue<Runnable> Go4CacheQueue = new ArrayBlockingQueue<Runnable>(1);
-    ThreadPoolExecutor Go4CacheExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, Go4CacheQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    BlockingQueue<Runnable> go4CacheDisplayQueue = new ArrayBlockingQueue<Runnable>(1);
-    ThreadPoolExecutor go4CacheDisplayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, go4CacheDisplayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
+    private static BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<Runnable>(1);
+    private static ThreadPoolExecutor displayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, displayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
+    private static BlockingQueue<Runnable> downloadQueue = new ArrayBlockingQueue<Runnable>(1);
+    private static ThreadPoolExecutor downloadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, downloadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
+    private static BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<Runnable>(1);
+    private static ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
+    private static BlockingQueue<Runnable> Go4CacheQueue = new ArrayBlockingQueue<Runnable>(1);
+    private static ThreadPoolExecutor Go4CacheExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, Go4CacheQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
+    private static BlockingQueue<Runnable> go4CacheDisplayQueue = new ArrayBlockingQueue<Runnable>(1);
+    private static ThreadPoolExecutor go4CacheDisplayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, go4CacheDisplayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
 
 
     // handlers
