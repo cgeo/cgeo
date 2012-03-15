@@ -60,7 +60,7 @@ public class GCBase {
         Strategy strategy = Settings.getLiveMapStrategy();
         if (strategy == Strategy.AUTO) {
             float speedNow = cgeoapplication.getInstance().getSpeedFromGeo();
-            strategy = speedNow >= 8 ? Strategy.FASTEST : Strategy.DETAILED; // 8 m/s = 30 km/h
+            strategy = speedNow >= 8 ? Strategy.FAST : Strategy.DETAILED; // 8 m/s = 30 km/h
         }
         // return searchByViewport(viewport, tokens, strategy);
 
