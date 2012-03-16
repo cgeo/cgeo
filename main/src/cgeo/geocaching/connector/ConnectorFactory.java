@@ -10,6 +10,8 @@ import cgeo.geocaching.geopoint.Viewport;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Set;
+
 public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final IConnector[] connectors = new IConnector[] {
@@ -79,6 +81,13 @@ public final class ConnectorFactory {
         // We have only connector capable of doing a 'searchByViewport()'
         // If there is a second connector the information has to be collected from all collectors
         return GCConnector.getInstance().searchByViewport(viewport, tokens);
+    }
+
+    /** @see IConnector#searchByGeocodes */
+    public static SearchResult searchByGeocodes(final Set<String> geocodes) {
+        // We have only connector capable of doing a 'searchByViewport()'
+        // If there is a second connector the information has to be collected from all collectors
+        return GCConnector.getInstance().searchByGeocodes(geocodes);
     }
 
 }

@@ -2,7 +2,9 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
@@ -31,6 +33,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class cgeopopup extends AbstractActivity {
 
@@ -214,6 +219,13 @@ public class cgeopopup extends AbstractActivity {
 
             finish();
             return;
+        }
+
+        if ( CacheType.UNKNOWN == cache.getType() ) {
+            Set<String> geocodes = new HashSet<String>();
+            geocodes.add(geocode);
+            SearchResult search = ConnectorFactory.searchByGeocodes(geocodes);
+            cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         }
 
         try {

@@ -7,6 +7,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CancellableHandler;
 
+import java.util.Set;
+
 public interface IConnector {
     /**
      * get name for display (currently only used in links)
@@ -77,6 +79,8 @@ public interface IConnector {
     public boolean supportsCachesAround();
 
     public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final CancellableHandler handler);
+
+    public SearchResult searchByGeocodes(final Set<String> geocodes);
 
     /**
      * search caches by coordinate. must be implemented if {@link supportsCachesAround} returns <code>true</true>

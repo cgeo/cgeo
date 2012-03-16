@@ -34,46 +34,50 @@ public class cgBaseTest extends AndroidTestCase {
         assertEquals(125.663703918457, (new Geopoint(48.0, 2.0)).getElevation(), 0.1);
     }
 
-    public static void testCompareCaches(ICache expected, cgCache actual) {
+    public static void testCompareCaches(ICache expected, cgCache actual, boolean all) {
         assertEquals(expected.getGeocode(), actual.getGeocode());
         assertTrue(expected.getType() == actual.getType());
         assertEquals(expected.getOwner(), actual.getOwner());
         assertEquals(expected.getDifficulty(), actual.getDifficulty());
         assertEquals(expected.getTerrain(), actual.getTerrain());
-        assertEquals(expected.getLatitude(), actual.getLatitude());
-        assertEquals(expected.getLongitude(), actual.getLongitude());
-        assertTrue(actual.isReliableLatLon());
         assertEquals(expected.isDisabled(), actual.isDisabled());
-        assertEquals(expected.isOwn(), actual.isOwn());
         assertEquals(expected.isArchived(), actual.isArchived());
-        assertEquals(expected.isPremiumMembersOnly(), actual.isPremiumMembersOnly());
-        assertEquals(expected.getOwnerReal(), actual.getOwnerReal());
         assertEquals(expected.getSize(), actual.getSize());
-        assertEquals(expected.getHint(), actual.getHint());
-        assertTrue(actual.getDescription().startsWith(expected.getDescription()));
-        assertEquals(expected.getShortDescription(), actual.getShortDescription());
         assertEquals(expected.getName(), actual.getName());
-        assertEquals(expected.getCacheId(), actual.getCacheId());
         assertEquals(expected.getGuid(), actual.getGuid());
-        assertEquals(expected.getLocation(), actual.getLocation());
-        assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
-        assertEquals(expected.isFound(), actual.isFound());
-        assertEquals(expected.isFavorite(), actual.isFavorite());
         assertTrue(expected.getFavoritePoints() <= actual.getFavoritePoints());
-        assertEquals(expected.isWatchlist(), actual.isWatchlist());
         assertEquals(expected.getHiddenDate().toString(), actual.getHiddenDate().toString());
-        for (String attribute : expected.getAttributes()) {
-            assertTrue(actual.getAttributes().contains(attribute));
-        }
-        for (LogType logType : expected.getLogCounts().keySet()) {
-            assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
-        }
+        assertEquals(expected.isPremiumMembersOnly(), actual.isPremiumMembersOnly());
 
-        // the inventory can differ to often, therefore we don't compare them
+        if (all) {
+            assertEquals(expected.getLatitude(), actual.getLatitude());
+            assertEquals(expected.getLongitude(), actual.getLongitude());
+            assertTrue(actual.isReliableLatLon());
+            assertEquals(expected.isOwn(), actual.isOwn());
+            assertEquals(expected.getOwnerReal(), actual.getOwnerReal());
+            assertEquals(expected.getHint(), actual.getHint());
+            assertTrue(actual.getDescription().startsWith(expected.getDescription()));
+            assertEquals(expected.getShortDescription(), actual.getShortDescription());
+            assertEquals(expected.getCacheId(), actual.getCacheId());
+            assertEquals(expected.getLocation(), actual.getLocation());
+            assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
+            assertEquals(expected.isFound(), actual.isFound());
+            assertEquals(expected.isFavorite(), actual.isFavorite());
+            assertEquals(expected.isWatchlist(), actual.isWatchlist());
 
-        int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
-        int expectedSpoilersSize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
-        assertEquals(expectedSpoilersSize, actualSpoilersSize);
+            for (String attribute : expected.getAttributes()) {
+                assertTrue(actual.getAttributes().contains(attribute));
+            }
+            for (LogType logType : expected.getLogCounts().keySet()) {
+                assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
+            }
+
+            // the inventory can differ to often, therefore we don't compare them
+
+            int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
+            int expectedSpoilersSize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
+            assertEquals(expectedSpoilersSize, actualSpoilersSize);
+        }
     }
 
     /**
@@ -89,7 +93,7 @@ public class cgBaseTest extends AndroidTestCase {
             SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), null);
             cgCache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
-            cgBaseTest.testCompareCaches(mockedCache, parsedCache);
+            cgBaseTest.testCompareCaches(mockedCache, parsedCache, true);
         }
         Settings.setGcCustomDate(gcCustomDate);
     }

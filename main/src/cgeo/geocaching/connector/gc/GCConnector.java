@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.util.Log;
 
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class GCConnector extends AbstractConnector {
@@ -135,6 +136,11 @@ public class GCConnector extends AbstractConnector {
         final SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType());
 
         return search;
+    }
+
+    @Override
+    public SearchResult searchByGeocodes(Set<String> geocodes) {
+        return GCBase.searchByGeocodes(geocodes);
     }
 
     @Override

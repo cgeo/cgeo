@@ -7,6 +7,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CancellableHandler;
 
+import java.util.Set;
+
 public abstract class AbstractConnector implements IConnector {
 
     @Override
@@ -51,6 +53,11 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     public SearchResult searchByGeocode(String geocode, String guid, cgeoapplication app, CancellableHandler handler) {
+        return null;
+    }
+
+    @Override
+    public SearchResult searchByGeocodes(Set<String> geocodes) {
         return null;
     }
 

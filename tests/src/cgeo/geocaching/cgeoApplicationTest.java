@@ -316,7 +316,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             mockedCache.setMockedDataUser(Settings.getUsername());
             cgCache parsedCache = cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
             if (null != parsedCache) {
-                cgBaseTest.testCompareCaches(mockedCache, parsedCache);
+                cgBaseTest.testCompareCaches(mockedCache, parsedCache, true);
             }
         }
     }

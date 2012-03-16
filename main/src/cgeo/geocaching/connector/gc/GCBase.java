@@ -5,12 +5,15 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LiveMapStrategy.StrategyFlag;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.network.Login;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
@@ -26,6 +29,7 @@ import org.json.JSONObject;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -92,7 +96,7 @@ public class GCBase {
      *            Strategy for data retrieval and parsing, @see Strategy
      * @return
      */
-    public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens, Strategy strategy) {
+    private static SearchResult searchByViewport(final Viewport viewport, final String[] tokens, Strategy strategy) {
         Log.d(Settings.tag, "GCBase.searchByViewport" + viewport.toString());
 
         String referer = GCConstants.URL_LIVE_MAP;
@@ -387,6 +391,77 @@ public class GCBase {
         String userSession = BaseUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
         String sessionToken = BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
         return new String[] { userSession, sessionToken };
+    }
+
+    public static SearchResult searchByGeocodes(final Set<String> geocodes) {
+
+        SearchResult result = new SearchResult();
+
+        final String geocodeList = StringUtils.join(geocodes.toArray(), "|");
+
+        String referer = GCConstants.URL_LIVE_MAP_DETAILS;
+
+        StringBuilder url = new StringBuilder();
+        url.append("?i=").append(geocodeList).append("&_=").append(String.valueOf(System.currentTimeMillis()));
+        final String urlString = url.toString();
+
+        try {
+            String data = Tile.requestMapInfo(referer + urlString, referer);
+
+            // Example JSON information
+            // {"status":"success",
+            //    "data":[{"name":"Mission: Impossible","gc":"GC1234","g":"34c2e609-5246-4f91-9029-d6c02b0f2a82","available":true,"archived":false,"subrOnly":false,"li":false,"fp":"5","difficulty":{"text":3.5,"value":"3_5"},"terrain":{"text":1.0,"value":"1"},"hidden":"7/23/2001","container":{"text":"Regular","value":"regular.gif"},"type":{"text":"Unknown Cache","value":8},"owner":{"text":"Ca$h_Cacher","value":"2db18e69-6877-402a-848d-6362621424f6"}},
+            //            {"name":"HP: Hannover - Sahlkamp","gc":"GC2Q97X","g":"a09149ca-00e0-4aa2-b332-db2b4dfb18d2","available":true,"archived":false,"subrOnly":false,"li":false,"fp":"0","difficulty":{"text":1.0,"value":"1"},"terrain":{"text":1.5,"value":"1_5"},"hidden":"5/29/2011","container":{"text":"Small","value":"small.gif"},"type":{"text":"Traditional Cache","value":2},"owner":{"text":"GeoM@n","value":"1deaa69e-6bcc-421d-95a1-7d32b468cb82"}}]
+            // }
+
+            final JSONObject json = new JSONObject(data);
+            final String status = json.getString("status");
+            if (StringUtils.isBlank(status)) {
+
+                throw new JSONException("No status inside JSON");
+            }
+            if ("success".compareTo(status) != 0) {
+                throw new JSONException("Wrong status inside JSON");
+            }
+            final JSONArray dataArray = json.getJSONArray("data");
+            if (dataArray == null) {
+                throw new JSONException("No data inside JSON");
+            }
+
+            for (int j = 0; j < dataArray.length(); j++) {
+
+                cgCache cache = new cgCache();
+
+                JSONObject dataObject = dataArray.getJSONObject(j);
+                cache.setName(dataObject.getString("name"));
+                cache.setGeocode(dataObject.getString("gc"));
+                cache.setGuid(dataObject.getString("g")); // 34c2e609-5246-4f91-9029-d6c02b0f2a82"
+                cache.setDisabled(!dataObject.getBoolean("available"));
+                cache.setArchived(dataObject.getBoolean("archived"));
+                cache.setPremiumMembersOnly(dataObject.getBoolean("subrOnly"));
+                boolean li = dataObject.getBoolean("li"); // seems to be "false" always
+                cache.setFavoritePoints(Integer.parseInt(dataObject.getString("fp")));
+                JSONObject difficultyObj = dataObject.getJSONObject("difficulty");
+                cache.setDifficulty(Float.parseFloat(difficultyObj.getString("text"))); // 3.5
+                JSONObject terrainObj = dataObject.getJSONObject("terrain");
+                cache.setTerrain(Float.parseFloat(terrainObj.getString("text"))); // 1.5
+                cache.setHidden(Login.parseGcCustomDate(dataObject.getString("hidden"), "MM/dd/yyyy")); // 7/23/2001
+                JSONObject containerObj = dataObject.getJSONObject("container");
+                cache.setSize(CacheSize.getById(containerObj.getString("text"))); // Regular
+                JSONObject typeObj = dataObject.getJSONObject("type");
+                cache.setType(CacheType.getByPattern(typeObj.getString("text"))); // Traditional Cache
+                JSONObject ownerObj = dataObject.getJSONObject("owner");
+                cache.setOwner(ownerObj.getString("text"));
+
+                result.addCache(cache);
+
+            }
+        } catch (JSONException e) {
+            result.setError(StatusCode.UNKNOWN_ERROR);
+        } catch (ParseException e) {
+            result.setError(StatusCode.UNKNOWN_ERROR);
+        }
+        return result;
     }
 
 }
