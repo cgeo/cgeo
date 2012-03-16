@@ -1027,7 +1027,8 @@
     · Type of waypoint can be selected on creation\n
     · Day of week shown for event-caches\n
     · Static maps can be saved for waypoints\n
-    · Static maps saved while importing GPX-files\n\n
+    · Static maps saved while importing GPX-files\n
+    · Quick access to navigation in waypoints\n\n
     <b>Bugfixing:</b>\n
     · Deletion of outdated caches improved\n
     · Changed internal caching for better performance\n
