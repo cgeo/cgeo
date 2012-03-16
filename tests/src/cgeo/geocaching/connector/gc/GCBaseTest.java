@@ -32,8 +32,7 @@ public class GCBaseTest extends TestCase {
         MockedCache mockedCache = new GC2CJPF();
 
         Set<String> geocodes = new HashSet<String>();
-        geocodes.add("GC1RMM2");//mockedCache.getGeocode());
-        //geocodes.add("GC1234");
+        geocodes.add(mockedCache.getGeocode());
 
         SearchResult result = GCBase.searchByGeocodes(geocodes);
         cgCache parsedCache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
