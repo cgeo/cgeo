@@ -572,10 +572,6 @@
   <string name="web_downloading">Downloading</string>
   <string name="web_downloaded">Gedownload</string>
 
-  <!-- event -->
-  <string name="event_success">Event cache toegevoegd aan kalender</string>
-  <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
-
   <!-- popup -->
   <string name="popup_more">Meer details</string>
 

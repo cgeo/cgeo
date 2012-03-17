@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendars">カレンダー</string>
+    <string name="event_success">イベントキャッシュがカレンダーに追加されました</string>
+    <string name="event_fail">イベントキャッシュをカレンダーに追加するのに失敗しました</string>
+</resources>

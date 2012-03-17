@@ -618,10 +618,6 @@
   <string name="web_downloading">Downloading</string>
   <string name="web_downloaded">Downloaded</string>
 
-  <!-- event -->
-  <string name="event_success">Event cache added to calendar</string>
-  <string name="event_fail">Failed to add event cache to calendar</string>
-
   <!-- popup -->
   <string name="popup_more">More details</string>
 

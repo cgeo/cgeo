@@ -613,10 +613,6 @@
   <string name="web_downloading">Download in corso</string>
   <string name="web_downloaded">Download terminato</string>
 
-  <!-- event -->
-  <string name="event_success">Evento aggiunto al calendario</string>
-  <string name="event_fail">Aggiunta evento fallita</string>
-
   <!-- popup -->
   <string name="popup_more">Altri dettagli</string>
 

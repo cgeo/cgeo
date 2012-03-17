@@ -585,10 +585,6 @@
   <string name="web_downloading">Téléchargement</string>
   <string name="web_downloaded">Téléchargé</string>
 
-  <!-- event -->
-  <string name="event_success">Cache évènement ajoutée à l\'agenda</string>
-  <string name="event_fail">Échec d\'ajout de la cache événement à l\'agenda</string>
-
   <!-- popup -->
   <string name="popup_more">Plus de détails</string>
 

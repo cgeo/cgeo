@@ -528,10 +528,6 @@
   <string name="web_downloading">Descargando</string>
   <string name="web_downloaded">Descargados</string>  
   
-  <!-- event -->
-  <string name="event_success">Escondite/Evento añadido al calendario</string>
-  <string name="event_fail">Error al añadir escondite/evento al calendario</string>
-
   <!-- popup -->
   <string name="popup_more">Más detalles</string>
 
