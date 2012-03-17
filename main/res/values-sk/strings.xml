@@ -644,12 +644,6 @@
 
   <string name="waypoint_coordinate_formats_plain">Iba text</string>
 
-  <string name="unit_m">m</string>
-  <string name="unit_km">km</string>
-  <string name="unit_ft">ft</string>
-  <string name="unit_yd">yd</string>
-  <string name="unit_mi">mi</string>
-
   <!-- visit -->
   <string name="visit_tweet">informovať o nájdení na Twitteri</string>
 
