@@ -770,7 +770,7 @@
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Comprehensive manual for c:geo that contains description of all possibilities of this application (even hidden ones).</string>
   <string name="helper_calendar_title">c:geo calendar add-on</string>
-  <string name="helper_calendar_missing">c:geo calendar add-on not installed</string>
+  <string name="helper_calendar_missing">c:geo calendar add-on not installed.</string>
   <string name="helper_calendar_description">Enables you to export event caches into the calendar on your device.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Simple usable application showing Online maps and allowing to download them directly into Offline mode (raster maps only). Also support track recording, POI handling and many other useful functions.</string>
@@ -780,7 +780,11 @@
   <string name="helper_bluetoothgps_description">Allows you to use external GPS device to get better reception, more precise location and can spare battery of your phone.</string>
   <string name="helper_barcode_title">Barcode Scanner</string>
   <string name="helper_barcode_description">There are Greasemonkey scripts and websites which allow to display a geocode as barcode. With this app c:geo can read that geocode directly from the screen of your computer.</string>
-  
+
+  <!-- add-ons -->
+  <string name="addon_missing_title">Missing Add-On</string>
+  <string name="addon_download_prompt">Get it now from Google Play.</string>
+    
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Dogs allowed</string>
   <string name="attribute_dogs_no">Dogs not allowed</string>
