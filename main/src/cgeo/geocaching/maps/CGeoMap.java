@@ -613,7 +613,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
 
         Strategy strategy = Settings.getLiveMapStrategy();
-        SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy));
+        SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy)).setIcon(android.R.drawable.ic_menu_preferences);
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
         subMenuStrategy.add(2, MENU_STRATEGY_FASTEST, 0, Strategy.FASTEST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FASTEST);
         subMenuStrategy.add(2, MENU_STRATEGY_FAST, 0, Strategy.FAST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FAST);
