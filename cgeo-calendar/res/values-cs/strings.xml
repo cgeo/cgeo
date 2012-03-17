@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendars">Kalendáře</string>
+    <string name="event_success">Událost byla přidána do kalendáře</string>
+    <string name="event_fail">Nepodařilo se vložit událost do kalendáře</string>
+</resources>
