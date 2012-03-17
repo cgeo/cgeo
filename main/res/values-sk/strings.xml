@@ -35,6 +35,7 @@
   <string name="ape">Skrýša projektu APE</string>
   <string name="gchq">Ústredie Groundspeaku</string>
   <string name="gps">Skrýša výstavy GPS</string>
+  <string name="gc_live_map">Aktívna mapa</string>
   <string name="unknown">Neznáma skrýša</string>
 
   <!-- cache sizes -->
@@ -313,6 +314,7 @@
   <string name="caches_filter_clear">vymazať filtre</string>
   <string name="caches_filter_size_title">Výber veľkosti</string>
   <string name="caches_filter_type_title">Výber typu</string>
+  <string name="caches_filter_modified">S upravenými súradnicami</string>
   <string name="caches_exporting_fieldnote">Exportovanie ako poznámky…</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
 
@@ -425,6 +427,7 @@
   <string name="init_default_navigation_tool">Predvolená navigácia</string>
   <string name="init_default_navigation_tool_description">Môžete si vybrať preferovaný nástroj pre navigáciu.</string>
   <string name="init_default_navigation_tool_select">Vyberte nástroj</string>
+  <string name="init_default_navigation_tool_2_description">Môžete vybrať druhý preferovaný nástroj pre navigáciu. Spustíte ho dlhým držaním ikony navigácia vedľa názvu skrýše.</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
@@ -574,6 +577,7 @@
   <string name="cache_image">Obrázok</string>
   <string name="cache_image_open_file">Otvoriť ako súbor</string>
   <string name="cache_image_open_browser">Otvoriť v prehliadači</string>
+  <string name="cache_share_field">Zdieľať</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
@@ -585,6 +589,7 @@
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Načítanie skrýš z .gpx súboru\nNačítané:</string>
   <string name="gpx_import_loading_waypoints">Načítanie bodov trasy z .gpx súboru\nNačítané:</string>
+  <string name="gpx_import_store_static_maps">Ukladanie statických máp</string>
   <string name="gpx_import_storing">Zapisovanie skrýš do databázy\nZapísané:</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
   <string name="gpx_import_title">Import GPX</string>
@@ -639,6 +644,12 @@
 
   <string name="waypoint_coordinate_formats_plain">Iba text</string>
 
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+
   <!-- visit -->
   <string name="visit_tweet">informovať o nájdení na Twitteri</string>
 
@@ -656,6 +667,12 @@
   <string name="map_static_loading">Načítanie statických máp…</string>
   <string name="map_token_err">Pretože c:geo bola schopná stiahnuť iba čiastočné údaje, súradnice skrýš môžu byť nepresné.</string>
   <string name="map_as_list">Zobraziť ako zoznam</string>
+  <string name="map_strategy">Stratégia</string>
+  <string name="map_strategy_title">Stratégia aktívnej mapy</string>
+  <string name="map_strategy_fastest">Najrýchlejšia</string>
+  <string name="map_strategy_fast">Rýchla</string>
+  <string name="map_strategy_auto">Podľa rýchlosti</string>
+  <string name="map_strategy_detailed">Podrobná</string>
 
   <!-- search -->
   <string name="search_bar_hint">Hľadanie skrýš</string>
@@ -743,6 +760,10 @@
   <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
   <string name="helper_barcode_title">Barcode Scanner</string>
   <string name="helper_barcode_description">Existujú Greasemonkey skripty a stránky, ktoré GC kód zobrazujú ako čiarový kód. S touto aplikáciou môže c:geo zobraziť GC kód priamo z obrazovky do vášho zariadenia.</string>
+
+  <!-- add-ons -->
+  <string name="addon_missing_title">Chýbajúci doplnok</string>
+  <string name="addon_download_prompt">Získať doplnok teraz z Google Play.</string>
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Psi povolené</string>
@@ -891,7 +912,7 @@
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Podpora: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Web: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a> </string>
+  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manuál: <a href="http://manual.cgeo.org/">c:geo v kocke</a></string>
   <string name="about_go4cache">Služba <b>Go 4 cache</b> umožňuje sledovať v reálnom čase ostatných cacherov na mape (v <b>c:geo</b> alebo v prehliadači). Môžete sa tak pozrieť napríklad na to, akú skrýšu práve hľadajú. Pripojením ku službe <b>Go 4 cache</b> umožníte aplikácii <b>c:geo</b> zverejňovať vašu aktuálnu polohu (iba pokiaľ <b>c:geo</b> beží).</string>
