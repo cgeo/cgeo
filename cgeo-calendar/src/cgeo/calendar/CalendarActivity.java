@@ -85,11 +85,11 @@ public final class CalendarActivity extends Activity {
         final String[] projection = new String[] { "_id", "displayName" };
         final Uri calendarProvider = Compatibility.getCalendarProviderURI();
 
-        // TODO: Handle missing provider
         final Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
 
         if (cursor == null || cursor.getCount() <= 0) {
             showToast(getResources().getString(R.string.event_fail));
+            finish();
             return;
         }
 
@@ -116,6 +116,8 @@ public final class CalendarActivity extends Activity {
         } while (cursor.moveToNext());
 
         if (calendars.isEmpty()) {
+            showToast(getResources().getString(R.string.event_fail));
+            finish();
             return;
         }
 
