@@ -121,6 +121,8 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
 
+    private static final String CALENDAR_ADDON_URI = "market://details?id=cgeo.calendar";
+
     private cgGeo geolocation;
     private cgCache cache;
     private final Progress progress = new Progress();
@@ -814,7 +816,27 @@ public class CacheDetailActivity extends AbstractActivity {
             startActivity(new Intent(ICalendar.INTENT,
                     Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
         } else {
-            showToast(res.getString(R.string.helper_calendar_missing));
+            // Inform user the calendar add-on is not installed and let them get it from Google Play
+            new AlertDialog.Builder(this)
+                    .setTitle(res.getString(R.string.addon_missing_title))
+                    .setMessage(new StringBuilder(res.getString(R.string.helper_calendar_missing))
+                            .append(" ")
+                            .append(res.getString(R.string.addon_download_prompt))
+                            .toString())
+                    .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(CALENDAR_ADDON_URI));
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create()
+                    .show();
         }
     }
 
