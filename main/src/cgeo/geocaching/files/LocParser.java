@@ -70,6 +70,7 @@ public final class LocParser extends FileParser {
         cache.setTerrain(coord.getTerrain());
         cache.setSize(coord.getSize());
         cache.setGeocode(coord.getGeocode().toUpperCase());
+        cache.setReliableLatLon(true);
         if (StringUtils.isBlank(cache.getName())) {
             cache.setName(coord.getName());
         }

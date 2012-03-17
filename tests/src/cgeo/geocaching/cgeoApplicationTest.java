@@ -229,27 +229,20 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         Settings.setLiveMapStrategy(Strategy.DETAILED);
 
         try {
-            GC2JVEH cache = new GC2JVEH();
+            GC2CJPF mockedCache = new GC2CJPF();
+
+            deleteCacheFromDB(mockedCache.getGeocode());
 
             final String tokens[] = GCBase.getTokens();
-            final Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
+            final Viewport viewport = new Viewport(mockedCache.getCoords(), 0.003, 0.003);
             final SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
+            assertNotNull(search);
+            assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
 
-            // GC2JVEH is a premium members only cache. It can't be "found" by non-premium members
-            if (Settings.isPremiumMember()) {
-                assertNotNull(search);
-                // coords are identical... if the user is logged in
-                if (search.error != null) {
-                    if (search.getGeocodes().contains(cache.getGeocode())) {
-                        assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).getCoords()));
-                        assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).isReliableLatLon());
-                    }
-                } else {
-                    assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-                    assertEquals(cache.getCoords().toString(), cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).getCoords().toString());
-                    assertTrue(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).isReliableLatLon());
-                }
-            }
+            cgCache parsedCache = cgeoapplication.getInstance().loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+
+            assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().isEqualTo(parsedCache.getCoords()));
+            assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
         } finally {
             Settings.setLiveMapStrategy(strategy);
         }
@@ -333,8 +326,13 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
-    private static void deleteCacheFromDBAndLogout(String geocode) {
+    private static void deleteCacheFromDB(String geocode) {
         cgeoapplication.getInstance().removeCache(geocode, LoadFlags.REMOVE_ALL);
+    }
+
+    /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
+    private static void deleteCacheFromDBAndLogout(String geocode) {
+        deleteCacheFromDB(geocode);
 
         Login.logout();
         // Modify login data to avoid an automatic login again

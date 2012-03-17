@@ -314,7 +314,7 @@ public class cgBase {
             recaptchaText = thread.getText();
         }
 
-        if (cids.size() > 0 && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
+        if (cids.size() > 0 && (Settings.isPremiumMember() || showCaptcha) && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
             Log.i(Settings.tag, "Trying to get .loc for " + cids.size() + " caches");
 
             try {
@@ -355,10 +355,6 @@ public class cgBase {
 
                 LocParser.parseLoc(searchResult, coordinates);
 
-                // now we have the coords...
-                for (cgCache cache : searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)) {
-                    cache.setReliableLatLon(true);
-                }
             } catch (Exception e) {
                 Log.e(Settings.tag, "cgBase.parseSearch.CIDs: " + e.toString());
             }
