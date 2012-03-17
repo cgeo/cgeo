@@ -2,10 +2,12 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:cacheColorHint="?background_color"
     android:divider="?background_color"
     android:fastScrollEnabled="true"
     android:focusable="false"
     android:footerDividersEnabled="false"
     android:headerDividersEnabled="false"
     android:listSelector="?background_color" >
-</ListView>
+
+</ListView>
