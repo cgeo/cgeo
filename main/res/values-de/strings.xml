@@ -747,6 +747,10 @@
   <string name="helper_barcode_title">Barcode-Scanner</string>
   <string name="helper_barcode_description">Es gibt GreaseMonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
   
+   <!-- add-ons -->
+  <string name="addon_missing_title">Add-On fehlt</string>
+  <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
+  
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Hunde erlaubt</string>
   <string name="attribute_dogs_no">Hunde nicht erlaubt</string>
