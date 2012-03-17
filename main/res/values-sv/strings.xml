@@ -612,10 +612,6 @@
   <string name="web_downloading">Laddar ner</string>
   <string name="web_downloaded">Nerladdat</string>
 
-  <!-- event -->
-  <string name="event_success">Event tillagt i kalender</string>
-  <string name="event_fail">Misslyckades att lägga till event i kalender</string>
-
   <!-- popup -->
   <string name="popup_more">Mer information</string>
 

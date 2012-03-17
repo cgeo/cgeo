@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendars">Naptárhoz</string>
+    <string name="event_success">Eseményláda hozzáadva a naptárhoz</string>
+    <string name="event_fail">Eseményláda hozzáadása a naptárhoz sikertelen.</string>
+</resources>

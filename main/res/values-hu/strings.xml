@@ -544,10 +544,6 @@
   <string name="web_downloading">Letöltés</string>
   <string name="web_downloaded">Letöltve</string>
 
-  <!-- event -->
-  <string name="event_success">Eseményláda hozzáadva a naptárhoz</string>
-  <string name="event_fail">Eseményláda hozzáadása a naptárhoz sikertelen.</string>
-
   <!-- popup -->
   <string name="popup_more">Több részlet</string>
 

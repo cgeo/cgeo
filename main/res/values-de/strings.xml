@@ -604,10 +604,6 @@
   <string name="web_downloading">Lade herunter</string>
   <string name="web_downloaded">Heruntergeladen</string>
 
-  <!-- event -->
-  <string name="event_success">Event-Cache zum Kalender hinzugefügt</string>
-  <string name="event_fail">Fehler beim Hinzufügen des Event-Cache zum Kalender</string>
-
   <!-- popup -->
   <string name="popup_more">Mehr Details</string>
 

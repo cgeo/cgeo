@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendars">Calendriers</string>
+    <string name="event_success">Cache évènement ajoutée à l\'agenda</string>
+    <string name="event_fail">Échec d\'ajout de la cache événement à l\'agenda</string>
+</resources>

@@ -607,10 +607,6 @@
   <string name="web_downloading">Preberanie</string>
   <string name="web_downloaded">Prebrané</string>
 
-  <!-- event -->
-  <string name="event_success">Udalosť bola pridaná do kalendára</string>
-  <string name="event_fail">Nepodarilo sa vložiť udalosť do kalendára</string>
-
   <!-- popup -->
   <string name="popup_more">Viac detailov</string>
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendars">Kalendarze</string>
+    <string name="event_success">Wydarzenie wpisane do kalendarza</string>
+    <string name="event_fail">Nie udało się wpisać wydarzenia do kalendarza</string>
+</resources>

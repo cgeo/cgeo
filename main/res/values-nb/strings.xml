@@ -326,10 +326,6 @@
   <string name="gpx_import_title_reading_file">Leser fil</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>
 
-  <!-- event -->
-  <string name="event_success">Hendelse-cache lagt til i kalenderen</string>
-  <string name="event_fail">c:geo klarte ikke å legge hendelse-cachen til i kalenderen</string>
-
   <!-- popup -->
   <string name="popup_more">Mer detaljer</string>
 

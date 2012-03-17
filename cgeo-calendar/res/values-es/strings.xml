@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendars">Calendarios</string>
+    <string name="event_success">Escondite/Evento añadido al calendario</string>
+    <string name="event_fail">Error al añadir escondite/evento al calendario</string>
+</resources>

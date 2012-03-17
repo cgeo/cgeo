@@ -341,10 +341,6 @@
   <string name="gpx_import_title_reading_file">čtení souboru</string>
   <string name="gpx_import_title_caches_imported">výsledek</string>
 
-  <!-- event -->
-  <string name="event_success">Událost byla přidána do kalendáře</string>
-  <string name="event_fail">Nepodařilo se vložit událost do kalendáře</string>
-
   <!-- popup -->
   <string name="popup_more">více detailů</string>
 

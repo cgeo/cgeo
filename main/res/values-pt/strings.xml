@@ -602,10 +602,6 @@
   <string name="web_downloading">A transferir</string>
   <string name="web_downloaded">Transferido</string>
 
-  <!-- event -->
-  <string name="event_success">Cache evento adiconada ao calendário</string>
-  <string name="event_fail">Falha ao adicionar a cache evento ao calendário</string>
-
   <!-- popup -->
   <string name="popup_more">Mais detalhes</string>
 

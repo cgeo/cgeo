@@ -234,10 +234,6 @@
   <string name="cache_location">Lokation</string>
   <string name="cache_coordinates">Koordinater</string>
 
-  <!-- event -->
-  <string name="event_success">Eventcache tilføjet til kalender</string>
-  <string name="event_fail">Kan ikke tilføje eventcache til kalender</string>
-
   <!-- popup -->
   <string name="popup_more">Flere detaljer</string>
 

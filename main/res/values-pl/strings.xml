@@ -525,10 +525,6 @@
   <string name="web_downloading">Ściąganie</string>
   <string name="web_downloaded">Ściągnięte</string>
 
-  <!-- event -->
-  <string name="event_success">Wydarzenie wpisane do kalendarza</string>
-  <string name="event_fail">Nie udało się wpisać wydarzenia do kalendarza</string>
-
   <!-- popup -->
   <string name="popup_more">Więcej szczegółów</string>
 
