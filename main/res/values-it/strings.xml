@@ -757,6 +757,10 @@
   <string name="helper_barcode_title">Barcode Scanner</string>
   <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
 
+  <!-- add-ons -->
+  <string name="addon_missing_title">Add-On mancante</string>
+  <string name="addon_download_prompt">Scaricalo ora da Google Play.</string>
+
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Cani permessi</string>
   <string name="attribute_dogs_no">Cani NON permessi</string>
