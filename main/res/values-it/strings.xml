@@ -575,8 +575,10 @@
   <string name="gpx_import_loading_waypoints">Caricamento file waypoints</string>
   <string name="gpx_import_storing">Salvataggio delle cache nel database</string>
   <string name="gpx_import_caches_imported">cache importate</string>
-  <string name="gpx_import_title">Importa GPX</string>
+  <string name="gpx_import_static_maps_skipped">Download mappe statiche interrotto</string>
+  <string name="gpx_import_title_static_maps">Salva mappe statiche</string>
   <string name="gpx_import_title_reading_file">Lettura file</string>
+  <string name="gpx_import_title">Importa GPX</string>
   <string name="gpx_import_title_caches_imported">Risultato</string>
   <string name="gpx_import_title_caches_import_failed">Importazione fallita</string>
   <string name="gpx_import_error_io">Impossibile leggere il file</string>
