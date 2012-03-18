@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Message;
 import android.view.WindowManager;
 
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 public class Progress {
 
     private ProgressDialog dialog;
+    private int progress = 0;
 
     public synchronized void dismiss() {
         if (dialog != null && dialog.isShowing()) {
@@ -24,6 +26,7 @@ public class Progress {
             dialog = ProgressDialog.show(context, title, message, indeterminate, cancelMessage != null);
             dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             dialog.setProgress(0);
+            this.progress = 0;
             if (cancelMessage != null) {
                 dialog.setCancelMessage(cancelMessage);
             }
@@ -34,12 +37,14 @@ public class Progress {
         if (dialog == null) {
             dialog = new ProgressDialog(context);
             dialog.setProgress(0);
+            this.progress = 0;
             dialog.setTitle(title);
             dialog.setMessage(message);
             dialog.setProgressStyle(style);
             if (cancelMessage != null) {
                 dialog.setCancelable(true);
                 dialog.setCancelMessage(cancelMessage);
+                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getResources().getString(android.R.string.cancel), cancelMessage);
             } else {
                 dialog.setCancelable(false);
             }
@@ -69,5 +74,13 @@ public class Progress {
         if (dialog != null && dialog.isShowing()) {
             dialog.setProgress(progress);
         }
+        this.progress = progress;
+    }
+
+    public synchronized int getProgress() {
+        if (dialog != null) {
+            dialog.getProgress();
+        }
+        return this.progress;
     }
 }
