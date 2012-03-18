@@ -71,7 +71,6 @@
   <string name="log_needs_archived">Necesita ser archivado</string>
   <string name="log_discovered">Descubierto</string>
   <string name="log_reviewed">Nota del revisor</string>
-  <string name="log_taken">Visita</string>
   <string name="log_tb_nothing">No hacer nada</string>
   <string name="log_tb_visit">Visita</string>
   <string name="log_tb_drop">Colocar aquí</string>
@@ -149,7 +148,6 @@
   <string name="err_store_failed">Lo siento, c:geo no puede guardar el escondite.</string>
   <string name="err_refresh_failed">Lo siento, c:geo no puede actualizar el escondite.</string>
   <string name="err_dwld_details_failed">Lo siento, c:geo no ha podido descargar los detalles del escondite.</string>
-  <string name="err_dwld_details_failed_reason">Lo siento, c:geo no ha podido descargar los detalles del escondite debido a </string>
   <string name="err_load_descr_failed">Lo siento, c:geo no ha podido cargar la descripción.</string>
   <string name="err_location_unknown">c:geo no conoce la ubicación del escondite.</string>
   <string name="err_missing_device_name">Debes indicar un nombre de dispositivo antes de registrarte.</string>

@@ -61,7 +61,6 @@
   <string name="log_needs_archived">アーカイブされるべき</string>
   <string name="log_discovered">発見した</string>
   <string name="log_reviewed">レビューノート</string>
-  <string name="log_taken">Visit</string>
   <string name="log_tb_nothing">何もしない</string>
   <string name="log_tb_visit">訪問</string>
   <string name="log_tb_drop">ここに置く</string>
@@ -124,7 +123,6 @@
   <string name="err_store_failed">キャッシュ情報を保存することができません。</string>
   <string name="err_refresh_failed">キャッシュ情報を更新することができません。</string>
   <string name="err_dwld_details_failed">キャッシュ情報の詳細をダウンロードすることができません。</string>
-  <string name="err_dwld_details_failed_reason">キャッシュ情報の詳細をダウンロードすることができません。原因: </string>
   <string name="err_load_descr_failed">キャッシュの説明をロードすることができません。</string>
   <string name="err_location_unknown">キャッシュの場所が分かりません。</string>
 

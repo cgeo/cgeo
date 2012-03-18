@@ -74,7 +74,6 @@
   <string name="log_needs_archived">Dient te worden gearchiveerd</string>
   <string name="log_discovered">Ontdekt</string>
   <string name="log_reviewed">Recensent notitie</string>
-  <string name="log_taken">Bezoek</string>
   <string name="log_tb_nothing">Niets doen</string>
   <string name="log_tb_visit">Bezoek</string>
   <string name="log_tb_drop">Hier droppen</string>
@@ -156,7 +155,6 @@
   <string name="err_store_failed">Sorry, c:geo kan de geocache niet opslaan.</string>
   <string name="err_refresh_failed">Sorry, c:geo kan de geocache niet verversen.</string>
   <string name="err_dwld_details_failed">Sorry, c:geo kon de cache details niet downloaden.</string>
-  <string name="err_dwld_details_failed_reason">Sorry, c:geo kon de cache details niet downloaden omdat</string>
   <string name="err_load_descr_failed">Sorry, c:geo kan de omschrijving niet laden.</string>
   <string name="err_location_unknown">c:geo kent de locatie van de cache niet.</string>
   <string name="err_missing_device_name">Voer een apparaatnaam in voor registratie.</string>

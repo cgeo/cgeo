@@ -74,7 +74,6 @@
   <string name="log_needs_archived">Nécessite d\'être archivée</string>
   <string name="log_discovered">Découverte</string>
   <string name="log_reviewed">Note du relecteur</string>
-  <string name="log_taken">Emmené en visite</string>
   <string name="log_tb_nothing">Ne fait rien</string>
   <string name="log_tb_visit">Visité</string>
   <string name="log_tb_drop">Déposé ici</string>
@@ -158,7 +157,6 @@
   <string name="err_store_failed">Désolé, c:geo ne peut pas enregistrer la cache.</string>
   <string name="err_refresh_failed">Désolé, c:geo ne peut pas rafraîchir la cache.</string>
   <string name="err_dwld_details_failed">Désolé, c:geo n\'a pas réussi à télécharger les détails de la cache.</string>
-  <string name="err_dwld_details_failed_reason">Désolé, c:geo n\'a pas réussi à télécharger les détails de la cache car </string>
   <string name="err_load_descr_failed">Désolé, c:geo ne peut pas charger la description.</string>
   <string name="err_location_unknown">c:geo ne connait pas la position de la cache.</string>
   <string name="err_missing_device_name">Veuillez saisir un nom pour votre appareil avant l\'enregistrement.</string>

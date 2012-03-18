@@ -117,7 +117,6 @@
   <string name="err_store_failed">c:geo nemůže uložit keš</string>
   <string name="err_refresh_failed">c:geo nemůže obnovit keš</string>
   <string name="err_dwld_details_failed">c:geo nemůže stáhnout detaily keše</string>
-  <string name="err_dwld_details_failed_reason">c:geo nemůže načíst podrobnosti o keši, protože</string>
   <string name="err_load_descr_failed">c:geo nemůže stáhnout popis keše.</string>
   <string name="err_location_unknown">c:geo nezná souřadnice keše</string>
   <string name="err_tb_display">"C:geo nemůže zobrazit trackable. Je to opravdu trackable?</string>

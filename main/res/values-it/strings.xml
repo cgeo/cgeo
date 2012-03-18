@@ -77,7 +77,6 @@
   <string name="log_needs_archived">Necessita archiviazione</string>
   <string name="log_discovered">Scoperta</string>
   <string name="log_reviewed">Nota del revisore</string>
-  <string name="log_taken">Visita</string>
   <string name="log_tb_nothing">Non fare nulla</string>
   <string name="log_tb_visit">Visitato</string>
   <string name="log_tb_drop">Lasciato</string>
@@ -118,14 +117,6 @@
   <string name="log_new_log_text">Testo Log</string>
   <string name="log_announcement">Annuncio</string>
   
-  <!-- copy -->
-  <string name="options_context_menu_title">Opzioni</string>
-  <string name="copy_coords">Copia Coordinate</string>
-  <string name="copy_desc">Copia Descrizione</string>
-  <string name="copy_personalnote">Copia Note personali</string>
-  <string name="copy_hint">Copia Aiuti</string>
-  <string name="copy_log">Copia Log</string>
-
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduci in %s</string>
   <string name="translate_to_english">Traduci in inglese</string>
@@ -175,7 +166,6 @@
   <string name="err_store_failed">c:geo non può salvare le geocache.</string>
   <string name="err_refresh_failed">c:geo non può aggiornare le geocache.</string>
   <string name="err_dwld_details_failed">c:geo ha fallito il download dei dettagli della cache.</string>
-  <string name="err_dwld_details_failed_reason">c:geo ha fallito il download dei dettagli della cache perché </string>
   <string name="err_load_descr_failed">c:geo non può caricare la descrizione.</string>
   <string name="err_location_unknown">c:geo non conosce la posizione della cache.</string>
   <string name="err_missing_device_name">Per cortesia inserire il nome del dispositivo prima di registrarsi.</string>

@@ -73,7 +73,6 @@
   <string name="log_needs_archived">Arhiválás szükséges</string>
   <string name="log_discovered">Felfedezve</string>
   <string name="log_reviewed">Moderátor jegyzet</string>
-  <string name="log_taken">Látogatás</string>
   <string name="log_tb_nothing">Ne csinálj semmit</string>
   <string name="log_tb_visit">Látogatás</string>
   <string name="log_tb_drop">Ládába helyezés</string>
@@ -152,7 +151,6 @@
   <string name="err_store_failed">Sajnáljuk, a c:geo nem tudja elmenteni a geoládát.</string>
   <string name="err_refresh_failed">Sajnáljuk, a c:geo nem tudjarefresh geocache.</string>
   <string name="err_dwld_details_failed">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait.</string>
-  <string name="err_dwld_details_failed_reason">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait, mert</string>
   <string name="err_load_descr_failed">Sajnáljuk, a c:geo nem tudja betölteni a leírást.</string>
   <string name="err_location_unknown">a c:geo nem ismeri a láda helyzetét.</string>
   <string name="err_missing_device_name">Kérlek regisztráció előtt írd be az eszköz nevét.</string>

@@ -118,7 +118,6 @@
   <string name="err_store_failed">Beklager, c:geo klarte ikke å lagre cachen.</string>
   <string name="err_refresh_failed">Beklager, c:geo klarte ikke å oppdatere cachen.</string>
   <string name="err_dwld_details_failed">Beklager, c:geo klarte ikke å laste ned cachens detaljer</string>
-  <string name="err_dwld_details_failed_reason">Beklager, c:geo klarte ikke å laste ned cachens detaljer p.g.a.</string>
   <string name="err_load_descr_failed">Beklager, c:geo klarte ikke å åpne beskrivelsen.</string>
 
   <string name="err_location_unknown">c:geo vet ikke hvor cachen er.</string>
