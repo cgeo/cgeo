@@ -14,7 +14,6 @@
   <string name="action_bar_share_title">Del link til cache</string>
 
   <!-- caches -->
-  <string name="all">Alle cacher</string>
   <string name="traditional">Traditionel cache</string>
   <string name="multi">Multi-cache</string>
   <string name="mystery">Ukendt cache</string>
@@ -124,13 +123,11 @@
   <string name="caches_eta_mins"> minutter</string>
   <string name="caches_store_offline">Gem Offline</string>
   <string name="caches_on_map">Vis på kort</string>
-  <string name="caches_select">Vælg fra liste</string>
 
   <!-- about -->
   <string name="about_changelog">Ændringslog</string>
   <string name="about_donate">Donér</string>
   <string name="about_detail">Detaljer</string>
-  <string name="about_donation_less">Donér\nmindre</string>
   <string name="about_donation_more">Donér\nudvikling</string>
 
   <!-- init -->
@@ -156,7 +153,6 @@
   <string name="init_nav">Benyt Google Navigation</string>
   <string name="init_autoload">Auto-indlæs lang cachebeskrivelse</string>
   <string name="init_livelist">Vis retning til cacher i lister</string>
-  <string name="init_browser">Identificer c:geo som standardbrowser</string>
   <string name="init_cleared">c:geo slettede login-informationer.</string>
 
   <!-- auth -->
@@ -204,7 +200,6 @@
   <string name="cache_dialog_refresh_title">Genindlæs</string>
   <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer…</string>
   <string name="cache_menu_navigate">Naviger</string>
-  <string name="cache_menu_compass">Kompas</string>
   <string name="cache_menu_tbt">Vejvisning</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kort</string>

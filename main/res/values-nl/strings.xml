@@ -18,7 +18,6 @@
   <string name="action_bar_share_title">Deel link naar cache</string>
 
   <!-- caches -->
-  <string name="all">Alle caches</string>
   <string name="all_types">Alle cache types</string>
   <string name="traditional">Traditionele cache</string>
   <string name="multi">Multi-cache</string>
@@ -74,7 +73,6 @@
   <string name="log_needs_archived">Dient te worden gearchiveerd</string>
   <string name="log_discovered">Ontdekt</string>
   <string name="log_reviewed">Recensent notitie</string>
-  <string name="log_taken">Bezoek</string>
   <string name="log_tb_nothing">Niets doen</string>
   <string name="log_tb_visit">Bezoek</string>
   <string name="log_tb_drop">Hier droppen</string>
@@ -156,7 +154,6 @@
   <string name="err_store_failed">Sorry, c:geo kan de geocache niet opslaan.</string>
   <string name="err_refresh_failed">Sorry, c:geo kan de geocache niet verversen.</string>
   <string name="err_dwld_details_failed">Sorry, c:geo kon de cache details niet downloaden.</string>
-  <string name="err_dwld_details_failed_reason">Sorry, c:geo kon de cache details niet downloaden omdat</string>
   <string name="err_load_descr_failed">Sorry, c:geo kan de omschrijving niet laden.</string>
   <string name="err_location_unknown">c:geo kent de locatie van de cache niet.</string>
   <string name="err_missing_device_name">Voer een apparaatnaam in voor registratie.</string>
@@ -190,7 +187,6 @@
 
   <string name="err_search_address_no_match">Sorry, c:geo heeft geen gelijkende plaats gevonden.</string>
   <string name="err_search_address_forgot">Sorry, c:geo is het adres dat je zoekt vergeten.</string>
-  <string name="err_search_address">Zoeken naar plaatsen</string>
   <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
   <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
   <string name="err_parse_dist">Sorry, c:geo kan afstand niet verwerken.</string>
@@ -272,7 +268,6 @@
   <string name="caches_sort_date">datum</string>
   <string name="caches_sort_finds">Aantal keer gevonden</string>
   <string name="caches_sort_state">staat</string>
-  <string name="caches_select">Selecteer uit lijst</string>
   <string name="caches_select_mode">Selectie modus</string>
   <string name="caches_select_mode_exit">Selectie modus beëindigen</string>
   <string name="caches_select_invert">Inverteer selectie</string>
@@ -312,7 +307,6 @@
   <string name="list_menu_rename">Hernoem huidige lijst</string>
   <string name="list_title">Selecteer een lijst</string>
   <string name="list_inbox">Opgeslagen</string>
-  <string name="list_wpt">Waypoints</string>
   <string name="list_dialog_create_title">Nieuwe lijst</string>
   <string name="list_dialog_create">Maak</string>
   <string name="list_dialog_cancel">Annuleer</string>
@@ -330,7 +324,6 @@
   <string name="about_changelog">Changelog</string>
   <string name="about_donate">Doneren</string>
   <string name="about_detail">Details</string>
-  <string name="about_donation_less">Minder doneren</string>
   <string name="about_donation_more">Doneren aan ontwikkeling</string>
   <string name="about_contributors">Bijdragers</string>
 
@@ -380,7 +373,6 @@
   <string name="init_nav">Gebruik Google Navigatie</string>
   <string name="init_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
   <string name="init_livelist">Toon afstand tot cache in lijst</string>
-  <string name="init_browser">c:geo Als standaard browser instellen</string>
   <string name="init_altitude">Hoogte correctie</string>
   <string name="init_altitude_description">Als de GPS een verkeerde hoogte aangeeft, kan dit gecorrigeerd worden met een positief of negatief nummer. De correctie is in meters.</string>
   <string name="init_clear">Login wissen</string>
@@ -493,7 +485,6 @@
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Verwijder cache van watchlist…</string>
   <string name="cache_menu_navigate">Navigeer</string>
-  <string name="cache_menu_compass">Compas</string>
   <string name="cache_menu_tbt">Turn-by-turn</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
@@ -640,7 +631,6 @@
   <string name="search_tb_hint">Trackable identificatie</string>
   <string name="search_tb_button">Zoeken naar trackable</string>
   <string name="search_destination">Bestemming</string>
-  <string name="search_some_destination">Een bestemming</string>
   <string name="search_direction_rel">Vanaf deze positie</string>
   <string name="search_address_started">Zoeken naar plaatsen</string>
   <string name="search_address_result">Gevonden plaatsen</string>

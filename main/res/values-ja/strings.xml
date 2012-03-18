@@ -16,7 +16,6 @@
   <string name="action_bar_share_title">キャッシュのリンクを共有</string>
 
   <!-- caches -->
-  <string name="all">">全てのキャッシュ</string>
   <string name="all_types">全てのタイプのキャッシュ</string>
   <string name="traditional">トラディショナルキャッシュ</string>
   <string name="multi">マルチキャッシュ</string>
@@ -61,7 +60,6 @@
   <string name="log_needs_archived">アーカイブされるべき</string>
   <string name="log_discovered">発見した</string>
   <string name="log_reviewed">レビューノート</string>
-  <string name="log_taken">Visit</string>
   <string name="log_tb_nothing">何もしない</string>
   <string name="log_tb_visit">訪問</string>
   <string name="log_tb_drop">ここに置く</string>
@@ -124,7 +122,6 @@
   <string name="err_store_failed">キャッシュ情報を保存することができません。</string>
   <string name="err_refresh_failed">キャッシュ情報を更新することができません。</string>
   <string name="err_dwld_details_failed">キャッシュ情報の詳細をダウンロードすることができません。</string>
-  <string name="err_dwld_details_failed_reason">キャッシュ情報の詳細をダウンロードすることができません。原因: </string>
   <string name="err_load_descr_failed">キャッシュの説明をロードすることができません。</string>
   <string name="err_location_unknown">キャッシュの場所が分かりません。</string>
 
@@ -157,7 +154,6 @@
 
   <string name="err_search_address_no_match">該当する場所が見つかりません。</string>
   <string name="err_search_address_forgot">Sorry, c:geo forgot address you try to find.</string>
-  <string name="err_search_address">場所を検索中</string>
   <string name="err_parse_lat">緯度の解析ができません。</string>
   <string name="err_parse_lon">経度の解析ができません。</string>
   <string name="err_parse_dist">距離の解析ができません。</string>
@@ -228,7 +224,6 @@
   <string name="caches_sort_rating">評価順</string>
   <string name="caches_sort_vote">vote (own rating)</string>
   <string name="caches_sort_inventory">目録の数順</string>
-  <string name="caches_select">リストから選択</string>
   <string name="caches_select_mode">選択モード</string>
   <string name="caches_select_mode_exit">選択モードを終わる</string>
   <string name="caches_select_invert">選択を反転</string>
@@ -255,7 +250,6 @@
   <string name="list_menu_change">別のリストにする</string>
   <string name="list_title">リストの選択</string>
   <string name="list_inbox">保存済み</string>
-  <string name="list_wpt">Waypoints</string>
   <string name="list_dialog_create_title">新しいリスト</string>
   <string name="list_dialog_create">作成</string>
   <string name="list_dialog_cancel">キャンセル</string>
@@ -271,7 +265,6 @@
   <string name="about_changelog">更新履歴</string>
   <string name="about_donate">寄付</string>
   <string name="about_detail">詳細</string>
-  <string name="about_donation_less">少し\n寄付する</string>
   <string name="about_donation_more">開発に\n寄付する</string>
   <string name="about_contributors">貢献者</string>
 
@@ -308,7 +301,6 @@
   <string name="init_nav">Googleマップナビを使う</string>
   <string name="init_autoload">キャッシュの説明を自動的に全て表示する</string>
   <string name="init_livelist">キャッシュの一覧で方向をアイコン表示する</string>
-  <string name="init_browser">c:geoが既定のブラウザかどうか確認する</string>
   <string name="init_altitude">標高の修正</string>
   <string name="init_altitude_description">もし現在地の標高が正しくないなら修正できます。正または負のメートル単位で入力してください。</string>
   <string name="init_clear">ログイン情報を消去</string>
@@ -370,7 +362,6 @@
   <string name="cache_dialog_refresh_title">更新</string>
   <string name="cache_dialog_refresh_message">キャッシュの詳細を再ロード中…</string>
   <string name="cache_menu_navigate">ナビゲーション</string>
-  <string name="cache_menu_compass">コンパス</string>
   <string name="cache_menu_tbt">道順ナビ</string>
   <string name="cache_menu_radar">レーダー</string>
   <string name="cache_menu_map">地図で表示</string>

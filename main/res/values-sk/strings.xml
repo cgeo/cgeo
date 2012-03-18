@@ -18,7 +18,6 @@
   <string name="action_bar_share_title">Zdieľať odkaz ku skrýši</string>
 
   <!-- caches -->
-  <string name="all">Všetky skrýše</string>
   <string name="all_types">Všetky typy</string>
   <string name="traditional">Tradičná skrýša</string>
   <string name="multi">Multi skrýša</string>
@@ -35,7 +34,6 @@
   <string name="ape">Skrýša projektu APE</string>
   <string name="gchq">Ústredie Groundspeaku</string>
   <string name="gps">Skrýša výstavy GPS</string>
-  <string name="gc_live_map">Aktívna mapa</string>
   <string name="unknown">Neznáma skrýša</string>
 
   <!-- cache sizes -->
@@ -200,7 +198,6 @@
 
   <string name="err_search_address_no_match">c:geo nenašlo žiadne zodpovedajúce miesto</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
-  <string name="err_search_address">Vyhľadávanie miest</string>
   <string name="err_parse_lat">c:geo nemôže dopočítať šírku.</string>
   <string name="err_parse_lon">c:geo nemôže dopočítať dĺžku.</string>
   <string name="err_parse_dist">c:geo nemôže dopočítať vzdialenosť.</string>
@@ -284,7 +281,6 @@
   <string name="caches_sort_date">dátumu</string>
   <string name="caches_sort_finds">nájdení</string>
   <string name="caches_sort_state">stavu</string>
-  <string name="caches_select">vybrať zo zoznamu</string>
   <string name="caches_select_mode">Mód výberu</string>
   <string name="caches_select_mode_exit">Opustiť mód výberu</string>
   <string name="caches_select_invert">Inverzný výber</string>
@@ -326,7 +322,6 @@
   <string name="list_menu_rename">Premenovať tento zoznam</string>
   <string name="list_title">Výber zoznamu</string>
   <string name="list_inbox">Uložené</string>
-  <string name="list_wpt">Body trasy</string>
   <string name="list_dialog_create_title">Nový zoznam</string>
   <string name="list_dialog_create">Vytvoriť</string>
   <string name="list_dialog_cancel">Zrušiť</string>
@@ -344,7 +339,6 @@
   <string name="about_changelog">Zmeny</string>
   <string name="about_donate">Podpora vývoja</string>
   <string name="about_detail">Detaily</string>
-  <string name="about_donation_less">Darujte\nmenej</string>
   <string name="about_donation_more">Podporte\nvývoj</string>
   <string name="about_contributors">Prispievatelia</string>
 
@@ -397,7 +391,6 @@
   <string name="init_nav">Používať Navigáciu Google</string>
   <string name="init_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
   <string name="init_livelist">Zobrazovať smer v zozname skrýš</string>
-  <string name="init_browser">Tváriť sa ako bežný webový prehliadač</string>
   <string name="init_altitude">Oprava výšky</string>
   <string name="init_altitude_description">Keď vám GPS zobrazuje nesprávnu nadmorskú výšku, môžete ju opraviť zadaním kladného alebo záporného čísla. Oprava ja vždy v metroch.</string>
   <string name="init_clear">Zmazať prihlasovacie údaje</string>
@@ -523,7 +516,6 @@
   <string name="cache_dialog_watchlist_remove_title">Zoznam sledovaných</string>
   <string name="cache_dialog_watchlist_remove_message">Odstraňovanie skrýše zo zoznamu sledovaných…</string>
   <string name="cache_menu_navigate">Navigovať</string>
-  <string name="cache_menu_compass">Kompas</string>
   <string name="cache_menu_tbt">Navigácia s inštrukciami</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mapa</string>
@@ -690,7 +682,6 @@
   <string name="search_tb_hint">Identifikácia trasovateľného predmetu</string>
   <string name="search_tb_button">Hľadať trasov. predmety</string>
   <string name="search_destination">Cieľ</string>
-  <string name="search_some_destination">Nejaký cieľ</string>
   <string name="search_direction_rel">Od tejto polohy</string>
   <string name="search_address_started">Vyhľadávanie miest</string>
   <string name="search_address_result">Nájdené miesta</string>

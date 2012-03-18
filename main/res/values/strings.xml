@@ -18,7 +18,6 @@
   <string name="action_bar_share_title">Share link to cache</string>
 
   <!-- caches -->
-  <string name="all">All Caches</string>
   <string name="all_types">All Cache Types</string>
   <string name="traditional">Traditional Cache</string>
   <string name="multi">Multi-cache</string>
@@ -35,7 +34,6 @@
   <string name="ape">Project APE Cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS Adventures Exhibit</string>
-  <string name="gc_live_map">Live Map</string>
   <string name="unknown">Unknown Type</string>
 
   <!-- cache sizes -->
@@ -200,7 +198,6 @@
 
   <string name="err_search_address_no_match">c:geo found no matching place.</string>
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
-  <string name="err_search_address">Searching for places</string>
   <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
   <string name="err_parse_lon">c:geo can\'t parse longitude.</string>
   <string name="err_parse_dist">c:geo can\'t parse distance.</string>
@@ -284,7 +281,6 @@
   <string name="caches_sort_date">Date</string>
   <string name="caches_sort_finds">Finds</string>
   <string name="caches_sort_state">State</string>
-  <string name="caches_select">Select from list</string>
   <string name="caches_select_mode">Select mode</string>
   <string name="caches_select_mode_exit">Exit select mode</string>
   <string name="caches_select_invert">Invert selection</string>
@@ -326,7 +322,6 @@
   <string name="list_menu_rename">Rename current list</string>
   <string name="list_title">Pick a list</string>
   <string name="list_inbox">Stored</string>
-  <string name="list_wpt">Waypoints</string>
   <string name="list_dialog_create_title">New list</string>
   <string name="list_dialog_create">Create</string>
   <string name="list_dialog_cancel">Cancel</string>
@@ -344,7 +339,6 @@
   <string name="about_changelog">Changelog</string>
   <string name="about_donate">Donate</string>
   <string name="about_detail">Details</string>
-  <string name="about_donation_less">Donate\nless</string>
   <string name="about_donation_more">Donate\ndevelopment</string>
   <string name="about_contributors">Contributors</string>
 
@@ -397,7 +391,6 @@
   <string name="init_nav">Use Google Navigation</string>
   <string name="init_log_offline">Enable Offline Logging\n(Don\'t show online Log screen when logging, don\'t send the Log online)</string>
   <string name="init_livelist">Show Direction to caches in the list</string>
-  <string name="init_browser">Identify c:geo as an ordinary webbrowser</string>
   <string name="init_altitude">Altitude Correction</string>
   <string name="init_altitude_description">If your GPS is calculating a wrong altitude, you can correct it with a positive or negative number. The correction always has to be given in meters.</string>
   <string name="init_clear">Clear Login</string>
@@ -529,7 +522,6 @@
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist…</string>
   <string name="cache_menu_navigate">Navigate</string>
-  <string name="cache_menu_compass">Compass</string>
   <string name="cache_menu_tbt">Turn-by-Turn</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Map</string>
@@ -716,7 +708,6 @@
   <string name="search_tb_hint">Trackable identification</string>
   <string name="search_tb_button">Search for trackable</string>
   <string name="search_destination">Destination</string>
-  <string name="search_some_destination">Some destination</string>
   <string name="search_direction_rel">From this position</string>
   <string name="search_address_started">Searching for places</string>
   <string name="search_address_result">Found places</string>
