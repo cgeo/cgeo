@@ -136,72 +136,72 @@
   <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
   <string name="err_unpublished">La cache a été retirée de la publication</string>
   <string name="err_premium_only">La cache est réservée aux membres Premium de Geocaching.com</string>
-  <string name="err_store">Désolé, c:geo ne peut pas enregister la cache.</string>
-  <string name="err_drop">Désolé, c:geo ne peut pas effacer la cache.</string>
-  <string name="err_detail_open">Désolé, c:geo ne peut pas ouvrir le détail de la cache.</string>
-  <string name="err_detail_cache">Désolé, c:geo ne peut pas afficher cette cache. Est-ce vraiment une géocache?</string>
-  <string name="err_detail_cache_find">Désolé, c:geo ne peut pas trouver de caches</string>
-  <string name="err_detail_cache_find_some">Désolé, c:geo ne peut pas trouver cette cache.</string>
-  <string name="err_detail_cache_find_any">Désolé, c:geo ne peut pas trouver de caches.</string>
-  <string name="err_detail_cache_find_next">Désolé, c:geo ne peut pas trouver les caches suivantes.</string>
-  <string name="err_detail_cache_forgot">Désolé, c:geo a oublié la cache demandée.</string>
-  <string name="err_detail_cache_forgot_visit">Désolé, c:geo a oublié la cache que vous avez visité.</string>
+  <string name="err_store">c:geo ne peut pas enregister la cache.</string>
+  <string name="err_drop">c:geo ne peut pas effacer la cache.</string>
+  <string name="err_detail_open">c:geo ne peut pas ouvrir le détail de la cache.</string>
+  <string name="err_detail_cache">c:geo ne peut pas afficher cette cache. Est-ce vraiment une géocache?</string>
+  <string name="err_detail_cache_find">c:geo ne peut pas trouver de caches</string>
+  <string name="err_detail_cache_find_some">c:geo ne peut pas trouver cette cache.</string>
+  <string name="err_detail_cache_find_any">c:geo ne peut pas trouver de caches.</string>
+  <string name="err_detail_cache_find_next">c:geo ne peut pas trouver les caches suivantes.</string>
+  <string name="err_detail_cache_forgot">c:geo a oublié la cache demandée.</string>
+  <string name="err_detail_cache_forgot_visit">c:geo a oublié la cache que vous avez visité.</string>
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
-  <string name="err_detail_not_load_map_static">Désolé, c:geo n\'a pas réussi à charger les cartes statiques.</string>
+  <string name="err_detail_not_load_map_static">c:geo n\'a pas réussi à charger les cartes statiques.</string>
   <string name="err_detail_ask_store_map_static">c:geo n\'a pas réussi à charger les cartes statiques. Les stocker maintenant ?</string>
   <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
   <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
   <string name="err_watchlist_failed">Échec lors du changement de votre liste de suivi.</string>
   <string name="err_navigation_no">c:geo ne trouve pas de navigation supportée.</string>
   <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
-  <string name="err_auth_initialize">Désolé, c:geo a échoué dans la demande d\'autorisation.</string>
+  <string name="err_auth_initialize">c:geo a échoué dans la demande d\'autorisation.</string>
   <string name="err_auth_process">Échec de la demande d\'autorisation.</string>
   <string name="err_cannot_log_visit">c:geo n\'a pas assez d\'information pour logger votre visite. Faites le depuis le détail de la cache, s\'il vous plait!</string>
-  <string name="err_init_cleared">Désolé, c:geo ne peux pas effacer votre nom d\'utilisateur.</string>
-  <string name="err_download_fail">Désolé, c:geo n\'a pas réussi à télécharger les caches car </string>
-  <string name="err_list_load_fail">Désolé, c:geo n\'a pas réussi à charger la liste des caches.</string>
-  <string name="err_store_failed">Désolé, c:geo ne peut pas enregistrer la cache.</string>
-  <string name="err_refresh_failed">Désolé, c:geo ne peut pas rafraîchir la cache.</string>
-  <string name="err_dwld_details_failed">Désolé, c:geo n\'a pas réussi à télécharger les détails de la cache.</string>
-  <string name="err_load_descr_failed">Désolé, c:geo ne peut pas charger la description.</string>
+  <string name="err_init_cleared">c:geo ne peux pas effacer votre nom d\'utilisateur.</string>
+  <string name="err_download_fail">c:geo n\'a pas réussi à télécharger les caches car </string>
+  <string name="err_list_load_fail">c:geo n\'a pas réussi à charger la liste des caches.</string>
+  <string name="err_store_failed">c:geo ne peut pas enregistrer la cache.</string>
+  <string name="err_refresh_failed">c:geo ne peut pas rafraîchir la cache.</string>
+  <string name="err_dwld_details_failed">c:geo n\'a pas réussi à télécharger les détails de la cache.</string>
+  <string name="err_load_descr_failed">c:geo ne peut pas charger la description.</string>
   <string name="err_location_unknown">c:geo ne connait pas la position de la cache.</string>
   <string name="err_missing_device_name">Veuillez saisir un nom pour votre appareil avant l\'enregistrement.</string>
 
-  <string name="err_tb_display">"Désolé, c:geo ne peut pas afficher l\'objet voyageur demandé. Est-ce vraiment un objet voyageur?</string>
-  <string name="err_tb_details_open">Désolé, c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
-  <string name="err_tb_details_download">Désolé, c:geo ne peut pas télécharger le détail de l\'objet voyageur car </string>
-  <string name="err_tb_forgot">Désolé, c:geo a oublié quel objet voyageur vous vouliez.</string>
-  <string name="err_tb_forgot_saw">Désolé, c:geo a oublié quel objet voyageur vous avez vu.</string>
-  <string name="err_tb_find">Désolé, c:geo ne peut pas trouver d\'objet voyageur.</string>
-  <string name="err_tb_find_that">Désolé, c:geo ne peut pas trouver cet objet voyageur.</string>
+  <string name="err_tb_display">"c:geo ne peut pas afficher l\'objet voyageur demandé. Est-ce vraiment un objet voyageur?</string>
+  <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
+  <string name="err_tb_details_download">c:geo ne peut pas télécharger le détail de l\'objet voyageur car </string>
+  <string name="err_tb_forgot">c:geo a oublié quel objet voyageur vous vouliez.</string>
+  <string name="err_tb_forgot_saw">c:geo a oublié quel objet voyageur vous avez vu.</string>
+  <string name="err_tb_find">c:geo ne peut pas trouver d\'objet voyageur.</string>
+  <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
 
-  <string name="err_waypoint_cache_unknown">Désolé, c:geo ne sait pas à quel cache vous voulez ajouter une étape.</string>
-  <string name="err_waypoint_unknown">Désolé, c:geo a oublié quel étape vous vouliez afficher.</string>
-  <string name="err_waypoint_add_failed">Désolé, c:geo n\'a pas réussi à afficher l\'étape.</string>
-  <string name="err_waypoint_load_failed">Désolé, c:geo n\'arrive pas à charger l\'étape.</string>
-  <string name="err_waypoint_delete_failed">Désolé, c:geo ne peut pas effacer l\'étape.</string>
+  <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quel cache vous voulez ajouter une étape.</string>
+  <string name="err_waypoint_unknown">c:geo a oublié quel étape vous vouliez afficher.</string>
+  <string name="err_waypoint_add_failed">c:geo n\'a pas réussi à afficher l\'étape.</string>
+  <string name="err_waypoint_load_failed">c:geo n\'arrive pas à charger l\'étape.</string>
+  <string name="err_waypoint_delete_failed">c:geo ne peut pas effacer l\'étape.</string>
   <string name="err_waypoint_open_cache_failed">c:geo n\'a pas réussi à obtenir les détails de la cache.</string>
-  <string name="err_point_unknown_position">Désolé, c:geo ne peut pas savoir où vous êtes.</string>
+  <string name="err_point_unknown_position">c:geo ne peut pas savoir où vous êtes.</string>
   <string name="err_point_no_position_given_title">Information obligatoire</string>
   <string name="err_point_no_position_given">Remplissez au moins la latitude ou la longitude ou la distance et le relèvement. Vous pouvez aussi remplir tous les champs.</string>
   <string name="err_point_curr_position_unavailable">c:geo ne connaît pas encore votre position. Veuillez patienter…</string>
   <string name="err_point_bear_and_dist_title">Besoin d\'aide?</string>
   <string name="err_point_bear_and_dist">Remplissez le relèvement et la distance. Le relèvement est l\'angle de 0 à 360 degrés par rapport au Nord. La distance est avec ou sans les unités.</string>
-  <string name="err_point_location_error">Désolé, c:geo ne peut pas trouver la position de l\'étape.</string>
+  <string name="err_point_location_error">c:geo ne peut pas trouver la position de l\'étape.</string>
 
-  <string name="err_log_load_data">Désolé, c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
-  <string name="err_log_load_data_again">Désolé, c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
+  <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
+  <string name="err_log_load_data_again">c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
   <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
-  <string name="err_log_failed_server">Désolé, c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
+  <string name="err_log_failed_server">c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
   <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site geocaching.com.</string>
 
-  <string name="err_search_address_no_match">Désolé, c:geo n\'a pas trouvé de lieu correspondant.</string>
-  <string name="err_search_address_forgot">Désolé, c:geo a oublié l\'adresse recherchée.</string>
-  <string name="err_parse_lat">Désolé, c:geo n\'arrive pas à lire la latitude.</string>
-  <string name="err_parse_lon">Désolé, c:geo n\'arrive pas à lire la longitude.</string>
-  <string name="err_parse_dist">Désolé, c:geo n\'arrive pas à lire la distance.</string>
-  <string name="err_parse_lat_lon">Désolé, c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
+  <string name="err_search_address_no_match">c:geo n\'a pas trouvé de lieu correspondant.</string>
+  <string name="err_search_address_forgot">c:geo a oublié l\'adresse recherchée.</string>
+  <string name="err_parse_lat">c:geo n\'arrive pas à lire la latitude.</string>
+  <string name="err_parse_lon">c:geo n\'arrive pas à lire la longitude.</string>
+  <string name="err_parse_dist">c:geo n\'arrive pas à lire la distance.</string>
+  <string name="err_parse_lat_lon">c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
 
   <string name="err_fieldnotes_export_failed">L\'export du champ Notes a échoué.</string>
 
@@ -217,7 +217,7 @@
   <string name="warn_search_help_user">Veuillez remplir le nom d\'utilisateur utilisé sur Geocaching.com.</string>
   <string name="warn_search_help_tb">Veuillez remplir le code de l\'objet voyageur. Par exemple \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
-  <string name="warn_load_images">Désolé, c:geo n\'a pas pu charger les images.</string>
+  <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
 
 
   <string name="info_log_posted">Envoi de la visite réussi.</string>
@@ -567,7 +567,7 @@
   <!-- file list base -->
   <string name="file_searching_in">Recherche de fichiers\nin</string>
   <string name="file_searching_sdcard_in">Aucun fichier trouvé dans le répertoire par défaut:\n%1$s\n\nRecherche dans la totalité de la carte SD:\n</string>
-  <string name="file_list_no_files">Désolé, c:geo n\'a pas trouvé les fichiers nécessaires.</string>
+  <string name="file_list_no_files">c:geo n\'a pas trouvé les fichiers nécessaires.</string>
   <string name="file_searching">Recherche des fichiers nécessaires</string>
   <string name="file_title_searching">Recherche en cours</string>
 
