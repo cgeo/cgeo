@@ -669,6 +669,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             item = menu.findItem(MENU_AS_LIST);
             item.setEnabled(live && CollectionUtils.isNotEmpty(caches));
 
+            menu.findItem(SUBMENU_STRATEGY).setEnabled(live);
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeomap.onPrepareOptionsMenu: " + e.toString());
         }
