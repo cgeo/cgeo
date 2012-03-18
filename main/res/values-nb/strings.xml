@@ -14,7 +14,6 @@
   <string name="action_bar_share_title">Del link til cachen</string>
 
   <!-- caches -->
-  <string name="all">Alle cacher</string>
   <string name="all_types">Alle cache typer</string>
   <string name="traditional">Tradisjonell cache</string>
   <string name="multi">Multi-cache</string>
@@ -137,7 +136,6 @@
 
   <string name="err_search_address_no_match">Beklager, c:geo klarte ikke å finne den forespurte adressen.</string>
   <string name="err_search_address_forgot">Beklager, c:geo glemte adressen du prøvde å finne.</string>
-  <string name="err_search_address">Søker etter plasser</string>
   <string name="err_parse_lat">Beklager, c:geo klarte ikke å lese breddegraden.</string>
   <string name="err_parse_lon">Beklager, c:geo klarte ikke å lese lengdegraden.</string>
   <string name="err_parse_dist">Beklager, c:geo klarte ikke å lese avstanden.</string>
@@ -187,7 +185,6 @@
   <string name="caches_store_offline">Lagre for offline-bruk</string>
   <string name="caches_store_selected">Lagre valgte</string>
   <string name="caches_on_map">Vis på kartet</string>
-  <string name="caches_select">Velg fra listen</string>
   <string name="caches_select_mode">Velge-modus</string>
   <string name="caches_select_mode_exit">Avslutt velge-modus</string>
   <string name="caches_nearby">I nærheten</string>
@@ -205,7 +202,6 @@
   <string name="about_changelog">Oppdateringslogg</string>
   <string name="about_donate">Donér</string>
   <string name="about_detail">Detaljer</string>
-  <string name="about_donation_less">Donér\nmindre</string>
   <string name="about_donation_more">Donér til\nutviklerne</string>
   <string name="about_contributors">Bidragsytere</string>
 
@@ -237,7 +233,6 @@
   <string name="init_nav">Bruk Google Navigation</string>
   <string name="init_autoload">Last full beskrivelse automatisk</string>
   <string name="init_livelist">Vis cachers retning i listen</string>
-  <string name="init_browser">Gjør c:geo til standard cache-leser</string>
   <string name="init_clear">Ikke husk meg</string>
   <string name="init_cleared">c:geo fjernet innloggings-opplysningene.</string>
 
@@ -287,7 +282,6 @@
   <string name="cache_dialog_refresh_title">Oppdater</string>
   <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt…</string>
   <string name="cache_menu_navigate">Navigér</string>
-  <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Punktvis navigasjon</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kartet</string>

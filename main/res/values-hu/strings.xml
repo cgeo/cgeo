@@ -18,7 +18,6 @@
   <string name="action_bar_share_title">A láda linkjének megosztása</string>
 
   <!-- caches -->
-  <string name="all">Összes</string>
   <string name="all_types">Minden láda típus</string>
   <string name="traditional">Hagyományos láda</string>
   <string name="multi">Multi-láda</string>
@@ -184,7 +183,6 @@
 
   <string name="err_search_address_no_match">Sajnáljuk, a c:geo nem talált eggyező helyet.</string>
   <string name="err_search_address_forgot">Sajnáljuk, a c:geo elfelejtette a címet amit kerestél.</string>
-  <string name="err_search_address">Helyek keresése</string>
   <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
   <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
   <string name="err_parse_dist">Sajnáljuk, a c:geo nem tudja értelmezni a távolságot.</string>
@@ -265,7 +263,6 @@
   <string name="caches_sort_date">dátum</string>
   <string name="caches_sort_finds">megtalálások</string>
   <string name="caches_sort_state">állapot</string>
-  <string name="caches_select">Kiválasztás listából</string>
   <string name="caches_select_mode">Kiválsztó mód</string>
   <string name="caches_select_mode_exit">Kilépés a kiválasztó módbólól</string>
   <string name="caches_select_invert">Kijelölés invertálása</string>
@@ -304,7 +301,6 @@
   <string name="list_menu_change">Lista megváltoztatása</string>
   <string name="list_title">Válassz listát</string>
   <string name="list_inbox">Mentett</string>
-  <string name="list_wpt">Útpontok</string>
   <string name="list_dialog_create_title">Új lista</string>
   <string name="list_dialog_create">Létrehozás</string>
   <string name="list_dialog_cancel">Mégsem</string>
@@ -320,7 +316,6 @@
   <string name="about_changelog">Változások</string>
   <string name="about_donate">Adományozás</string>
   <string name="about_detail">Részletek</string>
-  <string name="about_donation_less">Adományozás\nkevesebb</string>
   <string name="about_donation_more">Adomány\na fejlesztéshez</string>
   <string name="about_contributors">Hozzájárulók</string>
 
@@ -367,7 +362,6 @@
   <string name="init_autoload">Hosszú leírás autómata betöltése</string>
   <string name="init_log_offline">Offline logolás használata mindig (ne mutassa az online log ablakot logoláskor, ne küldje el a logot online)</string>
   <string name="init_livelist">Mutassa a ládák irányát a listában</string>
-  <string name="init_browser">Azonosítsa a c:geo-t általános böngészőként</string>
   <string name="init_altitude">Magasság korrekció</string>
   <string name="init_altitude_description">Ha a GPS rossz magasságot mutat, módosíthatod pozitív vagy negatív irányban. A korrekció mindig méterben van.</string>
   <string name="init_clear">Belépési adatok törlése</string>
@@ -470,7 +464,6 @@
   <string name="cache_dialog_watchlist_remove_title">Figyelőlista</string>
   <string name="cache_dialog_watchlist_remove_message">Láda eltávolítása a figyelőlistádról…</string>
   <string name="cache_menu_navigate">Navigáció</string>
-  <string name="cache_menu_compass">Iránytű</string>
   <string name="cache_menu_tbt">Lépésről lépésre</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Térkép</string>

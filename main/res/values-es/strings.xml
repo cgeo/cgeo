@@ -16,7 +16,6 @@
   <string name="action_bar_share_title">Compartir enlace a escondite</string>
 
   <!-- caches -->
-  <string name="all">Todos</string>
   <string name="all_types">Todos los escondites</string>
   <string name="traditional">Tradicionales</string>
   <string name="multi">Multis</string>
@@ -182,7 +181,6 @@
 
   <string name="err_search_address_no_match">Lo siento, c:geo no encuentra ningún lugar coincidente.</string>
   <string name="err_search_address_forgot">Lo siento, c:geo ha olvidado la dirección que buscabas.</string>
-  <string name="err_search_address">Buscando lugares</string>
   <string name="err_parse_lat">Lo siento, c:geo no puede procesar la latitud.</string>
   <string name="err_parse_lon">Lo siento, c:geo no puede procesar la longitud.</string>
   <string name="err_parse_dist">Lo siento, c:geo can\'t no puede procesar la distancia.</string>
@@ -260,7 +258,6 @@
   <string name="caches_sort_vote">votar (valoración propia)</string>
   <string name="caches_sort_inventory">recuento de inventario</string>
   <string name="caches_sort_date">fecha</string>
-  <string name="caches_select">Elegir de la lista</string>
   <string name="caches_select_mode">Modo selección</string>
   <string name="caches_select_mode_exit">Salir de modo selección</string>
   <string name="caches_select_invert">Invertir selección</string>  
@@ -300,7 +297,6 @@
 <string name="list_menu_change">Cambiar lista</string>
   <string name="list_title">Escoger lista</string>
   <string name="list_inbox">Guardadas</string>
-  <string name="list_wpt">Puntos de referencia</string>
   <string name="list_dialog_create_title">Nueva lista</string>
   <string name="list_dialog_create">Crear</string>
   <string name="list_dialog_cancel">Cancelar</string>
@@ -316,7 +312,6 @@
   <string name="about_changelog">Cambios</string>
   <string name="about_donate">Donar</string>
   <string name="about_detail">Detalles</string>
-  <string name="about_donation_less">Donar\nmenos</string>
   <string name="about_donation_more">Donar\nmas</string>
   <string name="about_contributors">Colaboradores</string>
 
@@ -359,7 +354,6 @@
   <string name="init_nav">Usar Google Navigation</string>
   <string name="init_autoload">Autocargar descripción larga</string>
   <string name="init_livelist">Mostrar dirección a los escondites en su listado</string>
-  <string name="init_browser">Identificar c:geo como navegador por defecto</string>
   <string name="init_altitude">Corrección de altitud</string>
   <string name="init_altitude_description">Si el GPS te indica una altitud errónea, puedes corregirla con un valor positivo o negativo. La corrección es siempre en metros.</string>
 
@@ -457,7 +451,6 @@
   <string name="cache_dialog_watchlist_remove_title">Lista de seguimiento</string>
   <string name="cache_dialog_watchlist_remove_message">Borrando escondite de tu Lista de seguimiento…</string>
   <string name="cache_menu_navigate">Navegar</string>
-  <string name="cache_menu_compass">Brújula</string>
   <string name="cache_menu_tbt">Paso a paso</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Ver en mapa</string>

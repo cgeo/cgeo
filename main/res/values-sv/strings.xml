@@ -18,7 +18,6 @@
   <string name="action_bar_share_title">Skicka cachens länk via</string>
 
   <!-- caches -->
-  <string name="all">Alla cacher</string>
   <string name="all_types">Alla typer av cacher</string>
   <string name="traditional">Traditionell cache</string>
   <string name="multi">Multi-cache</string>
@@ -35,7 +34,6 @@
   <string name="ape">Projekt APE cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS cache utställning</string>
-  <string name="gc_live_map">Live karta</string>
   <string name="unknown">Okänd typ</string>
 
   <!-- cache sizes -->
@@ -200,7 +198,6 @@
 
   <string name="err_search_address_no_match">Tyvärr hittade c:geo ingen plats som stämde.</string>
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
-  <string name="err_search_address">Söker efter platser</string>
   <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
   <string name="err_parse_lon">Tyvärr kan c:geo inte tolka longitud.</string>
   <string name="err_parse_dist">Tyvärr kan c:geo inte tolka avstånd.</string>
@@ -284,7 +281,6 @@
   <string name="caches_sort_date">Datum</string>
   <string name="caches_sort_finds">Antal som hittat</string>
   <string name="caches_sort_state">Status</string>
-  <string name="caches_select">Välj från lista</string>
   <string name="caches_select_mode">Markeringsläge</string>
   <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
   <string name="caches_select_invert">Invertera valda</string>
@@ -326,7 +322,6 @@
   <string name="list_menu_rename">Byt namn på den här listan</string>
   <string name="list_title">Välj en lista</string>
   <string name="list_inbox">Sparade</string>
-  <string name="list_wpt">Punkter</string>
   <string name="list_dialog_create_title">Ny lista</string>
   <string name="list_dialog_create">Skapa</string>
   <string name="list_dialog_cancel">Avbryt</string>
@@ -344,7 +339,6 @@
   <string name="about_changelog">Historik</string>
   <string name="about_donate">Stöd c:geo</string>
   <string name="about_detail">Detaljer</string>
-  <string name="about_donation_less">Donera\nlite</string>
   <string name="about_donation_more">Donera till\nutveckling</string>
   <string name="about_contributors">Medarbetare</string>
 
@@ -397,7 +391,6 @@
   <string name="init_nav">Använd Google Navigering</string>
   <string name="init_log_offline">Vid loggning: spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
   <string name="init_livelist">Visa riktning till cacher i listan</string>
-  <string name="init_browser">Identifiera c:geo som normal webbläsare</string>
   <string name="init_altitude">Höjd justering</string>
   <string name="init_altitude_description">Det är möjligt att justera höjden över havet om din GPS visar fel. Detta görs med ett positivt eller negativt tal, angivet i meter.</string>
   <string name="init_clear">Rensa inloggningsinfo</string>
@@ -523,7 +516,6 @@
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist…</string>
   <string name="cache_menu_navigate">Navigera</string>
-  <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Sväng-för-sväng</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Visa på karta</string>
@@ -690,7 +682,6 @@
   <string name="search_tb_hint">Identifiering av trackable</string>
   <string name="search_tb_button">Sök efter trackable</string>
   <string name="search_destination">Mål</string>
-  <string name="search_some_destination">Något mål</string>
   <string name="search_direction_rel">Från min plats</string>
   <string name="search_address_started">Söker efter platser</string>
   <string name="search_address_result">Hittade platser</string>
