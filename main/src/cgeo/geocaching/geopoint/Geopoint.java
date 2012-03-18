@@ -146,7 +146,7 @@ public final class Geopoint
      */
     private float[] pathTo(final Geopoint target) {
         float[] results = new float[2];
-        android.location.Location.distanceBetween(getLatitude(), getLongitude(), target.getLatitude(), target.getLongitude(), results);
+        android.location.Location.distanceBetween(latitude, longitude, target.latitude, target.longitude, results);
         return results;
     }
 
@@ -209,7 +209,7 @@ public final class Geopoint
      */
     public boolean isEqualTo(Geopoint gp)
     {
-        return null != gp && gp.getLatitude() == latitude && gp.getLongitude() == longitude;
+        return null != gp && gp.latitude == latitude && gp.longitude == longitude;
     }
 
     /**
@@ -242,7 +242,7 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
     @Override
@@ -258,7 +258,7 @@ public final class Geopoint
      */
     public Direction asDirection() {
         if (direction == null) { // because geopoint is immutable we can "cache" the result
-            direction = new Direction(getLatitude(), getLongitude());
+            direction = new Direction(latitude, longitude);
         }
         return direction;
     }
@@ -270,7 +270,7 @@ public final class Geopoint
      */
     public DDD asDDD() {
         if (ddd == null) {
-            ddd = new DDD(getLatitude(), getLongitude());
+            ddd = new DDD(latitude, longitude);
         }
         return ddd;
     }
@@ -282,7 +282,7 @@ public final class Geopoint
      */
     public DMM asDMM() {
         if (dmm == null) {
-            dmm = new DMM(getLatitude(), getLongitude());
+            dmm = new DMM(latitude, longitude);
         }
         return dmm;
     }
@@ -294,7 +294,7 @@ public final class Geopoint
      */
     public DMS asDMS() {
         if (dms == null) {
-            dms = new DMS(getLatitude(), getLongitude());
+            dms = new DMS(latitude, longitude);
         }
         return dms;
     }

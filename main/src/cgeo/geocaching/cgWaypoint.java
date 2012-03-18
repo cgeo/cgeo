@@ -45,7 +45,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
      */
     public cgWaypoint(final cgWaypoint other) {
         merge(other);
-        this.waypointType = other.getWaypointType();
+        this.waypointType = other.waypointType;
         id = 0;
     }
 
@@ -54,20 +54,20 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     public void merge(final cgWaypoint old) {
-        if (StringUtils.isBlank(getPrefix())) {
-            setPrefix(old.getPrefix());
+        if (StringUtils.isBlank(prefix)) {
+            setPrefix(old.prefix);
         }
         if (StringUtils.isBlank(lookup)) {
             lookup = old.lookup;
         }
         if (StringUtils.isBlank(name)) {
-            setName(old.getName());
+            setName(old.name);
         }
         if (StringUtils.isBlank(latlon) || latlon.startsWith("?")) { // there are waypoints containing "???"
             latlon = old.latlon;
         }
         if (coords == null) {
-            coords = old.getCoords();
+            coords = old.coords;
         }
         if (StringUtils.isBlank(note)) {
             note = old.note;
@@ -86,10 +86,10 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
             for (cgWaypoint old : oldPoints) {
                 if (old != null) {
                     boolean merged = false;
-                    if (old.getName() != null && old.getName().length() > 0) {
+                    if (old.name != null && old.name.length() > 0) {
                         for (cgWaypoint waypoint : newPoints) {
-                            if (waypoint != null && waypoint.getName() != null) {
-                                if (old.getName().equalsIgnoreCase(waypoint.getName())) {
+                            if (waypoint != null && waypoint.name != null) {
+                                if (old.name.equalsIgnoreCase(waypoint.name)) {
                                     waypoint.merge(old);
                                     merged = true;
                                     break;
@@ -242,6 +242,6 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
      * @return True - waypoint is final and has coordinates, False - otherwise
      */
     public boolean isFinalWithCoords() {
-        return WaypointType.FINAL == getWaypointType() && null != getCoords();
+        return WaypointType.FINAL == waypointType && null != coords;
     }
 }
