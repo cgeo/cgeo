@@ -123,7 +123,7 @@ public class Tile {
      * Calculates the maximum possible zoom level where the supplied points
      * are covered by adjacent tiles on the east/west axis.
      * The order of the points (left/right) is irrelevant.
-     * 
+     *
      * @param left
      *            First point
      * @param right
@@ -140,7 +140,7 @@ public class Tile {
         Tile tileLeft = new Tile(left, zoom);
         Tile tileRight = new Tile(right, zoom);
 
-        if (tileLeft.getX() == tileRight.getX()) {
+        if (tileLeft.tileX == tileRight.tileX) {
             zoom = zoom + 1;
         }
 
@@ -151,7 +151,7 @@ public class Tile {
      * Calculates the maximum possible zoom level where the supplied points
      * are covered by adjacent tiles on the north/south axis.
      * The order of the points (bottom/top) is irrelevant.
-     * 
+     *
      * @param bottom
      *            First point
      * @param top
@@ -172,7 +172,7 @@ public class Tile {
         Tile tileBottom = new Tile(bottom, zoom);
         Tile tileTop = new Tile(top, zoom);
 
-        if (Math.abs(tileBottom.getY() - tileTop.getY()) > 1) {
+        if (Math.abs(tileBottom.tileY - tileTop.tileY) > 1) {
             zoom = zoom - 1;
         }
 
@@ -186,7 +186,7 @@ public class Tile {
     /**
      * Calculates the inverted hyperbolic sine
      * (after Bronstein, Semendjajew: Taschenbuch der Mathematik
-     * 
+     *
      * @param x
      * @return
      */
@@ -202,9 +202,9 @@ public class Tile {
         if (!(o instanceof Tile)) {
             return false;
         }
-        return (this.getX() == ((Tile) o).getX())
-                && (this.getY() == ((Tile) o).getY())
-                && (this.getZoomlevel() == ((Tile) o).getZoomlevel());
+        return (this.tileX == ((Tile) o).tileX)
+                && (this.tileY == ((Tile) o).tileY)
+                && (this.zoomlevel == ((Tile) o).zoomlevel);
     }
 
     @Override

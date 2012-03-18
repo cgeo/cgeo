@@ -159,34 +159,34 @@ public class cgCache implements ICache {
          * - logOffline
          */
         if (visitedDate == 0) {
-            visitedDate = other.getVisitedDate();
+            visitedDate = other.visitedDate;
         }
         if (listId == StoredList.TEMPORARY_LIST_ID) {
             listId = other.listId;
         }
         if (StringUtils.isBlank(geocode)) {
-            geocode = other.getGeocode();
+            geocode = other.geocode;
         }
         if (StringUtils.isBlank(cacheId)) {
             cacheId = other.cacheId;
         }
         if (StringUtils.isBlank(guid)) {
-            guid = other.getGuid();
+            guid = other.guid;
         }
         if (null == cacheType || CacheType.UNKNOWN == cacheType) {
-            cacheType = other.getType();
+            cacheType = other.cacheType;
         }
         if (StringUtils.isBlank(name)) {
-            name = other.getName();
+            name = other.name;
         }
         if (StringUtils.isBlank(nameSp)) {
             nameSp = other.nameSp;
         }
         if (StringUtils.isBlank(owner)) {
-            owner = other.getOwner();
+            owner = other.owner;
         }
         if (StringUtils.isBlank(ownerReal)) {
-            ownerReal = other.getOwnerReal();
+            ownerReal = other.ownerReal;
         }
         if (hidden == null) {
             hidden = other.hidden;
@@ -198,16 +198,16 @@ public class cgCache implements ICache {
             size = other.size;
         }
         if (difficulty == 0) {
-            difficulty = other.getDifficulty();
+            difficulty = other.difficulty;
         }
         if (terrain == 0) {
-            terrain = other.getTerrain();
+            terrain = other.terrain;
         }
         if (direction == null) {
             direction = other.direction;
         }
         if (distance == null) {
-            distance = other.getDistance();
+            distance = other.distance;
         }
         if (StringUtils.isBlank(latlon)) {
             latlon = other.latlon;
@@ -229,22 +229,22 @@ public class cgCache implements ICache {
             personalNote = other.personalNote;
         }
         if (StringUtils.isBlank(shortdesc)) {
-            shortdesc = other.getShortdesc();
+            shortdesc = other.shortdesc;
         }
         if (StringUtils.isBlank(description)) {
             description = other.description;
         }
         if (favoritePoints == 0) {
-            favoritePoints = other.getFavoritePoints();
+            favoritePoints = other.favoritePoints;
         }
         if (rating == 0) {
-            rating = other.getRating();
+            rating = other.rating;
         }
         if (votes == 0) {
             votes = other.votes;
         }
         if (myVote == 0) {
-            myVote = other.getMyVote();
+            myVote = other.myVote;
         }
         if (attributes == null) {
             attributes = other.attributes;
