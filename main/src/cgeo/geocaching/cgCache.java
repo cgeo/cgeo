@@ -219,6 +219,7 @@ public class cgCache implements ICache {
             coords = other.coords;
         }
         if (zoomlevel < other.zoomlevel) {
+            zoomlevel = other.zoomlevel;
             coords = other.coords;
         }
 

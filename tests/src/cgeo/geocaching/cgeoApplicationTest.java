@@ -226,16 +226,17 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     public static void testSearchByViewport() {
 
         Strategy strategy = Settings.getLiveMapStrategy();
-        Settings.setLiveMapStrategy(Strategy.DETAILED);
 
         try {
             GC2CJPF mockedCache = new GC2CJPF();
-
             deleteCacheFromDB(mockedCache.getGeocode());
 
             final String tokens[] = GCBase.getTokens();
             final Viewport viewport = new Viewport(mockedCache.getCoords(), 0.003, 0.003);
-            final SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
+
+            // check coords for DETAILED
+            Settings.setLiveMapStrategy(Strategy.DETAILED);
+            SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
             assertNotNull(search);
             assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
 
@@ -243,6 +244,18 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
             assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().isEqualTo(parsedCache.getCoords()));
             assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
+
+            // check update after switch strategy to FAST
+            Settings.setLiveMapStrategy(Strategy.FAST);
+            search = ConnectorFactory.searchByViewport(viewport, tokens);
+            assertNotNull(search);
+            assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
+
+            parsedCache = cgeoapplication.getInstance().loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+
+            assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().isEqualTo(parsedCache.getCoords()));
+            assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
+
         } finally {
             Settings.setLiveMapStrategy(strategy);
         }
