@@ -9,6 +9,8 @@ import cgeo.geocaching.network.Network;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.util.Log;
+
 /**
  * provides all the available templates for logging
  *
@@ -129,6 +131,11 @@ public class LogTemplateProvider {
             return -1;
         }
 
-        return Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", ""));
+        try {
+            return Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", ""));
+        } catch (NumberFormatException e) {
+            Log.e(Settings.tag, "parseFindCount", e);
+            return -1;
+        }
     }
 }

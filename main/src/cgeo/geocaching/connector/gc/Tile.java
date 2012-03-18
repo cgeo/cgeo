@@ -33,8 +33,8 @@ public class Tile {
     public static final int ZOOMLEVEL_MAX = 18;
     public static final int ZOOMLEVEL_MIN = 0;
 
-    public static final int[] NUMBER_OF_TILES = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
-    public static final int[] NUMBER_OF_PIXELS = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
+    static final int[] NUMBER_OF_TILES = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
+    static final int[] NUMBER_OF_PIXELS = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
     static {
         for (int z = ZOOMLEVEL_MIN; z <= ZOOMLEVEL_MAX; z++) {
             NUMBER_OF_TILES[z] = 1 << z;

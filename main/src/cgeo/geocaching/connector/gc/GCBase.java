@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -258,8 +259,9 @@ public class GCBase {
                 }
             }
 
-            for (String id : positions.keySet()) {
-                List<UTFGridPosition> pos = positions.get(id);
+            for (Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
+                String id = entry.getKey();
+                List<UTFGridPosition> pos = entry.getValue();
                 UTFGridPosition xy = UTFGrid.getPositionInGrid(pos);
                 cgCache cache = new cgCache();
                 cache.setDetailed(false);
@@ -439,7 +441,7 @@ public class GCBase {
                 cache.setDisabled(!dataObject.getBoolean("available"));
                 cache.setArchived(dataObject.getBoolean("archived"));
                 cache.setPremiumMembersOnly(dataObject.getBoolean("subrOnly"));
-                boolean li = dataObject.getBoolean("li"); // seems to be "false" always
+                // "li" seems to be "false" always
                 cache.setFavoritePoints(Integer.parseInt(dataObject.getString("fp")));
                 JSONObject difficultyObj = dataObject.getJSONObject("difficulty");
                 cache.setDifficulty(Float.parseFloat(difficultyObj.getString("text"))); // 3.5
@@ -459,6 +461,8 @@ public class GCBase {
         } catch (JSONException e) {
             result.setError(StatusCode.UNKNOWN_ERROR);
         } catch (ParseException e) {
+            result.setError(StatusCode.UNKNOWN_ERROR);
+        } catch (NumberFormatException e) {
             result.setError(StatusCode.UNKNOWN_ERROR);
         }
         return result;

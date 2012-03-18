@@ -335,9 +335,9 @@ public class cgCache implements ICache {
                 guid.equalsIgnoreCase(other.guid) &&
                 hint.equalsIgnoreCase(other.hint) &&
                 cacheId.equalsIgnoreCase(other.cacheId) &&
-                direction == other.direction &&
-                distance == other.distance &&
-                elevation == other.elevation &&
+                (direction != null ? direction.equals(other.direction) : null == other.direction) &&
+                (distance != null ? distance.equals(other.distance) : null == other.distance) &&
+                (elevation != null ? elevation.equals(other.elevation) : null == other.elevation) &&
                 nameSp == other.nameSp &&
                 rating == other.rating &&
                 votes == other.votes &&
@@ -1410,10 +1410,7 @@ public class cgCache implements ICache {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof cgCache)) {
             return false;
         }
         // just compare the geocode even if that is not what "equals" normaly does

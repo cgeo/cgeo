@@ -264,13 +264,13 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         setExtensions(extensions);
     }
 
-    private void setExtensions(String[] extensionsIn) {
-        for (int i = 0; i < extensionsIn.length; i++) {
-            String extension = extensionsIn[i];
+    private void setExtensions(final String[] extensionsIn) {
+        extensions = extensionsIn;
+        for (int i = 0; i < extensions.length; i++) {
+            String extension = extensions[i];
             if (extension.length() == 0 || extension.charAt(0) != '.') {
-                extensionsIn[i] = "." + extension;
+                extensions[i] = "." + extension;
             }
         }
-        extensions = extensionsIn;
     }
 }

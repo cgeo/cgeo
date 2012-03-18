@@ -27,10 +27,7 @@ public class cgLog {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof cgLog)) {
             return false;
         }
         final cgLog otherLog = (cgLog) obj;

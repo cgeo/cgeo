@@ -39,7 +39,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -323,13 +322,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // Initialization done. Let's load the data with the given information.
         new LoadCacheThread(geocode, guid, loadCacheHandler).start();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Maybe keyboard hidden or display orientation changed. No need for update the UI or something else.
     }
 
     @Override
@@ -820,7 +812,7 @@ public class CacheDetailActivity extends AbstractActivity {
             new AlertDialog.Builder(this)
                     .setTitle(res.getString(R.string.addon_missing_title))
                     .setMessage(new StringBuilder(res.getString(R.string.helper_calendar_missing))
-                            .append(" ")
+                            .append(' ')
                             .append(res.getString(R.string.addon_download_prompt))
                             .toString())
                     .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
@@ -2200,7 +2192,7 @@ public class CacheDetailActivity extends AbstractActivity {
             view = (ListView) getLayoutInflater().inflate(R.layout.cacheview_logs, null);
 
             // log count
-            if (cache != null && cache.getLogCounts() != null) {
+            if (cache.getLogCounts() != null) {
                 boolean showLogCounter = false;
 
                 final StringBuilder text = new StringBuilder(200);

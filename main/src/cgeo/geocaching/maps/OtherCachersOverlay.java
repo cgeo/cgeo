@@ -5,7 +5,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
-import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
@@ -16,7 +15,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.Point;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -103,12 +101,6 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
     @Override
     public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
         super.draw(canvas, mapView, false);
-    }
-
-    @Override
-    public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
-            MapProjectionImpl projection, byte drawZoomLevel) {
-        super.drawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
     }
 
     @Override

@@ -2082,7 +2082,7 @@ public class cgeocaches extends AbstractListActivity {
         public void run()
         {
             SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            StringBuffer fieldNoteBuffer = new StringBuffer(500);
+            StringBuilder fieldNoteBuffer = new StringBuilder(500);
 
             // We need our own HashMap because LogType will give us localized and maybe
             // different strings than gc.com expects in the field note

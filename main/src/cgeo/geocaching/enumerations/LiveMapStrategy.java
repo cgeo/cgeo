@@ -9,9 +9,9 @@ import java.util.EnumSet;
  * Defines the strategy for the Live Map
  *
  * @author blafoo
- * 
+ *
  */
-public class LiveMapStrategy {
+public interface LiveMapStrategy {
 
     public enum StrategyFlag {
         LOAD_TILES, // 2x2 tiles filling the complete viewport
@@ -30,7 +30,7 @@ public class LiveMapStrategy {
         private final int stringId;
         private String l10n; // not final because the locale can be changed
 
-        Strategy(int id, EnumSet<StrategyFlag> flags, int stringId) {
+        private Strategy(int id, EnumSet<StrategyFlag> flags, int stringId) {
             this.id = id;
             this.flags = flags;
             this.stringId = stringId;

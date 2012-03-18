@@ -27,7 +27,7 @@ public class WhitespaceTest extends AndroidTestCase {
 
     @Override
     protected void setUp() throws Exception {
-        final StringBuffer buffer = new StringBuffer(4096);
+        final StringBuilder buffer = new StringBuilder(4096);
         final InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/GC2CJPF.html");
         final BufferedReader br = new BufferedReader(new InputStreamReader(is), 4096);
 

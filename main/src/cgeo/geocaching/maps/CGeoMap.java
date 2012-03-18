@@ -1151,9 +1151,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 if (search != null) {
                     downloaded = true;
+                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
                 }
-
-                caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
 
                 if (live) {
                     final boolean excludeMine = Settings.isExcludeMyCaches();

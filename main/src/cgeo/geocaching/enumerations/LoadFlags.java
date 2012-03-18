@@ -7,7 +7,7 @@ import java.util.EnumSet;
  *
  * @author blafoo
  */
-public class LoadFlags {
+public interface LoadFlags {
 
     public enum LoadFlag {
         LOAD_CACHE_BEFORE, // load from CacheCache

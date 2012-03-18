@@ -322,19 +322,23 @@ public abstract class Login {
     public static String[] getViewstates(String page) {
         // Get the number of viewstates.
         // If there is only one viewstate, __VIEWSTATEFIELDCOUNT is not present
-    
+
         if (page == null) { // no network access
             return null;
         }
-    
+
         int count = 1;
         final Matcher matcherViewstateCount = GCConstants.PATTERN_VIEWSTATEFIELDCOUNT.matcher(page);
         if (matcherViewstateCount.find()) {
-            count = Integer.parseInt(matcherViewstateCount.group(1));
+            try {
+                count = Integer.parseInt(matcherViewstateCount.group(1));
+            } catch (NumberFormatException e) {
+                Log.e(Settings.tag, "getViewStates", e);
+            }
         }
-    
+
         String[] viewstates = new String[count];
-    
+
         // Get the viewstates
         int no;
         final Matcher matcherViewstates = GCConstants.PATTERN_VIEWSTATES.matcher(page);
@@ -344,11 +348,16 @@ public abstract class Login {
                 no = 0;
             }
             else {
-                no = Integer.parseInt(sno);
+                try {
+                    no = Integer.parseInt(sno);
+                } catch (NumberFormatException e) {
+                    Log.e(Settings.tag, "getViewStates", e);
+                    no = 0;
+                }
             }
             viewstates[no] = matcherViewstates.group(2);
         }
-    
+
         if (viewstates.length != 1 || viewstates[0] != null) {
             return viewstates;
         }
@@ -382,7 +391,7 @@ public abstract class Login {
 
     static public String[] requestViewstates(final String uri, final Parameters params, boolean xContentType, boolean my) {
         final HttpResponse response = Network.request(uri, params, xContentType, my, false);
-    
+
         return getViewstates(Network.getResponseData(response));
     }
 
