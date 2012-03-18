@@ -13,7 +13,6 @@
   <string name="action_bar_share_title">Sdílet odkaz ke keši</string>
 
   <!-- caches -->
-  <string name="all">všechny kešky</string>
   <string name="all_types">všechny typy keší</string>
   <string name="traditional">tradiční keš</string>
   <string name="multi">multi-keš</string>
@@ -117,7 +116,6 @@
   <string name="err_store_failed">c:geo nemůže uložit keš</string>
   <string name="err_refresh_failed">c:geo nemůže obnovit keš</string>
   <string name="err_dwld_details_failed">c:geo nemůže stáhnout detaily keše</string>
-  <string name="err_dwld_details_failed_reason">c:geo nemůže načíst podrobnosti o keši, protože</string>
   <string name="err_load_descr_failed">c:geo nemůže stáhnout popis keše.</string>
   <string name="err_location_unknown">c:geo nezná souřadnice keše</string>
   <string name="err_tb_display">"C:geo nemůže zobrazit trackable. Je to opravdu trackable?</string>
@@ -146,7 +144,6 @@
   <string name="err_log_post_failed">c:geo nemohlo odeslat log.</string>
   <string name="err_search_address_no_match">c:geo nenašlo žádné odpovídající místo</string>
   <string name="err_search_address_forgot">c:geo zapomělo adresu, kterou se pokoušíte najít.</string>
-  <string name="err_search_address">vyhledávání míst</string>
   <string name="err_parse_lat">c:geo nemůže dopočítat šířku.</string>
   <string name="err_parse_lon">c:geo nemůže dopočítat délku.</string>
   <string name="err_parse_dist">c:geo nemůže dopočítat vzdálenost.</string>
@@ -198,7 +195,6 @@
   <string name="caches_store_offline">uložit pro offline</string>
   <string name="caches_store_selected">uložit vybrané</string>
   <string name="caches_on_map">zobrazit na mapě</string>
-  <string name="caches_select">vybrat ze seznamu</string>
   <string name="caches_select_mode">mód výběru</string>
   <string name="caches_select_mode_exit">opustit mód výběru</string>
   <string name="caches_nearby">blízké</string>
@@ -219,7 +215,6 @@
   <string name="about_changelog">změny</string>
   <string name="about_donate">podpora vývoje</string>
   <string name="about_detail">detaily</string>
-  <string name="about_donation_less">darujte\nméně</string>
   <string name="about_donation_more">podpořte\nvývoj</string>
   <string name="about_contributors">přispěvatelé</string>
 
@@ -251,7 +246,6 @@
   <string name="init_nav">používat Google Navigation</string>
   <string name="init_autoload">automaticky stahovat dlouhé popisy</string>
   <string name="init_livelist">zobrazovat směr v seznamu keší</string>
-  <string name="init_browser">tvářit se jako běžný webový prohlížeč</string>
   <string name="init_clear">smazat přihlašovací údaje</string>
   <string name="init_cleared">c:geo smazalo přihlašovací údaje.</string>
 
@@ -301,7 +295,6 @@
   <string name="cache_dialog_refresh_title">aktualizace</string>
   <string name="cache_dialog_refresh_message">Aktualizuji detaily keše…</string>
   <string name="cache_menu_navigate">navigovat</string>
-  <string name="cache_menu_compass">kompas</string>
   <string name="cache_menu_tbt">turn-by-turn</string>
   <string name="cache_menu_radar">radar</string>
   <string name="cache_menu_map">zobrazit na mapě</string>

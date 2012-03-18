@@ -18,7 +18,6 @@
   <string name="action_bar_share_title">Partilhar ligação para a cache</string>
 
   <!-- caches -->
-  <string name="all">Todas as caches</string>
   <string name="all_types">Todos os tipos</string>
   <string name="traditional">Cache tradicional</string>
   <string name="multi">Multi-cache</string>
@@ -194,7 +193,6 @@
 
   <string name="err_search_address_no_match">O c:geo não encontrou um local que corresponda.</string>
   <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
-  <string name="err_search_address">À procura de locais</string>
   <string name="err_parse_lat">O c:geo não consegue analisar a latitue.</string>
   <string name="err_parse_lon">O c:geo não consegue analisar a logitude.</string>
   <string name="err_parse_dist">O c:geo não consegue analisar a distância.</string>
@@ -278,7 +276,6 @@
   <string name="caches_sort_date">data</string>
   <string name="caches_sort_finds">Encontradas</string>
   <string name="caches_sort_state">Estado</string>
-  <string name="caches_select">Selecionar da lista</string>
   <string name="caches_select_mode">Modo de selecção</string>
   <string name="caches_select_mode_exit">Sair do modo de selecção</string>
   <string name="caches_select_invert">Inverter selecção</string>
@@ -319,7 +316,6 @@
   <string name="list_menu_rename">Mudar o nome da lista corrente.</string>
   <string name="list_title">Escolha uma lista</string>
   <string name="list_inbox">Arquivadas</string>
-  <string name="list_wpt">Pontos de referência</string>
   <string name="list_dialog_create_title">Nova lista</string>
   <string name="list_dialog_create">Criar</string>
   <string name="list_dialog_cancel">Cancelar</string>
@@ -337,7 +333,6 @@
   <string name="about_changelog">Changelog</string>
   <string name="about_donate">Doar</string>
   <string name="about_detail">Detalhes</string>
-  <string name="about_donation_less">Doar\nmenos</string>
   <string name="about_donation_more">Doar\ndesenvolvimento</string>
   <string name="about_contributors">Contribuidores</string>
 
@@ -390,7 +385,6 @@
   <string name="init_nav">Utilizar Google Navigation</string>
   <string name="init_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
   <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
-  <string name="init_browser">Utilizar o c:geo como browser principal</string>
   <string name="init_altitude">Correcção de altitude</string>
   <string name="init_altitude_description">Se o GPS estiver a dar uma altitude errada, pode corrigi-la com um número positivo ou negativo. A correcção é sempre em metros.</string>
   <string name="init_clear">Limpar login</string>
@@ -514,7 +508,6 @@
   <string name="cache_dialog_watchlist_remove_title">Lista de observação</string>
   <string name="cache_dialog_watchlist_remove_message">A remover cache da lista de observação…</string>
   <string name="cache_menu_navigate">Navegar</string>
-  <string name="cache_menu_compass">Bússola</string>
   <string name="cache_menu_tbt">Turn-by-turn</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mostrar no mapa</string>
@@ -557,7 +550,6 @@
   <string name="cache_location">Localização</string>
   <string name="cache_coordinates">Coordenadas</string>
   <string name="cache_coordinates_original">Coordenadas originais</string>
-  <string name="cache_calendars">Selecionar calendário</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
   <string name="cache_spoiler_images_loading">A carregar imagens spoiler…</string>
   <string name="cache_log_types">Tipos de log</string>
@@ -680,7 +672,6 @@
   <string name="search_tb_hint">Identificação do trackable</string>
   <string name="search_tb_button">Pesquisar por trackable</string>
   <string name="search_destination">Destino</string>
-  <string name="search_some_destination">Qualquer destino</string>
   <string name="search_direction_rel">A partir desta posição</string>
   <string name="search_address_started">Pesquisar por lugares</string>
   <string name="search_address_result">Encontrar lugares</string>

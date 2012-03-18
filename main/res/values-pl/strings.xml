@@ -16,7 +16,6 @@
   <string name="action_bar_share_title">Podziel się linkiem do skrzynki</string>
 
   <!-- caches -->
-  <string name="all">Wszystkie skrzynki</string>
   <string name="all_types">Wszystkie typy skrzynek</string>
   <string name="traditional">Skrzynki tradycyjne</string>
   <string name="multi">Skrzynki wieloetapowe</string>
@@ -71,7 +70,6 @@
   <string name="log_needs_archived">Powinno zostać zarchiwizowane</string>
   <string name="log_discovered">Odkryty</string>
   <string name="log_reviewed">Sprawdzony</string>
-  <string name="log_taken">Skrytka odwiedzona</string>
   <string name="log_tb_nothing">Nie rób nic</string>
   <string name="log_tb_visit">Odwiedzić</string>
   <string name="log_tb_drop">Odłożyć</string>
@@ -149,7 +147,6 @@
   <string name="err_store_failed">Przepraszam, c:geo nie może zapisać skrzynki.</string>
   <string name="err_refresh_failed">Przepraszam, c:geo nie może zaktualizować skrzynki.</string>
   <string name="err_dwld_details_failed">Przepraszam, c:geo nie może załadować szczegółów skrzynki.</string>
-  <string name="err_dwld_details_failed_reason">Przepraszam, c:geo nie może załadować szczegółów skrzynki, ponieważ</string>
   <string name="err_load_descr_failed">Przepraszam, c:geo nie może załadować opisu.</string>
   <string name="err_location_unknown">c:geo nie zna lokalizacji skrzynki.</string>
   <string name="err_missing_device_name">Proszę podać nazwę urządzenia przed zarejestrowaniem.</string>
@@ -183,7 +180,6 @@
 
   <string name="err_search_address_no_match">Przepraszam, c:geo nie znalazł pasującego miejsca.</string>
   <string name="err_search_address_forgot">Przepraszam, c:geo zapomiał jaki adres szukałeś.</string>
-  <string name="err_search_address">Wyszukiwanie miejsc</string>
   <string name="err_parse_lat">Przepraszam, c:geo nie może obliczyć szerokości geograficznej.</string>
   <string name="err_parse_lon">Przepraszam, c:geo nie może obliczyć długości geograficznej.</string>
   <string name="err_parse_dist">Przepraszam, c:geo nie może obliczyć odległości.</string>
@@ -259,7 +255,6 @@
   <string name="caches_sort_vote">głosów (twoja ocena)</string>
   <string name="caches_sort_inventory">ilości w inwentarzu</string>
   <string name="caches_sort_date">daty</string>
-  <string name="caches_select">Wybierz z listy</string>
   <string name="caches_select_mode">Tryb wyboru</string>
   <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
   <string name="caches_select_invert">Odwróć zaznaczenie</string>  
@@ -298,7 +293,6 @@
   <string name="list_title">Wybierz listę</string>
   <string name="list_menu_change">Zmień listę</string>
   <string name="list_inbox">Zapisane</string>
-  <string name="list_wpt">Punkty nawigacyjne</string>
   <string name="list_dialog_create_title">Nowa lista</string>
   <string name="list_dialog_create">Utworzyć</string>
   <string name="list_dialog_cancel">Anulować</string>
@@ -314,7 +308,6 @@
   <string name="about_changelog">Zmiany</string>
   <string name="about_donate">Wspomóc</string>
   <string name="about_detail">Szczegóły</string>
-  <string name="about_donation_less">Mniejsza\ndarowizna</string>
   <string name="about_donation_more">Darowizna dla\nprogramisty</string>
   <string name="about_contributors">Współpracownicy</string>
 
@@ -358,7 +351,6 @@
   <string name="init_autoload">Długie opisy automatycznie ładować</string>
   <string name="init_log_offline">Podczas logowania, zawsze logój offline (nie pokazój ekranu logowania online, nie wysyłaj logu online)</string>
   <string name="init_livelist">Pokazuj na liście kierunek do skrzynek</string>
-  <string name="init_browser">Ustaw c:geo jako standardową przeglądarkę</string>
   <string name="init_altitude">Korekta wysokości</string>
   <string name="init_altitude_description">Jeśli GPS podaje tobie złą wysokość, możesz skorygować z liczbą dodatnią lub ujemną. Korekta jest zawsze w metrach.</string>
   <string name="init_clear">Skasuj login</string>
@@ -455,7 +447,6 @@
   <string name="cache_dialog_watchlist_remove_title">Lista obserwowanych</string>
   <string name="cache_dialog_watchlist_remove_message">Usuwam skrzynkę z listy obserwowanych…</string>
   <string name="cache_menu_navigate">Nawigować</string>
-  <string name="cache_menu_compass">Kompas</string>
   <string name="cache_menu_tbt">Zakręt po zakręcie</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Pokaż na mapie</string>

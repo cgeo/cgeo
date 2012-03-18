@@ -18,7 +18,6 @@
   <string name="action_bar_share_title">Link versenden</string>
 
   <!-- caches -->
-  <string name="all">Alle Caches</string>
   <string name="all_types">Alle Cachetypen</string>
   <string name="traditional">Traditional-Cache</string>
   <string name="multi">Multi-Cache</string>
@@ -199,7 +198,6 @@
 
   <string name="err_search_address_no_match">Keinen passenden Ort gefunden.</string>
   <string name="err_search_address_forgot">c:geo hat die Adresse vergessen, die du suchst.</string>
-  <string name="err_search_address">Suche nach Orten</string>
   <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
   <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
@@ -283,7 +281,6 @@
   <string name="caches_sort_date">Datum</string>
   <string name="caches_sort_finds">Funde</string>
   <string name="caches_sort_state">Status</string>
-  <string name="caches_select">Wähle von Liste</string>
   <string name="caches_select_mode">Auswahlmodus</string>
   <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
   <string name="caches_select_invert">Auswahl invertieren</string>
@@ -325,7 +322,6 @@
   <string name="list_menu_rename">Aktuelle Liste umbenennen</string>
   <string name="list_title">Liste wählen</string>
   <string name="list_inbox">Standardliste</string>
-  <string name="list_wpt">Wegpunkte</string>
   <string name="list_dialog_create_title">Neue Liste</string>
   <string name="list_dialog_create">Erstellen</string>
   <string name="list_dialog_cancel">Abbrechen</string>
@@ -343,7 +339,6 @@
   <string name="about_changelog">Änderungen</string>
   <string name="about_donate">Spenden</string>
   <string name="about_detail">Details</string>
-  <string name="about_donation_less">Kleinere\nSpende</string>
   <string name="about_donation_more">Spenden für\nEntwicklung</string>
   <string name="about_contributors">Mitwirkende</string>
 
@@ -396,7 +391,6 @@
   <string name="init_nav">Google Navigation verwenden</string>
   <string name="init_log_offline">Offline loggen (Dialog für Online-Log nicht anzeigen)</string>
   <string name="init_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
-  <string name="init_browser">c:geo als normalen Internet-Browser tarnen</string>
   <string name="init_altitude">Höhenkorrektur</string>
   <string name="init_altitude_description">Falls das GPS eine falsche Höhe ermittelt, kannst du sie durch Angabe eines positiven oder negativen Wertes in Metern korrigieren.</string>
   <string name="init_clear">Login zurücksetzen</string>
@@ -517,7 +511,6 @@
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
   <string name="cache_menu_navigate">Navigieren</string>
-  <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Google Maps Navigation</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Karte</string>
@@ -682,7 +675,6 @@
   <string name="search_tb_hint">Trackingnummer</string>
   <string name="search_tb_button">Suche nach Trackable</string>
   <string name="search_destination">Ziel</string>
-  <string name="search_some_destination">Ein Zielort</string>
   <string name="search_direction_rel">Vom aktuellen Standort</string>
   <string name="search_address_started">Suche nach Orten</string>
   <string name="search_address_result">Gefundene Orte</string>
