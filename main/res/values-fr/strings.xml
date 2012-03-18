@@ -66,6 +66,8 @@
   <string name="log_retrieved">Récupéré</string>
   <string name="log_placed">Placé</string>
   <string name="log_grabbed">Pris ailleurs</string>
+  <string name="log_movecollection">Ajouté à une collection</string>
+  <string name="log_moveinventory">Ajouté à l\'inventaire</string>
   <string name="log_maintained">Maintenance effectuée</string>
   <string name="log_maintenance_needed">Nécessite une maintenance</string>
   <string name="log_update">Coordonnées mises à jour</string>
@@ -113,6 +115,11 @@
   <string name="log_new_log_text">Message</string>
   <string name="log_announcement">Annonce</string>
 
+  <!-- translation -->
+  <string name="translate_to_sys_lang">Traduire en %s</string>
+  <string name="translate_to_english">Traduire en anglais</string>
+  <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
+
   <!-- errors, warnings, info toasts -->
   <string name="err_none">ok</string>
   <string name="err_start">Communication non démarrée</string>
@@ -142,6 +149,7 @@
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
   <string name="err_detail_not_load_map_static">Désolé, c:geo n\'a pas réussi à charger les cartes statiques.</string>
+  <string name="err_detail_ask_store_map_static">c:geo n\'a pas réussi à charger les cartes statiques. Les stocker maintenant ?</string>
   <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
   <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
   <string name="err_watchlist_failed">Échec lors du changement de votre liste de suivi.</string>
@@ -173,6 +181,7 @@
   <string name="err_waypoint_add_failed">Désolé, c:geo n\'a pas réussi à afficher l\'étape.</string>
   <string name="err_waypoint_load_failed">Désolé, c:geo n\'arrive pas à charger l\'étape.</string>
   <string name="err_waypoint_delete_failed">Désolé, c:geo ne peut pas effacer l\'étape.</string>
+  <string name="err_waypoint_open_cache_failed">c:geo n\'a pas réussi à obtenir les détails de la cache.</string>
   <string name="err_point_unknown_position">Désolé, c:geo ne peut pas savoir où vous êtes.</string>
   <string name="err_point_no_position_given_title">Information obligatoire</string>
   <string name="err_point_no_position_given">Remplissez au moins la latitude ou la longitude ou la distance et le relèvement. Vous pouvez aussi remplir tous les champs.</string>
@@ -217,6 +226,7 @@
   <string name="info_log_type_changed">Le type de visite a changé!</string>
 
   <string name="info_fieldnotes_exported_to">Notes exporté vers</string>
+  <string name="info_storing_static_maps">Sauvegarde des cartes statiques</string>
 
   <!-- location service -->
   <string name="loc_last">Dernière pos. connue</string>
@@ -300,6 +310,7 @@
   <string name="caches_filter_clear">effacer les filtres</string>
   <string name="caches_filter_size_title">Choisir la taille</string>
   <string name="caches_filter_type_title">Choisir le type</string>
+  <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
   <string name="caches_exporting_fieldnote">Exporter commme notes de terrain…</string>
   <string name="caches_removing_from_history">Effacer de l\'historique…</string>
 
@@ -374,6 +385,7 @@
   <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés sur la carte active.</string>
   <string name="init_disabled">Exclure les caches désactivées</string>
   <string name="init_offline">Enregistrer les cartes pour une utilisation hors ligne</string>
+  <string name="init_offline_wp">Enregistrer les cartes autour des points intermédiaires pour une utilisation hors ligne</string>
   <string name="init_save_log_img">Sauver les images des visites</string>
   <string name="init_units">Utiliser des unités de distance impériales</string>
   <string name="init_nav">Utiliser Google Navigation</string>
@@ -401,9 +413,14 @@
   <string name="init_mapsources_description">Vous pouvez choisir la source de vos cartes. En tant qu\'alternative aux cartes Google, diverses cartes de type OpenStreetMap sont disponibles et même en hors-ligne (voir <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> pour plus de détails).</string>
   <string name="init_mapsource_select">Choisir la source des cartes</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_maptrail">Montrer la trace sur la carte</string>
   <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"visité\"</string>
   <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
   <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
+  <string name="init_default_navigation_tool">Navigation par défaut</string>
+  <string name="init_default_navigation_tool_description">Vous pouvez choisir ici l\'outil de navigation à utiliser par défaut.</string>
+  <string name="init_default_navigation_tool_select">Sélectionner l\'outil</string>
+  <string name="init_default_navigation_tool_2_description">Vous pouvez choisir ici votre deuxième outil de navigation préféré. Il sera activé par un appui long sur l\'icône de navigation situé près du nom de la cache.</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google Maps : plan</string>
@@ -461,6 +478,7 @@
   <string name="cache_personal_note">Note personnelle</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Description longue</string>
+  <string name="cache_description_table_note">La description contient des informations de formattages qui nécessitent possiblement d\'être vues sur le site geocaching.com pour être affichées correctement.</string>
   <string name="cache_watchlist">Liste de suivi</string>
   <string name="cache_watchlist_on">Cette cache est dans votre liste de suivi.</string>
   <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
@@ -544,9 +562,11 @@
   <string name="cache_image">Image</string>
   <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
   <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
+  <string name="cache_share_field">Partager</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Recherche de fichiers\nin</string>
+  <string name="file_searching_sdcard_in">Aucun fichier trouvé dans le répertoire par défaut:\n%1$s\n\nRecherche dans la totalité de la carte SD:\n</string>
   <string name="file_list_no_files">Désolé, c:geo n\'a pas trouvé les fichiers nécessaires.</string>
   <string name="file_searching">Recherche des fichiers nécessaires</string>
   <string name="file_title_searching">Recherche en cours</string>
@@ -554,10 +574,13 @@
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx</string>
   <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx</string>
+  <string name="gpx_import_store_static_maps">Écriture des cartes statiques</string>
   <string name="gpx_import_storing">Écriture des caches dans la base de données\nEnregistrés :</string>
   <string name="gpx_import_caches_imported">caches importées</string>
-  <string name="gpx_import_title">Importation GPX</string>
+  <string name="gpx_import_static_maps_skipped">Chargement des cartes statiques interrompu</string>
+  <string name="gpx_import_title_static_maps">Enregistrement des cartes statiques</string>
   <string name="gpx_import_title_reading_file">Lecture du fichier</string>
+  <string name="gpx_import_title">Importation GPX</string>
   <string name="gpx_import_title_caches_imported">Résultat</string>
   <string name="gpx_import_title_caches_import_failed">Échec de l\'importation</string>
   <string name="gpx_import_error_io">Impossible de lire le fichier</string>
@@ -582,6 +605,7 @@
   <!-- waypoint -->
   <string name="waypoint">Étape</string>
   <string name="waypoint_title">Étape</string>
+  <string name="waypoint_cache_coordinates">Coordonnées de la cache</string>
   <string name="waypoint_custom">Personnalisé</string>
   <string name="waypoint_my_coordinates">Ma position</string>
   <string name="waypoint_bearing">Relèvement</string>
@@ -598,6 +622,7 @@
   <string name="waypoint_done">Ok</string>
   <string name="waypoint_duplicate">Dupliquer</string>
   <string name="waypoint_copy_of">Copie de</string>
+  <string name="waypoint_menu_open_cache">Ouvrir la cache</string>
   <string name="search_history">Historique</string>
   <string name="search_history_empty">Aucune destination précédente</string>
   <string name="search_remove_destination">Destination effacée</string>
@@ -605,6 +630,13 @@
   <string name="search_history_cleared">Historique effacé</string>
 
   <string name="waypoint_coordinate_formats_plain">Texte</string>
+
+  <!-- distance units -->
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
 
   <!-- visit -->
   <string name="visit_tweet">Publier votre découverte sur Twitter</string>
@@ -623,6 +655,12 @@
   <string name="map_static_loading">Chargement des cartes statiques…</string>
   <string name="map_token_err">Depuis que c:geo est capable de télécharger des données partielles, les coordonnées des caches peuvent être inexactes.</string>
   <string name="map_as_list">Lister les caches</string>
+  <string name="map_strategy">Stratégie</string>
+  <string name="map_strategy_title">Stratégie de carte active</string>
+  <string name="map_strategy_fastest">La plus rapide</string>
+  <string name="map_strategy_fast">Rapide</string>
+  <string name="map_strategy_auto">En fonction du déplacement</string>
+  <string name="map_strategy_detailed">Détaillée</string>
 
   <!-- search -->
   <string name="search_bar_hint">Recherche de caches</string>
@@ -687,6 +725,8 @@
   <string name="use_compass">Utiliser la boussole</string>
   <string name="destination_select">Choisir une destination</string>
   <string name="destination_set">Définir une destination</string>
+  <string name="navigation_direct_navigation">Navigation directe</string>
+  <string name="navigation_target">Cible</string>
 
   <!-- license -->
   <string name="license">Licence</string>
@@ -696,12 +736,21 @@
   <!-- helpers -->
   <string name="helper_manual_title">Manuel</string>
   <string name="helper_manual_description">Manuel complet pour c:geo contenant la description de toutes les fonctionnalités de cette application (y compris celle secrètes).</string>
+  <string name="helper_calendar_title">Module supplémentaire c:geo agenda</string>
+  <string name="helper_calendar_missing">Module supplémentaire c:geo agenda non installé</string>
+  <string name="helper_calendar_description">Permet d\'exporter les événements liés aux caches dans le calendrier Android.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Application simple affichant des cartes en ligne et hors ligne. Permet d\'enregistrer son parcours, de gérer des POI et de nombreuses autres fonctions utiles.</string>
   <string name="helper_gpsstatus_title">Etat GPS</string>
   <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
   <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
   <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une meilleure réception, plus précis et économise la batterie.</string>
+  <string name="helper_barcode_title">Lecteur de code barre</string>
+  <string name="helper_barcode_description">Il existe des programmes et des sites web permettant d\'afficher un géo-code sous forme de code barre. Avec cette application, c:geo pourra lire les géo-codes affichés sous cette forme sur l\'écran de votre ordinateur.</string>
+
+  <!-- add-ons -->
+  <string name="addon_missing_title">Module complémentaire manquant</string>
+  <string name="addon_download_prompt">Le télécharger sur Google Play.</string>
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Chiens autorisés</string>
