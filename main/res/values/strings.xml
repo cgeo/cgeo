@@ -302,6 +302,7 @@
   <string name="caches_move_selected">Move selected</string>
   <string name="caches_move_all">Move all</string>
   <string name="caches_map_locus">Locus</string>
+  <string name="caches_map_locus_export">Export to Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Please, write text from image. It\'s important to download coordinates of caches. It\'s optional and can be switched off in Settings.</string>
   <string name="caches_recaptcha_hint">Text from image</string>
