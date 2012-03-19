@@ -2959,8 +2959,7 @@ public class cgData {
             if (size > 0) {
                 Log.d(Settings.tag, "Database clean: removing " + size + " geocaches from listId=0");
 
-                removeCaches(geocodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
-                databaseRW.execSQL("delete from " + dbTableCaches + " where " + cgData.whereGeocodeIn(geocodes));
+                removeCaches(geocodes, LoadFlags.REMOVE_ALL);
             }
 
             final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
