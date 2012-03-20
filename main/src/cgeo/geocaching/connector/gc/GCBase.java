@@ -102,6 +102,10 @@ public class GCBase {
         }
     }
 
+    public static void clearTileCache() {
+        tileCache.clear();
+    }
+
     /**
      * Searches the view port on the live map for caches.
      * The strategy dictates if only live map information is used or if an additional

@@ -446,6 +446,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             mapTitle = res.getString(R.string.map_map);
         }
 
+        //On create - clear tile cache
+        GCBase.clearTileCache();
+
         // live map, if no arguments are given
         live = (searchIntent == null && geocodeIntent == null && coordsIntent == null);
 
@@ -691,6 +694,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 search = null;
                 searchIntent = null;
                 ActivityMixin.invalidateOptionsMenu(activity);
+                if (Settings.isLiveMap()) {
+                    GCBase.clearTileCache();
+                }
                 return true;
             case MENU_STORE_CACHES:
                 if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
