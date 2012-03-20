@@ -32,7 +32,7 @@ public class LeastRecentlyUsedCache<K, V> extends LinkedHashMap<K, V> {
         V toBeRemoved = super.remove(key);
 
         if (null != toBeRemoved) {
-            Log.e(Settings.tag, "Removing " + toBeRemoved.toString());
+            Log.d(Settings.tag, "Removing " + toBeRemoved.toString());
 
             if (null != removeHandler) {
                 removeHandler.onRemove(toBeRemoved);
