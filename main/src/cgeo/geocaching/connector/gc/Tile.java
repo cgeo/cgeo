@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
 
 import org.apache.http.HttpResponse;
@@ -45,6 +46,7 @@ public class Tile {
     private final int tileX;
     private final int tileY;
     private final int zoomlevel;
+    private Viewport viewPort;
 
     public Tile(Geopoint origin, int zoomlevel) {
         assert zoomlevel >= ZOOMLEVEL_MIN && zoomlevel <= ZOOMLEVEL_MAX : "zoomlevel out of range";
@@ -161,7 +163,7 @@ public class Tile {
     public static int calcZoomLat(final Geopoint bottom, final Geopoint top) {
 
         int zoom = (int) Math.ceil(
-                Math.log(2 * Math.PI /
+                Math.log(2.0 * Math.PI /
                         Math.abs(
                                 asinh(tanGrad(bottom.getLatitude()))
                                         - asinh(tanGrad(top.getLatitude()))
@@ -234,5 +236,14 @@ public class Tile {
             Log.e(Settings.tag, "cgBase.requestMapTile() " + e.getMessage());
         }
         return null;
+    }
+
+    public boolean containsPoint(Geopoint coords) {
+
+        if (null == viewPort) {
+            viewPort = new Viewport(getCoord(new UTFGridPosition(0, 0)), getCoord(new UTFGridPosition(63, 63)));
+        }
+
+        return viewPort.isInViewport(coords);
     }
 }

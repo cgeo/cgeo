@@ -11,8 +11,10 @@ public class Viewport {
     public final Geopoint topRight;
 
     public Viewport(final Geopoint bottomLeft, final Geopoint topRight) {
-        this.bottomLeft = bottomLeft;
-        this.topRight = topRight;
+        this.bottomLeft = new Geopoint(Math.min(bottomLeft.getLatitude(), topRight.getLatitude()),
+                Math.min(bottomLeft.getLongitude(), topRight.getLongitude()));
+        this.topRight = new Geopoint(Math.max(bottomLeft.getLatitude(), topRight.getLatitude()),
+                Math.max(bottomLeft.getLongitude(), topRight.getLongitude()));
         this.center = new Geopoint((bottomLeft.getLatitude() + topRight.getLatitude()) / 2,
                 (bottomLeft.getLongitude() + topRight.getLongitude()) / 2);
     }
@@ -21,8 +23,13 @@ public class Viewport {
         this.center = center;
         final double centerLat = center.getLatitude();
         final double centerLon = center.getLongitude();
-        bottomLeft = new Geopoint(centerLat - latSpan / 2, centerLon - lonSpan / 2);
-        topRight = new Geopoint(centerLat + latSpan / 2, centerLon + lonSpan / 2);
+        bottomLeft = new Geopoint(centerLat - Math.abs(latSpan) / 2, centerLon - Math.abs(lonSpan) / 2);
+        topRight = new Geopoint(centerLat + Math.abs(latSpan) / 2, centerLon + Math.abs(lonSpan) / 2);
+    }
+
+    public Viewport(final int minLat, final int maxLat, final int minLon, final int maxLon) {
+        this(new Geopoint(Math.min(minLat, maxLat), Math.min(minLon, maxLon)),
+                new Geopoint(Math.max(minLat, maxLat), Math.max(minLon, maxLon)));
     }
 
     public double getLatitudeMin() {
@@ -43,6 +50,14 @@ public class Viewport {
 
     public Geopoint getCenter() {
         return center;
+    }
+
+    public boolean isInViewport(final Geopoint coords) {
+
+        return coords.getLongitudeE6() >= bottomLeft.getLongitudeE6()
+                && coords.getLongitudeE6() <= topRight.getLongitudeE6()
+                && coords.getLatitudeE6() >= bottomLeft.getLatitudeE6()
+                && coords.getLatitudeE6() <= topRight.getLatitudeE6();
     }
 
     @Override

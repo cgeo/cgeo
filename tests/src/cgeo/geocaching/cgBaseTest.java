@@ -149,8 +149,14 @@ public class cgBaseTest extends AndroidTestCase {
     public static cgCache createCache(int index) {
         final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES.get(index);
         // to get the same results we have to use the date format used when the mocked data was created
-        Settings.setGcCustomDate(MockedCache.getDateFormat());
-        final SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), null);
+        String oldCustomDate = Settings.getGcCustomDate();
+        SearchResult searchResult;
+        try {
+            Settings.setGcCustomDate(MockedCache.getDateFormat());
+            searchResult = cgBase.parseCacheFromText(mockedCache.getData(), null);
+        } finally {
+            Settings.setGcCustomDate(oldCustomDate);
+        }
         return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     }
 }
