@@ -226,4 +226,10 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final List<cgCache> caches = readGPX11(R.raw.no_connector);
         assertEquals(13, caches.size());
     }
+
+    public void testTexasChallenge2012() throws Exception {
+        final List<cgCache> caches = readGPX10(R.raw.challenge);
+        // previously these caches overwrote each other during parsing
+        assertEquals(130, caches.size());
+    }
 }

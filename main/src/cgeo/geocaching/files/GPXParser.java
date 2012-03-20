@@ -47,7 +47,10 @@ public abstract class GPXParser extends FileParser {
     private static final SimpleDateFormat formatSimpleZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
     private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"); // 2010-04-20T01:01:03-04:00
 
-    private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+    /**
+     * Attention: case sensitive geocode pattern to avoid matching normal words in the name or description of the cache.
+     */
+    private static final Pattern patternGeocode = Pattern.compile("([A-Z][0-9A-Z]+)");
     private static final Pattern patternGuid = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
     /**
      * supported groundspeak extensions of the GPX format
@@ -61,7 +64,10 @@ public abstract class GPXParser extends FileParser {
     /**
      * supported GSAK extension of the GPX format
      */
-    private static final String GSAK_NS = "http://www.gsak.net/xmlv1/5";
+    private static final String[] GSAK_NS = new String[] {
+            "http://www.gsak.net/xmlv1/5",
+            "http://www.gsak.net/xmlv1/6"
+    };
 
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
 
@@ -287,7 +293,11 @@ public abstract class GPXParser extends FileParser {
 
                     createNoteFromGSAKUserdata();
 
-                    result.put(cache.getGeocode(), cache);
+                    final String key = cache.getGeocode();
+                    if (result.containsKey(key)) {
+                        Log.w(Settings.tag, "Duplicate geocode during GPX import: " + key);
+                    }
+                    result.put(key, cache);
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
                         && cache.getCoords() != null
@@ -421,19 +431,21 @@ public abstract class GPXParser extends FileParser {
         final Element cacheParent = getCacheParent(waypoint);
 
         // GSAK extensions
-        final Element gsak = cacheParent.getChild(GSAK_NS, "wptExtension");
-        gsak.getChild(GSAK_NS, "Watch").setEndTextElementListener(new EndTextElementListener() {
+        for (String gsakNamespace : GSAK_NS) {
+            final Element gsak = cacheParent.getChild(gsakNamespace, "wptExtension");
+            gsak.getChild(gsakNamespace, "Watch").setEndTextElementListener(new EndTextElementListener() {
 
-            @Override
-            public void end(String watchList) {
-                cache.setOnWatchlist(Boolean.valueOf(watchList.trim()).booleanValue());
+                @Override
+                public void end(String watchList) {
+                    cache.setOnWatchlist(Boolean.valueOf(watchList.trim()).booleanValue());
+                }
+            });
+
+            gsak.getChild(gsakNamespace, "UserData").setEndTextElementListener(new UserDataListener(1));
+
+            for (int i = 2; i <= 4; i++) {
+                gsak.getChild(gsakNamespace, "User" + i).setEndTextElementListener(new UserDataListener(i));
             }
-        });
-
-        gsak.getChild(GSAK_NS, "UserData").setEndTextElementListener(new UserDataListener(1));
-
-        for (int i = 2; i <= 4; i++) {
-            gsak.getChild(GSAK_NS, "User" + i).setEndTextElementListener(new UserDataListener(i));
         }
 
         // 3 different versions of the GC schema
