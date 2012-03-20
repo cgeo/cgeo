@@ -100,7 +100,7 @@ public class cgCache implements ICache {
     private String nameForSorting;
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
-    private int zoomlevel = Tile.ZOOMLEVEL_MAX;
+    private int zoomlevel = Tile.ZOOMLEVEL_MAX + 1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 

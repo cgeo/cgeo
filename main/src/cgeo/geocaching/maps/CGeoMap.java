@@ -991,6 +991,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         int centerLongitudeNow = mapCenterNow.getLongitudeE6();
                         int spanLatitudeNow = mapView.getLatitudeSpan();
                         int spanLongitudeNow = mapView.getLongitudeSpan();
+                        int zoomNow = mapView.getMapZoomLevel();
 
                         // check if map moved or zoomed
                         //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
@@ -1004,6 +1005,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             moved = true;
                         } else if (spanLatitude == null || spanLongitude == null) {
                             moved = true;
+                        } else if (zoomNow != zoom) {
+                            moved = true;
                         } else if (((Math.abs(spanLatitudeNow - spanLatitude) > 50) || (Math.abs(spanLongitudeNow - spanLongitude) > 50) || // changed zoom
                                 (Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow / 4)) || (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow / 4)) // map moved
                         ) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches)
@@ -1012,7 +1015,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
 
                         // update title on any change
-                        int zoomNow = mapView.getMapZoomLevel();
                         if (moved || zoomNow != zoom || spanLatitudeNow != spanLatitude || spanLongitudeNow != spanLongitude || centerLatitudeNow != centerLatitude || centerLongitudeNow != centerLongitude) {
                             displayHandler.sendEmptyMessage(UPDATE_TITLE);
                         }
