@@ -377,6 +377,8 @@ public class GPXImporter {
     };
 
     final private Handler importStepHandler = new Handler() {
+        private boolean showProgressAfterCancel = false;
+
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -387,7 +389,14 @@ public class GPXImporter {
 
                 case IMPORT_STEP_READ_FILE:
                 case IMPORT_STEP_READ_WPT_FILE:
+                    progress.setProgressDivider(1024);
+                    progress.setMessage(res.getString(msg.arg1));
+                    progress.setMaxProgressAndReset(msg.arg2);
+                    break;
+
                 case IMPORT_STEP_STORE_CACHES:
+                    showProgressAfterCancel = true;
+                    progress.setProgressDivider(1);
                     progress.setMessage(res.getString(msg.arg1));
                     progress.setMaxProgressAndReset(msg.arg2);
                     break;
@@ -401,6 +410,7 @@ public class GPXImporter {
 
                 case IMPORT_STEP_STATIC_MAPS_SKIPPED:
                     progress.dismiss();
+                    progressHandler.cancel();
                     StringBuilder bufferSkipped = new StringBuilder(20);
                     bufferSkipped.append(res.getString(R.string.gpx_import_static_maps_skipped)).append(", ").append(msg.arg1).append(' ').append(res.getString(R.string.gpx_import_caches_imported));
                     fromActivity.helpDialog(res.getString(R.string.gpx_import_title_caches_imported), bufferSkipped.toString());
@@ -426,7 +436,10 @@ public class GPXImporter {
 
                 case IMPORT_STEP_CANCELED:
                     StringBuilder bufferCanceled = new StringBuilder(20);
-                    bufferCanceled.append(res.getString(R.string.gpx_import_canceled)).append(", ").append(progress.getProgress()).append(' ').append(res.getString(R.string.gpx_import_caches_imported));
+                    bufferCanceled.append(res.getString(R.string.gpx_import_canceled));
+                    if (showProgressAfterCancel) {
+                        bufferCanceled.append(", ").append(progress.getProgress()).append(' ').append(res.getString(R.string.gpx_import_caches_imported));
+                    }
                     fromActivity.showShortToast(bufferCanceled.toString());
                     importFinished();
                     break;
