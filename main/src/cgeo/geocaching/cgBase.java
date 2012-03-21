@@ -400,7 +400,7 @@ public class cgBase {
 
         final SearchResult searchResult = new SearchResult();
 
-        if (page.contains("Cache is Unpublished")) {
+        if (page.contains("Cache is Unpublished") || page.contains("you cannot view this cache listing until it has been published")) {
             searchResult.error = StatusCode.UNPUBLISHED_CACHE;
             return searchResult;
         }
@@ -766,6 +766,12 @@ public class cgBase {
 
         // logs
         cache.setLogs(loadLogsFromDetails(page, cache, false, true));
+
+        // last check for necessary cache conditions
+        if (StringUtils.isBlank(cache.getGeocode())) {
+            searchResult.error = StatusCode.UNKNOWN_ERROR;
+            return searchResult;
+        }
 
         searchResult.addCache(cache);
         return searchResult;

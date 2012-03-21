@@ -3,7 +3,10 @@ package cgeo.geocaching;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.R;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.BaseUtils;
@@ -11,12 +14,11 @@ import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import java.util.ArrayList;
 
-public class cgBaseTest extends AndroidTestCase {
+public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testRegEx() {
         String page = MockedCache.readCachePage("GC2CJPF");
@@ -100,7 +102,6 @@ public class cgBaseTest extends AndroidTestCase {
 
     public static void testWaypointsFromNote() {
         final cgCache cache = cgBaseTest.createCache(0);
-        assertNotNull(cache);
 
         final Geopoint[] empty = new Geopoint[] {};
         final Geopoint[] one = new Geopoint[] { new Geopoint("N51 21.523", "E7 2.680") };
@@ -150,7 +151,21 @@ public class cgBaseTest extends AndroidTestCase {
         final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES.get(index);
         // to get the same results we have to use the date format used when the mocked data was created
         Settings.setGcCustomDate(MockedCache.getDateFormat());
+
         final SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), null);
-        return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+        assertNotNull(searchResult);
+        assertEquals(1, searchResult.getCount());
+
+        final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+        assertNotNull(cache);
+        return cache;
+    }
+
+    public void testUnpublishedCache() {
+        final String page = getFileContent(R.raw.cache_unpublished);
+        SearchResult result = cgBase.parseCacheFromText(page, null);
+        assertNotNull(result);
+        assertEquals(0, result.getCount());
+        assertEquals(StatusCode.UNPUBLISHED_CACHE, result.getError());
     }
 }
