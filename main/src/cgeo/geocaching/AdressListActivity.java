@@ -16,9 +16,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class AdressListActivity extends AbstractListActivity {
-    private String keyword = null;
-    private ProgressDialog waitDialog = null;
-    private AddressListAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,12 +26,7 @@ public class AdressListActivity extends AbstractListActivity {
         setTitle(res.getString(R.string.search_address_result));
 
         // get parameters
-        Bundle extras = getIntent().getExtras();
-
-        // try to get data from extras
-        if (extras != null) {
-            keyword = extras.getString("keyword");
-        }
+        final String keyword = getIntent().getStringExtra("keyword");
 
         if (keyword == null) {
             showToast(res.getString(R.string.err_search_address_forgot));
@@ -42,10 +34,11 @@ public class AdressListActivity extends AbstractListActivity {
             return;
         }
 
-        adapter = new AddressListAdapter(this);
+        final AddressListAdapter adapter = new AddressListAdapter(this);
         setListAdapter(adapter);
 
-        waitDialog = ProgressDialog.show(this, res.getString(R.string.search_address_started), keyword, true);
+        final ProgressDialog waitDialog =
+                ProgressDialog.show(this, res.getString(R.string.search_address_started), keyword, true);
         waitDialog.setCancelable(true);
 
         new AsyncTask<Void, Void, List<Address>>() {
