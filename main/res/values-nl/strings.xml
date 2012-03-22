@@ -743,7 +743,7 @@
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
   <string name="helper_barcode_title">Barcode Scanner</string>
-  <string name="helper_barcode_description">Er zijn 'Greasemonkey' scripts en websites beschikbaar die een geocode als barcode weergeven. Met deze applicatie kan c:geo deze geocode direct van het computerscherm lezen.</string>
+  <string name="helper_barcode_description">Er zijn Greasemonkey scripts en websites beschikbaar die een geocode als barcode weergeven. Met deze applicatie kan c:geo deze geocode direct van het computerscherm lezen.</string>
 
   <!-- add-ons -->
   <string name="addon_missing_title">Add-On ontbreekt</string>
