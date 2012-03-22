@@ -12,10 +12,14 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.map.reader.MapDatabase;
+import org.mapsforge.map.reader.header.FileOpenResult;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +61,19 @@ public class MapsforgeMapProvider implements MapProvider {
             return sourceId - mfp.baseId;
         }
         return 0;
+    }
+
+    public static boolean isValidMapFile(String mapFileIn) {
+
+        if (StringUtils.isEmpty(mapFileIn)) {
+            return false;
+        }
+
+        MapDatabase mapDB = new MapDatabase();
+        FileOpenResult result = mapDB.openFile(new File(mapFileIn));
+        mapDB.closeFile();
+
+        return result.isSuccess();
     }
 
     @Override

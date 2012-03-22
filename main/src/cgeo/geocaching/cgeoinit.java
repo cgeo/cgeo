@@ -881,6 +881,9 @@ public class cgeoinit extends AbstractActivity {
             if (resultCode == RESULT_OK) {
                 if (data.hasExtra("mapfile")) {
                     Settings.setMapFile(data.getStringExtra("mapfile"));
+                    if (!Settings.isValidMapFile()) {
+                        showToast("The map file is invalid!");
+                    }
                 }
             }
             initMapfileEdittext(true);

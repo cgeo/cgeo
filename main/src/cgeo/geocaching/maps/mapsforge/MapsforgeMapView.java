@@ -14,12 +14,13 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 
-import org.mapsforge.android.maps.GeoPoint;
-import org.mapsforge.android.maps.MapDatabase;
 import org.mapsforge.android.maps.MapView;
-import org.mapsforge.android.maps.MapViewMode;
-import org.mapsforge.android.maps.Overlay;
 import org.mapsforge.android.maps.Projection;
+import org.mapsforge.android.maps.mapgenerator.MapGenerator;
+import org.mapsforge.android.maps.mapgenerator.MapGeneratorFactory;
+import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.android.maps.overlay.Overlay;
+import org.mapsforge.core.GeoPoint;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,9 +32,11 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
+import java.io.File;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
+    private MapGeneratorInternal mapType;
 
     public MapsforgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -60,13 +63,13 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     @Override
     public MapControllerImpl getMapController() {
-        return new MapsforgeMapController(getController(), getMaxZoomLevel());
+        return new MapsforgeMapController(getController(), getMapGenerator().getZoomLevelMax());
     }
 
     @Override
     public GeoPointImpl getMapViewCenter() {
-        GeoPoint point = getMapCenter();
-        return new MapsforgeGeoPoint(point.getLatitudeE6(), point.getLongitudeE6());
+        GeoPoint point = getMapPosition().getMapCenter();
+        return new MapsforgeGeoPoint(point.latitudeE6, point.longitudeE6);
     }
 
     @Override
@@ -126,7 +129,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
             GeoPoint high = projection.fromPixels(0, getHeight());
 
             if (low != null && high != null) {
-                span = Math.abs(high.getLatitudeE6() - low.getLatitudeE6());
+                span = Math.abs(high.latitudeE6 - low.latitudeE6);
             }
         }
 
@@ -145,7 +148,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
             GeoPoint high = projection.fromPixels(getWidth(), 0);
 
             if (low != null && high != null) {
-                span = Math.abs(high.getLongitudeE6() - low.getLongitudeE6());
+                span = Math.abs(high.longitudeE6 - low.longitudeE6);
             }
         }
 
@@ -159,26 +162,31 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     @Override
     public int getMapZoomLevel() {
-        return getZoomLevel() + 1;
+        return getMapPosition().getZoomLevel() + 1;
     }
 
     @Override
     public void setMapSource() {
 
+        MapGeneratorInternal newMapType = MapGeneratorInternal.MAPNIK;
         switch (MapsforgeMapProvider.getMapsforgeSource(Settings.getMapSource())) {
             case MapsforgeMapProvider.CYCLEMAP:
-                setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
+                newMapType = MapGeneratorInternal.OPENCYCLEMAP;
                 break;
             case MapsforgeMapProvider.OFFLINE:
-                if (MapDatabase.isValidMapFile(Settings.getMapFile())) {
-                    setMapViewMode(MapViewMode.CANVAS_RENDERER);
-                    super.setMapFile(Settings.getMapFile());
+                if (MapsforgeMapProvider.isValidMapFile(Settings.getMapFile())) {
+                    newMapType = MapGeneratorInternal.DATABASE_RENDERER;
                 } else {
-                    setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
+                    newMapType = MapGeneratorInternal.MAPNIK;
                 }
                 break;
             default:
-                setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
+                newMapType = MapGeneratorInternal.MAPNIK;
+        }
+            mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);
+            setMapGenerator(mapGenerator);
+            if (!mapGenerator.requiresInternetConnection()) {
+                setMapFile(new File(Settings.getMapFile()));
         }
     }
 
