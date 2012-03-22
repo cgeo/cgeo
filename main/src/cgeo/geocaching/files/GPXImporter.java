@@ -34,7 +34,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -188,10 +187,10 @@ public class GPXImporter {
 
         private void importStaticMaps(final SearchResult importedCaches) {
             final cgeoapplication app = cgeoapplication.getInstance();
-            Set<cgCache> caches = importedCaches.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
             int storedCacheMaps = 0;
-            for (cgCache cache : caches) {
-                Log.d(Settings.tag, "GPXImporter.ImportThread.importStaticMaps start downloadMaps");
+            for (String geocode : importedCaches.getGeocodes()) {
+                cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                Log.d(Settings.tag, "GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
                 StaticMapsProvider.downloadMaps(cache, app);
                 storedCacheMaps++;
                 if (progressHandler.isCancelled()) {
