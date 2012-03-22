@@ -13,6 +13,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
+import cgeo.geocaching.maps.mapsforge.EniroTileDownloader.EniroType;
 
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.Projection;
@@ -33,10 +34,13 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
 import java.io.File;
+
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
     private MapGeneratorInternal mapType;
+    private boolean customMap = false;
+    private EniroType customType;
 
     public MapsforgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -169,9 +173,13 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     public void setMapSource() {
 
         MapGeneratorInternal newMapType = MapGeneratorInternal.MAPNIK;
+        EniroType newCustomType = EniroType.map;
+        boolean customNew;
+
         switch (MapsforgeMapProvider.getMapsforgeSource(Settings.getMapSource())) {
             case MapsforgeMapProvider.CYCLEMAP:
                 newMapType = MapGeneratorInternal.OPENCYCLEMAP;
+                customNew = false;
                 break;
             case MapsforgeMapProvider.OFFLINE:
                 if (MapsforgeMapProvider.isValidMapFile(Settings.getMapFile())) {
@@ -179,14 +187,40 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
                 } else {
                     newMapType = MapGeneratorInternal.MAPNIK;
                 }
+                customNew = false;
+                break;
+            case MapsforgeMapProvider.ENIRO_MAP:
+                newCustomType = EniroType.map;
+                customNew = true;
+                break;
+            case MapsforgeMapProvider.ENIRO_SAT:
+                newCustomType = EniroType.aerial;
+                customNew = true;
                 break;
             default:
                 newMapType = MapGeneratorInternal.MAPNIK;
+                customNew = false;
         }
+
+        MapGenerator mapGenerator = null;
+
+        if (customNew && (customNew != customMap || customType != newCustomType)) {
+            mapGenerator = new EniroTileDownloader(newCustomType);
+            customType = newCustomType;
+            customMap = customNew;
+        } else if (customNew != customMap || mapType != newMapType) {
             mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);
+            customMap = customNew;
+            mapType = newMapType;
+        }
+
+        if (null != mapGenerator) {
+            getInMemoryTileCache().destroy();
+            getFileSystemTileCache().destroy();
             setMapGenerator(mapGenerator);
             if (!mapGenerator.requiresInternetConnection()) {
                 setMapFile(new File(Settings.getMapFile()));
+            }
         }
     }
 
