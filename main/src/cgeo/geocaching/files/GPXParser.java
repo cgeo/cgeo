@@ -255,8 +255,8 @@ public abstract class GPXParser extends FileParser {
             public void start(Attributes attrs) {
                 try {
                     if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
-                        cache.setCoords(new Geopoint(new Double(attrs.getValue("lat")),
-                                new Double(attrs.getValue("lon"))));
+                        cache.setCoords(new Geopoint(Double.valueOf(attrs.getValue("lat")),
+                                Double.valueOf(attrs.getValue("lon"))));
                     }
                 } catch (Exception e) {
                     Log.w(Settings.tag, "Failed to parse waypoint's latitude and/or longitude.");
