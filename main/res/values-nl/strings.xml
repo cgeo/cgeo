@@ -439,7 +439,7 @@
   <string name="cache_offline_store">Opslaan</string>
   <string name="cache_offline_stored">Opgeslagen in apparaat</string>
   <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
-  <string name="cache_offline_time_about">over</string>
+  <string name="cache_offline_time_about">ongeveer</string>
   <string name="cache_offline_time_mins">minuten geleden</string>
   <string name="cache_offline_time_mins_few">paar minuten geleden</string>
   <string name="cache_offline_time_hour">een uur geleden</string>
@@ -767,7 +767,7 @@
   <string name="attribute_fee_no">Geen toegang-of parkeerkosten van toepassing</string>
   <string name="attribute_rappelling_yes">Klimuitrusting benodigd</string>
   <string name="attribute_rappelling_no">Geen klimuitrusting nodig</string>
-  <string name="attribute_boat_yes">Bood benodigd</string>
+  <string name="attribute_boat_yes">Boot benodigd</string>
   <string name="attribute_boat_no">Geen boot nodig</string>
   <string name="attribute_scuba_yes">Duikuitrusting nodig</string>
   <string name="attribute_scuba_no">Geen duikuitrusting nodig</string>
