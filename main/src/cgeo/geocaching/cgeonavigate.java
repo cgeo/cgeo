@@ -6,14 +6,13 @@ import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.CompassView;
+import cgeo.geocaching.utils.PeriodicHandler;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.PowerManager;
 import android.util.Log;
 import android.view.Menu;
@@ -51,19 +50,15 @@ public class cgeonavigate extends AbstractActivity {
     private TextView distanceView = null;
     private TextView headingView = null;
     private CompassView compassView = null;
-    private updaterThread updater = null;
-    private Handler updaterHandler = new Handler() {
+    private PeriodicHandler updaterHandler = new PeriodicHandler(20) {
 
         @Override
-        public void handleMessage(Message msg) {
-            try {
-                if (compassView != null && northHeading != null) {
-                    compassView.updateNorth(northHeading, cacheHeading);
-                }
-            } catch (Exception e) {
-                Log.e(Settings.tag, "cgeonavigate.updaterHandler: " + e.toString());
+        public void act() {
+            if (compassView != null && northHeading != null) {
+                compassView.updateNorth(northHeading, cacheHeading);
             }
         }
+
     };
     private String geocode;
 
@@ -125,10 +120,12 @@ public class cgeonavigate extends AbstractActivity {
 
         // get textviews once
         compassView = (CompassView) findViewById(R.id.rose);
+    }
 
-        // start updater thread
-        updater = new updaterThread(updaterHandler);
-        updater.start();
+    @Override
+    public void onStart() {
+        super.onStart();
+        updaterHandler.start();
     }
 
     @Override
@@ -149,12 +146,6 @@ public class cgeonavigate extends AbstractActivity {
         if (pm == null) {
             pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         }
-
-        // updater thread
-        if (updater == null) {
-            updater = new updaterThread(updaterHandler);
-            updater.start();
-        }
     }
 
     private void setGo4CacheAction() {
@@ -173,6 +164,8 @@ public class cgeonavigate extends AbstractActivity {
         if (dir != null) {
             dir = app.removeDir();
         }
+
+        updaterHandler.stop();
 
         super.onStop();
     }
@@ -406,30 +399,6 @@ public class cgeonavigate extends AbstractActivity {
 
             if (geo == null || geo.speedNow <= 5) { // use compass when speed is lower than 18 km/h
                 northHeading = dir.directionNow;
-            }
-        }
-    }
-
-    private static class updaterThread extends Thread {
-
-        private Handler handler = null;
-
-        public updaterThread(Handler handlerIn) {
-            handler = handlerIn;
-        }
-
-        @Override
-        public void run() {
-            while (!Thread.currentThread().isInterrupted()) {
-                if (handler != null) {
-                    handler.sendMessage(Message.obtain());
-                }
-
-                try {
-                    Thread.sleep(20);
-                } catch (Exception e) {
-                    Thread.currentThread().interrupt();
-                }
             }
         }
     }
