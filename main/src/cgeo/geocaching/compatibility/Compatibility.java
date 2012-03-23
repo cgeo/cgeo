@@ -14,6 +14,8 @@ import android.view.Display;
 import android.view.Surface;
 import android.widget.EditText;
 
+import java.lang.reflect.Method;
+
 public final class Compatibility {
 
     private final static int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
@@ -23,7 +25,16 @@ public final class Compatibility {
     private final static AndroidLevel8Interface level8;
     private final static AndroidLevel11Interface level11;
 
+    private static Method overridePendingTransitionMethod = null;
+
     static {
+        if (isLevel5) {
+            try {
+                overridePendingTransitionMethod = Activity.class.getMethod("overridePendingTransition", Integer.TYPE, Integer.TYPE);
+            } catch (Exception e) {
+                Log.e(Settings.tag, "cannot get overridePendingTransition", e);
+            }
+        }
         if (isLevel8) {
             level8 = new AndroidLevel8();
         }
@@ -89,15 +100,23 @@ public final class Compatibility {
         }
     }
 
+    private static void overridePendingTransition(final Activity activity, int enterAnim, int exitAnim) {
+        try {
+            overridePendingTransitionMethod.invoke(activity, enterAnim, exitAnim);
+        } catch (Exception e) {
+            Log.e(Settings.tag, "cannot call overridePendingTransition", e);
+        }
+    }
+
     public static void restartActivity(AbstractActivity activity) {
         final Intent intent = activity.getIntent();
         if (isLevel5) {
-            activity.overridePendingTransition(0, 0);
+            overridePendingTransition(activity, 0, 0);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         }
         activity.finish();
         if (isLevel5) {
-            activity.overridePendingTransition(0, 0);
+            overridePendingTransition(activity, 0, 0);
         }
         activity.startActivity(intent);
     }
