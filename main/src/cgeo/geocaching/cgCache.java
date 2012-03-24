@@ -1420,7 +1420,7 @@ public class cgCache implements ICache {
 
     public void store(Activity activity, CancellableHandler handler) {
         final int listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
-        cgBase.storeCache(activity, this, null, listId, handler);
+        cgBase.storeCache(activity, this, null, listId, false, handler);
     }
 
     public int getZoomlevel() {

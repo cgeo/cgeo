@@ -74,6 +74,18 @@ public class HtmlImage implements Html.ImageGetter {
 
         Bitmap imagePre = null;
 
+        // if image is just being stored, check if online version is newer than stored version
+        if (onlySave) {
+            // returns 0 if file does not exists
+            final long localDate = LocalStorage.getStorageFile(geocode, url, true, false).lastModified();
+            // returns 0 if website does not support last modified date or error occurs
+            final long onlineDate = Network.requestLastModifiedDate(makeAbsoluteURL(url));
+            // image was stored since it was last changed online, so no need to download again
+            if (localDate > onlineDate) {
+                return null;
+            }
+        }
+
         // Load image from cache
         if (!onlySave) {
             imagePre = loadImageFromStorage(url);
