@@ -298,6 +298,7 @@
   <string name="caches_move_selected">Muovi le cache selezionate</string>
   <string name="caches_move_all">Muovi tutte</string>
   <string name="caches_map_locus">Locus</string>
+  <string name="caches_map_locus_export">Esporta in Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Per cortesia riporta il testo letto sull\'immagine. È importante per scaricare le coordinate delle cache. È tuttavia opzionale e può essere disattivato nei settaggi.</string>
   <string name="caches_recaptcha_hint">Testo da immagine</string>
