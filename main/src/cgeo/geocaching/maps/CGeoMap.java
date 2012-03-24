@@ -36,7 +36,7 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import cgeo.geocaching.network.Login;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.LRUList;
+import cgeo.geocaching.utils.BoundedList;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -170,7 +170,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static Map<Integer, LayerDrawable> overlaysCache = new HashMap<Integer, LayerDrawable>();
     private int cachesCnt = 0;
     /** List of caches in the viewport */
-    private final LRUList<cgCache> caches = new LRUList<cgCache>(MAX_CACHES);
+    private final BoundedList<cgCache> caches = new BoundedList<cgCache>(MAX_CACHES);
     // storing for offline
     private ProgressDialog waitDialog = null;
     private int detailTotal = 0;

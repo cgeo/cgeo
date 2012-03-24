@@ -8,12 +8,12 @@ import java.util.Collection;
  *
  * @author blafoo
  */
-public class LRUList<T> extends ArrayList<T> {
+public class BoundedList<T> extends ArrayList<T> {
 
     private static final long serialVersionUID = -5077882607489806620L;
     private final int maxEntries;
 
-    public LRUList(int maxEntries) {
+    public BoundedList(int maxEntries) {
         this.maxEntries = maxEntries;
     }
 
