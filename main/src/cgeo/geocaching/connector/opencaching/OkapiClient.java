@@ -4,10 +4,12 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgLog;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
@@ -28,6 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -75,13 +78,7 @@ final public class OkapiClient {
             return null;
         }
 
-        final cgCache cache = parseCache(data);
-
-        long time = new Date().getTime();
-        cache.setUpdated(time);
-        cache.setDetailedUpdate(time);
-
-        return cache;
+        return parseCache(data);
     }
 
     public static List<cgCache> getCachesAround(final Geopoint center, IConnector connector) {
@@ -177,6 +174,12 @@ final public class OkapiClient {
             cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
             cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
 
+            cache.setUpdated(System.currentTimeMillis());
+            cache.setDetailedUpdate(cache.getUpdated());
+            cache.setDetailed(true);
+
+            // save full detailed caches
+            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         } catch (JSONException e) {
             Log.e(Settings.tag, "OkapiClient.parseCache", e);
         }
