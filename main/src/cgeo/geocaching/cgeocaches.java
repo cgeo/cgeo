@@ -727,7 +727,7 @@ public class cgeocaches extends AbstractListActivity {
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
             SearchResult newSearch = cgBase.searchByStored(coords, cacheType, listId);
-            if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
+            if (newSearch != null && newSearch.getTotal() != search.getTotal()) {
                 refreshCurrentList();
             }
         }

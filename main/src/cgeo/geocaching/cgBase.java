@@ -300,7 +300,7 @@ public class cgBase {
         try {
             String result = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (null != result) {
-                searchResult.totalCnt = Integer.parseInt(result);
+                searchResult.setTotal(Integer.parseInt(result));
             }
         } catch (NumberFormatException e) {
             Log.w(Settings.tag, "cgeoBase.parseSearch: Failed to parse cache count");
@@ -347,7 +347,7 @@ public class cgBase {
                     if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
                         Log.i(Settings.tag, "User has not agreed to the license agreement. Can\'t download .loc file.");
 
-                        searchResult.error = StatusCode.UNAPPROVED_LICENSE;
+                        searchResult.setError(StatusCode.UNAPPROVED_LICENSE);
 
                         return searchResult;
                     }
@@ -401,23 +401,23 @@ public class cgBase {
         final SearchResult searchResult = new SearchResult();
 
         if (page.contains("Cache is Unpublished") || page.contains("you cannot view this cache listing until it has been published")) {
-            searchResult.error = StatusCode.UNPUBLISHED_CACHE;
+            searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
             return searchResult;
         }
 
         if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
-            searchResult.error = StatusCode.PREMIUM_ONLY;
+            searchResult.setError(StatusCode.PREMIUM_ONLY);
             return searchResult;
         }
 
         if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
-            searchResult.error = StatusCode.PREMIUM_ONLY;
+            searchResult.setError(StatusCode.PREMIUM_ONLY);
             return searchResult;
         }
 
         final String cacheName = Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_NAME, true, "")).toString();
         if ("An Error Has Occurred".equalsIgnoreCase(cacheName)) {
-            searchResult.error = StatusCode.UNKNOWN_ERROR;
+            searchResult.setError(StatusCode.UNKNOWN_ERROR);
             return searchResult;
         }
 
@@ -769,7 +769,7 @@ public class cgBase {
 
         // last check for necessary cache conditions
         if (StringUtils.isBlank(cache.getGeocode())) {
-            searchResult.error = StatusCode.UNKNOWN_ERROR;
+            searchResult.setError(StatusCode.UNKNOWN_ERROR);
             return searchResult;
         }
 
@@ -1308,7 +1308,7 @@ public class cgBase {
         }
 
         // save to application
-        search.setError(searchResult.error);
+        search.setError(searchResult.getError());
         search.setViewstates(searchResult.viewstates);
         for (String geocode : searchResult.getGeocodes()) {
             search.addGeocode(geocode);

@@ -779,11 +779,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_AS_LIST: {
-                final SearchResult searchResult = new SearchResult();
-                search.totalCnt = caches.size();
-                for (cgCache cache : caches) {
-                    searchResult.addCache(cache);
-                }
                 cgeocaches.startActivityMap(activity, search);
                 return true;
             }
@@ -1208,7 +1203,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     search = ConnectorFactory.searchByViewport(viewport, tokens);
                     if (search != null) {
                         downloaded = true;
-                        if (search.error == StatusCode.NOT_LOGGED_IN) {
+                        if (search.getError() == StatusCode.NOT_LOGGED_IN) {
                             Login.login();
                             tokens = null;
                         } else {

@@ -117,12 +117,12 @@ public class GCConnector extends AbstractConnector {
                 } else {
                     search.addGeocode(geocode);
                 }
-                search.error = StatusCode.NO_ERROR;
+                search.setError(StatusCode.NO_ERROR);
                 return search;
             }
 
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No data from server");
-            search.error = StatusCode.COMMUNICATION_ERROR;
+            search.setError(StatusCode.COMMUNICATION_ERROR);
             return search;
         }
 

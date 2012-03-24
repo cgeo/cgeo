@@ -22,10 +22,10 @@ import java.util.Set;
 public class SearchResult implements Parcelable {
 
     final private Set<String> geocodes;
-    public StatusCode error = null;
+    private StatusCode error = null;
     private String url = "";
     public String[] viewstates = null;
-    public int totalCnt = 0;
+    private int totalCnt = 0;
 
     final public static Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         public SearchResult createFromParcel(Parcel in) {
@@ -47,19 +47,24 @@ public class SearchResult implements Parcelable {
             this.error = searchResult.error;
             this.url = searchResult.url;
             this.viewstates = searchResult.viewstates;
-            this.totalCnt = searchResult.totalCnt;
+            this.setTotal(searchResult.getTotal());
         } else {
             this.geocodes = new HashSet<String>();
         }
     }
 
-    public SearchResult(final Set<String> geocodes) {
+    public SearchResult(final Set<String> geocodes, final int total) {
         if (geocodes == null) {
             this.geocodes = new HashSet<String>();
         } else {
             this.geocodes = new HashSet<String>(geocodes.size());
             this.geocodes.addAll(geocodes);
         }
+        this.setTotal(total);
+    }
+
+    public SearchResult(final Set<String> geocodes) {
+        this(geocodes, geocodes == null ? 0 : geocodes.size());
     }
 
     public SearchResult(final Parcel in) {
@@ -73,7 +78,7 @@ public class SearchResult implements Parcelable {
             viewstates = new String[length];
             in.readStringArray(viewstates);
         }
-        totalCnt = in.readInt();
+        setTotal(in.readInt());
     }
 
     @Override
@@ -87,7 +92,7 @@ public class SearchResult implements Parcelable {
             out.writeInt(viewstates.length);
             out.writeStringArray(viewstates);
         }
-        out.writeInt(totalCnt);
+        out.writeInt(getTotal());
     }
 
     @Override
@@ -133,6 +138,10 @@ public class SearchResult implements Parcelable {
 
     public int getTotal() {
         return totalCnt;
+    }
+
+    public void setTotal(int totalCnt) {
+        this.totalCnt = totalCnt;
     }
 
     /**

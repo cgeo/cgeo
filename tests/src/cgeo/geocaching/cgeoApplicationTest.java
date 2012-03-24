@@ -102,7 +102,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     public static cgCache testSearchByGeocode(final String geocode) {
         final SearchResult search = cgBase.searchByGeocode(geocode, null, 0, true, null);
         assertNotNull(search);
-        if (Settings.isPremiumMember() || search.error == null) {
+        if (Settings.isPremiumMember() || search.getError() == null) {
             assertEquals(1, search.getGeocodes().size());
             assertTrue(search.getGeocodes().contains(geocode));
             return cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
@@ -118,7 +118,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     public static void testSearchByGeocodeNotExisting() {
         final SearchResult search = cgBase.searchByGeocode("GC123456", null, 0, true, null);
         assertNotNull(search);
-        assertEquals(search.error, StatusCode.UNPUBLISHED_CACHE);
+        assertEquals(StatusCode.UNPUBLISHED_CACHE, search.getError());
     }
 
     /**
@@ -215,7 +215,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     public static void testSearchByUsername() {
         final SearchResult search = cgBase.searchByUsername(null, "blafoo", CacheType.WEBCAM, false);
         assertNotNull(search);
-        assertEquals(3, search.totalCnt);
+        assertEquals(3, search.getTotal());
         assertTrue(search.getGeocodes().contains("GCP0A9"));
     }
 
