@@ -206,6 +206,7 @@
   <string name="caches_refresh_selected">aktualizovat vybrané</string>
   <string name="caches_refresh_all">aktualizovat vše</string>
   <string name="caches_map_locus">Locus</string>
+  <string name="caches_map_locus_export">Exportovat do Locusu</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Opište text z obrázků. Je to důležité pro stažení souřadnic keší.</string>
   <string name="caches_recaptcha_hint">Text z obrázku</string>

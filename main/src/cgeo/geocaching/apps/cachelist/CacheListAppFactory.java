@@ -27,7 +27,8 @@ public final class CacheListAppFactory extends AbstractAppFactory {
         if (ArrayUtils.isEmpty(apps)) {
             apps = new CacheListApp[] {
                     new InternalCacheListMap(),
-                    new LocusCacheListApp() };
+                    new LocusCacheListApp(false),
+                    new LocusCacheListApp(true) };
         }
         return apps;
     }
