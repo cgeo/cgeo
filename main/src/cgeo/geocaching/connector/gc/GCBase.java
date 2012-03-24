@@ -183,12 +183,14 @@ public class GCBase {
                         else {
                             searchResult.addGeocodes(search.getGeocodes());
                         }
+                        tileCache.put(tile.hashCode(), tile);
                     }
 
                     // release native bitmap memory
-                    bitmap.recycle();
+                    if (null != bitmap) {
+                        bitmap.recycle();
+                    }
 
-                    tileCache.put(tile.hashCode(), tile);
                 }
             }
         }
