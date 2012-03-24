@@ -8,7 +8,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -1587,14 +1586,12 @@ public class CacheDetailActivity extends AbstractActivity {
                     storeThread = null;
 
                     try {
-                        cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY); // reload cache details
+                        CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
                     } catch (Exception e) {
                         showToast(res.getString(R.string.err_store_failed));
 
                         Log.e(Settings.tag, "CacheDetailActivity.storeCacheHandler: " + e.toString());
                     }
-
-                    CacheDetailActivity.this.notifyDataSetChanged();
                 }
             }
 
@@ -1614,14 +1611,12 @@ public class CacheDetailActivity extends AbstractActivity {
                     refreshThread = null;
 
                     try {
-                        cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY); // reload cache details
+                        CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
                     } catch (Exception e) {
                         showToast(res.getString(R.string.err_refresh_failed));
 
                         Log.e(Settings.tag, "CacheDetailActivity.refreshCacheHandler: " + e.toString());
                     }
-
-                    CacheDetailActivity.this.notifyDataSetChanged();
                 }
             }
 
@@ -1701,8 +1696,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                app.removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
-                search = cgBase.searchByGeocode(cache.getGeocode(), null, 0, true, handler);
+                cgBase.refreshCache(CacheDetailActivity.this, cache.getGeocode(), cache.getListId(), handler);
 
                 handler.sendEmptyMessage(0);
             }

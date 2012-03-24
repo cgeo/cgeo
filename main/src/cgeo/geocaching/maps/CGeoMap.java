@@ -1492,7 +1492,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             break;
                         }
 
-                        cgBase.storeCache(activity, null, geocode, StoredList.STANDARD_LIST_ID, handler);
+                        cgBase.storeCache(activity, null, geocode, StoredList.STANDARD_LIST_ID, false, handler);
                     }
                 } catch (Exception e) {
                     Log.e(Settings.tag, "cgeocaches.LoadDetails.run: " + e.toString());

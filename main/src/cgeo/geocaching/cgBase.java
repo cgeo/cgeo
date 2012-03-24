@@ -384,6 +384,9 @@ public class cgBase {
             if (CancellableHandler.isCancelled(handler)) {
                 return null;
             }
+            // update progress message so user knows we're still working. Otherwise it will remain on whatever was set
+            // in getExtraOnlineInfo (which could be logs, gcvote, or elevation)
+            sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_render);
             // save full detailed caches
             cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         }
@@ -1761,20 +1764,20 @@ public class cgBase {
         return params;
     }
 
-    public static void storeCache(Activity activity, cgCache origCache, String geocode, int listId, CancellableHandler handler) {
+    public static void storeCache(Activity activity, cgCache origCache, String geocode, int listId, boolean forceRedownload, CancellableHandler handler) {
         try {
             cgCache cache;
             // get cache details, they may not yet be complete
             if (origCache != null) {
-                // only reload the cache, if it was already stored or has not all details (by checking the description)
+                // only reload the cache if it was already stored or doesn't have full details (by checking the description)
                 if (origCache.getListId() >= StoredList.STANDARD_LIST_ID || StringUtils.isBlank(origCache.getDescription())) {
-                    final SearchResult search = searchByGeocode(origCache.getGeocode(), null, listId, false, null);
+                    final SearchResult search = searchByGeocode(origCache.getGeocode(), null, listId, false, handler);
                     cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 } else {
                     cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
-                final SearchResult search = searchByGeocode(geocode, null, listId, false, null);
+                final SearchResult search = searchByGeocode(geocode, null, listId, forceRedownload, handler);
                 cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             } else {
                 cache = null;
@@ -1845,6 +1848,11 @@ public class cgBase {
         } catch (Exception e) {
             Log.e(Settings.tag, "cgBase.storeCache");
         }
+    }
+
+    public static void refreshCache(Activity activity, String geocode, int listId, CancellableHandler handler) {
+        cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        storeCache(activity, null, geocode, listId, true, handler);
     }
 
     public static void dropCache(final cgCache cache, final Handler handler) {

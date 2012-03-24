@@ -1853,7 +1853,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     detailProgress++;
-                    cgBase.storeCache(cgeocaches.this, cache, null, listIdLD, null);
+                    cgBase.refreshCache(cgeocaches.this, cache.getGeocode(), listIdLD, null);
 
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -1916,7 +1916,7 @@ public class cgeocaches extends AbstractListActivity {
                         handler.sendMessage(handler.obtainMessage(1, GCcode));
                         yield();
 
-                        cgBase.storeCache(cgeocaches.this, null, GCcode, listIdLFW, null);
+                        cgBase.storeCache(cgeocaches.this, null, GCcode, listIdLFW, false, null);
 
                         handler.sendMessage(handler.obtainMessage(2, GCcode));
                         yield();
