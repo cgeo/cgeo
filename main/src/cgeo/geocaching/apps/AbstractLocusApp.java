@@ -37,6 +37,10 @@ public abstract class AbstractLocusApp extends AbstractApp {
         super(getString(R.string.caches_map_locus), INTENT);
     }
 
+    protected AbstractLocusApp(final String text, final String intent) {
+        super(text, intent);
+    }
+
     @Override
     public boolean isInstalled(Context context) {
         return LocusUtils.isLocusAvailable(context);
@@ -52,7 +56,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @param activity
      * @author koem
      */
-    protected static boolean showInLocus(final List<? extends Object> objectsToShow, final boolean withCacheWaypoints,
+    protected static boolean showInLocus(final List<? extends Object> objectsToShow, final boolean withCacheWaypoints, final boolean export,
             final Activity activity) {
         if (objectsToShow == null || objectsToShow.isEmpty()) {
             return false;
@@ -78,13 +82,13 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
 
         if (pd.getPoints().size() <= 1000) {
-            DisplayData.sendData(activity, pd, false);
+            DisplayData.sendData(activity, pd, export);
         } else {
             final ArrayList<PointsData> data = new ArrayList<PointsData>();
             data.add(pd);
             DisplayData.sendDataCursor(activity, data,
                     "content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(),
-                    false);
+                    export);
         }
 
         return true;

@@ -34,7 +34,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
             points.add(waypoint);
         }
 
-        return showInLocus(points, true, activity);
+        return showInLocus(points, true, false, activity);
     }
 
 }
