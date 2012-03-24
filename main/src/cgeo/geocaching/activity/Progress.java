@@ -13,6 +13,7 @@ public class Progress {
 
     private ProgressDialog dialog;
     private int progress = 0;
+    private int progressDivider = 1;
 
     public synchronized void dismiss() {
         if (dialog != null && dialog.isShowing()) {
@@ -65,16 +66,18 @@ public class Progress {
 
     public synchronized void setMaxProgressAndReset(final int max) {
         if (dialog != null && dialog.isShowing()) {
-            dialog.setMax(max);
+            final int modMax = max / this.progressDivider;
+            dialog.setMax(modMax);
             dialog.setProgress(0);
         }
     }
 
     public synchronized void setProgress(final int progress) {
+        final int modProgress = progress / this.progressDivider;
         if (dialog != null && dialog.isShowing()) {
-            dialog.setProgress(progress);
+            dialog.setProgress(modProgress);
         }
-        this.progress = progress;
+        this.progress = modProgress;
     }
 
     public synchronized int getProgress() {
@@ -82,5 +85,9 @@ public class Progress {
             dialog.getProgress();
         }
         return this.progress;
+    }
+
+    public synchronized void setProgressDivider(final int progressDivider) {
+        this.progressDivider = progressDivider;
     }
 }
