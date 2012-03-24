@@ -3,6 +3,8 @@ package cgeo.geocaching.compatibility;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.AbstractActivity;
 
+import org.apache.commons.lang3.reflect.MethodUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,8 +16,6 @@ import android.view.Display;
 import android.view.Surface;
 import android.widget.EditText;
 
-import java.lang.reflect.Method;
-
 public final class Compatibility {
 
     private final static int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
@@ -25,16 +25,7 @@ public final class Compatibility {
     private final static AndroidLevel8Interface level8;
     private final static AndroidLevel11Interface level11;
 
-    private static Method overridePendingTransitionMethod = null;
-
     static {
-        if (isLevel5) {
-            try {
-                overridePendingTransitionMethod = Activity.class.getMethod("overridePendingTransition", Integer.TYPE, Integer.TYPE);
-            } catch (Exception e) {
-                Log.e(Settings.tag, "cannot get overridePendingTransition", e);
-            }
-        }
         if (isLevel8) {
             level8 = new AndroidLevel8();
         }
@@ -102,7 +93,7 @@ public final class Compatibility {
 
     private static void overridePendingTransition(final Activity activity, int enterAnim, int exitAnim) {
         try {
-            overridePendingTransitionMethod.invoke(activity, enterAnim, exitAnim);
+            MethodUtils.invokeMethod(activity, "overridePendingTransition", enterAnim, exitAnim);
         } catch (Exception e) {
             Log.e(Settings.tag, "cannot call overridePendingTransition", e);
         }
