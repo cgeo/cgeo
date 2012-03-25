@@ -42,6 +42,9 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
@@ -361,4 +364,23 @@ public abstract class Network {
 
         return encoded;
     }
+
+    /**
+     * Returns the value of the response header field <code>last-modified</code> or 0 if this value is not set.
+     * 
+     * @param url
+     *            to retrieve last modified date of
+     * @return the value of the <cod>last-modified</code> header field.
+     */
+    public static long requestLastModifiedDate(String url) {
+        try {
+            return ((HttpURLConnection) new URL(url).openConnection()).getLastModified();
+        } catch (MalformedURLException e) {
+            Log.e(Settings.tag, "Failed to get last modified date for: " + url + " " + e);
+        } catch (IOException e) {
+            Log.e(Settings.tag, "Failed to get last modified date for: " + url + " " + e);
+        }
+        return 0;
+    }
+
 }
