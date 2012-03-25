@@ -399,10 +399,10 @@ public class GPXImporter {
                     break;
 
                 case IMPORT_STEP_STORE_CACHES:
-                    showProgressAfterCancel = true;
                     progress.setProgressDivider(1);
                     progress.setMessage(res.getString(msg.arg1));
                     progress.setMaxProgressAndReset(msg.arg2);
+                    showProgressAfterCancel = true;
                     break;
 
                 case IMPORT_STEP_STORE_STATIC_MAPS:

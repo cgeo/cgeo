@@ -70,6 +70,7 @@ public class Progress {
             dialog.setMax(modMax);
             dialog.setProgress(0);
         }
+        this.progress = 0;
     }
 
     public synchronized void setProgress(final int progress) {
