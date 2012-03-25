@@ -1584,14 +1584,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     updateStatusMsg((String) msg.obj);
                 } else {
                     storeThread = null;
-
-                    try {
-                        CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
-                    } catch (Exception e) {
-                        showToast(res.getString(R.string.err_store_failed));
-
-                        Log.e(Settings.tag, "CacheDetailActivity.storeCacheHandler: " + e.toString());
-                    }
+                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
                 }
             }
 
@@ -1609,14 +1602,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     updateStatusMsg((String) msg.obj);
                 } else {
                     refreshThread = null;
-
-                    try {
-                        CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
-                    } catch (Exception e) {
-                        showToast(res.getString(R.string.err_refresh_failed));
-
-                        Log.e(Settings.tag, "CacheDetailActivity.refreshCacheHandler: " + e.toString());
-                    }
+                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
                 }
             }
 
