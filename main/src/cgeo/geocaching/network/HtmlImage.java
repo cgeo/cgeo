@@ -72,24 +72,7 @@ public class HtmlImage implements Html.ImageGetter {
             return new BitmapDrawable(getTransparent1x1Image());
         }
 
-        Bitmap imagePre = null;
-
-        // if image is just being stored, check if online version is newer than stored version
-        if (onlySave) {
-            // returns 0 if file does not exists
-            final long localDate = LocalStorage.getStorageFile(geocode, url, true, false).lastModified();
-            // returns 0 if website does not support last modified date or error occurs
-            final long onlineDate = Network.requestLastModifiedDate(makeAbsoluteURL(url));
-            // image was stored since it was last changed online, so no need to download again
-            if (localDate > onlineDate) {
-                return null;
-            }
-        }
-
-        // Load image from cache
-        if (!onlySave) {
-            imagePre = loadImageFromStorage(url);
-        }
+        Bitmap imagePre = onlySave ? null : loadImageFromStorage(url);
 
         // Download image and save it to the cache
         if (imagePre == null || onlySave) {
@@ -97,9 +80,9 @@ public class HtmlImage implements Html.ImageGetter {
 
             if (absoluteURL != null) {
                 try {
-                    final HttpResponse httpResponse = Network.request(absoluteURL, null, false);
-                    if (httpResponse != null) {
-                        final File file = LocalStorage.getStorageFile(geocode, url, true, true);
+                    final File file = LocalStorage.getStorageFile(geocode, url, true, true);
+                    final HttpResponse httpResponse = Network.request(absoluteURL, null, false, file);
+                    if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
                         LocalStorage.saveEntityToFile(httpResponse, file);
                     }
                 } catch (Exception e) {

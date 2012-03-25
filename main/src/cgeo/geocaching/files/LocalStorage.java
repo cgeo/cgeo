@@ -4,15 +4,18 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 
 import android.os.Environment;
 import android.util.Log;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -151,12 +154,58 @@ public class LocalStorage {
         }
 
         try {
-            return saveToFile(response.getEntity().getContent(), targetFile);
+            final boolean saved = saveToFile(response.getEntity().getContent(), targetFile);
+            saveHeader("etag", response, targetFile);
+            saveHeader("last-modified", response, targetFile);
+            return saved;
         } catch (IOException e) {
             Log.e(Settings.tag, "LocalStorage.saveEntityToFile", e);
         }
 
         return false;
+    }
+
+    private static void saveHeader(final String name, final HttpResponse response, final File baseFile) {
+        final Header header = response.getFirstHeader(name);
+        final File file = filenameForHeader(baseFile, name);
+        if (header == null) {
+            file.delete();
+        } else {
+            saveToFile(new ByteArrayInputStream(header.getValue().getBytes()), file);
+        }
+    }
+
+    private static File filenameForHeader(final File baseFile, final String name) {
+        return new File(baseFile.getAbsolutePath() + "-" + name);
+    }
+
+    /**
+     * Get the saved header value for this file.
+     *
+     * @param baseFile
+     *            the name of the cached resource
+     * @param name
+     *            the name of the header ("etag" or "last-modified")
+     * @return null if no value has been cached, the value otherwise
+     */
+    public static String getSavedHeader(final File baseFile, final String name) {
+        try {
+            final File file = filenameForHeader(baseFile, name);
+            final FileReader f = new FileReader(file);
+            try {
+                // No header will be more than 256 bytes
+                final char[] value = new char[256];
+                final int count = f.read(value);
+                return new String(value, 0, count);
+            } finally {
+                f.close();
+            }
+        } catch (final FileNotFoundException e) {
+            // Do nothing, the file does not exist
+        } catch (final Exception e) {
+            Log.w(Settings.tag, "could not read saved header " + name + " for " + baseFile, e);
+        }
+        return null;
     }
 
     /**
@@ -267,7 +316,7 @@ public class LocalStorage {
                 }
             }
         }
-    
+
         return path.delete();
     }
 

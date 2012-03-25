@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.BaseUtils;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -40,11 +41,9 @@ import org.json.JSONObject;
 import android.net.Uri;
 import android.util.Log;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
@@ -209,9 +208,11 @@ public abstract class Network {
      * @param uri
      * @param params
      * @param xContentType
+     * @param cacheFile
+     *            the name of the file storing the cached resource, or null not to use one
      * @return
      */
-    public static HttpResponse request(final String uri, final Parameters params, final boolean xContentType) {
+    public static HttpResponse request(final String uri, final Parameters params, final boolean xContentType, final File cacheFile) {
         final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
         final HttpRequestBase request = new HttpGet(fullUri);
 
@@ -221,7 +222,31 @@ public abstract class Network {
             request.setHeader("Content-Type", "application/x-www-form-urlencoded");
         }
 
+        if (cacheFile != null) {
+            final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
+            if (etag != null) {
+                request.setHeader("If-None-Match", etag);
+            } else {
+                final String lastModified = LocalStorage.getSavedHeader(cacheFile, "last-modified");
+                if (lastModified != null) {
+                    request.setHeader("If-Modified-Since", lastModified);
+                }
+            }
+        }
+
         return Network.request(request);
+    }
+
+    /**
+     * GET HTTP request
+     *
+     * @param uri
+     * @param params
+     * @param xContentType
+     * @return
+     */
+    public static HttpResponse request(final String uri, final Parameters params, final boolean xContentType) {
+        return request(uri, params, xContentType, null);
     }
 
     public static HttpResponse request(final HttpRequestBase request) {
@@ -360,27 +385,7 @@ public abstract class Network {
     }
 
     public static String urlencode_rfc3986(String text) {
-        final String encoded = StringUtils.replace(URLEncoder.encode(text).replace("+", "%20"), "%7E", "~");
-
-        return encoded;
-    }
-
-    /**
-     * Returns the value of the response header field <code>last-modified</code> or 0 if this value is not set.
-     * 
-     * @param url
-     *            to retrieve last modified date of
-     * @return the value of the <cod>last-modified</code> header field.
-     */
-    public static long requestLastModifiedDate(String url) {
-        try {
-            return ((HttpURLConnection) new URL(url).openConnection()).getLastModified();
-        } catch (MalformedURLException e) {
-            Log.e(Settings.tag, "Failed to get last modified date for: " + url + " " + e);
-        } catch (IOException e) {
-            Log.e(Settings.tag, "Failed to get last modified date for: " + url + " " + e);
-        }
-        return 0;
+        return StringUtils.replace(URLEncoder.encode(text).replace("+", "%20"), "%7E", "~");
     }
 
 }
