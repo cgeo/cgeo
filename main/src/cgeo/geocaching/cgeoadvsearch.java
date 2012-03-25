@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
@@ -49,7 +50,7 @@ public class cgeoadvsearch extends AbstractActivity {
         // search query
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            final String query = intent.getStringExtra(SearchManager.QUERY);
+            final String query = intent.getStringExtra(SearchManager.QUERY).trim();
             final boolean keywordSearch = intent.getBooleanExtra(EXTRAS_KEYWORDSEARCH, true);
 
             if (instantSearch(query, keywordSearch)) {
@@ -122,15 +123,14 @@ public class cgeoadvsearch extends AbstractActivity {
      */
     private boolean instantSearch(final String query, final boolean keywordSearch) {
         try {
-            String result = BaseUtils.getMatch(query, GCConstants.PATTERN_GC_CODE, true, 0, "", false);
-            if (StringUtils.isNotBlank(result)) {
+            if (ConnectorFactory.canHandle(query)) {
                 final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-                cachesIntent.putExtra("geocode", result.toUpperCase());
+                cachesIntent.putExtra("geocode", query.toUpperCase());
                 startActivity(cachesIntent);
 
                 return true;
             } else {
-                result = BaseUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
+                String result = BaseUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
                 if (StringUtils.isNotBlank(result)) {
                     final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
                     trackablesIntent.putExtra("geocode", result.toUpperCase());
