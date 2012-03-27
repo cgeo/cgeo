@@ -9,7 +9,7 @@
   <string name="search">Cerca</string>
   <string name="settings">Settaggi</string>
   <string name="helpers">Apps utili</string>
-  <string name="about">About c:geo</string>
+  <string name="about">Info c:geo</string>
   <string name="helper">Vuoi imparare di più su <b>c:geo</b>?\nLeggi il facile manuale.</string>
   <string name="latitude">Latitudine</string>
   <string name="longitude">Longitudine</string>
@@ -383,8 +383,8 @@
   <string name="init_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
   <string name="init_exclude">Escludi le mie cache e quelle trovate</string>
   <string name="init_showwaypoints">Mostra waypoints sulla mappa</string>
-  <string name="init_showwaypoint_description">Numero di cache al di sotto del quale mostrare waypoints sulla mappa.</string>
-  <string name="init_disabled">Esclude cache non attive</string>
+  <string name="init_showwaypoint_description">Se sulla mappa sono mostrate meno cache di quelle indicate, saranno mostrati anche i waypoints.</string>
+  <string name="init_disabled">Escludi cache non attive</string>
   <string name="init_offline">Salva le mappe per uso offline</string>
   <string name="init_offline_wp">Salva i waypoints delle mappe per uso offline</string>
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
@@ -408,7 +408,7 @@
   <string name="init_restore_failed">Ripristino fallito.</string>
   <string name="init_restore_running">Ripristino del database delle cache…</string>
   <string name="init_restore_confirm">Il database è vuoto. Vuoi ripristinare il backup?</string>
-  <string name="init_backup_last">Disponibile Backup del</string>
+  <string name="init_backup_last">Disponibile Backup delle</string>
   <string name="init_backup_last_no">Non esiste il file con il backup.</string>
   <string name="init_mapsources">Tipi di mappe</string>
   <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).</string>
@@ -546,7 +546,7 @@
   <string name="cache_rating_of">di</string>
   <string name="cache_favourite">Popolarità</string>
   <string name="cache_owner">Proprietario</string>
-  <string name="cache_hidden">Nascosta</string>
+  <string name="cache_hidden">Nascosta il</string>
   <string name="cache_event">Data</string>
   <string name="cache_location">Luogo</string>
   <string name="cache_coordinates">Coordinate</string>
