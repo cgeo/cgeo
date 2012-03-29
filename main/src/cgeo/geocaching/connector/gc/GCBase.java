@@ -110,11 +110,6 @@ public class GCBase {
 
             for (Tile tile : tiles) {
 
-                // testing purpose
-                {
-                    searchResult.setUrl("Zoom=" + tile.getZoomlevel());
-                }
-
                 StringBuilder url = new StringBuilder();
                 url.append("?x=").append(tile.getX()) // x tile
                 .append("&y=").append(tile.getY()) // y tile
