@@ -146,7 +146,11 @@ public class GPXImporter {
 
                 if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {
                     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_STATIC_MAPS, R.string.gpx_import_store_static_maps, search.getCount()));
-                    importStaticMaps(search);
+                    boolean finishedWithoutCancel = importStaticMaps(search);
+                    // Skip last message if static maps where canceled
+                    if (!finishedWithoutCancel) {
+                        return;
+                    }
                 }
 
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED, search.getCount(), 0, search));
@@ -185,7 +189,7 @@ public class GPXImporter {
             return search;
         }
 
-        private void importStaticMaps(final SearchResult importedCaches) {
+        private boolean importStaticMaps(final SearchResult importedCaches) {
             final cgeoapplication app = cgeoapplication.getInstance();
             int storedCacheMaps = 0;
             for (String geocode : importedCaches.getGeocodes()) {
@@ -194,10 +198,11 @@ public class GPXImporter {
                 StaticMapsProvider.downloadMaps(cache, app);
                 storedCacheMaps++;
                 if (progressHandler.isCancelled()) {
-                    return;
+                    return false;
                 }
                 progressHandler.sendMessage(progressHandler.obtainMessage(0, storedCacheMaps, 0));
             }
+            return true;
         }
     }
 
@@ -394,10 +399,10 @@ public class GPXImporter {
                     break;
 
                 case IMPORT_STEP_STORE_CACHES:
-                    showProgressAfterCancel = true;
                     progress.setProgressDivider(1);
                     progress.setMessage(res.getString(msg.arg1));
                     progress.setMaxProgressAndReset(msg.arg2);
+                    showProgressAfterCancel = true;
                     break;
 
                 case IMPORT_STEP_STORE_STATIC_MAPS:
