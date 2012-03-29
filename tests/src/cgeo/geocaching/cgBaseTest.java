@@ -89,15 +89,18 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
     @MediumTest
     public static void testParseCacheFromTextWithMockedData() {
         String gcCustomDate = Settings.getGcCustomDate();
-        for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
-            // to get the same results we have to use the date format used when the mocked data was created
-            Settings.setGcCustomDate(MockedCache.getDateFormat());
-            SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), null);
-            cgCache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-            assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
-            cgBaseTest.testCompareCaches(mockedCache, parsedCache, true);
+        try {
+            for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+                // to get the same results we have to use the date format used when the mocked data was created
+                Settings.setGcCustomDate(MockedCache.getDateFormat());
+                SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), null);
+                cgCache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
+                cgBaseTest.testCompareCaches(mockedCache, parsedCache, true);
+            }
+        } finally {
+            Settings.setGcCustomDate(gcCustomDate);
         }
-        Settings.setGcCustomDate(gcCustomDate);
     }
 
     public static void testWaypointsFromNote() {
@@ -150,9 +153,16 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
     public static cgCache createCache(int index) {
         final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES.get(index);
         // to get the same results we have to use the date format used when the mocked data was created
-        Settings.setGcCustomDate(MockedCache.getDateFormat());
+        String oldCustomDate = Settings.getGcCustomDate();
 
-        final SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), null);
+        SearchResult searchResult;
+        try {
+            Settings.setGcCustomDate(MockedCache.getDateFormat());
+            searchResult = cgBase.parseCacheFromText(mockedCache.getData(), null);
+        } finally {
+            Settings.setGcCustomDate(oldCustomDate);
+        }
+
         assertNotNull(searchResult);
         assertEquals(1, searchResult.getCount());
 
