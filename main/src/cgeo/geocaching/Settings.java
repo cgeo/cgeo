@@ -79,6 +79,8 @@ public final class Settings {
     private static final String KEY_DEFAULT_NAVIGATION_TOOL = "defaultNavigationTool";
     private static final String KEY_DEFAULT_NAVIGATION_TOOL_2 = "defaultNavigationTool2";
     private static final String KEY_LIVE_MAP_STRATEGY = "livemapstrategy";
+    private static final String KEY_HIDE_LIVE_MAP_HINT = "hidelivemaphint";
+    private static final String KEY_LIVE_MAP_HINT_SHOW_COUNT = "livemaphintshowcount";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -1015,4 +1017,31 @@ public final class Settings {
         });
     }
 
+    public static boolean getHideLiveMapHint() {
+        return sharedPrefs.getInt(KEY_HIDE_LIVE_MAP_HINT, 0) == 0 ? false : true;
+    }
+
+    public static void setHideLiveHint(final boolean hide) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_HIDE_LIVE_MAP_HINT, hide ? 1 : 0);
+            }
+        });
+    }
+
+    public static int getLiveMapHintShowCount() {
+        return sharedPrefs.getInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, 0);
+    }
+
+    public static void setLiveMapHintShowCount(final int showCount) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, showCount);
+            }
+        });
+    }
 }
