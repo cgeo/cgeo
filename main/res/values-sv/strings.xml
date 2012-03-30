@@ -298,6 +298,7 @@
   <string name="caches_move_selected">Flytta valda</string>
   <string name="caches_move_all">Flytta alla</string>
   <string name="caches_map_locus">Locus</string>
+  <string name="caches_map_locus_export">Exportera till Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Skriv texten som syns i bilden. Det krävs för att hämta koordinaterna för cacherna i listan. Det går att fortsätta ändå (men med sämre funktionalitet).</string>
   <string name="caches_recaptcha_hint">Text från bilden</string>
@@ -416,7 +417,7 @@
   <string name="init_maptrail">Visa spår på kartan</string>
   <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
   <string name="init_sigautoinsert">Infoga signatur automatiskt i loggar</string>
-  <string name="init_loaddirectionimg">Ladda rikningsbild om det behövs</string>
+  <string name="init_loaddirectionimg">Ladda riktningsbild om det behövs (enbart Basic Member)</string>
   <string name="init_default_navigation_tool">Förvald navigering</string>
   <string name="init_default_navigation_tool_description">Här kan du välja ditt förvalda navigeringsprogram.</string>
   <string name="init_default_navigation_tool_select">Välj program</string>
@@ -584,8 +585,10 @@
   <string name="gpx_import_store_static_maps">Sparar kartor</string>
   <string name="gpx_import_storing">Skriver cacher till databasen</string>
   <string name="gpx_import_caches_imported">cacher importerade</string>
-  <string name="gpx_import_title">Importera GPX</string>
+  <string name="gpx_import_static_maps_skipped">Hämtningen av kartor avbröts</string>
+  <string name="gpx_import_title_static_maps">Sparar kartor</string>
   <string name="gpx_import_title_reading_file">Läser fil</string>
+  <string name="gpx_import_title">Importera GPX</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>
   <string name="gpx_import_title_caches_import_failed">Importeringen misslyckades</string>
   <string name="gpx_import_error_io">Kan inte läsa filen</string>
@@ -745,6 +748,10 @@
   <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få bättre mottagning, mer exakt position och kan även spara på batteriet i telefonen.</string>
   <string name="helper_barcode_title">Streckkodsläsare</string>
   <string name="helper_barcode_description">Det finns Greasemonkey-script och hemsidor som visar GC-koder som streckkoder/QR-koder. Med den här appen kan c:geo scanna in GC-koden direkt från skärmen på din dator.</string>
+
+  <!-- add-ons -->
+  <string name="addon_missing_title">Tillägg saknas</string>
+  <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
 
   <!-- next things -->
   <string name="legal_note">För att använda tjänster hos Geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
