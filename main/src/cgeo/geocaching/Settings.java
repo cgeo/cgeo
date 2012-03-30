@@ -5,11 +5,11 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.mapsforge.android.maps.MapDatabase;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -370,10 +370,8 @@ public final class Settings {
     }
 
     private static boolean checkMapfile(final String mapFileIn) {
-        if (null == mapFileIn) {
-            return false;
-        }
-        return MapDatabase.isValidMapFile(mapFileIn);
+
+        return MapsforgeMapProvider.isValidMapFile(mapFileIn);
     }
 
     public static coordInputFormatEnum getCoordInputFormat() {

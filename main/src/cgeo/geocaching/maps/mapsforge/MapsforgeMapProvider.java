@@ -12,10 +12,15 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.map.reader.MapDatabase;
+import org.mapsforge.map.reader.header.FileOpenResult;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +29,8 @@ public class MapsforgeMapProvider implements MapProvider {
     public final static int MAPNIK = 1;
     public final static int CYCLEMAP = 3;
     public final static int OFFLINE = 4;
+    public final static int ENIRO_MAP = 5;
+    public final static int ENIRO_SAT = 6;
 
     private final Map<Integer, String> mapSources;
 
@@ -37,6 +44,8 @@ public class MapsforgeMapProvider implements MapProvider {
         mapSources.put(baseId + MAPNIK, resources.getString(R.string.map_source_osm_mapnik));
         mapSources.put(baseId + CYCLEMAP, resources.getString(R.string.map_source_osm_cyclemap));
         mapSources.put(baseId + OFFLINE, resources.getString(R.string.map_source_osm_offline));
+        mapSources.put(baseId + ENIRO_MAP, resources.getString(R.string.map_source_eniro_map));
+        mapSources.put(baseId + ENIRO_SAT, resources.getString(R.string.map_source_eniro_sat));
     }
 
     @Override
@@ -47,7 +56,7 @@ public class MapsforgeMapProvider implements MapProvider {
 
     @Override
     public boolean isMySource(int sourceId) {
-        return sourceId >= baseId + MAPNIK && sourceId <= baseId + OFFLINE;
+        return sourceId >= baseId + MAPNIK && sourceId <= baseId + ENIRO_SAT;
     }
 
     public static int getMapsforgeSource(int sourceId) {
@@ -57,6 +66,19 @@ public class MapsforgeMapProvider implements MapProvider {
             return sourceId - mfp.baseId;
         }
         return 0;
+    }
+
+    public static boolean isValidMapFile(String mapFileIn) {
+
+        if (StringUtils.isEmpty(mapFileIn)) {
+            return false;
+        }
+
+        MapDatabase mapDB = new MapDatabase();
+        FileOpenResult result = mapDB.openFile(new File(mapFileIn));
+        mapDB.closeFile();
+
+        return result.isSuccess();
     }
 
     @Override

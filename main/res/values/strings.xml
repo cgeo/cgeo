@@ -430,13 +430,17 @@
     <item>@string/map_source_osm_mapnik</item>
     <item>@string/map_source_osm_cyclemap</item>
     <item>@string/map_source_osm_offline</item>
+    <item>@string/map_source_eniro_map</item>
+    <item>@string/map_source_eniro_sat</item>
   </string-array>
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">OSM: Offline</string>
-
+  <string name="map_source_eniro_map">Eniro: Map</string>
+  <string name="map_source_eniro_sat">Eniro: Sat</string>
+    
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Your device name:</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to receive caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normal even without registering your device.</string>
