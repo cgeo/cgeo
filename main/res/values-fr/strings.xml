@@ -421,6 +421,9 @@
   <string name="init_default_navigation_tool_description">Vous pouvez choisir ici l\'outil de navigation à utiliser par défaut.</string>
   <string name="init_default_navigation_tool_select">Sélectionner l\'outil</string>
   <string name="init_default_navigation_tool_2_description">Vous pouvez choisir ici votre deuxième outil de navigation préféré. Il sera activé par un appui long sur l\'icône de navigation situé près du nom de la cache.</string>
+  <string name="init_debug_title">Déverminage</string>
+  <string name="init_debug_note">c:geo est capable de générer beaucoup d\'informations peu utiles pour des utilisateurs normaux. Cependant, en cas de problème, les développeurs en charge de c:geo peuvent avoir besoin de cette information pour pouvoir l\'identifier. Dans ce cas, ils vous demanderont d\'activer cette option et d\'envoyer les fichiers de journaux.</string>
+  <string name="init_debug">Générer les informations</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google Maps : plan</string>
