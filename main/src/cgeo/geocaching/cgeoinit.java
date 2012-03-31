@@ -669,6 +669,17 @@ public class cgeoinit extends AbstractActivity {
 
         refreshBackupLabel();
 
+        // Debug settings
+        final CheckBox debugButton = (CheckBox) findViewById(R.id.debug);
+        debugButton.setChecked(Settings.isDebug());
+        debugButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setDebug(!Settings.isDebug());
+                debugButton.setChecked(Settings.isDebug());
+            }
+        });
     }
 
     private void initMapfileEdittext(boolean setFocus) {

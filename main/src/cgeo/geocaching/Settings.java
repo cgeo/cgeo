@@ -79,6 +79,7 @@ public final class Settings {
     private static final String KEY_DEFAULT_NAVIGATION_TOOL = "defaultNavigationTool";
     private static final String KEY_DEFAULT_NAVIGATION_TOOL_2 = "defaultNavigationTool2";
     private static final String KEY_LIVE_MAP_STRATEGY = "livemapstrategy";
+    private static final String KEY_DEBUG = "debug";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -1016,7 +1017,16 @@ public final class Settings {
     }
 
     public static boolean isDebug() {
-        return true;
+        return sharedPrefs.getBoolean(KEY_DEBUG, false);
+    }
+
+    public static void setDebug(final boolean debug) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override public void edit(Editor edit) {
+                edit.putBoolean(KEY_DEBUG, debug);
+            }
+        });
     }
 
 }

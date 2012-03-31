@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo compass</string>
@@ -422,7 +422,10 @@
   <string name="init_default_navigation_tool_description">Here you can select your preferred navigation tool.</string>
   <string name="init_default_navigation_tool_select">Select tool</string>
   <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. It\'s activated by long clicking the navigation icon next to the title of the cache.</string>
-  
+  <string name="init_debug_title">Debug information</string>
+  <string name="init_debug_note">c:geo can generate a lot of debugging information. While this information is generally not useful for c:geo users, developers may need to generate this information in order to analyze a bug. In this case, they will ask you to check the box below and send them the log file.</string>
+  <string name="init_debug">Generate debug information</string>
+
   <!-- map sources -->
   <string-array name="map_sources">
     <item>@string/map_source_google_map</item>
