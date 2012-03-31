@@ -2,13 +2,13 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

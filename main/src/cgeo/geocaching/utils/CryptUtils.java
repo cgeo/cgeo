@@ -4,7 +4,6 @@ import cgeo.geocaching.Settings;
 
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.util.Log;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

@@ -4,12 +4,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 class GoogleMapsApp extends AbstractPointNavigationApp {
 

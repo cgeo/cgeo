@@ -9,13 +9,13 @@ import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

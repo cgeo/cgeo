@@ -4,9 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeogpxes;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

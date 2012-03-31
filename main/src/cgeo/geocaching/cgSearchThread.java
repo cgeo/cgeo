@@ -1,7 +1,8 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.utils.Log;
+
 import android.os.Handler;
-import android.util.Log;
 
 abstract public class cgSearchThread extends Thread {
     private Handler recaptchaHandler = null;

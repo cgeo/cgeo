@@ -3,13 +3,13 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import java.io.IOException;
 

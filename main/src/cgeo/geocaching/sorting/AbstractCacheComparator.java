@@ -2,8 +2,8 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.utils.Log;
 
-import android.util.Log;
 
 /**
  * abstract super implementation for all cache comparators

@@ -26,6 +26,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -50,7 +51,6 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.format.DateUtils;
 import android.text.style.StrikethroughSpan;
-import android.util.Log;
 
 import java.net.URLDecoder;
 import java.text.ParseException;

@@ -18,6 +18,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.util.ArrayList;

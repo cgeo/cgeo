@@ -16,6 +16,7 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
@@ -24,7 +25,6 @@ import org.json.JSONObject;
 
 import android.net.Uri;
 import android.text.Html;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

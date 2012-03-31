@@ -6,6 +6,7 @@ import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.CompassView;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.PeriodicHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +15,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;

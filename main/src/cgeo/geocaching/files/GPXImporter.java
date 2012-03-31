@@ -11,6 +11,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,7 +24,6 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;

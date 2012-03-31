@@ -5,6 +5,7 @@ import cgeo.geocaching.concurrent.Task;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +13,6 @@ import org.apache.http.HttpResponse;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 

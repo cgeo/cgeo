@@ -6,6 +6,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +15,6 @@ import org.apache.http.HttpResponse;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

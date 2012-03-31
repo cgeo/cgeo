@@ -39,6 +39,7 @@ import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.sorting.VoteComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -56,7 +57,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;

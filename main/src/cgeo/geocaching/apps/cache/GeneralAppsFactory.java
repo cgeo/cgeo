@@ -3,11 +3,11 @@ package cgeo.geocaching.apps.cache;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.apps.AbstractAppFactory;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 

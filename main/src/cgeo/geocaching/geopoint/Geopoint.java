@@ -4,13 +4,13 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.location.Location;
-import android.util.Log;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

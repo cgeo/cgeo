@@ -7,12 +7,12 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.apps.AbstractAppFactory;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;

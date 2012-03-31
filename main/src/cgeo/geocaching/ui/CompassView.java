@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +13,6 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class CompassView extends View {

@@ -16,6 +16,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -27,7 +28,6 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Handler;
 import android.text.Spannable;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;

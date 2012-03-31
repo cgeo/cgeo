@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.LocationProviderType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.go4cache.Go4Cache;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.location.GpsSatellite;
@@ -11,7 +12,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.Iterator;
 

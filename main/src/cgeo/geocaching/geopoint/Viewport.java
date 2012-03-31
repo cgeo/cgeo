@@ -1,8 +1,8 @@
 package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.utils.Log;
 
-import android.util.Log;
 
 public class Viewport {
 

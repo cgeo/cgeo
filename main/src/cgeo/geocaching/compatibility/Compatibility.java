@@ -2,6 +2,7 @@ package cgeo.geocaching.compatibility;
 
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
 
@@ -11,7 +12,6 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.widget.EditText;

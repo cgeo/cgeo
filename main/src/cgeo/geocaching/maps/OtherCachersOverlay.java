@@ -7,6 +7,7 @@ import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +16,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;

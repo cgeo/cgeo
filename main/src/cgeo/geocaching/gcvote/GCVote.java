@@ -5,12 +5,12 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;

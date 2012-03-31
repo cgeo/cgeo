@@ -1,9 +1,10 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.utils.Log;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.text.Html;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -11,10 +11,10 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -10,10 +10,10 @@ import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.http.HttpResponse;
 
-import android.util.Log;
 
 public final class Twitter {
     public static final int MAX_TWEET_SIZE = 140;

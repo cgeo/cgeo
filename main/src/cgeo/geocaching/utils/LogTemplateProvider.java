@@ -9,7 +9,6 @@ import cgeo.geocaching.network.Network;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.util.Log;
 
 /**
  * provides all the available templates for logging

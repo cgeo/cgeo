@@ -5,6 +5,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,7 +40,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.Uri;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;

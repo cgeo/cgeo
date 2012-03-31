@@ -1015,4 +1015,8 @@ public final class Settings {
         });
     }
 
+    public static boolean isDebug() {
+        return true;
+    }
+
 }
