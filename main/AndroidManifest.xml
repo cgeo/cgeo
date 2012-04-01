@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		android:versionName="04.01.2012"
-		android:versionCode="20120104"
+		android:versionName="RC1 03.2012"
+		android:versionCode="20120323"
 		package="cgeo.geocaching"
 		name="c:geo"
 		android:installLocation="auto">
@@ -227,7 +227,13 @@
 			android:label="@string/app_name"
 			android:configChanges="keyboardHidden|orientation" >
 		</activity>
-        <provider android:name="cgeo.geocaching.apps.LocusDataStorageProvider" 
+		<activity
+			android:name=".LiveMapInfo"
+			android:label="@string/app_name"
+			android:theme="@style/cgeo_transparent"
+			android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<provider android:name="cgeo.geocaching.apps.LocusDataStorageProvider" 
             android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
 	</application>
 </manifest>

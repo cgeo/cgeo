@@ -657,8 +657,11 @@
   <string name="map_strategy_fast">Schnell</string>
   <string name="map_strategy_auto">Geschwindigkeitsabhängig</string>
   <string name="map_strategy_detailed">Detailliert</string>
-
-  <!-- search -->
+  <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau. Eventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.\n\nMehr Informationen über alle Änderungen findet ihr auf der \"Über c:geo\"-Seite in der App.</string>
+  <string name="live_map_note_close">Schließen</string>
+  <string name="live_map_note_dontshow">Nicht mehr anzeigen</string>
+  
+<!-- search -->
   <string name="search_bar_hint">Suche nach Caches</string>
   <string name="search_bar_desc">Caches (GC-Code, Stichwort), Trackables (TB-Code)</string>
   <string name="search_coordinates">Koordinaten</string>

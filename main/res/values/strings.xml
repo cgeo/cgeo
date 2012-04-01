@@ -691,6 +691,10 @@
   <string name="map_strategy_fast">Fast</string>
   <string name="map_strategy_auto">Speed dependent</string>
   <string name="map_strategy_detailed">Detailed</string>
+  <string name="live_map_notification">On the new live map coordinates may not always be precise. Possibly imprecise coordinates are marked by an orange circle.\nOpening the cache details or saving the cache for offline use will always obtain precise coordinates.\n\nMore information on all changes can be found on the \"About c:geo\" page inside the app.</string>
+  <string name="live_map_note_close">Close</string>
+  <string name="live_map_note_dontshow">Do not show again</string>
+  
 
   <!-- search -->
   <string name="search_bar_hint">Search for caches</string>
@@ -1042,10 +1046,12 @@
     <b>Known Limitations/Bugs:</b>\n
     · Live map:\n
       Approximated coords due to limitations on the GC-website\n
+      Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
       In fast mode the cache type might be wrong in rare cases\n
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
     · Other:\n
-      Log images with huge size will cause a long loading time\n\n\n
+      Log images with huge size will cause a long loading time\n
+      OSM:Offline does only support map-files with version 0.2.4\n\n\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>

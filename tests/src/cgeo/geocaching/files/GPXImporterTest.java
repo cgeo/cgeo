@@ -104,6 +104,20 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(2, cache.getWaypoints().size());
     }
 
+    public void testImportGpxWithLowercaseNames() throws IOException {
+        final File tc2012 = new File(tempDir, "tc2012.gpx");
+        copyResourceToFile(R.raw.tc2012, tc2012);
+
+        final GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(tc2012, listId, importStepHandler, progressHandler);
+        runImportThread(importThread);
+
+        assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_CACHES, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
+
+        final cgCache cache = cgeoapplication.getInstance().loadCache("AID1", LoadFlags.LOAD_CACHE_OR_DB);
+        assertCacheProperties(cache);
+        assertEquals("First Aid Station #1", cache.getName());
+    }
+
     private void assertImportStepMessages(int... importSteps) {
         assertEquals(importSteps.length, importStepHandler.messages.size());
         for (int i = 0; i < importSteps.length; i++) {

@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.IWaypoint;
+import cgeo.geocaching.LiveMapInfo;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
@@ -224,12 +225,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             title.append('/').append(caches.size());
                         }
                         title.append(']');
-                    }
-                    // testing purpose
-                    {
-                        if (search != null && StringUtils.isNotBlank(search.getUrl())) {
-                            title.append("[" + search.getUrl() + "]");
-                        }
                     }
 
                     ActivityMixin.setTitle(activity, title.toString());
@@ -467,6 +462,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         switchMyLocationButton();
 
         prepareFilterBar();
+
+        if (!Settings.getHideLiveMapHint()) {
+            Intent hintIntent = new Intent(activity, LiveMapInfo.class);
+            activity.startActivity(hintIntent);
+        }
     }
 
     private void prepareFilterBar() {

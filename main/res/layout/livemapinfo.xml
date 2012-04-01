@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?background_color_transparent"
+    android:orientation="vertical" >
+
+    <LinearLayout style="@style/action_bar" >
+
+        <TextView style="@style/action_bar_title" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/live_map_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="4dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/live_map_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/live_map_notification"
+                android:textColor="?text_color"
+                android:textSize="14dip" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <CheckBox
+                    android:id="@+id/live_map_hint_hide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/live_map_note_dontshow"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/live_map_hint_ok"
+                    style="@style/button_small"
+                    android:layout_width="60dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="1dip"
+                    android:text="@string/live_map_note_close" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
