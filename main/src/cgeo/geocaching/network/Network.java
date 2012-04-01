@@ -222,7 +222,7 @@ public abstract class Network {
             request.setHeader("Content-Type", "application/x-www-form-urlencoded");
         }
 
-        if (cacheFile != null) {
+        if (cacheFile != null && cacheFile.exists()) {
             final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
             if (etag != null) {
                 request.setHeader("If-None-Match", etag);
