@@ -30,6 +30,8 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.GpsStatus;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -69,6 +71,9 @@ public class cgeo extends AbstractActivity {
     private List<Address> addresses = null;
     private boolean addressObtaining = false;
     private boolean initialized = false;
+
+    private LocationManager locationManager;
+    private boolean gpsEnabled = false;
 
     private Handler updateUserInfoHandler = new Handler() {
 
@@ -130,6 +135,44 @@ public class cgeo extends AbstractActivity {
         }
     };
 
+    private class SatellitesHandler extends Handler {
+
+        final private static int NO_GPS = 0;
+        final private static int SATELLITES = 1;
+
+        @Override
+        public void handleMessage(final Message msg) {
+            String satellites = "";
+            switch (msg.what) {
+                case NO_GPS:
+                    satellites = res.getString(R.string.loc_gps_disabled);
+                    break;
+                case SATELLITES:
+                    final int satellitesFixed = msg.arg1;
+                    final int satellitesVisible = msg.arg2;
+                    if (satellitesFixed > 0) {
+                        satellites = res.getString(R.string.loc_sat) + ": " + satellitesFixed + "/" + satellitesVisible;
+                    } else if (satellitesVisible >= 0) {
+                        satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
+                    }
+                    break;
+            }
+            final TextView navSatellites = (TextView) findViewById(R.id.nav_satellites);
+            navSatellites.setText(satellites);
+        }
+
+        public void noGps() {
+            obtainMessage(NO_GPS).sendToTarget();
+        }
+
+        public void satellites(final int fixed, final int visible) {
+            obtainMessage(SATELLITES, fixed, visible).sendToTarget();
+        }
+
+    }
+
+    private SatellitesHandler satellitesHandler = new SatellitesHandler();
+
     private Handler firstLoginHandler = new Handler() {
 
         @Override
@@ -144,6 +187,21 @@ public class cgeo extends AbstractActivity {
                 Log.w(Settings.tag, "cgeo.fisrtLoginHander: " + e.toString());
             }
         }
+    };
+
+    private final GpsStatus.Listener gpsListener = new GpsStatus.Listener() {
+
+        @Override
+        public void onGpsStatusChanged(int event) {
+            if (event == GpsStatus.GPS_EVENT_STARTED && !gpsEnabled) {
+                satellitesHandler.satellites(0, 0);
+                gpsEnabled = true;
+            } else if (event == GpsStatus.GPS_EVENT_STOPPED && gpsEnabled) {
+                satellitesHandler.noGps();
+                gpsEnabled = false;
+            }
+        }
+
     };
 
     public cgeo() {
@@ -196,6 +254,8 @@ public class cgeo extends AbstractActivity {
             // nothing
         }
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
         init();
     }
 
@@ -209,6 +269,9 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        locationManager.addGpsStatusListener(gpsListener);
 
         updateUserInfoHandler.sendEmptyMessage(-1);
 
@@ -241,6 +304,8 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onPause() {
         initialized = false;
+
+        locationManager.removeGpsStatusListener(gpsListener);
 
         if (geo != null) {
             geo = app.removeGeo();
@@ -570,7 +635,6 @@ public class cgeo extends AbstractActivity {
         private final View nearestView = findViewById(R.id.nearest);
         private final TextView navType = (TextView) findViewById(R.id.nav_type);
         private final TextView navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
-        private final TextView navSatellites = (TextView) findViewById(R.id.nav_satellites);
         private final TextView navLocation = (TextView) findViewById(R.id.nav_location);
 
         @Override
@@ -592,15 +656,12 @@ public class cgeo extends AbstractActivity {
                         nearestView.setBackgroundResource(R.drawable.main_nearby);
                     }
 
-                    String satellites = null;
-                    if (geo.satellitesFixed > 0) {
-                        satellites = res.getString(R.string.loc_sat) + ": " + geo.satellitesFixed + "/" + geo.satellitesVisible;
-                    } else if (geo.satellitesVisible >= 0) {
-                        satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
+                    if (!gpsEnabled) {
+                        satellitesHandler.noGps();
                     } else {
-                        satellites = "";
+                        satellitesHandler.satellites(geo.satellitesFixed, geo.satellitesVisible);
                     }
-                    navSatellites.setText(satellites);
+
                     navType.setText(res.getString(geo.locationProvider.resourceId));
 
                     if (geo.accuracyNow >= 0) {

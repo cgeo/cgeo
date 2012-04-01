@@ -235,6 +235,7 @@
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Trying to Locate</string>
   <string name="loc_no_addr">Unknown address</string>
+  <string name="loc_gps_disabled">GPS disabled</string>
 
   <!-- standard menu -->
   <string name="menu_about">About c:geo</string>
