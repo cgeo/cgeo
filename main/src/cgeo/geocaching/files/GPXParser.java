@@ -278,7 +278,7 @@ public abstract class GPXParser extends FileParser {
                 // take the name as code, if nothing else is available
                 if (StringUtils.isBlank(cache.getGeocode())) {
                     if (StringUtils.isNotBlank(name)) {
-                        cache.setGeocode(name.trim());
+                        cache.setGeocode(name.trim().toUpperCase());
                     }
                 }
 
@@ -312,7 +312,7 @@ public abstract class GPXParser extends FileParser {
                 fixCache(cache);
 
                 if (cache.getName().length() > 2) {
-                    final String cacheGeocodeForWaypoint = "GC" + cache.getName().substring(2);
+                    final String cacheGeocodeForWaypoint = "GC" + cache.getName().substring(2).toUpperCase();
 
                     // lookup cache for waypoint in already parsed caches
                     final cgCache cacheForWaypoint = result.get(cacheGeocodeForWaypoint);
