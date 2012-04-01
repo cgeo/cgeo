@@ -244,4 +244,9 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     public boolean isFinalWithCoords() {
         return WaypointType.FINAL == waypointType && null != coords;
     }
+
+    @Override
+    public String getCoordType() {
+        return "waypoint";
+    }
 }

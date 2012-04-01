@@ -18,4 +18,6 @@ public interface IWaypoint extends ILogable {
 
     public abstract WaypointType getWaypointType();
 
+    public abstract String getCoordType();
+
 }
