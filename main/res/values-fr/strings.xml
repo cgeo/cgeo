@@ -235,6 +235,7 @@
   <string name="loc_sat">Satellites</string>
   <string name="loc_trying">Localisation en cours…</string>
   <string name="loc_no_addr">Adresse inconnue</string>
+  <string name="loc_gps_disabled">GPS désactivé</string>
 
   <!-- standard menu -->
   <string name="menu_about">À propos de c:geo</string>
