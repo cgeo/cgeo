@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgeopopup;
 import cgeo.geocaching.cgeowaypoint;
 import cgeo.geocaching.enumerations.CacheType;
@@ -130,7 +130,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 canvas.setDrawFilter(setfil);
 
                 for (CachesOverlayItemImpl item : items) {
-                    final cgCoord itemCoord = item.getCoord();
+                    final IWaypoint itemCoord = item.getCoord();
                     float[] result = new float[1];
 
                     Location.distanceBetween(itemCoord.getCoords().getLatitude(), itemCoord.getCoords().getLongitude(),
@@ -200,7 +200,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 return false;
             }
 
-            cgCoord coordinate = item.getCoord();
+            final IWaypoint coordinate = item.getCoord();
 
             if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
                 Intent popupIntent = new Intent(context, cgeopopup.class);

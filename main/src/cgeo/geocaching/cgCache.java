@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
 /**
  * Internal c:geo representation of a "cache"
  */
-public class cgCache implements ICache {
+public class cgCache implements ICache, IWaypoint {
 
     private long updated = 0;
     private long detailedUpdate = 0;
@@ -1429,5 +1429,20 @@ public class cgCache implements ICache {
 
     public void setZoomlevel(int zoomlevel) {
         this.zoomlevel = zoomlevel;
+    }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
+    public WaypointType getWaypointType() {
+        return null;
+    }
+
+    @Override
+    public String getCoordType() {
+        return "cache";
     }
 }

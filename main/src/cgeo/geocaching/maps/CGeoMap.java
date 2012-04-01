@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
@@ -8,7 +9,6 @@ import cgeo.geocaching.UpdateDirectionCallback;
 import cgeo.geocaching.UpdateLocationCallback;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
@@ -35,8 +35,8 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import cgeo.geocaching.network.Login;
-import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.BoundedList;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -1271,10 +1271,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                                     continue;
                                 }
 
-                                itemsToDisplay.add(getItem(new cgCoord(waypoint), null, waypoint));
+                                itemsToDisplay.add(getItem(waypoint, null, waypoint));
                             }
                         }
-                        itemsToDisplay.add(getItem(new cgCoord(cache), cache, null));
+                        itemsToDisplay.add(getItem(cache, cache, null));
                     }
 
                     overlayCaches.updateItems(itemsToDisplay);
@@ -1379,14 +1379,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             if (coordsIntent != null) {
-                final cgCoord coord = new cgCoord();
-                coord.setCoordType("waypoint");
-                coord.setCoords(coordsIntent);
-                coord.setName("some place");
-
                 final cgWaypoint waypoint = new cgWaypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT, false);
+                waypoint.setCoords(coordsIntent);
 
-                final CachesOverlayItemImpl item = getItem(coord, null, waypoint);
+                final CachesOverlayItemImpl item = getItem(waypoint, null, waypoint);
                 overlayCaches.updateItems(item);
                 displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
@@ -1706,7 +1702,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      *            Waypoint. Mutally exclusive with cache
      * @return
      */
-    private CachesOverlayItemImpl getItem(cgCoord coord, cgCache cache, cgWaypoint waypoint) {
+    private CachesOverlayItemImpl getItem(IWaypoint coord, cgCache cache, cgWaypoint waypoint) {
         if (cache != null) {
 
             CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, cache.getType());

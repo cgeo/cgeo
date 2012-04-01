@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.cgCoord;
+import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.enumerations.CacheType;
 
 /**
@@ -12,7 +12,7 @@ import cgeo.geocaching.enumerations.CacheType;
  */
 public interface CachesOverlayItemImpl extends OverlayItemImpl {
 
-    public cgCoord getCoord();
+    public IWaypoint getCoord();
 
     public CacheType getType();
 

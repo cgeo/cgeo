@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -80,7 +80,7 @@ public class MapsforgeMapProvider implements MapProvider {
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final CacheType type) {
+    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final CacheType type) {
         MapsforgeCacheOverlayItem baseItem = new MapsforgeCacheOverlayItem(coordinate, type);
         return baseItem;
     }

@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.cgCoord;
+import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 
@@ -11,16 +11,16 @@ import android.graphics.drawable.Drawable;
 
 public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOverlayItemImpl {
     final private CacheType cacheType;
-    final private cgCoord coord;
+    final private IWaypoint coord;
 
-    public MapsforgeCacheOverlayItem(cgCoord coordinate, final CacheType type) {
+    public MapsforgeCacheOverlayItem(IWaypoint coordinate, final CacheType type) {
         super(new GeoPoint(coordinate.getCoords().getLatitudeE6(), coordinate.getCoords().getLongitudeE6()), coordinate.getName(), "");
 
         this.cacheType = type;
         this.coord = coordinate;
     }
 
-    public cgCoord getCoord() {
+    public IWaypoint getCoord() {
         return coord;
     }
 
