@@ -765,6 +765,14 @@ public class cgeo extends AbstractActivity {
         findViewById(R.id.filter_button).performClick();
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
+    public void cgeoNavSettings(View v) {
+        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+    }
+
     private class CountBubbleUpdateThread extends Thread {
         private Handler countBubbleHandler = new Handler() {
             private TextView countBubble = null;

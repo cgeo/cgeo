@@ -167,7 +167,8 @@
 			android:layout_alignParentBottom="true"
 			android:layout_marginRight="6dip"
 			android:layout_marginLeft="6dip"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:onClick="cgeoNavSettings">
 		<TextView android:id="@+id/user_info"
 				style="@style/location_current"
 				android:text="@string/init_login_popup_working"/>
