@@ -82,8 +82,13 @@ public class HtmlImage implements Html.ImageGetter {
                 try {
                     final File file = LocalStorage.getStorageFile(geocode, url, true, true);
                     final HttpResponse httpResponse = Network.request(absoluteURL, null, false, file);
-                    if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
-                        LocalStorage.saveEntityToFile(httpResponse, file);
+                    if (httpResponse != null) {
+                        final int statusCode = httpResponse.getStatusLine().getStatusCode();
+                        if (statusCode == 200) {
+                            LocalStorage.saveEntityToFile(httpResponse, file);
+                        } else if (statusCode == 304) {
+                            file.setLastModified(System.currentTimeMillis());
+                        }
                     }
                 } catch (Exception e) {
                     Log.e(Settings.tag, "HtmlImage.getDrawable (downloading from web)", e);
