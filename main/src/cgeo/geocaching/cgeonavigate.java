@@ -30,7 +30,7 @@ public class cgeonavigate extends AbstractActivity {
     private static final String EXTRAS_LATITUDE = "latitude";
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
-    private static final List<cgCoord> coordinates = new ArrayList<cgCoord>();
+    private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
     private static final int MENU_MAP = 0;
     private static final int MENU_SWITCH_COMPASS_GPS = 1;
     private PowerManager pm = null;
@@ -210,7 +210,7 @@ public class cgeonavigate extends AbstractActivity {
             SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
 
             int cnt = 4;
-            for (cgCoord coordinate : coordinates) {
+            for (IWaypoint coordinate : coordinates) {
                 subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
                 cnt++;
             }
@@ -263,7 +263,7 @@ public class cgeonavigate extends AbstractActivity {
             finish();
             return true;
         } else if (id > 3 && coordinates.get(id - 4) != null) {
-            cgCoord coordinate = coordinates.get(id - 4);
+            final IWaypoint coordinate = coordinates.get(id - 4);
 
             title = coordinate.getName();
             dstCoords = coordinate.getCoords();
@@ -403,7 +403,7 @@ public class cgeonavigate extends AbstractActivity {
         }
     }
 
-    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<cgCoord> coordinatesWithType) {
+    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType) {
         coordinates.clear();
         if (coordinatesWithType != null) { // avoid possible NPE
             coordinates.addAll(coordinatesWithType);

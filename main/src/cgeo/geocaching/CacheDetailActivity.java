@@ -836,39 +836,15 @@ public class CacheDetailActivity extends AbstractActivity {
      *
      * @return A {@link List} of all coordinates
      */
-    public List<cgCoord> getCoordinates() {
-        List<cgCoord> coordinates = new ArrayList<cgCoord>();
+    public List<IWaypoint> getCoordinates() {
+        List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
 
         // cache
-        try {
-            final cgCoord coords = new cgCoord();
-            coords.setCoordType("cache");
-            if (StringUtils.isNotBlank(cache.getName())) {
-                coords.setName(cache.getName());
-            } else {
-                coords.setName(cache.getGeocode().toUpperCase());
-            }
-            coords.setCoords(cache.getCoords());
-            coordinates.add(coords);
-        } catch (Exception e) {
-            Log.e(Settings.tag, "CacheDetailActivity.getCoordinates (cache)", e);
-        }
+        coordinates.add(cache);
 
         // waypoints
-        try {
-            if (cache.hasWaypoints()) {
-                for (cgWaypoint waypoint : cache.getWaypoints()) {
-                    if (null != waypoint.getCoords()) {
-                        final cgCoord coords = new cgCoord();
-                        coords.setCoordType("waypoint");
-                        coords.setName(waypoint.getName());
-                        coords.setCoords(waypoint.getCoords());
-                        coordinates.add(coords);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            Log.e(Settings.tag, "CacheDetailActivity.getCoordinates (waypoint)", e);
+        if (cache.hasWaypoints()) {
+            coordinates.addAll(cache.getWaypoints());
         }
 
         return coordinates;
