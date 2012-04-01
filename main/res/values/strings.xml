@@ -1036,6 +1036,7 @@
     · Keep screen on while viewing cache-lists\n
     · TB-icons now shown in correct size\n
     · Cache count on live map corrected\n
+    · Improved GPX import for non-GC GPX files\n
     \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=3&amp;state=closed">Detailed list of all changes</a>\n
     \n
@@ -1045,6 +1046,8 @@
       Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
       In fast mode the cache type might be wrong in rare cases\n
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
+      Waypoints on map might disappear when moving the map\n
+      (Workaround: Increase waypoint limit in settings)\n
     · Other:\n
       Log images with huge size will cause a long loading time\n
       OSM:Offline does only support map-files with version 0.2.4\n\n\n
