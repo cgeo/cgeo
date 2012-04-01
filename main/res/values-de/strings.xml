@@ -421,6 +421,9 @@
   <string name="init_default_navigation_tool_description">Hier kannst du dein bevorzugtes Navigationswerkzeug festlegen.</string>
   <string name="init_default_navigation_tool_select">Wähle Werkzeug</string>
   <string name="init_default_navigation_tool_2_description">Hier kannst du dein zweites bevorzugtes Navigationswerkzeug festlegen. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
+  <string name="init_debug_title">Fehlersuche</string>
+  <string name="init_debug_note">c:geo kann bei Bedarf viele Debuginformationen speichern. Im Normalfall ist dies nicht notwendig, jedoch kann es den Entwicklern bei der Fehlersuche helfen. In diesem Fall werden sie dich bitten, diese Einstellung zu aktivieren und später das Log-File zuzusenden.</string>
+  <string name="init_debug">Debug-Log aktivieren</string>
   
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
