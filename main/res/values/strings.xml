@@ -1003,7 +1003,7 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next Release</b>\n\n
+    <b>02.04.2012</b>\n\n
     <b>New Features/Functions:</b>\n
     · Live Map re-implementation with selectable strategy:\n
       Fastest: Load approximated cache coords only\n
