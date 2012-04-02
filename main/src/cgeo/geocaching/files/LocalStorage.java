@@ -282,13 +282,14 @@ public class LocalStorage {
     }
 
     private static boolean copy(final InputStream input, final OutputStream output) {
-        byte[] buffer = new byte[4096];
+        final byte[] buffer = new byte[4096];
         int length;
         try {
             while ((length = input.read(buffer)) > 0) {
                 output.write(buffer, 0, length);
             }
-            output.flush(); // FIXME: is that necessary?
+            // Flushing is only necessary if the stream is not immediately closed afterwards.
+            // We rely on all callers to do that correctly outside of this method
         } catch (IOException e) {
             Log.e(Settings.tag, "LocalStorage.copy: error when copying data", e);
             return false;

@@ -6,12 +6,8 @@ import cgeo.geocaching.utils.BaseUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.test.AndroidTestCase;
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,25 +16,15 @@ import java.util.regex.Pattern;
  * It does not test semantical correctness.
  *
  */
-public class WhitespaceTest extends AndroidTestCase {
+public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
 
     private final static int EXPECTED_SIZE = 122907;
     private String data;
 
     @Override
     protected void setUp() throws Exception {
-        final StringBuilder buffer = new StringBuilder(4096);
-        final InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/GC2CJPF.html");
-        final BufferedReader br = new BufferedReader(new InputStreamReader(is), 4096);
-
-        String line = null;
-
-        while ((line = br.readLine()) != null) {
-            buffer.append(line).append('\n');
-        }
-        data = buffer.toString();
-
-        br.close();
+        super.setUp();
+        data = getFileContent(R.raw.gc2cjpf_html);
     }
 
     /**

@@ -231,7 +231,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
         @Override
         public synchronized void handleRegularMessage(Message msg) {
-            final Message msg1 = new Message();
+            final Message msg1 = Message.obtain();
             msg1.copyFrom(msg);
             messages.add(msg1);
             lastMessage = System.currentTimeMillis();

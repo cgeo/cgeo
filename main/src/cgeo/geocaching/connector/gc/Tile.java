@@ -141,7 +141,7 @@ public class Tile {
         Tile tileRight = new Tile(right, zoom);
 
         if (tileLeft.tileX == tileRight.tileX) {
-            zoom = zoom + 1;
+            zoom += 1;
         }
 
         return Math.min(zoom, ZOOMLEVEL_MAX);
@@ -173,7 +173,7 @@ public class Tile {
         Tile tileTop = new Tile(top, zoom);
 
         if (Math.abs(tileBottom.tileY - tileTop.tileY) > 1) {
-            zoom = zoom - 1;
+            zoom -= 1;
         }
 
         return Math.min(zoom, ZOOMLEVEL_MAX);

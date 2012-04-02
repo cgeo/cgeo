@@ -24,12 +24,17 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
         String page = MockedCache.readCachePage("GC2CJPF");
         assertEquals("blafoo", BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
         assertTrue(page.contains("id=\"ctl00_hlRenew\"") || "Premium Member".equals(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???")));
-        int cachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
+        int cachesFound = 0;
+        try {
+            cachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
+        } catch (NumberFormatException e) {
+            fail();
+        }
         assertTrue(cachesFound >= 491);
     }
 
     public static void testReplaceWhitespaces() {
-        assertEquals("foo bar baz ", BaseUtils.replaceWhitespace(new String("  foo\n\tbar   \r   baz  ")));
+        assertEquals("foo bar baz ", BaseUtils.replaceWhitespace("  foo\n\tbar   \r   baz  "));
     }
 
     public static void testElevation() {

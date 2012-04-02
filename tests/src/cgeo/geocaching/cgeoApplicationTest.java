@@ -231,7 +231,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             GC2CJPF mockedCache = new GC2CJPF();
             deleteCacheFromDB(mockedCache.getGeocode());
 
-            final String tokens[] = GCBase.getTokens();
+            final String[] tokens = GCBase.getTokens();
             final Viewport viewport = new Viewport(mockedCache.getCoords(), 0.003, 0.003);
 
             // check coords for DETAILED
@@ -275,7 +275,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
         try {
 
-            final String tokens[] = null; // without a valid token we are "logged off"
+            final String[] tokens = null; // without a valid token we are "logged off"
 
             // non premium cache
             MockedCache cache = new GC2CJPF();

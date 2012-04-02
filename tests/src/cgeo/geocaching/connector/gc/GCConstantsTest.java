@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.BaseUtils;
 
@@ -31,7 +30,11 @@ public class GCConstantsTest extends AndroidTestCase {
     }
 
     private static void assertCacheCount(final int count, final String html) {
-        assertEquals(count, Integer.parseInt(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
+        try {
+            assertEquals(count, Integer.parseInt(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
+        } catch (NumberFormatException e) {
+            fail();
+        }
     }
 
     public static void testConstants() {
