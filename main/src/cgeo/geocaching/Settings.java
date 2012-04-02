@@ -120,6 +120,9 @@ public final class Settings {
     private static String username = null;
     private static String password = null;
 
+    // Debug settings are accessed often enough to be cached
+    private static Boolean cachedDebug = sharedPrefs.getBoolean(KEY_DEBUG, false);
+
     // maps
     private static MapProvider mapProvider = null;
 
@@ -1018,8 +1021,9 @@ public final class Settings {
         });
     }
 
+
     public static boolean isDebug() {
-        return sharedPrefs.getBoolean(KEY_DEBUG, false);
+        return cachedDebug;
     }
 
     public static void setDebug(final boolean debug) {
@@ -1029,6 +1033,7 @@ public final class Settings {
                 edit.putBoolean(KEY_DEBUG, debug);
             }
         });
+        cachedDebug = debug;
     }
 
     public static boolean getHideLiveMapHint() {
