@@ -1008,40 +1008,11 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>02.04.2012</b>\n\n
+    <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · Live Map re-implementation with selectable strategy:\n
-      Fastest: Load approximated cache coords only\n
-      Fast: Same as fastest but try to identify the cache type\n
-      Detailed: Same as fast but load details for 20 caches around your position\n
-      Speed dependent: Automatic switch from detailed to fast at 30kmh\n
-    · New markers in map and partly in lists:\n
-      Personal Note available(Pen icon)\n
-      Modified coordinates available (Flagpost icon)\n
-      Caches is saved on device (Disk icon)\n
-      Offline log is stored (Red smiley)\n
-      Cache coords are approximated (Encircled in Orange)\n
-    · Calendar operations moved to calendar add-on (Android Market)\n 
-      c:geo doesn\'t require calendar permissions anymore\n
-    · Login status and find count shown on main screen\n
-    · Copy, translate, forward with long press for cache- and log-text\n
-    · Two preferred navigation tools selectable\n
-    · Type of waypoint can be selected on creation\n
-    · Day of week shown for event-caches\n
-    · Static maps can be saved for waypoints\n
-    · Static maps saved while importing GPX-files\n
-    · Quick access to navigation in waypoints\n\n
+    · 
     <b>Bugfixing:</b>\n
-    · Deletion of outdated caches improved\n
-    · Changed internal caching for better performance\n
-    · Caches with modified coords are displayed at the modified coords\n   
-    · Improved consistency for offline logging\n
-    · Removed OSM:Osmarender as it is no longer available\n
-    · Find-count not working in signature\n
-    · Keep screen on while viewing cache-lists\n
-    · TB-icons now shown in correct size\n
-    · Cache count on live map corrected\n
-    · Improved GPX import for non-GC GPX files\n
+    · 
     \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=3&amp;state=closed">Detailed list of all changes</a>\n
     \n
