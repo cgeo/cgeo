@@ -4,7 +4,7 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.LeastRecentlyUsedCache;
+import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.MapUtils;
@@ -29,7 +29,7 @@ public final class GCVote {
     private static final Pattern patternVoteElement = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
 
     private static final int MAX_CACHED_RATINGS = 1000;
-    private static LeastRecentlyUsedCache<String, GCVoteRating> ratingsCache = new LeastRecentlyUsedCache<String, GCVoteRating>(MAX_CACHED_RATINGS);
+    private static LeastRecentlyUsedMap<String, GCVoteRating> ratingsCache = new LeastRecentlyUsedMap<String, GCVoteRating>(MAX_CACHED_RATINGS);
 
     /**
      * Get user rating for a given guid or geocode. For a guid first the ratings cache is checked

@@ -7,12 +7,12 @@ import java.util.LinkedHashMap;
  * 
  * @author blafoo
  */
-public class LeastRecentlyUsedCache<K, V> extends LinkedHashMap<K, V> {
+public class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
 
     private static final long serialVersionUID = -5077882607489806620L;
     private final int maxEntries;
 
-    public LeastRecentlyUsedCache(int maxEntries) {
+    public LeastRecentlyUsedMap(int maxEntries) {
         this.maxEntries = maxEntries;
     }
 
