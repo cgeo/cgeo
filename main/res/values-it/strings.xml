@@ -235,9 +235,10 @@
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Localizzazione in corso</string>
   <string name="loc_no_addr">Indirizzo sconosciuto</string>
+  <string name="loc_gps_disabled">GPS non attivo</string>
 
   <!-- standard menu -->
-  <string name="menu_about">About c:geo</string>
+  <string name="menu_about">Info c:geo</string>
   <string name="menu_helpers">Programmi utili</string>
   <string name="menu_settings">Settaggi</string>
   <string name="menu_history">Cronologia</string>
@@ -422,6 +423,10 @@
   <string name="init_default_navigation_tool_description">Qui puoi scegliere il tuo strumento di navigazione preferito.</string>
   <string name="init_default_navigation_tool_select">Scegli navigatore</string>
   <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo premuto l\'icona di navigazione vicino al titolo della cache.</string>
+
+  <string name="init_debug_title">Informazioni di Debug</string>
+  <string name="init_debug_note">c:geo può generare molte informazioni di debug. Per quanto queste informazioni non sono generalmente utili agli utenti di c:geo, gli sviluppatori potrebbero averne bisogno per analizzare un eventuale problema. In questo case, vi sarà chiesto di settare l\'opzione sottostante ed inviare il log.</string>
+  <string name="init_debug">Genera informazioni di debug</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
@@ -642,7 +647,7 @@
 
   <!-- map -->
   <string name="map_map">Mappa</string>
-  <string name="map_live">Mappa online</string>
+  <string name="map_live">Mappa Live</string>
   <string name="map_view_map">Scegli mappa</string>
   <string name="map_trail_show">Mostra scia</string>
   <string name="map_trail_hide">Nasconde scia</string>
@@ -654,7 +659,16 @@
   <string name="map_static_loading">Caricamento mappe statiche…</string>
   <string name="map_token_err">Dato che c:geo riesce a scaricare solo dati parziali, le coordinate delle cache potrebbero non essere accurate.</string>
   <string name="map_as_list">Mostra come lista</string>
-
+  <string name="map_strategy">Strategia</string>
+  <string name="map_strategy_title">Strategia mappa Live</string>
+  <string name="map_strategy_fastest">La più veloce</string>
+  <string name="map_strategy_fast">Veloce</string>
+  <string name="map_strategy_auto">In base alla tua velocità</string>
+  <string name="map_strategy_detailed">Dettagliata</string>
+  <string name="live_map_notification">Nella nuova Mappa Live le coordinate potrebbero non essere sempre precise. Coordinate possibilmente imprecise sono marcate da un cerchio arancione.\nAprendo i dettagli della cache o salvando la cache per uso offline farà calcolare sempre coordinate precise.\n\nInformazioni addizionali su tutte le modifiche si possono trovare nel menu \"Info c:geo\" sulla pagina principale di questa app.</string>
+  <string name="live_map_note_close">Chiudi</string>
+  <string name="live_map_note_dontshow">Non mostrare ancora</string>
+  
   <!-- search -->
   <string name="search_bar_hint">Cerca caches</string>
   <string name="search_bar_desc">Cache (GC-code, parole chiave), Oggetti trackables (TB-code)</string>
