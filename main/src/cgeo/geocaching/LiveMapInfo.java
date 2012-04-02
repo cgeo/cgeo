@@ -20,7 +20,7 @@ public class LiveMapInfo extends AbstractActivity {
 
         showCount = Settings.getLiveMapHintShowCount();
 
-        if (showCount > 0) {
+        if (showCount > 2) {
             final CheckBox cb = (CheckBox) findViewById(R.id.live_map_hint_hide);
             cb.setVisibility(View.VISIBLE);
         }
