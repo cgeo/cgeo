@@ -535,7 +535,7 @@ public final class Settings {
     }
 
     public static boolean isStoreOfflineWpMaps() {
-        return 0 != sharedPrefs.getInt(KEY_USE_OFFLINEWPMAPS, 1);
+        return 0 != sharedPrefs.getInt(KEY_USE_OFFLINEWPMAPS, 0);
     }
 
     public static void setStoreOfflineWpMaps(final boolean offlineMaps) {
