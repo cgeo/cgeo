@@ -1012,7 +1012,7 @@
     <b>New Features/Functions:</b>\n
     · 
     <b>Bugfixing:</b>\n
-    · 
+    · Fix: Static maps download for waypoints now off by default
     \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
