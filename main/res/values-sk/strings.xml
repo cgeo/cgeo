@@ -235,6 +235,7 @@
   <string name="loc_sat">sat</string>
   <string name="loc_trying">zisťovanie pozície</string>
   <string name="loc_no_addr">neznáma adresa</string>
+  <string name="loc_gps_disabled">GPS zakázaná</string>
 
   <!-- standard menu -->
   <string name="menu_about">O aplikácii</string>
@@ -298,6 +299,7 @@
   <string name="caches_move_selected">Presunúť vybrané</string>
   <string name="caches_move_all">Presunúť všetky</string>
   <string name="caches_map_locus">Locus</string>
+  <string name="caches_map_locus_export">Exportovať do Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Opíšte text z obrázku. Je to dôležité pre stiahnutie súradníc skrýš. Túto vlastnosť je možné vypnúť v Nastaveniach.</string>
   <string name="caches_recaptcha_hint">Text z obrázku</string>
@@ -421,6 +423,9 @@
   <string name="init_default_navigation_tool_description">Môžete si vybrať preferovaný nástroj pre navigáciu.</string>
   <string name="init_default_navigation_tool_select">Vyberte nástroj</string>
   <string name="init_default_navigation_tool_2_description">Môžete vybrať druhý preferovaný nástroj pre navigáciu. Spustíte ho dlhým držaním ikony navigácia vedľa názvu skrýše.</string>
+  <string name="init_debug_title">Ladiace informácie</string>
+  <string name="init_debug_note">c:geo môže vytvárať generovať množstvo ladiacich informácií. Aj keď tieto informácie nie sú pre používateľov zvyčajne použiteľné, vývojári ich môžu potrebovať pre analýzu chyby. V tomto prípade vás požiadajú začiarknuť políčko nižšie a poslať vytvorený log súbor.</string>
+  <string name="init_debug">Generovanie ladiacich informácií</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
@@ -584,8 +589,10 @@
   <string name="gpx_import_store_static_maps">Ukladanie statických máp</string>
   <string name="gpx_import_storing">Zapisovanie skrýš do databázy\nZapísané:</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
-  <string name="gpx_import_title">Import GPX</string>
+  <string name="gpx_import_static_maps_skipped">Preberanie statických máp zrušené</string>
+  <string name="gpx_import_title_static_maps">Uloženie statických máp</string>
   <string name="gpx_import_title_reading_file">Čítanie súboru</string>
+  <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_caches_imported">Výsledok</string>
   <string name="gpx_import_title_caches_import_failed">Import zlyhal</string>
   <string name="gpx_import_error_io">Nedá sa prečítať súbor</string>
@@ -636,6 +643,13 @@
 
   <string name="waypoint_coordinate_formats_plain">Iba text</string>
 
+  <!-- distance units -->
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">st</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+
   <!-- visit -->
   <string name="visit_tweet">informovať o nájdení na Twitteri</string>
 
@@ -659,6 +673,10 @@
   <string name="map_strategy_fast">Rýchla</string>
   <string name="map_strategy_auto">Podľa rýchlosti</string>
   <string name="map_strategy_detailed">Podrobná</string>
+  <string name="live_map_notification">Na novej aktívnej mape nemusia byť súradnice vždy presné. Súradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\nPo otvorení detailu skrýše, alebo po jej uložení pre použitie offline, sú získané vždy presné súradnice.\n\nViac informácií ku všetkým zmenám sa nachádzajú na stránke „O c:geo“ v aplikácii.</string>
+  <string name="live_map_note_close">Zatvoriť</string>
+  <string name="live_map_note_dontshow">Nabudúce nezobrazovať</string>
+
 
   <!-- search -->
   <string name="search_bar_hint">Hľadanie skrýš</string>
