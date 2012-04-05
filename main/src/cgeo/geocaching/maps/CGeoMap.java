@@ -172,6 +172,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private int cachesCnt = 0;
     /** List of caches in the viewport */
     private final BoundedList<cgCache> caches = new BoundedList<cgCache>(MAX_CACHES);
+    /** List of waypoints in the viewport */
+    private final BoundedList<cgWaypoint> waypoints = new BoundedList<cgWaypoint>(MAX_CACHES);
     // storing for offline
     private ProgressDialog waitDialog = null;
     private int detailTotal = 0;
@@ -1146,7 +1148,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 if (search != null) {
                     downloaded = true;
-                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
+                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_ONLY));
+                    waypoints.addAll(app.getWaypointsInViewport(centerLat, centerLon, spanLat, spanLon));
                 }
 
                 if (live) {
@@ -1252,27 +1255,26 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 // display caches
                 final List<cgCache> cachesToDisplay = new ArrayList<cgCache>(caches);
+                final List<cgWaypoint> waypointsToDisplay = new ArrayList<cgWaypoint>(waypoints);
                 final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
 
                 if (!cachesToDisplay.isEmpty()) {
+                    // Only show waypoints for single view or setting
+                    // when less than showWaypointsthreshold Caches shown
+                    if (cachesToDisplay.size() == 1 || (cachesCnt < Settings.getWayPointsThreshold())) {
+                        for (cgWaypoint waypoint : waypointsToDisplay) {
+
+                            if (waypoint.getCoords() == null) {
+                                continue;
+                            }
+
+                            itemsToDisplay.add(getItem(waypoint, null, waypoint));
+                        }
+                    }
                     for (cgCache cache : cachesToDisplay) {
 
                         if (cache.getCoords() == null) {
                             continue;
-                        }
-
-                        // display cache waypoints
-                        if (cache.hasWaypoints()
-                                // Only show waypoints for single view or setting
-                                // when less than showWaypointsthreshold Caches shown
-                                && (cachesToDisplay.size() == 1 || (cachesToDisplay.size() < Settings.getWayPointsThreshold()))) {
-                            for (cgWaypoint waypoint : cache.getWaypoints()) {
-                                if (waypoint.getCoords() == null) {
-                                    continue;
-                                }
-
-                                itemsToDisplay.add(getItem(waypoint, null, waypoint));
-                            }
                         }
                         itemsToDisplay.add(getItem(cache, cache, null));
                     }
