@@ -646,7 +646,7 @@
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
-  <string name="unit_ft">st</string>
+  <string name="unit_ft">ft</string>
   <string name="unit_yd">yd</string>
   <string name="unit_mi">mi</string>
 
