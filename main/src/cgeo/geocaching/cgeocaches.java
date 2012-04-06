@@ -11,6 +11,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.export.ExportFactory;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.AttributeFilter;
 import cgeo.geocaching.filter.IFilter;
@@ -54,7 +55,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.ContextMenu;
@@ -71,18 +71,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -110,7 +103,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_SORT_VOTE = 19;
     private static final int MENU_SORT_INVENTORY = 20;
     private static final int MENU_IMPORT_WEB = 21;
-    private static final int MENU_EXPORT_NOTES = 22;
+    private static final int MENU_EXPORT = 22;
     private static final int MENU_REMOVE_FROM_HISTORY = 23;
     private static final int MENU_DROP_CACHE = 24;
     private static final int MENU_MOVE_TO_LIST = 25;
@@ -166,7 +159,6 @@ public class cgeocaches extends AbstractListActivity {
     private LoadDetailsThread threadDetails = null;
     private LoadFromWebThread threadWeb = null;
     private DropDetailsThread threadR = null;
-    private ExportFieldNotesThread threadF = null;
     private RemoveFromHistoryThread threadH = null;
     private int listId = StoredList.TEMPORARY_LIST_ID;
     private List<StoredList> lists = null;
@@ -464,39 +456,6 @@ public class cgeocaches extends AbstractListActivity {
 
                 // reload history list
                 (new LoadByHistoryThread(loadCachesHandler)).start();
-
-                progress.dismiss();
-            }
-        }
-    };
-    private Handler exportFieldNotesHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg)
-        {
-            setAdapter();
-
-            if (msg.what > -1)
-            {
-                cacheList.get(msg.what).setStatusChecked(false);
-                progress.setProgress(detailProgress);
-            }
-            else if (-2 == msg.what)
-            {
-                showToast(res.getString(R.string.info_fieldnotes_exported_to) + ": " + msg.obj.toString());
-            }
-            else if (-3 == msg.what)
-            {
-                showToast(res.getString(R.string.err_fieldnotes_export_failed));
-            } else if (msg.what == MSG_CANCEL) {
-                if (threadF != null) {
-                    threadF.kill();
-                }
-            } else {
-                if (adapter != null)
-                {
-                    adapter.setSelectMode(false, true);
-                }
 
                 progress.dismiss();
             }
@@ -808,7 +767,7 @@ public class cgeocaches extends AbstractListActivity {
             subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
             subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
             subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
-            subMenu.add(0, MENU_EXPORT_NOTES, 0, res.getString(R.string.cache_export_fieldnote)); // export field notes
+            subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
             if (Settings.getWebDeviceCode() == null)
             {
                 menu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title)).setIcon(android.R.drawable.ic_menu_upload); // import gpx file
@@ -822,7 +781,7 @@ public class cgeocaches extends AbstractListActivity {
             {
                 SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_HISTORY, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
                 subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
-                subMenu.add(0, MENU_EXPORT_NOTES, 0, res.getString(R.string.cache_export_fieldnote)); // export field notes
+                subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
             }
             menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as); // download details for all caches
         }
@@ -934,23 +893,12 @@ public class cgeocaches extends AbstractListActivity {
                 }
             }
 
-            item = menu.findItem(MENU_EXPORT_NOTES);
-            if (null != item) {
-                // Hide Field Notes export if there are no caches with logs
-                item.setVisible(false);
-                for (cgCache cache : cacheList) {
-                    if (cache.isLogOffline()) {
-                        item.setVisible(true);
-                        if (hasSelection) {
-                            item.setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked() + ")");
-                        } else {
-                            item.setTitle(res.getString(R.string.cache_export_fieldnote));
-                        }
-                        break;
-                    }
-                }
+            item = menu.findItem(MENU_EXPORT);
+            if (hasSelection) {
+                item.setTitle(res.getString(R.string.export) + " (" + adapter.getChecked() + ")");
+            } else {
+                item.setTitle(res.getString(R.string.export));
             }
-
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeocaches.onPrepareOptionsMenu: " + e.toString());
         }
@@ -1070,8 +1018,8 @@ public class cgeocaches extends AbstractListActivity {
             case MENU_IMPORT_WEB:
                 importWeb();
                 return false;
-            case MENU_EXPORT_NOTES:
-                exportFieldNotes();
+            case MENU_EXPORT:
+                exportCaches();
                 return false;
             case MENU_REMOVE_FROM_HISTORY:
                 removeFromHistoryCheck();
@@ -1508,27 +1456,23 @@ public class cgeocaches extends AbstractListActivity {
         threadH.start();
     }
 
-    public void exportFieldNotes()
-    {
-        if (adapter != null && adapter.getChecked() > 0)
-        {
-            // there are some checked caches
-            detailTotal = adapter.getChecked();
+    public void exportCaches() {
+
+        List<cgCache> caches;
+        if (adapter != null && adapter.getChecked() > 0) {
+            // there are some caches checked
+            caches = new LinkedList<cgCache>();
+            for (cgCache cache : cacheList) {
+                if (cache.isStatusChecked()) {
+                    caches.add(cache);
+                }
+            }
+        } else {
+            // no caches checked, export all
+            caches = cacheList;
         }
-        else
-        {
-            // no checked caches, export all
-            detailTotal = cacheList.size();
-        }
-        detailProgress = 0;
 
-        showProgress(false);
-
-        progress.show(this, null, res.getString(R.string.caches_exporting_fieldnote), ProgressDialog.STYLE_HORIZONTAL, exportFieldNotesHandler.obtainMessage(MSG_CANCEL));
-        progress.setMaxProgressAndReset(detailTotal);
-
-        threadF = new ExportFieldNotesThread(exportFieldNotesHandler);
-        threadF.start();
+        ExportFactory.showExportMenu(caches, this);
     }
 
     public void importWeb() {
@@ -2048,127 +1992,6 @@ public class cgeocaches extends AbstractListActivity {
                     yield();
                 } catch (Exception e) {
                     Log.e(Settings.tag, "cgeocaches.RemoveFromHistoryThread: " + e.toString());
-                }
-            }
-
-            handler.sendEmptyMessage(MSG_DONE);
-        }
-    }
-
-    private class ExportFieldNotesThread extends Thread
-    {
-        private final Handler handler;
-        private volatile boolean needToStop = false;
-        private int checked = 0;
-
-        public ExportFieldNotesThread(Handler handlerIn)
-        {
-            setPriority(Thread.MIN_PRIORITY);
-
-            handler = handlerIn;
-
-            if (adapter != null)
-            {
-                checked = adapter.getChecked();
-            }
-        }
-
-        public void kill()
-        {
-            needToStop = true;
-        }
-
-        @Override
-        public void run()
-        {
-            SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            StringBuilder fieldNoteBuffer = new StringBuilder(500);
-
-            // We need our own HashMap because LogType will give us localized and maybe
-            // different strings than gc.com expects in the field note
-            // We only need such logtypes that are possible to log via c:geo
-            Map<LogType, String> logTypes = new HashMap<LogType, String>();
-            logTypes.put(LogType.LOG_FOUND_IT, "Found it");
-            logTypes.put(LogType.LOG_DIDNT_FIND_IT, "Didn't find it");
-            logTypes.put(LogType.LOG_NOTE, "Write Note");
-            logTypes.put(LogType.LOG_NEEDS_ARCHIVE, "Needs archived");
-            logTypes.put(LogType.LOG_NEEDS_MAINTENANCE, "Needs Maintenance");
-            logTypes.put(LogType.LOG_WILL_ATTEND, "Will Attend");
-            logTypes.put(LogType.LOG_ATTENDED, "Attended");
-            logTypes.put(LogType.LOG_WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
-
-            for (cgCache cache : cacheList) {
-                if (checked > 0 && !cache.isStatusChecked()) {
-                    handler.sendEmptyMessage(0);
-
-                    yield();
-                    continue;
-                }
-
-                try {
-                    if (needToStop)
-                    {
-                        Log.i(Settings.tag, "Stopped exporting process.");
-                        break;
-                    }
-
-                    if (cache.isLogOffline())
-                    {
-                        cgLog log = app.loadLogOffline(cache.getGeocode());
-
-                        if (null != logTypes.get(log.type))
-                        {
-                            fieldNoteBuffer.append(cache.getGeocode())
-                                    .append(',')
-                                    .append(fieldNoteDateFormat.format(new Date(log.date)))
-                                    .append(',')
-                                    .append(logTypes.get(log.type))
-                                    .append(",\"")
-                                    .append(StringUtils.replaceChars(log.log, '"', '\''))
-                                    .append("\"\n");
-                        }
-                    }
-
-                    detailProgress++;
-
-                    handler.sendEmptyMessage(cacheList.indexOf(cache));
-
-                    yield();
-                } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.ExportFieldNotesThread: " + e.toString());
-                }
-            }
-
-            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-            {
-                File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
-                exportLocation.mkdirs();
-
-                SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                File exportFile = new File(exportLocation + "/" + fileNameDateFormat.format(new Date()) + ".txt");
-
-                OutputStream os = null;
-                Writer fw = null;
-                try
-                {
-                    os = new FileOutputStream(exportFile);
-                    fw = new OutputStreamWriter(os, "ISO-8859-1"); // TODO: gc.com doesn't support UTF-8
-                    fw.write(fieldNoteBuffer.toString());
-
-                    Message.obtain(handler, -2, exportFile).sendToTarget();
-                } catch (IOException e) {
-                    Log.e(Settings.tag, "cgeocaches.ExportFieldNotesThread: " + e.toString());
-                    handler.sendEmptyMessage(-3);
-                } finally
-                {
-                    if (fw != null)
-                    {
-                        try {
-                            fw.close();
-                        } catch (IOException e) {
-                            Log.e(Settings.tag, "cgeocaches.ExportFieldNotesThread: " + e.toString());
-                        }
-                    }
                 }
             }
 
