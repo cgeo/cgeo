@@ -670,16 +670,21 @@ public class cgeoinit extends AbstractActivity {
         refreshBackupLabel();
 
         // Debug settings
-        final CheckBox debugButton = (CheckBox) findViewById(R.id.debug);
-        debugButton.setChecked(Settings.isDebug());
-        debugButton.setOnClickListener(new View.OnClickListener() {
+        if (BuildConfig.DEBUG) {
+            final CheckBox debugButton = (CheckBox) findViewById(R.id.debug);
+            debugButton.setChecked(Settings.isDebug());
+            debugButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Settings.setDebug(!Settings.isDebug());
-                debugButton.setChecked(Settings.isDebug());
-            }
-        });
+                @Override
+                public void onClick(View v) {
+                    Settings.setDebug(!Settings.isDebug());
+                    debugButton.setChecked(Settings.isDebug());
+                }
+            });
+        } else {
+            final ViewGroup debugSection = (ViewGroup) findViewById(R.id.debug_section);
+            debugSection.removeAllViews();
+        }
     }
 
     private void initMapfileEdittext(boolean setFocus) {
