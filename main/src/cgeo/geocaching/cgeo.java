@@ -184,7 +184,7 @@ public class cgeo extends AbstractActivity {
                     showToast(res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "cgeo.fisrtLoginHander: " + e.toString());
+                Log.w(Settings.tag, "cgeo.firstLoginHander: " + e.toString());
             }
         }
     };
