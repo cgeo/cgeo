@@ -25,4 +25,20 @@ public class CacheTest extends AndroidTestCase {
         assertFalse(cacheYesterday.canBeAddedToCalendar());
     }
 
+    public static void testEquality() {
+        final cgCache one = new cgCache();
+        final cgCache two = new cgCache();
+
+        // identity
+        assertTrue(one.equals(one));
+
+        // different objects without geocode shall not be equal
+        assertFalse(one.equals(two));
+
+        one.setGeocode("geocode");
+        two.setGeocode("geocode");
+
+        // different objects with same geocode shall be equal
+        assertTrue(one.equals(two));
+    }
 }

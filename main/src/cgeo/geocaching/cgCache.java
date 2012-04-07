@@ -1414,8 +1414,8 @@ public class cgCache implements ICache, IWaypoint {
         if (!(obj instanceof cgCache)) {
             return false;
         }
-        // just compare the geocode even if that is not what "equals" normaly does
-        return geocode != null ? geocode.compareTo(((cgCache) obj).geocode) == 0 : false;
+        // just compare the geocode even if that is not what "equals" normally does
+        return StringUtils.isNotBlank(geocode) ? geocode.equals(((cgCache) obj).geocode) : false;
     }
 
     public void store(Activity activity, CancellableHandler handler) {

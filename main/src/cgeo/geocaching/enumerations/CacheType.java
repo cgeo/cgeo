@@ -63,7 +63,7 @@ public enum CacheType {
     }
 
     public final static CacheType getById(final String id) {
-        final CacheType result = id != null ? CacheType.FIND_BY_ID.get(id.toLowerCase().trim()) : null;
+        final CacheType result = (id != null) ? CacheType.FIND_BY_ID.get(id.toLowerCase().trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -71,7 +71,7 @@ public enum CacheType {
     }
 
     public final static CacheType getByPattern(final String pattern) {
-        final CacheType result = pattern != null ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim()) : null;
+        final CacheType result = (pattern != null) ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }

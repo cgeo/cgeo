@@ -25,7 +25,7 @@ public class TypeFilter extends AbstractFilter {
 
     public static IFilter[] getAllFilters() {
         final CacheType[] types = CacheType.values();
-        ArrayList<IFilter> filters = new ArrayList<IFilter>(types.length);
+        final ArrayList<IFilter> filters = new ArrayList<IFilter>(types.length);
         for (CacheType cacheType : types) {
             if (cacheType != CacheType.ALL) {
                 filters.add(new TypeFilter(cacheType));

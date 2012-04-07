@@ -25,7 +25,7 @@ public class SizeFilter extends AbstractFilter {
 
     public static AbstractFilter[] getAllFilters() {
         final CacheSize[] cacheSizes = CacheSize.values();
-        ArrayList<SizeFilter> filters = new ArrayList<SizeFilter>();
+        final ArrayList<SizeFilter> filters = new ArrayList<SizeFilter>();
         for (CacheSize cacheSize : cacheSizes) {
             if (cacheSize != CacheSize.UNKNOWN) {
                 filters.add(new SizeFilter(cacheSize));
