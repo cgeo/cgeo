@@ -760,6 +760,18 @@
   <string name="addon_missing_title">Add-On mancante</string>
   <string name="addon_download_prompt">Scaricalo ora da Google Play.</string>
 
+ <!-- export -->
+  <string name="export">Esporta</string>
+  <string name="export_as">Esporta come…</string>
+  <string name="export_exportedto">esportato in</string>
+  <string name="export_failed">Esportazione fallita</string>
+  <string name="export_fieldnotes">Field Notes</string>
+  <string name="export_fieldnotes_info">Field Notes saranno esportate in /sdcard/field-notes con data e ora corrente nel nome file.</string>
+  <string name="export_fieldnotes_upload">Carica su geocaching.com</string>
+  <string name="export_fieldnotes_uploading">Caricamento…</string>
+  <string name="export_fieldnotes_onlynew">Solo quelli nuovi rispetto all\'ultima esportazione</string>
+  <string name="export_gpx">GPX</string>
+
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Cani permessi</string>
   <string name="attribute_dogs_no">Cani NON permessi</string>
