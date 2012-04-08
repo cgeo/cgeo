@@ -298,18 +298,10 @@ public class cgCache implements ICache {
      * @param other
      * @return true if both caches have the same content
      */
-    public boolean isEqualTo(cgCache other) {
-        if (other == null) {
-            return false;
-        }
-
-        if (
-        // updated
-        // detailedUpdate
-        // visitedDate
-        detailed == other.detailed &&
-                geocode.equalsIgnoreCase(other.geocode) &&
-                name.equalsIgnoreCase(other.name) &&
+    private boolean isEqualTo(final cgCache other) {
+        return detailed == other.detailed &&
+                StringUtils.equalsIgnoreCase(geocode, other.geocode) &&
+                StringUtils.equalsIgnoreCase(name, other.name) &&
                 cacheType == other.cacheType &&
                 size == other.size &&
                 found == other.found &&
@@ -317,25 +309,25 @@ public class cgCache implements ICache {
                 premiumMembersOnly == other.premiumMembersOnly &&
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
-                (coords != null ? coords.isEqualTo(other.coords) : coords == other.coords) &&
+                (coords != null ? coords.isEqualTo(other.coords) : null == other.coords) &&
                 reliableLatLon == other.reliableLatLon &&
                 disabled == other.disabled &&
                 archived == other.archived &&
                 listId == other.listId &&
-                owner.equalsIgnoreCase(other.owner) &&
-                ownerReal.equalsIgnoreCase(other.ownerReal) &&
-                (description != null ? description.equalsIgnoreCase(other.description) : null == other.description) &&
-                (personalNote != null ? personalNote.equalsIgnoreCase(other.personalNote) : null == other.personalNote) &&
-                shortdesc.equalsIgnoreCase(other.shortdesc) &&
-                latlon.equalsIgnoreCase(other.latlon) &&
-                location.equalsIgnoreCase(other.location) &&
+                StringUtils.equalsIgnoreCase(owner, other.owner) &&
+                StringUtils.equalsIgnoreCase(ownerReal, other.ownerReal) &&
+                StringUtils.equalsIgnoreCase(description, other.description) &&
+                StringUtils.equalsIgnoreCase(personalNote, other.personalNote) &&
+                StringUtils.equalsIgnoreCase(shortdesc, other.shortdesc) &&
+                StringUtils.equalsIgnoreCase(latlon, other.latlon) &&
+                StringUtils.equalsIgnoreCase(location, other.location) &&
                 favorite == other.favorite &&
                 favoritePoints == other.favoritePoints &&
                 onWatchlist == other.onWatchlist &&
-                (hidden != null ? hidden.compareTo(other.hidden) == 0 : hidden == other.hidden) &&
-                guid.equalsIgnoreCase(other.guid) &&
-                hint.equalsIgnoreCase(other.hint) &&
-                cacheId.equalsIgnoreCase(other.cacheId) &&
+                (hidden != null ? hidden.equals(other.hidden) : null == other.hidden) &&
+                StringUtils.equalsIgnoreCase(guid, other.guid) &&
+                StringUtils.equalsIgnoreCase(hint, other.hint) &&
+                StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
                 (direction != null ? direction.equals(other.direction) : null == other.direction) &&
                 (distance != null ? distance.equals(other.distance) : null == other.distance) &&
                 (elevation != null ? elevation.equals(other.elevation) : null == other.elevation) &&
@@ -351,10 +343,7 @@ public class cgCache implements ICache {
                 inventory == other.inventory &&
                 logCounts == other.logCounts &&
                 logOffline == other.logOffline &&
-                finalDefined == other.finalDefined) {
-            return true;
-        }
-        return false;
+                finalDefined == other.finalDefined;
     }
 
     public boolean hasTrackables() {
