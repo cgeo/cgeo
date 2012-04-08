@@ -17,7 +17,7 @@ import cgeo.geocaching.network.Login;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
-import cgeo.geocaching.utils.LeastRecentlyUsedCache;
+import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -180,7 +180,7 @@ public class GCBase {
 
         try {
 
-            final LeastRecentlyUsedCache<String, String> nameCache = new LeastRecentlyUsedCache<String, String>(2000); // JSON id, cache name
+            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<String, String>(2000); // JSON id, cache name
 
             if (StringUtils.isEmpty(data)) {
                 throw new JSONException("No page given");

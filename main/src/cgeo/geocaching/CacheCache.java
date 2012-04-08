@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.cgData.StorageLocation;
-import cgeo.geocaching.utils.LeastRecentlyUsedCache;
+import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,12 +14,12 @@ import org.apache.commons.lang3.StringUtils;
 public class CacheCache {
 
     private static final int MAX_CACHED_CACHES = 1000;
-    final private LeastRecentlyUsedCache<String, cgCache> cachesCache;
+    final private LeastRecentlyUsedMap<String, cgCache> cachesCache;
 
     private static CacheCache instance = null;
 
     private CacheCache() {
-        cachesCache = new LeastRecentlyUsedCache<String, cgCache>(MAX_CACHED_CACHES);
+        cachesCache = new LeastRecentlyUsedMap.LruCache<String, cgCache>(MAX_CACHED_CACHES);
     }
 
     public static CacheCache getInstance() {
