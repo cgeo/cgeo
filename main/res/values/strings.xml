@@ -1022,10 +1022,13 @@
   <string name="changelog">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · 
-    <b>Bugfixing:</b>\n
-    · Fix: Static maps download for waypoints now off by default
+    · Export caches as GPX file\n
+    · Field notes can now be uploaded to the website\n
     \n
+    <b>Bugfixing:</b>\n
+    · Static maps download for waypoints now off by default\n
+    · Waypoints on map do no longer disappear when moving map\n
+     \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
     <b>Known Limitations/Bugs:</b>\n
@@ -1034,8 +1037,6 @@
       Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
       In fast mode the cache type might be wrong in rare cases\n
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
-      Waypoints on map might disappear when moving the map\n
-      (Workaround: Increase waypoint limit in settings)\n
     · Other:\n
       Log images with huge size will cause a long loading time\n
       OSM:Offline does only support map-files with version 0.2.4\n\n\n
