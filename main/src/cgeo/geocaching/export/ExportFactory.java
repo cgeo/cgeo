@@ -13,7 +13,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * Factory to create a dialog with all available exporters.
+ */
 public class ExportFactory {
+    /**
+     * Contains instances of all available exporters.
+     */
     public enum Exporters {
         FIELDNOTES(new FieldnoteExport()),
         GPX(new GpxExport());
@@ -25,6 +31,14 @@ public class ExportFactory {
         public final Export exporter;
     }
 
+    /**
+     * Creates a dialog so that the user can select an exporter.
+     *
+     * @param caches
+     *            The {@link List} of {@link cgCache} to be exported
+     * @param activity
+     *            The {@link Activity} in whose context the dialog should be shown
+     */
     public static void showExportMenu(final List<cgCache> caches, final Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.export).setIcon(android.R.drawable.ic_menu_share);

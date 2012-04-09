@@ -33,6 +33,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Exports offline-logs in the Groundspeak Field Note format.<br>
+ * <br>
+ *
+ * Field Notes are simple plain text files, but poorly documented. Syntax:<br>
+ * <code>GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"</code>
+ */
 public class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
     private static final SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -41,6 +48,11 @@ public class FieldnoteExport extends AbstractExport {
         super(getString(R.string.export_fieldnotes));
     }
 
+    /**
+     * A dialog to allow the user to set options for the export.
+     *
+     * Currently available options are: upload field notes, only new logs since last export/upload
+     */
     private class ExportOptionsDialog extends AlertDialog {
         public ExportOptionsDialog(final List<cgCache> caches, final Activity activity) {
             super(activity);
@@ -65,7 +77,14 @@ public class FieldnoteExport extends AbstractExport {
 
     @Override
     public void export(final List<cgCache> caches, final Activity activity) {
-        new ExportOptionsDialog(caches, activity).show();
+        if (null == activity) {
+            // No activity given, so no user interaction possible.
+            // Start export with default parameters.
+            new ExportTask(caches, null, false, false).execute((Void) null);
+        } else {
+            // Show configuration dialog
+            new ExportOptionsDialog(caches, activity).show();
+        }
     }
 
     private class ExportTask extends AsyncTask<Void, Integer, Boolean> {
@@ -78,6 +97,18 @@ public class FieldnoteExport extends AbstractExport {
 
         private static final int STATUS_UPLOAD = -1;
 
+        /**
+         * Instantiates and configurates the task for exporting field notes.
+         *
+         * @param caches
+         *            The {@link List} of {@link cgCache} to be exported
+         * @param activity
+         *            optional: Show a progress bar and toasts
+         * @param upload
+         *            Upload the Field Note to geocaching.com
+         * @param onlyNew
+         *            Upload/export only new logs since last export
+         */
         public ExportTask(final List<cgCache> caches, final Activity activity, final boolean upload, final boolean onlyNew) {
             this.caches = caches;
             this.activity = activity;
@@ -87,8 +118,10 @@ public class FieldnoteExport extends AbstractExport {
 
         @Override
         protected void onPreExecute() {
-            progress.show(activity, null, getString(R.string.export) + ": " + getName(), ProgressDialog.STYLE_HORIZONTAL, null);
-            progress.setMaxProgressAndReset(caches.size());
+            if (null != activity) {
+                progress.show(activity, null, getString(R.string.export) + ": " + getName(), ProgressDialog.STYLE_HORIZONTAL, null);
+                progress.setMaxProgressAndReset(caches.size());
+            }
         }
 
         @Override
@@ -199,24 +232,28 @@ public class FieldnoteExport extends AbstractExport {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            progress.dismiss();
+            if (null != activity) {
+                progress.dismiss();
 
-            if (result) {
-                if (onlyNew) {
-                    // update last export time in settings
+                if (result) {
+                    if (onlyNew) {
+                        // update last export time in settings
+                    }
+                    ActivityMixin.showToast(activity, getName() + " " + getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                } else {
+                    ActivityMixin.showToast(activity, getString(R.string.export_failed));
                 }
-                ActivityMixin.showToast(activity, getName() + " " + getString(R.string.export_exportedto) + ": " + exportFile.toString());
-            } else {
-                ActivityMixin.showToast(activity, getString(R.string.export_failed));
             }
         }
 
         @Override
         protected void onProgressUpdate(Integer... status) {
-            if (STATUS_UPLOAD == status[0]) {
-                progress.setMessage(getString(R.string.export_fieldnotes_uploading));
-            } else {
-                progress.setProgress(status[0]);
+            if (null != activity) {
+                if (STATUS_UPLOAD == status[0]) {
+                    progress.setMessage(getString(R.string.export_fieldnotes_uploading));
+                } else {
+                    progress.setProgress(status[0]);
+                }
             }
         }
     }

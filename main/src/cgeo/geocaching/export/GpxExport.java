@@ -45,6 +45,14 @@ public class GpxExport extends AbstractExport {
         private final Progress progress = new Progress();
         private File exportFile;
 
+        /**
+         * Instantiates and configurates the task for exporting field notes.
+         * 
+         * @param caches
+         *            The {@link List} of {@link cgCache} to be exported
+         * @param activity
+         *            optional: Show a progress bar and toasts
+         */
         public ExportTask(final List<cgCache> caches, final Activity activity) {
             this.caches = caches;
             this.activity = activity;
@@ -52,8 +60,10 @@ public class GpxExport extends AbstractExport {
 
         @Override
         protected void onPreExecute() {
-            progress.show(activity, null, getString(R.string.export) + ": " + getName(), ProgressDialog.STYLE_HORIZONTAL, null);
-            progress.setMaxProgressAndReset(caches.size());
+            if (null != activity) {
+                progress.show(activity, null, getString(R.string.export) + ": " + getName(), ProgressDialog.STYLE_HORIZONTAL, null);
+                progress.setMaxProgressAndReset(caches.size());
+            }
         }
 
         @Override
@@ -200,17 +210,21 @@ public class GpxExport extends AbstractExport {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            progress.dismiss();
-            if (result) {
-                ActivityMixin.showToast(activity, getName() + " " + getString(R.string.export_exportedto) + ": " + exportFile.toString());
-            } else {
-                ActivityMixin.showToast(activity, getString(R.string.export_failed));
+            if (null != activity) {
+                progress.dismiss();
+                if (result) {
+                    ActivityMixin.showToast(activity, getName() + " " + getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                } else {
+                    ActivityMixin.showToast(activity, getString(R.string.export_failed));
+                }
             }
         }
 
         @Override
         protected void onProgressUpdate(Integer... status) {
-            progress.setProgress(status[0]);
+            if (null != activity) {
+                progress.setProgress(status[0]);
+            }
         }
     }
 }

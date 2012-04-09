@@ -13,6 +13,13 @@ public abstract class AbstractExport implements Export {
         return name;
     }
 
+    /**
+     * Generates a localized string from a ressource id.
+     *
+     * @param ressourceId
+     *            the ressource id of the string
+     * @return localized string
+     */
     protected static String getString(int ressourceId) {
         return cgeoapplication.getInstance().getString(ressourceId);
     }
