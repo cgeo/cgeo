@@ -1801,14 +1801,8 @@ public class cgData {
             throw new IllegalArgumentException("geocode must not be empty");
         }
 
-        Set<String> geocodes = new HashSet<String>();
-        geocodes.add(geocode);
-
-        Set<cgCache> caches = loadCaches(geocodes, loadFlags);
-        if (caches != null && caches.size() >= 1) {
-            return (cgCache) caches.toArray()[0];
-        }
-        return null;
+        final Set<cgCache> caches = loadCaches(Collections.singleton(geocode), loadFlags);
+        return caches.isEmpty() ? null : caches.iterator().next();
     }
 
     /**
