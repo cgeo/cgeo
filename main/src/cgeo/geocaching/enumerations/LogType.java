@@ -42,8 +42,8 @@ public enum LogType {
     LOG_UNKNOWN(0, "unknown", "", R.string.err_unknown); // LogType not init. yet
 
     public final int id;
-    private final String iconName;
-    private final String type;
+    public final String iconName;
+    public final String type;
     private final int stringId;
     private String l10n; // not final because the locale can be changed
 

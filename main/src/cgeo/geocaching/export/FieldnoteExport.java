@@ -170,7 +170,7 @@ public class FieldnoteExport extends AbstractExport {
                 exportLocation.mkdirs();
 
                 SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                exportFile = new File(exportLocation + "/" + fileNameDateFormat.format(new Date()) + ".txt");
+                exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
 
                 OutputStream os = null;
                 Writer fw = null;
@@ -239,7 +239,7 @@ public class FieldnoteExport extends AbstractExport {
                     if (onlyNew) {
                         // update last export time in settings
                     }
-                    ActivityMixin.showToast(activity, getName() + " " + getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
                 } else {
                     ActivityMixin.showToast(activity, getString(R.string.export_failed));
                 }
