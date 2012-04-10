@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Parcel;
@@ -201,14 +200,4 @@ public class SearchResult implements Parcelable {
         return cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
     }
 
-    /** Add the cache geocodes to the search and store them in the CacheCache */
-    public void addCaches(final Set<cgCache> caches) {
-        if (CollectionUtils.isEmpty(caches)) {
-            return;
-        }
-
-        for (final cgCache cache : caches) {
-            addCache(cache);
-        }
-    }
 }

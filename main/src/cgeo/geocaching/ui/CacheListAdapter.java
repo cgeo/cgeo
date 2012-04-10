@@ -195,17 +195,6 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         notifyDataSetChanged();
     }
 
-    public void clearFilter() {
-        if (originalList != null) {
-            list.clear();
-            list.addAll(originalList);
-
-            currentFilter = null;
-        }
-
-        notifyDataSetChanged();
-    }
-
     public boolean isFilter() {
         return currentFilter != null;
     }

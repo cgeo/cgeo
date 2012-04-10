@@ -389,10 +389,4 @@ public abstract class Login {
         putViewstates(params, getViewstates(page));
     }
 
-    static public String[] requestViewstates(final String uri, final Parameters params, boolean xContentType, boolean my) {
-        final HttpResponse response = Network.request(uri, params, xContentType, my, false);
-
-        return getViewstates(Network.getResponseData(response));
-    }
-
 }

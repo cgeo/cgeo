@@ -2,7 +2,6 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.R;
 
-import android.content.Context;
 import android.content.res.Resources;
 
 public enum StatusCode {
@@ -43,10 +42,6 @@ public enum StatusCode {
 
     public String getErrorString(final Resources res) {
         return res.getString(error_string);
-    }
-
-    public String getErrorString(final Context context) {
-        return getErrorString(context.getResources());
     }
 
 }

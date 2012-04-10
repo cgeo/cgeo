@@ -1401,10 +1401,6 @@ public class cgCache implements ICache, IWaypoint {
         cgBase.storeCache(activity, this, null, listId, false, handler);
     }
 
-    public int getZoomlevel() {
-        return this.zoomlevel;
-    }
-
     public void setZoomlevel(int zoomlevel) {
         this.zoomlevel = zoomlevel;
     }
