@@ -57,8 +57,7 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(expected.isPremiumMembersOnly(), actual.isPremiumMembersOnly());
 
         if (all) {
-            assertEquals(expected.getLatitude(), actual.getLatitude());
-            assertEquals(expected.getLongitude(), actual.getLongitude());
+            assertEquals(expected.getCoords(), actual.getCoords());
             assertTrue(actual.isReliableLatLon());
             assertEquals(expected.isOwn(), actual.isOwn());
             assertEquals(expected.getOwnerReal(), actual.getOwnerReal());

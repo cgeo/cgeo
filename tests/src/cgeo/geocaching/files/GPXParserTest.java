@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
@@ -117,8 +116,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(2.0f, cache.getDifficulty(), 0.01f);
         assertEquals(1.0f, cache.getTerrain(), 0.01f);
         final Geopoint refCoordinates = new Geopoint("N 49° 19.122", "E 008° 32.739");
-        assertEquals(refCoordinates.format(GeopointFormatter.Format.LAT_DECMINUTE), cache.getLatitude());
-        assertEquals(refCoordinates.format(GeopointFormatter.Format.LON_DECMINUTE), cache.getLongitude());
+        assertEquals(refCoordinates, cache.getCoords());
         assertEquals("vptsz", cache.getOwner());
         assertEquals(CacheSize.SMALL, cache.getSize());
         assertEquals(CacheType.MULTI, cache.getType());

@@ -1,5 +1,6 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
@@ -18,8 +19,7 @@ import java.math.RoundingMode;
 /**
  * Abstraction of geographic point.
  */
-public final class Geopoint
-{
+public final class Geopoint implements ICoordinates {
     public static final double deg2rad = Math.PI / 180;
     public static final double rad2deg = 180 / Math.PI;
     public static final float erad = 6371.0f;
@@ -242,7 +242,7 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     * 
+     *
      * @return formatted coordinates
      */
     @Override
@@ -510,6 +510,11 @@ public final class Geopoint
         }
 
         return null;
+    }
+
+    @Override
+    public Geopoint getCoords() {
+        return this;
     }
 
 }

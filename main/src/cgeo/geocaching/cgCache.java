@@ -13,7 +13,6 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
@@ -520,16 +519,6 @@ public class cgCache implements ICache, IWaypoint {
     @Override
     public String getGeocode() {
         return geocode;
-    }
-
-    @Override
-    public String getLatitude() {
-        return coords != null ? coords.format(GeopointFormatter.Format.LAT_DECMINUTE) : null;
-    }
-
-    @Override
-    public String getLongitude() {
-        return coords != null ? coords.format(GeopointFormatter.Format.LON_DECMINUTE) : null;
     }
 
     @Override
