@@ -75,7 +75,7 @@ public enum CacheAttribute {
     TOURIST_OK(63, "touristok"),
     TREECLIMBING(64, "treeclimbing"),
     FRONTYARD(65, "frontyard"),
-    TEAMWORK(66, "teamwork_yes");
+    TEAMWORK(66, "teamwork");
 
     public static final String INTERNAL_PRE = "attribute_";
     public static final String INTERNAL_YES = "_yes";

@@ -1157,7 +1157,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         /**
-         * lazy-creates the layout holding the icons of the chaches attributes
+         * lazy-creates the layout holding the icons of the caches attributes
          * and makes it visible
          */
         private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
@@ -1175,7 +1175,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         /**
-         * lazy-creates the layout holding the discriptions of the chaches attributes
+         * lazy-creates the layout holding the descriptions of the caches attributes
          * and makes it visible
          */
         private void showAttributeDescriptions(LinearLayout attribBox) {

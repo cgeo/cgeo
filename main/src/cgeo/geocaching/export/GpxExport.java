@@ -49,7 +49,7 @@ public class GpxExport extends AbstractExport {
         private File exportFile;
 
         /**
-         * Instantiates and configurates the task for exporting field notes.
+         * Instantiates and configures the task for exporting field notes.
          *
          * @param caches
          *            The {@link List} of {@link cgCache} to be exported
@@ -71,6 +71,12 @@ public class GpxExport extends AbstractExport {
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            // quick check for being able to write the GPX file
+            if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                return false;
+            }
+
+            // FIXME: complete export is created in memory. That should be some file stream instead.
             final StringBuilder gpx = new StringBuilder();
 
             gpx.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -145,9 +151,9 @@ public class GpxExport extends AbstractExport {
                             gpx.append(attr.id);
                             gpx.append("\" inc=\"");
                             if (enabled) {
-                                gpx.append("1");
+                                gpx.append('1');
                             } else {
-                                gpx.append("0");
+                                gpx.append('0');
                             }
                             gpx.append("\">");
                             gpx.append(StringEscapeUtils.escapeXml(attr.getL10n(enabled)));
@@ -246,7 +252,7 @@ public class GpxExport extends AbstractExport {
                 exportLocation.mkdirs();
 
                 SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                exportFile = new File(exportLocation + "/" + fileNameDateFormat.format(new Date()) + ".gpx");
+                exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".gpx");
 
                 OutputStream os = null;
                 Writer fw = null;
@@ -279,7 +285,7 @@ public class GpxExport extends AbstractExport {
             if (null != activity) {
                 progress.dismiss();
                 if (result) {
-                    ActivityMixin.showToast(activity, getName() + " " + getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
                 } else {
                     ActivityMixin.showToast(activity, getString(R.string.export_failed));
                 }
