@@ -2737,6 +2737,11 @@ public class cgData {
 
         Set<String> geocodes = new HashSet<String>();
 
+        // if not stored only, get codes from CacheCache as well
+        if (!stored) {
+            geocodes.addAll(CacheCache.getInstance().getInViewport(centerLat, centerLon, spanLat, spanLon, cacheType));
+        }
+
         // viewport limitation
         double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
         double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -2798,7 +2803,11 @@ public class cgData {
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
-                    return null;
+                    if (geocodes.isEmpty()) {
+                        return null;
+                    } else {
+                        return geocodes;
+                    }
                 }
 
                 cursor.close();
