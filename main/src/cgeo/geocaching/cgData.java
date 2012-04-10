@@ -1862,7 +1862,7 @@ public class cgData {
      * @param loadFlags
      * @return Set of loaded caches. Never null.
      */
-    public Set<cgCache> loadCaches(final Set<String> geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
+    private Set<cgCache> loadCaches(final Set<String> geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
         final Set<cgCache> caches = new HashSet<cgCache>();
         if (CollectionUtils.isEmpty(geocodes)) {
             return caches;
@@ -2244,7 +2244,7 @@ public class cgData {
         return waypoint;
     }
 
-    public List<cgImage> loadSpoilers(String geocode) {
+    private List<cgImage> loadSpoilers(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
@@ -2442,7 +2442,7 @@ public class cgData {
         return logCounts;
     }
 
-    public List<cgTrackable> loadInventory(String geocode) {
+    private List<cgTrackable> loadInventory(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }

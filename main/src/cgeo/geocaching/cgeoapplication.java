@@ -384,19 +384,9 @@ public class cgeoapplication extends Application {
         storage.dropList(listId);
     }
 
-    /** {@link cgData#loadInventory(String)} */
-    public List<cgTrackable> loadInventory(String geocode) {
-        return storage.loadInventory(geocode);
-    }
-
     /** {@link cgData#loadLogCounts(String)} */
     public Map<LogType, Integer> loadLogCounts(String geocode) {
         return storage.loadLogCounts(geocode);
-    }
-
-    /** {@link cgData#loadSpoilers(String)} */
-    public List<cgImage> loadSpoilers(String geocode) {
-        return storage.loadSpoilers(geocode);
     }
 
     /** {@link cgData#loadWaypoint(int)} */
@@ -518,11 +508,6 @@ public class cgeoapplication extends Application {
     /** {@link cgData#loadCaches} */
     public Set<cgCache> loadCaches(final Set<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
         return storage.loadCaches(geocodes, loadFlags);
-    }
-
-    /** {@link cgData#loadCaches} */
-    public Set<cgCache> loadCaches(Long centerLat, Long centerLon, Long spanLat, Long spanLon, final EnumSet<LoadFlag> loadFlags) {
-        return storage.loadCaches(null, centerLat, centerLon, spanLat, spanLon, loadFlags);
     }
 
     /** {@link cgData#saveCache} */
