@@ -9,7 +9,6 @@ import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.mapsforge.android.maps.MapDatabase;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -369,17 +368,6 @@ public final class Settings {
         });
 
         return commitResult;
-    }
-
-    public static boolean isValidMapFile() {
-        return checkMapfile(getMapFile());
-    }
-
-    private static boolean checkMapfile(final String mapFileIn) {
-        if (null == mapFileIn) {
-            return false;
-        }
-        return MapDatabase.isValidMapFile(mapFileIn);
     }
 
     public static coordInputFormatEnum getCoordInputFormat() {
