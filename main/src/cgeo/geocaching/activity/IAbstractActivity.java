@@ -1,8 +1,5 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.cgCache;
-
-import android.view.Menu;
 import android.view.View;
 
 public interface IAbstractActivity {
@@ -13,19 +10,11 @@ public interface IAbstractActivity {
 
     public void goManual(View view);
 
-    public void showProgress(final boolean show);
-
-    public void setTheme();
-
     public void showToast(String text);
 
     public void showShortToast(String text);
 
     public void helpDialog(String title, String message);
-
-    public void setTitle(final String title);
-
-    void addVisitMenu(Menu menu, cgCache cache);
 
     public void invalidateOptionsMenuCompatible();
 }
