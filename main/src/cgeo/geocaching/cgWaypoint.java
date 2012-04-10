@@ -223,14 +223,6 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         this.note = note;
     }
 
-    public int getCachedOrder() {
-        return cachedOrder;
-    }
-
-    public void setCachedOrder(int cachedOrder) {
-        this.cachedOrder = cachedOrder;
-    }
-
     @Override
     public String toString() {
         return name + " " + waypointType.getL10n();
