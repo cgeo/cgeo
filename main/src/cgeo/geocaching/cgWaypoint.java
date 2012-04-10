@@ -179,10 +179,6 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         return waypointType;
     }
 
-    public void setWaypointType(WaypointType type) {
-        this.waypointType = type;
-    }
-
     public String getLookup() {
         return lookup;
     }
