@@ -166,7 +166,7 @@
   <string name="err_dwld_details_failed">Download der Cache-Details fehlgeschlagen.</string>
   <string name="err_load_descr_failed">Laden der Cachebeschreibung fehlgeschlagen.</string>
   <string name="err_location_unknown">c:geo erkennt die Position des Caches nicht.</string>
-  <string name="err_missing_device_name">Vor der Registrierung muss ein Name für das Handy festlegt werden.</string>
+  <string name="err_missing_device_name">Vor der Registrierung muss ein Name für das Endgerät festlegt werden.</string>
 
   <string name="err_tb_display">"c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
@@ -432,11 +432,11 @@
   <string name="map_source_osm_cyclemap">OSM: Radfahrerkarte</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
-  <string name="init_sendToCgeo_name">Der Name des Handys:</string>
+  <string name="init_sendToCgeo_name">Name des Endgerätes:</string>
   <string name="init_sendToCgeo_description">Send to c:geo erlaubt es, mit einem speziellen Plugin für Firefox oder Chrome, Caches direkt von der Geocachingseite zu empfangen. Bitte dazu die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durchlesen.</string>
   <string name="init_sendToCgeo_register">Registrierung anfordern</string>
-  <string name="init_sendToCgeo_registering">Handy wird für "Send to c:geo" registriert…</string>
-  <string name="init_sendToCgeo_register_ok">Registrierung erfolgreich. Der PIN Code ist ####. Bitte diesen auf der der c:geo Website angeben, um das Handy im Browser hinzuzufügen.</string>
+  <string name="init_sendToCgeo_registering">Das Gerät wird für "Send to c:geo" registriert…</string>
+  <string name="init_sendToCgeo_register_ok">Registrierung erfolgreich. Der PIN Code ist ####. Bitte diesen auf der der c:geo Website angeben, um das Endgerät im Browser hinzuzufügen.</string>
   <string name="init_sendToCgeo_register_fail">Registrierung fehlgeschlagen.</string>
   <string name="sendToCgeo_download_fail">c:geo konnte Caches nicht laden. Entweder besteht keine Internetverbindung oder send2c:geo funktioniert nicht.</string>
   <string name="sendToCgeo_no_registration">c:geo konnte Caches nicht laden. Registrierung für send2c:geo ungültig. Bitte in Einstellungen neu registrieren.</string>
