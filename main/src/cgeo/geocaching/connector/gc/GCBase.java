@@ -325,62 +325,6 @@ public class GCBase {
         return gcid;
     }
 
-    private static String modulo(final long value, final long base, final String sequence) {
-        String result = "";
-        long rest = 0;
-        long divResult = value;
-        do
-        {
-            rest = divResult % base;
-            divResult = (int) Math.floor(divResult / base);
-            result = sequence.charAt((int) rest) + result;
-        } while (divResult != 0);
-        return result;
-    }
-
-    /**
-     * Convert (old) GCIds to GCCode (geocode)
-     *
-     * Based on http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40
-     */
-    public static String gcidToGCCode(final long gcid) {
-        String gccode = modulo(gcid + 411120, GC_BASE31, SEQUENCE_GCID);
-        if ((gccode.length() < 4) || (gccode.length() == 4 && SEQUENCE_GCID.indexOf(gccode.charAt(0)) < 16)) {
-            gccode = modulo(gcid, GC_BASE16, SEQUENCE_GCID);
-        }
-        return "GC" + gccode;
-    }
-
-    /**
-     * Convert ids from the live map to (old) GCIds
-     *
-     * Based on http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40
-     */
-    public static long newidToGCId(final String newid) {
-        long gcid = 0;
-        for (int p = 0; p < newid.length(); p++) {
-            gcid = GC_BASE57 * gcid + SEQUENCE_NEWID.indexOf(newid.charAt(p));
-        }
-        return gcid;
-    }
-
-    /**
-     * Convert (old) GCIds to ids used in the live map
-     *
-     * Based on http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40
-     */
-    public static String gcidToNewId(final long gcid) {
-        return modulo(gcid, GC_BASE57, SEQUENCE_NEWID);
-    }
-
-    /**
-     * Convert ids from the live map into GCCode (geocode)
-     */
-    public static String newidToGeocode(final String newid) {
-        long gcid = GCBase.newidToGCId(newid);
-        return GCBase.gcidToGCCode(gcid);
-    }
-
     /** Get user session & session token from the Live Map. Needed for following requests */
     public static String[] getTokens() {
         final HttpResponse response = Network.request(GCConstants.URL_LIVE_MAP, null, false);
