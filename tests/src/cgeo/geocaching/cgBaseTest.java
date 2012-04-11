@@ -156,7 +156,7 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public static cgCache createCache(int index) {
-        final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES.get(index);
+        final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES[index];
         // to get the same results we have to use the date format used when the mocked data was created
         String oldCustomDate = Settings.getGcCustomDate();
 
