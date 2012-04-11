@@ -7,11 +7,11 @@ import android.app.backup.SharedPreferencesBackupHelper;
 
 public class CentralBackupAgent extends BackupAgentHelper {
 
-    static final String PREFS_BACKUP_KEY = "prefs";
+    private static final String PREFS_BACKUP_KEY = "prefs";
 
     @Override
     public void onCreate() {
-        SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, Settings.preferences);
+        final SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, Settings.getPreferencesName());
         addHelper(PREFS_BACKUP_KEY, helper);
     }
 
