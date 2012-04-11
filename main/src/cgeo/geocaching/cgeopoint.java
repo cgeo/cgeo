@@ -410,16 +410,14 @@ public class cgeopoint extends AbstractActivity {
 
     private void addToHistory(final Geopoint coords) {
         // Add locations to history
-        cgDestination loc = new cgDestination();
-        loc.setCoords(coords);
+        final cgDestination loc = new cgDestination(0, 0, coords);
 
-        if (!getHistoryOfSearchedLocations().contains(loc))
-        {
-            loc.setDate(System.currentTimeMillis());
-            getHistoryOfSearchedLocations().add(0, loc);
+        if (!getHistoryOfSearchedLocations().contains(loc)) {
+            final cgDestination updatedLoc = loc.withDate(System.currentTimeMillis());
+            getHistoryOfSearchedLocations().add(0, updatedLoc);
 
             // Save location
-            app.saveSearchedDestination(loc);
+            app.saveSearchedDestination(updatedLoc);
 
             // Ensure to remove the footer
             historyListView.removeFooterView(getEmptyHistoryFooter());

@@ -1412,37 +1412,25 @@ public class cgData {
     /**
      * Persists the given <code>destination</code> into the database.
      *
-     * @param destinations
-     * @return <code>true</code> if the given destination was successfully
-     *         persisted <code>false</code> otherwise.
+     * @param destination
+     *            a destination to save
      */
-    public boolean saveSearchedDestination(cgDestination destination) {
-        boolean success = true;
+    public void saveSearchedDestination(final cgDestination destination) {
+        init();
 
-        if (destination == null) {
-            success = false;
-        } else {
-            init();
+        databaseRW.beginTransaction();
 
-            databaseRW.beginTransaction();
-
-            try {
-                ContentValues values = new ContentValues();
-                values.put("date", destination.getDate());
-                putCoords(values, destination.getCoords());
-
-                long id = databaseRW.insert(dbTableSearchDestionationHistory, null, values);
-                destination.setId(id);
-                databaseRW.setTransactionSuccessful();
-            } catch (Exception e) {
-                success = false;
-                Log.e(Settings.tag, "Updating searchedDestinations db failed", e);
-            } finally {
-                databaseRW.endTransaction();
-            }
+        try {
+            ContentValues values = new ContentValues();
+            values.put("date", destination.getDate());
+            putCoords(values, destination.getCoords());
+            databaseRW.insert(dbTableSearchDestionationHistory, null, values);
+            databaseRW.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e(Settings.tag, "Updating searchedDestinations db failed", e);
+        } finally {
+            databaseRW.endTransaction();
         }
-
-        return success;
     }
 
     public boolean saveWaypoints(String geocode, List<cgWaypoint> waypoints, boolean drop) {
@@ -2323,10 +2311,7 @@ public class cgData {
             int indexLongitude = cursor.getColumnIndex("longitude");
 
             do {
-                final cgDestination dest = new cgDestination();
-                dest.setId(cursor.getLong(indexId));
-                dest.setDate(cursor.getLong(indexDate));
-                dest.setCoords(getCoords(cursor, indexLatitude, indexLongitude));
+                final cgDestination dest = new cgDestination(cursor.getLong(indexId), cursor.getLong(indexDate), getCoords(cursor, indexLatitude, indexLongitude));
 
                 // If coordinates are non-existent or invalid, do not consider
                 // this point.

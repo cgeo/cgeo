@@ -350,8 +350,8 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#saveSearchedDestination(cgDestination)} */
-    public boolean saveSearchedDestination(cgDestination destination) {
-        return storage.saveSearchedDestination(destination);
+    public void saveSearchedDestination(cgDestination destination) {
+        storage.saveSearchedDestination(destination);
     }
 
     /** {@link cgData#saveWaypoints(String, List, boolean)} */
