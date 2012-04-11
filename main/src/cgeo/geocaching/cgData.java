@@ -1892,7 +1892,7 @@ public class cgData {
             }
             else
             {
-                cgData.whereGeocodeIn(geocodes);
+                where = cgData.whereGeocodeIn(geocodes);
             }
             cursor = databaseRO.query(
                     dbTableCaches,
