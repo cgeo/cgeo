@@ -9,13 +9,13 @@ import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.mapsforge.android.maps.MapDatabase;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 
 import java.util.Locale;
 
@@ -82,9 +82,9 @@ public final class Settings {
     private static final String KEY_DEBUG = "debug";
     private static final String KEY_HIDE_LIVE_MAP_HINT = "hidelivemaphint";
     private static final String KEY_LIVE_MAP_HINT_SHOW_COUNT = "livemaphintshowcount";
+    private static final String KEY_SETTINGS_VERSION = "settingsversion";
 
     private final static int unitsMetric = 1;
-    private final static int unitsImperial = 2;
 
     // twitter api keys
     private final static String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
@@ -113,12 +113,13 @@ public final class Settings {
     // usable values
     public static final String tag = "cgeo";
 
-    /** Name of the preferences file */
-    public static final String preferences = "cgeo.pref";
-
-    private static final SharedPreferences sharedPrefs = cgeoapplication.getInstance().getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
     private static String username = null;
     private static String password = null;
+
+    private static final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(cgeoapplication.getInstance().getBaseContext());
+    static {
+        migrateSettings();
+    }
 
     // Debug settings are accessed often enough to be cached
     private static Boolean cachedDebug = sharedPrefs.getBoolean(KEY_DEBUG, false);
@@ -128,6 +129,82 @@ public final class Settings {
 
     private Settings() {
         // this class is not to be instantiated;
+    }
+
+    private static void migrateSettings() {
+        // migrate from non standard file location and integer based boolean types
+        if (sharedPrefs.getInt(KEY_SETTINGS_VERSION, 0) < 1) {
+            final String oldPreferencesName = "cgeo.pref";
+            final SharedPreferences old = cgeoapplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
+            final Editor e = sharedPrefs.edit();
+
+            e.putString(KEY_TEMP_TOKEN_SECRET, old.getString(KEY_TEMP_TOKEN_SECRET, null));
+            e.putString(KEY_TEMP_TOKEN_PUBLIC, old.getString(KEY_TEMP_TOKEN_PUBLIC, null));
+            e.putBoolean(KEY_HELP_SHOWN, old.getInt(KEY_HELP_SHOWN, 0) != 0);
+            e.putFloat(KEY_ANYLONGITUDE, old.getFloat(KEY_ANYLONGITUDE, 0));
+            e.putFloat(KEY_ANYLATITUDE, old.getFloat(KEY_ANYLATITUDE, 0));
+            e.putBoolean(KEY_PUBLICLOC, 0 != old.getInt(KEY_PUBLICLOC, 0));
+            e.putBoolean(KEY_USE_OFFLINEMAPS, 0 != old.getInt(KEY_USE_OFFLINEMAPS, 1));
+            e.putBoolean(KEY_USE_OFFLINEWPMAPS, 0 != old.getInt(KEY_USE_OFFLINEWPMAPS, 0));
+            e.putString(KEY_WEB_DEVICE_CODE, old.getString(KEY_WEB_DEVICE_CODE, null));
+            e.putString(KEY_WEBDEVICE_NAME, old.getString(KEY_WEBDEVICE_NAME, null));
+            e.putBoolean(KEY_MAP_LIVE, old.getInt(KEY_MAP_LIVE, 1) != 0);
+            e.putInt(KEY_MAP_SOURCE, old.getInt(KEY_MAP_SOURCE, 0));
+            e.putBoolean(KEY_USE_TWITTER, 0 != old.getInt(KEY_USE_TWITTER, 0));
+            e.putBoolean(KEY_SHOW_ADDRESS, 0 != old.getInt(KEY_SHOW_ADDRESS, 1));
+            e.putBoolean(KEY_SHOW_CAPTCHA, old.getBoolean(KEY_SHOW_CAPTCHA, false));
+            e.putBoolean(KEY_MAP_TRAIL, old.getInt(KEY_MAP_TRAIL, 1) != 0);
+            e.putInt(KEY_LAST_MAP_ZOOM, old.getInt(KEY_LAST_MAP_ZOOM, 14));
+            e.putBoolean(KEY_LIVE_LIST, 0 != old.getInt(KEY_LIVE_LIST, 1));
+            e.putBoolean(KEY_METRIC_UNITS, old.getInt(KEY_METRIC_UNITS, unitsMetric) == unitsMetric);
+            e.putBoolean(KEY_SKIN, old.getInt(KEY_SKIN, 0) != 0);
+            e.putInt(KEY_LAST_USED_LIST, old.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID));
+            e.putString(KEY_CACHE_TYPE, old.getString(KEY_CACHE_TYPE, CacheType.ALL.id));
+            e.putString(KEY_TWITTER_TOKEN_SECRET, old.getString(KEY_TWITTER_TOKEN_SECRET, null));
+            e.putString(KEY_TWITTER_TOKEN_PUBLIC, old.getString(KEY_TWITTER_TOKEN_PUBLIC, null));
+            e.putInt(KEY_VERSION, old.getInt(KEY_VERSION, 0));
+            e.putBoolean(KEY_LOAD_DESCRIPTION, 0 != old.getInt(KEY_LOAD_DESCRIPTION, 0));
+            e.putBoolean(KEY_RATING_WANTED, old.getBoolean(KEY_RATING_WANTED, true));
+            e.putBoolean(KEY_ELEVATION_WANTED, old.getBoolean(KEY_ELEVATION_WANTED, true));
+            e.putBoolean(KEY_FRIENDLOGS_WANTED, old.getBoolean(KEY_FRIENDLOGS_WANTED, true));
+            e.putBoolean(KEY_USE_ENGLISH, old.getBoolean(KEY_USE_ENGLISH, false));
+            e.putBoolean(KEY_USE_COMPASS, 0 != old.getInt(KEY_USE_COMPASS, 1));
+            e.putBoolean(KEY_AUTO_VISIT_TRACKABLES, old.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false));
+            e.putBoolean(KEY_AUTO_INSERT_SIGNATURE, old.getBoolean(KEY_AUTO_INSERT_SIGNATURE, false));
+            e.putInt(KEY_ALTITUDE_CORRECTION, old.getInt(KEY_ALTITUDE_CORRECTION, 0));
+            e.putBoolean(KEY_USE_GOOGLE_NAVIGATION, 0 != old.getInt(KEY_USE_GOOGLE_NAVIGATION, 1));
+            e.putBoolean(KEY_STORE_LOG_IMAGES, old.getBoolean(KEY_STORE_LOG_IMAGES, false));
+            e.putBoolean(KEY_EXCLUDE_DISABLED, 0 != old.getInt(KEY_EXCLUDE_DISABLED, 0));
+            e.putBoolean(KEY_EXCLUDE_OWN, 0 != old.getInt(KEY_EXCLUDE_OWN, 0));
+            e.putString(KEY_MAPFILE, old.getString(KEY_MAPFILE, null));
+            e.putString(KEY_SIGNATURE, old.getString(KEY_SIGNATURE, null));
+            e.putString(KEY_GCVOTE_PASSWORD, old.getString(KEY_GCVOTE_PASSWORD, null));
+            e.putString(KEY_PASSWORD, old.getString(KEY_PASSWORD, null));
+            e.putString(KEY_USERNAME, old.getString(KEY_USERNAME, null));
+            e.putString(KEY_MEMBER_STATUS, old.getString(KEY_MEMBER_STATUS, ""));
+            e.putInt(KEY_COORD_INPUT_FORMAT, old.getInt(KEY_COORD_INPUT_FORMAT, 0));
+            e.putBoolean(KEY_LOG_OFFLINE, old.getBoolean(KEY_LOG_OFFLINE, false));
+            e.putBoolean(KEY_LOAD_DIRECTION_IMG, old.getBoolean(KEY_LOAD_DIRECTION_IMG, true));
+            e.putString(KEY_GC_CUSTOM_DATE, old.getString(KEY_GC_CUSTOM_DATE, null));
+            e.putInt(KEY_SHOW_WAYPOINTS_THRESHOLD, old.getInt(KEY_SHOW_WAYPOINTS_THRESHOLD, 0));
+            e.putString(KEY_COOKIE_STORE, old.getString(KEY_COOKIE_STORE, null));
+            e.putBoolean(KEY_OPEN_LAST_DETAILS_PAGE, old.getBoolean(KEY_OPEN_LAST_DETAILS_PAGE, false));
+            e.putInt(KEY_LAST_DETAILS_PAGE, old.getInt(KEY_LAST_DETAILS_PAGE, 1));
+            e.putInt(KEY_DEFAULT_NAVIGATION_TOOL, old.getInt(KEY_DEFAULT_NAVIGATION_TOOL, 0));
+            e.putInt(KEY_DEFAULT_NAVIGATION_TOOL_2, old.getInt(KEY_DEFAULT_NAVIGATION_TOOL_2, 0));
+            e.putInt(KEY_LIVE_MAP_STRATEGY, old.getInt(KEY_LIVE_MAP_STRATEGY, Strategy.AUTO.id));
+            e.putBoolean(KEY_DEBUG, old.getBoolean(KEY_DEBUG, false));
+            e.putBoolean(KEY_HIDE_LIVE_MAP_HINT, old.getInt(KEY_HIDE_LIVE_MAP_HINT, 0) != 0);
+            e.putInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, old.getInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, 0));
+
+            e.putInt(KEY_SETTINGS_VERSION, 1) ; // mark migrated
+            e.commit();
+            cachedDebug = sharedPrefs.getBoolean(KEY_DEBUG, false);
+        }
+        final SharedPreferences old = cgeoapplication.getInstance().getSharedPreferences("cgeo.pref", Context.MODE_PRIVATE);
+        System.out.println("old prefs " + old.getString(KEY_USERNAME, "not set"));
+        System.out.println("shared prefs " + sharedPrefs.getString(KEY_USERNAME, "no set"));
+
     }
 
     public static void setLanguage(boolean useEnglish) {
@@ -315,7 +392,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_MAP_LIVE, live ? 1 : 0);
+                edit.putBoolean(KEY_MAP_LIVE, live);
             }
         });
     }
@@ -369,17 +446,6 @@ public final class Settings {
         });
 
         return commitResult;
-    }
-
-    public static boolean isValidMapFile() {
-        return checkMapfile(getMapFile());
-    }
-
-    private static boolean checkMapfile(final String mapFileIn) {
-        if (null == mapFileIn) {
-            return false;
-        }
-        return MapDatabase.isValidMapFile(mapFileIn);
     }
 
     public static coordInputFormatEnum getCoordInputFormat() {
@@ -443,7 +509,7 @@ public final class Settings {
     }
 
     public static boolean isExcludeMyCaches() {
-        return 0 != sharedPrefs.getInt(KEY_EXCLUDE_OWN, 0);
+        return sharedPrefs.getBoolean(KEY_EXCLUDE_OWN, false);
     }
 
     /**
@@ -463,7 +529,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_EXCLUDE_OWN, exclude ? 1 : 0);
+                edit.putBoolean(KEY_EXCLUDE_OWN, exclude);
             }
         });
     }
@@ -483,7 +549,7 @@ public final class Settings {
     }
 
     public static boolean isShowAddress() {
-        return 0 != sharedPrefs.getInt(KEY_SHOW_ADDRESS, 1);
+        return sharedPrefs.getBoolean(KEY_SHOW_ADDRESS, true);
     }
 
     public static void setShowAddress(final boolean showAddress) {
@@ -491,7 +557,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_SHOW_ADDRESS, showAddress ? 1 : 0);
+                edit.putBoolean(KEY_SHOW_ADDRESS, showAddress);
             }
         });
     }
@@ -511,7 +577,7 @@ public final class Settings {
     }
 
     public static boolean isExcludeDisabledCaches() {
-        return 0 != sharedPrefs.getInt(KEY_EXCLUDE_DISABLED, 0);
+        return sharedPrefs.getBoolean(KEY_EXCLUDE_DISABLED, false);
     }
 
     public static void setExcludeDisabledCaches(final boolean exclude) {
@@ -519,13 +585,13 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_EXCLUDE_DISABLED, exclude ? 1 : 0);
+                edit.putBoolean(KEY_EXCLUDE_DISABLED, exclude);
             }
         });
     }
 
     public static boolean isStoreOfflineMaps() {
-        return 0 != sharedPrefs.getInt(KEY_USE_OFFLINEMAPS, 1);
+        return sharedPrefs.getBoolean(KEY_USE_OFFLINEMAPS, true);
     }
 
     public static void setStoreOfflineMaps(final boolean offlineMaps) {
@@ -533,13 +599,13 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_USE_OFFLINEMAPS, offlineMaps ? 1 : 0);
+                edit.putBoolean(KEY_USE_OFFLINEMAPS, offlineMaps);
             }
         });
     }
 
     public static boolean isStoreOfflineWpMaps() {
-        return 0 != sharedPrefs.getInt(KEY_USE_OFFLINEWPMAPS, 0);
+        return sharedPrefs.getBoolean(KEY_USE_OFFLINEWPMAPS, false);
     }
 
     public static void setStoreOfflineWpMaps(final boolean offlineMaps) {
@@ -547,7 +613,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_USE_OFFLINEWPMAPS, offlineMaps ? 1 : 0);
+                edit.putBoolean(KEY_USE_OFFLINEWPMAPS, offlineMaps);
             }
         });
     }
@@ -567,7 +633,7 @@ public final class Settings {
     }
 
     public static boolean isUseGoogleNavigation() {
-        return 0 != sharedPrefs.getInt(KEY_USE_GOOGLE_NAVIGATION, 1);
+        return sharedPrefs.getBoolean(KEY_USE_GOOGLE_NAVIGATION, true);
     }
 
     public static void setUseGoogleNavigation(final boolean useGoogleNavigation) {
@@ -575,13 +641,13 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_USE_GOOGLE_NAVIGATION, useGoogleNavigation ? 1 : 0);
+                edit.putBoolean(KEY_USE_GOOGLE_NAVIGATION, useGoogleNavigation);
             }
         });
     }
 
     public static boolean isAutoLoadDescription() {
-        return 0 != sharedPrefs.getInt(KEY_LOAD_DESCRIPTION, 0);
+        return sharedPrefs.getBoolean(KEY_LOAD_DESCRIPTION, false);
     }
 
     public static void setAutoLoadDesc(final boolean autoLoad) {
@@ -589,7 +655,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_LOAD_DESCRIPTION, autoLoad ? 1 : 0);
+                edit.putBoolean(KEY_LOAD_DESCRIPTION, autoLoad);
             }
         });
     }
@@ -641,7 +707,7 @@ public final class Settings {
     }
 
     public static boolean isLiveList() {
-        return 0 != sharedPrefs.getInt(KEY_LIVE_LIST, 1);
+        return sharedPrefs.getBoolean(KEY_LIVE_LIST, true);
     }
 
     public static void setLiveList(final boolean liveList) {
@@ -649,13 +715,13 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_LIVE_LIST, liveList ? 1 : 0);
+                edit.putBoolean(KEY_LIVE_LIST, liveList);
             }
         });
     }
 
     public static boolean isPublicLoc() {
-        return 0 != sharedPrefs.getInt(KEY_PUBLICLOC, 0);
+        return sharedPrefs.getBoolean(KEY_PUBLICLOC, false);
     }
 
     public static void setPublicLoc(final boolean publicLocation) {
@@ -663,7 +729,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_PUBLICLOC, publicLocation ? 1 : 0);
+                edit.putBoolean(KEY_PUBLICLOC, publicLocation);
             }
         });
     }
@@ -697,7 +763,7 @@ public final class Settings {
     }
 
     public static boolean isUseMetricUnits() {
-        return sharedPrefs.getInt(KEY_METRIC_UNITS, unitsMetric) == unitsMetric;
+        return sharedPrefs.getBoolean(KEY_METRIC_UNITS, true);
     }
 
     public static void setUseMetricUnits(final boolean metric) {
@@ -705,17 +771,17 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_METRIC_UNITS, metric ? unitsMetric : unitsImperial);
+                edit.putBoolean(KEY_METRIC_UNITS, metric);
             }
         });
     }
 
     public static boolean isLiveMap() {
-        return sharedPrefs.getInt(KEY_MAP_LIVE, 1) != 0;
+        return sharedPrefs.getBoolean(KEY_MAP_LIVE, true);
     }
 
     public static boolean isMapTrail() {
-        return sharedPrefs.getInt(KEY_MAP_TRAIL, 1) != 0;
+        return sharedPrefs.getBoolean(KEY_MAP_TRAIL, true);
     }
 
     public static void setMapTrail(final boolean showTrail) {
@@ -723,7 +789,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_MAP_TRAIL, showTrail ? 1 : 0);
+                edit.putBoolean(KEY_MAP_TRAIL, showTrail);
             }
         });
     }
@@ -786,7 +852,7 @@ public final class Settings {
     }
 
     public static boolean isUseCompass() {
-        return 0 != sharedPrefs.getInt(KEY_USE_COMPASS, 1);
+        return sharedPrefs.getBoolean(KEY_USE_COMPASS, true);
     }
 
     public static void setUseCompass(final boolean useCompass) {
@@ -794,13 +860,13 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_USE_COMPASS, useCompass ? 1 : 0);
+                edit.putBoolean(KEY_USE_COMPASS, useCompass);
             }
         });
     }
 
     public static boolean isHelpShown() {
-        return sharedPrefs.getInt(KEY_HELP_SHOWN, 0) != 0;
+        return sharedPrefs.getBoolean(KEY_HELP_SHOWN, false);
     }
 
     public static void setHelpShown() {
@@ -808,13 +874,13 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_HELP_SHOWN, 1);
+                edit.putBoolean(KEY_HELP_SHOWN, true);
             }
         });
     }
 
     public static boolean isLightSkin() {
-        return sharedPrefs.getInt(KEY_SKIN, 0) != 0;
+        return sharedPrefs.getBoolean(KEY_SKIN, false);
     }
 
     public static void setLightSkin(final boolean lightSkin) {
@@ -822,7 +888,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_SKIN, lightSkin ? 1 : 0);
+                edit.putBoolean(KEY_SKIN, lightSkin);
             }
         });
     }
@@ -879,7 +945,7 @@ public final class Settings {
     }
 
     public static boolean isUseTwitter() {
-        return 0 != sharedPrefs.getInt(KEY_USE_TWITTER, 0);
+        return sharedPrefs.getBoolean(KEY_USE_TWITTER, false);
     }
 
     public static void setUseTwitter(final boolean useTwitter) {
@@ -887,7 +953,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_USE_TWITTER, useTwitter ? 1 : 0);
+                edit.putBoolean(KEY_USE_TWITTER, useTwitter);
             }
         });
     }
@@ -1037,7 +1103,7 @@ public final class Settings {
     }
 
     public static boolean getHideLiveMapHint() {
-        return sharedPrefs.getInt(KEY_HIDE_LIVE_MAP_HINT, 0) == 0 ? false : true;
+        return sharedPrefs.getBoolean(KEY_HIDE_LIVE_MAP_HINT, false);
     }
 
     public static void setHideLiveHint(final boolean hide) {
@@ -1045,7 +1111,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_HIDE_LIVE_MAP_HINT, hide ? 1 : 0);
+                edit.putBoolean(KEY_HIDE_LIVE_MAP_HINT, hide);
             }
         });
     }
@@ -1062,5 +1128,10 @@ public final class Settings {
                 edit.putInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, showCount);
             }
         });
+    }
+
+    public static String getPreferencesName() {
+        // there is currently no Android API to get the file name of the shared preferences
+        return cgeoapplication.getInstance().getPackageName() + "_preferences";
     }
 }

@@ -1,5 +1,6 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
@@ -18,8 +19,7 @@ import java.math.RoundingMode;
 /**
  * Abstraction of geographic point.
  */
-public final class Geopoint
-{
+public final class Geopoint implements ICoordinates {
     public static final double deg2rad = Math.PI / 180;
     public static final double rad2deg = 180 / Math.PI;
     public static final float erad = 6371.0f;
@@ -114,7 +114,7 @@ public final class Geopoint
      */
     public int getLatitudeE6()
     {
-        return (int) (latitude * 1E6);
+        return (int) Math.round(latitude * 1E6);
     }
 
     /**
@@ -134,7 +134,7 @@ public final class Geopoint
      */
     public int getLongitudeE6()
     {
-        return (int) (longitude * 1E6);
+        return (int) Math.round(longitude * 1E6);
     }
 
     /**
@@ -200,16 +200,21 @@ public final class Geopoint
         return new Geopoint(rlat * rad2deg, rlon * rad2deg);
     }
 
-    /**
-     * Checks if given Geopoint is identical with this Geopoint.
-     *
-     * @param gp
-     *            Geopoint to check
-     * @return true if identical, false otherwise
-     */
-    public boolean isEqualTo(Geopoint gp)
-    {
-        return null != gp && gp.latitude == latitude && gp.longitude == longitude;
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof Geopoint)) {
+            return false;
+        }
+        final Geopoint gp = (Geopoint) obj;
+        return getLatitudeE6() == gp.getLatitudeE6() && getLongitudeE6() == gp.getLongitudeE6();
+    }
+
+    @Override
+    public int hashCode() {
+        return getLatitudeE6() ^ getLongitudeE6();
     }
 
     /**
@@ -242,7 +247,7 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     * 
+     *
      * @return formatted coordinates
      */
     @Override
@@ -510,6 +515,11 @@ public final class Geopoint
         }
 
         return null;
+    }
+
+    @Override
+    public Geopoint getCoords() {
+        return this;
     }
 
 }

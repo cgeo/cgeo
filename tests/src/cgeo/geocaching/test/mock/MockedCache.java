@@ -5,7 +5,6 @@ import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -72,16 +71,6 @@ public abstract class MockedCache implements ICache {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    public String getLatitude() {
-        return coords.format(GeopointFormatter.Format.LAT_DECMINUTE);
-    }
-
-    @Override
-    public String getLongitude() {
-        return coords.format(GeopointFormatter.Format.LON_DECMINUTE);
     }
 
     @Override

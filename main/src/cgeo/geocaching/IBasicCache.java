@@ -11,7 +11,7 @@ import cgeo.geocaching.enumerations.CacheType;
  * @author blafoo
  *
  */
-public interface IBasicCache extends ILogable {
+public interface IBasicCache extends ILogable, ICoordinates {
 
     public abstract String getGuid();
 

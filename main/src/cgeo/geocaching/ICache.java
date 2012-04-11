@@ -28,16 +28,6 @@ public interface ICache extends IBasicCache {
     public String getOwnerReal();
 
     /**
-     * @return Latitude, e.g. N 52° 12.345
-     */
-    public String getLatitude();
-
-    /**
-     * @return Longitude, e.g. E 9° 34.567
-     */
-    public String getLongitude();
-
-    /**
      * @return true if the user is the owner of the cache, false else
      */
     public boolean isOwn();

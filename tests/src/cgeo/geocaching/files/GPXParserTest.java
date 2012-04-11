@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
@@ -43,7 +42,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(5.0f, cache.getTerrain());
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.getShortdesc());
-        assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(cache.getCoords()));
+        assertTrue(new Geopoint(48.859683, 9.1874).equals(cache.getCoords()));
         return cache;
     }
 
@@ -67,7 +66,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(4.0f, cache.getTerrain());
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortdesc());
-        assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.getCoords()));
+        assertTrue(new Geopoint(48.85968, 9.18740).equals(cache.getCoords()));
         assertTrue(cache.isReliableLatLon());
     }
 
@@ -117,8 +116,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(2.0f, cache.getDifficulty(), 0.01f);
         assertEquals(1.0f, cache.getTerrain(), 0.01f);
         final Geopoint refCoordinates = new Geopoint("N 49° 19.122", "E 008° 32.739");
-        assertEquals(refCoordinates.format(GeopointFormatter.Format.LAT_DECMINUTE), cache.getLatitude());
-        assertEquals(refCoordinates.format(GeopointFormatter.Format.LON_DECMINUTE), cache.getLongitude());
+        assertEquals(refCoordinates, cache.getCoords());
         assertEquals("vptsz", cache.getOwner());
         assertEquals(CacheSize.SMALL, cache.getSize());
         assertEquals(CacheType.MULTI, cache.getType());

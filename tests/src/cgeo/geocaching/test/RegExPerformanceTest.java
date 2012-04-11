@@ -68,12 +68,7 @@ public class RegExPerformanceTest extends TestCase {
     public final static Pattern PATTERN_DESCRIPTION = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
 
 
-    public final static List<MockedCache> MOCKED_CACHES = new ArrayList<MockedCache>();
-    static {
-        MOCKED_CACHES.add(new GC2CJPF());
-        MOCKED_CACHES.add(new GC1ZXX2());
-        MOCKED_CACHES.add(new GC2JVEH());
-    }
+    public final static MockedCache[] MOCKED_CACHES = { new GC2CJPF(), new GC1ZXX2(), new GC2JVEH() };
 
     public static void testRegEx() {
         List<String> output = doTheTests(10);

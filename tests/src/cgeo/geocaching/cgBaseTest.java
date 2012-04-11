@@ -57,8 +57,7 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(expected.isPremiumMembersOnly(), actual.isPremiumMembersOnly());
 
         if (all) {
-            assertEquals(expected.getLatitude(), actual.getLatitude());
-            assertEquals(expected.getLongitude(), actual.getLongitude());
+            assertEquals(expected.getCoords(), actual.getCoords());
             assertTrue(actual.isReliableLatLon());
             assertEquals(expected.isOwn(), actual.isOwn());
             assertEquals(expected.getOwnerReal(), actual.getOwnerReal());
@@ -151,12 +150,12 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
         cache.parseWaypointsFromNote();
         assertEquals(expected.length, cache.getWaypoints().size());
         for (int i = 0; i < expected.length; i++) {
-            assertTrue(expected[i].isEqualTo(cache.getWaypoint(i).getCoords()));
+            assertTrue(expected[i].equals(cache.getWaypoint(i).getCoords()));
         }
     }
 
     public static cgCache createCache(int index) {
-        final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES.get(index);
+        final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES[index];
         // to get the same results we have to use the date format used when the mocked data was created
         String oldCustomDate = Settings.getGcCustomDate();
 

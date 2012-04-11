@@ -2,73 +2,43 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
 
-public class cgDestination {
+public class cgDestination implements ICoordinates {
 
-    private long id;
-
-    private long date;
-
-    private Geopoint coords;
-
-    public cgDestination() {
-    }
+    final private long id;
+    final private long date;
+    final private Geopoint coords;
 
     public cgDestination(long id, long date, final Geopoint coords) {
-        super();
         this.id = id;
         this.date = date;
         this.coords = coords;
+    }
+
+    public cgDestination withDate(final long date) {
+        return new cgDestination(id, date, coords);
     }
 
     public long getDate() {
         return date;
     }
 
-    public void setDate(long date) {
-        this.date = date;
-    }
-
+    @Override
     public Geopoint getCoords() {
         return coords;
     }
 
-    public void setCoords(final Geopoint coords) {
-        this.coords = coords;
-    }
-
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        long temp;
-        temp = Double.doubleToLongBits(coords.getLatitude());
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(coords.getLongitude());
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        return coords.hashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof cgDestination)) {
-            return false;
-        }
-        cgDestination other = (cgDestination) obj;
-        return coords.isEqualTo(other.coords);
+    public boolean equals(final Object obj) {
+        return obj != null && obj instanceof cgDestination && ((cgDestination) obj).coords.equals(coords);
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
 }
