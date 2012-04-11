@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.concurrent.BlockingThreadPool;
-import cgeo.geocaching.concurrent.Task;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
@@ -146,7 +145,7 @@ public class StaticMapsProvider {
             downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
         }
         else {
-            Task currentTask = new Task("getting static map") {
+            final Runnable currentTask = new Runnable() {
                 @Override
                 public void run() {
                     downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
