@@ -1884,11 +1884,15 @@ public class cgData {
         Cursor cursor = null;
 
         try {
-            StringBuilder where = cgData.whereGeocodeIn(geocodes);
+            StringBuilder where = new StringBuilder();
 
             // viewport limitation
             if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
                 where.append(buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon));
+            }
+            else
+            {
+                cgData.whereGeocodeIn(geocodes);
             }
             cursor = databaseRO.query(
                     dbTableCaches,
@@ -1983,7 +1987,7 @@ public class cgData {
      * @return
      */
 
-    private String buildCoordinateWhere(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon) {
+    private static String buildCoordinateWhere(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon) {
         StringBuilder where = new StringBuilder();
         double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
         double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -2002,9 +2006,6 @@ public class cgData {
             lonMin = llCache;
         }
 
-        if (where.length() > 0) {
-            where.append(" and ");
-        }
         where.append("(latitude >= ");
         where.append(String.format((Locale) null, "%.6f", latMin));
         where.append(" and latitude <= ");
