@@ -37,7 +37,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(cache);
         assertEquals("OC5952", cache.getGeocode());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
-        assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.getCoords()));
+        assertTrue(new Geopoint(48.85968, 9.18740).equals(cache.getCoords()));
     }
 
     public void testGCLoc() throws IOException, ParserException {
@@ -47,7 +47,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(cache);
         assertEquals("GC1BKP3", cache.getGeocode());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
-        assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(cache.getCoords()));
+        assertTrue(new Geopoint(48.859683, 9.1874).equals(cache.getCoords()));
         assertEquals(1.0f, cache.getDifficulty());
         assertEquals(5.0f, cache.getTerrain());
         assertEquals(CacheSize.MICRO, cache.getSize());

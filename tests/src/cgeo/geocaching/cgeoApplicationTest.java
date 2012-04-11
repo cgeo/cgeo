@@ -242,7 +242,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
             cgCache parsedCache = cgeoapplication.getInstance().loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
 
-            assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().isEqualTo(parsedCache.getCoords()));
+            assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
             assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
 
             // check update after switch strategy to FAST
@@ -253,7 +253,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
             parsedCache = cgeoapplication.getInstance().loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
 
-            assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().isEqualTo(parsedCache.getCoords()));
+            assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
             assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
 
         } finally {

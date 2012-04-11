@@ -150,7 +150,7 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
         cache.parseWaypointsFromNote();
         assertEquals(expected.length, cache.getWaypoints().size());
         for (int i = 0; i < expected.length; i++) {
-            assertTrue(expected[i].isEqualTo(cache.getWaypoint(i).getCoords()));
+            assertTrue(expected[i].equals(cache.getWaypoint(i).getCoords()));
         }
     }
 

@@ -308,7 +308,7 @@ public class cgCache implements ICache, IWaypoint {
                 premiumMembersOnly == other.premiumMembersOnly &&
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
-                (coords != null ? coords.isEqualTo(other.coords) : null == other.coords) &&
+                (coords != null ? coords.equals(other.coords) : null == other.coords) &&
                 reliableLatLon == other.reliableLatLon &&
                 disabled == other.disabled &&
                 archived == other.archived &&

@@ -24,7 +24,7 @@ public class GC2JVEH extends MockedCache {
     }
 
     public GC2JVEH() {
-        super(new Geopoint(52.37225, 9.73537));
+        super(new Geopoint(52.37225, 9.735367));
     }
 
     @Override

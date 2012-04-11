@@ -77,7 +77,7 @@ public class GeopointTest extends AndroidTestCase {
         Geopoint gp1a = DDD.createGeopoint(String.valueOf(ddd1.latDir), String.valueOf(ddd1.latDeg), String.valueOf(ddd1.latDegFrac),
                 String.valueOf(ddd1.lonDir), String.valueOf(ddd1.lonDeg), String.valueOf(ddd1.lonDegFrac));
 
-        Assert.assertTrue(gp1a.isEqualTo(gp1));
+        Assert.assertTrue(gp1a.equals(gp1));
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
@@ -88,7 +88,7 @@ public class GeopointTest extends AndroidTestCase {
         Geopoint gp2a = DDD.createGeopoint(String.valueOf(ddd2.latDir), String.valueOf(ddd2.latDeg), String.valueOf(ddd2.latDegFrac),
                 String.valueOf(ddd2.lonDir), String.valueOf(ddd2.lonDeg), String.valueOf(ddd2.lonDegFrac));
 
-        Assert.assertTrue(gp2a.isEqualTo(gp2));
+        Assert.assertTrue(gp2a.equals(gp2));
 
         // case 3
         final Geopoint gp3 = new Geopoint(51.29999833333333d, 13.8d);
@@ -137,7 +137,7 @@ public class GeopointTest extends AndroidTestCase {
         Geopoint gp1a = DMM.createGeopoint(String.valueOf(dmm1.latDir), String.valueOf(dmm1.latDeg), String.valueOf(dmm1.latMin), String.valueOf(dmm1.latMinFrac),
                 String.valueOf(dmm1.lonDir), String.valueOf(dmm1.lonDeg), String.valueOf(dmm1.lonMin), String.valueOf(dmm1.lonMinFrac));
 
-        Assert.assertTrue(gp1a.isEqualTo(gp1));
+        Assert.assertTrue(gp1a.equals(gp1));
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
@@ -194,7 +194,7 @@ public class GeopointTest extends AndroidTestCase {
         Geopoint gp1a = DMS.createGeopoint(String.valueOf(dms1.latDir), String.valueOf(dms1.latDeg), String.valueOf(dms1.latMin), String.valueOf(dms1.latSec), String.valueOf(dms1.latSecFrac),
                 String.valueOf(dms1.lonDir), String.valueOf(dms1.lonDeg), String.valueOf(dms1.lonMin), String.valueOf(dms1.lonSec), String.valueOf(dms1.lonSecFrac));
 
-        Assert.assertTrue(gp1a.isEqualTo(gp1));
+        Assert.assertTrue(gp1a.equals(gp1));
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);

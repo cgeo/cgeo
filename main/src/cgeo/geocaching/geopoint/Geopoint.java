@@ -114,7 +114,7 @@ public final class Geopoint implements ICoordinates {
      */
     public int getLatitudeE6()
     {
-        return (int) (latitude * 1E6);
+        return (int) Math.round(latitude * 1E6);
     }
 
     /**
@@ -134,7 +134,7 @@ public final class Geopoint implements ICoordinates {
      */
     public int getLongitudeE6()
     {
-        return (int) (longitude * 1E6);
+        return (int) Math.round(longitude * 1E6);
     }
 
     /**
@@ -200,16 +200,21 @@ public final class Geopoint implements ICoordinates {
         return new Geopoint(rlat * rad2deg, rlon * rad2deg);
     }
 
-    /**
-     * Checks if given Geopoint is identical with this Geopoint.
-     *
-     * @param gp
-     *            Geopoint to check
-     * @return true if identical, false otherwise
-     */
-    public boolean isEqualTo(Geopoint gp)
-    {
-        return null != gp && gp.latitude == latitude && gp.longitude == longitude;
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof Geopoint)) {
+            return false;
+        }
+        final Geopoint gp = (Geopoint) obj;
+        return getLatitudeE6() == gp.getLatitudeE6() && getLongitudeE6() == gp.getLongitudeE6();
+    }
+
+    @Override
+    public int hashCode() {
+        return getLatitudeE6() ^ getLongitudeE6();
     }
 
     /**
