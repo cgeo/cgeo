@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.Settings;
 
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -74,7 +73,7 @@ public final class CryptUtils {
             digest.update(text.getBytes(), 0, text.length());
             hashed = new BigInteger(1, digest.digest()).toString(16);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.md5: " + e.toString());
+            Log.e("cgBase.md5: " + e.toString());
         }
 
         return hashed;
@@ -88,7 +87,7 @@ public final class CryptUtils {
             digest.update(text.getBytes(), 0, text.length());
             hashed = new BigInteger(1, digest.digest()).toString(16);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.sha1: " + e.toString());
+            Log.e("cgBase.sha1: " + e.toString());
         }
 
         return hashed;
@@ -103,7 +102,7 @@ public final class CryptUtils {
             mac.init(secretKeySpec);
             macBytes = mac.doFinal(text.getBytes());
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.hashHmac: " + e.toString());
+            Log.e("cgBase.hashHmac: " + e.toString());
         }
 
         return macBytes;

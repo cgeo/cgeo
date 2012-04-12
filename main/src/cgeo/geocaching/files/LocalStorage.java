@@ -1,6 +1,5 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -159,7 +158,7 @@ public class LocalStorage {
             saveHeader("last-modified", response, targetFile);
             return saved;
         } catch (IOException e) {
-            Log.e(Settings.tag, "LocalStorage.saveEntityToFile", e);
+            Log.e("LocalStorage.saveEntityToFile", e);
         }
 
         return false;
@@ -203,7 +202,7 @@ public class LocalStorage {
         } catch (final FileNotFoundException e) {
             // Do nothing, the file does not exist
         } catch (final Exception e) {
-            Log.w(Settings.tag, "could not read saved header " + name + " for " + baseFile, e);
+            Log.w("could not read saved header " + name + " for " + baseFile, e);
         }
         return null;
     }
@@ -234,7 +233,7 @@ public class LocalStorage {
                 inputStream.close();
             }
         } catch (IOException e) {
-            Log.e(Settings.tag, "LocalStorage.saveToFile", e);
+            Log.e("LocalStorage.saveToFile", e);
         }
         return false;
     }
@@ -257,7 +256,7 @@ public class LocalStorage {
             input = new FileInputStream(source);
             output = new FileOutputStream(destination);
         } catch (FileNotFoundException e) {
-            Log.e(Settings.tag, "LocalStorage.copy: could not open file", e);
+            Log.e("LocalStorage.copy: could not open file", e);
             if (input != null) {
                 try {
                     input.close();
@@ -274,7 +273,7 @@ public class LocalStorage {
             input.close();
             output.close();
         } catch (IOException e) {
-            Log.e(Settings.tag, "LocalStorage.copy: could not close file", e);
+            Log.e("LocalStorage.copy: could not close file", e);
             return false;
         }
 
@@ -291,7 +290,7 @@ public class LocalStorage {
             // Flushing is only necessary if the stream is not immediately closed afterwards.
             // We rely on all callers to do that correctly outside of this method
         } catch (IOException e) {
-            Log.e(Settings.tag, "LocalStorage.copy: error when copying data", e);
+            Log.e("LocalStorage.copy: error when copying data", e);
             return false;
         }
 

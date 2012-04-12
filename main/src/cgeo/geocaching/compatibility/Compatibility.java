@@ -1,6 +1,5 @@
 package cgeo.geocaching.compatibility;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Log;
 
@@ -54,7 +53,7 @@ public final class Compatibility {
                 }
             } catch (final Exception e) {
                 // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
-                Log.e(Settings.tag, "Cannot call getRotation()", e);
+                Log.e("Cannot call getRotation()", e);
             }
         } else {
             final Display display = activity.getWindowManager()
@@ -95,7 +94,7 @@ public final class Compatibility {
         try {
             MethodUtils.invokeMethod(activity, "overridePendingTransition", enterAnim, exitAnim);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cannot call overridePendingTransition", e);
+            Log.e("cannot call overridePendingTransition", e);
         }
     }
 

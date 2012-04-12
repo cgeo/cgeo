@@ -78,7 +78,7 @@ public class StaticMapsActivity extends AbstractActivity {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                 }
-                Log.e(Settings.tag, "StaticMapsActivity.loadMapsHandler: " + e.toString());
+                Log.e("StaticMapsActivity.loadMapsHandler: " + e.toString());
             }
         }
     };
@@ -160,7 +160,7 @@ public class StaticMapsActivity extends AbstractActivity {
                             }
                         }
                     } catch (Exception e) {
-                        Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run.1: " + e.toString());
+                        Log.e("StaticMapsActivity.LoadMapsThread.run.1: " + e.toString());
                     }
                 }
 
@@ -179,14 +179,14 @@ public class StaticMapsActivity extends AbstractActivity {
                                 }
                             }
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run.2: " + e.toString());
+                            Log.e("StaticMapsActivity.LoadMapsThread.run.2: " + e.toString());
                         }
                     }
                 }
 
                 loadMapsHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
-                Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run: " + e.toString());
+                Log.e("StaticMapsActivity.LoadMapsThread.run: " + e.toString());
             }
         }
     }

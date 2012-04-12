@@ -1,12 +1,10 @@
 package cgeo.geocaching.test;
 
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-
-import android.util.Log;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,7 +63,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         String result = matcher.replaceAll(" ").trim();
         final long end = System.currentTimeMillis();
         assertEquals(EXPECTED_SIZE - 1, result.length());
-        Log.d(Settings.tag, (end - start) + " ms regex");
+        Log.d((end - start) + " ms regex");
     }
 
     public void testReplaceAll() {
@@ -73,7 +71,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         String result = data.replaceAll("\\s+", " ");
         final long end = System.currentTimeMillis();
         assertEquals(EXPECTED_SIZE + 1, result.length());
-        Log.d(Settings.tag, (end - start) + " ms replaceAll");
+        Log.d((end - start) + " ms replaceAll");
     }
 
     public void testActualImplementation() {
@@ -82,7 +80,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         result = BaseUtils.replaceWhitespace(data);
         final long end = System.currentTimeMillis();
         assertEquals(EXPECTED_SIZE, result.length());
-        Log.d(Settings.tag, (end - start) + " ms actual implementation");
+        Log.d((end - start) + " ms actual implementation");
     }
 
     public void testManually() {
@@ -91,7 +89,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         result = replaceWhitespaceManually(data);
         final long end = System.currentTimeMillis();
         assertEquals(EXPECTED_SIZE, result.length());
-        Log.d(Settings.tag, (end - start) + " ms manually");
+        Log.d((end - start) + " ms manually");
     }
 
     public void testStringUtils() {
@@ -100,6 +98,6 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         result = replaceWhitespaceStringUtils(data);
         final long end = System.currentTimeMillis();
         assertEquals(EXPECTED_SIZE - 1, result.length());
-        Log.d(Settings.tag, (end - start) + " ms StringUtils");
+        Log.d((end - start) + " ms StringUtils");
     }
 }

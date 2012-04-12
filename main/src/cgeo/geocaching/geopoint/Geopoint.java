@@ -1,7 +1,6 @@
 package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.ICoordinates;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -498,7 +497,7 @@ public final class Geopoint implements ICoordinates {
                 return result.getDouble("elevation");
             }
         } catch (Exception e) {
-            Log.w(Settings.tag, "cgBase.getElevation: " + e.toString());
+            Log.w("cgBase.getElevation: " + e.toString());
         }
 
         return null;

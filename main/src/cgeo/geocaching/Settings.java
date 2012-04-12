@@ -110,9 +110,6 @@ public final class Settings {
         }
     }
 
-    // FIXME: tag should be private member of our log class
-    public static final String tag = "cgeo";
-
     private static String username = null;
     private static String password = null;
 

@@ -1,7 +1,6 @@
 package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgeoapplication;
@@ -242,7 +241,7 @@ public class GpxExport extends AbstractExport {
                     publishProgress(i + 1);
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "GpxExport.ExportTask generation", e);
+                Log.e("GpxExport.ExportTask generation", e);
                 return false;
             }
 
@@ -261,14 +260,14 @@ public class GpxExport extends AbstractExport {
                     fw = new OutputStreamWriter(os, "UTF-8");
                     fw.write(gpx.toString());
                 } catch (IOException e) {
-                    Log.e(Settings.tag, "GpxExport.ExportTask export", e);
+                    Log.e("GpxExport.ExportTask export", e);
                     return false;
                 } finally {
                     if (fw != null) {
                         try {
                             fw.close();
                         } catch (IOException e) {
-                            Log.e(Settings.tag, "GpxExport.ExportTask export", e);
+                            Log.e("GpxExport.ExportTask export", e);
                             return false;
                         }
                     }

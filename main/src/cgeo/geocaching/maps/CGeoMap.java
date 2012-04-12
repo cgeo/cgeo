@@ -673,7 +673,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
             menu.findItem(SUBMENU_STRATEGY).setEnabled(live);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeomap.onPrepareOptionsMenu: " + e.toString());
+            Log.e("cgeomap.onPrepareOptionsMenu: " + e.toString());
         }
 
         return true;
@@ -716,7 +716,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             }
                         }
                     } catch (Exception e) {
-                        Log.e(Settings.tag, "cgeomap.onOptionsItemSelected.#4: " + e.toString());
+                        Log.e("cgeomap.onOptionsItemSelected.#4: " + e.toString());
                     }
 
                     detailTotal = geocodes.size();
@@ -750,7 +750,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                                     dir = app.startDir(activity, dirUpdate);
                                 }
                             } catch (Exception e) {
-                                Log.e(Settings.tag, "cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
+                                Log.e("cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
                             }
                         }
                     });
@@ -910,7 +910,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
 
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w("Failed to update location.");
             }
         }
     }
@@ -1036,7 +1036,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     yield();
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "cgeomap.LoadTimer.run: " + e.toString());
+                    Log.w("cgeomap.LoadTimer.run: " + e.toString());
                 }
             }
         }
@@ -1109,7 +1109,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     yield();
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "cgeomap.LoadUsersTimer.run: " + e.toString());
+                    Log.w("cgeomap.LoadUsersTimer.run: " + e.toString());
                 }
             }
         }
@@ -1230,7 +1230,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 displayExecutor.execute(new DisplayRunnable(centerLat, centerLon, spanLat, spanLon));
 
             } catch (ThreadDeath e) {
-                Log.d(Settings.tag, "DownloadThread stopped");
+                Log.d("DownloadThread stopped");
                 displayHandler.sendEmptyMessage(UPDATE_TITLE);
             } finally {
                 showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
@@ -1293,7 +1293,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 displayHandler.sendEmptyMessage(UPDATE_TITLE);
             } catch (ThreadDeath e) {
-                Log.d(Settings.tag, "DisplayThread stopped");
+                Log.d("DisplayThread stopped");
                 displayHandler.sendEmptyMessage(UPDATE_TITLE);
             } finally {
                 showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
@@ -1482,7 +1482,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
 
                         if (handler.isCancelled()) {
-                            Log.i(Settings.tag, "Stopped storing process.");
+                            Log.i("Stopped storing process.");
 
                             break;
                         }
@@ -1490,7 +1490,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         cgBase.storeCache(activity, null, geocode, StoredList.STANDARD_LIST_ID, false, handler);
                     }
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.LoadDetails.run: " + e.toString());
+                    Log.e("cgeocaches.LoadDetails.run: " + e.toString());
                 } finally {
                     // one more cache over
                     detailProgress++;

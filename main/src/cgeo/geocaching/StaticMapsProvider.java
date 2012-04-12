@@ -154,7 +154,7 @@ public class StaticMapsProvider {
             try {
                 pool.add(currentTask, 20, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
-                Log.e(Settings.tag, "StaticMapsProvider.downloadMaps error adding task: " + e.toString());
+                Log.e("StaticMapsProvider.downloadMaps error adding task: " + e.toString());
             }
         }
     }
@@ -182,7 +182,7 @@ public class StaticMapsProvider {
                     StaticMapsProvider.getMapFile(geocode, "wp" + wp_id + "_", level, false).delete();
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "StaticMapsProvider.removeWpStaticMaps: " + e.toString());
+                Log.e("StaticMapsProvider.removeWpStaticMaps: " + e.toString());
             }
         }
     }

@@ -61,7 +61,7 @@ public abstract class Login {
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             Login.setActualStatus(cgBase.res.getString(R.string.err_login));
-            Log.e(Settings.tag, "cgeoBase.login: No login information stored");
+            Log.e("cgeoBase.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
@@ -76,12 +76,12 @@ public abstract class Login {
         }
 
         if (StringUtils.isBlank(loginData)) {
-            Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
+            Log.e("cgeoBase.login: Failed to retrieve login page (1st)");
             return StatusCode.CONNECTION_FAILED; // no loginpage
         }
 
         if (Login.getLoginStatus(loginData)) {
-            Log.i(Settings.tag, "Already logged in Geocaching.com as " + login.left);
+            Log.i("Already logged in Geocaching.com as " + login.left);
             Login.switchToEnglish(loginData);
             return StatusCode.NO_ERROR; // logged in
         }
@@ -98,7 +98,7 @@ public abstract class Login {
                 "ctl00$ContentBody$btnSignIn", "Login");
         final String[] viewstates = Login.getViewstates(loginData);
         if (cgBase.isEmpty(viewstates)) {
-            Log.e(Settings.tag, "cgeoBase.login: Failed to find viewstates");
+            Log.e("cgeoBase.login: Failed to find viewstates");
             return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
         }
         Login.putViewstates(params, viewstates);
@@ -108,7 +108,7 @@ public abstract class Login {
 
         if (StringUtils.isNotBlank(loginData)) {
             if (Login.getLoginStatus(loginData)) {
-                Log.i(Settings.tag, "Successfully logged in Geocaching.com as " + login.left);
+                Log.i("Successfully logged in Geocaching.com as " + login.left);
 
                 Login.switchToEnglish(loginData);
                 Settings.setCookieStore(Network.dumpCookieStore());
@@ -116,15 +116,15 @@ public abstract class Login {
                 return StatusCode.NO_ERROR; // logged in
             } else {
                 if (loginData.contains("Your username/password combination does not match.")) {
-                    Log.i(Settings.tag, "Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
+                    Log.i("Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
                     return StatusCode.WRONG_LOGIN_DATA; // wrong login
                 } else {
-                    Log.i(Settings.tag, "Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
+                    Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
                     return StatusCode.UNKNOWN_ERROR; // can't login
                 }
             }
         } else {
-            Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (2nd)");
+            Log.e("cgeoBase.login: Failed to retrieve login page (2nd)");
             // FIXME: should it be CONNECTION_FAILED to match the first attempt?
             return StatusCode.COMMUNICATION_ERROR; // no login page
         }
@@ -182,7 +182,7 @@ public abstract class Login {
      */
     public static boolean getLoginStatus(final String page) {
         if (StringUtils.isBlank(page)) {
-            Log.e(Settings.tag, "cgeoBase.checkLogin: No page given");
+            Log.e("cgeoBase.checkLogin: No page given");
             return false;
         }
 
@@ -216,14 +216,14 @@ public abstract class Login {
 
     private static void switchToEnglish(String previousPage) {
         if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
-            Log.i(Settings.tag, "Geocaching.com language already set to English");
+            Log.i("Geocaching.com language already set to English");
             // get find count
             getLoginStatus(Network.getResponseData(Network.request("http://www.geocaching.com/email/", null, false)));
         } else {
             final String page = Network.getResponseData(Network.request("http://www.geocaching.com/default.aspx", null, false));
             getLoginStatus(page);
             if (page == null) {
-                Log.e(Settings.tag, "Failed to read viewstates to set geocaching.com language");
+                Log.e("Failed to read viewstates to set geocaching.com language");
             }
             final Parameters params = new Parameters(
                     "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
@@ -231,7 +231,7 @@ public abstract class Login {
             Login.transferViewstates(page, params);
             final HttpResponse response = Network.postRequest("http://www.geocaching.com/default.aspx", params);
             if (!Network.isSuccess(response)) {
-                Log.e(Settings.tag, "Failed to set geocaching.com language to English");
+                Log.e("Failed to set geocaching.com language to English");
             }
         }
     }
@@ -250,9 +250,9 @@ public abstract class Login {
                 return imgGetter.getDrawable(avatarURL);
             }
             // No match? There may be no avatar set by user.
-            Log.d(Settings.tag, "No avatar set for user");
+            Log.d("No avatar set for user");
         } catch (Exception e) {
-            Log.w(Settings.tag, "Error when retrieving user avatar", e);
+            Log.w("Error when retrieving user avatar", e);
         }
         return null;
     }
@@ -265,7 +265,7 @@ public abstract class Login {
         final String result = Network.getResponseData(Network.request("http://www.geocaching.com/account/ManagePreferences.aspx", null, false, false, false));
 
         if (null == result) {
-            Log.w(Settings.tag, "cgeoBase.detectGcCustomDate: result is null");
+            Log.w("cgeoBase.detectGcCustomDate: result is null");
             return;
         }
 
@@ -322,7 +322,7 @@ public abstract class Login {
             try {
                 count = Integer.parseInt(matcherViewstateCount.group(1));
             } catch (NumberFormatException e) {
-                Log.e(Settings.tag, "getViewStates", e);
+                Log.e("getViewStates", e);
             }
         }
 
@@ -340,7 +340,7 @@ public abstract class Login {
                 try {
                     no = Integer.parseInt(sno);
                 } catch (NumberFormatException e) {
-                    Log.e(Settings.tag, "getViewStates", e);
+                    Log.e("getViewStates", e);
                     no = 0;
                 }
             }

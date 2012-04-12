@@ -370,7 +370,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         if (viewId == R.id.type) {
             for (final LogType typeOne : possibleLogTypes) {
                 menu.add(viewId, typeOne.id, 0, typeOne.getL10n());
-                Log.w(Settings.tag, "Adding " + typeOne + " " + typeOne.getL10n());
+                Log.w("Adding " + typeOne + " " + typeOne.getL10n());
             }
         } else if (viewId == R.id.changebutton) {
             final int textId = ((TextView) findViewById(viewId)).getId();
@@ -426,7 +426,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     return true;
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeovisit.onContextItemSelected: " + e.toString());
+                Log.e("cgeovisit.onContextItemSelected: " + e.toString());
             }
         } else {
             try {
@@ -449,14 +449,14 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                             tb.action = logType;
                             tbText.setText(res.getString(logType.resourceId) + " ▼");
 
-                            Log.i(Settings.tag, "Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
+                            Log.i("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
                         }
                     }
 
                     return true;
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeovisit.onContextItemSelected: " + e.toString());
+                Log.e("cgeovisit.onContextItemSelected: " + e.toString());
             }
         }
 
@@ -668,7 +668,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     possibleLogTypes.remove(LogType.LOG_UPDATE_COORDINATES);
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeovisit.loadData.run: " + e.toString());
+                Log.e("cgeovisit.loadData.run: " + e.toString());
             }
 
             loadDataHandler.sendEmptyMessage(0);
@@ -741,7 +741,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
             return status;
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeovisit.postLogFn: " + e.toString());
+            Log.e("cgeovisit.postLogFn: " + e.toString());
         }
 
         return StatusCode.LOG_POST_ERROR;

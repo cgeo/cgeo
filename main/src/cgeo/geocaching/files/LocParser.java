@@ -1,7 +1,6 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -103,8 +102,7 @@ public final class LocParser extends FileParser {
             }
         }
 
-        Log.i(Settings.tag,
-                "Coordinates found in .loc file: " + coords.size());
+        Log.i("Coordinates found in .loc file: " + coords.size());
         return coords;
     }
 
@@ -113,7 +111,7 @@ public final class LocParser extends FileParser {
         try {
             return new Geopoint(Double.valueOf(latitude), Double.valueOf(longitude));
         } catch (NumberFormatException e) {
-            Log.e(Settings.tag, "LOC format has changed");
+            Log.e("LOC format has changed");
         }
         // fall back to parser, just in case the format changes
         return GeopointParser.parse(latitude, longitude);
@@ -144,7 +142,7 @@ public final class LocParser extends FileParser {
             cache.setListId(listId);
             cache.setDetailed(true);
         }
-        Log.i(Settings.tag, "Caches found in .loc file: " + caches.size());
+        Log.i("Caches found in .loc file: " + caches.size());
         return caches;
     }
 

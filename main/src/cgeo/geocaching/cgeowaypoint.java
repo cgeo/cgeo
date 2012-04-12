@@ -111,7 +111,7 @@ public class cgeowaypoint extends AbstractActivity {
                     waitDialog.dismiss();
                     waitDialog = null;
                 }
-                Log.e(Settings.tag, "cgeowaypoint.loadWaypointHandler: " + e.toString());
+                Log.e("cgeowaypoint.loadWaypointHandler: " + e.toString());
             }
         }
 
@@ -295,7 +295,7 @@ public class cgeowaypoint extends AbstractActivity {
 
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
+                Log.e("cgeowaypoint.loadWaypoint.run: " + e.toString());
             }
         }
     }

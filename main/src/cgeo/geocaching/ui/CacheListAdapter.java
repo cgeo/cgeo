@@ -364,7 +364,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         if (position > getCount()) {
-            Log.w(Settings.tag, "CacheListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w("CacheListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 
@@ -770,7 +770,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
                     return true;
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "CacheListAdapter.detectGesture.onFling: " + e.toString());
+                Log.w("CacheListAdapter.detectGesture.onFling: " + e.toString());
             }
 
             return false;

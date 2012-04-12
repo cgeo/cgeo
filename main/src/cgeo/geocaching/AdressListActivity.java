@@ -49,7 +49,7 @@ public class AdressListActivity extends AbstractListActivity {
                 try {
                     return geocoder.getFromLocationName(keyword, 20);
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "AdressListActivity.doInBackground", e);
+                    Log.e("AdressListActivity.doInBackground", e);
                     return null;
                 }
             }
@@ -68,7 +68,7 @@ public class AdressListActivity extends AbstractListActivity {
                         }
                     }
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "AdressListActivity.onPostExecute", e);
+                    Log.e("AdressListActivity.onPostExecute", e);
                 }
             }
 

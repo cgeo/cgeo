@@ -1,7 +1,6 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgSelectMapfile;
 import cgeo.geocaching.utils.Log;
 
@@ -35,7 +34,7 @@ public class MapfileListAdapter extends ArrayAdapter<File> {
         }
 
         if (position > getCount()) {
-            Log.w(Settings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w("cgGPXListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 

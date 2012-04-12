@@ -133,7 +133,7 @@ public class LogTemplateProvider {
         try {
             return Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", ""));
         } catch (NumberFormatException e) {
-            Log.e(Settings.tag, "parseFindCount", e);
+            Log.e("parseFindCount", e);
             return -1;
         }
     }

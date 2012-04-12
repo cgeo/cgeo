@@ -68,7 +68,7 @@ public final class Go4Cache extends Thread {
 
     @Override
     public void run() {
-        Log.d(Settings.tag, "Go4Cache task started");
+        Log.d("Go4Cache task started");
         Geopoint latestCoords = null;
         String latestAction = null;
 
@@ -108,7 +108,7 @@ public final class Go4Cache extends Thread {
                 latestAction = currentAction;
             }
         } catch (InterruptedException e) {
-            Log.e(Settings.tag, "Go4Cache.run: interrupted", e);
+            Log.e("Go4Cache.run: interrupted", e);
         }
     }
 
@@ -138,7 +138,7 @@ public final class Go4Cache extends Thread {
         final String data = Network.getResponseData(Network.postRequest("http://api.go4cache.com/get.php", params));
 
         if (StringUtils.isBlank(data)) {
-            Log.e(Settings.tag, "cgeoBase.getGeocachersInViewport: No data from server");
+            Log.e("cgeoBase.getGeocachersInViewport: No data from server");
             return null;
         }
 
@@ -150,7 +150,7 @@ public final class Go4Cache extends Thread {
                 users.add(parseUser(oneUser));
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.getGeocachersInViewport: " + e.toString());
+            Log.e("cgBase.getGeocachersInViewport: " + e.toString());
         }
 
         return Collections.unmodifiableList(users);

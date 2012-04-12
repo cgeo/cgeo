@@ -37,7 +37,7 @@ public class cgeoabout extends AbstractActivity {
             ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
             ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeoabout.init: Failed to obtain package version.");
+            Log.e("cgeoabout.init: Failed to obtain package version.");
         }
     }
 

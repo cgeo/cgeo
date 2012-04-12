@@ -99,7 +99,7 @@ public class cgSearchHandler extends Handler {
 
                 imgHandler.sendEmptyMessage(0);
             } catch (IOException e) {
-                Log.e(Settings.tag, "Failed to download reCAPTCHA image");
+                Log.e("Failed to download reCAPTCHA image");
             }
         }
     }

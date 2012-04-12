@@ -228,7 +228,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_detail_cache_find_any));
-                Log.e(Settings.tag, "cgeocaches.loadCachesHandler: " + e.toString());
+                Log.e("cgeocaches.loadCachesHandler: " + e.toString());
 
                 hideLoading();
                 showProgress(false);
@@ -241,7 +241,7 @@ public class cgeocaches extends AbstractListActivity {
                 hideLoading();
                 showProgress(false);
             } catch (Exception e2) {
-                Log.e(Settings.tag, "cgeocaches.loadCachesHandler.2: " + e2.toString());
+                Log.e("cgeocaches.loadCachesHandler.2: " + e2.toString());
             }
 
             if (adapter != null) {
@@ -295,7 +295,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_detail_cache_find_next));
-                Log.e(Settings.tag, "cgeocaches.loadNextPageHandler: " + e.toString());
+                Log.e("cgeocaches.loadNextPageHandler: " + e.toString());
             }
 
             hideLoading();
@@ -625,7 +625,7 @@ public class cgeocaches extends AbstractListActivity {
             default:
                 title = "caches";
                 setTitle(title);
-                Log.e(Settings.tag, "cgeocaches.onCreate: No action or unknown action specified");
+                Log.e("cgeocaches.onCreate: No action or unknown action specified");
                 break;
         }
         prepareFilterBar();
@@ -900,7 +900,7 @@ public class cgeocaches extends AbstractListActivity {
                 item.setTitle(res.getString(R.string.export));
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeocaches.onPrepareOptionsMenu: " + e.toString());
+            Log.e("cgeocaches.onPrepareOptionsMenu: " + e.toString());
         }
 
         return true;
@@ -1071,7 +1071,7 @@ public class cgeocaches extends AbstractListActivity {
         try {
             adapterInfo = (AdapterContextMenuInfo) info;
         } catch (Exception e) {
-            Log.w(Settings.tag, "cgeocaches.onCreateContextMenu: " + e.toString());
+            Log.w("cgeocaches.onCreateContextMenu: " + e.toString());
         }
 
         if (adapterInfo == null || adapterInfo.position >= adapter.getCount()) {
@@ -1149,7 +1149,7 @@ public class cgeocaches extends AbstractListActivity {
         try {
             adapterInfo = (AdapterContextMenuInfo) info;
         } catch (Exception e) {
-            Log.w(Settings.tag, "cgeocaches.onContextItemSelected: " + e.toString());
+            Log.w("cgeocaches.onContextItemSelected: " + e.toString());
         }
 
         if (id == MENU_DEFAULT_NAVIGATION) {
@@ -1548,7 +1548,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to UpdateLocation location.");
+                Log.w("Failed to UpdateLocation location.");
             }
         }
     }
@@ -1773,7 +1773,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 try {
                     if (needToStop) {
-                        Log.i(Settings.tag, "Stopped storing process.");
+                        Log.i("Stopped storing process.");
                         break;
                     }
 
@@ -1784,15 +1784,15 @@ public class cgeocaches extends AbstractListActivity {
                                 delay = 500;
                             }
 
-                            Log.i(Settings.tag, "Waiting for next cache " + delay + " ms");
+                            Log.i("Waiting for next cache " + delay + " ms");
                             sleep(delay);
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "cgeocaches.LoadDetailsThread.sleep: " + e.toString());
+                            Log.e("cgeocaches.LoadDetailsThread.sleep: " + e.toString());
                         }
                     }
 
                     if (needToStop) {
-                        Log.i(Settings.tag, "Stopped storing process.");
+                        Log.i("Stopped storing process.");
                         break;
                     }
 
@@ -1803,7 +1803,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     yield();
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.LoadDetailsThread: " + e.toString());
+                    Log.e("cgeocaches.LoadDetailsThread: " + e.toString());
                 }
 
                 last = System.currentTimeMillis();
@@ -1893,7 +1893,7 @@ public class cgeocaches extends AbstractListActivity {
                         times = 0;
                     }
                 } catch (InterruptedException e) {
-                    Log.e(Settings.tag, "cgeocaches.LoadFromWebThread.sleep: " + e.toString());
+                    Log.e("cgeocaches.LoadFromWebThread.sleep: " + e.toString());
                 }
             }
 
@@ -1933,13 +1933,13 @@ public class cgeocaches extends AbstractListActivity {
 
                 try {
                     if (needToStop) {
-                        Log.i(Settings.tag, "Stopped dropping process.");
+                        Log.i("Stopped dropping process.");
                         break;
                     }
 
                     app.markDropped(cache.getGeocode());
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.DropDetailsThread: " + e.toString());
+                    Log.e("cgeocaches.DropDetailsThread: " + e.toString());
                 }
             }
             cacheListTemp.clear();
@@ -1980,7 +1980,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 try {
                     if (needToStop) {
-                        Log.i(Settings.tag, "Stopped removing process.");
+                        Log.i("Stopped removing process.");
                         break;
                     }
 
@@ -1991,7 +1991,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     yield();
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.RemoveFromHistoryThread: " + e.toString());
+                    Log.e("cgeocaches.RemoveFromHistoryThread: " + e.toString());
                 }
             }
 

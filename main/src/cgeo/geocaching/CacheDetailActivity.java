@@ -219,9 +219,9 @@ public class CacheDetailActivity extends AbstractActivity {
             String uriQuery = uri.getQuery();
 
             if (uriQuery != null) {
-                Log.i(Settings.tag, "Opening URI: " + uriHost + uriPath + "?" + uriQuery);
+                Log.i("Opening URI: " + uriHost + uriPath + "?" + uriQuery);
             } else {
-                Log.i(Settings.tag, "Opening URI: " + uriHost + uriPath);
+                Log.i("Opening URI: " + uriHost + uriPath);
             }
 
             if (uriHost.contains("geocaching.com")) {
@@ -743,7 +743,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 cacheDistanceView.setText(dist.toString());
                 cacheDistanceView.bringToFront();
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w("Failed to update location.");
             }
         }
     }
@@ -1019,7 +1019,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     ((ViewPager) container).addView(view, 0);
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "ViewPagerAdapter.instantiateItem ", e);
+                Log.e("ViewPagerAdapter.instantiateItem ", e);
             }
 
             return view;
@@ -1844,7 +1844,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     final HtmlImage mapGetter = new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, 0, false);
                     image = mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?zoom=15&size=" + width + "x" + height + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7Cshadow:false%7C" + latlonMap + "&sensor=false");
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "CacheDetailActivity.PreviewMapTask", e);
+                    Log.w("CacheDetailActivity.PreviewMapTask", e);
                 }
 
                 return image;

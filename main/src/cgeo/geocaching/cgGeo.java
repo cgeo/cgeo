@@ -45,7 +45,7 @@ public class cgGeo {
             try {
                 geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
             } catch (Exception e) {
-                Log.w(Settings.tag, "There is no location provider " + listener.locationProvider);
+                Log.w("There is no location provider " + listener.locationProvider);
             }
         }
     }
@@ -244,7 +244,7 @@ public class cgGeo {
                 lastLocation.setProvider(LAST_LOCATION_PSEUDO_PROVIDER);
                 assign(lastLocation);
 
-                Log.i(Settings.tag, "Using last location from " + provider);
+                Log.i("Using last location from " + provider);
                 break;
             }
         }

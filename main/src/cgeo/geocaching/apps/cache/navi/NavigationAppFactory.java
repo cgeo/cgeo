@@ -257,7 +257,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             try {
                 return app.invoke(geo, activity, cache, waypoint, destination);
             } catch (Exception e) {
-                Log.e(Settings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
+                Log.e("NavigationAppFactory.onMenuItemSelected: " + e.toString());
             }
         }
         return false;
@@ -291,7 +291,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             try {
                 app.invoke(geo, activity, cache, waypoint, destination);
             } catch (Exception e) {
-                Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
+                Log.e("NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
             }
         }
     }
@@ -314,7 +314,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             try {
                 app.invoke(geo, activity, cache, waypoint, destination);
             } catch (Exception e) {
-                Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication2: " + e.toString());
+                Log.e("NavigationAppFactory.startDefaultNavigationApplication2: " + e.toString());
             }
         }
     }

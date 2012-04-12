@@ -1,6 +1,5 @@
 package cgeo.geocaching.compatibility;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -15,7 +14,7 @@ public class AndroidLevel8 implements AndroidLevel8Interface {
     }
 
     public void dataChanged(final String name) {
-        Log.i(Settings.tag, "Requesting settings backup with settings manager");
+        Log.i("Requesting settings backup with settings manager");
         BackupManager.dataChanged(name);
     }
 }

@@ -1,6 +1,5 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.LocalStorage;
@@ -117,7 +116,7 @@ public abstract class Network {
                         HeaderElement[] codecs = ceheader.getElements();
                         for (int i = 0; i < codecs.length; i++) {
                             if (codecs[i].getName().equalsIgnoreCase("gzip")) {
-                                Log.d(Settings.tag, "Decompressing response");
+                                Log.d("Decompressing response");
                                 response.setEntity(
                                         new Network.GzipDecompressingEntity(response.getEntity()));
                                 return;
@@ -183,7 +182,7 @@ public abstract class Network {
             return Network.request(request);
         } catch (Exception e) {
             // Can be UnsupportedEncodingException, ClientProtocolException or IOException
-            Log.e(Settings.tag, "postRequest", e);
+            Log.e("postRequest", e);
             return null;
         }
     }
@@ -258,7 +257,7 @@ public abstract class Network {
 
     private static HttpResponse doRequest(final HttpRequestBase request) {
         final String reqLogStr = request.getMethod() + " " + hidePassword(request.getURI().toString());
-        Log.d(Settings.tag, reqLogStr);
+        Log.d(reqLogStr);
 
         final HttpClient client = getHttpClient();
         for (int i = 0; i <= NB_DOWNLOAD_RETRIES; i++) {
@@ -267,18 +266,18 @@ public abstract class Network {
                 final HttpResponse response = client.execute(request);
                 int status = response.getStatusLine().getStatusCode();
                 if (status == 200) {
-                    Log.d(Settings.tag, status + Network.formatTimeSpan(before) + reqLogStr);
+                    Log.d(status + Network.formatTimeSpan(before) + reqLogStr);
                 } else {
-                    Log.w(Settings.tag, status + " [" + response.getStatusLine().getReasonPhrase() + "]" + Network.formatTimeSpan(before) + reqLogStr);
+                    Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + Network.formatTimeSpan(before) + reqLogStr);
                 }
                 return response;
             } catch (IOException e) {
                 final String timeSpan = Network.formatTimeSpan(before);
                 final String tries = (i + 1) + "/" + (NB_DOWNLOAD_RETRIES + 1);
                 if (i == NB_DOWNLOAD_RETRIES) {
-                    Log.e(Settings.tag, "Failure " + tries + timeSpan + reqLogStr, e);
+                    Log.e("Failure " + tries + timeSpan + reqLogStr, e);
                 } else {
-                    Log.e(Settings.tag, "Failure " + tries + " (" + e.toString() + ")" + timeSpan + "- retrying " + reqLogStr);
+                    Log.e("Failure " + tries + " (" + e.toString() + ")" + timeSpan + "- retrying " + reqLogStr);
                 }
             }
         }
@@ -306,7 +305,7 @@ public abstract class Network {
             try {
                 return new JSONObject(Network.getResponseData(response));
             } catch (JSONException e) {
-                Log.e(Settings.tag, "Network.requestJSON", e);
+                Log.e("Network.requestJSON", e);
             }
         }
 
@@ -322,7 +321,7 @@ public abstract class Network {
             String data = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
             return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
         } catch (Exception e) {
-            Log.e(Settings.tag, "getResponseData", e);
+            Log.e("getResponseData", e);
             return null;
         }
     }
@@ -353,7 +352,7 @@ public abstract class Network {
                 response = postRequest(uri, null);
                 data = getResponseData(response);
             } else {
-                Log.i(Settings.tag, "Working as guest.");
+                Log.i("Working as guest.");
             }
         }
         return data;
@@ -378,7 +377,7 @@ public abstract class Network {
                 response = request(uri, params, xContentType, my, addF);
                 data = getResponseData(response);
             } else {
-                Log.i(Settings.tag, "Working as guest.");
+                Log.i("Working as guest.");
             }
         }
         return data;

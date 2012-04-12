@@ -271,7 +271,7 @@ public class cgeonavigate extends AbstractActivity {
             setDestCoords();
             updateDistanceInfo();
 
-            Log.d(Settings.tag, "destination set: " + title + " (" + dstCoords + ")");
+            Log.d("destination set: " + title + " (" + dstCoords + ")");
             return true;
         }
 
@@ -367,7 +367,7 @@ public class cgeonavigate extends AbstractActivity {
                     northHeading = geo.bearingNow;
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w("Failed to update location.");
             }
         }
     }

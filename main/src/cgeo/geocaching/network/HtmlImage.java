@@ -1,7 +1,6 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
@@ -91,7 +90,7 @@ public class HtmlImage implements Html.ImageGetter {
                         }
                     }
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "HtmlImage.getDrawable (downloading from web)", e);
+                    Log.e("HtmlImage.getDrawable (downloading from web)", e);
                 }
             }
         }
@@ -107,7 +106,7 @@ public class HtmlImage implements Html.ImageGetter {
 
         // get image and return
         if (imagePre == null) {
-            Log.d(Settings.tag, "HtmlImage.getDrawable: Failed to obtain image");
+            Log.d("HtmlImage.getDrawable: Failed to obtain image");
 
             if (returnErrorImage) {
                 imagePre = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_not_loaded);
@@ -130,7 +129,7 @@ public class HtmlImage implements Html.ImageGetter {
             try {
                 imagePre = Bitmap.createScaledBitmap(imagePre, width, height, true);
             } catch (Exception e) {
-                Log.d(Settings.tag, "HtmlImage.getDrawable: Failed to scale image");
+                Log.d("HtmlImage.getDrawable: Failed to scale image");
                 return null;
             }
         } else {
@@ -158,7 +157,7 @@ public class HtmlImage implements Html.ImageGetter {
             final File fileSec = LocalStorage.getStorageSecFile(geocode, url, true);
             return loadCachedImage(fileSec);
         } catch (Exception e) {
-            Log.w(Settings.tag, "HtmlImage.getDrawable (reading cache): " + e.toString());
+            Log.w("HtmlImage.getDrawable (reading cache): " + e.toString());
         }
         return null;
     }
@@ -182,7 +181,7 @@ public class HtmlImage implements Html.ImageGetter {
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "HtmlImage.makeAbsoluteURL (parse URL)", e);
+            Log.e("HtmlImage.makeAbsoluteURL (parse URL)", e);
         }
         return null;
     }
@@ -207,7 +206,7 @@ public class HtmlImage implements Html.ImageGetter {
             fis = new FileInputStream(file);
             BitmapFactory.decodeStream(fis, null, options);
         } catch (FileNotFoundException e) {
-            Log.e(Settings.tag, "HtmlImage.setSampleSize", e);
+            Log.e("HtmlImage.setSampleSize", e);
         } finally {
             if (fis != null) {
                 try {

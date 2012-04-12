@@ -73,7 +73,7 @@ public class cgeoinit extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_login_failed));
 
-                Log.e(Settings.tag, "cgeoinit.logInHandler: " + e.toString());
+                Log.e("cgeoinit.logInHandler: " + e.toString());
             }
 
             if (loginDialog != null && loginDialog.isShowing()) {
@@ -101,7 +101,7 @@ public class cgeoinit extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.init_sendToCgeo_register_fail));
 
-                Log.e(Settings.tag, "cgeoinit.webHandler: " + e.toString());
+                Log.e("cgeoinit.webHandler: " + e.toString());
             }
 
             if (webDialog != null && webDialog.isShowing()) {
@@ -872,7 +872,7 @@ public class cgeoinit extends AbstractActivity {
                         try {
                             pin = Integer.parseInt(strings[1].trim());
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "webDialog: " + e.toString());
+                            Log.e("webDialog: " + e.toString());
                         }
                         String code = strings[0];
                         Settings.setWebNameCode(nam, code);

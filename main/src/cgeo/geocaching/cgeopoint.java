@@ -498,7 +498,7 @@ public class cgeopoint extends AbstractActivity {
                 latButton.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 lonButton.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w("Failed to update location.");
             }
         }
     }

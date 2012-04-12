@@ -87,7 +87,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
                 initializeDistanceUnitSelector();
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeowaypointadd.loadWaypointHandler: " + e.toString());
+                Log.e("cgeowaypointadd.loadWaypointHandler: " + e.toString());
             } finally {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
@@ -251,7 +251,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
         @Override
         public void updateLocation(cgGeo geo) {
-            Log.d(Settings.tag, "cgeowaypointadd.updateLocation called");
+            Log.d("cgeowaypointadd.updateLocation called");
             if (geo == null || geo.coordsNow == null) {
                 return;
             }
@@ -262,7 +262,7 @@ public class cgeowaypointadd extends AbstractActivity {
                 bLat.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 bLon.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w("Failed to update location.");
             }
         }
     }
@@ -276,7 +276,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
+                Log.e("cgeowaypoint.loadWaypoint.run: " + e.toString());
             }
         }
     }

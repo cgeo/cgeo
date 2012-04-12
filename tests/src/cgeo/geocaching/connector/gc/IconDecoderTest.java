@@ -1,20 +1,19 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
+import cgeo.geocaching.utils.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
 
     public void testparseMapPNG14() {
         final Bitmap bitmap = getBitmap(R.raw.tile14);
-        Log.d(Settings.tag, "Bitmap=" + bitmap.getWidth() + "x" + bitmap.getHeight());
+        Log.d("Bitmap=" + bitmap.getWidth() + "x" + bitmap.getHeight());
 
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 97, 136, 14).getType());
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 226, 104, 14).getType());

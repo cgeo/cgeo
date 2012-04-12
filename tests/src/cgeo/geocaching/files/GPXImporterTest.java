@@ -8,10 +8,10 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
 import android.os.Message;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,7 +82,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         try {
             importThread.join();
         } catch (InterruptedException e) {
-            Log.e(Settings.tag, "GPXImporterTest.runImportThread", e);
+            Log.e("GPXImporterTest.runImportThread", e);
         }
         importStepHandler.waitForCompletion();
     }

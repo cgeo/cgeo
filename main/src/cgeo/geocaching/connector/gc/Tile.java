@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
@@ -226,7 +225,7 @@ public class Tile {
         try {
             return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
         } catch (IOException e) {
-            Log.e(Settings.tag, "cgBase.requestMapTile() " + e.getMessage());
+            Log.e("cgBase.requestMapTile() " + e.getMessage());
         }
         return null;
     }

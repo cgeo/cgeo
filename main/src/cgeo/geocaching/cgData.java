@@ -266,16 +266,16 @@ public class cgData {
                 databaseRW = dbHelper.getWritableDatabase();
 
                 if (databaseRW != null && databaseRW.isOpen()) {
-                    Log.i(Settings.tag, "Connection to RW database established.");
+                    Log.i("Connection to RW database established.");
                 } else {
-                    Log.e(Settings.tag, "Failed to open connection to RW database.");
+                    Log.e("Failed to open connection to RW database.");
                 }
 
                 if (databaseRW != null && databaseRW.inTransaction()) {
                     databaseRW.endTransaction();
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgData.openDb.RW: " + e.toString());
+                Log.e("cgData.openDb.RW: " + e.toString());
             }
         }
 
@@ -291,16 +291,16 @@ public class cgData {
                 }
 
                 if (databaseRO != null && databaseRO.isOpen()) {
-                    Log.i(Settings.tag, "Connection to RO database established.");
+                    Log.i("Connection to RO database established.");
                 } else {
-                    Log.e(Settings.tag, "Failed to open connection to RO database.");
+                    Log.e("Failed to open connection to RO database.");
                 }
 
                 if (databaseRO != null && databaseRO.inTransaction()) {
                     databaseRO.endTransaction();
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgData.openDb.RO: " + e.toString());
+                Log.e("cgData.openDb.RO: " + e.toString());
             }
         }
 
@@ -325,7 +325,7 @@ public class cgData {
             databaseRO = null;
             SQLiteDatabase.releaseMemory();
 
-            Log.d(Settings.tag, "Closing RO database");
+            Log.d("Closing RO database");
         }
 
         if (databaseRW != null) {
@@ -339,7 +339,7 @@ public class cgData {
             databaseRW = null;
             SQLiteDatabase.releaseMemory();
 
-            Log.d(Settings.tag, "Closing RW database");
+            Log.d("Closing RW database");
         }
 
         if (dbHelper != null) {
@@ -360,7 +360,7 @@ public class cgData {
 
     public String backupDatabase() {
         if (!LocalStorage.isExternalStorageAvailable()) {
-            Log.w(Settings.tag, "Database wasn't backed up: no external memory");
+            Log.w("Database wasn't backed up: no external memory");
             return null;
         }
 
@@ -370,10 +370,10 @@ public class cgData {
         init();
 
         if (backupDone) {
-            Log.i(Settings.tag, "Database was copied to " + target);
+            Log.i("Database was copied to " + target);
             return target.getPath();
         } else {
-            Log.e(Settings.tag, "Database could not be copied to " + target);
+            Log.e("Database could not be copied to " + target);
             return null;
         }
     }
@@ -389,7 +389,7 @@ public class cgData {
 
     public boolean restoreDatabase() {
         if (!LocalStorage.isExternalStorageAvailable()) {
-            Log.w(Settings.tag, "Database wasn't restored: no external memory");
+            Log.w("Database wasn't restored: no external memory");
             return false;
         }
 
@@ -399,9 +399,9 @@ public class cgData {
         init();
 
         if (restoreDone) {
-            Log.i(Settings.tag, "Database succesfully restored from " + sourceFile.getPath());
+            Log.i("Database succesfully restored from " + sourceFile.getPath());
         } else {
-            Log.e(Settings.tag, "Could not restore database from " + sourceFile.getPath());
+            Log.e("Could not restore database from " + sourceFile.getPath());
         }
 
         return restoreDone;
@@ -452,7 +452,7 @@ public class cgData {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            Log.i(Settings.tag, "Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": start");
+            Log.i("Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": start");
 
             try {
                 if (db.isReadOnly()) {
@@ -465,7 +465,7 @@ public class cgData {
                     dropDatabase(db);
                     onCreate(db);
 
-                    Log.i(Settings.tag, "Database structure created.");
+                    Log.i("Database structure created.");
                 }
 
                 if (oldVersion > 0) {
@@ -485,9 +485,9 @@ public class cgData {
                             db.execSQL("create index if not exists in_a on " + dbTableLogs + " (geocode)");
                             db.execSQL("create index if not exists in_a on " + dbTableTrackables + " (geocode)");
 
-                            Log.i(Settings.tag, "Indexes added.");
+                            Log.i("Indexes added.");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 34: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 34: " + e.toString());
                         }
                     }
 
@@ -496,9 +496,9 @@ public class cgData {
                             db.execSQL("alter table " + dbTableCaches + " add column direction text");
                             db.execSQL("alter table " + dbTableCaches + " add column distance double");
 
-                            Log.i(Settings.tag, "Columns direction and distance added to " + dbTableCaches + ".");
+                            Log.i("Columns direction and distance added to " + dbTableCaches + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 37: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 37: " + e.toString());
                         }
                     }
 
@@ -507,9 +507,9 @@ public class cgData {
                             db.execSQL("drop table " + dbTableLogs);
                             db.execSQL(dbCreateLogs);
 
-                            Log.i(Settings.tag, "Changed type column in " + dbTableLogs + " to integer.");
+                            Log.i("Changed type column in " + dbTableLogs + " to integer.");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 38: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 38: " + e.toString());
                         }
                     }
 
@@ -517,9 +517,9 @@ public class cgData {
                         try {
                             db.execSQL(dbCreateLists);
 
-                            Log.i(Settings.tag, "Created lists table.");
+                            Log.i("Created lists table.");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 39: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 39: " + e.toString());
                         }
                     }
 
@@ -528,9 +528,9 @@ public class cgData {
                             db.execSQL("drop table " + dbTableTrackables);
                             db.execSQL(dbCreateTrackables);
 
-                            Log.i(Settings.tag, "Changed type of geocode column in trackables table.");
+                            Log.i("Changed type of geocode column in trackables table.");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 40: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 40: " + e.toString());
                         }
                     }
 
@@ -540,9 +540,9 @@ public class cgData {
                             db.execSQL("alter table " + dbTableCaches + " add column votes integer");
                             db.execSQL("alter table " + dbTableCaches + " add column vote integer");
 
-                            Log.i(Settings.tag, "Added columns for GCvote.");
+                            Log.i("Added columns for GCvote.");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 41: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 41: " + e.toString());
                         }
                     }
 
@@ -550,9 +550,9 @@ public class cgData {
                         try {
                             db.execSQL(dbCreateLogsOffline);
 
-                            Log.i(Settings.tag, "Added table for offline logs");
+                            Log.i("Added table for offline logs");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 42: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 42: " + e.toString());
                         }
                     }
 
@@ -648,9 +648,9 @@ public class cgData {
                             db.execSQL("drop table " + dbTableCachesTemp);
                             db.setTransactionSuccessful();
 
-                            Log.i(Settings.tag, "Changed direction column");
+                            Log.i("Changed direction column");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 43: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 43: " + e.toString());
                         } finally {
                             db.endTransaction();
                         }
@@ -660,9 +660,9 @@ public class cgData {
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column favourite_cnt integer");
 
-                            Log.i(Settings.tag, "Column favourite_cnt added to " + dbTableCaches + ".");
+                            Log.i("Column favourite_cnt added to " + dbTableCaches + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 44: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 44: " + e.toString());
                         }
                     }
 
@@ -670,9 +670,9 @@ public class cgData {
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column owner_real text");
 
-                            Log.i(Settings.tag, "Column owner_real added to " + dbTableCaches + ".");
+                            Log.i("Column owner_real added to " + dbTableCaches + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 45: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 45: " + e.toString());
                         }
                     }
 
@@ -681,18 +681,18 @@ public class cgData {
                             db.execSQL("alter table " + dbTableCaches + " add column visiteddate long");
                             db.execSQL("create index if not exists in_f on " + dbTableCaches + " (visiteddate, detailedupdate)");
 
-                            Log.i(Settings.tag, "Added column for date of visit.");
+                            Log.i("Added column for date of visit.");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 46: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 46: " + e.toString());
                         }
                     }
                     if (oldVersion < 47) { // upgrade to 47
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column own integer not null default 0");
 
-                            Log.i(Settings.tag, "Added column own.");
+                            Log.i("Added column own.");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 47: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 47: " + e.toString());
                         }
                     }
 
@@ -700,9 +700,9 @@ public class cgData {
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column elevation double");
 
-                            Log.i(Settings.tag, "Column elevation added to " + dbTableCaches + ".");
+                            Log.i("Column elevation added to " + dbTableCaches + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 48: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 48: " + e.toString());
                         }
                     }
 
@@ -710,9 +710,9 @@ public class cgData {
                         try {
                             db.execSQL(dbCreateLogCount);
 
-                            Log.i(Settings.tag, "Created table " + dbTableLogCount + ".");
+                            Log.i("Created table " + dbTableLogCount + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 49: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 49: " + e.toString());
                         }
                     }
 
@@ -720,9 +720,9 @@ public class cgData {
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column myvote float");
 
-                            Log.i(Settings.tag, "Added float column for votes to " + dbTableCaches + ".");
+                            Log.i("Added float column for votes to " + dbTableCaches + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 50: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 50: " + e.toString());
                         }
                     }
 
@@ -730,9 +730,9 @@ public class cgData {
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column reliable_latlon integer");
 
-                            Log.i(Settings.tag, "Column reliable_latlon added to " + dbTableCaches + ".");
+                            Log.i("Column reliable_latlon added to " + dbTableCaches + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 51: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 51: " + e.toString());
                         }
                     }
 
@@ -740,9 +740,9 @@ public class cgData {
                         try {
                             db.execSQL(dbCreateSearchDestinationHistory);
 
-                            Log.i(Settings.tag, "Added table " + dbTableSearchDestionationHistory + ".");
+                            Log.i("Added table " + dbTableSearchDestionationHistory + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 52", e);
+                            Log.e("Failed to upgrade to ver. 52", e);
                         }
                     }
 
@@ -750,9 +750,9 @@ public class cgData {
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
 
-                            Log.i(Settings.tag, "Column onWatchlist added to " + dbTableCaches + ".");
+                            Log.i("Column onWatchlist added to " + dbTableCaches + ".");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 53", e);
+                            Log.e("Failed to upgrade to ver. 53", e);
                         }
                     }
 
@@ -760,7 +760,7 @@ public class cgData {
                         try {
                             db.execSQL(dbCreateLogImages);
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 54: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 54: " + e.toString());
 
                         }
                     }
@@ -769,7 +769,7 @@ public class cgData {
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 55: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 55: " + e.toString());
                         }
                     }
 
@@ -781,7 +781,7 @@ public class cgData {
                                     "lower(attribute) where attribute like \"%_yes\" " +
                                     "or attribute like \"%_no\"");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 56: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 56: " + e.toString());
                         }
                     }
 
@@ -796,7 +796,7 @@ public class cgData {
                             db.execSQL("drop index in_f");
                             createIndices(db);
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 57: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 57: " + e.toString());
                         }
                     }
 
@@ -884,9 +884,9 @@ public class cgData {
 
                             db.setTransactionSuccessful();
 
-                            Log.i(Settings.tag, "Removed latitude_string and longitude_string columns");
+                            Log.i("Removed latitude_string and longitude_string columns");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 58", e);
+                            Log.e("Failed to upgrade to ver. 58", e);
                         } finally {
                             db.endTransaction();
                         }
@@ -898,7 +898,7 @@ public class cgData {
                             createIndices(db);
                             removeObsoleteCacheDirectories(db);
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 59", e);
+                            Log.e("Failed to upgrade to ver. 59", e);
                         }
                     }
 
@@ -906,7 +906,7 @@ public class cgData {
                         try {
                             removeSecEmptyDirs();
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 60", e);
+                            Log.e("Failed to upgrade to ver. 60", e);
                         }
                     }
                     if (oldVersion < 61) {
@@ -914,7 +914,7 @@ public class cgData {
                             db.execSQL("alter table " + dbTableLogs + " add column friend integer");
                             db.execSQL("alter table " + dbTableCaches + " add column coordsChanged integer default 0");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 61: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 61: " + e.toString());
 
                         }
                     }
@@ -925,7 +925,7 @@ public class cgData {
                             db.execSQL("alter table " + dbTableWaypoints + " add column own integer default 0");
                             db.execSQL("update " + dbTableWaypoints + " set own = 1 where type = 'own'");
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "Failed to upgrade to ver. 62: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 62: " + e.toString());
 
                         }
                     }
@@ -936,7 +936,7 @@ public class cgData {
                 db.endTransaction();
             }
 
-            Log.i(Settings.tag, "Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
+            Log.i("Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
         }
     }
 
@@ -969,7 +969,7 @@ public class cgData {
             @Override
             public void run() {
                 for (final File dir : toRemove) {
-                    Log.i(Settings.tag, "Removing obsolete cache directory for " + dir.getName());
+                    Log.i("Removing obsolete cache directory for " + dir.getName());
                     LocalStorage.deleteDirectory(dir);
                 }
             }
@@ -1033,7 +1033,7 @@ public class cgData {
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.allDetailedThere: " + e.toString());
+            Log.e("cgData.allDetailedThere: " + e.toString());
         }
 
         if (cursor != null) {
@@ -1094,7 +1094,7 @@ public class cgData {
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.isThere: " + e.toString());
+            Log.e("cgData.isThere: " + e.toString());
         }
 
         if (cursor != null) {
@@ -1172,7 +1172,7 @@ public class cgData {
                 cursor.close();
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.isOffline: " + e.toString());
+            Log.e("cgData.isOffline: " + e.toString());
         }
 
         return listId >= StoredList.STANDARD_LIST_ID;
@@ -1193,7 +1193,7 @@ public class cgData {
         } catch (SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getGeocodeForGuid", e);
+            Log.e("cgData.getGeocodeForGuid", e);
         }
 
         return null;
@@ -1214,7 +1214,7 @@ public class cgData {
         } catch (SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getCacheidForGeocode", e);
+            Log.e("cgData.getCacheidForGeocode", e);
         }
 
         return null;
@@ -1255,7 +1255,7 @@ public class cgData {
 
         cache.addStorageLocation(StorageLocation.DATABASE);
         cacheCache.putCacheInCache(cache);
-        Log.d(Settings.tag, "Saving " + cache.toString() + " (" + cache.getListId() + ") to DB");
+        Log.d("Saving " + cache.toString() + " (" + cache.getListId() + ") to DB");
 
         ContentValues values = new ContentValues();
 
@@ -1428,7 +1428,7 @@ public class cgData {
             databaseRW.insert(dbTableSearchDestionationHistory, null, values);
             databaseRW.setTransactionSuccessful();
         } catch (Exception e) {
-            Log.e(Settings.tag, "Updating searchedDestinations db failed", e);
+            Log.e("Updating searchedDestinations db failed", e);
         } finally {
             databaseRW.endTransaction();
         }
@@ -1441,7 +1441,7 @@ public class cgData {
 
         init();
 
-        Log.d(Settings.tag, "cgData.saveWaypoints(drop=" + drop + ")");
+        Log.d("cgData.saveWaypoints(drop=" + drop + ")");
 
         boolean ok = false;
         databaseRW.beginTransaction();
@@ -1846,7 +1846,7 @@ public class cgData {
         }
 
         if (remaining.size() >= 1) {
-            Log.e(Settings.tag, "cgData.loadCaches(" + remaining.toString() + ") failed");
+            Log.e("cgData.loadCaches(" + remaining.toString() + ") failed");
         }
         return result;
     }
@@ -1877,7 +1877,7 @@ public class cgData {
             throw new IllegalArgumentException("Please use only one parameter");
         }
 
-        Log.d(Settings.tag, "cgData.loadCaches(" + geocodes.toString() + ") from DB");
+        Log.d("cgData.loadCaches(" + geocodes.toString() + ") from DB");
 
         init();
 
@@ -1967,7 +1967,7 @@ public class cgData {
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getCaches: " + e.toString());
+            Log.e("cgData.getCaches: " + e.toString());
         }
 
         if (cursor != null) {
@@ -2134,7 +2134,7 @@ public class cgData {
         cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
         cache.setFinalDefined(cursor.getInt(cacheColumnIndex[40]) > 0);
 
-        Log.d(Settings.tag, "Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
+        Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
         return cache;
     }
@@ -2193,7 +2193,7 @@ public class cgData {
                 null,
                 "1");
 
-        Log.d(Settings.tag, "cgData.loadWaypoint(" + id + ")");
+        Log.d("cgData.loadWaypoint(" + id + ")");
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -2356,7 +2356,7 @@ public class cgData {
             databaseRW.setTransactionSuccessful();
         } catch (Exception e) {
             success = false;
-            Log.e(Settings.tag, "Unable to clear searched destinations", e);
+            Log.e("Unable to clear searched destinations", e);
         } finally {
             databaseRW.endTransaction();
         }
@@ -2591,7 +2591,7 @@ public class cgData {
             count = (int) compiledStmnt.simpleQueryForLong();
             compiledStmnt.close();
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.loadAllStoredCachesCount: " + e.toString());
+            Log.e("cgData.loadAllStoredCachesCount: " + e.toString());
         }
 
         return count;
@@ -2607,7 +2607,7 @@ public class cgData {
             count = (int) sqlCount.simpleQueryForLong();
             sqlCount.close();
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getAllHistoricCachesCount: " + e.toString());
+            Log.e("cgData.getAllHistoricCachesCount: " + e.toString());
         }
 
         return count;
@@ -2665,7 +2665,7 @@ public class cgData {
             }
 
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.loadBatchOfStoredGeocodes: " + e.toString());
+            Log.e("cgData.loadBatchOfStoredGeocodes: " + e.toString());
         }
 
         return geocodes;
@@ -2715,7 +2715,7 @@ public class cgData {
                 cursor.close();
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.loadBatchOfHistoricGeocodes: " + e.toString());
+            Log.e("cgData.loadBatchOfHistoricGeocodes: " + e.toString());
         }
 
         return geocodes;
@@ -2788,7 +2788,7 @@ public class cgData {
             }
             cursor.close();
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.loadInViewport: " + e.toString());
+            Log.e("cgData.loadInViewport: " + e.toString());
         }
 
         return geocodes;
@@ -2838,7 +2838,7 @@ public class cgData {
     public void clean(boolean more) {
         init();
 
-        Log.d(Settings.tag, "Database clean: started");
+        Log.d("Database clean: started");
 
         Cursor cursor = null;
         Set<String> geocodes = new HashSet<String>();
@@ -2883,7 +2883,7 @@ public class cgData {
 
             final int size = geocodes.size();
             if (size > 0) {
-                Log.d(Settings.tag, "Database clean: removing " + size + " geocaches from listId=0");
+                Log.d("Database clean: removing " + size + " geocaches from listId=0");
 
                 removeCaches(geocodes, LoadFlags.REMOVE_ALL);
             }
@@ -2891,13 +2891,13 @@ public class cgData {
             final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
             final int count = (int) countSql.simpleQueryForLong();
             countSql.close();
-            Log.d(Settings.tag, "Database clean: " + count + " geocaches remaining for listId=0");
+            Log.d("Database clean: " + count + " geocaches remaining for listId=0");
 
         } catch (Exception e) {
-            Log.w(Settings.tag, "cgData.clean: " + e.toString());
+            Log.w("cgData.clean: " + e.toString());
         }
 
-        Log.d(Settings.tag, "Database clean: finished");
+        Log.d("Database clean: finished");
     }
 
     /**
@@ -2913,7 +2913,7 @@ public class cgData {
             values.put("reason", StoredList.TEMPORARY_LIST_ID);
             databaseRW.update(dbTableCaches, values, "reason = ?", new String[] { Integer.toString(listId) });
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.dropList: error when updating reason", e);
+            Log.e("cgData.dropList: error when updating reason", e);
         }
     }
 
@@ -3010,7 +3010,7 @@ public class cgData {
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.saveLogOffline: " + e.toString());
+            Log.e("cgData.saveLogOffline: " + e.toString());
         }
 
         return status;
@@ -3092,7 +3092,7 @@ public class cgData {
                 return logCount.simpleQueryForLong() > 0;
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.hasLogOffline", e);
+            Log.e("cgData.hasLogOffline", e);
         }
 
         return false;
@@ -3135,7 +3135,7 @@ public class cgData {
             lists.addAll(storedLists);
 
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.readLists: " + e.toString());
+            Log.e("cgData.readLists: " + e.toString());
         }
         return lists;
     }
@@ -3324,7 +3324,7 @@ public class cgData {
                 databaseRW.delete(dbTableSearchDestionationHistory, "_id = " + destination.getId(), null);
                 databaseRW.setTransactionSuccessful();
             } catch (Exception e) {
-                Log.e(Settings.tag, "Unable to remove searched destination", e);
+                Log.e("Unable to remove searched destination", e);
                 success = false;
             } finally {
                 databaseRW.endTransaction();
@@ -3361,7 +3361,7 @@ public class cgData {
         } catch (SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getCacheDescription", e);
+            Log.e("cgData.getCacheDescription", e);
         }
 
         return null;

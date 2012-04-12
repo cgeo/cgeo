@@ -84,8 +84,7 @@ class GoogleNavigationApp extends AbstractNavigationApp {
             // nothing
         }
 
-        Log.i(Settings.tag,
-                "cgBase.runNavigation: No navigation application available.");
+        Log.i("cgBase.runNavigation: No navigation application available.");
         return false;
     }
 

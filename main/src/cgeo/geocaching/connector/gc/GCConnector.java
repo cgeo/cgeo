@@ -90,7 +90,7 @@ public class GCConnector extends AbstractConnector {
     public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final CancellableHandler handler) {
 
         if (app == null) {
-            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No application found");
+            Log.e("cgeoBase.searchByGeocode: No application found");
             return null;
         }
 
@@ -111,7 +111,7 @@ public class GCConnector extends AbstractConnector {
             final SearchResult search = new SearchResult();
             if (app.isThere(geocode, guid, true, false)) {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
-                    Log.i(Settings.tag, "Loading old cache from cache.");
+                    Log.i("Loading old cache from cache.");
 
                     search.addGeocode(app.getGeocode(guid));
                 } else {
@@ -121,7 +121,7 @@ public class GCConnector extends AbstractConnector {
                 return search;
             }
 
-            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No data from server");
+            Log.e("cgeoBase.searchByGeocode: No data from server");
             search.setError(StatusCode.COMMUNICATION_ERROR);
             return search;
         }
@@ -129,7 +129,7 @@ public class GCConnector extends AbstractConnector {
         final SearchResult searchResult = cgBase.parseCache(page, handler);
 
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No cache parsed");
+            Log.e("cgeoBase.searchByGeocode: No cache parsed");
             return searchResult;
         }
 

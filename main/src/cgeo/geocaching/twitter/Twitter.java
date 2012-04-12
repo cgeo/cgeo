@@ -38,12 +38,12 @@ public final class Twitter {
             OAuth.signOAuth("api.twitter.com", "/1/statuses/update.json", "POST", false, parameters, Settings.getTokenPublic(), Settings.getTokenSecret());
             final HttpResponse httpResponse = Network.postRequest("http://api.twitter.com/1/statuses/update.json", parameters);
             if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
-                Log.i(Settings.tag, "Tweet posted");
+                Log.i("Tweet posted");
             } else {
-                Log.e(Settings.tag, "Tweet could not be posted");
+                Log.e("Tweet could not be posted");
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.postTweet: " + e.toString());
+            Log.e("cgBase.postTweet: " + e.toString());
         }
     }
 

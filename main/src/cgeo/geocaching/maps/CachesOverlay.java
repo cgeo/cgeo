@@ -247,7 +247,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             waitDialog.dismiss();
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgMapOverlay.onTap: " + e.toString());
+            Log.e("cgMapOverlay.onTap: " + e.toString());
         }
 
         return false;
@@ -258,7 +258,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         try {
             return items.get(index);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgMapOverlay.createItem: " + e.toString());
+            Log.e("cgMapOverlay.createItem: " + e.toString());
         }
 
         return null;
@@ -269,7 +269,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         try {
             return items.size();
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgMapOverlay.size: " + e.toString());
+            Log.e("cgMapOverlay.size: " + e.toString());
         }
 
         return 0;

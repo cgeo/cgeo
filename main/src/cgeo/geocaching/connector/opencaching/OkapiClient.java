@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.opencaching;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgLog;
@@ -114,7 +113,7 @@ final public class OkapiClient {
                 return caches;
             }
         } catch (JSONException e) {
-            Log.e(Settings.tag, "OkapiClient.parseCaches", e);
+            Log.e("OkapiClient.parseCaches", e);
         }
         return null;
     }
@@ -181,7 +180,7 @@ final public class OkapiClient {
             // save full detailed caches
             cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         } catch (JSONException e) {
-            Log.e(Settings.tag, "OkapiClient.parseCache", e);
+            Log.e("OkapiClient.parseCache", e);
         }
         return cache;
     }
@@ -218,7 +217,7 @@ final public class OkapiClient {
                 }
                 result.add(log);
             } catch (JSONException e) {
-                Log.e(Settings.tag, "OkapiClient.parseLogs", e);
+                Log.e("OkapiClient.parseLogs", e);
             }
         }
         return result;
@@ -240,7 +239,7 @@ final public class OkapiClient {
         try {
             return ISO8601DATEFORMAT.parse(strippedDate);
         } catch (ParseException e) {
-            Log.e(Settings.tag, "OkapiClient.parseDate", e);
+            Log.e("OkapiClient.parseDate", e);
         }
         return null;
     }
@@ -260,7 +259,7 @@ final public class OkapiClient {
         try {
             size = response.getDouble(CACHE_SIZE);
         } catch (JSONException e) {
-            Log.e(Settings.tag, "OkapiClient.getCacheSize", e);
+            Log.e("OkapiClient.getCacheSize", e);
         }
         switch ((int) Math.round(size)) {
             case 1:

@@ -164,12 +164,12 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://" + host + pathAuthorize + "?" + encodedParams)));
                         status = 1;
                     } catch (Exception e) {
-                        Log.e(Settings.tag, "TwitterAuthorizationActivity.requestToken(2): " + e.toString());
+                        Log.e("TwitterAuthorizationActivity.requestToken(2): " + e.toString());
                     }
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "TwitterAuthorizationActivity.requestToken(1): " + e.toString());
+            Log.e("TwitterAuthorizationActivity.requestToken(1): " + e.toString());
         }
 
         requestTokenHandler.sendEmptyMessage(status);
@@ -209,7 +209,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
                 status = 1;
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "TwitterAuthorizationActivity.changeToken: " + e.toString());
+            Log.e("TwitterAuthorizationActivity.changeToken: " + e.toString());
         }
 
         changeTokensHandler.sendEmptyMessage(status);

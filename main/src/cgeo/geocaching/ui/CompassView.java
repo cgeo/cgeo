@@ -1,7 +1,6 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -58,7 +57,7 @@ public class CompassView extends View {
             try {
                 invalidate();
             } catch (Exception e) {
-                Log.e(Settings.tag, "CompassView.changeHandler: " + e.toString());
+                Log.e("CompassView.changeHandler: " + e.toString());
             }
         }
     };

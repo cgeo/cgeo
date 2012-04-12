@@ -1,7 +1,6 @@
 package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgeoapplication;
@@ -159,7 +158,7 @@ public class FieldnoteExport extends AbstractExport {
                     }
                     publishProgress(i + 1);
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "FieldnoteExport.ExportTask generation", e);
+                    Log.e("FieldnoteExport.ExportTask generation", e);
                     return false;
                 }
             }
@@ -179,14 +178,14 @@ public class FieldnoteExport extends AbstractExport {
                     fw = new OutputStreamWriter(os, "ISO-8859-1"); // TODO: gc.com doesn't support UTF-8
                     fw.write(fieldNoteBuffer.toString());
                 } catch (IOException e) {
-                    Log.e(Settings.tag, "FieldnoteExport.ExportTask export", e);
+                    Log.e("FieldnoteExport.ExportTask export", e);
                     return false;
                 } finally {
                     if (fw != null) {
                         try {
                             fw.close();
                         } catch (IOException e) {
-                            Log.e(Settings.tag, "FieldnoteExport.ExportTask export", e);
+                            Log.e("FieldnoteExport.ExportTask export", e);
                             return false;
                         }
                     }

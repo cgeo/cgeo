@@ -113,7 +113,7 @@ public class GCBase {
      * @return
      */
     private static SearchResult searchByViewport(final Viewport viewport, final String[] tokens, Strategy strategy) {
-        Log.d(Settings.tag, "GCBase.searchByViewport" + viewport.toString());
+        Log.d("GCBase.searchByViewport" + viewport.toString());
 
         String referer = GCConstants.URL_LIVE_MAP;
 
@@ -166,11 +166,11 @@ public class GCBase {
 
                     String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
                     if (StringUtils.isEmpty(data)) {
-                        Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                        Log.e("GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
                     } else {
                         final SearchResult search = parseMapJSON(data, tile, bitmap, strategy);
                         if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
-                            Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+                            Log.e("GCBase.searchByViewport: No cache parsed for viewport " + viewport);
                         }
                         else {
                             searchResult.addGeocodes(search.getGeocodes());
@@ -308,10 +308,10 @@ public class GCBase {
                 }
                 searchResult.addCache(cache);
             }
-            Log.d(Settings.tag, "Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
+            Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
         } catch (Exception e) {
-            Log.e(Settings.tag, "GCBase.parseMapJSON", e);
+            Log.e("GCBase.parseMapJSON", e);
         }
 
         return searchResult;

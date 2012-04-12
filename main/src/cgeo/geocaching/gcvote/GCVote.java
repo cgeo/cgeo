@@ -117,7 +117,7 @@ public final class GCVote {
                         }
                     }
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "GCVote.getRating: Failed to parse guid");
+                    Log.w("GCVote.getRating: Failed to parse guid");
                 }
                 if (guid == null) {
                     continue;
@@ -134,7 +134,7 @@ public final class GCVote {
                         }
                     }
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "GCVote.getRating: Failed to parse loggedIn");
+                    Log.w("GCVote.getRating: Failed to parse loggedIn");
                 }
 
                 float rating = 0;
@@ -144,7 +144,7 @@ public final class GCVote {
                         rating = Float.parseFloat(matcherRating.group(1));
                     }
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "GCVote.getRating: Failed to parse rating");
+                    Log.w("GCVote.getRating: Failed to parse rating");
                 }
                 if (rating <= 0) {
                     continue;
@@ -157,7 +157,7 @@ public final class GCVote {
                         votes = Integer.parseInt(matcherVotes.group(1));
                     }
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "GCVote.getRating: Failed to parse vote count");
+                    Log.w("GCVote.getRating: Failed to parse vote count");
                 }
                 if (votes < 0) {
                     continue;
@@ -171,7 +171,7 @@ public final class GCVote {
                             myVote = Float.parseFloat(matcherVote.group(1));
                         }
                     } catch (Exception e) {
-                        Log.w(Settings.tag, "GCVote.getRating: Failed to parse user's vote");
+                        Log.w("GCVote.getRating: Failed to parse user's vote");
                     }
                 }
 
@@ -182,7 +182,7 @@ public final class GCVote {
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "GCVote.getRating: " + e.toString());
+            Log.e("GCVote.getRating: " + e.toString());
         }
 
         return ratings;
@@ -257,7 +257,7 @@ public final class GCVote {
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "GCvote.loadRatings: " + e.toString());
+            Log.e("GCvote.loadRatings: " + e.toString());
         }
     }
 }

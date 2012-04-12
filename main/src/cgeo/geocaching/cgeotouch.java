@@ -408,7 +408,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
                     loadDataHandler.obtainMessage(MSG_UPDATE_TYPE, typeSelected).sendToTarget();
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeotouch.loadData.run: " + e.toString());
+                Log.e("cgeotouch.loadData.run: " + e.toString());
             }
 
             loadDataHandler.sendEmptyMessage(0);
@@ -452,7 +452,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
 
             return status;
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeotouch.postLogFn: " + e.toString());
+            Log.e("cgeotouch.postLogFn: " + e.toString());
         }
 
         return StatusCode.LOG_POST_ERROR;

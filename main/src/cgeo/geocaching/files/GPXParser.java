@@ -1,7 +1,6 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
@@ -259,7 +258,7 @@ public abstract class GPXParser extends FileParser {
                                 Double.valueOf(attrs.getValue("lon"))));
                     }
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "Failed to parse waypoint's latitude and/or longitude.");
+                    Log.w("Failed to parse waypoint's latitude and/or longitude.");
                 }
             }
         });
@@ -295,7 +294,7 @@ public abstract class GPXParser extends FileParser {
 
                     final String key = cache.getGeocode();
                     if (result.containsKey(key)) {
-                        Log.w(Settings.tag, "Duplicate geocode during GPX import: " + key);
+                        Log.w("Duplicate geocode during GPX import: " + key);
                     }
                     result.put(key, cache);
                     showProgressMessage(progressHandler, progressStream.getProgress());
@@ -346,7 +345,7 @@ public abstract class GPXParser extends FileParser {
                 try {
                     cache.setHidden(parseDate(body));
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "Failed to parse cache date: " + e.toString());
+                    Log.w("Failed to parse cache date: " + e.toString());
                 }
             }
         });
@@ -468,7 +467,7 @@ public abstract class GPXParser extends FileParser {
                             cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
                         }
                     } catch (Exception e) {
-                        Log.w(Settings.tag, "Failed to parse cache attributes.");
+                        Log.w("Failed to parse cache attributes.");
                     }
                 }
             });
@@ -548,7 +547,7 @@ public abstract class GPXParser extends FileParser {
                     try {
                         cache.setDifficulty(Float.parseFloat(body));
                     } catch (NumberFormatException e) {
-                        Log.w(Settings.tag, "Failed to parse difficulty: " + e.toString());
+                        Log.w("Failed to parse difficulty: " + e.toString());
                     }
                 }
             });
@@ -561,7 +560,7 @@ public abstract class GPXParser extends FileParser {
                     try {
                         cache.setTerrain(Float.parseFloat(body));
                     } catch (NumberFormatException e) {
-                        Log.w(Settings.tag, "Failed to parse terrain: " + e.toString());
+                        Log.w("Failed to parse terrain: " + e.toString());
                     }
                 }
             });
@@ -705,7 +704,7 @@ public abstract class GPXParser extends FileParser {
                     try {
                         log.date = parseDate(body).getTime();
                     } catch (Exception e) {
-                        Log.w(Settings.tag, "Failed to parse log date: " + e.toString());
+                        Log.w("Failed to parse log date: " + e.toString());
                     }
                 }
             });
@@ -744,7 +743,7 @@ public abstract class GPXParser extends FileParser {
             Xml.parse(progressStream, Xml.Encoding.UTF_8, root.getContentHandler());
             return result.values();
         } catch (SAXException e) {
-            Log.e(Settings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
+            Log.e("Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
     }

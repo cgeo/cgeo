@@ -44,7 +44,7 @@ public class cgTrackable implements ILogable {
                 int id = Integer.parseInt(hex, 16);
                 return "http://geokrety.org/konkret.php?id=" + id;
             } catch (NumberFormatException e) {
-                Log.e(Settings.tag, "cgTrackable.getUrl", e);
+                Log.e("cgTrackable.getUrl", e);
                 return null;
             }
         }

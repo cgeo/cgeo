@@ -221,7 +221,7 @@ public class cgeotrackable extends AbstractActivity {
                                 Message message = handler.obtainMessage(0, image);
                                 handler.sendMessage(message);
                             } catch (Exception e) {
-                                Log.e(Settings.tag, "cgeospoilers.onCreate.onClick.run: " + e.toString());
+                                Log.e("cgeospoilers.onCreate.onClick.run: " + e.toString());
                             }
                         }
                     }.start();
@@ -229,7 +229,7 @@ public class cgeotrackable extends AbstractActivity {
                     imgView.addView(trackableImage);
                 }
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeotrackable.loadTrackableHandler: " + e.toString() + Arrays.toString(e.getStackTrace()));
+                Log.e("cgeotrackable.loadTrackableHandler: " + e.toString() + Arrays.toString(e.getStackTrace()));
             }
 
             displayLogs();
@@ -525,7 +525,7 @@ public class cgeotrackable extends AbstractActivity {
                 registerForContextMenu(view);
                 openContextMenu(view);
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeotrackable.userActions.onClick ", e);
+                Log.e("cgeotrackable.userActions.onClick ", e);
             }
         }
     }
@@ -573,7 +573,7 @@ public class cgeotrackable extends AbstractActivity {
                 Message message = handler.obtainMessage(0, image);
                 handler.sendMessage(message);
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeotrackable.tbIconThread.run: " + e.toString());
+                Log.e("cgeotrackable.tbIconThread.run: " + e.toString());
             }
         }
     }

@@ -146,7 +146,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
             }
         } catch (Exception e) {
-            Log.w(Settings.tag, "cgeoadvsearch.instantSearch: " + e.toString());
+            Log.w("cgeoadvsearch.instantSearch: " + e.toString());
         }
 
         return false;
@@ -271,7 +271,7 @@ public class cgeoadvsearch extends AbstractActivity {
                     }
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w("Failed to update location.");
             }
         }
     }

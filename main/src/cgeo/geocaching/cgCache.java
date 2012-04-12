@@ -392,10 +392,10 @@ public class cgCache implements ICache, IWaypoint {
         Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
         Matcher matcherOk = patternOk.matcher(page);
         if (matcherOk.find()) {
-            Log.i(Settings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
+            Log.i("cgCache.isGuidContainedInPage: guid '" + guid + "' found");
             return true;
         } else {
-            Log.i(Settings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
+            Log.i("cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
             return false;
         }
     }
@@ -1338,7 +1338,7 @@ public class cgCache implements ICache, IWaypoint {
                 matcher = coordPattern.matcher(note);
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgCache.parseWaypointsFromNote: " + e.toString());
+            Log.e("cgCache.parseWaypointsFromNote: " + e.toString());
         }
     }
 

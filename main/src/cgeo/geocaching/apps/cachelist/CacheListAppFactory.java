@@ -2,7 +2,6 @@ package cgeo.geocaching.apps.cachelist;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.activity.IAbstractActivity;
@@ -73,7 +72,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
                 activity.invalidateOptionsMenuCompatible();
                 return result;
             } catch (Exception e) {
-                Log.e(Settings.tag, "CacheListAppFactory.onMenuItemSelected: " + e.toString());
+                Log.e("CacheListAppFactory.onMenuItemSelected: " + e.toString());
             }
         }
         return false;

@@ -49,7 +49,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
             super.draw(canvas);
         } catch (Exception e) {
-            Log.e(Settings.tag, "MapsforgeMapView.draw: " + e.toString());
+            Log.e("MapsforgeMapView.draw: " + e.toString());
         }
     }
 
@@ -196,7 +196,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
                 }
 
             } catch (Exception e) {
-                Log.e(Settings.tag, "MapsforgeMapView.repaintRequired: " + e.toString());
+                Log.e("MapsforgeMapView.repaintRequired: " + e.toString());
             }
         }
     }

@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps.cache;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.utils.Log;
@@ -37,7 +36,7 @@ public final class GeneralAppsFactory extends AbstractAppFactory {
             try {
                 return app.invoke(activity, cache);
             } catch (Exception e) {
-                Log.e(Settings.tag, "GeneralAppsFactory.onMenuItemSelected: " + e.toString());
+                Log.e("GeneralAppsFactory.onMenuItemSelected: " + e.toString());
             }
         }
         return false;

@@ -184,7 +184,7 @@ public class cgeo extends AbstractActivity {
                     showToast(res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "cgeo.firstLoginHander: " + e.toString());
+                Log.w("cgeo.firstLoginHander: " + e.toString());
             }
         }
     };
@@ -226,12 +226,12 @@ public class cgeo extends AbstractActivity {
 
             version = info.versionCode;
 
-            Log.i(Settings.tag, "Starting " + info.packageName + " " + info.versionCode + " a.k.a " + info.versionName + "...");
+            Log.i("Starting " + info.packageName + " " + info.versionCode + " a.k.a " + info.versionName + "...");
 
             info = null;
             manager = null;
         } catch (Exception e) {
-            Log.i(Settings.tag, "No info.");
+            Log.i("No info.");
         }
 
         try {
@@ -702,7 +702,7 @@ public class cgeo extends AbstractActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w("Failed to update location.");
             }
         }
     }
@@ -792,7 +792,7 @@ public class cgeo extends AbstractActivity {
                         countBubble.setVisibility(View.VISIBLE);
                     }
                 } catch (Exception e) {
-                    Log.w(Settings.tag, "cgeo.countBubbleHander: " + e.toString());
+                    Log.w("cgeo.countBubbleHander: " + e.toString());
                 }
             }
         };
@@ -836,7 +836,7 @@ public class cgeo extends AbstractActivity {
 
             boolean more = false;
             if (version != Settings.getVersion()) {
-                Log.i(Settings.tag, "Initializing hard cleanup - version changed from " + Settings.getVersion() + " to " + version + ".");
+                Log.i("Initializing hard cleanup - version changed from " + Settings.getVersion() + " to " + version + ".");
 
                 more = true;
             }
@@ -903,7 +903,7 @@ public class cgeo extends AbstractActivity {
 
                 addresses = geocoder.getFromLocation(geo.coordsNow.getLatitude(), geo.coordsNow.getLongitude(), 1);
             } catch (Exception e) {
-                Log.i(Settings.tag, "Failed to obtain address");
+                Log.i("Failed to obtain address");
             }
 
             obtainAddressHandler.sendEmptyMessage(0);

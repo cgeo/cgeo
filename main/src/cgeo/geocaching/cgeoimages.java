@@ -207,7 +207,7 @@ public class cgeoimages extends AbstractActivity {
             image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
             fos.close();
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeoimages.handleMessage.onClick: " + e.toString());
+            Log.e("cgeoimages.handleMessage.onClick: " + e.toString());
             return;
         }
 

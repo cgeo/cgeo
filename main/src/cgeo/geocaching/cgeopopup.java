@@ -74,7 +74,7 @@ public class cgeopopup extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_store));
 
-                Log.e(Settings.tag, "cgeopopup.storeCacheHandler: " + e.toString());
+                Log.e("cgeopopup.storeCacheHandler: " + e.toString());
             }
 
             if (storeDialog != null) {
@@ -97,7 +97,7 @@ public class cgeopopup extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_drop));
 
-                Log.e(Settings.tag, "cgeopopup.dropCacheHandler: " + e.toString());
+                Log.e("cgeopopup.dropCacheHandler: " + e.toString());
             }
 
             if (dropDialog != null) {
@@ -452,7 +452,7 @@ public class cgeopopup extends AbstractActivity {
                 offlineStore.setOnClickListener(new storeCache());
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeopopup.init: " + e.toString());
+            Log.e("cgeopopup.init: " + e.toString());
         }
 
         if (geo != null) {
@@ -515,7 +515,7 @@ public class cgeopopup extends AbstractActivity {
                     cacheDistance.bringToFront();
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w("Failed to update location.");
             }
         }
     }
