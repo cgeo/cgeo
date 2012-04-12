@@ -21,10 +21,10 @@ import android.os.Message;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -521,6 +521,10 @@ public class cgeoapplication extends Application {
     /** {@link cgData#removeCaches} */
     public void removeCaches(final Set<String> geocodes, EnumSet<LoadFlags.RemoveFlag> removeFlags) {
         storage.removeCaches(geocodes, removeFlags);
+    }
+
+    public Collection<? extends cgWaypoint> getWaypointsInViewport(long centerLat, long centerLon, long spanLat, long spanLon) {
+        return storage.loadWaypoints(centerLat, centerLon, spanLat, spanLon);
     }
 
 }

@@ -28,6 +28,7 @@ import android.database.sqlite.SQLiteStatement;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -1883,39 +1884,15 @@ public class cgData {
         Cursor cursor = null;
 
         try {
-            StringBuilder where = cgData.whereGeocodeIn(geocodes);
+            StringBuilder where = null;
 
             // viewport limitation
             if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
-                double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
-                double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
-                double lonMin = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
-                double lonMax = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
-                double llCache;
-
-                if (latMin > latMax) {
-                    llCache = latMax;
-                    latMax = latMin;
-                    latMin = llCache;
-                }
-                if (lonMin > lonMax) {
-                    llCache = lonMax;
-                    lonMax = lonMin;
-                    lonMin = llCache;
-                }
-
-                if (where.length() > 0) {
-                    where.append(" and ");
-                }
-                where.append("(latitude >= ");
-                where.append(String.format((Locale) null, "%.6f", latMin));
-                where.append(" and latitude <= ");
-                where.append(String.format((Locale) null, "%.6f", latMax));
-                where.append(" and longitude >= ");
-                where.append(String.format((Locale) null, "%.6f", lonMin));
-                where.append(" and longitude <= ");
-                where.append(String.format((Locale) null, "%.6f", lonMax));
-                where.append(')');
+                where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
+            }
+            else
+            {
+                where = cgData.whereGeocodeIn(geocodes);
             }
             cursor = databaseRO.query(
                     dbTableCaches,
@@ -1998,6 +1975,47 @@ public class cgData {
         }
 
         return caches;
+    }
+
+    /**
+     * Builds a where for coordinates
+     *
+     * @param centerLat
+     * @param centerLon
+     * @param spanLat
+     * @param spanLon
+     * @return
+     */
+
+    private static StringBuilder buildCoordinateWhere(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon) {
+        StringBuilder where = new StringBuilder();
+        double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
+        double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
+        double lonMin = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
+        double lonMax = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
+        double llCache;
+
+        if (latMin > latMax) {
+            llCache = latMax;
+            latMax = latMin;
+            latMin = llCache;
+        }
+        if (lonMin > lonMax) {
+            llCache = lonMax;
+            lonMax = lonMin;
+            lonMin = llCache;
+        }
+
+        where.append("(latitude >= ");
+        where.append(String.format((Locale) null, "%.6f", latMin));
+        where.append(" and latitude <= ");
+        where.append(String.format((Locale) null, "%.6f", latMax));
+        where.append(" and longitude >= ");
+        where.append(String.format((Locale) null, "%.6f", lonMin));
+        where.append(" and longitude <= ");
+        where.append(String.format((Locale) null, "%.6f", lonMax));
+        where.append(')');
+        return where;
     }
 
     /**
@@ -2736,32 +2754,7 @@ public class cgData {
         }
 
         // viewport limitation
-        double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
-        double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
-        double lonMin = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
-        double lonMax = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
-        double llCache;
-
-        if (latMin > latMax) {
-            llCache = latMax;
-            latMax = latMin;
-            latMin = llCache;
-        }
-        if (lonMin > lonMax) {
-            llCache = lonMax;
-            lonMax = lonMin;
-            lonMin = llCache;
-        }
-
-        final StringBuilder where = new StringBuilder();
-        where.append("latitude >= ");
-        where.append(String.format((Locale) null, "%.6f", latMin));
-        where.append(" and latitude <= ");
-        where.append(String.format((Locale) null, "%.6f", latMax));
-        where.append(" and longitude >= ");
-        where.append(String.format((Locale) null, "%.6f", lonMin));
-        where.append(" and longitude <= ");
-        where.append(String.format((Locale) null, "%.6f", lonMax));
+        StringBuilder where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
 
         // cacheType limitation
         if (cacheType != CacheType.ALL) {
@@ -3410,6 +3403,50 @@ public class cgData {
         }
 
         return where;
+    }
+
+    /**
+     * Loads all Waypoints in the coordinate rectangle.
+     *
+     * @param centerLat
+     * @param centerLon
+     * @param spanLat
+     * @param spanLon
+     * @return
+     */
+
+    public Collection<? extends cgWaypoint> loadWaypoints(long centerLat, long centerLon, long spanLat, long spanLon) {
+        StringBuilder where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
+        init();
+
+        List<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
+
+        Cursor cursor = databaseRO.query(
+                dbTableWaypoints,
+                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" },
+                where.toString(),
+                null,
+                null,
+                null,
+                "_id",
+                "100");
+
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            do {
+
+                cgWaypoint waypoint = createWaypointFromDatabaseContent(cursor);
+
+                waypoints.add(waypoint);
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return waypoints;
     }
 
 }
