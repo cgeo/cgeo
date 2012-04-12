@@ -30,7 +30,7 @@ public class StaticMapsProvider {
         return LocalStorage.getStorageFile(geocode, "map_" + prefix + level, false, createDirs);
     }
 
-    private static void downloadDifferentZooms(final cgCache cache, String markerUrl, String prefix, String latlonMap, int edge, String waypoints) {
+    private static void downloadDifferentZooms(final cgCache cache, String markerUrl, String prefix, String latlonMap, int edge, final Parameters waypoints) {
         downloadMap(cache, 20, "satellite", markerUrl, prefix, 1, latlonMap, edge, waypoints);
         downloadMap(cache, 18, "satellite", markerUrl, prefix, 2, latlonMap, edge, waypoints);
         downloadMap(cache, 16, "roadmap", markerUrl, prefix, 3, latlonMap, edge, waypoints);
@@ -38,15 +38,18 @@ public class StaticMapsProvider {
         downloadMap(cache, 11, "roadmap", markerUrl, prefix, 5, latlonMap, edge, waypoints);
     }
 
-    private static void downloadMap(cgCache cache, int zoom, String mapType, String markerUrl, String prefix, int level, String latlonMap, int edge, String waypoints) {
+    private static void downloadMap(cgCache cache, int zoom, String mapType, String markerUrl, String prefix, int level, String latlonMap, int edge, final Parameters waypoints) {
         final String mapUrl = "http://maps.google.com/maps/api/staticmap";
         final Parameters params = new Parameters(
                 "center", latlonMap,
                 "zoom", String.valueOf(zoom),
                 "size", edge + "x" + edge,
                 "maptype", mapType,
-                "markers", "icon:" + markerUrl + '|' + latlonMap + waypoints,
+                "markers", "icon:" + markerUrl + '|' + latlonMap,
                 "sensor", "false");
+        if (waypoints != null) {
+            params.addAll(waypoints);
+        }
         final HttpResponse httpResponse = Network.request(mapUrl, params);
 
         if (httpResponse != null) {
@@ -102,7 +105,7 @@ public class StaticMapsProvider {
         String wpLatlonMap = waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         String wpMarkerUrl = getWpMarkerUrl(waypoint);
         // download map images in separate background thread for higher performance
-        downloadMaps(cache, wpMarkerUrl, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, "", waitForResult);
+        downloadMaps(cache, wpMarkerUrl, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, null, waitForResult);
     }
 
     public static void storeCacheStaticMap(cgCache cache, Activity activity, final boolean waitForResult) {
@@ -112,22 +115,19 @@ public class StaticMapsProvider {
 
     private static void storeCacheStaticMap(cgCache cache, int edge, final boolean waitForResult) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-        final StringBuilder waypoints = new StringBuilder();
+        final Parameters waypoints = new Parameters();
         if (cache.hasWaypoints()) {
             for (cgWaypoint waypoint : cache.getWaypoints()) {
                 if (waypoint.getCoords() == null) {
                     continue;
                 }
-                String wpMarkerUrl = getWpMarkerUrl(waypoint);
-                waypoints.append("&markers=icon%3A");
-                waypoints.append(wpMarkerUrl);
-                waypoints.append("%7C");
-                waypoints.append(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
+                final String wpMarkerUrl = getWpMarkerUrl(waypoint);
+                waypoints.put("markers", "icon:" + wpMarkerUrl + "|" + waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
             }
         }
         // download map images in separate background thread for higher performance
         final String cacheMarkerUrl = getCacheMarkerUrl(cache);
-        downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints.toString(), waitForResult);
+        downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints, waitForResult);
     }
 
     private static int guessMinDisplaySide(Display display) {
@@ -147,7 +147,7 @@ public class StaticMapsProvider {
     }
 
     private static void downloadMaps(final cgCache cache, final String markerUrl, final String prefix, final String latlonMap, final int edge,
-            final String waypoints, boolean waitForResult) {
+            final Parameters waypoints, boolean waitForResult) {
         if (waitForResult) {
             downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
         }
@@ -174,12 +174,12 @@ public class StaticMapsProvider {
             type += "_disabled";
         }
 
-        return Network.urlencode_rfc3986(MARKERS_URL + "marker_cache_" + type + ".png");
+        return MARKERS_URL + "marker_cache_" + type + ".png";
     }
 
     private static String getWpMarkerUrl(final cgWaypoint waypoint) {
         String type = waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null;
-        return Network.urlencode_rfc3986(MARKERS_URL + "marker_waypoint_" + type + ".png");
+        return MARKERS_URL + "marker_waypoint_" + type + ".png";
     }
 
     public static void removeWpStaticMaps(int wp_id, String geocode) {

@@ -15,6 +15,7 @@ import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Login;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
@@ -126,36 +127,31 @@ public class GCBase {
             for (Tile tile : tiles) {
 
                 if (!tileCache.containsKey(tile.hashCode())) {
-
-                    StringBuilder url = new StringBuilder();
-                    url.append("?x=").append(tile.getX()) // x tile
-                    .append("&y=").append(tile.getY()) // y tile
-                    .append("&z=").append(tile.getZoomlevel()); // zoom level
+                    final Parameters params = new Parameters(
+                            "x", String.valueOf(tile.getX()),
+                            "y", String.valueOf(tile.getY()),
+                            "z", String.valueOf(tile.getZoomlevel()),
+                            "ep", "1");
                     if (tokens != null) {
-                        url.append("&k=").append(tokens[0]); // user session
-                        url.append("&st=").append(tokens[1]); // session token
+                        params.put("k", tokens[0], "st", tokens[1]);
                     }
-                    url.append("&ep=1");
                     if (Settings.isExcludeMyCaches()) {
-                        url.append("&hf=1").append("&hh=1"); // hide found, hide hidden
+                        params.put("hf", "1", "hh", "1"); // hide found, hide hidden
                     }
                     if (Settings.getCacheType() == CacheType.TRADITIONAL) {
-                        url.append("&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
-                    }
-                    if (Settings.getCacheType() == CacheType.MULTI) {
-                        url.append("&ect=9,5,2,6,453,13,1304,137,11,4,8,1858");
-                    }
-                    if (Settings.getCacheType() == CacheType.MYSTERY) {
-                        url.append("&ect=9,5,3,6,453,13,1304,137,11,4,2,1858");
+                        params.put("ect", "9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
+                    } else if (Settings.getCacheType() == CacheType.MULTI) {
+                        params.put("ect", "9,5,2,6,453,13,1304,137,11,4,8,1858");
+                    } else if (Settings.getCacheType() == CacheType.MYSTERY) {
+                        params.put("ect", "9,5,3,6,453,13,1304,137,11,4,2,1858");
                     }
                     if (tile.getZoomlevel() != 14) {
-                        url.append("&_=").append(String.valueOf(System.currentTimeMillis()));
+                        params.put("_", String.valueOf(System.currentTimeMillis()));
                     }
-                    // other types t.b.d
-                    final String urlString = url.toString();
+                    // TODO: other types t.b.d
 
                     // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
-                    Bitmap bitmap = Tile.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
+                    Bitmap bitmap = Tile.requestMapTile(GCConstants.URL_MAP_TILE, params, referer);
 
                     // Check bitmap size
                     if (bitmap.getWidth() != Tile.TILE_SIZE ||
@@ -164,7 +160,7 @@ public class GCBase {
                         bitmap = null;
                     }
 
-                    String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
+                    String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, referer);
                     if (StringUtils.isEmpty(data)) {
                         Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
                     } else {
@@ -371,18 +367,14 @@ public class GCBase {
 
     public static SearchResult searchByGeocodes(final Set<String> geocodes) {
 
-        SearchResult result = new SearchResult();
+        final SearchResult result = new SearchResult();
 
         final String geocodeList = StringUtils.join(geocodes.toArray(), "|");
-
-        String referer = GCConstants.URL_LIVE_MAP_DETAILS;
-
-        StringBuilder url = new StringBuilder();
-        url.append("?i=").append(geocodeList).append("&_=").append(String.valueOf(System.currentTimeMillis()));
-        final String urlString = url.toString();
+        final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
 
         try {
-            String data = Tile.requestMapInfo(referer + urlString, referer);
+            final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
+            final String data = Tile.requestMapInfo(referer, params, referer);
 
             // Example JSON information
             // {"status":"success",
