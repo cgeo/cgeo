@@ -110,7 +110,7 @@ public final class Settings {
         }
     }
 
-    // usable values
+    // FIXME: tag should be private member of our log class
     public static final String tag = "cgeo";
 
     private static String username = null;
@@ -201,10 +201,6 @@ public final class Settings {
             e.commit();
             cachedDebug = sharedPrefs.getBoolean(KEY_DEBUG, false);
         }
-        final SharedPreferences old = cgeoapplication.getInstance().getSharedPreferences("cgeo.pref", Context.MODE_PRIVATE);
-        System.out.println("old prefs " + old.getString(KEY_USERNAME, "not set"));
-        System.out.println("shared prefs " + sharedPrefs.getString(KEY_USERNAME, "no set"));
-
     }
 
     public static void setLanguage(boolean useEnglish) {
