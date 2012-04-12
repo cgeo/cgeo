@@ -47,19 +47,6 @@ public final class Geopoint implements ICoordinates {
     }
 
     /**
-     * Creates new Geopoint with given latitude and longitude (both microdegree).
-     *
-     * @param lat
-     *            latitude
-     * @param lon
-     *            longitude
-     */
-    public Geopoint(final int lat, final int lon)
-    {
-        this(lat / 1e6, lon / 1e6);
-    }
-
-    /**
      * Creates new Geopoint with latitude and longitude parsed from string.
      *
      * @param text

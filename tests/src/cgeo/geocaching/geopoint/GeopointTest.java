@@ -41,12 +41,6 @@ public class GeopointTest extends AndroidTestCase {
         Assert.assertFalse(gp1.equals(gp2));
     }
 
-    public static void testCreateE6() {
-        final Geopoint gp1 = new Geopoint(48.2, 2.34);
-        final Geopoint gp2 = new Geopoint(48200000, 2340000);
-        Assert.assertTrue(gp1.isEqualTo(gp2, 1e-6));
-    }
-
     public static void testGetE6() {
         final Geopoint gp = new Geopoint(41.2, -3.4);
         Assert.assertEquals(41200000.0, gp.getLatitudeE6(), 1e-6);

@@ -18,7 +18,7 @@ import java.util.Map;
 public class GC2CJPF extends MockedCache {
 
     public GC2CJPF() {
-        super(new Geopoint(52425067, 9664200));
+        super(new Geopoint(52.425067, 9.664200));
     }
 
     @Override

@@ -194,12 +194,7 @@ public class GCBase {
                 if (search != null) {
 
                     List<Number> bounds = cgeoapplication.getInstance().getBounds(search.getGeocodes());
-                    int minLat = (int) ((Double) bounds.get(1) * 1e6);
-                    int maxLat = (int) ((Double) bounds.get(2) * 1e6);
-                    int maxLon = (int) ((Double) bounds.get(3) * 1e6);
-                    int minLon = (int) ((Double) bounds.get(4) * 1e6);
-
-                    lastSearchViewport = new Viewport(minLat, maxLat, minLon, maxLon);
+                    lastSearchViewport = new Viewport(bounds.get(1).doubleValue(), bounds.get(2).doubleValue(), bounds.get(4).doubleValue(), bounds.get(3).doubleValue());
                     searchResult.addGeocodes(search.getGeocodes());
                 }
             }

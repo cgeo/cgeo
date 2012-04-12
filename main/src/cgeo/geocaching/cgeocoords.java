@@ -419,7 +419,7 @@ public class cgeocoords extends Dialog {
                     if (geo != null && geo.coordsNow != null) {
                         gp = geo.coordsNow;
                     } else {
-                        gp = new Geopoint(0, 0);
+                        gp = new Geopoint(0.0, 0.0);
                     }
                 }
             }

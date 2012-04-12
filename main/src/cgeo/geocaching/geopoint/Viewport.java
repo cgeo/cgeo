@@ -27,9 +27,8 @@ public class Viewport {
         topRight = new Geopoint(centerLat + Math.abs(latSpan) / 2, centerLon + Math.abs(lonSpan) / 2);
     }
 
-    public Viewport(final int minLat, final int maxLat, final int minLon, final int maxLon) {
-        this(new Geopoint(Math.min(minLat, maxLat), Math.min(minLon, maxLon)),
-                new Geopoint(Math.max(minLat, maxLat), Math.max(minLon, maxLon)));
+    public Viewport(final double lat1, final double lat2, final double lon1, final double lon2) {
+        this(new Geopoint(lat1, lon1), new Geopoint(lat2, lon2));
     }
 
     public double getLatitudeMin() {
