@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -382,5 +383,11 @@ public class cgeowaypoint extends AbstractActivity {
             return true;
         }
         return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, waypoint, null);
+    }
+
+    public static void startActivity(final Context context, final int waypointId) {
+        Intent popupIntent = new Intent(context, cgeowaypoint.class);
+        popupIntent.putExtra("waypoint", waypointId);
+        context.startActivity(popupIntent);
     }
 }

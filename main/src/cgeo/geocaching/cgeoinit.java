@@ -20,6 +20,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpResponse;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -897,4 +898,10 @@ public class cgeoinit extends AbstractActivity {
             initMapfileEdittext(true);
         }
     }
+
+    public static void startActivity(Context fromActivity) {
+        final Intent initIntent = new Intent(fromActivity, cgeoinit.class);
+        fromActivity.startActivity(initIntent);
+    }
+
 }

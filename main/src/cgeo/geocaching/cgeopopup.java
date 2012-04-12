@@ -16,6 +16,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -656,5 +657,11 @@ public class cgeopopup extends AbstractActivity {
     public void goManual(View view) {
         super.goManual(view);
         finish();
+    }
+
+    public static void startActivity(final Context context, final String geocode) {
+        final Intent popupIntent = new Intent(context, cgeopopup.class);
+        popupIntent.putExtra("geocode", geocode);
+        context.startActivity(popupIntent);
     }
 }

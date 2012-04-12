@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Canvas;
 
 import java.util.ArrayList;
@@ -134,9 +133,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
 
         public void onClick(DialogInterface dialog, int id) {
             if (geocode != null) {
-                final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
-                detailIntent.putExtra("geocode", geocode);
-                context.startActivity(detailIntent);
+                CacheDetailActivity.startActivity(context, geocode);
             }
 
             dialog.cancel();

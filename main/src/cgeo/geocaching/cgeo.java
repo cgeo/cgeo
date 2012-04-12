@@ -874,9 +874,7 @@ public class cgeo extends AbstractActivity {
 
                 // invoke settings activity to insert login details
                 if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                    final Context context = cgeo.this;
-                    final Intent initIntent = new Intent(context, cgeoinit.class);
-                    context.startActivity(initIntent);
+                    cgeoinit.startActivity(cgeo.this);
                 }
             }
         }

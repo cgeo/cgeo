@@ -20,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -688,10 +687,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             }
 
             // load cache details
-            Intent cachesIntent = new Intent(getContext(), CacheDetailActivity.class);
-            cachesIntent.putExtra("geocode", geocode);
-            cachesIntent.putExtra("name", name);
-            getContext().startActivity(cachesIntent);
+            CacheDetailActivity.startActivity(getContext(), geocode, name);
         }
 
         // long tap on item

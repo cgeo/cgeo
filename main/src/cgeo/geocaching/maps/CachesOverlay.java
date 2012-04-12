@@ -18,7 +18,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
@@ -227,19 +226,11 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             final IWaypoint coordinate = item.getCoord();
 
             if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
-                Intent popupIntent = new Intent(context, cgeopopup.class);
-
-                popupIntent.putExtra("geocode", coordinate.getGeocode());
-
                 CGeoMap.markCacheAsDirty(coordinate.getGeocode());
-                context.startActivity(popupIntent);
+                cgeopopup.startActivity(context, coordinate.getGeocode());
             } else if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {
-                Intent popupIntent = new Intent(context, cgeowaypoint.class);
-
-                popupIntent.putExtra("waypoint", coordinate.getId());
-
                 CGeoMap.markCacheAsDirty(coordinate.getGeocode());
-                context.startActivity(popupIntent);
+                cgeowaypoint.startActivity(context, coordinate.getId());
             } else {
                 waitDialog.dismiss();
                 return false;

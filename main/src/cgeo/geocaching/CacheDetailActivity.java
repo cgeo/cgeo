@@ -2487,4 +2487,11 @@ public class CacheDetailActivity extends AbstractActivity {
             return view;
         }
     }
+
+    public static void startActivity(final Context context, final String geocode, final String cacheName) {
+        final Intent cachesIntent = new Intent(context, CacheDetailActivity.class);
+        cachesIntent.putExtra("geocode", geocode);
+        cachesIntent.putExtra("name", cacheName);
+        context.startActivity(cachesIntent);
+    }
 }
