@@ -1,7 +1,5 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.Settings;
-import cgeo.geocaching.utils.Log;
 
 
 public class Viewport {
@@ -101,9 +99,11 @@ public class Viewport {
      *            the coordinates to check
      * @return true if the coordinates are in the viewport
      */
+    // FIXME: this static method has nothing to do here and should be used with a viewport, not some int numbers,
+    // when CGeoMap.java gets rewritten
     public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, final Geopoint coords) {
-        return 2 * Math.abs(coords.getLatitudeE6() - centerLat) <= Math.abs(spanLat) &&
-                2 * Math.abs(coords.getLongitudeE6() - centerLon) <= Math.abs(spanLon);
+        final Viewport viewport = new Viewport(new Geopoint(centerLat / 1e6, centerLon / 1e6), spanLat / 1e6, spanLon / 1e6);
+        return viewport.isInViewport(coords);
     }
 
     /**
@@ -122,37 +122,12 @@ public class Viewport {
      * @param spanLon2
      * @return
      */
+    // FIXME: this static method has nothing to do here and should be used with a viewport, not some int numbers,
+    // when CGeoMap.java gets rewritten
     public static boolean isInViewPort(int centerLat1, int centerLon1, int centerLat2, int centerLon2, int spanLat1, int spanLon1, int spanLat2, int spanLon2) {
-        try {
-            final int left1 = centerLat1 - (spanLat1 / 2);
-            final int left2 = centerLat2 - (spanLat2 / 2);
-            if (left2 <= left1) {
-                return false;
-            }
-
-            final int right1 = centerLat1 + (spanLat1 / 2);
-            final int right2 = centerLat2 + (spanLat2 / 2);
-            if (right2 >= right1) {
-                return false;
-            }
-
-            final int top1 = centerLon1 + (spanLon1 / 2);
-            final int top2 = centerLon2 + (spanLon2 / 2);
-            if (top2 >= top1) {
-                return false;
-            }
-
-            final int bottom1 = centerLon1 - (spanLon1 / 2);
-            final int bottom2 = centerLon2 - (spanLon2 / 2);
-            if (bottom2 <= bottom1) {
-                return false;
-            }
-
-            return true;
-        } catch (Exception e) {
-            Log.e(Settings.tag, "Viewport.isInViewPort: " + e.toString());
-            return false;
-        }
+        final Viewport outer = new Viewport(new Geopoint(centerLat1 / 1e6, centerLon1 / 1e6), spanLat1 / 1e6, spanLon1 / 1e6);
+        final Viewport inner = new Viewport(new Geopoint(centerLat2 / 1e6, centerLon2 / 1e6), spanLat2 / 1e6, spanLon2 / 1e6);
+        return outer.includes(inner);
     }
 
     /**
