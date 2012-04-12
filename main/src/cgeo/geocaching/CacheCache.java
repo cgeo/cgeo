@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap.RemoveHandler;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -85,12 +86,17 @@ public class CacheCache {
     }
 
     public Set<String> getInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
-        Set<String> geocodes = new HashSet<String>();
-        for (cgCache cache : cachesCache.values()) {
-            if (Viewport.isCacheInViewPort(centerLat.intValue(), centerLon.intValue(), spanLat.intValue(), spanLon.intValue(), cache.getCoords())) {
-                if (CacheType.ALL == cacheType || cache.getType() == cacheType) {
-                    geocodes.add(cache.getGeocode());
-                }
+        final Set<String> geocodes = new HashSet<String>();
+        for (final cgCache cache : cachesCache.values()) {
+            if (cache.getCoords() == null) {
+                // FIXME: this kludge must be removed, it is only present to help us debug the cases where
+                // caches contain null coordinates.
+                Log.e(Settings.tag, "CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
+                continue;
+            }
+            if ((CacheType.ALL == cacheType || cache.getType() == cacheType) &&
+                    Viewport.isCacheInViewPort(centerLat.intValue(), centerLon.intValue(), spanLat.intValue(), spanLon.intValue(), cache.getCoords())) {
+                geocodes.add(cache.getGeocode());
             }
         }
         return geocodes;
