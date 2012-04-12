@@ -49,7 +49,6 @@ public class Tile {
     private final Viewport viewPort;
 
     public Tile(Geopoint origin, int zoomlevel) {
-        assert zoomlevel >= ZOOMLEVEL_MIN && zoomlevel <= ZOOMLEVEL_MAX : "zoomlevel out of range";
 
         this.zoomlevel = Math.max(Math.min(zoomlevel, ZOOMLEVEL_MAX), ZOOMLEVEL_MIN);
 
@@ -157,7 +156,7 @@ public class Tile {
     public static int calcZoomLat(final Geopoint bottom, final Geopoint top) {
 
         int zoom = (int) Math.ceil(
-                Math.log(2 * Math.PI /
+                Math.log(2.0 * Math.PI /
                         Math.abs(
                                 asinh(tanGrad(bottom.getLatitude()))
                                         - asinh(tanGrad(top.getLatitude()))

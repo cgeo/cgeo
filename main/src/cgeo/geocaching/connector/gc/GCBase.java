@@ -154,9 +154,15 @@ public class GCBase {
                     // other types t.b.d
                     final String urlString = url.toString();
 
-                assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
-                assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
+                    // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
+                    Bitmap bitmap = Tile.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
 
+                    // Check bitmap size
+                    if (bitmap.getWidth() != Tile.TILE_SIZE ||
+                            bitmap.getHeight() != Tile.TILE_SIZE) {
+                        bitmap.recycle();
+                        bitmap = null;
+                    }
 
                     String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
                     if (StringUtils.isEmpty(data)) {
@@ -172,6 +178,9 @@ public class GCBase {
                         tileCache.put(tile.hashCode(), tile);
                     }
 
+                    // release native bitmap memory
+                    if (bitmap != null) {
+                        bitmap.recycle();
                     }
 
                 }
@@ -296,7 +305,7 @@ public class GCBase {
                 cache.setName(nameCache.get(id));
                 cache.setZoomlevel(tile.getZoomlevel());
                 cache.setCoords(tile.getCoord(xy));
-                if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && positions.size() < 64) {
+                if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && positions.size() < 64 && bitmap != null) {
                     // don't parse if there are too many caches. The decoding would return too much wrong results
                     IconDecoder.parseMapPNG(cache, bitmap, xy, tile.getZoomlevel());
                 } else {
