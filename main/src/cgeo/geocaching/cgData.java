@@ -2713,6 +2713,18 @@ public class cgData {
         return loadInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
+    /**
+     * Loads the geocodes of caches in a viewport from CacheCache and/or Database
+     * 
+     * @param stored
+     *            True - query only stored caches, False - query cached ones as well
+     * @param centerLat
+     * @param centerLon
+     * @param spanLat
+     * @param spanLon
+     * @param cacheType
+     * @return Set with geocodes or null if none have been found
+     */
     public Set<String> loadInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
             return null;
@@ -2721,6 +2733,11 @@ public class cgData {
         init();
 
         Set<String> geocodes = new HashSet<String>();
+
+        // if not stored only, get codes from CacheCache as well
+        if (!stored) {
+            geocodes.addAll(CacheCache.getInstance().getInViewport(centerLat, centerLon, spanLat, spanLon, cacheType));
+        }
 
         // viewport limitation
         double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
@@ -2783,7 +2800,8 @@ public class cgData {
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
-                    return null;
+
+                    return geocodes.isEmpty() ? null : geocodes;
                 }
 
                 cursor.close();
