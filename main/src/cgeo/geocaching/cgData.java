@@ -1884,11 +1884,11 @@ public class cgData {
         Cursor cursor = null;
 
         try {
-            StringBuilder where = new StringBuilder();
+            StringBuilder where = null;
 
             // viewport limitation
             if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
-                where.append(buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon));
+                where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
             }
             else
             {
@@ -1987,7 +1987,7 @@ public class cgData {
      * @return
      */
 
-    private static String buildCoordinateWhere(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon) {
+    private static StringBuilder buildCoordinateWhere(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon) {
         StringBuilder where = new StringBuilder();
         double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
         double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -2015,7 +2015,7 @@ public class cgData {
         where.append(" and longitude <= ");
         where.append(String.format((Locale) null, "%.6f", lonMax));
         where.append(')');
-        return where.toString();
+        return where;
     }
 
     /**
@@ -2741,8 +2741,7 @@ public class cgData {
         Set<String> geocodes = new HashSet<String>();
 
         // viewport limitation
-        StringBuilder where = new StringBuilder();
-        where.append(buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon));
+        StringBuilder where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
 
         // cacheType limitation
         if (cacheType != CacheType.ALL) {
@@ -3463,8 +3462,7 @@ public class cgData {
      */
 
     public Collection<? extends cgWaypoint> loadWaypoints(long centerLat, long centerLon, long spanLat, long spanLon) {
-        StringBuilder where = new StringBuilder();
-        where.append(buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon));
+        StringBuilder where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
         init();
 
         List<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
