@@ -2704,12 +2704,12 @@ public class cgData {
     }
 
     /** Retrieve all stored caches from DB */
-    public Set<String> loadCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> loadCachedInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
         return loadInViewport(false, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
     /** Retrieve stored caches from DB with listId >= 1 */
-    public Set<String> loadStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> loadStoredInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
         return loadInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
@@ -2723,16 +2723,12 @@ public class cgData {
      * @param spanLat
      * @param spanLon
      * @param cacheType
-     * @return Set with geocodes or null if none have been found
+     * @return Set with geocodes
      */
-    public Set<String> loadInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
-        if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
-            return null;
-        }
-
+    private Set<String> loadInViewport(final boolean stored, final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
         init();
 
-        Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<String>();
 
         // if not stored only, get codes from CacheCache as well
         if (!stored) {
@@ -2757,7 +2753,7 @@ public class cgData {
             lonMin = llCache;
         }
 
-        StringBuilder where = new StringBuilder();
+        final StringBuilder where = new StringBuilder();
         where.append("latitude >= ");
         where.append(String.format((Locale) null, "%.6f", latMin));
         where.append(" and latitude <= ");
@@ -2780,7 +2776,7 @@ public class cgData {
         }
 
         try {
-            Cursor cursor = databaseRO.query(
+            final Cursor cursor = databaseRO.query(
                     dbTableCaches,
                     new String[] { "geocode" },
                     where.toString(),
@@ -2790,22 +2786,14 @@ public class cgData {
                     null,
                     "500");
 
-            if (cursor != null) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-                    int index = cursor.getColumnIndex("geocode");
+            if (cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndex("geocode");
 
-                    do {
-                        geocodes.add(cursor.getString(index));
-                    } while (cursor.moveToNext());
-                } else {
-                    cursor.close();
-
-                    return geocodes.isEmpty() ? null : geocodes;
-                }
-
-                cursor.close();
+                do {
+                    geocodes.add(cursor.getString(index));
+                } while (cursor.moveToNext());
             }
+            cursor.close();
         } catch (Exception e) {
             Log.e(Settings.tag, "cgData.loadInViewport: " + e.toString());
         }

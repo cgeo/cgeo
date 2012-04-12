@@ -307,14 +307,14 @@ public class cgeoapplication extends Application {
         return new SearchResult(geocodes, getAllHistoricCachesCount());
     }
 
-    /** {@link cgData#loadCachedInViewport(Long, Long, Long, Long, CacheType)} */
-    public SearchResult getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    /** {@link cgData#loadCachedInViewport(long, long, long, long, CacheType)} */
+    public SearchResult getCachedInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
         final Set<String> geocodes = storage.loadCachedInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
         return new SearchResult(geocodes);
     }
 
-    /** {@link cgData#loadStoredInViewport(Long, Long, Long, Long, CacheType)} */
-    public SearchResult getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    /** {@link cgData#loadStoredInViewport(long, long, long, long, CacheType)} */
+    public SearchResult getStoredInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
         final Set<String> geocodes = storage.loadStoredInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
         return new SearchResult(geocodes);
     }
