@@ -4,10 +4,10 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -208,21 +208,13 @@ public class Tile {
     }
 
     /** Request JSON informations for a tile */
-    public static String requestMapInfo(final String url, final String referer) {
-        final HttpGet request = new HttpGet(url);
-        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
-        request.addHeader("Referer", referer);
-        request.addHeader("X-Requested-With", "XMLHttpRequest");
-        return Network.getResponseData(Network.request(request), false);
+    public static String requestMapInfo(final String url, final Parameters params, final String referer) {
+        return Network.getResponseData(Network.request(url, params, new Parameters("Referer", referer)));
     }
 
     /** Request .png image for a tile. */
-    public static Bitmap requestMapTile(final String url, final String referer) {
-        final HttpGet request = new HttpGet(url);
-        request.addHeader("Accept", "image/png,image/*;q=0.8,*/*;q=0.5");
-        request.addHeader("Referer", referer);
-        request.addHeader("X-Requested-With", "XMLHttpRequest");
-        final HttpResponse response = Network.request(request);
+    public static Bitmap requestMapTile(final String url, final Parameters params, final String referer) {
+        final HttpResponse response = Network.request(url, params, new Parameters("Referer", referer));
         try {
             return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
         } catch (IOException e) {

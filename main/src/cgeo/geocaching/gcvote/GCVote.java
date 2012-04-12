@@ -95,7 +95,7 @@ public final class GCVote {
                 params.put("waypoints", StringUtils.join(geocodes.toArray(), ','));
             }
             params.put("version", "cgeo");
-            final String page = Network.getResponseData(Network.request("http://gcvote.com/getVotes.php", params, false, false, false));
+            final String page = Network.getResponseData(Network.request("http://gcvote.com/getVotes.php", params));
             if (page == null) {
                 return null;
             }
@@ -219,7 +219,7 @@ public final class GCVote {
                 "voteUser", String.format("%.1f", vote).replace(',', '.'),
                 "version", "cgeo");
 
-        final String result = Network.getResponseData(Network.request("http://gcvote.com/setVote.php", params, false, false, false));
+        final String result = Network.getResponseData(Network.request("http://gcvote.com/setVote.php", params));
 
         return result.trim().equalsIgnoreCase("ok");
     }

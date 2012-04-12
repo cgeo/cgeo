@@ -81,7 +81,7 @@ public class HtmlImage implements Html.ImageGetter {
             if (absoluteURL != null) {
                 try {
                     final File file = LocalStorage.getStorageFile(geocode, url, true, true);
-                    final HttpResponse httpResponse = Network.request(absoluteURL, null, false, file);
+                    final HttpResponse httpResponse = Network.request(absoluteURL, null, file);
                     if (httpResponse != null) {
                         final int statusCode = httpResponse.getStatusLine().getStatusCode();
                         if (statusCode == 200) {
