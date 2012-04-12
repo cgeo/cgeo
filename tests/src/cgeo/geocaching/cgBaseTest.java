@@ -179,7 +179,7 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
         final String page = getFileContent(R.raw.cache_unpublished);
         SearchResult result = cgBase.parseCacheFromText(page, null);
         assertNotNull(result);
-        assertEquals(0, result.getCount());
+        assertTrue(result.isEmpty());
         assertEquals(StatusCode.UNPUBLISHED_CACHE, result.getError());
     }
 }

@@ -18,7 +18,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
             SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
             assertNotNull(searchResult);
-            assertTrue(searchResult.getCount() >= 1);
+            assertFalse(searchResult.isEmpty());
             assertTrue(searchResult.getGeocodes().contains("GC211WG"));
             // Spiel & Sport GC211WG N 52° 25.413 E 009° 36.049
         }

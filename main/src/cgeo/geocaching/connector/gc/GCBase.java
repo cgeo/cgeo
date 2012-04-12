@@ -191,7 +191,7 @@ public class GCBase {
             Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.isInViewport(center)) {
                 SearchResult search = cgBase.searchByCoords(null, center, Settings.getCacheType(), false);
-                if (search != null) {
+                if (search != null && !search.isEmpty()) {
 
                     List<Number> bounds = cgeoapplication.getInstance().getBounds(search.getGeocodes());
                     lastSearchViewport = new Viewport(bounds.get(1).doubleValue(), bounds.get(2).doubleValue(), bounds.get(4).doubleValue(), bounds.get(3).doubleValue());

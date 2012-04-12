@@ -200,4 +200,8 @@ public class SearchResult implements Parcelable {
         return cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
     }
 
+    public boolean isEmpty() {
+        return geocodes.isEmpty();
+    }
+
 }

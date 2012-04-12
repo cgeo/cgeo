@@ -21,6 +21,7 @@ import android.os.Message;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -280,10 +281,7 @@ public class cgeoapplication extends Application {
             return null;
         }
 
-        Set<String> geocodeList = new HashSet<String>();
-        geocodeList.add(geocode);
-
-        return getBounds(geocodeList);
+        return getBounds(Collections.singleton(geocode));
     }
 
     /** {@link cgData#getBounds(Set)} */
