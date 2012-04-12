@@ -36,11 +36,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     private Context context = null;
     private boolean displayCircles = false;
     private ProgressDialog waitDialog = null;
-    private Point center = new Point();
-    private Point left = new Point();
     private Paint blockedCircle = null;
-    private PaintFlagsDrawFilter setfil = null;
-    private PaintFlagsDrawFilter remfil = null;
+    private PaintFlagsDrawFilter setFilter = null;
+    private PaintFlagsDrawFilter removeFilter = null;
     private MapProvider mapProvider = null;
 
     public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn) {
@@ -107,65 +105,91 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     }
 
     private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
+        if (!displayCircles || items.isEmpty()) {
+            return;
+        }
 
         // prevent content changes
         getOverlayImpl().lock();
         try {
-            if (displayCircles) {
-                if (blockedCircle == null) {
-                    blockedCircle = new Paint();
-                    blockedCircle.setAntiAlias(true);
-                    blockedCircle.setStrokeWidth(2.0f);
-                    blockedCircle.setARGB(127, 0, 0, 0);
-                    blockedCircle.setPathEffect(new DashPathEffect(new float[] { 3, 2 }, 0));
+            lazyInitializeDrawingObjects();
+            canvas.setDrawFilter(setFilter);
+
+            final int radius = calculateDrawingRadius(projection);
+            final Point center = new Point();
+
+            for (CachesOverlayItemImpl item : items) {
+                final Geopoint itemCoord = item.getCoord().getCoords();
+                final GeoPointImpl itemGeo = mapProvider.getGeoPointBase(itemCoord);
+                projection.toPixels(itemGeo, center);
+
+                final CacheType type = item.getType();
+                if (type == null || type == CacheType.MULTI || type == CacheType.MYSTERY || type == CacheType.VIRTUAL || type.isEvent()) {
+                    blockedCircle.setColor(0x66000000);
+                    blockedCircle.setStyle(Style.STROKE);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+                } else {
+                    blockedCircle.setColor(0x66BB0000);
+                    blockedCircle.setStyle(Style.STROKE);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+
+                    blockedCircle.setColor(0x44BB0000);
+                    blockedCircle.setStyle(Style.FILL);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
                 }
-
-                if (setfil == null) {
-                    setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
-                }
-                if (remfil == null) {
-                    remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
-                }
-
-                canvas.setDrawFilter(setfil);
-
-                for (CachesOverlayItemImpl item : items) {
-                    final IWaypoint itemCoord = item.getCoord();
-                    float[] result = new float[1];
-
-                    Location.distanceBetween(itemCoord.getCoords().getLatitude(), itemCoord.getCoords().getLongitude(),
-                            itemCoord.getCoords().getLatitude(), itemCoord.getCoords().getLongitude() + 1, result);
-                    final float longitudeLineDistance = result[0];
-
-                    GeoPointImpl itemGeo = mapProvider.getGeoPointBase(itemCoord.getCoords());
-
-                    final Geopoint leftCoords = new Geopoint(itemCoord.getCoords().getLatitude(),
-                            itemCoord.getCoords().getLongitude() - 161 / longitudeLineDistance);
-                    GeoPointImpl leftGeo = mapProvider.getGeoPointBase(leftCoords);
-
-                    projection.toPixels(itemGeo, center);
-                    projection.toPixels(leftGeo, left);
-                    int radius = center.x - left.x;
-
-                    final CacheType type = item.getType();
-                    if (type == null || type == CacheType.MULTI || type == CacheType.MYSTERY || type == CacheType.VIRTUAL) {
-                        blockedCircle.setColor(0x66000000);
-                        blockedCircle.setStyle(Style.STROKE);
-                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-                    } else {
-                        blockedCircle.setColor(0x66BB0000);
-                        blockedCircle.setStyle(Style.STROKE);
-                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-
-                        blockedCircle.setColor(0x44BB0000);
-                        blockedCircle.setStyle(Style.FILL);
-                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-                    }
-                }
-                canvas.setDrawFilter(remfil);
             }
+            canvas.setDrawFilter(removeFilter);
         } finally {
             getOverlayImpl().unlock();
+        }
+    }
+
+    /**
+     * calculate the radius of the circle to be drawn for the first item only. Those circles are only 161 meters in
+     * reality and therefore the minor changes due to the projection will not make any visible difference at the zoom
+     * levels which are used to see the circles.
+     *
+     * @param projection
+     * @return
+     */
+    private int calculateDrawingRadius(MapProjectionImpl projection) {
+        float[] distanceArray = new float[1];
+        final Geopoint itemCoord = items.get(0).getCoord().getCoords();
+
+        Location.distanceBetween(itemCoord.getLatitude(), itemCoord.getLongitude(),
+                itemCoord.getLatitude(), itemCoord.getLongitude() + 1, distanceArray);
+        final float longitudeLineDistance = distanceArray[0];
+
+        final GeoPointImpl itemGeo = mapProvider.getGeoPointBase(itemCoord);
+
+        final Geopoint leftCoords = new Geopoint(itemCoord.getLatitude(),
+                itemCoord.getLongitude() - 161 / longitudeLineDistance);
+        final GeoPointImpl leftGeo = mapProvider.getGeoPointBase(leftCoords);
+
+        final Point center = new Point();
+        projection.toPixels(itemGeo, center);
+
+        final Point left = new Point();
+        projection.toPixels(leftGeo, left);
+
+        final int radius = center.x - left.x;
+        return radius;
+    }
+
+    private void lazyInitializeDrawingObjects() {
+        if (blockedCircle == null) {
+            blockedCircle = new Paint();
+            blockedCircle.setAntiAlias(true);
+            blockedCircle.setStrokeWidth(2.0f);
+            blockedCircle.setARGB(127, 0, 0, 0);
+            blockedCircle.setPathEffect(new DashPathEffect(new float[] { 3, 2 }, 0));
+        }
+
+        if (setFilter == null) {
+            setFilter = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
+        }
+        if (removeFilter == null) {
+            removeFilter = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
         }
     }
 

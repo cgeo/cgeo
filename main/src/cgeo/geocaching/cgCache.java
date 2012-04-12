@@ -401,8 +401,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public boolean isEventCache() {
-        return CacheType.EVENT == cacheType || CacheType.MEGA_EVENT == cacheType
-                || CacheType.CITO == cacheType || CacheType.LOSTANDFOUND == cacheType;
+        return cacheType.isEvent();
     }
 
     public boolean logVisit(IAbstractActivity fromActivity) {
