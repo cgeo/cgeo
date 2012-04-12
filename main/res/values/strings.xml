@@ -779,7 +779,7 @@
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">You can use radar from this application with c:geo. It also offers a lot of other GPS-related information.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
-  <string name="helper_bluetoothgps_description">Allows you to use external GPS device to get better reception, more precise location and can spare battery of your phone.</string>
+  <string name="helper_bluetoothgps_description">Allows you to use an external GPS receiver to get more precise location and can spare battery of your device.</string>
   <string name="helper_barcode_title">Barcode Scanner</string>
   <string name="helper_barcode_description">There are Greasemonkey scripts and websites which allow to display a geocode as barcode. With this app c:geo can read that geocode directly from the screen of your computer.</string>
 

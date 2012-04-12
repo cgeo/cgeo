@@ -988,6 +988,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         int centerLongitudeNow = mapCenterNow.getLongitudeE6();
                         int spanLatitudeNow = mapView.getLatitudeSpan();
                         int spanLongitudeNow = mapView.getLongitudeSpan();
+                        int zoomNow = mapView.getMapZoomLevel();
 
                         // check if map moved or zoomed
                         //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
@@ -1001,6 +1002,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             moved = true;
                         } else if (spanLatitude == null || spanLongitude == null) {
                             moved = true;
+                        } else if (zoomNow != zoom) {
+                            moved = true;
                         } else if (((Math.abs(spanLatitudeNow - spanLatitude) > 50) || (Math.abs(spanLongitudeNow - spanLongitude) > 50) || // changed zoom
                                 (Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow / 4)) || (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow / 4)) // map moved
                         ) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches)
@@ -1009,7 +1012,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
 
                         // update title on any change
-                        int zoomNow = mapView.getMapZoomLevel();
                         if (moved || zoomNow != zoom || spanLatitudeNow != spanLatitude || spanLongitudeNow != spanLongitude || centerLatitudeNow != centerLatitude || centerLongitudeNow != centerLongitude) {
                             displayHandler.sendEmptyMessage(UPDATE_TITLE);
                         }
@@ -1311,8 +1313,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         @Override
         public void run() {
-            final Geopoint center = new Geopoint((int) centerLat, (int) centerLon);
-            final Viewport viewport = new Viewport(center, spanLat / 1e6 * 1.5, spanLon / 1e6 * 1.5);
+            final Geopoint center = new Geopoint(centerLat / 1e6, centerLon / 1e6);
+            final Viewport viewport = new Viewport(center, spanLat / 1e6, spanLon / 1e6).resize(1.5);
 
             try {
                 go4CacheThreadRun = System.currentTimeMillis();
@@ -1524,6 +1526,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
     }
 
+    private Viewport listToViewport(final List<Number> l) {
+        return new Viewport(new Geopoint(l.get(1).doubleValue(), l.get(3).doubleValue()), new Geopoint(l.get(2).doubleValue(), l.get(4).doubleValue()));
+    }
+
     // move map to view results of searchIntent
     private void centerMap(String geocodeCenter, final SearchResult searchCenter, final Geopoint coordsCenter, int[] mapState) {
 
@@ -1539,46 +1545,30 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             alreadyCentered = true;
         } else if (!centered && (geocodeCenter != null || searchIntent != null)) {
             try {
-                List<Number> viewport = null;
+                List<Number> vp = null;
 
                 if (geocodeCenter != null) {
-                    viewport = app.getBounds(geocodeCenter);
+                    vp = app.getBounds(geocodeCenter);
                 } else {
                     if (searchCenter != null) {
-                        viewport = app.getBounds(searchCenter.getGeocodes());
+                        vp = app.getBounds(searchCenter.getGeocodes());
                     }
                 }
 
-                if (viewport == null || viewport.size() < 5) {
+                if (vp == null || vp.size() < 5) {
                     return;
                 }
 
-                int cnt = (Integer) viewport.get(0);
+                int cnt = (Integer) vp.get(0);
                 if (cnt <= 0) {
                     return;
                 }
-                int minLat = (int) ((Double) viewport.get(1) * 1e6);
-                int maxLat = (int) ((Double) viewport.get(2) * 1e6);
-                int maxLon = (int) ((Double) viewport.get(3) * 1e6);
-                int minLon = (int) ((Double) viewport.get(4) * 1e6);
 
-                int centerLat = 0;
-                int centerLon = 0;
+                final Viewport viewport = listToViewport(vp);
 
-                if ((Math.abs(maxLat) - Math.abs(minLat)) != 0) {
-                    centerLat = minLat + ((maxLat - minLat) / 2);
-                } else {
-                    centerLat = maxLat;
-                }
-                if ((Math.abs(maxLon) - Math.abs(minLon)) != 0) {
-                    centerLon = minLon + ((maxLon - minLon) / 2);
-                } else {
-                    centerLon = maxLon;
-                }
-
-                mapController.setCenter(mapProvider.getGeoPointBase(new Geopoint(centerLat, centerLon)));
-                if (Math.abs(maxLat - minLat) != 0 && Math.abs(maxLon - minLon) != 0) {
-                    mapController.zoomToSpan(Math.abs(maxLat - minLat), Math.abs(maxLon - minLon));
+                mapController.setCenter(mapProvider.getGeoPointBase(viewport.center));
+                if (viewport.getLatitudeSpan() != 0 && viewport.getLongitudeSpan() != 0) {
+                    mapController.zoomToSpan((int) (viewport.getLatitudeSpan() * 1e6), (int) (viewport.getLongitudeSpan() * 1e6));
                 }
             } catch (Exception e) {
                 // nothing at all

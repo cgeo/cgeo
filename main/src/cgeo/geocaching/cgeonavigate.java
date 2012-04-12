@@ -294,23 +294,6 @@ public class cgeonavigate extends AbstractActivity {
         ((TextView) findViewById(R.id.destination)).setText(dstCoords.toString());
     }
 
-    public void setDest(final Geopoint coords) {
-        if (coords == null) {
-            return;
-        }
-
-        title = "some place";
-        setTitle();
-        setDestCoords();
-
-        dstCoords = coords;
-        updateDistanceInfo();
-    }
-
-    public Geopoint getCoordinatesNow() {
-        return geo.coordsNow;
-    }
-
     private void updateDistanceInfo() {
         if (geo == null || geo.coordsNow == null || dstCoords == null) {
             return;

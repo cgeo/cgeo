@@ -1,7 +1,6 @@
 // $codepro.audit.disable logExceptions
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -1864,54 +1863,6 @@ public class cgBase {
         } catch (Exception e) {
             Log.e(Settings.tag, "cgBase.dropCache: " + e.toString());
         }
-    }
-
-    public static boolean runNavigation(Activity activity, Resources res, Settings settings, final Geopoint coords) {
-        return runNavigation(activity, res, settings, coords, null);
-    }
-
-    public static boolean runNavigation(Activity activity, Resources res, Settings settings, final Geopoint coords, final Geopoint coordsNow) {
-        if (activity == null) {
-            return false;
-        }
-        if (settings == null) {
-            return false;
-        }
-
-        // Google Navigation
-        if (Settings.isUseGoogleNavigation()) {
-            try {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:ll=" + coords.getLatitude() + "," + coords.getLongitude())));
-
-                return true;
-            } catch (Exception e) {
-                // nothing
-            }
-        }
-
-        // Google Maps Directions
-        try {
-            if (coordsNow != null) {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?f=d&saddr=" + coordsNow.getLatitude() + "," + coordsNow.getLongitude() +
-                                "&daddr=" + coords.getLatitude() + "," + coords.getLongitude())));
-            } else {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?f=d&daddr=" + coords.getLatitude() + "," + coords.getLongitude())));
-            }
-
-            return true;
-        } catch (Exception e) {
-            // nothing
-        }
-
-        Log.i(Settings.tag, "cgBase.runNavigation: No navigation application available.");
-
-        if (res != null) {
-            ActivityMixin.showToast(activity, res.getString(R.string.err_navigation_no));
-        }
-
-        return false;
     }
 
     /**

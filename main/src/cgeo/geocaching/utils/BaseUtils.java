@@ -3,8 +3,6 @@
  */
 package cgeo.geocaching.utils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -82,17 +80,6 @@ public final class BaseUtils {
      */
     public static String getMatch(final String data, final Pattern p, final String defaultValue) {
         return BaseUtils.getMatch(data, p, true, 1, defaultValue, false);
-    }
-
-    public static List<String> getMatches(final String data, final Pattern p, int count) {
-        ArrayList<String> result = new ArrayList<String>();
-        final Matcher matcher = p.matcher(data);
-        while (matcher.find()) {
-            for (int i = 0; i < count; i++) {
-                result.add(matcher.group(i));
-            }
-        }
-        return result;
     }
 
     /**

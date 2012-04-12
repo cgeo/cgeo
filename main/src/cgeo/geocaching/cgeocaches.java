@@ -505,7 +505,7 @@ public class cgeocaches extends AbstractListActivity {
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             type = CacheListType.OFFLINE;
             if (coords == null) {
-                coords = new Geopoint(0, 0);
+                coords = new Geopoint(0.0, 0.0);
             }
         }
 

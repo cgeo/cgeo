@@ -32,12 +32,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public static void testBaseCodings() {
-        assertEquals(2045702, GCBase.newidToGCId("CpLB"));
-        assertEquals("CpLB", GCBase.gcidToNewId(2045702));
         assertEquals(2045702, GCBase.gccodeToGCId("GC2MEGA"));
-        assertEquals("GC2MEGA", GCBase.gcidToGCCode(2045702));
-
-        assertEquals("GC211WG", GCBase.newidToGeocode("gEaR"));
     }
 
     /** Tile computation with different zoom levels */

@@ -4,6 +4,7 @@ import cgeo.geocaching.Settings;
 
 final public class Log {
 
+    //FIXME: tag should be private member of this log class
     public static void v(final String tag, final String msg) {
         if (Settings.isDebug()) {
             android.util.Log.v(tag, msg);

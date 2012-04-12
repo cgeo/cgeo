@@ -17,7 +17,7 @@ import java.util.Map;
 public class GC1ZXX2 extends MockedCache {
 
     public GC1ZXX2() {
-        super(new Geopoint(52373217, 9710800));
+        super(new Geopoint(52.373217, 9.710800));
     }
 
     @Override

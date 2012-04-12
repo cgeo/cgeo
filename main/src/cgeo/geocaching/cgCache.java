@@ -99,7 +99,7 @@ public class cgCache implements ICache, IWaypoint {
     private String nameForSorting;
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
-    private int zoomlevel = Tile.ZOOMLEVEL_MAX;
+    private int zoomlevel = Tile.ZOOMLEVEL_MAX + 1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -401,8 +401,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public boolean isEventCache() {
-        return CacheType.EVENT == cacheType || CacheType.MEGA_EVENT == cacheType
-                || CacheType.CITO == cacheType || CacheType.LOSTANDFOUND == cacheType;
+        return cacheType.isEvent();
     }
 
     public boolean logVisit(IAbstractActivity fromActivity) {
@@ -1399,10 +1398,6 @@ public class cgCache implements ICache, IWaypoint {
     public void store(Activity activity, CancellableHandler handler) {
         final int listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
         cgBase.storeCache(activity, this, null, listId, false, handler);
-    }
-
-    public int getZoomlevel() {
-        return this.zoomlevel;
     }
 
     public void setZoomlevel(int zoomlevel) {

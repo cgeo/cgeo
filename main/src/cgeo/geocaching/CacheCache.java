@@ -1,9 +1,17 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.cgData.StorageLocation;
+import cgeo.geocaching.connector.gc.GCBase;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
+import cgeo.geocaching.utils.LeastRecentlyUsedMap.RemoveHandler;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Cache for Caches. Every cache is stored in memory while c:geo is active to
@@ -15,11 +23,14 @@ public class CacheCache {
 
     private static final int MAX_CACHED_CACHES = 1000;
     final private LeastRecentlyUsedMap<String, cgCache> cachesCache;
+    final private RemoveHandler<cgCache> removeHandler;
 
     private static CacheCache instance = null;
 
     private CacheCache() {
         cachesCache = new LeastRecentlyUsedMap.LruCache<String, cgCache>(MAX_CACHED_CACHES);
+        removeHandler = new CacheRemoveHandler();
+        cachesCache.setRemoveHandler(removeHandler);
     }
 
     public static CacheCache getInstance() {
@@ -74,9 +85,34 @@ public class CacheCache {
         return cachesCache.get(geocode);
     }
 
+    public Set<String> getInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+        final Set<String> geocodes = new HashSet<String>();
+        for (final cgCache cache : cachesCache.values()) {
+            if (cache.getCoords() == null) {
+                // FIXME: this kludge must be removed, it is only present to help us debug the cases where
+                // caches contain null coordinates.
+                Log.e(Settings.tag, "CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
+                continue;
+            }
+            if ((CacheType.ALL == cacheType || cache.getType() == cacheType) &&
+                    Viewport.isCacheInViewPort(centerLat.intValue(), centerLon.intValue(), spanLat.intValue(), spanLon.intValue(), cache.getCoords())) {
+                geocodes.add(cache.getGeocode());
+            }
+        }
+        return geocodes;
+    }
+
     @Override
     public String toString() {
         return StringUtils.join(cachesCache.keySet(), ' ');
+    }
+
+    private class CacheRemoveHandler implements RemoveHandler<cgCache> {
+
+        @Override
+        public void onRemove(cgCache removed) {
+            GCBase.removeFromTileCache(removed.getCoords());
+        }
     }
 
 }

@@ -86,4 +86,7 @@ public enum CacheType {
         this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
     }
 
+    public boolean isEvent() {
+        return CacheType.EVENT == this || CacheType.MEGA_EVENT == this || CacheType.CITO == this || CacheType.LOSTANDFOUND == this;
+    }
 }

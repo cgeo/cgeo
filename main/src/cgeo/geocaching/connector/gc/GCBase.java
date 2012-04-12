@@ -31,6 +31,7 @@ import android.graphics.Bitmap;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -51,6 +52,9 @@ public class GCBase {
     protected final static long GC_BASE57 = 57;
     protected final static long GC_BASE31 = 31;
     protected final static long GC_BASE16 = 16;
+
+    private final static LeastRecentlyUsedMap<Integer, Tile> tileCache = new LeastRecentlyUsedMap.LruCache<Integer, Tile>(64);
+    private static Viewport lastSearchViewport = null;
 
     /**
      * Searches the view port on the live map with Strategy.AUTO
@@ -84,6 +88,17 @@ public class GCBase {
         }
     }
 
+    public static void removeFromTileCache(Geopoint coords) {
+        if (coords != null) {
+            Collection<Tile> tiles = new ArrayList<Tile>(tileCache.values());
+            for (Tile tile : tiles) {
+                if (tile.containsPoint(coords)) {
+                    tileCache.remove(tile.hashCode());
+                }
+            }
+        }
+    }
+
     /**
      * Searches the view port on the live map for caches.
      * The strategy dictates if only live map information is used or if an additional
@@ -110,58 +125,78 @@ public class GCBase {
 
             for (Tile tile : tiles) {
 
-                StringBuilder url = new StringBuilder();
-                url.append("?x=").append(tile.getX()) // x tile
-                .append("&y=").append(tile.getY()) // y tile
-                .append("&z=").append(tile.getZoomlevel()); // zoom level
-                if (tokens != null) {
-                    url.append("&k=").append(tokens[0]); // user session
-                    url.append("&st=").append(tokens[1]); // session token
-                }
-                url.append("&ep=1");
-                if (Settings.isExcludeMyCaches()) {
-                    url.append("&hf=1").append("&hh=1"); // hide found, hide hidden
-                }
-                if (Settings.getCacheType() == CacheType.TRADITIONAL) {
-                    url.append("&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
-                }
-                if (Settings.getCacheType() == CacheType.MULTI) {
-                    url.append("&ect=9,5,2,6,453,13,1304,137,11,4,8,1858");
-                }
-                if (Settings.getCacheType() == CacheType.MYSTERY) {
-                    url.append("&ect=9,5,3,6,453,13,1304,137,11,4,2,1858");
-                }
-                if (tile.getZoomlevel() != 14) {
-                    url.append("&_=").append(String.valueOf(System.currentTimeMillis()));
-                }
-                // other types t.b.d
-                final String urlString = url.toString();
+                if (!tileCache.containsKey(tile.hashCode())) {
 
-                // The PNG must be request before ! Else the following request would return with 204 - No Content
-                Bitmap bitmap = Tile.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
-
-                assert bitmap.getWidth() == Tile.TILE_SIZE : "Bitmap has wrong width";
-                assert bitmap.getHeight() == Tile.TILE_SIZE : "Bitmap has wrong height";
-
-                String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
-                if (StringUtils.isEmpty(data)) {
-                    Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
-                } else {
-                    final SearchResult search = parseMapJSON(data, tile, bitmap, strategy);
-                    if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
-                        Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+                    StringBuilder url = new StringBuilder();
+                    url.append("?x=").append(tile.getX()) // x tile
+                    .append("&y=").append(tile.getY()) // y tile
+                    .append("&z=").append(tile.getZoomlevel()); // zoom level
+                    if (tokens != null) {
+                        url.append("&k=").append(tokens[0]); // user session
+                        url.append("&st=").append(tokens[1]); // session token
                     }
-                    else {
-                        searchResult.addGeocodes(search.getGeocodes());
+                    url.append("&ep=1");
+                    if (Settings.isExcludeMyCaches()) {
+                        url.append("&hf=1").append("&hh=1"); // hide found, hide hidden
                     }
+                    if (Settings.getCacheType() == CacheType.TRADITIONAL) {
+                        url.append("&ect=9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
+                    }
+                    if (Settings.getCacheType() == CacheType.MULTI) {
+                        url.append("&ect=9,5,2,6,453,13,1304,137,11,4,8,1858");
+                    }
+                    if (Settings.getCacheType() == CacheType.MYSTERY) {
+                        url.append("&ect=9,5,3,6,453,13,1304,137,11,4,2,1858");
+                    }
+                    if (tile.getZoomlevel() != 14) {
+                        url.append("&_=").append(String.valueOf(System.currentTimeMillis()));
+                    }
+                    // other types t.b.d
+                    final String urlString = url.toString();
+
+                    // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
+                    Bitmap bitmap = Tile.requestMapTile(GCConstants.URL_MAP_TILE + urlString, referer);
+
+                    // Check bitmap size
+                    if (bitmap.getWidth() != Tile.TILE_SIZE ||
+                            bitmap.getHeight() != Tile.TILE_SIZE) {
+                        bitmap.recycle();
+                        bitmap = null;
+                    }
+
+                    String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO + urlString, referer);
+                    if (StringUtils.isEmpty(data)) {
+                        Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                    } else {
+                        final SearchResult search = parseMapJSON(data, tile, bitmap, strategy);
+                        if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
+                            Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+                        }
+                        else {
+                            searchResult.addGeocodes(search.getGeocodes());
+                        }
+                        tileCache.put(tile.hashCode(), tile);
+                    }
+
+                    // release native bitmap memory
+                    if (bitmap != null) {
+                        bitmap.recycle();
+                    }
+
                 }
             }
         }
 
         if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
-            SearchResult search = cgBase.searchByCoords(null, viewport.getCenter(), Settings.getCacheType(), false);
-            if (search != null) {
-                searchResult.addGeocodes(search.getGeocodes());
+            Geopoint center = viewport.getCenter();
+            if ((lastSearchViewport == null) || !lastSearchViewport.isInViewport(center)) {
+                SearchResult search = cgBase.searchByCoords(null, center, Settings.getCacheType(), false);
+                if (search != null) {
+
+                    List<Number> bounds = cgeoapplication.getInstance().getBounds(search.getGeocodes());
+                    lastSearchViewport = new Viewport(bounds.get(1).doubleValue(), bounds.get(2).doubleValue(), bounds.get(4).doubleValue(), bounds.get(3).doubleValue());
+                    searchResult.addGeocodes(search.getGeocodes());
+                }
             }
         }
 
@@ -265,7 +300,7 @@ public class GCBase {
                 cache.setName(nameCache.get(id));
                 cache.setZoomlevel(tile.getZoomlevel());
                 cache.setCoords(tile.getCoord(xy));
-                if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && positions.size() < 64) {
+                if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && positions.size() < 64 && bitmap != null) {
                     // don't parse if there are too many caches. The decoding would return too much wrong results
                     IconDecoder.parseMapPNG(cache, bitmap, xy, tile.getZoomlevel());
                 } else {
@@ -323,62 +358,6 @@ public class GCBase {
             gcid += Math.pow(16, 4) - 16 * Math.pow(31, 3);
         }
         return gcid;
-    }
-
-    private static String modulo(final long value, final long base, final String sequence) {
-        String result = "";
-        long rest = 0;
-        long divResult = value;
-        do
-        {
-            rest = divResult % base;
-            divResult = (int) Math.floor(divResult / base);
-            result = sequence.charAt((int) rest) + result;
-        } while (divResult != 0);
-        return result;
-    }
-
-    /**
-     * Convert (old) GCIds to GCCode (geocode)
-     *
-     * Based on http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40
-     */
-    public static String gcidToGCCode(final long gcid) {
-        String gccode = modulo(gcid + 411120, GC_BASE31, SEQUENCE_GCID);
-        if ((gccode.length() < 4) || (gccode.length() == 4 && SEQUENCE_GCID.indexOf(gccode.charAt(0)) < 16)) {
-            gccode = modulo(gcid, GC_BASE16, SEQUENCE_GCID);
-        }
-        return "GC" + gccode;
-    }
-
-    /**
-     * Convert ids from the live map to (old) GCIds
-     *
-     * Based on http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40
-     */
-    public static long newidToGCId(final String newid) {
-        long gcid = 0;
-        for (int p = 0; p < newid.length(); p++) {
-            gcid = GC_BASE57 * gcid + SEQUENCE_NEWID.indexOf(newid.charAt(p));
-        }
-        return gcid;
-    }
-
-    /**
-     * Convert (old) GCIds to ids used in the live map
-     *
-     * Based on http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40
-     */
-    public static String gcidToNewId(final long gcid) {
-        return modulo(gcid, GC_BASE57, SEQUENCE_NEWID);
-    }
-
-    /**
-     * Convert ids from the live map into GCCode (geocode)
-     */
-    public static String newidToGeocode(final String newid) {
-        long gcid = GCBase.newidToGCId(newid);
-        return GCBase.gcidToGCCode(gcid);
     }
 
     /** Get user session & session token from the Live Map. Needed for following requests */

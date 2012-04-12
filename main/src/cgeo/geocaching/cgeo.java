@@ -151,9 +151,9 @@ public class cgeo extends AbstractActivity {
                     final int satellitesFixed = msg.arg1;
                     final int satellitesVisible = msg.arg2;
                     if (satellitesFixed > 0) {
-                        satellites = res.getString(R.string.loc_sat) + ": " + satellitesFixed + "/" + satellitesVisible;
+                        satellites = res.getString(R.string.loc_sat) + ": " + satellitesFixed + '/' + satellitesVisible;
                     } else if (satellitesVisible >= 0) {
-                        satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
+                        satellites = res.getString(R.string.loc_sat) + ": 0/" + satellitesVisible;
                     }
                     break;
             }

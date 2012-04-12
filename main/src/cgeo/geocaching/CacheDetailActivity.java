@@ -832,25 +832,6 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     /**
-     * Creates a {@link List} of all coordinates (cache and waypoints) for the current cache.
-     *
-     * @return A {@link List} of all coordinates
-     */
-    public List<IWaypoint> getCoordinates() {
-        List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
-
-        // cache
-        coordinates.add(cache);
-
-        // waypoints
-        if (cache.hasWaypoints()) {
-            coordinates.addAll(cache.getWaypoints());
-        }
-
-        return coordinates;
-    }
-
-    /**
      * Tries to navigate to the {@link cgCache} of this activity.
      */
     private void startDefaultNavigation() {

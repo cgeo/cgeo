@@ -2722,23 +2722,36 @@ public class cgData {
     }
 
     /** Retrieve all stored caches from DB */
-    public Set<String> loadCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> loadCachedInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
         return loadInViewport(false, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
     /** Retrieve stored caches from DB with listId >= 1 */
-    public Set<String> loadStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> loadStoredInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
         return loadInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
-    public Set<String> loadInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
-        if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
-            return null;
-        }
-
+    /**
+     * Loads the geocodes of caches in a viewport from CacheCache and/or Database
+     * 
+     * @param stored
+     *            True - query only stored caches, False - query cached ones as well
+     * @param centerLat
+     * @param centerLon
+     * @param spanLat
+     * @param spanLon
+     * @param cacheType
+     * @return Set with geocodes
+     */
+    private Set<String> loadInViewport(final boolean stored, final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
         init();
 
-        Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<String>();
+
+        // if not stored only, get codes from CacheCache as well
+        if (!stored) {
+            geocodes.addAll(CacheCache.getInstance().getInViewport(centerLat, centerLon, spanLat, spanLon, cacheType));
+        }
 
         // viewport limitation
         StringBuilder where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
@@ -2756,7 +2769,7 @@ public class cgData {
         }
 
         try {
-            Cursor cursor = databaseRO.query(
+            final Cursor cursor = databaseRO.query(
                     dbTableCaches,
                     new String[] { "geocode" },
                     where.toString(),
@@ -2766,75 +2779,16 @@ public class cgData {
                     null,
                     "500");
 
-            if (cursor != null) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-                    int index = cursor.getColumnIndex("geocode");
+            if (cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndex("geocode");
 
-                    do {
-                        geocodes.add(cursor.getString(index));
-                    } while (cursor.moveToNext());
-                } else {
-                    cursor.close();
-                    return null;
-                }
-
-                cursor.close();
+                do {
+                    geocodes.add(cursor.getString(index));
+                } while (cursor.moveToNext());
             }
+            cursor.close();
         } catch (Exception e) {
             Log.e(Settings.tag, "cgData.loadInViewport: " + e.toString());
-        }
-
-        return geocodes;
-    }
-
-    public List<String> getOfflineAll(CacheType cacheType) {
-        init();
-
-        List<String> geocodes = new ArrayList<String>();
-
-        StringBuilder where = new StringBuilder();
-
-        // cacheType limitation
-        if (cacheType != CacheType.ALL) {
-            where.append(cacheType);
-            where.append('"');
-        }
-
-        // offline caches only
-        if (where.length() > 0) {
-            where.append(" and ");
-        }
-        where.append("reason >= 1");
-
-        try {
-            Cursor cursor = databaseRO.query(
-                    dbTableCaches,
-                    new String[] { "geocode" },
-                    where.toString(),
-                    null,
-                    null,
-                    null,
-                    null,
-                    "5000");
-
-            if (cursor != null) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-                    int index = cursor.getColumnIndex("geocode");
-
-                    do {
-                        geocodes.add(cursor.getString(index));
-                    } while (cursor.moveToNext());
-                } else {
-                    cursor.close();
-                    return null;
-                }
-
-                cursor.close();
-            }
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getOfflineAll: " + e.toString());
         }
 
         return geocodes;

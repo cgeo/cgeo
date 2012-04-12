@@ -32,7 +32,6 @@ public abstract class Login {
     // false = not logged in
     private static boolean actualLoginStatus = false;
     private static String actualUserName = "";
-    private static String actualMemberStatus = "";
     private static int actualCachesFound = -1;
     private static String actualStatus = "";
 
@@ -171,14 +170,6 @@ public abstract class Login {
         actualUserName = userName;
     }
 
-    public static String getActualMemberStatus() {
-        return actualMemberStatus;
-    }
-
-    public static void setActualMemberStatus(final String memberStatus) {
-        actualMemberStatus = memberStatus;
-    }
-
     public static int getActualCachesFound() {
         return actualCachesFound;
     }
@@ -204,7 +195,6 @@ public abstract class Login {
         setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
         if (isActualLoginStatus()) {
             setActualUserName(BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
-            setActualMemberStatus(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"));
             setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
             return true;
         }
@@ -213,7 +203,6 @@ public abstract class Login {
         setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
         if (isActualLoginStatus()) {
             setActualUserName(Settings.getUsername());
-            setActualMemberStatus(Settings.getMemberStatus());
             // number of caches found is not part of this page
             return true;
         }
@@ -387,12 +376,6 @@ public abstract class Login {
      */
     public static void transferViewstates(final String page, final Parameters params) {
         putViewstates(params, getViewstates(page));
-    }
-
-    static public String[] requestViewstates(final String uri, final Parameters params, boolean xContentType, boolean my) {
-        final HttpResponse response = Network.request(uri, params, xContentType, my, false);
-
-        return getViewstates(Network.getResponseData(response));
     }
 
 }

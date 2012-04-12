@@ -10,3 +10,4 @@ gen/
 /tests/private.properties
 /cgeo-calendar/local.properties
 /cgeo-calendar/private.properties
+.directory

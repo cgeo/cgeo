@@ -47,19 +47,6 @@ public final class Geopoint implements ICoordinates {
     }
 
     /**
-     * Creates new Geopoint with given latitude and longitude (both microdegree).
-     *
-     * @param lat
-     *            latitude
-     * @param lon
-     *            longitude
-     */
-    public Geopoint(final int lat, final int lon)
-    {
-        this(lat / 1e6, lon / 1e6);
-    }
-
-    /**
      * Creates new Geopoint with latitude and longitude parsed from string.
      *
      * @param text
@@ -247,7 +234,7 @@ public final class Geopoint implements ICoordinates {
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
     @Override
@@ -517,6 +504,8 @@ public final class Geopoint implements ICoordinates {
         return null;
     }
 
+    //FIXME: this interface implementation is totally confusing as it returns the class itself.
+    // it can therefore be removed completely (and any invocation of it) without any disadvantages
     @Override
     public Geopoint getCoords() {
         return this;
