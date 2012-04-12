@@ -1848,7 +1848,7 @@ public class cgeocaches extends AbstractListActivity {
                     deviceCode = "";
                 }
                 final Parameters params = new Parameters("code", deviceCode);
-                HttpResponse responseFromWeb = Network.request("http://send2.cgeo.org/read.html", params, true);
+                HttpResponse responseFromWeb = Network.request("http://send2.cgeo.org/read.html", params);
 
                 if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = Network.getResponseData(responseFromWeb);

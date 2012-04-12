@@ -17,7 +17,6 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -105,7 +104,7 @@ public class GCConnector extends AbstractConnector {
 
         cgBase.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
-        final String page = Network.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
+        final String page = Network.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false);
 
         if (StringUtils.isEmpty(page)) {
             final SearchResult search = new SearchResult();

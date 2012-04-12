@@ -362,7 +362,7 @@ public class GCBase {
 
     /** Get user session & session token from the Live Map. Needed for following requests */
     public static String[] getTokens() {
-        final HttpResponse response = Network.request(GCConstants.URL_LIVE_MAP, null, false);
+        final HttpResponse response = Network.request(GCConstants.URL_LIVE_MAP);
         final String data = Network.getResponseData(response);
         String userSession = BaseUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
         String sessionToken = BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");

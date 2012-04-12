@@ -4,6 +4,7 @@ import cgeo.geocaching.concurrent.BlockingThreadPool;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -38,12 +39,18 @@ public class StaticMapsProvider {
     }
 
     private static void downloadMap(cgCache cache, int zoom, String mapType, String markerUrl, String prefix, int level, String latlonMap, int edge, String waypoints) {
-        final String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + latlonMap;
-        final String url = mapUrl + "&zoom=" + zoom + "&size=" + edge + "x" + edge + "&maptype=" + mapType + "&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints + "&sensor=false";
-        final File file = getMapFile(cache.getGeocode(), prefix, level, true);
-        final HttpResponse httpResponse = Network.request(url, null, false);
+        final String mapUrl = "http://maps.google.com/maps/api/staticmap";
+        final Parameters params = new Parameters(
+                "center", latlonMap,
+                "zoom", String.valueOf(zoom),
+                "size", edge + "x" + edge,
+                "maptype", mapType,
+                "markers", "icon:" + markerUrl + '|' + latlonMap + waypoints,
+                "sensor", "false");
+        final HttpResponse httpResponse = Network.request(mapUrl, params);
 
         if (httpResponse != null) {
+            final File file = getMapFile(cache.getGeocode(), prefix, level, true);
             if (LocalStorage.saveEntityToFile(httpResponse, file)) {
                 // Delete image if it has no contents
                 final long fileSize = file.length();
