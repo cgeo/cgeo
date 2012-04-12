@@ -10,21 +10,23 @@ public class Viewport {
     public final Geopoint bottomLeft;
     public final Geopoint topRight;
 
-    public Viewport(final Geopoint bottomLeft, final Geopoint topRight) {
-        this.bottomLeft = new Geopoint(Math.min(bottomLeft.getLatitude(), topRight.getLatitude()),
-                Math.min(bottomLeft.getLongitude(), topRight.getLongitude()));
-        this.topRight = new Geopoint(Math.max(bottomLeft.getLatitude(), topRight.getLatitude()),
-                Math.max(bottomLeft.getLongitude(), topRight.getLongitude()));
-        this.center = new Geopoint((bottomLeft.getLatitude() + topRight.getLatitude()) / 2,
-                (bottomLeft.getLongitude() + topRight.getLongitude()) / 2);
+    public Viewport(final Geopoint gp1, final Geopoint gp2) {
+        this.bottomLeft = new Geopoint(Math.min(gp1.getLatitude(), gp2.getLatitude()),
+                Math.min(gp1.getLongitude(), gp2.getLongitude()));
+        this.topRight = new Geopoint(Math.max(gp1.getLatitude(), gp2.getLatitude()),
+                Math.max(gp1.getLongitude(), gp2.getLongitude()));
+        this.center = new Geopoint((gp1.getLatitude() + gp2.getLatitude()) / 2,
+                (gp1.getLongitude() + gp2.getLongitude()) / 2);
     }
 
     public Viewport(final Geopoint center, final double latSpan, final double lonSpan) {
         this.center = center;
         final double centerLat = center.getLatitude();
         final double centerLon = center.getLongitude();
-        bottomLeft = new Geopoint(centerLat - Math.abs(latSpan) / 2, centerLon - Math.abs(lonSpan) / 2);
-        topRight = new Geopoint(centerLat + Math.abs(latSpan) / 2, centerLon + Math.abs(lonSpan) / 2);
+        final double latHalfSpan = Math.abs(latSpan) / 2;
+        final double lonHalfSpan = Math.abs(lonSpan) / 2;
+        bottomLeft = new Geopoint(centerLat - latHalfSpan, centerLon - lonHalfSpan);
+        topRight = new Geopoint(centerLat + latHalfSpan, centerLon + lonHalfSpan);
     }
 
     public Viewport(final double lat1, final double lat2, final double lon1, final double lon2) {
@@ -51,6 +53,14 @@ public class Viewport {
         return center;
     }
 
+    public double getLatitudeSpan() {
+        return getLatitudeMax() - getLatitudeMin();
+    }
+
+    public double getLongitudeSpan() {
+        return getLongitudeMax() - getLongitudeMin();
+    }
+
     public boolean isInViewport(final Geopoint coords) {
 
         return coords.getLongitudeE6() >= bottomLeft.getLongitudeE6()
@@ -62,6 +72,17 @@ public class Viewport {
     @Override
     public String toString() {
         return "(" + bottomLeft.toString() + "," + topRight.toString() + ")";
+    }
+
+    /**
+     * Check whether another viewport is fully included into the current one.
+     *
+     * @param vp
+     *            the other viewport
+     * @return true if the vp is fully included into this one, false otherwise
+     */
+    public boolean includes(final Viewport vp) {
+        return isInViewport(vp.bottomLeft) && isInViewport(vp.topRight);
     }
 
     /**
@@ -132,5 +153,42 @@ public class Viewport {
             Log.e(Settings.tag, "Viewport.isInViewPort: " + e.toString());
             return false;
         }
+    }
+
+    /**
+     * Return the "where" part of the string appropriate for a SQL query.
+     *
+     * @return the string without the "where" keyword
+     */
+    public String sqlWhere() {
+        return "latitude >= " + getLatitudeMin() + " and " +
+                "latitude <= " + getLatitudeMax() + " and " +
+                "longitude >= " + getLongitudeMin() + " and " +
+                "longitude <= " + getLongitudeMax();
+    }
+
+    /**
+     * Return a widened or shrunk viewport.
+     *
+     * @param factor
+     *            multiplicative factor for the latitude and longitude span (> 1 to widen, < 1 to shrink)
+     * @return a widened or shrunk viewport
+     */
+    public Viewport resize(final double factor) {
+        return new Viewport(getCenter(), getLatitudeSpan() * factor, getLongitudeSpan() * factor);
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        if (other == null || !(other instanceof Viewport)) {
+            return false;
+        }
+        final Viewport vp = (Viewport) other;
+        return bottomLeft.equals(vp.bottomLeft) && topRight.equals(vp.topRight);
+    }
+
+    @Override
+    public int hashCode() {
+        return bottomLeft.hashCode() ^ topRight.hashCode();
     }
 }
