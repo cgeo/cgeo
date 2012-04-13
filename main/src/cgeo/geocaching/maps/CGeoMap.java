@@ -1526,7 +1526,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
     }
 
-    private Viewport listToViewport(final List<Number> l) {
+    private static Viewport listToViewport(final List<Number> l) {
         return new Viewport(new Geopoint(l.get(1).doubleValue(), l.get(3).doubleValue()), new Geopoint(l.get(2).doubleValue(), l.get(4).doubleValue()));
     }
 
