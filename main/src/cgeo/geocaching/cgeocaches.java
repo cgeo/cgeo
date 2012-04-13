@@ -768,8 +768,7 @@ public class cgeocaches extends AbstractListActivity {
             subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
             subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
-            if (Settings.getWebDeviceCode() == null)
-            {
+            if (Settings.getWebDeviceCode() == null) {
                 menu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title)).setIcon(android.R.drawable.ic_menu_upload); // import gpx file
             } else {
                 SubMenu subMenuImport = menu.addSubMenu(0, SUBMENU_IMPORT, 0, res.getString(R.string.import_title)).setIcon(android.R.drawable.ic_menu_upload); // import
@@ -777,8 +776,7 @@ public class cgeocaches extends AbstractListActivity {
                 subMenuImport.add(1, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title)).setCheckable(false).setChecked(false);
             }
         } else {
-            if (type == CacheListType.HISTORY)
-            {
+            if (type == CacheListType.HISTORY) {
                 SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_HISTORY, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
                 subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
                 subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
@@ -818,30 +816,12 @@ public class cgeocaches extends AbstractListActivity {
             boolean isNonDefaultList = listId != StoredList.STANDARD_LIST_ID;
 
             if (type == CacheListType.OFFLINE) { // only offline list
-                if (hasSelection) {
-                    menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked() + ")");
-                } else {
-                    menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_all));
-                }
+                setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
                 menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList);
-
-                if (hasSelection) {
-                    menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked() + ")");
-                } else {
-                    menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_all));
-                }
-
-                if (hasSelection) {
-                    menu.findItem(MENU_MOVE_TO_LIST).setTitle(res.getString(R.string.caches_move_selected) + " (" + adapter.getChecked() + ")");
-                } else {
-                    menu.findItem(MENU_MOVE_TO_LIST).setTitle(res.getString(R.string.caches_move_all));
-                }
+                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
+                setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
             } else { // search and history list (all other than offline)
-                if (hasSelection) {
-                    menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_selected) + " (" + adapter.getChecked() + ")");
-                } else {
-                    menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_offline));
-                }
+                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
             }
 
             // Hide menus if cache-list is empty
@@ -884,26 +864,26 @@ public class cgeocaches extends AbstractListActivity {
                 item.setVisible(multipleLists);
             }
 
-            item = menu.findItem(MENU_REMOVE_FROM_HISTORY);
-            if (null != item) {
-                if (hasSelection) {
-                    item.setTitle(res.getString(R.string.cache_remove_from_history) + " (" + adapter.getChecked() + ")");
-                } else {
-                    item.setTitle(res.getString(R.string.cache_clear_history));
-                }
-            }
-
-            item = menu.findItem(MENU_EXPORT);
-            if (hasSelection) {
-                item.setTitle(res.getString(R.string.export) + " (" + adapter.getChecked() + ")");
-            } else {
-                item.setTitle(res.getString(R.string.export));
-            }
+            setMenuItemLabel(menu, MENU_REMOVE_FROM_HISTORY, R.string.cache_remove_from_history, R.string.cache_clear_history);
+            setMenuItemLabel(menu, MENU_EXPORT, R.string.export, R.string.export);
         } catch (Exception e) {
-            Log.e("cgeocaches.onPrepareOptionsMenu: " + e.toString());
+            Log.e("cgeocaches.onPrepareOptionsMenu", e);
         }
 
         return true;
+    }
+
+    private void setMenuItemLabel(final Menu menu, final int menuId, final int resIdSelection, final int resId) {
+        final MenuItem menuItem = menu.findItem(menuId);
+        if (menuItem == null) {
+            return;
+        }
+        boolean hasSelection = adapter != null && adapter.getChecked() > 0;
+        if (hasSelection) {
+            menuItem.setTitle(res.getString(resIdSelection) + " (" + adapter.getChecked() + ")");
+        } else {
+            menuItem.setTitle(res.getString(resId));
+        }
     }
 
     @Override
