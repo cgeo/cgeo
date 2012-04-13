@@ -143,7 +143,7 @@ public class cgBase {
 
             if (recaptchaJsParam != null) {
                 final Parameters params = new Parameters("k", recaptchaJsParam.trim());
-                final String recaptchaJs = Network.getResponseData(Network.request("http://www.google.com/recaptcha/api/challenge", params, true));
+                final String recaptchaJs = Network.getResponseData(Network.request("http://www.google.com/recaptcha/api/challenge", params));
 
                 if (StringUtils.isNotBlank(recaptchaJs)) {
                     recaptchaChallenge = BaseUtils.getMatch(recaptchaJs, GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE, true, 1, null, true);
@@ -853,7 +853,7 @@ public class cgBase {
                     // "sp", Boolean.toString(personal), // personal logs
                     "sf", Boolean.toString(friends));
 
-            final HttpResponse response = Network.request("http://www.geocaching.com/seek/geocache.logbook", params, false, false, false);
+            final HttpResponse response = Network.request("http://www.geocaching.com/seek/geocache.logbook", params);
             if (response == null) {
                 Log.e("cgBase.loadLogsFromDetails: cannot log logs, response is null");
                 return null;
@@ -1359,7 +1359,7 @@ public class cgBase {
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
         final String fullUri = uri + "?" + addFToParams(params, false, true);
-        String page = Network.requestLogged(uri, params, false, my, true);
+        String page = Network.requestLogged(uri, params, my, true);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgeoBase.searchByAny: No data from server");
@@ -1439,7 +1439,7 @@ public class cgBase {
             params.put("id", id);
         }
 
-        String page = Network.requestLogged("http://www.geocaching.com/track/details.aspx", params, false, false, false);
+        String page = Network.requestLogged("http://www.geocaching.com/track/details.aspx", params, false, false);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgeoBase.searchTrackable: No data from server");

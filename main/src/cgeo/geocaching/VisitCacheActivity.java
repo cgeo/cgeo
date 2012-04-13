@@ -656,7 +656,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     return;
                 }
 
-                final String page = Network.getResponseData(Network.request("http://www.geocaching.com/seek/log.aspx", params, false, false, false));
+                final String page = Network.getResponseData(Network.request("http://www.geocaching.com/seek/log.aspx", params));
 
                 viewstates = Login.getViewstates(page);
                 trackables = cgBase.parseTrackableLog(page);

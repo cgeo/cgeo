@@ -69,7 +69,7 @@ public abstract class Login {
         if (cgBase.res != null) {
             Login.setActualStatus(cgBase.res.getString(R.string.init_login_popup_working));
         }
-        HttpResponse loginResponse = Network.request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
+        HttpResponse loginResponse = Network.request("https://www.geocaching.com/login/default.aspx");
         String loginData = Network.getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
             return StatusCode.MAINTENANCE;
@@ -131,7 +131,7 @@ public abstract class Login {
     }
 
     public static StatusCode logout() {
-        HttpResponse logoutResponse = Network.request("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f", null, false, false, false);
+        HttpResponse logoutResponse = Network.request("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f");
         String logoutData = Network.getResponseData(logoutResponse);
         if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
             return StatusCode.MAINTENANCE;
@@ -218,9 +218,9 @@ public abstract class Login {
         if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
             Log.i("Geocaching.com language already set to English");
             // get find count
-            getLoginStatus(Network.getResponseData(Network.request("http://www.geocaching.com/email/", null, false)));
+            getLoginStatus(Network.getResponseData(Network.request("http://www.geocaching.com/email/")));
         } else {
-            final String page = Network.getResponseData(Network.request("http://www.geocaching.com/default.aspx", null, false));
+            final String page = Network.getResponseData(Network.request("http://www.geocaching.com/default.aspx"));
             getLoginStatus(page);
             if (page == null) {
                 Log.e("Failed to read viewstates to set geocaching.com language");
@@ -238,7 +238,7 @@ public abstract class Login {
 
     public static BitmapDrawable downloadAvatarAndGetMemberStatus(final Context context) {
         try {
-            final String profile = BaseUtils.replaceWhitespace(Network.getResponseData(Network.request("http://www.geocaching.com/my/", null, false)));
+            final String profile = BaseUtils.replaceWhitespace(Network.getResponseData(Network.request("http://www.geocaching.com/my/")));
 
             Settings.setMemberStatus(BaseUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
 
@@ -262,7 +262,7 @@ public abstract class Login {
      */
     public static void detectGcCustomDate() {
 
-        final String result = Network.getResponseData(Network.request("http://www.geocaching.com/account/ManagePreferences.aspx", null, false, false, false));
+        final String result = Network.getResponseData(Network.request("http://www.geocaching.com/account/ManagePreferences.aspx"));
 
         if (null == result) {
             Log.w("cgeoBase.detectGcCustomDate: result is null");

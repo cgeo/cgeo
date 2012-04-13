@@ -392,7 +392,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
                     return;
                 }
 
-                final String page = Network.getResponseData(Network.request("http://www.geocaching.com/track/log.aspx", params, false, false, false));
+                final String page = Network.getResponseData(Network.request("http://www.geocaching.com/track/log.aspx", params));
 
                 viewstates = Login.getViewstates(page);
 

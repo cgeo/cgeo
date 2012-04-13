@@ -15,7 +15,6 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
@@ -1826,9 +1825,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         private class PreviewMapTask extends AsyncTask<Void, Void, BitmapDrawable> {
             @Override
-            protected BitmapDrawable doInBackground(Void... params) {
-                BitmapDrawable image = null;
-
+            protected BitmapDrawable doInBackground(Void... parameters) {
                 try {
                     final String latlonMap = cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
 
@@ -1839,15 +1836,15 @@ public class CacheDetailActivity extends AbstractActivity {
                     final int height = (int) (110 * metrics.density);
 
                     // TODO move this code to StaticMapProvider and use its constant values
-                    final String markerUrl = Network.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
+                    final String markerUrl = "http://cgeo.carnero.cc/_markers/my_location_mdpi.png";
 
                     final HtmlImage mapGetter = new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, 0, false);
-                    image = mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?zoom=15&size=" + width + "x" + height + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7Cshadow:false%7C" + latlonMap + "&sensor=false");
+                    final Parameters params = new Parameters("zoom", "15", "size", width + "x" + height, "maptype", "roadmap", "markers", "icon:" + markerUrl + "|shadow:false|" + latlonMap, "sensor", "false");
+                    return mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?" + params);
                 } catch (Exception e) {
                     Log.w("CacheDetailActivity.PreviewMapTask", e);
+                    return null;
                 }
-
-                return image;
             }
 
             @Override
