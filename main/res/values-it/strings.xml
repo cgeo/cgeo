@@ -26,15 +26,15 @@
   <string name="event">Event cache</string>
   <string name="mega">Mega-event cache</string>
   <string name="earth">Earthcache</string>
-  <string name="cito">Cache in trash out event</string>
+  <string name="cito">Evento Cache in trash out</string>
   <string name="webcam">Webcam cache</string>
   <string name="virtual">Virtual cache</string>
   <string name="wherigo">Wherigo cache</string>
   <string name="lostfound">Lost &amp; found</string>
   <string name="ape">Project ape cache</string>
   <string name="gchq">Groundspeak hq</string>
-  <string name="gps">GPS cache exhibit</string>
-  <string name="unknown">Unknown type</string>
+  <string name="gps">Fiera GPS cache</string>
+  <string name="unknown">Tipo sconosciuto</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
@@ -57,7 +57,7 @@
   <!-- logs -->
   <string name="log_found">Trovata</string>
   <string name="log_dnf">Non trovata (DNF)</string>
-  <string name="log_note">Scrivi Nota</string>
+  <string name="log_note">Note</string>
   <string name="log_published">Pubblicata</string>
   <string name="log_enabled">Attiva</string>
   <string name="log_disabled">Non attiva</string>
@@ -69,7 +69,7 @@
   <string name="log_movecollection">Sposta in collezione</string>
   <string name="log_moveinventory">Sposta in inventario</string>  
   <string name="log_maintained">Manutenzione effettuata</string>
-  <string name="log_maintenance_needed">Necessita manutenzione</string>
+  <string name="log_maintenance_needed">Richiede manutenzione</string>
   <string name="log_update">Coordinate aggiornate</string>
   <string name="log_archived">Archiviata</string>
   <string name="log_needs_archived">Necessita archiviazione</string>
@@ -269,19 +269,19 @@
   <string name="caches_on_map">Visualizza sulla mappa</string>
   <string name="caches_sort">Ordina</string>
   <string name="caches_sort_title">Ordina per</string>
-  <string name="caches_sort_distance">distanza</string>
-  <string name="caches_sort_difficulty">difficoltà</string>
-  <string name="caches_sort_terrain">terreno</string>
-  <string name="caches_sort_size">dimensione</string>
-  <string name="caches_sort_favorites">popolarità</string>
-  <string name="caches_sort_name">nome</string>
+  <string name="caches_sort_distance">Distanza</string>
+  <string name="caches_sort_difficulty">Difficoltà</string>
+  <string name="caches_sort_terrain">Terreno</string>
+  <string name="caches_sort_size">Dimensione</string>
+  <string name="caches_sort_favorites">Popolarità</string>
+  <string name="caches_sort_name">Nome</string>
   <string name="caches_sort_gccode">GC-code</string>
-  <string name="caches_sort_rating">voto</string>
-  <string name="caches_sort_vote">il tuo voto</string>
-  <string name="caches_sort_inventory">oggetti contenuti</string>
-  <string name="caches_sort_date">data</string>
-  <string name="caches_sort_finds">numero ritrovamenti</string>
-  <string name="caches_sort_state">stato</string>
+  <string name="caches_sort_rating">Voto</string>
+  <string name="caches_sort_vote">Il tuo voto</string>
+  <string name="caches_sort_inventory">Oggetti trackables</string>
+  <string name="caches_sort_date">Data</string>
+  <string name="caches_sort_finds">Numero ritrovamenti</string>
+  <string name="caches_sort_state">Stato</string>
   <string name="caches_select_mode">Modo Selezione</string>
   <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
   <string name="caches_select_invert">Inverti selezione</string>
@@ -306,14 +306,14 @@
   <string name="caches_recaptcha_continue">Continua</string>
   <string name="caches_filter">Filtra</string>
   <string name="caches_filter_title">Filtra per</string>
-  <string name="caches_filter_size">dimensione</string>
-  <string name="caches_filter_type">tipo</string>
-  <string name="caches_filter_track">con oggetti trackables</string>
-  <string name="caches_filter_clear">senza filtri</string>
+  <string name="caches_filter_size">Dimensione</string>
+  <string name="caches_filter_type">Tipo</string>
+  <string name="caches_filter_track">Con oggetti trackables</string>
+  <string name="caches_filter_clear">Rimuovi filtri</string>
   <string name="caches_filter_size_title">Scegli dimensione</string>
   <string name="caches_filter_type_title">Scegli tipo</string>
   <string name="caches_filter_modified">Con coordinate modificate</string>
-  <string name="caches_exporting_fieldnote">Esportando le note…</string>
+  <string name="caches_exporting_fieldnote">Esportazione Field Notes…</string>
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
 
   <!-- caches lists -->
@@ -380,12 +380,12 @@
   <string name="init_other">Altre opzioni</string>
   <string name="init_skin">Tema chiaro\n(richiede riavvio di c:geo)</string>
   <string name="init_address">Visualizza indirizzo su pagina principale</string>
-  <string name="init_captcha">Visualizza CAPTCHA se necessario (solo membri Basic)</string>
+  <string name="init_captcha">Visualizza CAPTCHA se necessario (solo utenti base, non Premium)</string>
   <string name="init_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
-  <string name="init_exclude">Escludi le mie cache e quelle trovate</string>
+  <string name="init_exclude">Escludi le mie cache e quelle che ho già trovato</string>
   <string name="init_showwaypoints">Mostra waypoints sulla mappa</string>
-  <string name="init_showwaypoint_description">Se sulla mappa sono mostrate meno cache di quelle indicate, saranno mostrati anche i waypoints.</string>
-  <string name="init_disabled">Escludi cache non attive</string>
+  <string name="init_showwaypoint_description">Se sulla mappa sono mostrate meno cache di quelle indicate, saranno mostrati anche i relativi waypoints.</string>
+  <string name="init_disabled">Escludi cache disattivate</string>
   <string name="init_offline">Salva le mappe per uso offline</string>
   <string name="init_offline_wp">Salva i waypoints delle mappe per uso offline</string>
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
@@ -416,11 +416,11 @@
   <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Mostra la scia nella Mappa</string>
-  <string name="init_trackautovisit">Setta i miei oggetti trackables automaticamente su \"visit\" quando invio log</string>
+  <string name="init_trackautovisit">Setta i miei oggetti Trackables automaticamente su \"visit\" quando invio log</string>
   <string name="init_sigautoinsert">Inserisce la firma automaticamente</string>
   <string name="init_loaddirectionimg">Carica le immagini di direzione se necessario</string>
   <string name="init_default_navigation_tool">Navigatore preferito</string>
-  <string name="init_default_navigation_tool_description">Qui puoi scegliere il tuo strumento di navigazione preferito.</string>
+  <string name="init_default_navigation_tool_description">Qui puoi scegliere il tuo strumento di navigazione preferito. Sarà attivato cliccando l\'icona di navigazione vicino al titolo della cache.</string>
   <string name="init_default_navigation_tool_select">Scegli navigatore</string>
   <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo premuto l\'icona di navigazione vicino al titolo della cache.</string>
 
@@ -430,7 +430,7 @@
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
-  <string name="init_sendToCgeo_description">\"Send to c:geo\" permette di ricevere cache direttamente dal sito geocaching.com tramite un plugin speciale per Firefox o Chrome. Prima della registrazione leggere <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. È necessario registrare il dispositivo solo se intendi usare send2cgeo. C:geo funzionerà anche senza registrazione e senza send2cgeo.</string>
+  <string name="init_sendToCgeo_description">\"Send to c:geo\" permette di ricevere cache direttamente dal sito geocaching.com tramite un plugin speciale per Firefox o Chrome. Prima della registrazione leggere <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. È necessario registrare questo dispositivo solo se intendi usare send2cgeo. C:geo funzionerà anche senza questa registrazione e senza send2cgeo.</string>
   <string name="init_sendToCgeo_register">Richiedi registrazione</string>
   <string name="init_sendToCgeo_registering">Registrazione in corso a \"Send to c:geo\"…</string>
   <string name="init_sendToCgeo_register_ok">Registrazione terminata. Il tuo PIN code è ####. Usalo sul sito di c:geo per aggiungere il dispositivo al tuo browser Firefox o Chrome.</string>
@@ -491,7 +491,7 @@
       <item quantity="other">%d Waypoint</item>
   </plurals>  
   <string name="cache_waypoints_add">Aggiungi waypoint</string>
-  <string name="cache_hint">Aiuto</string>
+  <string name="cache_hint">Aiuto (spoiler)</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_logsfriends">Log amici</string>  
   <string name="cache_dialog_loading_details">Caricamento dettagli cache…</string>
@@ -560,7 +560,7 @@
   <string name="cache_spoiler_images_loading">Caricamento immagini spoiler…</string>
   <string name="cache_log_types">Tipi di Log</string>
   <string name="cache_coordinates_no">Questa cache non ha coordinate.</string>
-  <string name="cache_export_fieldnote">Esporta le note (Field notes)</string>
+  <string name="cache_export_fieldnote">Esporta le note (Field Notes)</string>
   <string name="cache_clear_history">Cancella cronologia</string>
   <string name="cache_remove_from_history">Rimuovi dalla cronologia</string>
   <string name="cache_license">Licenza</string>
@@ -652,14 +652,14 @@
   <string name="map_view_map">Scegli mappa</string>
   <string name="map_trail_show">Mostra scia</string>
   <string name="map_trail_hide">Nasconde scia</string>
-  <string name="map_circles_show">Mostra cerchie</string>
-  <string name="map_circles_hide">Nascondi cerchie</string>
+  <string name="map_circles_show">Mostra area cache</string>
+  <string name="map_circles_hide">Nascondi area cache</string>
   <string name="map_live_enable">Attiva online</string>
   <string name="map_live_disable">Disattiva online</string>
   <string name="map_static_title">Mappe statiche</string>
   <string name="map_static_loading">Caricamento mappe statiche…</string>
   <string name="map_token_err">Dato che c:geo riesce a scaricare solo dati parziali, le coordinate delle cache potrebbero non essere accurate.</string>
-  <string name="map_as_list">Mostra come lista</string>
+  <string name="map_as_list">Mostra lista cache</string>
   <string name="map_strategy">Strategia</string>
   <string name="map_strategy_title">Strategia mappa Live</string>
   <string name="map_strategy_fastest">La più veloce</string>
@@ -787,8 +787,8 @@
   <string name="attribute_snowmobiles_no">Motoslitte NON permesse</string>
   <string name="attribute_horses_yes">Cavalli permessi</string>
   <string name="attribute_horses_no">Cavalli NON permessi</string>
-  <string name="attribute_campfires_yes">Piccoli fuochi permessi</string>
-  <string name="attribute_campfires_no">Piccoli fuochi NON permessi</string>
+  <string name="attribute_campfires_yes">Fuochi da campo permessi</string>
+  <string name="attribute_campfires_no">Fuochi da campo NON permessi</string>
   <string name="attribute_rv_yes">Camper/roulotte permessi</string>
   <string name="attribute_rv_no">Camper/roulotte NON permessi</string>
 
@@ -823,7 +823,7 @@
   <string name="attribute_field_puzzle_no">Terreno non accidentato</string>
   <string name="attribute_nightcache_yes">Cache notturna</string>
   <string name="attribute_nightcache_no">Cache non notturna</string>
-  <string name="attribute_parkngrab_yes">Parcheggio vicino</string>
+  <string name="attribute_parkngrab_yes">Parcheggia e trova!</string>
   <string name="attribute_parkngrab_no">Parcheggio lontano</string>
   <string name="attribute_abandonedbuilding_yes">Struttura abbandonata</string>
   <string name="attribute_abandonedbuilding_no">Struttura non abbandonata</string>
