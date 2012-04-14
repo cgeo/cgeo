@@ -97,8 +97,8 @@ public class FieldnoteExport extends AbstractExport {
         private static final int STATUS_UPLOAD = -1;
 
         /**
-         * Instantiates and configures the task for exporting field notes.
-         * 
+         * Instantiates and configurates the task for exporting field notes.
+         *
          * @param caches
          *            The {@link List} of {@link cgCache} to be exported
          * @param activity
