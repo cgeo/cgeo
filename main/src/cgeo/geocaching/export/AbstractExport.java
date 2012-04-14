@@ -2,8 +2,8 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.cgeoapplication;
 
-public abstract class AbstractExport implements Export {
-    private String name;
+abstract class AbstractExport implements Export {
+    private final String name;
 
     protected AbstractExport(final String name) {
         this.name = name;
@@ -14,13 +14,19 @@ public abstract class AbstractExport implements Export {
     }
 
     /**
-     * Generates a localized string from a ressource id.
+     * Generates a localized string from a resource id.
      *
-     * @param ressourceId
-     *            the ressource id of the string
+     * @param resourceId
+     *            the resource id of the string
      * @return localized string
      */
-    protected static String getString(int ressourceId) {
-        return cgeoapplication.getInstance().getString(ressourceId);
+    protected static String getString(int resourceId) {
+        return cgeoapplication.getInstance().getString(resourceId);
+    }
+
+    @Override
+    public String toString() {
+        // used in the array adapter of the dialog showing the exports
+        return getName();
     }
 }

@@ -39,11 +39,11 @@ import java.util.Map;
  * Field Notes are simple plain text files, but poorly documented. Syntax:<br>
  * <code>GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"</code>
  */
-public class FieldnoteExport extends AbstractExport {
+class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
     private static final SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-    public FieldnoteExport() {
+    protected FieldnoteExport() {
         super(getString(R.string.export_fieldnotes));
     }
 

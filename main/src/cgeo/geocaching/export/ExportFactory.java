@@ -2,33 +2,32 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Factory to create a dialog with all available exporters.
  */
-public class ExportFactory {
+public abstract class ExportFactory {
+
     /**
-     * Contains instances of all available exporters.
+     * Contains instances of all available exporter classes.
      */
-    public enum Exporters {
-        FIELDNOTES(new FieldnoteExport()),
-        GPX(new GpxExport());
+    private static final List<Class<? extends Export>> exporterClasses;
 
-        Exporters(Export exporter) {
-            this.exporter = exporter;
-        }
-
-        public final Export exporter;
+    static {
+        final ArrayList<Class<? extends Export>> temp = new ArrayList<Class<? extends Export>>();
+        temp.add(FieldnoteExport.class);
+        temp.add(GpxExport.class);
+        exporterClasses = Collections.unmodifiableList(temp);
     }
 
     /**
@@ -43,27 +42,22 @@ public class ExportFactory {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.export).setIcon(android.R.drawable.ic_menu_share);
 
-        final ArrayAdapter<Exporters> adapter = new ArrayAdapter<Exporters>(activity, android.R.layout.select_dialog_item, Exporters.values()) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getView(position, convertView, parent);
-                textView.setText(getItem(position).exporter.getName());
-                return textView;
+        final ArrayList<Export> export = new ArrayList<Export>();
+        for (Class<? extends Export> exporterClass : exporterClasses) {
+            try {
+                export.add(exporterClass.newInstance());
+            } catch (Exception ex) {
+                Log.e("showExportMenu", ex);
             }
+        }
 
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                textView.setText(getItem(position).exporter.getName());
-                return textView;
-            }
-        };
+        final ArrayAdapter<Export> adapter = new ArrayAdapter<Export>(activity, android.R.layout.select_dialog_item, export);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_item);
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                Exporters selectedItem = adapter.getItem(item);
-                selectedItem.exporter.export(caches, activity);
+                final Export selectedExport = adapter.getItem(item);
+                selectedExport.export(caches, activity);
             }
         });
 
