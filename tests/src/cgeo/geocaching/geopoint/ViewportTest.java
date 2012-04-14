@@ -1,6 +1,12 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.geocaching.ICoordinates;
+
 import android.test.AndroidTestCase;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ViewportTest extends AndroidTestCase {
 
@@ -67,6 +73,27 @@ public class ViewportTest extends AndroidTestCase {
         assertTrue(vpRef.includes(vpRef));
         assertTrue(vpRef.includes(vpRef.resize(0.5)));
         assertFalse(vpRef.includes(vpRef.resize(2.0)));
+    }
+
+    public static void testExpands() {
+        assertEquals(vpRef, vpRef.expand(new Geopoint(0, 0)));
+        final Viewport vp1 = vpRef.expand(new Geopoint(-4.0, 0.0));
+        assertEquals(new Geopoint(-4.0, -2.0), vp1.bottomLeft);
+        assertEquals(new Geopoint(3.0, 4.0), vp1.topRight);
+        final Viewport vp2 = vpRef.expand(new Geopoint(-10.0, 10.0));
+        assertEquals(new Geopoint(-10.0, -2.0), vp2.bottomLeft);
+        assertEquals(new Geopoint(3.0, 10.0), vp2.topRight);
+    }
+
+    public static void testContaining() {
+        assertNull(Viewport.containing(Collections.singleton((ICoordinates) null)));
+        final Set<Geopoint> points = new HashSet<Geopoint>();
+        points.add(vpRef.bottomLeft);
+        assertEquals(new Viewport(vpRef.bottomLeft, vpRef.bottomLeft), Viewport.containing(points));
+        points.add(vpRef.topRight);
+        assertEquals(vpRef, Viewport.containing(points));
+        points.add(vpRef.center);
+        assertEquals(vpRef, Viewport.containing(points));
     }
 
 }

@@ -1,5 +1,9 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.geocaching.ICoordinates;
+
+import java.util.Set;
+
 
 
 public class Viewport {
@@ -157,6 +161,49 @@ public class Viewport {
      */
     public Viewport resize(final double factor) {
         return new Viewport(getCenter(), getLatitudeSpan() * factor, getLongitudeSpan() * factor);
+    }
+
+    /**
+     * Return a viewport that contains the current viewport as well as another point.
+     *
+     * @param coords
+     *            the coordinates we want in the viewport
+     * @return either the same or an expanded viewport
+     */
+    public Viewport expand(final Geopoint coords) {
+        if (contains(coords)) {
+            return this;
+        } else {
+            final double latitude = coords.getLatitude();
+            final double longitude = coords.getLongitude();
+            final double latMin = Math.min(getLatitudeMin(), latitude);
+            final double latMax = Math.max(getLatitudeMax(), latitude);
+            final double lonMin = Math.min(getLongitudeMin(), longitude);
+            final double lonMax = Math.max(getLongitudeMax(), longitude);
+            return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
+        }
+    }
+
+    /**
+     * Return the smallest viewport containing all the given points.
+     * 
+     * @param points
+     *            a set of points. Point with null coordinates (or null themselves) will be ignored
+     * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
+     */
+    static public Viewport containing(final Set<? extends ICoordinates> points) {
+        Viewport viewport = null;
+        for (final ICoordinates point : points) {
+            final Geopoint coords = point == null ? null : point.getCoords();
+            if (coords != null) {
+                if (viewport == null) {
+                    viewport = new Viewport(coords, coords);
+                } else {
+                    viewport = viewport.expand(coords);
+                }
+            }
+        }
+        return viewport;
     }
 
     @Override
