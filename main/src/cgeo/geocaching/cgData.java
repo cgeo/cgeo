@@ -36,7 +36,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -2007,13 +2006,13 @@ public class cgData {
         }
 
         where.append("(latitude >= ");
-        where.append(String.format((Locale) null, "%.6f", latMin));
+        where.append(String.format("%.6f", latMin));
         where.append(" and latitude <= ");
-        where.append(String.format((Locale) null, "%.6f", latMax));
+        where.append(String.format("%.6f", latMax));
         where.append(" and longitude >= ");
-        where.append(String.format((Locale) null, "%.6f", lonMin));
+        where.append(String.format("%.6f", lonMin));
         where.append(" and longitude <= ");
-        where.append(String.format((Locale) null, "%.6f", lonMax));
+        where.append(String.format("%.6f", lonMax));
         where.append(')');
         return where;
     }
@@ -2642,8 +2641,8 @@ public class cgData {
         try {
             Cursor cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
-                            ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif" },
+                    new String[] { "geocode", "(abs(latitude-" + String.format("%.6f", coords.getLatitude()) +
+                            ") + abs(longitude-" + String.format("%.6f", coords.getLongitude()) + ")) as dif" },
                     specifySql.toString(),
                     null,
                     null,
@@ -2733,7 +2732,7 @@ public class cgData {
 
     /**
      * Loads the geocodes of caches in a viewport from CacheCache and/or Database
-     * 
+     *
      * @param stored
      *            True - query only stored caches, False - query cached ones as well
      * @param centerLat

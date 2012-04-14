@@ -70,14 +70,14 @@ public class GeopointFormatter
                 return String.format("%.6f %.6f", latSigned, lonSigned);
 
             case LAT_LON_DECDEGREE_COMMA:
-                return String.format((Locale) null, "%.6f,%.6f", latSigned, lonSigned);
+                return String.format("%.6f,%.6f", latSigned, lonSigned);
 
             case LAT_LON_DECMINUTE:
                 return String.format("%c %02d° %06.3f · %c %03d° %06.3f",
                         dmm.latDir, dmm.latDeg, dmm.latMinRaw, dmm.lonDir, dmm.lonDeg, dmm.lonMinRaw);
 
             case LAT_LON_DECMINUTE_RAW:
-                return String.format((Locale) null, "%c %02d° %06.3f %c %03d° %06.3f",
+                return String.format("%c %02d° %06.3f %c %03d° %06.3f",
                         dmm.latDir, dmm.latDeg, dmm.latMinRaw, dmm.lonDir, dmm.lonDeg, dmm.lonMinRaw);
 
             case LAT_LON_DECSECOND:
