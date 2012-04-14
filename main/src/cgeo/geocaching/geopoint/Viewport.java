@@ -12,7 +12,9 @@ public class Viewport {
     public final Geopoint bottomLeft;
     public final Geopoint topRight;
 
-    public Viewport(final Geopoint gp1, final Geopoint gp2) {
+    public Viewport(final ICoordinates point1, final ICoordinates point2) {
+        final Geopoint gp1 = point1.getCoords();
+        final Geopoint gp2 = point2.getCoords();
         this.bottomLeft = new Geopoint(Math.min(gp1.getLatitude(), gp2.getLatitude()),
                 Math.min(gp1.getLongitude(), gp2.getLongitude()));
         this.topRight = new Geopoint(Math.max(gp1.getLatitude(), gp2.getLatitude()),
@@ -21,10 +23,10 @@ public class Viewport {
                 (gp1.getLongitude() + gp2.getLongitude()) / 2);
     }
 
-    public Viewport(final Geopoint center, final double latSpan, final double lonSpan) {
-        this.center = center;
-        final double centerLat = center.getLatitude();
-        final double centerLon = center.getLongitude();
+    public Viewport(final ICoordinates center, final double latSpan, final double lonSpan) {
+        this.center = center.getCoords();
+        final double centerLat = this.center.getLatitude();
+        final double centerLon = this.center.getLongitude();
         final double latHalfSpan = Math.abs(latSpan) / 2;
         final double lonHalfSpan = Math.abs(lonSpan) / 2;
         bottomLeft = new Geopoint(centerLat - latHalfSpan, centerLon - lonHalfSpan);
@@ -66,11 +68,12 @@ public class Viewport {
     /**
      * Check whether a point is contained in this viewport.
      *
-     * @param coords
+     * @param point
      *            the coordinates to check
      * @return true if the point is contained in this viewport, false otherwise
      */
-    public boolean contains(final Geopoint coords) {
+    public boolean contains(final ICoordinates point) {
+        final Geopoint coords = point.getCoords();
         return coords.getLongitudeE6() >= bottomLeft.getLongitudeE6()
                 && coords.getLongitudeE6() <= topRight.getLongitudeE6()
                 && coords.getLatitudeE6() >= bottomLeft.getLatitudeE6()
@@ -165,15 +168,16 @@ public class Viewport {
 
     /**
      * Return a viewport that contains the current viewport as well as another point.
-     *
+     * 
      * @param coords
-     *            the coordinates we want in the viewport
+     *            the point we want in the viewport
      * @return either the same or an expanded viewport
      */
-    public Viewport expand(final Geopoint coords) {
-        if (contains(coords)) {
+    public Viewport expand(final ICoordinates point) {
+        if (contains(point)) {
             return this;
         } else {
+            final Geopoint coords = point.getCoords();
             final double latitude = coords.getLatitude();
             final double longitude = coords.getLongitude();
             final double latMin = Math.min(getLatitudeMin(), latitude);
@@ -186,7 +190,7 @@ public class Viewport {
 
     /**
      * Return the smallest viewport containing all the given points.
-     * 
+     *
      * @param points
      *            a set of points. Point with null coordinates (or null themselves) will be ignored
      * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
