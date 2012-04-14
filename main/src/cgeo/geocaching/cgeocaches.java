@@ -66,7 +66,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -913,7 +912,7 @@ public class cgeocaches extends AbstractListActivity {
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_CREATE_LIST:
-                createList(null);
+                new StoredList.UserInterface(this).promptForListCreation(null);
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_DROP_LIST:
@@ -1084,33 +1083,21 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     private void moveCachesToOtherList() {
-        final List<StoredList> cacheLists = app.getLists();
-        ArrayList<String> listNames = new ArrayList<String>();
-        for (StoredList list : cacheLists) {
-            listNames.add(list.getTitleAndCount());
-        }
+        new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new RunnableWithArgument<Integer>() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(res.getString(R.string.cache_menu_move_list));
-        builder.setItems(listNames.toArray(new String[listNames.size()]), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                moveCachesToList(cacheLists.get(item));
+            @Override
+            public void run(Integer newListId) {
+                final boolean moveAll = adapter.getChecked() == 0;
+                for (final cgCache c : Collections.unmodifiableList(cacheList)) {
+                    if (moveAll || c.isStatusChecked()) {
+                        app.moveToList(c.getGeocode(), newListId);
+                    }
+                }
+                adapter.resetChecks();
+
+                refreshCurrentList();
             }
         });
-        builder.create().show();
-    }
-
-    private void moveCachesToList(final StoredList list) {
-        int newListId = list.id;
-        final boolean moveAll = adapter.getChecked() == 0;
-        for (final cgCache c : Collections.unmodifiableList(cacheList)) {
-            if (moveAll || c.isStatusChecked()) {
-                app.moveToList(c.getGeocode(), newListId);
-            }
-        }
-        adapter.resetChecks();
-
-        refreshCurrentList();
     }
 
     @Override
@@ -1160,23 +1147,15 @@ public class cgeocaches extends AbstractListActivity {
             return true;
         } else if (id == MENU_MOVE_TO_LIST) {
             final String geocode = getCacheFromAdapter(adapterInfo).getGeocode();
-            final List<StoredList> cacheLists = app.getLists();
-            ArrayList<String> listNames = new ArrayList<String>();
-            for (StoredList list : cacheLists) {
-                listNames.add(list.getTitleAndCount());
-            }
+            new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new RunnableWithArgument<Integer>() {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(res.getString(R.string.cache_menu_move_list));
-            builder.setItems(listNames.toArray(new String[listNames.size()]), new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int item) {
-                    final int newListId = cacheLists.get(item).id;
+                @Override
+                public void run(Integer newListId) {
                     app.moveToList(geocode, newListId);
                     adapter.resetChecks();
                     refreshCurrentList();
                 }
             });
-            builder.create().show();
             return true;
         }
 
@@ -2012,41 +1991,14 @@ public class cgeocaches extends AbstractListActivity {
         if (type != CacheListType.OFFLINE) {
             return;
         }
+        new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, new RunnableWithArgument<Integer>() {
 
-        lists = app.getLists();
-
-        if (lists == null) {
-            return;
-        }
-
-        final List<CharSequence> listsTitle = new ArrayList<CharSequence>();
-        for (StoredList list : lists) {
-            listsTitle.add(list.getTitleAndCount());
-        }
-        listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
-
-        final CharSequence[] items = new CharSequence[listsTitle.size()];
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(res.getString(R.string.list_title));
-        builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int itemId) {
-                if (itemId >= lists.size()) {
-                    // create new list on the fly
-                    createList(new RunnableWithArgument<Integer>() {
-
-                        @Override
-                        public void run(final Integer arg) {
-                            switchListById(arg.intValue());
-                        }
-                    });
-                }
-                else {
-                    switchListById(lists.get(itemId).id);
-                }
+            @Override
+            public void run(final Integer selectedListId) {
+                switchListById(selectedListId.intValue());
             }
         });
-        builder.create().show();
+        lists = app.getLists();
     }
 
     public void switchListById(int id) {
@@ -2104,58 +2056,11 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithArgument<String> runnable) {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        final View view = inflater.inflate(R.layout.list_create_dialog, null);
-        final EditText input = (EditText) view.findViewById(R.id.text);
-        input.setText(defaultValue);
-
-        alert.setTitle(dialogTitle);
-        alert.setView(view);
-        alert.setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // remove whitespaces added by autocompletion of Android keyboard
-                String listName = StringUtils.trim(input.getText().toString());
-                if (StringUtils.isNotBlank(listName)) {
-                    runnable.run(listName);
-                }
-            }
-        });
-        alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                dialog.dismiss();
-            }
-        });
-
-        alert.show();
-    }
-
-    private void createList(final RunnableWithArgument<Integer> runAfterwards) {
-        handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
-
-            @Override
-            public void run(final String listName) {
-                final int newId = app.createList(listName);
-
-                if (newId >= 10) {
-                    showToast(res.getString(R.string.list_dialog_create_ok));
-                    if (runAfterwards != null) {
-                        runAfterwards.run(newId);
-                    }
-                } else {
-                    showToast(res.getString(R.string.list_dialog_create_err));
-                }
-            }
-        });
-    }
-
     private void renameList() {
-        final StoredList list = app.getList(listId);
-        handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithArgument<String>() {
+        new StoredList.UserInterface(this).promptForListRename(listId, new Runnable() {
 
             @Override
-            public void run(final String listName) {
-                app.renameList(listId, listName);
+            public void run() {
                 refreshCurrentList();
             }
         });
