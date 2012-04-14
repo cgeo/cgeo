@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -1748,34 +1749,13 @@ public class cgData {
         return true;
     }
 
-    public List<Number> getBounds(Set<String> geocodes) {
+    public Viewport getBounds(final Set<String> geocodes) {
         if (CollectionUtils.isEmpty(geocodes)) {
             return null;
         }
 
         final Set<cgCache> caches = loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
-
-        double latMin = 360.0;
-        double latMax = -360.0;
-        double lonMin = 360.0;
-        double lonMax = -360.0;
-        for (cgCache cache : caches) {
-            final Geopoint coords = cache.getCoords();
-            double latitude = coords.getLatitude();
-            latMin = Math.min(latitude, latMin);
-            latMax = Math.max(latitude, latMax);
-            double longitude = coords.getLongitude();
-            lonMin = Math.min(longitude, lonMin);
-            lonMax = Math.max(longitude, lonMax);
-        }
-
-        final List<Number> viewport = new ArrayList<Number>();
-        viewport.add(caches.size());
-        viewport.add(latMin);
-        viewport.add(latMax);
-        viewport.add(lonMin);
-        viewport.add(lonMax);
-        return viewport;
+        return Viewport.containing(caches);
     }
 
     /**
@@ -2733,7 +2713,7 @@ public class cgData {
 
     /**
      * Loads the geocodes of caches in a viewport from CacheCache and/or Database
-     * 
+     *
      * @param stored
      *            True - query only stored caches, False - query cached ones as well
      * @param centerLat

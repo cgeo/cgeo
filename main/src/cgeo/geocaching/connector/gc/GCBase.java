@@ -188,10 +188,9 @@ public class GCBase {
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 SearchResult search = cgBase.searchByCoords(null, center, Settings.getCacheType(), false);
                 if (search != null && !search.isEmpty()) {
-
-                    List<Number> bounds = cgeoapplication.getInstance().getBounds(search.getGeocodes());
-                    lastSearchViewport = new Viewport(bounds.get(1).doubleValue(), bounds.get(2).doubleValue(), bounds.get(4).doubleValue(), bounds.get(3).doubleValue());
-                    searchResult.addGeocodes(search.getGeocodes());
+                    final Set<String> geocodes = search.getGeocodes();
+                    lastSearchViewport = cgeoapplication.getInstance().getBounds(geocodes);
+                    searchResult.addGeocodes(geocodes);
                 }
             }
         }

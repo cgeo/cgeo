@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -276,7 +277,7 @@ public class cgeoapplication extends Application {
         return storage.allDetailedThere();
     }
 
-    public List<Number> getBounds(String geocode) {
+    public Viewport getBounds(String geocode) {
         if (geocode == null) {
             return null;
         }
@@ -285,7 +286,7 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#getBounds(Set)} */
-    public List<Number> getBounds(final Set<String> geocodes) {
+    public Viewport getBounds(final Set<String> geocodes) {
         return storage.getBounds(geocodes);
     }
 

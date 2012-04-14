@@ -1526,10 +1526,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
     }
 
-    private static Viewport listToViewport(final List<Number> l) {
-        return new Viewport(new Geopoint(l.get(1).doubleValue(), l.get(3).doubleValue()), new Geopoint(l.get(2).doubleValue(), l.get(4).doubleValue()));
-    }
-
     // move map to view results of searchIntent
     private void centerMap(String geocodeCenter, final SearchResult searchCenter, final Geopoint coordsCenter, int[] mapState) {
 
@@ -1545,26 +1541,17 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             alreadyCentered = true;
         } else if (!centered && (geocodeCenter != null || searchIntent != null)) {
             try {
-                List<Number> vp = null;
+                Viewport viewport = null;
 
                 if (geocodeCenter != null) {
-                    vp = app.getBounds(geocodeCenter);
-                } else {
-                    if (searchCenter != null) {
-                        vp = app.getBounds(searchCenter.getGeocodes());
-                    }
+                    viewport = app.getBounds(geocodeCenter);
+                } else if (searchCenter != null) {
+                    viewport = app.getBounds(searchCenter.getGeocodes());
                 }
 
-                if (vp == null || vp.size() < 5) {
+                if (viewport == null) {
                     return;
                 }
-
-                int cnt = (Integer) vp.get(0);
-                if (cnt <= 0) {
-                    return;
-                }
-
-                final Viewport viewport = listToViewport(vp);
 
                 mapController.setCenter(mapProvider.getGeoPointBase(viewport.center));
                 if (viewport.getLatitudeSpan() != 0 && viewport.getLongitudeSpan() != 0) {
