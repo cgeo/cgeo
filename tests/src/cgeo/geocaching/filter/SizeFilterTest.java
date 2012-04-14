@@ -32,7 +32,7 @@ public class SizeFilterTest extends AbstractFilterTestCase {
 
     public static void testGetAllFilters() {
         final int expectedSizes = CacheSize.values().length - 1; // hide "UNKNOWN"
-        assertEquals(expectedSizes, SizeFilter.getAllFilters().length);
+        assertEquals(expectedSizes, new SizeFilter.Factory().getFilters().length);
     }
 
     public void testFilter() {

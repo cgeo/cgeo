@@ -14,10 +14,12 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.ExportFactory;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.AttributeFilter;
+import cgeo.geocaching.filter.DifficultyFilter;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.filter.ModifiedFilter;
 import cgeo.geocaching.filter.SizeFilter;
 import cgeo.geocaching.filter.StateFilter;
+import cgeo.geocaching.filter.TerrainFilter;
 import cgeo.geocaching.filter.TrackablesFilter;
 import cgeo.geocaching.filter.TypeFilter;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -128,6 +130,8 @@ public class cgeocaches extends AbstractListActivity {
     private static final int SUBMENU_FILTER_STATE = 68;
     private static final int MENU_NAVIGATION = 69;
     private static final int MENU_FILTER_MODIFIED = 70;
+    private static final int SUBMENU_FILTER_TERRAIN = 71;
+    private static final int SUBMENU_FILTER_DIFFICULTY = 72;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_CANCEL = -99;
@@ -724,6 +728,8 @@ public class cgeocaches extends AbstractListActivity {
             subMenuFilter.add(0, SUBMENU_FILTER_TYPE, 0, res.getString(R.string.caches_filter_type));
         }
         subMenuFilter.add(0, SUBMENU_FILTER_SIZE, 0, res.getString(R.string.caches_filter_size));
+        subMenuFilter.add(0, SUBMENU_FILTER_TERRAIN, 0, res.getString(R.string.cache_terrain));
+        subMenuFilter.add(0, SUBMENU_FILTER_DIFFICULTY, 0, res.getString(R.string.cache_difficulty));
         subMenuFilter.add(0, SUBMENU_FILTER_ATTRIBUTES, 0, res.getString(R.string.cache_attributes));
         subMenuFilter.add(0, SUBMENU_FILTER_STATE, 0, res.getString(R.string.cache_status));
         subMenuFilter.add(0, MENU_FILTER_TRACKABLES, 0, res.getString(R.string.caches_filter_track));
@@ -972,16 +978,22 @@ public class cgeocaches extends AbstractListActivity {
                 setComparator(item, new StateComparator());
                 return true;
             case SUBMENU_FILTER_TYPE:
-                showFilterMenu(TypeFilter.getAllFilters(), res.getString(R.string.caches_filter_type_title));
+                showFilterMenu(new TypeFilter.Factory().getFilters(), res.getString(R.string.caches_filter_type_title));
                 return true;
             case SUBMENU_FILTER_SIZE:
-                showFilterMenu(SizeFilter.getAllFilters(), res.getString(R.string.caches_filter_size_title));
+                showFilterMenu(new SizeFilter.Factory().getFilters(), res.getString(R.string.caches_filter_size_title));
                 return true;
             case SUBMENU_FILTER_ATTRIBUTES:
-                showFilterMenu(AttributeFilter.getAllFilters(), res.getString(R.string.cache_attributes));
+                showFilterMenu(new AttributeFilter.Factory().getFilters(), res.getString(R.string.cache_attributes));
+                return true;
+            case SUBMENU_FILTER_DIFFICULTY:
+                showFilterMenu(new DifficultyFilter.Factory().getFilters(), res.getString(R.string.cache_difficulty));
+                return true;
+            case SUBMENU_FILTER_TERRAIN:
+                showFilterMenu(new TerrainFilter.Factory().getFilters(), res.getString(R.string.cache_terrain));
                 return true;
             case SUBMENU_FILTER_STATE:
-                showFilterMenu(StateFilter.getAllFilters(), res.getString(R.string.cache_status));
+                showFilterMenu(new StateFilter.Factory().getFilters(), res.getString(R.string.cache_status));
                 return true;
             case MENU_FILTER_TRACKABLES:
                 setFilter(new TrackablesFilter(res.getString(R.string.caches_filter_track)));

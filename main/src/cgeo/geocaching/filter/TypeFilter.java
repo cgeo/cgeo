@@ -23,14 +23,19 @@ public class TypeFilter extends AbstractFilter {
         return cacheType.getL10n();
     }
 
-    public static IFilter[] getAllFilters() {
-        final CacheType[] types = CacheType.values();
-        final ArrayList<IFilter> filters = new ArrayList<IFilter>(types.length);
-        for (CacheType cacheType : types) {
-            if (cacheType != CacheType.ALL) {
-                filters.add(new TypeFilter(cacheType));
+    public static class Factory implements FilterFactory {
+
+        @Override
+        public IFilter[] getFilters() {
+            final CacheType[] types = CacheType.values();
+            final ArrayList<IFilter> filters = new ArrayList<IFilter>(types.length);
+            for (CacheType cacheType : types) {
+                if (cacheType != CacheType.ALL) {
+                    filters.add(new TypeFilter(cacheType));
+                }
             }
+            return filters.toArray(new TypeFilter[filters.size()]);
         }
-        return filters.toArray(new TypeFilter[filters.size()]);
+
     }
 }

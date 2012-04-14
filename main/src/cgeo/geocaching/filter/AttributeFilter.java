@@ -41,16 +41,20 @@ public class AttributeFilter extends AbstractFilter {
         return fullCache.getAttributes().contains(attribute);
     }
 
-    public static IFilter[] getAllFilters() {
-        final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
-        final Resources res = cgeoapplication.getInstance().getResources();
+    public static class Factory implements FilterFactory {
 
-        final String[] ids = res.getStringArray(R.array.attribute_ids);
-        final IFilter[] filters = new IFilter[ids.length];
-        for (int i = 0; i < ids.length; i++) {
-            filters[i] = new AttributeFilter(getName("attribute_" + ids[i], res, packageName), ids[i]);
+        @Override
+        public IFilter[] getFilters() {
+            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
+            final Resources res = cgeoapplication.getInstance().getResources();
+
+            final String[] ids = res.getStringArray(R.array.attribute_ids);
+            final IFilter[] filters = new IFilter[ids.length];
+            for (int i = 0; i < ids.length; i++) {
+                filters[i] = new AttributeFilter(getName("attribute_" + ids[i], res, packageName), ids[i]);
+            }
+            return filters;
         }
-        return filters;
+       
     }
-
 }

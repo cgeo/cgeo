@@ -75,23 +75,28 @@ public abstract class StateFilter extends AbstractFilter {
         }
     }
 
-    public static AbstractFilter[] getAllFilters() {
-        final ArrayList<StateFilter> filters = new ArrayList<StateFilter>();
-        filters.add(new StateFoundFilter());
-        filters.add(new StateArchivedFilter());
-        filters.add(new StateDisabledFilter());
-        filters.add(new StatePremiumFilter());
-        filters.add(new StateOfflineLogFilter());
+    public static class Factory implements FilterFactory {
 
-        Collections.sort(filters, new Comparator<StateFilter>() {
+        @Override
+        public IFilter[] getFilters() {
+            final ArrayList<StateFilter> filters = new ArrayList<StateFilter>();
+            filters.add(new StateFoundFilter());
+            filters.add(new StateArchivedFilter());
+            filters.add(new StateDisabledFilter());
+            filters.add(new StatePremiumFilter());
+            filters.add(new StateOfflineLogFilter());
 
-            @Override
-            public int compare(StateFilter filter1, StateFilter filter2) {
-                return filter1.getName().compareToIgnoreCase(filter2.getName());
-            }
-        });
+            Collections.sort(filters, new Comparator<StateFilter>() {
 
-        return filters.toArray(new StateFilter[filters.size()]);
+                @Override
+                public int compare(StateFilter filter1, StateFilter filter2) {
+                    return filter1.getName().compareToIgnoreCase(filter2.getName());
+                }
+            });
+
+            return filters.toArray(new StateFilter[filters.size()]);
+        }
+
     }
 
 }

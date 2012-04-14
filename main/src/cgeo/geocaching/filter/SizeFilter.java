@@ -23,14 +23,19 @@ public class SizeFilter extends AbstractFilter {
         return cacheSize.getL10n();
     }
 
-    public static AbstractFilter[] getAllFilters() {
-        final CacheSize[] cacheSizes = CacheSize.values();
-        final ArrayList<SizeFilter> filters = new ArrayList<SizeFilter>();
-        for (CacheSize cacheSize : cacheSizes) {
-            if (cacheSize != CacheSize.UNKNOWN) {
-                filters.add(new SizeFilter(cacheSize));
+    public static class Factory implements FilterFactory {
+
+        @Override
+        public IFilter[] getFilters() {
+            final CacheSize[] cacheSizes = CacheSize.values();
+            final ArrayList<SizeFilter> filters = new ArrayList<SizeFilter>();
+            for (CacheSize cacheSize : cacheSizes) {
+                if (cacheSize != CacheSize.UNKNOWN) {
+                    filters.add(new SizeFilter(cacheSize));
+                }
             }
+            return filters.toArray(new SizeFilter[filters.size()]);
         }
-        return filters.toArray(new SizeFilter[filters.size()]);
+
     }
 }

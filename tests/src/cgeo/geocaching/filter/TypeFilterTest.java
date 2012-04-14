@@ -45,7 +45,7 @@ public class TypeFilterTest extends AbstractFilterTestCase {
 
     public static void testGetAllFilters() {
         final int expectedEntries = CacheType.values().length - 1; // hide "all"
-        assertEquals(expectedEntries, TypeFilter.getAllFilters().length);
+        assertEquals(expectedEntries, new TypeFilter.Factory().getFilters().length);
     }
 
 }
