@@ -13,15 +13,8 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.ExportFactory;
 import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.filter.AttributeFilter;
-import cgeo.geocaching.filter.DifficultyFilter;
+import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
-import cgeo.geocaching.filter.ModifiedFilter;
-import cgeo.geocaching.filter.SizeFilter;
-import cgeo.geocaching.filter.StateFilter;
-import cgeo.geocaching.filter.TerrainFilter;
-import cgeo.geocaching.filter.TrackablesFilter;
-import cgeo.geocaching.filter.TypeFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Network;
@@ -108,16 +101,11 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_REMOVE_FROM_HISTORY = 23;
     private static final int MENU_DROP_CACHE = 24;
     private static final int MENU_MOVE_TO_LIST = 25;
-    private static final int MENU_FILTER_CLEAR = 26;
-    private static final int MENU_FILTER_TRACKABLES = 27;
-    private static final int SUBMENU_FILTER_SIZE = 28;
-    private static final int SUBMENU_FILTER_TYPE = 29;
     private static final int MENU_SWITCH_SELECT_MODE = 52;
     private static final int SUBMENU_SHOW_MAP = 54;
     private static final int SUBMENU_MANAGE_LISTS = 55;
     private static final int SUBMENU_MANAGE_OFFLINE = 56;
     private static final int SUBMENU_SORT = 57;
-    private static final int SUBMENU_FILTER = 58;
     private static final int SUBMENU_IMPORT = 59;
     private static final int SUBMENU_MANAGE_HISTORY = 60;
     private static final int MENU_SORT_DATE = 61;
@@ -126,13 +114,9 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_RENAME_LIST = 64;
     private static final int MENU_DROP_CACHES_AND_LIST = 65;
     private static final int MENU_DEFAULT_NAVIGATION = 66;
-    private static final int SUBMENU_FILTER_ATTRIBUTES = 67;
-    private static final int SUBMENU_FILTER_STATE = 68;
     private static final int MENU_NAVIGATION = 69;
-    private static final int MENU_FILTER_MODIFIED = 70;
-    private static final int SUBMENU_FILTER_TERRAIN = 71;
-    private static final int SUBMENU_FILTER_DIFFICULTY = 72;
     private static final int MENU_STORE_CACHE = 73;
+    private static final int MENU_FILTER = 74;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_CANCEL = -99;
@@ -722,19 +706,7 @@ public class cgeocaches extends AbstractListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        SubMenu subMenuFilter = menu.addSubMenu(0, SUBMENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
-        subMenuFilter.setHeaderTitle(res.getString(R.string.caches_filter_title));
-        if (Settings.getCacheType() == CacheType.ALL) {
-            subMenuFilter.add(0, SUBMENU_FILTER_TYPE, 0, res.getString(R.string.caches_filter_type));
-        }
-        subMenuFilter.add(0, SUBMENU_FILTER_SIZE, 0, res.getString(R.string.caches_filter_size));
-        subMenuFilter.add(0, SUBMENU_FILTER_TERRAIN, 0, res.getString(R.string.cache_terrain));
-        subMenuFilter.add(0, SUBMENU_FILTER_DIFFICULTY, 0, res.getString(R.string.cache_difficulty));
-        subMenuFilter.add(0, SUBMENU_FILTER_ATTRIBUTES, 0, res.getString(R.string.cache_attributes));
-        subMenuFilter.add(0, SUBMENU_FILTER_STATE, 0, res.getString(R.string.cache_status));
-        subMenuFilter.add(0, MENU_FILTER_TRACKABLES, 0, res.getString(R.string.caches_filter_track));
-        subMenuFilter.add(0, MENU_FILTER_MODIFIED, 0, res.getString(R.string.caches_filter_modified));
-        subMenuFilter.add(0, MENU_FILTER_CLEAR, 0, res.getString(R.string.caches_filter_clear));
+        menu.add(0, MENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
 
         SubMenu subMenuSort = menu.addSubMenu(0, SUBMENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
         subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
@@ -977,35 +949,22 @@ public class cgeocaches extends AbstractListActivity {
             case MENU_SORT_STATE:
                 setComparator(item, new StateComparator());
                 return true;
-            case SUBMENU_FILTER_TYPE:
-                showFilterMenu(new TypeFilter.Factory().getFilters(), res.getString(R.string.caches_filter_type_title));
+            case MENU_FILTER:
+                new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>() {
+                    @Override
+                    public void run(IFilter selectedFilter) {
+                        if (selectedFilter != null) {
+                            setFilter(selectedFilter);
+                        }
+                        else {
+                            // clear filter
+                            if (adapter != null) {
+                                setFilter(null);
+                            }
+                        }
+                    }
+                });
                 return true;
-            case SUBMENU_FILTER_SIZE:
-                showFilterMenu(new SizeFilter.Factory().getFilters(), res.getString(R.string.caches_filter_size_title));
-                return true;
-            case SUBMENU_FILTER_ATTRIBUTES:
-                showFilterMenu(new AttributeFilter.Factory().getFilters(), res.getString(R.string.cache_attributes));
-                return true;
-            case SUBMENU_FILTER_DIFFICULTY:
-                showFilterMenu(new DifficultyFilter.Factory().getFilters(), res.getString(R.string.cache_difficulty));
-                return true;
-            case SUBMENU_FILTER_TERRAIN:
-                showFilterMenu(new TerrainFilter.Factory().getFilters(), res.getString(R.string.cache_terrain));
-                return true;
-            case SUBMENU_FILTER_STATE:
-                showFilterMenu(new StateFilter.Factory().getFilters(), res.getString(R.string.cache_status));
-                return true;
-            case MENU_FILTER_TRACKABLES:
-                setFilter(new TrackablesFilter(res.getString(R.string.caches_filter_track)));
-                return true;
-            case MENU_FILTER_MODIFIED:
-                setFilter(new ModifiedFilter(res.getString(R.string.caches_filter_modified)));
-                return true;
-            case MENU_FILTER_CLEAR:
-                if (adapter != null) {
-                    setFilter(null);
-                }
-                return false;
             case MENU_IMPORT_WEB:
                 importWeb();
                 return false;
@@ -1023,23 +982,6 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, search);
-    }
-
-    private void showFilterMenu(final IFilter[] filters, final String menuTitle) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(menuTitle);
-
-        final String[] names = new String[filters.length];
-        for (int i = 0; i < filters.length; i++) {
-            names[i] = filters[i].getName();
-        }
-        builder.setItems(names, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                setFilter(filters[item]);
-            }
-        });
-
-        builder.create().show();
     }
 
     private void setComparator(MenuItem item,

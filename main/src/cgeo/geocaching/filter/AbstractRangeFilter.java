@@ -3,7 +3,7 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.cgeoapplication;
 
 
-public abstract class AbstractRangeFilter extends AbstractFilter {
+abstract class AbstractRangeFilter extends AbstractFilter {
 
     protected final float rangeMin;
     protected final float rangeMax;

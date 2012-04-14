@@ -1,5 +1,5 @@
 package cgeo.geocaching.filter;
 
-public interface FilterFactory {
+interface IFilterFactory {
     public IFilter[] getFilters();
 }

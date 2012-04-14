@@ -5,7 +5,7 @@ import cgeo.geocaching.enumerations.CacheType;
 
 import java.util.ArrayList;
 
-public class TypeFilter extends AbstractFilter {
+class TypeFilter extends AbstractFilter {
     private final CacheType cacheType;
 
     public TypeFilter(final CacheType cacheType) {
@@ -23,7 +23,7 @@ public class TypeFilter extends AbstractFilter {
         return cacheType.getL10n();
     }
 
-    public static class Factory implements FilterFactory {
+    public static class Factory implements IFilterFactory {
 
         @Override
         public IFilter[] getFilters() {

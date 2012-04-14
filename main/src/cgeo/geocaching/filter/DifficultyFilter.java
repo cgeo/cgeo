@@ -5,7 +5,7 @@ import cgeo.geocaching.cgCache;
 
 import java.util.ArrayList;
 
-public class DifficultyFilter extends AbstractRangeFilter {
+class DifficultyFilter extends AbstractRangeFilter {
 
     public DifficultyFilter(int difficulty) {
         super(R.string.cache_difficulty, difficulty);
@@ -16,7 +16,7 @@ public class DifficultyFilter extends AbstractRangeFilter {
         return rangeMin <= cache.getDifficulty() && cache.getDifficulty() < rangeMax;
     }
 
-    public static class Factory implements FilterFactory {
+    public static class Factory implements IFilterFactory {
 
         @Override
         public IFilter[] getFilters() {

@@ -6,7 +6,7 @@ import cgeo.geocaching.cgCache;
 
 import java.util.ArrayList;
 
-public class TerrainFilter extends AbstractRangeFilter {
+class TerrainFilter extends AbstractRangeFilter {
 
     public TerrainFilter(int terrain) {
         super(R.string.cache_terrain, terrain);
@@ -17,7 +17,7 @@ public class TerrainFilter extends AbstractRangeFilter {
         return rangeMin <= cache.getTerrain() && cache.getTerrain() < rangeMax;
     }
 
-    public static class Factory implements FilterFactory {
+    public static class Factory implements IFilterFactory {
         @Override
         public IFilter[] getFilters() {
             final ArrayList<IFilter> filters = new ArrayList<IFilter>(5);

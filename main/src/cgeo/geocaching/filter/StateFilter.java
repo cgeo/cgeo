@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public abstract class StateFilter extends AbstractFilter {
+abstract class StateFilter extends AbstractFilter {
 
     final static Resources res = cgeoapplication.getInstance().getResources();
 
@@ -75,7 +75,7 @@ public abstract class StateFilter extends AbstractFilter {
         }
     }
 
-    public static class Factory implements FilterFactory {
+    public static class Factory implements IFilterFactory {
 
         @Override
         public IFilter[] getFilters() {

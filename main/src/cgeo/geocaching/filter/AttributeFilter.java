@@ -11,7 +11,7 @@ import android.content.res.Resources;
 
 import java.util.EnumSet;
 
-public class AttributeFilter extends AbstractFilter {
+class AttributeFilter extends AbstractFilter {
 
     private final String attribute;
 
@@ -41,7 +41,7 @@ public class AttributeFilter extends AbstractFilter {
         return fullCache.getAttributes().contains(attribute);
     }
 
-    public static class Factory implements FilterFactory {
+    public static class Factory implements IFilterFactory {
 
         @Override
         public IFilter[] getFilters() {
@@ -55,6 +55,6 @@ public class AttributeFilter extends AbstractFilter {
             }
             return filters;
         }
-       
+
     }
 }

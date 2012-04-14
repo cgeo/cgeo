@@ -5,7 +5,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 
 import java.util.ArrayList;
 
-public class SizeFilter extends AbstractFilter {
+class SizeFilter extends AbstractFilter {
     private final CacheSize cacheSize;
 
     public SizeFilter(CacheSize cacheSize) {
@@ -23,7 +23,7 @@ public class SizeFilter extends AbstractFilter {
         return cacheSize.getL10n();
     }
 
-    public static class Factory implements FilterFactory {
+    public static class Factory implements IFilterFactory {
 
         @Override
         public IFilter[] getFilters() {
