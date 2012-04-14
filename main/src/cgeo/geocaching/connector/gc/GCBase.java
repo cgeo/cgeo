@@ -185,7 +185,7 @@ public class GCBase {
 
         if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
             Geopoint center = viewport.getCenter();
-            if ((lastSearchViewport == null) || !lastSearchViewport.isInViewport(center)) {
+            if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 SearchResult search = cgBase.searchByCoords(null, center, Settings.getCacheType(), false);
                 if (search != null && !search.isEmpty()) {
 

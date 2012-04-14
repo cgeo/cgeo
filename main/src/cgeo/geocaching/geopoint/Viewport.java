@@ -59,8 +59,14 @@ public class Viewport {
         return getLongitudeMax() - getLongitudeMin();
     }
 
-    public boolean isInViewport(final Geopoint coords) {
-
+    /**
+     * Check whether a point is contained in this viewport.
+     *
+     * @param coords
+     *            the coordinates to check
+     * @return true if the point is contained in this viewport, false otherwise
+     */
+    public boolean contains(final Geopoint coords) {
         return coords.getLongitudeE6() >= bottomLeft.getLongitudeE6()
                 && coords.getLongitudeE6() <= topRight.getLongitudeE6()
                 && coords.getLatitudeE6() >= bottomLeft.getLatitudeE6()
@@ -80,7 +86,7 @@ public class Viewport {
      * @return true if the vp is fully included into this one, false otherwise
      */
     public boolean includes(final Viewport vp) {
-        return isInViewport(vp.bottomLeft) && isInViewport(vp.topRight);
+        return contains(vp.bottomLeft) && contains(vp.topRight);
     }
 
     /**
@@ -103,7 +109,7 @@ public class Viewport {
     // when CGeoMap.java gets rewritten
     public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, final Geopoint coords) {
         final Viewport viewport = new Viewport(new Geopoint(centerLat / 1e6, centerLon / 1e6), spanLat / 1e6, spanLon / 1e6);
-        return viewport.isInViewport(coords);
+        return viewport.contains(coords);
     }
 
     /**

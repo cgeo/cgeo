@@ -224,6 +224,6 @@ public class Tile {
 
     public boolean containsPoint(Geopoint coords) {
 
-        return viewPort.isInViewport(coords);
+        return viewPort.contains(coords);
     }
 }

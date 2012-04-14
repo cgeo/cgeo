@@ -40,11 +40,11 @@ public class ViewportTest extends AndroidTestCase {
     }
 
     public static void testInViewport() {
-        assertFalse(vpRef.isInViewport(new Geopoint(-2.0, -2.0)));
-        assertFalse(vpRef.isInViewport(new Geopoint(4.0, 4.0)));
-        assertTrue(vpRef.isInViewport(new Geopoint(0.0, 0.0)));
-        assertTrue(vpRef.isInViewport(new Geopoint(-1.0, -2.0)));
-        assertTrue(vpRef.isInViewport(new Geopoint(3.0, 4.0)));
+        assertFalse(vpRef.contains(new Geopoint(-2.0, -2.0)));
+        assertFalse(vpRef.contains(new Geopoint(4.0, 4.0)));
+        assertTrue(vpRef.contains(new Geopoint(0.0, 0.0)));
+        assertTrue(vpRef.contains(new Geopoint(-1.0, -2.0)));
+        assertTrue(vpRef.contains(new Geopoint(3.0, 4.0)));
     }
 
     public static void testSqlWhere() {
