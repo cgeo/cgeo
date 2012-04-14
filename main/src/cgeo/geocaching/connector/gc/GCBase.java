@@ -183,7 +183,7 @@ public class GCBase {
             }
         }
 
-        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isPremiumMember()) {
             Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 SearchResult search = cgBase.searchByCoords(null, center, Settings.getCacheType(), false);
