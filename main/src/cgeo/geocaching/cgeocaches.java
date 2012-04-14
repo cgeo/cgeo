@@ -164,7 +164,6 @@ public class cgeocaches extends AbstractListActivity {
     private DropDetailsThread threadR = null;
     private RemoveFromHistoryThread threadH = null;
     private int listId = StoredList.TEMPORARY_LIST_ID;
-    private List<StoredList> lists = null;
     private GeocodeComparator gcComparator = new GeocodeComparator();
     private Handler loadCachesHandler = new Handler() {
 
@@ -2010,7 +2009,6 @@ public class cgeocaches extends AbstractListActivity {
                 switchListById(selectedListId.intValue());
             }
         });
-        lists = app.getLists();
     }
 
     public void switchListById(int id) {
