@@ -132,6 +132,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_FILTER_MODIFIED = 70;
     private static final int SUBMENU_FILTER_TERRAIN = 71;
     private static final int SUBMENU_FILTER_DIFFICULTY = 72;
+    private static final int MENU_STORE_CACHE = 73;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_CANCEL = -99;
@@ -1091,6 +1092,9 @@ public class cgeocaches extends AbstractListActivity {
                 menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             }
         }
+        else {
+            menu.add(0, MENU_STORE_CACHE, 0, res.getString(R.string.cache_offline_store));
+        }
     }
 
     private void moveCachesToOtherList() {
@@ -1167,6 +1171,11 @@ public class cgeocaches extends AbstractListActivity {
                     refreshCurrentList();
                 }
             });
+            return true;
+        } else if (id == MENU_STORE_CACHE) {
+            final cgCache cache = getCacheFromAdapter(adapterInfo);
+            //FIXME: this must use the same handler like in the CacheDetailActivity. Will be done by moving the handler into the store method.
+            cache.store(this, null);
             return true;
         }
 
@@ -1381,8 +1390,7 @@ public class cgeocaches extends AbstractListActivity {
         threadDetails.start();
     }
 
-    public void removeFromHistoryCheck()
-    {
+    public void removeFromHistoryCheck() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setCancelable(true);
         dialog.setTitle(res.getString(R.string.caches_removing_from_history));
@@ -1404,8 +1412,7 @@ public class cgeocaches extends AbstractListActivity {
         alert.show();
     }
 
-    public void removeFromHistory()
-    {
+    public void removeFromHistory() {
         if (adapter != null && adapter.getChecked() > 0)
         {
             // there are some checked caches
@@ -1427,7 +1434,6 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     public void exportCaches() {
-
         List<cgCache> caches;
         if (adapter != null && adapter.getChecked() > 0) {
             // there are some caches checked
