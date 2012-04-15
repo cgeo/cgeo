@@ -183,13 +183,17 @@ public class GCBase {
             }
         }
 
-        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isPremiumMember()) {
+        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
             Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 SearchResult search = cgBase.searchByCoords(null, center, Settings.getCacheType(), false);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
-                    lastSearchViewport = cgeoapplication.getInstance().getBounds(geocodes);
+                    if (Settings.isPremiumMember()) {
+                        lastSearchViewport = cgeoapplication.getInstance().getBounds(geocodes);
+                    } else {
+                        lastSearchViewport = new Viewport(center, 0.01, 0.01);
+                    }
                     searchResult.addGeocodes(geocodes);
                 }
             }
