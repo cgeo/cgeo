@@ -19,10 +19,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +63,16 @@ public final class NavigationAppFactory extends AbstractAppFactory {
          * The id - used in c:geo settings
          */
         public final int id;
+
+        /*
+         * display app name in array adapter
+         *
+         * @see java.lang.Enum#toString()
+         */
+        @Override
+        public String toString() {
+            return app.getName();
+        }
     }
 
     /**
@@ -127,24 +134,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         }
         /*
          * Using an ArrayAdapter with list of NavigationAppsEnum items avoids
-         * handling between mapping list positions allows us to do dynamic filtering of the list based on usecase.
+         * handling between mapping list positions allows us to do dynamic filtering of the list based on use case.
          */
-        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<NavigationAppsEnum>(activity, android.R.layout.select_dialog_item, items) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getView(position, convertView, parent);
-                textView.setText(getItem(position).app.getName());
-                return textView;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                textView.setText(getItem(position).app.getName());
-                return textView;
-            }
-        };
-        adapter.setDropDownViewResource(android.R.layout.select_dialog_item);
+        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<NavigationAppsEnum>(activity, android.R.layout.select_dialog_item, items);
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
@@ -298,7 +290,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     /**
      * Starts the second default navigation tool if correctly set and installed or the compass app as default fallback.
-     * 
+     *
      * @param geo
      * @param activity
      * @param cache
@@ -321,7 +313,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     /**
      * Returns the default navigation tool if correctly set and installed or the compass app as default fallback
-     * 
+     *
      * @param activity
      * @return never <code>null</code>
      */
@@ -341,7 +333,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     /**
      * Returns the second default navigation tool if correctly set and installed or the compass app as default fallback
-     * 
+     *
      * @param activity
      * @return never <code>null</code>
      */

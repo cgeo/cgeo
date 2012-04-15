@@ -12,65 +12,85 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.Comparator;
 
 public final class FilterUserInterface {
 
+    private static class FactoryEntry {
+        private final String name;
+        private final Class<? extends IFilterFactory> filterFactory;
+
+        public FactoryEntry(final String name, final Class<? extends IFilterFactory> filterFactory) {
+            this.name = name;
+            this.filterFactory = filterFactory;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
     private final IAbstractActivity activity;
-    private final HashMap<Integer, Class<? extends IFilterFactory>> registry;
+    private final ArrayList<FactoryEntry> registry;
     private final Resources res;
 
     public FilterUserInterface(final IAbstractActivity activity) {
         this.activity = activity;
         this.res = cgeoapplication.getInstance().getResources();
 
-        registry = new HashMap<Integer, Class<? extends IFilterFactory>>();
+        registry = new ArrayList<FactoryEntry>();
         if (Settings.getCacheType() == CacheType.ALL) {
-            registry.put(R.string.caches_filter_type, TypeFilter.Factory.class);
+            register(R.string.caches_filter_type, TypeFilter.Factory.class);
         }
-        registry.put(R.string.caches_filter_size, SizeFilter.Factory.class);
-        registry.put(R.string.cache_terrain, TerrainFilter.Factory.class);
-        registry.put(R.string.cache_difficulty, DifficultyFilter.Factory.class);
-        registry.put(R.string.cache_attributes, AttributeFilter.Factory.class);
-        registry.put(R.string.cache_status, StateFilter.Factory.class);
-        registry.put(R.string.caches_filter_track, TrackablesFilter.class);
-        registry.put(R.string.caches_filter_modified, ModifiedFilter.class);
+        register(R.string.caches_filter_size, SizeFilter.Factory.class);
+        register(R.string.cache_terrain, TerrainFilter.Factory.class);
+        register(R.string.cache_difficulty, DifficultyFilter.Factory.class);
+        register(R.string.cache_attributes, AttributeFilter.Factory.class);
+        register(R.string.cache_status, StateFilter.Factory.class);
+        register(R.string.caches_filter_track, TrackablesFilter.class);
+        register(R.string.caches_filter_modified, ModifiedFilter.class);
+
+        // sort by localized names
+        Collections.sort(registry, new Comparator<FactoryEntry>() {
+
+            @Override
+            public int compare(FactoryEntry lhs, FactoryEntry rhs) {
+                return lhs.name.compareToIgnoreCase(rhs.name);
+            }
+        });
+
+        // reset shall be last
+        register(R.string.caches_filter_clear, null);
+    }
+
+    private void register(int resourceId, Class<? extends IFilterFactory> factoryClass) {
+        registry.add(new FactoryEntry(res.getString(resourceId), factoryClass));
     }
 
     public void selectFilter(final RunnableWithArgument<IFilter> runAfterwards) {
         final AlertDialog.Builder builder = new AlertDialog.Builder((Activity) activity);
         builder.setTitle(R.string.caches_filter);
 
-        ArrayList<String> names = new ArrayList<String>(registry.size() + 1);
-        for (Entry<Integer, Class<? extends IFilterFactory>> entry : registry.entrySet()) {
-            names.add(res.getString(entry.getKey()));
-        }
-        Collections.sort(names);
-        names.add(res.getString(R.string.caches_filter_clear));
-        final String[] array = names.toArray(new String[names.size()]);
-        builder.setItems(array, new DialogInterface.OnClickListener() {
+        final ArrayAdapter<FactoryEntry> adapter = new ArrayAdapter<FactoryEntry>((Activity) activity, android.R.layout.select_dialog_item, registry);
+
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int itemIndex) {
-                // no filter selected?
-                if (itemIndex >= registry.size()) {
+                FactoryEntry entry = adapter.getItem(itemIndex);
+                // reset?
+                if (entry.filterFactory == null) {
                     runAfterwards.run(null);
                 }
                 else {
-                    final String name = array[itemIndex];
-                    for (Entry<Integer, Class<? extends IFilterFactory>> entry : registry.entrySet()) {
-                        if (name.equals(res.getString(entry.getKey()))) {
-                            Class<? extends IFilterFactory> producer = entry.getValue();
-                            try {
-                                IFilterFactory factory = producer.newInstance();
-                                selectFromFactory(factory, name, runAfterwards);
-                            } catch (Exception e) {
-                                Log.e("selectFilter", e);
-                            }
-                            return;
-                        }
+                    try {
+                        IFilterFactory factoryInstance = entry.filterFactory.newInstance();
+                        selectFromFactory(factoryInstance, entry.name, runAfterwards);
+                    } catch (Exception e) {
+                        Log.e("selectFilter", e);
                     }
                 }
             }
@@ -89,11 +109,8 @@ public final class FilterUserInterface {
         final AlertDialog.Builder builder = new AlertDialog.Builder((Activity) activity);
         builder.setTitle(menuTitle);
 
-        final String[] names = new String[filters.length];
-        for (int i = 0; i < filters.length; i++) {
-            names[i] = filters[i].getName();
-        }
-        builder.setItems(names, new DialogInterface.OnClickListener() {
+        final ArrayAdapter<IFilter> adapter = new ArrayAdapter<IFilter>((Activity) activity, android.R.layout.select_dialog_item, filters);
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 runAfterwards.run(filters[item]);
             }

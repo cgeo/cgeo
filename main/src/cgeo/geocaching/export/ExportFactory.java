@@ -52,7 +52,6 @@ public abstract class ExportFactory {
         }
 
         final ArrayAdapter<Export> adapter = new ArrayAdapter<Export>(activity, android.R.layout.select_dialog_item, export);
-        adapter.setDropDownViewResource(android.R.layout.select_dialog_item);
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {

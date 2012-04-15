@@ -26,4 +26,14 @@ abstract class AbstractFilter implements IFilter {
     public String getName() {
         return name;
     }
+
+    /*
+     * show name in array adapter
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
