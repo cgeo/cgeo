@@ -56,7 +56,7 @@ public interface MapViewImpl {
 
     PositionOverlay createAddPositionOverlay(Activity activity);
 
-    void setMapSource();
+    void setMapSource(int mapSource);
 
     /**
      * Map-library unspecific method to request a repaint of either

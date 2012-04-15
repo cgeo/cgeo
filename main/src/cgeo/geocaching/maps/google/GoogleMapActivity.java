@@ -1,8 +1,12 @@
 package cgeo.geocaching.maps.google;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
+import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.utils.Log;
 
 import com.google.android.maps.MapActivity;
 
@@ -15,6 +19,7 @@ import android.view.View;
 public class GoogleMapActivity extends MapActivity implements MapActivityImpl {
 
     private AbstractMap mapBase;
+    private MapProvider mapProvider;
 
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
@@ -31,7 +36,30 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl {
     }
 
     @Override
+    public MapProvider getMapProvider() {
+        // This should never happen!
+        if (mapProvider == null) {
+            mapProvider = new GoogleMapProvider(0);
+            Log.e("GoogleMapActivity: Uninitialized MapProvider access attempted");
+        }
+        return mapProvider;
+    }
+
+    @Override
     protected void onCreate(Bundle icicle) {
+        if (icicle != null && icicle.containsKey(AbstractMap.EXTRAS_MAP_SOURCE)) {
+            mapProvider = MapProviderFactory.getMapProvider(icicle.getInt(AbstractMap.EXTRAS_MAP_SOURCE));
+        } else {
+            mapProvider = Settings.getMapProvider();
+        }
+
+        // this should not ever happen,
+        // it's just a safeguard that we do not end up with the wrong MapProvider
+        if (!(mapProvider instanceof GoogleMapProvider)) {
+            mapProvider = new GoogleMapProvider(0);
+            Log.e("GoogleMapActivity: Got the wrong MapProvider during onCreate");
+        }
+
         mapBase.onCreate(icicle);
     }
 
@@ -68,6 +96,13 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl {
     @Override
     protected void onStop() {
         mapBase.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(AbstractMap.EXTRAS_MAP_SOURCE, mapBase.getMapSource());
     }
 
     @Override

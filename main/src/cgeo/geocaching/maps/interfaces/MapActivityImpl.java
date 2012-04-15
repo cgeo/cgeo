@@ -20,6 +20,8 @@ public interface MapActivityImpl {
 
     Activity getActivity();
 
+    MapProvider getMapProvider();
+
     void superOnCreate(Bundle savedInstanceState);
 
     void superOnResume();

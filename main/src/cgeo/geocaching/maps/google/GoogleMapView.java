@@ -2,7 +2,6 @@ package cgeo.geocaching.maps.google;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
@@ -141,8 +140,8 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void setMapSource() {
-        setSatellite(GoogleMapProvider.isSatelliteSource(Settings.getMapSource()));
+    public void setMapSource(int mapSource) {
+        setSatellite(GoogleMapProvider.isSatelliteSource(mapSource));
     }
 
     @Override

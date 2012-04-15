@@ -163,9 +163,9 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void setMapSource() {
+    public void setMapSource(int mapSource) {
 
-        switch (MapsforgeMapProvider.getMapsforgeSource(Settings.getMapSource())) {
+        switch (MapsforgeMapProvider.getMapsforgeSource(mapSource)) {
             case MapsforgeMapProvider.CYCLEMAP:
                 setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
                 break;
