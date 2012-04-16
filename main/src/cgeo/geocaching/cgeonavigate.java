@@ -26,8 +26,7 @@ import java.util.List;
 
 public class cgeonavigate extends AbstractActivity {
 
-    private static final String EXTRAS_LONGITUDE = "longitude";
-    private static final String EXTRAS_LATITUDE = "latitude";
+    private static final String EXTRAS_COORDS = "coords";
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
@@ -88,7 +87,7 @@ public class cgeonavigate extends AbstractActivity {
             geocode = extras.getString(EXTRAS_GEOCODE);
             title = geocode;
             name = extras.getString(EXTRAS_NAME);
-            dstCoords = new Geopoint(extras.getDouble(EXTRAS_LATITUDE), extras.getDouble(EXTRAS_LONGITUDE));
+            dstCoords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
 
             if (StringUtils.isNotBlank(name)) {
                 if (StringUtils.isNotBlank(title)) {
@@ -393,8 +392,7 @@ public class cgeonavigate extends AbstractActivity {
         }
 
         final Intent navigateIntent = new Intent(context, cgeonavigate.class);
-        navigateIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
-        navigateIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
+        navigateIntent.putExtra(EXTRAS_COORDS, coords);
         navigateIntent.putExtra(EXTRAS_GEOCODE, geocode.toUpperCase());
         if (null != displayedName) {
             navigateIntent.putExtra(EXTRAS_NAME, displayedName);

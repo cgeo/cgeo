@@ -481,7 +481,7 @@ public class cgeopoint extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityCoordinates(this, coords.getLatitude(), coords.getLongitude());
+        cgeocaches.startActivityCoordinates(this, coords);
 
         finish();
     }

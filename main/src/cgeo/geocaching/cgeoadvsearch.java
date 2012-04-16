@@ -313,7 +313,7 @@ public class cgeoadvsearch extends AbstractActivity {
             }
         } else {
             try {
-                cgeocaches.startActivityCoordinates(this, GeopointParser.parseLatitude(latText), GeopointParser.parseLongitude(lonText));
+                cgeocaches.startActivityCoordinates(this, GeopointParser.parse(latText, lonText));
             } catch (GeopointParser.ParseException e) {
                 showToast(res.getString(e.resource));
             }

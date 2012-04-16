@@ -56,7 +56,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
             @Override
             public void onClick(View v) {
                 Activity activity = (Activity) v.getContext();
-                cgeocaches.startActivityAddress(activity, address.getLatitude(), address.getLongitude(), StringUtils.defaultString(address.getAddressLine(0)));
+                cgeocaches.startActivityAddress(activity, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
                 activity.finish();
             }
         });

@@ -78,6 +78,7 @@ public class cgeocaches extends AbstractListActivity {
 
     private static final int MAX_LIST_ITEMS = 1000;
     private static final String EXTRAS_LIST_TYPE = "type";
+    private static final String EXTRAS_COORDS = "coords";
     private static final int MENU_REFRESH_STORED = 2;
     private static final int MENU_CACHE_DETAILS = 4;
     private static final int MENU_DROP_CACHES = 5;
@@ -483,7 +484,7 @@ public class cgeocaches extends AbstractListActivity {
         if (extras != null) {
             Object typeObject = extras.get(EXTRAS_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
-            coords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
+            coords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
             cacheType = Settings.getCacheType();
             keyword = extras.getString("keyword");
             address = extras.getString("address");
@@ -2127,8 +2128,7 @@ public class cgeocaches extends AbstractListActivity {
 
         Intent cachesIntent = new Intent(context, cachesActivity.getClass());
         cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.COORDINATE);
-        cachesIntent.putExtra("latitude", coords.getLatitude());
-        cachesIntent.putExtra("longitude", coords.getLongitude());
+        cachesIntent.putExtra(EXTRAS_COORDS, coords);
 
         context.startActivity(cachesIntent);
     }
@@ -2195,8 +2195,7 @@ public class cgeocaches extends AbstractListActivity {
     public static void startActivityNearest(final Context context, final Geopoint coordsNow) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
         cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.NEAREST);
-        cachesIntent.putExtra("latitude", coordsNow.getLatitude());
-        cachesIntent.putExtra("longitude", coordsNow.getLongitude());
+        cachesIntent.putExtra(EXTRAS_COORDS, coordsNow);
         context.startActivity(cachesIntent);
     }
 
@@ -2206,20 +2205,18 @@ public class cgeocaches extends AbstractListActivity {
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityAddress(Context context, double latitude, double longitude, String address) {
+    public static void startActivityAddress(final Context context, final Geopoint coords, final String address) {
         Intent addressIntent = new Intent(context, cgeocaches.class);
         addressIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.ADDRESS);
-        addressIntent.putExtra("latitude", latitude);
-        addressIntent.putExtra("longitude", longitude);
+        addressIntent.putExtra(EXTRAS_COORDS, coords);
         addressIntent.putExtra("address", address);
         context.startActivity(addressIntent);
     }
 
-    public static void startActivityCoordinates(final Context context, double latitude, double longitude) {
+    public static void startActivityCoordinates(final Context context, final Geopoint coords) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
         cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.COORDINATE);
-        cachesIntent.putExtra("latitude", latitude);
-        cachesIntent.putExtra("longitude", longitude);
+        cachesIntent.putExtra(EXTRAS_COORDS, coords);
         context.startActivity(cachesIntent);
     }
 
