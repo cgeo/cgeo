@@ -25,11 +25,6 @@ public class ScaleOverlay implements GeneralOverlay {
     private Paint scaleShadow = null;
     private BlurMaskFilter blur = null;
     private float pixelDensity = 0;
-    private double pixels = 0d;
-    private int bottom = 0;
-    private double distance = 0d;
-    private double distanceRound = 0d;
-    private String units = null;
     private OverlayImpl ovlImpl = null;
 
     public ScaleOverlay(Activity activity, OverlayImpl overlayImpl) {
@@ -51,64 +46,42 @@ public class ScaleOverlay implements GeneralOverlay {
         drawInternal(canvas, mapView);
     }
 
+    static private double keepSignificantDigit(final double distance) {
+        final double scale = Math.pow(10, Math.floor(Math.log10(distance)));
+        return scale * Math.floor(distance / scale);
+    }
+
     private void drawInternal(Canvas canvas, MapViewImpl mapView) {
 
         final double span = mapView.getLongitudeSpan() / 1e6;
         final GeoPointImpl center = mapView.getMapViewCenter();
 
-        pixels = mapView.getWidth() * SCALE_WIDTH_FACTOR; // pixels related to following latitude span
-        bottom = mapView.getHeight() - 14; // pixels from bottom side of screen
+        final int bottom = mapView.getHeight() - 14; // pixels from bottom side of screen
 
         final Geopoint leftCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 - span / 2);
         final Geopoint rightCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 + span / 2);
 
-        distance = leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR;
-        distanceRound = 0d;
-
-        //FIXME: merge with getHumanDistance()
+        String units;
+        double distance = leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR;
         if (Settings.isUseMetricUnits()) {
-            if (distance > 100) { // 100+ km > 1xx km
-                distanceRound = Math.floor(distance / 100) * 100;
+            if (distance >= 1) {
                 units = "km";
-            } else if (distance > 10) { // 10 - 100 km > 1x km
-                distanceRound = Math.floor(distance / 10) * 10;
-                units = "km";
-            } else if (distance > 1) { // 1 - 10 km > 1.x km
-                distanceRound = Math.floor(distance);
-                units = "km";
-            } else if (distance > 0.1) { // 100 m - 1 km > 1xx m
+            } else {
                 distance *= 1000;
-                distanceRound = Math.floor(distance / 100) * 100;
-                units = "m";
-            } else { // 1 - 100 m > 1x m
-                distance *= 1000;
-                distanceRound = Math.round(distance / 10) * 10;
                 units = "m";
             }
         } else {
             distance /= IConversion.MILES_TO_KILOMETER;
-
-            if (distance > 100) { // 100+ mi > 1xx mi
-                distanceRound = Math.floor(distance / 100) * 100;
+            if (distance >= 1) {
                 units = "mi";
-            } else if (distance > 10) { // 10 - 100 mi > 1x mi
-                distanceRound = Math.floor(distance / 10) * 10;
-                units = "mi";
-            } else if (distance > 1) { // 1 - 10 mi > 1.x mi
-                distanceRound = Math.floor(distance);
-                units = "mi";
-            } else if (distance > 0.1) { // 0.1 mi - 1.0 mi > 1xx ft
+            } else {
                 distance *= 5280;
-                distanceRound = Math.floor(distance / 100) * 100;
-                units = "ft";
-            } else { // 1 - 100 ft > 1x ft
-                distance *= 5280;
-                distanceRound = Math.round(distance / 10) * 10;
                 units = "ft";
             }
         }
 
-        pixels = Math.round((pixels / distance) * distanceRound);
+        final double distanceRound = keepSignificantDigit(distance);
+        final double pixels = Math.round((mapView.getWidth() * SCALE_WIDTH_FACTOR / distance) * distanceRound);
 
         if (blur == null) {
             blur = new BlurMaskFilter(3, BlurMaskFilter.Blur.NORMAL);
