@@ -2593,10 +2593,17 @@ public class cgData {
         return count;
     }
 
+    /**
+     * Return a batch of stored geocodes.
+     *
+     * @param detailedOnly
+     * @param coords
+     *            the current coordinates to sort by distance, or null to sort by geocode
+     * @param cacheType
+     * @param listId
+     * @return
+     */
     public Set<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int listId) {
-        if (coords == null) {
-            throw new IllegalArgumentException("coords must not be null");
-        }
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
@@ -2620,7 +2627,9 @@ public class cgData {
         }
 
         try {
-            Cursor cursor = databaseRO.query(
+            Cursor cursor;
+            if (coords != null) {
+                cursor = databaseRO.query(
                     dbTableCaches,
                     new String[] { "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
                             ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif" },
@@ -2630,19 +2639,26 @@ public class cgData {
                     null,
                     "dif",
                     null);
-
-            if (cursor != null) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-                    int index = cursor.getColumnIndex("geocode");
-
-                    do {
-                        geocodes.add(cursor.getString(index));
-                    } while (cursor.moveToNext());
-                }
-
-                cursor.close();
+            } else {
+                cursor = databaseRO.query(
+                        dbTableCaches,
+                        new String[] { "geocode" },
+                        specifySql.toString(),
+                        null,
+                        null,
+                        null,
+                        "geocode");
             }
+
+            if (cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndex("geocode");
+
+                do {
+                    geocodes.add(cursor.getString(index));
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
 
         } catch (Exception e) {
             Log.e("cgData.loadBatchOfStoredGeocodes: " + e.toString());

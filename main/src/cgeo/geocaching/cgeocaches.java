@@ -485,11 +485,6 @@ public class cgeocaches extends AbstractListActivity {
             Object typeObject = extras.get(EXTRAS_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
             coords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
-            // FIXME: this code seems dubious, as adding a fake Geopoint with valid
-            // coordinates should not be required.
-            if (coords == null) {
-                coords = new Geopoint(0.0, 0.0);
-            }
             cacheType = Settings.getCacheType();
             keyword = extras.getString("keyword");
             address = extras.getString("address");
