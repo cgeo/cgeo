@@ -1,8 +1,10 @@
 package cgeo.geocaching.utils;
 
 import java.util.AbstractSet;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Set wrapper for the LeastRecentlyUsedMap.
@@ -33,7 +35,8 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
 
     /**
      * Copy of the HashSet code if iterator()
-     *
+     * Iterator access has to be synchronized externally!
+     * 
      * @see HashSet
      */
     @Override
@@ -48,7 +51,9 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      */
     @Override
     public int size() {
-        return map.size();
+        synchronized (this) {
+            return map.size();
+        }
     }
 
     /**
@@ -58,7 +63,9 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      */
     @Override
     public boolean isEmpty() {
-        return map.isEmpty();
+        synchronized (this) {
+            return map.isEmpty();
+        }
     }
 
     /**
@@ -68,7 +75,9 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      */
     @Override
     public boolean contains(Object o) {
-        return map.containsKey(o);
+        synchronized (this) {
+            return map.containsKey(o);
+        }
     }
 
     /**
@@ -78,7 +87,9 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      */
     @Override
     public boolean add(E e) {
-        return map.put(e, PRESENT) == null;
+        synchronized (this) {
+            return map.put(e, PRESENT) == null;
+        }
     }
 
     /**
@@ -88,7 +99,9 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      */
     @Override
     public boolean remove(Object o) {
-        return map.remove(o) == PRESENT;
+        synchronized (this) {
+            return map.remove(o) == PRESENT;
+        }
     }
 
     /**
@@ -98,7 +111,9 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      */
     @Override
     public void clear() {
-        map.clear();
+        synchronized (this) {
+            map.clear();
+        }
     }
 
     /**
@@ -110,11 +125,24 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     @SuppressWarnings("unchecked")
     public Object clone() {
         try {
-            final LeastRecentlyUsedSet<E> newSet = (LeastRecentlyUsedSet<E>) super.clone();
-            newSet.map = (LeastRecentlyUsedMap<E, Object>) map.clone();
-            return newSet;
+            synchronized (this) {
+                final LeastRecentlyUsedSet<E> newSet = (LeastRecentlyUsedSet<E>) super.clone();
+                newSet.map = (LeastRecentlyUsedMap<E, Object>) map.clone();
+                return newSet;
+            }
         } catch (CloneNotSupportedException e) {
             throw new InternalError();
+        }
+    }
+
+    /**
+     * Creates a clone as a list in a synchronized fashion.
+     *
+     * @return List based clone of the set
+     */
+    public List<E> getAsList() {
+        synchronized (this) {
+            return new ArrayList<E>(this);
         }
     }
 
