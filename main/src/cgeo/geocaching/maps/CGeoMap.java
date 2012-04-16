@@ -339,7 +339,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     protected void countVisibleCaches() {
-        final ArrayList<cgCache> protectedCaches = new ArrayList<cgCache>(caches);
+        final List<cgCache> protectedCaches = caches.getAsList();
 
         int count = 0;
         if (protectedCaches.size() > 0) {
@@ -721,7 +721,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
                     final List<String> geocodes = new ArrayList<String>();
 
-                    List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
+                    final List<cgCache> cachesProtected = caches.getAsList();
+
                     try {
                         if (cachesProtected.size() > 0) {
                             final GeoPointImpl mapCenter = mapView.getMapViewCenter();
@@ -1209,7 +1210,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
-                    final ArrayList<cgCache> tempList = new ArrayList<cgCache>(caches);
+                    final List<cgCache> tempList = caches.getAsList();
+
                     for (cgCache cache : tempList) {
                         if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
                             caches.remove(cache);
@@ -1307,7 +1309,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
 
                 // display caches
-                final List<cgCache> cachesToDisplay = new ArrayList<cgCache>(caches);
+                final List<cgCache> cachesToDisplay = caches.getAsList();
                 final List<cgWaypoint> waypointsToDisplay = new ArrayList<cgWaypoint>(waypoints);
                 final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
 
