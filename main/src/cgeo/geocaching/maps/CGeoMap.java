@@ -115,6 +115,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final String EXTRAS_MAP_TITLE = "mapTitle";
 
     private static final String BUNDLE_MAP_SOURCE = "mapSource";
+    private static final String BUNDLE_MAP_STATE = "mapState";
 
     private Resources res = null;
     private MapProvider mapProvider = null;
@@ -362,6 +363,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public void onSaveInstanceState(final Bundle outState) {
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
+        outState.putIntArray(BUNDLE_MAP_STATE, currentMapState());
     }
 
     @Override
@@ -374,15 +376,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         app = (cgeoapplication) activity.getApplication();
         mapProvider = Settings.getMapProvider();
 
-        // Restore previously saved map source if any
-        if (savedInstanceState != null) {
-            currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource());
-        } else {
-            currentSourceId = Settings.getMapSource();
-        }
 
-        // get parameters
-        Bundle extras = activity.getIntent().getExtras();
+        // Get parameters from the intent
+        final Bundle extras = activity.getIntent().getExtras();
         if (extras != null) {
             searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
@@ -391,9 +387,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
         }
-
         if (StringUtils.isBlank(mapTitle)) {
             mapTitle = res.getString(R.string.map_map);
+        }
+
+        // Get fresh map information from the bundle if any
+        if (savedInstanceState != null) {
+            currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource());
+            mapStateIntent = savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
+        } else {
+            currentSourceId = Settings.getMapSource();
         }
 
         // If recreating from an obsolete map source, we may need a restart
@@ -872,12 +875,26 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         mapIntent.putExtra(EXTRAS_SEARCH, searchIntent);
         mapIntent.putExtra(EXTRAS_GEOCODE, geocodeIntent);
         if (coordsIntent != null) {
-            mapIntent.putExtra(EXTRAS_LATITUDE, coordsIntent.getLatitude());
-            mapIntent.putExtra(EXTRAS_LONGITUDE, coordsIntent.getLongitude());
+            mapIntent.putExtra(EXTRAS_COORDS, coordsIntent);
         }
         mapIntent.putExtra(EXTRAS_WPTTYPE, waypointTypeIntent != null ? waypointTypeIntent.id : null);
         mapIntent.putExtra(EXTRAS_MAP_TITLE, mapTitle);
 
+        final int[] mapState = currentMapState();
+        if (mapState != null) {
+            mapIntent.putExtra(EXTRAS_MAPSTATE, mapState);
+        }
+
+        // start the new map
+        activity.startActivity(mapIntent);
+    }
+
+    /**
+     * Get the current map state from the map view if it exists or from the mapStateIntent field otherwise.
+     *
+     * @return the current map state as an array of int, or null if no map state is available
+     */
+    private int[] currentMapState() {
         if (mapView != null) {
             int[] mapState = new int[4];
             GeoPointImpl mapCenter = mapView.getMapViewCenter();
@@ -885,11 +902,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             mapState[1] = mapCenter.getLongitudeE6();
             mapState[2] = mapView.getMapZoomLevel();
             mapState[3] = followMyLocation ? 1 : 0;
-            mapIntent.putExtra(EXTRAS_MAPSTATE, mapState);
+            return mapState;
+        } else {
+            return mapStateIntent;
         }
-
-        // start the new map
-        activity.startActivity(mapIntent);
     }
 
     private void savePrefs() {
