@@ -4,6 +4,7 @@ import cgeo.geocaching.geopoint.Geopoint.DDD;
 import cgeo.geocaching.geopoint.Geopoint.DMM;
 import cgeo.geocaching.geopoint.Geopoint.DMS;
 
+import android.os.Bundle;
 import android.test.AndroidTestCase;
 
 import junit.framework.Assert;
@@ -59,6 +60,14 @@ public class GeopointTest extends AndroidTestCase {
         // the initial bearing of the path in both cases.
         Assert.assertEquals(287.162, gp1.bearingTo(gp2), 1e-3);
         Assert.assertEquals(107.715, gp2.bearingTo(gp1), 1e-3);
+    }
+
+    public static void testParcelable() {
+        final Geopoint gp = new Geopoint(1.2, 3.4);
+        final String KEY = "geopoint";
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY, gp);
+        assertEquals(gp, bundle.getParcelable(KEY));
     }
 
     public static void testDDD() {

@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,7 +20,7 @@ import java.math.RoundingMode;
 /**
  * Abstraction of geographic point.
  */
-public final class Geopoint implements ICoordinates {
+public final class Geopoint implements ICoordinates, Parcelable {
     public static final double deg2rad = Math.PI / 180;
     public static final double rad2deg = 180 / Math.PI;
     public static final float erad = 6371.0f;
@@ -81,6 +83,17 @@ public final class Geopoint implements ICoordinates {
      */
     public Geopoint(final Location loc) {
         this(loc.getLatitude(), loc.getLongitude());
+    }
+
+    /**
+     * Create new Geopoint from Parcel.
+     *
+     * @param in
+     *            a Parcel to read the saved data from
+     */
+    public Geopoint(final Parcel in) {
+        latitude = in.readDouble();
+        longitude = in.readDouble();
     }
 
     /**
@@ -233,7 +246,7 @@ public final class Geopoint implements ICoordinates {
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     * 
+     *
      * @return formatted coordinates
      */
     @Override
@@ -509,5 +522,26 @@ public final class Geopoint implements ICoordinates {
     public Geopoint getCoords() {
         return this;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+    }
+
+    public static final Parcelable.Creator<Geopoint> CREATOR = new Parcelable.Creator<Geopoint>() {
+        public Geopoint createFromParcel(final Parcel in) {
+            return new Geopoint(in);
+        }
+
+        public Geopoint[] newArray(final int size) {
+            return new Geopoint[size];
+        }
+    };
 
 }
