@@ -115,6 +115,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     private static final String EXTRAS_MAP_TITLE = "mapTitle";
 
+    private static final String BUNDLE_MAP_SOURCE = "mapSource";
+
     private Resources res = null;
     private MapProvider mapProvider = null;
     private Activity activity = null;
@@ -327,6 +329,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      */
     private String mapTitle;
 
+    /* Current source id */
+    private int currentSourceId;
+
     public CGeoMap(MapActivityImpl activity) {
         super(activity);
     }
@@ -354,6 +359,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -362,6 +372,39 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
         mapProvider = Settings.getMapProvider();
+
+        // Restore previously saved map source if any
+        if (savedInstanceState != null) {
+            currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource());
+        } else {
+            currentSourceId = Settings.getMapSource();
+        }
+
+        // get parameters
+        Bundle extras = activity.getIntent().getExtras();
+        if (extras != null) {
+            searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
+            geocodeIntent = extras.getString(EXTRAS_GEOCODE);
+            final double latitudeIntent = extras.getDouble(EXTRAS_LATITUDE);
+            final double longitudeIntent = extras.getDouble(EXTRAS_LONGITUDE);
+            coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
+            waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
+            mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
+            mapTitle = extras.getString(EXTRAS_MAP_TITLE);
+
+            if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
+                coordsIntent = null;
+            }
+        }
+
+        if (StringUtils.isBlank(mapTitle)) {
+            mapTitle = res.getString(R.string.map_map);
+        }
+
+        // If recreating from an obsolete map source, we may need a restart
+        if (changeMapSource(Settings.getMapSource())) {
+            return;
+        }
 
         // reset status
         noMapTokenShowed = false;
@@ -420,26 +463,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             dirUpdate.updateDirection(dir);
         }
 
-        // get parameters
-        Bundle extras = activity.getIntent().getExtras();
-        if (extras != null) {
-            searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
-            geocodeIntent = extras.getString(EXTRAS_GEOCODE);
-            final double latitudeIntent = extras.getDouble(EXTRAS_LATITUDE);
-            final double longitudeIntent = extras.getDouble(EXTRAS_LONGITUDE);
-            coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
-            waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
-            mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
-            mapTitle = extras.getString(EXTRAS_MAP_TITLE);
-
-            if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
-                coordsIntent = null;
-            }
-        }
-
-        if (StringUtils.isBlank(mapTitle)) {
-            mapTitle = res.getString(R.string.map_map);
-        }
 
         // live map, if no arguments are given
         live = (searchIntent == null && geocodeIntent == null && coordsIntent == null);
@@ -483,6 +506,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public void onResume() {
         super.onResume();
+
+        if (changeMapSource(Settings.getMapSource())) {
+            return;
+        }
 
         app.setAction(StringUtils.defaultIfBlank(geocodeIntent, null));
         if (geo == null) {
@@ -812,35 +839,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     item.setChecked(true);
                     int mapSource = MapProviderFactory.getMapSourceFromMenuId(id);
 
-                    boolean mapRestartRequired = switchMapSource(mapSource);
-
-                    if (mapRestartRequired) {
-                        // close old mapview
-                        activity.finish();
-
-                        // prepare information to restart a similar view
-                        Intent mapIntent = new Intent(activity, Settings.getMapProvider().getMapClass());
-
-                        mapIntent.putExtra(EXTRAS_SEARCH, searchIntent);
-                        mapIntent.putExtra(EXTRAS_GEOCODE, geocodeIntent);
-                        if (coordsIntent != null) {
-                            mapIntent.putExtra(EXTRAS_LATITUDE, coordsIntent.getLatitude());
-                            mapIntent.putExtra(EXTRAS_LONGITUDE, coordsIntent.getLongitude());
-                        }
-                        mapIntent.putExtra(EXTRAS_WPTTYPE, waypointTypeIntent != null ? waypointTypeIntent.id : null);
-                        int[] mapState = new int[4];
-                        GeoPointImpl mapCenter = mapView.getMapViewCenter();
-                        mapState[0] = mapCenter.getLatitudeE6();
-                        mapState[1] = mapCenter.getLongitudeE6();
-                        mapState[2] = mapView.getMapZoomLevel();
-                        mapState[3] = followMyLocation ? 1 : 0;
-                        mapIntent.putExtra(EXTRAS_MAPSTATE, mapState);
-                        mapIntent.putExtra(EXTRAS_MAP_TITLE, mapTitle);
-
-                        // start the new map
-                        activity.startActivity(mapIntent);
-
-                    }
+                    changeMapSource(mapSource);
 
                     return true;
                 }
@@ -848,16 +847,59 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         return false;
     }
 
-    private boolean switchMapSource(int sourceId) {
-        boolean mapRestartRequired = !MapProviderFactory.isSameProvider(Settings.getMapSource(), sourceId);
+    /**
+     * Restart the current activity if the map provider has changed, or change the map source if needed.
+     *
+     * @param mapSource
+     *            the new map source, which can be the same as the current one
+     * @return true if a restart is needed, false otherwise
+     */
+    private boolean changeMapSource(final int mapSource) {
+        final boolean restartRequired = !MapProviderFactory.isSameProvider(currentSourceId, mapSource);
 
-        Settings.setMapSource(sourceId);
+        Settings.setMapSource(mapSource);
+        currentSourceId = mapSource;
 
-        if (!mapRestartRequired) {
+        if (restartRequired) {
+            mapRestart();
+        } else if (mapView != null) {
             mapView.setMapSource();
         }
 
-        return mapRestartRequired;
+        return restartRequired;
+    }
+
+    /**
+     * Restart the current activity with the default map source.
+     */
+    private void mapRestart() {
+        // close old mapview
+        activity.finish();
+
+        // prepare information to restart a similar view
+        Intent mapIntent = new Intent(activity, Settings.getMapProvider().getMapClass());
+
+        mapIntent.putExtra(EXTRAS_SEARCH, searchIntent);
+        mapIntent.putExtra(EXTRAS_GEOCODE, geocodeIntent);
+        if (coordsIntent != null) {
+            mapIntent.putExtra(EXTRAS_LATITUDE, coordsIntent.getLatitude());
+            mapIntent.putExtra(EXTRAS_LONGITUDE, coordsIntent.getLongitude());
+        }
+        mapIntent.putExtra(EXTRAS_WPTTYPE, waypointTypeIntent != null ? waypointTypeIntent.id : null);
+        mapIntent.putExtra(EXTRAS_MAP_TITLE, mapTitle);
+
+        if (mapView != null) {
+            int[] mapState = new int[4];
+            GeoPointImpl mapCenter = mapView.getMapViewCenter();
+            mapState[0] = mapCenter.getLatitudeE6();
+            mapState[1] = mapCenter.getLongitudeE6();
+            mapState[2] = mapView.getMapZoomLevel();
+            mapState[3] = followMyLocation ? 1 : 0;
+            mapIntent.putExtra(EXTRAS_MAPSTATE, mapState);
+        }
+
+        // start the new map
+        activity.startActivity(mapIntent);
     }
 
     private void savePrefs() {
