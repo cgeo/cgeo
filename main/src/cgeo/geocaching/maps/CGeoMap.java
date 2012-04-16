@@ -95,8 +95,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     //Menu
     private static final String EXTRAS_GEOCODE = "geocode";
-    private static final String EXTRAS_LONGITUDE = "longitude";
-    private static final String EXTRAS_LATITUDE = "latitude";
+    private static final String EXTRAS_COORDS = "coords";
     private static final String EXTRAS_WPTTYPE = "wpttype";
     private static final String EXTRAS_MAPSTATE = "mapstate";
     private static final String EXTRAS_SEARCH = "search";
@@ -387,16 +386,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (extras != null) {
             searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
-            final double latitudeIntent = extras.getDouble(EXTRAS_LATITUDE);
-            final double longitudeIntent = extras.getDouble(EXTRAS_LONGITUDE);
-            coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
+            coordsIntent = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
             waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
-
-            if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
-                coordsIntent = null;
-            }
         }
 
         if (StringUtils.isBlank(mapTitle)) {
@@ -1687,8 +1680,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
         final Intent mapIntent = newIntent(fromActivity);
-        mapIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
-        mapIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
+        mapIntent.putExtra(EXTRAS_COORDS, coords);
         if (type != null) {
             mapIntent.putExtra(EXTRAS_WPTTYPE, type.id);
         }
