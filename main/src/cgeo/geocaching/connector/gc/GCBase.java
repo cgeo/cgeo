@@ -154,8 +154,8 @@ public class GCBase {
                     Bitmap bitmap = Tile.requestMapTile(GCConstants.URL_MAP_TILE, params, referer);
 
                     // Check bitmap size
-                    if (bitmap.getWidth() != Tile.TILE_SIZE ||
-                            bitmap.getHeight() != Tile.TILE_SIZE) {
+                    if (bitmap != null && (bitmap.getWidth() != Tile.TILE_SIZE ||
+                            bitmap.getHeight() != Tile.TILE_SIZE)) {
                         bitmap.recycle();
                         bitmap = null;
                     }
