@@ -100,6 +100,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final String EXTRAS_WPTTYPE = "wpttype";
     private static final String EXTRAS_MAPSTATE = "mapstate";
     private static final String EXTRAS_SEARCH = "search";
+    private static final String EXTRAS_MAP_TITLE = "mapTitle";
+
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
     private static final int MENU_STORE_CACHES = 3;
@@ -112,8 +114,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     private static final int MENU_CIRCLE_MODE = 6;
     private static final int MENU_AS_LIST = 7;
-
-    private static final String EXTRAS_MAP_TITLE = "mapTitle";
 
     private Resources res = null;
     private MapProvider mapProvider = null;
@@ -363,7 +363,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         res = this.getResources();
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
-        mapProvider = Settings.getMapProvider();
+        mapProvider = this.getMapProvider();
 
         // reset status
         noMapTokenShowed = false;
@@ -384,7 +384,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         // initialize map
         mapView = (MapViewImpl) activity.findViewById(mapProvider.getMapViewId());
-        mapView.setMapSource();
+        mapView.setMapSource(this.getMapSource());
         mapView.setBuiltInZoomControls(true);
         mapView.displayZoomControls(true);
         mapView.preLoad();
@@ -629,8 +629,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         return true;
     }
 
-    private static void addMapViewMenuItems(final Menu menu) {
-        MapProviderFactory.addMapviewMenuItems(menu, 1, Settings.getMapSource());
+    private void addMapViewMenuItems(final Menu menu) {
+        MapProviderFactory.addMapviewMenuItems(menu, 1, this.getMapSource());
         menu.setGroupCheckable(1, true, true);
     }
 
@@ -846,12 +846,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     private boolean switchMapSource(int sourceId) {
-        boolean mapRestartRequired = !MapProviderFactory.isSameProvider(Settings.getMapSource(), sourceId);
+        boolean mapRestartRequired = !MapProviderFactory.isSameProvider(this.getMapSource(), sourceId);
 
-        Settings.setMapSource(sourceId);
+        this.setMapSource(sourceId);
 
         if (!mapRestartRequired) {
-            mapView.setMapSource();
+            mapView.setMapSource(sourceId);
         }
 
         return mapRestartRequired;
