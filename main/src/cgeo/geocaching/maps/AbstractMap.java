@@ -68,4 +68,6 @@ public abstract class AbstractMap {
 
     public abstract void goManual(View view);
 
+    public abstract void onSaveInstanceState(final Bundle outState);
+
 }

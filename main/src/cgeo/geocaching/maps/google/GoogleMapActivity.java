@@ -36,6 +36,11 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl {
     }
 
     @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        mapBase.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onDestroy() {
         mapBase.onDestroy();
     }
