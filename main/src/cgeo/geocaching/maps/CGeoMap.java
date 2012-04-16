@@ -472,7 +472,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (null == mapStateIntent) {
             followMyLocation = live;
         } else {
-            followMyLocation = 1 == mapStateIntent[3] ? true : false;
+            followMyLocation = 1 == mapStateIntent[3];
         }
         if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
             centerMap(geocodeIntent, searchIntent, coordsIntent, mapStateIntent);
