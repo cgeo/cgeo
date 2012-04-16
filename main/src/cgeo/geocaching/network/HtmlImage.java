@@ -71,10 +71,10 @@ public class HtmlImage implements Html.ImageGetter {
             return new BitmapDrawable(getTransparent1x1Image());
         }
 
-        Bitmap imagePre = onlySave ? null : loadImageFromStorage(url);
+        Bitmap imagePre = loadImageFromStorage(url);
 
         // Download image and save it to the cache
-        if (imagePre == null || onlySave) {
+        if (imagePre == null) {
             final String absoluteURL = makeAbsoluteURL(url);
 
             if (absoluteURL != null) {
