@@ -43,7 +43,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 
@@ -171,15 +170,15 @@ public abstract class Network {
      * @param params
      * @return
      */
-    public static HttpResponse postRequest(final String uri, final List<? extends NameValuePair> params) {
+    public static HttpResponse postRequest(final String uri, final Parameters params) {
         try {
-            HttpPost request = new HttpPost(uri);
+            final HttpPost request = new HttpPost(uri);
             if (params != null) {
                 request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
             }
             request.setHeader("X-Requested-With", "XMLHttpRequest");
             return Network.request(request);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // Can be UnsupportedEncodingException, ClientProtocolException or IOException
             Log.e("postRequest", e);
             return null;
