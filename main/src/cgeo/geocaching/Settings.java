@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -439,6 +440,10 @@ public final class Settings {
         });
 
         return commitResult;
+    }
+
+    public static boolean isValidMapFile(final String mapFileIn) {
+        return MapsforgeMapProvider.isValidMapFile(mapFileIn);
     }
 
     public static coordInputFormatEnum getCoordInputFormat() {
