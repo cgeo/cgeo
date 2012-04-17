@@ -104,7 +104,7 @@ public class GCConnector extends AbstractConnector {
 
         cgBase.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
-        final String page = Network.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false);
+        final String page = Network.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
 
         if (StringUtils.isEmpty(page)) {
             final SearchResult search = new SearchResult();

@@ -1,6 +1,5 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.BaseUtils;
@@ -185,21 +184,6 @@ public abstract class Network {
             Log.e("postRequest", e);
             return null;
         }
-    }
-
-    /**
-     * GET HTTP request
-     *
-     * @param uri
-     *            the URI to request
-     * @param params
-     *            the parameters to add the the GET request
-     * @param my
-     * @param addF
-     * @return
-     */
-    public static HttpResponse request(final String uri, final Parameters params, boolean my, boolean addF) {
-        return Network.request(uri, cgBase.addFToParams(params, my, addF));
     }
 
     /**
@@ -394,17 +378,15 @@ public abstract class Network {
      * @param uri
      * @param params
      * @param xContentType
-     * @param my
-     * @param addF
      * @return
      */
-    public static String requestLogged(final String uri, final Parameters params, boolean my, boolean addF) {
-        HttpResponse response = request(uri, params, my, addF);
+    public static String requestLogged(final String uri, final Parameters params) {
+        HttpResponse response = request(uri, params);
         String data = getResponseData(response);
 
         if (!Login.getLoginStatus(data)) {
             if (Login.login() == StatusCode.NO_ERROR) {
-                response = request(uri, params, my, addF);
+                response = request(uri, params);
                 data = getResponseData(response);
             } else {
                 Log.i("Working as guest.");
