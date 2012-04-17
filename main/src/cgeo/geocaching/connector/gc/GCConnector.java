@@ -9,7 +9,6 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.network.Login;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;

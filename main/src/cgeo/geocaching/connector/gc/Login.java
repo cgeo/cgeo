@@ -1,10 +1,13 @@
-package cgeo.geocaching.network;
+package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
-import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 

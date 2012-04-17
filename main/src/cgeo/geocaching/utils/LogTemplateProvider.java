@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.network.Login;
+import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.network.Network;
 
 import org.apache.commons.lang3.StringUtils;

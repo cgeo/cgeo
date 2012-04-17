@@ -13,7 +13,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.network.Login;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.Formatter;

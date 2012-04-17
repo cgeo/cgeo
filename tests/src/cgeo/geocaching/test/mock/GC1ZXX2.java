@@ -1,10 +1,10 @@
 package cgeo.geocaching.test.mock;
 
+import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.network.Login;
 
 import java.text.ParseException;
 import java.util.Arrays;

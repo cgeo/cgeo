@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -12,7 +13,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.network.Login;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 

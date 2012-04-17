@@ -4,7 +4,6 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.network.Login;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
