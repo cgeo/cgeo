@@ -208,12 +208,12 @@ public class Tile {
 
     /** Request JSON informations for a tile */
     public static String requestMapInfo(final String url, final Parameters params, final String referer) {
-        return Network.getResponseData(Network.request(url, params, new Parameters("Referer", referer)));
+        return Network.getResponseData(Network.getRequest(url, params, new Parameters("Referer", referer)));
     }
 
     /** Request .png image for a tile. */
     public static Bitmap requestMapTile(final String url, final Parameters params, final String referer) {
-        final HttpResponse response = Network.request(url, params, new Parameters("Referer", referer));
+        final HttpResponse response = Network.getRequest(url, params, new Parameters("Referer", referer));
         try {
             return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
         } catch (IOException e) {

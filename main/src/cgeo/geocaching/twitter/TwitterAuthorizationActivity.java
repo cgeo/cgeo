@@ -141,7 +141,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
         try {
             final Parameters params = new Parameters();
             OAuth.signOAuth(host, pathRequest, method, true, params, null, null);
-            final String line = Network.getResponseData(Network.request("https://" + host + pathRequest, params));
+            final String line = Network.getResponseData(Network.getRequest("https://" + host + pathRequest, params));
 
 
             if (StringUtils.isNotBlank(line)) {

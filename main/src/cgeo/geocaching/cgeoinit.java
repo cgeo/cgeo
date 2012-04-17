@@ -864,7 +864,7 @@ public class cgeoinit extends AbstractActivity {
                     final String cod = StringUtils.defaultString(deviceCode);
 
                     final Parameters params = new Parameters("name", nam, "code", cod);
-                    HttpResponse response = Network.request("http://send2.cgeo.org/auth.html", params);
+                    HttpResponse response = Network.getRequest("http://send2.cgeo.org/auth.html", params);
 
                     if (response != null && response.getStatusLine().getStatusCode() == 200)
                     {

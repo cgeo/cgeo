@@ -50,7 +50,7 @@ public class StaticMapsProvider {
         if (waypoints != null) {
             params.addAll(waypoints);
         }
-        final HttpResponse httpResponse = Network.request(mapUrl, params);
+        final HttpResponse httpResponse = Network.getRequest(mapUrl, params);
 
         if (httpResponse != null) {
             final File file = getMapFile(cache.getGeocode(), prefix, level, true);

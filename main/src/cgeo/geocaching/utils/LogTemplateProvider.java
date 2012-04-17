@@ -89,7 +89,7 @@ public class LogTemplateProvider {
                                 if (offline) {
                                     return "";
                                 }
-                                final String page = Network.getResponseData(Network.request("http://www.geocaching.com/email/"));
+                                final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/"));
                                 current = parseFindCount(page);
                             }
 

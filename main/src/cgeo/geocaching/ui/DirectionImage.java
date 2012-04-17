@@ -17,7 +17,7 @@ public class DirectionImage {
         }
 
         final HttpResponse httpResponse =
-                Network.request("http://www.geocaching.com/ImgGen/seek/CacheDir.ashx", new Parameters("k", code));
+                Network.getRequest("http://www.geocaching.com/ImgGen/seek/CacheDir.ashx", new Parameters("k", code));
         if (httpResponse != null) {
             LocalStorage.saveEntityToFile(httpResponse, getDirectionFile(geocode, true));
         }

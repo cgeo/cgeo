@@ -197,7 +197,7 @@ public abstract class Network {
      *            the headers to add to the GET request
      * @return the HTTP response
      */
-    public static HttpResponse request(final String uri, final Parameters params, final Parameters headers) {
+    public static HttpResponse getRequest(final String uri, final Parameters params, final Parameters headers) {
         final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
         final HttpRequestBase request = new HttpGet(fullUri);
 
@@ -222,20 +222,20 @@ public abstract class Network {
      *            the name of the file storing the cached resource, or null not to use one
      * @return the HTTP response
      */
-    public static HttpResponse request(final String uri, final Parameters params, final File cacheFile) {
+    public static HttpResponse getRequest(final String uri, final Parameters params, final File cacheFile) {
         if (cacheFile != null && cacheFile.exists()) {
             final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
             if (etag != null) {
-                return request(uri, params, new Parameters("If-None-Match", etag));
+                return getRequest(uri, params, new Parameters("If-None-Match", etag));
             } else {
                 final String lastModified = LocalStorage.getSavedHeader(cacheFile, "last-modified");
                 if (lastModified != null) {
-                    return request(uri, params, new Parameters("If-Modified-Since", lastModified));
+                    return getRequest(uri, params, new Parameters("If-Modified-Since", lastModified));
                 }
             }
         }
 
-        return request(uri, params, (Parameters) null);
+        return getRequest(uri, params, (Parameters) null);
     }
 
     /**
@@ -247,8 +247,8 @@ public abstract class Network {
      *            the parameters to add the the GET request
      * @return the HTTP response
      */
-    public static HttpResponse request(final String uri, final Parameters params) {
-        return request(uri, params, (Parameters) null);
+    public static HttpResponse getRequest(final String uri, final Parameters params) {
+        return getRequest(uri, params, (Parameters) null);
     }
 
     /**
@@ -258,8 +258,8 @@ public abstract class Network {
      *            the URI to request
      * @return the HTTP response
      */
-    public static HttpResponse request(final String uri) {
-        return request(uri, null, (Parameters) null);
+    public static HttpResponse getRequest(final String uri) {
+        return getRequest(uri, null, (Parameters) null);
     }
 
     public static HttpResponse request(final HttpRequestBase request) {
@@ -377,17 +377,14 @@ public abstract class Network {
      *
      * @param uri
      * @param params
-     * @param xContentType
      * @return
      */
-    public static String requestLogged(final String uri, final Parameters params) {
-        HttpResponse response = request(uri, params);
-        String data = getResponseData(response);
+    public static String getRequestLogged(final String uri, final Parameters params) {
+        final String data = getResponseData(getRequest(uri, params));
 
         if (!Login.getLoginStatus(data)) {
             if (Login.login() == StatusCode.NO_ERROR) {
-                response = request(uri, params);
-                data = getResponseData(response);
+                return getResponseData(getRequest(uri, params));
             } else {
                 Log.i("Working as guest.");
             }
