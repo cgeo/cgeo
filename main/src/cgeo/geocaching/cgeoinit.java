@@ -7,6 +7,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Login;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -822,7 +823,7 @@ public class cgeoinit extends AbstractActivity {
             loginDialog.setCancelable(false);
 
             Settings.setLogin(username, password);
-            Network.clearCookies();
+            Cookies.clearCookies();
 
             (new Thread() {
 

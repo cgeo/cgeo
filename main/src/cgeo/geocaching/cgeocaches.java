@@ -17,6 +17,7 @@ import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sorting.CacheComparator;
@@ -186,14 +187,14 @@ public class cgeocaches extends AbstractListActivity {
                     dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            Network.clearCookies();
+                            Cookies.clearCookies();
                             dialog.cancel();
                         }
                     });
                     dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            Network.clearCookies();
+                            Cookies.clearCookies();
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
                         }
                     });

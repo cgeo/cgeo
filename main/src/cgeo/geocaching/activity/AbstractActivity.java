@@ -6,7 +6,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Cookies;
 
 import android.app.Activity;
 import android.content.Context;
@@ -88,7 +88,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         cgBase.initialize(app);
 
         // Restore cookie store if needed
-        Network.restoreCookieStore(Settings.getCookieStore());
+        Cookies.restoreCookieStore(Settings.getCookieStore());
 
         ActivityMixin.keepScreenOn(this, keepScreenOn);
     }
@@ -131,7 +131,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 
     /**
      * insert text into the EditText at the current cursor position
-     * 
+     *
      * @param editText
      * @param insertText
      * @param moveCursor

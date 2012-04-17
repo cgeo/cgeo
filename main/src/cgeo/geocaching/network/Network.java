@@ -15,17 +15,13 @@ import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.HttpEntityWrapper;
-import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.CoreProtocolPNames;
@@ -72,8 +68,6 @@ public abstract class Network {
     private static final String PATTERN_PASSWORD = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
     private final static HttpParams clientParams = new BasicHttpParams();
-    private static boolean cookieStoreRestored = false;
-    private final static CookieStore cookieStore = new BasicCookieStore();
 
     static {
         Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
@@ -87,7 +81,7 @@ public abstract class Network {
 
     private static HttpClient getHttpClient() {
         final DefaultHttpClient client = new DefaultHttpClient();
-        client.setCookieStore(cookieStore);
+        client.setCookieStore(Cookies.cookieStore);
         client.setParams(clientParams);
 
         client.addRequestInterceptor(new HttpRequestInterceptor() {
@@ -126,40 +120,6 @@ public abstract class Network {
         });
 
         return client;
-    }
-
-    public static void restoreCookieStore(final String oldCookies) {
-        if (!cookieStoreRestored) {
-            Network.clearCookies();
-            if (oldCookies != null) {
-                for (final String cookie : StringUtils.split(oldCookies, ';')) {
-                    final String[] split = StringUtils.split(cookie, "=", 3);
-                    if (split.length == 3) {
-                        final BasicClientCookie newCookie = new BasicClientCookie(split[0], split[1]);
-                        newCookie.setDomain(split[2]);
-                        cookieStore.addCookie(newCookie);
-                    }
-                }
-            }
-            cookieStoreRestored = true;
-        }
-    }
-
-    public static String dumpCookieStore() {
-        StringBuilder cookies = new StringBuilder();
-        for (final Cookie cookie : cookieStore.getCookies()) {
-            cookies.append(cookie.getName());
-            cookies.append('=');
-            cookies.append(cookie.getValue());
-            cookies.append('=');
-            cookies.append(cookie.getDomain());
-            cookies.append(';');
-        }
-        return cookies.toString();
-    }
-
-    public static void clearCookies() {
-        cookieStore.clear();
     }
 
     /**

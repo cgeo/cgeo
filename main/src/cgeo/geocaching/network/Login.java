@@ -86,7 +86,7 @@ public abstract class Login {
             return StatusCode.NO_ERROR; // logged in
         }
 
-        Network.clearCookies();
+        Cookies.clearCookies();
         Settings.setCookieStore(null);
 
         final Parameters params = new Parameters(
@@ -111,7 +111,7 @@ public abstract class Login {
                 Log.i("Successfully logged in Geocaching.com as " + login.left);
 
                 Login.switchToEnglish(loginData);
-                Settings.setCookieStore(Network.dumpCookieStore());
+                Settings.setCookieStore(Cookies.dumpCookieStore());
 
                 return StatusCode.NO_ERROR; // logged in
             } else {
@@ -137,7 +137,7 @@ public abstract class Login {
             return StatusCode.MAINTENANCE;
         }
 
-        Network.clearCookies();
+        Cookies.clearCookies();
         Settings.setCookieStore(null);
         return StatusCode.NO_ERROR;
     }
