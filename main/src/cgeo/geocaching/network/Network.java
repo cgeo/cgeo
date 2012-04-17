@@ -175,7 +175,6 @@ public abstract class Network {
             if (params != null) {
                 request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
             }
-            request.setHeader("X-Requested-With", "XMLHttpRequest");
             return Network.request(request);
         } catch (final Exception e) {
             // Can be UnsupportedEncodingException, ClientProtocolException or IOException
@@ -199,7 +198,6 @@ public abstract class Network {
         final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
         final HttpRequestBase request = new HttpGet(fullUri);
 
-        request.setHeader("X-Requested-With", "XMLHttpRequest");
         if (headers != null) {
             for (final NameValuePair header : headers) {
                 request.setHeader(header.getName(), header.getValue());
@@ -263,6 +261,7 @@ public abstract class Network {
     public static HttpResponse request(final HttpRequestBase request) {
         request.setHeader("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
         request.setHeader("Accept-Language", "en-US,*;q=0.9");
+        request.setHeader("X-Requested-With", "XMLHttpRequest");
         request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, USER_AGENT);
 
         final String reqLogStr = request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
