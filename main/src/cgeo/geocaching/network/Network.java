@@ -307,7 +307,7 @@ public abstract class Network {
 
     public static JSONObject requestJSON(final String uri, final Parameters params) {
         final HttpResponse response = getRequest(uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"));
-        if (response != null && response.getStatusLine().getStatusCode() == 200) {
+        if (isSuccess(response)) {
             try {
                 return new JSONObject(Network.getResponseData(response));
             } catch (final JSONException e) {
