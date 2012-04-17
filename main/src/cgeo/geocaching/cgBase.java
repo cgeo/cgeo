@@ -1359,7 +1359,7 @@ public class cgBase {
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
         final String fullUri = uri + "?" + addFToParams(params, false, true);
-        final String page = Network.getRequestLogged(uri, addFToParams(params, my, true));
+        final String page = Login.getRequestLogged(uri, addFToParams(params, my, true));
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgeoBase.searchByAny: No data from server");
@@ -1439,7 +1439,7 @@ public class cgBase {
             params.put("id", id);
         }
 
-        final String page = Network.getRequestLogged("http://www.geocaching.com/track/details.aspx", params);
+        final String page = Login.getRequestLogged("http://www.geocaching.com/track/details.aspx", params);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgeoBase.searchTrackable: No data from server");
@@ -1691,7 +1691,7 @@ public class cgBase {
      */
     public static int addToWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
-        String page = Network.postRequestLogged(uri);
+        String page = Login.postRequestLogged(uri);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgBase.addToWatchlist: No data from server");
@@ -1717,7 +1717,7 @@ public class cgBase {
      */
     public static int removeFromWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
-        String page = Network.postRequestLogged(uri);
+        String page = Login.postRequestLogged(uri);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgBase.removeFromWatchlist: No data from server");

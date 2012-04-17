@@ -9,7 +9,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Login;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
@@ -104,7 +104,7 @@ public class GCConnector extends AbstractConnector {
 
         cgBase.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
-        final String page = Network.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
+        final String page = Login.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
 
         if (StringUtils.isEmpty(page)) {
             final SearchResult search = new SearchResult();

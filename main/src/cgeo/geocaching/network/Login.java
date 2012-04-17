@@ -378,4 +378,45 @@ public abstract class Login {
         putViewstates(params, getViewstates(page));
     }
 
+    /**
+     * POST HTTP request. Do the request a second time if the user is not logged in
+     *
+     * @param uri
+     * @return
+     */
+    public static String postRequestLogged(final String uri) {
+        HttpResponse response = Network.postRequest(uri, null);
+        String data = Network.getResponseData(response);
+
+        if (!getLoginStatus(data)) {
+            if (login() == StatusCode.NO_ERROR) {
+                response = Network.postRequest(uri, null);
+                data = Network.getResponseData(response);
+            } else {
+                Log.i("Working as guest.");
+            }
+        }
+        return data;
+    }
+
+    /**
+     * GET HTTP request. Do the request a second time if the user is not logged in
+     *
+     * @param uri
+     * @param params
+     * @return
+     */
+    public static String getRequestLogged(final String uri, final Parameters params) {
+        final String data = Network.getResponseData(Network.getRequest(uri, params));
+
+        if (!getLoginStatus(data)) {
+            if (login() == StatusCode.NO_ERROR) {
+                return Network.getResponseData(Network.getRequest(uri, params));
+            } else {
+                Log.i("Working as guest.");
+            }
+        }
+        return data;
+    }
+
 }

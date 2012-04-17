@@ -1,6 +1,5 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
@@ -39,7 +38,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.zip.GZIPInputStream;
-
 
 public abstract class Network {
 
@@ -289,52 +287,11 @@ public abstract class Network {
         return Network.getResponseData(response, true);
     }
 
-    static public String getResponseData(final HttpResponse response, boolean replaceWhitespace) {
+    public static String getResponseData(final HttpResponse response, boolean replaceWhitespace) {
         if (!isSuccess(response)) {
             return null;
         }
         return getResponseDataNoError(response, replaceWhitespace);
-    }
-
-    /**
-     * POST HTTP request. Do the request a second time if the user is not logged in
-     *
-     * @param uri
-     * @return
-     */
-    public static String postRequestLogged(final String uri) {
-        HttpResponse response = postRequest(uri, null);
-        String data = getResponseData(response);
-
-        if (!Login.getLoginStatus(data)) {
-            if (Login.login() == StatusCode.NO_ERROR) {
-                response = postRequest(uri, null);
-                data = getResponseData(response);
-            } else {
-                Log.i("Working as guest.");
-            }
-        }
-        return data;
-    }
-
-    /**
-     * GET HTTP request. Do the request a second time if the user is not logged in
-     *
-     * @param uri
-     * @param params
-     * @return
-     */
-    public static String getRequestLogged(final String uri, final Parameters params) {
-        final String data = getResponseData(getRequest(uri, params));
-
-        if (!Login.getLoginStatus(data)) {
-            if (Login.login() == StatusCode.NO_ERROR) {
-                return getResponseData(getRequest(uri, params));
-            } else {
-                Log.i("Working as guest.");
-            }
-        }
-        return data;
     }
 
     public static String urlencode_rfc3986(String text) {
