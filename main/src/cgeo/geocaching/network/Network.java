@@ -302,7 +302,7 @@ public abstract class Network {
     }
 
     static public boolean isSuccess(final HttpResponse response) {
-        return response != null && response.getStatusLine().getStatusCode() == 200;
+        return response.getStatusLine().getStatusCode() == 200;
     }
 
     public static JSONObject requestJSON(final String uri, final Parameters params) {
