@@ -5,7 +5,6 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
@@ -315,10 +314,6 @@ public abstract class Network {
         }
 
         return null;
-    }
-
-    private static String prepareParameters(final String baseUri, final Parameters params) {
-        return CollectionUtils.isNotEmpty(params) ? baseUri + "?" + params.toString() : baseUri;
     }
 
     private static String getResponseDataNoError(final HttpResponse response, boolean replaceWhitespace) {
