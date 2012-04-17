@@ -579,7 +579,7 @@ public class CacheDetailActivity extends AbstractActivity {
             cache.openInBrowser(this);
             return true;
         } else if (menuItem == MENU_CACHES_AROUND) {
-            cachesAround();
+            cgeocaches.startActivityCachesAround(this, cache.getCoords());
             return true;
         } else if (menuItem == MENU_CALENDAR) {
             addToCalendarWithIntent();
@@ -775,17 +775,6 @@ public class CacheDetailActivity extends AbstractActivity {
             search = cgBase.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
             handler.sendMessage(Message.obtain());
         }
-    }
-
-    /**
-     * Starts activity to search for caches near this cache.
-     *
-     * Also finishes this activity.
-     */
-    private void cachesAround() {
-        cgeocaches.startActivityCachesAround(this, cache.getCoords());
-
-        finish();
     }
 
     private void addToCalendarWithIntent() {
