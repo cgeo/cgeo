@@ -266,15 +266,12 @@ public abstract class Network {
         request.setHeader("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
         request.setHeader("Accept-Language", "en-US,*;q=0.9");
         request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, USER_AGENT);
-        return Network.doRequest(request);
-    }
 
-    private static HttpResponse doRequest(final HttpRequestBase request) {
-        final String reqLogStr = request.getMethod() + " " + hidePassword(request.getURI().toString());
+        final String reqLogStr = request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
         Log.d(reqLogStr);
 
-        final HttpClient client = getHttpClient();
-        for (int i = 0; i <= NB_DOWNLOAD_RETRIES; i++) {
+        final HttpClient client = Network.getHttpClient();
+        for (int i = 0; i <= Network.NB_DOWNLOAD_RETRIES; i++) {
             final long before = System.currentTimeMillis();
             try {
                 final HttpResponse response = client.execute(request);
@@ -287,8 +284,8 @@ public abstract class Network {
                 return response;
             } catch (IOException e) {
                 final String timeSpan = Network.formatTimeSpan(before);
-                final String tries = (i + 1) + "/" + (NB_DOWNLOAD_RETRIES + 1);
-                if (i == NB_DOWNLOAD_RETRIES) {
+                final String tries = (i + 1) + "/" + (Network.NB_DOWNLOAD_RETRIES + 1);
+                if (i == Network.NB_DOWNLOAD_RETRIES) {
                     Log.e("Failure " + tries + timeSpan + reqLogStr, e);
                 } else {
                     Log.e("Failure " + tries + " (" + e.toString() + ")" + timeSpan + "- retrying " + reqLogStr);
@@ -309,16 +306,11 @@ public abstract class Network {
     }
 
     public static JSONObject requestJSON(final String uri, final Parameters params) {
-        final HttpGet request = new HttpGet(Network.prepareParameters(uri, params));
-        request.setHeader("Accept", "application/json, text/javascript, */*; q=0.01");
-        request.setHeader("Content-Type", "application/json; charset=UTF-8");
-        request.setHeader("X-Requested-With", "XMLHttpRequest");
-
-        final HttpResponse response = doRequest(request);
+        final HttpResponse response = getRequest(uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"));
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
             try {
                 return new JSONObject(Network.getResponseData(response));
-            } catch (JSONException e) {
+            } catch (final JSONException e) {
                 Log.e("Network.requestJSON", e);
             }
         }
