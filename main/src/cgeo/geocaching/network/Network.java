@@ -36,6 +36,7 @@ import android.net.Uri;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.zip.GZIPInputStream;
 
@@ -128,99 +129,49 @@ public abstract class Network {
      * @return
      */
     public static HttpResponse postRequest(final String uri, final Parameters params) {
-        try {
-            final HttpPost request = new HttpPost(uri);
-            if (params != null) {
-                request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-            }
-            return Network.request(request);
-        } catch (final Exception e) {
-            // Can be UnsupportedEncodingException, ClientProtocolException or IOException
-            Log.e("postRequest", e);
-            return null;
-        }
+        return request("POST", uri, params, null, null);
     }
 
     /**
-     * GET HTTP request
+     * Make an HTTP request
      *
+     * @param method
+     *            the HTTP method to use ("GET" or "POST")
      * @param uri
      *            the URI to request
      * @param params
      *            the parameters to add the the GET request
      * @param headers
      *            the headers to add to the GET request
-     * @return the HTTP response
-     */
-    public static HttpResponse getRequest(final String uri, final Parameters params, final Parameters headers) {
-        final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
-        final HttpRequestBase request = new HttpGet(fullUri);
-
-        if (headers != null) {
-            for (final NameValuePair header : headers) {
-                request.setHeader(header.getName(), header.getValue());
-            }
-        }
-
-        return Network.request(request);
-    }
-
-    /**
-     * GET HTTP request
-     *
-     * @param uri
-     *            the URI to request
-     * @param params
-     *            the parameters to add the the GET request
      * @param cacheFile
-     *            the name of the file storing the cached resource, or null not to use one
-     * @return the HTTP response
+     *            the cache file used to cache this query
+     * @return the HTTP response, or null in case of an encoding error in a POST request arguments
      */
-    public static HttpResponse getRequest(final String uri, final Parameters params, final File cacheFile) {
-        if (cacheFile != null && cacheFile.exists()) {
-            final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
-            if (etag != null) {
-                return getRequest(uri, params, new Parameters("If-None-Match", etag));
-            } else {
-                final String lastModified = LocalStorage.getSavedHeader(cacheFile, "last-modified");
-                if (lastModified != null) {
-                    return getRequest(uri, params, new Parameters("If-Modified-Since", lastModified));
+    private static HttpResponse request(final String method, final String uri, final Parameters params, final Parameters headers, final File cacheFile) {
+        HttpRequestBase request;
+        if (method.equals("GET")) {
+            final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
+            request = new HttpGet(fullUri);
+        } else {
+            request = new HttpPost(uri);
+            if (params != null) {
+                try {
+                    ((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+                } catch (final UnsupportedEncodingException e) {
+                    Log.e("request", e);
+                    return null;
                 }
             }
         }
 
-        return getRequest(uri, params, (Parameters) null);
-    }
+        for (final NameValuePair header : Parameters.extend(Parameters.merge(headers, cacheHeaders(cacheFile)),
+                "Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7",
+                "Accept-Language", "en-US,*;q=0.9",
+                "X-Requested-With", "XMLHttpRequest")) {
+            request.setHeader(header.getName(), header.getValue());
+        }
 
-    /**
-     * GET HTTP request
-     *
-     * @param uri
-     *            the URI to request
-     * @param params
-     *            the parameters to add the the GET request
-     * @return the HTTP response
-     */
-    public static HttpResponse getRequest(final String uri, final Parameters params) {
-        return getRequest(uri, params, (Parameters) null);
-    }
-
-    /**
-     * GET HTTP request
-     *
-     * @param uri
-     *            the URI to request
-     * @return the HTTP response
-     */
-    public static HttpResponse getRequest(final String uri) {
-        return getRequest(uri, null, (Parameters) null);
-    }
-
-    public static HttpResponse request(final HttpRequestBase request) {
-        request.setHeader("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
-        request.setHeader("Accept-Language", "en-US,*;q=0.9");
-        request.setHeader("X-Requested-With", "XMLHttpRequest");
-        request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, USER_AGENT);
+        request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.USER_AGENT);
 
         final String reqLogStr = request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
         Log.d(reqLogStr);
@@ -251,6 +202,76 @@ public abstract class Network {
         return null;
     }
 
+    private static Parameters cacheHeaders(final File cacheFile) {
+        if (cacheFile != null && cacheFile.exists()) {
+            final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
+            if (etag != null) {
+                return new Parameters("If-None-Match", etag);
+            } else {
+                final String lastModified = LocalStorage.getSavedHeader(cacheFile, "last-modified");
+                if (lastModified != null) {
+                    return new Parameters("If-Modified-Since", lastModified);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * GET HTTP request
+     *
+     * @param uri
+     *            the URI to request
+     * @param params
+     *            the parameters to add the the GET request
+     * @param cacheFile
+     *            the name of the file storing the cached resource, or null not to use one
+     * @return the HTTP response
+     */
+    public static HttpResponse getRequest(final String uri, final Parameters params, final File cacheFile) {
+        return request("GET", uri, params, null, cacheFile);
+    }
+
+
+    /**
+     * GET HTTP request
+     *
+     * @param uri
+     *            the URI to request
+     * @param params
+     *            the parameters to add the the GET request
+     * @return the HTTP response
+     */
+    public static HttpResponse getRequest(final String uri, final Parameters params) {
+        return request("GET", uri, params, null, null);
+    }
+
+    /**
+     * GET HTTP request
+     *
+     * @param uri
+     *            the URI to request
+     * @param params
+     *            the parameters to add the the GET request
+     * @param headers
+     *            the headers to add to the GET request
+     * @return the HTTP response
+     */
+    public static HttpResponse getRequest(final String uri, final Parameters params, final Parameters headers) {
+        return request("GET", uri, params, headers, null);
+    }
+
+    /**
+     * GET HTTP request
+     *
+     * @param uri
+     *            the URI to request
+     * @return the HTTP response
+     */
+    public static HttpResponse getRequest(final String uri) {
+        return request("GET", uri, null, null, null);
+    }
+
     private static String formatTimeSpan(final long before) {
         // don't use String.format in a pure logging routine, it has very bad performance
         return " (" + (System.currentTimeMillis() - before) + " ms) ";
@@ -261,7 +282,7 @@ public abstract class Network {
     }
 
     public static JSONObject requestJSON(final String uri, final Parameters params) {
-        final HttpResponse response = getRequest(uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"));
+        final HttpResponse response = request("GET", uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"), null);
         if (isSuccess(response)) {
             try {
                 return new JSONObject(Network.getResponseData(response));
