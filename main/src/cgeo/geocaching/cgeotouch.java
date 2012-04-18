@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -8,6 +9,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DateDialog;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -63,7 +65,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
                 setType((LogType) msg.obj);
                 showToast(res.getString(R.string.info_log_type_changed));
             } else {
-                if (cgBase.isEmpty(viewstates) && attempts < 2) {
+                if (Login.isEmpty(viewstates) && attempts < 2) {
                     showToast(res.getString(R.string.err_log_load_data_again));
 
                     loadData thread;
@@ -71,7 +73,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
                     thread.start();
 
                     return;
-                } else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
+                } else if (Login.isEmpty(viewstates) && attempts >= 2) {
                     showToast(res.getString(R.string.err_log_load_data));
                     showProgress(false);
 
@@ -203,8 +205,8 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
             textContent = text.getText().toString();
 
             final long now = System.currentTimeMillis();
-            dateString = cgBase.formatDate(now);
-            timeString = cgBase.formatTime(now);
+            dateString = Formatter.formatDate(now);
+            timeString = Formatter.formatTime(now);
 
             if ((id & 0x4) == 0x4) {
                 addText += dateString;
@@ -287,7 +289,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         });
 
         Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
         dateButton.setOnClickListener(new cgeotouchDateListener());
 
         if (tweetBox == null) {
@@ -299,7 +301,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         tweetCheck.setChecked(true);
 
         Button buttonPost = (Button) findViewById(R.id.post);
-        if (cgBase.isEmpty(viewstates)) {
+        if (Login.isEmpty(viewstates)) {
             buttonPost.setEnabled(false);
             buttonPost.setOnTouchListener(null);
             buttonPost.setOnClickListener(null);
@@ -319,7 +321,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         date = dateIn;
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
     }
 
     public void setType(LogType type) {
@@ -396,7 +398,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
 
                 viewstates = Login.getViewstates(page);
 
-                final List<LogType> typesPre = cgBase.parseTypes(page);
+                final List<LogType> typesPre = GCParser.parseTypes(page);
                 if (typesPre.size() > 0) {
                     logTypes.clear();
                     logTypes.addAll(typesPre);
@@ -442,7 +444,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
                 tweetCheck = (CheckBox) findViewById(R.id.tweet);
             }
 
-            final StatusCode status = cgBase.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
+            final StatusCode status = GCParser.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
 
             if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
                     Settings.isTwitterLoginValid() &&

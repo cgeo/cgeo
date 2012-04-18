@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.BaseUtils;
@@ -9,7 +10,7 @@ import java.util.List;
 public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 
     public void testLogPageWithTrackables() {
-        List<cgTrackableLog> tbLogs = cgBase.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
+        List<cgTrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
         assertNotNull(tbLogs);
         assertEquals(2, tbLogs.size());
         cgTrackableLog log = tbLogs.get(0);
@@ -18,7 +19,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testLogPageWithoutTrackables() {
-        List<cgTrackableLog> tbLogs = cgBase.parseTrackableLog(getFileContent(R.raw.log_without_tb));
+        List<cgTrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_without_tb));
         assertNotNull(tbLogs);
         assertEquals(0, tbLogs.size());
     }
@@ -53,7 +54,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseTrackableWithoutReleaseDate() {
-        cgTrackable trackable = cgBase.parseTrackable(getFileContent(R.raw.tb14wfv), null, null);
+        cgTrackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb14wfv), null, null);
         assertNotNull(trackable);
         assertEquals("The Brickster", trackable.getName());
         assertEquals("Adrian C", trackable.getOwner());
@@ -66,11 +67,11 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private cgTrackable getTB2R124() {
-        return cgBase.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tb2r124)), null, null);
+        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tb2r124)), null, null);
     }
 
     private cgTrackable getTBXATG() {
-        return cgBase.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tbxatg)), null, null);
+        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tbxatg)), null, null);
     }
 
 }

@@ -1,6 +1,5 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgeoapplication;
 
 import android.test.ApplicationTestCase;
@@ -17,6 +16,5 @@ public abstract class AbstractFilterTestCase extends ApplicationTestCase<cgeoapp
 
         // init environment
         createApplication();
-        cgBase.initialize(getApplication());
     }
 }

@@ -1,8 +1,10 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -155,7 +157,7 @@ public class cgeotrackable extends AbstractActivity {
 
                 // trackable released
                 if (trackable.getReleased() != null) {
-                    addDetail(R.string.trackable_released, cgBase.formatDate(trackable.getReleased().getTime()));
+                    addDetail(R.string.trackable_released, Formatter.formatDate(trackable.getReleased().getTime()));
                 }
 
                 // trackable distance
@@ -428,7 +430,7 @@ public class cgeotrackable extends AbstractActivity {
             trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
 
             if ((trackable == null || trackable.isLoggable()) && !StringUtils.startsWithIgnoreCase(geocode, "GK")) {
-                trackable = cgBase.searchTrackable(geocode, guid, id);
+                trackable = GCParser.searchTrackable(geocode, guid, id);
             }
             handler.sendMessage(Message.obtain());
         }
@@ -446,7 +448,7 @@ public class cgeotrackable extends AbstractActivity {
                 rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logs_item, null);
 
                 if (log.date > 0) {
-                    ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
+                    ((TextView) rowView.findViewById(R.id.added)).setText(Formatter.formatShortDate(log.date));
                 }
 
                 ((TextView) rowView.findViewById(R.id.type)).setText(log.type.getL10n());

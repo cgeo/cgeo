@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -13,6 +14,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DateDialog;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
@@ -88,13 +90,13 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 showToast(res.getString(R.string.info_log_type_changed));
             }
 
-            if (cgBase.isEmpty(viewstates) && attempts < 2) {
+            if (Login.isEmpty(viewstates) && attempts < 2) {
                 final LoadDataThread thread;
                 thread = new LoadDataThread();
                 thread.start();
 
                 return;
-            } else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
+            } else if (Login.isEmpty(viewstates) && attempts >= 2) {
                 showToast(res.getString(R.string.err_log_load_data));
                 showProgress(false);
 
@@ -507,7 +509,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         });
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
         dateButton.setOnClickListener(new DateListener());
 
         final EditText logView = (EditText) findViewById(R.id.log);
@@ -522,7 +524,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             lastState.restore(this);
         }
 
-        if (cgBase.isEmpty(viewstates)) {
+        if (Login.isEmpty(viewstates)) {
             enablePostButton(false);
             new LoadDataThread().start();
         } else {
@@ -545,7 +547,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         date = dateIn;
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
     }
 
     public void setType(LogType type) {
@@ -609,7 +611,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             setType(typeSelected);
 
             final Button dateButton = (Button) findViewById(R.id.date);
-            dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
+            dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
             dateButton.setOnClickListener(new DateListener());
 
             final EditText logView = (EditText) findViewById(R.id.log);
@@ -659,9 +661,9 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/seek/log.aspx", params));
 
                 viewstates = Login.getViewstates(page);
-                trackables = cgBase.parseTrackableLog(page);
+                trackables = GCParser.parseTrackableLog(page);
 
-                final List<LogType> typesPre = cgBase.parseTypes(page);
+                final List<LogType> typesPre = GCParser.parseTypes(page);
                 if (CollectionUtils.isNotEmpty(typesPre)) {
                     possibleLogTypes.clear();
                     possibleLogTypes.addAll(typesPre);
@@ -695,7 +697,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     public StatusCode postLogFn(String log) {
         try {
-            final StatusCode status = cgBase.postLog(geocode, cacheid, viewstates, typeSelected,
+            final StatusCode status = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackables);
 

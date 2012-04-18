@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -101,7 +100,7 @@ public class GCConnector extends AbstractConnector {
         params.put("log", "y");
         params.put("numlogs", String.valueOf(GCConstants.NUMBER_OF_LOGS));
 
-        cgBase.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
+        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
         final String page = Login.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
 
@@ -124,7 +123,7 @@ public class GCConnector extends AbstractConnector {
             return search;
         }
 
-        final SearchResult searchResult = cgBase.parseCache(page, handler);
+        final SearchResult searchResult = GCParser.parseCache(page, handler);
 
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e("cgeoBase.searchByGeocode: No cache parsed");

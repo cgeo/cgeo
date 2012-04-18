@@ -2,7 +2,6 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -84,8 +83,6 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         // init
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
-
-        cgBase.initialize(app);
 
         // Restore cookie store if needed
         Cookies.restoreCookieStore(Settings.getCookieStore());

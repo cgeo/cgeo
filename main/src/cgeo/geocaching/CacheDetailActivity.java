@@ -7,6 +7,7 @@ import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
@@ -38,6 +39,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -606,7 +609,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private class LoadCacheHandler extends CancellableHandler {
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
                 if (search == null) {
@@ -772,14 +775,43 @@ public class CacheDetailActivity extends AbstractActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
+            search = cgCache.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
             handler.sendMessage(Message.obtain());
         }
     }
 
+    /**
+     * Indicates whether the specified action can be used as an intent. This
+     * method queries the package manager for installed packages that can
+     * respond to an intent with the specified action. If no suitable package is
+     * found, this method returns false.
+     *
+     * @param context
+     *            The application's environment.
+     * @param action
+     *            The Intent action to check for availability.
+     * @param uri
+     *            The Intent URI to check for availability.
+     *
+     * @return True if an Intent with the specified action can be sent and
+     *         responded to, false otherwise.
+     */
+    private static boolean isIntentAvailable(Context context, String action, Uri uri) {
+        final PackageManager packageManager = context.getPackageManager();
+        final Intent intent;
+        if (uri == null) {
+            intent = new Intent(action);
+        } else {
+            intent = new Intent(action, uri);
+        }
+        List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
+    }
+
     private void addToCalendarWithIntent() {
 
-        final boolean calendarAddOnAvailable = cgBase.isIntentAvailable(this, ICalendar.INTENT, Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST));
+        final boolean calendarAddOnAvailable = isIntentAvailable(this, ICalendar.INTENT, Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST));
 
         if (calendarAddOnAvailable) {
             final Parameters params = new Parameters(
@@ -1426,7 +1458,7 @@ public class CacheDetailActivity extends AbstractActivity {
             if (cache.getHiddenDate() != null) {
                 long time = cache.getHiddenDate().getTime();
                 if (time > 0) {
-                    String dateString = cgBase.formatFullDate(time);
+                    String dateString = Formatter.formatFullDate(time);
                     if (cache.isEventCache()) {
                         dateString = DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
                     }
@@ -1525,7 +1557,7 @@ public class CacheDetailActivity extends AbstractActivity {
         private class StoreCacheHandler extends CancellableHandler {
             @Override
             public void handleRegularMessage(Message msg) {
-                if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                     updateStatusMsg((String) msg.obj);
                 } else {
                     storeThread = null;
@@ -1543,7 +1575,7 @@ public class CacheDetailActivity extends AbstractActivity {
         private class RefreshCacheHandler extends CancellableHandler {
             @Override
             public void handleRegularMessage(Message msg) {
-                if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                     updateStatusMsg((String) msg.obj);
                 } else {
                     refreshThread = null;
@@ -1627,7 +1659,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                cgBase.refreshCache(CacheDetailActivity.this, cache.getGeocode(), cache.getListId(), handler);
+                cache.refresh(CacheDetailActivity.this, cache.getListId(), handler);
 
                 handler.sendEmptyMessage(0);
             }
@@ -1657,7 +1689,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                cgBase.dropCache(cache, handler);
+                cache.drop(handler);
             }
         }
 
@@ -1713,7 +1745,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(cgBase.addToWatchlist(cache));
+                handler.sendEmptyMessage(GCParser.addToWatchlist(cache));
             }
         }
 
@@ -1727,7 +1759,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(cgBase.removeFromWatchlist(cache));
+                handler.sendEmptyMessage(GCParser.removeFromWatchlist(cache));
             }
         }
 
@@ -2176,7 +2208,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     final cgLog log = getItem(position);
 
                     if (log.date > 0) {
-                        holder.date.setText(cgBase.formatShortDate(log.date));
+                        holder.date.setText(Formatter.formatShortDate(log.date));
                         holder.date.setVisibility(View.VISIBLE);
                     } else {
                         holder.date.setVisibility(View.GONE);

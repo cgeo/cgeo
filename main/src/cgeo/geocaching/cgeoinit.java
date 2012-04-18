@@ -12,6 +12,7 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
@@ -733,7 +734,7 @@ public class cgeoinit extends AbstractActivity {
         TextView lastBackup = (TextView) findViewById(R.id.backup_last);
         File lastBackupFile = cgeoapplication.isRestoreFile();
         if (lastBackupFile != null) {
-            lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.formatTime(lastBackupFile.lastModified()) + ", " + cgBase.formatDate(lastBackupFile.lastModified()));
+            lastBackup.setText(res.getString(R.string.init_backup_last) + " " + Formatter.formatTime(lastBackupFile.lastModified()) + ", " + Formatter.formatDate(lastBackupFile.lastModified()));
         } else {
             lastBackup.setText(res.getString(R.string.init_backup_last_no));
         }

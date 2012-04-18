@@ -6,6 +6,7 @@ import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -70,7 +71,7 @@ public class cgeopoint extends AbstractActivity {
 
             longitude.setText(lonString);
             latitude.setText(latString);
-            date.setText(cgBase.formatShortDateTime(getContext(), loc.getDate()));
+            date.setText(Formatter.formatShortDateTime(getContext(), loc.getDate()));
 
             return v;
         }

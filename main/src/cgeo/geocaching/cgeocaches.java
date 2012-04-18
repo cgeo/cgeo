@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
+import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -674,7 +675,7 @@ public class cgeocaches extends AbstractListActivity {
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-            SearchResult newSearch = cgBase.searchByStored(coords, cacheType, listId);
+            SearchResult newSearch = cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, cacheType, listId);
             if (newSearch != null && newSearch.getTotal() != search.getTotal()) {
                 refreshCurrentList();
             }
@@ -1097,7 +1098,7 @@ public class cgeocaches extends AbstractListActivity {
 
             return true;
         } else if (id == MENU_DROP_CACHE) {
-            cgBase.dropCache(getCacheFromAdapter(adapterInfo), new Handler() {
+            getCacheFromAdapter(adapterInfo).drop(new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     refreshCurrentList();
@@ -1505,7 +1506,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByStored(coords, Settings.getCacheType(), listId);
+            search = cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, Settings.getCacheType(), listId);
             handler.sendMessage(Message.obtain());
         }
     }
@@ -1535,7 +1536,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByNextPage(this, search, Settings.isShowCaptcha());
+            search = GCParser.searchByNextPage(this, search, Settings.isShowCaptcha());
 
             handler.sendMessage(Message.obtain());
         }
@@ -1562,7 +1563,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByCoords(this, coords, cacheType, Settings.isShowCaptcha());
+            search = GCParser.searchByCoords(this, coords, cacheType, Settings.isShowCaptcha());
 
             handler.sendMessage(Message.obtain());
         }
@@ -1589,7 +1590,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByKeyword(this, keyword, cacheType, Settings.isShowCaptcha());
+            search = GCParser.searchByKeyword(this, keyword, cacheType, Settings.isShowCaptcha());
             handler.sendMessage(Message.obtain());
         }
     }
@@ -1615,7 +1616,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByUsername(this, username, cacheType, Settings.isShowCaptcha());
+            search = GCParser.searchByUsername(this, username, cacheType, Settings.isShowCaptcha());
             handler.sendMessage(Message.obtain());
         }
     }
@@ -1647,7 +1648,7 @@ public class cgeocaches extends AbstractListActivity {
                 params.put("cacheType", cacheType.id);
             }
 
-            search = cgBase.searchByOwner(this, username, cacheType, Settings.isShowCaptcha());
+            search = GCParser.searchByOwner(this, username, cacheType, Settings.isShowCaptcha());
 
             handler.sendMessage(Message.obtain());
         }
@@ -1717,7 +1718,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     detailProgress++;
-                    cgBase.refreshCache(cgeocaches.this, cache.getGeocode(), listIdLD, null);
+                    cache.refresh(cgeocaches.this, listIdLD, null);
 
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -1780,7 +1781,7 @@ public class cgeocaches extends AbstractListActivity {
                         handler.sendMessage(handler.obtainMessage(1, GCcode));
                         yield();
 
-                        cgBase.storeCache(cgeocaches.this, null, GCcode, listIdLFW, false, null);
+                        cgCache.storeCache(cgeocaches.this, null, GCcode, listIdLFW, false, null);
 
                         handler.sendMessage(handler.obtainMessage(2, GCcode));
                         yield();

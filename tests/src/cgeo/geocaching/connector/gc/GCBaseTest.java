@@ -1,11 +1,11 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgBaseTest;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.MockedCache;
+import cgeo.test.Compare;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,7 +37,7 @@ public class GCBaseTest extends TestCase {
         SearchResult result = GCBase.searchByGeocodes(geocodes);
         cgCache parsedCache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
 
-        cgBaseTest.testCompareCaches(mockedCache, parsedCache, false);
+        Compare.assertCompareCaches(mockedCache, parsedCache, false);
 
     }
 }

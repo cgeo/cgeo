@@ -3,7 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -578,8 +577,8 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
             ArrayList<String> infos = new ArrayList<String>();
             infos.add(StringUtils.upperCase(cache.getGeocode()));
-            infos.add(cgBase.formatDate(cache.getVisitedDate()));
-            infos.add(cgBase.formatTime(cache.getVisitedDate()));
+            infos.add(Formatter.formatDate(cache.getVisitedDate()));
+            infos.add(Formatter.formatTime(cache.getVisitedDate()));
             holder.info.setText(StringUtils.join(infos, Formatter.SEPARATOR));
         } else {
             ArrayList<String> infos = new ArrayList<String>();
@@ -597,7 +596,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
                 infos.add(cache.getSize().getL10n());
             } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
-                infos.add(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
+                infos.add(Formatter.formatShortDate(cache.getHiddenDate().getTime()));
             }
 
             if (cache.isPremiumMembersOnly()) {

@@ -9,11 +9,14 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
@@ -26,6 +29,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Message;
+import android.text.Html;
 import android.text.Spannable;
 
 import java.util.ArrayList;
@@ -381,7 +386,7 @@ public class cgCache implements ICache, IWaypoint {
      *
      * @return true: page contains guid of cache, false: otherwise
      */
-    boolean isGuidContainedInPage(final String page) {
+    public boolean isGuidContainedInPage(final String page) {
         if (StringUtils.isBlank(page)) {
             return false;
         }
@@ -1397,7 +1402,7 @@ public class cgCache implements ICache, IWaypoint {
 
     public void store(Activity activity, CancellableHandler handler) {
         final int listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
-        cgBase.storeCache(activity, this, null, listId, false, handler);
+        storeCache(activity, this, null, listId, false, handler);
     }
 
     public void setZoomlevel(int zoomlevel) {
@@ -1418,4 +1423,171 @@ public class cgCache implements ICache, IWaypoint {
     public String getCoordType() {
         return "cache";
     }
+
+    public void drop(Handler handler) {
+        try {
+            cgeoapplication.getInstance().markDropped(getGeocode());
+            cgeoapplication.getInstance().removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
+
+            handler.sendMessage(Message.obtain());
+        } catch (Exception e) {
+            Log.e("cache.drop: ", e);
+        }
+    }
+
+    public void checkFields() {
+        if (StringUtils.isBlank(getGeocode())) {
+            Log.e("cgBase.loadLogsFromDetails: geo code not parsed correctly");
+        }
+        if (StringUtils.isBlank(getName())) {
+            Log.e("name not parsed correctly");
+        }
+        if (StringUtils.isBlank(getGuid())) {
+            Log.e("guid not parsed correctly");
+        }
+        if (getTerrain() == 0.0) {
+            Log.e("terrain not parsed correctly");
+        }
+        if (getDifficulty() == 0.0) {
+            Log.e("difficulty not parsed correctly");
+        }
+        if (StringUtils.isBlank(getOwner())) {
+            Log.e("owner not parsed correctly");
+        }
+        if (StringUtils.isBlank(getOwnerReal())) {
+            Log.e("owner real not parsed correctly");
+        }
+        if (getHiddenDate() == null) {
+            Log.e("hidden not parsed correctly");
+        }
+        if (getFavoritePoints() < 0) {
+            Log.e("favoriteCount not parsed correctly");
+        }
+        if (getSize() == null) {
+            Log.e("size not parsed correctly");
+        }
+        if (getType() == null || getType() == CacheType.UNKNOWN) {
+            Log.e("type not parsed correctly");
+        }
+        if (getCoords() == null) {
+            Log.e("coordinates not parsed correctly");
+        }
+        if (StringUtils.isBlank(getLocation())) {
+            Log.e("location not parsed correctly");
+        }
+    }
+
+    public void refresh(Activity activity, int newListId, CancellableHandler handler) {
+        cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        storeCache(activity, null, geocode, newListId, true, handler);
+    }
+
+    public static void storeCache(Activity activity, cgCache origCache, String geocode, int listId, boolean forceRedownload, CancellableHandler handler) {
+        try {
+            cgCache cache;
+            // get cache details, they may not yet be complete
+            if (origCache != null) {
+                // only reload the cache if it was already stored or doesn't have full details (by checking the description)
+                if (origCache.getListId() >= StoredList.STANDARD_LIST_ID || StringUtils.isBlank(origCache.getDescription())) {
+                    final SearchResult search = searchByGeocode(origCache.getGeocode(), null, listId, false, handler);
+                    cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                } else {
+                    cache = origCache;
+                }
+            } else if (StringUtils.isNotBlank(geocode)) {
+                final SearchResult search = searchByGeocode(geocode, null, listId, forceRedownload, handler);
+                cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+            } else {
+                cache = null;
+            }
+
+            if (cache == null) {
+                if (handler != null) {
+                    handler.sendMessage(Message.obtain());
+                }
+
+                return;
+            }
+
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+
+            final HtmlImage imgGetter = new HtmlImage(activity, cache.getGeocode(), false, listId, true);
+
+            // store images from description
+            if (StringUtils.isNotBlank(cache.getDescription())) {
+                Html.fromHtml(cache.getDescription(), imgGetter, null);
+            }
+
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+
+            // store spoilers
+            if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+                for (cgImage oneSpoiler : cache.getSpoilers()) {
+                    imgGetter.getDrawable(oneSpoiler.getUrl());
+                }
+            }
+
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+
+            // store images from logs
+            if (Settings.isStoreLogImages()) {
+                for (cgLog log : cache.getLogs(true)) {
+                    if (CollectionUtils.isNotEmpty(log.logImages)) {
+                        for (cgImage oneLogImg : log.logImages) {
+                            imgGetter.getDrawable(oneLogImg.getUrl());
+                        }
+                    }
+                }
+            }
+
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+
+            // store map previews
+            StaticMapsProvider.downloadMaps(cache, activity);
+
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+
+            cache.setListId(listId);
+            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+
+            if (handler != null) {
+                handler.sendMessage(Message.obtain());
+            }
+        } catch (Exception e) {
+            Log.e("cgBase.storeCache");
+        }
+    }
+
+    public static SearchResult searchByGeocode(final String geocode, final String guid, final int listId, final boolean forceReload, final CancellableHandler handler) {
+        if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+            Log.e("cgeoBase.searchByGeocode: No geocode nor guid given");
+            return null;
+        }
+
+        cgeoapplication app = cgeoapplication.getInstance();
+        if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
+            final SearchResult search = new SearchResult();
+            final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
+            search.addGeocode(realGeocode);
+            return search;
+        }
+
+        // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
+        if (geocode == null && guid != null) {
+            return GCConnector.getInstance().searchByGeocode(null, guid, app, handler);
+        }
+
+        return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode, guid, app, handler);
+    }
+
 }

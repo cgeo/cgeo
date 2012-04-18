@@ -2,10 +2,10 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.ui.Formatter;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -55,14 +55,14 @@ public class LogTemplateProvider {
 
                         @Override
                         public String getValue(final boolean offline) {
-                            return cgBase.formatFullDate(System.currentTimeMillis());
+                            return Formatter.formatFullDate(System.currentTimeMillis());
                         }
                     },
                     new LogTemplate("TIME", R.string.init_signature_template_time) {
 
                         @Override
                         public String getValue(final boolean offline) {
-                            return cgBase.formatTime(System.currentTimeMillis());
+                            return Formatter.formatTime(System.currentTimeMillis());
                         }
                     },
                     new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
@@ -70,7 +70,7 @@ public class LogTemplateProvider {
                         @Override
                         public String getValue(final boolean offline) {
                             final long currentTime = System.currentTimeMillis();
-                            return cgBase.formatFullDate(currentTime) + " " + cgBase.formatTime(currentTime);
+                            return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
                         }
                     },
                     new LogTemplate("USER", R.string.init_signature_template_user) {

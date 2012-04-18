@@ -246,4 +246,8 @@ public class GeopointTest extends AndroidTestCase {
         Assert.assertEquals(lonSecFrac, dms.lonSecFrac);
     }
 
+    public static void testElevation() {
+        assertEquals(125.663703918457, (new Geopoint(48.0, 2.0)).getElevation(), 0.1);
+    }
+
 }

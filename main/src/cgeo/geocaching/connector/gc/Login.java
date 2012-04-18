@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
@@ -63,15 +63,12 @@ public abstract class Login {
         final ImmutablePair<String, String> login = Settings.getLogin();
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
-            Login.setActualStatus(cgBase.res.getString(R.string.err_login));
+            Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
             Log.e("cgeoBase.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        // res is null during the unit tests
-        if (cgBase.res != null) {
-            Login.setActualStatus(cgBase.res.getString(R.string.init_login_popup_working));
-        }
+        Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
         HttpResponse loginResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
         String loginData = Network.getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
@@ -100,7 +97,7 @@ public abstract class Login {
                 "ctl00$ContentBody$cbRememberMe", "on",
                 "ctl00$ContentBody$btnSignIn", "Login");
         final String[] viewstates = Login.getViewstates(loginData);
-        if (cgBase.isEmpty(viewstates)) {
+        if (isEmpty(viewstates)) {
             Log.e("cgeoBase.login: Failed to find viewstates");
             return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
         }
@@ -189,10 +186,7 @@ public abstract class Login {
             return false;
         }
 
-        // res is null during the unit tests
-        if (cgBase.res != null) {
-            setActualStatus(cgBase.res.getString(R.string.init_login_popup_ok));
-        }
+        setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_ok));
 
         // on every page except login page
         setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
@@ -210,10 +204,7 @@ public abstract class Login {
             return true;
         }
 
-        // res is null during the unit tests
-        if (cgBase.res != null) {
-            setActualStatus(cgBase.res.getString(R.string.init_login_popup_failed));
-        }
+        setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_failed));
         return false;
     }
 
@@ -304,6 +295,24 @@ public abstract class Login {
 
     public static Date parseGcCustomDate(final String input) throws ParseException {
         return parseGcCustomDate(input, Settings.getGcCustomDate());
+    }
+
+    /**
+     * checks if an Array of Strings is empty or not. Empty means:
+     * - Array is null
+     * - or all elements are null or empty strings
+     */
+    public static boolean isEmpty(String[] a) {
+        if (a == null) {
+            return true;
+        }
+
+        for (String s : a) {
+            if (StringUtils.isNotEmpty(s)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

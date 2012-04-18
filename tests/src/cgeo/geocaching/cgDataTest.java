@@ -29,9 +29,10 @@ public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
         int listId2 = StoredList.STANDARD_LIST_ID;
 
         // create caches
-        final cgCache cache1 = cgBaseTest.createCache(0);
-        assertNotNull(cache1);
-        final cgCache cache2 = cgBaseTest.createCache(1);
+        final cgCache cache1 = new cgCache();
+        cache1.setGeocode("Cache 1");
+        final cgCache cache2 = new cgCache();
+        cache2.setGeocode("Cache 2");
         assertNotNull(cache2);
 
         try {

@@ -1,7 +1,6 @@
 package cgeo.geocaching.go4cache;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
@@ -16,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +42,7 @@ public final class Go4Cache extends Thread {
 
     private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
     final private ArrayBlockingQueue<Geopoint> queue = new ArrayBlockingQueue<Geopoint>(1);
+    private String packageVersion;
 
     public static Go4Cache getInstance() { // no need to be synchronized
         return InstanceHolder.INSTANCE;
@@ -48,8 +50,20 @@ public final class Go4Cache extends Thread {
 
     private Go4Cache() { // private singleton constructor
         super("Go4Cache");
+        initializeVersion();
         setPriority(Thread.MIN_PRIORITY);
         start();
+    }
+
+    private void initializeVersion() {
+        try {
+            final PackageManager manager = cgeoapplication.getInstance().getPackageManager();
+            final PackageInfo info = manager.getPackageInfo(cgeoapplication.getInstance().getPackageName(), 0);
+            packageVersion = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e("unable to get version information", e);
+            packageVersion = null;
+        }
     }
 
     /**
@@ -96,8 +110,8 @@ public final class Go4Cache extends Thread {
                         "ln", lonStr,
                         "a", currentAction,
                         "s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + currentAction + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
-                if (null != cgBase.version) {
-                    params.put("v", cgBase.version);
+                if (null != packageVersion) {
+                    params.put("v", packageVersion);
                 }
 
                 Network.postRequest("http://api.go4cache.com/", params);

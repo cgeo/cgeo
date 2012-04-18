@@ -8,7 +8,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.UpdateDirectionCallback;
 import cgeo.geocaching.UpdateLocationCallback;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
@@ -1540,7 +1539,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             break;
                         }
 
-                        cgBase.storeCache(activity, null, geocode, StoredList.STANDARD_LIST_ID, false, handler);
+                        cgCache.storeCache(activity, null, geocode, StoredList.STANDARD_LIST_ID, false, handler);
                     }
                 } catch (Exception e) {
                     Log.e("cgeocaches.LoadDetails.run: " + e.toString());

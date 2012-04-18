@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -185,7 +184,7 @@ public class GCBase {
         if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
             Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
-                SearchResult search = cgBase.searchByCoords(null, center, Settings.getCacheType(), false);
+                SearchResult search = GCParser.searchByCoords(null, center, Settings.getCacheType(), false);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
                     if (Settings.isPremiumMember()) {

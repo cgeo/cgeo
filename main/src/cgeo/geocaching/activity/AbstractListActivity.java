@@ -1,6 +1,5 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -73,7 +72,6 @@ public abstract class AbstractListActivity extends ListActivity implements
         // init
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
-        cgBase.initialize(app);
 
         ActivityMixin.keepScreenOn(this, keepScreenOn);
     }
