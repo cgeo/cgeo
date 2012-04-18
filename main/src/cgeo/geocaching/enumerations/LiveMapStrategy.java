@@ -51,7 +51,13 @@ public interface LiveMapStrategy {
         }
 
         public void setL10n() {
-            this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
+            cgeoapplication instance = cgeoapplication.getInstance();
+            if (instance != null) {
+                this.l10n = instance.getBaseContext().getResources().getString(stringId);
+            } else {
+                // fix #1347: needed for AndroidTestCases that don't guarantee an initialized application
+                this.l10n = this.name();
+            }
         }
     }
 

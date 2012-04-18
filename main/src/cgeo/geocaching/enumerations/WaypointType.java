@@ -70,7 +70,14 @@ public enum WaypointType {
     }
 
     public void setL10n() {
-        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
+        cgeoapplication instance = cgeoapplication.getInstance();
+        if (instance != null) {
+            this.l10n = instance.getBaseContext().getResources().getString(stringId);
+        } else {
+            // fix #1347: needed for AndroidTestCases that don't guarantee an initialized application
+            this.l10n = this.id;
+        }
+
         if (WaypointType.ALL_TYPES_EXCEPT_OWN != null && WaypointType.ALL_TYPES_EXCEPT_OWN.containsKey(this)) {
             WaypointType.ALL_TYPES_EXCEPT_OWN.put(this, this.getL10n());
         }
