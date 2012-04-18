@@ -5,7 +5,9 @@ import cgeo.geocaching.cgeoapplication;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Enum listing waypoint types
@@ -23,13 +25,11 @@ public enum WaypointType {
 
     public final String id;
     public final int stringId;
-    private String l10n; // not final because the locale can be changed
     public final int markerId;
 
     private WaypointType(String id, int stringId, int markerId) {
         this.id = id;
         this.stringId = stringId;
-        setL10n();
         this.markerId = markerId;
     }
 
@@ -38,13 +38,13 @@ public enum WaypointType {
      * non public so that <code>null</code> handling can be handled centrally in the enum type itself
      */
     private static final Map<String, WaypointType> FIND_BY_ID;
-    public static final Map<WaypointType, String> ALL_TYPES_EXCEPT_OWN = new HashMap<WaypointType, String>();
+    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN = new HashSet<WaypointType>();
     static {
         final HashMap<String, WaypointType> mapping = new HashMap<String, WaypointType>();
         for (WaypointType wt : values()) {
             mapping.put(wt.id, wt);
             if (wt != WaypointType.OWN) {
-                ALL_TYPES_EXCEPT_OWN.put(wt, wt.getL10n());
+                ALL_TYPES_EXCEPT_OWN.add(wt);
             }
         }
         FIND_BY_ID = Collections.unmodifiableMap(mapping);
@@ -66,15 +66,9 @@ public enum WaypointType {
     }
 
     public final String getL10n() {
-        return l10n;
+        return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
 
-    public void setL10n() {
-        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
-        if (WaypointType.ALL_TYPES_EXCEPT_OWN != null && WaypointType.ALL_TYPES_EXCEPT_OWN.containsKey(this)) {
-            WaypointType.ALL_TYPES_EXCEPT_OWN.put(this, this.getL10n());
-        }
-    }
 
     @Override
     public final String toString() {

@@ -25,13 +25,11 @@ public enum CacheSize {
     public final String id;
     public final int comparable;
     private final int stringId;
-    private String l10n; // not final because the locale can be changed
 
     private CacheSize(String id, int comparable, int stringId) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;
-        setL10n();
     }
 
     final private static Map<String, CacheSize> FIND_BY_ID;
@@ -61,12 +59,7 @@ public enum CacheSize {
     }
 
     public final String getL10n() {
-        return l10n;
+        return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
-
-    public void setL10n() {
-        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
-    }
-
 }
 

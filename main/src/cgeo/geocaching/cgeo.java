@@ -3,12 +3,8 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.Login;
-import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
@@ -517,29 +513,6 @@ public class cgeo extends AbstractActivity {
         initialized = true;
 
         Settings.setLanguage(Settings.isUseEnglish());
-
-        /*
-         * "update" the cache size/type. For a better performance
-         * the resource strings are stored in the enum's. In case of a
-         * locale change the resource strings don't get updated automatically.
-         * That's why we have to do it on our own.
-         */
-        for (CacheSize cacheSize : CacheSize.values()) {
-            cacheSize.setL10n();
-        }
-        for (CacheType cacheType : CacheType.values()) {
-            cacheType.setL10n();
-        }
-        for (LogType logType : LogType.values()) {
-            logType.setL10n();
-        }
-        for (WaypointType waypointType : WaypointType.values()) {
-            waypointType.setL10n();
-        }
-        for (Strategy strategy : Strategy.values()) {
-            strategy.setL10n();
-        }
-
         Settings.getLogin();
 
         if (app.firstRun) {

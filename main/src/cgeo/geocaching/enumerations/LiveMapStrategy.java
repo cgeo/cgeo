@@ -28,13 +28,11 @@ public interface LiveMapStrategy {
         public final int id;
         public final EnumSet<StrategyFlag> flags;
         private final int stringId;
-        private String l10n; // not final because the locale can be changed
 
         private Strategy(int id, EnumSet<StrategyFlag> flags, int stringId) {
             this.id = id;
             this.flags = flags;
             this.stringId = stringId;
-            setL10n();
         }
 
         public final static Strategy getById(final int id) {
@@ -47,12 +45,7 @@ public interface LiveMapStrategy {
         }
 
         public final String getL10n() {
-            return l10n;
-        }
-
-        public void setL10n() {
-            this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
+            return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
         }
     }
-
 }
