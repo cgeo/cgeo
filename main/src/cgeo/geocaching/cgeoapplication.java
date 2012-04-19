@@ -297,7 +297,7 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#loadHistoryOfSearchedLocations()} */
-    public List<cgDestination> getHistoryOfSearchedLocations() {
+    public List<Destination> getHistoryOfSearchedLocations() {
         return storage.loadHistoryOfSearchedLocations();
     }
 
@@ -348,8 +348,8 @@ public class cgeoapplication extends Application {
         return storage.clearSearchedDestinations();
     }
 
-    /** {@link cgData#saveSearchedDestination(cgDestination)} */
-    public void saveSearchedDestination(cgDestination destination) {
+    /** {@link cgData#saveSearchedDestination(Destination)} */
+    public void saveSearchedDestination(Destination destination) {
         storage.saveSearchedDestination(destination);
     }
 
@@ -412,7 +412,7 @@ public class cgeoapplication extends Application {
         return StringUtils.defaultString(action);
     }
 
-    public boolean addLog(String geocode, cgLog log) {
+    public boolean addLog(String geocode, LogEntry log) {
         if (StringUtils.isBlank(geocode)) {
             return false;
         }
@@ -420,7 +420,7 @@ public class cgeoapplication extends Application {
             return false;
         }
 
-        List<cgLog> list = new ArrayList<cgLog>();
+        List<LogEntry> list = new ArrayList<LogEntry>();
         list.add(log);
 
         return storage.saveLogs(geocode, list, false);
@@ -440,7 +440,7 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#loadLogOffline(String)} */
-    public cgLog loadLogOffline(String geocode) {
+    public LogEntry loadLogOffline(String geocode) {
         return storage.loadLogOffline(geocode);
     }
 
@@ -484,8 +484,8 @@ public class cgeoapplication extends Application {
         return storage.removeList(id);
     }
 
-    /** {@link cgData#removeSearchedDestination(cgDestination)} */
-    public boolean removeSearchedDestinations(cgDestination destination) {
+    /** {@link cgData#removeSearchedDestination(Destination)} */
+    public boolean removeSearchedDestinations(Destination destination) {
         return storage.removeSearchedDestination(destination);
     }
 

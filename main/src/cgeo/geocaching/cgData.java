@@ -1417,7 +1417,7 @@ public class cgData {
      * @param destination
      *            a destination to save
      */
-    public void saveSearchedDestination(final cgDestination destination) {
+    public void saveSearchedDestination(final Destination destination) {
         init();
 
         databaseRW.beginTransaction();
@@ -1608,11 +1608,11 @@ public class cgData {
         return true;
     }
 
-    public boolean saveLogs(String geocode, List<cgLog> logs) {
+    public boolean saveLogs(String geocode, List<LogEntry> logs) {
         return saveLogs(geocode, logs, true);
     }
 
-    public boolean saveLogs(String geocode, List<cgLog> logs, boolean drop) {
+    public boolean saveLogs(String geocode, List<LogEntry> logs, boolean drop) {
         if (StringUtils.isBlank(geocode) || logs == null) {
             return false;
         }
@@ -1629,7 +1629,7 @@ public class cgData {
             if (!logs.isEmpty()) {
                 InsertHelper helper = new InsertHelper(databaseRW, dbTableLogs);
                 long timeStamp = System.currentTimeMillis();
-                for (cgLog log : logs) {
+                for (LogEntry log : logs) {
                     helper.prepareForInsert();
 
                     helper.bind(LOGS_GEOCODE, geocode);
@@ -1643,9 +1643,9 @@ public class cgData {
 
                     long log_id = helper.execute();
 
-                    if (CollectionUtils.isNotEmpty(log.logImages)) {
+                    if (log.hasLogImages()) {
                         ContentValues values = new ContentValues();
-                        for (cgImage img : log.logImages) {
+                        for (cgImage img : log.getLogImages()) {
                             values.clear();
                             values.put("log_id", log_id);
                             values.put("title", img.getTitle());
@@ -2287,7 +2287,7 @@ public class cgData {
      *
      * @return A list of previously entered destinations or an empty list.
      */
-    public List<cgDestination> loadHistoryOfSearchedLocations() {
+    public List<Destination> loadHistoryOfSearchedLocations() {
         init();
 
         Cursor cursor = databaseRO.query(dbTableSearchDestionationHistory,
@@ -2299,7 +2299,7 @@ public class cgData {
                 "date desc",
                 "100");
 
-        final List<cgDestination> destinations = new LinkedList<cgDestination>();
+        final List<Destination> destinations = new LinkedList<Destination>();
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -2309,7 +2309,7 @@ public class cgData {
             int indexLongitude = cursor.getColumnIndex("longitude");
 
             do {
-                final cgDestination dest = new cgDestination(cursor.getLong(indexId), cursor.getLong(indexDate), getCoords(cursor, indexLatitude, indexLongitude));
+                final Destination dest = new Destination(cursor.getLong(indexId), cursor.getLong(indexDate), getCoords(cursor, indexLatitude, indexLongitude));
 
                 // If coordinates are non-existent or invalid, do not consider
                 // this point.
@@ -2344,14 +2344,14 @@ public class cgData {
         return success;
     }
 
-    public List<cgLog> loadLogs(String geocode) {
+    public List<LogEntry> loadLogs(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
         init();
 
-        List<cgLog> logs = new ArrayList<cgLog>();
+        List<LogEntry> logs = new ArrayList<LogEntry>();
 
         Cursor cursor = databaseRO.rawQuery(
                 "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "
@@ -2359,7 +2359,7 @@ public class cgData {
                         + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc", new String[] { geocode });
 
         if (cursor != null && cursor.getCount() > 0) {
-            cgLog log = null;
+            LogEntry log = null;
             int indexLogsId = cursor.getColumnIndex("cg_logs_id");
             int indexType = cursor.getColumnIndex("type");
             int indexAuthor = cursor.getColumnIndex("author");
@@ -2372,7 +2372,7 @@ public class cgData {
             int indexUrl = cursor.getColumnIndex("url");
             while (cursor.moveToNext() && logs.size() < 100) {
                 if (log == null || log.id != cursor.getInt(indexLogsId)) {
-                    log = new cgLog();
+                    log = new LogEntry();
                     log.id = cursor.getInt(indexLogsId);
                     log.type = LogType.getById(cursor.getInt(indexType));
                     log.author = cursor.getString(indexAuthor);
@@ -2385,11 +2385,7 @@ public class cgData {
                 if (!cursor.isNull(indexLogImagesId)) {
                     String title = cursor.getString(indexTitle);
                     String url = cursor.getString(indexUrl);
-                    if (log.logImages == null) {
-                        log.logImages = new ArrayList<cgImage>();
-                    }
-                    final cgImage log_img = new cgImage(url, title);
-                    log.logImages.add(log_img);
+                    log.addLogImage(new cgImage(url, title));
                 }
             }
         }
@@ -3012,14 +3008,14 @@ public class cgData {
         return status;
     }
 
-    public cgLog loadLogOffline(String geocode) {
+    public LogEntry loadLogOffline(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
         init();
 
-        cgLog log = null;
+        LogEntry log = null;
 
         Cursor cursor = databaseRO.query(
                 dbTableLogsOffline,
@@ -3034,7 +3030,7 @@ public class cgData {
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
 
-            log = new cgLog();
+            log = new LogEntry();
             log.id = cursor.getInt(cursor.getColumnIndex("_id"));
             log.type = LogType.getById(cursor.getInt(cursor.getColumnIndex("type")));
             log.log = cursor.getString(cursor.getColumnIndex("log"));
@@ -3308,7 +3304,7 @@ public class cgData {
         return true;
     }
 
-    public boolean removeSearchedDestination(cgDestination destination) {
+    public boolean removeSearchedDestination(Destination destination) {
         boolean success = true;
         if (destination == null) {
             success = false;

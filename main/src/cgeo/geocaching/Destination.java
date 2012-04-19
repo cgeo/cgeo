@@ -2,20 +2,20 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
 
-public class cgDestination implements ICoordinates {
+public final class Destination implements ICoordinates {
 
     final private long id;
     final private long date;
     final private Geopoint coords;
 
-    public cgDestination(long id, long date, final Geopoint coords) {
+    public Destination(long id, long date, final Geopoint coords) {
         this.id = id;
         this.date = date;
         this.coords = coords;
     }
 
-    public cgDestination withDate(final long date) {
-        return new cgDestination(id, date, coords);
+    public Destination(final Geopoint coords) {
+        this(0, System.currentTimeMillis(), coords);
     }
 
     public long getDate() {
@@ -34,7 +34,7 @@ public class cgDestination implements ICoordinates {
 
     @Override
     public boolean equals(final Object obj) {
-        return obj != null && obj instanceof cgDestination && ((cgDestination) obj).coords.equals(coords);
+        return obj != null && obj instanceof Destination && ((Destination) obj).coords.equals(coords);
     }
 
     public long getId() {

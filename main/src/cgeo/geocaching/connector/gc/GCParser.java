@@ -1,14 +1,14 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgSearchThread;
 import cgeo.geocaching.cgTrackable;
-import cgeo.geocaching.cgTrackableLog;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -50,6 +50,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
@@ -910,7 +911,7 @@ public abstract class GCParser {
 
     public static StatusCode postLog(final String geocode, final String cacheid, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day,
-            final String log, final List<cgTrackableLog> trackables) {
+            final String log, final List<TrackableLog> trackables) {
         if (Login.isEmpty(viewstates)) {
             Log.e("cgeoBase.postLog: No viewstate given");
             return StatusCode.LOG_POST_ERROR;
@@ -961,7 +962,7 @@ public abstract class GCParser {
         if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
 
-            for (final cgTrackableLog tb : trackables) {
+            for (final TrackableLog tb : trackables) {
                 if (tb.action != LogTypeTrackable.DO_NOTHING) {
                     hdnSelected.append(Integer.toString(tb.id));
                     hdnSelected.append(tb.action.action);
@@ -1014,7 +1015,7 @@ public abstract class GCParser {
                 if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
                     final StringBuilder hdnSelected = new StringBuilder();
 
-                    for (cgTrackableLog tb : trackables) {
+                    for (TrackableLog tb : trackables) {
                         String ctl = null;
                         final String action = Integer.toString(tb.id) + tb.action.action;
 
@@ -1332,7 +1333,7 @@ public abstract class GCParser {
              */
             while (matcherLogs.find())
             {
-                final cgLog logDone = new cgLog();
+                final LogEntry logDone = new LogEntry();
 
                 logDone.type = LogType.getByIconName(matcherLogs.group(1));
                 logDone.author = Html.fromHtml(matcherLogs.group(3)).toString().trim();
@@ -1360,10 +1361,7 @@ public abstract class GCParser {
                 while (matcherLogImages.find())
                 {
                     final cgImage logImage = new cgImage(matcherLogImages.group(1), matcherLogImages.group(2));
-                    if (logDone.logImages == null) {
-                        logDone.logImages = new ArrayList<cgImage>();
-                    }
-                    logDone.logImages.add(logImage);
+                    logDone.addLogImage(logImage);
                 }
 
                 trackable.getLogs().add(logDone);
@@ -1395,7 +1393,7 @@ public abstract class GCParser {
      * @param friends
      *            retrieve friend logs
      */
-    private static List<cgLog> loadLogsFromDetails(final String page, final cgCache cache, final boolean friends, final boolean getDataFromPage) {
+    private static List<LogEntry> loadLogsFromDetails(final String page, final cgCache cache, final boolean friends, final boolean getDataFromPage) {
         String rawResponse = null;
 
         if (!getDataFromPage) {
@@ -1434,7 +1432,7 @@ public abstract class GCParser {
             rawResponse = BaseUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, "");
         }
 
-        List<cgLog> logs = new ArrayList<cgLog>();
+        List<LogEntry> logs = new ArrayList<LogEntry>();
 
         try {
             final JSONObject resp = new JSONObject(rawResponse);
@@ -1447,7 +1445,7 @@ public abstract class GCParser {
 
             for (int index = 0; index < data.length(); index++) {
                 final JSONObject entry = data.getJSONObject(index);
-                final cgLog logDone = new cgLog();
+                final LogEntry logDone = new LogEntry();
                 logDone.friend = friends;
 
                 // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
@@ -1471,10 +1469,7 @@ public abstract class GCParser {
                     String url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
                     String title = image.getString("Name");
                     final cgImage logImage = new cgImage(url, title);
-                    if (logDone.logImages == null) {
-                        logDone.logImages = new ArrayList<cgImage>();
-                    }
-                    logDone.logImages.add(logImage);
+                    logDone.addLogImage(logImage);
                 }
 
                 logs.add(logDone);
@@ -1519,18 +1514,16 @@ public abstract class GCParser {
         return types;
     }
 
-    public static List<cgTrackableLog> parseTrackableLog(final String page) {
+    public static List<TrackableLog> parseTrackableLog(final String page) {
         if (StringUtils.isEmpty(page)) {
             return null;
         }
-
-        final List<cgTrackableLog> trackables = new ArrayList<cgTrackableLog>();
 
         String table = StringUtils.substringBetween(page, "<table id=\"tblTravelBugs\"", "</table>");
 
         // if no trackables are currently in the account, the table is not available, so return an empty list instead of null
         if (StringUtils.isBlank(table)) {
-            return trackables;
+            return Collections.emptyList();
         }
 
         table = StringUtils.substringBetween(table, "<tbody>", "</tbody>");
@@ -1539,39 +1532,30 @@ public abstract class GCParser {
             return null;
         }
 
+        final List<TrackableLog> trackableLogs = new ArrayList<TrackableLog>();
+
         final Matcher trackableMatcher = GCConstants.PATTERN_TRACKABLE.matcher(page);
         while (trackableMatcher.find()) {
             if (trackableMatcher.groupCount() > 0) {
-                final cgTrackableLog trackableLog = new cgTrackableLog();
 
-                if (trackableMatcher.group(1) != null) {
-                    trackableLog.trackCode = trackableMatcher.group(1);
-                } else {
-                    continue;
-                }
-                if (trackableMatcher.group(2) != null) {
-                    trackableLog.name = Html.fromHtml(trackableMatcher.group(2)).toString();
-                } else {
-                    continue;
-                }
-                if (trackableMatcher.group(3) != null) {
-                    trackableLog.ctl = Integer.valueOf(trackableMatcher.group(3));
-                } else {
-                    continue;
-                }
-                if (trackableMatcher.group(5) != null) {
-                    trackableLog.id = Integer.valueOf(trackableMatcher.group(5));
-                } else {
-                    continue;
-                }
+                final String trackCode = trackableMatcher.group(1);
+                final String name = Html.fromHtml(trackableMatcher.group(2)).toString();
+                try {
+                    final Integer ctl = Integer.valueOf(trackableMatcher.group(3));
+                    final Integer id = Integer.valueOf(trackableMatcher.group(5));
+                    if (trackCode != null && name != null && ctl != null && id != null) {
+                        final TrackableLog entry = new TrackableLog(trackCode, name, id.intValue(), ctl.intValue());
 
-                Log.i("Trackable in inventory (#" + trackableLog.ctl + "/" + trackableLog.id + "): " + trackableLog.trackCode + " - " + trackableLog.name);
-
-                trackables.add(trackableLog);
+                        Log.i("Trackable in inventory (#" + entry.ctl + "/" + entry.id + "): " + entry.trackCode + " - " + entry.name);
+                        trackableLogs.add(entry);
+                    }
+                } catch (NumberFormatException e) {
+                    Log.e("GCParser.parseTrackableLog", e);
+                }
             }
         }
 
-        return trackables;
+        return trackableLogs;
     }
 
     /**
@@ -1594,10 +1578,10 @@ public abstract class GCParser {
         //cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            List<cgLog> allLogs = cache.getLogs();
-            List<cgLog> friendLogs = loadLogsFromDetails(page, cache, true, false);
+            List<LogEntry> allLogs = cache.getLogs();
+            List<LogEntry> friendLogs = loadLogsFromDetails(page, cache, true, false);
             if (friendLogs != null) {
-                for (cgLog log : friendLogs) {
+                for (LogEntry log : friendLogs) {
                     if (allLogs.contains(log)) {
                         allLogs.get(allLogs.indexOf(log)).friend = true;
                     } else {

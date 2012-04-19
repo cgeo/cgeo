@@ -34,7 +34,7 @@ public class cgTrackable implements ILogable {
     private String goal = null;
     private String details = null;
     private String image = null;
-    private List<cgLog> logs = new ArrayList<cgLog>();
+    private List<LogEntry> logs = new ArrayList<LogEntry>();
     private String trackingcode = null;
 
     public String getUrl() {
@@ -188,11 +188,11 @@ public class cgTrackable implements ILogable {
         this.image = image;
     }
 
-    public List<cgLog> getLogs() {
+    public List<LogEntry> getLogs() {
         return logs;
     }
 
-    public void setLogs(List<cgLog> logs) {
+    public void setLogs(List<LogEntry> logs) {
         this.logs = logs;
     }
 

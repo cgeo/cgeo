@@ -92,7 +92,7 @@ public class cgCache implements ICache, IWaypoint {
     private List<String> attributes = null;
     private List<cgWaypoint> waypoints = null;
     private ArrayList<cgImage> spoilers = null;
-    private List<cgLog> logs = null;
+    private List<LogEntry> logs = null;
     private List<cgTrackable> inventory = null;
     private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
     private boolean logOffline = false;
@@ -938,7 +938,7 @@ public class cgCache implements ICache, IWaypoint {
         return false;
     }
 
-    public List<cgLog> getLogs() {
+    public List<LogEntry> getLogs() {
         return getLogs(true);
     }
 
@@ -947,15 +947,15 @@ public class cgCache implements ICache, IWaypoint {
      *            true for all logs, false for friend logs only
      * @return the logs with all entries or just the entries of the friends, never <code>null</code>
      */
-    public List<cgLog> getLogs(boolean allLogs) {
+    public List<LogEntry> getLogs(boolean allLogs) {
         if (logs == null) {
             return Collections.emptyList();
         }
         if (allLogs) {
             return logs;
         }
-        ArrayList<cgLog> friendLogs = new ArrayList<cgLog>();
-        for (cgLog log : logs) {
+        ArrayList<LogEntry> friendLogs = new ArrayList<LogEntry>();
+        for (LogEntry log : logs) {
             if (log.friend) {
                 friendLogs.add(log);
             }
@@ -967,7 +967,7 @@ public class cgCache implements ICache, IWaypoint {
      * @param logs
      *            the log entries
      */
-    public void setLogs(List<cgLog> logs) {
+    public void setLogs(List<LogEntry> logs) {
         this.logs = logs;
     }
 
@@ -1358,16 +1358,16 @@ public class cgCache implements ICache, IWaypoint {
         return attributes != null && attributes.size() > 0;
     }
 
-    public void prependLog(final cgLog log) {
+    public void prependLog(final LogEntry log) {
         if (logs == null) {
-            logs = new ArrayList<cgLog>();
+            logs = new ArrayList<LogEntry>();
         }
         logs.add(0, log);
     }
 
-    public void appendLog(final cgLog log) {
+    public void appendLog(final LogEntry log) {
         if (logs == null) {
-            logs = new ArrayList<cgLog>();
+            logs = new ArrayList<LogEntry>();
         }
         logs.add(log);
     }
@@ -1537,9 +1537,9 @@ public class cgCache implements ICache, IWaypoint {
 
             // store images from logs
             if (Settings.isStoreLogImages()) {
-                for (cgLog log : cache.getLogs(true)) {
-                    if (CollectionUtils.isNotEmpty(log.logImages)) {
-                        for (cgImage oneLogImg : log.logImages) {
+                for (LogEntry log : cache.getLogs(true)) {
+                    if (log.hasLogImages()) {
+                        for (cgImage oneLogImg : log.getLogImages()) {
                             imgGetter.getDrawable(oneLogImg.getUrl());
                         }
                     }

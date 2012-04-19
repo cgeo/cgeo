@@ -2,7 +2,7 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgLog;
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
@@ -209,7 +209,7 @@ class GpxExport extends AbstractExport {
                     if (cache.getLogs().size() > 0) {
                         gpx.append("<groundspeak:logs>");
 
-                        for (cgLog log : cache.getLogs()) {
+                        for (LogEntry log : cache.getLogs()) {
                             gpx.append("<groundspeak:log id=\"");
                             gpx.append(log.id);
                             gpx.append("\">");

@@ -2189,7 +2189,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
             }
 
-            view.setAdapter(new ArrayAdapter<cgLog>(CacheDetailActivity.this, R.layout.cacheview_logs_item, cache.getLogs(allLogs)) {
+            view.setAdapter(new ArrayAdapter<LogEntry>(CacheDetailActivity.this, R.layout.cacheview_logs_item, cache.getLogs(allLogs)) {
                 final UserActionsClickListener userActionsClickListener = new UserActionsClickListener();
                 final DecryptTextClickListener decryptTextClickListener = new DecryptTextClickListener();
 
@@ -2205,7 +2205,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         rowView.setTag(holder);
                     }
 
-                    final cgLog log = getItem(position);
+                    final LogEntry log = getItem(position);
 
                     if (log.date > 0) {
                         holder.date.setText(Formatter.formatShortDate(log.date));
@@ -2238,10 +2238,10 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
 
                     // images
-                    if (CollectionUtils.isNotEmpty(log.logImages)) {
+                    if (log.hasLogImages()) {
 
                         List<String> titles = new ArrayList<String>(5);
-                        for (cgImage image : log.logImages) {
+                        for (cgImage image : log.getLogImages()) {
                             if (StringUtils.isNotBlank(image.getTitle())) {
                                 titles.add(image.getTitle());
                             }
@@ -2255,7 +2255,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         holder.images.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cgeoimages.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), new ArrayList<cgImage>(log.logImages));
+                                cgeoimages.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), new ArrayList<cgImage>(log.getLogImages()));
                             }
                         });
                     } else {
@@ -2511,5 +2511,12 @@ public class CacheDetailActivity extends AbstractActivity {
         cachesIntent.putExtra("geocode", geocode);
         cachesIntent.putExtra("name", cacheName);
         context.startActivity(cachesIntent);
+    }
+
+    public static void startActivityGuid(final Context context, final String guid, final String cacheName) {
+        final Intent cacheIntent = new Intent(context, CacheDetailActivity.class);
+        cacheIntent.putExtra("guid", guid);
+        cacheIntent.putExtra("name", cacheName);
+        context.startActivity(cacheIntent);
     }
 }

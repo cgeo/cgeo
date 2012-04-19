@@ -66,7 +66,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
     private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private String[] viewstates = null;
     private boolean gettingViewstate = true;
-    private List<cgTrackableLog> trackables = null;
+    private List<TrackableLog> trackables = null;
     private Calendar date = Calendar.getInstance();
     private LogType typeSelected = LogType.LOG_UNKNOWN;
     private int attempts = 0;
@@ -116,7 +116,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
                 inventoryView.removeAllViews();
 
-                for (cgTrackableLog tb : trackables) {
+                for (TrackableLog tb : trackables) {
                     LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.visit_trackable, null);
 
                     ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
@@ -384,7 +384,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         } else {
             final int realViewId = ((LinearLayout) findViewById(viewId)).getId();
 
-            for (final cgTrackableLog tb : trackables) {
+            for (final TrackableLog tb : trackables) {
                 if (tb.id == realViewId) {
                     menu.setHeaderTitle(tb.name);
                 }
@@ -421,7 +421,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                         }
                         tbText.setText(res.getString(logType.resourceId) + " ▼");
                     }
-                    for (cgTrackableLog tb : trackables) {
+                    for (TrackableLog tb : trackables) {
                         tb.action = logType;
                     }
                     tbChanged = true;
@@ -444,7 +444,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                         return false;
                     }
 
-                    for (cgTrackableLog tb : trackables) {
+                    for (TrackableLog tb : trackables) {
                         if (tb.id == group) {
                             tbChanged = true;
 
@@ -477,7 +477,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
         possibleLogTypes = cache.getPossibleLogTypes();
 
-        final cgLog log = app.loadLogOffline(geocode);
+        final LogEntry log = app.loadLogOffline(geocode);
         if (log != null) {
             typeSelected = log.type;
             date.setTime(new Date(log.date));
@@ -702,7 +702,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     log, trackables);
 
             if (status == StatusCode.NO_ERROR) {
-                final cgLog logNow = new cgLog();
+                final LogEntry logNow = new LogEntry();
                 logNow.author = Settings.getUsername();
                 logNow.date = date.getTimeInMillis();
                 logNow.type = typeSelected;
@@ -767,7 +767,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     private class ActivityState {
         private final String[] viewstates;
-        private final List<cgTrackableLog> trackables;
+        private final List<TrackableLog> trackables;
         private final int attempts;
         private final List<LogType> possibleLogTypes;
         private final LogType typeSelected;
