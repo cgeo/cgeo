@@ -524,8 +524,8 @@ public class cgeoapplication extends Application {
         storage.removeCaches(geocodes, removeFlags);
     }
 
-    public Collection<? extends cgWaypoint> getWaypointsInViewport(long centerLat, long centerLon, long spanLat, long spanLon) {
-        return storage.loadWaypoints(centerLat, centerLon, spanLat, spanLon);
+    public Collection<? extends cgWaypoint> getWaypointsInViewport(long centerLat, long centerLon, long spanLat, long spanLon, boolean excludeMine, boolean excludeDisabled) {
+        return storage.loadWaypoints(centerLat, centerLon, spanLat, spanLon, excludeMine, excludeDisabled);
     }
 
 }

@@ -1217,19 +1217,18 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
                     }
                 }
-                if (searchIntent == null && geocodeIntent == null)
+                countVisibleCaches();
+                if (cachesCnt < Settings.getWayPointsThreshold())
                 {
-                    //All visible waypoints
-                    //TODO exclude found
-                    waypoints.addAll(app.getWaypointsInViewport(centerLat, centerLon, spanLat, spanLon));
-                }
-                else
-                {
-                    //All waypoints from the viewed caches
                     waypoints.clear();
-                    countVisibleCaches();
-                    if (cachesCnt < Settings.getWayPointsThreshold())
+                    if (searchIntent == null && geocodeIntent == null)
                     {
+                        //All visible waypoints
+                        waypoints.addAll(app.getWaypointsInViewport(centerLat, centerLon, spanLat, spanLon, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches()));
+                    }
+                    else
+                    {
+                        //All waypoints from the viewed caches
                         for (cgCache c : caches.getAsList()) {
                             waypoints.addAll(c.getWaypoints());
                         }
