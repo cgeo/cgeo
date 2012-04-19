@@ -1,12 +1,13 @@
 package cgeo.geocaching;
 
 
+import cgeo.geocaching.utils.Log;
+
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import android.os.SystemClock;
 import android.test.AndroidTestCase;
 import android.text.Html;
-import android.util.Log;
 
 public class HtmlPerformanceTest extends AndroidTestCase {
     private String input;
@@ -56,7 +57,7 @@ public class HtmlPerformanceTest extends AndroidTestCase {
         final long start = SystemClock.elapsedRealtime();
         runnable.run();
         final long end = SystemClock.elapsedRealtime();
-        Log.d("cgeotest", label + ": " + (end - start) + " ms");
+        Log.d(label + ": " + (end - start) + " ms");
         return end - start;
     }
 }
