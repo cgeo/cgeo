@@ -28,13 +28,11 @@ public interface LiveMapStrategy {
         public final int id;
         public final EnumSet<StrategyFlag> flags;
         private final int stringId;
-        private String l10n; // not final because the locale can be changed
 
         private Strategy(int id, EnumSet<StrategyFlag> flags, int stringId) {
             this.id = id;
             this.flags = flags;
             this.stringId = stringId;
-            setL10n();
         }
 
         public final static Strategy getById(final int id) {
@@ -47,18 +45,7 @@ public interface LiveMapStrategy {
         }
 
         public final String getL10n() {
-            return l10n;
-        }
-
-        public void setL10n() {
-            cgeoapplication instance = cgeoapplication.getInstance();
-            if (instance != null) {
-                this.l10n = instance.getBaseContext().getResources().getString(stringId);
-            } else {
-                // fix #1347: needed for AndroidTestCases that don't guarantee an initialized application
-                this.l10n = this.name();
-            }
+            return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
         }
     }
-
 }

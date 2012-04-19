@@ -25,13 +25,11 @@ public enum CacheSize {
     public final String id;
     public final int comparable;
     private final int stringId;
-    private String l10n; // not final because the locale can be changed
 
     private CacheSize(String id, int comparable, int stringId) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;
-        setL10n();
     }
 
     final private static Map<String, CacheSize> FIND_BY_ID;
@@ -61,18 +59,7 @@ public enum CacheSize {
     }
 
     public final String getL10n() {
-        return l10n;
+        return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
-
-    public void setL10n() {
-        cgeoapplication instance = cgeoapplication.getInstance();
-        if (instance != null) {
-            this.l10n = instance.getBaseContext().getResources().getString(stringId);
-        } else {
-            // fix #1347: needed for AndroidTestCases that don't guarantee an initialized application
-            this.l10n = this.id;
-        }
-    }
-
 }
 

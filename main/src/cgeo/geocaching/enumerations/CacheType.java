@@ -37,7 +37,6 @@ public enum CacheType {
     public final String pattern;
     public final String guid;
     private final int stringId;
-    private String l10n; // not final because the locale can be changed
     public final int markerId;
 
     private CacheType(String id, String pattern, String guid, int stringId, int markerId) {
@@ -45,7 +44,6 @@ public enum CacheType {
         this.pattern = pattern;
         this.guid = guid;
         this.stringId = stringId;
-        setL10n();
         this.markerId = markerId;
     }
 
@@ -79,17 +77,7 @@ public enum CacheType {
     }
 
     public final String getL10n() {
-        return l10n;
-    }
-
-    public void setL10n() {
-        cgeoapplication instance = cgeoapplication.getInstance();
-        if (instance != null) {
-            this.l10n = instance.getBaseContext().getResources().getString(stringId);
-        } else {
-            // fix #1347: needed for AndroidTestCases that don't guarantee an initialized application
-            this.l10n = this.id;
-        }
+        return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
 
     public boolean isEvent() {
