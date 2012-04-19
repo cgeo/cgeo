@@ -12,6 +12,8 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
+import org.mapsforge.android.maps.MapDatabase;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -89,6 +91,10 @@ public class MapsforgeMapProvider implements MapProvider {
     public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context, Go4CacheUser userOne) {
         MapsforgeOtherCachersOverlayItem baseItem = new MapsforgeOtherCachersOverlayItem(context, userOne);
         return baseItem;
+    }
+
+    public static boolean isValidMapFile(String mapFileIn) {
+        return MapDatabase.isValidMapFile(mapFileIn);
     }
 
 }
