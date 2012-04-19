@@ -6,6 +6,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -116,10 +117,8 @@ public final class Settings {
     private static final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(cgeoapplication.getInstance().getBaseContext());
     static {
         migrateSettings();
+        Log.setDebugUnsaved(sharedPrefs.getBoolean(KEY_DEBUG, false));
     }
-
-    // Debug settings are accessed often enough to be cached
-    private static Boolean cachedDebug = sharedPrefs.getBoolean(KEY_DEBUG, false);
 
     // maps
     private static MapProvider mapProvider = null;
@@ -196,7 +195,6 @@ public final class Settings {
 
             e.putInt(KEY_SETTINGS_VERSION, 1) ; // mark migrated
             e.commit();
-            cachedDebug = sharedPrefs.getBoolean(KEY_DEBUG, false);
         }
     }
 
@@ -1082,7 +1080,7 @@ public final class Settings {
 
 
     public static boolean isDebug() {
-        return cachedDebug;
+        return Log.isDebug();
     }
 
     public static void setDebug(final boolean debug) {
@@ -1092,7 +1090,7 @@ public final class Settings {
                 edit.putBoolean(KEY_DEBUG, debug);
             }
         });
-        cachedDebug = debug;
+        Log.setDebugUnsaved(debug);
     }
 
     public static boolean getHideLiveMapHint() {
