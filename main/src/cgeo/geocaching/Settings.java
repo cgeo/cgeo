@@ -923,6 +923,12 @@ public final class Settings {
         return CacheType.getById(sharedPrefs.getString(KEY_CACHE_TYPE, CacheType.ALL.id));
     }
 
+    /**
+     * The Threshold for the showing of child waypoints
+     * 
+     * @return
+     */
+
     public static int getWayPointsThreshold() {
         return sharedPrefs.getInt(KEY_SHOW_WAYPOINTS_THRESHOLD, 0);
     }
