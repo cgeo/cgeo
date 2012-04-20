@@ -2,6 +2,7 @@ package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.ICoordinates;
 
+import java.util.Locale;
 import java.util.Set;
 
 
@@ -146,13 +147,15 @@ public class Viewport {
     /**
      * Return the "where" part of the string appropriate for a SQL query.
      *
+     * @param dbTable
+     *            the database table to use as prefix, or null if no prefix is required
      * @return the string without the "where" keyword
      */
-    public String sqlWhere() {
-        return "latitude >= " + getLatitudeMin() + " and " +
-                "latitude <= " + getLatitudeMax() + " and " +
-                "longitude >= " + getLongitudeMin() + " and " +
-                "longitude <= " + getLongitudeMax();
+    public String sqlWhere(final String dbTable) {
+        final String prefix = dbTable == null ? "" : (dbTable + ".");
+        return String.format((Locale) null,
+                "%slatitude >= %s and %slatitude <= %s and %slongitude >= %s and %slongitude <= %s",
+                prefix, getLatitudeMin(), prefix, getLatitudeMax(), prefix, getLongitudeMin(), prefix, getLongitudeMax());
     }
 
     /**
@@ -168,7 +171,7 @@ public class Viewport {
 
     /**
      * Return a viewport that contains the current viewport as well as another point.
-     * 
+     *
      * @param coords
      *            the point we want in the viewport
      * @return either the same or an expanded viewport

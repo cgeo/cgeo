@@ -54,7 +54,8 @@ public class ViewportTest extends AndroidTestCase {
     }
 
     public static void testSqlWhere() {
-        assertEquals("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0", vpRef.sqlWhere());
+        assertEquals("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0", vpRef.sqlWhere(null));
+        assertEquals("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0", vpRef.sqlWhere("t"));
     }
 
     public static void testEquals() {
