@@ -1,13 +1,14 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.IConversion;
+import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.app.Activity;
 import android.graphics.BlurMaskFilter;
@@ -61,27 +62,10 @@ public class ScaleOverlay implements GeneralOverlay {
         final Geopoint leftCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 - span / 2);
         final Geopoint rightCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 + span / 2);
 
-        String units;
-        double distance = leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR;
-        if (Settings.isUseMetricUnits()) {
-            if (distance >= 1) {
-                units = "km";
-            } else {
-                distance *= 1000;
-                units = "m";
-            }
-        } else {
-            distance /= IConversion.MILES_TO_KILOMETER;
-            if (distance >= 1) {
-                units = "mi";
-            } else {
-                distance *= 5280;
-                units = "ft";
-            }
-        }
+        final ImmutablePair<Double, String> scaled = HumanDistance.scaleUnit(leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR);
 
-        final double distanceRound = keepSignificantDigit(distance);
-        final double pixels = Math.round((mapView.getWidth() * SCALE_WIDTH_FACTOR / distance) * distanceRound);
+        final double distanceRound = keepSignificantDigit(scaled.left);
+        final double pixels = Math.round((mapView.getWidth() * SCALE_WIDTH_FACTOR / scaled.left) * distanceRound);
 
         if (blur == null) {
             blur = new BlurMaskFilter(3, BlurMaskFilter.Blur.NORMAL);
@@ -112,15 +96,17 @@ public class ScaleOverlay implements GeneralOverlay {
             scale.setColor(0xFF000000);
         }
 
+        final String formatString = distanceRound >= 1 ? "%.0f" : "%.1f";
+
         canvas.drawLine(10, bottom, 10, (bottom - (8 * pixelDensity)), scaleShadow);
         canvas.drawLine((int) (pixels + 10), bottom, (int) (pixels + 10), (bottom - (8 * pixelDensity)), scaleShadow);
         canvas.drawLine(8, bottom, (int) (pixels + 12), bottom, scaleShadow);
-        canvas.drawText(String.format("%.0f", distanceRound) + " " + units, (float) (pixels - (10 * pixelDensity)), (bottom - (10 * pixelDensity)), scaleShadow);
+        canvas.drawText(String.format(formatString, distanceRound) + " " + scaled.right, (float) (pixels - (10 * pixelDensity)), (bottom - (10 * pixelDensity)), scaleShadow);
 
         canvas.drawLine(11, bottom, 11, (bottom - (6 * pixelDensity)), scale);
         canvas.drawLine((int) (pixels + 9), bottom, (int) (pixels + 9), (bottom - (6 * pixelDensity)), scale);
         canvas.drawLine(10, bottom, (int) (pixels + 10), bottom, scale);
-        canvas.drawText(String.format("%.0f", distanceRound) + " " + units, (float) (pixels - (10 * pixelDensity)), (bottom - (10 * pixelDensity)), scale);
+        canvas.drawText(String.format(formatString, distanceRound) + " " + scaled.right, (float) (pixels - (10 * pixelDensity)), (bottom - (10 * pixelDensity)), scale);
     }
 
     @Override
