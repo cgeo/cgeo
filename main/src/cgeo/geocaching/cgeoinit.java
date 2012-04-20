@@ -48,7 +48,6 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class cgeoinit extends AbstractActivity {
 
@@ -704,30 +703,22 @@ public class cgeoinit extends AbstractActivity {
             return;
         }
 
-        final AtomicReference<String> fileRef = new AtomicReference<String>(null);
         final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup), res.getString(R.string.init_backup_running), true, false);
-        Thread backupThread = new Thread() {
-            final Handler handler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    dialog.dismiss();
-                    final String file = fileRef.get();
-                    if (file != null) {
-                        helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_success) + "\n" + file);
-                    } else {
-                        helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
-                    }
-                    refreshBackupLabel();
-                }
-            };
-
+        new Thread() {
             @Override
             public void run() {
-                fileRef.set(app.backupDatabase());
-                handler.sendMessage(handler.obtainMessage());
+                final String backupFileName = app.backupDatabase();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        helpDialog(res.getString(R.string.init_backup_backup),
+                                backupFileName != null ? res.getString(R.string.init_backup_success) + "\n" + backupFileName : res.getString(R.string.init_backup_failed));
+                        refreshBackupLabel();
+                    }
+                });
             }
-        };
-        backupThread.start();
+        }.start();
     }
 
     private void refreshBackupLabel() {
