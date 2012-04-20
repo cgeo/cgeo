@@ -1543,12 +1543,10 @@ public class cgData {
                 loadFlags.contains(LoadFlag.LOAD_INVENTORY) ||
                 loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
 
-            Set<cgCache> cachesFromDB = loadCaches(remaining, null, null, null, null, loadFlags);
-            if (cachesFromDB != null) {
-                result.addAll(cachesFromDB);
-                for (cgCache cache : cachesFromDB) {
-                    remaining.remove(cache.getGeocode());
-                }
+            final Set<cgCache> cachesFromDB = loadCachesFromGeocodes(remaining, loadFlags);
+            result.addAll(cachesFromDB);
+            for (final cgCache cache : cachesFromDB) {
+                remaining.remove(cache.getGeocode());
             }
         }
 
@@ -1572,126 +1570,95 @@ public class cgData {
      * Load caches.
      *
      * @param geocodes
-     *            OR
-     * @param centerLat
-     * @param centerLon
-     * @param spanLat
-     * @param spanLon
      * @param loadFlags
      * @return Set of loaded caches. Never null.
      */
-    private Set<cgCache> loadCaches(final Set<String> geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
-        final Set<cgCache> caches = new HashSet<cgCache>();
+    private Set<cgCache> loadCachesFromGeocodes(final Set<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
         if (CollectionUtils.isEmpty(geocodes)) {
-            return caches;
-        }
-        // Using more than one of the parametersets results in overly comlex wheres
-        if (CollectionUtils.isNotEmpty(geocodes)
-                && centerLat != null
-                && centerLon != null
-                && spanLat != null
-                && spanLon != null) {
-            throw new IllegalArgumentException("Please use only one parameter");
+            return Collections.emptySet();
         }
 
-        Log.d("cgData.loadCaches(" + geocodes.toString() + ") from DB");
+
+        Log.d("cgData.loadCachesFromGeocodes(" + geocodes.toString() + ") from DB");
 
         init();
 
-        Cursor cursor = null;
+        final Cursor cursor = databaseRO.query(
+                dbTableCaches,
+                CACHE_COLUMNS,
+                cgData.whereGeocodeIn(geocodes),
+                null,
+                null,
+                null,
+                null,
+                null);
 
         try {
-            StringBuilder where = null;
+            if (cursor.moveToFirst()) {
+                final Set<cgCache> caches = new HashSet<cgCache>();
+                do {
+                    //Extracted Method = LOADDBMINIMAL
+                    cgCache cache = cgData.createCacheFromDatabaseContent(cursor);
 
-            // viewport limitation
-            if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
-                where = buildCoordinateWhere(dbTableCaches, centerLat, centerLon, spanLat, spanLon);
+                    if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
+                        cache.setAttributes(loadAttributes(cache.getGeocode()));
+                    }
+
+                    if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
+                        final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(waypoints)) {
+                            cache.setWaypoints(waypoints, false);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
+                        final List<cgImage> spoilers = loadSpoilers(cache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(spoilers)) {
+                            if (cache.getSpoilers() == null) {
+                                cache.setSpoilers(new ArrayList<cgImage>());
+                            } else {
+                                cache.getSpoilers().clear();
+                            }
+                            cache.getSpoilers().addAll(spoilers);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
+                        cache.setLogs(loadLogs(cache.getGeocode()));
+                        final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
+                        if (MapUtils.isNotEmpty(logCounts)) {
+                            cache.getLogCounts().clear();
+                            cache.getLogCounts().putAll(logCounts);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
+                        final List<cgTrackable> inventory = loadInventory(cache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(inventory)) {
+                            if (cache.getInventory() == null) {
+                                cache.setInventory(new ArrayList<cgTrackable>());
+                            } else {
+                                cache.getInventory().clear();
+                            }
+                            cache.getInventory().addAll(inventory);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+                        cache.setLogOffline(hasLogOffline(cache.getGeocode()));
+                    }
+                    cache.addStorageLocation(StorageLocation.DATABASE);
+                    cacheCache.putCacheInCache(cache);
+
+                    caches.add(cache);
+                } while (cursor.moveToNext());
+                return caches;
+            } else {
+                return Collections.emptySet();
             }
-            else
-            {
-                where = cgData.whereGeocodeIn(geocodes);
-            }
-            cursor = databaseRO.query(
-                    dbTableCaches,
-                    CACHE_COLUMNS,
-                    where.toString(),
-                    null,
-                    null,
-                    null,
-                    null,
-                    null);
-
-            if (cursor != null) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-
-                    do {
-                        //Extracted Method = LOADDBMINIMAL
-                        cgCache cache = cgData.createCacheFromDatabaseContent(cursor);
-
-                        if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
-                            cache.setAttributes(loadAttributes(cache.getGeocode()));
-                        }
-
-                        if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
-                            final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
-                            if (CollectionUtils.isNotEmpty(waypoints)) {
-                                cache.setWaypoints(waypoints, false);
-                            }
-                        }
-
-                        if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
-                            final List<cgImage> spoilers = loadSpoilers(cache.getGeocode());
-                            if (CollectionUtils.isNotEmpty(spoilers)) {
-                                if (cache.getSpoilers() == null) {
-                                    cache.setSpoilers(new ArrayList<cgImage>());
-                                } else {
-                                    cache.getSpoilers().clear();
-                                }
-                                cache.getSpoilers().addAll(spoilers);
-                            }
-                        }
-
-                        if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
-                            cache.setLogs(loadLogs(cache.getGeocode()));
-                            final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
-                            if (MapUtils.isNotEmpty(logCounts)) {
-                                cache.getLogCounts().clear();
-                                cache.getLogCounts().putAll(logCounts);
-                            }
-                        }
-
-                        if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
-                            final List<cgTrackable> inventory = loadInventory(cache.getGeocode());
-                            if (CollectionUtils.isNotEmpty(inventory)) {
-                                if (cache.getInventory() == null) {
-                                    cache.setInventory(new ArrayList<cgTrackable>());
-                                } else {
-                                    cache.getInventory().clear();
-                                }
-                                cache.getInventory().addAll(inventory);
-                            }
-                        }
-
-                        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
-                            cache.setLogOffline(hasLogOffline(cache.getGeocode()));
-                        }
-                        cache.addStorageLocation(StorageLocation.DATABASE);
-                        cacheCache.putCacheInCache(cache);
-
-                        caches.add(cache);
-                    } while (cursor.moveToNext());
-                }
-            }
-        } catch (Exception e) {
-            Log.e("cgData.getCaches: " + e.toString());
-        }
-
-        if (cursor != null) {
+        } finally {
             cursor.close();
         }
-
-        return caches;
     }
 
     /**
@@ -3126,7 +3093,7 @@ public class cgData {
         newlyCreatedDatabase = false;
     }
 
-    private static StringBuilder whereGeocodeIn(Set<String> geocodes) {
+    private static String whereGeocodeIn(Set<String> geocodes) {
         final StringBuilder where = new StringBuilder();
 
         if (geocodes != null && geocodes.size() > 0) {
@@ -3145,7 +3112,7 @@ public class cgData {
             where.append(')');
         }
 
-        return where;
+        return where.toString();
     }
 
     /**
