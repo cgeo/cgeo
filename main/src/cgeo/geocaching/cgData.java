@@ -2197,14 +2197,14 @@ public class cgData {
     }
 
     /**
-     * Number of caches stored. The number is shown on the starting activitiy of c:geo
+     * Number of caches stored. The number is shown on the starting activity of c:geo
      *
      * @param detailedOnly
      * @param cacheType
      * @param list
      * @return
      */
-    public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
+    public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final int list) {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
@@ -2212,7 +2212,7 @@ public class cgData {
 
         String listSql = null;
         String listSqlW = null;
-        if (list == null) {
+        if (list == 0) {
             listSql = " where reason >= 1";
             listSqlW = " and reason >= 1";
         } else if (list >= 1) {

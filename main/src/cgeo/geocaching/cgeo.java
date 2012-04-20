@@ -790,7 +790,7 @@ public class cgeo extends AbstractActivity {
                 }
             }
 
-            countBubbleCnt = app.getAllStoredCachesCount(true, CacheType.ALL, null);
+            countBubbleCnt = app.getAllStoredCachesCount(true, CacheType.ALL);
 
             countBubbleHandler.sendEmptyMessage(0);
         }

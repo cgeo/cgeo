@@ -699,7 +699,7 @@ public class cgeoinit extends AbstractActivity {
      */
     public void backup(View view) {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
-        if (app.getAllStoredCachesCount(true, CacheType.ALL, null) == 0) {
+        if (app.getAllStoredCachesCount(true, CacheType.ALL) == 0) {
             helpDialog(res.getString(R.string.init_backup), res.getString(R.string.init_backup_unnecessary));
             return;
         }

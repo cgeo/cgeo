@@ -43,7 +43,7 @@ public abstract class Compare {
                 assertTrue(actual.getAttributes().contains(attribute));
             }
             for (LogType logType : expected.getLogCounts().keySet()) {
-                assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
+                assertTrue(actual.getLogCounts().get(logType).intValue() >= expected.getLogCounts().get(logType).intValue());
             }
 
             // the inventory can differ to often, therefore we don't compare them

@@ -319,6 +319,11 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#getAllStoredCachesCount(boolean, CacheType, Integer)} */
+    public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType) {
+        return storage.getAllStoredCachesCount(detailedOnly, cacheType, 0);
+    }
+
+    /** {@link cgData#getAllStoredCachesCount(boolean, CacheType, Integer)} */
     public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
         return storage.getAllStoredCachesCount(detailedOnly, cacheType, list);
     }

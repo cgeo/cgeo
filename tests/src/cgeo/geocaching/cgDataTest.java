@@ -52,7 +52,7 @@ public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
             // save caches to DB (cache1=listId1, cache2=listId1)
             app.saveCache(cache1, LoadFlags.SAVE_ALL);
             app.saveCache(cache2, LoadFlags.SAVE_ALL);
-            assertTrue(app.getAllStoredCachesCount(false, CacheType.ALL, null) >= 2);
+            assertTrue(app.getAllStoredCachesCount(false, CacheType.ALL) >= 2);
 
             // rename list (cache1=listId1, cache2=listId1)
             assertEquals(1, app.renameList(listId1, "cgData Test (renamed)"));
