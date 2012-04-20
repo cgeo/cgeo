@@ -2184,11 +2184,14 @@ public class cgData {
         trackable.setGuid(cursor.getString(cursor.getColumnIndex("guid")));
         trackable.setName(cursor.getString(cursor.getColumnIndex("title")));
         trackable.setOwner(cursor.getString(cursor.getColumnIndex("owner")));
-        String releasedPre = cursor.getString(cursor.getColumnIndex("released"));
-        if (releasedPre != null && Long.getLong(releasedPre) != null) {
-            trackable.setReleased(new Date(Long.getLong(releasedPre)));
-        } else {
-            trackable.setReleased(null);
+        String released = cursor.getString(cursor.getColumnIndex("released"));
+        if (released != null) {
+            try {
+                long releaseMilliSeconds = Long.parseLong(released);
+                trackable.setReleased(new Date(releaseMilliSeconds));
+            } catch (NumberFormatException e) {
+                Log.e("createTrackableFromDatabaseContent", e);
+            }
         }
         trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
         trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));
