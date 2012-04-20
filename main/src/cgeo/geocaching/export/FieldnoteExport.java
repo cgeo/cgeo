@@ -1,8 +1,8 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
@@ -89,7 +89,6 @@ class FieldnoteExport extends AbstractExport {
     private class ExportTask extends AsyncTask<Void, Integer, Boolean> {
         private final List<cgCache> caches;
         private final Activity activity;
-        private final boolean upload;
         private final boolean onlyNew;
         private final Progress progress = new Progress();
         private File exportFile;
@@ -111,7 +110,6 @@ class FieldnoteExport extends AbstractExport {
         public ExportTask(final List<cgCache> caches, final Activity activity, final boolean upload, final boolean onlyNew) {
             this.caches = caches;
             this.activity = activity;
-            this.upload = upload;
             this.onlyNew = onlyNew;
         }
 

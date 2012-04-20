@@ -98,53 +98,6 @@ public class Viewport {
     }
 
     /**
-     * Check if coordinates are located in a viewport (defined by its center and span
-     * in each direction).
-     *
-     * @param centerLat
-     *            the viewport center latitude
-     * @param centerLon
-     *            the viewport center longitude
-     * @param spanLat
-     *            the latitude span
-     * @param spanLon
-     *            the longitude span
-     * @param coords
-     *            the coordinates to check
-     * @return true if the coordinates are in the viewport
-     */
-    // FIXME: this static method has nothing to do here and should be used with a viewport, not some int numbers,
-    // when CGeoMap.java gets rewritten
-    public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, final Geopoint coords) {
-        final Viewport viewport = new Viewport(new Geopoint(centerLat / 1e6, centerLon / 1e6), spanLat / 1e6, spanLon / 1e6);
-        return viewport.contains(coords);
-    }
-
-    /**
-     * Check if an area is located in a viewport (defined by its center and span
-     * in each direction).
-     *
-     * expects coordinates in E6 format
-     *
-     * @param centerLat1
-     * @param centerLon1
-     * @param centerLat2
-     * @param centerLon2
-     * @param spanLat1
-     * @param spanLon1
-     * @param spanLat2
-     * @param spanLon2
-     * @return
-     */
-    // FIXME: this static method has nothing to do here and should be used with a viewport, not some int numbers,
-    // when CGeoMap.java gets rewritten
-    public static boolean isInViewPort(int centerLat1, int centerLon1, int centerLat2, int centerLon2, int spanLat1, int spanLon1, int spanLat2, int spanLon2) {
-        final Viewport outer = new Viewport(new Geopoint(centerLat1 / 1e6, centerLon1 / 1e6), spanLat1 / 1e6, spanLon1 / 1e6);
-        final Viewport inner = new Viewport(new Geopoint(centerLat2 / 1e6, centerLon2 / 1e6), spanLat2 / 1e6, spanLon2 / 1e6);
-        return outer.includes(inner);
-    }
-
-    /**
      * Return the "where" part of the string appropriate for a SQL query.
      *
      * @param dbTable

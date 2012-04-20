@@ -1662,58 +1662,15 @@ public class cgData {
     }
 
     /**
-     * Builds a where for coordinates
+     * Builds a where for a viewport with the size enhanced by 50%.
      *
-     * @param dbtable
-     *
-     * @param centerLat
-     * @param centerLon
-     * @param spanLat
-     * @param spanLon
+     * @param dbTable
+     * @param viewport
      * @return
      */
 
-    private static StringBuilder buildCoordinateWhere(String dbtable, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon) {
-        StringBuilder where = new StringBuilder();
-        double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
-        double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
-        double lonMin = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
-        double lonMax = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
-        double llCache;
-
-        if (latMin > latMax) {
-            llCache = latMax;
-            latMax = latMin;
-            latMin = llCache;
-        }
-        if (lonMin > lonMax) {
-            llCache = lonMax;
-            lonMax = lonMin;
-            lonMin = llCache;
-        }
-
-        where.append("(");
-        where.append(dbtable);
-        where.append(".");
-        where.append("latitude >= ");
-        where.append(String.format((Locale) null, "%.6f", latMin));
-        where.append(" and ");
-        where.append(dbtable);
-        where.append(".");
-        where.append("latitude <= ");
-        where.append(String.format((Locale) null, "%.6f", latMax));
-        where.append(" and ");
-        where.append(dbtable);
-        where.append(".");
-        where.append("longitude >= ");
-        where.append(String.format((Locale) null, "%.6f", lonMin));
-        where.append(" and ");
-        where.append(dbtable);
-        where.append(".");
-        where.append("longitude <= ");
-        where.append(String.format((Locale) null, "%.6f", lonMax));
-        where.append(')');
-        return where;
+    private static String buildCoordinateWhere(final String dbTable, final Viewport viewport) {
+        return viewport.resize(1.5).sqlWhere(dbTable);
     }
 
     /**
@@ -2432,13 +2389,13 @@ public class cgData {
     }
 
     /** Retrieve all stored caches from DB */
-    public Set<String> loadCachedInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
-        return loadInViewport(false, centerLat, centerLon, spanLat, spanLon, cacheType);
+    public Set<String> loadCachedInViewport(final Viewport viewport, final CacheType cacheType) {
+        return loadInViewport(false, viewport, cacheType);
     }
 
     /** Retrieve stored caches from DB with listId >= 1 */
-    public Set<String> loadStoredInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
-        return loadInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
+    public Set<String> loadStoredInViewport(final Viewport viewport, final CacheType cacheType) {
+        return loadInViewport(true, viewport, cacheType);
     }
 
     /**
@@ -2453,18 +2410,18 @@ public class cgData {
      * @param cacheType
      * @return Set with geocodes
      */
-    private Set<String> loadInViewport(final boolean stored, final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
+    private Set<String> loadInViewport(final boolean stored, final Viewport viewport, final CacheType cacheType) {
         init();
 
         final Set<String> geocodes = new HashSet<String>();
 
         // if not stored only, get codes from CacheCache as well
         if (!stored) {
-            geocodes.addAll(CacheCache.getInstance().getInViewport(centerLat, centerLon, spanLat, spanLon, cacheType));
+            geocodes.addAll(CacheCache.getInstance().getInViewport(viewport, cacheType));
         }
 
         // viewport limitation
-        StringBuilder where = buildCoordinateWhere(dbTableCaches, centerLat, centerLon, spanLat, spanLon);
+        final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableCaches, viewport));
 
         // cacheType limitation
         if (cacheType != CacheType.ALL) {
@@ -3127,8 +3084,8 @@ public class cgData {
      * @return
      */
 
-    public Collection<? extends cgWaypoint> loadWaypoints(long centerLat, long centerLon, long spanLat, long spanLon, boolean excludeMine, boolean excludeDisabled) {
-        StringBuilder where = buildCoordinateWhere(dbTableWaypoints, centerLat, centerLon, spanLat, spanLon);
+    public Collection<? extends cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
+        final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableWaypoints, viewport));
         if (excludeMine)
         {
             where.append("and " + dbTableCaches + ".own == 0 and " + dbTableCaches + ".found == 0 ");

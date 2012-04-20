@@ -85,7 +85,7 @@ public class CacheCache {
         return cachesCache.get(geocode);
     }
 
-    public Set<String> getInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> getInViewport(final Viewport viewport, final CacheType cacheType) {
         final Set<String> geocodes = new HashSet<String>();
         for (final cgCache cache : cachesCache.values()) {
             if (cache.getCoords() == null) {
@@ -94,8 +94,7 @@ public class CacheCache {
                 Log.e("CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
                 continue;
             }
-            if ((CacheType.ALL == cacheType || cache.getType() == cacheType) &&
-                    Viewport.isCacheInViewPort(centerLat.intValue(), centerLon.intValue(), spanLat.intValue(), spanLon.intValue(), cache.getCoords())) {
+            if ((CacheType.ALL == cacheType || cache.getType() == cacheType) && viewport.contains(cache)) {
                 geocodes.add(cache.getGeocode());
             }
         }

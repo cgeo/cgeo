@@ -307,14 +307,14 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#loadCachedInViewport(long, long, long, long, CacheType)} */
-    public SearchResult getCachedInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
-        final Set<String> geocodes = storage.loadCachedInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
+    public SearchResult getCachedInViewport(final Viewport viewport, final CacheType cacheType) {
+        final Set<String> geocodes = storage.loadCachedInViewport(viewport, cacheType);
         return new SearchResult(geocodes);
     }
 
     /** {@link cgData#loadStoredInViewport(long, long, long, long, CacheType)} */
-    public SearchResult getStoredInViewport(final long centerLat, final long centerLon, final long spanLat, final long spanLon, final CacheType cacheType) {
-        final Set<String> geocodes = storage.loadStoredInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
+    public SearchResult getStoredInViewport(final Viewport viewport, final CacheType cacheType) {
+        final Set<String> geocodes = storage.loadStoredInViewport(viewport, cacheType);
         return new SearchResult(geocodes);
     }
 
@@ -524,8 +524,8 @@ public class cgeoapplication extends Application {
         storage.removeCaches(geocodes, removeFlags);
     }
 
-    public Collection<? extends cgWaypoint> getWaypointsInViewport(long centerLat, long centerLon, long spanLat, long spanLon, boolean excludeMine, boolean excludeDisabled) {
-        return storage.loadWaypoints(centerLat, centerLon, spanLat, spanLon, excludeMine, excludeDisabled);
+    public Collection<? extends cgWaypoint> getWaypointsInViewport(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
+        return storage.loadWaypoints(viewport, excludeMine, excludeDisabled);
     }
 
 }
