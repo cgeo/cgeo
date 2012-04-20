@@ -24,18 +24,21 @@ public class HumanDistance {
             }
         } else {
             final float miles = distanceKilometers / IConversion.MILES_TO_KILOMETER;
-            if (distanceKilometers > 100) {
+            if (miles > 100) {
                 return String.format("%d", Math.round(miles)) + " mi";
-            } else if (distanceKilometers > 0.5) {
+            } else if (miles > 0.5) {
                 return String.format("%.1f", Double.valueOf(Math.round(miles * 10.0) / 10.0)) + " mi";
-            } else if (distanceKilometers > 0.1) {
+            } else if (miles > 0.1) {
                 return String.format("%.2f", Double.valueOf(Math.round(miles * 100.0) / 100.0)) + " mi";
-            } else if (distanceKilometers > 0.05) {
-                return String.format("%d", Math.round(miles * 5280.0)) + " ft";
-            } else if (distanceKilometers > 0.01) {
-                return String.format("%.1f", Double.valueOf(Math.round(miles * 5280 * 10.0) / 10.0)) + " ft";
+            }
+
+            final float feet = miles * 5280;
+            if (feet >= 100) {
+                return String.format("%d", Math.round(feet)) + " ft";
+            } else if (feet >= 10) {
+                return String.format("%.1f", Double.valueOf(Math.round(feet * 10.0) / 10.0)) + " ft";
             } else {
-                return String.format("%.2f", Double.valueOf(Math.round(miles * 5280 * 100.0) / 100.0)) + " ft";
+                return String.format("%.2f", Double.valueOf(Math.round(feet * 100.0) / 100.0)) + " ft";
             }
         }
     }
