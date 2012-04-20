@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
@@ -1206,7 +1207,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         private ViewGroup createAttributeIconsLayout(int parentWidth) {
-            LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
+            final LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
             rows.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
             rows.setOrientation(LinearLayout.VERTICAL);
 
@@ -1215,7 +1216,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
             noAttributeIconsFound = true;
 
-            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
             for (String attributeName : cache.getAttributes()) {
                 boolean strikethru = attributeName.endsWith("_no");
                 // cut off _yes / _no
@@ -1233,12 +1233,10 @@ public class CacheDetailActivity extends AbstractActivity {
                     rows.addView(attributeRow);
                 }
 
-                // dynamically search icon of the attribute
-                Drawable d = null;
-                int id = res.getIdentifier("attribute_" + attributeName, "drawable", packageName);
-                if (id > 0) {
+                CacheAttribute attrib = CacheAttribute.getByGcRawName(attributeName);
+                if (attrib != CacheAttribute.UNKNOWN) {
                     noAttributeIconsFound = false;
-                    d = res.getDrawable(id);
+                    Drawable d = res.getDrawable(attrib.drawableId);
                     iv.setImageDrawable(d);
                     // strike through?
                     if (strikethru) {
@@ -1250,7 +1248,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         fl.addView(strikethruImage);
                     }
                 } else {
-                    d = res.getDrawable(R.drawable.attribute_icon_not_found);
+                    Drawable d = res.getDrawable(R.drawable.attribute_icon_not_found);
                     iv.setImageDrawable(d);
                 }
 
@@ -1271,25 +1269,29 @@ public class CacheDetailActivity extends AbstractActivity {
         private ViewGroup createAttributeDescriptionsLayout() {
             final LinearLayout descriptions = (LinearLayout) getLayoutInflater().inflate(
                     R.layout.attribute_descriptions, null);
-            TextView attribView = (TextView) descriptions.getChildAt(0);
+            final TextView attribView = (TextView) descriptions.getChildAt(0);
 
-            StringBuilder buffer = new StringBuilder();
-            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
+            final StringBuilder buffer = new StringBuilder();
             final List<String> attributes = cache.getAttributes();
 
-            for (String attribute : attributes) {
-                // dynamically search for a translation of the attribute
-                int id = res.getIdentifier("attribute_" + attribute, "string", packageName);
-                if (id > 0) {
-                    String translated = res.getString(id);
+            for (String attributeName : attributes) {
+                boolean negated = attributeName.endsWith("_no");
+                // cut off _yes / _no
+                if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
+                    attributeName = attributeName.substring(0, attributeName.lastIndexOf('_'));
+                }
+                // search for a translation of the attribute
+                CacheAttribute attrib = CacheAttribute.getByGcRawName(attributeName);
+                if (attrib != CacheAttribute.UNKNOWN) {
+                    String translated = res.getString(negated ? attrib.stringIdNo : attrib.stringIdYes);
                     if (StringUtils.isNotBlank(translated)) {
-                        attribute = translated;
+                        attributeName = translated;
                     }
                 }
                 if (buffer.length() > 0) {
                     buffer.append('\n');
                 }
-                buffer.append(attribute);
+                buffer.append(attributeName);
             }
 
             if (noAttributeIconsFound) {
