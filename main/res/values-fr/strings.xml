@@ -218,7 +218,7 @@
   <string name="warn_search_help_tb">Veuillez remplir le code de l\'objet voyageur. Par exemple \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
   <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
-
+  <string name="warn_invalid_mapfile">Le fichier sélectionné n\'est pas un fichier de carte mapsforge version 0.2.4.\nLes cartes hors-lignes ne sont pas disponibles.</string>
 
   <string name="info_log_posted">Envoi de la visite réussi.</string>
   <string name="info_log_saved">Sauvegarde de la visite réussie.</string>
@@ -299,6 +299,7 @@
   <string name="caches_move_selected">Déplacer les caches sélectionnées</string>
   <string name="caches_move_all">Tout déplacer</string>
   <string name="caches_map_locus">Locus</string>
+  <string name="caches_map_locus_export">Exporter vers Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Recopier le texte se trouvant dans l\'image pour charger les coordonnées des caches. Cette étape peut être désactivée dans les Paramètres.</string>
   <string name="caches_recaptcha_hint">Texte de l\'image</string>
@@ -758,6 +759,18 @@
   <!-- add-ons -->
   <string name="addon_missing_title">Module complémentaire manquant</string>
   <string name="addon_download_prompt">Le télécharger sur Google Play.</string>
+
+  <!-- export -->
+  <string name="export">Exporter</string>
+  <string name="export_as">Exporter en tant que…</string>
+  <string name="export_exportedto">exporté vers</string>
+  <string name="export_failed">Échec de l\'exportation</string>
+  <string name="export_fieldnotes">Notes de terrain</string>
+  <string name="export_fieldnotes_info">Les notes de terrain seront sauvées dans le dossier /sdcard/field-notes avec, comme nom de fichier, la date et l\'heure courantes.</string>
+  <string name="export_fieldnotes_upload">Envoyer vers geocaching.com</string>
+  <string name="export_fieldnotes_uploading">Envoi en cours…</string>
+  <string name="export_fieldnotes_onlynew">Uniquement les nouveautés depuis le dernier envoi</string>
+  <string name="export_gpx">GPX</string>
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Chiens autorisés</string>
