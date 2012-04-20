@@ -42,77 +42,63 @@ public class cgeowaypoint extends AbstractActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            try {
-                if (waypoint == null) {
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                        waitDialog = null;
-                    }
+            if (waitDialog != null) {
+                waitDialog.dismiss();
+                waitDialog = null;
+            }
 
-                    showToast(res.getString(R.string.err_waypoint_load_failed));
+            if (waypoint == null) {
+                showToast(res.getString(R.string.err_waypoint_load_failed));
+                finish();
+                return;
+            }
 
-                    finish();
-                    return;
-                } else {
-                    final TextView identification = (TextView) findViewById(R.id.identification);
-                    final TextView coords = (TextView) findViewById(R.id.coordinates);
-                    final ImageView defaultNavigation = (ImageView) findViewById(R.id.defaultNavigation);
-                    final View separator = findViewById(R.id.separator);
+            final TextView identification = (TextView) findViewById(R.id.identification);
+            final TextView coords = (TextView) findViewById(R.id.coordinates);
+            final ImageView defaultNavigation = (ImageView) findViewById(R.id.defaultNavigation);
+            final View separator = findViewById(R.id.separator);
 
-                    final View headline = findViewById(R.id.headline);
-                    registerNavigationMenu(headline);
+            final View headline = findViewById(R.id.headline);
+            registerNavigationMenu(headline);
 
-                    if (StringUtils.isNotBlank(waypoint.getName())) {
-                        setTitle(Html.fromHtml(waypoint.getName()).toString());
-                    } else {
-                        setTitle(res.getString(R.string.waypoint_title));
-                    }
+            if (StringUtils.isNotBlank(waypoint.getName())) {
+                setTitle(Html.fromHtml(waypoint.getName()).toString());
+            } else {
+                setTitle(res.getString(R.string.waypoint_title));
+            }
 
-                    if (!waypoint.getPrefix().equalsIgnoreCase("OWN")) {
-                        identification.setText(waypoint.getPrefix() + "/" + waypoint.getLookup());
-                    } else {
-                        identification.setText(res.getString(R.string.waypoint_custom));
-                    }
-                    registerNavigationMenu(identification);
-                    waypoint.setIcon(res, identification);
+            if (!waypoint.getPrefix().equalsIgnoreCase("OWN")) {
+                identification.setText(waypoint.getPrefix() + "/" + waypoint.getLookup());
+            } else {
+                identification.setText(res.getString(R.string.waypoint_custom));
+            }
+            registerNavigationMenu(identification);
+            waypoint.setIcon(res, identification);
 
-                    if (waypoint.getCoords() != null) {
-                        coords.setText(Html.fromHtml(waypoint.getCoords().toString()), TextView.BufferType.SPANNABLE);
-                        defaultNavigation.setVisibility(View.VISIBLE);
-                        separator.setVisibility(View.VISIBLE);
-                    } else {
-                        coords.setText(res.getString(R.string.waypoint_unknown_coordinates));
-                        defaultNavigation.setVisibility(View.GONE);
-                        separator.setVisibility(View.GONE);
-                    }
-                    registerNavigationMenu(coords);
+            if (waypoint.getCoords() != null) {
+                coords.setText(Html.fromHtml(waypoint.getCoords().toString()), TextView.BufferType.SPANNABLE);
+                defaultNavigation.setVisibility(View.VISIBLE);
+                separator.setVisibility(View.VISIBLE);
+            } else {
+                coords.setText(res.getString(R.string.waypoint_unknown_coordinates));
+                defaultNavigation.setVisibility(View.GONE);
+                separator.setVisibility(View.GONE);
+            }
+            registerNavigationMenu(coords);
 
-                    if (StringUtils.isNotBlank(waypoint.getNote())) {
-                        final TextView note = (TextView) findViewById(R.id.note);
-                        note.setText(Html.fromHtml(waypoint.getNote()), TextView.BufferType.SPANNABLE);
-                        registerNavigationMenu(note);
-                    }
+            if (StringUtils.isNotBlank(waypoint.getNote())) {
+                final TextView note = (TextView) findViewById(R.id.note);
+                note.setText(Html.fromHtml(waypoint.getNote()), TextView.BufferType.SPANNABLE);
+                registerNavigationMenu(note);
+            }
 
-                    Button buttonEdit = (Button) findViewById(R.id.edit);
-                    buttonEdit.setOnClickListener(new editWaypointListener());
+            final Button buttonEdit = (Button) findViewById(R.id.edit);
+            buttonEdit.setOnClickListener(new editWaypointListener());
 
-                    Button buttonDelete = (Button) findViewById(R.id.delete);
-                    if (waypoint.isUserDefined()) {
-                        buttonDelete.setOnClickListener(new deleteWaypointListener());
-                        buttonDelete.setVisibility(View.VISIBLE);
-                    }
-
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                        waitDialog = null;
-                    }
-                }
-            } catch (Exception e) {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                    waitDialog = null;
-                }
-                Log.e("cgeowaypoint.loadWaypointHandler: " + e.toString());
+            if (waypoint.isUserDefined()) {
+                final Button buttonDelete = (Button) findViewById(R.id.delete);
+                buttonDelete.setOnClickListener(new deleteWaypointListener());
+                buttonDelete.setVisibility(View.VISIBLE);
             }
         }
 
@@ -329,7 +315,6 @@ public class cgeowaypoint extends AbstractActivity {
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
 
                 finish();
-                return;
             } else {
                 showToast(res.getString(R.string.err_waypoint_delete_failed));
             }

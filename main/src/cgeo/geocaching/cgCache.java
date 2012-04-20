@@ -394,15 +394,9 @@ public class cgCache implements ICache, IWaypoint {
         if (StringUtils.isBlank(guid)) {
             return false;
         }
-        Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
-        Matcher matcherOk = patternOk.matcher(page);
-        if (matcherOk.find()) {
-            Log.i("cgCache.isGuidContainedInPage: guid '" + guid + "' found");
-            return true;
-        } else {
-            Log.i("cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
-            return false;
-        }
+        final Boolean found = Pattern.compile(guid, Pattern.CASE_INSENSITIVE).matcher(page).find();
+        Log.i("cgCache.isGuidContainedInPage: guid '" + guid + "' " + (found ? "" : "not ") + "found");
+        return found;
     }
 
     public boolean isEventCache() {

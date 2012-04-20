@@ -106,28 +106,28 @@ public abstract class Login {
         loginResponse = Network.postRequest("https://www.geocaching.com/login/default.aspx", params);
         loginData = Network.getResponseData(loginResponse);
 
-        if (StringUtils.isNotBlank(loginData)) {
-            if (Login.getLoginStatus(loginData)) {
-                Log.i("Successfully logged in Geocaching.com as " + login.left);
-
-                Login.switchToEnglish(loginData);
-                Settings.setCookieStore(Cookies.dumpCookieStore());
-
-                return StatusCode.NO_ERROR; // logged in
-            } else {
-                if (loginData.contains("Your username/password combination does not match.")) {
-                    Log.i("Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
-                    return StatusCode.WRONG_LOGIN_DATA; // wrong login
-                } else {
-                    Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
-                    return StatusCode.UNKNOWN_ERROR; // can't login
-                }
-            }
-        } else {
+        if (StringUtils.isBlank(loginData)) {
             Log.e("cgeoBase.login: Failed to retrieve login page (2nd)");
             // FIXME: should it be CONNECTION_FAILED to match the first attempt?
             return StatusCode.COMMUNICATION_ERROR; // no login page
         }
+
+        if (Login.getLoginStatus(loginData)) {
+            Log.i("Successfully logged in Geocaching.com as " + login.left);
+
+            Login.switchToEnglish(loginData);
+            Settings.setCookieStore(Cookies.dumpCookieStore());
+
+            return StatusCode.NO_ERROR; // logged in
+        }
+
+        if (loginData.contains("Your username/password combination does not match.")) {
+            Log.i("Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
+            return StatusCode.WRONG_LOGIN_DATA; // wrong login
+        }
+
+        Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
+            return StatusCode.UNKNOWN_ERROR; // can't login
     }
 
     public static StatusCode logout() {
@@ -421,13 +421,15 @@ public abstract class Login {
     public static String getRequestLogged(final String uri, final Parameters params) {
         final String data = Network.getResponseData(Network.getRequest(uri, params));
 
-        if (!getLoginStatus(data)) {
-            if (login() == StatusCode.NO_ERROR) {
-                return Network.getResponseData(Network.getRequest(uri, params));
-            } else {
-                Log.i("Working as guest.");
-            }
+        if (getLoginStatus(data)) {
+            return data;
         }
+
+        if (login() == StatusCode.NO_ERROR) {
+            return Network.getResponseData(Network.getRequest(uri, params));
+        }
+
+        Log.w("Working as guest.");
         return data;
     }
 

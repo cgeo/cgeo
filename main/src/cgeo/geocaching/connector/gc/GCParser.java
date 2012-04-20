@@ -186,15 +186,11 @@ public abstract class GCParser {
             if (StringUtils.isNotBlank(inventoryPre)) {
                 final Matcher matcherTbsInside = GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE.matcher(inventoryPre);
                 while (matcherTbsInside.find()) {
-                    if (matcherTbsInside.groupCount() == 2 && matcherTbsInside.group(2) != null) {
-                        final String inventoryItem = matcherTbsInside.group(2).toLowerCase();
-                        if (inventoryItem.equals("premium member only cache")) {
-                            continue;
-                        } else {
-                            if (cache.getInventoryItems() <= 0) {
-                                cache.setInventoryItems(1);
-                            }
-                        }
+                    if (matcherTbsInside.groupCount() == 2 &&
+                            matcherTbsInside.group(2) != null &&
+                            !matcherTbsInside.group(2).equalsIgnoreCase("premium member only cache") &&
+                            cache.getInventoryItems() <= 0) {
+                        cache.setInventoryItems(1);
                     }
                 }
             }

@@ -129,19 +129,18 @@ public class GeopointParser
 
             return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0), matcher.start(), matcher.group().length());
 
-        } else {
+        }
 
-            // Nothing found with "N 52...", try to match string as decimaldegree
-            try {
-                final String[] items = StringUtils.split(text.trim());
-                if (items.length > 0) {
-                    final int index = (latlon == LatLon.LON ? items.length - 1 : 0);
-                    final int pos = (latlon == LatLon.LON ? text.lastIndexOf(items[index]) : text.indexOf(items[index]));
-                    return new ResultWrapper(Double.parseDouble(items[index]), pos, items[index].length());
-                }
-            } catch (NumberFormatException e) {
-                // The right exception will be raised below.
+        // Nothing found with "N 52...", try to match string as decimaldegree
+        try {
+            final String[] items = StringUtils.split(text.trim());
+            if (items.length > 0) {
+                final int index = (latlon == LatLon.LON ? items.length - 1 : 0);
+                final int pos = (latlon == LatLon.LON ? text.lastIndexOf(items[index]) : text.indexOf(items[index]));
+                return new ResultWrapper(Double.parseDouble(items[index]), pos, items[index].length());
             }
+        } catch (NumberFormatException e) {
+            // The right exception will be raised below.
         }
 
         throw new ParseException("Could not parse coordinates as " + latlon + ": \"" + text + "\"", latlon);

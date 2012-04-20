@@ -197,42 +197,27 @@ public class cgeonavigate extends AbstractActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (Settings.isUseCompass()) {
-            menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(R.string.use_gps)).setIcon(android.R.drawable.ic_menu_compass);
-        } else {
-            menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(R.string.use_compass)).setIcon(android.R.drawable.ic_menu_compass);
-        }
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass)).setIcon(android.R.drawable.ic_menu_compass);
         menu.add(0, MENU_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
         menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(android.R.drawable.ic_menu_edit);
         if (coordinates.size() > 1) {
-            SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
-
+            final SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
             int cnt = 4;
-            for (IWaypoint coordinate : coordinates) {
+            for (final IWaypoint coordinate : coordinates) {
                 subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
                 cnt++;
             }
-
-            return true;
         } else {
             menu.add(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces).setEnabled(false);
-
-            return true;
         }
+        return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-
-        MenuItem item = menu.findItem(MENU_SWITCH_COMPASS_GPS);
-        if (Settings.isUseCompass()) {
-            item.setTitle(res.getString(R.string.use_gps));
-        } else {
-            item.setTitle(res.getString(R.string.use_compass));
-        }
-
+        menu.findItem(MENU_SWITCH_COMPASS_GPS).setTitle(res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
         return true;
     }
 

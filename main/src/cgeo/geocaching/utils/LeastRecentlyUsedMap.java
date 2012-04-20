@@ -54,9 +54,9 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
             final V oldVal = super.remove(key);
     		put(key, value);
     		return oldVal;
-    	} else {
-    		return super.put(key, value);
     	}
+
+        return super.put(key, value);
     }
 
     @Override

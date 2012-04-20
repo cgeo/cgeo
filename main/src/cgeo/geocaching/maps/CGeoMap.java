@@ -876,17 +876,17 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      * @return the current map state as an array of int, or null if no map state is available
      */
     private int[] currentMapState() {
-        if (mapView != null) {
-            int[] mapState = new int[4];
-            GeoPointImpl mapCenter = mapView.getMapViewCenter();
-            mapState[0] = mapCenter.getLatitudeE6();
-            mapState[1] = mapCenter.getLongitudeE6();
-            mapState[2] = mapView.getMapZoomLevel();
-            mapState[3] = followMyLocation ? 1 : 0;
-            return mapState;
-        } else {
+        if (mapView == null) {
             return mapStateIntent;
         }
+
+        final GeoPointImpl mapCenter = mapView.getMapViewCenter();
+        return new int[] {
+                mapCenter.getLatitudeE6(),
+                mapCenter.getLongitudeE6(),
+                mapView.getMapZoomLevel(),
+                followMyLocation ? 1 : 0
+        };
     }
 
     private void savePrefs() {

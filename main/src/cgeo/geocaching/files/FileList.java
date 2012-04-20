@@ -63,30 +63,14 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
         @Override
         public void handleMessage(Message msg) {
-            try {
-                if (CollectionUtils.isEmpty(files)) {
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                    }
-
-                    showToast(res.getString(R.string.file_list_no_files));
-
-                    finish();
-                    return;
-                } else {
-                    if (adapter != null) {
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
-            } catch (Exception e) {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
-                Log.e("cgFileList.loadFilesHandler: " + e.toString());
+            if (waitDialog != null) {
+                waitDialog.dismiss();
+            }
+            if (CollectionUtils.isEmpty(files)) {
+                showToast(res.getString(R.string.file_list_no_files));
+                finish();
+            } else if (adapter != null) {
+                adapter.notifyDataSetChanged();
             }
         }
     };

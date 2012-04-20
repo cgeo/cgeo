@@ -438,7 +438,6 @@ public class cgeowaypointadd extends AbstractActivity {
                     StaticMapsProvider.storeWaypointStaticMap(cache, cgeowaypointadd.this, waypoint, false);
                 }
                 finish();
-                return;
             } else {
                 showToast(res.getString(R.string.err_waypoint_add_failed));
             }

@@ -203,17 +203,20 @@ public abstract class Network {
     }
 
     private static Parameters cacheHeaders(final File cacheFile) {
-        if (cacheFile != null && cacheFile.exists()) {
-            final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
-            if (etag != null) {
-                return new Parameters("If-None-Match", etag);
-            } else {
-                final String lastModified = LocalStorage.getSavedHeader(cacheFile, "last-modified");
-                if (lastModified != null) {
-                    return new Parameters("If-Modified-Since", lastModified);
-                }
-            }
+        if (cacheFile == null || !cacheFile.exists()) {
+            return null;
         }
+
+        final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
+        if (etag != null) {
+            return new Parameters("If-None-Match", etag);
+        }
+
+        final String lastModified = LocalStorage.getSavedHeader(cacheFile, "last-modified");
+        if (lastModified != null) {
+            return new Parameters("If-Modified-Since", lastModified);
+        }
+
         return null;
     }
 

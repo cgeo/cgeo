@@ -128,16 +128,16 @@ public class Viewport {
     public Viewport expand(final ICoordinates point) {
         if (contains(point)) {
             return this;
-        } else {
-            final Geopoint coords = point.getCoords();
-            final double latitude = coords.getLatitude();
-            final double longitude = coords.getLongitude();
-            final double latMin = Math.min(getLatitudeMin(), latitude);
-            final double latMax = Math.max(getLatitudeMax(), latitude);
-            final double lonMin = Math.min(getLongitudeMin(), longitude);
-            final double lonMax = Math.max(getLongitudeMax(), longitude);
-            return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
         }
+
+        final Geopoint coords = point.getCoords();
+        final double latitude = coords.getLatitude();
+        final double longitude = coords.getLongitude();
+        final double latMin = Math.min(getLatitudeMin(), latitude);
+        final double latMax = Math.max(getLatitudeMax(), latitude);
+        final double lonMin = Math.min(getLongitudeMin(), longitude);
+        final double lonMax = Math.max(getLongitudeMax(), longitude);
+        return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
     }
 
     /**

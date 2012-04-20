@@ -104,11 +104,10 @@ public final class Settings {
 
         static coordInputFormatEnum fromInt(int id) {
             final coordInputFormatEnum[] values = coordInputFormatEnum.values();
-            if (id >= 0 && id < values.length) {
-                return values[id];
-            } else {
+            if (id < 0 || id >= values.length) {
                 return Min;
             }
+            return values[id];
         }
     }
 
@@ -234,11 +233,7 @@ public final class Settings {
     }
 
     public static String getUsername() {
-        if (null == username) {
-            return sharedPrefs.getString(KEY_USERNAME, null);
-        } else {
-            return username;
-        }
+        return username != null ? username : sharedPrefs.getString(KEY_USERNAME, null);
     }
 
     public static boolean setLogin(final String username, final String password) {
@@ -928,7 +923,7 @@ public final class Settings {
 
     /**
      * The Threshold for the showing of child waypoints
-     * 
+     *
      * @return
      */
 

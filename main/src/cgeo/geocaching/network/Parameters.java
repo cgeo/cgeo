@@ -82,11 +82,7 @@ public class Parameters extends ArrayList<NameValuePair> {
      * @return the object itself if it is non-null, a new one otherwise
      */
     public static Parameters extend(final Parameters params, final String... keyValues) {
-        if (params == null) {
-            return new Parameters(keyValues);
-        } else {
-            return params.put(keyValues);
-        }
+        return params == null ? new Parameters(keyValues) : params.put(keyValues);
     }
 
     /**

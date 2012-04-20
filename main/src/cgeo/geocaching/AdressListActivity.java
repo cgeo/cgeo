@@ -57,18 +57,13 @@ public class AdressListActivity extends AbstractListActivity {
             @Override
             protected void onPostExecute(final List<Address> addresses) {
                 waitDialog.dismiss();
-                try {
-                    if (CollectionUtils.isEmpty(addresses)) {
-                        showToast(res.getString(R.string.err_search_address_no_match));
-                        finish();
-                        return;
-                    } else {
-                        for (Address address : addresses) {
-                            adapter.add(address); // don't use addAll, it's only available with API >= 11
-                        }
+                if (CollectionUtils.isNotEmpty(addresses)) {
+                    for (final Address address : addresses) {
+                        adapter.add(address); // don't use addAll, it's only available with API >= 11
                     }
-                } catch (Exception e) {
-                    Log.e("AdressListActivity.onPostExecute", e);
+                } else {
+                    showToast(res.getString(R.string.err_search_address_no_match));
+                    finish();
                 }
             }
 

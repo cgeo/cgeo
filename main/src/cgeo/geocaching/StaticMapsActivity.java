@@ -37,26 +37,20 @@ public class StaticMapsActivity extends AbstractActivity {
 
         @Override
         public void handleMessage(Message msg) {
+            if (waitDialog != null) {
+                waitDialog.dismiss();
+            }
             try {
                 if (CollectionUtils.isEmpty(maps)) {
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                    }
-
                     if ((waypoint_id != null && Settings.isStoreOfflineWpMaps()) || (waypoint_id == null && Settings.isStoreOfflineMaps())) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(StaticMapsActivity.this);
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(StaticMapsActivity.this);
                         builder.setMessage(R.string.err_detail_ask_store_map_static).setPositiveButton(android.R.string.yes, dialogClickListener)
                                 .setNegativeButton(android.R.string.no, dialogClickListener).show();
                     } else {
                         showToast(res.getString(R.string.err_detail_not_load_map_static));
                         finish();
                     }
-                    return;
                 } else {
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                    }
-
                     if (inflater == null) {
                         inflater = getLayoutInflater();
                     }
@@ -66,7 +60,7 @@ public class StaticMapsActivity extends AbstractActivity {
                     }
                     smapsView.removeAllViews();
 
-                    for (Bitmap image : maps) {
+                    for (final Bitmap image : maps) {
                         if (image != null) {
                             final ImageView map = (ImageView) inflater.inflate(R.layout.map_static_item, null);
                             map.setImageBitmap(image);
@@ -75,9 +69,6 @@ public class StaticMapsActivity extends AbstractActivity {
                     }
                 }
             } catch (Exception e) {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
                 Log.e("StaticMapsActivity.loadMapsHandler: " + e.toString());
             }
         }
