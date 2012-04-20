@@ -3,8 +3,6 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 
-import android.content.res.Resources;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -97,17 +95,7 @@ public enum CacheAttribute {
     }
 
     public String getL10n(final boolean enabled) {
-        final String attributeDescriptor = INTERNAL_PRE + gcRawName + (enabled ? INTERNAL_YES : INTERNAL_NO);
-
-        cgeoapplication instance = cgeoapplication.getInstance();
-        if (instance != null) {
-            Resources res = instance.getResources();
-            int id = res.getIdentifier(attributeDescriptor, "string", instance.getBaseContext().getPackageName());
-
-            return (id > 0) ? res.getString(id) : attributeDescriptor;
-        } else {
-            return attributeDescriptor;
-        }
+        return cgeoapplication.getInstance().getResources().getString(enabled ? stringIdYes : stringIdNo);
     }
 
     private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME;
