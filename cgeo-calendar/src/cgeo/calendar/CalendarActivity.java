@@ -215,7 +215,7 @@ public final class CalendarActivity extends Activity {
 
             final Date eventDate = parseDate();
             final String description = parseDescription();
-            final String location = parseLocation();
+            final String eventLocation = parseLocation();
 
             // values
             final ContentValues event = new ContentValues();
@@ -226,8 +226,8 @@ public final class CalendarActivity extends Activity {
             event.put("title", Html.fromHtml(name).toString());
             event.put("description", description);
 
-            if (location.length() > 0) {
-                event.put("eventLocation", location);
+            if (eventLocation.length() > 0) {
+                event.put("eventLocation", eventLocation);
             }
             event.put("allDay", 1);
             event.put("hasAlarm", 0);
@@ -251,7 +251,7 @@ public final class CalendarActivity extends Activity {
         try {
             final Date eventDate = parseDate();
             final String description = parseDescription();
-            final String location = parseLocation();
+            final String eventLocation = parseLocation();
 
             /*
              * TODO These strings are available as constants starting with API 14 and can be used when
@@ -266,7 +266,7 @@ public final class CalendarActivity extends Activity {
                     .putExtra("description", description)
                     .putExtra("hasAlarm", false)
                     .putExtra("eventTimezone", "UTC")
-                    .putExtra("eventLocation", location);
+                    .putExtra("eventLocation", eventLocation);
             startActivity(intent);
         } catch (Exception e) {
             showToast(getResources().getString(R.string.event_fail));
