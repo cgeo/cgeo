@@ -59,6 +59,8 @@ public class cgData {
             "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon", "coordsChanged", "finalDefined"
             // reason is replaced by listId in cgCache
     };
+    /** The list of fields needed for mapping. */
+    private static final String[] WAYPOINT_COLUMNS = new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" };
 
     /** Number of days (as ms) after temporarily saved caches are deleted */
     private static long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
@@ -1603,7 +1605,7 @@ public class cgData {
 
             // viewport limitation
             if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
-                where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
+                where = buildCoordinateWhere(dbTableCaches, centerLat, centerLon, spanLat, spanLon);
             }
             else
             {
@@ -1695,6 +1697,8 @@ public class cgData {
     /**
      * Builds a where for coordinates
      *
+     * @param dbtable
+     *
      * @param centerLat
      * @param centerLon
      * @param spanLat
@@ -1702,7 +1706,7 @@ public class cgData {
      * @return
      */
 
-    private static StringBuilder buildCoordinateWhere(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon) {
+    private static StringBuilder buildCoordinateWhere(String dbtable, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon) {
         StringBuilder where = new StringBuilder();
         double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
         double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -1721,13 +1725,25 @@ public class cgData {
             lonMin = llCache;
         }
 
-        where.append("(latitude >= ");
+        where.append("(");
+        where.append(dbtable);
+        where.append(".");
+        where.append("latitude >= ");
         where.append(String.format((Locale) null, "%.6f", latMin));
-        where.append(" and latitude <= ");
+        where.append(" and ");
+        where.append(dbtable);
+        where.append(".");
+        where.append("latitude <= ");
         where.append(String.format((Locale) null, "%.6f", latMax));
-        where.append(" and longitude >= ");
+        where.append(" and ");
+        where.append(dbtable);
+        where.append(".");
+        where.append("longitude >= ");
         where.append(String.format((Locale) null, "%.6f", lonMin));
-        where.append(" and longitude <= ");
+        where.append(" and ");
+        where.append(dbtable);
+        where.append(".");
+        where.append("longitude <= ");
         where.append(String.format((Locale) null, "%.6f", lonMax));
         where.append(')');
         return where;
@@ -1900,7 +1916,7 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,
-                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" },
+                WAYPOINT_COLUMNS,
                 "_id = ?",
                 new String[] { Integer.toString(id) },
                 null,
@@ -1934,7 +1950,7 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,
-                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" },
+                WAYPOINT_COLUMNS,
                 "geocode = ?",
                 new String[] { geocode },
                 null,
@@ -2481,7 +2497,7 @@ public class cgData {
         }
 
         // viewport limitation
-        StringBuilder where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
+        StringBuilder where = buildCoordinateWhere(dbTableCaches, centerLat, centerLon, spanLat, spanLon);
 
         // cacheType limitation
         if (cacheType != CacheType.ALL) {
@@ -3139,24 +3155,32 @@ public class cgData {
      * @param centerLon
      * @param spanLat
      * @param spanLon
+     * @param excludeDisabled
+     * @param excludeMine
      * @return
      */
 
-    public Collection<? extends cgWaypoint> loadWaypoints(long centerLat, long centerLon, long spanLat, long spanLon) {
-        StringBuilder where = buildCoordinateWhere(centerLat, centerLon, spanLat, spanLon);
+    public Collection<? extends cgWaypoint> loadWaypoints(long centerLat, long centerLon, long spanLat, long spanLon, boolean excludeMine, boolean excludeDisabled) {
+        StringBuilder where = buildCoordinateWhere(dbTableWaypoints, centerLat, centerLon, spanLat, spanLon);
+        if (excludeMine)
+        {
+            where.append("and " + dbTableCaches + ".own == 0 and " + dbTableCaches + ".found == 0 ");
+        }
+        if (excludeDisabled)
+        {
+            where.append("and " + dbTableCaches + ".disabled == 0 ");
+        }
         init();
 
         List<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
 
-        Cursor cursor = databaseRO.query(
-                dbTableWaypoints,
-                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" },
-                where.toString(),
-                null,
-                null,
-                null,
-                "_id",
-                "100");
+        String query = "SELECT ";
+        for (int i = 0; i < WAYPOINT_COLUMNS.length; i++) {
+            query += (i > 0 ? ", " : "") + dbTableWaypoints + "." + WAYPOINT_COLUMNS[i] + " ";
+        }
+        query += " FROM " + dbTableWaypoints + ", " + dbTableCaches + " WHERE " + dbTableWaypoints + "._id == " + dbTableCaches + "._id and " + where;
+        Cursor cursor = databaseRO.rawQuery(
+                query, null);
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();

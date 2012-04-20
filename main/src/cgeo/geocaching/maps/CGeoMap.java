@@ -1201,8 +1201,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 if (search != null) {
                     downloaded = true;
-                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_ONLY));
-                    waypoints.addAll(app.getWaypointsInViewport(centerLat, centerLon, spanLat, spanLon));
+                    Set<cgCache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                    caches.addAll(cachesFromSearchResult);
                 }
 
                 if (live) {
@@ -1214,6 +1214,23 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     for (cgCache cache : tempList) {
                         if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
                             caches.remove(cache);
+                        }
+                    }
+                }
+                countVisibleCaches();
+                if (cachesCnt < Settings.getWayPointsThreshold())
+                {
+                    waypoints.clear();
+                    if (searchIntent == null && geocodeIntent == null)
+                    {
+                        //All visible waypoints
+                        waypoints.addAll(app.getWaypointsInViewport(centerLat, centerLon, spanLat, spanLon, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches()));
+                    }
+                    else
+                    {
+                        //All waypoints from the viewed caches
+                        for (cgCache c : caches.getAsList()) {
+                            waypoints.addAll(c.getWaypoints());
                         }
                     }
                 }
