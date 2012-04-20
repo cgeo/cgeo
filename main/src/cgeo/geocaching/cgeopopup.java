@@ -148,7 +148,7 @@ public class cgeopopup extends AbstractActivity {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(final MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
             final Rect r = new Rect(0, 0, 0, 0);
             getWindow().getDecorView().getHitRect(r);
