@@ -19,6 +19,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -143,6 +145,19 @@ public class cgeopopup extends AbstractActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            final Rect r = new Rect(0, 0, 0, 0);
+            getWindow().getDecorView().getHitRect(r);
+            if (!r.contains((int) event.getX(), (int) event.getY())) {
+                finish();
+                return true;
+            }
+        }
+        return super.onTouchEvent(event);
     }
 
     @Override
