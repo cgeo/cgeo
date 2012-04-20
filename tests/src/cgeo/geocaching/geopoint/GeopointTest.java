@@ -1,8 +1,8 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.geopoint.Geopoint.DDD;
-import cgeo.geocaching.geopoint.Geopoint.DMM;
-import cgeo.geocaching.geopoint.Geopoint.DMS;
+import cgeo.geocaching.geopoint.direction.DDD;
+import cgeo.geocaching.geopoint.direction.DMM;
+import cgeo.geocaching.geopoint.direction.DMS;
 
 import android.os.Bundle;
 import android.test.AndroidTestCase;

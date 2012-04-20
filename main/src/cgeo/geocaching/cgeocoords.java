@@ -5,12 +5,12 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Geopoint.DDD;
-import cgeo.geocaching.geopoint.Geopoint.DMM;
-import cgeo.geocaching.geopoint.Geopoint.DMS;
-import cgeo.geocaching.geopoint.Geopoint.Direction;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser.ParseException;
+import cgeo.geocaching.geopoint.direction.DDD;
+import cgeo.geocaching.geopoint.direction.DMM;
+import cgeo.geocaching.geopoint.direction.DMS;
+import cgeo.geocaching.geopoint.direction.Direction;
 
 import org.apache.commons.lang3.StringUtils;
 

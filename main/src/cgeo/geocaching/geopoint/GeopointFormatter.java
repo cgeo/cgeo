@@ -1,7 +1,7 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.geopoint.Geopoint.DMM;
-import cgeo.geocaching.geopoint.Geopoint.DMS;
+import cgeo.geocaching.geopoint.direction.DMM;
+import cgeo.geocaching.geopoint.direction.DMS;
 
 import java.util.Locale;
 

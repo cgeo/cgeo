@@ -2,6 +2,10 @@ package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.geopoint.direction.DDD;
+import cgeo.geocaching.geopoint.direction.DMM;
+import cgeo.geocaching.geopoint.direction.DMS;
+import cgeo.geocaching.geopoint.direction.Direction;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
@@ -13,9 +17,6 @@ import org.json.JSONObject;
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * Abstraction of geographic point.
@@ -301,180 +302,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
             dms = new DMS(latitude, longitude);
         }
         return dms;
-    }
-
-    /* Constant values needed for calculation */
-    private static final double D60 = 60.0d;
-    private static final double D1000 = 1000.0d;
-    private static final double D3600 = 3600.0d;
-    private static final BigDecimal BD_SIXTY = BigDecimal.valueOf(D60);
-    private static final BigDecimal BD_THOUSAND = BigDecimal.valueOf(D1000);
-    private static final BigDecimal BD_ONEHOUNDREDTHOUSAND = BigDecimal.valueOf(100000.0d);
-
-    /**
-     * Value type for the direction.
-     */
-    public static class Direction {
-        /** latitude direction, 'N' or 'S' */
-        public final char latDir;
-        /** longitude direction, 'E' or 'W' */
-        public final char lonDir;
-
-        private Direction(final double latSigned, final double lonSigned) {
-            latDir = latSigned < 0 ? 'S' : 'N';
-            lonDir = lonSigned < 0 ? 'W' : 'E';
-        }
-
-        protected static String addZeros(final int value, final int len) {
-            return StringUtils.leftPad(Integer.toString(value), len, '0');
-        }
-    }
-
-    /**
-     * Value type for the DDD.DDDDD format.
-     */
-    public static final class DDD extends Direction {
-
-        /** latitude degree value */
-        public final int latDeg;
-        /** fractional part of the latitude degree value */
-        public final int latDegFrac;
-
-        public final int lonDeg;
-        public final int lonDegFrac;
-
-        private DDD(final double latSigned, final double lonSigned) {
-            super(latSigned, lonSigned);
-            BigDecimal bdLat = BigDecimal.valueOf(latSigned).abs();
-            latDeg = bdLat.intValue();
-            BigDecimal bdLatFrac = bdLat.subtract(BigDecimal.valueOf(latDeg)).multiply(BD_ONEHOUNDREDTHOUSAND);
-            latDegFrac = bdLatFrac.setScale(0, RoundingMode.HALF_UP).intValue();
-
-            BigDecimal bdlon = BigDecimal.valueOf(lonSigned).abs();
-            lonDeg = bdlon.intValue();
-            BigDecimal bdLonFrac = bdlon.subtract(BigDecimal.valueOf(lonDeg)).multiply(BD_ONEHOUNDREDTHOUSAND);
-            lonDegFrac = bdLonFrac.setScale(0, RoundingMode.HALF_UP).intValue();
-        }
-
-        public static Geopoint createGeopoint(final String latDir, final String latDeg, final String latDegFrac,
-                final String lonDir, final String lonDeg, final String lonDegFrac) {
-            double lat = 0.0d;
-            double lon = 0.0d;
-            try {
-                lat = Double.parseDouble(latDeg + "." + addZeros(Integer.parseInt(latDegFrac), 5));
-                lon = Double.parseDouble(lonDeg + "." + addZeros(Integer.parseInt(lonDegFrac), 5));
-            } catch (NumberFormatException e) {
-            }
-            lat *= "S".equalsIgnoreCase(latDir) ? -1 : 1;
-            lon *= "W".equalsIgnoreCase(lonDir) ? -1 : 1;
-            return new Geopoint(lat, lon);
-        }
-    }
-
-    public static final class DMM extends Direction {
-
-        public final int latDeg;
-        public final double latMinRaw;
-        public final int latMin;
-        public final int latMinFrac;
-
-        public final int lonDeg;
-        public final double lonMinRaw;
-        public final int lonMin;
-        public final int lonMinFrac;
-
-        private DMM(final double latSigned, final double lonSigned) {
-            super(latSigned, lonSigned);
-            BigDecimal bdLat = BigDecimal.valueOf(latSigned).abs();
-            latDeg = bdLat.intValue();
-            BigDecimal bdLatMin = bdLat.subtract(BigDecimal.valueOf(latDeg)).multiply(BD_SIXTY);
-            // Rounding here ...
-            bdLatMin = bdLatMin.setScale(3, RoundingMode.HALF_UP);
-            latMinRaw = bdLatMin.doubleValue();
-            latMin = bdLatMin.intValue();
-            BigDecimal bdLatMinFrac = bdLatMin.subtract(BigDecimal.valueOf(latMin)).multiply(BD_THOUSAND);
-            latMinFrac = bdLatMinFrac.setScale(0, RoundingMode.HALF_UP).intValue();
-
-            BigDecimal bdlon = BigDecimal.valueOf(lonSigned).abs();
-            lonDeg = bdlon.intValue();
-            BigDecimal bdLonMin = bdlon.subtract(BigDecimal.valueOf(lonDeg)).multiply(BD_SIXTY);
-            // Rounding here ...
-            bdLonMin = bdLonMin.setScale(3, RoundingMode.HALF_UP);
-            lonMinRaw = bdLonMin.doubleValue();
-            lonMin = bdLonMin.intValue();
-            BigDecimal bdLonMinFrac = bdLonMin.subtract(BigDecimal.valueOf(lonMin)).multiply(BD_THOUSAND);
-            lonMinFrac = bdLonMinFrac.setScale(0, RoundingMode.HALF_UP).intValue();
-        }
-
-        public static Geopoint createGeopoint(final String latDir, final String latDeg, final String latMin, final String latMinFrac,
-                final String lonDir, final String lonDeg, final String lonMin, final String lonMinFrac) {
-            double lat = 0.0d;
-            double lon = 0.0d;
-            try {
-                lat = Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac), 3)) / D60;
-                lon = Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac), 3)) / D60;
-            } catch (NumberFormatException e) {
-            }
-            lat *= "S".equalsIgnoreCase(latDir) ? -1 : 1;
-            lon *= "W".equalsIgnoreCase(lonDir) ? -1 : 1;
-            return new Geopoint(lat, lon);
-        }
-    }
-
-    public static final class DMS extends Direction {
-
-        public final int latDeg;
-        public final int latMin;
-        public final double latSecRaw;
-        public final int latSec;
-        public final int latSecFrac;
-
-        public final int lonDeg;
-        public final int lonMin;
-        public final double lonSecRaw;
-        public final int lonSec;
-        public final int lonSecFrac;
-
-        private DMS(final double latSigned, final double lonSigned) {
-            super(latSigned, lonSigned);
-            BigDecimal bdLat = BigDecimal.valueOf(latSigned).abs();
-            latDeg = bdLat.intValue();
-            BigDecimal bdLatMin = bdLat.subtract(BigDecimal.valueOf(latDeg)).multiply(BD_SIXTY);
-            latMin = bdLatMin.intValue();
-            BigDecimal bdLatSec = bdLatMin.subtract(BigDecimal.valueOf(latMin)).multiply(BD_SIXTY);
-            // Rounding here ...
-            bdLatSec = bdLatSec.setScale(3, RoundingMode.HALF_UP);
-            latSecRaw = bdLatSec.doubleValue();
-            latSec = bdLatSec.intValue();
-            BigDecimal bdLatSecFrac = bdLatSec.subtract(BigDecimal.valueOf(latSec)).multiply(BD_THOUSAND);
-            latSecFrac = bdLatSecFrac.setScale(0, RoundingMode.HALF_UP).intValue();
-
-            BigDecimal bdlon = BigDecimal.valueOf(lonSigned).abs();
-            lonDeg = bdlon.intValue();
-            BigDecimal bdLonMin = bdlon.subtract(BigDecimal.valueOf(lonDeg)).multiply(BD_SIXTY);
-            lonMin = bdLonMin.intValue();
-            BigDecimal bdLonSec = bdLonMin.subtract(BigDecimal.valueOf(lonMin)).multiply(BD_SIXTY);
-            // Rounding here ...
-            bdLonSec = bdLonSec.setScale(3, RoundingMode.HALF_UP);
-            lonSecRaw = bdLonSec.doubleValue();
-            lonSec = bdLonSec.intValue();
-            BigDecimal bdLonSecFrac = bdLonSec.subtract(BigDecimal.valueOf(lonSec)).multiply(BD_THOUSAND);
-            lonSecFrac = bdLonSecFrac.setScale(0, RoundingMode.HALF_UP).intValue();
-        }
-
-        public static Geopoint createGeopoint(final String latDir, final String latDeg, final String latMin, final String latSec, final String latSecFrac,
-                final String lonDir, final String lonDeg, final String lonMin, final String lonSec, final String lonSecFrac) {
-            double lat = 0.0d;
-            double lon = 0.0d;
-            try {
-                lat = Double.parseDouble(latDeg) + Double.parseDouble(latMin) / D60 + Double.parseDouble(latSec + "." + addZeros(Integer.parseInt(latSecFrac), 3)) / D3600;
-                lon = Double.parseDouble(lonDeg) + Double.parseDouble(lonMin) / D60 + Double.parseDouble(lonSec + "." + addZeros(Integer.parseInt(lonSecFrac), 3)) / D3600;
-            } catch (NumberFormatException e) {
-            }
-            lat *= "S".equalsIgnoreCase(latDir) ? -1 : 1;
-            lon *= "W".equalsIgnoreCase(lonDir) ? -1 : 1;
-            return new Geopoint(lat, lon);
-        }
     }
 
     abstract public static class GeopointException
