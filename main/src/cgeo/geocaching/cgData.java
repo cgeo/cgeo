@@ -76,7 +76,7 @@ public class cgData {
     private SQLiteDatabase databaseRO = null;
     private SQLiteDatabase databaseRW = null;
     private static final int dbVersion = 62;
-    private static final int customListIdOffset = 10;
+    public static final int customListIdOffset = 10;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
     private static final String dbTableLists = "cg_lists";

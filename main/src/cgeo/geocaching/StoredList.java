@@ -84,7 +84,7 @@ public class StoredList {
                 public void run(final String listName) {
                     final int newId = app.createList(listName);
 
-                    if (newId >= 10) {
+                    if (newId >= cgData.customListIdOffset) {
                         activity.showToast(res.getString(R.string.list_dialog_create_ok));
                         if (runAfterwards != null) {
                             runAfterwards.run(newId);
