@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringEscapeUtils;
