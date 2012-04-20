@@ -163,26 +163,25 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     private final String makeAbsoluteURL(final String url) {
-        try {
-            // Check if uri is absolute or not, if not attach the connector hostname
-            // FIXME: that should also include the scheme
-            if (Uri.parse(url).isAbsolute()) {
-                return url;
-            } else {
-                final String host = ConnectorFactory.getConnector(geocode).getHost();
-                if (StringUtils.isNotEmpty(host)) {
-                    StringBuilder builder = new StringBuilder("http://");
-                    builder.append(host);
-                    if (!StringUtils.startsWith(url, "/")) {
-                        builder.append('/');
-                    }
-                    builder.append(url);
-                    return builder.toString();
-                }
-            }
-        } catch (Exception e) {
-            Log.e("HtmlImage.makeAbsoluteURL (parse URL)", e);
+        // Check if uri is absolute or not, if not attach the connector hostname
+        // FIXME: that should also include the scheme
+        if (Uri.parse(url).isAbsolute()) {
+            return url;
         }
+
+        final String host = ConnectorFactory.getConnector(geocode).getHost();
+        if (StringUtils.isNotEmpty(host)) {
+            final StringBuilder builder = new StringBuilder("http://");
+            builder.append(host);
+            if (!StringUtils.startsWith(url, "/")) {
+                // FIXME: explain why the result URL would be valid if the path does not start with
+                // a '/', or signal an error.
+                builder.append('/');
+            }
+            builder.append(url);
+            return builder.toString();
+        }
+
         return null;
     }
 
