@@ -34,10 +34,6 @@ public class Viewport {
         topRight = new Geopoint(centerLat + latHalfSpan, centerLon + lonHalfSpan);
     }
 
-    public Viewport(final double lat1, final double lat2, final double lon1, final double lon2) {
-        this(new Geopoint(lat1, lon1), new Geopoint(lat2, lon2));
-    }
-
     public double getLatitudeMin() {
         return bottomLeft.getLatitude();
     }
