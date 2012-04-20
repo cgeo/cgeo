@@ -2,44 +2,48 @@ package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.Settings;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 public class HumanDistance {
+
+    public static ImmutablePair<Double, String> scaleUnit(final double distanceKilometers) {
+        double distance;
+        String units;
+        if (Settings.isUseMetricUnits()) {
+            if (distanceKilometers >= 1) {
+                distance = distanceKilometers;
+                units = "km";
+            } else {
+                distance = distanceKilometers * 1000;
+                units = "m";
+            }
+        } else {
+            distance = distanceKilometers / IConversion.MILES_TO_KILOMETER;
+            if (distance >= 0.1) {
+                units = "mi";
+            } else {
+                distance *= 5280;
+                units = "ft";
+            }
+        }
+        return new ImmutablePair<Double, String>(distance, units);
+    }
+
     public static String getHumanDistance(final Float distanceKilometers) {
         if (distanceKilometers == null) {
             return "?";
         }
 
-        if (Settings.isUseMetricUnits()) {
-            if (distanceKilometers > 100) {
-                return String.format("%d", Math.round(distanceKilometers)) + " km";
-            } else if (distanceKilometers > 10) {
-                return String.format("%.1f", Double.valueOf(Math.round(distanceKilometers * 10.0) / 10.0)) + " km";
-            } else if (distanceKilometers > 1) {
-                return String.format("%.2f", Double.valueOf(Math.round(distanceKilometers * 100.0) / 100.0)) + " km";
-            } else if (distanceKilometers > 0.1) {
-                return String.format("%d", Math.round(distanceKilometers * 1000.0)) + " m";
-            } else if (distanceKilometers > 0.01) {
-                return String.format("%.1f", Double.valueOf(Math.round(distanceKilometers * 1000.0 * 10.0) / 10.0)) + " m";
-            } else {
-                return String.format("%.2f", Double.valueOf(Math.round(distanceKilometers * 1000.0 * 100.0) / 100.0)) + " m";
-            }
+        final ImmutablePair<Double, String> scaled = scaleUnit(distanceKilometers);
+        String formatString;
+        if (scaled.left >= 100) {
+            formatString = "%.0f";
+        } else if (scaled.left >= 10) {
+            formatString = "%.1f";
         } else {
-            final float miles = distanceKilometers / IConversion.MILES_TO_KILOMETER;
-            if (miles > 100) {
-                return String.format("%d", Math.round(miles)) + " mi";
-            } else if (miles > 0.5) {
-                return String.format("%.1f", Double.valueOf(Math.round(miles * 10.0) / 10.0)) + " mi";
-            } else if (miles > 0.1) {
-                return String.format("%.2f", Double.valueOf(Math.round(miles * 100.0) / 100.0)) + " mi";
-            }
-
-            final float feet = miles * 5280;
-            if (feet >= 100) {
-                return String.format("%d", Math.round(feet)) + " ft";
-            } else if (feet >= 10) {
-                return String.format("%.1f", Double.valueOf(Math.round(feet * 10.0) / 10.0)) + " ft";
-            } else {
-                return String.format("%.2f", Double.valueOf(Math.round(feet * 100.0) / 100.0)) + " ft";
-            }
+            formatString = "%.2f";
         }
+
+        return String.format(formatString + " %s", scaled.left, scaled.right);
     }
 }
