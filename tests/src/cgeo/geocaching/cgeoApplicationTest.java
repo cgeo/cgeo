@@ -233,7 +233,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             deleteCacheFromDB(mockedCache.getGeocode());
 
             final String[] tokens = GCBase.getTokens();
-            final Viewport viewport = new Viewport(mockedCache.getCoords(), 0.003, 0.003);
+            final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
             // check coords for DETAILED
             Settings.setLiveMapStrategy(Strategy.DETAILED);
@@ -248,7 +248,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
             // check update after switch strategy to FAST
             Settings.setLiveMapStrategy(Strategy.FAST);
-            GCBase.removeFromTileCache(mockedCache.getCoords());
+            GCBase.removeFromTileCache(mockedCache);
 
             search = ConnectorFactory.searchByViewport(viewport, tokens);
             assertNotNull(search);
@@ -283,9 +283,9 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             // non premium cache
             MockedCache cache = new GC2CJPF();
             deleteCacheFromDBAndLogout(cache.getGeocode());
-            GCBase.removeFromTileCache(cache.getCoords());
+            GCBase.removeFromTileCache(cache);
 
-            Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
+            Viewport viewport = new Viewport(cache, 0.003, 0.003);
             SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
 
             assertNotNull(search);
@@ -302,7 +302,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             cache = new GC2JVEH();
             deleteCacheFromDBAndLogout(cache.getGeocode());
 
-            viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
+            viewport = new Viewport(cache, 0.003, 0.003);
             search = ConnectorFactory.searchByViewport(viewport, tokens);
 
             assertNotNull(search);

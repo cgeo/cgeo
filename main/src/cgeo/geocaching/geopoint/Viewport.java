@@ -150,12 +150,11 @@ public class Viewport {
     static public Viewport containing(final Set<? extends ICoordinates> points) {
         Viewport viewport = null;
         for (final ICoordinates point : points) {
-            final Geopoint coords = point == null ? null : point.getCoords();
-            if (coords != null) {
+            if (point != null) {
                 if (viewport == null) {
-                    viewport = new Viewport(coords, coords);
+                    viewport = new Viewport(point, point);
                 } else {
-                    viewport = viewport.expand(coords);
+                    viewport = viewport.expand(point);
                 }
             }
         }
@@ -175,4 +174,5 @@ public class Viewport {
     public int hashCode() {
         return bottomLeft.hashCode() ^ topRight.hashCode();
     }
+
 }

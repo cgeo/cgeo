@@ -110,7 +110,7 @@ public class CacheCache {
 
         @Override
         public void onRemove(cgCache removed) {
-            GCBase.removeFromTileCache(removed.getCoords());
+            GCBase.removeFromTileCache(removed);
         }
     }
 

@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
@@ -87,11 +88,11 @@ public class GCBase {
         }
     }
 
-    public static void removeFromTileCache(Geopoint coords) {
-        if (coords != null) {
+    public static void removeFromTileCache(final ICoordinates point) {
+        if (point != null) {
             Collection<Tile> tiles = new ArrayList<Tile>(tileCache.values());
             for (Tile tile : tiles) {
-                if (tile.containsPoint(coords)) {
+                if (tile.containsPoint(point)) {
                     tileCache.remove(tile.hashCode());
                 }
             }
@@ -182,7 +183,7 @@ public class GCBase {
         }
 
         if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
-            Geopoint center = viewport.getCenter();
+            final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 SearchResult search = GCParser.searchByCoords(null, center, Settings.getCacheType(), false);
                 if (search != null && !search.isEmpty()) {

@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class ViewportTest extends AndroidTestCase {
 
-    final private static Viewport vpRef = new Viewport(new Geopoint(-1.0, 3.0), new Geopoint(-2.0, 4.0));
+    final private static Viewport vpRef = new Viewport(new Geopoint(-1.0, -2.0), new Geopoint(3.0, 4.0));
 
     public static void assertBounds(final Viewport vp) {
         assertEquals(new Geopoint(1.0, 1.0), vp.center);

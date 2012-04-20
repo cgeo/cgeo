@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
@@ -222,8 +223,7 @@ public class Tile {
         return null;
     }
 
-    public boolean containsPoint(Geopoint coords) {
-
-        return viewPort.contains(coords);
+    public boolean containsPoint(final ICoordinates point) {
+        return viewPort.contains(point);
     }
 }
