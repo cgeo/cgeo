@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgLog;
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -129,7 +129,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Station3: Der zerbrochene Stein zählt doppelt.\nFinal: Oben neben dem Tor", cache.getHint());
         // logs
         assertEquals(6, cache.getLogs().size());
-        final cgLog log = cache.getLogs().get(5);
+        final LogEntry log = cache.getLogs().get(5);
         assertEquals("Geoteufel", log.author);
         assertEquals(parseTime("2011-09-11T07:00:00Z"), log.date);
         assertEquals(-1, log.found);

@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.opencaching;
 
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.cgLog;
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -202,18 +202,18 @@ final public class OkapiClient {
         return user.getString(USER_USERNAME);
     }
 
-    private static List<cgLog> parseLogs(JSONArray logsJSON) {
-        List<cgLog> result = null;
+    private static List<LogEntry> parseLogs(JSONArray logsJSON) {
+        List<LogEntry> result = null;
         for (int i = 0; i < logsJSON.length(); i++) {
             try {
                 JSONObject logResponse = logsJSON.getJSONObject(i);
-                cgLog log = new cgLog();
+                LogEntry log = new LogEntry();
                 log.date = parseDate(logResponse.getString(LOG_DATE)).getTime();
                 log.log = logResponse.getString(LOG_COMMENT).trim();
                 log.type = parseLogType(logResponse.getString(LOG_TYPE));
                 log.author = parseUser(logResponse.getJSONObject(LOG_USER));
                 if (result == null) {
-                    result = new ArrayList<cgLog>();
+                    result = new ArrayList<LogEntry>();
                 }
                 result.add(log);
             } catch (JSONException e) {

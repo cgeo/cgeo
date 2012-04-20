@@ -41,18 +41,18 @@ public class cgeopoint extends AbstractActivity {
     private static final int MENU_CACHES_AROUND = 5;
     private static final int MENU_CLEAR_HISTORY = 6;
 
-    private static class DestinationHistoryAdapter extends ArrayAdapter<cgDestination> {
+    private static class DestinationHistoryAdapter extends ArrayAdapter<Destination> {
         private LayoutInflater inflater = null;
 
         public DestinationHistoryAdapter(Context context,
-                List<cgDestination> objects) {
+                List<Destination> objects) {
             super(context, 0, objects);
         }
 
         @Override
         public View getView(final int position, final View convertView, final ViewGroup parent) {
 
-            cgDestination loc = getItem(position);
+            Destination loc = getItem(position);
 
             View v = convertView;
 
@@ -90,7 +90,7 @@ public class cgeopoint extends AbstractActivity {
     private Button latButton = null;
     private Button lonButton = null;
     private boolean changed = false;
-    private List<cgDestination> historyOfSearchedLocations;
+    private List<Destination> historyOfSearchedLocations;
     private DestinationHistoryAdapter destionationHistoryAdapter;
     private ListView historyListView;
     private TextView historyFooter;
@@ -138,8 +138,8 @@ public class cgeopoint extends AbstractActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
                 final Object selection = arg0.getItemAtPosition(arg2);
-                if (selection instanceof cgDestination) {
-                    navigateTo(((cgDestination) selection).getCoords());
+                if (selection instanceof Destination) {
+                    navigateTo(((Destination) selection).getCoords());
                 }
             }
         });
@@ -164,21 +164,21 @@ public class cgeopoint extends AbstractActivity {
         switch (item.getItemId()) {
             case CONTEXT_MENU_NAVIGATE:
                 contextMenuItemPosition = position;
-                if (destination instanceof cgDestination) {
-                    NavigationAppFactory.showNavigationMenu(geo, this, null, null, ((cgDestination) destination).getCoords());
+                if (destination instanceof Destination) {
+                    NavigationAppFactory.showNavigationMenu(geo, this, null, null, ((Destination) destination).getCoords());
                     return true;
                 }
                 break;
 
             case CONTEXT_MENU_DELETE_WAYPOINT:
-                if (destination instanceof cgDestination) {
-                    removeFromHistory((cgDestination) destination);
+                if (destination instanceof Destination) {
+                    removeFromHistory((Destination) destination);
                 }
                 return true;
 
             case CONTEXT_MENU_EDIT_WAYPOINT:
-                if (destination instanceof cgDestination) {
-                    final Geopoint gp = ((cgDestination) destination).getCoords();
+                if (destination instanceof Destination) {
+                    final Geopoint gp = ((Destination) destination).getCoords();
                     latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
                     lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 }
@@ -206,7 +206,7 @@ public class cgeopoint extends AbstractActivity {
         return destionationHistoryAdapter;
     }
 
-    private List<cgDestination> getHistoryOfSearchedLocations() {
+    private List<Destination> getHistoryOfSearchedLocations() {
         if (historyOfSearchedLocations == null) {
             // Load from database
             historyOfSearchedLocations = app.getHistoryOfSearchedLocations();
@@ -383,8 +383,7 @@ public class cgeopoint extends AbstractActivity {
 
         final Geopoint coords = getDestination();
 
-        if (coords != null)
-        {
+        if (coords != null) {
             addToHistory(coords);
         }
 
@@ -411,21 +410,20 @@ public class cgeopoint extends AbstractActivity {
 
     private void addToHistory(final Geopoint coords) {
         // Add locations to history
-        final cgDestination loc = new cgDestination(0, 0, coords);
+        final Destination loc = new Destination(coords);
 
         if (!getHistoryOfSearchedLocations().contains(loc)) {
-            final cgDestination updatedLoc = loc.withDate(System.currentTimeMillis());
-            getHistoryOfSearchedLocations().add(0, updatedLoc);
+            getHistoryOfSearchedLocations().add(0, loc);
 
             // Save location
-            app.saveSearchedDestination(updatedLoc);
+            app.saveSearchedDestination(loc);
 
             // Ensure to remove the footer
             historyListView.removeFooterView(getEmptyHistoryFooter());
         }
     }
 
-    private void removeFromHistory(cgDestination destination) {
+    private void removeFromHistory(Destination destination) {
         if (getHistoryOfSearchedLocations().contains(destination)) {
             getHistoryOfSearchedLocations().remove(destination);
 

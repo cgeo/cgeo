@@ -6,14 +6,14 @@ import android.test.AndroidTestCase;
 
 import junit.framework.Assert;
 
-public class cgDestinationTest extends AndroidTestCase {
+public class DestinationTest extends AndroidTestCase {
 
-    private cgDestination dest = null;
+    private Destination dest = null;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        dest = new cgDestination(1, 10000, new Geopoint(52.5, 9.33));
+        dest = new Destination(1, 10000, new Geopoint(52.5, 9.33));
     }
 
     public void testSomething() {

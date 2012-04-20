@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
@@ -16,7 +17,6 @@ import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 import cgeo.geocaching.utils.Log;
 
 import org.mapsforge.android.maps.GeoPoint;
-import org.mapsforge.android.maps.MapDatabase;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.MapViewMode;
 import org.mapsforge.android.maps.Overlay;
@@ -30,6 +30,7 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
@@ -170,11 +171,14 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
                 setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
                 break;
             case MapsforgeMapProvider.OFFLINE:
-                if (MapDatabase.isValidMapFile(Settings.getMapFile())) {
-                    setMapViewMode(MapViewMode.CANVAS_RENDERER);
-                    super.setMapFile(Settings.getMapFile());
-                } else {
-                    setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
+                setMapViewMode(MapViewMode.CANVAS_RENDERER);
+                super.setMapFile(Settings.getMapFile());
+                if (!Settings.isValidMapFile(Settings.getMapFile())) {
+                    Toast.makeText(
+                            getContext(),
+                            getContext().getResources().getString(R.string.warn_invalid_mapfile),
+                            Toast.LENGTH_LONG)
+                            .show();
                 }
                 break;
             default:

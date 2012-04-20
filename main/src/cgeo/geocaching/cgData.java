@@ -474,271 +474,6 @@ public class cgData {
                 if (oldVersion > 0) {
                     db.execSQL("delete from " + dbTableCaches + " where reason = 0");
 
-                    if (oldVersion < 34) { // upgrade to 34
-                        try {
-                            db.execSQL("create index if not exists in_a on " + dbTableCaches + " (geocode)");
-                            db.execSQL("create index if not exists in_b on " + dbTableCaches + " (guid)");
-                            db.execSQL("create index if not exists in_c on " + dbTableCaches + " (reason)");
-                            db.execSQL("create index if not exists in_d on " + dbTableCaches + " (detailed)");
-                            db.execSQL("create index if not exists in_e on " + dbTableCaches + " (type)");
-                            db.execSQL("create index if not exists in_a on " + dbTableAttributes + " (geocode)");
-                            db.execSQL("create index if not exists in_a on " + dbTableWaypoints + " (geocode)");
-                            db.execSQL("create index if not exists in_b on " + dbTableWaypoints + " (geocode, type)");
-                            db.execSQL("create index if not exists in_a on " + dbTableSpoilers + " (geocode)");
-                            db.execSQL("create index if not exists in_a on " + dbTableLogs + " (geocode)");
-                            db.execSQL("create index if not exists in_a on " + dbTableTrackables + " (geocode)");
-
-                            Log.i("Indexes added.");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 34: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 37) { // upgrade to 37
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column direction text");
-                            db.execSQL("alter table " + dbTableCaches + " add column distance double");
-
-                            Log.i("Columns direction and distance added to " + dbTableCaches + ".");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 37: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 38) { // upgrade to 38
-                        try {
-                            db.execSQL("drop table " + dbTableLogs);
-                            db.execSQL(dbCreateLogs);
-
-                            Log.i("Changed type column in " + dbTableLogs + " to integer.");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 38: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 39) { // upgrade to 39
-                        try {
-                            db.execSQL(dbCreateLists);
-
-                            Log.i("Created lists table.");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 39: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 40) { // upgrade to 40
-                        try {
-                            db.execSQL("drop table " + dbTableTrackables);
-                            db.execSQL(dbCreateTrackables);
-
-                            Log.i("Changed type of geocode column in trackables table.");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 40: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 41) { // upgrade to 41
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column rating float");
-                            db.execSQL("alter table " + dbTableCaches + " add column votes integer");
-                            db.execSQL("alter table " + dbTableCaches + " add column vote integer");
-
-                            Log.i("Added columns for GCvote.");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 41: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 42) { // upgrade to 42
-                        try {
-                            db.execSQL(dbCreateLogsOffline);
-
-                            Log.i("Added table for offline logs");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 42: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 43) { // upgrade to 43
-                        try {
-                            final String dbTableCachesTemp = dbTableCaches + "_temp";
-                            final String dbCreateCachesTemp = ""
-                                    + "create temporary table " + dbTableCachesTemp + " ("
-                                    + "_id integer primary key autoincrement, "
-                                    + "updated long not null, "
-                                    + "detailed integer not null default 0, "
-                                    + "detailedupdate long, "
-                                    + "geocode text unique not null, "
-                                    + "reason integer not null default 0, " // cached, favourite...
-                                    + "cacheid text, "
-                                    + "guid text, "
-                                    + "type text, "
-                                    + "name text, "
-                                    + "owner text, "
-                                    + "hidden long, "
-                                    + "hint text, "
-                                    + "size text, "
-                                    + "difficulty float, "
-                                    + "terrain float, "
-                                    + "latlon text, "
-                                    + "latitude_string text, "
-                                    + "longitude_string text, "
-                                    + "location text, "
-                                    + "distance double, "
-                                    + "latitude double, "
-                                    + "longitude double, "
-                                    + "shortdesc text, "
-                                    + "description text, "
-                                    + "rating float, "
-                                    + "votes integer, "
-                                    + "vote integer, "
-                                    + "disabled integer not null default 0, "
-                                    + "archived integer not null default 0, "
-                                    + "members integer not null default 0, "
-                                    + "found integer not null default 0, "
-                                    + "favourite integer not null default 0, "
-                                    + "inventorycoins integer default 0, "
-                                    + "inventorytags integer default 0, "
-                                    + "inventoryunknown integer default 0 "
-                                    + "); ";
-                            final String dbCreateCachesNew = ""
-                                    + "create table " + dbTableCaches + " ("
-                                    + "_id integer primary key autoincrement, "
-                                    + "updated long not null, "
-                                    + "detailed integer not null default 0, "
-                                    + "detailedupdate long, "
-                                    + "geocode text unique not null, "
-                                    + "reason integer not null default 0, " // cached, favourite...
-                                    + "cacheid text, "
-                                    + "guid text, "
-                                    + "type text, "
-                                    + "name text, "
-                                    + "owner text, "
-                                    + "hidden long, "
-                                    + "hint text, "
-                                    + "size text, "
-                                    + "difficulty float, "
-                                    + "terrain float, "
-                                    + "latlon text, "
-                                    + "latitude_string text, "
-                                    + "longitude_string text, "
-                                    + "location text, "
-                                    + "direction double, "
-                                    + "distance double, "
-                                    + "latitude double, "
-                                    + "longitude double, "
-                                    + "shortdesc text, "
-                                    + "description text, "
-                                    + "rating float, "
-                                    + "votes integer, "
-                                    + "vote integer, "
-                                    + "disabled integer not null default 0, "
-                                    + "archived integer not null default 0, "
-                                    + "members integer not null default 0, "
-                                    + "found integer not null default 0, "
-                                    + "favourite integer not null default 0, "
-                                    + "inventorycoins integer default 0, "
-                                    + "inventorytags integer default 0, "
-                                    + "inventoryunknown integer default 0 "
-                                    + "); ";
-
-                            db.beginTransaction();
-                            db.execSQL(dbCreateCachesTemp);
-                            db.execSQL("insert into " + dbTableCachesTemp + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCaches);
-                            db.execSQL("drop table " + dbTableCaches);
-                            db.execSQL(dbCreateCachesNew);
-                            db.execSQL("insert into " + dbTableCaches + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, null, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCachesTemp);
-                            db.execSQL("drop table " + dbTableCachesTemp);
-                            db.setTransactionSuccessful();
-
-                            Log.i("Changed direction column");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 43: " + e.toString());
-                        } finally {
-                            db.endTransaction();
-                        }
-                    }
-
-                    if (oldVersion < 44) { // upgrade to 44
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column favourite_cnt integer");
-
-                            Log.i("Column favourite_cnt added to " + dbTableCaches + ".");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 44: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 45) { // upgrade to 45
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column owner_real text");
-
-                            Log.i("Column owner_real added to " + dbTableCaches + ".");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 45: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 46) { // upgrade to 46
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column visiteddate long");
-                            db.execSQL("create index if not exists in_f on " + dbTableCaches + " (visiteddate, detailedupdate)");
-
-                            Log.i("Added column for date of visit.");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 46: " + e.toString());
-                        }
-                    }
-                    if (oldVersion < 47) { // upgrade to 47
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column own integer not null default 0");
-
-                            Log.i("Added column own.");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 47: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 48) { // upgrade to 48
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column elevation double");
-
-                            Log.i("Column elevation added to " + dbTableCaches + ".");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 48: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 49) { // upgrade to 49
-                        try {
-                            db.execSQL(dbCreateLogCount);
-
-                            Log.i("Created table " + dbTableLogCount + ".");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 49: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 50) { // upgrade to 50
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column myvote float");
-
-                            Log.i("Added float column for votes to " + dbTableCaches + ".");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 50: " + e.toString());
-                        }
-                    }
-
-                    if (oldVersion < 51) { // upgrade to 51
-                        try {
-                            db.execSQL("alter table " + dbTableCaches + " add column reliable_latlon integer");
-
-                            Log.i("Column reliable_latlon added to " + dbTableCaches + ".");
-                        } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 51: " + e.toString());
-                        }
-                    }
-
                     if (oldVersion < 52) { // upgrade to 52
                         try {
                             db.execSQL(dbCreateSearchDestinationHistory);
@@ -1419,7 +1154,7 @@ public class cgData {
      * @param destination
      *            a destination to save
      */
-    public void saveSearchedDestination(final cgDestination destination) {
+    public void saveSearchedDestination(final Destination destination) {
         init();
 
         databaseRW.beginTransaction();
@@ -1610,11 +1345,11 @@ public class cgData {
         return true;
     }
 
-    public boolean saveLogs(String geocode, List<cgLog> logs) {
+    public boolean saveLogs(String geocode, List<LogEntry> logs) {
         return saveLogs(geocode, logs, true);
     }
 
-    public boolean saveLogs(String geocode, List<cgLog> logs, boolean drop) {
+    public boolean saveLogs(String geocode, List<LogEntry> logs, boolean drop) {
         if (StringUtils.isBlank(geocode) || logs == null) {
             return false;
         }
@@ -1631,7 +1366,7 @@ public class cgData {
             if (!logs.isEmpty()) {
                 InsertHelper helper = new InsertHelper(databaseRW, dbTableLogs);
                 long timeStamp = System.currentTimeMillis();
-                for (cgLog log : logs) {
+                for (LogEntry log : logs) {
                     helper.prepareForInsert();
 
                     helper.bind(LOGS_GEOCODE, geocode);
@@ -1645,9 +1380,9 @@ public class cgData {
 
                     long log_id = helper.execute();
 
-                    if (CollectionUtils.isNotEmpty(log.logImages)) {
+                    if (log.hasLogImages()) {
                         ContentValues values = new ContentValues();
-                        for (cgImage img : log.logImages) {
+                        for (cgImage img : log.getLogImages()) {
                             values.clear();
                             values.put("log_id", log_id);
                             values.put("title", img.getTitle());
@@ -2303,7 +2038,7 @@ public class cgData {
      *
      * @return A list of previously entered destinations or an empty list.
      */
-    public List<cgDestination> loadHistoryOfSearchedLocations() {
+    public List<Destination> loadHistoryOfSearchedLocations() {
         init();
 
         Cursor cursor = databaseRO.query(dbTableSearchDestionationHistory,
@@ -2315,7 +2050,7 @@ public class cgData {
                 "date desc",
                 "100");
 
-        final List<cgDestination> destinations = new LinkedList<cgDestination>();
+        final List<Destination> destinations = new LinkedList<Destination>();
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -2325,7 +2060,7 @@ public class cgData {
             int indexLongitude = cursor.getColumnIndex("longitude");
 
             do {
-                final cgDestination dest = new cgDestination(cursor.getLong(indexId), cursor.getLong(indexDate), getCoords(cursor, indexLatitude, indexLongitude));
+                final Destination dest = new Destination(cursor.getLong(indexId), cursor.getLong(indexDate), getCoords(cursor, indexLatitude, indexLongitude));
 
                 // If coordinates are non-existent or invalid, do not consider
                 // this point.
@@ -2360,14 +2095,14 @@ public class cgData {
         return success;
     }
 
-    public List<cgLog> loadLogs(String geocode) {
+    public List<LogEntry> loadLogs(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
         init();
 
-        List<cgLog> logs = new ArrayList<cgLog>();
+        List<LogEntry> logs = new ArrayList<LogEntry>();
 
         Cursor cursor = databaseRO.rawQuery(
                 "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "
@@ -2375,7 +2110,7 @@ public class cgData {
                         + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc", new String[] { geocode });
 
         if (cursor != null && cursor.getCount() > 0) {
-            cgLog log = null;
+            LogEntry log = null;
             int indexLogsId = cursor.getColumnIndex("cg_logs_id");
             int indexType = cursor.getColumnIndex("type");
             int indexAuthor = cursor.getColumnIndex("author");
@@ -2388,7 +2123,7 @@ public class cgData {
             int indexUrl = cursor.getColumnIndex("url");
             while (cursor.moveToNext() && logs.size() < 100) {
                 if (log == null || log.id != cursor.getInt(indexLogsId)) {
-                    log = new cgLog();
+                    log = new LogEntry();
                     log.id = cursor.getInt(indexLogsId);
                     log.type = LogType.getById(cursor.getInt(indexType));
                     log.author = cursor.getString(indexAuthor);
@@ -2401,11 +2136,7 @@ public class cgData {
                 if (!cursor.isNull(indexLogImagesId)) {
                     String title = cursor.getString(indexTitle);
                     String url = cursor.getString(indexUrl);
-                    if (log.logImages == null) {
-                        log.logImages = new ArrayList<cgImage>();
-                    }
-                    final cgImage log_img = new cgImage(url, title);
-                    log.logImages.add(log_img);
+                    log.addLogImage(new cgImage(url, title));
                 }
             }
         }
@@ -3028,14 +2759,14 @@ public class cgData {
         return status;
     }
 
-    public cgLog loadLogOffline(String geocode) {
+    public LogEntry loadLogOffline(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
         init();
 
-        cgLog log = null;
+        LogEntry log = null;
 
         Cursor cursor = databaseRO.query(
                 dbTableLogsOffline,
@@ -3050,7 +2781,7 @@ public class cgData {
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
 
-            log = new cgLog();
+            log = new LogEntry();
             log.id = cursor.getInt(cursor.getColumnIndex("_id"));
             log.type = LogType.getById(cursor.getInt(cursor.getColumnIndex("type")));
             log.log = cursor.getString(cursor.getColumnIndex("log"));
@@ -3324,7 +3055,7 @@ public class cgData {
         return true;
     }
 
-    public boolean removeSearchedDestination(cgDestination destination) {
+    public boolean removeSearchedDestination(Destination destination) {
         boolean success = true;
         if (destination == null) {
             success = false;

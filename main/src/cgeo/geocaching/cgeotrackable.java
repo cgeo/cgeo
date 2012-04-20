@@ -7,7 +7,6 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
@@ -444,7 +443,7 @@ public class cgeotrackable extends AbstractActivity {
         RelativeLayout rowView;
 
         if (trackable != null && trackable.getLogs() != null) {
-            for (cgLog log : trackable.getLogs()) {
+            for (LogEntry log : trackable.getLogs()) {
                 rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logs_item, null);
 
                 if (log.date > 0) {
@@ -462,10 +461,7 @@ public class cgeotrackable extends AbstractActivity {
                     final String cacheName = log.cacheName;
                     ((TextView) rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View arg0) {
-                            Intent cacheIntent = new Intent(cgeotrackable.this, CacheDetailActivity.class);
-                            cacheIntent.putExtra("guid", cacheGuid);
-                            cacheIntent.putExtra("name", Html.fromHtml(cacheName).toString());
-                            startActivity(cacheIntent);
+                            CacheDetailActivity.startActivityGuid(cgeotrackable.this, cacheGuid, Html.fromHtml(cacheName).toString());
                         }
                     });
                 }
@@ -477,9 +473,9 @@ public class cgeotrackable extends AbstractActivity {
                 // add LogImages
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
 
-                if (CollectionUtils.isNotEmpty(log.logImages)) {
+                if (log.hasLogImages()) {
 
-                    final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
+                    final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.getLogImages());
 
                     final View.OnClickListener listener = new View.OnClickListener() {
                         @Override
@@ -489,8 +485,8 @@ public class cgeotrackable extends AbstractActivity {
                     };
 
                     ArrayList<String> titles = new ArrayList<String>();
-                    for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
-                        String img_title = log.logImages.get(i_img_cnt).getTitle();
+                    for (cgImage image : log.getLogImages()) {
+                        String img_title = image.getTitle();
                         if (!StringUtils.isBlank(img_title)) {
                             titles.add(img_title);
                         }
