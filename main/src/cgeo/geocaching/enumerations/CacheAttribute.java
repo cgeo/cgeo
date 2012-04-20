@@ -81,9 +81,6 @@ public enum CacheAttribute {
     public static final String INTERNAL_YES = "_yes";
     public static final String INTERNAL_NO = "_no";
 
-    private static final Resources res = cgeoapplication.getInstance().getResources();
-    private static final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
-
     public final int id;
     public final String gcRawName;
 
@@ -95,9 +92,15 @@ public enum CacheAttribute {
     public String getL10n(final boolean enabled) {
         final String attributeDescriptor = INTERNAL_PRE + gcRawName + (enabled ? INTERNAL_YES : INTERNAL_NO);
 
-        int id = res.getIdentifier(attributeDescriptor, "string", packageName);
+        cgeoapplication instance = cgeoapplication.getInstance();
+        if (instance != null) {
+            Resources res = instance.getResources();
+            int id = res.getIdentifier(attributeDescriptor, "string", instance.getBaseContext().getPackageName());
 
-        return (id > 0) ? res.getString(id) : attributeDescriptor;
+            return (id > 0) ? res.getString(id) : attributeDescriptor;
+        } else {
+            return attributeDescriptor;
+        }
     }
 
     private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME;

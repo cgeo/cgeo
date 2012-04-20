@@ -45,14 +45,12 @@ public enum LogType {
     public final String iconName;
     public final String type;
     private final int stringId;
-    private String l10n; // not final because the locale can be changed
 
     private LogType(int id, String iconName, String type, int stringId) {
         this.id = id;
         this.iconName = iconName;
         this.type = type;
         this.stringId = stringId;
-        setL10n();
     }
 
     private final static Map<String, LogType> FIND_BY_ICONNAME;
@@ -94,12 +92,6 @@ public enum LogType {
     }
 
     public final String getL10n() {
-        return l10n;
+        return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
-
-    public void setL10n() {
-        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
-    }
-
 }
-

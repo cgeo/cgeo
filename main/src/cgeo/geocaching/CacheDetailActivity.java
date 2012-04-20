@@ -2367,7 +2367,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                     // info
                     final List<String> infoTextList = new ArrayList<String>(3);
-                    if (WaypointType.ALL_TYPES_EXCEPT_OWN.containsKey(wpt.getWaypointType())) {
+                    if (WaypointType.ALL_TYPES_EXCEPT_OWN.contains(wpt.getWaypointType())) {
                         infoTextList.add(wpt.getWaypointType().getL10n());
                     }
                     if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(wpt.getPrefix())) {

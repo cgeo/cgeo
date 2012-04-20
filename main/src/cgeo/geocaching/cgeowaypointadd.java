@@ -142,7 +142,10 @@ public class cgeowaypointadd extends AbstractActivity {
         Button addWaypoint = (Button) findViewById(R.id.add_waypoint);
         addWaypoint.setOnClickListener(new coordsListener());
 
-        List<String> wayPointNames = new ArrayList<String>(WaypointType.ALL_TYPES_EXCEPT_OWN.values());
+        List<String> wayPointNames = new ArrayList<String>();
+        for (WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN) {
+            wayPointNames.add(wpt.getL10n());
+        }
         AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.name);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
         textView.setAdapter(adapter);
@@ -214,7 +217,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
         Spinner waypointTypeSelector = (Spinner) findViewById(R.id.type);
 
-        wpTypes = new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN.keySet());
+        wpTypes = new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN);
         ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, wpTypes.toArray(new WaypointType[wpTypes.size()]));
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waypointTypeSelector.setAdapter(wpAdapter);
