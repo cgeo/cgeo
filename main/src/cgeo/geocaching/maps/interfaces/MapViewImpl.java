@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
@@ -77,5 +78,7 @@ public interface MapViewImpl {
      * @return true - text/draw in light colors, false text/draw in dark colors
      */
     boolean needsInvertedColors();
+
+    Viewport getViewport();
 
 }

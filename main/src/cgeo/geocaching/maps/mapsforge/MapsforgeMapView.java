@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
@@ -68,6 +69,11 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     public GeoPointImpl getMapViewCenter() {
         GeoPoint point = getMapCenter();
         return new MapsforgeGeoPoint(point.getLatitudeE6(), point.getLongitudeE6());
+    }
+
+    @Override
+    public Viewport getViewport() {
+        return new Viewport(getMapViewCenter(), getLatitudeSpan() / 1e6, getLongitudeSpan() / 1e6);
     }
 
     @Override
