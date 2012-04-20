@@ -10,6 +10,7 @@ import android.text.ClipboardManager;
  * This class uses the deprecated function ClipboardManager.setText(CharSequence).
  * API 11 introduced setPrimaryClip(ClipData)
  */
+@SuppressWarnings("deprecation")
 public final class ClipboardUtils {
 
     /**
