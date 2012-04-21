@@ -734,7 +734,7 @@ public class cgeocaches extends AbstractListActivity {
         Collections.sort(sortedLabels);
         for (String label : sortedLabels) {
             Integer id = comparators.get(label);
-            subMenuSort.add(1, id.intValue(), 0, label).setCheckable(true).setChecked(id.intValue() == MENU_SORT_DISTANCE);
+            subMenuSort.add(1, id, 0, label).setCheckable(true).setChecked(id == MENU_SORT_DISTANCE);
         }
 
         subMenuSort.setGroupCheckable(1, true, true);
@@ -1950,7 +1950,7 @@ public class cgeocaches extends AbstractListActivity {
 
             @Override
             public void run(final Integer selectedListId) {
-                switchListById(selectedListId.intValue());
+                switchListById(selectedListId);
             }
         });
     }
