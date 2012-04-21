@@ -478,7 +478,7 @@ public final class Settings {
     }
 
     public static boolean getLoadDirImg() {
-        return isPremiumMember() ? false : sharedPrefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
+        return !isPremiumMember() && sharedPrefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
     }
 
     public static void setGcCustomDate(final String format) {
@@ -554,7 +554,7 @@ public final class Settings {
     }
 
     public static boolean isShowCaptcha() {
-        return isPremiumMember() ? false : sharedPrefs.getBoolean(KEY_SHOW_CAPTCHA, false);
+        return !isPremiumMember() && sharedPrefs.getBoolean(KEY_SHOW_CAPTCHA, false);
     }
 
     public static void setShowCaptcha(final boolean showCaptcha) {
