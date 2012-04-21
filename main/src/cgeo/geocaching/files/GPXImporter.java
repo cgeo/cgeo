@@ -55,8 +55,8 @@ public class GPXImporter {
     public static final String WAYPOINTS_FILE_SUFFIX = "-wpts";
     public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = WAYPOINTS_FILE_SUFFIX + GPX_FILE_EXTENSION;
 
-    private static final List<String> GPX_MIME_TYPES = Arrays.asList(new String[] { "text/xml", "application/xml" });
-    private static final List<String> ZIP_MIME_TYPES = Arrays.asList(new String[] { "application/zip", "application/x-compressed", "application/x-zip-compressed", "application/x-zip", "application/octet-stream" });
+    private static final List<String> GPX_MIME_TYPES = Arrays.asList("text/xml", "application/xml");
+    private static final List<String> ZIP_MIME_TYPES = Arrays.asList("application/zip", "application/x-compressed", "application/x-zip-compressed", "application/x-zip", "application/octet-stream");
 
     private Progress progress = new Progress();
 
