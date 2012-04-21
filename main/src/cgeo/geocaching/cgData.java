@@ -3081,25 +3081,23 @@ public class cgData {
 
     public Collection<? extends cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
         final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableWaypoints, viewport));
-        if (excludeMine)
-        {
-            where.append("and " + dbTableCaches + ".own == 0 and " + dbTableCaches + ".found == 0 ");
+        if (excludeMine) {
+            where.append(" and ").append(dbTableCaches).append(".own == 0 and ").append(dbTableCaches).append(".found == 0 ");
         }
-        if (excludeDisabled)
-        {
-            where.append("and " + dbTableCaches + ".disabled == 0 ");
+        if (excludeDisabled) {
+            where.append(" and ").append(dbTableCaches).append(".disabled == 0 ");
         }
         init();
 
         List<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
 
-        String query = "SELECT ";
+        final StringBuilder query = new StringBuilder("SELECT ");
         for (int i = 0; i < WAYPOINT_COLUMNS.length; i++) {
-            query += (i > 0 ? ", " : "") + dbTableWaypoints + "." + WAYPOINT_COLUMNS[i] + " ";
+            query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
         }
-        query += " FROM " + dbTableWaypoints + ", " + dbTableCaches + " WHERE " + dbTableWaypoints + "._id == " + dbTableCaches + "._id and " + where;
+        query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append("._id == ").append(dbTableCaches).append("._id and ").append(where);
         Cursor cursor = databaseRO.rawQuery(
-                query, null);
+                query.toString(), null);
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
