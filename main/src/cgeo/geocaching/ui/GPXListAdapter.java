@@ -16,7 +16,6 @@ import java.io.File;
 import java.util.List;
 
 public class GPXListAdapter extends ArrayAdapter<File> {
-    private GPXListView holder = null;
     private cgeogpxes activity = null;
     private LayoutInflater inflater = null;
 
@@ -40,6 +39,7 @@ public class GPXListAdapter extends ArrayAdapter<File> {
         final File file = getItem(position);
 
         View v = rowView;
+        GPXListView holder = null;
 
         if (v == null) {
             v = inflater.inflate(R.layout.gpx_item, null);

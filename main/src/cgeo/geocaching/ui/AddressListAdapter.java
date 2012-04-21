@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class AddressListAdapter extends ArrayAdapter<Address> {
 
     private LayoutInflater inflater;
-    private AddressListView holder;
     private Geopoint location;
 
     public AddressListAdapter(final Context context) {
@@ -39,6 +38,8 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
 
         // holder pattern implementation
         View view = convertView;
+        AddressListView holder;
+
         if (view == null) {
             view = inflater.inflate(R.layout.addresses_item, null);
 

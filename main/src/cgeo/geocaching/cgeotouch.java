@@ -36,7 +36,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class cgeotouch extends AbstractActivity implements DateDialog.DateDialogParent {
-    private cgTrackable trackable = null;
     private List<LogType> logTypes = new ArrayList<LogType>();
     private ProgressDialog waitDialog = null;
     private String guid = null;
@@ -131,7 +130,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
             }
         }
 
-        trackable = app.getTrackableByGeocode("logging trackable");
+        final cgTrackable trackable = app.getTrackableByGeocode("logging trackable");
 
         if (StringUtils.isNotBlank(trackable.getName())) {
             setTitle(res.getString(R.string.trackable_touch) + trackable.getName());

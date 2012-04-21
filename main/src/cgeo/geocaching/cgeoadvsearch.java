@@ -32,7 +32,6 @@ public class cgeoadvsearch extends AbstractActivity {
     private UpdateLocationCallback geoUpdate = new update();
     private EditText latEdit = null;
     private EditText lonEdit = null;
-    private String[] geocodesInCache = null;
 
     public cgeoadvsearch() {
         super("c:geo-search");
@@ -176,7 +175,7 @@ public class cgeoadvsearch extends AbstractActivity {
                 findByGeocodeFn();
             }
         });
-        geocodesInCache = app.geocodesInCache();
+        final String[] geocodesInCache = app.geocodesInCache();
         if (geocodesInCache != null) {
             final ArrayAdapter<String> geocodesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, geocodesInCache);
             geocodeEdit.setAdapter(geocodesAdapter);

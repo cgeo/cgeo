@@ -42,8 +42,6 @@ public class cgeocoords extends Dialog {
     private TextView tLatSep1, tLatSep2, tLatSep3;
     private TextView tLonSep1, tLonSep2, tLonSep3;
 
-    private Spinner spinner;
-
     private CoordinateUpdate cuListener;
 
     private coordInputFormatEnum currentFormat = null;
@@ -83,7 +81,7 @@ public class cgeocoords extends Dialog {
             }
         });
 
-        spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(context,
                         R.array.waypoint_coordinate_formats,

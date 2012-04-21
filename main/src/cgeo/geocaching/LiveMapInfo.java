@@ -9,8 +9,6 @@ import android.widget.CheckBox;
 
 public class LiveMapInfo extends AbstractActivity {
 
-    private int showCount;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +16,7 @@ public class LiveMapInfo extends AbstractActivity {
         setTheme(R.style.transparent);
         setContentView(R.layout.livemapinfo);
 
-        showCount = Settings.getLiveMapHintShowCount();
+        final int showCount = Settings.getLiveMapHintShowCount();
 
         if (showCount > 2) {
             final CheckBox cb = (CheckBox) findViewById(R.id.live_map_hint_hide);

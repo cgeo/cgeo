@@ -59,7 +59,6 @@ public class cgeo extends AbstractActivity {
 
     private int version = 0;
     private cgGeo geo = null;
-    private UpdateLocationCallback geoUpdate = null;
     private TextView filterTitle = null;
     private boolean cleanupRunning = false;
     private int countBubbleCnt = 0;
@@ -520,8 +519,7 @@ public class cgeo extends AbstractActivity {
         }
 
         if (geo == null) {
-            geoUpdate = new UpdateLocation();
-            geo = app.startGeo(geoUpdate);
+            geo = app.startGeo(new UpdateLocation());
         }
 
         final View findOnMap = findViewById(R.id.map);

@@ -19,7 +19,6 @@ public class MapfileListAdapter extends ArrayAdapter<File> {
 
     private cgSelectMapfile parentView;
     private LayoutInflater inflater;
-    private MapfileView holder;
 
     public MapfileListAdapter(cgSelectMapfile parentIn, List<File> listIn) {
         super(parentIn, 0, listIn);
@@ -41,6 +40,7 @@ public class MapfileListAdapter extends ArrayAdapter<File> {
         File file = getItem(position);
 
         View v = rowView;
+        MapfileView holder;
 
         if (v == null) {
             v = inflater.inflate(R.layout.mapfile_item, null);

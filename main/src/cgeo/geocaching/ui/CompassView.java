@@ -16,7 +16,6 @@ import android.view.View;
 
 public class CompassView extends View {
 
-    private changeThread watchdog = null;
     private volatile boolean wantStop = false;
     private Context context = null;
     private Bitmap compassUnderlay = null;
@@ -94,8 +93,7 @@ public class CompassView extends View {
         initialDisplay = true;
         wantStop = false;
 
-        watchdog = new changeThread();
-        watchdog.start();
+        new changeThread().start();
     }
 
     @Override

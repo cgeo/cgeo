@@ -71,7 +71,6 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
     private LogType typeSelected = LogType.LOG_UNKNOWN;
     private int attempts = 0;
     private Button postButton = null;
-    private Button saveButton = null;
     private Button clearButton = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
@@ -473,7 +472,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
         tweetCheck = (CheckBox) findViewById(R.id.tweet);
         clearButton = (Button) findViewById(R.id.clear);
-        saveButton = (Button) findViewById(R.id.save);
+        final Button saveButton = (Button) findViewById(R.id.save);
 
         possibleLogTypes = cache.getPossibleLogTypes();
 
