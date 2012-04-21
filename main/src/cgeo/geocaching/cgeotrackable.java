@@ -49,13 +49,6 @@ public class cgeotrackable extends AbstractActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            if (trackable != null && StringUtils.isNotBlank(trackable.getError())) {
-                showToast(res.getString(R.string.err_tb_details_download) + " " + trackable.getError() + ".");
-
-                finish();
-                return;
-            }
-
             if (trackable == null) {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
