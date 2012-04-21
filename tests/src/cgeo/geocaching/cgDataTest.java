@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
 
 import android.test.ApplicationTestCase;
 
@@ -90,5 +92,15 @@ public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
             app.removeList(listId1);
             app.removeList(listId2);
         }
+    }
+
+    // Check that queries don't throw an exception (see issue #1429).
+    public static void testLoadWaypoints() {
+        final Viewport viewport = new Viewport(new Geopoint(-1, -2), new Geopoint(3, 4));
+        final cgeoapplication app = cgeoapplication.getInstance();
+        app.getWaypointsInViewport(viewport, false, false);
+        app.getWaypointsInViewport(viewport, false, true);
+        app.getWaypointsInViewport(viewport, true, false);
+        app.getWaypointsInViewport(viewport, true, true);
     }
 }
