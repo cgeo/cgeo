@@ -162,8 +162,8 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
         s.writeInt(map.size());
 
         // Write out all elements in the proper order.
-        for (final Iterator<E> i = map.keySet().iterator(); i.hasNext();) {
-            s.writeObject(i.next());
+        for (final E e : map.keySet()) {
+            s.writeObject(e);
         }
     }
 

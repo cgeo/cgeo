@@ -820,9 +820,9 @@ public abstract class GPXParser extends FileParser {
     private void createNoteFromGSAKUserdata() {
         if (StringUtils.isBlank(cache.getPersonalNote())) {
             final StringBuilder buffer = new StringBuilder();
-            for (int i = 0; i < userData.length; i++) {
-                if (StringUtils.isNotBlank(userData[i])) {
-                    buffer.append(' ').append(userData[i]);
+            for (final String anUserData : userData) {
+                if (StringUtils.isNotBlank(anUserData)) {
+                    buffer.append(' ').append(anUserData);
                 }
             }
             final String note = buffer.toString().trim();
