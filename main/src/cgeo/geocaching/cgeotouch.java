@@ -140,7 +140,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
 
         app.setAction("logging trackable");
 
-        if (trackable == null || guid == null) {
+        if (guid == null) {
             showToast(res.getString(R.string.err_tb_forgot_saw));
 
             finish();
