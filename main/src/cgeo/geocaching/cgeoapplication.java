@@ -22,7 +22,6 @@ import android.os.Message;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -529,7 +528,7 @@ public class cgeoapplication extends Application {
         storage.removeCaches(geocodes, removeFlags);
     }
 
-    public Collection<? extends cgWaypoint> getWaypointsInViewport(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
+    public Set<cgWaypoint> getWaypointsInViewport(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
         return storage.loadWaypoints(viewport, excludeMine, excludeDisabled);
     }
 

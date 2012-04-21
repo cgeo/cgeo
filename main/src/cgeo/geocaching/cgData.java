@@ -29,7 +29,6 @@ import android.database.sqlite.SQLiteStatement;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -3079,7 +3078,7 @@ public class cgData {
      * @return
      */
 
-    public Collection<? extends cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
+    public Set<cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
         final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableWaypoints, viewport));
         if (excludeMine) {
             where.append(" and ").append(dbTableCaches).append(".own == 0 and ").append(dbTableCaches).append(".found == 0 ");
@@ -3089,31 +3088,26 @@ public class cgData {
         }
         init();
 
-        List<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
-
         final StringBuilder query = new StringBuilder("SELECT ");
         for (int i = 0; i < WAYPOINT_COLUMNS.length; i++) {
             query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
         }
         query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append("._id == ").append(dbTableCaches).append("._id and ").append(where);
-        Cursor cursor = databaseRO.rawQuery(query.toString(), null);
 
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToFirst();
+        final Cursor cursor = databaseRO.rawQuery(query.toString(), null);
+        try {
+            if (!cursor.moveToFirst()) {
+                return Collections.emptySet();
+            }
 
+            final Set<cgWaypoint> waypoints = new HashSet<cgWaypoint>();
             do {
-
-                cgWaypoint waypoint = createWaypointFromDatabaseContent(cursor);
-
-                waypoints.add(waypoint);
+                waypoints.add(createWaypointFromDatabaseContent(cursor));
             } while (cursor.moveToNext());
-        }
-
-        if (cursor != null) {
+            return waypoints;
+        } finally {
             cursor.close();
         }
-
-        return waypoints;
     }
 
 }
