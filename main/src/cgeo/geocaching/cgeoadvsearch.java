@@ -4,7 +4,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.Log;
@@ -306,8 +305,8 @@ public class cgeoadvsearch extends AbstractActivity {
             }
         } else {
             try {
-                cgeocaches.startActivityCoordinates(this, GeopointParser.parse(latText, lonText));
-            } catch (GeopointParser.ParseException e) {
+                cgeocaches.startActivityCoordinates(this, new Geopoint(latText, lonText));
+            } catch (Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
             }
         }

@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -114,7 +113,7 @@ public final class LocParser extends FileParser {
             Log.e("LOC format has changed");
         }
         // fall back to parser, just in case the format changes
-        return GeopointParser.parse(latitude, longitude);
+        return new Geopoint(latitude, longitude);
     }
 
     public LocParser(int listId) {

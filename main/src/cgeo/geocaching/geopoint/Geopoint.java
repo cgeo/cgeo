@@ -1,6 +1,7 @@
 package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.ICoordinates;
+import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.geopoint.direction.DDD;
 import cgeo.geocaching.geopoint.direction.DMM;
@@ -53,12 +54,14 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *
      * @param text
      *            string to parse
-     * @throws GeopointParser.ParseException
+     * @throws Geopoint.ParseException
      *             if the string cannot be parsed
      * @see GeopointParser.parse()
      */
     public Geopoint(final String text) {
-        this(GeopointParser.parseLatitude(text), GeopointParser.parseLongitude(text));
+        final Geopoint parsed = GeopointParser.parse(text);
+        this.latitude = parsed.latitude;
+        this.longitude = parsed.longitude;
     }
 
     /**
@@ -68,7 +71,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *            latitude string to parse
      * @param lonText
      *            longitude string to parse
-     * @throws GeopointParser.ParseException
+     * @throws Geopoint.ParseException
      *             if any argument string cannot be parsed
      * @see GeopointParser.parse()
      */
@@ -312,6 +315,19 @@ public final class Geopoint implements ICoordinates, Parcelable {
         public GeopointException(String msg)
         {
             super(msg);
+        }
+    }
+
+    public static class ParseException
+            extends GeopointException
+    {
+        private static final long serialVersionUID = 1L;
+        public final int resource;
+
+        public ParseException(final String msg, final GeopointParser.LatLon faulty)
+        {
+            super(msg);
+            resource = faulty == GeopointParser.LatLon.LAT ? R.string.err_parse_lat : R.string.err_parse_lon;
         }
     }
 

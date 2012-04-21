@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.opencaching;
 
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -12,7 +12,6 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
@@ -248,7 +247,7 @@ final public class OkapiClient {
         final String latitude = StringUtils.substringBefore(location, "|");
         final String longitude = StringUtils.substringAfter(location, "|");
         // FIXME: the next line should be a setter at cgCache
-        cache.setCoords(GeopointParser.parse(latitude, longitude));
+        cache.setCoords(new Geopoint(latitude, longitude));
     }
 
     private static CacheSize getCacheSize(final JSONObject response) {

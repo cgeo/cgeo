@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -370,28 +369,22 @@ public class cgeowaypointadd extends AbstractActivity {
                 return;
             }
 
-            double latitude;
-            double longitude;
+            Geopoint coords;
 
             if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
                 try {
-                    latitude = GeopointParser.parseLatitude(latText);
-                    longitude = GeopointParser.parseLongitude(lonText);
-                } catch (GeopointParser.ParseException e) {
+                    coords = new Geopoint(latText, lonText);
+                } catch (Geopoint.ParseException e) {
                     showToast(res.getString(e.resource));
                     return;
                 }
+            } else if (geo == null || geo.coordsNow == null) {
+                showToast(res.getString(R.string.err_point_curr_position_unavailable));
+                return;
             } else {
-                if (geo == null || geo.coordsNow == null) {
-                    showToast(res.getString(R.string.err_point_curr_position_unavailable));
-                    return;
-                }
-
-                latitude = geo.coordsNow.getLatitude();
-                longitude = geo.coordsNow.getLongitude();
+                coords = geo.coordsNow;
             }
 
-            Geopoint coords = null;
             if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
                 // bearing & distance
                 double bearing = 0;
@@ -410,9 +403,7 @@ public class cgeowaypointadd extends AbstractActivity {
                     return;
                 }
 
-                coords = new Geopoint(latitude, longitude).project(bearing, distance);
-            } else {
-                coords = new Geopoint(latitude, longitude);
+                coords = coords.project(bearing, distance);
             }
 
             String name = ((EditText) findViewById(R.id.name)).getText().toString().trim();

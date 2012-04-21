@@ -1,7 +1,5 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.geopoint.GeopointParser.ParseException;
-
 import android.test.AndroidTestCase;
 
 public class GeoPointParserTest extends AndroidTestCase {
@@ -27,7 +25,7 @@ public class GeoPointParserTest extends AndroidTestCase {
         Geopoint point = null;
         try {
             point = GeopointParser.parse("N 49° 56.031");
-        } catch (ParseException e) {
+        } catch (Geopoint.ParseException e) {
             // expected
         }
         assertEquals(null, point);
@@ -64,7 +62,7 @@ public class GeoPointParserTest extends AndroidTestCase {
         Geopoint point = null;
         try {
             point = GeopointParser.parse("N51 21.523 and some words in between, so there is no relation E07 02.680");
-        } catch (ParseException e) {
+        } catch (Geopoint.ParseException e) {
             // expected
         }
         assertEquals(null, point);

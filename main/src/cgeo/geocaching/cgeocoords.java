@@ -6,7 +6,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.GeopointParser.ParseException;
 import cgeo.geocaching.geopoint.direction.DDD;
 import cgeo.geocaching.geopoint.direction.DMM;
 import cgeo.geocaching.geopoint.direction.DMS;
@@ -352,7 +351,7 @@ public class cgeocoords extends Dialog {
         if (currentFormat == coordInputFormatEnum.Plain) {
             try {
                 gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
-            } catch (ParseException e) {
+            } catch (Geopoint.ParseException e) {
                 if (signalError) {
                     context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
                 }

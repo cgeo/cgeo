@@ -15,7 +15,6 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
@@ -1320,16 +1319,16 @@ public class cgCache implements ICache, IWaypoint {
             Matcher matcher = coordPattern.matcher(note);
             while (matcher.find()) {
                 try {
-                    final Geopoint point = GeopointParser.parse(note.substring(matcher.start()));
+                    final Geopoint point = new Geopoint(note.substring(matcher.start()));
                     // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
-                    if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
+                    if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
                         final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
                         final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT, false);
                         waypoint.setCoords(point);
                         addWaypoint(waypoint, false);
                         count++;
                     }
-                } catch (GeopointParser.ParseException e) {
+                } catch (Geopoint.ParseException e) {
                     // ignore
                 }
 

@@ -1,7 +1,5 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.geopoint.Geopoint.GeopointException;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,8 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Parse coordinates.
  */
-public class GeopointParser
-{
+class GeopointParser {
     private static class ResultWrapper {
         final double result;
         final int matcherPos;
@@ -29,7 +26,7 @@ public class GeopointParser
     private static final Pattern patternLat = Pattern.compile("\\b([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternLon = Pattern.compile("\\b([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
-    private enum LatLon
+    enum LatLon
     {
         LAT,
         LON
@@ -52,7 +49,7 @@ public class GeopointParser
      * @param text
      *            the string to parse
      * @return an Geopoint with parsed latitude and longitude
-     * @throws ParseException
+     * @throws Geopoint.ParseException
      *             if lat or lon could not be parsed
      */
     public static Geopoint parse(final String text)
@@ -63,7 +60,7 @@ public class GeopointParser
         final ResultWrapper longitudeWrapper = parseHelper(text.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength), LatLon.LON);
 
         if (longitudeWrapper.matcherPos - (latitudeWrapper.matcherPos + latitudeWrapper.matcherLength) >= 10) {
-            throw new ParseException("Distance between latitude and longitude text is to large.", LatLon.LON);
+            throw new Geopoint.ParseException("Distance between latitude and longitude text is to large.", LatLon.LON);
         }
 
         final double lon = longitudeWrapper.result;
@@ -89,7 +86,7 @@ public class GeopointParser
      * @param longitude
      *            the longitude string to parse
      * @return an Geopoint with parsed latitude and longitude
-     * @throws ParseException
+     * @throws Geopoint.ParseException
      *             if lat or lon could not be parsed
      */
     public static Geopoint parse(final String latitude, final String longitude)
@@ -143,7 +140,7 @@ public class GeopointParser
             // The right exception will be raised below.
         }
 
-        throw new ParseException("Could not parse coordinates as " + latlon + ": \"" + text + "\"", latlon);
+        throw new Geopoint.ParseException("Could not parse coordinates as " + latlon + ": \"" + text + "\"", latlon);
     }
 
     /**
@@ -153,7 +150,7 @@ public class GeopointParser
      * @param text
      *            the string to be parsed
      * @return the latitude as decimal degree
-     * @throws ParseException
+     * @throws Geopoint.ParseException
      *             if latitude could not be parsed
      */
     public static double parseLatitude(final String text)
@@ -168,24 +165,11 @@ public class GeopointParser
      * @param text
      *            the string to be parsed
      * @return the longitude as decimal degree
-     * @throws ParseException
+     * @throws Geopoint.ParseException
      *             if longitude could not be parsed
      */
     public static double parseLongitude(final String text)
     {
         return parseHelper(text, LatLon.LON).result;
-    }
-
-    public static class ParseException
-            extends GeopointException
-    {
-        private static final long serialVersionUID = 1L;
-        public final int resource;
-
-        public ParseException(final String msg, final LatLon faulty)
-        {
-            super(msg);
-            resource = faulty == LatLon.LAT ? R.string.err_parse_lat : R.string.err_parse_lon;
-        }
     }
 }

@@ -5,7 +5,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 
@@ -535,8 +534,8 @@ public class cgeopoint extends AbstractActivity {
 
         if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
             try {
-                coords = GeopointParser.parse(latText, lonText);
-            } catch (GeopointParser.ParseException e) {
+                coords = new Geopoint(latText, lonText);
+            } catch (Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
                 return null;
             }
