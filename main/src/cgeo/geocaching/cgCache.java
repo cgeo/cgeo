@@ -369,10 +369,7 @@ public class cgCache implements ICache, IWaypoint {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        if (hidden.compareTo(cal.getTime()) < 0) {
-            return false;
-        }
-        return true;
+        return hidden.compareTo(cal.getTime()) >= 0;
     }
 
     /**
@@ -1213,10 +1210,7 @@ public class cgCache implements ICache, IWaypoint {
         if (!hasWaypoints()) {
             return false;
         }
-        if (index < 0 || index >= waypoints.size()) {
-            return false;
-        }
-        return true;
+        return index >= 0 && index < waypoints.size();
     }
 
     /**

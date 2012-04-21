@@ -205,10 +205,7 @@ public class cgTrackable implements ILogable {
     }
 
     public boolean isLoggable() {
-        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
-            return false;
-        }
-        return true;
+        return !StringUtils.startsWithIgnoreCase(geocode, "GK");
     }
 
     public String getTrackingcode() {

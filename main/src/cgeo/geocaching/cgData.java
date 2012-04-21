@@ -1298,13 +1298,7 @@ public class cgData {
 
         init();
 
-        int deleted = databaseRW.delete(dbTableWaypoints, "_id = " + id, null);
-
-        if (deleted > 0) {
-            return true;
-        }
-
-        return false;
+        return databaseRW.delete(dbTableWaypoints, "_id = " + id, null) > 0;
     }
 
     public boolean saveSpoilers(String geocode, List<cgImage> spoilers) {
@@ -2966,11 +2960,8 @@ public class cgData {
     }
 
     public synchronized boolean status() {
-        if (databaseRO == null || databaseRW == null || !initialized) {
-            return false;
-        }
+        return databaseRO != null && databaseRW != null && initialized;
 
-        return true;
     }
 
     public boolean removeSearchedDestination(Destination destination) {
