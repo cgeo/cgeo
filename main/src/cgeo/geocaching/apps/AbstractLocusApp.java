@@ -55,7 +55,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @param activity
      * @author koem
      */
-    protected static boolean showInLocus(final List<? extends Object> objectsToShow, final boolean withCacheWaypoints, final boolean export,
+    protected static boolean showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
             final Activity activity) {
         if (objectsToShow == null || objectsToShow.isEmpty()) {
             return false;
