@@ -1353,35 +1353,32 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         @Override
         public void run() {
-            try {
-                if (mapView == null || CollectionUtils.isEmpty(users)) {
-                    return;
-                }
-
-                // display users
-                List<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
-
-                int counter = 0;
-                OtherCachersOverlayItemImpl item = null;
-
-                for (Go4CacheUser userOne : users) {
-                    if (userOne.getCoords() == null) {
-                        continue;
-                    }
-
-                    item = mapProvider.getOtherCachersOverlayItemBase(activity, userOne);
-                    items.add(item);
-
-                    counter++;
-                    if ((counter % 10) == 0) {
-                        overlayGo4Cache.updateItems(items);
-                        displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-                    }
-                }
-
-                overlayGo4Cache.updateItems(items);
-            } finally {
+            if (mapView == null || CollectionUtils.isEmpty(users)) {
+                return;
             }
+
+            // display users
+            List<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
+
+            int counter = 0;
+            OtherCachersOverlayItemImpl item = null;
+
+            for (Go4CacheUser userOne : users) {
+                if (userOne.getCoords() == null) {
+                    continue;
+                }
+
+                item = mapProvider.getOtherCachersOverlayItemBase(activity, userOne);
+                items.add(item);
+
+                counter++;
+                if ((counter % 10) == 0) {
+                    overlayGo4Cache.updateItems(items);
+                    displayHandler.sendEmptyMessage(INVALIDATE_MAP);
+                }
+            }
+
+            overlayGo4Cache.updateItems(items);
         }
     }
 
