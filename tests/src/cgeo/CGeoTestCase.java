@@ -1,20 +1,19 @@
-package cgeo.geocaching.filter;
+package cgeo;
 
 import cgeo.geocaching.cgeoapplication;
 
 import android.test.ApplicationTestCase;
 
-public abstract class AbstractFilterTestCase extends ApplicationTestCase<cgeoapplication> {
+public abstract class CGeoTestCase extends ApplicationTestCase<cgeoapplication> {
 
-    public AbstractFilterTestCase() {
+    public CGeoTestCase() {
         super(cgeoapplication.class);
     }
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-
-        // init environment
         createApplication();
     }
+
 }

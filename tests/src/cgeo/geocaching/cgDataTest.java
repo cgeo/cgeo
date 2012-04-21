@@ -1,28 +1,15 @@
 package cgeo.geocaching;
 
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
-import android.test.ApplicationTestCase;
-
 import java.util.HashSet;
 import java.util.Set;
 
-public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
-
-    public cgDataTest() {
-        super(cgeoapplication.class);
-    }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
-        // init environment
-        createApplication();
-    }
+public class cgDataTest extends CGeoTestCase {
 
     public static void testStoredLists() {
 

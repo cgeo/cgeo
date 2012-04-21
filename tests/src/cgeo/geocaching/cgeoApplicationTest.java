@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.connector.gc.GCParser;
@@ -21,7 +22,6 @@ import cgeo.test.Compare;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
@@ -34,19 +34,7 @@ import junit.framework.Assert;
  * application and/or context.
  */
 
-public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
-
-    public cgeoApplicationTest() {
-        super(cgeoapplication.class);
-    }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
-        // init environment
-        createApplication();
-    }
+public class cgeoApplicationTest extends CGeoTestCase {
 
     /**
      * The name 'test preconditions' is a convention to signal that if this test

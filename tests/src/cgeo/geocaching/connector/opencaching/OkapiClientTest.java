@@ -1,12 +1,11 @@
 package cgeo.geocaching.connector.opencaching;
 
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 
-import android.test.AndroidTestCase;
-
-public class OkapiClientTest extends AndroidTestCase {
+public class OkapiClientTest extends CGeoTestCase {
 
     public static void testGetOCCache() {
         String geoCode = "OU0331";

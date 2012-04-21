@@ -1,12 +1,11 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.Settings;
-
-import android.test.AndroidTestCase;
 
 import java.util.regex.Pattern;
 
-public class HumanDistanceTest extends AndroidTestCase {
+public class HumanDistanceTest extends CGeoTestCase {
 
     private static void assertMatch(final String ok, final float distance) {
         final String humanDistance = HumanDistance.getHumanDistance(distance);

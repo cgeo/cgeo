@@ -1,11 +1,12 @@
 package cgeo.geocaching.filter;
 
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
 
 import java.util.ArrayList;
 
-public class TypeFilterTest extends AbstractFilterTestCase {
+public class TypeFilterTest extends CGeoTestCase {
 
     private TypeFilter traditionalFilter;
     private cgCache traditional;

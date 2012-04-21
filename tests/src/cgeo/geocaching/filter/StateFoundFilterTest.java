@@ -1,9 +1,10 @@
 package cgeo.geocaching.filter;
 
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.filter.StateFilter.StateFoundFilter;
 
-public class StateFoundFilterTest extends AbstractFilterTestCase {
+public class StateFoundFilterTest extends CGeoTestCase {
 
     private StateFilter.StateFoundFilter foundFilter;
     private cgCache foundCache;

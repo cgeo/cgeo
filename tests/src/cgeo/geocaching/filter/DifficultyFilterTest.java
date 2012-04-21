@@ -1,8 +1,9 @@
 package cgeo.geocaching.filter;
 
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.cgCache;
 
-public class DifficultyFilterTest extends AbstractFilterTestCase {
+public class DifficultyFilterTest extends CGeoTestCase {
 
     public static void testTerrainFilter() {
         final cgCache easy = new cgCache();
