@@ -60,7 +60,7 @@ public enum CacheType {
         FIND_BY_PATTERN = Collections.unmodifiableMap(mappingPattern);
     }
 
-    public final static CacheType getById(final String id) {
+    public static CacheType getById(final String id) {
         final CacheType result = (id != null) ? CacheType.FIND_BY_ID.get(id.toLowerCase().trim()) : null;
         if (result == null) {
             return UNKNOWN;
@@ -68,7 +68,7 @@ public enum CacheType {
         return result;
     }
 
-    public final static CacheType getByPattern(final String pattern) {
+    public static CacheType getByPattern(final String pattern) {
         final CacheType result = (pattern != null) ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim()) : null;
         if (result == null) {
             return UNKNOWN;

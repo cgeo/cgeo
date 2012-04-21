@@ -41,7 +41,7 @@ public enum CacheSize {
         FIND_BY_ID = Collections.unmodifiableMap(mapping);
     }
 
-    public final static CacheSize getById(final String id) {
+    public static CacheSize getById(final String id) {
         if (id == null) {
             return UNKNOWN;
         }

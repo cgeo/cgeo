@@ -162,7 +162,7 @@ public class HtmlImage implements Html.ImageGetter {
         return null;
     }
 
-    private final String makeAbsoluteURL(final String url) {
+    private String makeAbsoluteURL(final String url) {
         // Check if uri is absolute or not, if not attach the connector hostname
         // FIXME: that should also include the scheme
         if (Uri.parse(url).isAbsolute()) {

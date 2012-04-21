@@ -40,7 +40,7 @@ public final class ActivityMixin {
         fromActivity.finish();
     }
 
-    public final static void goManual(final Context context, final String helpTopic) {
+    public static void goManual(final Context context, final String helpTopic) {
         if (StringUtils.isBlank(helpTopic)) {
             return;
         }
@@ -55,7 +55,7 @@ public final class ActivityMixin {
         }
     }
 
-    public final static void setTitle(final Activity activity, final String text) {
+    public static void setTitle(final Activity activity, final String text) {
         if (StringUtils.isBlank(text)) {
             return;
         }
@@ -66,7 +66,7 @@ public final class ActivityMixin {
         }
     }
 
-    public final static void showProgress(final Activity activity, final boolean show) {
+    public static void showProgress(final Activity activity, final boolean show) {
         if (activity == null) {
             return;
         }
@@ -79,7 +79,7 @@ public final class ActivityMixin {
         }
     }
 
-    public final static void setTheme(final Activity activity) {
+    public static void setTheme(final Activity activity) {
         if (Settings.isLightSkin()) {
             activity.setTheme(R.style.light);
         } else {
@@ -87,7 +87,7 @@ public final class ActivityMixin {
         }
     }
 
-    public final static void showToast(final Activity activity, final String text) {
+    public static void showToast(final Activity activity, final String text) {
         if (StringUtils.isNotBlank(text)) {
             Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
 
@@ -96,7 +96,7 @@ public final class ActivityMixin {
         }
     }
 
-    public final static void showShortToast(final Activity activity, final String text) {
+    public static void showShortToast(final Activity activity, final String text) {
         if (StringUtils.isNotBlank(text)) {
             Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
 
@@ -105,7 +105,7 @@ public final class ActivityMixin {
         }
     }
 
-    public static final void helpDialog(final Activity activity, final String title, final String message, final Drawable icon) {
+    public static void helpDialog(final Activity activity, final String title, final String message, final Drawable icon) {
         if (StringUtils.isBlank(message)) {
             return;
         }

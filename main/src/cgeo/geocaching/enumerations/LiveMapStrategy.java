@@ -35,7 +35,7 @@ public interface LiveMapStrategy {
             this.stringId = stringId;
         }
 
-        public final static Strategy getById(final int id) {
+        public static Strategy getById(final int id) {
             for (Strategy strategy : Strategy.values()) {
                 if (strategy.id == id) {
                     return strategy;

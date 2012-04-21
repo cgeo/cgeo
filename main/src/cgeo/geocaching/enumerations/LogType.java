@@ -66,7 +66,7 @@ public enum LogType {
         FIND_BY_TYPE = Collections.unmodifiableMap(mappingType);
     }
 
-    public final static LogType getById(final int id) {
+    public static LogType getById(final int id) {
         for (LogType logType : values()) {
             if (logType.id == id) {
                 return logType;
