@@ -1025,6 +1025,8 @@
     <b>New Features/Functions:</b>\n
     · Export caches as GPX file\n
     · Field notes can now be uploaded to the website\n
+    · Filter for D/T in lists\n
+    · Allow close of popup by click on map\n
     \n
     <b>Bugfixing:</b>\n
     · Static maps download for waypoints now off by default\n
