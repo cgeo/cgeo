@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,13 +57,12 @@ public final class GCVote {
         }
 
         final Map<String, GCVoteRating> ratings = getRating(guids, geocodes);
-        if (ratings != null) {
-            for (Entry<String, GCVoteRating> entry : ratings.entrySet()) {
-                return entry.getValue();
-            }
+
+        if (MapUtils.isEmpty(ratings)) {
+            return null;
         }
 
-        return null;
+        return ratings.values().iterator().next();
     }
 
     /**
