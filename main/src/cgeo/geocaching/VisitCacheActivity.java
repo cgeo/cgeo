@@ -634,7 +634,6 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             }
             if (!Settings.isLogin()) { // allow offline logging
                 showToast(res.getString(R.string.err_login));
-                return;
             }
         }
 

@@ -412,7 +412,6 @@ public class cgeotrackable extends AbstractActivity {
 
                 stop();
                 finish();
-                return;
             }
         }
 

@@ -419,7 +419,6 @@ public class cgeopopup extends AbstractActivity {
                     startActivity(cachesIntent);
 
                     finish();
-                    return;
                 }
             });
 

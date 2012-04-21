@@ -220,7 +220,6 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             }
         }
 
-        return;
     }
 
     /**

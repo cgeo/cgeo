@@ -159,6 +159,5 @@ public abstract class IconDecoder {
             // intentionally left blank
         }
 
-        return;
     }
 }

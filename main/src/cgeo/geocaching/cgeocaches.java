@@ -1557,7 +1557,6 @@ public class cgeocaches extends AbstractListActivity {
                 showToast(res.getString(R.string.warn_no_coordinates));
 
                 finish();
-                return;
             }
         }
 
@@ -1584,7 +1583,6 @@ public class cgeocaches extends AbstractListActivity {
                 showToast(res.getString(R.string.warn_no_keyword));
 
                 finish();
-                return;
             }
         }
 
@@ -1610,7 +1608,6 @@ public class cgeocaches extends AbstractListActivity {
                 showToast(res.getString(R.string.warn_no_username));
 
                 finish();
-                return;
             }
         }
 
@@ -1636,7 +1633,6 @@ public class cgeocaches extends AbstractListActivity {
                 showToast(res.getString(R.string.warn_no_username));
 
                 finish();
-                return;
             }
         }
 

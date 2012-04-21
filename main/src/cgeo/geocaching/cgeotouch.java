@@ -373,7 +373,6 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
                 showToast(res.getString(R.string.err_tb_forgot_saw));
 
                 finish();
-                return;
             }
         }
 
