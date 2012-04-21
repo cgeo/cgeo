@@ -218,7 +218,7 @@
   <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
   <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
-
+  <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.2.4 kartfile.\nOffline kartan är inte tillgänglig.</string>
 
   <string name="info_log_posted">c:geo har postat din logg.</string>
   <string name="info_log_saved">c:geo har sparat din logg.</string>
@@ -235,6 +235,7 @@
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Försöker hitta plats</string>
   <string name="loc_no_addr">Okänd adress</string>
+  <string name="loc_gps_disabled">GPS avstängd</string>
 
   <!-- standard menu -->
   <string name="menu_about">Om c:geo</string>
@@ -422,6 +423,9 @@
   <string name="init_default_navigation_tool_description">Här kan du välja ditt förvalda navigeringsprogram.</string>
   <string name="init_default_navigation_tool_select">Välj program</string>
   <string name="init_default_navigation_tool_2_description">Här kan du välja ditt andra förvalda navigeringsprogram. Det kan aktiveras genom att klicka länge på navigationsikonen i listen överst i en cachebeskrivning.</string>
+  <string name="init_debug_title">Debug information</string>
+  <string name="init_debug_note">c:geo kan generera mycket debug information. Denna information är normalt inte användbar för användare av c:geo. Vid eventuella problem kan dock utvecklare behöva den här informationen för att analysera problemet. Om så är fallet kommer du att ombedjas att markera rutan nedan och sedan skicka loggfilen till dem.</string>
+  <string name="init_debug">Generera debug information</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
@@ -662,6 +666,9 @@
   <string name="map_strategy_fast">Snabbt</string>
   <string name="map_strategy_auto">Hastighetsberoende (gps)</string>
   <string name="map_strategy_detailed">Exakta positioner</string>
+  <string name="live_map_notification">I den nya Live kartan så är koordinaterna inte alltid exakta. En cache med potentiellt oexakta koordinater är markerad med en orange cirkel.\nGenom att visa detaljer för cachen eller genom att spara cachen för offline kommer alltid exakta koordinater att hämtas.\n\nMer information om alla förändringar finns på \"Om c:geo\" sidan, som kan nås från c:geo's startsida.</string>
+  <string name="live_map_note_close">Stäng</string>
+  <string name="live_map_note_dontshow">Visa inte mer</string>
 
   <!-- search -->
   <string name="search_bar_hint">Sök cache/TB</string>
@@ -745,13 +752,25 @@
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
-  <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få bättre mottagning, mer exakt position och kan även spara på batteriet i telefonen.</string>
+  <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få mer exakt position och även spara på enhetens batteri.</string>
   <string name="helper_barcode_title">Streckkodsläsare</string>
   <string name="helper_barcode_description">Det finns Greasemonkey-script och hemsidor som visar GC-koder som streckkoder/QR-koder. Med den här appen kan c:geo scanna in GC-koden direkt från skärmen på din dator.</string>
 
   <!-- add-ons -->
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
+
+  <!-- export -->
+  <string name="export">Exportera</string>
+  <string name="export_as">Exportera som…</string>
+  <string name="export_exportedto">exporterat till</string>
+  <string name="export_failed">Exporteringen misslyckades</string>
+  <string name="export_fieldnotes">Field Notes</string>
+  <string name="export_fieldnotes_info">Field Notes kommer att exporteras till /sdcard/field-notes med aktuellt datum och tid som filnamn.</string>
+  <string name="export_fieldnotes_upload">Uppladdat till geocaching.com</string>
+  <string name="export_fieldnotes_uploading">Laddar upp…</string>
+  <string name="export_fieldnotes_onlynew">Bara sedan senaste exporteringen</string>
+  <string name="export_gpx">GPX</string>
 
   <!-- next things -->
   <string name="legal_note">För att använda tjänster hos Geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
