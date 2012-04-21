@@ -171,8 +171,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         final Point left = new Point();
         projection.toPixels(leftGeo, left);
 
-        final int radius = center.x - left.x;
-        return radius;
+        return center.x - left.x;
     }
 
     private void lazyInitializeDrawingObjects() {

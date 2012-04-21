@@ -385,9 +385,7 @@ public final class Settings {
     }
 
     public static int getLastList() {
-        final int listId = sharedPrefs.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID);
-
-        return listId;
+        return sharedPrefs.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID);
     }
 
     public static void saveLastList(final int listId) {
@@ -424,15 +422,12 @@ public final class Settings {
     }
 
     public static boolean setMapFile(final String mapFile) {
-        final boolean commitResult = editSharedSettings(new PrefRunnable() {
-
+        return editSharedSettings(new PrefRunnable() {
             @Override
             public void edit(Editor edit) {
                 edit.putString(KEY_MAPFILE, mapFile);
             }
         });
-
-        return commitResult;
     }
 
     public static boolean isValidMapFile(final String mapFileIn) {

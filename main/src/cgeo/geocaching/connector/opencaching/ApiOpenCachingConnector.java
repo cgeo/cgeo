@@ -40,8 +40,6 @@ public class ApiOpenCachingConnector extends OpenCachingConnector {
         }
         final SearchResult searchResult = new SearchResult();
         searchResult.addCache(cache);
-
-        final SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType());
-        return search;
+        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 }

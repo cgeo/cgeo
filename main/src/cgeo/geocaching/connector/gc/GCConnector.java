@@ -130,9 +130,7 @@ public class GCConnector extends AbstractConnector {
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType());
-
-        return search;
+        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 
     @Override

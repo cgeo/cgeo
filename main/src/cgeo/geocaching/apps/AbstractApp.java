@@ -33,8 +33,7 @@ public abstract class AbstractApp implements App {
         try {
             // This can throw an exception where the exception type is only defined on API Level > 3
             // therefore surround with try-catch
-            final Intent intent = packageManager.getLaunchIntentForPackage(packageName);
-            return intent;
+            return packageManager.getLaunchIntentForPackage(packageName);
         } catch (Exception e) {
             return null;
         }

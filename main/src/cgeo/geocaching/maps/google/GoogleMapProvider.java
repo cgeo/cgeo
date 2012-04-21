@@ -82,14 +82,12 @@ public class GoogleMapProvider implements MapProvider {
 
     @Override
     public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final CacheType type) {
-        GoogleCacheOverlayItem baseItem = new GoogleCacheOverlayItem(coordinate, type);
-        return baseItem;
+        return new GoogleCacheOverlayItem(coordinate, type);
     }
 
     @Override
     public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context, Go4CacheUser userOne) {
-        GoogleOtherCachersOverlayItem baseItem = new GoogleOtherCachersOverlayItem(context, userOne);
-        return baseItem;
+        return new GoogleOtherCachersOverlayItem(context, userOne);
     }
 
 }

@@ -1770,16 +1770,13 @@ public class cgeocaches extends AbstractListActivity {
                 if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = Network.getResponseData(responseFromWeb);
                     if (response.length() > 2) {
-
-                        String GCcode = response;
-
                         delay = 1;
-                        handler.sendMessage(handler.obtainMessage(1, GCcode));
+                        handler.sendMessage(handler.obtainMessage(1, response));
                         yield();
 
-                        cgCache.storeCache(cgeocaches.this, null, GCcode, listIdLFW, false, null);
+                        cgCache.storeCache(cgeocaches.this, null, response, listIdLFW, false, null);
 
-                        handler.sendMessage(handler.obtainMessage(2, GCcode));
+                        handler.sendMessage(handler.obtainMessage(2, response));
                         yield();
                     } else if ("RG".equals(response)) {
                         //Server returned RG (registration) and this device no longer registered.
