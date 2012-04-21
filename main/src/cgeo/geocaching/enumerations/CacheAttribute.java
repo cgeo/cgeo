@@ -3,6 +3,8 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,9 +78,9 @@ public enum CacheAttribute {
     FRONTYARD(65, "frontyard", R.drawable.attribute_frontyard, R.string.attribute_frontyard_yes, R.string.attribute_frontyard_no),
     TEAMWORK(66, "teamwork", R.drawable.attribute_teamwork, R.string.attribute_teamwork_yes, R.string.attribute_teamwork_no);
 
-    public static final String INTERNAL_PRE = "attribute_";
-    public static final String INTERNAL_YES = "_yes";
-    public static final String INTERNAL_NO = "_no";
+    private static final String INTERNAL_PRE = "attribute_";
+    private static final String INTERNAL_YES = "_yes";
+    private static final String INTERNAL_NO = "_no";
 
     public final int id;
     public final String gcRawName;
@@ -130,5 +132,9 @@ public enum CacheAttribute {
             return "";
         }
         return attributeName.replace(INTERNAL_PRE, "").replace(INTERNAL_YES, "").replace(INTERNAL_NO, "").trim();
+    }
+
+    public static boolean isEnabled(final String attributeName) {
+        return !StringUtils.endsWithIgnoreCase(attributeName, INTERNAL_NO);
     }
 }

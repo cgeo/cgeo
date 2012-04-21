@@ -1217,11 +1217,6 @@ public class CacheDetailActivity extends AbstractActivity {
             noAttributeIconsFound = true;
 
             for (String attributeName : cache.getAttributes()) {
-                boolean strikethru = attributeName.endsWith("_no");
-                // cut off _yes / _no
-                if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
-                    attributeName = attributeName.substring(0, attributeName.lastIndexOf('_'));
-                }
                 // check if another attribute icon fits in this row
                 attributeRow.measure(0, 0);
                 int rowWidth = attributeRow.getMeasuredWidth();
@@ -1233,7 +1228,8 @@ public class CacheDetailActivity extends AbstractActivity {
                     rows.addView(attributeRow);
                 }
 
-                CacheAttribute attrib = CacheAttribute.getByGcRawName(attributeName);
+                final boolean strikethru = !CacheAttribute.isEnabled(attributeName);
+                final CacheAttribute attrib = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
                 if (attrib != CacheAttribute.UNKNOWN) {
                     noAttributeIconsFound = false;
                     Drawable d = res.getDrawable(attrib.drawableId);
@@ -1275,18 +1271,11 @@ public class CacheDetailActivity extends AbstractActivity {
             final List<String> attributes = cache.getAttributes();
 
             for (String attributeName : attributes) {
-                boolean negated = attributeName.endsWith("_no");
-                // cut off _yes / _no
-                if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
-                    attributeName = attributeName.substring(0, attributeName.lastIndexOf('_'));
-                }
+                final boolean enabled = CacheAttribute.isEnabled(attributeName);
                 // search for a translation of the attribute
-                CacheAttribute attrib = CacheAttribute.getByGcRawName(attributeName);
+                CacheAttribute attrib = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
                 if (attrib != CacheAttribute.UNKNOWN) {
-                    String translated = res.getString(negated ? attrib.stringIdNo : attrib.stringIdYes);
-                    if (StringUtils.isNotBlank(translated)) {
-                        attributeName = translated;
-                    }
+                    attributeName = attrib.getL10n(enabled);
                 }
                 if (buffer.length() > 0) {
                     buffer.append('\n');

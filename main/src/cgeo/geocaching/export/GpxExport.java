@@ -1,8 +1,8 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
@@ -90,8 +90,8 @@ class GpxExport extends AbstractExport {
                     }
 
                     gpx.append("<wpt ");
-                    gpx.append("lat=\"" + cache.getCoords().getLatitude() + "\" ");
-                    gpx.append("lon=\"" + cache.getCoords().getLongitude() + "\">");
+                    gpx.append("lat=\"").append(cache.getCoords().getLatitude()).append("\" ");
+                    gpx.append("lon=\"").append(cache.getCoords().getLongitude()).append("\">");
 
                     gpx.append("<time>");
                     gpx.append(StringEscapeUtils.escapeXml(dateFormatZ.format(cache.getHiddenDate())));
@@ -114,8 +114,8 @@ class GpxExport extends AbstractExport {
                     gpx.append("</type>");
 
                     gpx.append("<groundspeak:cache ");
-                    gpx.append("available=\"" + (!cache.isDisabled() ? "True" : "False"));
-                    gpx.append("\" archived=\"" + (cache.isArchived() ? "True" : "False") + "\" ");
+                    gpx.append("available=\"").append(!cache.isDisabled() ? "True" : "False");
+                    gpx.append("\" archived=\"").append(cache.isArchived() ? "True" : "False").append("\" ");
                     gpx.append("xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0/1\">");
 
                     gpx.append("<groundspeak:name>");
@@ -144,7 +144,7 @@ class GpxExport extends AbstractExport {
 
                         for (String attribute : cache.getAttributes()) {
                             final CacheAttribute attr = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attribute));
-                            final boolean enabled = attribute.endsWith(CacheAttribute.INTERNAL_YES);
+                            final boolean enabled = CacheAttribute.isEnabled(attribute);
 
                             gpx.append("<groundspeak:attribute id=\"");
                             gpx.append(attr.id);

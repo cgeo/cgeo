@@ -12,14 +12,13 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public final class CalendarActivity extends Activity {
     private static final String LOG_TAG = "cgeo.calendar";
@@ -93,7 +92,7 @@ public final class CalendarActivity extends Activity {
             return;
         }
 
-        final Map<Integer, String> calendars = new HashMap<Integer, String>();
+        final SparseArray<String> calendars = new SparseArray<String>();
         cursor.moveToFirst();
 
         final int indexId = cursor.getColumnIndex("_id");
@@ -115,20 +114,22 @@ public final class CalendarActivity extends Activity {
             }
         } while (cursor.moveToNext());
 
-        if (calendars.isEmpty()) {
+        if (calendars.size() == 0) {
             showToast(getResources().getString(R.string.event_fail));
             finish();
             return;
         }
 
-        final CharSequence[] items = calendars.values().toArray(new CharSequence[calendars.size()]);
+        final String[] items = new String[calendars.size()];
+        for (int i = 0; i < calendars.size(); i++) {
+            items[i] = calendars.valueAt(i);
+        }
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.calendars);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                final Integer[] keys = calendars.keySet().toArray(new Integer[calendars.size()]);
-                final Integer calendarId = keys[item];
+                final int calendarId = calendars.keyAt(item);
                 addToCalendar(calendarId);
                 finish();
             }
@@ -209,7 +210,7 @@ public final class CalendarActivity extends Activity {
      * @param calendarId
      *            The selected calendar
      */
-    private void addToCalendar(Integer calendarId) {
+    private void addToCalendar(int calendarId) {
         try {
             final Uri calendarProvider = Compatibility.getCalendarEventsProviderURI();
 

@@ -161,7 +161,7 @@ class FieldnoteExport extends AbstractExport {
                 }
             }
 
-            fieldNoteBuffer.append("\n");
+            fieldNoteBuffer.append('\n');
 
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 exportLocation.mkdirs();

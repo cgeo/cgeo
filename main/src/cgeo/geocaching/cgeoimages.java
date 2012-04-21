@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.SparseArray;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -34,7 +35,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class cgeoimages extends AbstractActivity {
@@ -51,7 +51,7 @@ public class cgeoimages extends AbstractActivity {
     private LinearLayout imagesView = null;
     private int count = 0;
     private int countDone = 0;
-    private final HashMap<Integer, cgImage> images = new HashMap<Integer, cgImage>();
+    private final SparseArray<cgImage> images = new SparseArray<cgImage>();
     private BitmapDrawable currentDrawable;
     private cgImage currentImage;
 

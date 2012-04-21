@@ -16,15 +16,21 @@ public class MapProviderFactory {
 
     private static MapProviderFactory instance = null;
 
-    private MapProvider[] mapProviders;
+    private final MapProvider[] mapProviders;
     private SortedMap<Integer, String> mapSources;
 
     private MapProviderFactory() {
         // add GoogleMapProvider only if google api is available in order to support x86 android emulator
+        boolean googleMaps = true;
         try {
             Class.forName("com.google.android.maps.MapActivity");
-            mapProviders = new MapProvider[] { new GoogleMapProvider(GOOGLEMAP_BASEID), new MapsforgeMapProvider(MFMAP_BASEID) };
         } catch (ClassNotFoundException e) {
+            googleMaps = false;
+        }
+        if (googleMaps) {
+            mapProviders = new MapProvider[] { new GoogleMapProvider(GOOGLEMAP_BASEID), new MapsforgeMapProvider(MFMAP_BASEID) };
+        }
+        else {
             mapProviders = new MapProvider[] { new MapsforgeMapProvider(MFMAP_BASEID) };
         }
 

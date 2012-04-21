@@ -28,6 +28,7 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
 import android.util.DisplayMetrics;
+import android.util.SparseArray;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -46,10 +47,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class CacheListAdapter extends ArrayAdapter<cgCache> {
@@ -66,7 +65,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     private boolean sort = true;
     private int checked = 0;
     private boolean selectMode = false;
-    final private static Map<Integer, Drawable> gcIconDrawables = new HashMap<Integer, Drawable>();
+    final private static SparseArray<Drawable> gcIconDrawables = new SparseArray<Drawable>();
     final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
     final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
     final private int[] ratingBcgs = new int[3];
@@ -613,11 +612,13 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     private static Drawable getCacheIcon(cgCache cache) {
         int hashCode = getIconHashCode(cache.getType(), cache.hasUserModifiedCoords() || cache.hasFinalDefined());
-        if (!gcIconDrawables.containsKey(hashCode)) {
-            // fallback to mystery icon
-            hashCode = getIconHashCode(CacheType.MYSTERY, cache.hasUserModifiedCoords() || cache.hasFinalDefined());
+        Drawable drawable = gcIconDrawables.get(hashCode);
+        if (drawable != null) {
+            return drawable;
         }
 
+        // fallback to mystery icon
+        hashCode = getIconHashCode(CacheType.MYSTERY, cache.hasUserModifiedCoords() || cache.hasFinalDefined());
         return gcIconDrawables.get(hashCode);
     }
 

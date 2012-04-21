@@ -106,7 +106,7 @@ public class CacheCache {
         return StringUtils.join(cachesCache.keySet(), ' ');
     }
 
-    private class CacheRemoveHandler implements RemoveHandler<cgCache> {
+    private static class CacheRemoveHandler implements RemoveHandler<cgCache> {
 
         @Override
         public void onRemove(cgCache removed) {

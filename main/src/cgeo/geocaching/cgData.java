@@ -3096,8 +3096,7 @@ public class cgData {
             query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
         }
         query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append("._id == ").append(dbTableCaches).append("._id and ").append(where);
-        Cursor cursor = databaseRO.rawQuery(
-                query.toString(), null);
+        Cursor cursor = databaseRO.rawQuery(query.toString(), null);
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
