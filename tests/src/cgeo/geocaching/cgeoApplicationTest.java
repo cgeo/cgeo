@@ -311,10 +311,15 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     public static void testSearchByGeocodeBasis() {
         for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
-            mockedCache.setMockedDataUser(Settings.getUsername());
-            cgCache parsedCache = cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
-            if (null != parsedCache) {
-                Compare.assertCompareCaches(mockedCache, parsedCache, true);
+            String oldUser = mockedCache.getMockedDataUser();
+            try {
+                mockedCache.setMockedDataUser(Settings.getUsername());
+                cgCache parsedCache = cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
+                if (null != parsedCache) {
+                    Compare.assertCompareCaches(mockedCache, parsedCache, true);
+                }
+            } finally {
+                mockedCache.setMockedDataUser(oldUser);
             }
         }
     }
