@@ -209,7 +209,7 @@ public abstract class Login {
     }
 
     private static void switchToEnglish(String previousPage) {
-        if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
+        if (previousPage != null && previousPage.contains(ENGLISH)) {
             Log.i("Geocaching.com language already set to English");
             // get find count
             getLoginStatus(Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/")));
