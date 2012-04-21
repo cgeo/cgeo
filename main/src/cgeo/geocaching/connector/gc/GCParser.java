@@ -739,18 +739,10 @@ public abstract class GCParser {
                 "__EVENTARGUMENT", "");
         Login.putViewstates(params, viewstates);
 
-        String page = Network.getResponseData(Network.postRequest(uri, params));
+        final String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
-            final StatusCode loginState = Login.login();
-            if (loginState == StatusCode.NO_ERROR) {
-                page = Network.getResponseData(Network.postRequest(uri, params));
-            } else if (loginState == StatusCode.NO_LOGIN_INFO_STORED) {
-                Log.i("Working as guest.");
-            } else {
-                search.setError(loginState);
-                Log.e("cgeoBase.searchByNextPage: Can not log in geocaching");
-                return search;
-            }
+            Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+            return search;
         }
 
         if (StringUtils.isBlank(page)) {
@@ -971,20 +963,10 @@ public abstract class GCParser {
         }
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
-        String page = Network.getResponseData(Network.postRequest(uri, params));
+        String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
-            final StatusCode loginState = Login.login();
-            if (loginState == StatusCode.NO_ERROR) {
-                page = Network.getResponseData(Network.postRequest(uri, params));
-            } else {
-                Log.e("cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
-                return loginState;
-            }
-        }
-
-        if (StringUtils.isBlank(page)) {
-            Log.e("cgeoBase.postLog: No data from server");
-            return StatusCode.NO_DATA_FROM_SERVER;
+            Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+            return StatusCode.NOT_LOGGED_IN;
         }
 
         // maintenance, archived needs to be confirmed
@@ -1101,20 +1083,10 @@ public abstract class GCParser {
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
-        String page = Network.getResponseData(Network.postRequest(uri, params));
+        final String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
-            final StatusCode loginState = Login.login();
-            if (loginState == StatusCode.NO_ERROR) {
-                page = Network.getResponseData(Network.postRequest(uri, params));
-            } else {
-                Log.e("cgeoBase.postLogTrackable: Can not log in geocaching (error: " + loginState + ")");
-                return loginState;
-            }
-        }
-
-        if (StringUtils.isBlank(page)) {
-            Log.e("cgeoBase.postLogTrackable: No data from server");
-            return StatusCode.NO_DATA_FROM_SERVER;
+            Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+            return StatusCode.NOT_LOGGED_IN;
         }
 
         try {
@@ -1141,7 +1113,7 @@ public abstract class GCParser {
      */
     public static int addToWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
-        String page = Login.postRequestLogged(uri);
+        String page = Login.postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgBase.addToWatchlist: No data from server");
@@ -1167,7 +1139,7 @@ public abstract class GCParser {
      */
     public static int removeFromWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
-        String page = Login.postRequestLogged(uri);
+        String page = Login.postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgBase.removeFromWatchlist: No data from server");

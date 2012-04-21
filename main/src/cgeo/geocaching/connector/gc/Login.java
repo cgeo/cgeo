@@ -396,13 +396,13 @@ public abstract class Login {
      * @param uri
      * @return
      */
-    public static String postRequestLogged(final String uri) {
-        HttpResponse response = Network.postRequest(uri, null);
+    public static String postRequestLogged(final String uri, final Parameters params) {
+        HttpResponse response = Network.postRequest(uri, params);
         String data = Network.getResponseData(response);
 
         if (!getLoginStatus(data)) {
             if (login() == StatusCode.NO_ERROR) {
-                response = Network.postRequest(uri, null);
+                response = Network.postRequest(uri, params);
                 data = Network.getResponseData(response);
             } else {
                 Log.i("Working as guest.");
