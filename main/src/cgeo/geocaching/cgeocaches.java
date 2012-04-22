@@ -64,7 +64,6 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -159,7 +158,7 @@ public class cgeocaches extends AbstractListActivity {
         public void handleMessage(Message msg) {
             try {
                 if (search != null) {
-                    setTitle(title + " [" + search.getCount() + "]");
+                    setTitle(title + " [" + search.getCount() + ']');
                     cacheList.clear();
 
                     final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -203,7 +202,7 @@ public class cgeocaches extends AbstractListActivity {
                     AlertDialog alert = dialog.create();
                     alert.show();
                 } else if (app != null && search != null && search.getError() != null) {
-                    showToast(res.getString(R.string.err_download_fail) + " " + search.getError().getErrorString(res) + ".");
+                    showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString(res) + '.');
 
                     hideLoading();
                     showProgress(false);
@@ -1930,7 +1929,7 @@ public class cgeocaches extends AbstractListActivity {
 
     private void hideLoading() {
         final ListView list = getListView();
-        final RelativeLayout loading = (RelativeLayout) findViewById(R.id.loading);
+        final View loading = findViewById(R.id.loading);
 
         if (list.getVisibility() == View.GONE) {
             list.setVisibility(View.VISIBLE);

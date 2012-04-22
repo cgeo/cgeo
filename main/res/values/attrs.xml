@@ -31,4 +31,6 @@
 
   <!-- others -->
   <attr name="compass" format="integer" />
+  <attr name="progressSpinnerLarge" format="integer" />
+  
 </resources>
