@@ -746,14 +746,14 @@ public class cgeocaches extends AbstractListActivity {
             subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
             subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
             subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
-            subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
-            if (Settings.getWebDeviceCode() == null) {
-                menu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title)).setIcon(android.R.drawable.ic_menu_upload); // import gpx file
-            } else {
-                SubMenu subMenuImport = menu.addSubMenu(0, SUBMENU_IMPORT, 0, res.getString(R.string.import_title)).setIcon(android.R.drawable.ic_menu_upload); // import
-                subMenuImport.add(1, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title)).setCheckable(false).setChecked(false);
-                subMenuImport.add(1, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title)).setCheckable(false).setChecked(false);
+
+            //TODO: add submenu/AlertDialog and use R.string.gpx_import_title
+            subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
+            if (Settings.getWebDeviceCode() != null) {
+                subMenu.add(0, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title));
             }
+
+            subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
         } else {
             if (type == CacheListType.HISTORY) {
                 SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_HISTORY, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
