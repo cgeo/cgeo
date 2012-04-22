@@ -250,35 +250,33 @@ class GpxExport extends AbstractExport {
 
                     gpx.write("</wpt>");
 
-                    if (cache.hasWaypoints()) {
-                        for (cgWaypoint wp : cache.getWaypoints()) {
-                            gpx.write("<wpt lat=\"");
-                            gpx.write(Double.toString(wp.getCoords().getLatitude()));
-                            gpx.write("\" lon=\"");
-                            gpx.write(Double.toString(wp.getCoords().getLongitude()));
-                            gpx.write("\">");
+                    for (cgWaypoint wp : cache.getWaypoints()) {
+                        gpx.write("<wpt lat=\"");
+                        gpx.write(Double.toString(wp.getCoords().getLatitude()));
+                        gpx.write("\" lon=\"");
+                        gpx.write(Double.toString(wp.getCoords().getLongitude()));
+                        gpx.write("\">");
 
-                            gpx.write("<name>");
-                            gpx.write(StringEscapeUtils.escapeXml(wp.getPrefix()));
-                            gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode().substring(2)));
-                            gpx.write("</name>");
+                        gpx.write("<name>");
+                        gpx.write(StringEscapeUtils.escapeXml(wp.getPrefix()));
+                        gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode().substring(2)));
+                        gpx.write("</name>");
 
-                            gpx.write("<cmt />");
+                        gpx.write("<cmt />");
 
-                            gpx.write("<desc>");
-                            gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
-                            gpx.write("</desc>");
+                        gpx.write("<desc>");
+                        gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
+                        gpx.write("</desc>");
 
-                            gpx.write("<sym>");
-                            gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
-                            gpx.write("</sym>");
+                        gpx.write("<sym>");
+                        gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
+                        gpx.write("</sym>");
 
-                            gpx.write("<type>Waypoint|");
-                            gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
-                            gpx.write("</type>");
+                        gpx.write("<type>Waypoint|");
+                        gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
+                        gpx.write("</type>");
 
-                            gpx.write("</wpt>");
-                        }
+                        gpx.write("</wpt>");
                     }
 
                     publishProgress(i + 1);
