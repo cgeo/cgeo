@@ -146,7 +146,7 @@ class GeopointParser {
     /**
      * Parses latitude out of a given string.
      *
-     * @see parse()
+     * @see #parse(String)
      * @param text
      *            the string to be parsed
      * @return the latitude as decimal degree
@@ -161,7 +161,7 @@ class GeopointParser {
     /**
      * Parses longitude out of a given string.
      *
-     * @see parse()
+     * @see #parse(String)
      * @param text
      *            the string to be parsed
      * @return the longitude as decimal degree

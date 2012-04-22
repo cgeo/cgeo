@@ -56,7 +56,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *            string to parse
      * @throws Geopoint.ParseException
      *             if the string cannot be parsed
-     * @see GeopointParser.parse()
+     * @see GeopointParser#parse(String)
      */
     public Geopoint(final String text) {
         final Geopoint parsed = GeopointParser.parse(text);
@@ -73,7 +73,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *            longitude string to parse
      * @throws Geopoint.ParseException
      *             if any argument string cannot be parsed
-     * @see GeopointParser.parse()
+     * @see GeopointParser#parse(String, String)
      */
     public Geopoint(final String latText, final String lonText) {
         this(GeopointParser.parseLatitude(latText), GeopointParser.parseLongitude(lonText));
@@ -82,7 +82,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Creates new Geopoint with given Location.
      *
-     * @param gp
+     * @param loc
      *            the Location to clone
      */
     public Geopoint(final Location loc) {
