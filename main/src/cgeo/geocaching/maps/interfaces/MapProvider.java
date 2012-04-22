@@ -1,12 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.IWaypoint;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.go4cache.Go4CacheUser;
-
 import android.app.Activity;
-import android.content.Context;
 
 import java.util.Map;
 
@@ -23,17 +17,13 @@ public interface MapProvider {
 
     public boolean isMySource(int sourceId);
 
+    public boolean isSameActivity(int sourceId1, int sourceId2);
+
     public Class<? extends Activity> getMapClass();
 
     public int getMapViewId();
 
     public int getMapLayoutId();
 
-    public GeoPointImpl getGeoPointBase(final Geopoint coords);
-
-    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint iWaypoint, final CacheType type);
-
-    public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context,
-            Go4CacheUser userOne);
-
+    public MapItemFactory getMapItemFactory();
 }

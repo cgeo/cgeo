@@ -219,6 +219,7 @@
   <string name="warn_log_text_fill">Please fill in text for your log.</string>
   <string name="warn_load_images">c:geo failed to load images.</string>
   <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge version 0.3.0 map file.\nOffline maps are not available.</string>
+  <string name="warn_deprecated_mapfile">You are using a deprecated version 0.2.4 map file.\nConsider switching to a version 0.3.0 map.\nWe will drop support for version 0.2.4 in the next release.</string>
 
   <string name="info_log_posted">c:geo successfully submitted the log.</string>
   <string name="info_log_saved">c:geo successfully saved the log.</string>

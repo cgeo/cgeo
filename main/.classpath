@@ -8,6 +8,7 @@
 	<classpathentry kind="lib" path="libs/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry kind="lib" path="libs/mapsforge-map-0.3.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="libs/mapsforge-map-0.2.4.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
