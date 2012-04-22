@@ -1087,7 +1087,8 @@ public class cgeocaches extends AbstractListActivity {
             NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null);
             return true;
         } else if (id == MENU_LOG_VISIT) {
-            return getCacheFromAdapter(adapterInfo).logVisit(this);
+            getCacheFromAdapter(adapterInfo).logVisit(this);
+            return true;
         } else if (id == MENU_CACHE_DETAILS) {
             final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
             final cgCache cache = getCacheFromAdapter(adapterInfo);
