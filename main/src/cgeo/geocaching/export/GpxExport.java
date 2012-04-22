@@ -161,7 +161,7 @@ class GpxExport extends AbstractExport {
                             final boolean enabled = CacheAttribute.isEnabled(attribute);
 
                             gpx.write("<groundspeak:attribute id=\"");
-                            gpx.write(attr.id);
+                            gpx.write(Integer.toString(attr.id));
                             gpx.write("\" inc=\"");
                             if (enabled) {
                                 gpx.write('1');
@@ -223,7 +223,7 @@ class GpxExport extends AbstractExport {
 
                         for (LogEntry log : cache.getLogs()) {
                             gpx.write("<groundspeak:log id=\"");
-                            gpx.write(log.id);
+                            gpx.write(Integer.toString(log.id));
                             gpx.write("\">");
 
                             gpx.write("<groundspeak:date>");
