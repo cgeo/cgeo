@@ -18,11 +18,10 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Environment;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -75,13 +74,20 @@ class GpxExport extends AbstractExport {
                 return false;
             }
 
-            // FIXME: complete export is created in memory. That should be some file stream instead.
-            final StringBuilder gpx = new StringBuilder();
-
-            gpx.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            gpx.append("<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd\">");
+            Writer gpx = null;
 
             try {
+                exportLocation.mkdirs();
+
+                final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                exportFile = new File(exportLocation.toString() + File.separatorChar + fileNameDateFormat.format(new Date()) + ".gpx");
+
+                gpx = new BufferedWriter(new FileWriter(exportFile));
+
+                gpx.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                gpx.write("<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd\">");
+
+
                 for (int i = 0; i < caches.size(); i++) {
                     cgCache cache = caches.get(i);
 
@@ -89,191 +95,184 @@ class GpxExport extends AbstractExport {
                         cache = cgeoapplication.getInstance().loadCache(caches.get(i).getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
                     }
 
-                    gpx.append("<wpt ");
-                    gpx.append("lat=\"").append(cache.getCoords().getLatitude()).append("\" ");
-                    gpx.append("lon=\"").append(cache.getCoords().getLongitude()).append("\">");
+                    gpx.write("<wpt ");
+                    gpx.write("lat=\"");
+                    gpx.write(Double.toString(cache.getCoords().getLatitude()));
+                    gpx.write("\" ");
+                    gpx.write("lon=\"");
+                    gpx.write(Double.toString(cache.getCoords().getLongitude()));
+                    gpx.write("\">");
 
-                    gpx.append("<time>");
-                    gpx.append(StringEscapeUtils.escapeXml(dateFormatZ.format(cache.getHiddenDate())));
-                    gpx.append("</time>");
+                    gpx.write("<time>");
+                    gpx.write(StringEscapeUtils.escapeXml(dateFormatZ.format(cache.getHiddenDate())));
+                    gpx.write("</time>");
 
-                    gpx.append("<name>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getGeocode()));
-                    gpx.append("</name>");
+                    gpx.write("<name>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode()));
+                    gpx.write("</name>");
 
-                    gpx.append("<desc>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getName()));
-                    gpx.append("</desc>");
+                    gpx.write("<desc>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getName()));
+                    gpx.write("</desc>");
 
-                    gpx.append("<sym>");
-                    gpx.append(cache.isFound() ? "Geocache Found" : "Geocache");
-                    gpx.append("</sym>");
+                    gpx.write("<sym>");
+                    gpx.write(cache.isFound() ? "Geocache Found" : "Geocache");
+                    gpx.write("</sym>");
 
-                    gpx.append("<type>");
-                    gpx.append(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().toString())); //TODO: Correct (english) string
-                    gpx.append("</type>");
+                    gpx.write("<type>");
+                    gpx.write(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().toString())); //TODO: Correct (english) string
+                    gpx.write("</type>");
 
-                    gpx.append("<groundspeak:cache ");
-                    gpx.append("available=\"").append(!cache.isDisabled() ? "True" : "False");
-                    gpx.append("\" archived=\"").append(cache.isArchived() ? "True" : "False").append("\" ");
-                    gpx.append("xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0/1\">");
+                    gpx.write("<groundspeak:cache ");
+                    gpx.write("available=\"");
+                    gpx.write(!cache.isDisabled() ? "True" : "False");
+                    gpx.write("\" archived=\"");
+                    gpx.write(cache.isArchived() ? "True" : "False");
+                    gpx.write("\" ");
+                    gpx.write("xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0/1\">");
 
-                    gpx.append("<groundspeak:name>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getName()));
-                    gpx.append("</groundspeak:name>");
+                    gpx.write("<groundspeak:name>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getName()));
+                    gpx.write("</groundspeak:name>");
 
-                    gpx.append("<groundspeak:placed_by>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getOwner()));
-                    gpx.append("</groundspeak:placed_by>");
+                    gpx.write("<groundspeak:placed_by>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getOwner()));
+                    gpx.write("</groundspeak:placed_by>");
 
-                    gpx.append("<groundspeak:owner>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getOwnerReal()));
-                    gpx.append("</groundspeak:owner>");
+                    gpx.write("<groundspeak:owner>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getOwnerReal()));
+                    gpx.write("</groundspeak:owner>");
 
-                    gpx.append("<groundspeak:type>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getType().toString())); //TODO: Correct (english) string
-                    gpx.append("</groundspeak:type>");
+                    gpx.write("<groundspeak:type>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getType().toString())); //TODO: Correct (english) string
+                    gpx.write("</groundspeak:type>");
 
-                    gpx.append("<groundspeak:container>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getSize().toString())); //TODO: Correct (english) string
-                    gpx.append("</groundspeak:container>");
+                    gpx.write("<groundspeak:container>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getSize().toString())); //TODO: Correct (english) string
+                    gpx.write("</groundspeak:container>");
 
                     if (cache.hasAttributes()) {
                         //TODO: Attribute conversion required: English verbose name, gpx-id
-                        gpx.append("<groundspeak:attributes>");
+                        gpx.write("<groundspeak:attributes>");
 
                         for (String attribute : cache.getAttributes()) {
                             final CacheAttribute attr = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attribute));
                             final boolean enabled = CacheAttribute.isEnabled(attribute);
 
-                            gpx.append("<groundspeak:attribute id=\"");
-                            gpx.append(attr.id);
-                            gpx.append("\" inc=\"");
+                            gpx.write("<groundspeak:attribute id=\"");
+                            gpx.write(attr.id);
+                            gpx.write("\" inc=\"");
                             if (enabled) {
-                                gpx.append('1');
+                                gpx.write('1');
                             } else {
-                                gpx.append('0');
+                                gpx.write('0');
                             }
-                            gpx.append("\">");
-                            gpx.append(StringEscapeUtils.escapeXml(attr.getL10n(enabled)));
-                            gpx.append("</groundspeak:attribute>");
+                            gpx.write("\">");
+                            gpx.write(StringEscapeUtils.escapeXml(attr.getL10n(enabled)));
+                            gpx.write("</groundspeak:attribute>");
                         }
 
-                        gpx.append("</groundspeak:attributes>");
+                        gpx.write("</groundspeak:attributes>");
                     }
 
-                    gpx.append("<groundspeak:difficulty>");
-                    gpx.append(Float.toString(cache.getDifficulty()));
-                    gpx.append("</groundspeak:difficulty>");
+                    gpx.write("<groundspeak:difficulty>");
+                    gpx.write(Float.toString(cache.getDifficulty()));
+                    gpx.write("</groundspeak:difficulty>");
 
-                    gpx.append("<groundspeak:terrain>");
-                    gpx.append(Float.toString(cache.getTerrain()));
-                    gpx.append("</groundspeak:terrain>");
+                    gpx.write("<groundspeak:terrain>");
+                    gpx.write(Float.toString(cache.getTerrain()));
+                    gpx.write("</groundspeak:terrain>");
 
-                    gpx.append("<groundspeak:country>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getLocation()));
-                    gpx.append("</groundspeak:country>");
+                    gpx.write("<groundspeak:country>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getLocation()));
+                    gpx.write("</groundspeak:country>");
 
-                    gpx.append("<groundspeak:state>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getLocation()));
-                    gpx.append("</groundspeak:state>");
+                    gpx.write("<groundspeak:state>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getLocation()));
+                    gpx.write("</groundspeak:state>");
 
-                    gpx.append("<groundspeak:short_description html=\"");
+                    gpx.write("<groundspeak:short_description html=\"");
                     if (BaseUtils.containsHtml(cache.getShortDescription())) {
-                        gpx.append("True");
+                        gpx.write("True");
                     } else {
-                        gpx.append("False");
+                        gpx.write("False");
                     }
-                    gpx.append("\">");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getShortDescription()));
-                    gpx.append("</groundspeak:short_description>");
+                    gpx.write("\">");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getShortDescription()));
+                    gpx.write("</groundspeak:short_description>");
 
-                    gpx.append("<groundspeak:long_description html=\"");
+                    gpx.write("<groundspeak:long_description html=\"");
                     if (BaseUtils.containsHtml(cache.getDescription())) {
-                        gpx.append("True");
+                        gpx.write("True");
                     } else {
-                        gpx.append("False");
+                        gpx.write("False");
                     }
-                    gpx.append("\">");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getDescription()));
-                    gpx.append("</groundspeak:long_description>");
+                    gpx.write("\">");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getDescription()));
+                    gpx.write("</groundspeak:long_description>");
 
-                    gpx.append("<groundspeak:encoded_hints>");
-                    gpx.append(StringEscapeUtils.escapeXml(cache.getHint()));
-                    gpx.append("</groundspeak:encoded_hints>");
+                    gpx.write("<groundspeak:encoded_hints>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getHint()));
+                    gpx.write("</groundspeak:encoded_hints>");
 
-                    gpx.append("</groundspeak:cache>");
+                    gpx.write("</groundspeak:cache>");
 
                     //TODO: Waypoints
 
                     if (cache.getLogs().size() > 0) {
-                        gpx.append("<groundspeak:logs>");
+                        gpx.write("<groundspeak:logs>");
 
                         for (LogEntry log : cache.getLogs()) {
-                            gpx.append("<groundspeak:log id=\"");
-                            gpx.append(log.id);
-                            gpx.append("\">");
+                            gpx.write("<groundspeak:log id=\"");
+                            gpx.write(log.id);
+                            gpx.write("\">");
 
-                            gpx.append("<groundspeak:date>");
-                            gpx.append(StringEscapeUtils.escapeXml(dateFormatZ.format(new Date(log.date))));
-                            gpx.append("</groundspeak:date>");
+                            gpx.write("<groundspeak:date>");
+                            gpx.write(StringEscapeUtils.escapeXml(dateFormatZ.format(new Date(log.date))));
+                            gpx.write("</groundspeak:date>");
 
-                            gpx.append("<groundspeak:type>");
-                            gpx.append(StringEscapeUtils.escapeXml(log.type.type));
-                            gpx.append("</groundspeak:type>");
+                            gpx.write("<groundspeak:type>");
+                            gpx.write(StringEscapeUtils.escapeXml(log.type.type));
+                            gpx.write("</groundspeak:type>");
 
-                            gpx.append("<groundspeak:finder id=\"\">");
-                            gpx.append(StringEscapeUtils.escapeXml(log.author));
-                            gpx.append("</groundspeak:finder>");
+                            gpx.write("<groundspeak:finder id=\"\">");
+                            gpx.write(StringEscapeUtils.escapeXml(log.author));
+                            gpx.write("</groundspeak:finder>");
 
-                            gpx.append("<groundspeak:text encoded=\"False\">");
-                            gpx.append(StringEscapeUtils.escapeXml(log.log));
-                            gpx.append("</groundspeak:text>");
+                            gpx.write("<groundspeak:text encoded=\"False\">");
+                            gpx.write(StringEscapeUtils.escapeXml(log.log));
+                            gpx.write("</groundspeak:text>");
 
-                            gpx.append("</groundspeak:log>");
+                            gpx.write("</groundspeak:log>");
                         }
 
-                        gpx.append("</groundspeak:logs>");
+                        gpx.write("</groundspeak:logs>");
                     }
 
-                    gpx.append("</wpt>");
+                    gpx.write("</wpt>");
 
                     publishProgress(i + 1);
                 }
+
+                gpx.write("</gpx>");
             } catch (Exception e) {
-                Log.e("GpxExport.ExportTask generation", e);
+                Log.e("GpxExport.ExportTask export", e);
+
+                // delete partial gpx file on error
+                if (exportFile.exists()) {
+                    exportFile.delete();
+                }
+
                 return false;
-            }
-
-            gpx.append("</gpx>");
-
-            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                exportLocation.mkdirs();
-
-                SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".gpx");
-
-                OutputStream os = null;
-                Writer fw = null;
-                try {
-                    os = new FileOutputStream(exportFile);
-                    fw = new OutputStreamWriter(os, "UTF-8");
-                    fw.write(gpx.toString());
-                } catch (IOException e) {
-                    Log.e("GpxExport.ExportTask export", e);
-                    return false;
-                } finally {
-                    if (fw != null) {
-                        try {
-                            fw.close();
-                        } catch (IOException e) {
-                            Log.e("GpxExport.ExportTask export", e);
-                            return false;
-                        }
+            } finally {
+                if (gpx != null) {
+                    try {
+                        gpx.close();
+                    } catch (IOException e) {
+                        Log.e("GpxExport.ExportTask export", e);
+                        return false;
                     }
                 }
-            } else {
-                return false;
             }
 
             return true;
