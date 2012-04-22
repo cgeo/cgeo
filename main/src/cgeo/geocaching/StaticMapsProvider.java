@@ -113,17 +113,15 @@ public class StaticMapsProvider {
         storeCacheStaticMap(cache, edge, waitForResult);
     }
 
-    private static void storeCacheStaticMap(cgCache cache, int edge, final boolean waitForResult) {
+    private static void storeCacheStaticMap(final cgCache cache, final int edge, final boolean waitForResult) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Parameters waypoints = new Parameters();
-        if (cache.hasWaypoints()) {
-            for (cgWaypoint waypoint : cache.getWaypoints()) {
-                if (waypoint.getCoords() == null) {
-                    continue;
-                }
-                final String wpMarkerUrl = getWpMarkerUrl(waypoint);
-                waypoints.put("markers", "icon:" + wpMarkerUrl + "|" + waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
+        for (final cgWaypoint waypoint : cache.getWaypoints()) {
+            if (waypoint.getCoords() == null) {
+                continue;
             }
+            final String wpMarkerUrl = getWpMarkerUrl(waypoint);
+            waypoints.put("markers", "icon:" + wpMarkerUrl + "|" + waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
         }
         // download map images in separate background thread for higher performance
         final String cacheMarkerUrl = getCacheMarkerUrl(cache);

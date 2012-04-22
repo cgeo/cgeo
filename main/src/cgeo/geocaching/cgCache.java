@@ -1177,18 +1177,15 @@ public class cgCache implements ICache, IWaypoint {
      * @return <code>true</code> if the waypoint was duplicated, <code>false</code> otherwise (invalid index)
      */
     public boolean duplicateWaypoint(final int index) {
-        if (!isValidWaypointIndex(index)) {
+        final cgWaypoint original = getWaypoint(index);
+        if (original == null) {
             return false;
         }
-        final cgWaypoint copy = new cgWaypoint(waypoints.get(index));
+        final cgWaypoint copy = new cgWaypoint(original);
         copy.setUserDefined();
         copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
         waypoints.add(index + 1, copy);
         return cgeoapplication.getInstance().saveOwnWaypoint(-1, geocode, copy);
-    }
-
-    private boolean isValidWaypointIndex(final int index) {
-        return hasWaypoints() && index >= 0 && index < waypoints.size();
     }
 
     /**
@@ -1199,10 +1196,10 @@ public class cgCache implements ICache, IWaypoint {
      * @return <code>true</code>, if the waypoint was deleted
      */
     public boolean deleteWaypoint(final int index) {
-        if (!isValidWaypointIndex(index)) {
+        final cgWaypoint waypoint = getWaypoint(index);
+        if (waypoint == null) {
             return false;
         }
-        final cgWaypoint waypoint = waypoints.get(index);
         if (waypoint.isUserDefined()) {
             waypoints.remove(index);
             cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
@@ -1256,10 +1253,7 @@ public class cgCache implements ICache, IWaypoint {
      * @return waypoint or <code>null</code> if index is out of range
      */
     public cgWaypoint getWaypoint(final int index) {
-        if (!isValidWaypointIndex(index)) {
-            return null;
-        }
-        return waypoints.get(index);
+        return waypoints != null && index >= 0 && index < waypoints.size() ? waypoints.get(index) : null;
     }
 
     /**

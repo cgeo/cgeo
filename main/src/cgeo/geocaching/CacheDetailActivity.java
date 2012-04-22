@@ -488,15 +488,16 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
 
                 break;
-            case CONTEXT_MENU_WAYPOINT_EDIT:
-                if (cache.hasWaypoints() && index < cache.getWaypoints().size()) {
-                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+            case CONTEXT_MENU_WAYPOINT_EDIT: {
+                final cgWaypoint waypoint = cache.getWaypoint(index);
+                if (waypoint != null) {
                     Intent editIntent = new Intent(this, cgeowaypointadd.class);
                     editIntent.putExtra("waypoint", waypoint.getId());
                     startActivity(editIntent);
                     refreshOnResume = true;
                 }
                 break;
+            }
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
                 if (cache.duplicateWaypoint(index)) {
                     app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
@@ -1079,7 +1080,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
             // show number of waypoints directly in waypoint title
             if (page == Page.WAYPOINTS) {
-                int waypointCount = (cache.hasWaypoints() ? cache.getWaypoints().size() : 0);
+                final int waypointCount = cache.getWaypoints().size();
                 return res.getQuantityString(R.plurals.waypoints, waypointCount, waypointCount);
             }
             return res.getString(page.titleStringId);
@@ -2337,92 +2338,88 @@ public class CacheDetailActivity extends AbstractActivity {
 
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_waypoints, null);
 
-            LinearLayout waypoints = (LinearLayout) view.findViewById(R.id.waypoints);
+            final LinearLayout waypoints = (LinearLayout) view.findViewById(R.id.waypoints);
 
-            if (cache.hasWaypoints()) {
-                LinearLayout waypointView;
+            // sort waypoints: PP, Sx, FI, OWN
+            final List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.getWaypoints());
+            Collections.sort(sortedWaypoints);
 
-                // sort waypoints: PP, Sx, FI, OWN
-                List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.getWaypoints());
-                Collections.sort(sortedWaypoints);
+            for (final cgWaypoint wpt : sortedWaypoints) {
+                final LinearLayout waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
 
-                for (final cgWaypoint wpt : sortedWaypoints) {
-                    waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
-
-                    // coordinates
-                    if (null != wpt.getCoords()) {
-                        final TextView coordinatesView = (TextView) waypointView.findViewById(R.id.coordinates);
-                        coordinatesView.setText(wpt.getCoords().toString());
-                        coordinatesView.setVisibility(View.VISIBLE);
-                    }
-
-                    // info
-                    final List<String> infoTextList = new ArrayList<String>(3);
-                    if (WaypointType.ALL_TYPES_EXCEPT_OWN.contains(wpt.getWaypointType())) {
-                        infoTextList.add(wpt.getWaypointType().getL10n());
-                    }
-                    if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(wpt.getPrefix())) {
-                        infoTextList.add(res.getString(R.string.waypoint_custom));
-                    } else {
-                        if (StringUtils.isNotBlank(wpt.getPrefix())) {
-                            infoTextList.add(wpt.getPrefix());
-                        }
-                        if (StringUtils.isNotBlank(wpt.getLookup())) {
-                            infoTextList.add(wpt.getLookup());
-                        }
-                    }
-                    if (CollectionUtils.isNotEmpty(infoTextList)) {
-                        final TextView infoView = (TextView) waypointView.findViewById(R.id.info);
-                        infoView.setText(StringUtils.join(infoTextList, Formatter.SEPARATOR));
-                        infoView.setVisibility(View.VISIBLE);
-                    }
-
-                    // title
-                    TextView nameView = (TextView) waypointView.findViewById(R.id.name);
-                    if (StringUtils.isNotBlank(wpt.getName())) {
-                        nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
-                    } else if (null != wpt.getCoords()) {
-                        nameView.setText(wpt.getCoords().toString());
-                    } else {
-                        nameView.setText(res.getString(R.string.waypoint));
-                    }
-                    wpt.setIcon(res, nameView);
-
-                    // note
-                    if (StringUtils.isNotBlank(wpt.getNote())) {
-                        final TextView noteView = (TextView) waypointView.findViewById(R.id.note);
-                        noteView.setVisibility(View.VISIBLE);
-                        if (BaseUtils.containsHtml(wpt.getNote())) {
-                            noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
-                        }
-                        else {
-                            noteView.setText(wpt.getNote());
-                        }
-                    }
-
-                    View wpNavView = waypointView.findViewById(R.id.wpDefaultNavigation);
-                    wpNavView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            NavigationAppFactory.startDefaultNavigationApplication(geolocation, CacheDetailActivity.this, null, wpt, null);
-                        }
-                    });
-                    wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View v) {
-                            NavigationAppFactory.startDefaultNavigationApplication2(geolocation, CacheDetailActivity.this, null, wpt, null);
-                            return true;
-                        }
-                    });
-
-                    registerForContextMenu(waypointView);
-                    waypointView.setOnClickListener(new WaypointInfoClickListener());
-
-                    waypoints.addView(waypointView);
+                // coordinates
+                if (null != wpt.getCoords()) {
+                    final TextView coordinatesView = (TextView) waypointView.findViewById(R.id.coordinates);
+                    coordinatesView.setText(wpt.getCoords().toString());
+                    coordinatesView.setVisibility(View.VISIBLE);
                 }
+
+                // info
+                final List<String> infoTextList = new ArrayList<String>(3);
+                if (WaypointType.ALL_TYPES_EXCEPT_OWN.contains(wpt.getWaypointType())) {
+                    infoTextList.add(wpt.getWaypointType().getL10n());
+                }
+                if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(wpt.getPrefix())) {
+                    infoTextList.add(res.getString(R.string.waypoint_custom));
+                } else {
+                    if (StringUtils.isNotBlank(wpt.getPrefix())) {
+                        infoTextList.add(wpt.getPrefix());
+                    }
+                    if (StringUtils.isNotBlank(wpt.getLookup())) {
+                        infoTextList.add(wpt.getLookup());
+                    }
+                }
+                if (CollectionUtils.isNotEmpty(infoTextList)) {
+                    final TextView infoView = (TextView) waypointView.findViewById(R.id.info);
+                    infoView.setText(StringUtils.join(infoTextList, Formatter.SEPARATOR));
+                    infoView.setVisibility(View.VISIBLE);
+                }
+
+                // title
+                final TextView nameView = (TextView) waypointView.findViewById(R.id.name);
+                if (StringUtils.isNotBlank(wpt.getName())) {
+                    nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
+                } else if (null != wpt.getCoords()) {
+                    nameView.setText(wpt.getCoords().toString());
+                } else {
+                    nameView.setText(res.getString(R.string.waypoint));
+                }
+                wpt.setIcon(res, nameView);
+
+                // note
+                if (StringUtils.isNotBlank(wpt.getNote())) {
+                    final TextView noteView = (TextView) waypointView.findViewById(R.id.note);
+                    noteView.setVisibility(View.VISIBLE);
+                    if (BaseUtils.containsHtml(wpt.getNote())) {
+                        noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
+                    }
+                    else {
+                        noteView.setText(wpt.getNote());
+                    }
+                }
+
+                final View wpNavView = waypointView.findViewById(R.id.wpDefaultNavigation);
+                wpNavView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        NavigationAppFactory.startDefaultNavigationApplication(geolocation, CacheDetailActivity.this, null, wpt, null);
+                    }
+                });
+                wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        NavigationAppFactory.startDefaultNavigationApplication2(geolocation, CacheDetailActivity.this, null, wpt, null);
+                        return true;
+                    }
+                });
+
+                registerForContextMenu(waypointView);
+                waypointView.setOnClickListener(new WaypointInfoClickListener());
+
+                waypoints.addView(waypointView);
             }
 
-            Button addWaypoint = (Button) view.findViewById(R.id.add_waypoint);
+            final Button addWaypoint = (Button) view.findViewById(R.id.add_waypoint);
             addWaypoint.setClickable(true);
             addWaypoint.setOnClickListener(new AddWaypointClickListener());
 
@@ -2431,16 +2428,9 @@ public class CacheDetailActivity extends AbstractActivity {
 
         private class AddWaypointClickListener implements View.OnClickListener {
 
-            public void onClick(View view) {
-                Intent addWptIntent = new Intent(CacheDetailActivity.this, cgeowaypointadd.class);
-
-                addWptIntent.putExtra("geocode", cache.getGeocode());
-                int wpCount = 0;
-                if (cache.hasWaypoints()) {
-                    wpCount = cache.getWaypoints().size();
-                }
-                addWptIntent.putExtra("count", wpCount);
-
+            public void onClick(final View view) {
+                final Intent addWptIntent = new Intent(CacheDetailActivity.this, cgeowaypointadd.class);
+                addWptIntent.putExtra("geocode", cache.getGeocode()).putExtra("count", cache.getWaypoints().size());
                 startActivity(addWptIntent);
                 refreshOnResume = true;
             }
