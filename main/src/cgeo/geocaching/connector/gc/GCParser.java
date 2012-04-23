@@ -1283,8 +1283,7 @@ public abstract class GCParser {
         }
 
         // trackable logs
-        try
-        {
+        try {
             final Matcher matcherLogs = GCConstants.PATTERN_TRACKABLE_LOG.matcher(page);
             /*
              * 1. Type (img)
@@ -1295,23 +1294,20 @@ public abstract class GCParser {
              * 6. Cache-name
              * 7. Logtext
              */
-            while (matcherLogs.find())
-            {
-                final LogEntry logDone = new LogEntry();
-
-                logDone.type = LogType.getByIconName(matcherLogs.group(1));
-                logDone.author = Html.fromHtml(matcherLogs.group(3)).toString().trim();
-
-                try
-                {
-                    logDone.date = Login.parseGcCustomDate(matcherLogs.group(2)).getTime();
+            while (matcherLogs.find()) {
+                long date = 0;
+                try {
+                    date = Login.parseGcCustomDate(matcherLogs.group(2)).getTime();
                 } catch (ParseException e) {
                 }
 
-                logDone.log = matcherLogs.group(7).trim();
+                final LogEntry logDone = new LogEntry(
+                        Html.fromHtml(matcherLogs.group(3)).toString().trim(),
+                        date,
+                        LogType.getByIconName(matcherLogs.group(1)),
+                        matcherLogs.group(7).trim());
 
-                if (matcherLogs.group(4) != null && matcherLogs.group(6) != null)
-                {
+                if (matcherLogs.group(4) != null && matcherLogs.group(6) != null) {
                     logDone.cacheGuid = matcherLogs.group(4);
                     logDone.cacheName = matcherLogs.group(6);
                 }
@@ -1322,8 +1318,7 @@ public abstract class GCParser {
                  * 1. Image URL
                  * 2. Image title
                  */
-                while (matcherLogImages.find())
-                {
+                while (matcherLogImages.find()) {
                     final cgImage logImage = new cgImage(matcherLogImages.group(1), matcherLogImages.group(2));
                     logDone.addLogImage(logImage);
                 }
@@ -1409,23 +1404,25 @@ public abstract class GCParser {
 
             for (int index = 0; index < data.length(); index++) {
                 final JSONObject entry = data.getJSONObject(index);
-                final LogEntry logDone = new LogEntry();
-                logDone.friend = friends;
 
                 // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
                 final String logIconNameExt = entry.optString("LogTypeImage", ".gif");
                 final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
-                logDone.type = LogType.getByIconName(logIconName);
 
+                long date = 0;
                 try {
-                    logDone.date = Login.parseGcCustomDate(entry.getString("Visited")).getTime();
+                    date = Login.parseGcCustomDate(entry.getString("Visited")).getTime();
                 } catch (ParseException e) {
-                    Log.e("cgBase.loadLogsFromDetails: failed to parse log date.");
+                    Log.e("GCParser.loadLogsFromDetails: failed to parse log date.");
                 }
 
-                logDone.author = entry.getString("UserName");
+                final LogEntry logDone = new LogEntry(
+                        entry.getString("UserName"),
+                        date,
+                        LogType.getByIconName(logIconName),
+                        entry.getString("LogText"));
                 logDone.found = entry.getInt("GeocacheFindCount");
-                logDone.log = entry.getString("LogText");
+                logDone.friend = friends;
 
                 final JSONArray images = entry.getJSONArray("Images");
                 for (int i = 0; i < images.length(); i++) {

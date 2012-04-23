@@ -1,9 +1,9 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
@@ -76,7 +76,7 @@ public abstract class GPXParser extends FileParser {
 
     private cgCache cache;
     private cgTrackable trackable = new cgTrackable();
-    private LogEntry log = new LogEntry();
+    private LogEntry log = null;
 
     private String type = null;
     private String sym = null;
@@ -674,7 +674,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void start(Attributes attrs) {
-                    log = new LogEntry();
+                    log = new LogEntry("", 0, LogType.LOG_UNKNOWN, "");
 
                     try {
                         if (attrs.getIndex("id") > -1) {

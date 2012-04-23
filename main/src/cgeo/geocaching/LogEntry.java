@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.LogType;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public final class LogEntry {
      * using a cast, but that might trigger static code analysis tools.
      */
     private static final List<cgImage> EMPTY_LIST = Collections.emptyList();
+
     public int id = 0;
     public LogType type = LogType.LOG_NOTE; // note
     public String author = "";
@@ -25,6 +27,21 @@ public final class LogEntry {
     private List<cgImage> logImages = null;
     public String cacheName = ""; // used for trackables
     public String cacheGuid = ""; // used for trackables
+
+    public LogEntry(final Calendar date, final LogType type, final String text) {
+        this(Settings.getUsername(), date.getTimeInMillis(), type, text);
+    }
+
+    public LogEntry(final long dateInMilliSeconds, final LogType type, final String text) {
+        this(Settings.getUsername(), dateInMilliSeconds, type, text);
+    }
+
+    public LogEntry(final String author, long dateInMilliSeconds, final LogType type, final String text) {
+        this.author = author;
+        this.date = dateInMilliSeconds;
+        this.type = type;
+        this.log = text;
+    }
 
     @Override
     public int hashCode() {

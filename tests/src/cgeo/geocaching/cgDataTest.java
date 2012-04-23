@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,17 +52,17 @@ public class cgDataTest extends CGeoTestCase {
             assertEquals("cgData Test (renamed)", list1.title);
 
             // move to list (cache1=listId2, cache2=listId2)
-            app.moveToList(cache1.getGeocode(), listId2);
+            app.moveToList(Collections.singletonList(cache1), listId2);
             assertEquals(1, app.getAllStoredCachesCount(false, CacheType.ALL, listId2));
 
             // remove list (cache1=listId2, cache2=listId2)
             assertTrue(app.removeList(listId1));
 
             // mark dropped (cache1=1, cache2=0)
-            app.markDropped(cache2.getGeocode());
+            app.markDropped(Collections.singletonList(cache2));
 
             // mark stored (cache1=1, cache2=listId2)
-            app.markStored(cache2.getGeocode(), listId2);
+            app.markStored(Collections.singletonList(cache2), listId2);
             assertEquals(2, app.getAllStoredCachesCount(false, CacheType.ALL, listId2));
 
             // drop stored (cache1=0, cache2=0)

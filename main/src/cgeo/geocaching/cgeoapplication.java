@@ -21,7 +21,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -333,18 +332,13 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#moveToList(String, int)} */
-    public void markStored(String geocode, int listId) {
-        storage.moveToList(geocode, listId);
+    public void markStored(List<cgCache> caches, int listId) {
+        storage.moveToList(caches, listId);
     }
 
     /** {@link cgData#moveToList(String, int)} */
-    public void markDropped(String geocode) {
-        storage.moveToList(geocode, StoredList.TEMPORARY_LIST_ID);
-    }
-
-    /** {@link cgData#markFound(String)} */
-    public boolean markFound(String geocode) {
-        return storage.markFound(geocode);
+    public void markDropped(List<cgCache> caches) {
+        storage.moveToList(caches, StoredList.TEMPORARY_LIST_ID);
     }
 
     /** {@link cgData#clearSearchedDestinations()} */
@@ -358,8 +352,8 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#saveWaypoints(String, List, boolean)} */
-    public boolean saveWaypoints(String geocode, List<cgWaypoint> waypoints, boolean drop) {
-        return storage.saveWaypoints(geocode, waypoints, drop);
+    public boolean saveWaypoints(final cgCache cache) {
+        return storage.saveWaypoints(cache);
     }
 
     public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
@@ -376,10 +370,7 @@ public class cgeoapplication extends Application {
     }
 
     public boolean saveTrackable(cgTrackable trackable) {
-        final List<cgTrackable> list = new ArrayList<cgTrackable>();
-        list.add(trackable);
-
-        return storage.saveInventory("---", list);
+        return storage.saveTrackable(trackable);
     }
 
     /** {@link cgData#dropList(int)} **/
@@ -414,20 +405,6 @@ public class cgeoapplication extends Application {
 
     public String getAction() {
         return StringUtils.defaultString(action);
-    }
-
-    public boolean addLog(String geocode, LogEntry log) {
-        if (StringUtils.isBlank(geocode)) {
-            return false;
-        }
-        if (log == null) {
-            return false;
-        }
-
-        List<LogEntry> list = new ArrayList<LogEntry>();
-        list.add(log);
-
-        return storage.saveLogs(geocode, list, false);
     }
 
     public void setLastCoords(final Geopoint coords) {
@@ -494,8 +471,8 @@ public class cgeoapplication extends Application {
     }
 
     /** {@link cgData#moveToList(String, int)} */
-    public void moveToList(String geocode, int listId) {
-        storage.moveToList(geocode, listId);
+    public void moveToList(List<cgCache> caches, int listId) {
+        storage.moveToList(caches, listId);
     }
 
     /** {@link cgData#getCacheDescription(String)} */

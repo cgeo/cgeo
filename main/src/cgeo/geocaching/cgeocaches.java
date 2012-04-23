@@ -70,7 +70,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -400,11 +399,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == MSG_CANCEL) {
-                if (threadR != null) {
-                    threadR.kill();
-                }
-            } else {
+            if (msg.what != MSG_CANCEL) {
                 if (adapter != null) {
                     adapter.setSelectMode(false, true);
                 }
@@ -1046,12 +1041,15 @@ public class cgeocaches extends AbstractListActivity {
 
             @Override
             public void run(Integer newListId) {
+                List<cgCache> selected;
                 final boolean moveAll = adapter.getChecked() == 0;
-                for (final cgCache c : Collections.unmodifiableList(cacheList)) {
-                    if (moveAll || c.isStatusChecked()) {
-                        app.moveToList(c.getGeocode(), newListId);
-                    }
+                if (moveAll) {
+                    selected = new ArrayList<cgCache>(cacheList);
                 }
+                else {
+                    selected = adapter.getCheckedCaches();
+                }
+                app.moveToList(selected, newListId);
                 adapter.resetChecks();
 
                 refreshCurrentList();
@@ -1106,12 +1104,12 @@ public class cgeocaches extends AbstractListActivity {
             });
             return true;
         } else if (id == MENU_MOVE_TO_LIST) {
-            final String geocode = getCacheFromAdapter(adapterInfo).getGeocode();
+            final cgCache cache = getCacheFromAdapter(adapterInfo);
             new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new RunnableWithArgument<Integer>() {
 
                 @Override
                 public void run(Integer newListId) {
-                    app.moveToList(geocode, newListId);
+                    app.moveToList(Collections.singletonList(cache), newListId);
                     adapter.resetChecks();
                     refreshCurrentList();
                 }
@@ -1382,12 +1380,7 @@ public class cgeocaches extends AbstractListActivity {
         List<cgCache> caches;
         if (adapter != null && adapter.getChecked() > 0) {
             // there are some caches checked
-            caches = new LinkedList<cgCache>();
-            for (cgCache cache : cacheList) {
-                if (cache.isStatusChecked()) {
-                    caches.add(cache);
-                }
-            }
+            caches = adapter.getCheckedCaches();
         } else {
             // no caches checked, export all
             caches = cacheList;
@@ -1818,46 +1811,26 @@ public class cgeocaches extends AbstractListActivity {
     private class DropDetailsThread extends Thread {
 
         final private Handler handler;
-        private volatile boolean needToStop = false;
-        private int checked = 0;
+        private List<cgCache> selected = new ArrayList<cgCache>();
 
         public DropDetailsThread(Handler handlerIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
 
-            if (adapter != null) {
-                checked = adapter.getChecked();
+            int checked = adapter.getChecked();
+            if (checked == 0) {
+                selected = new ArrayList<cgCache>(cacheList);
             }
-        }
-
-        public void kill() {
-            needToStop = true;
+            else {
+                selected = adapter.getCheckedCaches();
+            }
         }
 
         @Override
         public void run() {
             removeGeoAndDir();
-
-            final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
-            for (cgCache cache : cacheListTemp) {
-                if (checked > 0 && !cache.isStatusChecked()) {
-                    continue;
-                }
-
-                try {
-                    if (needToStop) {
-                        Log.i("Stopped dropping process.");
-                        break;
-                    }
-
-                    app.markDropped(cache.getGeocode());
-                } catch (Exception e) {
-                    Log.e("cgeocaches.DropDetailsThread: " + e.toString());
-                }
-            }
-            cacheListTemp.clear();
-
+            app.markDropped(selected);
             handler.sendEmptyMessage(MSG_DONE);
         }
     }
@@ -1996,16 +1969,8 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            int checked = adapter.getChecked();
-            if (checked > 0) {
-                final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
-                for (cgCache cache : cacheListTemp) {
-                    if (cache.isStatusChecked()) {
-                        app.moveToList(cache.getGeocode(), listId);
-                    }
-                }
-            }
-
+            final List<cgCache> caches = adapter.getCheckedCaches();
+            app.moveToList(caches, listId);
             handler.sendEmptyMessage(listId);
         }
     }

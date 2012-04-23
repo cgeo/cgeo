@@ -856,4 +856,17 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     public List<cgCache> getFilteredList() {
         return list;
     }
+
+    public List<cgCache> getCheckedCaches() {
+        ArrayList<cgCache> result = new ArrayList<cgCache>();
+        int checked = getChecked();
+        if (checked > 0) {
+            for (cgCache cache : list) {
+                if (cache.isStatusChecked()) {
+                    result.add(cache);
+                }
+            }
+        }
+        return result;
+    }
 }

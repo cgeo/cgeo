@@ -908,7 +908,7 @@ public class cgCache implements ICache, IWaypoint {
             }
         }
 
-        return saveToDatabase && cgeoapplication.getInstance().saveWaypoints(geocode, waypoints, false);
+        return saveToDatabase && cgeoapplication.getInstance().saveWaypoints(this);
     }
 
     public List<LogEntry> getLogs() {
@@ -1382,7 +1382,7 @@ public class cgCache implements ICache, IWaypoint {
 
     public void drop(Handler handler) {
         try {
-            cgeoapplication.getInstance().markDropped(getGeocode());
+            cgeoapplication.getInstance().markDropped(Collections.singletonList(this));
             cgeoapplication.getInstance().removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
 
             handler.sendMessage(Message.obtain());

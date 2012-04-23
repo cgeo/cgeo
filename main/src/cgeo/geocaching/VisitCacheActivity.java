@@ -4,7 +4,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
@@ -700,29 +699,16 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     log, trackables);
 
             if (status == StatusCode.NO_ERROR) {
-                final LogEntry logNow = new LogEntry();
-                logNow.author = Settings.getUsername();
-                logNow.date = date.getTimeInMillis();
-                logNow.type = typeSelected;
-                logNow.log = log;
+                final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
-                if (cache != null) {
-                    cache.prependLog(logNow);
-                }
-                app.addLog(geocode, logNow);
+                cache.prependLog(logNow);
+                //                app.saveLogs(cache);
 
                 if (typeSelected == LogType.LOG_FOUND_IT) {
-                    app.markFound(geocode);
-                    if (cache != null) {
-                        cache.setFound(true);
-                    }
+                    cache.setFound(true);
                 }
 
-                if (cache != null) {
-                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
-                } else {
-                    app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
-                }
+                app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
             }
 
             if (status == StatusCode.NO_ERROR) {

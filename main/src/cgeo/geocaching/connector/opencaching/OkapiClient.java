@@ -206,11 +206,11 @@ final public class OkapiClient {
         for (int i = 0; i < logsJSON.length(); i++) {
             try {
                 JSONObject logResponse = logsJSON.getJSONObject(i);
-                LogEntry log = new LogEntry();
-                log.date = parseDate(logResponse.getString(LOG_DATE)).getTime();
-                log.log = logResponse.getString(LOG_COMMENT).trim();
-                log.type = parseLogType(logResponse.getString(LOG_TYPE));
-                log.author = parseUser(logResponse.getJSONObject(LOG_USER));
+                LogEntry log = new LogEntry(
+                        parseUser(logResponse.getJSONObject(LOG_USER)),
+                        parseDate(logResponse.getString(LOG_DATE)).getTime(),
+                        parseLogType(logResponse.getString(LOG_TYPE)),
+                        logResponse.getString(LOG_COMMENT).trim());
                 if (result == null) {
                     result = new ArrayList<LogEntry>();
                 }

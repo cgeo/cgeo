@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -42,7 +42,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(5.0f, cache.getTerrain());
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.getShortdesc());
-        assertTrue(new Geopoint(48.859683, 9.1874).equals(cache.getCoords()));
+        assertEquals(new Geopoint(48.859683, 9.1874), cache.getCoords());
         return cache;
     }
 
@@ -66,7 +66,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(4.0f, cache.getTerrain());
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortdesc());
-        assertTrue(new Geopoint(48.85968, 9.18740).equals(cache.getCoords()));
+        assertEquals(new Geopoint(48.85968, 9.18740), cache.getCoords());
         assertTrue(cache.isReliableLatLon());
     }
 
