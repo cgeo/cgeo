@@ -283,8 +283,17 @@ class GpxExport extends AbstractExport {
                 }
 
                 gpx.write("</gpx>");
+
+                gpx.close();
             } catch (Exception e) {
                 Log.e("GpxExport.ExportTask export", e);
+
+                if (gpx != null) {
+                    try {
+                        gpx.close();
+                    } catch (IOException ee) {
+                    }
+                }
 
                 // delete partial gpx file on error
                 if (exportFile.exists()) {
@@ -292,15 +301,6 @@ class GpxExport extends AbstractExport {
                 }
 
                 return false;
-            } finally {
-                if (gpx != null) {
-                    try {
-                        gpx.close();
-                    } catch (IOException e) {
-                        Log.e("GpxExport.ExportTask export", e);
-                        return false;
-                    }
-                }
             }
 
             return true;
