@@ -34,7 +34,6 @@ public abstract class Compare {
             assertEquals(expected.getShortDescription(), actual.getShortDescription());
             assertEquals(expected.getCacheId(), actual.getCacheId());
             assertEquals(expected.getLocation(), actual.getLocation());
-            assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
             assertEquals(expected.isFound(), actual.isFound());
             assertEquals(expected.isFavorite(), actual.isFavorite());
             assertEquals(expected.isWatchlist(), actual.isWatchlist());
@@ -46,7 +45,8 @@ public abstract class Compare {
                 assertTrue(actual.getLogCounts().get(logType).intValue() >= expected.getLogCounts().get(logType).intValue());
             }
 
-            // the inventory can differ to often, therefore we don't compare them
+            // The inventories can differ too often, therefore we don't compare them. Also, the personal note
+            // cannot be expected to match with different tester accounts.
 
             int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
             int expectedSpoilersSize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
