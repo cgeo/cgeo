@@ -50,13 +50,12 @@ public abstract class Network {
         @Override
         public InputStream getContent() throws IOException, IllegalStateException {
             // the wrapped entity's getContent() decides about repeatability
-            InputStream wrappedin = wrappedEntity.getContent();
-            return new GZIPInputStream(wrappedin);
+            return new GZIPInputStream(wrappedEntity.getContent());
         }
 
         @Override
         public long getContentLength() {
-            // length of ungzipped content is not known
+            // length of gunzipped content is not known
             return -1;
         }
     }
@@ -99,16 +98,14 @@ public abstract class Network {
             public void process(
                     final HttpResponse response,
                     final HttpContext context) throws HttpException, IOException {
-                HttpEntity entity = response.getEntity();
-                if (null != entity) {
-                    Header ceheader = entity.getContentEncoding();
-                    if (ceheader != null) {
-                        HeaderElement[] codecs = ceheader.getElements();
-                        for (int i = 0; i < codecs.length; i++) {
-                            if (codecs[i].getName().equalsIgnoreCase("gzip")) {
+                final HttpEntity entity = response.getEntity();
+                if (entity != null) {
+                    final Header contentEncoding = entity.getContentEncoding();
+                    if (contentEncoding != null) {
+                        for (final HeaderElement codec : contentEncoding.getElements()) {
+                            if (codec.getName().equalsIgnoreCase("gzip")) {
                                 Log.d("Decompressing response");
-                                response.setEntity(
-                                        new Network.GzipDecompressingEntity(response.getEntity()));
+                                response.setEntity(new GzipDecompressingEntity(response.getEntity()));
                                 return;
                             }
                         }
@@ -124,9 +121,9 @@ public abstract class Network {
     /**
      * POST HTTP request
      *
-     * @param uri
-     * @param params
-     * @return
+     * @param uri the URI to request
+     * @param params the parameters to add to the POST request
+     * @return the HTTP response, or null in case of an encoding error params
      */
     public static HttpResponse postRequest(final String uri, final Parameters params) {
         return request("POST", uri, params, null, null);
@@ -318,7 +315,7 @@ public abstract class Network {
         return getResponseDataNoError(response, replaceWhitespace);
     }
 
-    public static String urlencode_rfc3986(String text) {
+    public static String rfc3986URLEncode(String text) {
         return StringUtils.replace(URLEncoder.encode(text).replace("+", "%20"), "%7E", "~");
     }
 
