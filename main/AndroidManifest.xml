@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		android:versionName="02.04.2012"
-		android:versionCode="20120402"
+		android:versionName="24.04.2012"
+		android:versionCode="20120424"
 		package="cgeo.geocaching"
 		name="c:geo"
 		android:installLocation="auto">
