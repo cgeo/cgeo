@@ -62,7 +62,6 @@ public class cgBaseTest extends AbstractResourceInstrumentationTestCase {
             assertEquals(expected.getShortDescription(), actual.getShortDescription());
             assertEquals(expected.getCacheId(), actual.getCacheId());
             assertEquals(expected.getLocation(), actual.getLocation());
-            assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
             assertEquals(expected.isFound(), actual.isFound());
             assertEquals(expected.isFavorite(), actual.isFavorite());
             assertEquals(expected.isWatchlist(), actual.isWatchlist());
