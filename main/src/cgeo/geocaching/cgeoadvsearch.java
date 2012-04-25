@@ -82,16 +82,6 @@ public class cgeoadvsearch extends AbstractActivity implements IObserver<IGeoDat
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
     public void onPause() {
         app.deleteGeoObserver(this);
         super.onPause();
