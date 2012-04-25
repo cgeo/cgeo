@@ -801,11 +801,16 @@ public class cgeocaches extends AbstractListActivity {
             // Hide menus if cache-list is empty
             int[] hideIfEmptyList = new int[] {
                     MENU_SWITCH_SELECT_MODE,
-                    SUBMENU_MANAGE_OFFLINE,
                     SUBMENU_MANAGE_HISTORY,
                     SUBMENU_SHOW_MAP,
                     SUBMENU_SORT,
-                    MENU_REFRESH_STORED };
+                    MENU_REFRESH_STORED,
+                    MENU_DROP_CACHES,
+                    MENU_DROP_CACHES_AND_LIST,
+                    MENU_MOVE_TO_LIST,
+                    MENU_EXPORT,
+                    MENU_REMOVE_FROM_HISTORY
+            };
 
             boolean menuVisible = cacheList.size() > 0;
             for (int itemId : hideIfEmptyList) {
@@ -835,7 +840,7 @@ public class cgeocaches extends AbstractListActivity {
             }
             item = menu.findItem(MENU_MOVE_TO_LIST);
             if (item != null) {
-                item.setVisible(multipleLists);
+                item.setVisible(multipleLists && cacheList.size() > 0);
             }
 
             setMenuItemLabel(menu, MENU_REMOVE_FROM_HISTORY, R.string.cache_remove_from_history, R.string.cache_clear_history);
