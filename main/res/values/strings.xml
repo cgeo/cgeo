@@ -1003,10 +1003,15 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next release</b>\n\n
+    <b>Bugfixing:</b>\n
+    · Distance information in nearby search corrected\n
+    \n
     <b>24.04.2012</b>\n\n
     <b>Bugfixing:</b>\n
     · Adapt to gc.com changes\n
     · Some small bugs fixed\n
+    \n
     <b>02.04.2012</b>\n\n
     <b>New Features/Functions:</b>\n
     · Live Map re-implementation with selectable strategy:\n
