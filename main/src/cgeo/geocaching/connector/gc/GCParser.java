@@ -68,7 +68,6 @@ public abstract class GCParser {
         }
 
         final List<String> cids = new ArrayList<String>();
-        final List<String> guids = new ArrayList<String>();
         String recaptchaChallenge = null;
         String recaptchaText = null;
         String page = pageContent;
@@ -134,8 +133,6 @@ public abstract class GCParser {
 
                 while (matcherGuidAndDisabled.find()) {
                     if (matcherGuidAndDisabled.groupCount() > 0) {
-                        guids.add(matcherGuidAndDisabled.group(1));
-
                         cache.setGuid(matcherGuidAndDisabled.group(1));
                         if (matcherGuidAndDisabled.group(4) != null) {
                             cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(4).trim()).toString());

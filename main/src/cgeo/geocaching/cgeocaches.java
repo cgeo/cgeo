@@ -1605,14 +1605,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
 
         @Override
         public void run() {
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("username", username);
-            if (cacheType != null) {
-                params.put("cacheType", cacheType.id);
-            }
-
             search = GCParser.searchByOwner(this, username, cacheType, Settings.isShowCaptcha());
-
             handler.sendMessage(Message.obtain());
         }
     }
