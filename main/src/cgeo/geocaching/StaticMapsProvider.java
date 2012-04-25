@@ -30,15 +30,15 @@ public class StaticMapsProvider {
         return LocalStorage.getStorageFile(geocode, "map_" + prefix + level, false, createDirs);
     }
 
-    private static void downloadDifferentZooms(final cgCache cache, String markerUrl, String prefix, String latlonMap, int edge, final Parameters waypoints) {
-        downloadMap(cache, 20, "satellite", markerUrl, prefix, 1, latlonMap, edge, waypoints);
-        downloadMap(cache, 18, "satellite", markerUrl, prefix, 2, latlonMap, edge, waypoints);
-        downloadMap(cache, 16, "roadmap", markerUrl, prefix, 3, latlonMap, edge, waypoints);
-        downloadMap(cache, 14, "roadmap", markerUrl, prefix, 4, latlonMap, edge, waypoints);
-        downloadMap(cache, 11, "roadmap", markerUrl, prefix, 5, latlonMap, edge, waypoints);
+    private static void downloadDifferentZooms(final String geocode, String markerUrl, String prefix, String latlonMap, int edge, final Parameters waypoints) {
+        downloadMap(geocode, 20, "satellite", markerUrl, prefix, 1, latlonMap, edge, waypoints);
+        downloadMap(geocode, 18, "satellite", markerUrl, prefix, 2, latlonMap, edge, waypoints);
+        downloadMap(geocode, 16, "roadmap", markerUrl, prefix, 3, latlonMap, edge, waypoints);
+        downloadMap(geocode, 14, "roadmap", markerUrl, prefix, 4, latlonMap, edge, waypoints);
+        downloadMap(geocode, 11, "roadmap", markerUrl, prefix, 5, latlonMap, edge, waypoints);
     }
 
-    private static void downloadMap(cgCache cache, int zoom, String mapType, String markerUrl, String prefix, int level, String latlonMap, int edge, final Parameters waypoints) {
+    private static void downloadMap(String geocode, int zoom, String mapType, String markerUrl, String prefix, int level, String latlonMap, int edge, final Parameters waypoints) {
         final String mapUrl = "http://maps.google.com/maps/api/staticmap";
         final Parameters params = new Parameters(
                 "center", latlonMap,
@@ -53,14 +53,20 @@ public class StaticMapsProvider {
         final HttpResponse httpResponse = Network.getRequest(mapUrl, params);
 
         if (httpResponse != null) {
-            final File file = getMapFile(cache.getGeocode(), prefix, level, true);
-            if (LocalStorage.saveEntityToFile(httpResponse, file)) {
-                // Delete image if it has no contents
-                final long fileSize = file.length();
-                if (fileSize < MIN_MAP_IMAGE_BYTES) {
-                    file.delete();
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                final File file = getMapFile(geocode, prefix, level, true);
+                if (LocalStorage.saveEntityToFile(httpResponse, file)) {
+                    // Delete image if it has no contents
+                    final long fileSize = file.length();
+                    if (fileSize < MIN_MAP_IMAGE_BYTES) {
+                        file.delete();
+                    }
                 }
+            } else {
+                Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + httpResponse.getStatusLine().getStatusCode());
             }
+        } else {
+            Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
         }
     }
 
@@ -88,24 +94,24 @@ public class StaticMapsProvider {
         // download static map for current waypoints
         if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
             for (cgWaypoint waypoint : cache.getWaypoints()) {
-                storeWaypointStaticMap(cache, edge, waypoint, false);
+                storeWaypointStaticMap(cache.getGeocode(), edge, waypoint, false);
             }
         }
     }
 
     public static void storeWaypointStaticMap(cgCache cache, Activity activity, cgWaypoint waypoint, boolean waitForResult) {
         int edge = StaticMapsProvider.guessMinDisplaySide(activity);
-        storeWaypointStaticMap(cache, edge, waypoint, waitForResult);
+        storeWaypointStaticMap(cache.getGeocode(), edge, waypoint, waitForResult);
     }
 
-    private static void storeWaypointStaticMap(cgCache cache, int edge, cgWaypoint waypoint, final boolean waitForResult) {
+    private static void storeWaypointStaticMap(final String geocode, int edge, cgWaypoint waypoint, final boolean waitForResult) {
         if (waypoint.getCoords() == null) {
             return;
         }
         String wpLatlonMap = waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         String wpMarkerUrl = getWpMarkerUrl(waypoint);
         // download map images in separate background thread for higher performance
-        downloadMaps(cache, wpMarkerUrl, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, null, waitForResult);
+        downloadMaps(geocode, wpMarkerUrl, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, null, waitForResult);
     }
 
     public static void storeCacheStaticMap(cgCache cache, Activity activity, final boolean waitForResult) {
@@ -125,7 +131,7 @@ public class StaticMapsProvider {
         }
         // download map images in separate background thread for higher performance
         final String cacheMarkerUrl = getCacheMarkerUrl(cache);
-        downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints, waitForResult);
+        downloadMaps(cache.getGeocode(), cacheMarkerUrl, "", latlonMap, edge, waypoints, waitForResult);
     }
 
     private static int guessMinDisplaySide(Display display) {
@@ -144,16 +150,16 @@ public class StaticMapsProvider {
         return guessMinDisplaySide(((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay());
     }
 
-    private static void downloadMaps(final cgCache cache, final String markerUrl, final String prefix, final String latlonMap, final int edge,
+    private static void downloadMaps(final String geocode, final String markerUrl, final String prefix, final String latlonMap, final int edge,
             final Parameters waypoints, boolean waitForResult) {
         if (waitForResult) {
-            downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
+            downloadDifferentZooms(geocode, markerUrl, prefix, latlonMap, edge, waypoints);
         }
         else {
             final Runnable currentTask = new Runnable() {
                 @Override
                 public void run() {
-                    downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
+                    downloadDifferentZooms(geocode, markerUrl, prefix, latlonMap, edge, waypoints);
                 }
             };
             try {
