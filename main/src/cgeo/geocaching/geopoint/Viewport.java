@@ -150,7 +150,7 @@ public class Viewport {
     static public Viewport containing(final Set<? extends ICoordinates> points) {
         Viewport viewport = null;
         for (final ICoordinates point : points) {
-            if (point != null) {
+            if (point != null && point.getCoords() != null) {
                 if (viewport == null) {
                     viewport = new Viewport(point, point);
                 } else {
