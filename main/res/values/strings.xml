@@ -1031,6 +1031,10 @@
     <b>Bugfixing:</b>\n
     · Static maps download for waypoints now off by default\n
     · Waypoints on map do no longer disappear when moving map\n
+    · Static map download improved\n
+    · Distance information in nearby search corrected\n
+    · Adaption to changes on geocaching.com\n
+    · Warning displayed for incompatible map file\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
