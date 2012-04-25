@@ -1,10 +1,10 @@
 package cgeo.geocaching.apps.cachelist;
 
+import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.apps.AbstractApp;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.maps.CGeoMap;
 
 import android.app.Activity;
@@ -24,7 +24,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
     }
 
     @Override
-    public boolean invoke(cgGeo geo, List<cgCache> caches, Activity activity, final SearchResult search) {
+    public boolean invoke(IGeoData geo, List<cgCache> caches, Activity activity, final SearchResult search) {
         CGeoMap.startActivitySearch(activity, search, null);
         return true;
     }

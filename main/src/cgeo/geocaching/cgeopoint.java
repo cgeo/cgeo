@@ -7,6 +7,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.IObserver;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,7 +35,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class cgeopoint extends AbstractActivity {
+public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
     private static final int MENU_DEFAULT_NAVIGATION = 2;
     private static final int MENU_NAVIGATE = 0;
     private static final int MENU_CACHES_AROUND = 5;
@@ -84,8 +85,6 @@ public class cgeopoint extends AbstractActivity {
         }
     }
 
-    private cgGeo geo = null;
-    private UpdateLocationCallback geoUpdate = new update();
     private Button latButton = null;
     private Button lonButton = null;
     private boolean changed = false;
@@ -146,7 +145,7 @@ public class cgeopoint extends AbstractActivity {
         historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v,
-                    ContextMenuInfo menuInfo) {
+                                            ContextMenuInfo menuInfo) {
                 menu.add(Menu.NONE, CONTEXT_MENU_NAVIGATE, Menu.NONE, res.getString(R.string.cache_menu_navigate));
                 menu.add(Menu.NONE, CONTEXT_MENU_EDIT_WAYPOINT, Menu.NONE, R.string.waypoint_edit);
                 menu.add(Menu.NONE, CONTEXT_MENU_DELETE_WAYPOINT, Menu.NONE, R.string.waypoint_delete);
@@ -164,7 +163,7 @@ public class cgeopoint extends AbstractActivity {
             case CONTEXT_MENU_NAVIGATE:
                 contextMenuItemPosition = position;
                 if (destination instanceof Destination) {
-                    NavigationAppFactory.showNavigationMenu(geo, this, null, null, ((Destination) destination).getCoords());
+                    NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, null, ((Destination) destination).getCoords());
                     return true;
                 }
                 break;
@@ -224,42 +223,27 @@ public class cgeopoint extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
-
+        app.addGeoObserver(this);
         init();
     }
 
     @Override
     public void onDestroy() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onDestroy();
     }
 
     @Override
     public void onStop() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
+        app.deleteGeoObserver(this);
         super.onPause();
     }
 
     private void init() {
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
-
         latButton = (Button) findViewById(R.id.buttonLatitude);
         lonButton = (Button) findViewById(R.id.buttonLongitude);
 
@@ -305,7 +289,7 @@ public class cgeopoint extends AbstractActivity {
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
                 gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
             }
-            cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, null, gp, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, null, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
@@ -400,7 +384,7 @@ public class cgeopoint extends AbstractActivity {
                 return true;
 
             case MENU_NAVIGATE:
-                NavigationAppFactory.showNavigationMenu(geo, this, null, null, coords);
+                NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, null, coords);
                 return true;
             default:
                 return false;
@@ -468,7 +452,7 @@ public class cgeopoint extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, null, geopoint);
+        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, null, geopoint);
     }
 
     private void cachesAround() {
@@ -484,33 +468,27 @@ public class cgeopoint extends AbstractActivity {
         finish();
     }
 
-    private class update implements UpdateLocationCallback {
-
-        @Override
-        public void updateLocation(cgGeo geo) {
-            if (geo == null) {
-                return;
-            }
-
-            try {
-                latButton.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-                lonButton.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-            } catch (Exception e) {
-                Log.w("Failed to update location.");
-            }
+    @Override
+    public void update(final IGeoData geo) {
+        try {
+            latButton.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+            lonButton.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+        } catch (final Exception e) {
+            Log.w("Failed to update location.");
         }
     }
 
     private class currentListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            if (geo == null || geo.coordsNow == null) {
+            final Geopoint coords = app.currentGeo().getCoordsNow();
+            if (coords == null) {
                 showToast(res.getString(R.string.err_point_unknown_position));
                 return;
             }
 
-            latButton.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE));
-            lonButton.setText(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE));
+            latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
+            lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
 
             changed = false;
         }
@@ -540,12 +518,12 @@ public class cgeopoint extends AbstractActivity {
                 return null;
             }
         } else {
-            if (geo == null || geo.coordsNow == null) {
+            if (app.currentGeo().getCoordsNow() == null) {
                 showToast(res.getString(R.string.err_point_curr_position_unavailable));
                 return null;
             }
 
-            coords = geo.coordsNow;
+            coords = app.currentGeo().getCoordsNow();
         }
 
         if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {

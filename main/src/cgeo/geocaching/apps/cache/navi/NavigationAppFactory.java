@@ -1,14 +1,13 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StaticMapsProvider;
+import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
 
@@ -80,7 +79,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * A dialog is created for tool selection and the selected tool is started afterwards.
      * <p />
      * Delegates to
-     * {@link #showNavigationMenu(cgGeo, Activity, cgCache, SearchResult, cgWaypoint, Geopoint, boolean, boolean)} with
+     * {@link #showNavigationMenu(IGeoData, Activity, cgCache, cgWaypoint, Geopoint, boolean, boolean)} with
      * <code>showInternalMap = true</code> and <code>showDefaultNavigation = false</code>
      *
      * @param geo
@@ -89,7 +88,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param waypoint
      * @param destination
      */
-    public static void showNavigationMenu(final cgGeo geo, final Activity activity,
+    public static void showNavigationMenu(final IGeoData geo, final Activity activity,
             final cgCache cache, final cgWaypoint waypoint, final Geopoint destination) {
         showNavigationMenu(geo, activity, cache, waypoint, destination, true, false);
     }
@@ -111,9 +110,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param showDefaultNavigation
      *            should be <code>false</code> by default
      *
-     * @see #showNavigationMenu(cgGeo, Activity, cgCache, cgWaypoint, Geopoint)
+     * @see #showNavigationMenu(IGeoData, Activity, cgCache, cgWaypoint, Geopoint)
      */
-    public static void showNavigationMenu(final cgGeo geo, final Activity activity,
+    public static void showNavigationMenu(final IGeoData geo, final Activity activity,
             final cgCache cache, final cgWaypoint waypoint, final Geopoint destination,
             final boolean showInternalMap, final boolean showDefaultNavigation) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -188,10 +187,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     /**
      * Adds the installed navigation tools to the given menu.
-     * Use {@link #onMenuItemSelected(MenuItem, cgGeo, Activity, cgCache, SearchResult, cgWaypoint, Geopoint)} on
+     * Use {@link #onMenuItemSelected(MenuItem, IGeoData, Activity, cgCache, cgWaypoint, Geopoint)} on
      * selection event to start the selected navigation tool.
      *
-     * <b>Only use this way if {@link #showNavigationMenu(cgGeo, Activity, cgCache, SearchResult, cgWaypoint, Geopoint)}
+     * <b>Only use this way if {@link #showNavigationMenu(IGeoData, Activity, cgCache, cgWaypoint, Geopoint)}
      * is not suitable for the given usecase.</b>
      *
      * @param menu
@@ -203,11 +202,11 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     /**
      * Adds the installed navigation tools to the given menu.
-     * Use {@link #onMenuItemSelected(MenuItem, cgGeo, Activity, cgCache, cgWaypoint, Geopoint)} on
+     * Use {@link #onMenuItemSelected(MenuItem, IGeoData, Activity, cgCache, cgWaypoint, Geopoint)} on
      * selection event to start the selected navigation tool.
      *
      * <b>Only use this way if
-     * {@link #showNavigationMenu(cgGeo, Activity, cgCache, cgWaypoint, Geopoint, boolean, boolean)} is
+     * {@link #showNavigationMenu(IGeoData, Activity, cgCache, cgWaypoint, Geopoint, boolean, boolean)} is
      * not suitable for the given usecase.</b>
      *
      * @param menu
@@ -239,7 +238,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return
      */
     public static boolean onMenuItemSelected(final MenuItem item,
-            final cgGeo geo, Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint destination) {
+            final IGeoData geo, Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint destination) {
         if (cache == null && waypoint == null && destination == null) {
             return false;
         }
@@ -271,11 +270,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param geo
      * @param activity
      * @param cache
-     * @param search
      * @param waypoint
      * @param destination
      */
-    public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, cgCache cache,
+    public static void startDefaultNavigationApplication(final IGeoData geo, Activity activity, cgCache cache,
             cgWaypoint waypoint, final Geopoint destination) {
         final NavigationApp app = getDefaultNavigationApplication(activity);
 
@@ -294,11 +292,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param geo
      * @param activity
      * @param cache
-     * @param search
      * @param waypoint
      * @param destination
      */
-    public static void startDefaultNavigationApplication2(final cgGeo geo, Activity activity, cgCache cache,
+    public static void startDefaultNavigationApplication2(final IGeoData geo, Activity activity, cgCache cache,
             cgWaypoint waypoint, final Geopoint destination) {
         final NavigationApp app = getDefaultNavigationApplication2(activity);
 

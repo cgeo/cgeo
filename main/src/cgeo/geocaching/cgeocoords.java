@@ -31,7 +31,7 @@ import android.widget.TextView;
 public class cgeocoords extends Dialog {
 
     final private AbstractActivity context;
-    final private cgGeo geo;
+    final private IGeoData geo;
     final private cgCache cache;
     private Geopoint gp;
 
@@ -46,7 +46,7 @@ public class cgeocoords extends Dialog {
 
     private coordInputFormatEnum currentFormat = null;
 
-    public cgeocoords(final AbstractActivity context, final cgCache cache, final Geopoint gp, final cgGeo geo) {
+    public cgeocoords(final AbstractActivity context, final cgCache cache, final Geopoint gp, final IGeoData geo) {
         super(context);
         this.context = context;
         this.geo = geo;
@@ -54,8 +54,8 @@ public class cgeocoords extends Dialog {
 
         if (gp != null) {
             this.gp = gp;
-        } else if (geo != null && geo.coordsNow != null) {
-            this.gp = geo.coordsNow;
+        } else if (geo != null && geo.getCoordsNow() != null) {
+            this.gp = geo.getCoordsNow();
         } else {
             this.gp = new Geopoint(0.0, 0.0);
         }
@@ -413,8 +413,8 @@ public class cgeocoords extends Dialog {
                 // Start new format with an acceptable value: either the current one
                 // entered by the user, else our current coordinates, else (0,0).
                 if (!calc(false)) {
-                    if (geo != null && geo.coordsNow != null) {
-                        gp = geo.coordsNow;
+                    if (geo != null && geo.getCoordsNow() != null) {
+                        gp = geo.getCoordsNow();
                     } else {
                         gp = new Geopoint(0.0, 0.0);
                     }
@@ -436,12 +436,12 @@ public class cgeocoords extends Dialog {
 
         @Override
         public void onClick(View v) {
-            if (geo == null || geo.coordsNow == null) {
+            if (geo == null || geo.getCoordsNow() == null) {
                 context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
                 return;
             }
 
-            gp = geo.coordsNow;
+            gp = geo.getCoordsNow();
             updateGUI();
         }
     }

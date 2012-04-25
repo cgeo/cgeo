@@ -45,8 +45,7 @@ public class cgeopopup extends AbstractActivity {
     private LayoutInflater inflater = null;
     private String geocode = null;
     private cgCache cache = null;
-    private cgGeo geo = null;
-    private UpdateLocationCallback geoUpdate = new update();
+    private GeoObserver geoUpdate = new UpdateLocation();
     private ProgressDialog storeDialog = null;
     private ProgressDialog dropDialog = null;
     private TextView cacheDistance = null;
@@ -202,7 +201,7 @@ public class cgeopopup extends AbstractActivity {
             navigateTo();
             return true;
         } else if (menuItem == 3) {
-            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null);
+            NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
             return true;
         } else if (menuItem == 5) {
             cachesAround();
@@ -222,10 +221,6 @@ public class cgeopopup extends AbstractActivity {
     }
 
     private void init() {
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
-
         app.setAction(geocode);
 
         cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
@@ -469,10 +464,6 @@ public class cgeopopup extends AbstractActivity {
         } catch (Exception e) {
             Log.e("cgeopopup.init: " + e.toString());
         }
-
-        if (geo != null) {
-            geoUpdate.updateLocation(geo);
-        }
     }
 
     @Override
@@ -485,52 +476,37 @@ public class cgeopopup extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
-
+        app.addGeoObserver(geoUpdate);
         init();
     }
 
     @Override
     public void onDestroy() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onDestroy();
     }
 
     @Override
     public void onStop() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
+        app.deleteGeoObserver(geoUpdate);
         super.onPause();
     }
 
-    private class update implements UpdateLocationCallback {
+    private class UpdateLocation extends GeoObserver {
 
         @Override
-        public void updateLocation(cgGeo geo) {
-            if (geo == null) {
-                return;
-            }
-
+        protected void updateLocation(final IGeoData geo) {
             try {
-                if (geo.coordsNow != null && cache != null && cache.getCoords() != null) {
-                    cacheDistance.setText(HumanDistance.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
+                if (geo.getCoordsNow() != null && cache != null && cache.getCoords() != null) {
+                    cacheDistance.setText(HumanDistance.getHumanDistance(geo.getCoordsNow().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }
             } catch (Exception e) {
-                Log.w("Failed to update location.");
+                Log.w("Failed to UpdateLocation location.");
             }
         }
     }
@@ -541,7 +517,7 @@ public class cgeopopup extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
     }
 
     private void cachesAround() {
@@ -651,7 +627,7 @@ public class cgeopopup extends AbstractActivity {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;
         }
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
         finish();
     }
 
@@ -663,7 +639,7 @@ public class cgeopopup extends AbstractActivity {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;
         }
-        NavigationAppFactory.startDefaultNavigationApplication2(geo, this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), this, cache, null, null);
         finish();
     }
 
