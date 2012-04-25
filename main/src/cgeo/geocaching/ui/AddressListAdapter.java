@@ -21,24 +21,22 @@ import java.util.ArrayList;
 
 public class AddressListAdapter extends ArrayAdapter<Address> {
 
-    private LayoutInflater inflater;
-    private Geopoint location;
+    final private LayoutInflater inflater;
+    final private Geopoint location;
 
     public AddressListAdapter(final Context context) {
         super(context, 0);
+        inflater = ((Activity) context).getLayoutInflater();
+        location = cgeoapplication.getInstance().currentGeo().getCoordsNow();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (inflater == null) {
-            inflater = ((Activity) getContext()).getLayoutInflater();
-        }
-
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
         final Address address = getItem(position);
 
         // holder pattern implementation
+        final AddressListView holder;
         View view = convertView;
-        AddressListView holder;
 
         if (view == null) {
             view = inflater.inflate(R.layout.addresses_item, null);
@@ -55,8 +53,8 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
         view.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
-                Activity activity = (Activity) v.getContext();
+            public void onClick(final View v) {
+                final Activity activity = (Activity) v.getContext();
                 cgeocaches.startActivityAddress(activity, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
                 activity.finish();
             }
@@ -69,10 +67,6 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     }
 
     private CharSequence getDistanceText(final Address address) {
-        if (location == null) {
-            location = cgeoapplication.getInstance().getLastCoords();
-        }
-
         if (location != null && address.hasLatitude() && address.hasLongitude()) {
             return HumanDistance.getHumanDistance(location.distanceTo(new Geopoint(address.getLatitude(), address.getLongitude())));
         }
@@ -84,7 +78,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
         final int maxIndex = address.getMaxAddressLineIndex();
         final ArrayList<String> lines = new ArrayList<String>();
         for (int i = 0; i <= maxIndex; i++) {
-            String line = address.getAddressLine(i);
+            final String line = address.getAddressLine(i);
             if (StringUtils.isNotBlank(line)) {
                 lines.add(line);
             }
