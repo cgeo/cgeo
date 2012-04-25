@@ -163,7 +163,6 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
      */
     public GeoDataProvider(final cgeoapplication app) {
         geoManager = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-        restoreLastLocation();
         this.app = app;
         unregisterer.start();
         // Start with an empty GeoData just in case someone queries it before we get
@@ -351,7 +350,6 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         }
 
         current.coordsNow = new Geopoint(current.location.getLatitude(), current.location.getLongitude());
-        cgeoapplication.getInstance().setLastCoords(current.coordsNow);
 
         final Location location = current.location;
         final LocationProviderType locationProvider = current.locationProvider;
@@ -368,20 +366,4 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         }
     }
 
-    private void restoreLastLocation() {
-        // restore from last location (stored by app)
-        assignLastLocation(cgeoapplication.getInstance().getLastCoords());
-
-        // restore from last location (stored by device sensors)
-        for (final String provider : new String[] { LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER }) {
-            final Location lastLocation = geoManager.getLastKnownLocation(provider);
-            if (lastLocation != null) {
-                lastLocation.setProvider(LAST_LOCATION_PSEUDO_PROVIDER);
-                assign(lastLocation);
-
-                Log.i("Using last location from " + provider);
-                break;
-            }
-        }
-    }
 }

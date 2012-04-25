@@ -375,14 +375,6 @@ public class cgeoapplication extends Application {
         return StringUtils.defaultString(action);
     }
 
-    public void setLastCoords(final Geopoint coords) {
-        lastCoords = coords;
-    }
-
-    public Geopoint getLastCoords() {
-        return lastCoords;
-    }
-
     /** {@link cgData#saveLogOffline(String, Date, LogType, String)} */
     public boolean saveLogOffline(String geocode, Date date, LogType logtype, String log) {
         return storage.saveLogOffline(geocode, date, logtype, log);
