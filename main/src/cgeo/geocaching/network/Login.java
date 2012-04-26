@@ -82,7 +82,7 @@ public abstract class Login {
         }
 
         if (Login.getLoginStatus(loginData)) {
-            Log.i(Settings.tag, "Already logged in Geocaching.com as " + login.left);
+            Log.i(Settings.tag, "Already logged in Geocaching.com as " + login.left + " (" + getActualMemberStatus() + ')');
             Login.switchToEnglish(loginData);
             return StatusCode.NO_ERROR; // logged in
         }
@@ -109,7 +109,7 @@ public abstract class Login {
 
         if (StringUtils.isNotBlank(loginData)) {
             if (Login.getLoginStatus(loginData)) {
-                Log.i(Settings.tag, "Successfully logged in Geocaching.com as " + login.left);
+                Log.i(Settings.tag, "Successfully logged in Geocaching.com as " + login.left + " (" + getActualMemberStatus() + ')');
 
                 Login.switchToEnglish(loginData);
                 Settings.setCookieStore(Network.dumpCookieStore());
