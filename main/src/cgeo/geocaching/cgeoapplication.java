@@ -35,7 +35,7 @@ public class cgeoapplication extends Application {
     private cgData storage = null;
     private String action = null;
     private Geopoint lastCoords = null;
-    private GeoDataProvider geo;
+    private volatile GeoDataProvider geo;
     private cgDirection dir = null;
     private boolean dirInUse = false;
     public boolean firstRun = true; // c:geo is just launched
