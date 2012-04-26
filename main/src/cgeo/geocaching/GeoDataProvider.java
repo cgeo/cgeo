@@ -164,7 +164,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         unregisterer.start();
         // Start with an empty GeoData just in case someone queries it before we get
         // a chance to get any information.
-        memory = new GeoData();
+        notifyObservers(new GeoData());
     }
 
     private void registerListeners() {
