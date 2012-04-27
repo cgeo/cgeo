@@ -145,7 +145,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
     private long detailProgressTime = 0L;
     private LoadDetailsThread threadDetails = null;
     private LoadFromWebThread threadWeb = null;
-    private DropDetailsThread threadR = null;
     private RemoveFromHistoryThread threadH = null;
     private int listId = StoredList.TEMPORARY_LIST_ID;
     private GeocodeComparator gcComparator = new GeocodeComparator();
@@ -1411,9 +1410,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
 
     public void dropSelected() {
         progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
-
-        threadR = new DropDetailsThread(dropDetailsHandler);
-        threadR.start();
+        new DropDetailsThread(dropDetailsHandler).start();
     }
 
     @Override
