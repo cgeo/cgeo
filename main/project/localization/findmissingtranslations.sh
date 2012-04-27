@@ -9,11 +9,11 @@ finddiffs () {
     diff -y en.str $1.str > tmp.str
     echo "Only in values/strings.xml:" >> $1.missing
     grep "<\||" tmp.str | cut -d " " -f 1 | while read s; do
-        grep "<string" ../../res/values/strings.xml | grep "name=\"$s\""
+	    egrep "<(string|plurals)" ../../res/values/strings.xml | grep "name=\"$s\""
     done | egrep -v '<string name="(contributors|changelog)">'>> $1.missing
     echo "Only in values-$1/strings.xml:" >> $1.missing
     grep ">\||" tmp.str | sed "s/^/x/;s/\s\s*/ /g" | cut -d " " -f 3 | while read s; do
-        grep "<string" ../../res/values-$1/strings.xml | grep "name=\"$s\""
+	    egrep "<(string|plurals)" ../../res/values-$1/strings.xml | grep "name=\"$s\""
     done >> $1.missing
     rm tmp.str
 }
