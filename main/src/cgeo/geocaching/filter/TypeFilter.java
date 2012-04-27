@@ -34,7 +34,7 @@ class TypeFilter extends AbstractFilter {
                     filters.add(new TypeFilter(cacheType));
                 }
             }
-            return filters.toArray(new TypeFilter[filters.size()]);
+            return filters.toArray(new IFilter[filters.size()]);
         }
 
     }
