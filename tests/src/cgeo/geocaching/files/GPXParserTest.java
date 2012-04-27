@@ -193,9 +193,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
             }
         }
 
-        List<cgCache> cacheList = new ArrayList<cgCache>(caches);
         // TODO: may need to sort by geocode when a test imports more than one cache
-        return cacheList;
+        return new ArrayList<cgCache>(caches);
     }
 
     public static void testParseDateWithFractionalSeconds() {

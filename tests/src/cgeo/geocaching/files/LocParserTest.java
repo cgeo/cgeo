@@ -25,9 +25,8 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
             instream.close();
         }
 
-        List<cgCache> cacheList = new ArrayList<cgCache>(caches);
         // TODO: may need to sort by geocode when a test imports more than one cache
-        return cacheList;
+        return new ArrayList<cgCache>(caches);
     }
 
     public void testOCLoc() throws IOException, ParserException {
