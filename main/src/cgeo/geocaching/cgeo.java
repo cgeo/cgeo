@@ -10,6 +10,7 @@ import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -27,7 +28,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.GpsStatus;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -69,7 +69,6 @@ public class cgeo extends AbstractActivity {
 
     private LocationManager locationManager;
     final private UpdateLocation locationUpdater = new UpdateLocation();
-    private boolean gpsEnabled = false;
 
     private Handler updateUserInfoHandler = new Handler() {
 
@@ -129,40 +128,40 @@ public class cgeo extends AbstractActivity {
         }
     };
 
-    private class SatellitesHandler extends Handler {
+    private class SatellitesHandler extends Handler implements IObserver<IGeoData> {
 
-        final private static int NO_GPS = 0;
-        final private static int SATELLITES = 1;
+        private boolean gpsEnabled = false;
+        private int satellitesFixed = 0;
+        private int satellitesVisible = 0;
 
         @Override
         public void handleMessage(final Message msg) {
-            String satellites = "";
-            switch (msg.what) {
-                case NO_GPS:
-                    satellites = res.getString(R.string.loc_gps_disabled);
-                    break;
-                case SATELLITES:
-                    final int satellitesFixed = msg.arg1;
-                    final int satellitesVisible = msg.arg2;
-                    if (satellitesFixed > 0) {
-                        satellites = res.getString(R.string.loc_sat) + ": " + satellitesFixed + '/' + satellitesVisible;
-                    } else if (satellitesVisible >= 0) {
-                        satellites = res.getString(R.string.loc_sat) + ": 0/" + satellitesVisible;
-                    }
-                    break;
+            final IGeoData data = (IGeoData) msg.obj;
+            if (data.getGpsEnabled() == gpsEnabled &&
+                    data.getSatellitesFixed() == satellitesFixed &&
+                    data.getSatellitesVisible() == satellitesVisible) {
+                return;
             }
+            gpsEnabled = data.getGpsEnabled();
+            satellitesFixed = data.getSatellitesFixed();
+            satellitesVisible = data.getSatellitesVisible();
+
             final TextView navSatellites = (TextView) findViewById(R.id.nav_satellites);
-            navSatellites.setText(satellites);
+            if (gpsEnabled) {
+                if (satellitesFixed > 0) {
+                    navSatellites.setText(res.getString(R.string.loc_sat) + ": " + satellitesFixed + '/' + satellitesVisible);
+                } else if (satellitesVisible >= 0) {
+                    navSatellites.setText(res.getString(R.string.loc_sat) + ": 0/" + satellitesVisible);
+                }
+            } else {
+                navSatellites.setText(res.getString(R.string.loc_gps_disabled));
+            }
         }
 
-        public void noGps() {
-            obtainMessage(NO_GPS).sendToTarget();
+        @Override
+        public void update(final IGeoData data) {
+            obtainMessage(0, data).sendToTarget();
         }
-
-        public void satellites(final int fixed, final int visible) {
-            obtainMessage(SATELLITES, fixed, visible).sendToTarget();
-        }
-
     }
 
     private SatellitesHandler satellitesHandler = new SatellitesHandler();
@@ -181,21 +180,6 @@ public class cgeo extends AbstractActivity {
                 Log.w("cgeo.firstLoginHander: " + e.toString());
             }
         }
-    };
-
-    private final GpsStatus.Listener gpsListener = new GpsStatus.Listener() {
-
-        @Override
-        public void onGpsStatusChanged(int event) {
-            if (event == GpsStatus.GPS_EVENT_STARTED && !gpsEnabled) {
-                satellitesHandler.satellites(0, 0);
-                gpsEnabled = true;
-            } else if (event == GpsStatus.GPS_EVENT_STOPPED && gpsEnabled) {
-                satellitesHandler.noGps();
-                gpsEnabled = false;
-            }
-        }
-
     };
 
     public cgeo() {
@@ -257,8 +241,7 @@ public class cgeo extends AbstractActivity {
     public void onResume() {
         super.onResume();
         app.addGeoObserver(locationUpdater);
-        gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        locationManager.addGpsStatusListener(gpsListener);
+        app.addGeoObserver(satellitesHandler);
         updateUserInfoHandler.sendEmptyMessage(-1);
         init();
     }
@@ -281,7 +264,7 @@ public class cgeo extends AbstractActivity {
     public void onPause() {
         initialized = false;
         app.deleteGeoObserver(locationUpdater);
-        locationManager.removeGpsStatusListener(gpsListener);
+        app.deleteGeoObserver(satellitesHandler);
         super.onPause();
     }
 
@@ -592,12 +575,6 @@ public class cgeo extends AbstractActivity {
                             }
                         });
                         nearestView.setBackgroundResource(R.drawable.main_nearby);
-                    }
-
-                    if (!gpsEnabled) {
-                        satellitesHandler.noGps();
-                    } else {
-                        satellitesHandler.satellites(geo.getSatellitesFixed(), geo.getSatellitesVisible());
                     }
 
                     navType.setText(res.getString(geo.getLocationProvider().resourceId));
