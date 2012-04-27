@@ -46,6 +46,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         public float accuracyNow = -1f;
         public int satellitesVisible = 0;
         public int satellitesFixed = 0;
+        public boolean gpsEnabled = false;
 
         @Override
         public Location getLocation() {
@@ -70,6 +71,11 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         @Override
         public float getBearingNow() {
             return bearingNow;
+        }
+
+        @Override
+        public boolean getGpsEnabled() {
+            return gpsEnabled;
         }
 
         @Override
@@ -253,6 +259,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
 
         @Override
         public void onGpsStatusChanged(final int event) {
+            boolean changed = false;
             if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
                 final GpsStatus status = geoManager.getGpsStatus(null);
                 final Iterator<GpsSatellite> statusIterator = status.getSatellites().iterator();
@@ -268,7 +275,6 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
                     satellites++;
                 }
 
-                boolean changed = false;
                 if (satellites != current.satellitesVisible) {
                     current.satellitesVisible = satellites;
                     changed = true;
@@ -277,10 +283,20 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
                     current.satellitesFixed = fixed;
                     changed = true;
                 }
+            } else if (event == GpsStatus.GPS_EVENT_STARTED && !current.gpsEnabled) {
+                current.gpsEnabled = true;
+                current.satellitesFixed = 0;
+                current.satellitesVisible = 0;
+                changed = true;
+            } else if (event == GpsStatus.GPS_EVENT_STOPPED && current.gpsEnabled) {
+                current.gpsEnabled = false;
+                current.satellitesFixed = 0;
+                current.satellitesVisible = 0;
+                changed = true;
+            }
 
-                if (changed) {
-                    selectBest(null);
-                }
+            if (changed) {
+                selectBest(null);
             }
         }
     }
