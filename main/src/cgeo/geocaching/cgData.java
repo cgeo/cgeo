@@ -1227,11 +1227,7 @@ public class cgData {
                 ok = true;
             } else {
                 final int rows = databaseRW.update(dbTableWaypoints, values, "_id = " + id, null);
-                if (rows > 0) {
-                    ok = true;
-                } else {
-                    ok = false;
-                }
+                ok = rows > 0;
             }
             databaseRW.setTransactionSuccessful();
         } finally {
@@ -1945,7 +1941,7 @@ public class cgData {
                             cursor.getString(indexLog));
                     log.id = cursor.getInt(indexLogsId);
                     log.found = cursor.getInt(indexFound);
-                    log.friend = cursor.getInt(indexFriend) == 1 ? true : false;
+                    log.friend = cursor.getInt(indexFriend) == 1;
                     logs.add(log);
                 }
                 if (!cursor.isNull(indexLogImagesId)) {
