@@ -490,6 +490,10 @@
   <string name="cache_watchlist_add">Ajouter à votre liste de suivi</string>
   <string name="cache_watchlist_remove">Retirer de votre liste de suivi</string>
   <string name="cache_waypoints">Étapes</string>
+  <plurals name="waypoints">
+      <item quantity="one">1 étape</item>
+      <item quantity="other">%d étapes</item>
+  </plurals>
   <string name="cache_waypoints_add">Ajouter une étape</string>
   <string name="cache_hint">Indice</string>
   <string name="cache_logs">Carnet de bord</string>
@@ -931,5 +935,11 @@
   <string name="go4cache_looking_around">En balade</string>
   <string name="go4cache_tweeting">En train de tweeter</string>
   <string name="go4cache_heading_to">En direction de</string>
+  <plurals name="go4cache_time_minutes">
+	<item quantity="one">il y a une minute</item>
+	<item quantity="other">il y a %d minutes</item>
+  </plurals>
+
+  <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
 
 </resources>
