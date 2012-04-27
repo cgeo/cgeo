@@ -34,8 +34,6 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
     private GeoData current = new GeoData();
     private final Unregisterer unregisterer = new Unregisterer();
 
-    final private cgeoapplication app;
-
     private static class GeoData implements Cloneable, IGeoData {
         public Location location = null;
         public LocationProviderType locationProvider = LocationProviderType.LAST;
@@ -159,11 +157,10 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
      * There is no need to instantiate more than one such object in an application, as observers can be added
      * at will.
      *
-     * @param app the application
+     * @param context the context used to retrieve the system services
      */
-    public GeoDataProvider(final cgeoapplication app) {
-        geoManager = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-        this.app = app;
+    public GeoDataProvider(final Context context) {
+        geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         unregisterer.start();
         // Start with an empty GeoData just in case someone queries it before we get
         // a chance to get any information.
