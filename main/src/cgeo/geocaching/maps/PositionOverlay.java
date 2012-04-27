@@ -210,7 +210,7 @@ public class PositionOverlay implements GeneralOverlay {
         marginTop = center.y - heightArrowHalf;
 
         Matrix matrix = new Matrix();
-        matrix.setRotate(heading.floatValue(), widthArrowHalf, heightArrowHalf);
+        matrix.setRotate(heading, widthArrowHalf, heightArrowHalf);
         matrix.postTranslate(marginLeft, marginTop);
 
         canvas.drawBitmap(arrow, matrix, null);

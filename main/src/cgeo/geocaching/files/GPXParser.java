@@ -436,7 +436,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String watchList) {
-                    cache.setOnWatchlist(Boolean.valueOf(watchList.trim()).booleanValue());
+                    cache.setOnWatchlist(Boolean.valueOf(watchList.trim()));
                 }
             });
 
