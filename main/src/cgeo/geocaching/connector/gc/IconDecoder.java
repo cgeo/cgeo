@@ -153,7 +153,6 @@ public abstract class IconDecoder {
             }
             if ((bitmap.getPixel(x + POSX_FOUND, y + POSY_FOUND) & 0x00FFFFFF) == COLOR_FOUND) {
                 cache.setFound(true);
-                return;
             }
         } catch (IllegalArgumentException e) {
             // intentionally left blank

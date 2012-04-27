@@ -61,7 +61,6 @@ public final class CalendarActivity extends Activity {
         } catch (Exception e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             finish();
-            return;
         }
     }
 
