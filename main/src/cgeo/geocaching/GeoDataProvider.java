@@ -25,12 +25,14 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
     private static final String LAST_LOCATION_PSEUDO_PROVIDER = "last";
     private final LocationManager geoManager;
     private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
-    private LocationData gpsLocation = new LocationData(LocationProviderType.GPS);
-    private LocationData netLocation = new LocationData(LocationProviderType.NETWORK);
+    private final LocationData gpsLocation = new LocationData(LocationProviderType.GPS);
+    private final LocationData netLocation = new LocationData(LocationProviderType.NETWORK);
     private final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
     private final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
-    private GeoData current = new GeoData();
     private final Unregisterer unregisterer = new Unregisterer();
+    public boolean gpsEnabled = false;
+    public int satellitesVisible = 0;
+    public int satellitesFixed = 0;
 
     private static class LocationData {
         public Location location;
@@ -55,15 +57,21 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         }
     }
 
-    private static class GeoData implements Cloneable, IGeoData {
-        public Location location = null;
+    private static class GeoData extends Location implements IGeoData {
+        public boolean gpsEnabled = false;
         public int satellitesVisible = 0;
         public int satellitesFixed = 0;
-        public boolean gpsEnabled = false;
+
+        GeoData(final Location location, final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed) {
+            super(location);
+            this.gpsEnabled = gpsEnabled;
+            this.satellitesVisible = satellitesVisible;
+            this.satellitesFixed = satellitesFixed;
+        }
 
         @Override
         public Location getLocation() {
-            return location;
+            return this;
         }
 
         private LocationProviderType getLocationProviderType(final String provider) {
@@ -78,37 +86,17 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
 
         @Override
         public LocationProviderType getLocationProvider() {
-            return getLocationProviderType(location != null ? location.getProvider() : LAST_LOCATION_PSEUDO_PROVIDER);
+            return getLocationProviderType(getProvider());
         }
 
         @Override
         public Geopoint getCoords() {
-            return new Geopoint(location);
-        }
-
-        @Override
-        public double getAltitude() {
-            return location.getAltitude();
-        }
-
-        @Override
-        public float getBearing() {
-            return location.getBearing();
+            return new Geopoint(this);
         }
 
         @Override
         public boolean getGpsEnabled() {
             return gpsEnabled;
-        }
-
-        @Override
-        public float getSpeed() {
-            return location.getSpeed();
-        }
-
-        @Override
-        public float getAccuracy() {
-            return location.getAccuracy();
         }
 
         @Override
@@ -120,21 +108,12 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         public int getSatellitesFixed() {
             return satellitesFixed;
         }
-
-        public IGeoData makeImmutable() {
-            try {
-                return (IGeoData) clone();
-            } catch (final CloneNotSupportedException e) {
-                // This cannot happen
-                return null;
-            }
-        }
     }
 
     private class Unregisterer extends Thread {
 
         private boolean unregisterRequested = false;
-        private ArrayBlockingQueue<Boolean> queue = new ArrayBlockingQueue<Boolean>(1);
+        private final ArrayBlockingQueue<Boolean> queue = new ArrayBlockingQueue<Boolean>(1);
 
         public void cancelUnregister() {
             try {
@@ -189,7 +168,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         unregisterer.start();
         // Start with an empty GeoData just in case someone queries it before we get
         // a chance to get any information.
-        notifyObservers(new GeoData());
+        notifyObservers(new GeoData(new Location(LAST_LOCATION_PSEUDO_PROVIDER), false, 0, 0));
     }
 
     private void registerListeners() {
@@ -264,34 +243,32 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
             switch (event) {
                 case GpsStatus.GPS_EVENT_SATELLITE_STATUS: {
                     final GpsStatus status = geoManager.getGpsStatus(null);
-                    int satellites = 0;
+                    int visible = 0;
                     int fixed = 0;
                     for (final GpsSatellite satellite : status.getSatellites()) {
                         if (satellite.usedInFix()) {
                             fixed++;
                         }
-                        satellites++;
+                        visible++;
                     }
-                    if (satellites != current.satellitesVisible || fixed != current.satellitesFixed) {
-                        current.satellitesVisible = satellites;
-                        current.satellitesFixed = fixed;
+                    if (visible != satellitesVisible || fixed != satellitesFixed) {
+                        satellitesVisible = visible;
+                        satellitesFixed = fixed;
                         changed = true;
                     }
                     break;
                 }
                 case GpsStatus.GPS_EVENT_STARTED:
-                    if (!current.gpsEnabled) {
-                        current.gpsEnabled = true;
-                        current.satellitesFixed = 0;
-                        current.satellitesVisible = 0;
+                    if (!gpsEnabled) {
+                        gpsEnabled = true;
                         changed = true;
                     }
                     break;
                 case GpsStatus.GPS_EVENT_STOPPED:
-                    if (current.gpsEnabled) {
-                        current.gpsEnabled = false;
-                        current.satellitesFixed = 0;
-                        current.satellitesVisible = 0;
+                    if (gpsEnabled) {
+                        gpsEnabled = false;
+                        satellitesFixed = 0;
+                        satellitesVisible = 0;
                         changed = true;
                     }
                     break;
@@ -305,7 +282,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
 
     private LocationData best() {
         if (gpsLocation.isRecent() || !netLocation.isValid()) {
-            return gpsLocation;
+            return gpsLocation.isValid() ? gpsLocation : null;
         }
         if (!gpsLocation.isValid()) {
             return netLocation;
@@ -318,12 +295,14 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
     }
 
     private void assign(final LocationData locationData) {
-        if (locationData.location == null) {
+        if (locationData == null) {
             return;
         }
 
-        current.location = locationData.location;
-        notifyObservers(current.makeImmutable());
+        // We do not necessarily get signalled when satellites go to 0/0.
+        final int visible = gpsLocation.isRecent() ? satellitesVisible : 0;
+        final IGeoData current = new GeoData(locationData.location, gpsEnabled, visible, satellitesFixed);
+        notifyObservers(current);
 
         Go4Cache.signalCoordinates(current.getCoords());
     }
