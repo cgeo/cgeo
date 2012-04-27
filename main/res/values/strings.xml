@@ -962,6 +962,8 @@
 	<item quantity="one">one Minute ago</item>
 	<item quantity="other">%d Minutes ago</item>
   </plurals>
+  
+  <string name="clipboard_copy_ok">Copied to clipboard</string>
       
   <!-- ====== please, do not translate (and include in translation) things below this line ====== -->
 

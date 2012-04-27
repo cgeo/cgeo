@@ -470,6 +470,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 switch (index) {
                     case MENU_FIELD_COPY:
                         ClipboardUtils.copyToClipboard(clickedItemText);
+                        showToast(res.getString(R.string.clipboard_copy_ok));
                         return true;
                     case MENU_FIELD_TRANSLATE:
                         TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), clickedItemText.toString());

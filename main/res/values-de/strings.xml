@@ -926,4 +926,6 @@
 	<item quantity="one">vor einer Minute</item>
 	<item quantity="other">vor %d Minuten</item>
   </plurals>
+  
+  <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
 </resources>
