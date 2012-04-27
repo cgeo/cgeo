@@ -363,8 +363,7 @@ public class cgeo extends AbstractActivity {
             List<StoredList> cacheLists = app.getLists();
             int listCount = cacheLists.size();
             menu.setHeaderTitle(res.getString(R.string.list_title));
-            for (int i = 0; i < listCount; i++) {
-                StoredList list = cacheLists.get(i);
+            for (final StoredList list : cacheLists) {
                 menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.getTitleAndCount());
             }
             return;
