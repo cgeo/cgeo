@@ -934,5 +934,7 @@
   <plurals name="go4cache_time_minutes">
     <item quantity="one">un minuto fa</item>
     <item quantity="other">%d minuti fa</item>
-  </plurals>  
+  </plurals>
+  
+  <string name="clipboard_copy_ok">Copiato nella clipboard</string>  
 </resources>
