@@ -1,11 +1,11 @@
 package cgeo.geocaching.apps.cachelist;
 
+import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.apps.AbstractAppFactory;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -63,7 +63,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
     }
 
     public static boolean onMenuItemSelected(final MenuItem item,
-            final cgGeo geo, final List<cgCache> caches, final IAbstractActivity activity,
+            final IGeoData geo, final List<cgCache> caches, final IAbstractActivity activity,
             final SearchResult search) {
         CacheListApp app = (CacheListApp) getAppFromMenuItem(item, apps);
         if (app != null) {

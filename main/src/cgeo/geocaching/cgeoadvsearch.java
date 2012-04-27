@@ -6,6 +6,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.EditUtils;
+import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -23,13 +24,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class cgeoadvsearch extends AbstractActivity {
+public class cgeoadvsearch extends AbstractActivity implements IObserver<IGeoData> {
 
     public static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
 
     private static final int MENU_SEARCH_OWN_CACHES = 1;
-    private cgGeo geo = null;
-    private UpdateLocationCallback geoUpdate = new update();
     private EditText latEdit = null;
     private EditText lonEdit = null;
 
@@ -78,34 +77,23 @@ public class cgeoadvsearch extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
-
+        app.addGeoObserver(this);
         init();
     }
 
     @Override
     public void onDestroy() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onDestroy();
     }
 
     @Override
     public void onStop() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
+        app.deleteGeoObserver(this);
         super.onPause();
     }
 
@@ -145,10 +133,6 @@ public class cgeoadvsearch extends AbstractActivity {
 
     private void init() {
         Settings.getLogin();
-
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
 
         ((Button) findViewById(R.id.buttonLatitude)).setOnClickListener(new findByCoordsAction());
         ((Button) findViewById(R.id.buttonLongitude)).setOnClickListener(new findByCoordsAction());
@@ -237,33 +221,26 @@ public class cgeoadvsearch extends AbstractActivity {
         displayTrackable.setOnClickListener(new findTrackableListener());
     }
 
-    private class update implements UpdateLocationCallback {
-
-        @Override
-        public void updateLocation(cgGeo geo) {
-            if (geo == null) {
-                return;
+    @Override
+    public void update(final IGeoData geo) {
+        try {
+            if (latEdit == null) {
+                latEdit = (EditText) findViewById(R.id.latitude);
+            }
+            if (lonEdit == null) {
+                lonEdit = (EditText) findViewById(R.id.longitude);
             }
 
-            try {
-                if (latEdit == null) {
-                    latEdit = (EditText) findViewById(R.id.latitude);
+            if (geo.getCoordsNow() != null) {
+                if (latEdit != null) {
+                    latEdit.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 }
-                if (lonEdit == null) {
-                    lonEdit = (EditText) findViewById(R.id.longitude);
+                if (lonEdit != null) {
+                    lonEdit.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
                 }
-
-                if (geo.coordsNow != null) {
-                    if (latEdit != null) {
-                        latEdit.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-                    }
-                    if (lonEdit != null) {
-                        lonEdit.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-                    }
-                }
-            } catch (Exception e) {
-                Log.w("Failed to update location.");
             }
+        } catch (Exception e) {
+            Log.w("Failed to update location.");
         }
     }
 
@@ -271,7 +248,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, null, null, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, null, null, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
@@ -298,9 +275,10 @@ public class cgeoadvsearch extends AbstractActivity {
         final String lonText = lonView.getText().toString();
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
-            if (geo.coordsNow != null) {
-                latView.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                lonView.setText(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE));
+            final IGeoData geo = app.currentGeo();
+            if (geo.getCoordsNow() != null) {
+                latView.setText(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE));
+                lonView.setText(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE));
             }
         } else {
             try {

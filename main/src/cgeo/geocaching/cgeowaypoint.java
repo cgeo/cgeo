@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +28,7 @@ import android.widget.TextView;
 
 import java.util.EnumSet;
 
-public class cgeowaypoint extends AbstractActivity {
+public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData> {
 
     private static final int MENU_ID_NAVIGATION = 0;
     private static final int MENU_ID_CACHES_AROUND = 5;
@@ -36,8 +37,6 @@ public class cgeowaypoint extends AbstractActivity {
     private cgWaypoint waypoint = null;
     private int id = -1;
     private ProgressDialog waitDialog = null;
-    private cgGeo geo = null;
-    private UpdateLocationCallback geoUpdate = new update();
     private Handler loadWaypointHandler = new Handler() {
 
         @Override
@@ -142,10 +141,6 @@ public class cgeowaypoint extends AbstractActivity {
             return;
         }
 
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
-
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
         waitDialog.setCancelable(true);
 
@@ -165,10 +160,7 @@ public class cgeowaypoint extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
+        app.addGeoObserver(this);
 
         if (waitDialog == null) {
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
@@ -180,28 +172,17 @@ public class cgeowaypoint extends AbstractActivity {
 
     @Override
     public void onDestroy() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onDestroy();
     }
 
     @Override
     public void onStop() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
+        app.deleteGeoObserver(this);
         super.onPause();
     }
 
@@ -247,7 +228,7 @@ public class cgeowaypoint extends AbstractActivity {
             goToGeocache();
             return true;
         } else if (menuItem == MENU_ID_NAVIGATION) {
-            NavigationAppFactory.showNavigationMenu(geo, this, null, waypoint, null);
+            NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, waypoint, null);
             return true;
         }
         return false;
@@ -287,12 +268,9 @@ public class cgeowaypoint extends AbstractActivity {
         }
     }
 
-    private static class update implements UpdateLocationCallback {
-
-        @Override
-        public void updateLocation(cgGeo geo) {
-            // nothing
-        }
+    @Override
+    public void update(final IGeoData geo) {
+        // nothing
     }
 
     private class editWaypointListener implements View.OnClickListener {
@@ -330,7 +308,7 @@ public class cgeowaypoint extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, waypoint, null);
     }
 
     /**
@@ -341,7 +319,7 @@ public class cgeowaypoint extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication2(geo, this, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), this, null, waypoint, null);
     }
 
     private boolean navigationPossible() {
@@ -367,7 +345,7 @@ public class cgeowaypoint extends AbstractActivity {
         if (handled) {
             return true;
         }
-        return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, waypoint, null);
+        return NavigationAppFactory.onMenuItemSelected(item, app.currentGeo(), this, null, waypoint, null);
     }
 
     public static void startActivity(final Context context, final int waypointId) {

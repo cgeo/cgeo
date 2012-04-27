@@ -1,11 +1,11 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
 
@@ -26,7 +26,7 @@ class GoogleNavigationApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean invoke(final cgGeo geo, final Activity activity, final cgCache cache, final cgWaypoint waypoint, final Geopoint coords) {
+    public boolean invoke(final IGeoData geo, final Activity activity, final cgCache cache, final cgWaypoint waypoint, final Geopoint coords) {
         if (activity == null) {
             return false;
         }
@@ -50,8 +50,8 @@ class GoogleNavigationApp extends AbstractNavigationApp {
         return true;
     }
 
-    private static boolean navigateToCoordinates(cgGeo geo, Activity activity, final Geopoint coords) {
-        final Geopoint coordsNow = geo == null ? null : geo.coordsNow;
+    private static boolean navigateToCoordinates(IGeoData geo, Activity activity, final Geopoint coords) {
+        final Geopoint coordsNow = geo == null ? null : geo.getCoordsNow();
 
         // Google Navigation
         if (Settings.isUseGoogleNavigation()) {

@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -18,7 +18,7 @@ class InternalMap extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean invoke(cgGeo geo, Activity activity, cgCache cache,
+    public boolean invoke(IGeoData geo, Activity activity, cgCache cache,
             cgWaypoint waypoint, final Geopoint coords) {
         if (cache != null) {
             CGeoMap.startActivityGeoCode(activity, cache.getGeocode());

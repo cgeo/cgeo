@@ -38,6 +38,7 @@ import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.sorting.VoteComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -74,7 +75,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class cgeocaches extends AbstractListActivity {
+public class cgeocaches extends AbstractListActivity implements IObserver<IGeoData> {
 
     private static final int MAX_LIST_ITEMS = 1000;
     private static final String EXTRAS_LIST_TYPE = "type";
@@ -120,6 +121,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_FILTER = 74;
 
     private static final int MSG_DONE = -1;
+    private static final int MSG_RESTART_GEO_AND_DIR = -2;
     private static final int MSG_CANCEL = -99;
 
     private String action = null;
@@ -137,9 +139,7 @@ public class cgeocaches extends AbstractListActivity {
     private TextView listFooterText = null;
     private Progress progress = new Progress();
     private Float northHeading = 0f;
-    private cgGeo geo = null;
     private cgDirection dir = null;
-    private UpdateLocationCallback geoUpdate = new UpdateLocation();
     private UpdateDirectionCallback dirUpdate = new UpdateDirection();
     private String title = "";
     private int detailTotal = 0;
@@ -210,8 +210,9 @@ public class cgeocaches extends AbstractListActivity {
                     return;
                 }
 
-                if (geo != null && geo.coordsNow != null) {
-                    adapter.setActualCoordinates(geo.coordsNow);
+                final Geopoint coordsNow = app.currentGeo().getCoordsNow();
+                if (coordsNow != null) {
+                    adapter.setActualCoordinates(coordsNow);
                     adapter.setActualHeading(northHeading);
                 }
             } catch (Exception e) {
@@ -277,8 +278,9 @@ public class cgeocaches extends AbstractListActivity {
                     return;
                 }
 
-                if (geo != null && geo.coordsNow != null) {
-                    adapter.setActualCoordinates(geo.coordsNow);
+                final Geopoint coordsNow = app.currentGeo().getCoordsNow();
+                if (coordsNow != null) {
+                    adapter.setActualCoordinates(coordsNow);
                     adapter.setActualHeading(northHeading);
                 }
             } catch (Exception e) {
@@ -322,6 +324,8 @@ public class cgeocaches extends AbstractListActivity {
                 if (threadDetails != null) {
                     threadDetails.kill();
                 }
+            } else if (msg.what == MSG_RESTART_GEO_AND_DIR) {
+                startGeoAndDir();
             } else {
                 if (cacheList != null && search != null) {
                     final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -333,8 +337,9 @@ public class cgeocaches extends AbstractListActivity {
                     }
                 }
 
-                if (geo != null && geo.coordsNow != null) {
-                    adapter.setActualCoordinates(geo.coordsNow);
+                final Geopoint coordsNow = app.currentGeo().getCoordsNow();
+                if (coordsNow != null) {
+                    adapter.setActualCoordinates(coordsNow);
                     adapter.setActualHeading(northHeading);
                 }
 
@@ -363,12 +368,10 @@ public class cgeocaches extends AbstractListActivity {
                 refreshCurrentList();
             } else if (msg.what == -2) {
                 progress.dismiss();
-                startGeoAndDir();
                 showToast(res.getString(R.string.sendToCgeo_download_fail));
                 finish();
             } else if (msg.what == -3) {
                 progress.dismiss();
-                startGeoAndDir();
                 showToast(res.getString(R.string.sendToCgeo_no_registration));
                 finish();
             } else if (msg.what == MSG_CANCEL) {
@@ -390,7 +393,6 @@ public class cgeocaches extends AbstractListActivity {
                     Collections.sort(cacheList, gcComparator);
                 }
 
-                startGeoAndDir();
                 progress.dismiss();
             }
         }
@@ -469,6 +471,13 @@ public class cgeocaches extends AbstractListActivity {
         super.onCreate(savedInstanceState);
 
         // init
+        if (CollectionUtils.isNotEmpty(cacheList)) {
+            setMoreCaches();
+        }
+
+        setTitle(title);
+        setAdapter();
+
         app.setAction(action);
 
         setTheme();
@@ -492,8 +501,6 @@ public class cgeocaches extends AbstractListActivity {
                 coords = new Geopoint(0.0, 0.0);
             }
         }
-
-        init();
 
         Thread threadPure;
         cgSearchThread thread;
@@ -641,8 +648,6 @@ public class cgeocaches extends AbstractListActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
-        init();
     }
 
     @Override
@@ -651,15 +656,13 @@ public class cgeocaches extends AbstractListActivity {
 
         init();
 
-        if (adapter != null && geo != null && geo.coordsNow != null) {
-            adapter.setActualCoordinates(geo.coordsNow);
-            adapter.setActualHeading(northHeading);
-        }
-
         if (adapter != null) {
             adapter.setSelectMode(false, true);
-            if (geo != null && geo.coordsNow != null) {
-                adapter.forceSort(geo.coordsNow);
+            final Geopoint coordsNow = app.currentGeo().getCoordsNow();
+            if (coordsNow != null) {
+                adapter.setActualCoordinates(coordsNow);
+                adapter.setActualHeading(northHeading);
+                adapter.forceSort(coordsNow);
             }
         }
 
@@ -682,15 +685,11 @@ public class cgeocaches extends AbstractListActivity {
             adapter = null;
         }
 
-        removeGeoAndDir();
-
         super.onDestroy();
     }
 
     @Override
     public void onStop() {
-        removeGeoAndDir();
-
         super.onStop();
     }
 
@@ -983,7 +982,7 @@ public class cgeocaches extends AbstractListActivity {
                 return true;
         }
 
-        return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, search);
+        return CacheListAppFactory.onMenuItemSelected(item, app.currentGeo(), cacheList, this, search);
     }
 
     private void setComparator(MenuItem item,
@@ -1050,8 +1049,7 @@ public class cgeocaches extends AbstractListActivity {
                 final boolean moveAll = adapter.getChecked() == 0;
                 if (moveAll) {
                     selected = new ArrayList<cgCache>(cacheList);
-                }
-                else {
+                } else {
                     selected = adapter.getCheckedCaches();
                 }
                 app.moveToList(selected, newListId);
@@ -1083,11 +1081,11 @@ public class cgeocaches extends AbstractListActivity {
 
         if (id == MENU_DEFAULT_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null);
+            NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
             return true;
         } else if (id == MENU_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null);
+            NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
             return true;
         } else if (id == MENU_LOG_VISIT) {
             getCacheFromAdapter(adapterInfo).logVisit(this);
@@ -1211,9 +1209,8 @@ public class cgeocaches extends AbstractListActivity {
         }
         adapter.reFilter();
 
-        if (geo != null) {
-            adapter.setActualCoordinates(geo.coordsNow);
-        }
+        adapter.setActualCoordinates(app.currentGeo().getCoordsNow());
+
         if (dir != null) {
             adapter.setActualHeading(dir.directionNow);
         }
@@ -1263,38 +1260,22 @@ public class cgeocaches extends AbstractListActivity {
     private void init() {
         startGeoAndDir();
 
-        if (CollectionUtils.isNotEmpty(cacheList)) {
-            setMoreCaches();
-        }
-
-        setTitle(title);
-        setAdapter();
-
-        if (geo != null) {
-            geoUpdate.updateLocation(geo);
-        }
         if (dir != null) {
             dirUpdate.updateDirection(dir);
         }
     }
 
-    // sensor & geolocation manager
+    // Sensor & geolocation manager. This must be called from the UI thread as it may
+    // cause the system listeners to start if nobody else required them before.
     private void startGeoAndDir() {
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
+        app.addGeoObserver(this);
         if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
             dir = app.startDir(this, dirUpdate);
         }
     }
 
     private void removeGeoAndDir() {
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
+        app.deleteGeoObserver(this);
     }
 
     private void importGpx() {
@@ -1442,33 +1423,27 @@ public class cgeocaches extends AbstractListActivity {
         threadR.start();
     }
 
-    private class UpdateLocation implements UpdateLocationCallback {
+    @Override
+    public void update(final IGeoData geo) {
+        if (adapter == null) {
+            return;
+        }
 
-        @Override
-        public void updateLocation(cgGeo geo) {
-            if (geo == null) {
-                return;
-            }
-            if (adapter == null) {
-                return;
+        try {
+            if (cacheList != null && geo.getCoordsNow() != null) {
+                adapter.setActualCoordinates(geo.getCoordsNow());
             }
 
-            try {
-                if (cacheList != null && geo.coordsNow != null) {
-                    adapter.setActualCoordinates(geo.coordsNow);
+            if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) { // use GPS when speed is higher than 18 km/h
+                if (!Settings.isUseCompass()) {
+                    adapter.setActualHeading(geo.getBearingNow());
                 }
-
-                if (!Settings.isUseCompass() || geo.speedNow > 5) { // use GPS when speed is higher than 18 km/h
-                    if (!Settings.isUseCompass()) {
-                        adapter.setActualHeading(geo.bearingNow);
-                    }
-                    if (northHeading != null) {
-                        adapter.setActualHeading(northHeading);
-                    }
+                if (northHeading != null) {
+                    adapter.setActualHeading(northHeading);
                 }
-            } catch (Exception e) {
-                Log.w("Failed to UpdateLocation location.");
             }
+        } catch (Exception e) {
+            Log.w("Failed to UpdateLocation location.");
         }
     }
 
@@ -1484,7 +1459,7 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             northHeading = dir.directionNow;
-            if (northHeading != null && adapter != null && (geo == null || geo.speedNow <= 5)) { // use compass when speed is lower than 18 km/h) {
+            if (northHeading != null && adapter != null && (app.currentGeo().getSpeedNow() <= 5)) { // use compass when speed is lower than 18 km/h) {
                 adapter.setActualHeading(northHeading);
             }
         }
@@ -1725,6 +1700,7 @@ public class cgeocaches extends AbstractListActivity {
             }
             cacheListTemp.clear();
 
+            handler.sendEmptyMessage(MSG_RESTART_GEO_AND_DIR);
             handler.sendEmptyMessage(MSG_DONE);
         }
     }
@@ -1810,6 +1786,8 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             handler.sendEmptyMessage(ret);
+
+            startGeoAndDir();
         }
     }
 
@@ -1837,6 +1815,8 @@ public class cgeocaches extends AbstractListActivity {
             removeGeoAndDir();
             app.markDropped(selected);
             handler.sendEmptyMessage(MSG_DONE);
+
+            startGeoAndDir();
         }
     }
 

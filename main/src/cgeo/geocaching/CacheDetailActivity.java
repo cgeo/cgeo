@@ -30,7 +30,6 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -124,7 +123,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private static final String CALENDAR_ADDON_URI = "market://details?id=cgeo.calendar";
 
-    private cgGeo geolocation;
     private cgCache cache;
     private final Progress progress = new Progress();
     private SearchResult search;
@@ -187,10 +185,6 @@ public class CacheDetailActivity extends AbstractActivity {
         setTheme();
         setContentView(R.layout.cacheview);
         setTitle(res.getString(R.string.cache));
-
-        if (geolocation == null) {
-            geolocation = app.startGeo(locationUpdater);
-        }
 
         String geocode = null;
         String guid = null;
@@ -330,9 +324,7 @@ public class CacheDetailActivity extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        if (geolocation == null) {
-            geolocation = app.startGeo(locationUpdater);
-        }
+        app.addGeoObserver(locationUpdater);
         if (refreshOnResume) {
             notifyDataSetChanged();
             refreshOnResume = false;
@@ -341,19 +333,11 @@ public class CacheDetailActivity extends AbstractActivity {
 
     @Override
     public void onDestroy() {
-        if (geolocation != null) {
-            geolocation = app.removeGeo();
-        }
-
         super.onDestroy();
     }
 
     @Override
     public void onStop() {
-        if (geolocation != null) {
-            geolocation = app.removeGeo();
-        }
-
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
         }
@@ -363,9 +347,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
     @Override
     public void onPause() {
-        if (geolocation != null) {
-            geolocation = app.removeGeo();
-        }
+        app.deleteGeoObserver(locationUpdater);
 
         super.onPause();
     }
@@ -514,14 +496,14 @@ public class CacheDetailActivity extends AbstractActivity {
             case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
-                    NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, null, waypoint, null);
+                    NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, waypoint, null);
                 }
             }
                 break;
             case CONTEXT_MENU_WAYPOINT_NAVIGATE: {
                 final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
                 if (waypoint != null) {
-                    NavigationAppFactory.showNavigationMenu(geolocation, this, null, waypoint, null);
+                    NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, waypoint, null);
                 }
             }
                 break;
@@ -597,7 +579,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
             return false;
         }
-        if (NavigationAppFactory.onMenuItemSelected(item, geolocation, this, cache, null, null)) {
+        if (NavigationAppFactory.onMenuItemSelected(item, app.currentGeo(), this, cache, null, null)) {
             return true;
         }
         if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
@@ -710,12 +692,9 @@ public class CacheDetailActivity extends AbstractActivity {
         progress.dismiss();
     }
 
-    private class LocationUpdater implements UpdateLocationCallback {
+    private class LocationUpdater extends GeoObserver {
         @Override
-        public void updateLocation(cgGeo geo) {
-            if (geo == null) {
-                return;
-            }
+        public void updateLocation(final IGeoData geo) {
             if (cacheDistanceView == null) {
                 return;
             }
@@ -723,13 +702,13 @@ public class CacheDetailActivity extends AbstractActivity {
             try {
                 StringBuilder dist = new StringBuilder();
 
-                if (geo.coordsNow != null && cache != null && cache.getCoords() != null) {
-                    dist.append(HumanDistance.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
+                if (geo.getCoordsNow() != null && cache != null && cache.getCoords() != null) {
+                    dist.append(HumanDistance.getHumanDistance(geo.getCoordsNow().distanceTo(cache.getCoords())));
                 }
 
                 if (cache != null && cache.getElevation() != null) {
-                    if (geo.altitudeNow != null) {
-                        double diff = (cache.getElevation() - geo.altitudeNow);
+                    if (geo.getAltitudeNow() != null) {
+                        double diff = (cache.getElevation() - geo.getAltitudeNow());
                         if (diff >= 0) {
                             dist.append(" ↗");
                         } else if (diff < 0) {
@@ -864,7 +843,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         //TODO: previously this used also the search argument "search". check if still needed
-        NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
     }
 
     /**
@@ -877,7 +856,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         //TODO: previously this used also the search argument "search". check if still needed
-        NavigationAppFactory.startDefaultNavigationApplication2(geolocation, this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), this, cache, null, null);
     }
 
     /**
@@ -895,7 +874,7 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(geolocation, this, cache, null, null);
+        NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
     }
 
     /**
@@ -1515,10 +1494,6 @@ public class CacheDetailActivity extends AbstractActivity {
                 } else {
                     ((LinearLayout) view.findViewById(R.id.license_box)).setVisibility(View.GONE);
                 }
-            }
-
-            if (geolocation != null) {
-                locationUpdater.updateLocation(geolocation);
             }
 
             return view;
@@ -2403,13 +2378,13 @@ public class CacheDetailActivity extends AbstractActivity {
                 wpNavView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication(geolocation, CacheDetailActivity.this, null, wpt, null);
+                        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), CacheDetailActivity.this, null, wpt, null);
                     }
                 });
                 wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication2(geolocation, CacheDetailActivity.this, null, wpt, null);
+                        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), CacheDetailActivity.this, null, wpt, null);
                         return true;
                     }
                 });

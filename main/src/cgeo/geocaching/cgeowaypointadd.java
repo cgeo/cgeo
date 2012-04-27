@@ -9,6 +9,7 @@ import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,12 +32,10 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class cgeowaypointadd extends AbstractActivity {
+public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoData> {
 
     private String geocode = null;
     private int id = -1;
-    private cgGeo geo = null;
-    private UpdateLocationCallback geoUpdate = new update();
     private ProgressDialog waitDialog = null;
     private cgWaypoint waypoint = null;
     private Geopoint gpTemp = null;
@@ -104,10 +103,6 @@ public class cgeowaypointadd extends AbstractActivity {
         setContentView(R.layout.waypoint_new);
         setTitle("waypoint");
 
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
-
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -170,10 +165,7 @@ public class cgeowaypointadd extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-
-        if (geo == null) {
-            geo = app.startGeo(geoUpdate);
-        }
+        app.addGeoObserver(this);
 
         if (id > 0) {
             if (waitDialog == null) {
@@ -187,28 +179,17 @@ public class cgeowaypointadd extends AbstractActivity {
 
     @Override
     public void onDestroy() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onDestroy();
     }
 
     @Override
     public void onStop() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
+        app.deleteGeoObserver(this);
         super.onPause();
     }
 
@@ -249,23 +230,20 @@ public class cgeowaypointadd extends AbstractActivity {
         distanceUnitSelector.setOnItemSelectedListener(new changeDistanceUnit(this));
     }
 
-    private class update implements UpdateLocationCallback {
+    @Override
+    public void update(final IGeoData geo) {
+        Log.d("cgeowaypointadd.updateLocation called");
+        if (geo.getCoordsNow() == null) {
+            return;
+        }
 
-        @Override
-        public void updateLocation(cgGeo geo) {
-            Log.d("cgeowaypointadd.updateLocation called");
-            if (geo == null || geo.coordsNow == null) {
-                return;
-            }
-
-            try {
-                Button bLat = (Button) findViewById(R.id.buttonLatitude);
-                Button bLon = (Button) findViewById(R.id.buttonLongitude);
-                bLat.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-                bLon.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-            } catch (Exception e) {
-                Log.w("Failed to update location.");
-            }
+        try {
+            Button bLat = (Button) findViewById(R.id.buttonLatitude);
+            Button bLon = (Button) findViewById(R.id.buttonLongitude);
+            bLat.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+            bLon.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+        } catch (Exception e) {
+            Log.w("Failed to update location.");
         }
     }
 
@@ -293,7 +271,7 @@ public class cgeowaypointadd extends AbstractActivity {
                 gp = gpTemp;
             }
             cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, cache, gp, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, cache, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
@@ -378,11 +356,14 @@ public class cgeowaypointadd extends AbstractActivity {
                     showToast(res.getString(e.resource));
                     return;
                 }
-            } else if (geo == null || geo.coordsNow == null) {
-                showToast(res.getString(R.string.err_point_curr_position_unavailable));
-                return;
             } else {
-                coords = geo.coordsNow;
+                final IGeoData geo = app.currentGeo();
+                if (geo.getCoordsNow() == null) {
+                    showToast(res.getString(R.string.err_point_curr_position_unavailable));
+                    return;
+                } else {
+                    coords = geo.getCoordsNow();
+                }
             }
 
             if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
