@@ -50,14 +50,14 @@ public final class CacheListAppFactory extends AbstractAppFactory {
         if (activeApps.size() > 1) {
             SubMenu subMenu = menu.addSubMenu(0, 101, 0,
                     res.getString(R.string.caches_on_map)).setIcon(
-                    android.R.drawable.ic_menu_mapmode);
+                    R.drawable.ic_menu_mapmode);
             for (CacheListApp app : activeApps) {
                 subMenu.add(0, app.getId(), 0, app.getName());
             }
             return subMenu.getItem();
         } else if (activeApps.size() == 1) {
             return menu.add(0, activeApps.get(0).getId(), 0,
-                    activeApps.get(0).getName()).setIcon(android.R.drawable.ic_menu_mapmode);
+                    activeApps.get(0).getName()).setIcon(R.drawable.ic_menu_mapmode);
         }
         return null;
     }

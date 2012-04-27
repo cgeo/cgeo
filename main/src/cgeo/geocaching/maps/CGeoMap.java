@@ -613,15 +613,15 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        SubMenu submenu = menu.addSubMenu(1, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(android.R.drawable.ic_menu_mapmode);
+        SubMenu submenu = menu.addSubMenu(1, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(R.drawable.ic_menu_mapmode);
         addMapViewMenuItems(submenu);
 
         menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
-        menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as).setEnabled(false);
+        menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as).setEnabled(false);
         menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
 
         Strategy strategy = Settings.getLiveMapStrategy();
-        SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy)).setIcon(android.R.drawable.ic_menu_preferences);
+        SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy)).setIcon(R.drawable.ic_menu_preferences);
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
         subMenuStrategy.add(2, MENU_STRATEGY_FASTEST, 0, Strategy.FASTEST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FASTEST);
         subMenuStrategy.add(2, MENU_STRATEGY_FAST, 0, Strategy.FAST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FAST);
@@ -630,7 +630,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         subMenuStrategy.setGroupCheckable(2, true, true);
 
         menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
-        menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(android.R.drawable.ic_menu_agenda);
+        menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(R.drawable.ic_menu_agenda);
 
         return true;
     }

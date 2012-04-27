@@ -40,7 +40,7 @@ public abstract class ExportFactory {
      */
     public static void showExportMenu(final List<cgCache> caches, final Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.export).setIcon(android.R.drawable.ic_menu_share);
+        builder.setTitle(R.string.export).setIcon(R.drawable.ic_menu_share);
 
         final ArrayList<Export> export = new ArrayList<Export>();
         for (Class<? extends Export> exporterClass : exporterClasses) {

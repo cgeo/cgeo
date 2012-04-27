@@ -340,13 +340,13 @@ public class cgeopoint extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
+        menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
 
-        menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+        menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_more);
 
-        menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
+        menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
 
-        menu.add(0, MENU_CLEAR_HISTORY, 0, res.getString(R.string.search_clear_history)).setIcon(android.R.drawable.ic_menu_delete); // clear history
+        menu.add(0, MENU_CLEAR_HISTORY, 0, res.getString(R.string.search_clear_history)).setIcon(R.drawable.ic_menu_delete); // clear history
 
         return true;
     }

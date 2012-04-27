@@ -207,10 +207,10 @@ public class cgeowaypoint extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_ID_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
-        menu.add(0, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-        menu.add(0, MENU_ID_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
-        menu.add(0, MENU_ID_OPEN_GEOCACHE, 0, res.getString(R.string.waypoint_menu_open_cache)).setIcon(android.R.drawable.ic_menu_mylocation); // open geocache
+        menu.add(0, MENU_ID_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
+        menu.add(0, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
+        menu.add(0, MENU_ID_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
+        menu.add(0, MENU_ID_OPEN_GEOCACHE, 0, res.getString(R.string.waypoint_menu_open_cache)).setIcon(R.drawable.ic_menu_mylocation); // open geocache
 
         return true;
     }
