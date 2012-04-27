@@ -107,7 +107,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
     private static final int SUBMENU_MANAGE_LISTS = 55;
     private static final int SUBMENU_MANAGE_OFFLINE = 56;
     private static final int SUBMENU_SORT = 57;
-    private static final int SUBMENU_IMPORT = 59;
     private static final int SUBMENU_MANAGE_HISTORY = 60;
     private static final int MENU_SORT_DATE = 61;
     private static final int MENU_SORT_FINDS = 62;

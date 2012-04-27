@@ -28,7 +28,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -67,7 +66,6 @@ public class cgeo extends AbstractActivity {
     private boolean addressObtaining = false;
     private boolean initialized = false;
 
-    private LocationManager locationManager;
     final private UpdateLocation locationUpdater = new UpdateLocation();
 
     private Handler updateUserInfoHandler = new Handler() {
@@ -224,8 +222,6 @@ public class cgeo extends AbstractActivity {
         } catch (Exception e) {
             // nothing
         }
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         init();
     }

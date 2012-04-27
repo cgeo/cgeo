@@ -8,8 +8,8 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.IObserver;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,7 +34,6 @@ public class cgeoapplication extends Application {
 
     private cgData storage = null;
     private String action = null;
-    private Geopoint lastCoords = null;
     private volatile GeoDataProvider geo;
     private cgDirection dir = null;
     private boolean dirInUse = false;

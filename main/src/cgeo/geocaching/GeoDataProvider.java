@@ -25,8 +25,8 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
     private static final String LAST_LOCATION_PSEUDO_PROVIDER = "last";
     private final LocationManager geoManager;
     private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
-    private final LocationData gpsLocation = new LocationData(LocationProviderType.GPS);
-    private final LocationData netLocation = new LocationData(LocationProviderType.NETWORK);
+    private final LocationData gpsLocation = new LocationData();
+    private final LocationData netLocation = new LocationData();
     private final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
     private final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
     private final Unregisterer unregisterer = new Unregisterer();
@@ -36,12 +36,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
 
     private static class LocationData {
         public Location location;
-        public LocationProviderType provider;
         public long timestamp = 0;
-
-        LocationData(final LocationProviderType provider) {
-            this.provider = provider;
-        }
 
         public void update(final Location location) {
             this.location = location;
@@ -74,7 +69,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
             return this;
         }
 
-        private LocationProviderType getLocationProviderType(final String provider) {
+        private static LocationProviderType getLocationProviderType(final String provider) {
             if (provider.equals(LocationManager.GPS_PROVIDER)) {
                 return LocationProviderType.GPS;
             }

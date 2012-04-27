@@ -361,9 +361,8 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
                 if (geo.getCoords() == null) {
                     showToast(res.getString(R.string.err_point_curr_position_unavailable));
                     return;
-                } else {
-                    coords = geo.getCoords();
                 }
+                coords = geo.getCoords();
             }
 
             if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
