@@ -14,7 +14,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -25,23 +24,39 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
 
     private static final String LAST_LOCATION_PSEUDO_PROVIDER = "last";
     private final LocationManager geoManager;
-    private final AbstractLocationListener networkListener = new NetworkLocationListener();
-    private final AbstractLocationListener gpsListener = new GpsLocationListener();
-    private final GpsStatusListener gpsStatusListener = new GpsStatusListener();
-    private Location locGps = null;
-    private Location locNet = null;
-    private long locGpsLast = 0L;
+    private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
+    private LocationData gpsLocation = new LocationData(LocationProviderType.GPS);
+    private LocationData netLocation = new LocationData(LocationProviderType.NETWORK);
+    private final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
+    private final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
     private GeoData current = new GeoData();
     private final Unregisterer unregisterer = new Unregisterer();
 
+    private static class LocationData {
+        public Location location;
+        public LocationProviderType provider;
+        public long timestamp = 0;
+
+        LocationData(final LocationProviderType provider) {
+            this.provider = provider;
+        }
+
+        public void update(final Location location) {
+            this.location = location;
+            timestamp = System.currentTimeMillis();
+        }
+
+        public boolean isRecent() {
+            return isValid() && System.currentTimeMillis() < timestamp + 30000;
+        }
+
+        public boolean isValid() {
+            return location != null;
+        }
+    }
+
     private static class GeoData implements Cloneable, IGeoData {
         public Location location = null;
-        public LocationProviderType locationProvider = LocationProviderType.LAST;
-        public Geopoint coordsNow = null;
-        public Double altitudeNow = null;
-        public float bearingNow = 0;
-        public float speedNow = 0;
-        public float accuracyNow = -1f;
         public int satellitesVisible = 0;
         public int satellitesFixed = 0;
         public boolean gpsEnabled = false;
@@ -51,24 +66,34 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
             return location;
         }
 
+        private LocationProviderType getLocationProviderType(final String provider) {
+            if (provider.equals(LocationManager.GPS_PROVIDER)) {
+                return LocationProviderType.GPS;
+            }
+            if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
+                return LocationProviderType.NETWORK;
+            }
+            return LocationProviderType.LAST;
+        }
+
         @Override
         public LocationProviderType getLocationProvider() {
-            return locationProvider;
+            return getLocationProviderType(location != null ? location.getProvider() : LAST_LOCATION_PSEUDO_PROVIDER);
         }
 
         @Override
         public Geopoint getCoordsNow() {
-            return coordsNow;
+            return new Geopoint(location);
         }
 
         @Override
         public Double getAltitudeNow() {
-            return altitudeNow;
+            return location.getAltitude();
         }
 
         @Override
         public float getBearingNow() {
-            return bearingNow;
+            return location.getBearing();
         }
 
         @Override
@@ -78,12 +103,12 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
 
         @Override
         public float getSpeedNow() {
-            return speedNow;
+            return location.getSpeed();
         }
 
         @Override
         public float getAccuracyNow() {
-            return accuracyNow;
+            return location.getAccuracy();
         }
 
         @Override
@@ -104,7 +129,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
                 return null;
             }
         }
-    };
+    }
 
     private class Unregisterer extends Thread {
 
@@ -159,7 +184,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
      *
      * @param context the context used to retrieve the system services
      */
-    public GeoDataProvider(final Context context) {
+    GeoDataProvider(final Context context) {
         geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         unregisterer.start();
         // Start with an empty GeoData just in case someone queries it before we get
@@ -170,7 +195,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
     private void registerListeners() {
         geoManager.addGpsStatusListener(gpsStatusListener);
 
-        for (final AbstractLocationListener listener : new AbstractLocationListener[] { networkListener, gpsListener }) {
+        for (final Listener listener : new Listener[] { networkListener, gpsListener }) {
             try {
                 geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
             } catch (final Exception e) {
@@ -200,11 +225,13 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         unregisterer.lateUnregister();
     }
 
-    private static abstract class AbstractLocationListener implements LocationListener {
+    private class Listener implements LocationListener {
         private final String locationProvider;
+        private final LocationData locationData;
 
-        protected AbstractLocationListener(final String provider) {
-            locationProvider = provider;
+        Listener(final String locationProvider, final LocationData locationData) {
+            this.locationProvider = locationProvider;
+            this.locationData = locationData;
         }
 
         @Override
@@ -221,34 +248,12 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         public void onProviderEnabled(final String provider) {
             // nothing
         }
-    }
-
-    private final class GpsLocationListener extends AbstractLocationListener {
-
-        public GpsLocationListener() {
-            super(LocationManager.GPS_PROVIDER);
-        }
 
         @Override
         public void onLocationChanged(final Location location) {
-            locGps = location;
-            locGpsLast = System.currentTimeMillis();
-            selectBest(location.getProvider());
+            locationData.update(location);
+            selectBest();
         }
-    }
-
-    private final class NetworkLocationListener extends AbstractLocationListener {
-
-        protected NetworkLocationListener() {
-            super(LocationManager.NETWORK_PROVIDER);
-        }
-
-        @Override
-        public void onLocationChanged(final Location location) {
-            locNet = location;
-            selectBest(location.getProvider());
-        }
-
     }
 
     private final class GpsStatusListener implements GpsStatus.Listener {
@@ -256,111 +261,71 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         @Override
         public void onGpsStatusChanged(final int event) {
             boolean changed = false;
-            if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
-                final GpsStatus status = geoManager.getGpsStatus(null);
-                final Iterator<GpsSatellite> statusIterator = status.getSatellites().iterator();
-
-                int satellites = 0;
-                int fixed = 0;
-
-                while (statusIterator.hasNext()) {
-                    final GpsSatellite sat = statusIterator.next();
-                    if (sat.usedInFix()) {
-                        fixed++;
+            switch (event) {
+                case GpsStatus.GPS_EVENT_SATELLITE_STATUS: {
+                    final GpsStatus status = geoManager.getGpsStatus(null);
+                    int satellites = 0;
+                    int fixed = 0;
+                    for (final GpsSatellite satellite : status.getSatellites()) {
+                        if (satellite.usedInFix()) {
+                            fixed++;
+                        }
+                        satellites++;
                     }
-                    satellites++;
+                    if (satellites != current.satellitesVisible || fixed != current.satellitesFixed) {
+                        current.satellitesVisible = satellites;
+                        current.satellitesFixed = fixed;
+                        changed = true;
+                    }
+                    break;
                 }
-
-                if (satellites != current.satellitesVisible) {
-                    current.satellitesVisible = satellites;
-                    changed = true;
-                }
-                if (fixed != current.satellitesFixed) {
-                    current.satellitesFixed = fixed;
-                    changed = true;
-                }
-            } else if (event == GpsStatus.GPS_EVENT_STARTED && !current.gpsEnabled) {
-                current.gpsEnabled = true;
-                current.satellitesFixed = 0;
-                current.satellitesVisible = 0;
-                changed = true;
-            } else if (event == GpsStatus.GPS_EVENT_STOPPED && current.gpsEnabled) {
-                current.gpsEnabled = false;
-                current.satellitesFixed = 0;
-                current.satellitesVisible = 0;
-                changed = true;
+                case GpsStatus.GPS_EVENT_STARTED:
+                    if (!current.gpsEnabled) {
+                        current.gpsEnabled = true;
+                        current.satellitesFixed = 0;
+                        current.satellitesVisible = 0;
+                        changed = true;
+                    }
+                    break;
+                case GpsStatus.GPS_EVENT_STOPPED:
+                    if (current.gpsEnabled) {
+                        current.gpsEnabled = false;
+                        current.satellitesFixed = 0;
+                        current.satellitesVisible = 0;
+                        changed = true;
+                    }
+                    break;
             }
 
             if (changed) {
-                selectBest(null);
+                selectBest();
             }
         }
     }
 
-    private void selectBest(final String signallingProvider) {
-        if (locNet != null && locGps == null) { // we have only NET
-            assign(locNet);
+    private LocationData best() {
+        if (gpsLocation.isRecent() || !netLocation.isValid()) {
+            return gpsLocation;
         }
-        else if ((locNet == null && locGps != null) // we have only GPS
-                || (current.satellitesFixed > 0) // GPS seems to be fixed
-                || (signallingProvider != null && signallingProvider.equals(LocationManager.GPS_PROVIDER)) // we have new location from GPS
-                || locGpsLast > System.currentTimeMillis() - 30 * 1000 // GPS was working in last 30 seconds
-        ) {
-            assign(locGps);
+        if (!gpsLocation.isValid()) {
+            return netLocation;
         }
-        else {
-            assign(locNet); // nothing else, using NET
-        }
-        notifyObservers(current.makeImmutable());
+        return gpsLocation.timestamp > netLocation.timestamp ? gpsLocation : netLocation;
     }
 
-    private void assignLastLocation(final Geopoint coords) {
-        if (coords == null) {
+    private void selectBest() {
+        assign(best());
+    }
+
+    private void assign(final LocationData locationData) {
+        if (locationData.location == null) {
             return;
         }
 
-        current.locationProvider = LocationProviderType.LAST;
-        current.coordsNow = coords;
-        current.altitudeNow = null;
-        current.bearingNow = 0f;
-        current.speedNow = 0f;
-        current.accuracyNow = 999f;
-
-        notifyObservers(current.makeImmutable());
-    }
-
-    private void assign(final Location loc) {
-        if (loc == null) {
-            current.locationProvider = LocationProviderType.LAST;
-            return;
-        }
-
-        current.location = loc;
-
-        final String provider = current.location.getProvider();
-        if (provider.equals(LocationManager.GPS_PROVIDER)) {
-            current.locationProvider = LocationProviderType.GPS;
-        } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-            current.locationProvider = LocationProviderType.NETWORK;
-        } else if (provider.equalsIgnoreCase(LAST_LOCATION_PSEUDO_PROVIDER)) {
-            current.locationProvider = LocationProviderType.LAST;
-        }
-
-        current.coordsNow = new Geopoint(current.location.getLatitude(), current.location.getLongitude());
-
-        final Location location = current.location;
-        final LocationProviderType locationProvider = current.locationProvider;
-        current.altitudeNow = location.hasAltitude() && locationProvider != LocationProviderType.LAST ? location.getAltitude() + Settings.getAltCorrection() : null;
-        current.bearingNow = location.hasBearing() && locationProvider != LocationProviderType.LAST ? location.getBearing() : 0f;
-        current.speedNow = location.hasSpeed() && locationProvider != LocationProviderType.LAST ? location.getSpeed() : 0f;
-        current.accuracyNow = location.hasAccuracy() && locationProvider != LocationProviderType.LAST ? location.getAccuracy() : 999f;
-
+        current.location = locationData.location;
         notifyObservers(current.makeImmutable());
 
-        if (locationProvider == LocationProviderType.GPS || locationProvider == LocationProviderType.NETWORK) {
-            // FIXME: should use observer pattern as well
-            Go4Cache.signalCoordinates(current.coordsNow);
-        }
+        Go4Cache.signalCoordinates(current.getCoordsNow());
     }
 
 }
