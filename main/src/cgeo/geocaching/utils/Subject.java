@@ -19,7 +19,7 @@ public class Subject<T> implements ISubject<T> {
     @Override
     public synchronized boolean addObserver(final IObserver<? super T> observer) {
         final boolean added = observers.add(observer);
-        if (added & observers.size() == 1) {
+        if (added && observers.size() == 1) {
             onFirstObserver();
         }
         return added;
