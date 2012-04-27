@@ -15,7 +15,7 @@ public class MemorySubject<T> extends Subject<T> {
      * the data before it got a chance to get updated. Otherwise, <code>null</code> will be returned until updated
      * data is available.
      */
-    protected T memory;
+    private T memory;
 
     @Override
     public synchronized boolean addObserver(final IObserver<? super T> observer) {
@@ -38,7 +38,7 @@ public class MemorySubject<T> extends Subject<T> {
      * @return the initial data set by the subject (which may be <code>null</code>),
      *         or the updated data if it is available
      */
-    public T getMemory() {
+    public synchronized T getMemory() {
         return memory;
     }
 
