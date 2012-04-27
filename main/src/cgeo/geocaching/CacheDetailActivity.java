@@ -702,13 +702,13 @@ public class CacheDetailActivity extends AbstractActivity {
             try {
                 StringBuilder dist = new StringBuilder();
 
-                if (geo.getCoordsNow() != null && cache != null && cache.getCoords() != null) {
-                    dist.append(HumanDistance.getHumanDistance(geo.getCoordsNow().distanceTo(cache.getCoords())));
+                if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
+                    dist.append(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
                 }
 
                 if (cache != null && cache.getElevation() != null) {
-                    if (geo.getAltitudeNow() != null) {
-                        double diff = (cache.getElevation() - geo.getAltitudeNow());
+                    if (geo.getAltitude() != 0.0) {
+                        double diff = cache.getElevation() - geo.getAltitude();
                         if (diff >= 0) {
                             dist.append(" ↗");
                         } else if (diff < 0) {

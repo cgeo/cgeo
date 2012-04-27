@@ -51,7 +51,7 @@ class GoogleNavigationApp extends AbstractNavigationApp {
     }
 
     private static boolean navigateToCoordinates(IGeoData geo, Activity activity, final Geopoint coords) {
-        final Geopoint coordsNow = geo == null ? null : geo.getCoordsNow();
+        final Geopoint coordsNow = geo == null ? null : geo.getCoords();
 
         // Google Navigation
         if (Settings.isUseGoogleNavigation()) {

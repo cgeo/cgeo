@@ -221,12 +221,12 @@ public class cgeoadvsearch extends AbstractActivity implements IObserver<IGeoDat
                 lonEdit = (EditText) findViewById(R.id.longitude);
             }
 
-            if (geo.getCoordsNow() != null) {
+            if (geo.getCoords() != null) {
                 if (latEdit != null) {
-                    latEdit.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                    latEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 }
                 if (lonEdit != null) {
-                    lonEdit.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+                    lonEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
                 }
             }
         } catch (Exception e) {
@@ -266,9 +266,9 @@ public class cgeoadvsearch extends AbstractActivity implements IObserver<IGeoDat
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
             final IGeoData geo = app.currentGeo();
-            if (geo.getCoordsNow() != null) {
-                latView.setText(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE));
-                lonView.setText(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE));
+            if (geo.getCoords() != null) {
+                latView.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
+                lonView.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
             }
         } else {
             try {

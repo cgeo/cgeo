@@ -54,8 +54,8 @@ public class cgeocoords extends Dialog {
 
         if (gp != null) {
             this.gp = gp;
-        } else if (geo != null && geo.getCoordsNow() != null) {
-            this.gp = geo.getCoordsNow();
+        } else if (geo != null && geo.getCoords() != null) {
+            this.gp = geo.getCoords();
         } else {
             this.gp = new Geopoint(0.0, 0.0);
         }
@@ -413,8 +413,8 @@ public class cgeocoords extends Dialog {
                 // Start new format with an acceptable value: either the current one
                 // entered by the user, else our current coordinates, else (0,0).
                 if (!calc(false)) {
-                    if (geo != null && geo.getCoordsNow() != null) {
-                        gp = geo.getCoordsNow();
+                    if (geo != null && geo.getCoords() != null) {
+                        gp = geo.getCoords();
                     } else {
                         gp = new Geopoint(0.0, 0.0);
                     }
@@ -436,12 +436,12 @@ public class cgeocoords extends Dialog {
 
         @Override
         public void onClick(View v) {
-            if (geo == null || geo.getCoordsNow() == null) {
+            if (geo == null || geo.getCoords() == null) {
                 context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
                 return;
             }
 
-            gp = geo.getCoordsNow();
+            gp = geo.getCoords();
             updateGUI();
         }
     }

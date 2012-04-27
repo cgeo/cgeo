@@ -82,17 +82,17 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         }
 
         @Override
-        public Geopoint getCoordsNow() {
+        public Geopoint getCoords() {
             return new Geopoint(location);
         }
 
         @Override
-        public Double getAltitudeNow() {
+        public double getAltitude() {
             return location.getAltitude();
         }
 
         @Override
-        public float getBearingNow() {
+        public float getBearing() {
             return location.getBearing();
         }
 
@@ -102,12 +102,12 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         }
 
         @Override
-        public float getSpeedNow() {
+        public float getSpeed() {
             return location.getSpeed();
         }
 
         @Override
-        public float getAccuracyNow() {
+        public float getAccuracy() {
             return location.getAccuracy();
         }
 
@@ -325,7 +325,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         current.location = locationData.location;
         notifyObservers(current.makeImmutable());
 
-        Go4Cache.signalCoordinates(current.getCoordsNow());
+        Go4Cache.signalCoordinates(current.getCoords());
     }
 
 }

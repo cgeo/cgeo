@@ -9,11 +9,11 @@ public interface IGeoData {
 
     public Location getLocation();
     public LocationProviderType getLocationProvider();
-    public Geopoint getCoordsNow();
-    public Double getAltitudeNow();
-    public float getBearingNow();
-    public float getSpeedNow();
-    public float getAccuracyNow();
+    public Geopoint getCoords();
+    public double getAltitude();
+    public float getBearing();
+    public float getSpeed();
+    public float getAccuracy();
     public boolean getGpsEnabled();
     public int getSatellitesVisible();
     public int getSatellitesFixed();

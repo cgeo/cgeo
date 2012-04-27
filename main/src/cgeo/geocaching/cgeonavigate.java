@@ -262,7 +262,7 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
     }
 
     private void updateDistanceInfo(final IGeoData geo) {
-        if (geo.getCoordsNow() == null || dstCoords == null) {
+        if (geo.getCoords() == null || dstCoords == null) {
             return;
         }
 
@@ -273,8 +273,8 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
             headingView = (TextView) findViewById(R.id.heading);
         }
 
-        cacheHeading = geo.getCoordsNow().bearingTo(dstCoords);
-        distanceView.setText(HumanDistance.getHumanDistance(geo.getCoordsNow().distanceTo(dstCoords)));
+        cacheHeading = geo.getCoords().bearingTo(dstCoords);
+        distanceView.setText(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(dstCoords)));
         headingView.setText(Math.round(cacheHeading) + "°");
     }
 
@@ -288,7 +288,7 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
                 navLocation = (TextView) findViewById(R.id.nav_location);
             }
 
-            if (geo.getCoordsNow() != null) {
+            if (geo.getCoords() != null) {
                 String satellites = null;
                 if (geo.getSatellitesFixed() > 0) {
                     satellites = res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible();
@@ -300,21 +300,21 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
                 navSatellites.setText(satellites);
                 navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
-                if (geo.getAccuracyNow() >= 0) {
+                if (geo.getAccuracy() >= 0) {
                     if (Settings.isUseMetricUnits()) {
-                        navAccuracy.setText("±" + Math.round(geo.getAccuracyNow()) + " m");
+                        navAccuracy.setText("±" + Math.round(geo.getAccuracy()) + " m");
                     } else {
-                        navAccuracy.setText("±" + Math.round(geo.getAccuracyNow() * IConversion.METERS_TO_FEET) + " ft");
+                        navAccuracy.setText("±" + Math.round(geo.getAccuracy() * IConversion.METERS_TO_FEET) + " ft");
                     }
                 } else {
                     navAccuracy.setText(null);
                 }
 
-                if (geo.getAltitudeNow() != null) {
-                    final String humanAlt = HumanDistance.getHumanDistance(geo.getAltitudeNow().floatValue() / 1000);
-                    navLocation.setText(geo.getCoordsNow() + " | " + humanAlt);
+                if (geo.getAltitude() != 0.0f) {
+                    final String humanAlt = HumanDistance.getHumanDistance((float) geo.getAltitude() / 1000);
+                    navLocation.setText(geo.getCoords() + " | " + humanAlt);
                 } else {
-                    navLocation.setText(geo.getCoordsNow().toString());
+                    navLocation.setText(geo.getCoords().toString());
                 }
 
                 updateDistanceInfo(geo);
@@ -324,8 +324,8 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
                 navLocation.setText(res.getString(R.string.loc_trying));
             }
 
-            if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) { // use GPS when speed is higher than 18 km/h
-                northHeading = geo.getBearingNow();
+            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                northHeading = geo.getBearing();
             }
         } catch (Exception e) {
             Log.w("Failed to LocationUpdater location.");
@@ -340,7 +340,7 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
                 return;
             }
 
-            if (app.currentGeo().getSpeedNow() <= 5) { // use compass when speed is lower than 18 km/h
+            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
                 northHeading = dir.directionNow;
             }
         }

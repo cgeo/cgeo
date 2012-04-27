@@ -871,7 +871,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     // Set center of map to my location if appropriate.
     private void myLocationInMiddle(final IGeoData geo) {
         if (followMyLocation) {
-            centerMap(geo.getCoordsNow());
+            centerMap(geo.getCoords());
         }
     }
 
@@ -891,7 +891,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     overlayPosition.setCoordinates(geo.getLocation());
                 }
 
-                if (geo.getCoordsNow() != null) {
+                if (geo.getCoords() != null) {
                     if (followMyLocation) {
                         myLocationInMiddle(geo);
                     } else {
@@ -899,8 +899,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                 }
 
-                if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) { // use GPS when speed is higher than 18 km/h
-                    overlayPosition.setHeading(geo.getBearingNow());
+                if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                    overlayPosition.setHeading(geo.getBearing());
                     repaintRequired = true;
                 }
 
@@ -923,7 +923,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 return;
             }
 
-            if (overlayPosition != null && mapView != null && (app.currentGeo().getSpeedNow() <= 5)) { // use compass when speed is lower than 18 km/h
+            if (overlayPosition != null && mapView != null && (app.currentGeo().getSpeed() <= 5)) { // use compass when speed is lower than 18 km/h
                 overlayPosition.setHeading(dir.directionNow);
                 mapView.repaintRequired(overlayPosition);
             }

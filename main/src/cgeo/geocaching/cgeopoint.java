@@ -471,8 +471,8 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
     @Override
     public void update(final IGeoData geo) {
         try {
-            latButton.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-            lonButton.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+            latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+            lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
         } catch (final Exception e) {
             Log.w("Failed to update location.");
         }
@@ -481,7 +481,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
     private class currentListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            final Geopoint coords = app.currentGeo().getCoordsNow();
+            final Geopoint coords = app.currentGeo().getCoords();
             if (coords == null) {
                 showToast(res.getString(R.string.err_point_unknown_position));
                 return;
@@ -518,12 +518,12 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
                 return null;
             }
         } else {
-            if (app.currentGeo().getCoordsNow() == null) {
+            if (app.currentGeo().getCoords() == null) {
                 showToast(res.getString(R.string.err_point_curr_position_unavailable));
                 return null;
             }
 
-            coords = app.currentGeo().getCoordsNow();
+            coords = app.currentGeo().getCoords();
         }
 
         if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {

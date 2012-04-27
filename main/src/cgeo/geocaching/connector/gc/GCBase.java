@@ -4,7 +4,6 @@ import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeo;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -69,7 +68,7 @@ public class GCBase {
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
         Strategy strategy = Settings.getLiveMapStrategy();
         if (strategy == Strategy.AUTO) {
-            float speedNow = cgeoapplication.getInstance().currentGeo().getSpeedNow();
+            float speedNow = cgeoapplication.getInstance().currentGeo().getSpeed();
             strategy = speedNow >= 8 ? Strategy.FAST : Strategy.DETAILED; // 8 m/s = 30 km/h
         }
         // return searchByViewport(viewport, tokens, strategy);
@@ -78,7 +77,7 @@ public class GCBase {
         {
             SearchResult result = searchByViewport(viewport, tokens, strategy);
             String text = Formatter.SEPARATOR + strategy.getL10n() + Formatter.SEPARATOR;
-            int speed = (int) cgeoapplication.getInstance().currentGeo().getSpeedNow();
+            int speed = (int) cgeoapplication.getInstance().currentGeo().getSpeed();
             if (Settings.isUseMetricUnits()) {
                 text += speed + " km/h";
             } else {

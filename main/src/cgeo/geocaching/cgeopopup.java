@@ -501,8 +501,8 @@ public class cgeopopup extends AbstractActivity {
         @Override
         protected void updateLocation(final IGeoData geo) {
             try {
-                if (geo.getCoordsNow() != null && cache != null && cache.getCoords() != null) {
-                    cacheDistance.setText(HumanDistance.getHumanDistance(geo.getCoordsNow().distanceTo(cache.getCoords())));
+                if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
+                    cacheDistance.setText(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }
             } catch (Exception e) {

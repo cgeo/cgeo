@@ -233,15 +233,15 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
     @Override
     public void update(final IGeoData geo) {
         Log.d("cgeowaypointadd.updateLocation called");
-        if (geo.getCoordsNow() == null) {
+        if (geo.getCoords() == null) {
             return;
         }
 
         try {
             Button bLat = (Button) findViewById(R.id.buttonLatitude);
             Button bLon = (Button) findViewById(R.id.buttonLongitude);
-            bLat.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-            bLon.setHint(geo.getCoordsNow().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+            bLat.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+            bLon.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
         } catch (Exception e) {
             Log.w("Failed to update location.");
         }
@@ -358,11 +358,11 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
                 }
             } else {
                 final IGeoData geo = app.currentGeo();
-                if (geo.getCoordsNow() == null) {
+                if (geo.getCoords() == null) {
                     showToast(res.getString(R.string.err_point_curr_position_unavailable));
                     return;
                 } else {
-                    coords = geo.getCoordsNow();
+                    coords = geo.getCoords();
                 }
             }
 

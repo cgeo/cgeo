@@ -115,7 +115,7 @@ public class cgeo extends AbstractActivity {
                         addText.append(address.getAdminArea());
                     }
 
-                    addCoords = app.currentGeo().getCoordsNow();
+                    addCoords = app.currentGeo().getCoords();
 
                     TextView navLocation = (TextView) findViewById(R.id.nav_location);
                     navLocation.setText(addText.toString());
@@ -565,7 +565,7 @@ public class cgeo extends AbstractActivity {
             final TextView navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
             final TextView navLocation = (TextView) findViewById(R.id.nav_location);
             try {
-                if (geo.getCoordsNow() != null) {
+                if (geo.getCoords() != null) {
                     if (!nearestView.isClickable()) {
                         nearestView.setFocusable(true);
                         nearestView.setClickable(true);
@@ -579,12 +579,12 @@ public class cgeo extends AbstractActivity {
 
                     navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
-                    if (geo.getAccuracyNow() >= 0) {
-                        int speed = Math.round(geo.getSpeedNow()) * 60 * 60 / 1000;
+                    if (geo.getAccuracy() >= 0) {
+                        int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
                         if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + Math.round(geo.getAccuracyNow()) + " m" + Formatter.SEPARATOR + speed + " km/h");
+                            navAccuracy.setText("±" + Math.round(geo.getAccuracy()) + " m" + Formatter.SEPARATOR + speed + " km/h");
                         } else {
-                            navAccuracy.setText("±" + Math.round(geo.getAccuracyNow() * IConversion.METERS_TO_FEET) + " ft" + Formatter.SEPARATOR + speed / IConversion.MILES_TO_KILOMETER + " mph");
+                            navAccuracy.setText("±" + Math.round(geo.getAccuracy() * IConversion.METERS_TO_FEET) + " ft" + Formatter.SEPARATOR + speed / IConversion.MILES_TO_KILOMETER + " mph");
                         }
                     } else {
                         navAccuracy.setText(null);
@@ -594,15 +594,15 @@ public class cgeo extends AbstractActivity {
                         if (addCoords == null) {
                             navLocation.setText(res.getString(R.string.loc_no_addr));
                         }
-                        if (addCoords == null || (geo.getCoordsNow().distanceTo(addCoords) > 0.5 && !addressObtaining)) {
+                        if (addCoords == null || (geo.getCoords().distanceTo(addCoords) > 0.5 && !addressObtaining)) {
                             (new ObtainAddressThread()).start();
                         }
                     } else {
-                        if (geo.getAltitudeNow() != null) {
-                            final String humanAlt = HumanDistance.getHumanDistance(geo.getAltitudeNow().floatValue() / 1000);
-                            navLocation.setText(geo.getCoordsNow() + " | " + humanAlt);
+                        if (geo.getAltitude() != 0.0) {
+                            final String humanAlt = HumanDistance.getHumanDistance((float) geo.getAltitude() / 1000);
+                            navLocation.setText(geo.getCoords() + " | " + humanAlt);
                         } else {
-                            navLocation.setText(geo.getCoordsNow().toString());
+                            navLocation.setText(geo.getCoords().toString());
                         }
                     }
                 } else {
@@ -636,12 +636,12 @@ public class cgeo extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindNearest(View v) {
-        if (app.currentGeo().getCoordsNow() == null) {
+        if (app.currentGeo().getCoords() == null) {
             return;
         }
 
         findViewById(R.id.nearest).setPressed(true);
-        cgeocaches.startActivityNearest(this, app.currentGeo().getCoordsNow());
+        cgeocaches.startActivityNearest(this, app.currentGeo().getCoords());
     }
 
     /**
@@ -810,7 +810,7 @@ public class cgeo extends AbstractActivity {
 
             try {
                 final Geocoder geocoder = new Geocoder(cgeo.this, Locale.getDefault());
-                final Geopoint coords = app.currentGeo().getCoordsNow();
+                final Geopoint coords = app.currentGeo().getCoords();
                 addresses = geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1);
             } catch (Exception e) {
                 Log.i("Failed to obtain address");

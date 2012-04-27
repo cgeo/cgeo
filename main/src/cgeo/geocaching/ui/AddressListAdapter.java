@@ -27,7 +27,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     public AddressListAdapter(final Context context) {
         super(context, 0);
         inflater = ((Activity) context).getLayoutInflater();
-        location = cgeoapplication.getInstance().currentGeo().getCoordsNow();
+        location = cgeoapplication.getInstance().currentGeo().getCoords();
     }
 
     @Override

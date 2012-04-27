@@ -209,7 +209,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
                     return;
                 }
 
-                final Geopoint coordsNow = app.currentGeo().getCoordsNow();
+                final Geopoint coordsNow = app.currentGeo().getCoords();
                 if (coordsNow != null) {
                     adapter.setActualCoordinates(coordsNow);
                     adapter.setActualHeading(northHeading);
@@ -277,7 +277,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
                     return;
                 }
 
-                final Geopoint coordsNow = app.currentGeo().getCoordsNow();
+                final Geopoint coordsNow = app.currentGeo().getCoords();
                 if (coordsNow != null) {
                     adapter.setActualCoordinates(coordsNow);
                     adapter.setActualHeading(northHeading);
@@ -336,7 +336,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
                     }
                 }
 
-                final Geopoint coordsNow = app.currentGeo().getCoordsNow();
+                final Geopoint coordsNow = app.currentGeo().getCoords();
                 if (coordsNow != null) {
                     adapter.setActualCoordinates(coordsNow);
                     adapter.setActualHeading(northHeading);
@@ -652,7 +652,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
 
         if (adapter != null) {
             adapter.setSelectMode(false, true);
-            final Geopoint coordsNow = app.currentGeo().getCoordsNow();
+            final Geopoint coordsNow = app.currentGeo().getCoords();
             if (coordsNow != null) {
                 adapter.setActualCoordinates(coordsNow);
                 adapter.setActualHeading(northHeading);
@@ -1203,7 +1203,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
         }
         adapter.reFilter();
 
-        adapter.setActualCoordinates(app.currentGeo().getCoordsNow());
+        adapter.setActualCoordinates(app.currentGeo().getCoords());
 
         if (dir != null) {
             adapter.setActualHeading(dir.directionNow);
@@ -1424,13 +1424,13 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
         }
 
         try {
-            if (cacheList != null && geo.getCoordsNow() != null) {
-                adapter.setActualCoordinates(geo.getCoordsNow());
+            if (cacheList != null && geo.getCoords() != null) {
+                adapter.setActualCoordinates(geo.getCoords());
             }
 
-            if (!Settings.isUseCompass() || geo.getSpeedNow() > 5) { // use GPS when speed is higher than 18 km/h
+            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
                 if (!Settings.isUseCompass()) {
-                    adapter.setActualHeading(geo.getBearingNow());
+                    adapter.setActualHeading(geo.getBearing());
                 }
                 if (northHeading != null) {
                     adapter.setActualHeading(northHeading);
@@ -1453,7 +1453,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
             }
 
             northHeading = dir.directionNow;
-            if (northHeading != null && adapter != null && (app.currentGeo().getSpeedNow() <= 5)) { // use compass when speed is lower than 18 km/h) {
+            if (northHeading != null && adapter != null && (app.currentGeo().getSpeed() <= 5)) { // use compass when speed is lower than 18 km/h) {
                 adapter.setActualHeading(northHeading);
             }
         }
