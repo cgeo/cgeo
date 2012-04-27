@@ -145,7 +145,7 @@ public class LocalStorage {
      *            the entity whose content will be saved
      * @param targetFile
      *            the target file, which will be created if necessary
-     * @return true if the operation was successful, false otherwise
+     * @return true if the operation was successful, false otherwise, in which case the file will not exist
      */
     public static boolean saveEntityToFile(final HttpResponse response, final File targetFile) {
         if (response == null) {
@@ -154,8 +154,8 @@ public class LocalStorage {
 
         try {
             final boolean saved = saveToFile(response.getEntity().getContent(), targetFile);
-            saveHeader("etag", response, targetFile);
-            saveHeader("last-modified", response, targetFile);
+            saveHeader("etag", saved ? response : null, targetFile);
+            saveHeader("last-modified", saved ? response : null, targetFile);
             return saved;
         } catch (IOException e) {
             Log.e("LocalStorage.saveEntityToFile", e);
@@ -165,7 +165,7 @@ public class LocalStorage {
     }
 
     private static void saveHeader(final String name, final HttpResponse response, final File baseFile) {
-        final Header header = response.getFirstHeader(name);
+        final Header header = response != null ? response.getFirstHeader(name) : null;
         final File file = filenameForHeader(baseFile, name);
         if (header == null) {
             file.delete();
@@ -209,6 +209,9 @@ public class LocalStorage {
 
     /**
      * Save an HTTP response to a file.
+     * <p/>
+     * If the response could not be saved to the file due, for example, to a network error,
+     * the file will not exist when this method returns.
      *
      * @param entity
      *            the entity whose content will be saved
@@ -224,16 +227,18 @@ public class LocalStorage {
         try {
             try {
                 final FileOutputStream fos = new FileOutputStream(targetFile);
-                try {
-                    return copy(inputStream, fos);
-                } finally {
-                    fos.close();
+                final boolean written = copy(inputStream, fos);
+                fos.close();
+                if (!written) {
+                    targetFile.delete();
                 }
+                return written;
             } finally {
                 inputStream.close();
             }
         } catch (IOException e) {
             Log.e("LocalStorage.saveToFile", e);
+            targetFile.delete();
         }
         return false;
     }
