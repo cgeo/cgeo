@@ -61,12 +61,7 @@ public class LocalStorage {
      */
     static String getExtension(final String url) {
         final String urlExt = StringUtils.substringAfterLast(url, ".");
-        if (urlExt.length() > 4) {
-            return "";
-        } else if (urlExt.length() > 0) {
-            return "." + urlExt;
-        }
-        return "";
+        return urlExt.length() >= 1 && urlExt.length() <= 4 ? "." + urlExt : "";
     }
 
     /**
