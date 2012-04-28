@@ -32,4 +32,10 @@ public class OXConnector extends AbstractConnector {
         return "www.opencaching.com";
     }
 
+    @Override
+    public String getLicenseText(cgCache cache) {
+        // NOT TO BE TRANSLATED
+        return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons BY-SA 3.0 License";
+    }
+
 }
