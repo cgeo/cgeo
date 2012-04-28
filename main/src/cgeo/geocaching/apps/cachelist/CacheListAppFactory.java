@@ -8,8 +8,6 @@ import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import android.app.Activity;
 import android.content.res.Resources;
 import android.view.Menu;
@@ -20,16 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class CacheListAppFactory extends AbstractAppFactory {
-    private static CacheListApp[] apps = new CacheListApp[] {};
-
-    private static CacheListApp[] getMultiPointNavigationApps() {
-        if (ArrayUtils.isEmpty(apps)) {
-            apps = new CacheListApp[] {
-                    new InternalCacheListMap(),
-                    new LocusCacheListApp(false),
-                    new LocusCacheListApp(true) };
-        }
-        return apps;
+    private static class LazyHolder {
+        public static final CacheListApp[] apps = {
+                new InternalCacheListMap(),
+                new LocusCacheListApp(false),
+                new LocusCacheListApp(true)
+        };
     }
 
     /**
@@ -38,34 +32,34 @@ public final class CacheListAppFactory extends AbstractAppFactory {
      * @param res
      * @return the added menu item (also for a sub menu, then the menu item in the parent menu is returned)
      */
-    public static MenuItem addMenuItems(Menu menu,
-            Activity activity, Resources res) {
-        List<CacheListApp> activeApps = new ArrayList<CacheListApp>();
-        for (CacheListApp app : getMultiPointNavigationApps()) {
+    public static MenuItem addMenuItems(final Menu menu, final Activity activity, final Resources res) {
+        final List<CacheListApp> activeApps = new ArrayList<CacheListApp>(LazyHolder.apps.length);
+        for (final CacheListApp app : LazyHolder.apps) {
             if (app.isInstalled(activity)) {
                 activeApps.add(app);
             }
         }
         // use a new sub menu, if more than one app is available
-        if (activeApps.size() > 1) {
-            SubMenu subMenu = menu.addSubMenu(0, 101, 0,
-                    res.getString(R.string.caches_on_map)).setIcon(
-                    android.R.drawable.ic_menu_mapmode);
-            for (CacheListApp app : activeApps) {
-                subMenu.add(0, app.getId(), 0, app.getName());
-            }
-            return subMenu.getItem();
-        } else if (activeApps.size() == 1) {
-            return menu.add(0, activeApps.get(0).getId(), 0,
-                    activeApps.get(0).getName()).setIcon(android.R.drawable.ic_menu_mapmode);
+        switch (activeApps.size()) {
+            case 0:
+                return null;
+            case 1:
+                return menu.add(0, activeApps.get(0).getId(), 0,
+                        activeApps.get(0).getName()).setIcon(android.R.drawable.ic_menu_mapmode);
+            default:
+                final SubMenu subMenu = menu.addSubMenu(0, 101, 0,
+                        res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
+                for (final CacheListApp app : activeApps) {
+                    subMenu.add(0, app.getId(), 0, app.getName());
+                }
+                return subMenu.getItem();
         }
-        return null;
     }
 
     public static boolean onMenuItemSelected(final MenuItem item,
             final IGeoData geo, final List<cgCache> caches, final IAbstractActivity activity,
             final SearchResult search) {
-        CacheListApp app = (CacheListApp) getAppFromMenuItem(item, apps);
+        final CacheListApp app = (CacheListApp) getAppFromMenuItem(item, LazyHolder.apps);
         if (app != null) {
             try {
                 boolean result = app.invoke(geo, caches, (Activity) activity, search);
