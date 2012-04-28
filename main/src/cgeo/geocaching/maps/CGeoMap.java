@@ -1660,12 +1660,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      *            Waypoint. Mutally exclusive with cache
      * @return
      */
-    private CachesOverlayItemImpl getItem(IWaypoint coord, cgCache cache, cgWaypoint waypoint) {
+    private CachesOverlayItemImpl getItem(final IWaypoint coord, final cgCache cache, final cgWaypoint waypoint) {
         if (cache != null) {
-
-            CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, cache.getType());
-
-            int hashcode = new HashCodeBuilder()
+            final CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, cache.getType());
+            final int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
                 .append(cache.getType().id)
                     .append(cache.isDisabled() || cache.isArchived())
@@ -1677,23 +1675,20 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     .append(cache.getListId() > 0)
                 .toHashCode();
 
-            LayerDrawable ldFromCache = CGeoMap.overlaysCache.get(hashcode);
+            final LayerDrawable ldFromCache = CGeoMap.overlaysCache.get(hashcode);
             if (ldFromCache != null) {
                 item.setMarker(ldFromCache);
                 return item;
             }
 
-            ArrayList<Drawable> layers = new ArrayList<Drawable>();
-            ArrayList<int[]> insets = new ArrayList<int[]>();
-
+            // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
+            final ArrayList<Drawable> layers = new ArrayList<Drawable>(9);
+            final ArrayList<int[]> insets = new ArrayList<int[]>(8);
 
             // background: disabled or not
-            Drawable marker = getResources().getDrawable(R.drawable.marker);
-            if (cache.isDisabled() || cache.isArchived()) {
-                marker = getResources().getDrawable(R.drawable.marker_disabled);
-            }
+            final Drawable marker = getResources().getDrawable(cache.isDisabled() || cache.isArchived() ? R.drawable.marker_disabled : R.drawable.marker);
             layers.add(marker);
-            int resolution = marker.getIntrinsicWidth() > 40 ? 1 : 0;
+            final int resolution = marker.getIntrinsicWidth() > 40 ? 1 : 0;
             // reliable or not
             if (!cache.isReliableLatLon()) {
                 insets.add(INSET_RELIABLE[resolution]);
@@ -1703,7 +1698,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             layers.add(getResources().getDrawable(cache.getType().markerId));
             insets.add(INSET_TYPE[resolution]);
             // own
-            if ( cache.isOwn() ) {
+            if (cache.isOwn()) {
                 layers.add(getResources().getDrawable(R.drawable.marker_own));
                 insets.add(INSET_OWN[resolution]);
                 // if not, checked if stored
@@ -1731,11 +1726,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 insets.add(INSET_PERSONALNOTE[resolution]);
             }
 
-
-            LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
+            final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
 
             int index = 1;
-            for ( int[] inset : insets) {
+            for (final int[] inset : insets) {
                 ld.setLayerInset(index++, inset[0], inset[1], inset[2], inset[3]);
             }
 
@@ -1743,10 +1737,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
             item.setMarker(ld);
             return item;
+        }
 
-        } else if (waypoint != null) {
-
-            CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, null);
+        if (waypoint != null) {
+            final CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, null);
             Drawable[] layers = new Drawable[2];
             layers[0] = getResources().getDrawable(R.drawable.marker);
             layers[1] = getResources().getDrawable(waypoint.getWaypointType().markerId);
@@ -1762,7 +1756,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         return null;
-
     }
 
 }
