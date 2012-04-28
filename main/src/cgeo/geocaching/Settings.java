@@ -430,6 +430,15 @@ public final class Settings {
         });
     }
 
+    public static boolean isValidMapFile() {
+        return checkMapfile(getMapFile());
+    }
+
+    private static boolean checkMapfile(final String mapFileIn) {
+
+        return MapsforgeMapProvider.isValidMapFile(mapFileIn);
+    }
+
     public static boolean isValidMapFile(final String mapFileIn) {
         return MapsforgeMapProvider.isValidMapFile(mapFileIn);
     }
@@ -799,7 +808,7 @@ public final class Settings {
     }
 
     public static void setMapSource(final int newMapSource) {
-        if (!MapProviderFactory.isSameProvider(getMapSource(), newMapSource)) {
+        if (!MapProviderFactory.isSameActivity(getMapSource(), newMapSource)) {
             mapProvider = null;
         }
         editSharedSettings(new PrefRunnable() {
