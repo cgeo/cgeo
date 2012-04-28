@@ -410,23 +410,22 @@ public class cgeo extends AbstractActivity {
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {
         final int id = item.getItemId();
+        if (id < 0) {
+            return false;
+        }
 
         if (id == 0) {
             Settings.setCacheType(CacheType.ALL);
             setFilterTitle();
-
-            return true;
         } else if (id > MENU_OPEN_LIST) {
-            int listId = id - MENU_OPEN_LIST;
-            Settings.saveLastList(listId);
+            Settings.saveLastList(id - MENU_OPEN_LIST);
             cgeocaches.startActivityOffline(this);
-            return true;
-        } else if (id > 0) {
+        } else {
             final String itemTitle = item.getTitle().toString();
             CacheType cacheType = CacheType.ALL;
-            for (CacheType ct : CacheType.values()) {
+            for (final CacheType ct : CacheType.values()) {
                 if (ct.getL10n().equalsIgnoreCase(itemTitle)) {
                     cacheType = ct;
                     break;
@@ -434,11 +433,9 @@ public class cgeo extends AbstractActivity {
             }
             Settings.setCacheType(cacheType);
             setFilterTitle();
-
-            return true;
         }
 
-        return false;
+        return true;
     }
 
     private void setFilterTitle() {
