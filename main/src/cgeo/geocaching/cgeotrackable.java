@@ -88,7 +88,7 @@ public class cgeotrackable extends AbstractActivity {
                 addDetail(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown));
 
                 // trackable type
-                String tbType = null;
+                String tbType;
                 if (StringUtils.isNotBlank(trackable.getType())) {
                     tbType = Html.fromHtml(trackable.getType()).toString();
                 } else {
@@ -111,7 +111,7 @@ public class cgeotrackable extends AbstractActivity {
                         trackable.getSpottedType() == cgTrackable.SPOTTED_UNKNOWN ||
                         trackable.getSpottedType() == cgTrackable.SPOTTED_OWNER
                 ) {
-                    String text = null;
+                    String text;
 
                     if (trackable.getSpottedType() == cgTrackable.SPOTTED_CACHE) {
                         text = res.getString(R.string.trackable_spotted_in_cache) + " " + Html.fromHtml(trackable.getSpottedName()).toString();
@@ -207,7 +207,7 @@ public class cgeotrackable extends AbstractActivity {
 
                         @Override
                         public void run() {
-                            BitmapDrawable image = null;
+                            BitmapDrawable image;
                             try {
                                 HtmlImage imgGetter = new HtmlImage(cgeotrackable.this, geocode, true, 0, false);
 
@@ -555,7 +555,7 @@ public class cgeotrackable extends AbstractActivity {
                 return;
             }
 
-            BitmapDrawable image = null;
+            BitmapDrawable image;
             try {
                 HtmlImage imgGetter = new HtmlImage(cgeotrackable.this, trackable.getGeocode(), false, 0, false);
 

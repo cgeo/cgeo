@@ -59,7 +59,7 @@ public abstract class MockedCache implements ICache {
             final BufferedReader br = new BufferedReader(new InputStreamReader(is), 150000);
 
             final StringBuilder buffer = new StringBuilder();
-            String line = null;
+            String line;
 
             while ((line = br.readLine()) != null) {
                 buffer.append(line).append('\n');

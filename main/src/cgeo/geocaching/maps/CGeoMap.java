@@ -1329,7 +1329,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             List<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
 
             int counter = 0;
-            OtherCachersOverlayItemImpl item = null;
+            OtherCachersOverlayItemImpl item;
 
             for (Go4CacheUser userOne : users) {
                 if (userOne.getCoords() == null) {

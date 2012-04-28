@@ -98,7 +98,7 @@ public final class GCVote {
                 return null;
             }
 
-            String voteData = null;
+            String voteData;
             final Matcher matcherVoteElement = patternVoteElement.matcher(page);
             while (matcherVoteElement.find()) {
                 voteData = matcherVoteElement.group(1);

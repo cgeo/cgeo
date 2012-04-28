@@ -751,7 +751,7 @@ public class cgData {
                     "100");
 
             if (cursor != null) {
-                int index = 0;
+                int index;
 
                 if (cursor.getCount() > 0) {
                     cursor.moveToFirst();
@@ -812,7 +812,7 @@ public class cgData {
             }
 
             if (cursor != null) {
-                int index = 0;
+                int index;
                 cnt = cursor.getCount();
 
                 if (cnt > 0) {
@@ -863,7 +863,7 @@ public class cgData {
     public boolean isOffline(String geocode, String guid) {
         init();
 
-        Cursor cursor = null;
+        Cursor cursor;
         long listId = StoredList.TEMPORARY_LIST_ID;
 
         try {
@@ -893,7 +893,7 @@ public class cgData {
 
             if (cursor != null) {
                 final int cnt = cursor.getCount();
-                int index = 0;
+                int index;
 
                 if (cnt > 0) {
                     cursor.moveToFirst();
@@ -2100,8 +2100,8 @@ public class cgData {
         }
         init();
 
-        String listSql = null;
-        String listSqlW = null;
+        String listSql;
+        String listSqlW;
         if (list == 0) {
             listSql = " where reason >= 1";
             listSqlW = " and reason >= 1";
@@ -2114,7 +2114,7 @@ public class cgData {
 
         int count = 0;
         try {
-            String sql = "select count(_id) from " + dbTableCaches; // this default is not used, but we like to have variables initialized
+            String sql; // this default is not used, but we like to have variables initialized
             if (!detailedOnly) {
                 if (cacheType == CacheType.ALL) {
                     sql = "select count(_id) from " + dbTableCaches + listSql;
@@ -2367,7 +2367,7 @@ public class cgData {
 
         Log.d("Database clean: started");
 
-        Cursor cursor = null;
+        Cursor cursor;
         Set<String> geocodes = new HashSet<String>();
 
         try {

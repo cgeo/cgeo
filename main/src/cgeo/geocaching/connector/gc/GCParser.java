@@ -627,8 +627,8 @@ public abstract class GCParser {
         }
 
         // waypoints
-        int wpBegin = 0;
-        int wpEnd = 0;
+        int wpBegin;
+        int wpEnd;
 
         wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
         if (wpBegin != -1) { // parse waypoints
@@ -991,7 +991,7 @@ public abstract class GCParser {
                     final StringBuilder hdnSelected = new StringBuilder();
 
                     for (TrackableLog tb : trackables) {
-                        String ctl = null;
+                        String ctl;
                         final String action = Integer.toString(tb.id) + tb.action.action;
 
                         if (tb.ctl < 10) {
@@ -1350,7 +1350,7 @@ public abstract class GCParser {
      *            retrieve friend logs
      */
     private static List<LogEntry> loadLogsFromDetails(final String page, final cgCache cache, final boolean friends, final boolean getDataFromPage) {
-        String rawResponse = null;
+        String rawResponse;
 
         if (!getDataFromPage) {
             final Matcher userTokenMatcher = GCConstants.PATTERN_USERTOKEN2.matcher(page);

@@ -289,7 +289,7 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
             }
 
             if (geo.getCoords() != null) {
-                String satellites = null;
+                String satellites;
                 if (geo.getSatellitesFixed() > 0) {
                     satellites = res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible();
                 } else if (geo.getSatellitesVisible() >= 0) {

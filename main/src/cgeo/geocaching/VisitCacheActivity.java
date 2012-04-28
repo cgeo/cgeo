@@ -295,7 +295,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        SubMenu menuLog = null;
+        SubMenu menuLog;
 
         menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(android.R.drawable.ic_menu_add);
         for (LogTemplate template : LogTemplateProvider.getTemplates()) {

@@ -367,7 +367,7 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
 
             if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
                 // bearing & distance
-                double bearing = 0;
+                double bearing;
                 try {
                     bearing = Double.parseDouble(bearingText);
                 } catch (NumberFormatException e) {

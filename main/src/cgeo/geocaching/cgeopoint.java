@@ -495,8 +495,8 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
     }
 
     private Geopoint getDestination() {
-        Geopoint result = null;
-        Geopoint coords = null;
+        Geopoint result;
+        Geopoint coords;
 
         String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
         // combine distance from EditText and distanceUnit saved from Spinner
@@ -528,7 +528,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
 
         if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
-            double bearing = 0;
+            double bearing;
             try {
                 bearing = Double.parseDouble(bearingText);
             } catch (NumberFormatException e) {

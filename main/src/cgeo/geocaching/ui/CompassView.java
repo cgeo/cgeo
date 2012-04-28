@@ -209,8 +209,8 @@ public class CompassView extends View {
         int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
         int canvasCenterY = (compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
 
-        int marginLeftTemp = 0;
-        int marginTopTemp = 0;
+        int marginLeftTemp;
+        int marginTopTemp;
 
         super.onDraw(canvas);
 
@@ -251,7 +251,7 @@ public class CompassView extends View {
     }
 
     private int measureWidth(int measureSpec) {
-        int result = 0;
+        int result;
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
 
@@ -269,7 +269,7 @@ public class CompassView extends View {
     }
 
     private int measureHeight(int measureSpec) {
-        int result = 0;
+        int result;
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
 

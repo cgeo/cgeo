@@ -470,7 +470,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             holder.inventory.removeAllViews();
         }
 
-        ImageView tbIcon = null;
+        ImageView tbIcon;
         if (cache.getInventoryItems() > 0) {
             tbIcon = (ImageView) inflater.inflate(R.layout.trackable_icon, null);
             tbIcon.setImageResource(R.drawable.trackable_all);

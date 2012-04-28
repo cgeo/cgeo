@@ -1781,7 +1781,7 @@ public class CacheDetailActivity extends AbstractActivity {
             if (cache.getListId() >= StoredList.STANDARD_LIST_ID) {
                 long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
-                String ago = "";
+                String ago;
                 if (diff < 15) {
                     ago = res.getString(R.string.cache_offline_time_mins_few);
                 } else if (diff < 50) {

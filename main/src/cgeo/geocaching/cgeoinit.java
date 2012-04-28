@@ -175,7 +175,7 @@ public class cgeoinit extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == 0) {
-            boolean status = false;
+            boolean status;
 
             ((EditText) findViewById(R.id.username)).setText("");
             ((EditText) findViewById(R.id.password)).setText("");

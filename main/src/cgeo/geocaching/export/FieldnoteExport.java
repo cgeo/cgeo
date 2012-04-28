@@ -169,7 +169,7 @@ class FieldnoteExport extends AbstractExport {
                 SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
                 exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
 
-                OutputStream os = null;
+                OutputStream os;
                 Writer fw = null;
                 try {
                     os = new FileOutputStream(exportFile);

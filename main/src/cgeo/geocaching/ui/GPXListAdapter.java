@@ -39,7 +39,7 @@ public class GPXListAdapter extends ArrayAdapter<File> {
         final File file = getItem(position);
 
         View v = rowView;
-        GPXListView holder = null;
+        GPXListView holder;
 
         if (v == null) {
             v = inflater.inflate(R.layout.gpx_item, null);

@@ -137,7 +137,7 @@ public class StaticMapsProvider {
     private static int guessMinDisplaySide(Display display) {
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
-        int edge = 0;
+        int edge;
         if (maxWidth > maxHeight) {
             edge = maxWidth;
         } else {

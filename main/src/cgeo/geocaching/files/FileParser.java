@@ -52,7 +52,7 @@ public abstract class FileParser {
         final BufferedReader input = new BufferedReader(new InputStreamReader(progressInputStream));
 
         try {
-            String line = null;
+            String line;
             while ((line = input.readLine()) != null) {
                 buffer.append(line);
                 showProgressMessage(progressHandler, progressInputStream.getProgress());

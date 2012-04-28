@@ -193,10 +193,10 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        EditText text = null;
-        String textContent = null;
-        String dateString = null;
-        String timeString = null;
+        EditText text;
+        String textContent;
+        String dateString;
+        String timeString;
         String addText = "";
 
         if ((id >= 0x1 && id <= 0x7)) {

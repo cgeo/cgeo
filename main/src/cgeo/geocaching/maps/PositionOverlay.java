@@ -150,7 +150,7 @@ public class PositionOverlay implements GeneralOverlay {
         if (Settings.isMapTrail()) {
             int size = history.size();
             if (size > 1) {
-                int alpha = 0;
+                int alpha;
                 int alphaCnt = size - 201;
                 if (alphaCnt < 1) {
                     alphaCnt = 1;

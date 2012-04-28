@@ -67,7 +67,7 @@ public class cgeoimages extends AbstractActivity {
         progressDialog.setMax(count);
         progressDialog.show();
 
-        LinearLayout rowView = null;
+        LinearLayout rowView;
         for (final cgImage img : images) {
             rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
 

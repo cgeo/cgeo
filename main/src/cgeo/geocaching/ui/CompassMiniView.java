@@ -111,8 +111,8 @@ public class CompassMiniView extends View {
         // compass margins
         canvas.setDrawFilter(setfil);
 
-        int marginLeft = 0;
-        int marginTop = 0;
+        int marginLeft;
+        int marginTop;
 
         int compassArrowWidth = compassArrow.getWidth();
         int compassArrowHeight = compassArrow.getWidth();
@@ -136,7 +136,7 @@ public class CompassMiniView extends View {
     }
 
     private int measureWidth(int measureSpec) {
-        int result = 0;
+        int result;
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
 
@@ -154,7 +154,7 @@ public class CompassMiniView extends View {
     }
 
     private int measureHeight(int measureSpec) {
-        int result = 0;
+        int result;
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
 
