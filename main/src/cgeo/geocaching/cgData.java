@@ -2114,7 +2114,7 @@ public class cgData {
 
         int count = 0;
         try {
-            String sql; // this default is not used, but we like to have variables initialized
+            String sql;
             if (!detailedOnly) {
                 if (cacheType == CacheType.ALL) {
                     sql = "select count(_id) from " + dbTableCaches + listSql;
