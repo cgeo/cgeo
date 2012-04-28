@@ -297,13 +297,13 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
     public boolean onCreateOptionsMenu(Menu menu) {
         SubMenu menuLog = null;
 
-        menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(android.R.drawable.ic_menu_add);
+        menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
         for (LogTemplate template : LogTemplateProvider.getTemplates()) {
             menuLog.add(0, template.getItemId(), 0, template.getResourceId());
         }
         menuLog.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature));
 
-        final SubMenu menuStars = menu.addSubMenu(0, SUBMENU_VOTE, 0, res.getString(R.string.log_rating)).setIcon(android.R.drawable.ic_menu_sort_by_size);
+        final SubMenu menuStars = menu.addSubMenu(0, SUBMENU_VOTE, 0, res.getString(R.string.log_rating)).setIcon(R.drawable.ic_menu_sort_by_size);
         menuStars.add(0, 10, 0, res.getString(R.string.log_no_rating));
         menuStars.add(0, 19, 0, res.getString(R.string.log_stars_5) + " (" + res.getString(R.string.log_stars_5_description) + ")");
         menuStars.add(0, 18, 0, res.getString(R.string.log_stars_45) + " (" + res.getString(R.string.log_stars_45_description) + ")");

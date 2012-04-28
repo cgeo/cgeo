@@ -181,18 +181,18 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass)).setIcon(android.R.drawable.ic_menu_compass);
-        menu.add(0, MENU_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
-        menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(android.R.drawable.ic_menu_edit);
+        menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass)).setIcon(R.drawable.ic_menu_compass);
+        menu.add(0, MENU_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(R.drawable.ic_menu_mapmode);
+        menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(R.drawable.ic_menu_edit);
         if (coordinates.size() > 1) {
-            final SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
+            final SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(R.drawable.ic_menu_myplaces);
             int cnt = 4;
             for (final IWaypoint coordinate : coordinates) {
                 subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
                 cnt++;
             }
         } else {
-            menu.add(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces).setEnabled(false);
+            menu.add(0, 3, 0, res.getString(R.string.destination_select)).setIcon(R.drawable.ic_menu_myplaces).setEnabled(false);
         }
         return true;
     }

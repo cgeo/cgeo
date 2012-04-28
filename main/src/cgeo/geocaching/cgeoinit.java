@@ -167,7 +167,7 @@ public class cgeoinit extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, res.getString(R.string.init_clear)).setIcon(android.R.drawable.ic_menu_delete);
+        menu.add(0, 0, 0, res.getString(R.string.init_clear)).setIcon(R.drawable.ic_menu_delete);
 
         return true;
     }

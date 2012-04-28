@@ -117,7 +117,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             final boolean showInternalMap, final boolean showDefaultNavigation) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
-        builder.setIcon(android.R.drawable.ic_menu_mapmode);
+        builder.setIcon(R.drawable.ic_menu_mapmode);
         final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
         final boolean hasStaticMaps = hasStaticMap(cache, waypoint);
