@@ -44,14 +44,16 @@ public class Go4CacheUser {
     }
 
     public int getIconId() {
-        if (null == client) {
+        if (client == null) {
             return -1;
         }
         if (client.equalsIgnoreCase("c:geo")) {
             return R.drawable.client_cgeo;
-        } else if (client.equalsIgnoreCase("preCaching")) {
+        }
+        if (client.equalsIgnoreCase("preCaching")) {
             return R.drawable.client_precaching;
-        } else if (client.equalsIgnoreCase("Handy Geocaching")) {
+        }
+        if (client.equalsIgnoreCase("Handy Geocaching")) {
             return R.drawable.client_handygeocaching;
         }
         return -1;

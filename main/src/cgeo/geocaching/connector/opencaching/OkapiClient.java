@@ -226,7 +226,7 @@ final public class OkapiClient {
         if ("Found it".equalsIgnoreCase(logType)) {
             return LogType.LOG_FOUND_IT;
         }
-        else if ("Didn't find it".equalsIgnoreCase(logType)) {
+        if ("Didn't find it".equalsIgnoreCase(logType)) {
             return LogType.LOG_DIDNT_FIND_IT;
         }
         return LogType.LOG_NOTE;
@@ -280,11 +280,14 @@ final public class OkapiClient {
     private static CacheType getCacheType(final String cacheType) {
         if (cacheType.equalsIgnoreCase("Traditional")) {
             return CacheType.TRADITIONAL;
-        } else if (cacheType.equalsIgnoreCase("Multi")) {
+        }
+        if (cacheType.equalsIgnoreCase("Multi")) {
             return CacheType.MULTI;
-        } else if (cacheType.equalsIgnoreCase("Quiz")) {
+        }
+        if (cacheType.equalsIgnoreCase("Quiz")) {
             return CacheType.MYSTERY;
-        } else if (cacheType.equalsIgnoreCase("Virtual")) {
+        }
+        if (cacheType.equalsIgnoreCase("Virtual")) {
             return CacheType.VIRTUAL;
         }
         return CacheType.UNKNOWN;

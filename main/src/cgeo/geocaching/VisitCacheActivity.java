@@ -88,16 +88,13 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 showToast(res.getString(R.string.info_log_type_changed));
             }
 
-            if (Login.isEmpty(viewstates) && attempts < 2) {
-                final LoadDataThread thread;
-                thread = new LoadDataThread();
-                thread.start();
-
-                return;
-            } else if (Login.isEmpty(viewstates) && attempts >= 2) {
-                showToast(res.getString(R.string.err_log_load_data));
-                showProgress(false);
-
+            if (Login.isEmpty(viewstates)) {
+                if (attempts < 2) {
+                    new LoadDataThread().start();
+                } else {
+                    showToast(res.getString(R.string.err_log_load_data));
+                    showProgress(false);
+                }
                 return;
             }
 
@@ -336,7 +333,9 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         if (id == MENU_SIGNATURE) {
             insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), false), true);
             return true;
-        } else if (id >= 10 && id <= 19) {
+        }
+
+        if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0;
             if (rating < 1) {
                 rating = 0;
@@ -344,12 +343,13 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             updatePostButtonText();
             return true;
         }
+
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
         if (template != null) {
-            final String newText = template.getValue(false);
-            insertIntoLog(newText, true);
+            insertIntoLog(template.getValue(false), true);
             return true;
         }
+
         return false;
     }
 
@@ -400,9 +400,10 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
         if (group == R.id.type) {
             setType(LogType.getById(id));
-
             return true;
-        } else if (group == R.id.changebutton) {
+        }
+
+        if (group == R.id.changebutton) {
             try {
                 final LogTypeTrackable logType = LogTypeTrackable.findById(id);
                 if (logType != null) {

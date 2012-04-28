@@ -97,7 +97,8 @@ public class Parameters extends ArrayList<NameValuePair> {
     public static Parameters merge(final Parameters params, final Parameters extra) {
         if (params == null) {
             return extra;
-        } else if (extra != null) {
+        }
+        if (extra != null) {
             params.addAll(extra);
         }
         return params;
