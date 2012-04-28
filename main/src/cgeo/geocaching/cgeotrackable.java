@@ -460,7 +460,7 @@ public class cgeotrackable extends AbstractActivity {
 
                 TextView logView = (TextView) rowView.findViewById(R.id.log);
                 logView.setMovementMethod(LinkMovementMethod.getInstance());
-                logView.setText(Html.fromHtml(log.log, new HtmlImage(cgeotrackable.this, null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
+                logView.setText(Html.fromHtml(log.log, new HtmlImage(this, null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
 
                 // add LogImages
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);

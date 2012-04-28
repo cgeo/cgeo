@@ -60,7 +60,7 @@ public class cgeoimages extends AbstractActivity {
     private void loadImages(final List<cgImage> images, final int progressMessage, final boolean offline) {
 
         count = images.size();
-        progressDialog = new ProgressDialog(cgeoimages.this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMessage(res.getString(progressMessage));
         progressDialog.setCancelable(true);

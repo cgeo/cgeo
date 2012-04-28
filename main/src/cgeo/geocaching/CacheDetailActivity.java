@@ -927,7 +927,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 res.getString(R.string.user_menu_open_browser)
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(res.getString(R.string.user_menu_title) + " " + name);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
