@@ -1054,7 +1054,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        final int id = item.getItemId();
         ContextMenu.ContextMenuInfo info = item.getMenuInfo();
 
         // restore menu info for sub menu items, see
@@ -1071,64 +1070,59 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
             Log.w("cgeocaches.onContextItemSelected: " + e.toString());
         }
 
-        if (id == MENU_DEFAULT_NAVIGATION) {
-            final cgCache cache = getCacheFromAdapter(adapterInfo);
-            NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
-            return true;
-        } else if (id == MENU_NAVIGATION) {
-            final cgCache cache = getCacheFromAdapter(adapterInfo);
-            NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
-            return true;
-        } else if (id == MENU_LOG_VISIT) {
-            getCacheFromAdapter(adapterInfo).logVisit(this);
-            return true;
-        } else if (id == MENU_CACHE_DETAILS) {
-            final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-            final cgCache cache = getCacheFromAdapter(adapterInfo);
-            cachesIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
-            cachesIntent.putExtra("name", cache.getName());
-            startActivity(cachesIntent);
+        final cgCache cache = adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
 
-            return true;
-        } else if (id == MENU_DROP_CACHE) {
-            getCacheFromAdapter(adapterInfo).drop(new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    refreshCurrentList();
-                }
-            });
-            return true;
-        } else if (id == MENU_MOVE_TO_LIST) {
-            final cgCache cache = getCacheFromAdapter(adapterInfo);
-            new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new RunnableWithArgument<Integer>() {
+        final int id = item.getItemId();
+        switch (id) {
+            case MENU_DEFAULT_NAVIGATION:
+                NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
+                break;
+            case MENU_NAVIGATION:
+                NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
+                break;
+            case MENU_LOG_VISIT:
+                cache.logVisit(this);
+                break;
+            case MENU_CACHE_DETAILS:
+                final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
+                cachesIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
+                cachesIntent.putExtra("name", cache.getName());
+                startActivity(cachesIntent);
+                break;
+            case MENU_DROP_CACHE:
+                cache.drop(new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        refreshCurrentList();
+                    }
+                });
+                break;
+            case MENU_MOVE_TO_LIST:
+                new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new RunnableWithArgument<Integer>() {
 
-                @Override
-                public void run(Integer newListId) {
-                    app.moveToList(Collections.singletonList(cache), newListId);
-                    adapter.resetChecks();
-                    refreshCurrentList();
+                    @Override
+                    public void run(Integer newListId) {
+                        app.moveToList(Collections.singletonList(cache), newListId);
+                        adapter.resetChecks();
+                        refreshCurrentList();
+                    }
+                });
+                break;
+            case MENU_STORE_CACHE:
+                //FIXME: this must use the same handler like in the CacheDetailActivity. Will be done by moving the handler into the store method.
+                cache.store(this, null);
+                break;
+            default:
+                // we must remember the menu info for the sub menu, there is a bug
+                // in Android:
+                // https://code.google.com/p/android/issues/detail?id=7139
+                lastMenuInfo = info;
+                if (cache != null) {
+                    // create a search for a single cache (as if in details view)
+                    cache.logOffline(this, LogType.getById(id - MENU_LOG_VISIT_OFFLINE));
                 }
-            });
-            return true;
-        } else if (id == MENU_STORE_CACHE) {
-            final cgCache cache = getCacheFromAdapter(adapterInfo);
-            //FIXME: this must use the same handler like in the CacheDetailActivity. Will be done by moving the handler into the store method.
-            cache.store(this, null);
-            return true;
         }
 
-        // we must remember the menu info for the sub menu, there is a bug
-        // in Android:
-        // https://code.google.com/p/android/issues/detail?id=7139
-        lastMenuInfo = info;
-
-        if (adapterInfo != null) {
-            // create a search for a single cache (as if in details view)
-            final cgCache cache = getCacheFromAdapter(adapterInfo);
-
-            int logType = id - MENU_LOG_VISIT_OFFLINE;
-            cache.logOffline(this, LogType.getById(logType));
-        }
         return true;
     }
 
