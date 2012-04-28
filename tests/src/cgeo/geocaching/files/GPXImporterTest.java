@@ -281,7 +281,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         super.tearDown();
     }
 
-    private void deleteDirectory(File dir) {
+    private static void deleteDirectory(File dir) {
         for (File f : dir.listFiles()) {
             if (f.isFile()) {
                 f.delete();
