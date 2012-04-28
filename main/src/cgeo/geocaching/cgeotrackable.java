@@ -350,21 +350,20 @@ public class cgeotrackable extends AbstractActivity {
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        final int id = item.getItemId();
-
-        if (id == 1) {
-            cgeocaches.startActivityOwner(this, contextMenuUser);
-            return true;
-        } else if (id == 2) {
-            cgeocaches.startActivityUserName(this, contextMenuUser);
-            return true;
-        } else if (id == 3) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
-
-            return true;
+    public boolean onContextItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+                cgeocaches.startActivityOwner(this, contextMenuUser);
+                return true;
+            case 2:
+                cgeocaches.startActivityUserName(this, contextMenuUser);
+                return true;
+            case 3:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+                return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     @Override

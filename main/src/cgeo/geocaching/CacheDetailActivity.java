@@ -551,33 +551,32 @@ public class CacheDetailActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int menuItem = item.getItemId();
 
-        // no menu selected, but a new sub menu shown
-        if (menuItem == 0) {
-            return false;
-        }
-
-        if (menuItem == MENU_DEFAULT_NAVIGATION) {
-            startDefaultNavigation();
-            return true;
-        } else if (menuItem == MENU_LOG_VISIT) {
-            refreshOnResume = true;
-            cache.logVisit(this);
-            return true;
-        } else if (menuItem == MENU_BROWSER) {
-            cache.openInBrowser(this);
-            return true;
-        } else if (menuItem == MENU_CACHES_AROUND) {
-            cgeocaches.startActivityCachesAround(this, cache.getCoords());
-            return true;
-        } else if (menuItem == MENU_CALENDAR) {
-            addToCalendarWithIntent();
-            return true;
-        } else if (menuItem == MENU_SHARE) {
-            if (cache != null) {
-                cache.shareCache(this, res);
+        switch(menuItem) {
+            case 0:
+                // no menu selected, but a new sub menu shown
+                return false;
+            case MENU_DEFAULT_NAVIGATION:
+                startDefaultNavigation();
                 return true;
-            }
-            return false;
+            case MENU_LOG_VISIT:
+                refreshOnResume = true;
+                cache.logVisit(this);
+                return true;
+            case MENU_BROWSER:
+                cache.openInBrowser(this);
+                return true;
+            case MENU_CACHES_AROUND:
+                cgeocaches.startActivityCachesAround(this, cache.getCoords());
+                return true;
+            case MENU_CALENDAR:
+                addToCalendarWithIntent();
+                return true;
+            case MENU_SHARE:
+                if (cache != null) {
+                    cache.shareCache(this, res);
+                    return true;
+                }
+                return false;
         }
         if (NavigationAppFactory.onMenuItemSelected(item, app.currentGeo(), this, cache, null, null)) {
             return true;
@@ -586,8 +585,7 @@ public class CacheDetailActivity extends AbstractActivity {
             return true;
         }
 
-        int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, LogType.getById(logType));
+        cache.logOffline(this, LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
         return true;
     }
 

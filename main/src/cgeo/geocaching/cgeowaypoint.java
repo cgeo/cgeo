@@ -217,21 +217,22 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final int menuItem = item.getItemId();
-        if (menuItem == MENU_ID_DEFAULT_NAVIGATION) {
-            goDefaultNavigation(null);
-            return true;
-        } else if (menuItem == MENU_ID_CACHES_AROUND) {
-            cachesAround();
-            return true;
-        } else if (menuItem == MENU_ID_OPEN_GEOCACHE) {
-            goToGeocache();
-            return true;
-        } else if (menuItem == MENU_ID_NAVIGATION) {
-            NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, waypoint, null);
-            return true;
+        switch (item.getItemId()) {
+            case MENU_ID_DEFAULT_NAVIGATION:
+                goDefaultNavigation(null);
+                return true;
+            case MENU_ID_CACHES_AROUND:
+                cachesAround();
+                return true;
+            case MENU_ID_OPEN_GEOCACHE:
+                goToGeocache();
+                return true;
+            case MENU_ID_NAVIGATION:
+                NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, waypoint, null);
+                return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     private void cachesAround() {

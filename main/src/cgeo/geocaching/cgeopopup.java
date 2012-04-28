@@ -197,26 +197,27 @@ public class cgeopopup extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int menuItem = item.getItemId();
 
-        if (menuItem == 2) {
-            navigateTo();
-            return true;
-        } else if (menuItem == 3) {
-            NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
-            return true;
-        } else if (menuItem == 5) {
-            cachesAround();
-            return true;
-        } else if (menuItem == MENU_LOG_VISIT) {
-            cache.logVisit(this);
-            finish();
-            return true;
-        } else if (menuItem == 7) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode())));
-            return true;
+        switch (menuItem) {
+            case 2:
+                navigateTo();
+                break;
+            case 3:
+                NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
+                break;
+            case 5:
+                cachesAround();
+                break;
+            case MENU_LOG_VISIT:
+                cache.logVisit(this);
+                finish();
+                break;
+            case 7:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode())));
+                break;
+            default:
+                cache.logOffline(this, LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
         }
 
-        int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, LogType.getById(logType));
         return true;
     }
 
