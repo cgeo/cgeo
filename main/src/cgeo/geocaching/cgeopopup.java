@@ -289,7 +289,7 @@ public class cgeopopup extends AbstractActivity {
 
                 itemName.setText(res.getString(R.string.cache_status));
 
-                StringBuilder state = new StringBuilder();
+                final StringBuilder state = new StringBuilder();
                 if (cache.isFound()) {
                     if (state.length() > 0) {
                         state.append(", ");
@@ -317,8 +317,6 @@ public class cgeopopup extends AbstractActivity {
 
                 itemValue.setText(state.toString());
                 detailsList.addView(itemLayout);
-
-                state = null;
             }
 
             // distance

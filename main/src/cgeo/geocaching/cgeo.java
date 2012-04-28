@@ -360,10 +360,8 @@ public class cgeo extends AbstractActivity {
 
         // context menu for offline button
         if (v.getId() == R.id.search_offline) {
-            List<StoredList> cacheLists = app.getLists();
-            int listCount = cacheLists.size();
             menu.setHeaderTitle(res.getString(R.string.list_title));
-            for (final StoredList list : cacheLists) {
+            for (final StoredList list : app.getLists()) {
                 menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.getTitleAndCount());
             }
             return;

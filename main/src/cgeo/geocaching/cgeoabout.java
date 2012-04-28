@@ -5,7 +5,6 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -27,13 +26,9 @@ public class cgeoabout extends AbstractActivity {
 
     private void init() {
         try {
-            PackageManager manager = this.getPackageManager();
-            PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
+            final PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), 0);
 
             setTitle(res.getString(R.string.about) + " (ver. " + info.versionName + ")");
-
-            manager = null;
-
             ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
             ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Exception e) {
