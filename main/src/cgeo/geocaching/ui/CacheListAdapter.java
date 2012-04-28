@@ -35,7 +35,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
@@ -73,7 +72,6 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     private static final int SWIPE_MIN_DISTANCE = 60;
     private static final int SWIPE_MAX_OFF_PATH = 100;
     private static final int SWIPE_DISTANCE = 80;
-    private static final float SWIPE_OPACITY = 0.5f;
     /**
      * time in milliseconds after which the list may be resorted due to position updates
      */
@@ -798,21 +796,12 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         showCheckbox.setFillAfter(true);
         showCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        // dim cache info
-        final Animation dimInfo = new AlphaAnimation(1.0f, SWIPE_OPACITY);
-        dimInfo.setRepeatCount(0);
-        dimInfo.setDuration(force ? 0 : 400);
-        dimInfo.setFillEnabled(true);
-        dimInfo.setFillAfter(true);
-        dimInfo.setInterpolator(new AccelerateDecelerateInterpolator());
-
         // animation set (container)
         final AnimationSet selectAnimation = new AnimationSet(true);
         selectAnimation.setFillEnabled(true);
         selectAnimation.setFillAfter(true);
 
         selectAnimation.addAnimation(showCheckbox);
-        selectAnimation.addAnimation(dimInfo);
 
         holder.oneInfo.startAnimation(selectAnimation);
         cache.setStatusCheckedView(true);
@@ -833,21 +822,12 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         hideCheckbox.setFillAfter(true);
         hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        // brighten cache info
-        final Animation brightenInfo = new AlphaAnimation(SWIPE_OPACITY, 1.0f);
-        brightenInfo.setRepeatCount(0);
-        brightenInfo.setDuration(force ? 0 : 400);
-        brightenInfo.setFillEnabled(true);
-        brightenInfo.setFillAfter(true);
-        brightenInfo.setInterpolator(new AccelerateDecelerateInterpolator());
-
         // animation set (container)
         final AnimationSet selectAnimation = new AnimationSet(true);
         selectAnimation.setFillEnabled(true);
         selectAnimation.setFillAfter(true);
 
         selectAnimation.addAnimation(hideCheckbox);
-        selectAnimation.addAnimation(brightenInfo);
 
         holder.oneInfo.startAnimation(selectAnimation);
         cache.setStatusCheckedView(false);
