@@ -17,12 +17,8 @@ public class GeocodeComparator extends AbstractCacheComparator {
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
-        if (cache1.getGeocode().length() > cache2.getGeocode().length()) {
-            return 1;
-        } else if (cache2.getGeocode().length() > cache1.getGeocode().length()) {
-            return -1;
-        }
-        return cache1.getGeocode().compareToIgnoreCase(cache2.getGeocode());
+    protected int compareCaches(final cgCache cache1, final cgCache cache2) {
+        final int lengthDiff = cache1.getGeocode().length() - cache2.getGeocode().length();
+        return lengthDiff != 0 ? lengthDiff : cache1.getGeocode().compareToIgnoreCase(cache2.getGeocode());
     }
 }

@@ -9,17 +9,12 @@ import cgeo.geocaching.cgCache;
 public class TerrainComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
+    protected boolean canCompare(final cgCache cache1, final cgCache cache2) {
         return cache1.getTerrain() != 0.0 && cache2.getTerrain() != 0.0;
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
-        if (cache1.getTerrain() > cache2.getTerrain()) {
-            return 1;
-        } else if (cache2.getTerrain() > cache1.getTerrain()) {
-            return -1;
-        }
-        return 0;
+    protected int compareCaches(final cgCache cache1, final cgCache cache2) {
+        return Float.compare(cache1.getTerrain(), cache2.getTerrain());
     }
 }

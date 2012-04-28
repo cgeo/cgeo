@@ -15,11 +15,6 @@ public class DifficultyComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final cgCache cache1, final cgCache cache2) {
-        if (cache1.getDifficulty() > cache2.getDifficulty()) {
-            return 1;
-        } else if (cache2.getDifficulty() > cache1.getDifficulty()) {
-            return -1;
-        }
-        return 0;
+        return Float.compare(cache1.getDifficulty(), cache2.getDifficulty());
     }
 }

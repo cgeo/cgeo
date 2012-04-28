@@ -11,7 +11,7 @@ import cgeo.geocaching.utils.Log;
 public abstract class AbstractCacheComparator implements CacheComparator {
 
     @Override
-    public final int compare(cgCache cache1, cgCache cache2) {
+    public final int compare(final cgCache cache1, final cgCache cache2) {
         try {
             // first check that we have all necessary data for the comparison
             if (!canCompare(cache1, cache2)) {
@@ -25,7 +25,7 @@ public abstract class AbstractCacheComparator implements CacheComparator {
     }
 
     /**
-     * check necessary preconditions (like missing fields) before running the comparison itself
+     * Check necessary preconditions (like missing fields) before running the comparison itself
      *
      * @param cache1
      * @param cache2
@@ -34,7 +34,10 @@ public abstract class AbstractCacheComparator implements CacheComparator {
     protected abstract boolean canCompare(final cgCache cache1, final cgCache cache2);
 
     /**
-     * compares two caches. Logging and exception handling is implemented outside this method already.
+     * Compares two caches. Logging and exception handling is implemented outside this method already.
+     * <p/>
+     * A cache is smaller than another cache if it is desirable to show it first when presented to the user.
+     * For example, a highly rated cache must be considered smaller than a poorly rated one.
      *
      * @param cache1
      * @param cache2
