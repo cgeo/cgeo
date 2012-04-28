@@ -376,7 +376,7 @@ public class GCBase {
 
         try {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
-            final String data = Tile.requestMapInfo(referer, params, referer);
+            final String data = StringUtils.defaultString(Tile.requestMapInfo(referer, params, referer));
 
             // Example JSON information
             // {"status":"success",
