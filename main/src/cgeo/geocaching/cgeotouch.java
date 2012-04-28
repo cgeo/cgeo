@@ -59,33 +59,28 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
 
     private Handler loadDataHandler = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
-            if (MSG_UPDATE_TYPE == msg.what) {
+        public void handleMessage(final Message msg) {
+            if (msg.what == MSG_UPDATE_TYPE) {
                 setType((LogType) msg.obj);
                 showToast(res.getString(R.string.info_log_type_changed));
             } else {
-                if (Login.isEmpty(viewstates) && attempts < 2) {
-                    showToast(res.getString(R.string.err_log_load_data_again));
+                if (Login.isEmpty(viewstates)) {
+                    if (attempts < 2) {
+                        showToast(res.getString(R.string.err_log_load_data_again));
+                        new loadData(guid).start();
+                    } else {
+                        showToast(res.getString(R.string.err_log_load_data));
+                        showProgress(false);
+                    }
+                } else {
+                    gettingViewstate = false; // we're done, user can post log
 
-                    loadData thread;
-                    thread = new loadData(guid);
-                    thread.start();
+                    final Button buttonPost = (Button) findViewById(R.id.post);
+                    buttonPost.setEnabled(true);
+                    buttonPost.setOnClickListener(new postListener());
 
-                    return;
-                } else if (Login.isEmpty(viewstates) && attempts >= 2) {
-                    showToast(res.getString(R.string.err_log_load_data));
                     showProgress(false);
-
-                    return;
                 }
-
-                gettingViewstate = false; // we're done, user can post log
-
-                Button buttonPost = (Button) findViewById(R.id.post);
-                buttonPost.setEnabled(true);
-                buttonPost.setOnClickListener(new postListener());
-
-                showProgress(false);
             }
         }
     };
