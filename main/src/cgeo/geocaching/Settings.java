@@ -808,7 +808,7 @@ public final class Settings {
     }
 
     public static void setMapSource(final int newMapSource) {
-        if (!MapProviderFactory.isSameProvider(getMapSource(), newMapSource)) {
+        if (!MapProviderFactory.isSameActivity(getMapSource(), newMapSource)) {
             mapProvider = null;
         }
         editSharedSettings(new PrefRunnable() {

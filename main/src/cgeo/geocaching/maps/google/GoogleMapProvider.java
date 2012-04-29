@@ -1,20 +1,13 @@
 package cgeo.geocaching.maps.google;
 
-import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.MapProviderFactory;
-import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
-import cgeo.geocaching.maps.interfaces.GeoPointImpl;
+import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
-import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
 import com.google.android.maps.MapActivity;
 
-import android.content.Context;
 import android.content.res.Resources;
 
 import java.util.HashMap;
@@ -28,6 +21,7 @@ public class GoogleMapProvider implements MapProvider {
     private final Map<Integer, String> mapSources;
 
     private int baseId;
+    private final MapItemFactory mapItemFactory;
 
     public GoogleMapProvider(int _baseId) {
         baseId = _baseId;
@@ -36,6 +30,8 @@ public class GoogleMapProvider implements MapProvider {
         mapSources = new HashMap<Integer, String>();
         mapSources.put(baseId + MAP, resources.getString(R.string.map_source_google_map));
         mapSources.put(baseId + SATELLITE, resources.getString(R.string.map_source_google_satellite));
+
+        mapItemFactory = new GoogleMapItemFactory();
     }
 
     @Override
@@ -76,18 +72,12 @@ public class GoogleMapProvider implements MapProvider {
     }
 
     @Override
-    public GeoPointImpl getGeoPointBase(final Geopoint coords) {
-        return new GoogleGeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6());
+    public MapItemFactory getMapItemFactory() {
+        return mapItemFactory;
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final CacheType type) {
-        return new GoogleCacheOverlayItem(coordinate, type);
+    public boolean isSameActivity(int sourceId1, int sourceId2) {
+        return true;
     }
-
-    @Override
-    public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context, Go4CacheUser userOne) {
-        return new GoogleOtherCachersOverlayItem(context, userOne);
-    }
-
 }
