@@ -75,8 +75,12 @@ public final class GCConstants {
      * Patterns for parsing trackables
      */
     public final static Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" title=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
-    public final static Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugTBNum\" String=\"[^\"]*\">Use[^<]*<strong>(TB[0-9A-Z]+)[^<]*</strong> to reference this item.[^<]*</span>");
-    public final static Pattern PATTERN_TRACKABLE_NAME = Pattern.compile("<h2[^>]*>(?:[^<]*<img[^>]*>)?[^<]*<span id=\"ctl00_ContentBody_lbHeading\">([^<]+)</span>[^<]*</h2>");
+    public final static Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile("<strong>(TB[0-9A-Z]+)[^<]*</strong> to reference this item.");
+    /**
+     * some parts of the webpage don't correctly encode the name, therefore this pattern must be checked with a
+     * trackable name that needs HTML encoding
+     */
+    public final static Pattern PATTERN_TRACKABLE_NAME = Pattern.compile("name=\"og:title\" content=\"([^\"]+)\"");
     /** Two groups ! */
     public final static Pattern PATTERN_TRACKABLE_OWNER = Pattern.compile("<dt>\\W*Owner:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugOwner\" title=\"[^\"]*\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">([^<]+)<\\/a>[^<]*</dd>");
     public final static Pattern PATTERN_TRACKABLE_RELEASES = Pattern.compile("<dt>\\W*Released:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>");

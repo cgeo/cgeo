@@ -1188,7 +1188,7 @@ public abstract class GCParser {
         trackable.setIconUrl(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ICON, true, trackable.getIconUrl()));
 
         // trackable name
-        trackable.setName(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, trackable.getName()));
+        trackable.setName(Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, "")).toString());
 
         // trackable type
         if (StringUtils.isNotBlank(trackable.getName())) {
