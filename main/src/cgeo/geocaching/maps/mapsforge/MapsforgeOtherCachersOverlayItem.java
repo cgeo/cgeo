@@ -4,8 +4,8 @@ import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.OtherCachersOverlayItem;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
-import org.mapsforge.android.maps.GeoPoint;
-import org.mapsforge.android.maps.OverlayItem;
+import org.mapsforge.android.maps.overlay.OverlayItem;
+import org.mapsforge.core.GeoPoint;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
