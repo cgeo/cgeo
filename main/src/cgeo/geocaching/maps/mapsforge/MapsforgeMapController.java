@@ -3,8 +3,8 @@ package cgeo.geocaching.maps.mapsforge;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 
-import org.mapsforge.android.maps.GeoPoint;
 import org.mapsforge.android.maps.MapController;
+import org.mapsforge.core.GeoPoint;
 
 public class MapsforgeMapController implements MapControllerImpl {
 

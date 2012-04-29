@@ -469,10 +469,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public void onResume() {
         super.onResume();
 
-        if (changeMapSource(Settings.getMapSource())) {
-            return;
-        }
-
         app.setAction(StringUtils.defaultIfBlank(geocodeIntent, null));
 
         addGeoDirObservers();
