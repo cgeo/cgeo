@@ -229,7 +229,6 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 cgeopopup.startActivity(context, coordinate.getGeocode());
             } else if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {
                 CGeoMap.markCacheAsDirty(coordinate.getGeocode());
-                //CacheDetailActivity.startActivity(context, coordinate.getGeocode(), CacheDetailActivity.Page.WAYPOINTS.ordinal());
                 WaypointPopup.startActivity(context, coordinate.getId(), coordinate.getGeocode());
             } else {
                 waitDialog.dismiss();
