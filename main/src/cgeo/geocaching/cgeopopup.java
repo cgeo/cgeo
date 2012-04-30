@@ -475,18 +475,8 @@ public class cgeopopup extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
-        app.addGeoObserver(geoUpdate);
         init();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
+        app.addGeoObserver(geoUpdate);
     }
 
     @Override
