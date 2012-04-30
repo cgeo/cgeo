@@ -1,12 +1,12 @@
-package cgeo.geocaching.maps.mapsforge;
+package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
-import org.mapsforge.android.maps.Projection;
-import org.mapsforge.android.maps.overlay.ItemizedOverlay;
+import org.mapsforge.android.mapsold.ItemizedOverlay;
+import org.mapsforge.android.mapsold.Projection;
 
 import android.content.Context;
 import android.graphics.Canvas;

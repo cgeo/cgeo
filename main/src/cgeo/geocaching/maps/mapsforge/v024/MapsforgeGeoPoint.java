@@ -1,13 +1,11 @@
-package cgeo.geocaching.maps.mapsforge;
+package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 
-import org.mapsforge.core.GeoPoint;
+import org.mapsforge.android.mapsold.GeoPoint;
 
 public class MapsforgeGeoPoint extends GeoPoint implements GeoPointImpl {
-
-    private static final long serialVersionUID = 1L;
 
     public MapsforgeGeoPoint(int latitudeE6, int longitudeE6) {
         super(latitudeE6, longitudeE6);
@@ -16,15 +14,5 @@ public class MapsforgeGeoPoint extends GeoPoint implements GeoPointImpl {
     @Override
     public Geopoint getCoords() {
         return new Geopoint(getLatitudeE6() / 1e6, getLongitudeE6() / 1e6);
-    }
-
-    @Override
-    public int getLatitudeE6() {
-        return latitudeE6;
-    }
-
-    @Override
-    public int getLongitudeE6() {
-        return longitudeE6;
     }
 }

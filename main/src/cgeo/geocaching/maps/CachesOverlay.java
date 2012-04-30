@@ -9,6 +9,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
+import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
@@ -39,6 +40,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     private PaintFlagsDrawFilter setFilter = null;
     private PaintFlagsDrawFilter removeFilter = null;
     private MapProvider mapProvider = null;
+    private MapItemFactory mapItemFactory = null;
 
     public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn) {
         super(ovlImpl);
@@ -48,6 +50,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         context = contextIn;
 
         mapProvider = Settings.getMapProvider();
+        mapItemFactory = mapProvider.getMapItemFactory();
     }
 
     public void updateItems(CachesOverlayItemImpl item) {
@@ -119,7 +122,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             for (CachesOverlayItemImpl item : items) {
                 final Geopoint itemCoord = item.getCoord().getCoords();
-                final GeoPointImpl itemGeo = mapProvider.getGeoPointBase(itemCoord);
+                final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
                 projection.toPixels(itemGeo, center);
 
                 final CacheType type = item.getType();
@@ -159,11 +162,11 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 itemCoord.getLatitude(), itemCoord.getLongitude() + 1, distanceArray);
         final float longitudeLineDistance = distanceArray[0];
 
-        final GeoPointImpl itemGeo = mapProvider.getGeoPointBase(itemCoord);
+        final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
 
         final Geopoint leftCoords = new Geopoint(itemCoord.getLatitude(),
                 itemCoord.getLongitude() - 161 / longitudeLineDistance);
-        final GeoPointImpl leftGeo = mapProvider.getGeoPointBase(leftCoords);
+        final GeoPointImpl leftGeo = mapItemFactory.getGeoPointBase(leftCoords);
 
         final Point center = new Point();
         projection.toPixels(itemGeo, center);
