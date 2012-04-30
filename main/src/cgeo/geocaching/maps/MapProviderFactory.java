@@ -61,10 +61,10 @@ public class MapProviderFactory {
         return getInstance().mapSources.containsKey(sourceId);
     }
 
-    public static boolean isSameProvider(int sourceId1, int sourceId2) {
+    public static boolean isSameActivity(int sourceId1, int sourceId2) {
         for (MapProvider mp : getInstance().mapProviders) {
             if (mp.isMySource(sourceId1) && mp.isMySource(sourceId2)) {
-                return true;
+                return mp.isSameActivity(sourceId1, sourceId2);
             }
         }
         return false;

@@ -1,11 +1,11 @@
-package cgeo.geocaching.maps.mapsforge;
+package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.OtherCachersOverlayItem;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
-import org.mapsforge.android.maps.overlay.OverlayItem;
-import org.mapsforge.core.GeoPoint;
+import org.mapsforge.android.mapsold.GeoPoint;
+import org.mapsforge.android.mapsold.OverlayItem;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

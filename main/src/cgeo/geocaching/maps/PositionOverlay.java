@@ -5,6 +5,7 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
+import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
@@ -44,17 +45,19 @@ public class PositionOverlay implements GeneralOverlay {
     private Point historyPointP = new Point();
     private Activity activity;
     private MapProvider mapProvider = null;
+    private MapItemFactory mapItemFactory = null;
     private OverlayImpl ovlImpl = null;
 
     public PositionOverlay(Activity activity, OverlayImpl ovlImpl) {
         this.activity = activity;
         this.mapProvider = Settings.getMapProvider();
+        this.mapItemFactory = this.mapProvider.getMapItemFactory();
         this.ovlImpl = ovlImpl;
     }
 
     public void setCoordinates(Location coordinatesIn) {
         coordinates = coordinatesIn;
-        location = mapProvider.getGeoPointBase(new Geopoint(coordinates));
+        location = mapItemFactory.getGeoPointBase(new Geopoint(coordinates));
     }
 
     public void setHeading(Float bearingNow) {
@@ -119,7 +122,7 @@ public class PositionOverlay implements GeneralOverlay {
         float longitudeLineDistance = result[0];
 
         final Geopoint leftCoords = new Geopoint(latitude, longitude - accuracy / longitudeLineDistance);
-        GeoPointImpl leftGeo = mapProvider.getGeoPointBase(leftCoords);
+        GeoPointImpl leftGeo = mapItemFactory.getGeoPointBase(leftCoords);
         projection.toPixels(leftGeo, left);
         projection.toPixels(location, center);
         int radius = center.x - left.x;
@@ -161,8 +164,8 @@ public class PositionOverlay implements GeneralOverlay {
                     Location now = history.get(cnt);
 
                     if (prev != null && now != null) {
-                        projection.toPixels(mapProvider.getGeoPointBase(new Geopoint(prev)), historyPointP);
-                        projection.toPixels(mapProvider.getGeoPointBase(new Geopoint(now)), historyPointN);
+                        projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
+                        projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
 
                         if ((alphaCnt - cnt) > 0) {
                             alpha = 255 / (alphaCnt - cnt);
@@ -185,8 +188,8 @@ public class PositionOverlay implements GeneralOverlay {
                 Location now = coordinates;
 
                 if (prev != null && now != null) {
-                    projection.toPixels(mapProvider.getGeoPointBase(new Geopoint(prev)), historyPointP);
-                    projection.toPixels(mapProvider.getGeoPointBase(new Geopoint(now)), historyPointN);
+                    projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
+                    projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
 
                     historyLineShadow.setAlpha(255);
                     historyLine.setAlpha(255);
