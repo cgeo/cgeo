@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData> {
+public class cgeonavigate extends AbstractActivity implements IObserver<Object> {
 
     private static final String EXTRAS_COORDS = "coords";
     private static final String EXTRAS_NAME = "name";
@@ -34,8 +34,6 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
     private static final int MENU_MAP = 0;
     private static final int MENU_SWITCH_COMPASS_GPS = 1;
     private PowerManager pm = null;
-    private cgDirection dir = null;
-    private UpdateDirectionCallback dirUpdate = new UpdateDirection();
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private Float northHeading = null;
@@ -72,11 +70,6 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
         setContentView(R.layout.navigate);
         setTitle(res.getString(R.string.compass_title));
 
-        // sensor & geolocation manager
-        if (Settings.isUseCompass() && dir == null) {
-            dir = app.startDir(this, dirUpdate);
-        }
-
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -106,10 +99,6 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
         setTitle();
         setDestCoords();
 
-        if (dir != null) {
-            dirUpdate.updateDirection(dir);
-        }
-
         // get textviews once
         compassView = (CompassView) findViewById(R.id.rose);
     }
@@ -128,8 +117,8 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
 
         // sensor & geolocation manager
         app.addGeoObserver(this);
-        if (Settings.isUseCompass() && dir == null) {
-            dir = app.startDir(this, dirUpdate);
+        if (Settings.isUseCompass()) {
+            app.addDirectionObserver(this);
         }
 
         // keep backlight on
@@ -148,34 +137,20 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
 
     @Override
     public void onStop() {
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-
         updaterHandler.stop();
-
         super.onStop();
     }
 
     @Override
     public void onPause() {
         app.deleteGeoObserver(this);
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-
+        app.deleteDirectionObserver(this);
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-
         compassView.destroyDrawingCache();
-        compassView = null;
-
         super.onDestroy();
     }
 
@@ -215,13 +190,9 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
             Settings.setUseCompass(!oldSetting);
             invalidateOptionsMenuCompatible();
             if (oldSetting) {
-                if (dir != null) {
-                    dir = app.removeDir();
-                }
+                app.deleteDirectionObserver(this);
             } else {
-                if (dir == null) {
-                    dir = app.startDir(this, dirUpdate);
-                }
+                app.addDirectionObserver(this);
             }
         } else if (id == 2) {
             Intent pointIntent = new Intent(this, cgeopoint.class);
@@ -279,7 +250,15 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
     }
 
     @Override
-    public void update(final IGeoData geo) {
+    public void update(final Object data) {
+        if (data instanceof IGeoData) {
+            updateGeoData((IGeoData) data);
+        } else {
+            updateDirection((Float) data);
+        }
+    }
+
+    private void updateGeoData(final IGeoData geo) {
         try {
             if (navType == null || navLocation == null || navAccuracy == null) {
                 navType = (TextView) findViewById(R.id.nav_type);
@@ -332,17 +311,9 @@ public class cgeonavigate extends AbstractActivity implements IObserver<IGeoData
         }
     }
 
-    private class UpdateDirection implements UpdateDirectionCallback {
-
-        @Override
-        public void updateDirection(cgDirection dir) {
-            if (dir == null || dir.directionNow == null) {
-                return;
-            }
-
-            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
-                northHeading = dir.directionNow;
-            }
+    private void updateDirection(final float direction) {
+        if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
+            northHeading = DirectionProvider.getDirectionNow(this, direction);
         }
     }
 

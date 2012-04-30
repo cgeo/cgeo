@@ -16,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
@@ -35,8 +34,7 @@ public class cgeoapplication extends Application {
     private cgData storage = null;
     private String action = null;
     private volatile GeoDataProvider geo;
-    private cgDirection dir = null;
-    private boolean dirInUse = false;
+    private volatile DirectionProvider dir;
     public boolean firstRun = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean databaseCleaned = false; // database was cleaned
@@ -61,8 +59,6 @@ public class cgeoapplication extends Application {
     @Override
     public void onTerminate() {
         Log.d("Terminating c:geo...");
-
-        cleanDir();
 
         if (storage != null) {
             storage.clean();
@@ -135,56 +131,27 @@ public class cgeoapplication extends Application {
         return currentGeoObject().getMemory();
     }
 
-    public void cleanDir() {
-        if (dir != null) {
-            dir.closeDir();
-            dir = null;
+    public void addDirectionObserver(final IObserver<? super Float> observer) {
+        currentDirObject().addObserver(observer);
+    }
+
+    public void deleteDirectionObserver(final IObserver<? super Float> observer) {
+        currentDirObject().deleteObserver(observer);
+    }
+
+    private DirectionProvider currentDirObject() {
+        if (dir == null) {
+            synchronized(this) {
+                if (dir == null) {
+                    dir = new DirectionProvider(this);
+                }
+            }
         }
+        return dir;
     }
 
     public boolean storageStatus() {
         return storage.status();
-    }
-
-    public cgDirection startDir(Context context, UpdateDirectionCallback dirUpdate) {
-        if (dir == null) {
-            dir = new cgDirection(context, dirUpdate);
-
-            Log.i("Direction service started");
-        }
-
-        dir.replaceUpdate(dirUpdate);
-        dirInUse = true;
-
-        return dir;
-    }
-
-    public cgDirection removeDir() {
-        if (dir != null) {
-            dir.replaceUpdate(null);
-        }
-        dirInUse = false;
-
-        (new removeDirThread()).start();
-
-        return null;
-    }
-
-    private class removeDirThread extends Thread {
-
-        @Override
-        public void run() {
-            try {
-                sleep(2500);
-            } catch (Exception e) {
-                // nothing
-            }
-
-            if (!dirInUse && dir != null) {
-                cleanDir();
-                Log.i("Direction service stopped");
-            }
-        }
     }
 
     public void cleanDatabase(boolean more) {
