@@ -1657,12 +1657,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      *            Waypoint. Mutally exclusive with cache
      * @return
      */
-    private CachesOverlayItemImpl getItem(IWaypoint coord, cgCache cache, cgWaypoint waypoint) {
+    private CachesOverlayItemImpl getItem(final IWaypoint coord, final cgCache cache, final cgWaypoint waypoint) {
         if (cache != null) {
 
-            CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, cache.getType());
+            final CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, cache.getType());
 
-            int hashcode = new HashCodeBuilder()
+            final int hashcode = new HashCodeBuilder()
                     .append(cache.isReliableLatLon())
                     .append(cache.getType().id)
                     .append(cache.isDisabled() || cache.isArchived())
@@ -1674,14 +1674,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     .append(cache.getListId() > 0)
                     .toHashCode();
 
-            LayerDrawable ldFromCache = CGeoMap.overlaysCache.get(hashcode);
+            final LayerDrawable ldFromCache = CGeoMap.overlaysCache.get(hashcode);
             if (ldFromCache != null) {
                 item.setMarker(ldFromCache);
                 return item;
             }
 
-            ArrayList<Drawable> layers = new ArrayList<Drawable>();
-            ArrayList<int[]> insets = new ArrayList<int[]>();
+            final ArrayList<Drawable> layers = new ArrayList<Drawable>();
+            final ArrayList<int[]> insets = new ArrayList<int[]>();
 
             // background: disabled or not
             Drawable marker = getResources().getDrawable(R.drawable.marker);
@@ -1689,7 +1689,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 marker = getResources().getDrawable(R.drawable.marker_disabled);
             }
             layers.add(marker);
-            int resolution = marker.getIntrinsicWidth() > 40 ? 1 : 0;
+            final int resolution = marker.getIntrinsicWidth() > 40 ? 1 : 0;
             // reliable or not
             if (!cache.isReliableLatLon()) {
                 insets.add(INSET_RELIABLE[resolution]);
@@ -1741,7 +1741,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         } else if (waypoint != null) {
 
-            CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, null);
+            final CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, null);
             Drawable[] layers = new Drawable[2];
             layers[0] = getResources().getDrawable(R.drawable.marker);
             layers[1] = getResources().getDrawable(waypoint.getWaypointType().markerId);

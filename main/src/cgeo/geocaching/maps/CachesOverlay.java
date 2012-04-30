@@ -239,8 +239,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             waitDialog.dismiss();
         } catch (Exception e) {
             Log.e("cgMapOverlay.onTap: " + e.toString());
-            if (waitDialog != null)
-            {
+            if (waitDialog != null) {
                 waitDialog.dismiss();
             }
         }
