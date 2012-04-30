@@ -1684,10 +1684,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             final ArrayList<int[]> insets = new ArrayList<int[]>();
 
             // background: disabled or not
-            Drawable marker = getResources().getDrawable(R.drawable.marker);
-            if (cache.isDisabled() || cache.isArchived()) {
-                marker = getResources().getDrawable(R.drawable.marker_disabled);
-            }
+            final Drawable marker = getResources().getDrawable(cache.isDisabled() || cache.isArchived() ? R.drawable.marker_disabled : R.drawable.marker);
             layers.add(marker);
             final int resolution = marker.getIntrinsicWidth() > 40 ? 1 : 0;
             // reliable or not
@@ -1727,10 +1724,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 insets.add(INSET_PERSONALNOTE[resolution]);
             }
 
-            LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
+            final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
 
             int index = 1;
-            for (int[] inset : insets) {
+            for (final int[] inset : insets) {
                 ld.setLayerInset(index++, inset[0], inset[1], inset[2], inset[3]);
             }
 
