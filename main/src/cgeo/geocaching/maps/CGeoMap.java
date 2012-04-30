@@ -1680,6 +1680,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 return item;
             }
 
+            // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
             final ArrayList<Drawable> layers = new ArrayList<Drawable>(9);
             final ArrayList<int[]> insets = new ArrayList<int[]>(8);
 
