@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color_transparent" >
+	<LinearLayout style="@style/action_bar">
+		<TextView style="@style/action_bar_title" />
+		<View style="@style/action_bar_separator" />
+		<ImageView android:id="@+id/defaultNavigation" 
+		    	style="@style/action_bar_action"
+				android:src="@drawable/actionbar_compass"
+				android:onClick="goDefaultNavigation"
+				android:longClickable="true" />
+		<View style="@style/action_bar_separator"
+		 		android:id="@+id/separator"
+		 />
+		<ImageView style="@style/action_bar_action"		    
+				android:src="@drawable/actionbar_manual"
+				android:onClick="goManual" />
+	</LinearLayout>
+	<ScrollView android:id="@+id/details_list_box"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="4dip"
+			android:orientation="vertical" >
+		<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical" >
+			<LinearLayout android:id="@+id/waypoint_details_list"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" >
+			</LinearLayout>
+			<LinearLayout android:id="@+id/edit_box"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"  >
+				<Button style="@style/button_small"
+						android:id="@+id/edit"
+						android:text="@string/waypoint_edit" />
+			</LinearLayout>
+			<LinearLayout android:id="@+id/cache_details_list"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" >
+			</LinearLayout>
+			<LinearLayout android:id="@+id/more_details_box"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"  >
+				<Button style="@style/button_small"
+						android:id="@+id/more_details"
+						android:text="@string/popup_more" />
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>
