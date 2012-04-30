@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -15,7 +16,6 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -46,8 +46,7 @@ public class cgeopopup extends AbstractActivity {
     private String geocode = null;
     private cgCache cache = null;
     private GeoObserver geoUpdate = new UpdateLocation();
-    private ProgressDialog storeDialog = null;
-    private ProgressDialog dropDialog = null;
+    private final Progress progress = new Progress();
     private TextView cacheDistance = null;
     private Handler ratingHandler = new Handler() {
 
@@ -62,52 +61,47 @@ public class cgeopopup extends AbstractActivity {
             }
         }
     };
-    private CancellableHandler storeCacheHandler = new CancellableHandler() {
 
+    private class StoreCacheHandler extends CancellableHandler {
         @Override
         public void handleRegularMessage(Message msg) {
-            try {
-                if (storeDialog != null) {
-                    storeDialog.dismiss();
-                }
-
-                finish();
-                return;
-            } catch (Exception e) {
-                showToast(res.getString(R.string.err_store));
-
-                Log.e("cgeopopup.storeCacheHandler: " + e.toString());
+            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                updateStatusMsg((String) msg.obj);
+            } else {
+                init();
             }
-
-            if (storeDialog != null) {
-                storeDialog.dismiss();
-            }
-            init();
         }
-    };
-    private Handler dropCacheHandler = new Handler() {
 
+        private void updateStatusMsg(final String msg) {
+            progress.setMessage(res.getString(R.string.cache_dialog_offline_save_message)
+                    + "\n\n"
+                    + msg);
+        }
+    }
+
+    private class DropCacheHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            try {
-                if (dropDialog != null) {
-                    dropDialog.dismiss();
-                }
-
-                finish();
-                return;
-            } catch (Exception e) {
-                showToast(res.getString(R.string.err_drop));
-
-                Log.e("cgeopopup.dropCacheHandler: " + e.toString());
-            }
-
-            if (dropDialog != null) {
-                dropDialog.dismiss();
-            }
             init();
         }
-    };
+    }
+
+    private class RefreshCacheHandler extends CancellableHandler {
+        @Override
+        public void handleRegularMessage(Message msg) {
+            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                updateStatusMsg((String) msg.obj);
+            } else {
+                init();
+            }
+        }
+
+        private void updateStatusMsg(final String msg) {
+            progress.setMessage(res.getString(R.string.cache_dialog_refresh_message)
+                    + "\n\n"
+                    + msg);
+        }
+    }
 
     public cgeopopup() {
         super("c:geo-cache-info");
@@ -443,11 +437,11 @@ public class cgeopopup extends AbstractActivity {
 
                 offlineRefresh.setVisibility(View.VISIBLE);
                 offlineRefresh.setEnabled(true);
-                offlineRefresh.setOnClickListener(new storeCache());
+                offlineRefresh.setOnClickListener(new RefreshCacheClickListener());
 
                 offlineStore.setText(res.getString(R.string.cache_offline_drop));
                 offlineStore.setEnabled(true);
-                offlineStore.setOnClickListener(new dropCache());
+                offlineStore.setOnClickListener(new DropCacheClickListener());
             } else {
                 offlineText.setText(res.getString(R.string.cache_offline_not_ready));
 
@@ -458,11 +452,14 @@ public class cgeopopup extends AbstractActivity {
 
                 offlineStore.setText(res.getString(R.string.cache_offline_store));
                 offlineStore.setEnabled(true);
-                offlineStore.setOnClickListener(new storeCache());
+                offlineStore.setOnClickListener(new StoreCacheClickListener());
             }
         } catch (Exception e) {
             Log.e("cgeopopup.init: " + e.toString());
         }
+
+        // cache is loaded. remove progress-popup if any there
+        progress.dismiss();
     }
 
     @Override
@@ -520,26 +517,26 @@ public class cgeopopup extends AbstractActivity {
         finish();
     }
 
-    private class storeCache implements View.OnClickListener {
+    private class StoreCacheClickListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            if (dropDialog != null && dropDialog.isShowing()) {
-                showToast("Still removing this cache.");
+            if (progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
                 return;
             }
 
-            storeDialog = ProgressDialog.show(cgeopopup.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true);
-            storeDialog.setCancelable(false);
-            Thread thread = new storeCacheThread(storeCacheHandler);
-            thread.start();
+            final StoreCacheHandler storeCacheHandler = new StoreCacheHandler();
+
+            progress.show(cgeopopup.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+
+            new StoreCacheThread(storeCacheHandler).start();
         }
     }
 
-    private class storeCacheThread extends Thread {
-
+    private class StoreCacheThread extends Thread {
         final private CancellableHandler handler;
 
-        public storeCacheThread(final CancellableHandler handler) {
+        public StoreCacheThread(final CancellableHandler handler) {
             this.handler = handler;
         }
 
@@ -550,26 +547,55 @@ public class cgeopopup extends AbstractActivity {
         }
     }
 
-    private class dropCache implements View.OnClickListener {
-
+    private class RefreshCacheClickListener implements View.OnClickListener {
         public void onClick(View arg0) {
-            if (storeDialog != null && storeDialog.isShowing()) {
-                showToast("Still saving this cache.");
+            if (progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
                 return;
             }
 
-            dropDialog = ProgressDialog.show(cgeopopup.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true);
-            dropDialog.setCancelable(false);
-            Thread thread = new dropCacheThread(dropCacheHandler);
-            thread.start();
+            final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler();
+
+            progress.show(cgeopopup.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
+
+            new RefreshCacheThread(refreshCacheHandler).start();
         }
     }
 
-    private class dropCacheThread extends Thread {
+    private class RefreshCacheThread extends Thread {
+        final private CancellableHandler handler;
+
+        public RefreshCacheThread(final CancellableHandler handler) {
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            cache.refresh(cgeopopup.this, cache.getListId(), handler);
+            handler.sendEmptyMessage(0);
+        }
+    }
+
+    private class DropCacheClickListener implements View.OnClickListener {
+
+        public void onClick(View arg0) {
+            if (progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
+                return;
+            }
+
+            final DropCacheHandler dropCacheHandler = new DropCacheHandler();
+
+            progress.show(cgeopopup.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
+            new DropCacheThread(dropCacheHandler).start();
+        }
+    }
+
+    private class DropCacheThread extends Thread {
 
         private Handler handler = null;
 
-        public dropCacheThread(Handler handlerIn) {
+        public DropCacheThread(Handler handlerIn) {
             handler = handlerIn;
         }
 
