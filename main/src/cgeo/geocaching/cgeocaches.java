@@ -197,7 +197,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
 
                     AlertDialog alert = dialog.create();
                     alert.show();
-                } else if (app != null && search != null && search.getError() != null) {
+                } else if (search != null && search.getError() != null) {
                     showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString(res) + '.');
 
                     hideLoading();
