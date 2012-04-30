@@ -1680,8 +1680,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 return item;
             }
 
-            final ArrayList<Drawable> layers = new ArrayList<Drawable>();
-            final ArrayList<int[]> insets = new ArrayList<int[]>();
+            final ArrayList<Drawable> layers = new ArrayList<Drawable>(9);
+            final ArrayList<int[]> insets = new ArrayList<int[]>(8);
 
             // background: disabled or not
             final Drawable marker = getResources().getDrawable(cache.isDisabled() || cache.isArchived() ? R.drawable.marker_disabled : R.drawable.marker);
