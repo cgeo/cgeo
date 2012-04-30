@@ -1,23 +1,22 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.MapProviderFactory;
-import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
-import cgeo.geocaching.maps.interfaces.GeoPointImpl;
+import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
-import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
+import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapActivity024;
+import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapItemFactory024;
 
-import org.mapsforge.android.maps.MapDatabase;
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.map.reader.MapDatabase;
+import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Resources;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +29,8 @@ public class MapsforgeMapProvider implements MapProvider {
     private final Map<Integer, String> mapSources;
 
     private final int baseId;
+    private boolean oldMap = false;
+    private MapItemFactory mapItemFactory = new MapsforgeMapItemFactory();
 
     public MapsforgeMapProvider(int _baseId) {
         baseId = _baseId;
@@ -61,38 +62,69 @@ public class MapsforgeMapProvider implements MapProvider {
         return 0;
     }
 
+    public static boolean isValidMapFile(String mapFileIn) {
+
+        if (StringUtils.isEmpty(mapFileIn)) {
+            return false;
+        }
+
+        MapDatabase mapDB = new MapDatabase();
+        FileOpenResult result = mapDB.openFile(new File(mapFileIn));
+        mapDB.closeFile();
+
+        boolean isValid = result.isSuccess();
+
+        if (!isValid) {
+            isValid = isMapfile024(mapFileIn);
+        }
+
+        return isValid;
+    }
+
+    private static boolean isMapfile024(String mapFileIn) {
+        return org.mapsforge.android.mapsold.MapDatabase.isValidMapFile(mapFileIn);
+    }
+
+    @Override
+    public boolean isSameActivity(int sourceId1, int sourceId2) {
+        final int mfSourceId1 = getMapsforgeSource(sourceId1);
+        final int mfSourceId2 = getMapsforgeSource(sourceId2);
+        return mfSourceId1 == mfSourceId2 ||
+                !isMapfile024(Settings.getMapFile()) ||
+                mfSourceId1 != OFFLINE && mfSourceId2 != OFFLINE;
+    }
+
     @Override
     public Class<? extends Activity> getMapClass() {
+        int sourceId = getMapsforgeSource(Settings.getMapSource());
+
+        if (sourceId == OFFLINE && isMapfile024(Settings.getMapFile())) {
+            oldMap = true;
+            mapItemFactory = new MapsforgeMapItemFactory024();
+            return MapsforgeMapActivity024.class;
+        }
+        oldMap = false;
+        mapItemFactory = new MapsforgeMapItemFactory();
         return MapsforgeMapActivity.class;
     }
 
     @Override
     public int getMapViewId() {
+        if (oldMap) {
+            return R.id.mfmap_old;
+        }
         return R.id.mfmap;
     }
 
     @Override
     public int getMapLayoutId() {
+        if (oldMap) {
+            return R.layout.map_mapsforge_old;
+        }
         return R.layout.map_mapsforge;
     }
-
     @Override
-    public GeoPointImpl getGeoPointBase(final Geopoint coords) {
-        return new MapsforgeGeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6());
+    public MapItemFactory getMapItemFactory() {
+        return mapItemFactory;
     }
-
-    @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final CacheType type) {
-        return new MapsforgeCacheOverlayItem(coordinate, type);
-    }
-
-    @Override
-    public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context, Go4CacheUser userOne) {
-        return new MapsforgeOtherCachersOverlayItem(context, userOne);
-    }
-
-    public static boolean isValidMapFile(String mapFileIn) {
-        return MapDatabase.isValidMapFile(mapFileIn);
-    }
-
 }

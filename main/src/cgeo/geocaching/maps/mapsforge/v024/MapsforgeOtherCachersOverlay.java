@@ -1,12 +1,12 @@
-package cgeo.geocaching.maps.mapsforge;
+package cgeo.geocaching.maps.mapsforge.v024;
 
-import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
-import org.mapsforge.android.maps.Projection;
-import org.mapsforge.android.maps.overlay.ItemizedOverlay;
+import org.mapsforge.android.mapsold.ItemizedOverlay;
+import org.mapsforge.android.mapsold.Projection;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,28 +16,28 @@ import android.graphics.drawable.Drawable;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlayItem> implements ItemizedOverlayImpl {
+public class MapsforgeOtherCachersOverlay extends ItemizedOverlay<MapsforgeOtherCachersOverlayItem> implements ItemizedOverlayImpl {
 
-    private CachesOverlay base;
+    private OtherCachersOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public MapsforgeCacheOverlay(Context contextIn, Drawable markerIn) {
-        super(boundCenterBottom(markerIn));
-        base = new CachesOverlay(this, contextIn);
+    public MapsforgeOtherCachersOverlay(Context contextIn, Drawable markerIn) {
+        super(boundCenter(markerIn));
+        base = new OtherCachersOverlay(this, contextIn);
     }
 
     @Override
-    public CachesOverlay getBase() {
+    public OtherCachersOverlay getBase() {
         return base;
     }
 
     @Override
-    protected MapsforgeCacheOverlayItem createItem(int i) {
+    protected MapsforgeOtherCachersOverlayItem createItem(int i) {
         if (base == null) {
             return null;
         }
 
-        return (MapsforgeCacheOverlayItem) base.createItem(i);
+        return (MapsforgeOtherCachersOverlayItem) base.createItem(i);
     }
 
     @Override
@@ -61,6 +61,7 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
     @Override
     protected void drawOverlayBitmap(Canvas canvas, Point drawPosition,
             Projection projection, byte drawZoomLevel) {
+
         base.drawOverlayBitmap(canvas, drawPosition, new MapsforgeMapProjection(projection), drawZoomLevel);
     }
 
@@ -81,7 +82,7 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
 
     @Override
     public void superSetLastFocusedItemIndex(int i) {
-        // nothing to do
+        // Nothing to do here
     }
 
     @Override
@@ -91,12 +92,13 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
 
     @Override
     public void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-        // nothing to do here...
+        // Nothing to do here
     }
 
     @Override
     public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
+
         super.drawOverlayBitmap(canvas, drawPosition, (Projection) projection.getImpl(), drawZoomLevel);
     }
 

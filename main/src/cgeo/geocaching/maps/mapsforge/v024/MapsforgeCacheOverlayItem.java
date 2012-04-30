@@ -1,11 +1,11 @@
-package cgeo.geocaching.maps.mapsforge;
+package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 
-import org.mapsforge.android.maps.overlay.OverlayItem;
-import org.mapsforge.core.GeoPoint;
+import org.mapsforge.android.mapsold.GeoPoint;
+import org.mapsforge.android.mapsold.OverlayItem;
 
 import android.graphics.drawable.Drawable;
 

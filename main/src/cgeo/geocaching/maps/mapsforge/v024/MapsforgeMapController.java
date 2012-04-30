@@ -1,10 +1,10 @@
-package cgeo.geocaching.maps.mapsforge;
+package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 
-import org.mapsforge.android.maps.MapController;
-import org.mapsforge.core.GeoPoint;
+import org.mapsforge.android.mapsold.GeoPoint;
+import org.mapsforge.android.mapsold.MapController;
 
 public class MapsforgeMapController implements MapControllerImpl {
 
