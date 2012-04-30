@@ -1070,6 +1070,11 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
 
         final cgCache cache = adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
 
+        // just in case the list got resorted while we are executing this code
+        if (cache == null) {
+            return true;
+        }
+
         final int id = item.getItemId();
         switch (id) {
             case MENU_DEFAULT_NAVIGATION:
@@ -1115,10 +1120,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 // in Android:
                 // https://code.google.com/p/android/issues/detail?id=7139
                 lastMenuInfo = info;
-                if (cache != null) {
-                    // create a search for a single cache (as if in details view)
-                    cache.logOffline(this, LogType.getById(id - MENU_LOG_VISIT_OFFLINE));
-                }
+                // create a search for a single cache (as if in details view)
+                cache.logOffline(this, LogType.getById(id - MENU_LOG_VISIT_OFFLINE));
         }
 
         return true;
