@@ -2947,7 +2947,7 @@ public class cgData {
         for (int i = 0; i < WAYPOINT_COLUMNS.length; i++) {
             query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
         }
-        query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append("._id == ").append(dbTableCaches).append("._id and ").append(where);
+        query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where);
 
         final Cursor cursor = databaseRO.rawQuery(query.toString(), null);
         try {
