@@ -160,7 +160,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        SubMenu subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(android.R.drawable.ic_menu_add);
+        SubMenu subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
 
         subMenu.add(0, 0x6, 0, res.getString(R.string.log_date_time));
         subMenu.add(0, 0x4, 0, res.getString(R.string.log_date));

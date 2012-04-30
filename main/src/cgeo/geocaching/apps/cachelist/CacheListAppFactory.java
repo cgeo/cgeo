@@ -3,9 +3,9 @@ package cgeo.geocaching.apps.cachelist;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.apps.AbstractAppFactory;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -45,10 +45,10 @@ public final class CacheListAppFactory extends AbstractAppFactory {
                 return null;
             case 1:
                 return menu.add(0, activeApps.get(0).getId(), 0,
-                        activeApps.get(0).getName()).setIcon(android.R.drawable.ic_menu_mapmode);
+                        activeApps.get(0).getName()).setIcon(R.drawable.ic_menu_mapmode);
             default:
                 final SubMenu subMenu = menu.addSubMenu(0, 101, 0,
-                        res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
+                        res.getString(R.string.caches_on_map)).setIcon(R.drawable.ic_menu_mapmode);
                 for (final CacheListApp app : activeApps) {
                     subMenu.add(0, app.getId(), 0, app.getName());
                 }
