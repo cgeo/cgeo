@@ -190,8 +190,6 @@ public class cgeo extends AbstractActivity {
 
         app.setAction(null);
 
-        app.cleanDir();
-
         setContentView(R.layout.main);
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 

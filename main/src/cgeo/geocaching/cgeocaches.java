@@ -74,7 +74,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class cgeocaches extends AbstractListActivity implements IObserver<IGeoData> {
+public class cgeocaches extends AbstractListActivity implements IObserver<Object> {
 
     private static final int MAX_LIST_ITEMS = 1000;
     private static final String EXTRAS_LIST_TYPE = "type";
@@ -137,8 +137,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
     private TextView listFooterText = null;
     private Progress progress = new Progress();
     private Float northHeading = 0f;
-    private cgDirection dir = null;
-    private UpdateDirectionCallback dirUpdate = new UpdateDirection();
     private String title = "";
     private int detailTotal = 0;
     private int detailProgress = 0;
@@ -646,7 +644,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
     public void onResume() {
         super.onResume();
 
-        init();
+        startGeoAndDir();
 
         if (adapter != null) {
             adapter.setSelectMode(false, true);
@@ -1194,12 +1192,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
             adapter.notifyDataSetChanged();
         }
         adapter.reFilter();
-
-        adapter.setActualCoordinates(app.currentGeo().getCoords());
-
-        if (dir != null) {
-            adapter.setActualHeading(dir.directionNow);
-        }
     }
 
     private void setLoadingCaches() {
@@ -1243,25 +1235,18 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
         listFooter.setClickable(enableMore);
     }
 
-    private void init() {
-        startGeoAndDir();
-
-        if (dir != null) {
-            dirUpdate.updateDirection(dir);
-        }
-    }
-
     // Sensor & geolocation manager. This must be called from the UI thread as it may
     // cause the system listeners to start if nobody else required them before.
     private void startGeoAndDir() {
         app.addGeoObserver(this);
-        if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
-            dir = app.startDir(this, dirUpdate);
+        if (Settings.isLiveList() && Settings.isUseCompass()) {
+            app.addDirectionObserver(this);
         }
     }
 
     private void removeGeoAndDir() {
         app.deleteGeoObserver(this);
+        app.deleteDirectionObserver(this);
     }
 
     private void importGpx() {
@@ -1408,7 +1393,15 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
     }
 
     @Override
-    public void update(final IGeoData geo) {
+    public void update(final Object data) {
+        if (data instanceof IGeoData) {
+            updateGeoData((IGeoData) data);
+        } else {
+            updateDirection((Float) data);
+        }
+    }
+
+    private void updateGeoData(final IGeoData geo) {
         if (adapter == null) {
             return;
         }
@@ -1431,21 +1424,14 @@ public class cgeocaches extends AbstractListActivity implements IObserver<IGeoDa
         }
     }
 
-    private class UpdateDirection implements UpdateDirectionCallback {
+    public void updateDirection(final float direction) {
+        if (!Settings.isLiveList()) {
+            return;
+        }
 
-        @Override
-        public void updateDirection(cgDirection dir) {
-            if (!Settings.isLiveList()) {
-                return;
-            }
-            if (dir == null || dir.directionNow == null) {
-                return;
-            }
-
-            northHeading = dir.directionNow;
-            if (northHeading != null && adapter != null && (app.currentGeo().getSpeed() <= 5)) { // use compass when speed is lower than 18 km/h) {
-                adapter.setActualHeading(northHeading);
-            }
+        northHeading = DirectionProvider.getDirectionNow(this, direction);
+        if (northHeading != null && adapter != null && (app.currentGeo().getSpeed() <= 5)) { // use compass when speed is lower than 18 km/h) {
+            adapter.setActualHeading(northHeading);
         }
     }
 
