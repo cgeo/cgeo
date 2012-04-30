@@ -448,14 +448,6 @@ public class cgeo extends AbstractActivity {
             return;
         }
 
-        //TODO This is ugly fix for #486 bug should be reported to library
-        if (Thread.currentThread().getContextClassLoader() == null)
-        {
-            Thread.currentThread().setContextClassLoader(new ClassLoader() {
-            });
-            StringUtils.isNotBlank("haha");
-        }
-
         initialized = true;
 
         Settings.setLanguage(Settings.isUseEnglish());
