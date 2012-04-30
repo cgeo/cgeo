@@ -301,7 +301,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         for (final CompassMiniView compass : compasses) {
-            compass.updateCoords(coordsIn);
+            compass.updateCurrentCoords(coordsIn);
         }
     }
 
@@ -441,7 +441,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         distances.add(holder.distance);
         holder.distance.setContent(cache.getCoords());
         compasses.add(holder.direction);
-        holder.direction.setContent(cache.getCoords());
+        holder.direction.setTargetCoords(cache.getCoords());
 
         if (cache.isFound() && cache.isLogOffline()) {
             holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);
@@ -487,7 +487,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             holder.direction.updateAzimuth(azimuth);
             if (coords != null) {
                 holder.distance.update(coords);
-                holder.direction.updateCoords(coords);
+                holder.direction.updateCurrentCoords(coords);
             }
             setDiDi = true;
         } else {

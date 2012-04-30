@@ -1,10 +1,10 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,88 +13,114 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class CompassMiniView extends View {
-    private int arrowSkin = R.drawable.compass_arrow_mini_white;
-    private Context context = null;
-    private Geopoint cacheCoords = null;
-    private Bitmap compassArrow = null;
+final public class CompassMiniView extends View {
+    private Geopoint targetCoords = null;
     private float azimuth = 0;
     private float heading = 0;
-    private PaintFlagsDrawFilter setfil = null;
-    private PaintFlagsDrawFilter remfil = null;
 
-    public CompassMiniView(Context contextIn) {
-        super(contextIn);
-        context = contextIn;
+    /**
+     * lazy initialized bitmap resource depending on selected skin
+     */
+    private static int arrowSkin = 0;
+    /**
+     * bitmap shared by all instances of the view
+     */
+    private static Bitmap compassArrow;
+    /**
+     * bitmap width
+     */
+    private static int compassArrowWidth;
+    /**
+     * bitmap height
+     */
+    private static int compassArrowHeight;
+    /**
+     * view instance counter for bitmap recycling
+     */
+    private static int instances = 0;
+
+    /**
+     * pixel size of the square arrow bitmap
+     */
+    private static final int ARROW_BITMAP_SIZE = 21;
+    private static final PaintFlagsDrawFilter FILTER_SET = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
+    private static final PaintFlagsDrawFilter FILTER_REMOVE = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
+
+    public CompassMiniView(Context context) {
+        super(context);
+        initializeResources(context);
     }
 
-    public CompassMiniView(Context contextIn, AttributeSet attrs) {
-        super(contextIn, attrs);
-        context = contextIn;
+    public CompassMiniView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initializeResources(context);
+    }
 
-        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.cgCompassMini);
-        int usedSkin = attributes.getInt(R.styleable.cgCompassMini_skin, 0);
-        if (usedSkin == 1) {
-            arrowSkin = R.drawable.compass_arrow_mini_black;
-        } else {
-            arrowSkin = R.drawable.compass_arrow_mini_white;
+    private static void initializeResources(final Context context) {
+        if (arrowSkin == 0) {
+            if (Settings.isLightSkin()) {
+                arrowSkin = R.drawable.compass_arrow_mini_black;
+            } else {
+                arrowSkin = R.drawable.compass_arrow_mini_white;
+            }
+        }
+        if (compassArrow == null) {
+            compassArrow = BitmapFactory.decodeResource(context.getResources(), arrowSkin);
+            compassArrowWidth = compassArrow.getWidth();
+            compassArrowHeight = compassArrow.getWidth();
         }
     }
 
     @Override
     public void onAttachedToWindow() {
-        compassArrow = BitmapFactory.decodeResource(context.getResources(), arrowSkin);
-
-        setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
-        remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
+        instances++;
     }
 
     @Override
     public void onDetachedFromWindow() {
-        if (compassArrow != null) {
-            compassArrow.recycle();
-            compassArrow = null;
+        instances--;
+        if (instances == 0) {
+            if (compassArrow != null) {
+                compassArrow.recycle();
+                compassArrow = null;
+            }
         }
     }
 
-    public void setContent(final Geopoint cacheCoordsIn) {
-        cacheCoords = cacheCoordsIn;
+    public void setTargetCoords(final Geopoint point) {
+        targetCoords = point;
     }
 
-    protected void updateAzimuth(float azimuthIn) {
-        azimuth = azimuthIn;
-
+    protected void updateAzimuth(float azimuth) {
+        this.azimuth = azimuth;
         updateDirection();
     }
 
-    protected void updateHeading(float headingIn) {
-        heading = headingIn;
-
+    protected void updateHeading(float heading) {
+        this.heading = heading;
         updateDirection();
     }
 
-    protected void updateCoords(final Geopoint coordsIn) {
-        if (coordsIn == null || cacheCoords == null) {
+    protected void updateCurrentCoords(final Geopoint currentCoords) {
+        if (currentCoords == null || targetCoords == null) {
             return;
         }
 
-        heading = coordsIn.bearingTo(cacheCoords);
-
+        heading = currentCoords.bearingTo(targetCoords);
         updateDirection();
     }
 
-    protected void updateDirection() {
+    private void updateDirection() {
         if (compassArrow == null || compassArrow.isRecycled()) {
             return;
         }
 
         // compass margins
-        int compassRoseWidth = compassArrow.getWidth();
-        int compassRoseHeight = compassArrow.getWidth();
-        int marginLeft = (getWidth() - compassRoseWidth) / 2;
-        int marginTop = (getHeight() - compassRoseHeight) / 2;
 
-        invalidate(marginLeft, marginTop, (marginLeft + compassRoseWidth), (marginTop + compassRoseHeight));
+        final int marginLeft = (getWidth() - compassArrowWidth) / 2;
+        final int marginTop = (getHeight() - compassArrowHeight) / 2;
+
+        invalidate(marginLeft, marginTop, (marginLeft + compassArrowWidth), (marginTop + compassArrowHeight));
     }
 
     @Override
@@ -109,25 +135,20 @@ public class CompassMiniView extends View {
         }
 
         // compass margins
-        canvas.setDrawFilter(setfil);
+        canvas.setDrawFilter(FILTER_SET);
 
-        int marginLeft;
-        int marginTop;
 
-        int compassArrowWidth = compassArrow.getWidth();
-        int compassArrowHeight = compassArrow.getWidth();
+        final int canvasCenterX = (compassArrowWidth / 2) + ((getWidth() - compassArrowWidth) / 2);
+        final int canvasCenterY = (compassArrowHeight / 2) + ((getHeight() - compassArrowHeight) / 2);
 
-        int canvasCenterX = (compassArrowWidth / 2) + ((getWidth() - compassArrowWidth) / 2);
-        int canvasCenterY = (compassArrowHeight / 2) + ((getHeight() - compassArrowHeight) / 2);
-
-        marginLeft = (getWidth() - compassArrowWidth) / 2;
-        marginTop = (getHeight() - compassArrowHeight) / 2;
+        final int marginLeft = (getWidth() - compassArrowWidth) / 2;
+        final int marginTop = (getHeight() - compassArrowHeight) / 2;
 
         canvas.rotate(-azimuthRelative, canvasCenterX, canvasCenterY);
         canvas.drawBitmap(compassArrow, marginLeft, marginTop, null);
         canvas.rotate(azimuthRelative, canvasCenterX, canvasCenterY);
 
-        canvas.setDrawFilter(remfil);
+        canvas.setDrawFilter(FILTER_REMOVE);
     }
 
     @Override
@@ -136,36 +157,34 @@ public class CompassMiniView extends View {
     }
 
     private int measureWidth(int measureSpec) {
-        int result;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
+        final int specMode = MeasureSpec.getMode(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
 
         if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
-        } else {
-            result = 21 + getPaddingLeft() + getPaddingRight();
+            return specSize;
+        }
 
-            if (specMode == MeasureSpec.AT_MOST) {
-                result = Math.min(result, specSize);
-            }
+        int result = ARROW_BITMAP_SIZE + getPaddingLeft() + getPaddingRight();
+
+        if (specMode == MeasureSpec.AT_MOST) {
+            result = Math.min(result, specSize);
         }
 
         return result;
     }
 
     private int measureHeight(int measureSpec) {
-        int result;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
+        final int specMode = MeasureSpec.getMode(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
 
         if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
-        } else {
-            result = 21 + getPaddingTop() + getPaddingBottom();
+            return specSize;
+        }
 
-            if (specMode == MeasureSpec.AT_MOST) {
-                result = Math.min(result, specSize);
-            }
+        int result = ARROW_BITMAP_SIZE + getPaddingTop() + getPaddingBottom();
+
+        if (specMode == MeasureSpec.AT_MOST) {
+            result = Math.min(result, specSize);
         }
 
         return result;
