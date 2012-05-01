@@ -156,28 +156,28 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Calculates distance to given Geopoint in km.
      *
-     * @param gp
+     * @param point
      *            target
      * @return distance in km
      * @throws GeopointException
      *             if there is an error in distance calculation
      */
-    public float distanceTo(final Geopoint gp)
+    public float distanceTo(final ICoordinates point)
     {
-        return pathTo(gp)[0] / 1000;
+        return pathTo(point.getCoords())[0] / 1000;
     }
 
     /**
      * Calculates bearing to given Geopoint in degree.
      *
-     * @param gp
+     * @param point
      *            target
      * @return bearing in degree, in the [0,360[ range
      */
-    public float bearingTo(final Geopoint gp)
+    public float bearingTo(final ICoordinates point)
     {
         // Android library returns a bearing in the [-180;180] range
-        final float bearing = pathTo(gp)[1];
+        final float bearing = pathTo(point.getCoords())[1];
         return bearing < 0 ? bearing + 360 : bearing;
     }
 

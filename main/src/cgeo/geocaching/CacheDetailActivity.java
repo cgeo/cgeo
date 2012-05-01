@@ -13,6 +13,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
@@ -324,16 +325,11 @@ public class CacheDetailActivity extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        app.addGeoObserver(locationUpdater);
         if (refreshOnResume) {
             notifyDataSetChanged();
             refreshOnResume = false;
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+        app.addGeoObserver(locationUpdater);
     }
 
     @Override
@@ -341,14 +337,12 @@ public class CacheDetailActivity extends AbstractActivity {
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
         }
-
         super.onStop();
     }
 
     @Override
     public void onPause() {
         app.deleteGeoObserver(locationUpdater);
-
         super.onPause();
     }
 
@@ -698,7 +692,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             try {
-                StringBuilder dist = new StringBuilder();
+                final StringBuilder dist = new StringBuilder();
 
                 if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
                     dist.append(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
@@ -706,12 +700,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 if (cache != null && cache.getElevation() != null) {
                     if (geo.getAltitude() != 0.0) {
-                        double diff = cache.getElevation() - geo.getAltitude();
-                        if (diff >= 0) {
-                            dist.append(" ↗");
-                        } else if (diff < 0) {
-                            dist.append(" ↘");
-                        }
+                        final double diff = cache.getElevation() - geo.getAltitude();
+                        dist.append(diff >= 0 ? " ↗" : " ↘");
                         if (Settings.isUseMetricUnits()) {
                             dist.append(Math.abs((int) diff));
                             dist.append(" m");
@@ -1383,7 +1373,19 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // distance
-            cacheDistanceView = addCacheDetail(R.string.cache_distance, cache.getDistance() != null ? "~" + HumanDistance.getHumanDistance(cache.getDistance()) : "--");
+            {
+                Float distance = null;
+                if (cache.getDistance() != null) {
+                    distance = cache.getDistance();
+                } else if (cache.getCoords() != null) {
+                    final Geopoint currentCoords = app.currentGeo().getCoords();
+                    if (currentCoords != null) {
+                        distance = currentCoords.distanceTo(cache);
+                    }
+                }
+                cacheDistanceView = addCacheDetail(R.string.cache_distance,
+                        distance != null ? HumanDistance.getHumanDistance(distance) : "--");
+            }
 
             // difficulty
             if (cache.getDifficulty() > 0) {
