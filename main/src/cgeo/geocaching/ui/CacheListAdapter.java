@@ -47,7 +47,6 @@ import java.util.Set;
 
 public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
-    private CacheListView holder = null;
     private LayoutInflater inflater = null;
     private CacheComparator cacheComparator = null;
     private Geopoint coords = null;
@@ -296,6 +295,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         View v = rowView;
 
+        CacheListView holder;
         if (v == null) {
             v = inflater.inflate(R.layout.caches_item, null);
 

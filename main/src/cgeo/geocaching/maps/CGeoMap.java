@@ -117,7 +117,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final String BUNDLE_MAP_STATE = "mapState";
 
     private Resources res = null;
-    private MapProvider mapProvider = null;
     private MapItemFactory mapItemFactory = null;
     private Activity activity = null;
     private MapViewImpl mapView = null;
@@ -356,7 +355,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         res = this.getResources();
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
-        mapProvider = Settings.getMapProvider();
+        final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
 
 

@@ -7,7 +7,6 @@ import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
-import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
@@ -44,14 +43,12 @@ public class PositionOverlay implements GeneralOverlay {
     private Point historyPointN = new Point();
     private Point historyPointP = new Point();
     private Activity activity;
-    private MapProvider mapProvider = null;
     private MapItemFactory mapItemFactory = null;
     private OverlayImpl ovlImpl = null;
 
     public PositionOverlay(Activity activity, OverlayImpl ovlImpl) {
         this.activity = activity;
-        this.mapProvider = Settings.getMapProvider();
-        this.mapItemFactory = this.mapProvider.getMapItemFactory();
+        this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
         this.ovlImpl = ovlImpl;
     }
 

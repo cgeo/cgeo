@@ -39,7 +39,6 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     private Paint blockedCircle = null;
     private PaintFlagsDrawFilter setFilter = null;
     private PaintFlagsDrawFilter removeFilter = null;
-    private MapProvider mapProvider = null;
     private MapItemFactory mapItemFactory = null;
 
     public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn) {
@@ -49,7 +48,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
         context = contextIn;
 
-        mapProvider = Settings.getMapProvider();
+        final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
     }
 
