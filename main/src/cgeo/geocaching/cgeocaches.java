@@ -33,6 +33,7 @@ import cgeo.geocaching.sorting.PopularityComparator;
 import cgeo.geocaching.sorting.RatingComparator;
 import cgeo.geocaching.sorting.SizeComparator;
 import cgeo.geocaching.sorting.StateComparator;
+import cgeo.geocaching.sorting.StorageTimeComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.sorting.VoteComparator;
@@ -117,6 +118,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     private static final int MENU_NAVIGATION = 69;
     private static final int MENU_STORE_CACHE = 73;
     private static final int MENU_FILTER = 74;
+    private static final int MENU_SORT_STORAGE = 75;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_RESTART_GEO_AND_DIR = -2;
@@ -712,6 +714,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         comparators.put(res.getString(R.string.caches_sort_date), MENU_SORT_DATE);
         comparators.put(res.getString(R.string.caches_sort_finds), MENU_SORT_FINDS);
         comparators.put(res.getString(R.string.caches_sort_state), MENU_SORT_STATE);
+        comparators.put(res.getString(R.string.caches_sort_storage), MENU_SORT_STORAGE);
 
         List<String> sortedLabels = new ArrayList<String>(comparators.keySet());
         Collections.sort(sortedLabels);
@@ -917,6 +920,9 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 return false;
             case MENU_SORT_GEOCODE:
                 setComparator(item, new GeocodeComparator());
+                return false;
+            case MENU_SORT_STORAGE:
+                setComparator(item, new StorageTimeComparator());
                 return false;
             case MENU_SWITCH_LIST:
                 selectList(null);
