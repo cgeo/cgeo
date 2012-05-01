@@ -17,7 +17,7 @@ public final class LogEntry {
     private static final List<cgImage> EMPTY_LIST = Collections.emptyList();
 
     public int id = 0;
-    public LogType type = LogType.LOG_NOTE; // note
+    public LogType type = LogType.NOTE; // note
     public String author = "";
     public String log = "";
     public long date = 0;

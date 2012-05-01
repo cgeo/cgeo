@@ -674,7 +674,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void start(Attributes attrs) {
-                    log = new LogEntry("", 0, LogType.LOG_UNKNOWN, "");
+                    log = new LogEntry("", 0, LogType.UNKNOWN, "");
 
                     try {
                         if (attrs.getIndex("id") > -1) {
@@ -690,7 +690,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end() {
-                    if (log.type != LogType.LOG_UNKNOWN) {
+                    if (log.type != LogType.UNKNOWN) {
                         cache.appendLog(log);
                     }
                 }

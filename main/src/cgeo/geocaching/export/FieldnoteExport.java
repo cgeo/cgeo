@@ -129,14 +129,14 @@ class FieldnoteExport extends AbstractExport {
             // different strings than gc.com expects in the field note
             // We only need such logtypes that are possible to log via c:geo
             Map<LogType, String> logTypes = new HashMap<LogType, String>();
-            logTypes.put(LogType.LOG_FOUND_IT, "Found it");
-            logTypes.put(LogType.LOG_DIDNT_FIND_IT, "Didn't find it");
-            logTypes.put(LogType.LOG_NOTE, "Write Note");
-            logTypes.put(LogType.LOG_NEEDS_ARCHIVE, "Needs archived");
-            logTypes.put(LogType.LOG_NEEDS_MAINTENANCE, "Needs Maintenance");
-            logTypes.put(LogType.LOG_WILL_ATTEND, "Will Attend");
-            logTypes.put(LogType.LOG_ATTENDED, "Attended");
-            logTypes.put(LogType.LOG_WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
+            logTypes.put(LogType.FOUND_IT, "Found it");
+            logTypes.put(LogType.DIDNT_FIND_IT, "Didn't find it");
+            logTypes.put(LogType.NOTE, "Write Note");
+            logTypes.put(LogType.NEEDS_ARCHIVE, "Needs archived");
+            logTypes.put(LogType.NEEDS_MAINTENANCE, "Needs Maintenance");
+            logTypes.put(LogType.WILL_ATTEND, "Will Attend");
+            logTypes.put(LogType.ATTENDED, "Attended");
+            logTypes.put(LogType.WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
 
             for (int i = 0; i < caches.size(); i++) {
                 try {

@@ -135,8 +135,8 @@ final public class OkapiClient {
             final JSONObject owner = response.getJSONObject(CACHE_OWNER);
             cache.setOwner(parseUser(owner));
 
-            cache.getLogCounts().put(LogType.LOG_FOUND_IT, response.getInt(CACHE_FOUNDS));
-            cache.getLogCounts().put(LogType.LOG_DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
+            cache.getLogCounts().put(LogType.FOUND_IT, response.getInt(CACHE_FOUNDS));
+            cache.getLogCounts().put(LogType.DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
             cache.setSize(getCacheSize(response));
             cache.setDifficulty((float) response.getDouble(CACHE_DIFFICULTY));
             cache.setTerrain((float) response.getDouble(CACHE_TERRAIN));
@@ -224,12 +224,12 @@ final public class OkapiClient {
 
     private static LogType parseLogType(String logType) {
         if ("Found it".equalsIgnoreCase(logType)) {
-            return LogType.LOG_FOUND_IT;
+            return LogType.FOUND_IT;
         }
         if ("Didn't find it".equalsIgnoreCase(logType)) {
-            return LogType.LOG_DIDNT_FIND_IT;
+            return LogType.DIDNT_FIND_IT;
         }
-        return LogType.LOG_NOTE;
+        return LogType.NOTE;
     }
 
     private static Date parseDate(final String date) {

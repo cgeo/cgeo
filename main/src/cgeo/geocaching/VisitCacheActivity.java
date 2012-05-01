@@ -67,7 +67,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
     private boolean gettingViewstate = true;
     private List<TrackableLog> trackables = null;
     private Calendar date = Calendar.getInstance();
-    private LogType typeSelected = LogType.LOG_UNKNOWN;
+    private LogType typeSelected = LogType.UNKNOWN;
     private int attempts = 0;
     private Button postButton = null;
     private Button clearButton = null;
@@ -187,7 +187,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     private void updatePostButtonText() {
         if (postButton.isEnabled()) {
-            if (typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
+            if (typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
                 if (rating == 0) {
                     postButton.setText(res.getString(R.string.log_post_no_rate));
                 } else {
@@ -320,7 +320,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         final boolean signatureAvailable = Settings.getSignature() != null;
         menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
 
-        final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == LogType.LOG_FOUND_IT && StringUtils.isNotBlank(cache.getGuid());
+        final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == LogType.FOUND_IT && StringUtils.isNotBlank(cache.getGuid());
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
         return true;
@@ -490,7 +490,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
         if (!possibleLogTypes.contains(typeSelected)) {
             if (alreadyFound) {
-                typeSelected = LogType.LOG_NOTE;
+                typeSelected = LogType.NOTE;
             } else {
                 typeSelected = possibleLogTypes.get(0);
             }
@@ -555,13 +555,13 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
 
-        if (LogType.LOG_FOUND_IT == type && !tbChanged) {
+        if (LogType.FOUND_IT == type && !tbChanged) {
             // TODO: change action
-        } else if (LogType.LOG_FOUND_IT != type && !tbChanged) {
+        } else if (LogType.FOUND_IT != type && !tbChanged) {
             // TODO: change action
         }
 
-        if (type == LogType.LOG_FOUND_IT && Settings.isUseTwitter()) {
+        if (type == LogType.FOUND_IT && Settings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);
@@ -600,7 +600,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             app.clearLogOffline(geocode);
 
             if (alreadyFound) {
-                typeSelected = LogType.LOG_NOTE;
+                typeSelected = LogType.NOTE;
             } else {
                 typeSelected = possibleLogTypes.get(0);
             }
@@ -665,7 +665,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 if (CollectionUtils.isNotEmpty(typesPre)) {
                     possibleLogTypes.clear();
                     possibleLogTypes.addAll(typesPre);
-                    possibleLogTypes.remove(LogType.LOG_UPDATE_COORDINATES);
+                    possibleLogTypes.remove(LogType.UPDATE_COORDINATES);
                 }
             } catch (Exception e) {
                 Log.e("cgeovisit.loadData.run: " + e.toString());
@@ -705,7 +705,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 cache.prependLog(logNow);
                 //                app.saveLogs(cache);
 
-                if (typeSelected == LogType.LOG_FOUND_IT) {
+                if (typeSelected == LogType.FOUND_IT) {
                     cache.setFound(true);
                 }
 
@@ -716,13 +716,13 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 app.clearLogOffline(geocode);
             }
 
-            if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isUseTwitter()
+            if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter()
                     && Settings.isTwitterLoginValid()
                     && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                 Twitter.postTweetCache(geocode);
             }
 
-            if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
+            if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
                 GCVote.setRating(cache, rating);
             }
 

@@ -2230,20 +2230,20 @@ public class CacheDetailActivity extends AbstractActivity {
 
                     // colored marker
                     holder.statusMarker.setVisibility(View.VISIBLE);
-                    if (log.type == LogType.LOG_FOUND_IT
-                            || log.type == LogType.LOG_WEBCAM_PHOTO_TAKEN
-                            || log.type == LogType.LOG_ATTENDED) {
+                    if (log.type == LogType.FOUND_IT
+                            || log.type == LogType.WEBCAM_PHOTO_TAKEN
+                            || log.type == LogType.ATTENDED) {
                         holder.statusMarker.setImageResource(R.drawable.mark_green);
-                    } else if (log.type == LogType.LOG_PUBLISH_LISTING
-                            || log.type == LogType.LOG_ENABLE_LISTING
-                            || log.type == LogType.LOG_OWNER_MAINTENANCE) {
+                    } else if (log.type == LogType.PUBLISH_LISTING
+                            || log.type == LogType.ENABLE_LISTING
+                            || log.type == LogType.OWNER_MAINTENANCE) {
                         holder.statusMarker.setImageResource(R.drawable.mark_green_more);
-                    } else if (log.type == LogType.LOG_DIDNT_FIND_IT
-                            || log.type == LogType.LOG_NEEDS_MAINTENANCE
-                            || log.type == LogType.LOG_NEEDS_ARCHIVE) {
+                    } else if (log.type == LogType.DIDNT_FIND_IT
+                            || log.type == LogType.NEEDS_MAINTENANCE
+                            || log.type == LogType.NEEDS_ARCHIVE) {
                         holder.statusMarker.setImageResource(R.drawable.mark_red);
-                    } else if (log.type == LogType.LOG_TEMP_DISABLE_LISTING
-                            || log.type == LogType.LOG_ARCHIVE) {
+                    } else if (log.type == LogType.TEMP_DISABLE_LISTING
+                            || log.type == LogType.ARCHIVE) {
                         holder.statusMarker.setImageResource(R.drawable.mark_red_more);
                     } else {
                         holder.statusMarker.setVisibility(View.GONE);

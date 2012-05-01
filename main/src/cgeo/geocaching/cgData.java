@@ -2508,7 +2508,7 @@ public class cgData {
         if (StringUtils.isBlank(geocode)) {
             return false;
         }
-        if (LogType.LOG_UNKNOWN == type && StringUtils.isBlank(log)) {
+        if (LogType.UNKNOWN == type && StringUtils.isBlank(log)) {
             return false;
         }
 

@@ -29,7 +29,7 @@ public class FindsComparator extends AbstractCacheComparator {
         if (cache.getLogCounts().isEmpty()) {
             cache.setLogCounts(app.loadLogCounts(cache.getGeocode()));
         }
-        Integer logged = cache.getLogCounts().get(LogType.LOG_FOUND_IT);
+        Integer logged = cache.getLogCounts().get(LogType.FOUND_IT);
         if (logged != null) {
             finds = logged;
         }

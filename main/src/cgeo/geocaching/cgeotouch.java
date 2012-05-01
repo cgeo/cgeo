@@ -43,7 +43,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
     private String[] viewstates = null;
     private boolean gettingViewstate = true;
     private Calendar date = Calendar.getInstance();
-    private LogType typeSelected = LogType.LOG_UNKNOWN;
+    private LogType typeSelected = LogType.UNKNOWN;
     private int attempts = 0;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
@@ -263,13 +263,13 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         }
 
         logTypes.clear();
-        logTypes.add(LogType.LOG_RETRIEVED_IT);
-        logTypes.add(LogType.LOG_GRABBED_IT);
-        logTypes.add(LogType.LOG_NOTE);
-        logTypes.add(LogType.LOG_DISCOVERED_IT);
+        logTypes.add(LogType.RETRIEVED_IT);
+        logTypes.add(LogType.GRABBED_IT);
+        logTypes.add(LogType.NOTE);
+        logTypes.add(LogType.DISCOVERED_IT);
 
-        if (LogType.LOG_UNKNOWN == typeSelected) {
-            typeSelected = LogType.LOG_RETRIEVED_IT;
+        if (LogType.UNKNOWN == typeSelected) {
+            typeSelected = LogType.RETRIEVED_IT;
         }
         setType(typeSelected);
 

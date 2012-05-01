@@ -601,7 +601,7 @@ public abstract class GCParser {
                     String countStr = matcherLog.group(2).replaceAll("[.,]", "");
 
                     if (StringUtils.isNotBlank(typeStr)
-                            && LogType.LOG_UNKNOWN != LogType.getByIconName(typeStr)
+                            && LogType.UNKNOWN != LogType.getByIconName(typeStr)
                             && StringUtils.isNotBlank(countStr)) {
                         cache.getLogCounts().put(LogType.getByIconName(typeStr), Integer.parseInt(countStr));
                     }

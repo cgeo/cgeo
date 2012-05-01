@@ -411,7 +411,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final LogType logType) {
-        if (logType == LogType.LOG_UNKNOWN) {
+        if (logType == LogType.UNKNOWN) {
             return;
         }
         cgeoapplication app = (cgeoapplication) ((Activity) fromActivity).getApplication();
@@ -433,32 +433,32 @@ public class cgCache implements ICache, IWaypoint {
         boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
         List<LogType> logTypes = new ArrayList<LogType>();
         if (isEventCache()) {
-            logTypes.add(LogType.LOG_WILL_ATTEND);
-            logTypes.add(LogType.LOG_NOTE);
-            logTypes.add(LogType.LOG_ATTENDED);
-            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
+            logTypes.add(LogType.WILL_ATTEND);
+            logTypes.add(LogType.NOTE);
+            logTypes.add(LogType.ATTENDED);
+            logTypes.add(LogType.NEEDS_ARCHIVE);
             if (isOwner) {
-                logTypes.add(LogType.LOG_ANNOUNCEMENT);
+                logTypes.add(LogType.ANNOUNCEMENT);
             }
         } else if (CacheType.WEBCAM == cacheType) {
-            logTypes.add(LogType.LOG_WEBCAM_PHOTO_TAKEN);
-            logTypes.add(LogType.LOG_DIDNT_FIND_IT);
-            logTypes.add(LogType.LOG_NOTE);
-            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
-            logTypes.add(LogType.LOG_NEEDS_MAINTENANCE);
+            logTypes.add(LogType.WEBCAM_PHOTO_TAKEN);
+            logTypes.add(LogType.DIDNT_FIND_IT);
+            logTypes.add(LogType.NOTE);
+            logTypes.add(LogType.NEEDS_ARCHIVE);
+            logTypes.add(LogType.NEEDS_MAINTENANCE);
         } else {
-            logTypes.add(LogType.LOG_FOUND_IT);
-            logTypes.add(LogType.LOG_DIDNT_FIND_IT);
-            logTypes.add(LogType.LOG_NOTE);
-            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
-            logTypes.add(LogType.LOG_NEEDS_MAINTENANCE);
+            logTypes.add(LogType.FOUND_IT);
+            logTypes.add(LogType.DIDNT_FIND_IT);
+            logTypes.add(LogType.NOTE);
+            logTypes.add(LogType.NEEDS_ARCHIVE);
+            logTypes.add(LogType.NEEDS_MAINTENANCE);
         }
         if (isOwner) {
-            logTypes.add(LogType.LOG_OWNER_MAINTENANCE);
-            logTypes.add(LogType.LOG_TEMP_DISABLE_LISTING);
-            logTypes.add(LogType.LOG_ENABLE_LISTING);
-            logTypes.add(LogType.LOG_ARCHIVE);
-            logTypes.remove(LogType.LOG_UPDATE_COORDINATES);
+            logTypes.add(LogType.OWNER_MAINTENANCE);
+            logTypes.add(LogType.TEMP_DISABLE_LISTING);
+            logTypes.add(LogType.ENABLE_LISTING);
+            logTypes.add(LogType.ARCHIVE);
+            logTypes.remove(LogType.UPDATE_COORDINATES);
         }
         return logTypes;
     }

@@ -121,15 +121,15 @@ public class GC1ZXX2 extends MockedCache {
     @Override
     public Map<LogType, Integer> getLogCounts() {
         Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
-        logCounts.put(LogType.LOG_PUBLISH_LISTING, 1);
-        logCounts.put(LogType.LOG_FOUND_IT, 369);
-        logCounts.put(LogType.LOG_POST_REVIEWER_NOTE, 1);
-        logCounts.put(LogType.LOG_DIDNT_FIND_IT, 7);
-        logCounts.put(LogType.LOG_NOTE, 10);
-        logCounts.put(LogType.LOG_ARCHIVE, 1);
-        logCounts.put(LogType.LOG_ENABLE_LISTING, 2);
-        logCounts.put(LogType.LOG_TEMP_DISABLE_LISTING, 3);
-        logCounts.put(LogType.LOG_OWNER_MAINTENANCE, 7);
+        logCounts.put(LogType.PUBLISH_LISTING, 1);
+        logCounts.put(LogType.FOUND_IT, 369);
+        logCounts.put(LogType.POST_REVIEWER_NOTE, 1);
+        logCounts.put(LogType.DIDNT_FIND_IT, 7);
+        logCounts.put(LogType.NOTE, 10);
+        logCounts.put(LogType.ARCHIVE, 1);
+        logCounts.put(LogType.ENABLE_LISTING, 2);
+        logCounts.put(LogType.TEMP_DISABLE_LISTING, 3);
+        logCounts.put(LogType.OWNER_MAINTENANCE, 7);
         return logCounts;
     }
 
