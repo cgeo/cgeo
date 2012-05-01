@@ -31,6 +31,7 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -2116,8 +2117,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
             // log count
             if (cache.getLogCounts() != null) {
-                boolean showLogCounter = false;
-
                 final StringBuilder text = new StringBuilder(200);
                 text.append(res.getString(R.string.cache_log_types));
                 text.append(": ");
@@ -2136,10 +2135,11 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                 });
 
+                boolean showLogCounter = false;
                 for (Entry<LogType, Integer> pair : sortedLogCounts) {
                     String logTypeLabel = pair.getKey().getL10n();
                     // it may happen that the label is unknown -> then avoid any output for this type
-                    if (logTypeLabel != null) {
+                    if (logTypeLabel != null && pair.getKey() != LogType.PUBLISH_LISTING) {
                         if (showLogCounter) {
                             text.append(", ");
                         }
