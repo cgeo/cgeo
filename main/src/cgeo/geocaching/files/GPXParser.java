@@ -690,7 +690,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end() {
-                    if (StringUtils.isNotBlank(log.log)) {
+                    if (log.type != LogType.LOG_UNKNOWN) {
                         cache.appendLog(log);
                     }
                 }
