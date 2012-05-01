@@ -44,7 +44,7 @@ public class StaticMapsActivity extends AbstractActivity {
                 if (CollectionUtils.isEmpty(maps)) {
                     if ((waypoint_id != null && Settings.isStoreOfflineWpMaps()) || (waypoint_id == null && Settings.isStoreOfflineMaps())) {
                         final AlertDialog.Builder builder = new AlertDialog.Builder(StaticMapsActivity.this);
-                        builder.setMessage(R.string.err_detail_ask_store_map_static).setPositiveButton(android.R.string.yes, dialogClickListener)
+                        builder.setTitle(R.string.map_static_title).setMessage(R.string.err_detail_ask_store_map_static).setPositiveButton(android.R.string.yes, dialogClickListener)
                                 .setNegativeButton(android.R.string.no, dialogClickListener).show();
                     } else {
                         showToast(res.getString(R.string.err_detail_not_load_map_static));
