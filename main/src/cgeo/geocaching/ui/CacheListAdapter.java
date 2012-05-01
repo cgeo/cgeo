@@ -297,7 +297,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         View v = rowView;
 
         if (v == null) {
-            v = inflater.inflate(R.layout.cache, null);
+            v = inflater.inflate(R.layout.caches_item, null);
 
             holder = new CacheListView();
             holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
@@ -308,7 +308,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             holder.direction = (CompassMiniView) v.findViewById(R.id.direction);
             holder.dirImgLayout = (RelativeLayout) v.findViewById(R.id.dirimg_layout);
             holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
-            holder.inventory = (RelativeLayout) v.findViewById(R.id.inventory);
+            holder.inventory = (ImageView) v.findViewById(R.id.inventory);
             holder.favourite = (TextView) v.findViewById(R.id.favourite);
             holder.info = (TextView) v.findViewById(R.id.info);
 
@@ -363,15 +363,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         holder.text.setText(cache.getNameSp(), TextView.BufferType.SPANNABLE);
         holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache), null, null, null);
 
-        if (holder.inventory.getChildCount() > 0) {
-            holder.inventory.removeAllViews();
-        }
-
         if (cache.getInventoryItems() > 0) {
-            final ImageView tbIcon = (ImageView) inflater.inflate(R.layout.trackable_icon, null);
-            tbIcon.setImageResource(R.drawable.trackable_all);
-
-            holder.inventory.addView(tbIcon);
             holder.inventory.setVisibility(View.VISIBLE);
         } else {
             holder.inventory.setVisibility(View.GONE);

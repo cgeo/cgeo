@@ -3,30 +3,40 @@
 		android:id="@+id/one_cache"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:paddingBottom="7dip"
-		android:paddingTop="7dip"
+		android:paddingBottom="6dip"
+		android:paddingTop="6dip"
 		android:background="?background_color" >
+	
+    <!-- selection mode checkbox -->
+    	
 	<CheckBox android:id="@+id/checkbox"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerVertical="true"
 			android:layout_alignParentLeft="true"
 			android:layout_gravity="left"
-			android:padding="5dip"
+			android:paddingRight="5dip"
 			android:gravity="left|center_horizontal"
-			android:visibility="visible" />
-    <ImageView android:id="@+id/log_status_mark"
+			android:visibility="gone" />
+
+	<!--  "found" marker, vertical green/red line -->
+	
+	<ImageView android:id="@+id/log_status_mark"
 		android:layout_width="2dip"
 		android:layout_height="30dip"
 		android:layout_centerVertical="true"
 		android:layout_toRightOf="@id/checkbox"
+		android:layout_marginRight="4dip"
 		android:scaleType="fitXY"
+		android:visibility="gone"
 		android:src="@drawable/mark_green" />
+	
+	<!-- cache name and icon -->
+	
 	<TextView android:id="@+id/text"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginRight="110dip"
-			android:layout_marginLeft="10dip"
 			android:layout_toRightOf="@+id/log_status_mark"
 			android:layout_gravity="left"
 			android:paddingRight="3dip"
@@ -36,12 +46,14 @@
 			android:ellipsize="marquee"
 			android:textSize="18dip"
 			android:textColor="?text_color" />
+	
+	<!-- cache attributes and other info -->
+	
 	<TextView android:id="@+id/info"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="28dip"
 			android:layout_marginRight="110dip"
-			android:layout_marginLeft="10dip"
 			android:layout_alignParentBottom="true"
 			android:layout_toRightOf="@id/log_status_mark"
 			android:layout_gravity="left"
@@ -52,6 +64,9 @@
 			android:ellipsize="marquee"
 			android:textSize="12dip"
 			android:textColor="?text_color_grey" />
+	
+	<!-- real text based direction and distance -->
+	
 	<RelativeLayout android:id="@+id/direction_layout"
 			android:visibility="gone"
 			android:layout_width="78dip"
@@ -86,6 +101,9 @@
 				android:gravity="center" 
 				cc:skin="?compass" />
 	</RelativeLayout>
+	
+	<!-- image based direction and distance -->
+	
 	<RelativeLayout android:id="@+id/dirimg_layout"
 			android:visibility="gone"
 			android:layout_width="78dip"
@@ -104,28 +122,29 @@
 				android:scaleType="fitXY"
 				android:src="@null" />
 	</RelativeLayout>
+	
+	<!-- inventory and favorites -->
+	
 	<RelativeLayout
 			android:layout_width="28dip"
 			android:layout_height="wrap_content"
 			android:layout_centerVertical="true"
 			android:layout_alignParentRight="true"
 			android:layout_marginTop="1dip"
-			android:layout_marginBottom="1dip"
-			android:layout_marginRight="2dip" >
-		<RelativeLayout android:id="@+id/inventory"
-				android:visibility="gone"
+			android:layout_marginBottom="1dip">
+
+		<ImageView android:id="@+id/inventory"
 				android:layout_width="28dip"
 				android:layout_height="22dip"
-				android:layout_marginTop="2dip"
-				android:layout_centerHorizontal="true"
+				android:layout_gravity="center_vertical|center_horizontal"
 				android:layout_alignParentTop="true"
-				android:layout_gravity="center"
-				android:background="?inventory" >
-		</RelativeLayout>
+				android:scaleType="center"
+				android:src="@drawable/trackable_all"
+				android:background="?inventory"/>
 		<TextView android:id="@+id/favourite"
 				android:layout_width="28dip"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="24dip"
+				android:layout_marginTop="22dip"
 				android:layout_centerHorizontal="true"
 				android:layout_alignParentBottom="true"
 				android:layout_gravity="center"

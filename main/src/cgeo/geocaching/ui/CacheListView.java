@@ -13,7 +13,7 @@ public class CacheListView {
     public TextView text;
     public TextView favourite;
     public TextView info;
-    public RelativeLayout inventory;
+    public ImageView inventory;
     public RelativeLayout directionLayout;
     public DistanceView distance;
     public CompassMiniView direction;
