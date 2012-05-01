@@ -1031,6 +1031,8 @@
     · Field notes can now be uploaded to the website\n
     · Filter for D/T in lists\n
     · Allow close of popup by click on map\n
+    · Support of v0.3.0 mapsforge offline maps\n
+    · Sorting of caches by store date\n
     \n
     <b>Bugfixing:</b>\n
     · Static maps download for waypoints now off by default\n
@@ -1038,7 +1040,8 @@
     · Static map download improved\n
     · Distance information in nearby search corrected\n
     · Adaption to changes on geocaching.com\n
-    · Warning displayed for incompatible map file\n
+    · Warning displayed for incompatible or outdated map files\n
+    · No change of font color in selection mode\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
@@ -1049,8 +1052,7 @@
       In fast mode the cache type might be wrong in rare cases\n
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
     · Other:\n
-      Log images with huge size will cause a long loading time\n
-      OSM:Offline does only support map-files with version 0.2.4\n\n\n
+      Log images with huge size will cause a long loading time\n\n\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
