@@ -98,7 +98,6 @@ public class cgCache implements ICache, IWaypoint {
     private boolean userModifiedCoords = false;
     // temporary values
     private boolean statusChecked = false;
-    private boolean statusCheckedView = false;
     private String directionImg = "";
     private String nameForSorting;
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
@@ -958,14 +957,6 @@ public class cgCache implements ICache, IWaypoint {
 
     public void setStatusChecked(boolean statusChecked) {
         this.statusChecked = statusChecked;
-    }
-
-    public boolean isStatusCheckedView() {
-        return statusCheckedView;
-    }
-
-    public void setStatusCheckedView(boolean statusCheckedView) {
-        this.statusCheckedView = statusCheckedView;
     }
 
     public String getDirectionImg() {

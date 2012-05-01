@@ -27,17 +27,12 @@ import android.graphics.drawable.LayerDrawable;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
-import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -52,33 +47,31 @@ import java.util.Set;
 
 public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
-    final private Resources res;
-    /** Resulting list of caches */
-    final private List<cgCache> list;
     private CacheListView holder = null;
     private LayoutInflater inflater = null;
     private CacheComparator cacheComparator = null;
     private Geopoint coords = null;
     private float azimuth = 0;
     private long lastSort = 0L;
-    private boolean sort = true;
-    private int checked = 0;
     private boolean selectMode = false;
-    final private static SparseArray<Drawable> gcIconDrawables = new SparseArray<Drawable>();
+    private IFilter currentFilter = null;
+    private List<cgCache> originalList = null;
+
     final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
     final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
     final private int[] ratingBcgs = new int[3];
-    final private float pixelDensity;
+    final private CacheListType cacheListType;
+    final private Resources res;
+    /** Resulting list of caches */
+    final private List<cgCache> list;
+
     private static final int SWIPE_MIN_DISTANCE = 60;
     private static final int SWIPE_MAX_OFF_PATH = 100;
-    private static final int SWIPE_DISTANCE = 80;
+    private static final SparseArray<Drawable> gcIconDrawables = new SparseArray<Drawable>();
     /**
      * time in milliseconds after which the list may be resorted due to position updates
      */
     private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
-    private IFilter currentFilter = null;
-    private List<cgCache> originalList = null;
-    private final CacheListType cacheListType;
 
     public CacheListAdapter(final Activity activity, final List<cgCache> list, CacheListType cacheListType) {
         super(activity, 0, list);
@@ -90,11 +83,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             cacheComparator = new VisitComparator();
         }
 
-        final DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        pixelDensity = metrics.density;
-
-        Drawable modifiedCoordinatesMarker = activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
+        final Drawable modifiedCoordinatesMarker = activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
         for (final CacheType cacheType : CacheType.values()) {
             // unmodified icon
             int hashCode = getIconHashCode(cacheType, false);
@@ -198,29 +187,25 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         return currentFilter.getName();
     }
 
-    public int getChecked() {
+    public int getCheckedCount() {
+        int checked = 0;
+        for (cgCache cache : list) {
+            if (cache.isStatusChecked()) {
+                checked++;
+            }
+        }
         return checked;
     }
 
-    public boolean setSelectMode(final boolean status, final boolean clear) {
-        selectMode = status;
+    public void setSelectMode(final boolean selectMode) {
+        this.selectMode = selectMode;
 
-        if (!selectMode && clear) {
+        if (!selectMode) {
             for (final cgCache cache : list) {
                 cache.setStatusChecked(false);
-                cache.setStatusCheckedView(false);
-            }
-            checked = 0;
-        } else if (selectMode) {
-            for (final cgCache cache : list) {
-                cache.setStatusCheckedView(false);
             }
         }
-        checkChecked(0);
-
         notifyDataSetChanged();
-
-        return selectMode;
     }
 
     public boolean getSelectMode() {
@@ -228,45 +213,18 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     public void switchSelectMode() {
-        selectMode = !selectMode;
-
-        if (!selectMode) {
-            for (final cgCache cache : list) {
-                cache.setStatusChecked(false);
-                cache.setStatusCheckedView(false);
-            }
-            checked = 0;
-        } else {
-            for (final cgCache cache : list) {
-                cache.setStatusCheckedView(false);
-            }
-        }
-        checkChecked(0);
-
-        notifyDataSetChanged();
+        setSelectMode(!getSelectMode());
     }
 
     public void invertSelection() {
-        int check = 0;
-
         for (cgCache cache : list) {
-            if (cache.isStatusChecked()) {
-                cache.setStatusChecked(false);
-                cache.setStatusCheckedView(false);
-            } else {
-                cache.setStatusChecked(true);
-                cache.setStatusCheckedView(true);
-
-                check++;
-            }
+            cache.setStatusChecked(!cache.isStatusChecked());
         }
-        checkChecked(check);
-
         notifyDataSetChanged();
     }
 
     public void forceSort(final Geopoint coordsIn) {
-        if (CollectionUtils.isEmpty(list) || !sort) {
+        if (CollectionUtils.isEmpty(list) || selectMode) {
             return;
         }
 
@@ -290,7 +248,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         coords = coordsIn;
 
-        if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && sort && isSortedByDistance()) {
+        if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && !selectMode && isSortedByDistance()) {
             Collections.sort(list, new DistanceComparator(coordsIn, list));
             notifyDataSetChanged();
             lastSort = System.currentTimeMillis();
@@ -323,35 +281,6 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
     }
 
-    /**
-     * clear all check marks
-     *
-     * @return
-     */
-    public boolean resetChecks() {
-        if (list.isEmpty()) {
-            return false;
-        }
-        if (checked <= 0) {
-            return false;
-        }
-
-        boolean status = getSelectMode();
-        int cleared = 0;
-        for (cgCache cache : list) {
-            if (cache.isStatusChecked()) {
-                cache.setStatusChecked(false);
-
-                checkChecked(-1);
-                cleared++;
-            }
-        }
-        setSelectMode(false, false);
-        notifyDataSetChanged();
-
-        return cleared > 0 || status;
-    }
-
     @Override
     public View getView(final int position, final View rowView, final ViewGroup parent) {
         if (inflater == null) {
@@ -363,7 +292,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             return null;
         }
 
-        cgCache cache = getItem(position);
+        final cgCache cache = getItem(position);
 
         View v = rowView;
 
@@ -372,8 +301,6 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
             holder = new CacheListView();
             holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-            holder.oneInfo = (RelativeLayout) v.findViewById(R.id.one_info);
-            holder.oneCheckbox = (RelativeLayout) v.findViewById(R.id.one_checkbox);
             holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
             holder.text = (TextView) v.findViewById(R.id.text);
             holder.directionLayout = (RelativeLayout) v.findViewById(R.id.direction_layout);
@@ -390,53 +317,23 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             holder = (CacheListView) v.getTag();
         }
 
-        if (cache.isOwn()) {
-            if (Settings.isLightSkin()) {
-                holder.oneInfo.setBackgroundResource(R.color.owncache_background_light);
-                holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_light);
-            } else {
-                holder.oneInfo.setBackgroundResource(R.color.owncache_background_dark);
-                holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_dark);
-            }
-        } else {
-            if (Settings.isLightSkin()) {
-                holder.oneInfo.setBackgroundResource(R.color.background_light);
-                holder.oneCheckbox.setBackgroundResource(R.color.background_light);
-            } else {
-                holder.oneInfo.setBackgroundResource(R.color.background_dark);
-                holder.oneCheckbox.setBackgroundResource(R.color.background_dark);
-            }
-        }
+        final boolean lightSkin = Settings.isLightSkin();
 
-        final touchListener touchLst = new touchListener(cache.getGeocode(), cache.getName(), cache);
+        final TouchListener touchLst = new TouchListener(cache);
         v.setOnClickListener(touchLst);
         v.setOnLongClickListener(touchLst);
         v.setOnTouchListener(touchLst);
         v.setLongClickable(true);
 
         if (selectMode) {
-            if (cache.isStatusCheckedView()) {
-                moveRight(holder, cache, true); // move fast when already slided
-            } else {
-                moveRight(holder, cache, false);
-            }
-        } else if (cache.isStatusChecked()) {
-            holder.checkbox.setChecked(true);
-            if (cache.isStatusCheckedView()) {
-                moveRight(holder, cache, true); // move fast when already slided
-            } else {
-                moveRight(holder, cache, false);
-            }
-        } else {
-            holder.checkbox.setChecked(false);
-            if (cache.isStatusCheckedView()) {
-                moveLeft(holder, cache, false);
-            } else {
-                holder.oneInfo.clearAnimation();
-            }
+            holder.checkbox.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.checkbox.setVisibility(View.GONE);
         }
 
-        holder.checkbox.setOnClickListener(new checkBoxListener(cache));
+        holder.checkbox.setChecked(cache.isStatusChecked());
+        holder.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache));
 
         distances.add(holder.distance);
         holder.distance.setContent(cache.getCoords());
@@ -470,9 +367,8 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             holder.inventory.removeAllViews();
         }
 
-        ImageView tbIcon;
         if (cache.getInventoryItems() > 0) {
-            tbIcon = (ImageView) inflater.inflate(R.layout.trackable_icon, null);
+            final ImageView tbIcon = (ImageView) inflater.inflate(R.layout.trackable_icon, null);
             tbIcon.setImageResource(R.drawable.trackable_all);
 
             holder.inventory.addView(tbIcon);
@@ -521,9 +417,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             }
 
             if (dirImg != null) {
-                if (!Settings.isLightSkin()) {
-                    int length = dirImg.getWidth() * dirImg.getHeight();
-                    int[] pixels = new int[length];
+                if (!lightSkin) {
+                    final int length = dirImg.getWidth() * dirImg.getHeight();
+                    final int[] pixels = new int[length];
                     dirImg.getPixels(pixels, 0, dirImg.getWidth(), 0, 0, dirImg.getWidth(), dirImg.getHeight());
                     for (int i = 0; i < length; i++) {
                         if (pixels[i] == 0xff000000) { // replace black with white
@@ -545,12 +441,12 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
-        if (Settings.isLightSkin()) {
+        if (lightSkin) {
             favoriteBack = R.drawable.favourite_background_light;
         } else {
             favoriteBack = R.drawable.favourite_background_dark;
         }
-        float myVote = cache.getMyVote();
+        final float myVote = cache.getMyVote();
         if (myVote > 0) { // use my own rating for display, if I have voted
             if (myVote >= 4) {
                 favoriteBack = ratingBcgs[2];
@@ -560,7 +456,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
                 favoriteBack = ratingBcgs[0];
             }
         } else {
-            float rating = cache.getRating();
+            final float rating = cache.getRating();
             if (rating >= 3.5) {
                 favoriteBack = ratingBcgs[2];
             } else if (rating >= 2.1) {
@@ -572,13 +468,13 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         holder.favourite.setBackgroundResource(favoriteBack);
 
         if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
-            ArrayList<String> infos = new ArrayList<String>();
+            final ArrayList<String> infos = new ArrayList<String>();
             infos.add(StringUtils.upperCase(cache.getGeocode()));
             infos.add(Formatter.formatDate(cache.getVisitedDate()));
             infos.add(Formatter.formatTime(cache.getVisitedDate()));
             holder.info.setText(StringUtils.join(infos, Formatter.SEPARATOR));
         } else {
-            ArrayList<String> infos = new ArrayList<String>();
+            final ArrayList<String> infos = new ArrayList<String>();
             if (StringUtils.isNotBlank(cache.getGeocode())) {
                 infos.add(cache.getGeocode());
             }
@@ -610,7 +506,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     private static Drawable getCacheIcon(cgCache cache) {
         int hashCode = getIconHashCode(cache.getType(), cache.hasUserModifiedCoords() || cache.hasFinalDefined());
-        Drawable drawable = gcIconDrawables.get(hashCode);
+        final Drawable drawable = gcIconDrawables.get(hashCode);
         if (drawable != null) {
             return drawable;
         }
@@ -623,53 +519,33 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
-
-        checked = 0;
-        for (cgCache cache : list) {
-            if (cache.isStatusChecked()) {
-                checked++;
-            }
-        }
-
         distances.clear();
         compasses.clear();
     }
 
-    private class checkBoxListener implements View.OnClickListener {
+    private static class SelectionCheckBoxListener implements View.OnClickListener {
 
-        private cgCache cache = null;
+        private final cgCache cache;
 
-        public checkBoxListener(cgCache cacheIn) {
-            cache = cacheIn;
+        public SelectionCheckBoxListener(cgCache cache) {
+            this.cache = cache;
         }
 
         public void onClick(View view) {
             final boolean checkNow = ((CheckBox) view).isChecked();
-
-            if (checkNow) {
-                cache.setStatusChecked(true);
-                checked++;
-            } else {
-                cache.setStatusChecked(false);
-                checked--;
-            }
+            cache.setStatusChecked(checkNow);
         }
     }
 
-    private class touchListener implements View.OnLongClickListener, View.OnClickListener, View.OnTouchListener {
+    private class TouchListener implements View.OnLongClickListener, View.OnClickListener, View.OnTouchListener {
 
-        private String geocode = null;
-        private String name = null;
-        private cgCache cache = null;
         private boolean touch = true;
-        private GestureDetector gestureDetector = null;
+        private final GestureDetector gestureDetector;
+        private final cgCache cache;
 
-        public touchListener(String geocodeIn, String nameIn, cgCache cacheIn) {
-            geocode = geocodeIn;
-            name = nameIn;
-            cache = cacheIn;
-
-            final detectGesture dGesture = new detectGesture(holder, cache);
+        public TouchListener(final cgCache cache) {
+            this.cache = cache;
+            final FlingGesture dGesture = new FlingGesture(cache);
             gestureDetector = new GestureDetector(dGesture);
         }
 
@@ -680,12 +556,14 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
                 return;
             }
 
-            if (getSelectMode() || getChecked() > 0) {
+            if (getSelectMode()) {
+                cache.setStatusChecked(!cache.isStatusChecked());
+                notifyDataSetChanged();
                 return;
             }
 
             // load cache details
-            CacheDetailActivity.startActivity(getContext(), geocode, name);
+            CacheDetailActivity.startActivity(getContext(), cache.getGeocode(), cache.getName());
         }
 
         // long tap on item
@@ -709,128 +587,43 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
     }
 
-    class detectGesture extends GestureDetector.SimpleOnGestureListener {
+    private class FlingGesture extends GestureDetector.SimpleOnGestureListener {
 
-        private CacheListView holder = null;
-        private cgCache cache = null;
+        private final cgCache cache;
 
-        public detectGesture(CacheListView holderIn, cgCache cacheIn) {
-            holder = holderIn;
-            cache = cacheIn;
+        public FlingGesture(cgCache cache) {
+            this.cache = cache;
         }
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             try {
-                if (getSelectMode()) {
-                    return false;
-                }
-
                 if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
                     return false;
                 }
 
+                // left to right swipe
                 if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-                    // left to right swipe
-                    if (cache.isStatusChecked()) {
-                        return true;
-                    }
-
-                    if (holder != null && holder.oneInfo != null) {
-                        checkChecked(+1);
-                        holder.checkbox.setChecked(true);
+                    if (!selectMode) {
+                        switchSelectMode();
                         cache.setStatusChecked(true);
-                        moveRight(holder, cache, false);
                     }
-
                     return true;
-                } else if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-                    // right to left swipe
-                    if (!cache.isStatusChecked()) {
-                        return true;
+                }
+
+                // right to left swipe
+                if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
+                    if (selectMode) {
+                        switchSelectMode();
                     }
-
-                    if (holder != null && holder.oneInfo != null) {
-                        if (getSelectMode()) {
-                            setSelectMode(false, false);
-                        }
-
-                        checkChecked(-1);
-                        holder.checkbox.setChecked(false);
-                        cache.setStatusChecked(false);
-                        moveLeft(holder, cache, false);
-                    }
-
                     return true;
                 }
             } catch (Exception e) {
-                Log.w("CacheListAdapter.detectGesture.onFling: " + e.toString());
+                Log.w("CacheListAdapter.FlingGesture.onFling: " + e.toString());
             }
 
             return false;
         }
-    }
-
-    private void checkChecked(int cnt) {
-        // check how many caches are selected, if any block sorting of list
-        checked += cnt;
-        sort = !(checked > 0 || getSelectMode());
-
-        if (sort) {
-            forceSort(coords);
-        }
-    }
-
-    private void moveRight(CacheListView holder, cgCache cache, boolean force) {
-        if (cache == null) {
-            return;
-        }
-
-        holder.checkbox.setChecked(cache.isStatusChecked());
-
-        // slide cache info
-        final Animation showCheckbox = new TranslateAnimation(0, (int) (SWIPE_DISTANCE * pixelDensity), 0, 0);
-        showCheckbox.setRepeatCount(0);
-        showCheckbox.setDuration(force ? 0 : 400);
-        showCheckbox.setFillEnabled(true);
-        showCheckbox.setFillAfter(true);
-        showCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        // animation set (container)
-        final AnimationSet selectAnimation = new AnimationSet(true);
-        selectAnimation.setFillEnabled(true);
-        selectAnimation.setFillAfter(true);
-
-        selectAnimation.addAnimation(showCheckbox);
-
-        holder.oneInfo.startAnimation(selectAnimation);
-        cache.setStatusCheckedView(true);
-    }
-
-    private void moveLeft(CacheListView holder, cgCache cache, boolean force) {
-        if (cache == null) {
-            return;
-        }
-
-        holder.checkbox.setChecked(cache.isStatusChecked());
-
-        // slide cache info
-        final Animation hideCheckbox = new TranslateAnimation((int) (SWIPE_DISTANCE * pixelDensity), 0, 0, 0);
-        hideCheckbox.setRepeatCount(0);
-        hideCheckbox.setDuration(force ? 0 : 400);
-        hideCheckbox.setFillEnabled(true);
-        hideCheckbox.setFillAfter(true);
-        hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        // animation set (container)
-        final AnimationSet selectAnimation = new AnimationSet(true);
-        selectAnimation.setFillEnabled(true);
-        selectAnimation.setFillAfter(true);
-
-        selectAnimation.addAnimation(hideCheckbox);
-
-        holder.oneInfo.startAnimation(selectAnimation);
-        cache.setStatusCheckedView(false);
     }
 
     public List<cgCache> getFilteredList() {
@@ -838,13 +631,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     public List<cgCache> getCheckedCaches() {
-        ArrayList<cgCache> result = new ArrayList<cgCache>();
-        int checked = getChecked();
-        if (checked > 0) {
-            for (cgCache cache : list) {
-                if (cache.isStatusChecked()) {
-                    result.add(cache);
-                }
+        final ArrayList<cgCache> result = new ArrayList<cgCache>();
+        for (cgCache cache : list) {
+            if (cache.isStatusChecked()) {
+                result.add(cache);
             }
         }
         return result;

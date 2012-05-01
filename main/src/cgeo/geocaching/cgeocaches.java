@@ -229,7 +229,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
             }
 
             if (adapter != null) {
-                adapter.setSelectMode(false, true);
+                adapter.setSelectMode(false);
             }
         }
     };
@@ -287,7 +287,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
             showProgress(false);
 
             if (adapter != null) {
-                adapter.setSelectMode(false, true);
+                adapter.setSelectMode(false);
             }
         }
     };
@@ -375,7 +375,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 }
             } else {
                 if (adapter != null) {
-                    adapter.setSelectMode(false, true);
+                    adapter.setSelectMode(false);
                 }
 
                 cacheList.clear();
@@ -398,7 +398,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         public void handleMessage(Message msg) {
             if (msg.what != MSG_CANCEL) {
                 if (adapter != null) {
-                    adapter.setSelectMode(false, true);
+                    adapter.setSelectMode(false);
                 }
 
                 refreshCurrentList();
@@ -432,7 +432,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 }
             } else {
                 if (adapter != null) {
-                    adapter.setSelectMode(false, true);
+                    adapter.setSelectMode(false);
                 }
 
                 // reload history list
@@ -647,7 +647,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         startGeoAndDir();
 
         if (adapter != null) {
-            adapter.setSelectMode(false, true);
+            adapter.setSelectMode(false);
             final Geopoint coordsNow = app.currentGeo().getCoords();
             if (coordsNow != null) {
                 adapter.setActualCoordinates(coordsNow);
@@ -775,7 +775,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
             }
 
-            boolean hasSelection = adapter != null && adapter.getChecked() > 0;
+            boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
             boolean isNonDefaultList = listId != StoredList.STANDARD_LIST_ID;
 
             if (type == CacheListType.OFFLINE) { // only offline list
@@ -846,9 +846,9 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         if (menuItem == null) {
             return;
         }
-        boolean hasSelection = adapter != null && adapter.getChecked() > 0;
+        boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
         if (hasSelection) {
-            menuItem.setTitle(res.getString(resIdSelection) + " (" + adapter.getChecked() + ")");
+            menuItem.setTitle(res.getString(resIdSelection) + " (" + adapter.getCheckedCount() + ")");
         } else {
             menuItem.setTitle(res.getString(resId));
         }
@@ -1036,14 +1036,14 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
             @Override
             public void run(Integer newListId) {
                 List<cgCache> selected;
-                final boolean moveAll = adapter.getChecked() == 0;
+                final boolean moveAll = adapter.getCheckedCount() == 0;
                 if (moveAll) {
                     selected = new ArrayList<cgCache>(cacheList);
                 } else {
                     selected = adapter.getCheckedCaches();
                 }
                 app.moveToList(selected, newListId);
-                adapter.resetChecks();
+                adapter.setSelectMode(false);
 
                 refreshCurrentList();
             }
@@ -1106,7 +1106,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                     @Override
                     public void run(Integer newListId) {
                         app.moveToList(Collections.singletonList(cache), newListId);
-                        adapter.resetChecks();
+                        adapter.setSelectMode(false);
                         refreshCurrentList();
                     }
                 });
@@ -1157,10 +1157,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (adapter != null) {
-                if (adapter.resetChecks()) {
-                    return true;
-                } else if (adapter.getSelectMode()) {
-                    adapter.setSelectMode(false, true);
+                if (adapter.getSelectMode()) {
+                    adapter.setSelectMode(false);
                     return true;
                 }
             }
@@ -1263,9 +1261,9 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     }
 
     public void refreshStored() {
-        if (adapter != null && adapter.getChecked() > 0) {
+        if (adapter != null && adapter.getCheckedCount() > 0) {
             // there are some checked caches
-            detailTotal = adapter.getChecked();
+            detailTotal = adapter.getCheckedCount();
         } else {
             // no checked caches, download everything (when already stored - refresh them)
             detailTotal = cacheList.size();
@@ -1297,7 +1295,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setCancelable(true);
         dialog.setTitle(res.getString(R.string.caches_removing_from_history));
-        dialog.setMessage((adapter != null && adapter.getChecked() > 0) ? res.getString(R.string.cache_remove_from_history)
+        dialog.setMessage((adapter != null && adapter.getCheckedCount() > 0) ? res.getString(R.string.cache_remove_from_history)
                 : res.getString(R.string.cache_clear_history));
         dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -1316,10 +1314,10 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     }
 
     public void removeFromHistory() {
-        if (adapter != null && adapter.getChecked() > 0)
+        if (adapter != null && adapter.getCheckedCount() > 0)
         {
             // there are some checked caches
-            detailTotal = adapter.getChecked();
+            detailTotal = adapter.getCheckedCount();
         }
         else
         {
@@ -1338,7 +1336,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
 
     public void exportCaches() {
         List<cgCache> caches;
-        if (adapter != null && adapter.getChecked() > 0) {
+        if (adapter != null && adapter.getCheckedCount() > 0) {
             // there are some caches checked
             caches = adapter.getCheckedCaches();
         } else {
@@ -1364,7 +1362,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         dialog.setCancelable(true);
         dialog.setTitle(res.getString(R.string.caches_drop_stored));
 
-        if (adapter != null && adapter.getChecked() > 0) {
+        if (adapter != null && adapter.getCheckedCount() > 0) {
             dialog.setMessage(res.getString(R.string.caches_drop_selected_ask));
         } else {
             dialog.setMessage(res.getString(R.string.caches_drop_all_ask));
@@ -1606,7 +1604,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
             this.listIdLD = Math.max(listId, StoredList.STANDARD_LIST_ID);
 
             if (adapter != null) {
-                checked = adapter.getChecked();
+                checked = adapter.getCheckedCount();
             }
         }
 
@@ -1767,7 +1765,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
 
             handler = handlerIn;
 
-            int checked = adapter.getChecked();
+            int checked = adapter.getCheckedCount();
             if (checked == 0) {
                 selected = new ArrayList<cgCache>(cacheList);
             }
@@ -1798,7 +1796,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
             handler = handlerIn;
 
             if (adapter != null) {
-                checked = adapter.getChecked();
+                checked = adapter.getCheckedCount();
             }
         }
 

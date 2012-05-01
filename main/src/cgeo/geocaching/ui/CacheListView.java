@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 public class CacheListView {
     // layouts & views
-    public RelativeLayout oneInfo;
-    public RelativeLayout oneCheckbox;
     public CheckBox checkbox;
     public ImageView logStatusMark;
     public TextView text;
