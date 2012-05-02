@@ -235,5 +235,11 @@
 		</activity>
 		<provider android:name="cgeo.geocaching.apps.LocusDataStorageProvider" 
             android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
+		<activity android:name="WaypointPopup"
+		    android:label="@string/app_name"
+			android:theme="@style/cgeo_transparent"
+			android:windowSoftInputMode="stateHidden"
+			android:configChanges="keyboardHidden|orientation" >
+		</activity>
 	</application>
 </manifest>

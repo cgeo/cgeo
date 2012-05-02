@@ -309,11 +309,18 @@ public class CacheDetailActivity extends AbstractActivity {
         });
 
         // switch to entry page (last used or 2)
-        final int entryPageIndex = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
-        if (viewPagerAdapter.getCount() < entryPageIndex) {
-            for (int i = 0; i <= entryPageIndex; i++) {
-                // we can't switch to a page that is out of bounds, so we add null-pages
-                pageOrder.add(null);
+        int entryPageIndex;
+        if (extras != null && extras.get("page") != null) {
+            entryPageIndex = extras.getInt("page");
+        }
+        else
+        {
+            entryPageIndex = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+            if (viewPagerAdapter.getCount() < entryPageIndex) {
+                for (int i = 0; i <= entryPageIndex; i++) {
+                    // we can't switch to a page that is out of bounds, so we add null-pages
+                    pageOrder.add(null);
+                }
             }
         }
         viewPager.setCurrentItem(entryPageIndex, false);
@@ -945,6 +952,13 @@ public class CacheDetailActivity extends AbstractActivity {
         context.startActivity(detailIntent);
     }
 
+    public static void startActivity(final Context context, final String geocode, final int page) {
+        final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
+        detailIntent.putExtra("geocode", geocode.toUpperCase());
+        detailIntent.putExtra("page", page);
+        context.startActivity(detailIntent);
+    }
+
     /**
      * The ViewPagerAdapter for scrolling through pages of the CacheDetailActivity.
      */
@@ -1059,7 +1073,7 @@ public class CacheDetailActivity extends AbstractActivity {
     /**
      * Enum of all possible pages with methods to get the view and a title.
      */
-    private enum Page {
+    public enum Page {
         DETAILS(R.string.detail),
         DESCRIPTION(R.string.cache_description),
         LOGS(R.string.cache_logs),
