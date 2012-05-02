@@ -3,8 +3,6 @@
 		android:id="@+id/one_cache"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:paddingBottom="6dip"
-		android:paddingTop="6dip"
 		android:background="?background_color" >
 	
     <!-- selection mode checkbox -->
@@ -39,6 +37,7 @@
 			android:layout_marginRight="110dip"
 			android:layout_toRightOf="@+id/log_status_mark"
 			android:layout_gravity="left"
+			android:paddingTop="5dip"
 			android:paddingRight="3dip"
 			android:lines="1"
 			android:singleLine="true"
@@ -52,12 +51,13 @@
 	<TextView android:id="@+id/info"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="28dip"
+			android:layout_marginTop="30dip"
 			android:layout_marginRight="110dip"
 			android:layout_alignParentBottom="true"
 			android:layout_toRightOf="@id/log_status_mark"
 			android:layout_gravity="left"
 			android:paddingRight="3dip"
+			android:paddingBottom="5dip"
 			android:lines="1"
 			android:singleLine="true"
 			android:scrollHorizontally="true"
