@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.google;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.maps.AbstractMapProvider;
 import cgeo.geocaching.maps.AbstractMapSource;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
@@ -15,7 +16,7 @@ import android.content.res.Resources;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GoogleMapProvider implements MapProvider {
+public final class GoogleMapProvider extends AbstractMapProvider {
 
     private final static int MAP = 1;
     private final static int SATELLITE = 2;
@@ -30,8 +31,8 @@ public class GoogleMapProvider implements MapProvider {
         final Resources resources = cgeoapplication.getInstance().getResources();
 
         mapSources = new HashMap<Integer, MapSource>();
-        mapSources.put(baseId + MAP, new AbstractMapSource(this, resources.getString(R.string.map_source_google_map)));
-        mapSources.put(baseId + SATELLITE, new AbstractMapSource(this, resources.getString(R.string.map_source_google_satellite)));
+        mapSources.put(baseId + MAP, new GoogleMapSource(this, resources.getString(R.string.map_source_google_map)));
+        mapSources.put(baseId + SATELLITE, new GoogleMapSatelliteSource(this, resources.getString(R.string.map_source_google_satellite)));
 
         mapItemFactory = new GoogleMapItemFactory();
     }
@@ -41,20 +42,9 @@ public class GoogleMapProvider implements MapProvider {
         return mapSources;
     }
 
-    @Override
-    public boolean isMySource(int sourceId) {
-        return sourceId >= baseId + MAP && sourceId <= baseId + SATELLITE;
-    }
-
-    public static boolean isSatelliteSource(int sourceId) {
-        MapProvider mp = MapProviderFactory.getMapProvider(sourceId);
-        if (mp instanceof GoogleMapProvider) {
-            GoogleMapProvider gp = (GoogleMapProvider) mp;
-            if (gp.baseId + SATELLITE == sourceId) {
-                return true;
-            }
-        }
-        return false;
+    public static boolean isSatelliteSource(final int sourceId) {
+        final MapSource mapSource = MapProviderFactory.getMapSource(sourceId);
+        return mapSource != null && mapSource instanceof GoogleMapSatelliteSource;
     }
 
     @Override
@@ -81,4 +71,21 @@ public class GoogleMapProvider implements MapProvider {
     public boolean isSameActivity(int sourceId1, int sourceId2) {
         return true;
     }
+
+    private static class GoogleMapSource extends AbstractMapSource {
+
+        public GoogleMapSource(final MapProvider mapProvider, final String name) {
+            super(mapProvider, name);
+        }
+
+    }
+
+    private static final class GoogleMapSatelliteSource extends GoogleMapSource {
+
+        public GoogleMapSatelliteSource(MapProvider mapProvider, String name) {
+            super(mapProvider, name);
+        }
+
+    }
+
 }

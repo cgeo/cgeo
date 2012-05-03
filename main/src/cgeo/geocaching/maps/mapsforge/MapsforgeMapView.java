@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.ScaleOverlay;
@@ -11,6 +12,7 @@ import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
@@ -176,15 +178,9 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     public void setMapSource() {
 
         MapGeneratorInternal newMapType = MapGeneratorInternal.MAPNIK;
-        switch (MapsforgeMapProvider.getMapsforgeSource(Settings.getMapSource())) {
-            case MapsforgeMapProvider.CYCLEMAP:
-                newMapType = MapGeneratorInternal.OPENCYCLEMAP;
-                break;
-            case MapsforgeMapProvider.OFFLINE:
-                newMapType = MapGeneratorInternal.DATABASE_RENDERER;
-                break;
-            default:
-                newMapType = MapGeneratorInternal.MAPNIK;
+        final MapSource mapSource = MapProviderFactory.getMapSource(Settings.getMapSource());
+        if (mapSource instanceof MapsforgeMapSource) {
+            newMapType = ((MapsforgeMapSource) mapSource).getGenerator();
         }
 
         MapGenerator mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);

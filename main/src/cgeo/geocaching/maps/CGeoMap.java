@@ -562,7 +562,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         for (Integer mapSourceId : MapProviderFactory.getMapSources().keySet()) {
             final MenuItem menuItem = menu.findItem(mapSourceId);
             if (menuItem != null) {
-                final MapSource mapSource = MapProviderFactory.getMapSources().get(mapSourceId);
+                final MapSource mapSource = MapProviderFactory.getMapSource(mapSourceId);
                 if (mapSource != null) {
                     menuItem.setEnabled(mapSource.isAvailable());
                 }

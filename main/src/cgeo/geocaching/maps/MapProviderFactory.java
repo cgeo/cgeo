@@ -117,4 +117,8 @@ public class MapProviderFactory {
     public static int getMapSourceFromMenuId(int menuId) {
         return menuId;
     }
+
+    public static MapSource getMapSource(int sourceId) {
+        return getInstance().mapSources.get(sourceId);
+    }
 }
