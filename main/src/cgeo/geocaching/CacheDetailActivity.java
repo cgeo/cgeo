@@ -1615,7 +1615,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                cache.store(CacheDetailActivity.this, handler);
+                cache.store(handler);
             }
         }
 
@@ -1628,7 +1628,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                cache.refresh(CacheDetailActivity.this, cache.getListId(), handler);
+                cache.refresh(cache.getListId(), handler);
 
                 handler.sendEmptyMessage(0);
             }
@@ -1828,7 +1828,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     // TODO move this code to StaticMapProvider and use its constant values
                     final String markerUrl = "http://cgeo.carnero.cc/_markers/my_location_mdpi.png";
 
-                    final HtmlImage mapGetter = new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, 0, false);
+                    final HtmlImage mapGetter = new HtmlImage(cache.getGeocode(), false, 0, false);
                     final Parameters params = new Parameters("zoom", "15", "size", width + "x" + height, "maptype", "roadmap", "markers", "icon:" + markerUrl + "|shadow:false|" + latlonMap, "sensor", "false");
                     return mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?" + params);
                 } catch (Exception e) {
@@ -1927,7 +1927,7 @@ public class CacheDetailActivity extends AbstractActivity {
             if (StringUtils.isNotBlank(cache.getHint())) {
                 TextView hintView = ((TextView) view.findViewById(R.id.hint));
                 if (BaseUtils.containsHtml(cache.getHint())) {
-                    hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                    hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                     hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
                 }
                 else {
@@ -2026,7 +2026,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 publishProgress();
                 if (imageCounter.getImageCount() > 0) {
                     // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
-                    description = Html.fromHtml(descriptionString, new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
+                    description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
                     publishProgress();
                 }
 
@@ -2199,7 +2199,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                     // logtext, avoid parsing HTML if not necessary
                     if (BaseUtils.containsHtml(log.log)) {
-                        holder.text.setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                        holder.text.setText(Html.fromHtml(log.log, new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                     }
                     else {
                         holder.text.setText(log.log);

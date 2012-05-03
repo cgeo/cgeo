@@ -101,7 +101,7 @@ public class cgeoimages extends AbstractActivity {
 
         @Override
         protected BitmapDrawable doInBackground(Void... params) {
-            final HtmlImage imgGetter = new HtmlImage(cgeoimages.this, geocode, true, offline ? 1 : 0, false);
+            final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? 1 : 0, false);
             return imgGetter.getDrawable(img.getUrl());
         }
 

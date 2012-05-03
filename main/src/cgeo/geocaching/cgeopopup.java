@@ -545,7 +545,7 @@ public class cgeopopup extends AbstractActivity {
 
         @Override
         public void run() {
-            cache.store(cgeopopup.this, handler);
+            cache.store(handler);
             invalidateOptionsMenuCompatible();
         }
     }

@@ -2,6 +2,7 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.Log;
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -37,7 +39,6 @@ public class HtmlImage implements Html.ImageGetter {
             "counter.digits.com",
             "andyhoppe"
     };
-    final private Context context;
     final private String geocode;
     /**
      * on error: return large error image, if <code>true</code>, otherwise empty 1x1 image
@@ -48,9 +49,9 @@ public class HtmlImage implements Html.ImageGetter {
     final private BitmapFactory.Options bfOptions;
     final private int maxWidth;
     final private int maxHeight;
+    final private Resources resources;
 
-    public HtmlImage(final Context contextIn, final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
-        this.context = contextIn;
+    public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this.geocode = geocode;
         this.returnErrorImage = returnErrorImage;
         this.listId = listId;
@@ -59,9 +60,10 @@ public class HtmlImage implements Html.ImageGetter {
         bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
 
-        final Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         this.maxWidth = display.getWidth() - 25;
         this.maxHeight = display.getHeight() - 25;
+        this.resources = cgeoapplication.getInstance().getResources();
     }
 
     @Override
@@ -109,7 +111,7 @@ public class HtmlImage implements Html.ImageGetter {
             Log.d("HtmlImage.getDrawable: Failed to obtain image");
 
             if (returnErrorImage) {
-                imagePre = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_not_loaded);
+                imagePre = BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded);
             } else {
                 imagePre = getTransparent1x1Image();
             }
@@ -144,7 +146,7 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     private Bitmap getTransparent1x1Image() {
-        return BitmapFactory.decodeResource(context.getResources(), R.drawable.image_no_placement);
+        return BitmapFactory.decodeResource(resources, R.drawable.image_no_placement);
     }
 
     private Bitmap loadImageFromStorage(final String url) {

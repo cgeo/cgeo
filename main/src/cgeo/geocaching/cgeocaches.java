@@ -1119,7 +1119,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 break;
             case MENU_STORE_CACHE:
                 //FIXME: this must use the same handler like in the CacheDetailActivity. Will be done by moving the handler into the store method.
-                cache.store(this, null);
+                cache.store(null);
                 break;
             default:
                 // we must remember the menu info for the sub menu, there is a bug
@@ -1657,7 +1657,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                     }
 
                     detailProgress++;
-                    cache.refresh(cgeocaches.this, listIdLD, null);
+                    cache.refresh(listIdLD, null);
 
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -1718,7 +1718,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                         handler.sendMessage(handler.obtainMessage(1, response));
                         yield();
 
-                        cgCache.storeCache(cgeocaches.this, null, response, listIdLFW, false, null);
+                        cgCache.storeCache(null, response, listIdLFW, false, null);
 
                         handler.sendMessage(handler.obtainMessage(2, response));
                         yield();

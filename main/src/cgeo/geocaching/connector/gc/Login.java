@@ -16,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpResponse;
 
-import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 
 import java.text.ParseException;
@@ -231,7 +230,7 @@ public abstract class Login {
         }
     }
 
-    public static BitmapDrawable downloadAvatarAndGetMemberStatus(final Context context) {
+    public static BitmapDrawable downloadAvatarAndGetMemberStatus() {
         try {
             final String profile = BaseUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
 
@@ -241,7 +240,7 @@ public abstract class Login {
 
             final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (null != avatarURL) {
-                final HtmlImage imgGetter = new HtmlImage(context, "", false, 0, false);
+                final HtmlImage imgGetter = new HtmlImage("", false, 0, false);
                 return imgGetter.getDrawable(avatarURL);
             }
             // No match? There may be no avatar set by user.

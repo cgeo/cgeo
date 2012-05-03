@@ -70,13 +70,8 @@ public class StaticMapsProvider {
         }
     }
 
-    public static void downloadMaps(cgCache cache, cgeoapplication app) {
-        final Display display = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        downloadMaps(cache, display);
-    }
-
-    public static void downloadMaps(cgCache cache, Activity activity) {
-        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+    public static void downloadMaps(cgCache cache) {
+        final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         downloadMaps(cache, display);
     }
 

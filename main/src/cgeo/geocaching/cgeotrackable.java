@@ -162,7 +162,7 @@ public class cgeotrackable extends AbstractActivity {
                     ((LinearLayout) findViewById(R.id.goal_box)).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.goal);
                     descView.setVisibility(View.VISIBLE);
-                    descView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+                    descView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
                 }
 
@@ -171,7 +171,7 @@ public class cgeotrackable extends AbstractActivity {
                     ((LinearLayout) findViewById(R.id.details_box)).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.details);
                     descView.setVisibility(View.VISIBLE);
-                    descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+                    descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
                 }
 
@@ -209,7 +209,7 @@ public class cgeotrackable extends AbstractActivity {
                         public void run() {
                             BitmapDrawable image;
                             try {
-                                HtmlImage imgGetter = new HtmlImage(cgeotrackable.this, geocode, true, 0, false);
+                                HtmlImage imgGetter = new HtmlImage(geocode, true, 0, false);
 
                                 image = imgGetter.getDrawable(trackable.getImage());
                                 Message message = handler.obtainMessage(0, image);
@@ -459,7 +459,7 @@ public class cgeotrackable extends AbstractActivity {
 
                 TextView logView = (TextView) rowView.findViewById(R.id.log);
                 logView.setMovementMethod(LinkMovementMethod.getInstance());
-                logView.setText(Html.fromHtml(log.log, new HtmlImage(this, null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
+                logView.setText(Html.fromHtml(log.log, new HtmlImage(null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
 
                 // add LogImages
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
@@ -556,7 +556,7 @@ public class cgeotrackable extends AbstractActivity {
 
             BitmapDrawable image;
             try {
-                HtmlImage imgGetter = new HtmlImage(cgeotrackable.this, trackable.getGeocode(), false, 0, false);
+                HtmlImage imgGetter = new HtmlImage(trackable.getGeocode(), false, 0, false);
 
                 image = imgGetter.getDrawable(url);
                 Message message = handler.obtainMessage(0, image);

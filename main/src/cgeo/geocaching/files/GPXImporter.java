@@ -195,7 +195,7 @@ public class GPXImporter {
             for (String geocode : importedCaches.getGeocodes()) {
                 cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
-                StaticMapsProvider.downloadMaps(cache, app);
+                StaticMapsProvider.downloadMaps(cache);
                 storedCacheMaps++;
                 if (progressHandler.isCancelled()) {
                     return false;

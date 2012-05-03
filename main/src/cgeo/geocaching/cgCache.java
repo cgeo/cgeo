@@ -1347,9 +1347,9 @@ public class cgCache implements ICache, IWaypoint {
         return StringUtils.isNotBlank(geocode) && geocode.equals(((cgCache) obj).geocode);
     }
 
-    public void store(Activity activity, CancellableHandler handler) {
+    public void store(CancellableHandler handler) {
         final int listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
-        storeCache(activity, this, null, listId, false, handler);
+        storeCache(this, null, listId, false, handler);
     }
 
     public void setZoomlevel(int zoomlevel) {
@@ -1424,12 +1424,12 @@ public class cgCache implements ICache, IWaypoint {
         }
     }
 
-    public void refresh(Activity activity, int newListId, CancellableHandler handler) {
+    public void refresh(int newListId, CancellableHandler handler) {
         cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
-        storeCache(activity, null, geocode, newListId, true, handler);
+        storeCache(null, geocode, newListId, true, handler);
     }
 
-    public static void storeCache(Activity activity, cgCache origCache, String geocode, int listId, boolean forceRedownload, CancellableHandler handler) {
+    public static void storeCache(cgCache origCache, String geocode, int listId, boolean forceRedownload, CancellableHandler handler) {
         try {
             cgCache cache;
             // get cache details, they may not yet be complete
@@ -1460,7 +1460,7 @@ public class cgCache implements ICache, IWaypoint {
                 return;
             }
 
-            final HtmlImage imgGetter = new HtmlImage(activity, cache.getGeocode(), false, listId, true);
+            final HtmlImage imgGetter = new HtmlImage(cache.getGeocode(), false, listId, true);
 
             // store images from description
             if (StringUtils.isNotBlank(cache.getDescription())) {
@@ -1498,7 +1498,7 @@ public class cgCache implements ICache, IWaypoint {
             }
 
             // store map previews
-            StaticMapsProvider.downloadMaps(cache, activity);
+            StaticMapsProvider.downloadMaps(cache);
 
             if (CancellableHandler.isCancelled(handler)) {
                 return;
