@@ -835,7 +835,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     overlayPosition = mapView.createAddPositionOverlay(activity);
                 }
 
-                if ((overlayPosition != null && geo.getLocation() != null) && overlayPosition != null) {
+                if ((overlayPosition != null && geo.getLocation() != null)) {
                     overlayPosition.setCoordinates(geo.getLocation());
                 }
 
@@ -1678,8 +1678,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
             item.setMarker(ld);
             return item;
+        }
 
-        } else if (waypoint != null) {
+        if (waypoint != null) {
 
             final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(coord, null);
             Drawable[] layers = new Drawable[2];
