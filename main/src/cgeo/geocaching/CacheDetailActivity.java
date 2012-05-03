@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCParser;
@@ -521,7 +522,11 @@ public class CacheDetailActivity extends AbstractActivity {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
 
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-            NavigationAppFactory.addMenuItems(subMenu, this);
+            List<NavigationAppsEnum> filter = new ArrayList<NavigationAppsEnum>(1);
+            if (!StaticMapsProvider.doesExistStaticMapForCache(cache.getGeocode())) {
+                filter.add(NavigationAppsEnum.STATIC_MAP);
+            }
+            NavigationAppFactory.addMenuItems(subMenu, this, filter);
             GeneralAppsFactory.addMenuItems(subMenu, this, cache);
 
             menu.add(1, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(R.drawable.ic_menu_agenda); // add event to calendar

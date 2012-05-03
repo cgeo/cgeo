@@ -1497,15 +1497,15 @@ public class cgCache implements ICache, IWaypoint {
                 return;
             }
 
-            // store map previews
-            StaticMapsProvider.downloadMaps(cache, activity);
+            cache.setListId(listId);
+            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
             if (CancellableHandler.isCancelled(handler)) {
                 return;
             }
 
-            cache.setListId(listId);
-            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            // store map previews
+            StaticMapsProvider.downloadMaps(cache, activity);
 
             if (handler != null) {
                 handler.sendMessage(Message.obtain());
