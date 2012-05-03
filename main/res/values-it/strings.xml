@@ -282,6 +282,7 @@
   <string name="caches_sort_date">Data</string>
   <string name="caches_sort_finds">Numero ritrovamenti</string>
   <string name="caches_sort_state">Stato</string>
+  <string name="caches_sort_storage">Data salvataggio</string>
   <string name="caches_select_mode">Modo Selezione</string>
   <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
   <string name="caches_select_invert">Inverti selezione</string>
