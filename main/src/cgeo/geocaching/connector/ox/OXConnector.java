@@ -1,6 +1,11 @@
-package cgeo.geocaching.connector;
+package cgeo.geocaching.connector.ox;
 
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import java.util.regex.Pattern;
 
@@ -38,4 +43,14 @@ public class OXConnector extends AbstractConnector {
         return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons BY-SA 3.0 License";
     }
 
+    @Override
+    public SearchResult searchByGeocode(String geocode, String guid, cgeoapplication app, CancellableHandler handler) {
+        final cgCache cache = OpenCachingApi.searchByGeoCode(geocode);
+        if (cache == null) {
+            return null;
+        }
+        final SearchResult searchResult = new SearchResult();
+        searchResult.addCache(cache);
+        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+    }
 }

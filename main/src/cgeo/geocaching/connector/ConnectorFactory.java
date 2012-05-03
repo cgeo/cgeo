@@ -5,6 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.opencaching.ApiOpenCachingConnector;
 import cgeo.geocaching.connector.opencaching.OpenCachingConnector;
+import cgeo.geocaching.connector.ox.OXConnector;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
