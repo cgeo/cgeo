@@ -2,9 +2,11 @@ package cgeo.geocaching.maps.google;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.maps.AbstractMapSource;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.interfaces.MapSource;
 
 import com.google.android.maps.MapActivity;
 
@@ -15,10 +17,10 @@ import java.util.Map;
 
 public class GoogleMapProvider implements MapProvider {
 
-    public final static int MAP = 1;
-    public final static int SATELLITE = 2;
+    private final static int MAP = 1;
+    private final static int SATELLITE = 2;
 
-    private final Map<Integer, String> mapSources;
+    private final Map<Integer, MapSource> mapSources;
 
     private int baseId;
     private final MapItemFactory mapItemFactory;
@@ -27,16 +29,15 @@ public class GoogleMapProvider implements MapProvider {
         baseId = _baseId;
         final Resources resources = cgeoapplication.getInstance().getResources();
 
-        mapSources = new HashMap<Integer, String>();
-        mapSources.put(baseId + MAP, resources.getString(R.string.map_source_google_map));
-        mapSources.put(baseId + SATELLITE, resources.getString(R.string.map_source_google_satellite));
+        mapSources = new HashMap<Integer, MapSource>();
+        mapSources.put(baseId + MAP, new AbstractMapSource(this, resources.getString(R.string.map_source_google_map)));
+        mapSources.put(baseId + SATELLITE, new AbstractMapSource(this, resources.getString(R.string.map_source_google_satellite)));
 
         mapItemFactory = new GoogleMapItemFactory();
     }
 
     @Override
-    public Map<Integer, String> getMapSources() {
-
+    public Map<Integer, MapSource> getMapSources() {
         return mapSources;
     }
 

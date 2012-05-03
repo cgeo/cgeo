@@ -2,6 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 
 import android.view.Menu;
@@ -17,27 +18,31 @@ public class MapProviderFactory {
     private static MapProviderFactory instance = null;
 
     private final MapProvider[] mapProviders;
-    private SortedMap<Integer, String> mapSources;
+    private SortedMap<Integer, MapSource> mapSources;
 
     private MapProviderFactory() {
         // add GoogleMapProvider only if google api is available in order to support x86 android emulator
-        boolean googleMaps = true;
-        try {
-            Class.forName("com.google.android.maps.MapActivity");
-        } catch (ClassNotFoundException e) {
-            googleMaps = false;
-        }
-        if (googleMaps) {
+        if (isGoogleMapsInstalled()) {
             mapProviders = new MapProvider[] { new GoogleMapProvider(GOOGLEMAP_BASEID), new MapsforgeMapProvider(MFMAP_BASEID) };
         }
         else {
             mapProviders = new MapProvider[] { new MapsforgeMapProvider(MFMAP_BASEID) };
         }
 
-        mapSources = new TreeMap<Integer, String>();
+        mapSources = new TreeMap<Integer, MapSource>();
         for (MapProvider mp : mapProviders) {
             mapSources.putAll(mp.getMapSources());
         }
+    }
+
+    private static boolean isGoogleMapsInstalled() {
+        boolean googleMaps = true;
+        try {
+            Class.forName("com.google.android.maps.MapActivity");
+        } catch (ClassNotFoundException e) {
+            googleMaps = false;
+        }
+        return googleMaps;
     }
 
     private static synchronized void initInstance() {
@@ -53,7 +58,7 @@ public class MapProviderFactory {
         return instance;
     }
 
-    public static SortedMap<Integer, String> getMapSources() {
+    public static SortedMap<Integer, MapSource> getMapSources() {
         return getInstance().mapSources;
     }
 
@@ -102,10 +107,10 @@ public class MapProviderFactory {
     }
 
     public static void addMapviewMenuItems(Menu parentMenu, int groupId, int currentSource) {
-        SortedMap<Integer, String> mapSources = getInstance().mapSources;
+        SortedMap<Integer, MapSource> mapSources = getInstance().mapSources;
 
         for (int key : mapSources.keySet()) {
-            parentMenu.add(groupId, key, 0, mapSources.get(key)).setCheckable(true).setChecked(key == currentSource);
+            parentMenu.add(groupId, key, 0, mapSources.get(key).getName()).setCheckable(true).setChecked(key == currentSource);
         }
     }
 

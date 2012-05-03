@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface MapProvider {
 
-    public Map<Integer, String> getMapSources();
+    public Map<Integer, MapSource> getMapSources();
 
     public boolean isMySource(int sourceId);
 

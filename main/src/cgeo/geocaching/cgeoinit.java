@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -46,6 +47,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -551,9 +553,12 @@ public class cgeoinit extends AbstractActivity {
         webAuth.setOnClickListener(new webAuth());
 
         // Map source settings
-        Collection<String> mapSourceValues = MapProviderFactory.getMapSources().values();
+        Collection<String> mapSourceNames = new ArrayList<String>();
+        for (MapSource mapSource : MapProviderFactory.getMapSources().values()) {
+            mapSourceNames.add(mapSource.getName());
+        }
         Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSourceValues.toArray(new String[mapSourceValues.size()]));
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSourceNames.toArray(new String[mapSourceNames.size()]));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mapSourceSelector.setAdapter(adapter);
         int mapsource = Settings.getMapSource();
