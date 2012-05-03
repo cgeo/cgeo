@@ -4,10 +4,10 @@ import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StaticMapsProvider;
-import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
 
@@ -196,30 +196,32 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param menu
      * @param activity
      */
-    public static void addMenuItems(final Menu menu, final Activity activity) {
-        addMenuItems(menu, activity, true, false);
+    public static void addMenuItems(final Menu menu, final Activity activity, List<NavigationAppsEnum> filter) {
+        addMenuItems(menu, activity, false, filter);
     }
 
     /**
      * Adds the installed navigation tools to the given menu.
      * Use {@link #onMenuItemSelected(MenuItem, IGeoData, Activity, cgCache, cgWaypoint, Geopoint)} on
      * selection event to start the selected navigation tool.
-     *
+     * 
      * <b>Only use this way if
      * {@link #showNavigationMenu(IGeoData, Activity, cgCache, cgWaypoint, Geopoint, boolean, boolean)} is
      * not suitable for the given usecase.</b>
-     *
+     * 
      * @param menu
      * @param activity
-     * @param showInternalMap
      * @param showDefaultNavigation
+     * @param filter
+     *            Remove this items from the menu
      */
-    public static void addMenuItems(final Menu menu, final Activity activity,
-            final boolean showInternalMap, final boolean showDefaultNavigation) {
+    public static void addMenuItems(final Menu menu, final Activity activity, final boolean showDefaultNavigation, List<NavigationAppsEnum> filter) {
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
         for (NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
-            if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
-                    (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
+            if (filter.contains(navApp)) {
+                continue;
+            }
+            if (showDefaultNavigation || defaultNavigationTool != navApp.id) {
                 menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
             }
         }

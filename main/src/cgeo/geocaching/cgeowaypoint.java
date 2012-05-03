@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.utils.IObserver;
@@ -26,7 +27,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 
 public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData> {
 
@@ -336,7 +339,11 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
             ContextMenuInfo menuInfo) {
         if (navigationPossible()) {
             menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
-            NavigationAppFactory.addMenuItems(menu, this);
+            List<NavigationAppsEnum> filter = new ArrayList<NavigationAppsEnum>(1);
+            if (!StaticMapsProvider.doesExistStaticMapForWaypoint(waypoint.getGeocode(), waypoint.getId())) {
+                filter.add(NavigationAppsEnum.STATIC_MAP);
+            }
+            NavigationAppFactory.addMenuItems(menu, this, filter);
         }
     }
 
