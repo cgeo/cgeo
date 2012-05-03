@@ -431,12 +431,7 @@ public final class Settings {
     }
 
     public static boolean isValidMapFile() {
-        return checkMapfile(getMapFile());
-    }
-
-    private static boolean checkMapfile(final String mapFileIn) {
-
-        return MapsforgeMapProvider.isValidMapFile(mapFileIn);
+        return isValidMapFile(getMapFile());
     }
 
     public static boolean isValidMapFile(final String mapFileIn) {

@@ -32,6 +32,7 @@ import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
@@ -556,6 +557,15 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
+        for (Integer mapSourceId : MapProviderFactory.getMapSources().keySet()) {
+            final MenuItem menuItem = menu.findItem(mapSourceId);
+            if (menuItem != null) {
+                final MapSource mapSource = MapProviderFactory.getMapSource(mapSourceId);
+                if (mapSource != null) {
+                    menuItem.setEnabled(mapSource.isAvailable());
+                }
+            }
+        }
 
         MenuItem item;
         try {
@@ -718,9 +728,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 return true;
             }
             default:
-                if (MapProviderFactory.isValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
+                int mapSource = MapProviderFactory.getMapSourceFromMenuId(id);
+                if (MapProviderFactory.isValidSourceId(mapSource)) {
                     item.setChecked(true);
-                    int mapSource = MapProviderFactory.getMapSourceFromMenuId(id);
 
                     changeMapSource(mapSource);
 

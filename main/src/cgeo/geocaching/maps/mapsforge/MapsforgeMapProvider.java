@@ -3,13 +3,16 @@ package cgeo.geocaching.maps.mapsforge;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.maps.AbstractMapProvider;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapActivity024;
 import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapItemFactory024;
 
 import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
 import org.mapsforge.map.reader.MapDatabase;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
@@ -20,13 +23,13 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapsforgeMapProvider implements MapProvider {
+public final class MapsforgeMapProvider extends AbstractMapProvider {
 
-    public final static int MAPNIK = 1;
-    public final static int CYCLEMAP = 3;
-    public final static int OFFLINE = 4;
+    private final static int MAPNIK = 1;
+    private final static int CYCLEMAP = 3;
+    private final static int OFFLINE = 4;
 
-    private final Map<Integer, String> mapSources;
+    private final Map<Integer, MapSource> mapSources;
 
     private final int baseId;
     private boolean oldMap = false;
@@ -36,21 +39,15 @@ public class MapsforgeMapProvider implements MapProvider {
         baseId = _baseId;
         final Resources resources = cgeoapplication.getInstance().getResources();
 
-        mapSources = new HashMap<Integer, String>();
-        mapSources.put(baseId + MAPNIK, resources.getString(R.string.map_source_osm_mapnik));
-        mapSources.put(baseId + CYCLEMAP, resources.getString(R.string.map_source_osm_cyclemap));
-        mapSources.put(baseId + OFFLINE, resources.getString(R.string.map_source_osm_offline));
+        mapSources = new HashMap<Integer, MapSource>();
+        mapSources.put(baseId + MAPNIK, new MapsforgeMapSource(this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
+        mapSources.put(baseId + CYCLEMAP, new MapsforgeMapSource(this, resources.getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.OPENCYCLEMAP));
+        mapSources.put(baseId + OFFLINE, new OfflineMapSource(this, resources.getString(R.string.map_source_osm_offline), MapGeneratorInternal.DATABASE_RENDERER));
     }
 
     @Override
-    public Map<Integer, String> getMapSources() {
-
+    public Map<Integer, MapSource> getMapSources() {
         return mapSources;
-    }
-
-    @Override
-    public boolean isMySource(int sourceId) {
-        return sourceId >= baseId + MAPNIK && sourceId <= baseId + OFFLINE;
     }
 
     public static int getMapsforgeSource(int sourceId) {
@@ -123,8 +120,21 @@ public class MapsforgeMapProvider implements MapProvider {
         }
         return R.layout.map_mapsforge;
     }
+
     @Override
     public MapItemFactory getMapItemFactory() {
         return mapItemFactory;
+    }
+
+    private static final class OfflineMapSource extends MapsforgeMapSource {
+
+        public OfflineMapSource(MapProvider mapProvider, final String name, MapGeneratorInternal generator) {
+            super(mapProvider, name, generator);
+        }
+
+        @Override
+        public boolean isAvailable() {
+            return Settings.isValidMapFile();
+        }
     }
 }
