@@ -57,48 +57,47 @@ public class StaticMapsActivity extends AbstractActivity {
                 Log.e("StaticMapsActivity.loadMapsHandler: " + e.toString());
             }
         }
+    };
 
-        /**
-         * Shows the static maps.
-         */
-        private void showStaticMaps() {
-            if (inflater == null) {
-                inflater = getLayoutInflater();
-            }
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    downloadStaticMaps();
+                    startActivity(StaticMapsActivity.this.getIntent());
+                    break;
 
-            if (smapsView == null) {
-                smapsView = (LinearLayout) findViewById(R.id.maps_list);
+                case DialogInterface.BUTTON_NEGATIVE:
+                    showToast(res.getString(R.string.err_detail_not_load_map_static));
+                    break;
             }
-            smapsView.removeAllViews();
+            finish();
+        }
+    };
 
-            for (final Bitmap image : maps) {
-                if (image != null) {
-                    final ImageView map = (ImageView) inflater.inflate(R.layout.map_static_item, null);
-                    map.setImageBitmap(image);
-                    smapsView.addView(map);
-                }
-            }
+    /**
+     * Shows the static maps.
+     */
+    private void showStaticMaps() {
+        if (inflater == null) {
+            inflater = getLayoutInflater();
         }
 
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        downloadStaticMaps();
-                        showStaticMaps();
-                        return;
+        if (smapsView == null) {
+            smapsView = (LinearLayout) findViewById(R.id.maps_list);
+        }
+        smapsView.removeAllViews();
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        showToast(res.getString(R.string.err_detail_not_load_map_static));
-                        break;
-                }
-                finish();
+        for (final Bitmap image : maps) {
+            if (image != null) {
+                final ImageView map = (ImageView) inflater.inflate(R.layout.map_static_item, null);
+                map.setImageBitmap(image);
+                smapsView.addView(map);
             }
-        };
-
-    };
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
