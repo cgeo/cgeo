@@ -44,7 +44,7 @@
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 					<View style="@style/separator_horizontal" />
 				</RelativeLayout>
-			<LinearLayout android:id="@+id/cache_details_list"
+			<LinearLayout android:id="@+id/details_list"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:orientation="vertical" >

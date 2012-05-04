@@ -54,7 +54,7 @@
 				android:resource="@xml/searchable" />
 		</activity>
 		<activity
-			android:name=".cgeopopup"
+			android:name=".CachePopup"
 			android:label="@string/app_name"
 			android:theme="@style/cgeo_transparent"
 			android:windowSoftInputMode="stateHidden"
