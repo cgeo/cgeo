@@ -194,7 +194,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static BlockingQueue<Runnable> go4CacheDisplayQueue = new ArrayBlockingQueue<Runnable>(1);
     private static ThreadPoolExecutor go4CacheDisplayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, go4CacheDisplayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
 
-
     // handlers
     /** Updates the titles */
     final private Handler displayHandler = new Handler() {
@@ -358,7 +357,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         app = (cgeoapplication) activity.getApplication();
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
-
 
         // Get parameters from the intent
         final Bundle extras = activity.getIntent().getExtras();
@@ -837,7 +835,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     overlayPosition = mapView.createAddPositionOverlay(activity);
                 }
 
-                if (overlayPosition != null && geo.getLocation() != null) {
+                if ((overlayPosition != null && geo.getLocation() != null)) {
                     overlayPosition.setCoordinates(geo.getLocation());
                 }
 
@@ -909,7 +907,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      */
     private class LoadTimer extends Thread {
 
-    	public LoadTimer() {
+        public LoadTimer() {
             super("Load Timer");
         }
 
@@ -1606,18 +1604,17 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (cache != null) {
             final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(coord, cache.getType());
 
-
             final int hashcode = new HashCodeBuilder()
-                .append(cache.isReliableLatLon())
-                .append(cache.getType().id)
+                    .append(cache.isReliableLatLon())
+                    .append(cache.getType().id)
                     .append(cache.isDisabled() || cache.isArchived())
-                .append(cache.isOwn())
-                .append(cache.isFound())
-                .append(cache.hasUserModifiedCoords())
-                .append(cache.getPersonalNote())
+                    .append(cache.isOwn())
+                    .append(cache.isFound())
+                    .append(cache.hasUserModifiedCoords())
+                    .append(cache.getPersonalNote())
                     .append(cache.isLogOffline())
                     .append(cache.getListId() > 0)
-                .toHashCode();
+                    .toHashCode();
 
             final LayerDrawable ldFromCache = CGeoMap.overlaysCache.get(hashcode);
             if (ldFromCache != null) {
@@ -1701,6 +1698,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         return null;
+
     }
 
 }
