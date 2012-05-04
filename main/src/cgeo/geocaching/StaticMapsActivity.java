@@ -6,9 +6,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -27,6 +25,7 @@ public class StaticMapsActivity extends AbstractActivity {
 
     private static final int MENU_REFRESH = 1;
     private final List<Bitmap> maps = new ArrayList<Bitmap>();
+    private boolean download = false;
     private Integer waypoint_id = null;
     private String geocode = null;
     private LayoutInflater inflater = null;
@@ -42,10 +41,10 @@ public class StaticMapsActivity extends AbstractActivity {
             }
             try {
                 if (CollectionUtils.isEmpty(maps)) {
-                    if ((waypoint_id != null && Settings.isStoreOfflineWpMaps()) || (waypoint_id == null && Settings.isStoreOfflineMaps())) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(StaticMapsActivity.this);
-                        builder.setTitle(R.string.map_static_title).setMessage(R.string.err_detail_ask_store_map_static).setPositiveButton(android.R.string.yes, dialogClickListener)
-                                .setNegativeButton(android.R.string.no, dialogClickListener).show();
+                    if (download) {
+                        downloadStaticMaps();
+                        startActivity(StaticMapsActivity.this.getIntent());
+                        finish();
                     } else {
                         showToast(res.getString(R.string.err_detail_not_load_map_static));
                         finish();
@@ -56,24 +55,6 @@ public class StaticMapsActivity extends AbstractActivity {
             } catch (Exception e) {
                 Log.e("StaticMapsActivity.loadMapsHandler: " + e.toString());
             }
-        }
-    };
-
-    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-            switch (which) {
-                case DialogInterface.BUTTON_POSITIVE:
-                    downloadStaticMaps();
-                    startActivity(StaticMapsActivity.this.getIntent());
-                    break;
-
-                case DialogInterface.BUTTON_NEGATIVE:
-                    showToast(res.getString(R.string.err_detail_not_load_map_static));
-                    break;
-            }
-            finish();
         }
     };
 
@@ -112,6 +93,7 @@ public class StaticMapsActivity extends AbstractActivity {
 
         // try to get data from extras
         if (extras != null) {
+            download = extras.getBoolean("download", false);
             geocode = extras.getString("geocode");
             if (extras.containsKey("waypoint")) {
                 waypoint_id = extras.getInt("waypoint");
