@@ -51,22 +51,7 @@ public class StaticMapsActivity extends AbstractActivity {
                         finish();
                     }
                 } else {
-                    if (inflater == null) {
-                        inflater = getLayoutInflater();
-                    }
-
-                    if (smapsView == null) {
-                        smapsView = (LinearLayout) findViewById(R.id.maps_list);
-                    }
-                    smapsView.removeAllViews();
-
-                    for (final Bitmap image : maps) {
-                        if (image != null) {
-                            final ImageView map = (ImageView) inflater.inflate(R.layout.map_static_item, null);
-                            map.setImageBitmap(image);
-                            smapsView.addView(map);
-                        }
-                    }
+                    showStaticMaps();
                 }
             } catch (Exception e) {
                 Log.e("StaticMapsActivity.loadMapsHandler: " + e.toString());
@@ -81,6 +66,7 @@ public class StaticMapsActivity extends AbstractActivity {
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
                     downloadStaticMaps();
+                    startActivity(StaticMapsActivity.this.getIntent());
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
@@ -90,6 +76,28 @@ public class StaticMapsActivity extends AbstractActivity {
             finish();
         }
     };
+
+    /**
+     * Shows the static maps.
+     */
+    private void showStaticMaps() {
+        if (inflater == null) {
+            inflater = getLayoutInflater();
+        }
+
+        if (smapsView == null) {
+            smapsView = (LinearLayout) findViewById(R.id.maps_list);
+        }
+        smapsView.removeAllViews();
+
+        for (final Bitmap image : maps) {
+            if (image != null) {
+                final ImageView map = (ImageView) inflater.inflate(R.layout.map_static_item, null);
+                map.setImageBitmap(image);
+                smapsView.addView(map);
+            }
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
