@@ -8,7 +8,6 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Build;
 import android.text.InputType;
 import android.view.Display;
@@ -64,14 +63,6 @@ public final class Compatibility {
             }
         }
         return directionNowPre;
-    }
-
-    public static Uri getCalendarProviderURI() {
-        return Uri.parse(isLevel8 ? "content://com.android.calendar/calendars" : "content://calendar/calendars");
-    }
-
-    public static Uri getCalenderEventsProviderURI() {
-        return Uri.parse(isLevel8 ? "content://com.android.calendar/events" : "content://calendar/events");
     }
 
     public static void dataChanged(final String name) {

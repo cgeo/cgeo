@@ -307,11 +307,6 @@ public class cgeoapplication extends Application {
         return storage.saveTrackable(trackable);
     }
 
-    /** {@link cgData#dropList(int)} **/
-    public void dropList(int listId) {
-        storage.dropList(listId);
-    }
-
     /** {@link cgData#loadLogCounts(String)} */
     public Map<LogType, Integer> loadLogCounts(String geocode) {
         return storage.loadLogCounts(geocode);

@@ -273,7 +273,6 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        cgeoapplication.getInstance().dropList(listId);
         cgeoapplication.getInstance().removeList(listId);
         deleteDirectory(tempDir);
         Settings.setStoreOfflineMaps(importCacheStaticMaps);

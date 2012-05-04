@@ -181,16 +181,6 @@ public class StaticMapsProvider {
         return MARKERS_URL + "marker_waypoint_" + type + ".png";
     }
 
-    public static void removeCacheStaticMaps(String geocode) {
-        for (int level = 1; level <= 5; level++) {
-            try {
-                StaticMapsProvider.getMapFile(geocode, "", level, false).delete();
-            } catch (Exception e) {
-                Log.e("StaticMapsProvider.removeCacheStaticMaps: " + e.toString());
-            }
-        }
-    }
-
     public static void removeWpStaticMaps(int wp_id, String geocode) {
         for (int level = 1; level <= 5; level++) {
             try {

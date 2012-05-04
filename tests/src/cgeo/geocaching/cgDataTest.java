@@ -66,7 +66,7 @@ public class cgDataTest extends CGeoTestCase {
             assertEquals(2, app.getAllStoredCachesCount(false, CacheType.ALL, listId2));
 
             // drop stored (cache1=0, cache2=0)
-            app.dropList(listId2);
+            app.removeList(listId2);
 
         } finally {
 

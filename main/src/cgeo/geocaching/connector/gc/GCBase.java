@@ -48,8 +48,6 @@ import java.util.Set;
 public class GCBase {
 
     protected final static String SEQUENCE_GCID = "0123456789ABCDEFGHJKMNPQRTVWXYZ";
-    protected final static String SEQUENCE_NEWID = "tHpXJR8gyfzCrdV5G0Kb3Y92N47lTBPAhWnvLZkaexmSwq6sojDcEQMFO";
-    protected final static long GC_BASE57 = 57;
     protected final static long GC_BASE31 = 31;
     protected final static long GC_BASE16 = 16;
 

@@ -2427,23 +2427,6 @@ public class cgData {
         Log.d("Database clean: finished");
     }
 
-    /**
-     * Drop stored list by putting the caches in automatic mode (listId = 0)
-     *
-     * @param listId
-     *            the list id to remove the caches from
-     */
-    public void dropList(int listId) {
-        init();
-        try {
-            final ContentValues values = new ContentValues();
-            values.put("reason", StoredList.TEMPORARY_LIST_ID);
-            databaseRW.update(dbTableCaches, values, "reason = ?", new String[] { Integer.toString(listId) });
-        } catch (Exception e) {
-            Log.e("cgData.dropList: error when updating reason", e);
-        }
-    }
-
     public void removeAllFromCache() {
         // clean up CacheCache
         cacheCache.removeAllFromCache();
