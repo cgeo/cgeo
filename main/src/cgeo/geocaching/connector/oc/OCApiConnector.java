@@ -1,4 +1,4 @@
-package cgeo.geocaching.connector.opencaching;
+package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
@@ -8,11 +8,11 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
-public class ApiOpenCachingConnector extends OpenCachingConnector {
+public class OCApiConnector extends OCConnector {
 
     private final String cK;
 
-    public ApiOpenCachingConnector(String name, String host, String prefix, String cK) {
+    public OCApiConnector(String name, String host, String prefix, String cK) {
         super(name, host, prefix);
         this.cK = cK;
     }

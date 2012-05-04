@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.opencaching.OpenCachingConnector;
+import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 
@@ -21,14 +21,14 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
     }
 
     public static void testGeocodeOpenCaching() {
-        assertTrue(ConnectorFactory.getConnector("OZ12345") instanceof OpenCachingConnector); // opencaching CZ
-        assertTrue(ConnectorFactory.getConnector("OC12345") instanceof OpenCachingConnector); // opencaching DE
-        assertTrue(ConnectorFactory.getConnector("OU12345") instanceof OpenCachingConnector); // opencaching US
-        assertTrue(ConnectorFactory.getConnector("OK12345") instanceof OpenCachingConnector); // opencaching UK
-        assertTrue(ConnectorFactory.getConnector("OJ12345") instanceof OpenCachingConnector); // opencaching JP
-        assertTrue(ConnectorFactory.getConnector("OS12345") instanceof OpenCachingConnector); // opencaching NO
-        assertTrue(ConnectorFactory.getConnector("OB12345") instanceof OpenCachingConnector); // opencaching NL
-        assertTrue(ConnectorFactory.getConnector("OP12345") instanceof OpenCachingConnector); // opencaching PL
+        assertTrue(ConnectorFactory.getConnector("OZ12345") instanceof OCConnector); // opencaching CZ
+        assertTrue(ConnectorFactory.getConnector("OC12345") instanceof OCConnector); // opencaching DE
+        assertTrue(ConnectorFactory.getConnector("OU12345") instanceof OCConnector); // opencaching US
+        assertTrue(ConnectorFactory.getConnector("OK12345") instanceof OCConnector); // opencaching UK
+        assertTrue(ConnectorFactory.getConnector("OJ12345") instanceof OCConnector); // opencaching JP
+        assertTrue(ConnectorFactory.getConnector("OS12345") instanceof OCConnector); // opencaching NO
+        assertTrue(ConnectorFactory.getConnector("OB12345") instanceof OCConnector); // opencaching NL
+        assertTrue(ConnectorFactory.getConnector("OP12345") instanceof OCConnector); // opencaching PL
     }
 
     public static void testGeocodeInvalidFormat() throws Exception {

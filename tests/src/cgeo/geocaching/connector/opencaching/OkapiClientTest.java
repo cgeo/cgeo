@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.opencaching;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.connector.oc.OkapiClient;
 import cgeo.geocaching.enumerations.LoadFlags;
 
 public class OkapiClientTest extends CGeoTestCase {

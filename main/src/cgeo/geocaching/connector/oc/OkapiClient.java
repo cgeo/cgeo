@@ -1,4 +1,4 @@
-package cgeo.geocaching.connector.opencaching;
+package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgCache;
@@ -297,7 +297,7 @@ final public class OkapiClient {
         if (connector == null) {
             return null;
         }
-        if (!(connector instanceof ApiOpenCachingConnector)) {
+        if (!(connector instanceof OCApiConnector)) {
             return null;
         }
 
@@ -307,7 +307,7 @@ final public class OkapiClient {
         }
 
         final String uri = "http://" + host + service;
-        ((ApiOpenCachingConnector) connector).addAuthentication(params);
+        ((OCApiConnector) connector).addAuthentication(params);
         return Network.requestJSON(uri, params);
     }
 }
