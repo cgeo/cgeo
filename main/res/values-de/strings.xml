@@ -218,7 +218,7 @@
   <string name="warn_search_help_tb">Code des Trackables eingeben, z.B. \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Bitte Text einfügen.</string>
   <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
-  <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte in der Version 0.2.4.\nOffline Karte ist nicht verfügbar.</string>
+  <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte in der Version 0.3.0.\nOffline Karte ist nicht verfügbar.</string>
   <string name="warn_deprecated_mapfile">Es wird eine veraltete Offline-Karte v0.2.4 verwendet.\nBitte zukünftig Offline-Karten in der Version 0.3.0 verwenden.\nDer Support für die alte Version wird im nächsten Release eingestellt.</string>
  
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
