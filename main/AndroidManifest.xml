@@ -54,7 +54,7 @@
 				android:resource="@xml/searchable" />
 		</activity>
 		<activity
-			android:name=".cgeopopup"
+			android:name=".CachePopup"
 			android:label="@string/app_name"
 			android:theme="@style/cgeo_transparent"
 			android:windowSoftInputMode="stateHidden"
@@ -235,5 +235,11 @@
 		</activity>
 		<provider android:name=".apps.LocusDataStorageProvider" 
             android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
+		<activity android:name="WaypointPopup"
+		    android:label="@string/app_name"
+			android:theme="@style/cgeo_transparent"
+			android:windowSoftInputMode="stateHidden"
+			android:configChanges="keyboardHidden|orientation" >
+		</activity>
 	</application>
 </manifest>

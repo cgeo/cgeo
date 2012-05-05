@@ -2,8 +2,8 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgeopopup;
-import cgeo.geocaching.cgeowaypoint;
+import cgeo.geocaching.WaypointPopup;
+import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -228,10 +228,10 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
                 CGeoMap.markCacheAsDirty(coordinate.getGeocode());
-                cgeopopup.startActivity(context, coordinate.getGeocode());
+                CachePopup.startActivity(context, coordinate.getGeocode());
             } else if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {
                 CGeoMap.markCacheAsDirty(coordinate.getGeocode());
-                cgeowaypoint.startActivity(context, coordinate.getId());
+                WaypointPopup.startActivity(context, coordinate.getId(), coordinate.getGeocode());
             } else {
                 waitDialog.dismiss();
                 return false;
@@ -240,6 +240,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             waitDialog.dismiss();
         } catch (Exception e) {
             Log.e("cgMapOverlay.onTap: " + e.toString());
+            if (waitDialog != null) {
+                waitDialog.dismiss();
+            }
         }
 
         return false;
