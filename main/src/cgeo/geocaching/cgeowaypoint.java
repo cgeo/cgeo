@@ -92,7 +92,13 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
             }
 
             final Button buttonEdit = (Button) findViewById(R.id.edit);
-            buttonEdit.setOnClickListener(new editWaypointListener());
+            buttonEdit.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    cgeowaypointadd.startActivityEditWaypoint(cgeowaypoint.this, id);
+                }
+            });
 
             if (waypoint.isUserDefined()) {
                 final Button buttonDelete = (Button) findViewById(R.id.delete);
@@ -238,6 +244,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
     private void cachesAround() {
         if (waypoint == null || waypoint.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
+            return;
         }
 
         cgeocaches.startActivityCoordinates(this, waypoint.getCoords());
@@ -248,6 +255,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
     private void goToGeocache() {
         if (waypoint == null || waypoint.getGeocode() == null) {
             showToast(res.getString(R.string.err_waypoint_open_cache_failed));
+            return;
         }
 
         CacheDetailActivity.startActivity(this, waypoint.getGeocode());
@@ -272,15 +280,6 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
     @Override
     public void update(final IGeoData geo) {
         // nothing
-    }
-
-    private class editWaypointListener implements View.OnClickListener {
-
-        public void onClick(View arg0) {
-            Intent editIntent = new Intent(cgeowaypoint.this, cgeowaypointadd.class);
-            editIntent.putExtra("waypoint", id);
-            startActivity(editIntent);
-        }
     }
 
     private class deleteWaypointListener implements View.OnClickListener {

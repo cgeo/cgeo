@@ -15,6 +15,8 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -422,5 +424,17 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
         } else {
             ActivityMixin.goManual(this, "c:geo-waypoint-new");
         }
+    }
+
+    public static void startActivityEditWaypoint(final Context context, final int waypointId) {
+        final Intent editIntent = new Intent(context, cgeowaypointadd.class);
+        editIntent.putExtra("waypoint", waypointId);
+        context.startActivity(editIntent);
+    }
+
+    public static void startActivityAddWaypoint(final Context context, final cgCache cache) {
+        final Intent addWptIntent = new Intent(context, cgeowaypointadd.class);
+        addWptIntent.putExtra("geocode", cache.getGeocode()).putExtra("count", cache.getWaypoints().size());
+        context.startActivity(addWptIntent);
     }
 }

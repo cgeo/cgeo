@@ -19,6 +19,7 @@ import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
@@ -83,7 +84,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -476,9 +476,7 @@ public class CacheDetailActivity extends AbstractActivity {
             case CONTEXT_MENU_WAYPOINT_EDIT: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
-                    Intent editIntent = new Intent(this, cgeowaypointadd.class);
-                    editIntent.putExtra("waypoint", waypoint.getId());
-                    startActivity(editIntent);
+                    cgeowaypointadd.startActivityEditWaypoint(this, waypoint.getId());
                     refreshOnResume = true;
                 }
                 break;
@@ -1347,45 +1345,19 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             detailsList = (LinearLayout) view.findViewById(R.id.details_list);
+            final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
 
             // cache name (full name)
             Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
             if (cache.isDisabled() || cache.isArchived()) { // strike
                 span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
-            addCacheDetail(R.string.cache_name, span);
 
-            // cache type
-            addCacheDetail(R.string.cache_type, cache.getType().getL10n());
-
-            // size
-            if (null != cache.getSize() && cache.showSize()) {
-                addCacheDetail(R.string.cache_size, cache.getSize().getL10n());
-            }
-
-            // gc-code
-            addCacheDetail(R.string.cache_geocode, cache.getGeocode().toUpperCase());
-
-            // cache state
-            if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
-                List<String> states = new ArrayList<String>(5);
-                if (cache.isLogOffline()) {
-                    states.add(res.getString(R.string.cache_status_offline_log));
-                }
-                if (cache.isFound()) {
-                    states.add(res.getString(R.string.cache_status_found));
-                }
-                if (cache.isArchived()) {
-                    states.add(res.getString(R.string.cache_status_archived));
-                }
-                if (cache.isDisabled()) {
-                    states.add(res.getString(R.string.cache_status_disabled));
-                }
-                if (cache.isPremiumMembersOnly()) {
-                    states.add(res.getString(R.string.cache_status_premium));
-                }
-                addCacheDetail(R.string.cache_status, StringUtils.join(states, ", "));
-            }
+            details.add(R.string.cache_name, span);
+            details.add(R.string.cache_type, cache.getType().getL10n());
+            details.addSize(cache);
+            details.add(R.string.cache_geocode, cache.getGeocode().toUpperCase());
+            details.addCacheState(cache);
 
             // distance
             {
@@ -1398,41 +1370,25 @@ public class CacheDetailActivity extends AbstractActivity {
                         distance = currentCoords.distanceTo(cache);
                     }
                 }
-                cacheDistanceView = addCacheDetail(R.string.cache_distance,
+                cacheDistanceView = details.add(R.string.cache_distance,
                         distance != null ? HumanDistance.getHumanDistance(distance) : "--");
             }
 
-            // difficulty
-            if (cache.getDifficulty() > 0) {
-                addStarRating(R.string.cache_difficulty, cache.getDifficulty());
-            }
-
-            // terrain
-            if (cache.getTerrain() > 0) {
-                addStarRating(R.string.cache_terrain, cache.getTerrain());
-            }
-
-            // rating
-            if (cache.getRating() > 0) {
-                final RelativeLayout itemLayout = addStarRating(R.string.cache_rating, cache.getRating());
-                if (cache.getVotes() > 0) {
-                    final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
-                    itemAddition.setText("(" + cache.getVotes() + ")");
-                    itemAddition.setVisibility(View.VISIBLE);
-                }
-            }
+            details.addDifficulty(cache);
+            details.addTerrain(cache);
+            details.addRating(cache);
 
             // favourite count
-            addCacheDetail(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+            details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
 
             // own rating
             if (cache.getMyVote() > 0) {
-                addStarRating(R.string.cache_own_rating, cache.getMyVote());
+                details.addStars(R.string.cache_own_rating, cache.getMyVote());
             }
 
             // cache author
             if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
-                TextView ownerView = addCacheDetail(R.string.cache_owner, "");
+                TextView ownerView = details.add(R.string.cache_owner, "");
                 if (StringUtils.isNotBlank(cache.getOwner())) {
                     ownerView.setText(Html.fromHtml(cache.getOwner()), TextView.BufferType.SPANNABLE);
                 } else { // OwnerReal guaranteed to be not blank based on above
@@ -1449,18 +1405,18 @@ public class CacheDetailActivity extends AbstractActivity {
                     if (cache.isEventCache()) {
                         dateString = DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
                     }
-                    addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
+                    details.add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
                 }
             }
 
             // cache location
             if (StringUtils.isNotBlank(cache.getLocation())) {
-                addCacheDetail(R.string.cache_location, cache.getLocation());
+                details.add(R.string.cache_location, cache.getLocation());
             }
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                TextView valueView = addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString());
+                TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
                 valueView.setOnClickListener(new View.OnClickListener() {
                             private int position = 0;
                             private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
@@ -1512,29 +1468,6 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             return view;
-        }
-
-        private TextView addCacheDetail(final int nameId, final CharSequence value) {
-            final RelativeLayout layout = (RelativeLayout) getLayoutInflater().inflate(R.layout.cache_item, null);
-            ((TextView) layout.findViewById(R.id.name)).setText(res.getString(nameId));
-            final TextView valueView = (TextView) layout.findViewById(R.id.value);
-            valueView.setText(value);
-            detailsList.addView(layout);
-            return valueView;
-        }
-
-        private RelativeLayout addStarRating(final int nameId, final float value) {
-            final RelativeLayout layout = (RelativeLayout) getLayoutInflater().inflate(R.layout.cache_layout, null);
-            TextView viewName = (TextView) layout.findViewById(R.id.name);
-            TextView viewValue = (TextView) layout.findViewById(R.id.value);
-            LinearLayout layoutStars = (LinearLayout) layout.findViewById(R.id.stars);
-
-            viewName.setText(res.getString(nameId));
-            viewValue.setText(String.format("%.1f", value) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
-            layoutStars.addView(createStarRating(value, 5, CacheDetailActivity.this), 1);
-
-            detailsList.addView(layout);
-            return layout;
         }
 
         private class StoreCacheHandler extends CancellableHandler {
@@ -2404,32 +2337,28 @@ public class CacheDetailActivity extends AbstractActivity {
                 });
 
                 registerForContextMenu(waypointView);
-                waypointView.setOnClickListener(new WaypointInfoClickListener());
+                waypointView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openContextMenu(view);
+                    }
+                });
 
                 waypoints.addView(waypointView);
             }
 
             final Button addWaypoint = (Button) view.findViewById(R.id.add_waypoint);
             addWaypoint.setClickable(true);
-            addWaypoint.setOnClickListener(new AddWaypointClickListener());
+            addWaypoint.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    cgeowaypointadd.startActivityAddWaypoint(CacheDetailActivity.this, cache);
+                    refreshOnResume = true;
+                }
+            });
 
             return view;
-        }
-
-        private class AddWaypointClickListener implements View.OnClickListener {
-
-            public void onClick(final View view) {
-                final Intent addWptIntent = new Intent(CacheDetailActivity.this, cgeowaypointadd.class);
-                addWptIntent.putExtra("geocode", cache.getGeocode()).putExtra("count", cache.getWaypoints().size());
-                startActivity(addWptIntent);
-                refreshOnResume = true;
-            }
-        }
-
-        private class WaypointInfoClickListener implements View.OnClickListener {
-            public void onClick(View view) {
-                openContextMenu(view);
-            }
         }
     }
 

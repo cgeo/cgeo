@@ -1,6 +1,5 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
@@ -8,16 +7,12 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public abstract class AbstractActivity extends Activity implements IAbstractActivity {
 
@@ -104,26 +99,6 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 
     public void invalidateOptionsMenuCompatible() {
         ActivityMixin.invalidateOptionsMenu(this);
-    }
-
-    public static LinearLayout createStarRating(final float value, final int count, final Context context) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        LinearLayout starsContainer = new LinearLayout(context);
-        starsContainer.setOrientation(LinearLayout.HORIZONTAL);
-
-        for (int i = 0; i < count; i++) {
-            ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
-            if (value - i >= 0.75) {
-                star.setImageResource(R.drawable.star_on);
-            } else if (value - i >= 0.25) {
-                star.setImageResource(R.drawable.star_half);
-            } else {
-                star.setImageResource(R.drawable.star_off);
-            }
-            starsContainer.addView(star);
-        }
-
-        return starsContainer;
     }
 
     /**

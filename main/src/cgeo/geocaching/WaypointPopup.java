@@ -1,21 +1,19 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class WaypointPopup extends AbstractPopupActivity {
@@ -42,10 +40,6 @@ public class WaypointPopup extends AbstractPopupActivity {
         super.init();
         waypoint = app.loadWaypoint(waypointId);
         try {
-            RelativeLayout itemLayout;
-            TextView itemName;
-            TextView itemValue;
-
             if (StringUtils.isNotBlank(waypoint.getName())) {
                 setTitle(waypoint.getName());
             } else {
@@ -56,114 +50,27 @@ public class WaypointPopup extends AbstractPopupActivity {
             ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(waypoint.getWaypointType().markerId), null, null, null);
 
             //Start filling waypoint details
-            LinearLayout waypointDetailsList = (LinearLayout) findViewById(R.id.waypoint_details_list);
-            waypointDetailsList.removeAllViews();
+            details = new CacheDetailsCreator(this, (LinearLayout) findViewById(R.id.waypoint_details_list));
 
             //Waypoint geocode
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-            itemName.setText(res.getString(R.string.cache_geocode));
-
-            itemValue.setText(waypoint.getPrefix().toUpperCase() + waypoint.getGeocode().toUpperCase().substring(2));
-            waypointDetailsList.addView(itemLayout);
+            details.add(R.string.cache_geocode, waypoint.getPrefix().toUpperCase() + waypoint.getGeocode().toUpperCase().substring(2));
 
             // Edit Button
-            Button buttonEdit = (Button) findViewById(R.id.edit);
+            final Button buttonEdit = (Button) findViewById(R.id.edit);
             buttonEdit.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
-                    Intent editIntent = new Intent(WaypointPopup.this, cgeowaypointadd.class);
-                    editIntent.putExtra("waypoint", waypoint.getId());
-                    startActivity(editIntent);
-                    restartActivity();
+                    cgeowaypointadd.startActivityEditWaypoint(WaypointPopup.this, waypoint.getId());
+                    finish();
                 }
             });
 
             //Start filling cache details
-            LinearLayout cacheDetailsList = (LinearLayout) findViewById(R.id.details_list);
-            cacheDetailsList.removeAllViews();
+            details = new CacheDetailsCreator(this, (LinearLayout) findViewById(R.id.details_list));
+            details.add(R.string.cache_name, cache.getName());
 
-            // Cache name
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-            itemValue.setLines(1);
-            itemName.setText(res.getString(R.string.cache_name));
-
-            itemValue.setText(cache.getName());
-            cacheDetailsList.addView(itemLayout);
-
-            // cache type
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-            itemName.setText(res.getString(R.string.cache_type));
-
-            String cacheType = cache.getType().getL10n();
-            String cacheSize = cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
-            itemValue.setText(cacheType + cacheSize);
-            cacheDetailsList.addView(itemLayout);
-
-            // gc-code
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-            itemName.setText(res.getString(R.string.cache_geocode));
-            itemValue.setText(cache.getGeocode().toUpperCase());
-            cacheDetailsList.addView(itemLayout);
-
-            // cache state
-            if (cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
-                itemLayout = createCacheState();
-                cacheDetailsList.addView(itemLayout);
-
-            }
-
-            // distance
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-            itemName.setText(res.getString(R.string.cache_distance));
-            itemValue.setText("--");
-            cacheDistance = itemValue;
-            cacheDetailsList.addView(itemLayout);
-            // difficulty
-            if (cache.getDifficulty() > 0f) {
-                itemLayout = createDifficulty();
-                cacheDetailsList.addView(itemLayout);
-            }
-
-            // terrain
-            if (cache.getTerrain() > 0f) {
-                itemLayout = createTerrain();
-                cacheDetailsList.addView(itemLayout);
-            }
-
-            // rating
-            if (cache.getRating() > 0) {
-                setRating(cache.getRating(), cache.getVotes());
-            } else {
-                aquireGCVote();
-            }
-
-            // more details
-            Button buttonMore = (Button) findViewById(R.id.more_details);
-            buttonMore.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    Intent cachesIntent = new Intent(WaypointPopup.this, CacheDetailActivity.class);
-                    cachesIntent.putExtra(EXTRA_GEOCODE, geocode.toUpperCase());
-                    startActivity(cachesIntent);
-
-                    finish();
-                }
-            });
+            addCacheDetails();
 
         } catch (Exception e) {
             Log.e("cgeopopup.init: " + e.toString());
@@ -178,31 +85,6 @@ public class WaypointPopup extends AbstractPopupActivity {
         }
 
         NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, waypoint, null);
-    }
-
-    @Override
-    protected void cachesAround() {
-        if (waypoint == null || waypoint.getCoords() == null) {
-            showToast(res.getString(R.string.err_location_unknown));
-            return;
-        }
-
-        cgeocaches.startActivityCoordinates(this, waypoint.getCoords());
-
-        finish();
-    }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void goDefaultNavigation(final View view) {
-        if (waypoint == null || waypoint.getCoords() == null) {
-            showToast(res.getString(R.string.cache_coordinates_no));
-            return;
-        }
-        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, waypoint, null);
-        finish();
     }
 
     /**
@@ -226,23 +108,15 @@ public class WaypointPopup extends AbstractPopupActivity {
     }
 
     @Override
-    protected void logOffline(int menuItem) {
-        cache.logOffline(this, LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
-    }
-
-    @Override
-    protected void logVisit() {
-        cache.logVisit(this);
-        finish();
-    }
-
-    @Override
-    protected void showInBrowser() {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode())));
-    }
-
-    @Override
     protected void showNavigationMenu() {
         NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, waypoint, null);
+    }
+
+    @Override
+    protected Geopoint getCoordinates() {
+        if (waypoint == null) {
+            return null;
+        }
+        return waypoint.getCoords();
     }
 }
