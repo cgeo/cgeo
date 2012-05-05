@@ -4,10 +4,10 @@ import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StaticMapsProvider;
-import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
 
@@ -34,20 +34,22 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         INTERNAL_MAP(new InternalMap(), 2),
         /** The internal static map activity */
         STATIC_MAP(new StaticMapApp(), 3),
+        /** Download static maps on demand */
+        DOWNLOAD_STATIC_MAPS(new DownloadStaticMapsApp(), 4),
         /** The external Locus app */
-        LOCUS(new LocusApp(), 4),
+        LOCUS(new LocusApp(), 5),
         /** The external RMaps app */
-        RMAPS(new RMapsApp(), 5),
+        RMAPS(new RMapsApp(), 6),
         /** Google Maps */
-        GOOGLE_MAPS(new GoogleMapsApp(), 6),
+        GOOGLE_MAPS(new GoogleMapsApp(), 7),
         /** Google Navigation */
-        GOOGLE_NAVIGATION(new GoogleNavigationApp(), 7),
+        GOOGLE_NAVIGATION(new GoogleNavigationApp(), 8),
         /** Google Streetview */
-        GOOGLE_STREETVIEW(new StreetviewApp(), 8),
+        GOOGLE_STREETVIEW(new StreetviewApp(), 9),
         /** The external OruxMaps app */
-        ORUX_MAPS(new OruxMapsApp(), 9),
+        ORUX_MAPS(new OruxMapsApp(), 10),
         /** The external navigon app */
-        NAVIGON(new NavigonApp(), 10);
+        NAVIGON(new NavigonApp(), 11);
 
         NavigationAppsEnum(NavigationApp app, int id) {
             this.app = app;
@@ -126,6 +128,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
                 if (hasStaticMaps) {
                     items.add(navApp);
                 }
+            } else if (NavigationAppsEnum.DOWNLOAD_STATIC_MAPS.id == navApp.id) {
+                if (!hasStaticMaps) {
+                    items.add(navApp);
+                }
             } else if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
                 items.add(navApp);
@@ -185,20 +191,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      */
     private static final int MENU_ITEM_OFFSET = 12345;
 
-    /**
-     * Adds the installed navigation tools to the given menu.
-     * Use {@link #onMenuItemSelected(MenuItem, IGeoData, Activity, cgCache, cgWaypoint, Geopoint)} on
-     * selection event to start the selected navigation tool.
-     *
-     * <b>Only use this way if {@link #showNavigationMenu(IGeoData, Activity, cgCache, cgWaypoint, Geopoint)}
-     * is not suitable for the given usecase.</b>
-     *
-     * @param menu
-     * @param activity
-     */
-    public static void addMenuItems(final Menu menu, final Activity activity) {
-        addMenuItems(menu, activity, true, false);
-    }
 
     /**
      * Adds the installed navigation tools to the given menu.
@@ -211,17 +203,14 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      *
      * @param menu
      * @param activity
-     * @param showInternalMap
-     * @param showDefaultNavigation
+     * @param filter
      */
-    public static void addMenuItems(final Menu menu, final Activity activity,
-            final boolean showInternalMap, final boolean showDefaultNavigation) {
-        final int defaultNavigationTool = Settings.getDefaultNavigationTool();
+    public static void addMenuItems(final Menu menu, final Activity activity, final List<NavigationAppsEnum> filter) {
         for (NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
-            if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
-                    (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
+            if (filter.contains(navApp)) {
+                continue;
             }
+            menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
         }
     }
 

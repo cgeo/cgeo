@@ -533,6 +533,7 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Map</string>
   <string name="cache_menu_map_static">Static Maps</string>
+  <string name="cache_menu_download_map_static">Download Static Maps</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Show on ext. map</string>
   <string name="cache_menu_streetview">Street View</string>
