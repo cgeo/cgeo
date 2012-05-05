@@ -218,7 +218,7 @@
   <string name="warn_search_help_tb">Inserisci il codice del trackable. Per esempio \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Prego, inserire del testo nel log.</string>
   <string name="warn_load_images">c:geo non riesce a caricare immagini.</string>
-  <string name="warn_invalid_mapfile">La mappa selezionata non è mapsforge versione 0.2.4.\nMappa offline non disponibile.</string>
+  <string name="warn_invalid_mapfile">La mappa selezionata non è mapsforge versione 0.3.0.\nMappa offline non disponibile.</string>
 
   <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
   <string name="info_log_saved">c:geo ha salvato il log.</string>
