@@ -2,22 +2,12 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.utils.CancellableHandler;
-
-import java.util.Set;
 
 public abstract class AbstractConnector implements IConnector {
 
     @Override
     public boolean canHandle(String geocode) {
-        return false;
-    }
-
-    @Override
-    public boolean supportsRefreshCache(cgCache cache) {
         return false;
     }
 
@@ -39,26 +29,6 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public boolean supportsUserActions() {
         return false;
-    }
-
-    @Override
-    public boolean supportsCachesAround() {
-        return false;
-    }
-
-    @Override
-    public SearchResult searchByCoordinate(Geopoint center) {
-        return null;
-    }
-
-    @Override
-    public SearchResult searchByGeocode(String geocode, String guid, cgeoapplication app, CancellableHandler handler) {
-        return null;
-    }
-
-    @Override
-    public SearchResult searchByGeocodes(Set<String> geocodes) {
-        return null;
     }
 
     public SearchResult searchByViewport(Viewport viewport, String tokens[]) {

@@ -1,5 +1,6 @@
-package cgeo.geocaching;
+package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -20,10 +21,10 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class cgSearchHandler extends Handler {
+public class SearchHandler extends Handler {
     private Activity activity = null;
     private Resources res = null;
-    private cgSearchThread recaptchaThread = null;
+    private AbstractSearchThread recaptchaThread = null;
     private ImageView imageView = null;
     private Bitmap img = null;
 
@@ -40,7 +41,7 @@ public class cgSearchHandler extends Handler {
         }
     };
 
-    public cgSearchHandler(Activity activityIn, Resources resIn, cgSearchThread recaptchaThreadIn) {
+    public SearchHandler(Activity activityIn, Resources resIn, AbstractSearchThread recaptchaThreadIn) {
         activity = activityIn;
         res = resIn;
         recaptchaThread = recaptchaThreadIn;

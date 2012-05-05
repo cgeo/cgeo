@@ -14,6 +14,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -79,6 +80,18 @@ public class SearchResult implements Parcelable {
             in.readStringArray(viewstates);
         }
         setTotal(in.readInt());
+    }
+
+    public SearchResult(cgCache cache) {
+        this();
+        addCache(cache);
+    }
+
+    public SearchResult(Collection<cgCache> caches) {
+        this();
+        for (cgCache cache : caches) {
+            addCache(cache);
+        }
     }
 
     @Override

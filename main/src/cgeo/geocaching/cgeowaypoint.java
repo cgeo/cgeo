@@ -240,7 +240,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
             showToast(res.getString(R.string.err_location_unknown));
         }
 
-        cgeocaches.startActivityCachesAround(this, waypoint.getCoords());
+        cgeocaches.startActivityCoordinates(this, waypoint.getCoords());
 
         finish();
     }

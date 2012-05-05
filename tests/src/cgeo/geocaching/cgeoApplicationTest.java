@@ -2,9 +2,9 @@ package cgeo.geocaching;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -176,11 +176,11 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByCoords(cgSearchThread, Geopoint, String, int, boolean)}
+     * Test {@link cgBase#searchByCoords(AbstractSearchThread, Geopoint, String, int, boolean)}
      */
     @MediumTest
     public static void testSearchByCoords() {
-        final SearchResult search = GCParser.searchByCoords(null, new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, false);
+        final SearchResult search = GCParser.searchByCoords(new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, false);
         assertNotNull(search);
         assertTrue(18 <= search.getGeocodes().size());
         assertTrue(search.getGeocodes().contains("GC1RMM2"));
@@ -191,7 +191,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByOwner() {
-        final SearchResult search = GCParser.searchByOwner(null, "blafoo", CacheType.MYSTERY, false);
+        final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY, false);
         assertNotNull(search);
         assertEquals(3, search.getGeocodes().size());
         assertTrue(search.getGeocodes().contains("GC36RT6"));
@@ -202,7 +202,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByUsername() {
-        final SearchResult search = GCParser.searchByUsername(null, "blafoo", CacheType.WEBCAM, false);
+        final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM, false);
         assertNotNull(search);
         assertEquals(3, search.getTotal());
         assertTrue(search.getGeocodes().contains("GCP0A9"));
@@ -213,14 +213,13 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByViewport() {
-
-        Strategy strategy = Settings.getLiveMapStrategy();
+        final Strategy strategy = Settings.getLiveMapStrategy();
 
         try {
-            GC2CJPF mockedCache = new GC2CJPF();
+            final GC2CJPF mockedCache = new GC2CJPF();
             deleteCacheFromDB(mockedCache.getGeocode());
 
-            final String[] tokens = GCBase.getTokens();
+            final String[] tokens = Login.getMapTokens();
             final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
             // check coords for DETAILED
@@ -236,7 +235,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
             // check update after switch strategy to FAST
             Settings.setLiveMapStrategy(Strategy.FAST);
-            GCBase.removeFromTileCache(mockedCache);
+            Tile.Cache.removeFromTileCache(mockedCache);
 
             search = ConnectorFactory.searchByViewport(viewport, tokens);
             assertNotNull(search);
@@ -271,7 +270,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             // non premium cache
             MockedCache cache = new GC2CJPF();
             deleteCacheFromDBAndLogout(cache.getGeocode());
-            GCBase.removeFromTileCache(cache);
+            Tile.Cache.removeFromTileCache(cache);
 
             Viewport viewport = new Viewport(cache, 0.003, 0.003);
             SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);

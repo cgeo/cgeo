@@ -3,17 +3,20 @@ package cgeo.geocaching.connector.ox;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
 
+import java.util.Collection;
 import java.util.regex.Pattern;
 
 /**
  * connector for OpenCaching.com
  *
  */
-public class OXConnector extends AbstractConnector {
+public class OXConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode {
 
     private static final Pattern PATTERN_GEOCODE = Pattern.compile("OX[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
 
@@ -44,13 +47,22 @@ public class OXConnector extends AbstractConnector {
     }
 
     @Override
-    public SearchResult searchByGeocode(String geocode, String guid, cgeoapplication app, CancellableHandler handler) {
+    public SearchResult searchByGeocode(String geocode, String guid, CancellableHandler handler) {
         final cgCache cache = OpenCachingApi.searchByGeoCode(geocode);
         if (cache == null) {
             return null;
         }
-        final SearchResult searchResult = new SearchResult();
-        searchResult.addCache(cache);
+        final SearchResult searchResult = new SearchResult(cache);
+        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+    }
+
+    @Override
+    public SearchResult searchByCenter(Geopoint center) {
+        Collection<cgCache> caches = OpenCachingApi.searchByCenter(center);
+        if (caches == null) {
+            return null;
+        }
+        final SearchResult searchResult = new SearchResult(caches);
         return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 }

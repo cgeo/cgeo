@@ -15,7 +15,6 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -1133,7 +1132,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 do {
 
                     if (tokens == null) {
-                        tokens = GCBase.getTokens();
+                        tokens = Login.getMapTokens();
                         if (noMapTokenHandler != null && tokens == null) {
                             noMapTokenHandler.sendEmptyMessage(0);
                         }

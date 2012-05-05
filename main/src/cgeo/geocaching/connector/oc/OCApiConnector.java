@@ -3,12 +3,12 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
-public class OCApiConnector extends OCConnector {
+public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
     private final String cK;
 
@@ -28,18 +28,12 @@ public class OCApiConnector extends OCConnector {
     }
 
     @Override
-    public boolean supportsRefreshCache(cgCache cache) {
-        return true;
-    }
-
-    @Override
-    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(final String geocode, final String guid, final CancellableHandler handler) {
         final cgCache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;
         }
-        final SearchResult searchResult = new SearchResult();
-        searchResult.addCache(cache);
+        final SearchResult searchResult = new SearchResult(cache);
         return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 }

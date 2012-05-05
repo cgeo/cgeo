@@ -6,7 +6,10 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -15,10 +18,9 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Set;
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter {
 
     private static GCConnector instance;
     private static final Pattern gpxZipFilePattern = Pattern.compile("\\d{7,}(_.+)?\\.zip", Pattern.CASE_INSENSITIVE);
@@ -40,11 +42,6 @@ public class GCConnector extends AbstractConnector {
             return false;
         }
         return GCConstants.PATTERN_GC_CODE.matcher(geocode).matches();
-    }
-
-    @Override
-    public boolean supportsRefreshCache(cgCache cache) {
-        return true;
     }
 
     @Override
@@ -79,18 +76,7 @@ public class GCConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean supportsCachesAround() {
-        return true;
-    }
-
-    @Override
-    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final CancellableHandler handler) {
-
-        if (app == null) {
-            Log.e("cgeoBase.searchByGeocode: No application found");
-            return null;
-        }
-
+    public SearchResult searchByGeocode(final String geocode, final String guid, final CancellableHandler handler) {
         final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
@@ -106,11 +92,11 @@ public class GCConnector extends AbstractConnector {
 
         if (StringUtils.isEmpty(page)) {
             final SearchResult search = new SearchResult();
-            if (app.isThere(geocode, guid, true, false)) {
+            if (cgeoapplication.getInstance().isThere(geocode, guid, true, false)) {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
                     Log.i("Loading old cache from cache.");
 
-                    search.addGeocode(app.getGeocode(guid));
+                    search.addGeocode(cgeoapplication.getInstance().getGeocode(guid));
                 } else {
                     search.addGeocode(geocode);
                 }
@@ -134,13 +120,8 @@ public class GCConnector extends AbstractConnector {
     }
 
     @Override
-    public SearchResult searchByGeocodes(Set<String> geocodes) {
-        return GCBase.searchByGeocodes(geocodes);
-    }
-
-    @Override
     public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
-        return GCBase.searchByViewport(viewport, tokens);
+        return GCMap.searchByViewport(viewport, tokens);
     }
 
     @Override
@@ -153,8 +134,18 @@ public class GCConnector extends AbstractConnector {
         return cacheHasReliableLatLon;
     }
 
-    @Override
-    public String[] getTokens() {
-        return GCBase.getTokens();
+    public static int addToWatchlist(cgCache cache) {
+        return GCParser.addToWatchlist(cache);
     }
+
+    public static int removeFromWatchlist(cgCache cache) {
+        return GCParser.removeFromWatchlist(cache);
+    }
+
+    @Override
+    public SearchResult searchByCenter(Geopoint center) {
+        // TODO make search by coordinate use this method. currently it is just a marker that this connector supports search by center
+        return null;
+    }
+
 }

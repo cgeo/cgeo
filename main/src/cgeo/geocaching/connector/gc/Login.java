@@ -433,4 +433,12 @@ public abstract class Login {
         return data;
     }
 
+    /** Get user session & session token from the Live Map. Needed for following requests */
+    public static String[] getMapTokens() {
+        final HttpResponse response = Network.getRequest(GCConstants.URL_LIVE_MAP);
+        final String data = Network.getResponseData(response);
+        final String userSession = BaseUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
+        final String sessionToken = BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
+        return new String[] { userSession, sessionToken };
+    }
 }

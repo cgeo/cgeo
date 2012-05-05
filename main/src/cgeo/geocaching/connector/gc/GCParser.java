@@ -7,7 +7,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.cgSearchThread;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
@@ -61,7 +60,7 @@ public abstract class GCParser {
     private final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
     private final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 
-    private static SearchResult parseSearch(final cgSearchThread thread, final String url, final String pageContent, final boolean showCaptcha) {
+    private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("cgeoBase.parseSearch: No page given");
             return null;
@@ -77,6 +76,7 @@ public abstract class GCParser {
         searchResult.viewstates = Login.getViewstates(page);
 
         // recaptcha
+        AbstractSearchThread thread = AbstractSearchThread.getCurrentInstance();
         if (showCaptcha) {
             String recaptchaJsParam = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_RECAPTCHA, false, null);
 
@@ -305,7 +305,7 @@ public abstract class GCParser {
         return searchResult;
     }
 
-    public static SearchResult parseCache(final String page, final CancellableHandler handler) {
+    static SearchResult parseCache(final String page, final CancellableHandler handler) {
         final SearchResult searchResult = parseCacheFromText(page, handler);
         if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
             final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -710,7 +710,7 @@ public abstract class GCParser {
         return searchResult;
     }
 
-    public static SearchResult searchByNextPage(cgSearchThread thread, final SearchResult search, boolean showCaptcha) {
+    public static SearchResult searchByNextPage(final SearchResult search, boolean showCaptcha) {
         if (search == null) {
             return search;
         }
@@ -747,7 +747,7 @@ public abstract class GCParser {
             return search;
         }
 
-        final SearchResult searchResult = parseSearch(thread, url, page, showCaptcha);
+        final SearchResult searchResult = parseSearch(url, page, showCaptcha);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e("cgeoBase.searchByNextPage: No cache parsed");
             return search;
@@ -771,7 +771,7 @@ public abstract class GCParser {
      * @param addF
      * @return the original params if not null, maybe augmented with f=1, or a new Parameters with f=1 or null otherwise
      */
-    public static Parameters addFToParams(final Parameters params, final boolean my, final boolean addF) {
+    private static Parameters addFToParams(final Parameters params, final boolean my, final boolean addF) {
         if (!my && Settings.isExcludeMyCaches() && addF) {
             if (params == null) {
                 return new Parameters("f", "1");
@@ -784,8 +784,6 @@ public abstract class GCParser {
     }
 
     /**
-     * @param thread
-     *            thread to run the captcha if needed
      * @param cacheType
      * @param listId
      * @param showCaptcha
@@ -793,7 +791,7 @@ public abstract class GCParser {
      *            the parameters to add to the request URI
      * @return
      */
-    private static SearchResult searchByAny(final cgSearchThread thread, final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params) {
+    private static SearchResult searchByAny(final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params) {
         insertCacheType(params, cacheType);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
@@ -805,7 +803,7 @@ public abstract class GCParser {
             return null;
         }
 
-        final SearchResult searchResult = parseSearch(thread, fullUri, page, showCaptcha);
+        final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e("cgeoBase.searchByAny: No cache parsed");
             return searchResult;
@@ -818,22 +816,22 @@ public abstract class GCParser {
         return search;
     }
 
-    public static SearchResult searchByCoords(final cgSearchThread thread, final Geopoint coords, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByCoords(final Geopoint coords, final CacheType cacheType, final boolean showCaptcha) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(thread, cacheType, false, showCaptcha, params);
+        return searchByAny(cacheType, false, showCaptcha, params);
     }
 
-    public static SearchResult searchByKeyword(final cgSearchThread thread, final String keyword, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByKeyword(final String keyword, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("cgeoBase.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        return searchByAny(thread, cacheType, false, showCaptcha, params);
+        return searchByAny(cacheType, false, showCaptcha, params);
     }
 
-    public static SearchResult searchByUsername(final cgSearchThread thread, final String userName, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByUsername(final String userName, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
             Log.e("cgeoBase.searchByUsername: No user name given");
             return null;
@@ -847,17 +845,17 @@ public abstract class GCParser {
             Log.i("cgBase.searchByUsername: Overriding users choice, downloading all caches.");
         }
 
-        return searchByAny(thread, cacheType, my, showCaptcha, params);
+        return searchByAny(cacheType, my, showCaptcha, params);
     }
 
-    public static SearchResult searchByOwner(final cgSearchThread thread, final String userName, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByOwner(final String userName, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
             Log.e("cgeoBase.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", userName);
-        return searchByAny(thread, cacheType, false, showCaptcha, params);
+        return searchByAny(cacheType, false, showCaptcha, params);
     }
 
     public static cgTrackable searchTrackable(final String geocode, final String guid, final String id) {
@@ -885,7 +883,7 @@ public abstract class GCParser {
             return trackable;
         }
 
-        trackable = parseTrackable(page, cgeoapplication.getInstance(), geocode);
+        trackable = parseTrackable(page, geocode);
         if (trackable == null) {
             Log.e("cgeoBase.searchTrackable: No trackable parsed");
             return null;
@@ -1108,7 +1106,7 @@ public abstract class GCParser {
      *            the cache to add
      * @return -1: error occured
      */
-    public static int addToWatchlist(final cgCache cache) {
+    static int addToWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
         String page = Login.postRequestLogged(uri, null);
 
@@ -1134,7 +1132,7 @@ public abstract class GCParser {
      *            the cache to remove
      * @return -1: error occured
      */
-    public static int removeFromWatchlist(final cgCache cache) {
+    static int removeFromWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
         String page = Login.postRequestLogged(uri, null);
 
@@ -1170,7 +1168,7 @@ public abstract class GCParser {
      *            if not null, the application to use to save the trackable
      * @return the parsed trackable, or null if none could be parsed
      */
-    public static cgTrackable parseTrackable(final String page, final cgeoapplication app, final String possibleTrackingcode) {
+    static cgTrackable parseTrackable(final String page, final String possibleTrackingcode) {
         if (StringUtils.isBlank(page)) {
             Log.e("cgeoBase.parseTrackable: No page given");
             return null;
@@ -1332,8 +1330,8 @@ public abstract class GCParser {
             trackable.setTrackingcode(possibleTrackingcode);
         }
 
-        if (app != null) {
-            app.saveTrackable(trackable);
+        if (cgeoapplication.getInstance() != null) {
+            cgeoapplication.getInstance().saveTrackable(trackable);
         }
 
         return trackable;

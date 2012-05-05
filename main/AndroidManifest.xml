@@ -233,7 +233,7 @@
 			android:theme="@style/cgeo_transparent"
 			android:configChanges="keyboardHidden|orientation" >
 		</activity>
-		<provider android:name="cgeo.geocaching.apps.LocusDataStorageProvider" 
+		<provider android:name=".apps.LocusDataStorageProvider" 
             android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
 	</application>
 </manifest>

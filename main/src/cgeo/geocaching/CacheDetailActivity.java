@@ -7,7 +7,7 @@ import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -505,7 +505,7 @@ public class CacheDetailActivity extends AbstractActivity {
             case CONTEXT_MENU_WAYPOINT_CACHES_AROUND: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
-                    cgeocaches.startActivityCachesAround(this, waypoint.getCoords());
+                    cgeocaches.startActivityCoordinates(this, waypoint.getCoords());
                 }
             }
                 break;
@@ -561,7 +561,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 cache.openInBrowser(this);
                 return true;
             case MENU_CACHES_AROUND:
-                cgeocaches.startActivityCachesAround(this, cache.getCoords());
+                cgeocaches.startActivityCoordinates(this, cache.getCoords());
                 return true;
             case MENU_CALENDAR:
                 addToCalendarWithIntent();
@@ -1714,7 +1714,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(GCParser.addToWatchlist(cache));
+                handler.sendEmptyMessage(GCConnector.addToWatchlist(cache));
             }
         }
 
@@ -1728,7 +1728,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(GCParser.removeFromWatchlist(cache));
+                handler.sendEmptyMessage(GCConnector.removeFromWatchlist(cache));
             }
         }
 

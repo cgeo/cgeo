@@ -158,7 +158,37 @@ public final class GCConstants {
     /** Number of logs to retrieve from GC.com */
     public final static int NUMBER_OF_LOGS = 35;
 
+    private final static String SEQUENCE_GCID = "0123456789ABCDEFGHJKMNPQRTVWXYZ";
+    private final static long GC_BASE31 = 31;
+    private final static long GC_BASE16 = 16;
+
+    /**
+     * Convert GCCode (geocode) to (old) GCIds
+     *
+     * Based on http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40
+     * see http://support.groundspeak.com/index.php?pg=kb.printer.friendly&id=1#p221
+     */
+    public static long gccodeToGCId(final String gccode) {
+        long gcid = 0;
+        long base = GC_BASE31;
+        String geocodeWO = gccode.substring(2).toUpperCase();
+
+        if ((geocodeWO.length() < 4) || (geocodeWO.length() == 4 && SEQUENCE_GCID.indexOf(geocodeWO.charAt(0)) < 16)) {
+            base = GC_BASE16;
+        }
+
+        for (int p = 0; p < geocodeWO.length(); p++) {
+            gcid = base * gcid + SEQUENCE_GCID.indexOf(geocodeWO.charAt(p));
+        }
+
+        if (base == GC_BASE31) {
+            gcid += Math.pow(16, 4) - 16 * Math.pow(31, 3);
+        }
+        return gcid;
+    }
+
     private GCConstants() {
         // this class shall not have instances
     }
+
 }

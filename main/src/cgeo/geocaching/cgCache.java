@@ -4,8 +4,10 @@ import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.gc.GCBase;
+import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -480,7 +482,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public boolean supportsRefresh() {
-        return getConnector().supportsRefreshCache(this);
+        return getConnector() instanceof ISearchByGeocode;
     }
 
     public boolean supportsWatchList() {
@@ -574,7 +576,7 @@ public class cgCache implements ICache, IWaypoint {
     @Override
     public String getCacheId() {
         if (StringUtils.isBlank(cacheId) && getConnector().equals(GCConnector.getInstance())) {
-            return String.valueOf(GCBase.gccodeToGCId(geocode));
+            return String.valueOf(GCConstants.gccodeToGCId(geocode));
         }
 
         return cacheId;
@@ -605,7 +607,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public boolean supportsCachesAround() {
-        return getConnector().supportsCachesAround();
+        return getConnector() instanceof ISearchByCenter;
     }
 
     public void shareCache(Activity fromActivity, Resources res) {
@@ -1521,7 +1523,7 @@ public class cgCache implements ICache, IWaypoint {
             return null;
         }
 
-        cgeoapplication app = cgeoapplication.getInstance();
+        final cgeoapplication app = cgeoapplication.getInstance();
         if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
             final SearchResult search = new SearchResult();
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
@@ -1531,10 +1533,14 @@ public class cgCache implements ICache, IWaypoint {
 
         // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
         if (geocode == null && guid != null) {
-            return GCConnector.getInstance().searchByGeocode(null, guid, app, handler);
+            return GCConnector.getInstance().searchByGeocode(null, guid, handler);
         }
 
-        return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode, guid, app, handler);
+        final IConnector connector = ConnectorFactory.getConnector(geocode);
+        if (connector instanceof ISearchByGeocode) {
+            return ((ISearchByGeocode) connector).searchByGeocode(geocode, guid, handler);
+        }
+        return null;
     }
 
 }

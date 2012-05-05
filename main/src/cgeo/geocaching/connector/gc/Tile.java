@@ -5,6 +5,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.http.HttpResponse;
@@ -13,6 +14,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * All about tiles.
@@ -213,8 +218,8 @@ public class Tile {
     }
 
     /** Request .png image for a tile. */
-    public static Bitmap requestMapTile(final String url, final Parameters params, final String referer) {
-        final HttpResponse response = Network.getRequest(url, params, new Parameters("Referer", referer));
+    public static Bitmap requestMapTile(final Parameters params) {
+        final HttpResponse response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP));
         try {
             return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
         } catch (IOException e) {
@@ -226,4 +231,45 @@ public class Tile {
     public boolean containsPoint(final ICoordinates point) {
         return viewPort.contains(point);
     }
+
+    /**
+     * Calculate needed tiles for the given viewport
+     *
+     * @param viewport
+     * @return
+     */
+    protected static Set<Tile> getTilesForViewport(final Viewport viewport) {
+        Set<Tile> tiles = new HashSet<Tile>();
+        int zoom = Math.min(Tile.calcZoomLon(viewport.bottomLeft, viewport.topRight),
+                Tile.calcZoomLat(viewport.bottomLeft, viewport.topRight));
+        tiles.add(new Tile(viewport.bottomLeft, zoom));
+        tiles.add(new Tile(new Geopoint(viewport.getLatitudeMin(), viewport.getLongitudeMax()), zoom));
+        tiles.add(new Tile(new Geopoint(viewport.getLatitudeMax(), viewport.getLongitudeMin()), zoom));
+        tiles.add(new Tile(viewport.topRight, zoom));
+        return tiles;
+    }
+
+    public static class Cache {
+        private final static LeastRecentlyUsedMap<Integer, Tile> tileCache = new LeastRecentlyUsedMap.LruCache<Integer, Tile>(64);
+
+        public static void removeFromTileCache(final ICoordinates point) {
+            if (point != null) {
+                Collection<Tile> tiles = new ArrayList<Tile>(tileCache.values());
+                for (Tile tile : tiles) {
+                    if (tile.containsPoint(point)) {
+                        tileCache.remove(tile.hashCode());
+                    }
+                }
+            }
+        }
+
+        public static boolean contains(final Tile tile) {
+            return tileCache.containsKey(tile.hashCode());
+        }
+
+        public static void add(final Tile tile) {
+            tileCache.put(tile.hashCode(), tile);
+        }
+    }
+
 }

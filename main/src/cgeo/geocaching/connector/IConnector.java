@@ -2,12 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.utils.CancellableHandler;
-
-import java.util.Set;
 
 public interface IConnector {
     /**
@@ -24,8 +19,6 @@ public interface IConnector {
      * @return
      */
     public boolean canHandle(final String geocode);
-
-    public boolean supportsRefreshCache(final cgCache cache);
 
     /**
      * get browser URL for the given cache
@@ -70,25 +63,6 @@ public interface IConnector {
      * @return
      */
     public boolean supportsUserActions();
-
-    /**
-     * enable/disable "caches around" action in cache details
-     *
-     * @return
-     */
-    public boolean supportsCachesAround();
-
-    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final CancellableHandler handler);
-
-    public SearchResult searchByGeocodes(final Set<String> geocodes);
-
-    /**
-     * search caches by coordinate. must be implemented if {@link supportsCachesAround} returns <code>true</true>
-     *
-     * @param center
-     * @return
-     */
-    public SearchResult searchByCoordinate(final Geopoint center);
 
     /**
      * Search caches by viewport.

@@ -22,20 +22,19 @@ public class GCBaseTest extends TestCase {
     }
 
     private static void assertKey(String key, int x, int y) {
-        UTFGridPosition pos = UTFGridPosition.fromString(key);
+        final UTFGridPosition pos = UTFGridPosition.fromString(key);
         assertEquals(x, pos.getX());
         assertEquals(y, pos.getY());
     }
 
-    public static void testSearchByGeocodes() {
+    public static void testSearchFromMap() {
+        final MockedCache mockedCache = new GC2CJPF();
 
-        MockedCache mockedCache = new GC2CJPF();
-
-        Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<String>();
         geocodes.add(mockedCache.getGeocode());
 
-        SearchResult result = GCBase.searchByGeocodes(geocodes);
-        cgCache parsedCache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+        final SearchResult result = GCMap.searchByGeocodes(geocodes);
+        final cgCache parsedCache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
 
         Compare.assertCompareCaches(mockedCache, parsedCache, false);
 

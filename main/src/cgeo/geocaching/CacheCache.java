@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.cgData.StorageLocation;
-import cgeo.geocaching.connector.gc.GCBase;
+import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
@@ -108,7 +108,7 @@ public class CacheCache {
 
         @Override
         public void onRemove(cgCache removed) {
-            GCBase.removeFromTileCache(removed);
+            Tile.Cache.removeFromTileCache(removed);
         }
     }
 

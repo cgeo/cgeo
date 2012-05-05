@@ -11,7 +11,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     public static void testGetViewport() {
         Login.login();
 
-        String[] tokens = GCBase.getTokens();
+        String[] tokens = Login.getMapTokens();
 
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
@@ -31,7 +31,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public static void testBaseCodings() {
-        assertEquals(2045702, GCBase.gccodeToGCId("GC2MEGA"));
+        assertEquals(2045702, GCConstants.gccodeToGCId("GC2MEGA"));
     }
 
     /** Tile computation with different zoom levels */

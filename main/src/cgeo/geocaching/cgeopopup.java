@@ -2,7 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -236,7 +236,7 @@ public class cgeopopup extends AbstractActivity {
         if ( CacheType.UNKNOWN == cache.getType() ) {
             Set<String> geocodes = new HashSet<String>();
             geocodes.add(geocode);
-            SearchResult search = ConnectorFactory.searchByGeocodes(geocodes);
+            SearchResult search = GCMap.searchByGeocodes(geocodes);
             cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         }
 
@@ -515,7 +515,7 @@ public class cgeopopup extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityCachesAround(this, cache.getCoords());
+        cgeocaches.startActivityCoordinates(this, cache.getCoords());
 
         finish();
     }

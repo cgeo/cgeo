@@ -1,5 +1,8 @@
-package cgeo.geocaching;
+package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.TrackableLog;
+import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
@@ -54,7 +57,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseTrackableWithoutReleaseDate() {
-        cgTrackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb14wfv), null, null);
+        cgTrackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb14wfv), null);
         assertNotNull(trackable);
         assertEquals("The Brickster", trackable.getName());
         assertEquals("Adrian C", trackable.getOwner());
@@ -67,11 +70,11 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private cgTrackable getTB2R124() {
-        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tb2r124)), null, null);
+        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tb2r124)), null);
     }
 
     private cgTrackable getTBXATG() {
-        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tbxatg)), null, null);
+        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tbxatg)), null);
     }
 
 }

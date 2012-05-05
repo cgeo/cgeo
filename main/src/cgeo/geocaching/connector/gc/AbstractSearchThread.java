@@ -1,13 +1,20 @@
-package cgeo.geocaching;
+package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.utils.Log;
 
 import android.os.Handler;
+import android.os.Message;
 
-abstract public class cgSearchThread extends Thread {
+abstract public class AbstractSearchThread extends Thread {
     private Handler recaptchaHandler = null;
     private String recaptchaChallenge = null;
     private String recaptchaText = null;
+    private final Handler handler;
+    private static AbstractSearchThread currentInstance;
+
+    public AbstractSearchThread(final Handler handler) {
+        this.handler = handler;
+    }
 
     public void setRecaptchaHandler(Handler recaptchaHandlerIn) {
         recaptchaHandler = recaptchaHandlerIn;
@@ -43,5 +50,19 @@ abstract public class cgSearchThread extends Thread {
 
     public synchronized String getText() {
         return recaptchaText;
+    }
+
+    @Override
+    final public void run() {
+        super.run();
+        currentInstance = this;
+        runSearch();
+        handler.sendMessage(Message.obtain());
+    }
+
+    protected abstract void runSearch();
+
+    public static AbstractSearchThread getCurrentInstance() {
+        return currentInstance;
     }
 }

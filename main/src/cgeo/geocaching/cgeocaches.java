@@ -7,6 +7,8 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.connector.gc.SearchHandler;
+import cgeo.geocaching.connector.gc.AbstractSearchThread;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -438,7 +440,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 }
 
                 // reload history list
-                (new LoadByHistoryThread(loadCachesHandler)).start();
+                (new LoadByHistoryThread()).start();
 
                 progress.dismiss();
             }
@@ -500,7 +502,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         }
 
         Thread threadPure;
-        cgSearchThread thread;
+        AbstractSearchThread thread;
 
         switch (type) {
             case OFFLINE:
@@ -519,7 +521,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 showProgress(true);
                 setLoadingCaches();
 
-                threadPure = new LoadByOfflineThread(loadCachesHandler, coords, listId);
+                threadPure = new LoadByOfflineThread(coords, listId);
                 threadPure.start();
 
                 break;
@@ -529,7 +531,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 showProgress(true);
                 setLoadingCaches();
 
-                threadPure = new LoadByHistoryThread(loadCachesHandler);
+                threadPure = new LoadByHistoryThread();
                 threadPure.start();
                 break;
             case NEAREST:
@@ -539,8 +541,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new LoadByCoordsThread(loadCachesHandler, coords);
-                thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
+                thread = new LoadByCoordsThread(coords);
+                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
                 thread.start();
                 break;
             case COORDINATE:
@@ -550,8 +552,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new LoadByCoordsThread(loadCachesHandler, coords);
-                thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
+                thread = new LoadByCoordsThread(coords);
+                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
                 thread.start();
                 break;
             case KEYWORD:
@@ -560,8 +562,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new LoadByKeywordThread(loadCachesHandler, keyword);
-                thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
+                thread = new LoadByKeywordThread(keyword);
+                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
                 thread.start();
                 break;
             case ADDRESS:
@@ -578,8 +580,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                     setLoadingCaches();
                 }
 
-                thread = new LoadByCoordsThread(loadCachesHandler, coords);
-                thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
+                thread = new LoadByCoordsThread(coords);
+                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
                 thread.start();
                 break;
             case USERNAME:
@@ -588,8 +590,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new LoadByUserNameThread(loadCachesHandler, username);
-                thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
+                thread = new LoadByUserNameThread(username);
+                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
                 thread.start();
                 break;
             case OWNER:
@@ -598,8 +600,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new LoadByOwnerThread(loadCachesHandler, username);
-                thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
+                thread = new LoadByOwnerThread(username);
+                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
                 thread.start();
                 break;
             case MAP:
@@ -1443,13 +1445,10 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     }
 
     private class LoadByOfflineThread extends Thread {
-
-        final private Handler handler;
         final private Geopoint coords;
         final private int listId;
 
-        public LoadByOfflineThread(final Handler handlerIn, final Geopoint coordsIn, int listIdIn) {
-            handler = handlerIn;
+        public LoadByOfflineThread(final Geopoint coordsIn, int listIdIn) {
             coords = coordsIn;
             listId = listIdIn;
         }
@@ -1457,50 +1456,34 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         @Override
         public void run() {
             search = cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, Settings.getCacheType(), listId);
-            handler.sendMessage(Message.obtain());
+            loadCachesHandler.sendMessage(Message.obtain());
         }
     }
 
     private class LoadByHistoryThread extends Thread {
-
-        final private Handler handler;
-
-        public LoadByHistoryThread(Handler handlerIn) {
-            handler = handlerIn;
-        }
-
         @Override
         public void run() {
             search = cgeoapplication.getInstance().getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
-            handler.sendMessage(Message.obtain());
+            loadCachesHandler.sendMessage(Message.obtain());
         }
     }
 
-    private class LoadNextPageThread extends cgSearchThread {
-
-        private final Handler handler;
-
-        public LoadNextPageThread(Handler handlerIn) {
-            handler = handlerIn;
+    private class LoadNextPageThread extends AbstractSearchThread {
+        public LoadNextPageThread() {
+            super(loadNextPageHandler);
         }
 
         @Override
-        public void run() {
-            search = GCParser.searchByNextPage(this, search, Settings.isShowCaptcha());
-
-            handler.sendMessage(Message.obtain());
+        public void runSearch() {
+            search = GCParser.searchByNextPage(search, Settings.isShowCaptcha());
         }
     }
 
-    private class LoadByCoordsThread extends cgSearchThread {
-
-        final private Handler handler;
+    private class LoadByCoordsThread extends AbstractSearchThread {
         final private Geopoint coords;
 
-        public LoadByCoordsThread(final Handler handler, final Geopoint coords) {
-            setPriority(Thread.MIN_PRIORITY);
-
-            this.handler = handler;
+        public LoadByCoordsThread(final Geopoint coords) {
+            super(loadCachesHandler);
             this.coords = coords;
 
             if (coords == null) {
@@ -1511,22 +1494,16 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         }
 
         @Override
-        public void run() {
-            search = GCParser.searchByCoords(this, coords, cacheType, Settings.isShowCaptcha());
-
-            handler.sendMessage(Message.obtain());
+        public void runSearch() {
+            search = GCParser.searchByCoords(coords, cacheType, Settings.isShowCaptcha());
         }
     }
 
-    private class LoadByKeywordThread extends cgSearchThread {
-
-        final private Handler handler;
+    private class LoadByKeywordThread extends AbstractSearchThread {
         final private String keyword;
 
-        public LoadByKeywordThread(final Handler handler, final String keyword) {
-            setPriority(Thread.MIN_PRIORITY);
-
-            this.handler = handler;
+        public LoadByKeywordThread(final String keyword) {
+            super(loadCachesHandler);
             this.keyword = keyword;
 
             if (keyword == null) {
@@ -1537,21 +1514,16 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         }
 
         @Override
-        public void run() {
-            search = GCParser.searchByKeyword(this, keyword, cacheType, Settings.isShowCaptcha());
-            handler.sendMessage(Message.obtain());
+        public void runSearch() {
+            search = GCParser.searchByKeyword(keyword, cacheType, Settings.isShowCaptcha());
         }
     }
 
-    private class LoadByUserNameThread extends cgSearchThread {
-
-        final private Handler handler;
+    private class LoadByUserNameThread extends AbstractSearchThread {
         final private String username;
 
-        public LoadByUserNameThread(final Handler handler, final String username) {
-            setPriority(Thread.MIN_PRIORITY);
-
-            this.handler = handler;
+        public LoadByUserNameThread(final String username) {
+            super(loadCachesHandler);
             this.username = username;
 
             if (StringUtils.isBlank(username)) {
@@ -1562,21 +1534,16 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         }
 
         @Override
-        public void run() {
-            search = GCParser.searchByUsername(this, username, cacheType, Settings.isShowCaptcha());
-            handler.sendMessage(Message.obtain());
+        public void runSearch() {
+            search = GCParser.searchByUsername(username, cacheType, Settings.isShowCaptcha());
         }
     }
 
-    private class LoadByOwnerThread extends cgSearchThread {
-
-        final private Handler handler;
+    private class LoadByOwnerThread extends AbstractSearchThread {
         final private String username;
 
-        public LoadByOwnerThread(final Handler handler, final String username) {
-            setPriority(Thread.MIN_PRIORITY);
-
-            this.handler = handler;
+        public LoadByOwnerThread(final String username) {
+            super(loadCachesHandler);
             this.username = username;
 
             if (StringUtils.isBlank(username)) {
@@ -1587,9 +1554,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         }
 
         @Override
-        public void run() {
-            search = GCParser.searchByOwner(this, username, cacheType, Settings.isShowCaptcha());
-            handler.sendMessage(Message.obtain());
+        public void runSearch() {
+            search = GCParser.searchByOwner(username, cacheType, Settings.isShowCaptcha());
         }
     }
 
@@ -1645,7 +1611,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                             }
 
                             Log.i("Waiting for next cache " + delay + " ms");
-                            sleep(delay);
                         } catch (Exception e) {
                             Log.e("cgeocaches.LoadDetailsThread.sleep: " + e.toString());
                         }
@@ -1849,9 +1814,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
             setLoadingCaches();
             listFooter.setOnClickListener(null);
 
-            LoadNextPageThread thread;
-            thread = new LoadNextPageThread(loadNextPageHandler);
-            thread.setRecaptchaHandler(new cgSearchHandler(cgeocaches.this, res, thread));
+            final LoadNextPageThread thread = new LoadNextPageThread();
+            thread.setRecaptchaHandler(new SearchHandler(cgeocaches.this, res, thread));
             thread.start();
         }
     }
@@ -1908,7 +1872,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     private class MoveHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            Thread threadPure = new LoadByOfflineThread(loadCachesHandler, coords, msg.what);
+            Thread threadPure = new LoadByOfflineThread(coords, msg.what);
             threadPure.start();
         }
     }
@@ -2038,16 +2002,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityCachesAround(final AbstractActivity context, final Geopoint coords) {
-        cgeocaches cachesActivity = new cgeocaches();
-
-        Intent cachesIntent = new Intent(context, cachesActivity.getClass());
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.COORDINATE);
-        cachesIntent.putExtra(EXTRAS_COORDS, coords);
-
-        context.startActivity(cachesIntent);
-    }
-
     public static void startActivityOwner(final AbstractActivity context, final String userName) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
 
@@ -2121,7 +2075,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     }
 
     public static void startActivityAddress(final Context context, final Geopoint coords, final String address) {
-        Intent addressIntent = new Intent(context, cgeocaches.class);
+        final Intent addressIntent = new Intent(context, cgeocaches.class);
         addressIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.ADDRESS);
         addressIntent.putExtra(EXTRAS_COORDS, coords);
         addressIntent.putExtra("address", address);
