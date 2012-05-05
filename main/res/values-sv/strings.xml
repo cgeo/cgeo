@@ -218,7 +218,8 @@
   <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
   <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
-  <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.2.4 kartfile.\nOffline kartan är inte tillgänglig.</string>
+  <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.3.0 kartfile.\nOffline kartan är inte tillgänglig.</string>
+  <string name="warn_deprecated_mapfile">Den kartfil du använder är av en gammal version (0.2.4).\nVi rekommenderar att byta till en kartfil med version 0.3.0.\nNästa version av c:geo kommer inte hantera version 0.2.4.</string>
 
   <string name="info_log_posted">c:geo har postat din logg.</string>
   <string name="info_log_saved">c:geo har sparat din logg.</string>
@@ -282,6 +283,7 @@
   <string name="caches_sort_date">Datum</string>
   <string name="caches_sort_finds">Antal som hittat</string>
   <string name="caches_sort_state">Status</string>
+  <string name="caches_sort_storage">Tid för sparandet i enheten</string>
   <string name="caches_select_mode">Markeringsläge</string>
   <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
   <string name="caches_select_invert">Invertera valda</string>
@@ -525,6 +527,7 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Visa på karta</string>
   <string name="cache_menu_map_static">Sparade kartor</string>
+  <string name="cache_menu_download_map_static">Spara kartor</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Visa på extern karta</string>
   <string name="cache_menu_streetview">Gatuvy</string>
@@ -793,4 +796,6 @@
 	<item quantity="one">en minut sedan</item>
 	<item quantity="other">%d minuter sedan</item>
   </plurals>
+
+  <string name="clipboard_copy_ok">Kopierat till urklipp.</string>
 </resources>
