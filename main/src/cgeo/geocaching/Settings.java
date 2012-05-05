@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -1042,7 +1043,7 @@ public final class Settings {
     }
 
     public static int getDefaultNavigationTool() {
-        return sharedPrefs.getInt(KEY_DEFAULT_NAVIGATION_TOOL, 0);
+        return sharedPrefs.getInt(KEY_DEFAULT_NAVIGATION_TOOL, NavigationAppsEnum.COMPASS.id);
     }
 
     public static void setDefaultNavigationTool(final int defaultNavigationTool) {
@@ -1056,7 +1057,7 @@ public final class Settings {
     }
 
     public static int getDefaultNavigationTool2() {
-        return sharedPrefs.getInt(KEY_DEFAULT_NAVIGATION_TOOL_2, 0);
+        return sharedPrefs.getInt(KEY_DEFAULT_NAVIGATION_TOOL_2, NavigationAppsEnum.INTERNAL_MAP.id);
     }
 
     public static void setDefaultNavigationTool2(final int defaultNavigationTool) {
