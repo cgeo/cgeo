@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
@@ -20,7 +19,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
      * @author koem
      */
     @Override
-    public boolean invoke(IGeoData geo, Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint coords) {
+    public boolean invoke(Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint coords) {
 
         final ArrayList<Object> points = new ArrayList<Object>();
 

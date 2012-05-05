@@ -69,8 +69,6 @@ public final class Go4Cache extends Thread {
     /**
      * Send the coordinates to go4cache.com if the user opted in to do so.
      *
-     * @param app
-     *            the current application
      * @param coords
      *            the current coordinates
      */

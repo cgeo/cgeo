@@ -3,14 +3,14 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -21,16 +21,17 @@ class GoogleNavigationApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean isInstalled(Context context) {
+    public boolean isInstalled() {
         return true;
     }
 
     @Override
-    public boolean invoke(final IGeoData geo, final Activity activity, final cgCache cache, final cgWaypoint waypoint, final Geopoint coords) {
+    public boolean invoke(final Activity activity, final cgCache cache, final cgWaypoint waypoint, final Geopoint coords) {
         if (activity == null) {
             return false;
         }
 
+        IGeoData geo = cgeoapplication.getInstance().currentGeo();
         boolean navigationResult = false;
         if (coords != null) {
             navigationResult = navigateToCoordinates(geo, activity, coords);

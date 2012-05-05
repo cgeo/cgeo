@@ -6,7 +6,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -17,7 +16,7 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public boolean isInstalled(Context context) {
+    public boolean isInstalled() {
         return true;
     }
 

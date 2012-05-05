@@ -265,12 +265,12 @@ public class cgeoapplication extends Application {
         return storage.getAllHistoricCachesCount();
     }
 
-    /** {@link cgData#moveToList(String, int)} */
+    /** {@link cgData#moveToList(List, int)} */
     public void markStored(List<cgCache> caches, int listId) {
         storage.moveToList(caches, listId);
     }
 
-    /** {@link cgData#moveToList(String, int)} */
+    /** {@link cgData#moveToList(List, int)} */
     public void markDropped(List<cgCache> caches) {
         storage.moveToList(caches, StoredList.TEMPORARY_LIST_ID);
     }
@@ -285,7 +285,7 @@ public class cgeoapplication extends Application {
         storage.saveSearchedDestination(destination);
     }
 
-    /** {@link cgData#saveWaypoints(String, List, boolean)} */
+    /** {@link cgData#saveWaypoints(cgCache)} */
     public boolean saveWaypoints(final cgCache cache) {
         return storage.saveWaypoints(cache);
     }
@@ -366,7 +366,7 @@ public class cgeoapplication extends Application {
         return storage.getLists(getResources());
     }
 
-    /** {@link cgData#getList(int, Resources))} */
+    /** {@link cgData#getList(int, Resources)} */
     public StoredList getList(int id) {
         return storage.getList(id, getResources());
     }
@@ -391,7 +391,7 @@ public class cgeoapplication extends Application {
         return storage.removeSearchedDestination(destination);
     }
 
-    /** {@link cgData#moveToList(String, int)} */
+    /** {@link cgData#moveToList(List, int)} */
     public void moveToList(List<cgCache> caches, int listId) {
         storage.moveToList(caches, listId);
     }

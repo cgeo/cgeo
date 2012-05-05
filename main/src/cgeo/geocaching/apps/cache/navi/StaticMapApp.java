@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
@@ -15,7 +14,7 @@ class StaticMapApp extends AbstractStaticMapsApp {
     }
 
     @Override
-    public boolean invoke(IGeoData geo, Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint coords) {
+    public boolean invoke(Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint coords) {
         return invoke(activity, cache, waypoint, false);
     }
 

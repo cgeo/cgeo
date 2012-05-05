@@ -24,9 +24,9 @@ import java.util.Set;
  *
  * @author blafoo
  *
- * @see http://msdn.microsoft.com/en-us/library/bb259689.aspx
- * @see http
- *      ://svn.openstreetmap.org/applications/viewer/jmapviewer/src/org/openstreetmap/gui/jmapviewer/OsmMercator.java
+ * @see <a href="http://msdn.microsoft.com/en-us/library/bb259689.aspx">MSDN</a>
+ * @see <a
+ *      href="http://svn.openstreetmap.org/applications/viewer/jmapviewer/src/org/openstreetmap/gui/jmapviewer/OsmMercator.java">OSM</a>
  */
 public class Tile {
 
@@ -70,24 +70,16 @@ public class Tile {
     /**
      * Calculate the tile for a Geopoint based on the Spherical Mercator.
      *
-     * @see http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers
+     * @see <a
+     *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
     private int calcX(final Geopoint origin) {
         return (int) ((origin.getLongitude() + 180.0) / 360.0 * NUMBER_OF_TILES[this.zoomlevel]);
     }
 
-    public int getX() {
-        return tileX;
-    }
-
-    public int getY() {
-        return tileY;
-    }
-
     /**
      * Calculate the tile for a Geopoint based on the Spherical Mercator.
      *
-     * @see http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers
      */
     private int calcY(final Geopoint origin) {
 
@@ -99,10 +91,19 @@ public class Tile {
         return (int) ((0.5 - Math.log((1 + sinLatRad) / (1 - sinLatRad)) / (4 * Math.PI)) * NUMBER_OF_TILES[this.zoomlevel]);
     }
 
+    public int getX() {
+        return tileX;
+    }
+
+    public int getY() {
+        return tileY;
+    }
+
     /**
      * Calculate latitude/longitude for a given x/y position in this tile.
-     *
-     * @see http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers
+     * 
+     * @see <a
+     *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
     public Geopoint getCoord(UTFGridPosition pos) {
 

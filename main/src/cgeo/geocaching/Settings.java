@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -493,7 +494,7 @@ public final class Settings {
 
     /**
      * @return User selected date format on GC.com
-     * @see cgBase.gcCustomDateFormats
+     * @see Login#gcCustomDateFormats
      */
     public static String getGcCustomDate() {
         return sharedPrefs.getString(KEY_GC_CUSTOM_DATE, null);

@@ -3,11 +3,11 @@ package cgeo.geocaching.connector.gc;
 import java.util.List;
 
 /**
- *
+ * 
  * @author blafoo
- *
- * @see https://github.com/mapbox/mbtiles-spec/blob/master/1.1/utfgrid.md
- *
+ * 
+ * @see <a href="https://github.com/mapbox/mbtiles-spec/blob/master/1.1/utfgrid.md">Mapbox</a>
+ * 
  */
 public final class UTFGrid {
 

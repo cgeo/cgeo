@@ -6,8 +6,8 @@ import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.ui.Formatter;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.IObserver;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -163,7 +163,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
             case CONTEXT_MENU_NAVIGATE:
                 contextMenuItemPosition = position;
                 if (destination instanceof Destination) {
-                    NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, null, ((Destination) destination).getCoords());
+                    NavigationAppFactory.showNavigationMenu(this, null, null, ((Destination) destination).getCoords());
                     return true;
                 }
                 break;
@@ -324,7 +324,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
+        menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
 
         menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_more);
 
@@ -384,7 +384,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
                 return true;
 
             case MENU_NAVIGATE:
-                NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, null, coords);
+                NavigationAppFactory.showNavigationMenu(this, null, null, coords);
                 return true;
             default:
                 return false;
@@ -452,7 +452,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, null, geopoint);
+        NavigationAppFactory.startDefaultNavigationApplication(this, null, null, geopoint);
     }
 
     private void cachesAround() {

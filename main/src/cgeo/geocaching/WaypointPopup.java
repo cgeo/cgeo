@@ -84,7 +84,7 @@ public class WaypointPopup extends AbstractPopupActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication(this, null, waypoint, null);
     }
 
     /**
@@ -96,7 +96,7 @@ public class WaypointPopup extends AbstractPopupActivity {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;
         }
-        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), this, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication2(this, null, waypoint, null);
         finish();
     }
 
@@ -109,7 +109,7 @@ public class WaypointPopup extends AbstractPopupActivity {
 
     @Override
     protected void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, waypoint, null);
+        NavigationAppFactory.showNavigationMenu(this, null, waypoint, null);
     }
 
     @Override

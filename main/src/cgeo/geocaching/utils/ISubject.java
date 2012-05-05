@@ -39,10 +39,10 @@ public interface ISubject<T> {
     /**
      * Notify all the observers that new data is available.
      * <p/>
-     * The {@link IObserver#update(T)} method of each observer will be called with no particular order.
-     *
+     * The {@link IObserver#update(Object)} method of each observer will be called with no particular order.
+     * 
      * @param data
-     *         the updated data
+     *            the updated data
      * @return true if at least one observer was notified, false if there were no observers
      */
     public boolean notifyObservers(final T data);

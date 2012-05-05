@@ -5,7 +5,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -409,7 +408,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
                                 }
                                 if (waypoint.getCoords() != null) {
-                                    menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName());
+                                    menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
                                     menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(R.drawable.ic_menu_mapmode);
                                     menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
                                 }
@@ -497,14 +496,14 @@ public class CacheDetailActivity extends AbstractActivity {
             case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
-                    NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, waypoint, null);
+                    NavigationAppFactory.startDefaultNavigationApplication(this, null, waypoint, null);
                 }
             }
                 break;
             case CONTEXT_MENU_WAYPOINT_NAVIGATE: {
                 final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
                 if (waypoint != null) {
-                    NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, waypoint, null);
+                    NavigationAppFactory.showNavigationMenu(this, null, waypoint, null);
                 }
             }
                 break;
@@ -524,17 +523,11 @@ public class CacheDetailActivity extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (null != cache) {
-            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
+            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
 
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-            List<NavigationAppsEnum> filter = new ArrayList<NavigationAppsEnum>(1);
-            if (StaticMapsProvider.doesExistStaticMapForCache(cache.getGeocode())) {
-                filter.add(NavigationAppsEnum.DOWNLOAD_STATIC_MAPS);
-            } else {
-                filter.add(NavigationAppsEnum.STATIC_MAP);
-            }
-            NavigationAppFactory.addMenuItems(subMenu, this, filter);
-            GeneralAppsFactory.addMenuItems(subMenu, this, cache);
+            NavigationAppFactory.addMenuItems(subMenu, cache);
+            GeneralAppsFactory.addMenuItems(subMenu, cache);
 
             menu.add(1, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(R.drawable.ic_menu_agenda); // add event to calendar
             addVisitMenu(menu, cache);
@@ -585,7 +578,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
                 return false;
         }
-        if (NavigationAppFactory.onMenuItemSelected(item, app.currentGeo(), this, cache, null, null)) {
+        if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
             return true;
         }
         if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
@@ -844,7 +837,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         //TODO: previously this used also the search argument "search". check if still needed
-        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(this, cache, null, null);
     }
 
     /**
@@ -857,7 +850,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         //TODO: previously this used also the search argument "search". check if still needed
-        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication2(this, cache, null, null);
     }
 
     /**
@@ -875,7 +868,7 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
+        NavigationAppFactory.showNavigationMenu(this, cache, null, null);
     }
 
     /**
@@ -2332,13 +2325,13 @@ public class CacheDetailActivity extends AbstractActivity {
                 wpNavView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), CacheDetailActivity.this, null, wpt, null);
+                        NavigationAppFactory.startDefaultNavigationApplication(CacheDetailActivity.this, null, wpt, null);
                     }
                 });
                 wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), CacheDetailActivity.this, null, wpt, null);
+                        NavigationAppFactory.startDefaultNavigationApplication2(CacheDetailActivity.this, null, wpt, null);
                         return true;
                     }
                 });

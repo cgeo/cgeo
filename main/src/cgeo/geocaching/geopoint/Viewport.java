@@ -120,8 +120,8 @@ public class Viewport {
 
     /**
      * Return a viewport that contains the current viewport as well as another point.
-     *
-     * @param coords
+     * 
+     * @param point
      *            the point we want in the viewport
      * @return either the same or an expanded viewport
      */

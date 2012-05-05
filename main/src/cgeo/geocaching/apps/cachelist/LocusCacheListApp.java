@@ -1,10 +1,9 @@
 package cgeo.geocaching.apps.cachelist;
 
-import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.apps.AbstractLocusApp;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.apps.AbstractLocusApp;
 
 import org.apache.commons.collections.CollectionUtils;
 
@@ -29,7 +28,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
      * @author koem
      */
     @Override
-    public boolean invoke(IGeoData geo, List<cgCache> cacheList, Activity activity, final SearchResult search) {
+    public boolean invoke(List<cgCache> cacheList, Activity activity, final SearchResult search) {
         if (CollectionUtils.isEmpty(cacheList)) {
             return false;
         }

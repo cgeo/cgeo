@@ -3,6 +3,7 @@ package cgeo.geocaching.apps;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -15,7 +16,6 @@ import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 
@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * for the Locus API:
  *
- * @see http://forum.asamm.cz/viewtopic.php?f=29&t=767
+ * @see <a href="http://forum.asamm.cz/viewtopic.php?f=29&t=767">Locus forum</a>
  */
 public abstract class AbstractLocusApp extends AbstractApp {
     private static final String INTENT = Intent.ACTION_VIEW;
@@ -41,8 +41,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
     }
 
     @Override
-    public boolean isInstalled(Context context) {
-        return LocusUtils.isLocusAvailable(context);
+    public boolean isInstalled() {
+        return LocusUtils.isLocusAvailable(cgeoapplication.getInstance());
     }
 
     /**

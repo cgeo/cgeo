@@ -955,11 +955,11 @@ public class cgData {
 
     /**
      * Save/store a cache to the CacheCache
-     *
+     * 
      * @param cache
      *            the Cache to save in the CacheCache/DB
-     * @param saveFlag
-     *
+     * @param saveFlags
+     * 
      * @return true = cache saved successfully to the CacheCache/DB
      */
     public boolean saveCache(cgCache cache, EnumSet<LoadFlags.SaveFlag> saveFlags) {
@@ -2907,10 +2907,6 @@ public class cgData {
     /**
      * Loads all Waypoints in the coordinate rectangle.
      *
-     * @param centerLat
-     * @param centerLon
-     * @param spanLat
-     * @param spanLon
      * @param excludeDisabled
      * @param excludeMine
      * @return

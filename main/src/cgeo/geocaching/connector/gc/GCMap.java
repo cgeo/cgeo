@@ -104,8 +104,6 @@ public class GCMap {
     }
 
     /**
-     * @param url
-     *            URL used to retrieve data.
      * @param data
      *            Retrieved data.
      * @return SearchResult. Never null.

@@ -73,74 +73,72 @@ public class AppManualReaderClient {
 	 */
 	public static final String TOPIC_ABOUT_MANUAL = "andtw-about";
 
-	/**
-	 * Convenience function to open a manual at a specific topic. See
-	 * {@link #openManual(String, String, Context, String)} for a detailed
-	 * description.
-	 *
-	 * @param manualIdentifier
-	 *            the identifier of the manual to open. This identifier must
-	 *            uniquely identify the manual as such, independent of the
-	 *            particular locale the manual is intended for.
-	 * @param topic
-	 *            the topic to open. Please do not use spaces for topic names.
-	 *            With respect to the TiddlyWiki infrastructure used for manuals
-	 *            the topic needs to the tag of a (single) tiddler. This way
-	 *            manuals can be localized (especially their topic titles)
-	 *            without breaking an app's knowledge about topics. Some
-	 *            standardized topics are predefined, such as
-	 *            {@link #TOPIC_HOME}, {@link #TOPIC_INDEX}, and
-	 *            {@link #TOPIC_ABOUT_MANUAL}.
-	 * @param context
-	 *            the context (usually an Activity) from which the manual is to
-	 *            be opened. In particular, this context is required to derive
-	 *            the proper current locale configuration in order to open
-	 *            appropriate localized manuals, if installed.
-	 *
-	 * @exception ActivityNotFoundException
-	 *                there is no suitable manual installed and all combinations
-	 *                of locale scope failed to activate any manual.
-	 *
-	 * @see #openManual(String, String, Context, String, Boolean)
-	 */
+	    /**
+     * Convenience function to open a manual at a specific topic. See
+     * {@link #openManual(String, String, Context, String)} for a detailed
+     * description.
+     *
+     * @param manualIdentifier
+     *            the identifier of the manual to open. This identifier must
+     *            uniquely identify the manual as such, independent of the
+     *            particular locale the manual is intended for.
+     * @param topic
+     *            the topic to open. Please do not use spaces for topic names.
+     *            With respect to the TiddlyWiki infrastructure used for manuals
+     *            the topic needs to the tag of a (single) tiddler. This way
+     *            manuals can be localized (especially their topic titles)
+     *            without breaking an app's knowledge about topics. Some
+     *            standardized topics are predefined, such as {@link #TOPIC_HOME}, {@link #TOPIC_INDEX}, and
+     *            {@link #TOPIC_ABOUT_MANUAL}.
+     * @param context
+     *            the context (usually an Activity) from which the manual is to
+     *            be opened. In particular, this context is required to derive
+     *            the proper current locale configuration in order to open
+     *            appropriate localized manuals, if installed.
+     *
+     * @exception ActivityNotFoundException
+     *                there is no suitable manual installed and all combinations
+     *                of locale scope failed to activate any manual.
+     *
+     * @see #openManual(String, String, Context, String, boolean)
+     */
 	public static void openManual(String manualIdentifier, String topic,
 			Context context) throws ActivityNotFoundException {
 		openManual(manualIdentifier, topic, context, null, false);
 	}
 
-	/**
-	 * Convenience function to open a manual at a specific topic. See
-	 * {@link #openManual(String, String, Context, String)} for a detailed
-	 * description.
-	 *
-	 * @param manualIdentifier
-	 *            the identifier of the manual to open. This identifier must
-	 *            uniquely identify the manual as such, independent of the
-	 *            particular locale the manual is intended for.
-	 * @param topic
-	 *            the topic to open. Please do not use spaces for topic names.
-	 *            With respect to the TiddlyWiki infrastructure used for manuals
-	 *            the topic needs to the tag of a (single) tiddler. This way
-	 *            manuals can be localized (especially their topic titles)
-	 *            without breaking an app's knowledge about topics. Some
-	 *            standardized topics are predefined, such as
-	 *            {@link #TOPIC_HOME}, {@link #TOPIC_INDEX}, and
-	 *            {@link #TOPIC_ABOUT_MANUAL}.
-	 * @param context
-	 *            the context (usually an Activity) from which the manual is to
-	 *            be opened. In particular, this context is required to derive
-	 *            the proper current locale configuration in order to open
-	 *            appropriate localized manuals, if installed.
-	 *
-	 * @exception ActivityNotFoundException
-	 *                there is no suitable manual installed and all combinations
-	 *                of locale scope failed to activate any manual.
-	 * @param fallbackUri
-	 *            either <code>null</code> or a fallback URI to be used in case
-	 *            the user has not installed any suitable manual.
-	 *
-	 * @see #openManual(String, String, Context, String, Boolean)
-	 */
+	        /**
+     * Convenience function to open a manual at a specific topic. See
+     * {@link #openManual(String, String, Context, String)} for a detailed
+     * description.
+     *
+     * @param manualIdentifier
+     *            the identifier of the manual to open. This identifier must
+     *            uniquely identify the manual as such, independent of the
+     *            particular locale the manual is intended for.
+     * @param topic
+     *            the topic to open. Please do not use spaces for topic names.
+     *            With respect to the TiddlyWiki infrastructure used for manuals
+     *            the topic needs to the tag of a (single) tiddler. This way
+     *            manuals can be localized (especially their topic titles)
+     *            without breaking an app's knowledge about topics. Some
+     *            standardized topics are predefined, such as {@link #TOPIC_HOME}, {@link #TOPIC_INDEX}, and
+     *            {@link #TOPIC_ABOUT_MANUAL}.
+     * @param context
+     *            the context (usually an Activity) from which the manual is to
+     *            be opened. In particular, this context is required to derive
+     *            the proper current locale configuration in order to open
+     *            appropriate localized manuals, if installed.
+     * @param fallbackUri
+     *            either <code>null</code> or a fallback URI to be used in case
+     *            the user has not installed any suitable manual.
+     *
+     * @exception ActivityNotFoundException
+     *                there is no suitable manual installed and all combinations
+     *                of locale scope failed to activate any manual.
+     *
+     * @see #openManual(String, String, Context, String, boolean)
+     */
 	public static void openManual(String manualIdentifier, String topic,
 			Context context, String fallbackUri)
 			throws ActivityNotFoundException {

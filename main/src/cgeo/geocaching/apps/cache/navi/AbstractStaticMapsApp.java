@@ -12,7 +12,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 abstract class AbstractStaticMapsApp extends AbstractNavigationApp {
@@ -21,7 +20,7 @@ abstract class AbstractStaticMapsApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean isInstalled(Context context) {
+    public boolean isInstalled() {
         return true;
     }
 

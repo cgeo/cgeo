@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -24,13 +23,13 @@ abstract class AbstractPointNavigationApp extends AbstractNavigationApp {
     }
 
     @Override
-    public final boolean invoke(IGeoData geo, Activity activity, cgCache cache, cgWaypoint waypoint, Geopoint coords) {
+    public final boolean invoke(Activity activity, cgCache cache, cgWaypoint waypoint, Geopoint coords) {
         if (cache == null && waypoint == null && coords == null) {
             return false;
         }
 
         try {
-            if (isInstalled(activity)) {
+            if (isInstalled()) {
                 final Geopoint point = getCoordinates(cache, waypoint, coords);
                 if (point != null) {
                     navigate(activity, point);

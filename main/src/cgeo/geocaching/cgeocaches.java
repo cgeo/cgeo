@@ -6,9 +6,9 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
+import cgeo.geocaching.connector.gc.AbstractSearchThread;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.SearchHandler;
-import cgeo.geocaching.connector.gc.AbstractSearchThread;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -980,7 +980,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 return true;
         }
 
-        return CacheListAppFactory.onMenuItemSelected(item, app.currentGeo(), cacheList, this, search);
+        return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
     }
 
     private void setComparator(MenuItem item,
@@ -1020,7 +1020,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         contextMenuGeocode = cache.getGeocode();
 
         if (cache.getCoords() != null) {
-            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName());
+            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
             menu.add(1, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
             addVisitMenu(menu, cache);
             menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
@@ -1086,10 +1086,10 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         final int id = item.getItemId();
         switch (id) {
             case MENU_DEFAULT_NAVIGATION:
-                NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
+                NavigationAppFactory.startDefaultNavigationApplication(this, cache, null, null);
                 break;
             case MENU_NAVIGATION:
-                NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
+                NavigationAppFactory.showNavigationMenu(this, cache, null, null);
                 break;
             case MENU_LOG_VISIT:
                 cache.logVisit(this);

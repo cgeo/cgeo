@@ -75,7 +75,7 @@ public class CachePopup extends AbstractPopupActivity {
 
     @Override
     protected void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, cache, null, null);
+        NavigationAppFactory.showNavigationMenu(this, cache, null, null);
     }
 
     @Override
@@ -218,7 +218,7 @@ public class CachePopup extends AbstractPopupActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(this, cache, null, null);
     }
 
     /**
@@ -230,7 +230,7 @@ public class CachePopup extends AbstractPopupActivity {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;
         }
-        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication2(this, cache, null, null);
         finish();
     }
 

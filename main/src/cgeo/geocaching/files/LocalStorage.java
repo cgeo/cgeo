@@ -136,8 +136,8 @@ public class LocalStorage {
     /**
      * Save an HTTP response to a file.
      *
-     * @param entity
-     *            the entity whose content will be saved
+     * @param response
+     *            the response whose entity content will be saved
      * @param targetFile
      *            the target file, which will be created if necessary
      * @return true if the operation was successful, false otherwise, in which case the file will not exist
@@ -203,13 +203,13 @@ public class LocalStorage {
     }
 
     /**
-     * Save an HTTP response to a file.
+     * Save a stream to a file.
      * <p/>
-     * If the response could not be saved to the file due, for example, to a network error,
-     * the file will not exist when this method returns.
+     * If the response could not be saved to the file due, for example, to a network error, the file will not exist when
+     * this method returns.
      *
-     * @param entity
-     *            the entity whose content will be saved
+     * @param inputStream
+     *            the stream whose content will be saved
      * @param targetFile
      *            the target file, which will be created if necessary
      * @return true if the operation was successful, false otherwise

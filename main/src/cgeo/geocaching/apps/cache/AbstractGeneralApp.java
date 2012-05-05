@@ -14,7 +14,7 @@ abstract class AbstractGeneralApp extends AbstractApp implements GeneralApp {
 
     @Override
     public boolean invoke(Activity activity, cgCache cache) {
-        final Intent intent = getLaunchIntent(activity);
+        final Intent intent = getLaunchIntent();
         if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);

@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps.cachelist;
 
-import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
@@ -35,7 +34,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
     public static MenuItem addMenuItems(final Menu menu, final Activity activity, final Resources res) {
         final List<CacheListApp> activeApps = new ArrayList<CacheListApp>(LazyHolder.apps.length);
         for (final CacheListApp app : LazyHolder.apps) {
-            if (app.isInstalled(activity)) {
+            if (app.isInstalled()) {
                 activeApps.add(app);
             }
         }
@@ -56,13 +55,12 @@ public final class CacheListAppFactory extends AbstractAppFactory {
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item,
-            final IGeoData geo, final List<cgCache> caches, final IAbstractActivity activity,
+    public static boolean onMenuItemSelected(final MenuItem item, final List<cgCache> caches, final IAbstractActivity activity,
             final SearchResult search) {
         final CacheListApp app = (CacheListApp) getAppFromMenuItem(item, LazyHolder.apps);
         if (app != null) {
             try {
-                boolean result = app.invoke(geo, caches, (Activity) activity, search);
+                boolean result = app.invoke(caches, (Activity) activity, search);
                 activity.invalidateOptionsMenuCompatible();
                 return result;
             } catch (Exception e) {

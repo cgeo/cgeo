@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.utils.IObserver;
@@ -27,9 +26,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.List;
 
 public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData> {
 
@@ -197,7 +194,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_ID_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
+        menu.add(0, MENU_ID_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
         menu.add(0, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
         menu.add(0, MENU_ID_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
         menu.add(0, MENU_ID_OPEN_GEOCACHE, 0, res.getString(R.string.waypoint_menu_open_cache)).setIcon(R.drawable.ic_menu_mylocation); // open geocache
@@ -237,7 +234,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
                 goToGeocache();
                 return true;
             case MENU_ID_NAVIGATION:
-                NavigationAppFactory.showNavigationMenu(app.currentGeo(), this, null, waypoint, null);
+                NavigationAppFactory.showNavigationMenu(this, null, waypoint, null);
                 return true;
             default:
                 return false;
@@ -311,7 +308,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(app.currentGeo(), this, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication(this, null, waypoint, null);
     }
 
     /**
@@ -322,7 +319,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication2(app.currentGeo(), this, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication2(this, null, waypoint, null);
     }
 
     private boolean navigationPossible() {
@@ -337,13 +334,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         if (navigationPossible()) {
             menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
-            List<NavigationAppsEnum> filter = new ArrayList<NavigationAppsEnum>(1);
-            if (StaticMapsProvider.doesExistStaticMapForWaypoint(waypoint.getGeocode(), waypoint.getId())) {
-                filter.add(NavigationAppsEnum.DOWNLOAD_STATIC_MAPS);
-            } else {
-                filter.add(NavigationAppsEnum.STATIC_MAP);
-            }
-            NavigationAppFactory.addMenuItems(menu, this, filter);
+            NavigationAppFactory.addMenuItems(menu, waypoint);
         }
     }
 
@@ -353,7 +344,7 @@ public class cgeowaypoint extends AbstractActivity implements IObserver<IGeoData
         if (handled) {
             return true;
         }
-        return NavigationAppFactory.onMenuItemSelected(item, app.currentGeo(), this, null, waypoint, null);
+        return NavigationAppFactory.onMenuItemSelected(item, this, waypoint);
     }
 
     public static void startActivity(final Context context, final int waypointId) {

@@ -589,7 +589,7 @@ public class cgeoinit extends AbstractActivity {
 
         // Default navigation tool settings
         Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
-        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps(this);
+        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps();
         ArrayAdapter<NavigationAppsEnum> naviAdapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {

@@ -7,7 +7,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -18,7 +17,7 @@ class StreetviewApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public boolean isInstalled(Context context) {
+    public boolean isInstalled() {
         return true;
     }
 

@@ -18,7 +18,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -277,13 +276,13 @@ public class cgeo extends AbstractActivity {
         super.onPrepareOptionsMenu(menu);
         MenuItem item = menu.findItem(MENU_SCAN);
         if (item != null) {
-            item.setEnabled(isIntentAvailable(this, SCAN_INTENT));
+            item.setEnabled(isIntentAvailable(SCAN_INTENT));
         }
         return true;
     }
 
-    public static boolean isIntentAvailable(Context context, String intent) {
-        final PackageManager packageManager = context.getPackageManager();
+    public static boolean isIntentAvailable(String intent) {
+        final PackageManager packageManager = cgeoapplication.getInstance().getPackageManager();
         final List<ResolveInfo> list = packageManager.queryIntentActivities(
                 new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
 
