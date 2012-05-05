@@ -1,5 +1,6 @@
 package cgeo.geocaching.apps;
 
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeo;
 import cgeo.geocaching.cgeoapplication;
 
@@ -9,10 +10,9 @@ import android.content.pm.PackageManager;
 
 public abstract class AbstractApp implements App {
 
-    protected String packageName;
-
-    private String intent;
-    private String name;
+    private final String packageName;
+    private final String intent;
+    private final String name;
 
     protected AbstractApp(final String name, final String intent,
             final String packageName) {
@@ -58,5 +58,10 @@ public abstract class AbstractApp implements App {
 
     protected static String getString(int ressourceId) {
         return cgeoapplication.getInstance().getString(ressourceId);
+    }
+
+    @Override
+    public boolean isEnabled(cgCache cache) {
+        return true;
     }
 }

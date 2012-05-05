@@ -1,5 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractApp;
 
 abstract class AbstractNavigationApp extends AbstractApp implements NavigationApp {
@@ -12,4 +13,8 @@ abstract class AbstractNavigationApp extends AbstractApp implements NavigationAp
         super(name, intent);
     }
 
+    @Override
+    public boolean isEnabled(cgWaypoint waypoint) {
+        return true;
+    }
 }

@@ -3,15 +3,11 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,22 +30,22 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         INTERNAL_MAP(new InternalMap(), 2),
         /** The internal static map activity */
         STATIC_MAP(new StaticMapApp(), 3),
-        /** Download static maps on demand */
-        DOWNLOAD_STATIC_MAPS(new DownloadStaticMapsApp(), 4),
         /** The external Locus app */
-        LOCUS(new LocusApp(), 5),
+        DOWNLOAD_STATIC_MAPS(new DownloadStaticMapsApp(), 20),
+        /** The external Locus app */
+        LOCUS(new LocusApp(), 4),
         /** The external RMaps app */
-        RMAPS(new RMapsApp(), 6),
+        RMAPS(new RMapsApp(), 5),
         /** Google Maps */
-        GOOGLE_MAPS(new GoogleMapsApp(), 7),
+        GOOGLE_MAPS(new GoogleMapsApp(), 6),
         /** Google Navigation */
-        GOOGLE_NAVIGATION(new GoogleNavigationApp(), 8),
+        GOOGLE_NAVIGATION(new GoogleNavigationApp(), 7),
         /** Google Streetview */
-        GOOGLE_STREETVIEW(new StreetviewApp(), 9),
+        GOOGLE_STREETVIEW(new StreetviewApp(), 8),
         /** The external OruxMaps app */
-        ORUX_MAPS(new OruxMapsApp(), 10),
+        ORUX_MAPS(new OruxMapsApp(), 9),
         /** The external navigon app */
-        NAVIGON(new NavigonApp(), 11);
+        NAVIGON(new NavigonApp(), 10);
 
         NavigationAppsEnum(NavigationApp app, int id) {
             this.app = app;
@@ -122,19 +118,12 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         builder.setIcon(R.drawable.ic_menu_mapmode);
         final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        final boolean hasStaticMaps = hasStaticMap(cache, waypoint);
         for (NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
-            if (NavigationAppsEnum.STATIC_MAP.id == navApp.id) {
-                if (hasStaticMaps) {
-                    items.add(navApp);
-                }
-            } else if (NavigationAppsEnum.DOWNLOAD_STATIC_MAPS.id == navApp.id) {
-                if (!hasStaticMaps) {
-                    items.add(navApp);
-                }
-            } else if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
+            if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                items.add(navApp);
+                if ((cache != null && navApp.app.isEnabled(cache)) || (waypoint != null && navApp.app.isEnabled(waypoint))) {
+                    items.add(navApp);
+                }
             }
         }
         /*
@@ -151,23 +140,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         });
         final AlertDialog alert = builder.create();
         alert.show();
-    }
-
-    private static boolean hasStaticMap(cgCache cache, cgWaypoint waypoint) {
-        if (waypoint != null) {
-            String geocode = waypoint.getGeocode();
-            int id = waypoint.getId();
-            if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode, null)) {
-                return StaticMapsProvider.doesExistStaticMapForWaypoint(geocode, id);
-            }
-        }
-        if (cache != null) {
-            String geocode = cache.getGeocode();
-            if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode, null)) {
-                return StaticMapsProvider.doesExistStaticMapForCache(geocode);
-            }
-        }
-        return false;
     }
 
     /**
@@ -304,8 +276,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return never <code>null</code>
      */
     public static NavigationApp getDefaultNavigationApplication(Activity activity) {
-        final int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        return getNavigationAppFromSetting(activity, Settings.getDefaultNavigationTool());
+    }
 
+    private static NavigationApp getNavigationAppFromSetting(Activity activity, final int defaultNavigationTool) {
         final List<NavigationAppsEnum> installedNavigationApps = getInstalledNavigationApps(activity);
 
         for (NavigationAppsEnum navigationApp : installedNavigationApps) {
@@ -324,17 +298,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return never <code>null</code>
      */
     public static NavigationApp getDefaultNavigationApplication2(Activity activity) {
-        final int defaultNavigationTool = Settings.getDefaultNavigationTool2();
-
-        final List<NavigationAppsEnum> installedNavigationApps = getInstalledNavigationApps(activity);
-
-        for (NavigationAppsEnum navigationApp : installedNavigationApps) {
-            if (navigationApp.id == defaultNavigationTool) {
-                return navigationApp.app;
-            }
-        }
-        // second default navigation tool wasn't set already or couldn't be found (not installed any more for example)
-        return NavigationAppsEnum.COMPASS.app;
+        return getNavigationAppFromSetting(activity, Settings.getDefaultNavigationTool2());
     }
 
 }

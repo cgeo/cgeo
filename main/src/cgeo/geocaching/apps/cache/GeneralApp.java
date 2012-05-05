@@ -7,8 +7,6 @@ import android.app.Activity;
 
 interface GeneralApp extends App {
 
-    boolean isEnabled(final cgCache cache);
-
     public boolean invoke(Activity activity, cgCache cache);
 
 }

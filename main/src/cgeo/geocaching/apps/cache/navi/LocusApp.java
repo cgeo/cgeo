@@ -1,9 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.IGeoData;
-import cgeo.geocaching.apps.AbstractLocusApp;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.apps.AbstractLocusApp;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
@@ -35,6 +35,11 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
         }
 
         return showInLocus(points, true, false, activity);
+    }
+
+    @Override
+    public boolean isEnabled(cgWaypoint waypoint) {
+        return true;
     }
 
 }
