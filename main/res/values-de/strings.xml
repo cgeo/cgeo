@@ -519,7 +519,8 @@
   <string name="cache_menu_tbt">Google Maps Navigation</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Karte</string>
-  <string name="cache_menu_map_static">Statische Karte</string>
+  <string name="cache_menu_map_static">Statische Karten</string>
+  <string name="cache_menu_download_map_static">Statische Karten speichern</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Auf ext. Karte zeigen</string>
   <string name="cache_menu_browser">Im Browser öffnen</string>
