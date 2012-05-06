@@ -23,16 +23,14 @@ public final class GoogleMapProvider extends AbstractMapProvider {
 
     private final Map<Integer, MapSource> mapSources;
 
-    private int baseId;
     private final MapItemFactory mapItemFactory;
 
-    public GoogleMapProvider(int _baseId) {
-        baseId = _baseId;
+    public GoogleMapProvider(final int baseid) {
         final Resources resources = cgeoapplication.getInstance().getResources();
 
         mapSources = new HashMap<Integer, MapSource>();
-        mapSources.put(baseId + MAP, new GoogleMapSource(this, resources.getString(R.string.map_source_google_map)));
-        mapSources.put(baseId + SATELLITE, new GoogleMapSatelliteSource(this, resources.getString(R.string.map_source_google_satellite)));
+        mapSources.put(baseid + MAP, new GoogleMapSource(this, resources.getString(R.string.map_source_google_map)));
+        mapSources.put(baseid + SATELLITE, new GoogleMapSatelliteSource(this, resources.getString(R.string.map_source_google_satellite)));
 
         mapItemFactory = new GoogleMapItemFactory();
     }
