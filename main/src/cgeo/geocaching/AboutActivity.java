@@ -11,7 +11,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
-public class cgeoabout extends AbstractActivity {
+public class AboutActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class cgeoabout extends AbstractActivity {
             ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
             ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Exception e) {
-            Log.e("cgeoabout.init: Failed to obtain package version.");
+            Log.e("AboutActivity.init: Failed to obtain package version.");
         }
     }
 

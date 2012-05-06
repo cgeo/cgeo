@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class cgeoinit extends AbstractActivity {
+public class SettingsActivity extends AbstractActivity {
 
     private final static int SELECT_MAPFILE_REQUEST = 1;
 
@@ -77,7 +77,7 @@ public class cgeoinit extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_login_failed));
 
-                Log.e("cgeoinit.logInHandler: " + e.toString());
+                Log.e("SettingsActivity.logInHandler: " + e.toString());
             }
 
             if (loginDialog != null && loginDialog.isShowing()) {
@@ -105,7 +105,7 @@ public class cgeoinit extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.init_sendToCgeo_register_fail));
 
-                Log.e("cgeoinit.webHandler: " + e.toString());
+                Log.e("SettingsActivity.webHandler: " + e.toString());
             }
 
             if (webDialog != null && webDialog.isShowing()) {
@@ -117,7 +117,7 @@ public class cgeoinit extends AbstractActivity {
     };
     protected boolean enableTemplatesMenu = false;
 
-    public cgeoinit() {
+    public SettingsActivity() {
         super("c:geo-configuration");
     }
 
@@ -275,7 +275,7 @@ public class cgeoinit extends AbstractActivity {
         authorizeTwitter.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
-                Intent authIntent = new Intent(cgeoinit.this, TwitterAuthorizationActivity.class);
+                Intent authIntent = new Intent(SettingsActivity.this, TwitterAuthorizationActivity.class);
                 startActivity(authIntent);
             }
         });
@@ -288,7 +288,7 @@ public class cgeoinit extends AbstractActivity {
             public void onClick(View v) {
                 Settings.setUseTwitter(twitterButton.isChecked());
                 if (Settings.isUseTwitter() && !Settings.isTwitterLoginValid()) {
-                    Intent authIntent = new Intent(cgeoinit.this, TwitterAuthorizationActivity.class);
+                    Intent authIntent = new Intent(SettingsActivity.this, TwitterAuthorizationActivity.class);
                     startActivity(authIntent);
                 }
 
@@ -572,7 +572,7 @@ public class cgeoinit extends AbstractActivity {
 
             @Override
             public void onClick(View v) {
-                Intent selectIntent = new Intent(cgeoinit.this, cgSelectMapfile.class);
+                Intent selectIntent = new Intent(SettingsActivity.this, cgSelectMapfile.class);
                 startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
             }
         });
@@ -816,7 +816,7 @@ public class cgeoinit extends AbstractActivity {
                 return;
             }
 
-            loginDialog = ProgressDialog.show(cgeoinit.this, res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_working), true);
+            loginDialog = ProgressDialog.show(SettingsActivity.this, res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_working), true);
             loginDialog.setCancelable(false);
 
             Settings.setLogin(username, password);
@@ -849,7 +849,7 @@ public class cgeoinit extends AbstractActivity {
                 return;
             }
 
-            webDialog = ProgressDialog.show(cgeoinit.this, res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_registering), true);
+            webDialog = ProgressDialog.show(SettingsActivity.this, res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_registering), true);
             webDialog.setCancelable(false);
 
             (new Thread() {
@@ -901,7 +901,7 @@ public class cgeoinit extends AbstractActivity {
     }
 
     public static void startActivity(Context fromActivity) {
-        final Intent initIntent = new Intent(fromActivity, cgeoinit.class);
+        final Intent initIntent = new Intent(fromActivity, SettingsActivity.class);
         fromActivity.startActivity(initIntent);
     }
 

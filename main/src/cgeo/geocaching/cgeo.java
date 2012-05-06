@@ -300,7 +300,7 @@ public class cgeo extends AbstractActivity {
                 startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
             case MENU_SETTINGS:
-                startActivity(new Intent(this, cgeoinit.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case MENU_HISTORY:
                 cgeocaches.startActivityHistory(this);
@@ -326,17 +326,17 @@ public class cgeo extends AbstractActivity {
                     return;
                 }
 
-                Intent searchIntent = new Intent(this, cgeoadvsearch.class);
+                Intent searchIntent = new Intent(this, SearchActivity.class);
                 searchIntent.setAction(Intent.ACTION_SEARCH).
                         putExtra(SearchManager.QUERY, scan).
-                        putExtra(cgeoadvsearch.EXTRAS_KEYWORDSEARCH, false);
+                        putExtra(SearchActivity.EXTRAS_KEYWORDSEARCH, false);
                 startActivityForResult(searchIntent, SEARCH_REQUEST_CODE);
 
             } else if (resultCode == RESULT_CANCELED) {
                 // do nothing
             }
         } else if (requestCode == SEARCH_REQUEST_CODE) {
-            // cgeoadvsearch activity returned without making a search
+            // SearchActivity activity returned without making a search
             if (resultCode == RESULT_CANCELED) {
                 String query = intent.getStringExtra(SearchManager.QUERY);
                 if (query == null) {
@@ -638,7 +638,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoSearch(View v) {
         findViewById(R.id.advanced_button).setPressed(true);
-        startActivity(new Intent(this, cgeoadvsearch.class));
+        startActivity(new Intent(this, SearchActivity.class));
     }
 
     /**
@@ -768,7 +768,7 @@ public class cgeo extends AbstractActivity {
 
                 // invoke settings activity to insert login details
                 if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                    cgeoinit.startActivity(cgeo.this);
+                    SettingsActivity.startActivity(cgeo.this);
                 }
             }
         }
@@ -806,7 +806,7 @@ public class cgeo extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void showAbout(View view) {
-        startActivity(new Intent(this, cgeoabout.class));
+        startActivity(new Intent(this, AboutActivity.class));
     }
 
     /**

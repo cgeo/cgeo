@@ -475,7 +475,7 @@ public class CacheDetailActivity extends AbstractActivity {
             case CONTEXT_MENU_WAYPOINT_EDIT: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
-                    cgeowaypointadd.startActivityEditWaypoint(this, waypoint.getId());
+                    EditWaypointActivity.startActivityEditWaypoint(this, waypoint.getId());
                     refreshOnResume = true;
                 }
                 break;
@@ -2340,7 +2340,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 @Override
                 public void onClick(View v) {
-                    cgeowaypointadd.startActivityAddWaypoint(CacheDetailActivity.this, cache);
+                    EditWaypointActivity.startActivityAddWaypoint(CacheDetailActivity.this, cache);
                     refreshOnResume = true;
                 }
             });

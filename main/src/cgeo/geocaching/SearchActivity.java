@@ -24,7 +24,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class cgeoadvsearch extends AbstractActivity implements IObserver<IGeoData> {
+public class SearchActivity extends AbstractActivity implements IObserver<IGeoData> {
 
     public static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
 
@@ -32,7 +32,7 @@ public class cgeoadvsearch extends AbstractActivity implements IObserver<IGeoDat
     private EditText latEdit = null;
     private EditText lonEdit = null;
 
-    public cgeoadvsearch() {
+    public SearchActivity() {
         super("c:geo-search");
     }
 
@@ -238,7 +238,7 @@ public class cgeoadvsearch extends AbstractActivity implements IObserver<IGeoDat
 
         @Override
         public void onClick(View arg0) {
-            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, null, null, app.currentGeo());
+            cgeocoords coordsDialog = new cgeocoords(SearchActivity.this, null, null, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override

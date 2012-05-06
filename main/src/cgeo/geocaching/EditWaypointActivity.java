@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoData> {
+public class EditWaypointActivity extends AbstractActivity implements IObserver<IGeoData> {
 
     private String geocode = null;
     private int id = -1;
@@ -87,7 +87,7 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
 
                 initializeDistanceUnitSelector();
             } catch (Exception e) {
-                Log.e("cgeowaypointadd.loadWaypointHandler: " + e.toString());
+                Log.e("EditWaypointActivity.loadWaypointHandler: " + e.toString());
             } finally {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
@@ -234,7 +234,7 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
 
     @Override
     public void update(final IGeoData geo) {
-        Log.d("cgeowaypointadd.updateLocation called");
+        Log.d("EditWaypointActivity.updateLocation called");
         if (geo.getCoords() == null) {
             return;
         }
@@ -273,7 +273,7 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
                 gp = gpTemp;
             }
             cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, cache, gp, app.currentGeo());
+            cgeocoords coordsDialog = new cgeocoords(EditWaypointActivity.this, cache, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
@@ -293,11 +293,11 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
 
     private class changeWaypointType implements OnItemSelectedListener {
 
-        private changeWaypointType(cgeowaypointadd wpView) {
+        private changeWaypointType(EditWaypointActivity wpView) {
             this.wpView = wpView;
         }
 
-        private cgeowaypointadd wpView;
+        private EditWaypointActivity wpView;
 
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
@@ -317,11 +317,11 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
 
     private class changeDistanceUnit implements OnItemSelectedListener {
 
-        private changeDistanceUnit(cgeowaypointadd unitView) {
+        private changeDistanceUnit(EditWaypointActivity unitView) {
             this.unitView = unitView;
         }
 
-        private cgeowaypointadd unitView;
+        private EditWaypointActivity unitView;
 
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
@@ -408,7 +408,7 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
                 app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
-                    StaticMapsProvider.storeWaypointStaticMap(cache, cgeowaypointadd.this, waypoint, false);
+                    StaticMapsProvider.storeWaypointStaticMap(cache, EditWaypointActivity.this, waypoint, false);
                 }
                 finish();
             } else {
@@ -427,13 +427,13 @@ public class cgeowaypointadd extends AbstractActivity implements IObserver<IGeoD
     }
 
     public static void startActivityEditWaypoint(final Context context, final int waypointId) {
-        final Intent editIntent = new Intent(context, cgeowaypointadd.class);
+        final Intent editIntent = new Intent(context, EditWaypointActivity.class);
         editIntent.putExtra("waypoint", waypointId);
         context.startActivity(editIntent);
     }
 
     public static void startActivityAddWaypoint(final Context context, final cgCache cache) {
-        final Intent addWptIntent = new Intent(context, cgeowaypointadd.class);
+        final Intent addWptIntent = new Intent(context, EditWaypointActivity.class);
         addWptIntent.putExtra("geocode", cache.getGeocode()).putExtra("count", cache.getWaypoints().size());
         context.startActivity(addWptIntent);
     }
