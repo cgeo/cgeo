@@ -258,7 +258,7 @@ public final class CalendarActivity extends Activity {
              * targetSdkVersion changes to 14. For example CalendarContract.EXTRA_EVENT_BEGIN_TIME and
              * Events.TITLE
              */
-            final Intent intent = new Intent(Intent.ACTION_INSERT)
+            final Intent intent = new Intent(Intent.ACTION_EDIT)
                     .setData(Compatibility.getCalendarEventsProviderURI())
                     .putExtra("beginTime", eventDate.getTime() + 43200000)
                     .putExtra("allDay", true)
