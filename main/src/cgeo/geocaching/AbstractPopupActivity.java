@@ -276,7 +276,9 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         details.addCacheState(cache);
 
         // distance
-        details.add(R.string.cache_distance, "--");
+        // if there is already a distance in cacheDistance, use it instead of resetting to default.
+        // this prevents displaying "--" while waiting for a new position update (See bug #1468)
+        details.add(R.string.cache_distance, cacheDistance != null ? cacheDistance.getText().toString() : "--");
         cacheDistance = details.getValueView();
 
         details.addDifficulty(cache);
