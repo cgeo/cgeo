@@ -20,14 +20,12 @@ public class MapsforgeMapItemFactory024 implements MapItemFactory {
 
     @Override
     public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final CacheType type) {
-        MapsforgeCacheOverlayItem baseItem = new MapsforgeCacheOverlayItem(coordinate, type);
-        return baseItem;
+        return new MapsforgeCacheOverlayItem(coordinate, type);
     }
 
     @Override
     public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context, Go4CacheUser userOne) {
-        MapsforgeOtherCachersOverlayItem baseItem = new MapsforgeOtherCachersOverlayItem(context, userOne);
-        return baseItem;
+        return new MapsforgeOtherCachersOverlayItem(context, userOne);
     }
 
 }
