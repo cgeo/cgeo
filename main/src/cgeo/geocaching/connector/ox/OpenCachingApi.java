@@ -41,7 +41,7 @@ public class OpenCachingApi {
         if (response == null) {
             return Collections.emptyList();
         }
-        Collection<cgCache> caches = null;
+        Collection<cgCache> caches;
         try {
             caches = new GPX10Parser(StoredList.STANDARD_LIST_ID).parse(response.getEntity().getContent(), null);
         } catch (Exception e) {
