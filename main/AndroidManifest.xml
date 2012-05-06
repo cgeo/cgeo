@@ -25,7 +25,7 @@
 		<uses-library android:name="com.google.android.maps" android:required="false" />
 		<meta-data
 			android:name="android.app.default_searchable"
-			android:value=".cgeoadvsearch" />
+			android:value=".SearchActivity" />
 		<meta-data
 			android:name="com.google.android.backup.api_key"
 			android:value="AEdPqrEAAAAIsvD_aUSDMwWOf9NkwwxZ4kJJI_AG2EaxjSu2jw" />
