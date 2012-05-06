@@ -119,10 +119,10 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private void assertImportStepMessages(int... importSteps) {
-        assertEquals(importSteps.length, importStepHandler.messages.size());
-        for (int i = 0; i < importSteps.length; i++) {
+        for (int i = 0; i < Math.min(importSteps.length, importStepHandler.messages.size()); i++) {
             assertEquals(importSteps[i], importStepHandler.messages.get(i).what);
         }
+        assertEquals(importSteps.length, importStepHandler.messages.size());
     }
 
     public void testImportLoc() throws IOException {
