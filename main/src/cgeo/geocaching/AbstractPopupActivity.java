@@ -131,11 +131,11 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         geocode = cache.getGeocode().toUpperCase();
     }
 
-    private final void logOffline(int menuItem) {
+    private void logOffline(int menuItem) {
         cache.logOffline(this, LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
     }
 
-    private final void logVisit() {
+    private void logVisit() {
         cache.logVisit(this);
         finish();
     }
@@ -300,7 +300,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         });
     }
 
-    private final void cachesAround() {
+    private void cachesAround() {
         final Geopoint coords = getCoordinates();
         if (coords == null) {
             showToast(res.getString(R.string.err_location_unknown));
