@@ -175,7 +175,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 if (cacheList == null) {
                     showToast(res.getString(R.string.err_list_load_fail));
                 }
-                setMoreCaches();
+                showFooterMoreCaches();
 
                 if (cacheList != null && search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
@@ -264,7 +264,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 if (cacheList == null) {
                     showToast(res.getString(R.string.err_list_load_fail));
                 }
-                setMoreCaches();
+                showFooterMoreCaches();
 
                 if (search != null && search.getError() != null) {
                     showToast(res.getString(R.string.err_download_fail) + " " + search.getError().getErrorString(res) + ".");
@@ -469,14 +469,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // init
-        if (CollectionUtils.isNotEmpty(cacheList)) {
-            setMoreCaches();
-        }
-
-        setTitle(title);
-        setAdapter();
-
         app.setAction(action);
 
         setTheme();
@@ -501,6 +493,14 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
             }
         }
 
+        // init
+        if (CollectionUtils.isNotEmpty(cacheList)) {
+            showFooterMoreCaches();
+        }
+
+        setTitle(title);
+        setAdapter();
+
         Thread threadPure;
         AbstractSearchThread thread;
 
@@ -519,7 +519,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
 
                 setTitle(title);
                 showProgress(true);
-                setLoadingCaches();
+                showFooterLoadingCaches();
 
                 threadPure = new LoadByOfflineThread(coords, listId);
                 threadPure.start();
@@ -529,7 +529,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 title = res.getString(R.string.caches_history);
                 setTitle(title);
                 showProgress(true);
-                setLoadingCaches();
+                showFooterLoadingCaches();
 
                 threadPure = new LoadByHistoryThread();
                 threadPure.start();
@@ -539,7 +539,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 title = res.getString(R.string.caches_nearby);
                 setTitle(title);
                 showProgress(true);
-                setLoadingCaches();
+                showFooterLoadingCaches();
 
                 thread = new LoadByCoordsThread(coords);
                 thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
@@ -550,7 +550,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 title = coords.toString();
                 setTitle(title);
                 showProgress(true);
-                setLoadingCaches();
+                showFooterLoadingCaches();
 
                 thread = new LoadByCoordsThread(coords);
                 thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
@@ -560,7 +560,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 title = keyword;
                 setTitle(title);
                 showProgress(true);
-                setLoadingCaches();
+                showFooterLoadingCaches();
 
                 thread = new LoadByKeywordThread(keyword);
                 thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
@@ -572,12 +572,12 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                     title = address;
                     setTitle(title);
                     showProgress(true);
-                    setLoadingCaches();
+                    showFooterLoadingCaches();
                 } else {
                     title = coords.toString();
                     setTitle(title);
                     showProgress(true);
-                    setLoadingCaches();
+                    showFooterLoadingCaches();
                 }
 
                 thread = new LoadByCoordsThread(coords);
@@ -588,7 +588,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 title = username;
                 setTitle(title);
                 showProgress(true);
-                setLoadingCaches();
+                showFooterLoadingCaches();
 
                 thread = new LoadByUserNameThread(username);
                 thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
@@ -598,7 +598,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 title = username;
                 setTitle(title);
                 showProgress(true);
-                setLoadingCaches();
+                showFooterLoadingCaches();
 
                 thread = new LoadByOwnerThread(username);
                 thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
@@ -1180,12 +1180,12 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
                 inflater = getLayoutInflater();
             }
             listFooter = inflater.inflate(R.layout.caches_footer, null);
-
             listFooter.setClickable(true);
             listFooter.setOnClickListener(new MoreCachesListener());
-        }
-        if (listFooterText == null) {
+
             listFooterText = (TextView) listFooter.findViewById(R.id.more_caches);
+
+            getListView().addFooterView(listFooter);
         }
 
         if (adapter == null) {
@@ -1193,7 +1193,6 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
 
             registerForContextMenu(list);
             list.setLongClickable(true);
-            list.addFooterView(listFooter);
 
             adapter = new CacheListAdapter(this, cacheList, type);
             setListAdapter(adapter);
@@ -1203,11 +1202,8 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         adapter.reFilter();
     }
 
-    private void setLoadingCaches() {
+    private void showFooterLoadingCaches() {
         if (listFooter == null) {
-            return;
-        }
-        if (listFooterText == null) {
             return;
         }
 
@@ -1216,15 +1212,12 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         listFooter.setOnClickListener(null);
     }
 
-    private void setMoreCaches() {
+    private void showFooterMoreCaches() {
         if (listFooter == null) {
             return;
         }
-        if (listFooterText == null) {
-            return;
-        }
 
-        boolean enableMore = type != CacheListType.OFFLINE && cacheList != null && cacheList.size() < MAX_LIST_ITEMS;
+        boolean enableMore = (type != CacheListType.OFFLINE && cacheList != null && cacheList.size() < MAX_LIST_ITEMS);
         if (enableMore && search != null) {
             final int count = search.getTotal();
             enableMore = enableMore && count > 0 && cacheList.size() < count;
@@ -1234,11 +1227,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
             listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + cacheList.size() + ")");
             listFooter.setOnClickListener(new MoreCachesListener());
         } else {
-            if (CollectionUtils.isEmpty(cacheList)) {
-                listFooterText.setText(res.getString(R.string.caches_no_cache));
-            } else {
-                listFooterText.setText(res.getString(R.string.caches_more_caches_no));
-            }
+            listFooterText.setText(res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no));
             listFooter.setOnClickListener(null);
         }
         listFooter.setClickable(enableMore);
@@ -1811,7 +1800,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         @Override
         public void onClick(View arg0) {
             showProgress(true);
-            setLoadingCaches();
+            showFooterLoadingCaches();
             listFooter.setOnClickListener(null);
 
             final LoadNextPageThread thread = new LoadNextPageThread();
@@ -1863,7 +1852,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         Settings.saveLastList(listId);
 
         showProgress(true);
-        setLoadingCaches();
+        showFooterLoadingCaches();
 
         (new MoveCachesToListThread(listId, new MoveHandler())).start();
         invalidateOptionsMenuCompatible();
