@@ -858,57 +858,35 @@ public class cgData {
         return false;
     }
 
-    /** Cache stored in DB with listId >= 1 */
-    // TODO Simply like getCacheDescription()
+    /** is cache stored in one of the lists (not only temporary) */
     public boolean isOffline(String geocode, String guid) {
+        if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+            return false;
+        }
         init();
 
-        Cursor cursor;
-        long listId = StoredList.TEMPORARY_LIST_ID;
-
         try {
+            final SQLiteStatement listId;
+            final String value;
             if (StringUtils.isNotBlank(geocode)) {
-                cursor = databaseRO.query(
-                        dbTableCaches,
-                        new String[] { "reason" },
-                        "geocode = ?",
-                        new String[] { geocode },
-                        null,
-                        null,
-                        null,
-                        "1");
-            } else if (StringUtils.isNotBlank(guid)) {
-                cursor = databaseRO.query(
-                        dbTableCaches,
-                        new String[] { "reason" },
-                        "guid = ? ",
-                        new String[] { guid },
-                        null,
-                        null,
-                        null,
-                        "1");
-            } else {
-                return false;
+                listId = getStatementListIdFromGeocode();
+                value = geocode;
             }
-
-            if (cursor != null) {
-                final int cnt = cursor.getCount();
-                int index;
-
-                if (cnt > 0) {
-                    cursor.moveToFirst();
-
-                    index = cursor.getColumnIndex("reason");
-                    listId = cursor.getLong(index);
-                }
-
-                cursor.close();
+            else {
+                listId = getStatementListIdFromGuid();
+                value = guid;
             }
+            synchronized (listId) {
+                listId.bindString(1, value);
+                return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST_ID;
+            }
+        } catch (SQLiteDoneException e) {
+            // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e("cgData.isOffline: " + e.toString());
+            Log.e("cgData.isOffline", e);
         }
 
-        return listId >= StoredList.STANDARD_LIST_ID;
+        return false;
     }
 
     public String getGeocodeForGuid(String guid) {
@@ -955,11 +933,11 @@ public class cgData {
 
     /**
      * Save/store a cache to the CacheCache
-     * 
+     *
      * @param cache
      *            the Cache to save in the CacheCache/DB
      * @param saveFlags
-     * 
+     *
      * @return true = cache saved successfully to the CacheCache/DB
      */
     public boolean saveCache(cgCache cache, EnumSet<LoadFlags.SaveFlag> saveFlags) {
@@ -2835,6 +2813,14 @@ public class cgData {
 
     private SQLiteStatement getStatementDescription() {
         return getStatement("descriptionFromGeocode", "SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
+    }
+
+    private SQLiteStatement getStatementListIdFromGeocode() {
+        return getStatement("listFromGeocode", "SELECT reason FROM " + dbTableCaches + " WHERE geocode = ?");
+    }
+
+    private SQLiteStatement getStatementListIdFromGuid() {
+        return getStatement("listFromGeocode", "SELECT reason FROM " + dbTableCaches + " WHERE guid = ?");
     }
 
     private SQLiteStatement getStatementCacheId() {

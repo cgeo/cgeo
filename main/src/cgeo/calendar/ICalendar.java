@@ -1,6 +1,8 @@
 package cgeo.calendar;
 
 public interface ICalendar {
+    static final String CALENDAR_ADDON_URI = "market://details?id=cgeo.calendar";
+
     static final String INTENT = "cgeo.calendar.RESERVE";
 
     static final String URI_SCHEME = "add";

@@ -122,8 +122,6 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
 
-    private static final String CALENDAR_ADDON_URI = "market://details?id=cgeo.calendar";
-
     private cgCache cache;
     private final Progress progress = new Progress();
     private SearchResult search;
@@ -495,7 +493,7 @@ public class CacheDetailActivity extends AbstractActivity {
             case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
-                    NavigationAppFactory.startDefaultNavigationApplication(this, null, waypoint, null);
+                    NavigationAppFactory.startDefaultNavigationApplication(1, this, waypoint);
                 }
             }
                 break;
@@ -812,7 +810,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setData(Uri.parse(CALENDAR_ADDON_URI));
+                            intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
                             startActivity(intent);
                         }
                     })
@@ -830,26 +828,14 @@ public class CacheDetailActivity extends AbstractActivity {
      * Tries to navigate to the {@link cgCache} of this activity.
      */
     private void startDefaultNavigation() {
-        if (cache == null || cache.getCoords() == null) {
-            showToast(res.getString(R.string.err_location_unknown));
-            return;
-        }
-
-        //TODO: previously this used also the search argument "search". check if still needed
-        NavigationAppFactory.startDefaultNavigationApplication(this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
     }
 
     /**
      * Tries to navigate to the {@link cgCache} of this activity.
      */
     private void startDefaultNavigation2() {
-        if (cache == null || cache.getCoords() == null) {
-            showToast(res.getString(R.string.err_location_unknown));
-            return;
-        }
-
-        //TODO: previously this used also the search argument "search". check if still needed
-        NavigationAppFactory.startDefaultNavigationApplication2(this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(2, this, cache);
     }
 
     /**
@@ -2312,13 +2298,13 @@ public class CacheDetailActivity extends AbstractActivity {
                 wpNavView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication(CacheDetailActivity.this, null, wpt, null);
+                        NavigationAppFactory.startDefaultNavigationApplication(1, CacheDetailActivity.this, wpt);
                     }
                 });
                 wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication2(CacheDetailActivity.this, null, wpt, null);
+                        NavigationAppFactory.startDefaultNavigationApplication(2, CacheDetailActivity.this, wpt);
                         return true;
                     }
                 });
@@ -2376,8 +2362,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             view = (ListView) getLayoutInflater().inflate(R.layout.cacheview_inventory, null);
 
-            // TODO: Switch back to Android-resource and delete copied one
-            view.setAdapter(new ArrayAdapter<cgTrackable>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
+            view.setAdapter(new ArrayAdapter<cgTrackable>(CacheDetailActivity.this, android.R.layout.simple_list_item_1, cache.getInventory()));
             view.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {

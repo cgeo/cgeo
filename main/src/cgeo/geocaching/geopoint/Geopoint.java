@@ -359,8 +359,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
         return null;
     }
 
-    //FIXME: this interface implementation is totally confusing as it returns the class itself.
-    // it can therefore be removed completely (and any invocation of it) without any disadvantages
     @Override
     public Geopoint getCoords() {
         return this;

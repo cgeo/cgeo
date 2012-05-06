@@ -79,12 +79,7 @@ public class WaypointPopup extends AbstractPopupActivity {
 
     @Override
     protected void navigateTo() {
-        if (waypoint == null || waypoint.getCoords() == null) {
-            showToast(res.getString(R.string.err_location_unknown));
-            return;
-        }
-
-        NavigationAppFactory.startDefaultNavigationApplication(this, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication(1, this, waypoint);
     }
 
     /**
@@ -96,7 +91,7 @@ public class WaypointPopup extends AbstractPopupActivity {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;
         }
-        NavigationAppFactory.startDefaultNavigationApplication2(this, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication(2, this, waypoint);
         finish();
     }
 

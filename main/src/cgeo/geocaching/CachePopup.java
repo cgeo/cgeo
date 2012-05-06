@@ -232,12 +232,7 @@ public class CachePopup extends AbstractPopupActivity {
 
     @Override
     protected void navigateTo() {
-        if (cache == null || cache.getCoords() == null) {
-            showToast(res.getString(R.string.err_location_unknown));
-            return;
-        }
-
-        NavigationAppFactory.startDefaultNavigationApplication(this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
     }
 
     /**
@@ -249,7 +244,7 @@ public class CachePopup extends AbstractPopupActivity {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;
         }
-        NavigationAppFactory.startDefaultNavigationApplication2(this, cache, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(2, this, cache);
         finish();
     }
 

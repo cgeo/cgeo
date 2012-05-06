@@ -4,6 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
@@ -163,10 +165,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * Adds the installed navigation tools to the given menu.
      * Use {@link #onMenuItemSelected(MenuItem, Activity, cgCache)} on
      * selection event to start the selected navigation tool.
-     * 
+     *
      * <b>Only use this way if {@link #showNavigationMenu(Activity, cgCache, cgWaypoint, Geopoint, boolean, boolean)} is
      * not suitable for the given usecase.</b>
-     * 
+     *
      * @param menu
      */
     public static void addMenuItems(final Menu menu, final cgCache cache) {
@@ -229,27 +231,54 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
      *
-     * @param activity
-     * @param cache
-     * @param waypoint
-     * @param destination
-     */
-    public static void startDefaultNavigationApplication(Activity activity, cgCache cache,
-            cgWaypoint waypoint, final Geopoint destination) {
-        invokeApp(activity, cache, waypoint, destination, getDefaultNavigationApplication());
-    }
-
-    /**
-     * Starts the second default navigation tool if correctly set and installed or the compass app as default fallback.
+     * @param defaultNavigation
      *
      * @param activity
      * @param cache
+     */
+    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, cgCache cache) {
+        if (cache == null || cache.getCoords() == null) {
+            ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+            return;
+        }
+
+        invokeApp(activity, cache, null, null, getDefaultNavigationApplication(defaultNavigation));
+    }
+
+    private static NavigationApp getDefaultNavigationApplication(int defaultNavigation) {
+        if (defaultNavigation == 2) {
+            return getNavigationAppFromSetting(Settings.getDefaultNavigationTool2());
+        }
+        return getNavigationAppFromSetting(Settings.getDefaultNavigationTool());
+    }
+
+    /**
+     * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
+     *
+     * @param activity
      * @param waypoint
+     */
+    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, cgWaypoint waypoint) {
+        if (waypoint == null || waypoint.getCoords() == null) {
+            ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+            return;
+        }
+        invokeApp(activity, null, waypoint, null, getDefaultNavigationApplication(defaultNavigation));
+    }
+
+    /**
+     * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
+     *
+     * @param activity
      * @param destination
      */
-    public static void startDefaultNavigationApplication2(Activity activity, cgCache cache,
-            cgWaypoint waypoint, final Geopoint destination) {
-        invokeApp(activity, cache, waypoint, destination, getNavigationAppFromSetting(Settings.getDefaultNavigationTool2()));
+    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, final Geopoint destination) {
+        if (destination == null) {
+            ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+            return;
+        }
+
+        invokeApp(activity, null, null, destination, getDefaultNavigationApplication(defaultNavigation));
     }
 
     /**

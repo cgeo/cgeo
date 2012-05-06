@@ -447,12 +447,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
     }
 
     private void navigateTo(Geopoint geopoint) {
-        if (geopoint == null) {
-            showToast(res.getString(R.string.err_location_unknown));
-            return;
-        }
-
-        NavigationAppFactory.startDefaultNavigationApplication(this, null, null, geopoint);
+        NavigationAppFactory.startDefaultNavigationApplication(1, this, geopoint);
     }
 
     private void cachesAround() {

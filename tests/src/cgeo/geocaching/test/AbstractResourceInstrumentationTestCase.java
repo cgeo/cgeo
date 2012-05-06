@@ -21,7 +21,6 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         try {
             ins.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return result;

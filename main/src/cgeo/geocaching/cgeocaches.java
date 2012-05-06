@@ -1086,7 +1086,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         final int id = item.getItemId();
         switch (id) {
             case MENU_DEFAULT_NAVIGATION:
-                NavigationAppFactory.startDefaultNavigationApplication(this, cache, null, null);
+                NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
                 break;
             case MENU_NAVIGATION:
                 NavigationAppFactory.showNavigationMenu(this, cache, null, null);

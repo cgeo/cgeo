@@ -14,7 +14,7 @@ import java.util.List;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {
     private List<cgCache> readLoc(int resourceId) throws IOException, ParserException {
-        LocParser parser = new LocParser(1);
+        final LocParser parser = new LocParser(1);
         Collection<cgCache> caches = null;
         final InputStream instream = getResourceStream(resourceId);
         try {
@@ -25,7 +25,6 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
             instream.close();
         }
 
-        // TODO: may need to sort by geocode when a test imports more than one cache
         return new ArrayList<cgCache>(caches);
     }
 

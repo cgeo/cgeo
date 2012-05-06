@@ -88,7 +88,7 @@ public abstract class GPXParser extends FileParser {
     /**
      * Parser result. Maps geocode to cache.
      */
-    private final Map<String, cgCache> result = new HashMap<String, cgCache>(500);
+    private final Map<String, cgCache> result = new HashMap<String, cgCache>(100);
     private ProgressInputStream progressStream;
 
     private final class UserDataListener implements EndTextElementListener {

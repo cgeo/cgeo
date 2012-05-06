@@ -193,13 +193,12 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
             }
         }
 
-        // TODO: may need to sort by geocode when a test imports more than one cache
         return new ArrayList<cgCache>(caches);
     }
 
     public static void testParseDateWithFractionalSeconds() {
         // was experienced in GSAK file
-        String dateString = "2011-08-13T02:52:18.103Z";
+        final String dateString = "2011-08-13T02:52:18.103Z";
         try {
             GPXParser.parseDate(dateString);
         } catch (ParseException e) {
