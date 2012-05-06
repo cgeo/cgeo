@@ -2,6 +2,9 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.HumanDistance;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -128,5 +131,30 @@ public final class CacheDetailsCreator {
         if (cache.getTerrain() > 0) {
             addStars(R.string.cache_terrain, cache.getTerrain());
         }
+    }
+
+    public void addDistance(final cgCache cache, final TextView cacheDistanceView) {
+        Float distance = null;
+        if (cache.getCoords() != null) {
+            final Geopoint currentCoords = cgeoapplication.getInstance().currentGeo().getCoords();
+            if (currentCoords != null) {
+                distance = currentCoords.distanceTo(cache);
+            }
+        }
+        if (distance == null) {
+            if (cache.getDistance() != null) {
+                distance = cache.getDistance();
+            }
+        }
+        String text = "--";
+        if (distance != null) {
+            text = HumanDistance.getHumanDistance(distance);
+        }
+        else if (cacheDistanceView != null) {
+            // if there is already a distance in cacheDistance, use it instead of resetting to default.
+            // this prevents displaying "--" while waiting for a new position update (See bug #1468)
+            text = cacheDistanceView.getText().toString();
+        }
+        add(R.string.cache_distance, text);
     }
 }

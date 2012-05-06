@@ -275,10 +275,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         details.add(R.string.cache_geocode, cache.getGeocode().toUpperCase());
         details.addCacheState(cache);
 
-        // distance
-        // if there is already a distance in cacheDistance, use it instead of resetting to default.
-        // this prevents displaying "--" while waiting for a new position update (See bug #1468)
-        details.add(R.string.cache_distance, cacheDistance != null ? cacheDistance.getText().toString() : "--");
+        details.addDistance(cache, cacheDistance);
         cacheDistance = details.getValueView();
 
         details.addDifficulty(cache);

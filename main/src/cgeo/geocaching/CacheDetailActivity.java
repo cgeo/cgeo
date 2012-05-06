@@ -13,7 +13,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
@@ -1359,20 +1358,8 @@ public class CacheDetailActivity extends AbstractActivity {
             details.add(R.string.cache_geocode, cache.getGeocode().toUpperCase());
             details.addCacheState(cache);
 
-            // distance
-            {
-                Float distance = null;
-                if (cache.getDistance() != null) {
-                    distance = cache.getDistance();
-                } else if (cache.getCoords() != null) {
-                    final Geopoint currentCoords = app.currentGeo().getCoords();
-                    if (currentCoords != null) {
-                        distance = currentCoords.distanceTo(cache);
-                    }
-                }
-                cacheDistanceView = details.add(R.string.cache_distance,
-                        distance != null ? HumanDistance.getHumanDistance(distance) : "--");
-            }
+            details.addDistance(cache, cacheDistanceView);
+            cacheDistanceView = details.getValueView();
 
             details.addDifficulty(cache);
             details.addTerrain(cache);
