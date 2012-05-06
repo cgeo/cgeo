@@ -77,7 +77,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class cgeocaches extends AbstractListActivity implements IObserver<Object> {
+public class cgeocaches extends AbstractListActivity {
 
     private static final int MAX_LIST_ITEMS = 1000;
     private static final String EXTRAS_LIST_TYPE = "type";
@@ -150,6 +150,7 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     private RemoveFromHistoryThread threadH = null;
     private int listId = StoredList.TEMPORARY_LIST_ID;
     private GeocodeComparator gcComparator = new GeocodeComparator();
+    private UpdateHandler updateHandler = new UpdateHandler();
     private Handler loadCachesHandler = new Handler() {
 
         @Override
@@ -1236,15 +1237,15 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
     // Sensor & geolocation manager. This must be called from the UI thread as it may
     // cause the system listeners to start if nobody else required them before.
     private void startGeoAndDir() {
-        app.addGeoObserver(this);
+        app.addGeoObserver(updateHandler);
         if (Settings.isLiveList() && Settings.isUseCompass()) {
-            app.addDirectionObserver(this);
+            app.addDirectionObserver(updateHandler);
         }
     }
 
     private void removeGeoAndDir() {
-        app.deleteGeoObserver(this);
-        app.deleteDirectionObserver(this);
+        app.deleteGeoObserver(updateHandler);
+        app.deleteDirectionObserver(updateHandler);
     }
 
     private void importGpx() {
@@ -1390,12 +1391,20 @@ public class cgeocaches extends AbstractListActivity implements IObserver<Object
         new DropDetailsThread(dropDetailsHandler).start();
     }
 
-    @Override
-    public void update(final Object data) {
-        if (data instanceof IGeoData) {
-            updateGeoData((IGeoData) data);
-        } else {
-            updateDirection((Float) data);
+    private class UpdateHandler extends Handler implements IObserver<Object> {
+
+        @Override
+        public void handleMessage(final Message message) {
+            if (message.obj instanceof IGeoData) {
+                    updateGeoData((IGeoData) message.obj);
+            } else {
+                    updateDirection((Float) message.obj);
+            }
+        }
+
+        @Override
+        public void update(final Object o) {
+            obtainMessage(0, o).sendToTarget();
         }
     }
 

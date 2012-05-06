@@ -273,10 +273,8 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         azimuth = directionNow;
 
-        if (CollectionUtils.isNotEmpty(compasses)) {
-            for (CompassMiniView compass : compasses) {
-                compass.updateAzimuth(azimuth);
-            }
+        for (final CompassMiniView compass : compasses) {
+            compass.updateAzimuth(azimuth);
         }
     }
 
