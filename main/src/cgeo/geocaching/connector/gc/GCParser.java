@@ -316,11 +316,14 @@ public abstract class GCParser {
             if (CancellableHandler.isCancelled(handler)) {
                 return null;
             }
-            // update progress message so user knows we're still working. Otherwise it will remain on whatever was set
-            // in getExtraOnlineInfo (which could be logs, gcvote, or elevation)
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_render);
+
             // save full detailed caches
+            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_cache);
             cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+
+            // update progress message so user knows we're still working. This is more of a place holder than
+            // actual indication of what the program is doing
+            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_render);
         }
         return searchResult;
     }
