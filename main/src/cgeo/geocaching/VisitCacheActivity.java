@@ -703,13 +703,12 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
                 cache.prependLog(logNow);
-                //                app.saveLogs(cache);
 
                 if (typeSelected == LogType.FOUND_IT) {
                     cache.setFound(true);
                 }
 
-                app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+                app.saveCache(cache, cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
             }
 
             if (status == StatusCode.NO_ERROR) {
