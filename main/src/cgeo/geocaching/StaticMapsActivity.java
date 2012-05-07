@@ -42,13 +42,16 @@ public class StaticMapsActivity extends AbstractActivity {
             try {
                 if (CollectionUtils.isEmpty(maps)) {
                     if (download) {
-                        downloadStaticMaps();
-                        startActivity(StaticMapsActivity.this.getIntent());
-                        finish();
+                        final boolean succeeded = downloadStaticMaps();
+                        if (succeeded) {
+                            startActivity(StaticMapsActivity.this.getIntent());
+                        } else {
+                            showToast(res.getString(R.string.err_detail_google_maps_limit_reached));
+                        }
                     } else {
                         showToast(res.getString(R.string.err_detail_not_load_map_static));
-                        finish();
                     }
+                    finish();
                 } else {
                     showStaticMaps();
                 }
@@ -188,19 +191,20 @@ public class StaticMapsActivity extends AbstractActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void downloadStaticMaps() {
+    private boolean downloadStaticMaps() {
         final cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (waypoint_id == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeCacheStaticMap(cache, this, true);
-        } else {
-            final cgWaypoint waypoint = cache.getWaypointById(waypoint_id);
-            if (waypoint != null) {
-                showToast(res.getString(R.string.info_storing_static_maps));
-                StaticMapsProvider.storeWaypointStaticMap(cache, this, waypoint, true);
-            } else {
-                showToast(res.getString(R.string.err_detail_not_load_map_static));
-            }
+            return StaticMapsProvider.doesExistStaticMapForCache(geocode);
         }
+        final cgWaypoint waypoint = cache.getWaypointById(waypoint_id);
+        if (waypoint != null) {
+            showToast(res.getString(R.string.info_storing_static_maps));
+            StaticMapsProvider.storeWaypointStaticMap(cache, this, waypoint, true);
+            return StaticMapsProvider.doesExistStaticMapForWaypoint(geocode, waypoint_id);
+        }
+        showToast(res.getString(R.string.err_detail_not_load_map_static));
+        return false;
     }
 }
