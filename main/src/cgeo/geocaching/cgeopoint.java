@@ -326,7 +326,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
 
-        menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_more);
+        menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
 
         menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
 
@@ -340,17 +340,10 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
         super.onPrepareOptionsMenu(menu);
 
         try {
-            final Geopoint coords = getDestination();
-
-            if (coords != null) {
-                menu.findItem(MENU_NAVIGATE).setVisible(true);
-                menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(true);
-                menu.findItem(MENU_CACHES_AROUND).setVisible(true);
-            } else {
-                menu.findItem(MENU_NAVIGATE).setVisible(false);
-                menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(false);
-                menu.findItem(MENU_CACHES_AROUND).setVisible(false);
-            }
+            boolean visible = getDestination() != null;
+            menu.findItem(MENU_NAVIGATE).setVisible(visible);
+            menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(visible);
+            menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
 
             menu.findItem(MENU_CLEAR_HISTORY).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
         } catch (Exception e) {
