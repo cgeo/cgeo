@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.LogType;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,5 +83,31 @@ public final class LogEntry {
 
     public boolean hasLogImages() {
         return CollectionUtils.isNotEmpty(logImages);
+    }
+
+    public CharSequence getImageTitles() {
+        final List<String> titles = new ArrayList<String>(5);
+        for (cgImage image : getLogImages()) {
+            if (StringUtils.isNotBlank(image.getTitle())) {
+                titles.add(image.getTitle());
+            }
+        }
+        if (titles.isEmpty()) {
+            titles.add(cgeoapplication.getInstance().getString(R.string.cache_log_image_default_title));
+        }
+        return StringUtils.join(titles, ", ");
+    }
+
+    public int daysSinceLog() {
+        final Calendar logDate = Calendar.getInstance();
+        logDate.setTimeInMillis(date);
+        logDate.set(Calendar.SECOND, 0);
+        logDate.set(Calendar.MINUTE, 0);
+        logDate.set(Calendar.HOUR, 0);
+        final Calendar today = Calendar.getInstance();
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.HOUR, 0);
+        return (int) Math.round((today.getTimeInMillis() - logDate.getTimeInMillis()) / 86400000d);
     }
 }

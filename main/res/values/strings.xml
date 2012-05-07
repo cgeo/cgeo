@@ -963,11 +963,15 @@
   <string name="go4cache_tweeting">Tweeting</string>
   <string name="go4cache_heading_to">Heading to</string>
   <plurals name="go4cache_time_minutes">
-	<item quantity="one">one Minute ago</item>
-	<item quantity="other">%d Minutes ago</item>
+	<item quantity="one">one minute ago</item>
+	<item quantity="other">%d minutes ago</item>
   </plurals>
   
   <string name="clipboard_copy_ok">Copied to clipboard</string>
+  <plurals name="days_ago">
+      <item quantity="one">yesterday</item>
+      <item quantity="other">%d days ago</item>
+  </plurals>
       
   <!-- ====== please, do not translate (and include in translation) things below this line ====== -->
 

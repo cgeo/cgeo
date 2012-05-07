@@ -930,4 +930,8 @@
   </plurals>
   
   <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
+  <plurals name="days_ago">
+      <item quantity="one">gestern</item>
+      <item quantity="other">vor %d Tagen</item>
+  </plurals>
 </resources>

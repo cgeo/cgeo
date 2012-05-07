@@ -2127,18 +2127,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                     // images
                     if (log.hasLogImages()) {
-
-                        List<String> titles = new ArrayList<String>(5);
-                        for (cgImage image : log.getLogImages()) {
-                            if (StringUtils.isNotBlank(image.getTitle())) {
-                                titles.add(image.getTitle());
-                            }
-                        }
-                        if (titles.isEmpty()) {
-                            titles.add(res.getString(R.string.cache_log_image_default_title));
-                        }
-
-                        holder.images.setText(StringUtils.join(titles, ", "));
+                        holder.images.setText(log.getImageTitles());
                         holder.images.setVisibility(View.VISIBLE);
                         holder.images.setOnClickListener(new View.OnClickListener() {
                             @Override

@@ -16,6 +16,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -451,5 +453,13 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         }
 
         return StatusCode.LOG_POST_ERROR;
+    }
+
+    public static void startActivity(final Context context, final cgTrackable trackable) {
+        final Intent logTouchIntent = new Intent(context, cgeotouch.class);
+        logTouchIntent.putExtra("geocode", trackable.getGeocode().toUpperCase());
+        logTouchIntent.putExtra("guid", trackable.getGuid());
+        logTouchIntent.putExtra("trackingcode", trackable.getTrackingcode());
+        context.startActivity(logTouchIntent);
     }
 }
