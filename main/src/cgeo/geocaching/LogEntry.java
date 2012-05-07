@@ -11,11 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 public final class LogEntry {
-    /**
-     * avoid creating new empty lists all the time using this constant. We could also return Collections.EMPTY_LIST
-     * using a cast, but that might trigger static code analysis tools.
-     */
-    private static final List<cgImage> EMPTY_LIST = Collections.emptyList();
 
     public int id = 0;
     public LogType type = LogType.NOTE; // note
@@ -76,7 +71,7 @@ public final class LogEntry {
      */
     public List<cgImage> getLogImages() {
         if (logImages == null) {
-            return EMPTY_LIST;
+            return Collections.emptyList();
         }
         return logImages;
     }
