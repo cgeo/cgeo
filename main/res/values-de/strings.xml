@@ -504,6 +504,7 @@
   <string name="cache_dialog_loading_details_status_waypoints">Verarbeite Wegpunkte</string>
   <string name="cache_dialog_loading_details_status_gcvote">Lade GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Lade Höhe</string>
+  <string name="cache_dialog_loading_details_status_cache">Zwischenspeichern</string>
   <string name="cache_dialog_loading_details_status_render">Erzeuge Darstellung</string>
   <string name="cache_dialog_offline_save_title">Offline-Verwendung</string>
   <string name="cache_dialog_offline_save_message">Speichere Cache für Offline-Verwendung…</string>
