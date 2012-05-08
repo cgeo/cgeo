@@ -149,7 +149,6 @@ public class cgeocaches extends AbstractListActivity {
     private LoadFromWebThread threadWeb = null;
     private RemoveFromHistoryThread threadH = null;
     private int listId = StoredList.TEMPORARY_LIST_ID;
-    private GeocodeComparator gcComparator = new GeocodeComparator();
     private UpdateHandler updateHandler = new UpdateHandler();
     private Handler loadCachesHandler = new Handler() {
 
@@ -163,7 +162,6 @@ public class cgeocaches extends AbstractListActivity {
                     final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     if (CollectionUtils.isNotEmpty(caches)) {
                         cacheList.addAll(caches);
-                        Collections.sort(cacheList, gcComparator);
                     }
                 } else {
                     setTitle(title);
@@ -251,7 +249,6 @@ public class cgeocaches extends AbstractListActivity {
                     if (CollectionUtils.isNotEmpty(caches)) {
                         cacheList.addAll(caches);
                         caches.clear();
-                        Collections.sort(cacheList, gcComparator);
                     }
                     if (adapter != null) {
                         adapter.reFilter();
@@ -333,7 +330,6 @@ public class cgeocaches extends AbstractListActivity {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
-                        Collections.sort(cacheList, gcComparator);
                     }
                 }
 
@@ -389,8 +385,6 @@ public class cgeocaches extends AbstractListActivity {
                 if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
-
-                    Collections.sort(cacheList, gcComparator);
                 }
 
                 progress.dismiss();
@@ -414,8 +408,6 @@ public class cgeocaches extends AbstractListActivity {
                 if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
-
-                    Collections.sort(cacheList, gcComparator);
                 }
 
                 progress.dismiss();
@@ -657,7 +649,7 @@ public class cgeocaches extends AbstractListActivity {
             if (coordsNow != null) {
                 adapter.setActualCoordinates(coordsNow);
                 adapter.setActualHeading(northHeading);
-                adapter.forceSort(coordsNow);
+                adapter.forceSort();
             }
         }
 
@@ -1200,6 +1192,7 @@ public class cgeocaches extends AbstractListActivity {
         } else {
             adapter.notifyDataSetChanged();
         }
+        adapter.forceSort();
         adapter.reFilter();
     }
 

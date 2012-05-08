@@ -125,7 +125,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
      */
     public void setComparator(final CacheComparator comparator) {
         cacheComparator = comparator;
-        forceSort(coords);
+        forceSort();
     }
 
     public CacheComparator getCacheComparator() {
@@ -222,16 +222,14 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         notifyDataSetChanged();
     }
 
-    public void forceSort(final Geopoint coordsIn) {
+    public void forceSort() {
         if (CollectionUtils.isEmpty(list) || selectMode) {
             return;
         }
 
         if (isSortedByDistance()) {
-            if (coordsIn == null) {
-                return;
-            }
-            Collections.sort(list, new DistanceComparator(coordsIn, list));
+            lastSort = 0;
+            updateSortByDistance();
         }
         else {
             Collections.sort(list, cacheComparator);
@@ -246,20 +244,34 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         coords = coordsIn;
-
-        if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && !selectMode && isSortedByDistance()) {
-            Collections.sort(list, new DistanceComparator(coordsIn, list));
-            notifyDataSetChanged();
-            lastSort = System.currentTimeMillis();
-        }
+        updateSortByDistance();
 
         for (final DistanceView distance : distances) {
             distance.update(coordsIn);
         }
-
         for (final CompassMiniView compass : compasses) {
             compass.updateCurrentCoords(coordsIn);
         }
+    }
+
+    private void updateSortByDistance() {
+        if (CollectionUtils.isEmpty(list)) {
+            return;
+        }
+        if (selectMode) {
+            return;
+        }
+        if ((System.currentTimeMillis() - lastSort) <= PAUSE_BETWEEN_LIST_SORT) {
+            return;
+        }
+        if (!isSortedByDistance()) {
+            return;
+        }
+
+        Log.w(System.currentTimeMillis() + ":  " + coords.toString());
+        Collections.sort(list, new DistanceComparator(coords, list));
+        notifyDataSetChanged();
+        lastSort = System.currentTimeMillis();
     }
 
     private boolean isSortedByDistance() {
