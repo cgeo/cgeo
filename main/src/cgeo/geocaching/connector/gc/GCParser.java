@@ -338,31 +338,26 @@ public abstract class GCParser {
 
         final SearchResult searchResult = new SearchResult();
 
-        if (page.contains("Cache is Unpublished") || page.contains("you cannot view this cache listing until it has been published")) {
+        if (page.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || page.contains(GCConstants.STRING_UNPUBLISHED_OWNER)) {
             searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
             return searchResult;
         }
 
-        if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
-            searchResult.setError(StatusCode.PREMIUM_ONLY);
-            return searchResult;
-        }
-
-        if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
+        if (page.contains(GCConstants.STRING_PREMIUMONLY_1) || page.contains(GCConstants.STRING_PREMIUMONLY_2)) {
             searchResult.setError(StatusCode.PREMIUM_ONLY);
             return searchResult;
         }
 
         final String cacheName = Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_NAME, true, "")).toString();
-        if ("An Error Has Occurred".equalsIgnoreCase(cacheName)) {
+        if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
             searchResult.setError(StatusCode.UNKNOWN_ERROR);
             return searchResult;
         }
 
         final cgCache cache = new cgCache();
-        cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
+        cache.setDisabled(page.contains(GCConstants.STRING_DISABLED));
 
-        cache.setArchived(page.contains("<li>This cache has been archived,"));
+        cache.setArchived(page.contains(GCConstants.STRING_ARCHIVED));
 
         cache.setPremiumMembersOnly(BaseUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
@@ -390,7 +385,7 @@ public abstract class GCParser {
 
         String tableInside = page;
 
-        int pos = tableInside.indexOf("id=\"cacheDetails\"");
+        int pos = tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
         if (pos == -1) {
             Log.e("cgeoBase.parseCache: ID \"cacheDetails\" not found on page");
             return null;
@@ -398,7 +393,7 @@ public abstract class GCParser {
 
         tableInside = tableInside.substring(pos);
 
-        pos = tableInside.indexOf("<div class=\"CacheInformationTable\"");
+        pos = tableInside.indexOf(GCConstants.STRING_CACHEINFORMATIONTABLE);
         if (pos == -1) {
             Log.e("cgeoBase.parseCache: class \"CacheInformationTable\" not found on page");
             return null;

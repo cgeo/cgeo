@@ -28,7 +28,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_HINT = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>");
     public final static Pattern PATTERN_DESC = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
     public final static Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>[^\\w^<]*</div>");
-    public final static Pattern PATTERN_GEOCODE = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"");
+    public final static Pattern PATTERN_GEOCODE = Pattern.compile("class=\"CoordInfoCode\">(GC[0-9A-Z]+)</span>");
     public final static Pattern PATTERN_CACHEID = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)");
     public final static Pattern PATTERN_GUID = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
     public final static Pattern PATTERN_SIZE = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"\\w+: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>");
@@ -155,6 +155,17 @@ public final class GCConstants {
     /** Live Map since 14.02.2012 */
     public final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
     public final static Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
+
+    public final static String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
+    public final static String STRING_PREMIUMONLY_1 = "has chosen to make this cache listing visible to Premium Members only.";
+    public final static String STRING_UNPUBLISHED_OWNER = "Cache is Unpublished";
+    public final static String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
+    public final static String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
+    public final static String STRING_CACHEINFORMATIONTABLE = "<div id=\"ctl00_ContentBody_CacheInformationTable\" class=\"CacheInformationTable\">";
+    public final static String STRING_DISABLED = "<li>This cache is temporarily unavailable.";
+    public final static String STRING_ARCHIVED = "<li>This cache has been archived,";
+    public final static String STRING_CACHEDETAILS = "id=\"cacheDetails\"";
+
     /** Number of logs to retrieve from GC.com */
     public final static int NUMBER_OF_LOGS = 35;
 

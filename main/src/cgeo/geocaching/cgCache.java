@@ -1386,7 +1386,7 @@ public class cgCache implements ICache, IWaypoint {
 
     public void checkFields() {
         if (StringUtils.isBlank(getGeocode())) {
-            Log.e("cgBase.loadLogsFromDetails: geo code not parsed correctly");
+            Log.e("geo code not parsed correctly");
         }
         if (StringUtils.isBlank(getName())) {
             Log.e("name not parsed correctly");
