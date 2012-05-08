@@ -146,6 +146,7 @@
   <string name="err_detail_cache_find_next">c:geo non trova la prossima geocache.</string>
   <string name="err_detail_cache_forgot">c:geo ha dimenticato quale geocache hai richiesto.</string>
   <string name="err_detail_cache_forgot_visit">c:geo ha dimenticato quale cache hai visitato.</string>
+  <string name="err_detail_google_maps_limit_reached">c:geo non riesce a scaricare le mappe statiche. Forse raggiunto il limite di google map. Riprova domani.</string> 
   <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questa cache.</string>
   <string name="err_detail_no_map_static">c:geo non trova static maps per questa cache.</string>
   <string name="err_detail_not_load_map_static">c:geo non riesce a caricare la static map.</string>
@@ -503,6 +504,7 @@
   <string name="cache_dialog_loading_details_status_waypoints">Elaborazione waypoints</string>
   <string name="cache_dialog_loading_details_status_gcvote">Caricamento GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Caricamento dati di altitudine</string>
+  <string name="cache_dialog_loading_details_status_cache">Salvataggio dati</string>
   <string name="cache_dialog_loading_details_status_render">Creazione pagina</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Salvataggio cache per uso offline…</string>
@@ -519,6 +521,7 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mappa</string>
   <string name="cache_menu_map_static">Mappe statiche</string>
+  <string name="cache_menu_download_map_static">Scarica mappe statiche</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Mappa su app esterna</string>
   <string name="cache_menu_streetview">Street View</string>
@@ -938,4 +941,9 @@
   </plurals>
   
   <string name="clipboard_copy_ok">Copiato nella clipboard</string>  
+  <plurals name="days_ago">
+    <item quantity="one">ieri</item>
+    <item quantity="other">%d giorni fa</item>
+  </plurals>
+
 </resources>
