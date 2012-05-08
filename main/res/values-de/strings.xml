@@ -146,6 +146,7 @@
   <string name="err_detail_cache_find_next">c:geo konnte die nächsten Caches nicht finden.</string>
   <string name="err_detail_cache_forgot">c:geo hat vergessen, welcher Cache aufgerufen werden sollte.</string>
   <string name="err_detail_cache_forgot_visit">c:geo hat vergessen, welcher Cache besucht werden sollte.</string>
+  <string name="err_detail_google_maps_limit_reached">c:geo kann die statischen Karten nicht herunterladen. Google Maps Limit könnte erreicht sein.</string>
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
   <string name="err_detail_no_map_static">c:geo hat keine statische Karte für diesen Cache gefunden.</string>
   <string name="err_detail_not_load_map_static">c:geo konnte die statische Karte nicht laden.</string>
