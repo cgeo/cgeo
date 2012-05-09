@@ -21,6 +21,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -351,14 +352,18 @@ public class cgeoapplication extends Application {
         storage.clearLogOffline(geocode);
     }
 
-    /** {@link cgData#setVisitDate(String, long)} */
+    /** {@link cgData#setVisitDate(List, long)} */
     public void saveVisitDate(String geocode) {
-        storage.setVisitDate(geocode, System.currentTimeMillis());
+        storage.setVisitDate(Collections.singletonList(geocode), System.currentTimeMillis());
     }
 
-    /** {@link cgData#setVisitDate(String, long)} */
-    public void clearVisitDate(String geocode) {
-        storage.setVisitDate(geocode, 0);
+    /** {@link cgData#setVisitDate(List, long)} */
+    public void clearVisitDate(List<cgCache> caches) {
+        ArrayList<String> geocodes = new ArrayList<String>(caches.size());
+        for (cgCache cache : caches) {
+            geocodes.add(cache.getGeocode());
+        }
+        storage.setVisitDate(geocodes, 0);
     }
 
     /** {@link cgData#getLists(Resources)} */

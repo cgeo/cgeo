@@ -1699,7 +1699,7 @@ public class CacheDetailActivity extends AbstractActivity {
             final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
             final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
 
-            if (cache.getListId() >= StoredList.STANDARD_LIST_ID) {
+            if (cache.isOffline()) {
                 long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                 String ago;

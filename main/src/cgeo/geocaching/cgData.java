@@ -2586,8 +2586,8 @@ public class cgData {
         return false;
     }
 
-    public void setVisitDate(String geocode, long visitedDate) {
-        if (StringUtils.isBlank(geocode)) {
+    public void setVisitDate(List<String> geocodes, long visitedDate) {
+        if (geocodes.isEmpty()) {
             return;
         }
 
@@ -2598,7 +2598,9 @@ public class cgData {
             ContentValues values = new ContentValues();
             values.put("visiteddate", visitedDate);
 
-            databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
+            for (String geocode : geocodes) {
+                databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
+            }
             databaseRW.setTransactionSuccessful();
         } finally {
             databaseRW.endTransaction();

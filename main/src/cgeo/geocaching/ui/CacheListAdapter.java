@@ -1,9 +1,11 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -49,7 +51,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     private LayoutInflater inflater = null;
     private CacheComparator cacheComparator = null;
-    private Geopoint coords = null;
+    private Geopoint coords;
     private float azimuth = 0;
     private long lastSort = 0L;
     private boolean selectMode = false;
@@ -58,7 +60,6 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
     final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
-    final private int[] ratingBcgs = new int[3];
     final private CacheListType cacheListType;
     final private Resources res;
     /** Resulting list of caches */
@@ -72,9 +73,25 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
      */
     private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
 
+    private static final int[] RATING_BACKGROUND = new int[3];
+    static {
+        if (Settings.isLightSkin()) {
+            RATING_BACKGROUND[0] = R.drawable.favourite_background_red_light;
+            RATING_BACKGROUND[1] = R.drawable.favourite_background_orange_light;
+            RATING_BACKGROUND[2] = R.drawable.favourite_background_green_light;
+        } else {
+            RATING_BACKGROUND[0] = R.drawable.favourite_background_red_dark;
+            RATING_BACKGROUND[1] = R.drawable.favourite_background_orange_dark;
+            RATING_BACKGROUND[2] = R.drawable.favourite_background_green_dark;
+        }
+    }
+
     public CacheListAdapter(final Activity activity, final List<cgCache> list, CacheListType cacheListType) {
         super(activity, 0, list);
-
+        final IGeoData currentGeo = cgeoapplication.getInstance().currentGeo();
+        if (currentGeo != null) {
+            coords = currentGeo.getCoords();
+        }
         this.res = activity.getResources();
         this.list = list;
         this.cacheListType = cacheListType;
@@ -98,16 +115,6 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
                     layers[0].getIntrinsicHeight() - layers[1].getIntrinsicHeight(),
                     0, 0);
             gcIconDrawables.put(hashCode, ld);
-        }
-
-        if (Settings.isLightSkin()) {
-            ratingBcgs[0] = R.drawable.favourite_background_red_light;
-            ratingBcgs[1] = R.drawable.favourite_background_orange_light;
-            ratingBcgs[2] = R.drawable.favourite_background_green_light;
-        } else {
-            ratingBcgs[0] = R.drawable.favourite_background_red_dark;
-            ratingBcgs[1] = R.drawable.favourite_background_orange_dark;
-            ratingBcgs[2] = R.drawable.favourite_background_green_dark;
         }
     }
 
@@ -178,7 +185,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         notifyDataSetChanged();
     }
 
-    public boolean isFilter() {
+    public boolean isFiltered() {
         return currentFilter != null;
     }
 
@@ -207,12 +214,12 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         notifyDataSetChanged();
     }
 
-    public boolean getSelectMode() {
+    public boolean isSelectMode() {
         return selectMode;
     }
 
     public void switchSelectMode() {
-        setSelectMode(!getSelectMode());
+        setSelectMode(!isSelectMode());
     }
 
     public void invertSelection() {
@@ -267,8 +274,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         if (!isSortedByDistance()) {
             return;
         }
-
-        Log.w(System.currentTimeMillis() + ":  " + coords.toString());
+        if (coords == null) {
+            return;
+        }
         Collections.sort(list, new DistanceComparator(coords, list));
         notifyDataSetChanged();
         lastSort = System.currentTimeMillis();
@@ -451,20 +459,20 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         final float myVote = cache.getMyVote();
         if (myVote > 0) { // use my own rating for display, if I have voted
             if (myVote >= 4) {
-                favoriteBack = ratingBcgs[2];
+                favoriteBack = RATING_BACKGROUND[2];
             } else if (myVote >= 3) {
-                favoriteBack = ratingBcgs[1];
+                favoriteBack = RATING_BACKGROUND[1];
             } else if (myVote > 0) {
-                favoriteBack = ratingBcgs[0];
+                favoriteBack = RATING_BACKGROUND[0];
             }
         } else {
             final float rating = cache.getRating();
             if (rating >= 3.5) {
-                favoriteBack = ratingBcgs[2];
+                favoriteBack = RATING_BACKGROUND[2];
             } else if (rating >= 2.1) {
-                favoriteBack = ratingBcgs[1];
+                favoriteBack = RATING_BACKGROUND[1];
             } else if (rating > 0.0) {
-                favoriteBack = ratingBcgs[0];
+                favoriteBack = RATING_BACKGROUND[0];
             }
         }
         holder.favourite.setBackgroundResource(favoriteBack);
@@ -558,7 +566,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
                 return;
             }
 
-            if (getSelectMode()) {
+            if (isSelectMode()) {
                 cache.setStatusChecked(!cache.isStatusChecked());
                 notifyDataSetChanged();
                 return;
@@ -640,5 +648,21 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             }
         }
         return result;
+    }
+
+    public List<cgCache> getCheckedOrAllCaches() {
+        final List<cgCache> result = getCheckedCaches();
+        if (!result.isEmpty()) {
+            return result;
+        }
+        return new ArrayList<cgCache>(list);
+    }
+
+    public int getCheckedOrAllCount() {
+        final int checked = getCheckedCount();
+        if (checked > 0) {
+            return checked;
+        }
+        return list.size();
     }
 }

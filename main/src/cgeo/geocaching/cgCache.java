@@ -1437,7 +1437,7 @@ public class cgCache implements ICache, IWaypoint {
             // get cache details, they may not yet be complete
             if (origCache != null) {
                 // only reload the cache if it was already stored or doesn't have full details (by checking the description)
-                if (origCache.getListId() >= StoredList.STANDARD_LIST_ID || StringUtils.isBlank(origCache.getDescription())) {
+                if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
                     final SearchResult search = searchByGeocode(origCache.getGeocode(), null, listId, false, handler);
                     cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 } else {
@@ -1540,6 +1540,10 @@ public class cgCache implements ICache, IWaypoint {
             return ((ISearchByGeocode) connector).searchByGeocode(geocode, guid, handler);
         }
         return null;
+    }
+
+    public boolean isOffline() {
+        return listId >= StoredList.STANDARD_LIST_ID;
     }
 
 }
