@@ -1634,7 +1634,11 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(GCConnector.addToWatchlist(cache));
+                final int result = GCConnector.addToWatchlist(cache);
+                if (-1 != result) {
+                    app.saveCache(cache, cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+                }
+                handler.sendEmptyMessage(result);
             }
         }
 
@@ -1648,7 +1652,11 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(GCConnector.removeFromWatchlist(cache));
+                final int result = GCConnector.removeFromWatchlist(cache);
+                if (-1 != result) {
+                    app.saveCache(cache, cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+                }
+                handler.sendEmptyMessage(result);
             }
         }
 
