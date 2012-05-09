@@ -39,6 +39,7 @@ public class HtmlImage implements Html.ImageGetter {
             "counter.digits.com",
             "andyhoppe"
     };
+
     final private String geocode;
     /**
      * on error: return large error image, if <code>true</code>, otherwise empty 1x1 image
@@ -73,7 +74,10 @@ public class HtmlImage implements Html.ImageGetter {
             return new BitmapDrawable(getTransparent1x1Image());
         }
 
-        Bitmap imagePre = loadImageFromStorage(url);
+        final boolean shared = url.contains("/images/icons/icon_");
+        final String pseudoGeocode = shared ? "shared" : geocode;
+
+        Bitmap imagePre = loadImageFromStorage(url, pseudoGeocode, shared);
 
         // Download image and save it to the cache
         if (imagePre == null) {
@@ -81,7 +85,7 @@ public class HtmlImage implements Html.ImageGetter {
 
             if (absoluteURL != null) {
                 try {
-                    final File file = LocalStorage.getStorageFile(geocode, url, true, true);
+                    final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
                     final HttpResponse httpResponse = Network.getRequest(absoluteURL, null, file);
                     if (httpResponse != null) {
                         final int statusCode = httpResponse.getStatusLine().getStatusCode();
@@ -103,7 +107,7 @@ public class HtmlImage implements Html.ImageGetter {
 
         // now load the newly downloaded image
         if (imagePre == null) {
-            imagePre = loadImageFromStorage(url);
+            imagePre = loadImageFromStorage(url, pseudoGeocode, shared);
         }
 
         // get image and return
@@ -149,15 +153,15 @@ public class HtmlImage implements Html.ImageGetter {
         return BitmapFactory.decodeResource(resources, R.drawable.image_no_placement);
     }
 
-    private Bitmap loadImageFromStorage(final String url) {
+    private Bitmap loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
         try {
-            final File file = LocalStorage.getStorageFile(geocode, url, true, false);
-            final Bitmap image = loadCachedImage(file);
+            final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, false);
+            final Bitmap image = loadCachedImage(file, forceKeep);
             if (image != null) {
                 return image;
             }
-            final File fileSec = LocalStorage.getStorageSecFile(geocode, url, true);
-            return loadCachedImage(fileSec);
+            final File fileSec = LocalStorage.getStorageSecFile(pseudoGeocode, url, true);
+            return loadCachedImage(fileSec, forceKeep);
         } catch (Exception e) {
             Log.w("HtmlImage.getDrawable (reading cache): " + e.toString());
         }
@@ -187,9 +191,9 @@ public class HtmlImage implements Html.ImageGetter {
         return null;
     }
 
-    private Bitmap loadCachedImage(final File file) {
+    private Bitmap loadCachedImage(final File file, final boolean forceKeep) {
         if (file.exists()) {
-            if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
+            if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep) {
                 setSampleSize(file);
                 return BitmapFactory.decodeFile(file.getPath(), bfOptions);
             }
