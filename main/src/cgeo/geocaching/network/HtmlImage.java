@@ -39,6 +39,9 @@ public class HtmlImage implements Html.ImageGetter {
             "counter.digits.com",
             "andyhoppe"
     };
+
+    private static final String SMILEY_CATEGORY_IDENTIFIER = ".smileys";
+
     final private String geocode;
     /**
      * on error: return large error image, if <code>true</code>, otherwise empty 1x1 image
@@ -50,12 +53,14 @@ public class HtmlImage implements Html.ImageGetter {
     final private int maxWidth;
     final private int maxHeight;
     final private Resources resources;
+    private String categoryIdentifier;
 
     public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this.geocode = geocode;
         this.returnErrorImage = returnErrorImage;
         this.listId = listId;
         this.onlySave = onlySave;
+        this.categoryIdentifier = geocode;
 
         bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
@@ -73,6 +78,8 @@ public class HtmlImage implements Html.ImageGetter {
             return new BitmapDrawable(getTransparent1x1Image());
         }
 
+        categoryIdentifier = url.contains("/images/icons/icon_") ? SMILEY_CATEGORY_IDENTIFIER : geocode;
+
         Bitmap imagePre = loadImageFromStorage(url);
 
         // Download image and save it to the cache
@@ -81,7 +88,7 @@ public class HtmlImage implements Html.ImageGetter {
 
             if (absoluteURL != null) {
                 try {
-                    final File file = LocalStorage.getStorageFile(geocode, url, true, true);
+                    final File file = LocalStorage.getStorageFile(categoryIdentifier, url, true, true);
                     final HttpResponse httpResponse = Network.getRequest(absoluteURL, null, file);
                     if (httpResponse != null) {
                         final int statusCode = httpResponse.getStatusLine().getStatusCode();
@@ -151,12 +158,12 @@ public class HtmlImage implements Html.ImageGetter {
 
     private Bitmap loadImageFromStorage(final String url) {
         try {
-            final File file = LocalStorage.getStorageFile(geocode, url, true, false);
+            final File file = LocalStorage.getStorageFile(categoryIdentifier, url, true, false);
             final Bitmap image = loadCachedImage(file);
             if (image != null) {
                 return image;
             }
-            final File fileSec = LocalStorage.getStorageSecFile(geocode, url, true);
+            final File fileSec = LocalStorage.getStorageSecFile(categoryIdentifier, url, true);
             return loadCachedImage(fileSec);
         } catch (Exception e) {
             Log.w("HtmlImage.getDrawable (reading cache): " + e.toString());
@@ -189,7 +196,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     private Bitmap loadCachedImage(final File file) {
         if (file.exists()) {
-            if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
+            if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || SMILEY_CATEGORY_IDENTIFIER.equals(categoryIdentifier)) {
                 setSampleSize(file);
                 return BitmapFactory.decodeFile(file.getPath(), bfOptions);
             }
