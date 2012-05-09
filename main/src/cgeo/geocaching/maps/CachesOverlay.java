@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -245,7 +245,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             }
         }
 
-        return false;
+        return true;
     }
 
     @Override
