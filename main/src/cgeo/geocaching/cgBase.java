@@ -460,7 +460,7 @@ public class cgBase {
 
         tableInside = tableInside.substring(pos);
 
-        pos = tableInside.indexOf("<div class=\"CacheInformationTable\"");
+        pos = tableInside.indexOf("<div id=\"ctl00_ContentBody_CacheInformationTable\" class=\"CacheInformationTable\">");
         if (pos == -1) {
             Log.e(Settings.tag, "cgeoBase.parseCache: class \"CacheInformationTable\" not found on page");
             return null;
