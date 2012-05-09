@@ -200,18 +200,25 @@
                 padding:1em;
                 width:420px;
             }
-            .myLatLon { border-bottom:2px solid #c0cee3;font-style:italic; }
-            .leaflet-control-attribution 
-            {
-                font-size:8px !important;
-                font-family: "Helvetica Neue",Arial,Helvetica,sans-serif !important;
+            .myLatLon {
+            border-bottom:2px solid #c0cee3;
+            font-style:italic;
+            }
+            .leaflet-control-attribution{
+            padding:3px !important;
+            }
+            .leaflet-control-attribution img{
+            vertical-align:middle;
             }
         </style>
-    <link rel="stylesheet" type="text/css" media="all" href="/js/leaflet/dist/leaflet.css" />
+    <link rel="Stylesheet" type="text/css" media="screen" href="/hide/css/CSPScreen.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="/js/leaflet/v4/leaflet.css" />
     <!--[if IE]>
-            <link rel="stylesheet" type="text/css" media="all" href="/js/leaflet/dist/leaflet.ie.css" />
+            <link rel="stylesheet" type="text/css" media="all" href="/js/leaflet/v4/leaflet.ie.css" />
         <![endif]-->
-    <script type="text/javascript" language="javascript" src="/js/leaflet/dist/leaflet.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/leaflet/v4/leaflet.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagemethods.js"></script>
+    <script type="text/javascript" src="/js/geometa.js"></script>
     <script type="text/javascript">
         var userToken = null,
                 urlParams = {},
@@ -230,16 +237,16 @@
             }
         })();
     </script>
-<meta name="og:site_name" content="Geocaching.com" property="og:site_name" /><meta name="og:type" content="article" property="og:type" /><meta name="fb:app_id" content="100167303362705" property="fb:app_id" /><meta name="og:url" content="http://coord.info/GC2CJPF" property="og:url" /><meta name="og:description" content="Von Nachwuchs-Cachern für Nachwuchs-Cacher." property="og:description" /><meta name="og:image" content="http://www.geocaching.com/images/facebook/wpttypes/3.png" property="og:image" /><meta name="og:title" content="Kinderwald KiC" property="og:title" /><meta name="description" content="Kinderwald KiC (GC2CJPF) was created by Tom03 on 07/31/2010. It&#39;s a Small size geocache, with difficulty of 2.5, terrain of 2. It&#39;s located in Niedersachsen, Germany. Von Nachwuchs-Cachern f&#252;r Nachwuchs-Cacher. Kleiner Multi &#252;ber 7 Stationen. L&#228;nge ca. 1 km + 1km f&#252;r den R&#252;ckweg. Die ZS befinden sich alle am KLEINEN BACH innerhalb des Kinderwaldes." /><link rel="alternate" href="../datastore/rss_galleryimages.ashx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376" type="application/rss+xml" title="[Gallery Images]" id="GalleryImages" /></head>
+<meta name="og:site_name" content="Geocaching.com" property="og:site_name" /><meta name="og:type" content="article" property="og:type" /><meta name="fb:app_id" content="100167303362705" property="fb:app_id" /><meta name="og:url" content="http://www.geocaching.com/seek/cache_details.aspx?log=y&amp;wp=GC2CJPF&amp;numlogs=35&amp;decrypt=y" property="og:url" /><meta name="og:description" content="Von Nachwuchs-Cachern für Nachwuchs-Cacher." property="og:description" /><meta name="og:image" content="http://www.geocaching.com/images/facebook/wpttypes/3.png" property="og:image" /><meta name="og:title" content="Kinderwald KiC" property="og:title" /><meta name="description" content="Kinderwald KiC (GC2CJPF) was created by Tom03 on 07/31/2010. It&#39;s a Small size geocache, with difficulty of 2.5, terrain of 2. It&#39;s located in Niedersachsen, Germany. Von Nachwuchs-Cachern f&#252;r Nachwuchs-Cacher. Kleiner Multi &#252;ber 7 Stationen. L&#228;nge ca. 1 km + 1km f&#252;r den R&#252;ckweg. Die ZS befinden sich alle am KLEINEN BACH innerhalb des Kinderwaldes." /><link rel="alternate" href="../datastore/rss_galleryimages.ashx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376" type="application/rss+xml" title="[Gallery Images]" id="GalleryImages" /></head>
 <body background="http://www.blafoo.de/images/Kinderwald.jpg" class="CacheDetailsPage">
     <form name="aspnetForm" method="post" action="cache_details.aspx?log=y&amp;wp=GC2CJPF&amp;numlogs=35&amp;decrypt=y" id="aspnetForm">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
 <input type="hidden" name="__VIEWSTATEFIELDCOUNT" id="__VIEWSTATEFIELDCOUNT" value="3" />
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE3MDQ4NTMzNDQPFgIeBEMuSUQoKVlTeXN0ZW0uSW50NjQsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OQcxODExNDA5FgJmD2QWBmYPZBYKAgYPFgIeBFRleHQFYjxtZXRhIG5hbWU9IkNvcHlyaWdodCIgY29udGVudD0iQ29weXJpZ2h0IChjKSAyMDAwLTIwMTIgR3JvdW5kc3BlYWssIEluYy4gQWxsIFJpZ2h0cyBSZXNlcnZlZC4iIC8+ZAIHDxYCHwEFRzwhLS0gQ29weXJpZ2h0IChjKSAyMDAwLTIwMTIgR3JvdW5kc3BlYWssIEluYy4gQWxsIFJpZ2h0cyBSZXNlcnZlZC4gLS0+ZAIaDxYCHgRocmVmBR1+L2Nzcy90bG5NYXN0ZXJTY3JlZW4uY3NzP3I9MWQCGw8WAh8CBRV+L2Nzcy90bG5NYWluLmNzcz9yPTFkAiAPFgIeB1Zpc2libGVoZAIBD2QWDgIFDxYCHwFkZAIIDxYCHwNnFgoCAQ8PFgIeCEltYWdlVXJsBU5odHRwOi8vaW1nLmdlb2NhY2hpbmcuY29tL3VzZXIvYXZhdGFyLzUwZjgzMTIzLTI3ZDgtNGRjZi05ZmRlLTJhZjAwNmVmYWYyYi5qcGdkZAIDDxYCHwEFaEhlbGxvLCA8YSBocmVmPSIvbXkvZGVmYXVsdC5hc3B4IiB0aXRsZT0iVmlldyBQcm9maWxlIGZvciBibGFmb28iIGNsYXNzPSJTaWduZWRJblByb2ZpbGVMaW5rIj5ibGFmb288L2E+ZAIFDw8WAh4LTmF2aWdhdGVVcmwFrQFodHRwczovL3d3dy5nZW9jYWNoaW5nLmNvbS9sb2dpbi9kZWZhdWx0LmFzcHg/UkVTRVQ9WSZyZWRpcj1odHRwJTNhJTJmJTJmd3d3Lmdlb2NhY2hpbmcuY29tJTJmc2VlayUyZmNhY2hlX2RldGFpbHMuYXNweCUzZmxvZyUzZHklMjZ3cCUzZEdDMkNKUEYlMjZudW1sb2dzJTNkMzUlMjZkZWNyeXB0JTNkeWRkAgcPFgIfAQWtATxpbWcgc3JjPSIvaW1hZ2VzL2ljb25zL2ljb25fc21pbGUucG5nIiB0aXRsZT0iQ2FjaGVzIEZvdW5kIiAvPiA1MTMmbmJzcDsmbWlkZG90OyZuYnNwOzxpbWcgc3JjPSIvaW1hZ2VzL2NoYWxsZW5nZXMvdHlwZXMvc20vY2hhbGxlbmdlLnBuZyIgdGl0bGU9IkNoYWxsZW5nZXMgQ29tcGxldGVkIiAvPiAyZAILDxYCHwNnZAINDxYCHwNnFgICDQ8PFgIfBQVAfi90cmFjay9zZWFyY2guYXNweD9vPTEmdWlkPTA1NjRhOTQwLTgzMTEtNDBlZS04ZTc2LTdlOTFiMmNmNjI4NGRkAhAPDxYCHwNnZGQCLA8WAh4FY2xhc3MFDHNwYW4tMjQgbGFzdBYCAgEPZBZQAgEPZBYCZg9kFgICAQ8PFgIfAQUHR0MyQ0pQRmRkAgIPFgIfAQWxATxhIGhyZWY9Ii9hYm91dC9jYWNoZV90eXBlcy5hc3B4IiB0YXJnZXQ9Il9ibGFuayIgdGl0bGU9IkFib3V0IENhY2hlIFR5cGVzIj48aW1nIHNyYz0iL2ltYWdlcy9XcHRUeXBlcy8zLmdpZiIgYWx0PSJNdWx0aS1jYWNoZSIgdGl0bGU9Ik11bHRpLWNhY2hlIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIC8+PC9hPmQCBQ8WAh8BBQFBZAIHDxYCHwNnZAIKDxYCHwNoZAIRD2QWBAIBDxYCHwEFATdkAgMPDxYCHwUFRC9zZWVrL2NhY2hlX2Zhdm9yaXRlZC5hc3B4P2d1aWQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2ZGQCEg8PFgIfBQUZaHR0cDovL3d3dy5raW5kZXJ3YWxkLmRlL2RkAhUPFgIfA2hkAhYPFgIfA2hkAhgPFgIeBXN0eWxlBQ9kaXNwbGF5OmlubGluZTsWAgIBDxYCHwEFG1VUTTogMzJVIEUgNTQ1MTY0IE4gNTgwODUyNGQCHQ8PFgIfBQUzY2RwZi5hc3B4P2d1aWQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2ZGQCHg8PFgIfBQU4Y2RwZi5hc3B4P2d1aWQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2JmxjPTVkZAIfDw8WAh8FBTljZHBmLmFzcHg/Z3VpZD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzYmbGM9MTBkZAIgDw8WBB8FBXNodHRwOi8vbWFwcy5nb29nbGUuY29tL21hcHM/Zj1kJmhsPWVuJnNhZGRyPTUyLjQxNjIsOS41OTQxMTcgKEhvbWUgTG9jYXRpb24pJmRhZGRyPTUyLjQyNTA2Nyw5LjY2NDIoS2luZGVyd2FsZCtLaUMpHgZUYXJnZXQFBl9ibGFua2RkAiQPZBYIAgEPDxYEHglGb3JlQ29sb3IMHgRfIVNCAgRkZAIDDw8WBB8JDB8KAgRkZAIFDw8WAh8DZxYCHgdvbmNsaWNrBTtzMmdwcygnNzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2Jyk7cmV0dXJuIGZhbHNlO2QCBw8PFgIfA2cWAh8LBSBzMnBob25lKCdHQzJDSlBGJyk7cmV0dXJuIGZhbHNlO2QCJg8WAh8DZ2QCKQ9kFghmDxYCHwNoZAIBDw8WAh8DaGRkAgIPDxYCHwNoZGQCAw8WAh8DaGQCKw8PFgIfAQUHRW5jcnlwdGRkAiwPFgIfAQUbRGFzIEZpbmFsIGlzdCB1bnRlciBTdGVpbmVuZAIvD2QWBAIBDw8WBB4IQ3NzQ2xhc3NkHwoCAmRkAgQPFgIfAQUCMjJkAjAPZBYCAgEPFgIfA2cWAgIBDw8WAh8FBTgvc2Vlay9sb2cuYXNweD9MVUlEPTdjNmYwODkxLTcwMDMtNGFlNS05MjMxLWMyZTQxN2QxYzVlNGRkAjEPFgIfA2dkAjIPFgIfA2hkAjYPZBYCAgEPZBYEAgEPDxYCHwEF/wM8aWZyYW1lIHR5cGU9ImlmcmFtZSIgc3JjPSJodHRwOi8vYWRzLmdyb3VuZHNwZWFrLmNvbS9hLmFzcHg/Wm9uZUlEPTkmVGFzaz1HZXQmU2l0ZUlEPTEmWD0nZTgyYTJkNTM1ZWFmNDRlYWIzZjNjZDNlMDAyMThlNmEnIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjI0MCIgTWFyZ2lud2lkdGg9IjAiIE1hcmdpbmhlaWdodD0iMCIgSHNwYWNlPSIwIiBWc3BhY2U9IjAiIEZyYW1lYm9yZGVyPSIwIiBTY3JvbGxpbmc9Im5vIiBzdHlsZT0id2lkdGg6MTIwcHg7SGVpZ2h0OjI0MHB4OyI+PGEgaHJlZj0iaHR0cDovL2Fkcy5ncm91bmRzcGVhay5jb20vYS5hc3B4P1pvbmVJRD05JlRhc2s9Q2xpY2smO01vZGU9SFRNTCZTaXRlSUQ9MSIgdGFyZ2V0PSJfYmxhbmsiPjxpbWcgc3JjPSJodHRwOi8vYWRzLmdyb3VuZHNwZWFrLmNvbS9hLmFzcHg/Wm9uZUlEPTkmVGFzaz1HZXQmTW9kZT1IVE1MJlNpdGVJRD0xIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjI0MCIgYm9yZGVyPSIwIiBhbHQ9IiIgLz48L2E+PC9pZnJhbWU+ZGQCAw8WAh4JaW5uZXJodG1sBRNBZHZlcnRpc2luZyB3aXRoIFVzZAI6D2QWBgIFDxYCHgtfIUl0ZW1Db3VudAIBFgICAQ9kFgJmDxUDVmh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vdHJhY2svZGV0YWlscy5hc3B4P2d1aWQ9NGMzYmIyOTYtNGMzMC00NjU3LWIxMTAtYjczNzBkZmFmNTRkM2h0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vaW1hZ2VzL3dwdHR5cGVzL3NtLzIxLmdpZhhUcmF2ZWxpbmcgQnJ1dHVzIEJ1Y2tleWVkAgkPDxYCHwNnZBYCAgEPDxYEHwEFE1ZpZXcgYWxsIFRyYWNrYWJsZXMfBQVJfi90cmFjay9zZWFyY2guYXNweD93aWQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2JmNjaWQ9MTgxMTQwOWRkAgsPDxYCHwUFPH4vdHJhY2svc2VhcmNoLmFzcHg/d2lkPTczMjQ2YTVhLWViYjktNGQ0Zi04ZGI5LWE5NTEwMzZmNTM3NmRkAjsPDxYCHwNnZBYCZg8WAh8OAgEWAgIBD2QWBGYPFQMAV2h0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vYm9va21hcmtzL3ZpZXcuYXNweD9ndWlkPTNlZWVhMDU3LWY2MDUtNDg1YS1hNDVhLWY1ZmVhMTQyNjYxMhJLaW5kZXJjYWNoZXMgKEtpQylkAgIPFQJMaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9wcm9maWxlLz9ndWlkPTA1NjRhOTQwLTgzMTEtNDBlZS04ZTc2LTdlOTFiMmNmNjI4NAZibGFmb29kAjwPDxYCHwNnZBYCZg8WAh8OAgEWAgIBD2QWBGYPFQMAV2h0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vYm9va21hcmtzL3ZpZXcuYXNweD9ndWlkPTNlZWVhMDU3LWY2MDUtNDg1YS1hNDVhLWY1ZmVhMTQyNjYxMhJLaW5kZXJjYWNoZXMgKEtpQylkAgIPFQJMaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9wcm9maWxlLz9ndWlkPTA1NjRhOTQwLTgzMTEtNDBlZS04ZTc2LTdlOTFiMmNm" />
-<input type="hidden" name="__VIEWSTATE1" id="__VIEWSTATE1" value="NjI4NAZibGFmb29kAj4PZBYCAgEPDxYCHwUFRS9oaWRlL3dwdGxpc3QuYXNweD9SZWZXcHRJRD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzYmRFM9MWRkAkAPDxYEHgZSRFMuSUQLKXZHcm91bmRzcGVhay5XZWIuR1BYLldwdERhdGFTb3VyY2VzLCBUdWNzb24uQ29tbW9uLkxlZ2FjeSwgVmVyc2lvbj0zLjAuNDQyNi4yNDg1MSwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAR4HUldQVC5JRCgrBAcxODExNDA5ZBYCZg8WAh8OAgQWCmYPZBYCZg8PFgIfA2hkZAIBD2QWDGYPFQIABWZhbHNlZAICDxUJdDxpbWcgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBzcmM9Ii9pbWFnZXMvaWNvbnMvaWNvbl9ub2Nvb3Jkcy5qcGciIGFsdD0iSGlkZSBDb29yZGluYXRlcyIgdGl0bGU9IkhpZGUgQ29vcmRpbmF0ZXMiIC8+NWh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vaW1hZ2VzL3dwdHR5cGVzL3NtL2ZsYWcuanBnDkZpbmFsIExvY2F0aW9uDkZpbmFsIExvY2F0aW9uAkZOAkZOBUZJTkFMsAE8YSBocmVmPSJodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL3NlZWsvd3B0LmFzcHg/V0lEPTMwZjFiMzdjLWQzOTUtNGM3YS05NGUyLTBjNjQ5ZDVmMjMxYiZSZWZJRD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzYmUmVmRFM9MSI+R0MyQ0pQRiBGaW5hbDwvYT4gKEZpbmFsIExvY2F0aW9uKQM/Pz9kAgUPDxYCHgdUb29sVGlwBQRFZGl0ZGQCBw8PFgIfEQUDTWFwZGQCCw8PFgIeDUFsdGVybmF0ZVRleHQFBlJlbW92ZRYCHwsFQHJldHVybiBjb25maXJtKCdBcmUgeW91IHN1cmUgeW91IHdhbnQgdG8gcmVtb3ZlIHRoaXMgd2F5cG9pbnQ/JylkAgwPFQIAAGQCAg9kFgxmDxUCDkFsdGVybmF0aW5nUm93BWZhbHNlZAICDxUJYjxpbWcgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBzcmM9Ii9pbWFnZXMvaWNvbnMvaWNvbl92aWV3YWJsZS5qcGciIGFsdD0iVmlzaWJsZSIgdGl0bGU9IlZpc2libGUiIC8+NGh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vaW1hZ2VzL3dwdHR5cGVzL3NtL3BrZy5qcGcMUGFya2luZyBBcmVhDFBhcmtpbmcgQXJlYQJQSwJQSwZQQVJLTkewATxhIGhyZWY9Imh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vc2Vlay93cHQuYXNweD9XSUQ9OThjYjEzODctNDljZS00Zjk0LTliMDUtNWNiMDc5ZDMzMmIxJlJlZklEPTczMjQ2YTVhLWViYjktNGQ0Zi04ZGI5LWE5NTEwMzZmNTM3NiZSZWZEUz0xIj5HQzJDSlBGIFBhcmtpbmc8L2E+IChQYXJraW5nIEFyZWEpHE4gNTLCsCAyNS4zODQgRSAwMDnCsCAzOS4wMjNkAgUPDxYCHxEFBEVkaXRkZAIHDw8WAh8RBQNNYXBkZAILDw8WAh8SBQZSZW1vdmUWAh8LBUByZXR1cm4gY29uZmlybSgnQXJlIHlvdSBzdXJlIHlvdSB3YW50IHRvIHJlbW92ZSB0aGlzIHdheXBvaW50PycpZAIMDxUCDkFsdGVybmF0aW5nUm93N0tlaW4gIm9mZml6aWVsbGVyIiBQYXJrcGxhdHosIFBhcmtlbiB0cm90emRlbSBtw7ZnbGljaC5kAgMPZBYMZg8VAgAFZmFsc2VkAgIPFQliPGltZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHNyYz0iL2ltYWdlcy9pY29ucy9pY29uX3ZpZXdhYmxlLmpwZyIgYWx0PSJWaXNpYmxlIiB0aXRsZT0iVmlzaWJsZSIgLz43aHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9pbWFnZXMvd3B0dHlwZXMvc20vcHV6emxlLmpwZxJRdWVzdGlvbiB0byBBbnN3ZXISUXVlc3Rpb24gdG8gQW5zd2VyAlNUAlNUBVNUQVJUtAE8YSBocmVmPSJodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL3NlZWsvd3B0LmFzcHg/V0lEPTA0MTEzYmFkLTY0Y2EtNDk5YS05ODQ4LWI1OTM3ZTEzZGExYiZSZWZJRD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzYmUmVmRFM9MSI+R0MyQ0pQRiBTdGFydDwvYT4gKFF1ZXN0aW9uIHRvIEFuc3dlcikcTiA1MsKwIDI1LjUwNCBFIDAwOcKwIDM5Ljg1MmQCBQ8PFgIfEQUERWRpdGRkAgcPDxYCHxEFA01hcGRkAgsPDxYCHxIFBlJlbW92ZRYCHwsFQHJldHVybiBjb25maXJtKCdBcmUgeW91IHN1cmUgeW91IHdhbnQgdG8gcmVtb3ZlIHRoaXMgd2F5cG9pbnQ/JylkAgwPFQIAAGQCBA9kFgxmDxUCDkFsdGVybmF0aW5nUm93BWZhbHNlZAICDxUJYjxpbWcgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBzcmM9Ii9pbWFnZXMvaWNvbnMvaWNvbl92aWV3YWJsZS5qcGciIGFsdD0iVmlzaWJsZSIgdGl0bGU9IlZpc2libGUiIC8+OWh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vaW1hZ2VzL3dwdHR5cGVzL3NtL3dheXBvaW50LmpwZw9SZWZlcmVuY2UgUG9pbnQPUmVmZXJlbmNlIFBvaW50AldPAldPBlNDRU5JQ7IBPGEgaHJlZj0iaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9zZWVrL3dwdC5hc3B4P1dJRD1iMjhjNTg3OS0zMTgxLTQ1MTAtOTRmYS02ZWM1ZTMwZmQwNTYmUmVmSUQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2JlJlZkRTPTEiPkF1c3NpY2h0c3B1bmt0PC9hPiAoUmVmZXJlbmNlIFBvaW50KRxOIDUywrAgMjUuNDg4IEUgMDA5wrAgMzkuNDMyZAIFDw8WAh8RBQRFZGl0ZGQCBw8PFgIfEQUDTWFwZGQCCw8PFgIfEgUGUmVtb3ZlFgIfCwVAcmV0dXJuIGNvbmZpcm0oJ0FyZSB5b3Ugc3VyZSB5b3Ugd2FudCB0byByZW1vdmUgdGhpcyB3YXlwb2ludD8nKWQCDA8VAg5BbHRlcm5hdGluZ1Jvd09FaGVtYWxpZ2UgRmluYWxsb2NhdGlvbiB3byBlcyBnZWJyYW5udCBoYXQuIEdsZWljaHplaXRpZyBuZXR0ZXIgQXVzc2ljaHRzcHVua3QuZAJBDw8WAh8DZ2QWAgIBDw8WBB8FBSovbWFwL2RlZmF1bHQuYXNweD9sYXQ9NTIuNDI1MDY3JmxuZz05LjY2NDIfA2dkZAJFDw8WAh8FBRovc2Vlay9uZWFyZXN0LmFzcHg/dT1Ub20wM2RkAkcPDxYCHwUFGy9zZWVrL25lYXJlc3QuYXNweD91bD1Ub20wM2RkAkkPZBYKAgMPDxYCHwUFVS9zZWVrL25lYXJlc3QuYXNweD90eD1hNWY2ZDBhZC1kMmYyLTQwMTEtOGMxNC05NDBhOWViZjNjNzQmbGF0PTUyLjQyNTA2NyZsbmc9OS42NjQyMDBkZAIFDw8WAh8FBVkvc2Vlay9uZWFyZXN0LmFzcHg/dHg9YTVmNmQwYWQtZDJmMi00MDExLThjMTQtOTQwYTllYmYzYzc0JmxhdD01Mi40MjUwNjcmbG5nPTkuNjY0MjAwJmY9MWRkAgkPDxYCHwUFLS9zZWVrL25lYXJlc3QuYXNweD9sYXQ9NTIuNDI1MDY3JmxuZz05LjY2NDIwMGRkAgsPDxYCHwUFMS9zZWVrL25lYXJlc3QuYXNweD9sYXQ9NTIuNDI1MDY3JmxuZz05LjY2NDIwMCZmPTFkZAIPDw8WAh8FBUdodHRwOi8vd3d3LndheW1hcmtpbmcuY29tL2RpcmVjdG9yeS5hc3B4P2Y9MSZsYXQ9NTIuNDI1MDY3Jmxvbj05LjY2NDIwMGRkAkoPFgIfA2hkAkwPDxYCHwUFJS9yZXZpZXdzL2hvdGVscy1jb29yZHMtNTIuNDI1MSw5LjY2NDJkZAJOD2QWAgIBDw8WBB8BBZAHPGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vbWFwL2RlZmF1bHQuYXNweD9sYXQ9NTIuNDI1MDY3JmxuZz05LjY2NDIiIHRhcmdldD0iX2JsYW5rIj5HZW9jYWNoaW5nLmNvbSBHb29nbGUgTWFwPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9xPU4rNTIlYzIlYjArMjUuNTA0K0UrMDA5JWMyJWIwKzM5Ljg1MisoR0MyQ0pQRikrIiB0YXJnZXQ9Il9ibGFuayI+R29vZ2xlIE1hcHM8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5tYXBxdWVzdC5jb20vbWFwcy9tYXAuYWRwP3NlYXJjaHR5cGU9YWRkcmVzcyZmb3JtdHlwZT1sYXRsb25nJmxhdGxvbmd0eXBlPWRlY2ltYWwmbGF0aXR1ZGU9NTIuNDI1MDY3JmxvbmdpdHVkZT05LjY2NDImem9vbT0xMCIgdGFyZ2V0PSJfYmxhbmsiPk1hcFF1ZXN0PC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly9tYXBzLnlhaG9vLmNvbS9tYXBzX3Jlc3VsdD9sYXQ9NTIuNDI1" />
-<input type="hidden" name="__VIEWSTATE2" id="__VIEWSTATE2" value="MDY3Jmxvbj05LjY2NDIiIHRhcmdldD0iX2JsYW5rIj5ZYWhvbyBNYXBzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cuYmluZy5jb20vbWFwcy9kZWZhdWx0LmFzcHg/dj0yJnNwPXBvaW50LjUyLjQyNTA2N185LjY2NDJfR0MyQ0pQRiIgdGFyZ2V0PSJfYmxhbmsiPkJpbmcgTWFwczwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vd3d3Lm9wZW5jeWNsZW1hcC5vcmcvP3pvb209MTImbGF0PTUyLjQyNTA2NyZsb249OS42NjQyIiB0YXJnZXQ9Il9ibGFuayI+T3BlbiBDeWNsZSBNYXBzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cub3BlbnN0cmVldG1hcC5vcmcvP21sYXQ9NTIuNDI1MDY3Jm1sb249OS42NjQyJnpvb209MTIiIHRhcmdldD0iX2JsYW5rIj5PcGVuIFN0cmVldCBNYXBzPC9hPjwvbGk+HwNnZGQCUA9kFgYCAQ8WAh8BBRA4MyBMb2dnZWQgVmlzaXRzZAIHDw8WAh8FBUN+L3NlZWsvY2FjaGVfbG9nYm9vay5hc3B4P2d1aWQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2ZGQCCQ8PFgQfBQU9fi9zZWVrL2dhbGxlcnkuYXNweD9ndWlkPTczMjQ2YTVhLWViYjktNGQ0Zi04ZGI5LWE5NTEwMzZmNTM3Nh8BBSNWaWV3IHRoZSBJbWFnZSBHYWxsZXJ5IG9mIDE0IGltYWdlc2RkAlEPFgIfAQUEdHJ1ZWQCUg8WAh8BBUlsYXQ9NTIuNDI1MDY3OyBsbmc9OS42NjQyOyBndWlkPSc3MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzYnOw0KZAJTDxYCHwEFcXRyeSB7IF9nYXEucHVzaChbJ190cmFja0V2ZW50JywgJ0dlb2NhY2hpbmcnLCAnQ2FjaGVEZXRhaWxzTWVtYmVyVHlwZScsICdQcmVtaXVtJywgbnVsbCwgdHJ1ZV0pOyB9IGNhdGNoKGVycikgeyB9ZAItDxYCHwNoZAIuD2QWBAIBDxYCHwEFB0VuZ2xpc2hkAgMPFgIfDgIPFh5mD2QWAgIBDw8WCB4PQ29tbWFuZEFyZ3VtZW50BQVlbi1VUx4LQ29tbWFuZE5hbWUFDVNldFRlbXBMb2NhbGUfAQUHRW5nbGlzaB4QQ2F1c2VzVmFsaWRhdGlvbmhkZAIBD2QWAgIBDw8WCB8TBQVkZS1ERR8UBQ1TZXRUZW1wTG9jYWxlHwEFB0RldXRzY2gfFWhkZAICD2QWAgIBDw8WCB8TBQVmci1GUh8UBQ1TZXRUZW1wTG9jYWxlHwEFCUZyYW7Dp2Fpcx8VaGRkAgMPZBYCAgEPDxYIHxMFBXB0LVBUHxQFDVNldFRlbXBMb2NhbGUfAQUKUG9ydHVndcOqcx8VaGRkAgQPZBYCAgEPDxYIHxMFBWNzLUNaHxQFDVNldFRlbXBMb2NhbGUfAQUJxIxlxaF0aW5hHxVoZGQCBQ9kFgICAQ8PFggfEwUFc3YtU0UfFAUNU2V0VGVtcExvY2FsZR8BBQdTdmVuc2thHxVoZGQCBg9kFgICAQ8PFggfEwUFbmwtTkwfFAUNU2V0VGVtcExvY2FsZR8BBQpOZWRlcmxhbmRzHxVoZGQCBw9kFgICAQ8PFggfEwUFY2EtRVMfFAUNU2V0VGVtcExvY2FsZR8BBQdDYXRhbMOgHxVoZGQCCA9kFgICAQ8PFggfEwUFcGwtUEwfFAUNU2V0VGVtcExvY2FsZR8BBQZQb2xza2kfFWhkZAIJD2QWAgIBDw8WCB8TBQVldC1FRR8UBQ1TZXRUZW1wTG9jYWxlHwEFBUVlc3RpHxVoZGQCCg9kFgICAQ8PFggfEwUFbmItTk8fFAUNU2V0VGVtcExvY2FsZR8BBQ5Ob3JzaywgQm9rbcOlbB8VaGRkAgsPZBYCAgEPDxYIHxMFBWtvLUtSHxQFDVNldFRlbXBMb2NhbGUfAQUJ7ZWc6rWt7Ja0HxVoZGQCDA9kFgICAQ8PFggfEwUFZXMtRVMfFAUNU2V0VGVtcExvY2FsZR8BBQhFc3Bhw7FvbB8VaGRkAg0PZBYCAgEPDxYIHxMFBWh1LUhVHxQFDVNldFRlbXBMb2NhbGUfAQUGTWFneWFyHxVoZGQCDg9kFgICAQ8PFggfEwUFcm8tUk8fFAUNU2V0VGVtcExvY2FsZR8BBQhSb23Dom7Egx8VaGRkAgMPFgIfAQUrU2VydmVyOiBXRUIwMjsgQnVpbGQ6IFdlYi5Ib3RGaXhfMjAxMjAyMTMuNGRk1655JiA1P7FZXuMiqVUa4tv12I0=" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNTIzMzkwMzA0DxYCHgRDLklEKClZU3lzdGVtLkludDY0LCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkHMTgxMTQwORYCZg9kFgZmD2QWCgIGDxYCHgRUZXh0BWI8bWV0YSBuYW1lPSJDb3B5cmlnaHQiIGNvbnRlbnQ9IkNvcHlyaWdodCAoYykgMjAwMC0yMDEyIEdyb3VuZHNwZWFrLCBJbmMuIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIiAvPmQCBw8WAh8BBUc8IS0tIENvcHlyaWdodCAoYykgMjAwMC0yMDEyIEdyb3VuZHNwZWFrLCBJbmMuIEFsbCBSaWdodHMgUmVzZXJ2ZWQuIC0tPmQCGg8WAh4EaHJlZgUdfi9jc3MvdGxuTWFzdGVyU2NyZWVuLmNzcz9yPTFkAhsPFgIfAgUVfi9jc3MvdGxuTWFpbi5jc3M/cj0xZAIgDxYCHgdWaXNpYmxlaGQCAQ9kFhACBQ8WAh8BZGQCCA8WAh8DZxYIAgEPDxYCHghJbWFnZVVybAVOaHR0cDovL2ltZy5nZW9jYWNoaW5nLmNvbS91c2VyL2F2YXRhci81MGY4MzEyMy0yN2Q4LTRkY2YtOWZkZS0yYWYwMDZlZmFmMmIuanBnZGQCAw8WAh8BBWhIZWxsbywgPGEgaHJlZj0iL215L2RlZmF1bHQuYXNweCIgdGl0bGU9IlZpZXcgUHJvZmlsZSBmb3IgYmxhZm9vIiBjbGFzcz0iU2lnbmVkSW5Qcm9maWxlTGluayI+YmxhZm9vPC9hPmQCBQ8PFgIeC05hdmlnYXRlVXJsBa0BaHR0cHM6Ly93d3cuZ2VvY2FjaGluZy5jb20vbG9naW4vZGVmYXVsdC5hc3B4P1JFU0VUPVkmcmVkaXI9aHR0cCUzYSUyZiUyZnd3dy5nZW9jYWNoaW5nLmNvbSUyZnNlZWslMmZjYWNoZV9kZXRhaWxzLmFzcHglM2Zsb2clM2R5JTI2d3AlM2RHQzJDSlBGJTI2bnVtbG9ncyUzZDM1JTI2ZGVjcnlwdCUzZHlkZAILDxYCHwEFqwE8aW1nIHNyYz0iL2ltYWdlcy9pY29ucy9pY29uX3NtaWxlLnBuZyIgdGl0bGU9IkNhY2hlcyBGb3VuZCIgLz4gNTc5Jm5ic3A7Jm5ic3A7Jm5ic3A7PGltZyBzcmM9Ii9pbWFnZXMvY2hhbGxlbmdlcy90eXBlcy9zbS9jaGFsbGVuZ2UucG5nIiB0aXRsZT0iQ2hhbGxlbmdlcyBDb21wbGV0ZWQiIC8+IDNkAg0PFgIfA2cWAgINDw8WAh8FBUB+L3RyYWNrL3NlYXJjaC5hc3B4P289MSZ1aWQ9MDU2NGE5NDAtODMxMS00MGVlLThlNzYtN2U5MWIyY2Y2Mjg0ZGQCEA8PFgIfA2dkZAIsD2QWAgIDDxYCHwNoZAItDxYCHgVjbGFzcwUMc3Bhbi0yNCBsYXN0FgICAQ9kFkYCAQ9kFgJmD2QWAgIBDw8WAh8BBQdHQzJDSlBGZGQCAg8WAh8BBbEBPGEgaHJlZj0iL2Fib3V0L2NhY2hlX3R5cGVzLmFzcHgiIHRhcmdldD0iX2JsYW5rIiB0aXRsZT0iQWJvdXQgQ2FjaGUgVHlwZXMiPjxpbWcgc3JjPSIvaW1hZ2VzL1dwdFR5cGVzLzMuZ2lmIiBhbHQ9Ik11bHRpLWNhY2hlIiB0aXRsZT0iTXVsdGktY2FjaGUiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgLz48L2E+ZAIFDxYCHwEFAUFkAgcPFgIfA2dkAgoPFgIfA2hkAhEPZBYEAgEPFgIfAQUBOWQCAw8PFgIfBQVEL3NlZWsvY2FjaGVfZmF2b3JpdGVkLmFzcHg/Z3VpZD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzZkZAITDw8WAh8FBRlodHRwOi8vd3d3LmtpbmRlcndhbGQuZGUvZGQCFg8WAh8DaGQCFw8WAh8DaGQCGA9kFgwCAw8WAh4Fc3R5bGUFD2Rpc3BsYXk6aW5saW5lOxYCAgEPFgIfAQUbVVRNOiAzMlUgRSA1NDUxNjQgTiA1ODA4NTI0ZAINDw8WAh8FBTNjZHBmLmFzcHg/Z3VpZD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzZkZAIPDw8WAh8FBThjZHBmLmFzcHg/Z3VpZD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzYmbGM9NWRkAhEPDxYCHwUFOWNkcGYuYXNweD9ndWlkPTczMjQ2YTVhLWViYjktNGQ0Zi04ZGI5LWE5NTEwMzZmNTM3NiZsYz0xMGRkAhMPDxYEHwUFc2h0dHA6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPWQmaGw9ZW4mc2FkZHI9NTIuNDE2Miw5LjU5NDExNyAoSG9tZSBMb2NhdGlvbikmZGFkZHI9NTIuNDI1MDY3LDkuNjY0MihLaW5kZXJ3YWxkK0tpQykeBlRhcmdldAUGX2JsYW5rZGQCGw9kFggCAQ8PFgQeCUZvcmVDb2xvcgweBF8hU0ICBGRkAgMPDxYEHwkMHwoCBGRkAgUPDxYCHwNnFgIeB29uY2xpY2sFO3MyZ3BzKCc3MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzYnKTtyZXR1cm4gZmFsc2U7ZAIHDw8WAh8DZxYCHwsFIHMycGhvbmUoJ0dDMkNKUEYnKTtyZXR1cm4gZmFsc2U7ZAIaDxYCHwNnZAIdD2QWCGYPFgIfA2hkAgEPDxYCHwNoZGQCAg8PFgIfA2hkZAIDDxYCHwNoZAIfDw8WAh8BBQdFbmNyeXB0ZGQCIA8WAh8BBRtEYXMgRmluYWwgaXN0IHVudGVyIFN0ZWluZW5kAiMPZBYEAgEPDxYEHghDc3NDbGFzc2QfCgICZGQCBA8WAh8BBQIyMmQCJA9kFgICAQ8WAh8DZxYCAgEPDxYCHwUFOC9zZWVrL2xvZy5hc3B4P0xVSUQ9N2M2ZjA4OTEtNzAwMy00YWU1LTkyMzEtYzJlNDE3ZDFjNWU0ZGQCJQ8WAh8DZ2QCJg8WAh8DaGQCKg9kFgICAQ9kFgQCAQ8PFgIfAQX/AzxpZnJhbWUgdHlwZT0iaWZyYW1lIiBzcmM9Imh0dHA6Ly9hZHMuZ3JvdW5kc3BlYWsuY29tL2EuYXNweD9ab25lSUQ9OSZUYXNrPUdldCZTaXRlSUQ9MSZYPSc3ZTVkMWNiNzdiOGI0MTU3ODYzZjVjYWUxZjcyMjhiNyciIHdpZHRoPSIxMjAiIGhlaWdodD0iMjQwIiBNYXJnaW53aWR0aD0iMCIgTWFyZ2luaGVpZ2h0PSIwIiBIc3BhY2U9IjAiIFZzcGFjZT0iMCIgRnJhbWVib3JkZXI9IjAiIFNjcm9sbGluZz0ibm8iIHN0eWxlPSJ3aWR0aDoxMjBweDtIZWlnaHQ6MjQwcHg7Ij48YSBocmVmPSJodHRwOi8vYWRzLmdyb3VuZHNwZWFrLmNvbS9hLmFzcHg/Wm9uZUlEPTkmVGFzaz1DbGljayY7TW9kZT1IVE1MJlNpdGVJRD0xIiB0YXJnZXQ9Il9ibGFuayI+PGltZyBzcmM9Imh0dHA6Ly9hZHMuZ3JvdW5kc3BlYWsuY29tL2EuYXNweD9ab25lSUQ9OSZUYXNrPUdldCZNb2RlPUhUTUwmU2l0ZUlEPTEiIHdpZHRoPSIxMjAiIGhlaWdodD0iMjQwIiBib3JkZXI9IjAiIGFsdD0iIiAvPjwvYT48L2lmcmFtZT5kZAIDDxYCHglpbm5lcmh0bWwFE0FkdmVydGlzaW5nIHdpdGggVXNkAi4PZBYEAgcPDxYCHwNnZGQCCw8PFgIfBQU8fi90cmFjay9zZWFyY2guYXNweD93aWQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2ZGQCLw8PFgIfA2dkFgJmDxYCHgtfIUl0ZW1Db3VudAIBFgICAQ9kFgRmDxUDAFdodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL2Jvb2ttYXJrcy92aWV3LmFzcHg/Z3VpZD0zZWVlYTA1Ny1mNjA1LTQ4NWEtYTQ1YS1mNWZlYTE0MjY2MTISS2luZGVyY2FjaGVzIChLaUMpZAICDxUCTGh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vcHJvZmlsZS8/Z3VpZD0wNTY0YTk0MC04MzExLTQwZWUtOGU3Ni03ZTkxYjJjZjYyODQGYmxhZm9vZAIwDw8WAh8DZ2QWAmYPFgIfDgIBFgICAQ9kFgRmDxUDAFdodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL2Jvb2ttYXJrcy92aWV3LmFzcHg/Z3VpZD0zZWVlYTA1Ny1mNjA1LTQ4NWEtYTQ1YS1mNWZlYTE0MjY2MTISS2luZGVyY2FjaGVzIChLaUMpZAICDxUCTGh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vcHJvZmlsZS8/Z3VpZD0wNTY0YTk0MC04MzExLTQwZWUtOGU3Ni03ZTkxYjJjZjYyODQGYmxhZm9vZAIyD2QWAgIBDw8WAh8FBUUvaGlkZS93cHRsaXN0LmFzcHg/UmVmV3B0SUQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2JkRTPTFkZAI0Dw8WBB4GUkRTLklECyl2R3JvdW5kc3BlYWsuV2ViLkdQWC5XcHREYXRhU291cmNlcywgVHVjc29uLkNvbW1vbi5MZWdhY3ksIFZlcnNpb249My4wLjQ1MTEuMTM3NTIsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAEeB1JXUFQuSUQoKwQHMTgxMTQwOWQWAmYPFgIfDgIEFgpmD2QWAmYPDxYCHwNoZGQCAQ9k" />
+<input type="hidden" name="__VIEWSTATE1" id="__VIEWSTATE1" value="FgxmDxUCAAVmYWxzZWQCAg8VCXQ8aW1nIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgc3JjPSIvaW1hZ2VzL2ljb25zL2ljb25fbm9jb29yZHMuanBnIiBhbHQ9IkhpZGUgQ29vcmRpbmF0ZXMiIHRpdGxlPSJIaWRlIENvb3JkaW5hdGVzIiAvPjVodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL2ltYWdlcy93cHR0eXBlcy9zbS9mbGFnLmpwZw5GaW5hbCBMb2NhdGlvbg5GaW5hbCBMb2NhdGlvbgJGTgJGTgVGSU5BTLABPGEgaHJlZj0iaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9zZWVrL3dwdC5hc3B4P1dJRD0zMGYxYjM3Yy1kMzk1LTRjN2EtOTRlMi0wYzY0OWQ1ZjIzMWImUmVmSUQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2JlJlZkRTPTEiPkdDMkNKUEYgRmluYWw8L2E+IChGaW5hbCBMb2NhdGlvbikDPz8/ZAIFDw8WAh4HVG9vbFRpcAUERWRpdGRkAgcPDxYCHxEFA01hcGRkAgsPDxYCHg1BbHRlcm5hdGVUZXh0BQZSZW1vdmUWAh8LBUByZXR1cm4gY29uZmlybSgnQXJlIHlvdSBzdXJlIHlvdSB3YW50IHRvIHJlbW92ZSB0aGlzIHdheXBvaW50PycpZAIMDxUCAABkAgIPZBYMZg8VAg5BbHRlcm5hdGluZ1JvdwVmYWxzZWQCAg8VCWI8aW1nIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgc3JjPSIvaW1hZ2VzL2ljb25zL2ljb25fdmlld2FibGUuanBnIiBhbHQ9IlZpc2libGUiIHRpdGxlPSJWaXNpYmxlIiAvPjRodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL2ltYWdlcy93cHR0eXBlcy9zbS9wa2cuanBnDFBhcmtpbmcgQXJlYQxQYXJraW5nIEFyZWECUEsCUEsGUEFSS05HsAE8YSBocmVmPSJodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL3NlZWsvd3B0LmFzcHg/V0lEPTk4Y2IxMzg3LTQ5Y2UtNGY5NC05YjA1LTVjYjA3OWQzMzJiMSZSZWZJRD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzYmUmVmRFM9MSI+R0MyQ0pQRiBQYXJraW5nPC9hPiAoUGFya2luZyBBcmVhKRxOIDUywrAgMjUuMzg0IEUgMDA5wrAgMzkuMDIzZAIFDw8WAh8RBQRFZGl0ZGQCBw8PFgIfEQUDTWFwZGQCCw8PFgIfEgUGUmVtb3ZlFgIfCwVAcmV0dXJuIGNvbmZpcm0oJ0FyZSB5b3Ugc3VyZSB5b3Ugd2FudCB0byByZW1vdmUgdGhpcyB3YXlwb2ludD8nKWQCDA8VAg5BbHRlcm5hdGluZ1JvdzdLZWluICJvZmZpemllbGxlciIgUGFya3BsYXR6LCBQYXJrZW4gdHJvdHpkZW0gbcO2Z2xpY2guZAIDD2QWDGYPFQIABWZhbHNlZAICDxUJYjxpbWcgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBzcmM9Ii9pbWFnZXMvaWNvbnMvaWNvbl92aWV3YWJsZS5qcGciIGFsdD0iVmlzaWJsZSIgdGl0bGU9IlZpc2libGUiIC8+N2h0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vaW1hZ2VzL3dwdHR5cGVzL3NtL3B1enpsZS5qcGcSUXVlc3Rpb24gdG8gQW5zd2VyElF1ZXN0aW9uIHRvIEFuc3dlcgJTVAJTVAVTVEFSVLQBPGEgaHJlZj0iaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9zZWVrL3dwdC5hc3B4P1dJRD0wNDExM2JhZC02NGNhLTQ5OWEtOTg0OC1iNTkzN2UxM2RhMWImUmVmSUQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2JlJlZkRTPTEiPkdDMkNKUEYgU3RhcnQ8L2E+IChRdWVzdGlvbiB0byBBbnN3ZXIpHE4gNTLCsCAyNS41MDQgRSAwMDnCsCAzOS44NTJkAgUPDxYCHxEFBEVkaXRkZAIHDw8WAh8RBQNNYXBkZAILDw8WAh8SBQZSZW1vdmUWAh8LBUByZXR1cm4gY29uZmlybSgnQXJlIHlvdSBzdXJlIHlvdSB3YW50IHRvIHJlbW92ZSB0aGlzIHdheXBvaW50PycpZAIMDxUCAABkAgQPZBYMZg8VAg5BbHRlcm5hdGluZ1JvdwVmYWxzZWQCAg8VCWI8aW1nIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgc3JjPSIvaW1hZ2VzL2ljb25zL2ljb25fdmlld2FibGUuanBnIiBhbHQ9IlZpc2libGUiIHRpdGxlPSJWaXNpYmxlIiAvPjlodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL2ltYWdlcy93cHR0eXBlcy9zbS93YXlwb2ludC5qcGcPUmVmZXJlbmNlIFBvaW50D1JlZmVyZW5jZSBQb2ludAJXTwJXTwZTQ0VOSUOyATxhIGhyZWY9Imh0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vc2Vlay93cHQuYXNweD9XSUQ9YjI4YzU4NzktMzE4MS00NTEwLTk0ZmEtNmVjNWUzMGZkMDU2JlJlZklEPTczMjQ2YTVhLWViYjktNGQ0Zi04ZGI5LWE5NTEwMzZmNTM3NiZSZWZEUz0xIj5BdXNzaWNodHNwdW5rdDwvYT4gKFJlZmVyZW5jZSBQb2ludCkcTiA1MsKwIDI1LjQ4OCBFIDAwOcKwIDM5LjQzMmQCBQ8PFgIfEQUERWRpdGRkAgcPDxYCHxEFA01hcGRkAgsPDxYCHxIFBlJlbW92ZRYCHwsFQHJldHVybiBjb25maXJtKCdBcmUgeW91IHN1cmUgeW91IHdhbnQgdG8gcmVtb3ZlIHRoaXMgd2F5cG9pbnQ/JylkAgwPFQIOQWx0ZXJuYXRpbmdSb3dPRWhlbWFsaWdlIEZpbmFsbG9jYXRpb24gd28gZXMgZ2VicmFubnQgaGF0LiBHbGVpY2h6ZWl0aWcgbmV0dGVyIEF1c3NpY2h0c3B1bmt0LmQCNQ8PFgIfA2dkFgICAQ8PFgQfBQUqL21hcC9kZWZhdWx0LmFzcHg/bGF0PTUyLjQyNTA2NyZsbmc9OS42NjQyHwNnZGQCOQ8PFgIfBQUaL3NlZWsvbmVhcmVzdC5hc3B4P3U9VG9tMDNkZAI7Dw8WAh8FBRsvc2Vlay9uZWFyZXN0LmFzcHg/dWw9VG9tMDNkZAI9D2QWCgIDDw8WAh8FBVUvc2Vlay9uZWFyZXN0LmFzcHg/dHg9YTVmNmQwYWQtZDJmMi00MDExLThjMTQtOTQwYTllYmYzYzc0JmxhdD01Mi40MjUwNjcmbG5nPTkuNjY0MjAwZGQCBQ8PFgIfBQVZL3NlZWsvbmVhcmVzdC5hc3B4P3R4PWE1ZjZkMGFkLWQyZjItNDAxMS04YzE0LTk0MGE5ZWJmM2M3NCZsYXQ9NTIuNDI1MDY3JmxuZz05LjY2NDIwMCZmPTFkZAIJDw8WAh8FBS0vc2Vlay9uZWFyZXN0LmFzcHg/bGF0PTUyLjQyNTA2NyZsbmc9OS42NjQyMDBkZAILDw8WAh8FBTEvc2Vlay9uZWFyZXN0LmFzcHg/bGF0PTUyLjQyNTA2NyZsbmc9OS42NjQyMDAmZj0xZGQCDw8PFgIfBQVHaHR0cDovL3d3dy53YXltYXJraW5nLmNvbS9kaXJlY3RvcnkuYXNweD9mPTEmbGF0PTUyLjQyNTA2NyZsb249OS42NjQyMDBkZAI+DxYCHwNoZAJADw8WAh8FBSUvcmV2aWV3cy9ob3RlbHMtY29vcmRzLTUyLjQyNTEsOS42NjQyZGQCQg9kFgICAQ8PFgQfAQW0BzxsaT48YSBocmVmPSJodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL21hcC9kZWZhdWx0LmFzcHg/bGF0PTUyLjQyNTA3JmxuZz05LjY2NDIiIHRhcmdldD0iX2JsYW5rIj5HZW9jYWNoaW5nLmNvbSBNYXA8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL21hcHMuZ29vZ2xlLmNvbS9tYXBzP3E9Tis1MiVjMiViMCsyNS41MDQrRSswMDklYzIlYjArMzkuODUyKyhHQzJDSlBGKSsiIHRhcmdldD0iX2JsYW5rIj5Hb29nbGUgTWFwczwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vd3d3Lm1hcHF1ZXN0LmNvbS9tYXBzL21hcC5hZHA/c2VhcmNodHlwZT1hZGRyZXNzJmZvcm10eXBlPWxhdGxvbmcmbGF0bG9uZ3R5cGU9ZGVjaW1hbCZsYXRpdHVkZT01Mi40MjUwNyZsb25naXR1ZGU9OS42NjQyJnpvb209MTAiIHRhcmdldD0iX2JsYW5rIj5NYXBRdWVzdDwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vbWFwcy55YWhvby5jb20vI2xhdD01Mi40MjUwNyZsb249OS42NjQyJnpvb209MTYmcT01Mi40MjUwNyw5LjY2NDImY29uZj0xJnN0YXJ0PTEmbXZ0PW0mdHJmPTAiIHRhcmdldD0iX2JsYW5rIj5ZYWhvbyBNYXBzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cuYmluZy5jb20vbWFwcy9kZWZhdWx0LmFzcHg/dj0yJmx2bD0xNCZzcD1wb2ludC41Mi40MjUwN185LjY2NDJfR0MyQ0pQRiIgdGFyZ2V0PSJfYmxhbmsiPkJpbmcgTWFwczwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vd3d3Lm9wZW5jeWNsZW1hcC5vcmcvP3pvb209MTImbGF0PTUyLjQyNTA3Jmxvbj05LjY2NDIi" />
+<input type="hidden" name="__VIEWSTATE2" id="__VIEWSTATE2" value="IHRhcmdldD0iX2JsYW5rIj5PcGVuIEN5Y2xlIE1hcHM8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5vcGVuc3RyZWV0bWFwLm9yZy8/bWxhdD01Mi40MjUwNyZtbG9uPTkuNjY0MiZ6b29tPTEyIiB0YXJnZXQ9Il9ibGFuayI+T3BlbiBTdHJlZXQgTWFwczwvYT48L2xpPh8DZ2RkAkQPZBYGAgEPFgIfAQURMTA2IExvZ2dlZCBWaXNpdHNkAgcPDxYCHwUFQ34vc2Vlay9jYWNoZV9sb2dib29rLmFzcHg/Z3VpZD03MzI0NmE1YS1lYmI5LTRkNGYtOGRiOS1hOTUxMDM2ZjUzNzZkZAIJDw8WBB8FBT1+L3NlZWsvZ2FsbGVyeS5hc3B4P2d1aWQ9NzMyNDZhNWEtZWJiOS00ZDRmLThkYjktYTk1MTAzNmY1Mzc2HwEFI1ZpZXcgdGhlIEltYWdlIEdhbGxlcnkgb2YgMTYgaW1hZ2VzZGQCRQ8WAh8BBQR0cnVlZAJGDxYCHwEFSWxhdD01Mi40MjUwNjc7IGxuZz05LjY2NDI7IGd1aWQ9JzczMjQ2YTVhLWViYjktNGQ0Zi04ZGI5LWE5NTEwMzZmNTM3Nic7DQpkAkcPFgIfAQVxdHJ5IHsgX2dhcS5wdXNoKFsnX3RyYWNrRXZlbnQnLCAnR2VvY2FjaGluZycsICdDYWNoZURldGFpbHNNZW1iZXJUeXBlJywgJ1ByZW1pdW0nLCBudWxsLCB0cnVlXSk7IH0gY2F0Y2goZXJyKSB7IH1kAi4PFgIfA2hkAi8PZBYEAgEPFgIfAQUHRW5nbGlzaGQCAw8WAh8OAg8WHmYPZBYCAgEPDxYIHg9Db21tYW5kQXJndW1lbnQFBWVuLVVTHgtDb21tYW5kTmFtZQUNU2V0VGVtcExvY2FsZR8BBQdFbmdsaXNoHhBDYXVzZXNWYWxpZGF0aW9uaGRkAgEPZBYCAgEPDxYIHxMFBWRlLURFHxQFDVNldFRlbXBMb2NhbGUfAQUHRGV1dHNjaB8VaGRkAgIPZBYCAgEPDxYIHxMFBWZyLUZSHxQFDVNldFRlbXBMb2NhbGUfAQUJRnJhbsOnYWlzHxVoZGQCAw9kFgICAQ8PFggfEwUFcHQtUFQfFAUNU2V0VGVtcExvY2FsZR8BBQpQb3J0dWd1w6pzHxVoZGQCBA9kFgICAQ8PFggfEwUFY3MtQ1ofFAUNU2V0VGVtcExvY2FsZR8BBQnEjGXFoXRpbmEfFWhkZAIFD2QWAgIBDw8WCB8TBQVzdi1TRR8UBQ1TZXRUZW1wTG9jYWxlHwEFB1N2ZW5za2EfFWhkZAIGD2QWAgIBDw8WCB8TBQVubC1OTB8UBQ1TZXRUZW1wTG9jYWxlHwEFCk5lZGVybGFuZHMfFWhkZAIHD2QWAgIBDw8WCB8TBQVjYS1FUx8UBQ1TZXRUZW1wTG9jYWxlHwEFB0NhdGFsw6AfFWhkZAIID2QWAgIBDw8WCB8TBQVwbC1QTB8UBQ1TZXRUZW1wTG9jYWxlHwEFBlBvbHNraR8VaGRkAgkPZBYCAgEPDxYIHxMFBWV0LUVFHxQFDVNldFRlbXBMb2NhbGUfAQUFRWVzdGkfFWhkZAIKD2QWAgIBDw8WCB8TBQVuYi1OTx8UBQ1TZXRUZW1wTG9jYWxlHwEFDk5vcnNrLCBCb2ttw6VsHxVoZGQCCw9kFgICAQ8PFggfEwUFa28tS1IfFAUNU2V0VGVtcExvY2FsZR8BBQntlZzqta3slrQfFWhkZAIMD2QWAgIBDw8WCB8TBQVlcy1FUx8UBQ1TZXRUZW1wTG9jYWxlHwEFCEVzcGHDsW9sHxVoZGQCDQ9kFgICAQ8PFggfEwUFaHUtSFUfFAUNU2V0VGVtcExvY2FsZR8BBQZNYWd5YXIfFWhkZAIOD2QWAgIBDw8WCB8TBQVyby1STx8UBQ1TZXRUZW1wTG9jYWxlHwEFCFJvbcOibsSDHxVoZGQCAw8WAh8BBStTZXJ2ZXI6IFdFQjE3OyBCdWlsZDogV2ViLkhvdEZpeF8yMDEyMDUwOC4yZGS4CQcP6ESmiwyYzlDNW0DphrmwKw==" />
 </div>
 
 <script type="text/javascript">
@@ -259,13 +266,13 @@ function __doPostBack(eventTarget, eventArgument) {
 </script>
 
 
-<script src="/WebResource.axd?d=Dh2VENdI9XyWNN0f7DnYfR8WWRCRIzdVqal2y0yjiQ5nC_eHhLchYgnQDHIk0d3RCcSUMVZ36ciRD0qmhXKmeu3S_RE1&amp;t=634449413070371108" type="text/javascript"></script>
+<script src="/WebResource.axd?d=Dh2VENdI9XyWNN0f7DnYfR8WWRCRIzdVqal2y0yjiQ5nC_eHhLchYgnQDHIk0d3RCcSUMVZ36ciRD0qmhXKmeu3S_RE1&amp;t=634708844153247068" type="text/javascript"></script>
 
 
-<script src="/ScriptResource.axd?d=I9_m2Hb1Tv_B0qTMDG8bMbnkNSHUkv5oUaG9-V5NZ8qQ2VFlu60I8y8gfr3vPmZjbiPnu43MOQdFVDeYF-nDAEKBLmyxD3DCTGmes9NNbbvaDEHyEuuRWgccIkK3ik5TI48YGDxjHjqdn-gTK4Fkgd17LGw1&amp;t=2610f696" type="text/javascript"></script>
-<script src="/ScriptResource.axd?d=8vNbe34dAujgZMPnfnacfjeoweX1vHgyns8KlAV4vpGpsZC9Cf3pro__lv8ekBa0NiCgXGMMolzOUNH__lrnEI_qjlNBIAuuLeemtAXV_i6E0QIMZa8nGSYmWGF5nQOJK3rmZzvTxsr2Mh4Ebdba_1ywGLUSH_U_XIe-jzecfRQwwvjZ0&amp;t=2610f696" type="text/javascript"></script>
-<script src="/ScriptResource.axd?d=2jdNC2D7ot6lEFIEEJyYsOB9NSwVD5pdjWE2hpM8JhgGDEs_3zj3g0rJ9voFS7KLAH-Xe9jIZEeLZ4F0SZh_k1yfB7H2oxgLo3W8HwkqoAM6CTyvsrrAC6DYetsH1LLhhu8Cp-y2GGtVGeETjhtdngA9w7RKfkoa-NxeOXqAV-czoGhTf3xeYxhuZYV29YZj3Ax-Dv4_Au0l4_63VcimvxRXajk1" type="text/javascript"></script>
-<script src="/ScriptResource.axd?d=McH91wSR9oVNvyYD6Jh_rOa4m0RfzKuKVQ0t8QqGtHR6OPEN12p1eMHxh1hJom5pjb9g8WyfiSqnohH_KpKI15rPiYDzgdf5vMP3qDQ51FyzVQ-LOBQd20gPOn3DRK7_az8s5F3gI3sXQoPIXnlykFMypix1gDXdy0b5t3ANsiXlrCjA_4eslqBdKCYOy0iWV5SlfyS3yAV9lz5jBPGS8Zkg-tWFQohcChLQee3VS6l6ZDykIVMLsRgWVFWPrklSxJxMJkgrpD1VCxOdBB_NHIGUeQXMu0Ps9je8wOQ_Cb8NS9VGDPgzw6iQQ3g_KNEWthYIvkVRYTybcIStnZ4hXxyUBjM2UAJsB9d6D5IazMjKGXPr_HxSt-wu8XnpIiXeyrpTlKYVoeLejXRGdXXtEHt3OB0SQqCs7IXCrWbAenki_VLHoz5esmDp3sOOe_o2N1J6ajjj93C5fTmpI2VYYrFZhQvatw-uOJaB0FVyFi_W2wRSYyJmRJRwr1mKvz7eEkD6JWo4lpqKWzLvYBakOhTOrdejdk8j7BqSmrf0wA2D6v-8lpM53UR7gbLMdHrmjRGA7zqfapPmJnPW7v4_SjWL_IfIft5_0hFPdha4bnruJx76N5C588MriAohrBDM96Td2zO2zplDCkQ04kMnKUrdf9s_mzmzUP1drOpkcU-envXig2AY-1vb3IUc8wwr8ZACEFuCnUe53GxlrKzZhsFr388dhOOQr5w7XagSMB-5Yyet0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=I9_m2Hb1Tv_B0qTMDG8bMbnkNSHUkv5oUaG9-V5NZ8qQ2VFlu60I8y8gfr3vPmZjbiPnu43MOQdFVDeYF-nDAEKBLmyxD3DCTGmes9NNbbvaDEHyEuuRWgccIkK3ik5TI48YGDxjHjqdn-gTK4Fkgd17LGw1&amp;t=ffffffff940d030f" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=8vNbe34dAujgZMPnfnacfjeoweX1vHgyns8KlAV4vpGpsZC9Cf3pro__lv8ekBa0NiCgXGMMolzOUNH__lrnEI_qjlNBIAuuLeemtAXV_i6E0QIMZa8nGSYmWGF5nQOJK3rmZzvTxsr2Mh4Ebdba_1ywGLUSH_U_XIe-jzecfRQwwvjZ0&amp;t=ffffffff940d030f" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=RiyDcUFpJaki4hxGXGM5S_fQdfCNQ7xibnVXZ9C56ezCDAs3h-jwj0Ci4hoXINO0VX_NYRFomCUoQMSImxRaE-U3lqfIUCV-78YOi4WkFFCtI1vqVuZHH-l3CZtiTYOR7Wng3P9OgYvMQpgXm_VVahtXH-RbK9h47So_Xt4n3mCg8AvKq76f7CSSsTZgdLFntdddH9caHDGwHP653u8S_Kb2MNA1" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=0Ffv5ilvOQTmotTVhTYYd0iLQkt3pQ4Awf3P7JchoiZFF8Yw3MFKWAea8-lNT-eHpYO3-iJe6OChAB-HdVFpdV_X1nVmit68ThbnG4dlfiC1sajcEW1Cztc1BMi6aQTdVprcCLbM8QUjPYMs_zggeBZWzefqAzTPG1S3VuyFoj-q6fTqYurtAXv-v2HeDxDhm-tEAl4lOc_VPHadhZ-e0EefIJUafJyyziYRvZH03sakUX7-fFDGUrQJaJ6fzrK1KHugcpJu9TXeegIpxhDFM6g7lDQukHgF3-uhZxzCRY9icaxcbfkHV6dKluXu317Hq6CPWI3kC8DLsbKZIoidejZQ2k7rRXE_eYhfik_BTmLbXT5u-mIXW2eyzPl33a6Jf9M5hEt4m3_fpaIr8OIsZcVUMh_jDyxoykHkm_VBh4WF-N806Vvo9JC5CQPgEF1f5ow_JYQq5btGMWtBpL7eRINwR6i6mpBv1yk1sGUba1o1EkdiU40P68aJGW9pmHXt5oSUXU9pb9kge6X2UpWYLE5axnOR9qQ46cBentoovc62n03K503xbjQa9RlihoIj5Czc76lxrion1roE1GE5OOUuqDcaIWdegMzDQC7KzxQoBW4HsQy8WFgBIoxD3Tej3uufAdOPe91BTmMJH0XEjNn7SFKZxIWwWlH29crPotZkpJSardoUI4M1sAPF66baTPsrW-yaPdMADOaA7pfgR3gQ3YH0h6Dnrez-Gt6z8I5q1KYf0" type="text/javascript"></script>
 <script src="js/cachedetails.js" type="text/javascript"></script>
 <script src="../js/latlng.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -316,10 +323,11 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                     <p class="SignedInText">
                         <strong>
                             Hello, <a href="/my/default.aspx" title="View Profile for blafoo" class="SignedInProfileLink">blafoo</a></strong> (<a id="ctl00_hlSignOut" accesskey="s" title="Sign Out" href="https://www.geocaching.com/login/default.aspx?RESET=Y&amp;redir=http%3a%2f%2fwww.geocaching.com%2fseek%2fcache_details.aspx%3flog%3dy%26wp%3dGC2CJPF%26numlogs%3d35%26decrypt%3dy">Sign Out</a>)<br />
-                        <strong>
-                            <img src="/images/icons/icon_smile.png" title="Caches Found" /> 513&nbsp;&middot;&nbsp;<img src="/images/challenges/types/sm/challenge.png" title="Challenges Completed" /> 2</strong>
+                            <span id="ctl00_litPMLevel">Premium Member</span>
                         
-                        <a id="ctl00_hlRenew" accesskey="a" title="Renew Your Membership!" href="../account/EditMembership.aspx" style="display: block;">Renew Your Membership!</a>
+                        <strong style="display:block">
+                            <img src="/images/icons/icon_smile.png" title="Caches Found" /> 579&nbsp;&nbsp;&nbsp;<img src="/images/challenges/types/sm/challenge.png" title="Challenges Completed" /> 3</strong>
+                        
                     </p>
                     
                 </div>
@@ -425,9 +433,20 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                     </li>
                     <li>
                         <a id="ctl00_hlNavVideos" accesskey="7" title="Videos" href="../videos/default.aspx">Videos</a></li>
+                    <li>
+                        <a id="ctl00_hlNavFollowUs" title="Follow Us" href="../travel/default.aspx">Follow Us &#9660;</a>
+                        <ul class="SubMenu NavSocialMedia">
+                            <li>
+                                <a id="ctl00_hlSubNavFacebook" title="Facebook" class="SubNavFacebook" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts">Facebook</a></li>
+                            <li>
+                                <a id="ctl00_hlSubNavTwitter" title="Twitter" class="SubNavTwitter" href="http://twitter.com/GoGeocaching">Twitter</a></li>
+                            <li>
+                                <a id="ctl00_hlSubNavFlickr" title="Flickr" class="SubNavFlickr" href="http://www.flickr.com/photos/geocaching_com/">Flickr</a></li>
+                            <li>
+                                <a id="ctl00_hlSubNavYouTube" title="YouTube" class="SubNavYouTube" href="http://www.youtube.com/user/GoGeocaching">YouTube</a></li>
+                        </ul>
+                    </li>
                 </ul>
-                <p class="SocialMediaIcons NoBottomSpacing right">
-                    <a id="ctl00_hlFacebook" title="Follow Us on Facebook" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts"><img id="ctl00_imgFacebook" title="Follow Us on Facebook" src="../images/home/icon_facebook.png" alt="Follow Us on Facebook" style="border-width:0px;" /></a>&nbsp;&nbsp;&nbsp;<a id="ctl00_hlTwitter" title="Follow Us on Twitter" href="http://twitter.com/GoGeocaching"><img id="ctl00_imgTwitter" title="Follow Us on Twitter" src="../images/home/icon_twitter.png" alt="Follow Us on Twitter" style="border-width:0px;" /></a>&nbsp;&nbsp;&nbsp;<a id="ctl00_hlFlickr" title="Follow Us on Flickr" href="http://www.flickr.com/photos/geocaching_com/"><img id="ctl00_imgFlickr" title="Follow Us on Flickr" src="../images/home/icon_flickr.png" alt="Follow Us on Flickr" style="border-width:0px;" /></a>&nbsp;&nbsp;&nbsp;<a id="ctl00_hlYouTube" title="Follow Us on YouTube" href="http://www.youtube.com/user/GoGeocaching"><img id="ctl00_imgYouTube" title="Follow Us on YouTube" src="../images/home/icon_youtube.png" alt="Follow Us on YouTube" style="border-width:0px;" /></a></p>
                 
             </nav>
             
@@ -445,6 +464,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                 <p>
                     <span id="ctl00_Breadcrumbs"><span><a title="Geocaching - The Official Global GPS Cache Hunt Site" href="/">Geocaching</a></span><span> &gt; </span><span><a title="Hide and Seek A Geocache" href="/seek/default.aspx">Hide and Seek A Geocache</a></span><span> &gt; </span><span>Geocache Details</span></span>
                 </p>
+                
                 
             </div>
             
@@ -534,6 +554,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
             
         </div>
         
+        
+        
         <div class="span-3 right last">
             
             
@@ -541,7 +563,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                     <a id="uxFavContainerLink" href="javascript:void(0);">
                         <div class="favorite-container">
                             <span class="favorite-value">
-                                7</span><br />
+                                9</span><br />
                             Favorites
                             <img id="imgFavoriteArrow" src="/images/arrow-down.png" alt="Expand" title="Expand" />
                         </div>
@@ -570,13 +592,14 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
             
         </div>
         
+       
         <p class="Clear">
             <a id="ctl00_ContentBody_uxCacheUrl" title="Related Web Page" href="http://www.kinderwald.de/">Related Web Page</a></p>
         
         
         
         
-        <div class="CacheInformationTable">
+        <div id="ctl00_ContentBody_CacheInformationTable" class="CacheInformationTable">
             <div class="LocationData FloatContainer">
                 <div class="span-9">
                     <p class="NoBottomSpacing">
@@ -795,15 +818,13 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
         
 </div>
         
-        <p class="TopSpacing">
-            
-                <div id="map_preview_canvas" style="border: solid 1px #B0B0B0; width: 228px; height: 175px;">
-                </div>
-            
-        </p>
+        
+            <div id="map_preview_canvas" class="TopSpacing" style="width: 228px; height: 175px;">
+            </div>
         
         
-        <div class="CacheDetailNavigationWidget BottomSpacing">
+        
+        <div class="CacheDetailNavigationWidget TopSpacing BottomSpacing">
             
             <h3 class="WidgetHeader">
                 
@@ -821,7 +842,7 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
             <div id="ctl00_ContentBody_divContentSide">
                 
                 <p class="NoBottomSpacing">
-                    <span id="ctl00_ContentBody_ADModules_09"><iframe type="iframe" src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&SiteID=1&X='e82a2d535eaf44eab3f3cd3e00218e6a'" width="120" height="240" Marginwidth="0" Marginheight="0" Hspace="0" Vspace="0" Frameborder="0" Scrolling="no" style="width:120px;Height:240px;"><a href="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Click&;Mode=HTML&SiteID=1" target="_blank"><img src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&Mode=HTML&SiteID=1" width="120" height="240" border="0" alt="" /></a></iframe></span>
+                    <span id="ctl00_ContentBody_ADModules_09"><iframe type="iframe" src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&SiteID=1&X='7e5d1cb77b8b4157863f5cae1f7228b7'" width="120" height="240" Marginwidth="0" Marginheight="0" Hspace="0" Vspace="0" Frameborder="0" Scrolling="no" style="width:120px;Height:240px;"><a href="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Click&;Mode=HTML&SiteID=1" target="_blank"><img src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&Mode=HTML&SiteID=1" width="120" height="240" border="0" alt="" /></a></iframe></span>
                 </p>
                 <p class="AlignCenter">
                     <small><a href="../about/advertising.aspx" id="ctl00_ContentBody_advertisingWithUs" title="Advertising with Us">Advertising with Us</a></small></p>
@@ -849,22 +870,13 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
     <div class="WidgetBody">
         
         
-                <ul>
-            
-                <li>
-                    <a href="http://www.geocaching.com/track/details.aspx?guid=4c3bb296-4c30-4657-b110-b7370dfaf54d" class="lnk">
-                        <img src="http://www.geocaching.com/images/wpttypes/sm/21.gif" width="16" /><span>Traveling Brutus Buckeye</span></a>
-                </li>
-            
-                </ul>
-            
-            
-            <div class="TopSpacing">
-                <div id="ctl00_ContentBody_uxTravelBugList_uxTrackableItemsLinks">
+            <div id="ctl00_ContentBody_uxTravelBugList_uxNoTrackableItems">
 	
-                    <p class="NoBottomSpacing"><a id="ctl00_ContentBody_uxTravelBugList_uxViewAllTrackableItems" href="../track/search.aspx?wid=73246a5a-ebb9-4d4f-8db9-a951036f5376&amp;ccid=1811409">View all Trackables</a></p>
-                
+                <p class="NoBottomSpacing"><span id="ctl00_ContentBody_uxTravelBugList_uxNoTrackableItemsLabel">There are no Trackables in this cache.</span></p>
+            
 </div>
+            <div class="TopSpacing">
+                
                 <p class="NoBottomSpacing"><a id="ctl00_ContentBody_uxTravelBugList_uxTrackableItemsHistory" href="../track/search.aspx?wid=73246a5a-ebb9-4d4f-8db9-a951036f5376">View past Trackables</a></p>
                 <p class="NoBottomSpacing"><a id="ctl00_ContentBody_uxTravelBugList_uxWhatAreTrackables" title="What are Trackable Items?" href="../track/default.aspx">What are Trackable Items?</a></p>
             </div>
@@ -1273,12 +1285,9 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
             <div class="CDMapWidget">
                 <p class="WidgetHeader NoBottomSpacing">
                     <a id="ctl00_ContentBody_uxViewLargerMap" title="View Larger Map" class="lnk" href="/map/default.aspx?lat=52.425067&amp;lng=9.6642" target="_blank"><img src="/images/silk/map_go.png" /> <span>View Larger Map</span></a>
-                    | <a href="#" id="lnk_slippyMap">View Dynamic Map</a>
                 </p>
-                <div style="border: 1px solid #B0B0B0; width: 325px; height: 325px;">
-                    <img id="staticMap" src="/images/blank.gif" style="width: 325px; height: 325px;" />
-                </div>
-                <div id="map_canvas" style="width: 325px; height: 325px; display: none;">
+                
+                <div id="map_canvas" style="width: 325px; height: 325px;">
                 </div>
                 <p class="WidgetFooter">
                     <a id="ctl00_ContentBody_uxNotesAboutPrinting" href="#mapPrintingNotes" class="NoPrint">Notes about Printing Maps</a></p>
@@ -1331,7 +1340,7 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
         <span class="NoPrint">
             
 <ul>
-    <span id="ctl00_ContentBody_MapLinks_MapLinks"><li><a href="http://www.geocaching.com/map/default.aspx?lat=52.425067&lng=9.6642" target="_blank">Geocaching.com Google Map</a></li><li><a href="http://maps.google.com/maps?q=N+52%c2%b0+25.504+E+009%c2%b0+39.852+(GC2CJPF)+" target="_blank">Google Maps</a></li><li><a href="http://www.mapquest.com/maps/map.adp?searchtype=address&formtype=latlong&latlongtype=decimal&latitude=52.425067&longitude=9.6642&zoom=10" target="_blank">MapQuest</a></li><li><a href="http://maps.yahoo.com/maps_result?lat=52.425067&lon=9.6642" target="_blank">Yahoo Maps</a></li><li><a href="http://www.bing.com/maps/default.aspx?v=2&sp=point.52.425067_9.6642_GC2CJPF" target="_blank">Bing Maps</a></li><li><a href="http://www.opencyclemap.org/?zoom=12&lat=52.425067&lon=9.6642" target="_blank">Open Cycle Maps</a></li><li><a href="http://www.openstreetmap.org/?mlat=52.425067&mlon=9.6642&zoom=12" target="_blank">Open Street Maps</a></li></span>
+    <span id="ctl00_ContentBody_MapLinks_MapLinks"><li><a href="http://www.geocaching.com/map/default.aspx?lat=52.42507&lng=9.6642" target="_blank">Geocaching.com Map</a></li><li><a href="http://maps.google.com/maps?q=N+52%c2%b0+25.504+E+009%c2%b0+39.852+(GC2CJPF)+" target="_blank">Google Maps</a></li><li><a href="http://www.mapquest.com/maps/map.adp?searchtype=address&formtype=latlong&latlongtype=decimal&latitude=52.42507&longitude=9.6642&zoom=10" target="_blank">MapQuest</a></li><li><a href="http://maps.yahoo.com/#lat=52.42507&lon=9.6642&zoom=16&q=52.42507,9.6642&conf=1&start=1&mvt=m&trf=0" target="_blank">Yahoo Maps</a></li><li><a href="http://www.bing.com/maps/default.aspx?v=2&lvl=14&sp=point.52.42507_9.6642_GC2CJPF" target="_blank">Bing Maps</a></li><li><a href="http://www.opencyclemap.org/?zoom=12&lat=52.42507&lon=9.6642" target="_blank">Open Cycle Maps</a></li><li><a href="http://www.openstreetmap.org/?mlat=52.42507&mlon=9.6642&zoom=12" target="_blank">Open Street Maps</a></li></span>
 </ul>
 
         </span>
@@ -1341,15 +1350,15 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
         
             <div class="InformationWidget Clear">
                 <h3>
-                    83 Logged Visits</h3>
+                    106 Logged Visits</h3>
                 <div class="EncryptDecrypt">
                     <a href="#" class="decrypt-link">
                         Decrypt
                     </a>
                 </div>
-                <span id="ctl00_ContentBody_lblFindCounts"><p class="LogTotals"><img src="/images/icons/icon_smile.gif" alt="Found it" title="Found it" /> 64&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_sad.gif" alt="Didn't find it" title="Didn't find it" /> 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_note.gif" alt="Write note" title="Write note" /> 6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_disabled.gif" alt="Temporarily Disable Listing" title="Temporarily Disable Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_enabled.gif" alt="Enable Listing" title="Enable Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_greenlight.gif" alt="Publish Listing" title="Publish Listing" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_needsmaint.gif" alt="Needs Maintenance" title="Needs Maintenance" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_maint.gif" alt="Owner Maintenance" title="Owner Maintenance" /> 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></span>
+                <span id="ctl00_ContentBody_lblFindCounts"><p class="LogTotals"><img src="/images/icons/icon_smile.gif" alt="Found it" title="Found it" /> 87&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_sad.gif" alt="Didn't find it" title="Didn't find it" /> 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_note.gif" alt="Write note" title="Write note" /> 6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_disabled.gif" alt="Temporarily Disable Listing" title="Temporarily Disable Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_enabled.gif" alt="Enable Listing" title="Enable Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_greenlight.gif" alt="Publish Listing" title="Publish Listing" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_needsmaint.gif" alt="Needs Maintenance" title="Needs Maintenance" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_maint.gif" alt="Owner Maintenance" title="Owner Maintenance" /> 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></span>
                 <p class="HalfLeft">
-                    <a id="ctl00_ContentBody_uxLogbookLink" href="cache_logbook.aspx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376">View Logbook</a> | <a id="ctl00_ContentBody_uxGalleryImagesLink" DisplayFormatPlural="View the Image Gallery of {0:#,###} images" DisplayFormatSingular="View the Image Gallery" href="gallery.aspx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376">View the Image Gallery of 14 images</a>
+                    <a id="ctl00_ContentBody_uxLogbookLink" href="cache_logbook.aspx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376">View Logbook</a> | <a id="ctl00_ContentBody_uxGalleryImagesLink" DisplayFormatPlural="View the Image Gallery of {0:#,###} images" DisplayFormatSingular="View the Image Gallery" href="gallery.aspx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376">View the Image Gallery of 16 images</a>
                 </p>
                 <p class="NoBottomSpacing AlignRight">
                     <span class="Warning">**Warning!</span> <a href="/about/glossary.aspx#spoiler" title="Spoilers">Spoilers</a> may be included in the descriptions or links.
@@ -1378,7 +1387,7 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
             </div>
             <p>
                 <small>
-                    Current Time: <time datetime="2012-02-14T14:51:47Z">02/14/2012 14:51:47 (UTC-08:00) Pacific Time (US & Canada) (22:51 GMT)</time><br/>Last Updated: <time class="timeago" datetime="2012-01-29T18:57:05Z">2012-01-29T18:57:05Z</time> on 01/29/2012 10:57:05 (UTC-08:00) Pacific Time (US & Canada) (18:57 GMT) <br/>Rendered From:Unknown<br />Coordinates are in the WGS84 datum
+                    Current Time: <time datetime="2012-05-09T11:12:05Z">05/09/2012 11:12:05 Pacific Daylight Time (18:12 GMT)</time><br/>Last Updated: <time class="timeago" datetime="2012-05-05T19:14:12Z">2012-05-05T19:14:12Z</time> on 05/05/2012 12:14:12 Pacific Daylight Time (19:14 GMT) <br/>Rendered From:Unknown<br />Coordinates are in the WGS84 datum
                 </small>
             </p>
         
@@ -1575,8 +1584,8 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                 totalPages = obj.pageInfo.totalPages;
 
                 var $newBody = $(document.createElement("TBODY"));
-                                        
-                $("#tmpl_CacheLogRow").tmpl(obj.data,{includeAvatars: includeAvatars}).appendTo($newBody);
+
+                $("#tmpl_CacheLogRow").tmpl(obj.data,{ includeAvatars: includeAvatars }).appendTo($newBody);
 
                 $newBody.find("a.tb_images").each(function()
                 {
@@ -1678,6 +1687,46 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
 
             $(function () {
 
+                // CSP Section
+                if ($("#cspMessage").length) {
+                
+                    var editLink = $('a[href*="report.aspx"]').attr('href');
+
+                    $("#cspMessage").prepend('<P>Please take a moment to check the listing and ensure it is ready to enable. Clicking "Submit for Review" will enable your cache page.</P>');
+                    $("#cspMessage").prepend('<P>Once it is enabled, you will receive a confirmation email that it was successfully submitted. Your local volunteer reviewer will try to begin the review process within 3 days.</P>');
+                    $("#cspMessage").prepend('<P>Your cache page has not been reviewed yet. It will not appear in the review queue until you enable it.</P>');
+                    
+                    $("#cspGoBack").click(function (e) {
+                        e.preventDefault();
+                        window.location = editLink;
+                        return false;
+                    });
+                    
+                    $("#cspSubmit").click(function (e) {
+                        e.preventDefault();
+                        $.pageMethod("EnableCSPCache", JSON.stringify({ dto: { ut: userToken } }), function (r) {
+                            var r = JSON.parse(r.d);
+                            if (r.success == true) {
+                                window.location = '/seek/cache_details.aspx?guid=' + r.guid;
+                            } else {
+                                alert("There was an error enabling your cache.");
+                            }
+                        });
+                        return false;
+                    });
+                    
+                    $("#cspConfirm").change(function() {
+                        if ($("#cspConfirm").is(":checked")) {
+                            $("#cspSubmit").removeAttr('disabled');
+                            $("#cspGoBack").attr('disabled', true);
+                        } else {
+                            $("#cspSubmit").attr('disabled', true);
+                            $("#cspGoBack").removeAttr('disabled');
+                        }
+                    });
+                }
+
+
                 //override coords
                 if (typeof(userDefinedCoords) != "undefined") {
                     if (userDefinedCoords.status == "success" && userDefinedCoords.data.isUserDefined == true) {
@@ -1771,8 +1820,6 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                         
                 if ($("#cache_logs_container").length > 0) {
             
-                
-                
                     appendNewLogs(initalLogs);
 
                     if (DetectMobileQuick()) {
@@ -1816,8 +1863,6 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                 }
 
                 if (mapLatLng != null) {
-
-
 
                     $("#uxLatLonLink").qtip({
                         suppress:false,
@@ -1863,131 +1908,97 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                     });
             
                     setStaticMaps();
-                    $("#staticMap").lazyload();
+                    //$("#staticMap").lazyload();
                 }
             });
 
             function setStaticMaps() {
-                    var map = new L.Map('map_preview_canvas', {
-                        center: new L.LatLng(mapLatLng.lat, mapLatLng.lng),
-                        zoom: 10,
-                        doubleClickZoom: false,
-                        dragging: false,
-                        touchZoom: false,
-                        scrollWheelZoom: false,
-                        zoomControl: false
-                    });
 
-                    var tileUrl = "http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
-                        tLayer = new L.TileLayer(tileUrl,
-                        {
-                            name: "mpq",
-                            alt: "MapQuest",
-                            attribution: 'Data, imagery and map information provided by MapQuest, <a href="http://www.openstreetmap.org" target="_blank">Open Street Map</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA.</a>',
-                            subdomains: "1234",
-                            tileSize: 256,
-                            minZoom: 0,
-                            maxZoom: 20
-                        });
+                var map = new L.Map('map_preview_canvas', {
+                    center: new L.LatLng(mapLatLng.lat, mapLatLng.lng),
+                    zoom: 10,
+                    doubleClickZoom: false,
+                    dragging: false,
+                    touchZoom: false,
+                    scrollWheelZoom: false,
+                    zoomControl: false
+                });
 
-                    map.addLayer(tLayer);
+                var mapLarge = new L.Map('map_canvas', {
+                    center: new L.LatLng(mapLatLng.lat, mapLatLng.lng),
+                    zoom: 14,
+                    doubleClickZoom: true,
+                    dragging: true,
+                    touchZoom: false,
+                    scrollWheelZoom: false,
+                    zoomControl: true
+                });
 
-                    var pinIcon = L.Icon.extend({
-                        iconSize: new L.Point(20, 23),
-                        iconAnchor: new L.Point(10, 23),
-                        shadowUrl: null
-                    });
+                var tileOptions = {
+                    tileUrl: "http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg",
+                    name: "mpqosm",
+                    alt: "MapQuest",
+                    attribution: "Tiles Courtesy of <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>, Map and map data © 2012 <a href=\"http://www.openstreetmap.org\" target='_blank'>OpenStreetMap</a> and contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>. ",
+                    subdomains: "1234",
+                    tileSize: 256,
+                    minZoom: 0,
+                    maxZoom: 18
+                };
 
-                    var mkA = new L.Marker(new L.LatLng(mapLatLng.lat, mapLatLng.lng), {
-                        icon: new pinIcon('/images/wpttypes/pins/' + mapLatLng.type + '.png')
-                    });
+                map.addLayer(new L.TileLayer(tileOptions.tileUrl, tileOptions));
+                mapLarge.addLayer(new L.TileLayer(tileOptions.tileUrl, tileOptions));
 
-                    mkA.on("click", function () {
+                var pinIcon = L.Icon.extend({
+                    iconSize: new L.Point(20, 23),
+                    iconAnchor: new L.Point(10,23),
+                    shadowUrl: null
+                });
+
+                var mkA = new L.Marker(new L.LatLng(mapLatLng.lat, mapLatLng.lng), 
+                    {
+                        icon: new pinIcon({iconUrl:'/images/wpttypes/pins/' + mapLatLng.type + '.png', iconAnchor: new L.Point(10,23)}),
+                        title: mapLatLng.name
+                    })
+                    .on("click", function () {
                         document.getElementById("uxlrgMap").scrollIntoView(true);
                         return false;
                     });
 
-                    map.addLayer(mkA);
+                var mkA2 = new L.Marker(new L.LatLng(mapLatLng.lat, mapLatLng.lng), {
+                    icon: new pinIcon({iconUrl:'/images/wpttypes/pins/' + mapLatLng.type + '.png', iconAnchor: new L.Point(10,23)}),
+                    clickable: false, zIndexOffset:99, title: mapLatLng.name
+                });
 
-                    $("#ctl00_ContentBody_uxNotesAboutPrinting").fancybox({
-                        overlayShow: false
-                    });
+                map.addLayer(mkA);
+                mapLarge.addLayer(mkA2);
+
+                $("#ctl00_ContentBody_uxNotesAboutPrinting").fancybox({
+                    overlayShow: false
+                });
                 
-                    var staticUrl = [];
-                    var markers=[];
+                
+                if (cmapAdditionalWaypoints != null && cmapAdditionalWaypoints.length > 0) {
+                    var llBounds = new L.LatLngBounds();
 
-                    //$("#mapPreview").attr("src", "http://maps.google.com/maps/api/staticmap?zoom=10&size=228x150&sensor=false&markers=icon:http://www.geocaching.com/images/wpttypes/pins/" + mapLatLng.type + ".png|" + mapLatLng.lat + "," + mapLatLng.lng);
-
-                    staticUrl.push("http://maps.google.com/maps/api/staticmap?size=325x325&sensor=false");
-                    staticUrl.push("&markers=icon:http://www.geocaching.com/images/wpttypes/pins/" + mapLatLng.type + ".png|" + mapLatLng.lat + "," + mapLatLng.lng);
-                    markers.push({lat:mapLatLng.lat, lng:mapLatLng.lng, marker:"http://www.geocaching.com/images/wpttypes/pins/" + mapLatLng.type + ".png", primary:true});
-                    if (cmapAdditionalWaypoints != null && cmapAdditionalWaypoints.length > 0) {
-                        for (var x = 0, len = cmapAdditionalWaypoints.length; x < len; x++) {
-                            var item = cmapAdditionalWaypoints[x]
-                            staticUrl.push("&markers=icon:http://www.geocaching.com/images/wpttypes/pins/" + item.type + ".png|" + item.lat + "," + item.lng);
-                            markers.push({lat:item.lat, lng:item.lng, marker: "http://www.geocaching.com/images/wpttypes/pins/" + item.type + ".png",primary:false});
-                        }
-                    } else {
-                    staticUrl.push("&zoom=14");
-                    }
-
-                    $("#staticMap")
-                        .data("markers", markers )
-                        .attr("data-original", staticUrl.join(""));
-            }
-
-            function loadDynamicMap() {
-                if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
-                    displayDynamicMap();
-                } else {
-                    var script = document.createElement("script");
-                    script.type = "text/javascript";
-                    script.src = "http://maps.google.com/maps/api/js?v=3&sensor=false&indexing=false&callback=displayDynamicMap";
-                    document.documentElement.firstChild.appendChild(script);
-                }
-            }
-
-            function displayDynamicMap() {
-                $sm = $("#staticMap");
-                $map = $('<div />').addClass('map').css({ height: 325, width: 325 });
-                $("#lnk_slippyMap").replaceWith($("<span>Showing Dynamic Map</span>"));
-            
-                var items = $sm.data("markers");
-            
-                // walk the array to find the full bounds
-                var bounds = new google.maps.LatLngBounds();
-                var markers = [];
-
-                for (var x = 0, len=items.length; x < len; x++) {
-                    var item = items[x];
-                    var ll = new google.maps.LatLng(item.lat, item.lng);
-                    bounds.extend(ll);
-                    markers.push(new google.maps.Marker( {
-                        clickable:false,
-                        icon: item.marker,
-                        position: ll, zIndex: google.maps.Marker.MAX_ZINDEX + (item.primary ? 1 : 0)
-                    }));
-                }
-
-                $sm.replaceWith($map);
-
-                var map = new google.maps.Map($map.get(0), {
-                                zoom: 14,
-                                center: bounds.getCenter(),
-                                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                                mapTypeControl: true,
-                                navigationControlOptions: {
-                                    style: google.maps.NavigationControlStyle.SMALL
-                                }
+                    for (var x = 0, len = cmapAdditionalWaypoints.length; x < len; x++) {
+                        var item = cmapAdditionalWaypoints[x],
+                            ll = new L.LatLng(item.lat, item.lng),
+                            marker = new L.Marker(ll, {
+                                icon: new pinIcon({iconUrl:'/images/wpttypes/pins/' + item.type + '.png', iconAnchor: new L.Point(10,23)}),
+                                title: item.name, 
+                                clickable:false
                             });
 
-                for(var x=0, len=markers.length; x<len;x++) {
-                    markers[x].setMap(map);
-                }
+                        llBounds.extend(ll);
+                        mapLarge.addLayer(marker);
+                    }
+                    var bz = mapLarge.getBoundsZoom(llBounds);
 
-                if (bounds.length>1)
-                    map.fitBounds(bounds);
+                    mapLarge.setView(new L.LatLng(mapLatLng.lat, mapLatLng.lng), bz);
+                } 
             }
+
+            
         
             function dht() {
                 try {
@@ -2202,7 +2213,7 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                 
             </div>
             
-            <div class="span-5">
+            <div class="span-4">
                 
                 <p class="FooterHeader">
                     <strong>
@@ -2220,7 +2231,7 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                 
             </div>
             
-            <div class="span-5">
+            <div class="span-4">
                 
                 <p class="FooterHeader">
                     <strong>
@@ -2236,7 +2247,7 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                 
             </div>
             
-            <div class="span-7">
+            <div class="span-5">
                 
                 <p class="FooterHeader">
                     <strong>
@@ -2247,14 +2258,14 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                     <li>
                         <a id="ctl00_hlFooterDiscussionForums" accesskey="f" title="Discussion Forums" href="../forums/default.aspx">Discussion Forums</a></li>
                     <li>
-                        <a id="ctl00_hlFooterParksPoliceLink" title="Land Management and Law Enforcement" href="../parksandpolice/default.aspx">Land Management and Law Enforcement</a></li>
+                        <a id="ctl00_hlFooterParksPoliceLink" title="Land Management and Law Enforcement" href="../parksandpolice/default.aspx">Land Management and Law&nbsp;Enforcement</a></li>
                     <li>
                         <a id="ctl00_hlFooterContactUs" title="Contact Us" href="../contact/default.aspx">Contact Us</a></li>
                 </ul>
                 
             </div>
             
-            <div class="span-4 append-3 last">
+            <div class="span-4">
                 
                 <p class="FooterHeader">
                     <strong>
@@ -2269,6 +2280,19 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                 </ul>
                 
             </div>
+            <div class="span-4 append-3 last">
+                
+                <p class="FooterHeader">
+                    <strong>
+                        Follow Us</strong></p>
+                        <ul class="FooterLinks FollowUsLinks">
+                            <li><a id="ctl00_hlFacebook" title="Facebook" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts"><img id="ctl00_imgFacebook" title="Facebook" src="../images/home/icon_facebook.png" alt="Facebook" style="border-width:0px;" /></a></li>
+                            <li><a id="ctl00_hlTwitter" title="Twitter" href="http://twitter.com/GoGeocaching"><img id="ctl00_imgTwitter" title="Twitter" src="../images/home/icon_twitter.png" alt="Twitter" style="border-width:0px;" /></a></li>
+                            <li><a id="ctl00_hlFlickr" title=" Flickr" href="http://www.flickr.com/photos/geocaching_com/"><img id="ctl00_imgFlickr" title="Flickr" src="../images/home/icon_flickr.png" alt="Flickr" style="border-width:0px;" /></a></li>
+                            <li><a id="ctl00_hlYouTube" title="YouTube" href="http://www.youtube.com/user/GoGeocaching"><img id="ctl00_imgYouTube" title="YouTube" src="../images/home/icon_youtube.png" alt="YouTube" style="border-width:0px;" /></a></li>
+                        </ul>
+                
+            </div>
             
             <p class="span-24 last FooterBottom">
                 Copyright
@@ -2281,7 +2305,9 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
                 |
                 <a id="ctl00_hlFooterLogo" accesskey="l" title="Geocaching Logo Usage Guidelines" href="../about/logousage.aspx">Geocaching Logo Usage Guidelines</a>
                 |
-                <a id="ctl00_hlFooterAPI" accesskey="`" title="API License Agreement" href="../live/api_license_agreement.aspx">API License Agreement</a></p>
+                <a id="ctl00_hlFooterAPI" accesskey="`" title="API License Agreement" href="../live/api_license_agreement.aspx">API License Agreement</a>
+                |
+                <a id="ctl00_HlFooterStatus" accesskey="`" title="Current Service Status" href="http://status.geocaching.com">Service Status</a></p>
             
         </div>
         
@@ -2298,17 +2324,15 @@ P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</span>
 
 <script type="text/javascript">
 //<![CDATA[
-var uvtoken = 'DbFDfIrSTaXyfNf74lbdopy%2bTw%2fC84Gn87pU%2b3r69toc4lYTKyii0cXY42BXT7amAeAEUCcV1MyzYH%2f69bWOOJ%2bW7ADYGWn7OZhaDMq0PZnGZmCyc0nX7MX4qkdr6Pq7igxCBwv6DNAb8Ar2g98kkSqYtfidn21%2b0BITFaZC6SGczNMMHreAOP5lofIIKjlM1l%2bE31pP1e0b5Sk6AKZ%2bOYV9pAps4ii3Taltkd%2fO7Vve%2fsHuybarBpnW0VS5InTudsZ%2baoG%2bVrnoXLmwjItRUVp47RrUgx2SWkhpZTUp4%2bIr3PLaS8W3eeNk68hcIcQKcdCFWgFhKBhP%2fUMGT9jqDXrfCe00Bzv1zxSmuN2hdabPaGLYj5JvzzRlX1Wd01BRQfNeZS82I66wN5BYBGvV6Re5B8xzFyckKNZNokW9IzQ%3d';var isLoggedIn = true;
+var uvtoken = 'DbFDfIrSTaXyfNf74lbdopy%2bTw%2fC84Gn87pU%2b3r69toc4lYTKyii0cXY42BXT7amAeAEUCcV1MyzYH%2f69bWOOJqUnao4iDEhpHcnFzROLkgPvy5XC0JQhqH50%2bZfjI7kVbca%2bPeFaOM42aFb5H7MFlQWedQv8T%2fcKARUmubqE%2f88ljtK7ugJ3DvyVbLMZxET86XkoMLyOs2sPw3tT9z%2bskmW1lZKmcxb74CF2bP35cFrg1fI1aRZyZQB0fod4DR9XSJZtRna5OojMk0DbHMFAw7dFMrABppu334RpyuLMMAjjfwju%2bOajkYEMhdCCOJWK1xvehVHTxU5Wen5cSnHT14S3gpx0wUIyl8RglcnkLMtQtFWIhS%2ffNi2Jl8c0XNmPTT5zg67HxxvA5XGg8sYTmbZ046TkYjCTukW7fdxG%2bg%3d';var isLoggedIn = true;
 var userDefinedCoords = {"status":"success","data":{"isUserDefined":false,"oldLatLngDisplay":"N 52° 25.504' E 009° 39.852'"}};
-cmapAdditionalWaypoints.push({ lat:52.423067, lng:9.650383, name:'GC2CJPF Parking', pf:'PK', type:217 });
-cmapAdditionalWaypoints.push({ lat:52.425067, lng:9.6642, name:'GC2CJPF Start', pf:'ST', type:218 });
-cmapAdditionalWaypoints.push({ lat:52.4248, lng:9.6572, name:'Aussichtspunkt', pf:'WO', type:452 });
-mapLatLng = { lat:52.425067, lng:9.664200, type:3 };
+cmapAdditionalWaypoints = [{"lat":52.42307,"lng":9.65038,"type":217,"name":"GC2CJPF Parking ( Parking Area )","pf":"PK"},{"lat":52.42507,"lng":9.6642,"type":218,"name":"GC2CJPF Start ( Question to Answer )","pf":"ST"},{"lat":52.4248,"lng":9.6572,"type":452,"name":"Aussichtspunkt ( Reference Point )","pf":"WO"}];
+mapLatLng = {"lat":52.42507,"lng":9.6642,"type":3,"name":"Kinderwald KiC"};
 var ccConversions = [{"t":"Decimal","k":"DD","d":"WGS84","v":"52.425067, 009.664200"},{"t":"DDD MM SS.SSS","k":"DMS","d":"WGS84","v":"N 52° 25' 30.241\" E 009° 39' 51.120\""},{"t":"UTM","k":"UTM","d":"WGS84","v":"32U E 545164 N 5808524"}];
 userInfo = {ID: 1912314};
-userToken = 'FOUTFKOKLELXOJAYT35WSZBNGADBNKFSYIMKJ2YI6247JORDCSRPR3LYUNKEOR2PQUOHC7OGY223V2X2ADNEDT25JD2QHOXIHYLH7J5XLOWJSK5WTLLQ5UJQMIZEGXYFSHPFRQQ5A374RP7GSKIVLW2RCI53UZFIABL6BZOMFKJVUGRZNB2WTXZKPVBKQDJB76DIMLU2RDXSFQWZF54YLIO2PFWFCDENOIQLJ7RWZGAS3TLHKQUQ';
+userToken = 'FOUTFKOKLELXOJAYT35WSZBNGADBNKFSYIMKJ2YI6247JORDCSRPR3LYUNKEOR2PQUOHC7OGY223V2X2ADNEDT25JD2QHOXIHYLH7J5XLOWJSK5WTLLQ5UJQMIZEGXYFSHPFRQQ5A374RP7GSKIVLW2RCI53UZFIABL6BZOMFKJVUGRZNB2WTXZKPVBKQDJB76DIMLU2RDXSEHHO2LIDPMAVXQ2VXOYOAUTZ4K4OGQKN27NXNDKQ';
 includeAvatars = true;
-initalLogs = {"status":"success", "data": [{"LogID":210544989,"CacheID":1811409,"LogGuid":"c3e61373-8bfd-486a-bd29-756ea2525645","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"-4°C. Aber ein sehr schöner Spaziergang und unsere kleinen hatten bei der klirrenden Kälte auch ohne Seilfähre ihren Spaß.<br />Eine sehr aufwendige Arbeit, die von jedem geschätzt werden sollte. <br />DFDC<br />A.Meise<br /><br />TB-Drop","Created":"29/01/2012","Visited":"29/01/2012","UserName":"a.meise","MembershipLevel":3,"AccountID":1405245,"AccountGuid":"df13f5d1-0d3a-49eb-a41d-725bb1664a88","Email":"","AvatarImage":"2ad84894-cb7c-4595-ac1e-1711873d0ca2.jpg","GeocacheFindCount":169,"GeocacheHideCount":6,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":208289692,"CacheID":1811409,"LogGuid":"4bbce528-844a-41c8-a881-160f9d5abeb2","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Hallo :-)<br />Danke für diesen schönen Cache !!!<br />War ja auch eine kleine Zeitreise in meine Kindheit obwohl es ja damals den Kinderwald noch nicht gab.<br />Es gab trotzdem viele \"Abenteuer\" im Forst ;-)<br />Jendopa","Created":"15/01/2012","Visited":"14/01/2012","UserName":"Jendopa","MembershipLevel":1,"AccountID":4179363,"AccountGuid":"16f7dc47-cdb7-464d-b8fe-85e4f979ac5a","Email":"","AvatarImage":"","GeocacheFindCount":45,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":199083747,"CacheID":1811409,"LogGuid":"09c926b9-c545-4683-836e-c1bbfd04e553","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Schade, ich habe den Aufstieg in die höheren Etagen vermisst (wie die zwei Cache vorher), aber der Cache ist trotzdem gut gemacht. 2 große Kinder sind heute duch den Kinderwald gestreift.<br />Vielen Dank für die Tour und Gruss vom PS","Created":"15/11/2011","Visited":"15/11/2011","UserName":"powersearcher","MembershipLevel":3,"AccountID":623231,"AccountGuid":"bf288d6d-c3a9-490b-a862-fe37d04a6dd4","Email":"","AvatarImage":"47be780e-8ee5-416b-9409-787c01463294.jpg","GeocacheFindCount":4447,"GeocacheHideCount":50,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":199080920,"CacheID":1811409,"LogGuid":"1fd5a2e4-0fc8-44bc-a776-897973636926","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"hallo, hier konnten ps und ich heute muggelfrei die schoene runde drehen.vielen dank und gruss suchherby mit seiner suchnase eika","Created":"15/11/2011","Visited":"15/11/2011","UserName":"Suchherby","MembershipLevel":3,"AccountID":151548,"AccountGuid":"f16a8472-ebfa-4e37-b5a8-9bb2942026a3","Email":"","AvatarImage":"5031f093-c226-49ad-b282-deac1c4cfc45.jpg","GeocacheFindCount":4234,"GeocacheHideCount":116,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":196670830,"CacheID":1811409,"LogGuid":"c827ae37-ba19-40b7-8898-df1e7aadafa0","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Mit 5 Nachwuchscachern gut gefunden und trotz einbrechender Dunkelheit bis zum Ende mit Spaß dabei.<br />Coin out<br />TFTC","Created":"03/11/2011","Visited":"03/11/2011","UserName":"DK_fun","MembershipLevel":3,"AccountID":1620132,"AccountGuid":"c66d2a04-1642-4da6-9e95-0ac8b1b266b9","Email":"","AvatarImage":"","GeocacheFindCount":375,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":195643419,"CacheID":1811409,"LogGuid":"1c1a2d4a-fd0a-4462-9e39-aa6df4be0178","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Heute zusammen mit Mr.+Mrs.High diesen schönen Multi gemacht. Diese Ecke kannte ich noch nicht und war begeistert. Die Seilfähre war das Highlight. Da komme ich doch glatt noch mal mit meine Enkelkinder wieder.<br />TFTC","Created":"30/10/2011","Visited":"29/10/2011","UserName":"CacheOma1939","MembershipLevel":1,"AccountID":5161579,"AccountGuid":"0044c291-6398-47d5-ba40-4b4c96d7d055","Email":"","AvatarImage":"","GeocacheFindCount":51,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":195636911,"CacheID":1811409,"LogGuid":"103296cd-a78c-4dcf-8ee8-0ccbec2be18a","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Write note","LogTypeImage":"icon_note.gif","LogText":"TB hinterlegt.","Created":"30/10/2011","Visited":"29/10/2011","UserName":"mr.+mrs.high","MembershipLevel":3,"AccountID":2258748,"AccountGuid":"3fa5cc93-e4e5-4ea8-b88b-3056856a147f","Email":"","AvatarImage":"81b34943-cf75-40cb-a155-ff9c28599d9a.jpg","GeocacheFindCount":1414,"GeocacheHideCount":2,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":195636607,"CacheID":1811409,"LogGuid":"b921ec7a-bb3c-4094-aee5-e6c3e07c6c4d","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"<b><font color=\"green\">Diese schöne Runde sind wir mit CacheOma 1939 abgegangen. Wir werden wohl mal mit den Nichten wieder kommen,weil da können sie sich mal richtig austoben.Danke fürs zeigen dieses tollen Waldes.<br />TFTC<br /><br />In: TB</font></b>","Created":"30/10/2011","Visited":"29/10/2011","UserName":"mr.+mrs.high","MembershipLevel":3,"AccountID":2258748,"AccountGuid":"3fa5cc93-e4e5-4ea8-b88b-3056856a147f","Email":"","AvatarImage":"81b34943-cf75-40cb-a155-ff9c28599d9a.jpg","GeocacheFindCount":1414,"GeocacheHideCount":2,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[{"ImageID":12520555,"ImageGuid":"adc5f6e5-1094-4a82-9cd5-e4415ed0eefa","Name":"Dat war ne Gaudi","Descr":"","FileName":"adc5f6e5-1094-4a82-9cd5-e4415ed0eefa.jpg","Created":"07/11/2011","LogID":195636607,"CacheID":1811409,"ImageUrl":null}]},{"LogID":195374344,"CacheID":1811409,"LogGuid":"da7ed7e4-4eb2-4cbb-87ca-25ba5647e55b","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Heute einfach nochmal mit den Hunden hin, ohne Kinder und mit etwas mehr Zeit und Ruhe vom Instinkt leiten lassen. Und siehe da: ein Döschen.<br /><br />Dfdc","Created":"29/10/2011","Visited":"29/10/2011","UserName":"ceewee","MembershipLevel":3,"AccountID":2828282,"AccountGuid":"f3b9e609-633b-43af-9e34-1f8f54b86a9e","Email":"","AvatarImage":"c66d884a-742f-4fc1-832b-0ebd2d9d7d7d.jpg","GeocacheFindCount":470,"GeocacheHideCount":2,"ChallengesCompleted":3,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":194769701,"CacheID":1811409,"LogGuid":"b61445ed-a6b7-44bc-af4e-1123ecd6dbb1","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Owner Maintenance","LogTypeImage":"icon_maint.gif","LogText":"So, am Wochenende alles kontrolliert. Die ehemalige Villa Kunterbunt scheint Vandalen zum Opfer gefallen zu sein, auch die Tipis sind nicht mehr wirklich gut zu erkennen. Die Fragen habe ich daher angepasst.<br />Sowohl die Blume als auch die Seilfähre sind ohne Probleme machbar. Da sich anscheinend nicht jeder die Seilfähre zutraut bzw. die Fähre im Winter abgebaut wird, können die Final-KOs jetzt auch ohne diese Station ermittelt werden <img src=\"/images/icons/icon_smile_big.gif\" border=\"0\" align=\"middle\" />","Created":"25/10/2011","Visited":"25/10/2011","UserName":"Tom03","MembershipLevel":1,"AccountID":2025274,"AccountGuid":"9a28b2fb-bce9-481f-87bc-7c5f4bafe723","Email":"","AvatarImage":"07375e3c-fdf0-4d4f-b4f6-34fc4c5c5a24.jpg","GeocacheFindCount":152,"GeocacheHideCount":2,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":193961644,"CacheID":1811409,"LogGuid":"a3767f1f-8b92-4153-9cc9-b645c058cdf4","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Didn't find it","LogTypeImage":"icon_sad.gif","LogText":"Wir konnten den Kindern hier heute leider auch keinen Schatz zeigen.<br />An der PlumklosVilla wurden Bretter ausgebessert und ich nehme an das viele Holzkreise fehlen, da es nach der Formel mehr sein sollten wie Schafe.<br />Die Fähre finde ich für Kinder auch zu tricky und trotz Quersumme, und verschiedene Finalanläufe konnte wir hier nicht zum Ziel gelangen, schade.","Created":"22/10/2011","Visited":"22/10/2011","UserName":"ceewee","MembershipLevel":3,"AccountID":2828282,"AccountGuid":"f3b9e609-633b-43af-9e34-1f8f54b86a9e","Email":"","AvatarImage":"c66d884a-742f-4fc1-832b-0ebd2d9d7d7d.jpg","GeocacheFindCount":470,"GeocacheHideCount":2,"ChallengesCompleted":3,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":192928382,"CacheID":1811409,"LogGuid":"ae235a1b-3bd1-4ffe-b281-ac4c75717b1f","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Didn't find it","LogTypeImage":"icon_sad.gif","LogText":"Zusammen mit TheUnforgiven81 sollte dieser Multi auf einer gemütlichen Fahrrad-Cachetour mitgenommen werden. Wir fingen von \"hinten\" an und mussten leider schon bei der Seilfähre aufgeben. Wir hatten wohl irgendwie Tomaten auf den Augen...<br />Litis","Created":"16/10/2011","Visited":"16/10/2011","UserName":"Litis","MembershipLevel":1,"AccountID":4360540,"AccountGuid":"5eb5d151-c902-4edf-ba5c-20f3024aa256","Email":"","AvatarImage":"80eb3f0d-e8b2-4ecb-b1fc-fd71b5cd1288.jpg","GeocacheFindCount":266,"GeocacheHideCount":1,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":190838992,"CacheID":1811409,"LogGuid":"aade0fb8-fc36-4fef-92d0-355f98d24012","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Meinen 100. gefundenen Cache habe ich mir für einen Besuch bei guten Freunden aufgehoben. Mit den Kindern haben wir dieses schönes Multi gehoben. Eine Station hat mir ziemlich nasse Wanderstiefel eingebracht. Leider ist die Villa Kunterbunt arg mitgenommen und als solche nicht mehr zu erkennen. Außerdem fehlten die Holzscheiben komplett, sodass man das Ergebnis raten oder - besser - anhand eines der Fotos wenigstens ziemlich gut schätzen kann. Am Ende hatten wir ein Tippi zu wenig gezählt und eine Holzscheibe zu viel vermutet. Mit einer kleinen Korrektur war das Final kein Problem mehr.<br />Also lieber Owner: Wartung ist notwendig, ansonsten ein netter Multi. Danke!","Created":"05/10/2011","Visited":"03/10/2011","UserName":"Packapacka","MembershipLevel":1,"AccountID":1407315,"AccountGuid":"6a6bc47e-5b45-432c-9e83-bad2d74bfe2b","Email":"","AvatarImage":"","GeocacheFindCount":102,"GeocacheHideCount":7,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":190604619,"CacheID":1811409,"LogGuid":"1688c4f1-4884-410c-9bef-aba261848492","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Didn't find it","LogTypeImage":"icon_sad.gif","LogText":"Also das war leider ein Reinfall.<br />Wir waren mit 3 Erwachsenen und 2 hoch motivierten Kindern unterwegs. Leider gab es mit vielen Stationen Probleme. Das Zählen der Tipis ist stark mehrdeutig. Jeder von uns hatte eine andere Zahl ermittelt. Eine lachende Blume gibt es am Marterpfahl auch nicht mehr, weil hier jemand mit dem Messer rumgemetzelt hat. <br />Eine Villa Kunterbund haben wir so auch nicht gefunden. In dem Wegabschnitt gibt es eigentlich nur eine \"Donnerbalkenhütte\", sprich Plumsklo. Dort war keine Wand mit irgendwelchen runden Holzstücken zu finden.<br />Der Hinweis an der Seilfähre ist für einen Cache der sich Kindercache nennt ein paar Nummern zu anspruchsvoll.<br />Auf diese Art haben wir keine vernünftigen Koordinaten ermitteln können und die Kids waren schon recht traurig, dass wir keinen \"Schatz\" gefunden haben. <br />Ohne Vorinformation aus anderen Quellen lässt sich dieser Cache meines Erachtens nicht lösen. Schade!","Created":"04/10/2011","Visited":"03/10/2011","UserName":"AnDiLa","MembershipLevel":1,"AccountID":737513,"AccountGuid":"852f3105-639d-4f3b-a260-dcfbdab4b51f","Email":"","AvatarImage":"46b3f894-d5b1-45ce-89ee-200bb89ef838.jpg","GeocacheFindCount":330,"GeocacheHideCount":1,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":186141387,"CacheID":1811409,"LogGuid":"f5def3ff-daea-4810-8ba1-7db3a1774d5f","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Ein wirklich schön gemachter Kindercache, der schon am anfang mit viel Spaß und Gelächter begann ( Seilfähre) wir hatten zum Glück noch Wechselkleidung dabei. Die ganze Familie hat bei diesen Cach viel Spaß gehabt. Und da wir mit W4-taem auf der suche wahren konnte sich der Cache auch nicht lange verbergen.             <br />Ein toller Cache und ein sehr schönes Gelände;-))) <br />Danke <br />Vier????","Created":"12/09/2011","Visited":"12/09/2011","UserName":"vier????","MembershipLevel":1,"AccountID":3643149,"AccountGuid":"c1f4e8d3-b7be-4740-8891-3bc37ba0c506","Email":"","AvatarImage":"","GeocacheFindCount":346,"GeocacheHideCount":0,"ChallengesCompleted":1,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[{"ImageID":12016097,"ImageGuid":"8e37c011-3e11-4333-b69c-56e990a6c13c","Name":"","Descr":"Ein wirklich schön gemachter Kindercache, der schon am anfang mit viel Spaß und Gelächter begann ( Seilfähre) wir hatten zum Glück noch Wechselkleidung dabei. Die ganze Familie hat bei diesen Cach viel Spaß gehabt. Und da wir mit W4-taem auf der suche wahren konnte sich der Cache auch nicht lange verbergen.             \nEin toller Cache und ein sehr schönes Gelände;-))) \nDanke\nVier????","FileName":"8e37c011-3e11-4333-b69c-56e990a6c13c.jpg","Created":"12/09/2011","LogID":186141387,"CacheID":1811409,"ImageUrl":null}]},{"LogID":185911335,"CacheID":1811409,"LogGuid":"8dd5870e-46ef-4162-9897-62acc7a63717","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Heute mit den vier???? diesen Multi gemacht. Der Start für uns, die Seilbahn hätte fast für einen Abbruch gesorgt. Haben dann, auch wenn etwas nass, trotzdem weiter gemacht<img src=\"/images/icons/icon_smile_big.gif\" border=\"0\" align=\"middle\" />. Bis auf eine Station alles leicht zu lösen. <br />Out: TB <br /><br />Vielen Dank für diesen tollen Multi,<br />sagt das W4-Team","Created":"11/09/2011","Visited":"11/09/2011","UserName":"w4-team","MembershipLevel":3,"AccountID":3663334,"AccountGuid":"445903eb-f768-4d74-b26d-f811ddc50bb7","Email":"","AvatarImage":"b6812751-9eeb-482f-8617-50c9ec47b90d.jpg","GeocacheFindCount":417,"GeocacheHideCount":0,"ChallengesCompleted":19,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":181250482,"CacheID":1811409,"LogGuid":"1b1a53e3-50df-4881-8700-1e9bbec50635","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"hab ihn mit der familie und freundin gefunden...<br />war echt toll...habe sogar einen kleinen tauchgang von der seilfähre runter gemacht <img src=\"/images/icons/icon_smile_big.gif\" border=\"0\" align=\"middle\" /> <br />DFDC !!!","Created":"21/08/2011","Visited":"21/08/2011","UserName":"L8aube","MembershipLevel":1,"AccountID":4939791,"AccountGuid":"6723adb7-2aff-4d9b-836b-87df888a61d0","Email":"","AvatarImage":"","GeocacheFindCount":5,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[{"ImageID":11787263,"ImageGuid":"9ac96f8f-6e63-4087-be94-48a96ffaba67","Name":"seilfähre ","Descr":"kurz vorm tauchgang xD","FileName":"9ac96f8f-6e63-4087-be94-48a96ffaba67.jpg","Created":"21/08/2011","LogID":181250482,"CacheID":1811409,"ImageUrl":null}]},{"LogID":181220910,"CacheID":1811409,"LogGuid":"4b88db68-a5e8-4b37-9d5a-8cc406611457","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"den haben miss4tune und ich im team mit l8aube und gastcacher auf schöner kleiner vormittagsrunde gefunden und geloggt ;-)<br /><br />dfdc","Created":"21/08/2011","Visited":"21/08/2011","UserName":"Sir5al","MembershipLevel":3,"AccountID":3229535,"AccountGuid":"66de7735-1888-479b-8dbd-ada710747374","Email":"","AvatarImage":"9da1d6ed-3a3f-47cb-aba3-f5550abe7d11.jpg","GeocacheFindCount":624,"GeocacheHideCount":1,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[{"ImageID":11785894,"ImageGuid":"bfda9eb7-a4ae-4b59-b4d3-7deb3e08cd79","Name":"Upside Down","Descr":"kein Spoiler ;-)","FileName":"bfda9eb7-a4ae-4b59-b4d3-7deb3e08cd79.jpg","Created":"21/08/2011","LogID":181220910,"CacheID":1811409,"ImageUrl":null}]},{"LogID":177793540,"CacheID":1811409,"LogGuid":"20b859cf-216f-48c2-a0b7-d63caadb8086","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Owner Maintenance","LogTypeImage":"icon_maint.gif","LogText":"So, das Final ist jetzt besser versteckt ! Keine Brennesseln mehr... Die Quersumme stimmt jetzt auch, danke für den Hinweis. Das Original-Logbuch ist jetzt auch wieder in der Dose.... Und um den Spaß-Faktor zu erhöhen habe ich Station F. überarbeitet, hehehe.","Created":"06/08/2011","Visited":"06/08/2011","UserName":"Tom03","MembershipLevel":1,"AccountID":2025274,"AccountGuid":"9a28b2fb-bce9-481f-87bc-7c5f4bafe723","Email":"","AvatarImage":"07375e3c-fdf0-4d4f-b4f6-34fc4c5c5a24.jpg","GeocacheFindCount":152,"GeocacheHideCount":2,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":175386549,"CacheID":1811409,"LogGuid":"673321ec-75e9-4b1f-89d3-1c568f2f1352","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Kurzer Fahrradausflug mit Opa und den Kids (Schlenzer2000 und Sopranettchen). Wir haben gezählt, sind ins Wasser gefallen, haben uns nicht beirren lassen und am Final gesucht - nix. Tourdaten nochmal abgefahren, nachgerechnet - stimmt alles. Suchradius ausgeweitet und dann tatsächlich fündig geworden. Leider dem Regenguss nicht entkommen.<br />DFDC, Sopranette<br />#1008","Created":"26/07/2011","Visited":"26/07/2011","UserName":"Sopranette","MembershipLevel":3,"AccountID":1817201,"AccountGuid":"2cb6a31e-1da7-4b90-b844-962c5b76023f","Email":"","AvatarImage":"bd85f298-3276-4d19-a5f2-0cb8187a075c.jpg","GeocacheFindCount":1291,"GeocacheHideCount":18,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":173168272,"CacheID":1811409,"LogGuid":"a3ec8dfc-fee3-4ea7-939d-147558f68c14","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Needs Maintenance","LogTypeImage":"icon_needsmaint.gif","LogText":"Ja, stimmt...hatte ich in meinem Log vergessen zu notieren. Ich fand auch nur einen Notizzettel mit diversen Einträgen. Kein Logbuch vorhanden. Wäre schön, wenn das nachgeholt werdenkönnte bzw. ein möglicherweise abhanden gekommenes ersetzt würde.<br /><br />MfG","Created":"16/07/2011","Visited":"16/07/2011","UserName":"euroberlin","MembershipLevel":1,"AccountID":1329392,"AccountGuid":"54b15127-29a6-4749-9a56-5a782a90954d","Email":"","AvatarImage":"d1ea7c15-cd92-417b-a33e-a6ba286ad04f.jpg","GeocacheFindCount":358,"GeocacheHideCount":5,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":173093539,"CacheID":1811409,"LogGuid":"c3858175-ba9d-47b2-a7f7-03bd22f510ff","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Heute wollten wir mal Oma zeigen, was Geocachen ist... Dafür bot sich dieser Kindercache an und wir zogen los, diesen großen Spielplatz unsicher zu machen. Alles lief wie am Schnürchen - bis zum Finale. Die Quersumme stimmte, die Final-KO`s waren eingegeben, doch wo war die Dose??? Es brauchte einige Zeit bis diese ausgemacht war und einige Überwindung sich mit kurzen Hosen durch die Brennessel zu schlagen. Die Dose passte dann irgendwie nicht zu diesem wirklich schönen Cache. Für einen Kindercache war die Dose recht klein und ein richtiges Log-Buch war nicht vorhanden. Schade eigentlich. Daher kleine Abzüge in der B-Note. Trotzdem kommt Oma bestimmt nochmal mit ;-) ......<br /><br />Die LFW-Schnüffler","Created":"16/07/2011","Visited":"16/07/2011","UserName":"LFW-Schnüffler","MembershipLevel":3,"AccountID":2717413,"AccountGuid":"6062f301-7690-4f38-9772-4f94de5e5f56","Email":"","AvatarImage":"dd298bd3-1af9-4f3c-9d8b-ddfdfe746e56.jpg","GeocacheFindCount":325,"GeocacheHideCount":0,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":173063969,"CacheID":1811409,"LogGuid":"2ac5515f-da8a-4e4f-9797-f682cf119f7a","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Mhh Wochenende, gutes Wetter und Ferien...ja, das sind ja gleich drei Dinge auf einmal..das geht nun wirklich nicht - doch! geht wohl! Diesen wollte ich heute abgehen und bemerkte doch sogleich, dass sich eine Familie (Vater, Mutter, zwei Kinder) auffällig unauffällig in bester Geocacher Weise durch den Kinderwald bewegten. Ich tat dies in gebührendem Abstand ebenfalls und so unauffällig, dass die hier überall \"herumstreunenden\" Kinder nichts mitbekamen :) Am Final musste ich mit meinem zweirädrigen Cachemobil zunächst unauffällig weiterfahren, da besagte \"Konkurrenz\" wie wild in der Botanik am Suchen war :) ca. 20 Minuten später erfolgte ein erneutes Heranpirschen meinerseits, doch die Konkurrenz war noch nicht so weit - ich konnte aber schon das Eintragen ins Logbuch beobachten. Spätestens jetzt wusste ich, dass die errechneten KO´s stimmig sind (auch wenn meine Quersumme 48 ergibt!). Nach einer weiteren kurzen Wartezeit konnte ich das kleine Döschen dann auch endlich suchen. Und es war dank einer recht eindeutigen \"Cacherautobahn\" auch ganz fix gefunden. Ich habe die Tarnung ein bisschen verstärkt. Ein sehr angenehmer Multicache, der mir jedoch an der \"Villa Kunterbunt\"-Station ein bisschen Sorgen machte. Ich brauchte hier doch glatt drei Anläufe um besagte Villa als solche zu identifizieren. Ob der Name so passend ist...ich weiß nicht. Die Villa trägt ja noch einen anderen weit hin sichtbaren Namen, der ist viel passender und auch der Grund, warum ich die Villa nicht sofort erkannt habe :-)<br /><br />Vielen Dank für den Cache... endlich mal wieder einer hier... nachdem der NC, der hier mal lag, von mir leider nicht beendet werden konnte.<br /><br />Viele Grüße!","Created":"16/07/2011","Visited":"16/07/2011","UserName":"euroberlin","MembershipLevel":1,"AccountID":1329392,"AccountGuid":"54b15127-29a6-4749-9a56-5a782a90954d","Email":"","AvatarImage":"d1ea7c15-cd92-417b-a33e-a6ba286ad04f.jpg","GeocacheFindCount":358,"GeocacheHideCount":5,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":194857848,"CacheID":1811409,"LogGuid":"ea0cfc42-738a-4a5b-8b62-8bddf9d987d4","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Habe jetzt endlich mein eigenes Konto und logge meine Fünde nach. Danke für den Cache! MitCacherTochter","Created":"25/10/2011","Visited":"22/06/2011","UserName":"MitCacherTochter","MembershipLevel":1,"AccountID":5172770,"AccountGuid":"fdd335f8-1c55-4f01-9218-5bc1ac6eefbd","Email":"","AvatarImage":"7d02f96f-98d3-4b14-a41d-644dc5272231.jpg","GeocacheFindCount":165,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":168242205,"CacheID":1811409,"LogGuid":"e675ecb7-4527-444c-a20b-99ed331bff79","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Wunderbar, ein echter Kindermulti, Kinder, sowie Erwachsene hatten viel Spaß auf dieser Runde! Schöne und gut erreichbare ZS, auch die Dose war gut für die Kinder zu finden und die Freude war groß;-) ein Erfolgserlebnis! DfdC ","Created":"22/06/2011","Visited":"22/06/2011","UserName":"-Sunrise-","MembershipLevel":1,"AccountID":4478343,"AccountGuid":"88965e17-b4d4-4c28-9359-170b72e8c9c8","Email":"","AvatarImage":"4d9018e7-66d9-4eed-a0b4-a9050242fcb2.jpg","GeocacheFindCount":664,"GeocacheHideCount":0,"ChallengesCompleted":1,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]}], "pageInfo": { "idx":1, "size": 25, "totalRows": 83, "rows": 83 } };
+initalLogs = {"status":"success", "data": [{"LogID":231530286,"CacheID":1811409,"LogGuid":"8eb0b604-5ef7-4a57-a705-8a1d4ed1b494","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Nach der Pflege der chaches durch den Owner nun gut gefunden.<br />Danke","Created":"04/05/2012","Visited":"28/04/2012","UserName":"Fluti","MembershipLevel":1,"AccountID":5366533,"AccountGuid":"63f7ba3b-a343-43eb-b5a7-eb022b79d5c8","Email":"","AvatarImage":"","GeocacheFindCount":110,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":229810425,"CacheID":1811409,"LogGuid":"d511c614-da66-4add-a3fb-b99e366eb6cb","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Heute hat's endlich geklappt. Beim letzten Mal war die Villa leider zerstört. Undich muss zugeben, dass ich \"F\" ausgerechnet habe; die Fähre hat doch zu sehr gewackelt. So war zusammen mit Fluti der Final schnell gefunden. <br /><br />Out: Coin, die hier nicht geloggt war<br /><br />DFDC<br />holgi30926","Created":"28/04/2012","Visited":"28/04/2012","UserName":"holgi30926","MembershipLevel":3,"AccountID":2098710,"AccountGuid":"096bdcf2-2a4c-41f7-991c-909ac1ce6f66","Email":"","AvatarImage":"","GeocacheFindCount":1429,"GeocacheHideCount":8,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":228572473,"CacheID":1811409,"LogGuid":"e58e81c4-0ad4-40de-aa22-4f03562cbb69","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Heute haben wir uns im Kinderwald aufgehalten und diesen nebenbei erledigt. Im Sommer ist der Staudamm sicherlich ein Highlight, ein Glück haben die Kids diesen heute übersehen - das Wetter war wirklich nicht nach Baden...<br />Danke für die Runde sagt der Dimple!","Created":"22/04/2012","Visited":"22/04/2012","UserName":"dimple_roeder","MembershipLevel":3,"AccountID":946162,"AccountGuid":"1ef681aa-3544-49ae-b46c-e8e5004f7601","Email":"","AvatarImage":"","GeocacheFindCount":460,"GeocacheHideCount":8,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":228454374,"CacheID":1811409,"LogGuid":"246620dc-357e-4017-9535-c27bcb249aea","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"heute auf unserer \"Hunderunde\" bei echtem \"Mischwetter\" gefunden und geloggt!Hatten viel Spaß dabei, natürlich allem voran Sohnemann beim Zählen, Klettern, Floß fahren und Bockspringen!<br />DFDC <img src=\"/images/icons/icon_smile_tongue.gif\" border=\"0\" align=\"middle\" />","Created":"22/04/2012","Visited":"22/04/2012","UserName":"Teammafia","MembershipLevel":1,"AccountID":4813789,"AccountGuid":"d783c930-1907-41e3-b5f1-21e40d117082","Email":"","AvatarImage":"527ed6ab-ac74-49e5-a4c3-16ea57bbc508.jpg","GeocacheFindCount":112,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":227775349,"CacheID":1811409,"LogGuid":"931d3d21-cc12-4270-8b8c-a8b736735d42","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Diese kleine lässt sich auch gut mit dem Kinderwagen erledigen. Wir kommen wieder, wenn unsere Kleine größer ist. TFTC","Created":"19/04/2012","Visited":"19/04/2012","UserName":"hofoen","MembershipLevel":1,"AccountID":3776133,"AccountGuid":"78a812dc-caeb-45f3-b25e-17320cfcd89c","Email":"","AvatarImage":"","GeocacheFindCount":332,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":226738109,"CacheID":1811409,"LogGuid":"24224b6f-ab25-45d4-9c79-03bcdca82f08","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"sehr schöne stationen - hat uns sehr viel spaß gemacht.<br />katha und dirk sagen danke!<br />dfdc heidefink","Created":"15/04/2012","Visited":"15/04/2012","UserName":"Heidefink","MembershipLevel":1,"AccountID":5606942,"AccountGuid":"ef10618f-03ed-4ba9-b012-980ade021ebd","Email":"","AvatarImage":"","GeocacheFindCount":25,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":226471149,"CacheID":1811409,"LogGuid":"04787cef-535c-42ef-8481-66bc4656dbe5","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Kindergeburtstag ab in den Wald.<br /><br />Schönes fleckchen. Der Cache hat Spaß gemacht!<br /><br />Vielen Dank,<br /><br />Fxboarder","Created":"14/04/2012","Visited":"13/04/2012","UserName":"Fxboarder","MembershipLevel":1,"AccountID":2240431,"AccountGuid":"963fb506-4f05-425d-9334-c3a9aa75ae6d","Email":"","AvatarImage":"8cefae8a-191b-4ae8-a467-007404fa245b.jpg","GeocacheFindCount":85,"GeocacheHideCount":1,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":231872584,"CacheID":1811409,"LogGuid":"9b6b5c72-9b7c-4a0c-8dac-55f03635f2aa","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"zusammen mit tigerente83 auf runde gegangen.dfdc","Created":"05/05/2012","Visited":"11/04/2012","UserName":"dieStahmi`s","MembershipLevel":1,"AccountID":5709955,"AccountGuid":"90be5fae-f5c5-4811-949d-b7752b46d972","Email":"","AvatarImage":"","GeocacheFindCount":22,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":225919337,"CacheID":1811409,"LogGuid":"c8905510-727a-4cbc-b7d5-fe3961cb5ccb","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"die stahmis waren in hannover zu besuch. da musste natürlich ein cache her. einer der kindgerecht ist, das passt super. also sind wir gemeinsam mit den stahmis losgezogen. geparkt hatten wir am anderen ende des waldes, aber das laufen bei so schönem wetter machte uns ja nichts aus. dann ging es los. auch wir erwachsenen fühlten uns hier im kinderwald pudelwohl. leider mussten wir feststellen, dass die seilfähre keine erwachsenen personen aushält..... :))) es hat riesig spaß gemacht einen so tollen ort kennengelernt zu haben. dfdc","Created":"12/04/2012","Visited":"11/04/2012","UserName":"tigerente83","MembershipLevel":3,"AccountID":2311284,"AccountGuid":"15a4b180-780b-4cd9-91e0-f84416b80092","Email":"","AvatarImage":"ba1922cb-5dad-4ecc-8927-ac97e5c98628.jpg","GeocacheFindCount":303,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":225305148,"CacheID":1811409,"LogGuid":"22096f48-a969-4eaa-b2db-21d759cf21b2","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Jau gut gefunden bei schönem norddeutschem Schietwetter. Danke für den Cache. Hat Spaß gemacht.","Created":"09/04/2012","Visited":"09/04/2012","UserName":"Nite74","MembershipLevel":3,"AccountID":3835615,"AccountGuid":"e5e42073-2ce3-4370-8d8e-97623bf1b24a","Email":"","AvatarImage":"66bdf1e5-671e-4faa-a2f2-1796b54d9e30.jpg","GeocacheFindCount":1366,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":225559034,"CacheID":1811409,"LogGuid":"860ee9e1-f481-4ceb-ba4e-c6437b3afd25","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"DFDC","Created":"10/04/2012","Visited":"06/04/2012","UserName":"Papa Bär","MembershipLevel":1,"AccountID":5688435,"AccountGuid":"67bd1445-f51d-499d-9a23-a4826a10d833","Email":"","AvatarImage":"","GeocacheFindCount":13,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":223893771,"CacheID":1811409,"LogGuid":"2bfe7d4d-f3fe-4fd9-abca-c78ee68bcea1","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Fahrradtour mit der Familie. <br />Schöner Cache. Danke ;)","Created":"06/04/2012","Visited":"06/04/2012","UserName":"Mr. Smile","MembershipLevel":1,"AccountID":5610631,"AccountGuid":"4f858b39-b923-4013-9359-49c0e546a6ca","Email":"","AvatarImage":"","GeocacheFindCount":61,"GeocacheHideCount":0,"ChallengesCompleted":1,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":220995647,"CacheID":1811409,"LogGuid":"9868a139-cdd8-48a7-8bc2-5daabe0b6b49","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"ein schöner nachmittagsspaziergang , gekrönt durch den cache für papa ;)<br />die stationen sind gut gewählt, hat spass gemacht tftc","Created":"25/03/2012","Visited":"25/03/2012","UserName":"nick3r","MembershipLevel":1,"AccountID":5123678,"AccountGuid":"290f218f-2139-4ab1-9777-d57014c3e763","Email":"","AvatarImage":"","GeocacheFindCount":120,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":218288422,"CacheID":1811409,"LogGuid":"c52facc4-1cda-4644-8ca3-3ea7b6633ce6","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Heute mit Sohnemann diesen schönen Cache gesucht<br />und nach etwas Hilfe von Robotec (der auch mit Nachwuchs unterwegs war) geloggt.<br />Vielen Dank für das nette Gespräch.<br /><br />DFDC.","Created":"13/03/2012","Visited":"11/03/2012","UserName":"birdiegolfer23","MembershipLevel":3,"AccountID":5467285,"AccountGuid":"c42188ca-89f1-4855-98d4-e647b6b16094","Email":"","AvatarImage":"","GeocacheFindCount":62,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":217800041,"CacheID":1811409,"LogGuid":"c7a637a2-e5bf-48ad-84e7-343c98757fbd","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Diesen super tollen Cache hab ich heute mit meinem CoCacher gefunden.....<br />und dabei noch die \"Birdiegolfer23\" getroffen. <br />Cachergrüße und happy Caching........<br /><br />Robotec","Created":"11/03/2012","Visited":"11/03/2012","UserName":"Robotec","MembershipLevel":1,"AccountID":126000,"AccountGuid":"3e192c0b-5f73-4ed7-bd81-6c1880240fc2","Email":"","AvatarImage":"","GeocacheFindCount":1266,"GeocacheHideCount":14,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":221032149,"CacheID":1811409,"LogGuid":"f2691dfc-8803-47c7-b1b2-9a58755bbd85","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Auf dem Rückweg vom eigentlichen Nachtcache, haben wir uns dann auch gern noch dem Kinderwald gewidmet. Leider war keine Seilfähre da, so dass uns DIESER Spaß versagt bliebt. Hat dennoch Spaß gemacht, dfdC.","Created":"25/03/2012","Visited":"09/03/2012","UserName":"HaSeesel","MembershipLevel":3,"AccountID":2708159,"AccountGuid":"c13d03e5-9ecf-41ed-a908-02c25efcaa7f","Email":"","AvatarImage":"6c542347-f20a-42d1-8ebb-cf02796ebdd4.jpg","GeocacheFindCount":1259,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":217367331,"CacheID":1811409,"LogGuid":"e701e9a2-a93b-4e8f-a8ab-1eb482ca1775","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Als kleines Add-on mitgenommen, nachdem wir den in der näheliegenden NC gemacht hatten.","Created":"10/03/2012","Visited":"09/03/2012","UserName":"Schakedimes","MembershipLevel":3,"AccountID":2382924,"AccountGuid":"28ad4c8c-761b-4f0d-9599-defe47f35a13","Email":"","AvatarImage":"ea77e92b-b00f-4790-8fd1-e6be5e1e13db.jpg","GeocacheFindCount":1095,"GeocacheHideCount":0,"ChallengesCompleted":22,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":217315187,"CacheID":1811409,"LogGuid":"1383a593-c477-41ac-b701-13c0691a87a9","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Den haben wir (Rasenhasen,HaSeesel,Schakedimes et moi) fix noch als Nachtcache auf dem Rückweg gemacht. Alles gut und schnell gefunden, dfdC!","Created":"09/03/2012","Visited":"09/03/2012","UserName":"eiendjee","MembershipLevel":3,"AccountID":3414541,"AccountGuid":"6106d2d5-ef32-4427-a651-4bfdcb20934c","Email":"","AvatarImage":"b7da7cde-60f4-443b-9b59-a15dee0301a1.jpg","GeocacheFindCount":1684,"GeocacheHideCount":8,"ChallengesCompleted":16,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":217308134,"CacheID":1811409,"LogGuid":"80172472-0b5f-4925-8276-32747e9d3497","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"auf nächtlicher Runde haben wir diesen noch mitgenommen. Danke dafür.","Created":"09/03/2012","Visited":"09/03/2012","UserName":"RasenHasen","MembershipLevel":3,"AccountID":3517737,"AccountGuid":"d3db6f42-0766-4edb-bd2a-5ce5f9012b38","Email":"","AvatarImage":"b9f820e1-3e03-4d45-bf41-91e09da94cf8.jpg","GeocacheFindCount":785,"GeocacheHideCount":0,"ChallengesCompleted":17,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":214911725,"CacheID":1811409,"LogGuid":"e7dec4b1-cbfc-4e0e-94ab-3308871fa7ac","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"zusammen mit PoLiDiS gesucht und gefunden...","Created":"26/02/2012","Visited":"26/02/2012","UserName":"LeonBer","MembershipLevel":1,"AccountID":1307086,"AccountGuid":"52a3156d-a119-43ab-9bbe-cde0ddb38dbc","Email":"","AvatarImage":"","GeocacheFindCount":325,"GeocacheHideCount":1,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[{"ImageID":13242991,"ImageGuid":"918f931a-c491-4222-b55f-5895fe038269","Name":"WP_000223","Descr":"","FileName":"918f931a-c491-4222-b55f-5895fe038269.jpg","Created":"26/02/2012","LogID":214911725,"CacheID":1811409,"ImageUrl":null}]},{"LogID":214874459,"CacheID":1811409,"LogGuid":"130942e4-5b09-4cba-9c1c-9a7c82171f8f","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"sehr viel Interessantes gelernt. Das Wetter hat auch mit gespielt...<br /><br />DFDC","Created":"26/02/2012","Visited":"26/02/2012","UserName":"PoliDis","MembershipLevel":1,"AccountID":3934256,"AccountGuid":"6738c0fc-b042-4312-8c75-04016efee18a","Email":"","AvatarImage":"5adae921-fb15-4ab3-9710-e5101650bbe0.jpg","GeocacheFindCount":41,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[{"ImageID":13241492,"ImageGuid":"e4de21cb-6437-4ed0-a04a-37dc62abe6a1","Name":"Kinderwald","Descr":"","FileName":"e4de21cb-6437-4ed0-a04a-37dc62abe6a1.jpg","Created":"26/02/2012","LogID":214874459,"CacheID":1811409,"ImageUrl":null}]},{"LogID":213437802,"CacheID":1811409,"LogGuid":"00aa71e9-ab74-47b3-a786-b65a1261f44c","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Heute bei leichtem Regen diesen tollen Cache gut gefunden.Alle Stationen sind gut zu finden.Ja da möchte man nochmal Kind sein toller Platz für die Großen und kleinen Kinder.<br /><br />Danke für den Cache.<br /><br />Bis denne Norbi.","Created":"19/02/2012","Visited":"19/02/2012","UserName":"Norbi","MembershipLevel":3,"AccountID":554812,"AccountGuid":"22c6850b-44ef-4837-9966-6c15a2ed9ccc","Email":"","AvatarImage":"09d2770a-b562-4191-ab8e-8bc8a10d2a76.jpg","GeocacheFindCount":1223,"GeocacheHideCount":3,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":210544989,"CacheID":1811409,"LogGuid":"c3e61373-8bfd-486a-bd29-756ea2525645","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"-4°C. Aber ein sehr schöner Spaziergang und unsere kleinen hatten bei der klirrenden Kälte auch ohne Seilfähre ihren Spaß.<br />Eine sehr aufwendige Arbeit, die von jedem geschätzt werden sollte. <br />DFDC<br />A.Meise<br /><br />TB-Drop","Created":"29/01/2012","Visited":"29/01/2012","UserName":"a.meise","MembershipLevel":3,"AccountID":1405245,"AccountGuid":"df13f5d1-0d3a-49eb-a41d-725bb1664a88","Email":"","AvatarImage":"2ad84894-cb7c-4595-ac1e-1711873d0ca2.jpg","GeocacheFindCount":177,"GeocacheHideCount":6,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":208289692,"CacheID":1811409,"LogGuid":"4bbce528-844a-41c8-a881-160f9d5abeb2","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Hallo :-)<br />Danke für diesen schönen Cache !!!<br />War ja auch eine kleine Zeitreise in meine Kindheit obwohl es ja damals den Kinderwald noch nicht gab.<br />Es gab trotzdem viele \"Abenteuer\" im Forst ;-)<br />Jendopa","Created":"15/01/2012","Visited":"14/01/2012","UserName":"Jendopa","MembershipLevel":1,"AccountID":4179363,"AccountGuid":"16f7dc47-cdb7-464d-b8fe-85e4f979ac5a","Email":"","AvatarImage":"","GeocacheFindCount":45,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":199083747,"CacheID":1811409,"LogGuid":"09c926b9-c545-4683-836e-c1bbfd04e553","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Schade, ich habe den Aufstieg in die höheren Etagen vermisst (wie die zwei Cache vorher), aber der Cache ist trotzdem gut gemacht. 2 große Kinder sind heute duch den Kinderwald gestreift.<br />Vielen Dank für die Tour und Gruss vom PS","Created":"15/11/2011","Visited":"15/11/2011","UserName":"powersearcher","MembershipLevel":3,"AccountID":623231,"AccountGuid":"bf288d6d-c3a9-490b-a862-fe37d04a6dd4","Email":"","AvatarImage":"47be780e-8ee5-416b-9409-787c01463294.jpg","GeocacheFindCount":4680,"GeocacheHideCount":50,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]}], "pageInfo": { "idx":1, "size": 25, "totalRows": 106, "rows": 106 } };
 //]]>
 </script>
 </form>
@@ -2351,9 +2375,15 @@ initalLogs = {"status":"success", "data": [{"LogID":210544989,"CacheID":1811409,
                 addclass: false,
                 addtitle: false
             });
+
             // Hide the warning message if the user closed it already
             if ($.cookie('hide_warning') != null) {
                 $(".WarningMessage").hide();
+            } else {
+                $("#warningCloseButton").click(function () {
+                    $('.WarningMessage').hide('blind');
+                    $.cookie('hide_warning', 'true', { expires: 1 });
+                });
             }
 
             function isiOS() {
@@ -2517,6 +2547,6 @@ initalLogs = {"status":"success", "data": [{"LogID":210544989,"CacheID":1811409,
     </div>
     <!-- End Quantcast tag -->
     
-    <!-- Server: WEB02; Build: Web.HotFix_20120213.4 -->
+    <!-- Server: WEB17; Build: Web.HotFix_20120508.2 -->
 </body>
 </html>

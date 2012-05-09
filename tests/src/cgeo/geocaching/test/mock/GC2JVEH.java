@@ -157,4 +157,12 @@ public class GC2JVEH extends MockedCache {
         return spoilers;
     }
 
+    @Override
+    public String getPersonalNote() {
+        if ("blafoo".equals(this.getMockedDataUser())) {
+            return "Selig";
+        }
+        return super.getPersonalNote();
+    }
+
 }
