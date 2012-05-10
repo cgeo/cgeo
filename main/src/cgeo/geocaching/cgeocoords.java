@@ -67,7 +67,7 @@ public class cgeocoords extends Dialog {
 
         try {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+            getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         } catch (Exception e) {
             // nothing
         }

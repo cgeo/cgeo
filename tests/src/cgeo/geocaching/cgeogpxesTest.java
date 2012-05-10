@@ -6,7 +6,7 @@ public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
     private final cgeogpxes importGpxActivity = new cgeogpxes();
 
     public cgeogpxesTest() {
-        super("cgeo.geocaching", cgeogpxes.class);
+        super(cgeogpxes.class);
     }
 
     public void testFileNameMatches() {

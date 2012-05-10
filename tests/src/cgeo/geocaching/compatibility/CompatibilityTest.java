@@ -11,7 +11,7 @@ public class CompatibilityTest extends ActivityInstrumentationTestCase2<cgeo> {
     private cgeo activity;
 
     public CompatibilityTest() {
-        super("cgeo.geocaching", cgeo.class);
+        super(cgeo.class);
     }
 
     @Override

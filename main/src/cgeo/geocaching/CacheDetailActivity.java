@@ -1175,7 +1175,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         private ViewGroup createAttributeIconsLayout(int parentWidth) {
             final LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
-            rows.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+            rows.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             rows.setOrientation(LinearLayout.VERTICAL);
 
             LinearLayout attributeRow = newAttributeIconsRow();
@@ -1223,7 +1223,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         private LinearLayout newAttributeIconsRow() {
             LinearLayout rowLayout = new LinearLayout(CacheDetailActivity.this);
-            rowLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+            rowLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.WRAP_CONTENT));
             rowLayout.setOrientation(LinearLayout.HORIZONTAL);
             return rowLayout;

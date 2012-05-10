@@ -7,7 +7,7 @@ import android.test.ActivityInstrumentationTestCase2;
 public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
 
     public SettingsTest() {
-        super("cgeo.geocaching", cgeo.class);
+        super(cgeo.class);
     }
 
     @Override
@@ -24,5 +24,9 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
         assertNotNull(mapFile);
         // We just want to ensure that it does not throw any exception but we do not know anything about the result
         MapsforgeMapProvider.isValidMapFile(mapFile);
+    }
+
+    public static void testSettings() {
+        assertEquals(Settings.getMemberStatus(), "Premium Member");
     }
 }

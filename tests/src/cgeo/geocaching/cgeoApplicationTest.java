@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.AbstractSearchThread;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.connector.gc.Tile;
@@ -25,7 +26,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 import junit.framework.Assert;
 
@@ -69,7 +70,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
         assertEquals("http://www.geocaching.com/images/wpttypes/21.gif", tb.getIconUrl());
         assertEquals("blafoo's Children Music CD", tb.getName());
         assertEquals("Travel Bug Dog Tag", tb.getType());
-        assertEquals(new Date(2009 - 1900, 8 - 1, 24), tb.getReleased());
+        assertEquals(new GregorianCalendar(2009 - 1900, 8 - 1, 24), tb.getReleased());
         assertEquals("Niedersachsen, Germany", tb.getOrigin());
         assertEquals("blafoo", tb.getOwner());
         assertEquals("0564a940-8311-40ee-8e76-7e91b2cf6284", tb.getOwnerGuid());

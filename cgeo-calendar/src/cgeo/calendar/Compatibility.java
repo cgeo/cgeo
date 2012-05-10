@@ -5,7 +5,7 @@ import android.os.Build;
 
 public final class Compatibility {
 
-    private final static int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
+    private final static int sdkVersion = Build.VERSION.SDK_INT;
     private final static boolean isLevel8 = sdkVersion >= 8;
     private final static boolean isLevel14 = sdkVersion >= 14;
 

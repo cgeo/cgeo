@@ -6,7 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 public class ProgressTest extends ActivityInstrumentationTestCase2<cgeo> {
     public ProgressTest() {
-        super("cgeo.geocaching", cgeo.class);
+        super(cgeo.class);
     }
 
     public void testProgressWrapper() {

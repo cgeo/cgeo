@@ -71,7 +71,7 @@ public class HtmlImage implements Html.ImageGetter {
     public BitmapDrawable getDrawable(final String url) {
         // Reject empty and counter images URL
         if (StringUtils.isBlank(url) || isCounter(url)) {
-            return new BitmapDrawable(getTransparent1x1Image());
+            return new BitmapDrawable(resources, getTransparent1x1Image());
         }
 
         final boolean shared = url.contains("/images/icons/icon_");
@@ -143,7 +143,7 @@ public class HtmlImage implements Html.ImageGetter {
             height = imgHeight;
         }
 
-        final BitmapDrawable image = new BitmapDrawable(imagePre);
+        final BitmapDrawable image = new BitmapDrawable(resources, imagePre);
         image.setBounds(new Rect(0, 0, width, height));
 
         return image;

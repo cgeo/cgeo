@@ -556,7 +556,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         public TouchListener(final cgCache cache) {
             this.cache = cache;
             final FlingGesture dGesture = new FlingGesture(cache);
-            gestureDetector = new GestureDetector(dGesture);
+            gestureDetector = new GestureDetector(getContext(), dGesture);
         }
 
         // tap on item

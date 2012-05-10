@@ -1541,7 +1541,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public View makeView() {
         ImageView imageView = new ImageView(activity);
         imageView.setScaleType(ScaleType.CENTER);
-        imageView.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+        imageView.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         return imageView;
     }
 
