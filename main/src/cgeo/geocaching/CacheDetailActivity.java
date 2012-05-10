@@ -1666,7 +1666,9 @@ public class CacheDetailActivity extends AbstractActivity {
             Button buttonRemove = (Button) view.findViewById(R.id.remove_from_watchlist);
             TextView text = (TextView) view.findViewById(R.id.watchlist_text);
 
-            if (cache.isOnWatchlist()) {
+            boolean userIsOwner = StringUtils.equals(cache.getOwnerReal(), Settings.getUsername());
+
+            if (cache.isOnWatchlist() || userIsOwner) {
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setVisibility(View.VISIBLE);
                 text.setText(R.string.cache_watchlist_on);
@@ -1675,6 +1677,15 @@ public class CacheDetailActivity extends AbstractActivity {
                 buttonRemove.setVisibility(View.GONE);
                 text.setText(R.string.cache_watchlist_not_on);
             }
+
+            // the owner of a cache has it always on his watchlist. Adding causes an error
+            if (userIsOwner) {
+                buttonAdd.setEnabled(false);
+                buttonAdd.setVisibility(View.GONE);
+                buttonRemove.setEnabled(false);
+                buttonRemove.setVisibility(View.GONE);
+            }
+
         }
 
         /**
