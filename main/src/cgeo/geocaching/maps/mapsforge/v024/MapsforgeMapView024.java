@@ -45,7 +45,7 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     @Override
     public void draw(Canvas canvas) {
         try {
-            if (getMapZoomLevel() >= 22) { // to avoid too close zoom level (mostly on Samsung Galaxy S series)
+            if (getMapZoomLevel() > 22) { // to avoid too close zoom level (mostly on Samsung Galaxy S series)
                 getController().setZoom(22);
             }
 
