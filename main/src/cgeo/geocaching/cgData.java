@@ -2300,7 +2300,7 @@ public class cgData {
 
         // offline caches only
         if (stored) {
-            where.append(" and reason >= 1");
+            where.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
         }
 
         try {
@@ -2737,6 +2737,12 @@ public class cgData {
         return count;
     }
 
+    /**
+     * Remove a list. Caches in the list are moved to the standard list.
+     *
+     * @param listId
+     * @return true if the list got deleted, false else
+     */
     public boolean removeList(int listId) {
         boolean status = false;
         if (listId < customListIdOffset) {
@@ -2750,8 +2756,9 @@ public class cgData {
             int cnt = databaseRW.delete(dbTableLists, "_id = " + (listId - customListIdOffset), null);
 
             if (cnt > 0) {
+                // move caches from deleted list to standard list
                 ContentValues values = new ContentValues();
-                values.put("reason", 1);
+                values.put("reason", StoredList.STANDARD_LIST_ID);
                 databaseRW.update(dbTableCaches, values, "reason = " + listId, null);
 
                 status = true;

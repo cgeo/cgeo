@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
@@ -273,6 +274,10 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
     @Override
     protected void tearDown() throws Exception {
+        SearchResult search = cgeoapplication.getInstance().getBatchOfStoredCaches(false, null, CacheType.ALL, listId);
+        List<cgCache> cachesInList = new ArrayList<cgCache>();
+        cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+        cgeoapplication.getInstance().markDropped(cachesInList);
         cgeoapplication.getInstance().removeList(listId);
         deleteDirectory(tempDir);
         Settings.setStoreOfflineMaps(importCacheStaticMaps);
