@@ -70,7 +70,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
         assertEquals("http://www.geocaching.com/images/wpttypes/21.gif", tb.getIconUrl());
         assertEquals("blafoo's Children Music CD", tb.getName());
         assertEquals("Travel Bug Dog Tag", tb.getType());
-        assertEquals(new GregorianCalendar(2009 - 1900, 8 - 1, 24), tb.getReleased());
+        assertEquals(new GregorianCalendar(2009, 8 - 1, 24).getTime(), tb.getReleased());
         assertEquals("Niedersachsen, Germany", tb.getOrigin());
         assertEquals("blafoo", tb.getOwner());
         assertEquals("0564a940-8311-40ee-8e76-7e91b2cf6284", tb.getOwnerGuid());
@@ -181,10 +181,20 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByCoords() {
-        final SearchResult search = GCParser.searchByCoords(new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, false);
-        assertNotNull(search);
-        assertTrue(18 <= search.getGeocodes().size());
-        assertTrue(search.getGeocodes().contains("GC1RMM2"));
+        // backup user settings
+        final boolean excludeMine = Settings.isExcludeMyCaches();
+        try {
+            // set up settings required for test
+            Settings.setExcludeMine(false);
+
+            final SearchResult search = GCParser.searchByCoords(new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, false);
+            assertNotNull(search);
+            assertTrue(20 <= search.getGeocodes().size());
+            assertTrue(search.getGeocodes().contains("GC1RMM2"));
+        } finally {
+            // restore user settings
+            Settings.setExcludeMine(excludeMine);
+        }
     }
 
     /**
@@ -192,10 +202,21 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByOwner() {
-        final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY, false);
-        assertNotNull(search);
-        assertEquals(3, search.getGeocodes().size());
-        assertTrue(search.getGeocodes().contains("GC36RT6"));
+        // backup user settings
+        final boolean excludeMine = Settings.isExcludeMyCaches();
+        try {
+            // set up settings required for test
+            Settings.setExcludeMine(false);
+
+            final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY, false);
+            assertNotNull(search);
+            assertEquals(3, search.getGeocodes().size());
+            assertTrue(search.getGeocodes().contains("GC36RT6"));
+
+        } finally {
+            // restore user settings
+            Settings.setExcludeMine(excludeMine);
+        }
     }
 
     /**
@@ -203,10 +224,21 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByUsername() {
-        final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM, false);
-        assertNotNull(search);
-        assertEquals(3, search.getTotal());
-        assertTrue(search.getGeocodes().contains("GCP0A9"));
+        // backup user settings
+        final boolean excludeMine = Settings.isExcludeMyCaches();
+        try {
+            // set up settings required for test
+            Settings.setExcludeMine(false);
+
+            final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM, false);
+            assertNotNull(search);
+            assertEquals(3, search.getTotal());
+            assertTrue(search.getGeocodes().contains("GCP0A9"));
+
+        } finally {
+            // restore user settings
+            Settings.setExcludeMine(excludeMine);
+        }
     }
 
     /**
@@ -214,9 +246,14 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByViewport() {
+        // backup user settings
+        final boolean excludeMine = Settings.isExcludeMyCaches();
         final Strategy strategy = Settings.getLiveMapStrategy();
 
         try {
+            // set up settings required for test
+            Settings.setExcludeMine(false);
+
             final GC2CJPF mockedCache = new GC2CJPF();
             deleteCacheFromDB(mockedCache.getGeocode());
 
@@ -248,6 +285,8 @@ public class cgeoApplicationTest extends CGeoTestCase {
             assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
 
         } finally {
+            // restore user settings
+            Settings.setExcludeMine(excludeMine);
             Settings.setLiveMapStrategy(strategy);
         }
     }

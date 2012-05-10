@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -9,24 +10,33 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testGetViewport() {
-        Login.login();
+        // backup user settings
+        final boolean excludeMine = Settings.isExcludeMyCaches();
+        try {
+            // set up settings required for test
+            Settings.setExcludeMine(false);
+            Login.login();
 
-        String[] tokens = Login.getMapTokens();
+            String[] tokens = Login.getMapTokens();
 
-        {
-            final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
-            SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
-            assertNotNull(searchResult);
-            assertFalse(searchResult.isEmpty());
-            assertTrue(searchResult.getGeocodes().contains("GC211WG"));
-            // Spiel & Sport GC211WG N 52° 25.413 E 009° 36.049
-        }
+            {
+                final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
+                SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
+                assertNotNull(searchResult);
+                assertFalse(searchResult.isEmpty());
+                assertTrue(searchResult.getGeocodes().contains("GC211WG"));
+                // Spiel & Sport GC211WG N 52° 25.413 E 009° 36.049
+            }
 
-        {
-            final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
-            SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
-            assertNotNull(searchResult);
-            assertTrue(searchResult.getGeocodes().contains("GC211WG"));
+            {
+                final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
+                SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
+                assertNotNull(searchResult);
+                assertTrue(searchResult.getGeocodes().contains("GC211WG"));
+            }
+        } finally {
+            // restore user settings
+            Settings.setExcludeMine(excludeMine);
         }
     }
 
