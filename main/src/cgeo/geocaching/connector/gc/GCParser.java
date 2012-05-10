@@ -288,7 +288,7 @@ public abstract class GCParser {
                 LocParser.parseLoc(searchResult, coordinates);
 
             } catch (Exception e) {
-                Log.e("cgBase.parseSearch.CIDs: " + e.toString());
+                Log.e("GCParser.parseSearch.CIDs: " + e.toString());
             }
         }
 
@@ -840,7 +840,7 @@ public abstract class GCParser {
         boolean my = false;
         if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
             my = true;
-            Log.i("cgBase.searchByUsername: Overriding users choice, downloading all caches.");
+            Log.i("GCParser.searchByUsername: Overriding users choice, downloading all caches.");
         }
 
         return searchByAny(cacheType, my, showCaptcha, params);
@@ -1099,7 +1099,7 @@ public abstract class GCParser {
 
     /**
      * Adds the cache to the watchlist of the user.
-     * 
+     *
      * @param cache
      *            the cache to add
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
@@ -1109,23 +1109,23 @@ public abstract class GCParser {
         String page = Login.postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
-            Log.e("cgBase.addToWatchlist: No data from server");
+            Log.e("GCParser.addToWatchlist: No data from server");
             return false; // error
         }
 
         boolean guidOnPage = cache.isGuidContainedInPage(page);
         if (guidOnPage) {
-            Log.i("cgBase.addToWatchlist: cache is on watchlist");
+            Log.i("GCParser.addToWatchlist: cache is on watchlist");
             cache.setOnWatchlist(true);
         } else {
-            Log.e("cgBase.addToWatchlist: cache is not on watchlist");
+            Log.e("GCParser.addToWatchlist: cache is not on watchlist");
         }
         return guidOnPage; // on watchlist (=added) / else: error
     }
 
     /**
      * Removes the cache from the watchlist
-     * 
+     *
      * @param cache
      *            the cache to remove
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
@@ -1135,7 +1135,7 @@ public abstract class GCParser {
         String page = Login.postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
-            Log.e("cgBase.removeFromWatchlist: No data from server");
+            Log.e("GCParser.removeFromWatchlist: No data from server");
             return false; // error
         }
 
@@ -1149,12 +1149,82 @@ public abstract class GCParser {
         page = Network.getResponseData(Network.postRequest(uri, params));
         boolean guidOnPage = cache.isGuidContainedInPage(page);
         if (!guidOnPage) {
-            Log.i("cgBase.removeFromWatchlist: cache removed from watchlist");
+            Log.i("GCParser.removeFromWatchlist: cache removed from watchlist");
             cache.setOnWatchlist(false);
         } else {
-            Log.e("cgBase.removeFromWatchlist: cache not removed from watchlist");
+            Log.e("GCParser.removeFromWatchlist: cache not removed from watchlist");
         }
         return !guidOnPage; // on watchlist (=error) / not on watchlist
+    }
+
+    static String requestHtmlPage(final String geocode, final String guid, final String log, final String numlogs) {
+        final Parameters params = new Parameters("decrypt", "y");
+        if (StringUtils.isNotBlank(geocode)) {
+            params.put("wp", geocode);
+        } else if (StringUtils.isNotBlank(guid)) {
+            params.put("guid", guid);
+        }
+        params.put("log", log);
+        params.put("numlogs", numlogs);
+
+        return Login.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
+    }
+
+    /**
+     * Adds the cache to the favorites of the user.
+     *
+     * @param cache
+     *            the cache to add
+     * @return <code>false</code> if an error occurred, <code>true</code> otherwise
+     */
+    static boolean addToFavorites(final cgCache cache) {
+
+        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        if (StringUtils.isEmpty(userToken)) {
+            return false;
+        }
+
+        final String uri = "http://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=true";
+
+        HttpResponse response = Network.postRequest(uri, null);
+
+        if (response != null && response.getStatusLine().getStatusCode() == 200) {
+            Log.i("GCParser.addToFavorites: cache added to favorites");
+            cache.setFavorite(true);
+            cache.setFavoritePoints(cache.getFavoritePoints() + 1);
+            return true;
+        }
+        Log.e("GCParser.addToFavorites: cache not added to favorites");
+        return false;
+    }
+
+    /**
+     * Removes the cache from the Favorites
+     *
+     * @param cache
+     *            the cache to remove
+     * @return <code>false</code> if an error occurred, <code>true</code> otherwise
+     */
+    static boolean removeFromFavorites(final cgCache cache) {
+        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        if (StringUtils.isEmpty(userToken)) {
+            return false;
+        }
+
+        final String uri = "http://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=false";
+
+        HttpResponse response = Network.postRequest(uri, null);
+
+        if (response != null && response.getStatusLine().getStatusCode() == 200) {
+            Log.i("GCParser.removeFromFavorites: cache removed from favorites");
+            cache.setFavorite(false);
+            cache.setFavoritePoints(cache.getFavoritePoints() - 1);
+            return true;
+        }
+        Log.e("GCParser.removeFromFavorites: cache not removed from favorites");
+        return false;
     }
 
     /**
@@ -1349,9 +1419,9 @@ public abstract class GCParser {
         String rawResponse;
 
         if (!getDataFromPage) {
-            final Matcher userTokenMatcher = GCConstants.PATTERN_USERTOKEN2.matcher(page);
+            final Matcher userTokenMatcher = GCConstants.PATTERN_USERTOKEN.matcher(page);
             if (!userTokenMatcher.find()) {
-                Log.e("cgBase.loadLogsFromDetails: unable to extract userToken");
+                Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
                 return null;
             }
 
@@ -1366,17 +1436,17 @@ public abstract class GCParser {
 
             final HttpResponse response = Network.getRequest("http://www.geocaching.com/seek/geocache.logbook", params);
             if (response == null) {
-                Log.e("cgBase.loadLogsFromDetails: cannot log logs, response is null");
+                Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
                 return null;
             }
             final int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode != 200) {
-                Log.e("cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
+                Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
                 return null;
             }
             rawResponse = Network.getResponseData(response);
             if (rawResponse == null) {
-                Log.e("cgBase.loadLogsFromDetails: unable to read whole response");
+                Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
                 return null;
             }
         } else {
@@ -1389,7 +1459,7 @@ public abstract class GCParser {
         try {
             final JSONObject resp = new JSONObject(rawResponse);
             if (!resp.getString("status").equals("success")) {
-                Log.e("cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
+                Log.e("GCParser.loadLogsFromDetails: status is " + resp.getString("status"));
                 return null;
             }
 
@@ -1430,7 +1500,7 @@ public abstract class GCParser {
             }
         } catch (JSONException e) {
             // failed to parse logs
-            Log.w("cgBase.loadLogsFromDetails: Failed to parse cache logs", e);
+            Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs", e);
         }
 
         return logs;

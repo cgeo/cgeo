@@ -11,7 +11,6 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -77,18 +76,10 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByGeocode(final String geocode, final String guid, final CancellableHandler handler) {
-        final Parameters params = new Parameters("decrypt", "y");
-        if (StringUtils.isNotBlank(geocode)) {
-            params.put("wp", geocode);
-        } else if (StringUtils.isNotBlank(guid)) {
-            params.put("guid", guid);
-        }
-        params.put("log", "y");
-        params.put("numlogs", String.valueOf(GCConstants.NUMBER_OF_LOGS));
 
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
-        final String page = Login.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
+        final String page = GCParser.requestHtmlPage(geocode, guid, "y", String.valueOf(GCConstants.NUMBER_OF_LOGS));
 
         if (StringUtils.isEmpty(page)) {
             final SearchResult search = new SearchResult();
@@ -150,10 +141,31 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return removed;
     }
 
+    public static boolean addToFavorites(cgCache cache) {
+        final boolean added = GCParser.addToFavorites(cache);
+        if (added) {
+            cgeoapplication.getInstance().updateCache(cache);
+        }
+        return added;
+    }
+
+    public static boolean removeFromFavorites(cgCache cache) {
+        final boolean removed = GCParser.removeFromFavorites(cache);
+        if (removed) {
+            cgeoapplication.getInstance().updateCache(cache);
+        }
+        return removed;
+    }
+
     @Override
     public SearchResult searchByCenter(Geopoint center) {
         // TODO make search by coordinate use this method. currently it is just a marker that this connector supports search by center
         return null;
+    }
+
+    @Override
+    public boolean supportsFavoritePoints() {
+        return true;
     }
 
 }

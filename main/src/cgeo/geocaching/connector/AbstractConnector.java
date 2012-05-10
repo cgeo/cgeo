@@ -17,6 +17,11 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public boolean supportsFavoritePoints() {
+        return false;
+    }
+
+    @Override
     public boolean supportsLogging() {
         return false;
     }

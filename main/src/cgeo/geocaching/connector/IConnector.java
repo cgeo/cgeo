@@ -36,6 +36,13 @@ public interface IConnector {
     public boolean supportsWatchList();
 
     /**
+     * enable/disable favorite points controls in cache details
+     * 
+     * @return
+     */
+    public boolean supportsFavoritePoints();
+
+    /**
      * enable/disable logging controls in cache details
      *
      * @return

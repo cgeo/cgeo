@@ -1425,6 +1425,26 @@ public class CacheDetailActivity extends AbstractActivity {
             buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox();
 
+            // favorite points
+            Button buttonFavPointAdd = (Button) view.findViewById(R.id.add_to_favpoint);
+            Button buttonFavPointRemove = (Button) view.findViewById(R.id.remove_from_favpoint);
+            buttonFavPointAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GCConnector.addToFavorites(cache);
+                    updateFavPointBox();
+                }
+            });
+            buttonFavPointRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GCConnector.removeFromFavorites(cache);
+                    updateFavPointBox();
+                }
+            });
+
+            updateFavPointBox();
+
             // data license
             IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector != null) {
@@ -1686,6 +1706,41 @@ public class CacheDetailActivity extends AbstractActivity {
                 buttonRemove.setVisibility(View.GONE);
             }
 
+        }
+
+        /**
+         * shows/hides buttons, sets text in watchlist box
+         */
+        private void updateFavPointBox() {
+            boolean userIsOwner = StringUtils.equals(cache.getOwnerReal(), Settings.getUsername());
+
+            LinearLayout layout = (LinearLayout) view.findViewById(R.id.favpoint_box);
+            boolean supportsFavoritePoints = cache.supportsFavoritePoints();
+            layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
+            if (!supportsFavoritePoints || userIsOwner || !Settings.isPremiumMember()) {
+                return;
+            }
+            Button buttonAdd = (Button) view.findViewById(R.id.add_to_favpoint);
+            Button buttonRemove = (Button) view.findViewById(R.id.remove_from_favpoint);
+            TextView text = (TextView) view.findViewById(R.id.favpoint_text);
+
+            if (cache.isFavorite()) {
+                buttonAdd.setVisibility(View.GONE);
+                buttonRemove.setVisibility(View.VISIBLE);
+                text.setText(R.string.cache_favpoint_on);
+            } else {
+                buttonAdd.setVisibility(View.VISIBLE);
+                buttonRemove.setVisibility(View.GONE);
+                text.setText(R.string.cache_favpoint_not_on);
+            }
+
+            // Add/remove to Favorites is only possible if the cache has been found
+            if (!cache.isFound()) {
+                buttonAdd.setEnabled(false);
+                buttonAdd.setVisibility(View.GONE);
+                buttonRemove.setEnabled(false);
+                buttonRemove.setVisibility(View.GONE);
+            }
         }
 
         /**

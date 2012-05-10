@@ -501,6 +501,11 @@
   <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
   <string name="cache_watchlist_add">Add to Watchlist</string>
   <string name="cache_watchlist_remove">Remove from Watchlist</string>
+  <string name="cache_favpoint_on">This cache is one of your favorites.</string>
+  <string name="cache_favpoint_not_on">This cache is not one of your favorites.</string>
+  <string name="cache_favpoint_add">Add to Favorites</string>
+  <string name="cache_favpoint_remove">Remove from Favorites</string>
+  
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
       <item quantity="one">1 Waypoint</item>
@@ -983,7 +988,7 @@
     · 0xErnie (localization DE)\n
     · <a href="mailto:bazsy@freemail.hu">Balazs Szabo (Bazsy1983)</a> (loc. HU)\n
     · Bananeweizen (code, loc. DE)\n
-    · blafoo (code)\n
+    · blafoo (code, localization DE)\n
     · Bonemaro (tester)\n
     · BudBundi (localization DE, tester)\n
     · campbeb (code)\n
@@ -1034,6 +1039,7 @@
   <string name="changelog">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
+    · Add/remove cache to/from Favorites #676
     · Export caches as GPX file\n
     · Filter for D/T in lists\n
     · Allow close of popup by click on map\n

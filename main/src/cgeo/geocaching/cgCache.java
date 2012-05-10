@@ -489,6 +489,10 @@ public class cgCache implements ICache, IWaypoint {
         return getConnector().supportsWatchList();
     }
 
+    public boolean supportsFavoritePoints() {
+        return getConnector().supportsFavoritePoints();
+    }
+
     public boolean supportsLogging() {
         return getConnector().supportsLogging();
     }

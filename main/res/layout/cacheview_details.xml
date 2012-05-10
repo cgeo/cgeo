@@ -135,7 +135,52 @@
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
+        
+        <!-- Favorite points box -->
 
+        <LinearLayout
+            android:id="@+id/favpoint_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/favpoint_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="130dip"
+                    android:paddingRight="3dip"
+                    android:textColor="?text_color"
+                    android:textSize="14dip" />
+
+                <Button
+                    android:id="@+id/add_to_favpoint"
+                    style="@style/button_small"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/cache_favpoint_add"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/remove_from_favpoint"
+                    style="@style/button_small"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/cache_favpoint_remove"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+        
         <!-- License Box -->
 
         <LinearLayout
