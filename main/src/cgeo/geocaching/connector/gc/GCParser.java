@@ -1099,18 +1099,18 @@ public abstract class GCParser {
 
     /**
      * Adds the cache to the watchlist of the user.
-     *
+     * 
      * @param cache
      *            the cache to add
-     * @return -1: error occured
+     * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
-    static int addToWatchlist(final cgCache cache) {
+    static boolean addToWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
         String page = Login.postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgBase.addToWatchlist: No data from server");
-            return -1; // error
+            return false; // error
         }
 
         boolean guidOnPage = cache.isGuidContainedInPage(page);
@@ -1120,23 +1120,23 @@ public abstract class GCParser {
         } else {
             Log.e("cgBase.addToWatchlist: cache is not on watchlist");
         }
-        return guidOnPage ? 1 : -1; // on watchlist (=added) / else: error
+        return guidOnPage; // on watchlist (=added) / else: error
     }
 
     /**
      * Removes the cache from the watchlist
-     *
+     * 
      * @param cache
      *            the cache to remove
-     * @return -1: error occured
+     * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
-    static int removeFromWatchlist(final cgCache cache) {
+    static boolean removeFromWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
         String page = Login.postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("cgBase.removeFromWatchlist: No data from server");
-            return -1; // error
+            return false; // error
         }
 
         // removing cache from list needs approval by hitting "Yes" button
@@ -1154,7 +1154,7 @@ public abstract class GCParser {
         } else {
             Log.e("cgBase.removeFromWatchlist: cache not removed from watchlist");
         }
-        return guidOnPage ? -1 : 0; // on watchlist (=error) / not on watchlist
+        return !guidOnPage; // on watchlist (=error) / not on watchlist
     }
 
     /**
