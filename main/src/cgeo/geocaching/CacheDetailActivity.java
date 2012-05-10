@@ -47,6 +47,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -2229,6 +2230,14 @@ public class CacheDetailActivity extends AbstractActivity {
             final List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.getWaypoints());
             Collections.sort(sortedWaypoints);
 
+            final PaintDrawable wpNavViewBackground;
+            if (Settings.isLightSkin()) {
+                wpNavViewBackground = new PaintDrawable(0x80000000);
+                wpNavViewBackground.setCornerRadius(8);
+            } else {
+                wpNavViewBackground = null;
+            }
+
             for (final cgWaypoint wpt : sortedWaypoints) {
                 final LinearLayout waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
 
@@ -2297,6 +2306,10 @@ public class CacheDetailActivity extends AbstractActivity {
                         return true;
                     }
                 });
+
+                if (Settings.isLightSkin()) {
+                    wpNavView.setBackgroundDrawable(wpNavViewBackground);
+                }
 
                 registerForContextMenu(waypointView);
                 waypointView.setOnClickListener(new View.OnClickListener() {
