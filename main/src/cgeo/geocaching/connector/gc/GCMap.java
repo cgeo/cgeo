@@ -217,7 +217,7 @@ public class GCMap {
 
     /**
      * Searches the view port on the live map with Strategy.AUTO
-     * 
+     *
      * @param viewport
      *            Area to search
      * @param tokens
@@ -251,7 +251,7 @@ public class GCMap {
      * Searches the view port on the live map for caches.
      * The strategy dictates if only live map information is used or if an additional
      * searchByCoordinates query is issued.
-     * 
+     *
      * @param viewport
      *            Area to search
      * @param tokens
@@ -337,7 +337,7 @@ public class GCMap {
                     if (Settings.isPremiumMember()) {
                         lastSearchViewport = cgeoapplication.getInstance().getBounds(geocodes);
                     } else {
-                        lastSearchViewport = new Viewport(center, 0.01, 0.01);
+                        lastSearchViewport = new Viewport(center, center);
                     }
                     searchResult.addGeocodes(geocodes);
                 }
