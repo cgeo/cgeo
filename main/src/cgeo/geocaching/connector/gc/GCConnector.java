@@ -45,7 +45,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         if (geocode == null) {
             return false;
         }
-        return GCConstants.PATTERN_GC_CODE.matcher(geocode).matches();
+        return GCConstants.PATTERN_GC_CODE.matcher(geocode).matches() || GCConstants.PATTERN_TB_CODE.matcher(geocode).matches();
     }
 
     @Override

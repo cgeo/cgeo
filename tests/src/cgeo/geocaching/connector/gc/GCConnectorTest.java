@@ -30,6 +30,12 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
+    public static void testCanHandle() {
+        assertTrue(GCConnector.getInstance().canHandle("GC2MEGA"));
+        assertTrue(GCConnector.getInstance().canHandle("TB3F651"));
+        assertFalse(GCConnector.getInstance().canHandle("OXZZZZZ"));
+    }
+
     public static void testBaseCodings() {
         assertEquals(2045702, GCConstants.gccodeToGCId("GC2MEGA"));
     }
