@@ -3,14 +3,11 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
-import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -21,7 +18,6 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.EnumSet;
 import java.util.regex.Pattern;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter {
@@ -141,7 +137,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static boolean addToWatchlist(cgCache cache) {
         final boolean added = GCParser.addToWatchlist(cache);
         if (added) {
-            cgeoapplication.getInstance().saveCache(cache, cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+            cgeoapplication.getInstance().updateCache(cache);
         }
         return added;
     }
@@ -149,7 +145,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static boolean removeFromWatchlist(cgCache cache) {
         final boolean removed = GCParser.removeFromWatchlist(cache);
         if (removed) {
-            cgeoapplication.getInstance().saveCache(cache, cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+            cgeoapplication.getInstance().updateCache(cache);
         }
         return removed;
     }

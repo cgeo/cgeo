@@ -4,7 +4,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -43,7 +42,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.List;
 
 public class VisitCacheActivity extends AbstractActivity implements DateDialog.DateDialogParent {
@@ -708,7 +706,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     cache.setFound(true);
                 }
 
-                app.saveCache(cache, cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+                app.updateCache(cache);
             }
 
             if (status == StatusCode.NO_ERROR) {
