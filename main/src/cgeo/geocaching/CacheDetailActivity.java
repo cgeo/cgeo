@@ -2302,7 +2302,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 waypointView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        openContextMenu(view);
+                        openContextMenu(v);
                     }
                 });
 
