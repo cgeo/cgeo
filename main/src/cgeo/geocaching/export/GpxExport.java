@@ -121,7 +121,7 @@ class GpxExport extends AbstractExport {
                     gpx.write("</sym>");
 
                     gpx.write("<type>");
-                    gpx.write(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().toString())); //TODO: Correct (english) string
+                    gpx.write(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().id));
                     gpx.write("</type>");
 
                     gpx.write("<groundspeak:cache ");
@@ -145,11 +145,11 @@ class GpxExport extends AbstractExport {
                     gpx.write("</groundspeak:owner>");
 
                     gpx.write("<groundspeak:type>");
-                    gpx.write(StringEscapeUtils.escapeXml(cache.getType().toString())); //TODO: Correct (english) string
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getType().id));
                     gpx.write("</groundspeak:type>");
 
                     gpx.write("<groundspeak:container>");
-                    gpx.write(StringEscapeUtils.escapeXml(cache.getSize().toString())); //TODO: Correct (english) string
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getSize().id));
                     gpx.write("</groundspeak:container>");
 
                     if (cache.hasAttributes()) {
@@ -269,11 +269,11 @@ class GpxExport extends AbstractExport {
                         gpx.write("</desc>");
 
                         gpx.write("<sym>");
-                        gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
+                        gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
                         gpx.write("</sym>");
 
                         gpx.write("<type>Waypoint|");
-                        gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString()));
+                        gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
                         gpx.write("</type>");
 
                         gpx.write("</wpt>");
