@@ -962,7 +962,7 @@
   <string name="about_go4cache"><b>Go 4 cache</b>サービスにより他のジオキャッシャーを(<b>c:geo</b>またはブラウザで)地図上にリアルタイムで表示できます。例えば、彼らがどのキャッシュを探しているのか表示できます。<b>Go 4 cache</b>に接続すれば<b>c:geo</b>でジオキャッシング中に現在地を(<b>c:geo</b>が起動している間だけ)公開することができます。</string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="about_auth_1"><b>c:geo</b>がTwitterにアクセスする許可を得るには次のようにしてください。</string>
-  <string name="about_auth_2">「認証を開始する」ボタンを押すとブラウザでTwitterのページが開きます。そのページにログインすれば<b>c:geo</b>があなたのアカウントにアクセルする許可が得られます。ログインに成功したら数字のPINコードが表示されるので、この下の入力欄にコピー&ペーストして「完了」ボタンを押してください。</string>
+  <string name="about_auth_2">「認証を開始する」ボタンを押すとブラウザでTwitterのページが開きます。そのページにログインすれば<b>c:geo</b>があなたのアカウントにアクセルする許可が得られます。ログインに成功したら数字のPINコードが表示されるので、この下の入力欄にコピー&amp;ペーストして「完了」ボタンを押してください。</string>
 
   <!-- go4cache -->
   <string name="go4cache_looking_around">Looking around</string>
