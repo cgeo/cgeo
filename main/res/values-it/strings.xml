@@ -487,6 +487,10 @@
   <string name="cache_watchlist_not_on">Questa cache non è nella tua watchlist.</string>
   <string name="cache_watchlist_add">Aggiungi alla watchlist</string>
   <string name="cache_watchlist_remove">Rimuovi dalla watchlist</string>
+  <string name="cache_favpoint_on">Questa cache è una delle tue favorite.</string>
+  <string name="cache_favpoint_not_on">Questa cache non è una delle tue favorite.</string>
+  <string name="cache_favpoint_add">Aggiungi a cache favorite</string>
+  <string name="cache_favpoint_remove">Rimuovi da cache favorite</string>
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
       <item quantity="one">1 Waypoint</item>
