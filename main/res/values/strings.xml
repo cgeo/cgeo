@@ -1039,7 +1039,7 @@
   <string name="changelog">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · Add/remove cache to/from Favorites #676
+    · Add/remove cache to/from Favorites\n
     · Export caches as GPX file\n
     · Filter for D/T in lists\n
     · Allow close of popup by click on map\n
