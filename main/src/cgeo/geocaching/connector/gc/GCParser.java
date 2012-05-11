@@ -1178,24 +1178,27 @@ public abstract class GCParser {
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
     static boolean addToFavorites(final cgCache cache) {
+        return changeFavorite(cache, true);
+    }
 
+    private static boolean changeFavorite(final cgCache cache, final boolean add) {
         final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
         final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
         if (StringUtils.isEmpty(userToken)) {
             return false;
         }
 
-        final String uri = "http://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=true";
+        final String uri = "http://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + Boolean.toString(add);
 
         HttpResponse response = Network.postRequest(uri, null);
 
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
-            Log.i("GCParser.addToFavorites: cache added to favorites");
-            cache.setFavorite(true);
-            cache.setFavoritePoints(cache.getFavoritePoints() + 1);
+            Log.i("GCParser.changeFavorite: cache added/removed to/from favorites");
+            cache.setFavorite(add);
+            cache.setFavoritePoints(cache.getFavoritePoints() + (add ? 1 : -1));
             return true;
         }
-        Log.e("GCParser.addToFavorites: cache not added to favorites");
+        Log.e("GCParser.changeFavorite: cache not added/removed to/from favorites");
         return false;
     }
 
@@ -1207,24 +1210,7 @@ public abstract class GCParser {
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
     static boolean removeFromFavorites(final cgCache cache) {
-        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
-        if (StringUtils.isEmpty(userToken)) {
-            return false;
-        }
-
-        final String uri = "http://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=false";
-
-        HttpResponse response = Network.postRequest(uri, null);
-
-        if (response != null && response.getStatusLine().getStatusCode() == 200) {
-            Log.i("GCParser.removeFromFavorites: cache removed from favorites");
-            cache.setFavorite(false);
-            cache.setFavoritePoints(cache.getFavoritePoints() - 1);
-            return true;
-        }
-        Log.e("GCParser.removeFromFavorites: cache not removed from favorites");
-        return false;
+        return changeFavorite(cache, false);
     }
 
     /**

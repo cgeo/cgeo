@@ -1686,6 +1686,7 @@ public class CacheDetailActivity extends AbstractActivity {
             Button buttonRemove = (Button) view.findViewById(R.id.remove_from_watchlist);
             TextView text = (TextView) view.findViewById(R.id.watchlist_text);
 
+            //TODO: We already have cache.isOwn(). Those 2 should be combined.
             boolean userIsOwner = StringUtils.equals(cache.getOwnerReal(), Settings.getUsername());
 
             if (cache.isOnWatchlist() || userIsOwner) {
