@@ -161,15 +161,39 @@ public abstract class Network {
             }
         }
 
+        addHeaders(request, headers, cacheFile);
+
+        return doRepeatedRequests(request);
+    }
+
+    /**
+     * Add headers to HTTP request.
+     * @param request
+     *            the request to add headers to
+     * @param headers
+     *            the headers to add (in addition to the standard headers), can be null
+     * @param cacheFile
+     *            if non-null, the file to take ETag and If-Modified-Since information from
+     */
+    private static void addHeaders(final HttpRequestBase request, final Parameters headers, final File cacheFile) {
         for (final NameValuePair header : Parameters.extend(Parameters.merge(headers, cacheHeaders(cacheFile)),
                 "Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7",
                 "Accept-Language", "en-US,*;q=0.9",
                 "X-Requested-With", "XMLHttpRequest")) {
             request.setHeader(header.getName(), header.getValue());
         }
-
         request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.USER_AGENT);
+    }
 
+    /**
+     * Retry a request for a few times.
+     *
+     * @param request
+     *            the request to try
+     * @return
+     *            the response, or null if there has been a failure
+     */
+    private static HttpResponse doRepeatedRequests(final HttpRequestBase request) {
         final String reqLogStr = request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
         Log.d(reqLogStr);
 
