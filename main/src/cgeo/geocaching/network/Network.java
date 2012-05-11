@@ -20,6 +20,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.HttpEntityWrapper;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
@@ -127,6 +130,36 @@ public abstract class Network {
      */
     public static HttpResponse postRequest(final String uri, final Parameters params) {
         return request("POST", uri, params, null, null);
+    }
+
+    /**
+     * Multipart POST HTTP request
+     *
+     * @param uri the URI to request
+     * @param params the parameters to add to the POST request
+     * @param fileFieldName the name of the file field name
+     * @param fileContentType the content-type of the file
+     * @param file the file to include in the request
+     * @return the HTTP response, or null in case of an encoding error param
+     */
+    public static HttpResponse postRequest(final String uri, final Parameters params,
+                                           final String fileFieldName, final String fileContentType, final File file) {
+        final MultipartEntity entity = new MultipartEntity();
+        for (final NameValuePair param : params) {
+            try {
+                entity.addPart(param.getName(), new StringBody(param.getValue()));
+            } catch (final UnsupportedEncodingException e) {
+                Log.e("Network.postRequest: unsupported encoding for parameter " + param.getName(), e);
+                return null;
+            }
+        }
+        entity.addPart(fileFieldName, new FileBody(file, fileContentType));
+
+        final HttpPost request = new HttpPost(uri);
+        request.setEntity(entity);
+
+        addHeaders(request, null, null);
+        return doRepeatedRequests(request);
     }
 
     /**
