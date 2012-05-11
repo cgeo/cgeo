@@ -146,6 +146,7 @@
   <string name="err_detail_cache_find_next">Tyvärr kan c:geo inte hitta nästa geocache.</string>
   <string name="err_detail_cache_forgot">Tyvärr glömde c:geo vilken geocache du ville se.</string>
   <string name="err_detail_cache_forgot_visit">Tyvärr glömde c:geo vilken cache tittade på.</string>
+  <string name="err_detail_google_maps_limit_reached">c:geo kunde inte hämta kartor. Eventuellt kan Google Maps gräns ha uppnåtts.</string>
   <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
   <string name="err_detail_no_map_static">c:geo hittade inga sparade kartor för denna cache.</string>
   <string name="err_detail_not_load_map_static">Tyvärr misslyckades c:geo att ladda sparade kartor.</string>
@@ -493,9 +494,13 @@
   <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
   <string name="cache_watchlist_add">Lägg till i watchlist</string>
   <string name="cache_watchlist_remove">Ta bort från watchlist</string>
+  <string name="cache_favpoint_on">Den här cachen är en av dina favoriter.</string>
+  <string name="cache_favpoint_not_on">Den här cachen är inte en av dina favoriter.</string>
+  <string name="cache_favpoint_add">Lägg till bland Favoriter</string>
+  <string name="cache_favpoint_remove">Ta bort från Favoriter</string>
+
   <string name="cache_waypoints">Punkter</string>
   <plurals name="waypoints">
-      <item quantity="zero">Punkter</item>
       <item quantity="one">1 Punkt</item>
       <item quantity="other">%d Punkter</item>
   </plurals>
@@ -511,6 +516,7 @@
   <string name="cache_dialog_loading_details_status_waypoints">Analyserar punkter</string>
   <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote.com</string>
   <string name="cache_dialog_loading_details_status_elevation">Hämtar höjddata</string>
+  <string name="cache_dialog_loading_details_status_cache">Sparar information</string>
   <string name="cache_dialog_loading_details_status_render">Förbereder för visning</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline…</string>
@@ -792,10 +798,13 @@
   <string name="go4cache_tweeting">Tweeting</string>
   <string name="go4cache_heading_to">På väg mot</string>
   <plurals name="go4cache_time_minutes">
-	<item quantity="zero">just nu</item>
 	<item quantity="one">en minut sedan</item>
 	<item quantity="other">%d minuter sedan</item>
   </plurals>
 
   <string name="clipboard_copy_ok">Kopierat till urklipp.</string>
+  <plurals name="days_ago">
+      <item quantity="one">igår</item>
+      <item quantity="other">%d dagar sedan</item>
+  </plurals>
 </resources>
