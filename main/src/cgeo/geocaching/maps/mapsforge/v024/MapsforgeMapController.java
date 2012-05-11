@@ -28,7 +28,7 @@ public class MapsforgeMapController implements MapControllerImpl {
 
     @Override
     public void setZoom(int mapzoom) {
-        mapController.setZoom(mapzoom > maxZoomLevel ? maxZoomLevel : mapzoom);
+        mapController.setZoom(Math.min(mapzoom, maxZoomLevel));
     }
 
     @Override
