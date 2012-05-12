@@ -47,6 +47,7 @@ class GpxExport extends AbstractExport {
         private final Activity activity;
         private final Progress progress = new Progress();
         private File exportFile;
+        private Writer gpx;
 
         /**
          * Instantiates and configures the task for exporting field notes.
@@ -75,8 +76,6 @@ class GpxExport extends AbstractExport {
             if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 return false;
             }
-
-            Writer gpx = null;
 
             try {
                 exportLocation.mkdirs();
@@ -150,29 +149,7 @@ class GpxExport extends AbstractExport {
                     gpx.write(StringEscapeUtils.escapeXml(cache.getSize().id));
                     gpx.write("</groundspeak:container>");
 
-                    if (cache.hasAttributes()) {
-                        //TODO: Attribute conversion required: English verbose name, gpx-id
-                        gpx.write("<groundspeak:attributes>");
-
-                        for (String attribute : cache.getAttributes()) {
-                            final CacheAttribute attr = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attribute));
-                            final boolean enabled = CacheAttribute.isEnabled(attribute);
-
-                            gpx.write("<groundspeak:attribute id=\"");
-                            gpx.write(Integer.toString(attr.id));
-                            gpx.write("\" inc=\"");
-                            if (enabled) {
-                                gpx.write('1');
-                            } else {
-                                gpx.write('0');
-                            }
-                            gpx.write("\">");
-                            gpx.write(StringEscapeUtils.escapeXml(attr.getL10n(enabled)));
-                            gpx.write("</groundspeak:attribute>");
-                        }
-
-                        gpx.write("</groundspeak:attributes>");
-                    }
+                    writeAttributes(cache);
 
                     gpx.write("<groundspeak:difficulty>");
                     gpx.write(Float.toString(cache.getDifficulty()));
@@ -212,69 +189,13 @@ class GpxExport extends AbstractExport {
                     gpx.write(StringEscapeUtils.escapeXml(cache.getHint()));
                     gpx.write("</groundspeak:encoded_hints>");
 
+                    writeLogs(cache);
+
                     gpx.write("</groundspeak:cache>");
-
-                    if (cache.getLogs().size() > 0) {
-                        gpx.write("<groundspeak:logs>");
-
-                        for (LogEntry log : cache.getLogs()) {
-                            gpx.write("<groundspeak:log id=\"");
-                            gpx.write(Integer.toString(log.id));
-                            gpx.write("\">");
-
-                            gpx.write("<groundspeak:date>");
-                            gpx.write(StringEscapeUtils.escapeXml(dateFormatZ.format(new Date(log.date))));
-                            gpx.write("</groundspeak:date>");
-
-                            gpx.write("<groundspeak:type>");
-                            gpx.write(StringEscapeUtils.escapeXml(log.type.type));
-                            gpx.write("</groundspeak:type>");
-
-                            gpx.write("<groundspeak:finder id=\"\">");
-                            gpx.write(StringEscapeUtils.escapeXml(log.author));
-                            gpx.write("</groundspeak:finder>");
-
-                            gpx.write("<groundspeak:text encoded=\"False\">");
-                            gpx.write(StringEscapeUtils.escapeXml(log.log));
-                            gpx.write("</groundspeak:text>");
-
-                            gpx.write("</groundspeak:log>");
-                        }
-
-                        gpx.write("</groundspeak:logs>");
-                    }
 
                     gpx.write("</wpt>");
 
-                    for (cgWaypoint wp : cache.getWaypoints()) {
-                        gpx.write("<wpt lat=\"");
-                        final Geopoint coords = wp.getCoords();
-                        gpx.write(coords != null ? Double.toString(coords.getLatitude()) : ""); // TODO: check whether is the best way to handle unknown waypoint coordinates
-                        gpx.write("\" lon=\"");
-                        gpx.write(coords != null ? Double.toString(coords.getLongitude()) : "");
-                        gpx.write("\">");
-
-                        gpx.write("<name>");
-                        gpx.write(StringEscapeUtils.escapeXml(wp.getPrefix()));
-                        gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode().substring(2)));
-                        gpx.write("</name>");
-
-                        gpx.write("<cmt />");
-
-                        gpx.write("<desc>");
-                        gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
-                        gpx.write("</desc>");
-
-                        gpx.write("<sym>");
-                        gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
-                        gpx.write("</sym>");
-
-                        gpx.write("<type>Waypoint|");
-                        gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
-                        gpx.write("</type>");
-
-                        gpx.write("</wpt>");
-                    }
+                    writeWaypoints(cache);
 
                     publishProgress(i + 1);
                 }
@@ -301,6 +222,98 @@ class GpxExport extends AbstractExport {
             }
 
             return true;
+        }
+
+        private void writeWaypoints(final cgCache cache) throws IOException {
+            for (cgWaypoint wp : cache.getWaypoints()) {
+                gpx.write("<wpt lat=\"");
+                final Geopoint coords = wp.getCoords();
+                gpx.write(coords != null ? Double.toString(coords.getLatitude()) : ""); // TODO: check whether is the best way to handle unknown waypoint coordinates
+                gpx.write("\" lon=\"");
+                gpx.write(coords != null ? Double.toString(coords.getLongitude()) : "");
+                gpx.write("\">");
+
+                gpx.write("<name>");
+                gpx.write(StringEscapeUtils.escapeXml(wp.getPrefix()));
+                gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode().substring(2)));
+                gpx.write("</name>");
+
+                gpx.write("<cmt />");
+
+                gpx.write("<desc>");
+                gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
+                gpx.write("</desc>");
+
+                gpx.write("<sym>");
+                gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
+                gpx.write("</sym>");
+
+                gpx.write("<type>Waypoint|");
+                gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
+                gpx.write("</type>");
+
+                gpx.write("</wpt>");
+            }
+        }
+
+        private void writeLogs(final cgCache cache) throws IOException {
+            if (cache.getLogs().size() <= 0) {
+                return;
+            }
+            gpx.write("<groundspeak:logs>");
+
+            for (LogEntry log : cache.getLogs()) {
+                gpx.write("<groundspeak:log id=\"");
+                gpx.write(Integer.toString(log.id));
+                gpx.write("\">");
+
+                gpx.write("<groundspeak:date>");
+                gpx.write(StringEscapeUtils.escapeXml(dateFormatZ.format(new Date(log.date))));
+                gpx.write("</groundspeak:date>");
+
+                gpx.write("<groundspeak:type>");
+                gpx.write(StringEscapeUtils.escapeXml(log.type.type));
+                gpx.write("</groundspeak:type>");
+
+                gpx.write("<groundspeak:finder id=\"\">");
+                gpx.write(StringEscapeUtils.escapeXml(log.author));
+                gpx.write("</groundspeak:finder>");
+
+                gpx.write("<groundspeak:text encoded=\"False\">");
+                gpx.write(StringEscapeUtils.escapeXml(log.log));
+                gpx.write("</groundspeak:text>");
+
+                gpx.write("</groundspeak:log>");
+            }
+
+            gpx.write("</groundspeak:logs>");
+        }
+
+        private void writeAttributes(final cgCache cache) throws IOException {
+            if (!cache.hasAttributes()) {
+                return;
+            }
+            //TODO: Attribute conversion required: English verbose name, gpx-id
+            gpx.write("<groundspeak:attributes>");
+
+            for (String attribute : cache.getAttributes()) {
+                final CacheAttribute attr = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attribute));
+                final boolean enabled = CacheAttribute.isEnabled(attribute);
+
+                gpx.write("<groundspeak:attribute id=\"");
+                gpx.write(Integer.toString(attr.id));
+                gpx.write("\" inc=\"");
+                if (enabled) {
+                    gpx.write('1');
+                } else {
+                    gpx.write('0');
+                }
+                gpx.write("\">");
+                gpx.write(StringEscapeUtils.escapeXml(attr.getL10n(enabled)));
+                gpx.write("</groundspeak:attribute>");
+            }
+
+            gpx.write("</groundspeak:attributes>");
         }
 
         @Override
