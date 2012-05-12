@@ -118,7 +118,7 @@ class GpxExport extends AbstractExport {
                     gpx.write("</sym>");
 
                     gpx.write("<type>");
-                    gpx.write(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().id));
+                    gpx.write(StringEscapeUtils.escapeXml("Geocache|" + cache.getType().pattern));
                     gpx.write("</type>");
 
                     gpx.write("<groundspeak:cache ");
@@ -142,7 +142,7 @@ class GpxExport extends AbstractExport {
                     gpx.write("</groundspeak:owner>");
 
                     gpx.write("<groundspeak:type>");
-                    gpx.write(StringEscapeUtils.escapeXml(cache.getType().id));
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getType().pattern));
                     gpx.write("</groundspeak:type>");
 
                     gpx.write("<groundspeak:container>");
