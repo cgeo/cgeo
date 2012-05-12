@@ -986,6 +986,7 @@ public class cgeocaches extends AbstractListActivity {
             if (cacheLists.size() > 1) {
                 menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             }
+            menu.add(0, MENU_EXPORT, 0, res.getString(R.string.export));
         }
         else {
             menu.add(0, MENU_STORE_CACHE, 0, res.getString(R.string.cache_offline_store));
@@ -1070,6 +1071,9 @@ public class cgeocaches extends AbstractListActivity {
                 //FIXME: this must use the same handler like in the CacheDetailActivity. Will be done by moving the handler into the store method.
                 cache.store(null);
                 break;
+            case MENU_EXPORT:
+                ExportFactory.showExportMenu(Collections.singletonList(cache), this);
+                return false;
             default:
                 // we must remember the menu info for the sub menu, there is a bug
                 // in Android:
