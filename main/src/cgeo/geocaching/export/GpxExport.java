@@ -9,6 +9,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -247,9 +248,10 @@ class GpxExport extends AbstractExport {
 
                     for (cgWaypoint wp : cache.getWaypoints()) {
                         gpx.write("<wpt lat=\"");
-                        gpx.write(Double.toString(wp.getCoords().getLatitude()));
+                        final Geopoint coords = wp.getCoords();
+                        gpx.write(coords != null ? Double.toString(coords.getLatitude()) : ""); // TODO: check whether is the best way to handle unknown waypoint coordinates
                         gpx.write("\" lon=\"");
-                        gpx.write(Double.toString(wp.getCoords().getLongitude()));
+                        gpx.write(coords != null ? Double.toString(coords.getLongitude()) : "");
                         gpx.write("\">");
 
                         gpx.write("<name>");
