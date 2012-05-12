@@ -429,6 +429,14 @@
   <string name="init_debug_title">Debug information</string>
   <string name="init_debug_note">c:geo can generate a lot of debugging information. While this information is generally not useful for c:geo users, developers may need to generate this information in order to analyze a bug. In this case, they will ask you to check the box below and send them the log file.</string>
   <string name="init_debug">Generate debug information</string>
+  <string name="init_dbonsdcard_title">Database location</string>
+  <string name="init_dbonsdcard_note">You may store the database of c:geo on the external storage medium. If you do so you will save internal memory, but you may loose a bit of performance and c:geo will not work if your sdcard is not available.</string>
+  <string name="init_dbonsdcard">Database on external storage</string>
+  <string name="init_dbmove">Moving Database</string>
+  <string name="init_dbmove_dbmove">Moving Database</string>
+  <string name="init_dbmove_running">Moving Database</string>
+  <string name="init_dbmove_success">Successfully moved the database.</string>
+  <string name="init_dbmove_failed">Failed to move database</string>
 
   <!-- map sources -->
   <string-array name="map_sources">
