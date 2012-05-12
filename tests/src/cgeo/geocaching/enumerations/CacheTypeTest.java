@@ -18,4 +18,19 @@ public class CacheTypeTest extends AndroidTestCase {
         assertEquals(CacheType.CITO, CacheType.getByPattern("cache in trash out event"));
     }
 
+    public static void testGetByIdComplete() {
+        for (CacheType type : CacheType.values()) {
+            assertEquals(type, CacheType.getById(type.id));
+            assertEquals(type, CacheType.getById(type.id.toLowerCase()));
+            assertEquals(type, CacheType.getById(type.id.toUpperCase()));
+        }
+    }
+
+    public static void testGetByPatternComplete() {
+        for (CacheType type : CacheType.values()) {
+            assertEquals(type, CacheType.getByPattern(type.pattern));
+            assertEquals(type, CacheType.getByPattern(type.pattern.toLowerCase()));
+            assertEquals(type, CacheType.getByPattern(type.pattern.toUpperCase()));
+        }
+    }
 }

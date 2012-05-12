@@ -54,7 +54,7 @@ public enum CacheType {
         final HashMap<String, CacheType> mappingPattern = new HashMap<String, CacheType>();
         for (CacheType ct : values()) {
             mappingId.put(ct.id, ct);
-            mappingPattern.put(ct.pattern, ct);
+            mappingPattern.put(ct.pattern.toLowerCase(), ct);
         }
         FIND_BY_ID = Collections.unmodifiableMap(mappingId);
         FIND_BY_PATTERN = Collections.unmodifiableMap(mappingPattern);
