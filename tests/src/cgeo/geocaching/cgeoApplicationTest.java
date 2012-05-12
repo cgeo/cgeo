@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -21,6 +22,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.test.Compare;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.test.suitebuilder.annotation.MediumTest;
@@ -63,7 +65,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchTrackable() {
-        cgTrackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
+        final cgTrackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
         // fix data
         assertEquals("aefffb86-099f-444f-b132-605436163aa8", tb.getGuid());
         assertEquals("TB2J1VZ", tb.getGeocode());
@@ -83,6 +85,18 @@ public class cgeoApplicationTest extends CGeoTestCase {
         assertTrue(cgTrackable.SPOTTED_CACHE == tb.getSpottedType() || cgTrackable.SPOTTED_USER == tb.getSpottedType());
         // no assumption possible: assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
         // no assumption possible: assertEquals("Nice place for a break cache", tb.getSpottedName());
+
+        // we can't check specifics in the log entries since they change, but we can verify data was parsed
+        for (LogEntry log : tb.getLogs()) {
+            assertTrue(log.date > 0);
+            assertTrue(StringUtils.isNotEmpty(log.author));
+            if (log.type == LogType.PLACED_IT || log.type == LogType.RETRIEVED_IT) {
+                assertTrue(StringUtils.isNotEmpty(log.cacheName));
+                assertTrue(StringUtils.isNotEmpty(log.cacheGuid));
+            } else {
+                assertTrue(log.type != LogType.UNKNOWN);
+            }
+        }
     }
 
     /**

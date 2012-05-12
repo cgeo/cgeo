@@ -13,7 +13,7 @@ import java.util.List;
 public final class LogEntry {
 
     public int id = 0;
-    public LogType type = LogType.NOTE; // note
+    public LogType type = LogType.UNKNOWN;
     public String author = "";
     public String log = "";
     public long date = 0;
