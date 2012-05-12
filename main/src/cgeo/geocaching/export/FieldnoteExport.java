@@ -6,7 +6,11 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,6 +63,16 @@ class FieldnoteExport extends AbstractExport {
             View layout = activity.getLayoutInflater().inflate(R.layout.fieldnote_export_dialog, null);
             setView(layout);
 
+            final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);
+            final CheckBox onlyNewOption = (CheckBox) layout.findViewById(R.id.onlynew);
+
+            uploadOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onlyNewOption.setEnabled(uploadOption.isChecked());
+                }
+            });
+
             ((Button) layout.findViewById(R.id.export)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,8 +80,8 @@ class FieldnoteExport extends AbstractExport {
                     new ExportTask(
                             caches,
                             activity,
-                            ((CheckBox) findViewById(R.id.upload)).isChecked(),
-                            ((CheckBox) findViewById(R.id.onlynew)).isChecked())
+                            uploadOption.isChecked(),
+                            onlyNewOption.isChecked())
                             .execute((Void) null);
                 }
             });
@@ -89,6 +103,7 @@ class FieldnoteExport extends AbstractExport {
     private class ExportTask extends AsyncTask<Void, Integer, Boolean> {
         private final List<cgCache> caches;
         private final Activity activity;
+        private final boolean upload;
         private final boolean onlyNew;
         private final Progress progress = new Progress();
         private File exportFile;
@@ -110,6 +125,7 @@ class FieldnoteExport extends AbstractExport {
         public ExportTask(final List<cgCache> caches, final Activity activity, final boolean upload, final boolean onlyNew) {
             this.caches = caches;
             this.activity = activity;
+            this.upload = upload;
             this.onlyNew = onlyNew;
         }
 
@@ -192,37 +208,53 @@ class FieldnoteExport extends AbstractExport {
                 return false;
             }
 
-            /*
-             * if (upload) {
-             * TODO Use multipart POST request for uploading
-             * publishProgress(STATUS_UPLOAD);
-             *
-             * final Parameters uploadParams = new Parameters(
-             * "__EVENTTARGET", "",
-             * "__EVENTARGUMENT", "",
-             * "__VIEWSTATE", "",
-             * //TODO "ctl00$ContentBody$chkSuppressDate", "on",
-             * "ctl00$ContentBody$FieldNoteLoader", fieldNoteBuffer.toString(),
-             * "ctl00$ContentBody$btnUpload", "Upload Field Note");
-             * final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
-             *
-             * String page = Network.getResponseData(Network.postRequest(uri, uploadParams));
-             * if (!Login.getLoginStatus(page)) {
-             * final StatusCode loginState = Login.login();
-             * if (loginState == StatusCode.NO_ERROR) {
-             * page = Network.getResponseData(Network.postRequest(uri, uploadParams));
-             * } else {
-             * Log.e(Settings.tag, "FieldnoteExport.ExportTask upload: No login (error: " + loginState + ")");
-             * return false;
-             * }
-             * }
-             *
-             * if (StringUtils.isBlank(page)) {
-             * Log.e(Settings.tag, "FieldnoteExport.ExportTask upload: No data from server");
-             * return false;
-             * }
-             * }
-             */
+
+            if (upload) {
+                publishProgress(STATUS_UPLOAD);
+
+                final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
+
+                if (!Login.isActualLoginStatus()) {
+                    // no need to upload (possibly large file) if we're not logged in
+                    final StatusCode loginState = Login.login();
+                    if (loginState != StatusCode.NO_ERROR) {
+                        Log.e("FieldnoteExport.ExportTask upload: Login failed");
+                    }
+                }
+
+                String page = Network.getResponseData(Network.getRequest(uri));
+
+                if (!Login.getLoginStatus(page)) {
+                    // Login.isActualLoginStatus() was wrong, we are not logged in
+                    final StatusCode loginState = Login.login();
+                    if (loginState == StatusCode.NO_ERROR) {
+                        page = Network.getResponseData(Network.getRequest(uri));
+                    } else {
+                        Log.e("FieldnoteExport.ExportTask upload: No login (error: " + loginState + ")");
+                        return false;
+                    }
+                }
+
+                final String[] viewstates = Login.getViewstates(page);
+
+                final Parameters uploadParams = new Parameters(
+                        "__EVENTTARGET", "",
+                        "__EVENTARGUMENT", "",
+                        "ctl00$ContentBody$btnUpload", "Upload Field Note");
+
+                if (onlyNew) {
+                    uploadParams.put("ctl00$ContentBody$chkSuppressDate", "on");
+                }
+
+                Login.putViewstates(uploadParams, viewstates);
+
+                Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
+
+                if (StringUtils.isBlank(page)) {
+                    Log.e("FieldnoteExport.ExportTask upload: No data from server");
+                    return false;
+                }
+            }
 
             return true;
         }
