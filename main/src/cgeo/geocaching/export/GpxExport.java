@@ -185,9 +185,7 @@ class GpxExport extends AbstractExport {
                     gpx.write(StringEscapeUtils.escapeXml(cache.getLocation()));
                     gpx.write("</groundspeak:country>");
 
-                    gpx.write("<groundspeak:state>");
-                    gpx.write(StringEscapeUtils.escapeXml(cache.getLocation()));
-                    gpx.write("</groundspeak:state>");
+                    gpx.write("<groundspeak:state></groundspeak:state>"); // c:geo cannot manage 2 separate fields, so we export as country
 
                     gpx.write("<groundspeak:short_description html=\"");
                     if (BaseUtils.containsHtml(cache.getShortDescription())) {
