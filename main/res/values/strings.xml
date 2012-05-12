@@ -1047,6 +1047,7 @@
     · Sorting of caches by store date\n
     · New popup for waypoints on live map\n
     · On-demand download of static maps\n
+    · Upload fieldnotes to geocaching.com\n
     \n
     <b>Bugfixing:</b>\n
     · Static maps download for waypoints now off by default\n
@@ -1057,6 +1058,7 @@
     · Warning displayed for incompatible or outdated map files\n
     · No change of font color in selection mode\n
     · List layout optimized for most efficient screen usage\n
+    · Watchlist status shown correct\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
