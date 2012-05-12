@@ -1067,7 +1067,8 @@
       In fast mode the cache type might be wrong in rare cases\n
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
     · Other:\n
-      Log images with huge size will cause a long loading time\n\n\n
+      Log images with huge size cause a long loading time\n
+      Recursively opening several instances of the map can cause a crash\n\n\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
