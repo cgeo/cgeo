@@ -90,11 +90,8 @@ class GpxExport extends AbstractExport {
 
 
                 for (int i = 0; i < caches.size(); i++) {
-                    cgCache cache = caches.get(i);
-
-                    if (!cache.isDetailed()) {
-                        cache = cgeoapplication.getInstance().loadCache(caches.get(i).getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
-                    }
+                    // reload the cache. otherwise logs, attributes and other detailed information is not available
+                    final cgCache cache = cgeoapplication.getInstance().loadCache(caches.get(i).getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
 
                     gpx.write("<wpt ");
                     gpx.write("lat=\"");
