@@ -488,8 +488,8 @@
   <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
   <string name="cache_watchlist_add">Hinzufügen</string>
   <string name="cache_watchlist_remove">Entfernen</string>
-  <string name="cache_favpoint_on">Dieser Cacher ist einer deiner Favoriten.</string>
-  <string name="cache_favpoint_not_on">Dieser Cacher ist keiner deiner Favoriten.</string>
+  <string name="cache_favpoint_on">Dieser Cache ist ein Favorit.</string>
+  <string name="cache_favpoint_not_on">Dieser Cache ist kein Favorit.</string>
   <string name="cache_favpoint_add">Hinzufügen zu Favoriten</string>
   <string name="cache_favpoint_remove">Entfernen aus Favoriten</string>
   
