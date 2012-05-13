@@ -449,7 +449,7 @@
   <string name="init_sendToCgeo_description"><b>Send 2 c:geo</b>はPCのブラウザ(FirefoxやChrome。InternetExplorerは非対応)で表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。 登録する前に<a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>(英語)をお読みください。簡単な登録とブラウザに拡張機能のインストールが必要です。この<b>Send 2 c:geo</b>機能を使用しないのなら登録は不要です。</string>
   <string name="init_sendToCgeo_register">登録を申請する</string>
   <string name="init_sendToCgeo_registering">"Send to c:geo"にこの端末を登録しています…</string>
-  <string name="init_sendToCgeo_register_ok">登録しました。PINコードは####です。PCのブラウザでhttp://send2.cgeo.org/(英語)を開き、右下辺りの「Add a device ...」からPINコードを入力して端末の登録を完了してください。</string>
+  <string name="init_sendToCgeo_register_ok">登録しました。PINコードは####です。PCのブラウザでhttp://send2.cgeo.org/(英語)を開き、右下辺りの「Add a device…」からPINコードを入力して端末の登録を完了してください。</string>
   <string name="init_sendToCgeo_register_fail">登録に失敗しました。</string>
 
   <string name="sendToCgeo_download_fail">キャッシュ情報がダウンロードできませんでした。インターネットに未接続かSend 2 c:geoのサーバが停止中です。</string>
