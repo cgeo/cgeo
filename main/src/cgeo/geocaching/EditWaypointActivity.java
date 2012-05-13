@@ -404,7 +404,7 @@ public class EditWaypointActivity extends AbstractActivity implements IObserver<
             waypoint.setId(id);
 
             cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            if (null != cache && cache.addWaypoint(waypoint, true)) {
+            if (null != cache && cache.addOrChangeWaypoint(waypoint, true)) {
                 app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {

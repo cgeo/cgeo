@@ -1028,7 +1028,7 @@ public class cgData {
 
         try {
             saveAttributesWithoutTransaction(cache);
-            saveWaypointsWithoutTransaction(cache);
+            saveOriginalWaypointsWithoutTransaction(cache);
             saveSpoilersWithoutTransaction(cache);
             saveLogsWithoutTransaction(cache.getGeocode(), cache.getLogs());
             saveLogCountsWithoutTransaction(cache);
@@ -1103,7 +1103,7 @@ public class cgData {
         databaseRW.beginTransaction();
 
         try {
-            saveWaypointsWithoutTransaction(cache);
+            saveOriginalWaypointsWithoutTransaction(cache);
             databaseRW.setTransactionSuccessful();
             result = true;
         } catch (Exception e) {
@@ -1114,7 +1114,7 @@ public class cgData {
         return result;
     }
 
-    private void saveWaypointsWithoutTransaction(final cgCache cache) {
+    private void saveOriginalWaypointsWithoutTransaction(final cgCache cache) {
         String geocode = cache.getGeocode();
         databaseRW.delete(dbTableWaypoints, "geocode = ? and type <> ? and own = 0", new String[] { geocode, "own" });
 
@@ -1177,7 +1177,7 @@ public class cgData {
         return new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
     }
 
-    public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
+    public boolean saveWaypoint(int id, String geocode, cgWaypoint waypoint) {
         if ((StringUtils.isBlank(geocode) && id <= 0) || waypoint == null) {
             return false;
         }
