@@ -20,6 +20,8 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class StaticMapsProvider {
+    private static final String WAYPOINT_PREFIX = "wp";
+    private static final String MAP_FILENAME_PREFIX = "map_";
     private static final String MARKERS_URL = "http://cgeo.carnero.cc/_markers/";
     /** In my tests the "no image available" image had 5470 bytes, while "street only" maps had at least 20000 bytes */
     private static final int MIN_MAP_IMAGE_BYTES = 6000;
@@ -27,7 +29,7 @@ public class StaticMapsProvider {
     private static final BlockingThreadPool pool = new BlockingThreadPool(1, Thread.MIN_PRIORITY);
 
     public static File getMapFile(final String geocode, String prefix, final int level, final boolean createDirs) {
-        return LocalStorage.getStorageFile(geocode, "map_" + prefix + level, false, createDirs);
+        return LocalStorage.getStorageFile(geocode, MAP_FILENAME_PREFIX + prefix + level, false, createDirs);
     }
 
     private static void downloadDifferentZooms(final String geocode, String markerUrl, String prefix, String latlonMap, int edge, final Parameters waypoints) {
@@ -89,7 +91,7 @@ public class StaticMapsProvider {
         // download static map for current waypoints
         if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
             // remove all waypoint static map files due to origin cache waypoint id changed on saveCache
-            LocalStorage.deleteFilesWithPrefix(cache.getGeocode(), "map_wp");
+            LocalStorage.deleteFilesWithPrefix(cache.getGeocode(), MAP_FILENAME_PREFIX + WAYPOINT_PREFIX);
             for (cgWaypoint waypoint : cache.getWaypoints()) {
                 storeWaypointStaticMap(cache.getGeocode(), edge, waypoint, false);
             }
@@ -108,7 +110,7 @@ public class StaticMapsProvider {
         String wpLatlonMap = waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         String wpMarkerUrl = getWpMarkerUrl(waypoint);
         // download map images in separate background thread for higher performance
-        downloadMaps(geocode, wpMarkerUrl, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, null, waitForResult);
+        downloadMaps(geocode, wpMarkerUrl, WAYPOINT_PREFIX + waypoint.getId() + "_", wpLatlonMap, edge, null, waitForResult);
     }
 
     public static void storeCacheStaticMap(cgCache cache, Activity activity, final boolean waitForResult) {
@@ -134,13 +136,10 @@ public class StaticMapsProvider {
     private static int guessMinDisplaySide(Display display) {
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
-        int edge;
         if (maxWidth > maxHeight) {
-            edge = maxWidth;
-        } else {
-            edge = maxHeight;
+            return maxWidth;
         }
-        return edge;
+        return maxHeight;
     }
 
     private static int guessMinDisplaySide(Activity activity) {
@@ -187,7 +186,7 @@ public class StaticMapsProvider {
         for (int level = 1; level <= 5; level++) {
             try {
                 if (wp_id > 0) {
-                    StaticMapsProvider.getMapFile(geocode, "wp" + wp_id + "_", level, false).delete();
+                    StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + wp_id + "_", level, false).delete();
                 }
             } catch (Exception e) {
                 Log.e("StaticMapsProvider.removeWpStaticMaps: " + e.toString());
@@ -220,7 +219,7 @@ public class StaticMapsProvider {
      */
     public static boolean doesExistStaticMapForWaypoint(String geocode, int waypointId) {
         for (int level = 1; level <= 5; level++) {
-            File mapFile = StaticMapsProvider.getMapFile(geocode, "wp" + waypointId + "_", level, false);
+            File mapFile = StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_", level, false);
             if (mapFile != null && mapFile.exists()) {
                 return true;
             }
