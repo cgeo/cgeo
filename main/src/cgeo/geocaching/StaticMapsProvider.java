@@ -88,6 +88,8 @@ public class StaticMapsProvider {
 
         // download static map for current waypoints
         if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+            // remove all waypoint static map files due to origin cache waypoint id changed on saveCache
+            LocalStorage.deleteFilesWithPrefix(cache.getGeocode(), "map_wp");
             for (cgWaypoint waypoint : cache.getWaypoints()) {
                 storeWaypointStaticMap(cache.getGeocode(), edge, waypoint, false);
             }
@@ -181,7 +183,7 @@ public class StaticMapsProvider {
         return MARKERS_URL + "marker_waypoint_" + type + ".png";
     }
 
-    public static void removeWpStaticMaps(int wp_id, String geocode) {
+    public static void removeWpStaticMaps(int wp_id, final String geocode) {
         for (int level = 1; level <= 5; level++) {
             try {
                 if (wp_id > 0) {

@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -320,4 +321,48 @@ public class LocalStorage {
         return path.delete();
     }
 
+    /**
+     * Deletes all files from directory geocode with the given prefix.
+     *
+     * @param geocode
+     *            The geocode identifying the cache directory
+     * @param prefix
+     *            The filename prefix
+     */
+    public static void deleteFilesWithPrefix(final String geocode, final String prefix) {
+        final File[] filesToDelete = getFilesWithPrefix(geocode, prefix);
+        for (final File file : filesToDelete) {
+            try {
+                if (!file.delete()) {
+                    Log.w("LocalStorage.deleteFilesPrefix: Can't delete file " + file.getName());
+                }
+            } catch (Exception e) {
+                Log.e("LocalStorage.deleteFilesPrefix: " + e.toString());
+            }
+        }
+    }
+
+    /**
+     * Get an array of all files of the geocode directory starting with
+     * the given filenamePrefix.
+     *
+     * @param geocode
+     *            The geocode identifying the cache data directory
+     * @param filenamePrefix
+     *            The prefix of the files
+     * @return File[] the array of files starting with filenamePrefix in geocode directory
+     */
+    public static File[] getFilesWithPrefix(final String geocode, final String filenamePrefix) {
+        final FilenameFilter filter = new FilenameFilter() {
+            public boolean accept(File dir, String filename) {
+                if (filename.startsWith(filenamePrefix)) {
+                    return true;
+                }
+                return false;
+            }
+        };
+        final File gcDir = LocalStorage.getStorageDir(geocode);
+        final File[] found = gcDir.listFiles(filter);
+        return found;
+    }
 }
