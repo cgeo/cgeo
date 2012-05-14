@@ -441,7 +441,7 @@ public class cgData {
         return restoreDone;
     }
 
-    private class DBContext extends ContextWrapper {
+    private static class DBContext extends ContextWrapper {
 
         public DBContext(Context base) {
             super(base);
@@ -456,8 +456,7 @@ public class cgData {
                 CursorFactory factory) {
             File f = new File(name);
             f.getParentFile().mkdirs();
-            SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(f, factory);
-            return db;
+            return SQLiteDatabase.openOrCreateDatabase(f, factory);
         }
 
     }
