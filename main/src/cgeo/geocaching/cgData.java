@@ -19,10 +19,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
@@ -263,7 +265,7 @@ public class cgData {
         if (databaseRW == null || !databaseRW.isOpen()) {
             try {
                 if (dbHelper == null) {
-                    dbHelper = new DbHelper(context);
+                    dbHelper = new DbHelper(new DBContext(context));
                 }
                 databaseRW = dbHelper.getWritableDatabase();
 
@@ -284,7 +286,7 @@ public class cgData {
         if (databaseRO == null || !databaseRO.isOpen()) {
             try {
                 if (dbHelper == null) {
-                    dbHelper = new DbHelper(context);
+                    dbHelper = new DbHelper(new DBContext(context));
                 }
                 databaseRO = dbHelper.getReadableDatabase();
 
@@ -314,7 +316,7 @@ public class cgData {
         cacheCache.removeAllFromCache();
 
         initialized = false;
-        closePreparedStatements();
+        clearPreparedStatements();
 
         if (databaseRO != null) {
             path = databaseRO.getPath();
@@ -350,10 +352,11 @@ public class cgData {
         }
     }
 
-    private void closePreparedStatements() {
+    private void clearPreparedStatements() {
         for (SQLiteStatement statement : statements.values()) {
             statement.close();
         }
+        statements.clear();
     }
 
     private static File backupFile() {
@@ -378,6 +381,39 @@ public class cgData {
 
         Log.i("Database was copied to " + target);
         return target.getPath();
+    }
+
+    public boolean moveDatabase() {
+        if (!LocalStorage.isExternalStorageAvailable()) {
+            Log.w("Database was not moved: external memory not available");
+            return false;
+        }
+
+        final File target = Settings.isDbOnSDCard() ? internalDb() : externalDb();
+        closeDb();
+        final File source = new File(path);
+        final boolean moveDone = LocalStorage.copy(source, target);
+        if (moveDone) {
+            source.delete();
+            Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
+        }
+        init();
+
+        if (!moveDone) {
+            Log.e("Database could not be moved to " + target);
+            return false;
+        }
+
+        Log.i("Database was moved to " + target);
+        return true;
+    }
+
+    public static File internalDb() {
+        return new File(LocalStorage.getInternalDbDirectory(), dbName);
+    }
+
+    public static File externalDb() {
+        return new File(LocalStorage.getExternalDbDirectory(), dbName);
     }
 
     public static File isRestoreFile() {
@@ -405,10 +441,31 @@ public class cgData {
         return restoreDone;
     }
 
+    private class DBContext extends ContextWrapper {
+
+        public DBContext(Context base) {
+            super(base);
+        }
+
+        /**
+         * We override the default open/create as it doesn't work on OS 1.6 and
+         * causes issues on other devices too.
+         */
+        @Override
+        public SQLiteDatabase openOrCreateDatabase(String name, int mode,
+                CursorFactory factory) {
+            File f = new File(name);
+            f.getParentFile().mkdirs();
+            SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(f, factory);
+            return db;
+        }
+
+    }
+
     private static class DbHelper extends SQLiteOpenHelper {
 
         DbHelper(Context context) {
-            super(context, dbName, null, dbVersion);
+            super(context, Settings.isDbOnSDCard() ? externalDb().getPath() : internalDb().getPath(), null, dbVersion);
         }
 
         @Override

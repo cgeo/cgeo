@@ -76,6 +76,37 @@ public class cgeoapplication extends Application {
         return storage.backupDatabase();
     }
 
+    /**
+     * Move the database to/from external storage in a new thread,
+     * showing a progress window
+     * 
+     * @param fromActivity
+     */
+    public void moveDatabase(final Activity fromActivity) {
+        final Resources res = this.getResources();
+        final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.init_dbmove_dbmove), res.getString(R.string.init_dbmove_running), true, false);
+        final AtomicBoolean atomic = new AtomicBoolean(false);
+        Thread moveThread = new Thread() {
+            final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    boolean success = atomic.get();
+                    String message = success ? res.getString(R.string.init_dbmove_success) : res.getString(R.string.init_dbmove_failed);
+                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_dbmove_dbmove), message);
+                }
+            };
+
+            @Override
+            public void run() {
+                atomic.set(storage.moveDatabase());
+                handler.sendMessage(handler.obtainMessage());
+            }
+        };
+        moveThread.start();
+    }
+
+
     public static File isRestoreFile() {
         return cgData.isRestoreFile();
     }

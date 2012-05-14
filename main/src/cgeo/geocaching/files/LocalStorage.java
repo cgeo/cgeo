@@ -26,7 +26,7 @@ import java.io.OutputStream;
  */
 public class LocalStorage {
 
-    /** Name of the local private directory to use to hold cached information */
+    /** Name of the local private directory used to hold cached information */
     public final static String cache = ".cgeo";
 
     /**
@@ -49,8 +49,24 @@ public class LocalStorage {
 
     private static File getStorageSpecific(boolean secondary) {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ^ secondary ?
-                new File(Environment.getExternalStorageDirectory(), LocalStorage.cache) :
-                new File(new File(new File(Environment.getDataDirectory(), "data"), "cgeo.geocaching"), LocalStorage.cache);
+                getExternalStorageBase() :
+                new File(getInternalStorageBase(), LocalStorage.cache);
+    }
+
+    public static File getExternalDbDirectory() {
+        return getExternalStorageBase();
+    }
+
+    public static File getInternalDbDirectory() {
+        return new File(getInternalStorageBase(), "databases");
+    }
+
+    private static File getExternalStorageBase() {
+        return new File(Environment.getExternalStorageDirectory(), LocalStorage.cache);
+    }
+
+    private static File getInternalStorageBase() {
+        return new File(new File(Environment.getDataDirectory(), "data"), "cgeo.geocaching");
     }
 
     /**

@@ -676,6 +676,18 @@ public class SettingsActivity extends AbstractActivity {
 
         refreshBackupLabel();
 
+        // Database location
+        refreshDbOnSDCardSetting();
+
+        final CheckBox dbOnSDCardButton = (CheckBox) findViewById(R.id.dbonsdcard);
+        dbOnSDCardButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                app.moveDatabase(SettingsActivity.this);
+            }
+        });
+
         // Debug settings
         final CheckBox debugButton = (CheckBox) findViewById(R.id.debug);
         debugButton.setChecked(Settings.isDebug());
@@ -734,6 +746,11 @@ public class SettingsActivity extends AbstractActivity {
         } else {
             lastBackup.setText(res.getString(R.string.init_backup_last_no));
         }
+    }
+
+    private void refreshDbOnSDCardSetting() {
+        final CheckBox dbOnSDCardButton = (CheckBox) findViewById(R.id.dbonsdcard);
+        dbOnSDCardButton.setChecked(Settings.isDbOnSDCard());
     }
 
     /**
