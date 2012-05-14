@@ -1108,7 +1108,7 @@ public class cgCache implements ICache, IWaypoint {
      *            called while loading or building a cache
      * @return <code>true</code> if waypoint successfully added to waypoint database
      */
-    public boolean addWaypoint(final cgWaypoint waypoint, boolean saveToDatabase) {
+    public boolean addOrChangeWaypoint(final cgWaypoint waypoint, boolean saveToDatabase) {
         if (null == waypoints) {
             waypoints = new ArrayList<cgWaypoint>();
         }
@@ -1130,7 +1130,7 @@ public class cgCache implements ICache, IWaypoint {
             resetFinalDefined();
         }
 
-        return saveToDatabase && cgeoapplication.getInstance().saveOwnWaypoint(waypoint.getId(), geocode, waypoint);
+        return saveToDatabase && cgeoapplication.getInstance().saveWaypoint(waypoint.getId(), geocode, waypoint);
     }
 
     public boolean hasWaypoints() {
@@ -1182,7 +1182,7 @@ public class cgCache implements ICache, IWaypoint {
         copy.setUserDefined();
         copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
         waypoints.add(index + 1, copy);
-        return cgeoapplication.getInstance().saveOwnWaypoint(-1, geocode, copy);
+        return cgeoapplication.getInstance().saveWaypoint(-1, geocode, copy);
     }
 
     /**
@@ -1285,7 +1285,7 @@ public class cgCache implements ICache, IWaypoint {
                         final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
                         final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT, false);
                         waypoint.setCoords(point);
-                        addWaypoint(waypoint, false);
+                        addOrChangeWaypoint(waypoint, false);
                         count++;
                     }
                 } catch (Geopoint.ParseException e) {
