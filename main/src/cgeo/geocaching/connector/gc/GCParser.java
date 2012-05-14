@@ -618,7 +618,7 @@ public abstract class GCParser {
             if (null != originalCoords) {
                 final cgWaypoint waypoint = new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.WAYPOINT, false);
                 waypoint.setCoords(new Geopoint(originalCoords));
-                cache.addWaypoint(waypoint, false);
+                cache.addOrChangeWaypoint(waypoint, false);
                 cache.setUserModifiedCoords(true);
             }
         } catch (Geopoint.GeopointException e) {
@@ -688,7 +688,7 @@ public abstract class GCParser {
                     // waypoint note
                     waypoint.setNote(BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
 
-                    cache.addWaypoint(waypoint, false);
+                    cache.addOrChangeWaypoint(waypoint, false);
                 }
             }
         }

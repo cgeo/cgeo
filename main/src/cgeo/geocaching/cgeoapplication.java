@@ -292,8 +292,8 @@ public class cgeoapplication extends Application {
         return storage.saveWaypoints(cache);
     }
 
-    public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
-        if (storage.saveOwnWaypoint(id, geocode, waypoint)) {
+    public boolean saveWaypoint(int id, String geocode, cgWaypoint waypoint) {
+        if (storage.saveWaypoint(id, geocode, waypoint)) {
             this.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             return true;
         }
