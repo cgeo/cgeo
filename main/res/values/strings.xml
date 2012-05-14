@@ -322,6 +322,7 @@
   <!-- caches lists -->
   <string name="list_menu">List</string>
   <string name="list_menu_create">Create new list</string>
+  <string name="list_menu_all_lists">all lists</string>
   <string name="list_menu_drop">Drop current list</string>
   <string name="list_menu_change">Change list</string>
   <string name="list_menu_rename">Rename current list</string>

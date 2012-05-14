@@ -1500,7 +1500,6 @@ public class cgData {
             return Collections.emptySet();
         }
 
-
         Log.d("cgData.loadCachesFromGeocodes(" + geocodes.toString() + ") from DB");
 
         init();
@@ -2209,15 +2208,20 @@ public class cgData {
 
         StringBuilder specifySql = new StringBuilder();
 
-        specifySql.append("reason = ");
-        specifySql.append(Math.max(listId, 1));
+        if (listId != StoredList.ALL_LIST_ID) {
+            specifySql.append("reason = ");
+            specifySql.append(Math.max(listId, 1));
+        } else {
+            specifySql.append("reason >= ");
+            specifySql.append(StoredList.STANDARD_LIST_ID);
+        }
 
         if (detailedOnly) {
             specifySql.append(" and detailed = 1 ");
         }
 
         if (cacheType != CacheType.ALL) {
-            specifySql.append(" and type = \"");
+            specifySql.append("and type = \"");
             specifySql.append(cacheType.id);
             specifySql.append('"');
         }
@@ -2226,15 +2230,15 @@ public class cgData {
             Cursor cursor;
             if (coords != null) {
                 cursor = databaseRO.query(
-                    dbTableCaches,
-                    new String[] { "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
-                            ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif" },
-                    specifySql.toString(),
-                    null,
-                    null,
-                    null,
-                    "dif",
-                    null);
+                        dbTableCaches,
+                        new String[] { "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+                                ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif" },
+                        specifySql.toString(),
+                        null,
+                        null,
+                        null,
+                        "dif",
+                        null);
             } else {
                 cursor = databaseRO.query(
                         dbTableCaches,
@@ -2620,6 +2624,10 @@ public class cgData {
         return statement;
     }
 
+    private SQLiteStatement getStatementCountAllLists() {
+        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches);
+    }
+
     private SQLiteStatement getStatementCountStandardList() {
         return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
     }
@@ -2712,6 +2720,10 @@ public class cgData {
 
     public StoredList getList(int id, Resources res) {
         init();
+        if (id == StoredList.ALL_LIST_ID) {
+            return new StoredList(StoredList.ALL_LIST_ID, res.getString(R.string.list_menu_all_lists), (int) getStatementCountAllLists().simpleQueryForLong());
+        }
+
         if (id >= customListIdOffset) {
             Cursor cursor = databaseRO.query(
                     dbTableLists,
