@@ -739,18 +739,6 @@ public class cgeocaches extends AbstractListActivity {
                 menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
             }
 
-            boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
-            boolean isNonDefaultList = listId != StoredList.STANDARD_LIST_ID;
-
-            if (type == CacheListType.OFFLINE) { // only offline list
-                setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
-                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList);
-                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
-                setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
-            } else { // search and history list (all other than offline)
-                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
-            }
-
             // Hide menus if cache-list is empty
             int[] hideIfEmptyList = new int[] {
                     MENU_SWITCH_SELECT_MODE,
@@ -765,16 +753,28 @@ public class cgeocaches extends AbstractListActivity {
                     MENU_REMOVE_FROM_HISTORY
             };
 
-            boolean menuVisible = cacheList.size() > 0;
+            final boolean listNotEmpty = cacheList.size() > 0;
             for (int itemId : hideIfEmptyList) {
                 MenuItem item = menu.findItem(itemId);
                 if (null != item) {
-                    item.setVisible(menuVisible);
+                    item.setVisible(listNotEmpty);
                 }
             }
 
             if (navigationMenu != null) {
-                navigationMenu.setVisible(menuVisible);
+                navigationMenu.setVisible(listNotEmpty);
+            }
+
+            final boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
+            final boolean isNonDefaultList = listId != StoredList.STANDARD_LIST_ID;
+
+            if (type == CacheListType.OFFLINE) { // only offline list
+                setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
+                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
+                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
+                setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
+            } else { // search and history list (all other than offline)
+                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
             }
 
             MenuItem item = menu.findItem(MENU_DROP_LIST);
@@ -786,14 +786,14 @@ public class cgeocaches extends AbstractListActivity {
                 item.setVisible(isNonDefaultList);
             }
 
-            boolean multipleLists = app.getLists().size() >= 2;
+            final boolean multipleLists = app.getLists().size() >= 2;
             item = menu.findItem(MENU_SWITCH_LIST);
             if (item != null) {
                 item.setVisible(multipleLists);
             }
             item = menu.findItem(MENU_MOVE_TO_LIST);
             if (item != null) {
-                item.setVisible(multipleLists && cacheList.size() > 0);
+                item.setVisible(multipleLists && listNotEmpty);
             }
 
             setMenuItemLabel(menu, MENU_REMOVE_FROM_HISTORY, R.string.cache_remove_from_history, R.string.cache_clear_history);
