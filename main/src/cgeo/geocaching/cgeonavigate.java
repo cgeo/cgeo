@@ -6,8 +6,8 @@ import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.CompassView;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.PeriodicHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class cgeonavigate extends AbstractActivity implements IObserver<Object> {
+public class cgeonavigate extends AbstractActivity {
 
     private static final String EXTRAS_COORDS = "coords";
     private static final String EXTRAS_NAME = "name";
@@ -116,10 +116,7 @@ public class cgeonavigate extends AbstractActivity implements IObserver<Object> 
         setGo4CacheAction();
 
         // sensor & geolocation manager
-        app.addGeoObserver(this);
-        if (Settings.isUseCompass()) {
-            app.addDirectionObserver(this);
-        }
+        geoDirHandler.startGeoAndDir();
 
         // keep backlight on
         if (pm == null) {
@@ -143,8 +140,7 @@ public class cgeonavigate extends AbstractActivity implements IObserver<Object> 
 
     @Override
     public void onPause() {
-        app.deleteGeoObserver(this);
-        app.deleteDirectionObserver(this);
+        geoDirHandler.stopGeoAndDir();
         super.onPause();
     }
 
@@ -190,9 +186,9 @@ public class cgeonavigate extends AbstractActivity implements IObserver<Object> 
             Settings.setUseCompass(!oldSetting);
             invalidateOptionsMenuCompatible();
             if (oldSetting) {
-                app.deleteDirectionObserver(this);
+                geoDirHandler.stopDir();
             } else {
-                app.addDirectionObserver(this);
+                geoDirHandler.startDir();
             }
         } else if (id == 2) {
             Intent pointIntent = new Intent(this, cgeopoint.class);
@@ -249,73 +245,68 @@ public class cgeonavigate extends AbstractActivity implements IObserver<Object> 
         headingView.setText(Math.round(cacheHeading) + "°");
     }
 
-    @Override
-    public void update(final Object data) {
-        if (data instanceof IGeoData) {
-            updateGeoData((IGeoData) data);
-        } else {
-            updateDirection((Float) data);
-        }
-    }
-
-    private void updateGeoData(final IGeoData geo) {
-        try {
-            if (navType == null || navLocation == null || navAccuracy == null) {
-                navType = (TextView) findViewById(R.id.nav_type);
-                navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
-                navSatellites = (TextView) findViewById(R.id.nav_satellites);
-                navLocation = (TextView) findViewById(R.id.nav_location);
-            }
-
-            if (geo.getCoords() != null) {
-                String satellites;
-                if (geo.getSatellitesFixed() > 0) {
-                    satellites = res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible();
-                } else if (geo.getSatellitesVisible() >= 0) {
-                    satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.getSatellitesVisible();
-                } else {
-                    satellites = "";
+    private GeoDirHandler geoDirHandler = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final IGeoData geo) {
+            try {
+                if (navType == null || navLocation == null || navAccuracy == null) {
+                    navType = (TextView) findViewById(R.id.nav_type);
+                    navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
+                    navSatellites = (TextView) findViewById(R.id.nav_satellites);
+                    navLocation = (TextView) findViewById(R.id.nav_location);
                 }
-                navSatellites.setText(satellites);
-                navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
-                if (geo.getAccuracy() >= 0) {
-                    if (Settings.isUseMetricUnits()) {
-                        navAccuracy.setText("±" + Math.round(geo.getAccuracy()) + " m");
+                if (geo.getCoords() != null) {
+                    String satellites;
+                    if (geo.getSatellitesFixed() > 0) {
+                        satellites = res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible();
+                    } else if (geo.getSatellitesVisible() >= 0) {
+                        satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.getSatellitesVisible();
                     } else {
-                        navAccuracy.setText("±" + Math.round(geo.getAccuracy() * IConversion.METERS_TO_FEET) + " ft");
+                        satellites = "";
                     }
+                    navSatellites.setText(satellites);
+                    navType.setText(res.getString(geo.getLocationProvider().resourceId));
+
+                    if (geo.getAccuracy() >= 0) {
+                        if (Settings.isUseMetricUnits()) {
+                            navAccuracy.setText("±" + Math.round(geo.getAccuracy()) + " m");
+                        } else {
+                            navAccuracy.setText("±" + Math.round(geo.getAccuracy() * IConversion.METERS_TO_FEET) + " ft");
+                        }
+                    } else {
+                        navAccuracy.setText(null);
+                    }
+
+                    if (geo.getAltitude() != 0.0f) {
+                        final String humanAlt = HumanDistance.getHumanDistance((float) geo.getAltitude() / 1000);
+                        navLocation.setText(geo.getCoords() + " | " + humanAlt);
+                    } else {
+                        navLocation.setText(geo.getCoords().toString());
+                    }
+
+                    updateDistanceInfo(geo);
                 } else {
+                    navType.setText(null);
                     navAccuracy.setText(null);
+                    navLocation.setText(res.getString(R.string.loc_trying));
                 }
 
-                if (geo.getAltitude() != 0.0f) {
-                    final String humanAlt = HumanDistance.getHumanDistance((float) geo.getAltitude() / 1000);
-                    navLocation.setText(geo.getCoords() + " | " + humanAlt);
-                } else {
-                    navLocation.setText(geo.getCoords().toString());
+                if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                    northHeading = geo.getBearing();
                 }
-
-                updateDistanceInfo(geo);
-            } else {
-                navType.setText(null);
-                navAccuracy.setText(null);
-                navLocation.setText(res.getString(R.string.loc_trying));
+            } catch (Exception e) {
+                Log.w("Failed to LocationUpdater location.");
             }
+        }
 
-            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                northHeading = geo.getBearing();
+        @Override
+        public void updateDirection(final float direction) {
+            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
+                northHeading = DirectionProvider.getDirectionNow(cgeonavigate.this, direction);
             }
-        } catch (Exception e) {
-            Log.w("Failed to LocationUpdater location.");
         }
-    }
-
-    private void updateDirection(final float direction) {
-        if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
-            northHeading = DirectionProvider.getDirectionNow(this, direction);
-        }
-    }
+    };
 
     public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType) {
         coordinates.clear();

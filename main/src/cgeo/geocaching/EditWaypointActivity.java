@@ -9,7 +9,7 @@ import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
-import cgeo.geocaching.utils.IObserver;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class EditWaypointActivity extends AbstractActivity implements IObserver<IGeoData> {
+public class EditWaypointActivity extends AbstractActivity {
 
     private String geocode = null;
     private int id = -1;
@@ -167,7 +167,7 @@ public class EditWaypointActivity extends AbstractActivity implements IObserver<
     public void onResume() {
         super.onResume();
 
-        app.addGeoObserver(this);
+        geoDirHandler.startGeo();
 
         if (id > 0) {
             if (waitDialog == null) {
@@ -191,7 +191,7 @@ public class EditWaypointActivity extends AbstractActivity implements IObserver<
 
     @Override
     public void onPause() {
-        app.deleteGeoObserver(this);
+        geoDirHandler.stopGeo();
         super.onPause();
     }
 
@@ -232,22 +232,24 @@ public class EditWaypointActivity extends AbstractActivity implements IObserver<
         distanceUnitSelector.setOnItemSelectedListener(new changeDistanceUnit(this));
     }
 
-    @Override
-    public void update(final IGeoData geo) {
-        Log.d("EditWaypointActivity.updateLocation called");
-        if (geo.getCoords() == null) {
-            return;
-        }
+    final private GeoDirHandler geoDirHandler = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final IGeoData geo) {
+            Log.d("EditWaypointActivity.updateLocation called");
+            if (geo.getCoords() == null) {
+                return;
+            }
 
-        try {
-            Button bLat = (Button) findViewById(R.id.buttonLatitude);
-            Button bLon = (Button) findViewById(R.id.buttonLongitude);
-            bLat.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-            bLon.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-        } catch (Exception e) {
-            Log.w("Failed to update location.");
+            try {
+                Button bLat = (Button) findViewById(R.id.buttonLatitude);
+                Button bLon = (Button) findViewById(R.id.buttonLongitude);
+                bLat.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                bLon.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+            } catch (Exception e) {
+                Log.w("Failed to update location.");
+            }
         }
-    }
+    };
 
     private class loadWaypoint extends Thread {
 

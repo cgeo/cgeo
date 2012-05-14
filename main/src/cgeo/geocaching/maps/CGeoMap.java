@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.DirectionProvider;
-import cgeo.geocaching.GeoObserver;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.LiveMapInfo;
@@ -36,7 +36,6 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 
@@ -122,8 +121,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private MapViewImpl mapView = null;
     private MapControllerImpl mapController = null;
     private cgeoapplication app = null;
-    final private GeoObserver geoUpdate = new UpdateLoc();
-    final private IObserver<Float> dirUpdate = new UpdateDir();
+    final private GeoDirHandler geoDirUpdate = new UpdateLoc();
     private SearchResult searchIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
@@ -281,9 +279,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     waitDialog.setOnCancelListener(null);
                 }
 
-                if (Settings.isUseCompass()) {
-                    app.addDirectionObserver(dirUpdate);
-                }
+                geoDirUpdate.startDir();
             }
         }
 
@@ -293,9 +289,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 loadDetailsThread.stopIt();
             }
 
-            if (Settings.isUseCompass()) {
-                app.addDirectionObserver(dirUpdate);
-            }
+            geoDirUpdate.startDir();
         }
     }
 
@@ -489,15 +483,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     private void addGeoDirObservers() {
-        app.addGeoObserver(geoUpdate);
-        if (Settings.isUseCompass()) {
-            app.addDirectionObserver(dirUpdate);
-        }
+        geoDirUpdate.startGeoAndDir();
     }
 
     private void deleteGeoDirObservers() {
-        app.deleteGeoObserver(geoUpdate);
-        app.deleteDirectionObserver(dirUpdate);
+        geoDirUpdate.stopGeoAndDir();
     }
 
     @Override
@@ -668,9 +658,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                                     loadDetailsThread.stopIt();
                                 }
 
-                                if (Settings.isUseCompass()) {
-                                    app.addDirectionObserver(dirUpdate);
-                                }
+                                geoDirUpdate.startDir();
                             } catch (Exception e) {
                                 Log.e("cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
                             }
@@ -823,10 +811,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     // class: update location
-    private class UpdateLoc extends GeoObserver {
+    private class UpdateLoc extends GeoDirHandler {
 
         @Override
-        protected void updateLocation(final IGeoData geo) {
+        protected void updateGeoData(final IGeoData geo) {
             try {
                 boolean repaintRequired = false;
 
@@ -859,13 +847,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 Log.w("Failed to update location.");
             }
         }
-    }
-
-    // class: update direction
-    private class UpdateDir implements IObserver<Float> {
 
         @Override
-        public void update(final Float direction) {
+        public void updateDirection(final float direction) {
             if (overlayPosition != null && mapView != null && (app.currentGeo().getSpeed() <= 5)) { // use compass when speed is lower than 18 km/h
                 overlayPosition.setHeading(DirectionProvider.getDirectionNow(activity, direction));
                 mapView.repaintRequired(overlayPosition);

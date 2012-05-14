@@ -12,6 +12,7 @@ import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,7 +48,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     protected CacheDetailsCreator details;
 
     private TextView cacheDistance = null;
-    private final GeoObserver geoUpdate = new UpdateLocation();
     private final int layout;
 
     private final Handler ratingHandler = new Handler() {
@@ -62,10 +62,10 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         }
     };
 
-    private final class UpdateLocation extends GeoObserver {
+    private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
         @Override
-        protected void updateLocation(final IGeoData geo) {
+        protected void updateGeoData(final IGeoData geo) {
             try {
                 if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
                     cacheDistance.setText(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
@@ -75,7 +75,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                 Log.w("Failed to UpdateLocation location.");
             }
         }
-    }
+    };
 
     public AbstractPopupActivity(String helpTopic, int layout) {
         super(helpTopic);
@@ -218,7 +218,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
     @Override
     public void onPause() {
-        app.deleteGeoObserver(geoUpdate);
+        geoUpdate.stopGeo();
         super.onPause();
     }
 
@@ -246,7 +246,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     public void onResume() {
         super.onResume();
         init();
-        app.addGeoObserver(geoUpdate);
+        geoUpdate.startGeo();
     }
 
     @Override

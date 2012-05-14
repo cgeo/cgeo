@@ -6,7 +6,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.EditUtils;
-import cgeo.geocaching.utils.IObserver;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +24,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class SearchActivity extends AbstractActivity implements IObserver<IGeoData> {
+public class SearchActivity extends AbstractActivity {
 
     public static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
 
@@ -77,13 +77,13 @@ public class SearchActivity extends AbstractActivity implements IObserver<IGeoDa
     @Override
     public void onResume() {
         super.onResume();
-        app.addGeoObserver(this);
+        geoDirHandler.startGeo();
         init();
     }
 
     @Override
     public void onPause() {
-        app.deleteGeoObserver(this);
+        geoDirHandler.stopGeo();
         super.onPause();
     }
 
@@ -211,28 +211,30 @@ public class SearchActivity extends AbstractActivity implements IObserver<IGeoDa
         displayTrackable.setOnClickListener(new findTrackableListener());
     }
 
-    @Override
-    public void update(final IGeoData geo) {
-        try {
-            if (latEdit == null) {
-                latEdit = (EditText) findViewById(R.id.latitude);
-            }
-            if (lonEdit == null) {
-                lonEdit = (EditText) findViewById(R.id.longitude);
-            }
+    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final IGeoData geo) {
+            try {
+                if (latEdit == null) {
+                    latEdit = (EditText) findViewById(R.id.latitude);
+                }
+                if (lonEdit == null) {
+                    lonEdit = (EditText) findViewById(R.id.longitude);
+                }
 
-            if (geo.getCoords() != null) {
-                if (latEdit != null) {
-                    latEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                if (geo.getCoords() != null) {
+                    if (latEdit != null) {
+                        latEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                    }
+                    if (lonEdit != null) {
+                        lonEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+                    }
                 }
-                if (lonEdit != null) {
-                    lonEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-                }
+            } catch (Exception e) {
+                Log.w("Failed to update location.");
             }
-        } catch (Exception e) {
-            Log.w("Failed to update location.");
         }
-    }
+    };
 
     private class findByCoordsAction implements OnClickListener {
 

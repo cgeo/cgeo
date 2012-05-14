@@ -141,6 +141,16 @@ public class cgeoapplication extends Application {
         restoreThread.start();
     }
 
+    /**
+     * Register an observer to receive GeoData information.
+     * <br/>
+     * If there is a chance that no observers are registered before this
+     * method is called, it is necessary to call it from a task implementing
+     * a looper interface as the data provider will use listeners that
+     * require a looper thread to run.
+     *
+     * @param observer a geodata observer
+     */
     public void addGeoObserver(final IObserver<? super IGeoData> observer) {
         currentGeoObject().addObserver(observer);
     }
