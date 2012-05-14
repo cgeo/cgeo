@@ -87,6 +87,7 @@ public final class Settings {
     private static final String KEY_HIDE_LIVE_MAP_HINT = "hidelivemaphint";
     private static final String KEY_LIVE_MAP_HINT_SHOW_COUNT = "livemaphintshowcount";
     private static final String KEY_SETTINGS_VERSION = "settingsversion";
+    private static final String KEY_DB_ON_SDCARD = "dbonsdcard";
 
     private final static int unitsMetric = 1;
 
@@ -1124,6 +1125,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, showCount);
+            }
+        });
+    }
+
+    public static boolean isDbOnSDCard() {
+        return sharedPrefs.getBoolean(KEY_DB_ON_SDCARD, false);
+    }
+
+    public static void setDbOnSDCard(final boolean dbOnSDCard) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_DB_ON_SDCARD, dbOnSDCard);
             }
         });
     }
