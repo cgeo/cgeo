@@ -40,7 +40,7 @@ import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.sorting.VoteComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
-import cgeo.geocaching.utils.IObserver;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
@@ -150,7 +150,45 @@ public class cgeocaches extends AbstractListActivity {
     private LoadFromWebThread threadWeb = null;
     private RemoveFromHistoryThread threadH = null;
     private int listId = StoredList.TEMPORARY_LIST_ID;
-    private final UpdateHandler updateHandler = new UpdateHandler();
+    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
+
+	    @Override
+	    public void updateGeoData(final IGeoData geo) {
+		if (adapter == null) {
+		    return;
+		}
+
+		try {
+		    if (geo.getCoords() != null) {
+			adapter.setActualCoordinates(geo.getCoords());
+		    }
+
+		    if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+			if (!Settings.isUseCompass()) {
+			    adapter.setActualHeading(geo.getBearing());
+			}
+			if (northHeading != null) {
+			    adapter.setActualHeading(northHeading);
+			}
+		    }
+		} catch (Exception e) {
+		    Log.w("Failed to UpdateLocation location.");
+		}
+	    }
+
+	    @Override
+	    public void updateDirection(final float direction) {
+		if (!Settings.isLiveList()) {
+		    return;
+		}
+
+		northHeading = DirectionProvider.getDirectionNow(cgeocaches.this, direction);
+		if (northHeading != null && adapter != null && (app.currentGeo().getSpeed() <= 5)) { // use compass when speed is lower than 18 km/h) {
+		    adapter.setActualHeading(northHeading);
+		}
+	    }
+
+	};
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     /**
@@ -1185,18 +1223,15 @@ public class cgeocaches extends AbstractListActivity {
         listFooter.setClickable(enableMore);
     }
 
-    // Sensor & geolocation manager. This must be called from the UI thread as it may
-    // cause the system listeners to start if nobody else required them before.
     private void startGeoAndDir() {
-        app.addGeoObserver(updateHandler);
-        if (Settings.isLiveList() && Settings.isUseCompass()) {
-            app.addDirectionObserver(updateHandler);
-        }
+	geoDirHandler.startGeo();
+	if (Settings.isLiveMap()) {
+	    geoDirHandler.startDir();
+	}
     }
 
     private void removeGeoAndDir() {
-        app.deleteGeoObserver(updateHandler);
-        app.deleteDirectionObserver(updateHandler);
+	geoDirHandler.stopGeoAndDir();
     }
 
     private void importGpx() {
@@ -1312,57 +1347,6 @@ public class cgeocaches extends AbstractListActivity {
     public void dropSelected() {
         progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
         new DropDetailsThread(dropDetailsHandler).start();
-    }
-
-    private class UpdateHandler extends Handler implements IObserver<Object> {
-
-        @Override
-        public void handleMessage(final Message message) {
-            if (message.obj instanceof IGeoData) {
-                updateGeoData((IGeoData) message.obj);
-            } else {
-                updateDirection((Float) message.obj);
-            }
-        }
-
-        @Override
-        public void update(final Object o) {
-            obtainMessage(0, o).sendToTarget();
-        }
-    }
-
-    private void updateGeoData(final IGeoData geo) {
-        if (adapter == null) {
-            return;
-        }
-
-        try {
-            if (geo.getCoords() != null) {
-                adapter.setActualCoordinates(geo.getCoords());
-            }
-
-            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                if (!Settings.isUseCompass()) {
-                    adapter.setActualHeading(geo.getBearing());
-                }
-                if (northHeading != null) {
-                    adapter.setActualHeading(northHeading);
-                }
-            }
-        } catch (Exception e) {
-            Log.w("Failed to UpdateLocation location.");
-        }
-    }
-
-    public void updateDirection(final float direction) {
-        if (!Settings.isLiveList()) {
-            return;
-        }
-
-        northHeading = DirectionProvider.getDirectionNow(this, direction);
-        if (northHeading != null && adapter != null && (app.currentGeo().getSpeed() <= 5)) { // use compass when speed is lower than 18 km/h) {
-            adapter.setActualHeading(northHeading);
-        }
     }
 
     private class LoadByOfflineThread extends Thread {

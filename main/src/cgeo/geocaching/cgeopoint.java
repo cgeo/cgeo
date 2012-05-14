@@ -6,7 +6,7 @@ import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.ui.Formatter;
-import cgeo.geocaching.utils.IObserver;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -35,7 +35,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
+public class cgeopoint extends AbstractActivity {
     private static final int MENU_DEFAULT_NAVIGATION = 2;
     private static final int MENU_NAVIGATE = 0;
     private static final int MENU_CACHES_AROUND = 5;
@@ -223,7 +223,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
     @Override
     public void onResume() {
         super.onResume();
-        app.addGeoObserver(this);
+        geoDirHandler.startGeo();
         init();
     }
 
@@ -239,7 +239,7 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
 
     @Override
     public void onPause() {
-        app.deleteGeoObserver(this);
+        geoDirHandler.stopGeo();
         super.onPause();
     }
 
@@ -456,15 +456,17 @@ public class cgeopoint extends AbstractActivity implements IObserver<IGeoData> {
         finish();
     }
 
-    @Override
-    public void update(final IGeoData geo) {
-        try {
-            latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-            lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-        } catch (final Exception e) {
-            Log.w("Failed to update location.");
+    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final IGeoData geo) {
+            try {
+                latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+            } catch (final Exception e) {
+                Log.w("Failed to update location.");
+            }
         }
-    }
+    };
 
     private class currentListener implements View.OnClickListener {
 

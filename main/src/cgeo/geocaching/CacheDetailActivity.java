@@ -21,13 +21,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
-import cgeo.geocaching.utils.BaseUtils;
-import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.CryptUtils;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TranslationUtils;
-import cgeo.geocaching.utils.UnknownTagsHandler;
+import cgeo.geocaching.utils.*;
 
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
@@ -125,7 +119,43 @@ public class CacheDetailActivity extends AbstractActivity {
     private cgCache cache;
     private final Progress progress = new Progress();
     private SearchResult search;
-    private final LocationUpdater locationUpdater = new LocationUpdater();
+
+    private final GeoDirHandler locationUpdater = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final IGeoData geo) {
+            if (cacheDistanceView == null) {
+                return;
+            }
+
+            try {
+                final StringBuilder dist = new StringBuilder();
+
+                if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
+                    dist.append(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
+                }
+
+                if (cache != null && cache.getElevation() != null) {
+                    if (geo.getAltitude() != 0.0) {
+                        final double diff = cache.getElevation() - geo.getAltitude();
+                        dist.append(diff >= 0 ? " ↗" : " ↘");
+                        if (Settings.isUseMetricUnits()) {
+                            dist.append(Math.abs((int) diff));
+                            dist.append(" m");
+                        } else {
+                            dist.append(Math.abs((int) (diff * IConversion.METERS_TO_FEET)));
+                            dist.append(" ft");
+                        }
+                    }
+                }
+
+                cacheDistanceView.setText(dist.toString());
+                cacheDistanceView.bringToFront();
+            } catch (Exception e) {
+                Log.w("Failed to update location.");
+            }
+        }
+    };
+
     private CharSequence clickedItemText = null;
     private int contextMenuWPIndex = -1;
 
@@ -334,7 +364,7 @@ public class CacheDetailActivity extends AbstractActivity {
             notifyDataSetChanged();
             refreshOnResume = false;
         }
-        app.addGeoObserver(locationUpdater);
+        locationUpdater.startGeo();
     }
 
     @Override
@@ -347,7 +377,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
     @Override
     public void onPause() {
-        app.deleteGeoObserver(locationUpdater);
+        locationUpdater.stopGeo();
         super.onPause();
     }
 
@@ -687,9 +717,9 @@ public class CacheDetailActivity extends AbstractActivity {
         progress.dismiss();
     }
 
-    private class LocationUpdater extends GeoObserver {
+    private class LocationUpdater extends GeoDirHandler {
         @Override
-        public void updateLocation(final IGeoData geo) {
+        public void updateGeoData(final IGeoData geo) {
             if (cacheDistanceView == null) {
                 return;
             }

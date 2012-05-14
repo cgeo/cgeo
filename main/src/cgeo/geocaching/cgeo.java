@@ -10,7 +10,7 @@ import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.Formatter;
-import cgeo.geocaching.utils.IObserver;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -125,15 +125,14 @@ public class cgeo extends AbstractActivity {
         }
     };
 
-    private class SatellitesHandler extends Handler implements IObserver<IGeoData> {
+    private class SatellitesHandler extends GeoDirHandler {
 
         private boolean gpsEnabled = false;
         private int satellitesFixed = 0;
         private int satellitesVisible = 0;
 
         @Override
-        public void handleMessage(final Message msg) {
-            final IGeoData data = (IGeoData) msg.obj;
+        public void updateGeoData(final IGeoData data) {
             if (data.getGpsEnabled() == gpsEnabled &&
                     data.getSatellitesFixed() == satellitesFixed &&
                     data.getSatellitesVisible() == satellitesVisible) {
@@ -155,10 +154,6 @@ public class cgeo extends AbstractActivity {
             }
         }
 
-        @Override
-        public void update(final IGeoData data) {
-            obtainMessage(0, data).sendToTarget();
-        }
     }
 
     private SatellitesHandler satellitesHandler = new SatellitesHandler();
@@ -233,8 +228,8 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
-        app.addGeoObserver(locationUpdater);
-        app.addGeoObserver(satellitesHandler);
+        locationUpdater.startGeo();
+        satellitesHandler.startGeo();
         updateUserInfoHandler.sendEmptyMessage(-1);
         init();
     }
@@ -256,8 +251,8 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onPause() {
         initialized = false;
-        app.deleteGeoObserver(locationUpdater);
-        app.deleteGeoObserver(satellitesHandler);
+        locationUpdater.stopGeo();
+        satellitesHandler.stopGeo();
         super.onPause();
     }
 
@@ -535,10 +530,10 @@ public class cgeo extends AbstractActivity {
                 .show();
     }
 
-    private class UpdateLocation extends GeoObserver {
+    private class UpdateLocation extends GeoDirHandler {
 
         @Override
-        public void updateLocation(final IGeoData geo) {
+        public void updateGeoData(final IGeoData geo) {
             final View nearestView = findViewById(R.id.nearest);
             final TextView navType = (TextView) findViewById(R.id.nav_type);
             final TextView navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
