@@ -717,42 +717,6 @@ public class CacheDetailActivity extends AbstractActivity {
         progress.dismiss();
     }
 
-    private class LocationUpdater extends GeoDirHandler {
-        @Override
-        public void updateGeoData(final IGeoData geo) {
-            if (cacheDistanceView == null) {
-                return;
-            }
-
-            try {
-                final StringBuilder dist = new StringBuilder();
-
-                if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
-                    dist.append(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
-                }
-
-                if (cache != null && cache.getElevation() != null) {
-                    if (geo.getAltitude() != 0.0) {
-                        final double diff = cache.getElevation() - geo.getAltitude();
-                        dist.append(diff >= 0 ? " ↗" : " ↘");
-                        if (Settings.isUseMetricUnits()) {
-                            dist.append(Math.abs((int) diff));
-                            dist.append(" m");
-                        } else {
-                            dist.append(Math.abs((int) (diff * IConversion.METERS_TO_FEET)));
-                            dist.append(" ft");
-                        }
-                    }
-                }
-
-                cacheDistanceView.setText(dist.toString());
-                cacheDistanceView.bringToFront();
-            } catch (Exception e) {
-                Log.w("Failed to update location.");
-            }
-        }
-    }
-
     /**
      * Loads the cache with the given geocode or guid.
      */
