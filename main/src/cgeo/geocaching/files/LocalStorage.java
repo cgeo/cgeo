@@ -374,8 +374,6 @@ public class LocalStorage {
                 return filename.startsWith(filenamePrefix);
             }
         };
-        final File gcDir = LocalStorage.getStorageDir(geocode);
-        final File[] found = gcDir.listFiles(filter);
-        return found;
+        return LocalStorage.getStorageDir(geocode).listFiles(filter);
     }
 }
