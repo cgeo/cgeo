@@ -148,7 +148,6 @@ public class cgeocaches extends AbstractListActivity {
     private long detailProgressTime = 0L;
     private LoadDetailsThread threadDetails = null;
     private LoadFromWebThread threadWeb = null;
-    private RemoveFromHistoryThread threadH = null;
     private int listId = StoredList.TEMPORARY_LIST_ID;
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
@@ -1299,8 +1298,7 @@ public class cgeocaches extends AbstractListActivity {
         progress.show(this, null, res.getString(R.string.caches_removing_from_history), ProgressDialog.STYLE_HORIZONTAL, removeFromHistoryHandler.obtainMessage(MSG_CANCEL));
         progress.setMaxProgressAndReset(detailTotal);
 
-        threadH = new RemoveFromHistoryThread(removeFromHistoryHandler);
-        threadH.start();
+        new RemoveFromHistoryThread(removeFromHistoryHandler).start();
     }
 
     public void importWeb() {
