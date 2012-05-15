@@ -88,6 +88,7 @@ public final class Settings {
     private static final String KEY_LIVE_MAP_HINT_SHOW_COUNT = "livemaphintshowcount";
     private static final String KEY_SETTINGS_VERSION = "settingsversion";
     private static final String KEY_DB_ON_SDCARD = "dbonsdcard";
+    private static final String KEY_STORED_LIST_SHOWS_ALL = "storedlistshowsall";
 
     private final static int unitsMetric = 1;
 
@@ -196,7 +197,7 @@ public final class Settings {
             e.putBoolean(KEY_HIDE_LIVE_MAP_HINT, old.getInt(KEY_HIDE_LIVE_MAP_HINT, 0) != 0);
             e.putInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, old.getInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, 0));
 
-            e.putInt(KEY_SETTINGS_VERSION, 1) ; // mark migrated
+            e.putInt(KEY_SETTINGS_VERSION, 1); // mark migrated
             e.commit();
         }
     }
@@ -397,6 +398,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putInt(KEY_LAST_USED_LIST, listId);
+            }
+        });
+    }
+
+    public static boolean getStoredListShowsAll() {
+        return sharedPrefs.getBoolean(KEY_STORED_LIST_SHOWS_ALL, false);
+    }
+
+    public static void setStoredListShowsAll(final boolean showAll) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_STORED_LIST_SHOWS_ALL, showAll);
             }
         });
     }
@@ -1086,7 +1101,6 @@ public final class Settings {
         });
     }
 
-
     public static boolean isDebug() {
         return Log.isDebug();
     }
@@ -1094,7 +1108,8 @@ public final class Settings {
     public static void setDebug(final boolean debug) {
         editSharedSettings(new PrefRunnable() {
 
-            @Override public void edit(Editor edit) {
+            @Override
+            public void edit(Editor edit) {
                 edit.putBoolean(KEY_DEBUG, debug);
             }
         });

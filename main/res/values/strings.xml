@@ -419,6 +419,7 @@
   <string name="init_mapsource_select">Select Map Source</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Show trail on Map</string>
+  <string name="init_storedshowsall">Stored list shows all caches</string>
   <string name="init_trackautovisit">Set trackables to \"Visited\" as a default</string>
   <string name="init_sigautoinsert">Insert signature automatically</string>
   <string name="init_loaddirectionimg">Load direction-image if necessary (only Basic Member)</string>

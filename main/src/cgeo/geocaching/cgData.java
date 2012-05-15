@@ -1499,7 +1499,6 @@ public class cgData {
             return Collections.emptySet();
         }
 
-
         Log.d("cgData.loadCachesFromGeocodes(" + geocodes.toString() + ") from DB");
 
         init();
@@ -2208,8 +2207,13 @@ public class cgData {
 
         StringBuilder specifySql = new StringBuilder();
 
-        specifySql.append("reason = ");
-        specifySql.append(Math.max(listId, 1));
+        if (listId != StoredList.STANDARD_LIST_ID || !Settings.getStoredListShowsAll()) {
+            specifySql.append("reason = ");
+            specifySql.append(Math.max(listId, 1));
+        } else {
+            specifySql.append("reason >= ");
+            specifySql.append(StoredList.STANDARD_LIST_ID);
+        }
 
         if (detailedOnly) {
             specifySql.append(" and detailed = 1 ");
@@ -2225,15 +2229,15 @@ public class cgData {
             Cursor cursor;
             if (coords != null) {
                 cursor = databaseRO.query(
-                    dbTableCaches,
-                    new String[] { "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
-                            ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif" },
-                    specifySql.toString(),
-                    null,
-                    null,
-                    null,
-                    "dif",
-                    null);
+                        dbTableCaches,
+                        new String[] { "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+                                ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif" },
+                        specifySql.toString(),
+                        null,
+                        null,
+                        null,
+                        "dif",
+                        null);
             } else {
                 cursor = databaseRO.query(
                         dbTableCaches,
@@ -2620,7 +2624,7 @@ public class cgData {
     }
 
     private SQLiteStatement getStatementCountStandardList() {
-        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
+        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason " + (Settings.getStoredListShowsAll() ? ">=" : "=") + " " + StoredList.STANDARD_LIST_ID);
     }
 
     public boolean hasLogOffline(final String geocode) {
@@ -2726,7 +2730,7 @@ public class cgData {
             }
         }
         // fall back to standard list in case of invalid list id
-        if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
+        if (id == StoredList.STANDARD_LIST_ID || id >= 0) {
             return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementCountStandardList().simpleQueryForLong());
         }
 
