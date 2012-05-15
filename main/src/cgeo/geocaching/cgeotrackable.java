@@ -112,6 +112,7 @@ public class cgeotrackable extends AbstractActivity {
                         trackable.getSpottedType() == cgTrackable.SPOTTED_UNKNOWN ||
                         trackable.getSpottedType() == cgTrackable.SPOTTED_OWNER
                 ) {
+                    boolean showTimeSpan = true;
                     StringBuilder text;
 
                     if (trackable.getSpottedType() == cgTrackable.SPOTTED_CACHE) {
@@ -124,10 +125,11 @@ public class cgeotrackable extends AbstractActivity {
                         text = new StringBuilder(res.getString(R.string.trackable_spotted_owner));
                     } else {
                         text = new StringBuilder("N/A");
+                        showTimeSpan = false;
                     }
 
                     // days since last spotting
-                    if (!"N/A".equals(text) && trackable.getLogs() != null) {
+                    if (showTimeSpan && trackable.getLogs() != null) {
                         for (LogEntry log : trackable.getLogs()) {
                             if (log.type == LogType.RETRIEVED_IT || log.type == LogType.GRABBED_IT || log.type == LogType.DISCOVERED_IT || log.type == LogType.PLACED_IT) {
                                 final int days = log.daysSinceLog();
