@@ -25,6 +25,7 @@ import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
@@ -44,6 +45,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -64,7 +66,6 @@ import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
-import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -1804,20 +1805,17 @@ public class CacheDetailActivity extends AbstractActivity {
             @Override
             protected BitmapDrawable doInBackground(Void... parameters) {
                 try {
-                    final String latlonMap = cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
-
-                    DisplayMetrics metrics = new DisplayMetrics();
-                    getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-                    final int width = metrics.widthPixels;
-                    final int height = (int) (110 * metrics.density);
-
-                    // TODO move this code to StaticMapProvider and use its constant values
-                    final String markerUrl = "http://cgeo.carnero.cc/_markers/my_location_mdpi.png";
-
-                    final HtmlImage mapGetter = new HtmlImage(cache.getGeocode(), false, 0, false);
-                    final Parameters params = new Parameters("zoom", "15", "size", width + "x" + height, "maptype", "roadmap", "markers", "icon:" + markerUrl + "|shadow:false|" + latlonMap, "sensor", "false");
-                    return mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?" + params);
+                    // persistent preview from storage
+                    Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(cache.getGeocode(), "preview", false).getPath());
+                    if (image != null) {
+                        return ImageHelper.scaleBitmapToFitDisplay(image);
+                    }
+                    StaticMapsProvider.storeCachePreviewMap(cache);
+                    image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(cache.getGeocode(), "preview", false).getPath());
+                    if (image != null) {
+                        return ImageHelper.scaleBitmapToFitDisplay(image);
+                    }
+                    return null;
                 } catch (Exception e) {
                     Log.w("CacheDetailActivity.PreviewMapTask", e);
                     return null;
