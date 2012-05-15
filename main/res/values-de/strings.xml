@@ -427,6 +427,14 @@
   <string name="init_debug_title">Fehlersuche</string>
   <string name="init_debug_note">c:geo kann bei Bedarf viele Debuginformationen speichern. Im Normalfall ist dies nicht notwendig, jedoch kann es den Entwicklern bei der Fehlersuche helfen. In diesem Fall wird der Benutzer gebeten diese Einstellung zu aktivieren und später das Log-File zuzusenden.</string>
   <string name="init_debug">Debug-Log aktivieren</string>
+  <string name="init_dbonsdcard_title">Datenspeicherung</string>
+  <string name="init_dbonsdcard_note">Die Datenbank von c:geo kann auf eine externe Speicherkarte verschoben werden. Hiermit kann interner Speicher gespart werden, allerdings wird sich die Leistung etwas reduzieren und c:geo funktioniert nicht mehr ohne verfügbare Speicherkarte.</string>
+  <string name="init_dbonsdcard">Datenbank auf externer Karte</string>
+  <string name="init_dbmove">Verschiebe Datenbank</string>
+  <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
+  <string name="init_dbmove_running">Verschiebe Datenbank</string>
+  <string name="init_dbmove_success">Die Datenbank wurde erfolgreich verschoben.</string>
+  <string name="init_dbmove_failed">Fehler beim Verschieben der Datenbank.</string>
   
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
