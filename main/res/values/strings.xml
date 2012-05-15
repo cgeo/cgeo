@@ -511,8 +511,8 @@
   <string name="cache_watchlist_remove">Remove from Watchlist</string>
   <string name="cache_favpoint_on">This cache is one of your favorites.</string>
   <string name="cache_favpoint_not_on">This cache is not one of your favorites.</string>
-  <string name="cache_favpoint_add">Add to Favorites</string>
-  <string name="cache_favpoint_remove">Remove from Favorites</string>
+  <string name="cache_favpoint_add">Add</string>
+  <string name="cache_favpoint_remove">Remove</string>
   
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
