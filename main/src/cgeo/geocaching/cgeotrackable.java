@@ -112,18 +112,18 @@ public class cgeotrackable extends AbstractActivity {
                         trackable.getSpottedType() == cgTrackable.SPOTTED_UNKNOWN ||
                         trackable.getSpottedType() == cgTrackable.SPOTTED_OWNER
                 ) {
-                    String text;
+                    StringBuilder text;
 
                     if (trackable.getSpottedType() == cgTrackable.SPOTTED_CACHE) {
-                        text = res.getString(R.string.trackable_spotted_in_cache) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString();
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_in_cache) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
                     } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_USER) {
-                        text = res.getString(R.string.trackable_spotted_at_user) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString();
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_at_user) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
                     } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_UNKNOWN) {
-                        text = res.getString(R.string.trackable_spotted_unknown_location);
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_unknown_location));
                     } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_OWNER) {
-                        text = res.getString(R.string.trackable_spotted_owner);
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_owner));
                     } else {
-                        text = "N/A";
+                        text = new StringBuilder("N/A");
                     }
 
                     // days since last spotting
@@ -131,13 +131,13 @@ public class cgeotrackable extends AbstractActivity {
                         for (LogEntry log : trackable.getLogs()) {
                             if (log.type == LogType.RETRIEVED_IT || log.type == LogType.GRABBED_IT || log.type == LogType.DISCOVERED_IT || log.type == LogType.PLACED_IT) {
                                 final int days = log.daysSinceLog();
-                                text += (" (" + res.getQuantityString(R.plurals.days_ago, days, days) + ")");
+                                text.append(" (").append(res.getQuantityString(R.plurals.days_ago, days, days)).append(')');
                                 break;
                             }
                         }
                     }
 
-                    final TextView spotted = details.add(R.string.trackable_spotted, text);
+                    final TextView spotted = details.add(R.string.trackable_spotted, text.toString());
                     spotted.setClickable(true);
                     if (cgTrackable.SPOTTED_CACHE == trackable.getSpottedType()) {
                         spotted.setOnClickListener(new View.OnClickListener() {

@@ -987,16 +987,14 @@ public abstract class GCParser {
                     final StringBuilder hdnSelected = new StringBuilder();
 
                     for (TrackableLog tb : trackables) {
-                        String ctl;
                         final String action = Integer.toString(tb.id) + tb.action.action;
+                        final StringBuilder paramText = new StringBuilder("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl");
 
                         if (tb.ctl < 10) {
-                            ctl = "0" + Integer.toString(tb.ctl);
-                        } else {
-                            ctl = Integer.toString(tb.ctl);
+                            paramText.append('0');
                         }
-
-                        params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl" + ctl + "$ddlAction", action);
+                        paramText.append(tb.ctl).append("$ddlAction");
+                        params.put(paramText.toString(), action);
                         if (tb.action != LogTypeTrackable.DO_NOTHING) {
                             hdnSelected.append(action);
                             hdnSelected.append(',');

@@ -388,9 +388,9 @@ public class cgeocaches extends AbstractListActivity {
             if (msg.what == 0) { //no caches
                 progress.setMessage(res.getString(R.string.web_import_waiting));
             } else if (msg.what == 1) { //cache downloading
-                progress.setMessage(res.getString(R.string.web_downloading) + " " + (String) msg.obj + "...");
+                progress.setMessage(res.getString(R.string.web_downloading) + " " + (String) msg.obj + '…');
             } else if (msg.what == 2) { //Cache downloaded
-                progress.setMessage(res.getString(R.string.web_downloaded) + " " + (String) msg.obj + ".");
+                progress.setMessage(res.getString(R.string.web_downloaded) + " " + (String) msg.obj + '…');
                 refreshCurrentList();
             } else if (msg.what == -2) {
                 progress.dismiss();

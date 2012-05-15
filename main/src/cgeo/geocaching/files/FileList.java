@@ -211,7 +211,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                         continue; // skip hidden directories
                     }
                     if (name.length() > 16) {
-                        name = name.substring(0, 14) + "...";
+                        name = name.substring(0, 14) + '…';
                     }
                     changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, 0, name));
 

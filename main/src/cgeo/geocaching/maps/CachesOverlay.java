@@ -203,7 +203,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             if (waitDialog == null) {
                 waitDialog = new ProgressDialog(context);
-                waitDialog.setMessage("loading details...");
+                waitDialog.setMessage("loading details…");
                 waitDialog.setCancelable(false);
             }
             waitDialog.show();

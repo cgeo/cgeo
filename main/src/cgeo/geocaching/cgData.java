@@ -454,9 +454,9 @@ public class cgData {
         @Override
         public SQLiteDatabase openOrCreateDatabase(String name, int mode,
                 CursorFactory factory) {
-            File f = new File(name);
-            f.getParentFile().mkdirs();
-            return SQLiteDatabase.openOrCreateDatabase(f, factory);
+            final File file = new File(name);
+            file.getParentFile().mkdirs();
+            return SQLiteDatabase.openOrCreateDatabase(file, factory);
         }
 
     }

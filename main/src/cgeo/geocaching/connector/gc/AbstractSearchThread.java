@@ -30,7 +30,7 @@ abstract public class AbstractSearchThread extends Thread {
         try {
             wait();
         } catch (InterruptedException e) {
-            Log.w("searchThread is not waiting for user...");
+            Log.w("searchThread is not waiting for user…");
         }
     }
 

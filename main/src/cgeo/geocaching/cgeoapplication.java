@@ -60,7 +60,7 @@ public class cgeoapplication extends Application {
 
     @Override
     public void onTerminate() {
-        Log.d("Terminating c:geo...");
+        Log.d("Terminating c:geo…");
 
         if (storage != null) {
             storage.clean();
@@ -79,7 +79,7 @@ public class cgeoapplication extends Application {
     /**
      * Move the database to/from external storage in a new thread,
      * showing a progress window
-     * 
+     *
      * @param fromActivity
      */
     public void moveDatabase(final Activity fromActivity) {

@@ -66,13 +66,13 @@ public final class Twitter {
             String name = cache.getName();
             status = "I found " + name + " (" + url + ")";
             if (status.length() > MAX_TWEET_SIZE) {
-                name = name.substring(0, name.length() - (status.length() - MAX_TWEET_SIZE) - 3) + "...";
+                name = name.substring(0, name.length() - (status.length() - MAX_TWEET_SIZE) - 1) + '…';
             }
             status = "I found " + name + " (" + url + ")";
             status = appendHashTag(status, "cgeo");
             status = appendHashTag(status, "geocaching");
         }
-    
+
         postTweet(cgeoapplication.getInstance(), status, null);
     }
 
@@ -80,7 +80,7 @@ public final class Twitter {
         final cgTrackable trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
         String name = trackable.getName();
         if (name.length() > 82) {
-            name = name.substring(0, 79) + "...";
+            name = name.substring(0, 81) + '…';
         }
         StringBuilder builder = new StringBuilder("I touched ");
         builder.append(name);
