@@ -72,8 +72,6 @@ public class cgData {
     private static int[] cacheColumnIndex;
     private Context context = null;
     private CacheCache cacheCache = null;
-    private String path = null;
-    private DbHelper dbHelper = null;
     private SQLiteDatabase database = null;
     private static final int dbVersion = 62;
     public static final int customListIdOffset = 10;
@@ -247,7 +245,6 @@ public class cgData {
             + "longitude double "
             + "); ";
 
-    private boolean initialized = false;
     private HashMap<String, SQLiteStatement> statements = new HashMap<String, SQLiteStatement>();
     private static boolean newlyCreatedDatabase = false;
 
@@ -257,59 +254,27 @@ public class cgData {
     }
 
     public synchronized void init() {
-        if (initialized) {
+        if (database != null) {
             return;
         }
 
-        if (database == null || !database.isOpen()) {
-            try {
-                if (dbHelper == null) {
-                    dbHelper = new DbHelper(new DBContext(context));
-                }
-                database = dbHelper.getWritableDatabase();
-
-                if (database != null && database.isOpen()) {
-                    Log.i("Connection to RW database established.");
-                } else {
-                    Log.e("Failed to open connection to RW database.");
-                }
-
-                if (database != null && database.inTransaction()) {
-                    database.endTransaction();
-                }
-            } catch (Exception e) {
-                Log.e("cgData.openDb.RW: " + e.toString());
-            }
+        try {
+            final DbHelper dbHelper = new DbHelper(new DBContext(context));
+            database = dbHelper.getWritableDatabase();
+        } catch (Exception e) {
+            Log.e("cgData.init: unable to open database for R/W", e);
         }
-
-        initialized = true;
     }
 
     public void closeDb() {
+        if (database == null) {
+            return;
+        }
 
         cacheCache.removeAllFromCache();
-
-        initialized = false;
         clearPreparedStatements();
-
-        if (database != null) {
-            path = database.getPath();
-
-            if (database.inTransaction()) {
-                database.endTransaction();
-            }
-
-            database.close();
-            database = null;
-            SQLiteDatabase.releaseMemory();
-
-            Log.d("Closing RW database");
-        }
-
-        if (dbHelper != null) {
-            dbHelper.close();
-            dbHelper = null;
-        }
+        database.close();
+        database = null;
     }
 
     private void clearPreparedStatements() {
@@ -331,7 +296,7 @@ public class cgData {
 
         final File target = backupFile();
         closeDb();
-        final boolean backupDone = LocalStorage.copy(new File(path), target);
+        final boolean backupDone = LocalStorage.copy(databasePath(), target);
         init();
 
         if (!backupDone) {
@@ -349,31 +314,34 @@ public class cgData {
             return false;
         }
 
-        final File target = Settings.isDbOnSDCard() ? internalDb() : externalDb();
         closeDb();
-        final File source = new File(path);
-        final boolean moveDone = LocalStorage.copy(source, target);
-        if (moveDone) {
-            source.delete();
-            Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
-        }
-        init();
 
-        if (!moveDone) {
+        final File source = databasePath();
+        final File target = databaseAlternatePath();
+
+        if (!LocalStorage.copy(source, target)) {
             Log.e("Database could not be moved to " + target);
+            init();
             return false;
         }
 
+        source.delete();
+        Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
         Log.i("Database was moved to " + target);
+        init();
         return true;
     }
 
-    public static File internalDb() {
-        return new File(LocalStorage.getInternalDbDirectory(), dbName);
+    private static File databasePath(final boolean internal) {
+        return new File(internal ? LocalStorage.getInternalDbDirectory() : LocalStorage.getExternalDbDirectory(), dbName);
     }
 
-    public static File externalDb() {
-        return new File(LocalStorage.getExternalDbDirectory(), dbName);
+    private static File databasePath() {
+        return databasePath(!Settings.isDbOnSDCard());
+    }
+
+    private static File databaseAlternatePath() {
+        return databasePath(Settings.isDbOnSDCard());
     }
 
     public static File isRestoreFile() {
@@ -389,7 +357,7 @@ public class cgData {
 
         final File sourceFile = backupFile();
         closeDb();
-        final boolean restoreDone = LocalStorage.copy(sourceFile, new File(path));
+        final boolean restoreDone = LocalStorage.copy(sourceFile, databasePath());
         init();
 
         if (restoreDone) {
@@ -424,7 +392,7 @@ public class cgData {
     private static class DbHelper extends SQLiteOpenHelper {
 
         DbHelper(Context context) {
-            super(context, Settings.isDbOnSDCard() ? externalDb().getPath() : internalDb().getPath(), null, dbVersion);
+            super(context, databasePath().getPath(), null, dbVersion);
         }
 
         @Override
@@ -2811,7 +2779,7 @@ public class cgData {
     }
 
     public synchronized boolean status() {
-        return database != null && database != null && initialized;
+        return database != null;
 
     }
 
