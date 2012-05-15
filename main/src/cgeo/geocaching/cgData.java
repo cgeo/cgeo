@@ -2208,7 +2208,7 @@ public class cgData {
 
         StringBuilder specifySql = new StringBuilder();
 
-        if (listId != StoredList.ALL_LIST_ID) {
+        if (listId != StoredList.STANDARD_LIST_ID) {
             specifySql.append("reason = ");
             specifySql.append(Math.max(listId, 1));
         } else {
@@ -2221,7 +2221,7 @@ public class cgData {
         }
 
         if (cacheType != CacheType.ALL) {
-            specifySql.append("and type = \"");
+            specifySql.append(" and type = \"");
             specifySql.append(cacheType.id);
             specifySql.append('"');
         }
@@ -2624,12 +2624,8 @@ public class cgData {
         return statement;
     }
 
-    private SQLiteStatement getStatementCountAllLists() {
-        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches);
-    }
-
     private SQLiteStatement getStatementCountStandardList() {
-        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
+        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID);
     }
 
     public boolean hasLogOffline(final String geocode) {
@@ -2720,10 +2716,6 @@ public class cgData {
 
     public StoredList getList(int id, Resources res) {
         init();
-        if (id == StoredList.ALL_LIST_ID) {
-            return new StoredList(StoredList.ALL_LIST_ID, res.getString(R.string.list_menu_all_lists), (int) getStatementCountAllLists().simpleQueryForLong());
-        }
-
         if (id >= customListIdOffset) {
             Cursor cursor = databaseRO.query(
                     dbTableLists,
@@ -2739,7 +2731,7 @@ public class cgData {
             }
         }
         // fall back to standard list in case of invalid list id
-        if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
+        if (id == StoredList.STANDARD_LIST_ID || id >= 0) {
             return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementCountStandardList().simpleQueryForLong());
         }
 

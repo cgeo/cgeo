@@ -18,7 +18,6 @@ import java.util.List;
 public class StoredList {
     public static final int TEMPORARY_LIST_ID = 0;
     public static final int STANDARD_LIST_ID = 1;
-    public static final int ALL_LIST_ID = 2;
 
     public final int id;
     public final String title;
@@ -56,7 +55,6 @@ public class StoredList {
             for (StoredList list : lists) {
                 listsTitle.add(list.getTitleAndCount());
             }
-            listsTitle.add("<" + res.getString(R.string.list_menu_all_lists) + ">");
             listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
 
             final CharSequence[] items = new CharSequence[listsTitle.size()];
@@ -65,11 +63,7 @@ public class StoredList {
             builder.setTitle(res.getString(titleId));
             builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogInterface, int itemId) {
-                    if (itemId == lists.size()) {
-                        // all lists
-                        runAfterwards.run(StoredList.ALL_LIST_ID);
-                    }
-                    else if (itemId >= lists.size()) {
+                    if (itemId >= lists.size()) {
                         // create new list on the fly
                         promptForListCreation(runAfterwards);
                     }
