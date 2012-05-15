@@ -28,11 +28,7 @@ public class MapsforgeMapController implements MapControllerImpl {
 
     @Override
     public void setZoom(int mapzoom) {
-        int mfzoom = mapzoom - 1;
-        if (mfzoom > maxZoomLevel) {
-            mfzoom = maxZoomLevel;
-        }
-        mapController.setZoom(mfzoom);
+        mapController.setZoom(Math.min(mapzoom, maxZoomLevel));
     }
 
     @Override
@@ -42,7 +38,7 @@ public class MapsforgeMapController implements MapControllerImpl {
             // calculate zoomlevel
             int distDegree = Math.max(latSpanE6, lonSpanE6);
             int zoomLevel = (int) Math.floor(Math.log(360.0 * 1e6 / distDegree) / Math.log(2));
-            mapController.setZoom(zoomLevel + 1);
+            mapController.setZoom(zoomLevel);
         }
     }
 }
