@@ -2208,7 +2208,7 @@ public class cgData {
 
         StringBuilder specifySql = new StringBuilder();
 
-        if (listId != StoredList.STANDARD_LIST_ID) {
+        if (listId != StoredList.STANDARD_LIST_ID || !Settings.getStoredListShowsAll()) {
             specifySql.append("reason = ");
             specifySql.append(Math.max(listId, 1));
         } else {
@@ -2625,7 +2625,7 @@ public class cgData {
     }
 
     private SQLiteStatement getStatementCountStandardList() {
-        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID);
+        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason " + (Settings.getStoredListShowsAll() ? ">=" : "=") + " " + StoredList.STANDARD_LIST_ID);
     }
 
     public boolean hasLogOffline(final String geocode) {

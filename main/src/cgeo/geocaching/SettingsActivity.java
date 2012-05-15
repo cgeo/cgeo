@@ -587,6 +587,16 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        final CheckBox storedshowsallButton = (CheckBox) findViewById(R.id.storedshowsall);
+        storedshowsallButton.setChecked(Settings.getStoredListShowsAll());
+        storedshowsallButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setStoredListShowsAll(storedshowsallButton.isChecked());
+            }
+        });
+
         // Default navigation tool settings
         Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
         final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps();
@@ -597,6 +607,7 @@ public class SettingsActivity extends AbstractActivity {
                 textView.setText(getItem(position).app.getName());
                 return textView;
             }
+
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
