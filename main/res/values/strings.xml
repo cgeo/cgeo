@@ -1055,6 +1055,8 @@
     · New popup for waypoints on live map\n
     · On-demand download of static maps\n
     · Upload fieldnotes to geocaching.com\n
+    · Optionally move stored data to sd-card\n
+    · Display time since last log on TB page\n
     \n
     <b>Bugfixing:</b>\n
     · Static maps download for waypoints now off by default\n
