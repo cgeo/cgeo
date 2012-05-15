@@ -371,10 +371,7 @@ public class LocalStorage {
     public static File[] getFilesWithPrefix(final String geocode, final String filenamePrefix) {
         final FilenameFilter filter = new FilenameFilter() {
             public boolean accept(File dir, String filename) {
-                if (filename.startsWith(filenamePrefix)) {
-                    return true;
-                }
-                return false;
+                return filename.startsWith(filenamePrefix);
             }
         };
         final File gcDir = LocalStorage.getStorageDir(geocode);
