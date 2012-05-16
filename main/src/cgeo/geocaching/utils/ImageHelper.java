@@ -9,15 +9,33 @@ import android.graphics.drawable.BitmapDrawable;
 import android.view.Display;
 import android.view.WindowManager;
 
+/**
+ * Helper class for image operations. Code that is use in several classes should go here.
+ * 
+ * @author marco-jacob
+ * 
+ */
 public class ImageHelper {
+
     /**
-     * Scales a bitmap to the given bounds
+     * Private constructor to prevent from creating this static helper class
+     */
+    private ImageHelper() {
+    }
+
+    /**
+     * Fit the bitmap to the given display bounds and therefore scale the bitmap
+     * or keep the original image if it is smaller than the display.
      *
      * @param image
      *            The bitmap to scale
-     * @return BitmapDrawable The scaled image
+     * @return BitmapDrawable The image fitting the bounds of display-25 or NULL if given image is null
      */
     public static BitmapDrawable scaleBitmapToFitDisplay(Bitmap image) {
+        if (image == null) {
+            return null;
+        }
+
         final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
@@ -28,18 +46,12 @@ public class ImageHelper {
         int width;
         int height;
 
-        Bitmap result = null;
+        Bitmap result;
         if (imgWidth > maxWidth || imgHeight > maxHeight) {
             final double ratio = Math.min((double) maxHeight / (double) imgHeight, (double) maxWidth / (double) imgWidth);
             width = (int) Math.ceil(imgWidth * ratio);
             height = (int) Math.ceil(imgHeight * ratio);
-
-            try {
-                result = Bitmap.createScaledBitmap(image, width, height, true);
-            } catch (Exception e) {
-                Log.d("ImageHelper.scaleBitmapToFitDisplay: Failed to scale image");
-                return null;
-            }
+            result = Bitmap.createScaledBitmap(image, width, height, true);
         } else {
             result = image;
             width = imgWidth;

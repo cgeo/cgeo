@@ -121,9 +121,7 @@ public class HtmlImage implements Html.ImageGetter {
             }
         }
 
-        final BitmapDrawable image = ImageHelper.scaleBitmapToFitDisplay(imagePre);
-
-        return image;
+        return ImageHelper.scaleBitmapToFitDisplay(imagePre);
     }
 
 
