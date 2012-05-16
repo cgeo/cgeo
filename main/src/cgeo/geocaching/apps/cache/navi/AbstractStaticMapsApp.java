@@ -70,10 +70,7 @@ abstract class AbstractStaticMapsApp extends AbstractNavigationApp {
 
     @Override
     public boolean isEnabled(Geopoint geopoint) {
-        if (geopoint == null) {
-            return true;
-        }
-        return false;
+        return geopoint == null;
     }
 
 }
