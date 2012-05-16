@@ -193,6 +193,9 @@ public abstract class Login {
             setActualUserName(BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
             setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
             Settings.setMemberStatus(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            if ( page.contains(GCConstants.MEMBER_STATUS_RENEW) ) {
+                Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
+            }
             return true;
         }
 
@@ -235,6 +238,9 @@ public abstract class Login {
             final String profile = BaseUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
 
             Settings.setMemberStatus(BaseUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
+                Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
+            }
 
             setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));
 

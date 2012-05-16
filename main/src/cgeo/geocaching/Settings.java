@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -265,7 +266,7 @@ public final class Settings {
         if (memberStatus == null) {
             return false;
         }
-        return "Premium Member".equalsIgnoreCase(memberStatus);
+        return GCConstants.MEMBER_STATUS_PM.equalsIgnoreCase(memberStatus);
     }
 
     public static String getMemberStatus() {
