@@ -204,7 +204,16 @@ public class GCMap {
                 } else {
                     cache.setType(CacheType.UNKNOWN);
                 }
-                searchResult.addCache(cache);
+                boolean exclude = false;
+                if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwn())) { // workaround for BM
+                    exclude = true;
+                }
+                if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {
+                    exclude = true;
+                }
+                if (!exclude) {
+                    searchResult.addCache(cache);
+                }
             }
             Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
@@ -280,7 +289,7 @@ public class GCMap {
                     if (tokens != null) {
                         params.put("k", tokens[0], "st", tokens[1]);
                     }
-                    if (Settings.isExcludeMyCaches()) {
+                    if (Settings.isExcludeMyCaches()) { // works only for PM
                         params.put("hf", "1", "hh", "1"); // hide found, hide hidden
                     }
                     if (Settings.getCacheType() == CacheType.TRADITIONAL) {
