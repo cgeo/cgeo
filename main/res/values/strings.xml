@@ -809,12 +809,14 @@
   <string name="export">Export</string>
   <string name="export_as">Export as…</string>
   <string name="export_exportedto">exported to</string>
-  <string name="export_failed">Exported failed</string>
+  <string name="export_failed">Export failed</string>
   <string name="export_fieldnotes">Field Notes</string>
   <string name="export_fieldnotes_info">Field Notes will be exported into /sdcard/field-notes with current date and time as file name.</string>
   <string name="export_fieldnotes_upload">Upload to geocaching.com</string>
   <string name="export_fieldnotes_uploading">Uploading…</string>
+  <string name="export_fieldnotes_upload_success">Upload to geocaching.com successful</string>
   <string name="export_fieldnotes_onlynew">Only since last export</string>
+  <string name="export_fieldnotes_creating">Creating Field Notes…</string>
   <string name="export_gpx">GPX</string>
   
   <!--  attributes (permissions -> allowed, not allowed) -->

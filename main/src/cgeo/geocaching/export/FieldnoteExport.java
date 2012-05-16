@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.view.View;
@@ -132,8 +131,7 @@ class FieldnoteExport extends AbstractExport {
         @Override
         protected void onPreExecute() {
             if (null != activity) {
-                progress.show(activity, null, getString(R.string.export) + ": " + getName(), ProgressDialog.STYLE_HORIZONTAL, null);
-                progress.setMaxProgressAndReset(caches.size());
+                progress.show(activity, getString(R.string.export) + ": " + getName(), getString(R.string.export_fieldnotes_creating), true, null);
             }
         }
 
@@ -154,9 +152,9 @@ class FieldnoteExport extends AbstractExport {
             logTypes.put(LogType.ATTENDED, "Attended");
             logTypes.put(LogType.WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
 
-            for (int i = 0; i < caches.size(); i++) {
+            int i = 0;
+            for (cgCache cache : caches) {
                 try {
-                    final cgCache cache = caches.get(i);
                     if (cache.isLogOffline()) {
                         LogEntry log = cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
                         if (null != logTypes.get(log.type)) {
@@ -168,9 +166,10 @@ class FieldnoteExport extends AbstractExport {
                                     .append(",\"")
                                     .append(StringUtils.replaceChars(log.log, '"', '\''))
                                     .append("\"\n");
+
+                            publishProgress(++i);
                         }
                     }
-                    publishProgress(i + 1);
                 } catch (Exception e) {
                     Log.e("FieldnoteExport.ExportTask generation", e);
                     return false;
@@ -230,7 +229,7 @@ class FieldnoteExport extends AbstractExport {
                     if (loginState == StatusCode.NO_ERROR) {
                         page = Network.getResponseData(Network.getRequest(uri));
                     } else {
-                        Log.e("FieldnoteExport.ExportTask upload: No login (error: " + loginState + ")");
+                        Log.e("FieldnoteExport.ExportTask upload: No login (error: " + loginState + ')');
                         return false;
                     }
                 }
@@ -265,10 +264,15 @@ class FieldnoteExport extends AbstractExport {
                 progress.dismiss();
 
                 if (result) {
-                    if (onlyNew) {
-                        // update last export time in settings
-                    }
+                    //                    if (onlyNew) {
+                    //                        // update last export time in settings when doing it ourself (currently we use the date check from gc.com)
+                    //                    }
+
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
+
+                    if (upload) {
+                        ActivityMixin.showToast(activity, getString(R.string.export_fieldnotes_upload_success));
+                    }
                 } else {
                     ActivityMixin.showToast(activity, getString(R.string.export_failed));
                 }
@@ -281,7 +285,7 @@ class FieldnoteExport extends AbstractExport {
                 if (STATUS_UPLOAD == status[0]) {
                     progress.setMessage(getString(R.string.export_fieldnotes_uploading));
                 } else {
-                    progress.setProgress(status[0]);
+                    progress.setMessage(getString(R.string.export_fieldnotes_creating) + " (" + status[0] + ')');
                 }
             }
         }
