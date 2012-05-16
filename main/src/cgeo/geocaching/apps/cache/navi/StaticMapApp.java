@@ -18,4 +18,19 @@ class StaticMapApp extends AbstractStaticMapsApp {
         return invoke(activity, cache, waypoint, false);
     }
 
+    @Override
+    public boolean isEnabled(cgCache cache) {
+        if (cache == null) {
+            return false;
+        }
+        return hasStaticMap(cache);
+    }
+
+    @Override
+    public boolean isEnabled(cgWaypoint waypoint) {
+        if (waypoint == null) {
+            return false;
+        }
+        return hasStaticMap(waypoint);
+    }
 }
