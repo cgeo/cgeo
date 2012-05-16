@@ -219,7 +219,7 @@
   <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
   <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
-  <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.3.0 kartfile.\nOffline kartan är inte tillgänglig.</string>
+  <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.3.0 kartfil.\nOffline kartan är inte tillgänglig.</string>
   <string name="warn_deprecated_mapfile">Den kartfil du använder är av en gammal version (0.2.4).\nVi rekommenderar att byta till en kartfil med version 0.3.0.\nNästa version av c:geo kommer inte hantera version 0.2.4.</string>
 
   <string name="info_log_posted">c:geo har postat din logg.</string>
@@ -429,6 +429,14 @@
   <string name="init_debug_title">Debug information</string>
   <string name="init_debug_note">c:geo kan generera mycket debug information. Denna information är normalt inte användbar för användare av c:geo. Vid eventuella problem kan dock utvecklare behöva den här informationen för att analysera problemet. Om så är fallet kommer du att ombedjas att markera rutan nedan och sedan skicka loggfilen till dem.</string>
   <string name="init_debug">Generera debug information</string>
+  <string name="init_dbonsdcard_title">Databasplacering</string>
+  <string name="init_dbonsdcard_note">Du kan placera c:geos databas på ditt minneskort. På detta sätt kan du spara internminne, men du kan också få något sämre prestanda och c:geo kommer inte fungera om ditt minneskort inte är tillgängligt (exempelvis när den är kopplad till en dator).</string>
+  <string name="init_dbonsdcard">Databas på minneskort</string>
+  <string name="init_dbmove">Flyttar databasen</string>
+  <string name="init_dbmove_dbmove">Flyttar databasen</string>
+  <string name="init_dbmove_running">Flyttar databasen</string>
+  <string name="init_dbmove_success">Databasen har ny flyttats.</string>
+  <string name="init_dbmove_failed">Misslyckades att flytta databasen</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
@@ -496,8 +504,8 @@
   <string name="cache_watchlist_remove">Ta bort från watchlist</string>
   <string name="cache_favpoint_on">Den här cachen är en av dina favoriter.</string>
   <string name="cache_favpoint_not_on">Den här cachen är inte en av dina favoriter.</string>
-  <string name="cache_favpoint_add">Lägg till bland Favoriter</string>
-  <string name="cache_favpoint_remove">Ta bort från Favoriter</string>
+  <string name="cache_favpoint_add">Lägg till</string>
+  <string name="cache_favpoint_remove">Ta bort</string>
 
   <string name="cache_waypoints">Punkter</string>
   <plurals name="waypoints">
@@ -783,7 +791,6 @@
 
   <!-- next things -->
   <string name="legal_note">För att använda tjänster hos Geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
-  <string name="author">Upphovsman: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Hemsida: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo</a></string>
