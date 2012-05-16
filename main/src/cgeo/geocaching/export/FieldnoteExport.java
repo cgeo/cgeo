@@ -7,7 +7,6 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.Login;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -31,9 +30,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Exports offline-logs in the Groundspeak Field Note format.<br>
@@ -139,41 +136,25 @@ class FieldnoteExport extends AbstractExport {
         protected Boolean doInBackground(Void... params) {
             final StringBuilder fieldNoteBuffer = new StringBuilder();
 
-            // We need our own HashMap because LogType will give us localized and maybe
-            // different strings than gc.com expects in the field note
-            // We only need such logtypes that are possible to log via c:geo
-            Map<LogType, String> logTypes = new HashMap<LogType, String>();
-            logTypes.put(LogType.FOUND_IT, "Found it");
-            logTypes.put(LogType.DIDNT_FIND_IT, "Didn't find it");
-            logTypes.put(LogType.NOTE, "Write Note");
-            logTypes.put(LogType.NEEDS_ARCHIVE, "Needs archived");
-            logTypes.put(LogType.NEEDS_MAINTENANCE, "Needs Maintenance");
-            logTypes.put(LogType.WILL_ATTEND, "Will Attend");
-            logTypes.put(LogType.ATTENDED, "Attended");
-            logTypes.put(LogType.WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
-
-            int i = 0;
-            for (cgCache cache : caches) {
-                try {
+            try {
+                int i = 0;
+                for (cgCache cache : caches) {
                     if (cache.isLogOffline()) {
-                        LogEntry log = cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
-                        if (null != logTypes.get(log.type)) {
-                            fieldNoteBuffer.append(cache.getGeocode())
-                                    .append(',')
-                                    .append(fieldNoteDateFormat.format(new Date(log.date)))
-                                    .append(',')
-                                    .append(logTypes.get(log.type))
-                                    .append(",\"")
-                                    .append(StringUtils.replaceChars(log.log, '"', '\''))
-                                    .append("\"\n");
-
-                            publishProgress(++i);
-                        }
+                        final LogEntry log = cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
+                        fieldNoteBuffer.append(cache.getGeocode())
+                                .append(',')
+                                .append(fieldNoteDateFormat.format(new Date(log.date)))
+                                .append(',')
+                                .append(log.type.type)
+                                .append(",\"")
+                                .append(StringUtils.replaceChars(log.log, '"', '\''))
+                                .append("\"\n");
+                        publishProgress(++i);
                     }
-                } catch (Exception e) {
-                    Log.e("FieldnoteExport.ExportTask generation", e);
-                    return false;
                 }
+            } catch (Exception e) {
+                Log.e("FieldnoteExport.ExportTask generation", e);
+                return false;
             }
 
             fieldNoteBuffer.append('\n');
@@ -188,7 +169,7 @@ class FieldnoteExport extends AbstractExport {
                 Writer fw = null;
                 try {
                     os = new FileOutputStream(exportFile);
-                    fw = new OutputStreamWriter(os, "ISO-8859-1"); // TODO: gc.com doesn't support UTF-8
+                    fw = new OutputStreamWriter(os, "ISO-8859-1"); // gc.com doesn't support neither UTF-8 nor html entities
                     fw.write(fieldNoteBuffer.toString());
                 } catch (IOException e) {
                     Log.e("FieldnoteExport.ExportTask export", e);
@@ -206,7 +187,6 @@ class FieldnoteExport extends AbstractExport {
             } else {
                 return false;
             }
-
 
             if (upload) {
                 publishProgress(STATUS_UPLOAD);
