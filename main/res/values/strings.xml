@@ -557,6 +557,7 @@
   <string name="cache_menu_visit_offline">Log Visit offline</string>
   <string name="cache_menu_spoilers">Spoiler images</string>
   <string name="cache_menu_around">Caches around</string>
+  <string name="cache_menu_set_as_cache_coords">Set as cache coords</string>
   <string name="cache_menu_event">Add to calendar</string>
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_share">Share cache</string>
