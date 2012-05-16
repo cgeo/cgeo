@@ -21,7 +21,14 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
-import cgeo.geocaching.utils.*;
+import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TranslationUtils;
+import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
@@ -1680,10 +1687,7 @@ public class CacheDetailActivity extends AbstractActivity {
             Button buttonRemove = (Button) view.findViewById(R.id.remove_from_watchlist);
             TextView text = (TextView) view.findViewById(R.id.watchlist_text);
 
-            //TODO: We already have cache.isOwn(). Those 2 should be combined.
-            boolean userIsOwner = StringUtils.equals(cache.getOwnerReal(), Settings.getUsername());
-
-            if (cache.isOnWatchlist() || userIsOwner) {
+            if (cache.isOnWatchlist() || cache.isOwn()) {
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setVisibility(View.VISIBLE);
                 text.setText(R.string.cache_watchlist_on);
@@ -1694,7 +1698,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // the owner of a cache has it always on his watchlist. Adding causes an error
-            if (userIsOwner) {
+            if (cache.isOwn()) {
                 buttonAdd.setEnabled(false);
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setEnabled(false);
@@ -1707,12 +1711,10 @@ public class CacheDetailActivity extends AbstractActivity {
          * shows/hides buttons, sets text in watchlist box
          */
         private void updateFavPointBox() {
-            boolean userIsOwner = StringUtils.equals(cache.getOwnerReal(), Settings.getUsername());
-
             LinearLayout layout = (LinearLayout) view.findViewById(R.id.favpoint_box);
             boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
-            if (!supportsFavoritePoints || userIsOwner || !Settings.isPremiumMember()) {
+            if (!supportsFavoritePoints || cache.isOwn() || !Settings.isPremiumMember()) {
                 return;
             }
             Button buttonAdd = (Button) view.findViewById(R.id.add_to_favpoint);

@@ -23,7 +23,7 @@ public interface ICache extends IBasicCache {
     public String getOwner();
 
     /**
-     * @return GC username of the owner
+     * @return GC username of the (actual) owner, might differ from the owner. Never empty.
      */
     public String getOwnerReal();
 
@@ -105,7 +105,7 @@ public interface ICache extends IBasicCache {
 
     /**
      * immutable list of attributes, never <code>null</code>
-     * 
+     *
      * @return the list of attributes for this cache
      */
     public List<String> getAttributes();

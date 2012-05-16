@@ -378,10 +378,7 @@ public abstract class GCParser {
         // owner real name
         cache.setOwnerReal(URLDecoder.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNERREAL, true, cache.getOwnerReal())));
 
-        final String username = Settings.getUsername();
-        if (cache.getOwnerReal() != null && username != null && cache.getOwnerReal().equalsIgnoreCase(username)) {
-            cache.setOwn(true);
-        }
+        cache.setOwn(StringUtils.equals(cache.getOwnerReal(), Settings.getUsername()));
 
         String tableInside = page;
 
