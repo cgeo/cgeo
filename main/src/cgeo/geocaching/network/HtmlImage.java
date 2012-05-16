@@ -5,6 +5,7 @@ import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +15,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.Html;
@@ -121,33 +121,9 @@ public class HtmlImage implements Html.ImageGetter {
             }
         }
 
-        final int imgWidth = imagePre.getWidth();
-        final int imgHeight = imagePre.getHeight();
-
-        int width;
-        int height;
-
-        if (imgWidth > maxWidth || imgHeight > maxHeight) {
-            final double ratio = Math.min((double) maxHeight / (double) imgHeight, (double) maxWidth / (double) imgWidth);
-            width = (int) Math.ceil(imgWidth * ratio);
-            height = (int) Math.ceil(imgHeight * ratio);
-
-            try {
-                imagePre = Bitmap.createScaledBitmap(imagePre, width, height, true);
-            } catch (Exception e) {
-                Log.d("HtmlImage.getDrawable: Failed to scale image");
-                return null;
-            }
-        } else {
-            width = imgWidth;
-            height = imgHeight;
-        }
-
-        final BitmapDrawable image = new BitmapDrawable(resources, imagePre);
-        image.setBounds(new Rect(0, 0, width, height));
-
-        return image;
+        return imagePre != null ? ImageHelper.scaleBitmapToFitDisplay(imagePre) : null;
     }
+
 
     private Bitmap getTransparent1x1Image() {
         return BitmapFactory.decodeResource(resources, R.drawable.image_no_placement);

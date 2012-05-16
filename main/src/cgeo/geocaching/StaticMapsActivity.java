@@ -133,12 +133,12 @@ public class StaticMapsActivity extends AbstractActivity {
                 for (int level = 1; level <= 5; level++) {
                     try {
                         if (waypoint_id != null) {
-                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "wp" + waypoint_id + "_", level, false).getPath());
+                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "wp" + waypoint_id + "_" + level, false).getPath());
                             if (image != null) {
                                 maps.add(image);
                             }
                         } else {
-                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "", level, false).getPath());
+                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "" + level, false).getPath());
                             if (image != null) {
                                 maps.add(image);
                             }
@@ -152,12 +152,12 @@ public class StaticMapsActivity extends AbstractActivity {
                     for (int level = 1; level <= 5; level++) {
                         try {
                             if (waypoint_id != null) {
-                                final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "wp" + waypoint_id + "_", level, false).getPath());
+                                final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "wp" + waypoint_id + "_" + level, false).getPath());
                                 if (image != null) {
                                     maps.add(image);
                                 }
                             } else {
-                                final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "", level, false).getPath());
+                                final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "" + level, false).getPath());
                                 if (image != null) {
                                     maps.add(image);
                                 }
