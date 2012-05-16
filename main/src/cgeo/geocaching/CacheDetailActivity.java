@@ -26,6 +26,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
