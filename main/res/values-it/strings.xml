@@ -429,6 +429,14 @@
   <string name="init_debug_title">Informazioni di Debug</string>
   <string name="init_debug_note">c:geo può generare molte informazioni di debug. Per quanto queste informazioni non sono generalmente utili agli utenti di c:geo, gli sviluppatori potrebbero averne bisogno per analizzare un eventuale problema. In questo case, vi sarà chiesto di settare l\'opzione sottostante ed inviare il log.</string>
   <string name="init_debug">Genera informazioni di debug</string>
+  <string name="init_dbonsdcard_title">Posizione Database</string>
+  <string name="init_dbonsdcard_note">Puoi decidere di salvare il database su memoria esterna. In questo caso risparmierai memoria interna ma potresti perdere un pochino di velocità e c:geo non funzionerà se la tua sdcard non sarà disponibile.</string>
+  <string name="init_dbonsdcard">Database su memoria esterna</string>
+  <string name="init_dbmove">Spostamento Database</string>
+  <string name="init_dbmove_dbmove">Spostamento Database</string>
+  <string name="init_dbmove_running">Spostamento Database</string>
+  <string name="init_dbmove_success">Database spostato con successo.</string>
+  <string name="init_dbmove_failed">Spostamento fallito</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
@@ -489,8 +497,8 @@
   <string name="cache_watchlist_remove">Rimuovi dalla watchlist</string>
   <string name="cache_favpoint_on">Questa cache è una delle tue favorite.</string>
   <string name="cache_favpoint_not_on">Questa cache non è una delle tue favorite.</string>
-  <string name="cache_favpoint_add">Aggiungi a cache favorite</string>
-  <string name="cache_favpoint_remove">Rimuovi da cache favorite</string>
+  <string name="cache_favpoint_add">Aggiungi</string>
+  <string name="cache_favpoint_remove">Rimuovi</string>
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
       <item quantity="one">1 Waypoint</item>
