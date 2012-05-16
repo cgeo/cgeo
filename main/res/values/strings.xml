@@ -592,6 +592,7 @@
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
   <string name="cache_log_types">Log types</string>
   <string name="cache_coordinates_no">This cache has no coordinates.</string>
+  <string name="cache_coordinates_set_to">Cache coordinates set to: %s.</string>
   <string name="cache_export_fieldnote">Export as Field Notes</string>
   <string name="cache_clear_history">Clear history</string>
   <string name="cache_remove_from_history">Remove from history</string>

@@ -556,7 +556,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                     cache.setCoords(wptCoords);
                     cgeoapplication.getInstance().updateCache(cache);
-                    showToast("Cache coords set to " + wptCoords.toString());
+                    showToast(getString(R.string.cache_coordinates_set_to, wptCoords.toString()));
                 }
             }
                 break;
