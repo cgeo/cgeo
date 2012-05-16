@@ -119,7 +119,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         for (NavigationAppsEnum navApp : getInstalledNavigationApps()) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                if ((cache != null && navApp.app.isEnabled(cache)) || (waypoint != null && navApp.app.isEnabled(waypoint)) || destination != null) {
+                if (navApp.app.isEnabled(cache) || navApp.app.isEnabled(waypoint) || navApp.app.isEnabled(destination)) {
                     items.add(navApp);
                 }
             }

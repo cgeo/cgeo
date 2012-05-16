@@ -18,13 +18,4 @@ class DownloadStaticMapsApp extends AbstractStaticMapsApp {
         return invoke(activity, cache, waypoint, true);
     }
 
-    @Override
-    public boolean isEnabled(cgCache cache) {
-        return !hasStaticMap(cache);
-    }
-
-    @Override
-    public boolean isEnabled(cgWaypoint waypoint) {
-        return !hasStaticMap(waypoint);
-    }
 }
