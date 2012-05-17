@@ -37,7 +37,7 @@ public interface IConnector {
 
     /**
      * enable/disable favorite points controls in cache details
-     * 
+     *
      * @return
      */
     public boolean supportsFavoritePoints();

@@ -125,8 +125,10 @@ public abstract class Network {
     /**
      * POST HTTP request
      *
-     * @param uri the URI to request
-     * @param params the parameters to add to the POST request
+     * @param uri
+     *            the URI to request
+     * @param params
+     *            the parameters to add to the POST request
      * @return the HTTP response, or null in case of an encoding error params
      */
     public static HttpResponse postRequest(final String uri, final Parameters params) {
@@ -134,17 +136,46 @@ public abstract class Network {
     }
 
     /**
+     * POST HTTP request with Json POST DATA
+     *
+     * @param uri
+     *            the URI to request
+     * @param json
+     *            the json object to add to the POST request
+     * @return the HTTP response, or null in case of an encoding error params
+     */
+    public static HttpResponse postJsonRequest(final String uri, final JSONObject json) {
+        HttpPost request;
+        request = new HttpPost(uri);
+        request.addHeader("Content-Type", "application/json; charset=utf-8");
+        if (json != null) {
+            try {
+                request.setEntity(new StringEntity(json.toString()));
+            } catch (UnsupportedEncodingException e) {
+                Log.e("postJsonRequest:JSON Entity: UnsupportedEncodingException");
+                return null;
+            }
+        }
+        return doRepeatedRequests(request);
+    }
+
+    /**
      * Multipart POST HTTP request
      *
-     * @param uri the URI to request
-     * @param params the parameters to add to the POST request
-     * @param fileFieldName the name of the file field name
-     * @param fileContentType the content-type of the file
-     * @param file the file to include in the request
+     * @param uri
+     *            the URI to request
+     * @param params
+     *            the parameters to add to the POST request
+     * @param fileFieldName
+     *            the name of the file field name
+     * @param fileContentType
+     *            the content-type of the file
+     * @param file
+     *            the file to include in the request
      * @return the HTTP response, or null in case of an encoding error param
      */
     public static HttpResponse postRequest(final String uri, final Parameters params,
-                                           final String fileFieldName, final String fileContentType, final File file) {
+            final String fileFieldName, final String fileContentType, final File file) {
         final MultipartEntity entity = new MultipartEntity();
         for (final NameValuePair param : params) {
             try {
@@ -202,6 +233,7 @@ public abstract class Network {
 
     /**
      * Add headers to HTTP request.
+     *
      * @param request
      *            the request to add headers to
      * @param headers
@@ -225,7 +257,7 @@ public abstract class Network {
      * @param request
      *            the request to try
      * @return
-     *            the response, or null if there has been a failure
+     *         the response, or null if there has been a failure
      */
     private static HttpResponse doRepeatedRequests(final HttpRequestBase request) {
         final String reqLogStr = request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
@@ -289,7 +321,6 @@ public abstract class Network {
     public static HttpResponse getRequest(final String uri, final Parameters params, final File cacheFile) {
         return request("GET", uri, params, null, cacheFile);
     }
-
 
     /**
      * GET HTTP request

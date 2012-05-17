@@ -22,7 +22,14 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
-import cgeo.geocaching.utils.*;
+import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TranslationUtils;
+import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
@@ -600,7 +607,7 @@ public class CacheDetailActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int menuItem = item.getItemId();
 
-        switch(menuItem) {
+        switch (menuItem) {
             case 0:
                 // no menu selected, but a new sub menu shown
                 return false;
@@ -1407,22 +1414,22 @@ public class CacheDetailActivity extends AbstractActivity {
             if (cache.getCoords() != null) {
                 TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
                 valueView.setOnClickListener(new View.OnClickListener() {
-                            private int position = 0;
-                            private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
-                                    GeopointFormatter.Format.LAT_LON_DECMINUTE,
-                                    GeopointFormatter.Format.LAT_LON_DECSECOND,
-                                    GeopointFormatter.Format.LAT_LON_DECDEGREE
-                            };
+                    private int position = 0;
+                    private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
+                            GeopointFormatter.Format.LAT_LON_DECMINUTE,
+                            GeopointFormatter.Format.LAT_LON_DECSECOND,
+                            GeopointFormatter.Format.LAT_LON_DECDEGREE
+                    };
 
-                            // rotate coordinate formats on click
-                            @Override
-                            public void onClick(View view) {
-                                position = (position + 1) % availableFormats.length;
+                    // rotate coordinate formats on click
+                    @Override
+                    public void onClick(View view) {
+                        position = (position + 1) % availableFormats.length;
 
-                                final TextView valueView = (TextView) view.findViewById(R.id.value);
-                                valueView.setText(cache.getCoords().format(availableFormats[position]));
-                            }
-                        });
+                        final TextView valueView = (TextView) view.findViewById(R.id.value);
+                        valueView.setText(cache.getCoords().format(availableFormats[position]));
+                    }
+                });
                 registerForContextMenu(valueView);
             }
 
