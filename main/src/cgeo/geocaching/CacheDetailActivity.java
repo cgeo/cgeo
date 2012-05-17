@@ -556,6 +556,9 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                     cache.setCoords(wptCoords);
                     cgeoapplication.getInstance().updateCache(cache);
+                    if (cache.supportsOwnCoordinates()) {
+                        GCConnector.uploadModifiedCoordinates(cache, wptCoords);
+                    }
                     showToast(getString(R.string.cache_coordinates_set_to, wptCoords.toString()));
                 }
             }
