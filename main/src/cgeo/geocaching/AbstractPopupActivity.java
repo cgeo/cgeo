@@ -2,9 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
@@ -32,8 +30,6 @@ import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.Collections;
 
 public abstract class AbstractPopupActivity extends AbstractActivity {
 
@@ -124,10 +120,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             return;
         }
 
-        if (CacheType.UNKNOWN == cache.getType()) {
-            final SearchResult search = GCMap.searchByGeocodes(Collections.singleton(geocode));
-            cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
-        }
         geocode = cache.getGeocode().toUpperCase();
     }
 

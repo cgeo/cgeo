@@ -2,9 +2,15 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.IWaypoint;
+import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.WaypointPopup;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -17,7 +23,6 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
@@ -28,6 +33,7 @@ import android.graphics.Point;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CachesOverlay extends AbstractItemizedOverlay {
@@ -35,7 +41,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     private List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
     private Context context = null;
     private boolean displayCircles = false;
-    private ProgressDialog waitDialog = null;
+    private Progress progress = new Progress();
     private Paint blockedCircle = null;
     private PaintFlagsDrawFilter setFilter = null;
     private PaintFlagsDrawFilter removeFilter = null;
@@ -201,12 +207,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 return false;
             }
 
-            if (waitDialog == null) {
-                waitDialog = new ProgressDialog(context);
-                waitDialog.setMessage("loading details…");
-                waitDialog.setCancelable(false);
-            }
-            waitDialog.show();
+            progress.show(context, context.getResources().getString(R.string.map_live), context.getResources().getString(R.string.cache_dialog_loading_details), true, null);
 
             CachesOverlayItemImpl item = null;
 
@@ -227,21 +228,27 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             final IWaypoint coordinate = item.getCoord();
 
             if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
-                CGeoMap.markCacheAsDirty(coordinate.getGeocode());
-                CachePopup.startActivity(context, coordinate.getGeocode());
+                cgCache cache = cgeoapplication.getInstance().loadCache(coordinate.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                if (CacheType.UNKNOWN != cache.getType()) {
+                    // don't show popup if we have enough details
+                    progress.dismiss();
+                }
+                RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
+                requestDetailsThread.start();
+                return true;
             } else if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {
                 CGeoMap.markCacheAsDirty(coordinate.getGeocode());
                 WaypointPopup.startActivity(context, coordinate.getId(), coordinate.getGeocode());
             } else {
-                waitDialog.dismiss();
+                progress.dismiss();
                 return false;
             }
 
-            waitDialog.dismiss();
+            progress.dismiss();
         } catch (Exception e) {
             Log.e("cgMapOverlay.onTap: " + e.toString());
-            if (waitDialog != null) {
-                waitDialog.dismiss();
+            if (progress != null) {
+                progress.dismiss();
             }
         }
 
@@ -269,4 +276,24 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
         return 0;
     }
+
+    private class RequestDetailsThread extends Thread {
+
+        private final cgCache cache;
+
+        public RequestDetailsThread(cgCache cache) {
+            this.cache = cache;
+        }
+
+        @Override
+        public void run() {
+            if (CacheType.UNKNOWN == cache.getType()) {
+                /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+            }
+            CGeoMap.markCacheAsDirty(cache.getGeocode());
+            CachePopup.startActivity(context, cache.getGeocode());
+            progress.dismiss();
+        }
+    }
+
 }
