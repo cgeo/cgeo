@@ -1620,4 +1620,54 @@ public abstract class GCParser {
         }
     }
 
+    public static boolean uploadModifiedCoordinates(cgCache cache, Geopoint wpt) {
+        return editModifiedCoordinates(cache, wpt);
+    }
+
+    public static boolean deleteModifiedCoordinates(cgCache cache) {
+        return editModifiedCoordinates(cache, null);
+    }
+
+    public static boolean editModifiedCoordinates(cgCache cache, Geopoint wpt) {
+        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        if (StringUtils.isEmpty(userToken)) {
+            return false;
+        }
+        final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
+
+        JSONObject jo;
+        try {
+            if (wpt != null) {
+                jo = new JSONObject().put("dto", (new JSONObject().put("ut", userToken)
+                        .put("data", new JSONObject()
+                                .put("lat", wpt.getLatitudeE6() / 1E6)
+                                .put("lng", wpt.getLongitudeE6() / 1E6))));
+            } else {
+                jo = new JSONObject().put("dto", (new JSONObject().put("ut", userToken)));
+            }
+
+            String uriSuffix;
+            if (wpt != null) {
+                uriSuffix = "SetUserCoordinate";
+            } else {
+                uriSuffix = "ResetUserCoordinate";
+            }
+
+            HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
+            Log.i("Sending to " + uriPrefix + uriSuffix + " :" + jo.toString());
+
+            if (response != null && response.getStatusLine().getStatusCode() == 200) {
+                Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
+                return true;
+            }
+
+        } catch (JSONException e) {
+            Log.e("Unknown exception with json wrap code");
+            e.printStackTrace();
+        }
+        Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords");
+        return false;
+    }
+
 }

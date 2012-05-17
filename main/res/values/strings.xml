@@ -557,6 +557,7 @@
   <string name="cache_menu_visit_offline">Log Visit offline</string>
   <string name="cache_menu_spoilers">Spoiler images</string>
   <string name="cache_menu_around">Caches around</string>
+  <string name="cache_menu_set_as_cache_coords">Set as cache coords</string>
   <string name="cache_menu_event">Add to calendar</string>
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_share">Share cache</string>
@@ -591,6 +592,7 @@
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
   <string name="cache_log_types">Log types</string>
   <string name="cache_coordinates_no">This cache has no coordinates.</string>
+  <string name="cache_coordinates_set_to">Cache coordinates set to: %s.</string>
   <string name="cache_export_fieldnote">Export as Field Notes</string>
   <string name="cache_clear_history">Clear history</string>
   <string name="cache_remove_from_history">Remove from history</string>

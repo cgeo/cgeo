@@ -50,6 +50,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public boolean supportsOwnCoordinates() {
+        return true;
+    }
+
+    @Override
     public boolean supportsWatchList() {
         return true;
     }
@@ -155,6 +160,22 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             cgeoapplication.getInstance().updateCache(cache);
         }
         return removed;
+    }
+
+    public static boolean uploadModifiedCoordinates(cgCache cache, Geopoint wpt) {
+        final boolean uploaded = GCParser.uploadModifiedCoordinates(cache, wpt);
+        if (uploaded) {
+            cgeoapplication.getInstance().updateCache(cache);
+        }
+        return uploaded;
+    }
+
+    public static boolean deleteModifiedCoordinates(cgCache cache) {
+        final boolean deleted = GCParser.deleteModifiedCoordinates(cache);
+        if (deleted) {
+            cgeoapplication.getInstance().updateCache(cache);
+        }
+        return deleted;
     }
 
     @Override
