@@ -234,26 +234,25 @@ public class GCMap {
      * @return
      */
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
+        int speed = (int) cgeoapplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
         Strategy strategy = Settings.getLiveMapStrategy();
         if (strategy == Strategy.AUTO) {
-            float speedNow = cgeoapplication.getInstance().currentGeo().getSpeed();
-            strategy = speedNow >= 8 ? Strategy.FAST : Strategy.DETAILED; // 8 m/s = 30 km/h
+            strategy = speed >= 30 ? Strategy.FAST : Strategy.DETAILED;
         }
-        // return searchByViewport(viewport, tokens, strategy);
 
-        // testing purpose
-        {
-            SearchResult result = searchByViewport(viewport, tokens, strategy);
+        SearchResult result = searchByViewport(viewport, tokens, strategy);
+
+        if (Settings.isDebug()) {
             String text = Formatter.SEPARATOR + strategy.getL10n() + Formatter.SEPARATOR;
-            int speed = (int) cgeoapplication.getInstance().currentGeo().getSpeed();
             if (Settings.isUseMetricUnits()) {
                 text += speed + " km/h";
             } else {
                 text += speed / IConversion.MILES_TO_KILOMETER + " mph";
             }
             result.setUrl(result.getUrl() + text);
-            return result;
         }
+
+        return result;
     }
 
     /**

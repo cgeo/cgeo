@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.DirectionProvider;
-import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.LiveMapInfo;
@@ -36,6 +35,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 
@@ -217,6 +217,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             title.append('/').append(caches.size());
                         }
                         title.append(']');
+                    }
+
+                    if (Settings.isDebug()) {
+                        if (search != null && StringUtils.isNotBlank(search.getUrl())) {
+                            title.append("[" + search.getUrl() + "]");
+                        }
                     }
 
                     ActivityMixin.setTitle(activity, title.toString());
