@@ -123,7 +123,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
     private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
-    private static final int CONTEXT_MENU_WAYPOINT_SET_AS_CACHE_COORDS = 1241;
+    private static final int CONTEXT_MENU_WAYPOINT_SET_AS_CACHE_MAIN_AND_UPLOAD_COORDS_TO_GC_COM = 1241;
 
     private cgCache cache;
     private final Progress progress = new Progress();
@@ -447,7 +447,12 @@ public class CacheDetailActivity extends AbstractActivity {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
                                     menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(R.drawable.ic_menu_mapmode);
                                     menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
-                                    menu.add(CONTEXT_MENU_WAYPOINT_SET_AS_CACHE_COORDS, index, 0, R.string.cache_menu_set_as_cache_coords);
+                                    if (cache.supportsOwnCoordinates()) {
+                                        menu.add(CONTEXT_MENU_WAYPOINT_SET_AS_CACHE_MAIN_AND_UPLOAD_COORDS_TO_GC_COM, index, 0, R.string.cache_menu_upload_wpt_to_gc_com);
+                                    } else {
+                                        //calls the same code, but there is explicit check
+                                        menu.add(CONTEXT_MENU_WAYPOINT_SET_AS_CACHE_MAIN_AND_UPLOAD_COORDS_TO_GC_COM, index, 0, R.string.cache_menu_set_as_cache_coords);
+                                    }
                                 }
                                 break;
                             }
@@ -551,7 +556,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
             }
                 break;
-            case CONTEXT_MENU_WAYPOINT_SET_AS_CACHE_COORDS: {
+            case CONTEXT_MENU_WAYPOINT_SET_AS_CACHE_MAIN_AND_UPLOAD_COORDS_TO_GC_COM: {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
                     Geopoint wptCoords = waypoint.getCoords();
@@ -565,8 +570,10 @@ public class CacheDetailActivity extends AbstractActivity {
                     cgeoapplication.getInstance().updateCache(cache);
                     if (cache.supportsOwnCoordinates()) {
                         GCConnector.uploadModifiedCoordinates(cache, wptCoords);
+                        showToast(getString(R.string.cache_coordinates_has_been_modified_on_gc_com, wptCoords.toString()));
+                    } else {
+                        showToast(getString(R.string.cache_coordinates_has_been_localy_modified_to, wptCoords.toString()));
                     }
-                    showToast(getString(R.string.cache_coordinates_set_to, wptCoords.toString()));
                 }
             }
                 break;
