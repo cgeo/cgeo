@@ -301,15 +301,20 @@ public class cgeo extends AbstractActivity {
                 cgeocaches.startActivityHistory(this);
                 return true;
             case MENU_SCAN:
-                Intent intent = new Intent(SCAN_INTENT);
-                intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-                startActivityForResult(intent, SCAN_REQUEST_CODE);
+                startScannerApplication();
                 return true;
             default:
                 break;
         }
 
         return false;
+    }
+
+    private void startScannerApplication() {
+        Intent intent = new Intent(SCAN_INTENT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET); // when resuming our app, cancel this activity
+        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+        startActivityForResult(intent, SCAN_REQUEST_CODE);
     }
 
     @Override

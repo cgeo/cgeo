@@ -7,6 +7,8 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections.CollectionUtils;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -23,6 +25,9 @@ import java.util.List;
 
 public class StaticMapsActivity extends AbstractActivity {
 
+    private static final String EXTRAS_WAYPOINT = "waypoint";
+    private static final String EXTRAS_DOWNLOAD = "download";
+    private static final String EXTRAS_GEOCODE = "geocode";
     private static final int MENU_REFRESH = 1;
     private final List<Bitmap> maps = new ArrayList<Bitmap>();
     private boolean download = false;
@@ -96,10 +101,10 @@ public class StaticMapsActivity extends AbstractActivity {
 
         // try to get data from extras
         if (extras != null) {
-            download = extras.getBoolean("download", false);
-            geocode = extras.getString("geocode");
-            if (extras.containsKey("waypoint")) {
-                waypoint_id = extras.getInt("waypoint");
+            download = extras.getBoolean(EXTRAS_DOWNLOAD, false);
+            geocode = extras.getString(EXTRAS_GEOCODE);
+            if (extras.containsKey(EXTRAS_WAYPOINT)) {
+                waypoint_id = extras.getInt(EXTRAS_WAYPOINT);
             }
         }
 
@@ -206,5 +211,19 @@ public class StaticMapsActivity extends AbstractActivity {
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));
         return false;
+    }
+
+    public static void startActivity(final Context activity, final String geocode, final boolean download, final cgWaypoint waypoint) {
+        final Intent intent = new Intent(activity, StaticMapsActivity.class);
+        // if resuming our app within this activity, finish it and return to the cache activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        intent.putExtra(EXTRAS_GEOCODE, geocode);
+        if (download) {
+            intent.putExtra(EXTRAS_DOWNLOAD, true);
+        }
+        if (waypoint != null) {
+            intent.putExtra(EXTRAS_WAYPOINT, waypoint.getId());
+        }
+        activity.startActivity(intent);
     }
 }

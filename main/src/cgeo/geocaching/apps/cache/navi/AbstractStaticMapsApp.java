@@ -12,7 +12,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.content.Intent;
 
 abstract class AbstractStaticMapsApp extends AbstractNavigationApp {
     public AbstractStaticMapsApp(String name) {
@@ -53,16 +52,7 @@ abstract class AbstractStaticMapsApp extends AbstractNavigationApp {
             return true;
         }
 
-        final Intent intent = new Intent(activity, StaticMapsActivity.class);
-        intent.putExtra("geocode", geocode);
-        if (download) {
-            intent.putExtra("download", true);
-        }
-        if (waypoint != null) {
-            intent.putExtra("waypoint", waypoint.getId());
-        }
-        activity.startActivity(intent);
-
+        StaticMapsActivity.startActivity(activity, geocode, download, waypoint);
         return true;
     }
 

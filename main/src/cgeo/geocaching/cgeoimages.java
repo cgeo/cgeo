@@ -227,6 +227,8 @@ public class cgeoimages extends AbstractActivity {
 
     private static void startActivity(final Context fromActivity, final String geocode, ArrayList<cgImage> logImages, int imageType) {
         final Intent logImgIntent = new Intent(fromActivity, cgeoimages.class);
+        // if resuming our app within this activity, finish it and return to the cache activity
+        logImgIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         logImgIntent.putExtra("geocode", geocode.toUpperCase());
         logImgIntent.putExtra("type", imageType);
         logImgIntent.putParcelableArrayListExtra("images", logImages);
