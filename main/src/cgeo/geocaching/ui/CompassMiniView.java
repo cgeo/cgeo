@@ -17,6 +17,10 @@ final public class CompassMiniView extends View {
     private Geopoint targetCoords = null;
     private float azimuth = 0;
     private float heading = 0;
+    /**
+     * remember the last state of drawing so we can avoid repainting for very small changes
+     */
+    private float lastDrawingAzimuth;
 
     /**
      * lazy initialized bitmap resource depending on selected skin
@@ -45,6 +49,7 @@ final public class CompassMiniView extends View {
     private static final int ARROW_BITMAP_SIZE = 21;
     private static final PaintFlagsDrawFilter FILTER_SET = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
     private static final PaintFlagsDrawFilter FILTER_REMOVE = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
+    private static final float MINIMUM_ROTATION_DEGREES_FOR_REPAINT = 5;
 
     public CompassMiniView(Context context) {
         super(context);
@@ -115,8 +120,15 @@ final public class CompassMiniView extends View {
             return;
         }
 
-        // compass margins
+        float azimuthRelative = calculateAzimuthRelative();
 
+        // avoid updates on very small changes, which are not visible to the user
+        float change = Math.abs(azimuthRelative - lastDrawingAzimuth);
+        if (change < MINIMUM_ROTATION_DEGREES_FOR_REPAINT) {
+            return;
+        }
+
+        // compass margins
         final int marginLeft = (getWidth() - compassArrowWidth) / 2;
         final int marginTop = (getHeight() - compassArrowHeight) / 2;
 
@@ -127,19 +139,14 @@ final public class CompassMiniView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        float azimuthRelative = azimuth - heading;
-        if (azimuthRelative < 0) {
-            azimuthRelative += 360;
-        } else if (azimuthRelative >= 360) {
-            azimuthRelative -= 360;
-        }
+        float azimuthRelative = calculateAzimuthRelative();
+        lastDrawingAzimuth = azimuthRelative;
 
         // compass margins
         canvas.setDrawFilter(FILTER_SET);
 
-
-        final int canvasCenterX = (compassArrowWidth / 2) + ((getWidth() - compassArrowWidth) / 2);
-        final int canvasCenterY = (compassArrowHeight / 2) + ((getHeight() - compassArrowHeight) / 2);
+        final int canvasCenterX = getWidth() / 2;
+        final int canvasCenterY = getHeight() / 2;
 
         final int marginLeft = (getWidth() - compassArrowWidth) / 2;
         final int marginTop = (getHeight() - compassArrowHeight) / 2;
@@ -149,6 +156,16 @@ final public class CompassMiniView extends View {
         canvas.rotate(azimuthRelative, canvasCenterX, canvasCenterY);
 
         canvas.setDrawFilter(FILTER_REMOVE);
+    }
+
+    private float calculateAzimuthRelative() {
+        float azimuthRelative = azimuth - heading;
+        if (azimuthRelative < 0) {
+            azimuthRelative += 360;
+        } else if (azimuthRelative >= 360) {
+            azimuthRelative -= 360;
+        }
+        return azimuthRelative;
     }
 
     @Override

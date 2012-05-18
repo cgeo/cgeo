@@ -152,28 +152,28 @@ public class cgeocaches extends AbstractListActivity {
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
 	    @Override
-	    public void updateGeoData(final IGeoData geo) {
-		if (adapter == null) {
-		    return;
-		}
+        public void updateGeoData(final IGeoData geo) {
+            if (adapter == null) {
+                return;
+            }
 
-		try {
-		    if (geo.getCoords() != null) {
-			adapter.setActualCoordinates(geo.getCoords());
-		    }
+            try {
+                if (geo.getCoords() != null) {
+                    adapter.setActualCoordinates(geo.getCoords());
+                }
 
-		    if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-			if (!Settings.isUseCompass()) {
-			    adapter.setActualHeading(geo.getBearing());
-			}
-			if (northHeading != null) {
-			    adapter.setActualHeading(northHeading);
-			}
-		    }
-		} catch (Exception e) {
-		    Log.w("Failed to UpdateLocation location.");
-		}
-	    }
+                if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                    if (!Settings.isUseCompass()) {
+                        adapter.setActualHeading(geo.getBearing());
+                    }
+                    if (northHeading != null) {
+                        adapter.setActualHeading(northHeading);
+                    }
+                }
+            } catch (Exception e) {
+                Log.w("Failed to UpdateLocation location.");
+            }
+        }
 
 	    @Override
 	    public void updateDirection(final float direction) {
