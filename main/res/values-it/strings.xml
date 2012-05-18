@@ -785,7 +785,9 @@
   <string name="export_fieldnotes_info">Field Notes saranno esportate in /sdcard/field-notes con data e ora corrente nel nome file.</string>
   <string name="export_fieldnotes_upload">Carica su geocaching.com</string>
   <string name="export_fieldnotes_uploading">Caricamento…</string>
+  <string name="export_fieldnotes_upload_success">Caricato su geocaching.com con successo</string>
   <string name="export_fieldnotes_onlynew">Solo quelli nuovi rispetto all\'ultima esportazione</string>
+  <string name="export_fieldnotes_creating">Creazione Field Notes…</string>
   <string name="export_gpx">GPX</string>
 
   <!--  attributes (permissions -> allowed, not allowed) -->
