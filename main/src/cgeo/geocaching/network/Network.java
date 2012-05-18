@@ -20,6 +20,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.HttpEntityWrapper;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
@@ -130,6 +131,30 @@ public abstract class Network {
      */
     public static HttpResponse postRequest(final String uri, final Parameters params) {
         return request("POST", uri, params, null, null);
+    }
+
+    /**
+     * POST HTTP request with Json POST DATA
+     *
+     * @param uri
+     *            the URI to request
+     * @param json
+     *            the json object to add to the POST request
+     * @return the HTTP response, or null in case of an encoding error params
+     */
+    public static HttpResponse postJsonRequest(final String uri, final JSONObject json) {
+        HttpPost request;
+        request = new HttpPost(uri);
+        request.addHeader("Content-Type", "application/json; charset=utf-8");
+        if (json != null) {
+            try {
+                request.setEntity(new StringEntity(json.toString()));
+            } catch (UnsupportedEncodingException e) {
+                Log.e("postJsonRequest:JSON Entity: UnsupportedEncodingException");
+                return null;
+            }
+        }
+        return doRepeatedRequests(request);
     }
 
     /**
