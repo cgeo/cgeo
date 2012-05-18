@@ -694,34 +694,36 @@ public class cgeocaches extends AbstractListActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
 
-        SubMenu subMenuSort = menu.addSubMenu(0, SUBMENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(R.drawable.ic_menu_sort_alphabetically);
-        subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
+        if (type != CacheListType.HISTORY) {
+            final SubMenu subMenuSort = menu.addSubMenu(0, SUBMENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(R.drawable.ic_menu_sort_alphabetically);
+            subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
 
-        // sort the context menu labels alphabetically for easier reading
-        Map<String, Integer> comparators = new HashMap<String, Integer>();
-        comparators.put(res.getString(R.string.caches_sort_distance), MENU_SORT_DISTANCE);
-        comparators.put(res.getString(R.string.caches_sort_difficulty), MENU_SORT_DIFFICULTY);
-        comparators.put(res.getString(R.string.caches_sort_terrain), MENU_SORT_TERRAIN);
-        comparators.put(res.getString(R.string.caches_sort_size), MENU_SORT_SIZE);
-        comparators.put(res.getString(R.string.caches_sort_favorites), MENU_SORT_FAVORITES);
-        comparators.put(res.getString(R.string.caches_sort_name), MENU_SORT_NAME);
-        comparators.put(res.getString(R.string.caches_sort_gccode), MENU_SORT_GEOCODE);
-        comparators.put(res.getString(R.string.caches_sort_rating), MENU_SORT_RATING);
-        comparators.put(res.getString(R.string.caches_sort_vote), MENU_SORT_VOTE);
-        comparators.put(res.getString(R.string.caches_sort_inventory), MENU_SORT_INVENTORY);
-        comparators.put(res.getString(R.string.caches_sort_date), MENU_SORT_DATE);
-        comparators.put(res.getString(R.string.caches_sort_finds), MENU_SORT_FINDS);
-        comparators.put(res.getString(R.string.caches_sort_state), MENU_SORT_STATE);
-        comparators.put(res.getString(R.string.caches_sort_storage), MENU_SORT_STORAGE);
+            // sort the context menu labels alphabetically for easier reading
+            final Map<String, Integer> comparators = new HashMap<String, Integer>();
+            comparators.put(res.getString(R.string.caches_sort_distance), MENU_SORT_DISTANCE);
+            comparators.put(res.getString(R.string.caches_sort_difficulty), MENU_SORT_DIFFICULTY);
+            comparators.put(res.getString(R.string.caches_sort_terrain), MENU_SORT_TERRAIN);
+            comparators.put(res.getString(R.string.caches_sort_size), MENU_SORT_SIZE);
+            comparators.put(res.getString(R.string.caches_sort_favorites), MENU_SORT_FAVORITES);
+            comparators.put(res.getString(R.string.caches_sort_name), MENU_SORT_NAME);
+            comparators.put(res.getString(R.string.caches_sort_gccode), MENU_SORT_GEOCODE);
+            comparators.put(res.getString(R.string.caches_sort_rating), MENU_SORT_RATING);
+            comparators.put(res.getString(R.string.caches_sort_vote), MENU_SORT_VOTE);
+            comparators.put(res.getString(R.string.caches_sort_inventory), MENU_SORT_INVENTORY);
+            comparators.put(res.getString(R.string.caches_sort_date), MENU_SORT_DATE);
+            comparators.put(res.getString(R.string.caches_sort_finds), MENU_SORT_FINDS);
+            comparators.put(res.getString(R.string.caches_sort_state), MENU_SORT_STATE);
+            comparators.put(res.getString(R.string.caches_sort_storage), MENU_SORT_STORAGE);
 
-        List<String> sortedLabels = new ArrayList<String>(comparators.keySet());
-        Collections.sort(sortedLabels);
-        for (String label : sortedLabels) {
-            Integer id = comparators.get(label);
-            subMenuSort.add(1, id, 0, label).setCheckable(true).setChecked(id == MENU_SORT_DISTANCE);
+            final List<String> sortedLabels = new ArrayList<String>(comparators.keySet());
+            Collections.sort(sortedLabels);
+            for (String label : sortedLabels) {
+                Integer id = comparators.get(label);
+                subMenuSort.add(1, id, 0, label).setCheckable(true).setChecked(id == MENU_SORT_DISTANCE);
+            }
+
+            subMenuSort.setGroupCheckable(1, true, true);
         }
-
-        subMenuSort.setGroupCheckable(1, true, true);
 
         menu.add(0, MENU_SWITCH_SELECT_MODE, 0, res.getString(R.string.caches_select_mode)).setIcon(R.drawable.ic_menu_agenda);
         menu.add(0, MENU_INVERT_SELECTION, 0, res.getString(R.string.caches_select_invert)).setIcon(R.drawable.ic_menu_mark);
