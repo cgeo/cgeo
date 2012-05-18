@@ -229,11 +229,11 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
                 cgCache cache = cgeoapplication.getInstance().loadCache(coordinate.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                if (CacheType.UNKNOWN != cache.getType()) {
+                RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
+                if (!requestDetailsThread.requestRequired()) {
                     // don't show popup if we have enough details
                     progress.dismiss();
                 }
-                RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
                 requestDetailsThread.start();
                 return true;
             } else if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() > 0) {
@@ -285,12 +285,16 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             this.cache = cache;
         }
 
+        public boolean requestRequired() {
+            return CacheType.UNKNOWN == cache.getType() || !cache.isReliableLatLon() || !cache.isOffline();
+        }
+
         @Override
         public void run() {
-            if (CacheType.UNKNOWN == cache.getType()) {
+            if (requestRequired()) {
                 /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+                CGeoMap.markCacheAsDirty(cache.getGeocode());
             }
-            CGeoMap.markCacheAsDirty(cache.getGeocode());
             CachePopup.startActivity(context, cache.getGeocode());
             progress.dismiss();
         }

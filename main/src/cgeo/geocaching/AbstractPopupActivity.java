@@ -280,6 +280,9 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             aquireGCVote();
         }
 
+        // favourite count
+        details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+
         // more details
         final Button buttonMore = (Button) findViewById(R.id.more_details);
         buttonMore.setOnClickListener(new OnClickListener() {
