@@ -40,18 +40,18 @@ public class MapfileListAdapter extends ArrayAdapter<File> {
         File file = getItem(position);
 
         View v = rowView;
-        MapfileView holder;
 
+        ViewHolder holder;
         if (v == null) {
             v = inflater.inflate(R.layout.mapfile_item, null);
 
-            holder = new MapfileView();
+            holder = new ViewHolder();
             holder.filepath = (TextView) v.findViewById(R.id.mapfilepath);
             holder.filename = (TextView) v.findViewById(R.id.mapfilename);
 
             v.setTag(holder);
         } else {
-            holder = (MapfileView) v.getTag();
+            holder = (ViewHolder) v.getTag();
         }
 
         File current = new File(parentView.getCurrentMapfile());
@@ -85,8 +85,8 @@ public class MapfileListAdapter extends ArrayAdapter<File> {
         }
     }
 
-    private static class MapfileView {
-        public TextView filepath;
-        public TextView filename;
+    private static final class ViewHolder {
+        TextView filepath;
+        TextView filename;
     }
 }

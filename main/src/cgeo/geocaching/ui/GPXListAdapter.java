@@ -19,6 +19,11 @@ public class GPXListAdapter extends ArrayAdapter<File> {
     private cgeogpxes activity = null;
     private LayoutInflater inflater = null;
 
+    private static class ViewHolder {
+        TextView filepath;
+        TextView filename;
+    }
+
     public GPXListAdapter(cgeogpxes parentIn, List<File> listIn) {
         super(parentIn, 0, listIn);
 
@@ -39,18 +44,18 @@ public class GPXListAdapter extends ArrayAdapter<File> {
         final File file = getItem(position);
 
         View v = rowView;
-        GPXListView holder;
 
+        final ViewHolder holder;
         if (v == null) {
             v = inflater.inflate(R.layout.gpx_item, null);
 
-            holder = new GPXListView();
+            holder = new ViewHolder();
             holder.filepath = (TextView) v.findViewById(R.id.filepath);
             holder.filename = (TextView) v.findViewById(R.id.filename);
 
             v.setTag(holder);
         } else {
-            holder = (GPXListView) v.getTag();
+            holder = (ViewHolder) v.getTag();
         }
 
         v.setOnClickListener(new View.OnClickListener() {

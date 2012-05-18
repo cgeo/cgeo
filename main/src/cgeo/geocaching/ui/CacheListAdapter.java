@@ -86,6 +86,24 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
     }
 
+    /**
+     * view holder for the cache list adapter
+     *
+     */
+    private static class ViewHolder {
+        CheckBox checkbox;
+        ImageView logStatusMark;
+        TextView text;
+        TextView favourite;
+        TextView info;
+        ImageView inventory;
+        RelativeLayout directionLayout;
+        DistanceView distance;
+        CompassMiniView direction;
+        RelativeLayout dirImgLayout;
+        ImageView dirImg;
+    }
+
     public CacheListAdapter(final Activity activity, final List<cgCache> list, CacheListType cacheListType) {
         super(activity, 0, list);
         final IGeoData currentGeo = cgeoapplication.getInstance().currentGeo();
@@ -313,11 +331,11 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         View v = rowView;
 
-        CacheListView holder;
+        final ViewHolder holder;
         if (v == null) {
             v = inflater.inflate(R.layout.caches_item, null);
 
-            holder = new CacheListView();
+            holder = new ViewHolder();
             holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
             holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
             holder.text = (TextView) v.findViewById(R.id.text);
@@ -332,7 +350,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
             v.setTag(holder);
         } else {
-            holder = (CacheListView) v.getTag();
+            holder = (ViewHolder) v.getTag();
         }
 
         final boolean lightSkin = Settings.isLightSkin();

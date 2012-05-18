@@ -24,6 +24,11 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     final private LayoutInflater inflater;
     final private Geopoint location;
 
+    private static final class ViewHolder {
+        TextView label;
+        TextView distance;
+    }
+
     public AddressListAdapter(final Context context) {
         super(context, 0);
         inflater = ((Activity) context).getLayoutInflater();
@@ -34,20 +39,20 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         final Address address = getItem(position);
 
-        // holder pattern implementation
-        final AddressListView holder;
         View view = convertView;
 
+        // holder pattern implementation
+        final ViewHolder holder;
         if (view == null) {
             view = inflater.inflate(R.layout.addresses_item, null);
 
-            holder = new AddressListView();
+            holder = new ViewHolder();
             holder.label = (TextView) view.findViewById(R.id.label);
             holder.distance = (TextView) view.findViewById(R.id.distance);
 
             view.setTag(holder);
         } else {
-            holder = (AddressListView) view.getTag();
+            holder = (ViewHolder) view.getTag();
         }
 
         view.setOnClickListener(new View.OnClickListener() {
