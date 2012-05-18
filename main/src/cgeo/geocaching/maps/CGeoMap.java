@@ -1074,7 +1074,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                 }
                 countVisibleCaches();
-                if (cachesCnt < Settings.getWayPointsThreshold())
+                if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null || searchIntent != null)
                 {
                     waypoints.clear();
                     if (searchIntent == null && geocodeIntent == null) {
