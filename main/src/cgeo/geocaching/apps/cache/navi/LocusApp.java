@@ -41,4 +41,8 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
         return true;
     }
 
+    @Override
+    public boolean isEnabled(Geopoint geopoint) {
+        return true;
+    }
 }
