@@ -13,4 +13,6 @@ public interface NavigationApp extends App {
             final Geopoint coords);
 
     boolean isEnabled(final cgWaypoint waypoint);
+
+    boolean isEnabled(final Geopoint geopoint);
 }

@@ -8,6 +8,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -54,6 +55,12 @@ abstract class AbstractStaticMapsApp extends AbstractNavigationApp {
 
         StaticMapsActivity.startActivity(activity, geocode, download, waypoint);
         return true;
+    }
+
+
+    @Override
+    public boolean isEnabled(Geopoint geopoint) {
+        return geopoint == null;
     }
 
 }
