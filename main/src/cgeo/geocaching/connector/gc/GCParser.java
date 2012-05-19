@@ -451,14 +451,44 @@ public abstract class GCParser {
         // on watchlist
         cache.setOnWatchlist(BaseUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
 
-        // latitude and longitude. Can only be retrieved if user is logged in
-        cache.setLatlon(BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, cache.getLatlon()));
-        if (StringUtils.isNotEmpty(cache.getLatlon())) {
+        // get original coordinates in case of user-modified listing-coordinates
+        Geopoint originalCoords = null;
+        try {
+            final String originalCoordsString = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
+            if (StringUtils.isNotEmpty(originalCoordsString)) {
+                originalCoords = new Geopoint(originalCoordsString);
+            }
+        } catch (Geopoint.GeopointException e) {
+            //this cache has not modified coordinates
+        }
+        Log.i("Original coords " + originalCoords);
+
+        Geopoint actualCoords = null;
+        String latLon = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, cache.getLatlon());
+        cache.setLatlon(latLon);
+
+        if (StringUtils.isNotEmpty(latLon)) {
             try {
-                cache.setCoords(new Geopoint(cache.getLatlon()));
-                cache.setReliableLatLon(true);
+                actualCoords = new Geopoint(latLon);
             } catch (Geopoint.GeopointException e) {
                 Log.w("cgeoBase.parseCache: Failed to parse cache coordinates: " + e.toString());
+            }
+        }
+        Log.i("Actual coords " + actualCoords);
+
+        if (originalCoords == null) {
+            if (actualCoords != null) {
+                cache.setCoords(actualCoords);
+                cache.setReliableLatLon(true);
+            }
+        } else {
+            cache.setCoords(originalCoords);
+            cache.setReliableLatLon(true);
+            if (actualCoords != null) {
+                final cgWaypoint waypoint = new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_modified_on_gc_com), WaypointType.FINAL, false);
+                waypoint.setCoords(actualCoords);
+                cache.addOrChangeWaypoint(waypoint, false);
+                cache.setUserModifiedCoords(true);
             }
         }
 
@@ -609,19 +639,6 @@ public abstract class GCParser {
         {
             // failed to parse logs
             Log.w("cgeoBase.parseCache: Failed to parse cache log count");
-        }
-
-        // add waypoint for original coordinates in case of user-modified listing-coordinates
-        try {
-            final String originalCoords = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
-
-            if (null != originalCoords) {
-                final cgWaypoint waypoint = new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.WAYPOINT, false);
-                waypoint.setCoords(new Geopoint(originalCoords));
-                cache.addOrChangeWaypoint(waypoint, false);
-                cache.setUserModifiedCoords(true);
-            }
-        } catch (Geopoint.GeopointException e) {
         }
 
         // waypoints
@@ -1621,6 +1638,56 @@ public abstract class GCParser {
                 cache.setMyVote(rating.getMyVote());
             }
         }
+    }
+
+    public static boolean uploadModifiedCoordinates(cgCache cache, Geopoint wpt) {
+        return editModifiedCoordinates(cache, wpt);
+    }
+
+    public static boolean deleteModifiedCoordinates(cgCache cache) {
+        return editModifiedCoordinates(cache, null);
+    }
+
+    public static boolean editModifiedCoordinates(cgCache cache, Geopoint wpt) {
+        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        if (StringUtils.isEmpty(userToken)) {
+            return false;
+        }
+        final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
+
+        JSONObject jo;
+        try {
+            if (wpt != null) {
+                jo = new JSONObject().put("dto", (new JSONObject().put("ut", userToken)
+                        .put("data", new JSONObject()
+                                .put("lat", wpt.getLatitudeE6() / 1E6)
+                                .put("lng", wpt.getLongitudeE6() / 1E6))));
+            } else {
+                jo = new JSONObject().put("dto", (new JSONObject().put("ut", userToken)));
+            }
+
+            String uriSuffix;
+            if (wpt != null) {
+                uriSuffix = "SetUserCoordinate";
+            } else {
+                uriSuffix = "ResetUserCoordinate";
+            }
+
+            HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
+            Log.i("Sending to " + uriPrefix + uriSuffix + " :" + jo.toString());
+
+            if (response != null && response.getStatusLine().getStatusCode() == 200) {
+                Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
+                return true;
+            }
+
+        } catch (JSONException e) {
+            Log.e("Unknown exception with json wrap code");
+            e.printStackTrace();
+        }
+        Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords");
+        return false;
     }
 
 }

@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.IObserver;
@@ -483,7 +484,11 @@ public class cgeoapplication extends Application {
     }
 
     public Set<cgWaypoint> getWaypointsInViewport(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
-        return storage.loadWaypoints(viewport, excludeMine, excludeDisabled);
+        return storage.loadWaypoints(viewport, excludeMine, excludeDisabled, null);
+    }
+
+    public Set<cgWaypoint> getFinalWaypointsInViewport(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
+        return storage.loadWaypoints(viewport, excludeMine, excludeDisabled, WaypointType.FINAL);
     }
 
 }

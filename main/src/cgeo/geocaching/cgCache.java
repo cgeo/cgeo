@@ -497,6 +497,10 @@ public class cgCache implements ICache, IWaypoint {
         return getConnector().supportsLogging();
     }
 
+    public boolean supportsOwnCoordinates() {
+        return getConnector().supportsOwnCoordinates();
+    }
+
     @Override
     public float getDifficulty() {
         return difficulty;
