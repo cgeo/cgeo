@@ -766,7 +766,7 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             final boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
-            final boolean isNonDefaultList = listId != StoredList.STANDARD_LIST_ID;
+            final boolean isNonDefaultList = (listId != StoredList.STANDARD_LIST_ID) && (listId != StoredList.ALL_LIST_ID);
 
             if (type == CacheListType.OFFLINE) { // only offline list
                 setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
@@ -1003,7 +1003,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 refreshCurrentList();
             }
-        });
+        }, true);
     }
 
     @Override
@@ -1065,7 +1065,7 @@ public class cgeocaches extends AbstractListActivity {
                         adapter.setSelectMode(false);
                         refreshCurrentList();
                     }
-                });
+                }, true);
                 break;
             case MENU_STORE_CACHE:
                 //FIXME: this must use the same handler like in the CacheDetailActivity. Will be done by moving the handler into the store method.

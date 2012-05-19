@@ -2209,8 +2209,8 @@ public class cgData {
 
         StringBuilder specifySql = new StringBuilder();
 
-        specifySql.append("reason = ");
-        specifySql.append(Math.max(listId, 1));
+        specifySql.append("reason ");
+        specifySql.append(listId != StoredList.ALL_LIST_ID ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
 
         if (detailedOnly) {
             specifySql.append(" and detailed = 1 ");
@@ -2624,6 +2624,10 @@ public class cgData {
         return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
     }
 
+    private SQLiteStatement getStatementCountAllLists() {
+        return getStatement("CountAllLists", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID);
+    }
+
     public boolean hasLogOffline(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return false;
@@ -2726,6 +2730,11 @@ public class cgData {
                 return lists.get(0);
             }
         }
+
+        if (id == StoredList.ALL_LIST_ID) {
+            return new StoredList(StoredList.ALL_LIST_ID, res.getString(R.string.list_all_lists), (int) getStatementCountAllLists().simpleQueryForLong());
+        }
+
         // fall back to standard list in case of invalid list id
         if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
             return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementCountStandardList().simpleQueryForLong());
@@ -2830,6 +2839,9 @@ public class cgData {
     }
 
     public void moveToList(final List<cgCache> caches, final int listId) {
+        if (listId == StoredList.ALL_LIST_ID) {
+            return;
+        }
         if (caches.isEmpty()) {
             return;
         }
