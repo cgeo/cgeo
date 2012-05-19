@@ -16,11 +16,11 @@ abstract class AbstractNavigationApp extends AbstractApp implements NavigationAp
 
     @Override
     public boolean isEnabled(cgWaypoint waypoint) {
-        return true;
+        return waypoint != null;
     }
 
     @Override
     public boolean isEnabled(Geopoint geopoint) {
-        return false;
+        return geopoint != null;
     }
 }

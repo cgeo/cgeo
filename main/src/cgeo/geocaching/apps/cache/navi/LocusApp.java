@@ -38,11 +38,11 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 
     @Override
     public boolean isEnabled(cgWaypoint waypoint) {
-        return true;
+        return waypoint != null;
     }
 
     @Override
     public boolean isEnabled(Geopoint geopoint) {
-        return true;
+        return geopoint != null;
     }
 }

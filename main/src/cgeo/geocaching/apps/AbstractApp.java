@@ -61,6 +61,6 @@ public abstract class AbstractApp implements App {
 
     @Override
     public boolean isEnabled(cgCache cache) {
-        return true;
+        return cache != null;
     }
 }
