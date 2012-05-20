@@ -382,7 +382,7 @@ public class cgeotrackable extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_LOG_TOUCH:
-                cgeotouch.startActivity(this, trackable);
+                LogTrackableActivity.startActivity(this, trackable);
                 return true;
             case MENU_BROWSER_TRACKABLE:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));

@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
@@ -89,6 +90,7 @@ public final class Settings {
     private static final String KEY_LIVE_MAP_HINT_SHOW_COUNT = "livemaphintshowcount";
     private static final String KEY_SETTINGS_VERSION = "settingsversion";
     private static final String KEY_DB_ON_SDCARD = "dbonsdcard";
+    private static final String KEY_LAST_TRACKABLE_ACTION = "trackableaction";
 
     private final static int unitsMetric = 1;
 
@@ -1140,6 +1142,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putBoolean(KEY_DB_ON_SDCARD, dbOnSDCard);
+            }
+        });
+    }
+
+    public static int getTrackableAction() {
+        return sharedPrefs.getInt(KEY_LAST_TRACKABLE_ACTION, LogType.RETRIEVED_IT.id);
+    }
+
+    public static void setTrackableAction(final int trackableAction) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_LAST_TRACKABLE_ACTION, trackableAction);
             }
         });
     }
