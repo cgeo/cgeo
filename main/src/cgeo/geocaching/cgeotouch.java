@@ -270,10 +270,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         logTypes.add(LogType.NOTE);
         logTypes.add(LogType.DISCOVERED_IT);
 
-        if (LogType.UNKNOWN == typeSelected) {
-            typeSelected = LogType.RETRIEVED_IT;
-        }
-        setType(typeSelected);
+        setType(LogType.getById(Settings.getTrackableAction()));
 
         Button typeButton = (Button) findViewById(R.id.type);
         registerForContextMenu(typeButton);
@@ -349,6 +346,8 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
             if (!gettingViewstate) {
                 waitDialog = ProgressDialog.show(cgeotouch.this, null, res.getString(R.string.log_saving), true);
                 waitDialog.setCancelable(true);
+
+                Settings.setTrackableAction(typeSelected.id);
 
                 String tracking = ((EditText) findViewById(R.id.tracking)).getText().toString();
                 String log = ((EditText) findViewById(R.id.log)).getText().toString();
