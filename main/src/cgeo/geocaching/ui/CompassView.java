@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.PeriodicHandler;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,14 +9,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 
 public class CompassView extends View {
 
-    private volatile boolean wantStop = false;
     private Context context = null;
     private Bitmap compassUnderlay = null;
     private Bitmap compassRose = null;
@@ -49,17 +46,7 @@ public class CompassView extends View {
     private int compassOverlayWidth = 0;
     private int compassOverlayHeight = 0;
     private boolean initialDisplay;
-    private Handler changeHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message message) {
-            try {
-                invalidate();
-            } catch (Exception e) {
-                Log.e("CompassView.changeHandler: " + e.toString());
-            }
-        }
-    };
+    private final RedrawHandler redrawHandler = new RedrawHandler();
 
     public CompassView(Context contextIn) {
         super(contextIn);
@@ -91,14 +78,12 @@ public class CompassView extends View {
         remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
 
         initialDisplay = true;
-        wantStop = false;
-
-        new changeThread().start();
+        redrawHandler.start();
     }
 
     @Override
     public void onDetachedFromWindow() {
-        wantStop = true;
+        redrawHandler.stop();
 
         if (compassUnderlay != null) {
             compassUnderlay.recycle();
@@ -165,25 +150,25 @@ public class CompassView extends View {
         return actual + offset;
     }
 
-    private class changeThread extends Thread {
+    private class RedrawHandler extends PeriodicHandler {
+
+        public RedrawHandler() {
+            super(40);
+        }
 
         @Override
-        public void run() {
-            while (!wantStop) {
-                try {
-                    sleep(50);
-                } catch (Exception e) {
-                    // nothing
+        public void act() {
+            final double newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
+            final double newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+            if (Math.abs(newAzimuthShown - azimuthShown) >= 2 || Math.abs(newCacheHeadingShown - cacheHeadingShown) >= 2) {
+                synchronized(CompassView.this) {
+                    azimuthShown = newAzimuthShown;
+                    cacheHeadingShown = newCacheHeadingShown;
                 }
-
-                synchronized (CompassView.this) {
-                    azimuthShown = smoothUpdate(northMeasured, azimuthShown);
-                    cacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-                }
-
-                changeHandler.sendMessage(Message.obtain());
+                invalidate();
             }
         }
+
     }
 
     @Override

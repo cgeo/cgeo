@@ -8,7 +8,6 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.CompassView;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.PeriodicHandler;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,7 +35,6 @@ public class cgeonavigate extends AbstractActivity {
     private PowerManager pm = null;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
-    private Float northHeading = null;
     private String title = null;
     private String name = null;
     private TextView navType = null;
@@ -46,16 +44,6 @@ public class cgeonavigate extends AbstractActivity {
     private TextView distanceView = null;
     private TextView headingView = null;
     private CompassView compassView = null;
-    private PeriodicHandler updaterHandler = new PeriodicHandler(20) {
-
-        @Override
-        public void act() {
-            if (compassView != null && northHeading != null) {
-                compassView.updateNorth(northHeading, cacheHeading);
-            }
-        }
-
-    };
     private String geocode;
 
     public cgeonavigate() {
@@ -104,12 +92,6 @@ public class cgeonavigate extends AbstractActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        updaterHandler.start();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
 
@@ -130,12 +112,6 @@ public class cgeonavigate extends AbstractActivity {
         } else if (StringUtils.isNotBlank(name)) {
             app.setAction(name);
         }
-    }
-
-    @Override
-    public void onStop() {
-        updaterHandler.stop();
-        super.onStop();
     }
 
     @Override
@@ -293,7 +269,7 @@ public class cgeonavigate extends AbstractActivity {
                 }
 
                 if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                    northHeading = geo.getBearing();
+                    updateNorthHeading(geo.getBearing());
                 }
             } catch (Exception e) {
                 Log.w("Failed to LocationUpdater location.");
@@ -303,10 +279,16 @@ public class cgeonavigate extends AbstractActivity {
         @Override
         public void updateDirection(final float direction) {
             if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
-                northHeading = DirectionProvider.getDirectionNow(cgeonavigate.this, direction);
+                updateNorthHeading(DirectionProvider.getDirectionNow(cgeonavigate.this, direction));
             }
         }
     };
+
+    private void updateNorthHeading(final float northHeading) {
+        if (compassView != null) {
+            compassView.updateNorth(northHeading, cacheHeading);
+        }
+    }
 
     public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType) {
         coordinates.clear();
