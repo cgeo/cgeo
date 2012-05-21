@@ -28,7 +28,8 @@
   <attr name="favourite_g" format="integer" />
   <attr name="close" format="integer" />
   <attr name="log_img_icon" format="integer" />
-
+  <attr name="actionbar_compass" format="integer" />
+  
   <!-- others -->
   <attr name="compass" format="integer" />
   <attr name="progressSpinnerLarge" format="integer" />

@@ -48,6 +48,7 @@
 		<item name="favourite_g">@drawable/favourite_background_green_dark</item>
 		<item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
+        <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
         
         <item name="progressSpinnerLarge">@android:style/Widget.ProgressBar.Large</item>
 
@@ -82,6 +83,7 @@
 		<item name="favourite_g">@drawable/favourite_background_green_light</item>
 		<item name="close">@drawable/map_close_light</item>
         <item name="log_img_icon">@drawable/log_img_light</item>
+        <item name="actionbar_compass">@drawable/actionbar_compass_light</item>
 
         <item name="progressSpinnerLarge">@android:style/Widget.ProgressBar.Large.Inverse</item>
         
@@ -116,6 +118,7 @@
 		<item name="favourite_g">@drawable/favourite_background_green_dark</item>
 		<item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
+        <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
 
         <item name="progressSpinnerLarge">@android:style/Widget.ProgressBar.Large</item>
         
