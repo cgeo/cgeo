@@ -322,11 +322,13 @@
   <!-- caches lists -->
   <string name="list_menu">List</string>
   <string name="list_menu_create">Create new list</string>
+  <string name="list_menu_all_lists">All caches</string>
   <string name="list_menu_drop">Drop current list</string>
   <string name="list_menu_change">Change list</string>
   <string name="list_menu_rename">Rename current list</string>
   <string name="list_title">Pick a list</string>
   <string name="list_inbox">Stored</string>
+  <string name="list_all_lists">All caches</string>
   <string name="list_dialog_create_title">New list</string>
   <string name="list_dialog_create">Create</string>
   <string name="list_dialog_cancel">Cancel</string>
