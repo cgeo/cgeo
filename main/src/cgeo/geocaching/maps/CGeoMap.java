@@ -219,10 +219,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         title.append(']');
                     }
 
-                    if (Settings.isDebug()) {
-                        if (search != null && StringUtils.isNotBlank(search.getUrl())) {
-                            title.append("[" + search.getUrl() + "]");
-                        }
+                    if (Settings.isDebug() && search != null && StringUtils.isNotBlank(search.getUrl())) {
+                        title.append('[').append(search.getUrl()).append(']');
                     }
 
                     ActivityMixin.setTitle(activity, title.toString());
