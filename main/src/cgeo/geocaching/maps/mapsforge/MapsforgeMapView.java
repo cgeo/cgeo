@@ -184,6 +184,13 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         }
 
         MapGenerator mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);
+
+        // When swapping map sources, make sure we aren't exceeding max zoom. See bug #1535
+        final int maxZoom = mapGenerator.getZoomLevelMax();
+        if (getMapPosition().getZoomLevel() > maxZoom) {
+            getController().setZoom(maxZoom);
+        }
+
         setMapGenerator(mapGenerator);
         if (!mapGenerator.requiresInternetConnection()) {
             setMapFile(new File(Settings.getMapFile()));

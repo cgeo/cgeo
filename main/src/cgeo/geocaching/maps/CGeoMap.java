@@ -748,6 +748,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             mapRestart();
         } else if (mapView != null) {
             mapView.setMapSource();
+            mapController = mapView.getMapController();
         }
 
         return restartRequired;
