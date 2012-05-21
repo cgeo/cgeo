@@ -119,7 +119,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private MapItemFactory mapItemFactory = null;
     private Activity activity = null;
     private MapViewImpl mapView = null;
-    private MapControllerImpl mapController = null;
     private cgeoapplication app = null;
     final private GeoDirHandler geoDirUpdate = new UpdateLoc();
     private SearchResult searchIntent = null;
@@ -421,8 +420,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         mapView.repaintRequired(null);
 
-        mapController = mapView.getMapController();
-        mapController.setZoom(Settings.getMapZoom());
+        mapView.getMapController().setZoom(Settings.getMapZoom());
 
         // live map, if no arguments are given
         live = (searchIntent == null && geocodeIntent == null && coordsIntent == null);
@@ -748,7 +746,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             mapRestart();
         } else if (mapView != null) {
             mapView.setMapSource();
-            mapController = mapView.getMapController();
         }
 
         return restartRequired;
@@ -1425,17 +1422,22 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             return;
         }
 
-        if (!alreadyCentered) {
-            alreadyCentered = true;
+        final MapControllerImpl mapController = mapView.getMapController();
+        final GeoPointImpl target = makeGeoPoint(coords);
 
-            mapController.setCenter(makeGeoPoint(coords));
+        if (alreadyCentered) {
+            mapController.animateTo(target);
         } else {
-            mapController.animateTo(makeGeoPoint(coords));
+            mapController.setCenter(target);
         }
+
+        alreadyCentered = true;
+
     }
 
     // move map to view results of searchIntent
     private void centerMap(String geocodeCenter, final SearchResult searchCenter, final Geopoint coordsCenter, int[] mapState) {
+        final MapControllerImpl mapController = mapView.getMapController();
 
         if (!centered && mapState != null) {
             try {

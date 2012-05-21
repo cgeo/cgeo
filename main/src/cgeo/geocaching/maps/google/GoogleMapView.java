@@ -36,6 +36,7 @@ import android.widget.FrameLayout;
 public class GoogleMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
+    private final GoogleMapController mapController = new GoogleMapController(getController());
 
     public GoogleMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -81,7 +82,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
     @Override
     public MapControllerImpl getMapController() {
-        return new GoogleMapController(getController());
+        return mapController;
     }
 
     @Override

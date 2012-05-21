@@ -41,6 +41,7 @@ import java.io.File;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
+    private final MapsforgeMapController mapController = new MapsforgeMapController(getController(), getMapGenerator().getZoomLevelMax());
 
     public MapsforgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -67,7 +68,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     @Override
     public MapControllerImpl getMapController() {
-        return new MapsforgeMapController(getController(), getMapGenerator().getZoomLevelMax());
+        return mapController;
     }
 
     @Override

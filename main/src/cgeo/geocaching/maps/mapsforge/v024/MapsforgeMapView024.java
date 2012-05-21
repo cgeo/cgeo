@@ -36,6 +36,7 @@ import android.widget.Toast;
 public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
+    private final MapsforgeMapController mapController = new MapsforgeMapController(getController(), getMaxZoomLevel());
 
     public MapsforgeMapView024(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -62,7 +63,7 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
 
     @Override
     public MapControllerImpl getMapController() {
-        return new MapsforgeMapController(getController(), getMaxZoomLevel());
+        return mapController;
     }
 
     @Override
