@@ -11,7 +11,10 @@ import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DateDialog;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
@@ -31,26 +34,25 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class cgeotouch extends AbstractActivity implements DateDialog.DateDialogParent {
-    private List<LogType> logTypes = new ArrayList<LogType>();
+public class LogTrackableActivity extends AbstractActivity implements DateDialog.DateDialogParent {
+    private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private ProgressDialog waitDialog = null;
     private String guid = null;
     private String geocode = null;
     private String[] viewstates = null;
     private boolean gettingViewstate = true;
     private Calendar date = Calendar.getInstance();
-    private LogType typeSelected = LogType.UNKNOWN;
+    private LogType typeSelected = LogType.getById(Settings.getTrackableAction());
     private int attempts = 0;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
 
-    private static final int MSG_UPDATE_TYPE = 1;
+    private static final int MENU_SIGNATURE = 1;
 
     private Handler showProgressHandler = new Handler() {
         @Override
@@ -62,34 +64,37 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
     private Handler loadDataHandler = new Handler() {
         @Override
         public void handleMessage(final Message msg) {
-            if (msg.what == MSG_UPDATE_TYPE) {
-                setType((LogType) msg.obj);
+            if (!possibleLogTypes.contains(typeSelected)) {
+                setType(possibleLogTypes.get(0));
+
                 showToast(res.getString(R.string.info_log_type_changed));
-            } else {
-                if (Login.isEmpty(viewstates)) {
-                    if (attempts < 2) {
-                        showToast(res.getString(R.string.err_log_load_data_again));
-                        new loadData(guid).start();
-                    } else {
-                        showToast(res.getString(R.string.err_log_load_data));
-                        showProgress(false);
-                    }
+            }
+
+            if (Login.isEmpty(viewstates)) {
+                if (attempts < 2) {
+                    showToast(res.getString(R.string.err_log_load_data_again));
+                    new LoadDataThread().start();
                 } else {
-                    gettingViewstate = false; // we're done, user can post log
-
-                    final Button buttonPost = (Button) findViewById(R.id.post);
-                    buttonPost.setEnabled(true);
-                    buttonPost.setOnClickListener(new postListener());
-
+                    showToast(res.getString(R.string.err_log_load_data));
                     showProgress(false);
                 }
+                return;
             }
+
+            gettingViewstate = false; // we're done, user can post log
+
+            final Button buttonPost = (Button) findViewById(R.id.post);
+            buttonPost.setEnabled(true);
+            buttonPost.setOnClickListener(new PostListener());
+
+            showProgress(false);
         }
     };
 
-    private Handler postLogHandler = new Handler() {
+    private final Handler postLogHandler = new Handler() {
+
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (waitDialog != null) {
                 waitDialog.dismiss();
             }
@@ -104,7 +109,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         }
     };
 
-    public cgeotouch() {
+    public LogTrackableActivity() {
         super("c:geo-log-trackable");
     }
 
@@ -117,7 +122,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         setTitle(res.getString(R.string.trackable_touch));
 
         // get parameters
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             geocode = extras.getString("geocode");
             guid = extras.getString("guid");
@@ -127,12 +132,12 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
             }
         }
 
-        final cgTrackable trackable = app.getTrackableByGeocode("logging trackable");
+        final cgTrackable trackable = app.getTrackableByGeocode(geocode);
 
         if (StringUtils.isNotBlank(trackable.getName())) {
-            setTitle(res.getString(R.string.trackable_touch) + trackable.getName());
+            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
         } else {
-            setTitle(res.getString(R.string.trackable_touch) + trackable.getGeocode().toUpperCase());
+            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode().toUpperCase());
         }
 
         app.setAction("logging trackable");
@@ -150,7 +155,6 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -162,75 +166,43 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        SubMenu subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
+        final SubMenu subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
 
-        subMenu.add(0, 0x6, 0, res.getString(R.string.log_date_time));
-        subMenu.add(0, 0x4, 0, res.getString(R.string.log_date));
-        subMenu.add(0, 0x2, 0, res.getString(R.string.log_time));
-        subMenu.add(0, 0x1, 0, res.getString(R.string.init_signature));
-        subMenu.add(0, 0x7, 0, res.getString(R.string.log_date_time) + " & " + res.getString(R.string.init_signature));
+        for (LogTemplate template : LogTemplateProvider.getTemplates()) {
+            subMenu.add(0, template.getItemId(), 0, template.getResourceId());
+        }
+        subMenu.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature));
 
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (Settings.getSignature() == null) {
-            menu.findItem(0x1).setVisible(false);
-            menu.findItem(0x7).setVisible(false);
-        } else {
-            menu.findItem(0x1).setVisible(true);
-            menu.findItem(0x7).setVisible(true);
-        }
-
+        menu.findItem(MENU_SIGNATURE).setVisible(Settings.getSignature() != null);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
-        EditText text;
-        String textContent;
-        String dateString;
-        String timeString;
-        String addText = "";
+        if (id == MENU_SIGNATURE) {
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), false), true);
+            return true;
+        }
 
-        if ((id >= 0x1 && id <= 0x7)) {
-            text = (EditText) findViewById(R.id.log);
-            textContent = text.getText().toString();
-
-            final long now = System.currentTimeMillis();
-            dateString = Formatter.formatDate(now);
-            timeString = Formatter.formatTime(now);
-
-            if ((id & 0x4) == 0x4) {
-                addText += dateString;
-                if ((id & 0x2) == 0x2) {
-                    addText += " | ";
-                }
-            }
-            if ((id & 0x2) == 0x2) {
-                addText += timeString;
-            }
-            if ((id & 0x1) == 0x1 && Settings.getSignature() != null) {
-                if (addText.length() > 0) {
-                    addText += "\n";
-                }
-                // number replaced by empty string (there are no numbers for trackables)
-                addText += StringUtils.replaceEach(Settings.getSignature(),
-                        new String[] { "[DATE]", "[TIME]", "[USER]", "[NUMBER]" },
-                        new String[] { dateString, timeString, Settings.getUsername(), "" });
-            }
-            if (textContent.length() > 0 && addText.length() > 0) {
-                addText = "\n" + addText;
-            }
-            text.setText(textContent + addText, TextView.BufferType.NORMAL);
-            text.setSelection(text.getText().toString().length());
+        final LogTemplate template = LogTemplateProvider.getTemplate(id);
+        if (template != null) {
+            insertIntoLog(template.getValue(false), true);
             return true;
         }
 
         return false;
+    }
+
+    private void insertIntoLog(String newText, final boolean moveCursor) {
+        final EditText log = (EditText) findViewById(R.id.log);
+        insertAtPosition(log, newText, moveCursor);
     }
 
     @Override
@@ -239,7 +211,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         final int viewId = view.getId();
 
         if (viewId == R.id.type) {
-            for (final LogType typeOne : logTypes) {
+            for (final LogType typeOne : possibleLogTypes) {
                 menu.add(viewId, typeOne.id, 0, typeOne.getL10n());
             }
         }
@@ -264,18 +236,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
             app.setAction("logging trackable");
         }
 
-        logTypes.clear();
-        logTypes.add(LogType.RETRIEVED_IT);
-        logTypes.add(LogType.GRABBED_IT);
-        logTypes.add(LogType.NOTE);
-        logTypes.add(LogType.DISCOVERED_IT);
-
-        if (LogType.UNKNOWN == typeSelected) {
-            typeSelected = LogType.RETRIEVED_IT;
-        }
-        setType(typeSelected);
-
-        Button typeButton = (Button) findViewById(R.id.type);
+        final Button typeButton = (Button) findViewById(R.id.type);
         registerForContextMenu(typeButton);
         typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
@@ -284,9 +245,9 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
             }
         });
 
-        Button dateButton = (Button) findViewById(R.id.date);
+        final Button dateButton = (Button) findViewById(R.id.date);
         dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
-        dateButton.setOnClickListener(new cgeotouchDateListener());
+        dateButton.setOnClickListener(new DateListener());
 
         if (tweetBox == null) {
             tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
@@ -296,18 +257,20 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         }
         tweetCheck.setChecked(true);
 
-        Button buttonPost = (Button) findViewById(R.id.post);
+        if (CollectionUtils.isEmpty(possibleLogTypes)) {
+            possibleLogTypes = cgTrackable.getPossibleLogTypes();
+        }
+
+        final Button buttonPost = (Button) findViewById(R.id.post);
         if (Login.isEmpty(viewstates)) {
             buttonPost.setEnabled(false);
             buttonPost.setOnTouchListener(null);
             buttonPost.setOnClickListener(null);
 
-            loadData thread;
-            thread = new loadData(guid);
-            thread.start();
+            new LoadDataThread().start();
         } else {
             buttonPost.setEnabled(true);
-            buttonPost.setOnClickListener(new postListener());
+            buttonPost.setOnClickListener(new PostListener());
         }
         disableSuggestions((EditText) findViewById(R.id.tracking));
     }
@@ -326,9 +289,6 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
 
-        if (tweetBox == null) {
-            tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
-        }
         if (Settings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
@@ -336,40 +296,42 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         }
     }
 
-    private class cgeotouchDateListener implements View.OnClickListener {
+    private class DateListener implements View.OnClickListener {
+
         public void onClick(View arg0) {
-            Dialog dateDialog = new DateDialog(cgeotouch.this, cgeotouch.this, date);
+            final Dialog dateDialog = new DateDialog(LogTrackableActivity.this, LogTrackableActivity.this, date);
             dateDialog.setCancelable(true);
             dateDialog.show();
         }
     }
 
-    private class postListener implements View.OnClickListener {
+    private class PostListener implements View.OnClickListener {
+
         public void onClick(View arg0) {
             if (!gettingViewstate) {
-                waitDialog = ProgressDialog.show(cgeotouch.this, null, res.getString(R.string.log_saving), true);
+                waitDialog = ProgressDialog.show(LogTrackableActivity.this, null, res.getString(R.string.log_saving), true);
                 waitDialog.setCancelable(true);
 
-                String tracking = ((EditText) findViewById(R.id.tracking)).getText().toString();
-                String log = ((EditText) findViewById(R.id.log)).getText().toString();
-                Thread thread = new postLog(postLogHandler, tracking, log);
-                thread.start();
+                Settings.setTrackableAction(typeSelected.id);
+
+                final String tracking = ((EditText) findViewById(R.id.tracking)).getText().toString();
+                final String log = ((EditText) findViewById(R.id.log)).getText().toString();
+                new PostLogThread(postLogHandler, tracking, log).start();
             } else {
                 showToast(res.getString(R.string.err_log_load_data_still));
             }
         }
     }
 
-    private class loadData extends Thread {
-        private String guid = null;
+    private class LoadDataThread extends Thread {
 
-        public loadData(String guidIn) {
-            guid = guidIn;
-
+        public LoadDataThread() {
+            super("Load data for logging trackable");
             if (guid == null) {
                 showToast(res.getString(R.string.err_tb_forgot_saw));
 
                 finish();
+                return;
             }
         }
 
@@ -394,51 +356,39 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
                 viewstates = Login.getViewstates(page);
 
                 final List<LogType> typesPre = GCParser.parseTypes(page);
-                if (typesPre.size() > 0) {
-                    logTypes.clear();
-                    logTypes.addAll(typesPre);
-                }
-                typesPre.clear();
-
-                if (!logTypes.contains(typeSelected)) {
-                    typeSelected = logTypes.get(0);
-                    loadDataHandler.obtainMessage(MSG_UPDATE_TYPE, typeSelected).sendToTarget();
+                if (CollectionUtils.isNotEmpty(typesPre)) {
+                    possibleLogTypes.clear();
+                    possibleLogTypes.addAll(typesPre);
                 }
             } catch (Exception e) {
-                Log.e("cgeotouch.loadData.run: " + e.toString());
+                Log.e("LogTrackableActivity.LoadDataThread.run: " + e.toString());
             }
 
             loadDataHandler.sendEmptyMessage(0);
         }
     }
 
-    private class postLog extends Thread {
+    private class PostLogThread extends Thread {
         final private Handler handler;
         final private String tracking;
         final private String log;
 
-        public postLog(final Handler handler, final String tracking, final String log) {
-            this.handler = handler;
-            this.tracking = tracking;
-            this.log = log;
+        public PostLogThread(final Handler handlerIn, final String trackingIn, final String logIn) {
+            super("Post trackable log");
+            handler = handlerIn;
+            tracking = trackingIn;
+            log = logIn;
         }
 
         @Override
         public void run() {
-            final StatusCode error = postLogFn(tracking, log);
-            handler.sendMessage(handler.obtainMessage(0, error));
+            final StatusCode status = postLogFn(tracking, log);
+            handler.sendMessage(handler.obtainMessage(0, status));
         }
     }
 
     public StatusCode postLogFn(String tracking, String log) {
         try {
-            if (tweetBox == null) {
-                tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
-            }
-            if (tweetCheck == null) {
-                tweetCheck = (CheckBox) findViewById(R.id.tweet);
-            }
-
             final StatusCode status = GCParser.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
 
             if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
@@ -449,14 +399,14 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
 
             return status;
         } catch (Exception e) {
-            Log.e("cgeotouch.postLogFn: " + e.toString());
+            Log.e("LogTrackableActivity.postLogFn: " + e.toString());
         }
 
         return StatusCode.LOG_POST_ERROR;
     }
 
     public static void startActivity(final Context context, final cgTrackable trackable) {
-        final Intent logTouchIntent = new Intent(context, cgeotouch.class);
+        final Intent logTouchIntent = new Intent(context, LogTrackableActivity.class);
         logTouchIntent.putExtra("geocode", trackable.getGeocode().toUpperCase());
         logTouchIntent.putExtra("guid", trackable.getGuid());
         logTouchIntent.putExtra("trackingcode", trackable.getTrackingcode());

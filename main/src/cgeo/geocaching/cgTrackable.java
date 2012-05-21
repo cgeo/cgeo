@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -214,5 +215,15 @@ public class cgTrackable implements ILogable {
 
     public void setTrackingcode(String trackingcode) {
         this.trackingcode = trackingcode;
+    }
+
+    static public List<LogType> getPossibleLogTypes() {
+        List<LogType> logTypes = new ArrayList<LogType>();
+        logTypes.add(LogType.RETRIEVED_IT);
+        logTypes.add(LogType.GRABBED_IT);
+        logTypes.add(LogType.NOTE);
+        logTypes.add(LogType.DISCOVERED_IT);
+
+        return logTypes;
     }
 }
