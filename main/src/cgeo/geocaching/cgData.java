@@ -2904,7 +2904,7 @@ public class cgData {
      * @return
      */
 
-    public Set<cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
+    public Set<cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled, WaypointType wptType) {
         final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableWaypoints, viewport));
         if (excludeMine) {
             where.append(" and ").append(dbTableCaches).append(".own == 0 and ").append(dbTableCaches).append(".found == 0");
@@ -2912,6 +2912,11 @@ public class cgData {
         if (excludeDisabled) {
             where.append(" and ").append(dbTableCaches).append(".disabled == 0");
         }
+
+        if (wptType != null) {
+            where.append(" and ").append(dbTableWaypoints).append(".type == '").append(wptType.id).append("'");
+        }
+
         init();
 
         final StringBuilder query = new StringBuilder("SELECT ");

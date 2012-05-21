@@ -13,6 +13,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
@@ -123,6 +124,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
     private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
+    private static final int CONTEXT_MENU_WAYPOINT_UPLOAD_COORDS_TO_GC_COM = 1241;
 
     private cgCache cache;
     private final Progress progress = new Progress();
@@ -446,6 +448,9 @@ public class CacheDetailActivity extends AbstractActivity {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
                                     menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(R.drawable.ic_menu_mapmode);
                                     menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
+                                    if (cache.supportsOwnCoordinates()) {
+                                        menu.add(CONTEXT_MENU_WAYPOINT_UPLOAD_COORDS_TO_GC_COM, index, 0, R.string.cache_menu_upload_wpt_to_gc_com);
+                                    }
                                 }
                                 break;
                             }
@@ -546,6 +551,19 @@ public class CacheDetailActivity extends AbstractActivity {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
                     cgeocaches.startActivityCoordinates(this, waypoint.getCoords());
+                }
+            }
+                break;
+            case CONTEXT_MENU_WAYPOINT_UPLOAD_COORDS_TO_GC_COM: {
+                final cgWaypoint waypoint = cache.getWaypoint(index);
+                if (waypoint != null) {
+                    if (cache.supportsOwnCoordinates()) {
+                        Geopoint wptCoords = waypoint.getCoords();
+                        GCConnector.uploadModifiedCoordinates(cache, wptCoords);
+                        showToast(getString(R.string.cache_coordinates_has_been_modified_on_gc_com, wptCoords.toString()));
+                    } else {
+                        showToast(getString(R.string.cache_coordinates_cannot_be_uploaded));
+                    }
                 }
             }
                 break;

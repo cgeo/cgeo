@@ -104,4 +104,11 @@ public interface IConnector {
      */
     public String[] getTokens();
 
+    /**
+     * enable/disable uploading modified coordinates to website
+     *
+     * @return true, when uploading is possible
+     */
+    boolean supportsOwnCoordinates();
+
 }
