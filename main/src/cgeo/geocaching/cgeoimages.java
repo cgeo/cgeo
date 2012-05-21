@@ -128,6 +128,7 @@ public class cgeoimages extends AbstractActivity {
 
                 view.addView(image_view);
 
+                image_view.setId(image.hashCode());
                 images.put(image_view.getId(), img);
             }
 
