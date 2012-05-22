@@ -5,7 +5,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
-import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -464,7 +463,7 @@ public class cgeoapplication extends Application {
      * {@link cgData#saveCache}
      */
     public boolean updateCache(cgCache cache) {
-        return saveCache(cache, cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+        return saveCache(cache, LoadFlags.SAVE_ALL);
     }
 
     /** {@link cgData#saveCache} */
