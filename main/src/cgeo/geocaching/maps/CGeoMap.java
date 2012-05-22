@@ -161,7 +161,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
     private int cachesCnt = 0;
     /** List of caches in the viewport */
-    private final LeastRecentlyUsedSet<cgCache> caches = new LeastRecentlyUsedSet<cgCache>(MAX_CACHES);
+    private LeastRecentlyUsedSet<cgCache> caches = null;
     /** List of waypoints in the viewport */
     private final LeastRecentlyUsedSet<cgWaypoint> waypoints = new LeastRecentlyUsedSet<cgWaypoint>(MAX_CACHES);
     // storing for offline
@@ -351,6 +351,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         res = this.getResources();
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
+
+        int countBubbleCnt = app.getAllStoredCachesCount(true, CacheType.ALL);
+        caches = new LeastRecentlyUsedSet<cgCache>(MAX_CACHES + countBubbleCnt);
+
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
 
