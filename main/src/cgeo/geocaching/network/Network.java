@@ -15,12 +15,12 @@ import ch.boye.httpclientandroidlib.HttpResponseInterceptor;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.ProtocolException;
 import ch.boye.httpclientandroidlib.client.HttpClient;
+import ch.boye.httpclientandroidlib.client.entity.GzipDecompressingEntity;
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.client.methods.HttpGet;
 import ch.boye.httpclientandroidlib.client.methods.HttpPost;
 import ch.boye.httpclientandroidlib.client.methods.HttpRequestBase;
 import ch.boye.httpclientandroidlib.client.params.ClientPNames;
-import ch.boye.httpclientandroidlib.entity.HttpEntityWrapper;
 import ch.boye.httpclientandroidlib.entity.mime.MultipartEntity;
 import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
@@ -41,30 +41,10 @@ import android.net.Uri;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.zip.GZIPInputStream;
 
 public abstract class Network {
-
-    static class GzipDecompressingEntity extends HttpEntityWrapper {
-        public GzipDecompressingEntity(final HttpEntity entity) {
-            super(entity);
-        }
-
-        @Override
-        public InputStream getContent() throws IOException, IllegalStateException {
-            // the wrapped entity's getContent() decides about repeatability
-            return new GZIPInputStream(wrappedEntity.getContent());
-        }
-
-        @Override
-        public long getContentLength() {
-            // length of gunzipped content is not known
-            return -1;
-        }
-    }
 
     private static final int NB_DOWNLOAD_RETRIES = 4;
     /** User agent id */
