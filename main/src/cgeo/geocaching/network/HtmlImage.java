@@ -8,8 +8,8 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
 
 import android.content.Context;
 import android.content.res.Resources;

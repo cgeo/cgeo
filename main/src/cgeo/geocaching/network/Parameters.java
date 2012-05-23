@@ -1,9 +1,9 @@
 package cgeo.geocaching.network;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
+import ch.boye.httpclientandroidlib.NameValuePair;
+import ch.boye.httpclientandroidlib.client.utils.URLEncodedUtils;
+import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
+import ch.boye.httpclientandroidlib.protocol.HTTP;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;

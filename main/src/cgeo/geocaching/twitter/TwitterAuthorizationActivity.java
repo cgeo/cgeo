@@ -8,10 +8,10 @@ import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
+import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
+import ch.boye.httpclientandroidlib.util.EntityUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.util.EntityUtils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

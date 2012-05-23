@@ -18,9 +18,9 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.http.HttpResponse;
 
 import android.app.ProgressDialog;
 import android.content.Context;

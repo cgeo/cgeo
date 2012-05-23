@@ -4,8 +4,8 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
 
 import java.io.File;
 
