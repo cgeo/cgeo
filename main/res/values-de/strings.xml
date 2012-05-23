@@ -320,11 +320,13 @@
   <!-- caches lists -->
   <string name="list_menu">Liste</string>
   <string name="list_menu_create">Neue Liste</string>
+  <string name="list_menu_all_lists">Alle</string>
   <string name="list_menu_drop">Aktuelle Liste löschen</string>
   <string name="list_menu_change">Andere Liste anzeigen</string>
   <string name="list_menu_rename">Aktuelle Liste umbenennen</string>
   <string name="list_title">Liste wählen</string>
   <string name="list_inbox">Standardliste</string>
+  <string name="list_all_lists">Alle</string>
   <string name="list_dialog_create_title">Neue Liste</string>
   <string name="list_dialog_create">Erstellen</string>
   <string name="list_dialog_cancel">Abbrechen</string>
