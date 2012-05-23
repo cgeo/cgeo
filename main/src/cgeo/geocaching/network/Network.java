@@ -30,7 +30,6 @@ import ch.boye.httpclientandroidlib.params.BasicHttpParams;
 import ch.boye.httpclientandroidlib.params.CoreConnectionPNames;
 import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
 import ch.boye.httpclientandroidlib.params.HttpParams;
-import ch.boye.httpclientandroidlib.protocol.HTTP;
 import ch.boye.httpclientandroidlib.protocol.HttpContext;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -54,7 +53,7 @@ public abstract class Network {
     private final static HttpParams clientParams = new BasicHttpParams();
 
     static {
-        Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
+        Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, "UTF-8");
         Network.clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
         Network.clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
         Network.clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
@@ -70,6 +69,7 @@ public abstract class Network {
         client.setParams(clientParams);
 
         client.setRedirectStrategy(new DefaultRedirectStrategy() {
+            @Override
             public boolean isRedirected(HttpRequest request, HttpResponse response, HttpContext context) {
                 boolean isRedirect = false;
                 try {
@@ -188,7 +188,7 @@ public abstract class Network {
             request = new HttpPost(uri);
             if (params != null) {
                 try {
-                    ((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+                    ((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
                 } catch (final UnsupportedEncodingException e) {
                     Log.e("request", e);
                     return null;
@@ -355,7 +355,7 @@ public abstract class Network {
 
     private static String getResponseDataNoError(final HttpResponse response, boolean replaceWhitespace) {
         try {
-            String data = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+            String data = EntityUtils.toString(response.getEntity(), "UTF-8");
             return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
         } catch (Exception e) {
             Log.e("getResponseData", e);
