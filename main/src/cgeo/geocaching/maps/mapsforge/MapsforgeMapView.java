@@ -51,7 +51,9 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     @Override
     public void draw(Canvas canvas) {
         try {
-            if (getMapZoomLevel() >= 22) { // to avoid too close zoom level (mostly on Samsung Galaxy S series)
+            // Google Maps and OSM Maps use different zoom levels for the same view.
+            // Here we don't want the Google Maps compatible zoom level, but the actual one.
+            if (getActualMapZoomLevel() > 22) { // to avoid too close zoom level (mostly on Samsung Galaxy S series)
                 getController().setZoom(22);
             }
 
@@ -170,9 +172,25 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         // Nothing to do here
     }
 
+    /**
+     * Get the map zoom level which is compatible with Google Maps.
+     *
+     * @return the current map zoom level +1
+     */
     @Override
     public int getMapZoomLevel() {
+        // Google Maps and OSM Maps use different zoom levels for the same view.
+        // All OSM Maps zoom levels are offset by 1 so they match Google Maps.
         return getMapPosition().getZoomLevel() + 1;
+    }
+
+    /**
+     * Get the actual map zoom level
+     * 
+     * @return the current map zoom level with no adjustments
+     */
+    private int getActualMapZoomLevel() {
+        return getMapPosition().getZoomLevel();
     }
 
     @Override

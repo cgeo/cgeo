@@ -26,13 +26,15 @@ public class MapsforgeMapController implements MapControllerImpl {
         mapController.setCenter((GeoPoint) geoPoint);
     }
 
+    /**
+     * Set the map zoom level to mapzoom-1 or maxZoomLevel, whichever is least
+     * mapzoom-1 is used to be compatible with Google Maps zoom levels
+     */
     @Override
     public void setZoom(int mapzoom) {
-        int mfzoom = mapzoom - 1;
-        if (mfzoom > maxZoomLevel) {
-            mfzoom = maxZoomLevel;
-        }
-        mapController.setZoom(mfzoom);
+        // Google Maps and OSM Maps use different zoom levels for the same view.
+        // All OSM Maps zoom levels are offset by 1 so they match Google Maps.
+        mapController.setZoom(Math.min(mapzoom - 1, maxZoomLevel));
     }
 
     @Override
