@@ -146,6 +146,7 @@
   <string name="err_detail_cache_find_next">c:geo ne peut pas trouver les caches suivantes.</string>
   <string name="err_detail_cache_forgot">c:geo a oublié la cache demandée.</string>
   <string name="err_detail_cache_forgot_visit">c:geo a oublié la cache que vous avez visité.</string>
+  <string name="err_detail_google_maps_limit_reached">c:geo n\'a pas pu charger les cartes statiques. La limite de Google Maps est peut être temporairement atteinte.</string>
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
   <string name="err_detail_not_load_map_static">c:geo n\'a pas réussi à charger les cartes statiques.</string>
@@ -219,6 +220,7 @@
   <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
   <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
   <string name="warn_invalid_mapfile">Le fichier sélectionné n\'est pas un fichier de carte mapsforge version 0.3.0.\nLes cartes hors-lignes ne sont pas disponibles.</string>
+  <string name="warn_deprecated_mapfile">Vous utilisez un fichier de carte obsolète de version 0.2.4.\nVous devriez charger sans tarder une carte version 0.3.\nLe support des cartes 0.2.4 disparaîtra dans une prochaine version de c:geo.</string>
 
   <string name="info_log_posted">Envoi de la visite réussi.</string>
   <string name="info_log_saved">Sauvegarde de la visite réussie.</string>
@@ -282,6 +284,7 @@
   <string name="caches_sort_date">date</string>
   <string name="caches_sort_finds">trouvées</string>
   <string name="caches_sort_state">état</string>
+  <string name="caches_sort_storage">date de sauvegarde dans l\'appareil</string>
   <string name="caches_select_mode">Mode sélection</string>
   <string name="caches_select_mode_exit">Sortir du mode sélection</string>
   <string name="caches_select_invert">Inverser la sélection</string>
@@ -319,11 +322,13 @@
   <!-- caches lists -->
   <string name="list_menu">Listes</string>
   <string name="list_menu_create">Nouvelle liste</string>
+  <string name="list_menu_all_lists">Toutes les caches</string>
   <string name="list_menu_drop">Effacer la liste courante</string>
   <string name="list_menu_change">Changer de liste</string>
   <string name="list_menu_rename">Renommer la liste courante</string>
   <string name="list_title">Choisir une liste</string>
   <string name="list_inbox">Enregistrées</string>
+  <string name="list_all_lists">Toutes les caches</string>
   <string name="list_dialog_create_title">Nouvelle liste</string>
   <string name="list_dialog_create">Créer</string>
   <string name="list_dialog_cancel">Annuler</string>
@@ -426,6 +431,14 @@
   <string name="init_debug_title">Déverminage</string>
   <string name="init_debug_note">c:geo est capable de générer beaucoup d\'informations peu utiles pour des utilisateurs normaux. Cependant, en cas de problème, les développeurs en charge de c:geo peuvent avoir besoin de cette information pour pouvoir l\'identifier. Dans ce cas, ils vous demanderont d\'activer cette option et d\'envoyer les fichiers de journaux.</string>
   <string name="init_debug">Générer les informations</string>
+  <string name="init_dbonsdcard_title">Emplacement de la base</string>
+  <string name="init_dbonsdcard_note">La base de données de c:geo peut être enregistrée sur un support externe. En choisissant cette option, vous récupérerez de l\'espace de stockage sur votre appareil au détriment de performances réduites. c:geo ne fonctionnera pas si votre carte SD est absente.</string>
+  <string name="init_dbonsdcard">Base de données sur stockage externe</string>
+  <string name="init_dbmove">Déplacement de la base de données</string>
+  <string name="init_dbmove_dbmove">Déplacement de la base de données</string>
+  <string name="init_dbmove_running">Déplacement de la base de données</string>
+  <string name="init_dbmove_success">Base de données déplacée</string>
+  <string name="init_dbmove_failed">Erreur lors du déplacement de la base de données</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google Maps : plan</string>
@@ -489,6 +502,11 @@
   <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
   <string name="cache_watchlist_add">Ajouter à votre liste de suivi</string>
   <string name="cache_watchlist_remove">Retirer de votre liste de suivi</string>
+  <string name="cache_favpoint_on">Cette cache est dans vos favoris.</string>
+  <string name="cache_favpoint_not_on">Cette cache n\'est pas dans vos favoris.</string>
+  <string name="cache_favpoint_add">Ajouter</string>
+  <string name="cache_favpoint_remove">Enlever</string>
+
   <string name="cache_waypoints">Étapes</string>
   <plurals name="waypoints">
       <item quantity="one">1 étape</item>
@@ -506,6 +524,7 @@
   <string name="cache_dialog_loading_details_status_waypoints">Points intermédiaires</string>
   <string name="cache_dialog_loading_details_status_gcvote">Votes</string>
   <string name="cache_dialog_loading_details_status_elevation">Altitude</string>
+  <string name="cache_dialog_loading_details_status_cache">Sauvegarde des données</string>
   <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>
   <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne…</string>
@@ -522,6 +541,7 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Carte</string>
   <string name="cache_menu_map_static">Cartes statiques</string>
+  <string name="cache_menu_download_map_static">Télécharger les cartes statiques</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Carte externe</string>
   <string name="cache_menu_streetview">Street View</string>
@@ -773,7 +793,9 @@
   <string name="export_fieldnotes_info">Les notes de terrain seront sauvées dans le dossier /sdcard/field-notes avec, comme nom de fichier, la date et l\'heure courantes.</string>
   <string name="export_fieldnotes_upload">Envoyer vers geocaching.com</string>
   <string name="export_fieldnotes_uploading">Envoi en cours…</string>
+  <string name="export_fieldnotes_upload_success">Envoi effectué avec succès</string>
   <string name="export_fieldnotes_onlynew">Uniquement les nouveautés depuis le dernier envoi</string>
+  <string name="export_fieldnotes_creating">Création des notes de terrain…</string>
   <string name="export_gpx">GPX</string>
 
   <!--  attributes (permissions -> allowed, not allowed) -->
@@ -920,7 +942,6 @@
   <string name="legal_note">Pour utiliser les services de geocaching.com, vous devez accepter les termes et conditions de la <a href="http://www.geocaching.com/about/termsofuse.aspx">mise en garde de Groundspeak</a>.</string>
   <string name="quote">Pour faciliter le géocaching.</string>
   <string name="powered_by">carnero</string>
-  <string name="author">auteur: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">site: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">page c:geo</a></string>
@@ -941,5 +962,9 @@
   </plurals>
 
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
+  <plurals name="days_ago">
+    <item quantity="one">hier</item>
+    <item quantity="other">il y a %d jours</item>
+  </plurals>
 
 </resources>
