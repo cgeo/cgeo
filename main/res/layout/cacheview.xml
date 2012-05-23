@@ -22,7 +22,7 @@
             android:id="@+id/defaultNavigation"
             style="@style/action_bar_action"
             android:onClick="startDefaultNavigation"
-            android:src="@drawable/actionbar_compass"
+            android:src="@drawable/actionbar_compass_dark"
             android:longClickable="true" />
 
         <View style="@style/action_bar_separator" />

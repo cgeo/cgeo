@@ -36,7 +36,7 @@
 	    </LinearLayout>
 		<ImageView style="@style/action_bar_action"
 		 		android:id="@+id/wpDefaultNavigation"
-				android:src="@drawable/actionbar_compass"
+				android:src="?actionbar_compass"
 				android:layout_gravity="right"
 				android:layout_alignParentRight="true"
 				android:clickable="true"
