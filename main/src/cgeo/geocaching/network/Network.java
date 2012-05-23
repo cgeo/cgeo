@@ -13,16 +13,19 @@ import ch.boye.httpclientandroidlib.HttpRequestInterceptor;
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.HttpResponseInterceptor;
 import ch.boye.httpclientandroidlib.NameValuePair;
+import ch.boye.httpclientandroidlib.ProtocolException;
 import ch.boye.httpclientandroidlib.client.HttpClient;
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.client.methods.HttpGet;
 import ch.boye.httpclientandroidlib.client.methods.HttpPost;
 import ch.boye.httpclientandroidlib.client.methods.HttpRequestBase;
+import ch.boye.httpclientandroidlib.client.params.ClientPNames;
 import ch.boye.httpclientandroidlib.entity.HttpEntityWrapper;
 import ch.boye.httpclientandroidlib.entity.mime.MultipartEntity;
 import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
+import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
 import ch.boye.httpclientandroidlib.params.BasicHttpParams;
 import ch.boye.httpclientandroidlib.params.CoreConnectionPNames;
 import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
@@ -74,6 +77,7 @@ public abstract class Network {
         Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
         Network.clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
         Network.clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
+        Network.clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
     }
 
     private static String hidePassword(final String message) {
@@ -84,6 +88,24 @@ public abstract class Network {
         final DefaultHttpClient client = new DefaultHttpClient();
         client.setCookieStore(Cookies.cookieStore);
         client.setParams(clientParams);
+
+        client.setRedirectStrategy(new DefaultRedirectStrategy() {
+            public boolean isRedirected(HttpRequest request, HttpResponse response, HttpContext context) {
+                boolean isRedirect = false;
+                try {
+                    isRedirect = super.isRedirected(request, response, context);
+                } catch (final ProtocolException e) {
+                    Log.e("httpclient.isRedirected: unable to check for redirection", e);
+                }
+                if (!isRedirect) {
+                    final int responseCode = response.getStatusLine().getStatusCode();
+                    if (responseCode == 301 || responseCode == 302) {
+                        return true;
+                    }
+                }
+                return isRedirect;
+            }
+        });
 
         client.addRequestInterceptor(new HttpRequestInterceptor() {
 
