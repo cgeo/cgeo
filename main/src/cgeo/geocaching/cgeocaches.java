@@ -221,6 +221,7 @@ public class cgeocaches extends AbstractListActivity {
                     dialog.setCancelable(true);
                     dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
 
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             Cookies.clearCookies();
                             dialog.cancel();
@@ -228,6 +229,7 @@ public class cgeocaches extends AbstractListActivity {
                     });
                     dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
 
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             Cookies.clearCookies();
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
@@ -632,11 +634,13 @@ public class cgeocaches extends AbstractListActivity {
                 .setMessage(res.getString(R.string.gpx_import_confirm))
                 .setCancelable(false)
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         new GPXImporter(cgeocaches.this, listId, importGpxAttachementFinishedHandler).importGPX();
                     }
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
@@ -1277,12 +1281,14 @@ public class cgeocaches extends AbstractListActivity {
         dialog.setMessage((adapter != null && adapter.getCheckedCount() > 0) ? res.getString(R.string.cache_remove_from_history)
                 : res.getString(R.string.cache_clear_history));
         dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 removeFromHistory();
                 dialog.cancel();
             }
         });
         dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
@@ -1325,6 +1331,7 @@ public class cgeocaches extends AbstractListActivity {
         }
         dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
 
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 dropSelected();
                 if (removeListAfterwards) {
@@ -1335,6 +1342,7 @@ public class cgeocaches extends AbstractListActivity {
         });
         dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
 
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
@@ -1765,11 +1773,13 @@ public class cgeocaches extends AbstractListActivity {
         alert.setTitle(R.string.list_dialog_remove_title);
         alert.setMessage(R.string.list_dialog_remove_description);
         alert.setPositiveButton(R.string.list_dialog_remove, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 removeListInternal();
             }
         });
         alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
             }

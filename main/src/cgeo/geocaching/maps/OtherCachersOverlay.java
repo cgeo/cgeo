@@ -81,6 +81,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
             }
             dialog.setNeutralButton(cgeoapplication.getInstance().getResources().getString(android.R.string.ok), new DialogInterface.OnClickListener() {
 
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
@@ -131,6 +132,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
             geocode = geocodeIn;
         }
 
+        @Override
         public void onClick(DialogInterface dialog, int id) {
             if (geocode != null) {
                 CacheDetailActivity.startActivity(context, geocode);

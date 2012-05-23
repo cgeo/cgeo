@@ -46,10 +46,12 @@ public abstract class AbstractItemizedOverlay implements GeneralOverlay {
         ovlImpl.superSetLastFocusedItemIndex(index);
     }
 
+    @Override
     public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
         ovlImpl.superDraw(canvas, mapView, shadow);
     }
 
+    @Override
     public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
         ovlImpl.superDrawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);

@@ -8,11 +8,13 @@ import android.view.Display;
 
 public class AndroidLevel8 implements AndroidLevel8Interface {
 
+    @Override
     public int getRotation(final Activity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
         return display.getRotation();
     }
 
+    @Override
     public void dataChanged(final String name) {
         Log.i("Requesting settings backup with settings manager");
         BackupManager.dataChanged(name);

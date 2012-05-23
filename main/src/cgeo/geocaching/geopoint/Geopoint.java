@@ -376,10 +376,12 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     public static final Parcelable.Creator<Geopoint> CREATOR = new Parcelable.Creator<Geopoint>() {
+        @Override
         public Geopoint createFromParcel(final Parcel in) {
             return new Geopoint(in);
         }
 
+        @Override
         public Geopoint[] newArray(final int size) {
             return new Geopoint[size];
         }

@@ -559,6 +559,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             this.cache = cache;
         }
 
+        @Override
         public void onClick(View view) {
             final boolean checkNow = ((CheckBox) view).isChecked();
             cache.setStatusChecked(checkNow);
@@ -578,6 +579,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         // tap on item
+        @Override
         public void onClick(View view) {
             if (!touch) {
                 touch = true;
@@ -595,6 +597,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         // long tap on item
+        @Override
         public boolean onLongClick(View view) {
             if (!touch) {
                 touch = true;
@@ -605,6 +608,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         // swipe on item
+        @Override
         public boolean onTouch(View view, MotionEvent event) {
             if (gestureDetector.onTouchEvent(event)) {
                 touch = false;

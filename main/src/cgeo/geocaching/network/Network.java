@@ -100,6 +100,7 @@ public abstract class Network {
         });
         client.addResponseInterceptor(new HttpResponseInterceptor() {
 
+            @Override
             public void process(
                     final HttpResponse response,
                     final HttpContext context) throws HttpException, IOException {

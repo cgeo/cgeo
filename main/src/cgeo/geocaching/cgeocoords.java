@@ -76,6 +76,7 @@ public class cgeocoords extends Dialog {
 
         findViewById(R.id.actionBarManualbutton).setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View view) {
                 ActivityMixin.goManual(context, "c:geo-geocoordinate-input");
             }

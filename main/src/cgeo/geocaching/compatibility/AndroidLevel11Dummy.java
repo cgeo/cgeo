@@ -10,6 +10,7 @@ import android.app.Activity;
  */
 public class AndroidLevel11Dummy implements AndroidLevel11Interface {
 
+    @Override
     public void invalidateOptionsMenu(final Activity activity) {
         // do nothing
     }

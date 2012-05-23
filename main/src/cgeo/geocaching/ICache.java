@@ -66,6 +66,7 @@ public interface ICache extends IBasicCache {
     /**
      * @return Guid
      */
+    @Override
     public String getGuid();
 
     /**

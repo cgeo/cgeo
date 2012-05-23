@@ -25,6 +25,7 @@ public class GoogleOtherCachersOverlayItem extends OverlayItem implements OtherC
         return marker;
     }
 
+    @Override
     public Go4CacheUser getUser() {
         return item.getUser();
     }

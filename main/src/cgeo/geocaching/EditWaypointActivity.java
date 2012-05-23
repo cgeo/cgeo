@@ -267,6 +267,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
     private class coordDialogListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             Geopoint gp = null;
             if (waypoint != null && waypoint.getCoords() != null) {
@@ -338,6 +339,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
     private class coordsListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             final String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
             // combine distance from EditText and distanceUnit saved from Spinner

@@ -203,6 +203,7 @@ public class cgeo extends AbstractActivity {
                     helper.setClickable(true);
                     helper.setOnClickListener(new View.OnClickListener() {
 
+                        @Override
                         public void onClick(View view) {
                             ActivityMixin.goManual(cgeo.this, "c:geo-intro");
                             view.setVisibility(View.GONE);
@@ -459,6 +460,7 @@ public class cgeo extends AbstractActivity {
         final View findOnMap = findViewById(R.id.map);
         findOnMap.setClickable(true);
         findOnMap.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View v) {
                 cgeoFindOnMap(v);
             }
@@ -467,6 +469,7 @@ public class cgeo extends AbstractActivity {
         final View findByOffline = findViewById(R.id.search_offline);
         findByOffline.setClickable(true);
         findByOffline.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View v) {
                 cgeoFindByOffline(v);
             }
@@ -476,6 +479,7 @@ public class cgeo extends AbstractActivity {
         final View advanced = findViewById(R.id.advanced_button);
         advanced.setClickable(true);
         advanced.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View v) {
                 cgeoSearch(v);
             }
@@ -484,6 +488,7 @@ public class cgeo extends AbstractActivity {
         final View any = findViewById(R.id.any_button);
         any.setClickable(true);
         any.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View v) {
                 cgeoPoint(v);
             }
@@ -493,6 +498,7 @@ public class cgeo extends AbstractActivity {
         filter.setClickable(true);
         registerForContextMenu(filter);
         filter.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 openContextMenu(v);
             }
@@ -518,6 +524,7 @@ public class cgeo extends AbstractActivity {
                 .setMessage(res.getString(R.string.init_restore_confirm))
                 .setCancelable(false)
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                         cgData.resetNewlyCreatedDatabase();
@@ -526,6 +533,7 @@ public class cgeo extends AbstractActivity {
                     }
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                         cgData.resetNewlyCreatedDatabase();
@@ -549,6 +557,7 @@ public class cgeo extends AbstractActivity {
                         nearestView.setFocusable(true);
                         nearestView.setClickable(true);
                         nearestView.setOnClickListener(new OnClickListener() {
+                            @Override
                             public void onClick(View v) {
                                 cgeoFindNearest(v);
                             }

@@ -18,10 +18,12 @@ public class GoogleCacheOverlayItem extends OverlayItem implements CachesOverlay
         this.coord = coordinate;
     }
 
+    @Override
     public IWaypoint getCoord() {
         return coord;
     }
 
+    @Override
     public CacheType getType() {
         return cacheType;
     }

@@ -802,6 +802,7 @@ public class cgCache implements ICache, IWaypoint {
         this.latlon = latlon;
     }
 
+    @Override
     public Geopoint getCoords() {
         return coords;
     }

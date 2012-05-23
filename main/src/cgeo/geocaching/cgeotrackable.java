@@ -143,6 +143,7 @@ public class cgeotrackable extends AbstractActivity {
                     spotted.setClickable(true);
                     if (cgTrackable.SPOTTED_CACHE == trackable.getSpottedType()) {
                         spotted.setOnClickListener(new View.OnClickListener() {
+                            @Override
                             public void onClick(View arg0) {
                                 CacheDetailActivity.startActivityGuid(cgeotrackable.this, trackable.getSpottedGuid(), trackable.getSpottedName());
                             }
@@ -197,6 +198,7 @@ public class cgeotrackable extends AbstractActivity {
                     trackableImage.setClickable(true);
                     trackableImage.setOnClickListener(new View.OnClickListener() {
 
+                        @Override
                         public void onClick(View arg0) {
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage())));
                         }
@@ -455,6 +457,7 @@ public class cgeotrackable extends AbstractActivity {
                     final String cacheGuid = log.cacheGuid;
                     final String cacheName = log.cacheName;
                     ((TextView) rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener() {
+                        @Override
                         public void onClick(View arg0) {
                             CacheDetailActivity.startActivityGuid(cgeotrackable.this, cacheGuid, Html.fromHtml(cacheName).toString());
                         }
@@ -498,6 +501,7 @@ public class cgeotrackable extends AbstractActivity {
 
     private class UserActionsListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View view) {
             if (view == null) {
                 return;

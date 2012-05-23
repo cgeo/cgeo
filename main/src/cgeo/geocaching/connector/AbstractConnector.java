@@ -36,6 +36,7 @@ public abstract class AbstractConnector implements IConnector {
         return false;
     }
 
+    @Override
     public SearchResult searchByViewport(Viewport viewport, String tokens[]) {
         return null;
     }

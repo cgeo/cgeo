@@ -279,6 +279,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         registerForContextMenu(typeButton);
         typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 openContextMenu(view);
             }
@@ -337,6 +338,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
     }
 
     private class cgeotouchDateListener implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             Dialog dateDialog = new DateDialog(cgeotouch.this, cgeotouch.this, date);
             dateDialog.setCancelable(true);
@@ -345,6 +347,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
     }
 
     private class postListener implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             if (!gettingViewstate) {
                 waitDialog = ProgressDialog.show(cgeotouch.this, null, res.getString(R.string.log_saving), true);

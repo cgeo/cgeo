@@ -12,6 +12,7 @@ abstract class AbstractFilter implements IFilter {
         this.name = name;
     }
 
+    @Override
     public void filter(List<cgCache> list) {
         final List<cgCache> itemsToRemove = new ArrayList<cgCache>();
         for (cgCache item : list) {

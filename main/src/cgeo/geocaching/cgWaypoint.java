@@ -159,6 +159,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         return "http://coord.info/" + geocode.toUpperCase();
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -167,6 +168,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         this.id = id;
     }
 
+    @Override
     public String getGeocode() {
         return geocode;
     }
@@ -175,6 +177,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         this.geocode = geocode;
     }
 
+    @Override
     public WaypointType getWaypointType() {
         return waypointType;
     }
@@ -187,6 +190,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         this.lookup = lookup;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -203,6 +207,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         this.latlon = latlon;
     }
 
+    @Override
     public Geopoint getCoords() {
         return coords;
     }

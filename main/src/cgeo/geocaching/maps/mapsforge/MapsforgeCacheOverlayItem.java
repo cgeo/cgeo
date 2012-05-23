@@ -20,10 +20,12 @@ public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOver
         this.coord = coordinate;
     }
 
+    @Override
     public IWaypoint getCoord() {
         return coord;
     }
 
+    @Override
     public CacheType getType() {
         return cacheType;
     }

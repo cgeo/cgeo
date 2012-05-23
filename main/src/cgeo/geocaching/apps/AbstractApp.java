@@ -38,6 +38,7 @@ public abstract class AbstractApp implements App {
         }
     }
 
+    @Override
     public boolean isInstalled() {
         if (getLaunchIntent() != null) {
             return true;

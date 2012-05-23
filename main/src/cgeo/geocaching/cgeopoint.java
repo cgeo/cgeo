@@ -284,6 +284,7 @@ public class cgeopoint extends AbstractActivity {
 
     private class coordDialogListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             Geopoint gp = null;
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
@@ -470,6 +471,7 @@ public class cgeopoint extends AbstractActivity {
 
     private class currentListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             final Geopoint coords = app.currentGeo().getCoords();
             if (coords == null) {

@@ -35,10 +35,12 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         this.keepScreenOn = keepScreenOn;
     }
 
+    @Override
     final public void goHome(final View view) {
         ActivityMixin.goHome(this);
     }
 
+    @Override
     public void goManual(final View view) {
         ActivityMixin.goManual(this, helpTopic);
     }
@@ -55,14 +57,17 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         ActivityMixin.setTheme(this);
     }
 
+    @Override
     public final void showToast(String text) {
         ActivityMixin.showToast(this, text);
     }
 
+    @Override
     public final void showShortToast(String text) {
         ActivityMixin.showShortToast(this, text);
     }
 
+    @Override
     public final void helpDialog(final String title, final String message) {
         ActivityMixin.helpDialog(this, title, message);
     }
@@ -97,6 +102,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         Compatibility.restartActivity(this);
     }
 
+    @Override
     public void invalidateOptionsMenuCompatible() {
         ActivityMixin.invalidateOptionsMenu(this);
     }

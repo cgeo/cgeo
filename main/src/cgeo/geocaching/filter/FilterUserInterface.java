@@ -79,6 +79,7 @@ public final class FilterUserInterface {
         final ArrayAdapter<FactoryEntry> adapter = new ArrayAdapter<FactoryEntry>((Activity) activity, android.R.layout.select_dialog_item, registry);
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int itemIndex) {
                 FactoryEntry entry = adapter.getItem(itemIndex);
                 // reset?
@@ -111,6 +112,7 @@ public final class FilterUserInterface {
 
         final ArrayAdapter<IFilter> adapter = new ArrayAdapter<IFilter>((Activity) activity, android.R.layout.select_dialog_item, filters);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int item) {
                 runAfterwards.run(filters[item]);
             }

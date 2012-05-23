@@ -79,6 +79,7 @@ public class MapfileListAdapter extends ArrayAdapter<File> {
         }
 
         // tap on item
+        @Override
         public void onClick(View view) {
             parentView.setMapfile(file.toString());
             parentView.close();

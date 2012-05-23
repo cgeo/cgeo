@@ -177,6 +177,7 @@ public class CachePopup extends AbstractPopupActivity {
     }
 
     private class RefreshCacheClickListener implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             if (progress.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_working));

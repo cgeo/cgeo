@@ -239,6 +239,7 @@ public class SettingsActivity extends AbstractActivity {
         legalNote.setClickable(true);
         legalNote.setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View arg0) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
             }
@@ -255,6 +256,7 @@ public class SettingsActivity extends AbstractActivity {
         go4cache.setClickable(true);
         go4cache.setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View arg0) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://go4cache.com/")));
             }
@@ -274,6 +276,7 @@ public class SettingsActivity extends AbstractActivity {
         Button authorizeTwitter = (Button) findViewById(R.id.authorize_twitter);
         authorizeTwitter.setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View arg0) {
                 Intent authIntent = new Intent(SettingsActivity.this, TwitterAuthorizationActivity.class);
                 startActivity(authIntent);
@@ -303,6 +306,7 @@ public class SettingsActivity extends AbstractActivity {
         }
         Button sigBtn = (Button) findViewById(R.id.signature_help);
         sigBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 helpDialog(res.getString(R.string.init_signature_help_title), res.getString(R.string.init_signature_help_text));
             }
@@ -310,6 +314,7 @@ public class SettingsActivity extends AbstractActivity {
         Button templates = (Button) findViewById(R.id.signature_template);
         registerForContextMenu(templates);
         templates.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 enableTemplatesMenu = true;
                 openContextMenu(v);
@@ -824,6 +829,7 @@ public class SettingsActivity extends AbstractActivity {
 
     private class logIn implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             final String username = ((EditText) findViewById(R.id.username)).getText().toString();
             final String password = ((EditText) findViewById(R.id.password)).getText().toString();
@@ -857,6 +863,7 @@ public class SettingsActivity extends AbstractActivity {
 
     private class webAuth implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             final String deviceName = ((EditText) findViewById(R.id.webDeviceName)).getText().toString();
             final String deviceCode = Settings.getWebDeviceCode();

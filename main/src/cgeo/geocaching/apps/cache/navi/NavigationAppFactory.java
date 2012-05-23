@@ -131,6 +131,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<NavigationAppsEnum>(activity, android.R.layout.select_dialog_item, items);
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int item) {
                 NavigationAppsEnum selectedItem = adapter.getItem(item);
                 selectedItem.app.invoke(activity, cache, waypoint, destination);

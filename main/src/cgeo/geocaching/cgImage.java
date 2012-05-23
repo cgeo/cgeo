@@ -42,6 +42,7 @@ public class cgImage implements Parcelable {
     }
 
     public static final Parcelable.Creator<cgImage> CREATOR = new Parcelable.Creator<cgImage>() {
+        @Override
         public cgImage createFromParcel(Parcel in) {
             return new cgImage(in);
         }

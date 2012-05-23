@@ -58,6 +58,7 @@ public class cgTrackable implements ILogable {
         this.guid = guid;
     }
 
+    @Override
     public String getGeocode() {
         return geocode;
     }
@@ -74,6 +75,7 @@ public class cgTrackable implements ILogable {
         this.iconUrl = iconUrl;
     }
 
+    @Override
     public String getName() {
         return name;
     }

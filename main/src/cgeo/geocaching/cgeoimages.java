@@ -117,6 +117,7 @@ public class cgeoimages extends AbstractActivity {
                 image_view.setClickable(true);
                 image_view.setOnClickListener(new View.OnClickListener() {
 
+                    @Override
                     public void onClick(View arg0) {
                         viewImageInStandardApp(image);
                     }

@@ -127,6 +127,7 @@ public final class CalendarActivity extends Activity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.calendars);
         builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int item) {
                 final int calendarId = calendars.keyAt(item);
                 addToCalendar(calendarId);

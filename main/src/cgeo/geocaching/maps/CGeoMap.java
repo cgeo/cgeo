@@ -658,6 +658,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     waitDialog.setMax(detailTotal);
                     waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
+                        @Override
                         public void onCancel(DialogInterface arg0) {
                             try {
                                 if (loadDetailsThread != null) {
@@ -1319,6 +1320,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             this.viewport = viewport;
         }
 
+        @Override
         public abstract void run();
     }
 
@@ -1501,6 +1503,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     // set my location listener
     private class MyLocationListener implements View.OnClickListener {
+        @Override
         public void onClick(View view) {
             followMyLocation = !followMyLocation;
             switchMyLocationButton();

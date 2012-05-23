@@ -25,6 +25,7 @@ public class MapsforgeOtherCachersOverlayItem extends OverlayItem implements Oth
         return marker;
     }
 
+    @Override
     public Go4CacheUser getUser() {
         return item.getUser();
     }

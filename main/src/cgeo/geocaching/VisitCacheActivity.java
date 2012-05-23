@@ -126,6 +126,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     registerForContextMenu(inventoryItem);
                     inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
 
+                        @Override
                         public void onClick(View view) {
                             final Intent trackablesIntent = new Intent(VisitCacheActivity.this, cgeotrackable.class);
                             trackablesIntent.putExtra(EXTRAS_GEOCODE, tbCode);
@@ -134,6 +135,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     });
                     inventoryItem.findViewById(R.id.action).setOnClickListener(new View.OnClickListener() {
 
+                        @Override
                         public void onClick(View view) {
                             openContextMenu(view);
                         }
@@ -158,6 +160,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     registerForContextMenu(changeButton);
                     changeButton.setOnClickListener(new View.OnClickListener() {
 
+                        @Override
                         public void onClick(View view) {
                             openContextMenu(view);
                         }
@@ -500,6 +503,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View view) {
                 openContextMenu(view);
             }
@@ -569,6 +573,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     private class DateListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             final Dialog dateDialog = new DateDialog(VisitCacheActivity.this, VisitCacheActivity.this, date);
             dateDialog.setCancelable(true);
@@ -578,6 +583,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     private class PostListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             if (!gettingViewstate) {
                 waitDialog = ProgressDialog.show(VisitCacheActivity.this, null, res.getString(R.string.log_saving), true);
@@ -594,6 +600,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     private class ClearListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             app.clearLogOffline(geocode);
 

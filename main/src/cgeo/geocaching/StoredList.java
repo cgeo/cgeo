@@ -70,6 +70,7 @@ public class StoredList {
             AlertDialog.Builder builder = new AlertDialog.Builder((Activity) activity);
             builder.setTitle(res.getString(titleId));
             builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialogInterface, int itemId) {
                     if (itemId == lists.size() && !onlyMoveTargets) {
                         // all lists
@@ -116,6 +117,7 @@ public class StoredList {
             alert.setTitle(dialogTitle);
             alert.setView(view);
             alert.setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int whichButton) {
                     // remove whitespaces added by autocompletion of Android keyboard
                     String listName = StringUtils.trim(input.getText().toString());
@@ -125,6 +127,7 @@ public class StoredList {
                 }
             });
             alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int whichButton) {
                     dialog.dismiss();
                 }

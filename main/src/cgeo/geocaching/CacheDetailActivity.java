@@ -810,6 +810,7 @@ public class CacheDetailActivity extends AbstractActivity {
                             .append(res.getString(R.string.addon_download_prompt))
                             .toString())
                     .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(Intent.ACTION_VIEW);
                             intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
@@ -817,6 +818,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
                     })
                     .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                         }
@@ -863,6 +865,7 @@ public class CacheDetailActivity extends AbstractActivity {
      */
     private class UserActionsClickListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View view) {
             if (view == null) {
                 return;
@@ -881,6 +884,7 @@ public class CacheDetailActivity extends AbstractActivity {
      */
     private class OwnerActionsClickListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View view) {
             if (view == null) {
                 return;
@@ -911,6 +915,7 @@ public class CacheDetailActivity extends AbstractActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(res.getString(R.string.user_menu_title) + " " + name);
         builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
@@ -1509,6 +1514,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         private class StoreCacheClickListener implements View.OnClickListener {
+            @Override
             public void onClick(View arg0) {
                 if (progress.isShowing()) {
                     showToast(res.getString(R.string.err_detail_still_working));
@@ -1529,6 +1535,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         private class RefreshCacheClickListener implements View.OnClickListener {
+            @Override
             public void onClick(View arg0) {
                 if (progress.isShowing()) {
                     showToast(res.getString(R.string.err_detail_still_working));
@@ -1577,6 +1584,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         private class DropCacheClickListener implements View.OnClickListener {
+            @Override
             public void onClick(View arg0) {
                 if (progress.isShowing()) {
                     showToast(res.getString(R.string.err_detail_still_working));
@@ -1628,6 +1636,7 @@ public class CacheDetailActivity extends AbstractActivity {
          * Listener for "add to watchlist" button
          */
         private class AddToWatchlistClickListener extends AbstractWatchlistClickListener {
+            @Override
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
@@ -1639,6 +1648,7 @@ public class CacheDetailActivity extends AbstractActivity {
          * Listener for "remove from watchlist" button
          */
         private class RemoveFromWatchlistClickListener extends AbstractWatchlistClickListener {
+            @Override
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
@@ -1882,6 +1892,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     Button showDesc = (Button) view.findViewById(R.id.show_description);
                     showDesc.setVisibility(View.VISIBLE);
                     showDesc.setOnClickListener(new View.OnClickListener() {
+                        @Override
                         public void onClick(View arg0) {
                             loadLongDescription();
                         }

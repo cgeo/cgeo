@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 public class DecryptTextClickListener implements View.OnClickListener {
 
+    @Override
     public void onClick(View view) {
         if (view == null) {
             return;

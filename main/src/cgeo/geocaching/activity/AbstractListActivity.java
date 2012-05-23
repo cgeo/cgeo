@@ -33,10 +33,12 @@ public abstract class AbstractListActivity extends ListActivity implements
         this.helpTopic = helpTopic;
     }
 
+    @Override
     final public void goHome(View view) {
         ActivityMixin.goHome(this);
     }
 
+    @Override
     public void goManual(View view) {
         ActivityMixin.goManual(this, helpTopic);
     }
@@ -49,14 +51,17 @@ public abstract class AbstractListActivity extends ListActivity implements
         ActivityMixin.setTheme(this);
     }
 
+    @Override
     public final void showToast(String text) {
         ActivityMixin.showToast(this, text);
     }
 
+    @Override
     public final void showShortToast(String text) {
         ActivityMixin.showShortToast(this, text);
     }
 
+    @Override
     public final void helpDialog(final String title, final String message) {
         ActivityMixin.helpDialog(this, title, message, null);
     }

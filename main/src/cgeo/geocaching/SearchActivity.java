@@ -255,6 +255,7 @@ public class SearchActivity extends AbstractActivity {
 
     private class findByCoordsListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             findByCoordsFn();
         }
@@ -283,6 +284,7 @@ public class SearchActivity extends AbstractActivity {
 
     private class findByKeywordListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             findByKeywordFn();
         }
@@ -301,6 +303,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private class findByAddressListener implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             findByAddressFn();
         }
@@ -321,6 +324,7 @@ public class SearchActivity extends AbstractActivity {
 
     private class findByUsernameListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             findByUsernameFn();
         }
@@ -354,6 +358,7 @@ public class SearchActivity extends AbstractActivity {
 
     private class findByGeocodeListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             findByGeocodeFn();
         }
@@ -372,6 +377,7 @@ public class SearchActivity extends AbstractActivity {
 
     private class findTrackableListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             findTrackableFn();
         }
