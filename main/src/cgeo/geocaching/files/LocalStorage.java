@@ -3,9 +3,9 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
 
+import ch.boye.httpclientandroidlib.Header;
+import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
 
 import android.os.Environment;
 

@@ -12,8 +12,7 @@ import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.http.HttpResponse;
-
+import ch.boye.httpclientandroidlib.HttpResponse;
 
 public final class Twitter {
     public static final int MAX_TWEET_SIZE = 140;

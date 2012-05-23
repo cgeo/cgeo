@@ -1,10 +1,10 @@
 package cgeo.geocaching.network;
 
+import ch.boye.httpclientandroidlib.client.CookieStore;
+import ch.boye.httpclientandroidlib.cookie.Cookie;
+import ch.boye.httpclientandroidlib.impl.client.BasicCookieStore;
+import ch.boye.httpclientandroidlib.impl.cookie.BasicClientCookie;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.cookie.BasicClientCookie;
 
 public abstract class Cookies {
 

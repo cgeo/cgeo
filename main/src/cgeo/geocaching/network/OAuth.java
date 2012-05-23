@@ -3,8 +3,8 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 
+import ch.boye.httpclientandroidlib.NameValuePair;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.NameValuePair;
 
 import java.util.ArrayList;
 import java.util.Date;

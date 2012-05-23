@@ -11,10 +11,10 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.http.HttpResponse;
 
 import android.graphics.drawable.BitmapDrawable;
 

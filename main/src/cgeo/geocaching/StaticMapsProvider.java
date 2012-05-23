@@ -7,9 +7,9 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
 
 import android.app.Activity;
 import android.content.Context;

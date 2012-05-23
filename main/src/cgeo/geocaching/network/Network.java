@@ -4,33 +4,36 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
+import ch.boye.httpclientandroidlib.Header;
+import ch.boye.httpclientandroidlib.HeaderElement;
+import ch.boye.httpclientandroidlib.HttpEntity;
+import ch.boye.httpclientandroidlib.HttpException;
+import ch.boye.httpclientandroidlib.HttpRequest;
+import ch.boye.httpclientandroidlib.HttpRequestInterceptor;
+import ch.boye.httpclientandroidlib.HttpResponse;
+import ch.boye.httpclientandroidlib.HttpResponseInterceptor;
+import ch.boye.httpclientandroidlib.NameValuePair;
+import ch.boye.httpclientandroidlib.ProtocolException;
+import ch.boye.httpclientandroidlib.client.HttpClient;
+import ch.boye.httpclientandroidlib.client.entity.GzipDecompressingEntity;
+import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
+import ch.boye.httpclientandroidlib.client.methods.HttpGet;
+import ch.boye.httpclientandroidlib.client.methods.HttpPost;
+import ch.boye.httpclientandroidlib.client.methods.HttpRequestBase;
+import ch.boye.httpclientandroidlib.client.params.ClientPNames;
+import ch.boye.httpclientandroidlib.entity.mime.MultipartEntity;
+import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
+import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
+import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
+import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
+import ch.boye.httpclientandroidlib.params.BasicHttpParams;
+import ch.boye.httpclientandroidlib.params.CoreConnectionPNames;
+import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
+import ch.boye.httpclientandroidlib.params.HttpParams;
+import ch.boye.httpclientandroidlib.protocol.HTTP;
+import ch.boye.httpclientandroidlib.protocol.HttpContext;
+import ch.boye.httpclientandroidlib.util.EntityUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
-import org.apache.http.HeaderElement;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpException;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpRequestInterceptor;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpResponseInterceptor;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.entity.HttpEntityWrapper;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,30 +41,10 @@ import android.net.Uri;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.zip.GZIPInputStream;
 
 public abstract class Network {
-
-    static class GzipDecompressingEntity extends HttpEntityWrapper {
-        public GzipDecompressingEntity(final HttpEntity entity) {
-            super(entity);
-        }
-
-        @Override
-        public InputStream getContent() throws IOException, IllegalStateException {
-            // the wrapped entity's getContent() decides about repeatability
-            return new GZIPInputStream(wrappedEntity.getContent());
-        }
-
-        @Override
-        public long getContentLength() {
-            // length of gunzipped content is not known
-            return -1;
-        }
-    }
 
     private static final int NB_DOWNLOAD_RETRIES = 4;
     /** User agent id */
@@ -74,6 +57,7 @@ public abstract class Network {
         Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
         Network.clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
         Network.clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
+        Network.clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
     }
 
     private static String hidePassword(final String message) {
@@ -84,6 +68,24 @@ public abstract class Network {
         final DefaultHttpClient client = new DefaultHttpClient();
         client.setCookieStore(Cookies.cookieStore);
         client.setParams(clientParams);
+
+        client.setRedirectStrategy(new DefaultRedirectStrategy() {
+            public boolean isRedirected(HttpRequest request, HttpResponse response, HttpContext context) {
+                boolean isRedirect = false;
+                try {
+                    isRedirect = super.isRedirected(request, response, context);
+                } catch (final ProtocolException e) {
+                    Log.e("httpclient.isRedirected: unable to check for redirection", e);
+                }
+                if (!isRedirect) {
+                    final int responseCode = response.getStatusLine().getStatusCode();
+                    if (responseCode == 301 || responseCode == 302) {
+                        return true;
+                    }
+                }
+                return isRedirect;
+            }
+        });
 
         client.addRequestInterceptor(new HttpRequestInterceptor() {
 

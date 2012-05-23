@@ -8,7 +8,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.http.HttpResponse;
+import ch.boye.httpclientandroidlib.HttpResponse;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
