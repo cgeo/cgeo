@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
  *
  * For further information about patterns have a look at
  * http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html
- *
- * @author blafoo
  */
 public final class GCConstants {
 

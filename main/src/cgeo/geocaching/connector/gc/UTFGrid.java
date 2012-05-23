@@ -4,8 +4,6 @@ import java.util.List;
 
 /**
  * 
- * @author blafoo
- * 
  * @see <a href="https://github.com/mapbox/mbtiles-spec/blob/master/1.1/utfgrid.md">Mapbox</a>
  * 
  */

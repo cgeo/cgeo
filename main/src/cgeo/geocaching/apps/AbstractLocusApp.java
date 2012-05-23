@@ -53,7 +53,6 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @param withCacheWaypoints
      *            wether to give waypoints of caches to Locus or not
      * @param activity
-     * @author koem
      */
     protected static boolean showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
             final Activity activity) {
@@ -103,7 +102,6 @@ public abstract class AbstractLocusApp extends AbstractApp {
      *            whether to give cache details (description, hint) to Locus or not
      *            should be false for all if more then 200 Caches are transferred
      * @return null, when the <code>Point</code> could not be constructed
-     * @author koem
      */
     private static Point getCachePoint(cgCache cache, boolean withWaypoints, boolean withCacheDetails) {
         if (cache == null || cache.getCoords() == null) {
@@ -182,7 +180,6 @@ public abstract class AbstractLocusApp extends AbstractApp {
      *
      * @param waypoint
      * @return null, when the <code>Point</code> could not be constructed
-     * @author koem
      */
     private static Point getWaypointPoint(cgWaypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {

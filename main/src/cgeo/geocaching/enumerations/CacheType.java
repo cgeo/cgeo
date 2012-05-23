@@ -9,8 +9,6 @@ import java.util.Map;
 
 /**
  * Enum listing all cache types
- *
- * @author koem
  */
 public enum CacheType {
 

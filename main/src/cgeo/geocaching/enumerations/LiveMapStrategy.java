@@ -7,9 +7,6 @@ import java.util.EnumSet;
 
 /**
  * Defines the strategy for the Live Map
- *
- * @author blafoo
- *
  */
 public interface LiveMapStrategy {
 

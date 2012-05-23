@@ -8,9 +8,6 @@ import android.app.Activity;
 
 /**
  * navigation app for simple point navigation (no differentiation between cache/waypoint/point)
- *
- * @author bananeweizen
- *
  */
 abstract class AbstractPointNavigationApp extends AbstractNavigationApp {
 

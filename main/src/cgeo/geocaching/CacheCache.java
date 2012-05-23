@@ -16,8 +16,6 @@ import java.util.Set;
 /**
  * Cache for Caches. Every cache is stored in memory while c:geo is active to
  * speed up the app and to minimize network request - which are slow.
- *
- * @author blafoo
  */
 public class CacheCache {
 

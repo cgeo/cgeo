@@ -25,7 +25,6 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
      * show caches in Locus
      *
      * @see AbstractLocusApp#showInLocus
-     * @author koem
      */
     @Override
     public boolean invoke(List<cgCache> cacheList, Activity activity, final SearchResult search) {

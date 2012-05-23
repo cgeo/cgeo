@@ -11,8 +11,6 @@ import java.util.Set;
 
 /**
  * Enum listing waypoint types
- *
- * @author koem
  */
 public enum WaypointType {
     FINAL("flag", R.string.wp_final, R.drawable.waypoint_flag),

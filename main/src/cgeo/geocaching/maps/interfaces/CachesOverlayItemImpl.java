@@ -6,9 +6,6 @@ import cgeo.geocaching.enumerations.CacheType;
 /**
  * Covers the common functions of the provider-specific
  * CacheOverlayItem implementations
- *
- * @author rsudev
- *
  */
 public interface CachesOverlayItemImpl extends OverlayItemImpl {
 

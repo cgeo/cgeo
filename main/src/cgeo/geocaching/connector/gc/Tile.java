@@ -22,8 +22,6 @@ import java.util.Set;
 /**
  * All about tiles.
  *
- * @author blafoo
- *
  * @see <a href="http://msdn.microsoft.com/en-us/library/bb259689.aspx">MSDN</a>
  * @see <a
  *      href="http://svn.openstreetmap.org/applications/viewer/jmapviewer/src/org/openstreetmap/gui/jmapviewer/OsmMercator.java">OSM</a>

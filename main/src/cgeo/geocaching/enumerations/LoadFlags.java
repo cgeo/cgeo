@@ -4,8 +4,6 @@ import java.util.EnumSet;
 
 /**
  * Cache loading/saving/removing parameters
- *
- * @author blafoo
  */
 public interface LoadFlags {
 

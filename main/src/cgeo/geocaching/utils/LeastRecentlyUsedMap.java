@@ -13,9 +13,6 @@ import java.util.Map;
  * <li> BOUNDED means that objects are updated only when they are put,
  *      so the objects that are dropped are the ones that haven't been written the longest</li>
  * </ul>
- *
- * @author blafoo
- * @author Teschi
  */
 public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
 
@@ -119,8 +116,6 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
     /**
      * Interface for handlers that wish to get notified when items are
      * removed from the LRUMap
-     *
-     * @author rsudev
      *
      * @param <V>
      */

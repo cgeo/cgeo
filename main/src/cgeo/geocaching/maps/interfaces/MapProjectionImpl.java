@@ -5,9 +5,6 @@ import android.graphics.Point;
 /**
  * Defines common functions of the provider-specific
  * MapProjection implementations
- *
- * @author rsudev
- *
  */
 public interface MapProjectionImpl {
 

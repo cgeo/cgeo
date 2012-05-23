@@ -11,9 +11,6 @@ import java.util.Map;
 
 /**
  * Basic interface for caches
- *
- * @author blafoo
- *
  */
 public interface ICache extends IBasicCache {
 

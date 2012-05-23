@@ -7,9 +7,6 @@ import java.util.Map;
 /**
  * Defines functions of a factory class to get implementation specific objects
  * (GeoPoints, OverlayItems, ...)
- *
- * @author rsudev
- *
  */
 public interface MapProvider {
 

@@ -3,9 +3,6 @@ package cgeo.geocaching.maps.interfaces;
 /**
  * Defines the common functions of the provider-specific
  * MapController implementations
- *
- * @author rsudev
- *
  */
 public interface MapControllerImpl {
 

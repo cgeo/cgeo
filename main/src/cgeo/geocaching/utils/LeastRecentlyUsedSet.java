@@ -16,8 +16,6 @@ import java.util.List;
  * Synchronization is added to guard against concurrent modification. Iterator
  * access has to be guarded externally or the synchronized getAsList method can be used
  * to get a clone for iteration
- * 
- * @author Teschi
  */
 public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
         implements Cloneable, java.io.Serializable {

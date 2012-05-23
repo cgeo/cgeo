@@ -4,9 +4,6 @@ import android.app.Activity;
 
 /**
  * Android level 11 support
- * 
- * @author bananeweizen
- * 
  */
 public class AndroidLevel11 implements AndroidLevel11Interface {
 

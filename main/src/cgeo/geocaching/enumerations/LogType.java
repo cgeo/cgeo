@@ -11,8 +11,6 @@ import java.util.Map;
 
 /**
  * Different log types
- *
- * @author blafoo
  */
 public enum LogType {
 

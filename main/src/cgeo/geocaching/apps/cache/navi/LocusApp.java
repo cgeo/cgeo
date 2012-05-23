@@ -16,7 +16,6 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
      * This method constructs a list of cache and waypoints only.
      *
      * @see AbstractLocusApp#showInLocus
-     * @author koem
      */
     @Override
     public boolean invoke(Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint coords) {

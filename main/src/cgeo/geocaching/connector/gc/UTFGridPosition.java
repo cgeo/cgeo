@@ -6,9 +6,6 @@ import java.util.regex.Pattern;
 
 /**
  * Representation of a position inside an UTFGrid
- *
- * @author blafoo
- *
  */
 public final class UTFGridPosition {
 

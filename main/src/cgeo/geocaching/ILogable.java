@@ -3,11 +3,6 @@
  */
 package cgeo.geocaching;
 
-
-/**
- * @author blafoo
- *
- */
 public interface ILogable {
 
     /**

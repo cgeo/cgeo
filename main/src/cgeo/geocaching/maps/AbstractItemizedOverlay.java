@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayItemImpl;
 
@@ -14,9 +14,6 @@ import android.graphics.drawable.Drawable;
 /**
  * Base class for itemized overlays. Delegates calls from deriving classes to the contained
  * provider-specific implementation.
- *
- * @author rsudev
- *
  */
 public abstract class AbstractItemizedOverlay implements GeneralOverlay {
 
