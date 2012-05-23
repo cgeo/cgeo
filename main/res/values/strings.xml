@@ -1076,6 +1076,7 @@
     · Watchlist status shown correct\n
     · Faster reaction when opening popup on map\n
     · Hiding of found/owned caches on map corrected\n
+    · Show all stored caches on map (limit of 500 caches removed)\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
