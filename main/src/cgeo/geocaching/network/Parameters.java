@@ -3,7 +3,6 @@ package cgeo.geocaching.network;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.client.utils.URLEncodedUtils;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
-import ch.boye.httpclientandroidlib.protocol.HTTP;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class Parameters extends ArrayList<NameValuePair> {
 
     @Override
     public String toString() {
-        return URLEncodedUtils.format(this, HTTP.UTF_8);
+        return URLEncodedUtils.format(this, "UTF-8");
     }
 
     /**
