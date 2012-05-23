@@ -917,7 +917,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (mapView != null) {
                         // get current viewport
                         final Viewport viewportNow = mapView.getViewport();
-                        int zoomNow = mapView.getMapZoomLevel();
+                        // Since zoomNow is used only for local comparison purposes,
+                        // it is ok to use the Google Maps compatible zoom level of OSM Maps
+                        final int zoomNow = mapView.getMapZoomLevel();
 
                         // check if map moved or zoomed
                         //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
