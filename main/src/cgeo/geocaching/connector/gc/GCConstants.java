@@ -161,7 +161,6 @@ public final class GCConstants {
     public final static String STRING_UNPUBLISHED_OWNER = "Cache is Unpublished";
     public final static String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
     public final static String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
-    public final static String STRING_CACHEINFORMATIONTABLE = "<div id=\"ctl00_ContentBody_CacheInformationTable\" class=\"CacheInformationTable\">";
     public final static String STRING_DISABLED = "<li>This cache is temporarily unavailable.";
     public final static String STRING_ARCHIVED = "<li>This cache has been archived,";
     public final static String STRING_CACHEDETAILS = "id=\"cacheDetails\"";

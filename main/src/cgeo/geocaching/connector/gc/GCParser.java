@@ -391,14 +391,6 @@ public abstract class GCParser {
 
         tableInside = tableInside.substring(pos);
 
-        pos = tableInside.indexOf(GCConstants.STRING_CACHEINFORMATIONTABLE);
-        if (pos == -1) {
-            Log.e("GCParser.parseCache: class \"CacheInformationTable\" not found on page");
-            return null;
-        }
-
-        tableInside = tableInside.substring(0, pos);
-
         if (StringUtils.isNotBlank(tableInside)) {
             // cache terrain
             String result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_TERRAIN, true, null);
