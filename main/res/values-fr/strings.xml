@@ -221,6 +221,7 @@
   <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
   <string name="warn_invalid_mapfile">Le fichier sélectionné n\'est pas un fichier de carte mapsforge version 0.3.0.\nLes cartes hors-lignes ne sont pas disponibles.</string>
   <string name="warn_deprecated_mapfile">Vous utilisez un fichier de carte obsolète de version 0.2.4.\nVous devriez charger sans tarder une carte version 0.3.\nLe support des cartes 0.2.4 disparaîtra dans une prochaine version de c:geo.</string>
+  <string name="warn_nonexistant_mapfile">Le fichier de carte spécifié n\'existe pas.\nLes cartes hors ligne ne sont pas disponibles.</string>
 
   <string name="info_log_posted">Envoi de la visite réussi.</string>
   <string name="info_log_saved">Sauvegarde de la visite réussie.</string>
