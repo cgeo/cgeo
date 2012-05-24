@@ -21,7 +21,7 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    protected void navigate(Activity activity, Geopoint point) {
+    public void navigate(Activity activity, Geopoint point) {
         // INFO: q parameter works with Google Maps, but breaks cooperation with all other apps
         try {
             activity.startActivity(new Intent(Intent.ACTION_VIEW,

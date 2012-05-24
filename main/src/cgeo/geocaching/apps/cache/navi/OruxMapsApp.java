@@ -15,7 +15,7 @@ class OruxMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    protected void navigate(Activity activity, Geopoint point) {
+    public void navigate(Activity activity, Geopoint point) {
         final Intent intent = new Intent(INTENT);
         intent.putExtra("latitude", point.getLatitude());//latitude, wgs84 datum
         intent.putExtra("longitude", point.getLongitude());//longitude, wgs84 datum

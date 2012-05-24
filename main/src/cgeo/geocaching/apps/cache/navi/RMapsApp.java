@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
@@ -11,7 +12,7 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 
-class RMapsApp extends AbstractNavigationApp {
+class RMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
 
     private static final String INTENT = "com.robert.maps.action.SHOW_POINTS";
 
@@ -20,29 +21,30 @@ class RMapsApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean invoke(Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint coords) {
-        try {
-            final ArrayList<String> locations = new ArrayList<String>();
-            if (cache != null && cache.getCoords() != null) {
-                locations.add(cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA)
-                        + ";" + cache.getGeocode()
-                        + ";" + cache.getName());
-            } else if (waypoint != null && waypoint.getCoords() != null) {
-                locations.add(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA)
-                        + ";" + waypoint.getLookup()
-                        + ";" + waypoint.getName());
-            }
+    public void navigate(Activity activity, cgWaypoint waypoint) {
+        navigate(activity, waypoint.getCoords(), waypoint.getLookup(), waypoint.getName());
+    }
 
-            if (!locations.isEmpty()) {
-                final Intent intent = new Intent(INTENT);
-                intent.putStringArrayListExtra("locations", locations);
-                activity.startActivity(intent);
-                return true;
-            }
-        } catch (Exception e) {
-            // nothing
-        }
+    private static void navigate(Activity activity, Geopoint coords, String code, String name) {
+        final ArrayList<String> locations = new ArrayList<String>();
+        locations.add(coords.format(Format.LAT_LON_DECDEGREE_COMMA) + ";" + code + ";" + name);
+        final Intent intent = new Intent(INTENT);
+        intent.putStringArrayListExtra("locations", locations);
+        activity.startActivity(intent);
+    }
 
-        return false;
+    @Override
+    public boolean isEnabled(cgWaypoint waypoint) {
+        return waypoint.getCoords() != null;
+    }
+
+    @Override
+    public void navigate(Activity activity, cgCache cache) {
+        navigate(activity, cache.getCoords(), cache.getGeocode(), cache.getName());
+    }
+
+    @Override
+    public void navigate(Activity activity, Geopoint coords) {
+        navigate(activity, coords, "", "");
     }
 }

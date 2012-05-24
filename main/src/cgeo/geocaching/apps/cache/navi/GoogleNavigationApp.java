@@ -3,8 +3,6 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -14,7 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
-class GoogleNavigationApp extends AbstractNavigationApp {
+class GoogleNavigationApp extends AbstractPointNavigationApp {
 
     GoogleNavigationApp() {
         super(getString(R.string.cache_menu_tbt), null);
@@ -25,33 +23,8 @@ class GoogleNavigationApp extends AbstractNavigationApp {
         return true;
     }
 
-    @Override
-    public boolean invoke(final Activity activity, final cgCache cache, final cgWaypoint waypoint, final Geopoint coords) {
-        if (activity == null) {
-            return false;
-        }
-
+    private static boolean navigateToCoordinates(Activity activity, final Geopoint coords) {
         IGeoData geo = cgeoapplication.getInstance().currentGeo();
-        boolean navigationResult = false;
-        if (coords != null) {
-            navigationResult = navigateToCoordinates(geo, activity, coords);
-        }
-        else if (waypoint != null) {
-            navigationResult = navigateToCoordinates(geo, activity, waypoint.getCoords());
-        }
-        else if (cache != null) {
-            navigationResult = navigateToCoordinates(geo, activity, cache.getCoords());
-        }
-
-        if (!navigationResult) {
-            ActivityMixin.showToast(activity, getString(R.string.err_navigation_no));
-            return false;
-        }
-
-        return true;
-    }
-
-    private static boolean navigateToCoordinates(IGeoData geo, Activity activity, final Geopoint coords) {
         final Geopoint coordsNow = geo == null ? null : geo.getCoords();
 
         // Google Navigation
@@ -89,4 +62,10 @@ class GoogleNavigationApp extends AbstractNavigationApp {
         return false;
     }
 
+    @Override
+    public void navigate(Activity activity, Geopoint coords) {
+        if (!navigateToCoordinates(activity, coords)) {
+            ActivityMixin.showToast(activity, getString(R.string.err_navigation_no));
+        }
+    }
 }

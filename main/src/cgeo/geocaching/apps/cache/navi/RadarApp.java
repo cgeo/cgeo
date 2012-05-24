@@ -16,7 +16,7 @@ class RadarApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    protected void navigate(Activity activity, Geopoint point) {
+    public void navigate(Activity activity, Geopoint point) {
         final Intent radarIntent = new Intent(INTENT);
         radarIntent.putExtra("latitude", (float) point.getLatitude());
         radarIntent.putExtra("longitude", (float) point.getLongitude());
