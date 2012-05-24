@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -63,7 +64,7 @@ public abstract class Login {
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
-            Log.e("cgeoBase.login: No login information stored");
+            Log.e("Login.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
@@ -75,7 +76,7 @@ public abstract class Login {
         }
 
         if (StringUtils.isBlank(loginData)) {
-            Log.e("cgeoBase.login: Failed to retrieve login page (1st)");
+            Log.e("Login.login: Failed to retrieve login page (1st)");
             return StatusCode.CONNECTION_FAILED; // no loginpage
         }
 
@@ -97,7 +98,7 @@ public abstract class Login {
                 "ctl00$ContentBody$btnSignIn", "Login");
         final String[] viewstates = Login.getViewstates(loginData);
         if (isEmpty(viewstates)) {
-            Log.e("cgeoBase.login: Failed to find viewstates");
+            Log.e("Login.login: Failed to find viewstates");
             return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
         }
         Login.putViewstates(params, viewstates);
@@ -106,7 +107,7 @@ public abstract class Login {
         loginData = Network.getResponseData(loginResponse);
 
         if (StringUtils.isBlank(loginData)) {
-            Log.e("cgeoBase.login: Failed to retrieve login page (2nd)");
+            Log.e("Login.login: Failed to retrieve login page (2nd)");
             // FIXME: should it be CONNECTION_FAILED to match the first attempt?
             return StatusCode.COMMUNICATION_ERROR; // no login page
         }
@@ -181,7 +182,7 @@ public abstract class Login {
      */
     public static boolean getLoginStatus(final String page) {
         if (StringUtils.isBlank(page)) {
-            Log.e("cgeoBase.checkLogin: No page given");
+            Log.e("Login.checkLogin: No page given");
             return false;
         }
 
@@ -265,7 +266,7 @@ public abstract class Login {
         final String result = Network.getResponseData(Network.getRequest("http://www.geocaching.com/account/ManagePreferences.aspx"));
 
         if (null == result) {
-            Log.w("cgeoBase.detectGcCustomDate: result is null");
+            Log.w("Login.detectGcCustomDate: result is null");
             return;
         }
 

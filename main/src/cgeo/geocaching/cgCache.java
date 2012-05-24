@@ -1523,7 +1523,7 @@ public class cgCache implements ICache, IWaypoint {
 
     public static SearchResult searchByGeocode(final String geocode, final String guid, final int listId, final boolean forceReload, final CancellableHandler handler) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
-            Log.e("cgeoBase.searchByGeocode: No geocode nor guid given");
+            Log.e("cgCache.searchByGeocode: No geocode nor guid given");
             return null;
         }
 

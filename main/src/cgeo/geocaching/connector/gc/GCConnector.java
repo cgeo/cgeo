@@ -95,7 +95,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
                 return search;
             }
 
-            Log.e("cgeoBase.searchByGeocode: No data from server");
+            Log.e("GCConnector.searchByGeocode: No data from server");
             search.setError(StatusCode.COMMUNICATION_ERROR);
             return search;
         }
@@ -103,7 +103,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         final SearchResult searchResult = GCParser.parseCache(page, handler);
 
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e("cgeoBase.searchByGeocode: No cache parsed");
+            Log.e("GCConnector.searchByGeocode: No cache parsed");
             return searchResult;
         }
 

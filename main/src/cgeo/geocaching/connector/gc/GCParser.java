@@ -31,6 +31,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -62,7 +63,7 @@ public abstract class GCParser {
 
     private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha) {
         if (StringUtils.isBlank(pageContent)) {
-            Log.e("cgeoBase.parseSearch: No page given");
+            Log.e("GCParser.parseSearch: No page given");
             return null;
         }
 
@@ -101,7 +102,7 @@ public abstract class GCParser {
 
         int startPos = page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
         if (startPos == -1) {
-            Log.e("cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
+            Log.e("GCParser.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
             return null;
         }
 
@@ -110,7 +111,7 @@ public abstract class GCParser {
         startPos = page.indexOf('>');
         int endPos = page.indexOf("ctl00_ContentBody_UnitTxt");
         if (startPos == -1 || endPos == -1) {
-            Log.e("cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
+            Log.e("GCParser.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
             return null;
         }
 
@@ -151,7 +152,7 @@ public abstract class GCParser {
                 }
             } catch (Exception e) {
                 // failed to parse GUID and/or Disabled
-                Log.w("cgeoBase.parseSearch: Failed to parse GUID and/or Disabled data");
+                Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data");
             }
 
             if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
@@ -215,7 +216,7 @@ public abstract class GCParser {
                     cache.setFavoritePoints(Integer.parseInt(result));
                 }
             } catch (NumberFormatException e) {
-                Log.w("cgeoBase.parseSearch: Failed to parse favourite count");
+                Log.w("GCParser.parseSearch: Failed to parse favourite count");
             }
 
             if (cache.getNameSp() == null) {
@@ -235,7 +236,7 @@ public abstract class GCParser {
                 searchResult.setTotal(Integer.parseInt(result));
             }
         } catch (NumberFormatException e) {
-            Log.w("cgeoBase.parseSearch: Failed to parse cache count");
+            Log.w("GCParser.parseSearch: Failed to parse cache count");
         }
 
         if (thread != null && recaptchaChallenge != null) {
@@ -332,7 +333,7 @@ public abstract class GCParser {
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(page)) {
-            Log.e("cgeoBase.parseCache: No page given");
+            Log.e("GCParser.parseCache: No page given");
             return null;
         }
 
@@ -384,7 +385,7 @@ public abstract class GCParser {
 
         int pos = tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
         if (pos == -1) {
-            Log.e("cgeoBase.parseCache: ID \"cacheDetails\" not found on page");
+            Log.e("GCParser.parseCache: ID \"cacheDetails\" not found on page");
             return null;
         }
 
@@ -392,7 +393,7 @@ public abstract class GCParser {
 
         pos = tableInside.indexOf(GCConstants.STRING_CACHEINFORMATIONTABLE);
         if (pos == -1) {
-            Log.e("cgeoBase.parseCache: class \"CacheInformationTable\" not found on page");
+            Log.e("GCParser.parseCache: class \"CacheInformationTable\" not found on page");
             return null;
         }
 
@@ -429,7 +430,7 @@ public abstract class GCParser {
                 }
             } catch (ParseException e) {
                 // failed to parse cache hidden date
-                Log.w("cgeoBase.parseCache: Failed to parse cache hidden (event) date");
+                Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
             }
 
             // favourite
@@ -455,7 +456,7 @@ public abstract class GCParser {
                 cache.setCoords(new Geopoint(cache.getLatlon()));
                 cache.setReliableLatLon(true);
             } catch (Geopoint.GeopointException e) {
-                Log.w("cgeoBase.parseCache: Failed to parse cache coordinates: " + e.toString());
+                Log.w("GCParser.parseCache: Failed to parse cache coordinates: " + e.toString());
             }
         }
 
@@ -509,7 +510,7 @@ public abstract class GCParser {
             }
         } catch (Exception e) {
             // failed to parse cache attributes
-            Log.w("cgeoBase.parseCache: Failed to parse cache attributes");
+            Log.w("GCParser.parseCache: Failed to parse cache attributes");
         }
 
         // cache spoilers
@@ -546,7 +547,7 @@ public abstract class GCParser {
             }
         } catch (Exception e) {
             // failed to parse cache spoilers
-            Log.w("cgeoBase.parseCache: Failed to parse cache spoilers");
+            Log.w("GCParser.parseCache: Failed to parse cache spoilers");
         }
 
         // cache inventory
@@ -580,7 +581,7 @@ public abstract class GCParser {
             }
         } catch (Exception e) {
             // failed to parse cache inventory
-            Log.w("cgeoBase.parseCache: Failed to parse cache inventory (2)");
+            Log.w("GCParser.parseCache: Failed to parse cache inventory (2)");
         }
 
         // cache logs counts
@@ -605,7 +606,7 @@ public abstract class GCParser {
         } catch (Exception e)
         {
             // failed to parse logs
-            Log.w("cgeoBase.parseCache: Failed to parse cache log count");
+            Log.w("GCParser.parseCache: Failed to parse cache log count");
         }
 
         // add waypoint for original coordinates in case of user-modified listing-coordinates
@@ -714,12 +715,12 @@ public abstract class GCParser {
         final String url = search.getUrl();
 
         if (StringUtils.isBlank(url)) {
-            Log.e("cgeoBase.searchByNextPage: No url found");
+            Log.e("GCParser.searchByNextPage: No url found");
             return search;
         }
 
         if (Login.isEmpty(viewstates)) {
-            Log.e("cgeoBase.searchByNextPage: No viewstate given");
+            Log.e("GCParser.searchByNextPage: No viewstate given");
             return search;
         }
 
@@ -733,18 +734,18 @@ public abstract class GCParser {
 
         final String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
-            Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+            Log.e("GCParser.postLogTrackable: Can not log in geocaching");
             return search;
         }
 
         if (StringUtils.isBlank(page)) {
-            Log.e("cgeoBase.searchByNextPage: No data from server");
+            Log.e("GCParser.searchByNextPage: No data from server");
             return search;
         }
 
         final SearchResult searchResult = parseSearch(url, page, showCaptcha);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e("cgeoBase.searchByNextPage: No cache parsed");
+            Log.e("GCParser.searchByNextPage: No cache parsed");
             return search;
         }
 
@@ -794,13 +795,13 @@ public abstract class GCParser {
         final String page = Login.getRequestLogged(uri, addFToParams(params, my, true));
 
         if (StringUtils.isBlank(page)) {
-            Log.e("cgeoBase.searchByAny: No data from server");
+            Log.e("GCParser.searchByAny: No data from server");
             return null;
         }
 
         final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e("cgeoBase.searchByAny: No cache parsed");
+            Log.e("GCParser.searchByAny: No cache parsed");
             return searchResult;
         }
 
@@ -818,7 +819,7 @@ public abstract class GCParser {
 
     public static SearchResult searchByKeyword(final String keyword, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(keyword)) {
-            Log.e("cgeoBase.searchByKeyword: No keyword given");
+            Log.e("GCParser.searchByKeyword: No keyword given");
             return null;
         }
 
@@ -828,7 +829,7 @@ public abstract class GCParser {
 
     public static SearchResult searchByUsername(final String userName, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
-            Log.e("cgeoBase.searchByUsername: No user name given");
+            Log.e("GCParser.searchByUsername: No user name given");
             return null;
         }
 
@@ -845,7 +846,7 @@ public abstract class GCParser {
 
     public static SearchResult searchByOwner(final String userName, final CacheType cacheType, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
-            Log.e("cgeoBase.searchByOwner: No user name given");
+            Log.e("GCParser.searchByOwner: No user name given");
             return null;
         }
 
@@ -855,7 +856,7 @@ public abstract class GCParser {
 
     public static cgTrackable searchTrackable(final String geocode, final String guid, final String id) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
-            Log.w("cgeoBase.searchTrackable: No geocode nor guid nor id given");
+            Log.w("GCParser.searchTrackable: No geocode nor guid nor id given");
             return null;
         }
 
@@ -874,13 +875,13 @@ public abstract class GCParser {
         final String page = Login.getRequestLogged("http://www.geocaching.com/track/details.aspx", params);
 
         if (StringUtils.isBlank(page)) {
-            Log.e("cgeoBase.searchTrackable: No data from server");
+            Log.e("GCParser.searchTrackable: No data from server");
             return trackable;
         }
 
         trackable = parseTrackable(page, geocode);
         if (trackable == null) {
-            Log.e("cgeoBase.searchTrackable: No trackable parsed");
+            Log.e("GCParser.searchTrackable: No trackable parsed");
             return null;
         }
 
@@ -891,12 +892,12 @@ public abstract class GCParser {
             final LogType logType, final int year, final int month, final int day,
             final String log, final List<TrackableLog> trackables) {
         if (Login.isEmpty(viewstates)) {
-            Log.e("cgeoBase.postLog: No viewstate given");
+            Log.e("GCParser.postLog: No viewstate given");
             return StatusCode.LOG_POST_ERROR;
         }
 
         if (StringUtils.isBlank(log)) {
-            Log.e("cgeoBase.postLog: No log text given");
+            Log.e("GCParser.postLog: No log text given");
             return StatusCode.NO_LOG_TEXT;
         }
 
@@ -955,7 +956,7 @@ public abstract class GCParser {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
         String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
-            Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+            Log.e("GCParser.postLogTrackable: Can not log in geocaching");
             return StatusCode.NOT_LOGGED_IN;
         }
 
@@ -968,7 +969,7 @@ public abstract class GCParser {
                 final String[] viewstatesConfirm = Login.getViewstates(page);
 
                 if (Login.isEmpty(viewstatesConfirm)) {
-                    Log.e("cgeoBase.postLog: No viewstate for confirm log");
+                    Log.e("GCParser.postLog: No viewstate for confirm log");
                     return StatusCode.LOG_POST_ERROR;
                 }
 
@@ -1005,7 +1006,7 @@ public abstract class GCParser {
                 page = Network.getResponseData(Network.postRequest(uri, params));
             }
         } catch (Exception e) {
-            Log.e("cgeoBase.postLog.confim: " + e.toString());
+            Log.e("GCParser.postLog.confim: " + e.toString());
         }
 
         try {
@@ -1026,22 +1027,22 @@ public abstract class GCParser {
                 return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
-            Log.e("cgeoBase.postLog.check: " + e.toString());
+            Log.e("GCParser.postLog.check: " + e.toString());
         }
 
-        Log.e("cgeoBase.postLog: Failed to post log because of unknown error");
+        Log.e("GCParser.postLog: Failed to post log because of unknown error");
         return StatusCode.LOG_POST_ERROR;
     }
 
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day, final String log) {
         if (Login.isEmpty(viewstates)) {
-            Log.e("cgeoBase.postLogTrackable: No viewstate given");
+            Log.e("GCParser.postLogTrackable: No viewstate given");
             return StatusCode.LOG_POST_ERROR;
         }
 
         if (StringUtils.isBlank(log)) {
-            Log.e("cgeoBase.postLogTrackable: No log text given");
+            Log.e("GCParser.postLogTrackable: No log text given");
             return StatusCode.NO_LOG_TEXT;
         }
 
@@ -1073,7 +1074,7 @@ public abstract class GCParser {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         final String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
-            Log.e("cgeoBase.postLogTrackable: Can not log in geocaching");
+            Log.e("GCParser.postLogTrackable: Can not log in geocaching");
             return StatusCode.NOT_LOGGED_IN;
         }
 
@@ -1085,10 +1086,10 @@ public abstract class GCParser {
                 return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
-            Log.e("cgeoBase.postLogTrackable.check: " + e.toString());
+            Log.e("GCParser.postLogTrackable.check: " + e.toString());
         }
 
-        Log.e("cgeoBase.postLogTrackable: Failed to post log because of unknown error");
+        Log.e("GCParser.postLogTrackable: Failed to post log because of unknown error");
         return StatusCode.LOG_POST_ERROR;
     }
 
@@ -1219,7 +1220,7 @@ public abstract class GCParser {
      */
     static cgTrackable parseTrackable(final String page, final String possibleTrackingcode) {
         if (StringUtils.isBlank(page)) {
-            Log.e("cgeoBase.parseTrackable: No page given");
+            Log.e("GCParser.parseTrackable: No page given");
             return null;
         }
 
@@ -1251,7 +1252,7 @@ public abstract class GCParser {
             }
         } catch (Exception e) {
             // failed to parse trackable owner name
-            Log.w("cgeoBase.parseTrackable: Failed to parse trackable owner name");
+            Log.w("GCParser.parseTrackable: Failed to parse trackable owner name");
         }
 
         // trackable origin
@@ -1282,7 +1283,7 @@ public abstract class GCParser {
             }
         } catch (Exception e) {
             // failed to parse trackable last known place
-            Log.w("cgeoBase.parseTrackable: Failed to parse trackable last known place");
+            Log.w("GCParser.parseTrackable: Failed to parse trackable last known place");
         }
 
         // released date - can be missing on the page
@@ -1323,7 +1324,7 @@ public abstract class GCParser {
             }
         } catch (Exception e) {
             // failed to parse trackable details & image
-            Log.w("cgeoBase.parseTrackable: Failed to parse trackable details & image");
+            Log.w("GCParser.parseTrackable: Failed to parse trackable details & image");
         }
 
         // trackable logs
@@ -1371,7 +1372,7 @@ public abstract class GCParser {
             }
         } catch (Exception e) {
             // failed to parse logs
-            Log.w("cgeoBase.parseCache: Failed to parse cache logs" + e.toString());
+            Log.w("GCParser.parseCache: Failed to parse cache logs" + e.toString());
         }
 
         // trackingcode
@@ -1533,7 +1534,7 @@ public abstract class GCParser {
 
         table = StringUtils.substringBetween(table, "<tbody>", "</tbody>");
         if (StringUtils.isBlank(table)) {
-            Log.e("cgeoBase.parseTrackableLog: tbody not found on page");
+            Log.e("GCParser.parseTrackableLog: tbody not found on page");
             return null;
         }
 

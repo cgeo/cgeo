@@ -150,7 +150,7 @@ public final class Go4Cache extends Thread {
         final String data = Network.getResponseData(Network.postRequest("http://api.go4cache.com/get.php", params));
 
         if (StringUtils.isBlank(data)) {
-            Log.e("cgeoBase.getGeocachersInViewport: No data from server");
+            Log.e("Go4Cache.getGeocachersInViewport: No data from server");
             return null;
         }
 
