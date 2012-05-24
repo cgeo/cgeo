@@ -5,12 +5,20 @@ final public class Log {
 
     private static final String TAG = "cgeo";
 
+    /**
+     * the debug flag is cached here so that we don't need to access the settings every time we have to evaluate it
+     */
     private static boolean isDebug = true;
 
     public static boolean isDebug() {
         return isDebug;
     }
 
+    /**
+     * make a non persisted copy of the debug flag from the settings for performance reasons
+     *
+     * @param isDebug
+     */
     public static void setDebugUnsaved(boolean isDebug) {
         Log.isDebug = isDebug;
     }
