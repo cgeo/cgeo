@@ -221,7 +221,8 @@
   <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
   <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte in der Version 0.3.0.\nOffline Karte ist nicht verfügbar.</string>
   <string name="warn_deprecated_mapfile">Es wird eine veraltete Offline-Karte v0.2.4 verwendet.\nBitte zukünftig Offline-Karten in der Version 0.3.0 verwenden.\nDer Support für die alte Version wird im nächsten Release eingestellt.</string>
- 
+    <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline Karte ist nicht verfügbar.</string>
+  
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
