@@ -20,14 +20,14 @@ public final class GCConstants {
     /** Caches in a tile */
     public final static String URL_MAP_INFO = "http://www.geocaching.com/map/map.info";
     /** Tile itself */
-    public final static String URL_MAP_TILE = "http://www.geocaching.com/map/map.tile";
+    public final static String URL_MAP_TILE = "http://www.geocaching.com/map/map.png";
 
     /**
      * Patterns for parsing the result of a (detailed) search
      */
     public final static Pattern PATTERN_HINT = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>");
-    public final static Pattern PATTERN_DESC = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
-    public final static Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>[^\\w^<]*</div>");
+    public final static Pattern PATTERN_DESC = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"><div class=\"UserSuppliedContent\">(.*?)</div>\\s*<p>\\s*</p>\\s*<p id=\"ctl00_ContentBody_hints\">");
+    public final static Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>\\s*</div>");
     public final static Pattern PATTERN_GEOCODE = Pattern.compile("class=\"CoordInfoCode\">(GC[0-9A-Z]+)</span>");
     public final static Pattern PATTERN_CACHEID = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)");
     public final static Pattern PATTERN_GUID = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
