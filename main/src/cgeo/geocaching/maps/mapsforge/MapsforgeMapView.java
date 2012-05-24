@@ -212,6 +212,14 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
         setMapGenerator(mapGenerator);
         if (!mapGenerator.requiresInternetConnection()) {
+            if (!new File(Settings.getMapFile()).exists()) {
+                Toast.makeText(
+                        getContext(),
+                        getContext().getResources().getString(R.string.warn_nonexistant_mapfile),
+                        Toast.LENGTH_LONG)
+                        .show();
+                return;
+            }
             setMapFile(new File(Settings.getMapFile()));
             if (!Settings.isValidMapFile(Settings.getMapFile())) {
                 Toast.makeText(
