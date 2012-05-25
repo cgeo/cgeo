@@ -221,6 +221,7 @@
   <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
   <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.3.0 kartfil.\nOffline kartan är inte tillgänglig.</string>
   <string name="warn_deprecated_mapfile">Den kartfil du använder är av en gammal version (0.2.4).\nVi rekommenderar att byta till en kartfil med version 0.3.0.\nNästa version av c:geo kommer inte hantera version 0.2.4.</string>
+   <string name="warn_nonexistant_mapfile">Den angivna kartfilen finns inte.\nOffline kartor kommer inte att vara tillgängliga.</string>
 
   <string name="info_log_posted">c:geo har postat din logg.</string>
   <string name="info_log_saved">c:geo har sparat din logg.</string>
@@ -322,11 +323,13 @@
   <!-- caches lists -->
   <string name="list_menu">Listor</string>
   <string name="list_menu_create">Skapa en ny lista</string>
+  <string name="list_menu_all_lists">Alla cacher</string>
   <string name="list_menu_drop">Ta bort den här listan</string>
   <string name="list_menu_change">Byt lista</string>
   <string name="list_menu_rename">Byt namn på den här listan</string>
   <string name="list_title">Välj en lista</string>
   <string name="list_inbox">Sparade</string>
+  <string name="list_all_lists">Alla cacher</string>
   <string name="list_dialog_create_title">Ny lista</string>
   <string name="list_dialog_create">Skapa</string>
   <string name="list_dialog_cancel">Avbryt</string>
@@ -784,9 +787,11 @@
   <string name="export_failed">Exporteringen misslyckades</string>
   <string name="export_fieldnotes">Field Notes</string>
   <string name="export_fieldnotes_info">Field Notes kommer att exporteras till /sdcard/field-notes med aktuellt datum och tid som filnamn.</string>
-  <string name="export_fieldnotes_upload">Uppladdat till geocaching.com</string>
+  <string name="export_fieldnotes_upload">Ladda upp till geocaching.com</string>
   <string name="export_fieldnotes_uploading">Laddar upp…</string>
+  <string name="export_fieldnotes_upload_success">Uppladdningen till geocaching.com slutförd</string>
   <string name="export_fieldnotes_onlynew">Bara sedan senaste exporteringen</string>
+  <string name="export_fieldnotes_creating">Skapar Field Notes…</string>
   <string name="export_gpx">GPX</string>
 
   <!-- next things -->
