@@ -1038,23 +1038,28 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         @Override
         public void run() {
+            /**
+             * True if we are currently showing the live map or a single points through coordsIntent.
+             */
+            final boolean isLiveMapOrCoords = searchIntent == null && geocodeIntent == null;
+
             try {
                 showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
                 loadThreadRun = System.currentTimeMillis();
 
                 // stage 1 - pull and render from the DB only for live map
-                if (searchIntent != null || geocodeIntent != null) {
-                    // map started from another activity
-                    search = new SearchResult(searchIntent);
-                    if (geocodeIntent != null) {
-                        search.addGeocode(geocodeIntent);
-                    }
-                } else {
+                if (isLiveMapOrCoords) {
                     // live map
                     if (!live || !Settings.isLiveMap()) {
                         search = new SearchResult(app.getStoredInViewport(viewport, Settings.getCacheType()));
                     } else {
                         search = new SearchResult(app.getCachedInViewport(viewport, Settings.getCacheType()));
+                    }
+                } else {
+                    // map started from another activity
+                    search = new SearchResult(searchIntent);
+                    if (geocodeIntent != null) {
+                        search.addGeocode(geocodeIntent);
                     }
                 }
 
@@ -1077,10 +1082,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                 }
                 countVisibleCaches();
-                if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null)
-                {
+                if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
                     waypoints.clear();
-                    if (searchIntent == null && geocodeIntent == null) {
+                    if (isLiveMapOrCoords) {
                         //All visible waypoints
                         waypoints.addAll(app.getWaypointsInViewport(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches()));
                     } else {
