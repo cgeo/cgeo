@@ -220,6 +220,8 @@
   <string name="warn_log_text_fill">Prego, inserire del testo nel log.</string>
   <string name="warn_load_images">c:geo non riesce a caricare immagini.</string>
   <string name="warn_invalid_mapfile">La mappa selezionata non è mapsforge versione 0.3.0.\nMappa offline non disponibile.</string>
+  <string name="warn_deprecated_mapfile">Stai usando una vecchia mappa 0.2.4.\nAggiornala alla 0.3.0 appena puoi.\nIl supporto alla 0.2.4 sarà rimosso nella prossima versione.</string>
+  <string name="warn_nonexistant_mapfile">La mappa selezionata non esiste.\nMappa offline non disponibile.</string>
 
   <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
   <string name="info_log_saved">c:geo ha salvato il log.</string>
