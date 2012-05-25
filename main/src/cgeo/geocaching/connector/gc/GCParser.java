@@ -741,6 +741,9 @@ public abstract class GCParser {
             return search;
         }
 
+        // search results don't need to be filtered so load GCVote ratings here
+        GCVote.loadRatings(new ArrayList<cgCache>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
+
         // save to application
         search.setError(searchResult.getError());
         search.setViewstates(searchResult.viewstates);
