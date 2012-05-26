@@ -780,7 +780,6 @@
 
   <!-- next things -->
   <string name="legal_note">Aby móc korzystać z usług serwisu Geocaching.com <a href="http://www.geocaching.com/about/termsofuse.aspx">warunki korzystania Groundspeak</a> muszą być potwierdzone.</string>
-  <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Website: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo strona</a></string>
