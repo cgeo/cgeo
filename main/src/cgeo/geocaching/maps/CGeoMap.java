@@ -221,7 +221,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     // set title
                     final StringBuilder title = new StringBuilder();
 
-                    if (mapMode == MapMode.LIVE_ONLINE) {
+                    if (isLiveMode()) {
                         title.append(res.getString(R.string.map_live));
                     } else {
                         title.append(mapTitle);
@@ -449,11 +449,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         mapView.getMapController().setZoom(Settings.getMapZoom());
 
         if (null == mapStateIntent) {
-            followMyLocation = mapMode == MapMode.LIVE_OFFLINE || mapMode == MapMode.LIVE_ONLINE;
+            followMyLocation = isLiveMode();
         } else {
             followMyLocation = 1 == mapStateIntent[3];
         }
-        if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
+        if (!isLiveMode()) {
             centerMap(geocodeIntent, searchIntent, coordsIntent, mapStateIntent);
         }
 
