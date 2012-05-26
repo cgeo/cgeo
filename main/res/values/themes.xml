@@ -1,128 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="cgeo_main" parent="android:Theme.Wallpaper.NoTitleBar">
-		<!-- system elements -->
-		<item name="android:windowNoTitle">true</item>
-		<item name="android:windowContentOverlay">@null</item>
-	</style>
-	
-	<style name="cgeo" parent="android:Theme.NoTitleBar">
-		<!-- system elements -->
-		<item name="android:buttonStyle">@style/button</item>
-		<item name="android:editTextStyle">@style/edittext</item>
-		<item name="android:windowContentOverlay">@null</item>
-	</style>
 
-	<style name="cgeo_transparent" parent="android:Theme.Dialog">
-		<!-- system elements -->
-		<item name="android:buttonStyle">@style/button</item>
-		<item name="android:editTextStyle">@style/edittext</item>
-		<item name="android:windowNoTitle">true</item>
-		<item name="android:windowIsTranslucent">true</item>
-	</style>
+    <style name="cgeo_main" parent="android:style/Theme.Wallpaper.NoTitleBar">
+        <!-- system elements -->
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
-	<style name="dark" parent="cgeo">
-		<!-- system values -->
+    <style name="cgeo" parent="android:style/Theme.NoTitleBar">
+        <!-- system elements -->
+        <item name="android:buttonStyle">@style/button</item>
+        <item name="android:editTextStyle">@style/edittext</item>
+        <item name="android:windowContentOverlay">@null</item>
+        
+        <!-- own values: colors -->
+        <item name="just_color">@color/just_black</item>
+        <item name="text_color_link">@color/link</item>
+        <item name="button_color_enabled">@color/button_enabled</item>
+        <item name="button_color_disabled">@color/button_disabled</item>
+    </style>
 
-		<!-- own values: colors -->
-		<item name="just_color">@color/just_black</item>
-		<item name="text_color">@color/text_dark</item>
-		<item name="text_color_headline">@color/text_headline_dark</item>
-		<item name="text_color_grey">@color/text_grey_dark</item>
-		<item name="text_color_hint">@color/text_hint_dark</item>
-		<item name="text_color_link">@color/link</item>
-		<item name="button_color_enabled">@color/button_enabled</item>
-		<item name="button_color_disabled">@color/button_disabled</item>
-		<item name="background_color">@color/background_dark</item>
-		<item name="background_color_notice">@color/background_dark_notice</item>
-		<item name="background_color_transparent">@color/background_dark_transparent</item>
-		<item name="separator_color">@color/separator_dark</item>
+    <style name="dark" parent="cgeo">
+        <!-- system values -->
 
-		<!-- own values: drawables -->
-		<item name="button">@drawable/action_button_dark</item>
-		<item name="input">@drawable/input_bcg_dark</item>
-		<item name="inventory">@drawable/inventory_background_dark</item>
-		<item name="favourite">@drawable/favourite_background_dark</item>
-		<item name="favourite_r">@drawable/favourite_background_red_dark</item>
-		<item name="favourite_o">@drawable/favourite_background_orange_dark</item>
-		<item name="favourite_g">@drawable/favourite_background_green_dark</item>
-		<item name="close">@drawable/map_close_dark</item>
+        <!-- own values: colors -->
+        <item name="text_color">@color/text_dark</item>
+        <item name="text_color_headline">@color/text_headline_dark</item>
+        <item name="text_color_grey">@color/text_grey_dark</item>
+        <item name="text_color_hint">@color/text_hint_dark</item>
+        <item name="background_color">@color/background_dark</item>
+        <item name="background_color_notice">@color/background_dark_notice</item>
+        <item name="background_color_transparent">@color/background_dark_transparent</item>
+        <item name="separator_color">@color/separator_dark</item>
+
+        <!-- own values: drawables -->
+        <item name="button">@drawable/action_button_dark</item>
+        <item name="input">@drawable/input_bcg_dark</item>
+        <item name="inventory">@drawable/inventory_background_dark</item>
+        <item name="favourite">@drawable/favourite_background_dark</item>
+        <item name="favourite_r">@drawable/favourite_background_red_dark</item>
+        <item name="favourite_o">@drawable/favourite_background_orange_dark</item>
+        <item name="favourite_g">@drawable/favourite_background_green_dark</item>
+        <item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
-        
         <item name="progressSpinnerLarge">@android:style/Widget.ProgressBar.Large</item>
 
-		<!-- own values: other -->
-		<item name="compass">0</item>
-	</style>
+        <!-- own values: other -->
+        <item name="compass">0</item>
+    </style>
 
-	<style name="light" parent="cgeo">
-		<!-- system values -->
+    <style name="light" parent="cgeo">
+        <!-- system values -->
 
-		<!-- own values: colors -->
-		<item name="just_color">@color/just_black</item>
-		<item name="text_color">@color/text_light</item>
-		<item name="text_color_headline">@color/text_headline_light</item>
-		<item name="text_color_grey">@color/text_grey_light</item>
-		<item name="text_color_hint">@color/text_hint_light</item>
-		<item name="text_color_link">@color/link</item>
-		<item name="button_color_enabled">@color/button_enabled</item>
-		<item name="button_color_disabled">@color/button_disabled</item>
-		<item name="background_color">@color/background_light</item>
-		<item name="background_color_notice">@color/background_light_notice</item>
-		<item name="background_color_transparent">@color/background_light_transparent</item>
-		<item name="separator_color">@color/separator_light</item>
+        <!-- own values: colors -->
+        <item name="text_color">@color/text_light</item>
+        <item name="text_color_headline">@color/text_headline_light</item>
+        <item name="text_color_grey">@color/text_grey_light</item>
+        <item name="text_color_hint">@color/text_hint_light</item>
+        <item name="background_color">@color/background_light</item>
+        <item name="background_color_notice">@color/background_light_notice</item>
+        <item name="background_color_transparent">@color/background_light_transparent</item>
+        <item name="separator_color">@color/separator_light</item>
 
-		<!-- own values: drawables -->
-		<item name="button">@drawable/action_button_light</item>
-		<item name="input">@drawable/input_bcg_light</item>
-		<item name="inventory">@drawable/inventory_background_light</item>
-		<item name="favourite">@drawable/favourite_background_light</item>
-		<item name="favourite_r">@drawable/favourite_background_red_light</item>
-		<item name="favourite_o">@drawable/favourite_background_orange_light</item>
-		<item name="favourite_g">@drawable/favourite_background_green_light</item>
-		<item name="close">@drawable/map_close_light</item>
+        <!-- own values: drawables -->
+        <item name="button">@drawable/action_button_light</item>
+        <item name="input">@drawable/input_bcg_light</item>
+        <item name="inventory">@drawable/inventory_background_light</item>
+        <item name="favourite">@drawable/favourite_background_light</item>
+        <item name="favourite_r">@drawable/favourite_background_red_light</item>
+        <item name="favourite_o">@drawable/favourite_background_orange_light</item>
+        <item name="favourite_g">@drawable/favourite_background_green_light</item>
+        <item name="close">@drawable/map_close_light</item>
         <item name="log_img_icon">@drawable/log_img_light</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_light</item>
-
         <item name="progressSpinnerLarge">@android:style/Widget.ProgressBar.Large.Inverse</item>
-        
+
         <!-- own values: other -->
-		<item name="compass">1</item>
-	</style>
-  
-	<style name="transparent" parent="cgeo_transparent">
-		<!-- system values -->
+        <item name="compass">1</item>
+    </style>
 
-		<!-- own values: colors -->
-		<item name="just_color">@color/just_black</item>
-		<item name="text_color">@color/text_dark</item>
-		<item name="text_color_headline">@color/text_headline_dark</item>
-		<item name="text_color_grey">@color/text_grey_dark</item>
-		<item name="text_color_hint">@color/text_hint_dark</item>
-		<item name="text_color_link">@color/link</item>
-		<item name="button_color_enabled">@color/button_enabled</item>
-		<item name="button_color_disabled">@color/button_disabled</item>
-		<item name="background_color">@color/background_dark</item>
-		<item name="background_color_notice">@color/background_dark_notice</item>
-		<item name="background_color_transparent">@color/background_dark_transparent</item>
-		<item name="separator_color">@color/separator_dark</item>
+    <style name="cgeo_popup" parent="android:style/Theme.Dialog">
+        <!-- system elements -->
+        <item name="android:buttonStyle">@style/button</item>
+        <item name="android:editTextStyle">@style/edittext</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
-		<!-- own values: drawables -->
-		<item name="button">@drawable/action_button_dark</item>
-		<item name="input">@drawable/input_bcg_dark</item>
-		<item name="inventory">@drawable/inventory_background_dark</item>
-		<item name="favourite">@drawable/favourite_background_dark</item>
-		<item name="favourite_r">@drawable/favourite_background_red_dark</item>
-		<item name="favourite_o">@drawable/favourite_background_orange_dark</item>
-		<item name="favourite_g">@drawable/favourite_background_green_dark</item>
-		<item name="close">@drawable/map_close_dark</item>
+    <!-- TODO: Popup probably doesn't need all these fields set. Should delete unnecessary ones. -->
+    <style name="popup_dark" parent="cgeo_popup">
+        <!-- system values -->
+
+        <!-- own values: colors -->
+        <item name="just_color">@color/just_black</item>
+        <item name="text_color">@color/text_dark</item>
+        <item name="text_color_headline">@color/text_headline_dark</item>
+        <item name="text_color_grey">@color/text_grey_dark</item>
+        <item name="text_color_hint">@color/text_hint_dark</item>
+        <item name="text_color_link">@color/link</item>
+        <item name="button_color_enabled">@color/button_enabled</item>
+        <item name="button_color_disabled">@color/button_disabled</item>
+        <item name="background_color">@color/background_dark</item>
+        <item name="background_color_notice">@color/background_dark_notice</item>
+        <item name="background_color_transparent">@color/background_dark_transparent</item>
+        <item name="separator_color">@color/separator_dark</item>
+
+        <!-- own values: drawables -->
+        <item name="button">@drawable/action_button_dark</item>
+        <item name="input">@drawable/input_bcg_dark</item>
+        <item name="inventory">@drawable/inventory_background_dark</item>
+        <item name="favourite">@drawable/favourite_background_dark</item>
+        <item name="favourite_r">@drawable/favourite_background_red_dark</item>
+        <item name="favourite_o">@drawable/favourite_background_orange_dark</item>
+        <item name="favourite_g">@drawable/favourite_background_green_dark</item>
+        <item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
-
         <item name="progressSpinnerLarge">@android:style/Widget.ProgressBar.Large</item>
-        
+
         <!-- own values: other -->
-		<item name="compass">0</item>
-	</style>
+        <item name="compass">0</item>
+    </style>
+
 </resources>

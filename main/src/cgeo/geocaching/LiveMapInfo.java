@@ -13,7 +13,6 @@ public class LiveMapInfo extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTheme(R.style.transparent);
         setContentView(R.layout.livemapinfo);
 
         final int showCount = Settings.getLiveMapHintShowCount();
