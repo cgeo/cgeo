@@ -2,7 +2,6 @@
 <resources>
 
     <!-- system definitions -->
-    <style name="cgeo" parent="android:Theme.NoTitleBar"></style>
 
     <style name="button" parent="@android:style/Widget.Button">
         <item name="android:padding">6dip</item>
@@ -13,9 +12,6 @@
         <item name="android:textSize">22dip</item>
         <item name="android:textColor">?text_color</item>
         <item name="android:background">?button</item>
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:gravity">center</item>
     </style>
 
     <style name="edittext" parent="@android:style/Widget.EditText">
@@ -26,7 +22,6 @@
         <item name="android:textColor">?text_color</item>
         <item name="android:textColorHint">?text_color_hint</item>
         <item name="android:background">?input</item>
-        <item name="android:focusable">true</item>
         <item name="android:gravity">top|left</item>
         <item name="android:capitalize">none</item>
     </style>
@@ -92,7 +87,7 @@
     </style>
 
     <!-- button: full width -->
-    <style name="button">
+    <style name="button_full" parent="button">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">10dip</item>
@@ -101,7 +96,7 @@
     </style>
 
     <!-- button: small -->
-    <style name="button_small">
+    <style name="button_small" parent="button">
         <item name="android:layout_width">125dip</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">right</item>
@@ -114,7 +109,7 @@
     </style>
 
     <!-- edittext -->
-    <style name="edittext">
+    <style name="edittext_full" parent="edittext">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">10dip</item>
@@ -122,7 +117,7 @@
         <item name="android:layout_marginBottom">5dip</item>
     </style>
 
-    <style name="edittext_dialog">
+    <style name="edittext_dialog" parent="edittext">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">10dip</item>
@@ -199,52 +194,32 @@
         <item name="android:background">@drawable/icon_bcg</item>
     </style>
 
-    <style name="location_current_type">
+    <style name="location_current_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:paddingLeft">3dip</item>
+        <item name="android:paddingRight">3dip</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:textSize">12dip</item>
+        <item name="android:textColor">@color/text_dark</item>
+    </style>
+
+    <style name="location_current_type" parent="location_current_style">
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_gravity">right</item>
-        <item name="android:paddingLeft">3dip</item>
-        <item name="android:paddingRight">3dip</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:scrollHorizontally">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">12dip</item>
-        <item name="android:textColor">@color/text_dark</item>
     </style>
 
-    <style name="location_current_accuracy">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentBottom">true</item>
+    <style name="location_current_accuracy" parent="location_current_style">
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_gravity">right</item>
-        <item name="android:paddingLeft">3dip</item>
-        <item name="android:paddingRight">3dip</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:scrollHorizontally">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">12dip</item>
-        <item name="android:textColor">@color/text_dark</item>
     </style>
 
-    <style name="location_current_satellites">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentBottom">true</item>
+    <style name="location_current_satellites" parent="location_current_style">
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_gravity">left</item>
-        <item name="android:paddingLeft">3dip</item>
-        <item name="android:paddingRight">3dip</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:scrollHorizontally">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">12dip</item>
-        <item name="android:textColor">@color/text_dark</item>
     </style>
 
     <!-- separators -->

@@ -35,16 +35,16 @@
 						android:layout_width="fill_parent"
 						android:layout_height="wrap_content"
 						android:orientation="horizontal" >
-					<Button style="@style/button"
+					<Button style="@style/button_full"
 							android:id="@+id/type"
 							android:layout_width="0dip"
 							android:layout_weight="1"/>
-					<Button style="@style/button"
+					<Button style="@style/button_full"
 							android:id="@+id/date"
 							android:layout_width="0dip"
 							android:layout_weight="1"/>
 				</LinearLayout>
-				<EditText style="@style/edittext"
+				<EditText style="@style/edittext_full"
 						android:id="@+id/log"
 						android:hint="@string/log_new_log_text"
 						android:singleLine="false"
@@ -75,7 +75,7 @@
 							android:textColor="?text_color"
 							android:text="@string/visit_tweet" />
 				</LinearLayout>
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/post"
 						android:text="@string/log_post" />
 				<RelativeLayout style="@style/separator_horizontal_layout" >
@@ -87,12 +87,12 @@
 						android:layout_width="fill_parent"
 						android:layout_height="wrap_content"
 						android:orientation="horizontal" >
-					<Button style="@style/button"
+					<Button style="@style/button_full"
 							android:id="@+id/save"
 							android:layout_width="0dip"
 							android:layout_weight="1"
 							android:text="@string/log_save" />
-					<Button style="@style/button"
+					<Button style="@style/button_full"
 							android:id="@+id/clear"
 							android:layout_width="0dip"
 							android:layout_weight="1"
@@ -122,7 +122,7 @@
 						android:layout_height="wrap_content"
 						android:gravity="right"
 						android:orientation="vertical" >
-					<Button style="@style/button"
+					<Button style="@style/button_full"
 							android:id="@+id/changebutton"
 							android:layout_width="wrap_content"
 							android:layout_weight="1"

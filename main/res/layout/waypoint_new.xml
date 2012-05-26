@@ -37,17 +37,17 @@
 
             <Button
                 android:id="@+id/buttonLatitude"
-                style="@style/button"
+                style="@style/button_full"
                 android:hint="@string/latitude" />
 
             <Button
                 android:id="@+id/buttonLongitude"
-                style="@style/button"
+                style="@style/button_full"
                 android:hint="@string/longitude" />
 
             <EditText
                 android:id="@+id/bearing"
-                style="@style/edittext"
+                style="@style/edittext_full"
                 android:hint="@string/waypoint_bearing"
                 android:inputType="numberDecimal" />
 
@@ -58,7 +58,7 @@
             
 	            <EditText
                 	android:id="@+id/distance"
-                	style="@style/edittext"
+                	style="@style/edittext_full"
                 	android:hint="@string/waypoint_distance"
                 	android:inputType="numberDecimal"
                 	android:layout_width="0dip"
@@ -73,7 +73,7 @@
 
 	        <AutoCompleteTextView
                 android:id="@+id/name"
-                style="@style/edittext"
+                style="@style/edittext_full"
                 android:hint="@string/waypoint_name" />
             
             <Spinner 
@@ -83,7 +83,7 @@
 
             <EditText
                 android:id="@+id/note"
-                style="@style/edittext"
+                style="@style/edittext_full"
                 android:layout_height="wrap_content"
                 android:capitalize="sentences"
                 android:hint="@string/waypoint_note"
@@ -92,7 +92,7 @@
 
             <Button
                 android:id="@+id/add_waypoint"
-                style="@style/button"
+                style="@style/button_full"
                 android:text="@string/waypoint_save" />
         </LinearLayout>
     </ScrollView>

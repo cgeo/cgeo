@@ -30,13 +30,13 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_coordinates" />
 			</RelativeLayout>
-			<Button style="@style/button" 
+			<Button style="@style/button_full" 
 				android:hint="@string/latitude"
 				android:id="@+id/buttonLatitude"/>
-			<Button style="@style/button" 
+			<Button style="@style/button_full" 
 				android:hint="@string/longitude"
 				android:id="@+id/buttonLongitude"/>
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/search_coordinates"
 					android:text="@string/search_coordinates_button" />
 <!-- ** -->
@@ -45,11 +45,11 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_address" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/address"
 					android:hint="@string/search_address"
 					android:imeOptions="actionGo" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/search_address"
 					android:text="@string/search_address_button" />
 <!-- ** -->
@@ -58,13 +58,13 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_gc" />
 			</RelativeLayout>
-			<AutoCompleteTextView style="@style/edittext"
+			<AutoCompleteTextView style="@style/edittext_full"
 					android:id="@+id/geocode"
 					android:hint="@string/search_gc"
 					android:imeOptions="actionGo"
 					android:text="GC"
 					android:inputType="textCapCharacters" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/display_geocode"
 					android:text="@string/search_gc_button" />
 <!-- ** -->
@@ -73,11 +73,11 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_kw" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/keyword"
 					android:hint="@string/search_kw_prefill"
 					android:imeOptions="actionGo" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/search_keyword"
 					android:text="@string/search_kw_button" />
 <!-- ** -->
@@ -86,11 +86,11 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_fbu" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/username"
 					android:hint="@string/search_fbu_prefill"
 					android:imeOptions="actionGo" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/search_username"
 					android:text="@string/search_fbu_button" />
 <!-- ** -->
@@ -99,11 +99,11 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_hbu" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/owner"
 					android:hint="@string/search_hbu_prefill"
 					android:imeOptions="actionGo" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/search_owner"
 					android:text="@string/search_hbu_button" />
 <!-- ** -->
@@ -112,12 +112,12 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_tb" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/trackable"
 					android:hint="@string/search_tb_hint"
 					android:imeOptions="actionGo"
 					android:inputType="textCapCharacters" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/display_trackable"
 					android:text="@string/search_tb_button" />
 		</LinearLayout>

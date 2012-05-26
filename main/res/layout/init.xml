@@ -43,14 +43,14 @@
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
 					android:text="@string/legal_note" />
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/username"
 					android:hint="@string/init_username" />
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/password"
 					android:hint="@string/init_password"
 					android:password="true" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/log_me_in"
                     android:lines="2"
                     android:singleLine="false"
@@ -62,7 +62,7 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/init_gcvote" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/passvote"
 					android:hint="@string/init_passvote"
 					android:password="true" />
@@ -126,7 +126,7 @@
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
 					android:text="@string/about_twitter" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/authorize_twitter"
 					android:text="@string/init_twitter_authorize" />
 			<LinearLayout
@@ -157,7 +157,7 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/init_signature" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/signature"
 					android:hint="@string/init_signature"
 					android:singleLine="false"
@@ -167,13 +167,13 @@
 			<LinearLayout android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal" >
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/signature_template"
 						android:layout_width="wrap_content"
 						android:layout_weight="2"
 						android:textSize="14dip"
 						android:text="@string/init_signature_template_button" />
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/signature_help"
 						android:layout_width="wrap_content"
 						android:layout_weight="1"
@@ -651,7 +651,7 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/init_showwaypoints" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/showwaypointsthreshold"
 					android:singleLine="true"
 					android:lines="1"
@@ -698,11 +698,11 @@
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal" >
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/select_mapfile"
 						android:text="@string/init_select_mapfile"
 						android:layout_width="wrap_content" />
-				<EditText style="@style/edittext"
+				<EditText style="@style/edittext_full"
 						android:id="@+id/mapfile"
 						android:singleLine="true"
 						android:lines="1"
@@ -715,7 +715,7 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/init_altitude" />
 			</RelativeLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/altitude"
 					android:singleLine="true"
 					android:lines="1"
@@ -795,7 +795,7 @@
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
 					android:text="@string/init_sendToCgeo_name" />
-            <EditText style="@style/edittext"
+            <EditText style="@style/edittext_full"
 					android:id="@+id/webDeviceName"
 					android:singleLine="true"
 					android:lines="1"
@@ -815,7 +815,7 @@
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
 					android:text="@string/init_sendToCgeo_description" />
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/sendToCgeo_register"
 					android:text="@string/init_sendToCgeo_register" />
 <!-- ** -->
@@ -843,13 +843,13 @@
 					android:layout_margin="3dip"
 					android:orientation="horizontal"
 					android:padding="3dip" >
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/backup_backup"
 						android:layout_width="0dip"
 						android:layout_weight="1"
 						android:text="@string/init_backup_backup"
 						android:onClick="backup" />
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/backup_restore"
 						android:layout_width="0dip"
 						android:layout_weight="1"
