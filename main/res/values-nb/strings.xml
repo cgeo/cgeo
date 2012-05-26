@@ -404,7 +404,6 @@
 
   <!-- next things -->
   <string name="legal_note">For å bruke tjenestene til Geocaching.com, må brukeren samtykke i vilkårene og betingelsene til <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak\'s ansvarsfraskrivelse</a></string>
-  <string name="author">utvikler: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">e-post adresse: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
