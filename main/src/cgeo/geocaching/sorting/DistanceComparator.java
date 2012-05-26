@@ -14,7 +14,9 @@ public class DistanceComparator extends AbstractCacheComparator {
     public DistanceComparator(final Geopoint coords, List<cgCache> list) {
         // calculate all distances to avoid duplicate calculations during sorting
         for (cgCache cache : list) {
-            if (cache.getCoords() != null) {
+            if (cache.getFinalCoords() != null) {
+                cache.setDistance(coords.distanceTo(cache.getFinalCoords()));
+            } else if (cache.getCoords() != null) {
                 cache.setDistance(coords.distanceTo(cache.getCoords()));
             }
             else {
@@ -30,13 +32,13 @@ public class DistanceComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final cgCache cache1, final cgCache cache2) {
-        if (cache1.getCoords() == null && cache2.getCoords() == null) {
+        if (cache1.getDistance() == null && cache2.getDistance() == null) {
             return 0;
         }
-        if (cache1.getCoords() == null) {
+        if (cache1.getDistance() == null) {
             return 1;
         }
-        if (cache2.getCoords() == null) {
+        if (cache2.getDistance() == null) {
             return -1;
         }
         return Float.compare(cache1.getDistance(), cache2.getDistance());

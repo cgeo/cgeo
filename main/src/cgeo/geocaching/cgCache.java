@@ -299,7 +299,8 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * Compare two caches quickly. For map and list fields only the references are compared !
      *
-     * @param other the other cache to compare this one to
+     * @param other
+     *            the other cache to compare this one to
      * @return true if both caches have the same content
      */
     private boolean isEqualTo(final cgCache other) {
@@ -663,7 +664,6 @@ public class cgCache implements ICache, IWaypoint {
         this.favorite = favourite;
     }
 
-
     @Override
     public boolean isWatchlist() {
         return onWatchlist;
@@ -808,6 +808,18 @@ public class cgCache implements ICache, IWaypoint {
 
     public Geopoint getCoords() {
         return coords;
+    }
+
+    public Geopoint getFinalCoords() {
+        if (CollectionUtils.isEmpty(waypoints)) {
+            return null;
+        }
+        for (cgWaypoint cgw : waypoints) {
+            if (cgw.isFinalWithCoords()) {
+                return cgw.getCoords();
+            }
+        }
+        return null;
     }
 
     public void setCoords(Geopoint coords) {
@@ -1174,7 +1186,8 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * Duplicate a waypoint.
      *
-     * @param index the waypoint to duplicate
+     * @param index
+     *            the waypoint to duplicate
      * @return <code>true</code> if the waypoint was duplicated, <code>false</code> otherwise (invalid index)
      */
     public boolean duplicateWaypoint(final int index) {
@@ -1250,7 +1263,8 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * Retrieve a given waypoint.
      *
-     * @param index the index of the waypoint
+     * @param index
+     *            the index of the waypoint
      * @return waypoint or <code>null</code> if index is out of range
      */
     public cgWaypoint getWaypoint(final int index) {
@@ -1260,7 +1274,8 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * Lookup a waypoint by its id.
      *
-     * @param id the id of the waypoint to look for
+     * @param id
+     *            the id of the waypoint to look for
      * @return waypoint or <code>null</code>
      */
     public cgWaypoint getWaypointById(final int id) {
