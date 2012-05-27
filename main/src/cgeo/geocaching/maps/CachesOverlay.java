@@ -295,8 +295,8 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         public void run() {
             if (requestRequired()) {
                 /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
-                CGeoMap.markCacheAsDirty(cache.getGeocode());
             }
+            CGeoMap.markCacheAsDirty(cache.getGeocode());
             CachePopup.startActivity(context, cache.getGeocode());
             progress.dismiss();
         }
