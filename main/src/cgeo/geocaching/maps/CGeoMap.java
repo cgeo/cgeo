@@ -190,7 +190,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /**Controls the map behaviour*/
     private MapMode mapMode = null;
     // other things
-    //    private boolean live = true; // live map (live, dead) or rest (displaying caches on map)
     private boolean liveChanged = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
