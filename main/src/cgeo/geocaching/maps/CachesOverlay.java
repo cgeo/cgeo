@@ -288,7 +288,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         }
 
         public boolean requestRequired() {
-            return CacheType.UNKNOWN == cache.getType() || !cache.isReliableLatLon() || !cache.isOffline();
+            return CacheType.UNKNOWN == cache.getType() || cache.getDifficulty() == 0;
         }
 
         @Override
