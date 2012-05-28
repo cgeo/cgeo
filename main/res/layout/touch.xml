@@ -30,20 +30,20 @@
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal" >
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/type"
 						android:layout_width="0dip"
 						android:layout_weight="1"/>
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/date"
 						android:layout_width="0dip"
 						android:layout_weight="1"/>
 			</LinearLayout>
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/tracking"
 					android:inputType="textCapCharacters"
 					android:hint="@string/trackable_code" />
-			<EditText style="@style/edittext"
+			<EditText style="@style/edittext_full"
 					android:id="@+id/log"
                        android:hint="@string/log_new_log_text"
 					android:singleLine="false"
@@ -73,7 +73,7 @@
 						android:textColor="?text_color"
 						android:text="@string/visit_tweet" />
 			</LinearLayout>
-			<Button style="@style/button"
+			<Button style="@style/button_full"
 					android:id="@+id/post"
 					android:text="@string/log_post" />
 		</LinearLayout>

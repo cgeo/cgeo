@@ -142,7 +142,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // set layout
-        setTheme(R.style.transparent);
         setContentView(layout);
         setTitle(res.getString(R.string.detail));
 
