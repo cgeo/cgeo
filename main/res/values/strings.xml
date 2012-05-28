@@ -1052,35 +1052,10 @@
   <string name="changelog">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · Add/remove cache to/from Favorites\n
-    · Export caches as GPX file\n
-    · Filter for D/T in lists\n
-    · Allow close of popup by click on map\n
-    · Support of v0.3.0 mapsforge offline maps\n
-    · Sorting of caches by store date\n
-    · New popup for waypoints on live map\n
-    · On-demand download of static maps\n
-    · Upload fieldnotes to geocaching.com\n
-    · Optionally move stored data to sd-card\n
-    · Display time since last log on TB page\n
-    · Popup on live map will give more details for unsaved caches\n
-    · View all caches from different lists at once\n
+    · [template]\n
     \n
     <b>Bugfixing:</b>\n
-    · Static maps download for waypoints now off by default\n
-    · Waypoints on map do no longer disappear when moving map\n
-    · Static map download improved\n
-    · Distance information in nearby search corrected\n
-    · Adaption to changes on geocaching.com\n
-    · Warning displayed for incompatible or outdated map files\n
-    · No change of font color in selection mode\n
-    · List layout optimized for most efficient screen usage\n
-    · Watchlist status shown correct\n
-    · Faster reaction when opening popup on map\n
-    · Hiding of found/owned caches on map corrected\n
-    · Show all stored caches on map (limit of 500 caches removed)\n
-    · Position marker now shown above cache icons\n
-    · Wrong cache size in cache details corrected\n
+    · [template]\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
