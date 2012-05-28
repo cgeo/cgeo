@@ -16,17 +16,17 @@
 
     <Button
         android:id="@+id/buttonLatitude"
-        style="@style/button"
+        style="@style/button_full"
         android:hint="@string/latitude" />
 
     <Button
         android:id="@+id/buttonLongitude"
-        style="@style/button"
+        style="@style/button_full"
         android:hint="@string/longitude" />
 
     <Button
         android:id="@+id/current"
-        style="@style/button"
+        style="@style/button_full"
         android:text="@string/waypoint_my_coordinates" />
 
     <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -40,7 +40,7 @@
 
     <EditText
         android:id="@+id/bearing"
-        style="@style/edittext"
+        style="@style/edittext_full"
         android:hint="@string/waypoint_bearing"
         android:inputType="numberDecimal" />
 
@@ -51,7 +51,7 @@
 
         <EditText
             android:id="@+id/distance"
-            style="@style/edittext"
+            style="@style/edittext_full"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:hint="@string/waypoint_distance"

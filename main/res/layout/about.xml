@@ -65,7 +65,7 @@
 					android:layout_marginTop="10dip"
 					android:orientation="horizontal"
 					android:gravity="center_horizontal" >
-				<Button style="@style/button"
+				<Button style="@style/button_full"
 						android:id="@+id/donation_more"
 						android:layout_width="280dip"
 						android:singleLine="false"
