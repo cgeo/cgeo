@@ -1064,7 +1064,7 @@
     · Optionally move stored data to sd-card\n
     · Display time since last log on TB page\n
     · Popup on live map will give more details for unsaved caches\n
-    · View all caches on different lists at once\n
+    · View all caches from different lists at once\n
     \n
     <b>Bugfixing:</b>\n
     · Static maps download for waypoints now off by default\n
@@ -1079,6 +1079,8 @@
     · Faster reaction when opening popup on map\n
     · Hiding of found/owned caches on map corrected\n
     · Show all stored caches on map (limit of 500 caches removed)\n
+    · Position marker now shown above cache icons\n
+    · Wrong cache size in cache details corrected\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
