@@ -406,16 +406,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         // initialize overlays
         mapView.clearOverlays();
 
-        if (overlayPosition == null) {
-            overlayPosition = mapView.createAddPositionOverlay(activity);
-        }
-
         if (Settings.isPublicLoc() && overlayGo4Cache == null) {
             overlayGo4Cache = mapView.createAddUsersOverlay(activity, getResources().getDrawable(R.drawable.user_location));
         }
 
         if (overlayCaches == null) {
             overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
+        }
+
+        if (overlayPosition == null) {
+            overlayPosition = mapView.createAddPositionOverlay(activity);
         }
 
         if (overlayScale == null) {
