@@ -263,19 +263,15 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         notifyDataSetChanged();
     }
 
-    public void setActualCoordinates(final Geopoint coordsIn) {
-        if (coordsIn == null) {
-            return;
-        }
-
-        coords = coordsIn;
+    public void setActualCoordinates(final Geopoint coords) {
+        this.coords = coords;
         updateSortByDistance();
 
         for (final DistanceView distance : distances) {
-            distance.update(coordsIn);
+            distance.update(coords);
         }
         for (final CompassMiniView compass : compasses) {
-            compass.updateCurrentCoords(coordsIn);
+            compass.updateCurrentCoords(coords);
         }
     }
 
@@ -304,13 +300,13 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         return cacheComparator == null || cacheComparator instanceof DistanceComparator;
     }
 
-    public void setActualHeading(Float directionNow) {
-        if (directionNow == null) {
+    public void setActualHeading(final float direction) {
+        final float delta = (360 + azimuth - direction) % 360;
+        if (delta < 10 || delta > 350) {
             return;
         }
 
-        azimuth = directionNow;
-
+        azimuth = direction;
         for (final CompassMiniView compass : compasses) {
             compass.updateAzimuth(azimuth);
         }
