@@ -344,6 +344,7 @@
   <string name="list_dialog_rename">Renommer</string>
 
   <!-- about -->
+  <string name="about_version">Version</string>
   <string name="about_changelog">Versions</string>
   <string name="about_donate">Dons</string>
   <string name="about_detail">Détails</string>
