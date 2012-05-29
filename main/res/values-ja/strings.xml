@@ -219,12 +219,14 @@
   <string name="warn_search_help_tb">トラッカブルアイテムのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」。</string>
   <string name="warn_log_text_fill">ログの本文を半角英数字記号で書いてください。(日本語は数値文字参照に変換する必要があります)</string>
   <string name="warn_load_images">画像をロードすることができませんでした。</string>
-  <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforge version 0.3.0フォーマットの地図ファイルではありません。 オフライン地図は利用できません。</string>
+  <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforge version 0.3.0フォーマットの地図ファイルではありません。 \nオフライン地図は利用できません。</string>
   <string name="warn_deprecated_mapfile">Mapsforge version 0.2.4フォーマットの地図ファイルは非推奨です。\nMapsforge version 0.3.0フォーマットに変更した方がいいでしょう。次のリリースでversion 0.2.4はサポートされなくなります。</string>
+  <string name="warn_nonexistant_mapfile">選択した地図ファイルは存在しません。 \nオフライン地図は利用できません。</string>
+
 
   <string name="info_log_posted">ログを投稿しました。</string>
   <string name="info_log_saved">ログを保存しました。</string>
-  <string name="info_log_cleared">グを消去しました。</string>
+  <string name="info_log_cleared">ログを消去しました。</string>
   <string name="info_log_type_changed">ログのタイプを変更しました。</string>
 
   <string name="info_fieldnotes_exported_to">フィールドノートとして書き出しました</string>
@@ -245,7 +247,7 @@
   <string name="menu_settings">設定</string>
   <string name="menu_history">履歴</string>
   <string name="menu_filter">フィルター</string>
-  <string name="menu_scan_geo">QR(バー)コードをスキャン</string>
+  <string name="menu_scan_geo">QRコードをスキャン</string> <!-- It is more suitable "QRcode" than "Geocode" in Japanese, because "Geocode" is not commonly known. Issue #794 https://github.com/cgeo/c-geo-opensource/issues/794 -->
 
   <!-- main screen -->
   <string name="live_map_button">地図</string>
@@ -260,7 +262,7 @@
   <string name="caches_more_caches">次のキャッシュ</string>
   <string name="caches_more_caches_no">キャッシュは以上です</string>
   <string name="caches_more_caches_loading">キャッシュ情報をロード中…</string>
-  <string name="caches_more_caches_currently">currently</string>
+  <string name="caches_more_caches_currently">現在</string>
   <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
   <string name="caches_eta_ltm">1分以内</string>
   <string name="caches_eta_mins"> 分</string>
@@ -322,11 +324,13 @@
   <!-- caches lists -->
   <string name="list_menu">リスト</string>
   <string name="list_menu_create">新しいリストを作成</string>
+  <string name="list_menu_all_lists">全てのキャッシュ</string>
   <string name="list_menu_drop">このリストを消去</string>
   <string name="list_menu_change">別のリストにする</string>
   <string name="list_menu_rename">このリスト名を変更</string>
   <string name="list_title">リストの選択</string>
   <string name="list_inbox">保存済み</string>
+  <string name="list_all_lists">全てのキャッシュ</string>
   <string name="list_dialog_create_title">新しいリスト</string>
   <string name="list_dialog_create">作成</string>
   <string name="list_dialog_cancel">キャンセル</string>
@@ -358,7 +362,7 @@
   <string name="init_login">ログインをチェックしてログイン情報を保存</string>
   <string name="init_login_popup">ログイン</string>
   <string name="init_login_popup_working">Geocaching.comにログイン中…</string>
-  <string name="init_login_popup_ok">ログイン成功</string>
+  <string name="init_login_popup_ok">ログイン完了</string>
   <string name="init_login_popup_failed">ログインに失敗しました。</string>
   <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
   <string name="init_go4cache_connect">Go 4 Cacheに接続する</string>
@@ -394,7 +398,7 @@
   <string name="init_save_log_img">Save Images from Logs</string>
   <string name="init_units">距離をマイル/フィートで表示\n(イギリス帝国単位)</string>
   <string name="init_nav">Googleマップナビを使う</string>
-  <string name="init_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオフライン専用にし、オンラインでの投稿をしない。このチェックは外してもオフライン用に保存することは可能です。)</string>
+  <string name="init_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオフライン専用にし、オンラインでの投稿をしない。このチェックを外してもオフライン用に保存することは可能です。)</string>
   <string name="init_livelist">キャッシュの一覧で方向をアイコン表示する</string>
   <string name="init_altitude">標高の修正</string>
   <string name="init_altitude_description">もし現在地の標高が正しくないなら修正できます。正または負のメートル単位で入力してください。</string>
@@ -413,9 +417,9 @@
   <string name="init_restore_running">キャッシュのデータベースをリストア中…</string>
   <string name="init_restore_confirm">キャッシュのデータベースは空です。バックアップからリストアしますか?</string>
   <string name="init_backup_last">最終バックアップ日時:</string>
-  <string name="init_backup_last_no">バックアップすべきファイルがありません。</string>
+  <string name="init_backup_last_no">過去にバックアップを取ったことはありません。</string>
   <string name="init_mapsources">地図の設定</string>
-  <string name="init_mapsources_description">オンライン地図をGoogleマップからOpenStreetMap(その派生オンライン地図やオフライン地図)に変更できます。(詳細は<a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>(英語)をご覧ください。)</string>
+  <string name="init_mapsources_description">オンライン地図をGoogleマップからOpenStreetMap(その派生オンライン地図やオフライン地図)に変更できます。詳細は<a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>(英語)をご覧ください。</string>
   <string name="init_mapsource_select">地図の選択</string>
   <string name="init_select_mapfile">選択…</string>
   <string name="init_maptrail">地図に軌跡を表示</string>
@@ -427,7 +431,7 @@
   <string name="init_default_navigation_tool_select">ナビツールの選択</string>
   <string name="init_default_navigation_tool_2_description">2番目にお好きなナビツールを選択できます。キャッシュ情報のタイトルの右隣にあるナビアイコンを長押しすると起動できます。</string>
   <string name="init_debug_title">デバッグ情報</string>
-  <string name="init_debug_note">c:geoはデバッグ情報を作成することができます。これは一般のユーザには役に立たないかもしれませんが、開発者には不具合の原因を調べるのに必要です。その時は下のチェックボックスをオンにしてデバッグ情報ファイルを開発者に送ってください。</string>
+  <string name="init_debug_note">c:geoはデバッグ情報を生成することができます。これは一般のユーザには役に立たないかもしれませんが、開発者には不具合の原因を調べるのに必要です。その時は下のチェックボックスをオンにしてログファイルを開発者に送ってください。詳しくは<a href="https://github.com/cgeo/c-geo-opensource/wiki/Send-log-to-developers">Send log to developers</a>(英語)をご覧ください。</string>
   <string name="init_debug">デバッグ情報を作成</string>
   <string name="init_dbonsdcard_title">データベースの保存場所</string>
   <string name="init_dbonsdcard_note">c:geoのデータベースを外部メディア(SDカード)に保存することもできます。その場合は端末の内蔵メモリの空き容量は増えますが、c:geoはSDカードなしでは使用できなくなり動作も少し遅くなるかもしれません。</string>
@@ -532,7 +536,7 @@
   <string name="cache_dialog_loading_details_status_gcvote">GCVoteをロード中</string>
   <string name="cache_dialog_loading_details_status_elevation">標高値をロード中</string> <!-- 正確に訳すと高度値 -->
   <string name="cache_dialog_loading_details_status_cache">Caching Data</string>
-  <string name="cache_dialog_loading_details_status_render">表示を処理中</string>
+  <string name="cache_dialog_loading_details_status_render">表示の処理中</string>
   <string name="cache_dialog_offline_save_title">オフライン</string>
   <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中…</string>
   <string name="cache_dialog_offline_drop_title">オフライン</string>
@@ -548,7 +552,7 @@
   <string name="cache_menu_radar">レーダー</string>
   <string name="cache_menu_map">地図で表示</string>
   <string name="cache_menu_map_static">オフライン地図</string>
-  <string name="cache_menu_download_map_static">Download Static Maps</string>
+  <string name="cache_menu_download_map_static">オフライン用に地図をダウンロード</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">外部地図で表示</string>
   <string name="cache_menu_streetview">Googleストリートビュー</string>
@@ -681,11 +685,11 @@
     <item>@string/unit_yd</item>
     <item>@string/unit_mi</item>
   </string-array>
-  <string name="unit_m">m(メートル)</string>
-  <string name="unit_km">km(キロメートル)</string>
-  <string name="unit_ft">ft(フィート)</string>
-  <string name="unit_yd">yd(ヤー)ド</string>
-  <string name="unit_mi">mi(マイル)</string>
+  <string name="unit_m">メートル</string>
+  <string name="unit_km">キロメートル</string>
+  <string name="unit_ft">フィート</string>
+  <string name="unit_yd">ヤード</string>
+  <string name="unit_mi">マイル</string>
   
   <!-- visit -->
   <string name="visit_tweet">この発見をTwitterでつぶやく</string>
@@ -696,7 +700,7 @@
   <string name="map_view_map">地図の変更</string>
   <string name="map_trail_show">軌跡を表示</string>
   <string name="map_trail_hide">軌跡を非表示</string>
-  <string name="map_circles_show">半径0.1マイル(161m)の円を表示</string>
+  <string name="map_circles_show">半径161mの円を表示</string>
   <string name="map_circles_hide">円を非表示</string>
   <string name="map_live_enable">オンラインで取得</string>
   <string name="map_live_disable">保存済みキャッシュのみ</string>
@@ -734,7 +738,7 @@
   <string name="search_hbu_prefill">所有者名</string>
   <string name="search_hbu_button">所有者名で検索</string>
   <string name="search_tb">トラッカブルアイテム</string>
-  <string name="search_tb_hint">トラッカブルアイテムコード(TBコード)</string>
+  <string name="search_tb_hint">トラッカブルアイテムコード</string>
   <string name="search_tb_button">トラッカブルアイテムを検索</string>
   <string name="search_destination">目的地</string>
   <string name="search_direction_rel">この地点から</string>
@@ -806,7 +810,7 @@
   <string name="addon_download_prompt">Google Playからインストールしますか?</string>
   
   <!-- export -->
-  <string name="export">Export</string>
+  <string name="export">書き出す</string>
   <string name="export_as">Export as…</string>
   <string name="export_exportedto">exported to</string>
   <string name="export_failed">書き出しに失敗しました</string>
@@ -967,7 +971,7 @@
   <string name="website">Webサイト: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">マニュアル: <a href="http://manual.cgeo.org/">c:geo マニュアル(英語)</a></string>
+  <string name="nutshellmanual">マニュアル: <a href="http://manual.cgeo.org/">c:geo マニュアル</a>(英語)</string>
   <string name="about_go4cache"><b>Go 4 cache</b>サービスにより他のジオキャッシャーを(<b>c:geo</b>またはブラウザで)地図上にリアルタイムで表示できます。例えば、彼らがどのキャッシュを探しているのか表示できます。<b>Go 4 cache</b>に接続すれば<b>c:geo</b>でジオキャッシング中に現在地を(<b>c:geo</b>が起動している間だけ)公開することができます。</string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="about_auth_1"><b>c:geo</b>がTwitterにアクセスする許可を得るには次のようにしてください。</string>
