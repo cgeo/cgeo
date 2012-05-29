@@ -28,7 +28,7 @@ public class AboutActivity extends AbstractActivity {
         try {
             final PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), 0);
 
-            setTitle(res.getString(R.string.about) + " (ver. " + info.versionName + ")");
+            ((TextView) findViewById(R.id.about_version_string)).setText(info.versionName);
             ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
             ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Exception e) {

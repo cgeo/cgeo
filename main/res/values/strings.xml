@@ -345,6 +345,7 @@
   <string name="list_dialog_rename">Rename</string>
 
   <!-- about -->
+  <string name="about_version">Version</string>
   <string name="about_changelog">Changelog</string>
   <string name="about_donate">Donate</string>
   <string name="about_detail">Details</string>
