@@ -342,7 +342,8 @@
   <string name="list_dialog_rename">Rinomina</string>
 
   <!-- about -->
-  <string name="about_changelog">Changelog</string>
+  <string name="about_version">Versione</string>
+  <string name="about_changelog">Modifiche</string>
   <string name="about_donate">Donazioni</string>
   <string name="about_detail">Dettagli</string>
   <string name="about_donation_more">Donazione\nsviluppo</string>
