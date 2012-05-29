@@ -12,6 +12,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.Version;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,9 +21,7 @@ import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.location.Address;
@@ -187,13 +186,8 @@ public class cgeo extends AbstractActivity {
         setContentView(R.layout.main);
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 
-        try {
-            final PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), 0);
-            version = info.versionCode;
-            Log.i("Starting " + info.packageName + " " + info.versionCode + " a.k.a " + info.versionName + "…");
-        } catch (final NameNotFoundException e) {
-            Log.i("No info.");
-        }
+        version = Version.getVersionCode();
+        Log.i("Starting " + Version.getPackageName() + " " + version + " a.k.a " + Version.getVersionName() + "…");
 
         try {
             if (!Settings.isHelpShown()) {

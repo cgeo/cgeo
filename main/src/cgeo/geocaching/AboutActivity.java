@@ -1,10 +1,9 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.Version;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -21,19 +20,9 @@ public class AboutActivity extends AbstractActivity {
         setContentView(R.layout.about);
         setTitle(res.getString(R.string.about));
 
-        init();
-    }
-
-    private void init() {
-        try {
-            final PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), 0);
-
-            ((TextView) findViewById(R.id.about_version_string)).setText(info.versionName);
-            ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
-            ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
-        } catch (Exception e) {
-            Log.e("AboutActivity.init: Failed to obtain package version.");
-        }
+        ((TextView) findViewById(R.id.about_version_string)).setText(Version.getVersionName());
+        ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /**
