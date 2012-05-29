@@ -146,6 +146,7 @@
   <string name="err_detail_cache_find_next">Prepáčte, c:geo nemôže nájsť ďalšiu skrýšu.</string>
   <string name="err_detail_cache_forgot">Prepáčte, c:geo zabudlo, akú skrýšu chcete zobraziť.</string>
   <string name="err_detail_cache_forgot_visit">Prepáčte, c:geo zabudlo, akú skrýšu ste prezerali.</string>
+  <string name="err_detail_google_maps_limit_reached">c:geo sa nepodarilo prevziať statické mapy. Je možné, že bol dosiahnutý limit Google mapy.</string>
   <string name="err_detail_no_spoiler">c:geo nenašla pre túto skrýšu žiaden spoilerový obrázok.</string>
   <string name="err_detail_no_map_static">c:geo nenašla žiadnu statickú mapu pre túto skrýšu.</string>
   <string name="err_detail_not_load_map_static">Prepáčte, c:geo sa nepodarilo načítať statické mapy.</string>
@@ -218,6 +219,9 @@
   <string name="warn_search_help_tb">Zadajte kód trasovateľného predmet. Napríklad „TB29QMZ“.</string>
   <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
   <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
+  <string name="warn_invalid_mapfile">Vybraná mapa nemá platný formát mapsforge verzie 0.3.0.\nOffline mapy nie sú dostupné.</string>
+  <string name="warn_deprecated_mapfile">Používate zastaralý formát mapových súborov verzie 0.2.4.\nZvážte prechod na mapy verzie 0.3.0.\nV budúcnosti prestane byť verzia 0.2.4 podporovaná.</string>
+   <string name="warn_nonexistant_mapfile">Vybraný mapový súbor neexistuje.\nOffline mapy nie sú dostupné.</string>
 
 
   <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
@@ -282,6 +286,7 @@
   <string name="caches_sort_date">dátumu</string>
   <string name="caches_sort_finds">nájdení</string>
   <string name="caches_sort_state">stavu</string>
+  <string name="caches_sort_storage">dátumu uloženia v zariadení</string>
   <string name="caches_select_mode">Mód výberu</string>
   <string name="caches_select_mode_exit">Opustiť mód výberu</string>
   <string name="caches_select_invert">Inverzný výber</string>
@@ -319,11 +324,13 @@
   <!-- caches lists -->
   <string name="list_menu">Zoznam</string>
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
+  <string name="list_menu_all_lists">Všetky skrýše</string>
   <string name="list_menu_drop">Zahodiť aktuálny zoznam</string>
   <string name="list_menu_change">Zmeniť zoznam</string>
   <string name="list_menu_rename">Premenovať tento zoznam</string>
   <string name="list_title">Výber zoznamu</string>
   <string name="list_inbox">Uložené</string>
+  <string name="list_all_lists">Všetky skrýše</string>
   <string name="list_dialog_create_title">Nový zoznam</string>
   <string name="list_dialog_create">Vytvoriť</string>
   <string name="list_dialog_cancel">Zrušiť</string>
@@ -338,6 +345,7 @@
   <string name="list_dialog_rename">Premenovať</string>
 
   <!-- about -->
+  <string name="about_version">Verzia</string>
   <string name="about_changelog">Zmeny</string>
   <string name="about_donate">Podpora vývoja</string>
   <string name="about_detail">Detaily</string>
@@ -426,6 +434,14 @@
   <string name="init_debug_title">Ladiace informácie</string>
   <string name="init_debug_note">c:geo môže vytvárať generovať množstvo ladiacich informácií. Aj keď tieto informácie nie sú pre používateľov zvyčajne použiteľné, vývojári ich môžu potrebovať pre analýzu chyby. V tomto prípade vás požiadajú začiarknuť políčko nižšie a poslať vytvorený log súbor.</string>
   <string name="init_debug">Generovanie ladiacich informácií</string>
+  <string name="init_dbonsdcard_title">Umiestnenie databázy</string>
+  <string name="init_dbonsdcard_note">Databázu c:geo môžete umiestniť na externé úložisko. Ak to spravíte, ušetríte vnútornú pamäť, ale môžete stratiť časť z výkonu a c:geo nebude fungovať, keď vaša SD karta nebude dostupná.</string>
+  <string name="init_dbonsdcard">Databáza na externom úložisku</string>
+  <string name="init_dbmove">Presúvanie databázy</string>
+  <string name="init_dbmove_dbmove">Presúvanie databázy</string>
+  <string name="init_dbmove_running">Prebieha presúvanie databázy</string>
+  <string name="init_dbmove_success">Databáza bola úspešne presunutá.</string>
+  <string name="init_dbmove_failed">Presun databázy zlyhal.</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
@@ -491,6 +507,11 @@
   <string name="cache_watchlist_not_on">Skrýša nie je vo vašom zozname sledovaných.</string>
   <string name="cache_watchlist_add">Pridať do zoznamu sledovaných</string>
   <string name="cache_watchlist_remove">Odstrániť zo zoznamu sledovaných</string>
+  <string name="cache_favpoint_on">Skrýša patrí medzi vaše obľúbené.</string>
+  <string name="cache_favpoint_not_on">Skrýša nepatrí medzi vaše obľúbené.</string>
+  <string name="cache_favpoint_add">Pridať</string>
+  <string name="cache_favpoint_remove">Odstrániť</string>
+
   <string name="cache_waypoints">Body trasy</string>
   <plurals name="waypoints">
       <item quantity="one">1 bod trasy</item>
@@ -509,6 +530,7 @@
   <string name="cache_dialog_loading_details_status_waypoints">Spracovanie bodov trasy</string>
   <string name="cache_dialog_loading_details_status_gcvote">Načítanie GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Načítanie údajov o stúpaní</string>
+  <string name="cache_dialog_loading_details_status_cache">Kešovanie údajov</string>
   <string name="cache_dialog_loading_details_status_render">Vykreslovanie pohľadu</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Ukladanie skrýše pre použitie offline…</string>
@@ -525,6 +547,7 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mapa</string>
   <string name="cache_menu_map_static">Statická mapa</string>
+  <string name="cache_menu_download_map_static">Prevziať statické mapy</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Zobraziť na externej mape</string>
   <string name="cache_menu_streetview">Zobrazenie ulíc</string>
@@ -768,6 +791,20 @@
   <string name="addon_missing_title">Chýbajúci doplnok</string>
   <string name="addon_download_prompt">Získať doplnok teraz z Google Play.</string>
 
+  <!-- export -->
+  <string name="export">Exportovať</string>
+  <string name="export_as">Exportovať ako…</string>
+  <string name="export_exportedto">exportované do</string>
+  <string name="export_failed">Export zlyhal</string>
+  <string name="export_fieldnotes">Poznámky</string>
+  <string name="export_fieldnotes_info">Poznámky budú exportované do /sdcard/field-notes s aktuálnym dátumom a časom ako názov súboru.</string>
+  <string name="export_fieldnotes_upload">Nahrať na geocaching.com</string>
+  <string name="export_fieldnotes_uploading">Nahrávanie…</string>
+  <string name="export_fieldnotes_upload_success">Nahranie na geocaching.com bolo úspešné</string>
+  <string name="export_fieldnotes_onlynew">Iba od posledného exportu</string>
+  <string name="export_fieldnotes_creating">Vytváranie poznámok…</string>
+  <string name="export_gpx">GPX</string>
+
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Psi povolené</string>
   <string name="attribute_dogs_no">Psi nepovolené</string>
@@ -930,5 +967,12 @@
     <item quantity="one">pred minútou</item>
     <item quantity="few">pred %d minútami</item>
     <item quantity="other">pred %d minútami</item>
+  </plurals>
+
+  <string name="clipboard_copy_ok">Skopírované do schránky</string>
+  <plurals name="days_ago">
+      <item quantity="one">včera</item>
+      <item quantity="few">pred %d dňami</item>
+      <item quantity="other">pred %d dňami</item>
   </plurals>
 </resources>
