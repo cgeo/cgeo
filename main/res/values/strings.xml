@@ -1073,6 +1073,7 @@
     · Display time since last log on TB page\n
     · Popup on live map will give more details for unsaved caches\n
     · View all caches from different lists at once\n
+    · Notification to user in case of new version, disturbances and similar occasions\n
     \n
     <b>Bugfixing:</b>\n
     · Static maps download for waypoints now off by default\n
@@ -1089,6 +1090,9 @@
     · Show all stored caches on map (limit of 500 caches removed)\n
     · Position marker now shown above cache icons\n
     · Wrong cache size in cache details corrected\n
+    · Display coordinates embedded in a log\n
+    · Circles on map still shown after orientation change\n
+    · A lot of translation improvements\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
     \n
