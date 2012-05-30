@@ -254,9 +254,8 @@ public class cgeo extends AbstractActivity {
         setContentView(R.layout.main);
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 
-        version = Version.getVersionCode();
-        Log.i("Starting " + Version.getPackageName() + ' ' + version + " a.k.a " + Version.getVersionName() +
-                " (" + Version.getVersionKind() + ')');
+        version = Version.getVersionCode(this);
+        Log.i("Starting " + getPackageName() + ' ' + version + " a.k.a " + Version.getVersionName(this));
 
         try {
             if (!Settings.isHelpShown()) {

@@ -34,25 +34,27 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class cgeoapplication extends Application {
 
-    private cgData storage = null;
+    final private cgData storage = new cgData();
     private String action = null;
     private volatile GeoDataProvider geo;
     private volatile DirectionProvider dir;
     public boolean firstRun = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean databaseCleaned = false; // database was cleaned
-    private StatusUpdater statusUpdater = null;
+    final private StatusUpdater statusUpdater = new StatusUpdater();
     private static cgeoapplication instance = null;
 
     public cgeoapplication() {
         instance = this;
-        storage = new cgData(this);
-        statusUpdater = new StatusUpdater();
-        new Thread(statusUpdater).start();
     }
 
     public static cgeoapplication getInstance() {
         return instance;
+    }
+
+    @Override
+    public void onCreate() {
+        new Thread(statusUpdater).start();
     }
 
     @Override
@@ -66,12 +68,8 @@ public class cgeoapplication extends Application {
     public void onTerminate() {
         Log.d("Terminating c:geo…");
 
-        if (storage != null) {
-            storage.clean();
-            storage.closeDb();
-            storage = null;
-            storage = new cgData(this);
-        }
+        storage.clean();
+        storage.closeDb();
 
         super.onTerminate();
     }

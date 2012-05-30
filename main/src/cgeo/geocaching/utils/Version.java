@@ -1,72 +1,44 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.cgeoapplication;
-
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-import java.util.regex.Pattern;
-
 public class Version {
 
-    static public enum BuildKind {
-        MARKET_RELEASE, RELEASE_CANDIDATE, NIGHTLY_BUILD, DEVELOPER_BUILD;
-
-        @Override public String toString() {
-            return name().toLowerCase().replace('_', ' ');
-        }
-    }
-
-    private final String packageName;
-    private String versionName;
-    private int versionCode;
-    private static Version instance = new Version();
-
-    final private static Pattern NB_PATTERN = Pattern.compile("-NB(\\d+)?-");
-    final private static Pattern RC_PATTERN = Pattern.compile("-RC(\\d+)?-");
-    final private static Pattern MARKET_PATTERN = Pattern.compile("^\\d\\d\\d\\d\\d\\.\\d\\d\\.\\d\\d$");
-
     private Version() {
-        final Context app = cgeoapplication.getInstance();
-        packageName = app.getPackageName();
+        // Do not instantiate
+    }
+
+    private static PackageInfo getPackageInfo(final Context context) {
         try {
-            final PackageInfo packageInfo = app.getPackageManager().getPackageInfo(packageName, 0);
-            versionName = packageInfo.versionName;
-            versionCode = packageInfo.versionCode;
+            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
         } catch (final NameNotFoundException e) {
-            // This cannot happen, let it crash later by letting the variables initialized to their default value
-            Log.e("Version: unable to get package information", e);
+            Log.e("Version.getPackageInfo: unable to get package information", e);
+            return null;
         }
     }
 
-    public static String getPackageName() {
-        return instance.packageName;
+    /**
+     * Get the current package version name if available.
+     *
+     * @param context the context to use
+     * @return the current package version name, or "" if unavailable
+     */
+    public static String getVersionName(final Context context) {
+        final PackageInfo packageInfo = getPackageInfo(context);
+        return packageInfo != null ? packageInfo.versionName : "";
     }
 
-    public static String getVersionName() {
-        return instance.versionName;
-    }
-
-    public static int getVersionCode() {
-        return instance.versionCode;
-    }
-
-    public static BuildKind lookupKind(final String versionName) {
-        if (NB_PATTERN.matcher(versionName).find()) {
-            return BuildKind.NIGHTLY_BUILD;
-        }
-        if (RC_PATTERN.matcher(versionName).find()) {
-            return BuildKind.RELEASE_CANDIDATE;
-        }
-        if (MARKET_PATTERN.matcher(versionName).find()) {
-            return BuildKind.MARKET_RELEASE;
-        }
-        return BuildKind.DEVELOPER_BUILD;
-    }
-
-    public static BuildKind getVersionKind() {
-        return lookupKind(instance.versionName);
+    /**
+     * Get the current package version code if available.
+     *
+     * @param context the context to use
+     * @return the current package version code, or -1 if unavailable
+     */
+    public static int getVersionCode(final Context context) {
+        final PackageInfo packageInfo = getPackageInfo(context);
+        return packageInfo != null ? packageInfo.versionCode : -1;
     }
 
 }

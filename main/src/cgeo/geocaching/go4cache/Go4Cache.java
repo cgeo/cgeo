@@ -93,7 +93,7 @@ public final class Go4Cache extends Thread {
                         "ln", lonStr,
                         "a", currentAction,
                         "s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + currentAction + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase(),
-                        "v", Version.getVersionName());
+                        "v", Version.getVersionName(cgeoapplication.getInstance()));
 
                 Network.postRequest("http://api.go4cache.com/", params);
 
