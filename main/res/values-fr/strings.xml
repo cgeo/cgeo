@@ -958,9 +958,6 @@
   <string name="status_new_release">Nouvelle version disponible.\nCliquer pour installer.</string>
   <string name="status_new_nightly">Nouvelle version de test disponible.\nCliquer pour installer.</string>
   <string name="status_new_rc">Nouvelle version candidate disponible.\nCliquer pour installer.</string>
-  <string name="status_default_developer_build">Version de développement</string>
-  <string name="status_default_nightly">Version de test.\nMerci de signaler les problèmes.\n</string>
-  <string name="status_rc">Version candidate.\nMerci de signaler les problèmes.\n"</string>
   <string name="status_geocaching_change">Des changements récents sur geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
   <string name="status_geocaching_livemap">Des changements récents sur geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
 

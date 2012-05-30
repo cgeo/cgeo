@@ -982,9 +982,6 @@
   <string name="status_new_release">New release available.\nClick to install.</string>
   <string name="status_new_nightly">New nightly build available.\nClick to install.</string>
   <string name="status_new_rc">New release candidate available.\nClick to install.</string>
-  <string name="status_default_developer_build">You are running a developer build</string>
-  <string name="status_default_nightly">You are running a nightly build.\nPlease report issues.\n</string>
-  <string name="status_rc">You are running a release candidate.\nPlease report issues.\n"</string>
   <string name="status_geocaching_change">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
   <string name="status_geocaching_livemap">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
 
