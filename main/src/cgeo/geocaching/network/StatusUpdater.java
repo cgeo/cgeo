@@ -1,5 +1,6 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.MemorySubject;
 import cgeo.geocaching.utils.PeriodicHandler;
 import cgeo.geocaching.utils.Version;
@@ -30,8 +31,8 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
     private void requestUpdate() {
         final JSONObject response =
                 Network.requestJSON("http://status.cgeo.org/api/status.json",
-                        new Parameters("version_code", "" + Version.getVersionCode(),
-                                "version_name", Version.getVersionName(),
+                        new Parameters("version_code", "" + Version.getVersionCode(cgeoapplication.getInstance()),
+                                "version_name", Version.getVersionName(cgeoapplication.getInstance()),
                                 "locale", Locale.getDefault().toString()));
         if (response != null) {
             notifyObservers(new Status(get(response, "message"), get(response, "message_id"), get(response, "icon"), get(response, "url")));

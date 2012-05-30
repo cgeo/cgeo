@@ -20,7 +20,7 @@ public class AboutActivity extends AbstractActivity {
         setContentView(R.layout.about);
         setTitle(res.getString(R.string.about));
 
-        ((TextView) findViewById(R.id.about_version_string)).setText(Version.getVersionName());
+        ((TextView) findViewById(R.id.about_version_string)).setText(Version.getVersionName(this));
         ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
         ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
     }
