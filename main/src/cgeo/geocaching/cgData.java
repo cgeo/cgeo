@@ -70,8 +70,7 @@ public class cgData {
      * holds the column indexes of the cache table to avoid lookups
      */
     private static int[] cacheColumnIndex;
-    private Context context = null;
-    private CacheCache cacheCache = null;
+    private CacheCache cacheCache = new CacheCache();
     private SQLiteDatabase database = null;
     private static final int dbVersion = 62;
     public static final int customListIdOffset = 10;
@@ -248,18 +247,13 @@ public class cgData {
     private HashMap<String, SQLiteStatement> statements = new HashMap<String, SQLiteStatement>();
     private static boolean newlyCreatedDatabase = false;
 
-    public cgData(Context contextIn) {
-        context = contextIn;
-        cacheCache = CacheCache.getInstance();
-    }
-
     public synchronized void init() {
         if (database != null) {
             return;
         }
 
         try {
-            final DbHelper dbHelper = new DbHelper(new DBContext(context));
+            final DbHelper dbHelper = new DbHelper(new DBContext(cgeoapplication.getInstance()));
             database = dbHelper.getWritableDatabase();
         } catch (Exception e) {
             Log.e("cgData.init: unable to open database for R/W", e);
@@ -2270,7 +2264,7 @@ public class cgData {
 
         // if not stored only, get codes from CacheCache as well
         if (!stored) {
-            geocodes.addAll(CacheCache.getInstance().getInViewport(viewport, cacheType));
+            geocodes.addAll(cacheCache.getInViewport(viewport, cacheType));
         }
 
         // viewport limitation

@@ -978,6 +978,13 @@
   <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
   <string name="about_auth_2">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
 
+  <!-- status -->
+  <string name="status_new_release">New release available.\nClick to install.</string>
+  <string name="status_new_nightly">New nightly build available.\nClick to install.</string>
+  <string name="status_new_rc">New release candidate available.\nClick to install.</string>
+  <string name="status_geocaching_change">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
+  <string name="status_geocaching_livemap">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
+
   <!-- go4cache -->
   <string name="go4cache_looking_around">Looking around</string>
   <string name="go4cache_tweeting">Tweeting</string>

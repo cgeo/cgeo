@@ -22,18 +22,9 @@ public class CacheCache {
     private static final int MAX_CACHED_CACHES = 1000;
     final private LeastRecentlyUsedMap<String, cgCache> cachesCache;
 
-    private static CacheCache instance = null;
-
-    private CacheCache() {
+    public CacheCache() {
         cachesCache = new LeastRecentlyUsedMap.LruCache<String, cgCache>(MAX_CACHED_CACHES);
         cachesCache.setRemoveHandler(new CacheRemoveHandler());
-    }
-
-    public static CacheCache getInstance() {
-        if (instance == null) {
-            instance = new CacheCache();
-        }
-        return instance;
     }
 
     public void removeAllFromCache() {

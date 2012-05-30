@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
 
@@ -33,22 +34,27 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class cgeoapplication extends Application {
 
-    private cgData storage = null;
+    final private cgData storage = new cgData();
     private String action = null;
     private volatile GeoDataProvider geo;
     private volatile DirectionProvider dir;
     public boolean firstRun = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean databaseCleaned = false; // database was cleaned
+    final private StatusUpdater statusUpdater = new StatusUpdater();
     private static cgeoapplication instance = null;
 
     public cgeoapplication() {
         instance = this;
-        storage = new cgData(this);
     }
 
     public static cgeoapplication getInstance() {
         return instance;
+    }
+
+    @Override
+    public void onCreate() {
+        new Thread(statusUpdater).start();
     }
 
     @Override
@@ -62,12 +68,8 @@ public class cgeoapplication extends Application {
     public void onTerminate() {
         Log.d("Terminating c:geo…");
 
-        if (storage != null) {
-            storage.clean();
-            storage.closeDb();
-            storage = null;
-            storage = new cgData(this);
-        }
+        storage.clean();
+        storage.closeDb();
 
         super.onTerminate();
     }
@@ -191,6 +193,10 @@ public class cgeoapplication extends Application {
             }
         }
         return dir;
+    }
+
+    public StatusUpdater getStatusUpdater() {
+        return statusUpdater;
     }
 
     public boolean storageStatus() {

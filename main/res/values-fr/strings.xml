@@ -954,6 +954,13 @@
   <string name="about_auth_1">Le processus suivant permet à <b>c:geo</b> d\'accéder à votre compte Twitter - si vous acceptez.</string>
   <string name="about_auth_2">Cliquer sur le bouton \"début d\'autorisation\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
 
+  <!-- status -->
+  <string name="status_new_release">Nouvelle version disponible.\nCliquer pour installer.</string>
+  <string name="status_new_nightly">Nouvelle version de test disponible.\nCliquer pour installer.</string>
+  <string name="status_new_rc">Nouvelle version candidate disponible.\nCliquer pour installer.</string>
+  <string name="status_geocaching_change">Des changements récents sur geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
+  <string name="status_geocaching_livemap">Des changements récents sur geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
+
   <!-- go4cache -->
   <string name="go4cache_looking_around">En balade</string>
   <string name="go4cache_tweeting">En train de tweeter</string>

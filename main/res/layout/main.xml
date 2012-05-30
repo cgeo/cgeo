@@ -17,6 +17,32 @@
 				android:src="@drawable/actionbar_manual"
 				android:onClick="goManual" />
 	</LinearLayout>
+	<RelativeLayout android:id="@+id/status"
+			android:visibility="gone"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_marginLeft="16dip"
+			android:layout_marginRight="16dip"
+			android:layout_marginTop="60dip"
+			android:background="@drawable/helper_bcg" >
+		<ImageView android:id="@+id/status_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentLeft="true"
+				android:layout_centerVertical="true"
+				android:layout_margin="4dip" />
+		<TextView android:id="@+id/status_message"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_toRightOf="@id/status_icon"
+				android:layout_centerVertical="true"
+				android:gravity="center"
+				android:padding="4dip"
+				android:textSize="14dip"
+				android:textColor="@color/text_icon" />
+	</RelativeLayout>
+<!-- ** -->
 	<LinearLayout
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
