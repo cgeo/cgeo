@@ -128,14 +128,12 @@ public class CompassView extends View {
      * @return the new value
      */
     static protected double smoothUpdate(double goal, double actual) {
-        double diff = goal - actual;
-        double offset = 0.0;
-
+        double diff = (goal - actual) % 360;
         if (diff < 0.0) {
             diff += 360.0;
-        } else if (diff >= 360.0) {
-            diff -= 360.0;
         }
+
+        double offset = 0.0;
 
         // If the difference is smaller than 1 degree, do nothing as it
         // causes the arrow to vibrate.
@@ -181,11 +179,9 @@ public class CompassView extends View {
         }
 
         double azimuthTemp = azimuthDrawn;
-        double azimuthRelative = azimuthTemp - headingDrawn;
+        double azimuthRelative = (azimuthTemp - headingDrawn) % 360;
         if (azimuthRelative < 0) {
             azimuthRelative += 360;
-        } else if (azimuthRelative >= 360) {
-            azimuthRelative -= 360;
         }
 
         // compass margins
