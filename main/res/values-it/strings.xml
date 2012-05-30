@@ -947,6 +947,13 @@
   <string name="about_auth_1">La procesura seguente autorizza <b>c:geo</b> ad accedere a Twitter - se confermato.</string>
   <string name="about_auth_2">Clicca sul pulsante \"Autorizza c:geo\" per iniziare. Questa procedura aprirà il browser sulla pagina Twitter. Fai Login su questa pagina e autorizza <b>c:geo</b> ad accedere al tuo account. Se accettato, Twitter mostrerà un PIN code numerico. Questo PIN deve essere riportato in <b>c:geo</b> e confermato.</string>
   
+  <!-- status -->
+  <string name="status_new_release">Una nuova versione è disponibile.\nClicca per installarla.</string>
+  <string name="status_new_nightly">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
+  <string name="status_new_rc">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
+  <string name="status_geocaching_change">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
+  <string name="status_geocaching_livemap">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
+
   <!-- go4cache -->
   <string name="go4cache_looking_around">Guardando attorno</string>
   <string name="go4cache_tweeting">Tweeting</string>
