@@ -223,7 +223,8 @@
   <string name="warn_load_images">c:geo failed to load images.</string>
   <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge version 0.3.0 map file.\nOffline maps are not available.</string>
   <string name="warn_deprecated_mapfile">You are using a deprecated version 0.2.4 map file.\nConsider switching to a version 0.3.0 map.\nWe will drop support for version 0.2.4 in the next release.</string>
-   <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
+  <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
+  <string name="warn_rendertheme_missing">Map theme not found.</string>
 
 
   <string name="info_log_posted">c:geo successfully submitted the log.</string>
@@ -453,6 +454,7 @@
   <string name="init_dbmove_running">Moving Database</string>
   <string name="init_dbmove_success">Successfully moved the database.</string>
   <string name="init_dbmove_failed">Failed to move database</string>
+  <string name="init_rendertheme_enable">Use custom theme</string>
 
   <!-- map sources -->
   <string-array name="map_sources">

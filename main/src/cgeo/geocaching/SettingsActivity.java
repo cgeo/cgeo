@@ -558,6 +558,16 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        final CheckBox renderThemeButton = (CheckBox) findViewById(R.id.rendertheme);
+        renderThemeButton.setChecked(Settings.isCustomRenderTheme());
+        renderThemeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setCustomRenderTheme(renderThemeButton.isChecked());
+            }
+        });
+
         // GPX Export directory
         final EditText gpxExportDir = (EditText) findViewById(R.id.gpx_exportdir);
         gpxExportDir.setText(Settings.getGpxExportDir());
