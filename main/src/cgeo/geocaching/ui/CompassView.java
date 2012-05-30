@@ -129,8 +129,6 @@ public class CompassView extends View {
      */
     static protected double smoothUpdate(double goal, double actual) {
         double diff = goal - actual;
-        final boolean largeDiff = Math.abs(diff) > 5;
-
         double offset = 0.0;
 
         if (diff < 0.0) {
@@ -142,9 +140,9 @@ public class CompassView extends View {
         // If the difference is smaller than 1 degree, do nothing as it
         // causes the arrow to vibrate.
         if (diff > 1.0 && diff <= 180.0) {
-            offset = largeDiff ? 2.0 : 1.0;
+            offset = Math.ceil(diff / 10.0); // for larger angles, rotate faster
         } else if (diff > 180.0 && diff < 359.0) {
-            offset = largeDiff ? -2.0 : -1.0;
+            offset = Math.floor((diff - 360.0) / 10.0);
         }
 
         return actual + offset;
