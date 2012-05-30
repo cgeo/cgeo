@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -470,7 +471,7 @@ public class cgeoapplication extends Application {
      * {@link cgData#saveCache}
      */
     public boolean updateCache(cgCache cache) {
-        return saveCache(cache, cache.getListId() != StoredList.TEMPORARY_LIST_ID ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+        return saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
     }
 
     /** {@link cgData#saveCache} */
