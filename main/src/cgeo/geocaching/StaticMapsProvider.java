@@ -37,11 +37,11 @@ public class StaticMapsProvider {
     }
 
     private static void downloadDifferentZooms(final String geocode, String markerUrl, String prefix, String latlonMap, int edge, final Parameters waypoints) {
-        downloadMap(geocode, 20, SATELLITE, markerUrl, prefix + "_1", "", latlonMap, edge, edge, waypoints);
-        downloadMap(geocode, 18, SATELLITE, markerUrl, prefix + "_2", "", latlonMap, edge, edge, waypoints);
-        downloadMap(geocode, 16, ROADMAP, markerUrl, prefix + "_3", "", latlonMap, edge, edge, waypoints);
-        downloadMap(geocode, 14, ROADMAP, markerUrl, prefix + "_4", "", latlonMap, edge, edge, waypoints);
-        downloadMap(geocode, 11, ROADMAP, markerUrl, prefix + "_5", "", latlonMap, edge, edge, waypoints);
+        downloadMap(geocode, 20, SATELLITE, markerUrl, prefix + '1', "", latlonMap, edge, edge, waypoints);
+        downloadMap(geocode, 18, SATELLITE, markerUrl, prefix + '2', "", latlonMap, edge, edge, waypoints);
+        downloadMap(geocode, 16, ROADMAP, markerUrl, prefix + '3', "", latlonMap, edge, edge, waypoints);
+        downloadMap(geocode, 14, ROADMAP, markerUrl, prefix + '4', "", latlonMap, edge, edge, waypoints);
+        downloadMap(geocode, 11, ROADMAP, markerUrl, prefix + '5', "", latlonMap, edge, edge, waypoints);
     }
 
     private static void downloadMap(String geocode, int zoom, String mapType, String markerUrl, String prefix, String shadow, String latlonMap, int width, int height, final Parameters waypoints) {
