@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
 
@@ -40,11 +41,14 @@ public class cgeoapplication extends Application {
     public boolean firstRun = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean databaseCleaned = false; // database was cleaned
+    private StatusUpdater statusUpdater = null;
     private static cgeoapplication instance = null;
 
     public cgeoapplication() {
         instance = this;
         storage = new cgData(this);
+        statusUpdater = new StatusUpdater();
+        new Thread(statusUpdater).start();
     }
 
     public static cgeoapplication getInstance() {
@@ -191,6 +195,10 @@ public class cgeoapplication extends Application {
             }
         }
         return dir;
+    }
+
+    public StatusUpdater getStatusUpdater() {
+        return statusUpdater;
     }
 
     public boolean storageStatus() {

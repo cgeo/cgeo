@@ -9,9 +9,13 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.network.StatusUpdater;
+import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.Version;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,13 +24,12 @@ import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,6 +38,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -174,6 +179,69 @@ public class cgeo extends AbstractActivity {
         }
     };
 
+    private class StatusHandler extends Handler implements IObserver<Status> {
+
+        @Override
+        public void update(final Status data) {
+            obtainMessage(0, data).sendToTarget();
+        }
+
+        @Override
+        public void handleMessage(final Message msg) {
+            final Status data = (Status) msg.obj;
+            updateDisplay(data != null && data.message != null ? data : StatusUpdater.defaultStatus());
+        }
+
+        private void updateDisplay(final Status data) {
+            final ViewGroup status = (ViewGroup) findViewById(R.id.status);
+            final ImageView statusIcon = (ImageView) findViewById(R.id.status_icon);
+            final TextView statusMessage = (TextView) findViewById(R.id.status_message);
+
+            if (data == null) {
+                status.setVisibility(View.GONE);
+                return;
+            }
+
+            if (data.icon != null) {
+                final int iconId = res.getIdentifier(data.icon, "drawable", getPackageName());
+                if (iconId != 0) {
+                    statusIcon.setImageResource(iconId);
+                    statusIcon.setVisibility(View.VISIBLE);
+                } else {
+                    Log.e("StatusHandler: could not find icon corresponding to @drawable/" + data.icon);
+                    statusIcon.setVisibility(View.GONE);
+                }
+            } else {
+                statusIcon.setVisibility(View.GONE);
+            }
+
+            String message = data.message;
+            if (data.messageId != null) {
+                final int messageId = res.getIdentifier(data.messageId, "string", getPackageName());
+                if (messageId != 0) {
+                    message = res.getString(messageId);
+                }
+            }
+
+            statusMessage.setText(message);
+            status.setVisibility(View.VISIBLE);
+
+            if (data.url != null) {
+                status.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(final View v) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(data.url)));
+                    }
+                });
+            } else {
+                status.setClickable(false);
+            }
+        }
+
+    }
+
+    private StatusHandler statusHandler = new StatusHandler();
+
     public cgeo() {
         super("c:geo-main-screen");
     }
@@ -187,13 +255,9 @@ public class cgeo extends AbstractActivity {
         setContentView(R.layout.main);
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 
-        try {
-            final PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), 0);
-            version = info.versionCode;
-            Log.i("Starting " + info.packageName + " " + info.versionCode + " a.k.a " + info.versionName + "…");
-        } catch (final NameNotFoundException e) {
-            Log.i("No info.");
-        }
+        version = Version.getVersionCode();
+        Log.i("Starting " + Version.getPackageName() + ' ' + version + " a.k.a " + Version.getVersionName() +
+                " (" + Version.getVersionKind() + ')');
 
         try {
             if (!Settings.isHelpShown()) {
@@ -229,6 +293,7 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
+        app.getStatusUpdater().addObserver(statusHandler);
         locationUpdater.startGeo();
         satellitesHandler.startGeo();
         updateUserInfoHandler.sendEmptyMessage(-1);
@@ -252,6 +317,7 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onPause() {
         initialized = false;
+        app.getStatusUpdater().deleteObserver(statusHandler);
         locationUpdater.stopGeo();
         satellitesHandler.stopGeo();
         super.onPause();
