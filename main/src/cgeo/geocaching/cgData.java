@@ -30,6 +30,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -72,7 +73,7 @@ public class cgData {
     private static int[] cacheColumnIndex;
     private CacheCache cacheCache = new CacheCache();
     private SQLiteDatabase database = null;
-    private static final int dbVersion = 62;
+    private static final int dbVersion = 63;
     public static final int customListIdOffset = 10;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
@@ -640,6 +641,14 @@ public class cgData {
 
                         }
                     }
+                    if (oldVersion < 63) {
+                        try {
+                            removeDoubleUnderscoreMapFiles();
+                        } catch (Exception e) {
+                            Log.e("Failed to upgrade to ver. 63: " + e.toString());
+
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -648,6 +657,26 @@ public class cgData {
             }
 
             Log.i("Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
+        }
+
+        /**
+         * Method to remove static map files with double underscore due to issue#1670
+         * introduced with release on 2012-05-24.
+         */
+        private static void removeDoubleUnderscoreMapFiles() {
+            File[] geocodeDirs = LocalStorage.getStorage().listFiles();
+            final FilenameFilter filter = new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String filename) {
+                    return (filename.startsWith("map_") && filename.contains("__"));
+                }
+            };
+            for (File dir : geocodeDirs) {
+                File[] wrongFiles = dir.listFiles(filter);
+                for (File wrongFile : wrongFiles) {
+                    wrongFile.delete();
+                }
+            }
         }
     }
 
