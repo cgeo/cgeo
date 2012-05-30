@@ -9,7 +9,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -189,7 +188,7 @@ public class cgeo extends AbstractActivity {
         @Override
         public void handleMessage(final Message msg) {
             final Status data = (Status) msg.obj;
-            updateDisplay(data != null && data.message != null ? data : StatusUpdater.defaultStatus());
+            updateDisplay(data != null && data.message != null ? data : null);
         }
 
         private void updateDisplay(final Status data) {

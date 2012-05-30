@@ -48,7 +48,6 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
 
     @Override
     public void run() {
-        notifyObservers(defaultStatus());
         Looper.prepare();
         new PeriodicHandler(1800000L) {
             @Override
@@ -57,19 +56,6 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
             }
         }.start();
         Looper.loop();
-    }
-
-    public static Status defaultStatus() {
-        switch (Version.getVersionKind()) {
-            case RELEASE_CANDIDATE:
-                return new Status(null, "status_default_rc", null, null);
-            case NIGHTLY_BUILD:
-                return new Status(null, "status_default_nightly", null, null);
-            case DEVELOPER_BUILD:
-                return new Status(null, "status_default_developer_build", null, null);
-            default:
-                return null;
-        }
     }
 
 }
