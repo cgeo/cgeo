@@ -433,6 +433,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             followMyLocation = live;
         } else {
             followMyLocation = 1 == mapStateIntent[3];
+            if ((overlayCaches.getCircles() ? 1 : 0) != mapStateIntent[4]) {
+                overlayCaches.switchCircles();
+            }
         }
         if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
             centerMap(geocodeIntent, searchIntent, coordsIntent, mapStateIntent);
@@ -798,7 +801,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 mapCenter.getLatitudeE6(),
                 mapCenter.getLongitudeE6(),
                 mapView.getMapZoomLevel(),
-                followMyLocation ? 1 : 0
+                followMyLocation ? 1 : 0,
+                overlayCaches.getCircles() ? 1 : 0
         };
     }
 
