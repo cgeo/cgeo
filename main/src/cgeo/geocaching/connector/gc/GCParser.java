@@ -1456,11 +1456,16 @@ public abstract class GCParser {
                     Log.e("GCParser.loadLogsFromDetails: failed to parse log date.");
                 }
 
+                // TODO: we should update our log data structure to be able to record
+                // proper coordinates, and make them clickable. In the meantime, it is
+                // better to integrate those coordinates into the text rather than not
+                // display them as all.
+                final String latLon = entry.getString("LatLonString");
                 final LogEntry logDone = new LogEntry(
                         entry.getString("UserName"),
                         date,
                         LogType.getByIconName(logIconName),
-                        entry.getString("LogText"));
+                        (StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + entry.getString("LogText"));
                 logDone.found = entry.getInt("GeocacheFindCount");
                 logDone.friend = friends;
 
