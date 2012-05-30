@@ -27,7 +27,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
     protected static boolean hasStaticMap(cgCache cache) {
         String geocode = cache.getGeocode();
         if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode, null)) {
-            return StaticMapsProvider.doesExistStaticMapForCache(geocode);
+            return StaticMapsProvider.hasStaticMapForCache(geocode);
         }
         return false;
     }
@@ -36,7 +36,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         String geocode = waypoint.getGeocode();
         int id = waypoint.getId();
         if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode, null)) {
-            return StaticMapsProvider.doesExistStaticMapForWaypoint(geocode, id);
+            return StaticMapsProvider.hasStaticMapForWaypoint(geocode, id);
         }
         return false;
     }

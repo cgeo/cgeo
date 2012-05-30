@@ -135,41 +135,27 @@ public class StaticMapsActivity extends AbstractActivity {
                     factory = new BitmapFactory();
                 }
 
-                for (int level = 1; level <= 5; level++) {
-                    try {
-                        if (waypoint_id != null) {
-                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "wp" + waypoint_id + "_" + level, false).getPath());
-                            if (image != null) {
-                                maps.add(image);
-                            }
-                        } else {
-                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "" + level, false).getPath());
-                            if (image != null) {
-                                maps.add(image);
-                            }
-                        }
-                    } catch (Exception e) {
-                        Log.e("StaticMapsActivity.LoadMapsThread.run.1: " + e.toString());
-                    }
-                }
-
-                if (maps.isEmpty()) {
+                // try downloading 2 times
+                for (int trials = 0; trials < 2; trials++) {
                     for (int level = 1; level <= 5; level++) {
                         try {
                             if (waypoint_id != null) {
-                                final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "wp" + waypoint_id + "_" + level, false).getPath());
+                                final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, waypoint_id, level);
                                 if (image != null) {
                                     maps.add(image);
                                 }
                             } else {
-                                final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "" + level, false).getPath());
+                                final Bitmap image = StaticMapsProvider.getCacheMap(geocode, level);
                                 if (image != null) {
                                     maps.add(image);
                                 }
                             }
                         } catch (Exception e) {
-                            Log.e("StaticMapsActivity.LoadMapsThread.run.2: " + e.toString());
+                            Log.e("StaticMapsActivity.LoadMapsThread.run: " + e.toString());
                         }
+                    }
+                    if (!maps.isEmpty()) {
+                        break;
                     }
                 }
 
@@ -201,13 +187,13 @@ public class StaticMapsActivity extends AbstractActivity {
         if (waypoint_id == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeCacheStaticMap(cache, this, true);
-            return StaticMapsProvider.doesExistStaticMapForCache(geocode);
+            return StaticMapsProvider.hasStaticMapForCache(geocode);
         }
         final cgWaypoint waypoint = cache.getWaypointById(waypoint_id);
         if (waypoint != null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeWaypointStaticMap(cache, this, waypoint, true);
-            return StaticMapsProvider.doesExistStaticMapForWaypoint(geocode, waypoint_id);
+            return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint_id);
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));
         return false;

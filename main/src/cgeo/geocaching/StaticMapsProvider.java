@@ -8,11 +8,14 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -21,6 +24,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class StaticMapsProvider {
+    private static final String PREFIX_PREVIEW = "preview";
     private static final String GOOGLE_STATICMAP_URL = "http://maps.google.com/maps/api/staticmap";
     private static final String SATELLITE = "satellite";
     private static final String ROADMAP = "roadmap";
@@ -32,7 +36,7 @@ public class StaticMapsProvider {
     /** ThreadPool restricting this to 1 Thread. **/
     private static final BlockingThreadPool pool = new BlockingThreadPool(1, Thread.MIN_PRIORITY);
 
-    public static File getMapFile(final String geocode, String prefix, final boolean createDirs) {
+    private static File getMapFile(final String geocode, String prefix, final boolean createDirs) {
         return LocalStorage.getStorageFile(geocode, MAP_FILENAME_PREFIX + prefix, false, createDirs);
     }
 
@@ -48,7 +52,7 @@ public class StaticMapsProvider {
         final Parameters params = new Parameters(
                 "center", latlonMap,
                 "zoom", String.valueOf(zoom),
-                "size", width + "x" + height,
+                "size", String.valueOf(width) + 'x' + String.valueOf(height),
                 "maptype", mapType,
                 "markers", "icon:" + markerUrl + '|' + shadow + latlonMap,
                 "sensor", "false");
@@ -80,7 +84,7 @@ public class StaticMapsProvider {
         downloadMaps(cache, display);
     }
 
-    public static void downloadMaps(cgCache cache, Display display) {
+    private static void downloadMaps(cgCache cache, Display display) {
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
@@ -114,7 +118,7 @@ public class StaticMapsProvider {
         String wpLatlonMap = waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         String wpMarkerUrl = getWpMarkerUrl(waypoint);
         // download map images in separate background thread for higher performance
-        downloadMaps(geocode, wpMarkerUrl, WAYPOINT_PREFIX + waypoint.getId() + "_", wpLatlonMap, edge, null, waitForResult);
+        downloadMaps(geocode, wpMarkerUrl, WAYPOINT_PREFIX + waypoint.getId() + '_', wpLatlonMap, edge, null, waitForResult);
     }
 
     public static void storeCacheStaticMap(cgCache cache, Activity activity, final boolean waitForResult) {
@@ -130,7 +134,7 @@ public class StaticMapsProvider {
                 continue;
             }
             final String wpMarkerUrl = getWpMarkerUrl(waypoint);
-            waypoints.put("markers", "icon:" + wpMarkerUrl + "|" + waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
+            waypoints.put("markers", "icon:" + wpMarkerUrl + '|' + waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
         }
         // download map images in separate background thread for higher performance
         final String cacheMarkerUrl = getCacheMarkerUrl(cache);
@@ -145,7 +149,7 @@ public class StaticMapsProvider {
         display.getMetrics(metrics);
         final int width = metrics.widthPixels;
         final int height = (int) (110 * metrics.density);
-        downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, "preview", "shadow:false|", latlonMap, width, height, null);
+        downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, width, height, null);
     }
 
     private static int guessMaxDisplaySide(Display display) {
@@ -182,14 +186,15 @@ public class StaticMapsProvider {
     }
 
     private static String getCacheMarkerUrl(final cgCache cache) {
-        String type = cache.getType().id;
+        StringBuilder url = new StringBuilder(MARKERS_URL);
+        url.append("marker_cache_").append(cache.getType().id);
         if (cache.isFound()) {
-            type += "_found";
+            url.append("_found");
         } else if (cache.isDisabled()) {
-            type += "_disabled";
+            url.append("_disabled");
         }
-
-        return MARKERS_URL + "marker_cache_" + type + ".png";
+        url.append(".png");
+        return url.toString();
     }
 
     private static String getWpMarkerUrl(final cgWaypoint waypoint) {
@@ -198,11 +203,12 @@ public class StaticMapsProvider {
     }
 
     public static void removeWpStaticMaps(int wp_id, final String geocode) {
+        if (wp_id <= 0) {
+            return;
+        }
         for (int level = 1; level <= 5; level++) {
             try {
-                if (wp_id > 0) {
-                    StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + wp_id + "_" + level, false).delete();
-                }
+                StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + wp_id + '_' + level, false).delete();
             } catch (Exception e) {
                 Log.e("StaticMapsProvider.removeWpStaticMaps: " + e.toString());
             }
@@ -215,9 +221,9 @@ public class StaticMapsProvider {
      * @param geocode
      * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
      */
-    public static boolean doesExistStaticMapForCache(String geocode) {
+    public static boolean hasStaticMapForCache(String geocode) {
         for (int level = 1; level <= 5; level++) {
-            File mapFile = StaticMapsProvider.getMapFile(geocode, "" + level, false);
+            File mapFile = StaticMapsProvider.getMapFile(geocode, String.valueOf(level), false);
             if (mapFile != null && mapFile.exists()) {
                 return true;
             }
@@ -232,7 +238,7 @@ public class StaticMapsProvider {
      * @param waypointId
      * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
      */
-    public static boolean doesExistStaticMapForWaypoint(String geocode, int waypointId) {
+    public static boolean hasStaticMapForWaypoint(String geocode, int waypointId) {
         for (int level = 1; level <= 5; level++) {
             File mapFile = StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + level, false);
             if (mapFile != null && mapFile.exists()) {
@@ -240,5 +246,17 @@ public class StaticMapsProvider {
             }
         }
         return false;
+    }
+
+    public static Bitmap getPreviewMap(final String geocode) {
+        return BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, PREFIX_PREVIEW, false).getPath());
+    }
+
+    public static Bitmap getWaypointMap(final String geocode, int waypoint_id, int level) {
+        return BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypoint_id + "_" + level, false).getPath());
+    }
+
+    public static Bitmap getCacheMap(final String geocode, int level) {
+        return BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, String.valueOf(level), false).getPath());
     }
 }

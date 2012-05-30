@@ -46,7 +46,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -1830,7 +1829,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             private Bitmap decode(final cgCache cache) {
-                return BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(cache.getGeocode(), "preview", false).getPath());
+                return StaticMapsProvider.getPreviewMap(cache.getGeocode());
             }
 
             @Override
