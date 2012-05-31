@@ -49,8 +49,15 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
         notifyObservers(event.values[0]);
     }
 
+    /**
+     * Take the phone rotation (through a given activity) in account and adjust the direction.
+     *
+     * @param activity the activity to consider when computing the rotation
+     * @param direction the unadjusted direction in degrees, in the [0, 360[ range
+     * @return the adjusted direction in degrees, in the [0, 360[ range
+     */
     public static float getDirectionNow(final Activity activity, final float direction) {
-        return Compatibility.getDirectionNow(direction, activity);
+        return Compatibility.getDirectionNow(direction, activity) % 360;
     }
 
 }
