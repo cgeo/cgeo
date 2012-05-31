@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.PeriodicHandler;
 
@@ -128,26 +129,19 @@ public class CompassView extends View {
      * @return the new value
      */
     static protected double smoothUpdate(double goal, double actual) {
-        double diff = goal - actual;
-        final boolean largeDiff = Math.abs(diff) > 5;
+        final double diff = DirectionProvider.difference(actual, goal);
 
         double offset = 0.0;
 
-        if (diff < 0.0) {
-            diff += 360.0;
-        } else if (diff >= 360.0) {
-            diff -= 360.0;
-        }
-
         // If the difference is smaller than 1 degree, do nothing as it
-        // causes the arrow to vibrate.
-        if (diff > 1.0 && diff <= 180.0) {
-            offset = largeDiff ? 2.0 : 1.0;
-        } else if (diff > 180.0 && diff < 359.0) {
-            offset = largeDiff ? -2.0 : -1.0;
+        // causes the arrow to vibrate. Round away from 0.
+        if (diff > 1.0) {
+            offset = Math.ceil(diff / 10.0); // for larger angles, rotate faster
+        } else if (diff < 1.0) {
+            offset = Math.floor(diff / 10.0);
         }
 
-        return actual + offset;
+        return (actual + offset + 360) % 360;
     }
 
     private class RedrawHandler extends PeriodicHandler {
@@ -160,7 +154,8 @@ public class CompassView extends View {
         public void act() {
             final double newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
             final double newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-            if (Math.abs(newAzimuthShown - azimuthShown) >= 2 || Math.abs(newCacheHeadingShown - cacheHeadingShown) >= 2) {
+            if (Math.abs(DirectionProvider.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                    Math.abs(DirectionProvider.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
                 synchronized(CompassView.this) {
                     azimuthShown = newAzimuthShown;
                     cacheHeadingShown = newCacheHeadingShown;
@@ -183,12 +178,7 @@ public class CompassView extends View {
         }
 
         double azimuthTemp = azimuthDrawn;
-        double azimuthRelative = azimuthTemp - headingDrawn;
-        if (azimuthRelative < 0) {
-            azimuthRelative += 360;
-        } else if (azimuthRelative >= 360) {
-            azimuthRelative -= 360;
-        }
+        final double azimuthRelative = (azimuthTemp - headingDrawn + 360) % 360;
 
         // compass margins
         int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
