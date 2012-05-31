@@ -24,21 +24,9 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sorting.CacheComparator;
-import cgeo.geocaching.sorting.DateComparator;
-import cgeo.geocaching.sorting.DifficultyComparator;
+import cgeo.geocaching.sorting.ComparatorUserInterface;
 import cgeo.geocaching.sorting.EventDateComparator;
-import cgeo.geocaching.sorting.FindsComparator;
-import cgeo.geocaching.sorting.GeocodeComparator;
-import cgeo.geocaching.sorting.InventoryComparator;
-import cgeo.geocaching.sorting.NameComparator;
-import cgeo.geocaching.sorting.PopularityComparator;
-import cgeo.geocaching.sorting.RatingComparator;
-import cgeo.geocaching.sorting.SizeComparator;
-import cgeo.geocaching.sorting.StateComparator;
-import cgeo.geocaching.sorting.StorageTimeComparator;
-import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VisitComparator;
-import cgeo.geocaching.sorting.VoteComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -72,10 +60,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class cgeocaches extends AbstractListActivity {
@@ -94,17 +80,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_CREATE_LIST = 7;
     private static final int MENU_DROP_LIST = 8;
     private static final int MENU_INVERT_SELECTION = 9;
-    private static final int MENU_SORT_DISTANCE = 10;
-    private static final int MENU_SORT_DIFFICULTY = 11;
-    private static final int MENU_SORT_TERRAIN = 12;
-    private static final int MENU_SORT_SIZE = 13;
-    private static final int MENU_SORT_FAVORITES = 14;
-    private static final int MENU_SORT_NAME = 15;
-    private static final int MENU_SORT_GEOCODE = 16;
     private static final int MENU_SWITCH_LIST = 17;
-    private static final int MENU_SORT_RATING = 18;
-    private static final int MENU_SORT_VOTE = 19;
-    private static final int MENU_SORT_INVENTORY = 20;
     private static final int MENU_IMPORT_WEB = 21;
     private static final int MENU_EXPORT = 22;
     private static final int MENU_REMOVE_FROM_HISTORY = 23;
@@ -114,18 +90,14 @@ public class cgeocaches extends AbstractListActivity {
     private static final int SUBMENU_SHOW_MAP = 54;
     private static final int SUBMENU_MANAGE_LISTS = 55;
     private static final int SUBMENU_MANAGE_OFFLINE = 56;
-    private static final int SUBMENU_SORT = 57;
+    private static final int MENU_SORT = 57;
     private static final int SUBMENU_MANAGE_HISTORY = 60;
-    private static final int MENU_SORT_DATE = 61;
-    private static final int MENU_SORT_FINDS = 62;
-    private static final int MENU_SORT_STATE = 63;
     private static final int MENU_RENAME_LIST = 64;
     private static final int MENU_DROP_CACHES_AND_LIST = 65;
     private static final int MENU_DEFAULT_NAVIGATION = 66;
     private static final int MENU_NAVIGATION = 69;
     private static final int MENU_STORE_CACHE = 73;
     private static final int MENU_FILTER = 74;
-    private static final int MENU_SORT_STORAGE = 75;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_RESTART_GEO_AND_DIR = -2;
@@ -682,34 +654,7 @@ public class cgeocaches extends AbstractListActivity {
         menu.add(0, MENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
 
         if (type != CacheListType.HISTORY) {
-            final SubMenu subMenuSort = menu.addSubMenu(0, SUBMENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(R.drawable.ic_menu_sort_alphabetically);
-            subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
-
-            // sort the context menu labels alphabetically for easier reading
-            final Map<String, Integer> comparators = new HashMap<String, Integer>();
-            comparators.put(res.getString(R.string.caches_sort_distance), MENU_SORT_DISTANCE);
-            comparators.put(res.getString(R.string.caches_sort_difficulty), MENU_SORT_DIFFICULTY);
-            comparators.put(res.getString(R.string.caches_sort_terrain), MENU_SORT_TERRAIN);
-            comparators.put(res.getString(R.string.caches_sort_size), MENU_SORT_SIZE);
-            comparators.put(res.getString(R.string.caches_sort_favorites), MENU_SORT_FAVORITES);
-            comparators.put(res.getString(R.string.caches_sort_name), MENU_SORT_NAME);
-            comparators.put(res.getString(R.string.caches_sort_gccode), MENU_SORT_GEOCODE);
-            comparators.put(res.getString(R.string.caches_sort_rating), MENU_SORT_RATING);
-            comparators.put(res.getString(R.string.caches_sort_vote), MENU_SORT_VOTE);
-            comparators.put(res.getString(R.string.caches_sort_inventory), MENU_SORT_INVENTORY);
-            comparators.put(res.getString(R.string.caches_sort_date), MENU_SORT_DATE);
-            comparators.put(res.getString(R.string.caches_sort_finds), MENU_SORT_FINDS);
-            comparators.put(res.getString(R.string.caches_sort_state), MENU_SORT_STATE);
-            comparators.put(res.getString(R.string.caches_sort_storage), MENU_SORT_STORAGE);
-
-            final List<String> sortedLabels = new ArrayList<String>(comparators.keySet());
-            Collections.sort(sortedLabels);
-            for (String label : sortedLabels) {
-                Integer id = comparators.get(label);
-                subMenuSort.add(1, id, 0, label).setCheckable(true).setChecked(id == MENU_SORT_DISTANCE);
-            }
-
-            subMenuSort.setGroupCheckable(1, true, true);
+            menu.add(0, MENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(R.drawable.ic_menu_sort_alphabetically);
         }
 
         menu.add(0, MENU_SWITCH_SELECT_MODE, 0, res.getString(R.string.caches_select_mode)).setIcon(R.drawable.ic_menu_agenda);
@@ -770,7 +715,7 @@ public class cgeocaches extends AbstractListActivity {
                     MENU_SWITCH_SELECT_MODE,
                     SUBMENU_MANAGE_HISTORY,
                     SUBMENU_SHOW_MAP,
-                    SUBMENU_SORT,
+                    MENU_SORT,
                     MENU_REFRESH_STORED,
                     MENU_DROP_CACHES,
                     MENU_DROP_CACHES_AND_LIST,
@@ -887,52 +832,10 @@ public class cgeocaches extends AbstractListActivity {
                 }
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_SORT_DISTANCE:
-                setComparator(item, null);
-                return false;
-            case MENU_SORT_DIFFICULTY:
-                setComparator(item, new DifficultyComparator());
-                return false;
-            case MENU_SORT_TERRAIN:
-                setComparator(item, new TerrainComparator());
-                return false;
-            case MENU_SORT_SIZE:
-                setComparator(item, new SizeComparator());
-                return false;
-            case MENU_SORT_FAVORITES:
-                setComparator(item, new PopularityComparator());
-                return false;
-            case MENU_SORT_NAME:
-                setComparator(item, new NameComparator());
-                return false;
-            case MENU_SORT_GEOCODE:
-                setComparator(item, new GeocodeComparator());
-                return false;
-            case MENU_SORT_STORAGE:
-                setComparator(item, new StorageTimeComparator());
-                return false;
             case MENU_SWITCH_LIST:
                 selectList(null);
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_SORT_RATING:
-                setComparator(item, new RatingComparator());
-                return false;
-            case MENU_SORT_VOTE:
-                setComparator(item, new VoteComparator());
-                return false;
-            case MENU_SORT_INVENTORY:
-                setComparator(item, new InventoryComparator());
-                return false;
-            case MENU_SORT_DATE:
-                setComparator(item, new DateComparator());
-                return true;
-            case MENU_SORT_FINDS:
-                setComparator(item, new FindsComparator(app));
-                return true;
-            case MENU_SORT_STATE:
-                setComparator(item, new StateComparator());
-                return true;
             case MENU_FILTER:
                 new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>() {
                     @Override
@@ -946,6 +849,14 @@ public class cgeocaches extends AbstractListActivity {
                                 setFilter(null);
                             }
                         }
+                    }
+                });
+                return true;
+            case MENU_SORT:
+                new ComparatorUserInterface(this).selectComparator(adapter.getCacheComparator(), new RunnableWithArgument<CacheComparator>() {
+                    @Override
+                    public void run(CacheComparator selectedComparator) {
+                        setComparator(selectedComparator);
                     }
                 });
                 return true;
@@ -968,12 +879,10 @@ public class cgeocaches extends AbstractListActivity {
         return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
     }
 
-    private void setComparator(MenuItem item,
-            CacheComparator comparator) {
+    private void setComparator(final CacheComparator comparator) {
         if (adapter != null) {
             adapter.setComparator(comparator);
         }
-        item.setChecked(true);
     }
 
     @Override

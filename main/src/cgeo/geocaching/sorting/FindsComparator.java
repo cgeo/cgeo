@@ -6,11 +6,7 @@ import cgeo.geocaching.enumerations.LogType;
 
 public class FindsComparator extends AbstractCacheComparator {
 
-    private cgeoapplication app;
-
-    public FindsComparator(cgeoapplication app) {
-        this.app = app;
-    }
+    private final cgeoapplication app = cgeoapplication.getInstance();
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
@@ -25,15 +21,14 @@ public class FindsComparator extends AbstractCacheComparator {
     }
 
     private int getFindsCount(cgCache cache) {
-        int finds = 0;
         if (cache.getLogCounts().isEmpty()) {
             cache.setLogCounts(app.loadLogCounts(cache.getGeocode()));
         }
         Integer logged = cache.getLogCounts().get(LogType.FOUND_IT);
         if (logged != null) {
-            finds = logged;
+            return logged;
         }
-        return finds;
+        return 0;
     }
 
 }

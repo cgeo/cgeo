@@ -3,7 +3,6 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
@@ -35,11 +34,11 @@ public final class FilterUserInterface {
         }
     }
 
-    private final IAbstractActivity activity;
+    private final Activity activity;
     private final ArrayList<FactoryEntry> registry;
     private final Resources res;
 
-    public FilterUserInterface(final IAbstractActivity activity) {
+    public FilterUserInterface(final Activity activity) {
         this.activity = activity;
         this.res = cgeoapplication.getInstance().getResources();
 
@@ -73,10 +72,10 @@ public final class FilterUserInterface {
     }
 
     public void selectFilter(final RunnableWithArgument<IFilter> runAfterwards) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder((Activity) activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.caches_filter);
 
-        final ArrayAdapter<FactoryEntry> adapter = new ArrayAdapter<FactoryEntry>((Activity) activity, android.R.layout.select_dialog_item, registry);
+        final ArrayAdapter<FactoryEntry> adapter = new ArrayAdapter<FactoryEntry>(activity, android.R.layout.select_dialog_item, registry);
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
@@ -107,10 +106,10 @@ public final class FilterUserInterface {
             return;
         }
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder((Activity) activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(menuTitle);
 
-        final ArrayAdapter<IFilter> adapter = new ArrayAdapter<IFilter>((Activity) activity, android.R.layout.select_dialog_item, filters);
+        final ArrayAdapter<IFilter> adapter = new ArrayAdapter<IFilter>(activity, android.R.layout.select_dialog_item, filters);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
