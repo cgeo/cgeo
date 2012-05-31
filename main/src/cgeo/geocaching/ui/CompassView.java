@@ -129,19 +129,19 @@ public class CompassView extends View {
      * @return the new value
      */
     static protected double smoothUpdate(double goal, double actual) {
-        final double diff = (goal - actual + 360) % 360;
+        final double diff = DirectionProvider.difference(actual, goal);
 
         double offset = 0.0;
 
         // If the difference is smaller than 1 degree, do nothing as it
-        // causes the arrow to vibrate.
-        if (diff > 1.0 && diff <= 180.0) {
+        // causes the arrow to vibrate. Round away from 0.
+        if (diff > 1.0) {
             offset = Math.ceil(diff / 10.0); // for larger angles, rotate faster
-        } else if (diff > 180.0 && diff < 359.0) {
-            offset = Math.floor((diff - 360.0) / 10.0);
+        } else if (diff < 1.0) {
+            offset = Math.floor(diff / 10.0);
         }
 
-        return actual + offset;
+        return (actual + offset + 360) % 360;
     }
 
     private class RedrawHandler extends PeriodicHandler {
