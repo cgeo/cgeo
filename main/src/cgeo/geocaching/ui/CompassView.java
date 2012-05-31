@@ -128,10 +128,7 @@ public class CompassView extends View {
      * @return the new value
      */
     static protected double smoothUpdate(double goal, double actual) {
-        double diff = (goal - actual) % 360;
-        if (diff < 0.0) {
-            diff += 360.0;
-        }
+        final double diff = (goal - actual + 360) % 360;
 
         double offset = 0.0;
 
@@ -179,10 +176,7 @@ public class CompassView extends View {
         }
 
         double azimuthTemp = azimuthDrawn;
-        double azimuthRelative = (azimuthTemp - headingDrawn) % 360;
-        if (azimuthRelative < 0) {
-            azimuthRelative += 360;
-        }
+        final double azimuthRelative = (azimuthTemp - headingDrawn + 360) % 360;
 
         // compass margins
         int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
