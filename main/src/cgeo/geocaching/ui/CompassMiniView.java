@@ -159,11 +159,7 @@ final public class CompassMiniView extends View {
     }
 
     private float calculateAzimuthRelative() {
-        float azimuthRelative = (azimuth - heading) % 360;
-        if (azimuthRelative < 0) {
-            azimuthRelative += 360;
-        }
-        return azimuthRelative;
+        return (azimuth - heading + 360) % 360;
     }
 
     @Override
