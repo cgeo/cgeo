@@ -478,15 +478,17 @@ public class cgeocaches extends AbstractListActivity {
         setTitle("caches");
 
         // get parameters
-        final Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            throw new UnsupportedOperationException(); // shall not happen, as we always set the extras when invoking the activity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Object typeObject = extras.get(EXTRAS_LIST_TYPE);
+            type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
+            coords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
         }
-        Object typeObject = extras.get(EXTRAS_LIST_TYPE);
-        type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
-        coords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
+        else {
+            extras = new Bundle();
+        }
         cacheType = Settings.getCacheType();
-        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+        if (isInvokedFromAttachment()) {
             type = CacheListType.OFFLINE;
             if (coords == null) {
                 coords = new Geopoint(0.0, 0.0);
@@ -623,9 +625,13 @@ public class cgeocaches extends AbstractListActivity {
         }
         prepareFilterBar();
 
-        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+        if (isInvokedFromAttachment()) {
             importGpxAttachement();
         }
+    }
+
+    private boolean isInvokedFromAttachment() {
+        return Intent.ACTION_VIEW.equals(getIntent().getAction());
     }
 
     private void importGpxAttachement() {
