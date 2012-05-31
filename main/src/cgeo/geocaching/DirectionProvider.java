@@ -67,7 +67,7 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
      * @return the adjusted direction in degrees, in the [0, 360[ range
      */
     public static float getDirectionNow(final Activity activity, final float direction) {
-        return Compatibility.getDirectionNow(direction, activity) % 360;
+        return Compatibility.getDirectionNow(direction, activity);
     }
 
 }

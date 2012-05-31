@@ -1,6 +1,7 @@
 package cgeo.geocaching.compatibility;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
@@ -40,23 +41,22 @@ public final class Compatibility {
 
     /**
      * Add 90, 180 or 270 degrees to the given rotation.
-     * <br/>
-     * Note: the result is not normalized and may fall outside your desired range.
      *
      * @param directionNowPre the direction in degrees before adjustment
      * @param activity the activity whose rotation is used to adjust the direction
-     * @return the adjusted direction
+     * @return the adjusted direction, in the [0, 360[ range
      */
     public static float getDirectionNow(final float directionNowPre, final Activity activity) {
+        float offset = 0;
         if (isLevel8) {
             try {
                 final int rotation = level8.getRotation(activity);
                 if (rotation == Surface.ROTATION_90) {
-                    return directionNowPre + 90;
+                    offset = 90;
                 } else if (rotation == Surface.ROTATION_180) {
-                    return directionNowPre + 180;
+                    offset = 180;
                 } else if (rotation == Surface.ROTATION_270) {
-                    return directionNowPre + 270;
+                    offset = 270;
                 }
             } catch (final Exception e) {
                 // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
@@ -66,10 +66,10 @@ public final class Compatibility {
             final Display display = activity.getWindowManager().getDefaultDisplay();
             final int rotation = display.getOrientation();
             if (rotation == Configuration.ORIENTATION_LANDSCAPE) {
-                return directionNowPre + 90;
+                offset = 90;
             }
         }
-        return directionNowPre;
+        return AngleUtils.normalize(directionNowPre + offset);
     }
 
     public static void dataChanged(final String name) {
