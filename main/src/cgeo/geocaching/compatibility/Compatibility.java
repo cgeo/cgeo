@@ -38,8 +38,16 @@ public final class Compatibility {
         }
     }
 
-    public static float getDirectionNow(final float directionNowPre,
-            final Activity activity) {
+    /**
+     * Add 90, 180 or 270 degrees to the given rotation.
+     * <br/>
+     * Note: the result is not normalized and may fall outside your desired range.
+     *
+     * @param directionNowPre the direction in degrees before adjustment
+     * @param activity the activity whose rotation is used to adjust the direction
+     * @return the adjusted direction
+     */
+    public static float getDirectionNow(final float directionNowPre, final Activity activity) {
         if (isLevel8) {
             try {
                 final int rotation = level8.getRotation(activity);
@@ -55,8 +63,7 @@ public final class Compatibility {
                 Log.e("Cannot call getRotation()", e);
             }
         } else {
-            final Display display = activity.getWindowManager()
-                    .getDefaultDisplay();
+            final Display display = activity.getWindowManager().getDefaultDisplay();
             final int rotation = display.getOrientation();
             if (rotation == Configuration.ORIENTATION_LANDSCAPE) {
                 return directionNowPre + 90;
