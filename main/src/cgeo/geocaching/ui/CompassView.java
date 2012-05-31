@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.PeriodicHandler;
 
@@ -153,7 +154,8 @@ public class CompassView extends View {
         public void act() {
             final double newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
             final double newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-            if (Math.abs(newAzimuthShown - azimuthShown) >= 2 || Math.abs(newCacheHeadingShown - cacheHeadingShown) >= 2) {
+            if (Math.abs(DirectionProvider.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                    Math.abs(DirectionProvider.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
                 synchronized(CompassView.this) {
                     azimuthShown = newAzimuthShown;
                     cacheHeadingShown = newCacheHeadingShown;
