@@ -14,6 +14,12 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
 
     private final SensorManager sensorManager;
 
+    // Previous values signalled to observers to avoid resending the same value when the
+    // device doesn't change orientation. The orientation is usually given with a 1 degree
+    // precision by Android, so it is not uncommon to obtain exactly the same value several
+    // times.
+    private float previous = -1;
+
     public DirectionProvider(final Context context) {
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
@@ -46,7 +52,11 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
 
     @Override
     public void onSensorChanged(final SensorEvent event) {
-        notifyObservers(event.values[0]);
+        final float direction = event.values[0];
+        if (direction != previous) {
+            notifyObservers(direction);
+            previous = direction;
+        }
     }
 
     /**
