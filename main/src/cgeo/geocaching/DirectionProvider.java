@@ -70,15 +70,4 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
         return Compatibility.getDirectionNow(direction, activity) % 360;
     }
 
-    /**
-     * Return the angle to turn of to go from an angle to the other
-     *
-     * @param from the origin angle in degrees, in the [0, 360[ range
-     * @param to the target angle in degreees, in the [0, 360[ range
-     * @return a value in degrees, in the [-180, 180[ range
-     */
-    public static double difference(final double from, final double to) {
-        return (to - from + 360 + 180) % 360 - 180;
-    }
-
 }
