@@ -106,7 +106,6 @@ public class cgeocaches extends AbstractListActivity {
     private String action = null;
     private CacheListType type = null;
     private Geopoint coords = null;
-    private CacheType cacheType = Settings.getCacheType();
     private SearchResult search = null;
     private final List<cgCache> cacheList = new ArrayList<cgCache>();
     private CacheListAdapter adapter = null;
@@ -437,7 +436,6 @@ public class cgeocaches extends AbstractListActivity {
         else {
             extras = new Bundle();
         }
-        cacheType = Settings.getCacheType();
         if (isInvokedFromAttachment()) {
             type = CacheListType.OFFLINE;
             if (coords == null) {
@@ -622,7 +620,7 @@ public class cgeocaches extends AbstractListActivity {
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-            SearchResult newSearch = cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, cacheType, listId);
+            SearchResult newSearch = cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, Settings.getCacheType(), listId);
             if (newSearch != null && newSearch.getTotal() != search.getTotal()) {
                 refreshCurrentList();
             }
@@ -1300,7 +1298,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void runSearch() {
-            search = GCParser.searchByCoords(coords, cacheType, Settings.isShowCaptcha());
+            search = GCParser.searchByCoords(coords, Settings.getCacheType(), Settings.isShowCaptcha());
         }
     }
 
@@ -1314,7 +1312,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void runSearch() {
-            search = GCParser.searchByKeyword(keyword, cacheType, Settings.isShowCaptcha());
+            search = GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha());
         }
     }
 
@@ -1328,7 +1326,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void runSearch() {
-            search = GCParser.searchByUsername(username, cacheType, Settings.isShowCaptcha());
+            search = GCParser.searchByUsername(username, Settings.getCacheType(), Settings.isShowCaptcha());
         }
     }
 
@@ -1342,7 +1340,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void runSearch() {
-            search = GCParser.searchByOwner(username, cacheType, Settings.isShowCaptcha());
+            search = GCParser.searchByOwner(username, Settings.getCacheType(), Settings.isShowCaptcha());
         }
     }
 
