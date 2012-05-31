@@ -136,10 +136,12 @@ public class cgCache implements ICache, IWaypoint {
         }
 
         updated = System.currentTimeMillis();
-        if (!detailed && other.detailed) {
-            detailed = true;
+        if (!detailed && (other.detailed || zoomlevel < other.zoomlevel)) {
+            detailed = other.detailed;
             detailedUpdate = other.detailedUpdate;
             coords = other.coords;
+            cacheType = other.cacheType;
+            zoomlevel = other.zoomlevel;
             // boolean values must be enumerated here. Other types are assigned outside this if-statement
             premiumMembersOnly = other.premiumMembersOnly;
             reliableLatLon = other.reliableLatLon;
@@ -154,7 +156,8 @@ public class cgCache implements ICache, IWaypoint {
         }
 
         /*
-         * No gathering for boolean members if a cache is not-detailed
+         * No gathering for boolean members if other cache is not-detailed
+         * and does not have information with higher reliability (denoted by zoomlevel)
          * - found
          * - own
          * - disabled
@@ -222,11 +225,6 @@ public class cgCache implements ICache, IWaypoint {
         if (coords == null) {
             coords = other.coords;
         }
-        if (zoomlevel < other.zoomlevel) {
-            zoomlevel = other.zoomlevel;
-            coords = other.coords;
-        }
-
         if (elevation == null) {
             elevation = other.elevation;
         }
