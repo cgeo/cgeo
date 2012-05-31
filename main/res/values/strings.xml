@@ -1092,6 +1092,9 @@
     · Wrong cache size in cache details corrected\n
     · Display coordinates embedded in a log\n
     · Circles on map still shown after orientation change\n
+    · Fixed possible crash when starting live map\n
+    · Fixed possible crash while using compass\n
+    · Less CPU-usage for the compass\n
     · A lot of translation improvements\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
