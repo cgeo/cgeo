@@ -745,6 +745,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      * @return true if a restart is needed, false otherwise
      */
     private boolean changeMapSource(final int mapSource) {
+        // If the current or the requested map source is invalid, request the first available map source instead
+        // and restart the activity.
+        if (!MapProviderFactory.isValidSourceId(mapSource)) {
+            Log.e("CGeoMap.onCreate: invalid map source requested: " + mapSource);
+            currentSourceId = MapProviderFactory.getSourceIdFromOrdinal(0);
+            Settings.setMapSource(currentSourceId);
+            mapRestart();
+            return true;
+        }
+
         final boolean restartRequired = !MapProviderFactory.isSameActivity(currentSourceId, mapSource);
 
         Settings.setMapSource(mapSource);
