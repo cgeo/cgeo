@@ -1067,7 +1067,7 @@
     <b>Bugfixing:</b>\n
     · [template]\n
      \n
-    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=6&amp;state=closed">Detailed list of all changes</a>\n
+    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=7&amp;state=closed">Detailed list of all changes</a>\n
     \n
     <b>Known Limitations/Bugs:</b>\n
     · Live map:\n
@@ -1076,8 +1076,7 @@
       In fast mode the cache type might be wrong in rare cases\n
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
     · Other:\n
-      Log images with huge size cause a long loading time\n
-      Recursively opening several instances of the map can cause a crash\n\n\n
+      Log images with huge size cause a long loading time\n\n\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
