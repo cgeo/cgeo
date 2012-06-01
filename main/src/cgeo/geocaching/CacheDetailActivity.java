@@ -145,6 +145,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     if (geo.getAltitude() != 0.0) {
                         final double diff = cache.getElevation() - geo.getAltitude();
                         dist.append(diff >= 0 ? " ↗" : " ↘");
+                        // TODO: move code related to different units (from the whole project) into utils code
                         if (Settings.isUseMetricUnits()) {
                             dist.append(Math.abs((int) diff));
                             dist.append(" m");
