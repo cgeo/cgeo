@@ -114,6 +114,8 @@
   <string name="log_new_log">Carnet</string>
   <string name="log_new_log_text">Message</string>
   <string name="log_announcement">Annonce</string>
+  <string name="log_today">Aujourd\'hui</string>
+  <string name="log_yesterday">Hier</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduire en %s</string>
