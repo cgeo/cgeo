@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 
 import android.content.Context;
@@ -64,9 +65,29 @@ public abstract class Formatter {
     }
 
     /**
+     * Generate a numeric date string according to system-wide settings (locale, date format)
+     * such as "10/20/2010". Today and yesterday will be presented as strings "today" and "yesterday".
+     * 
+     * @param date
+     *            milliseconds since the epoch
+     * @return the formatted string
+     */
+    public static String formatShortDateVerbally(long date) {
+        int diff = cgeo.geocaching.utils.DateUtils.daysSince(date);
+        switch (diff) {
+            case 0:
+                return cgeoapplication.getInstance().getString(R.string.log_today);
+            case 1:
+                return cgeoapplication.getInstance().getString(R.string.log_yesterday);
+            default:
+                return formatShortDate(date);
+        }
+    }
+
+    /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. at 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date

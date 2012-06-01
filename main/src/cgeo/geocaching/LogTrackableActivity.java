@@ -247,8 +247,8 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
         });
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
         dateButton.setOnClickListener(new DateListener());
+        setDate(date);
 
         if (tweetBox == null) {
             tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
@@ -281,7 +281,7 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
         date = dateIn;
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
     public void setType(LogType type) {

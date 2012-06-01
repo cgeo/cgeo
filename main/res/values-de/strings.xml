@@ -114,6 +114,8 @@
   <string name="log_new_log">Loggen</string>
   <string name="log_new_log_text">Log-Text</string>
   <string name="log_announcement">Ankündigung</string>
+  <string name="log_today">Heute</string>
+  <string name="log_yesterday">Gestern</string>
   
 <!-- translation -->
   <string name="translate_to_sys_lang">Übersetze in %s</string>

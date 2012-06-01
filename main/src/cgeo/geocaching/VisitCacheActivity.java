@@ -510,7 +510,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         });
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
+        setDate(date);
         dateButton.setOnClickListener(new DateListener());
 
         final EditText logView = (EditText) findViewById(R.id.log);
@@ -548,7 +548,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         date = dateIn;
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
     public void setType(LogType type) {
@@ -602,6 +602,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
         @Override
         public void onClick(View arg0) {
+            //TODO: unify this method and the code in init()
             app.clearLogOffline(geocode);
 
             if (alreadyFound) {
@@ -615,8 +616,8 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             setType(typeSelected);
 
             final Button dateButton = (Button) findViewById(R.id.date);
-            dateButton.setText(Formatter.formatShortDate(date.getTime().getTime()));
             dateButton.setOnClickListener(new DateListener());
+            setDate(date);
 
             final EditText logView = (EditText) findViewById(R.id.log);
             logView.setText("");
