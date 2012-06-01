@@ -802,6 +802,9 @@
   <string name="export_fieldnotes_creating">Création des notes de terrain…</string>
   <string name="export_gpx">GPX</string>
 
+  <!--  attribute unknown -->
+  <string name="attribute_unknown_yes">Attribut inconnu</string>
+  <string name="attribute_unknown_no">Attribut inconnu négatif</string>
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Chiens autorisés</string>
   <string name="attribute_dogs_no">Chiens interdits</string>
