@@ -824,6 +824,9 @@
   <string name="export_fieldnotes_creating">Creating Field Notes…</string>
   <string name="export_gpx">GPX</string>
   
+  <!--  attribute unknown -->
+  <string name="attribute_unknown_yes">Unknown attribute present</string>
+  <string name="attribute_unknown_no">Unknown attribute not present</string>
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Dogs allowed</string>
   <string name="attribute_dogs_no">Dogs not allowed</string>

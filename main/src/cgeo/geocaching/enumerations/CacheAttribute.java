@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 public enum CacheAttribute {
-    UNKNOWN(0, "", R.drawable.attribute__strikethru, 0, 0),
+    UNKNOWN(0, "unknown", R.drawable.attribute__strikethru, R.string.attribute_unknown_yes, R.string.attribute_unknown_no),
     DOGS(1, "dogs", R.drawable.attribute_dogs, R.string.attribute_dogs_yes, R.string.attribute_dogs_no),
     FEE(2, "fee", R.drawable.attribute_fee, R.string.attribute_fee_yes, R.string.attribute_fee_no),
     RAPPELLING(3, "rappelling", R.drawable.attribute_rappelling, R.string.attribute_rappelling_yes, R.string.attribute_rappelling_no),
