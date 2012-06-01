@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo compass</string>
@@ -1058,7 +1058,7 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next release</b>\n\n
+    <b>2012.06.01</b>\n\n
     <b>New Features/Functions:</b>\n
     · Add/remove cache to/from Favorites\n
     · Export caches as GPX file\n
