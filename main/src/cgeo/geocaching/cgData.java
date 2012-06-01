@@ -2475,41 +2475,30 @@ public class cgData {
 
     public boolean saveLogOffline(String geocode, Date date, LogType type, String log) {
         if (StringUtils.isBlank(geocode)) {
+            Log.e("cgData.saveLogOffline: cannot log a blank geocode");
             return false;
         }
         if (LogType.UNKNOWN == type && StringUtils.isBlank(log)) {
+            Log.e("cgData.saveLogOffline: cannot log an unknown log type and no message");
             return false;
         }
 
         init();
-        boolean status = false;
 
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put("geocode", geocode);
         values.put("updated", System.currentTimeMillis());
         values.put("type", type.id);
         values.put("log", log);
         values.put("date", date.getTime());
 
-        try {
-            if (hasLogOffline(geocode)) {
-                final int rows = database.update(dbTableLogsOffline, values, "geocode = ?", new String[] { geocode });
-
-                if (rows > 0) {
-                    status = true;
-                }
-            } else {
-                final long id = database.insert(dbTableLogsOffline, null, values);
-
-                if (id > 0) {
-                    status = true;
-                }
-            }
-        } catch (Exception e) {
-            Log.e("cgData.saveLogOffline: " + e.toString());
+        if (hasLogOffline(geocode)) {
+            final int rows = database.update(dbTableLogsOffline, values, "geocode = ?", new String[] { geocode });
+            return rows > 0;
+        } else {
+            final long id = database.insert(dbTableLogsOffline, null, values);
+            return id != -1;
         }
-
-        return status;
     }
 
     public LogEntry loadLogOffline(String geocode) {
