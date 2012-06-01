@@ -18,6 +18,7 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
+import cgeo.geocaching.ui.EditorDialog;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.BaseUtils;
@@ -1896,18 +1897,26 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // cache personal note
-            if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-                ((LinearLayout) view.findViewById(R.id.personalnote_box)).setVisibility(View.VISIBLE);
-
-                TextView personalNoteText = (TextView) view.findViewById(R.id.personalnote);
-                personalNoteText.setVisibility(View.VISIBLE);
-                personalNoteText.setText(cache.getPersonalNote(), TextView.BufferType.SPANNABLE);
-                personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
-                registerForContextMenu(personalNoteText);
-            }
-            else {
-                ((LinearLayout) view.findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
-            }
+            final TextView personalNoteText = (TextView) view.findViewById(R.id.personalnote);
+            personalNoteText.setText(cache.getPersonalNote(), TextView.BufferType.SPANNABLE);
+            personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
+            registerForContextMenu(personalNoteText);
+            final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
+            personalNoteEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditorDialog editor = new EditorDialog(CacheDetailActivity.this, personalNoteText.getText());
+                    editor.setOnEditorUpdate(new EditorDialog.EditorUpdate() {
+                        @Override
+                        public void update(CharSequence editorText) {
+                            personalNoteText.setText(editorText);
+                            cache.setPersonalNote(editorText.toString());
+                            app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                        }
+                    });
+                    editor.show();
+                }
+            });
 
             // cache hint and spoiler images
             if (StringUtils.isNotBlank(cache.getHint()) || CollectionUtils.isNotEmpty(cache.getSpoilers())) {
