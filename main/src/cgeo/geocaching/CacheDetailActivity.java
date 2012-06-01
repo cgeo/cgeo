@@ -395,9 +395,14 @@ public class CacheDetailActivity extends AbstractActivity {
         final int viewId = view.getId();
         contextMenuWPIndex = -1;
         switch (viewId) {
-            case R.id.value: // coordinates
+            case R.id.value: // cache details
+                TextView itemName = (TextView) ((View) view.getParent()).findViewById(R.id.name);
+                if (itemName == null) {
+                    // for details with star ratings, the name is two levels up
+                    itemName = (TextView) ((View) view.getParent().getParent()).findViewById(R.id.name);
+                }
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_coordinates), true);
+                buildOptionsContextmenu(menu, viewId, itemName.getText().toString(), true);
                 break;
             case R.id.shortdesc:
                 clickedItemText = ((TextView) view).getText();
@@ -1345,25 +1350,33 @@ public class CacheDetailActivity extends AbstractActivity {
                 span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            details.add(R.string.cache_name, span);
-            details.add(R.string.cache_type, cache.getType().getL10n());
+            registerForContextMenu(details.add(R.string.cache_name, span));
+            registerForContextMenu(details.add(R.string.cache_type, cache.getType().getL10n()));
+
             details.addSize(cache);
-            details.add(R.string.cache_geocode, cache.getGeocode().toUpperCase());
+            registerForContextMenu(details.getValueView());
+            registerForContextMenu(details.add(R.string.cache_geocode, cache.getGeocode().toUpperCase()));
             details.addCacheState(cache);
+            registerForContextMenu(details.getValueView());
 
             details.addDistance(cache, cacheDistanceView);
             cacheDistanceView = details.getValueView();
+            registerForContextMenu(cacheDistanceView);
 
             details.addDifficulty(cache);
+            registerForContextMenu(details.getValueView());
             details.addTerrain(cache);
+            registerForContextMenu(details.getValueView());
             details.addRating(cache);
+            registerForContextMenu(details.getValueView());
 
             // favourite count
-            details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+            registerForContextMenu(details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×"));
 
             // own rating
             if (cache.getMyVote() > 0) {
                 details.addStars(R.string.cache_own_rating, cache.getMyVote());
+                registerForContextMenu(details.getValueView());
             }
 
             // cache author
@@ -1375,6 +1388,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     ownerView.setText(Html.fromHtml(cache.getOwnerReal()), TextView.BufferType.SPANNABLE);
                 }
                 ownerView.setOnClickListener(new OwnerActionsClickListener());
+                registerForContextMenu(ownerView);
             }
 
             // cache hidden
@@ -1385,13 +1399,13 @@ public class CacheDetailActivity extends AbstractActivity {
                     if (cache.isEventCache()) {
                         dateString = DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
                     }
-                    details.add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
+                    registerForContextMenu(details.add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString));
                 }
             }
 
             // cache location
             if (StringUtils.isNotBlank(cache.getLocation())) {
-                details.add(R.string.cache_location, cache.getLocation());
+                registerForContextMenu(details.add(R.string.cache_location, cache.getLocation()));
             }
 
             // cache coordinates
