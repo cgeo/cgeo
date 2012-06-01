@@ -1083,9 +1083,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 SearchResult searchResult = null;
                 // stage 1 - pull and render from the DB only for live map
                 if (mapMode == MapMode.LIVE_ONLINE) {
-                    searchResult = new SearchResult(app.getStoredInViewport(viewport, Settings.getCacheType()));
-                } else if (mapMode == MapMode.LIVE_OFFLINE) {
                     searchResult = new SearchResult(app.getCachedInViewport(viewport, Settings.getCacheType()));
+                } else if (mapMode == MapMode.LIVE_OFFLINE) {
+                    searchResult = new SearchResult(app.getStoredInViewport(viewport, Settings.getCacheType()));
                 } else {
                     // map started from another activity
                     searchResult = new SearchResult(searchIntent);
@@ -1094,11 +1094,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                 }
 
-                if (searchResult != null) {
-                    downloaded = true;
-                    Set<cgCache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
-                    caches.addAll(cachesFromSearchResult);
-                }
+                downloaded = true;
+                Set<cgCache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                caches.addAll(cachesFromSearchResult);
 
                 if (isLiveMode()) {
                     final boolean excludeMine = Settings.isExcludeMyCaches();
@@ -1117,6 +1115,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     waypoints.clear();
                     if (isLiveMode() || mapMode == MapMode.COORDS) {
                         //All visible waypoints
+                        //FIXME apply type filter
                         waypoints.addAll(app.getWaypointsInViewport(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches()));
                     } else {
                         //All waypoints from the viewed caches
