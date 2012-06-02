@@ -2495,10 +2495,9 @@ public class cgData {
         if (hasLogOffline(geocode)) {
             final int rows = database.update(dbTableLogsOffline, values, "geocode = ?", new String[] { geocode });
             return rows > 0;
-        } else {
-            final long id = database.insert(dbTableLogsOffline, null, values);
-            return id != -1;
         }
+        final long id = database.insert(dbTableLogsOffline, null, values);
+        return id != -1;
     }
 
     public LogEntry loadLogOffline(String geocode) {

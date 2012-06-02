@@ -1096,6 +1096,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 downloaded = true;
                 Set<cgCache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                // to update the caches they have to be removed first
+                caches.removeAll(cachesFromSearchResult);
                 caches.addAll(cachesFromSearchResult);
 
                 if (isLiveMode()) {
