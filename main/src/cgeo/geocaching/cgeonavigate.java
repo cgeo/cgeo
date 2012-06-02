@@ -18,6 +18,7 @@ import android.os.PowerManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class cgeonavigate extends AbstractActivity {
     private static final String EXTRAS_COORDS = "coords";
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
+    private static final String EXTRAS_CACHE_INFO = "cacheinfo";
     private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
     private static final int MENU_MAP = 0;
     private static final int MENU_SWITCH_COMPASS_GPS = 1;
@@ -37,6 +39,7 @@ public class cgeonavigate extends AbstractActivity {
     private float cacheHeading = 0;
     private String title = null;
     private String name = null;
+    private String info = null;
     private TextView navType = null;
     private TextView navAccuracy = null;
     private TextView navSatellites = null;
@@ -65,6 +68,7 @@ public class cgeonavigate extends AbstractActivity {
             title = geocode;
             name = extras.getString(EXTRAS_NAME);
             dstCoords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
+            info = extras.getString(EXTRAS_CACHE_INFO);
 
             if (StringUtils.isNotBlank(name)) {
                 if (StringUtils.isNotBlank(title)) {
@@ -86,6 +90,7 @@ public class cgeonavigate extends AbstractActivity {
         // set header
         setTitle();
         setDestCoords();
+        setCacheInfo();
 
         // get textviews once
         compassView = (CompassView) findViewById(R.id.rose);
@@ -179,6 +184,7 @@ public class cgeonavigate extends AbstractActivity {
             dstCoords = coordinate.getCoords();
             setTitle();
             setDestCoords();
+            setCacheInfo();
             updateDistanceInfo(app.currentGeo());
 
             Log.d("destination set: " + title + " (" + dstCoords + ")");
@@ -202,6 +208,16 @@ public class cgeonavigate extends AbstractActivity {
         }
 
         ((TextView) findViewById(R.id.destination)).setText(dstCoords.toString());
+    }
+
+    private void setCacheInfo() {
+        final TextView cacheInfoView = (TextView) findViewById(R.id.cacheinfo);
+        if (info == null) {
+            cacheInfoView.setVisibility(View.GONE);
+            return;
+        }
+        cacheInfoView.setVisibility(View.VISIBLE);
+        cacheInfoView.setText(info);
     }
 
     private void updateDistanceInfo(final IGeoData geo) {
@@ -290,7 +306,8 @@ public class cgeonavigate extends AbstractActivity {
         }
     }
 
-    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType) {
+    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType,
+            final String info) {
         coordinates.clear();
         if (coordinatesWithType != null) { // avoid possible NPE
             coordinates.addAll(coordinatesWithType);
@@ -302,6 +319,12 @@ public class cgeonavigate extends AbstractActivity {
         if (null != displayedName) {
             navigateIntent.putExtra(EXTRAS_NAME, displayedName);
         }
+        navigateIntent.putExtra(EXTRAS_CACHE_INFO, info);
         context.startActivity(navigateIntent);
     }
+
+    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType) {
+        cgeonavigate.startActivity(context, geocode, displayedName, coords, coordinatesWithType, null);
+    }
+
 }

@@ -7,7 +7,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -18,7 +17,6 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.app.Activity;
@@ -492,37 +490,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         holder.favourite.setBackgroundResource(favoriteBack);
 
         if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
-            final ArrayList<String> infos = new ArrayList<String>();
-            infos.add(StringUtils.upperCase(cache.getGeocode()));
-            infos.add(Formatter.formatDate(cache.getVisitedDate()));
-            infos.add(Formatter.formatTime(cache.getVisitedDate()));
-            holder.info.setText(StringUtils.join(infos, Formatter.SEPARATOR));
+            holder.info.setText(Formatter.formatCacheInfoHistory(cache));
         } else {
-            final ArrayList<String> infos = new ArrayList<String>();
-            if (StringUtils.isNotBlank(cache.getGeocode())) {
-                infos.add(cache.getGeocode());
-            }
-            if (cache.hasDifficulty()) {
-                infos.add("D " + String.format("%.1f", cache.getDifficulty()));
-            }
-            if (cache.hasTerrain()) {
-                infos.add("T " + String.format("%.1f", cache.getTerrain()));
-            }
-
-            // don't show "not chosen" for events and virtuals, that should be the normal case
-            if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
-                infos.add(cache.getSize().getL10n());
-            } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
-                infos.add(Formatter.formatShortDate(cache.getHiddenDate().getTime()));
-            }
-
-            if (cache.isPremiumMembersOnly()) {
-                infos.add(res.getString(R.string.cache_premium));
-            }
-            if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {
-                infos.add(res.getString(R.string.cache_offline));
-            }
-            holder.info.setText(StringUtils.join(infos, Formatter.SEPARATOR));
+            holder.info.setText(Formatter.formatCacheInfoLong(cache, cacheListType));
         }
 
         return v;

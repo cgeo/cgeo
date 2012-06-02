@@ -12,7 +12,7 @@ import java.util.List;
 
 public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
 
-    static final String PREFIX_OWN = "OWN";
+    public static final String PREFIX_OWN = "OWN";
     private static final int ORDER_UNDEFINED = -2;
     private int id = 0;
     private String geocode = "geocode";
