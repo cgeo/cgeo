@@ -142,7 +142,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
-    private SearchResult search = null;
+    /** Last search result used for displaying header */
+    private SearchResult lastSearchResult = null;
     private String[] tokens = null;
     private boolean noMapTokenShowed = false;
     // map status data
@@ -236,8 +237,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         title.append(']');
                     }
 
-                    if (Settings.isDebug() && search != null && StringUtils.isNotBlank(search.getUrl())) {
-                        title.append('[').append(search.getUrl()).append(']');
+                    if (Settings.isDebug() && lastSearchResult != null && StringUtils.isNotBlank(lastSearchResult.getUrl())) {
+                        title.append('[').append(lastSearchResult.getUrl()).append(']');
                     }
 
                     ActivityMixin.setTitle(activity, title.toString());
@@ -603,7 +604,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 item.setTitle(res.getString(R.string.map_live_enable));
             }
 
-            menu.findItem(MENU_STORE_CACHES).setEnabled(isLiveMode() && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(search));
+            menu.findItem(MENU_STORE_CACHES).setEnabled(isLiveMode() && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(lastSearchResult));
 
             item = menu.findItem(MENU_CIRCLE_MODE); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
@@ -639,7 +640,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 Settings.setLiveMap(!Settings.isLiveMap());
                 mapMode = Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
                 liveChanged = true;
-                search = null;
+                lastSearchResult = null;
                 searchIntent = null;
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
@@ -723,7 +724,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_AS_LIST: {
-                cgeocaches.startActivityMap(activity, search);
+                cgeocaches.startActivityMap(activity, lastSearchResult);
                 return true;
             }
             case MENU_STRATEGY_FASTEST: {
@@ -1079,26 +1080,25 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
                 loadThreadRun = System.currentTimeMillis();
 
+                SearchResult searchResult = null;
                 // stage 1 - pull and render from the DB only for live map
                 if (mapMode == MapMode.LIVE_ONLINE) {
-                        search = new SearchResult(app.getStoredInViewport(viewport, Settings.getCacheType()));
+                    searchResult = new SearchResult(app.getCachedInViewport(viewport, Settings.getCacheType()));
                 } else if (mapMode == MapMode.LIVE_OFFLINE) {
-                        search = new SearchResult(app.getCachedInViewport(viewport, Settings.getCacheType()));
+                    searchResult = new SearchResult(app.getStoredInViewport(viewport, Settings.getCacheType()));
                 } else {
                     // map started from another activity
-                    search = new SearchResult(searchIntent);
+                    searchResult = new SearchResult(searchIntent);
                     if (geocodeIntent != null) {
-                        search.addGeocode(geocodeIntent);
+                        searchResult.addGeocode(geocodeIntent);
                     }
                 }
 
-                if (search != null) {
-                    downloaded = true;
-                    Set<cgCache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
-                    // to update the caches they have to be removed first
-                    caches.removeAll(cachesFromSearchResult);
-                    caches.addAll(cachesFromSearchResult);
-                }
+                downloaded = true;
+                Set<cgCache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                // to update the caches they have to be removed first
+                caches.removeAll(cachesFromSearchResult);
+                caches.addAll(cachesFromSearchResult);
 
                 if (isLiveMode()) {
                     final boolean excludeMine = Settings.isExcludeMyCaches();
@@ -1117,6 +1117,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     waypoints.clear();
                     if (isLiveMode() || mapMode == MapMode.COORDS) {
                         //All visible waypoints
+                        //FIXME apply type filter
                         waypoints.addAll(app.getWaypointsInViewport(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches()));
                     } else {
                         //All waypoints from the viewed caches
@@ -1132,6 +1133,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 if (mapMode == MapMode.LIVE_ONLINE) {
                     downloadExecutor.execute(new DownloadRunnable(viewport));
                 }
+                lastSearchResult = searchResult;
             } finally {
                 showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
             }
@@ -1155,6 +1157,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
 
                 int count = 0;
+                SearchResult searchResult = null;
                 do {
 
                     if (tokens == null) {
@@ -1164,10 +1167,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
                     }
 
-                    search = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
-                    if (search != null) {
+                    searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
+                    if (searchResult != null) {
                         downloaded = true;
-                        if (search.getError() == StatusCode.NOT_LOGGED_IN) {
+                        if (searchResult.getError() == StatusCode.NOT_LOGGED_IN) {
                             Login.login();
                             tokens = null;
                         } else {
@@ -1178,11 +1181,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 } while (count < 2);
 
-                if (search != null) {
-                    Set<cgCache> result = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                if (searchResult != null) {
+                    Set<cgCache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     // to update the caches they have to be removed first
                     caches.removeAll(result);
                     caches.addAll(result);
+                    lastSearchResult = searchResult;
                 }
 
                 //render
