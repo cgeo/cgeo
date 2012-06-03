@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
@@ -62,7 +62,7 @@ public class ScaleOverlay implements GeneralOverlay {
         final Geopoint leftCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 - span / 2);
         final Geopoint rightCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 + span / 2);
 
-        final ImmutablePair<Double, String> scaled = HumanDistance.scaleUnit(leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR);
+        final ImmutablePair<Double, String> scaled = Units.scaleDistance(leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR);
 
         final double distanceRound = keepSignificantDigit(scaled.left);
         final double pixels = Math.round((mapView.getWidth() * SCALE_WIDTH_FACTOR / scaled.left) * distanceRound);

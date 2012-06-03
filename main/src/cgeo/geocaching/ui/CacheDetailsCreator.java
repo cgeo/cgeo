@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.Units;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -148,7 +148,7 @@ public final class CacheDetailsCreator {
         }
         String text = "--";
         if (distance != null) {
-            text = HumanDistance.getHumanDistance(distance);
+            text = Units.getDistanceFromKilometers(distance);
         }
         else if (cacheDistanceView != null) {
             // if there is already a distance in cacheDistance, use it instead of resetting to default.

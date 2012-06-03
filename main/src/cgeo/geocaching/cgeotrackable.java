@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
@@ -166,7 +166,7 @@ public class cgeotrackable extends AbstractActivity {
 
                 // trackable distance
                 if (trackable.getDistance() >= 0) {
-                    details.add(R.string.trackable_distance, HumanDistance.getHumanDistance(trackable.getDistance()));
+                    details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance()));
                 }
 
                 // trackable goal

@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.Units;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -30,11 +30,11 @@ public class DistanceView extends TextView {
         if (cacheCoords == null || coords == null) {
             return;
         }
-        setText(HumanDistance.getHumanDistance(coords.distanceTo(cacheCoords)));
+        setText(Units.getDistanceFromKilometers(coords.distanceTo(cacheCoords)));
     }
 
     public void setDistance(Float distance) {
-        setText("~" + HumanDistance.getHumanDistance(distance));
+        setText("~" + Units.getDistanceFromKilometers(distance));
     }
 
     public void clear() {

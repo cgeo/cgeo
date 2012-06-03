@@ -6,8 +6,7 @@ import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.HumanDistance;
-import cgeo.geocaching.geopoint.IConversion;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.ui.Formatter;
@@ -633,11 +632,7 @@ public class cgeo extends AbstractActivity {
 
                     if (geo.getAccuracy() >= 0) {
                         int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
-                        if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + Math.round(geo.getAccuracy()) + " m" + Formatter.SEPARATOR + speed + " km/h");
-                        } else {
-                            navAccuracy.setText("±" + Math.round(geo.getAccuracy() * IConversion.METERS_TO_FEET) + " ft" + Formatter.SEPARATOR + speed / IConversion.MILES_TO_KILOMETER + " mph");
-                        }
+                        navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
                     } else {
                         navAccuracy.setText(null);
                     }
@@ -651,7 +646,7 @@ public class cgeo extends AbstractActivity {
                         }
                     } else {
                         if (geo.getAltitude() != 0.0) {
-                            final String humanAlt = HumanDistance.getHumanDistance((float) geo.getAltitude() / 1000);
+                            final String humanAlt = Units.getDistanceFromKilometers((float) geo.getAltitude() / 1000);
                             navLocation.setText(geo.getCoords() + " | " + humanAlt);
                         } else {
                             navLocation.setText(geo.getCoords().toString());

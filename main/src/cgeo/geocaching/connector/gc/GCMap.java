@@ -10,7 +10,7 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LiveMapStrategy.StrategyFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.IConversion;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.Formatter;
@@ -243,12 +243,7 @@ public class GCMap {
         SearchResult result = searchByViewport(viewport, tokens, strategy);
 
         if (Settings.isDebug()) {
-            String text = Formatter.SEPARATOR + strategy.getL10n() + Formatter.SEPARATOR;
-            if (Settings.isUseMetricUnits()) {
-                text += speed + " km/h";
-            } else {
-                text += speed / IConversion.MILES_TO_KILOMETER + " mph";
-            }
+            StringBuilder text = new StringBuilder(Formatter.SEPARATOR).append(strategy.getL10n()).append(Formatter.SEPARATOR).append(Units.getSpeed(speed));
             result.setUrl(result.getUrl() + text);
         }
 

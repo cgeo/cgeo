@@ -2,8 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.HumanDistance;
-import cgeo.geocaching.geopoint.IConversion;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.CompassView;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -217,7 +216,7 @@ public class cgeonavigate extends AbstractActivity {
         }
 
         cacheHeading = geo.getCoords().bearingTo(dstCoords);
-        distanceView.setText(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(dstCoords)));
+        distanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(dstCoords)));
         headingView.setText(Math.round(cacheHeading) + "°");
     }
 
@@ -233,29 +232,22 @@ public class cgeonavigate extends AbstractActivity {
                 }
 
                 if (geo.getCoords() != null) {
-                    String satellites;
-                    if (geo.getSatellitesFixed() > 0) {
-                        satellites = res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible();
-                    } else if (geo.getSatellitesVisible() >= 0) {
-                        satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.getSatellitesVisible();
-                    } else {
-                        satellites = "";
+                    if (geo.getSatellitesVisible() >= 0) {
+                        navSatellites.setText(res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible());
                     }
-                    navSatellites.setText(satellites);
+                    else {
+                        navSatellites.setText("");
+                    }
                     navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
                     if (geo.getAccuracy() >= 0) {
-                        if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + Math.round(geo.getAccuracy()) + " m");
-                        } else {
-                            navAccuracy.setText("±" + Math.round(geo.getAccuracy() * IConversion.METERS_TO_FEET) + " ft");
-                        }
+                        navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()));
                     } else {
                         navAccuracy.setText(null);
                     }
 
                     if (geo.getAltitude() != 0.0f) {
-                        final String humanAlt = HumanDistance.getHumanDistance((float) geo.getAltitude() / 1000);
+                        final String humanAlt = Units.getDistanceFromMeters((float) geo.getAltitude());
                         navLocation.setText(geo.getCoords() + " | " + humanAlt);
                     } else {
                         navLocation.setText(geo.getCoords().toString());

@@ -14,8 +14,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.HumanDistance;
-import cgeo.geocaching.geopoint.IConversion;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
@@ -138,21 +137,13 @@ public class CacheDetailActivity extends AbstractActivity {
                 final StringBuilder dist = new StringBuilder();
 
                 if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
-                    dist.append(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
+                    dist.append(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                 }
 
                 if (cache != null && cache.getElevation() != null) {
                     if (geo.getAltitude() != 0.0) {
-                        final double diff = cache.getElevation() - geo.getAltitude();
-                        dist.append(diff >= 0 ? " ↗" : " ↘");
-                        // TODO: move code related to different units (from the whole project) into utils code
-                        if (Settings.isUseMetricUnits()) {
-                            dist.append(Math.abs((int) diff));
-                            dist.append(" m");
-                        } else {
-                            dist.append(Math.abs((int) (diff * IConversion.METERS_TO_FEET)));
-                            dist.append(" ft");
-                        }
+                        final float diff = (float) (cache.getElevation() - geo.getAltitude());
+                        dist.append(' ').append(Units.getElevation(diff));
                     }
                 }
 

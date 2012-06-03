@@ -8,7 +8,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -64,7 +64,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         protected void updateGeoData(final IGeoData geo) {
             try {
                 if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
-                    cacheDistance.setText(HumanDistance.getHumanDistance(geo.getCoords().distanceTo(cache.getCoords())));
+                    cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }
             } catch (Exception e) {

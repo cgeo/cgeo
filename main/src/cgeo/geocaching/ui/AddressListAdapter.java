@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.HumanDistance;
+import cgeo.geocaching.geopoint.Units;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -73,7 +73,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
 
     private CharSequence getDistanceText(final Address address) {
         if (location != null && address.hasLatitude() && address.hasLongitude()) {
-            return HumanDistance.getHumanDistance(location.distanceTo(new Geopoint(address.getLatitude(), address.getLongitude())));
+            return Units.getDistanceFromKilometers(location.distanceTo(new Geopoint(address.getLatitude(), address.getLongitude())));
         }
 
         return "";
