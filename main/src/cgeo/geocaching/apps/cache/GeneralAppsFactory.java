@@ -31,14 +31,15 @@ public final class GeneralAppsFactory extends AbstractAppFactory {
 
     public static boolean onMenuItemSelected(final MenuItem item, Activity activity, cgCache cache) {
         final GeneralApp app = (GeneralApp) getAppFromMenuItem(item, apps);
-        if (app != null) {
-            try {
-                return app.invoke(activity, cache);
-            } catch (Exception e) {
-                Log.e("GeneralAppsFactory.onMenuItemSelected: " + e.toString());
-            }
+        if (app == null) {
+            return false;
         }
-        return false;
+        try {
+            app.invoke(activity, cache);
+        } catch (Exception e) {
+            Log.e("GeneralAppsFactory.onMenuItemSelected: " + e.toString());
+        }
+        return true;
     }
 
 }

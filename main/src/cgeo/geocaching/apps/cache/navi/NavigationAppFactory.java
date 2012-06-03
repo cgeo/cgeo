@@ -224,8 +224,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return
      */
     public static boolean onMenuItemSelected(final MenuItem item, Activity activity, cgCache cache) {
-        navigateCache(activity, cache, getAppFromMenuItem(item));
-        return true;
+        final App menuItem = getAppFromMenuItem(item);
+        navigateCache(activity, cache, menuItem);
+        return menuItem != null;
     }
 
     private static void navigateCache(Activity activity, cgCache cache, App app) {
@@ -236,8 +237,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     public static boolean onMenuItemSelected(final MenuItem item, Activity activity, cgWaypoint waypoint) {
-        navigateWaypoint(activity, waypoint, getAppFromMenuItem(item));
-        return true;
+        final App menuItem = getAppFromMenuItem(item);
+        navigateWaypoint(activity, waypoint, menuItem);
+        return menuItem != null;
     }
 
     private static void navigateWaypoint(Activity activity, cgWaypoint waypoint, App app) {
