@@ -1,8 +1,10 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
 
@@ -19,17 +21,43 @@ import java.util.List;
 public class LoggingUI extends AbstractUIFactory {
     public static class LogTypeEntry {
         private final LogType logType;
+        private final SpecialLogType specialLogType;
+        private final boolean isActive;
 
-        public LogTypeEntry(final LogType logType) {
+        public LogTypeEntry(final LogType logType, final SpecialLogType specialLogType, final boolean isActive) {
             this.logType = logType;
+            this.specialLogType = specialLogType;
+            this.isActive = isActive;
         }
 
         @Override
         public String toString() {
             if (logType == null) {
-                return res.getString(R.string.cache_menu_visit);
+                return specialLogType.getL10n();
             }
-            return logType.getL10n();
+
+            String text = logType.getL10n();
+
+            if (isActive) {
+                text += " ✔";
+            }
+
+            return text;
+        }
+    }
+
+    private enum SpecialLogType {
+        LOG_CACHE(R.string.cache_menu_visit),
+        CLEAR_LOG(R.string.log_clear);
+
+        private final int stringId;
+
+        private SpecialLogType(final int stringId) {
+            this.stringId = stringId;
+        }
+
+        public final String getL10n() {
+            return res.getString(stringId);
         }
     }
 
@@ -66,13 +94,18 @@ public class LoggingUI extends AbstractUIFactory {
     }
 
     private static void showOfflineMenu(final cgCache cache, final Activity activity) {
+        final LogEntry currentLog = cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
+        final LogType currentLogType = currentLog == null ? null : currentLog.type;
+
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         final ArrayList<LogTypeEntry> list = new ArrayList<LogTypeEntry>();
         for (LogType logType : logTypes) {
-            list.add(new LogTypeEntry(logType));
+            list.add(new LogTypeEntry(logType, null, logType == currentLogType));
         }
-        // online logging
-        list.add(new LogTypeEntry(null));
+        if (cache.isLogOffline()) {
+            list.add(new LogTypeEntry(null, SpecialLogType.CLEAR_LOG, false));
+        }
+        list.add(new LogTypeEntry(null, SpecialLogType.LOG_CACHE, false));
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_visit_offline);
@@ -83,10 +116,17 @@ public class LoggingUI extends AbstractUIFactory {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 final LogTypeEntry logTypeEntry = adapter.getItem(item);
-                if (logTypeEntry.logType != null) {
-                    cache.logOffline(activity, logTypeEntry.logType);
+                if (logTypeEntry.logType == null) {
+                    switch (logTypeEntry.specialLogType) {
+                        case LOG_CACHE:
+                            cache.logVisit((IAbstractActivity) activity);
+                            break;
+
+                        case CLEAR_LOG:
+                            cgeoapplication.getInstance().clearLogOffline(cache.getGeocode());
+                    }
                 } else {
-                    cache.logVisit((IAbstractActivity) activity);
+                    cache.logOffline(activity, logTypeEntry.logType);
                 }
             }
         });
