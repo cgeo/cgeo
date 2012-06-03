@@ -292,7 +292,13 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         if (coords == null) {
             return;
         }
+        final ArrayList<cgCache> oldList = new ArrayList<cgCache>(list);
         Collections.sort(list, new DistanceComparator(coords, list));
+
+        // avoid an update if the list has not changed due to location update
+        if (list.equals(oldList)) {
+            return;
+        }
         notifyDataSetChanged();
         lastSort = System.currentTimeMillis();
     }
