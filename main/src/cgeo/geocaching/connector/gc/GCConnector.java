@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -107,7 +106,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             return searchResult;
         }
 
-        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+        // do not filter when searching for one specific cache
+        return searchResult;
     }
 
     @Override

@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -26,7 +27,7 @@ import android.widget.EditText;
 
 public class SearchActivity extends AbstractActivity {
 
-    public static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
+    private static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
 
     private static final int MENU_SEARCH_OWN_CACHES = 1;
     private EditText latEdit = null;
@@ -409,5 +410,13 @@ public class SearchActivity extends AbstractActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void startActivityScan(final String scan, final Activity fromActivity) {
+        final Intent searchIntent = new Intent(fromActivity, SearchActivity.class);
+        searchIntent.setAction(Intent.ACTION_SEARCH).
+                putExtra(SearchManager.QUERY, scan).
+                putExtra(SearchActivity.EXTRAS_KEYWORDSEARCH, false);
+        fromActivity.startActivityForResult(searchIntent, cgeo.SEARCH_REQUEST_CODE);
     }
 }
