@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
@@ -37,7 +38,10 @@ public class HtmlImage implements Html.ImageGetter {
             "flagcounter.com",
             "compteur-blog.net",
             "counter.digits.com",
-            "andyhoppe"
+            "andyhoppe",
+            "besucherzaehler-homepage.de",
+            "hitwebcounter.com",
+            "kostenloser-counter.eu"
     };
 
     final private String geocode;
