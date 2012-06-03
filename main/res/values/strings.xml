@@ -364,9 +364,9 @@
   <string name="init_passvote">Password</string>
   <string name="init_login">Check and save Login</string>
   <string name="init_login_popup">Login</string>
-  <string name="init_login_popup_working">Logging into Geocaching.com…</string>
-  <string name="init_login_popup_ok">Login ok.</string>
-  <string name="init_login_popup_failed">Login failed.</string>
+  <string name="init_login_popup_working">Logging in…</string>
+  <string name="init_login_popup_ok">Login OK</string>
+  <string name="init_login_popup_failed">Login failed</string>
   <string name="init_login_popup_failed_reason">Login failed because of </string>
   <string name="init_go4cache_connect">Connect to Go 4 Cache</string>
   <string name="init_twitter_authorize">Authorize c:geo</string>
