@@ -169,7 +169,7 @@ class FieldnoteExport extends AbstractExport {
                 Writer fw = null;
                 try {
                     os = new FileOutputStream(exportFile);
-                    fw = new OutputStreamWriter(os, "ISO-8859-1"); // gc.com doesn't support neither UTF-8 nor html entities
+                    fw = new OutputStreamWriter(os, "UTF-16");
                     fw.write(fieldNoteBuffer.toString());
                 } catch (IOException e) {
                     Log.e("FieldnoteExport.ExportTask export", e);
