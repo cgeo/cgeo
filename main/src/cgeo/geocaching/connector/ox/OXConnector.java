@@ -62,7 +62,6 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
         if (caches == null) {
             return null;
         }
-        final SearchResult searchResult = new SearchResult(caches);
-        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+        return new SearchResult(caches);
     }
 }

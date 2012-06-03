@@ -390,12 +390,7 @@ public class cgeo extends AbstractActivity {
                     return;
                 }
 
-                Intent searchIntent = new Intent(this, SearchActivity.class);
-                searchIntent.setAction(Intent.ACTION_SEARCH).
-                        putExtra(SearchManager.QUERY, scan).
-                        putExtra(SearchActivity.EXTRAS_KEYWORDSEARCH, false);
-                startActivityForResult(searchIntent, SEARCH_REQUEST_CODE);
-
+                SearchActivity.startActivityScan(scan, this);
             } else if (resultCode == RESULT_CANCELED) {
                 // do nothing
             }

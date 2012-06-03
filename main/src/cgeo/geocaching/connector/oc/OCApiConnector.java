@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.network.Parameters;
@@ -33,7 +32,6 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         if (cache == null) {
             return null;
         }
-        final SearchResult searchResult = new SearchResult(cache);
-        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+        return new SearchResult(cache);
     }
 }
