@@ -1,6 +1,5 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 
@@ -8,7 +7,6 @@ import android.app.ListActivity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 
 public abstract class AbstractListActivity extends ListActivity implements
@@ -83,10 +81,6 @@ public abstract class AbstractListActivity extends ListActivity implements
 
     final public void setTitle(final String title) {
         ActivityMixin.setTitle(this, title);
-    }
-
-    public void addVisitMenu(Menu menu, cgCache cache) {
-        ActivityMixin.addVisitMenu(this, menu, cache);
     }
 
     @Override

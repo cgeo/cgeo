@@ -20,6 +20,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -556,7 +557,7 @@ public class CacheDetailActivity extends AbstractActivity {
             GeneralAppsFactory.addMenuItems(subMenu, cache);
 
             menu.add(1, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(R.drawable.ic_menu_agenda); // add event to calendar
-            addVisitMenu(menu, cache);
+            LoggingUI.addMenuItems(menu, cache);
             menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
             menu.add(1, MENU_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
             menu.add(0, MENU_SHARE, 0, res.getString(R.string.cache_menu_share)).setIcon(R.drawable.ic_menu_share); // share cache
@@ -584,10 +585,6 @@ public class CacheDetailActivity extends AbstractActivity {
             case MENU_DEFAULT_NAVIGATION:
                 startDefaultNavigation();
                 return true;
-            case MENU_LOG_VISIT:
-                refreshOnResume = true;
-                cache.logVisit(this);
-                return true;
             case MENU_BROWSER:
                 cache.openInBrowser(this);
                 return true;
@@ -610,8 +607,11 @@ public class CacheDetailActivity extends AbstractActivity {
         if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
             return true;
         }
+        if (LoggingUI.onMenuItemSelected(item, this, cache)) {
+            refreshOnResume = true;
+            return true;
+        }
 
-        cache.logOffline(this, LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
         return true;
     }
 

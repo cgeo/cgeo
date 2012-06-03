@@ -12,7 +12,6 @@ import cgeo.geocaching.connector.gc.SearchHandler;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.ExportFactory;
 import cgeo.geocaching.files.GPXImporter;
@@ -28,6 +27,7 @@ import cgeo.geocaching.sorting.ComparatorUserInterface;
 import cgeo.geocaching.sorting.EventDateComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
+import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
@@ -922,7 +922,7 @@ public class cgeocaches extends AbstractListActivity {
         if (cache.getCoords() != null) {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
             menu.add(1, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-            addVisitMenu(menu, cache);
+            LoggingUI.addMenuItems(menu, cache);
             menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
         }
         if (cache.isOffline()) {
@@ -984,9 +984,6 @@ public class cgeocaches extends AbstractListActivity {
             case MENU_NAVIGATION:
                 NavigationAppFactory.showNavigationMenu(this, cache, null, null);
                 break;
-            case MENU_LOG_VISIT:
-                cache.logVisit(this);
-                break;
             case MENU_CACHE_DETAILS:
                 final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
                 cachesIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
@@ -1024,8 +1021,7 @@ public class cgeocaches extends AbstractListActivity {
                 // in Android:
                 // https://code.google.com/p/android/issues/detail?id=7139
                 lastMenuInfo = info;
-                // create a search for a single cache (as if in details view)
-                cache.logOffline(this, LogType.getById(id - MENU_LOG_VISIT_OFFLINE));
+                LoggingUI.onMenuItemSelected(item, this, cache);
         }
 
         return true;

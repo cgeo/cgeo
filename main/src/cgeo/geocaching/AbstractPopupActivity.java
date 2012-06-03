@@ -4,12 +4,12 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -123,15 +123,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         geocode = cache.getGeocode().toUpperCase();
     }
 
-    private void logOffline(int menuItem) {
-        cache.logOffline(this, LogType.getById(menuItem - MENU_LOG_VISIT_OFFLINE));
-    }
-
-    private void logVisit() {
-        cache.logVisit(this);
-        finish();
-    }
-
     private void showInBrowser() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode())));
     }
@@ -173,7 +164,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
         menu.add(0, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-        addVisitMenu(menu, cache);
+        LoggingUI.addMenuItems(menu, cache);
         menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
         menu.add(0, MENU_SHOW_IN_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_info_details); // browser
 
@@ -187,21 +178,20 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         switch (menuItem) {
             case MENU_DEFAULT_NAVIGATION:
                 navigateTo();
-                break;
+                return true;
             case MENU_NAVIGATION:
                 showNavigationMenu();
-                break;
+                return true;
             case MENU_CACHES_AROUND:
                 cachesAround();
-                break;
-            case MENU_LOG_VISIT:
-                logVisit();
-                break;
+                return true;
             case MENU_SHOW_IN_BROWSER:
                 showInBrowser();
-                break;
-            default:
-                logOffline(menuItem);
+                return true;
+        }
+
+        if (LoggingUI.onMenuItemSelected(item, this, cache)) {
+            return true;
         }
 
         return true;
@@ -223,7 +213,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             menu.findItem(MENU_NAVIGATION).setVisible(visible);
             menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
 
-            menu.findItem(MENU_LOG_VISIT).setEnabled(Settings.isLogin());
+            LoggingUI.onPrepareOptionsMenu(menu);
         } catch (Exception e) {
             // nothing
         }

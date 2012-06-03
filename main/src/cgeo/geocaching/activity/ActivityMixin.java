@@ -2,10 +2,8 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeo;
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.enumerations.LogType;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,11 +12,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -27,10 +22,7 @@ import android.widget.Toast;
 
 import gnu.android.app.appmanualclient.AppManualReaderClient;
 
-import java.util.List;
-
 public final class ActivityMixin {
-    private static final int MENU_ICON_LOG_VISIT = R.drawable.ic_menu_edit;
 
     public final static void goHome(final Activity fromActivity) {
         final Intent intent = new Intent(fromActivity, cgeo.class);
@@ -127,27 +119,6 @@ public final class ActivityMixin {
 
     public static void helpDialog(Activity activity, String title, String message) {
         helpDialog(activity, title, message, null);
-    }
-
-    protected static void addVisitMenu(IAbstractActivity activity, Menu menu, cgCache cache) {
-        if (cache == null) {
-            return;
-        }
-        if (!cache.supportsLogging()) {
-            return;
-        }
-        Resources res = ((Activity) activity).getResources();
-        if (Settings.getLogOffline()) {
-            SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
-            List<LogType> logTypes = cache.getPossibleLogTypes();
-            for (LogType logType : logTypes) {
-                logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType.id, 0, logType.getL10n());
-            }
-            logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
-        }
-        else {
-            menu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit)).setIcon(MENU_ICON_LOG_VISIT);
-        }
     }
 
     public static void keepScreenOn(final Activity abstractActivity, boolean keepScreenOn) {

@@ -1,7 +1,6 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
@@ -10,7 +9,6 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
@@ -88,10 +86,6 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         Cookies.restoreCookieStore(Settings.getCookieStore());
 
         ActivityMixin.keepScreenOn(this, keepScreenOn);
-    }
-
-    public void addVisitMenu(Menu menu, cgCache cache) {
-        ActivityMixin.addVisitMenu(this, menu, cache);
     }
 
     protected static void disableSuggestions(final EditText edit) {

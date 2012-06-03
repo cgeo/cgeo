@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.cgData.StorageLocation;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -404,28 +405,28 @@ public class cgCache implements ICache, IWaypoint {
         ((Activity) fromActivity).startActivity(logVisitIntent);
     }
 
-    public void logOffline(final IAbstractActivity fromActivity, final LogType logType) {
+    public void logOffline(final Activity fromActivity, final LogType logType) {
         final boolean mustIncludeSignature = StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature();
         final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), true) : "";
         logOffline(fromActivity, initial, Calendar.getInstance(), logType);
     }
 
-    void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final LogType logType) {
+    void logOffline(final Activity fromActivity, final String log, Calendar date, final LogType logType) {
         if (logType == LogType.UNKNOWN) {
             return;
         }
-        cgeoapplication app = (cgeoapplication) ((Activity) fromActivity).getApplication();
+        cgeoapplication app = (cgeoapplication) fromActivity.getApplication();
         final boolean status = app.saveLogOffline(geocode, date.getTime(), logType, log);
 
-        Resources res = ((Activity) fromActivity).getResources();
+        Resources res = fromActivity.getResources();
         if (status) {
-            fromActivity.showToast(res.getString(R.string.info_log_saved));
+            ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
             app.saveVisitDate(geocode);
             logOffline = true;
 
             notifyChange();
         } else {
-            fromActivity.showToast(res.getString(R.string.err_log_post_failed));
+            ActivityMixin.showToast(fromActivity, res.getString(R.string.err_log_post_failed));
         }
     }
 
