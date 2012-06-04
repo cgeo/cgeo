@@ -27,7 +27,7 @@ public class CacheCache {
         cachesCache.setRemoveHandler(new CacheRemoveHandler());
     }
 
-    public void removeAllFromCache() {
+    public synchronized void removeAllFromCache() {
         cachesCache.clear();
     }
 
@@ -39,7 +39,9 @@ public class CacheCache {
         if (StringUtils.isBlank(geocode)) {
             throw new IllegalArgumentException("geocode must not be empty");
         }
-        cachesCache.remove(geocode);
+        synchronized(this) {
+            cachesCache.remove(geocode);
+        }
     }
 
     /**
@@ -56,8 +58,10 @@ public class CacheCache {
         if (StringUtils.isBlank(cache.getGeocode())) {
             throw new IllegalArgumentException("geocode must not be empty");
         }
-        cache.addStorageLocation(StorageLocation.CACHE);
-        cachesCache.put(cache.getGeocode(), cache);
+        synchronized(this) {
+            cache.addStorageLocation(StorageLocation.CACHE);
+            cachesCache.put(cache.getGeocode(), cache);
+        }
     }
 
     /**
@@ -69,10 +73,12 @@ public class CacheCache {
         if (StringUtils.isBlank(geocode)) {
             throw new IllegalArgumentException("geocode must not be empty");
         }
-        return cachesCache.get(geocode);
+        synchronized(this) {
+            return cachesCache.get(geocode);
+        }
     }
 
-    public Set<String> getInViewport(final Viewport viewport, final CacheType cacheType) {
+    public synchronized Set<String> getInViewport(final Viewport viewport, final CacheType cacheType) {
         final Set<String> geocodes = new HashSet<String>();
         for (final cgCache cache : cachesCache.values()) {
             if (cache.getCoords() == null) {
@@ -89,15 +95,19 @@ public class CacheCache {
     }
 
     @Override
-    public String toString() {
+    public synchronized String toString() {
         return StringUtils.join(cachesCache.keySet(), ' ');
     }
 
     private static class CacheRemoveHandler implements RemoveHandler<cgCache> {
 
         @Override
-        public void onRemove(cgCache removed) {
-            Tile.Cache.removeFromTileCache(removed);
+        public void onRemove(final cgCache removed) {
+            // FIXME: as above, we sometimes get caches with null coordinates, that may then provoke
+            // a NullPointerException down the invocation chain.
+            if (removed.getCoords() != null) {
+                Tile.Cache.removeFromTileCache(removed);
+            }
         }
     }
 
