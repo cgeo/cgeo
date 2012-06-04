@@ -102,8 +102,12 @@ public class CacheCache {
     private static class CacheRemoveHandler implements RemoveHandler<cgCache> {
 
         @Override
-        public void onRemove(cgCache removed) {
-            Tile.Cache.removeFromTileCache(removed);
+        public void onRemove(final cgCache removed) {
+            // FIXME: as above, we sometimes get caches with null coordinates, that may then provoke
+            // a NullPointerException down the invocation chain.
+            if (removed.getCoords() != null) {
+                Tile.Cache.removeFromTileCache(removed);
+            }
         }
     }
 
