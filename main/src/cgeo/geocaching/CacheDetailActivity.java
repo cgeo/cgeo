@@ -2018,8 +2018,10 @@ public class CacheDetailActivity extends AbstractActivity {
                     publishProgress();
                 }
 
-                // if description has HTML table, add a note at the end of the long description
-                if (unknownTagsHandler.isTableDetected() && descriptionView == view.findViewById(R.id.longdesc)) {
+                // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
+                // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
+                // sometimes technically incorrect.
+                if (unknownTagsHandler.isProblematicDetected() && descriptionView == view.findViewById(R.id.longdesc)) {
                     final int startPos = description.length();
                     ((Editable) description).append("\n\n").append(res.getString(R.string.cache_description_table_note));
                     ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

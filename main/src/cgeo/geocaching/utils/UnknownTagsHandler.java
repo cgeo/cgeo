@@ -12,7 +12,7 @@ public class UnknownTagsHandler implements TagHandler {
     private static final int UNDEFINED_POSITION = -1;
     private static int countCells = 0;
     int strikePos = UNDEFINED_POSITION;
-    private boolean tableDetected = false;
+    private boolean problematicDetected = false;
 
     @Override
     public void handleTag(boolean opening, String tag, Editable output,
@@ -20,11 +20,13 @@ public class UnknownTagsHandler implements TagHandler {
         if (tag.equalsIgnoreCase("strike") || tag.equals("s")) {
             handleStrike(opening, output);
         } else if (tag.equalsIgnoreCase("table")) {
-            handleTable();
+            handleProblematic();
         } else if (tag.equalsIgnoreCase("td")) {
             handleTd(opening, output);
         } else if (tag.equalsIgnoreCase("tr")) {
             handleTr(opening, output);
+        } else if (tag.equalsIgnoreCase("pre")) {
+            handleProblematic();
         }
     }
 
@@ -40,12 +42,12 @@ public class UnknownTagsHandler implements TagHandler {
         }
     }
 
-    public boolean isTableDetected() {
-        return tableDetected;
+    public boolean isProblematicDetected() {
+        return problematicDetected;
     }
 
-    private void handleTable() {
-        tableDetected = true;
+    private void handleProblematic() {
+        problematicDetected = true;
     }
 
     private static void handleTd(boolean opening, Editable output) {
