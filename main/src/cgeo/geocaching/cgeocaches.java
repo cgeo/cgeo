@@ -148,7 +148,7 @@ public class cgeocaches extends AbstractListActivity {
     private long detailProgressTime = 0L;
     private LoadDetailsThread threadDetails = null;
     private LoadFromWebThread threadWeb = null;
-    private int listId = StoredList.TEMPORARY_LIST_ID;
+    private int listId = StoredList.TEMPORARY_LIST_ID;  // Only meaningful for the OFFLINE type
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
 	    @Override
@@ -630,6 +630,11 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
+    private boolean isConcreteList() {
+        return type == CacheListType.OFFLINE &&
+                (listId == StoredList.STANDARD_LIST_ID || listId >= cgData.customListIdOffset);
+    }
+
     private boolean isInvokedFromAttachment() {
         return Intent.ACTION_VIEW.equals(getIntent().getAction());
     }
@@ -740,16 +745,18 @@ public class cgeocaches extends AbstractListActivity {
         if (type == CacheListType.OFFLINE) {
             SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_OFFLINE, 0, res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
             subMenu.add(0, MENU_DROP_CACHES, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
-            subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
-            if (listId != StoredList.ALL_LIST_ID) {
+            if (isConcreteList()) {
+                subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
                 subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
             }
             subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
 
             //TODO: add submenu/AlertDialog and use R.string.gpx_import_title
-            subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
-            if (Settings.getWebDeviceCode() != null) {
-                subMenu.add(0, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title));
+            if (isConcreteList()) {
+                subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
+                if (Settings.getWebDeviceCode() != null) {
+                    subMenu.add(0, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title));
+                }
             }
 
             subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
@@ -759,9 +766,7 @@ public class cgeocaches extends AbstractListActivity {
                 subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
                 subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
             }
-            if (listId != StoredList.ALL_LIST_ID) {
-                menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as); // download details for all caches
-            }
+            menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as); // download details for all caches
         }
 
         navigationMenu = CacheListAppFactory.addMenuItems(menu, this, res);
@@ -769,8 +774,10 @@ public class cgeocaches extends AbstractListActivity {
         if (type == CacheListType.OFFLINE) {
             SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_LISTS, 0, res.getString(R.string.list_menu)).setIcon(R.drawable.ic_menu_more);
             subMenu.add(0, MENU_CREATE_LIST, 0, res.getString(R.string.list_menu_create));
-            subMenu.add(0, MENU_DROP_LIST, 0, res.getString(R.string.list_menu_drop));
-            subMenu.add(0, MENU_RENAME_LIST, 0, res.getString(R.string.list_menu_rename));
+            if (isConcreteList()) {
+                subMenu.add(0, MENU_DROP_LIST, 0, res.getString(R.string.list_menu_drop));
+                subMenu.add(0, MENU_RENAME_LIST, 0, res.getString(R.string.list_menu_rename));
+            }
             subMenu.add(0, MENU_SWITCH_LIST, 0, res.getString(R.string.list_menu_change));
         }
 
@@ -824,11 +831,11 @@ public class cgeocaches extends AbstractListActivity {
             if (type == CacheListType.OFFLINE) { // only offline list
                 setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
                 menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
-                if (listId != StoredList.ALL_LIST_ID) {
+                if (isConcreteList()) {
                     setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 }
                 setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
-            } else if (listId != StoredList.ALL_LIST_ID) { // search and history list (all other than offline)
+            } else { // search and history list (all other than offline)
                 setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
             }
 
