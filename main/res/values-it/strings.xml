@@ -359,8 +359,8 @@
   <string name="init_passvote">Password</string>
   <string name="init_login">Verifica e salva login</string>
   <string name="init_login_popup">Login</string>
-  <string name="init_login_popup_working">Logging in Geocaching.com…</string>
-  <string name="init_login_popup_ok">Login ok.</string>
+  <string name="init_login_popup_working">Logging…</string>
+  <string name="init_login_popup_ok">Login OK.</string>
   <string name="init_login_popup_failed">Login fallito.</string>
   <string name="init_login_popup_failed_reason">Login fallito perché </string>
   <string name="init_go4cache_connect">Connetti a Go 4 Cache</string>
@@ -430,7 +430,7 @@
   <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo premuto l\'icona di navigazione vicino al titolo della cache.</string>
 
   <string name="init_debug_title">Informazioni di Debug</string>
-  <string name="init_debug_note">c:geo può generare molte informazioni di debug. Per quanto queste informazioni non sono generalmente utili agli utenti di c:geo, gli sviluppatori potrebbero averne bisogno per analizzare un eventuale problema. In questo case, vi sarà chiesto di settare l\'opzione sottostante ed inviare il log.</string>
+  <string name="init_debug_note">c:geo può generare molte informazioni di debug. Per quanto queste informazioni non sono generalmente utili agli utenti di c:geo, gli sviluppatori potrebbero averne bisogno per analizzare un eventuale problema. In questo caso, vi sarà chiesto di settare l\'opzione sottostante ed inviare il log.</string>
   <string name="init_debug">Genera informazioni di debug</string>
   <string name="init_dbonsdcard_title">Posizione Database</string>
   <string name="init_dbonsdcard_note">Puoi decidere di salvare il database su memoria esterna. In questo caso risparmierai memoria interna ma potresti perdere un pochino di velocità e c:geo non funzionerà se la tua sdcard non sarà disponibile.</string>
@@ -793,6 +793,9 @@
   <string name="export_fieldnotes_creating">Creazione Field Notes…</string>
   <string name="export_gpx">GPX</string>
 
+<!--  attribute unknown -->
+  <string name="attribute_unknown_yes">(attributo sconosciuto) permesso</string>
+  <string name="attribute_unknown_no">(attributo sconosciuto) non permesso</string>
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Cani permessi</string>
   <string name="attribute_dogs_no">Cani NON permessi</string>
