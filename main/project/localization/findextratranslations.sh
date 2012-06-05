@@ -25,7 +25,7 @@ checkpresent() {
     if [ -z `echo $1 | sed -e 's/^status_.*$//'` ]; then
         return 0
     fi
-    (cd $sourcedir && grep -m 1 R.string.$1 $sourcefiles > /dev/null) || \
+    (cd $sourcedir && grep -m 1 -E "\WR\.(string|plurals)\.$1\W" $sourcefiles > /dev/null) || \
       grep -m 1 @string/$1 $xmlfiles > /dev/null
 }
 
