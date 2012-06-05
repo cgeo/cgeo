@@ -73,7 +73,7 @@ public class cgData {
     private static int[] cacheColumnIndex;
     private CacheCache cacheCache = new CacheCache();
     private SQLiteDatabase database = null;
-    private static final int dbVersion = 63;
+    private static final int dbVersion = 64;
     public static final int customListIdOffset = 10;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
@@ -647,6 +647,17 @@ public class cgData {
                         } catch (Exception e) {
                             Log.e("Failed to upgrade to ver. 63: " + e.toString());
 
+                        }
+                    }
+
+                    if (oldVersion < 64) {
+                        try {
+                            // No cache should ever be stored into the ALL_CACHES list. Here we use hardcoded list ids
+                            // rather than symbolic ones because the fix must be applied with the values at the time
+                            // of the problem. The problem was introduced in release 2012.06.01.
+                            db.execSQL("update " + dbTableCaches + " set reason=1 where reason=2");
+                        } catch (Exception e) {
+                            Log.e("Failed to upgrade to ver. 64", e);
                         }
                     }
                 }
