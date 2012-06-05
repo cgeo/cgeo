@@ -594,7 +594,7 @@
   <string name="cache_image_open_file">Als Datei öffnen</string>
   <string name="cache_image_open_browser">Im Browser öffnen</string>
   <string name="cache_share_field">Weiterleiten</string>
-  
+
   <!-- file list base -->
   <string name="file_searching_in">Suche nach Dateien\nin</string>
   <string name="file_searching_sdcard_in">Keine Dateien in Standardverzeichnissen gefunden:\n%1$s\n\nDurchsuche komplette SD-Karte:\n</string>
@@ -610,16 +610,15 @@
   <string name="gpx_import_caches_imported">Caches importiert</string>
   <string name="gpx_import_static_maps_skipped">Download statischer Karten abgebrochen</string>
   <string name="gpx_import_title_static_maps">Speichern statischer Karten</string>
-  <string name="gpx_import_title">Importiere GPX-Datei</string>
-  <string name="gpx_import_title_static_maps">Speichern statischer Karten</string>
   <string name="gpx_import_title_reading_file">Lese Datei</string>
+  <string name="gpx_import_title">Importiere GPX-Datei</string>
   <string name="gpx_import_title_caches_imported">Ergebnis</string>
   <string name="gpx_import_title_caches_import_failed">Import-Fehler</string>
   <string name="gpx_import_error_io">Fehler beim Lesen der Datei</string>
   <string name="gpx_import_error_parser">Dateiformat nicht ok</string>
   <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
   <string name="gpx_import_confirm">Soll die GPX-Datei importiert werden?</string>
-  <string name="gpx_import_canceled">Der GPX-Import wurde abgebrochen</string>      
+  <string name="gpx_import_canceled">Der GPX-Import wurde abgebrochen</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Kartendatei wählen</string>
