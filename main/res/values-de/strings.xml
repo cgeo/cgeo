@@ -303,6 +303,7 @@
   <string name="caches_move_selected">Ausgewählte verschieben</string>
   <string name="caches_move_all">Alle verschieben</string>
   <string name="caches_map_locus">Locus</string>
+  <string name="caches_map_locus_export">Exportieren nach Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Bitte Text vom Bild abschreiben. Wichtig, um Koordinaten des Caches laden zu können. Dies ist optional und kann in den Einstellungen deaktiviert werden.</string>
   <string name="caches_recaptcha_hint">Text vom Bild</string>
@@ -343,6 +344,7 @@
   <string name="list_dialog_rename">Umbenennen</string>
 
   <!-- about -->
+  <string name="about_version">Version</string>
   <string name="about_changelog">Änderungen</string>
   <string name="about_donate">Spenden</string>
   <string name="about_detail">Details</string>
@@ -443,7 +445,9 @@
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM: Radfahrerkarte</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Name des Endgerätes:</string>
@@ -542,6 +546,7 @@
   <string name="cache_menu_download_map_static">Statische Karten speichern</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Auf ext. Karte zeigen</string>
+  <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Im Browser öffnen</string>
   <string name="cache_menu_visit">Besuch loggen</string>
   <string name="cache_menu_visit_offline">Besuch offline loggen</string>
@@ -553,6 +558,7 @@
   <string name="cache_menu_move_list">Auf andere Liste verschieben</string>
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
@@ -603,9 +609,10 @@
   <string name="gpx_import_storing">Schreibe Caches in Datenbank</string>
   <string name="gpx_import_caches_imported">Caches importiert</string>
   <string name="gpx_import_static_maps_skipped">Download statischer Karten abgebrochen</string>
-  <string name="gpx_import_title">Importiere GPX-Datei</string>
-  <string name="gpx_import_title_reading_file">Lese Datei</string>
   <string name="gpx_import_title_static_maps">Speichern statischer Karten</string>
+  <string name="gpx_import_title">Importiere GPX-Datei</string>
+  <string name="gpx_import_title_static_maps">Speichern statischer Karten</string>
+  <string name="gpx_import_title_reading_file">Lese Datei</string>
   <string name="gpx_import_title_caches_imported">Ergebnis</string>
   <string name="gpx_import_title_caches_import_failed">Import-Fehler</string>
   <string name="gpx_import_error_io">Fehler beim Lesen der Datei</string>
@@ -655,7 +662,14 @@
   <string name="search_history_cleared">Verlauf gelöscht</string>
   
   <string name="waypoint_coordinate_formats_plain">Schlicht</string>
-
+  
+<!-- distance units -->
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+  
   <!-- visit -->
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
 
@@ -786,6 +800,10 @@
   <string name="export_fieldnotes_onlynew">Nur seit letztem Export</string>
   <string name="export_fieldnotes_creating">Erstelle Field Notes…</string>
   <string name="export_gpx">GPX</string>
+  
+  <!-- attribute unknown -->
+  <string name="attribute_unknown_yes">Unbekannte Attribute vorhanden</string>
+  <string name="attribute_unknown_no">Keine unbekannten Attribute</string>
   
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Hunde erlaubt</string>
@@ -930,6 +948,7 @@
   <!-- next things -->
   <string name="legal_note">Um die Dienste von Geocaching.com nutzen zu können, müssen die <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak-Nutzungsbedingungen</a> (englisch) akzeptiert werden.</string>
   <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
+  <string name="powered_by">carnero</string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Webseite: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
