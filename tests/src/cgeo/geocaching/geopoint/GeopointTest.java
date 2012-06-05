@@ -1,13 +1,9 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.geopoint.direction.DDD;
-import cgeo.geocaching.geopoint.direction.DMM;
-import cgeo.geocaching.geopoint.direction.DMS;
+import junit.framework.Assert;
 
 import android.os.Bundle;
 import android.test.AndroidTestCase;
-
-import junit.framework.Assert;
 
 public class GeopointTest extends AndroidTestCase {
 
@@ -73,56 +69,52 @@ public class GeopointTest extends AndroidTestCase {
     public static void testDDD() {
         // case 1
         final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
-        DDD ddd1 = gp1.asDDD();
 
-        checkDDD(ddd1, 'N', 51, 30000, 'E', 13, 80000);
+        checkDDD(gp1, 'N', 51, 30000, 'E', 13, 80000);
 
-        Geopoint gp1a = DDD.createGeopoint(String.valueOf(ddd1.latDir), String.valueOf(ddd1.latDeg), String.valueOf(ddd1.latDegFrac),
-                String.valueOf(ddd1.lonDir), String.valueOf(ddd1.lonDeg), String.valueOf(ddd1.lonDegFrac));
+        Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatDegFrac()),
+                String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonDegFrac()));
 
         Assert.assertTrue(gp1a.equals(gp1));
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
-        DDD ddd2 = gp2.asDDD();
 
-        checkDDD(ddd2, 'N', 51, 34567, 'E', 13, 87654);
+        checkDDD(gp2, 'N', 51, 34567, 'E', 13, 87654);
 
-        Geopoint gp2a = DDD.createGeopoint(String.valueOf(ddd2.latDir), String.valueOf(ddd2.latDeg), String.valueOf(ddd2.latDegFrac),
-                String.valueOf(ddd2.lonDir), String.valueOf(ddd2.lonDeg), String.valueOf(ddd2.lonDegFrac));
+        Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatDegFrac()),
+                String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonDegFrac()));
 
         Assert.assertTrue(gp2a.equals(gp2));
 
         // case 3
         final Geopoint gp3 = new Geopoint(51.29999833333333d, 13.8d);
-        DDD ddd3 = gp3.asDDD();
 
-        checkDDD(ddd3, 'N', 51, 30000, 'E', 13, 80000);
+        checkDDD(gp3, 'N', 51, 30000, 'E', 13, 80000);
 
-        Geopoint gp3a = DDD.createGeopoint(String.valueOf(ddd3.latDir), String.valueOf(ddd3.latDeg), String.valueOf(ddd3.latDegFrac),
-                String.valueOf(ddd3.lonDir), String.valueOf(ddd3.lonDeg), String.valueOf(ddd3.lonDegFrac));
+        Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatDegFrac()),
+                String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonDegFrac()));
 
         checkTolerance(gp3, gp3a, 5e-5);
 
         // case 4
         final Geopoint gp4 = new Geopoint(51.00012d, 13.00089d);
-        DDD ddd4 = gp4.asDDD();
 
-        checkDDD(ddd4, 'N', 51, 12, 'E', 13, 89);
+        checkDDD(gp4, 'N', 51, 12, 'E', 13, 89);
 
-        Geopoint gp4a = DDD.createGeopoint(String.valueOf(ddd4.latDir), String.valueOf(ddd4.latDeg), String.valueOf(ddd4.latDegFrac),
-                String.valueOf(ddd4.lonDir), String.valueOf(ddd4.lonDeg), String.valueOf(ddd4.lonDegFrac));
+        Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatDegFrac()),
+                String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonDegFrac()));
 
         checkTolerance(gp4, gp4a, 5e-5);
     }
 
-    private static void checkDDD(DDD ddd, char latDir, int latDeg, int latDegFrac, char lonDir, int lonDeg, int lonDegFrac) {
-        Assert.assertEquals(latDir, ddd.latDir);
-        Assert.assertEquals(latDeg, ddd.latDeg);
-        Assert.assertEquals(latDegFrac, ddd.latDegFrac);
-        Assert.assertEquals(lonDir, ddd.lonDir);
-        Assert.assertEquals(lonDeg, ddd.lonDeg);
-        Assert.assertEquals(lonDegFrac, ddd.lonDegFrac);
+    private static void checkDDD(Geopoint gp, char latDir, int latDeg, int latDegFrac, char lonDir, int lonDeg, int lonDegFrac) {
+        Assert.assertEquals(latDir, gp.getLatDir());
+        Assert.assertEquals(latDeg, gp.getLatDeg());
+        Assert.assertEquals(latDegFrac, gp.getLatDegFrac());
+        Assert.assertEquals(lonDir, gp.getLonDir());
+        Assert.assertEquals(lonDeg, gp.getLonDeg());
+        Assert.assertEquals(lonDegFrac, gp.getLonDegFrac());
     }
 
     private static void checkTolerance(Geopoint gp1, Geopoint gp2, double tolerance) {
@@ -133,117 +125,109 @@ public class GeopointTest extends AndroidTestCase {
     public static void testDMM() {
         // case 1
         final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
-        DMM dmm1 = gp1.asDMM();
 
-        checkDMM(dmm1, 'N', 51, 18, 0, 'E', 13, 48, 0);
+        checkDMM(gp1, 'N', 51, 18, 0, 'E', 13, 48, 0);
 
-        Geopoint gp1a = DMM.createGeopoint(String.valueOf(dmm1.latDir), String.valueOf(dmm1.latDeg), String.valueOf(dmm1.latMin), String.valueOf(dmm1.latMinFrac),
-                String.valueOf(dmm1.lonDir), String.valueOf(dmm1.lonDeg), String.valueOf(dmm1.lonMin), String.valueOf(dmm1.lonMinFrac));
+        Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatMin()), String.valueOf(gp1.getLatMinFrac()),
+                String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonMin()), String.valueOf(gp1.getLonMinFrac()));
 
         Assert.assertTrue(gp1a.equals(gp1));
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
-        DMM dmm2 = gp2.asDMM();
 
-        checkDMM(dmm2, 'N', 51, 20, 740, 'E', 13, 52, 592);
+        checkDMM(gp2, 'N', 51, 20, 740, 'E', 13, 52, 592);
 
-        Geopoint gp2a = DMM.createGeopoint(String.valueOf(dmm2.latDir), String.valueOf(dmm2.latDeg), String.valueOf(dmm2.latMin), String.valueOf(dmm2.latMinFrac),
-                String.valueOf(dmm2.lonDir), String.valueOf(dmm2.lonDeg), String.valueOf(dmm2.lonMin), String.valueOf(dmm2.lonMinFrac));
+        Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatMin()), String.valueOf(gp2.getLatMinFrac()),
+                String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonMin()), String.valueOf(gp2.getLonMinFrac()));
 
         checkTolerance(gp2, gp2a, 5e-5);
 
         // case 3
-        final Geopoint gp3 = new Geopoint(51.29999833333333d, 13.8d);
-        DMM dmm3 = gp3.asDMM();
+        final Geopoint gp3 = new Geopoint(51.3d, 13.8d);
 
-        checkDMM(dmm3, 'N', 51, 18, 0, 'E', 13, 48, 0);
+        checkDMM(gp3, 'N', 51, 18, 0, 'E', 13, 48, 0);
 
-        Geopoint gp3a = DMM.createGeopoint(String.valueOf(dmm3.latDir), String.valueOf(dmm3.latDeg), String.valueOf(dmm3.latMin), String.valueOf(dmm3.latMinFrac),
-                String.valueOf(dmm3.lonDir), String.valueOf(dmm3.lonDeg), String.valueOf(dmm3.lonMin), String.valueOf(dmm3.lonMinFrac));
+        Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatMin()), String.valueOf(gp3.getLatMinFrac()),
+                String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonMin()), String.valueOf(gp3.getLonMinFrac()));
 
         checkTolerance(gp3, gp3a, 5e-5);
 
         // case 4
         final Geopoint gp4 = new Geopoint(51.00012d, 13.00089d);
-        DMM dmm4 = gp4.asDMM();
 
-        checkDMM(dmm4, 'N', 51, 0, 7, 'E', 13, 0, 53);
+        checkDMM(gp4, 'N', 51, 0, 7, 'E', 13, 0, 53);
 
-        Geopoint gp4a = DMM.createGeopoint(String.valueOf(dmm4.latDir), String.valueOf(dmm4.latDeg), String.valueOf(dmm4.latMin), String.valueOf(dmm4.latMinFrac),
-                String.valueOf(dmm4.lonDir), String.valueOf(dmm4.lonDeg), String.valueOf(dmm4.lonMin), String.valueOf(dmm4.lonMinFrac));
+        Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatMin()), String.valueOf(gp4.getLatMinFrac()),
+                String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonMin()), String.valueOf(gp4.getLonMinFrac()));
 
         checkTolerance(gp4, gp4a, 5e-5);
     }
 
-    private static void checkDMM(DMM dmm, char latDir, int latDeg, int latMin, int latMinFrac, char lonDir, int lonDeg, int lonMin, int lonMinFrac) {
-        Assert.assertEquals(latDir, dmm.latDir);
-        Assert.assertEquals(latDeg, dmm.latDeg);
-        Assert.assertEquals(latMin, dmm.latMin);
-        Assert.assertEquals(latMinFrac, dmm.latMinFrac);
-        Assert.assertEquals(lonDir, dmm.lonDir);
-        Assert.assertEquals(lonDeg, dmm.lonDeg);
-        Assert.assertEquals(lonMin, dmm.lonMin);
-        Assert.assertEquals(lonMinFrac, dmm.lonMinFrac);
+    private static void checkDMM(Geopoint gp, char latDir, int latDeg, int latMin, int latMinFrac, char lonDir, int lonDeg, int lonMin, int lonMinFrac) {
+        Assert.assertEquals(latDir, gp.getLatDir());
+        Assert.assertEquals(latDeg, gp.getLatDeg());
+        Assert.assertEquals(latMin, gp.getLatMin());
+        Assert.assertEquals(latMinFrac, gp.getLatMinFrac());
+        Assert.assertEquals(lonDir, gp.getLonDir());
+        Assert.assertEquals(lonDeg, gp.getLonDeg());
+        Assert.assertEquals(lonMin, gp.getLonMin());
+        Assert.assertEquals(lonMinFrac, gp.getLonMinFrac());
     }
 
     public static void testDMS() {
         // case 1
         final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
-        DMS dms1 = gp1.asDMS();
 
-        checkDMS(dms1, 'N', 51, 18, 0, 0, 'E', 13, 48, 0, 0);
+        checkDMS(gp1, 'N', 51, 18, 0, 0, 'E', 13, 48, 0, 0);
 
-        Geopoint gp1a = DMS.createGeopoint(String.valueOf(dms1.latDir), String.valueOf(dms1.latDeg), String.valueOf(dms1.latMin), String.valueOf(dms1.latSec), String.valueOf(dms1.latSecFrac),
-                String.valueOf(dms1.lonDir), String.valueOf(dms1.lonDeg), String.valueOf(dms1.lonMin), String.valueOf(dms1.lonSec), String.valueOf(dms1.lonSecFrac));
+        Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatMin()), String.valueOf(gp1.getLatSec()), String.valueOf(gp1.getLatSecFrac()),
+                String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonMin()), String.valueOf(gp1.getLonSec()), String.valueOf(gp1.getLonSecFrac()));
 
         Assert.assertTrue(gp1a.equals(gp1));
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
-        DMS dms2 = gp2.asDMS();
 
-        checkDMS(dms2, 'N', 51, 20, 44, 412, 'E', 13, 52, 35, 544);
+        checkDMS(gp2, 'N', 51, 20, 44, 412, 'E', 13, 52, 35, 544);
 
-        Geopoint gp2a = DMS.createGeopoint(String.valueOf(dms2.latDir), String.valueOf(dms2.latDeg), String.valueOf(dms2.latMin), String.valueOf(dms2.latSec), String.valueOf(dms2.latSecFrac),
-                String.valueOf(dms2.lonDir), String.valueOf(dms2.lonDeg), String.valueOf(dms2.lonMin), String.valueOf(dms2.lonSec), String.valueOf(dms2.lonSecFrac));
+        Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatMin()), String.valueOf(gp2.getLatSec()), String.valueOf(gp2.getLatSecFrac()),
+                String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonMin()), String.valueOf(gp2.getLonSec()), String.valueOf(gp2.getLonSecFrac()));
 
         checkTolerance(gp2, gp2a, 5e-6);
 
         // case 3
         final Geopoint gp3 = new Geopoint(51.29999833333333d, 13.8d);
-        DMS dms3 = gp3.asDMS();
 
-        checkDMS(dms3, 'N', 51, 17, 59, 994, 'E', 13, 48, 0, 0);
+        checkDMS(gp3, 'N', 51, 17, 59, 994, 'E', 13, 48, 0, 0);
 
-        Geopoint gp3a = DMS.createGeopoint(String.valueOf(dms3.latDir), String.valueOf(dms3.latDeg), String.valueOf(dms3.latMin), String.valueOf(dms3.latSec), String.valueOf(dms3.latSecFrac),
-                String.valueOf(dms3.lonDir), String.valueOf(dms3.lonDeg), String.valueOf(dms3.lonMin), String.valueOf(dms3.lonSec), String.valueOf(dms3.lonSecFrac));
+        Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatMin()), String.valueOf(gp3.getLatSec()), String.valueOf(gp3.getLatSecFrac()),
+                String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonMin()), String.valueOf(gp3.getLonSec()), String.valueOf(gp3.getLonSecFrac()));
 
         checkTolerance(gp3, gp3a, 5e-6);
 
         // case 4
         final Geopoint gp4 = new Geopoint(51.00012d, 13.00089d);
-        DMS dms4 = gp4.asDMS();
 
-        checkDMS(dms4, 'N', 51, 0, 0, 432, 'E', 13, 0, 3, 204);
+        checkDMS(gp4, 'N', 51, 0, 0, 432, 'E', 13, 0, 3, 204);
 
-        Geopoint gp4a = DMS.createGeopoint(String.valueOf(dms4.latDir), String.valueOf(dms4.latDeg), String.valueOf(dms4.latMin), String.valueOf(dms4.latSec), String.valueOf(dms4.latSecFrac),
-                String.valueOf(dms4.lonDir), String.valueOf(dms4.lonDeg), String.valueOf(dms4.lonMin), String.valueOf(dms4.lonSec), String.valueOf(dms4.lonSecFrac));
+        Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatMin()), String.valueOf(gp4.getLatSec()), String.valueOf(gp4.getLatSecFrac()),
+                String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonMin()), String.valueOf(gp4.getLonSec()), String.valueOf(gp4.getLonSecFrac()));
 
         checkTolerance(gp4, gp4a, 5e-6);
     }
 
-    private static void checkDMS(DMS dms, char latDir, int latDeg, int latMin, int latSec, int latSecFrac, char lonDir, int lonDeg, int lonMin, int lonSec, int lonSecFrac) {
-        Assert.assertEquals(latDir, dms.latDir);
-        Assert.assertEquals(latDeg, dms.latDeg);
-        Assert.assertEquals(latMin, dms.latMin);
-        Assert.assertEquals(latSec, dms.latSec);
-        Assert.assertEquals(latSecFrac, dms.latSecFrac);
-        Assert.assertEquals(lonDir, dms.lonDir);
-        Assert.assertEquals(lonDeg, dms.lonDeg);
-        Assert.assertEquals(lonMin, dms.lonMin);
-        Assert.assertEquals(lonSec, dms.lonSec);
-        Assert.assertEquals(lonSecFrac, dms.lonSecFrac);
+    private static void checkDMS(Geopoint gp, char latDir, int latDeg, int latMin, int latSec, int latSecFrac, char lonDir, int lonDeg, int lonMin, int lonSec, int lonSecFrac) {
+        Assert.assertEquals(latDir, gp.getLatDir());
+        Assert.assertEquals(latDeg, gp.getLatDeg());
+        Assert.assertEquals(latMin, gp.getLatMin());
+        Assert.assertEquals(latSec, gp.getLatSec());
+        Assert.assertEquals(latSecFrac, gp.getLatSecFrac());
+        Assert.assertEquals(lonDir, gp.getLonDir());
+        Assert.assertEquals(lonDeg, gp.getLonDeg());
+        Assert.assertEquals(lonMin, gp.getLonMin());
+        Assert.assertEquals(lonSec, gp.getLonSec());
+        Assert.assertEquals(lonSecFrac, gp.getLonSecFrac());
     }
 
     public static void testElevation() {
