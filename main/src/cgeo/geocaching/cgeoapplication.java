@@ -42,6 +42,7 @@ public class cgeoapplication extends Application {
     public boolean firstRun = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean databaseCleaned = false; // database was cleaned
+    private boolean liveMapHintShown = false; // livemap hint has been shown
     final private StatusUpdater statusUpdater = new StatusUpdater();
     private static cgeoapplication instance = null;
 
@@ -491,6 +492,14 @@ public class cgeoapplication extends Application {
 
     public Set<cgWaypoint> getWaypointsInViewport(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
         return storage.loadWaypoints(viewport, excludeMine, excludeDisabled);
+    }
+
+    public boolean isLiveMapHintShown() {
+        return liveMapHintShown;
+    }
+
+    public void setLiveMapHintShown() {
+        liveMapHintShown = true;
     }
 
 }
