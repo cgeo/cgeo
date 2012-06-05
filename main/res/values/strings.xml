@@ -1114,6 +1114,7 @@
       Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
       In fast mode the cache type might be wrong in rare cases\n
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
+      On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
       Log images with huge size cause a long loading time\n
       Recursively opening several instances of the map can cause a crash\n\n\n
