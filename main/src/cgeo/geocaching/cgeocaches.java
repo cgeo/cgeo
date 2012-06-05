@@ -745,18 +745,14 @@ public class cgeocaches extends AbstractListActivity {
         if (type == CacheListType.OFFLINE) {
             SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_OFFLINE, 0, res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
             subMenu.add(0, MENU_DROP_CACHES, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
-            if (isConcreteList()) {
-                subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
-                subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
-            }
+            subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
+            subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
             subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
 
             //TODO: add submenu/AlertDialog and use R.string.gpx_import_title
-            if (isConcreteList()) {
-                subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
-                if (Settings.getWebDeviceCode() != null) {
-                    subMenu.add(0, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title));
-                }
+            subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
+            if (Settings.getWebDeviceCode() != null) {
+                subMenu.add(0, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title));
             }
 
             subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
@@ -774,14 +770,19 @@ public class cgeocaches extends AbstractListActivity {
         if (type == CacheListType.OFFLINE) {
             SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_LISTS, 0, res.getString(R.string.list_menu)).setIcon(R.drawable.ic_menu_more);
             subMenu.add(0, MENU_CREATE_LIST, 0, res.getString(R.string.list_menu_create));
-            if (isConcreteList()) {
-                subMenu.add(0, MENU_DROP_LIST, 0, res.getString(R.string.list_menu_drop));
-                subMenu.add(0, MENU_RENAME_LIST, 0, res.getString(R.string.list_menu_rename));
-            }
+            subMenu.add(0, MENU_DROP_LIST, 0, res.getString(R.string.list_menu_drop));
+            subMenu.add(0, MENU_RENAME_LIST, 0, res.getString(R.string.list_menu_rename));
             subMenu.add(0, MENU_SWITCH_LIST, 0, res.getString(R.string.list_menu_change));
         }
 
         return true;
+    }
+
+    private void setVisible(final Menu menu, final int itemId, final boolean visible) {
+        final MenuItem item = menu.findItem(itemId);
+        if (item != null) {
+            item.setVisible(visible);
+        }
     }
 
     @Override
@@ -799,41 +800,33 @@ public class cgeocaches extends AbstractListActivity {
                 menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
             }
 
-            // Hide menus if cache-list is empty
-            int[] hideIfEmptyList = new int[] {
-                    MENU_SWITCH_SELECT_MODE,
-                    SUBMENU_MANAGE_HISTORY,
-                    SUBMENU_SHOW_MAP,
-                    SUBMENU_SORT,
-                    MENU_REFRESH_STORED,
-                    MENU_DROP_CACHES,
-                    MENU_DROP_CACHES_AND_LIST,
-                    MENU_MOVE_TO_LIST,
-                    MENU_EXPORT,
-                    MENU_REMOVE_FROM_HISTORY
-            };
+            final boolean isEmpty = cacheList.isEmpty();
+            final boolean isConcrete = isConcreteList();
 
-            final boolean listNotEmpty = cacheList.size() > 0;
-            for (int itemId : hideIfEmptyList) {
-                MenuItem item = menu.findItem(itemId);
-                if (null != item) {
-                    item.setVisible(listNotEmpty);
-                }
-            }
+            setVisible(menu, MENU_SWITCH_SELECT_MODE, !isEmpty);
+            setVisible(menu, SUBMENU_MANAGE_HISTORY, !isEmpty);
+            setVisible(menu, SUBMENU_SHOW_MAP, !isEmpty);
+            setVisible(menu, SUBMENU_SORT, !isEmpty);
+            setVisible(menu, MENU_REFRESH_STORED, isConcrete && !isEmpty);
+            setVisible(menu, MENU_DROP_CACHES, !isEmpty);
+            setVisible(menu, MENU_DROP_CACHES_AND_LIST, isConcrete && !isEmpty);
+            setVisible(menu, MENU_MOVE_TO_LIST, !isEmpty);
+            setVisible(menu, MENU_EXPORT, !isEmpty);
+            setVisible(menu, MENU_REMOVE_FROM_HISTORY, !isEmpty);
+            setVisible(menu, MENU_IMPORT_GPX, isConcrete);
+            setVisible(menu, MENU_IMPORT_WEB, isConcrete);
 
             if (navigationMenu != null) {
-                navigationMenu.setVisible(listNotEmpty);
+                navigationMenu.setVisible(!isEmpty);
             }
 
             final boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
-            final boolean isNonDefaultList = (listId != StoredList.STANDARD_LIST_ID) && (listId != StoredList.ALL_LIST_ID);
+            final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
 
             if (type == CacheListType.OFFLINE) { // only offline list
                 setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
-                if (isConcreteList()) {
-                    menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
-                    setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
-                }
+                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
+                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
             } else { // search and history list (all other than offline)
                 setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
@@ -855,7 +848,7 @@ public class cgeocaches extends AbstractListActivity {
             }
             item = menu.findItem(MENU_MOVE_TO_LIST);
             if (item != null) {
-                item.setVisible(multipleLists && listNotEmpty);
+                item.setVisible(multipleLists && !isEmpty);
             }
 
             setMenuItemLabel(menu, MENU_REMOVE_FROM_HISTORY, R.string.cache_remove_from_history, R.string.cache_clear_history);
