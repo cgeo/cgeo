@@ -704,7 +704,7 @@ public class cgeocaches extends AbstractListActivity {
         return true;
     }
 
-    private void setVisible(final Menu menu, final int itemId, final boolean visible) {
+    private static void setVisible(final Menu menu, final int itemId, final boolean visible) {
         final MenuItem item = menu.findItem(itemId);
         if (item != null) {
             item.setVisible(visible);
