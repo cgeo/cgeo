@@ -20,6 +20,11 @@ else
 fi
 
 checkpresent() {
+    # Status messages are dynamically referenced by name, so they will
+    # not appear in the source.
+    if [ -z `echo $1 | sed -e 's/^status_.*$//'` ]; then
+        return 0
+    fi
     # Attributes are a special case, where in fact only the _yes is
     # referenced in the source while the _no should be kept as well
     res=`echo $1 | sed -e 's/^\(attribute_.*_\)no/\1yes/'`
