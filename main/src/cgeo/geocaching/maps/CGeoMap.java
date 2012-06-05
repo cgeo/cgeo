@@ -451,9 +451,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         prepareFilterBar();
 
-        if (!Settings.getHideLiveMapHint()) {
+        if (!app.isLiveMapHintShown() && !Settings.getHideLiveMapHint()) {
             Intent hintIntent = new Intent(activity, LiveMapInfo.class);
             activity.startActivity(hintIntent);
+            app.setLiveMapHintShown();
         }
     }
 
