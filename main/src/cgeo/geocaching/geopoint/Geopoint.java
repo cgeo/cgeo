@@ -3,10 +3,6 @@ package cgeo.geocaching.geopoint;
 import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
-import cgeo.geocaching.geopoint.direction.DDD;
-import cgeo.geocaching.geopoint.direction.DMM;
-import cgeo.geocaching.geopoint.direction.DMS;
-import cgeo.geocaching.geopoint.direction.Direction;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
@@ -29,11 +25,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
 
     private final double latitude;
     private final double longitude;
-
-    private Direction direction;
-    private DDD ddd;
-    private DMM dmm;
-    private DMS dms;
 
     /**
      * Creates new Geopoint with given latitude and longitude (both degree).
@@ -98,6 +89,66 @@ public final class Geopoint implements ICoordinates, Parcelable {
     public Geopoint(final Parcel in) {
         latitude = in.readDouble();
         longitude = in.readDouble();
+    }
+
+    /**
+     * Create new Geopoint from individual textual components.
+     *
+     * @param latDir
+     * @param latDeg
+     * @param latDegFrac
+     * @param lonDir
+     * @param lonDeg
+     * @param lonDegFrac
+     */
+    public Geopoint(final String latDir, final String latDeg, final String latDegFrac,
+                    final String lonDir, final String lonDeg, final String lonDegFrac) {
+        latitude = Double.parseDouble(latDeg + "." + addZeros(Integer.parseInt(latDegFrac), 5)) *
+                getLatSign(latDir);
+        longitude = Double.parseDouble(lonDeg + "." + addZeros(Integer.parseInt(lonDegFrac), 5)) *
+                getLonSign(lonDir);
+    }
+
+    /**
+     * Create new Geopoint from individual textual components.
+     *
+     * @param latDir
+     * @param latDeg
+     * @param latMin
+     * @param latMinFrac
+     * @param lonDir
+     * @param lonDeg
+     * @param lonMin
+     * @param lonMinFrac
+     */
+    public Geopoint(final String latDir, final String latDeg, final String latMin, final String latMinFrac,
+                    final String lonDir, final String lonDeg, final String lonMin, final String lonMinFrac) {
+        latitude = (Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac), 3)) / 60) *
+                (getLatSign(latDir));
+        longitude = (Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac), 3)) / 60) *
+                (getLonSign(lonDir));
+    }
+
+    /**
+     * Create new Geopoint from individual textual components.
+     *
+     * @param latDir
+     * @param latDeg
+     * @param latMin
+     * @param latSec
+     * @param latSecFrac
+     * @param lonDir
+     * @param lonDeg
+     * @param lonMin
+     * @param lonSec
+     * @param lonSecFrac
+     */
+    public Geopoint(final String latDir, final String latDeg, final String latMin, final String latSec, final String latSecFrac,
+                    final String lonDir, final String lonDeg, final String lonMin, final String lonSec, final String lonSecFrac) {
+        latitude = (Double.parseDouble(latDeg) + Double.parseDouble(latMin) / 60 + Double.parseDouble(latSec + "." + addZeros(Integer.parseInt(latSecFrac), 3)) / 3600) *
+                (getLatSign(latDir));
+        longitude = (Double.parseDouble(lonDeg) + Double.parseDouble(lonMin) / 60 + Double.parseDouble(lonSec + "." + addZeros(Integer.parseInt(lonSecFrac), 3)) / 3600) *
+                (getLonSign(lonDir));
     }
 
     /**
@@ -259,54 +310,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
         return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);
     }
 
-    /**
-     * Converts this geopoint to value type Direction.
-     *
-     * @return Direction
-     */
-    public Direction asDirection() {
-        if (direction == null) { // because geopoint is immutable we can "cache" the result
-            direction = new Direction(latitude, longitude);
-        }
-        return direction;
-    }
-
-    /**
-     * Converts this geopoint to value type DDD.
-     *
-     * @return
-     */
-    public DDD asDDD() {
-        if (ddd == null) {
-            ddd = new DDD(latitude, longitude);
-        }
-        return ddd;
-    }
-
-    /**
-     * Converts this geopoint to value type DMM.
-     *
-     * @return
-     */
-    public DMM asDMM() {
-        if (dmm == null) {
-            dmm = new DMM(latitude, longitude);
-        }
-        return dmm;
-    }
-
-    /**
-     * Converts this geopoint to value type DMS.
-     *
-     * @return
-     */
-    public DMS asDMS() {
-        if (dms == null) {
-            dms = new DMS(latitude, longitude);
-        }
-        return dms;
-    }
-
     abstract public static class GeopointException
             extends RuntimeException
     {
@@ -386,5 +389,213 @@ public final class Geopoint implements ICoordinates, Parcelable {
             return new Geopoint[size];
         }
     };
+
+    /**
+     * Get latitude character (N or S).
+     *
+     * @return
+     */
+    public char getLatDir() {
+        return latitude >= 0 ? 'N' : 'S';
+    }
+
+    /**
+     * Get longitude chararcter (E or W).
+     *
+     * @return
+     */
+    public char getLonDir() {
+        return longitude >= 0 ? 'E' : 'W';
+    }
+
+    /**
+     * Get the integral non-negative latitude degrees.
+     *
+     * @return
+     */
+    public int getLatDeg() {
+        return getDeg(latitude);
+    }
+
+    /**
+     * Get the integral non-negative longitude degrees.
+     *
+     * @return
+     */
+    public int getLonDeg() {
+        return getDeg(longitude);
+    }
+
+    private static int getDeg(final double deg) {
+        return (int) Math.abs(deg);
+    }
+
+    /**
+     * Get the fractional part of the latitude degrees scaled up by 10^5.
+     *
+     * @return
+     */
+    public int getLatDegFrac() {
+        return getDegFrac(latitude);
+    }
+
+    /**
+     * Get the fractional part of the longitude degrees scaled up by 10^5.
+     *
+     * @return
+     */
+    public int getLonDegFrac() {
+        return getDegFrac(longitude);
+    }
+
+    private static int getDegFrac(final double deg) {
+        return (int) (Math.round(Math.abs(deg) * 100000) % 100000);
+    }
+
+    /**
+     * Get the integral latitude minutes.
+     *
+     * @return
+     */
+    public int getLatMin() {
+        return getMin(latitude);
+    }
+
+    /**
+     * Get the integral longitude minutes.
+     *
+     * @return
+     */
+    public int getLonMin() {
+        return getMin(longitude);
+    }
+
+    private static int getMin(final double deg) {
+        return ((int) Math.abs(deg * 60)) % 60;
+    }
+
+    /**
+     * Get the fractional part of the latitude minutes scaled up by 1000.
+     *
+     * @return
+     */
+    public int getLatMinFrac() {
+        return getMinFrac(latitude);
+    }
+
+    /**
+     * Get the fractional part of the longitude minutes scaled up by 1000.
+     *
+     * @return
+     */
+    public int getLonMinFrac() {
+        return getMinFrac(longitude);
+    }
+
+    private static int getMinFrac(final double deg) {
+        return (int) (Math.round(Math.abs(deg) * 60000) % 1000);
+    }
+
+    /**
+     * Get the latitude minutes.
+     *
+     * @return
+     */
+    public double getLatMinRaw() {
+        return getMinRaw(latitude);
+    }
+
+    /**
+     * Get the longitude minutes.
+     *
+     * @return
+     */
+    public double getLonMinRaw() {
+        return getMinRaw(longitude);
+    }
+
+    private static double getMinRaw(final double deg) {
+        return (Math.abs(deg) * 60) % 60;
+    }
+
+    /**
+     * Get the integral part of the latitude seconds.
+     *
+     * @return
+     */
+    public int getLatSec() {
+        return getSec(latitude);
+    }
+
+    /**
+     * Get the integral part of the longitude seconds.
+     *
+     * @return
+     */
+    public int getLonSec() {
+        return getSec(longitude);
+    }
+
+    private static int getSec(final double deg) {
+        return ((int) Math.abs(deg * 3600)) % 60;
+    }
+
+    /**
+     * Get the fractional part of the latitude seconds scaled up by 1000.
+     *
+     * @return
+     */
+
+    public int getLatSecFrac() {
+        return getSecFrac(latitude);
+    }
+
+    /**
+     * Get the fractional part of the longitude seconds scaled up by 1000.
+     *
+     * @return
+     */
+
+    public int getLonSecFrac() {
+        return getSecFrac(longitude);
+    }
+
+    private static int getSecFrac(final double deg) {
+        return (int) (Math.round(Math.abs(deg) * 3600000) % 1000);
+    }
+
+    /**
+     * Get the latitude seconds.
+     *
+     * @return
+     */
+    public double getLatSecRaw() {
+        return getSecRaw(latitude);
+    }
+
+    /**
+     * Get the longitude seconds.
+     *
+     * @return
+     */
+    public double getLonSecRaw() {
+        return getSecRaw(longitude);
+    }
+
+    private static double getSecRaw(final double deg) {
+        return (Math.abs(deg) * 3600) % 3600;
+    }
+
+    private static String addZeros(final int value, final int len) {
+        return StringUtils.leftPad(Integer.toString(value), len, '0');
+    }
+
+    private static int getLonSign(final String lonDir) {
+        return "W".equalsIgnoreCase(lonDir) ? -1 : 1;
+    }
+
+    private static int getLatSign(final String latDir) {
+        return "S".equalsIgnoreCase(latDir) ? -1 : 1;
+    }
 
 }
