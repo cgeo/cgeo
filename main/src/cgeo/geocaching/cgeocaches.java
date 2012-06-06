@@ -733,7 +733,7 @@ public class cgeocaches extends AbstractListActivity {
             setVisible(menu, SUBMENU_MANAGE_HISTORY, !isEmpty);
             setVisible(menu, SUBMENU_SHOW_MAP, !isEmpty);
             setVisible(menu, MENU_SORT, !isEmpty);
-            setVisible(menu, MENU_REFRESH_STORED, isConcrete && !isEmpty);
+            setVisible(menu, MENU_REFRESH_STORED, !isEmpty && (isConcrete || type != CacheListType.OFFLINE));
             setVisible(menu, MENU_DROP_CACHES, !isEmpty);
             setVisible(menu, MENU_DROP_CACHES_AND_LIST, isConcrete && !isEmpty);
             setVisible(menu, MENU_MOVE_TO_LIST, !isEmpty);
