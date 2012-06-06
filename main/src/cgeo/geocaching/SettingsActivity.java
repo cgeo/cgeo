@@ -19,6 +19,7 @@ import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -48,6 +49,7 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -592,9 +594,16 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        // Filtered apps for settings
+        final NavigationAppsEnum[] filterItems = new NavigationAppsEnum[] {
+                NavigationAppsEnum.DOWNLOAD_STATIC_MAPS,
+                NavigationAppsEnum.STATIC_MAP
+        };
+        final List<NavigationAppsEnum> navigationAppFilter = Arrays.asList(filterItems);
+        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationAppsWithFilter(navigationAppFilter);
+
         // Default navigation tool settings
         Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
-        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps();
         ArrayAdapter<NavigationAppsEnum> naviAdapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
