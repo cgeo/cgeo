@@ -1061,7 +1061,7 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next maintenance release</b>\n\n
+    <b>2012.06.06</b>\n\n
     <b>Bugfixing:</b>\n
     · Do not crash when exporting GPX with unknown attribute\n
     · Do not allow dangerous operations on the virtual "all caches" list\n
