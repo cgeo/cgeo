@@ -1230,7 +1230,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
                         for (cgWaypoint waypoint : waypointsToDisplay) {
 
-                            if (waypoint.getCoords() == null) {
+                            if (waypoint == null || waypoint.getCoords() == null) {
                                 continue;
                             }
 
@@ -1239,7 +1239,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                     for (cgCache cache : cachesToDisplay) {
 
-                        if (cache.getCoords() == null) {
+                        if (cache == null || cache.getCoords() == null) {
                             continue;
                         }
                         itemsToDisplay.add(getItem(cache, cache, null));
