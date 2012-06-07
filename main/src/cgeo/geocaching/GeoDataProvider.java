@@ -162,13 +162,8 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         unregisterer.start();
         // Start with an empty GeoData just in case someone queries it before we get
-        // a chance to get any information. If we have it, put the last known location
-        // there in case no location provider is available.
-        final Geopoint lastKnownCoords = Settings.getLastLocation().getCoords();
-        final Location initialLocation = new Location(LAST_LOCATION_PSEUDO_PROVIDER);
-        initialLocation.setLatitude(lastKnownCoords.getLatitude());
-        initialLocation.setLongitude(lastKnownCoords.getLongitude());
-        notifyObservers(new GeoData(initialLocation, false, 0, 0));
+        // a chance to get any information.
+        notifyObservers(new GeoData(new Location(LAST_LOCATION_PSEUDO_PROVIDER), false, 0, 0));
     }
 
     private void registerListeners() {
@@ -191,13 +186,6 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
             geoManager.removeUpdates(gpsListener);
             geoManager.removeGpsStatusListener(gpsStatusListener);
         }
-    }
-
-    @Override
-    public boolean notifyObservers(final IGeoData data) {
-        // Save the coordinates in case we need to later start the application without any location provider.
-        Settings.setLastLocation(data);
-        return super.notifyObservers(data);
     }
 
     @Override
