@@ -14,6 +14,9 @@ public class GeopointFormatter
         /** Example: "10,123456 -0,123456" */
         LAT_LON_DECDEGREE,
 
+        /** Example: "10.123456 -0.123456" (unlocalized) */
+        LAT_LON_DECDEGREE_RAW,
+
         /** Example: "10.123456,-0.123456" (unlocalized) */
         LAT_LON_DECDEGREE_COMMA,
 
@@ -78,6 +81,9 @@ public class GeopointFormatter
                 return String.format("%c %02d° %02d' %06.3f\" · %c %03d° %02d' %06.3f\"",
                         gp.getLatDir(), gp.getLatDeg(), gp.getLatMin(), gp.getLatSecRaw(),
                         gp.getLonDir(), gp.getLonDeg(), gp.getLonMin(), gp.getLonSecRaw());
+
+            case LAT_LON_DECDEGREE_RAW:
+                return String.format((Locale) null, "%.6f %.6f", latSigned, lonSigned);
 
             case LAT_DECDEGREE_RAW:
                 return String.format((Locale) null, "%.6f", latSigned);
