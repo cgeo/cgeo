@@ -232,7 +232,7 @@
   <string name="info_storing_static_maps">Sauvegarde des cartes statiques</string>
 
   <!-- location service -->
-  <string name="loc_last">Dernière pos. connue</string>
+  <string name="loc_last">Aucun</string>
   <string name="loc_net">Réseau</string>
   <string name="loc_gps">Gps</string>
   <string name="loc_sat">Satellites</string>
