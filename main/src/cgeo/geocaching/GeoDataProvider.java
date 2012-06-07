@@ -161,11 +161,41 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
     GeoDataProvider(final Context context) {
         geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         unregisterer.start();
-        // Start with an empty GeoData just in case someone queries it before we get
+
+        final Location initialLocation = new Location(LAST_LOCATION_PSEUDO_PROVIDER);
+        try {
+            // Try to find a sensible initial location from the last locations known to Android.
+            final Location lastGpsLocation = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            final Location lastNetworkLocation = geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            // If both providers are non-null, take the most recent one
+            if (lastGpsLocation != null && lastNetworkLocation != null) {
+                if (lastGpsLocation.getTime() >= lastNetworkLocation.getTime()) {
+                    copyCoords(initialLocation, lastGpsLocation);
+                } else {
+                    copyCoords(initialLocation, lastNetworkLocation);
+                }
+            } else if (lastGpsLocation != null) {
+                copyCoords(initialLocation, lastGpsLocation);
+            } else if (lastNetworkLocation != null) {
+                copyCoords(initialLocation, lastNetworkLocation);
+            } else {
+                Log.i("GeoDataProvider: no last known location available");
+            }
+        } catch (final Exception e) {
+            // This error is non-fatal as its only consequence is that we will start with a dummy location
+            // instead of a previously known one.
+            Log.e("GeoDataProvider: error when retrieving last known location", e);
+        }
+        // Start with an historical GeoData just in case someone queries it before we get
         // a chance to get any information.
-        notifyObservers(new GeoData(new Location(LAST_LOCATION_PSEUDO_PROVIDER), false, 0, 0));
+        notifyObservers(new GeoData(initialLocation, false, 0, 0));
     }
 
+    private static void copyCoords(final Location target, final Location source) {
+        target.setLatitude(source.getLatitude());
+        target.setLongitude(source.getLongitude());
+    }
     private void registerListeners() {
         geoManager.addGpsStatusListener(gpsStatusListener);
 
