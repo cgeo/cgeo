@@ -7,6 +7,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Geopoint.ParseException;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
@@ -36,6 +38,7 @@ public final class Settings {
     private static final String KEY_ANYLONGITUDE = "anylongitude";
     private static final String KEY_ANYLATITUDE = "anylatitude";
     private static final String KEY_PUBLICLOC = "publicloc";
+    private static final String KEY_LASTLOC = "lastloc";
     private static final String KEY_USE_OFFLINEMAPS = "offlinemaps";
     private static final String KEY_USE_OFFLINEWPMAPS = "offlinewpmaps";
     private static final String KEY_WEB_DEVICE_CODE = "webDeviceCode";
@@ -726,6 +729,28 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putBoolean(KEY_PUBLICLOC, publicLocation);
+            }
+        });
+    }
+
+    public static ICoordinates getLastLocation() {
+        final String savedCoords = sharedPrefs.getString(KEY_LASTLOC, null);
+        try {
+            if (savedCoords != null) {
+                return new Geopoint(savedCoords);
+            }
+        } catch (final ParseException e) {
+            Log.e("getLastLocation: cannot parse last saved location " + savedCoords, e);
+        }
+        return new Geopoint(0, 0);
+    }
+
+    public static void setLastLocation(final ICoordinates coordinates) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_LASTLOC, coordinates.getCoords().format(Format.LAT_LON_DECDEGREE_RAW));
             }
         });
     }
