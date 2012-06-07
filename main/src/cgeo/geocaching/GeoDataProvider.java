@@ -177,8 +177,10 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
                 }
             } else if (lastGpsLocation != null) {
                 copyCoords(initialLocation, lastGpsLocation);
-            } else {
+            } else if (lastNetworkLocation != null) {
                 copyCoords(initialLocation, lastNetworkLocation);
+            } else {
+                Log.i("GeoDataProvider: no last known location available");
             }
         } catch (final Exception e) {
             // This error is non-fatal as its only consequence is that we will start with a dummy location
