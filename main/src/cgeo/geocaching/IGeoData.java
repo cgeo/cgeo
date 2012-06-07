@@ -5,7 +5,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 import android.location.Location;
 
-public interface IGeoData {
+public interface IGeoData extends ICoordinates {
 
     public Location getLocation();
     public LocationProviderType getLocationProvider();
