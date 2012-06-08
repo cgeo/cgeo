@@ -168,9 +168,18 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return
      */
     public static List<NavigationAppsEnum> getInstalledNavigationApps() {
+        return getInstalledNavigationAppsWithFilter(new ArrayList<NavigationAppsEnum>(0));
+    }
+
+    /**
+     * Returns all installed navigation apps.
+     *
+     * @return
+     */
+    public static List<NavigationAppsEnum> getInstalledNavigationAppsWithFilter(List<NavigationAppsEnum> filter) {
         final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
         for (NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
-            if (appEnum.app.isInstalled()) {
+            if (appEnum.app.isInstalled() && !filter.contains(appEnum)) {
                 installedNavigationApps.add(appEnum);
             }
         }
