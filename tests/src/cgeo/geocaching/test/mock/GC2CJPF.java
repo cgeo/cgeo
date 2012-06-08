@@ -37,12 +37,12 @@ public class GC2CJPF extends MockedCache {
     }
 
     @Override
-    public String getOwner() {
+    public String getOwnerDisplayName() {
         return "Tom03";
     }
     @Override
-    public String getOwnerReal() {
-        return getOwner();
+    public String getOwnerUserId() {
+        return getOwnerDisplayName();
     }
 
     @Override

@@ -485,8 +485,17 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "owner").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String cacheOwner) {
-                    cache.setOwner(validate(cacheOwner));
+                public void end(String ownerUserId) {
+                    cache.setOwnerUserId(validate(ownerUserId));
+                }
+            });
+
+            // waypoint.cache.getOwner()
+            gcCache.getChild(nsGC, "placed_by").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(String ownerDisplayName) {
+                    cache.setOwnerDisplayName(validate(ownerDisplayName));
                 }
             });
 

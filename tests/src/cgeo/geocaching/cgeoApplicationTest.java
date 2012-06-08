@@ -385,7 +385,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
         Assert.assertEquals("California, United States", GCV2R9.getLocation());
 
         cgCache GC1ZXEZ = cgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
-        Assert.assertEquals("Ms.Marple/Mr.Stringer", GC1ZXEZ.getOwnerReal());
+        Assert.assertEquals("Ms.Marple/Mr.Stringer", GC1ZXEZ.getOwnerUserId());
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */

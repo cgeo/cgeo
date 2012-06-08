@@ -123,7 +123,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         pg.archived = cache.isArchived();
         pg.premiumOnly = cache.isPremiumMembersOnly();
         pg.name = cache.getName();
-        pg.placedBy = cache.getOwner();
+        pg.placedBy = cache.getOwnerDisplayName();
         if (cache.getHiddenDate() != null) {
             pg.hidden = ISO8601DATE.format(cache.getHiddenDate().getTime());
         }

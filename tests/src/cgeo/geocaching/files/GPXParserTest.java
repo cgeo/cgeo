@@ -36,7 +36,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(false, cache.isArchived());
         assertEquals(false, cache.isDisabled());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwner());
+        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerDisplayName());
+        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerUserId());
         assertEquals(CacheSize.MICRO, cache.getSize());
         assertEquals(1.0f, cache.getDifficulty());
         assertEquals(5.0f, cache.getTerrain());
@@ -60,7 +61,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(false, cache.isArchived());
         assertEquals(false, cache.isDisabled());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwner());
+        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerDisplayName());
+        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerUserId());
         assertEquals(CacheSize.SMALL, cache.getSize());
         assertEquals(1.0f, cache.getDifficulty());
         assertEquals(4.0f, cache.getTerrain());
@@ -117,7 +119,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(1.0f, cache.getTerrain(), 0.01f);
         final Geopoint refCoordinates = new Geopoint("N 49° 19.122", "E 008° 32.739");
         assertEquals(refCoordinates, cache.getCoords());
-        assertEquals("vptsz", cache.getOwner());
+        assertEquals("vptsz", cache.getOwnerDisplayName());
+        assertEquals("vptsz", cache.getOwnerUserId());
         assertEquals(CacheSize.SMALL, cache.getSize());
         assertEquals(CacheType.MULTI, cache.getType());
         assertFalse(cache.isArchived());

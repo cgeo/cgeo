@@ -17,12 +17,12 @@ public interface ICache extends IBasicCache {
     /**
      * @return Displayed owner, might differ from the real owner
      */
-    public String getOwner();
+    public String getOwnerDisplayName();
 
     /**
      * @return GC username of the (actual) owner, might differ from the owner. Never empty.
      */
-    public String getOwnerReal();
+    public String getOwnerUserId();
 
     /**
      * @return true if the user is the owner of the cache, false else

@@ -377,9 +377,9 @@ public abstract class GCParser {
         cache.setName(cacheName);
 
         // owner real name
-        cache.setOwnerReal(URLDecoder.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNERREAL, true, cache.getOwnerReal())));
+        cache.setOwnerUserId(URLDecoder.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNER_USERID, true, cache.getOwnerUserId())));
 
-        cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerReal(), Settings.getUsername()));
+        cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getUsername()));
 
         String tableInside = page;
 
@@ -405,7 +405,7 @@ public abstract class GCParser {
             }
 
             // owner
-            cache.setOwner(Html.fromHtml(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER, true, cache.getOwner())).toString());
+            cache.setOwnerDisplayName(Html.fromHtml(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_DISPLAYNAME, true, cache.getOwnerDisplayName())).toString());
 
             // hidden
             try {

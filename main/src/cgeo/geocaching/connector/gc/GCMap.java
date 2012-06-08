@@ -88,7 +88,7 @@ public class GCMap {
                 JSONObject typeObj = dataObject.getJSONObject("type");
                 cache.setType(CacheType.getByPattern(typeObj.getString("text"))); // Traditional Cache
                 JSONObject ownerObj = dataObject.getJSONObject("owner");
-                cache.setOwner(ownerObj.getString("text"));
+                cache.setOwnerDisplayName(ownerObj.getString("text"));
 
                 result.addCache(cache);
 

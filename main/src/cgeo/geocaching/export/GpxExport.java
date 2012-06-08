@@ -134,11 +134,11 @@ class GpxExport extends AbstractExport {
                     gpx.write("</groundspeak:name>");
 
                     gpx.write("<groundspeak:placed_by>");
-                    gpx.write(StringEscapeUtils.escapeXml(cache.getOwner()));
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getOwnerDisplayName()));
                     gpx.write("</groundspeak:placed_by>");
 
                     gpx.write("<groundspeak:owner>");
-                    gpx.write(StringEscapeUtils.escapeXml(cache.getOwnerReal()));
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getOwnerUserId()));
                     gpx.write("</groundspeak:owner>");
 
                     gpx.write("<groundspeak:type>");

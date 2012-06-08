@@ -12,7 +12,7 @@ public abstract class Compare {
     public static void assertCompareCaches(ICache expected, cgCache actual, boolean all) {
         assertEquals(expected.getGeocode(), actual.getGeocode());
         assertTrue(expected.getType() == actual.getType());
-        assertEquals(expected.getOwner(), actual.getOwner());
+        assertEquals(expected.getOwnerDisplayName(), actual.getOwnerDisplayName());
         assertEquals(expected.getDifficulty(), actual.getDifficulty());
         assertEquals(expected.getTerrain(), actual.getTerrain());
         assertEquals(expected.isDisabled(), actual.isDisabled());
@@ -28,7 +28,7 @@ public abstract class Compare {
             assertEquals(expected.getCoords(), actual.getCoords());
             assertTrue(actual.isReliableLatLon());
             assertEquals(expected.isOwn(), actual.isOwn());
-            assertEquals(expected.getOwnerReal(), actual.getOwnerReal());
+            assertEquals(expected.getOwnerUserId(), actual.getOwnerUserId());
             assertEquals(expected.getHint(), actual.getHint());
             assertTrue(actual.getDescription().startsWith(expected.getDescription()));
             assertEquals(expected.getShortDescription(), actual.getShortDescription());

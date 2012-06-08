@@ -885,8 +885,8 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // Use real owner name vice the one owner chose to display
-            if (StringUtils.isNotBlank(cache.getOwnerReal())) {
-                clickedItemText = cache.getOwnerReal();
+            if (StringUtils.isNotBlank(cache.getOwnerUserId())) {
+                clickedItemText = cache.getOwnerUserId();
             } else {
                 clickedItemText = ((TextView) view).getText().toString();
             }
@@ -1358,12 +1358,12 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // cache author
-            if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
+            if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
                 TextView ownerView = details.add(R.string.cache_owner, "");
-                if (StringUtils.isNotBlank(cache.getOwner())) {
-                    ownerView.setText(Html.fromHtml(cache.getOwner()), TextView.BufferType.SPANNABLE);
+                if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
+                    ownerView.setText(Html.fromHtml(cache.getOwnerDisplayName()), TextView.BufferType.SPANNABLE);
                 } else { // OwnerReal guaranteed to be not blank based on above
-                    ownerView.setText(Html.fromHtml(cache.getOwnerReal()), TextView.BufferType.SPANNABLE);
+                    ownerView.setText(Html.fromHtml(cache.getOwnerUserId()), TextView.BufferType.SPANNABLE);
                 }
                 ownerView.setOnClickListener(new OwnerActionsClickListener());
             }

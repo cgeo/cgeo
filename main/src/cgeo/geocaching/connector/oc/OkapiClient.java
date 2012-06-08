@@ -133,7 +133,7 @@ final public class OkapiClient {
 
             // not used: url
             final JSONObject owner = response.getJSONObject(CACHE_OWNER);
-            cache.setOwner(parseUser(owner));
+            cache.setOwnerDisplayName(parseUser(owner));
 
             cache.getLogCounts().put(LogType.FOUND_IT, response.getInt(CACHE_FOUNDS));
             cache.getLogCounts().put(LogType.DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));

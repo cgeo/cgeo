@@ -62,8 +62,8 @@ public class cgCache implements ICache, IWaypoint {
     private CacheType cacheType = CacheType.UNKNOWN;
     private String name = "";
     private Spannable nameSp = null;
-    private String owner = "";
-    private String ownerReal = "";
+    private String ownerDisplayName = "";
+    private String ownerUserId = "";
     private Date hidden = null;
     private String hint = "";
     private CacheSize size = CacheSize.UNKNOWN;
@@ -190,11 +190,11 @@ public class cgCache implements ICache, IWaypoint {
         if (StringUtils.isBlank(nameSp)) {
             nameSp = other.nameSp;
         }
-        if (StringUtils.isBlank(owner)) {
-            owner = other.owner;
+        if (StringUtils.isBlank(ownerDisplayName)) {
+            ownerDisplayName = other.ownerDisplayName;
         }
-        if (StringUtils.isBlank(ownerReal)) {
-            ownerReal = other.ownerReal;
+        if (StringUtils.isBlank(ownerUserId)) {
+            ownerUserId = other.ownerUserId;
         }
         if (hidden == null) {
             hidden = other.hidden;
@@ -317,8 +317,8 @@ public class cgCache implements ICache, IWaypoint {
                 disabled == other.disabled &&
                 archived == other.archived &&
                 listId == other.listId &&
-                StringUtils.equalsIgnoreCase(owner, other.owner) &&
-                StringUtils.equalsIgnoreCase(ownerReal, other.ownerReal) &&
+                StringUtils.equalsIgnoreCase(ownerDisplayName, other.ownerDisplayName) &&
+                StringUtils.equalsIgnoreCase(ownerUserId, other.ownerUserId) &&
                 StringUtils.equalsIgnoreCase(description, other.description) &&
                 StringUtils.equalsIgnoreCase(personalNote, other.personalNote) &&
                 StringUtils.equalsIgnoreCase(shortdesc, other.shortdesc) &&
@@ -431,7 +431,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public List<LogType> getPossibleLogTypes() {
-        boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
+        boolean isOwner = getOwnerUserId() != null && getOwnerUserId().equalsIgnoreCase(Settings.getUsername());
         List<LogType> logTypes = new ArrayList<LogType>();
         if (isEventCache()) {
             logTypes.add(LogType.WILL_ATTEND);
@@ -507,8 +507,8 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     @Override
-    public String getOwner() {
-        return owner;
+    public String getOwnerDisplayName() {
+        return ownerDisplayName;
     }
 
     @Override
@@ -549,8 +549,8 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     @Override
-    public String getOwnerReal() {
-        return ownerReal;
+    public String getOwnerUserId() {
+        return ownerUserId;
     }
 
     @Override
@@ -989,12 +989,12 @@ public class cgCache implements ICache, IWaypoint {
         this.name = name;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setOwnerDisplayName(String ownerDisplayName) {
+        this.ownerDisplayName = ownerDisplayName;
     }
 
-    public void setOwnerReal(String ownerReal) {
-        this.ownerReal = ownerReal;
+    public void setOwnerUserId(String ownerUserId) {
+        this.ownerUserId = ownerUserId;
     }
 
     public void setHint(String hint) {
@@ -1404,11 +1404,11 @@ public class cgCache implements ICache, IWaypoint {
         if (getDifficulty() == 0.0) {
             Log.e("difficulty not parsed correctly");
         }
-        if (StringUtils.isBlank(getOwner())) {
-            Log.e("owner not parsed correctly");
+        if (StringUtils.isBlank(getOwnerDisplayName())) {
+            Log.e("owner display name not parsed correctly");
         }
-        if (StringUtils.isBlank(getOwnerReal())) {
-            Log.e("owner real not parsed correctly");
+        if (StringUtils.isBlank(getOwnerUserId())) {
+            Log.e("owner user id real not parsed correctly");
         }
         if (getHiddenDate() == null) {
             Log.e("hidden not parsed correctly");

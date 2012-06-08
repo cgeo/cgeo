@@ -53,12 +53,12 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public String getOwner() {
+    public String getOwnerDisplayName() {
         return "indianerjones, der merlyn,reflektordetektor";
     }
 
     @Override
-    public String getOwnerReal() {
+    public String getOwnerUserId() {
         return "indianerjones";
     }
 

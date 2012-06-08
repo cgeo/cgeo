@@ -1003,8 +1003,8 @@ public class cgData {
         values.put("type", cache.getType().id);
         values.put("name", cache.getName());
         values.put("own", cache.isOwn() ? 1 : 0);
-        values.put("owner", cache.getOwner());
-        values.put("owner_real", cache.getOwnerReal());
+        values.put("owner", cache.getOwnerDisplayName());
+        values.put("owner_real", cache.getOwnerUserId());
         if (cache.getHiddenDate() == null) {
             values.put("hidden", 0);
         } else {
@@ -1624,8 +1624,8 @@ public class cgData {
         cache.setType(CacheType.getById(cursor.getString(cacheColumnIndex[8])));
         cache.setName(cursor.getString(cacheColumnIndex[9]));
         cache.setOwn(cursor.getInt(cacheColumnIndex[10]) == 1);
-        cache.setOwner(cursor.getString(cacheColumnIndex[11]));
-        cache.setOwnerReal(cursor.getString(cacheColumnIndex[12]));
+        cache.setOwnerDisplayName(cursor.getString(cacheColumnIndex[11]));
+        cache.setOwnerUserId(cursor.getString(cacheColumnIndex[12]));
         long dateValue = cursor.getLong(cacheColumnIndex[13]);
         if (dateValue != 0) {
             cache.setHidden(new Date(dateValue));

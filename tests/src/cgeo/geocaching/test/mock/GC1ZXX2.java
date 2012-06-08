@@ -36,7 +36,7 @@ public class GC1ZXX2 extends MockedCache {
     }
 
     @Override
-    public String getOwner() {
+    public String getOwnerDisplayName() {
         return "Rich Uncle Pennybags";
     }
 
@@ -61,7 +61,7 @@ public class GC1ZXX2 extends MockedCache {
     }
 
     @Override
-    public String getOwnerReal() {
+    public String getOwnerUserId() {
         return "daniel354";
     }
 
