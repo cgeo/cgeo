@@ -43,6 +43,7 @@ import android.net.Uri;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 
 import java.net.URLDecoder;
@@ -223,6 +224,9 @@ public abstract class GCParser {
                 cache.setNameSp((new Spannable.Factory()).newSpannable(cache.getName()));
                 if (cache.isDisabled() || cache.isArchived()) { // strike
                     cache.getNameSp().setSpan(new StrikethroughSpan(), 0, cache.getNameSp().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                if (cache.isArchived()) {
+                    cache.getNameSp().setSpan(new ForegroundColorSpan(cgeoapplication.getInstance().getResources().getColor(R.color.archived_cache_color)), 0, cache.getNameSp().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
 
