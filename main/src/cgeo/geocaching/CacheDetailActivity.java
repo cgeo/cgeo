@@ -64,6 +64,7 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.view.ContextMenu;
@@ -1334,6 +1335,9 @@ public class CacheDetailActivity extends AbstractActivity {
             Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
             if (cache.isDisabled() || cache.isArchived()) { // strike
                 span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            if (cache.isArchived()) {
+                span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
             details.add(R.string.cache_name, span);
