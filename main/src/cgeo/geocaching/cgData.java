@@ -1467,22 +1467,27 @@ public class cgData {
 
         init();
 
-        final Cursor cursor = database.query(
-                dbTableCaches,
-                CACHE_COLUMNS,
-                cgData.whereGeocodeIn(geocodes),
-                null,
-                null,
-                null,
-                null,
-                null);
+        final StringBuilder query = new StringBuilder("SELECT ");
+        for (int i = 0; i < CACHE_COLUMNS.length; i++) {
+            query.append(i > 0 ? ", " : "").append(dbTableCaches).append('.').append(CACHE_COLUMNS[i]).append(' ');
+        }
+        query.append(",").append(dbTableLogsOffline).append(".log");
+        query.append(" FROM ").append(dbTableCaches);
+        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG))
+        {
+            query.append(" LEFT OUTER JOIN ").append(dbTableLogsOffline).append(" ON ( ").append(dbTableCaches).append(".geocode == ").append(dbTableLogsOffline).append(".geocode) ");
+        }
+        query.append(" WHERE ").append(dbTableCaches).append(".");
+        query.append(cgData.whereGeocodeIn(geocodes));
 
+        Cursor cursor = database.rawQuery(query.toString(), null);
         try {
             if (!cursor.moveToFirst()) {
                 return Collections.emptySet();
             }
 
             final Set<cgCache> caches = new HashSet<cgCache>();
+            int logIndex = -1;
             do {
                 //Extracted Method = LOADDBMINIMAL
                 cgCache cache = cgData.createCacheFromDatabaseContent(cursor);
@@ -1532,7 +1537,11 @@ public class cgData {
                 }
 
                 if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
-                    cache.setLogOffline(hasLogOffline(cache.getGeocode()));
+                    if (logIndex < 0)
+                    {
+                        logIndex = cursor.getColumnIndex("log");
+                    }
+                    cache.setLogOffline(!cursor.isNull(logIndex));
                 }
                 cache.addStorageLocation(StorageLocation.DATABASE);
                 cacheCache.putCacheInCache(cache);
@@ -1544,6 +1553,7 @@ public class cgData {
             cursor.close();
         }
     }
+
 
     /**
      * Builds a where for a viewport with the size enhanced by 50%.
