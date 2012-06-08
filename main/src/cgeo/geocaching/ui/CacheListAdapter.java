@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.text.Spannable;
 import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.util.SparseArray;
 import android.view.GestureDetector;
@@ -395,6 +396,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             cache.setNameSp((new Spannable.Factory()).newSpannable(cache.getName()));
             if (cache.isDisabled() || cache.isArchived()) { // strike
                 cache.getNameSp().setSpan(new StrikethroughSpan(), 0, cache.getNameSp().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            if (cache.isArchived()) {
+                cache.getNameSp().setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, cache.getNameSp().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
 
