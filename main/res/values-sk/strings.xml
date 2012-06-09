@@ -283,7 +283,7 @@
   <string name="caches_sort_rating">hodnotenia</string>
   <string name="caches_sort_vote">hlasovania (vlastného hodn.)</string>
   <string name="caches_sort_inventory">počtu položiek v skrýši</string>
-  <string name="caches_sort_date">dátumu</string>
+  <string name="caches_sort_date_hidden">dátumu</string>
   <string name="caches_sort_finds">nájdení</string>
   <string name="caches_sort_state">stavu</string>
   <string name="caches_sort_storage">dátumu uloženia v zariadení</string>

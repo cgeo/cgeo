@@ -260,7 +260,7 @@
   <string name="caches_sort_rating">osztályzat</string>
   <string name="caches_sort_vote">szavazat (saját osztályzat)</string>
   <string name="caches_sort_inventory">tárgyak száma</string>
-  <string name="caches_sort_date">dátum</string>
+  <string name="caches_sort_date_hidden">dátum</string>
   <string name="caches_sort_finds">megtalálások</string>
   <string name="caches_sort_state">állapot</string>
   <string name="caches_select_mode">Kiválsztó mód</string>

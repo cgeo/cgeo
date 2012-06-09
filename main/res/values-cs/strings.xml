@@ -217,7 +217,7 @@
   <string name="caches_sort_rating">Hodnocení</string>
   <string name="caches_sort_vote">Hlasy (vaše vlastní hodnocení)</string>
   <string name="caches_sort_inventory">Počet položek v inventáři</string>
-  <string name="caches_sort_date">Datum</string>
+  <string name="caches_sort_date_hidden">Datum</string>
   <string name="caches_sort_finds">Počet nálezů</string>
   <string name="caches_sort_state">Stav</string>
   <string name="caches_sort_storage">Datum uložení do zařízení</string>

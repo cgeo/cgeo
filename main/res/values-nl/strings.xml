@@ -278,7 +278,7 @@
   <string name="caches_sort_rating">waardering</string>
   <string name="caches_sort_vote">stemmen (eigen waardering)</string>
   <string name="caches_sort_inventory">aantal items</string>
-  <string name="caches_sort_date">datum</string>
+  <string name="caches_sort_date_hidden">datum</string>
   <string name="caches_sort_finds">Aantal keer gevonden</string>
   <string name="caches_sort_state">staat</string>
   <string name="caches_select_mode">Selectie modus</string>

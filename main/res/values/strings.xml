@@ -285,11 +285,11 @@
   <string name="caches_sort_rating">Rating</string>
   <string name="caches_sort_vote">Vote (Own Rating)</string>
   <string name="caches_sort_inventory">Count of Inventory</string>
-  <string name="caches_sort_date">Date</string>
+  <string name="caches_sort_date_hidden">Date Hidden</string>
+  <string name="caches_sort_date_logged">Date Logged</string>
   <string name="caches_sort_finds">Finds</string>
   <string name="caches_sort_state">State</string>
   <string name="caches_sort_storage">Date stored on device</string>
-  <string name="caches_sort_visit">Log date</string>
   <string name="caches_select_mode">Select mode</string>
   <string name="caches_select_mode_exit">Exit select mode</string>
   <string name="caches_select_invert">Invert selection</string>

@@ -283,7 +283,7 @@
   <string name="caches_sort_rating">評価</string>
   <string name="caches_sort_vote">Vote (Own Rating)</string>
   <string name="caches_sort_inventory">目録の数</string>
-  <string name="caches_sort_date">日付</string>
+  <string name="caches_sort_date_hidden">日付</string>
   <string name="caches_sort_finds">Finds</string>
   <string name="caches_sort_state">State</string>
   <string name="caches_sort_storage">オフライン用に保存した日時</string>

@@ -284,11 +284,11 @@
   <string name="caches_sort_rating">Bewertung</string>
   <string name="caches_sort_vote">Eigene Bewertung</string>
   <string name="caches_sort_inventory">Inventaranzahl</string>
-  <string name="caches_sort_date">Datum</string>
+  <string name="caches_sort_date_hidden">Versteckdatum</string>
+  <string name="caches_sort_date_logged">Log-Datum</string>
   <string name="caches_sort_finds">Funde</string>
   <string name="caches_sort_state">Status</string>
   <string name="caches_sort_storage">Speicherdatum</string>
-  <string name="caches_sort_visit">Logdatum</string>
   <string name="caches_select_mode">Auswahlmodus</string>
   <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
   <string name="caches_select_invert">Auswahl invertieren</string>
