@@ -273,7 +273,7 @@
   <string name="caches_sort_rating">pontuação</string>
   <string name="caches_sort_vote">votos (pontuação própria)</string>
   <string name="caches_sort_inventory">somatório do inventário</string>
-  <string name="caches_sort_date">data</string>
+  <string name="caches_sort_date_hidden">data</string>
   <string name="caches_sort_finds">Encontradas</string>
   <string name="caches_sort_state">Estado</string>
   <string name="caches_select_mode">Modo de selecção</string>

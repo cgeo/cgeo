@@ -282,7 +282,7 @@
   <string name="caches_sort_rating">Betyg (GC-vote)</string>
   <string name="caches_sort_vote">Betyg (eget)</string>
   <string name="caches_sort_inventory">Antal trackable</string>
-  <string name="caches_sort_date">Datum</string>
+  <string name="caches_sort_date_hidden">Datum</string>
   <string name="caches_sort_finds">Antal som hittat</string>
   <string name="caches_sort_state">Status</string>
   <string name="caches_sort_storage">Tid för sparandet i enheten</string>

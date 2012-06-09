@@ -284,7 +284,7 @@
   <string name="caches_sort_rating">Voto</string>
   <string name="caches_sort_vote">Il tuo voto</string>
   <string name="caches_sort_inventory">Oggetti trackables</string>
-  <string name="caches_sort_date">Data</string>
+  <string name="caches_sort_date_hidden">Data</string>
   <string name="caches_sort_finds">Numero ritrovamenti</string>
   <string name="caches_sort_state">Stato</string>
   <string name="caches_sort_storage">Data salvataggio</string>
