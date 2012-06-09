@@ -587,7 +587,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 item.setTitle(res.getString(R.string.map_live_enable));
             }
 
-            menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(search));
+            final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
+            menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && app.hasUnsavedCaches(new SearchResult(geocodesInViewport)));
 
             item = menu.findItem(MENU_CIRCLE_MODE); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
@@ -597,7 +598,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             item = menu.findItem(MENU_AS_LIST);
-            item.setEnabled(live && CollectionUtils.isNotEmpty(caches));
+            item.setEnabled(live && !isLoading());
 
             menu.findItem(SUBMENU_STRATEGY).setEnabled(live);
         } catch (Exception e) {
@@ -623,25 +624,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_STORE_CACHES:
-                if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
+                if (!isLoading()) {
+                    final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
                     final List<String> geocodes = new ArrayList<String>();
 
-                    final List<cgCache> cachesProtected = caches.getAsList();
-
-                    try {
-                        if (cachesProtected.size() > 0) {
-                            final Viewport viewport = mapView.getViewport();
-
-                            for (final cgCache cache : cachesProtected) {
-                                if (cache != null && cache.getCoords() != null) {
-                                    if (viewport.contains(cache) && !app.isOffline(cache.getGeocode(), null)) {
-                                        geocodes.add(cache.getGeocode());
-                                    }
-                                }
-                            }
+                    for (final String geocode : geocodesInViewport) {
+                        if (!app.isOffline(geocode, null)) {
+                            geocodes.add(geocode);
                         }
-                    } catch (Exception e) {
-                        Log.e("cgeomap.onOptionsItemSelected.#4: " + e.toString());
                     }
 
                     detailTotal = geocodes.size();
@@ -702,7 +692,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_AS_LIST: {
-                cgeocaches.startActivityMap(activity, search);
+                cgeocaches.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
                 return true;
             }
             case MENU_STRATEGY_FASTEST: {
@@ -736,6 +726,23 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
         }
         return false;
+    }
+
+    /**
+     * @return a Set of geocodes corresponding to the caches that are shown on screen.
+     */
+    private Set<String> getGeocodesForCachesInViewport() {
+        final Set<String> geocodes = new HashSet<String>();
+        final List<cgCache> cachesProtected = caches.getAsList();
+
+        final Viewport viewport = mapView.getViewport();
+
+        for (final cgCache cache : cachesProtected) {
+            if (viewport.contains(cache)) {
+                geocodes.add(cache.getGeocode());
+            }
+        }
+        return geocodes;
     }
 
     /**
