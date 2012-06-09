@@ -1471,13 +1471,14 @@ public class cgData {
         for (int i = 0; i < CACHE_COLUMNS.length; i++) {
             query.append(i > 0 ? ", " : "").append(dbTableCaches).append('.').append(CACHE_COLUMNS[i]).append(' ');
         }
-        query.append(",").append(dbTableLogsOffline).append(".log");
+        query.append(',').append(dbTableLogsOffline).append(".log");
+
         query.append(" FROM ").append(dbTableCaches);
-        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG))
-        {
+        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
             query.append(" LEFT OUTER JOIN ").append(dbTableLogsOffline).append(" ON ( ").append(dbTableCaches).append(".geocode == ").append(dbTableLogsOffline).append(".geocode) ");
         }
-        query.append(" WHERE ").append(dbTableCaches).append(".");
+
+        query.append(" WHERE ").append(dbTableCaches).append('.');
         query.append(cgData.whereGeocodeIn(geocodes));
 
         Cursor cursor = database.rawQuery(query.toString(), null);
@@ -1537,8 +1538,7 @@ public class cgData {
                 }
 
                 if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
-                    if (logIndex < 0)
-                    {
+                    if (logIndex < 0) {
                         logIndex = cursor.getColumnIndex("log");
                     }
                     cache.setLogOffline(!cursor.isNull(logIndex));
@@ -2915,14 +2915,10 @@ public class cgData {
                 if (all.length() > 0) {
                     all.append(", ");
                 }
-                all.append('"');
-                all.append(geocode);
-                all.append('"');
+                all.append('"').append(geocode).append('"');
             }
 
-            where.append("geocode in (");
-            where.append(all);
-            where.append(')');
+            where.append("geocode in (").append(all).append(')');
         }
 
         return where.toString();
