@@ -284,7 +284,7 @@
   <string name="caches_sort_rating">note</string>
   <string name="caches_sort_vote">vote (note perso)</string>
   <string name="caches_sort_inventory">nombre d\'objets dans l\'inventaire</string>
-  <string name="caches_sort_date">date</string>
+  <string name="caches_sort_date_hidden">date</string>
   <string name="caches_sort_finds">trouvées</string>
   <string name="caches_sort_state">état</string>
   <string name="caches_sort_storage">date de sauvegarde dans l\'appareil</string>

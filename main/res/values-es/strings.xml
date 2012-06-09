@@ -257,7 +257,7 @@
   <string name="caches_sort_rating">valoración</string>
   <string name="caches_sort_vote">votar (valoración propia)</string>
   <string name="caches_sort_inventory">recuento de inventario</string>
-  <string name="caches_sort_date">fecha</string>
+  <string name="caches_sort_date_hidden">fecha</string>
   <string name="caches_select_mode">Modo selección</string>
   <string name="caches_select_mode_exit">Salir de modo selección</string>
   <string name="caches_select_invert">Invertir selección</string>  

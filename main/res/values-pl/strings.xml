@@ -254,7 +254,7 @@
   <string name="caches_sort_rating">oceny</string>
   <string name="caches_sort_vote">głosów (twoja ocena)</string>
   <string name="caches_sort_inventory">ilości w inwentarzu</string>
-  <string name="caches_sort_date">daty</string>
+  <string name="caches_sort_date_hidden">daty</string>
   <string name="caches_select_mode">Tryb wyboru</string>
   <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
   <string name="caches_select_invert">Odwróć zaznaczenie</string>  

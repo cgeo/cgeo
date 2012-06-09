@@ -49,7 +49,8 @@ public class ComparatorUserInterface {
         register(R.string.caches_sort_rating, RatingComparator.class);
         register(R.string.caches_sort_vote, VoteComparator.class);
         register(R.string.caches_sort_inventory, InventoryComparator.class);
-        register(R.string.caches_sort_date, DateComparator.class);
+        register(R.string.caches_sort_date_hidden, DateComparator.class);
+        register(R.string.caches_sort_date_logged, VisitComparator.class);
         register(R.string.caches_sort_finds, FindsComparator.class);
         register(R.string.caches_sort_state, StateComparator.class);
         register(R.string.caches_sort_storage, StorageTimeComparator.class);
