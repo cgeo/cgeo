@@ -439,6 +439,17 @@ public abstract class GCParser {
         // cache found
         cache.setFound(BaseUtils.matches(page, GCConstants.PATTERN_FOUND) || BaseUtils.matches(page, GCConstants.PATTERN_FOUND_ALTERNATIVE));
 
+        // cache found date
+        try {
+            final String foundDateString = BaseUtils.getMatch(page, GCConstants.PATTERN_FOUND_DATE, true, null);
+            if (StringUtils.isNotBlank(foundDateString)) {
+                cache.setVisitedDate(Login.parseGcCustomDate(foundDateString).getTime());
+            }
+        } catch (ParseException e) {
+            // failed to parse cache found date
+            Log.w("GCParser.parseCache: Failed to parse cache found date");
+        }
+
         // cache type
         cache.setType(CacheType.getByPattern(BaseUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType().id)));
 
