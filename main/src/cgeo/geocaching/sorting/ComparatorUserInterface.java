@@ -40,19 +40,20 @@ public class ComparatorUserInterface {
         registry = new ArrayList<ComparatorUserInterface.ComparatorEntry>(20);
 
         register(R.string.caches_sort_distance, null);
-        register(R.string.caches_sort_difficulty, DifficultyComparator.class);
-        register(R.string.caches_sort_terrain, TerrainComparator.class);
-        register(R.string.caches_sort_size, SizeComparator.class);
-        register(R.string.caches_sort_favorites, PopularityComparator.class);
-        register(R.string.caches_sort_name, NameComparator.class);
-        register(R.string.caches_sort_gccode, GeocodeComparator.class);
-        register(R.string.caches_sort_rating, RatingComparator.class);
-        register(R.string.caches_sort_vote, VoteComparator.class);
-        register(R.string.caches_sort_inventory, InventoryComparator.class);
         register(R.string.caches_sort_date, DateComparator.class);
+        register(R.string.caches_sort_difficulty, DifficultyComparator.class);
         register(R.string.caches_sort_finds, FindsComparator.class);
+        register(R.string.caches_sort_gccode, GeocodeComparator.class);
+        register(R.string.caches_sort_inventory, InventoryComparator.class);
+        register(R.string.caches_sort_name, NameComparator.class);
+        register(R.string.caches_sort_favorites, PopularityComparator.class);
+        register(R.string.caches_sort_rating, RatingComparator.class);
+        register(R.string.caches_sort_size, SizeComparator.class);
         register(R.string.caches_sort_state, StateComparator.class);
         register(R.string.caches_sort_storage, StorageTimeComparator.class);
+        register(R.string.caches_sort_terrain, TerrainComparator.class);
+        register(R.string.caches_sort_visit, VisitComparator.class);
+        register(R.string.caches_sort_vote, VoteComparator.class);
 
         // sort the menu labels alphabetically for easier reading
         Collections.sort(registry, new Comparator<ComparatorEntry>() {
