@@ -19,6 +19,7 @@ import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -594,7 +595,7 @@ public class SettingsActivity extends AbstractActivity {
 
         // Default navigation tool settings
         Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
-        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps();
+        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledDefaultNavigationApps();
         ArrayAdapter<NavigationAppsEnum> naviAdapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {

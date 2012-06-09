@@ -24,6 +24,11 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         return true;
     }
 
+    @Override
+    public boolean isDefaultNavigationApp() {
+        return false;
+    }
+
     protected static boolean hasStaticMap(cgCache cache) {
         String geocode = cache.getGeocode();
         if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode, null)) {
