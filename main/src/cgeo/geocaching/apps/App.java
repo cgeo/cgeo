@@ -5,6 +5,8 @@ import cgeo.geocaching.cgCache;
 public interface App {
     public boolean isInstalled();
 
+    public boolean isDefaultNavigationApp();
+
     public String getName();
 
     int getId();

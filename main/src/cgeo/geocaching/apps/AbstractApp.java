@@ -47,6 +47,11 @@ public abstract class AbstractApp implements App {
     }
 
     @Override
+    public boolean isDefaultNavigationApp() {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return name;
     }

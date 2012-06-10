@@ -178,6 +178,21 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     /**
+     * Returns all installed navigation apps for default navigation.
+     * 
+     * @return
+     */
+    public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
+        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
+        for (NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
+            if (appEnum.app.isInstalled() && appEnum.app.isDefaultNavigationApp()) {
+                installedNavigationApps.add(appEnum);
+            }
+        }
+        return installedNavigationApps;
+    }
+
+    /**
      * This offset is used to build unique menu ids to avoid collisions of ids in menus
      */
     private static final int MENU_ITEM_OFFSET = 12345;
