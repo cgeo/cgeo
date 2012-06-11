@@ -60,7 +60,7 @@ class GpxExport extends AbstractExport {
     /**
      * A dialog to allow the user to set options for the export.
      *
-     * Currently available options are: upload field notes, only new logs since last export/upload
+     * Currently available option is: opening of share menu after successful export
      */
     private class ExportOptionsDialog extends AlertDialog {
         public ExportOptionsDialog(final List<cgCache> caches, final Activity activity) {
