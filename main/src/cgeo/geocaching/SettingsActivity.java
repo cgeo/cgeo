@@ -593,6 +593,16 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        final CheckBox shareAfterExportButton = (CheckBox) findViewById(R.id.share_after_export);
+        shareAfterExportButton.setChecked(Settings.getShareAfterExport());
+        shareAfterExportButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setShareAfterExport(shareAfterExportButton.isChecked());
+            }
+        });
+
         // Default navigation tool settings
         Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
         final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledDefaultNavigationApps();
@@ -603,6 +613,7 @@ public class SettingsActivity extends AbstractActivity {
                 textView.setText(getItem(position).app.getName());
                 return textView;
             }
+
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 TextView textView = (TextView) super.getDropDownView(position, convertView, parent);

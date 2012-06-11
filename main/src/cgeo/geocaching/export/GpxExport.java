@@ -2,6 +2,7 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
@@ -16,9 +17,15 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,7 +46,48 @@ class GpxExport extends AbstractExport {
 
     @Override
     public void export(final List<cgCache> caches, final Activity activity) {
-        new ExportTask(caches, activity).execute((Void) null);
+        if (null == activity) {
+            // No activity given, so no user interaction possible.
+            // Start export with default parameters.
+            new ExportTask(caches, activity).execute((Void) null);
+
+        } else {
+            // Show configuration dialog
+            new ExportOptionsDialog(caches, activity).show();
+        }
+    }
+
+    /**
+     * A dialog to allow the user to set options for the export.
+     *
+     * Currently available options are: upload field notes, only new logs since last export/upload
+     */
+    private class ExportOptionsDialog extends AlertDialog {
+        public ExportOptionsDialog(final List<cgCache> caches, final Activity activity) {
+            super(activity);
+
+            View layout = activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog, null);
+            setView(layout);
+
+            final CheckBox shareOption = (CheckBox) layout.findViewById(R.id.share);
+
+            shareOption.setChecked(Settings.getShareAfterExport());
+
+            shareOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Settings.setShareAfterExport(shareOption.isChecked());
+                }
+            });
+
+            ((Button) layout.findViewById(R.id.export)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                    new ExportTask(caches, activity).execute((Void) null);
+                }
+            });
+        }
     }
 
     private class ExportTask extends AsyncTask<Void, Integer, Boolean> {
@@ -87,7 +135,6 @@ class GpxExport extends AbstractExport {
 
                 gpx.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                 gpx.write("<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd\">");
-
 
                 for (int i = 0; i < caches.size(); i++) {
                     // reload the cache. otherwise logs, attributes and other detailed information is not available
@@ -322,6 +369,13 @@ class GpxExport extends AbstractExport {
                 progress.dismiss();
                 if (result) {
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    if (Settings.getShareAfterExport()) {
+                        Intent shareIntent = new Intent();
+                        shareIntent.setAction(Intent.ACTION_SEND);
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportFile));
+                        shareIntent.setType("application/xml");
+                        activity.startActivity(Intent.createChooser(shareIntent, getString(R.string.export_gpx_to)));
+                    }
                 } else {
                     ActivityMixin.showToast(activity, getString(R.string.export_failed));
                 }

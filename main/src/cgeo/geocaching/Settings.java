@@ -91,6 +91,7 @@ public final class Settings {
     private static final String KEY_SETTINGS_VERSION = "settingsversion";
     private static final String KEY_DB_ON_SDCARD = "dbonsdcard";
     private static final String KEY_LAST_TRACKABLE_ACTION = "trackableaction";
+    private static final String KEY_SHARE_AFTER_EXPORT = "shareafterexport";
 
     private final static int unitsMetric = 1;
 
@@ -199,7 +200,7 @@ public final class Settings {
             e.putBoolean(KEY_HIDE_LIVE_MAP_HINT, old.getInt(KEY_HIDE_LIVE_MAP_HINT, 0) != 0);
             e.putInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, old.getInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, 0));
 
-            e.putInt(KEY_SETTINGS_VERSION, 1) ; // mark migrated
+            e.putInt(KEY_SETTINGS_VERSION, 1); // mark migrated
             e.commit();
         }
     }
@@ -1089,7 +1090,6 @@ public final class Settings {
         });
     }
 
-
     public static boolean isDebug() {
         return Log.isDebug();
     }
@@ -1097,7 +1097,8 @@ public final class Settings {
     public static void setDebug(final boolean debug) {
         editSharedSettings(new PrefRunnable() {
 
-            @Override public void edit(Editor edit) {
+            @Override
+            public void edit(Editor edit) {
                 edit.putBoolean(KEY_DEBUG, debug);
             }
         });
@@ -1138,10 +1139,18 @@ public final class Settings {
 
     public static void setDbOnSDCard(final boolean dbOnSDCard) {
         editSharedSettings(new PrefRunnable() {
-
             @Override
             public void edit(Editor edit) {
                 edit.putBoolean(KEY_DB_ON_SDCARD, dbOnSDCard);
+            }
+        });
+    }
+
+    public static void setShareAfterExport(final boolean shareAfterExport) {
+        editSharedSettings(new PrefRunnable() {
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_SHARE_AFTER_EXPORT, shareAfterExport);
             }
         });
     }
@@ -1158,6 +1167,10 @@ public final class Settings {
                 edit.putInt(KEY_LAST_TRACKABLE_ACTION, trackableAction);
             }
         });
+	}
+
+    public static boolean getShareAfterExport() {
+        return sharedPrefs.getBoolean(KEY_SHARE_AFTER_EXPORT, true);
     }
 
     public static String getPreferencesName() {
