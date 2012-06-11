@@ -6,6 +6,7 @@ import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.ui.Formatter;
 
 import android.app.Activity;
 
@@ -27,7 +28,8 @@ class CompassApp extends AbstractApp implements CacheNavigationApp, WaypointNavi
 
     @Override
     public void navigate(Activity activity, cgWaypoint waypoint) {
-        cgeonavigate.startActivity(activity, waypoint.getPrefix() + "/" + waypoint.getLookup(), waypoint.getName(), waypoint.getCoords(), null);
+        cgeonavigate.startActivity(activity, waypoint.getPrefix() + "/" + waypoint.getLookup(), waypoint.getName(), waypoint.getCoords(), null,
+                waypoint.getWaypointType().getL10n());
     }
 
     @Override
@@ -37,7 +39,8 @@ class CompassApp extends AbstractApp implements CacheNavigationApp, WaypointNavi
 
     @Override
     public void navigate(Activity activity, cgCache cache) {
-        cgeonavigate.startActivity(activity, cache.getGeocode(), cache.getName(), cache.getCoords(), null);
+        cgeonavigate.startActivity(activity, cache.getGeocode(), cache.getName(), cache.getCoords(), null,
+                Formatter.formatCacheInfoShort(cache));
     }
 
     @Override

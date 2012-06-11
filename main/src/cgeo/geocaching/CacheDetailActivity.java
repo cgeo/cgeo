@@ -12,7 +12,6 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
@@ -2314,23 +2313,10 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
 
                 // info
-                final List<String> infoTextList = new ArrayList<String>(3);
-                if (WaypointType.ALL_TYPES_EXCEPT_OWN.contains(wpt.getWaypointType())) {
-                    infoTextList.add(wpt.getWaypointType().getL10n());
-                }
-                if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(wpt.getPrefix())) {
-                    infoTextList.add(res.getString(R.string.waypoint_custom));
-                } else {
-                    if (StringUtils.isNotBlank(wpt.getPrefix())) {
-                        infoTextList.add(wpt.getPrefix());
-                    }
-                    if (StringUtils.isNotBlank(wpt.getLookup())) {
-                        infoTextList.add(wpt.getLookup());
-                    }
-                }
-                if (CollectionUtils.isNotEmpty(infoTextList)) {
+                final String waypointInfo = Formatter.formatWaypointInfo(wpt);
+                if (StringUtils.isNotBlank(waypointInfo)) {
                     final TextView infoView = (TextView) waypointView.findViewById(R.id.info);
-                    infoView.setText(StringUtils.join(infoTextList, Formatter.SEPARATOR));
+                    infoView.setText(waypointInfo);
                     infoView.setVisibility(View.VISIBLE);
                 }
 
