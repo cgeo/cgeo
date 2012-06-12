@@ -1066,10 +1066,13 @@
   <string name="changelog">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · [template]\n
+    · Sort by found date in lists\n
+    · Title of archived caches now shown in red\n
+    · Display cache size and D/T-rating in compass\n
     \n
     <b>Bugfixing:</b>\n
-    · [template]\n
+    · Show as list from live map corrected to display the correct caches\n
+    · GPX import/export compatability improvements\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=7&amp;state=closed">Detailed list of all changes</a>\n
     \n
