@@ -27,7 +27,7 @@ import java.util.List;
 public class PositionOverlay implements GeneralOverlay {
     private Location coordinates = null;
     private GeoPointImpl location = null;
-    private Float heading = 0f;
+    private float heading = 0f;
     private Paint accuracyCircle = null;
     private Paint historyLine = null;
     private Paint historyLineShadow = null;
@@ -57,8 +57,16 @@ public class PositionOverlay implements GeneralOverlay {
         location = mapItemFactory.getGeoPointBase(new Geopoint(coordinates));
     }
 
-    public void setHeading(Float bearingNow) {
+    public Location getCoordinates() {
+        return coordinates;
+    }
+
+    public void setHeading(float bearingNow) {
         heading = bearingNow;
+    }
+
+    public float getHeading() {
+        return heading;
     }
 
     @Override
