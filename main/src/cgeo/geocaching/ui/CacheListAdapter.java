@@ -14,6 +14,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.VisitComparator;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -304,12 +305,12 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         return cacheComparator == null || cacheComparator instanceof DistanceComparator;
     }
 
-    public void setActualHeading(Float directionNow) {
-        if (directionNow == null) {
+    public void setActualHeading(final float direction) {
+        if (Math.abs(AngleUtils.difference(azimuth, direction)) < 10) {
             return;
         }
 
-        azimuth = directionNow;
+        azimuth = direction;
 
         for (final CompassMiniView compass : compasses) {
             compass.updateAzimuth(azimuth);
