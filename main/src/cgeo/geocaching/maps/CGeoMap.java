@@ -34,6 +34,7 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
@@ -51,6 +52,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -834,48 +836,96 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     // class: update location
     private class UpdateLoc extends GeoDirHandler {
+        // use the following constants for fine tuning - find good compromise between smooth updates and as less updates as possible
+
+        // minimum time in milliseconds between position overlay updates
+        private static final long MIN_UPDATE_INTERVAL = 500;
+        // minimum change of heading in grad for position overlay update
+        private static final float MIN_HEADING_DELTA = 15f;
+        // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
+        private static final float MIN_LOCATION_DELTA = 0.01f;
+
+        Location currentLocation = new Location("");
+        float currentHeading;
+
+        private long timeLastPositionOverlayCalculation = 0;
 
         @Override
         protected void updateGeoData(final IGeoData geo) {
-            try {
-                boolean repaintRequired = false;
+            currentLocation = geo.getLocation();
 
-                if (overlayPosition == null && mapView != null) {
-                    overlayPosition = mapView.createAddPositionOverlay(activity);
-                }
-
-                if ((overlayPosition != null && geo.getLocation() != null)) {
-                    overlayPosition.setCoordinates(geo.getLocation());
-                }
-
-                if (geo.getCoords() != null) {
-                    if (followMyLocation) {
-                        myLocationInMiddle(geo);
-                    } else {
-                        repaintRequired = true;
-                    }
-                }
-
-                if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                    overlayPosition.setHeading(geo.getBearing());
-                    repaintRequired = true;
-                }
-
-                if (repaintRequired && mapView != null) {
-                    mapView.repaintRequired(overlayPosition);
-                }
-
-            } catch (Exception e) {
-                Log.w("Failed to update location.");
+            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                currentHeading = geo.getBearing();
             }
+
+            repaintPositionOverlay();
         }
 
         @Override
         public void updateDirection(final float direction) {
-            if (overlayPosition != null && mapView != null && (app.currentGeo().getSpeed() <= 5)) { // use compass when speed is lower than 18 km/h
-                overlayPosition.setHeading(DirectionProvider.getDirectionNow(activity, direction));
-                mapView.repaintRequired(overlayPosition);
+            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
+                currentHeading = DirectionProvider.getDirectionNow(activity, direction);
+                repaintPositionOverlay();
             }
+        }
+
+        /**
+         * Repaint position overlay but only with a max frequency and if position or heading changes sufficiently.
+         */
+        void repaintPositionOverlay() {
+            final long currentTimeMillis = System.currentTimeMillis();
+            if (currentTimeMillis > timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL) {
+                timeLastPositionOverlayCalculation = currentTimeMillis;
+
+                try {
+                    if (mapView != null) {
+                        if (overlayPosition == null) {
+                            overlayPosition = mapView.createAddPositionOverlay(activity);
+                        }
+
+                        boolean needsRepaintForDistance = needsRepaintForDistance();
+                        boolean needsRepaintForHeading = needsRepaintForHeading();
+
+                        if (needsRepaintForDistance) {
+                            if (followMyLocation) {
+                                centerMap(new Geopoint(currentLocation));
+                            }
+                        }
+
+                        if (needsRepaintForDistance || needsRepaintForHeading) {
+                            overlayPosition.setCoordinates(currentLocation);
+                            overlayPosition.setHeading(currentHeading);
+                            mapView.repaintRequired(overlayPosition);
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.w("Failed to update location.");
+                }
+            }
+        }
+
+        boolean needsRepaintForHeading() {
+            return Math.abs(AngleUtils.difference(currentHeading, overlayPosition.getHeading())) > MIN_HEADING_DELTA;
+        }
+
+        boolean needsRepaintForDistance() {
+            final Location lastLocation = overlayPosition.getCoordinates();
+
+            float dist = Float.MAX_VALUE;
+            if (lastLocation != null) {
+                dist = currentLocation.distanceTo(lastLocation);
+            }
+
+            final float[] mapDimension = new float[1];
+            if (mapView.getWidth() < mapView.getHeight()) {
+                final double span = mapView.getLongitudeSpan() / 1e6;
+                Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), currentLocation.getLatitude(), currentLocation.getLongitude() + span, mapDimension);
+            } else {
+                final double span = mapView.getLatitudeSpan() / 1e6;
+                Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), currentLocation.getLatitude() + span, currentLocation.getLongitude(), mapDimension);
+            }
+
+            return dist > (mapDimension[0] * MIN_LOCATION_DELTA);
         }
     }
 
