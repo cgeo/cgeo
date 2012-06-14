@@ -151,7 +151,7 @@
   <string name="err_parse_lon">c:geo nemůže dopočítat délku.</string>
   <string name="err_parse_dist">c:geo nemůže dopočítat vzdálenost.</string>
   <string name="warn_save_nothing">není nic k uložení.</string>
-  <string name="warn_no_cache_coord">Nejní žádná keš se souřadnicemi.</string>
+  <string name="warn_no_cache_coord">Není k dispozici žádná keš se souřadnicemi.</string>
   <string name="warn_no_coordinates">Nezískány souřadnice</string>
   <string name="warn_no_keyword">žádná klíčová slova nenalezena</string>
   <string name="warn_no_username">žádné uživatelské jméno nenalezeno</string>
@@ -523,8 +523,8 @@
   <string name="map_view_map">pohled do mapy</string>
   <string name="map_trail_show">zobrazit záznam trasy</string>
   <string name="map_trail_hide">skrýt záznam trasy</string>
-  <string name="map_live_enable">povolit aktuální polohu</string>
-  <string name="map_live_disable">zakázat aktuální polohu</string>
+  <string name="map_live_enable">povolit aktivní mapu</string>	
+  <string name="map_live_disable">zakázat aktivní mapu</string>
   <string name="map_static_title">statické mapy</string>
   <string name="map_static_loading">načítání statických map…</string>
 
