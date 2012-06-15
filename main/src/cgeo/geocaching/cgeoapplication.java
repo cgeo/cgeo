@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
@@ -45,6 +46,18 @@ public class cgeoapplication extends Application {
     private boolean liveMapHintShown = false; // livemap hint has been shown
     final private StatusUpdater statusUpdater = new StatusUpdater();
     private static cgeoapplication instance = null;
+
+    private CGeoMap lastMapActivity;
+
+    public void setLastMapActivity(CGeoMap lastMapActivity) {
+        this.lastMapActivity = lastMapActivity;
+    }
+
+    public void terminateMapActivity() {
+        if (lastMapActivity != null) {
+            lastMapActivity.getActivity().finish();
+        }
+    }
 
     public cgeoapplication() {
         instance = this;

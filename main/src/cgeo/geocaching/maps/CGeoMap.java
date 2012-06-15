@@ -370,6 +370,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         res = this.getResources();
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
+        app.terminateMapActivity();
 
         int countBubbleCnt = app.getAllStoredCachesCount(true, CacheType.ALL);
         caches = new LeastRecentlyUsedSet<cgCache>(MAX_CACHES + countBubbleCnt);
@@ -539,6 +540,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (mapView != null) {
             mapView.destroyDrawingCache();
         }
+
+        cgeoapplication.getInstance().setLastMapActivity(this);
 
         super.onPause();
     }
