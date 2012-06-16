@@ -688,6 +688,7 @@
 					android:textColor="?text_color"
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
+					android:autoLink="web"
 					android:text="@string/init_mapsources_description" />
 			<Spinner  android:id="@+id/mapsource"
 					android:layout_width="fill_parent"
@@ -814,6 +815,7 @@
 					android:textColor="?text_color"
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
+					android:autoLink="web"
 					android:text="@string/init_sendToCgeo_description" />
 			<Button style="@style/button_full"
 					android:id="@+id/sendToCgeo_register"

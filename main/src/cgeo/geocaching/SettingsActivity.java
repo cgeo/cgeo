@@ -58,6 +58,7 @@ public class SettingsActivity extends AbstractActivity {
 
     private ProgressDialog loginDialog = null;
     private ProgressDialog webDialog = null;
+    private boolean enableTemplatesMenu = false;
     private Handler logInHandler = new Handler() {
 
         @Override
@@ -116,7 +117,6 @@ public class SettingsActivity extends AbstractActivity {
             init();
         }
     };
-    protected boolean enableTemplatesMenu = false;
 
     public SettingsActivity() {
         super("c:geo-configuration");
@@ -133,12 +133,6 @@ public class SettingsActivity extends AbstractActivity {
         setTitle(res.getString(R.string.settings));
 
         init();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
     }
 
     @Override
