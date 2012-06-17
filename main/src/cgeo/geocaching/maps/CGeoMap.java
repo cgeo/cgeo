@@ -1085,7 +1085,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
                 loadThreadRun = System.currentTimeMillis();
 
-                SearchResult searchResult = null;
+                SearchResult searchResult;
                 // stage 1 - pull and render from the DB only for live map
                 if (mapMode == MapMode.LIVE_ONLINE) {
                     searchResult = new SearchResult(app.getCachedInViewport(viewport, Settings.getCacheType()));
@@ -1162,7 +1162,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
 
                 int count = 0;
-                SearchResult searchResult = null;
+                SearchResult searchResult;
                 do {
 
                     if (tokens == null) {
