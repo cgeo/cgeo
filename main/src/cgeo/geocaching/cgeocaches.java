@@ -238,8 +238,7 @@ public class cgeocaches extends AbstractListActivity {
             try {
                 if (search != null) {
                     setTitle(title + " [" + search.getCount() + "]");
-                    cacheList.clear();
-                    cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+                    replaceCacheListFromSearch();
                     if (adapter != null) {
                         adapter.reFilter();
                     }
@@ -276,6 +275,12 @@ public class cgeocaches extends AbstractListActivity {
             }
         }
     };
+
+    private void replaceCacheListFromSearch() {
+        cacheList.clear();
+        cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+    }
+
     private Handler loadDetailsHandler = new Handler() {
 
         @Override
@@ -357,8 +362,7 @@ public class cgeocaches extends AbstractListActivity {
                     adapter.setSelectMode(false);
                 }
 
-                cacheList.clear();
-                cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+                replaceCacheListFromSearch();
 
                 progress.dismiss();
             }
@@ -375,8 +379,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 refreshCurrentList();
 
-                cacheList.clear();
-                cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+                replaceCacheListFromSearch();
 
                 progress.dismiss();
             }
@@ -561,8 +564,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 SearchResult result = (SearchResult) extras.get(EXTRAS_SEARCH);
                 search = new SearchResult(result);
-                cacheList.clear();
-                cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+                replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
                 break;
             default:
@@ -620,8 +622,7 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         if (loadCachesHandler != null && search != null) {
-            cacheList.clear();
-            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+            replaceCacheListFromSearch();
             loadCachesHandler.sendEmptyMessage(0);
         }
 
@@ -1269,8 +1270,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             search = cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, Settings.getCacheType(), listId);
-            cacheList.clear();
-            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+            replaceCacheListFromSearch();
             loadCachesHandler.sendMessage(Message.obtain());
         }
     }
@@ -1279,8 +1279,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             search = cgeoapplication.getInstance().getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
-            cacheList.clear();
-            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+            replaceCacheListFromSearch();
             loadCachesHandler.sendMessage(Message.obtain());
         }
     }
@@ -1307,8 +1306,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void runSearch() {
             search = GCParser.searchByCoords(coords, Settings.getCacheType(), Settings.isShowCaptcha());
-            cacheList.clear();
-            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+            replaceCacheListFromSearch();
         }
     }
 
@@ -1323,8 +1321,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void runSearch() {
             search = GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha());
-            cacheList.clear();
-            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+            replaceCacheListFromSearch();
         }
     }
 
@@ -1339,8 +1336,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void runSearch() {
             search = GCParser.searchByUsername(username, Settings.getCacheType(), Settings.isShowCaptcha());
-            cacheList.clear();
-            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+            replaceCacheListFromSearch();
         }
     }
 
@@ -1355,8 +1351,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void runSearch() {
             search = GCParser.searchByOwner(username, Settings.getCacheType(), Settings.isShowCaptcha());
-            cacheList.clear();
-            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+            replaceCacheListFromSearch();
         }
     }
 
