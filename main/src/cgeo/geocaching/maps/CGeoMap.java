@@ -598,10 +598,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             item = menu.findItem(MENU_MAP_LIVE); // live map
             if (mapMode == MapMode.LIVE_ONLINE) {
                 item.setTitle(res.getString(R.string.map_live_disable));
-            } else if (mapMode == MapMode.LIVE_OFFLINE) {
-                item.setTitle(res.getString(R.string.map_live_enable));
             } else {
-                item.setEnabled(false);
                 item.setTitle(res.getString(R.string.map_live_enable));
             }
 
