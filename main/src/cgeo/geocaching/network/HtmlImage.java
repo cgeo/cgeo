@@ -96,7 +96,9 @@ public class HtmlImage implements Html.ImageGetter {
                         if (statusCode == 200) {
                             LocalStorage.saveEntityToFile(httpResponse, file);
                         } else if (statusCode == 304) {
-                            file.setLastModified(System.currentTimeMillis());
+                            if (!file.setLastModified(System.currentTimeMillis())) {
+                                makeFreshCopy(file);
+                            }
                         }
                     }
                 } catch (Exception e) {
@@ -128,6 +130,21 @@ public class HtmlImage implements Html.ImageGetter {
         return imagePre != null ? ImageHelper.scaleBitmapToFitDisplay(imagePre) : null;
     }
 
+    /**
+     * Make a fresh copy of the file to reset its timestamp. On some storage, it is impossible
+     * to modify the modified time after the fact, in which case a brand new file must be
+     * created if we want to be able to use the time as validity hint.
+     *
+     * See Android issue 1699.
+     *
+     * @param file the file to refresh
+     */
+    private static void makeFreshCopy(final File file) {
+        final File tempFile = new File(file.getParentFile(), file.getName() + "-temp");
+        file.renameTo(tempFile);
+        LocalStorage.copy(tempFile, file);
+        tempFile.delete();
+    }
 
     private Bitmap getTransparent1x1Image() {
         return BitmapFactory.decodeResource(resources, R.drawable.image_no_placement);
