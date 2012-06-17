@@ -136,6 +136,18 @@ public abstract class Network {
     }
 
     /**
+     * POST HTTP request
+     *
+     * @param uri the URI to request
+     * @param params the parameters to add to the POST request
+     * @params headers the headers to add to the request
+     * @return the HTTP response, or null in case of an encoding error params
+     */
+    public static HttpResponse postRequest(final String uri, final Parameters params, final Parameters headers) {
+        return request("POST", uri, params, headers, null);
+    }
+
+    /**
      * Multipart POST HTTP request
      *
      * @param uri the URI to request
@@ -173,9 +185,9 @@ public abstract class Network {
      * @param uri
      *            the URI to request
      * @param params
-     *            the parameters to add the the GET request
+     *            the parameters to add to the URI
      * @param headers
-     *            the headers to add to the GET request
+     *            the headers to add to the request
      * @param cacheFile
      *            the cache file used to cache this query
      * @return the HTTP response, or null in case of an encoding error in a POST request arguments

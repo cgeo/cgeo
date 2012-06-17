@@ -30,7 +30,7 @@ import java.util.regex.Matcher;
 
 public abstract class Login {
 
-    private final static String ENGLISH = "English&#9660;";
+    private final static String ENGLISH = "<a href=\"#\">English&#9660;</a>";
 
     // false = not logged in
     private static boolean actualLoginStatus = false;
@@ -39,6 +39,8 @@ public abstract class Login {
     private static String actualStatus = "";
 
     private final static Map<String, SimpleDateFormat> gcCustomDateFormats;
+    public static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
+
     static {
         final String[] formats = new String[] {
                 "MM/dd/yyyy",
@@ -218,7 +220,7 @@ public abstract class Login {
             // get find count
             getLoginStatus(Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/")));
         } else {
-            final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/default.aspx"));
+            final String page = Network.getResponseData(Network.getRequest(LANGUAGE_CHANGE_URI));
             getLoginStatus(page);
             if (page == null) {
                 Log.e("Failed to read viewstates to set geocaching.com language");
@@ -227,8 +229,10 @@ public abstract class Login {
                     "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
                     "__EVENTARGUMENT", "");
             Login.transferViewstates(page, params);
-            final HttpResponse response = Network.postRequest("http://www.geocaching.com/default.aspx", params);
-            if (!Network.isSuccess(response)) {
+            final HttpResponse response = Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI));
+            if (Network.isSuccess(response)) {
+                Log.i("changed language on geocaching.com to English");
+            } else {
                 Log.e("Failed to set geocaching.com language to English");
             }
         }
