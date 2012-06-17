@@ -562,8 +562,7 @@ public class cgeocaches extends AbstractListActivity {
                 title = res.getString(R.string.map_map);
                 setTitle(title);
                 showProgress(true);
-                SearchResult result = (SearchResult) extras.get(EXTRAS_SEARCH);
-                search = new SearchResult(result);
+                search = (SearchResult) extras.get(EXTRAS_SEARCH);
                 replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
                 break;
