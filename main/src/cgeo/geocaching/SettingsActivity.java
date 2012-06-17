@@ -597,6 +597,7 @@ public class SettingsActivity extends AbstractActivity {
                 textView.setText(getItem(position).app.getName());
                 return textView;
             }
+
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
