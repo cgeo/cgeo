@@ -174,7 +174,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 } }; // bottom right, 12x12 / 26x26
     private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 } }; // bottom left, 12x12 / 26x26
 
-    private static SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
+    private SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
     private int cachesCnt = 0;
     /** List of caches in the viewport */
     private LeastRecentlyUsedSet<cgCache> caches = null;
@@ -539,6 +539,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (mapView != null) {
             mapView.destroyDrawingCache();
         }
+
+        overlaysCache.clear();
 
         super.onPause();
     }
@@ -1664,7 +1666,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     .append(cache.getListId() > 0)
                     .toHashCode();
 
-            final LayerDrawable ldFromCache = CGeoMap.overlaysCache.get(hashcode);
+            final LayerDrawable ldFromCache = overlaysCache.get(hashcode);
             if (ldFromCache != null) {
                 item.setMarker(ldFromCache);
                 return item;
@@ -1722,7 +1724,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 ld.setLayerInset(index++, inset[0], inset[1], inset[2], inset[3]);
             }
 
-            CGeoMap.overlaysCache.put(hashcode, ld);
+            overlaysCache.put(hashcode, ld);
 
             item.setMarker(ld);
             return item;
