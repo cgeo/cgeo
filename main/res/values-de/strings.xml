@@ -426,6 +426,7 @@
   <string name="init_mapsource_select">Kartenquelle wählen</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Zeige Spur auf Karte</string>
+  <string name="init_share_after_export">Weiterleiten nach dem Export</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Signatur automatisch einfügen</string>
   <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig (nur Basic Member)</string>
@@ -802,6 +803,8 @@
   <string name="export_fieldnotes_onlynew">Nur seit letztem Export</string>
   <string name="export_fieldnotes_creating">Erstelle Field Notes…</string>
   <string name="export_gpx">GPX</string>
+  <string name="export_gpx_info">GPX-Datei wird nach /sdcard/gpx mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
+  <string name="export_gpx_to">Exportierte GPX-Datei senden an</string>
   
   <!-- attribute unknown -->
   <string name="attribute_unknown_yes">Unbekannte Attribute vorhanden</string>
