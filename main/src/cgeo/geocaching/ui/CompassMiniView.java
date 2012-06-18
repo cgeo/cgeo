@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.AngleUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -159,7 +160,7 @@ final public class CompassMiniView extends View {
     }
 
     private float calculateAzimuthRelative() {
-        return (azimuth - heading + 360) % 360;
+        return AngleUtils.normalize(azimuth - heading);
     }
 
     @Override

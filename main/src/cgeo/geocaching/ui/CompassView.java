@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.PeriodicHandler;
 
 import android.content.Context;
@@ -23,19 +23,19 @@ public class CompassView extends View {
     /**
      * North direction currently SHOWN on compass (not measured)
      */
-    private double azimuthShown = 0.0;
+    private float azimuthShown = 0;
     /**
      * cache direction currently SHOWN on compass (not measured)
      */
-    private double cacheHeadingShown = 0.0;
+    private float cacheHeadingShown = 0;
     /**
      * cache direction measured from device, or 0.0
      */
-    private double cacheHeadingMeasured = 0.0;
+    private float cacheHeadingMeasured = 0;
     /**
      * North direction measured from device, or 0.0
      */
-    private double northMeasured = 0.0;
+    private float northMeasured = 0;
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
     private int compassUnderlayWidth = 0;
@@ -103,7 +103,7 @@ public class CompassView extends View {
         }
     }
 
-    public synchronized void updateNorth(double northHeadingIn, double cacheHeadingIn) {
+    public synchronized void updateNorth(float northHeadingIn, float cacheHeadingIn) {
         if (initialDisplay) {
             // We will force the compass to move brutally if this is the first
             // update since it is visible.
@@ -128,20 +128,20 @@ public class CompassView extends View {
      *            the actual value
      * @return the new value
      */
-    static protected double smoothUpdate(double goal, double actual) {
-        final double diff = DirectionProvider.difference(actual, goal);
+    static protected float smoothUpdate(float goal, float actual) {
+        final float diff = AngleUtils.difference(actual, goal);
 
-        double offset = 0.0;
+        float offset = 0;
 
         // If the difference is smaller than 1 degree, do nothing as it
         // causes the arrow to vibrate. Round away from 0.
         if (diff > 1.0) {
-            offset = Math.ceil(diff / 10.0); // for larger angles, rotate faster
+            offset = (float) Math.ceil(diff / 10.0); // for larger angles, rotate faster
         } else if (diff < 1.0) {
-            offset = Math.floor(diff / 10.0);
+            offset = (float) Math.floor(diff / 10.0);
         }
 
-        return (actual + offset + 360) % 360;
+        return AngleUtils.normalize(actual + offset);
     }
 
     private class RedrawHandler extends PeriodicHandler {
@@ -152,10 +152,10 @@ public class CompassView extends View {
 
         @Override
         public void act() {
-            final double newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
-            final double newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-            if (Math.abs(DirectionProvider.difference(azimuthShown, newAzimuthShown)) >= 2 ||
-                    Math.abs(DirectionProvider.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
+            final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
+            final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+            if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                    Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
                 synchronized(CompassView.this) {
                     azimuthShown = newAzimuthShown;
                     cacheHeadingShown = newCacheHeadingShown;
@@ -169,16 +169,16 @@ public class CompassView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // use local synchronized variables to avoid them being changed from the device during drawing
-        double azimuthDrawn;
-        double headingDrawn;
+        float azimuthDrawn;
+        float headingDrawn;
 
         synchronized (this) {
             azimuthDrawn = azimuthShown;
             headingDrawn = cacheHeadingShown;
         }
 
-        double azimuthTemp = azimuthDrawn;
-        final double azimuthRelative = (azimuthTemp - headingDrawn + 360) % 360;
+        float azimuthTemp = azimuthDrawn;
+        final float azimuthRelative = AngleUtils.normalize(azimuthTemp - headingDrawn);
 
         // compass margins
         int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
