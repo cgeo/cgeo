@@ -427,6 +427,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         mapView.repaintRequired(null);
 
         mapView.getMapController().setZoom(Settings.getMapZoom());
+        mapView.getMapController().setCenter(Settings.getMapCenter());
 
         // live map, if no arguments are given
         live = (searchIntent == null && geocodeIntent == null && coordsIntent == null);
@@ -832,11 +833,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         Settings.setMapZoom(mapView.getMapZoomLevel());
+        Settings.setMapCenter(mapView.getMapViewCenter());
     }
 
     // Set center of map to my location if appropriate.
     private void myLocationInMiddle(final IGeoData geo) {
-        if (followMyLocation) {
+        if (followMyLocation && !geo.isPseudoLocation()) {
             centerMap(geo.getCoords());
         }
     }
@@ -853,19 +855,26 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         private static final float MIN_LOCATION_DELTA = 0.01f;
 
         Location currentLocation = new Location("");
+        boolean locationValid = false;
         float currentHeading;
 
         private long timeLastPositionOverlayCalculation = 0;
 
         @Override
         protected void updateGeoData(final IGeoData geo) {
-            currentLocation = geo.getLocation();
+            if (geo.isPseudoLocation()) {
+                locationValid = false;
+            } else {
+                locationValid = true;
 
-            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                currentHeading = geo.getBearing();
+                currentLocation = geo.getLocation();
+
+                if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                    currentHeading = geo.getBearing();
+                }
+
+                repaintPositionOverlay();
             }
-
-            repaintPositionOverlay();
         }
 
         @Override
@@ -916,6 +925,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         boolean needsRepaintForDistance() {
+
+            if (!locationValid) {
+                return false;
+            }
+
             final Location lastLocation = overlayPosition.getCoordinates();
 
             float dist = Float.MAX_VALUE;

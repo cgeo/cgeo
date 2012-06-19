@@ -6,6 +6,8 @@ import cgeo.geocaching.go4cache.Go4Cache;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MemorySubject;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
@@ -102,6 +104,11 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         @Override
         public int getSatellitesFixed() {
             return satellitesFixed;
+        }
+
+        @Override
+        public boolean isPseudoLocation() {
+            return StringUtils.equals(getProvider(), GeoDataProvider.LAST_LOCATION_PSEUDO_PROVIDER);
         }
     }
 

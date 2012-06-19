@@ -9,6 +9,9 @@ public interface IGeoData {
 
     public Location getLocation();
     public LocationProviderType getLocationProvider();
+
+    public boolean isPseudoLocation();
+
     public Geopoint getCoords();
     public double getAltitude();
     public float getBearing();
@@ -17,5 +20,4 @@ public interface IGeoData {
     public boolean getGpsEnabled();
     public int getSatellitesVisible();
     public int getSatellitesFixed();
-
 }
