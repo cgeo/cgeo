@@ -289,7 +289,7 @@
   <string name="init_login_popup_failed_reason">Přihlášení neproběhlo, protože</string>
   <string name="init_go4cache_connect">Připojit ke Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizovat c:geo</string>
-  <string name="init_twitter_publish">nový status při nálezu keše</string>
+  <string name="init_twitter_publish">Nový status při nálezu keše</string>
   <string name="init_signature">podpis</string>
   <string name="init_signature_help_button">Návod</string>
   <string name="init_signature_help_title">Tipy a triky k podpisu</string>
