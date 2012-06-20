@@ -284,7 +284,7 @@
   <string name="init_login">Zkontrolovat</string>
   <string name="init_login_popup">Přihlášení</string>
   <string name="init_login_popup_working">Přihlašování na Geocaching.com…</string>
-  <string name="init_login_popup_ok">přihlášení proběhlo</string>
+  <string name="init_login_popup_ok">Přihlášení proběhlo</string>
   <string name="init_login_popup_failed">přihlášení neproběhlo</string>
   <string name="init_login_popup_failed_reason">přihlášení neproběhlo, protože</string>
   <string name="init_go4cache_connect">připojit ke Go 4 Cache</string>
