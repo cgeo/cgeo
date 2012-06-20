@@ -311,7 +311,7 @@
   <string name="init_skin">Světlý skin (vyžaduje restart)</string>
   <string name="init_address">Ukazuj adresu na hlavní obrazovce</string>
   <string name="init_captcha">Ukaž CAPTCHA obrázek, pokud je třeba. (jen Basic Member)</string>
-  <string name="init_useenglish">Používej angličtinu pro c:geo\n(potřeba restartovat)</string>
+  <string name="init_useenglish">Používej angličtinu pro c:geo (vyžaduje restart)</string>
   <string name="init_exclude">nezobrazovat vlastní a nalezené keše</string>
   <string name="init_showwaypoints">Zobrazuj waypointy na živé mapě</string>
   <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich waypointy.</string>
