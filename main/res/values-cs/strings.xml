@@ -7,8 +7,8 @@
   <string name="cache">keš</string>
   <string name="detail">detail</string>
   <string name="search">vyhledávání</string>
-  <string name="settings">nastavení</string>
-  <string name="about">o aplikaci</string>
+  <string name="settings">Nastavení</string>
+  <string name="about">O aplikaci</string>
   <string name="helper">Chcete se něco dovědět o <b>c:geo</b>?\nPodívejte se na snadno čitelný manuál.</string>
   <string name="latitude">Zeměpisná šířka</string>
   <string name="longitude">Zeměpisná délka</string>
@@ -177,8 +177,8 @@
   <string name="loc_gps_disabled">GPS zakázána</string>
 
   <!-- standard menu -->
-  <string name="menu_about">o aplikaci</string>
-  <string name="menu_settings">nastavení</string>  
+  <string name="menu_about">O aplikaci</string>
+  <string name="menu_settings">Nastavení</string>  
   <string name="menu_history">Historie</string>
   <string name="menu_filter">Filtr</string>
   <string name="menu_scan_geo">Naskenuj geokód</string>
@@ -281,15 +281,15 @@
   <string name="init_username">uživatelské jméno</string>
   <string name="init_password">heslo</string>
   <string name="init_passvote">heslo</string>
-  <string name="init_login">zkontrolovat</string>
-  <string name="init_login_popup">přihlášení</string>
-  <string name="init_login_popup_working">přihlašování na Geocaching.com…</string>
-  <string name="init_login_popup_ok">přihlášení proběhlo</string>
-  <string name="init_login_popup_failed">přihlášení neproběhlo</string>
-  <string name="init_login_popup_failed_reason">přihlášení neproběhlo, protože</string>
-  <string name="init_go4cache_connect">připojit k Go 4 Cache</string>
-  <string name="init_twitter_authorize">autorizovat c:geo</string>
-  <string name="init_twitter_publish">nový status při nálezu keše</string>
+  <string name="init_login">Zkontrolovat</string>
+  <string name="init_login_popup">Přihlášení</string>
+  <string name="init_login_popup_working">Přihlašování na Geocaching.com…</string>
+  <string name="init_login_popup_ok">Přihlášení proběhlo</string>
+  <string name="init_login_popup_failed">Přihlášení neproběhlo</string>
+  <string name="init_login_popup_failed_reason">Přihlášení neproběhlo, protože</string>
+  <string name="init_go4cache_connect">Připojit ke Go 4 Cache</string>
+  <string name="init_twitter_authorize">Autorizovat c:geo</string>
+  <string name="init_twitter_publish">Nový status při nálezu keše</string>
   <string name="init_signature">podpis</string>
   <string name="init_signature_help_button">Návod</string>
   <string name="init_signature_help_title">Tipy a triky k podpisu</string>
@@ -307,30 +307,30 @@
   <string name="init_friendlogswanted">Načti extra navíc stránku logbooku s logy kamarádů.</string>
   <string name="init_openlastdetailspage">Otevři detaily na naposledy použité stránce.</string>
   <string name="init_autoload">Automaticky načti dlouhý popis</string>
-  <string name="init_other">další možnosti</string>
-  <string name="init_skin">světlý skin (vyžaduje restart)</string>
+  <string name="init_other">Další možnosti</string>
+  <string name="init_skin">Světlý skin (vyžaduje restart)</string>
   <string name="init_address">Ukazuj adresu na hlavní obrazovce</string>
   <string name="init_captcha">Ukaž CAPTCHA obrázek, pokud je třeba. (jen Basic Member)</string>
-  <string name="init_useenglish">Používej angličtinu pro c:geo\n(potřeba restartovat)</string>
-  <string name="init_exclude">nezobrazovat vlastní a nalezené keše</string>
+  <string name="init_useenglish">Používej angličtinu pro c:geo (vyžaduje restart)</string>
+  <string name="init_exclude">Nezobrazovat vlastní a nalezené keše</string>
   <string name="init_showwaypoints">Zobrazuj waypointy na živé mapě</string>
   <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich waypointy.</string>
-  <string name="init_disabled">nezobrazovat zrušené keše</string>
-  <string name="init_offline">ukládat mapy pro offline použití</string>
-  <string name="init_offline_wp">uklídat statické mapy k waypointům pro offline použití</string>
+  <string name="init_disabled">Nezobrazovat zrušené keše</string>
+  <string name="init_offline">Ukládat mapy pro offline použití</string>
+  <string name="init_offline_wp">Ukládat statické mapy k waypointům pro offline použití</string>
   <string name="init_save_log_img">Ulož obrázky z logů</string>
-  <string name="init_units">používat imperiální jednotky vzdálenosti</string>
-  <string name="init_nav">používat Google Navigaci</string>
+  <string name="init_units">Používat imperiální jednotky vzdálenosti</string>
+  <string name="init_nav">Používat Google Navigaci</string>
   <string name="init_log_offline">Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat log na server)</string>
-  <string name="init_livelist">zobrazovat směr v seznamu keší</string>
+  <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
   <string name="init_altitude">Výšková korekce</string>
-  <string name="init_altitude_description">Pokud Vaše GPS počítá špatně výšku, můžete ji korigovat zde, stačí zadat kladné či záporné číslo v metrech.</string>
+  <string name="init_altitude_description">Pokud Vaše GPS špatně počítá výšku, můžete ji korigovat zde. Stačí zadat kladné či záporné číslo v metrech.</string>
   <string name="init_clear">smazat přihlašovací údaje</string>
   <string name="init_cleared">c:geo smazalo přihlašovací údaje.</string>
   <string name="init_backup">Záloha</string>
   <string name="init_backup_backup">Záloha</string>
   <string name="init_backup_running">Vytvářím zálohu databáze keší…</string>
-  <string name="init_backup_note">Tato funkce nezálohuje nastavení a přihlašovací údaje. Zálohuje a obnovuje jen databázi keší.\nVaše přihlašovací údaje nikdy neopustí c:geo.</string>
+  <string name="init_backup_note">Tato funkce nezálohuje nastavení a přihlašovací údaje. Zálohuje a obnovuje pouze databázi keší. Vaše přihlašovací údaje nikdy neopustí c:geo.</string>
   <string name="init_backup_restore">Obnova</string>
   <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
   <string name="init_backup_failed">Záloha databáze c:geo selhala.</string>
@@ -342,7 +342,7 @@
   <string name="init_backup_last">Dostupná záloha z</string>
   <string name="init_backup_last_no">Žádný soubor se zálohou není k dispozici.</string>
   <string name="init_mapsources">Zdroje map</string>
-  <string name="init_mapsources_description">Zde můžete vybrat zdroj map. Jako alternativu ke Google maps jsou k dispozici různé typy OpenStreetMap a navíc i offline mapové soubory (Viz <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> pro detaily).</string>
+  <string name="init_mapsources_description">Zde můžete vybrat zdroj map. Alternativou ke Google maps jsou různé typy OpenStreetMap, jakož i offline mapové podklady (Více viz na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyber zdroj mapy</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Zobrazuj trasu na mapě</string>
@@ -352,14 +352,14 @@
   <string name="init_default_navigation_tool">Výchozí navigace</string>
   <string name="init_default_navigation_tool_description">Zde můžete vybrat preferovaný navigační nástroj.</string>
   <string name="init_default_navigation_tool_select">Vyberte nástroj</string>
-  <string name="init_default_navigation_tool_2_description">Zde můžete vybrat druhý přeferovaný navigační prostředek. Ten se aktivuje dlouhým kliknutím na navigační ikonu vedle názvu keše.</string>
+  <string name="init_default_navigation_tool_2_description">Zde můžete vybrat sekundární přeferovaný navigační nástroj. Ten se aktivuje dlouhým kliknutím na navigační ikonu vedle názvu keše.</string>
   <string name="init_debug_title">Ladicí informace</string>
-  <string name="init_debug_note">c:geo může generovat mnoho ladicích informací. Tyto nejsou pro běžné uživatele uživatečné. Pro vývojáře hledajícího chybu můžou mít tato data význam, v takovém případě váš požádají povolit tuto volbu a po zopakování chyby jim informace zašlete v souboru.</string>
+  <string name="init_debug_note">c:geo může generovat mnoho ladicích informací. Tyto nejsou pro běžné uživatele užitečné. Pro vývojáře hledajícího chybu můžou mít tato data význam, v takovém případě váš požádají povolit tuto volbu a po zopakování chyby jim informace zašlete v souboru.</string>
   <string name="init_debug">Generovat ladicí informace</string>
 
   <string name="init_sendToCgeo_name">Jméno vašeho zařízení:</string>
-  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožnuje stahování keší pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečtěte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registraci proveďte jen, když potřebujete send2cgeo. c:geo bude normálně fungovat i bez registrace.</string>
-  <string name="init_sendToCgeo_register">Požádej o registraci</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožnuje stahování keší pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečtěte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registraci proveďte pouze pokud potřebujete send2cgeo. c:geo bude normálně fungovat i bez registrace.</string>
+  <string name="init_sendToCgeo_register">Požádat o registraci</string>
   <string name="init_sendToCgeo_registering">Registrace vašeho zařízení pro "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registrace byla úspěšná. PIN kód #### použijte na webu c:geo k přidání zařízení do Vašeho prohlížeče.</string>
   <string name="init_sendToCgeo_register_fail">Registrace selhala.</string>
@@ -589,8 +589,8 @@
   <string name="website">web: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a> </string>
   <string name="twitter">twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="about_go4cache">Služba<b>Go 4 cache</b>umožňuje sledovat v reálném čase ostatní kačery na mapě (v <b>c:geo</b>nebo v prohlížeči). Můžete se tak podívat třeba na to, jakou kešku právě hledají. Připojením ke službě  <b>Go 4 cache</b>umožníte aplikaci  <b>c:geo</b>zveřejňovat Vaši aktuální polohu (pouze pokud <b>c:geo</b>běží).</string>
-  <string name="about_twitter">Chcete aby <b>c:geo</b>napsalo na Váš Twitter pokaždé, když zapíšete nález kešky?  </string>
-  <string name="about_auth_1">Pomocí následujícího procesu můžete aplikaci <b>c:geo</b>umožnit odesílání příspěvků na Váš Twitter.  </string>
+  <string name="about_go4cache">Služba <b>Go 4 cache</b> umožňuje sledovat v reálném čase ostatní kačery na mapě (v <b>c:geo</b> nebo v prohlížeči). Můžete se tak podívat třeba na to, jakou kešku právě hledají. Připojením ke službě <b>Go 4 cache</b> umožníte aplikaci <b>c:geo</b> zveřejňovat Vaši aktuální polohu (pouze pokud <b>c:geo</b> běží).</string>
+  <string name="about_twitter">Chcete, aby <b>c:geo</b> napsalo na Váš Twitter pokaždé, když zapíšete nález kešky?</string>
+  <string name="about_auth_1">Pomocí následujícího procesu můžete umožnit <b>c:geo</b> aplikaci odesílání příspěvků na Váš Twitter.</string>
   <string name="about_auth_2">Tapnutím na tlačítko "zahájit autorizaci" celý proces začne. Tento proces otevře webovou stránku Twitteru, kde se budete muset přihlásit a tlačítkem Accept pak umožnit aplikaci <b>c:geo</b>přístup k Vašemu Twitteru. Twitter Vám přidělí PIN kód pokud tapnete na Accept. Tento kód zkopírujte a vložte do aplikace <b>c:geo</b>. A potvrďte. To je vše.</string>
 </resources>
