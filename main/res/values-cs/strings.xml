@@ -4,11 +4,11 @@
   <string name="app_name_compass">c:geo kompas</string>
 
   <!-- basics -->
-  <string name="cache">keš</string>
-  <string name="detail">detail</string>
+  <string name="cache">Keš</string>
+  <string name="detail">Detail</string>
   <string name="search">vyhledávání</string>
-  <string name="settings">nastavení</string>
-  <string name="about">o aplikaci</string>
+  <string name="settings">Nastavení</string>
+  <string name="about">O aplikaci</string>
   <string name="helper">Chcete se něco dovědět o <b>c:geo</b>?\nPodívejte se na snadno čitelný manuál.</string>
   <string name="latitude">Zeměpisná šířka</string>
   <string name="longitude">Zeměpisná délka</string>
@@ -16,22 +16,22 @@
   <string name="action_bar_share_title">Sdílet odkaz ke keši</string>
 
   <!-- caches -->
-  <string name="all_types">všechny typy keší</string>
-  <string name="traditional">tradiční keš</string>
-  <string name="multi">multi-keš</string>
-  <string name="mystery">neznámá keš</string>
-  <string name="letterbox">dopisní schránka</string>
-  <string name="event">událost</string>
-  <string name="mega">mega-událost</string>
-  <string name="earth">earthcache</string>
-  <string name="cito">událost cache in trash out</string>
-  <string name="webcam">webcam keš</string>
-  <string name="virtual">virtuální keš</string>
-  <string name="wherigo">wherigo keš</string>
-  <string name="lostfound">ztraceno a nalezeno</string>
-  <string name="ape">keš projektu ape</string>
-  <string name="gchq">ústředí groundspeaku</string>
-  <string name="gps">gps cache exhibit</string>
+  <string name="all_types">Všechny typy keší</string>
+  <string name="traditional">Tradiční keš</string>
+  <string name="multi">Multi-keš</string>
+  <string name="mystery">Neznámá keš</string>
+  <string name="letterbox">Dopisní schránka</string>
+  <string name="event">Událost</string>
+  <string name="mega">Mega-událost</string>
+  <string name="earth">Earthcache</string>
+  <string name="cito">Událost cache in trash out</string>
+  <string name="webcam">Webcam keš</string>
+  <string name="virtual">Virtuální keš</string>
+  <string name="wherigo">Wherigo keš</string>
+  <string name="lostfound">Ztraceno a nalezeno</string>
+  <string name="ape">Keš projektu APE</string>
+  <string name="gchq">Ústředí Groundspeaku</string>
+  <string name="gps">Gps cache exhibit</string>
 
   <!-- waypoints -->
   <string name="wp_final">cíl</string>
@@ -42,47 +42,47 @@
   <string name="wp_waypoint">referenční bod</string>
 
   <!-- logs -->
-  <string name="log_found">nález</string>
-  <string name="log_dnf">nenalezeno</string>
-  <string name="log_note">poznámka</string>
-  <string name="log_published">zveřejněno</string>
-  <string name="log_enabled">aktivováno</string>
-  <string name="log_disabled">deaktivováno</string>
-  <string name="log_attend">zúčastní se</string>
-  <string name="log_attended">účastnil se</string>
-  <string name="log_retrieved">vytažen z keše</string>
-  <string name="log_grabbed">převzat</string>
-  <string name="log_maintained">udržována</string>
-  <string name="log_maintenance_needed">vyžaduje údržbu</string>
-  <string name="log_update">změna souřadnic</string>
-  <string name="log_archived">archivace</string>
-  <string name="log_needs_archived">vyžaduje archivaci</string>
-  <string name="log_discovered">nalezen</string>
-  <string name="log_reviewed">poznámka kontroly</string>
-  <string name="log_tb_nothing">beze změny</string>
-  <string name="log_tb_visit">návštěva</string>
-  <string name="log_tb_drop">nechat zde</string>
-  <string name="log_tb_changeall">změnit vše</string>
-  <string name="log_save">uložit</string>
-  <string name="log_saving">ukládání logu</string>
-  <string name="log_clear">vyčistit</string>
-  <string name="log_post">odeslat log</string>
-  <string name="log_post_rate">odeslat log a hlasovat</string>
-  <string name="log_post_no_rate">odeslat log a nehlasovat</string>
-  <string name="log_add">přidat</string>
-  <string name="log_date">datum</string>
-  <string name="log_time">čas</string>
-  <string name="log_date_time">datum a čas</string>
-  <string name="log_rating">hlasovat</string>
-  <string name="log_no_rating">nehlasovat</string>
+  <string name="log_found">Nález</string>
+  <string name="log_dnf">Nenalezeno</string>
+  <string name="log_note">Poznámka</string>
+  <string name="log_published">Zveřejněno</string>
+  <string name="log_enabled">Aktivováno</string>
+  <string name="log_disabled">Deaktivováno</string>
+  <string name="log_attend">Zúčastní se</string>
+  <string name="log_attended">Účastnil se</string>
+  <string name="log_retrieved">Vytažen z keše</string>
+  <string name="log_grabbed">Převzat</string>
+  <string name="log_maintained">Udržována</string>
+  <string name="log_maintenance_needed">Vyžaduje údržbu</string>
+  <string name="log_update">Změna souřadnic</string>
+  <string name="log_archived">Archivace</string>
+  <string name="log_needs_archived">Vyžaduje archivaci</string>
+  <string name="log_discovered">Nalezen</string>
+  <string name="log_reviewed">Poznámka kontroly</string>
+  <string name="log_tb_nothing">Beze změny</string>
+  <string name="log_tb_visit">Návštěva</string>
+  <string name="log_tb_drop">Nechat zde</string>
+  <string name="log_tb_changeall">Změnit vše</string>
+  <string name="log_save">Uložit</string>
+  <string name="log_saving">Ukládání logu</string>
+  <string name="log_clear">Vyčistit</string>
+  <string name="log_post">Odeslat log</string>
+  <string name="log_post_rate">Odeslat log a hlasovat</string>
+  <string name="log_post_no_rate">Odeslat log a nehlasovat</string>
+  <string name="log_add">Přidat</string>
+  <string name="log_date">Datum</string>
+  <string name="log_time">Čas</string>
+  <string name="log_date_time">Datum a čas</string>
+  <string name="log_rating">Hlasovat</string>
+  <string name="log_no_rating">Nehlasovat</string>
   <string name="log_stars_1">1 hvězdička</string>
   <string name="log_stars_2">2 hvězdičky</string>
   <string name="log_stars_3">3 hvězdičky</string>
   <string name="log_stars_4">4 hvězdičky</string>
   <string name="log_stars_5">5 hvězdiček</string>
-  <string name="log_webcam">vyfocen webkamerou</string>
+  <string name="log_webcam">Vyfocen webkamerou</string>
   <string name="log_new_log">Log</string>
-  <string name="log_new_log_text">text logu</string>
+  <string name="log_new_log_text">Text logu</string>
 
   <!-- errors -->
   <string name="err_none">ok</string>
@@ -177,8 +177,8 @@
   <string name="loc_gps_disabled">GPS zakázána</string>
 
   <!-- standard menu -->
-  <string name="menu_about">o aplikaci</string>
-  <string name="menu_settings">nastavení</string>  
+  <string name="menu_about">O aplikaci</string>
+  <string name="menu_settings">Nastavení</string>
   <string name="menu_history">Historie</string>
   <string name="menu_filter">Filtr</string>
   <string name="menu_scan_geo">Naskenuj geokód</string>
@@ -199,12 +199,12 @@
   <string name="caches_eta_ltm">méně než minutu</string>
   <string name="caches_eta_mins">minuty</string>
   <string name="caches_eta_min">minuta</string>
-  <string name="caches_store_offline">uložit pro offline</string>
+  <string name="caches_store_offline">Uložit pro offline</string>
   <string name="caches_store_selected">uložit vybrané</string>
   <string name="caches_on_map">zobrazit na mapě</string>
-  <string name="caches_select_mode">mód výběru</string>
-  <string name="caches_select_mode_exit">opustit mód výběru</string>
-  <string name="caches_nearby">blízké</string>
+  <string name="caches_select_mode">Mód výběru</string>
+  <string name="caches_select_mode_exit">Opustit mód výběru</string>
+  <string name="caches_nearby">Blízké</string>
   <string name="caches_drop_selected">odebrat vybrané</string>
   <string name="caches_drop_selected_ask">Opravdu chcete smazat vybrané keše z přístroje?</string>
   <string name="caches_drop_all">odebrat vše</string>
@@ -259,7 +259,7 @@
   <string name="list_dialog_create_ok">Nový seznam byl vytvořen</string>
   <string name="list_dialog_create_err">c:geo nemohlo vytvořit nový seznam</string>
   <string name="list_dialog_remove_title">Odstranit seznam</string>
-  <string name="list_dialog_remove_description">Chceš zrušit aktuální seznam ? Všechny keše budou přesunuty do seznamu \"Uložené\".</string>
+  <string name="list_dialog_remove_description">Chceš zrušit aktuální seznam? Všechny keše budou přesunuty do seznamu \"Uložené\".</string>
   <string name="list_dialog_remove">Odstranit</string>
   <string name="list_dialog_remove_ok">Seznam byl odstraněn</string>
   <string name="list_dialog_remove_err">c:geo nemohlo odstani aktuální seznam</string>
@@ -267,11 +267,11 @@
   <string name="list_dialog_rename">Přejmenovat</string>
 
   <!-- about -->
-  <string name="about_changelog">změny</string>
-  <string name="about_donate">podpora vývoje</string>
-  <string name="about_detail">detaily</string>
-  <string name="about_donation_more">podpořte\nvývoj</string>
-  <string name="about_contributors">přispěvatelé</string>
+  <string name="about_changelog">Změny</string>
+  <string name="about_donate">Podpora vývoje</string>
+  <string name="about_netail">Detaily</string>
+  <string name="about_donation_more">Podpořte vývoj</string>
+  <string name="about_contributors">Přispěvatelé</string>
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
@@ -281,15 +281,15 @@
   <string name="init_username">uživatelské jméno</string>
   <string name="init_password">heslo</string>
   <string name="init_passvote">heslo</string>
-  <string name="init_login">zkontrolovat</string>
-  <string name="init_login_popup">přihlášení</string>
-  <string name="init_login_popup_working">přihlašování na Geocaching.com…</string>
-  <string name="init_login_popup_ok">přihlášení proběhlo</string>
-  <string name="init_login_popup_failed">přihlášení neproběhlo</string>
-  <string name="init_login_popup_failed_reason">přihlášení neproběhlo, protože</string>
-  <string name="init_go4cache_connect">připojit k Go 4 Cache</string>
-  <string name="init_twitter_authorize">autorizovat c:geo</string>
-  <string name="init_twitter_publish">nový status při nálezu keše</string>
+  <string name="init_login">Zkontrolovat</string>
+  <string name="init_login_popup">Přihlášení</string>
+  <string name="init_login_popup_working">Přihlašování na Geocaching.com…</string>
+  <string name="init_login_popup_ok">Přihlášení proběhlo</string>
+  <string name="init_login_popup_failed">Přihlášení neproběhlo</string>
+  <string name="init_login_popup_failed_reason">Přihlášení neproběhlo, protože</string>
+  <string name="init_go4cache_connect">Připojit ke Go 4 Cache</string>
+  <string name="init_twitter_authorize">Autorizovat c:geo</string>
+  <string name="init_twitter_publish">Nový status při nálezu keše</string>
   <string name="init_signature">podpis</string>
   <string name="init_signature_help_button">Návod</string>
   <string name="init_signature_help_title">Tipy a triky k podpisu</string>
@@ -298,7 +298,7 @@
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Čas</string>
   <string name="init_signature_template_datetime">Datum a čas</string>
-  <string name="init_signature_template_user">Uživate</string>
+  <string name="init_signature_template_user">Uživatel</string>
   <string name="init_signature_template_number">Číslo (pořadí nálezu)</string>
   <string name="init_details">Detaily keše</string>
   <string name="init_ratingwanted">Načti hodnocení keše z GCvote.com</string>
@@ -307,30 +307,30 @@
   <string name="init_friendlogswanted">Načti extra navíc stránku logbooku s logy kamarádů.</string>
   <string name="init_openlastdetailspage">Otevři detaily na naposledy použité stránce.</string>
   <string name="init_autoload">Automaticky načti dlouhý popis</string>
-  <string name="init_other">další možnosti</string>
-  <string name="init_skin">světlý skin (vyžaduje restart)</string>
+  <string name="init_other">Další možnosti</string>
+  <string name="init_skin">Světlý skin (vyžaduje restart)</string>
   <string name="init_address">Ukazuj adresu na hlavní obrazovce</string>
   <string name="init_captcha">Ukaž CAPTCHA obrázek, pokud je třeba. (jen Basic Member)</string>
-  <string name="init_useenglish">Používej angličtinu pro c:geo\n(potřeba restartovat)</string>
-  <string name="init_exclude">nezobrazovat vlastní a nalezené keše</string>
+  <string name="init_useenglish">Používej angličtinu pro c:geo (vyžaduje restart)</string>
+  <string name="init_exclude">Nezobrazovat vlastní a nalezené keše</string>
   <string name="init_showwaypoints">Zobrazuj waypointy na živé mapě</string>
   <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich waypointy.</string>
-  <string name="init_disabled">nezobrazovat zrušené keše</string>
-  <string name="init_offline">ukládat mapy pro offline použití</string>
-  <string name="init_offline_wp">uklídat statické mapy k waypointům pro offline použití</string>
+  <string name="init_disabled">Nezobrazovat zrušené keše</string>
+  <string name="init_offline">Ukládat mapy pro offline použití</string>
+  <string name="init_offline_wp">Ukládat statické mapy k waypointům pro offline použití</string>
   <string name="init_save_log_img">Ulož obrázky z logů</string>
-  <string name="init_units">používat imperiální jednotky vzdálenosti</string>
-  <string name="init_nav">používat Google Navigaci</string>
+  <string name="init_units">Používat imperiální jednotky vzdálenosti</string>
+  <string name="init_nav">Používat Google Navigaci</string>
   <string name="init_log_offline">Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat log na server)</string>
-  <string name="init_livelist">zobrazovat směr v seznamu keší</string>
+  <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
   <string name="init_altitude">Výšková korekce</string>
-  <string name="init_altitude_description">Pokud Vaše GPS počítá špatně výšku, můžete ji korigovat zde, stačí zadat kladné či záporné číslo v metrech.</string>
+  <string name="init_altitude_description">Pokud Vaše GPS špatně počítá výšku, můžete ji korigovat zde. Stačí zadat kladné či záporné číslo v metrech.</string>
   <string name="init_clear">smazat přihlašovací údaje</string>
   <string name="init_cleared">c:geo smazalo přihlašovací údaje.</string>
   <string name="init_backup">Záloha</string>
   <string name="init_backup_backup">Záloha</string>
   <string name="init_backup_running">Vytvářím zálohu databáze keší…</string>
-  <string name="init_backup_note">Tato funkce nezálohuje nastavení a přihlašovací údaje. Zálohuje a obnovuje jen databázi keší.\nVaše přihlašovací údaje nikdy neopustí c:geo.</string>
+  <string name="init_backup_note">Tato funkce nezálohuje nastavení a přihlašovací údaje. Zálohuje a obnovuje pouze databázi keší. Vaše přihlašovací údaje nikdy neopustí c:geo.</string>
   <string name="init_backup_restore">Obnova</string>
   <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
   <string name="init_backup_failed">Záloha databáze c:geo selhala.</string>
@@ -342,7 +342,7 @@
   <string name="init_backup_last">Dostupná záloha z</string>
   <string name="init_backup_last_no">Žádný soubor se zálohou není k dispozici.</string>
   <string name="init_mapsources">Zdroje map</string>
-  <string name="init_mapsources_description">Zde můžete vybrat zdroj map. Jako alternativu ke Google maps jsou k dispozici různé typy OpenStreetMap a navíc i offline mapové soubory (Viz <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> pro detaily).</string>
+  <string name="init_mapsources_description">Zde můžete vybrat zdroj map. Alternativou ke Google maps jsou různé typy OpenStreetMap, jakož i offline mapové podklady (Více viz na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyber zdroj mapy</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Zobrazuj trasu na mapě</string>
@@ -352,14 +352,14 @@
   <string name="init_default_navigation_tool">Výchozí navigace</string>
   <string name="init_default_navigation_tool_description">Zde můžete vybrat preferovaný navigační nástroj.</string>
   <string name="init_default_navigation_tool_select">Vyberte nástroj</string>
-  <string name="init_default_navigation_tool_2_description">Zde můžete vybrat druhý přeferovaný navigační prostředek. Ten se aktivuje dlouhým kliknutím na navigační ikonu vedle názvu keše.</string>
+  <string name="init_default_navigation_tool_2_description">Zde můžete vybrat sekundární přeferovaný navigační nástroj. Ten se aktivuje dlouhým kliknutím na navigační ikonu vedle názvu keše.</string>
   <string name="init_debug_title">Ladicí informace</string>
-  <string name="init_debug_note">c:geo může generovat mnoho ladicích informací. Tyto nejsou pro běžné uživatele uživatečné. Pro vývojáře hledajícího chybu můžou mít tato data význam, v takovém případě váš požádají povolit tuto volbu a po zopakování chyby jim informace zašlete v souboru.</string>
+  <string name="init_debug_note">c:geo může generovat mnoho ladicích informací. Tyto nejsou pro běžné uživatele užitečné. Pro vývojáře hledajícího chybu můžou mít tato data význam, v takovém případě váš požádají povolit tuto volbu a po zopakování chyby jim informace zašlete v souboru.</string>
   <string name="init_debug">Generovat ladicí informace</string>
 
   <string name="init_sendToCgeo_name">Jméno vašeho zařízení:</string>
-  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožnuje stahování keší pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečtěte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registraci proveďte jen, když potřebujete send2cgeo. c:geo bude normálně fungovat i bez registrace.</string>
-  <string name="init_sendToCgeo_register">Požádej o registraci</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožnuje stahování keší pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečtěte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registraci proveďte pouze pokud potřebujete send2cgeo. c:geo bude normálně fungovat i bez registrace.</string>
+  <string name="init_sendToCgeo_register">Požádat o registraci</string>
   <string name="init_sendToCgeo_registering">Registrace vašeho zařízení pro "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registrace byla úspěšná. PIN kód #### použijte na webu c:geo k přidání zařízení do Vašeho prohlížeče.</string>
   <string name="init_sendToCgeo_register_fail">Registrace selhala.</string>
@@ -382,14 +382,14 @@
   <string name="auth_dialog_completed">c:geo nyní může posílat zprávy na Váš Twitter.</string>
 
   <!-- cache -->
-  <string name="cache_count_no">žádná keš</string>
-  <string name="cache_count_one">jedna keš</string>
+  <string name="cache_count_no">Žádná keš</string>
+  <string name="cache_count_one">Jedna keš</string>
   <string name="cache_count_more">keší</string>
-  <string name="cache_offline">offline</string>
-  <string name="cache_offline_refresh">obnovit</string>
-  <string name="cache_offline_drop">smazat</string>
-  <string name="cache_offline_store">uložit</string>
-  <string name="cache_offline_stored">uložena v zařízení</string>
+  <string name="cache_offline">Offline</string>
+  <string name="cache_offline_refresh">Obnovit</string>
+  <string name="cache_offline_drop">Smazat</string>
+  <string name="cache_offline_store">Uložit</string>
+  <string name="cache_offline_stored">Uložena v zařízení</string>
   <string name="cache_offline_not_ready">není připravena\npro použití offline</string>
   <string name="cache_offline_time_about">přibližně před</string>
   <string name="cache_offline_time_mins">minutami</string>
@@ -400,14 +400,14 @@
   <string name="cache_premium">placený účet</string>
   <string name="cache_attributes">atributy</string>
   <string name="cache_attributes_no_icons">(obnov cache ke zobrazení atributů)</string>
-  <string name="cache_inventory">inventář</string>
+  <string name="cache_inventory">Inventář</string>
   <string name="cache_log_offline">offline log</string>
   <string name="cache_log_images_loading">Načítám obrázky z logů…</string>
   <string name="cache_log_images_title">Obrázky z logů</string>
   <string name="cache_log_image_default_title">Fotografie</string>
   <string name="cache_personal_note">Osobní poznámka</string>
-  <string name="cache_description">popis</string>
-  <string name="cache_description_long">dlouhý popis</string>
+  <string name="cache_description">Popis</string>
+  <string name="cache_description_long">Dlouhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na geocaching.com, aby bylo správně zobrazené.</string>
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Tato je ve vašem watchlistu.</string>
@@ -419,7 +419,7 @@
   <string name="cache_favpoint_add">Přidat k oblíbeným</string>
   <string name="cache_favpoint_remove">Odstraniz z oblíbených</string>
 
-  <string name="cache_waypoints">body trasy</string>
+  <string name="cache_waypoints">Body trasy</string>
   <plurals name="waypoints">
       <item quantity="one">1 bod trasy</item>
       <item quantity="other">%d bodů trasy</item>
@@ -428,23 +428,23 @@
 
   <string name="cache_hint">nápověda</string>
   <string name="cache_logs">logbook</string>
-  <string name="cache_dialog_loading_details">načítám detaily keše…</string>
+  <string name="cache_dialog_loading_details">Načítám detaily keše…</string>
   <string name="cache_dialog_offline_save_title">offline</string>
   <string name="cache_dialog_offline_save_message">Ukládám keš pro použití offline…</string>
   <string name="cache_dialog_offline_drop_title">offline</string>
   <string name="cache_dialog_offline_drop_message">Odstraňuji keš z paměti zařízení…</string>
   <string name="cache_dialog_refresh_title">aktualizace</string>
   <string name="cache_dialog_refresh_message">Aktualizuji detaily keše…</string>
-  <string name="cache_menu_navigate">navigovat</string>
-  <string name="cache_menu_tbt">turn-by-turn</string>
-  <string name="cache_menu_radar">radar</string>
-  <string name="cache_menu_map">zobrazit na mapě</string>
-  <string name="cache_menu_map_ext">zobrazit na jiné mapě</string>
-  <string name="cache_menu_map_static">statické mapy</string>
-  <string name="cache_menu_browser">otevřít v prohlížečí</string>
+  <string name="cache_menu_navigate">Navigovat</string>
+  <string name="cache_menu_tbt">Turn-by-turn</string>
+  <string name="cache_menu_radar">Radar</string>
+  <string name="cache_menu_map">Zobrazit na mapě</string>
+  <string name="cache_menu_map_ext">Zobrazit na jiné mapě</string>
+  <string name="cache_menu_map_static">Statické mapy</string>
+  <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">zapsat návštěvu</string>
   <string name="cache_menu_spoilers">obrázky</string>
-  <string name="cache_menu_around">keš v okolí</string>
+  <string name="cache_menu_around">Keš v okolí</string>
   <string name="cache_menu_event">přidat do kalendáře</string>
   <string name="cache_menu_details">detaily</string>
   <string name="cache_status">status</string>
@@ -505,48 +505,48 @@
   <string name="waypoint_my_coordinates">aktuální poloha</string>
   <string name="waypoint_bearing">směr</string>
   <string name="waypoint_distance">vzdálenost</string>
-  <string name="waypoint_name">název</string>
-  <string name="waypoint_edit">upravit</string>
-  <string name="waypoint_delete">smazat</string>
-  <string name="waypoint_edit_title">úprava waypointu</string>
-  <string name="waypoint_add_title">nový bod trasy</string>
-  <string name="waypoint_note">poznámka</string>
-  <string name="waypoint_save">uložit</string>
-  <string name="waypoint_loading">načítání bodu trasy…</string>
+  <string name="waypoint_name">Název</string>
+  <string name="waypoint_edit">Upravit</string>
+  <string name="waypoint_delete">Smazat</string>
+  <string name="waypoint_edit_title">Úprava waypointu</string>
+  <string name="waypoint_add_title">Nový bod trasy</string>
+  <string name="waypoint_note">Poznámka</string>
+  <string name="waypoint_save">Uložit</string>
+  <string name="waypoint_loading">Načítání bodu trasy…</string>
 
   <!-- visit -->
   <string name="visit_tweet">informovat o nálezu na twitteru</string>
 
   <!-- map -->
   <string name="map_map">Mapa</string>
-  <string name="map_live">aktivní mapa</string>
-  <string name="map_view_map">pohled do mapy</string>
-  <string name="map_trail_show">zobrazit záznam trasy</string>
-  <string name="map_trail_hide">skrýt záznam trasy</string>
-  <string name="map_live_enable">povolit aktivní mapu</string>	
-  <string name="map_live_disable">zakázat aktivní mapu</string>
-  <string name="map_static_title">statické mapy</string>
-  <string name="map_static_loading">načítání statických map…</string>
+  <string name="map_live">Aktivní mapa</string>
+  <string name="map_view_map">Pohled do mapy</string>
+  <string name="map_trail_show">Zobrazit záznam trasy</string>
+  <string name="map_trail_hide">Skrýt záznam trasy</string>
+  <string name="map_live_enable">Povolit aktivní mapu</string>	
+  <string name="map_live_disable">Zakázat aktivní mapu</string>
+  <string name="map_static_title">Statické mapy</string>
+  <string name="map_static_loading">Načítání statických map…</string>
 
   <!-- search -->
-  <string name="search_coordinates">souřadnice</string>
-  <string name="search_coordinates_button">hledat podle souřadnic</string>
-  <string name="search_address">adresa</string>
-  <string name="search_address_button">hledat podle adresy</string>
-  <string name="search_gc">geokód</string>
-  <string name="search_gc_button">hledat podle geokódu</string>
-  <string name="search_kw">klíčová slova</string>
-  <string name="search_kw_prefill">klíčové slovo</string>
-  <string name="search_kw_button">hledat podle klíčového slova</string>
-  <string name="search_fbu">nalezeno uživatelem</string>
-  <string name="search_fbu_prefill">uživatelské jméno</string>
-  <string name="search_fbu_button">hledat podle nálezce</string>
-  <string name="search_hbu">skryto uživatelem</string>
-  <string name="search_hbu_prefill">vlastník</string>
-  <string name="search_hbu_button">hledat podle vlastníka</string>
+  <string name="search_coordinates">Souřadnice</string>
+  <string name="search_coordinates_button">Hledat podle souřadnic</string>
+  <string name="search_address">Adresa</string>
+  <string name="search_address_button">Hledat podle adresy</string>
+  <string name="search_gc">Geokód</string>
+  <string name="search_gc_button">Hledat podle geokódu</string>
+  <string name="search_kw">Klíčová slova</string>
+  <string name="search_kw_prefill">Klíčové slovo</string>
+  <string name="search_kw_button">Hledat dle klíčového slova</string>
+  <string name="search_fbu">Nalezeno uživatelem</string>
+  <string name="search_fbu_prefill">Uživatelské jméno</string>
+  <string name="search_fbu_button">Hledat podle nálezce</string>
+  <string name="search_hbu">Skryto uživatelem</string>
+  <string name="search_hbu_prefill">Vlastník</string>
+  <string name="search_hbu_button">Hledat podle vlastníka</string>
   <string name="search_tb">Trackable</string>
-  <string name="search_tb_hint">identifikace trackable</string>
-  <string name="search_tb_button">vyhledávání trackable</string>
+  <string name="search_tb_hint">Identifikace trackable</string>
+  <string name="search_tb_button">Vyhledávání trackable</string>
   <string name="search_destination">cíl</string>
   <string name="search_direction_rel">od této polohy</string>
   <string name="search_address_started">vyhledávání míst</string>
@@ -554,26 +554,26 @@
 
   <!-- trackable -->
   <string name="trackable">Trackable</string>
-  <string name="trackable_details_loading">načítání detailů…</string>
-  <string name="trackable_log_touch">hlášení zahlédnutí</string>
-  <string name="trackable_browser_open">otevřít v prohlížeči</string>
-  <string name="trackable_goal">cíl</string>
-  <string name="trackable_details">detaily</string>
-  <string name="trackable_image">obrázek</string>
+  <string name="trackable_details_loading">Načítání detailů…</string>
+  <string name="trackable_log_touch">Hlášení zahlédnutí</string>
+  <string name="trackable_browser_open">Otevřít v prohlížeči</string>
+  <string name="trackable_goal">Cíl</string>
+  <string name="trackable_details">Detaily</string>
+  <string name="trackable_image">Obrázek</string>
   <string name="trackable_code">TB-kód</string>
-  <string name="trackable_name">název</string>
-  <string name="trackable_type">typ</string>
-  <string name="trackable_owner">vlastník</string>
-  <string name="trackable_spotted">Spotted</string>
-  <string name="trackable_origin">původ</string>
-  <string name="trackable_unknown">neznámý</string>
-  <string name="trackable_released">vypuštění</string>
-  <string name="trackable_touch">dotyk</string>
+  <string name="trackable_name">Název</string>
+  <string name="trackable_type">Typ</string>
+  <string name="trackable_owner">Vlastník</string>
+  <string name="trackable_spotted">Viděn</string>
+  <string name="trackable_origin">Původ</string>
+  <string name="trackable_unknown">Neznámý</string>
+  <string name="trackable_released">Vypuštění</string>
+  <string name="trackable_touch">Dotyk</string>
 
   <!-- navigation -->
-  <string name="navigation">navigace</string>
-  <string name="compass_title">kompas</string>
-  <string name="use_gps">použít GPS</string>
+  <string name="navigation">Navigace</string>
+  <string name="compass_title">Kompas</string>
+  <string name="use_gps">Použít GPS</string>
   <string name="use_compass">použít kompas</string>
   <string name="destination_select">vyberte cíl</string>
   <string name="destination_set">cíl nastaven</string>
@@ -589,8 +589,8 @@
   <string name="website">web: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a> </string>
   <string name="twitter">twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="about_go4cache">Služba<b>Go 4 cache</b>umožňuje sledovat v reálném čase ostatní kačery na mapě (v <b>c:geo</b>nebo v prohlížeči). Můžete se tak podívat třeba na to, jakou kešku právě hledají. Připojením ke službě  <b>Go 4 cache</b>umožníte aplikaci  <b>c:geo</b>zveřejňovat Vaši aktuální polohu (pouze pokud <b>c:geo</b>běží).</string>
-  <string name="about_twitter">Chcete aby <b>c:geo</b>napsalo na Váš Twitter pokaždé, když zapíšete nález kešky?  </string>
-  <string name="about_auth_1">Pomocí následujícího procesu můžete aplikaci <b>c:geo</b>umožnit odesílání příspěvků na Váš Twitter.  </string>
+  <string name="about_go4cache">Služba <b>Go 4 cache</b> umožňuje sledovat v reálném čase ostatní kačery na mapě (v <b>c:geo</b> nebo v prohlížeči). Můžete se tak podívat třeba na to, jakou kešku právě hledají. Připojením ke službě <b>Go 4 cache</b> umožníte aplikaci <b>c:geo</b> zveřejňovat Vaši aktuální polohu (pouze pokud <b>c:geo</b> běží).</string>
+  <string name="about_twitter">Chcete, aby <b>c:geo</b> napsalo na Váš Twitter pokaždé, když zapíšete nález kešky?</string>
+  <string name="about_auth_1">Pomocí následujícího procesu můžete umožnit <b>c:geo</b> aplikaci odesílání příspěvků na Váš Twitter.</string>
   <string name="about_auth_2">Tapnutím na tlačítko "zahájit autorizaci" celý proces začne. Tento proces otevře webovou stránku Twitteru, kde se budete muset přihlásit a tlačítkem Accept pak umožnit aplikaci <b>c:geo</b>přístup k Vašemu Twitteru. Twitter Vám přidělí PIN kód pokud tapnete na Accept. Tento kód zkopírujte a vložte do aplikace <b>c:geo</b>. A potvrďte. To je vše.</string>
 </resources>
