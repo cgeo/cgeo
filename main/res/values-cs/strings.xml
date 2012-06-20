@@ -177,7 +177,7 @@
   <string name="loc_gps_disabled">GPS zakázána</string>
 
   <!-- standard menu -->
-  <string name="menu_about">o aplikaci</string>
+  <string name="menu_about">O aplikaci</string>
   <string name="menu_settings">nastavení</string>  
   <string name="menu_history">Historie</string>
   <string name="menu_filter">Filtr</string>
