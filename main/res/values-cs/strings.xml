@@ -322,7 +322,7 @@
   <string name="init_units">Používat imperiální jednotky vzdálenosti</string>
   <string name="init_nav">Používat Google Navigaci</string>
   <string name="init_log_offline">Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat log na server)</string>
-  <string name="init_livelist">zobrazovat směr v seznamu keší</string>
+  <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
   <string name="init_altitude">Výšková korekce</string>
   <string name="init_altitude_description">Pokud Vaše GPS počítá špatně výšku, můžete ji korigovat zde, stačí zadat kladné či záporné číslo v metrech.</string>
   <string name="init_clear">smazat přihlašovací údaje</string>
