@@ -178,7 +178,7 @@
 
   <!-- standard menu -->
   <string name="menu_about">O aplikaci</string>
-  <string name="menu_settings">nastavení</string>  
+  <string name="menu_settings">Nastavení</string>  
   <string name="menu_history">Historie</string>
   <string name="menu_filter">Filtr</string>
   <string name="menu_scan_geo">Naskenuj geokód</string>
