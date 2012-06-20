@@ -316,7 +316,7 @@
   <string name="init_showwaypoints">Zobrazuj waypointy na živé mapě</string>
   <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich waypointy.</string>
   <string name="init_disabled">nezobrazovat zrušené keše</string>
-  <string name="init_offline">ukládat mapy pro offline použití</string>
+  <string name="init_offline">Ukládat mapy pro offline použití</string>
   <string name="init_offline_wp">Ukládat statické mapy k waypointům pro offline použití</string>
   <string name="init_save_log_img">Ulož obrázky z logů</string>
   <string name="init_units">používat imperiální jednotky vzdálenosti</string>
