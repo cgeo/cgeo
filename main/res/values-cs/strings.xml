@@ -330,7 +330,7 @@
   <string name="init_backup">Záloha</string>
   <string name="init_backup_backup">Záloha</string>
   <string name="init_backup_running">Vytvářím zálohu databáze keší…</string>
-  <string name="init_backup_note">Tato funkce nezálohuje nastavení a přihlašovací údaje. Zálohuje a obnovuje jen databázi keší.\nVaše přihlašovací údaje nikdy neopustí c:geo.</string>
+  <string name="init_backup_note">Tato funkce nezálohuje nastavení a přihlašovací údaje. Zálohuje a obnovuje pouze databázi keší. Vaše přihlašovací údaje nikdy neopustí c:geo.</string>
   <string name="init_backup_restore">Obnova</string>
   <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
   <string name="init_backup_failed">Záloha databáze c:geo selhala.</string>
