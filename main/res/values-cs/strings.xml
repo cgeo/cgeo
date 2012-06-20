@@ -307,7 +307,7 @@
   <string name="init_friendlogswanted">Načti extra navíc stránku logbooku s logy kamarádů.</string>
   <string name="init_openlastdetailspage">Otevři detaily na naposledy použité stránce.</string>
   <string name="init_autoload">Automaticky načti dlouhý popis</string>
-  <string name="init_other">další možnosti</string>
+  <string name="init_other">Další možnosti</string>
   <string name="init_skin">Světlý skin (vyžaduje restart)</string>
   <string name="init_address">Ukazuj adresu na hlavní obrazovce</string>
   <string name="init_captcha">Ukaž CAPTCHA obrázek, pokud je třeba. (jen Basic Member)</string>
