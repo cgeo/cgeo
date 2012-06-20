@@ -354,7 +354,7 @@
   <string name="init_default_navigation_tool_select">Vyberte nástroj</string>
   <string name="init_default_navigation_tool_2_description">Zde můžete vybrat sekundární přeferovaný navigační nástroj. Ten se aktivuje dlouhým kliknutím na navigační ikonu vedle názvu keše.</string>
   <string name="init_debug_title">Ladicí informace</string>
-  <string name="init_debug_note">c:geo může generovat mnoho ladicích informací. Tyto nejsou pro běžné uživatele uživatečné. Pro vývojáře hledajícího chybu můžou mít tato data význam, v takovém případě váš požádají povolit tuto volbu a po zopakování chyby jim informace zašlete v souboru.</string>
+  <string name="init_debug_note">c:geo může generovat mnoho ladicích informací. Tyto nejsou pro běžné uživatele užitečné. Pro vývojáře hledajícího chybu můžou mít tato data význam, v takovém případě váš požádají povolit tuto volbu a po zopakování chyby jim informace zašlete v souboru.</string>
   <string name="init_debug">Generovat ladicí informace</string>
 
   <string name="init_sendToCgeo_name">Jméno vašeho zařízení:</string>
