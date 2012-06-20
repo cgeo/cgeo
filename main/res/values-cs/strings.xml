@@ -281,7 +281,7 @@
   <string name="init_username">uživatelské jméno</string>
   <string name="init_password">heslo</string>
   <string name="init_passvote">heslo</string>
-  <string name="init_login">zkontrolovat</string>
+  <string name="init_login">Zkontrolovat</string>
   <string name="init_login_popup">přihlášení</string>
   <string name="init_login_popup_working">přihlašování na Geocaching.com…</string>
   <string name="init_login_popup_ok">přihlášení proběhlo</string>
