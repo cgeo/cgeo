@@ -359,7 +359,7 @@
 
   <string name="init_sendToCgeo_name">Jméno vašeho zařízení:</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožnuje stahování keší pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečtěte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registraci proveďte pouze pokud potřebujete send2cgeo. c:geo bude normálně fungovat i bez registrace.</string>
-  <string name="init_sendToCgeo_register">Požádej o registraci</string>
+  <string name="init_sendToCgeo_register">Požádat o registraci</string>
   <string name="init_sendToCgeo_registering">Registrace vašeho zařízení pro "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registrace byla úspěšná. PIN kód #### použijte na webu c:geo k přidání zařízení do Vašeho prohlížeče.</string>
   <string name="init_sendToCgeo_register_fail">Registrace selhala.</string>
