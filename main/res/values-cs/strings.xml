@@ -286,7 +286,7 @@
   <string name="init_login_popup_working">Přihlašování na Geocaching.com…</string>
   <string name="init_login_popup_ok">Přihlášení proběhlo</string>
   <string name="init_login_popup_failed">Přihlášení neproběhlo</string>
-  <string name="init_login_popup_failed_reason">přihlášení neproběhlo, protože</string>
+  <string name="init_login_popup_failed_reason">Přihlášení neproběhlo, protože</string>
   <string name="init_go4cache_connect">připojit ke Go 4 Cache</string>
   <string name="init_twitter_authorize">autorizovat c:geo</string>
   <string name="init_twitter_publish">nový status při nálezu keše</string>
