@@ -114,6 +114,8 @@
   <string name="log_new_log">Logga</string>
   <string name="log_new_log_text">Loggtext</string>
   <string name="log_announcement">Kungörelse</string>
+  <string name="log_today">Idag</string>
+  <string name="log_yesterday">Igår</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Översätt till %s</string>
@@ -282,7 +284,8 @@
   <string name="caches_sort_rating">Betyg (GC-vote)</string>
   <string name="caches_sort_vote">Betyg (eget)</string>
   <string name="caches_sort_inventory">Antal trackable</string>
-  <string name="caches_sort_date_hidden">Datum</string>
+  <string name="caches_sort_date_hidden">Datum för utplacering</string>
+  <string name="caches_sort_date_logged">Datum för senaste log</string>
   <string name="caches_sort_finds">Antal som hittat</string>
   <string name="caches_sort_state">Status</string>
   <string name="caches_sort_storage">Tid för sparandet i enheten</string>
@@ -344,6 +347,7 @@
   <string name="list_dialog_rename">Byt namn</string>
 
   <!-- about -->
+  <string name="about_version">Version</string>
   <string name="about_changelog">Historik</string>
   <string name="about_donate">Stöd c:geo</string>
   <string name="about_detail">Detaljer</string>
@@ -360,9 +364,9 @@
   <string name="init_passvote">Lösenord</string>
   <string name="init_login">Testa och spara inloggning</string>
   <string name="init_login_popup">Inloggning</string>
-  <string name="init_login_popup_working">Testar inloggning mot Geocaching.com…</string>
-  <string name="init_login_popup_ok">Inloggning ok.</string>
-  <string name="init_login_popup_failed">Inloggning misslyckades.</string>
+  <string name="init_login_popup_working">Testar inloggning mot gc.com…</string>
+  <string name="init_login_popup_ok">Inloggning OK</string>
+  <string name="init_login_popup_failed">Inloggning misslyckades</string>
   <string name="init_login_popup_failed_reason">Inloggning misslyckades pga </string>
   <string name="init_go4cache_connect">Anslut till Go 4 Cache</string>
   <string name="init_twitter_authorize">Inställningar för Twitter</string>
@@ -422,6 +426,7 @@
   <string name="init_mapsource_select">Välj kartkälla</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Visa spår på kartan</string>
+  <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
   <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
   <string name="init_sigautoinsert">Infoga signatur automatiskt i loggar</string>
   <string name="init_loaddirectionimg">Ladda riktningsbild om det behövs (enbart Basic Member)</string>
@@ -793,6 +798,8 @@
   <string name="export_fieldnotes_onlynew">Bara sedan senaste exporteringen</string>
   <string name="export_fieldnotes_creating">Skapar Field Notes…</string>
   <string name="export_gpx">GPX</string>
+  <string name="export_gpx_info">GPX filen kommer att exporteras till /sdcard/gpx med datum och tid i filnamnet.</string>
+  <string name="export_gpx_to">Skicka exporterad GPX till</string>
 
   <!-- next things -->
   <string name="legal_note">För att använda tjänster hos Geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
@@ -804,6 +811,13 @@
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
   <string name="about_auth_1">Nedan tillåter du <b>c:geo</b> att ansluta till Twitter.</string>
   <string name="about_auth_2">Klicka på \"Påbörja koppling mot Twitter\" om du vill koppla ihop <b>c:geo</b> med Twitter. Twitters hemsida kommer att öppnas i en webbläsare. Logga in på den sidan och tillåt <b>c:geo</b> att ansluta till ditt konto. När du godkänt så kommer Twitter att visa en PIN kod. Kom ihåg denna PIN kod, stäng webbläsaren och skriv in PIN koden i <b>c:geo</b> och bekräfta.</string>
+
+  <!-- status -->
+  <string name="status_new_release">Ny officiell version finns tillgänglig.\nKlicka för att installera.</string>
+  <string name="status_new_nightly">Nytt nattligt bygge finns tillgängligt.\nKlicka för att installera.</string>
+  <string name="status_new_rc">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
+  <string name="status_geocaching_change">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
+  <string name="status_geocaching_livemap">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
 
   <!-- go4cache -->
   <string name="go4cache_looking_around">Tittar omkring</string>
