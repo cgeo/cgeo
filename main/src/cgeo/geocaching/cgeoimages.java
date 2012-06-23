@@ -34,7 +34,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class cgeoimages extends AbstractActivity {
@@ -55,7 +55,8 @@ public class cgeoimages extends AbstractActivity {
     private BitmapDrawable currentDrawable;
     private cgImage currentImage;
 
-    static private final Collection<Bitmap> bitmaps = Collections.synchronizedCollection(new ArrayList<Bitmap>());
+    // We could use a Set here, but we will insert no duplicates, so there is no need to check for uniqueness.
+    private final Collection<Bitmap> bitmaps = new LinkedList<Bitmap>();
 
     private void loadImages(final List<cgImage> images, final int progressMessage, final boolean offline) {
 
