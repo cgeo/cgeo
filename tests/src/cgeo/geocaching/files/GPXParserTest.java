@@ -231,4 +231,14 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         // previously these caches overwrote each other during parsing
         assertEquals(130, caches.size());
     }
+
+    public void testGeoToad() throws Exception {
+        final List<cgCache> caches = readGPX10(R.raw.geotoad);
+        assertEquals(2, caches.size());
+        cgCache cache;
+        cache = caches.get(0);
+        assertEquals("GC2KN6K", cache.getGeocode());
+        cache = caches.get(1);
+        assertEquals("GC1T3MK", cache.getGeocode());
+    }
 }
