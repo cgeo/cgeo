@@ -57,6 +57,9 @@ public class cgeoimages extends AbstractActivity {
 
     // We could use a Set here, but we will insert no duplicates, so there is no need to check for uniqueness.
     private final Collection<Bitmap> bitmaps = new LinkedList<Bitmap>();
+    private int message;
+    private boolean offline;
+    private ArrayList<cgImage> imageNames;
 
     private void loadImages(final List<cgImage> images, final int progressMessage, final boolean offline) {
 
@@ -176,31 +179,34 @@ public class cgeoimages extends AbstractActivity {
         setTitle(res.getString(img_type == SPOILER_IMAGES ? R.string.cache_spoiler_images_title : R.string.cache_log_images_title));
 
         inflater = getLayoutInflater();
-        if (imagesView == null) {
-            imagesView = (LinearLayout) findViewById(R.id.spoiler_list);
-        }
+        imagesView = (LinearLayout) findViewById(R.id.spoiler_list);
 
-        final ArrayList<cgImage> images = extras.getParcelableArrayList("images");
-        if (CollectionUtils.isEmpty(images)) {
+        imageNames = extras.getParcelableArrayList("images");
+        if (CollectionUtils.isEmpty(imageNames)) {
             showToast(res.getString(R.string.warn_load_images));
             finish();
             return;
         }
 
-        final int message = img_type == SPOILER_IMAGES ? R.string.cache_spoiler_images_loading : R.string.cache_log_images_loading;
-        final boolean offline = app.isOffline(geocode, null) && (img_type == SPOILER_IMAGES || Settings.isStoreLogImages());
-
-        loadImages(images, message, offline);
+        message = img_type == SPOILER_IMAGES ? R.string.cache_spoiler_images_loading : R.string.cache_log_images_loading;
+        offline = app.isOffline(geocode, null) && (img_type == SPOILER_IMAGES || Settings.isStoreLogImages());
     }
 
     @Override
-    public void onDestroy() {
+    public void onStart() {
+        super.onStart();
+        loadImages(imageNames, message, offline);
+    }
+
+    @Override
+    public void onStop() {
         // Reclaim native memory faster than the finalizers would
-        for (Bitmap b : bitmaps) {
+        imagesView.removeAllViews();
+        for (final Bitmap b : bitmaps) {
             b.recycle();
         }
         bitmaps.clear();
-        super.onDestroy();
+        super.onStop();
     }
 
     private void viewImageInStandardApp(final BitmapDrawable image) {
