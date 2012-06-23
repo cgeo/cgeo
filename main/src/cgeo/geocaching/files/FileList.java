@@ -19,15 +19,17 @@ import android.widget.ArrayAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
     private static final int MSG_SEARCH_WHOLE_SD_CARD = 1;
 
-    private List<File> files = new ArrayList<File>();
+    private final List<File> files = new ArrayList<File>();
     private T adapter = null;
     private ProgressDialog waitDialog = null;
-    private loadFiles searchingThread = null;
+    private SearchFilesThread searchingThread = null;
     private boolean endSearching = false;
     private int listId = StoredList.STANDARD_LIST_ID;
     final private Handler changeWaitDialogHandler = new Handler() {
@@ -114,7 +116,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 );
 
         endSearching = false;
-        searchingThread = new loadFiles();
+        searchingThread = new SearchFilesThread();
         searchingThread.start();
     }
 
@@ -145,14 +147,14 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
      */
     protected abstract void setTitle();
 
-    private class loadFiles extends Thread {
+    private class SearchFilesThread extends Thread {
         public void notifyEnd() {
             endSearching = true;
         }
 
         @Override
         public void run() {
-            List<File> list = new ArrayList<File>();
+            final List<File> list = new ArrayList<File>();
 
             try {
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -181,7 +183,13 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, 0, "loaded directories"));
 
             files.addAll(list);
-            list.clear();
+            Collections.sort(files, new Comparator<File>() {
+
+                @Override
+                public int compare(File lhs, File rhs) {
+                    return lhs.getName().compareToIgnoreCase(rhs.getName());
+                }
+            });
 
             loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
         }
