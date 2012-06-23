@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -2126,13 +2127,13 @@ public class cgData {
                 if (cacheType == CacheType.ALL) {
                     sql = "select count(_id) from " + dbTableCaches + listSql;
                 } else {
-                    sql = "select count(_id) from " + dbTableCaches + " where type = \"" + cacheType.id + "\"" + listSqlW;
+                    sql = "select count(_id) from " + dbTableCaches + " where type = " + DatabaseUtils.sqlEscapeString(cacheType.id) + listSqlW;
                 }
             } else {
                 if (cacheType == CacheType.ALL) {
                     sql = "select count(_id) from " + dbTableCaches + " where detailed = 1" + listSqlW;
                 } else {
-                    sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \"" + cacheType.id + "\"" + listSqlW;
+                    sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = " + DatabaseUtils.sqlEscapeString(cacheType.id) + listSqlW;
                 }
             }
             SQLiteStatement compiledStmnt = database.compileStatement(sql);
@@ -2189,9 +2190,8 @@ public class cgData {
         }
 
         if (cacheType != CacheType.ALL) {
-            specifySql.append(" and type = \"");
-            specifySql.append(cacheType.id);
-            specifySql.append('"');
+            specifySql.append(" and type = ");
+            specifySql.append(DatabaseUtils.sqlEscapeString(cacheType.id));
         }
 
         try {
@@ -2247,9 +2247,8 @@ public class cgData {
             specifySql.append(" and detailed = 1");
         }
         if (cacheType != CacheType.ALL) {
-            specifySql.append(" and type = \"");
-            specifySql.append(cacheType.id);
-            specifySql.append('"');
+            specifySql.append(" and type = ");
+            specifySql.append(DatabaseUtils.sqlEscapeString(cacheType.id));
         }
 
         try {
@@ -2322,9 +2321,8 @@ public class cgData {
 
         // cacheType limitation
         if (cacheType != CacheType.ALL) {
-            where.append(" and type = \"");
-            where.append(cacheType.id);
-            where.append('"');
+            where.append(" and type = ");
+            where.append(DatabaseUtils.sqlEscapeString(cacheType.id));
         }
 
         // offline caches only
@@ -2468,7 +2466,7 @@ public class cgData {
             // Drop caches from the database
             final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
             for (final String geocode : geocodes) {
-                quotedGeocodes.add('"' + geocode + '"');
+                quotedGeocodes.add(DatabaseUtils.sqlEscapeString(geocode));
             }
             final String geocodeList = StringUtils.join(quotedGeocodes.toArray(), ',');
             final String baseWhereClause = "geocode in (" + geocodeList + ")";
@@ -2480,7 +2478,7 @@ public class cgData {
                 database.delete(dbTableLogs, baseWhereClause, null);
                 database.delete(dbTableLogCount, baseWhereClause, null);
                 database.delete(dbTableLogsOffline, baseWhereClause, null);
-                database.delete(dbTableWaypoints, baseWhereClause + " and type <> \"own\"", null);
+                database.delete(dbTableWaypoints, baseWhereClause + " and type <> 'own'", null);
                 database.delete(dbTableTrackables, baseWhereClause, null);
                 database.setTransactionSuccessful();
             } finally {
@@ -2915,7 +2913,7 @@ public class cgData {
                 if (all.length() > 0) {
                     all.append(", ");
                 }
-                all.append('"').append(geocode).append('"');
+                all.append(DatabaseUtils.sqlEscapeString(geocode));
             }
 
             where.append("geocode in (").append(all).append(')');
