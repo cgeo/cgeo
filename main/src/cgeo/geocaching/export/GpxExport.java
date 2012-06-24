@@ -161,6 +161,14 @@ class GpxExport extends AbstractExport {
                     gpx.write(StringEscapeUtils.escapeXml(cache.getName()));
                     gpx.write("</desc>");
 
+                    gpx.write("<url>");
+                    gpx.write(cache.getUrl());
+                    gpx.write("</url>");
+
+                    gpx.write("<urlname>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getName()));
+                    gpx.write("</urlname>");
+
                     gpx.write("<sym>");
                     gpx.write(cache.isFound() ? "Geocache Found" : "Geocache");
                     gpx.write("</sym>");
