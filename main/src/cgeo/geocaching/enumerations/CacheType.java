@@ -31,7 +31,14 @@ public enum CacheType {
     /** No real cache type -> filter */
     ALL("all", "display all caches", "9a79e6ce-3344-409c-bbe9-496530baf758", R.string.all_types, R.drawable.type_unknown);
 
+    /**
+     * id field is used when for storing caches in the database.
+     */
     public final String id;
+    /**
+     * human readable name of the cache type<br>
+     * used in web parsing as well as for gpx import/export.
+     */
     public final String pattern;
     public final String guid;
     private final int stringId;
