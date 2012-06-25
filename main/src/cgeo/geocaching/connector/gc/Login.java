@@ -144,7 +144,7 @@ public abstract class Login {
         return StatusCode.NO_ERROR;
     }
 
-    public static void setActualCachesFound(final int found) {
+    static void setActualCachesFound(final int found) {
         actualCachesFound = found;
     }
 
@@ -152,7 +152,7 @@ public abstract class Login {
         return actualStatus;
     }
 
-    public static void setActualStatus(final String status) {
+    private static void setActualStatus(final String status) {
         actualStatus = status;
     }
 
@@ -160,7 +160,7 @@ public abstract class Login {
         return actualLoginStatus;
     }
 
-    public static void setActualLoginStatus(boolean loginStatus) {
+    private static void setActualLoginStatus(boolean loginStatus) {
         actualLoginStatus = loginStatus;
     }
 
@@ -168,7 +168,7 @@ public abstract class Login {
         return actualUserName;
     }
 
-    public static void setActualUserName(String userName) {
+    private static void setActualUserName(String userName) {
         actualUserName = userName;
     }
 
