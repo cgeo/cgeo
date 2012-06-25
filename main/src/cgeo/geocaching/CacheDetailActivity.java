@@ -1364,9 +1364,9 @@ public class CacheDetailActivity extends AbstractActivity {
             if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
                 TextView ownerView = details.add(R.string.cache_owner, "");
                 if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
-                    ownerView.setText(Html.fromHtml(cache.getOwnerDisplayName()), TextView.BufferType.SPANNABLE);
+                    ownerView.setText(cache.getOwnerDisplayName(), TextView.BufferType.SPANNABLE);
                 } else { // OwnerReal guaranteed to be not blank based on above
-                    ownerView.setText(Html.fromHtml(cache.getOwnerUserId()), TextView.BufferType.SPANNABLE);
+                    ownerView.setText(cache.getOwnerUserId(), TextView.BufferType.SPANNABLE);
                 }
                 ownerView.setOnClickListener(new OwnerActionsClickListener());
             }

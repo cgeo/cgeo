@@ -34,6 +34,7 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -409,7 +410,7 @@ public abstract class GCParser {
             }
 
             // owner
-            cache.setOwnerDisplayName(Html.fromHtml(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_DISPLAYNAME, true, cache.getOwnerDisplayName())).toString());
+            cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_DISPLAYNAME, true, cache.getOwnerDisplayName())).toString());
 
             // hidden
             try {
