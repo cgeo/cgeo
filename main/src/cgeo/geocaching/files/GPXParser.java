@@ -51,6 +51,7 @@ public abstract class GPXParser extends FileParser {
      */
     private static final Pattern patternGeocode = Pattern.compile("([A-Z][0-9A-Z]+)");
     private static final Pattern patternGuid = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternUrlGeocode = Pattern.compile(".*" + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
     /**
      * supported groundspeak extensions of the GPX format
      */
@@ -228,7 +229,7 @@ public abstract class GPXParser extends FileParser {
 
     static Date parseDate(String inputUntrimmed) throws ParseException {
         String input = inputUntrimmed.trim();
-        // remove milli seconds to reduce number of needed patterns
+        // remove milliseconds to reduce number of needed patterns
         final Matcher matcher = PATTERN_MILLISECONDS.matcher(input);
         input = matcher.replaceFirst("");
         if (input.contains("Z")) {
@@ -421,6 +422,11 @@ public abstract class GPXParser extends FileParser {
                     if (StringUtils.isNotBlank(guid)) {
                         cache.setGuid(guid);
                     }
+                }
+                final Matcher matcherCode = patternUrlGeocode.matcher(url);
+                if (matcherCode.matches()) {
+                    String geocode = matcherCode.group(1);
+                    cache.setGeocode(geocode);
                 }
             }
         });

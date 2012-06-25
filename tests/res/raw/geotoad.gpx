@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" creator="GeoToad" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+<name>20120621T221044</name>
+<desc>GeoToad: wid = GC1T3MK:GC2KN6K (22Jun12 00:33)</desc>
+<author>GeoToad 3.16.0</author>
+<email>geotoad@googlegroups.com</email>
+<time>2012-06-21T22:10:44.000Z</time>
+<keywords>cache, geocache, groundspeak, geotoad</keywords>
+<wpt lat="51.949683" lon="8.603733">
+  <time>2009-06-07T07:00:00.000Z</time>
+  <name>&quot;Wunnibert&quot;</name>
+  <desc>&quot;Wunnibert&quot; by Jo44, traditional (1/1.5)</desc>
+  <url>http://www.geocaching.com/seek/cache_details.aspx?wp=GC1T3MK</url>
+  <urlname>&quot;Wunnibert&quot;</urlname>
+  <sym>Geocache</sym>
+  <type>Geocache|Traditional Cache</type>
+  <groundspeak:cache id="1260698" available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
+  <groundspeak:name>&quot;Wunnibert&quot;</groundspeak:name>
+  <groundspeak:placed_by>Jo44</groundspeak:placed_by>
+  <groundspeak:owner id="217639962">Jo44</groundspeak:owner>
+  <groundspeak:type>Traditional Cache</groundspeak:type>
+  <groundspeak:container>small</groundspeak:container>
+  <groundspeak:difficulty>1</groundspeak:difficulty>
+  <groundspeak:terrain>1.5</groundspeak:terrain>
+  <groundspeak:country>Germany</groundspeak:country>
+  <groundspeak:state>Nordrhein-Westfalen</groundspeak:state>
+  <groundspeak:attributes>
+      <groundspeak:attribute id="32" inc="1">Bikes allowed</groundspeak:attribute>
+      <groundspeak:attribute id="41" inc="1">Stroller accessible</groundspeak:attribute>
+      <groundspeak:attribute id="7" inc="1">Takes less than 1  hour</groundspeak:attribute>
+      <groundspeak:attribute id="6" inc="1">Kid friendly</groundspeak:attribute>
+      <groundspeak:attribute id="15" inc="1">Available in winter</groundspeak:attribute>
+      <groundspeak:attribute id="13" inc="1">Available 24-7</groundspeak:attribute>
+      <groundspeak:attribute id="1" inc="1">Dogs allowed</groundspeak:attribute>
+  </groundspeak:attributes>
+  <groundspeak:short_description html="True">&lt;br /&gt;[Bikes allowed, stroller accessible, takes less than 1 hour, kid friendly, available in winter, available 24-7, dogs allowed]&lt;br /&gt;Gesch&#252;tzter Tradi in einem lichten Fichtenwald.</groundspeak:short_description>
+  <groundspeak:long_description html="True">Ein neuer Stern ist am Cacherhimmel aufgegangen!&lt;br /&gt; Am 31.05.2009 ist &quot;Wunnibert&quot; geboren!&lt;br /&gt; Reichlich Cachergene hat er mitbekommen: Von Papa, Gro&#223;papa, Omi, Tante, Onkel und Cousine.&lt;br /&gt; Gebt &quot;Wunnibert&quot; doch einen guten Rat oder einen hei&#223;en Tipp mit auf seinen ( Cacher - ) Lebensweg. &lt;p&gt;Inhalt: Logbuch, Stift und Schnuller.&lt;/p&gt; &lt;p&gt;&quot;Wunnibert&quot; hat am 26.07.2010 eine Cousine bekommen: &lt;a href= &quot;http://coord.info/GC2CDA8&quot;&gt;&quot;Tummyseed&quot; (GC2CDA8)&lt;/a&gt;&lt;/p&gt;</groundspeak:long_description>
+  <groundspeak:encoded_hints>piekst</groundspeak:encoded_hints>
+  <groundspeak:logs>
+    <groundspeak:log id="976171115">
+      <groundspeak:date>2012-06-16T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="4235994636">randyandy21</groundspeak:finder>
+      <groundspeak:text encoded="False">TFTC auf netter Runde gefunden. Nun wieder auf in die Heimat.</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="2879926257">
+      <groundspeak:date>2012-06-13T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="1912797330">earlysun</groundspeak:finder>
+      <groundspeak:text encoded="False">Auf einem kurzbesuch in Bielefeld auch diesen Cache gut gefunden. TFTC!&lt;br /&gt;TB: IN</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="1225655337">
+      <groundspeak:date>2012-06-07T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="3223130690">White Werewolf</groundspeak:finder>
+      <groundspeak:text encoded="False">Mit Sali09 wurde heute einen kleine Runde gestartet und einige Ecken besichtigt die ich bisher von Sennestadt noch nicht kannte. Dieser hier geh&#xF6;rte mit dazu. Vielen Dank f&#xFC;rs Zeigen an den Owner.</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="848543352">
+      <groundspeak:date>2012-06-07T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="2299342038">SaLi09</groundspeak:finder>
+      <groundspeak:text encoded="False">Hier war die Dose schnell gefunden! DFDC SaLi09</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="121081409">
+      <groundspeak:date>2012-05-21T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="3782225719">DZElsoff</groundspeak:finder>
+      <groundspeak:text encoded="False">Schnell noch mal einen kleinen Spaziergang durch den Wald, ein wenig stechen lassen und dann war er mir.</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="1258700408">
+      <groundspeak:date>2012-05-12T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="1700209325">Columbus.</groundspeak:finder>
+      <groundspeak:text encoded="False">Nach Tummyseed mussten wir nat&#xFC;rlich auch bei Wunnibert vorbeischauen. Wir haben die Dose nach dem Loggen wieder in ihr Versteck zur&#xFC;ckgelegt.&lt;br /&gt;Danke und Gru&#xDF;.&lt;br /&gt;1195</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="2815497952">
+      <groundspeak:date>2012-05-12T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="647739319">monanam</groundspeak:finder>
+      <groundspeak:text encoded="False">gefunfen! DFDC, MONANAM</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="3699054691">
+      <groundspeak:date>2012-04-27T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="2222272664">Wurtzkoplento</groundspeak:finder>
+      <groundspeak:text encoded="False">Bingo;)</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="1967583827">
+      <groundspeak:date>2012-04-23T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="691211936">-TeamChihuahua-</groundspeak:finder>
+      <groundspeak:text encoded="False">Nach einem Pflicht besuch in diesem Wald, die dornige Dose schnell in den H&#xE4;nden gehalten und signiert. &lt;br /&gt;TFTC&lt;br /&gt;Team Chihuahua&lt;br /&gt;&lt;br /&gt;23. April 2012 &lt;br /&gt;Cache : 1512</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="328214809">
+      <groundspeak:date>2012-04-14T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="217551773">zumsel9b</groundspeak:finder>
+      <groundspeak:text encoded="False">Bei einer Testfahrt f&#xFC;r das neue Fahrrad meiner Tochter haben wir hier kurz halt gemacht.</groundspeak:text>
+    </groundspeak:log>
+  </groundspeak:logs>
+  <groundspeak:travelbugs></groundspeak:travelbugs>
+  </groundspeak:cache>
+</wpt>
+<wpt lat="51.909767" lon="8.615650">
+  <time>2010-12-26T07:00:00.000Z</time>
+  <name>Dem &quot;Dings&quot; zum Trotz 2</name>
+  <desc>Dem &quot;Dings&quot; zum Trotz 2 by Sonnentatzen, traditional (2/1.5)</desc>
+  <url>http://www.geocaching.com/seek/cache_details.aspx?wp=GC2KN6K</url>
+  <urlname>Dem &quot;Dings&quot; zum Trotz 2</urlname>
+  <sym>Geocache</sym>
+  <type>Geocache|Traditional Cache</type>
+  <groundspeak:cache id="2022337" available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
+  <groundspeak:name>Dem &quot;Dings&quot; zum Trotz 2</groundspeak:name>
+  <groundspeak:placed_by>Sonnentatzen</groundspeak:placed_by>
+  <groundspeak:owner id="3494626085">Sonnentatzen</groundspeak:owner>
+  <groundspeak:type>Traditional Cache</groundspeak:type>
+  <groundspeak:container>micro</groundspeak:container>
+  <groundspeak:difficulty>2</groundspeak:difficulty>
+  <groundspeak:terrain>1.5</groundspeak:terrain>
+  <groundspeak:country>Germany</groundspeak:country>
+  <groundspeak:state>Nordrhein-Westfalen</groundspeak:state>
+  <groundspeak:attributes>
+      <groundspeak:attribute id="24" inc="0">Not wheelchair accessible</groundspeak:attribute>
+      <groundspeak:attribute id="15" inc="1">Available in winter</groundspeak:attribute>
+      <groundspeak:attribute id="13" inc="1">Available 24-7</groundspeak:attribute>
+      <groundspeak:attribute id="42" inc="1">Needs maintenance</groundspeak:attribute>
+      <groundspeak:attribute id="7" inc="1">Takes less than 1  hour</groundspeak:attribute>
+      <groundspeak:attribute id="6" inc="1">Kid friendly</groundspeak:attribute>
+      <groundspeak:attribute id="1" inc="1">Dogs allowed</groundspeak:attribute>
+  </groundspeak:attributes>
+  <groundspeak:short_description html="True">&lt;br /&gt;[Not wheelchair accessible, available in winter, available 24-7, needs maintenance, takes less than 1 hour, kid friendly, dogs allowed]&lt;br /&gt;</groundspeak:short_description>
+  <groundspeak:long_description html="True">&lt;span style=&quot;font-weight: bold;&quot;&gt;&lt;span&gt;Das Dings ( &lt;span style= &quot;color: rgb(204, 0, 23);&quot;&gt;der Schnee&lt;/span&gt;) ist &#252;berall und &#228;rgert uns Cacher ein kleines Bisschen!&lt;br /&gt; &lt;br /&gt; Dies ist ein Tradi,&lt;br /&gt; der zu einer neuen Serie von Caches geh&#246;rt,&lt;br /&gt; die trotz &quot;Dings&quot; gefunden werden k&#246;nnen.&lt;br /&gt; &lt;br /&gt; &lt;span style=&quot;color: rgb(178, 17, 98);&quot;&gt;Nachahmung erw&#252;nscht!&lt;br /&gt; &lt;br /&gt; &lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Viel Spass beim Suchen und Finden ! &lt;img align=&quot;right&quot; src= &quot;http://img525.imageshack.us/img525/4821/30679113.jpg&quot; alt=&quot;&quot; style=&quot;margin: 3px 0px 3px 10px; width: 179px; height: 128px;&quot; /&gt; &lt;img align=&quot;&quot; src=&quot;http://&quot; alt=&quot;&quot; style= &quot;margin: 3px 0px; display: block;&quot; /&gt;&lt;/span&gt;&lt;br /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; &lt;div&gt;&lt;a href=&quot;http://www.gcJoker.de&quot;&gt;&lt;img border=&quot;0&quot; src= &quot;http://www.gcJoker.de/img/banner/banner200x73.gif&quot; alt= &quot;banner&quot; /&gt;&lt;/a&gt; &lt;div&gt; &lt;/div&gt; &lt;/div&gt;</groundspeak:long_description>
+  <groundspeak:encoded_hints>Ich bin zweckentfremdet, in mir steckt mehr als im ersten Moment zu sehen ist.</groundspeak:encoded_hints>
+  <groundspeak:logs>
+    <groundspeak:log id="1612244872">
+      <groundspeak:date>2012-06-11T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Write note</groundspeak:type>
+      <groundspeak:finder id="865265718">Trouble18</groundspeak:finder>
+      <groundspeak:text encoded="False">Dies auf dem R&#xFC;ckweg gefunden. Es musste einfach noch dazu :)</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="864079327">
+      <groundspeak:date>2012-06-11T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="865265718">Trouble18</groundspeak:finder>
+      <groundspeak:text encoded="False">St&#xE4;ndig dran vorbei gefahren, aber nie Lust gehabt zwischen den B&#xE4;umen her zu gehen. Heute endlich mal aufgerafft und ihn ohne gr&#xF6;&#xDF;ere Suche gefunden. Jedoch l&#xF6;st sich das Konstrukt langsam. Eventuell bleibt es demn&#xE4;chst ja unten drin.&lt;br /&gt;Danke f&#xFC;rs zeigen dieses altbekannten Ortes. Das hat erinnerungen geweckt&lt;br /&gt;Jetzt aber schnell weg bevor es regnet und der Bass des nahestehenden Autofahrers ist auch gruselig.&lt;br /&gt;Tftc</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="2652272802">
+      <groundspeak:date>2012-06-10T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="4021816271">TomTimpani</groundspeak:finder>
+      <groundspeak:text encoded="False">Heute meine Laufrunde nach Schlo&#xDF; Holte verlagert. Oh Wunder, es lagen tats&#xE4;chlich ein paar Caches auf dem Weg. Auch diesen gerne geloggt.&lt;br /&gt;TFTC&lt;br /&gt;TomTimpani</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="2702448538">
+      <groundspeak:date>2012-06-08T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="2580462969">Kantakor</groundspeak:finder>
+      <groundspeak:text encoded="False">Auch diesen kleinen Freund auf der heutigen Abend/Nachttour schnell&lt;br /&gt;gesucht, gefunden und muggelfrei geloggt.&lt;br /&gt;&lt;br /&gt;Danke f&#xFC;rs Verstecken,&lt;br /&gt;&lt;br /&gt;Kantakor</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="2003742312">
+      <groundspeak:date>2012-06-08T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="3594345313">andimitabei</groundspeak:finder>
+      <groundspeak:text encoded="False">Hier wurde ich gestern Abend mit dresinator und DerTobi91 f&#xFC;ndig, auf unserer Tour durch Kaunitz richtung Oerlinghausen zu einem tollen Nachtcache :)</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="1388327984">
+      <groundspeak:date>2012-06-07T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="1794171066">Dresinator</groundspeak:finder>
+      <groundspeak:text encoded="False">Netter Cache, gut gefunden :)</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="1085751396">
+      <groundspeak:date>2012-06-07T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="2217329812">Dertobi91</groundspeak:finder>
+      <groundspeak:text encoded="False">Tricks&lt;br /&gt;</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="3812521635">
+      <groundspeak:date>2012-05-30T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="2730780912">worldsucks</groundspeak:finder>
+      <groundspeak:text encoded="False">Die Dose konnte sich zwar kurze Zeit vor uns verstecken, irgendwann hat mein Cacherkollege dann aber doch zugeschlagen. Vielen Dank f&#xFC;r diese sehr sch&#xF6;ne und kreativ gestaltete Dose!&lt;br /&gt;&lt;br /&gt;Viel Erfolg weiterhin im Kampf gegen das &quot;Dings&quot; :-)</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="1688400223">
+      <groundspeak:date>2012-05-30T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="1356983771">merle &amp; phoebe</groundspeak:finder>
+      <groundspeak:text encoded="False">Unser &quot;Abschlusscache&quot; der heutigen Runde in Schlo&#xDF;-Holte und Umgebung. Nach ein paar Minuten drum herum suchen, da das GPS durch die B&#xE4;ume irritiert war, konnten wir letztlich doch noch den richtigen Griff machen. Sehr sch&#xF6;n gemachter Cache und toll getarnt.&lt;br /&gt;&lt;br /&gt;Da kann der &quot;Dings&quot; sich warm anziehen.&lt;br /&gt;&lt;br /&gt;DfdC</groundspeak:text>
+    </groundspeak:log>
+    <groundspeak:log id="3560290342">
+      <groundspeak:date>2012-05-20T07:00:00.000Z</groundspeak:date>
+      <groundspeak:type>Found it</groundspeak:type>
+      <groundspeak:finder id="4235785866">knaex</groundspeak:finder>
+      <groundspeak:text encoded="False">Nach kurzer Orientierung problemlos gefunden ... TFTC</groundspeak:text>
+    </groundspeak:log>
+  </groundspeak:logs>
+  <groundspeak:travelbugs></groundspeak:travelbugs>
+  </groundspeak:cache>
+</wpt>
+</gpx>

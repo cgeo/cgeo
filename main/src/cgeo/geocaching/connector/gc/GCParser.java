@@ -522,35 +522,32 @@ public abstract class GCParser {
 
         // cache spoilers
         try {
-            final String spoilers = BaseUtils.getMatch(page, GCConstants.PATTERN_SPOILERS, false, null);
-            if (null != spoilers) {
-                if (CancellableHandler.isCancelled(handler)) {
-                    return null;
+            if (CancellableHandler.isCancelled(handler)) {
+                return null;
+            }
+            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
+
+            final Matcher matcherSpoilersInside = GCConstants.PATTERN_SPOILER_IMAGE.matcher(page);
+
+            while (matcherSpoilersInside.find()) {
+                // the original spoiler URL (include .../display/... contains a low-resolution image
+                // if we shorten the URL we get the original-resolution image
+                String url = matcherSpoilersInside.group(1).replace("/display", "");
+
+                String title = null;
+                if (matcherSpoilersInside.group(2) != null) {
+                    title = matcherSpoilersInside.group(2);
                 }
-                CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
-
-                final Matcher matcherSpoilersInside = GCConstants.PATTERN_SPOILERSINSIDE.matcher(spoilers);
-
-                while (matcherSpoilersInside.find()) {
-                    // the original spoiler URL (include .../display/... contains a low-resolution image
-                    // if we shorten the URL we get the original-resolution image
-                    String url = matcherSpoilersInside.group(1).replace("/display", "");
-
-                    String title = null;
-                    if (matcherSpoilersInside.group(2) != null) {
-                        title = matcherSpoilersInside.group(2);
-                    }
-                    String description = null;
-                    if (matcherSpoilersInside.group(3) != null) {
-                        description = matcherSpoilersInside.group(3);
-                    }
-                    final cgImage spoiler = new cgImage(url, title, description);
-
-                    if (cache.getSpoilers() == null) {
-                        cache.setSpoilers(new ArrayList<cgImage>());
-                    }
-                    cache.getSpoilers().add(spoiler);
+                String description = null;
+                if (matcherSpoilersInside.group(3) != null) {
+                    description = matcherSpoilersInside.group(3);
                 }
+                final cgImage spoiler = new cgImage(url, title, description);
+
+                if (cache.getSpoilers() == null) {
+                    cache.setSpoilers(new ArrayList<cgImage>());
+                }
+                cache.getSpoilers().add(spoiler);
             }
         } catch (Exception e) {
             // failed to parse cache spoilers

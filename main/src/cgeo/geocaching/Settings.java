@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.utils.CryptUtils;
@@ -47,6 +48,8 @@ public final class Settings {
     private static final String KEY_SHOW_CAPTCHA = "showcaptcha";
     private static final String KEY_MAP_TRAIL = "maptrail";
     private static final String KEY_LAST_MAP_ZOOM = "mapzoom";
+    private static final String KEY_LAST_MAP_LAT = "maplat";
+    private static final String KEY_LAST_MAP_LON = "maplon";
     private static final String KEY_LIVE_LIST = "livelist";
     private static final String KEY_METRIC_UNITS = "units";
     private static final String KEY_SKIN = "skin";
@@ -805,6 +808,23 @@ public final class Settings {
         });
     }
 
+    public static GeoPointImpl getMapCenter() {
+        return getMapProvider().getMapItemFactory()
+                .getGeoPointBase(new Geopoint(sharedPrefs.getInt(KEY_LAST_MAP_LAT, 0) / 1e6,
+                        sharedPrefs.getInt(KEY_LAST_MAP_LON, 0) / 1e6));
+    }
+
+    public static void setMapCenter(final GeoPointImpl mapViewCenter) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_LAST_MAP_LAT, mapViewCenter.getLatitudeE6());
+                edit.putInt(KEY_LAST_MAP_LON, mapViewCenter.getLongitudeE6());
+            }
+        });
+    }
+
     public static int getMapSource() {
         return sharedPrefs.getInt(KEY_MAP_SOURCE, 0);
     }
@@ -1177,4 +1197,5 @@ public final class Settings {
         // there is currently no Android API to get the file name of the shared preferences
         return cgeoapplication.getInstance().getPackageName() + "_preferences";
     }
+
 }

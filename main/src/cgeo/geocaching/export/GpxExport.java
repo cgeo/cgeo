@@ -33,6 +33,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -160,6 +161,14 @@ class GpxExport extends AbstractExport {
                     gpx.write(StringEscapeUtils.escapeXml(cache.getName()));
                     gpx.write("</desc>");
 
+                    gpx.write("<url>");
+                    gpx.write(cache.getUrl());
+                    gpx.write("</url>");
+
+                    gpx.write("<urlname>");
+                    gpx.write(StringEscapeUtils.escapeXml(cache.getName()));
+                    gpx.write("</urlname>");
+
                     gpx.write("<sym>");
                     gpx.write(cache.isFound() ? "Geocache Found" : "Geocache");
                     gpx.write("</sym>");
@@ -169,7 +178,9 @@ class GpxExport extends AbstractExport {
                     gpx.write("</type>");
 
                     gpx.write("<groundspeak:cache ");
-                    gpx.write("available=\"");
+                    gpx.write("id=\"");
+                    gpx.write(cache.getCacheId());
+                    gpx.write("\" available=\"");
                     gpx.write(!cache.isDisabled() ? "True" : "False");
                     gpx.write("\" archived=\"");
                     gpx.write(cache.isArchived() ? "True" : "False");
@@ -272,35 +283,73 @@ class GpxExport extends AbstractExport {
         }
 
         private void writeWaypoints(final cgCache cache) throws IOException {
+            List<cgWaypoint> waypoints = cache.getWaypoints();
+            List<cgWaypoint> ownWaypoints = new ArrayList<cgWaypoint>(waypoints.size());
+            List<cgWaypoint> originWaypoints = new ArrayList<cgWaypoint>(waypoints.size());
             for (cgWaypoint wp : cache.getWaypoints()) {
-                gpx.write("<wpt lat=\"");
-                final Geopoint coords = wp.getCoords();
-                gpx.write(coords != null ? Double.toString(coords.getLatitude()) : ""); // TODO: check whether is the best way to handle unknown waypoint coordinates
-                gpx.write("\" lon=\"");
-                gpx.write(coords != null ? Double.toString(coords.getLongitude()) : "");
-                gpx.write("\">");
-
-                gpx.write("<name>");
-                gpx.write(StringEscapeUtils.escapeXml(wp.getPrefix()));
-                gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode().substring(2)));
-                gpx.write("</name>");
-
-                gpx.write("<cmt />");
-
-                gpx.write("<desc>");
-                gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
-                gpx.write("</desc>");
-
-                gpx.write("<sym>");
-                gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
-                gpx.write("</sym>");
-
-                gpx.write("<type>Waypoint|");
-                gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
-                gpx.write("</type>");
-
-                gpx.write("</wpt>");
+                if (wp.isUserDefined()) {
+                    ownWaypoints.add(wp);
+                } else {
+                    originWaypoints.add(wp);
+                }
             }
+            int maxPrefix = 0;
+            for (cgWaypoint wp : originWaypoints) {
+                String prefix = wp.getPrefix();
+                try {
+                    maxPrefix = Math.max(Integer.parseInt(prefix), maxPrefix);
+                } catch (NumberFormatException ex) {
+                    Log.e("Unexpected origin waypoint prefix='" + prefix + "'", ex);
+                }
+                writeCacheWaypoint(wp, prefix);
+            }
+            for (cgWaypoint wp : ownWaypoints) {
+                maxPrefix++;
+                String prefix = String.valueOf(maxPrefix);
+                if (prefix.length() == 1) {
+                    prefix = "0" + prefix;
+                }
+                writeCacheWaypoint(wp, prefix);
+            }
+        }
+
+        /**
+         * Writes one waypoint entry for cache waypoint.
+         *
+         * @param cache
+         *            The
+         * @param wp
+         * @param prefix
+         * @throws IOException
+         */
+        private void writeCacheWaypoint(final cgWaypoint wp, final String prefix) throws IOException {
+            gpx.write("<wpt lat=\"");
+            final Geopoint coords = wp.getCoords();
+            gpx.write(coords != null ? Double.toString(coords.getLatitude()) : ""); // TODO: check whether is the best way to handle unknown waypoint coordinates
+            gpx.write("\" lon=\"");
+            gpx.write(coords != null ? Double.toString(coords.getLongitude()) : "");
+            gpx.write("\">");
+
+            gpx.write("<name>");
+            gpx.write(StringEscapeUtils.escapeXml(prefix));
+            gpx.write(StringEscapeUtils.escapeXml(wp.getGeocode().substring(2)));
+            gpx.write("</name>");
+
+            gpx.write("<cmt />");
+
+            gpx.write("<desc>");
+            gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
+            gpx.write("</desc>");
+
+            gpx.write("<sym>");
+            gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
+            gpx.write("</sym>");
+
+            gpx.write("<type>Waypoint|");
+            gpx.write(StringEscapeUtils.escapeXml(wp.getWaypointType().toString())); //TODO: Correct identifier string
+            gpx.write("</type>");
+
+            gpx.write("</wpt>");
         }
 
         private void writeLogs(final cgCache cache) throws IOException {

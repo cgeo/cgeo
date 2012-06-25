@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -14,6 +15,7 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.test.Compare;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.test.suitebuilder.annotation.MediumTest;
@@ -27,6 +29,21 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(result);
         assertTrue(result.isEmpty());
         assertEquals(StatusCode.UNPUBLISHED_CACHE, result.getError());
+    }
+
+    public void testOwnCache() {
+        final String page = getFileContent(R.raw.own_cache);
+        SearchResult result = GCParser.parseCacheFromText(page, null);
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+        final cgCache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+        assertNotNull(cache);
+        assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
+        assertEquals(1, cache.getSpoilers().size());
+        final cgImage spoiler = cache.getSpoilers().get(0);
+        assertEquals("http://img.geocaching.com/cache/large/3f9365c3-f55c-4e55-9992-ee0e5175712c.jpg", spoiler.getUrl());
+        assertEquals("SPOILER", spoiler.getTitle());
+        assertNull(spoiler.getDescription());
     }
 
     private static cgCache createCache(int index) {
