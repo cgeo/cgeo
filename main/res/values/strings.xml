@@ -1077,6 +1077,8 @@
     · Show as list from live map corrected to display the correct caches\n
     · GPX import/export compatability improvements\n
     · Use last known location on startup\n
+    · Show spoiler images for owned caches\n
+    · Sort file names in GPX import list\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=7&amp;state=closed">Detailed list of all changes</a>\n
     \n
