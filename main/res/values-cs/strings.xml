@@ -269,8 +269,8 @@
   <!-- about -->
   <string name="about_changelog">Změny</string>
   <string name="about_donate">Podpora vývoje</string>
-  <string name="about_netail">Detaily</string>
-  <string name="about_donation_more">Podpořte vývoj</string>
+  <string name="about_detail">Detaily</string>
+  <string name="about_donation_more">Podpořte\nvývoj</string>
   <string name="about_contributors">Přispěvatelé</string>
 
   <!-- init -->
