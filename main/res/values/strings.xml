@@ -1061,6 +1061,10 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next maintenance release</b>\n\n
+    <b>Bugfixing:</b>\n
+    · Corrected owner name display with special characters\n
+    · Speed improvement and battery saving for mapsforge 0.3.0 maps\n\n\n
     <b>2012.06.18</b>\n\n
     <b>Bugfixing:</b>\n
     · Save for offline menu-option is shown again\n
