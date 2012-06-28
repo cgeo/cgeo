@@ -41,7 +41,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_FOUND = Pattern.compile("<a id=\"ctl00_ContentBody_hlFoundItLog\"[^<]*<img src=\".*/images/stockholm/16x16/check\\.gif\"[^>]*>[^<]*</a>[^<]*</p>");
     public final static Pattern PATTERN_FOUND_ALTERNATIVE = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"");
     public final static Pattern PATTERN_OWNER = Pattern.compile("<div id=\"ctl00_ContentBody_mcd1\">[^<]+<a href=\"[^\"]+\">([^<]+)</a></div>");
-    public final static Pattern PATTERN_TYPE = Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+?)\" title=\"[^\"]+\" width=\"32\" height=\"32\"");
+    public final static Pattern PATTERN_TYPE = Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+?)\" title=\"[^\"]+\" />");
     public final static Pattern PATTERN_HIDDEN = Pattern.compile("<div id=\"ctl00_ContentBody_mcd2\">\\W*Hidden[\\s:]*([^<]+?)</div>");
     public final static Pattern PATTERN_HIDDENEVENT = Pattern.compile("Event\\s*Date\\s*:\\s*([^<]+)<div id=\"calLinks\">", Pattern.DOTALL);
     public final static Pattern PATTERN_FAVORITE = Pattern.compile("<div id=\"pnlFavoriteCache\">"); // without 'class="hideMe"' inside the tag !
