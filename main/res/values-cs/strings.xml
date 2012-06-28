@@ -34,7 +34,7 @@
   <string name="gps">Gps cache exhibit</string>
 
   <!-- waypoints -->
-  <string name="wp_final">cíl</string>
+  <string name="wp_final">Cíl</string>
   <string name="wp_stage">část multi-keše</string>
   <string name="wp_puzzle">otázka</string>
   <string name="wp_pkg">parkoviště</string>
@@ -184,34 +184,34 @@
   <string name="menu_scan_geo">Naskenuj geokód</string>
 
   <!-- main screen -->
-  <string name="live_map_button">aktivní mapa</string>
-  <string name="caches_nearby_button">nejbližší</string>
-  <string name="advanced_search_button">hledání</string>
-  <string name="stored_caches_button">uložené</string>
-  <string name="any_button">cíl</string>
+  <string name="live_map_button">Aktivní mapa</string>
+  <string name="caches_nearby_button">Nejbližší</string>
+  <string name="advanced_search_button">Hledání</string>
+  <string name="stored_caches_button">Uložené</string>
+  <string name="any_button">Cíl</string>
   <string name="unknown_scan">Nenašel jsem žádný geokód ve skenu.</string>
 
   <!-- caches -->
-  <string name="caches_no_cache">žádná keš</string>
-  <string name="caches_more_caches">další keše</string>
+  <string name="caches_no_cache">Žádná keš</string>
+  <string name="caches_more_caches">Další keše</string>
   <string name="caches_more_caches_no">žádné další keše</string>
-  <string name="caches_downloading">stahuji keše…\nETA:</string>
+  <string name="caches_downloading">Stahuji keše…\nETA:</string>
   <string name="caches_eta_ltm">méně než minutu</string>
   <string name="caches_eta_mins">minuty</string>
   <string name="caches_eta_min">minuta</string>
   <string name="caches_store_offline">Uložit pro offline</string>
-  <string name="caches_store_selected">uložit vybrané</string>
-  <string name="caches_on_map">zobrazit na mapě</string>
+  <string name="caches_store_selected">Uložit vybrané</string>
+  <string name="caches_on_map">Zobrazit na mapě</string>
   <string name="caches_select_mode">Mód výběru</string>
   <string name="caches_select_mode_exit">Opustit mód výběru</string>
   <string name="caches_nearby">Blízké</string>
-  <string name="caches_drop_selected">odebrat vybrané</string>
+  <string name="caches_drop_selected">Odebrat vybrané</string>
   <string name="caches_drop_selected_ask">Opravdu chcete smazat vybrané keše z přístroje?</string>
-  <string name="caches_drop_all">odebrat vše</string>
+  <string name="caches_drop_all">Odebrat vše</string>
   <string name="caches_drop_all_ask">Opravdu chcete smazat všechny keše z přístroje?</string>
-  <string name="caches_drop_stored">odebrat uložené</string>
-  <string name="caches_refresh_selected">aktualizovat vybrané</string>
-  <string name="caches_refresh_all">aktualizovat vše</string>
+  <string name="caches_drop_stored">Odebrat uložené</string>
+  <string name="caches_refresh_selected">Aktualizovat vybrané</string>
+  <string name="caches_refresh_all">Aktualizovat vše</string>
   <string name="caches_sort_name">Jméno</string>
   <string name="caches_sort_gccode">GC-Kód</string>
   <string name="caches_sort_rating">Hodnocení</string>
@@ -277,10 +277,10 @@
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">gcvote.com</string>
   <string name="init_go4cache">Go 4 Cache</string>
-  <string name="init_twitter">twitter</string>
-  <string name="init_username">uživatelské jméno</string>
-  <string name="init_password">heslo</string>
-  <string name="init_passvote">heslo</string>
+  <string name="init_twitter">Twitter</string>
+  <string name="init_username">Uživatelské jméno</string>
+  <string name="init_password">Heslo</string>
+  <string name="init_passvote">Heslo</string>
   <string name="init_login">Zkontrolovat</string>
   <string name="init_login_popup">Přihlášení</string>
   <string name="init_login_popup_working">Přihlašování na Geocaching.com…</string>
@@ -290,7 +290,7 @@
   <string name="init_go4cache_connect">Připojit ke Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizovat c:geo</string>
   <string name="init_twitter_publish">Nový status při nálezu keše</string>
-  <string name="init_signature">podpis</string>
+  <string name="init_signature">Podpis</string>
   <string name="init_signature_help_button">Návod</string>
   <string name="init_signature_help_title">Tipy a triky k podpisu</string>
   <string name="init_signature_help_text">Zde vložte svůj podpis k použití při logování.\nSpeciální řetězce, které můžete použít: [DATE] , [TIME], [DATETIME], [USER] a [NUMBER].\nTyto budou nahrazeny v okamžiku vložení podpisu do logu.</string>
@@ -328,10 +328,10 @@
   <string name="init_clear">smazat přihlašovací údaje</string>
   <string name="init_cleared">c:geo smazalo přihlašovací údaje.</string>
   <string name="init_backup">Záloha</string>
-  <string name="init_backup_backup">Záloha</string>
+  <string name="init_backup_backup">Zálohovat</string>
   <string name="init_backup_running">Vytvářím zálohu databáze keší…</string>
   <string name="init_backup_note">Tato funkce nezálohuje nastavení a přihlašovací údaje. Zálohuje a obnovuje pouze databázi keší. Vaše přihlašovací údaje nikdy neopustí c:geo.</string>
-  <string name="init_backup_restore">Obnova</string>
+  <string name="init_backup_restore">Obnovit</string>
   <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
   <string name="init_backup_failed">Záloha databáze c:geo selhala.</string>
   <string name="init_backup_unnecessary">Databáze je prázná, není třeba jí zálohovat.</string>
@@ -390,7 +390,7 @@
   <string name="cache_offline_drop">Smazat</string>
   <string name="cache_offline_store">Uložit</string>
   <string name="cache_offline_stored">Uložena v zařízení</string>
-  <string name="cache_offline_not_ready">není připravena\npro použití offline</string>
+  <string name="cache_offline_not_ready">Není připravena\npro použití offline</string>
   <string name="cache_offline_time_about">přibližně před</string>
   <string name="cache_offline_time_mins">minutami</string>
   <string name="cache_offline_time_mins_few">několika minutami</string>
@@ -417,14 +417,14 @@
   <string name="cache_favpoint_on">Tato keš je jedna z vašich oblíbených.</string>
   <string name="cache_favpoint_not_on">Tato keš nepatří mezi vaše oblíbené.</string>
   <string name="cache_favpoint_add">Přidat k oblíbeným</string>
-  <string name="cache_favpoint_remove">Odstraniz z oblíbených</string>
+  <string name="cache_favpoint_remove">Odstranit z oblíbených</string>
 
   <string name="cache_waypoints">Body trasy</string>
   <plurals name="waypoints">
       <item quantity="one">1 bod trasy</item>
       <item quantity="other">%d bodů trasy</item>
   </plurals>
-  <string name="cache_waypoints_add">přidat bod</string>
+  <string name="cache_waypoints_add">Přidat bod</string>
 
   <string name="cache_hint">nápověda</string>
   <string name="cache_logs">logbook</string>
@@ -433,7 +433,7 @@
   <string name="cache_dialog_offline_save_message">Ukládám keš pro použití offline…</string>
   <string name="cache_dialog_offline_drop_title">offline</string>
   <string name="cache_dialog_offline_drop_message">Odstraňuji keš z paměti zařízení…</string>
-  <string name="cache_dialog_refresh_title">aktualizace</string>
+  <string name="cache_dialog_refresh_title">Aktualizace</string>
   <string name="cache_dialog_refresh_message">Aktualizuji detaily keše…</string>
   <string name="cache_menu_navigate">Navigovat</string>
   <string name="cache_menu_tbt">Turn-by-turn</string>
@@ -502,9 +502,9 @@
   <!-- waypoint -->
   <string name="waypoint_title">Bod trasy</string>
   <string name="waypoint_custom">vlastní</string>
-  <string name="waypoint_my_coordinates">aktuální poloha</string>
-  <string name="waypoint_bearing">směr</string>
-  <string name="waypoint_distance">vzdálenost</string>
+  <string name="waypoint_my_coordinates">Aktuální poloha</string>
+  <string name="waypoint_bearing">Směr</string>
+  <string name="waypoint_distance">Vzdálenost</string>
   <string name="waypoint_name">Název</string>
   <string name="waypoint_edit">Upravit</string>
   <string name="waypoint_delete">Smazat</string>
@@ -520,8 +520,8 @@
   <!-- map -->
   <string name="map_map">Mapa</string>
   <string name="map_live">Aktivní mapa</string>
-  <string name="map_view_map">Pohled do mapy</string>
-  <string name="map_trail_show">Zobrazit záznam trasy</string>
+  <string name="map_view_map">Vybrat typ mapy</string>
+  <string name="map_trail_show">Zobraziy záznam trasy</string>
   <string name="map_trail_hide">Skrýt záznam trasy</string>
   <string name="map_live_enable">Povolit aktivní mapu</string>	
   <string name="map_live_disable">Zakázat aktivní mapu</string>
@@ -547,8 +547,8 @@
   <string name="search_tb">Trackable</string>
   <string name="search_tb_hint">Identifikace trackable</string>
   <string name="search_tb_button">Vyhledávání trackable</string>
-  <string name="search_destination">cíl</string>
-  <string name="search_direction_rel">od této polohy</string>
+  <string name="search_destination">Cíl</string>
+  <string name="search_direction_rel">Od této polohy</string>
   <string name="search_address_started">vyhledávání míst</string>
   <string name="search_address_result">místa nalezena</string>
 
@@ -574,9 +574,9 @@
   <string name="navigation">Navigace</string>
   <string name="compass_title">Kompas</string>
   <string name="use_gps">Použít GPS</string>
-  <string name="use_compass">použít kompas</string>
-  <string name="destination_select">vyberte cíl</string>
-  <string name="destination_set">cíl nastaven</string>
+  <string name="use_compass">Použít kompas</string>
+  <string name="destination_select">Vyberte cíl</string>
+  <string name="destination_set">Cíl nastaven</string>
 
   <!-- license -->
   <string name="license">Licence</string>
