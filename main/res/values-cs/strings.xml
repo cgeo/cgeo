@@ -8,6 +8,7 @@
   <string name="detail">Detail</string>
   <string name="search">vyhledávání</string>
   <string name="settings">Nastavení</string>
+  <string name="helpers">Užitečné aplikace</string>
   <string name="about">O aplikaci</string>
   <string name="helper">Chcete se něco dovědět o <b>c:geo</b>?\nPodívejte se na snadno čitelný manuál.</string>
   <string name="latitude">Zeměpisná šířka</string>
@@ -183,15 +184,16 @@
 
   <!-- location service -->
   <string name="loc_last">poslední známá</string>
-  <string name="loc_net">síť</string>
-  <string name="loc_gps">gps</string>
-  <string name="loc_sat">sat</string>
-  <string name="loc_trying">zjišťuji pozici</string>
-  <string name="loc_no_addr">neznámá adresa</string>
+  <string name="loc_net">Síť</string>
+  <string name="loc_gps">GPS</string>
+  <string name="loc_sat">Sat</string>
+  <string name="loc_trying">Zjišťuji pozici</string>
+  <string name="loc_no_addr">Neznámá adresa</string>
   <string name="loc_gps_disabled">GPS zakázána</string>
 
   <!-- standard menu -->
   <string name="menu_about">O aplikaci</string>
+  <string name="menu_helpers">Pomocné programy</string>
   <string name="menu_settings">Nastavení</string>
   <string name="menu_history">Historie</string>
   <string name="menu_filter">Filtr</string>
@@ -207,38 +209,49 @@
 
   <!-- caches -->
   <string name="caches_no_cache">Žádná keš</string>
-  <string name="caches_more_caches">Další keše</string>
+  <string name="caches_more_caches">Načíst další keše</string>
   <string name="caches_more_caches_no">žádné další keše</string>
+  <string name="caches_more_caches_loading">Načítám keše…</string>
+  <string name="caches_more_caches_currently">aktuálně</string>
   <string name="caches_downloading">Stahuji keše…\nETA:</string>
   <string name="caches_eta_ltm">méně než minutu</string>
   <string name="caches_eta_mins">minuty</string>
   <string name="caches_eta_min">minuta</string>
   <string name="caches_store_offline">Uložit pro offline</string>
   <string name="caches_store_selected">Uložit vybrané</string>
+  <string name="caches_history">Historie</string>
   <string name="caches_on_map">Zobrazit na mapě</string>
+  <string name="caches_sort">Třídit</string>
+  <string name="caches_sort_title">Setřídit dle</string>
+  <string name="caches_sort_distance">Vzdálenosti</string>
+  <string name="caches_sort_difficulty">Obtížnosti</string>
+  <string name="caches_sort_terrain">Terénu</string>
+  <string name="caches_sort_size">Velikosti</string>
+  <string name="caches_sort_favorites">Oblíbenosti</string>
+  <string name="caches_sort_name">Jména</string>
+  <string name="caches_sort_gccode">GC-kódu</string>
+  <string name="caches_sort_rating">Hodnocení</string>
+  <string name="caches_sort_vote">Hlasů (vlastní hodnocení)</string>
+  <string name="caches_sort_inventory">Počtu položek v inventáři</string>
+  <string name="caches_sort_date_hidden">Data schování</string>
+  <string name="caches_sort_date_logged">Data zápisu</string>
+  <string name="caches_sort_finds">Počtu nálezů</string>
+  <string name="caches_sort_state">Stavu</string>
+  <string name="caches_sort_storage">Data uložení do zařízení</string>
   <string name="caches_select_mode">Mód výběru</string>
   <string name="caches_select_mode_exit">Opustit mód výběru</string>
-  <string name="caches_nearby">Blízké</string>
-  <string name="caches_drop_selected">Odebrat vybrané</string>
-  <string name="caches_drop_selected_ask">Opravdu chcete smazat vybrané keše z přístroje?</string>
-  <string name="caches_drop_all">Odebrat vše</string>
-  <string name="caches_drop_all_ask">Opravdu chcete smazat všechny keše z přístroje?</string>
-  <string name="caches_drop_stored">Odebrat uložené</string>
-  <string name="caches_refresh_selected">Aktualizovat vybrané</string>
-  <string name="caches_refresh_all">Aktualizovat vše</string>
-  <string name="caches_sort_name">Jméno</string>
-  <string name="caches_sort_gccode">GC-Kód</string>
-  <string name="caches_sort_rating">Hodnocení</string>
-  <string name="caches_sort_vote">Hlasy (vaše vlastní hodnocení)</string>
-  <string name="caches_sort_inventory">Počet položek v inventáři</string>
-  <string name="caches_sort_date_hidden">Datum</string>
-  <string name="caches_sort_finds">Počet nálezů</string>
-  <string name="caches_sort_state">Stav</string>
-  <string name="caches_sort_storage">Datum uložení do zařízení</string>
   <string name="caches_select_invert">Invertuj výběr</string>
+  <string name="caches_nearby">Blízké</string>
   <string name="caches_manage">Správa</string>
+  <string name="caches_drop_selected">Smazat vybrané</string>
+  <string name="caches_drop_selected_ask">Opravdu chcete smazat vybrané keše z přístroje?</string>
+  <string name="caches_drop_all">Smazat vše</string>
+  <string name="caches_drop_all_ask">Opravdu chcete smazat všechny keše z přístroje?</string>
+  <string name="caches_drop_stored">Smazat uložené</string>
   <string name="caches_drop_progress">Mažu keše</string>
   <string name="caches_drop_all_and_list">Vymaž všechny a zruš seznam</string>
+  <string name="caches_refresh_selected">Aktualizovat vybrané</string>
+  <string name="caches_refresh_all">Aktualizovat vše</string>
   <string name="caches_move_selected">Přesuň vybrané</string>
   <string name="caches_move_all">Přesuň všechny</string>
   <string name="caches_map_locus">Locus</string>
@@ -281,6 +294,7 @@
   <string name="list_dialog_rename">Přejmenovat</string>
 
   <!-- about -->
+  <string name="about_version">Verze</string>
   <string name="about_changelog">Změny</string>
   <string name="about_donate">Podpora vývoje</string>
   <string name="about_detail">Detaily</string>
@@ -370,6 +384,9 @@
   <string name="init_debug_title">Ladicí informace</string>
   <string name="init_debug_note">c:geo může generovat mnoho ladicích informací. Tyto nejsou pro běžné uživatele užitečné. Pro vývojáře hledajícího chybu můžou mít tato data význam, v takovém případě váš požádají povolit tuto volbu a po zopakování chyby jim informace zašlete v souboru.</string>
   <string name="init_debug">Generovat ladicí informace</string>
+  <string name="init_dbonsdcard_title">Umístění databáze</string>
+  <string name="init_dbonsdcard_note">Databáze c:geo může být umístěna na SD kartě. Ušetříte tím část interní paměti, avšak za cenu případného snížení rychlosti aplikace. Bez SD karty aplikace nebude následně fungovat.</string>
+  <string name="init_dbonsdcard">Databáze na SD kartě</string>
 
   <string name="init_sendToCgeo_name">Jméno vašeho zařízení:</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožnuje stahování keší pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečtěte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registraci proveďte pouze pokud potřebujete send2cgeo. c:geo bude normálně fungovat i bez registrace.</string>
