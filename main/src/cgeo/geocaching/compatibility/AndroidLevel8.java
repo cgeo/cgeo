@@ -2,10 +2,12 @@ package cgeo.geocaching.compatibility;
 
 import cgeo.geocaching.utils.Log;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.view.Display;
 
+@TargetApi(8)
 public class AndroidLevel8 implements AndroidLevel8Interface {
 
     @Override
