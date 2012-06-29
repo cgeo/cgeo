@@ -107,6 +107,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(WaypointType.TRAILHEAD, GPXParser.convertWaypointSym2Type("Trailhead"));
         assertEquals(WaypointType.FINAL, GPXParser.convertWaypointSym2Type("Final location"));
         assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("Reference point"));
+
+        assertEquals(WaypointType.PARKING, GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n()));
     }
 
     private static void assertGc31j2h(final cgCache cache) {

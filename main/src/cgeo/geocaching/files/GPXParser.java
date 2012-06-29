@@ -790,9 +790,17 @@ public abstract class GPXParser extends FileParser {
             return WaypointType.TRAILHEAD;
         } else if ("final location".equalsIgnoreCase(sym)) {
             return WaypointType.FINAL;
-        } else {
-            return WaypointType.WAYPOINT;
         }
+        // this is not fully correct, but lets also look for localized waypoint types
+        for (WaypointType waypointType : WaypointType.ALL_TYPES_EXCEPT_OWN) {
+            final String localized = waypointType.getL10n();
+            if (StringUtils.isNotEmpty(localized)) {
+                if (localized.equalsIgnoreCase(sym)) {
+                    return waypointType;
+                }
+            }
+        }
+        return WaypointType.WAYPOINT;
     }
 
     private void findGeoCode(final String input) {
