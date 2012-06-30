@@ -27,6 +27,7 @@ public class Progress {
             dialog = ProgressDialog.show(context, title, message, indeterminate, cancelMessage != null);
             dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             dialog.setProgress(0);
+            dialog.setCanceledOnTouchOutside(false);
             this.progress = 0;
             if (cancelMessage != null) {
                 dialog.setCancelMessage(cancelMessage);
@@ -38,6 +39,7 @@ public class Progress {
         if (dialog == null) {
             dialog = new ProgressDialog(context);
             dialog.setProgress(0);
+            dialog.setCanceledOnTouchOutside(false);
             this.progress = 0;
             dialog.setTitle(title);
             dialog.setMessage(message);
