@@ -23,7 +23,7 @@ public class GeopointFormatter
         /** Example: "N 10° 12.345 W 5° 12.345" */
         LAT_LON_DECMINUTE_RAW,
 
-        /** Example: "N 10° 12' 34" W 5° 12' 34"" */
+        /** Example: "N 10° 12' 34" W 5° 12' 34" */
         LAT_LON_DECSECOND,
 
         /** Example: "-0.123456" (unlocalized latitude) */
