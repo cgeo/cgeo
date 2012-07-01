@@ -2131,7 +2131,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                     ArrayList<String> labels = new ArrayList<String>(sortedLogCounts.size());
                     for (Entry<LogType, Integer> pair : sortedLogCounts) {
-                        labels.add(pair.getValue().intValue() + "× " + pair.getKey().getL10n());
+                        labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
                     }
 
                     final TextView countView = new TextView(CacheDetailActivity.this);
