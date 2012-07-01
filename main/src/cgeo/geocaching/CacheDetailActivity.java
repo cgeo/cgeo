@@ -787,7 +787,8 @@ public class CacheDetailActivity extends AbstractActivity {
                     ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
                     ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
                     ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
-                    ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription())
+                    ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription()),
+                    ICalendar.PARAM_START_TIME_MINUTES, StringUtils.defaultString(cache.guessEventTimeMinutes())
                     );
 
             startActivity(new Intent(ICalendar.INTENT,
