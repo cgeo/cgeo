@@ -335,10 +335,12 @@ class GpxExport extends AbstractExport {
             gpx.write(StringEscapeUtils.escapeXml(wp.getGeocode().substring(2)));
             gpx.write("</name>");
 
-            gpx.write("<cmt />");
+            gpx.write("<cmt>");
+            gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
+            gpx.write("</cmt>");
 
             gpx.write("<desc>");
-            gpx.write(StringEscapeUtils.escapeXml(wp.getNote()));
+            gpx.write(StringEscapeUtils.escapeXml(wp.getName()));
             gpx.write("</desc>");
 
             gpx.write("<sym>");
