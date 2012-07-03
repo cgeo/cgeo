@@ -19,7 +19,8 @@ public class MemorySubjectTest extends AndroidTestCase {
     private MemorySubject<Integer> memorySubject;
 
     @Override
-    public void setUp() {
+    public void setUp() throws Exception {
+        super.setUp();
         observer = new Observer();
         memorySubject = new MemorySubject<Integer>();
     }

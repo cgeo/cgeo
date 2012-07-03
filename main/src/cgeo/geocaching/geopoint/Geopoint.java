@@ -583,7 +583,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     private static double getSecRaw(final double deg) {
-        return (Math.abs(deg) * 3600) % 3600;
+        return (Math.abs(deg) * 3600) % 60;
     }
 
     private static String addZeros(final int value, final int len) {

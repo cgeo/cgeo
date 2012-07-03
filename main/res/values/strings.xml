@@ -608,7 +608,8 @@
   <string name="cache_image_open_file">Open as file</string>
   <string name="cache_image_open_browser">Open in browser</string>
   <string name="cache_share_field">Share</string>
-      
+  <string name="cache_time_full_hours">o\'clock</string>
+  
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>
   <string name="file_searching_sdcard_in">No files found in default folders:\n%1$s\n\nSearching whole SD card for files:\n</string>
@@ -1076,9 +1077,11 @@
     <b>Bugfixing:</b>\n
     · Show as list from live map corrected to display the correct caches\n
     · GPX import/export compatability improvements\n
+    · Export URLs in GPX export\n
     · Use last known location on startup\n
     · Show spoiler images for owned caches\n
     · Sort file names in GPX import list\n
+    · Corrected owner name display with special characters\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=7&amp;state=closed">Detailed list of all changes</a>\n
     \n

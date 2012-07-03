@@ -1550,4 +1550,45 @@ public class cgCache implements ICache, IWaypoint {
         return listId >= StoredList.STANDARD_LIST_ID;
     }
 
+    /**
+     * guess an event start time from the description
+     *
+     * @return start time in minutes after midnight
+     */
+    public String guessEventTimeMinutes() {
+        if (!isEventCache()) {
+            return null;
+        }
+        // 12:34
+        final Pattern time = Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b");
+        final Matcher matcher = time.matcher(getDescription());
+        while (matcher.find()) {
+            try {
+                final int hours = Integer.valueOf(matcher.group(1));
+                final int minutes = Integer.valueOf(matcher.group(2));
+                if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
+                    return String.valueOf(hours * 60 + minutes);
+                }
+            } catch (NumberFormatException e) {
+                // cannot happen, but static code analysis doesn't know
+            }
+        }
+        // 12 o'clock
+        final String hourLocalized = cgeoapplication.getInstance().getString(R.string.cache_time_full_hours);
+        if (StringUtils.isNotBlank(hourLocalized)) {
+            final Pattern fullHours = Pattern.compile("\\b(\\d{1,2})\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE);
+            final Matcher matcherHours = fullHours.matcher(getDescription());
+            if (matcherHours.find()) {
+                try {
+                    final int hours = Integer.valueOf(matcherHours.group(1));
+                    if (hours >= 0 && hours < 24) {
+                        return String.valueOf(hours * 60);
+                    }
+                } catch (NumberFormatException e) {
+                    // cannot happen, but static code analysis doesn't know
+                }
+            }
+        }
+        return null;
+    }
 }

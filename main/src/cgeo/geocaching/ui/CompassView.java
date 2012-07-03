@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
+import android.util.FloatMath;
 import android.view.View;
 
 public class CompassView extends View {
@@ -136,9 +137,9 @@ public class CompassView extends View {
         // If the difference is smaller than 1 degree, do nothing as it
         // causes the arrow to vibrate. Round away from 0.
         if (diff > 1.0) {
-            offset = (float) Math.ceil(diff / 10.0); // for larger angles, rotate faster
+            offset = FloatMath.ceil(diff / 10.0f); // for larger angles, rotate faster
         } else if (diff < 1.0) {
-            offset = (float) Math.floor(diff / 10.0);
+            offset = FloatMath.floor(diff / 10.0f);
         }
 
         return AngleUtils.normalize(actual + offset);

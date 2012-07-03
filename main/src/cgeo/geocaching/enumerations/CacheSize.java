@@ -36,6 +36,8 @@ public enum CacheSize {
         for (CacheSize cs : values()) {
             mapping.put(cs.id.toLowerCase(), cs);
         }
+        // add medium as additional string for Regular
+        mapping.put("medium", CacheSize.REGULAR);
         FIND_BY_ID = Collections.unmodifiableMap(mapping);
     }
 

@@ -255,8 +255,13 @@ public abstract class GPXParser extends FileParser {
             public void start(Attributes attrs) {
                 try {
                     if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
-                        cache.setCoords(new Geopoint(Double.valueOf(attrs.getValue("lat")),
-                                Double.valueOf(attrs.getValue("lon"))));
+                        final String latitude = attrs.getValue("lat");
+                        final String longitude = attrs.getValue("lon");
+                        // latitude and longitude are required attributes, but we export them empty for waypoints without coordinates
+                        if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
+                            cache.setCoords(new Geopoint(Double.valueOf(latitude),
+                                    Double.valueOf(longitude)));
+                        }
                     }
                 } catch (Exception e) {
                     Log.w("Failed to parse waypoint's latitude and/or longitude.");
@@ -300,8 +305,7 @@ public abstract class GPXParser extends FileParser {
                     result.put(key, cache);
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
-                        && cache.getCoords() != null
-                        && StringUtils.contains(type, "waypoint")) {
+                        && StringUtils.containsIgnoreCase(type, "waypoint")) {
                     addWaypointToCache();
                 }
 
@@ -790,9 +794,17 @@ public abstract class GPXParser extends FileParser {
             return WaypointType.TRAILHEAD;
         } else if ("final location".equalsIgnoreCase(sym)) {
             return WaypointType.FINAL;
-        } else {
-            return WaypointType.WAYPOINT;
         }
+        // this is not fully correct, but lets also look for localized waypoint types
+        for (WaypointType waypointType : WaypointType.ALL_TYPES_EXCEPT_OWN) {
+            final String localized = waypointType.getL10n();
+            if (StringUtils.isNotEmpty(localized)) {
+                if (localized.equalsIgnoreCase(sym)) {
+                    return waypointType;
+                }
+            }
+        }
+        return WaypointType.WAYPOINT;
     }
 
     private void findGeoCode(final String input) {

@@ -787,7 +787,8 @@ public class CacheDetailActivity extends AbstractActivity {
                     ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
                     ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
                     ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
-                    ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription())
+                    ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription()),
+                    ICalendar.PARAM_START_TIME_MINUTES, StringUtils.defaultString(cache.guessEventTimeMinutes())
                     );
 
             startActivity(new Intent(ICalendar.INTENT,
@@ -1364,9 +1365,9 @@ public class CacheDetailActivity extends AbstractActivity {
             if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
                 TextView ownerView = details.add(R.string.cache_owner, "");
                 if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
-                    ownerView.setText(Html.fromHtml(cache.getOwnerDisplayName()), TextView.BufferType.SPANNABLE);
+                    ownerView.setText(cache.getOwnerDisplayName(), TextView.BufferType.SPANNABLE);
                 } else { // OwnerReal guaranteed to be not blank based on above
-                    ownerView.setText(Html.fromHtml(cache.getOwnerUserId()), TextView.BufferType.SPANNABLE);
+                    ownerView.setText(cache.getOwnerUserId(), TextView.BufferType.SPANNABLE);
                 }
                 ownerView.setOnClickListener(new OwnerActionsClickListener());
             }
@@ -2109,43 +2110,33 @@ public class CacheDetailActivity extends AbstractActivity {
             view = (ListView) getLayoutInflater().inflate(R.layout.cacheview_logs, null);
 
             // log count
-            if (cache.getLogCounts() != null) {
-                final StringBuilder text = new StringBuilder(200);
-                text.append(res.getString(R.string.cache_log_types));
-                text.append(": ");
-
-                // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>();
-                for (Entry<LogType, Integer> entry : cache.getLogCounts().entrySet()) {
-                    sortedLogCounts.add(entry); // don't add these entries using addAll(), the iterator in the EntrySet can go wrong (see Findbugs)
-                }
-
-                Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
-
-                    @Override
-                    public int compare(Entry<LogType, Integer> logCountItem1, Entry<LogType, Integer> logCountItem2) {
-                        return logCountItem1.getKey().compareTo(logCountItem2.getKey());
-                    }
-                });
-
-                boolean showLogCounter = false;
-                for (Entry<LogType, Integer> pair : sortedLogCounts) {
-                    String logTypeLabel = pair.getKey().getL10n();
+            final Map<LogType, Integer> logCounts = cache.getLogCounts();
+            if (logCounts != null) {
+                final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>(logCounts.size());
+                for (Entry<LogType, Integer> entry : logCounts.entrySet()) {
                     // it may happen that the label is unknown -> then avoid any output for this type
-                    if (logTypeLabel != null && pair.getKey() != LogType.PUBLISH_LISTING) {
-                        if (showLogCounter) {
-                            text.append(", ");
-                        }
-                        text.append(pair.getValue().intValue());
-                        text.append("× ");
-                        text.append(logTypeLabel);
+                    if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getKey().getL10n() != null) {
+                        sortedLogCounts.add(entry);
                     }
-                    showLogCounter = true;
                 }
 
-                if (showLogCounter) {
+                if (sortedLogCounts.size() > 0) {
+                    // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
+                    Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
+
+                        @Override
+                        public int compare(Entry<LogType, Integer> logCountItem1, Entry<LogType, Integer> logCountItem2) {
+                            return logCountItem1.getKey().compareTo(logCountItem2.getKey());
+                        }
+                    });
+
+                    ArrayList<String> labels = new ArrayList<String>(sortedLogCounts.size());
+                    for (Entry<LogType, Integer> pair : sortedLogCounts) {
+                        labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
+                    }
+
                     final TextView countView = new TextView(CacheDetailActivity.this);
-                    countView.setText(text.toString());
+                    countView.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
                     view.addHeaderView(countView, null, false);
                 }
             }

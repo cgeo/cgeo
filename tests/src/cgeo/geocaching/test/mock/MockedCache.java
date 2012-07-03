@@ -8,6 +8,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.BaseUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.core.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,9 +55,11 @@ public abstract class MockedCache implements ICache {
     }
 
     public static String readCachePage(final String geocode) {
+        InputStream is = null;
+        BufferedReader br = null;
         try {
-            final InputStream is = MockedCache.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
-            final BufferedReader br = new BufferedReader(new InputStreamReader(is), 150000);
+            is = MockedCache.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
+            br = new BufferedReader(new InputStreamReader(is), 150000);
 
             final StringBuilder buffer = new StringBuilder();
             String line;
@@ -65,10 +68,12 @@ public abstract class MockedCache implements ICache {
                 buffer.append(line).append('\n');
             }
 
-            br.close();
             return BaseUtils.replaceWhitespace(buffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(is);
+            IOUtils.closeQuietly(br);
         }
         return null;
     }

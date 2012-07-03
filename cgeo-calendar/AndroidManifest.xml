@@ -5,7 +5,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="4" />
+    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="8"/>
 
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />

@@ -15,12 +15,10 @@ public class MapProviderFactory {
     private final static int GOOGLEMAP_BASEID = 30;
     private final static int MFMAP_BASEID = 40;
 
-    private static MapProviderFactory instance = null;
+    private final static MapProvider[] mapProviders;
+    private final static SortedMap<Integer, MapSource> mapSources;
 
-    private final MapProvider[] mapProviders;
-    private SortedMap<Integer, MapSource> mapSources;
-
-    private MapProviderFactory() {
+    static {
         // add GoogleMapProvider only if google api is available in order to support x86 android emulator
         if (isGoogleMapsInstalled()) {
             mapProviders = new MapProvider[] { new GoogleMapProvider(GOOGLEMAP_BASEID), new MapsforgeMapProvider(MFMAP_BASEID) };
@@ -45,29 +43,16 @@ public class MapProviderFactory {
         return googleMaps;
     }
 
-    private static synchronized void initInstance() {
-        if (null == instance) {
-            instance = new MapProviderFactory();
-        }
-    }
-
-    private static MapProviderFactory getInstance() {
-        if (null == instance) {
-            initInstance();
-        }
-        return instance;
-    }
-
     public static SortedMap<Integer, MapSource> getMapSources() {
-        return getInstance().mapSources;
+        return mapSources;
     }
 
     public static boolean isValidSourceId(int sourceId) {
-        return getInstance().mapSources.containsKey(sourceId);
+        return mapSources.containsKey(sourceId);
     }
 
     public static boolean isSameActivity(int sourceId1, int sourceId2) {
-        for (MapProvider mp : getInstance().mapProviders) {
+        for (MapProvider mp : mapProviders) {
             if (mp.isMySource(sourceId1) && mp.isMySource(sourceId2)) {
                 return mp.isSameActivity(sourceId1, sourceId2);
             }
@@ -76,17 +61,17 @@ public class MapProviderFactory {
     }
 
     public static MapProvider getMapProvider(int sourceId) {
-        for (MapProvider mp : getInstance().mapProviders) {
+        for (MapProvider mp : mapProviders) {
             if (mp.isMySource(sourceId)) {
                 return mp;
             }
         }
-        return getInstance().mapProviders[0];
+        return mapProviders[0];
     }
 
     public static int getSourceOrdinalFromId(int sourceId) {
         int sourceOrdinal = 0;
-        for (int key : getInstance().mapSources.keySet()) {
+        for (int key : mapSources.keySet()) {
             if (sourceId == key) {
                 return sourceOrdinal;
             }
@@ -97,20 +82,18 @@ public class MapProviderFactory {
 
     public static int getSourceIdFromOrdinal(int sourceOrdinal) {
         int count = 0;
-        for (int key : getInstance().mapSources.keySet()) {
+        for (int key : mapSources.keySet()) {
             if (sourceOrdinal == count) {
                 return key;
             }
             count++;
         }
-        return getInstance().mapSources.firstKey();
+        return mapSources.firstKey();
     }
 
     public static void addMapviewMenuItems(Menu parentMenu, int groupId, int currentSource) {
-        SortedMap<Integer, MapSource> mapSources = getInstance().mapSources;
-
-        for (int key : mapSources.keySet()) {
-            parentMenu.add(groupId, key, 0, mapSources.get(key).getName()).setCheckable(true).setChecked(key == currentSource);
+        for (Integer key : mapSources.keySet()) {
+            parentMenu.add(groupId, key, 0, mapSources.get(key).getName()).setCheckable(true).setChecked(key.intValue() == currentSource);
         }
     }
 
@@ -119,6 +102,6 @@ public class MapProviderFactory {
     }
 
     public static MapSource getMapSource(int sourceId) {
-        return getInstance().mapSources.get(sourceId);
+        return mapSources.get(Integer.valueOf(sourceId));
     }
 }

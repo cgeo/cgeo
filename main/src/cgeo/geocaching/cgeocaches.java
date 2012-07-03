@@ -996,6 +996,7 @@ public class cgeocaches extends AbstractListActivity {
                 cache.drop(new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
+                        adapter.notifyDataSetChanged();
                         refreshCurrentList();
                     }
                 });

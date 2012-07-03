@@ -30,6 +30,7 @@ public final class CalendarActivity extends Activity {
     private String location;
     private String coords;
     private Uri uri;
+    private int startTimeMinutes = -1;
 
     /** Called when the activity is first created. */
     @Override
@@ -49,6 +50,13 @@ public final class CalendarActivity extends Activity {
             name = getParameter(ICalendar.PARAM_NAME);
             location = getParameter(ICalendar.PARAM_LOCATION);
             coords = getParameter(ICalendar.PARAM_COORDS);
+            final String startTime = getParameter(ICalendar.PARAM_START_TIME_MINUTES);
+            if (startTime.length() > 0) {
+                try {
+                    startTimeMinutes = Integer.valueOf(startTime);
+                } catch (NumberFormatException e) {
+                }
+            }
 
             if (name.length() > 0 && hiddenDate.length() > 0) {
                 if (Compatibility.isLevel14()) {
@@ -147,12 +155,17 @@ public final class CalendarActivity extends Activity {
      * @return <code>Date</code> based on hidden date. Time is set to 00:00:00.
      */
     private Date parseDate() {
-        final Date eventDate = new Date(Long.parseLong(hiddenDate));
-        eventDate.setHours(0);
-        eventDate.setMinutes(0);
-        eventDate.setSeconds(0);
+        try {
+            final Date eventDate = new Date(Long.parseLong(hiddenDate));
+            eventDate.setHours(0);
+            eventDate.setMinutes(0);
+            eventDate.setSeconds(0);
 
-        return eventDate;
+            return eventDate;
+        } catch (NumberFormatException e) {
+            // cannot happen normally, but static code analysis does not know
+        }
+        return null;
     }
 
     /**
@@ -221,8 +234,12 @@ public final class CalendarActivity extends Activity {
             // values
             final ContentValues event = new ContentValues();
             event.put("calendar_id", calendarId);
-            event.put("dtstart", eventDate.getTime() + 43200000); // noon
-            event.put("dtend", eventDate.getTime() + 43200000 + 3600000); // + one hour
+            if (startTimeMinutes >= 0) {
+                event.put("dtstart", eventDate.getTime() + startTimeMinutes * 60000);
+            }
+            else {
+                event.put("allDay", 1);
+            }
             event.put("eventTimezone", "UTC");
             event.put("title", Html.fromHtml(name).toString());
             event.put("description", description);
@@ -230,7 +247,6 @@ public final class CalendarActivity extends Activity {
             if (eventLocation.length() > 0) {
                 event.put("eventLocation", eventLocation);
             }
-            event.put("allDay", 1);
             event.put("hasAlarm", 0);
 
             getContentResolver().insert(calendarProvider, event);
@@ -261,13 +277,17 @@ public final class CalendarActivity extends Activity {
              */
             final Intent intent = new Intent(Intent.ACTION_INSERT)
                     .setData(Compatibility.getCalendarEventsProviderURI())
-                    .putExtra("beginTime", eventDate.getTime() + 43200000)
-                    .putExtra("allDay", true)
                     .putExtra("title", Html.fromHtml(name).toString())
                     .putExtra("description", description)
                     .putExtra("hasAlarm", false)
                     .putExtra("eventTimezone", "UTC")
                     .putExtra("eventLocation", eventLocation);
+            if (startTimeMinutes >= 0) {
+                intent.putExtra("beginTime", eventDate.getTime() + startTimeMinutes * 60000);
+            }
+            else {
+                intent.putExtra("allDay", true);
+            }
             startActivity(intent);
         } catch (Exception e) {
             showToast(getResources().getString(R.string.event_fail));
