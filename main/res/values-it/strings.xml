@@ -590,6 +590,7 @@
   <string name="cache_image_open_file">Apri un file</string>
   <string name="cache_image_open_browser">Apri nel browser</string>
   <string name="cache_share_field">Condividi</string>
+  <string name="cache_time_full_hours">Precise</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Ricerca file\nin</string>
