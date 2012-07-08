@@ -161,13 +161,9 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void handleMessage(Message msg) {
             try {
-                if (search != null) {
-                    setTitle(title + " [" + search.getCount() + ']');
-                } else {
-                    setTitle(title);
-                }
-
                 setAdapter();
+
+                updateTitle();
 
                 setDateComparatorForEventList();
 
@@ -237,16 +233,14 @@ public class cgeocaches extends AbstractListActivity {
         public void handleMessage(Message msg) {
             try {
                 if (search != null) {
-                    setTitle(title + " [" + search.getCount() + "]");
                     replaceCacheListFromSearch();
                     if (adapter != null) {
                         adapter.reFilter();
                     }
-                } else {
-                    setTitle(title);
                 }
-
                 setAdapter();
+
+                updateTitle();
 
                 showFooterMoreCaches();
 
@@ -279,6 +273,22 @@ public class cgeocaches extends AbstractListActivity {
     private void replaceCacheListFromSearch() {
         cacheList.clear();
         cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+    }
+
+    protected void updateTitle() {
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        if (adapter.isFiltered()) {
+            numbers.add(adapter.getCount());
+        }
+        if (search != null) {
+            numbers.add(search.getCount());
+        }
+        if (numbers.isEmpty()) {
+            setTitle(title);
+        }
+        else {
+            setTitle(title + " [" + StringUtils.join(numbers, '/') + ']');
+        }
     }
 
     private Handler loadDetailsHandler = new Handler() {
@@ -425,7 +435,6 @@ public class cgeocaches extends AbstractListActivity {
 
         setTheme();
         setContentView(R.layout.caches);
-        setTitle("caches");
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -524,15 +533,12 @@ public class cgeocaches extends AbstractListActivity {
                 final String address = extras.getString(EXTRAS_ADDRESS);
                 if (StringUtils.isNotBlank(address)) {
                     title = address;
-                    setTitle(title);
-                    showProgress(true);
-                    showFooterLoadingCaches();
                 } else {
                     title = coords.toString();
-                    setTitle(title);
-                    showProgress(true);
-                    showFooterLoadingCaches();
                 }
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
 
                 thread = new LoadByCoordsThread(coords);
                 thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
@@ -1050,6 +1056,7 @@ public class cgeocaches extends AbstractListActivity {
         if (adapter != null) {
             adapter.setFilter(filter);
             prepareFilterBar();
+            updateTitle();
             invalidateOptionsMenuCompatible();
             return true;
         }
