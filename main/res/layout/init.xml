@@ -714,6 +714,42 @@
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
 				<TextView style="@style/separator_horizontal_headline"
+						android:text="@string/init_gpx_exportdir" />
+			</RelativeLayout>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="10dip"
+					android:layout_marginRight="10dip"
+					android:layout_marginBottom="5dip"
+					android:layout_gravity="left"
+					android:padding="3dip"
+					android:textSize="14dip"
+					android:textColor="?text_color"
+					android:textColorLink="?text_color_link"
+					android:linksClickable="true"
+					android:autoLink="web"
+					android:text="@string/init_gpx_exportdir_description" />
+			<LinearLayout
+					android:id="@+id/init_gpx_export_group"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal" >
+				<Button style="@style/button_full"
+						android:id="@+id/select_gpx_exportdir"
+						android:text="@string/init_select_gpx_exportdir"
+						android:layout_width="wrap_content" />
+				<EditText style="@style/edittext_full"
+						android:id="@+id/gpx_exportdir"
+						android:singleLine="true"
+						android:lines="1"
+						android:scrollHorizontally="true"
+						android:inputType="textNoSuggestions" />
+			</LinearLayout>
+<!-- ** -->
+			<RelativeLayout style="@style/separator_horizontal_layout" >
+				<View style="@style/separator_horizontal" />
+				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/init_altitude" />
 			</RelativeLayout>
 			<EditText style="@style/edittext_full"

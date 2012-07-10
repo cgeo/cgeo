@@ -38,7 +38,7 @@ import java.util.Date;
 import java.util.List;
 
 class GpxExport extends AbstractExport {
-    private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/gpx");
+    private static final File exportLocation = new File(Settings.getGpxExportDir());
     private static final SimpleDateFormat dateFormatZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     protected GpxExport() {

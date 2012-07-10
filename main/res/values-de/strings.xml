@@ -425,6 +425,10 @@
   <string name="init_mapsources_description">Hier kann die Quelle der benutzen Karte gewählt werden. Alternativ zu Google Maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_select_gpx_exportdir">…</string>
+  <string name="init_gpx_exportdir">Verzeichnis für GPX Exporte</string>
+  <string name="init_gpx_exportdir_description">Hier kann das Verzeichnis für GPX-Exporte gewählt werden.</string>
+  <string name="init_gpx_exportdir_select">Wähle Verzeichnis für GPX Exporte</string>
   <string name="init_maptrail">Zeige Spur auf Karte</string>
   <string name="init_share_after_export">Weiterleiten nach dem Export</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
@@ -606,6 +610,10 @@
   <string name="file_searching">Suche nach passenden Dateien</string>
   <string name="file_title_searching">Suche</string>
 
+  <!-- simple_dir_chooser -->
+  <string name="simple_dir_chooser_title">Verzeichnis wählen</string>
+  <string name="simple_dir_chooser_current_path">Pfad:</string>
+  
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei</string>
   <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
