@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color" >
+		<RelativeLayout style="@style/separator_horizontal_layout" >
+			<View style="@style/separator_horizontal" />
+			<TextView style="@style/separator_horizontal_headline"
+					android:text="@string/simple_dir_chooser_title" />
+		</RelativeLayout>
+		<EditText style="@style/edittext_full"
+				android:id="@+id/simple_dir_chooser_path"
+				android:singleLine="true"
+				android:lines="0"
+				android:editable="false"
+				android:scrollHorizontally="true"
+				android:inputType="textNoSuggestions" />
+		<ListView 
+               android:layout_height="wrap_content" 
+               android:layout_width="fill_parent" 
+               android:id="@+id/android:list" />
+		<View style="@style/separator_horizontal" />
+		<LinearLayout
+				android:id="@+id/init_gpx_dir_group"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal" >
+			<Button style="@style/button_full"
+					android:id="@+id/simple_dir_chooser_ok"
+					android:text="@android:string/ok"
+					android:layout_width="wrap_content" />
+			<Button style="@style/button_full"
+					android:id="@+id/simple_dir_chooser_cancel"
+					android:text="@android:string/cancel"
+					android:layout_width="wrap_content" />
+		</LinearLayout>
+</LinearLayout>
