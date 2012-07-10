@@ -31,6 +31,7 @@ import java.util.List;
  * Dialog for choosing a file or directory.
  */
 public class SimpleDirChooser extends ListActivity {
+    private static final String PARENT_DIR = "..        ";
     private File currentDir;
     private FileArrayAdapter adapter;
 
@@ -90,7 +91,7 @@ public class SimpleDirChooser extends ListActivity {
         }
         Collections.sort(listDirs);
         if (!dir.getName().equalsIgnoreCase("sdcard")) {
-            listDirs.add(0, new Option("..", dir.getParent()));
+            listDirs.add(0, new Option(PARENT_DIR, dir.getParent()));
         }
         this.adapter = new FileArrayAdapter(SimpleDirChooser.this, R.layout.simple_dir_item, listDirs);
         this.setListAdapter(adapter);
@@ -152,7 +153,7 @@ public class SimpleDirChooser extends ListActivity {
         @Override
         public void onClick(View arg0) {
             Option o = adapter.getItem(position);
-            if (o.getName().equals("..")) {
+            if (o.getName().equals(PARENT_DIR)) {
                 currentDir = new File(o.getPath());
                 fill(currentDir);
             } else {
