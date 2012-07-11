@@ -1472,7 +1472,9 @@ public class cgData {
         for (int i = 0; i < CACHE_COLUMNS.length; i++) {
             query.append(i > 0 ? ", " : "").append(dbTableCaches).append('.').append(CACHE_COLUMNS[i]).append(' ');
         }
-        query.append(',').append(dbTableLogsOffline).append(".log");
+        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+            query.append(',').append(dbTableLogsOffline).append(".log");
+        }
 
         query.append(" FROM ").append(dbTableCaches);
         if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
