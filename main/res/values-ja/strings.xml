@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?> <!-- based on e27ef7b1a96b6384f0c80df035ea884eb2dfd25f -->
+<?xml version="1.0" encoding="UTF-8"?> <!-- based on d54d589484303dfd8a2f5d98ca69040bb84a9535 -->
 <resources>
   <string name="app_name">c:geo</string>
-  <string name="app_name_compass">c:geo compass</string>
+  <string name="app_name_compass">c:geo コンパス</string>
 
   <!-- basics -->
   <string name="cache">キャッシュ</string>
@@ -427,7 +427,7 @@
   <string name="init_mapsource_select">地図の選択</string>
   <string name="init_select_mapfile">選択…</string>
   <string name="init_maptrail">地図に軌跡を表示</string>
-  <string name="init_share_after_export">GPXファイルにエクスポートした後に共有メニューを表示</string>
+  <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
   <string name="init_trackautovisit">「見つけた」ログを書く際に持っているトラッカブルアイテムを自動的に「訪れた」にする</string>
   <string name="init_sigautoinsert">署名を自動的に挿入する</string>
   <string name="init_loaddirectionimg">必要なら方向アイコンを取得(ベーシック会員のみ)</string>
@@ -608,7 +608,8 @@
   <string name="cache_image_open_file">他のアプリで開く</string>
   <string name="cache_image_open_browser">ブラウザで開く</string>
   <string name="cache_share_field">共有</string>
-      
+  <string name="cache_time_full_hours">時</string>  <!-- #1858 main/src/cgeo/geocaching/cgCache.java:public String guessEventTimeMinutes()説明分からイベントキャッシュの開催時間を推測 -->
+
   <!-- file list base -->
   <string name="file_searching_in">ファイルを検索中:\n</string>
   <string name="file_searching_sdcard_in">以下のデフォルトフォルダには見つかりませんでした:\n%1$s\n\n引き続きSDカードを検索中:\n</string>
@@ -719,7 +720,7 @@
   <string name="map_strategy_fast">速い(「最速」+タイプ)</string>
   <string name="map_strategy_auto">自動(移動速度に依存)</string>
   <string name="map_strategy_detailed">詳細(「速い」+詳細)</string>
-  <string name="live_map_notification">現バージョンではオンライン地図の座標はいつも正確とは限りません。不正確と思われる座標のキャッシュはオレンジ色の丸で表示されます。\nキャッシュの詳細を表示したりオフライン用に保存する際には正確な座標を取得します。\n\n詳しくはアプリ内の「c:geoについて」の変更履歴(英語)をご覧ください。</string>
+  <string name="live_map_notification">現バージョンではオンライン地図の座標は正確とは限りません。不正確と思われる座標のキャッシュはオレンジ色の丸で表示されます。\nキャッシュの詳細を表示したりオフライン用に保存する際には正確な座標を取得します。\n\n詳しくはアプリ内の「c:geoについて」の変更履歴(英語)をご覧ください。</string>
   <string name="live_map_note_close">閉じる</string>
   <string name="live_map_note_dontshow">再び表示をしない</string>
   
@@ -749,7 +750,7 @@
   <string name="search_direction_rel">この地点から</string>
   <string name="search_address_started">場所を検索中</string>
   <string name="search_address_result">検索結果:場所</string>
-  <string name="search_own_caches">Search my caches</string>
+  <string name="search_own_caches">自分で隠したキャッシュを検索</string>
 
   <!-- trackable -->
   <string name="trackable">トラッカブルアイテム</string>
@@ -932,8 +933,8 @@
   <string name="attribute_treeclimbing_no">木登りは不要</string>
 
   <!--  attributes (hazards -> present, not present) -->
-  <string name="attribute_poisonoak_yes">有毒植物がある</string>
-  <string name="attribute_poisonoak_no">有毒植物はない</string>
+  <string name="attribute_poisonoak_yes">有毒植物あり</string>
+  <string name="attribute_poisonoak_no">有毒植物なし</string>
   <string name="attribute_dangerousanimals_yes">危険な動物がいる</string>
   <string name="attribute_dangerousanimals_no">危険な動物はいない</string>
   <string name="attribute_ticks_yes">ダニがいる</string>
@@ -946,8 +947,8 @@
   <string name="attribute_hunting_no">ハンティング区域ではない</string>
   <string name="attribute_danger_yes">危険区域</string>
   <string name="attribute_danger_no">危険区域ではない</string>
-  <string name="attribute_thorn_yes">棘のある植物がある</string>
-  <string name="attribute_thorn_no">棘のある植物はない</string>
+  <string name="attribute_thorn_yes">棘のある植物あり</string>
+  <string name="attribute_thorn_no">棘のある植物なし</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">車いす可</string>
