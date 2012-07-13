@@ -193,7 +193,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /**Controls the map behaviour*/
     private MapMode mapMode = null;
     // other things
-    //    private boolean live = true; // live map (live, dead) or rest (displaying caches on map)
     private boolean liveChanged = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
@@ -608,7 +607,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-            menu.findItem(MENU_STORE_CACHES).setEnabled(isLiveMode() && !isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && app.hasUnsavedCaches(new SearchResult(geocodesInViewport)));
+            menu.findItem(MENU_STORE_CACHES).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && app.hasUnsavedCaches(new SearchResult(geocodesInViewport)));
 
             item = menu.findItem(MENU_CIRCLE_MODE); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
@@ -617,12 +616,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 item.setTitle(res.getString(R.string.map_circles_show));
             }
 
-            item = menu.findItem(MENU_AS_LIST);
-            item.setEnabled(isLiveMode() && !isLoading());
+            menu.findItem(MENU_AS_LIST).setEnabled(isLiveMode() && !isLoading());
 
             menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveMode());
         } catch (Exception e) {
-            Log.e("cgeomap.onPrepareOptionsMenu: " + e.toString());
+            Log.e("cgeomap.onPrepareOptionsMenu: " + e);
         }
 
         return true;
