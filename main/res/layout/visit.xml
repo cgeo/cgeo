@@ -50,7 +50,7 @@
 						android:singleLine="false"
                         android:layout_height="wrap_content"
                         android:minLines="5"
-						android:capitalize="sentences" />
+                        android:inputType="textCapSentences"/>
 				<LinearLayout android:id="@+id/tweet_box"
 						android:layout_width="fill_parent"
 						android:layout_height="wrap_content"

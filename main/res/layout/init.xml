@@ -49,7 +49,7 @@
 			<EditText style="@style/edittext_full"
 					android:id="@+id/password"
 					android:hint="@string/init_password"
-					android:password="true" />
+					android:inputType="textPassword"/>
 			<Button style="@style/button_full"
 					android:id="@+id/log_me_in"
                     android:lines="2"
@@ -65,7 +65,7 @@
 			<EditText style="@style/edittext_full"
 					android:id="@+id/passvote"
 					android:hint="@string/init_passvote"
-					android:password="true" />
+					android:inputType="textPassword"/>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
@@ -163,7 +163,7 @@
 					android:singleLine="false"
                     android:layout_height="wrap_content"
 					android:minLines="3"
-                    android:capitalize="sentences" />
+                    android:inputType="textCapSentences"/>
 			<LinearLayout android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal" >

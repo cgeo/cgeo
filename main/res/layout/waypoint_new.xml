@@ -85,7 +85,7 @@
                 android:id="@+id/note"
                 style="@style/edittext_full"
                 android:layout_height="wrap_content"
-                android:capitalize="sentences"
+                android:inputType="textCapSentences"
                 android:hint="@string/waypoint_note"
                 android:minLines="5"
                 android:singleLine="false" />
