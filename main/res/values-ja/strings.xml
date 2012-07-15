@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> <!-- based on d54d589484303dfd8a2f5d98ca69040bb84a9535 -->
 <resources>
   <string name="app_name">c:geo</string>
-  <string name="app_name_compass">c:geo compass</string>
+  <string name="app_name_compass">c:geo コンパス</string>
 
   <!-- basics -->
   <string name="cache">キャッシュ</string>
@@ -27,7 +27,7 @@
   <string name="mega">メガイベントキャシュ</string>
   <string name="earth">アースキャッシュ</string>
   <string name="cito">CITOイベント</string>
-  <string name="webcam">WebCamキャッシュ</string>
+  <string name="webcam">ウェブカムキャッシュ</string>
   <string name="virtual">バーチャルキャッシュ</string>
   <string name="wherigo">Wherigoキャッシュ</string>
   <string name="lostfound">Lost &amp; Found イベントキャッシュ</string>
@@ -36,7 +36,7 @@
   <string name="gps">GPS Adventures Exhibit</string>
   <string name="unknown">不明なタイプ</string>
 
-  <!-- cache sizes --> <!-- 要確認 -->
+  <!-- cache sizes -->  <!-- 要確認 -->
   <string name="cache_size_micro">マイクロ</string>
   <string name="cache_size_small">スモール</string>
   <string name="cache_size_regular">レギュラー</string>
@@ -76,15 +76,15 @@
   <string name="log_discovered">発見した</string>
   <string name="log_reviewed">レビューノート</string>
   <string name="log_tb_nothing">何もしない</string>
-  <string name="log_tb_visit">訪問した</string>
+  <string name="log_tb_visit">訪れた</string>
   <string name="log_tb_drop">ここに置く</string>
   <string name="log_tb_changeall">Change All</string>
   <string name="log_save">保存</string>
   <string name="log_saving">ログを保存中…</string>
   <string name="log_clear">消去</string>
-  <string name="log_post">ログを投稿</string>
-  <string name="log_post_rate">ログを投稿し、評価も行う</string>
-  <string name="log_post_no_rate">ログを投稿するが、評価はしない</string>
+  <string name="log_post">ログの投稿</string>
+  <string name="log_post_rate">ログの投稿と評価:</string>
+  <string name="log_post_no_rate">ログの投稿(未評価)</string>
   <string name="log_post_not_possible">ログのページをロード中…</string>
   <string name="log_add">挿入</string>
   <string name="log_date">日付</string>
@@ -101,7 +101,7 @@
   <string name="log_stars_4">星4つ</string>
   <string name="log_stars_45">星4.5</string>
   <string name="log_stars_5">星5つ</string>
-  <string name="log_stars_1_description">お粗末</string> <!-- 要確認 GCVote.com Suggested quality rating -->
+  <string name="log_stars_1_description">お粗末</string>   <!-- 要確認 GCVote.com Suggested quality rating -->
   <string name="log_stars_15_description">見劣りする</string>
   <string name="log_stars_2_description">平均以下</string>
   <string name="log_stars_25_description">悪くはない</string>
@@ -110,10 +110,12 @@
   <string name="log_stars_4_description">平均以上</string>
   <string name="log_stars_45_description">とても良い</string>
   <string name="log_stars_5_description">素晴らしい</string>
-  <string name="log_webcam">WebCamの写真を撮影</string>
+  <string name="log_webcam">ウェブカムに映った</string>
   <string name="log_new_log">ログ</string>
   <string name="log_new_log_text">ログ本文</string>
   <string name="log_announcement">アナウンス</string>
+  <string name="log_today">今日</string>
+  <string name="log_yesterday">昨日</string>
   
   <!-- translation -->
   <string name="translate_to_sys_lang">%sに翻訳</string>
@@ -188,7 +190,7 @@
   <string name="err_point_no_position_given">少なくとも経度、緯度、または距離と方位を入力してください。全てを入力することもできます。</string>
   <string name="err_point_curr_position_unavailable">現在地の座標が分かりません。もう少しお待ちください…</string>
   <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
-  <string name="err_point_bear_and_dist">方位と距離を半角英数字で入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。</string>
+  <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。</string>  <!--  半角必須?  -->
   <string name="err_point_location_error">ウェイポイントの場所が得られません。</string>
 
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
@@ -204,7 +206,7 @@
   <string name="err_parse_dist">距離の解析ができません。</string>
   <string name="err_parse_lat_lon">緯度または経度の解析ができません。</string>
 
-  <string name="err_fieldnotes_export_failed">フィールドノートの書き出しに失敗しました。</string>
+  <string name="err_fieldnotes_export_failed">フィールドノートのエクスポートに失敗しました。</string>
 
   <string name="warn_save_nothing">保存すべきものがありません。</string>
   <string name="warn_no_cache_coord">座標のあるキャッシュがありません。</string>
@@ -213,15 +215,15 @@
   <string name="warn_no_username">ユーザ名が入力されていません。</string>
   <string name="warn_search_help_title">ヘルプが必要?</string>
   <string name="warn_search_help_address">住所、地名や名称を入力してください。例:住所の「Radlicka 100, Prague, Czech Republic」、都市名の「ベルリン」、または「イエローストーン国立公園」のような名称。</string>
-  <string name="warn_search_help_gccode">ジオキャッシュコード(GCコード)を半角英数字で入力してください。例:「GC1VCAZ」。</string>
-  <string name="warn_search_help_keyword">キャッシュ名の一部を半角英数字記号で入力してください。検索対象はキャッシュ名だけです。キャッシュの詳細は対象ではありません。例:「Night Cache」。</string>
-  <string name="warn_search_help_user">Geocaching.comのユーザ名を入力してください。</string>
-  <string name="warn_search_help_tb">トラッカブルアイテムのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」。</string>
-  <string name="warn_log_text_fill">ログの本文を半角英数字記号で書いてください。(日本語は数値文字参照に変換する必要があります)</string>
+  <string name="warn_search_help_gccode">ジオキャッシュコード(GCコード)を入力してください。例:「GC1VCAZ」。</string>  <!--  半角必須?  -->
+  <string name="warn_search_help_keyword">キャッシュ名の一部を入力してください。検索対象はキャッシュ名だけです。キャッシュの詳細は対象ではありません。例:「Night Cache」。</string>  <!--  半角英数字記号で?  -->
+  <string name="warn_search_help_user">Geocaching.comのユーザ名を入力してください。</string>  <!--  半角必須?  -->
+  <string name="warn_search_help_tb">トラッカブルアイテムのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」。</string>  <!--  半角必須?  -->
+  <string name="warn_log_text_fill">ログの本文を入力してください。(訳者注:日本語も使用できます)</string>
   <string name="warn_load_images">画像をロードすることができませんでした。</string>
-  <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforge version 0.3.0フォーマットの地図ファイルではありません。 \nオフライン地図は利用できません。</string>
+  <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforge version 0.3.0フォーマットの地図ファイルではありません。\nオフライン地図は利用できません。</string>
   <string name="warn_deprecated_mapfile">Mapsforge version 0.2.4フォーマットの地図ファイルは非推奨です。\nMapsforge version 0.3.0フォーマットに変更した方がいいでしょう。次のリリースでversion 0.2.4はサポートされなくなります。</string>
-  <string name="warn_nonexistant_mapfile">選択した地図ファイルは存在しません。 \nオフライン地図は利用できません。</string>
+  <string name="warn_nonexistant_mapfile">選択した地図ファイルは存在しません。\nオフライン地図は利用できません。</string>
 
 
   <string name="info_log_posted">ログを投稿しました。</string>
@@ -229,7 +231,7 @@
   <string name="info_log_cleared">ログを消去しました。</string>
   <string name="info_log_type_changed">ログのタイプを変更しました。</string>
 
-  <string name="info_fieldnotes_exported_to">フィールドノートとして書き出しました</string>
+  <string name="info_fieldnotes_exported_to">フィールドノートとしてエクスポートしました</string>
   <string name="info_storing_static_maps">オフライン用に地図を保存中</string>
 
   <!-- location service -->
@@ -247,7 +249,7 @@
   <string name="menu_settings">設定</string>
   <string name="menu_history">履歴</string>
   <string name="menu_filter">フィルター</string>
-  <string name="menu_scan_geo">QRコードをスキャン</string> <!-- It is more suitable "QRcode" than "Geocode" in Japanese, because "Geocode" is not commonly known. Issue #794 https://github.com/cgeo/c-geo-opensource/issues/794 -->
+  <string name="menu_scan_geo">QRコードスキャン</string> <!-- It is more suitable "QRcode" than "Geocode" in Japanese, because "Geocode" is not commonly known. Issue #794 https://github.com/cgeo/c-geo-opensource/issues/794 -->
 
   <!-- main screen -->
   <string name="live_map_button">地図</string>
@@ -279,13 +281,14 @@
   <string name="caches_sort_size">サイズ</string>
   <string name="caches_sort_favorites">人気</string>
   <string name="caches_sort_name">名前</string>
-  <string name="caches_sort_gccode">GCコード(≈隠した日時順)</string>
+  <string name="caches_sort_gccode">GCコード</string>
   <string name="caches_sort_rating">評価</string>
   <string name="caches_sort_vote">Vote (Own Rating)</string>
   <string name="caches_sort_inventory">目録の数</string>
-  <string name="caches_sort_date_hidden">日付</string>
-  <string name="caches_sort_finds">Finds</string>
-  <string name="caches_sort_state">State</string>
+  <string name="caches_sort_date_hidden">隠した日</string>
+  <string name="caches_sort_date_logged">ログが書かれた日</string>
+  <string name="caches_sort_finds">見つかった数</string>
+  <string name="caches_sort_state">状態</string>
   <string name="caches_sort_storage">オフライン用に保存した日時</string>
   <string name="caches_select_mode">選択モード</string>
   <string name="caches_select_mode_exit">選択モードを終わる</string>
@@ -295,7 +298,7 @@
   <string name="caches_drop_selected">選択したキャッシュを削除</string>
   <string name="caches_drop_selected_ask">選択したキャッシュをデバイスから削除しますか?</string>
   <string name="caches_drop_all">全て削除</string>
-  <string name="caches_drop_all_ask">全てのキャッシュをデバイスから削除しますか?</string> <!-- 要確認 -->
+  <string name="caches_drop_all_ask">全てのキャッシュをデバイスから削除しますか?</string>   <!-- 要確認 -->
   <string name="caches_drop_stored">削除</string>
   <string name="caches_drop_progress">キャッシュを削除中</string>
   <string name="caches_drop_all_and_list">全て削除し、リストも消去</string>
@@ -304,9 +307,9 @@
   <string name="caches_move_selected">選択したキャッシュを移動</string>
   <string name="caches_move_all">全てのキャッシュを移動</string>
   <string name="caches_map_locus">Locus</string>
-  <string name="caches_map_locus_export">Export to Locus</string>
+  <string name="caches_map_locus_export">Locusにエクスポート</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
-  <string name="caches_recaptcha_explanation">画像の文字を半角英数字で入力してください。キャッシュの座標を得るのには重要ですが必須ではありません。設定(メイン画面のメニューボタンから)で、このダイアログを表示しないようにできます。</string>
+  <string name="caches_recaptcha_explanation">画像の文字を入力してください。キャッシュの座標を得るのには重要ですが必須ではありません。設定(メイン画面のメニューボタンから)で、このダイアログを表示しないようにできます。</string>  <!--  半角必須?  -->
   <string name="caches_recaptcha_hint">画像の文字</string>
   <string name="caches_recaptcha_continue">続ける</string>
   <string name="caches_filter">フィルター</string>
@@ -318,7 +321,7 @@
   <string name="caches_filter_size_title">サイズを選択</string>
   <string name="caches_filter_type_title">タイプを選択</string>
   <string name="caches_filter_modified">座標の更新あり</string>
-  <string name="caches_exporting_fieldnote">フィールドノートとして書き出し中…</string>
+  <string name="caches_exporting_fieldnote">フィールドノートとしてエクスポート中…</string>
   <string name="caches_removing_from_history">履歴から削除中…</string>
 
   <!-- caches lists -->
@@ -345,6 +348,7 @@
   <string name="list_dialog_rename">変更</string>
 
   <!-- about -->
+  <string name="about_version">バージョン</string>
   <string name="about_changelog">更新履歴</string>
   <string name="about_donate">寄付</string>
   <string name="about_detail">詳細</string>
@@ -361,9 +365,9 @@
   <string name="init_passvote">パスワード</string>
   <string name="init_login">ログインをチェックしてログイン情報を保存</string>
   <string name="init_login_popup">ログイン</string>
-  <string name="init_login_popup_working">Geocaching.comにログイン中…</string>
+  <string name="init_login_popup_working">ログイン中…</string>
   <string name="init_login_popup_ok">ログイン完了</string>
-  <string name="init_login_popup_failed">ログインに失敗しました。</string>
+  <string name="init_login_popup_failed">ログイン失敗</string>
   <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
   <string name="init_go4cache_connect">Go 4 Cacheに接続する</string>
   <string name="init_twitter_authorize">c:geoを認証する</string>
@@ -371,7 +375,7 @@
   <string name="init_signature">署名</string>
   <string name="init_signature_help_button">ヘルプ</string>
   <string name="init_signature_help_title">署名のヒント</string>
-  <string name="init_signature_help_text">ログ本文で使う署名を半角英数字記号で書いてください。(日本語は数値文字参照に変換する必要があります)\n特別な文字として、[DATE]、[TIME]、[DATETIME]、[USER]や[NUMBER]があります。\nこれらは署名の挿入時に、日付、時間、日時、ユーザ名や見つけたキャッシュ数に変換されます。</string>
+  <string name="init_signature_help_text">ログ本文で使う署名を入力してください。\n特別な文字として、[DATE]、[TIME]、[DATETIME]、[USER]や[NUMBER]があります。\nこれらは署名の挿入時に、日付、時間、日時、ユーザ名や見つけたキャッシュ数+1に変換されます。</string>
   <string name="init_signature_template_button">テンプレートを挿入</string>
   <string name="init_signature_template_date">日付</string>
   <string name="init_signature_template_time">時間</string>
@@ -380,8 +384,8 @@
   <string name="init_signature_template_number">キャッシュ数</string>
   <string name="init_details">キャッシュの詳細</string>
   <string name="init_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
-  <string name="init_elevationwanted">キャッシュの標高値を取得</string> <!-- 正確に訳すと高度値 -->
-  <string name="init_friendlogswanted">Load additional logbook page for logs from friends</string>
+  <string name="init_elevationwanted">キャッシュの標高値を取得</string>   <!-- 正確に訳すと高度値 -->
+  <string name="init_friendlogswanted">友達の書いたログを別ページに表示</string>
   <string name="init_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
   <string name="init_autoload">キャッシュの説明を自動的に全て表示する</string>
   <string name="init_other">その他のオプション</string>
@@ -395,10 +399,10 @@
   <string name="init_disabled">無効化キャッシュは除く</string>
   <string name="init_offline">オフライン用にキャッシュの地図を保存する</string>
   <string name="init_offline_wp">オフライン用にウェイポイントの地図を保存する</string>
-  <string name="init_save_log_img">Save Images from Logs</string>
+  <string name="init_save_log_img">オフライン用にログの添付画像を保存する</string>
   <string name="init_units">距離をマイル/フィートで表示\n(イギリス帝国単位)</string>
   <string name="init_nav">Googleマップナビを使う</string>
-  <string name="init_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオフライン専用にし、オンラインでの投稿をしない。このチェックを外してもオフライン用に保存することは可能です。)</string>
+  <string name="init_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオフライン専用にし、オンラインでの投稿をしない。このチェックを外してもオフライン用に保存することは可能です)</string>
   <string name="init_livelist">キャッシュの一覧で方向をアイコン表示する</string>
   <string name="init_altitude">標高の修正</string>
   <string name="init_altitude_description">もし現在地の標高が正しくないなら修正できます。正または負のメートル単位で入力してください。</string>
@@ -417,13 +421,14 @@
   <string name="init_restore_running">キャッシュのデータベースをリストア中…</string>
   <string name="init_restore_confirm">キャッシュのデータベースは空です。バックアップからリストアしますか?</string>
   <string name="init_backup_last">最終バックアップ日時:</string>
-  <string name="init_backup_last_no">過去にバックアップを取ったことはありません。</string>
+  <string name="init_backup_last_no">まだバックアップを取ったことがありません。</string>
   <string name="init_mapsources">地図の設定</string>
-  <string name="init_mapsources_description">オンライン地図をGoogleマップからOpenStreetMap(その派生オンライン地図やオフライン地図)に変更できます。詳細は<a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>(英語)をご覧ください。</string>
+  <string name="init_mapsources_description">オンライン地図をGoogleマップからOpenStreetMap(その派生オンライン地図やオフライン地図)に変更できます。詳細は<a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> (英語)をご覧ください。</string>
   <string name="init_mapsource_select">地図の選択</string>
   <string name="init_select_mapfile">選択…</string>
   <string name="init_maptrail">地図に軌跡を表示</string>
-  <string name="init_trackautovisit">Set trackables to \"Visited\" as a default</string>
+  <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
+  <string name="init_trackautovisit">「見つけた」ログを書く際に、持っているトラッカブルアイテムを自動的に「訪れた」にする</string>
   <string name="init_sigautoinsert">署名を自動的に挿入する</string>
   <string name="init_loaddirectionimg">必要なら方向アイコンを取得(ベーシック会員のみ)</string>
   <string name="init_default_navigation_tool">デフォルトのナビ</string>
@@ -431,7 +436,7 @@
   <string name="init_default_navigation_tool_select">ナビツールの選択</string>
   <string name="init_default_navigation_tool_2_description">2番目にお好きなナビツールを選択できます。キャッシュ情報のタイトルの右隣にあるナビアイコンを長押しすると起動できます。</string>
   <string name="init_debug_title">デバッグ情報</string>
-  <string name="init_debug_note">c:geoはデバッグ情報を生成することができます。これは一般のユーザには役に立たないかもしれませんが、開発者には不具合の原因を調べるのに必要です。その時は下のチェックボックスをオンにしてログファイルを開発者に送ってください。詳しくは<a href="https://github.com/cgeo/c-geo-opensource/wiki/Send-log-to-developers">Send log to developers</a>(英語)をご覧ください。</string>
+  <string name="init_debug_note">c:geoのデバッグ情報を作成することができます。これは一般のユーザには役に立たないかもしれませんが、開発者には不具合の原因を調べるのに必要です。その時は下のチェックボックスをオンにしてログファイルを開発者に送ってください。詳しくは<a href="http://faq.cgeo.org/#1_11">c:geo FAQ - How do I send log to developers</a>(英語)をご覧ください。</string>
   <string name="init_debug">デバッグ情報を作成</string>
   <string name="init_dbonsdcard_title">データベースの保存場所</string>
   <string name="init_dbonsdcard_note">c:geoのデータベースを外部メディア(SDカード)に保存することもできます。その場合は端末の内蔵メモリの空き容量は増えますが、c:geoはSDカードなしでは使用できなくなり動作も少し遅くなるかもしれません。</string>
@@ -458,7 +463,7 @@
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
-  <string name="init_sendToCgeo_description"><b>Send 2 c:geo</b>はPCのブラウザ(FirefoxやChrome。InternetExplorerは非対応)で表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。 登録する前に<a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>(英語)をお読みください。簡単な登録とブラウザに拡張機能のインストールが必要です。この<b>Send 2 c:geo</b>機能を使用しないのなら登録は不要です。</string>
+  <string name="init_sendToCgeo_description"><b>Send 2 c:geo</b>はPCのブラウザ(FirefoxやChrome。InternetExplorerは非対応)で表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。 登録する前に<a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> (英語)をお読みください。簡単な登録とブラウザに拡張機能のインストールが必要です。この<b>Send 2 c:geo</b>機能を使用しないのなら登録は不要です。</string>
   <string name="init_sendToCgeo_register">登録を申請する</string>
   <string name="init_sendToCgeo_registering">"Send to c:geo"にこの端末を登録しています…</string>
   <string name="init_sendToCgeo_register_ok">登録しました。PINコードは####です。PCのブラウザでhttp://send2.cgeo.org/(英語)を開き、右下辺りの「Add a device…」からPINコードを入力して端末の登録を完了してください。</string>
@@ -501,8 +506,8 @@
   <string name="cache_attributes_no_icons">(属性アイコンを表示するためにはキャッシュ情報を更新してください)</string>
   <string name="cache_inventory">目録</string>
   <string name="cache_log_offline">オフラインログ</string>
-  <string name="cache_log_images_loading">Loading Log images…</string>
-  <string name="cache_log_images_title">Log images</string>
+  <string name="cache_log_images_loading">添付画像をロード中…</string>
+  <string name="cache_log_images_title">ログの添付画像</string>
   <string name="cache_log_image_default_title">写真</string>
   <string name="cache_personal_note">Personal note</string>
   <string name="cache_description">説明</string>
@@ -526,7 +531,7 @@
   <string name="cache_waypoints_add">ウェイポイントを追加</string>
   <string name="cache_hint">ヒント</string>
   <string name="cache_logs">ログブック</string>
-  <string name="cache_logsfriends">ログブック (友達)</string>
+  <string name="cache_logsfriends">ログブック(友達)</string>
   <string name="cache_dialog_loading_details">キャッシュの詳細をロード中…</string>
   <string name="cache_dialog_loading_details_status_loadpage">ページをロード中</string>
   <string name="cache_dialog_loading_details_status_details">詳細を処理中</string>
@@ -534,8 +539,8 @@
   <string name="cache_dialog_loading_details_status_logs">ログをロード中</string>
   <string name="cache_dialog_loading_details_status_waypoints">ウェイポイントを処理中</string>
   <string name="cache_dialog_loading_details_status_gcvote">GCVoteをロード中</string>
-  <string name="cache_dialog_loading_details_status_elevation">標高値をロード中</string> <!-- 正確に訳すと高度値 -->
-  <string name="cache_dialog_loading_details_status_cache">Caching Data</string>
+  <string name="cache_dialog_loading_details_status_elevation">標高値をロード中</string>   <!-- 正確に訳すと高度値 -->
+  <string name="cache_dialog_loading_details_status_cache">データのキャッシュ中</string>
   <string name="cache_dialog_loading_details_status_render">表示の処理中</string>
   <string name="cache_dialog_offline_save_title">オフライン</string>
   <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中…</string>
@@ -587,7 +592,7 @@
   <string name="cache_favourite">お気に入り</string>
   <string name="cache_owner">所有者</string>
   <string name="cache_hidden">隠した日</string>
-  <string name="cache_event">日時</string>
+  <string name="cache_event">イベント日付</string>
   <string name="cache_location">場所</string>
   <string name="cache_coordinates">座標</string>
   <string name="cache_coordinates_original">出発地の座標</string>
@@ -595,15 +600,16 @@
   <string name="cache_spoiler_images_loading">スポイラー画像をロード中…</string>
   <string name="cache_log_types">ログタイプ</string>
   <string name="cache_coordinates_no">このキャッシュに座標値はありません。</string>
-  <string name="cache_export_fieldnote">フィールドノートとして書き出す</string>
+  <string name="cache_export_fieldnote">フィールドノートとしてエクスポート</string>
   <string name="cache_clear_history">全履歴を削除</string>
   <string name="cache_remove_from_history">履歴から削除</string>
   <string name="cache_license">ライセンス</string>
   <string name="cache_image">画像</string>
   <string name="cache_image_open_file">他のアプリで開く</string>
   <string name="cache_image_open_browser">ブラウザで開く</string>
-  <string name="cache_share_field">Share</string>
-      
+  <string name="cache_share_field">共有</string>
+  <string name="cache_time_full_hours">時</string>  <!-- issues#1858 main/src/cgeo/geocaching/cgCache.java:public String guessEventTimeMinutes()説明分からイベントキャッシュの開催時間を推測 -->
+
   <!-- file list base -->
   <string name="file_searching_in">ファイルを検索中:\n</string>
   <string name="file_searching_sdcard_in">以下のデフォルトフォルダには見つかりませんでした:\n%1$s\n\n引き続きSDカードを検索中:\n</string>
@@ -616,25 +622,25 @@
   <string name="gpx_import_loading_waypoints">ウェイポイントファイルをロード中</string>
   <string name="gpx_import_store_static_maps">オフライン地図を保存中</string>
   <string name="gpx_import_storing">キャッシュ情報をデータベースに書き込み中</string>
-  <string name="gpx_import_caches_imported">個のキャッシュを読み込みました</string>
+  <string name="gpx_import_caches_imported">個のキャッシュをインポートしました</string>
   <string name="gpx_import_static_maps_skipped">オフライン用地図のダウンロードを中止しました</string>
   <string name="gpx_import_title_static_maps">オフライン用に地図を保存</string>
   <string name="gpx_import_title_reading_file">ファイル読み込み中</string>
-  <string name="gpx_import_title">GPXファイルを読み込む</string>
+  <string name="gpx_import_title">GPXファイルをインポート</string>
   <string name="gpx_import_title_caches_imported">結果</string>
-  <string name="gpx_import_title_caches_import_failed">読み込み失敗</string>
+  <string name="gpx_import_title_caches_import_failed">インポート失敗</string>
   <string name="gpx_import_error_io">ファイルが読み込めません</string>
   <string name="gpx_import_error_parser">ファイルフォーマットが正しくありません</string>
   <string name="gpx_import_error_unexpected">予期せぬエラー</string>
-  <string name="gpx_import_confirm">c:geoにGPXファイルを読み込みますか?</string>
-  <string name="gpx_import_canceled">GPXファイルの読み込みが中止されました</string>
+  <string name="gpx_import_confirm">c:geoにGPXファイルをインポートしますか?</string>
+  <string name="gpx_import_canceled">GPXファイルのインポートが中止されました</string>
   
   <!-- map file select -->
   <string name="map_file_select_title">地図ファイルの選択</string>
 
   <!--  import -->
-  <string name="import_title">読み込み…</string>
-  <string name="web_import_title">Webから読み込む(Send 2 c:geo経由)</string>
+  <string name="import_title">インポート…</string>
+  <string name="web_import_title">Webからインポート(Send 2 c:geo経由)</string>
   <string name="web_import_waiting">Webから新しいキャッシュ情報を確認中…</string>
   <string name="web_downloading">ダウンロード中</string>
   <string name="web_downloaded">ダウンロード完了</string>
@@ -714,7 +720,7 @@
   <string name="map_strategy_fast">速い(「最速」+タイプ)</string>
   <string name="map_strategy_auto">自動(移動速度に依存)</string>
   <string name="map_strategy_detailed">詳細(「速い」+詳細)</string>
-  <string name="live_map_notification">このc:geoのバージョンではオンライン地図の座標はいつも正確とは限りません。不正確と思われる座標のキャッシュはオレンジ色の丸で表示されます。\nキャッシュの詳細を表示したりオフライン用に保存する際には正確な座標を取得します。\n\n詳しくはアプリ内の「c:geoについて」の変更履歴(英語)をご覧ください。</string>
+  <string name="live_map_notification">現バージョンではオンライン地図の座標は正確とは限りません。不正確と思われる座標のキャッシュはオレンジ色の丸で表示されます。\nキャッシュの詳細を表示したりオフライン用に保存する際には正確な座標を取得します。\n\n詳しくはアプリ内の「c:geoについて」の変更履歴(英語)をご覧ください。</string>
   <string name="live_map_note_close">閉じる</string>
   <string name="live_map_note_dontshow">再び表示をしない</string>
   
@@ -744,7 +750,7 @@
   <string name="search_direction_rel">この地点から</string>
   <string name="search_address_started">場所を検索中</string>
   <string name="search_address_result">検索結果:場所</string>
-  <string name="search_own_caches">Search my caches</string>
+  <string name="search_own_caches">自分のキャッシュを検索</string>
 
   <!-- trackable -->
   <string name="trackable">トラッカブルアイテム</string>
@@ -797,32 +803,37 @@
   <string name="helper_calendar_missing">c:geo calendar pluginはインストールされていません。</string>
   <string name="helper_calendar_description">イベントキャッシュをカレンダーアプリに登録することができます。</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">シンプルで役に立つ地図アプリです。オンラインでもオフラインでも使えます。オフライン用に地図を直接ダウンロード(画像データのみ)することができます。軌跡(GPSログ)を記録したり、POIを扱ったり、その他もたくさん便利な機能があります。</string>
+  <string name="helper_locus_description">シンプルで役に立つ地図アプリ。オフライン用に地図を直接ダウンロード(画像データのみ)することができます。軌跡(GPSログ)を記録したり、POIを扱ったり、その他もたくさん便利な機能があります。</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。その他、GPSに関するたくさんの情報が得られます。</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
-  <string name="helper_bluetoothgps_description">外部GPSデバイスを利用することができます。より良いGPS受信ができ、より正確な位置情報を得られ、アンドロイド端末のバッテリ消費が少なくなるかもしれません。</string>
+  <string name="helper_bluetoothgps_description">外部GPSデバイスを利用することができます。より正確な位置情報を得られ、アンドロイド端末のバッテリ消費が少なくなるかもしれません。</string>
   <string name="helper_barcode_title">QRコードスキャナー</string>
-  <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやサイトがあります。このアプリを使えばc:geoはパソコンの画面から直接GCコードを読み込むことができます。</string>
+  <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます。</string>
 
   <!-- add-ons -->
   <string name="addon_missing_title">プラグインが見つかりません</string>
   <string name="addon_download_prompt">Google Playからインストールしますか?</string>
   
   <!-- export -->
-  <string name="export">書き出す</string>
+  <string name="export">エクスポート</string>
   <string name="export_as">Export as…</string>
-  <string name="export_exportedto">exported to</string>
-  <string name="export_failed">書き出しに失敗しました</string>
+  <string name="export_exportedto">にエクスポートしました</string>
+  <string name="export_failed">エクスポートに失敗しました</string>
   <string name="export_fieldnotes">フィールドノート</string>
-  <string name="export_fieldnotes_info">フィールドノートは/sdcard/field-notesフォルダに保存され、ファイル名には現在の日時が付きます。</string>
+  <string name="export_fieldnotes_info">フィールドノートは/sdcard/field-notesフォルダに保存され、ファイル名は現在の日時になります。</string>
   <string name="export_fieldnotes_upload">geocaching.comにアップロード</string>
   <string name="export_fieldnotes_uploading">アップロード中…</string>
   <string name="export_fieldnotes_upload_success">geocaching.comにアップロードしました</string>
-  <string name="export_fieldnotes_onlynew">Only since last export</string>
+  <string name="export_fieldnotes_onlynew">最後にエクスポートした時から更新がある場合のみ</string>   <!-- only new logs since last export/upload  line53:FieldnoteExport.java -->
   <string name="export_fieldnotes_creating">フィールドノートを作成中…</string>
   <string name="export_gpx">GPX</string>
+  <string name="export_gpx_info">GPXファイルは/sdcard/gpxフォルダに保存され、ファイル名は現在の日時になります。</string>
+  <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
   
+  <!--  attribute unknown -->
+  <string name="attribute_unknown_yes">未知の属性あり</string>
+  <string name="attribute_unknown_no">未知の属性なし</string>
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">犬の同伴可</string>
   <string name="attribute_dogs_no">犬の同伴不可</string>
@@ -922,8 +933,8 @@
   <string name="attribute_treeclimbing_no">木登りは不要</string>
 
   <!--  attributes (hazards -> present, not present) -->
-  <string name="attribute_poisonoak_yes">有毒植物がある</string>
-  <string name="attribute_poisonoak_no">有毒植物はない</string>
+  <string name="attribute_poisonoak_yes">有毒植物あり</string>
+  <string name="attribute_poisonoak_no">有毒植物なし</string>
   <string name="attribute_dangerousanimals_yes">危険な動物がいる</string>
   <string name="attribute_dangerousanimals_no">危険な動物はいない</string>
   <string name="attribute_ticks_yes">ダニがいる</string>
@@ -936,8 +947,8 @@
   <string name="attribute_hunting_no">ハンティング区域ではない</string>
   <string name="attribute_danger_yes">危険区域</string>
   <string name="attribute_danger_no">危険区域ではない</string>
-  <string name="attribute_thorn_yes">棘のある植物がある</string>
-  <string name="attribute_thorn_no">棘のある植物はない</string>
+  <string name="attribute_thorn_yes">棘のある植物あり</string>
+  <string name="attribute_thorn_no">棘のある植物なし</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">車いす可</string>
@@ -977,18 +988,25 @@
   <string name="about_auth_1"><b>c:geo</b>がTwitterにアクセスする許可を得るには次のようにしてください。</string>
   <string name="about_auth_2">「認証を開始する」ボタンを押すとブラウザでTwitterのページが開きます。そのページにログインすれば<b>c:geo</b>があなたのアカウントにアクセルする許可が得られます。ログインに成功したら数字のPINコードが表示されるので、この下の入力欄にコピー&amp;ペーストして「完了」ボタンを押してください。</string>
 
+  <!-- status -->
+  <string name="status_new_release">新しいバージョンがあります。\nクリックしてインストールしてください。</string>
+  <string name="status_new_nightly">新しいナイトリービルドがあります。\nクリックしてインストールしてください。</string>
+  <string name="status_new_rc">新しいRCバージョンがあります。\nクリックしてインストールしてください。</string>
+  <string name="status_geocaching_change">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
+  <string name="status_geocaching_livemap">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
+
   <!-- go4cache -->
   <string name="go4cache_looking_around">Looking around</string>
   <string name="go4cache_tweeting">Tweeting</string>
   <string name="go4cache_heading_to">Heading to</string>
   <plurals name="go4cache_time_minutes">
-	<item quantity="one">one minute ago</item>
-	<item quantity="other">%d minutes ago</item>
+	<item quantity="one">1分前</item>
+	<item quantity="other">%d分前</item>
   </plurals>
   
-  <string name="clipboard_copy_ok">Copied to clipboard</string>
+  <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
   <plurals name="days_ago">
-      <item quantity="one">yesterday</item>
-      <item quantity="other">%d days ago</item>
+      <item quantity="one">昨日</item>
+      <item quantity="other">%d日前</item>
   </plurals>
 </resources>
