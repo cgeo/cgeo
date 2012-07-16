@@ -845,11 +845,7 @@ public class CacheDetailActivity extends AbstractActivity {
      * referenced from XML view
      */
     public void showNavigationMenu(@SuppressWarnings("unused") View view) {
-        showNavigationMenu();
-    }
-
-    private void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(this, cache, null, null);
+        NavigationAppFactory.showNavigationMenu(this, cache, null, null, true, true);
     }
 
     /**
