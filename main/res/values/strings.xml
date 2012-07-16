@@ -1061,6 +1061,11 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next maintenance release/b>\n\n
+    <b>Bugfixing:</b>\n
+    · Use last known location if no GPS-signal is present\n
+    · Coordinate conversion to DMS corrected\n
+    · Adaption to GC.com changes\n
     <b>2012.06.28</b>\n\n
     <b>Bugfixing:</b>\n
     · Adaptation to GC.com changes\n
