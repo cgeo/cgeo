@@ -1073,15 +1073,22 @@
     · Sort by found date in lists\n
     · Title of archived caches now shown in red\n
     · Display cache size and D/T-rating in compass\n
+    · Try to get event cache starting time and use it for calendar entry\n
+    · Titlebar in lists also shows number of filtered caches\n
     \n
     <b>Bugfixing:</b>\n
     · Show as list from live map corrected to display the correct caches\n
-    · GPX import/export compatability improvements\n
+    · GPX import/export improvements\n
     · Export URLs in GPX export\n
     · Use last known location on startup\n
     · Show spoiler images for owned caches\n
     · Sort file names in GPX import list\n
     · Corrected owner name display with special characters\n
+    · Cancel operations only if cancel is clicked\n
+    · Corrected logbook statistic for event caches\n
+    · Coordinate conversion to DMS corrected\n
+    · Use last known location if no GPS-signal is present\n
+    · Store for offline from map always available\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=7&amp;state=closed">Detailed list of all changes</a>\n
     \n
