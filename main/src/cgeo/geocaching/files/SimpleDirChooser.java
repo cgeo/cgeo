@@ -34,6 +34,8 @@ public class SimpleDirChooser extends ListActivity {
     private static final String PARENT_DIR = "..        ";
     private File currentDir;
     private FileArrayAdapter adapter;
+    private CheckBox lastBoxChecked = null;
+    private Button okButton = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,8 @@ public class SimpleDirChooser extends ListActivity {
 
         fill(currentDir);
 
-        Button okButton = (Button) findViewById(R.id.simple_dir_chooser_ok);
+        okButton = (Button) findViewById(R.id.simple_dir_chooser_ok);
+        okButton.setEnabled(false);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +132,7 @@ public class SimpleDirChooser extends ListActivity {
             }
 
             CheckBox check = (CheckBox) v.findViewById(R.id.CheckBox);
-            check.setOnClickListener(new OnCheckBoxClickListener(SimpleDirChooser.this.getListView()));
+            check.setOnClickListener(new OnCheckBoxClickListener());
 
             final Option o = items.get(position);
             if (o != null) {
@@ -167,21 +170,24 @@ public class SimpleDirChooser extends ListActivity {
     }
 
     public class OnCheckBoxClickListener implements OnClickListener {
-        private ListView listView;
-
-        OnCheckBoxClickListener(ListView listView) {
-            this.listView = listView;
+        OnCheckBoxClickListener() {
         }
 
         @Override
         public void onClick(View arg0) {
-            for (int i = 0; i < listView.getCount(); i++) {
-                View view = listView.getChildAt(i);
-                CheckBox check = (CheckBox) view.findViewById(R.id.CheckBox);
-                check.setChecked(false);
-            }
             CheckBox check = (CheckBox) arg0;
-            check.setChecked(true);
+            if (lastBoxChecked == check) {
+                check.setChecked(false);
+                lastBoxChecked = null;
+                okButton.setEnabled(false);
+            } else {
+                if (lastBoxChecked != null) {
+                    lastBoxChecked.setChecked(false);
+                }
+                check.setChecked(true);
+                lastBoxChecked = check;
+                okButton.setEnabled(true);
+            }
         }
     }
 
