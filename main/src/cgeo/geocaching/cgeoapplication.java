@@ -490,8 +490,8 @@ public class cgeoapplication extends Application {
         storage.removeCaches(geocodes, removeFlags);
     }
 
-    public Set<cgWaypoint> getWaypointsInViewport(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
-        return storage.loadWaypoints(viewport, excludeMine, excludeDisabled);
+    public Set<cgWaypoint> getWaypointsInViewport(final Viewport viewport, boolean excludeMine, boolean excludeDisabled, CacheType type) {
+        return storage.loadWaypoints(viewport, excludeMine, excludeDisabled, type);
     }
 
     public boolean isLiveMapHintShown() {
