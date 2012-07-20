@@ -7,6 +7,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.network.Cookies;
@@ -55,6 +56,7 @@ import java.util.List;
 public class SettingsActivity extends AbstractActivity {
 
     private final static int SELECT_MAPFILE_REQUEST = 1;
+    private final static int SELECT_GPXDIR_REQUEST = 2;
 
     private ProgressDialog loginDialog = null;
     private ProgressDialog webDialog = null;
@@ -577,6 +579,21 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        // GPX Export directory
+        final EditText gpxExportDir = (EditText) findViewById(R.id.gpx_exportdir);
+        gpxExportDir.setText(Settings.getGpxExportDir());
+        Button selectGpxExportDir = (Button) findViewById(R.id.select_gpx_exportdir);
+        selectGpxExportDir.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
+                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getGpxExportDir());
+                startActivityForResult(dirChooser, SELECT_GPXDIR_REQUEST);
+            }
+        });
+
+        // Display trail on map
         final CheckBox trailButton = (CheckBox) findViewById(R.id.trail);
         trailButton.setChecked(Settings.isMapTrail());
         trailButton.setOnClickListener(new View.OnClickListener() {
@@ -917,6 +934,16 @@ public class SettingsActivity extends AbstractActivity {
                 }
             }
             initMapfileEdittext(true);
+        }
+        if (requestCode == SELECT_GPXDIR_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                if (data.hasExtra("chosenDir")) {
+                    Settings.setGpxExportDir(data.getStringExtra("chosenDir"));
+                }
+            }
+            EditText gpxExportDir = (EditText) findViewById(R.id.gpx_exportdir);
+            gpxExportDir.setText(Settings.getGpxExportDir());
+            gpxExportDir.requestFocus();
         }
     }
 
