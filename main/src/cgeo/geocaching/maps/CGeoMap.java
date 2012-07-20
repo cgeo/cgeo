@@ -1187,9 +1187,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     waypoints.clear();
                     if (isLiveMode() || mapMode == MapMode.COORDS) {
                         //All visible waypoints
-                        //FIXME apply type filter
-                        waypoints.addAll(app.getWaypointsInViewport(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches()));
-                    } else {
+                        CacheType type = Settings.getCacheType();
+                        Set<cgWaypoint> waypointsInViewport = app.getWaypointsInViewport(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches(), type);
+                        waypoints.addAll(waypointsInViewport);
+                    }
+                    else
+                    {
                         //All waypoints from the viewed caches
                         for (cgCache c : caches.getAsList()) {
                             waypoints.addAll(c.getWaypoints());
