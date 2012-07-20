@@ -86,9 +86,13 @@ public class cgDataTest extends CGeoTestCase {
     public static void testLoadWaypoints() {
         final Viewport viewport = new Viewport(new Geopoint(-1, -2), new Geopoint(3, 4));
         final cgeoapplication app = cgeoapplication.getInstance();
-        app.getWaypointsInViewport(viewport, false, false);
-        app.getWaypointsInViewport(viewport, false, true);
-        app.getWaypointsInViewport(viewport, true, false);
-        app.getWaypointsInViewport(viewport, true, true);
+        app.getWaypointsInViewport(viewport, false, false, CacheType.ALL);
+        app.getWaypointsInViewport(viewport, false, true, CacheType.ALL);
+        app.getWaypointsInViewport(viewport, true, false, CacheType.ALL);
+        app.getWaypointsInViewport(viewport, true, true, CacheType.ALL);
+        app.getWaypointsInViewport(viewport, false, false, CacheType.TRADITIONAL);
+        app.getWaypointsInViewport(viewport, false, true, CacheType.TRADITIONAL);
+        app.getWaypointsInViewport(viewport, true, false, CacheType.TRADITIONAL);
+        app.getWaypointsInViewport(viewport, true, true, CacheType.TRADITIONAL);
     }
 }
