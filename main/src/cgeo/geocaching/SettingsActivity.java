@@ -588,6 +588,7 @@ public class SettingsActivity extends AbstractActivity {
             @Override
             public void onClick(View v) {
                 Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
+                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getGpxExportDir());
                 startActivityForResult(dirChooser, SELECT_GPXDIR_REQUEST);
             }
         });

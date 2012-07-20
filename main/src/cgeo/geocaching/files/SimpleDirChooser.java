@@ -31,16 +31,25 @@ import java.util.List;
  * Dialog for choosing a file or directory.
  */
 public class SimpleDirChooser extends ListActivity {
+    public static final String START_DIR = "start_dir";
     private static final String PARENT_DIR = "..        ";
     private File currentDir;
     private FileArrayAdapter adapter;
     private CheckBox lastBoxChecked = null;
     private Button okButton = null;
+    private String checkedText = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        currentDir = new File("/sdcard");
+        final Bundle extras = getIntent().getExtras();
+        String startDir = extras.getString(START_DIR);
+        if (startDir == null) {
+            startDir = "/sdcard";
+        } else {
+            startDir = startDir.substring(0, startDir.lastIndexOf(File.separatorChar));
+        }
+        currentDir = new File(startDir);
 
         ActivityMixin.setTheme(this);
         setContentView(R.layout.simple_dir_chooser);
@@ -50,20 +59,12 @@ public class SimpleDirChooser extends ListActivity {
 
         okButton = (Button) findViewById(R.id.simple_dir_chooser_ok);
         okButton.setEnabled(false);
+        okButton.setVisibility(View.INVISIBLE);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                ListView listView = SimpleDirChooser.this.getListView();
-                String chosenDirName = "";
-                for (int i = 0; i < listView.getCount(); i++) {
-                    View view = listView.getChildAt(i);
-                    CheckBox check = (CheckBox) view.findViewById(R.id.CheckBox);
-                    if (check.isChecked()) {
-                        Option o = SimpleDirChooser.this.adapter.getItem(i);
-                        chosenDirName = File.separator + o.getName();
-                    }
-                }
+                String chosenDirName = File.separator + checkedText;
                 intent.putExtra("chosenDir", currentDir.getAbsolutePath() + chosenDirName);
                 setResult(RESULT_OK, intent);
                 finish();
@@ -93,7 +94,7 @@ public class SimpleDirChooser extends ListActivity {
         } catch (Exception e) {
         }
         Collections.sort(listDirs);
-        if (!dir.getName().equalsIgnoreCase("sdcard")) {
+        if (dir.getParent() != null) {
             listDirs.add(0, new Option(PARENT_DIR, dir.getParent()));
         }
         this.adapter = new FileArrayAdapter(SimpleDirChooser.this, R.layout.simple_dir_item, listDirs);
@@ -131,15 +132,16 @@ public class SimpleDirChooser extends ListActivity {
                 v = vi.inflate(id, null);
             }
 
-            CheckBox check = (CheckBox) v.findViewById(R.id.CheckBox);
-            check.setOnClickListener(new OnCheckBoxClickListener());
-
             final Option o = items.get(position);
             if (o != null) {
                 TextView t1 = (TextView) v.findViewById(R.id.TextView01);
                 if (t1 != null) {
                     t1.setOnClickListener(new OnTextViewClickListener(position));
                     t1.setText(o.getName());
+                }
+                CheckBox check = (CheckBox) v.findViewById(R.id.CheckBox);
+                if (check != null) {
+                    check.setOnClickListener(new OnCheckBoxClickListener(o.getName()));
                 }
             }
             return v;
@@ -170,7 +172,10 @@ public class SimpleDirChooser extends ListActivity {
     }
 
     public class OnCheckBoxClickListener implements OnClickListener {
-        OnCheckBoxClickListener() {
+        private String checkedText;
+
+        OnCheckBoxClickListener(String checkedText) {
+            this.checkedText = checkedText;
         }
 
         @Override
@@ -180,6 +185,8 @@ public class SimpleDirChooser extends ListActivity {
                 check.setChecked(false);
                 lastBoxChecked = null;
                 okButton.setEnabled(false);
+                okButton.setVisibility(View.INVISIBLE);
+                SimpleDirChooser.this.checkedText = "";
             } else {
                 if (lastBoxChecked != null) {
                     lastBoxChecked.setChecked(false);
@@ -187,6 +194,8 @@ public class SimpleDirChooser extends ListActivity {
                 check.setChecked(true);
                 lastBoxChecked = check;
                 okButton.setEnabled(true);
+                okButton.setVisibility(View.VISIBLE);
+                SimpleDirChooser.this.checkedText = checkedText;
             }
         }
     }
