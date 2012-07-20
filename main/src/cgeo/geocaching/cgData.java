@@ -2942,7 +2942,7 @@ public class cgData {
             where.append(" and ").append(dbTableCaches).append(".disabled == 0");
         }
         if (type != CacheType.ALL) {
-            where.append(" and ").append(dbTableCaches).append(".type == '" + type.id + "'");
+            where.append(" and ").append(dbTableCaches).append(".type == '").append(type.id).append("'");
         }
         init();
 
