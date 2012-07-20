@@ -66,7 +66,7 @@ public class cgData {
     private static final String[] WAYPOINT_COLUMNS = new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" };
 
     /** Number of days (as ms) after temporarily saved caches are deleted */
-    private static long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
+    private final static long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
 
     /**
      * holds the column indexes of the cache table to avoid lookups
@@ -2929,16 +2929,20 @@ public class cgData {
      *
      * @param excludeDisabled
      * @param excludeMine
+     * @param type
      * @return
      */
 
-    public Set<cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled) {
+    public Set<cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled, CacheType type) {
         final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableWaypoints, viewport));
         if (excludeMine) {
             where.append(" and ").append(dbTableCaches).append(".own == 0 and ").append(dbTableCaches).append(".found == 0");
         }
         if (excludeDisabled) {
             where.append(" and ").append(dbTableCaches).append(".disabled == 0");
+        }
+        if (type != CacheType.ALL) {
+            where.append(" and ").append(dbTableCaches).append(".type == '").append(type.id).append("'");
         }
         init();
 
