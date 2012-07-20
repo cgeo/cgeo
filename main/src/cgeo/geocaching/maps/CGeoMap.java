@@ -177,6 +177,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 } }; // bottom left, 12x12 / 26x26
 
     private SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
+    /** Count of caches currently visible */
     private int cachesCnt = 0;
     /** List of caches in the viewport */
     private LeastRecentlyUsedSet<cgCache> caches = null;
@@ -1318,8 +1319,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     overlayCaches.updateItems(itemsToDisplay);
                     displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-
-                    cachesCnt = cachesToDisplay.size();
 
                 } else {
                     overlayCaches.updateItems(itemsToDisplay);
