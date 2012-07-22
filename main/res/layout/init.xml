@@ -163,7 +163,7 @@
 					android:singleLine="false"
                     android:layout_height="wrap_content"
 					android:minLines="3"
-                    android:inputType="textCapSentences"/>
+                    android:inputType="textMultiLine|textCapSentences"/>
 			<LinearLayout android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal" >
