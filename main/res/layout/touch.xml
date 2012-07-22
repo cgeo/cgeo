@@ -45,10 +45,10 @@
 					android:hint="@string/trackable_code" />
 			<EditText style="@style/edittext_full"
 					android:id="@+id/log"
-                       android:hint="@string/log_new_log_text"
+                    android:hint="@string/log_new_log_text"
 					android:singleLine="false"
 					android:lines="5"
-					android:inputType="textCapSentences" />
+					android:inputType="textMultiLine|textCapSentences" />
 			<LinearLayout android:id="@+id/tweet_box"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
