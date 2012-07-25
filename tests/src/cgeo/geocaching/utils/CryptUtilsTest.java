@@ -17,4 +17,8 @@ public class CryptUtilsTest extends TestCase {
         assertEquals(4660, GCConstants.gccodeToGCId("GC1234"));
         assertEquals(61731, GCConstants.gccodeToGCId("GCF123"));
     }
+
+    public static void testIssue1902() throws Exception {
+        assertEquals("ƖƖlƖƖƖƖ", CryptUtils.rot13("ƖƖyƖƖƖƖ"));
+    }
 }
