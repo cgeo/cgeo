@@ -18,14 +18,13 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -51,43 +50,31 @@ class GpxExport extends AbstractExport {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
             new ExportTask(caches, activity).execute((Void) null);
-
         } else {
             // Show configuration dialog
-            new ExportOptionsDialog(caches, activity).show();
-        }
-    }
-
-    /**
-     * A dialog to allow the user to set options for the export.
-     *
-     * Currently available option is: opening of share menu after successful export
-     */
-    private class ExportOptionsDialog extends AlertDialog {
-        public ExportOptionsDialog(final List<cgCache> caches, final Activity activity) {
-            super(activity);
-
-            View layout = activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog, null);
-            setView(layout);
-
-            final CheckBox shareOption = (CheckBox) layout.findViewById(R.id.share);
-
-            shareOption.setChecked(Settings.getShareAfterExport());
-
-            shareOption.setOnClickListener(new View.OnClickListener() {
+            AlertDialog.Builder dialogBuilder = new Builder(activity);
+            dialogBuilder.setTitle(R.string.export_gpx_info);
+            CharSequence[] choices = { getString(R.string.init_share_after_export) };
+            boolean[] checked = { Settings.getShareAfterExport() };
+            dialogBuilder.setPositiveButton(getString(R.string.export), new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Settings.setShareAfterExport(shareOption.isChecked());
+                public void onClick(DialogInterface dialog, int clicked) {
+                    if (clicked == DialogInterface.BUTTON_POSITIVE) {
+                        dialog.dismiss();
+                        new ExportTask(caches, activity).execute((Void) null);
+                    }
                 }
             });
+            dialogBuilder.setMultiChoiceItems(choices, checked, new DialogInterface.OnMultiChoiceClickListener() {
 
-            ((Button) layout.findViewById(R.id.export)).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    dismiss();
-                    new ExportTask(caches, activity).execute((Void) null);
+                public void onClick(DialogInterface arg0, int arg1, boolean arg2) {
+                    if (arg1 == 0) {
+                        Settings.setShareAfterExport(arg2);
+                    }
                 }
             });
+            dialogBuilder.create().show();
         }
     }
 
@@ -421,16 +408,20 @@ class GpxExport extends AbstractExport {
                 if (result) {
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
                     if (Settings.getShareAfterExport()) {
-                        Intent shareIntent = new Intent();
-                        shareIntent.setAction(Intent.ACTION_SEND);
-                        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportFile));
-                        shareIntent.setType("application/xml");
-                        activity.startActivity(Intent.createChooser(shareIntent, getString(R.string.export_gpx_to)));
+                        shareAfterExport();
                     }
                 } else {
                     ActivityMixin.showToast(activity, getString(R.string.export_failed));
                 }
             }
+        }
+
+        private void shareAfterExport() {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportFile));
+            shareIntent.setType("application/xml");
+            activity.startActivity(Intent.createChooser(shareIntent, getString(R.string.export_gpx_to)));
         }
 
         @Override
