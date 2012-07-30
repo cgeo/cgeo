@@ -1091,6 +1091,7 @@
     · Store for offline from map always available\n
     · Do not show waypoints on map if the relevant cache is filtered out\n
     · Limit for waypoints on live map now applied correctly\n
+    · Link to spoiler pictures was missing if the extension is jpeg\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=7&amp;state=closed">Detailed list of all changes</a>\n
     \n
