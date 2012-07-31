@@ -252,6 +252,7 @@
   <string name="menu_history">History</string>
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Scan geocode</string>
+  <string name="menu_download">Downloads</string>
 
   <!-- main screen -->
   <string name="live_map_button">Live map</string>
@@ -680,7 +681,8 @@
   <string name="web_import_waiting">Waiting for new caches from web…</string>
   <string name="web_downloading">Downloading</string>
   <string name="web_downloaded">Downloaded</string>
-
+  <string name="web_download_stop">Stop</string>
+  
   <!-- popup -->
   <string name="popup_more">More details</string>
 
@@ -869,7 +871,26 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">The GPX file will be exported to %1$s with current date and time as file name.</string>
   <string name="export_gpx_to">Send exported GPX to</string>
-
+  
+  <!-- cache download service -->
+  <string name="download_service_downloading">Downloading</string>
+  <string name="download_service_remove">Remove</string>
+  <string name="download_service_downloads">Downloads</string>
+  <string name="download_service_finished">Finished</string>
+  <string name="download_service_pause">Pause</string>
+  <string name="download_service_resume">Resume</string>
+  <string name="download_service_flush">Flush&amp;Stop</string>
+  <string name="download_service_queued">Queued</string>
+  <string name="download_service_flushed_queue_and_exiting">Download service has been requested to flush queue and exit.</string>
+  <string name="download_service_removed_cache">Geocache %s has been removed from queue.</string>
+  <string name="download_service_not_removed_cache">Geocache %s is not in queue.</string>
+  <string name="download_service_paused">Download service has been paused.</string>
+  <string name="download_service_resumed">Download service has been resumed.</string>
+  <string name="download_service_send2cgeostart">Download service starting send2cgeo download.</string>
+  <string name="download_service_send2cgefinished">Download service finished send2cgeo monitoring.</string>
+  <string name="download_service_send2cgeo_is_running">send2cgeo monitoring is already running</string>
+  <string name="download_service_queued_cache">Queued %s to download</string>
+  
   <!--  attribute unknown -->
   <string name="attribute_unknown_yes">Unknown attribute present</string>
   <string name="attribute_unknown_no">Unknown attribute not present</string>

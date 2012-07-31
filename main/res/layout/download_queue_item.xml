@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="90dp"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:paddingRight="3dip"
+        android:paddingTop="5dip"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="?text_color"
+        android:textSize="18dip" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:layout_gravity="left"
+        android:layout_marginRight="90dp"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:paddingBottom="5dip"
+        android:paddingRight="3dip"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="?text_color_grey"
+        android:textSize="12dip" />
+
+    <Button
+        android:id="@+id/delete_from_queue"
+        style="@style/button_small"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/download_service_remove"
+        android:visibility="gone" />
+
+</RelativeLayout>

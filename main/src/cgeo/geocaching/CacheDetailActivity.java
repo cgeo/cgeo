@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.downloadservice.CacheDownloadService;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -594,7 +595,7 @@ public class CacheDetailActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int menuItem = item.getItemId();
 
-        switch(menuItem) {
+        switch (menuItem) {
             case 0:
                 // no menu selected, but a new sub menu shown
                 return false;
@@ -1332,8 +1333,6 @@ public class CacheDetailActivity extends AbstractActivity {
         private LinearLayout detailsList;
 
         // TODO Do we need this thread-references?
-        private StoreCacheThread storeThread;
-        private RefreshCacheThread refreshThread;
         private Thread watchlistThread;
 
         @Override
@@ -1430,22 +1429,22 @@ public class CacheDetailActivity extends AbstractActivity {
             if (cache.getCoords() != null) {
                 TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
                 valueView.setOnClickListener(new View.OnClickListener() {
-                            private int position = 0;
-                            private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
-                                    GeopointFormatter.Format.LAT_LON_DECMINUTE,
-                                    GeopointFormatter.Format.LAT_LON_DECSECOND,
-                                    GeopointFormatter.Format.LAT_LON_DECDEGREE
-                            };
+                    private int position = 0;
+                    private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
+                            GeopointFormatter.Format.LAT_LON_DECMINUTE,
+                            GeopointFormatter.Format.LAT_LON_DECSECOND,
+                            GeopointFormatter.Format.LAT_LON_DECDEGREE
+                    };
 
-                            // rotate coordinate formats on click
-                            @Override
-                            public void onClick(View view) {
-                                position = (position + 1) % availableFormats.length;
+                    // rotate coordinate formats on click
+                    @Override
+                    public void onClick(View view) {
+                        position = (position + 1) % availableFormats.length;
 
-                                final TextView valueView = (TextView) view.findViewById(R.id.value);
-                                valueView.setText(cache.getCoords().format(availableFormats[position]));
-                            }
-                        });
+                        final TextView valueView = (TextView) view.findViewById(R.id.value);
+                        valueView.setText(cache.getCoords().format(availableFormats[position]));
+                    }
+                });
                 registerForContextMenu(valueView);
             }
 
@@ -1502,42 +1501,6 @@ public class CacheDetailActivity extends AbstractActivity {
             return view;
         }
 
-        private class StoreCacheHandler extends CancellableHandler {
-            @Override
-            public void handleRegularMessage(Message msg) {
-                if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
-                    updateStatusMsg((String) msg.obj);
-                } else {
-                    storeThread = null;
-                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
-                }
-            }
-
-            private void updateStatusMsg(final String msg) {
-                progress.setMessage(res.getString(R.string.cache_dialog_offline_save_message)
-                        + "\n\n"
-                        + msg);
-            }
-        }
-
-        private class RefreshCacheHandler extends CancellableHandler {
-            @Override
-            public void handleRegularMessage(Message msg) {
-                if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
-                    updateStatusMsg((String) msg.obj);
-                } else {
-                    refreshThread = null;
-                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
-                }
-            }
-
-            private void updateStatusMsg(final String msg) {
-                progress.setMessage(res.getString(R.string.cache_dialog_refresh_message)
-                        + "\n\n"
-                        + msg);
-            }
-        }
-
         private class DropCacheHandler extends Handler {
             @Override
             public void handleMessage(Message msg) {
@@ -1548,70 +1511,20 @@ public class CacheDetailActivity extends AbstractActivity {
         private class StoreCacheClickListener implements View.OnClickListener {
             @Override
             public void onClick(View arg0) {
-                if (progress.isShowing()) {
-                    showToast(res.getString(R.string.err_detail_still_working));
-                    return;
-                }
-
-                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler();
-
-                progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-
-                if (storeThread != null) {
-                    storeThread.interrupt();
-                }
-
-                storeThread = new StoreCacheThread(storeCacheHandler);
-                storeThread.start();
+                Intent intent = new Intent(getApplicationContext(), CacheDownloadService.class);
+                intent.putExtra(CacheDownloadService.EXTRA_GEOCODE, cache.getGeocode());
+                startService(intent);
             }
         }
 
         private class RefreshCacheClickListener implements View.OnClickListener {
             @Override
             public void onClick(View arg0) {
-                if (progress.isShowing()) {
-                    showToast(res.getString(R.string.err_detail_still_working));
-                    return;
-                }
-
-                final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler();
-
-                progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
-
-                if (refreshThread != null) {
-                    refreshThread.interrupt();
-                }
-
-                refreshThread = new RefreshCacheThread(refreshCacheHandler);
-                refreshThread.start();
-            }
-        }
-
-        private class StoreCacheThread extends Thread {
-            final private CancellableHandler handler;
-
-            public StoreCacheThread(final CancellableHandler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                cache.store(handler);
-            }
-        }
-
-        private class RefreshCacheThread extends Thread {
-            final private CancellableHandler handler;
-
-            public RefreshCacheThread(final CancellableHandler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                cache.refresh(cache.getListId(), handler);
-
-                handler.sendEmptyMessage(0);
+                Intent intent = new Intent(getApplicationContext(), CacheDownloadService.class);
+                intent.putExtra(CacheDownloadService.EXTRA_GEOCODE, cache.getGeocode());
+                intent.putExtra(CacheDownloadService.EXTRA_LIST_ID, cache.getListId());
+                intent.putExtra(CacheDownloadService.EXTRA_REFRESH, true);
+                startService(intent);
             }
         }
 
