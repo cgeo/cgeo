@@ -25,6 +25,19 @@ abstract class AbstractExport implements Export {
         return cgeoapplication.getInstance().getString(resourceId);
     }
 
+    /**
+     * Generates a localized string from a resource id.
+     * 
+     * @param resourceId
+     *            the resource id of the string
+     * @param params
+     *            The parameter
+     * @return localized string
+     */
+    protected static String getString(int resourceId, Object... params) {
+        return cgeoapplication.getInstance().getString(resourceId, params);
+    }
+
     @Override
     public String toString() {
         // used in the array adapter of the dialog showing the exports
