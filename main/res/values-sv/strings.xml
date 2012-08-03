@@ -798,7 +798,7 @@
   <string name="export_fieldnotes_onlynew">Bara sedan senaste exporteringen</string>
   <string name="export_fieldnotes_creating">Skapar Field Notes…</string>
   <string name="export_gpx">GPX</string>
-  <string name="export_gpx_info">GPX filen kommer att exporteras till /sdcard/gpx med datum och tid i filnamnet.</string>
+  <string name="export_gpx_info">GPX filen kommer att exporteras till %1$s med datum och tid i filnamnet.</string>
   <string name="export_gpx_to">Skicka exporterad GPX till</string>
 
   <!-- next things -->

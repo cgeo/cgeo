@@ -812,7 +812,7 @@
   <string name="export_fieldnotes_onlynew">Nur seit letztem Export</string>
   <string name="export_fieldnotes_creating">Erstelle Field Notes…</string>
   <string name="export_gpx">GPX</string>
-  <string name="export_gpx_info">GPX-Datei wird nach /sdcard/gpx mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
+  <string name="export_gpx_info">GPX-Datei wird nach %1$s mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
   <string name="export_gpx_to">Exportierte GPX-Datei senden an</string>
   
   <!-- attribute unknown -->
