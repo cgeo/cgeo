@@ -1083,6 +1083,7 @@
     · Display cache size and D/T-rating in compass\n
     · Try to get event cache starting time and use it for calendar entry\n
     · Titlebar in lists also shows number of filtered caches\n
+    · Selectable GPX export directory\n
     \n
     <b>Bugfixing:</b>\n
     · Show as list from live map corrected to display the correct caches\n
