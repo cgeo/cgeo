@@ -618,8 +618,8 @@
   <!-- navigation -->
   <string name="navigation">Navegación</string>
   <string name="compass_title">Brújula</string>
-  <string name="use_gps">Usar GPS</string>
-  <string name="use_compass">Usar brújula</string>
+  <string name="use_gps">Solo usar GPS</string>
+  <string name="use_compass">Usar GPS y brújula</string>
   <string name="destination_select">Seleccionar destino</string>
   <string name="destination_set">Elegir destino</string>
 
