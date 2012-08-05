@@ -718,8 +718,8 @@
   <!-- navigation -->
   <string name="navigation">Navigatie</string>
   <string name="compass_title">Kompas</string>
-  <string name="use_gps">Gebruik GPS</string>
-  <string name="use_compass">Gebruik kompas</string>
+  <string name="use_gps">Gebruik alleen GPS</string>
+  <string name="use_compass">Gebruik GPS en kompas</string>
   <string name="destination_select">Selecteer bestemming</string>
   <string name="destination_set">Zet bestemming</string>
   <string name="navigation_direct_navigation">Directe Navigatie</string>
