@@ -760,8 +760,8 @@
   <!-- navigation -->
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompass</string>
-  <string name="use_gps">GPS nutzen</string>
-  <string name="use_compass">Kompass nutzen</string>
+  <string name="use_gps">Nur GPS nutzen</string>
+  <string name="use_compass">GPS und Kompass nutzen</string>
   <string name="destination_select">Ziel auswählen</string>
   <string name="destination_set">Ziel setzen</string>
   <string name="navigation_direct_navigation">Direkte Navigation</string>
