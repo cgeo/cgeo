@@ -95,6 +95,7 @@ public final class Settings {
     private static final String KEY_DB_ON_SDCARD = "dbonsdcard";
     private static final String KEY_LAST_TRACKABLE_ACTION = "trackableaction";
     private static final String KEY_SHARE_AFTER_EXPORT = "shareafterexport";
+    private static final String KEY_GPX_EXPORT_DIR = "gpxExportDir";
 
     private final static int unitsMetric = 1;
 
@@ -1166,6 +1167,23 @@ public final class Settings {
         });
     }
 
+    public static String getGpxExportDir() {
+        return sharedPrefs.getString(KEY_GPX_EXPORT_DIR, "/sdcard/gpx");
+    }
+
+    public static void setGpxExportDir(final String gpxExportDir) {
+        editSharedSettings(new PrefRunnable() {
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_GPX_EXPORT_DIR, gpxExportDir);
+            }
+        });
+    }
+
+    public static boolean getShareAfterExport() {
+        return sharedPrefs.getBoolean(KEY_SHARE_AFTER_EXPORT, true);
+    }
+
     public static void setShareAfterExport(final boolean shareAfterExport) {
         editSharedSettings(new PrefRunnable() {
             @Override
@@ -1188,10 +1206,6 @@ public final class Settings {
             }
         });
 	}
-
-    public static boolean getShareAfterExport() {
-        return sharedPrefs.getBoolean(KEY_SHARE_AFTER_EXPORT, true);
-    }
 
     public static String getPreferencesName() {
         // there is currently no Android API to get the file name of the shared preferences

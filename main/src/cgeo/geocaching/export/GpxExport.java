@@ -26,6 +26,7 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,7 +39,6 @@ import java.util.Date;
 import java.util.List;
 
 class GpxExport extends AbstractExport {
-    private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/gpx");
     private static final SimpleDateFormat dateFormatZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     protected GpxExport() {
@@ -69,6 +69,9 @@ class GpxExport extends AbstractExport {
 
             View layout = activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog, null);
             setView(layout);
+
+            final TextView text = (TextView) layout.findViewById(R.id.info);
+            text.setText(getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
 
             final CheckBox shareOption = (CheckBox) layout.findViewById(R.id.share);
 
@@ -127,10 +130,11 @@ class GpxExport extends AbstractExport {
             }
 
             try {
+                final File exportLocation = new File(Settings.getGpxExportDir());
                 exportLocation.mkdirs();
 
                 final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                exportFile = new File(exportLocation.toString() + File.separatorChar + "export_" + fileNameDateFormat.format(new Date()) + ".gpx");
+                exportFile = new File(Settings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(new Date()) + ".gpx");
 
                 gpx = new BufferedWriter(new FileWriter(exportFile));
 

@@ -828,7 +828,7 @@
   <string name="export_fieldnotes_onlynew">最後にエクスポートした時から更新がある場合のみ</string>   <!-- only new logs since last export/upload  line53:FieldnoteExport.java -->
   <string name="export_fieldnotes_creating">フィールドノートを作成中…</string>
   <string name="export_gpx">GPX</string>
-  <string name="export_gpx_info">GPXファイルは/sdcard/gpxフォルダに保存され、ファイル名は現在の日時になります。</string>
+  <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります。</string>
   <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
   
   <!--  attribute unknown -->
