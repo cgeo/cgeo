@@ -1084,6 +1084,8 @@
     · Try to get event cache starting time and use it for calendar entry\n
     · Titlebar in lists also shows number of filtered caches\n
     · Selectable GPX export directory\n
+    · Live mode can now be activated after mapping search results\n
+      This allows to start the live map at a user defined location\n
     \n
     <b>Bugfixing:</b>\n
     · Show as list from live map corrected to display the correct caches\n
