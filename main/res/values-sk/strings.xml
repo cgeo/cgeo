@@ -114,6 +114,8 @@
   <string name="log_new_log">Log</string>
   <string name="log_new_log_text">Text logu</string>
   <string name="log_announcement">Oznámenie</string>
+  <string name="log_today">Dnes</string>
+  <string name="log_yesterday">Včera</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Preložiť do jazyka %s</string>
@@ -284,6 +286,7 @@
   <string name="caches_sort_vote">hlasovania (vlastného hodn.)</string>
   <string name="caches_sort_inventory">počtu položiek v skrýši</string>
   <string name="caches_sort_date_hidden">dátumu</string>
+  <string name="caches_sort_date_logged">Dátum pridaný do logu</string>
   <string name="caches_sort_finds">nájdení</string>
   <string name="caches_sort_state">stavu</string>
   <string name="caches_sort_storage">dátumu uloženia v zariadení</string>
@@ -423,7 +426,12 @@
   <string name="init_mapsources_description">Tu môžete vybrať zdroje pre vaše mapy. Je to alternatíva ku Google mapám rôznych OpenStreetMap styles sú dostupné a dokonca offline mapové súbory (podrobnosti nájdete na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyberte zdroj máp</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_select_gpx_exportdir">…</string>
+  <string name="init_gpx_exportdir">Adresár pre GPX Export</string>
+  <string name="init_gpx_exportdir_description">Tu si môžete vybrať adresár pre GPX exporty.</string>
+  <string name="init_gpx_exportdir_select">Výber adresára pre GPX Export</string>
   <string name="init_maptrail">Zobraziť stopu na mape</string>
+  <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
   <string name="init_trackautovisit">Nastaviť trasovateľné predmety automaticky na „navštívené“</string>
   <string name="init_sigautoinsert">Automaticky vložiť podpis</string>
   <string name="init_loaddirectionimg">Ak je to potrebné načítať obrázok zo smerom</string>
@@ -598,6 +606,7 @@
   <string name="cache_image_open_file">Otvoriť ako súbor</string>
   <string name="cache_image_open_browser">Otvoriť v prehliadači</string>
   <string name="cache_share_field">Zdieľať</string>
+  <string name="cache_time_full_hours">hodín</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
@@ -605,6 +614,10 @@
   <string name="file_list_no_files">Prepáčte, c:geo sa nepodarilo nájsť žiadne vhodné súbory.</string>
   <string name="file_searching">Vyhľadávanie zodpovedajúcich súborov</string>
   <string name="file_title_searching">Vyhľadávanie</string>
+
+  <!-- simple_dir_chooser -->
+  <string name="simple_dir_chooser_title">Vyberte adresár</string>
+  <string name="simple_dir_chooser_current_path">Cesta:</string>
 
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Načítanie skrýš z .gpx súboru\nNačítané:</string>
@@ -804,7 +817,12 @@
   <string name="export_fieldnotes_onlynew">Iba od posledného exportu</string>
   <string name="export_fieldnotes_creating">Vytváranie poznámok…</string>
   <string name="export_gpx">GPX</string>
+  <string name="export_gpx_info">Súbor GPX bude exportovaný do %1$s s názvom súboru podľa aktuálneho dátumu a času.</string>
+  <string name="export_gpx_to">Odoslať exportovaný GPS do</string>
 
+  <!--  attribute unknown -->
+  <string name="attribute_unknown_yes">Obsahuje neznánmy atribút</string>
+  <string name="attribute_unknown_no">Neobsahuje neznámy atribút</string>
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Psi povolené</string>
   <string name="attribute_dogs_no">Psi nepovolené</string>
@@ -958,6 +976,13 @@
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy keď zapíšete nájdenie skrýše?</string>
   <string name="about_auth_1">Pomocou nasledujúceho procesu môžete aplikácii <b>c:geo</b> umožniť odosielanie príspevkov na váš Twitter.  </string>
   <string name="about_auth_2">Ťuknutím na tlačidlo „Zahájiť autorizáciu“ celý proces začne. Tento proces otvorí webovú stránku Twitteru, kde sa sa prihlásite a tlačidlom „Authorize app“ umožníte aplikácii <b>c:geo</b> prístup k vášmu Twitter účtu. Potom čo ťuknete na „Authorize app“, Twitter vám pridelí PIN kód. Tento kód skopírujte a vložte do aplikácie <b>c:geo</b>. A potvrďte. To je všetko.</string>
+
+  <!-- status -->
+  <string name="status_new_release">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>
+  <string name="status_new_nightly">Je dostupná nová nočná zostava.\nKliknite pre inštaláciu.</string>
+  <string name="status_new_rc">Je dostupná nová verzia „release candidate“.\nKliknite pre inštaláciu.</string>
+  <string name="status_geocaching_change">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
+  <string name="status_geocaching_livemap">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
 
   <!-- go4cache -->
   <string name="go4cache_looking_around">Prehľadávanie okolia</string>
