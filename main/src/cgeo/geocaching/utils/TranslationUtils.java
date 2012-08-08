@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.text.Html;
 
 import java.net.URLEncoder;
 
@@ -15,7 +16,7 @@ public final class TranslationUtils {
     private static final String translationWebsite = "http://translate.google.com/";
     private static final String translationForceClassicMode = "?vi=c";
     private static final String translationAutoSelect = "#auto";
-    private static final String translationFieldSeparator = "|";
+    private static final String translationFieldSeparator = "/";
 
     public static final int translationTextLengthToWarn = 500;
 
@@ -29,7 +30,7 @@ public final class TranslationUtils {
      * @return URI ready to be parsed
      */
     public static String buildTranslationURI(final String toLang, final String text) {
-        return translationWebsite + translationForceClassicMode + translationAutoSelect + translationFieldSeparator + toLang + translationFieldSeparator + URLEncoder.encode(text).replace("+", "%20");
+        return translationWebsite + translationForceClassicMode + translationAutoSelect + translationFieldSeparator + toLang + translationFieldSeparator + URLEncoder.encode(Html.fromHtml(text).toString()).replace("+", "%20");
     }
 
     /**
