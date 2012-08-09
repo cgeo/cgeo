@@ -8,14 +8,14 @@
         android:id="@+id/CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="false" />
+        android:checked="false"/>
     <TextView 
-	    android:text="@+id/TextView01" 
 	    android:id="@+id/TextView01" 
-	    android:layout_width="wrap_content" 
-	    android:layout_height="wrap_content" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content"
 	    android:singleLine="true" 
 	    android:textStyle="bold" 
 	    android:layout_marginTop="5dip" 
-	    android:layout_marginLeft="5dip" />
+	    android:layout_marginLeft="5dip"
+	    android:textColor="?text_color"/>
 </LinearLayout>
