@@ -13,6 +13,11 @@ public class UnknownTagsHandler implements TagHandler {
     private static int countCells = 0;
     int strikePos = UNDEFINED_POSITION;
     private boolean problematicDetected = false;
+    private enum ListType {
+        Ordered, Unordered
+    }
+    private static int listIndex = 0;
+    private static ListType listType;
 
     @Override
     public void handleTag(boolean opening, String tag, Editable output,
@@ -27,6 +32,10 @@ public class UnknownTagsHandler implements TagHandler {
             handleTr(opening, output);
         } else if (tag.equalsIgnoreCase("pre")) {
             handleProblematic();
+        } else if (tag.equalsIgnoreCase("ol")) {
+            handleOl(opening);
+        } else if (tag.equalsIgnoreCase("li")) {
+            handleLi(opening, output);
         }
     }
 
@@ -64,6 +73,27 @@ public class UnknownTagsHandler implements TagHandler {
         if (opening) {
             output.append('\n');
             countCells = 0;
+        }
+    }
+
+    // Ordered lists are handled in a simple manner. They are rendered as Arabic numbers starting at 1
+    // with no handling for alpha or Roman numbers or arbitrary numbering.
+    private static void handleOl(boolean opening) {
+        if (opening) {
+            listIndex = 1;
+            listType = ListType.Ordered;
+        } else {
+            listType = ListType.Unordered;
+        }
+    }
+
+    private static void handleLi(boolean opening, Editable output) {
+        if (opening) {
+            if (listType == ListType.Ordered) {
+                output.append("\n  " + (listIndex++) + ". ");
+            } else {
+                output.append("\n  • ");
+            }
         }
     }
 
