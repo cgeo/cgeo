@@ -62,6 +62,10 @@ public abstract class Login {
     }
 
     public static StatusCode login() {
+        return login(true);
+    }
+
+    private static StatusCode login(boolean retry) {
         final ImmutablePair<String, String> login = Settings.getLogin();
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
@@ -129,7 +133,12 @@ public abstract class Login {
         }
 
         Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
-            return StatusCode.UNKNOWN_ERROR; // can't login
+        if (retry) {
+            Login.switchToEnglish(loginData);
+            return login(false);
+        }
+
+        return StatusCode.UNKNOWN_ERROR; // can't login
     }
 
     public static StatusCode logout() {
