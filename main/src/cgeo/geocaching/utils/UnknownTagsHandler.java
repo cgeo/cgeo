@@ -9,15 +9,17 @@ import android.text.style.StrikethroughSpan;
 
 public class UnknownTagsHandler implements TagHandler {
 
-    private static final int UNDEFINED_POSITION = -1;
-    private static int countCells = 0;
-    int strikePos = UNDEFINED_POSITION;
-    private boolean problematicDetected = false;
     private enum ListType {
         Ordered, Unordered
     }
-    private static int listIndex = 0;
-    private static ListType listType;
+
+    private static final int UNDEFINED_POSITION = -1;
+
+    private int countCells = 0;
+    private int strikePos = UNDEFINED_POSITION;
+    private boolean problematicDetected = false;
+    private int listIndex = 0;
+    private ListType listType = ListType.Unordered;
 
     @Override
     public void handleTag(boolean opening, String tag, Editable output,
@@ -40,7 +42,7 @@ public class UnknownTagsHandler implements TagHandler {
     }
 
     private void handleStrike(boolean opening, Editable output) {
-        int length = output.length();
+        final int length = output.length();
         if (opening) {
             strikePos = length;
         } else {
@@ -59,7 +61,7 @@ public class UnknownTagsHandler implements TagHandler {
         problematicDetected = true;
     }
 
-    private static void handleTd(boolean opening, Editable output) {
+    private void handleTd(boolean opening, Editable output) {
         // insert bar for each table column, see https://en.wikipedia.org/wiki/Box-drawing_characters
         if (opening) {
             if (countCells++ > 0) {
@@ -68,7 +70,7 @@ public class UnknownTagsHandler implements TagHandler {
         }
     }
 
-    private static void handleTr(boolean opening, Editable output) {
+    private void handleTr(boolean opening, Editable output) {
         // insert new line for each table row
         if (opening) {
             output.append('\n');
@@ -78,7 +80,7 @@ public class UnknownTagsHandler implements TagHandler {
 
     // Ordered lists are handled in a simple manner. They are rendered as Arabic numbers starting at 1
     // with no handling for alpha or Roman numbers or arbitrary numbering.
-    private static void handleOl(boolean opening) {
+    private void handleOl(boolean opening) {
         if (opening) {
             listIndex = 1;
             listType = ListType.Ordered;
@@ -87,7 +89,7 @@ public class UnknownTagsHandler implements TagHandler {
         }
     }
 
-    private static void handleLi(boolean opening, Editable output) {
+    private void handleLi(boolean opening, Editable output) {
         if (opening) {
             if (listType == ListType.Ordered) {
                 output.append("\n  " + (listIndex++) + ". ");
