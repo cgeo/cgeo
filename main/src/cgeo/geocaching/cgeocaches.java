@@ -1390,6 +1390,7 @@ public class cgeocaches extends AbstractListActivity {
             removeGeoAndDir();
 
             final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
+            final List<cgCache> weHaveStaticMaps = new ArrayList<cgCache>(cacheList.size());
             for (cgCache cache : cacheListTemp) {
                 if (checked > 0 && !cache.isStatusChecked()) {
                     handler.sendEmptyMessage(0);
@@ -1397,47 +1398,74 @@ public class cgeocaches extends AbstractListActivity {
                     yield();
                     continue;
                 }
-
-                try {
-                    if (needToStop) {
-                        Log.i("Stopped storing process.");
-                        break;
-                    }
-
-                    if ((System.currentTimeMillis() - last) < 1500) {
-                        try {
-                            int delay = 1000 + ((Double) (Math.random() * 1000)).intValue() - (int) (System.currentTimeMillis() - last);
-                            if (delay < 0) {
-                                delay = 500;
-                            }
-
-                            Log.i("Waiting for next cache " + delay + " ms");
-                        } catch (Exception e) {
-                            Log.e("cgeocaches.LoadDetailsThread.sleep: " + e.toString());
-                        }
-                    }
-
-                    if (needToStop) {
-                        Log.i("Stopped storing process.");
-                        break;
-                    }
-
-                    detailProgress++;
-                    cache.refresh(listIdLD, null);
-
-                    handler.sendEmptyMessage(cacheList.indexOf(cache));
-
-                    yield();
-                } catch (Exception e) {
-                    Log.e("cgeocaches.LoadDetailsThread: " + e.toString());
+                if (Settings.isStoreOfflineMaps() && StaticMapsProvider.hasStaticMapForCache(cache.getGeocode())) {
+                    weHaveStaticMaps.add(cache);
+                    continue;
                 }
-
-                last = System.currentTimeMillis();
+                try {
+                    refreshCache(cache);
+                } catch (InterruptedException e) {
+                    Log.i(e.getMessage());
+                }
             }
             cacheListTemp.clear();
 
+            for (cgCache cache : weHaveStaticMaps) {
+                try {
+                    refreshCache(cache);
+                } catch (InterruptedException e) {
+                    Log.i(e.getMessage());
+                }
+            }
+
             handler.sendEmptyMessage(MSG_RESTART_GEO_AND_DIR);
             handler.sendEmptyMessage(MSG_DONE);
+        }
+
+        /**
+         * Refreshes the cache information.
+         *
+         * @param cache
+         *            The cache to refresh
+         * @throws InterruptedException
+         *             interruted
+         */
+        private void refreshCache(cgCache cache) throws InterruptedException {
+            try {
+                if (needToStop) {
+                    throw new InterruptedException("Stopped storing process.");
+                }
+
+                if ((System.currentTimeMillis() - last) < 1500) {
+                    try {
+                        int delay = 1000 + ((Double) (Math.random() * 1000)).intValue() - (int) (System.currentTimeMillis() - last);
+                        if (delay < 0) {
+                            delay = 500;
+                        }
+
+                        Log.i("Waiting for next cache " + delay + " ms");
+                    } catch (Exception e) {
+                        Log.e("cgeocaches.LoadDetailsThread.sleep: " + e.toString());
+                    }
+                }
+
+                if (needToStop) {
+                    throw new InterruptedException("Stopped storing process.");
+                }
+
+                detailProgress++;
+                cache.refresh(listIdLD, null);
+
+                handler.sendEmptyMessage(cacheList.indexOf(cache));
+
+                yield();
+            } catch (InterruptedException e) {
+                throw e;
+            } catch (Exception e) {
+                Log.e("cgeocaches.LoadDetailsThread: " + e.toString());
+            }
+
+            last = System.currentTimeMillis();
         }
     }
 
