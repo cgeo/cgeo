@@ -30,7 +30,7 @@ public final class TranslationUtils {
      * @return URI ready to be parsed
      */
     public static String buildTranslationURI(final String toLang, final String text) {
-        return translationWebsite + translationForceClassicMode + translationAutoSelect + translationFieldSeparator + toLang + translationFieldSeparator + URLEncoder.encode(Html.fromHtml(text).toString()).replace("+", "%20");
+        return translationWebsite + translationForceClassicMode + translationAutoSelect + translationFieldSeparator + toLang + translationFieldSeparator + URLEncoder.encode(Html.fromHtml(text).toString());
     }
 
     /**
