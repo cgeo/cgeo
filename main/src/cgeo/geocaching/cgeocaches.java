@@ -1367,18 +1367,15 @@ public class cgeocaches extends AbstractListActivity {
         final private Handler handler;
         final private int listIdLD;
         private volatile boolean needToStop = false;
-        private int checked = 0;
         private long last = 0L;
+        final private List<cgCache> selected;
 
         public LoadDetailsThread(Handler handlerIn, int listId) {
             handler = handlerIn;
+            selected = adapter.getCheckedOrAllCaches();
 
             // in case of online lists, set the list id to the standard list
             this.listIdLD = Math.max(listId, StoredList.STANDARD_LIST_ID);
-
-            if (adapter != null) {
-                checked = adapter.getCheckedCount();
-            }
         }
 
         public void kill() {
@@ -1389,15 +1386,8 @@ public class cgeocaches extends AbstractListActivity {
         public void run() {
             removeGeoAndDir();
 
-            final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
-            final List<cgCache> weHaveStaticMaps = new ArrayList<cgCache>(cacheList.size());
-            for (cgCache cache : cacheListTemp) {
-                if (checked > 0 && !cache.isStatusChecked()) {
-                    handler.sendEmptyMessage(0);
-
-                    yield();
-                    continue;
-                }
+            final List<cgCache> weHaveStaticMaps = new ArrayList<cgCache>(selected.size());
+            for (cgCache cache : selected) {
                 if (Settings.isStoreOfflineMaps() && StaticMapsProvider.hasStaticMapForCache(cache.getGeocode())) {
                     weHaveStaticMaps.add(cache);
                     continue;
@@ -1408,7 +1398,6 @@ public class cgeocaches extends AbstractListActivity {
                     Log.i(e.getMessage());
                 }
             }
-            cacheListTemp.clear();
 
             for (cgCache cache : weHaveStaticMaps) {
                 try {
@@ -1424,11 +1413,11 @@ public class cgeocaches extends AbstractListActivity {
 
         /**
          * Refreshes the cache information.
-         *
+         * 
          * @param cache
          *            The cache to refresh
          * @throws InterruptedException
-         *             interruted
+         *             Interrupted
          */
         private void refreshCache(cgCache cache) throws InterruptedException {
             try {
