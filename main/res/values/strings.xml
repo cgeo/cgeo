@@ -53,6 +53,7 @@
   <string name="wp_pkg">Parking Area</string>
   <string name="wp_trailhead">Trailhead</string>
   <string name="wp_waypoint">Reference Point</string>
+  <string name="wp_original">Original Coordinates</string>
 
   <!-- logs -->
   <string name="log_found">Found it</string>
@@ -570,6 +571,8 @@
   <string name="cache_menu_visit_offline">Log Visit offline</string>
   <string name="cache_menu_spoilers">Spoiler images</string>
   <string name="cache_menu_around">Caches around</string>
+  <string name="cache_menu_set_as_cache_coords">Set as cache coords</string>
+  <string name="cache_menu_upload_wpt_to_gc_com">Set as cache coords and upload waypoint to Geocaching.com</string>
   <string name="cache_menu_event">Add to calendar</string>
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_share">Share cache</string>
@@ -673,6 +676,21 @@
   <string name="waypoint_save">Save</string>
   <string name="waypoint_loading">Loading waypoint…</string>
   <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
+  <string name="waypoint_set_as_cache_coords">Set as cache coordinates</string>
+  <string name="waypoint_reset_cache_coords">Reset cache coordinates</string>
+  <string name="waypoint_reset_cache_coords_on_website">Reset cache coordinates on website</string>
+  <string name="waypoint_coordinates_has_been_reset_on_website">Cache coordinates has been reset on website.</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Cache coordinates being reset on website.</string>
+  <string name="waypoint_reset_cache_coords_info">Reset possibilities</string>
+  <string name="waypoint_reset">Reset</string>
+  <string name="waypoint_localy_reset_cache_coords">Reset coordinates locally</string>
+  <string name="waypoint_modify_on_website">Modify coordinates on website</string>
+  <string name="waypoint_coordinates_couldnt_be_modified_on_website">Cache coordinates couldn\'t be set on website.</string>
+  <string name="waypoint_coordinates_upload_error">Error occurred during uploading coordinates to website.</string>
+  <string name="waypoint_coordinates_uploading_to_website">Uploading %s to website.</string>
+  <string name="waypoint_coordinates_reseting_on_website">Reseting to original coordinates on website.</string>
+  <string name="waypoint_coordinates_has_been_modified_on_website">Cache coordinates has been modified on website to: %s.</string>
+  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Cache coordinates has been localy modified to: %s.</string>
   <string name="waypoint_done">Done</string>
   <string name="waypoint_duplicate">Duplicate</string>
   <string name="waypoint_copy_of">Copy of</string>
