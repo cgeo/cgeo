@@ -1386,24 +1386,22 @@ public class cgeocaches extends AbstractListActivity {
         public void run() {
             removeGeoAndDir();
 
-            final List<cgCache> weHaveStaticMaps = new ArrayList<cgCache>(selected.size());
+            final List<cgCache> cachesWithStaticMaps = new ArrayList<cgCache>(selected.size());
             for (cgCache cache : selected) {
                 if (Settings.isStoreOfflineMaps() && StaticMapsProvider.hasStaticMapForCache(cache.getGeocode())) {
-                    weHaveStaticMaps.add(cache);
+                    cachesWithStaticMaps.add(cache);
                     continue;
                 }
-                try {
-                    refreshCache(cache);
-                } catch (InterruptedException e) {
-                    Log.i(e.getMessage());
+                if (!refreshCache(cache)) {
+                    // in case of interruption avoid the second loop
+                    cachesWithStaticMaps.clear();
+                    break;
                 }
             }
 
-            for (cgCache cache : weHaveStaticMaps) {
-                try {
-                    refreshCache(cache);
-                } catch (InterruptedException e) {
-                    Log.i(e.getMessage());
+            for (cgCache cache : cachesWithStaticMaps) {
+                if (!refreshCache(cache)) {
+                    break;
                 }
             }
 
@@ -1413,13 +1411,13 @@ public class cgeocaches extends AbstractListActivity {
 
         /**
          * Refreshes the cache information.
-         * 
+         *
          * @param cache
          *            The cache to refresh
-         * @throws InterruptedException
-         *             Interrupted
+         * @return
+         *         <code>false</code> if the storing was interrupted, <code>true</code> otherwise
          */
-        private void refreshCache(cgCache cache) throws InterruptedException {
+        private boolean refreshCache(cgCache cache) {
             try {
                 if (needToStop) {
                     throw new InterruptedException("Stopped storing process.");
@@ -1449,12 +1447,14 @@ public class cgeocaches extends AbstractListActivity {
 
                 yield();
             } catch (InterruptedException e) {
-                throw e;
+                Log.i(e.getMessage());
+                return false;
             } catch (Exception e) {
                 Log.e("cgeocaches.LoadDetailsThread: " + e.toString());
             }
 
             last = System.currentTimeMillis();
+            return true;
         }
     }
 
