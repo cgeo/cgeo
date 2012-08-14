@@ -85,10 +85,13 @@ public class StaticMapsProvider {
     }
 
     private static void downloadMaps(cgCache cache, Display display) {
+        if (cache == null) {
+            Log.e("downloadMaps - missing input parameter cache");
+            return;
+        }
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
-
         int edge = guessMaxDisplaySide(display);
 
         if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
@@ -112,6 +115,14 @@ public class StaticMapsProvider {
     }
 
     private static void storeWaypointStaticMap(final String geocode, int edge, cgWaypoint waypoint, final boolean waitForResult) {
+        if (geocode == null) {
+            Log.e("storeWaypointStaticMap - missing input parameter geocode");
+            return;
+        }
+        if (waypoint == null) {
+            Log.e("storeWaypointStaticMap - missing input parameter waypoint");
+            return;
+        }
         if (waypoint.getCoords() == null) {
             return;
         }
@@ -142,6 +153,10 @@ public class StaticMapsProvider {
     }
 
     public static void storeCachePreviewMap(final cgCache cache) {
+        if (cache == null) {
+            Log.e("storeCachePreviewMap - missing input parameter cache");
+            return;
+        }
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final String markerUrl = MARKERS_URL + "my_location_mdpi.png";
         final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
