@@ -19,7 +19,8 @@ public enum WaypointType {
     PUZZLE("puzzle", R.string.wp_puzzle, R.drawable.waypoint_puzzle),
     STAGE("stage", R.string.wp_stage, R.drawable.waypoint_stage),
     TRAILHEAD("trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead),
-    WAYPOINT("waypoint", R.string.wp_waypoint, R.drawable.waypoint_waypoint);
+    WAYPOINT("waypoint", R.string.wp_waypoint, R.drawable.waypoint_waypoint),
+    ORIGINAL("original", R.string.wp_original, R.drawable.waypoint_waypoint);
 
     public final String id;
     public final int stringId;

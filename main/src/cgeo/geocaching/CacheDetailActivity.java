@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
@@ -38,6 +39,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.R.color;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -80,6 +82,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -122,6 +125,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
     private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
+    private static final int CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES = 1241;
 
     private cgCache cache;
     private final Progress progress = new Progress();
@@ -428,11 +432,17 @@ public class CacheDetailActivity extends AbstractActivity {
                                 final cgWaypoint waypoint = sortedWaypoints.get(i);
                                 final int index = cache.getWaypoints().indexOf(waypoint);
                                 menu.setHeaderTitle(res.getString(R.string.waypoint));
-                                menu.add(CONTEXT_MENU_WAYPOINT_EDIT, index, 0, R.string.waypoint_edit);
+                                if (waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
+                                    menu.add(CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES, index, 0, R.string.waypoint_reset_cache_coords);
+                                } else {
+                                    menu.add(CONTEXT_MENU_WAYPOINT_EDIT, index, 0, R.string.waypoint_edit);
+                                }
                                 menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
                                 contextMenuWPIndex = index;
                                 if (waypoint.isUserDefined()) {
-                                    menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
+                                    if (waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
+                                        menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
+                                    }
                                 }
                                 if (waypoint.getCoords() != null) {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
@@ -541,6 +551,11 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
             }
                 break;
+            case CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES: {
+                new ResetCacheCoordinatesDialog(cache, cache.getWaypoint(index), this).show();
+            }
+                break;
+
             default:
                 return onOptionsItemSelected(item);
         }
@@ -2428,5 +2443,60 @@ public class CacheDetailActivity extends AbstractActivity {
         cacheIntent.putExtra("guid", guid);
         cacheIntent.putExtra("name", cacheName);
         context.startActivity(cacheIntent);
+    }
+
+    /**
+     * A dialog to allow the user to select reseting coordinates local/remote/both.
+     */
+    private class ResetCacheCoordinatesDialog extends AlertDialog {
+        public ResetCacheCoordinatesDialog(final cgCache cache, final cgWaypoint wpt, final Activity activity) {
+            super(activity);
+
+            View layout = activity.getLayoutInflater().inflate(R.layout.reset_cache_coords_dialog, null);
+            setView(layout);
+
+            final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);
+            final CheckBox resetLocalyOption = (CheckBox) layout.findViewById(R.id.local);
+
+            if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
+                uploadOption.setChecked(true);
+                uploadOption.setVisibility(View.VISIBLE);
+            }
+
+            ((Button) layout.findViewById(R.id.reset)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                    if (resetLocalyOption.isChecked()) {
+                        cache.setCoords(wpt.getCoords());
+                        cache.setUserModifiedCoords(false);
+                        cgeoapplication.getInstance().updateCache(cache);
+                    }
+
+                    IConnector con = ConnectorFactory.getConnector(cache);
+                    if (uploadOption.isChecked() && con.supportsOwnCoordinates()) {
+                        new ResetCoordsTask().execute(cache);
+                    }
+                }
+            });
+        }
+    }
+
+    private class ResetCoordsTask extends AsyncTask<cgCache, Progress, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(cgCache... cache) {
+            IConnector con = ConnectorFactory.getConnector(cache[0]);
+            return con.deleteModifiedCoordinates(cache[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                showToast(getString(R.string.waypoint_coordinates_has_been_reset_on_website));
+            } else {
+                showToast(getString(R.string.waypoint_coordinates_upload_error));
+            }
+        }
     }
 }

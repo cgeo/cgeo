@@ -90,6 +90,31 @@
                 android:minLines="5"
                 android:singleLine="false" />
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <CheckBox
+                    android:id="@+id/setAsCacheCoordsCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waypoint_set_as_cache_coords" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <CheckBox
+                    android:id="@+id/uploadCoordsToWebsiteCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waypoint_modify_on_website"
+                    android:visibility="gone" />
+            </LinearLayout>
+
             <Button
                 android:id="@+id/add_waypoint"
                 style="@style/button_full"
