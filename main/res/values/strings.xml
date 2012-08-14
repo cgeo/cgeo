@@ -1078,32 +1078,10 @@
   <string name="changelog">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · Sort by found date in lists\n
-    · Title of archived caches now shown in red\n
-    · Display cache size and D/T-rating in compass\n
-    · Try to get event cache starting time and use it for calendar entry\n
-    · Titlebar in lists also shows number of filtered caches\n
-    · Selectable GPX export directory\n
-    · Live mode can now be activated after mapping search results\n
-      This allows to start the live map at an user defined location\n
+    · ...\n
     \n
     <b>Bugfixing:</b>\n
-    · Show as list from live map corrected to display the correct caches\n
-    · GPX import/export improvements\n
-    · Export URLs in GPX export\n
-    · Use last known location on startup\n
-    · Show spoiler images for owned caches\n
-    · Sort file names in GPX import list\n
-    · Corrected owner name display with special characters\n
-    · Cancel operations only if cancel is clicked\n
-    · Corrected logbook statistic for event caches\n
-    · Coordinate conversion to DMS corrected\n
-    · Use last known location if no GPS-signal is present\n
-    · Store for offline from map always available\n
-    · Do not show waypoints on map if the relevant cache is filtered out\n
-    · Limit for waypoints on live map now applied correctly\n
-    · Link to spoiler pictures was missing if the extension is jpeg\n
-    · Adapted to changes on geocaching.com regarding login problems\n
+    · ...\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=7&amp;state=closed">Detailed list of all changes</a>\n
     \n
