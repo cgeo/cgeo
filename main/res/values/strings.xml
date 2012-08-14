@@ -1115,7 +1115,8 @@
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
       On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
-      Log images with huge size cause a long loading time\n\n\n
+      Log images with huge size cause a long loading time\n
+      Login problems may occur on mobile networks not allowing tethering like C-Spire Wireless. We are working on a solution.\n\n\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
