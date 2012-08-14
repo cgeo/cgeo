@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
@@ -42,7 +43,9 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.R.color;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -84,6 +87,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -129,6 +135,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
     private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
+    private static final int CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES = 1241;
 
     private static final Pattern DARK_COLOR_PATTERN = Pattern.compile(Pattern.quote("color=\"#") + "(0[0-9]){3}" + "\"");
 
@@ -436,10 +443,14 @@ public class CacheDetailActivity extends AbstractActivity {
                                 final cgWaypoint waypoint = sortedWaypoints.get(i);
                                 final int index = cache.getWaypoints().indexOf(waypoint);
                                 menu.setHeaderTitle(res.getString(R.string.waypoint));
-                                menu.add(CONTEXT_MENU_WAYPOINT_EDIT, index, 0, R.string.waypoint_edit);
-                                menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
+                                if (waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
+                                    menu.add(CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES, index, 0, R.string.waypoint_reset_cache_coords);
+                                } else {
+                                    menu.add(CONTEXT_MENU_WAYPOINT_EDIT, index, 0, R.string.waypoint_edit);
+                                    menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
+                                }
                                 contextMenuWPIndex = index;
-                                if (waypoint.isUserDefined()) {
+                                if (waypoint.isUserDefined() && !waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
                                 }
                                 if (waypoint.getCoords() != null) {
@@ -552,11 +563,16 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
             }
                 break;
+
+            case CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES: {
+                new ResetCacheCoordinatesDialog(cache, cache.getWaypoint(index), this).show();
+            }
+                break;
+
             default: {
                 if (imagesList != null && imagesList.onContextItemSelected(item)) {
                     return true;
                 }
-
                 return onOptionsItemSelected(item);
             }
         }
@@ -594,7 +610,7 @@ public class CacheDetailActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int menuItem = item.getItemId();
 
-        switch(menuItem) {
+        switch (menuItem) {
             case 0:
                 // no menu selected, but a new sub menu shown
                 return false;
@@ -1430,22 +1446,22 @@ public class CacheDetailActivity extends AbstractActivity {
             if (cache.getCoords() != null) {
                 TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
                 valueView.setOnClickListener(new View.OnClickListener() {
-                            private int position = 0;
-                            private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
-                                    GeopointFormatter.Format.LAT_LON_DECMINUTE,
-                                    GeopointFormatter.Format.LAT_LON_DECSECOND,
-                                    GeopointFormatter.Format.LAT_LON_DECDEGREE
-                            };
+                    private int position = 0;
+                    private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
+                            GeopointFormatter.Format.LAT_LON_DECMINUTE,
+                            GeopointFormatter.Format.LAT_LON_DECSECOND,
+                            GeopointFormatter.Format.LAT_LON_DECDEGREE
+                    };
 
-                            // rotate coordinate formats on click
-                            @Override
-                            public void onClick(View view) {
-                                position = (position + 1) % availableFormats.length;
+                    // rotate coordinate formats on click
+                    @Override
+                    public void onClick(View view) {
+                        position = (position + 1) % availableFormats.length;
 
-                                final TextView valueView = (TextView) view.findViewById(R.id.value);
-                                valueView.setText(cache.getCoords().format(availableFormats[position]));
-                            }
-                        });
+                        final TextView valueView = (TextView) view.findViewById(R.id.value);
+                        valueView.setText(cache.getCoords().format(availableFormats[position]));
+                    }
+                });
                 registerForContextMenu(valueView);
             }
 
@@ -2094,7 +2110,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see android.os.AsyncTask#onProgressUpdate(Progress[])
          */
         @Override
@@ -2525,5 +2541,118 @@ public class CacheDetailActivity extends AbstractActivity {
         cacheIntent.putExtra("guid", guid);
         cacheIntent.putExtra("name", cacheName);
         context.startActivity(cacheIntent);
+    }
+
+    /**
+     * A dialog to allow the user to select reseting coordinates local/remote/both.
+     */
+    private class ResetCacheCoordinatesDialog extends AlertDialog implements OnCheckedChangeListener {
+
+        final CheckBox uploadOption;
+        final CheckBox resetLocalyOption;
+
+        public ResetCacheCoordinatesDialog(final cgCache cache, final cgWaypoint wpt, final Activity activity) {
+            super(activity);
+
+            View layout = activity.getLayoutInflater().inflate(R.layout.reset_cache_coords_dialog, null);
+            setView(layout);
+
+            uploadOption = (CheckBox) layout.findViewById(R.id.upload);
+            resetLocalyOption = (CheckBox) layout.findViewById(R.id.local);
+
+            if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
+                uploadOption.setChecked(true);
+                uploadOption.setVisibility(View.VISIBLE);
+            }
+
+            uploadOption.setOnCheckedChangeListener(this);
+            resetLocalyOption.setOnCheckedChangeListener(this);
+
+            ((Button) layout.findViewById(R.id.reset)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                    final ProgressDialog p = ProgressDialog.show(CacheDetailActivity.this, res.getString(R.string.cache), res.getString(R.string.waypoint_reset), true);
+                    Handler h = new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            p.dismiss();
+                            notifyDataSetChanged();
+                        }
+                    };
+                    new ResetCoordsThread(cache, h, wpt, resetLocalyOption.isChecked(), uploadOption.isChecked(), p).start();
+                }
+            });
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+            ((Button) findViewById(R.id.reset)).setEnabled(
+                    (uploadOption.isChecked() || resetLocalyOption.isChecked()));
+        }
+    }
+
+    private class ResetCoordsThread extends Thread {
+
+        private final cgCache cache;
+        private final Handler handler;
+        private final boolean local;
+        private final boolean remote;
+        private final cgWaypoint wpt;
+        private ProgressDialog progress;
+
+        public ResetCoordsThread(cgCache cache, Handler handler, final cgWaypoint wpt, boolean local, boolean remote, final ProgressDialog progress) {
+            this.cache = cache;
+            this.handler = handler;
+            this.local = local;
+            this.remote = remote;
+            this.wpt = wpt;
+            this.progress = progress;
+        }
+
+        @Override
+        public void run() {
+
+            if (local) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.setMessage(res.getString(R.string.waypoint_reset_cache_coords));
+                    }
+                });
+                cache.setCoords(wpt.getCoords());
+                cache.setUserModifiedCoords(false);
+                cache.deleteWaypointForce(wpt);
+                cgeoapplication.getInstance().updateCache(cache);
+            }
+
+            IConnector con = ConnectorFactory.getConnector(cache);
+            if (remote && con.supportsOwnCoordinates()) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.setMessage(res.getString(R.string.waypoint_coordinates_being_reset_on_website));
+                    }
+                });
+
+                final boolean result = con.deleteModifiedCoordinates(cache);
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (result) {
+                            showToast(getString(R.string.waypoint_coordinates_has_been_reset_on_website));
+                        } else {
+                            showToast(getString(R.string.waypoint_coordinates_upload_error));
+                        }
+                        handler.sendMessage(Message.obtain());
+                        notifyDataSetChanged();
+                    }
+
+                });
+
+            }
+        }
     }
 }

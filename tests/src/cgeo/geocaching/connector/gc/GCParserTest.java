@@ -125,6 +125,25 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
                 "Station3: N51 21.444 / E07 02.600\r\nStation4: N51 21.789 / E07 02.800\r\nStation5: N51 21.667 / E07 02.800\r\nStation6: N51 21.444 / E07 02.706\r\nStation7: N51 21.321 / E07 02.700\r\nStation8: N51 21.123 / E07 02.477\r\nStation9: N51 21.734 / E07 02.500\r\nStation10: N51 21.733 / E07 02.378\r\nFinal: N51 21.544 / E07 02.566");
     }
 
+    @MediumTest
+    public static void testEditModifiedCoordinates() {
+        cgCache cache = new cgCache();
+        cache.setGeocode("GC2ZN4G");
+        // upload coordinates
+        GCParser.editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566"));
+        cache.drop(null);
+        String page = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        cgCache cache2 = GCParser.parseCacheFromText(page, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+        assertTrue(cache2.hasUserModifiedCoords());
+        assertEquals(new Geopoint("N51 21.544", "E07 02.566"), cache2.getCoords());
+        // delete coordinates
+        GCParser.deleteModifiedCoordinates(cache2);
+        cache2.drop(null);
+        String page2 = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        cgCache cache3 = GCParser.parseCacheFromText(page2, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+        assertFalse(cache3.hasUserModifiedCoords());
+    }
+
     private static void assertWaypointsFromNote(final cgCache cache, Geopoint[] expected, String note) {
         cache.setPersonalNote(note);
         cache.setWaypoints(new ArrayList<cgWaypoint>(), false);
