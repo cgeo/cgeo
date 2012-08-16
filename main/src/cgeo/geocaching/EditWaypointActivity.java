@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -17,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,6 +30,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -79,6 +83,8 @@ public class EditWaypointActivity extends AbstractActivity {
                     else {
                         ((EditText) findViewById(R.id.note)).setText(StringUtils.trimToEmpty(waypoint.getNote()));
                     }
+
+                    setUploadingCheckBoxVisibleByConnector(ConnectorFactory.getConnector(geocode));
                 }
 
                 if (own) {
@@ -158,9 +164,21 @@ public class EditWaypointActivity extends AbstractActivity {
             initializeWaypointTypeSelector();
         }
 
+        IConnector con;
+        if (geocode != null) {
+            con = ConnectorFactory.getConnector(geocode);
+            setUploadingCheckBoxVisibleByConnector(con);
+        }
+
         initializeDistanceUnitSelector();
 
         disableSuggestions((EditText) findViewById(R.id.distance));
+    }
+
+    private void setUploadingCheckBoxVisibleByConnector(IConnector con) {
+        if (con.supportsOwnCoordinates()) {
+            ((CheckBox) findViewById(R.id.uploadCoordsToWebsiteCheckBox)).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -346,7 +364,8 @@ public class EditWaypointActivity extends AbstractActivity {
             final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString() + distanceUnit;
             final String latText = ((Button) findViewById(R.id.buttonLatitude)).getText().toString();
             final String lonText = ((Button) findViewById(R.id.buttonLongitude)).getText().toString();
-
+            final CheckBox setAsCacheCoordsCheckBox = (CheckBox) findViewById(R.id.setAsCacheCoordsCheckBox);
+            final CheckBox uploadCoordsToWebsiteCheckBox = (CheckBox) findViewById(R.id.uploadCoordsToWebsiteCheckBox);
             if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
                     && StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
                 helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
@@ -414,9 +433,57 @@ public class EditWaypointActivity extends AbstractActivity {
                 if (Settings.isStoreOfflineWpMaps()) {
                     StaticMapsProvider.storeWaypointStaticMap(cache, EditWaypointActivity.this, waypoint, false);
                 }
+                if (setAsCacheCoordsCheckBox.isChecked()) {
+                    if (!cache.hasUserModifiedCoords()) {
+                        final cgWaypoint origWaypoint = new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+                        origWaypoint.setCoords(cache.getCoords());
+                        cache.addOrChangeWaypoint(origWaypoint, false);
+                        cache.setUserModifiedCoords(true);
+                    }
+                    cache.setCoords(waypoint.getCoords());
+                    cgeoapplication.getInstance().updateCache(cache);
+                }
+                if (uploadCoordsToWebsiteCheckBox.isChecked() && waypoint != null && waypoint.getCoords() != null) {
+                    if (cache.supportsOwnCoordinates()) {
+                        UploadParams up = new UploadParams();
+                        up.cache = cache;
+                        up.waypoint = waypoint.getCoords();
+                        new UploadModifiedCoordsTask().execute(up);
+                    } else {
+                        showToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                    }
+                }
                 finish();
             } else {
                 showToast(res.getString(R.string.err_waypoint_add_failed));
+            }
+        }
+    }
+
+    private class UploadParams {
+        public cgCache cache;
+        public Geopoint waypoint;
+    }
+
+    private class UploadModifiedCoordsTask extends AsyncTask<UploadParams, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(UploadParams... params) {
+            if (params.length == 1) {
+                IConnector con = ConnectorFactory.getConnector(params[0].cache);
+                if (con.supportsOwnCoordinates()) {
+                    return con.uploadModifiedCoordinates(params[0].cache, params[0].waypoint);
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, waypoint.getCoords().toString()));
+            } else {
+                showToast(getString(R.string.waypoint_coordinates_upload_error));
             }
         }
     }

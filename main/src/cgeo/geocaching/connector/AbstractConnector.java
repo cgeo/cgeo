@@ -2,6 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
 public abstract class AbstractConnector implements IConnector {
@@ -14,6 +15,31 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public boolean supportsWatchList() {
         return false;
+    }
+
+    @Override
+    public boolean supportsOwnCoordinates() {
+        return false;
+    }
+
+    /**
+     * Uploading modified coordinates to website
+     * 
+     * @param cache
+     * @param wpt
+     * @return success
+     */
+    @Override
+    public boolean uploadModifiedCoordinates(cgCache cache, Geopoint wpt) {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@link IConnector}
+     */
+    @Override
+    public boolean deleteModifiedCoordinates(cgCache cache) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
