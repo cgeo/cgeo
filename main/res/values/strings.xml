@@ -1078,10 +1078,10 @@
   <string name="changelog">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · ...\n
+    · If static maps are enabled, batch update of caches will now update caches without static maps first\n
     \n
     <b>Bugfixing:</b>\n
-    · ...\n
+    · Improvement for cache description translation\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
