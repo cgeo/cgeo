@@ -389,6 +389,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
+
+            Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE ? true : false);
         }
         else {
             mapMode = Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
