@@ -15,8 +15,11 @@ public final class GeneralAppsFactory extends AbstractAppFactory {
 
     private static GeneralApp[] getGeneralApps() {
         if (ArrayUtils.isEmpty(apps)) {
-            apps = new GeneralApp[] { new GccApp(),
-                    new WhereYouGoApp() };
+            apps = new GeneralApp[] {
+                    new CacheBeaconApp(),
+                    new GccApp(),
+                    new WhereYouGoApp()
+            };
         }
         return apps;
     }

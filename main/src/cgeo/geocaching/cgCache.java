@@ -10,9 +10,11 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
+import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
@@ -1590,5 +1592,22 @@ public class cgCache implements ICache, IWaypoint {
             }
         }
         return null;
+    }
+
+    /**
+     * check whether the cache has a given attribute
+     *
+     * @param attribute
+     * @param yes
+     *            true if we are looking for the attribute_yes version, false for the attribute_no version
+     * @return
+     */
+    public boolean hasAttribute(CacheAttribute attribute, boolean yes) {
+        // lazy loading of attributes
+        cgCache fullCache = cgeoapplication.getInstance().loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
+        if (fullCache == null) {
+            fullCache = this;
+        }
+        return fullCache.getAttributes().contains(attribute.getAttributeName(yes));
     }
 }

@@ -137,4 +137,8 @@ public enum CacheAttribute {
     public static boolean isEnabled(final String attributeName) {
         return !StringUtils.endsWithIgnoreCase(attributeName, INTERNAL_NO);
     }
+
+    public String getAttributeName(final boolean yes) {
+        return gcRawName + (yes ? INTERNAL_YES : INTERNAL_NO);
+    }
 }
