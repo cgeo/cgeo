@@ -4,5 +4,7 @@
 	android:hint="@string/search_bar_hint"
 	android:searchSettingsDescription="@string/search_bar_desc"
 	android:includeInGlobalSearch="true"
-	android:voiceSearchMode="showVoiceSearchButton|launchRecognizer" >
+	android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+	android:inputType="textNoSuggestions"
+	android:imeOptions="actionSearch">
 </searchable>
