@@ -52,6 +52,7 @@
   <string name="log_attend">Zúčastní se</string>
   <string name="log_attended">Účastnil se</string>
   <string name="log_retrieved">Vytažen z keše</string>
+  <string name="log_placed">Umístěn</string>
   <string name="log_grabbed">Převzat</string>
   <string name="log_maintained">Udržována</string>
   <string name="log_maintenance_needed">Vyžaduje údržbu</string>
