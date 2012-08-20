@@ -599,6 +599,7 @@
   <string name="trackable_origin">Původ</string>
   <string name="trackable_unknown">Neznámý</string>
   <string name="trackable_released">Vypuštění</string>
+  <string name="trackable_distance">Nacestoval</string>
   <string name="trackable_touch">Dotyk</string>
 
   <!-- navigation -->
