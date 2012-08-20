@@ -395,7 +395,7 @@ public class cgeotrackable extends AbstractActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(MENU_LOG_TOUCH).setEnabled(trackable.isLoggable());
+        menu.findItem(MENU_LOG_TOUCH).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
         menu.findItem(MENU_BROWSER_TRACKABLE).setEnabled(StringUtils.isNotBlank(trackable.getUrl()));
         return super.onPrepareOptionsMenu(menu);
     }
