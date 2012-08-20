@@ -26,6 +26,8 @@ import org.mapsforge.android.maps.mapgenerator.MapGeneratorFactory;
 import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
 import org.mapsforge.android.maps.overlay.Overlay;
 import org.mapsforge.core.GeoPoint;
+import org.mapsforge.map.reader.MapDatabase;
+import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,6 +40,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
@@ -284,4 +287,53 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     public boolean needsInvertedColors() {
         return false;
     }
+
+    @Override
+    public boolean isMapDatabaseSwitchSupported() {
+        return !getMapGenerator().requiresInternetConnection()
+                && null != Settings.getMapFile(); //if no file is specified in settings then disable the switch map option
+    }
+
+    @Override
+    public ArrayList<String> getMapDatabaseList() {
+
+        if (null == Settings.getMapFile()) {
+            return null;
+        }
+
+        try {
+            File directory = new File(Settings.getMapFile()).getParentFile();
+            ArrayList<String> mapFileList = new ArrayList<String>();
+
+            for (File file : directory.listFiles()) {
+                if (file.getName().endsWith(".map")) {
+                    MapDatabase testDatabase = new MapDatabase();
+                    FileOpenResult fileOpenResult = testDatabase.openFile(file.getAbsoluteFile());
+                    if (fileOpenResult.isSuccess()) {
+                        mapFileList.add(file.getName());
+                    }
+                    testDatabase.closeFile();
+                }
+            }
+            return mapFileList;
+        } catch (Exception e) {
+            Log.e("MapforgeMapView.getMapDatabase: " + e);
+        }
+        return null;
+    }
+
+    @Override
+    public void setMapDatabase(String s) {
+        if (s != null) {
+            String dir=new File(Settings.getMapFile()).getParent();
+            Settings.setMapFile(dir + "/" + s);
+            setMapFile(new File(dir + "/" + s));
+        }
+    }
+
+    @Override
+    public String getCurrentMapDatabase() {
+        return Settings.getMapFile();
+    }
+
 }

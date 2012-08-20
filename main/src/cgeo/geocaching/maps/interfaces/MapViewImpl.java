@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import java.util.ArrayList;
+
 /**
  * Defines common functions of the provider-specific
  * MapView implementations
@@ -77,5 +79,13 @@ public interface MapViewImpl {
     boolean needsInvertedColors();
 
     Viewport getViewport();
+
+    boolean isMapDatabaseSwitchSupported();
+
+    ArrayList<String> getMapDatabaseList();
+
+    String getCurrentMapDatabase();
+
+    void setMapDatabase(String s);
 
 }
