@@ -33,6 +33,8 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
@@ -169,7 +171,7 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
 
     /**
      * Get the map zoom level which is compatible with Google Maps.
-     * 
+     *
      * @return the current map zoom level +1
      */
     @Override
@@ -254,5 +256,29 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     @Override
     public boolean needsInvertedColors() {
         return false;
+    }
+
+    @Override
+    public boolean isMapDatabaseSwitchSupported() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public ArrayList<String> getMapDatabaseList() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getCurrentMapDatabase() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setMapDatabase(String s) {
+        // TODO Auto-generated method stub
+
     }
 }

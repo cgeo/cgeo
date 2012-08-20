@@ -728,6 +728,7 @@
   <string name="map_strategy_fast">Fast</string>
   <string name="map_strategy_auto">Speed dependent</string>
   <string name="map_strategy_detailed">Detailed</string>
+  <string name="map_select_offline_map_source">Select map source</string>
   <string name="live_map_notification">On the new live map coordinates may not always be precise. Possibly imprecise coordinates are marked by an orange circle.\nOpening the cache details or saving the cache for offline use will always obtain precise coordinates.\n\nMore information on all changes can be found on the \"About c:geo\" page inside the app.</string>
   <string name="live_map_note_close">Close</string>
   <string name="live_map_note_dontshow">Do not show again</string>
