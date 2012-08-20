@@ -58,7 +58,7 @@
   <string name="log_update">Změna souřadnic</string>
   <string name="log_archived">Archivace</string>
   <string name="log_needs_archived">Vyžaduje archivaci</string>
-  <string name="log_discovered">Nalezen</string>
+  <string name="log_discovered">Viděn</string>
   <string name="log_reviewed">Poznámka kontroly</string>
   <string name="log_tb_nothing">Beze změny</string>
   <string name="log_tb_visit">Návštěva</string>
