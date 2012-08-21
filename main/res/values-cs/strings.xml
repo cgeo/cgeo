@@ -52,13 +52,14 @@
   <string name="log_attend">Zúčastní se</string>
   <string name="log_attended">Účastnil se</string>
   <string name="log_retrieved">Vytažen z keše</string>
+  <string name="log_placed">Umístěn</string>
   <string name="log_grabbed">Převzat</string>
   <string name="log_maintained">Udržována</string>
   <string name="log_maintenance_needed">Vyžaduje údržbu</string>
   <string name="log_update">Změna souřadnic</string>
   <string name="log_archived">Archivace</string>
   <string name="log_needs_archived">Vyžaduje archivaci</string>
-  <string name="log_discovered">Nalezen</string>
+  <string name="log_discovered">Viděn</string>
   <string name="log_reviewed">Poznámka kontroly</string>
   <string name="log_tb_nothing">Beze změny</string>
   <string name="log_tb_visit">Návštěva</string>
@@ -598,6 +599,7 @@
   <string name="trackable_origin">Původ</string>
   <string name="trackable_unknown">Neznámý</string>
   <string name="trackable_released">Vypuštění</string>
+  <string name="trackable_distance">Nacestoval</string>
   <string name="trackable_touch">Dotyk</string>
 
   <!-- navigation -->
