@@ -1080,9 +1080,11 @@
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
     · If static maps are enabled, batch update of caches will now update caches without static maps first\n
+    · If a cache has a chirp attribute the navigation menu supports starting the Cache Beacon app\n
     \n
     <b>Bugfixing:</b>\n
     · Improvement for cache description translation\n
+    · Avoid crash when searching for an unactivated TB\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
