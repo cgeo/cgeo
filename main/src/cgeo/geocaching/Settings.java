@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 
 import java.util.Locale;
@@ -96,6 +97,7 @@ public final class Settings {
     private static final String KEY_LAST_TRACKABLE_ACTION = "trackableaction";
     private static final String KEY_SHARE_AFTER_EXPORT = "shareafterexport";
     private static final String KEY_GPX_EXPORT_DIR = "gpxExportDir";
+    private static final String KEY_GPX_IMPORT_DIR = "gpxImportDir";
 
     private final static int unitsMetric = 1;
 
@@ -1168,7 +1170,7 @@ public final class Settings {
     }
 
     public static String getGpxExportDir() {
-        return sharedPrefs.getString(KEY_GPX_EXPORT_DIR, "/sdcard/gpx");
+        return sharedPrefs.getString(KEY_GPX_EXPORT_DIR, Environment.getExternalStorageDirectory().getPath() + "/gpx");
     }
 
     public static void setGpxExportDir(final String gpxExportDir) {
@@ -1176,6 +1178,19 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putString(KEY_GPX_EXPORT_DIR, gpxExportDir);
+            }
+        });
+    }
+
+    public static String getGpxImportDir() {
+        return sharedPrefs.getString(KEY_GPX_IMPORT_DIR, Environment.getExternalStorageDirectory().getPath() + "/gpx");
+    }
+
+    public static void setGpxImportDir(final String gpxImportDir) {
+        editSharedSettings(new PrefRunnable() {
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_GPX_IMPORT_DIR, gpxImportDir);
             }
         });
     }

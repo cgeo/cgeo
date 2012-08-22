@@ -426,9 +426,13 @@
   <string name="init_mapsource_select">Kartenquelle wählen</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_select_gpx_exportdir">…</string>
+  <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">Verzeichnis für GPX Exporte</string>
+  <string name="init_gpx_importdir">Verzeichnis für GPX Importe</string>
   <string name="init_gpx_exportdir_description">Hier kann das Verzeichnis für GPX-Exporte gewählt werden.</string>
+  <string name="init_gpx_importdir_description">Hier kann das Verzeichnis für GPX-Importe gewählt werden.</string>
   <string name="init_gpx_exportdir_select">Wähle Verzeichnis für GPX Exporte</string>
+  <string name="init_gpx_importdir_select">Wähle Verzeichnis für GPX Importe</string>
   <string name="init_maptrail">Zeige Spur auf Karte</string>
   <string name="init_share_after_export">Weiterleiten nach dem Export</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
