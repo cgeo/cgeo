@@ -11,3 +11,4 @@ gen/
 /cgeo-calendar/local.properties
 /cgeo-calendar/private.properties
 .directory
+org.moreunit.prefs
