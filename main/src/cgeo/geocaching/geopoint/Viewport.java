@@ -71,7 +71,8 @@ public class Viewport {
      */
     public boolean contains(final ICoordinates point) {
         final Geopoint coords = point.getCoords();
-        return coords.getLongitudeE6() >= bottomLeft.getLongitudeE6()
+        return coords != null
+                && coords.getLongitudeE6() >= bottomLeft.getLongitudeE6()
                 && coords.getLongitudeE6() <= topRight.getLongitudeE6()
                 && coords.getLatitudeE6() >= bottomLeft.getLatitudeE6()
                 && coords.getLatitudeE6() <= topRight.getLatitudeE6();
@@ -120,7 +121,7 @@ public class Viewport {
 
     /**
      * Return a viewport that contains the current viewport as well as another point.
-     * 
+     *
      * @param point
      *            the point we want in the viewport
      * @return either the same or an expanded viewport
