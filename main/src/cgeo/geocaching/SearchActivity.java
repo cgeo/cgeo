@@ -1,6 +1,9 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
@@ -98,14 +101,18 @@ public class SearchActivity extends AbstractActivity {
      * @return true if a search was performed, else false
      */
     private boolean instantSearch(final String query, final boolean keywordSearch) {
-        final String geocode = BaseUtils.getMatch(query, GCConstants.PATTERN_GC_CODE, true, 0, "", false);
-        if (StringUtils.isNotBlank(geocode)) {
+
+        // Check if any connector can handle the query as a geocode
+        final String geocode = StringUtils.deleteWhitespace(query);
+        final IConnector connector = ConnectorFactory.getConnector(geocode);
+        if (connector instanceof ISearchByGeocode) {
             final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
             cachesIntent.putExtra("geocode", geocode.toUpperCase());
             startActivity(cachesIntent);
             return true;
         }
 
+        // Check if the query is a TB code
         final String trackable = BaseUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
         if (StringUtils.isNotBlank(trackable)) {
             final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
