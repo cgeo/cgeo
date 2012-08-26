@@ -318,7 +318,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Usuario</string>
   <string name="init_password">Contraseña</string>
@@ -329,7 +328,6 @@
   <string name="init_login_popup_ok">Acceso conseguido.</string>
   <string name="init_login_popup_failed">Error en el acceso.</string>
   <string name="init_login_popup_failed_reason">El acceso ha fallado debido a </string>
-  <string name="init_go4cache_connect">Conectar a Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizar a c:geo</string>
   <string name="init_twitter_publish">Publicar estado cuando se encuente un escondite</string>
   <string name="init_signature">Firma</string>
@@ -788,7 +786,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="http://itw.bidix.info/cgeo/">c:geo en breve</a></string>
-  <string name="about_go4cache">Servicio <b>Go 4 Cache</b> muestra a otros buscadores en el mapa (en <b>c:geo</b> o en el navegador) en tiempo real. Puede mostrar, por ejemplo, qué escondite estan buscando. Al conectarte a <b>Go 4 Cache</b> <b>c:geo</b> está autorizado a publicar tu ubicación (sólo cuando <b>c:geo</b> está activo).</string>
 
   <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un escondite?</string>
   <string name="about_auth_1">El siguiente proceso permite a  <b>c:geo</b> acceder a Twitter - si estás de acuerdo.</string>

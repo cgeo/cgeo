@@ -358,7 +358,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">používateľské meno</string>
   <string name="init_password">heslo</string>
@@ -369,7 +368,6 @@
   <string name="init_login_popup_ok">Prihlásenie úspešné</string>
   <string name="init_login_popup_failed">Prihlásenie neúspešné</string>
   <string name="init_login_popup_failed_reason">Prihlásenie neúspešné: </string>
-  <string name="init_go4cache_connect">Pripojiť ku Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizovať c:geo</string>
   <string name="init_twitter_publish">Nový status pri nájdení skrýše</string>
   <string name="init_signature">Podpis</string>
@@ -972,7 +970,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manuál: <a href="http://manual.cgeo.org/">c:geo v kocke</a></string>
-  <string name="about_go4cache">Služba <b>Go 4 cache</b> umožňuje sledovať v reálnom čase ostatných cacherov na mape (v <b>c:geo</b> alebo v prehliadači). Môžete sa tak pozrieť napríklad na to, akú skrýšu práve hľadajú. Pripojením ku službe <b>Go 4 cache</b> umožníte aplikácii <b>c:geo</b> zverejňovať vašu aktuálnu polohu (iba pokiaľ <b>c:geo</b> beží).</string>
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy keď zapíšete nájdenie skrýše?</string>
   <string name="about_auth_1">Pomocou nasledujúceho procesu môžete aplikácii <b>c:geo</b> umožniť odosielanie príspevkov na váš Twitter.  </string>
   <string name="about_auth_2">Ťuknutím na tlačidlo „Zahájiť autorizáciu“ celý proces začne. Tento proces otvorí webovú stránku Twitteru, kde sa sa prihlásite a tlačidlom „Authorize app“ umožníte aplikácii <b>c:geo</b> prístup k vášmu Twitter účtu. Potom čo ťuknete na „Authorize app“, Twitter vám pridelí PIN kód. Tento kód skopírujte a vložte do aplikácie <b>c:geo</b>. A potvrďte. To je všetko.</string>
@@ -983,16 +980,6 @@
   <string name="status_new_rc">Je dostupná nová verzia „release candidate“.\nKliknite pre inštaláciu.</string>
   <string name="status_geocaching_change">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
   <string name="status_geocaching_livemap">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
-
-  <!-- go4cache -->
-  <string name="go4cache_looking_around">Prehľadávanie okolia</string>
-  <string name="go4cache_tweeting">Posielanie tweetov</string>
-  <string name="go4cache_heading_to">Smerovanie k</string>
-  <plurals name="go4cache_time_minutes">
-    <item quantity="one">pred minútou</item>
-    <item quantity="few">pred %d minútami</item>
-    <item quantity="other">pred %d minútami</item>
-  </plurals>
 
   <string name="clipboard_copy_ok">Skopírované do schránky</string>
   <plurals name="days_ago">

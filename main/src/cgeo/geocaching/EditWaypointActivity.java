@@ -66,8 +66,6 @@ public class EditWaypointActivity extends AbstractActivity {
                     lookup = waypoint.getLookup();
                     own = waypoint.isUserDefined();
 
-                    app.setAction(geocode);
-
                     if (waypoint.getCoords() != null) {
                         ((Button) findViewById(R.id.buttonLatitude)).setText(waypoint.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
                         ((Button) findViewById(R.id.buttonLongitude)).setText(waypoint.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
@@ -124,10 +122,6 @@ public class EditWaypointActivity extends AbstractActivity {
             setTitle(res.getString(R.string.waypoint_add_title));
         } else {
             setTitle(res.getString(R.string.waypoint_edit_title));
-        }
-
-        if (geocode != null) {
-            app.setAction(geocode);
         }
 
         Button buttonLat = (Button) findViewById(R.id.buttonLatitude);

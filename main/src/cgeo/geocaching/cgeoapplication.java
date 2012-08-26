@@ -36,7 +36,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class cgeoapplication extends Application {
 
     final private cgData storage = new cgData();
-    private String action = null;
     private volatile GeoDataProvider geo;
     private volatile DirectionProvider dir;
     public boolean firstRun = true; // c:geo is just launched
@@ -366,25 +365,6 @@ public class cgeoapplication extends Application {
     /** {@link cgData#loadWaypoint(int)} */
     public cgWaypoint loadWaypoint(int id) {
         return storage.loadWaypoint(id);
-    }
-
-    /**
-     * set the current action to be reported to Go4Cache (if enabled in settings)<br>
-     * this might be either
-     * <ul>
-     * <li>geocode</li>
-     * <li>name of a cache</li>
-     * <li>action like twittering</li>
-     * </ul>
-     *
-     * @param action
-     */
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    public String getAction() {
-        return StringUtils.defaultString(action);
     }
 
     /** {@link cgData#saveLogOffline(String, Date, LogType, String)} */

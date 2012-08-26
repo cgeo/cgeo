@@ -283,11 +283,6 @@ public class CacheDetailActivity extends AbstractActivity {
             return;
         }
 
-        // Go4Cache
-        if (StringUtils.isNotBlank(geocode)) {
-            app.setAction(geocode);
-        }
-
         final LoadCacheHandler loadCacheHandler = new LoadCacheHandler();
 
         try {

@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -89,9 +90,6 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // init
-        app.setAction("setting up");
 
         setTheme();
         setContentView(R.layout.auth);

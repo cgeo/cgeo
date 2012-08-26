@@ -140,8 +140,6 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
             setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode().toUpperCase());
         }
 
-        app.setAction("logging trackable");
-
         if (guid == null) {
             showToast(res.getString(R.string.err_tb_forgot_saw));
 
@@ -232,10 +230,6 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
     }
 
     public void init() {
-        if (geocode != null) {
-            app.setAction("logging trackable");
-        }
-
         final Button typeButton = (Button) findViewById(R.id.type);
         registerForContextMenu(typeButton);
         typeButton.setText(typeSelected.getL10n());

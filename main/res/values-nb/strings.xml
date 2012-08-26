@@ -208,7 +208,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCVote.com</string>
-  <string name="init_go4cache">go 4 cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Brukernavn</string>
   <string name="init_password">Passord</string>
@@ -219,7 +218,6 @@
   <string name="init_login_popup_ok">Innlogging fullført.</string>
   <string name="init_login_popup_failed">Innlogging mislyktes.</string>
   <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
-  <string name="init_go4cache_connect">Koble til go 4 cache</string>
   <string name="init_twitter_authorize">Autoriser c:geo</string>
   <string name="init_twitter_publish">Del på Twitter når du finner cacher</string>
   <string name="init_signature">Signatur</string>
@@ -407,7 +405,6 @@
   <string name="support">e-post adresse: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
-  <string name="about_go4cache">Tjenesten <b>Go 4 cache</b> gjør det mulig for deg å se andre geocachere på kartet (i <b>c:geo</b> eller i web-leseren). Det kan for eksempel vise hvilken cache de er ute etter. Ved å koble til <b>Go 4 cache</b> får <b>c:geo</b> din tillatelse til oppgi dine koordinater til andre brukere av <b>Go 4 cache</b>, men bare mens <b>c:geo</b> kjører.</string>
   <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>
   <string name="about_auth_1">Den følgende prosessen tillater <b>c:geo</b> tilgang til Twitter - hvis bruker samtykker.</string>
   <string name="about_auth_2">Trykk på \"Start autorisasjon\" knappen for å starte prosessen. Denne prosessen vil åpne Twitter i web-leseren. Logg inn, og tillat <b>c:geo</b> tilgang til kontoen din. Hvis du aksepterer, vil Twitter oppgi en numerisk PIN-kode. Denne PIN-koden må så limes inn i <b>c:geo</b>. Verre er det ikke.</string>

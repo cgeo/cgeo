@@ -322,7 +322,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Felhasználónév</string>
   <string name="init_password">Jelszó</string>
@@ -333,7 +332,6 @@
   <string name="init_login_popup_ok">Belépés ok.</string>
   <string name="init_login_popup_failed">Belépés sikertelen.</string>
   <string name="init_login_popup_failed_reason">Belépés sikertelen, mert </string>
-  <string name="init_go4cache_connect">Csatlakozás a Go 4 Cache-hez</string>
   <string name="init_twitter_authorize">Engedélyezés</string>
   <string name="init_twitter_publish">Állapot bejelentése láda megtalálásakor</string>
   <string name="init_signature">Aláírás</string>
@@ -808,7 +806,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Kézikönyv: <a href="http://manual.cgeo.org/">A c:geo dióhéjban</a></string>
-  <string name="about_go4cache">A <b>Go 4 Cache</b> szolgáltatás más cachereket mutat a térképen (a <b>c:geo</b>-ban vagy a böngészőben) valós időben. Megmutathatja például melyik ládát keresik. Ha csatlakozol a <b>Go 4 Cache</b> szolgáltatáshoz, azzal engedélyezed a <b>c:geo</b>-nak, hogy megjelenítse a jelenlegi helyzeted miközben ládát keresel.(csak ha a <b>c:geo</b> fut).</string>
   <string name="about_twitter">Akarod, hogy <b>c:geo</b> új bejegyzést írjon Twitterre mindig mikor egy ládát megtalálsz?</string>
   <string name="about_auth_1">A következő folyamat engedélyezi a <b>c:geo</b>-nak, hogy hozzáférjen a Twitterhez – ha jóváhagyod.</string>
   <string name="about_auth_2">Kattints a \"c:geo engedélyezése\" gombra, hogy elindítsd a folyamatot. Ez a folyamat meg fog nyitni egy böngészőt a Twitter weboldallal. Lépj be ezen az oldalon és hagyd jóvá, hogy a <b>c:geo</b> hozzáférjen a felhasználói fiókodhoz. Ha elfogadod, a Twitter mutatni fog egy számokból álló PIN kódot. Ezt a PIN kódot kell a  <b>c:geo</b>-ban beillesztened és jóváhagynod. Ilyen egyszerű.</string>

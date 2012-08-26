@@ -354,7 +354,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Utente</string>
   <string name="init_password">Password</string>
@@ -365,7 +364,6 @@
   <string name="init_login_popup_ok">Login OK.</string>
   <string name="init_login_popup_failed">Login fallito.</string>
   <string name="init_login_popup_failed_reason">Login fallito perché </string>
-  <string name="init_go4cache_connect">Connetti a Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizza c:geo</string>
   <string name="init_twitter_publish">Manda un tweet quando trovi un cache</string>
   <string name="init_signature">Firma</string>
@@ -951,7 +949,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">pagina c:geo </a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manuale: <a href="http://manual.cgeo.org/">c:geo in a Nutshell</a></string>
-  <string name="about_go4cache">Il servizio <b>Go 4 Cache</b> mostra altri utenti geocacher sulla mappa (in <b>c:geo</b> o nel browser) in tempo reale. È visibile, ad esempio, quali cache stanno cercando. Collegandosi tramite <b>Go 4 Cache</b> <b>c:geo</b> è autorizzato a pubblicare la tua posizione attuale quando fai geocaching (solo quando <b>c:geo</b> è in esecuzione).</string>
   <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi una cache?</string>
   <string name="about_auth_1">La procesura seguente autorizza <b>c:geo</b> ad accedere a Twitter - se confermato.</string>
   <string name="about_auth_2">Clicca sul pulsante \"Autorizza c:geo\" per iniziare. Questa procedura aprirà il browser sulla pagina Twitter. Fai Login su questa pagina e autorizza <b>c:geo</b> ad accedere al tuo account. Se accettato, Twitter mostrerà un PIN code numerico. Questo PIN deve essere riportato in <b>c:geo</b> e confermato.</string>
@@ -963,15 +960,6 @@
   <string name="status_geocaching_change">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_livemap">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
 
-  <!-- go4cache -->
-  <string name="go4cache_looking_around">Guardando attorno</string>
-  <string name="go4cache_tweeting">Tweeting</string>
-  <string name="go4cache_heading_to">Puntando a</string>
-  <plurals name="go4cache_time_minutes">
-    <item quantity="one">un minuto fa</item>
-    <item quantity="other">%d minuti fa</item>
-  </plurals>
-  
   <string name="clipboard_copy_ok">Copiato nella clipboard</string>  
   <plurals name="days_ago">
     <item quantity="one">ieri</item>

@@ -249,27 +249,6 @@ public class SettingsActivity extends AbstractActivity {
             ((EditText) findViewById(R.id.passvote)).setText(gcvoteLogin.right);
         }
 
-        // go4cache settings
-        TextView go4cache = (TextView) findViewById(R.id.about_go4cache);
-        go4cache.setClickable(true);
-        go4cache.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://go4cache.com/")));
-            }
-        });
-
-        final CheckBox publicButton = (CheckBox) findViewById(R.id.publicloc);
-        publicButton.setChecked(Settings.isPublicLoc());
-        publicButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setPublicLoc(publicButton.isChecked());
-            }
-        });
-
         // Twitter settings
         Button authorizeTwitter = (Button) findViewById(R.id.authorize_twitter);
         authorizeTwitter.setOnClickListener(new View.OnClickListener() {

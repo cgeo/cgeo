@@ -109,8 +109,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     }
 
     protected void init() {
-        app.setAction(geocode);
-
         cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (cache == null) {

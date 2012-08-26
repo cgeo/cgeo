@@ -431,8 +431,6 @@ public class cgeocaches extends AbstractListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        app.setAction(action);
-
         setTheme();
         setContentView(R.layout.caches);
 

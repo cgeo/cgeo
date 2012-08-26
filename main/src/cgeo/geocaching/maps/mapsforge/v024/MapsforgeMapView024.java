@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -98,13 +97,6 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     public CachesOverlay createAddMapOverlay(Context context, Drawable drawable) {
 
         MapsforgeCacheOverlay ovl = new MapsforgeCacheOverlay(context, drawable);
-        getOverlays().add(ovl);
-        return ovl.getBase();
-    }
-
-    @Override
-    public OtherCachersOverlay createAddUsersOverlay(Context context, Drawable markerIn) {
-        MapsforgeOtherCachersOverlay ovl = new MapsforgeOtherCachersOverlay(context, markerIn);
         getOverlays().add(ovl);
         return ovl.getBase();
     }

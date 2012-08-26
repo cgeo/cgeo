@@ -5,7 +5,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -115,13 +114,6 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     public CachesOverlay createAddMapOverlay(Context context, Drawable drawable) {
 
         GoogleCacheOverlay ovl = new GoogleCacheOverlay(context, drawable);
-        getOverlays().add(ovl);
-        return ovl.getBase();
-    }
-
-    @Override
-    public OtherCachersOverlay createAddUsersOverlay(Context context, Drawable markerIn) {
-        GoogleOtherCachersOverlay ovl = new GoogleOtherCachersOverlay(context, markerIn);
         getOverlays().add(ovl);
         return ovl.getBase();
     }

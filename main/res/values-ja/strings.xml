@@ -358,7 +358,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">ユーザ名</string>
   <string name="init_password">パスワード</string>
@@ -369,7 +368,6 @@
   <string name="init_login_popup_ok">ログイン完了</string>
   <string name="init_login_popup_failed">ログイン失敗</string>
   <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
-  <string name="init_go4cache_connect">Go 4 Cacheに接続する</string>
   <string name="init_twitter_authorize">c:geoを認証する</string>
   <string name="init_twitter_publish">キャッシュが見つかったら状況をツイートする</string>
   <string name="init_signature">署名</string>
@@ -983,7 +981,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">マニュアル: <a href="http://manual.cgeo.org/">c:geo マニュアル</a>(英語)</string>
-  <string name="about_go4cache"><b>Go 4 cache</b>サービスにより他のジオキャッシャーを(<b>c:geo</b>またはブラウザで)地図上にリアルタイムで表示できます。例えば、彼らがどのキャッシュを探しているのか表示できます。<b>Go 4 cache</b>に接続すれば<b>c:geo</b>でジオキャッシング中に現在地を(<b>c:geo</b>が起動している間だけ)公開することができます。</string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="about_auth_1"><b>c:geo</b>がTwitterにアクセスする許可を得るには次のようにしてください。</string>
   <string name="about_auth_2">「認証を開始する」ボタンを押すとブラウザでTwitterのページが開きます。そのページにログインすれば<b>c:geo</b>があなたのアカウントにアクセルする許可が得られます。ログインに成功したら数字のPINコードが表示されるので、この下の入力欄にコピー&amp;ペーストして「完了」ボタンを押してください。</string>
@@ -995,15 +992,6 @@
   <string name="status_geocaching_change">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
   <string name="status_geocaching_livemap">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
 
-  <!-- go4cache -->
-  <string name="go4cache_looking_around">Looking around</string>
-  <string name="go4cache_tweeting">Tweeting</string>
-  <string name="go4cache_heading_to">Heading to</string>
-  <plurals name="go4cache_time_minutes">
-	<item quantity="one">1分前</item>
-	<item quantity="other">%d分前</item>
-  </plurals>
-  
   <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
   <plurals name="days_ago">
       <item quantity="one">昨日</item>

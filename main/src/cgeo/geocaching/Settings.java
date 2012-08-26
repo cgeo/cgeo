@@ -36,7 +36,6 @@ public final class Settings {
     private static final String KEY_HELP_SHOWN = "helper";
     private static final String KEY_ANYLONGITUDE = "anylongitude";
     private static final String KEY_ANYLATITUDE = "anylatitude";
-    private static final String KEY_PUBLICLOC = "publicloc";
     private static final String KEY_USE_OFFLINEMAPS = "offlinemaps";
     private static final String KEY_USE_OFFLINEWPMAPS = "offlinewpmaps";
     private static final String KEY_WEB_DEVICE_CODE = "webDeviceCode";
@@ -150,7 +149,6 @@ public final class Settings {
             e.putBoolean(KEY_HELP_SHOWN, old.getInt(KEY_HELP_SHOWN, 0) != 0);
             e.putFloat(KEY_ANYLONGITUDE, old.getFloat(KEY_ANYLONGITUDE, 0));
             e.putFloat(KEY_ANYLATITUDE, old.getFloat(KEY_ANYLATITUDE, 0));
-            e.putBoolean(KEY_PUBLICLOC, 0 != old.getInt(KEY_PUBLICLOC, 0));
             e.putBoolean(KEY_USE_OFFLINEMAPS, 0 != old.getInt(KEY_USE_OFFLINEMAPS, 1));
             e.putBoolean(KEY_USE_OFFLINEWPMAPS, 0 != old.getInt(KEY_USE_OFFLINEWPMAPS, 0));
             e.putString(KEY_WEB_DEVICE_CODE, old.getString(KEY_WEB_DEVICE_CODE, null));
@@ -717,20 +715,6 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putBoolean(KEY_LIVE_LIST, liveList);
-            }
-        });
-    }
-
-    public static boolean isPublicLoc() {
-        return sharedPrefs.getBoolean(KEY_PUBLICLOC, false);
-    }
-
-    public static void setPublicLoc(final boolean publicLocation) {
-        editSharedSettings(new PrefRunnable() {
-
-            @Override
-            public void edit(Editor edit) {
-                edit.putBoolean(KEY_PUBLICLOC, publicLocation);
             }
         });
     }

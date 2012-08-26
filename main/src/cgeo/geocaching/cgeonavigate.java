@@ -84,8 +84,6 @@ public class cgeonavigate extends AbstractActivity {
             return;
         }
 
-        setGo4CacheAction();
-
         // set header
         setTitle();
         setDestCoords();
@@ -99,22 +97,12 @@ public class cgeonavigate extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        setGo4CacheAction();
-
         // sensor & geolocation manager
         geoDirHandler.startGeoAndDir();
 
         // keep backlight on
         if (pm == null) {
             pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        }
-    }
-
-    private void setGo4CacheAction() {
-        if (StringUtils.isNotBlank(geocode)) {
-            app.setAction(geocode);
-        } else if (StringUtils.isNotBlank(name)) {
-            app.setAction(name);
         }
     }
 

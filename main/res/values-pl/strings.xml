@@ -314,7 +314,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Nazwa użytkownika</string>
   <string name="init_password">Hasło</string>
@@ -325,7 +324,6 @@
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Logowanie nie powiodło się.</string>
   <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
-  <string name="init_go4cache_connect">Połącz się z Go 4 Cache</string>
   <string name="init_twitter_authorize">Autoryzacja c:geo</string>
   <string name="init_twitter_publish">Publikowanie stanu, gdy znaleziono skrzynkę</string>
   <string name="init_signature">Sygnatura</string>
@@ -785,7 +783,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo strona</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manuał: <a href="http://itw.bidix.info/cgeo/">c:geo skrócona instrukcja obsługi</a></string>
-  <string name="about_go4cache">Serwis <b>Go 4 Cache</b> pokazuje innych geocachers na mapie (w <b>c:geo</b> lub w przeglądarce) w czasie rzeczywistym. Pokazuje na przykład co inni w tym czasie szukają. Razem z połączeniem do <b>Go 4 Cache</b> pozwalasz <b>c:geo</b> aby twoje współrzędne zostały na stronie internetowej opublikowane (tylko i wyłącznie wtedy, gdy <b>c:geo</b> jest aktywny).</string>
   <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował wiadomości textowe na stronie Twitter za każdym razem jak znajdziesz skrzynkę?</string>
   <string name="about_auth_1">Poniższy proces pozwala <b>c:geo</b>, aby uzyskać dostęp do Twitter - po uzgodnieniu.</string>
   <string name="about_auth_2">Kliknięcie na \"Autoryzacja c:geo\" spowoduje rozpoczęcie procesu. Ten proces spowoduje otwarcie przeglądarki internetowej na stronie Twitter. Zaloguj się na tej stronie i pozwól <b>c:geo</b> aby uzyskać dostęp do konta. Jeśli zostanie zaakceptowany, Twitter pojawi kod numeryczny PIN. Kod PIN musi zostać wklejony do <b>c:geo</b> i zostać potwierdzony. To jest wszystko.</string>

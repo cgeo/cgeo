@@ -358,7 +358,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Username</string>
   <string name="init_password">Password</string>
@@ -369,7 +368,6 @@
   <string name="init_login_popup_ok">Login OK</string>
   <string name="init_login_popup_failed">Login failed</string>
   <string name="init_login_popup_failed_reason">Login failed because of </string>
-  <string name="init_go4cache_connect">Connect to Go 4 Cache</string>
   <string name="init_twitter_authorize">Authorize c:geo</string>
   <string name="init_twitter_publish">Publish status when a cache has been found</string>
   <string name="init_signature">Signature</string>
@@ -992,7 +990,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="http://manual.cgeo.org/">c:geo in a Nutshell</a></string>
-  <string name="about_go4cache">The service <b>Go 4 Cache</b> shows other geocachers on the map (in <b>c:geo</b> or in their browser) in real time. It can show - for example - what cache they are searching for. By connecting to <b>Go 4 Cache</b> <b>c:geo</b> is allowed to publish your current location when geocaching (only while <b>c:geo</b> is running).</string>
   <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
   <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
   <string name="about_auth_2">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
@@ -1004,15 +1001,6 @@
   <string name="status_geocaching_change">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
   <string name="status_geocaching_livemap">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
 
-  <!-- go4cache -->
-  <string name="go4cache_looking_around">Looking around</string>
-  <string name="go4cache_tweeting">Tweeting</string>
-  <string name="go4cache_heading_to">Heading to</string>
-  <plurals name="go4cache_time_minutes">
-	<item quantity="one">one minute ago</item>
-	<item quantity="other">%d minutes ago</item>
-  </plurals>
-  
   <string name="clipboard_copy_ok">Copied to clipboard</string>
   <plurals name="days_ago">
       <item quantity="one">yesterday</item>

@@ -345,7 +345,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Gebruikersnaam</string>
   <string name="init_password">Wachtwoord</string>
@@ -356,7 +355,6 @@
   <string name="init_login_popup_ok">Ingelogd.</string>
   <string name="init_login_popup_failed">Inloggen mislukt.</string>
   <string name="init_login_popup_failed_reason">Inloggen mislukt omdat </string>
-  <string name="init_go4cache_connect">Verbinden met Go 4 Cache</string>
   <string name="init_twitter_authorize">c:geo Autoriseren</string>
   <string name="init_twitter_publish">Status publiceren bij gevonden cache</string>
   <string name="init_signature">Handtekening</string>
@@ -898,7 +896,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Handleiding: <a href="http://manual.cgeo.org/">c:geo in een notendop</a></string>
-  <string name="about_go4cache">Service <b>Go 4 cache</b> toont andere geocachers op de kaart (in <b>c:geo</b> of in browser) in real time. Het toont bijvoorbeeld welke cache ze zoeken. Door te verbinden met <b>Go 4 cache</b> is <b>c:geo</b> toegestaan om je huidige locatie te publiceren (alleen tijdens het gebruik van <b>c:geo</b>).</string>
   <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
   <string name="about_auth_1">Het volgende proces staat <b>c:geo</b> toe om Twitter toegang te verkrijgen bij goedkeuring.</string>
   <string name="about_auth_2">Klik op de \"autoriseer c:geo\" knop om het proces te starten. Dit proces zal een browser openen met een Twitter pagina. Login op deze pagina en sta <b>c:geo</b> toegang tot je account toe. Bij goedkeuring laat Twitter een numerieke PIN code zien. Deze PIN dien je te plakken en te bevestigen in <b>c:geo</b>.</string>

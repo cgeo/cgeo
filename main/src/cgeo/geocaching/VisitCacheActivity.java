@@ -267,8 +267,6 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode().toUpperCase());
         }
 
-        app.setAction(geocode);
-
         init();
     }
 
@@ -466,9 +464,6 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
     }
 
     public void init() {
-        if (geocode != null) {
-            app.setAction(geocode);
-        }
         postButton = (Button) findViewById(R.id.post);
         tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
         tweetCheck = (CheckBox) findViewById(R.id.tweet);

@@ -339,7 +339,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Nome de utilizador</string>
   <string name="init_password">Password</string>
@@ -350,7 +349,6 @@
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login falhado.</string>
   <string name="init_login_popup_failed_reason">Login falhado porque </string>
-  <string name="init_go4cache_connect">Ligar a Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorize o c:geo</string>
   <string name="init_twitter_publish">Publicar estado quando encontrar cache</string>
   <string name="init_signature">Assinatura</string>
@@ -882,18 +880,8 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">página do c:geo</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="http://manual.cgeo.org/">o essencial do c:geo</a></string>
-  <string name="about_go4cache">O serviço <b>Go 4 Cache</b> mostra outros geocachers no mapa (no <b>c:geo</b> ou no browser) em tempo real. Pode mostrar, por exemplo, que cache eles estão a procurar. Ao ligar-se ao <b>Go 4 Cache</b>, o <b>c:geo</b> está autorizado a publicar a sua localização actual quando fizer geocaching (apenas enquanto estiver a usar o <b>c:geo</b>).</string>
   <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que uma cache for registada?</string>
   <string name="about_auth_1">O processo seguinte permite ao <b>c:geo</b> aceder ao Twitter - se concordar.</string>
   <string name="about_auth_2">Premir o botão \"Autorizar c:geo\" dará início ao processo. Este processo irá abrir a página do Twitter no seu browser. Faça login nesta página e autorize o <b>c:geo</b> a aceder à sua conta. Se autorizar, o Twitter irá mostrar um código PIN numérico. Este PIN deverá ser copiado para o <b>c:geo</b> e sujeito a confirmação. E é tudo.</string>
   
-  <!-- go4cache -->
-  <string name="go4cache_looking_around">Olhando à volta</string>
-  <string name="go4cache_tweeting">Tweeting</string>
-  <string name="go4cache_heading_to">Em direcção a</string>
-  <plurals name="go4cache_time_minutes">
-  <item quantity="one">um Minuto atrás</item>
-	<item quantity="other">%d Minutos atrás</item>
-  </plurals>
-      
 </resources>

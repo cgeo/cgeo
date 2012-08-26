@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.LocationProviderType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.go4cache.Go4Cache;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MemorySubject;
 
@@ -335,8 +334,6 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         final int visible = gpsLocation.isRecent() ? satellitesVisible : 0;
         final IGeoData current = new GeoData(locationData.location, gpsEnabled, visible, satellitesFixed);
         notifyObservers(current);
-
-        Go4Cache.signalCoordinates(current.getCoords());
     }
 
 }

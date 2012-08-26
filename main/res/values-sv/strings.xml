@@ -357,7 +357,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Användare</string>
   <string name="init_password">Lösenord</string>
@@ -368,7 +367,6 @@
   <string name="init_login_popup_ok">Inloggning OK</string>
   <string name="init_login_popup_failed">Inloggning misslyckades</string>
   <string name="init_login_popup_failed_reason">Inloggning misslyckades pga </string>
-  <string name="init_go4cache_connect">Anslut till Go 4 Cache</string>
   <string name="init_twitter_authorize">Inställningar för Twitter</string>
   <string name="init_twitter_publish">Publicera status när en cache hittats</string>
   <string name="init_signature">Signatur</string>
@@ -807,7 +805,6 @@
   <string name="website">Hemsida: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="about_go4cache">Tjänsten <b>Go 4 Cache</b> visar andra geocachare på kartan i realtid (i <b>c:geo</b> eller webbläsaren). Du kan till exempel se vilken cache de letar efter. Genom att ansluta till <b>Go 4 Cache</b> tillåter du <b>c:geo</b> att publicera din nuvarande plats när du geocachar (bara när <b>c:geo</b> är igång).</string>
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
   <string name="about_auth_1">Nedan tillåter du <b>c:geo</b> att ansluta till Twitter.</string>
   <string name="about_auth_2">Klicka på \"Påbörja koppling mot Twitter\" om du vill koppla ihop <b>c:geo</b> med Twitter. Twitters hemsida kommer att öppnas i en webbläsare. Logga in på den sidan och tillåt <b>c:geo</b> att ansluta till ditt konto. När du godkänt så kommer Twitter att visa en PIN kod. Kom ihåg denna PIN kod, stäng webbläsaren och skriv in PIN koden i <b>c:geo</b> och bekräfta.</string>
@@ -818,15 +815,6 @@
   <string name="status_new_rc">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
   <string name="status_geocaching_change">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_livemap">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
-
-  <!-- go4cache -->
-  <string name="go4cache_looking_around">Tittar omkring</string>
-  <string name="go4cache_tweeting">Tweeting</string>
-  <string name="go4cache_heading_to">På väg mot</string>
-  <plurals name="go4cache_time_minutes">
-	<item quantity="one">en minut sedan</item>
-	<item quantity="other">%d minuter sedan</item>
-  </plurals>
 
   <string name="clipboard_copy_ok">Kopierat till urklipp.</string>
   <plurals name="days_ago">

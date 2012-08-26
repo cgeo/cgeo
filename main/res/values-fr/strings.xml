@@ -356,7 +356,6 @@
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Identifiant</string>
   <string name="init_password">Mot de passe</string>
@@ -367,7 +366,6 @@
   <string name="init_login_popup_ok">Identifiants OK</string>
   <string name="init_login_popup_failed">Erreur de connexion</string>
   <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
-  <string name="init_go4cache_connect">Connexion à Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorisation de c:geo</string>
   <string name="init_twitter_publish">Publication d\'une cache trouvée</string>
   <string name="init_signature">Signature</string>
@@ -954,7 +952,6 @@
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">page c:geo</a></string>
   <string name="twitter">twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manuel: <a href="http://manual.cgeo.org/">c:geo en bref</a></string>
-  <string name="about_go4cache">Le service <b>Go 4 cache</b> vous permet de voir en temps réel d\'autres géocacheurs sur une carte (dans <b>c:geo</b> ou dans le navigateur). Il peut afficher les caches en cours de recherche. En vous connectant sur <b>Go 4 cache</b> vous permettez à <b>c:geo</b> de publier votre publication (seulement si <b>c:geo</b> fonctionne).</string>
   <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
   <string name="about_auth_1">Le processus suivant permet à <b>c:geo</b> d\'accéder à votre compte Twitter - si vous acceptez.</string>
   <string name="about_auth_2">Cliquer sur le bouton \"début d\'autorisation\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
@@ -965,15 +962,6 @@
   <string name="status_new_rc">Nouvelle version candidate disponible.\nCliquer pour installer.</string>
   <string name="status_geocaching_change">Des changements récents sur geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
   <string name="status_geocaching_livemap">Des changements récents sur geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
-
-  <!-- go4cache -->
-  <string name="go4cache_looking_around">En balade</string>
-  <string name="go4cache_tweeting">En train de tweeter</string>
-  <string name="go4cache_heading_to">En direction de</string>
-  <plurals name="go4cache_time_minutes">
-	<item quantity="one">il y a une minute</item>
-	<item quantity="other">il y a %d minutes</item>
-  </plurals>
 
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <plurals name="days_ago">

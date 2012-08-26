@@ -22,8 +22,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.go4cache.Go4Cache;
-import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -33,7 +31,6 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
-import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -151,21 +148,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     // map status data
     private boolean followMyLocation = false;
     private Viewport viewport = null;
-    private Viewport viewportUsers = null;
     private int zoom = -100;
     // threads
     private LoadTimer loadTimer = null;
-    private Go4CacheTimer go4CacheTimer = null;
     private LoadDetails loadDetailsThread = null;
     /** Time of last {@link LoadRunnable} run */
     private volatile long loadThreadRun = 0L;
-    /** Time of last {@link Go4CacheRunnable} run */
-    private volatile long go4CacheThreadRun = 0L;
     //Interthread communication flag
     private volatile boolean downloaded = false;
     // overlays
     private CachesOverlay overlayCaches = null;
-    private OtherCachersOverlay overlayGo4Cache = null;
     private ScaleOverlay overlayScale = null;
     private PositionOverlay overlayPosition = null;
     // data for overlays
@@ -206,10 +198,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static ThreadPoolExecutor downloadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, downloadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     private static BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<Runnable>(1);
     private static ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    private static BlockingQueue<Runnable> Go4CacheQueue = new ArrayBlockingQueue<Runnable>(1);
-    private static ThreadPoolExecutor Go4CacheExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, Go4CacheQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    private static BlockingQueue<Runnable> go4CacheDisplayQueue = new ArrayBlockingQueue<Runnable>(1);
-    private static ThreadPoolExecutor go4CacheDisplayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, go4CacheDisplayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
 
     // handlers
     /** Updates the titles */
@@ -433,10 +421,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         // initialize overlays
         mapView.clearOverlays();
 
-        if (Settings.isPublicLoc() && overlayGo4Cache == null) {
-            overlayGo4Cache = mapView.createAddUsersOverlay(activity, getResources().getDrawable(R.drawable.user_location));
-        }
-
         if (overlayCaches == null) {
             overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
         }
@@ -498,8 +482,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public void onResume() {
         super.onResume();
 
-        app.setAction(StringUtils.defaultIfBlank(geocodeIntent, null));
-
         addGeoDirObservers();
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
@@ -530,11 +512,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (loadTimer != null) {
             loadTimer.stopIt();
             loadTimer = null;
-        }
-
-        if (go4CacheTimer != null) {
-            go4CacheTimer.stopIt();
-            go4CacheTimer = null;
         }
 
         deleteGeoDirObservers();
@@ -975,7 +952,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     /**
-     * Starts the {@link LoadTimer} and {@link Go4CacheTimer}.
+     * Starts the {@link LoadTimer}.
      */
 
     public synchronized void startTimer() {
@@ -990,15 +967,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
             loadTimer = new LoadTimer();
             loadTimer.start();
-        }
-
-        if (Settings.isPublicLoc()) {
-            if (go4CacheTimer != null) {
-                go4CacheTimer.stopIt();
-                go4CacheTimer = null;
-            }
-            go4CacheTimer = new Go4CacheTimer();
-            go4CacheTimer.start();
         }
     }
 
@@ -1079,60 +1047,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     displayExecutor.getActiveCount() > 0;
         }
 
-    }
-
-    /**
-     * Timer triggering every 250 ms to start the {@link Go4CacheRunnable} for displaying user.
-     */
-
-    private class Go4CacheTimer extends Thread {
-
-        public Go4CacheTimer() {
-            super("Users Timer");
-        }
-
-        private volatile boolean stop = false;
-
-        public void stopIt() {
-            stop = true;
-        }
-
-        @Override
-        public void run() {
-            while (!stop) {
-                try {
-                    sleep(250);
-
-                    if (mapView != null) {
-                        // get current viewport
-                        final Viewport viewportNow = mapView.getViewport();
-
-                        // check if map moved or zoomed
-                        boolean moved = false;
-
-                        long currentTime = System.currentTimeMillis();
-
-                        if (60000 < (currentTime - go4CacheThreadRun)) {
-                            moved = true;
-                        } else if (viewportUsers == null) {
-                            moved = true;
-                        } else if (mapMoved(viewportUsers, viewportNow) && !viewportUsers.includes(viewportNow)) {
-                            moved = true;
-                        }
-
-                        // save new values
-                        if (moved && (1000 < (currentTime - go4CacheThreadRun))) {
-                            viewportUsers = viewportNow;
-                            Go4CacheExecutor.execute(new Go4CacheRunnable(viewportUsers));
-                        }
-                    }
-
-                    yield();
-                } catch (Exception e) {
-                    Log.w("cgeomap.LoadUsersTimer.run: " + e.toString());
-                }
-            }
-        }
     }
 
     /**
@@ -1217,7 +1131,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     /**
      * Worker thread downloading caches from the internet.
-     * Started by {@link LoadRunnable}. Duplicate Code with {@link Go4CacheRunnable}
+     * Started by {@link LoadRunnable}.
      */
 
     private class DownloadRunnable extends DoRunnable {
@@ -1337,66 +1251,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
     }
 
-    /**
-     * Thread to load users from Go 4 Cache
-     */
-
-    private class Go4CacheRunnable extends DoRunnable {
-
-        public Go4CacheRunnable(final Viewport viewport) {
-            super(viewport);
-        }
-
-        @Override
-        public void run() {
-            go4CacheThreadRun = System.currentTimeMillis();
-            List<Go4CacheUser> go4CacheUsers = Go4Cache.getGeocachersInViewport(Settings.getUsername(), viewport.resize(1.5));
-            go4CacheDisplayExecutor.execute(new Go4CacheDisplayRunnable(go4CacheUsers, viewport));
-        }
-    }
-
-    /**
-     * Thread to display users of Go 4 Cache started from {@link Go4CacheRunnable}
-     */
-    private class Go4CacheDisplayRunnable extends DoRunnable {
-
-        private List<Go4CacheUser> users = null;
-
-        public Go4CacheDisplayRunnable(List<Go4CacheUser> usersIn, final Viewport viewport) {
-            super(viewport);
-            users = usersIn;
-        }
-
-        @Override
-        public void run() {
-            if (mapView == null || CollectionUtils.isEmpty(users)) {
-                return;
-            }
-
-            // display users
-            List<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
-
-            int counter = 0;
-            OtherCachersOverlayItemImpl item;
-
-            for (Go4CacheUser userOne : users) {
-                if (userOne.getCoords() == null) {
-                    continue;
-                }
-
-                item = mapItemFactory.getOtherCachersOverlayItemBase(activity, userOne);
-                items.add(item);
-
-                counter++;
-                if ((counter % 10) == 0) {
-                    overlayGo4Cache.updateItems(items);
-                    displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-                }
-            }
-
-            overlayGo4Cache.updateItems(items);
-        }
-    }
 
     /**
      * Thread to display one point. Started on opening if in single mode.

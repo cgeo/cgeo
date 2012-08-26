@@ -2,7 +2,6 @@ package cgeo.geocaching.maps.interfaces;
 
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.ScaleOverlay;
 
@@ -47,8 +46,6 @@ public interface MapViewImpl {
     Context getContext();
 
     CachesOverlay createAddMapOverlay(Context context, Drawable drawable);
-
-    OtherCachersOverlay createAddUsersOverlay(Context context, Drawable markerIn);
 
     ScaleOverlay createAddScaleOverlay(Activity activity);
 

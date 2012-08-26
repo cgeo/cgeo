@@ -248,8 +248,6 @@ public class cgeo extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        app.setAction(null);
-
         setContentView(R.layout.main);
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 
