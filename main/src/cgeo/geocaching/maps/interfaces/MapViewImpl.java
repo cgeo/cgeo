@@ -80,12 +80,39 @@ public interface MapViewImpl {
 
     Viewport getViewport();
 
+    /**
+     * Indicates if the view supports setting the map source that could be a map database for offline
+     * *
+     * 
+     * @return true - switching the source is available
+     */
     boolean isMapDatabaseSwitchSupported();
 
+    /**
+     * Returns a list of available sources for display to the end-user in the UI
+     * Note: if an internal representation of the source such as an ID is required
+     * it is the responsibility of this implemented class to hold a list mapping
+     * the returned list to the ID
+     * 
+     * @return List of selectable sources
+     */
     ArrayList<String> getMapDatabaseList();
 
+    /**
+     * Returns the current source as a name in the same styles a for the entries
+     * in getMapDatabaseList to be used to display the current selection for the end user
+     * 
+     * @return The currently used map source og null is no source is selected
+     */
     String getCurrentMapDatabase();
 
-    void setMapDatabase(String s);
+    /**
+     * Set a the map source
+     * in getMapDatabaseList to be used to display the current selection for the end user
+     * 
+     * @param mapSourceName
+     *            The name of the source as listed in the list from getMapDatabaseList
+     */
+    void setMapDatabase(String mapSourceName);
 
 }

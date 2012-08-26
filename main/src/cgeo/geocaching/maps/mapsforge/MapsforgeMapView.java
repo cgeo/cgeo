@@ -290,8 +290,17 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     @Override
     public boolean isMapDatabaseSwitchSupported() {
-        return !getMapGenerator().requiresInternetConnection()
-                && null != Settings.getMapFile(); //if no file is specified in settings then disable the switch map option
+
+        if (getMapGenerator().requiresInternetConnection()) {
+            return false;
+        }
+
+        if (null == Settings.getMapFile()) {
+            //if no file is specified in settings then disable the switch map option
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -304,7 +313,6 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         try {
             File directory = new File(Settings.getMapFile()).getParentFile();
             ArrayList<String> mapFileList = new ArrayList<String>();
-
             for (File file : directory.listFiles()) {
                 if (file.getName().endsWith(".map")) {
                     MapDatabase testDatabase = new MapDatabase();

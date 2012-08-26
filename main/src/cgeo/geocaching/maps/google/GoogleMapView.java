@@ -202,25 +202,25 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
     @Override
     public boolean isMapDatabaseSwitchSupported() {
-        // TODO Auto-generated method stub
+        //Not supported so return false
         return false;
     }
 
     @Override
     public ArrayList<String> getMapDatabaseList() {
-        // TODO Auto-generated method stub
+        //Not supported so return null
         return null;
     }
 
     @Override
     public String getCurrentMapDatabase() {
-        // TODO Auto-generated method stub
+        //Not supported so return null
         return null;
     }
 
     @Override
     public void setMapDatabase(String s) {
-        // TODO Auto-generated method stub
+        //Not supported so do nothing
 
     }
 }

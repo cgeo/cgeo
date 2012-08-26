@@ -70,12 +70,13 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
             ArrayList<String> mapDatabaseList = mapBase.getMapView().getMapDatabaseList();
             if (mapDatabaseList.size() > 0) {
                 for (int i = 0; i < mapDatabaseList.size(); i++) {
+                    String mapDatabase = mapDatabaseList.get(i);
                     MenuItem itm = subMenuSelectSource.add(AbstractMap.MENU_MAP_SPECIFIC_MIN
                             , AbstractMap.MENU_MAP_SPECIFIC_MIN + i + 1
                             , Menu.NONE
-                            , mapDatabaseList.get(i));
+                            , mapDatabase);
                     itm.setCheckable(true);
-                    itm.setChecked((new File(mapBase.getMapView().getCurrentMapDatabase())).getName().equals(mapDatabaseList.get(i)));
+                    itm.setChecked((new File(mapBase.getMapView().getCurrentMapDatabase())).getName().equals(mapDatabase));
                 }
                 subMenuSelectSource.setGroupCheckable(AbstractMap.MENU_MAP_SPECIFIC_MIN, true, true);
             }
@@ -121,12 +122,12 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     public void superOnDestroy() {
         super.onDestroy();
     }
-    
+
     @Override
     public boolean superOnOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-    
+
     @Override
     public void superOnResume() {
         super.onResume();
@@ -141,7 +142,7 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     public void superOnPause() {
         super.onPause();
     }
-    
+
     @Override
     public boolean superOnPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
