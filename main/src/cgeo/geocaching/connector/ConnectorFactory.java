@@ -50,7 +50,9 @@ public final class ConnectorFactory {
         return getConnector(cache.getGeocode());
     }
 
-    public static IConnector getConnector(String geocode) {
+    public static IConnector getConnector(final String geocodeInput) {
+        // this may come from user input
+        final String geocode = StringUtils.trim(geocodeInput);
         if (isInvalidGeocode(geocode)) {
             return UNKNOWN_CONNECTOR;
         }

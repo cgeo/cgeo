@@ -54,4 +54,9 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertEquals(GCConnector.getInstance().getName(), connector.getName());
     }
 
+    public static void testTrim() {
+        assertTrue(ConnectorFactory.getConnector("   OZ12345   ") instanceof OCConnector); // opencaching CZ
+        assertTrue(ConnectorFactory.getConnector("   OZ 12345   ") instanceof UnknownConnector);
+    }
+
 }

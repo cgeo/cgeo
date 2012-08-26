@@ -103,7 +103,7 @@ public class SearchActivity extends AbstractActivity {
     private boolean instantSearch(final String query, final boolean keywordSearch) {
 
         // Check if any connector can handle the query as a geocode
-        final String geocode = StringUtils.deleteWhitespace(query);
+        final String geocode = StringUtils.trim(query);
         final IConnector connector = ConnectorFactory.getConnector(geocode);
         if (connector instanceof ISearchByGeocode) {
             final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
