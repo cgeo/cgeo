@@ -10,12 +10,12 @@
   <string name="settings">Settaggi</string>
   <string name="helpers">Apps utili</string>
   <string name="about">Info c:geo</string>
-  <string name="helper">Vuoi imparare di più su <b>c:geo</b>?\nLeggi il facile manuale.</string>
+  <string name="helper">Vuoi imparare di più su <b>c:geo</b>?\nLeggi il semplice manuale.</string>
   <string name="latitude">Latitudine</string>
   <string name="longitude">Longitudine</string>
 
   <!-- actionbar -->
-  <string name="action_bar_share_title">Condividi link alla cache</string>
+  <string name="action_bar_share_title">Condividi link al cache</string>
 
   <!-- caches -->
   <string name="all_types">Tutti i tipi di cache</string>
