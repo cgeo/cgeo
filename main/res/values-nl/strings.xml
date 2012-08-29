@@ -375,7 +375,7 @@
   <string name="init_autoload">Automatisch laden van lange omschrijving</string>
   <string name="init_other">Overige opties</string>
   <string name="init_skin">Lichte skin (c:geo herstarten)</string>
-  <string name="init_address">Toon adres op hoofdscherm</string>
+  <string name="init_address">Toon adres in plaats van positie op hoofdscherm</string>
   <string name="init_captcha">Laat CAPTCHA zien indien noodzakelijk</string>
   <string name="init_useenglish">Use English inside c:geo\n(restart needed)</string>
   <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
