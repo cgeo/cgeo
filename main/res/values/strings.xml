@@ -388,7 +388,7 @@
   <string name="init_autoload">Auto-loading of long description</string>
   <string name="init_other">Other Options</string>
   <string name="init_skin">Use light skin\n(Restart needed)</string>
-  <string name="init_address">Show address on Mainscreen</string>
+  <string name="init_address">Show address instead of coordinates on main screen</string>
   <string name="init_captcha">Show CAPTCHA if necessary (only Basic Member)</string>
   <string name="init_useenglish">Use English language for c:geo\n(Restart needed)</string>
   <string name="init_exclude">Exclude own and found caches</string>
