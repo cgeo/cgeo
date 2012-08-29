@@ -387,7 +387,7 @@
   <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_other">Weitere Optionen</string>
   <string name="init_skin">Helle Oberfläche (Neustart erforderlich)</string>
-  <string name="init_address">Position am Startbildschirm anzeigen</string>
+  <string name="init_address">Ort statt Koordinaten im Startbildschirm anzeigen</string>
   <string name="init_captcha">Zeige CAPTCHA wenn notwendig (nur Basic Member)</string>
   <string name="init_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches ausblenden</string>
