@@ -384,7 +384,7 @@
   <string name="init_autoload">Carica automaticamente descrizione estesa</string>
   <string name="init_other">Altre opzioni</string>
   <string name="init_skin">Tema chiaro\n(richiede riavvio di c:geo)</string>
-  <string name="init_address">Visualizza indirizzo su pagina principale</string>
+  <string name="init_address">Visualizza indirizzo invece di posizione su pagina principale</string>
   <string name="init_captcha">Visualizza CAPTCHA se necessario (solo utenti base, non Premium)</string>
   <string name="init_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
   <string name="init_exclude">Escludi i miei cache e queli che ho già trovato</string>

@@ -341,7 +341,7 @@
   <string name="init_signature_template_number">Número</string> 
   <string name="init_other">Otras opciones</string>
   <string name="init_skin">Fondo blanco (necesita reiniciar c:geo)</string>
-  <string name="init_address">Mostrar dirección en la pantalla principal</string>
+  <string name="init_address">Mostrar dirección en lugar de posición en la pantalla principal</string>
   <string name="init_captcha">Mostrar CAPTCHA si es necesario</string>
   <string name="init_useenglish">Usar inglés interno (necesita reiniciar c:geo)</string>
   <string name="init_exclude">Excluir encontrados y propios</string>

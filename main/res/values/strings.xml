@@ -388,7 +388,7 @@
   <string name="init_autoload">Auto-loading of long description</string>
   <string name="init_other">Other Options</string>
   <string name="init_skin">Use light skin\n(Restart needed)</string>
-  <string name="init_address">Show address on Mainscreen</string>
+  <string name="init_address">Show address instead of coordinates on main screen</string>
   <string name="init_captcha">Show CAPTCHA if necessary (only Basic Member)</string>
   <string name="init_useenglish">Use English language for c:geo\n(Restart needed)</string>
   <string name="init_exclude">Exclude own and found caches</string>
@@ -1031,7 +1031,7 @@
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
-    · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, localization DE)\n
+    · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support, localization DE)\n
     · Ludovic Valente (localization FR)\n
     · marco-jacob (code, loc. DE)\n
     · MichielK (code, loc. NL)\n
@@ -1070,6 +1070,7 @@
     · If static maps are enabled, batch update of caches will now update caches without static maps first\n
     · If a cache has a chirp attribute the navigation menu supports starting the Cache Beacon app\n
     · Search bar on main screen now allows searching OC geocodes\n
+    · Removed Go4Cache support as this third party service is no longer available\n
     \n
     <b>Bugfixing:</b>\n
     · Improvement for cache description translation\n
