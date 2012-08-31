@@ -1243,14 +1243,14 @@ public class cgeocaches extends AbstractListActivity {
                 if (removeListAfterwards) {
                     removeList(false);
                 }
-                dialog.cancel();
+                //dialog.cancel();
             }
         });
         dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
+                //dialog.cancel();
             }
         });
 
