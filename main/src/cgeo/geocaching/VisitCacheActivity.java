@@ -15,6 +15,7 @@ import cgeo.geocaching.ui.DateDialog;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -143,8 +144,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
                     inventoryView.addView(inventoryItem);
 
-                    if (Settings.isTrackableAutoVisit())
-                    {
+                    if (Settings.isTrackableAutoVisit()) {
                         tb.action = LogTypeTrackable.VISITED;
                         tbChanged = true;
                     }
@@ -330,7 +330,8 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         final int id = item.getItemId();
 
         if (id == MENU_SIGNATURE) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), false), true);
+            final LogContext logContext = new LogContext(cache);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), logContext), true);
             return true;
         }
 
@@ -345,7 +346,8 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
         if (template != null) {
-            insertIntoLog(template.getValue(false), true);
+            final LogContext logContext = new LogContext(cache);
+            insertIntoLog(template.getValue(logContext), true);
             return true;
         }
 
@@ -481,7 +483,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
         } else if (StringUtils.isNotBlank(Settings.getSignature())
                 && Settings.isAutoInsertSignature()
                 && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), false), false);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache)), false);
         }
 
         if (!possibleLogTypes.contains(typeSelected)) {

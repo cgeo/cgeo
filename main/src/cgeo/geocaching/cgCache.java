@@ -24,6 +24,7 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -409,7 +410,7 @@ public class cgCache implements ICache, IWaypoint {
 
     public void logOffline(final Activity fromActivity, final LogType logType) {
         final boolean mustIncludeSignature = StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature();
-        final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), true) : "";
+        final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(this, true)) : "";
         logOffline(fromActivity, initial, Calendar.getInstance(), logType);
     }
 

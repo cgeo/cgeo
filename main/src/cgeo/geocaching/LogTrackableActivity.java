@@ -12,6 +12,7 @@ import cgeo.geocaching.ui.DateDialog;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -51,6 +52,7 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
     private int attempts = 0;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
+    private cgTrackable trackable;
 
     private static final int MENU_SIGNATURE = 1;
 
@@ -132,7 +134,7 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
             }
         }
 
-        final cgTrackable trackable = app.getTrackableByGeocode(geocode);
+        trackable = app.getTrackableByGeocode(geocode);
 
         if (StringUtils.isNotBlank(trackable.getName())) {
             setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
@@ -183,15 +185,16 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
+        final LogContext logContext = new LogContext(trackable);
 
         if (id == MENU_SIGNATURE) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), false), true);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), logContext), true);
             return true;
         }
 
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
         if (template != null) {
-            insertIntoLog(template.getValue(false), true);
+            insertIntoLog(template.getValue(logContext), true);
             return true;
         }
 

@@ -2,6 +2,8 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.network.Network;
@@ -9,12 +11,57 @@ import cgeo.geocaching.ui.Formatter;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 
 /**
  * provides all the available templates for logging
  *
  */
 public class LogTemplateProvider {
+
+    /**
+     * Context aware data container for log templates.
+     * <p>
+     * Some log templates need additional information. To provide that information, it can be encapsulated in this log
+     * context.
+     * </p>
+     *
+     */
+    public static class LogContext {
+        private cgCache cache;
+        private cgTrackable trackable;
+        private boolean offline = false;
+
+        public LogContext(final cgCache cache) {
+            this(cache, false);
+        }
+
+        public LogContext(final cgTrackable trackable) {
+            this.trackable = trackable;
+        }
+
+        public LogContext(boolean offline) {
+            this(null, offline);
+        }
+
+        public LogContext(final cgCache cache, boolean offline) {
+            this.cache = cache;
+            this.offline = offline;
+        }
+
+        public cgCache getCache() {
+            return cache;
+        }
+
+        public cgTrackable getTrackable() {
+            return trackable;
+        }
+
+        public boolean isOffline() {
+            return offline;
+        }
+    }
+
     public static abstract class LogTemplate {
         private final String template;
         private final int resourceId;
@@ -24,7 +71,7 @@ public class LogTemplateProvider {
             this.resourceId = resourceId;
         }
 
-        abstract public String getValue(boolean offline);
+        abstract public String getValue(LogContext context);
 
         public int getResourceId() {
             return resourceId;
@@ -38,70 +85,80 @@ public class LogTemplateProvider {
             return template;
         }
 
-        protected String apply(String input, boolean offline) {
+        protected String apply(String input, LogContext context) {
             if (input.contains("[" + template + "]")) {
-                return StringUtils.replace(input, "[" + template + "]", getValue(offline));
+                return StringUtils.replace(input, "[" + template + "]", getValue(context));
             }
             return input;
         }
     }
 
-    private static LogTemplate[] templates;
+    public static ArrayList<LogTemplate> getTemplates() {
+        ArrayList<LogTemplate> templates = new ArrayList<LogTemplateProvider.LogTemplate>();
+        templates.add(new LogTemplate("DATE", R.string.init_signature_template_date) {
 
-    public static LogTemplate[] getTemplates() {
-        if (templates == null) {
-            templates = new LogTemplate[] {
-                    new LogTemplate("DATE", R.string.init_signature_template_date) {
+            @Override
+            public String getValue(final LogContext context) {
+                return Formatter.formatFullDate(System.currentTimeMillis());
+            }
+        });
+        templates.add(new LogTemplate("TIME", R.string.init_signature_template_time) {
 
-                        @Override
-                        public String getValue(final boolean offline) {
-                            return Formatter.formatFullDate(System.currentTimeMillis());
-                        }
-                    },
-                    new LogTemplate("TIME", R.string.init_signature_template_time) {
+            @Override
+            public String getValue(final LogContext context) {
+                return Formatter.formatTime(System.currentTimeMillis());
+            }
+        });
+        templates.add(new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
 
-                        @Override
-                        public String getValue(final boolean offline) {
-                            return Formatter.formatTime(System.currentTimeMillis());
-                        }
-                    },
-                    new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
+            @Override
+            public String getValue(final LogContext context) {
+                final long currentTime = System.currentTimeMillis();
+                return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
+            }
+        });
+        templates.add(new LogTemplate("USER", R.string.init_signature_template_user) {
 
-                        @Override
-                        public String getValue(final boolean offline) {
-                            final long currentTime = System.currentTimeMillis();
-                            return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
-                        }
-                    },
-                    new LogTemplate("USER", R.string.init_signature_template_user) {
+            @Override
+            public String getValue(final LogContext context) {
+                return Settings.getUsername();
+            }
+        });
+        templates.add(new LogTemplate("NUMBER", R.string.init_signature_template_number) {
 
-                        @Override
-                        public String getValue(final boolean offline) {
-                            return Settings.getUsername();
-                        }
-                    },
-                    new LogTemplate("NUMBER", R.string.init_signature_template_number) {
-
-                        @Override
-                        public String getValue(final boolean offline) {
-                            int current = Login.getActualCachesFound();
-                            if (current == 0) {
-                                if (offline) {
-                                    return "";
-                                }
-                                final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/"));
-                                current = parseFindCount(page);
-                            }
-
-                            String findCount = "";
-                            if (current >= 0) {
-                                findCount = String.valueOf(current + 1);
-                            }
-                            return findCount;
-                        }
+            @Override
+            public String getValue(final LogContext context) {
+                int current = Login.getActualCachesFound();
+                if (current == 0) {
+                    if (context.isOffline()) {
+                        return "";
                     }
-            };
-        }
+                    final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/"));
+                    current = parseFindCount(page);
+                }
+
+                String findCount = "";
+                if (current >= 0) {
+                    findCount = String.valueOf(current + 1);
+                }
+                return findCount;
+            }
+        });
+        templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {
+
+            @Override
+            public String getValue(final LogContext context) {
+                cgTrackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    return trackable.getOwner();
+                }
+                cgCache cache = context.getCache();
+                if (cache != null) {
+                    return cache.getOwnerDisplayName();
+                }
+                return "";
+            }
+        });
         return templates;
     }
 
@@ -114,13 +171,13 @@ public class LogTemplateProvider {
         return null;
     }
 
-    public static String applyTemplates(String signature, boolean offline) {
+    public static String applyTemplates(String signature, LogContext context) {
         if (signature == null) {
             return "";
         }
         String result = signature;
         for (LogTemplate template : getTemplates()) {
-            result = template.apply(result, offline);
+            result = template.apply(result, context);
         }
         return result;
     }

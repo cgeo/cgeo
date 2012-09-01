@@ -380,6 +380,7 @@
   <string name="init_signature_template_datetime">Date &amp; Time</string>
   <string name="init_signature_template_user">User</string>
   <string name="init_signature_template_number">Number</string>
+  <string name="init_signature_template_owner">Owner</string>
   <string name="init_details">Cache Details</string>
   <string name="init_ratingwanted">Load cache rating from GCvote.com</string>
   <string name="init_elevationwanted">Load cache elevation data</string>

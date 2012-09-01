@@ -894,8 +894,7 @@ public class SettingsActivity extends AbstractActivity {
                     final Parameters params = new Parameters("name", nam, "code", cod);
                     HttpResponse response = Network.getRequest("http://send2.cgeo.org/auth.html", params);
 
-                    if (response != null && response.getStatusLine().getStatusCode() == 200)
-                    {
+                    if (response != null && response.getStatusLine().getStatusCode() == 200) {
                         //response was OK
                         String[] strings = Network.getResponseData(response).split(",");
                         try {
