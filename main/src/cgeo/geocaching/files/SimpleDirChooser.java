@@ -1,6 +1,3 @@
-/**
- *
- */
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
@@ -10,6 +7,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +29,7 @@ import java.util.List;
  * Dialog for choosing a file or directory.
  */
 public class SimpleDirChooser extends ListActivity {
+    public static final String EXTRA_CHOSEN_DIR = "chosenDir";
     public static final String START_DIR = "start_dir";
     private static final String PARENT_DIR = "..        ";
     private File currentDir;
@@ -45,7 +44,7 @@ public class SimpleDirChooser extends ListActivity {
         final Bundle extras = getIntent().getExtras();
         String startDir = extras.getString(START_DIR);
         if (startDir == null) {
-            startDir = "/sdcard";
+            startDir = Environment.getExternalStorageDirectory().getPath();
         } else {
             startDir = startDir.substring(0, startDir.lastIndexOf(File.separatorChar));
         }
@@ -65,7 +64,7 @@ public class SimpleDirChooser extends ListActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 String chosenDirName = File.separator + checkedText;
-                intent.putExtra("chosenDir", currentDir.getAbsolutePath() + chosenDirName);
+                intent.putExtra(EXTRA_CHOSEN_DIR, currentDir.getAbsolutePath() + chosenDirName);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -108,40 +107,40 @@ public class SimpleDirChooser extends ListActivity {
 
     public class FileArrayAdapter extends ArrayAdapter<Option> {
 
-        private Context c;
+        private Context content;
         private int id;
         private List<Option> items;
 
         public FileArrayAdapter(Context context, int simpleDirItemResId, List<Option> objects) {
             super(context, simpleDirItemResId, objects);
-            c = context;
-            id = simpleDirItemResId;
-            items = objects;
+            this.content = context;
+            this.id = simpleDirItemResId;
+            this.items = objects;
         }
 
         @Override
-        public Option getItem(int i) {
-            return items.get(i);
+        public Option getItem(int index) {
+            return items.get(index);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View v = convertView;
             if (v == null) {
-                LayoutInflater vi = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater vi = (LayoutInflater) content.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(id, null);
             }
 
-            final Option o = items.get(position);
-            if (o != null) {
+            final Option option = items.get(position);
+            if (option != null) {
                 TextView t1 = (TextView) v.findViewById(R.id.TextView01);
                 if (t1 != null) {
                     t1.setOnClickListener(new OnTextViewClickListener(position));
-                    t1.setText(o.getName());
+                    t1.setText(option.getName());
                 }
                 CheckBox check = (CheckBox) v.findViewById(R.id.CheckBox);
                 if (check != null) {
-                    check.setOnClickListener(new OnCheckBoxClickListener(o.getName()));
+                    check.setOnClickListener(new OnCheckBoxClickListener(option.getName()));
                 }
             }
             return v;
@@ -157,12 +156,12 @@ public class SimpleDirChooser extends ListActivity {
 
         @Override
         public void onClick(View arg0) {
-            Option o = adapter.getItem(position);
-            if (o.getName().equals(PARENT_DIR)) {
-                currentDir = new File(o.getPath());
+            Option option = adapter.getItem(position);
+            if (option.getName().equals(PARENT_DIR)) {
+                currentDir = new File(option.getPath());
                 fill(currentDir);
             } else {
-                File dir = new File(o.getPath());
+                File dir = new File(option.getPath());
                 if (dir.list(new DirOnlyFilenameFilter()).length > 0) {
                     currentDir = dir;
                     fill(currentDir);
@@ -201,12 +200,12 @@ public class SimpleDirChooser extends ListActivity {
     }
 
     public class Option implements Comparable<Option> {
-        private String name;
-        private String path;
+        private final String name;
+        private final String path;
 
-        public Option(String n, String p) {
-            name = n;
-            path = p;
+        public Option(String name, String path) {
+            this.name = name;
+            this.path = path;
         }
 
         public String getName() {
@@ -218,9 +217,9 @@ public class SimpleDirChooser extends ListActivity {
         }
 
         @Override
-        public int compareTo(Option o) {
-            if (o != null && this.name != null) {
-                return this.name.toLowerCase().compareTo(o.getName().toLowerCase());
+        public int compareTo(Option other) {
+            if (other != null && this.name != null) {
+                return String.CASE_INSENSITIVE_ORDER.compare(this.name, other.getName());
             }
             throw new IllegalArgumentException("");
         }

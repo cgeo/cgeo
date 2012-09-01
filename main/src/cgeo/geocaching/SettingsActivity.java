@@ -18,6 +18,7 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
+import cgeo.geocaching.utils.RunnableWithArgument;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -56,8 +57,8 @@ import java.util.List;
 public class SettingsActivity extends AbstractActivity {
 
     private final static int SELECT_MAPFILE_REQUEST = 1;
-    private final static int SELECT_GPXDIR_REQUEST = 2;
-    private final static int SELECT_IMPGPXDIR_REQUEST = 3;
+    private final static int SELECT_GPX_EXPORT_REQUEST = 2;
+    private final static int SELECT_GPX_IMPORT_REQUEST = 3;
 
 
     private ProgressDialog loginDialog = null;
@@ -176,14 +177,11 @@ public class SettingsActivity extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == 0) {
-            boolean status;
-
             ((EditText) findViewById(R.id.username)).setText("");
             ((EditText) findViewById(R.id.password)).setText("");
             ((EditText) findViewById(R.id.passvote)).setText("");
 
-            status = saveValues();
-            if (status) {
+            if (saveValues()) {
                 showToast(res.getString(R.string.init_cleared));
             } else {
                 showToast(res.getString(R.string.err_init_cleared));
@@ -570,7 +568,7 @@ public class SettingsActivity extends AbstractActivity {
             public void onClick(View v) {
                 Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
                 dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getGpxExportDir());
-                startActivityForResult(dirChooser, SELECT_GPXDIR_REQUEST);
+                startActivityForResult(dirChooser, SELECT_GPX_EXPORT_REQUEST);
             }
         });
 
@@ -584,7 +582,7 @@ public class SettingsActivity extends AbstractActivity {
             public void onClick(View v) {
                 Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
                 dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getGpxImportDir());
-                startActivityForResult(dirChooser, SELECT_IMPGPXDIR_REQUEST);
+                startActivityForResult(dirChooser, SELECT_GPX_IMPORT_REQUEST);
             }
         });
 
@@ -780,31 +778,31 @@ public class SettingsActivity extends AbstractActivity {
         String passvoteNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.passvote)).getText().toString());
         // don't trim signature, user may want to have whitespace at the beginning
         String signatureNew = ((EditText) findViewById(R.id.signature)).getText().toString();
-        String altitudeNew = StringUtils.trimToNull(((EditText) findViewById(R.id.altitude)).getText().toString());
-        String mfmapFileNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.mapfile)).getText().toString());
+        String mapFileNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.mapfile)).getText().toString());
 
-        int altitudeNewInt = 0;
-        if (altitudeNew != null) {
-            try {
-                altitudeNewInt = Integer.parseInt(altitudeNew);
-            } catch (NumberFormatException e) {
-                altitudeNewInt = 0;
-            }
-        }
+        String altitudeNew = StringUtils.trimToNull(((EditText) findViewById(R.id.altitude)).getText().toString());
+        int altitudeNewInt = parseNumber(altitudeNew, 0);
+
+        TextView field = (TextView) findViewById(R.id.showwaypointsthreshold);
+        final int waypointThreshold = parseNumber(field.getText().toString(), 5);
 
         final boolean status1 = Settings.setLogin(usernameNew, passwordNew);
         final boolean status2 = Settings.setGCvoteLogin(passvoteNew);
         final boolean status3 = Settings.setSignature(signatureNew);
         final boolean status4 = Settings.setAltCorrection(altitudeNewInt);
-        final boolean status5 = Settings.setMapFile(mfmapFileNew);
-        TextView field = (TextView) findViewById(R.id.showwaypointsthreshold);
-        Settings.setShowWaypointsThreshold(safeParse(field, 5));
+        final boolean status5 = Settings.setMapFile(mapFileNew);
+        Settings.setShowWaypointsThreshold(waypointThreshold);
+
+        String importNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_importdir)).getText().toString());
+        String exportNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_exportdir)).getText().toString());
+        Settings.setGpxImportDir(importNew);
+        Settings.setGpxExportDir(exportNew);
 
         return status1 && status2 && status3 && status4 && status5;
     }
 
     /**
-     * Returns the Int Value in the Field
+     * Returns the integer value from the string
      *
      * @param field
      *            the field to retrieve the integer value from
@@ -813,9 +811,9 @@ public class SettingsActivity extends AbstractActivity {
      * @return either the field content or the default value
      */
 
-    static private int safeParse(final TextView field, int defaultValue) {
+    static private int parseNumber(final String number, int defaultValue) {
         try {
-            return Integer.parseInt(field.getText().toString());
+            return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             return defaultValue;
         }
@@ -916,7 +914,7 @@ public class SettingsActivity extends AbstractActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == SELECT_MAPFILE_REQUEST) {
@@ -930,25 +928,35 @@ public class SettingsActivity extends AbstractActivity {
             }
             initMapfileEdittext(true);
         }
-        if (requestCode == SELECT_GPXDIR_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                if (data.hasExtra("chosenDir")) {
-                    Settings.setGpxExportDir(data.getStringExtra("chosenDir"));
+        if (requestCode == SELECT_GPX_EXPORT_REQUEST) {
+            checkDirectory(resultCode, data, R.id.gpx_exportdir, new RunnableWithArgument<String>() {
+
+                @Override
+                public void run(String directory) {
+                    Settings.setGpxExportDir(directory);
                 }
-            }
-            EditText gpxExportDir = (EditText) findViewById(R.id.gpx_exportdir);
-            gpxExportDir.setText(Settings.getGpxExportDir());
-            gpxExportDir.requestFocus();
+            });
         }
-        if (requestCode == SELECT_IMPGPXDIR_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                if (data.hasExtra("chosenDir")) {
-                    Settings.setGpxImportDir(data.getStringExtra("chosenDir"));
+        if (requestCode == SELECT_GPX_IMPORT_REQUEST) {
+            checkDirectory(resultCode, data, R.id.gpx_importdir, new RunnableWithArgument<String>() {
+
+                @Override
+                public void run(String directory) {
+                    Settings.setGpxImportDir(directory);
                 }
+            });
+        }
+    }
+
+    private void checkDirectory(int resultCode, Intent data, int textField, RunnableWithArgument<String> runnableSetDir) {
+        if (resultCode == RESULT_OK) {
+            if (data.hasExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR)) {
+                final String directory = data.getStringExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR);
+                runnableSetDir.run(directory);
+                EditText directoryText = (EditText) findViewById(textField);
+                directoryText.setText(directory);
+                directoryText.requestFocus();
             }
-            EditText gpxImportDir = (EditText) findViewById(R.id.gpx_importdir);
-            gpxImportDir.setText(Settings.getGpxExportDir());
-            gpxImportDir.requestFocus();
         }
     }
 
