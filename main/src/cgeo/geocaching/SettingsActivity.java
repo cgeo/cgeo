@@ -57,6 +57,7 @@ public class SettingsActivity extends AbstractActivity {
 
     private final static int SELECT_MAPFILE_REQUEST = 1;
     private final static int SELECT_GPXDIR_REQUEST = 2;
+    private final static int SELECT_IMPGPXDIR_REQUEST = 2;
 
 
     private ProgressDialog loginDialog = null;
@@ -573,6 +574,20 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        // GPX Import directory
+        final EditText gpxImportDir = (EditText) findViewById(R.id.gpx_importdir);
+        gpxImportDir.setText(Settings.getGpxImportDir());
+        Button selectGpxImportDir = (Button) findViewById(R.id.select_gpx_importdir);
+        selectGpxImportDir.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
+                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getGpxImportDir());
+                startActivityForResult(dirChooser, SELECT_IMPGPXDIR_REQUEST);
+            }
+        });
+
         // Display trail on map
         final CheckBox trailButton = (CheckBox) findViewById(R.id.trail);
         trailButton.setChecked(Settings.isMapTrail());
@@ -924,6 +939,16 @@ public class SettingsActivity extends AbstractActivity {
             EditText gpxExportDir = (EditText) findViewById(R.id.gpx_exportdir);
             gpxExportDir.setText(Settings.getGpxExportDir());
             gpxExportDir.requestFocus();
+        }
+        if (requestCode == SELECT_IMPGPXDIR_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                if (data.hasExtra("chosenDir")) {
+                    Settings.setGpxImportDir(data.getStringExtra("chosenDir"));
+                }
+            }
+            EditText gpxImportDir = (EditText) findViewById(R.id.gpx_importdir);
+            gpxImportDir.setText(Settings.getGpxExportDir());
+            gpxImportDir.requestFocus();
         }
     }
 

@@ -15,6 +15,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.ExportFactory;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.files.GpxImportChooser;
 import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -1146,7 +1147,7 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     private void importGpx() {
-        cgeogpxes.startSubActivity(this, listId);
+        GpxImportChooser.showImportMenu(this, listId);
     }
 
     @Override

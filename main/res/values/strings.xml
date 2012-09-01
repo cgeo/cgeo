@@ -425,9 +425,13 @@
   <string name="init_mapsource_select">Select Map Source</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_select_gpx_exportdir">…</string>
+  <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">GPX Export Directory</string>
+  <string name="init_gpx_importdir">GPX Import Directory</string>
   <string name="init_gpx_exportdir_description">Here you can select the directory for GPX exports.</string>
+  <string name="init_gpx_importdir_description">Here you can select the directory for GPX imports.</string>
   <string name="init_gpx_exportdir_select">Select GPX Export Directory</string>
+  <string name="init_gpx_importdir_select">Select GPX Import Directory</string>
   <string name="init_maptrail">Show trail on Map</string>
   <string name="init_share_after_export">Open share menu after GPX export</string>
   <string name="init_trackautovisit">Set trackables to \"Visited\" as a default</string>
@@ -625,6 +629,9 @@
   <string name="simple_dir_chooser_current_path">Path:</string>
   
   <!-- gpx -->
+  <string name="gpx_import_scan_choice">Search GPX files</string>
+  <string name="gpx_import_force_scan">Scan all directories</string>
+  <string name="gpx_import_only_default">Default dir only</string>
   <string name="gpx_import_loading_caches">Loading caches from .gpx file</string>
   <string name="gpx_import_loading_waypoints">Loading waypoints file</string>
   <string name="gpx_import_store_static_maps">Storing static maps</string>
