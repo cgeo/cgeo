@@ -3,9 +3,9 @@ package cgeo.geocaching.apps;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeo;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 
 public abstract class AbstractApp implements App {
 
@@ -24,26 +24,16 @@ public abstract class AbstractApp implements App {
         this(name, intent, null);
     }
 
-    protected Intent getLaunchIntent() {
-        if (packageName == null) {
-            return null;
-        }
-        final PackageManager packageManager = cgeoapplication.getInstance().getPackageManager();
-        try {
-            // This can throw an exception where the exception type is only defined on API Level > 3
-            // therefore surround with try-catch
-            return packageManager.getLaunchIntentForPackage(packageName);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
     @Override
     public boolean isInstalled() {
-        if (getLaunchIntent() != null) {
+        if (ProcessUtils.isInstalled(packageName)) {
             return true;
         }
         return cgeo.isIntentAvailable(intent);
+    }
+
+    protected Intent getLaunchIntent() {
+        return ProcessUtils.getLaunchIntent(packageName);
     }
 
     @Override

@@ -25,6 +25,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TranslationUtils;
@@ -479,10 +480,10 @@ public class CacheDetailActivity extends AbstractActivity {
                         showToast(res.getString(R.string.clipboard_copy_ok));
                         return true;
                     case MENU_FIELD_TRANSLATE:
-                        TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), clickedItemText.toString());
+                        TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
                         return true;
                     case MENU_FIELD_TRANSLATE_EN:
-                        TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), clickedItemText.toString());
+                        TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
                         return true;
                     case MENU_FIELD_SHARE:
                         final Intent intent = new Intent(Intent.ACTION_SEND);
