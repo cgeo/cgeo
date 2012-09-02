@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -153,9 +154,12 @@ class GpxExport extends AbstractExport {
                     gpx.write(Double.toString(cache.getCoords().getLongitude()));
                     gpx.write("\">");
 
-                    gpx.write("<time>");
-                    gpx.write(StringEscapeUtils.escapeXml(dateFormatZ.format(cache.getHiddenDate())));
-                    gpx.write("</time>");
+                    final Date hiddenDate = cache.getHiddenDate();
+                    if (hiddenDate != null) {
+                        gpx.write("<time>");
+                        gpx.write(StringEscapeUtils.escapeXml(dateFormatZ.format(hiddenDate)));
+                        gpx.write("</time>");
+                    }
 
                     gpx.write("<name>");
                     gpx.write(StringEscapeUtils.escapeXml(cache.getGeocode()));
@@ -228,21 +232,13 @@ class GpxExport extends AbstractExport {
                     gpx.write("<groundspeak:state></groundspeak:state>"); // c:geo cannot manage 2 separate fields, so we export as country
 
                     gpx.write("<groundspeak:short_description html=\"");
-                    if (BaseUtils.containsHtml(cache.getShortDescription())) {
-                        gpx.write("True");
-                    } else {
-                        gpx.write("False");
-                    }
+                    gpx.write(BaseUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
                     gpx.write("\">");
                     gpx.write(StringEscapeUtils.escapeXml(cache.getShortDescription()));
                     gpx.write("</groundspeak:short_description>");
 
                     gpx.write("<groundspeak:long_description html=\"");
-                    if (BaseUtils.containsHtml(cache.getDescription())) {
-                        gpx.write("True");
-                    } else {
-                        gpx.write("False");
-                    }
+                    gpx.write(BaseUtils.containsHtml(cache.getDescription()) ? "True" : "False");
                     gpx.write("\">");
                     gpx.write(StringEscapeUtils.escapeXml(cache.getDescription()));
                     gpx.write("</groundspeak:long_description>");
@@ -309,10 +305,7 @@ class GpxExport extends AbstractExport {
             }
             for (cgWaypoint wp : ownWaypoints) {
                 maxPrefix++;
-                String prefix = String.valueOf(maxPrefix);
-                if (prefix.length() == 1) {
-                    prefix = "0" + prefix;
-                }
+                String prefix = StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0');
                 writeCacheWaypoint(wp, prefix);
             }
         }
