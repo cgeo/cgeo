@@ -99,6 +99,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -123,6 +125,8 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
     private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
+
+    private static final Pattern DARK_COLOR_PATTERN = Pattern.compile(Pattern.quote("color=\"#") + "(0[0-9]){3}" + "\"");
 
     private cgCache cache;
     private final Progress progress = new Progress();
@@ -2058,14 +2062,20 @@ public class CacheDetailActivity extends AbstractActivity {
          * @param text
          */
         private void fixBlackTextColor(final TextView view, final String text) {
-            if (!Settings.isLightSkin()) {
-                if (-1 != StringUtils.indexOfAny(text, new String[] { "color=\"#000000", "color=\"black" })) {
-                    view.setBackgroundResource(color.darker_gray);
-                }
-                else {
-                    view.setBackgroundResource(color.black);
+            if (Settings.isLightSkin()) {
+                return;
+            }
+            int backcolor = color.black;
+            if (-1 != StringUtils.indexOfAny(text, new String[] { "color=\"black", "color=\"#000080\"" })) {
+                backcolor = color.darker_gray;
+            }
+            else {
+                Matcher matcher = DARK_COLOR_PATTERN.matcher(text);
+                if (matcher.find()) {
+                    backcolor = color.darker_gray;
                 }
             }
+            view.setBackgroundResource(backcolor);
         }
     }
 
