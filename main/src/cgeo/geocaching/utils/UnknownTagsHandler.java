@@ -92,7 +92,7 @@ public class UnknownTagsHandler implements TagHandler {
     private void handleLi(boolean opening, Editable output) {
         if (opening) {
             if (listType == ListType.Ordered) {
-                output.append("\n  " + (listIndex++) + ". ");
+                output.append("\n  ").append(String.valueOf(listIndex++)).append(". ");
             } else {
                 output.append("\n  • ");
             }
