@@ -75,7 +75,7 @@ public class cgeotrackable extends AbstractActivity {
                     setTitle(trackable.getName().toUpperCase());
                 }
 
-                ((ScrollView) findViewById(R.id.details_list_box)).setVisibility(View.VISIBLE);
+                findViewById(R.id.details_list_box).setVisibility(View.VISIBLE);
                 final CacheDetailsCreator details = new CacheDetailsCreator(cgeotrackable.this, (LinearLayout) findViewById(R.id.details_list));
 
                 // actiobar icon
@@ -171,7 +171,7 @@ public class cgeotrackable extends AbstractActivity {
 
                 // trackable goal
                 if (StringUtils.isNotBlank(trackable.getGoal())) {
-                    ((LinearLayout) findViewById(R.id.goal_box)).setVisibility(View.VISIBLE);
+                    findViewById(R.id.goal_box).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.goal);
                     descView.setVisibility(View.VISIBLE);
                     descView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
@@ -180,7 +180,7 @@ public class cgeotrackable extends AbstractActivity {
 
                 // trackable details
                 if (StringUtils.isNotBlank(trackable.getDetails())) {
-                    ((LinearLayout) findViewById(R.id.details_box)).setVisibility(View.VISIBLE);
+                    findViewById(R.id.details_box).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.details);
                     descView.setVisibility(View.VISIBLE);
                     descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
@@ -189,7 +189,7 @@ public class cgeotrackable extends AbstractActivity {
 
                 // trackable image
                 if (StringUtils.isNotBlank(trackable.getImage())) {
-                    ((LinearLayout) findViewById(R.id.image_box)).setVisibility(View.VISIBLE);
+                    findViewById(R.id.image_box).setVisibility(View.VISIBLE);
                     LinearLayout imgView = (LinearLayout) findViewById(R.id.image);
 
                     final ImageView trackableImage = (ImageView) inflater.inflate(R.layout.trackable_image, null);
@@ -451,12 +451,12 @@ public class cgeotrackable extends AbstractActivity {
                 ((TextView) rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
 
                 if (StringUtils.isBlank(log.cacheName)) {
-                    ((TextView) rowView.findViewById(R.id.location)).setVisibility(View.GONE);
+                    rowView.findViewById(R.id.location).setVisibility(View.GONE);
                 } else {
                     ((TextView) rowView.findViewById(R.id.location)).setText(Html.fromHtml(log.cacheName));
                     final String cacheGuid = log.cacheGuid;
                     final String cacheName = log.cacheName;
-                    ((TextView) rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener() {
+                    rowView.findViewById(R.id.location).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View arg0) {
                             CacheDetailActivity.startActivityGuid(cgeotrackable.this, cacheGuid, Html.fromHtml(cacheName).toString());
@@ -489,12 +489,12 @@ public class cgeotrackable extends AbstractActivity {
                     logLayout.addView(log_imgView);
                 }
 
-                ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new UserActionsListener());
+                rowView.findViewById(R.id.author).setOnClickListener(new UserActionsListener());
                 listView.addView(rowView);
             }
 
             if (trackable.getLogs().size() > 0) {
-                ((LinearLayout) findViewById(R.id.log_box)).setVisibility(View.VISIBLE);
+                findViewById(R.id.log_box).setVisibility(View.VISIBLE);
             }
         }
     }

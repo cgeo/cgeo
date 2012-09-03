@@ -44,7 +44,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 if (msg.what == MSG_SEARCH_WHOLE_SD_CARD) {
                     searchInfo = String.format(res.getString(R.string.file_searching_sdcard_in), getDefaultFolders());
                 }
-                waitDialog.setMessage(searchInfo + (String) msg.obj);
+                waitDialog.setMessage(searchInfo + msg.obj);
             }
         }
 

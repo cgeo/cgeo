@@ -1448,13 +1448,13 @@ public class CacheDetailActivity extends AbstractActivity {
             if (connector != null) {
                 String license = connector.getLicenseText(cache);
                 if (StringUtils.isNotBlank(license)) {
-                    ((LinearLayout) view.findViewById(R.id.license_box)).setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
                     TextView licenseView = ((TextView) view.findViewById(R.id.license));
                     licenseView.setText(Html.fromHtml(license), BufferType.SPANNABLE);
                     licenseView.setClickable(true);
                     licenseView.setMovementMethod(LinkMovementMethod.getInstance());
                 } else {
-                    ((LinearLayout) view.findViewById(R.id.license_box)).setVisibility(View.GONE);
+                    view.findViewById(R.id.license_box).setVisibility(View.GONE);
                 }
             }
 
@@ -1893,7 +1893,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             // cache personal note
             if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-                ((LinearLayout) view.findViewById(R.id.personalnote_box)).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.personalnote_box).setVisibility(View.VISIBLE);
 
                 TextView personalNoteText = (TextView) view.findViewById(R.id.personalnote);
                 personalNoteText.setVisibility(View.VISIBLE);
@@ -1902,14 +1902,14 @@ public class CacheDetailActivity extends AbstractActivity {
                 registerForContextMenu(personalNoteText);
             }
             else {
-                ((LinearLayout) view.findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
+                view.findViewById(R.id.personalnote_box).setVisibility(View.GONE);
             }
 
             // cache hint and spoiler images
             if (StringUtils.isNotBlank(cache.getHint()) || CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-                ((LinearLayout) view.findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.hint_box).setVisibility(View.VISIBLE);
             } else {
-                ((LinearLayout) view.findViewById(R.id.hint_box)).setVisibility(View.GONE);
+                view.findViewById(R.id.hint_box).setVisibility(View.GONE);
             }
 
             if (StringUtils.isNotBlank(cache.getHint())) {

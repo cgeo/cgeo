@@ -89,7 +89,7 @@ public class CachePopup extends AbstractPopupActivity {
 
             addCacheDetails();
 
-            ((LinearLayout) findViewById(R.id.offline_box)).setVisibility(View.VISIBLE);
+            findViewById(R.id.offline_box).setVisibility(View.VISIBLE);
 
             // offline use
             final TextView offlineText = (TextView) findViewById(R.id.offline_text);

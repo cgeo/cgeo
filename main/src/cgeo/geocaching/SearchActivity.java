@@ -129,8 +129,8 @@ public class SearchActivity extends AbstractActivity {
     private void init() {
         Settings.getLogin();
 
-        ((Button) findViewById(R.id.buttonLatitude)).setOnClickListener(new findByCoordsAction());
-        ((Button) findViewById(R.id.buttonLongitude)).setOnClickListener(new findByCoordsAction());
+        findViewById(R.id.buttonLatitude).setOnClickListener(new findByCoordsAction());
+        findViewById(R.id.buttonLongitude).setOnClickListener(new findByCoordsAction());
 
         final Button findByCoords = (Button) findViewById(R.id.search_coordinates);
         findByCoords.setOnClickListener(new findByCoordsListener());

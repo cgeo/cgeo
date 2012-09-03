@@ -120,7 +120,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
                 boolean add = false;
-                if (cache != null && navApp.app instanceof CacheNavigationApp && ((CacheNavigationApp) navApp.app).isEnabled(cache)) {
+                if (cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache)) {
                     add = true;
                 }
                 if (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint)) {

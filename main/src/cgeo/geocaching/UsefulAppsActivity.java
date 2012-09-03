@@ -66,7 +66,7 @@ public class UsefulAppsActivity extends AbstractActivity {
         ((TextView) layout.findViewById(R.id.title)).setText(res.getString(titleId));
         ((ImageView) layout.findViewById(R.id.image)).setImageDrawable(res.getDrawable(imageId));
         ((TextView) layout.findViewById(R.id.description)).setText(res.getString(descriptionId));
-        ((LinearLayout) layout.findViewById(R.id.app_layout)).setOnClickListener(new OnClickListener() {
+        layout.findViewById(R.id.app_layout).setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {

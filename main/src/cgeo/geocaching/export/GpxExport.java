@@ -85,7 +85,7 @@ class GpxExport extends AbstractExport {
                 }
             });
 
-            ((Button) layout.findViewById(R.id.export)).setOnClickListener(new View.OnClickListener() {
+            layout.findViewById(R.id.export).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dismiss();

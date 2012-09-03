@@ -151,7 +151,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 }
 
                 if (inventoryView.getChildCount() > 0) {
-                    ((LinearLayout) findViewById(R.id.inventory_box)).setVisibility(View.VISIBLE);
+                    findViewById(R.id.inventory_box).setVisibility(View.VISIBLE);
                 }
                 if (inventoryView.getChildCount() > 1) {
                     final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
@@ -374,14 +374,14 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 Log.w("Adding " + typeOne + " " + typeOne.getL10n());
             }
         } else if (viewId == R.id.changebutton) {
-            final int textId = ((TextView) findViewById(viewId)).getId();
+            final int textId = findViewById(viewId).getId();
 
             menu.setHeaderTitle(res.getString(R.string.log_tb_changeall));
             for (LogTypeTrackable logType : LogTypeTrackable.values()) {
                 menu.add(textId, logType.id, 0, res.getString(logType.resourceId));
             }
         } else {
-            final int realViewId = ((LinearLayout) findViewById(viewId)).getId();
+            final int realViewId = findViewById(viewId).getId();
 
             for (final TrackableLog tb : trackables) {
                 if (tb.id == realViewId) {
