@@ -93,7 +93,7 @@ public class MapProviderFactory {
 
     public static void addMapviewMenuItems(Menu parentMenu, int groupId, int currentSource) {
         for (Integer key : mapSources.keySet()) {
-            parentMenu.add(groupId, key, 0, mapSources.get(key).getName()).setCheckable(true).setChecked(key.intValue() == currentSource);
+            parentMenu.add(groupId, key, 0, mapSources.get(key).getName()).setCheckable(true).setChecked(key == currentSource);
         }
     }
 
@@ -102,6 +102,6 @@ public class MapProviderFactory {
     }
 
     public static MapSource getMapSource(int sourceId) {
-        return mapSources.get(Integer.valueOf(sourceId));
+        return mapSources.get(sourceId);
     }
 }
