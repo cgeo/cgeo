@@ -225,7 +225,7 @@ public class SimpleDirChooser extends ListActivity {
         }
     }
 
-    public class DirOnlyFilenameFilter implements FilenameFilter {
+    public static class DirOnlyFilenameFilter implements FilenameFilter {
 
         @Override
         public boolean accept(File dir, String filename) {
