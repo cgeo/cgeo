@@ -1071,6 +1071,7 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>Next release</b>\n\n
+    <b>2012.08.15</b>\n\n
     <b>New Features/Functions:</b>\n
     · If static maps are enabled, batch update of caches will now update caches without static maps first\n
     · If a cache has a chirp attribute the navigation menu supports starting the Cache Beacon app\n
@@ -1092,7 +1093,8 @@
       Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
       On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
-      Log images with huge size cause a long loading time\n\n\n
+      Log images with huge size cause a long loading time\n
+      Login problems may occur with some mobile operators that modify web pages to insert messages. We are working on a solution.\n\n\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
