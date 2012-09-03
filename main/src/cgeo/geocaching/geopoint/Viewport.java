@@ -67,7 +67,7 @@ public class Viewport {
      *
      * @param point
      *            the coordinates to check
-     * @return true if the point is contained in this viewport, false otherwise
+     * @return true if the point is contained in this viewport, false otherwise or if the point contains no coordinates
      */
     public boolean contains(final ICoordinates point) {
         final Geopoint coords = point.getCoords();
