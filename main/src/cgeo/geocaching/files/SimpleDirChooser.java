@@ -96,7 +96,7 @@ public class SimpleDirChooser extends ListActivity {
         if (dir.getParent() != null) {
             listDirs.add(0, new Option(PARENT_DIR, dir.getParent()));
         }
-        this.adapter = new FileArrayAdapter(SimpleDirChooser.this, R.layout.simple_dir_item, listDirs);
+        this.adapter = new FileArrayAdapter(this, R.layout.simple_dir_item, listDirs);
         this.setListAdapter(adapter);
     }
 
