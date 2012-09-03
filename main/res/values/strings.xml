@@ -1076,11 +1076,15 @@
     · If a cache has a chirp attribute the navigation menu supports starting the Cache Beacon app\n
     · Search bar on main screen now allows searching OC geocodes\n
     · Removed Go4Cache support as this third party service is no longer available\n
+    · Selectable GPX import directory\n
+    · New log template for inserting owner name\n
     \n
     <b>Bugfixing:</b>\n
     · Improvement for cache description translation\n
     · Avoid crash when searching for an unactivated TB\n
     · Improvement for enabling live mode on map\n
+    · Improvement for GPX export operations\n
+    · Readability improvement for cache description with dark text when using black theme\n 
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
