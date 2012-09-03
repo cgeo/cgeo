@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?> <!-- based on d54d589484303dfd8a2f5d98ca69040bb84a9535 -->
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo コンパス</string>
@@ -380,6 +380,7 @@
   <string name="init_signature_template_datetime">日付と時間</string>
   <string name="init_signature_template_user">ユーザ名</string>
   <string name="init_signature_template_number">キャッシュ数</string>
+  <string name="init_signature_template_owner">所有者</string>
   <string name="init_details">キャッシュの詳細</string>
   <string name="init_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
   <string name="init_elevationwanted">キャッシュの標高値を取得</string>   <!-- 正確に訳すと高度値 -->
@@ -388,7 +389,7 @@
   <string name="init_autoload">キャッシュの説明を自動的に全て表示する</string>
   <string name="init_other">その他のオプション</string>
   <string name="init_skin">明るい色のスキン\n(c:geoの再起動が必要)</string>
-  <string name="init_address">メイン画面での現在地を地名で表示する</string>
+  <string name="init_address">メイン画面での現在地を座標値の代わりに地名で表示する</string>
   <string name="init_captcha">必要ならCAPTCHAを表示する(ベーシック会員のみ)</string>
   <string name="init_useenglish">c:geoを英語表示にする\n(c:geoの再起動が必要)</string>
   <string name="init_exclude">自分で所有または見つけたキャッシュは除く</string>
@@ -424,6 +425,14 @@
   <string name="init_mapsources_description">オンライン地図をGoogleマップからOpenStreetMap(その派生オンライン地図やオフライン地図)に変更できます。詳細は<a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> (英語)をご覧ください。</string>
   <string name="init_mapsource_select">地図の選択</string>
   <string name="init_select_mapfile">選択…</string>
+  <string name="init_select_gpx_exportdir">選択…</string>
+  <string name="init_select_gpx_importdir">選択…</string>
+  <string name="init_gpx_exportdir">GPXエクスポートフォルダ</string>
+  <string name="init_gpx_importdir">GPXインポートフォルダ</string>
+  <string name="init_gpx_exportdir_description">GPXファイルへエクスポートする際の保存先フォルダを選択できます。</string>
+  <string name="init_gpx_importdir_description">GPXファイルへインポートする際の保存先フォルダを選択できます。</string>
+  <string name="init_gpx_exportdir_select">GPXファイルのエクスポートフォルダを選択</string>
+  <string name="init_gpx_importdir_select">GPXファイルのインポートフォルダを選択</string>
   <string name="init_maptrail">地図に軌跡を表示</string>
   <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
   <string name="init_trackautovisit">「見つけた」ログを書く際に、持っているトラッカブルアイテムを自動的に「訪れた」にする</string>
@@ -571,6 +580,7 @@
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_menu_cachebeacon">キャッシュビーコン</string>
   <string name="cache_status">状態</string>
   <string name="cache_status_offline_log">保存済みのログ</string>
   <string name="cache_status_found">見つかった</string>
@@ -614,6 +624,10 @@
   <string name="file_list_no_files">適切なファイルが見つかりませんでした。</string>
   <string name="file_searching">対応するファイルを調査中</string>
   <string name="file_title_searching">検索中</string>
+
+  <!-- simple_dir_chooser -->
+  <string name="simple_dir_chooser_title">フォルダの選択</string>
+  <string name="simple_dir_chooser_current_path">パス:</string>
 
   <!-- gpx -->
   <string name="gpx_import_loading_caches">GPXファイルからキャッシュをロード中</string>
@@ -782,8 +796,8 @@
   <!-- navigation -->
   <string name="navigation">ナビゲーション</string>
   <string name="compass_title">コンパス</string>
-  <string name="use_gps">GPSを使う</string>
-  <string name="use_compass">コンパスを使う</string>
+  <string name="use_gps">GPSのみ使用</string>
+  <string name="use_compass">GPSとコンパスを使用</string>
   <string name="destination_select">目的地を選択</string>
   <string name="destination_set">目的地を入力</string>
   <string name="navigation_direct_navigation">Direct Navigation</string>
