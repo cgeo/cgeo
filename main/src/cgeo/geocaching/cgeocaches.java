@@ -103,7 +103,6 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MSG_RESTART_GEO_AND_DIR = -2;
     private static final int MSG_CANCEL = -99;
 
-    private String action = null;
     private CacheListType type = null;
     private Geopoint coords = null;
     private SearchResult search = null;
@@ -494,7 +493,7 @@ public class cgeocaches extends AbstractListActivity {
                 threadPure.start();
                 break;
             case NEAREST:
-                action = "pending";
+                String action = "pending";
                 title = res.getString(R.string.caches_nearby);
                 setTitle(title);
                 showProgress(true);

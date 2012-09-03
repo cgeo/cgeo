@@ -37,7 +37,6 @@ public class cgeonavigate extends AbstractActivity {
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private String title = null;
-    private String name = null;
     private String info = null;
     private TextView navType = null;
     private TextView navAccuracy = null;
@@ -46,7 +45,6 @@ public class cgeonavigate extends AbstractActivity {
     private TextView distanceView = null;
     private TextView headingView = null;
     private CompassView compassView = null;
-    private String geocode;
 
     public cgeonavigate() {
         super("c:geo-compass", true);
@@ -63,9 +61,9 @@ public class cgeonavigate extends AbstractActivity {
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            geocode = extras.getString(EXTRAS_GEOCODE);
+            final String geocode = extras.getString(EXTRAS_GEOCODE);
             title = geocode;
-            name = extras.getString(EXTRAS_NAME);
+            final String name = extras.getString(EXTRAS_NAME);
             dstCoords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
             info = extras.getString(EXTRAS_CACHE_INFO);
 
