@@ -1071,7 +1071,6 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>Next release</b>\n\n
-    <b>2012.08.15</b>\n\n
     <b>New Features/Functions:</b>\n
     · If static maps are enabled, batch update of caches will now update caches without static maps first\n
     · If a cache has a chirp attribute the navigation menu supports starting the Cache Beacon app\n
@@ -1086,6 +1085,7 @@
     · Improvement for enabling live mode on map\n
     · Improvement for GPX export operations\n
     · Readability improvement for cache description with dark text when using black theme\n 
+    · Store for offline on live map now always available for basic members\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
