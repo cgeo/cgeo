@@ -379,6 +379,7 @@
   <string name="init_signature_template_datetime">Datum &amp; Tid</string>
   <string name="init_signature_template_user">Namn</string>
   <string name="init_signature_template_number">Nummer</string>
+  <string name="init_signature_template_owner">Ägare</string>
   <string name="init_details">Cacheinformation</string>
   <string name="init_ratingwanted">Ladda cache betyg från GCvote.com</string>
   <string name="init_elevationwanted">Ladda höjddata för cacher</string>
@@ -387,7 +388,7 @@
   <string name="init_autoload">Ladda full beskrivning automatiskt</string>
   <string name="init_other">Övriga inställningar</string>
   <string name="init_skin">Vitt skal (kräver omstart av c:geo)</string>
-  <string name="init_address">Visa adress på huvudskärmen</string>
+  <string name="init_address">Visa adress istället för koordinater på startsidan</string>
   <string name="init_captcha">Visa CAPTCHA (robotfällor) vid behov (enbart för Basic Member)</string>
   <string name="init_useenglish">Använd engelska i c:geo (kräver omstart)</string>
   <string name="init_exclude">Dölj egna och hittade cacher</string>
@@ -423,6 +424,14 @@
   <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer).</string>
   <string name="init_mapsource_select">Välj kartkälla</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_select_gpx_exportdir">…</string>
+  <string name="init_select_gpx_importdir">…</string>
+  <string name="init_gpx_exportdir">GPX-exportkatalog</string>
+  <string name="init_gpx_importdir">GPX-importkatalog</string>
+  <string name="init_gpx_exportdir_description">Här kan du välja katalog för GPX-exporteringar.</string>
+  <string name="init_gpx_importdir_description">Här kan du välja katalog för GPX-importeringar.</string>
+  <string name="init_gpx_exportdir_select">Välj katalog för GPX-export</string>
+  <string name="init_gpx_importdir_select">Välj katalog för GPX-import</string>
   <string name="init_maptrail">Visa spår på kartan</string>
   <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
   <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
@@ -563,6 +572,7 @@
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>
@@ -598,6 +608,7 @@
   <string name="cache_image_open_file">Öppna som fil</string>
   <string name="cache_image_open_browser">Öppna i webbläsare</string>
   <string name="cache_share_field">Dela</string>
+  <string name="cache_time_full_hours">prick</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Söker efter filer\ni</string>
@@ -605,6 +616,10 @@
   <string name="file_list_no_files">Tyvärr hittade c:geo inga lämpliga filer.</string>
   <string name="file_searching">Söker efter matchande filer</string>
   <string name="file_title_searching">Söker</string>
+
+  <!-- simple_dir_chooser -->
+  <string name="simple_dir_chooser_title">Välj katalog</string>
+  <string name="simple_dir_chooser_current_path">Sökväg:</string>
 
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Läser in cacher från .gpx filen</string>
@@ -752,8 +767,8 @@
   <!-- navigation -->
   <string name="navigation">Navigering</string>
   <string name="compass_title">Kompass</string>
-  <string name="use_gps">Använd GPS</string>
-  <string name="use_compass">Använd kompass</string>
+  <string name="use_gps">Använd enbart GPS</string>
+  <string name="use_compass">Använd GPS och kompass</string>
   <string name="destination_select">Välj målpunkt</string>
   <string name="destination_set">Sätt målpunkt</string>
   <string name="navigation_direct_navigation">Direkt navigering</string>
