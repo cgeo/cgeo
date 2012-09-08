@@ -45,7 +45,7 @@
   <string name="cache_size_virtual">Kein Behälter</string>
   <string name="cache_size_notchosen">Nicht gewählt</string>
   <string name="cache_size_unknown">Unbekannt</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Final</string>
   <string name="wp_stage">Station eines Multi-Cache</string>
@@ -74,7 +74,7 @@
   <string name="log_archived">Archiviert</string>
   <string name="log_needs_archived">Sollte archiviert werden</string>
   <string name="log_discovered">Gesehen</string>
-  <string name="log_reviewed">Bemerkung zur Überprüfung</string>
+  <string name="log_reviewer">Review(er)-Anmerkung</string>
   <string name="log_tb_nothing">Keine Aktion</string>
   <string name="log_tb_visit">Besucht</string>
   <string name="log_tb_drop">Ablegen</string>
@@ -116,12 +116,12 @@
   <string name="log_announcement">Ankündigung</string>
   <string name="log_today">Heute</string>
   <string name="log_yesterday">Gestern</string>
-  
+
 <!-- translation -->
   <string name="translate_to_sys_lang">Übersetze in %s</string>
   <string name="translate_to_english">Übersetze in Englisch</string>
   <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
-  
+
 <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
   <string name="err_start">Kommunikation nicht gestartet</string>
@@ -224,7 +224,7 @@
   <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte in der Version 0.3.0.\nOffline Karte ist nicht verfügbar.</string>
   <string name="warn_deprecated_mapfile">Es wird eine veraltete Offline-Karte v0.2.4 verwendet.\nBitte zukünftig Offline-Karten in der Version 0.3.0 verwenden.\nDer Support für die alte Version wird im nächsten Release eingestellt.</string>
     <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline Karte ist nicht verfügbar.</string>
-  
+
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
@@ -451,7 +451,7 @@
   <string name="init_dbmove_running">Verschiebe Datenbank</string>
   <string name="init_dbmove_success">Die Datenbank wurde erfolgreich verschoben.</string>
   <string name="init_dbmove_failed">Fehler beim Verschieben der Datenbank.</string>
-  
+
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
@@ -518,7 +518,7 @@
   <string name="cache_favpoint_not_on">Dieser Cache ist kein Favorit.</string>
   <string name="cache_favpoint_add">Hinzufügen</string>
   <string name="cache_favpoint_remove">Entfernen</string>
-  
+
   <string name="cache_waypoints">Wegpunkte</string>
   <plurals name="waypoints">
       <item quantity="one">1 Wegpunkt</item>
@@ -605,7 +605,7 @@
   <string name="cache_image_open_browser">Im Browser öffnen</string>
   <string name="cache_share_field">Weiterleiten</string>
   <string name="cache_time_full_hours">Uhr</string>
-  
+
   <!-- file list base -->
   <string name="file_searching_in">Suche nach Dateien\nin</string>
   <string name="file_searching_sdcard_in">Keine Dateien in Standardverzeichnissen gefunden:\n%1$s\n\nDurchsuche komplette SD-Karte:\n</string>
@@ -616,7 +616,7 @@
   <!-- simple_dir_chooser -->
   <string name="simple_dir_chooser_title">Verzeichnis wählen</string>
   <string name="simple_dir_chooser_current_path">Pfad:</string>
-  
+
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei</string>
   <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
@@ -674,16 +674,16 @@
   <string name="search_remove_destination">Ziel gelöscht</string>
   <string name="search_clear_history">Verlauf löschen</string>
   <string name="search_history_cleared">Verlauf gelöscht</string>
-  
+
   <string name="waypoint_coordinate_formats_plain">Schlicht</string>
-  
+
 <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
   <string name="unit_ft">ft</string>
   <string name="unit_yd">yd</string>
   <string name="unit_mi">mi</string>
-  
+
   <!-- visit -->
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
 
@@ -710,7 +710,7 @@
   <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau. Eventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.\n\nMehr Informationen über alle Änderungen befinden sich auf der \"Über c:geo\"-Seite in der App.</string>
   <string name="live_map_note_close">Schließen</string>
   <string name="live_map_note_dontshow">Nicht mehr anzeigen</string>
-  
+
 <!-- search -->
   <string name="search_bar_hint">Suche nach Caches</string>
   <string name="search_bar_desc">Caches (GC-Code, Stichwort), Trackables (TB-Code)</string>
@@ -796,11 +796,11 @@
   <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
   <string name="helper_barcode_title">Barcode-Scanner</string>
   <string name="helper_barcode_description">Es gibt GreaseMonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
-  
+
    <!-- add-ons -->
   <string name="addon_missing_title">Add-On fehlt</string>
   <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
-  
+
   <!-- export -->
   <string name="export">Exportieren</string>
   <string name="export_as">Exportieren als…</string>
@@ -816,11 +816,11 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX-Datei wird nach %1$s mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
   <string name="export_gpx_to">Exportierte GPX-Datei senden an</string>
-  
+
   <!-- attribute unknown -->
   <string name="attribute_unknown_yes">Unbekannte Attribute vorhanden</string>
   <string name="attribute_unknown_no">Keine unbekannten Attribute</string>
-  
+
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Hunde erlaubt</string>
   <string name="attribute_dogs_no">Hunde nicht erlaubt</string>
@@ -980,7 +980,7 @@
   <string name="status_new_rc">Neuer Release Candidate verfügbar.\nKlicken zum Installieren.</string>
   <string name="status_geocaching_change">Änderungen auf geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
   <string name="status_geocaching_livemap">Änderungen auf geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
-  
+
   <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
   <plurals name="days_ago">
       <item quantity="one">gestern</item>

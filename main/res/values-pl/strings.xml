@@ -42,7 +42,7 @@
   <string name="cache_size_virtual">wirtualna</string>
   <string name="cache_size_notchosen">nie wybrana</string>
   <string name="cache_size_unknown">nieznany</string>
-    
+
   <!-- waypoints -->
   <string name="wp_final">Finał</string>
   <string name="wp_stage">Etap do skrzynki</string>
@@ -69,7 +69,7 @@
   <string name="log_archived">Zarchiwizowane</string>
   <string name="log_needs_archived">Powinno zostać zarchiwizowane</string>
   <string name="log_discovered">Odkryty</string>
-  <string name="log_reviewed">Sprawdzony</string>
+  <string name="log_reviewer">Sprawdzony</string>
   <string name="log_tb_nothing">Nie rób nic</string>
   <string name="log_tb_visit">Odwiedzić</string>
   <string name="log_tb_drop">Odłożyć</string>
@@ -183,7 +183,7 @@
   <string name="err_parse_lat">Przepraszam, c:geo nie może obliczyć szerokości geograficznej.</string>
   <string name="err_parse_lon">Przepraszam, c:geo nie może obliczyć długości geograficznej.</string>
   <string name="err_parse_dist">Przepraszam, c:geo nie może obliczyć odległości.</string>
-  
+
   <string name="err_fieldnotes_export_failed">Eksportowanie notatek terenowych nieudane.</string>
 
   <string name="warn_save_nothing">Nie ma nic do zapisania.</string>
@@ -204,7 +204,7 @@
   <string name="info_log_saved">Wpis został zapisany.</string>
   <string name="info_log_cleared">Wpis został skasowany.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
-  
+
   <string name="info_fieldnotes_exported_to">Notatki terenowe eksportowane do</string>
 
   <!-- location service -->
@@ -257,7 +257,7 @@
   <string name="caches_sort_date_hidden">daty</string>
   <string name="caches_select_mode">Tryb wyboru</string>
   <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
-  <string name="caches_select_invert">Odwróć zaznaczenie</string>  
+  <string name="caches_select_invert">Odwróć zaznaczenie</string>
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzać</string>
   <string name="caches_drop_selected">Wybrane skasować</string>
@@ -303,7 +303,7 @@
   <string name="list_dialog_remove">Usuń</string>
   <string name="list_dialog_remove_ok">Lista została usunięta</string>
   <string name="list_dialog_remove_err">c:geo nie udało się usunąć obecną listę</string>
-  
+
   <!-- about -->
   <string name="about_changelog">Zmiany</string>
   <string name="about_donate">Wspomóc</string>
@@ -370,14 +370,14 @@
   <string name="init_trackautovisit">Ustaw przedmioty podróżne automatycznie na \"wizytę\"</string>
   <string name="init_sigautoinsert">Wstaw podpis automatycznie</string>
   <string name="init_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby</string>
-  
+
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satelita</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">OSM: Offline</string>
-  
+
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nazwa urządzenia:</string>
   <string name="init_sendToCgeo_description">Sent to c:geo pozwala tobie odbierać skrytki bezpośrednio ze strony geocaching za pomocą specjalnego plugin dla przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest tylko potrzebna, jeśli będziesz używać send2cgeo. C:geo będzie również działać bez rejestracji urządzenia.</string>
@@ -496,17 +496,17 @@
   <string name="file_list_no_files">Przepraszam, c:geo nie znalazł odpowiednich plików.</string>
   <string name="file_searching">Wyszukiwanie plików pasujących</string>
   <string name="file_title_searching">Szukam</string>
-  
+
   <!-- gpx -->
   <string name="gpx_import_caches_imported">skrzynek importowanych</string>
   <string name="gpx_import_loading_caches">Ładuje skrzynki z pliku .gpx</string>
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Czytanie pliku</string>
   <string name="gpx_import_title_caches_imported">Wynik</string>
-  
+
   <!-- map file select -->
   <string name="map_file_select_title">Wybierz plik z mapą</string>
-  
+
   <!--  import -->
   <string name="import_title">Import…</string>
   <string name="web_import_title">Import z internetu</string>
@@ -538,7 +538,7 @@
   <string name="search_remove_destination">Cel usunięty</string>
   <string name="search_clear_history">Usuń historię</string>
   <string name="search_history_cleared">Historia usunięta</string>
-  
+
   <string name="waypoint_coordinate_formats_plain">zwykłe</string>
 
   <!-- visit -->
@@ -635,7 +635,7 @@
   <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo, oferuje on również wiele informacji związanych z GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, aby uzyskać lepszy odbiór, bardziej precyzyjnej lokalizacji i oszczędzać baterię komórki.</string>
-  
+
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Psy dozwolone</string>
   <string name="attribute_dogs_no">Psy nie dozwolone</string>

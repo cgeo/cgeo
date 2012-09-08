@@ -13,7 +13,7 @@
   <string name="helper">Quer aprender acerca do <b>c:geo</b>?\nVeja o nosso prático manual.</string>
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
-  
+
   <!-- actionbar -->
   <string name="action_bar_share_title">Partilhar ligação para a cache</string>
 
@@ -45,7 +45,7 @@
   <string name="cache_size_virtual">Virtual</string>
   <string name="cache_size_notchosen">Não especificado</string>
   <string name="cache_size_unknown">Desconhecido</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Localização final</string>
   <string name="wp_stage">Estado da multi-cache</string>
@@ -74,7 +74,7 @@
   <string name="log_archived">Arquivada</string>
   <string name="log_needs_archived">Precisa logbook</string>
   <string name="log_discovered">Descoberta</string>
-  <string name="log_reviewed">Nota de revisor</string>
+  <string name="log_reviewer">Nota de revisor</string>
   <string name="log_tb_nothing">Não fazer nada</string>
   <string name="log_tb_visit">Visitei</string>
   <string name="log_tb_drop">Deixei aqui</string>
@@ -431,7 +431,7 @@
   <string name="sendToCgeo_download_fail">c:geo falhou o download das caches. Sem ligação à internet ou send2c:geo está em baixo.</string>
   <string name="sendToCgeo_no_registration">c:geo falhou o download das caches. Registo do send2c:geo expirou. Faça o registo nas definições.</string>
 
-  
+
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizar c:geo</string>
@@ -524,7 +524,7 @@
   <string name="cache_menu_move_list">Mover para outra lista</string>
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
-  <string name="cache_menu_oruxmaps">OruxMaps</string>  
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Log gravado</string>
   <string name="cache_status_found">Encontrada</string>
@@ -629,7 +629,7 @@
     <item>DDD°MM\'SS.SSS\"</item>
   </string-array>
   <string name="waypoint_coordinate_formats_plain">Plano</string>
-  
+
   <!-- visit -->
   <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
 
@@ -718,7 +718,7 @@
   <string name="license">Licença</string>
   <string name="license_show">Mostrar licença</string>
   <string name="license_dismiss">Dispensar</string>
-  
+
   <!-- helpers -->
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Manual prático do c:geo, que contém a descrição de todas as funcionalidades desta aplicação (mesmo as que estão escondidas).</string>
@@ -730,7 +730,7 @@
   <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
   <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
   <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
-  
+
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Cães permitidos</string>
   <string name="attribute_dogs_no">Cães não permitidos</string>
@@ -750,7 +750,7 @@
   <string name="attribute_campfires_no">Fogueiras não permitidas</string>
   <string name="attribute_rv_yes">Roulottes permitidas</string>
   <string name="attribute_rv_no">Roulottes não permitidas</string>
-  
+
   <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Recomendado para crianças</string>
   <string name="attribute_kids_no">Não recomendado para crianças</string>
@@ -804,7 +804,7 @@
   <string name="attribute_landf_no">Não é um passeio de perdidos e achados</string>
   <string name="attribute_partnership_yes">Cache de parceria</string>
   <string name="attribute_partnership_no">Não é uma cache de parceria</string>
-  
+
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Taxa de acesso ou estacionamento aplicável</string>
   <string name="attribute_fee_no">Não tem taxa de acesso ou estacionamento</string>
@@ -828,7 +828,7 @@
   <string name="attribute_wirelessbeacon_no">Sem sinal de rede sem fios</string>
   <string name="attribute_treeclimbing_yes">Requer subida a árvores</string>
   <string name="attribute_treeclimbing_no">Não requer subida a árvores</string>
-  
+
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Plantas venenosas</string>
   <string name="attribute_poisonoak_no">Sem plantas venenosas</string>
@@ -846,7 +846,7 @@
   <string name="attribute_danger_no">Área não perigosa</string>
   <string name="attribute_thorn_yes">Espinhos</string>
   <string name="attribute_thorn_no">Sem espinhos</string>
-  
+
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Acesso a cadeiras de rodas</string>
   <string name="attribute_wheelchair_no">Sem acesso a cadeiras de rodas</string>
@@ -870,7 +870,7 @@
   <string name="attribute_fuel_no">Sem abastecimento de combustível por perto</string>
   <string name="attribute_food_yes">Comida por perto</string>
   <string name="attribute_food_no">Sem comida por perto</string>
-  
+
   <!-- next things -->
   <string name="legal_note">Para utilizar os serviços de Geocaching.com, tem de concordar com os termos e condições da <a href="http://www.geocaching.com/about/termsofuse.aspx">declaração Groundspeak</a>.</string>
   <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
@@ -883,5 +883,5 @@
   <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que uma cache for registada?</string>
   <string name="about_auth_1">O processo seguinte permite ao <b>c:geo</b> aceder ao Twitter - se concordar.</string>
   <string name="about_auth_2">Premir o botão \"Autorizar c:geo\" dará início ao processo. Este processo irá abrir a página do Twitter no seu browser. Faça login nesta página e autorize o <b>c:geo</b> a aceder à sua conta. Se autorizar, o Twitter irá mostrar um código PIN numérico. Este PIN deverá ser copiado para o <b>c:geo</b> e sujeito a confirmação. E é tudo.</string>
-  
+
 </resources>

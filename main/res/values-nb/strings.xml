@@ -56,7 +56,7 @@
   <string name="log_archived">Arkivert</string>
   <string name="log_needs_archived">Bør arkiveres</string>
   <string name="log_discovered">Oppdaget</string>
-  <string name="log_reviewed">Andmeldelse</string>
+  <string name="log_reviewer">Andmeldelse</string>
   <string name="log_tb_nothing">Ikke gjør noe</string>
   <string name="log_tb_visit">Besøkte</string>
   <string name="log_tb_drop">Legg igjen</string>

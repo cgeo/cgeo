@@ -44,7 +44,7 @@
   <string name="cache_size_virtual">virtuális</string>
   <string name="cache_size_notchosen">nincs megadva</string>
   <string name="cache_size_unknown">ismeretlen</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Végső helyszín</string>
   <string name="wp_stage">Multi-láda állomása</string>
@@ -71,7 +71,7 @@
   <string name="log_archived">Arhiválva</string>
   <string name="log_needs_archived">Arhiválás szükséges</string>
   <string name="log_discovered">Felfedezve</string>
-  <string name="log_reviewed">Moderátor jegyzet</string>
+  <string name="log_reviewer">Moderátor jegyzet</string>
   <string name="log_tb_nothing">Ne csinálj semmit</string>
   <string name="log_tb_visit">Látogatás</string>
   <string name="log_tb_drop">Ládába helyezés</string>
@@ -203,7 +203,7 @@
   <string name="warn_search_help_tb">Írd be a nyomonkövethető tárgy kódját. Például \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez.</string>
   <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
-  
+
 
   <string name="info_log_posted">a c:geo sikeresen elküldte a bejegyzést.</string>
   <string name="info_log_saved">a c:geo sikeresen elmentette a bejegyzést.</string>
@@ -558,7 +558,7 @@
   <string name="search_remove_destination">Célpont eltávolítva</string>
   <string name="search_clear_history">Előzmények törlése</string>
   <string name="search_history_cleared">Előzmények törölve</string>
-  
+
   <string name="waypoint_coordinate_formats_plain">Egyszerű</string>
 
   <!-- visit -->

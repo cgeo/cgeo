@@ -8,7 +8,7 @@
   <string name="detail">Detalle</string>
   <string name="search">Buscar</string>
   <string name="settings">Ajustes</string>
-  <string name="helpers">¿Qué instalar?</string>  
+  <string name="helpers">¿Qué instalar?</string>
   <string name="about">Sobre c:geo</string>
   <string name="helper">Si quieres aprender cosas sobre <b>c:geo</b>?\nEcha un ojo a nuestro manual.</string>
 
@@ -42,7 +42,7 @@
   <string name="cache_size_virtual">virtual</string>
   <string name="cache_size_notchosen">no elegido</string>
   <string name="cache_size_unknown">desconocido</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Ubicación final</string>
   <string name="wp_stage">Etapa de multi escondite</string>
@@ -69,7 +69,7 @@
   <string name="log_archived">Archivado</string>
   <string name="log_needs_archived">Necesita ser archivado</string>
   <string name="log_discovered">Descubierto</string>
-  <string name="log_reviewed">Nota del revisor</string>
+  <string name="log_reviewer">Nota del revisor</string>
   <string name="log_tb_nothing">No hacer nada</string>
   <string name="log_tb_visit">Visita</string>
   <string name="log_tb_drop">Colocar aquí</string>
@@ -185,7 +185,7 @@
   <string name="err_parse_lon">Lo siento, c:geo no puede procesar la longitud.</string>
   <string name="err_parse_dist">Lo siento, c:geo can\'t no puede procesar la distancia.</string>
 
-  <string name="err_fieldnotes_export_failed">Eror al exportar notas de campo.</string>  
+  <string name="err_fieldnotes_export_failed">Eror al exportar notas de campo.</string>
 
   <string name="warn_save_nothing">No hay nada para guardar.</string>
   <string name="warn_no_cache_coord">No hay escondite con coordenadas.</string>
@@ -201,7 +201,7 @@
   <string name="warn_search_help_tb">Escribe el código del rastreable. Por ejemplo \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Escribe algún texto de registro.</string>
   <string name="warn_load_images">Error al cargar las imágenes.</string>
-  
+
 
   <string name="info_log_posted">c:geo registro enviado sin problemas.</string>
   <string name="info_log_saved">c:geo guardado sin problemas.</string>
@@ -251,7 +251,7 @@
   <string name="caches_sort_difficulty">dificultad</string>
   <string name="caches_sort_terrain">terreno</string>
   <string name="caches_sort_size">tamaño</string>
-  <string name="caches_sort_favorites">popularidad</string>  
+  <string name="caches_sort_favorites">popularidad</string>
   <string name="caches_sort_name">nombre</string>
   <string name="caches_sort_gccode">Código GC</string>
   <string name="caches_sort_rating">valoración</string>
@@ -260,15 +260,15 @@
   <string name="caches_sort_date_hidden">fecha</string>
   <string name="caches_select_mode">Modo selección</string>
   <string name="caches_select_mode_exit">Salir de modo selección</string>
-  <string name="caches_select_invert">Invertir selección</string>  
+  <string name="caches_select_invert">Invertir selección</string>
   <string name="caches_nearby">Cercanos</string>
-  <string name="caches_manage">Gestionar</string>  
+  <string name="caches_manage">Gestionar</string>
   <string name="caches_drop_selected">Descartar los seleccionados</string>
   <string name="caches_drop_selected_ask">¿Quieres borrar los escondites seleccionados del dispositivo?</string>
   <string name="caches_drop_all">Descartar todos</string>
   <string name="caches_drop_all_ask">¿Quieres borrar todos los escondites guardados en el dispositivo?</string>
   <string name="caches_drop_stored">Descartar guardados</string>
-  <string name="caches_drop_progress">Borrando escondites</string>  
+  <string name="caches_drop_progress">Borrando escondites</string>
   <string name="caches_refresh_selected">Actualizar seleccionados</string>
   <string name="caches_refresh_all">Actualizar todos</string>
   <string name="caches_move_selected">Mover seleccionados</string>
@@ -289,7 +289,7 @@
   <string name="caches_filter_type_title">Indica tipo</string>
   <string name="caches_exporting_fieldnote">Exportando como Notas de campo…</string>
   <string name="caches_removing_from_history">Borrando del historial…</string>
-  
+
   <!-- caches lists -->
   <string name="list_menu">Lista</string>
   <string name="list_menu_create">Crear nueva lista</string>
@@ -338,7 +338,7 @@
   <string name="init_signature_template_date">Fecha</string>
   <string name="init_signature_template_time">Hora</string>
   <string name="init_signature_template_user">Usuario</string>
-  <string name="init_signature_template_number">Número</string> 
+  <string name="init_signature_template_number">Número</string>
   <string name="init_other">Otras opciones</string>
   <string name="init_skin">Fondo blanco (necesita reiniciar c:geo)</string>
   <string name="init_address">Mostrar dirección en lugar de posición en la pantalla principal</string>
@@ -388,7 +388,7 @@
   <string name="init_sendToCgeo_register">Solicitar registro</string>
   <string name="init_sendToCgeo_registering">Registrando "Enviar a c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registro finalizado. Tu código PIN ####. Úsalo en la web de c:geo para añadir este dispositivo a tu navegador.</string>
-  <string name="init_sendToCgeo_register_fail">Error al registrarse.</string>  
+  <string name="init_sendToCgeo_register_fail">Error al registrarse.</string>
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -431,7 +431,7 @@
   <string name="cache_watchlist_on">Este escondite está en tu Lista de seguimiento.</string>
   <string name="cache_watchlist_not_on">Este escondite no está en tu Lista de seguimiento.</string>
   <string name="cache_watchlist_add">Añadir a Lista de seguimiento</string>
-  <string name="cache_watchlist_remove">Borrar de la Lista de seguimiento</string>  
+  <string name="cache_watchlist_remove">Borrar de la Lista de seguimiento</string>
   <string name="cache_description_long">Descripción larga</string>
   <string name="cache_waypoints">Puntos de referencia</string>
   <string name="cache_waypoints_add">Añadir referencia</string>
@@ -453,11 +453,11 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Ver en mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
-  <string name="cache_menu_rmaps">Rmaps</string>  
+  <string name="cache_menu_rmaps">Rmaps</string>
 <string name="cache_menu_map_ext">Mostrar en mapa ext.</string>
   <string name="cache_menu_browser">Navegador</string>
   <string name="cache_menu_visit">Encontrado</string>
-  <string name="cache_menu_visit_offline">Registar vista sin conexión</string>  
+  <string name="cache_menu_visit_offline">Registar vista sin conexión</string>
   <string name="cache_menu_spoilers">Revelaciones</string>
   <string name="cache_menu_around">Alrededores</string>
   <string name="cache_menu_event">Añadir a calendario</string>
@@ -492,8 +492,8 @@
   <string name="cache_coordinates_no">Este escondite no tiene coordenadas.</string>
   <string name="cache_export_fieldnote">Exportar como Notas de campo</string>
   <string name="cache_clear_history">Borrar historial</string>
-  <string name="cache_remove_from_history">Borrar del historial</string>  
-  
+  <string name="cache_remove_from_history">Borrar del historial</string>
+
   <!-- file list base -->
   <string name="file_searching_in">Buscando archivos \nen</string>
   <string name="file_list_no_files">c:geo no ha encontrado archivos apropiados.</string>
@@ -508,15 +508,15 @@
   <string name="gpx_import_title_caches_imported">Resultados</string>
 
   <!-- map file select -->
-  <string name="map_file_select_title">Selecciona un mapa</string>  
-  
+  <string name="map_file_select_title">Selecciona un mapa</string>
+
   <!--  import -->
   <string name="import_title">Importar…</string>
   <string name="web_import_title">Importar de la web</string>
   <string name="web_import_waiting">Esperando por nuevos escondites desde la web…</string>
   <string name="web_downloading">Descargando</string>
-  <string name="web_downloaded">Descargados</string>  
-  
+  <string name="web_downloaded">Descargados</string>
+
   <!-- popup -->
   <string name="popup_more">Más detalles</string>
 
@@ -540,7 +540,7 @@
   <string name="search_remove_destination">Destino borrado</string>
   <string name="search_clear_history">Borrar historial</string>
   <string name="search_history_cleared">Historial borrado</string>
-  
+
   <!-- visit -->
   <string name="visit_tweet">Publicar en Twitter</string>
 
@@ -604,7 +604,7 @@
   <string name="trackable_origin">Origen</string>
   <string name="trackable_unknown">Desconocido</string>
   <string name="trackable_released">Publicado</string>
-  <string name="trackable_distance">Recorrido</string>  
+  <string name="trackable_distance">Recorrido</string>
   <string name="trackable_touch">Contacto</string>
 
   <!--  user -->
@@ -625,7 +625,7 @@
   <string name="license">Licencia</string>
   <string name="license_show">Mostrar licencia</string>
   <string name="license_dismiss">Descartar</string>
-  
+
   <!-- helpers -->
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Sencillo manual de c:geo que contiene todas las capacidades de este programa (incluidas las ocultas).</string>
