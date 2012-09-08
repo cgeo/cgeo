@@ -14,7 +14,7 @@ class DownloadStaticMapsApp extends AbstractStaticMapsApp {
 
     @Override
     public boolean isEnabled(cgCache cache) {
-        return !hasStaticMap(cache);
+        return !cache.hasStaticMap();
     }
 
     @Override

@@ -231,12 +231,19 @@ public class StaticMapsProvider {
     }
 
     /**
-     * Check if at least one map file exists for the given geocode.
-     *
-     * @param geocode
+     * Check if at least one map file exists for the given cache.
+     * 
+     * @param cache
      * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
      */
-    public static boolean hasStaticMapForCache(String geocode) {
+    public static boolean hasStaticMap(final cgCache cache) {
+        if (cache == null) {
+            return false;
+        }
+        final String geocode = cache.getGeocode();
+        if (StringUtils.isBlank(geocode)) {
+            return false;
+        }
         for (int level = 1; level <= 5; level++) {
             File mapFile = StaticMapsProvider.getMapFile(geocode, String.valueOf(level), false);
             if (mapFile != null && mapFile.exists()) {

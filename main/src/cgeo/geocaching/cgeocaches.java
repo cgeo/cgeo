@@ -493,7 +493,6 @@ public class cgeocaches extends AbstractListActivity {
                 threadPure.start();
                 break;
             case NEAREST:
-                String action = "pending";
                 title = res.getString(R.string.caches_nearby);
                 setTitle(title);
                 showProgress(true);
@@ -504,7 +503,6 @@ public class cgeocaches extends AbstractListActivity {
                 thread.start();
                 break;
             case COORDINATE:
-                action = "planning";
                 title = coords.toString();
                 setTitle(title);
                 showProgress(true);
@@ -526,7 +524,6 @@ public class cgeocaches extends AbstractListActivity {
                 thread.start();
                 break;
             case ADDRESS:
-                action = "planning";
                 final String address = extras.getString(EXTRAS_ADDRESS);
                 if (StringUtils.isNotBlank(address)) {
                     title = address;
@@ -539,7 +536,6 @@ public class cgeocaches extends AbstractListActivity {
 
                 thread = new LoadByCoordsThread(coords);
                 thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
-                thread.start();
                 break;
             case USERNAME:
                 title = username;
@@ -1385,7 +1381,7 @@ public class cgeocaches extends AbstractListActivity {
 
             final List<cgCache> cachesWithStaticMaps = new ArrayList<cgCache>(selected.size());
             for (cgCache cache : selected) {
-                if (Settings.isStoreOfflineMaps() && StaticMapsProvider.hasStaticMapForCache(cache.getGeocode())) {
+                if (Settings.isStoreOfflineMaps() && cache.hasStaticMap()) {
                     cachesWithStaticMaps.add(cache);
                     continue;
                 }

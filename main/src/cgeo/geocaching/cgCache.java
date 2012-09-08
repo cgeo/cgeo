@@ -1611,4 +1611,8 @@ public class cgCache implements ICache, IWaypoint {
         }
         return fullCache.getAttributes().contains(attribute.getAttributeName(yes));
     }
+
+    public boolean hasStaticMap() {
+        return StaticMapsProvider.hasStaticMap(this);
+    }
 }

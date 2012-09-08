@@ -187,7 +187,7 @@ public class StaticMapsActivity extends AbstractActivity {
         if (waypoint_id == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeCacheStaticMap(cache, this, true);
-            return StaticMapsProvider.hasStaticMapForCache(geocode);
+            return cache.hasStaticMap();
         }
         final cgWaypoint waypoint = cache.getWaypointById(waypoint_id);
         if (waypoint != null) {

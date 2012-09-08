@@ -19,7 +19,6 @@ import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 
 import java.io.File;
