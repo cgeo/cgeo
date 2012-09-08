@@ -74,7 +74,7 @@
   <string name="log_archived">Archiviert</string>
   <string name="log_needs_archived">Sollte archiviert werden</string>
   <string name="log_discovered">Gesehen</string>
-  <string name="log_reviewed">Überprüft</string>
+  <string name="log_reviewed">Bemerkung zur Überprüfung</string>
   <string name="log_tb_nothing">Keine Aktion</string>
   <string name="log_tb_visit">Besucht</string>
   <string name="log_tb_drop">Ablegen</string>
