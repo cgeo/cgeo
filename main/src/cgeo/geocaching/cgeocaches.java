@@ -309,10 +309,8 @@ public class cgeocaches extends AbstractListActivity {
                 progress.setProgress(detailProgress);
                 if (minutesRemaining < 1) {
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-                } else if (minutesRemaining == 1) {
-                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_min));
-                } else {
-                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_mins));
+                } else  {
+                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getQuantityString(R.plurals.caches_eta_mins,minutesRemaining));
                 }
             } else if (msg.what == MSG_CANCEL) {
                 if (threadDetails != null) {
@@ -1160,10 +1158,8 @@ public class cgeocaches extends AbstractListActivity {
         String message;
         if (etaTime < 1) {
             message = res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
-        } else if (etaTime == 1) {
-            message = res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_min);
         } else {
-            message = res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_mins);
+            message = res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getQuantityString(R.plurals.caches_eta_mins,etaTime);
         }
 
         progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.obtainMessage(MSG_CANCEL));

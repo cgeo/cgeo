@@ -180,8 +180,10 @@
   <string name="caches_more_caches_no">ingen flere cacher</string>
   <string name="caches_downloading">Laster ned cacher…\nETA: </string>
   <string name="caches_eta_ltm">Mindre enn ett minutt</string>
-  <string name="caches_eta_mins"> minutter</string>
-  <string name="caches_eta_min"> minutt</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minutt</item>
+    <item quantity="other">minutter</item>
+  </plurals>
   <string name="caches_store_offline">Lagre for offline-bruk</string>
   <string name="caches_store_selected">Lagre valgte</string>
   <string name="caches_on_map">Vis på kartet</string>
@@ -247,9 +249,11 @@
   <string name="auth_dialog_completed">c:geo kan nå poste på Twitter.</string>
 
   <!-- cache -->
-  <string name="cache_count_no">Ingen cacher</string>
-  <string name="cache_count_one">Én cache</string>
-  <string name="cache_count_more">Cacher</string>
+  <plurals name="cache_counts">
+    <item quantity="zero">Ingen cacher</item>
+    <item quantity="one">Én cache</item>
+    <item quantity="other">Cacher</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Oppdater</string>
   <string name="cache_offline_drop">Slett</string>

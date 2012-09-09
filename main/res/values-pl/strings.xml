@@ -236,8 +236,10 @@
   <string name="caches_more_caches_loading">Ładuję skrzynki…</string>
   <string name="caches_downloading">Ładuję skrzynki…\nSzacowany czas: </string>
   <string name="caches_eta_ltm">Mniej niż minutę</string>
-  <string name="caches_eta_mins"> minut</string>
-  <string name="caches_eta_min"> minuta</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuta</item>
+    <item quantity="other">minut</item>
+  </plurals>
   <string name="caches_store_offline">Zapisz offline</string>
   <string name="caches_store_selected">Zapisz wybrane</string>
   <string name="caches_history">Historia</string>
@@ -399,9 +401,11 @@
   <string name="auth_dialog_completed">c:geo jest teraz upoważniony do postu na Twitter.</string>
 
   <!-- cache -->
-  <string name="cache_count_no">Nie ma skrzynek</string>
-  <string name="cache_count_one">Jedna skrzynka</string>
-  <string name="cache_count_more">Skrzynki</string>
+  <plurals name="cache_counts">
+    <item quantity="zero">Nie ma skrzynek</item>
+    <item quantity="one">Jedna skrzynka</item>
+    <item quantity="other">Skrzynki</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Odśwież</string>
   <string name="cache_offline_drop">Skasuj</string>
