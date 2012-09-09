@@ -48,7 +48,7 @@ public class cgTrackable implements ILogable {
                 return null;
             }
         }
-        return "http://www.geocaching.com/track/details.aspx?tracker=" + geocode.toUpperCase();
+        return "http://www.geocaching.com//track/details.aspx?tracker=" + geocode.toUpperCase();
     }
 
     public String getGuid() {
