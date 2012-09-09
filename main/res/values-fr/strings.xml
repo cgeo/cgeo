@@ -45,7 +45,7 @@
   <string name="cache_size_virtual">virtuelle</string>
   <string name="cache_size_notchosen">non renseignée</string>
   <string name="cache_size_unknown">inconnu</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Étape finale</string>
   <string name="wp_stage">Étape</string>
@@ -74,7 +74,7 @@
   <string name="log_archived">Archivée</string>
   <string name="log_needs_archived">Nécessite d\'être archivée</string>
   <string name="log_discovered">Découverte</string>
-  <string name="log_reviewed">Note du relecteur</string>
+  <string name="log_reviewer">Note du relecteur</string>
   <string name="log_tb_nothing">Ne fait rien</string>
   <string name="log_tb_visit">Visité</string>
   <string name="log_tb_drop">Déposé ici</string>

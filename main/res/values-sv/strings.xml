@@ -45,7 +45,7 @@
   <string name="cache_size_virtual">virtual</string>
   <string name="cache_size_notchosen">not chosen</string>
   <string name="cache_size_unknown">Okänd</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Slutlig plats</string>
   <string name="wp_stage">Delsteg för multi-cache</string>
@@ -74,7 +74,7 @@
   <string name="log_archived">Arkiverad</string>
   <string name="log_needs_archived">Behöver arkiveras</string>
   <string name="log_discovered">Såg den</string>
-  <string name="log_reviewed">Meddelande från reviewern</string>
+  <string name="log_reviewer">Meddelande från reviewern</string>
   <string name="log_tb_nothing">Gör inget</string>
   <string name="log_tb_visit">Besök</string>
   <string name="log_tb_drop">Lämna här</string>
@@ -678,7 +678,7 @@
   <string name="search_remove_destination">Punkten borttagen</string>
   <string name="search_clear_history">Rensa historik</string>
   <string name="search_history_cleared">Historiken rensad</string>
-  
+
   <string name="waypoint_coordinate_formats_plain">Standard</string>
 
   <!-- visit -->

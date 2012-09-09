@@ -31,7 +31,7 @@ public enum LogType {
     OWNER_MAINTENANCE(46,"icon_maint","owner maintenance",R.string.log_maintained),
     UPDATE_COORDINATES(47,"coord_update","update coordinates",R.string.log_update),
     DISCOVERED_IT(48,"icon_discovered","discovered it",R.string.log_discovered),
-    POST_REVIEWER_NOTE(18,"big_smile","post reviewer note",R.string.log_reviewed),
+    POST_REVIEWER_NOTE(18,"big_smile","post reviewer note",R.string.log_reviewer),
     VISIT(1001, "icon_visited", "visit", R.string.log_tb_visit),
     WEBCAM_PHOTO_TAKEN(11, "icon_camera", "webcam photo taken", R.string.log_webcam),
     ANNOUNCEMENT(74, "icon_announcement", "announcement", R.string.log_announcement),

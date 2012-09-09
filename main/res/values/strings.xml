@@ -45,7 +45,7 @@
   <string name="cache_size_virtual">Virtual</string>
   <string name="cache_size_notchosen">Not chosen</string>
   <string name="cache_size_unknown">Unknown</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Final Location</string>
   <string name="wp_stage">Stage of a Multicache</string>
@@ -74,7 +74,7 @@
   <string name="log_archived">Archived</string>
   <string name="log_needs_archived">Needs Archived</string>
   <string name="log_discovered">Discovered</string>
-  <string name="log_reviewed">Reviewer Note</string>
+  <string name="log_reviewer">Reviewer Note</string>
   <string name="log_tb_nothing">Do Nothing</string>
   <string name="log_tb_visit">Visited</string>
   <string name="log_tb_drop">Dropped Off</string>
@@ -116,12 +116,12 @@
   <string name="log_announcement">Announcement</string>
   <string name="log_today">Today</string>
   <string name="log_yesterday">Yesterday</string>
-  
+
   <!-- translation -->
   <string name="translate_to_sys_lang">Translate to %s</string>
   <string name="translate_to_english">Translate to English</string>
   <string name="translate_length_warning">Translate may fail with large amounts of text.</string>
-  
+
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
   <string name="err_start">Communication not started</string>
@@ -224,7 +224,7 @@
   <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge version 0.3.0 map file.\nOffline maps are not available.</string>
   <string name="warn_deprecated_mapfile">You are using a deprecated version 0.2.4 map file.\nConsider switching to a version 0.3.0 map.\nWe will drop support for version 0.2.4 in the next release.</string>
    <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
-  
+
 
   <string name="info_log_posted">c:geo successfully submitted the log.</string>
   <string name="info_log_saved">c:geo successfully saved the log.</string>
@@ -529,7 +529,7 @@
   <string name="cache_favpoint_not_on">This cache is not one of your favorites.</string>
   <string name="cache_favpoint_add">Add</string>
   <string name="cache_favpoint_remove">Remove</string>
-  
+
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
       <item quantity="one">1 Waypoint</item>
@@ -617,7 +617,7 @@
   <string name="cache_image_open_browser">Open in browser</string>
   <string name="cache_share_field">Share</string>
   <string name="cache_time_full_hours">o\'clock</string>
-  
+
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>
   <string name="file_searching_sdcard_in">No files found in default folders:\n%1$s\n\nSearching whole SD card for files:\n</string>
@@ -628,7 +628,7 @@
   <!-- simple_dir_chooser -->
   <string name="simple_dir_chooser_title">Choose directory</string>
   <string name="simple_dir_chooser_current_path">Path:</string>
-  
+
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Loading caches from .gpx file</string>
   <string name="gpx_import_loading_waypoints">Loading waypoints file</string>
@@ -646,7 +646,7 @@
   <string name="gpx_import_error_unexpected">Unexpected error</string>
   <string name="gpx_import_confirm">Do you want to import the GPX file into c:geo?</string>
   <string name="gpx_import_canceled">GPX import was canceled</string>
-  
+
   <!-- map file select -->
   <string name="map_file_select_title">Select map file</string>
 
@@ -708,7 +708,7 @@
   <string name="unit_ft">ft</string>
   <string name="unit_yd">yd</string>
   <string name="unit_mi">mi</string>
-  
+
   <!-- visit -->
   <string name="visit_tweet">Post this find to Twitter</string>
 
@@ -735,7 +735,7 @@
   <string name="live_map_notification">On the new live map coordinates may not always be precise. Possibly imprecise coordinates are marked by an orange circle.\nOpening the cache details or saving the cache for offline use will always obtain precise coordinates.\n\nMore information on all changes can be found on the \"About c:geo\" page inside the app.</string>
   <string name="live_map_note_close">Close</string>
   <string name="live_map_note_dontshow">Do not show again</string>
-  
+
 
   <!-- search -->
   <string name="search_bar_hint">Search for caches</string>
@@ -802,7 +802,7 @@
   <string name="destination_set">Set destination</string>
   <string name="navigation_direct_navigation">Direct Navigation</string>
   <string name="navigation_target">Target</string>
-  
+
   <!-- license -->
   <string name="license">License</string>
   <string name="license_show">Show license</string>
@@ -826,7 +826,7 @@
   <!-- add-ons -->
   <string name="addon_missing_title">Missing Add-On</string>
   <string name="addon_download_prompt">Get it now from Google Play.</string>
-  
+
   <!-- export -->
   <string name="export">Export</string>
   <string name="export_as">Export as…</string>
@@ -842,7 +842,7 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">The GPX file will be exported to %1$s with current date and time as file name.</string>
   <string name="export_gpx_to">Send exported GPX to</string>
-  
+
   <!--  attribute unknown -->
   <string name="attribute_unknown_yes">Unknown attribute present</string>
   <string name="attribute_unknown_no">Unknown attribute not present</string>
@@ -1011,7 +1011,7 @@
       <item quantity="one">yesterday</item>
       <item quantity="other">%d days ago</item>
   </plurals>
-      
+
   <!-- ====== please, do not translate (and include in translation) things below this line ====== -->
 
   <!-- contributors -->
@@ -1084,7 +1084,7 @@
     · Avoid crash when searching for an unactivated TB\n
     · Improvement for enabling live mode on map\n
     · Improvement for GPX export operations\n
-    · Readability improvement for cache description with dark text when using black theme\n 
+    · Readability improvement for cache description with dark text when using black theme\n
     · Store for offline on live map now always available for basic members\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
