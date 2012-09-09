@@ -55,7 +55,7 @@
   <string name="log_archived">Arkiveret</string>
   <string name="log_needs_archived">Mangler arkiveret</string>
   <string name="log_discovered">Set</string>
-  <string name="log_reviewed">Godkendernote</string>
+  <string name="log_reviewer">Godkendernote</string>
   <string name="log_tb_nothing">Gør intet</string>
   <string name="log_tb_visit">Besøg</string>
   <string name="log_tb_drop">Læg her</string>

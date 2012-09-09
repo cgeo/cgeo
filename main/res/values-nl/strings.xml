@@ -9,7 +9,7 @@
   <string name="search">Zoeken</string>
   <string name="settings">Instellingen</string>
   <string name="helpers">Wat te installeren</string>
-  <string name="about">Over c:geo</string>  
+  <string name="about">Over c:geo</string>
   <string name="helper">Wil je meer weten over <b>c:geo</b>?\nKijk dan in de (makkelijk te lezen) handleiding.</string>
   <string name="latitude">Breedtegraad</string>
   <string name="longitude">Lengtegraad</string>
@@ -45,7 +45,7 @@
   <string name="cache_size_virtual">virtual</string>
   <string name="cache_size_notchosen">not chosen</string>
   <string name="cache_size_unknown">Onbekend</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Eindbestemming</string>
   <string name="wp_stage">Multi-cache punt</string>
@@ -74,7 +74,7 @@
   <string name="log_archived">Gearchiveerd</string>
   <string name="log_needs_archived">Dient te worden gearchiveerd</string>
   <string name="log_discovered">Ontdekt</string>
-  <string name="log_reviewed">Recensent notitie</string>
+  <string name="log_reviewer">Recensent notitie</string>
   <string name="log_tb_nothing">Niets doen</string>
   <string name="log_tb_visit">Bezoek</string>
   <string name="log_tb_drop">Hier droppen</string>
@@ -114,7 +114,7 @@
   <string name="log_new_log">Log</string>
   <string name="log_new_log_text">Log tekst</string>
   <string name="log_announcement">Aankondiging</string>
-  
+
   <!-- translation -->
   <string name="translate_to_sys_lang">Vertaal naar %s</string>
   <string name="translate_to_english">Vertaal naar engels</string>

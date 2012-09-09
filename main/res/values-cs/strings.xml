@@ -60,7 +60,7 @@
   <string name="log_archived">Archivace</string>
   <string name="log_needs_archived">Vyžaduje archivaci</string>
   <string name="log_discovered">Viděn</string>
-  <string name="log_reviewed">Poznámka kontroly</string>
+  <string name="log_reviewer">Poznámka kontroly</string>
   <string name="log_tb_nothing">Beze změny</string>
   <string name="log_tb_visit">Návštěva</string>
   <string name="log_tb_drop">Nechat zde</string>
@@ -329,7 +329,7 @@
   <string name="init_details">Detaily keše</string>
   <string name="init_ratingwanted">Načti hodnocení keše z GCvote.com</string>
   <string name="init_elevationwanted">Načti výšková data ke keši</string>
-  
+
   <string name="init_friendlogswanted">Načti extra navíc stránku logbooku s logy kamarádů.</string>
   <string name="init_openlastdetailspage">Otevři detaily na naposledy použité stránce.</string>
   <string name="init_autoload">Automaticky načti dlouhý popis</string>
@@ -552,7 +552,7 @@
   <string name="map_view_map">Vybrat typ mapy</string>
   <string name="map_trail_show">Zobraziy záznam trasy</string>
   <string name="map_trail_hide">Skrýt záznam trasy</string>
-  <string name="map_live_enable">Povolit aktivní mapu</string>	
+  <string name="map_live_enable">Povolit aktivní mapu</string>
   <string name="map_live_disable">Zakázat aktivní mapu</string>
   <string name="map_static_title">Statické mapy</string>
   <string name="map_static_loading">Načítání statických map…</string>

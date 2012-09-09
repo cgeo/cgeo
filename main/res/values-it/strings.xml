@@ -45,7 +45,7 @@
   <string name="cache_size_virtual">virtual</string>
   <string name="cache_size_notchosen">non selezionata</string>
   <string name="cache_size_unknown">sconosciuto</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">Destinazione finale</string>
   <string name="wp_stage">Step intermedio multi-cache</string>
@@ -67,14 +67,14 @@
   <string name="log_placed">Inserito</string>
   <string name="log_grabbed">Prelevato da qualche parte</string>
   <string name="log_movecollection">Sposta in collezione</string>
-  <string name="log_moveinventory">Sposta in inventario</string>  
+  <string name="log_moveinventory">Sposta in inventario</string>
   <string name="log_maintained">Manutenzione effettuata</string>
   <string name="log_maintenance_needed">Richiede manutenzione</string>
   <string name="log_update">Coordinate aggiornate</string>
   <string name="log_archived">Archiviato</string>
   <string name="log_needs_archived">Necessita archiviazione</string>
   <string name="log_discovered">Scoperto</string>
-  <string name="log_reviewed">Nota del reviewer</string>
+  <string name="log_reviewer">Nota del reviewer</string>
   <string name="log_tb_nothing">Non fare nulla</string>
   <string name="log_tb_visit">Visitato</string>
   <string name="log_tb_drop">Lasciato</string>
@@ -116,12 +116,12 @@
   <string name="log_announcement">Annuncio</string>
   <string name="log_today">Oggi</string>
   <string name="log_yesterday">Ieri</string>
-  
+
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduci in %s</string>
   <string name="translate_to_english">Traduci in inglese</string>
   <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
-  
+
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
   <string name="err_start">Comunicazione non avviata</string>
@@ -148,7 +148,7 @@
   <string name="err_detail_cache_find_next">c:geo non trova il prossimo geocache.</string>
   <string name="err_detail_cache_forgot">c:geo ha dimenticato quale geocache hai richiesto.</string>
   <string name="err_detail_cache_forgot_visit">c:geo ha dimenticato quale cache hai visitato.</string>
-  <string name="err_detail_google_maps_limit_reached">c:geo non riesce a scaricare le mappe statiche. Forse raggiunto il limite di google map. Riprova domani.</string> 
+  <string name="err_detail_google_maps_limit_reached">c:geo non riesce a scaricare le mappe statiche. Forse raggiunto il limite di google map. Riprova domani.</string>
   <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questo cache.</string>
   <string name="err_detail_no_map_static">c:geo non trova static maps per questo cache.</string>
   <string name="err_detail_not_load_map_static">c:geo non riesce a caricare la static map.</string>
@@ -184,7 +184,7 @@
   <string name="err_waypoint_add_failed">c:geo non è riuscito ad aggiungere il tuo waypoint.</string>
   <string name="err_waypoint_load_failed">c:geo non è riuscito a caricare il waypoint.</string>
   <string name="err_waypoint_delete_failed">c:geo non riesce a cancellare il waypoint.</string>
-  <string name="err_waypoint_open_cache_failed">c:geo non riesce ad aprire i dettagli del cache.</string>  
+  <string name="err_waypoint_open_cache_failed">c:geo non riesce ad aprire i dettagli del cache.</string>
   <string name="err_point_unknown_position">c:geo non capisce dove ti trovi.</string>
   <string name="err_point_no_position_given_title">Info richieste</string>
   <string name="err_point_no_position_given">Inserisci almeno latitudine, o longitudine, o distanza e angolo. Puoi anche inserire tutti e quattro i valori.</string>
@@ -493,7 +493,7 @@
   <string name="cache_personal_note">Note personali</string>
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
-  <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su geocaching.com per vederla correttamente.</string>  
+  <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su geocaching.com per vederla correttamente.</string>
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Questo cache è nella tua watchlist.</string>
   <string name="cache_watchlist_not_on">Questo cache non è nella tua watchlist.</string>
@@ -507,11 +507,11 @@
   <plurals name="waypoints">
       <item quantity="one">1 Waypoint</item>
       <item quantity="other">%d Waypoint</item>
-  </plurals>  
+  </plurals>
   <string name="cache_waypoints_add">Aggiungi waypoint</string>
   <string name="cache_hint">Aiuto (spoiler)</string>
   <string name="cache_logs">Logbook</string>
-  <string name="cache_logsfriends">Log amici</string>  
+  <string name="cache_logsfriends">Log amici</string>
   <string name="cache_dialog_loading_details">Caricamento dettagli cache…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
   <string name="cache_dialog_loading_details_status_details">Elaborazione dettagli</string>
@@ -613,7 +613,7 @@
   <string name="gpx_import_error_parser">Il formato del file non è compatibile</string>
   <string name="gpx_import_error_unexpected">Errore inaspettato</string>
   <string name="gpx_import_confirm">Vuoi importare il file GPX in c:geo?</string>
-  <string name="gpx_import_canceled">Importazione GPX annullata</string>      
+  <string name="gpx_import_canceled">Importazione GPX annullata</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Seleziona il file mappa</string>
@@ -648,13 +648,13 @@
   <string name="waypoint_done">Fatto</string>
   <string name="waypoint_duplicate">Duplicato</string>
   <string name="waypoint_copy_of">Copia di</string>
-  <string name="waypoint_menu_open_cache">Apri Cache</string>  
+  <string name="waypoint_menu_open_cache">Apri Cache</string>
   <string name="search_history">Cronologia</string>
   <string name="search_history_empty">Nessuna precedente destinazione</string>
   <string name="search_remove_destination">Destinazione rimossa</string>
   <string name="search_clear_history">Cancella cronologia</string>
   <string name="search_history_cleared">Cronologia azzerata</string>
-  
+
   <string name="waypoint_coordinate_formats_plain">Plain</string>
 
   <!-- distance units -->
@@ -690,7 +690,7 @@
   <string name="live_map_notification">Nella nuova Mappa Live le coordinate potrebbero non essere sempre precise. Coordinate possibilmente imprecise sono marcate da un cerchio arancione.\nAprendo i dettagli del cache o salvando il cache per uso offline farà calcolare sempre coordinate precise.\n\nInformazioni addizionali su tutte le modifiche si possono trovare nel menu \"Info c:geo\" sulla pagina principale di questa app.</string>
   <string name="live_map_note_close">Chiudi</string>
   <string name="live_map_note_dontshow">Non mostrare ancora</string>
-  
+
   <!-- search -->
   <string name="search_bar_hint">Cerca caches</string>
   <string name="search_bar_desc">Cache (GC-code, parole chiave), Oggetti trackables (TB-code)</string>
@@ -952,7 +952,7 @@
   <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi una cache?</string>
   <string name="about_auth_1">La procesura seguente autorizza <b>c:geo</b> ad accedere a Twitter - se confermato.</string>
   <string name="about_auth_2">Clicca sul pulsante \"Autorizza c:geo\" per iniziare. Questa procedura aprirà il browser sulla pagina Twitter. Fai Login su questa pagina e autorizza <b>c:geo</b> ad accedere al tuo account. Se accettato, Twitter mostrerà un PIN code numerico. Questo PIN deve essere riportato in <b>c:geo</b> e confermato.</string>
-  
+
   <!-- status -->
   <string name="status_new_release">Una nuova versione è disponibile.\nClicca per installarla.</string>
   <string name="status_new_nightly">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
@@ -960,7 +960,7 @@
   <string name="status_geocaching_change">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_livemap">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
 
-  <string name="clipboard_copy_ok">Copiato nella clipboard</string>  
+  <string name="clipboard_copy_ok">Copiato nella clipboard</string>
   <plurals name="days_ago">
     <item quantity="one">ieri</item>
     <item quantity="other">%d giorni fa</item>

@@ -45,7 +45,7 @@
   <string name="cache_size_virtual">バーチャル</string>
   <string name="cache_size_notchosen">未選択</string>
   <string name="cache_size_unknown">不明</string>
-  
+
   <!-- waypoints -->
   <string name="wp_final">最終座標</string>
   <string name="wp_stage">マルチキャッシュのステージ</string>
@@ -74,7 +74,7 @@
   <string name="log_archived">アーカイブされた</string>
   <string name="log_needs_archived">アーカイブされるべき</string>
   <string name="log_discovered">発見した</string>
-  <string name="log_reviewed">レビューノート</string>
+  <string name="log_reviewer">レビューノート</string>
   <string name="log_tb_nothing">何もしない</string>
   <string name="log_tb_visit">訪れた</string>
   <string name="log_tb_drop">ここに置く</string>
@@ -116,12 +116,12 @@
   <string name="log_announcement">アナウンス</string>
   <string name="log_today">今日</string>
   <string name="log_yesterday">昨日</string>
-  
+
   <!-- translation -->
   <string name="translate_to_sys_lang">%sに翻訳</string>
   <string name="translate_to_english">英語に翻訳</string>
   <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません。</string>
-  
+
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
   <string name="err_start">通信を始めることができませんでした</string>
@@ -529,7 +529,7 @@
   <string name="cache_favpoint_not_on">このキャッシュはあなたのお気に入りに登録されていません。</string>
   <string name="cache_favpoint_add">登録</string>
   <string name="cache_favpoint_remove">削除</string>
-  
+
   <string name="cache_waypoints">ウェイポイント</string>
   <plurals name="waypoints">
       <item quantity="one">1 ウェイポイント</item>
@@ -646,7 +646,7 @@
   <string name="gpx_import_error_unexpected">予期せぬエラー</string>
   <string name="gpx_import_confirm">c:geoにGPXファイルをインポートしますか?</string>
   <string name="gpx_import_canceled">GPXファイルのインポートが中止されました</string>
-  
+
   <!-- map file select -->
   <string name="map_file_select_title">地図ファイルの選択</string>
 
@@ -708,7 +708,7 @@
   <string name="unit_ft">フィート</string>
   <string name="unit_yd">ヤード</string>
   <string name="unit_mi">マイル</string>
-  
+
   <!-- visit -->
   <string name="visit_tweet">この発見をTwitterでつぶやく</string>
 
@@ -735,7 +735,7 @@
   <string name="live_map_notification">現バージョンではオンライン地図の座標は正確とは限りません。不正確と思われる座標のキャッシュはオレンジ色の丸で表示されます。\nキャッシュの詳細を表示したりオフライン用に保存する際には正確な座標を取得します。\n\n詳しくはアプリ内の「c:geoについて」の変更履歴(英語)をご覧ください。</string>
   <string name="live_map_note_close">閉じる</string>
   <string name="live_map_note_dontshow">再び表示をしない</string>
-  
+
 
   <!-- search -->
   <string name="search_bar_hint">キャッシュ検索</string>
@@ -802,7 +802,7 @@
   <string name="destination_set">目的地を入力</string>
   <string name="navigation_direct_navigation">Direct Navigation</string>
   <string name="navigation_target">Target</string>
-  
+
   <!-- license -->
   <string name="license">ライセンス</string>
   <string name="license_show">ライセンスを表示</string>
@@ -826,7 +826,7 @@
   <!-- add-ons -->
   <string name="addon_missing_title">プラグインが見つかりません</string>
   <string name="addon_download_prompt">Google Playからインストールしますか?</string>
-  
+
   <!-- export -->
   <string name="export">エクスポート</string>
   <string name="export_as">Export as…</string>
@@ -842,7 +842,7 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります。</string>
   <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
-  
+
   <!--  attribute unknown -->
   <string name="attribute_unknown_yes">未知の属性あり</string>
   <string name="attribute_unknown_no">未知の属性なし</string>
