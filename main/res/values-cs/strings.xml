@@ -215,6 +215,9 @@
   <string name="caches_more_caches_currently">aktuálně</string>
   <string name="caches_downloading">Stahuji keše…\nETA:</string>
   <string name="caches_eta_ltm">méně než minutu</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="other">minuty</item>
+  </plurals>
   <string name="caches_store_offline">Uložit pro offline</string>
   <string name="caches_store_selected">Uložit vybrané</string>
   <string name="caches_history">Historie</string>
