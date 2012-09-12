@@ -1,0 +1,994 @@
+### Eclipse Workspace Patch 1.0
+#P mapsforge-map
+Index: src/main/java/org/mapsforge/android/maps/mapgenerator/JobTheme.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/mapgenerator/JobTheme.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/mapgenerator/JobTheme.java	(Arbeitskopie)
+@@ -23,6 +23,11 @@
+  */
+ public interface JobTheme extends Serializable {
+ 	/**
++	 * @return the prefix for all relative resource paths.
++	 */
++	String getRelativePathPrefix();
++
++	/**
+ 	 * @return an InputStream to read the render theme data from.
+ 	 * @throws FileNotFoundException
+ 	 *             if the render theme file cannot be found.
+Index: src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Symbol.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Symbol.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Symbol.java	(Arbeitskopie)
+@@ -33,11 +33,14 @@
+ 	 *            the name of the XML element.
+ 	 * @param attributes
+ 	 *            the attributes of the XML element.
++	 * @param relativePathPrefix
++	 *            the prefix for relative resource paths.
+ 	 * @return a new Symbol with the given rendering attributes.
+ 	 * @throws IOException
+ 	 *             if an I/O error occurs while reading a resource.
+ 	 */
+-	public static Symbol create(String elementName, Attributes attributes) throws IOException {
++	public static Symbol create(String elementName, Attributes attributes, String relativePathPrefix)
++			throws IOException {
+ 		String src = null;
+ 
+ 		for (int i = 0; i < attributes.getLength(); ++i) {
+@@ -52,7 +55,7 @@
+ 		}
+ 
+ 		validate(elementName, src);
+-		return new Symbol(src);
++		return new Symbol(relativePathPrefix, src);
+ 	}
+ 
+ 	private static void validate(String elementName, String src) {
+@@ -63,10 +66,10 @@
+ 
+ 	private final Bitmap bitmap;
+ 
+-	private Symbol(String src) throws IOException {
++	private Symbol(String relativePathPrefix, String src) throws IOException {
+ 		super();
+ 
+-		this.bitmap = BitmapUtils.createBitmap(src);
++		this.bitmap = BitmapUtils.createBitmap(relativePathPrefix, src);
+ 	}
+ 
+ 	@Override
+Index: src/main/resources/org/mapsforge/android/maps/rendertheme/osmarender/osmarender.xml
+===================================================================
+--- src/main/resources/org/mapsforge/android/maps/rendertheme/osmarender/osmarender.xml	(Revision 2013)
++++ src/main/resources/org/mapsforge/android/maps/rendertheme/osmarender/osmarender.xml	(Arbeitskopie)
+@@ -7,8 +7,7 @@
+ 		<!-- landuse -->
+ 		<rule e="way" k="landuse" v="*">
+ 			<rule e="way" k="landuse" v="military">
+-				<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/military.png" stroke="#e4e4e4"
+-					stroke-width="0.2" />
++				<area src="jar:patterns/military.png" stroke="#e4e4e4" stroke-width="0.2" />
+ 			</rule>
+ 			<rule e="way" k="landuse" v="residential|farmyard">
+ 				<area fill="#e4e4e4" />
+@@ -107,8 +106,7 @@
+ 				<area fill="#e9dd72" stroke="#556b2f" stroke-width="0.2" />
+ 			</rule>
+ 			<rule e="way" k="landuse" v="cemetery">
+-				<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/cemetery.png" stroke="#e4e4e4"
+-					stroke-width="0.2" />
++				<area src="jar:patterns/cemetery.png" stroke="#e4e4e4" stroke-width="0.2" />
+ 			</rule>
+ 			<rule e="way" k="landuse" v="field|farm|farmland|meadow|grass">
+ 				<area fill="#ebfff2" stroke="#9ee673" stroke-width="0.1" />
+@@ -129,13 +127,13 @@
+ 		<rule e="way" k="natural|landuse" v="forest|wood|scrub">
+ 			<rule e="way" k="wood" v="*">
+ 				<rule e="way" k="wood" v="coniferous">
+-					<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/wood-coniferous.png" />
++					<area src="jar:patterns/wood-coniferous.png" />
+ 				</rule>
+ 				<rule e="way" k="wood" v="deciduous">
+-					<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/wood-deciduous.png" />
++					<area src="jar:patterns/wood-deciduous.png" />
+ 				</rule>
+ 				<rule e="way" k="wood" v="mixed">
+-					<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/wood-mixed.png" />
++					<area src="jar:patterns/wood-mixed.png" />
+ 				</rule>
+ 			</rule>
+ 			<rule e="way" k="wood" v="~">
+@@ -154,32 +152,31 @@
+ 				<area fill="#cdabde" stroke="#e9dd72" stroke-width="0.2" />
+ 			</rule>
+ 			<rule e="way" k="amenity" v="grave_yard">
+-				<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/cemetery.png" stroke="#e4e4e4"
+-					stroke-width="0.2" />
++				<area src="jar:patterns/cemetery.png" stroke="#e4e4e4" stroke-width="0.2" />
+ 			</rule>
+ 			<rule e="way" k="amenity" v="parking">
+ 				<area fill="#ffffc0" stroke="#e9dd72" stroke-width="0.2" />
+ 				<rule e="way" k="access" v="private" zoom-min="15">
+-					<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/access-private.png" />
++					<area src="jar:patterns/access-private.png" />
+ 				</rule>
+ 				<rule e="way" k="*" v="*" zoom-min="17">
+-					<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/parking.png" />
++					<symbol src="jar:symbols/parking.png" />
+ 				</rule>
+ 			</rule>
+ 			<rule e="way" k="amenity" v="fountain" closed="yes">
+ 				<area fill="#b5d6f1" stroke="#000080" stroke-width="0.15" />
+ 				<rule e="way" k="*" v="*" zoom-min="17">
+-					<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/fountain.png" />
++					<symbol src="jar:symbols/fountain.png" />
+ 				</rule>
+ 			</rule>
+ 			<rule e="way" k="amenity" v="hospital" zoom-min="15">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/hospital.png" />
++				<symbol src="jar:symbols/hospital.png" />
+ 			</rule>
+ 			<rule e="way" k="amenity" v="theatre" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/theatre.png" />
++				<symbol src="jar:symbols/theatre.png" />
+ 			</rule>
+ 			<rule e="way" k="amenity" v="toilets" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/toilets.png" />
++				<symbol src="jar:symbols/toilets.png" />
+ 			</rule>
+ 
+ 			<rule e="way" k="*" v="*" zoom-min="17">
+@@ -211,7 +208,7 @@
+ 				<area fill="#ffffc0" stroke="#ffff90" stroke-width="0.2" />
+ 			</rule>
+ 			<rule e="way" k="natural" v="marsh|wetland">
+-				<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/marsh.png" />
++				<area src="jar:patterns/marsh.png" />
+ 			</rule>
+ 
+ 			<rule e="way" k="*" v="*" zoom-min="16">
+@@ -228,12 +225,11 @@
+ 			<rule e="way" k="leisure" v="playground|playing_fields|pitch|dog_park">
+ 				<area fill="#c7f1a3" stroke="#6fc18e" stroke-width="0.2" />
+ 				<rule e="way" k="*" v="playground" zoom-min="17">
+-					<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/playground.png" />
++					<symbol src="jar:symbols/playground.png" />
+ 				</rule>
+ 			</rule>
+ 			<rule e="way" k="leisure" v="nature_reserve">
+-				<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/nature-reserve.png" stroke="#6fc18e"
+-					stroke-width="0.2" />
++				<area src="jar:patterns/nature-reserve.png" stroke="#6fc18e" stroke-width="0.2" />
+ 			</rule>
+ 
+ 			<rule e="way" k="leisure" v="stadium|sports_centre|water_park">
+@@ -306,15 +302,14 @@
+ 
+ 		<!-- military -->
+ 		<rule e="way" k="military" v="*">
+-			<area src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/military.png" stroke="#e4e4e4"
+-				stroke-width="0.2" />
++			<area src="jar:patterns/military.png" stroke="#e4e4e4" stroke-width="0.2" />
+ 		</rule>
+ 
+ 
+ 		<!-- sport -->
+ 		<rule e="way" k="sport" v="*">
+ 			<rule e="way" k="sport" v="soccer" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/soccer-borderless.png" />
++				<symbol src="jar:symbols/soccer-borderless.png" />
+ 			</rule>
+ 			<rule e="way" k="sport" v="swimming|canoe|diving|scuba_diving">
+ 				<area fill="#b5d6f1" stroke="#6060ff" stroke-width="0.2" />
+@@ -322,7 +317,7 @@
+ 			<rule e="way" k="sport" v="tennis">
+ 				<area fill="#d18a6a" stroke="#b36c4c" stroke-width="0.2" />
+ 				<rule e="way" k="*" v="*" zoom-min="17">
+-					<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/tennis.png" />
++					<symbol src="jar:symbols/tennis.png" />
+ 				</rule>
+ 			</rule>
+ 		</rule>
+@@ -683,11 +678,10 @@
+ 
+ 					<rule e="way" k="highway" v="*" zoom-min="16">
+ 						<rule e="way" k="access" v="destination">
+-							<line src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/access-destination.png"
+-								stroke-width="1.5" />
++							<line src="jar:patterns/access-destination.png" stroke-width="1.5" />
+ 						</rule>
+ 						<rule e="way" k="access" v="private">
+-							<line src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/patterns/access-private.png" stroke-width="1.5" />
++							<line src="jar:patterns/access-private.png" stroke-width="1.5" />
+ 						</rule>
+ 					</rule>
+ 				</rule>
+@@ -740,8 +734,7 @@
+ 			<rule e="way" k="area" v="~|false|no">
+ 				<rule e="way" k="highway" v="*">
+ 					<rule e="way" k="oneway" v="yes|true" zoom-min="16">
+-						<lineSymbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/oneway.png"
+-							align-center="true" repeat="true" />
++						<lineSymbol src="jar:symbols/oneway.png" align-center="true" repeat="true" />
+ 					</rule>
+ 				</rule>
+ 			</rule>
+@@ -820,13 +813,13 @@
+ 			<line stroke="#202020" stroke-width="0.4" stroke-linecap="butt" />
+ 			<line stroke="#202020" stroke-width="4.0" stroke-dasharray="2,200" stroke-linecap="butt" />
+ 			<rule e="way" k="aerialway" v="cable_car">
+-				<lineSymbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/cable_car.png" />
++				<lineSymbol src="jar:symbols/cable_car.png" />
+ 			</rule>
+ 			<rule e="way" k="aerialway" v="chair_lift">
+-				<lineSymbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/chair_lift_2.png" />
++				<lineSymbol src="jar:symbols/chair_lift_2.png" />
+ 			</rule>
+ 			<rule e="way" k="aerialway" v="gondola">
+-				<lineSymbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/gondola.png" />
++				<lineSymbol src="jar:symbols/gondola.png" />
+ 			</rule>
+ 			<rule e="way" k="*" v="*" zoom-min="14">
+ 				<pathText k="name" font-style="bold" font-size="10" fill="#606060" stroke="#ffffff" stroke-width="2.0" />
+@@ -947,10 +940,10 @@
+ 		<!-- aeroway -->
+ 		<rule e="node" k="aeroway" v="*">
+ 			<rule e="node" k="aeroway" v="helipad" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/helipad.png" />
++				<symbol src="jar:symbols/helipad.png" />
+ 			</rule>
+ 			<rule e="node" k="aeroway" v="aerodrome|airport" zoom-max="13">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/airport.png" />
++				<symbol src="jar:symbols/airport.png" />
+ 			</rule>
+ 		</rule>
+ 
+@@ -958,96 +951,96 @@
+ 		<!-- amenity -->
+ 		<rule e="node" k="amenity" v="*">
+ 			<rule e="node" k="amenity" v="atm" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/atm.png" />
++				<symbol src="jar:symbols/atm.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="bank" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/bank.png" />
++				<symbol src="jar:symbols/bank.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="bench" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/bench.png" />
++				<symbol src="jar:symbols/bench.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="bicycle_rental" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/bicycle_rental.png" />
++				<symbol src="jar:symbols/bicycle_rental.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="bus_station" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/bus_sta.png" />
++				<symbol src="jar:symbols/bus_sta.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="cafe" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/cafe.png" />
++				<symbol src="jar:symbols/cafe.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="cinema" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/cinema.png" />
++				<symbol src="jar:symbols/cinema.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="fast_food" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/fastfood.png" />
++				<symbol src="jar:symbols/fastfood.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="fire_station" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/firebrigade.png" />
++				<symbol src="jar:symbols/firebrigade.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="fountain" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/fountain.png" />
++				<symbol src="jar:symbols/fountain.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="fuel" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/petrolStation.png" />
++				<symbol src="jar:symbols/petrolStation.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="hospital" zoom-min="15">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/hospital.png" />
++				<symbol src="jar:symbols/hospital.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="kindergarten" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/kindergarten.png" />
++				<symbol src="jar:symbols/kindergarten.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="library" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/library.png" />
++				<symbol src="jar:symbols/library.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="parking" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/parking.png" />
++				<symbol src="jar:symbols/parking.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="pharmacy" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/pharmacy.png" />
++				<symbol src="jar:symbols/pharmacy.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="place_of_worship" zoom-min="17">
+ 				<rule e="node" k="denomination|religion" v="jewish">
+-					<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/synagogue.png" />
++					<symbol src="jar:symbols/synagogue.png" />
+ 				</rule>
+ 				<rule e="node" k="denomination|religion" v="muslim|moslem">
+-					<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/mosque.png" />
++					<symbol src="jar:symbols/mosque.png" />
+ 				</rule>
+ 				<rule e="node" k="denomination|religion" v="christian">
+-					<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/church.png" />
++					<symbol src="jar:symbols/church.png" />
+ 				</rule>
+ 			</rule>
+ 			<rule e="node" k="amenity" v="post_box" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/postbox.png" />
++				<symbol src="jar:symbols/postbox.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="post_office" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/postoffice.png" />
++				<symbol src="jar:symbols/postoffice.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="pub|bar" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/pub.png" />
++				<symbol src="jar:symbols/pub.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="recycling" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/recycling.png" />
++				<symbol src="jar:symbols/recycling.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="restaurant" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/restaurant.png" />
++				<symbol src="jar:symbols/restaurant.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="school" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/school.png" />
++				<symbol src="jar:symbols/school.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="shelter" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/shelter.png" />
++				<symbol src="jar:symbols/shelter.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="telephone" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/telephone.png" />
++				<symbol src="jar:symbols/telephone.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="theatre" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/theatre.png" />
++				<symbol src="jar:symbols/theatre.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="toilets" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/toilets.png" />
++				<symbol src="jar:symbols/toilets.png" />
+ 			</rule>
+ 			<rule e="node" k="amenity" v="university|college" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/university.png" />
++				<symbol src="jar:symbols/university.png" />
+ 			</rule>
+ 
+ 			<rule e="node" k="*" v="*" zoom-min="17">
+@@ -1065,10 +1058,10 @@
+ 		<!-- highway -->
+ 		<rule e="node" k="highway" v="*">
+ 			<rule e="node" k="highway" v="bus_stop" zoom-min="16">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/bus.png" />
++				<symbol src="jar:symbols/bus.png" />
+ 			</rule>
+ 			<rule e="node" k="highway" v="traffic_signals" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/traffic_signal.png" />
++				<symbol src="jar:symbols/traffic_signal.png" />
+ 			</rule>
+ 			<rule e="node" k="highway" v="turning_circle">
+ 				<circle r="1.4" scale-radius="true" fill="#ffffff" />
+@@ -1094,30 +1087,30 @@
+ 
+ 		<!-- leisure -->
+ 		<rule e="node" k="leisure" v="playground" zoom-min="17">
+-			<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/playground.png" />
++			<symbol src="jar:symbols/playground.png" />
+ 		</rule>
+ 
+ 
+ 		<!-- man_made -->
+ 		<rule e="node" k="man_made" v="windmill" zoom-min="17">
+-			<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/windmill.png" />
++			<symbol src="jar:symbols/windmill.png" />
+ 		</rule>
+ 
+ 
+ 		<!-- natural -->
+ 		<rule e="node" k="natural" v="*">
+ 			<rule e="node" k="natural" v="cave_entrance" zoom-min="15">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/cave_entrance.png" />
++				<symbol src="jar:symbols/cave_entrance.png" />
+ 			</rule>
+ 			<rule e="node" k="natural" v="peak" zoom-min="12">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/peak.png" />
++				<symbol src="jar:symbols/peak.png" />
+ 				<caption k="ele" dy="20" font-style="bold" font-size="10" fill="#000000" stroke="#ffffff" stroke-width="2.0" />
+ 			</rule>
+ 			<rule e="node" k="natural" v="tree" zoom-min="16">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/tree.png" />
++				<symbol src="jar:symbols/tree.png" />
+ 			</rule>
+ 			<rule e="node" k="natural" v="volcano" zoom-min="12">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/vulcan.png" />
++				<symbol src="jar:symbols/vulcan.png" />
+ 			</rule>
+ 
+ 			<rule e="node" k="*" v="*" zoom-min="17">
+@@ -1128,6 +1121,9 @@
+ 
+ 		<!-- place -->
+ 		<rule e="node" k="place" v="*">
++			<rule e="node" k="place" v="hamlet" zoom-min="13">
++				<caption k="name" font-style="bold" font-size="13" fill="#000000" stroke="#ffffff" stroke-width="2.0" />
++			</rule>
+ 			<rule e="node" k="place" v="suburb|town|village" zoom-min="12">
+ 				<caption k="name" font-style="bold" font-size="15" fill="#000000" stroke="#ffffff" stroke-width="2.0" />
+ 			</rule>
+@@ -1146,10 +1142,10 @@
+ 		<!-- railway -->
+ 		<rule e="node" k="railway" v="*">
+ 			<rule e="node" k="railway" v="crossing" zoom-min="16">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/railway-crossing-small.png" />
++				<symbol src="jar:symbols/railway-crossing-small.png" />
+ 			</rule>
+ 			<rule e="node" k="railway" v="level_crossing" zoom-min="16">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/railway-crossing.png" />
++				<symbol src="jar:symbols/railway-crossing.png" />
+ 			</rule>
+ 			<rule e="node" k="railway" v="station" zoom-min="14">
+ 				<circle r="6" fill="#ec2d2d" stroke="#606060" stroke-width="1.5" />
+@@ -1165,13 +1161,13 @@
+ 		<!-- shop -->
+ 		<rule e="node" k="shop" v="*">
+ 			<rule e="node" k="shop" v="bakery" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/bakery.png" />
++				<symbol src="jar:symbols/bakery.png" />
+ 			</rule>
+ 			<rule e="node" k="shop" v="florist" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/florist.png" />
++				<symbol src="jar:symbols/florist.png" />
+ 			</rule>
+ 			<rule e="node" k="shop" v="supermarket|organic" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/supermarket.png" />
++				<symbol src="jar:symbols/supermarket.png" />
+ 			</rule>
+ 
+ 			<rule e="node" k="*" v="*" zoom-min="17">
+@@ -1183,19 +1179,19 @@
+ 		<!-- tourism -->
+ 		<rule e="node" k="tourism" v="*">
+ 			<rule e="node" k="tourism" v="camp_site" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/campSite.png" />
++				<symbol src="jar:symbols/campSite.png" />
+ 			</rule>
+ 			<rule e="node" k="tourism" v="hostel" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/hostel.png" />
++				<symbol src="jar:symbols/hostel.png" />
+ 			</rule>
+ 			<rule e="node" k="tourism" v="hotel" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/hotel.png" />
++				<symbol src="jar:symbols/hotel.png" />
+ 			</rule>
+ 			<rule e="node" k="tourism" v="information" zoom-min="17">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/information.png" />
++				<symbol src="jar:symbols/information.png" />
+ 			</rule>
+ 			<rule e="node" k="tourism" v="viewpoint" zoom-min="15">
+-				<symbol src="jar:/org/mapsforge/android/maps/rendertheme/osmarender/symbols/viewpoint.png" />
++				<symbol src="jar:symbols/viewpoint.png" />
+ 			</rule>
+ 
+ 			<rule e="node" k="*" v="*" zoom-min="17">
+Index: src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Line.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Line.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Line.java	(Arbeitskopie)
+@@ -44,11 +44,14 @@
+ 	 *            the attributes of the XML element.
+ 	 * @param level
+ 	 *            the drawing level of this instruction.
++	 * @param relativePathPrefix
++	 *            the prefix for relative resource paths.
+ 	 * @return a new Line with the given rendering attributes.
+ 	 * @throws IOException
+ 	 *             if an I/O error occurs while reading a resource.
+ 	 */
+-	public static Line create(String elementName, Attributes attributes, int level) throws IOException {
++	public static Line create(String elementName, Attributes attributes, int level, String relativePathPrefix)
++			throws IOException {
+ 		String src = null;
+ 		int stroke = Color.BLACK;
+ 		float strokeWidth = 0;
+@@ -75,7 +78,7 @@
+ 		}
+ 
+ 		validate(strokeWidth);
+-		return new Line(src, stroke, strokeWidth, strokeDasharray, strokeLinecap, level);
++		return new Line(relativePathPrefix, src, stroke, strokeWidth, strokeDasharray, strokeLinecap, level);
+ 	}
+ 
+ 	private static void validate(float strokeWidth) {
+@@ -97,11 +100,11 @@
+ 	private final Paint paint;
+ 	private final float strokeWidth;
+ 
+-	private Line(String src, int stroke, float strokeWidth, float[] strokeDasharray, Cap strokeLinecap, int level)
+-			throws IOException {
++	private Line(String relativePathPrefix, String src, int stroke, float strokeWidth, float[] strokeDasharray,
++			Cap strokeLinecap, int level) throws IOException {
+ 		super();
+ 
+-		Shader shader = BitmapUtils.createBitmapShader(src);
++		Shader shader = BitmapUtils.createBitmapShader(relativePathPrefix, src);
+ 
+ 		this.paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+ 		this.paint.setShader(shader);
+Index: src/test/resources/test_render_theme.xml
+===================================================================
+--- src/test/resources/test_render_theme.xml	(Revision 2013)
++++ src/test/resources/test_render_theme.xml	(Arbeitskopie)
+@@ -1,16 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<rendertheme xmlns="http://mapsforge.org/renderTheme" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-	version="1" map-background="#aabbcc">
+-
+-	<rule e="way" k="*" v="*">
+-		<rule e="way" k="key1" v="value1" zoom-max="15">
+-			<area fill="#001122" />
+-		</rule>
+-
+-		<line stroke="#998877" stroke-width="0.123" />
+-	</rule>
+-
+-	<rule e="node" k="key2" v="value2" zoom-min="16">
+-		<caption k="name" font-style="bold" font-size="10" fill="#223344" stroke-width="4.321" />
+-	</rule>
+-</rendertheme>
+\ No newline at end of file
+Index: src/test/java/org/mapsforge/android/maps/rendertheme/RenderThemeHandlerTest.java
+===================================================================
+--- src/test/java/org/mapsforge/android/maps/rendertheme/RenderThemeHandlerTest.java	(Revision 2013)
++++ src/test/java/org/mapsforge/android/maps/rendertheme/RenderThemeHandlerTest.java	(Arbeitskopie)
+@@ -1,58 +0,0 @@
+-/*
+- * Copyright 2010, 2011, 2012 mapsforge.org
+- *
+- * This program is free software: you can redistribute it and/or modify it under the
+- * terms of the GNU Lesser General Public License as published by the Free Software
+- * Foundation, either version 3 of the License, or (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+- * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+- *
+- * You should have received a copy of the GNU Lesser General Public License along with
+- * this program. If not, see <http://www.gnu.org/licenses/>.
+- */
+-package org.mapsforge.android.maps.rendertheme;
+-
+-import java.io.FileInputStream;
+-import java.io.IOException;
+-import java.io.InputStream;
+-
+-import javax.xml.parsers.ParserConfigurationException;
+-
+-import junit.framework.Assert;
+-
+-import org.junit.Ignore;
+-import org.junit.Test;
+-import org.xml.sax.SAXException;
+-
+-/**
+- * Tests the {@link RenderThemeHandler} class.
+- */
+-public class RenderThemeHandlerTest {
+-	/**
+-	 * Tests the {@link RenderThemeHandler#getRenderTheme} method.
+-	 * 
+-	 * @throws SAXException
+-	 *             see {@link RenderThemeHandler#getRenderTheme}
+-	 * @throws ParserConfigurationException
+-	 *             see {@link RenderThemeHandler#getRenderTheme}
+-	 * @throws IOException
+-	 *             see {@link RenderThemeHandler#getRenderTheme}
+-	 */
+-	@Ignore
+-	@Test
+-	public void getRenderThemeTest() throws SAXException, ParserConfigurationException, IOException {
+-		InputStream inputStream = null;
+-		try {
+-			inputStream = new FileInputStream("src/test/resources/test_render_theme.xml");
+-			RenderTheme renderTheme = RenderThemeHandler.getRenderTheme(inputStream);
+-			Assert.assertEquals(1, renderTheme.getMapBackground());
+-			// TODO extend test
+-		} finally {
+-			if (inputStream != null) {
+-				inputStream.close();
+-			}
+-		}
+-	}
+-}
+Index: src/test/java/org/mapsforge/android/maps/mapgenerator/tiledownloader/.directory
+===================================================================
+--- src/test/java/org/mapsforge/android/maps/mapgenerator/tiledownloader/.directory	(Revision 0)
++++ src/test/java/org/mapsforge/android/maps/mapgenerator/tiledownloader/.directory	(Revision 0)
+@@ -0,0 +1,5 @@
++[Dolphin]
++AdditionalInfoV2=Details_Size,Details_Date,CustomizedDetails
++Timestamp=2012,5,17,20,13,24
++Version=2
++ViewMode=1
+Index: src/main/java/org/mapsforge/android/maps/mapgenerator/databaserenderer/ExternalRenderTheme.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/mapgenerator/databaserenderer/ExternalRenderTheme.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/mapgenerator/databaserenderer/ExternalRenderTheme.java	(Arbeitskopie)
+@@ -75,6 +75,11 @@
+ 	}
+ 
+ 	@Override
++	public String getRelativePathPrefix() {
++		return this.renderThemeFile.getParent();
++	}
++
++	@Override
+ 	public InputStream getRenderThemeAsStream() throws FileNotFoundException {
+ 		return new FileInputStream(this.renderThemeFile);
+ 	}
+Index: src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/LineSymbol.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/LineSymbol.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/LineSymbol.java	(Arbeitskopie)
+@@ -33,11 +33,14 @@
+ 	 *            the name of the XML element.
+ 	 * @param attributes
+ 	 *            the attributes of the XML element.
++	 * @param relativePathPrefix
++	 *            the prefix for relative resource paths.
+ 	 * @return a new LineSymbol with the given rendering attributes.
+ 	 * @throws IOException
+ 	 *             if an I/O error occurs while reading a resource.
+ 	 */
+-	public static LineSymbol create(String elementName, Attributes attributes) throws IOException {
++	public static LineSymbol create(String elementName, Attributes attributes, String relativePathPrefix)
++			throws IOException {
+ 		String src = null;
+ 		boolean alignCenter = false;
+ 		boolean repeat = false;
+@@ -58,7 +61,7 @@
+ 		}
+ 
+ 		validate(elementName, src);
+-		return new LineSymbol(src, alignCenter, repeat);
++		return new LineSymbol(relativePathPrefix, src, alignCenter, repeat);
+ 	}
+ 
+ 	private static void validate(String elementName, String src) {
+@@ -71,10 +74,10 @@
+ 	private final Bitmap bitmap;
+ 	private final boolean repeat;
+ 
+-	private LineSymbol(String src, boolean alignCenter, boolean repeat) throws IOException {
++	private LineSymbol(String relativePathPrefix, String src, boolean alignCenter, boolean repeat) throws IOException {
+ 		super();
+ 
+-		this.bitmap = BitmapUtils.createBitmap(src);
++		this.bitmap = BitmapUtils.createBitmap(relativePathPrefix, src);
+ 		this.alignCenter = alignCenter;
+ 		this.repeat = repeat;
+ 	}
+
+Eigenschaftsänderungen: .
+___________________________________________________________________
+Hinzugefügt: svn:mergeinfo
+   Zusammengeführt /trunk/mapsforge-map:r1992
+
+Index: src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/BitmapUtils.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/BitmapUtils.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/BitmapUtils.java	(Arbeitskopie)
+@@ -29,42 +29,57 @@
+ 	private static final String PREFIX_FILE = "file:";
+ 	private static final String PREFIX_JAR = "jar:";
+ 
+-	private static InputStream createInputStream(String src) throws FileNotFoundException {
++	private static InputStream createInputStream(String relativePathPrefix, String src) throws FileNotFoundException {
+ 		if (src.startsWith(PREFIX_JAR)) {
+-			String name = src.substring(PREFIX_JAR.length());
+-			InputStream inputStream = BitmapUtils.class.getResourceAsStream(name);
++			String absoluteName = getAbsoluteName(relativePathPrefix, src.substring(PREFIX_JAR.length()));
++			InputStream inputStream = BitmapUtils.class.getResourceAsStream(absoluteName);
+ 			if (inputStream == null) {
+-				throw new FileNotFoundException("resource not found: " + src);
++				throw new FileNotFoundException("resource not found: " + absoluteName);
+ 			}
+ 			return inputStream;
+ 		} else if (src.startsWith(PREFIX_FILE)) {
+-			File file = new File(src.substring(PREFIX_FILE.length()));
++			File file = getFile(relativePathPrefix, src.substring(PREFIX_FILE.length()));
+ 			if (!file.exists()) {
+-				throw new IllegalArgumentException("file does not exist: " + src);
++				throw new IllegalArgumentException("file does not exist: " + file);
+ 			} else if (!file.isFile()) {
+-				throw new IllegalArgumentException("not a file: " + src);
++				throw new IllegalArgumentException("not a file: " + file);
+ 			} else if (!file.canRead()) {
+-				throw new IllegalArgumentException("cannot read file: " + src);
++				throw new IllegalArgumentException("cannot read file: " + file);
+ 			}
+ 			return new FileInputStream(file);
+ 		}
++
+ 		throw new IllegalArgumentException("invalid bitmap source: " + src);
+ 	}
+ 
+-	static Bitmap createBitmap(String src) throws IOException {
++	private static String getAbsoluteName(String relativePathPrefix, String name) {
++		if (name.charAt(0) == '/') {
++			return name;
++		}
++		return relativePathPrefix + name;
++	}
++
++	private static File getFile(String parentPath, String pathName) {
++		if (pathName.charAt(0) == File.separatorChar) {
++			return new File(pathName);
++		}
++		return new File(parentPath, pathName);
++	}
++
++	static Bitmap createBitmap(String relativePathPrefix, String src) throws IOException {
+ 		if (src == null || src.length() == 0) {
+ 			// no image source defined
+ 			return null;
+ 		}
+ 
+-		InputStream inputStream = createInputStream(src);
++		InputStream inputStream = createInputStream(relativePathPrefix, src);
+ 		Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+ 		inputStream.close();
+ 		return bitmap;
+ 	}
+ 
+-	static BitmapShader createBitmapShader(String src) throws IOException {
+-		Bitmap bitmap = BitmapUtils.createBitmap(src);
++	static BitmapShader createBitmapShader(String relativePathPrefix, String src) throws IOException {
++		Bitmap bitmap = BitmapUtils.createBitmap(relativePathPrefix, src);
+ 		if (bitmap == null) {
+ 			return null;
+ 		}
+Index: src/main/java/org/mapsforge/android/maps/rendertheme/RenderThemeHandler.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/rendertheme/RenderThemeHandler.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/rendertheme/RenderThemeHandler.java	(Arbeitskopie)
+@@ -23,6 +23,7 @@
+ import javax.xml.parsers.ParserConfigurationException;
+ import javax.xml.parsers.SAXParserFactory;
+ 
++import org.mapsforge.android.maps.mapgenerator.JobTheme;
+ import org.mapsforge.android.maps.rendertheme.renderinstruction.Area;
+ import org.mapsforge.android.maps.rendertheme.renderinstruction.Caption;
+ import org.mapsforge.android.maps.rendertheme.renderinstruction.Circle;
+@@ -30,6 +31,7 @@
+ import org.mapsforge.android.maps.rendertheme.renderinstruction.LineSymbol;
+ import org.mapsforge.android.maps.rendertheme.renderinstruction.PathText;
+ import org.mapsforge.android.maps.rendertheme.renderinstruction.Symbol;
++import org.mapsforge.core.IOUtils;
+ import org.xml.sax.Attributes;
+ import org.xml.sax.InputSource;
+ import org.xml.sax.SAXException;
+@@ -40,7 +42,7 @@
+ /**
+  * SAX2 handler to parse XML render theme files.
+  */
+-public class RenderThemeHandler extends DefaultHandler {
++public final class RenderThemeHandler extends DefaultHandler {
+ 	private static enum Element {
+ 		RENDER_THEME, RENDERING_INSTRUCTION, RULE;
+ 	}
+@@ -51,8 +53,8 @@
+ 	private static final String UNEXPECTED_ELEMENT = "unexpected element: ";
+ 
+ 	/**
+-	 * @param inputStream
+-	 *            an input stream containing valid render theme XML data.
++	 * @param jobTheme
++	 *            the JobTheme to create a RenderTheme from.
+ 	 * @return a new RenderTheme which is created by parsing the XML data from the input stream.
+ 	 * @throws SAXException
+ 	 *             if an error occurs while parsing the render theme XML.
+@@ -61,13 +63,19 @@
+ 	 * @throws IOException
+ 	 *             if an I/O error occurs while reading from the input stream.
+ 	 */
+-	public static RenderTheme getRenderTheme(InputStream inputStream) throws SAXException,
+-			ParserConfigurationException, IOException {
+-		RenderThemeHandler renderThemeHandler = new RenderThemeHandler();
++	public static RenderTheme getRenderTheme(JobTheme jobTheme) throws SAXException, ParserConfigurationException,
++			IOException {
++		RenderThemeHandler renderThemeHandler = new RenderThemeHandler(jobTheme.getRelativePathPrefix());
+ 		XMLReader xmlReader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
+ 		xmlReader.setContentHandler(renderThemeHandler);
+-		xmlReader.parse(new InputSource(inputStream));
+-		return renderThemeHandler.renderTheme;
++		InputStream inputStream = null;
++		try {
++			inputStream = jobTheme.getRenderThemeAsStream();
++			xmlReader.parse(new InputSource(inputStream));
++			return renderThemeHandler.renderTheme;
++		} finally {
++			IOUtils.closeQuietly(inputStream);
++		}
+ 	}
+ 
+ 	/**
+@@ -98,9 +106,15 @@
+ 	private Rule currentRule;
+ 	private final Stack<Element> elementStack = new Stack<Element>();
+ 	private int level;
++	private final String relativePathPrefix;
+ 	private RenderTheme renderTheme;
+ 	private final Stack<Rule> ruleStack = new Stack<Rule>();
+ 
++	private RenderThemeHandler(String relativePathPrefix) {
++		super();
++		this.relativePathPrefix = relativePathPrefix;
++	}
++
+ 	@Override
+ 	public void endDocument() {
+ 		if (this.renderTheme == null) {
+@@ -150,7 +164,7 @@
+ 
+ 			else if ("area".equals(localName)) {
+ 				checkState(localName, Element.RENDERING_INSTRUCTION);
+-				Area area = Area.create(localName, attributes, this.level++);
++				Area area = Area.create(localName, attributes, this.level++, this.relativePathPrefix);
+ 				this.ruleStack.peek().addRenderingInstruction(area);
+ 			}
+ 
+@@ -168,13 +182,13 @@
+ 
+ 			else if ("line".equals(localName)) {
+ 				checkState(localName, Element.RENDERING_INSTRUCTION);
+-				Line line = Line.create(localName, attributes, this.level++);
++				Line line = Line.create(localName, attributes, this.level++, this.relativePathPrefix);
+ 				this.currentRule.addRenderingInstruction(line);
+ 			}
+ 
+ 			else if ("lineSymbol".equals(localName)) {
+ 				checkState(localName, Element.RENDERING_INSTRUCTION);
+-				LineSymbol lineSymbol = LineSymbol.create(localName, attributes);
++				LineSymbol lineSymbol = LineSymbol.create(localName, attributes, this.relativePathPrefix);
+ 				this.currentRule.addRenderingInstruction(lineSymbol);
+ 			}
+ 
+@@ -186,7 +200,7 @@
+ 
+ 			else if ("symbol".equals(localName)) {
+ 				checkState(localName, Element.RENDERING_INSTRUCTION);
+-				Symbol symbol = Symbol.create(localName, attributes);
++				Symbol symbol = Symbol.create(localName, attributes, this.relativePathPrefix);
+ 				this.currentRule.addRenderingInstruction(symbol);
+ 			}
+ 
+Index: src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Area.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Area.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/rendertheme/renderinstruction/Area.java	(Arbeitskopie)
+@@ -39,11 +39,14 @@
+ 	 *            the attributes of the XML element.
+ 	 * @param level
+ 	 *            the drawing level of this instruction.
++	 * @param relativePathPrefix
++	 *            the prefix for relative resource paths.
+ 	 * @return a new Area with the given rendering attributes.
+ 	 * @throws IOException
+ 	 *             if an I/O error occurs while reading a resource.
+ 	 */
+-	public static Area create(String elementName, Attributes attributes, int level) throws IOException {
++	public static Area create(String elementName, Attributes attributes, int level, String relativePathPrefix)
++			throws IOException {
+ 		String src = null;
+ 		int fill = Color.BLACK;
+ 		int stroke = Color.TRANSPARENT;
+@@ -67,7 +70,7 @@
+ 		}
+ 
+ 		validate(strokeWidth);
+-		return new Area(src, fill, stroke, strokeWidth, level);
++		return new Area(relativePathPrefix, src, fill, stroke, strokeWidth, level);
+ 	}
+ 
+ 	private static void validate(float strokeWidth) {
+@@ -81,10 +84,11 @@
+ 	private final Paint outline;
+ 	private final float strokeWidth;
+ 
+-	private Area(String src, int fill, int stroke, float strokeWidth, int level) throws IOException {
++	private Area(String relativePathPrefix, String src, int fill, int stroke, float strokeWidth, int level)
++			throws IOException {
+ 		super();
+ 
+-		Shader shader = BitmapUtils.createBitmapShader(src);
++		Shader shader = BitmapUtils.createBitmapShader(relativePathPrefix, src);
+ 
+ 		if (fill == Color.TRANSPARENT) {
+ 			this.fill = null;
+Index: src/main/java/org/mapsforge/android/maps/mapgenerator/databaserenderer/DatabaseRenderer.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/mapgenerator/databaserenderer/DatabaseRenderer.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/mapgenerator/databaserenderer/DatabaseRenderer.java	(Arbeitskopie)
+@@ -15,7 +15,6 @@
+ package org.mapsforge.android.maps.mapgenerator.databaserenderer;
+ 
+ import java.io.IOException;
+-import java.io.InputStream;
+ import java.util.ArrayList;
+ import java.util.List;
+ import java.util.logging.Level;
+@@ -58,24 +57,14 @@
+ 	private static final byte ZOOM_MAX = 22;
+ 
+ 	private static RenderTheme getRenderTheme(JobTheme jobTheme) {
+-		InputStream inputStream = null;
+ 		try {
+-			inputStream = jobTheme.getRenderThemeAsStream();
+-			return RenderThemeHandler.getRenderTheme(inputStream);
++			return RenderThemeHandler.getRenderTheme(jobTheme);
+ 		} catch (ParserConfigurationException e) {
+ 			LOG.log(Level.SEVERE, null, e);
+ 		} catch (SAXException e) {
+ 			LOG.log(Level.SEVERE, null, e);
+ 		} catch (IOException e) {
+ 			LOG.log(Level.SEVERE, null, e);
+-		} finally {
+-			try {
+-				if (inputStream != null) {
+-					inputStream.close();
+-				}
+-			} catch (IOException e) {
+-				LOG.log(Level.SEVERE, null, e);
+-			}
+ 		}
+ 		return null;
+ 	}
+Index: src/main/java/org/mapsforge/android/maps/rendertheme/InternalRenderTheme.java
+===================================================================
+--- src/main/java/org/mapsforge/android/maps/rendertheme/InternalRenderTheme.java	(Revision 2013)
++++ src/main/java/org/mapsforge/android/maps/rendertheme/InternalRenderTheme.java	(Arbeitskopie)
+@@ -27,16 +27,23 @@
+ 	 * 
+ 	 * @see <a href="http://wiki.openstreetmap.org/wiki/Osmarender">Osmarender</a>
+ 	 */
+-	OSMARENDER("/org/mapsforge/android/maps/rendertheme/osmarender/osmarender.xml");
++	OSMARENDER("/org/mapsforge/android/maps/rendertheme/osmarender/", "osmarender.xml");
+ 
+-	private final String path;
++	private final String absolutePath;
++	private final String file;
+ 
+-	private InternalRenderTheme(String path) {
+-		this.path = path;
++	private InternalRenderTheme(String absolutePath, String file) {
++		this.absolutePath = absolutePath;
++		this.file = file;
+ 	}
+ 
+ 	@Override
++	public String getRelativePathPrefix() {
++		return this.absolutePath;
++	}
++
++	@Override
+ 	public InputStream getRenderThemeAsStream() {
+-		return Thread.currentThread().getClass().getResourceAsStream(this.path);
++		return Thread.currentThread().getClass().getResourceAsStream(this.absolutePath + this.file);
+ 	}
+ }
