@@ -122,7 +122,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     }
 
     private void showInBrowser() {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode())));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com//seek/cache_details.aspx?wp=" + cache.getGeocode())));
     }
 
     protected abstract void navigateTo();
