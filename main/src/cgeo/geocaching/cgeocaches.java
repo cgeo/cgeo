@@ -271,7 +271,9 @@ public class cgeocaches extends AbstractListActivity {
 
     private void replaceCacheListFromSearch() {
         cacheList.clear();
-        cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+        if (search!=null) {
+            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+        }
     }
 
     protected void updateTitle() {
