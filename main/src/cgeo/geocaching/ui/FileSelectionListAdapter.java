@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgSelectMapfile;
+import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -15,13 +15,13 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.List;
 
-public class MapfileListAdapter extends ArrayAdapter<File> {
+public class FileSelectionListAdapter extends ArrayAdapter<File> {
 
-    private cgSelectMapfile parentView;
+    private IFileSelectionView parentView;
     private LayoutInflater inflater;
 
-    public MapfileListAdapter(cgSelectMapfile parentIn, List<File> listIn) {
-        super(parentIn, 0, listIn);
+    public FileSelectionListAdapter(IFileSelectionView parentIn, List<File> listIn) {
+        super(parentIn.getContext(), 0, listIn);
 
         parentView = parentIn;
     }
@@ -54,7 +54,7 @@ public class MapfileListAdapter extends ArrayAdapter<File> {
             holder = (ViewHolder) v.getTag();
         }
 
-        File current = new File(parentView.getCurrentMapfile());
+        File current = new File(parentView.getCurrentFile());
 
         if (file.equals(current)) {
             holder.filename.setTypeface(holder.filename.getTypeface(), Typeface.BOLD);
@@ -81,7 +81,7 @@ public class MapfileListAdapter extends ArrayAdapter<File> {
         // tap on item
         @Override
         public void onClick(View view) {
-            parentView.setMapfile(file.toString());
+            parentView.setCurrentFile(file.toString());
             parentView.close();
         }
     }

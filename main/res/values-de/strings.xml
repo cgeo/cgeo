@@ -223,8 +223,9 @@
   <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
   <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte in der Version 0.3.0.\nOffline Karte ist nicht verfügbar.</string>
   <string name="warn_deprecated_mapfile">Es wird eine veraltete Offline-Karte v0.2.4 verwendet.\nBitte zukünftig Offline-Karten in der Version 0.3.0 verwenden.\nDer Support für die alte Version wird im nächsten Release eingestellt.</string>
-    <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline Karte ist nicht verfügbar.</string>
-
+  <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline Karte ist nicht verfügbar.</string>
+  <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
+  
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
@@ -423,6 +424,7 @@
   <string name="init_mapsources_description">Hier kann die Quelle der benutzen Karte gewählt werden. Alternativ zu Google Maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_select_themefile">…</string>
   <string name="init_select_gpx_exportdir">…</string>
   <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
@@ -451,7 +453,8 @@
   <string name="init_dbmove_running">Verschiebe Datenbank</string>
   <string name="init_dbmove_success">Die Datenbank wurde erfolgreich verschoben.</string>
   <string name="init_dbmove_failed">Fehler beim Verschieben der Datenbank.</string>
-
+  <string name="init_rendertheme_enable">Eigenes Karten-Theme verwenden</string>
+  
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
@@ -638,6 +641,9 @@
   <!-- map file select -->
   <string name="map_file_select_title">Kartendatei wählen</string>
 
+  <!-- theme file select -->
+  <string name="theme_file_select_title">Karten-Theme wählen</string>
+
   <!--  import -->
   <string name="import_title">Importiere…</string>
   <string name="web_import_title">Aus dem Internet importieren</string>
@@ -691,10 +697,13 @@
   <string name="map_map">Karte</string>
   <string name="map_live">Live-Karte</string>
   <string name="map_view_map">Karte</string>
+  <string name="map_modes">Karteneinstellungen</string>
   <string name="map_trail_show">Spur einblenden</string>
   <string name="map_trail_hide">Spur ausblenden</string>
   <string name="map_circles_show">Kreise anzeigen</string>
   <string name="map_circles_hide">Kreise verbergen</string>
+  <string name="map_theme_default">Eingebaute Kartendarstellung</string>
+  <string name="map_theme_custom">Benutzerdefinierte Kartendarstellung</string>
   <string name="map_live_enable">Aktualisierung einschalten</string>
   <string name="map_live_disable">Aktualisierung ausschalten</string>
   <string name="map_static_title">Statische Karte</string>

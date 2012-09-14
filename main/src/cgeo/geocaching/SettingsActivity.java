@@ -59,6 +59,7 @@ public class SettingsActivity extends AbstractActivity {
     private final static int SELECT_MAPFILE_REQUEST = 1;
     private final static int SELECT_GPX_EXPORT_REQUEST = 2;
     private final static int SELECT_GPX_IMPORT_REQUEST = 3;
+    private final static int SELECT_THEMEFILE_REQUEST = 4;
 
 
     private ProgressDialog loginDialog = null;
@@ -558,6 +559,7 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        // Theme file settings
         final CheckBox renderThemeButton = (CheckBox) findViewById(R.id.rendertheme);
         renderThemeButton.setChecked(Settings.isCustomRenderTheme());
         renderThemeButton.setOnClickListener(new View.OnClickListener() {
@@ -565,6 +567,18 @@ public class SettingsActivity extends AbstractActivity {
             @Override
             public void onClick(View v) {
                 Settings.setCustomRenderTheme(renderThemeButton.isChecked());
+            }
+        });
+
+        initThemefileEdittext(false);
+
+        Button selectThemefile = (Button) findViewById(R.id.select_themefile);
+        selectThemefile.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent selectIntent = new Intent(SettingsActivity.this, cgSelectThemefile.class);
+                startActivityForResult(selectIntent, SELECT_THEMEFILE_REQUEST);
             }
         });
 
@@ -727,6 +741,14 @@ public class SettingsActivity extends AbstractActivity {
         mfmapFileEdit.setText(Settings.getMapFile());
         if (setFocus) {
             mfmapFileEdit.requestFocus();
+        }
+    }
+
+    private void initThemefileEdittext(boolean setFocus) {
+        EditText themeFileEdit = (EditText) findViewById(R.id.themefile);
+        themeFileEdit.setText(Settings.getCustomRenderThemePath());
+        if (setFocus) {
+            themeFileEdit.requestFocus();
         }
     }
 
@@ -954,6 +976,14 @@ public class SettingsActivity extends AbstractActivity {
                     Settings.setGpxImportDir(directory);
                 }
             });
+        }
+        if (requestCode == SELECT_THEMEFILE_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                if (data.hasExtra("themefile")) {
+                    Settings.setCustomRenderThemePath(data.getStringExtra("themefile"));
+                }
+            }
+            initThemefileEdittext(true);
         }
     }
 

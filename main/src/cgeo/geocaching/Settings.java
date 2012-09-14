@@ -1223,7 +1223,7 @@ public final class Settings {
     }
 
     public static String getCustomRenderThemePath() {
-        return sharedPrefs.getString(KEY_RENDER_THEME_PATH, "/sdcard/.cgeo/mapthemes/theme.xml");
+        return sharedPrefs.getString(KEY_RENDER_THEME_PATH, "/sdcard/mfmaps/_themes/theme.xml");
     }
 
     public static void setCustomRenderThemePath(final String customRenderTheme) {
