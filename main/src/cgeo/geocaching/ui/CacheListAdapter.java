@@ -386,6 +386,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         } else if (cache.isLogOffline()) {
             holder.logStatusMark.setImageResource(R.drawable.mark_orange);
             holder.logStatusMark.setVisibility(View.VISIBLE);
+        } else if (cache.isOwn()) {
+            holder.logStatusMark.setImageResource(R.drawable.mark_yellow);
+            holder.logStatusMark.setVisibility(View.VISIBLE);
         } else {
             holder.logStatusMark.setVisibility(View.GONE);
         }
