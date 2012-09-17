@@ -1086,6 +1086,9 @@
     · Improvement for GPX export operations\n
     · Readability improvement for cache description with dark text when using black theme\n
     · Store for offline on live map now always available for basic members\n
+    · Live map now stays live after display rotation\n  
+    · Open in browser improved to allow setting a default browser without losing the option to open coord.info URLs with c:geo\n
+    · Improve offline stability\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
