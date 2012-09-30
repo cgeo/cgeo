@@ -2175,12 +2175,8 @@ public class CacheDetailActivity extends AbstractActivity {
                     holder.count.setVisibility(View.VISIBLE);
                     if (log.found == -1) {
                         holder.count.setVisibility(View.GONE);
-                    } else if (log.found == 0) {
-                        holder.count.setText(res.getString(R.string.cache_count_no));
-                    } else if (log.found == 1) {
-                        holder.count.setText(res.getString(R.string.cache_count_one));
-                    } else {
-                        holder.count.setText(log.found + " " + res.getString(R.string.cache_count_more));
+                    } else  {
+                        holder.count.setText(res.getQuantityText(R.plurals.cache_counts,log.found));
                     }
 
                     // logtext, avoid parsing HTML if not necessary

@@ -266,8 +266,10 @@
   <string name="caches_more_caches_currently">nu</string>
   <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
   <string name="caches_eta_ltm">mindre än en minut</string>
-  <string name="caches_eta_mins"> minuter</string>
-  <string name="caches_eta_min"> minut</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minut</item>
+    <item quantity="other">minuter</item>
+  </plurals>
   <string name="caches_store_offline">Spara för Offline</string>
   <string name="caches_store_selected">Spara valda</string>
   <string name="caches_history">Senast hittade cacher</string>
@@ -485,9 +487,11 @@
   <string name="auth_dialog_completed">c:geo är nu godkänd att posta på Twitter.</string>
 
   <!-- cache -->
-  <string name="cache_count_no">Ingen cache</string>
-  <string name="cache_count_one">En cache</string>
-  <string name="cache_count_more">cacher</string>
+  <plurals name="cache_counts">
+    <item quantity="zero">Ingen cache</item>
+    <item quantity="one">En cache</item>
+    <item quantity="other">cacher</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Uppdatera</string>
   <string name="cache_offline_drop">Radera</string>
