@@ -410,13 +410,6 @@ public class cgeotrackable extends AbstractActivity {
             geocode = geocodeIn;
             guid = guidIn;
             id = idIn;
-
-            if (geocode == null && guid == null && id == null) {
-                showToast(res.getString(R.string.err_tb_forgot));
-
-                stop();
-                finish();
-            }
         }
 
         @Override
