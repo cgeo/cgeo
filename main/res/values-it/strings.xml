@@ -266,8 +266,10 @@
   <string name="caches_more_caches_currently">attualmente</string>
   <string name="caches_downloading">Download cache in corso…\nETA: </string>
   <string name="caches_eta_ltm">Meno di un minuto</string>
-  <string name="caches_eta_mins"> minuti</string>
-  <string name="caches_eta_min"> minuto</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuto</item>
+    <item quantity="other">minuti</item>
+  </plurals>
   <string name="caches_store_offline">Salva per Offline</string>
   <string name="caches_store_selected">Salva selezionati</string>
   <string name="caches_history">Cronologia</string>
@@ -467,9 +469,11 @@
   <string name="auth_dialog_completed">c:geo è ora autorizzato ad inviare a Twitter.</string>
 
   <!-- cache -->
-  <string name="cache_count_no">Nessun cache</string>
-  <string name="cache_count_one">Un cache</string>
-  <string name="cache_count_more">Cache</string>
+  <plurals name="cache_counts">
+    <item quantity="zero">Nessun cache</item>
+    <item quantity="one">Un cache</item>
+    <item quantity="other">Cache</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aggiorna</string>
   <string name="cache_offline_drop">Elimina</string>

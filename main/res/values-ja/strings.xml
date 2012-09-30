@@ -267,8 +267,10 @@
   <string name="caches_more_caches_currently">現在</string>
   <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
   <string name="caches_eta_ltm">1分以内</string>
-  <string name="caches_eta_mins"> 分</string>
-  <string name="caches_eta_min"> 分</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">分</item>
+    <item quantity="other">分</item>
+  </plurals>
   <string name="caches_store_offline">オフライン用に保存</string>
   <string name="caches_store_selected">選択したキャッシュを保存</string>
   <string name="caches_history">履歴</string>
@@ -493,9 +495,11 @@
   <string name="auth_dialog_completed">c:geoはTwitterにポストするための認証を受けました。</string>
 
   <!-- cache -->
-  <string name="cache_count_no">キャッシュがありません</string>
-  <string name="cache_count_one">1つのキャッシュ</string>
-  <string name="cache_count_more">個のキャッシュ</string>
+  <plurals name="cache_counts">
+    <item quantity="zero">キャッシュがありません</item>
+    <item quantity="one">1つのキャッシュ</item>
+    <item quantity="other">個のキャッシュ</item>
+  </plurals>
   <string name="cache_offline">オフライン</string>
   <string name="cache_offline_refresh">更新</string>
   <string name="cache_offline_drop">削除</string>

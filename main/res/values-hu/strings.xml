@@ -242,8 +242,9 @@
   <string name="caches_more_caches_loading">Ládák betöltése…</string>
   <string name="caches_downloading">Ládák letöltése…\nETA: </string>
   <string name="caches_eta_ltm">Kevesebb mint egy perc</string>
-  <string name="caches_eta_mins"> perc</string>
-  <string name="caches_eta_min"> perc</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="other">perc</item>
+  </plurals>
   <string name="caches_store_offline">Offlineba mentés</string>
   <string name="caches_store_selected">Kijelöltek mentése</string>
   <string name="caches_history">Előzmények</string>
@@ -414,10 +415,11 @@
   <string name="auth_dialog_completed">A c:geo engedélyt kapott, hogy bejegyzéseket küldjön a Twitterre.</string>
 
   <!-- cache -->
-  <string name="cache_count_no">Nincs megtalálás</string>
-  <string name="cache_count_one">Megtalálás</string>
-  <string name="cache_count_more">Megtalálások
-</string>
+  <plurals name="cache_counts">
+    <item quantity="zero">Nincs megtalálás</item>
+    <item quantity="one">Megtalálás</item>
+    <item quantity="other">Megtalálások</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Frissítés</string>
   <string name="cache_offline_drop">Törlés</string>
