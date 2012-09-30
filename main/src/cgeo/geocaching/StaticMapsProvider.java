@@ -31,8 +31,8 @@ public class StaticMapsProvider {
     private static final String WAYPOINT_PREFIX = "wp";
     private static final String MAP_FILENAME_PREFIX = "map_";
     private static final String MARKERS_URL = "http://cgeo.carnero.cc/_markers/";
-    /** In my tests the "no image available" image had 5470 bytes, while "street only" maps had at least 20000 bytes */
-    private static final int MIN_MAP_IMAGE_BYTES = 6000;
+    /** We assume there is no real usable image with less than 1k */
+    private static final int MIN_MAP_IMAGE_BYTES = 1000;
     /** ThreadPool restricting this to 1 Thread. **/
     private static final BlockingThreadPool pool = new BlockingThreadPool(1, Thread.MIN_PRIORITY);
 
@@ -232,7 +232,7 @@ public class StaticMapsProvider {
 
     /**
      * Check if at least one map file exists for the given cache.
-     * 
+     *
      * @param cache
      * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
      */
