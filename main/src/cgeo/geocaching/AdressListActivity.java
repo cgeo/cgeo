@@ -5,6 +5,7 @@ import cgeo.geocaching.ui.AddressListAdapter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.location.Address;
@@ -49,7 +50,13 @@ public class AdressListActivity extends AbstractListActivity {
                 try {
                     return geocoder.getFromLocationName(keyword, 20);
                 } catch (Exception e) {
-                    Log.e("AdressListActivity.doInBackground", e);
+                    // non Google devices come without the geocoder
+                    if (StringUtils.containsIgnoreCase(e.getMessage(), "Service not Available")) {
+                        Log.i("No geocoder available");
+                    }
+                    else {
+                        Log.e("AdressListActivity.doInBackground", e);
+                    }
                     return null;
                 }
             }
@@ -62,8 +69,8 @@ public class AdressListActivity extends AbstractListActivity {
                         adapter.add(address); // don't use addAll, it's only available with API >= 11
                     }
                 } else {
-                    showToast(res.getString(R.string.err_search_address_no_match));
                     finish();
+                    cgeocaches.startActivityAddress(AdressListActivity.this, null, keyword);
                 }
             }
 

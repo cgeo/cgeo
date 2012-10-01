@@ -862,6 +862,34 @@ public abstract class GCParser {
         return searchByAny(cacheType, false, showCaptcha, params);
     }
 
+    public static SearchResult searchByAddress(final String address, final CacheType cacheType, final boolean showCaptcha) {
+        if (StringUtils.isBlank(address)) {
+            Log.e("GCParser.searchByAddress: No address given");
+            return null;
+        }
+        try {
+            JSONObject response = Network.requestJSON("http://www.geocaching.com/api/geocode", new Parameters("q", address));
+            if (response == null) {
+                return null;
+            }
+            if (!StringUtils.equalsIgnoreCase(response.getString("status"), "success")) {
+                return null;
+            }
+            if (!response.has("data")) {
+                return null;
+            }
+            JSONObject data = response.getJSONObject("data");
+            if (data == null) {
+                return null;
+            }
+            return searchByCoords(new Geopoint(data.getDouble("lat"), data.getDouble("lng")), cacheType, showCaptcha);
+        } catch (JSONException e) {
+            Log.w("GCParser.searchByAddress", e);
+        }
+
+        return null;
+    }
+
     public static cgTrackable searchTrackable(final String geocode, final String guid, final String id) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
             Log.w("GCParser.searchTrackable: No geocode nor guid nor id given");

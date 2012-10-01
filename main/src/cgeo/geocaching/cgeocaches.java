@@ -534,8 +534,14 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 showFooterLoadingCaches();
 
-                thread = new LoadByCoordsThread(coords);
+                if (coords != null) {
+                    thread = new LoadByCoordsThread(coords);
+                }
+                else {
+                    thread = new LoadByAddressThread(address);
+                }
                 thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
+                thread.start();
                 break;
             case USERNAME:
                 title = username;
@@ -1349,6 +1355,21 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void runSearch() {
             search = GCParser.searchByOwner(username, Settings.getCacheType(), Settings.isShowCaptcha());
+            replaceCacheListFromSearch();
+        }
+    }
+
+    private class LoadByAddressThread extends AbstractSearchThread {
+        final private String address;
+
+        public LoadByAddressThread(final String address) {
+            super(loadCachesHandler);
+            this.address = address;
+        }
+
+        @Override
+        public void runSearch() {
+            search = GCParser.searchByAddress(address, Settings.getCacheType(), Settings.isShowCaptcha());
             replaceCacheListFromSearch();
         }
     }
