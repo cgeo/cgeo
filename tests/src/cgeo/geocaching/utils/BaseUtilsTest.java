@@ -5,6 +5,8 @@ import cgeo.geocaching.test.mock.MockedCache;
 
 import android.test.AndroidTestCase;
 
+import java.util.regex.Pattern;
+
 public class BaseUtilsTest extends AndroidTestCase {
     public static void testRegEx() {
         String page = MockedCache.readCachePage("GC2CJPF");
@@ -23,4 +25,9 @@ public class BaseUtilsTest extends AndroidTestCase {
         assertEquals("foo bar baz ", BaseUtils.replaceWhitespace("  foo\n\tbar   \r   baz  "));
     }
 
+    public static void testControlCharactersCleanup() {
+        Pattern patternAll = Pattern.compile("(.*)", Pattern.DOTALL);
+        assertEquals("some control characters removed", BaseUtils.getMatch("some" + "\u001C" + "control" + (char) 0x1D + "characters removed", patternAll, ""));
+        assertEquals("newline also removed", BaseUtils.getMatch("newline\nalso\nremoved", patternAll, ""));
+    }
 }

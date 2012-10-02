@@ -41,7 +41,7 @@ public final class BaseUtils {
             }
             if (null != result) {
                 Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(result);
-                result = remover.replaceAll("");
+                result = remover.replaceAll(" ");
 
                 return trim ? new String(result).trim() : new String(result);
                 // Java copies the whole page String, when matching with regular expressions
