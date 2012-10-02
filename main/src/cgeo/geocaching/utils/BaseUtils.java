@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
  */
 public final class BaseUtils {
 
+    private static final Pattern PATTERN_REMOVE_NONPRINTABLE = Pattern.compile("\\p{Cntrl}");
+
     /**
      * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
      *
@@ -26,7 +28,7 @@ public final class BaseUtils {
      *            Value to return if the pattern is not found
      * @param last
      *            Find the last occurring value
-     * @return defaultValue or the n-th group if the pattern matches (trimed if wanted)
+     * @return defaultValue or the n-th group if the pattern matches (trimmed if wanted)
      */
     public static String getMatch(final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, final boolean last) {
         if (data != null) {
@@ -38,6 +40,9 @@ public final class BaseUtils {
                 result = matcher.group(group);
             }
             if (null != result) {
+                Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(result);
+                result = remover.replaceAll("");
+
                 return trim ? new String(result).trim() : new String(result);
                 // Java copies the whole page String, when matching with regular expressions
                 // later this would block the garbage collector, as we only need tiny parts of the page
