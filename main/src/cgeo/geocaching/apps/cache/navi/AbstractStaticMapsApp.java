@@ -30,6 +30,8 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
     }
 
     protected static boolean hasStaticMap(cgWaypoint waypoint) {
+        if (waypoint==null)
+            return false;
         String geocode = waypoint.getGeocode();
         int id = waypoint.getId();
         if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode, null)) {
@@ -40,11 +42,12 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
 
     protected static boolean invokeStaticMaps(final Activity activity, final cgCache cache, final cgWaypoint waypoint, final boolean download) {
         final ILogable logable = cache != null && cache.getListId() != 0 ? cache : waypoint;
-        final String geocode = StringUtils.upperCase(logable.getGeocode());
-        if (geocode == null) {
+        // If the cache is not stored for offline, cache seems to be null and waypoint may be null too
+        if (logable==null || logable.getGeocode()==null ) {
             ActivityMixin.showToast(activity, getString(R.string.err_detail_no_map_static));
             return true;
         }
+        final String geocode = StringUtils.upperCase(logable.getGeocode());
 
         StaticMapsActivity.startActivity(activity, geocode, download, waypoint);
         return true;
