@@ -26,12 +26,12 @@
   <string name="event">Event cache</string>
   <string name="mega">Mega-event cache</string>
   <string name="earth">Earthcache</string>
-  <string name="cito">Evento Cache in trash out</string>
+  <string name="cito">Evento Cache In Trash Out</string>
   <string name="webcam">Webcam cache</string>
   <string name="virtual">Virtual cache</string>
   <string name="wherigo">Wherigo cache</string>
-  <string name="lostfound">Lost &amp; found</string>
-  <string name="ape">Project ape cache</string>
+  <string name="lostfound">Lost &amp; Found</string>
+  <string name="ape">Project Ape cache</string>
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">Fiera GPS cache</string>
   <string name="unknown">Tipo sconosciuto</string>
@@ -43,7 +43,7 @@
   <string name="cache_size_large">large</string>
   <string name="cache_size_other">altro</string>
   <string name="cache_size_virtual">virtual</string>
-  <string name="cache_size_notchosen">non selezionata</string>
+  <string name="cache_size_notchosen">non selezionato</string>
   <string name="cache_size_unknown">sconosciuto</string>
 
   <!-- waypoints -->
@@ -141,7 +141,7 @@
   <string name="err_store">c:geo non può salvare il cache.</string>
   <string name="err_drop">c:geo non può eliminare il cache.</string>
   <string name="err_detail_open">c:geo non può aprire i dettagli del cache.</string>
-  <string name="err_detail_cache">c:geo non può visualizzare il cache richiesto. È veramente una geocache?</string>
+  <string name="err_detail_cache">c:geo non può visualizzare il cache richiesto. È veramente un geocache?</string>
   <string name="err_detail_cache_find">c:geo non trova il geocache</string>
   <string name="err_detail_cache_find_some">c:geo non trova quel geocache.</string>
   <string name="err_detail_cache_find_any">c:geo non trova nessun geocache.</string>
@@ -150,9 +150,9 @@
   <string name="err_detail_cache_forgot_visit">c:geo ha dimenticato quale cache hai visitato.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo non riesce a scaricare le mappe statiche. Forse raggiunto il limite di google map. Riprova domani.</string>
   <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questo cache.</string>
-  <string name="err_detail_no_map_static">c:geo non trova static maps per questo cache.</string>
-  <string name="err_detail_not_load_map_static">c:geo non riesce a caricare la static map.</string>
-  <string name="err_detail_ask_store_map_static">c:geo non riesce a caricare la static map. La salvo ora?</string>
+  <string name="err_detail_no_map_static">c:geo non trova alcuna mappa statica per questo cache.</string>
+  <string name="err_detail_not_load_map_static">c:geo non riesce a caricare la mappe statiche.</string>
+  <string name="err_detail_ask_store_map_static">c:geo non riesce a caricare la mappa statica. La salvo ora?</string>
   <string name="err_detail_still_working">Momentaneamente occupato a svolgere un altro compito.</string>
   <string name="err_watchlist_still_managing">Sto ancora gestendo la tua watchlist.</string>
   <string name="err_watchlist_failed">La modifica alla tua watchlist è fallita.</string>
@@ -533,7 +533,7 @@
   <string name="cache_dialog_refresh_title">Aggiorna</string>
   <string name="cache_dialog_refresh_message">Ricaricamento dettagli cache…</string>
   <string name="cache_dialog_watchlist_add_title">Watchlist</string>
-  <string name="cache_dialog_watchlist_add_message">Aggiunta cache alla watchlist in corso…</string>
+  <string name="cache_dialog_watchlist_add_message">Aggiunto cache alla watchlist in corso…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Rimozione cache dalla tua watchlist…</string>
   <string name="cache_menu_navigate">Naviga</string>
@@ -953,7 +953,7 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">pagina c:geo </a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manuale: <a href="http://manual.cgeo.org/">c:geo in a Nutshell</a></string>
-  <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi una cache?</string>
+  <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
   <string name="about_auth_1">La procesura seguente autorizza <b>c:geo</b> ad accedere a Twitter - se confermato.</string>
   <string name="about_auth_2">Clicca sul pulsante \"Autorizza c:geo\" per iniziare. Questa procedura aprirà il browser sulla pagina Twitter. Fai Login su questa pagina e autorizza <b>c:geo</b> ad accedere al tuo account. Se accettato, Twitter mostrerà un PIN code numerico. Questo PIN deve essere riportato in <b>c:geo</b> e confermato.</string>
 
