@@ -640,7 +640,9 @@
   <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
   <string name="gpx_import_confirm">Soll die GPX-Datei importiert werden?</string>
   <string name="gpx_import_canceled">Der GPX-Import wurde abgebrochen</string>
-
+  <string name="gpx_import_delete_title">Datei löschen</string>
+  <string name="gpx_import_delete_message">Datei %s löschen?</string>
+  
   <!-- map file select -->
   <string name="map_file_select_title">Kartendatei wählen</string>
 

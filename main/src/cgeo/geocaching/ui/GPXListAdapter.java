@@ -6,6 +6,8 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,22 +45,22 @@ public class GPXListAdapter extends ArrayAdapter<File> {
 
         final File file = getItem(position);
 
-        View v = rowView;
+        View view = rowView;
 
         final ViewHolder holder;
-        if (v == null) {
-            v = inflater.inflate(R.layout.gpx_item, null);
+        if (view == null) {
+            view = inflater.inflate(R.layout.gpx_item, null);
 
             holder = new ViewHolder();
-            holder.filepath = (TextView) v.findViewById(R.id.filepath);
-            holder.filename = (TextView) v.findViewById(R.id.filename);
+            holder.filepath = (TextView) view.findViewById(R.id.filepath);
+            holder.filename = (TextView) view.findViewById(R.id.filename);
 
-            v.setTag(holder);
+            view.setTag(holder);
         } else {
-            holder = (ViewHolder) v.getTag();
+            holder = (ViewHolder) view.getTag();
         }
 
-        v.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -69,6 +71,33 @@ public class GPXListAdapter extends ArrayAdapter<File> {
         holder.filepath.setText(file.getParent());
         holder.filename.setText(file.getName());
 
-        return v;
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setTitle(R.string.gpx_import_delete_title)
+                        .setMessage(activity.getString(R.string.gpx_import_delete_message, file.getName()))
+                        .setCancelable(false)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                file.delete();
+                                GPXListAdapter.this.remove(file);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+                return true;
+            }
+        });
+
+        return view;
     }
 }

@@ -651,7 +651,9 @@
   <string name="gpx_import_error_unexpected">Unexpected error</string>
   <string name="gpx_import_confirm">Do you want to import the GPX file into c:geo?</string>
   <string name="gpx_import_canceled">GPX import was canceled</string>
-
+  <string name="gpx_import_delete_title">Delete file</string>
+  <string name="gpx_import_delete_message">Do you want to delete %s?</string>
+  
   <!-- map file select -->
   <string name="map_file_select_title">Select map file</string>
 
