@@ -223,7 +223,8 @@
   <string name="warn_load_images">c:geo failed to load images.</string>
   <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge version 0.3.0 map file.\nOffline maps are not available.</string>
   <string name="warn_deprecated_mapfile">You are using a deprecated version 0.2.4 map file.\nConsider switching to a version 0.3.0 map.\nWe will drop support for version 0.2.4 in the next release.</string>
-   <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
+  <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
+  <string name="warn_rendertheme_missing">Map theme not found.</string>
 
 
   <string name="info_log_posted">c:geo successfully submitted the log.</string>
@@ -427,6 +428,7 @@
   <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even offline map files (See <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> for details).</string>
   <string name="init_mapsource_select">Select Map Source</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_select_themefile">…</string>
   <string name="init_select_gpx_exportdir">…</string>
   <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">GPX Export Directory</string>
@@ -455,6 +457,7 @@
   <string name="init_dbmove_running">Moving Database</string>
   <string name="init_dbmove_success">Successfully moved the database.</string>
   <string name="init_dbmove_failed">Failed to move database</string>
+  <string name="init_rendertheme_enable">Use custom theme</string>
 
   <!-- map sources -->
   <string-array name="map_sources">
@@ -654,6 +657,9 @@
   <!-- map file select -->
   <string name="map_file_select_title">Select map file</string>
 
+  <!-- theme file select -->
+  <string name="theme_file_select_title">Select custom map theme file</string>
+
   <!--  import -->
   <string name="import_title">Import…</string>
   <string name="web_import_title">Import from web</string>
@@ -720,10 +726,13 @@
   <string name="map_map">Map</string>
   <string name="map_live">Live map</string>
   <string name="map_view_map">Map view</string>
+  <string name="map_modes">Map modes</string>
   <string name="map_trail_show">Show trail</string>
   <string name="map_trail_hide">Hide trail</string>
   <string name="map_circles_show">Show circles</string>
   <string name="map_circles_hide">Hide circles</string>
+  <string name="map_theme_default">Default map theme</string>
+  <string name="map_theme_custom">Custom map theme</string>
   <string name="map_live_enable">Enable live</string>
   <string name="map_live_disable">Disable live</string>
   <string name="map_static_title">Static maps</string>

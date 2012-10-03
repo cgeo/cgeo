@@ -114,14 +114,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
     private static final int MENU_STORE_CACHES = 3;
-    private static final int MENU_TRAIL_MODE = 4;
+    private static final int SUBMENU_MODES = 4;
+    private static final int MENU_TRAIL_MODE = 41;
+    private static final int MENU_THEME_MODE = 42;
+    private static final int MENU_CIRCLE_MODE = 43;
     private static final int SUBMENU_STRATEGY = 5;
     private static final int MENU_STRATEGY_FASTEST = 51;
     private static final int MENU_STRATEGY_FAST = 52;
     private static final int MENU_STRATEGY_AUTO = 53;
     private static final int MENU_STRATEGY_DETAILED = 74;
 
-    private static final int MENU_CIRCLE_MODE = 6;
     private static final int MENU_AS_LIST = 7;
 
     private static final String EXTRAS_MAP_TITLE = "mapTitle";
@@ -539,7 +541,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
         menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as).setEnabled(false);
-        menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
+        SubMenu subMenuModes = menu.addSubMenu(0, SUBMENU_MODES, 0, res.getString(R.string.map_modes)).setIcon(R.drawable.ic_menu_mark);
+        subMenuModes.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
+        subMenuModes.add(0, MENU_THEME_MODE, 0, res.getString(R.string.map_theme_default)).setIcon(R.drawable.ic_menu_globe);
+        subMenuModes.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
 
         Strategy strategy = Settings.getLiveMapStrategy();
         SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy)).setIcon(R.drawable.ic_menu_preferences);
@@ -550,7 +555,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         subMenuStrategy.add(2, MENU_STRATEGY_DETAILED, 0, Strategy.DETAILED.getL10n()).setCheckable(true).setChecked(strategy == Strategy.DETAILED);
         subMenuStrategy.setGroupCheckable(2, true, true);
 
-        menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
         menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(R.drawable.ic_menu_agenda);
 
         return true;
@@ -598,6 +602,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 item.setTitle(res.getString(R.string.map_circles_hide));
             } else {
                 item.setTitle(res.getString(R.string.map_circles_show));
+            }
+
+            item = menu.findItem(MENU_THEME_MODE); // select default or custom theme
+            if (Settings.isCustomRenderTheme()) {
+                item.setTitle(res.getString(R.string.map_theme_default));
+            } else {
+                item.setTitle(res.getString(R.string.map_theme_custom));
             }
 
             menu.findItem(MENU_AS_LIST).setEnabled(isLiveMode() && !isLoading());
@@ -696,6 +707,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 overlayCaches.switchCircles();
                 mapView.repaintRequired(overlayCaches);
                 ActivityMixin.invalidateOptionsMenu(activity);
+                return true;
+            case MENU_THEME_MODE:
+                Settings.setCustomRenderTheme(!Settings.isCustomRenderTheme());
+                ActivityMixin.invalidateOptionsMenu(activity);
+                mapRestart();
                 return true;
             case MENU_AS_LIST: {
                 cgeocaches.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));

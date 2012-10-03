@@ -37,6 +37,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
@@ -178,7 +179,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     /**
      * Get the actual map zoom level
-     * 
+     *
      * @return the current map zoom level with no adjustments
      */
     private int getActualMapZoomLevel() {
@@ -219,6 +220,17 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
                         getContext().getResources().getString(R.string.warn_invalid_mapfile),
                         Toast.LENGTH_LONG)
                         .show();
+            }
+            if (Settings.isCustomRenderTheme()) {
+                try {
+                    setRenderTheme(new File(Settings.getCustomRenderThemePath()));
+                } catch (FileNotFoundException e) {
+                    Toast.makeText(
+                            getContext(),
+                            getContext().getResources().getString(R.string.warn_rendertheme_missing),
+                            Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         }
     }

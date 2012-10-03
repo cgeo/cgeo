@@ -13,25 +13,25 @@ import android.os.Environment;
 import java.io.File;
 import java.util.List;
 
-public class cgSelectMapfile extends FileList<FileSelectionListAdapter> implements IFileSelectionView {
+public class cgSelectThemefile extends FileList<FileSelectionListAdapter> implements IFileSelectionView {
 
-    public cgSelectMapfile() {
-        super("map");
+    public cgSelectThemefile() {
+        super("xml");
     }
 
-    String mapFile;
+    String themeFile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mapFile = Settings.getMapFile();
+        themeFile = Settings.getCustomRenderThemePath();
     }
 
     @Override
     public void close() {
 
         Intent intent = new Intent();
-        intent.putExtra("mapfile", mapFile);
+        intent.putExtra("themefile", themeFile);
 
         setResult(RESULT_OK, intent);
 
@@ -47,25 +47,25 @@ public class cgSelectMapfile extends FileList<FileSelectionListAdapter> implemen
     protected File[] getBaseFolders() {
         final File base = Environment.getExternalStorageDirectory();
         return new File[] {
-                new File(base, "mfmaps"),
-                new File(new File(base, "Locus"), "mapsVector"),
+                new File(new File(base, "mfmaps"), "_themes"),
+                new File(new File(new File(base, "Locus"), "mapsVector"), "_themes"),
                 new File(base, LocalStorage.cache)
         };
     }
 
     @Override
     protected void setTitle() {
-        setTitle(res.getString(R.string.map_file_select_title));
+        setTitle(res.getString(R.string.theme_file_select_title));
     }
 
     @Override
     public String getCurrentFile() {
-        return mapFile;
+        return themeFile;
     }
 
     @Override
     public void setCurrentFile(String newFile) {
-        mapFile = newFile;
+        themeFile = newFile;
     }
 
     @Override
