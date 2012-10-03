@@ -455,7 +455,8 @@
   <string name="init_dbmove_running">Moving Database</string>
   <string name="init_dbmove_success">Successfully moved the database.</string>
   <string name="init_dbmove_failed">Failed to move database</string>
-
+  <string name="init_plain_logs">Display log entries without colors</string>
+  
   <!-- map sources -->
   <string-array name="map_sources">
     <item>@string/map_source_google_map</item>

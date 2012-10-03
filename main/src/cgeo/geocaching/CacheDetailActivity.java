@@ -109,6 +109,7 @@ import java.util.regex.Pattern;
  */
 public class CacheDetailActivity extends AbstractActivity {
 
+    private static final Pattern PATTERN_REMOVE_COLORS = Pattern.compile("</?font.*?>", Pattern.CASE_INSENSITIVE);
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
     private static final int MENU_FIELD_TRANSLATE_EN = 3;
@@ -2180,11 +2181,13 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
 
                     // logtext, avoid parsing HTML if not necessary
-                    if (BaseUtils.containsHtml(log.log)) {
-                        holder.text.setText(Html.fromHtml(log.log, new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                    String logText = log.log;
+                    if (BaseUtils.containsHtml(logText)) {
+                        logText = removeColors(logText);
+                        holder.text.setText(Html.fromHtml(logText, new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                     }
                     else {
-                        holder.text.setText(log.log);
+                        holder.text.setText(logText);
                     }
 
                     // images
@@ -2235,6 +2238,14 @@ public class CacheDetailActivity extends AbstractActivity {
             });
 
             return view;
+        }
+
+        protected String removeColors(String log) {
+            if (Settings.getPlainLogs()) {
+                Matcher matcher = PATTERN_REMOVE_COLORS.matcher(log);
+                return matcher.replaceAll("");
+            }
+            return log;
         }
 
         private class LogViewHolder {

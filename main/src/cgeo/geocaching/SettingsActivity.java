@@ -516,6 +516,17 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        final CheckBox plainLogs = (CheckBox) findViewById(R.id.plain_logs);
+        plainLogs.setChecked(Settings.getPlainLogs());
+        plainLogs.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setPlainLogs(!Settings.getPlainLogs());
+                plainLogs.setChecked(Settings.getPlainLogs());
+            }
+        });
+
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
         altitudeEdit.setText(String.valueOf(Settings.getAltCorrection()));
