@@ -290,14 +290,18 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        SubMenu menuLog;
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        if (StringUtils.isNotEmpty(Settings.getSignature())) {
+            menu.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature)).setIcon(R.drawable.ic_menu_edit);
+        }
 
-        menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
+        SubMenu menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
         for (LogTemplate template : LogTemplateProvider.getTemplates()) {
             menuLog.add(0, template.getItemId(), 0, template.getResourceId());
         }
-        menuLog.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature));
+        if (StringUtils.isNotEmpty(Settings.getSignature())) {
+            menuLog.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature));
+        }
 
         final SubMenu menuStars = menu.addSubMenu(0, SUBMENU_VOTE, 0, res.getString(R.string.log_rating)).setIcon(R.drawable.ic_menu_sort_by_size);
         menuStars.add(0, 10, 0, res.getString(R.string.log_no_rating));
