@@ -1156,7 +1156,7 @@ public abstract class GCParser {
     }
 
     /**
-     * Removes the cache from the watchlist
+     * Removes the cache from the watch list
      *
      * @param cache
      *            the cache to remove
@@ -1186,7 +1186,7 @@ public abstract class GCParser {
         } else {
             Log.e("GCParser.removeFromWatchlist: cache not removed from watchlist");
         }
-        return !guidOnPage; // on watchlist (=error) / not on watchlist
+        return !guidOnPage; // on watch list (=error) / not on watch list
     }
 
     static String requestHtmlPage(final String geocode, final String guid, final String log, final String numlogs) {
@@ -1342,7 +1342,7 @@ public abstract class GCParser {
         }
 
         // trackable goal
-        trackable.setGoal(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal()));
+        trackable.setGoal(convertLinks(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal())));
 
         // trackable details & image
         try {
@@ -1355,7 +1355,7 @@ public abstract class GCParser {
                     trackable.setImage(image);
                 }
                 if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details, "No additional details available.")) {
-                    trackable.setDetails(details);
+                    trackable.setDetails(convertLinks(details));
                 }
             }
         } catch (Exception e) {
@@ -1367,13 +1367,13 @@ public abstract class GCParser {
         try {
             final Matcher matcherLogs = GCConstants.PATTERN_TRACKABLE_LOG.matcher(page);
             /*
-             * 1. Type (img)
+             * 1. Type (image)
              * 2. Date
              * 3. Author
              * 4. Cache-GUID
-             * 5. <ignored> (strike-through property for ancien caches)
+             * 5. <ignored> (strike-through property for ancient caches)
              * 6. Cache-name
-             * 7. Logtext
+             * 7. Log text
              */
             while (matcherLogs.find()) {
                 long date = 0;
@@ -1411,7 +1411,7 @@ public abstract class GCParser {
             Log.w("GCParser.parseCache: Failed to parse cache logs" + e.toString());
         }
 
-        // trackingcode
+        // tracking code
         if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(), possibleTrackingcode)) {
             trackable.setTrackingcode(possibleTrackingcode);
         }
@@ -1421,6 +1421,13 @@ public abstract class GCParser {
         }
 
         return trackable;
+    }
+
+    private static String convertLinks(String input) {
+        if (input == null) {
+            return null;
+        }
+        return StringUtils.replace(input, "../", GCConstants.GC_URL);
     }
 
     /**

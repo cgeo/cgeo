@@ -11,14 +11,15 @@ import java.util.regex.Pattern;
  */
 public final class GCConstants {
 
+    static final String GC_URL = "http://www.geocaching.com/";
     /** Live Map */
-    public final static String URL_LIVE_MAP = "http://www.geocaching.com/map/default.aspx";
+    public final static String URL_LIVE_MAP = GC_URL + "map/default.aspx";
     /** Live Map pop-up */
-    public final static String URL_LIVE_MAP_DETAILS = "http://www.geocaching.com/map/map.details";
+    public final static String URL_LIVE_MAP_DETAILS = GC_URL + "map/map.details";
     /** Caches in a tile */
-    public final static String URL_MAP_INFO = "http://www.geocaching.com/map/map.info";
+    public final static String URL_MAP_INFO = GC_URL + "map/map.info";
     /** Tile itself */
-    public final static String URL_MAP_TILE = "http://www.geocaching.com/map/map.png";
+    public final static String URL_MAP_TILE = GC_URL + "map/map.png";
 
     /**
      * Patterns for parsing the result of a (detailed) search

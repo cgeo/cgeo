@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.cgTrackable;
-import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.BaseUtils;
@@ -67,6 +66,16 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         // the next two items are normally available for trackables, but not for this one, so explicitly test for null
         assertNull(trackable.getReleased());
         assertNull(trackable.getOrigin());
+    }
+
+    public void testParseRelativeLink() {
+        final cgTrackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb4cwjx), null);
+        assertNotNull(trackable);
+        assertEquals("The Golden Lisa", trackable.getName());
+        final String goal = trackable.getGoal();
+        assertNotNull(goal);
+        assertFalse(goal.contains(".."));
+        assertTrue(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\""));
     }
 
     private cgTrackable getTB2R124() {
