@@ -567,7 +567,7 @@ public class cgData {
 
                             db.execSQL(dbCreateCachesTemp);
                             db.execSQL("insert into " + dbTableCachesTemp + " select _id,updated,detailed,detailedupdate,visiteddate,geocode,reason,cacheid,guid,type,name,own,owner,owner_real," +
-                                    "hidden,hint,size,difficulty,terrain,latlon,location,direction,distance,latitude,longitude,reliable_latlon,elevation," +
+                                    "hidden,hint,size,difficulty,terrain,latlon,location,direction,distance,latitude,longitude, 0,elevation," +
                                     "personal_note,shortdesc,description,favourite_cnt,rating,votes,myvote,disabled,archived,members,found,favourite,inventorycoins," +
                                     "inventorytags,inventoryunknown,onWatchlist from " + dbTableCaches);
                             db.execSQL("drop table " + dbTableCaches);
