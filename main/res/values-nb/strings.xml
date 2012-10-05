@@ -264,8 +264,8 @@
   <string name="cache_offline_time_mins">minutter siden</string>
   <string name="cache_offline_time_mins_few">en liten stund siden</string>
   <string name="cache_offline_time_hour">én time siden</string>
-  <string name="cache_offline_time_hours">mange timer siden</string>
-  <string name="cache_offline_time_days">mange dager siden</string>
+  <string name="cache_offline_time_hours">timer siden</string>
+  <string name="cache_offline_time_days">dager siden</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributer</string>
   <string name="cache_inventory">Inventar</string>
@@ -343,7 +343,7 @@
   <!-- map -->
   <string name="map_map">Kart</string>
   <string name="map_live">Live kart</string>
-  <string name="map_view_map">Vanlig kart</string>
+  <string name="map_view_map">Kart</string>
   <string name="map_trail_show">Vis spor</string>
   <string name="map_trail_hide">Skjul spor</string>
   <string name="map_live_enable">Aktiver live</string>
