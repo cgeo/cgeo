@@ -1,5 +1,7 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.ui.CustomProgressDialog;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +16,15 @@ public class Progress {
     private ProgressDialog dialog;
     private int progress = 0;
     private int progressDivider = 1;
+    private boolean hideAbsolute = false;
+
+    public Progress(boolean hideAbsolute) {
+        this.hideAbsolute = hideAbsolute;
+    }
+
+    public Progress() {
+        this(false);
+    }
 
     public synchronized void dismiss() {
         if (dialog != null && dialog.isShowing()) {
@@ -24,36 +35,40 @@ public class Progress {
 
     public synchronized void show(final Context context, final String title, final String message, final boolean indeterminate, final Message cancelMessage) {
         if (dialog == null) {
-            dialog = ProgressDialog.show(context, title, message, indeterminate, cancelMessage != null);
-            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            dialog.setProgress(0);
-            dialog.setCanceledOnTouchOutside(false);
-            this.progress = 0;
-            if (cancelMessage != null) {
-                dialog.setCancelMessage(cancelMessage);
-            }
+            createProgressDialog(context, title, message, cancelMessage);
+            dialog.setIndeterminate(indeterminate);
+            dialog.show();
         }
     }
 
     public synchronized void show(final Context context, final String title, final String message, final int style, final Message cancelMessage) {
         if (dialog == null) {
-            dialog = new ProgressDialog(context);
-            dialog.setProgress(0);
-            dialog.setCanceledOnTouchOutside(false);
-            this.progress = 0;
-            dialog.setTitle(title);
-            dialog.setMessage(message);
+            createProgressDialog(context, title, message, cancelMessage);
             dialog.setProgressStyle(style);
-            if (cancelMessage != null) {
-                dialog.setCancelable(true);
-                dialog.setCancelMessage(cancelMessage);
-                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getResources().getString(android.R.string.cancel), cancelMessage);
-            } else {
-                dialog.setCancelable(false);
-            }
-            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             dialog.show();
         }
+    }
+
+    private void createProgressDialog(Context context, String title, String message, Message cancelMessage) {
+        if (hideAbsolute) {
+            dialog = new CustomProgressDialog(context);
+        }
+        else {
+            dialog = new ProgressDialog(context);
+        }
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+        if (cancelMessage != null) {
+            dialog.setCancelable(true);
+            dialog.setCancelMessage(cancelMessage);
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getResources().getString(android.R.string.cancel), cancelMessage);
+        } else {
+            dialog.setCancelable(false);
+        }
+        dialog.setProgress(0);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        this.progress = 0;
     }
 
     public synchronized void setMessage(final String message) {

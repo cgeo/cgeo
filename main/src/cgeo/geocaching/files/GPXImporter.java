@@ -58,7 +58,7 @@ public class GPXImporter {
     private static final List<String> GPX_MIME_TYPES = Arrays.asList("text/xml", "application/xml");
     private static final List<String> ZIP_MIME_TYPES = Arrays.asList("application/zip", "application/x-compressed", "application/x-zip-compressed", "application/x-zip", "application/octet-stream");
 
-    private Progress progress = new Progress();
+    private Progress progress = new Progress(true);
 
     private Resources res;
     private int listId;
