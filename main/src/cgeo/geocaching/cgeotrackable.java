@@ -7,6 +7,7 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -77,7 +78,7 @@ public class cgeotrackable extends AbstractActivity {
                 findViewById(R.id.details_list_box).setVisibility(View.VISIBLE);
                 final CacheDetailsCreator details = new CacheDetailsCreator(cgeotrackable.this, (LinearLayout) findViewById(R.id.details_list));
 
-                // actiobar icon
+                // action bar icon
                 if (StringUtils.isNotBlank(trackable.getIconUrl())) {
                     final TrackableIconHandler iconHandler = new TrackableIconHandler(((TextView) findViewById(R.id.actionbar_title)));
                     final TrackableIconThread iconThread = new TrackableIconThread(trackable.getIconUrl(), iconHandler);
@@ -458,7 +459,15 @@ public class cgeotrackable extends AbstractActivity {
 
                 TextView logView = (TextView) rowView.findViewById(R.id.log);
                 logView.setMovementMethod(LinkMovementMethod.getInstance());
-                logView.setText(Html.fromHtml(log.log, new HtmlImage(null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
+
+                String logText = log.log;
+                if (BaseUtils.containsHtml(logText)) {
+                    logText = log.getDisplayText();
+                    logView.setText(Html.fromHtml(logText, new HtmlImage(null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
+                }
+                else {
+                    logView.setText(logText);
+                }
 
                 // add LogImages
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);

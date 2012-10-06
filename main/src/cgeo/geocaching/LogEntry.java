@@ -10,8 +10,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class LogEntry {
+
+    private static final Pattern PATTERN_REMOVE_COLORS = Pattern.compile("</?font.*?>", Pattern.CASE_INSENSITIVE);
 
     public int id = 0;
     public LogType type = LogType.UNKNOWN;
@@ -96,5 +100,16 @@ public final class LogEntry {
 
     public int daysSinceLog() {
         return DateUtils.daysSince(date);
+    }
+
+    /**
+     * Get the log text to be displayed. Depending on the settings, color tags might be removed.
+     */
+    public String getDisplayText() {
+        if (Settings.getPlainLogs()) {
+            Matcher matcher = PATTERN_REMOVE_COLORS.matcher(log);
+            return matcher.replaceAll("");
+        }
+        return log;
     }
 }
