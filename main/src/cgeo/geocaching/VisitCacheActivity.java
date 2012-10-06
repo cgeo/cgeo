@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -16,7 +15,6 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
-import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -45,14 +43,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class VisitCacheActivity extends AbstractActivity implements DateDialog.DateDialogParent {
+public class VisitCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
     static final String EXTRAS_FOUND = "found";
     static final String EXTRAS_TEXT = "text";
     static final String EXTRAS_GEOCODE = "geocode";
     static final String EXTRAS_ID = "id";
 
-    private static final int MENU_SIGNATURE = 1;
-    private static final int SUBMENU_VOTE = 2;
+    private static final int SUBMENU_VOTE = 3;
 
     private LayoutInflater inflater = null;
     private cgCache cache = null;
@@ -291,17 +288,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        if (StringUtils.isNotEmpty(Settings.getSignature())) {
-            menu.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature)).setIcon(R.drawable.ic_menu_edit);
-        }
-
-        SubMenu menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
-        for (LogTemplate template : LogTemplateProvider.getTemplates()) {
-            menuLog.add(0, template.getItemId(), 0, template.getResourceId());
-        }
-        if (StringUtils.isNotEmpty(Settings.getSignature())) {
-            menuLog.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature));
-        }
+        super.onCreateOptionsMenu(menu);
 
         final SubMenu menuStars = menu.addSubMenu(0, SUBMENU_VOTE, 0, res.getString(R.string.log_rating)).setIcon(R.drawable.ic_menu_sort_by_size);
         menuStars.add(0, 10, 0, res.getString(R.string.log_no_rating));
@@ -320,8 +307,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        final boolean signatureAvailable = Settings.getSignature() != null;
-        menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
+        super.onPrepareOptionsMenu(menu);
 
         final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == LogType.FOUND_IT && StringUtils.isNotBlank(cache.getGuid());
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
@@ -331,14 +317,11 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final int id = item.getItemId();
-
-        if (id == MENU_SIGNATURE) {
-            final LogContext logContext = new LogContext(cache);
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), logContext), true);
+        if (super.onOptionsItemSelected(item)) {
             return true;
         }
 
+        final int id = item.getItemId();
         if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0;
             if (rating < 1) {
@@ -348,19 +331,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             return true;
         }
 
-        final LogTemplate template = LogTemplateProvider.getTemplate(id);
-        if (template != null) {
-            final LogContext logContext = new LogContext(cache);
-            insertIntoLog(template.getValue(logContext), true);
-            return true;
-        }
-
         return false;
-    }
-
-    private void insertIntoLog(String newText, final boolean moveCursor) {
-        final EditText log = (EditText) findViewById(R.id.log);
-        insertAtPosition(log, newText, moveCursor);
     }
 
     private static String ratingTextValue(final double rating) {
@@ -786,5 +757,10 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
     @Override
     public Object onRetainNonConfigurationInstance() {
         return new ActivityState();
+    }
+
+    @Override
+    protected LogContext getLogContext() {
+        return new LogContext(cache);
     }
 }

@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.LogType;
@@ -11,9 +10,7 @@ import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DateDialog;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
-import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,9 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class LogTrackableActivity extends AbstractActivity implements DateDialog.DateDialogParent {
+public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
     private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private ProgressDialog waitDialog = null;
     private String guid = null;
@@ -53,8 +48,6 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
     private cgTrackable trackable;
-
-    private static final int MENU_SIGNATURE = 1;
 
     private Handler showProgressHandler = new Handler() {
         @Override
@@ -162,48 +155,6 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
         super.onConfigurationChanged(newConfig);
 
         init();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        final SubMenu subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
-
-        for (LogTemplate template : LogTemplateProvider.getTemplates()) {
-            subMenu.add(0, template.getItemId(), 0, template.getResourceId());
-        }
-        subMenu.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature));
-
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(MENU_SIGNATURE).setVisible(Settings.getSignature() != null);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        final int id = item.getItemId();
-        final LogContext logContext = new LogContext(trackable);
-
-        if (id == MENU_SIGNATURE) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), logContext), true);
-            return true;
-        }
-
-        final LogTemplate template = LogTemplateProvider.getTemplate(id);
-        if (template != null) {
-            insertIntoLog(template.getValue(logContext), true);
-            return true;
-        }
-
-        return false;
-    }
-
-    private void insertIntoLog(String newText, final boolean moveCursor) {
-        final EditText log = (EditText) findViewById(R.id.log);
-        insertAtPosition(log, newText, moveCursor);
     }
 
     @Override
@@ -410,5 +361,10 @@ public class LogTrackableActivity extends AbstractActivity implements DateDialog
         logTouchIntent.putExtra("guid", trackable.getGuid());
         logTouchIntent.putExtra("trackingcode", trackable.getTrackingcode());
         context.startActivity(logTouchIntent);
+    }
+
+    @Override
+    protected LogContext getLogContext() {
+        return new LogContext(trackable);
     }
 }

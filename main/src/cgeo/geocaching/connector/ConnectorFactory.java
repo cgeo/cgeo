@@ -2,6 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
@@ -48,6 +49,10 @@ public final class ConnectorFactory {
 
     public static IConnector getConnector(ICache cache) {
         return getConnector(cache.getGeocode());
+    }
+
+    public static IConnector getConnector(cgTrackable trackable) {
+        return getConnector(trackable.getGeocode());
     }
 
     public static IConnector getConnector(final String geocodeInput) {

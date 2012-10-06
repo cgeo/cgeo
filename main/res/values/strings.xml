@@ -116,7 +116,8 @@
   <string name="log_announcement">Announcement</string>
   <string name="log_today">Today</string>
   <string name="log_yesterday">Yesterday</string>
-
+  <string name="log_smilies">Smilies</string>
+  
   <!-- translation -->
   <string name="translate_to_sys_lang">Translate to %s</string>
   <string name="translate_to_english">Translate to English</string>
