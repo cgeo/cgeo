@@ -1347,12 +1347,16 @@ public class cgData {
             ContentValues values = new ContentValues();
             long timeStamp = System.currentTimeMillis();
             for (cgTrackable trackable : trackables) {
+                final String tbCode = trackable.getGeocode();
+                if (StringUtils.isNotBlank(tbCode)) {
+                    database.delete(dbTableTrackables, "tbcode = ?", new String[] { tbCode });
+                }
                 values.clear();
                 if (geocode != null) {
                     values.put("geocode", geocode);
                 }
                 values.put("updated", timeStamp);
-                values.put("tbcode", trackable.getGeocode());
+                values.put("tbcode", tbCode);
                 values.put("guid", trackable.getGuid());
                 values.put("title", trackable.getName());
                 values.put("owner", trackable.getOwner());
@@ -1366,7 +1370,7 @@ public class cgData {
 
                 database.insert(dbTableTrackables, null, values);
 
-                saveLogsWithoutTransaction(trackable.getGeocode(), trackable.getLogs());
+                saveLogsWithoutTransaction(tbCode, trackable.getLogs());
             }
         }
     }
