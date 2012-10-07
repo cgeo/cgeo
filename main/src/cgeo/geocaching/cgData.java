@@ -2968,4 +2968,33 @@ public class cgData {
         }
     }
 
+    public String[] getTrackableCodes() {
+        init();
+
+        final Cursor cursor = database.query(
+                dbTableTrackables,
+                new String[] { "tbcode" },
+                null,
+                null,
+                null,
+                null,
+                "updated DESC",
+                "100");
+
+        final ArrayList<String> list = new ArrayList<String>();
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+
+                final int index = cursor.getColumnIndex("tbcode");
+                do {
+                    list.add(cursor.getString(index));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+
+        return list.toArray(new String[list.size()]);
+    }
+
 }

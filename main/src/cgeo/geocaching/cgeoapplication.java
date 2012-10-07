@@ -482,4 +482,8 @@ public class cgeoapplication extends Application {
         liveMapHintShown = true;
     }
 
+    public String[] getTrackableCodes() {
+        return storage.getTrackableCodes();
+    }
+
 }

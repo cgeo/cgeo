@@ -112,7 +112,7 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_tb" />
 			</RelativeLayout>
-			<EditText style="@style/edittext_full"
+			<AutoCompleteTextView style="@style/edittext_full"
 					android:id="@+id/trackable"
 					android:hint="@string/search_tb_hint"
 					android:imeOptions="actionGo"

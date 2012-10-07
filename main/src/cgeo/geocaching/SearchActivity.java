@@ -154,11 +154,7 @@ public class SearchActivity extends AbstractActivity {
                 findByGeocodeFn();
             }
         });
-        final String[] geocodesInCache = app.geocodesInCache();
-        if (geocodesInCache != null) {
-            final ArrayAdapter<String> geocodesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, geocodesInCache);
-            geocodeEdit.setAdapter(geocodesAdapter);
-        }
+        addHistoryEntries(geocodeEdit, app.geocodesInCache());
 
         final Button displayByGeocode = (Button) findViewById(R.id.display_geocode);
         displayByGeocode.setOnClickListener(new findByGeocodeListener());
@@ -202,7 +198,7 @@ public class SearchActivity extends AbstractActivity {
             }
         });
 
-        EditText trackable = (EditText) findViewById(R.id.trackable);
+        AutoCompleteTextView trackable = (AutoCompleteTextView) findViewById(R.id.trackable);
         EditUtils.setActionListener(trackable, new Runnable() {
 
             @Override
@@ -210,10 +206,19 @@ public class SearchActivity extends AbstractActivity {
                 findTrackableFn();
             }
         });
+        addHistoryEntries(trackable, app.getTrackableCodes());
+
         disableSuggestions(trackable);
 
         final Button displayTrackable = (Button) findViewById(R.id.display_trackable);
         displayTrackable.setOnClickListener(new findTrackableListener());
+    }
+
+    private void addHistoryEntries(final AutoCompleteTextView textView, final String[] entries) {
+        if (entries != null) {
+            final ArrayAdapter<String> historyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, entries);
+            textView.setAdapter(historyAdapter);
+        }
     }
 
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
