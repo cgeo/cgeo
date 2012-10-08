@@ -1086,6 +1086,10 @@
     · Removed Go4Cache support as this third party service is no longer available\n
     · Selectable GPX import directory\n
     · New log template for inserting owner name\n
+    · New option to remove colors from log entries\n 
+    · Ability to delete GPX files after import\n
+    · Quick signature insertion\n
+    · Template for inserting smilies when logging a cache\n
     \n
     <b>Bugfixing:</b>\n
     · Improvement for cache description translation\n
@@ -1097,6 +1101,10 @@
     · Live map now stays live after display rotation\n  
     · Open in browser improved to allow setting a default browser without losing the option to open coord.info URLs with c:geo\n
     · Improve offline stability\n
+    · Static map download improvements\n
+    · Failure when importing previously exported GPX file fixed\n
+    · Opening a link from a TB description improved\n
+    · Last activity time on TB page corrected\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
