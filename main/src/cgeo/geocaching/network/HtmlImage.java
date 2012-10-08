@@ -41,7 +41,8 @@ public class HtmlImage implements Html.ImageGetter {
             "andyhoppe",
             "besucherzaehler-homepage.de",
             "hitwebcounter.com",
-            "kostenloser-counter.eu"
+            "kostenloser-counter.eu",
+            "trendcounter.com"
     };
 
     final private String geocode;
