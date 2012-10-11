@@ -126,7 +126,7 @@
 	<!-- inventory and favorites -->
 	
 	<RelativeLayout
-			android:layout_width="28dip"
+			android:layout_width="35dip"
 			android:layout_height="wrap_content"
 			android:layout_centerVertical="true"
 			android:layout_alignParentRight="true"
@@ -134,7 +134,7 @@
 			android:layout_marginBottom="1dip">
 
 		<ImageView android:id="@+id/inventory"
-				android:layout_width="28dip"
+				android:layout_width="35dip"
 				android:layout_height="22dip"
 				android:layout_gravity="center_vertical|center_horizontal"
 				android:layout_alignParentTop="true"
@@ -142,7 +142,7 @@
 				android:src="@drawable/trackable_all"
 				android:background="?inventory"/>
 		<TextView android:id="@+id/favourite"
-				android:layout_width="28dip"
+				android:layout_width="35dip"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="22dip"
 				android:layout_centerHorizontal="true"
