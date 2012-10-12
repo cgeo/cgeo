@@ -106,6 +106,7 @@ public class cgeocaches extends AbstractListActivity {
     private CacheListType type = null;
     private Geopoint coords = null;
     private SearchResult search = null;
+    /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
     private final List<cgCache> cacheList = new ArrayList<cgCache>();
     private CacheListAdapter adapter = null;
     private LayoutInflater inflater = null;
@@ -268,12 +269,17 @@ public class cgeocaches extends AbstractListActivity {
             }
         }
     };
+    private Set<cgCache> cachesFromSearchResult;
+
+    /**
+     * Loads the caches and fills the cachelist
+     */
 
     private void replaceCacheListFromSearch() {
-        cacheList.clear();
         if (search!=null) {
-            cacheList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+            cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
         }
+        refreshCacheListHandler.sendEmptyMessage(0);
     }
 
     protected void updateTitle() {
@@ -338,6 +344,10 @@ public class cgeocaches extends AbstractListActivity {
             }
         }
     };
+
+    /**
+     * TODO Possibly parts should be a Thread not a Handler
+     */
     private Handler downloadFromWebHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -1374,6 +1384,10 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
+    /**
+     * Thread to refresh the cache details.
+     */
+
     private class LoadDetailsThread extends Thread {
 
         final private Handler handler;
@@ -1653,6 +1667,12 @@ public class cgeocaches extends AbstractListActivity {
         invalidateOptionsMenuCompatible();
     }
 
+    /**
+     * TODO Possible refactoring. IMO The Handler is obsolete
+     * @author keith.paterson
+     *
+     */
+
     private class MoveHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -1677,6 +1697,20 @@ public class cgeocaches extends AbstractListActivity {
             handler.sendEmptyMessage(listId);
         }
     }
+
+    /**
+     * Handler to refresh the current list of caches. This list is shared with the Adapter and therefore must be updated
+     * in the UI-Thread
+     */
+
+    private Handler refreshCacheListHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            cacheList.clear();
+            cacheList.addAll(cachesFromSearchResult);
+        }
+    };
+
 
     private void renameList() {
         new StoredList.UserInterface(this).promptForListRename(listId, new Runnable() {
