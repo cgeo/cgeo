@@ -179,7 +179,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     /**
      * Returns all installed navigation apps for default navigation.
-     * 
+     *
      * @return
      */
     public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
@@ -300,9 +300,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     private static App getDefaultNavigationApplication(int defaultNavigation) {
         if (defaultNavigation == 2) {
-            return getNavigationAppFromSetting(Settings.getDefaultNavigationTool2());
+            return getNavigationAppForId(Settings.getDefaultNavigationTool2());
         }
-        return getNavigationAppFromSetting(Settings.getDefaultNavigationTool());
+        return getNavigationAppForId(Settings.getDefaultNavigationTool());
     }
 
     /**
@@ -340,14 +340,14 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return never <code>null</code>
      */
     public static App getDefaultNavigationApplication() {
-        return getNavigationAppFromSetting(Settings.getDefaultNavigationTool());
+        return getDefaultNavigationApplication(1);
     }
 
-    private static App getNavigationAppFromSetting(final int defaultNavigationTool) {
+    private static App getNavigationAppForId(final int navigationAppId) {
         final List<NavigationAppsEnum> installedNavigationApps = getInstalledNavigationApps();
 
         for (NavigationAppsEnum navigationApp : installedNavigationApps) {
-            if (navigationApp.id == defaultNavigationTool) {
+            if (navigationApp.id == navigationAppId) {
                 return navigationApp.app;
             }
         }

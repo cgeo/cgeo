@@ -166,8 +166,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
     /**
      * A {@link List} of all available pages.
-     *
-     * @todo Move to adapter
+     * 
+     * TODO Move to adapter
      */
     private final List<Page> pageOrder = new ArrayList<Page>();
 
@@ -552,14 +552,14 @@ public class CacheDetailActivity extends AbstractActivity {
         if (null != cache) {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
 
-            final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
+            final SubMenu subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
             NavigationAppFactory.addMenuItems(subMenu, cache);
             GeneralAppsFactory.addMenuItems(subMenu, cache);
 
-            menu.add(1, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(R.drawable.ic_menu_agenda); // add event to calendar
+            menu.add(0, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(R.drawable.ic_menu_agenda); // add event to calendar
             LoggingUI.addMenuItems(menu, cache);
             menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
-            menu.add(1, MENU_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
+            menu.add(0, MENU_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
             menu.add(0, MENU_SHARE, 0, res.getString(R.string.cache_menu_share)).setIcon(R.drawable.ic_menu_share); // share cache
         }
         return true;
@@ -677,7 +677,7 @@ public class CacheDetailActivity extends AbstractActivity {
             creator.notifyDataSetChanged();
         }
 
-        // actionbar: title and icon (default: mystery-icon)
+        // action bar: title and icon (default: mystery-icon)
         if (StringUtils.isNotBlank(cache.getName())) {
             setTitle(cache.getName() + " (" + cache.getGeocode().toUpperCase() + ")");
         } else {
