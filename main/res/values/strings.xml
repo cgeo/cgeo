@@ -1092,6 +1092,7 @@
     · Template for inserting smilies when logging a cache\n
     \n
     <b>Bugfixing:</b>\n
+    · Crash when modifying lists fixed\n
     · Improvement for cache description translation\n
     · Avoid crash when searching for an unactivated TB\n
     · Improvement for enabling live mode on map\n
@@ -1105,6 +1106,7 @@
     · Failure when importing previously exported GPX file fixed\n
     · Opening a link from a TB description improved\n
     · Last activity time on TB page corrected\n
+    · 4-digit favorite points shown correctly in lists\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
