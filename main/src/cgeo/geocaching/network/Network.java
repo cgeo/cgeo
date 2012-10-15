@@ -1,5 +1,7 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
@@ -32,11 +34,13 @@ import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
 import ch.boye.httpclientandroidlib.params.HttpParams;
 import ch.boye.httpclientandroidlib.protocol.HttpContext;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.Uri;
+import android.webkit.WebView;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +51,10 @@ public abstract class Network {
 
     private static final int NB_DOWNLOAD_RETRIES = 4;
     /** User agent id */
-    private final static String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
+    private final static String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
+    /** Native user agent **/
+    private final static String NATIVE_USER_AGENT = new WebView(cgeoapplication.getInstance()).getSettings().getUserAgentString();
+
     private static final String PATTERN_PASSWORD = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
     private final static HttpParams clientParams = new BasicHttpParams();
@@ -230,7 +237,11 @@ public abstract class Network {
                 "X-Requested-With", "XMLHttpRequest")) {
             request.setHeader(header.getName(), header.getValue());
         }
-        request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.USER_AGENT);
+        if (Settings.getUseNativeUa()) {
+            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.PC_USER_AGENT);
+        } else {
+            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.NATIVE_USER_AGENT);
+        }
     }
 
     /**
