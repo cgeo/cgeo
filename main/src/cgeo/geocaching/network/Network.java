@@ -238,9 +238,9 @@ public abstract class Network {
             request.setHeader(header.getName(), header.getValue());
         }
         if (Settings.getUseNativeUa()) {
-            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.PC_USER_AGENT);
-        } else {
             request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.NATIVE_USER_AGENT);
+        } else {
+            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.PC_USER_AGENT);
         }
     }
 
