@@ -457,7 +457,7 @@
   <string name="init_dbmove_success">Successfully moved the database.</string>
   <string name="init_dbmove_failed">Failed to move database</string>
   <string name="init_plain_logs">Display log entries without colors</string>
-  <string name="init_use_native_ua">Identify as Android browser</string>
+  <string name="init_use_native_ua">Identify as Android browser. Solves login problems of some network providers.</string>
   
   <!-- map sources -->
   <string-array name="map_sources">
