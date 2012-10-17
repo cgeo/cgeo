@@ -116,6 +116,7 @@
   <string name="log_announcement">Kungörelse</string>
   <string name="log_today">Idag</string>
   <string name="log_yesterday">Igår</string>
+  <string name="log_smilies">Smileys</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Översätt till %s</string>
@@ -454,6 +455,7 @@
   <string name="init_dbmove_running">Flyttar databasen</string>
   <string name="init_dbmove_success">Databasen har ny flyttats.</string>
   <string name="init_dbmove_failed">Misslyckades att flytta databasen</string>
+  <string name="init_plain_logs">Visa loggar utan färger</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
@@ -642,6 +644,8 @@
   <string name="gpx_import_error_unexpected">Oväntat fel</string>
   <string name="gpx_import_confirm">Vill du importera GPX filen till c:geo?</string>
   <string name="gpx_import_canceled">Importeringen av GPX filen avbröts</string>
+  <string name="gpx_import_delete_title">Ta bort fil</string>
+  <string name="gpx_import_delete_message">Vill du radera %s?</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Välj kartfil</string>
