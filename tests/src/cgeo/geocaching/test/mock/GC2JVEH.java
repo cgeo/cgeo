@@ -88,14 +88,6 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public boolean isWatchlist() {
-        if ("blafoo".equals(this.getMockedDataUser())) {
-            return true;
-        }
-        return super.isWatchlist();
-    }
-
-    @Override
     public Date getHiddenDate() {
         try {
             return Login.parseGcCustomDate("28/11/2010", getDateFormat());
@@ -163,6 +155,22 @@ public class GC2JVEH extends MockedCache {
             return "Selig";
         }
         return super.getPersonalNote();
+    }
+
+    @Override
+    public boolean isFound() {
+        if ("blafoo".equals(this.getMockedDataUser())) {
+            return true;
+        }
+        return super.isFound();
+    }
+
+    @Override
+    public boolean isFavorite() {
+        if ("blafoo".equals(this.getMockedDataUser())) {
+            return true;
+        }
+        return super.isFavorite();
     }
 
 }

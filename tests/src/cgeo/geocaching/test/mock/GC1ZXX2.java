@@ -122,7 +122,7 @@ public class GC1ZXX2 extends MockedCache {
     public Map<LogType, Integer> getLogCounts() {
         Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
         logCounts.put(LogType.PUBLISH_LISTING, 1);
-        logCounts.put(LogType.FOUND_IT, 369);
+        logCounts.put(LogType.FOUND_IT, 368);
         logCounts.put(LogType.POST_REVIEWER_NOTE, 1);
         logCounts.put(LogType.DIDNT_FIND_IT, 7);
         logCounts.put(LogType.NOTE, 10);
