@@ -116,6 +116,7 @@
   <string name="log_announcement">Annuncio</string>
   <string name="log_today">Oggi</string>
   <string name="log_yesterday">Ieri</string>
+  <string name="log_smilies">Smile</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -386,7 +387,7 @@
   <string name="init_autoload">Carica automaticamente descrizione estesa</string>
   <string name="init_other">Altre opzioni</string>
   <string name="init_skin">Tema chiaro\n(richiede riavvio di c:geo)</string>
-  <string name="init_address">Visualizza indirizzo invece di posizione su pagina principale</string>
+  <string name="init_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
   <string name="init_captcha">Visualizza CAPTCHA se necessario (solo utenti base, non Premium)</string>
   <string name="init_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
   <string name="init_exclude">Escludi i miei cache e queli che ho già trovato</string>
@@ -422,6 +423,14 @@
   <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).</string>
   <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_select_gpx_exportdir">…</string>
+  <string name="init_select_gpx_importdir">…</string>
+  <string name="init_gpx_exportdir">Cartella di export GPX</string>
+  <string name="init_gpx_importdir">Cartella di import GPX</string>
+  <string name="init_gpx_exportdir_description">Qui puoi selezionare la cartella di esportazione GPX.</string>
+  <string name="init_gpx_importdir_description">Qui puoi selezionare la cartella di importazione GPX.</string>
+  <string name="init_gpx_exportdir_select">Scegli la cartella di esportazione GPX</string>
+  <string name="init_gpx_importdir_select">Scegli la cartella di esportazione GPX</string>
   <string name="init_maptrail">Mostra la scia nella Mappa</string>
   <string name="init_share_after_export">Apri menu condividi dopo export GPX</string>
   <string name="init_trackautovisit">Setta i miei oggetti Trackables automaticamente su \"visit\" quando invio log</string>
@@ -443,6 +452,7 @@
   <string name="init_dbmove_running">Spostamento Database</string>
   <string name="init_dbmove_success">Database spostato con successo.</string>
   <string name="init_dbmove_failed">Spostamento fallito</string>
+  <string name="init_plain_logs">Visualizza i LOG senza colori</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
@@ -557,6 +567,7 @@
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>
   <string name="cache_status_found">Trovato</string>
@@ -601,6 +612,10 @@
   <string name="file_searching">Ricerca file corrispondenti</string>
   <string name="file_title_searching">Ricerca in corso</string>
 
+  <!-- simple_dir_chooser -->
+  <string name="simple_dir_chooser_title">Scegli cartella</string>
+  <string name="simple_dir_chooser_current_path">Path:</string>
+
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Caricamento caches da file GPX</string>
   <string name="gpx_import_loading_waypoints">Caricamento file waypoints</string>
@@ -618,6 +633,8 @@
   <string name="gpx_import_error_unexpected">Errore inaspettato</string>
   <string name="gpx_import_confirm">Vuoi importare il file GPX in c:geo?</string>
   <string name="gpx_import_canceled">Importazione GPX annullata</string>
+  <string name="gpx_import_delete_title">Cancella file</string>
+  <string name="gpx_import_delete_message">Vuoi cancellare %s?</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Seleziona il file mappa</string>
@@ -754,8 +771,8 @@
   <!-- navigation -->
   <string name="navigation">Navigazione</string>
   <string name="compass_title">Bussola</string>
-  <string name="use_gps">Usa Nord da GPS</string>
-  <string name="use_compass">Usa Nord da bussola</string>
+  <string name="use_gps">Usa Nord solo da GPS</string>
+  <string name="use_compass">Usa Nord da GPS e bussola</string>
   <string name="destination_select">Scegli destinazione</string>
   <string name="destination_set">Attiva destinazione</string>
   <string name="navigation_direct_navigation">Navigazione diretta</string>
