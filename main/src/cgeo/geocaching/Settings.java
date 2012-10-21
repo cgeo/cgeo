@@ -98,6 +98,7 @@ public final class Settings {
     private static final String KEY_GPX_EXPORT_DIR = "gpxExportDir";
     private static final String KEY_GPX_IMPORT_DIR = "gpxImportDir";
     private static final String KEY_PLAIN_LOGS = "plainLogs";
+    private static final String KEY_NATIVE_UA = "nativeUa";
 
     private final static int unitsMetric = 1;
 
@@ -1226,4 +1227,17 @@ public final class Settings {
         });
     }
 
+    public static boolean getUseNativeUa() {
+        return sharedPrefs.getBoolean(KEY_NATIVE_UA, false);
+    }
+
+    public static void setUseNativeUa(final boolean useNativeUa) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_NATIVE_UA, useNativeUa);
+            }
+        });
+    }
 }

@@ -527,6 +527,18 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        // Workaround for cspire customers on mobile connections #1843
+        final CheckBox useNativeUserAgent = (CheckBox) findViewById(R.id.use_native_ua);
+        useNativeUserAgent.setChecked(Settings.getUseNativeUa());
+        useNativeUserAgent.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setUseNativeUa(!Settings.getUseNativeUa());
+                useNativeUserAgent.setChecked(Settings.getUseNativeUa());
+            }
+        });
+
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
         altitudeEdit.setText(String.valueOf(Settings.getAltCorrection()));
