@@ -350,7 +350,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public void onSaveInstanceState(final Bundle outState) {
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putIntArray(BUNDLE_MAP_STATE, currentMapState());
-        outState.putString(BUNDLE_MAP_MODE, mapMode.name());
+        if (isLiveMode()) {
+            outState.putString(BUNDLE_MAP_MODE, mapMode.name());
+        }
+        else {
+            outState.putString(BUNDLE_MAP_MODE, null);
+        }
     }
 
     @Override
@@ -392,7 +397,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (savedInstanceState != null) {
             currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource());
             mapStateIntent = savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
-            mapMode = Enum.valueOf(MapMode.class, savedInstanceState.getString(BUNDLE_MAP_MODE));
+            String lastMapmode = savedInstanceState.getString(BUNDLE_MAP_MODE);
+            if (lastMapmode != null) {
+                mapMode = Enum.valueOf(MapMode.class, lastMapmode);
+            }
 
             Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE);
         } else {
