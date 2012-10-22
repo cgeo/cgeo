@@ -456,6 +456,7 @@
   <string name="init_dbmove_success">Die Datenbank wurde erfolgreich verschoben.</string>
   <string name="init_dbmove_failed">Fehler beim Verschieben der Datenbank.</string>
   <string name="init_plain_logs">Logeinträge ohne Farben anzeigen</string>
+  <string name="init_use_native_ua">Als Android Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
   
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
