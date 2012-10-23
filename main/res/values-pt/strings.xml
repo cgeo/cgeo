@@ -72,7 +72,7 @@
   <string name="log_maintenance_needed">Precisa manutenção</string>
   <string name="log_update">Coordenadas actualizadas</string>
   <string name="log_archived">Arquivada</string>
-  <string name="log_needs_archived">Precisa logbook</string>
+  <string name="log_needs_archived">Precisa arquivo</string>
   <string name="log_discovered">Descoberta</string>
   <string name="log_reviewer">Nota de revisor</string>
   <string name="log_tb_nothing">Não fazer nada</string>
