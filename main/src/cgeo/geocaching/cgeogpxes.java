@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 public class cgeogpxes extends FileList<GPXListAdapter> {
@@ -30,9 +31,8 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
     }
 
     @Override
-    protected File[] getBaseFolders() {
-        String gpxImportDir = Settings.getGpxImportDir();
-        return new File[] { new File(gpxImportDir) };
+    protected List<File> getBaseFolders() {
+        return Collections.singletonList(new File(Settings.getGpxImportDir()));
     }
 
     @Override

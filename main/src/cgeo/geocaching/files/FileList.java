@@ -17,7 +17,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.ArrayAdapter;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -140,7 +143,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
      *
      * @return The folder to start the recursive search in
      */
-    protected abstract File[] getBaseFolders();
+    protected abstract List<File> getBaseFolders();
 
     /**
      * Triggers the deriving class to set the title
@@ -163,7 +166,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                     {
                         if (dir.exists() && dir.isDirectory()) {
                             listDir(list, dir);
-                            if (list.size() > 0) {
+                            if (!list.isEmpty()) {
                                 loaded = true;
                                 break;
                             }
@@ -171,7 +174,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                     }
                     if (!loaded) {
                         changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, MSG_SEARCH_WHOLE_SD_CARD, Environment.getExternalStorageDirectory().getName()));
-                        listDir(list, Environment.getExternalStorageDirectory());
+                        listDirs(list, getStorages());
                     }
                 } else {
                     Log.w("No external media mounted.");
@@ -192,6 +195,12 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             });
 
             loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
+        }
+    }
+
+    private void listDirs(List<File> list, List<File> directories) {
+        for (final File dir : directories) {
+            listDir(list, dir);
         }
     }
 
@@ -228,7 +237,56 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 }
             }
         }
+    }
 
+    /*
+     * Get all storages available on the device.
+     * Will include paths like /mnt/sdcard /mnt/usbdisk /mnt/ext_card /mnt/sdcard/ext_card
+     */
+    protected static List<File> getStorages() {
+
+        String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+        List<File> storages = new ArrayList<File>();
+        storages.add(new File(extStorage));
+        File file = new File("/system/etc/vold.fstab");
+        if (file.canRead()) {
+            FileReader fr = null;
+            BufferedReader br = null;
+            try {
+                fr = new FileReader(file);
+                br = new BufferedReader(fr);
+                String s = br.readLine();
+                while (s != null) {
+                    if (s.startsWith("dev_mount")) {
+                        String[] tokens = StringUtils.split(s);
+                        if (tokens.length >= 3) {
+                            String path = tokens[2]; // mountpoint
+                            if (!extStorage.equals(path)) {
+                                File directory = new File(path);
+                                if (directory.exists() && directory.isDirectory()) {
+                                    storages.add(directory);
+                                }
+                            }
+                        }
+                    }
+                    s = br.readLine();
+                }
+            } catch (IOException e) {
+                Log.e("Could not get additional mount points for user content. " +
+                        "Proceeding with external storage only (" + extStorage + ")");
+            } finally {
+                try {
+                    if (fr != null) {
+                        fr.close();
+                    }
+                    if (br != null) {
+                        br.close();
+                    }
+                } catch (IOException e) {
+                }
+            }
+        }
+        return storages;
     }
 
     /**
