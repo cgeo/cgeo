@@ -514,6 +514,7 @@
   <string name="cache_log_images_title">Logbild</string>
   <string name="cache_log_image_default_title">Bild</string>
   <string name="cache_personal_note">Persönliche Notiz</string>
+  <string name="cache_personal_note_edit">Bearbeiten</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
   <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf Geocaching.com korrekt angezeigt werden.</string>
@@ -614,6 +615,9 @@
   <string name="cache_share_field">Weiterleiten</string>
   <string name="cache_time_full_hours">Uhr</string>
 
+  <!--  editor dialog -->
+  <string name="editor_save">Speichern</string>
+  
   <!-- file list base -->
   <string name="file_searching_in">Suche nach Dateien\nin</string>
   <string name="file_searching_sdcard_in">Keine Dateien in Standardverzeichnissen gefunden:\n%1$s\n\nDurchsuche komplette SD-Karte:\n</string>

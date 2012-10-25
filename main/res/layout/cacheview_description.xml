@@ -110,8 +110,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dip"
-            android:orientation="vertical"
-            android:visibility="gone" >
+            android:orientation="vertical" >
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -129,8 +128,12 @@
                 android:linksClickable="true"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip"
-                android:visibility="gone" />
+                android:textSize="14dip" />
+            <Button
+            	android:id="@+id/edit_personalnote"
+            	style="@style/button_small"
+            	android:text="@string/cache_personal_note_edit" />
+            
         </LinearLayout>
     </LinearLayout>
 

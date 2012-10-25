@@ -18,6 +18,7 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
+import cgeo.geocaching.ui.EditorDialog;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.BaseUtils;
@@ -166,7 +167,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
     /**
      * A {@link List} of all available pages.
-     * 
+     *
      * TODO Move to adapter
      */
     private final List<Page> pageOrder = new ArrayList<Page>();
@@ -1892,28 +1893,37 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // cache personal note
-            if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-                view.findViewById(R.id.personalnote_box).setVisibility(View.VISIBLE);
-
-                TextView personalNoteText = (TextView) view.findViewById(R.id.personalnote);
-                personalNoteText.setVisibility(View.VISIBLE);
-                personalNoteText.setText(cache.getPersonalNote(), TextView.BufferType.SPANNABLE);
-                personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
-                registerForContextMenu(personalNoteText);
-            }
-            else {
-                view.findViewById(R.id.personalnote_box).setVisibility(View.GONE);
-            }
+            final TextView personalNoteView = (TextView) view.findViewById(R.id.personalnote);
+            setPersonalNote(personalNoteView);
+            personalNoteView.setMovementMethod(LinkMovementMethod.getInstance());
+            registerForContextMenu(personalNoteView);
+            final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
+            personalNoteEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditorDialog editor = new EditorDialog(CacheDetailActivity.this, personalNoteView.getText());
+                    editor.setOnEditorUpdate(new EditorDialog.EditorUpdate() {
+                        @Override
+                        public void update(CharSequence editorText) {
+                            cache.setPersonalNote(editorText.toString());
+                            setPersonalNote(personalNoteView);
+                            app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                        }
+                    });
+                    editor.show();
+                }
+            });
 
             // cache hint and spoiler images
+            final View hintBoxView = view.findViewById(R.id.hint_box);
             if (StringUtils.isNotBlank(cache.getHint()) || CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-                view.findViewById(R.id.hint_box).setVisibility(View.VISIBLE);
+                hintBoxView.setVisibility(View.VISIBLE);
             } else {
-                view.findViewById(R.id.hint_box).setVisibility(View.GONE);
+                hintBoxView.setVisibility(View.GONE);
             }
 
+            final TextView hintView = ((TextView) view.findViewById(R.id.hint));
             if (StringUtils.isNotBlank(cache.getHint())) {
-                TextView hintView = ((TextView) view.findViewById(R.id.hint));
                 if (BaseUtils.containsHtml(cache.getHint())) {
                     hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                     hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
@@ -1926,14 +1936,13 @@ public class CacheDetailActivity extends AbstractActivity {
                 hintView.setOnClickListener(new DecryptTextClickListener());
                 registerForContextMenu(hintView);
             } else {
-                TextView hintView = ((TextView) view.findViewById(R.id.hint));
                 hintView.setVisibility(View.GONE);
                 hintView.setClickable(false);
                 hintView.setOnClickListener(null);
             }
 
+            final TextView spoilerlinkView = ((TextView) view.findViewById(R.id.hint_spoilerlink));
             if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-                TextView spoilerlinkView = ((TextView) view.findViewById(R.id.hint_spoilerlink));
                 spoilerlinkView.setVisibility(View.VISIBLE);
                 spoilerlinkView.setClickable(true);
                 spoilerlinkView.setOnClickListener(new View.OnClickListener() {
@@ -1948,13 +1957,23 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                 });
             } else {
-                TextView spoilerlinkView = ((TextView) view.findViewById(R.id.hint_spoilerlink));
                 spoilerlinkView.setVisibility(View.GONE);
                 spoilerlinkView.setClickable(true);
                 spoilerlinkView.setOnClickListener(null);
             }
 
             return view;
+        }
+
+        private void setPersonalNote(final TextView personalNoteView) {
+            final String personalNote = cache.getPersonalNote();
+            personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
+            if (StringUtils.isNotBlank(personalNote)) {
+                personalNoteView.setVisibility(View.VISIBLE);
+            }
+            else {
+                personalNoteView.setVisibility(View.GONE);
+            }
         }
 
         private void loadLongDescription() {
