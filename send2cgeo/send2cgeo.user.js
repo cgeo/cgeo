@@ -1,9 +1,10 @@
 // ==UserScript==
-// @name           sendToCgeo
+// @name           Send to c:geo
 // @namespace      http://send2.cgeo.org/
-// @description    Add Send to c:geo button to geocaching.com
+// @description    Add button "Send to c:geo" to geocaching.com
 // @include        http://www.geocaching.com/seek/cache_details*
 // @include        http://www.geocaching.com/map/*
+// @icon           http://send2.cgeo.org/content/images/logo.png
 // @updateURL      http://send2.cgeo.org/send2cgeo.user.js
 // @version        0.26
 // ==/UserScript==
@@ -32,7 +33,7 @@ s.textContent =  '(' + function() {
         // hide box after 3 seconds
         $(this).show().parent().delay(3000).fadeOut();
       });
-  }
+  };
 
 
   // Defines the elements to insert into the page //////////////////////////////
@@ -81,7 +82,7 @@ s.textContent =  '(' + function() {
 
     $('#Download p:last').append(html);
   }
-} + ')();'
+} + ')();';
 
 // Inject Script. Can’t use jQuery yet, because the page is not
 // accessible from Tampermonkey
