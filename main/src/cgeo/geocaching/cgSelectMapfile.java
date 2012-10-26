@@ -1,9 +1,11 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.files.FileList;
+import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.files.LocalStorage;
-import cgeo.geocaching.ui.MapfileListAdapter;
+import cgeo.geocaching.ui.FileSelectionListAdapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,7 +13,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class cgSelectMapfile extends FileList<MapfileListAdapter> {
+public class cgSelectMapfile extends FileList<FileSelectionListAdapter> implements IFileSelectionView {
 
     public cgSelectMapfile() {
         super("map");
@@ -25,6 +27,7 @@ public class cgSelectMapfile extends FileList<MapfileListAdapter> {
         mapFile = Settings.getMapFile();
     }
 
+    @Override
     public void close() {
 
         Intent intent = new Intent();
@@ -36,8 +39,8 @@ public class cgSelectMapfile extends FileList<MapfileListAdapter> {
     }
 
     @Override
-    protected MapfileListAdapter getAdapter(List<File> files) {
-        return new MapfileListAdapter(this, files);
+    protected FileSelectionListAdapter getAdapter(List<File> files) {
+        return new FileSelectionListAdapter(this, files);
     }
 
     @Override
@@ -56,12 +59,19 @@ public class cgSelectMapfile extends FileList<MapfileListAdapter> {
         setTitle(res.getString(R.string.map_file_select_title));
     }
 
-    public String getCurrentMapfile() {
+    @Override
+    public String getCurrentFile() {
         return mapFile;
     }
 
-    public void setMapfile(String newMapfile) {
-        mapFile = newMapfile;
+    @Override
+    public void setCurrentFile(String newFile) {
+        mapFile = newFile;
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
 }
