@@ -42,6 +42,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -65,6 +66,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -114,14 +116,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
     private static final int MENU_STORE_CACHES = 3;
-    private static final int MENU_TRAIL_MODE = 4;
+    private static final int SUBMENU_MODES = 4;
+    private static final int MENU_TRAIL_MODE = 81;
+    private static final int MENU_THEME_MODE = 82;
+    private static final int MENU_CIRCLE_MODE = 83;
     private static final int SUBMENU_STRATEGY = 5;
     private static final int MENU_STRATEGY_FASTEST = 51;
     private static final int MENU_STRATEGY_FAST = 52;
     private static final int MENU_STRATEGY_AUTO = 53;
     private static final int MENU_STRATEGY_DETAILED = 74;
 
-    private static final int MENU_CIRCLE_MODE = 6;
     private static final int MENU_AS_LIST = 7;
 
     private static final String EXTRAS_MAP_TITLE = "mapTitle";
@@ -547,7 +551,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
         menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as).setEnabled(false);
-        menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
+        SubMenu subMenuModes = menu.addSubMenu(0, SUBMENU_MODES, 0, res.getString(R.string.map_modes)).setIcon(R.drawable.ic_menu_mark);
+        subMenuModes.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
+        subMenuModes.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
+        subMenuModes.add(0, MENU_THEME_MODE, 0, res.getString(R.string.map_theme_select)).setIcon(R.drawable.ic_menu_preferences);
 
         Strategy strategy = Settings.getLiveMapStrategy();
         SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy)).setIcon(R.drawable.ic_menu_preferences);
@@ -558,7 +565,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         subMenuStrategy.add(2, MENU_STRATEGY_DETAILED, 0, Strategy.DETAILED.getL10n()).setCheckable(true).setChecked(strategy == Strategy.DETAILED);
         subMenuStrategy.setGroupCheckable(2, true, true);
 
-        menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
         menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(R.drawable.ic_menu_agenda);
 
         return true;
@@ -607,6 +613,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             } else {
                 item.setTitle(res.getString(R.string.map_circles_show));
             }
+
+            item = menu.findItem(MENU_THEME_MODE); // show theme selection
+            item.setVisible(mapView.hasMapThemes());
 
             menu.findItem(MENU_AS_LIST).setEnabled(isLiveMode() && !isLoading());
 
@@ -705,6 +714,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 mapView.repaintRequired(overlayCaches);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
+            case MENU_THEME_MODE:
+                selectMapTheme();
+                return true;
             case MENU_AS_LIST: {
                 cgeocaches.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
                 return true;
@@ -740,6 +752,57 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
         }
         return false;
+    }
+
+    private void selectMapTheme() {
+
+        final File[] themeFiles = Settings.getMapThemeFiles();
+
+        String currentTheme = StringUtils.EMPTY;
+        int currentItem = 0;
+        if (StringUtils.isNotEmpty(Settings.getCustomRenderThemeFile())) {
+            File currentThemeFile = new File(Settings.getCustomRenderThemeFile());
+            currentTheme = currentThemeFile.getName();
+        }
+
+        int index = 0;
+        List<String> names = new ArrayList<String>();
+        names.add(res.getString(R.string.map_theme_builtin));
+        for (File file : themeFiles) {
+            index++;
+            if (currentTheme.equalsIgnoreCase(file.getName())) {
+                currentItem = index;
+            }
+            names.add(file.getName());
+        }
+
+        final int selectedItem = currentItem;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        builder.setTitle(R.string.map_theme_select);
+
+        builder.setSingleChoiceItems(names.toArray(new String[] {}), selectedItem,
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int newItem) {
+                        if (newItem == selectedItem) {
+                            // no change
+                        } else {
+                            // Adjust index because of <default> selection
+                            if (newItem > 0) {
+                                Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
+                            } else {
+                                Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
+                            }
+                            mapView.setMapTheme();
+                        }
+                        dialog.cancel();
+                    }
+                });
+
+        builder.show();
     }
 
     /**
@@ -786,6 +849,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             mapRestart();
         } else if (mapView != null) {
             mapView.setMapSource();
+            ActivityMixin.invalidateOptionsMenu(activity);
         }
 
         return restartRequired;

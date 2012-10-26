@@ -709,6 +709,31 @@
 						android:scrollHorizontally="true"
 						android:inputType="textNoSuggestions" />
 			</LinearLayout>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:textSize="14dip"
+                    android:textColor="?text_color"
+                    android:text="@string/init_rendertheme_folder" />
+			<LinearLayout
+					android:id="@+id/init_themefilegroup"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal" >
+				<Button style="@style/button_full"
+						android:id="@+id/select_themefolder"
+						android:text="@string/init_select_themefolder"
+						android:layout_width="wrap_content" />
+				<EditText style="@style/edittext_full"
+						android:id="@+id/themefolder"
+						android:singleLine="true"
+						android:lines="1"
+						android:scrollHorizontally="true"
+						android:inputType="textNoSuggestions" />
+			</LinearLayout>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
@@ -818,7 +843,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -836,7 +860,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -871,11 +894,11 @@
 					android:id="@+id/webDeviceName"
 					android:singleLine="true"
 					android:lines="1"
-                    android:maxLength="15"
+					android:maxLength="15"
 					android:scrollHorizontally="true"
 					android:inputType="textNoSuggestions" />
 			<TextView
-                                        android:layout_width="wrap_content"
+					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"

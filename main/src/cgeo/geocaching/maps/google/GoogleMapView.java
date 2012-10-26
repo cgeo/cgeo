@@ -189,4 +189,15 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     public boolean needsInvertedColors() {
         return false;
     }
+
+    @Override
+    public boolean hasMapThemes() {
+        // Not supported
+        return false;
+    }
+
+    @Override
+    public void setMapTheme() {
+        // Not supported
+    }
 }
