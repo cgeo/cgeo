@@ -59,6 +59,7 @@ public class SettingsActivity extends AbstractActivity {
     private final static int SELECT_MAPFILE_REQUEST = 1;
     private final static int SELECT_GPX_EXPORT_REQUEST = 2;
     private final static int SELECT_GPX_IMPORT_REQUEST = 3;
+    private final static int SELECT_THEMEFOLDER_REQUEST = 4;
 
 
     private ProgressDialog loginDialog = null;
@@ -581,6 +582,20 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        // Theme folder settings
+        initThemefolderEdittext(false);
+
+        Button selectThemefolder = (Button) findViewById(R.id.select_themefolder);
+        selectThemefolder.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
+                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getCustomRenderThemeBasefolder());
+                startActivityForResult(dirChooser, SELECT_THEMEFOLDER_REQUEST);
+            }
+        });
+
         // GPX Export directory
         final EditText gpxExportDir = (EditText) findViewById(R.id.gpx_exportdir);
         gpxExportDir.setText(Settings.getGpxExportDir());
@@ -740,6 +755,14 @@ public class SettingsActivity extends AbstractActivity {
         mfmapFileEdit.setText(Settings.getMapFile());
         if (setFocus) {
             mfmapFileEdit.requestFocus();
+        }
+    }
+
+    private void initThemefolderEdittext(boolean setFocus) {
+        EditText themeFileEdit = (EditText) findViewById(R.id.themefolder);
+        themeFileEdit.setText(Settings.getCustomRenderThemeBasefolder());
+        if (setFocus) {
+            themeFileEdit.requestFocus();
         }
     }
 
@@ -965,6 +988,15 @@ public class SettingsActivity extends AbstractActivity {
                 @Override
                 public void run(String directory) {
                     Settings.setGpxImportDir(directory);
+                }
+            });
+        }
+        if (requestCode == SELECT_THEMEFOLDER_REQUEST) {
+            checkDirectory(resultCode, data, R.id.themefolder, new RunnableWithArgument<String>() {
+
+                @Override
+                public void run(String directory) {
+                    Settings.setCustomRenderThemeBasefolder(directory);
                 }
             });
         }
