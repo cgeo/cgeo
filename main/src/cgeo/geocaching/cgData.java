@@ -1513,14 +1513,7 @@ public class cgData {
 
                 if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
                     final List<cgImage> spoilers = loadSpoilers(cache.getGeocode());
-                    if (CollectionUtils.isNotEmpty(spoilers)) {
-                        if (cache.getSpoilers() == null) {
-                            cache.setSpoilers(new ArrayList<cgImage>());
-                        } else {
-                            cache.getSpoilers().clear();
-                        }
-                        cache.getSpoilers().addAll(spoilers);
-                    }
+                    cache.setSpoilers(spoilers);
                 }
 
                 if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {

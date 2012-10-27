@@ -479,7 +479,7 @@ public class cgeotrackable extends AbstractActivity {
                     final View.OnClickListener listener = new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            cgeoimages.startActivityLogImages(cgeotrackable.this, trackable.getGeocode(), logImages);
+                            ImagesActivity.startActivityLogImages(cgeotrackable.this, trackable.getGeocode(), logImages);
                         }
                     };
 

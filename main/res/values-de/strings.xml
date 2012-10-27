@@ -527,7 +527,8 @@
   <string name="cache_favpoint_not_on">Dieser Cache ist kein Favorit.</string>
   <string name="cache_favpoint_add">Hinzufügen</string>
   <string name="cache_favpoint_remove">Entfernen</string>
-
+  <string name="cache_images">Bilder</string>
+  
   <string name="cache_waypoints">Wegpunkte</string>
   <plurals name="waypoints">
       <item quantity="one">1 Wegpunkt</item>

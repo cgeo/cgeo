@@ -537,7 +537,8 @@
   <string name="cache_favpoint_not_on">This cache is not one of your favorites.</string>
   <string name="cache_favpoint_add">Add</string>
   <string name="cache_favpoint_remove">Remove</string>
-
+  <string name="cache_images">Images</string>
+  
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
       <item quantity="one">1 Waypoint</item>
@@ -614,6 +615,8 @@
   <string name="cache_coordinates_original">Original Coordinates</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
+  <string name="cache_images_title">Images</string>
+  <string name="cache_images_loading">Loading images…</string>
   <string name="cache_log_types">Log types</string>
   <string name="cache_coordinates_no">This cache has no coordinates.</string>
   <string name="cache_export_fieldnote">Export as Field Notes</string>

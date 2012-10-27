@@ -96,7 +96,7 @@ public class cgCache implements ICache, IWaypoint {
     private boolean onWatchlist = false;
     private List<String> attributes = null;
     private List<cgWaypoint> waypoints = null;
-    private ArrayList<cgImage> spoilers = null;
+    private List<cgImage> spoilers = null;
     private List<LogEntry> logs = null;
     private List<cgTrackable> inventory = null;
     private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
@@ -686,8 +686,11 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     @Override
-    public ArrayList<cgImage> getSpoilers() {
-        return spoilers;
+    public List<cgImage> getSpoilers() {
+        if (spoilers == null) {
+            return Collections.emptyList();
+        }
+        return Collections.unmodifiableList(spoilers);
     }
 
     @Override
@@ -1049,7 +1052,7 @@ public class cgCache implements ICache, IWaypoint {
         this.attributes = attributes;
     }
 
-    public void setSpoilers(ArrayList<cgImage> spoilers) {
+    public void setSpoilers(List<cgImage> spoilers) {
         this.spoilers = spoilers;
     }
 
@@ -1614,5 +1617,14 @@ public class cgCache implements ICache, IWaypoint {
 
     public boolean hasStaticMap() {
         return StaticMapsProvider.hasStaticMap(this);
+    }
+
+    public List<cgImage> getImages() {
+        List<cgImage> result = new ArrayList<cgImage>();
+        result.addAll(getSpoilers());
+        for (LogEntry log : getLogs()) {
+            result.addAll(log.getLogImages());
+        }
+        return result;
     }
 }

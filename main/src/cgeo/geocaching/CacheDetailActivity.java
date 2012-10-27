@@ -20,6 +20,8 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditorDialog;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.ImagesList;
+import cgeo.geocaching.ui.ImagesList.ImageType;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -110,6 +112,7 @@ import java.util.regex.Pattern;
  */
 public class CacheDetailActivity extends AbstractActivity {
 
+    private static final String EXTRAS_PAGE = "page";
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
     private static final int MENU_FIELD_TRANSLATE_EN = 3;
@@ -206,6 +209,7 @@ public class CacheDetailActivity extends AbstractActivity {
             notifyDataSetChanged();
         }
     };
+    protected ImagesList imagesList;
 
     public CacheDetailActivity() {
         // identifier for manual
@@ -325,6 +329,10 @@ public class CacheDetailActivity extends AbstractActivity {
                 if (Settings.isOpenLastDetailsPage()) {
                     Settings.setLastDetailsPage(position);
                 }
+                // lazy loading of cache images
+                if (pageOrder.get(position) == Page.IMAGES) {
+                    loadCacheImages();
+                }
             }
 
             @Override
@@ -338,17 +346,16 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // switch to entry page (last used or 2)
         int entryPageIndex;
-        if (extras != null && extras.get("page") != null) {
-            entryPageIndex = extras.getInt("page");
+        if (extras != null && extras.get(EXTRAS_PAGE) != null) {
+            entryPageIndex = extras.getInt(EXTRAS_PAGE);
         }
-        else
-        {
+        else {
             entryPageIndex = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
-            if (viewPagerAdapter.getCount() < entryPageIndex) {
-                for (int i = 0; i <= entryPageIndex; i++) {
-                    // we can't switch to a page that is out of bounds, so we add null-pages
-                    pageOrder.add(null);
-                }
+        }
+        if (viewPagerAdapter.getCount() < entryPageIndex) {
+            for (int i = 0; i <= entryPageIndex; i++) {
+                // we can't switch to a page that is out of bounds, so we add null-pages
+                pageOrder.add(null);
             }
         }
         viewPager.setCurrentItem(entryPageIndex, false);
@@ -399,7 +406,7 @@ public class CacheDetailActivity extends AbstractActivity {
             case R.id.longdesc:
                 // combine short and long description
                 String shortDesc = cache.getShortDescription();
-                if (shortDesc.compareTo("") == 0) {
+                if (StringUtils.isBlank(shortDesc)) {
                     clickedItemText = ((TextView) view).getText();
                 } else {
                     clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
@@ -448,6 +455,9 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
                 break;
             default:
+                if (imagesList != null) {
+                    imagesList.onCreateContextMenu(menu, view);
+                }
                 break;
         }
     }
@@ -542,8 +552,13 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
             }
                 break;
-            default:
+            default: {
+                if (imagesList != null && imagesList.onContextItemSelected(item)) {
+                    return true;
+                }
+
                 return onOptionsItemSelected(item);
+            }
         }
         return false;
     }
@@ -678,9 +693,9 @@ public class CacheDetailActivity extends AbstractActivity {
             creator.notifyDataSetChanged();
         }
 
-        // action bar: title and icon (default: mystery-icon)
+        // action bar: title and icon (default: mystery icon)
         if (StringUtils.isNotBlank(cache.getName())) {
-            setTitle(cache.getName() + " (" + cache.getGeocode().toUpperCase() + ")");
+            setTitle(cache.getName() + " (" + cache.getGeocode().toUpperCase() + ')');
         } else {
             setTitle(cache.getGeocode().toUpperCase());
         }
@@ -691,6 +706,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         pageOrder.add(Page.WAYPOINTS);
         pageOrder.add(Page.DETAILS);
+        final int detailsIndex = pageOrder.size() - 1;
         pageOrder.add(Page.DESCRIPTION);
         if (CollectionUtils.isNotEmpty(cache.getLogs(true))) {
             pageOrder.add(Page.LOGS);
@@ -701,10 +717,13 @@ public class CacheDetailActivity extends AbstractActivity {
         if (CollectionUtils.isNotEmpty(cache.getInventory())) {
             pageOrder.add(Page.INVENTORY);
         }
+        if (CollectionUtils.isNotEmpty(cache.getImages())) {
+            pageOrder.add(Page.IMAGES);
+        }
 
-        // switch to page 2 (index 1) if we're out of bounds
+        // switch to details page, if we're out of bounds
         if (viewPager.getCurrentItem() < 0 || viewPager.getCurrentItem() >= viewPagerAdapter.getCount()) {
-            viewPager.setCurrentItem(1, false);
+            viewPager.setCurrentItem(detailsIndex, false);
         }
 
         // notify the adapter that the data has changed
@@ -713,7 +732,7 @@ public class CacheDetailActivity extends AbstractActivity {
         // notify the indicator that the data has changed
         titleIndicator.notifyDataSetChanged();
 
-        // rendering done! remove progress-popup if any there
+        // rendering done! remove progress popup if any there
         progress.dismiss();
     }
 
@@ -771,9 +790,9 @@ public class CacheDetailActivity extends AbstractActivity {
         } else {
             intent = new Intent(action, uri);
         }
-        List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
+        final List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
-        return list.size() > 0;
+        return !list.isEmpty();
     }
 
     private void addToCalendarWithIntent() {
@@ -925,6 +944,22 @@ public class CacheDetailActivity extends AbstractActivity {
         alert.show();
     }
 
+    private void loadCacheImages() {
+        if (imagesList != null) {
+            return;
+        }
+        PageViewCreator creator = viewCreators.get(Page.IMAGES);
+        if (creator == null) {
+            return;
+        }
+        View imageView = creator.getView();
+        if (imageView == null) {
+            return;
+        }
+        imagesList = new ImagesList(CacheDetailActivity.this, cache.getGeocode());
+        imagesList.loadImages(imageView, cache.getImages(), ImageType.AllImages, false);
+    }
+
     public static void startActivity(final Context context, final String geocode) {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
         detailIntent.putExtra("geocode", geocode.toUpperCase());
@@ -934,7 +969,7 @@ public class CacheDetailActivity extends AbstractActivity {
     public static void startActivity(final Context context, final String geocode, final int page) {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
         detailIntent.putExtra("geocode", geocode.toUpperCase());
-        detailIntent.putExtra("page", page);
+        detailIntent.putExtra(EXTRAS_PAGE, page);
         context.startActivity(detailIntent);
     }
 
@@ -989,6 +1024,10 @@ public class CacheDetailActivity extends AbstractActivity {
                     case INVENTORY:
                         creator = new InventoryViewCreator();
                         break;
+
+                    case IMAGES:
+                        creator = new ImagesViewCreator();
+                        break;
                 }
                 viewCreators.put(page, creator);
             }
@@ -1011,7 +1050,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return (view == object);
+            return view == object;
         }
 
         @Override
@@ -1058,7 +1097,8 @@ public class CacheDetailActivity extends AbstractActivity {
         LOGS(R.string.cache_logs),
         LOGSFRIENDS(R.string.cache_logsfriends),
         WAYPOINTS(R.string.cache_waypoints),
-        INVENTORY(R.string.cache_inventory);
+        INVENTORY(R.string.cache_inventory),
+        IMAGES(R.string.cache_images);
 
         final private int titleStringId;
 
@@ -1845,7 +1885,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private class DescriptionViewCreator implements PageViewCreator {
 
-        ScrollView view;
+        private ScrollView view;
 
         @Override
         public void notifyDataSetChanged() {
@@ -1953,7 +1993,7 @@ public class CacheDetailActivity extends AbstractActivity {
                             return;
                         }
 
-                        cgeoimages.startActivitySpoilerImages(CacheDetailActivity.this, cache.getGeocode(), cache.getSpoilers());
+                        ImagesActivity.startActivitySpoilerImages(CacheDetailActivity.this, cache.getGeocode(), cache.getSpoilers());
                     }
                 });
             } else {
@@ -2099,8 +2139,8 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private class LogsViewCreator implements PageViewCreator {
-        ListView view;
-        boolean allLogs;
+        private ListView view;
+        private boolean allLogs;
 
         LogsViewCreator(boolean allLogs) {
             super();
@@ -2215,7 +2255,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         holder.images.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cgeoimages.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), new ArrayList<cgImage>(log.getLogImages()));
+                                ImagesActivity.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), new ArrayList<cgImage>(log.getLogImages()));
                             }
                         });
                     } else {
@@ -2281,7 +2321,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private class WaypointsViewCreator implements PageViewCreator {
 
-        ScrollView view;
+        private ScrollView view;
 
         @Override
         public void notifyDataSetChanged() {
@@ -2396,7 +2436,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private class InventoryViewCreator implements PageViewCreator {
 
-        ListView view;
+        private ListView view;
 
         @Override
         public void notifyDataSetChanged() {
@@ -2435,6 +2475,38 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
             });
 
+            return view;
+        }
+    }
+
+    private class ImagesViewCreator implements PageViewCreator {
+
+        private View view;
+
+        @Override
+        public void notifyDataSetChanged() {
+            view = null;
+        }
+
+        @Override
+        public View getView() {
+            if (view == null) {
+                view = getDispatchedView();
+            }
+
+            return view;
+        }
+
+        @Override
+        public View getDispatchedView() {
+            if (cache == null) {
+                return null; // something is really wrong
+            }
+
+            view = getLayoutInflater().inflate(R.layout.caches_images, null);
+            if (imagesList == null && viewPager.getCurrentItem() == pageOrder.indexOf(Page.IMAGES)) {
+                loadCacheImages();
+            }
             return view;
         }
     }

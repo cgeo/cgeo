@@ -72,4 +72,17 @@ public class cgImage implements Parcelable {
         final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         fromActivity.startActivity(browserIntent);
     }
+
+    @Override
+    public String toString() {
+        if (null != title) {
+            return title;
+        }
+
+        if (url != null) {
+            return url;
+        }
+
+        return "???";
+    }
 }
