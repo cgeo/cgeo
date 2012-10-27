@@ -1682,4 +1682,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     }
 
+    @Override
+    public MapViewImpl getMapView() {
+        return mapView;
+    }
+
 }

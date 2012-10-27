@@ -32,6 +32,8 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
+
 public class GoogleMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
@@ -188,5 +190,29 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     @Override
     public boolean needsInvertedColors() {
         return false;
+    }
+
+    @Override
+    public boolean isMapDatabaseSwitchSupported() {
+        //Not supported so return false
+        return false;
+    }
+
+    @Override
+    public ArrayList<String> getMapDatabaseList() {
+        //Not supported so return null
+        return null;
+    }
+
+    @Override
+    public String getCurrentMapDatabase() {
+        //Not supported so return null
+        return null;
+    }
+
+    @Override
+    public void setMapDatabase(String s) {
+        //Not supported so do nothing
+
     }
 }

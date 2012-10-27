@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
+import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -16,6 +17,8 @@ import android.view.View;
 public abstract class AbstractMap {
 
     MapActivityImpl mapActivity;
+    public final static int MENU_MAP_SPECIFIC_MIN = 1000;
+    public final static int MENU_MAP_SPECIFIC_MAX = 2000;
 
     protected AbstractMap(MapActivityImpl activity) {
         mapActivity = activity;
@@ -66,5 +69,7 @@ public abstract class AbstractMap {
     public abstract void goManual(View view);
 
     public abstract void onSaveInstanceState(final Bundle outState);
+
+    public abstract MapViewImpl getMapView();
 
 }
