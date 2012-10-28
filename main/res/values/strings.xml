@@ -1098,6 +1098,8 @@
     · Ability to delete GPX files after import\n
     · Quick signature insertion\n
     · Template for inserting smilies when logging a cache\n
+    · Option to identify as android browser. Might help in case of login problems on mobile networks\n
+    · Create and edit a personal note for each cache (not yet synchronized to geocaching.com)\n
     \n
     <b>Bugfixing:</b>\n
     · Crash when modifying lists fixed\n
@@ -1115,6 +1117,7 @@
     · Opening a link from a TB description improved\n
     · Last activity time on TB page corrected\n
     · 4-digit favorite points shown correctly in lists\n
+    · File scan for offline maps improved\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
@@ -1127,7 +1130,6 @@
       On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
       Log images with huge size cause a long loading time\n
-      Login problems may occur with some mobile operators that modify web pages to insert messages. We are working on a solution.\n\n\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
