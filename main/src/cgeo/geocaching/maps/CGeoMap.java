@@ -128,7 +128,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     private static final String BUNDLE_MAP_SOURCE = "mapSource";
     private static final String BUNDLE_MAP_STATE = "mapState";
-    private static final String BUNDLE_MAP_MODE = "mapMode";
 
     private Resources res = null;
     private MapItemFactory mapItemFactory = null;
@@ -350,12 +349,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public void onSaveInstanceState(final Bundle outState) {
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putIntArray(BUNDLE_MAP_STATE, currentMapState());
-        if (isLiveMode()) {
-            outState.putString(BUNDLE_MAP_MODE, mapMode.name());
-        }
-        else {
-            outState.putString(BUNDLE_MAP_MODE, null);
-        }
     }
 
     @Override
@@ -383,8 +376,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
-
-            Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE);
         }
         else {
             mapMode = Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
@@ -397,12 +388,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (savedInstanceState != null) {
             currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource());
             mapStateIntent = savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
-            String lastMapmode = savedInstanceState.getString(BUNDLE_MAP_MODE);
-            if (lastMapmode != null) {
-                mapMode = Enum.valueOf(MapMode.class, lastMapmode);
-            }
-
-            Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE);
         } else {
             currentSourceId = Settings.getMapSource();
         }
@@ -545,7 +530,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         SubMenu submenu = menu.addSubMenu(1, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(R.drawable.ic_menu_mapmode);
         addMapViewMenuItems(submenu);
 
-        menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
+        if (this.mapMode == MapMode.LIVE_ONLINE || this.mapMode == MapMode.LIVE_OFFLINE) {
+            menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
+        }
         menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as).setEnabled(false);
         menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
 
