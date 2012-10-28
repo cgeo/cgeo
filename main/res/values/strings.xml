@@ -1099,6 +1099,7 @@
     · Quick signature insertion\n
     · Template for inserting smilies when logging a cache\n
     · Option to identify as android browser. Might help in case of login problems on mobile networks\n
+    · Create and edit a personal note for each cache (not yet synchronized to geocaching.com)\n
     \n
     <b>Bugfixing:</b>\n
     · Crash when modifying lists fixed\n
