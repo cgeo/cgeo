@@ -101,8 +101,8 @@ public final class Settings {
     private static final String KEY_LAST_TRACKABLE_ACTION = "trackableaction";
     private static final String KEY_SHARE_AFTER_EXPORT = "shareafterexport";
     private static final String KEY_GPX_EXPORT_DIR = "gpxExportDir";
-    private static final String KEY_RENDER_THEME_PATH = "renderthemepath";
-    private static final String KEY_RENDER_THEME_FILE = "renderthemefile";
+    private static final String KEY_RENDER_THEME_BASE_FOLDER = "renderthemepath";
+    private static final String KEY_RENDER_THEME_FILE_PATH = "renderthemefile";
     private static final String KEY_GPX_IMPORT_DIR = "gpxImportDir";
     private static final String KEY_PLAIN_LOGS = "plainLogs";
     private static final String KEY_NATIVE_UA = "nativeUa";
@@ -1215,22 +1215,22 @@ public final class Settings {
         });
     }
 
-    public static String getCustomRenderThemeBasefolder() {
-        return sharedPrefs.getString(KEY_RENDER_THEME_PATH, "");
+    public static String getCustomRenderThemeBaseFolder() {
+        return sharedPrefs.getString(KEY_RENDER_THEME_BASE_FOLDER, "");
     }
 
-    public static void setCustomRenderThemeBasefolder(final String customRenderThemeBasefolder) {
+    public static void setCustomRenderThemeBaseFolder(final String customRenderThemeBaseFolder) {
         editSharedSettings(new PrefRunnable() {
 
             @Override
             public void edit(Editor edit) {
-                edit.putString(KEY_RENDER_THEME_PATH, customRenderThemeBasefolder);
+                edit.putString(KEY_RENDER_THEME_BASE_FOLDER, customRenderThemeBaseFolder);
             }
         });
     }
 
-    public static String getCustomRenderThemeFile() {
-        return sharedPrefs.getString(KEY_RENDER_THEME_FILE, "");
+    public static String getCustomRenderThemeFilePath() {
+        return sharedPrefs.getString(KEY_RENDER_THEME_FILE_PATH, "");
     }
 
     public static void setCustomRenderThemeFile(final String customRenderThemeFile) {
@@ -1238,14 +1238,14 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putString(KEY_RENDER_THEME_FILE, customRenderThemeFile);
+                edit.putString(KEY_RENDER_THEME_FILE_PATH, customRenderThemeFile);
             }
         });
     }
 
     public static File[] getMapThemeFiles() {
 
-        File directory = new File(Settings.getCustomRenderThemeBasefolder());
+        File directory = new File(Settings.getCustomRenderThemeBaseFolder());
 
         List<File> result = new ArrayList<File>();
 
@@ -1256,17 +1256,16 @@ public final class Settings {
 
     private static class ExtensionsBasedFileSelector extends FileSelector {
 
-        private final String[] _extensions;
-        private boolean _shouldEnd = false;
+        private final String[] extensions;
 
         public ExtensionsBasedFileSelector(String[] extensions) {
-            _extensions = extensions;
+            this.extensions = extensions;
         }
 
         @Override
         public boolean isSelected(File file) {
             String filename = file.getName();
-            for (String ext : _extensions) {
+            for (String ext : extensions) {
                 if (StringUtils.endsWithIgnoreCase(filename, ext)) {
                     return true;
                 }
@@ -1275,12 +1274,8 @@ public final class Settings {
         }
 
         @Override
-        public synchronized boolean shouldEnd() {
-            return _shouldEnd;
-        }
-
-        public synchronized void setShouldEnd(boolean shouldEnd) {
-            _shouldEnd = shouldEnd;
+        public boolean shouldEnd() {
+            return false;
         }
     }
 

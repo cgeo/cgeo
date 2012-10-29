@@ -235,7 +235,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     @Override
     public void setMapTheme() {
-        String customRenderTheme = Settings.getCustomRenderThemeFile();
+        String customRenderTheme = Settings.getCustomRenderThemeFilePath();
         if (!StringUtils.isEmpty(customRenderTheme)) {
             try {
                 setRenderTheme(new File(customRenderTheme));

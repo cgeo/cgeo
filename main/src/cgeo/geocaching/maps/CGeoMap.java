@@ -747,19 +747,18 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         final File[] themeFiles = Settings.getMapThemeFiles();
 
         String currentTheme = StringUtils.EMPTY;
-        int currentItem = 0;
-        if (StringUtils.isNotEmpty(Settings.getCustomRenderThemeFile())) {
-            File currentThemeFile = new File(Settings.getCustomRenderThemeFile());
+        String currentThemePath = Settings.getCustomRenderThemeFilePath();
+        if (StringUtils.isNotEmpty(currentThemePath)) {
+            File currentThemeFile = new File(currentThemePath);
             currentTheme = currentThemeFile.getName();
         }
 
-        int index = 0;
+        int currentItem = 0;
         List<String> names = new ArrayList<String>();
         names.add(res.getString(R.string.map_theme_builtin));
         for (File file : themeFiles) {
-            index++;
             if (currentTheme.equalsIgnoreCase(file.getName())) {
-                currentItem = index;
+                currentItem = names.size();
             }
             names.add(file.getName());
         }
