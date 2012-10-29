@@ -293,7 +293,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
     private class FileListSelector extends FileUtils.FileSelector {
 
-        boolean _shouldEnd = false;
+        boolean shouldEnd = false;
 
         @Override
         public boolean isSelected(File file) {
@@ -301,12 +301,12 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         }
 
         @Override
-        public boolean shouldEnd() {
-            return _shouldEnd;
+        public synchronized boolean shouldEnd() {
+            return shouldEnd;
         }
 
-        public void setShouldEnd(boolean shouldEnd) {
-            _shouldEnd = shouldEnd;
+        public synchronized void setShouldEnd(boolean shouldEnd) {
+            this.shouldEnd = shouldEnd;
         }
     }
 }

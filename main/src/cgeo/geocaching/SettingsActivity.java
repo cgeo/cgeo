@@ -591,7 +591,7 @@ public class SettingsActivity extends AbstractActivity {
             @Override
             public void onClick(View v) {
                 Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
-                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getCustomRenderThemeBasefolder());
+                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getCustomRenderThemeBaseFolder());
                 startActivityForResult(dirChooser, SELECT_THEMEFOLDER_REQUEST);
             }
         });
@@ -760,7 +760,7 @@ public class SettingsActivity extends AbstractActivity {
 
     private void initThemefolderEdittext(boolean setFocus) {
         EditText themeFileEdit = (EditText) findViewById(R.id.themefolder);
-        themeFileEdit.setText(Settings.getCustomRenderThemeBasefolder());
+        themeFileEdit.setText(Settings.getCustomRenderThemeBaseFolder());
         if (setFocus) {
             themeFileEdit.requestFocus();
         }
@@ -996,7 +996,7 @@ public class SettingsActivity extends AbstractActivity {
 
                 @Override
                 public void run(String directory) {
-                    Settings.setCustomRenderThemeBasefolder(directory);
+                    Settings.setCustomRenderThemeBaseFolder(directory);
                 }
             });
         }
