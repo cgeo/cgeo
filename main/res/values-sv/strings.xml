@@ -456,6 +456,7 @@
   <string name="init_dbmove_success">Databasen har ny flyttats.</string>
   <string name="init_dbmove_failed">Misslyckades att flytta databasen</string>
   <string name="init_plain_logs">Visa loggar utan färger</string>
+  <string name="init_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
@@ -515,6 +516,7 @@
   <string name="cache_log_images_title">Loggbild</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Personlig anteckning</string>
+  <string name="cache_personal_note_edit">Redigera</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
   <string name="cache_description_table_note">Varning från c:geo! Beskrivningen innehåller HTML-tabeller som eventuellt kan behöva öppnas i en webbläsare för att visas på önskat sätt.</string>
@@ -527,6 +529,7 @@
   <string name="cache_favpoint_not_on">Den här cachen är inte en av dina favoriter.</string>
   <string name="cache_favpoint_add">Lägg till</string>
   <string name="cache_favpoint_remove">Ta bort</string>
+  <string name="cache_images">Bilder</string>
 
   <string name="cache_waypoints">Punkter</string>
   <plurals name="waypoints">
@@ -604,6 +607,8 @@
   <string name="cache_coordinates_original">Ursprungliga koordinater</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
   <string name="cache_spoiler_images_loading">Laddar spoiler bilder…</string>
+  <string name="cache_images_title">Bilder</string>
+  <string name="cache_images_loading">Laddar bilder…</string>
   <string name="cache_log_types">Loggtyper</string>
   <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
   <string name="cache_export_fieldnote">Exportera som Field Notes</string>
@@ -615,6 +620,9 @@
   <string name="cache_image_open_browser">Öppna i webbläsare</string>
   <string name="cache_share_field">Dela</string>
   <string name="cache_time_full_hours">prick</string>
+
+  <!--  editor dialog -->
+  <string name="editor_save">Spara</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Söker efter filer\ni</string>
