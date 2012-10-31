@@ -9,6 +9,7 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -183,7 +184,7 @@ public class cgeotrackable extends AbstractActivity {
                     findViewById(R.id.details_box).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.details);
                     descView.setVisibility(View.VISIBLE);
-                    descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+                    descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
                 }
 
