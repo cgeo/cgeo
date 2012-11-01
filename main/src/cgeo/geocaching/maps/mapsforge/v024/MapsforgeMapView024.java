@@ -161,7 +161,7 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
 
     /**
      * Get the map zoom level which is compatible with Google Maps.
-     * 
+     *
      * @return the current map zoom level +1
      */
     @Override
@@ -246,5 +246,16 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     @Override
     public boolean needsInvertedColors() {
         return false;
+    }
+
+    @Override
+    public boolean hasMapThemes() {
+        // not supported
+        return false;
+    }
+
+    @Override
+    public void setMapTheme() {
+        // not supported
     }
 }

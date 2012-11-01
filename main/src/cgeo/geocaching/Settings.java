@@ -12,6 +12,8 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.FileUtils.FileSelector;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +27,9 @@ import android.content.res.Resources;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -96,6 +101,8 @@ public final class Settings {
     private static final String KEY_LAST_TRACKABLE_ACTION = "trackableaction";
     private static final String KEY_SHARE_AFTER_EXPORT = "shareafterexport";
     private static final String KEY_GPX_EXPORT_DIR = "gpxExportDir";
+    private static final String KEY_RENDER_THEME_BASE_FOLDER = "renderthemepath";
+    private static final String KEY_RENDER_THEME_FILE_PATH = "renderthemefile";
     private static final String KEY_GPX_IMPORT_DIR = "gpxImportDir";
     private static final String KEY_PLAIN_LOGS = "plainLogs";
     private static final String KEY_NATIVE_UA = "nativeUa";
@@ -1206,7 +1213,71 @@ public final class Settings {
                 edit.putInt(KEY_LAST_TRACKABLE_ACTION, trackableAction);
             }
         });
-	}
+    }
+
+    public static String getCustomRenderThemeBaseFolder() {
+        return sharedPrefs.getString(KEY_RENDER_THEME_BASE_FOLDER, "");
+    }
+
+    public static void setCustomRenderThemeBaseFolder(final String customRenderThemeBaseFolder) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_RENDER_THEME_BASE_FOLDER, customRenderThemeBaseFolder);
+            }
+        });
+    }
+
+    public static String getCustomRenderThemeFilePath() {
+        return sharedPrefs.getString(KEY_RENDER_THEME_FILE_PATH, "");
+    }
+
+    public static void setCustomRenderThemeFile(final String customRenderThemeFile) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_RENDER_THEME_FILE_PATH, customRenderThemeFile);
+            }
+        });
+    }
+
+    public static File[] getMapThemeFiles() {
+
+        File directory = new File(Settings.getCustomRenderThemeBaseFolder());
+
+        List<File> result = new ArrayList<File>();
+
+        FileUtils.listDir(result, directory, new ExtensionsBasedFileSelector(new String[] { "xml" }), null);
+
+        return result.toArray(new File[] {});
+    }
+
+    private static class ExtensionsBasedFileSelector extends FileSelector {
+
+        private final String[] extensions;
+
+        public ExtensionsBasedFileSelector(String[] extensions) {
+            this.extensions = extensions;
+        }
+
+        @Override
+        public boolean isSelected(File file) {
+            String filename = file.getName();
+            for (String ext : extensions) {
+                if (StringUtils.endsWithIgnoreCase(filename, ext)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean shouldEnd() {
+            return false;
+        }
+    }
 
     public static String getPreferencesName() {
         // there is currently no Android API to get the file name of the shared preferences

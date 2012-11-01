@@ -18,6 +18,7 @@ import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.mapgenerator.MapGenerator;
@@ -37,6 +38,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
@@ -178,7 +180,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     /**
      * Get the actual map zoom level
-     * 
+     *
      * @return the current map zoom level with no adjustments
      */
     private int getActualMapZoomLevel() {
@@ -220,6 +222,32 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
                         Toast.LENGTH_LONG)
                         .show();
             }
+        }
+        if (hasMapThemes()) {
+            setMapTheme();
+        }
+    }
+
+    @Override
+    public boolean hasMapThemes() {
+        return !getMapGenerator().requiresInternetConnection();
+    }
+
+    @Override
+    public void setMapTheme() {
+        String customRenderTheme = Settings.getCustomRenderThemeFilePath();
+        if (!StringUtils.isEmpty(customRenderTheme)) {
+            try {
+                setRenderTheme(new File(customRenderTheme));
+            } catch (FileNotFoundException e) {
+                Toast.makeText(
+                        getContext(),
+                        getContext().getResources().getString(R.string.warn_rendertheme_missing),
+                        Toast.LENGTH_LONG)
+                        .show();
+            }
+        } else {
+            setRenderTheme(DEFAULT_RENDER_THEME);
         }
     }
 

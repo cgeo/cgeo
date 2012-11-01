@@ -3,10 +3,10 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.activity.AbstractListActivity;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
@@ -151,8 +151,11 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     protected abstract void setTitle();
 
     private class SearchFilesThread extends Thread {
+
+        private final FileListSelector selector = new FileListSelector();
+
         public void notifyEnd() {
-            endSearching = true;
+            selector.setShouldEnd(true);
         }
 
         @Override
@@ -165,7 +168,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                     for (final File dir : getBaseFolders())
                     {
                         if (dir.exists() && dir.isDirectory()) {
-                            listDir(list, dir);
+                            FileUtils.listDir(list, dir,selector,changeWaitDialogHandler);
                             if (!list.isEmpty()) {
                                 loaded = true;
                                 break;
@@ -174,7 +177,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                     }
                     if (!loaded) {
                         changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, MSG_SEARCH_WHOLE_SD_CARD, Environment.getExternalStorageDirectory().getName()));
-                        listDirs(list, getStorages());
+                        listDirs(list, getStorages(), selector, changeWaitDialogHandler);
                     }
                 } else {
                     Log.w("No external media mounted.");
@@ -198,44 +201,9 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         }
     }
 
-    private void listDirs(List<File> list, List<File> directories) {
+    private void listDirs(List<File> list, List<File> directories, FileListSelector selector, Handler feedbackHandler) {
         for (final File dir : directories) {
-            listDir(list, dir);
-        }
-    }
-
-    private void listDir(List<File> result, File directory) {
-        if (directory == null || !directory.isDirectory() || !directory.canRead()) {
-            return;
-        }
-
-        final File[] files = directory.listFiles();
-
-        if (ArrayUtils.isNotEmpty(files)) {
-            for (File file : files) {
-                if (endSearching) {
-                    return;
-                }
-                if (!file.canRead()) {
-                    continue;
-                }
-                String name = file.getName();
-                if (file.isFile()) {
-                    if (filenameBelongsToList(name)) {
-                        result.add(file); // add file to list
-                    }
-                } else if (file.isDirectory()) {
-                    if (name.charAt(0) == '.') {
-                        continue; // skip hidden directories
-                    }
-                    if (name.length() > 16) {
-                        name = name.substring(0, 14) + '…';
-                    }
-                    changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, 0, name));
-
-                    listDir(result, file); // go deeper
-                }
-            }
+            FileUtils.listDir(list, dir, selector, feedbackHandler);
         }
     }
 
@@ -320,6 +288,25 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             if (extension.length() == 0 || extension.charAt(0) != '.') {
                 extensions[i] = "." + extension;
             }
+        }
+    }
+
+    private class FileListSelector extends FileUtils.FileSelector {
+
+        boolean shouldEnd = false;
+
+        @Override
+        public boolean isSelected(File file) {
+            return filenameBelongsToList(file.getName());
+        }
+
+        @Override
+        public synchronized boolean shouldEnd() {
+            return shouldEnd;
+        }
+
+        public synchronized void setShouldEnd(boolean shouldEnd) {
+            this.shouldEnd = shouldEnd;
         }
     }
 }
