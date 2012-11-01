@@ -109,7 +109,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final String EXTRAS_WPTTYPE = "wpttype";
     private static final String EXTRAS_MAPSTATE = "mapstate";
     private static final String EXTRAS_SEARCH = "search";
-    private static final String EXTRAS_MAP_MODE = "map_mode";
+    private static final String EXTRAS_MAP_MODE = "mapMode";
+    private static final String EXTRAS_LIVE_ENABLED = "liveEnabled";
 
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
@@ -128,7 +129,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     private static final String BUNDLE_MAP_SOURCE = "mapSource";
     private static final String BUNDLE_MAP_STATE = "mapState";
-    private static final String BUNDLE_MAP_MODE = "mapMode";
+    private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
 
     private Resources res = null;
     private MapItemFactory mapItemFactory = null;
@@ -186,6 +187,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     /**Controls the map behaviour*/
     private MapMode mapMode = null;
+    /** Live mode enabled for map. **/
+    private boolean isLiveEnabled;
     // other things
     private boolean liveChanged = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
@@ -350,12 +353,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public void onSaveInstanceState(final Bundle outState) {
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putIntArray(BUNDLE_MAP_STATE, currentMapState());
-        if (isLiveMode()) {
-            outState.putString(BUNDLE_MAP_MODE, mapMode.name());
-        }
-        else {
-            outState.putString(BUNDLE_MAP_MODE, null);
-        }
+        outState.putBoolean(BUNDLE_LIVE_ENABLED, isLiveEnabled);
     }
 
     @Override
@@ -377,14 +375,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         final Bundle extras = activity.getIntent().getExtras();
         if (extras != null) {
             mapMode = (MapMode) extras.get(EXTRAS_MAP_MODE);
+            isLiveEnabled = extras.getBoolean(EXTRAS_LIVE_ENABLED, false);
             searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
             coordsIntent = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
             waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
-
-            Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE);
         }
         else {
             mapMode = Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
@@ -397,12 +394,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (savedInstanceState != null) {
             currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource());
             mapStateIntent = savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
-            String lastMapmode = savedInstanceState.getString(BUNDLE_MAP_MODE);
-            if (lastMapmode != null) {
-                mapMode = Enum.valueOf(MapMode.class, lastMapmode);
-            }
-
-            Settings.setLiveMap(mapMode == MapMode.LIVE_ONLINE);
+            isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
         } else {
             currentSourceId = Settings.getMapSource();
         }
@@ -592,7 +584,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             item = menu.findItem(MENU_MAP_LIVE); // live map
-            if (mapMode == MapMode.LIVE_ONLINE) {
+            if (isLiveEnabled) {
                 item.setTitle(res.getString(R.string.map_live_disable));
             } else {
                 item.setTitle(res.getString(R.string.map_live_enable));
@@ -608,18 +600,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 item.setTitle(res.getString(R.string.map_circles_show));
             }
 
-            menu.findItem(MENU_AS_LIST).setEnabled(isLiveMode() && !isLoading());
+            menu.findItem(MENU_AS_LIST).setEnabled(isLiveEnabled && !isLoading());
 
-            menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveMode());
+            menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveEnabled);
         } catch (Exception e) {
             Log.e("cgeomap.onPrepareOptionsMenu: " + e);
         }
 
         return true;
-    }
-
-    private boolean isLiveMode() {
-        return mapMode == MapMode.LIVE_OFFLINE || mapMode == MapMode.LIVE_ONLINE;
     }
 
     @Override
@@ -631,8 +619,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_MAP_LIVE:
-                Settings.setLiveMap(!Settings.isLiveMap());
-                mapMode = Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
+                isLiveEnabled = !isLiveEnabled;
+                if (mapMode == MapMode.LIVE_ONLINE || mapMode == MapMode.LIVE_OFFLINE) {
+                    Settings.setLiveMap(isLiveEnabled);
+                    mapMode = isLiveEnabled ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE;
+                }
                 liveChanged = true;
                 lastSearchResult = null;
                 searchIntent = null;
@@ -809,6 +800,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         mapIntent.putExtra(EXTRAS_WPTTYPE, waypointTypeIntent != null ? waypointTypeIntent.id : null);
         mapIntent.putExtra(EXTRAS_MAP_TITLE, mapTitle);
         mapIntent.putExtra(EXTRAS_MAP_MODE, mapMode);
+        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, isLiveEnabled);
 
         final int[] mapState = currentMapState();
         if (mapState != null) {
@@ -1016,7 +1008,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                         if (liveChanged) {
                             moved = true;
-                        } else if (mapMode == MapMode.LIVE_ONLINE && !downloaded) {
+                        } else if (isLiveEnabled && !downloaded) {
                             moved = true;
                         } else if (viewport == null) {
                             moved = true;
@@ -1078,9 +1070,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 loadThreadRun = System.currentTimeMillis();
 
                 SearchResult searchResult;
-                // stage 1 - pull and render from the DB only for live map
                 if (mapMode == MapMode.LIVE_ONLINE) {
-                    searchResult = new SearchResult(app.getCachedInViewport(viewport, Settings.getCacheType()));
+                    searchResult = new SearchResult();
                 } else if (mapMode == MapMode.LIVE_OFFLINE) {
                     searchResult = new SearchResult(app.getStoredInViewport(viewport, Settings.getCacheType()));
                 } else {
@@ -1090,6 +1081,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         searchResult.addGeocode(geocodeIntent);
                     }
                 }
+                // live mode search result
+                if (isLiveEnabled) {
+                    SearchResult liveResult = new SearchResult(app.getCachedInViewport(viewport, Settings.getCacheType()));
+                    searchResult.addGeocodes(liveResult.getGeocodes());
+                }
 
                 downloaded = true;
                 Set<cgCache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
@@ -1097,7 +1093,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 caches.removeAll(cachesFromSearchResult);
                 caches.addAll(cachesFromSearchResult);
 
-                if (isLiveMode()) {
+                if (isLiveEnabled) {
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
@@ -1112,7 +1108,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 countVisibleCaches();
                 if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
                     waypoints.clear();
-                    if (isLiveMode() || mapMode == MapMode.COORDS) {
+                    if (isLiveEnabled || mapMode == MapMode.COORDS) {
                         //All visible waypoints
                         CacheType type = Settings.getCacheType();
                         Set<cgWaypoint> waypointsInViewport = app.getWaypointsInViewport(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches(), type);
@@ -1130,7 +1126,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 //render
                 displayExecutor.execute(new DisplayRunnable(viewport));
 
-                if (mapMode == MapMode.LIVE_ONLINE) {
+                if (isLiveEnabled) {
                     downloadExecutor.execute(new DownloadRunnable(viewport));
                 }
                 lastSearchResult = searchResult;
@@ -1530,6 +1526,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         final Intent mapIntent = newIntent(fromActivity);
         mapIntent.putExtra(EXTRAS_SEARCH, search);
         mapIntent.putExtra(EXTRAS_MAP_MODE, MapMode.LIST);
+        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, false);
         if (StringUtils.isNotBlank(title)) {
             mapIntent.putExtra(CGeoMap.EXTRAS_MAP_TITLE, title);
         }
@@ -1539,12 +1536,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public static void startActivityLiveMap(final Activity fromActivity) {
         final Intent mapIntent = newIntent(fromActivity);
         mapIntent.putExtra(EXTRAS_MAP_MODE, Settings.isLiveMap() ? MapMode.LIVE_ONLINE : MapMode.LIVE_OFFLINE);
+        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, Settings.isLiveMap());
         fromActivity.startActivity(mapIntent);
     }
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
         final Intent mapIntent = newIntent(fromActivity);
         mapIntent.putExtra(EXTRAS_MAP_MODE, MapMode.COORDS);
+        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, false);
         mapIntent.putExtra(EXTRAS_COORDS, coords);
         if (type != null) {
             mapIntent.putExtra(EXTRAS_WPTTYPE, type.id);
@@ -1558,6 +1557,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public static void startActivityGeoCode(final Activity fromActivity, final String geocode) {
         final Intent mapIntent = newIntent(fromActivity);
         mapIntent.putExtra(EXTRAS_MAP_MODE, MapMode.SINGLE);
+        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, false);
         mapIntent.putExtra(EXTRAS_GEOCODE, geocode);
         mapIntent.putExtra(EXTRAS_MAP_TITLE, geocode);
         fromActivity.startActivity(mapIntent);
