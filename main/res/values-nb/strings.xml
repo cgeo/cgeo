@@ -252,7 +252,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">Ingen cacher</item>
     <item quantity="one">Én cache</item>
-    <item quantity="other">Cacher</item>
+    <item quantity="other">%1$d Cacher</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Oppdater</string>

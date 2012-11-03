@@ -2235,7 +2235,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     if (log.found == -1) {
                         holder.count.setVisibility(View.GONE);
                     } else  {
-                        holder.count.setText(log.found + " " + res.getQuantityText(R.plurals.cache_counts,log.found));
+                        holder.count.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
                     }
 
                     // logtext, avoid parsing HTML if not necessary

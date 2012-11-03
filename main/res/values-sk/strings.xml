@@ -486,7 +486,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">žiadna skrýša</item>
     <item quantity="one">jedna skrýša</item>
-    <item quantity="other">skrýš</item>
+    <item quantity="other">%1$d skrýš</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnoviť</string>
