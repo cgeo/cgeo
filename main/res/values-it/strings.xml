@@ -482,7 +482,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">Nessun cache</item>
     <item quantity="one">Un cache</item>
-    <item quantity="other">Cache</item>
+    <item quantity="other">%1$d Cache</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aggiorna</string>

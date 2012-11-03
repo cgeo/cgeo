@@ -418,7 +418,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">Nincs megtalálás</item>
     <item quantity="one">Megtalálás</item>
-    <item quantity="other">Megtalálások</item>
+    <item quantity="other">%1$d Megtalálások</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Frissítés</string>

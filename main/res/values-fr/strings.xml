@@ -477,7 +477,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">aucune cache</item>
     <item quantity="one">une cache</item>
-    <item quantity="other">caches</item>
+    <item quantity="other">%1$d caches</item>
   </plurals>
   <string name="cache_offline">Hors ligne</string>
   <string name="cache_offline_refresh">Recharger</string>

@@ -408,7 +408,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">Sin escondites</item>
     <item quantity="one">Un escondite</item>
-    <item quantity="other">Escondites</item>
+    <item quantity="other">%1$d Escondites</item>
   </plurals>
   <string name="cache_offline">Desconectado</string>
   <string name="cache_offline_refresh">Actualizar</string>

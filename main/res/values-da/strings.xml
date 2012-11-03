@@ -171,7 +171,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">Ingen cache</item>
     <item quantity="one">En cache</item>
-    <item quantity="other">Cacher</item>
+    <item quantity="other">%1$d Cacher</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Genindlæs</string>

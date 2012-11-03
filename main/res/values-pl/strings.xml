@@ -404,7 +404,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">Nie ma skrzynek</item>
     <item quantity="one">Jedna skrzynka</item>
-    <item quantity="other">Skrzynki</item>
+    <item quantity="other">%1$d Skrzynki</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Odśwież</string>
