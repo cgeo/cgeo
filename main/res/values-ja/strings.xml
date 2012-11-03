@@ -498,7 +498,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">キャッシュがありません</item>
     <item quantity="one">1つのキャッシュ</item>
-    <item quantity="other">個のキャッシュ</item>
+    <item quantity="other">%1$d 個のキャッシュ</item>
   </plurals>
   <string name="cache_offline">オフライン</string>
   <string name="cache_offline_refresh">更新</string>

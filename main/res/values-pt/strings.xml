@@ -450,7 +450,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">Nenhuma cache</item>
     <item quantity="one">Uma cache</item>
-    <item quantity="other">Caches</item>
+    <item quantity="other">%1$d Caches</item>
   </plurals>
   <string name="cache_offline">Arquivo</string>
   <string name="cache_offline_refresh">Actualizar</string>

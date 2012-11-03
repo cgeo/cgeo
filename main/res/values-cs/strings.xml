@@ -415,7 +415,7 @@
   <plurals name="cache_counts">
     <item quantity="zero">Žádná keš</item>
     <item quantity="one">Jedna keš</item>
-    <item quantity="other">keší</item>
+    <item quantity="other">%1$d keší</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnovit</string>
