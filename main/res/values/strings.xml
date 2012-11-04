@@ -428,8 +428,9 @@
   <string name="init_mapsources">Map Sources</string>
   <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even offline map files (See <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> for details).</string>
   <string name="init_mapsource_select">Select Map Source</string>
-  <string name="init_select_mapfile">…</string>
   <string name="init_select_themefolder">…</string>
+  <string name="init_map_directory_description">Directory with offline maps</string>
+  <string name="init_select_map_directory">…</string>
   <string name="init_select_gpx_exportdir">…</string>
   <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">GPX Export Directory</string>

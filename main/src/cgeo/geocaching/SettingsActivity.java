@@ -61,7 +61,6 @@ public class SettingsActivity extends AbstractActivity {
     private final static int SELECT_GPX_IMPORT_REQUEST = 3;
     private final static int SELECT_THEMEFOLDER_REQUEST = 4;
 
-
     private ProgressDialog loginDialog = null;
     private ProgressDialog webDialog = null;
     private boolean enableTemplatesMenu = false;
@@ -558,22 +557,10 @@ public class SettingsActivity extends AbstractActivity {
         webAuth.setOnClickListener(new webAuth());
 
         // Map source settings
-        Collection<String> mapSourceNames = new ArrayList<String>();
-        for (MapSource mapSource : MapProviderFactory.getMapSources().values()) {
-            mapSourceNames.add(mapSource.getName());
-        }
-        Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSourceNames.toArray(new String[mapSourceNames.size()]));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mapSourceSelector.setAdapter(adapter);
-        int mapsource = Settings.getMapSource();
-        mapSourceSelector.setSelection(MapProviderFactory.getSourceOrdinalFromId(mapsource));
-        mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
+        updateMapSourceMenu();
 
-        initMapfileEdittext(false);
-
-        Button selectMapfile = (Button) findViewById(R.id.select_mapfile);
-        selectMapfile.setOnClickListener(new View.OnClickListener() {
+        Button selectMapDirectory = (Button) findViewById(R.id.select_map_directory);
+        selectMapDirectory.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -750,11 +737,27 @@ public class SettingsActivity extends AbstractActivity {
         });
     }
 
-    private void initMapfileEdittext(boolean setFocus) {
-        EditText mfmapFileEdit = (EditText) findViewById(R.id.mapfile);
-        mfmapFileEdit.setText(Settings.getMapFile());
+    private void updateMapSourceMenu() {
+        Collection<String> mapSourceNames = new ArrayList<String>();
+        for (MapSource mapSource : MapProviderFactory.getMapSources()) {
+            mapSourceNames.add(mapSource.getName());
+        }
+        Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSourceNames.toArray(new String[mapSourceNames.size()]));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mapSourceSelector.setAdapter(adapter);
+        final int index = MapProviderFactory.getMapSources().indexOf(Settings.getMapSource());
+        mapSourceSelector.setSelection(index);
+        mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
+
+        initMapDirectoryEdittext(false);
+    }
+
+    private void initMapDirectoryEdittext(boolean setFocus) {
+        final EditText mapDirectoryEdit = (EditText) findViewById(R.id.map_directory);
+        mapDirectoryEdit.setText(Settings.getMapFileDirectory());
         if (setFocus) {
-            mfmapFileEdit.requestFocus();
+            mapDirectoryEdit.requestFocus();
         }
     }
 
@@ -824,7 +827,7 @@ public class SettingsActivity extends AbstractActivity {
         String passvoteNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.passvote)).getText().toString());
         // don't trim signature, user may want to have whitespace at the beginning
         String signatureNew = ((EditText) findViewById(R.id.signature)).getText().toString();
-        String mapFileNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.mapfile)).getText().toString());
+        String mapDirectoryNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.map_directory)).getText().toString());
 
         String altitudeNew = StringUtils.trimToNull(((EditText) findViewById(R.id.altitude)).getText().toString());
         int altitudeNewInt = parseNumber(altitudeNew, 0);
@@ -836,7 +839,7 @@ public class SettingsActivity extends AbstractActivity {
         final boolean status2 = Settings.setGCvoteLogin(passvoteNew);
         final boolean status3 = Settings.setSignature(signatureNew);
         final boolean status4 = Settings.setAltCorrection(altitudeNewInt);
-        final boolean status5 = Settings.setMapFile(mapFileNew);
+        final boolean status5 = Settings.setMapFileDirectory(mapDirectoryNew);
         Settings.setShowWaypointsThreshold(waypointThreshold);
 
         String importNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_importdir)).getText().toString());
@@ -868,14 +871,14 @@ public class SettingsActivity extends AbstractActivity {
     private static class cgeoChangeMapSource implements OnItemSelectedListener {
 
         @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
                 long arg3) {
-            Settings.setMapSource(MapProviderFactory.getSourceIdFromOrdinal(arg2));
+            Settings.setMapSource(MapProviderFactory.getMapSources().get(position));
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> arg0) {
-            arg0.setSelection(MapProviderFactory.getSourceIdFromOrdinal(Settings.getMapSource()));
+            arg0.setSelection(MapProviderFactory.getMapSources().indexOf(Settings.getMapSource()));
         }
     }
 
@@ -965,13 +968,15 @@ public class SettingsActivity extends AbstractActivity {
         if (requestCode == SELECT_MAPFILE_REQUEST) {
             if (resultCode == RESULT_OK) {
                 if (data.hasExtra("mapfile")) {
-                    Settings.setMapFile(data.getStringExtra("mapfile"));
+                    final String mapFile = data.getStringExtra("mapfile");
+                    Settings.setMapFile(mapFile);
                     if (!Settings.isValidMapFile(Settings.getMapFile())) {
                         showToast(res.getString(R.string.warn_invalid_mapfile));
                     }
                 }
             }
-            initMapfileEdittext(true);
+            updateMapSourceMenu();
+            initMapDirectoryEdittext(true);
         }
         if (requestCode == SELECT_GPX_EXPORT_REQUEST) {
             checkDirectory(resultCode, data, R.id.gpx_exportdir, new RunnableWithArgument<String>() {

@@ -10,6 +10,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapActivity024;
 import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapItemFactory024;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
@@ -20,43 +21,55 @@ import android.app.Activity;
 import android.content.res.Resources;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public final class MapsforgeMapProvider extends AbstractMapProvider {
 
-    private final static int MAPNIK = 1;
-    private final static int CYCLEMAP = 3;
-    private final static int OFFLINE = 4;
-
-    private final Map<Integer, MapSource> mapSources;
-
-    private final int baseId;
+    public static final String MAPSFORGE_CYCLEMAP_ID = "MAPSFORGE_CYCLEMAP";
+    public static final String MAPSFORGE_MAPNIK_ID = "MAPSFORGE_MAPNIK";
     private boolean oldMap = false;
     private MapItemFactory mapItemFactory = new MapsforgeMapItemFactory();
+    private static MapsforgeMapProvider instance;
 
-    public MapsforgeMapProvider(int _baseId) {
-        baseId = _baseId;
+    private MapsforgeMapProvider() {
         final Resources resources = cgeoapplication.getInstance().getResources();
 
-        mapSources = new HashMap<Integer, MapSource>();
-        mapSources.put(baseId + MAPNIK, new MapsforgeMapSource(this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
-        mapSources.put(baseId + CYCLEMAP, new MapsforgeMapSource(this, resources.getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.OPENCYCLEMAP));
-        mapSources.put(baseId + OFFLINE, new OfflineMapSource(this, resources.getString(R.string.map_source_osm_offline), MapGeneratorInternal.DATABASE_RENDERER));
+        registerMapSource(new MapsforgeMapSource(MAPSFORGE_MAPNIK_ID, this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
+        registerMapSource(new MapsforgeMapSource(MAPSFORGE_CYCLEMAP_ID, this, resources.getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.OPENCYCLEMAP));
+
+        updateOfflineMaps();
     }
 
-    @Override
-    public Map<Integer, MapSource> getMapSources() {
-        return mapSources;
-    }
-
-    public static int getMapsforgeSource(int sourceId) {
-        MapProvider mp = MapProviderFactory.getMapProvider(sourceId);
-        if (mp instanceof MapsforgeMapProvider) {
-            MapsforgeMapProvider mfp = (MapsforgeMapProvider) mp;
-            return sourceId - mfp.baseId;
+    public static MapsforgeMapProvider getInstance() {
+        if (instance == null) {
+            instance = new MapsforgeMapProvider();
         }
-        return 0;
+        return instance;
+    }
+
+    public static List<String> getOfflineMaps() {
+        final String mapFile = Settings.getMapFile();
+        if (StringUtils.isEmpty(mapFile)) {
+            return Collections.emptyList();
+        }
+
+        try {
+            File directory = new File(mapFile).getParentFile();
+            ArrayList<String> mapFileList = new ArrayList<String>();
+            for (File file : directory.listFiles()) {
+                if (file.getName().endsWith(".map")) {
+                    if (MapsforgeMapProvider.isValidMapFile(file.getAbsolutePath())) {
+                        mapFileList.add(file.getAbsolutePath());
+                    }
+                }
+            }
+            return mapFileList;
+        } catch (Exception e) {
+            Log.e("Settings.getOfflineMaps: " + e);
+        }
+        return Collections.emptyList();
     }
 
     public static boolean isValidMapFile(String mapFileIn) {
@@ -83,19 +96,16 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     @Override
-    public boolean isSameActivity(int sourceId1, int sourceId2) {
-        final int mfSourceId1 = getMapsforgeSource(sourceId1);
-        final int mfSourceId2 = getMapsforgeSource(sourceId2);
-        return mfSourceId1 == mfSourceId2 ||
+    public boolean isSameActivity(final MapSource source1, final MapSource source2) {
+        return source1 == source2 ||
                 !isMapfile024(Settings.getMapFile()) ||
-                mfSourceId1 != OFFLINE && mfSourceId2 != OFFLINE;
+                (!(source1 instanceof OfflineMapSource) && !(source2 instanceof OfflineMapSource));
     }
 
     @Override
     public Class<? extends Activity> getMapClass() {
-        int sourceId = getMapsforgeSource(Settings.getMapSource());
-
-        if (sourceId == OFFLINE && isMapfile024(Settings.getMapFile())) {
+        final MapSource source = Settings.getMapSource();
+        if (source instanceof OfflineMapSource && isMapfile024(Settings.getMapFile())) {
             oldMap = true;
             mapItemFactory = new MapsforgeMapItemFactory024();
             return MapsforgeMapActivity024.class;
@@ -126,15 +136,41 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         return mapItemFactory;
     }
 
-    private static final class OfflineMapSource extends MapsforgeMapSource {
+    /**
+     * Offline maps use the hash of the filename as ID. That way changed files can easily be detected. Also we do no
+     * longer need to differentiate between internal map sources and offline map sources, as they all just have an
+     * numerical ID (based on the hash code).
+     */
+    public static final class OfflineMapSource extends MapsforgeMapSource {
 
-        public OfflineMapSource(MapProvider mapProvider, final String name, MapGeneratorInternal generator) {
-            super(mapProvider, name, generator);
+        private final String fileName;
+
+        public OfflineMapSource(final String fileName, MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
+            super(fileName, mapProvider, name, generator);
+            this.fileName = fileName;
         }
 
         @Override
         public boolean isAvailable() {
-            return Settings.isValidMapFile();
+            return isValidMapFile(fileName);
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+    }
+
+    public void updateOfflineMaps() {
+        MapProviderFactory.deleteOfflineMapSources();
+        final Resources resources = cgeoapplication.getInstance().getResources();
+        final List<String> offlineMaps = getOfflineMaps();
+        for (String mapFile : offlineMaps) {
+            final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(), "."));
+            registerMapSource(new OfflineMapSource(mapFile, this, resources.getString(R.string.map_source_osm_offline) + " - " + mapName, MapGeneratorInternal.DATABASE_RENDERER));
+        }
+        // have a default entry, if no map files are available. otherwise we cannot select "offline" in the settings
+        if (offlineMaps.isEmpty()) {
+            registerMapSource(new OfflineMapSource("", this, resources.getString(R.string.map_source_osm_offline), MapGeneratorInternal.DATABASE_RENDERER));
         }
     }
 }

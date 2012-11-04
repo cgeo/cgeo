@@ -6,9 +6,11 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 public abstract class AbstractMapSource implements MapSource {
 
     private final String name;
-    private MapProvider mapProvider;
+    private final MapProvider mapProvider;
+    private final String id;
 
-    public AbstractMapSource(MapProvider mapProvider, final String name) {
+    public AbstractMapSource(final String id, final MapProvider mapProvider, final String name) {
+        this.id = id;
         this.mapProvider = mapProvider;
         this.name = name;
     }
@@ -30,8 +32,12 @@ public abstract class AbstractMapSource implements MapSource {
     }
 
     @Override
-    public boolean hasMapProvider(MapProvider mapProvider) {
-        return this.mapProvider.equals(mapProvider);
+    public int getNumericalId() {
+        return id.hashCode();
     }
 
+    @Override
+    public MapProvider getMapProvider() {
+        return mapProvider;
+    }
 }

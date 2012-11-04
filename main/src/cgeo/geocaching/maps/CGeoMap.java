@@ -170,6 +170,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final int[][] INSET_FOUND = { { 0, 0, 21, 28 }, { 0, 0, 25, 35 } }; // top left, 12x12 / 16x16
     private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 } }; // bottom right, 12x12 / 26x26
     private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 } }; // bottom left, 12x12 / 26x26
+    private static final int MENU_GROUP_MAP_SOURCES = 1;
+    private static final int MENU_GROUP_MAP_STRATEGY = 2;
 
     private SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
     /** Count of caches currently visible */
@@ -394,11 +396,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
-            currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource());
+            currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource().getNumericalId());
             mapStateIntent = savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
             isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
         } else {
-            currentSourceId = Settings.getMapSource();
+            currentSourceId = Settings.getMapSource().getNumericalId();
         }
 
         // If recreating from an obsolete map source, we may need a restart
@@ -536,7 +538,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        SubMenu submenu = menu.addSubMenu(1, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(R.drawable.ic_menu_mapmode);
+        SubMenu submenu = menu.addSubMenu(0, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(R.drawable.ic_menu_mapmode);
         addMapViewMenuItems(submenu);
 
         menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
@@ -549,11 +551,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         Strategy strategy = Settings.getLiveMapStrategy();
         SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy)).setIcon(R.drawable.ic_menu_preferences);
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
-        subMenuStrategy.add(2, MENU_STRATEGY_FASTEST, 0, Strategy.FASTEST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FASTEST);
-        subMenuStrategy.add(2, MENU_STRATEGY_FAST, 0, Strategy.FAST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FAST);
-        subMenuStrategy.add(2, MENU_STRATEGY_AUTO, 0, Strategy.AUTO.getL10n()).setCheckable(true).setChecked(strategy == Strategy.AUTO);
-        subMenuStrategy.add(2, MENU_STRATEGY_DETAILED, 0, Strategy.DETAILED.getL10n()).setCheckable(true).setChecked(strategy == Strategy.DETAILED);
-        subMenuStrategy.setGroupCheckable(2, true, true);
+        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_FASTEST, 0, Strategy.FASTEST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FASTEST);
+        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_FAST, 0, Strategy.FAST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FAST);
+        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_AUTO, 0, Strategy.AUTO.getL10n()).setCheckable(true).setChecked(strategy == Strategy.AUTO);
+        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_DETAILED, 0, Strategy.DETAILED.getL10n()).setCheckable(true).setChecked(strategy == Strategy.DETAILED);
+        subMenuStrategy.setGroupCheckable(MENU_GROUP_MAP_STRATEGY, true, true);
 
         menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(R.drawable.ic_menu_agenda);
 
@@ -561,20 +563,17 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     private static void addMapViewMenuItems(final Menu menu) {
-        MapProviderFactory.addMapviewMenuItems(menu, 1, Settings.getMapSource());
-        menu.setGroupCheckable(1, true, true);
+        MapProviderFactory.addMapviewMenuItems(menu, MENU_GROUP_MAP_SOURCES);
+        menu.setGroupCheckable(MENU_GROUP_MAP_SOURCES, true, true);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        for (Integer mapSourceId : MapProviderFactory.getMapSources().keySet()) {
-            final MenuItem menuItem = menu.findItem(mapSourceId);
+        for (MapSource mapSource : MapProviderFactory.getMapSources()) {
+            final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
             if (menuItem != null) {
-                final MapSource mapSource = MapProviderFactory.getMapSource(mapSourceId);
-                if (mapSource != null) {
-                    menuItem.setEnabled(mapSource.isAvailable());
-                }
+                menuItem.setEnabled(mapSource.isAvailable());
             }
         }
 
@@ -730,12 +729,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 return true;
             }
             default:
-                int mapSource = MapProviderFactory.getMapSourceFromMenuId(id);
-                if (MapProviderFactory.isValidSourceId(mapSource)) {
+                final MapSource mapSource = MapProviderFactory.getMapSource(id);
+                if (mapSource != null) {
                     item.setChecked(true);
-
                     changeMapSource(mapSource);
-
                     return true;
                 }
         }
@@ -816,21 +813,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      *            the new map source, which can be the same as the current one
      * @return true if a restart is needed, false otherwise
      */
-    private boolean changeMapSource(final int mapSource) {
-        // If the current or the requested map source is invalid, request the first available map source instead
-        // and restart the activity.
-        if (!MapProviderFactory.isValidSourceId(mapSource)) {
-            Log.e("CGeoMap.onCreate: invalid map source requested: " + mapSource);
-            currentSourceId = MapProviderFactory.getSourceIdFromOrdinal(0);
-            Settings.setMapSource(currentSourceId);
-            mapRestart();
-            return true;
-        }
-
-        final boolean restartRequired = !MapProviderFactory.isSameActivity(currentSourceId, mapSource);
+    private boolean changeMapSource(final MapSource mapSource) {
+        final boolean restartRequired = !MapProviderFactory.isSameActivity(Settings.getMapSource(), mapSource);
 
         Settings.setMapSource(mapSource);
-        currentSourceId = mapSource;
+        currentSourceId = mapSource.getNumericalId();
 
         if (restartRequired) {
             mapRestart();

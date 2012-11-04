@@ -8,9 +8,12 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.OfflineMapSource;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
@@ -106,6 +109,7 @@ public final class Settings {
     private static final String KEY_GPX_IMPORT_DIR = "gpxImportDir";
     private static final String KEY_PLAIN_LOGS = "plainLogs";
     private static final String KEY_NATIVE_UA = "nativeUa";
+    private static final String KEY_MAP_DIRECTORY = "mapDirectory";
 
     private final static int unitsMetric = 1;
 
@@ -432,7 +436,7 @@ public final class Settings {
 
     public static MapProvider getMapProvider() {
         if (mapProvider == null) {
-            mapProvider = MapProviderFactory.getMapProvider(getMapSource());
+            mapProvider = getMapSource().getMapProvider();
         }
         return mapProvider;
     }
@@ -442,10 +446,36 @@ public final class Settings {
     }
 
     public static boolean setMapFile(final String mapFile) {
-        return editSharedSettings(new PrefRunnable() {
+        boolean result = editSharedSettings(new PrefRunnable() {
             @Override
             public void edit(Editor edit) {
                 edit.putString(KEY_MAPFILE, mapFile);
+            }
+        });
+        if (mapFile != null) {
+            setMapFileDirectory(new File(mapFile).getParent());
+        }
+        return result;
+    }
+
+    public static String getMapFileDirectory() {
+        final String mapDir = sharedPrefs.getString(KEY_MAP_DIRECTORY, null);
+        if (mapDir != null) {
+            return mapDir;
+        }
+        final String mapFile = getMapFile();
+        if (mapFile != null) {
+            return new File(mapFile).getParent();
+        }
+        return null;
+    }
+
+    public static boolean setMapFileDirectory(final String mapFileDirectory) {
+        return editSharedSettings(new PrefRunnable() {
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_MAP_DIRECTORY, mapFileDirectory);
+                MapsforgeMapProvider.getInstance().updateOfflineMaps();
             }
         });
     }
@@ -821,11 +851,55 @@ public final class Settings {
         });
     }
 
-    public static int getMapSource() {
-        return sharedPrefs.getInt(KEY_MAP_SOURCE, 0);
+    public static MapSource getMapSource() {
+        final int id = getConvertedMapId();
+        final MapSource map = MapProviderFactory.getMapSource(id);
+        if (map != null) {
+            return map;
+        }
+        // fallback to first available map
+        return MapProviderFactory.getDefaultSource();
     }
 
-    public static void setMapSource(final int newMapSource) {
+    private final static int GOOGLEMAP_BASEID = 30;
+    private final static int MAP = 1;
+    private final static int SATELLITE = 2;
+
+    private final static int MFMAP_BASEID = 40;
+    private final static int MAPNIK = 1;
+    private final static int CYCLEMAP = 3;
+    private final static int OFFLINE = 4;
+
+    /**
+     * convert old preference ids for maps (based on constant values) into new hash based ids
+     *
+     * @return
+     */
+    private static int getConvertedMapId() {
+        final int id = sharedPrefs.getInt(KEY_MAP_SOURCE, 0);
+        switch (id) {
+            case GOOGLEMAP_BASEID + MAP:
+                return GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
+            case GOOGLEMAP_BASEID + SATELLITE:
+                return GoogleMapProvider.GOOGLE_SATELLITE_ID.hashCode();
+            case MFMAP_BASEID + MAPNIK:
+                return MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode();
+            case MFMAP_BASEID + CYCLEMAP:
+                return MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode();
+            case MFMAP_BASEID + OFFLINE: {
+                final String mapFile = Settings.getMapFile();
+                if (StringUtils.isNotEmpty(mapFile)) {
+                    return mapFile.hashCode();
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        return id;
+    }
+
+    public static void setMapSource(final MapSource newMapSource) {
         if (!MapProviderFactory.isSameActivity(getMapSource(), newMapSource)) {
             mapProvider = null;
         }
@@ -833,9 +907,12 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_MAP_SOURCE, newMapSource);
+                edit.putInt(KEY_MAP_SOURCE, newMapSource.getNumericalId());
             }
         });
+        if (newMapSource instanceof OfflineMapSource) {
+            setMapFile(((OfflineMapSource) newMapSource).getFileName());
+        }
     }
 
     public static void setAnyCoordinates(final Geopoint coords) {

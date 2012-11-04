@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -191,7 +190,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     public void setMapSource() {
 
         MapGeneratorInternal newMapType = MapGeneratorInternal.MAPNIK;
-        final MapSource mapSource = MapProviderFactory.getMapSource(Settings.getMapSource());
+        final MapSource mapSource = Settings.getMapSource();
         if (mapSource instanceof MapsforgeMapSource) {
             newMapType = ((MapsforgeMapSource) mapSource).getGenerator();
         }

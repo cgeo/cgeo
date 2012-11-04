@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -7,30 +8,19 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 
 import android.view.Menu;
 
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapProviderFactory {
 
-    private final static int GOOGLEMAP_BASEID = 30;
-    private final static int MFMAP_BASEID = 40;
-
-    private final static MapProvider[] mapProviders;
-    private final static SortedMap<Integer, MapSource> mapSources;
+    private final static ArrayList<MapSource> mapSources = new ArrayList<MapSource>();
 
     static {
         // add GoogleMapProvider only if google api is available in order to support x86 android emulator
         if (isGoogleMapsInstalled()) {
-            mapProviders = new MapProvider[] { new GoogleMapProvider(GOOGLEMAP_BASEID), new MapsforgeMapProvider(MFMAP_BASEID) };
+            GoogleMapProvider.getInstance();
         }
-        else {
-            mapProviders = new MapProvider[] { new MapsforgeMapProvider(MFMAP_BASEID) };
-        }
-
-        mapSources = new TreeMap<Integer, MapSource>();
-        for (MapProvider mp : mapProviders) {
-            mapSources.putAll(mp.getMapSources());
-        }
+        MapsforgeMapProvider.getInstance();
     }
 
     private static boolean isGoogleMapsInstalled() {
@@ -43,65 +33,52 @@ public class MapProviderFactory {
         return googleMaps;
     }
 
-    public static SortedMap<Integer, MapSource> getMapSources() {
+    public static List<MapSource> getMapSources() {
         return mapSources;
     }
 
-    public static boolean isValidSourceId(int sourceId) {
-        return mapSources.containsKey(sourceId);
+    public static boolean isSameActivity(final MapSource source1, final MapSource source2) {
+        final MapProvider provider1 = source1.getMapProvider();
+        final MapProvider provider2 = source2.getMapProvider();
+        return provider1 == provider2 && provider1.isSameActivity(source1, source2);
     }
 
-    public static boolean isSameActivity(int sourceId1, int sourceId2) {
-        for (MapProvider mp : mapProviders) {
-            if (mp.isMySource(sourceId1) && mp.isMySource(sourceId2)) {
-                return mp.isSameActivity(sourceId1, sourceId2);
+    public static void addMapviewMenuItems(final Menu parentMenu, final int groupId) {
+        final int currentSource = Settings.getMapSource().getNumericalId();
+        for (int i = 0; i < mapSources.size(); i++) {
+            final MapSource mapSource = mapSources.get(i);
+            final int id = mapSource.getNumericalId();
+            parentMenu.add(groupId, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
+        }
+    }
+
+    public static MapSource getMapSource(int id) {
+        for (MapSource mapSource : mapSources) {
+            if (mapSource.getNumericalId() == id) {
+                return mapSource;
             }
         }
-        return false;
+        return null;
     }
 
-    public static MapProvider getMapProvider(int sourceId) {
-        for (MapProvider mp : mapProviders) {
-            if (mp.isMySource(sourceId)) {
-                return mp;
+    public static void registerMapSource(final MapSource mapSource) {
+        mapSources.add(mapSource);
+    }
+
+    public static MapSource getDefaultSource() {
+        return mapSources.get(0);
+    }
+
+    /**
+     * remove offline map sources after changes of the settings
+     */
+    public static void deleteOfflineMapSources() {
+        final ArrayList<MapSource> deletion = new ArrayList<MapSource>();
+        for (MapSource mapSource : mapSources) {
+            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
+                deletion.add(mapSource);
             }
         }
-        return mapProviders[0];
-    }
-
-    public static int getSourceOrdinalFromId(int sourceId) {
-        int sourceOrdinal = 0;
-        for (int key : mapSources.keySet()) {
-            if (sourceId == key) {
-                return sourceOrdinal;
-            }
-            sourceOrdinal++;
-        }
-        return 0;
-    }
-
-    public static int getSourceIdFromOrdinal(int sourceOrdinal) {
-        int count = 0;
-        for (int key : mapSources.keySet()) {
-            if (sourceOrdinal == count) {
-                return key;
-            }
-            count++;
-        }
-        return mapSources.firstKey();
-    }
-
-    public static void addMapviewMenuItems(Menu parentMenu, int groupId, int currentSource) {
-        for (Integer key : mapSources.keySet()) {
-            parentMenu.add(groupId, key, 0, mapSources.get(key).getName()).setCheckable(true).setChecked(key == currentSource);
-        }
-    }
-
-    public static int getMapSourceFromMenuId(int menuId) {
-        return menuId;
-    }
-
-    public static MapSource getMapSource(int sourceId) {
-        return mapSources.get(sourceId);
+        mapSources.removeAll(deletion);
     }
 }

@@ -5,5 +5,7 @@ public interface MapSource {
 
     public boolean isAvailable();
 
-    public boolean hasMapProvider(MapProvider mapProvider);
+    public int getNumericalId();
+
+    public MapProvider getMapProvider();
 }

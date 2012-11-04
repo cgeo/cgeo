@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.maps.AbstractMapProvider;
 import cgeo.geocaching.maps.AbstractMapSource;
-import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -13,36 +12,32 @@ import com.google.android.maps.MapActivity;
 
 import android.content.res.Resources;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public final class GoogleMapProvider extends AbstractMapProvider {
 
-    private final static int MAP = 1;
-    private final static int SATELLITE = 2;
-
-    private final Map<Integer, MapSource> mapSources;
+    public static final String GOOGLE_MAP_ID = "GOOGLE_MAP";
+    public static final String GOOGLE_SATELLITE_ID = "GOOGLE_SATELLITE";
+    private static GoogleMapProvider instance;
 
     private final MapItemFactory mapItemFactory;
 
-    public GoogleMapProvider(final int baseid) {
+    private GoogleMapProvider() {
         final Resources resources = cgeoapplication.getInstance().getResources();
 
-        mapSources = new HashMap<Integer, MapSource>();
-        mapSources.put(baseid + MAP, new GoogleMapSource(this, resources.getString(R.string.map_source_google_map)));
-        mapSources.put(baseid + SATELLITE, new GoogleMapSatelliteSource(this, resources.getString(R.string.map_source_google_satellite)));
+        registerMapSource(new GoogleMapSource(this, resources.getString(R.string.map_source_google_map)));
+        registerMapSource(new GoogleSatelliteSource(this, resources.getString(R.string.map_source_google_satellite)));
 
         mapItemFactory = new GoogleMapItemFactory();
     }
 
-    @Override
-    public Map<Integer, MapSource> getMapSources() {
-        return mapSources;
+    public static GoogleMapProvider getInstance() {
+        if (instance == null) {
+            instance = new GoogleMapProvider();
+        }
+        return instance;
     }
 
-    public static boolean isSatelliteSource(final int sourceId) {
-        final MapSource mapSource = MapProviderFactory.getMapSource(sourceId);
-        return mapSource != null && mapSource instanceof GoogleMapSatelliteSource;
+    public static boolean isSatelliteSource(final MapSource mapSource) {
+        return mapSource != null && mapSource instanceof GoogleSatelliteSource;
     }
 
     @Override
@@ -66,22 +61,30 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     }
 
     @Override
-    public boolean isSameActivity(int sourceId1, int sourceId2) {
+    public boolean isSameActivity(final MapSource source1, final MapSource source2) {
         return true;
     }
 
-    private static class GoogleMapSource extends AbstractMapSource {
+    private static abstract class AbstractGoogleMapSource extends AbstractMapSource {
 
-        public GoogleMapSource(final MapProvider mapProvider, final String name) {
-            super(mapProvider, name);
+        public AbstractGoogleMapSource(final String id, final MapProvider mapProvider, final String name) {
+            super(id, mapProvider, name);
         }
 
     }
 
-    private static final class GoogleMapSatelliteSource extends GoogleMapSource {
+    private static final class GoogleMapSource extends AbstractGoogleMapSource {
 
-        public GoogleMapSatelliteSource(MapProvider mapProvider, String name) {
-            super(mapProvider, name);
+        public GoogleMapSource(final MapProvider mapProvider, final String name) {
+            super(GOOGLE_MAP_ID, mapProvider, name);
+        }
+
+    }
+
+    private static final class GoogleSatelliteSource extends AbstractGoogleMapSource {
+
+        public GoogleSatelliteSource(MapProvider mapProvider, String name) {
+            super(GOOGLE_SATELLITE_ID, mapProvider, name);
         }
 
     }
