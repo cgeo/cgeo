@@ -225,6 +225,7 @@
   <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.3.0 kartfil.\nOffline kartan är inte tillgänglig.</string>
   <string name="warn_deprecated_mapfile">Den kartfil du använder är av en gammal version (0.2.4).\nVi rekommenderar att byta till en kartfil med version 0.3.0.\nNästa version av c:geo kommer inte hantera version 0.2.4.</string>
    <string name="warn_nonexistant_mapfile">Den angivna kartfilen finns inte.\nOffline kartor kommer inte att vara tillgängliga.</string>
+  <string name="warn_rendertheme_missing">Karttema kunde inte hittas.</string>
 
   <string name="info_log_posted">c:geo har postat din logg.</string>
   <string name="info_log_saved">c:geo har sparat din logg.</string>
@@ -426,7 +427,9 @@
   <string name="init_mapsources">Kartkällor</string>
   <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer).</string>
   <string name="init_mapsource_select">Välj kartkälla</string>
-  <string name="init_select_mapfile">…</string>
+  <string name="init_select_themefolder">…</string>
+  <string name="init_map_directory_description">Katalog med offline kartor</string>
+  <string name="init_select_map_directory">…</string>
   <string name="init_select_gpx_exportdir">…</string>
   <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">GPX-exportkatalog</string>
@@ -457,6 +460,7 @@
   <string name="init_dbmove_failed">Misslyckades att flytta databasen</string>
   <string name="init_plain_logs">Visa loggar utan färger</string>
   <string name="init_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
+  <string name="init_rendertheme_folder">Välj katalog för egna offline kartteman</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
@@ -658,6 +662,9 @@
   <!-- map file select -->
   <string name="map_file_select_title">Välj kartfil</string>
 
+  <!-- theme file select -->
+  <string name="theme_file_select_title">Välj fil med egna anpassningar för karttema</string>
+
   <!--  import -->
   <string name="import_title">Importerar…</string>
   <string name="web_import_title">Importerar från webben</string>
@@ -704,10 +711,13 @@
   <string name="map_map">Karta</string>
   <string name="map_live">Live karta</string>
   <string name="map_view_map">Karttyp</string>
+  <string name="map_modes">Kartlägen</string>
   <string name="map_trail_show">Visa spår</string>
   <string name="map_trail_hide">Dölj spår</string>
   <string name="map_circles_show">Visa cirklar</string>
   <string name="map_circles_hide">Dölj cirklar</string>
+  <string name="map_theme_builtin">Inbyggt karttema</string>
+  <string name="map_theme_select">Välj karttema</string>
   <string name="map_live_enable">Aktivera live</string>
   <string name="map_live_disable">Inaktivera live</string>
   <string name="map_static_title">Sparade kartor</string>
