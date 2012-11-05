@@ -426,7 +426,7 @@
   <string name="init_backup_last">Available backup from</string>
   <string name="init_backup_last_no">There is no file with a backup.</string>
   <string name="init_mapsources">Map Sources</string>
-  <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even offline map files (See <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> for details).</string>
+  <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even offline map files (See <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> for details).\nFurthermore selectable themes for offline maps are supported.</string>
   <string name="init_mapsource_select">Select Map Source</string>
   <string name="init_select_themefolder">…</string>
   <string name="init_map_directory_description">Directory with offline maps</string>
@@ -461,7 +461,7 @@
   <string name="init_dbmove_failed">Failed to move database</string>
   <string name="init_plain_logs">Display log entries without colors</string>
   <string name="init_use_native_ua">Identify as Android browser. Solves login problems of some network providers.</string>
-  <string name="init_rendertheme_folder">Select base folder for custom off-line map themes</string>
+  <string name="init_rendertheme_folder">Directory with custom offline map themes</string>
   
   <!-- map sources -->
   <string-array name="map_sources">
@@ -744,7 +744,7 @@
   <string name="map_trail_hide">Hide trail</string>
   <string name="map_circles_show">Show circles</string>
   <string name="map_circles_hide">Hide circles</string>
-  <string name="map_theme_builtin">Builtin map theme</string>
+  <string name="map_theme_builtin">Default</string>
   <string name="map_theme_select">Select map theme</string>
   <string name="map_live_enable">Enable live</string>
   <string name="map_live_disable">Disable live</string>
