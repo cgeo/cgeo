@@ -210,8 +210,8 @@ public final class Settings {
             e.putString(KEY_COOKIE_STORE, old.getString(KEY_COOKIE_STORE, null));
             e.putBoolean(KEY_OPEN_LAST_DETAILS_PAGE, old.getBoolean(KEY_OPEN_LAST_DETAILS_PAGE, false));
             e.putInt(KEY_LAST_DETAILS_PAGE, old.getInt(KEY_LAST_DETAILS_PAGE, 1));
-            e.putInt(KEY_DEFAULT_NAVIGATION_TOOL, old.getInt(KEY_DEFAULT_NAVIGATION_TOOL, 0));
-            e.putInt(KEY_DEFAULT_NAVIGATION_TOOL_2, old.getInt(KEY_DEFAULT_NAVIGATION_TOOL_2, 0));
+            e.putInt(KEY_DEFAULT_NAVIGATION_TOOL, old.getInt(KEY_DEFAULT_NAVIGATION_TOOL, NavigationAppsEnum.COMPASS.id));
+            e.putInt(KEY_DEFAULT_NAVIGATION_TOOL_2, old.getInt(KEY_DEFAULT_NAVIGATION_TOOL_2, NavigationAppsEnum.INTERNAL_MAP.id));
             e.putInt(KEY_LIVE_MAP_STRATEGY, old.getInt(KEY_LIVE_MAP_STRATEGY, Strategy.AUTO.id));
             e.putBoolean(KEY_DEBUG, old.getBoolean(KEY_DEBUG, false));
             e.putBoolean(KEY_HIDE_LIVE_MAP_HINT, old.getInt(KEY_HIDE_LIVE_MAP_HINT, 0) != 0);
