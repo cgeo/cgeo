@@ -3,6 +3,8 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -43,7 +45,7 @@ public class SimpleDirChooser extends ListActivity {
         super.onCreate(savedInstanceState);
         final Bundle extras = getIntent().getExtras();
         String startDir = extras.getString(START_DIR);
-        if (startDir == null) {
+        if (StringUtils.isBlank(startDir)) {
             startDir = Environment.getExternalStorageDirectory().getPath();
         } else {
             startDir = startDir.substring(0, startDir.lastIndexOf(File.separatorChar));
