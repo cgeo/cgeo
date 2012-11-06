@@ -1110,6 +1110,8 @@
     · Template for inserting smilies when logging a cache\n
     · Option to identify as android browser. Might help in case of login problems on mobile networks\n
     · Create and edit a personal note for each cache (not yet synchronized to geocaching.com)\n
+    · Quick change between different offline maps within live map\n
+    · Support of custom themes for offline maps (e.g. nightview)\n
     \n
     <b>Bugfixing:</b>\n
     · Crash when modifying lists fixed\n
@@ -1128,6 +1130,7 @@
     · Last activity time on TB page corrected\n
     · 4-digit favorite points shown correctly in lists\n
     · File scan for offline maps improved\n
+    · Allow HTML in trackable description\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
