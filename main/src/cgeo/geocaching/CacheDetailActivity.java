@@ -2026,45 +2026,45 @@ public class CacheDetailActivity extends AbstractActivity {
             registerForContextMenu(view.findViewById(R.id.longdesc));
         }
 
-        /**
-         * Loads the description in background. <br />
-         * <br />
-         * Params:
-         * <ol>
-         * <li>description string (String)</li>
-         * <li>target description view (TextView)</li>
-         * <li>loading indicator view (View, may be null)</li>
-         * </ol>
-         */
-        private class LoadDescriptionTask extends AsyncTask<Object, Void, Void> {
-            private View loadingIndicatorView;
-            private TextView descriptionView;
-            private String descriptionString;
-            private Spanned description;
+    }
 
-            private class HtmlImageCounter implements Html.ImageGetter {
+    /**
+     * Loads the description in background. <br />
+     * <br />
+     * Params:
+     * <ol>
+     * <li>description string (String)</li>
+     * <li>target description view (TextView)</li>
+     * <li>loading indicator view (View, may be null)</li>
+     * </ol>
+     */
+    private class LoadDescriptionTask extends AsyncTask<Object, Void, Void> {
+        private View loadingIndicatorView;
+        private TextView descriptionView;
+        private String descriptionString;
+        private Spanned description;
 
-                private int imageCount = 0;
+        private class HtmlImageCounter implements Html.ImageGetter {
 
-                @Override
-                public Drawable getDrawable(String url) {
-                    imageCount++;
-                    return null;
-                }
-
-                public int getImageCount() {
-                    return imageCount;
-                }
-            }
+            private int imageCount = 0;
 
             @Override
-            protected Void doInBackground(Object... params) {
-                try {
-                    descriptionString = ((String) params[0]);
-                    descriptionView = (TextView) params[1];
-                    loadingIndicatorView = (View) params[2];
-                } catch (Exception e) {
-                }
+            public Drawable getDrawable(String url) {
+                imageCount++;
+                return null;
+            }
+
+            public int getImageCount() {
+                return imageCount;
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Object... params) {
+            try {
+                descriptionString = ((String) params[0]);
+                descriptionView = (TextView) params[1];
+                loadingIndicatorView = (View) params[2];
 
                 // Fast preview: parse only HTML without loading any images
                 HtmlImageCounter imageCounter = new HtmlImageCounter();
@@ -2080,37 +2080,39 @@ public class CacheDetailActivity extends AbstractActivity {
                 // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
                 // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
                 // sometimes technically incorrect.
-                if (unknownTagsHandler.isProblematicDetected() && descriptionView == view.findViewById(R.id.longdesc)) {
+                if (unknownTagsHandler.isProblematicDetected() && descriptionView != null) {
                     final int startPos = description.length();
                     ((Editable) description).append("\n\n").append(res.getString(R.string.cache_description_table_note));
                     ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     publishProgress();
                 }
-                return null;
+            } catch (Exception e) {
+                Log.e("LoadDescriptionTask: ", e);
+            }
+            return null;
+        }
+
+        /*
+         * (non-Javadoc)
+         * 
+         * @see android.os.AsyncTask#onProgressUpdate(Progress[])
+         */
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            if (description != null) {
+                if (StringUtils.isNotBlank(descriptionString)) {
+                    descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                    descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+                    fixBlackTextColor(descriptionView, descriptionString);
+                }
+
+                descriptionView.setVisibility(View.VISIBLE);
+            } else {
+                showToast(res.getString(R.string.err_load_descr_failed));
             }
 
-            /*
-             * (non-Javadoc)
-             *
-             * @see android.os.AsyncTask#onProgressUpdate(Progress[])
-             */
-            @Override
-            protected void onProgressUpdate(Void... values) {
-                if (description != null) {
-                    if (StringUtils.isNotBlank(descriptionString)) {
-                        descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                        descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
-                        fixBlackTextColor(descriptionView, descriptionString);
-                    }
-
-                    descriptionView.setVisibility(View.VISIBLE);
-                } else {
-                    showToast(res.getString(R.string.err_load_descr_failed));
-                }
-
-                if (null != loadingIndicatorView) {
-                    loadingIndicatorView.setVisibility(View.GONE);
-                }
+            if (null != loadingIndicatorView) {
+                loadingIndicatorView.setVisibility(View.GONE);
             }
         }
 
