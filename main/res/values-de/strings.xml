@@ -425,7 +425,7 @@
   <string name="init_backup_last">Backup verfügbar von</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
   <string name="init_mapsources">Kartenherkunft</string>
-  <string name="init_mapsources_description">Hier kann die Quelle der benutzten Karte gewählt werden. Alternativ zu Google Maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).</string>
+  <string name="init_mapsources_description">Hier kann die Quelle der benutzten Karte gewählt werden. Alternativ zu Google Maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).\nWeiterhin werden verschiedene Darstellungen(Themes) für Offline-Karten unterstützt.</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
   <string name="init_select_themefolder">…</string>
   <string name="init_select_gpx_exportdir">…</string>
@@ -459,7 +459,7 @@
   <string name="init_dbmove_failed">Fehler beim Verschieben der Datenbank.</string>
   <string name="init_plain_logs">Logeinträge ohne Farben anzeigen</string>
   <string name="init_use_native_ua">Als Android Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
-  <string name="init_rendertheme_folder">Wähle den Basisordner für offline Karten Themes</string>
+  <string name="init_rendertheme_folder">Verzeichnis mit Darstellungen für Offline-Karte (optional)</string>
   
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
@@ -531,7 +531,7 @@
   <string name="cache_favpoint_add">Hinzufügen</string>
   <string name="cache_favpoint_remove">Entfernen</string>
   <string name="cache_images">Bilder</string>
-  
+  <string name="cache_images_loading">Lade Bilder…</string>
   <string name="cache_waypoints">Wegpunkte</string>
   <plurals name="waypoints">
       <item quantity="one">1 Wegpunkt</item>
@@ -717,7 +717,7 @@
   <string name="map_trail_hide">Spur ausblenden</string>
   <string name="map_circles_show">Kreise anzeigen</string>
   <string name="map_circles_hide">Kreise verbergen</string>
-  <string name="map_theme_builtin">Eingebaute Kartendarstellung</string>
+  <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Kartendarstellung wählen</string>
   <string name="map_live_enable">Aktualisierung einschalten</string>
   <string name="map_live_disable">Aktualisierung ausschalten</string>
