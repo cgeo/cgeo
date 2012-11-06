@@ -828,6 +828,7 @@ public class SettingsActivity extends AbstractActivity {
         // don't trim signature, user may want to have whitespace at the beginning
         String signatureNew = ((EditText) findViewById(R.id.signature)).getText().toString();
         String mapDirectoryNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.map_directory)).getText().toString());
+        String themesDirectoryNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.themefolder)).getText().toString());
 
         String altitudeNew = StringUtils.trimToNull(((EditText) findViewById(R.id.altitude)).getText().toString());
         int altitudeNewInt = parseNumber(altitudeNew, 0);
@@ -840,6 +841,7 @@ public class SettingsActivity extends AbstractActivity {
         final boolean status3 = Settings.setSignature(signatureNew);
         final boolean status4 = Settings.setAltCorrection(altitudeNewInt);
         final boolean status5 = Settings.setMapFileDirectory(mapDirectoryNew);
+        final boolean status6 = Settings.setCustomRenderThemeBaseFolder(themesDirectoryNew);
         Settings.setShowWaypointsThreshold(waypointThreshold);
 
         String importNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_importdir)).getText().toString());
@@ -847,7 +849,7 @@ public class SettingsActivity extends AbstractActivity {
         Settings.setGpxImportDir(importNew);
         Settings.setGpxExportDir(exportNew);
 
-        return status1 && status2 && status3 && status4 && status5;
+        return status1 && status2 && status3 && status4 && status5 && status6;
     }
 
     /**

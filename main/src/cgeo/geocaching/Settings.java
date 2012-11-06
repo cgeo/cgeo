@@ -1296,8 +1296,8 @@ public final class Settings {
         return sharedPrefs.getString(KEY_RENDER_THEME_BASE_FOLDER, "");
     }
 
-    public static void setCustomRenderThemeBaseFolder(final String customRenderThemeBaseFolder) {
-        editSharedSettings(new PrefRunnable() {
+    public static boolean setCustomRenderThemeBaseFolder(final String customRenderThemeBaseFolder) {
+        return editSharedSettings(new PrefRunnable() {
 
             @Override
             public void edit(Editor edit) {
