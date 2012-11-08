@@ -159,11 +159,7 @@ final public class OkapiClient {
                     if (imageResponse.getBoolean(CACHE_IMAGE_IS_SPOILER)) {
                         final String title = imageResponse.getString(CACHE_IMAGE_CAPTION);
                         final String url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.getGeocode());
-                        final cgImage image = new cgImage(url, title);
-                        if (cache.getSpoilers() == null) {
-                            cache.setSpoilers(new ArrayList<cgImage>());
-                        }
-                        cache.getSpoilers().add(image);
+                        cache.addSpoiler(new cgImage(url, title));
                     }
                 }
             }

@@ -543,12 +543,7 @@ public abstract class GCParser {
                 if (matcherSpoilersInside.group(3) != null) {
                     description = matcherSpoilersInside.group(3);
                 }
-                final cgImage spoiler = new cgImage(url, title, description);
-
-                if (cache.getSpoilers() == null) {
-                    cache.setSpoilers(new ArrayList<cgImage>());
-                }
-                cache.getSpoilers().add(spoiler);
+                cache.addSpoiler(new cgImage(url, title, description));
             }
         } catch (Exception e) {
             // failed to parse cache spoilers

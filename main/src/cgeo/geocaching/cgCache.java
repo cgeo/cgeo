@@ -685,6 +685,13 @@ public class cgCache implements ICache, IWaypoint {
         return inventory;
     }
 
+    public void addSpoiler(final cgImage spoiler) {
+        if (spoilers == null) {
+            spoilers = new ArrayList<cgImage>();
+        }
+        spoilers.add(spoiler);
+    }
+
     @Override
     public List<cgImage> getSpoilers() {
         if (spoilers == null) {
