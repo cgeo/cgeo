@@ -1131,6 +1131,7 @@
     · 4-digit favorite points shown correctly in lists\n
     · File scan for offline maps improved\n
     · Allow HTML in trackable description\n
+    · Live map filter now also working for basic members\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
