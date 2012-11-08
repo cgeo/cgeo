@@ -46,7 +46,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         /** The external OruxMaps app */
         ORUX_MAPS(new OruxMapsApp(), 9),
         /** The external navigon app */
-        NAVIGON(new NavigonApp(), 10);
+        NAVIGON(new NavigonApp(), 10),
+        /** The external Sygic app */
+        SYGIC(new SygicNavigationApp(), 11);
 
         NavigationAppsEnum(App app, int id) {
             this.app = app;
