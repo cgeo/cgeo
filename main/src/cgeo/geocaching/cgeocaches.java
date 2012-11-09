@@ -1707,7 +1707,9 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void handleMessage(Message msg) {
             cacheList.clear();
-            cacheList.addAll(cachesFromSearchResult);
+            if (cachesFromSearchResult != null) {
+                cacheList.addAll(cachesFromSearchResult);
+            }
         }
     };
 
