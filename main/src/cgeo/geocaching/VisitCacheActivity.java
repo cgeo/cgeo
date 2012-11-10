@@ -680,6 +680,14 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             if (status == StatusCode.NO_ERROR) {
                 final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
+                // Workaround for #1973
+                if (cache.getLogs() == null || cache.getLogs().size() == 0) {
+                    cgCache loadCache = app.loadCache(geocode, LoadFlags.LOAD_ALL_DB_ONLY);
+                    if (loadCache != null) {
+                        cache = loadCache;
+                    }
+                }
+
                 cache.prependLog(logNow);
 
                 if (typeSelected == LogType.FOUND_IT) {
@@ -687,9 +695,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                 }
 
                 app.updateCache(cache);
-            }
 
-            if (status == StatusCode.NO_ERROR) {
                 app.clearLogOffline(geocode);
             }
 

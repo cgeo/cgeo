@@ -807,6 +807,7 @@ public abstract class GCParser {
             return null;
         }
 
+        // TODO This seems to store the fresh loaded cache in CacheCache although it is in DB
         final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e("GCParser.searchByAny: No cache parsed");

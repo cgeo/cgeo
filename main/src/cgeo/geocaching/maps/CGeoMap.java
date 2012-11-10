@@ -1226,6 +1226,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 } while (count < 2);
 
+                // TODO searchResult is already loaded through searchByViewport!
                 if (searchResult != null) {
                     Set<cgCache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     // to update the caches they have to be removed first
