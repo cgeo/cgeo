@@ -855,7 +855,10 @@ public final class Settings {
         final int id = getConvertedMapId();
         final MapSource map = MapProviderFactory.getMapSource(id);
         if (map != null) {
-            return map;
+            // don't use offline maps if the map file is not valid
+            if ((!(map instanceof OfflineMapSource)) || (isValidMapFile())) {
+                return map;
+            }
         }
         // fallback to first available map
         return MapProviderFactory.getDefaultSource();
