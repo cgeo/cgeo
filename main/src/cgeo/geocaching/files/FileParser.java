@@ -16,11 +16,11 @@ import java.util.concurrent.CancellationException;
 public abstract class FileParser {
     /**
      * Parses caches from input stream.
-     *
+     * 
      * @param stream
      * @param progressHandler
      *            for reporting parsing progress (in bytes read from input stream)
-     * @return collection of parsed caches
+     * @return collection of caches
      * @throws IOException
      *             if the input stream can't be read
      * @throws ParserException

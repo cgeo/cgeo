@@ -61,7 +61,10 @@ public class cgeoapplication extends Application {
     @Override
     public void onLowMemory() {
         Log.i("Cleaning applications cache.");
+        removeAllFromCache();
+    }
 
+    public void removeAllFromCache() {
         storage.removeAllFromCache();
     }
 

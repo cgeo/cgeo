@@ -2,9 +2,6 @@ package cgeo.geocaching.connector.ox;
 
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
-import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.Network;
@@ -13,11 +10,11 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
 
 public class OpenCachingApi {
 
@@ -43,20 +40,10 @@ public class OpenCachingApi {
         }
         Collection<cgCache> caches;
         try {
-            caches = new GPX10Parser(StoredList.STANDARD_LIST_ID).parse(response.getEntity().getContent(), null);
+            caches = new OXGPXParser(StoredList.STANDARD_LIST_ID, isDetailed).parse(response.getEntity().getContent(), null);
         } catch (Exception e) {
             Log.e("Error importing from OpenCaching.com", e);
             return Collections.emptyList();
-        }
-        for (cgCache cache : caches) {
-            cache.setUpdated(System.currentTimeMillis());
-            if (isDetailed) {
-                cache.setDetailedUpdate(cache.getUpdated());
-                cache.setDetailed(true);
-            }
-
-            // save full detailed caches
-            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         }
         return caches;
     }

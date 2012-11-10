@@ -2437,9 +2437,7 @@ public class cgData {
     }
 
     public void removeCache(final String geocode, EnumSet<LoadFlags.RemoveFlag> removeFlags) {
-        Set<String> geocodes = new HashSet<String>();
-        geocodes.add(geocode);
-        removeCaches(geocodes, removeFlags);
+        removeCaches(Collections.singleton(geocode), removeFlags);
     }
 
     /**
@@ -2477,7 +2475,11 @@ public class cgData {
                 database.delete(dbTableLogs, baseWhereClause, null);
                 database.delete(dbTableLogCount, baseWhereClause, null);
                 database.delete(dbTableLogsOffline, baseWhereClause, null);
-                database.delete(dbTableWaypoints, baseWhereClause + " and type <> 'own'", null);
+                String wayPointClause = baseWhereClause;
+                if (!removeFlags.contains(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING)) {
+                    wayPointClause += " and type <> 'own'";
+                }
+                database.delete(dbTableWaypoints, wayPointClause, null);
                 database.delete(dbTableTrackables, baseWhereClause, null);
                 database.setTransactionSuccessful();
             } finally {

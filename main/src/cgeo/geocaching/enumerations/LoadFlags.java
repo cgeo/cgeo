@@ -37,9 +37,10 @@ public interface LoadFlags {
 
     public enum RemoveFlag {
         REMOVE_CACHE, // save only to CacheCache
-        REMOVE_DB // includes removing from CacheCache
+        REMOVE_DB, // includes removing from CacheCache
+        REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING // only to be used in unit testing (as we never delete own waypoints)
     }
 
-    public final static EnumSet<RemoveFlag> REMOVE_ALL = EnumSet.allOf(RemoveFlag.class);
+    public final static EnumSet<RemoveFlag> REMOVE_ALL = EnumSet.of(RemoveFlag.REMOVE_CACHE, RemoveFlag.REMOVE_DB);
 
 }
