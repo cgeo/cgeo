@@ -5,6 +5,7 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Environment;
@@ -347,6 +348,9 @@ public class LocalStorage {
      */
     public static void deleteFilesWithPrefix(final String geocode, final String prefix) {
         final File[] filesToDelete = getFilesWithPrefix(geocode, prefix);
+        if (filesToDelete == null) {
+            return;
+        }
         for (final File file : filesToDelete) {
             try {
                 if (!file.delete()) {
