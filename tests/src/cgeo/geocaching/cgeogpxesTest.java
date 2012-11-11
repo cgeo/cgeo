@@ -1,7 +1,9 @@
 package cgeo.geocaching;
 
+import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
+@TargetApi(8)
 public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
     private final cgeogpxes importGpxActivity = new cgeogpxes();
 

@@ -406,7 +406,6 @@
   <string name="init_mapsources">Fontes de mapa</string>
   <string name="init_mapsources_description">Aqui pode seleccionar a fonte dos seus mapas. Como alternativa ao Google Maps, vários estilos de OpenStreetMap estão disponíveis, e até ficheiros de mapas offline (veja <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para mais detalhes).</string>
   <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
-  <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Mostrar rasto no mapa</string>
   <string name="init_trackautovisit">Marcar automaticamente os trackables como \"visitados\"</string>
   <string name="init_sigautoinsert">Inserir assinatura automaticamente</string>

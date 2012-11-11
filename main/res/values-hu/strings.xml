@@ -378,7 +378,6 @@
   <string name="init_mapsources">Térkép források</string>
   <string name="init_mapsources_description">Itt választhatod ki a térképeid forrását. A Google térképek alternatívájaként több OpenStreetMap stílus is hozzáférhető és offline térkép fájlokat is használhatsz. (További információ <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Válassz térkép forrást</string>
-  <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">A nyomonkövethető tárgyak automatikus \"látogatott\" logolása</string>
   <string name="init_sigautoinsert">Aláírás automatikus beillesztése</string>
   <string name="init_loaddirectionimg">Irány-kép betöltése ha szükséges</string>

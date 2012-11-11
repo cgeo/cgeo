@@ -2,8 +2,10 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.cgeo;
 
+import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
+@TargetApi(8)
 public class ProgressTest extends ActivityInstrumentationTestCase2<cgeo> {
     public ProgressTest() {
         super(cgeo.class);

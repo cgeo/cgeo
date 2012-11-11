@@ -425,7 +425,6 @@
   <string name="init_mapsources">Mapové zdroje</string>
   <string name="init_mapsources_description">Tu môžete vybrať zdroje pre vaše mapy. Je to alternatíva ku Google mapám rôznych OpenStreetMap styles sú dostupné a dokonca offline mapové súbory (podrobnosti nájdete na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyberte zdroj máp</string>
-  <string name="init_select_mapfile">…</string>
   <string name="init_select_gpx_exportdir">…</string>
   <string name="init_gpx_exportdir">Adresár pre GPX Export</string>
   <string name="init_gpx_exportdir_description">Tu si môžete vybrať adresár pre GPX exporty.</string>

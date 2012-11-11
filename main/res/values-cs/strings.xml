@@ -371,7 +371,6 @@
   <string name="init_mapsources">Zdroje map</string>
   <string name="init_mapsources_description">Zde můžete vybrat zdroj map. Alternativou ke Google maps jsou různé typy OpenStreetMap, jakož i offline mapové podklady (Více viz na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyber zdroj mapy</string>
-  <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Zobrazuj trasu na mapě</string>
   <string name="init_trackautovisit">Nastav sledovatelné předměty na \"Návštěva\" jako výchozí.</string>
   <string name="init_sigautoinsert">Automaticky vkládej podpis</string>

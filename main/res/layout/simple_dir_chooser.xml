@@ -20,8 +20,11 @@
 				android:id="@+id/simple_dir_chooser_path"
 				android:singleLine="true"
 				android:lines="0"
-				android:editable="false"
-				android:scrollHorizontally="true"
+				android:clickable="false" 
+		        android:cursorVisible="false" 
+		        android:focusable="false" 
+		        android:focusableInTouchMode="false"
+        		android:scrollHorizontally="true"
 				android:inputType="textNoSuggestions" />
 	</LinearLayout>
    	<ListView 

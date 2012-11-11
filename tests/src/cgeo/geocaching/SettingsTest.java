@@ -3,8 +3,10 @@ package cgeo.geocaching;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 
+import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
+@TargetApi(8)
 public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
 
     public SettingsTest() {

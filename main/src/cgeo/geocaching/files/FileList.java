@@ -33,8 +33,9 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     private T adapter = null;
     private ProgressDialog waitDialog = null;
     private SearchFilesThread searchingThread = null;
-    private boolean endSearching = false;
     private int listId = StoredList.STANDARD_LIST_ID;
+    private String[] extensions;
+
     final private Handler changeWaitDialogHandler = new Handler() {
         private String searchInfo;
 
@@ -79,7 +80,6 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             }
         }
     };
-    private String[] extensions;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,7 +118,6 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 }
                 );
 
-        endSearching = false;
         searchingThread = new SearchFilesThread();
         searchingThread.start();
     }
@@ -199,11 +198,11 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
             loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
         }
-    }
 
-    private void listDirs(List<File> list, List<File> directories, FileListSelector selector, Handler feedbackHandler) {
-        for (final File dir : directories) {
-            FileUtils.listDir(list, dir, selector, feedbackHandler);
+        private void listDirs(List<File> list, List<File> directories, FileListSelector selector, Handler feedbackHandler) {
+            for (final File dir : directories) {
+                FileUtils.listDir(list, dir, selector, feedbackHandler);
+            }
         }
     }
 

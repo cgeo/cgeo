@@ -82,7 +82,6 @@
 					android:orientation="horizontal"
 					android:gravity="center_horizontal" >
 				<Button style="@style/button_full"
-						android:id="@+id/donation_more"
 						android:layout_width="280dip"
 						android:singleLine="false"
 						android:lines="2"

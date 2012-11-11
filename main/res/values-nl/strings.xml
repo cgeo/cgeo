@@ -412,7 +412,6 @@
   <string name="init_mapsources">Kaartbron</string>
   <string name="init_mapsources_description">Hier kan een kaartenbron geselecteerd worden. Als alternatief voor Google maps zijn verschillende OpenStreetMap varianten en ook offline kaarten-files beschikbaar (Zie <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> voor meer info).</string>
   <string name="init_mapsource_select">Selecteer kaartbron</string>
-  <string name="init_select_mapfile">…</string>
   <string name="init_maptrail">Laat pad op kaart zien</string>
   <string name="init_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
   <string name="init_sigautoinsert">Voeg handtekening automatisch toe</string>
