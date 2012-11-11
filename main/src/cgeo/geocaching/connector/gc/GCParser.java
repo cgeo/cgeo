@@ -498,6 +498,7 @@ public abstract class GCParser {
             if (null != attributesPre) {
                 final Matcher matcherAttributesInside = GCConstants.PATTERN_ATTRIBUTESINSIDE.matcher(attributesPre);
 
+                final ArrayList<String> attributes = new ArrayList<String>();
                 while (matcherAttributesInside.find()) {
                     if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
                         // by default, use the tooltip of the attribute
@@ -512,9 +513,10 @@ public abstract class GCParser {
                                 attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
                             }
                         }
-                        cache.addAttribute(attribute);
+                        attributes.add(attribute);
                     }
                 }
+                cache.setAttributes(attributes);
             }
         } catch (Exception e) {
             // failed to parse cache attributes
@@ -1634,7 +1636,7 @@ public abstract class GCParser {
                     if (allLogs.contains(log)) {
                         allLogs.get(allLogs.indexOf(log)).friend = true;
                     } else {
-                        allLogs.add(log);
+                        cache.appendLog(log);
                     }
                 }
             }

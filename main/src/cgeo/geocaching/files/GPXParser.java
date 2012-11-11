@@ -855,6 +855,8 @@ public abstract class GPXParser extends FileParser {
 
         cache = new cgCache();
         cache.setReliableLatLon(true);
+        cache.setAttributes(new ArrayList<String>());
+        cache.setWaypoints(new ArrayList<cgWaypoint>(), false);
         for (int i = 0; i < userData.length; i++) {
             userData[i] = null;
         }

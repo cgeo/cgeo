@@ -489,4 +489,16 @@ public class cgeoapplication extends Application {
         return storage.getTrackableCodes();
     }
 
+    public List<LogEntry> loadLogs(final String geocode) {
+        return storage.loadLogs(geocode);
+    }
+
+    public List<String> loadAttributes(final String geocode) {
+        return storage.loadAttributes(geocode);
+    }
+
+    public List<cgWaypoint> loadWaypoints(final String geocode) {
+        return storage.loadWaypoints(geocode);
+    }
+
 }

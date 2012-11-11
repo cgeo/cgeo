@@ -22,6 +22,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
@@ -94,10 +95,25 @@ public class cgCache implements ICache, IWaypoint {
     private float myVote = 0; // valid ratings are larger than zero
     private int inventoryItems = 0;
     private boolean onWatchlist = false;
-    private List<String> attributes = null;
-    private List<cgWaypoint> waypoints = null;
+    private LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
+        @Override
+        protected List<String> loadFromDatabase() {
+            return cgeoapplication.getInstance().loadAttributes(geocode);
+        }
+    };
+    private LazyInitializedList<cgWaypoint> waypoints = new LazyInitializedList<cgWaypoint>() {
+        @Override
+        protected List<cgWaypoint> loadFromDatabase() {
+            return cgeoapplication.getInstance().loadWaypoints(geocode);
+        }
+    };
     private List<cgImage> spoilers = null;
-    private List<LogEntry> logs = null;
+    private LazyInitializedList<LogEntry> logs = new LazyInitializedList<LogEntry>() {
+        @Override
+        protected List<LogEntry> loadFromDatabase() {
+            return cgeoapplication.getInstance().loadLogs(geocode);
+        }
+    };
     private List<cgTrackable> inventory = null;
     private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
     private boolean logOffline = false;
@@ -253,14 +269,16 @@ public class cgCache implements ICache, IWaypoint {
         if (myVote == 0) {
             myVote = other.myVote;
         }
-        if (attributes == null) {
-            attributes = other.attributes;
+        if (attributes.isEmpty()) {
+            attributes.set(other.attributes.get());
         }
-        if (waypoints == null) {
-            waypoints = other.waypoints;
+        if (waypoints.isEmpty()) {
+            waypoints.set(other.waypoints.get());
         }
         else {
-            cgWaypoint.mergeWayPoints(waypoints, other.getWaypoints(), waypoints == null || waypoints.isEmpty());
+            ArrayList<cgWaypoint> newPoints = new ArrayList<cgWaypoint>(waypoints.get());
+            cgWaypoint.mergeWayPoints(newPoints, other.getWaypoints(), false);
+            waypoints.set(newPoints);
         }
         if (spoilers == null) {
             spoilers = other.spoilers;
@@ -273,8 +291,8 @@ public class cgCache implements ICache, IWaypoint {
             inventory = other.inventory;
             inventoryItems = other.inventoryItems;
         }
-        if (CollectionUtils.isEmpty(logs)) { // keep last known logs if none
-            logs = other.logs;
+        if (logs.isEmpty()) { // keep last known logs if none
+            logs.set(other.logs.get());
         }
         if (logCounts.size() == 0) {
             logCounts = other.logCounts;
@@ -674,10 +692,7 @@ public class cgCache implements ICache, IWaypoint {
 
     @Override
     public List<String> getAttributes() {
-        if (attributes == null) {
-            return Collections.emptyList();
-        }
-        return Collections.unmodifiableList(attributes);
+        return Collections.unmodifiableList(attributes.get());
     }
 
     @Override
@@ -900,10 +915,7 @@ public class cgCache implements ICache, IWaypoint {
      * @return always non <code>null</code>
      */
     public List<cgWaypoint> getWaypoints() {
-        if (waypoints == null) {
-            return Collections.emptyList();
-        }
-        return Collections.unmodifiableList(waypoints);
+        return Collections.unmodifiableList(waypoints.get());
     }
 
     /**
@@ -915,7 +927,7 @@ public class cgCache implements ICache, IWaypoint {
      * @return <code>true</code> if waypoints successfully added to waypoint database
      */
     public boolean setWaypoints(List<cgWaypoint> waypoints, boolean saveToDatabase) {
-        this.waypoints = waypoints;
+        this.waypoints.set(waypoints);
         finalDefined = false;
         if (waypoints != null) {
             for (cgWaypoint waypoint : waypoints) {
@@ -929,8 +941,11 @@ public class cgCache implements ICache, IWaypoint {
         return saveToDatabase && cgeoapplication.getInstance().saveWaypoints(this);
     }
 
+    /**
+     * @return never <code>null</code>, but an empty collection instead
+     */
     public List<LogEntry> getLogs() {
-        return getLogs(true);
+        return Collections.unmodifiableList(getLogs(true));
     }
 
     /**
@@ -939,14 +954,11 @@ public class cgCache implements ICache, IWaypoint {
      * @return the logs with all entries or just the entries of the friends, never <code>null</code>
      */
     public List<LogEntry> getLogs(boolean allLogs) {
-        if (logs == null) {
-            return Collections.emptyList();
-        }
         if (allLogs) {
-            return logs;
+            return logs.get();
         }
         ArrayList<LogEntry> friendLogs = new ArrayList<LogEntry>();
-        for (LogEntry log : logs) {
+        for (LogEntry log : logs.get()) {
             if (log.friend) {
                 friendLogs.add(log);
             }
@@ -959,7 +971,7 @@ public class cgCache implements ICache, IWaypoint {
      *            the log entries
      */
     public void setLogs(List<LogEntry> logs) {
-        this.logs = logs;
+        this.logs.set(logs);
     }
 
     public boolean isLogOffline() {
@@ -1056,7 +1068,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public void setAttributes(List<String> attributes) {
-        this.attributes = attributes;
+        this.attributes.set(attributes);
     }
 
     public void setSpoilers(List<cgImage> spoilers) {
@@ -1122,10 +1134,6 @@ public class cgCache implements ICache, IWaypoint {
      * @return <code>true</code> if waypoint successfully added to waypoint database
      */
     public boolean addOrChangeWaypoint(final cgWaypoint waypoint, boolean saveToDatabase) {
-        if (null == waypoints) {
-            waypoints = new ArrayList<cgWaypoint>();
-        }
-
         waypoint.setGeocode(geocode);
 
         if (waypoint.getId() <= 0) { // this is a new waypoint
@@ -1147,7 +1155,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public boolean hasWaypoints() {
-        return CollectionUtils.isNotEmpty(waypoints);
+        return !waypoints.isEmpty();
     }
 
     public boolean hasFinalDefined() {
@@ -1263,7 +1271,7 @@ public class cgCache implements ICache, IWaypoint {
      * @return waypoint or <code>null</code> if index is out of range
      */
     public cgWaypoint getWaypoint(final int index) {
-        return waypoints != null && index >= 0 && index < waypoints.size() ? waypoints.get(index) : null;
+        return index >= 0 && index < waypoints.size() ? waypoints.get(index) : null;
     }
 
     /**
@@ -1314,27 +1322,18 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public void addAttribute(final String attribute) {
-        if (attributes == null) {
-            attributes = new ArrayList<String>();
-        }
         attributes.add(attribute);
     }
 
     public boolean hasAttributes() {
-        return attributes != null && attributes.size() > 0;
+        return !attributes.isEmpty();
     }
 
     public void prependLog(final LogEntry log) {
-        if (logs == null) {
-            logs = new ArrayList<LogEntry>();
-        }
-        logs.add(0, log);
+        logs.prepend(log);
     }
 
     public void appendLog(final LogEntry log) {
-        if (logs == null) {
-            logs = new ArrayList<LogEntry>();
-        }
         logs.add(log);
     }
 

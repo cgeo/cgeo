@@ -351,12 +351,13 @@ class GpxExport extends AbstractExport {
         }
 
         private void writeLogs(final cgCache cache) throws IOException {
-            if (cache.getLogs().size() <= 0) {
+            final List<LogEntry> logs = cache.getLogs();
+            if (logs.size() <= 0) {
                 return;
             }
             gpx.write("<groundspeak:logs>");
 
-            for (LogEntry log : cache.getLogs()) {
+            for (LogEntry log : logs) {
                 gpx.write("<groundspeak:log id=\"");
                 gpx.write(Integer.toString(log.id));
                 gpx.write("\">");

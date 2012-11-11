@@ -7,6 +7,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
@@ -18,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -253,4 +255,23 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertTrue(codes.contains("GC2KN6K"));
         assertTrue(codes.contains("GC1T3MK"));
     }
+
+    public void testLazyLogLoading() throws IOException, ParserException {
+        // this test should be in CacheTest, but it is easier to create here due to the GPX import abilities
+        final String geocode = "GC31J2H";
+        removeCacheCompletely(geocode);
+        final List<cgCache> caches = readGPX10(R.raw.lazy);
+        assertEquals(1, caches.size());
+        cgeoapplication.getInstance().removeAllFromCache();
+
+        // load only the minimum cache, it has several members missing
+        final cgCache minimalCache = cgeoapplication.getInstance().loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+
+        // now check that we load lazy members on demand
+        assertFalse(minimalCache.getAttributes().isEmpty());
+        assertFalse(minimalCache.getLogs().isEmpty());
+
+        removeCacheCompletely(geocode);
+    }
+
 }
