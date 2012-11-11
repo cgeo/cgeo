@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class LazyInitializedList<ElementType> implements Iterable<ElementType> {
 
-    private List<ElementType> list;
+    private volatile List<ElementType> list;
 
     public List<ElementType> get() {
         initializeList();
@@ -15,7 +15,11 @@ public abstract class LazyInitializedList<ElementType> implements Iterable<Eleme
 
     private void initializeList() {
         if (list == null) {
-            list = loadFromDatabase();
+            synchronized (this) {
+                if (list == null) {
+                    list = loadFromDatabase();
+                }
+            }
         }
     }
 
