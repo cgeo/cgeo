@@ -1113,6 +1113,7 @@
     · Create and edit a personal note for each cache (not yet synchronized to geocaching.com)\n
     · Quick change between different offline maps within live map\n
     · Support of custom themes for offline maps (e.g. nightview)\n
+    · Sygic navigation support\n
     \n
     <b>Bugfixing:</b>\n
     · Crash when modifying lists fixed\n
@@ -1133,6 +1134,7 @@
     · File scan for offline maps improved\n
     · Allow HTML in trackable description\n
     · Live map filter now also working for basic members\n
+    · Improved stability for large GPX file import\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
