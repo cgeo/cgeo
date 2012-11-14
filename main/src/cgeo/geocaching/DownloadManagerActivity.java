@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.downloadservice.CacheDownloadService;
 import cgeo.geocaching.downloadservice.ICacheDownloadService;
 import cgeo.geocaching.downloadservice.ICacheDownloadServiceCallback;
@@ -185,14 +184,14 @@ public class DownloadManagerActivity extends AbstractActivity implements OnClick
     @Override
     protected void onResume() {
         super.onResume();
-        ActivityMixin.showShortToast(this, "DownloadManager onResume");
-        Intent service = new Intent(getApplicationContext(), CacheDownloadService.class);
-        //default flags - do not create service when it is not running
-        bindService(service, cdsConnection, 0);
+        bindServiceHelper(CacheDownloadService.class, cdsConnection);
+        bindServiceHelper(Send2CgeoService.class, s2cConnection);
+    }
 
-        Intent s2cservice = new Intent(getApplicationContext(), Send2CgeoService.class);
+    private void bindServiceHelper(Class<?> cls, ServiceConnection scon) {
+        Intent service = new Intent(getApplicationContext(), cls);
         //default flags - do not create service when it is not running
-        bindService(s2cservice, s2cConnection, 0);
+        bindService(service, scon, 0);
     }
 
     /**

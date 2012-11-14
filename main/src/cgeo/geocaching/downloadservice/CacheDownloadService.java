@@ -67,7 +67,7 @@ public class CacheDownloadService extends Service {
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj) {
+            if (this == obj) { // same references
                 return true;
             }
             if (obj == null) {
@@ -77,48 +77,51 @@ public class CacheDownloadService extends Service {
                 return false;
             }
             QueueItem other = (QueueItem) obj;
+            if ((geocode == null) && (other.geocode == null)) {
+                return true; // both geocodes are null
+            }
             if (geocode == null) {
-                if (other.geocode != null) {
-                    return false;
-                }
-            } else if (!geocode.equals(other.geocode)) {
+                return false;
+            }
+            if (!geocode.equals(other.geocode)) {
                 return false;
             }
             return true;
         }
-
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent != null) {
-            if (intent.getExtras() != null) {
-                if (null != intent.getExtras().getString(EXTRA_GEOCODE)) {
-                    int listId = intent.getIntExtra(EXTRA_LIST_ID, StoredList.STANDARD_LIST_ID);
-                    QueueItem item =
-                            new QueueItem(intent.getExtras().getString(EXTRA_GEOCODE),
-                                    startId,
-                                    listId,
-                                    intent.getExtras().containsKey(EXTRA_REFRESH) ? OperationType.REFRESH : OperationType.STORE);
-                    try {
-                        if (!queue.contains(item)) {
-                            queue.put(item);
-                            if (lastCacheAdded < System.currentTimeMillis() + 1000) {
-                                ActivityMixin.showShortToast(this, (getString(R.string.download_service_queued_cache, item.geocode)));
-                                lastCacheAdded = System.currentTimeMillis();
-                            }
-                            notifyChanges();
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        if (intent == null) {
+            return START_NOT_STICKY;
+        }
 
-                    if (!downloadTaskRunning) {
-                        downloadTaskRunning = true;
-                        new DownloadCachesTask().execute();
-                    }
+        if (!intent.hasExtra(EXTRA_GEOCODE)) {
+            return START_NOT_STICKY;
+        }
+
+        int listId = intent.getIntExtra(EXTRA_LIST_ID, StoredList.STANDARD_LIST_ID);
+        QueueItem item =
+                new QueueItem(intent.getStringExtra(EXTRA_GEOCODE),
+                        startId,
+                        listId,
+                        intent.hasExtra(EXTRA_REFRESH) ? OperationType.REFRESH : OperationType.STORE);
+        try {
+            if (!queue.contains(item)) {
+                queue.put(item);
+                if (lastCacheAdded + 1000 < System.currentTimeMillis()) {
+                    ActivityMixin.showShortToast(this, (getString(R.string.download_service_queued_cache, item.geocode)));
+                    lastCacheAdded = System.currentTimeMillis();
                 }
+                notifyChanges();
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (!downloadTaskRunning) {
+            downloadTaskRunning = true;
+            new DownloadCachesTask().execute();
         }
         return START_STICKY;
     }
@@ -180,23 +183,20 @@ public class CacheDownloadService extends Service {
      */
     @TargetApi(5)
     private void showNotification() {
-        String ticker = (actualCache == null) ? "DownloadService idle." : "Downloading " + actualCache.geocode;
-        Notification notification = new Notification(R.drawable.icon_sync, ticker, System.currentTimeMillis());
+        String actualCacheCode = "";
+        if (actualCache != null) {
+            actualCacheCode = actualCache.geocode;
+        }
+        String status = getResources().getQuantityString(R.plurals.download_service_status, queue.size(), actualCacheCode, queue.size());
+        Notification notification = new Notification(R.drawable.icon_sync, status, System.currentTimeMillis());
         Intent notificationIntent = new Intent(this, DownloadManagerActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-        StringBuilder status = new StringBuilder();
-        if (actualCache != null) {
-            status.append("Downloading ");
-            status.append(actualCache.geocode);
-            status.append(" and " + queue.size() + "more caches.");
-        }
-        notification.setLatestEventInfo(getApplicationContext(), "Download service", status.toString(), contentIntent);
+        notification.setLatestEventInfo(getApplicationContext(), getString(R.string.download_service_name), status.toString(), contentIntent);
         startForeground(CGEO_DOWNLOAD_NOTIFICATION_ID, notification);
     }
 
     @Override
     public void onCreate() {
-        ActivityMixin.showShortToast(this, "Caches being downloaded!");
         super.onCreate();
         Log.d("CACHEDOWNLOADSERVICE START");
         notifyChanges();
@@ -292,7 +292,7 @@ public class CacheDownloadService extends Service {
         notifyClients(true);
         downloadTaskRunning = false;
         Log.d("CACHEDOWNLOADSERVICE STOP");
-        ActivityMixin.showShortToast(this, "Finished downloading geocaches.");
+        ActivityMixin.showShortToast(this, getString(R.string.download_service_finished));
         callbackList.kill();
         super.onDestroy();
     }

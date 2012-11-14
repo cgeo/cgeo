@@ -873,10 +873,18 @@
   <string name="export_gpx_to">Send exported GPX to</string>
   
   <!-- cache download service -->
+  <string name="download_service_name">c:geo donwloads</string>
   <string name="download_service_downloading">Downloading</string>
+  <plurals name="download_service_status">
+        <item quantity="zero">Downloading %1$s.</item>
+        <item quantity="one">Downloading %1$s and one more cache.</item>
+        <item quantity="two">Downloading %1$s and two more caches.</item>
+        <item quantity="other">Downloading %1$s and %2$d more caches.</item>
+  </plurals>
+  
   <string name="download_service_remove">Remove</string>
   <string name="download_service_downloads">Downloads</string>
-  <string name="download_service_finished">Finished</string>
+  <string name="download_service_finished">Finished downloading</string>
   <string name="download_service_pause">Pause</string>
   <string name="download_service_resume">Resume</string>
   <string name="download_service_flush">Cancel all</string>
@@ -884,10 +892,10 @@
   <string name="download_service_flushed_queue_and_exiting">Downloading of caches has been canceled.</string>
   <string name="download_service_removed_cache">Download of geocache %s has been canceled.</string>
   <string name="download_service_not_removed_cache">Geocache %s is not supposed to be downloaded.</string>
-  <string name="download_service_paused">Download service has been paused.</string>
-  <string name="download_service_resumed">Download service has been resumed.</string>
+  <string name="download_service_paused">Downloading has been paused.</string>
+  <string name="download_service_resumed">Downloading has been resumed.</string>
   <string name="download_service_send2cgeostart">Starting send2cgeo monitoring.</string>
-  <string name="download_service_send2cgefinished">Download service finished send2cgeo monitoring.</string>
+  <string name="download_service_send2cgefinished">c:geo finished send2cgeo monitoring.</string>
   <string name="download_service_send2cgeo_is_running">send2cgeo monitoring is already running</string>
   <string name="download_service_queued_cache">Waiting for %s to download</string>
   

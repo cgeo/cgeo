@@ -62,18 +62,19 @@ public class CacheQueueAdapter extends ArrayAdapter<String> {
             inflater = ((Activity) getContext()).getLayoutInflater();
         }
 
-        final ViewHolder holder;
         View v = view;
 
         if (v == null) {
             v = inflater.inflate(R.layout.download_queue_item, null);
+        }
+
+        ViewHolder holder = (ViewHolder) v.getTag();
+        if (holder == null) {
             holder = new ViewHolder();
             holder.text = (TextView) v.findViewById(R.id.text);
             holder.info = (TextView) v.findViewById(R.id.info);
             holder.remove = (Button) v.findViewById(R.id.delete_from_queue);
             v.setTag(holder);
-        } else {
-            holder = (ViewHolder) v.getTag();
         }
 
         final cgCache cache = cgeoapplication.getInstance().loadCache(item, EnumSet.of(LoadFlag.LOAD_CACHE_BEFORE, LoadFlag.LOAD_DB_MINIMAL));
