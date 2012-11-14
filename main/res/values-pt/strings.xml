@@ -26,7 +26,7 @@
   <string name="event">Cache evento</string>
   <string name="mega">Cache mega-evento</string>
   <string name="earth">Cache Terra</string>
-  <string name="cito">Evento cache in trash out</string>
+  <string name="cito">Evento Cache In Trash Out</string>
   <string name="webcam">Cache webcam</string>
   <string name="virtual">Cache virtual</string>
   <string name="wherigo">Cache whereigo</string>
@@ -72,7 +72,7 @@
   <string name="log_maintenance_needed">Precisa manutenção</string>
   <string name="log_update">Coordenadas actualizadas</string>
   <string name="log_archived">Arquivada</string>
-  <string name="log_needs_archived">Precisa arquivo</string>
+  <string name="log_needs_archived">Precisa de arquivamento</string>
   <string name="log_discovered">Descoberta</string>
   <string name="log_reviewer">Nota de revisor</string>
   <string name="log_tb_nothing">Não fazer nada</string>
