@@ -10,7 +10,8 @@ finddiffs () {
     echo "Only in values/strings.xml:" >> $1.missing
     grep "<\||" tmp.str | cut -d " " -f 1 | while read s; do
 	    egrep "<(string|plurals)" ../../res/values/strings.xml | grep "name=\"$s\""
-    done | egrep -v '<string name="(contributors|changelog)">'>> $1.missing
+    done | egrep -v 'translatable="false"' \
+         | egrep -v '<string name="(contributors|changelog)">'>> $1.missing
     echo "Only in values-$1/strings.xml:" >> $1.missing
     grep ">\||" tmp.str | sed "s/^/x/;s/\s\s*/ /g" | cut -d " " -f 3 | while read s; do
 	    egrep "<(string|plurals)" ../../res/values-$1/strings.xml | grep "name=\"$s\""
