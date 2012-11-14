@@ -64,6 +64,17 @@ abstract class StateFilter extends AbstractFilter {
         }
     }
 
+    static class StateNonPremiumFilter extends StateFilter {
+        public StateNonPremiumFilter() {
+            super(res.getString(R.string.cache_status_not_premium));
+        }
+
+        @Override
+        public boolean accepts(cgCache cache) {
+            return !cache.isPremiumMembersOnly();
+        }
+    }
+
     private static class StateOfflineLogFilter extends StateFilter {
         public StateOfflineLogFilter() {
             super(res.getString(R.string.cache_status_offline_log));
@@ -84,6 +95,7 @@ abstract class StateFilter extends AbstractFilter {
             filters.add(new StateArchivedFilter());
             filters.add(new StateDisabledFilter());
             filters.add(new StatePremiumFilter());
+            filters.add(new StateNonPremiumFilter());
             filters.add(new StateOfflineLogFilter());
 
             Collections.sort(filters, new Comparator<StateFilter>() {
