@@ -575,8 +575,8 @@
   <string name="gpx_import_loading_waypoints">A carregar o ficheiro dos waypoints</string>
   <string name="gpx_import_storing">A gravar as caches na base de dados</string>
   <string name="gpx_import_caches_imported">caches importadas</string>
-  <string name="gpx_import_title">Importar GPX</string>
   <string name="gpx_import_title_reading_file">A ler o ficheiro</string>
+  <string name="gpx_import_title">Importar GPX</string>
   <string name="gpx_import_title_caches_imported">Resultado</string>
   <string name="gpx_import_title_caches_import_failed">A importação falhou</string>
   <string name="gpx_import_error_io">Não consegue ler o ficheiro</string>
