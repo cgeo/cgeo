@@ -9,6 +9,7 @@ import cgeo.geocaching.downloadservice.ISend2CgeoService;
 import cgeo.geocaching.downloadservice.ISend2CgeoServiceCallback;
 import cgeo.geocaching.downloadservice.Send2CgeoService;
 import cgeo.geocaching.ui.CacheQueueAdapter;
+import cgeo.geocaching.utils.Log;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -260,7 +261,7 @@ public class DownloadManagerActivity extends AbstractActivity implements OnClick
                 s2cService.registerStatusCallback(s2cCallback);
             } catch (RemoteException e) {
                 //this shouldn't be fired when service is just connected
-                e.printStackTrace();
+                Log.e("Remote exception has been fired by onServiceConnection " + e.getMessage());
             }
         }
 

@@ -26,6 +26,8 @@ public class CacheDownloadService extends Service {
 
     private QueueItem actualCache;
 
+    private long lastCacheAdded = 0;
+
     private RemoteCallbackList<ICacheDownloadServiceCallback> callbackList = new RemoteCallbackList<ICacheDownloadServiceCallback>();
 
     public static final int CGEO_DOWNLOAD_NOTIFICATION_ID = 91258;
@@ -101,7 +103,10 @@ public class CacheDownloadService extends Service {
                     try {
                         if (!queue.contains(item)) {
                             queue.put(item);
-                            ActivityMixin.showShortToast(this, (getString(R.string.download_service_queued_cache, item.geocode)));
+                            if (lastCacheAdded < System.currentTimeMillis() + 1000) {
+                                ActivityMixin.showShortToast(this, (getString(R.string.download_service_queued_cache, item.geocode)));
+                                lastCacheAdded = System.currentTimeMillis();
+                            }
                             notifyChanges();
                         }
                     } catch (InterruptedException e) {
@@ -133,8 +138,8 @@ public class CacheDownloadService extends Service {
      */
     private void notifyClients(boolean finish) {
         synchronized (callbackList) {
-            final int N = callbackList.beginBroadcast();
-            for (int i = 0; i < N; i++) {
+            final int maxClientId = callbackList.beginBroadcast();
+            for (int i = 0; i < maxClientId; i++) {
                 try {
                     ICacheDownloadServiceCallback cb = callbackList.getBroadcastItem(i);
                     if (finish) {
@@ -163,7 +168,7 @@ public class CacheDownloadService extends Service {
     }
 
     /**
-     * @see notifyCahnges
+     * @see notifyChanges
      *      with default finish value (false)
      */
     private synchronized void notifyChanges() {
@@ -183,7 +188,7 @@ public class CacheDownloadService extends Service {
         if (actualCache != null) {
             status.append("Downloading ");
             status.append(actualCache.geocode);
-            status.append(", queue size " + queue.size());
+            status.append(" and " + queue.size() + "more caches.");
         }
         notification.setLatestEventInfo(getApplicationContext(), "Download service", status.toString(), contentIntent);
         startForeground(CGEO_DOWNLOAD_NOTIFICATION_ID, notification);
@@ -191,7 +196,7 @@ public class CacheDownloadService extends Service {
 
     @Override
     public void onCreate() {
-        ActivityMixin.showShortToast(this, "Cache download service started");
+        ActivityMixin.showShortToast(this, "Caches being downloaded!");
         super.onCreate();
         Log.d("CACHEDOWNLOADSERVICE START");
         notifyChanges();
@@ -272,13 +277,11 @@ public class CacheDownloadService extends Service {
 
             @Override
             public void pauseDownloading() throws RemoteException {
-                // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("NOT IMPLEMENTED");
             }
 
             @Override
             public void resumeDownloading() throws RemoteException {
-                // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("NOT IMPLEMENTED");
             }
         };
@@ -289,7 +292,7 @@ public class CacheDownloadService extends Service {
         notifyClients(true);
         downloadTaskRunning = false;
         Log.d("CACHEDOWNLOADSERVICE STOP");
-        ActivityMixin.showShortToast(this, "Cache download service stopped");
+        ActivityMixin.showShortToast(this, "Finished downloading geocaches.");
         callbackList.kill();
         super.onDestroy();
     }
