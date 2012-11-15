@@ -873,7 +873,7 @@
   <string name="export_gpx_to">Send exported GPX to</string>
   
   <!-- cache download service -->
-  <string name="download_service_name">c:geo donwloads</string>
+  <string name="download_service_name">c:geo downloads</string>
   <string name="download_service_downloading">Downloading</string>
   <plurals name="download_service_status">
         <item quantity="zero">Downloading %1$s.</item>
@@ -888,7 +888,7 @@
   <string name="download_service_pause">Pause</string>
   <string name="download_service_resume">Resume</string>
   <string name="download_service_flush">Cancel all</string>
-  <string name="download_service_queued">Waiting</string>
+  <string name="download_service_queued">Waiting: %d</string>
   <string name="download_service_flushed_queue_and_exiting">Downloading of caches has been canceled.</string>
   <string name="download_service_removed_cache">Download of geocache %s has been canceled.</string>
   <string name="download_service_not_removed_cache">Geocache %s is not supposed to be downloaded.</string>

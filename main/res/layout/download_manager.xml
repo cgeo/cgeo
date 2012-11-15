@@ -67,8 +67,8 @@
         <View style="@style/separator_horizontal" />
 
         <TextView
-            style="@style/separator_horizontal_headline"
-            android:text="@string/download_service_queued" />
+            android:id="@+id/downloadQueueTitle"
+            style="@style/separator_horizontal_headline" />
     </RelativeLayout>
 
     <ListView

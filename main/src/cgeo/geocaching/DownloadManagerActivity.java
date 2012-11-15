@@ -57,8 +57,10 @@ public class DownloadManagerActivity extends AbstractActivity implements OnClick
         public void handleMessage(Message msg) {
 
             switch (msg.what) {
-                case DS_CONNECTED:
                 case DS_UPDATE:
+                case DS_CONNECTED:
+                    TextView textQueued = (TextView) findViewById(R.id.downloadQueueTitle);
+                    textQueued.setText(getString(R.string.download_service_queued, msg.arg1));
                     try {
                         String caches[] = downloadService.queuedCodes();
                         ArrayList<String> cacheList = new ArrayList<String>(caches.length);
@@ -231,7 +233,14 @@ public class DownloadManagerActivity extends AbstractActivity implements OnClick
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             downloadService = (ICacheDownloadService) service;
-            uiHandler.sendEmptyMessage(DS_CONNECTED);
+            Message msg = Message.obtain();
+            msg.what = DS_CONNECTED;
+            try {
+                msg.arg1 = downloadService.queueStatus();
+            } catch (RemoteException e1) {
+                msg.arg1 = 0;
+            }
+            uiHandler.sendMessage(msg);
             try {
                 downloadService.registerStatusCallback(callback);
             } catch (RemoteException e) {
@@ -278,8 +287,11 @@ public class DownloadManagerActivity extends AbstractActivity implements OnClick
          * called from service when data changed
          */
         @Override
-        public void notifyRefresh() throws RemoteException {
-            uiHandler.sendEmptyMessage(DS_UPDATE);
+        public void notifyRefresh(int queueSize) throws RemoteException {
+            Message msg = Message.obtain();
+            msg.what = DS_UPDATE;
+            msg.arg1 = queueSize;
+            uiHandler.sendMessage(msg);
         }
 
         /**

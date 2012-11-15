@@ -148,7 +148,7 @@ public class CacheDownloadService extends Service {
                     if (finish) {
                         cb.notifyFinish();
                     } else {
-                        cb.notifyRefresh();
+                        cb.notifyRefresh(queue.size());
                     }
                 } catch (RemoteException e) {
                     // The RemoteCallbackList will take care of removing
@@ -183,11 +183,10 @@ public class CacheDownloadService extends Service {
      */
     @TargetApi(5)
     private void showNotification() {
-        String actualCacheCode = "";
-        if (actualCache != null) {
-            actualCacheCode = actualCache.geocode;
+        if (actualCache == null) {
+            return;
         }
-        String status = getResources().getQuantityString(R.plurals.download_service_status, queue.size(), actualCacheCode, queue.size());
+        String status = getResources().getQuantityString(R.plurals.download_service_status, queue.size(), actualCache.geocode, queue.size());
         Notification notification = new Notification(R.drawable.icon_sync, status, System.currentTimeMillis());
         Intent notificationIntent = new Intent(this, DownloadManagerActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
@@ -330,7 +329,6 @@ public class CacheDownloadService extends Service {
                             //TODO: use handler in the future to report more granular progress
                             cache.refresh(actualCache.listId, null);
                             break;
-
                     }
 
                     Log.d("CACHEDOWNLOAD FINISHED DOWNLOAD" + actualCache.geocode);

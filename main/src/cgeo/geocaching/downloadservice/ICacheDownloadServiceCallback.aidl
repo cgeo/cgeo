@@ -1,6 +1,6 @@
 package cgeo.geocaching.downloadservice;
 
 interface ICacheDownloadServiceCallback {
-    void notifyRefresh(); 
+    void notifyRefresh(int queueSize); 
     void notifyFinish();
 }
