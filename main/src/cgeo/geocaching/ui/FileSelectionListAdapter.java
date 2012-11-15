@@ -54,9 +54,8 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
             holder = (ViewHolder) v.getTag();
         }
 
-        File current = new File(parentView.getCurrentFile());
-
-        if (file.equals(current)) {
+        String currentFile = parentView.getCurrentFile();
+        if (currentFile != null && file.equals(new File(currentFile))) {
             holder.filename.setTypeface(holder.filename.getTypeface(), Typeface.BOLD);
         } else {
             holder.filename.setTypeface(holder.filename.getTypeface(), Typeface.NORMAL);
