@@ -158,7 +158,7 @@
   <string name="loc_last">Sist sett</string>
   <string name="loc_net">Nettverk</string>
   <string name="loc_gps">GPS</string>
-  <string name="loc_sat">Satelitt</string>
+  <string name="loc_sat">Sateliett</string>
   <string name="loc_trying">Prøver å lokalisere</string>
   <string name="loc_no_addr">Ukjent adresse</string>
 

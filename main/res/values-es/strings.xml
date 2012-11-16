@@ -371,7 +371,7 @@
   <string name="init_backup_last">Copia guardada el</string>
   <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
   <string name="init_mapsources">Proveedor de mapas</string>
-  <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de linea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string>
+  <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de línea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string>
   <string name="init_mapsource_select">Elige proveedor de mapas</string>
   <string name="init_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
   <string name="init_sigautoinsert">Insertar firma automáticamente</string>
@@ -633,7 +633,7 @@
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Sencillo manual de c:geo que contiene todas las capacidades de este programa (incluidas las ocultas).</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Sencilla aplicación que muestra mapas en linea y permite descargarlos para ser usados sin conexión (sólo mapas no vectoriales). Tambien permite registrar el recorrido, gestionar puntos de interés y más funciones interesantes.</string>
+  <string name="helper_locus_description">Sencilla aplicación que muestra mapas en línea y permite descargarlos para ser usados sin conexión (sólo mapas no vectoriales). También permite registrar el recorrido, gestionar puntos de interés y más funciones interesantes.</string>
 
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Puedes usar el radar de esta aplicación con c:geo. Además ofrece un montón de información relacionada con el GPS.</string>

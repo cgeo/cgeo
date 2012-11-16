@@ -800,7 +800,7 @@
 
   <!-- next things -->
   <string name="legal_note">A geocaching.com szolgáltatásainak használatához, el kell fogadnod ezeket a feltételeket:<a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> </string>
-  <string name="quote">Hogy a geocaching könyebb legyen a felhasználók pedig lustábbak.</string>
+  <string name="quote">Hogy a geocaching könnyebb legyen a felhasználók pedig lustábbak.</string>
   <string name="powered_by">carnero</string>
   <string name="support">Támogatás: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Weboldal: <a href="http://cgeo.org/">cgeo.org</a></string>

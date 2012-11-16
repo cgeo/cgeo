@@ -37,9 +37,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 class GpxExport extends AbstractExport {
-    private static final SimpleDateFormat dateFormatZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    private static final SimpleDateFormat dateFormatZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 
     protected GpxExport() {
         super(getString(R.string.export_gpx));
@@ -133,7 +134,7 @@ class GpxExport extends AbstractExport {
                 final File exportLocation = new File(Settings.getGpxExportDir());
                 exportLocation.mkdirs();
 
-                final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
                 exportFile = new File(Settings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(new Date()) + ".gpx");
 
                 gpx = new BufferedWriter(new FileWriter(exportFile));

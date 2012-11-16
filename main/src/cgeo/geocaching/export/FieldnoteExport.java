@@ -30,6 +30,7 @@ import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Exports offline-logs in the Groundspeak Field Note format.<br>
@@ -40,7 +41,7 @@ import java.util.List;
  */
 class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
-    private static final SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    private static final SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 
     protected FieldnoteExport() {
         super(getString(R.string.export_fieldnotes));
@@ -161,7 +162,7 @@ class FieldnoteExport extends AbstractExport {
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 exportLocation.mkdirs();
 
-                SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
                 exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
 
                 OutputStream os;
