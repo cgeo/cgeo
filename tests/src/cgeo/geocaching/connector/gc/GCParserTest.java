@@ -32,11 +32,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testOwnCache() {
-        final String page = getFileContent(R.raw.own_cache);
-        SearchResult result = GCParser.parseCacheFromText(page, null);
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        final cgCache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+        final cgCache cache = parseCache(R.raw.own_cache);
         assertNotNull(cache);
         assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
         assertEquals(1, cache.getSpoilers().size());
@@ -133,6 +129,22 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         for (int i = 0; i < expected.length; i++) {
             assertTrue(expected[i].equals(cache.getWaypoint(i).getCoords()));
         }
+    }
+
+    public void testWaypointParsing() {
+        cgCache cache = parseCache(R.raw.gc366bq);
+        assertEquals(13, cache.getWaypoints().size());
+        //make sure that waypoints are not duplicated
+        cache = parseCache(R.raw.gc366bq);
+        assertEquals(13, cache.getWaypoints().size());
+    }
+
+    private cgCache parseCache(int resourceId) {
+        final String page = getFileContent(resourceId);
+        SearchResult result = GCParser.parseCacheFromText(page, null);
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+        return result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     }
 
 }

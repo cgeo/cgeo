@@ -625,6 +625,7 @@ public abstract class GCParser {
         }
 
         // waypoints
+        cache.setWaypoints(Collections.<cgWaypoint> emptyList(), false);
         int wpBegin;
         int wpEnd;
 
