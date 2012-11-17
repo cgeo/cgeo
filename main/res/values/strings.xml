@@ -1115,6 +1115,7 @@
     · Quick change between different offline maps within live map\n
     · Support of custom themes for offline maps (e.g. nightview)\n
     · Sygic navigation support\n
+    · Filter for premium member caches\n
     \n
     <b>Bugfixing:</b>\n
     · Crash when modifying lists fixed\n
@@ -1148,6 +1149,8 @@
       On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
       Log images with huge size cause a long loading time\n
+      In special situations the logbook might not be shown completely after logging a cache\n
+      The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
