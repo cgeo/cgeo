@@ -271,14 +271,23 @@ public class StaticMapsProvider {
     }
 
     public static Bitmap getPreviewMap(final String geocode) {
-        return BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, PREFIX_PREVIEW, false).getPath());
+        return decodeFile(StaticMapsProvider.getMapFile(geocode, PREFIX_PREVIEW, false));
     }
 
     public static Bitmap getWaypointMap(final String geocode, int waypoint_id, int level) {
-        return BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypoint_id + "_" + level, false).getPath());
+        return decodeFile(StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypoint_id + "_" + level, false));
     }
 
     public static Bitmap getCacheMap(final String geocode, int level) {
-        return BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, String.valueOf(level), false).getPath());
+        return decodeFile(StaticMapsProvider.getMapFile(geocode, String.valueOf(level), false));
     }
+
+    private static Bitmap decodeFile(final File mapFile) {
+        // avoid exception in system log, if we got nothing back from Google.
+        if (mapFile.exists()) {
+            return BitmapFactory.decodeFile(mapFile.getPath());
+        }
+        return null;
+    }
+
 }
