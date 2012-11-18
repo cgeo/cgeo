@@ -135,20 +135,13 @@ class FieldnoteExport extends AbstractExport {
         @Override
         protected Boolean doInBackground(Void... params) {
             final StringBuilder fieldNoteBuffer = new StringBuilder();
+            final cgeoapplication app = cgeoapplication.getInstance();
 
             try {
                 int i = 0;
                 for (cgCache cache : caches) {
                     if (cache.isLogOffline()) {
-                        final LogEntry log = cgeoapplication.getInstance().loadLogOffline(cache.getGeocode());
-                        fieldNoteBuffer.append(cache.getGeocode())
-                                .append(',')
-                                .append(fieldNoteDateFormat.format(new Date(log.date)))
-                                .append(',')
-                                .append(log.type.type)
-                                .append(",\"")
-                                .append(StringUtils.replaceChars(log.log, '"', '\''))
-                                .append("\"\n");
+                        appendFieldNote(fieldNoteBuffer, cache, app.loadLogOffline(cache.getGeocode()));
                         publishProgress(++i);
                     }
                 }
@@ -269,5 +262,16 @@ class FieldnoteExport extends AbstractExport {
                 }
             }
         }
+    }
+
+    static void appendFieldNote(final StringBuilder fieldNoteBuffer, final cgCache cache, final LogEntry log) {
+        fieldNoteBuffer.append(cache.getGeocode())
+                .append(',')
+                .append(fieldNoteDateFormat.format(new Date(log.date)))
+                .append(',')
+                .append(StringUtils.capitalize(log.type.type))
+                .append(",\"")
+                .append(StringUtils.replaceChars(log.log, '"', '\''))
+                .append("\"\n");
     }
 }
