@@ -32,11 +32,19 @@ public abstract class LazyInitializedList<ElementType> implements Iterable<Eleme
     }
 
     public void set(final List<ElementType> elements) {
-        list = new ArrayList<ElementType>(elements);
+        if (elements != null) {
+            list = new ArrayList<ElementType>(elements);
+        } else {
+            list = new ArrayList<ElementType>();
+        }
     }
 
     public void set(LazyInitializedList<ElementType> other) {
-        list = new ArrayList<ElementType>(other.asList());
+        if (other != null) {
+            list = new ArrayList<ElementType>(other.asList());
+        } else {
+            list = new ArrayList<ElementType>();
+        }
     }
 
     public boolean isEmpty() {
