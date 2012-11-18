@@ -5,12 +5,11 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.LazyInitializedList;
 
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -104,7 +103,7 @@ public class GC1ZXX2 extends MockedCache {
     }
 
     @Override
-    public List<String> getAttributes() {
+    public LazyInitializedList<String> getAttributes() {
         String[] attributes = new String[] {
                 "bicycles_yes",
                 "available_yes",
@@ -114,7 +113,7 @@ public class GC1ZXX2 extends MockedCache {
                 "kids_yes",
                 "dogs_yes"
         };
-        return Arrays.asList(attributes);
+        return new MockedLazyInitializedList<String>(attributes);
     }
 
 

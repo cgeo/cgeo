@@ -352,13 +352,12 @@ class GpxExport extends AbstractExport {
         }
 
         private void writeLogs(final cgCache cache) throws IOException {
-            final List<LogEntry> logs = cache.getLogs();
-            if (logs.size() <= 0) {
+            if (cache.getLogs().isEmpty()) {
                 return;
             }
             gpx.write("<groundspeak:logs>");
 
-            for (LogEntry log : logs) {
+            for (LogEntry log : cache.getLogs()) {
                 gpx.write("<groundspeak:log id=\"");
                 gpx.write(Integer.toString(log.id));
                 gpx.write("\">");
@@ -386,7 +385,7 @@ class GpxExport extends AbstractExport {
         }
 
         private void writeAttributes(final cgCache cache) throws IOException {
-            if (!cache.hasAttributes()) {
+            if (cache.getAttributes().isEmpty()) {
                 return;
             }
             //TODO: Attribute conversion required: English verbose name, gpx-id

@@ -1074,13 +1074,12 @@ public class cgData {
         String geocode = cache.getGeocode();
         database.delete(dbTableAttributes, "geocode = ?", new String[]{geocode});
 
-        final List<String> attributes = cache.getAttributes();
-        if (CollectionUtils.isNotEmpty(attributes)) {
+        if (cache.getAttributes().isNotEmpty()) {
 
             InsertHelper helper = new InsertHelper(database, dbTableAttributes);
             long timeStamp = System.currentTimeMillis();
 
-            for (String attribute : attributes) {
+            for (String attribute : cache.getAttributes()) {
                 helper.prepareForInsert();
 
                 helper.bind(ATTRIBUTES_GEOCODE, geocode);
@@ -1266,40 +1265,42 @@ public class cgData {
         }
     }
 
-    private void saveLogsWithoutTransaction(final String geocode, final List<LogEntry> logs) {
+    private void saveLogsWithoutTransaction(final String geocode, final Iterable<LogEntry> logs) {
         // TODO delete logimages referring these logs
         database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
 
-        if (CollectionUtils.isNotEmpty(logs)) {
-            InsertHelper helper = new InsertHelper(database, dbTableLogs);
-            long timeStamp = System.currentTimeMillis();
-            for (LogEntry log : logs) {
-                helper.prepareForInsert();
+        if (!logs.iterator().hasNext()) {
+            return;
+        }
 
-                helper.bind(LOGS_GEOCODE, geocode);
-                helper.bind(LOGS_UPDATED, timeStamp);
-                helper.bind(LOGS_TYPE, log.type.id);
-                helper.bind(LOGS_AUTHOR, log.author);
-                helper.bind(LOGS_LOG, log.log);
-                helper.bind(LOGS_DATE, log.date);
-                helper.bind(LOGS_FOUND, log.found);
-                helper.bind(LOGS_FRIEND, log.friend);
+        InsertHelper helper = new InsertHelper(database, dbTableLogs);
+        long timeStamp = System.currentTimeMillis();
+        for (LogEntry log : logs) {
+            helper.prepareForInsert();
 
-                long log_id = helper.execute();
+            helper.bind(LOGS_GEOCODE, geocode);
+            helper.bind(LOGS_UPDATED, timeStamp);
+            helper.bind(LOGS_TYPE, log.type.id);
+            helper.bind(LOGS_AUTHOR, log.author);
+            helper.bind(LOGS_LOG, log.log);
+            helper.bind(LOGS_DATE, log.date);
+            helper.bind(LOGS_FOUND, log.found);
+            helper.bind(LOGS_FRIEND, log.friend);
 
-                if (log.hasLogImages()) {
-                    ContentValues values = new ContentValues();
-                    for (cgImage img : log.getLogImages()) {
-                        values.clear();
-                        values.put("log_id", log_id);
-                        values.put("title", img.getTitle());
-                        values.put("url", img.getUrl());
-                        database.insert(dbTableLogImages, null, values);
-                    }
+            long log_id = helper.execute();
+
+            if (log.hasLogImages()) {
+                ContentValues values = new ContentValues();
+                for (cgImage img : log.getLogImages()) {
+                    values.clear();
+                    values.put("log_id", log_id);
+                    values.put("title", img.getTitle());
+                    values.put("url", img.getUrl());
+                    database.insert(dbTableLogImages, null, values);
                 }
             }
-            helper.close();
         }
+        helper.close();
     }
 
     private void saveLogCountsWithoutTransaction(final cgCache cache) {

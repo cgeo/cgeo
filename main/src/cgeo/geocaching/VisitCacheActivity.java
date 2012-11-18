@@ -680,7 +680,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             if (status == StatusCode.NO_ERROR) {
                 final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
-                cache.prependLog(logNow);
+                cache.getLogs().prepend(logNow);
 
                 if (typeSelected == LogType.FOUND_IT) {
                     cache.setFound(true);

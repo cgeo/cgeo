@@ -4,6 +4,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.utils.LazyInitializedList;
 
 import java.util.Date;
 import java.util.List;
@@ -102,11 +103,11 @@ public interface ICache extends IBasicCache {
     public Date getHiddenDate();
 
     /**
-     * immutable list of attributes, never <code>null</code>
-     *
+     * null safe list of attributes
+     * 
      * @return the list of attributes for this cache
      */
-    public List<String> getAttributes();
+    public LazyInitializedList<String> getAttributes();
 
     /**
      * @return the list of trackables in this cache

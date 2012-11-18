@@ -708,10 +708,10 @@ public class CacheDetailActivity extends AbstractActivity {
         pageOrder.add(Page.DETAILS);
         final int detailsIndex = pageOrder.size() - 1;
         pageOrder.add(Page.DESCRIPTION);
-        if (CollectionUtils.isNotEmpty(cache.getLogs(true))) {
+        if (cache.getLogs().isNotEmpty()) {
             pageOrder.add(Page.LOGS);
         }
-        if (CollectionUtils.isNotEmpty(cache.getLogs(false))) {
+        if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
             pageOrder.add(Page.LOGSFRIENDS);
         }
         if (CollectionUtils.isNotEmpty(cache.getInventory())) {
@@ -1271,9 +1271,7 @@ public class CacheDetailActivity extends AbstractActivity {
             final TextView attribView = (TextView) descriptions.getChildAt(0);
 
             final StringBuilder buffer = new StringBuilder();
-            final List<String> attributes = cache.getAttributes();
-
-            for (String attributeName : attributes) {
+            for (String attributeName : cache.getAttributes()) {
                 final boolean enabled = CacheAttribute.isEnabled(attributeName);
                 // search for a translation of the attribute
                 CacheAttribute attrib = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
@@ -1450,7 +1448,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // cache attributes
-            if (cache.hasAttributes()) {
+            if (cache.getAttributes().isNotEmpty()) {
                 new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
                 view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
             }
@@ -2094,7 +2092,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see android.os.AsyncTask#onProgressUpdate(Progress[])
          */
         @Override
@@ -2204,7 +2202,8 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
             }
 
-            view.setAdapter(new ArrayAdapter<LogEntry>(CacheDetailActivity.this, R.layout.cacheview_logs_item, cache.getLogs(allLogs)) {
+            final List<LogEntry> logs = allLogs ? cache.getLogs().asList() : cache.getFriendsLogs();
+            view.setAdapter(new ArrayAdapter<LogEntry>(CacheDetailActivity.this, R.layout.cacheview_logs_item, logs) {
                 final UserActionsClickListener userActionsClickListener = new UserActionsClickListener();
                 final DecryptTextClickListener decryptTextClickListener = new DecryptTextClickListener();
 

@@ -28,6 +28,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -1630,14 +1631,14 @@ public abstract class GCParser {
         //cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            List<LogEntry> allLogs = cache.getLogs();
+            LazyInitializedList<LogEntry> allLogs = cache.getLogs();
             List<LogEntry> friendLogs = loadLogsFromDetails(page, cache, true, false);
             if (friendLogs != null) {
                 for (LogEntry log : friendLogs) {
                     if (allLogs.contains(log)) {
                         allLogs.get(allLogs.indexOf(log)).friend = true;
                     } else {
-                        cache.appendLog(log);
+                        cache.getLogs().add(log);
                     }
                 }
             }

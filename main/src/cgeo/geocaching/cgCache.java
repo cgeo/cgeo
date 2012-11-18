@@ -270,13 +270,13 @@ public class cgCache implements ICache, IWaypoint {
             myVote = other.myVote;
         }
         if (attributes.isEmpty()) {
-            attributes.set(other.attributes.get());
+            attributes.set(other.attributes);
         }
         if (waypoints.isEmpty()) {
-            waypoints.set(other.waypoints.get());
+            waypoints.set(other.waypoints);
         }
         else {
-            ArrayList<cgWaypoint> newPoints = new ArrayList<cgWaypoint>(waypoints.get());
+            ArrayList<cgWaypoint> newPoints = new ArrayList<cgWaypoint>(waypoints.asList());
             cgWaypoint.mergeWayPoints(newPoints, other.getWaypoints(), false);
             waypoints.set(newPoints);
         }
@@ -292,7 +292,7 @@ public class cgCache implements ICache, IWaypoint {
             inventoryItems = other.inventoryItems;
         }
         if (logs.isEmpty()) { // keep last known logs if none
-            logs.set(other.logs.get());
+            logs.set(other.logs);
         }
         if (logCounts.size() == 0) {
             logCounts = other.logCounts;
@@ -691,8 +691,8 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     @Override
-    public List<String> getAttributes() {
-        return Collections.unmodifiableList(attributes.get());
+    public LazyInitializedList<String> getAttributes() {
+        return attributes;
     }
 
     @Override
@@ -915,7 +915,7 @@ public class cgCache implements ICache, IWaypoint {
      * @return always non <code>null</code>
      */
     public List<cgWaypoint> getWaypoints() {
-        return Collections.unmodifiableList(waypoints.get());
+        return waypoints.asList();
     }
 
     /**
@@ -942,28 +942,23 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     /**
-     * @return never <code>null</code>, but an empty collection instead
+     * @return never <code>null</code>
      */
-    public List<LogEntry> getLogs() {
-        return Collections.unmodifiableList(getLogs(true));
+    public LazyInitializedList<LogEntry> getLogs() {
+        return logs;
     }
 
     /**
-     * @param allLogs
-     *            true for all logs, false for friend logs only
-     * @return the logs with all entries or just the entries of the friends, never <code>null</code>
+     * @return only the logs of friends, never <code>null</code>
      */
-    public List<LogEntry> getLogs(boolean allLogs) {
-        if (allLogs) {
-            return logs.get();
-        }
+    public List<LogEntry> getFriendsLogs() {
         ArrayList<LogEntry> friendLogs = new ArrayList<LogEntry>();
-        for (LogEntry log : logs.get()) {
+        for (LogEntry log : logs) {
             if (log.friend) {
                 friendLogs.add(log);
             }
         }
-        return friendLogs;
+        return Collections.unmodifiableList(friendLogs);
     }
 
     /**
@@ -1321,22 +1316,6 @@ public class cgCache implements ICache, IWaypoint {
         }
     }
 
-    public void addAttribute(final String attribute) {
-        attributes.add(attribute);
-    }
-
-    public boolean hasAttributes() {
-        return !attributes.isEmpty();
-    }
-
-    public void prependLog(final LogEntry log) {
-        logs.prepend(log);
-    }
-
-    public void appendLog(final LogEntry log) {
-        logs.add(log);
-    }
-
     /*
      * For working in the debugger
      * (non-Javadoc)
@@ -1502,7 +1481,7 @@ public class cgCache implements ICache, IWaypoint {
 
             // store images from logs
             if (Settings.isStoreLogImages()) {
-                for (LogEntry log : cache.getLogs(true)) {
+                for (LogEntry log : cache.getLogs()) {
                     if (log.hasLogImages()) {
                         for (cgImage oneLogImg : log.getLogImages()) {
                             imgGetter.getDrawable(oneLogImg.getUrl());
