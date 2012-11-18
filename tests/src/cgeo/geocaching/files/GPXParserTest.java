@@ -1,6 +1,8 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
@@ -26,6 +28,7 @@ import java.util.Set;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SimpleDateFormat LOG_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
+    private int listId;
 
     public void testGPXVersion100() throws Exception {
         testGPXVersion(R.raw.gc1bkp3_gpx100);
@@ -185,12 +188,12 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private List<cgCache> readGPX10(int... resourceIds) throws IOException, ParserException {
-        final GPX10Parser parser = new GPX10Parser(1);
+        final GPX10Parser parser = new GPX10Parser(listId);
         return readVersionedGPX(parser, resourceIds);
     }
 
     private List<cgCache> readGPX11(int... resourceIds) throws IOException, ParserException {
-        final GPX11Parser parser = new GPX11Parser(1);
+        final GPX11Parser parser = new GPX11Parser(listId);
         return readVersionedGPX(parser, resourceIds);
     }
 
@@ -274,4 +277,20 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
     }
 
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        listId = cgeoapplication.getInstance().createList("Temporary unit testing");
+        assertTrue(listId != StoredList.TEMPORARY_LIST_ID);
+        assertTrue(listId != StoredList.STANDARD_LIST_ID);
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        SearchResult search = cgeoapplication.getInstance().getBatchOfStoredCaches(false, null, CacheType.ALL, listId);
+        assertNotNull(search);
+        cgeoapplication.getInstance().removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
+        cgeoapplication.getInstance().removeList(listId);
+        super.tearDown();
+    }
 }
