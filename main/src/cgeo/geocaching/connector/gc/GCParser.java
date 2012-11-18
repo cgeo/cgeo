@@ -1259,6 +1259,10 @@ public abstract class GCParser {
             return null;
         }
 
+        if (page.contains(GCConstants.ERROR_TB_DOES_NOT_EXIST) || page.contains(GCConstants.ERROR_TB_ARITHMETIC_OVERFLOW) || page.contains(GCConstants.ERROR_TB_ELEMENT_EXCEPTION)) {
+            return null;
+        }
+
         final cgTrackable trackable = new cgTrackable();
 
         // trackable geocode

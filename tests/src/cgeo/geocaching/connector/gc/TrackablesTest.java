@@ -86,4 +86,9 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tbxatg)), null);
     }
 
+    public void testParseTrackableNotExisting() {
+        cgTrackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing), null);
+        assertNull(trackable);
+    }
+
 }

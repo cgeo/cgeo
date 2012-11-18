@@ -57,7 +57,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     @MediumTest
     public static void testSearchTrackableNotExisting() {
         cgTrackable tb = GCParser.searchTrackable("123456", null, null);
-        assertNotNull(tb);
+        assertNull(tb);
     }
 
     /**

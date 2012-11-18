@@ -77,6 +77,11 @@ public final class GCConstants {
      */
     public final static Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" title=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
     public final static Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile("<strong>(TB[0-9A-Z]+)[^<]*</strong> to reference this item.");
+
+    // multiple error codes, depending on the search term for the trackable code
+    public final static String ERROR_TB_DOES_NOT_EXIST = "does not exist in the system";
+    public final static String ERROR_TB_ELEMENT_EXCEPTION = "ElementNotFound Exception";
+    public final static String ERROR_TB_ARITHMETIC_OVERFLOW = "operation resulted in an overflow";
     /**
      * some parts of the webpage don't correctly encode the name, therefore this pattern must be checked with a
      * trackable name that needs HTML encoding
