@@ -452,7 +452,6 @@
   <string name="cache_dialog_watchlist_remove_title">Lista de seguimiento</string>
   <string name="cache_dialog_watchlist_remove_message">Borrando escondite de tu Lista de seguimiento…</string>
   <string name="cache_menu_navigate">Navegar</string>
-  <string name="cache_menu_tbt">Paso a paso</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Ver en mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>

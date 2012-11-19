@@ -542,7 +542,6 @@
   <string name="cache_dialog_watchlist_remove_title">Liste de suivi</string>
   <string name="cache_dialog_watchlist_remove_message">Retrait de la cache de votre liste de suivi…</string>
   <string name="cache_menu_navigate">Navigation</string>
-  <string name="cache_menu_tbt">Itinéraire</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Carte</string>
   <string name="cache_menu_map_static">Cartes statiques</string>

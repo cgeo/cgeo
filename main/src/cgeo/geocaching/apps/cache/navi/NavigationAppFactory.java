@@ -8,6 +8,8 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.apps.App;
+import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
+import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
@@ -40,7 +42,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         /** Google Maps */
         GOOGLE_MAPS(new GoogleMapsApp(), 6),
         /** Google Navigation */
-        GOOGLE_NAVIGATION(new GoogleNavigationApp(), 7),
+        GOOGLE_NAVIGATION(new GoogleNavigationDrivingApp(), 7),
         /** Google Streetview */
         GOOGLE_STREETVIEW(new StreetviewApp(), 8),
         /** The external OruxMaps app */
@@ -48,7 +50,15 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         /** The external navigon app */
         NAVIGON(new NavigonApp(), 10),
         /** The external Sygic app */
-        SYGIC(new SygicNavigationApp(), 11);
+        SYGIC(new SygicNavigationApp(), 11),
+        /**
+         * Google Navigation in walking mode
+         */
+        GOOGLE_NAVIGATION_WALK(new GoogleNavigationWalkingApp(), 12),
+        /**
+         * Google Maps Directions
+         */
+        GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13);
 
         NavigationAppsEnum(App app, int id) {
             this.app = app;

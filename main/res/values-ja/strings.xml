@@ -563,7 +563,6 @@
   <string name="cache_dialog_watchlist_remove_title">ウォッチリスト</string>
   <string name="cache_dialog_watchlist_remove_message">ウォッチリストから削除中…</string>
   <string name="cache_menu_navigate">ナビゲーション</string>
-  <string name="cache_menu_tbt">道順ナビ</string>
   <string name="cache_menu_radar">レーダー</string>
   <string name="cache_menu_map">地図で表示</string>
   <string name="cache_menu_map_static">オフライン地図</string>

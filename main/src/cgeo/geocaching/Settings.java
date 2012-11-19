@@ -75,7 +75,6 @@ public final class Settings {
     private static final String KEY_AUTO_VISIT_TRACKABLES = "trackautovisit";
     private static final String KEY_AUTO_INSERT_SIGNATURE = "sigautoinsert";
     private static final String KEY_ALTITUDE_CORRECTION = "altcorrection";
-    private static final String KEY_USE_GOOGLE_NAVIGATION = "usegnav";
     private static final String KEY_STORE_LOG_IMAGES = "logimages";
     private static final String KEY_EXCLUDE_DISABLED = "excludedisabled";
     private static final String KEY_EXCLUDE_OWN = "excludemine";
@@ -192,7 +191,6 @@ public final class Settings {
             e.putBoolean(KEY_AUTO_VISIT_TRACKABLES, old.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false));
             e.putBoolean(KEY_AUTO_INSERT_SIGNATURE, old.getBoolean(KEY_AUTO_INSERT_SIGNATURE, false));
             e.putInt(KEY_ALTITUDE_CORRECTION, old.getInt(KEY_ALTITUDE_CORRECTION, 0));
-            e.putBoolean(KEY_USE_GOOGLE_NAVIGATION, 0 != old.getInt(KEY_USE_GOOGLE_NAVIGATION, 1));
             e.putBoolean(KEY_STORE_LOG_IMAGES, old.getBoolean(KEY_STORE_LOG_IMAGES, false));
             e.putBoolean(KEY_EXCLUDE_DISABLED, 0 != old.getInt(KEY_EXCLUDE_DISABLED, 0));
             e.putBoolean(KEY_EXCLUDE_OWN, 0 != old.getInt(KEY_EXCLUDE_OWN, 0));
@@ -668,20 +666,6 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putBoolean(KEY_STORE_LOG_IMAGES, storeLogImages);
-            }
-        });
-    }
-
-    public static boolean isUseGoogleNavigation() {
-        return sharedPrefs.getBoolean(KEY_USE_GOOGLE_NAVIGATION, true);
-    }
-
-    public static void setUseGoogleNavigation(final boolean useGoogleNavigation) {
-        editSharedSettings(new PrefRunnable() {
-
-            @Override
-            public void edit(Editor edit) {
-                edit.putBoolean(KEY_USE_GOOGLE_NAVIGATION, useGoogleNavigation);
             }
         });
     }
