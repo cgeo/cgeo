@@ -1,7 +1,6 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
@@ -41,7 +40,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.Uri;
-import android.webkit.WebView;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,8 +53,8 @@ public abstract class Network {
 
     /** User agent id */
     private final static String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
-    /** Native user agent **/
-    private final static String NATIVE_USER_AGENT = new WebView(cgeoapplication.getInstance()).getSettings().getUserAgentString();
+    /** Native user agent, taken from a Android 2.2 Nexus **/
+    private final static String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
     private static final String PATTERN_PASSWORD = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
