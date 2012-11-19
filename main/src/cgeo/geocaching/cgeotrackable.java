@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
@@ -32,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -367,7 +367,7 @@ public class cgeotrackable extends AbstractActivity {
                 cgeocaches.startActivityUserName(this, contextMenuUser);
                 return true;
             case 3:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(contextMenuUser))));
                 return true;
             default:
                 return false;

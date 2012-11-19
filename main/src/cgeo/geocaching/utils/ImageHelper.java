@@ -1,13 +1,12 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.compatibility.Compatibility;
 
-import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.Display;
-import android.view.WindowManager;
 
 public class ImageHelper {
 
@@ -24,9 +23,9 @@ public class ImageHelper {
      */
     public static BitmapDrawable scaleBitmapToFitDisplay(final Bitmap image) {
         final cgeoapplication app = cgeoapplication.getInstance();
-        final Display display = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        final int maxWidth = display.getWidth() - 25;
-        final int maxHeight = display.getHeight() - 25;
+        Point displaySize = Compatibility.getDisplaySize();
+        final int maxWidth = displaySize.x - 25;
+        final int maxHeight = displaySize.y - 25;
 
         Bitmap result = image;
         int width = image.getWidth();

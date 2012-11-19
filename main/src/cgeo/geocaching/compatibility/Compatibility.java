@@ -8,11 +8,9 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
+import android.graphics.Point;
 import android.os.Build;
 import android.text.InputType;
-import android.view.Display;
-import android.view.Surface;
 import android.widget.EditText;
 
 public final class Compatibility {
@@ -23,19 +21,26 @@ public final class Compatibility {
 
     private final static AndroidLevel8Interface level8;
     private final static AndroidLevel11Interface level11;
+    private final static AndroidLevel13Interface level13;
 
     static {
         if (isLevel8) {
             level8 = new AndroidLevel8();
         }
         else {
-            level8 = new AndroidLevel8Dummy();
+            level8 = new AndroidLevel8Emulation();
         }
         if (sdkVersion >= 11) {
             level11 = new AndroidLevel11();
         }
         else {
-            level11 = new AndroidLevel11Dummy();
+            level11 = new AndroidLevel11Emulation();
+        }
+        if (sdkVersion >= 13) {
+            level13 = new AndroidLevel13();
+        }
+        else {
+            level13 = new AndroidLevel13Emulation();
         }
     }
 
@@ -47,29 +52,7 @@ public final class Compatibility {
      * @return the adjusted direction, in the [0, 360[ range
      */
     public static float getDirectionNow(final float directionNowPre, final Activity activity) {
-        float offset = 0;
-        if (isLevel8) {
-            try {
-                final int rotation = level8.getRotation(activity);
-                if (rotation == Surface.ROTATION_90) {
-                    offset = 90;
-                } else if (rotation == Surface.ROTATION_180) {
-                    offset = 180;
-                } else if (rotation == Surface.ROTATION_270) {
-                    offset = 270;
-                }
-            } catch (final Exception e) {
-                // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
-                Log.e("Cannot call getRotation()", e);
-            }
-        } else {
-            final Display display = activity.getWindowManager().getDefaultDisplay();
-            final int rotation = display.getOrientation();
-            if (rotation == Configuration.ORIENTATION_LANDSCAPE) {
-                offset = 90;
-            }
-        }
-        return AngleUtils.normalize(directionNowPre + offset);
+        return AngleUtils.normalize(directionNowPre + level8.getRotationOffset(activity));
     }
 
     public static void dataChanged(final String name) {
@@ -111,6 +94,18 @@ public final class Compatibility {
 
     public static void invalidateOptionsMenu(final Activity activity) {
         level11.invalidateOptionsMenu(activity);
+    }
+
+    public static int getDisplayWidth() {
+        return level13.getDisplayWidth();
+    }
+
+    public static int getDisplayHeight() {
+        return level13.getDisplayHeight();
+    }
+
+    public static Point getDisplaySize() {
+        return level13.getDisplaySize();
     }
 
 }

@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.concurrent.BlockingThreadPool;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
@@ -12,10 +13,10 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -80,11 +81,6 @@ public class StaticMapsProvider {
     }
 
     public static void downloadMaps(cgCache cache) {
-        final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        downloadMaps(cache, display);
-    }
-
-    private static void downloadMaps(cgCache cache, Display display) {
         if (cache == null) {
             Log.e("downloadMaps - missing input parameter cache");
             return;
@@ -92,7 +88,7 @@ public class StaticMapsProvider {
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
-        int edge = guessMaxDisplaySide(display);
+        int edge = guessMaxDisplaySide();
 
         if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
             storeCachePreviewMap(cache);
@@ -109,8 +105,8 @@ public class StaticMapsProvider {
         }
     }
 
-    public static void storeWaypointStaticMap(cgCache cache, Activity activity, cgWaypoint waypoint, boolean waitForResult) {
-        int edge = StaticMapsProvider.guessMaxDisplaySide(activity);
+    public static void storeWaypointStaticMap(cgCache cache, cgWaypoint waypoint, boolean waitForResult) {
+        int edge = StaticMapsProvider.guessMaxDisplaySide();
         storeWaypointStaticMap(cache.getGeocode(), edge, waypoint, waitForResult);
     }
 
@@ -132,8 +128,8 @@ public class StaticMapsProvider {
         downloadMaps(geocode, wpMarkerUrl, WAYPOINT_PREFIX + waypoint.getId() + '_', wpLatlonMap, edge, null, waitForResult);
     }
 
-    public static void storeCacheStaticMap(cgCache cache, Activity activity, final boolean waitForResult) {
-        int edge = guessMaxDisplaySide(activity);
+    public static void storeCacheStaticMap(cgCache cache, final boolean waitForResult) {
+        int edge = guessMaxDisplaySide();
         storeCacheStaticMap(cache, edge, waitForResult);
     }
 
@@ -167,17 +163,14 @@ public class StaticMapsProvider {
         downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, width, height, null);
     }
 
-    private static int guessMaxDisplaySide(Display display) {
-        final int maxWidth = display.getWidth() - 25;
-        final int maxHeight = display.getHeight() - 25;
+    private static int guessMaxDisplaySide() {
+        Point displaySize = Compatibility.getDisplaySize();
+        final int maxWidth = displaySize.x - 25;
+        final int maxHeight = displaySize.y - 25;
         if (maxWidth > maxHeight) {
             return maxWidth;
         }
         return maxHeight;
-    }
-
-    private static int guessMaxDisplaySide(Activity activity) {
-        return guessMaxDisplaySide(((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay());
     }
 
     private static void downloadMaps(final String geocode, final String markerUrl, final String prefix, final String latlonMap, final int edge,

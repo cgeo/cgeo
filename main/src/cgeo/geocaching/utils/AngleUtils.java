@@ -8,9 +8,11 @@ public class AngleUtils {
 
     /**
      * Return the angle to turn of to go from an angle to the other
-     *
-     * @param from the origin angle in degrees
-     * @param to the target angle in degreees
+     * 
+     * @param from
+     *            the origin angle in degrees
+     * @param to
+     *            the target angle in degrees
      * @return a value in degrees, in the [-180, 180[ range
      */
     public static float difference(final float from, final float to) {

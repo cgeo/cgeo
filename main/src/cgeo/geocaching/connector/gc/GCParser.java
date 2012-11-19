@@ -48,7 +48,6 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 
-import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -172,7 +171,7 @@ public abstract class GCParser {
 
             // cache direction - image
             if (Settings.getLoadDirImg()) {
-                cache.setDirectionImg(URLDecoder.decode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION, true, 1, cache.getDirectionImg(), true)));
+                cache.setDirectionImg(Network.decode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION, true, 1, cache.getDirectionImg(), true)));
             }
 
             // cache inventory
@@ -383,7 +382,7 @@ public abstract class GCParser {
         cache.setName(cacheName);
 
         // owner real name
-        cache.setOwnerUserId(URLDecoder.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNER_USERID, true, cache.getOwnerUserId())));
+        cache.setOwnerUserId(Network.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNER_USERID, true, cache.getOwnerUserId())));
 
         cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getUsername()));
 

@@ -406,7 +406,7 @@ public class EditWaypointActivity extends AbstractActivity {
                 app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
-                    StaticMapsProvider.storeWaypointStaticMap(cache, EditWaypointActivity.this, waypoint, false);
+                    StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
                 }
                 finish();
             } else {

@@ -186,13 +186,13 @@ public class StaticMapsActivity extends AbstractActivity {
         final cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (waypoint_id == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
-            StaticMapsProvider.storeCacheStaticMap(cache, this, true);
+            StaticMapsProvider.storeCacheStaticMap(cache, true);
             return cache.hasStaticMap();
         }
         final cgWaypoint waypoint = cache.getWaypointById(waypoint_id);
         if (waypoint != null) {
             showToast(res.getString(R.string.info_storing_static_maps));
-            StaticMapsProvider.storeWaypointStaticMap(cache, this, waypoint, true);
+            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, true);
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint_id);
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));

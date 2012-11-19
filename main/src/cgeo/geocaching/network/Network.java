@@ -35,6 +35,7 @@ import ch.boye.httpclientandroidlib.params.HttpParams;
 import ch.boye.httpclientandroidlib.protocol.HttpContext;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
 
+import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,11 +46,13 @@ import android.webkit.WebView;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 public abstract class Network {
 
     private static final int NB_DOWNLOAD_RETRIES = 4;
+
     /** User agent id */
     private final static String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
     /** Native user agent **/
@@ -399,7 +402,27 @@ public abstract class Network {
     }
 
     public static String rfc3986URLEncode(String text) {
-        return StringUtils.replace(URLEncoder.encode(text).replace("+", "%20"), "%7E", "~");
+        return StringUtils.replace(Network.encode(text).replace("+", "%20"), "%7E", "~");
+    }
+
+    public static String decode(final String text) {
+        try {
+            return URLDecoder.decode(text, CharEncoding.UTF_8);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String encode(final String text) {
+        try {
+            return URLEncoder.encode(text, CharEncoding.UTF_8);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

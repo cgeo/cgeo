@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -15,6 +16,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
@@ -79,7 +81,6 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -92,7 +93,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -933,7 +933,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         cgeocaches.startActivityUserName(CacheDetailActivity.this, name.toString());
                         return;
                     case 2:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(name.toString()))));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(name.toString()))));
                         return;
                     default:
                         break;
@@ -1124,8 +1124,7 @@ public class CacheDetailActivity extends AbstractActivity {
             attributeBox.removeAllViews();
 
             // maximum width for attribute icons is screen width - paddings of parents
-            attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                    .getDefaultDisplay().getWidth();
+            attributeBoxMaxWidth = Compatibility.getDisplayWidth();
             ViewParent child = attributeBox;
             do {
                 if (child instanceof View) {

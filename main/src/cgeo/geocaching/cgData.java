@@ -23,7 +23,6 @@ import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
-import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteDoneException;
@@ -151,9 +150,6 @@ public class cgData {
             + "updated long not null, " // date of save
             + "attribute text "
             + "); ";
-    private final static int ATTRIBUTES_GEOCODE = 2;
-    private final static int ATTRIBUTES_UPDATED = 3;
-    private final static int ATTRIBUTES_ATTRIBUTE = 4;
 
     private static final String dbCreateWaypoints = ""
             + "create table " + dbTableWaypoints + " ("
@@ -191,14 +187,6 @@ public class cgData {
             + "found integer not null default 0, "
             + "friend integer "
             + "); ";
-    private final static int LOGS_GEOCODE = 2;
-    private final static int LOGS_UPDATED = 3;
-    private final static int LOGS_TYPE = 4;
-    private final static int LOGS_AUTHOR = 5;
-    private final static int LOGS_LOG = 6;
-    private final static int LOGS_DATE = 7;
-    private final static int LOGS_FOUND = 8;
-    private final static int LOGS_FRIEND = 9;
 
     private static final String dbCreateLogCount = ""
             + "create table " + dbTableLogCount + " ("
@@ -1062,7 +1050,7 @@ public class cgData {
             database.setTransactionSuccessful();
             result = true;
         } catch (Exception e) {
-            // nothing
+            Log.e("SaveCache", e);
         } finally {
             database.endTransaction();
         }
@@ -1074,21 +1062,17 @@ public class cgData {
         String geocode = cache.getGeocode();
         database.delete(dbTableAttributes, "geocode = ?", new String[]{geocode});
 
-        if (cache.getAttributes().isNotEmpty()) {
+        if (cache.getAttributes().isEmpty()) {
+            return;
+        }
+        SQLiteStatement statement = getStatementInsertAttribute();
+        long timeStamp = System.currentTimeMillis();
+        for (String attribute : cache.getAttributes()) {
+            statement.bindString(1, geocode);
+            statement.bindLong(2, timeStamp);
+            statement.bindString(3, attribute);
 
-            InsertHelper helper = new InsertHelper(database, dbTableAttributes);
-            long timeStamp = System.currentTimeMillis();
-
-            for (String attribute : cache.getAttributes()) {
-                helper.prepareForInsert();
-
-                helper.bind(ATTRIBUTES_GEOCODE, geocode);
-                helper.bind(ATTRIBUTES_UPDATED, timeStamp);
-                helper.bind(ATTRIBUTES_ATTRIBUTE, attribute);
-
-                helper.execute();
-            }
-            helper.close();
+            statement.executeInsert();
         }
     }
 
@@ -1273,34 +1257,29 @@ public class cgData {
             return;
         }
 
-        InsertHelper helper = new InsertHelper(database, dbTableLogs);
+        SQLiteStatement statement = getStatementInsertLog();
         long timeStamp = System.currentTimeMillis();
         for (LogEntry log : logs) {
-            helper.prepareForInsert();
-
-            helper.bind(LOGS_GEOCODE, geocode);
-            helper.bind(LOGS_UPDATED, timeStamp);
-            helper.bind(LOGS_TYPE, log.type.id);
-            helper.bind(LOGS_AUTHOR, log.author);
-            helper.bind(LOGS_LOG, log.log);
-            helper.bind(LOGS_DATE, log.date);
-            helper.bind(LOGS_FOUND, log.found);
-            helper.bind(LOGS_FRIEND, log.friend);
-
-            long log_id = helper.execute();
-
+            statement.bindString(1, geocode);
+            statement.bindLong(2, timeStamp);
+            statement.bindLong(3, log.type.id);
+            statement.bindString(4, log.author);
+            statement.bindString(5, log.log);
+            statement.bindLong(6, log.date);
+            statement.bindLong(7, log.found);
+            statement.bindLong(8, log.friend ? 1 : 0);
+            long logId = statement.executeInsert();
             if (log.hasLogImages()) {
                 ContentValues values = new ContentValues();
                 for (cgImage img : log.getLogImages()) {
                     values.clear();
-                    values.put("log_id", log_id);
+                    values.put("log_id", logId);
                     values.put("title", img.getTitle());
                     values.put("url", img.getUrl());
                     database.insert(dbTableLogImages, null, values);
                 }
             }
         }
-        helper.close();
     }
 
     private void saveLogCountsWithoutTransaction(final cgCache cache) {
@@ -2586,6 +2565,14 @@ public class cgData {
 
     private SQLiteStatement getStatementCountAllLists() {
         return getStatement("CountAllLists", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID);
+    }
+
+    private SQLiteStatement getStatementInsertLog() {
+        return getStatement("InsertLog", "INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    }
+
+    private SQLiteStatement getStatementInsertAttribute() {
+        return getStatement("InsertAttribute", "INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)");
     }
 
     public boolean hasLogOffline(final String geocode) {
