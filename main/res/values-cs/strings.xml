@@ -544,6 +544,21 @@
   <string name="waypoint_note">Poznámka</string>
   <string name="waypoint_save">Uložit</string>
   <string name="waypoint_loading">Načítání bodu trasy…</string>
+  <string name="waypoint_set_as_cache_coords">Nastavit jako souřadnice keše</string>
+  <string name="waypoint_reset_cache_coords">Obnovit původní souřadnice keše</string>
+  <string name="waypoint_reset_cache_coords_on_website">Obnovit původní souřadnice keše na webu</string>
+  <string name="waypoint_coordinates_has_been_reset_on_website">Souřadnice keše byly obnoveny na webu.</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Souřadnice keše se obnovují na webu.</string>
+  <string name="waypoint_reset_cache_coords_info">Možnosti obnovy</string>
+  <string name="waypoint_reset">Obnova</string>
+  <string name="waypoint_localy_reset_cache_coords">Obnovit souřadnice keše v zařízení</string>
+  <string name="waypoint_modify_on_website">Změnit souřadnice keše na webu</string>
+  <string name="waypoint_coordinates_couldnt_be_modified_on_website">Souřadnice keše nemohou být změněny na webu.</string>
+  <string name="waypoint_coordinates_upload_error">Při nahrávání souřadnic na web se vyskytla chyba.</string>
+  <string name="waypoint_coordinates_uploading_to_website">Nahrávám %s na web</string>
+  <string name="waypoint_coordinates_reseting_on_website">Obnovuji původní souřadnice keše na webu.</string>
+  <string name="waypoint_coordinates_has_been_modified_on_website">Souřadnice keše na webu byly změněny na %s.</string>
+  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Souřadnice keše byly v zařízení změněny na: %s.</string>
 
   <!-- visit -->
   <string name="visit_tweet">informovat o nálezu na twitteru</string>
