@@ -352,6 +352,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
+            // TODO Show progress across whole function, it is performing very long time on slower devices
             final String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
             // combine distance from EditText and distanceUnit saved from Spinner
             final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString() + distanceUnit;
@@ -438,10 +439,11 @@ public class EditWaypointActivity extends AbstractActivity {
                 }
                 if (uploadCoordsToWebsiteCheckBox.isChecked() && waypoint != null && waypoint.getCoords() != null) {
                     if (cache.supportsOwnCoordinates()) {
-                        ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_coordinates_uploading_to_website, waypoint.getCoords()), true);
+                        final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_coordinates_uploading_to_website, waypoint.getCoords()), true);
                         Handler finishHandler = new Handler() {
                             @Override
                             public void handleMessage(Message msg) {
+                                progress.dismiss();
                                 finish();
                             }
                         };
