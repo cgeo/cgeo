@@ -4,6 +4,7 @@ import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -18,7 +19,7 @@ public class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
 
     @Override
     public boolean isInstalled() {
-        return true;
+        return MapProviderFactory.isGoogleMapsInstalled();
     }
 
     @Override
