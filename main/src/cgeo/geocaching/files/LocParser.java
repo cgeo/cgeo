@@ -77,7 +77,7 @@ public final class LocParser extends FileParser {
         cache.setDifficulty(coord.getDifficulty());
         cache.setTerrain(coord.getTerrain());
         cache.setSize(coord.getSize());
-        cache.setGeocode(coord.getGeocode().toUpperCase());
+        cache.setGeocode(coord.getGeocode());
         cache.setReliableLatLon(true);
         if (StringUtils.isBlank(cache.getName())) {
             cache.setName(coord.getName());
@@ -149,8 +149,7 @@ public final class LocParser extends FileParser {
         final cgCache cache = new cgCache();
         final Matcher matcherGeocode = patternGeocode.matcher(pointString);
         if (matcherGeocode.find()) {
-            final String geocode = matcherGeocode.group(1).trim().toUpperCase();
-            cache.setGeocode(geocode.toUpperCase());
+            cache.setGeocode(matcherGeocode.group(1).trim());
         }
 
         final Matcher matcherName = patternName.matcher(pointString);

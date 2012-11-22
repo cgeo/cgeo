@@ -28,6 +28,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Locale;
+
 public class SearchActivity extends AbstractActivity {
 
     private static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
@@ -104,7 +106,7 @@ public class SearchActivity extends AbstractActivity {
         final IConnector connector = ConnectorFactory.getConnector(geocode);
         if (connector instanceof ISearchByGeocode) {
             final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-            cachesIntent.putExtra("geocode", geocode.toUpperCase());
+            cachesIntent.putExtra("geocode", geocode.toUpperCase(Locale.US));
             startActivity(cachesIntent);
             return true;
         }
@@ -113,7 +115,7 @@ public class SearchActivity extends AbstractActivity {
         final String trackable = BaseUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
         if (StringUtils.isNotBlank(trackable)) {
             final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
-            trackablesIntent.putExtra("geocode", trackable.toUpperCase());
+            trackablesIntent.putExtra("geocode", trackable.toUpperCase(Locale.US));
             startActivity(trackablesIntent);
             return true;
         }
@@ -402,7 +404,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
-        trackablesIntent.putExtra("geocode", trackableText.toUpperCase());
+        trackablesIntent.putExtra("geocode", trackableText.toUpperCase(Locale.US));
         startActivity(trackablesIntent);
     }
 

@@ -38,8 +38,8 @@ public class cgTrackable implements ILogable {
     private String trackingcode = null;
 
     public String getUrl() {
-        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
-            String hex = geocode.substring(3);
+        if (StringUtils.startsWithIgnoreCase(getGeocode(), "GK")) {
+            String hex = getGeocode().substring(3);
             try {
                 int id = Integer.parseInt(hex, 16);
                 return "http://geokrety.org/konkret.php?id=" + id;
@@ -48,7 +48,7 @@ public class cgTrackable implements ILogable {
                 return null;
             }
         }
-        return "http://www.geocaching.com//track/details.aspx?tracker=" + geocode.toUpperCase();
+        return "http://www.geocaching.com//track/details.aspx?tracker=" + geocode;
     }
 
     public String getGuid() {
@@ -65,7 +65,7 @@ public class cgTrackable implements ILogable {
     }
 
     public void setGeocode(String geocode) {
-        this.geocode = geocode;
+        this.geocode = StringUtils.upperCase(geocode);
     }
 
     public String getIconUrl() {
@@ -208,7 +208,7 @@ public class cgTrackable implements ILogable {
     }
 
     public boolean isLoggable() {
-        return !StringUtils.startsWithIgnoreCase(geocode, "GK");
+        return !StringUtils.startsWithIgnoreCase(getGeocode(), "GK");
     }
 
     public String getTrackingcode() {

@@ -5,6 +5,7 @@ import cgeo.geocaching.cgeoapplication;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -59,14 +60,14 @@ public enum CacheType {
         final HashMap<String, CacheType> mappingPattern = new HashMap<String, CacheType>();
         for (CacheType ct : values()) {
             mappingId.put(ct.id, ct);
-            mappingPattern.put(ct.pattern.toLowerCase(), ct);
+            mappingPattern.put(ct.pattern.toLowerCase(Locale.US), ct);
         }
         FIND_BY_ID = Collections.unmodifiableMap(mappingId);
         FIND_BY_PATTERN = Collections.unmodifiableMap(mappingPattern);
     }
 
     public static CacheType getById(final String id) {
-        final CacheType result = (id != null) ? CacheType.FIND_BY_ID.get(id.toLowerCase().trim()) : null;
+        final CacheType result = (id != null) ? CacheType.FIND_BY_ID.get(id.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -74,7 +75,7 @@ public enum CacheType {
     }
 
     public static CacheType getByPattern(final String pattern) {
-        final CacheType result = (pattern != null) ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim()) : null;
+        final CacheType result = (pattern != null) ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }

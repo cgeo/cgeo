@@ -293,7 +293,7 @@ public class cgeonavigate extends AbstractActivity {
 
         final Intent navigateIntent = new Intent(context, cgeonavigate.class);
         navigateIntent.putExtra(EXTRAS_COORDS, coords);
-        navigateIntent.putExtra(EXTRAS_GEOCODE, geocode.toUpperCase());
+        navigateIntent.putExtra(EXTRAS_GEOCODE, geocode);
         if (null != displayedName) {
             navigateIntent.putExtra(EXTRAS_NAME, displayedName);
         }

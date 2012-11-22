@@ -287,7 +287,7 @@ public abstract class GPXParser extends FileParser {
                 // take the name as code, if nothing else is available
                 if (StringUtils.isBlank(cache.getGeocode())) {
                     if (StringUtils.isNotBlank(name)) {
-                        cache.setGeocode(name.trim().toUpperCase());
+                        cache.setGeocode(name.trim());
                     }
                 }
 
@@ -326,7 +326,7 @@ public abstract class GPXParser extends FileParser {
                 fixCache(cache);
 
                 if (cache.getName().length() > 2) {
-                    final String cacheGeocodeForWaypoint = "GC" + cache.getName().substring(2).toUpperCase();
+                    final String cacheGeocodeForWaypoint = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
 
                     // lookup cache for waypoint in already parsed caches
                     final cgCache cacheForWaypoint = cgeoapplication.getInstance().loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
@@ -410,7 +410,7 @@ public abstract class GPXParser extends FileParser {
             public void end(String body) {
                 final String[] content = body.split("\\|");
                 if (content.length > 0) {
-                    type = content[0].toLowerCase().trim();
+                    type = content[0].toLowerCase(Locale.US).trim();
                 }
             }
         });
@@ -420,7 +420,7 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end(final String body) {
-                sym = body.toLowerCase();
+                sym = body.toLowerCase(Locale.US);
                 if (sym.contains("geocache") && sym.contains("found")) {
                     cache.setFound(true);
                 }
@@ -526,7 +526,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String body) {
-                    cache.setType(CacheType.getByPattern(validate(body.toLowerCase())));
+                    cache.setType(CacheType.getByPattern(validate(body)));
                 }
             });
 
@@ -535,7 +535,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String body) {
-                    cache.setSize(CacheSize.getById(validate(body.toLowerCase())));
+                    cache.setSize(CacheSize.getById(validate(body)));
                 }
             });
 
@@ -665,7 +665,7 @@ public abstract class GPXParser extends FileParser {
 
                     try {
                         if (attrs.getIndex("ref") > -1) {
-                            trackable.setGeocode(attrs.getValue("ref").toUpperCase());
+                            trackable.setGeocode(attrs.getValue("ref"));
                         }
                     } catch (Exception e) {
                         // nothing
@@ -745,7 +745,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String body) {
-                    final String logType = validate(body).toLowerCase();
+                    final String logType = validate(body);
                     log.type = LogType.getByType(logType);
                 }
             });

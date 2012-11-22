@@ -118,7 +118,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             return;
         }
 
-        geocode = cache.getGeocode().toUpperCase();
+        geocode = cache.getGeocode();
     }
 
     private void showInBrowser() {
@@ -251,7 +251,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         final String cacheSize = cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
         details.add(R.string.cache_type, cacheType + cacheSize);
 
-        details.add(R.string.cache_geocode, cache.getGeocode().toUpperCase());
+        details.add(R.string.cache_geocode, cache.getGeocode());
         details.addCacheState(cache);
 
         details.addDistance(cache, cacheDistance);
@@ -276,7 +276,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
             @Override
             public void onClick(View arg0) {
-                CacheDetailActivity.startActivity(AbstractPopupActivity.this, geocode.toUpperCase());
+                CacheDetailActivity.startActivity(AbstractPopupActivity.this, geocode);
                 finish();
             }
         });

@@ -420,7 +420,7 @@ public class cgCache implements ICache, IWaypoint {
         }
         Intent logVisitIntent = new Intent((Activity) fromActivity, VisitCacheActivity.class);
         logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_ID, cacheId);
-        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_GEOCODE, geocode.toUpperCase());
+        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_GEOCODE, geocode);
         logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_FOUND, found);
 
         ((Activity) fromActivity).startActivity(logVisitIntent);
@@ -640,7 +640,7 @@ public class cgCache implements ICache, IWaypoint {
         }
 
         StringBuilder subject = new StringBuilder("Geocache ");
-        subject.append(geocode.toUpperCase());
+        subject.append(geocode);
         if (StringUtils.isNotBlank(name)) {
             subject.append(" - ").append(name);
         }
@@ -994,7 +994,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public void setGeocode(String geocode) {
-        this.geocode = geocode;
+        this.geocode = StringUtils.upperCase(geocode);
     }
 
     public void setCacheId(String cacheId) {

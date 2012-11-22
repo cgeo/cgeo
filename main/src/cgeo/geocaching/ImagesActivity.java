@@ -86,7 +86,7 @@ public class ImagesActivity extends AbstractActivity {
         final Intent logImgIntent = new Intent(fromActivity, ImagesActivity.class);
         // if resuming our app within this activity, finish it and return to the cache activity
         logImgIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                .putExtra(EXTRAS_GEOCODE, geocode.toUpperCase())
+                .putExtra(EXTRAS_GEOCODE, geocode)
                 .putExtra(EXTRAS_TYPE, imageType);
 
         // avoid forcing the array list as parameter type

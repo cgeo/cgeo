@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class VisitCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
     static final String EXTRAS_FOUND = "found";
@@ -261,7 +262,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         if (StringUtils.isNotBlank(cache.getName())) {
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
         } else {
-            setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode().toUpperCase());
+            setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
         }
 
         init();
@@ -335,7 +336,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     private static String ratingTextValue(final double rating) {
-        return String.format("%.1f", rating);
+        return String.format(Locale.getDefault(), "%.1f", rating);
     }
 
     @Override

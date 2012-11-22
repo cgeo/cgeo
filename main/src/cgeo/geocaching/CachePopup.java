@@ -79,7 +79,7 @@ public class CachePopup extends AbstractPopupActivity {
             if (StringUtils.isNotBlank(cache.getName())) {
                 setTitle(cache.getName());
             } else {
-                setTitle(geocode.toUpperCase());
+                setTitle(geocode);
             }
 
             // actionbar icon

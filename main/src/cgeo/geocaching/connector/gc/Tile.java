@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -99,7 +100,7 @@ public class Tile {
 
     /**
      * Calculate latitude/longitude for a given x/y position in this tile.
-     * 
+     *
      * @see <a
      *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
@@ -115,7 +116,7 @@ public class Tile {
 
     @Override
     public String toString() {
-        return String.format("(%d/%d), zoom=%d", tileX, tileY, zoomlevel);
+        return String.format(Locale.US, "(%d/%d), zoom=%d", tileX, tileY, zoomlevel);
     }
 
     /**

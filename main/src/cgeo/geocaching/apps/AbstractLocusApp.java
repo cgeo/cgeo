@@ -22,6 +22,7 @@ import android.location.Location;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * for the Locus API:
@@ -30,7 +31,7 @@ import java.util.List;
  */
 public abstract class AbstractLocusApp extends AbstractApp {
     private static final String INTENT = Intent.ACTION_VIEW;
-    private static final SimpleDateFormat ISO8601DATE = new SimpleDateFormat("yyyy-MM-dd'T'");
+    private static final SimpleDateFormat ISO8601DATE = new SimpleDateFormat("yyyy-MM-dd'T'", Locale.US);
 
     protected AbstractLocusApp() {
         super(getString(R.string.caches_map_locus), INTENT);
@@ -47,11 +48,11 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     /**
      * Display a list of caches / waypoints in Locus
-     *
+     * 
      * @param objectsToShow
      *            which caches/waypoints to show
      * @param withCacheWaypoints
-     *            wether to give waypoints of caches to Locus or not
+     *            Whether to give waypoints of caches to Locus or not
      * @param activity
      */
     protected static boolean showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
@@ -85,7 +86,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             final ArrayList<PointsData> data = new ArrayList<PointsData>();
             data.add(pd);
             DisplayData.sendDataCursor(activity, data,
-                    "content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(),
+                    "content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(Locale.US),
                     export);
         }
 

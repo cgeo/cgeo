@@ -1003,7 +1003,7 @@ public class cgeocaches extends AbstractListActivity {
                 break;
             case MENU_CACHE_DETAILS:
                 final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-                cachesIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
+                cachesIntent.putExtra("geocode", cache.getGeocode());
                 cachesIntent.putExtra("name", cache.getName());
                 startActivity(cachesIntent);
                 break;

@@ -164,7 +164,7 @@ public abstract class GCParser {
 
             String inventoryPre = null;
 
-            cache.setGeocode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true).toUpperCase());
+            cache.setGeocode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
 
             // cache type
             cache.setType(CacheType.getByPattern(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, true, 1, null, true)));
@@ -434,7 +434,7 @@ public abstract class GCParser {
             cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
 
             // cache size
-            cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id).toLowerCase()));
+            cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id)));
         }
 
         // cache found
@@ -502,7 +502,7 @@ public abstract class GCParser {
                 while (matcherAttributesInside.find()) {
                     if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
                         // by default, use the tooltip of the attribute
-                        String attribute = matcherAttributesInside.group(2).toLowerCase();
+                        String attribute = matcherAttributesInside.group(2).toLowerCase(Locale.US);
 
                         // if the image name can be recognized, use the image name as attribute
                         String imageName = matcherAttributesInside.group(1).trim();
@@ -510,7 +510,7 @@ public abstract class GCParser {
                             int start = imageName.lastIndexOf('/');
                             int end = imageName.lastIndexOf('.');
                             if (start >= 0 && end >= 0) {
-                                attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
+                                attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase(Locale.US);
                             }
                         }
                         attributes.add(attribute);
@@ -1265,7 +1265,7 @@ public abstract class GCParser {
         final cgTrackable trackable = new cgTrackable();
 
         // trackable geocode
-        trackable.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()).toUpperCase());
+        trackable.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()));
 
         // trackable id
         trackable.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GUID, true, trackable.getGuid()));

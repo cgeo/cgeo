@@ -156,7 +156,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     public String getUrl() {
-        return "http://www.geocaching.com//seek/cache_details.aspx?wp=" + geocode.toUpperCase();
+        return "http://www.geocaching.com//seek/cache_details.aspx?wp=" + geocode;
     }
 
     @Override
@@ -174,7 +174,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     public void setGeocode(String geocode) {
-        this.geocode = geocode;
+        this.geocode = StringUtils.upperCase(geocode);
     }
 
     @Override

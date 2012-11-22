@@ -2,6 +2,8 @@ package cgeo.geocaching.enumerations;
 
 import android.test.AndroidTestCase;
 
+import java.util.Locale;
+
 public class CacheTypeTest extends AndroidTestCase {
 
     public static void testGetById() {
@@ -21,16 +23,16 @@ public class CacheTypeTest extends AndroidTestCase {
     public static void testGetByIdComplete() {
         for (CacheType type : CacheType.values()) {
             assertEquals(type, CacheType.getById(type.id));
-            assertEquals(type, CacheType.getById(type.id.toLowerCase()));
-            assertEquals(type, CacheType.getById(type.id.toUpperCase()));
+            assertEquals(type, CacheType.getById(type.id.toLowerCase(Locale.US)));
+            assertEquals(type, CacheType.getById(type.id.toUpperCase(Locale.US)));
         }
     }
 
     public static void testGetByPatternComplete() {
         for (CacheType type : CacheType.values()) {
             assertEquals(type, CacheType.getByPattern(type.pattern));
-            assertEquals(type, CacheType.getByPattern(type.pattern.toLowerCase()));
-            assertEquals(type, CacheType.getByPattern(type.pattern.toUpperCase()));
+            assertEquals(type, CacheType.getByPattern(type.pattern.toLowerCase(Locale.US)));
+            assertEquals(type, CacheType.getByPattern(type.pattern.toUpperCase(Locale.US)));
         }
     }
 }
