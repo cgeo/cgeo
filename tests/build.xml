@@ -55,7 +55,6 @@
 		<record name="${log.file}" action="stop" />
 
 		<loadfile property="tests.output" srcFile="${log.file}" />
-		<delete file="${log.file}" />
 
 		<echo>Checking for failures</echo>
 		<fail message="Acceptance tests FAILED!!!" >
