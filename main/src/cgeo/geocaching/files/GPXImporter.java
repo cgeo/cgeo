@@ -374,7 +374,6 @@ public class GPXImporter {
 
                 case IMPORT_STEP_READ_FILE:
                 case IMPORT_STEP_READ_WPT_FILE:
-                    progress.setProgressDivider(1024);
                     progress.setMessage(res.getString(msg.arg1));
                     progress.setMaxProgressAndReset(msg.arg2);
                     break;
