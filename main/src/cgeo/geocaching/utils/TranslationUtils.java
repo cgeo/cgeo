@@ -1,11 +1,10 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.network.Network;
 
 import android.content.Intent;
 import android.net.Uri;
-
-import java.net.URLEncoder;
 
 /**
  * Utilities used for translating
@@ -30,7 +29,7 @@ public final class TranslationUtils {
      * @return URI ready to be parsed
      */
     private static String buildTranslationURI(final String toLang, final String text) {
-        String content = URLEncoder.encode(text);
+        String content = Network.encode(text);
         // the app works better without the "+", the website works better with "+", therefore assume using the app if installed
         if (ProcessUtils.isInstalled(TRANSLATION_APP)) {
             content = content.replace("+", "%20");

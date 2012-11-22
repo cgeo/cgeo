@@ -573,7 +573,9 @@
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist…</string>
   <string name="cache_menu_navigate">Navigate</string>
-  <string name="cache_menu_tbt">Turn-by-Turn</string>
+  <string name="cache_menu_navigation_drive">Navigation (Driving)</string>
+  <string name="cache_menu_navigation_walk">Navigation (Walking)</string>
+  <string name="cache_menu_maps_directions">Google Maps Directions</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Map</string>
   <string name="cache_menu_map_static">Static Maps</string>

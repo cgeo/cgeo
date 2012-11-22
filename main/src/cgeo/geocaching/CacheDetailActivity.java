@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -15,6 +16,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
@@ -79,7 +81,6 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -92,7 +93,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -250,8 +250,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // try to get data from URI
         if (geocode == null && guid == null && uri != null) {
-            String uriHost = uri.getHost().toLowerCase();
-            String uriPath = uri.getPath().toLowerCase();
+            String uriHost = uri.getHost().toLowerCase(Locale.US);
+            String uriPath = uri.getPath().toLowerCase(Locale.US);
             String uriQuery = uri.getQuery();
 
             if (uriQuery != null) {
@@ -265,11 +265,11 @@ public class CacheDetailActivity extends AbstractActivity {
                 guid = uri.getQueryParameter("guid");
 
                 if (StringUtils.isNotBlank(geocode)) {
-                    geocode = geocode.toUpperCase();
+                    geocode = geocode.toUpperCase(Locale.US);
                     guid = null;
                 } else if (StringUtils.isNotBlank(guid)) {
                     geocode = null;
-                    guid = guid.toLowerCase();
+                    guid = guid.toLowerCase(Locale.US);
                 } else {
                     showToast(res.getString(R.string.err_detail_open));
                     finish();
@@ -277,7 +277,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
             } else if (uriHost.contains("coord.info")) {
                 if (uriPath != null && uriPath.startsWith("/gc")) {
-                    geocode = uriPath.substring(1).toUpperCase();
+                    geocode = uriPath.substring(1).toUpperCase(Locale.US);
                 } else {
                     showToast(res.getString(R.string.err_detail_open));
                     finish();
@@ -300,7 +300,7 @@ public class CacheDetailActivity extends AbstractActivity {
             if (StringUtils.isNotBlank(name)) {
                 title = name;
             } else if (null != geocode && StringUtils.isNotBlank(geocode)) { // can't be null, but the compiler doesn't understand StringUtils.isNotBlank()
-                title = geocode.toUpperCase();
+                title = geocode;
             }
             progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, loadCacheHandler.cancelMessage());
         } catch (Exception e) {
@@ -695,9 +695,9 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // action bar: title and icon (default: mystery icon)
         if (StringUtils.isNotBlank(cache.getName())) {
-            setTitle(cache.getName() + " (" + cache.getGeocode().toUpperCase() + ')');
+            setTitle(cache.getName() + " (" + cache.getGeocode() + ')');
         } else {
-            setTitle(cache.getGeocode().toUpperCase());
+            setTitle(cache.getGeocode());
         }
         ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
 
@@ -933,7 +933,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         cgeocaches.startActivityUserName(CacheDetailActivity.this, name.toString());
                         return;
                     case 2:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(name.toString()))));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(name.toString()))));
                         return;
                     default:
                         break;
@@ -962,13 +962,13 @@ public class CacheDetailActivity extends AbstractActivity {
 
     public static void startActivity(final Context context, final String geocode) {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
-        detailIntent.putExtra("geocode", geocode.toUpperCase());
+        detailIntent.putExtra("geocode", geocode);
         context.startActivity(detailIntent);
     }
 
     public static void startActivity(final Context context, final String geocode, final int page) {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
-        detailIntent.putExtra("geocode", geocode.toUpperCase());
+        detailIntent.putExtra("geocode", geocode);
         detailIntent.putExtra(EXTRAS_PAGE, page);
         context.startActivity(detailIntent);
     }
@@ -1124,8 +1124,7 @@ public class CacheDetailActivity extends AbstractActivity {
             attributeBox.removeAllViews();
 
             // maximum width for attribute icons is screen width - paddings of parents
-            attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                    .getDefaultDisplay().getWidth();
+            attributeBoxMaxWidth = Compatibility.getDisplayWidth();
             ViewParent child = attributeBox;
             do {
                 if (child instanceof View) {
@@ -1378,7 +1377,7 @@ public class CacheDetailActivity extends AbstractActivity {
             details.add(R.string.cache_name, span);
             details.add(R.string.cache_type, cache.getType().getL10n());
             details.addSize(cache);
-            details.add(R.string.cache_geocode, cache.getGeocode().toUpperCase());
+            details.add(R.string.cache_geocode, cache.getGeocode());
             details.addCacheState(cache);
 
             details.addDistance(cache, cacheDistanceView);

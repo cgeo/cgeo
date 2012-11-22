@@ -48,7 +48,6 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 
-import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -165,14 +164,14 @@ public abstract class GCParser {
 
             String inventoryPre = null;
 
-            cache.setGeocode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true).toUpperCase());
+            cache.setGeocode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
 
             // cache type
             cache.setType(CacheType.getByPattern(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, true, 1, null, true)));
 
             // cache direction - image
             if (Settings.getLoadDirImg()) {
-                cache.setDirectionImg(URLDecoder.decode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION, true, 1, cache.getDirectionImg(), true)));
+                cache.setDirectionImg(Network.decode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION, true, 1, cache.getDirectionImg(), true)));
             }
 
             // cache inventory
@@ -383,7 +382,7 @@ public abstract class GCParser {
         cache.setName(cacheName);
 
         // owner real name
-        cache.setOwnerUserId(URLDecoder.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNER_USERID, true, cache.getOwnerUserId())));
+        cache.setOwnerUserId(Network.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNER_USERID, true, cache.getOwnerUserId())));
 
         cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getUsername()));
 
@@ -435,7 +434,7 @@ public abstract class GCParser {
             cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
 
             // cache size
-            cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id).toLowerCase()));
+            cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id)));
         }
 
         // cache found
@@ -503,7 +502,7 @@ public abstract class GCParser {
                 while (matcherAttributesInside.find()) {
                     if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
                         // by default, use the tooltip of the attribute
-                        String attribute = matcherAttributesInside.group(2).toLowerCase();
+                        String attribute = matcherAttributesInside.group(2).toLowerCase(Locale.US);
 
                         // if the image name can be recognized, use the image name as attribute
                         String imageName = matcherAttributesInside.group(1).trim();
@@ -511,7 +510,7 @@ public abstract class GCParser {
                             int start = imageName.lastIndexOf('/');
                             int end = imageName.lastIndexOf('.');
                             if (start >= 0 && end >= 0) {
-                                attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
+                                attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase(Locale.US);
                             }
                         }
                         attributes.add(attribute);
@@ -1266,7 +1265,7 @@ public abstract class GCParser {
         final cgTrackable trackable = new cgTrackable();
 
         // trackable geocode
-        trackable.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()).toUpperCase());
+        trackable.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()));
 
         // trackable id
         trackable.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GUID, true, trackable.getGuid()));

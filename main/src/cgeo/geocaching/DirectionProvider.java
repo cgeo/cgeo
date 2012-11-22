@@ -14,7 +14,7 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
 
     private final SensorManager sensorManager;
 
-    // Previous values signalled to observers to avoid resending the same value when the
+    // Previous values signaled to observers to avoid resending the same value when the
     // device doesn't change orientation. The orientation is usually given with a 1 degree
     // precision by Android, so it is not uncommon to obtain exactly the same value several
     // times.
@@ -38,14 +38,14 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
     @Override
     public void onAccuracyChanged(final Sensor sensor, int accuracy) {
         /*
-        * There is a bug in Android, which appearently causes this method to be called every
-        * time the sensor _value_ changed, even if the _accuracy_ did not change. So logging
-        * this event leads to the log being flooded with multiple entries _per second_,
-        * which I experienced when running cgeo in a building (with GPS and network being
-        * unreliable).
-        *
-        * See for example https://code.google.com/p/android/issues/detail?id=14792
-        */
+         * There is a bug in Android, which apparently causes this method to be called every
+         * time the sensor _value_ changed, even if the _accuracy_ did not change. So logging
+         * this event leads to the log being flooded with multiple entries _per second_,
+         * which I experienced when running cgeo in a building (with GPS and network being
+         * unreliable).
+         * 
+         * See for example https://code.google.com/p/android/issues/detail?id=14792
+         */
 
         //Log.i(Settings.tag, "Compass' accuracy is low (" + accuracy + ")");
     }

@@ -467,7 +467,6 @@
   <string name="cache_dialog_refresh_title">Aktualizace</string>
   <string name="cache_dialog_refresh_message">Aktualizuji detaily keše…</string>
   <string name="cache_menu_navigate">Navigovat</string>
-  <string name="cache_menu_tbt">Turn-by-turn</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Zobrazit na mapě</string>
   <string name="cache_menu_map_ext">Zobrazit na jiné mapě</string>

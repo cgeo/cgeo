@@ -202,7 +202,6 @@
   <string name="cache_dialog_refresh_title">Genindlæs</string>
   <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer…</string>
   <string name="cache_menu_navigate">Naviger</string>
-  <string name="cache_menu_tbt">Vejvisning</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kort</string>
   <string name="cache_menu_map_ext">Vis på ext. kort</string>

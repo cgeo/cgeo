@@ -5,6 +5,7 @@ import cgeo.geocaching.cgeoapplication;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -34,7 +35,7 @@ public enum CacheSize {
     static {
         final HashMap<String, CacheSize> mapping = new HashMap<String, CacheSize>();
         for (CacheSize cs : values()) {
-            mapping.put(cs.id.toLowerCase(), cs);
+            mapping.put(cs.id.toLowerCase(Locale.US), cs);
         }
         // add medium as additional string for Regular
         mapping.put("medium", CacheSize.REGULAR);
@@ -51,7 +52,7 @@ public enum CacheSize {
             return result;
         }
         // only if String was not found, normalize it
-        final CacheSize resultNormalized = CacheSize.FIND_BY_ID.get(id.toLowerCase().trim());
+        final CacheSize resultNormalized = CacheSize.FIND_BY_ID.get(id.toLowerCase(Locale.US).trim());
         if (resultNormalized != null) {
             return resultNormalized;
         }

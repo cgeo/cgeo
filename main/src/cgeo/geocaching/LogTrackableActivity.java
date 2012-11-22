@@ -132,7 +132,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         if (StringUtils.isNotBlank(trackable.getName())) {
             setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
         } else {
-            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode().toUpperCase());
+            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
         }
 
         if (guid == null) {
@@ -357,7 +357,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     public static void startActivity(final Context context, final cgTrackable trackable) {
         final Intent logTouchIntent = new Intent(context, LogTrackableActivity.class);
-        logTouchIntent.putExtra("geocode", trackable.getGeocode().toUpperCase());
+        logTouchIntent.putExtra("geocode", trackable.getGeocode());
         logTouchIntent.putExtra("guid", trackable.getGuid());
         logTouchIntent.putExtra("trackingcode", trackable.getTrackingcode());
         context.startActivity(logTouchIntent);

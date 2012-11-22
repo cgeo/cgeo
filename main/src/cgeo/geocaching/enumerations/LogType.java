@@ -5,6 +5,7 @@ import cgeo.geocaching.cgeoapplication;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -74,7 +75,7 @@ public enum LogType {
     }
 
     public static LogType getByIconName(final String imageType) {
-        final LogType result = imageType != null ? LogType.FIND_BY_ICONNAME.get(imageType.toLowerCase().trim()) : null;
+        final LogType result = imageType != null ? LogType.FIND_BY_ICONNAME.get(imageType.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -82,7 +83,7 @@ public enum LogType {
     }
 
     public static LogType getByType(final String type) {
-        final LogType result = type != null ? LogType.FIND_BY_TYPE.get(type.toLowerCase().trim()) : null;
+        final LogType result = type != null ? LogType.FIND_BY_TYPE.get(type.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }

@@ -23,7 +23,7 @@ public class MapProviderFactory {
         MapsforgeMapProvider.getInstance();
     }
 
-    private static boolean isGoogleMapsInstalled() {
+    public static boolean isGoogleMapsInstalled() {
         boolean googleMaps = true;
         try {
             Class.forName("com.google.android.maps.MapActivity");

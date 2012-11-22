@@ -41,4 +41,10 @@ public class CacheTest extends AndroidTestCase {
         // different objects with same geocode shall be equal
         assertTrue(one.equals(two));
     }
+
+    public static void testGeocodeUppercase() {
+        cgCache cache = new cgCache();
+        cache.setGeocode("gc1234");
+        assertEquals("GC1234", cache.getGeocode());
+    }
 }

@@ -43,7 +43,7 @@ public class WaypointPopup extends AbstractPopupActivity {
             if (StringUtils.isNotBlank(waypoint.getName())) {
                 setTitle(waypoint.getName());
             } else {
-                setTitle(waypoint.getGeocode().toUpperCase());
+                setTitle(waypoint.getGeocode());
             }
 
             // actionbar icon
@@ -53,7 +53,7 @@ public class WaypointPopup extends AbstractPopupActivity {
             details = new CacheDetailsCreator(this, (LinearLayout) findViewById(R.id.waypoint_details_list));
 
             //Waypoint geocode
-            details.add(R.string.cache_geocode, waypoint.getPrefix().toUpperCase() + waypoint.getGeocode().toUpperCase().substring(2));
+            details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
 
             // Edit Button
             final Button buttonEdit = (Button) findViewById(R.id.edit);

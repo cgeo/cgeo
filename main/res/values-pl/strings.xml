@@ -448,7 +448,6 @@
   <string name="cache_dialog_watchlist_remove_title">Lista obserwowanych</string>
   <string name="cache_dialog_watchlist_remove_message">Usuwam skrzynkę z listy obserwowanych…</string>
   <string name="cache_menu_navigate">Nawigować</string>
-  <string name="cache_menu_tbt">Zakręt po zakręcie</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Pokaż na mapie</string>
   <string name="cache_menu_map_static">Statyczna mapa</string>

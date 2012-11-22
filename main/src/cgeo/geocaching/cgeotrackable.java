@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
@@ -32,9 +33,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class cgeotrackable extends AbstractActivity {
     private static final int MENU_LOG_TOUCH = 1;
@@ -68,12 +69,12 @@ public class cgeotrackable extends AbstractActivity {
 
             try {
                 inflater = getLayoutInflater();
-                geocode = trackable.getGeocode().toUpperCase();
+                geocode = trackable.getGeocode();
 
                 if (StringUtils.isNotBlank(trackable.getName())) {
                     setTitle(Html.fromHtml(trackable.getName()).toString());
                 } else {
-                    setTitle(trackable.getName().toUpperCase());
+                    setTitle(trackable.getName());
                 }
 
                 findViewById(R.id.details_list_box).setVisibility(View.VISIBLE);
@@ -99,7 +100,7 @@ public class cgeotrackable extends AbstractActivity {
                 details.add(R.string.trackable_type, tbType);
 
                 // trackable geocode
-                details.add(R.string.trackable_code, trackable.getGeocode().toUpperCase());
+                details.add(R.string.trackable_code, trackable.getGeocode());
 
                 // trackable owner
                 TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown));
@@ -274,33 +275,33 @@ public class cgeotrackable extends AbstractActivity {
 
         // try to get data from URI
         if (geocode == null && guid == null && id == null && uri != null) {
-            String uriHost = uri.getHost().toLowerCase();
+            String uriHost = uri.getHost().toLowerCase(Locale.US);
             if (uriHost.contains("geocaching.com")) {
                 geocode = uri.getQueryParameter("tracker");
                 guid = uri.getQueryParameter("guid");
                 id = uri.getQueryParameter("id");
 
                 if (StringUtils.isNotBlank(geocode)) {
-                    geocode = geocode.toUpperCase();
+                    geocode = geocode.toUpperCase(Locale.US);
                     guid = null;
                     id = null;
                 } else if (StringUtils.isNotBlank(guid)) {
                     geocode = null;
-                    guid = guid.toLowerCase();
+                    guid = guid.toLowerCase(Locale.US);
                     id = null;
                 } else if (StringUtils.isNotBlank(id)) {
                     geocode = null;
                     guid = null;
-                    id = id.toLowerCase();
+                    id = id.toLowerCase(Locale.US);
                 } else {
                     showToast(res.getString(R.string.err_tb_details_open));
                     finish();
                     return;
                 }
             } else if (uriHost.contains("coord.info")) {
-                String uriPath = uri.getPath().toLowerCase();
+                String uriPath = uri.getPath().toLowerCase(Locale.US);
                 if (uriPath != null && uriPath.startsWith("/tb")) {
-                    geocode = uriPath.substring(1).toUpperCase();
+                    geocode = uriPath.substring(1).toUpperCase(Locale.US);
                     guid = null;
                     id = null;
                 } else {
@@ -322,7 +323,7 @@ public class cgeotrackable extends AbstractActivity {
         if (StringUtils.isNotBlank(name)) {
             message = Html.fromHtml(name).toString();
         } else if (StringUtils.isNotBlank(geocode)) {
-            message = geocode.toUpperCase();
+            message = geocode;
         } else {
             message = res.getString(R.string.trackable);
         }
@@ -367,7 +368,7 @@ public class cgeotrackable extends AbstractActivity {
                 cgeocaches.startActivityUserName(this, contextMenuUser);
                 return true;
             case 3:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(contextMenuUser))));
                 return true;
             default:
                 return false;

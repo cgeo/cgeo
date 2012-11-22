@@ -3,9 +3,9 @@ package cgeo.geocaching.compatibility;
 import android.app.Activity;
 
 /**
- * dummy class which has no functionality in the level 11 API
+ * implement level 11 API using older methods
  */
-public class AndroidLevel11Dummy implements AndroidLevel11Interface {
+public class AndroidLevel11Emulation implements AndroidLevel11Interface {
 
     @Override
     public void invalidateOptionsMenu(final Activity activity) {

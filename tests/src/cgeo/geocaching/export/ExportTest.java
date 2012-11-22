@@ -13,7 +13,7 @@ public class ExportTest extends CGeoTestCase {
         final LogEntry log = new LogEntry(1353244820000L, LogType.FOUND_IT, "Hidden in a tree");
         final StringBuilder logStr = new StringBuilder();
         FieldnoteExport.appendFieldNote(logStr, cache, log);
-        assertEquals("GCX1234,2012-11-18T14:20:20Z,Found it,\"Hidden in a tree\"\n", logStr.toString());
+        assertEquals("Non matching export " + logStr.toString(), "GCX1234,2012-11-18T13:20:20Z,Found it,\"Hidden in a tree\"\n", logStr.toString());
     }
 
 }

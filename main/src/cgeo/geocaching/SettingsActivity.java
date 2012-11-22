@@ -495,16 +495,6 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
-        final CheckBox gnavButton = (CheckBox) findViewById(R.id.gnav);
-        gnavButton.setChecked(Settings.isUseGoogleNavigation());
-        gnavButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setUseGoogleNavigation(gnavButton.isChecked());
-            }
-        });
-
         final CheckBox logOffline = (CheckBox) findViewById(R.id.log_offline);
         logOffline.setChecked(Settings.getLogOffline());
         logOffline.setOnClickListener(new View.OnClickListener() {

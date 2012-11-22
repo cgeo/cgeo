@@ -33,4 +33,9 @@ public class cgWaypointTest extends AndroidTestCase {
         assertTrue(parking.compareTo(trailhead) < 0);
 	}
 
+    public static void testGeocode() {
+        cgWaypoint waypoint = new cgWaypoint("Test waypoint", WaypointType.PARKING, false);
+        waypoint.setGeocode("p1");
+        assertEquals("P1", waypoint.getGeocode());
+    }
 }

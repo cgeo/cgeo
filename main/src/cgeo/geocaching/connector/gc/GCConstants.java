@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
@@ -187,7 +188,7 @@ public final class GCConstants {
     public static long gccodeToGCId(final String gccode) {
         long gcid = 0;
         long base = GC_BASE31;
-        String geocodeWO = gccode.substring(2).toUpperCase();
+        String geocodeWO = gccode.substring(2).toUpperCase(Locale.US);
 
         if ((geocodeWO.length() < 4) || (geocodeWO.length() == 4 && SEQUENCE_GCID.indexOf(geocodeWO.charAt(0)) < 16)) {
             base = GC_BASE16;

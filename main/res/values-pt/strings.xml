@@ -509,7 +509,6 @@
   <string name="cache_dialog_watchlist_remove_title">Lista de observação</string>
   <string name="cache_dialog_watchlist_remove_message">A remover cache da lista de observação…</string>
   <string name="cache_menu_navigate">Navegar</string>
-  <string name="cache_menu_tbt">Turn-by-turn</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mostrar no mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>

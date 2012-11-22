@@ -552,7 +552,6 @@
   <string name="cache_dialog_watchlist_remove_title">Zoznam sledovaných</string>
   <string name="cache_dialog_watchlist_remove_message">Odstraňovanie skrýše zo zoznamu sledovaných…</string>
   <string name="cache_menu_navigate">Navigovať</string>
-  <string name="cache_menu_tbt">Navigácia s inštrukciami</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mapa</string>
   <string name="cache_menu_map_static">Statická mapa</string>

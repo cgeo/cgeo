@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.ImageHelper;
@@ -12,15 +13,13 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.Html;
-import android.view.Display;
-import android.view.WindowManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -66,9 +65,9 @@ public class HtmlImage implements Html.ImageGetter {
         bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
 
-        final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        this.maxWidth = display.getWidth() - 25;
-        this.maxHeight = display.getHeight() - 25;
+        Point displaySize = Compatibility.getDisplaySize();
+        this.maxWidth = displaySize.x - 25;
+        this.maxHeight = displaySize.y - 25;
         this.resources = cgeoapplication.getInstance().getResources();
     }
 

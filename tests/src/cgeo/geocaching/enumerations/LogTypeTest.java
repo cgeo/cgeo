@@ -19,7 +19,8 @@ public class LogTypeTest extends AndroidTestCase {
     public static void testGetByType() {
         assertEquals(LogType.UNKNOWN, LogType.getByIconName(""));
         assertEquals(LogType.UNKNOWN, LogType.getByIconName(null));
-        assertEquals(LogType.GRABBED_IT, LogType.getByType("grabbed IT "));
+        assertEquals(LogType.GRABBED_IT, LogType.getByType("grabbed it"));
+        assertEquals(LogType.GRABBED_IT, LogType.getByType("  gRAbbed IT "));
     }
 
 }

@@ -284,7 +284,6 @@
   <string name="cache_dialog_refresh_title">Oppdater</string>
   <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt…</string>
   <string name="cache_menu_navigate">Navigér</string>
-  <string name="cache_menu_tbt">Punktvis navigasjon</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kartet</string>
   <string name="cache_menu_map_ext">Vis på utvidet kart</string>

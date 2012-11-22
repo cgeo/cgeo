@@ -463,7 +463,6 @@
   <string name="cache_dialog_watchlist_remove_title">Figyelőlista</string>
   <string name="cache_dialog_watchlist_remove_message">Láda eltávolítása a figyelőlistádról…</string>
   <string name="cache_menu_navigate">Navigáció</string>
-  <string name="cache_menu_tbt">Lépésről lépésre</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Térkép</string>
   <string name="cache_menu_map_static">Statikus térképek</string>
