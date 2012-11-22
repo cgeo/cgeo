@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Exports offline-logs in the Groundspeak Field Note format.<br>
@@ -42,6 +43,9 @@ import java.util.Locale;
 class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
     private static final SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+    static {
+        fieldNoteDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
 
     protected FieldnoteExport() {
         super(getString(R.string.export_fieldnotes));
