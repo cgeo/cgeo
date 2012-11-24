@@ -191,7 +191,7 @@ public class cgTrackable implements ILogable {
     }
 
     public void setLogs(List<LogEntry> logs) {
-        this.logs = logs;
+        this.logs = logs != null ? logs : new ArrayList<LogEntry>();
     }
 
     @Override
