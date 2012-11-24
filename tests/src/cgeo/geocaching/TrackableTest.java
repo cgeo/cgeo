@@ -10,4 +10,9 @@ public class TrackableTest extends AndroidTestCase {
         assertEquals("TB1234", trackable.getGeocode());
     }
 
+    public static void testSetLogsNull() {
+        cgTrackable trackable = new cgTrackable();
+        trackable.setLogs(null);
+        assertNotNull("Trackable logs must not be null!", trackable.getLogs());
+    }
 }
