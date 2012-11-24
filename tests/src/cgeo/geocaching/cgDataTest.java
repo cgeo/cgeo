@@ -3,11 +3,15 @@ package cgeo.geocaching;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class cgDataTest extends CGeoTestCase {
@@ -94,5 +98,43 @@ public class cgDataTest extends CGeoTestCase {
         app.getWaypointsInViewport(viewport, false, true, CacheType.TRADITIONAL);
         app.getWaypointsInViewport(viewport, true, false, CacheType.TRADITIONAL);
         app.getWaypointsInViewport(viewport, true, true, CacheType.TRADITIONAL);
+    }
+
+    // Check that saving a cache and trackable without logs works (see #2199)
+    public static void testSaveWithoutLogs() {
+
+        cgeoapplication app = cgeoapplication.getInstance();
+
+        final String GEOCODE_CACHE = "TEST";
+
+        // create cache and trackable
+        final cgCache cache = new cgCache();
+        cache.setGeocode(GEOCODE_CACHE);
+        cache.setDetailed(true);
+        final cgTrackable trackable = new cgTrackable();
+        trackable.setLogs(null);
+        final List<cgTrackable> inventory = new ArrayList<cgTrackable>();
+        inventory.add(trackable);
+        cache.setInventory(inventory);
+
+        try {
+            app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            final cgCache loadedCache = app.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertNotNull("Cache was not saved!", loadedCache);
+            assertEquals(1, loadedCache.getInventory().size());
+        } finally {
+            app.removeCache(GEOCODE_CACHE, LoadFlags.REMOVE_ALL);
+        }
+    }
+
+    // Loading logs for an empty geocode should return an empty list, not null!
+    public static void testLoadLogsFromEmptyGeocode() {
+
+        cgeoapplication app = cgeoapplication.getInstance();
+
+        List<LogEntry> logs = app.loadLogs("");
+
+        assertNotNull("Logs must not be null", logs);
+        assertEquals("Logs from empty geocode must be empty", 0, logs.size());
     }
 }

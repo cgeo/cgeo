@@ -1894,13 +1894,13 @@ public class cgData {
     }
 
     public List<LogEntry> loadLogs(String geocode) {
+        List<LogEntry> logs = new ArrayList<LogEntry>();
+
         if (StringUtils.isBlank(geocode)) {
-            return null;
+            return logs;
         }
 
         init();
-
-        List<LogEntry> logs = new ArrayList<LogEntry>();
 
         Cursor cursor = database.rawQuery(
                 "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "
