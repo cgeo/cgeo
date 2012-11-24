@@ -1935,21 +1935,26 @@ public class CacheDetailActivity extends AbstractActivity {
             personalNoteView.setMovementMethod(LinkMovementMethod.getInstance());
             registerForContextMenu(personalNoteView);
             final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
-            personalNoteEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EditorDialog editor = new EditorDialog(CacheDetailActivity.this, personalNoteView.getText());
-                    editor.setOnEditorUpdate(new EditorDialog.EditorUpdate() {
-                        @Override
-                        public void update(CharSequence editorText) {
-                            cache.setPersonalNote(editorText.toString());
-                            setPersonalNote(personalNoteView);
-                            app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-                        }
-                    });
-                    editor.show();
-                }
-            });
+            if (cache.isOffline()) {
+                personalNoteEdit.setVisibility(View.VISIBLE);
+                personalNoteEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditorDialog editor = new EditorDialog(CacheDetailActivity.this, personalNoteView.getText());
+                        editor.setOnEditorUpdate(new EditorDialog.EditorUpdate() {
+                            @Override
+                            public void update(CharSequence editorText) {
+                                cache.setPersonalNote(editorText.toString());
+                                setPersonalNote(personalNoteView);
+                                app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                            }
+                        });
+                        editor.show();
+                    }
+                });
+            } else {
+                personalNoteEdit.setVisibility(View.INVISIBLE);
+            }
 
             // cache hint and spoiler images
             final View hintBoxView = view.findViewById(R.id.hint_box);
