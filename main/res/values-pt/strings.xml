@@ -428,7 +428,6 @@
   <string name="init_mapsources">Fontes de mapa</string>
   <string name="init_mapsources_description">Aqui pode seleccionar a fonte dos seus mapas. Como alternativa ao Google Maps, vários estilos de OpenStreetMap estão disponíveis, e até ficheiros de mapas offline (veja <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para mais detalhes).</string>
   <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
-  <string name="init_select_themefolder">…</string>
   <string name="init_map_directory_description">Directório com os mapas offline</string>
   <string name="init_gpx_exportdir">Directório para exportar GPX</string>
   <string name="init_gpx_importdir">Directório para importar GPX</string>
@@ -570,6 +569,9 @@
   <string name="cache_dialog_watchlist_remove_title">Lista de observação</string>
   <string name="cache_dialog_watchlist_remove_message">A remover cache da lista de observação…</string>
   <string name="cache_menu_navigate">Navegar</string>
+  <string name="cache_menu_navigation_drive">Navegar (Conduzir)</string>
+  <string name="cache_menu_navigation_walk">Navegar (Andar)</string>
+  <string name="cache_menu_maps_directions">Direcções pelo Google Maps</string> 
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mostrar no mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
@@ -867,9 +869,6 @@
   <string name="export_gpx_info">O ficheiro GPX vai ser exportado para %1$s com a data e a hora actual como nome de ficheiro.</string>
   <string name="export_gpx_to">Enviar GPX exportado para</string>
 
-  <!--  attribute unknown -->
-  <string name="attribute_unknown_yes">Unknown attribute present</string>
-  <string name="attribute_unknown_no">Unknown attribute not present</string>
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Cães permitidos</string>
   <string name="attribute_dogs_no">Cães não permitidos</string>
