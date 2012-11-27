@@ -19,6 +19,7 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -129,6 +130,26 @@ public class cgCache implements ICache, IWaypoint {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
     private Handler changeNotificationHandler = null;
+
+    /**
+     * Create a new cache. To be used everywhere except for the GPX parser
+     */
+    public cgCache() {
+        // empty
+    }
+
+    /**
+     * Cache constructor to be used by the GPX parser only. This constructor explicitly sets several members to empty
+     * lists.
+     *
+     * @param gpxParser
+     */
+    public cgCache(GPXParser gpxParser) {
+        setReliableLatLon(true);
+        setAttributes(Collections.<String> emptyList());
+        setWaypoints(Collections.<cgWaypoint> emptyList(), false);
+        setLogs(Collections.<LogEntry> emptyList());
+    }
 
     public void setChangeNotificationHandler(Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;

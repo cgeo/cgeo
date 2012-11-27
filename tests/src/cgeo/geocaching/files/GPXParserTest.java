@@ -277,6 +277,23 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
     }
 
+    public void testDuplicateImport() throws IOException, ParserException {
+        final String geocode = "GC31J2H";
+        removeCacheCompletely(geocode);
+
+        // first import
+        List<cgCache> caches = readGPX10(R.raw.lazy);
+        assertEquals(1, caches.size());
+        assertEquals(6, caches.get(0).getLogs().size());
+
+        // second import
+        caches = readGPX10(R.raw.lazy);
+        assertEquals(1, caches.size());
+        assertEquals(6, caches.get(0).getLogs().size());
+
+        removeCacheCompletely(geocode);
+    }
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
