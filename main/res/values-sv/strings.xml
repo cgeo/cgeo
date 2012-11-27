@@ -427,11 +427,7 @@
   <string name="init_mapsources">Kartkällor</string>
   <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer).</string>
   <string name="init_mapsource_select">Välj kartkälla</string>
-  <string name="init_select_themefolder">…</string>
   <string name="init_map_directory_description">Katalog med offline kartor</string>
-  <string name="init_select_map_directory">…</string>
-  <string name="init_select_gpx_exportdir">…</string>
-  <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">GPX-exportkatalog</string>
   <string name="init_gpx_importdir">GPX-importkatalog</string>
   <string name="init_gpx_exportdir_description">Här kan du välja katalog för GPX-exporteringar.</string>

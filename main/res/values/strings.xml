@@ -428,11 +428,7 @@
   <string name="init_mapsources">Map Sources</string>
   <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even offline map files (See <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> for details).\nFurthermore selectable themes for offline maps are supported.</string>
   <string name="init_mapsource_select">Select Map Source</string>
-  <string name="init_select_themefolder">…</string>
   <string name="init_map_directory_description">Directory with offline maps</string>
-  <string name="init_select_map_directory">…</string>
-  <string name="init_select_gpx_exportdir">…</string>
-  <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">GPX Export Directory</string>
   <string name="init_gpx_importdir">GPX Import Directory</string>
   <string name="init_gpx_exportdir_description">Here you can select the directory for GPX exports.</string>
@@ -464,13 +460,6 @@
   <string name="init_rendertheme_folder">Directory with custom offline map themes (optional)</string>
   
   <!-- map sources -->
-  <string-array name="map_sources">
-    <item>@string/map_source_google_map</item>
-    <item>@string/map_source_google_satellite</item>
-    <item>@string/map_source_osm_mapnik</item>
-    <item>@string/map_source_osm_cyclemap</item>
-    <item>@string/map_source_osm_offline</item>
-  </string-array>
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -714,22 +703,9 @@
   <string name="search_clear_history">Clear History</string>
   <string name="search_history_cleared">History cleared</string>
 
-  <string-array name="waypoint_coordinate_formats">
-    <item>@string/waypoint_coordinate_formats_plain</item>
-    <item>DDD.DDDDD°</item>
-    <item>DDD°MM.MMM\'</item>
-    <item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
   <string name="waypoint_coordinate_formats_plain">Plain</string>
 
   <!-- distance units -->
-  <string-array name="distance_units">
-    <item>@string/unit_m</item>
-    <item>@string/unit_km</item>
-    <item>@string/unit_ft</item>
-    <item>@string/unit_yd</item>
-    <item>@string/unit_mi</item>
-  </string-array>
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
   <string name="unit_ft">ft</string>
@@ -1041,121 +1017,4 @@
       <item quantity="one">yesterday</item>
       <item quantity="other">%d days ago</item>
   </plurals>
-
-  <!-- ====== please, do not translate (and include in translation) things below this line ====== -->
-
-  <!-- contributors -->
-  <string name="contributors">\n
-    · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
-    \n
-    · 0xErnie (localization DE)\n
-    · <a href="mailto:bazsy@freemail.hu">Balazs Szabo (Bazsy1983)</a> (loc. HU)\n
-    · Bananeweizen (code, loc. DE)\n
-    · blafoo (code, localization DE)\n
-    · Bonemaro (tester)\n
-    · BudBundi (localization DE, tester)\n
-    · campbeb (code)\n
-    · Charles (localization FR)\n
-    · Denny (localization DA)\n
-    · Eisbehr (code)\n
-    · F. Coello (localization ES)\n
-    · Filipe C. (code)\n
-    · <a href="http://www.hunterthornsberry.com">Hunter275</a> (tester)\n
-    · <a href="http://iirojappinen.com/">Iiro Jäppinen</a> (graphic)\n
-    · inkantis (localization PL)\n
-    · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
-    · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
-    · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
-    · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support, localization DE)\n
-    · Ludovic Valente (localization FR)\n
-    · marco-jacob (code, loc. DE)\n
-    · MichielK (code, loc. NL)\n
-    · mucek4 (code, open source project leader)\n
-    · ncorreia (code, localization PT)\n
-    · Pascal (localization NL)\n
-    · Pavol Babinčák (code, loc. SK)\n
-    · Peter (localization HU)\n
-    · <a href="https://github.com/Portree-Kid">Portree Kid</a> (code)\n
-    · Rainer S. (code)\n
-    · Ray (code, loc. JA)\n
-    · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
-    · RoadRunner- (code, loc. DE)\n
-    · <a href="http://www.blueskysoftware.it/">RomNexus6</a> (localization IT)\n
-    · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
-    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code, localization FR)\n
-    · serenity (localization DE)\n
-    · Shan, a.k.a. ShakurNO (localization NO)\n
-    · Shizo87 (tester)\n
-    · stephanme/Geoteufel (code)\n
-    · thiasB (code, loc. DE EN)\n
-    · YraFyra (code, loc. SV)\n
-    · zenobios (code, loc. DE EN)\n
-    \n
-    · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
-    · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons)\n
-    · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
-    · <a href="http://androidicons.com/">Android Icons</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
-    · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n
-  </string>
-
-  <!-- changelog -->
-  <string name="changelog">\n
-    <b>Next release</b>\n\n
-    <b>New Features/Functions:</b>\n
-    · If static maps are enabled, batch update of caches will now update caches without static maps first\n
-    · If a cache has a chirp attribute the navigation menu supports starting the Cache Beacon app\n
-    · Search bar on main screen now allows searching OC geocodes\n
-    · Removed Go4Cache support as this third party service is no longer available\n
-    · Selectable GPX import directory\n
-    · New log template for inserting owner name\n
-    · New option to remove colors from log entries\n 
-    · Ability to delete GPX files after import\n
-    · Quick signature insertion\n
-    · Template for inserting smilies when logging a cache\n
-    · Option to identify as android browser. Might help in case of login problems on mobile networks\n
-    · Create and edit a personal note for each cache (not yet synchronized to geocaching.com)\n
-    · Quick change between different offline maps within live map\n
-    · Support of custom themes for offline maps (e.g. nightview)\n
-    · Sygic navigation support\n
-    · Filter for non premium member caches\n
-    · New image tab in cache details\n 
-    \n
-    <b>Bugfixing:</b>\n
-    · Crash when modifying lists fixed\n
-    · Improvement for cache description translation\n
-    · Avoid crash when searching for an unactivated TB\n
-    · Improvement for enabling live mode on map\n
-    · Improvement for GPX export operations\n
-    · Readability improvement for cache description with dark text when using black theme\n
-    · Store for offline on live map now always available for basic members\n
-    · Live map now stays live after display rotation\n  
-    · Open in browser improved to allow setting a default browser without losing the option to open coord.info URLs with c:geo\n
-    · Improve offline stability\n
-    · Static map download improvements\n
-    · Failure when importing previously exported GPX file fixed\n
-    · Opening a link from a TB description improved\n
-    · Last activity time on TB page corrected\n
-    · 4-digit favorite points shown correctly in lists\n
-    · File scan for offline maps improved\n
-    · Allow HTML in trackable description\n
-    · Live map filter now also working for basic members\n
-    · Improved stability for large GPX file import\n
-     \n
-    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
-    \n
-    <b>Known Limitations/Bugs:</b>\n
-    · Live map:\n
-      Approximated coords due to limitations on the GC-website\n
-      Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
-      In fast mode the cache type might be wrong in rare cases\n
-      Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
-      On low zoom owned/found caches may not be hidden anymore\n
-    · Other:\n
-      Log images with huge size cause a long loading time\n
-      In special situations the logbook might not be shown completely after logging a cache\n
-      The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
-      On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
-    <b>Old releases</b>\n
-    · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
-    \n</string>
 </resources>

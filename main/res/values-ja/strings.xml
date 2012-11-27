@@ -426,8 +426,6 @@
   <string name="init_mapsources">地図の設定</string>
   <string name="init_mapsources_description">オンライン地図をGoogleマップからOpenStreetMap(その派生オンライン地図やオフライン地図)に変更できます。詳細は<a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> (英語)をご覧ください。</string>
   <string name="init_mapsource_select">地図の選択</string>
-  <string name="init_select_gpx_exportdir">選択…</string>
-  <string name="init_select_gpx_importdir">選択…</string>
   <string name="init_gpx_exportdir">GPXエクスポートフォルダ</string>
   <string name="init_gpx_importdir">GPXインポートフォルダ</string>
   <string name="init_gpx_exportdir_description">GPXファイルへエクスポートする際の保存先フォルダを選択できます。</string>
@@ -689,12 +687,6 @@
   <string name="search_clear_history">全履歴を削除</string>
   <string name="search_history_cleared">全履歴を削除しました</string>
 
-  <string-array name="waypoint_coordinate_formats">
-    <item>@string/waypoint_coordinate_formats_plain</item>
-    <item>DDD.DDDDD°</item>
-    <item>DDD°MM.MMM\'</item>
-    <item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
   <string name="waypoint_coordinate_formats_plain">プレーン</string>
 
   <!-- distance units -->

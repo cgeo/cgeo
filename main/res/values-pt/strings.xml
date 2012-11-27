@@ -585,7 +585,6 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
-  <string name="cache_menu_sygic" translatable="false">Sygic</string> 
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Log gravado</string>
   <string name="cache_status_found">Encontrada</string>

@@ -17,7 +17,7 @@
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name" android:allowBackup="false">
         <activity
             android:label="@string/app_name"
             android:name=".CalendarActivity"

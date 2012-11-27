@@ -422,8 +422,6 @@
   <string name="init_mapsources">Tipi di mappe</string>
   <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).</string>
   <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
-  <string name="init_select_gpx_exportdir">…</string>
-  <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">Cartella di export GPX</string>
   <string name="init_gpx_importdir">Cartella di import GPX</string>
   <string name="init_gpx_exportdir_description">Qui puoi selezionare la cartella di esportazione GPX.</string>

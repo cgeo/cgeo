@@ -428,11 +428,7 @@
   <string name="init_mapsources">Térkép források</string>
   <string name="init_mapsources_description">Itt választhatod ki a térképeid forrását. A Google térképek alternatívájaként több OpenStreetMap stílus is hozzáférhető és offline térkép fájlokat is használhatsz. (További információ <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Válassz térkép forrást</string>
-  <string name="init_select_themefolder">…</string>
   <string name="init_map_directory_description">Könyvtár az offline térképekhez</string>
-  <string name="init_select_map_directory">…</string>
-  <string name="init_select_gpx_exportdir">…</string>
-  <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">GPX exportálási könyvtár</string>
   <string name="init_gpx_importdir">GPX importálási könyvtár</string>
   <string name="init_gpx_exportdir_description">Itt választhatod ki a könyvtárat a GPX exportálásokhoz.</string>

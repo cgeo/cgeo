@@ -16,6 +16,7 @@ abstract class AbstractAddEntry {
     void addEntryToCalendar() {
         try {
             addEntryToCalendarInternal();
+            activity.showToast(R.string.event_success);
         } catch (Exception e) {
             activity.showToast(R.string.event_fail);
 

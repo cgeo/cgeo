@@ -427,9 +427,6 @@
   <string name="init_mapsources">Kartenherkunft</string>
   <string name="init_mapsources_description">Hier kann die Quelle der benutzten Karte gewählt werden. Alternativ zu Google Maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).\nWeiterhin werden verschiedene Darstellungen(Themes) für Offline-Karten unterstützt.</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
-  <string name="init_select_themefolder">…</string>
-  <string name="init_select_gpx_exportdir">…</string>
-  <string name="init_select_gpx_importdir">…</string>
   <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
   <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
   <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
