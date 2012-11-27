@@ -116,6 +116,7 @@
   <string name="log_announcement">Oznámenie</string>
   <string name="log_today">Dnes</string>
   <string name="log_yesterday">Včera</string>
+  <string name="log_smilies">Smajlíci</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Preložiť do jazyka %s</string>
@@ -223,7 +224,8 @@
   <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
   <string name="warn_invalid_mapfile">Vybraná mapa nemá platný formát mapsforge verzie 0.3.0.\nOffline mapy nie sú dostupné.</string>
   <string name="warn_deprecated_mapfile">Používate zastaralý formát mapových súborov verzie 0.2.4.\nZvážte prechod na mapy verzie 0.3.0.\nV budúcnosti prestane byť verzia 0.2.4 podporovaná.</string>
-   <string name="warn_nonexistant_mapfile">Vybraný mapový súbor neexistuje.\nOffline mapy nie sú dostupné.</string>
+  <string name="warn_nonexistant_mapfile">Vybraný mapový súbor neexistuje.\nOffline mapy nie sú dostupné.</string>
+  <string name="warn_rendertheme_missing">Téma mapy nebola nájdená.</string>
 
 
   <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
@@ -382,6 +384,7 @@
   <string name="init_signature_template_datetime">Dátum a čas</string>
   <string name="init_signature_template_user">Používateľ</string>
   <string name="init_signature_template_number">Číslo</string>
+  <string name="init_signature_template_owner">Vlastník</string>
   <string name="init_details">Detaily skrýše</string>
   <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
   <string name="init_elevationwanted">Načítať údaje o stúpaní skrýše</string>
@@ -425,9 +428,13 @@
   <string name="init_mapsources">Mapové zdroje</string>
   <string name="init_mapsources_description">Tu môžete vybrať zdroje pre vaše mapy. Je to alternatíva ku Google mapám rôznych OpenStreetMap styles sú dostupné a dokonca offline mapové súbory (podrobnosti nájdete na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyberte zdroj máp</string>
-  <string name="init_gpx_exportdir">Adresár pre GPX Export</string>
-  <string name="init_gpx_exportdir_description">Tu si môžete vybrať adresár pre GPX exporty.</string>
-  <string name="init_gpx_exportdir_select">Výber adresára pre GPX Export</string>
+  <string name="init_map_directory_description">Priečinok s offline mapami</string>
+  <string name="init_gpx_exportdir">Priečinok pre GPX Export</string>
+  <string name="init_gpx_importdir">Priečinok pre GPX Import</string>
+  <string name="init_gpx_exportdir_description">Tu si môžete vybrať priečinok pre GPX exporty.</string>
+  <string name="init_gpx_importdir_description">Tu si môžete vybrať priečinok pre GPX importy.</string>
+  <string name="init_gpx_exportdir_select">Výber priečinka pre GPX export</string>
+  <string name="init_gpx_importdir_select">Výber priečinka pre GPX import</string>
   <string name="init_maptrail">Zobraziť stopu na mape</string>
   <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
   <string name="init_trackautovisit">Nastaviť trasovateľné predmety automaticky na „navštívené“</string>
@@ -448,6 +455,9 @@
   <string name="init_dbmove_running">Prebieha presúvanie databázy</string>
   <string name="init_dbmove_success">Databáza bola úspešne presunutá.</string>
   <string name="init_dbmove_failed">Presun databázy zlyhal.</string>
+  <string name="init_plain_logs">Zobraziť záznamy logu bez farieb</string>
+  <string name="init_use_native_ua">Ohlásiť sa ako prehliadač Android. Pomôže vyriešiť problémy pri niektorých poskytovateľov siete.</string>
+  <string name="init_rendertheme_folder">Priečinok s vlastnými témami offline máp (voliteľné)</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
@@ -507,6 +517,7 @@
   <string name="cache_log_images_title">Obrázok z logu</string>
   <string name="cache_log_image_default_title">Fotografia</string>
   <string name="cache_personal_note">Osobná poznámka</string>
+  <string name="cache_personal_note_edit">Upraviť</string>
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky, ktorý môže byť pre správne zobrazenie potrebné otvoriť v geocaching.com.</string>
@@ -519,6 +530,7 @@
   <string name="cache_favpoint_not_on">Skrýša nepatrí medzi vaše obľúbené.</string>
   <string name="cache_favpoint_add">Pridať</string>
   <string name="cache_favpoint_remove">Odstrániť</string>
+  <string name="cache_images">Obrázky</string>
 
   <string name="cache_waypoints">Body trasy</string>
   <plurals name="waypoints">
@@ -570,12 +582,15 @@
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_menu_cachebeacon">Cache Beacon</string>
+
   <string name="cache_status">Stav</string>
-  <string name="cache_status_offline_log">Uložený log</string>
+  <string name="cache_status_offline_log">Uložený log</string>
   <string name="cache_status_found">Nájdená</string>
   <string name="cache_status_archived">Archivovaná</string>
   <string name="cache_status_disabled">Zrušená</string>
   <string name="cache_status_premium">Iba pre platiacich používateľov</string>
+  <string name="cache_status_not_premium">Prístup pre všetkých používateľov</string>
   <string name="cache_geocode">GC kód</string>
   <string name="cache_name">Názov</string>
   <string name="cache_type">Typ</string>
@@ -595,6 +610,8 @@
   <string name="cache_coordinates_original">Pôvodné súradnice</string>
   <string name="cache_spoiler_images_title">Spoilerové obrázky</string>
   <string name="cache_spoiler_images_loading">Načítanie spoilerových obrázkov…</string>
+  <string name="cache_images_title">Obrázky</string>
+  <string name="cache_images_loading">Prebieha načítanie obrázkov…</string>
   <string name="cache_log_types">Typy záznamov</string>
   <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string>
   <string name="cache_export_fieldnote">Exportovať ako poznámky</string>
@@ -606,16 +623,19 @@
   <string name="cache_image_open_browser">Otvoriť v prehliadači</string>
   <string name="cache_share_field">Zdieľať</string>
   <string name="cache_time_full_hours">hodín</string>
-
+  
+  <!--  editor dialog -->
+  <string name="editor_save">Uložiť</string>
+      
   <!-- file list base -->
   <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
-  <string name="file_searching_sdcard_in">Žiadne súbory neboli nájdené v predvolených adresároch:\n%1$s\n\nVyhľadávanie súborov na celej SD karte:\n</string>
+  <string name="file_searching_sdcard_in">Žiadne súbory neboli nájdené v predvolených priečinkoch:\n%1$s\n\nVyhľadávanie súborov na celej SD karte:\n</string>
   <string name="file_list_no_files">Prepáčte, c:geo sa nepodarilo nájsť žiadne vhodné súbory.</string>
   <string name="file_searching">Vyhľadávanie zodpovedajúcich súborov</string>
   <string name="file_title_searching">Vyhľadávanie</string>
 
   <!-- simple_dir_chooser -->
-  <string name="simple_dir_chooser_title">Vyberte adresár</string>
+  <string name="simple_dir_chooser_title">Výber priečinka</string>
   <string name="simple_dir_chooser_current_path">Cesta:</string>
 
   <!-- gpx -->
@@ -635,9 +655,14 @@
   <string name="gpx_import_error_unexpected">Neočakávaná chyba</string>
   <string name="gpx_import_confirm">Chcete importovať GPX súbor do c:geo?</string>
   <string name="gpx_import_canceled">Import GPX bol zrušený</string>
+  <string name="gpx_import_delete_title">Vymazať súbor</string>
+  <string name="gpx_import_delete_message">Chcete zmazať %s?</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Výber mapového súboru</string>
+
+  <!-- theme file select -->
+  <string name="theme_file_select_title">Výber súboru s témou mapy</string>
 
   <!--  import -->
   <string name="import_title">Import…</string>
@@ -692,10 +717,13 @@
   <string name="map_map">Mapa</string>
   <string name="map_live">Aktívna mapa</string>
   <string name="map_view_map">Zobrazenie mapy</string>
+  <string name="map_modes">Režimy mapy</string>
   <string name="map_trail_show">Zobraziť záznam trasy</string>
   <string name="map_trail_hide">Skryť záznam trasy</string>
   <string name="map_circles_show">Zobraziť kruhy</string>
   <string name="map_circles_hide">Skryť kruhy</string>
+  <string name="map_theme_builtin">Predvolené</string>
+  <string name="map_theme_select">Vybrať tému mapy</string>
   <string name="map_live_enable">Povoliť aktuálnu polohu</string>
   <string name="map_live_disable">Zakázať aktuálnu polohu</string>
   <string name="map_static_title">Statické mapy</string>
