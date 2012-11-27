@@ -430,9 +430,6 @@
   <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
   <string name="init_select_themefolder">…</string>
   <string name="init_map_directory_description">Directório com os mapas offline</string>
-  <string name="init_select_map_directory">…</string>
-  <string name="init_select_gpx_exportdir">…</string>
-  <string name="init_select_gpx_importdir">…</string>
   <string name="init_gpx_exportdir">Directório para exportar GPX</string>
   <string name="init_gpx_importdir">Directório para importar GPX</string>
   <string name="init_gpx_exportdir_description">Aqui pode selecionar o directório para exportar os GPX.</string>
