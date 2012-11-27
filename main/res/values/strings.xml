@@ -1118,6 +1118,7 @@
     · Support of custom themes for offline maps (e.g. nightview)\n
     · Sygic navigation support\n
     · Filter for non premium member caches\n
+    · New image tab in cache details\n 
     \n
     <b>Bugfixing:</b>\n
     · Crash when modifying lists fixed\n
@@ -1153,6 +1154,7 @@
       Log images with huge size cause a long loading time\n
       In special situations the logbook might not be shown completely after logging a cache\n
       The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
+      On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
