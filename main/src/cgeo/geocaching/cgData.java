@@ -2735,11 +2735,11 @@ public class cgData {
         init();
 
         SQLiteStatement move = PreparedStatements.getMoveToList();
-        move.bindLong(1, listId);
 
         database.beginTransaction();
         try {
             for (cgCache cache : caches) {
+                move.bindLong(1, listId);
                 move.bindString(2, cache.getGeocode());
                 move.execute();
                 cache.setListId(listId);
