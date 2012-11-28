@@ -1058,9 +1058,10 @@ public class cgData {
             return;
         }
         SQLiteStatement statement = PreparedStatements.getInsertAttribute();
-        statement.bindLong(2, System.currentTimeMillis());
+        final long timestamp = System.currentTimeMillis();
         for (String attribute : cache.getAttributes()) {
             statement.bindString(1, geocode);
+            statement.bindLong(2, timestamp);
             statement.bindString(3, attribute);
 
             statement.executeInsert();
@@ -1224,9 +1225,10 @@ public class cgData {
         List<cgImage> spoilers = cache.getSpoilers();
         if (CollectionUtils.isNotEmpty(spoilers)) {
             SQLiteStatement insertSpoiler = PreparedStatements.getInsertSpoiler();
-            insertSpoiler.bindLong(2, System.currentTimeMillis());
+            final long timestamp = System.currentTimeMillis();
             for (cgImage spoiler : spoilers) {
                 insertSpoiler.bindString(1, geocode);
+                insertSpoiler.bindLong(2, timestamp);
                 insertSpoiler.bindString(3, spoiler.getUrl());
                 insertSpoiler.bindString(4, spoiler.getTitle());
                 final String description = spoiler.getDescription();
@@ -1250,9 +1252,10 @@ public class cgData {
         }
 
         SQLiteStatement insertLog = PreparedStatements.getInsertLog();
-        insertLog.bindLong(2, System.currentTimeMillis());
+        final long timestamp = System.currentTimeMillis();
         for (LogEntry log : logs) {
             insertLog.bindString(1, geocode);
+            insertLog.bindLong(2, timestamp);
             insertLog.bindLong(3, log.type.id);
             insertLog.bindString(4, log.author);
             insertLog.bindString(5, log.log);
@@ -1262,8 +1265,8 @@ public class cgData {
             long logId = insertLog.executeInsert();
             if (log.hasLogImages()) {
                 SQLiteStatement insertImage = PreparedStatements.getInsertLogImage();
-                insertImage.bindLong(1, logId);
                 for (cgImage img : log.getLogImages()) {
+                    insertImage.bindLong(1, logId);
                     insertImage.bindString(2, img.getTitle());
                     insertImage.bindString(3, img.getUrl());
                     insertImage.executeInsert();
@@ -1280,9 +1283,10 @@ public class cgData {
         if (MapUtils.isNotEmpty(logCounts)) {
             Set<Entry<LogType, Integer>> logCountsItems = logCounts.entrySet();
             SQLiteStatement insertLogCounts = PreparedStatements.getInsertLogCounts();
-            insertLogCounts.bindLong(2, System.currentTimeMillis());
+            final long timestamp = System.currentTimeMillis();
             for (Entry<LogType, Integer> pair : logCountsItems) {
                 insertLogCounts.bindString(1, geocode);
+                insertLogCounts.bindLong(2, timestamp);
                 insertLogCounts.bindLong(3, pair.getKey().id);
                 insertLogCounts.bindLong(4, pair.getValue());
 
@@ -2535,9 +2539,9 @@ public class cgData {
         database.beginTransaction();
         try {
             SQLiteStatement setVisit = PreparedStatements.getUpdateVisitDate();
-            setVisit.bindLong(1, visitedDate);
 
             for (String geocode : geocodes) {
+                setVisit.bindLong(1, visitedDate);
                 setVisit.bindString(2, geocode);
                 setVisit.execute();
             }
