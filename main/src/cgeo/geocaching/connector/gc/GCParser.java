@@ -612,6 +612,9 @@ public abstract class GCParser {
             Log.w("GCParser.parseCache: Failed to parse cache log count");
         }
 
+        // waypoints - reset collection
+        cache.setWaypoints(Collections.<cgWaypoint> emptyList(), false);
+
         // add waypoint for original coordinates in case of user-modified listing-coordinates
         try {
             final String originalCoords = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
@@ -625,8 +628,6 @@ public abstract class GCParser {
         } catch (Geopoint.GeopointException e) {
         }
 
-        // waypoints
-        cache.setWaypoints(Collections.<cgWaypoint> emptyList(), false);
         int wpBegin;
         int wpEnd;
 
