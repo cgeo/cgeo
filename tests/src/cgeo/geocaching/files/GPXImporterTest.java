@@ -279,7 +279,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        SearchResult search = cgeoapplication.getInstance().getBatchOfStoredCaches(false, null, CacheType.ALL, listId);
+        SearchResult search = cgeoapplication.getInstance().getBatchOfStoredCaches(null, CacheType.ALL, listId);
         List<cgCache> cachesInList = new ArrayList<cgCache>();
         cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
         cgeoapplication.getInstance().markDropped(cachesInList);

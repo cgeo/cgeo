@@ -5,7 +5,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.Login;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -765,7 +764,7 @@ public class SettingsActivity extends AbstractActivity {
      */
     public void backup(View view) {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
-        if (app.getAllStoredCachesCount(true, CacheType.ALL) == 0) {
+        if (cgeoapplication.getAllCachesCount() == 0) {
             helpDialog(res.getString(R.string.init_backup), res.getString(R.string.init_backup_unnecessary));
             return;
         }

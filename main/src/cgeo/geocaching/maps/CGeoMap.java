@@ -368,7 +368,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
 
-        int countBubbleCnt = app.getAllStoredCachesCount(true, CacheType.ALL);
+        int countBubbleCnt = cgeoapplication.getAllCachesCount();
         caches = new LeastRecentlyUsedSet<cgCache>(MAX_CACHES + countBubbleCnt);
 
         final MapProvider mapProvider = Settings.getMapProvider();

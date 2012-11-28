@@ -275,10 +275,10 @@ public class cgeoapplication extends Application {
         return storage.getBounds(geocodes);
     }
 
-    /** {@link cgData#loadBatchOfStoredGeocodes(boolean, Geopoint, CacheType, int)} */
-    public SearchResult getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int listId) {
-        final Set<String> geocodes = storage.loadBatchOfStoredGeocodes(detailedOnly, coords, cacheType, listId);
-        return new SearchResult(geocodes, getAllStoredCachesCount(true, cacheType, listId));
+    /** {@link cgData#loadBatchOfStoredGeocodes(Geopoint, CacheType, int)} */
+    public SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId) {
+        final Set<String> geocodes = storage.loadBatchOfStoredGeocodes(coords, cacheType, listId);
+        return new SearchResult(geocodes, getAllStoredCachesCount(cacheType, listId));
     }
 
     /** {@link cgData#loadHistoryOfSearchedLocations()} */
@@ -303,19 +303,14 @@ public class cgeoapplication extends Application {
         return new SearchResult(geocodes);
     }
 
-    /** {@link cgData#getAllStoredCachesCount(boolean, CacheType, int)} */
-    public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType) {
-        return storage.getAllStoredCachesCount(detailedOnly, cacheType, 0);
+    /** {@link cgData#getAllStoredCachesCount(CacheType, int)} */
+    public int getAllStoredCachesCount(final CacheType cacheType, final Integer list) {
+        return storage.getAllStoredCachesCount(cacheType, list);
     }
 
-    /** {@link cgData#getAllStoredCachesCount(boolean, CacheType, int)} */
-    public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
-        return storage.getAllStoredCachesCount(detailedOnly, cacheType, list);
-    }
-
-    /** {@link cgData#getAllHistoricCachesCount()} */
+    /** {@link cgData#getAllHistoryCachesCount()} */
     public int getAllHistoricCachesCount() {
-        return storage.getAllHistoricCachesCount();
+        return storage.getAllHistoryCachesCount();
     }
 
     /** {@link cgData#moveToList(List, int)} */
@@ -499,6 +494,10 @@ public class cgeoapplication extends Application {
 
     public List<cgWaypoint> loadWaypoints(final String geocode) {
         return storage.loadWaypoints(geocode);
+    }
+
+    public static int getAllCachesCount() {
+        return cgData.getAllCachesCount();
     }
 
 }

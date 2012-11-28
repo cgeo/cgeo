@@ -46,7 +46,7 @@ public class cgDataTest extends CGeoTestCase {
             // save caches to DB (cache1=listId1, cache2=listId1)
             app.saveCache(cache1, LoadFlags.SAVE_ALL);
             app.saveCache(cache2, LoadFlags.SAVE_ALL);
-            assertTrue(app.getAllStoredCachesCount(false, CacheType.ALL) >= 2);
+            assertTrue(cgeoapplication.getAllCachesCount() >= 2);
 
             // rename list (cache1=listId1, cache2=listId1)
             assertEquals(1, app.renameList(listId1, "cgData Test (renamed)"));
@@ -57,7 +57,7 @@ public class cgDataTest extends CGeoTestCase {
 
             // move to list (cache1=listId2, cache2=listId2)
             app.moveToList(Collections.singletonList(cache1), listId2);
-            assertEquals(1, app.getAllStoredCachesCount(false, CacheType.ALL, listId2));
+            assertEquals(1, app.getAllStoredCachesCount(CacheType.ALL, listId2));
 
             // remove list (cache1=listId2, cache2=listId2)
             assertTrue(app.removeList(listId1));
@@ -67,7 +67,7 @@ public class cgDataTest extends CGeoTestCase {
 
             // mark stored (cache1=1, cache2=listId2)
             app.markStored(Collections.singletonList(cache2), listId2);
-            assertEquals(2, app.getAllStoredCachesCount(false, CacheType.ALL, listId2));
+            assertEquals(2, app.getAllStoredCachesCount(CacheType.ALL, listId2));
 
             // drop stored (cache1=0, cache2=0)
             app.removeList(listId2);

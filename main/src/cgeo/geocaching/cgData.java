@@ -72,7 +72,7 @@ public class cgData {
      */
     private static int[] cacheColumnIndex;
     private CacheCache cacheCache = new CacheCache();
-    private SQLiteDatabase database = null;
+    private static SQLiteDatabase database = null;
     private static final int dbVersion = 64;
     public static final int customListIdOffset = 10;
     private static final String dbName = "data";
@@ -234,7 +234,6 @@ public class cgData {
             + "longitude double "
             + "); ";
 
-    private HashMap<String, SQLiteStatement> statements = new HashMap<String, SQLiteStatement>();
     private static boolean newlyCreatedDatabase = false;
 
     public synchronized void init() {
@@ -256,16 +255,9 @@ public class cgData {
         }
 
         cacheCache.removeAllFromCache();
-        clearPreparedStatements();
+        PreparedStatements.clearPreparedStatements();
         database.close();
         database = null;
-    }
-
-    private void clearPreparedStatements() {
-        for (SQLiteStatement statement : statements.values()) {
-            statement.close();
-        }
-        statements.clear();
     }
 
     private static File backupFile() {
@@ -876,11 +868,11 @@ public class cgData {
             final SQLiteStatement listId;
             final String value;
             if (StringUtils.isNotBlank(geocode)) {
-                listId = getStatementListIdFromGeocode();
+                listId = PreparedStatements.getListIdOfGeocode();
                 value = geocode;
             }
             else {
-                listId = getStatementListIdFromGuid();
+                listId = PreparedStatements.getListIdOfGuid();
                 value = guid;
             }
             synchronized (listId) {
@@ -903,7 +895,7 @@ public class cgData {
         init();
 
         try {
-            final SQLiteStatement description = getStatementGeocode();
+            final SQLiteStatement description = PreparedStatements.getGeocodeOfGuid();
             synchronized (description) {
                 description.bindString(1, guid);
                 return description.simpleQueryForString();
@@ -924,7 +916,7 @@ public class cgData {
         init();
 
         try {
-            final SQLiteStatement description = getStatementCacheId();
+            final SQLiteStatement description = PreparedStatements.getCacheIdOfGeocode();
             synchronized (description) {
                 description.bindString(1, geocode);
                 return description.simpleQueryForString();
@@ -1058,18 +1050,17 @@ public class cgData {
         return result;
     }
 
-    private void saveAttributesWithoutTransaction(final cgCache cache) {
+    private static void saveAttributesWithoutTransaction(final cgCache cache) {
         String geocode = cache.getGeocode();
         database.delete(dbTableAttributes, "geocode = ?", new String[]{geocode});
 
         if (cache.getAttributes().isEmpty()) {
             return;
         }
-        SQLiteStatement statement = getStatementInsertAttribute();
-        long timeStamp = System.currentTimeMillis();
+        SQLiteStatement statement = PreparedStatements.getInsertAttribute();
+        statement.bindLong(2, System.currentTimeMillis());
         for (String attribute : cache.getAttributes()) {
             statement.bindString(1, geocode);
-            statement.bindLong(2, timeStamp);
             statement.bindString(3, attribute);
 
             statement.executeInsert();
@@ -1088,10 +1079,8 @@ public class cgData {
         database.beginTransaction();
 
         try {
-            ContentValues values = new ContentValues();
-            values.put("date", destination.getDate());
-            putCoords(values, destination.getCoords());
-            database.insert(dbTableSearchDestionationHistory, null, values);
+            SQLiteStatement insertDestination = PreparedStatements.getInsertSearchDestination(destination);
+            insertDestination.executeInsert();
             database.setTransactionSuccessful();
         } catch (Exception e) {
             Log.e("Updating searchedDestinations db failed", e);
@@ -1117,7 +1106,7 @@ public class cgData {
         return result;
     }
 
-    private void saveOriginalWaypointsWithoutTransaction(final cgCache cache) {
+    private static void saveOriginalWaypointsWithoutTransaction(final cgCache cache) {
         String geocode = cache.getGeocode();
         database.delete(dbTableWaypoints, "geocode = ? and type <> ? and own = 0", new String[]{geocode, "own"});
 
@@ -1228,28 +1217,31 @@ public class cgData {
         return database.delete(dbTableWaypoints, "_id = " + id, null) > 0;
     }
 
-    private void saveSpoilersWithoutTransaction(final cgCache cache) {
+    private static void saveSpoilersWithoutTransaction(final cgCache cache) {
         String geocode = cache.getGeocode();
         database.delete(dbTableSpoilers, "geocode = ?", new String[]{geocode});
 
         List<cgImage> spoilers = cache.getSpoilers();
         if (CollectionUtils.isNotEmpty(spoilers)) {
-            ContentValues values = new ContentValues();
-            long timeStamp = System.currentTimeMillis();
+            SQLiteStatement insertSpoiler = PreparedStatements.getInsertSpoiler();
+            insertSpoiler.bindLong(2, System.currentTimeMillis());
             for (cgImage spoiler : spoilers) {
-                values.clear();
-                values.put("geocode", geocode);
-                values.put("updated", timeStamp);
-                values.put("url", spoiler.getUrl());
-                values.put("title", spoiler.getTitle());
-                values.put("description", spoiler.getDescription());
-
-                database.insert(dbTableSpoilers, null, values);
+                insertSpoiler.bindString(1, geocode);
+                insertSpoiler.bindString(3, spoiler.getUrl());
+                insertSpoiler.bindString(4, spoiler.getTitle());
+                final String description = spoiler.getDescription();
+                if (description != null) {
+                    insertSpoiler.bindString(5, description);
+                }
+                else {
+                    insertSpoiler.bindNull(5);
+                }
+                insertSpoiler.executeInsert();
             }
         }
     }
 
-    private void saveLogsWithoutTransaction(final String geocode, final Iterable<LogEntry> logs) {
+    private static void saveLogsWithoutTransaction(final String geocode, final Iterable<LogEntry> logs) {
         // TODO delete logimages referring these logs
         database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
 
@@ -1257,49 +1249,44 @@ public class cgData {
             return;
         }
 
-        SQLiteStatement statement = getStatementInsertLog();
-        long timeStamp = System.currentTimeMillis();
+        SQLiteStatement insertLog = PreparedStatements.getInsertLog();
+        insertLog.bindLong(2, System.currentTimeMillis());
         for (LogEntry log : logs) {
-            statement.bindString(1, geocode);
-            statement.bindLong(2, timeStamp);
-            statement.bindLong(3, log.type.id);
-            statement.bindString(4, log.author);
-            statement.bindString(5, log.log);
-            statement.bindLong(6, log.date);
-            statement.bindLong(7, log.found);
-            statement.bindLong(8, log.friend ? 1 : 0);
-            long logId = statement.executeInsert();
+            insertLog.bindString(1, geocode);
+            insertLog.bindLong(3, log.type.id);
+            insertLog.bindString(4, log.author);
+            insertLog.bindString(5, log.log);
+            insertLog.bindLong(6, log.date);
+            insertLog.bindLong(7, log.found);
+            insertLog.bindLong(8, log.friend ? 1 : 0);
+            long logId = insertLog.executeInsert();
             if (log.hasLogImages()) {
-                ContentValues values = new ContentValues();
+                SQLiteStatement insertImage = PreparedStatements.getInsertLogImage();
+                insertImage.bindLong(1, logId);
                 for (cgImage img : log.getLogImages()) {
-                    values.clear();
-                    values.put("log_id", logId);
-                    values.put("title", img.getTitle());
-                    values.put("url", img.getUrl());
-                    database.insert(dbTableLogImages, null, values);
+                    insertImage.bindString(2, img.getTitle());
+                    insertImage.bindString(3, img.getUrl());
+                    insertImage.executeInsert();
                 }
             }
         }
     }
 
-    private void saveLogCountsWithoutTransaction(final cgCache cache) {
+    private static void saveLogCountsWithoutTransaction(final cgCache cache) {
         String geocode = cache.getGeocode();
         database.delete(dbTableLogCount, "geocode = ?", new String[]{geocode});
 
         Map<LogType, Integer> logCounts = cache.getLogCounts();
         if (MapUtils.isNotEmpty(logCounts)) {
-            ContentValues values = new ContentValues();
-
             Set<Entry<LogType, Integer>> logCountsItems = logCounts.entrySet();
-            long timeStamp = System.currentTimeMillis();
+            SQLiteStatement insertLogCounts = PreparedStatements.getInsertLogCounts();
+            insertLogCounts.bindLong(2, System.currentTimeMillis());
             for (Entry<LogType, Integer> pair : logCountsItems) {
-                values.clear();
-                values.put("geocode", geocode);
-                values.put("updated", timeStamp);
-                values.put("type", pair.getKey().id);
-                values.put("count", pair.getValue());
+                insertLogCounts.bindString(1, geocode);
+                insertLogCounts.bindLong(3, pair.getKey().id);
+                insertLogCounts.bindLong(4, pair.getValue());
 
-                database.insert(dbTableLogCount, null, values);
+                insertLogCounts.executeInsert();
             }
         }
     }
@@ -1318,7 +1305,7 @@ public class cgData {
         return true;
     }
 
-    private void saveInventoryWithoutTransaction(final String geocode, final List<cgTrackable> trackables) {
+    private static void saveInventoryWithoutTransaction(final String geocode, final List<cgTrackable> trackables) {
         if (geocode != null) {
             database.delete(dbTableTrackables, "geocode = ?", new String[]{geocode});
         }
@@ -2074,84 +2061,65 @@ public class cgData {
     }
 
     /**
-     * Number of caches stored. The number is shown on the starting activity of c:geo
+     * Number of caches stored for a given type and/or list
      *
-     * @param detailedOnly
      * @param cacheType
      * @param list
      * @return
      */
-    public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final int list) {
+    public int getAllStoredCachesCount(final CacheType cacheType, final int list) {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
+        if (list < 0) {
+            throw new IllegalArgumentException("list must be >= 0");
+        }
         init();
 
-        String listSql;
-        String listSqlW;
-        if (list == 0) {
-            listSql = " where reason >= 1";
-            listSqlW = " and reason >= 1";
-        } else if (list >= 1) {
-            listSql = " where reason = " + list;
-            listSqlW = " and reason = " + list;
-        } else {
-            return 0;
-        }
-
-        int count = 0;
         try {
-            String sql;
-            if (!detailedOnly) {
-                if (cacheType == CacheType.ALL) {
-                    sql = "select count(_id) from " + dbTableCaches + listSql;
-                } else {
-                    sql = "select count(_id) from " + dbTableCaches + " where type = " + DatabaseUtils.sqlEscapeString(cacheType.id) + listSqlW;
-                }
-            } else {
-                if (cacheType == CacheType.ALL) {
-                    sql = "select count(_id) from " + dbTableCaches + " where detailed = 1" + listSqlW;
-                } else {
-                    sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = " + DatabaseUtils.sqlEscapeString(cacheType.id) + listSqlW;
-                }
+            StringBuilder sql = new StringBuilder("select count(_id) from " + dbTableCaches + " where detailed = 1");
+            if (cacheType != CacheType.ALL) {
+                sql.append(" and type = " + DatabaseUtils.sqlEscapeString(cacheType.id));
             }
-            SQLiteStatement compiledStmnt = database.compileStatement(sql);
-            count = (int) compiledStmnt.simpleQueryForLong();
-            compiledStmnt.close();
+            if (list == 0) {
+                sql.append(" and reason > 0");
+            } else if (list >= 1) {
+                sql.append(" and reason = " + list);
+            }
+
+            String key = "CountCaches_" + cacheType.id + "_" + Integer.toString(list);
+
+            SQLiteStatement compiledStmnt = PreparedStatements.getStatement(key, sql.toString());
+            return (int) compiledStmnt.simpleQueryForLong();
         } catch (Exception e) {
             Log.e("cgData.loadAllStoredCachesCount: " + e.toString());
         }
 
-        return count;
+        return 0;
     }
 
-    public int getAllHistoricCachesCount() {
+    public int getAllHistoryCachesCount() {
         init();
 
-        int count = 0;
-
         try {
-            SQLiteStatement sqlCount = database.compileStatement("select count(_id) from " + dbTableCaches + " where visiteddate > 0");
-            count = (int) sqlCount.simpleQueryForLong();
-            sqlCount.close();
+            return (int) PreparedStatements.getCountHistoryCaches().simpleQueryForLong();
         } catch (Exception e) {
             Log.e("cgData.getAllHistoricCachesCount: " + e.toString());
         }
 
-        return count;
+        return 0;
     }
 
     /**
      * Return a batch of stored geocodes.
      *
-     * @param detailedOnly
      * @param coords
      *            the current coordinates to sort by distance, or null to sort by geocode
      * @param cacheType
      * @param listId
      * @return
      */
-    public Set<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int listId) {
+    public Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId) {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
@@ -2163,10 +2131,7 @@ public class cgData {
 
         specifySql.append("reason ");
         specifySql.append(listId != StoredList.ALL_LIST_ID ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
-
-        if (detailedOnly) {
-            specifySql.append(" and detailed = 1 ");
-        }
+        specifySql.append(" and detailed = 1 ");
 
         if (cacheType != CacheType.ALL) {
             specifySql.append(" and type = ");
@@ -2399,11 +2364,6 @@ public class cgData {
                 removeCaches(geocodes, LoadFlags.REMOVE_ALL);
             }
 
-            final SQLiteStatement countSql = database.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
-            final int count = (int) countSql.simpleQueryForLong();
-            countSql.close();
-            Log.d("Database clean: " + count + " geocaches remaining for listId=0");
-
         } catch (Exception e) {
             Log.w("cgData.clean: " + e.toString());
         }
@@ -2546,35 +2506,6 @@ public class cgData {
         database.delete(dbTableLogsOffline, "geocode = ?", new String[]{geocode});
     }
 
-    private SQLiteStatement getStatementLogCount() {
-        return getStatement("LogCountFromGeocode", "SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
-    }
-
-    private synchronized SQLiteStatement getStatement(final String key, final String query) {
-        SQLiteStatement statement = statements.get(key);
-        if (statement == null) {
-            statement = database.compileStatement(query);
-            statements.put(key, statement);
-        }
-        return statement;
-    }
-
-    private SQLiteStatement getStatementCountStandardList() {
-        return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
-    }
-
-    private SQLiteStatement getStatementCountAllLists() {
-        return getStatement("CountAllLists", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID);
-    }
-
-    private SQLiteStatement getStatementInsertLog() {
-        return getStatement("InsertLog", "INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    }
-
-    private SQLiteStatement getStatementInsertAttribute() {
-        return getStatement("InsertAttribute", "INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)");
-    }
-
     public boolean hasLogOffline(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return false;
@@ -2582,7 +2513,7 @@ public class cgData {
 
         init();
         try {
-            final SQLiteStatement logCount = getStatementLogCount();
+            final SQLiteStatement logCount = PreparedStatements.getLogCountOfGeocode();
             synchronized (logCount) {
                 logCount.bindString(1, geocode);
                 return logCount.simpleQueryForLong() > 0;
@@ -2603,11 +2534,12 @@ public class cgData {
 
         database.beginTransaction();
         try {
-            ContentValues values = new ContentValues();
-            values.put("visiteddate", visitedDate);
+            SQLiteStatement setVisit = PreparedStatements.getUpdateVisitDate();
+            setVisit.bindLong(1, visitedDate);
 
             for (String geocode : geocodes) {
-                database.update(dbTableCaches, values, "geocode = ?", new String[]{geocode});
+                setVisit.bindString(2, geocode);
+                setVisit.execute();
             }
             database.setTransactionSuccessful();
         } finally {
@@ -2619,7 +2551,7 @@ public class cgData {
         init();
 
         List<StoredList> lists = new ArrayList<StoredList>();
-        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementCountStandardList().simpleQueryForLong()));
+        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong()));
 
         try {
             String query = "SELECT l._id as _id, l.title as title, COUNT(c._id) as count" +
@@ -2679,15 +2611,19 @@ public class cgData {
         }
 
         if (id == StoredList.ALL_LIST_ID) {
-            return new StoredList(StoredList.ALL_LIST_ID, res.getString(R.string.list_all_lists), (int) getStatementCountAllLists().simpleQueryForLong());
+            return new StoredList(StoredList.ALL_LIST_ID, res.getString(R.string.list_all_lists), getAllCachesCount());
         }
 
         // fall back to standard list in case of invalid list id
         if (id == StoredList.STANDARD_LIST_ID || id >= customListIdOffset) {
-            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementCountStandardList().simpleQueryForLong());
+            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong());
         }
 
         return null;
+    }
+
+    public static int getAllCachesCount() {
+        return (int) PreparedStatements.getCountAllCaches().simpleQueryForLong();
     }
 
     /**
@@ -2757,22 +2693,22 @@ public class cgData {
      * @return true if the list got deleted, false else
      */
     public boolean removeList(int listId) {
-        boolean status = false;
         if (listId < customListIdOffset) {
-            return status;
+            return false;
         }
 
         init();
 
+        boolean status = false;
         database.beginTransaction();
         try {
             int cnt = database.delete(dbTableLists, "_id = " + (listId - customListIdOffset), null);
 
             if (cnt > 0) {
                 // move caches from deleted list to standard list
-                ContentValues values = new ContentValues();
-                values.put("reason", StoredList.STANDARD_LIST_ID);
-                database.update(dbTableCaches, values, "reason = " + listId, null);
+                SQLiteStatement moveToStandard = PreparedStatements.getMoveToStandardList();
+                moveToStandard.bindLong(1, listId);
+                moveToStandard.execute();
 
                 status = true;
             }
@@ -2794,13 +2730,14 @@ public class cgData {
         }
         init();
 
-        final ContentValues values = new ContentValues();
-        values.put("reason", listId);
+        SQLiteStatement move = PreparedStatements.getMoveToList();
+        move.bindLong(1, listId);
 
         database.beginTransaction();
         try {
             for (cgCache cache : caches) {
-                database.update(dbTableCaches, values, "geocode = ?", new String[]{cache.getGeocode()});
+                move.bindString(2, cache.getGeocode());
+                move.execute();
                 cache.setListId(listId);
             }
             database.setTransactionSuccessful();
@@ -2809,9 +2746,8 @@ public class cgData {
         }
     }
 
-    public synchronized boolean status() {
+    public boolean status() {
         return database != null;
-
     }
 
     public boolean removeSearchedDestination(Destination destination) {
@@ -2836,26 +2772,6 @@ public class cgData {
         return success;
     }
 
-    private SQLiteStatement getStatementDescription() {
-        return getStatement("descriptionFromGeocode", "SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
-    }
-
-    private SQLiteStatement getStatementListIdFromGeocode() {
-        return getStatement("listFromGeocode", "SELECT reason FROM " + dbTableCaches + " WHERE geocode = ?");
-    }
-
-    private SQLiteStatement getStatementListIdFromGuid() {
-        return getStatement("listFromGeocode", "SELECT reason FROM " + dbTableCaches + " WHERE guid = ?");
-    }
-
-    private SQLiteStatement getStatementCacheId() {
-        return getStatement("cacheIdFromGeocode", "SELECT cacheid FROM " + dbTableCaches + " WHERE geocode = ?");
-    }
-
-    private SQLiteStatement getStatementGeocode() {
-        return getStatement("geocodeFromGuid", "SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?");
-    }
-
     public String getCacheDescription(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
@@ -2863,7 +2779,7 @@ public class cgData {
         init();
 
         try {
-            final SQLiteStatement description = getStatementDescription();
+            final SQLiteStatement description = PreparedStatements.getDescriptionOfGeocode();
             synchronized (description) {
                 description.bindString(1, geocode);
                 return description.simpleQueryForString();
@@ -2982,6 +2898,110 @@ public class cgData {
         }
 
         return list.toArray(new String[list.size()]);
+    }
+
+    private static class PreparedStatements {
+
+        private static HashMap<String, SQLiteStatement> statements = new HashMap<String, SQLiteStatement>();
+
+        private PreparedStatements() {
+            // utility class
+        }
+
+        public static SQLiteStatement getMoveToStandardList() {
+            return getStatement("MoveToStandardList", "UPDATE " + dbTableCaches + " SET reason = " + StoredList.STANDARD_LIST_ID + " WHERE reason = ?");
+        }
+
+        public static SQLiteStatement getMoveToList() {
+            return getStatement("MoveToList", "UPDATE " + dbTableCaches + " SET reason = ? WHERE geocode = ?");
+        }
+
+        public static SQLiteStatement getUpdateVisitDate() {
+            return getStatement("UpdateVisitDate", "UPDATE " + dbTableCaches + " SET visiteddate = ? WHERE geocode = ?");
+        }
+
+        public static SQLiteStatement getInsertLogImage() {
+            return getStatement("InsertLogImage", "INSERT INTO " + dbTableLogImages + " (log_id, title, url) VALUES (?, ?, ?)");
+        }
+
+        public static SQLiteStatement getInsertLogCounts() {
+            return getStatement("InsertLogCounts", "INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)");
+        }
+
+        public static SQLiteStatement getInsertSpoiler() {
+            return getStatement("InsertSpoiler", "INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)");
+        }
+
+        public static SQLiteStatement getInsertSearchDestination(Destination destination) {
+            final SQLiteStatement statement = getStatement("InsertSearch", "INSERT INTO " + dbTableSearchDestionationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)");
+            statement.bindLong(1, destination.getDate());
+            final Geopoint coords = destination.getCoords();
+            statement.bindDouble(2, coords.getLatitude());
+            statement.bindDouble(3, coords.getLongitude());
+            return statement;
+        }
+
+        private static void clearPreparedStatements() {
+            for (SQLiteStatement statement : statements.values()) {
+                statement.close();
+            }
+            statements.clear();
+        }
+
+        private static synchronized SQLiteStatement getStatement(final String key, final String query) {
+            SQLiteStatement statement = statements.get(key);
+            if (statement == null) {
+                Log.i("Compiling " + key);
+                statement = database.compileStatement(query);
+                statements.put(key, statement);
+            }
+            return statement;
+        }
+
+        public static SQLiteStatement getCountHistoryCaches() {
+            return getStatement("HistoryCount", "select count(_id) from " + dbTableCaches + " where visiteddate > 0");
+        }
+
+        private static SQLiteStatement getLogCountOfGeocode() {
+            return getStatement("LogCountFromGeocode", "SELECT count(_id) FROM " + cgData.dbTableLogsOffline + " WHERE geocode = ?");
+        }
+
+        private static SQLiteStatement getCountCachesOnStandardList() {
+            return getStatement("CountStandardList", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
+        }
+
+        private static SQLiteStatement getCountAllCaches() {
+            return getStatement("CountAllLists", "SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID);
+        }
+
+        private static SQLiteStatement getInsertLog() {
+            return getStatement("InsertLog", "INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        }
+
+        private static SQLiteStatement getInsertAttribute() {
+            return getStatement("InsertAttribute", "INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)");
+        }
+
+        private static SQLiteStatement getDescriptionOfGeocode() {
+            return getStatement("descriptionFromGeocode", "SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
+        }
+
+        private static SQLiteStatement getListIdOfGeocode() {
+            return getStatement("listFromGeocode", "SELECT reason FROM " + dbTableCaches + " WHERE geocode = ?");
+        }
+
+        private static SQLiteStatement getListIdOfGuid() {
+            return getStatement("listFromGeocode", "SELECT reason FROM " + dbTableCaches + " WHERE guid = ?");
+        }
+
+        private static SQLiteStatement getCacheIdOfGeocode() {
+            return getStatement("cacheIdFromGeocode", "SELECT cacheid FROM " + dbTableCaches + " WHERE geocode = ?");
+        }
+
+        private static SQLiteStatement getGeocodeOfGuid() {
+            return getStatement("geocodeFromGuid", "SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?");
+        }
+
     }
 
 }

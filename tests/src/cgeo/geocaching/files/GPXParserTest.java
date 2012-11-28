@@ -305,7 +305,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        SearchResult search = cgeoapplication.getInstance().getBatchOfStoredCaches(false, null, CacheType.ALL, listId);
+        SearchResult search = cgeoapplication.getInstance().getBatchOfStoredCaches(null, CacheType.ALL, listId);
         assertNotNull(search);
         cgeoapplication.getInstance().removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
         cgeoapplication.getInstance().removeList(listId);

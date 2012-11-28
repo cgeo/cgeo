@@ -642,7 +642,7 @@ public class cgeocaches extends AbstractListActivity {
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-            SearchResult newSearch = cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, Settings.getCacheType(), listId);
+            SearchResult newSearch = cgeoapplication.getInstance().getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
             if (newSearch != null && newSearch.getTotal() != search.getTotal()) {
                 refreshCurrentList();
             }
@@ -1283,7 +1283,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, Settings.getCacheType(), listId);
+            search = cgeoapplication.getInstance().getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
             replaceCacheListFromSearch();
             loadCachesHandler.sendMessage(Message.obtain());
         }

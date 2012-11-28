@@ -772,7 +772,7 @@ public class cgeo extends AbstractActivity {
                 }
             }
 
-            countBubbleCnt = app.getAllStoredCachesCount(true, CacheType.ALL);
+            countBubbleCnt = cgeoapplication.getAllCachesCount();
 
             countBubbleHandler.sendEmptyMessage(0);
         }
