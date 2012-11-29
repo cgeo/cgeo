@@ -294,12 +294,12 @@ public class cgCache implements ICache, IWaypoint {
             attributes.set(other.attributes);
         }
         if (waypoints.isEmpty()) {
-            waypoints.set(other.waypoints);
+            this.setWaypoints(other.waypoints.asList(), false);
         }
         else {
             ArrayList<cgWaypoint> newPoints = new ArrayList<cgWaypoint>(waypoints.asList());
-            cgWaypoint.mergeWayPoints(newPoints, other.getWaypoints(), false);
-            waypoints.set(newPoints);
+            cgWaypoint.mergeWayPoints(newPoints, other.waypoints.asList(), false);
+            this.setWaypoints(newPoints, false);
         }
         if (spoilers == null) {
             spoilers = other.spoilers;
