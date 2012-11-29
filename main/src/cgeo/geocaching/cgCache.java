@@ -327,6 +327,9 @@ public class cgCache implements ICache, IWaypoint {
         if (zoomlevel == -1) {
             zoomlevel = other.zoomlevel;
         }
+        if (!finalDefined) {
+            finalDefined = other.finalDefined;
+        }
 
         boolean isEqual = isEqualTo(other);
 
