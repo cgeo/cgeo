@@ -30,6 +30,6 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
     }
 
     public static void testSettings() {
-        assertEquals(Settings.getMemberStatus(), GCConstants.MEMBER_STATUS_PM);
+        assertEquals(GCConstants.MEMBER_STATUS_PM, Settings.getMemberStatus());
     }
 }
