@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Log beküldése &amp; nincs értékelés</string>
   <string name="log_post_not_possible">Log oldal betöltése…</string> 
   <string name="log_add">Hozzáadás</string>
-  <string name="log_date">Dátum</string>
-  <string name="log_time">Idő</string>
-  <string name="log_date_time">Dátum &amp; idő</string>
   <string name="log_rating">Értékelés</string>
   <string name="log_no_rating">Nincs értékelés</string>
   <string name="log_stars_1">1 csillag</string>
@@ -404,7 +401,6 @@
   <string name="init_offline_wp">Az útpontok statikus térképeinek mentése offline használathoz</string> 
   <string name="init_save_log_img">Logokban található képek mentése</string>
   <string name="init_units">Mérföld/láb használata\n(angolszász mértékegységek)</string>
-  <string name="init_nav">Google Navigáció használata</string>
   <string name="init_log_offline">Offline logolás használata mindig (ne mutassa az online log ablakot logoláskor, ne küldje el a logot online)</string>
   <string name="init_livelist">Mutassa a ládák irányát a listában</string>
   <string name="init_altitude">Magasság korrekció</string>
@@ -641,7 +637,6 @@
   <string name="gpx_import_loading_caches">Geoládák betöltése .gpx fájlból</string>
   <string name="gpx_import_loading_waypoints">Útpontfájl betöltése</string>
   <string name="gpx_import_store_static_maps">Statikus térképek mentése</string>
-  <string name="gpx_import_storing">Geoládák adatbázisba írása</string> 
   <string name="gpx_import_caches_imported">ládák importálva</string>
   <string name="gpx_import_static_maps_skipped">A statikus térképek letöltése megszakítva.</string>
   <string name="gpx_import_title_static_maps">Statikus térképek mentése</string>

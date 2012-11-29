@@ -72,9 +72,6 @@
   <string name="log_post_rate">Odeslat log a hlasovat</string>
   <string name="log_post_no_rate">Odeslat log a nehlasovat</string>
   <string name="log_add">Přidat</string>
-  <string name="log_date">Datum</string>
-  <string name="log_time">Čas</string>
-  <string name="log_date_time">Datum a čas</string>
   <string name="log_rating">Hlasovat</string>
   <string name="log_no_rating">Nehlasovat</string>
   <string name="log_stars_1">1 hvězdička</string>
@@ -347,7 +344,6 @@
   <string name="init_offline_wp">Ukládat statické mapy k waypointům pro offline použití</string>
   <string name="init_save_log_img">Ulož obrázky z logů</string>
   <string name="init_units">Používat imperiální jednotky vzdálenosti</string>
-  <string name="init_nav">Používat Google Navigaci</string>
   <string name="init_log_offline">Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat log na server)</string>
   <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
   <string name="init_altitude">Výšková korekce</string>
@@ -502,7 +498,6 @@
   <string name="gpx_import_loading_caches">nahrávání keší z .gpx souboru</string>
   <string name="gpx_import_loading_waypoints">Načítám soubor s waypointy</string>
   <string name="gpx_import_store_static_maps">Ukládám statické mapy</string>
-  <string name="gpx_import_storing">Zapisuji keše do databáze</string>
   <string name="gpx_import_caches_imported">keše importovány</string>
   <string name="gpx_import_static_maps_skipped">Stažení statických map zrušeno</string>
   <string name="gpx_import_title_static_maps">Ulož statické mapy</string>

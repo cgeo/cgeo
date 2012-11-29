@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Invia log senza voto</string>
   <string name="log_post_not_possible">Connessione…</string>
   <string name="log_add">Aggiungi</string>
-  <string name="log_date">Data</string>
-  <string name="log_time">Ota</string>
-  <string name="log_date_time">Data e ora</string>
   <string name="log_rating">Voto</string>
   <string name="log_no_rating">Nessun voto</string>
   <string name="log_stars_1">1 stella</string>
@@ -398,7 +395,6 @@
   <string name="init_offline_wp">Salva i waypoints delle mappe per uso offline</string>
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
   <string name="init_units">Usa miglia/piedi</string>
-  <string name="init_nav">Usa Google Navigation</string>
   <string name="init_log_offline">Quando salvi log, fallo sempre offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
   <string name="init_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
   <string name="init_altitude">Correzione di altitudine</string>
@@ -616,7 +612,6 @@
   <string name="gpx_import_loading_caches">Caricamento caches da file GPX</string>
   <string name="gpx_import_loading_waypoints">Caricamento file waypoints</string>
   <string name="gpx_import_store_static_maps">Salvataggio mappe statiche</string>
-  <string name="gpx_import_storing">Salvataggio dei cache nel database</string>
   <string name="gpx_import_caches_imported">cache importati</string>
   <string name="gpx_import_static_maps_skipped">Download mappe statiche interrotto</string>
   <string name="gpx_import_title_static_maps">Salva mappe statiche</string>

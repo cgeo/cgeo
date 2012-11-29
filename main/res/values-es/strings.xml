@@ -81,9 +81,6 @@
   <string name="log_post_rate">Enviar registro y puntuación</string>
   <string name="log_post_no_rate">Enviar registro sin puntuar</string>
   <string name="log_add">Añadir</string>
-  <string name="log_date">Fecha</string>
-  <string name="log_time">Hora</string>
-  <string name="log_date_time">Fecha y hora</string>
   <string name="log_rating">Puntuación</string>
   <string name="log_no_rating">Sin puntuación</string>
   <string name="log_stars_1">1 estrella</string>
@@ -351,7 +348,6 @@
   <string name="init_offline">Guardar mapas para usar sin conexión</string>
   <string name="init_save_log_img">Guardar imágenes de los registros</string>
   <string name="init_units">Usar millas/pies (unidades imperiales)</string>
-  <string name="init_nav">Usar Google Navigation</string>
   <string name="init_autoload">Autocargar descripción larga</string>
   <string name="init_livelist">Mostrar dirección a los escondites en su listado</string>
   <string name="init_altitude">Corrección de altitud</string>

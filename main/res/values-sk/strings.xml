@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Odoslať log a nehlasovať</string>
   <string name="log_post_not_possible">Načítanie stránky s logmi…</string>
   <string name="log_add">Pridať</string>
-  <string name="log_date">Dátum</string>
-  <string name="log_time">Čas</string>
-  <string name="log_date_time">Dátum a čas</string>
   <string name="log_rating">Hlasovať</string>
   <string name="log_no_rating">Nehlasovať</string>
   <string name="log_stars_1">1 hviezdička</string>
@@ -404,7 +401,6 @@
   <string name="init_offline_wp">Uložiť statické mapy bodov strás pre použitie offline</string>
   <string name="init_save_log_img">Uložiť obrázky zo záznamov</string>
   <string name="init_units">Používať imperiálne jednotky vzdialenosti</string>
-  <string name="init_nav">Používať Navigáciu Google</string>
   <string name="init_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
   <string name="init_livelist">Zobrazovať smer v zozname skrýš</string>
   <string name="init_altitude">Oprava výšky</string>
@@ -642,7 +638,6 @@
   <string name="gpx_import_loading_caches">Načítanie skrýš z .gpx súboru\nNačítané:</string>
   <string name="gpx_import_loading_waypoints">Načítanie bodov trasy z .gpx súboru\nNačítané:</string>
   <string name="gpx_import_store_static_maps">Ukladanie statických máp</string>
-  <string name="gpx_import_storing">Zapisovanie skrýš do databázy\nZapísané:</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
   <string name="gpx_import_static_maps_skipped">Preberanie statických máp zrušené</string>
   <string name="gpx_import_title_static_maps">Uloženie statických máp</string>

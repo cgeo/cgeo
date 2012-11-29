@@ -81,9 +81,6 @@
   <string name="log_post_rate">Wpisz do dziennika &amp; oceń</string>
   <string name="log_post_no_rate">Wpisz do dziennika &amp; nie oceniaj</string>
   <string name="log_add">Dodaj</string>
-  <string name="log_date">Data</string>
-  <string name="log_time">Godzina</string>
-  <string name="log_date_time">Data &amp; godzina</string>
   <string name="log_rating">Ocena</string>
   <string name="log_no_rating">Bez oceny</string>
   <string name="log_stars_1">1 gwiazdka</string>
@@ -347,7 +344,6 @@
   <string name="init_offline">Zapisuj mampki do użytku offline</string>
   <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
   <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
-  <string name="init_nav">Używaj Google Navigation</string>
   <string name="init_autoload">Długie opisy automatycznie ładować</string>
   <string name="init_log_offline">Podczas logowania, zawsze logój offline (nie pokazój ekranu logowania online, nie wysyłaj logu online)</string>
   <string name="init_livelist">Pokazuj na liście kierunek do skrzynek</string>

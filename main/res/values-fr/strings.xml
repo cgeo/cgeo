@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Envoyer &amp; ne pas noter</string>
   <string name="log_post_not_possible">Chargement de la page…</string>
   <string name="log_add">Ajouter</string>
-  <string name="log_date">Date</string>
-  <string name="log_time">Heure</string>
-  <string name="log_date_time">Date &amp; heure</string>
   <string name="log_rating">Note</string>
   <string name="log_no_rating">Pas de note</string>
   <string name="log_stars_1">1 étoile</string>
@@ -399,7 +396,6 @@
   <string name="init_offline_wp">Enregistrer les cartes autour des points intermédiaires pour une utilisation hors ligne</string>
   <string name="init_save_log_img">Sauver les images des visites</string>
   <string name="init_units">Utiliser des unités de distance impériales</string>
-  <string name="init_nav">Utiliser Google Navigation</string>
   <string name="init_log_offline">Toujours utiliser le mode hors-ligne, même si connecté.</string>
   <string name="init_livelist">Afficher la direction des caches dans les listes</string>
   <string name="init_altitude">Correction de l\'altitude</string>
@@ -608,7 +604,6 @@
   <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx</string>
   <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx</string>
   <string name="gpx_import_store_static_maps">Écriture des cartes statiques</string>
-  <string name="gpx_import_storing">Écriture des caches dans la base de données\nEnregistrés :</string>
   <string name="gpx_import_caches_imported">caches importées</string>
   <string name="gpx_import_static_maps_skipped">Chargement des cartes statiques interrompu</string>
   <string name="gpx_import_title_static_maps">Enregistrement des cartes statiques</string>

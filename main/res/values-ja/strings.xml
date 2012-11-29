@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">ログの投稿(未評価)</string>
   <string name="log_post_not_possible">ログのページをロード中…</string>
   <string name="log_add">挿入</string>
-  <string name="log_date">日付</string>
-  <string name="log_time">時間</string>
-  <string name="log_date_time">日付と時間</string>
   <string name="log_rating">評価</string>
   <string name="log_no_rating">未評価</string>
   <string name="log_stars_1">星1つ</string>
@@ -402,7 +399,6 @@
   <string name="init_offline_wp">オフライン用にウェイポイントの地図を保存する</string>
   <string name="init_save_log_img">オフライン用にログの添付画像を保存する</string>
   <string name="init_units">距離をマイル/フィートで表示\n(イギリス帝国単位)</string>
-  <string name="init_nav">Googleマップナビを使う</string>
   <string name="init_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオフライン専用にし、オンラインでの投稿をしない。このチェックを外してもオフライン用に保存することは可能です)</string>
   <string name="init_livelist">キャッシュの一覧で方向をアイコン表示する</string>
   <string name="init_altitude">標高の修正</string>
@@ -633,7 +629,6 @@
   <string name="gpx_import_loading_caches">GPXファイルからキャッシュをロード中</string>
   <string name="gpx_import_loading_waypoints">ウェイポイントファイルをロード中</string>
   <string name="gpx_import_store_static_maps">オフライン地図を保存中</string>
-  <string name="gpx_import_storing">キャッシュ情報をデータベースに書き込み中</string>
   <string name="gpx_import_caches_imported">個のキャッシュをインポートしました</string>
   <string name="gpx_import_static_maps_skipped">オフライン用地図のダウンロードを中止しました</string>
   <string name="gpx_import_title_static_maps">オフライン用に地図を保存</string>

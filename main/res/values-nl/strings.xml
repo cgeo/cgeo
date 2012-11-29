@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Post log zonder beoordeling</string>
   <string name="log_post_not_possible">Laden Log Pagina…</string>
   <string name="log_add">Toevoegen</string>
-  <string name="log_date">Datum</string>
-  <string name="log_time">Tijd</string>
-  <string name="log_date_time">Datum &amp; tijd</string>
   <string name="log_rating">Beoordeling</string>
   <string name="log_no_rating">Geen beoordeling</string>
   <string name="log_stars_1">1 ster</string>
@@ -388,7 +385,6 @@
   <string name="init_offline_wp">Statische kaarten van waipoints opslaan voor gebruik zonder verbinding</string>
   <string name="init_save_log_img">Sla afbeeldingen van logs op</string>
   <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
-  <string name="init_nav">Gebruik Google Navigatie</string>
   <string name="init_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
   <string name="init_livelist">Toon afstand tot cache in lijst</string>
   <string name="init_altitude">Hoogte correctie</string>
@@ -581,7 +577,6 @@
   <string name="gpx_import_loading_caches">Caches laden van .gpx bestand</string>
   <string name="gpx_import_loading_waypoints">Waypoints laden van .gpx bestand</string>
   <string name="gpx_import_store_static_maps">Opslaan statische kaarten</string>
-  <string name="gpx_import_storing">Opslaan caches in de database</string>
   <string name="gpx_import_caches_imported">Caches geïmporteerd</string>
   <string name="gpx_import_static_maps_skipped">Download van statische kaarten afgebroken</string>
   <string name="gpx_import_title_static_maps">Sla statische kaarten op</string>

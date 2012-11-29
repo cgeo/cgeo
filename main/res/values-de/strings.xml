@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo Kompass</string>
 
@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Loggen ohne Bewertung</string>
   <string name="log_post_not_possible">Lade Log-Seite…</string>
   <string name="log_add">Hinzufügen</string>
-  <string name="log_date">Datum</string>
-  <string name="log_time">Uhrzeit</string>
-  <string name="log_date_time">Datum &amp; Uhrzeit</string>
   <string name="log_rating">Bewertung</string>
   <string name="log_no_rating">Keine Bewertung</string>
   <string name="log_stars_1">1 Stern</string>
@@ -403,7 +400,6 @@
   <string name="init_offline_wp">Statische Karten zu Wegpunkten für Offline-Verwendung speichern</string>
   <string name="init_save_log_img">Logbilder abspeichern</string>
   <string name="init_units">Imperiale Einheiten (Meilen/Fuß)</string>
-  <string name="init_nav">Google Navigation verwenden</string>
   <string name="init_log_offline">Offline loggen (Dialog für Online-Log nicht anzeigen)</string>
   <string name="init_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
   <string name="init_altitude">Höhenkorrektur</string>
@@ -636,7 +632,6 @@
   <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei</string>
   <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
   <string name="gpx_import_store_static_maps">Schreibe statische Karten</string>
-  <string name="gpx_import_storing">Schreibe Caches in Datenbank</string>
   <string name="gpx_import_caches_imported">Caches importiert</string>
   <string name="gpx_import_static_maps_skipped">Download statischer Karten abgebrochen</string>
   <string name="gpx_import_title_static_maps">Speichern statischer Karten</string>
@@ -998,11 +993,11 @@
   <string name="about_auth_2">Ein Klick auf \"Starte Autorisierung\" öffnet eine Twitter-Seite in einem Browserfenster. Durch die Anmeldung und die Bestätigung wird <b>c:geo</b> ermöglicht, auf den persönlichen Twitter-Account zuzugreifen. Wird dies bestätigt, nennt Twitter eine numerische PIN, diese muss kopiert und in <b>c:geo</b> eingefügt werden. Das ist alles.</string>
 
   <!-- status -->
-  <string name="status_new_release">Neuer Release verfügbar.\nKlicken zum Installieren.</string>
-  <string name="status_new_nightly">Neuer Nightly Build verfügbar.\nKlicken zum Installieren.</string>
-  <string name="status_new_rc">Neuer Release Candidate verfügbar.\nKlicken zum Installieren.</string>
-  <string name="status_geocaching_change">Änderungen auf geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
-  <string name="status_geocaching_livemap">Änderungen auf geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">Neuer Release verfügbar.\nKlicken zum Installieren.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nKlicken zum Installieren.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nKlicken zum Installieren.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
 
   <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
   <plurals name="days_ago">

@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Publicar registo &amp; Não votar</string>
   <string name="log_post_not_possible">A carregar página de registo…</string>
   <string name="log_add">Adicionar</string>
-  <string name="log_date">Data</string>
-  <string name="log_time">Hora</string>
-  <string name="log_date_time">Data &amp; Hora</string>
   <string name="log_rating">Pontuação</string>
   <string name="log_no_rating">Não votar</string>
   <string name="log_stars_1">1 estrela</string>
@@ -404,7 +401,6 @@
   <string name="init_offline_wp">Armazenar waypoints de mapas estáticos para utilização offline</string>
   <string name="init_save_log_img">Guardar imagens dos registos</string>
   <string name="init_units">Utilizar distância nas unidades do sistema imperial</string>
-  <string name="init_nav">Utilizar Google Navigation</string>
   <string name="init_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
   <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
   <string name="init_altitude">Correcção de altitude</string>
@@ -643,7 +639,6 @@
   <string name="gpx_import_loading_caches">A carregar as caches do ficheiro .gpx</string>
   <string name="gpx_import_loading_waypoints">A carregar o ficheiro dos waypoints</string>
   <string name="gpx_import_store_static_maps">A gravar mapas estáticos</string>
-  <string name="gpx_import_storing">A gravar as caches na base de dados</string>
   <string name="gpx_import_caches_imported">caches importadas</string>
   <string name="gpx_import_static_maps_skipped">Download of static maps aborted</string>
   <string name="gpx_import_title_static_maps">Gravar mapas estáticos</string>

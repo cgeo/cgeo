@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Posta logg utan betyg</string>
   <string name="log_post_not_possible">Laddar loggningssida…</string>
   <string name="log_add">Lägg till</string>
-  <string name="log_date">Datum</string>
-  <string name="log_time">Tid</string>
-  <string name="log_date_time">Datum &amp; tid</string>
   <string name="log_rating">Betyg</string>
   <string name="log_no_rating">Inget betyg</string>
   <string name="log_stars_1">1 stjärna</string>
@@ -403,7 +400,6 @@
   <string name="init_offline_wp">Spara kartor för extra punkter för användning offline</string>
   <string name="init_save_log_img">Spara bilder från loggar</string>
   <string name="init_units">Använd amerikanska enheter för avstånd</string>
-  <string name="init_nav">Använd Google Navigering</string>
   <string name="init_log_offline">Vid loggning: spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
   <string name="init_livelist">Visa riktning till cacher i listan</string>
   <string name="init_altitude">Höjd justering</string>
@@ -638,7 +634,6 @@
   <string name="gpx_import_loading_caches">Läser in cacher från .gpx filen</string>
   <string name="gpx_import_loading_waypoints">Läser in punkter från .gpx file</string>
   <string name="gpx_import_store_static_maps">Sparar kartor</string>
-  <string name="gpx_import_storing">Skriver cacher till databasen</string>
   <string name="gpx_import_caches_imported">cacher importerade</string>
   <string name="gpx_import_static_maps_skipped">Hämtningen av kartor avbröts</string>
   <string name="gpx_import_title_static_maps">Sparar kartor</string>

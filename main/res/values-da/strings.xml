@@ -150,7 +150,6 @@
   <string name="init_disabled">Udelad deaktiverede cacher</string>
   <string name="init_offline">Gem kort til offlinebrug</string>
   <string name="init_units">Benyt britiske afstandsmål</string>
-  <string name="init_nav">Benyt Google Navigation</string>
   <string name="init_autoload">Auto-indlæs lang cachebeskrivelse</string>
   <string name="init_livelist">Vis retning til cacher i lister</string>
   <string name="init_cleared">c:geo slettede login-informationer.</string>

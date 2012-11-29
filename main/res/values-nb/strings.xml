@@ -68,9 +68,6 @@
   <string name="log_post_rate">Last opp loggen og rangér</string>
   <string name="log_post_no_rate">Last opp loggen uten å rangere</string>
   <string name="log_add">Legg til</string>
-  <string name="log_date">Dato</string>
-  <string name="log_time">Klokkelsett</string>
-  <string name="log_date_time">Dato og klokkeslett</string>
   <string name="log_rating">Rangering</string>
   <string name="log_no_rating">Ingen rangering</string>
   <string name="log_stars_1">1 stjerne</string>
@@ -230,7 +227,6 @@
   <string name="init_disabled">Ekskluder deaktiverte cacher</string>
   <string name="init_offline">Lagre kartet for offline-bruk (små deler)</string>
   <string name="init_units">Bruk imperialistiske måleenheter</string>
-  <string name="init_nav">Bruk Google Navigation</string>
   <string name="init_autoload">Last full beskrivelse automatisk</string>
   <string name="init_livelist">Vis cachers retning i listen</string>
   <string name="init_clear">Ikke husk meg</string>

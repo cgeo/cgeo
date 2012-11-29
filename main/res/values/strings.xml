@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo compass</string>
 
@@ -87,9 +87,6 @@
   <string name="log_post_no_rate">Submit Log &amp; Do not Rate</string>
   <string name="log_post_not_possible">Loading Log Page…</string>
   <string name="log_add">Add</string>
-  <string name="log_date">Date</string>
-  <string name="log_time">Time</string>
-  <string name="log_date_time">Date &amp; Time</string>
   <string name="log_rating">Rating</string>
   <string name="log_no_rating">No rating</string>
   <string name="log_stars_1">1 Star</string>
@@ -404,7 +401,6 @@
   <string name="init_offline_wp">Store waypoints static maps for offline use</string>
   <string name="init_save_log_img">Save Images from Logs</string>
   <string name="init_units">Use Imperial Units instead of Metric Units</string>
-  <string name="init_nav">Use Google Navigation</string>
   <string name="init_log_offline">Enable Offline Logging\n(Don\'t show online Log screen when logging, don\'t send the Log online)</string>
   <string name="init_livelist">Show Direction to caches in the list</string>
   <string name="init_altitude">Altitude Correction</string>
@@ -644,7 +640,6 @@
   <string name="gpx_import_loading_caches">Loading caches from .gpx file</string>
   <string name="gpx_import_loading_waypoints">Loading waypoints file</string>
   <string name="gpx_import_store_static_maps">Storing static maps</string>
-  <string name="gpx_import_storing">Writing caches to database</string>
   <string name="gpx_import_caches_imported">caches imported</string>
   <string name="gpx_import_static_maps_skipped">Download of static maps aborted</string>
   <string name="gpx_import_title_static_maps">Store static maps</string>
@@ -1005,12 +1000,12 @@
   <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
   <string name="about_auth_2">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
 
-  <!-- status -->
-  <string name="status_new_release">New release available.\nClick to install.</string>
-  <string name="status_new_nightly">New nightly build available.\nClick to install.</string>
-  <string name="status_new_rc">New release candidate available.\nClick to install.</string>
-  <string name="status_geocaching_change">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
-  <string name="status_geocaching_livemap">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
+  <!-- status (used via string based resource loading) -->
+  <string name="status_new_release" tools:ignore="UnusedResources">New release available.\nClick to install.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">New nightly build available.\nClick to install.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">New release candidate available.\nClick to install.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
 
   <string name="clipboard_copy_ok">Copied to clipboard</string>
   <plurals name="days_ago">
