@@ -307,8 +307,6 @@
   <string name="caches_filter_type">type</string>
   <string name="caches_filter_track">met trackables</string>
   <string name="caches_filter_clear">maak filters leeg</string>
-  <string name="caches_filter_size_title">Kies grootte</string>
-  <string name="caches_filter_type_title">Kies type</string>
   <string name="caches_filter_modified">Met aangepaste coordinaten</string>
   <string name="caches_exporting_fieldnote">Exporteer als Field Notes…</string>
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>

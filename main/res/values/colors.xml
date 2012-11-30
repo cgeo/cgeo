@@ -9,8 +9,6 @@
     <color name="background_light_notice">#FFDFDFDF</color>
     <color name="background_dark_transparent">#44000000</color>
     <color name="background_light_transparent">#44FFFFFF</color>
-    <color name="owncache_background_dark">#FF222222</color>
-    <color name="owncache_background_light">#FFDDDDDD</color>
     <color name="separator_dark">#44FFFFFF</color>
     <color name="separator_light">#44000000</color>
     <color name="text_icon">#FFFFFFFF</color>

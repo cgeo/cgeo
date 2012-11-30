@@ -319,8 +319,6 @@
   <string name="caches_filter_type">típu</string>
   <string name="caches_filter_track">nyomonkövethető tárgyak</string>
   <string name="caches_filter_clear">szűrők törlése</string>
-  <string name="caches_filter_size_title">Válassz méretet</string>
-  <string name="caches_filter_type_title">Válassz típust</string>
   <string name="caches_filter_modified">Módosított koordinátákkal</string> 
   <string name="caches_exporting_fieldnote">Exportálás terepjegyzetként…</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>

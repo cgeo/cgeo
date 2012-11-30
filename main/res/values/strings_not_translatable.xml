@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- map sources -->
-  <string-array name="map_sources">
-    <item>@string/map_source_google_map</item>
-    <item>@string/map_source_google_satellite</item>
-    <item>@string/map_source_osm_mapnik</item>
-    <item>@string/map_source_osm_cyclemap</item>
-    <item>@string/map_source_osm_offline</item>
-  </string-array>
-
   <string-array name="waypoint_coordinate_formats" translatable="false">
     <item>@string/waypoint_coordinate_formats_plain</item>
     <item>DDD.DDDDD°</item>

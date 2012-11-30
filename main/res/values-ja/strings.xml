@@ -317,8 +317,6 @@
   <string name="caches_filter_type">タイプ</string>
   <string name="caches_filter_track">トラッカブルアイテムあり</string>
   <string name="caches_filter_clear">フィルターをクリア</string>
-  <string name="caches_filter_size_title">サイズを選択</string>
-  <string name="caches_filter_type_title">タイプを選択</string>
   <string name="caches_filter_modified">座標の更新あり</string>
   <string name="caches_exporting_fieldnote">フィールドノートとしてエクスポート中…</string>
   <string name="caches_removing_from_history">履歴から削除中…</string>
@@ -449,14 +447,6 @@
   <string name="init_dbmove_success">データベースを移動しました。</string>
   <string name="init_dbmove_failed">データベースの移動に失敗しました</string>
 
-  <!-- map sources -->
-  <string-array name="map_sources">
-    <item>@string/map_source_google_map</item>
-    <item>@string/map_source_google_satellite</item>
-    <item>@string/map_source_osm_mapnik</item>
-    <item>@string/map_source_osm_cyclemap</item>
-    <item>@string/map_source_osm_offline</item>
-  </string-array>
   <string name="map_source_google_map">Googleマップ:地図</string>
   <string name="map_source_google_satellite">Googleマップ:航空写真</string>
   <string name="map_source_osm_mapnik">OpenStreetMap</string>

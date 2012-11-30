@@ -318,8 +318,6 @@
   <string name="caches_filter_type">Typ</string>
   <string name="caches_filter_track">Med trackables</string>
   <string name="caches_filter_clear">Rensa filter</string>
-  <string name="caches_filter_size_title">Välj storlek</string>
-  <string name="caches_filter_type_title">Välj typ</string>
   <string name="caches_filter_modified">Med tillagda koordinater</string>
   <string name="caches_exporting_fieldnote">Exporterar som Field Notes…</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>

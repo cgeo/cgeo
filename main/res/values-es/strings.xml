@@ -284,8 +284,6 @@
   <string name="caches_filter_type">tipo</string>
   <string name="caches_filter_track">con rastreables</string>
   <string name="caches_filter_clear">limpiar filtros</string>
-  <string name="caches_filter_size_title">Indica tamaño</string>
-  <string name="caches_filter_type_title">Indica tipo</string>
   <string name="caches_exporting_fieldnote">Exportando como Notas de campo…</string>
   <string name="caches_removing_from_history">Borrando del historial…</string>
 

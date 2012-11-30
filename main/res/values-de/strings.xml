@@ -319,8 +319,6 @@
   <string name="caches_filter_type">Typ</string>
   <string name="caches_filter_track">Mit Trackables</string>
   <string name="caches_filter_clear">Filter zurücksetzen</string>
-  <string name="caches_filter_size_title">Größe wählen</string>
-  <string name="caches_filter_type_title">Typ wählen</string>
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
   <string name="caches_exporting_fieldnote">Exportiere als Field-Notes…</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>

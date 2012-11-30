@@ -316,8 +316,6 @@
   <string name="caches_filter_type">Tipo</string>
   <string name="caches_filter_track">Con oggetti trackables</string>
   <string name="caches_filter_clear">Rimuovi filtri</string>
-  <string name="caches_filter_size_title">Scegli dimensione</string>
-  <string name="caches_filter_type_title">Scegli tipo</string>
   <string name="caches_filter_modified">Con coordinate modificate</string>
   <string name="caches_exporting_fieldnote">Esportazione Field Notes…</string>
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>

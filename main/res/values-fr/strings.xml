@@ -315,8 +315,6 @@
   <string name="caches_filter_type">type</string>
   <string name="caches_filter_track">avec des trackables</string>
   <string name="caches_filter_clear">effacer les filtres</string>
-  <string name="caches_filter_size_title">Choisir la taille</string>
-  <string name="caches_filter_type_title">Choisir le type</string>
   <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
   <string name="caches_exporting_fieldnote">Exporter commme notes de terrain…</string>
   <string name="caches_removing_from_history">Effacer de l\'historique…</string>

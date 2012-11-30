@@ -73,7 +73,7 @@ public final class FilterUserInterface {
 
     public void selectFilter(final RunnableWithArgument<IFilter> runAfterwards) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.caches_filter);
+        builder.setTitle(R.string.caches_filter_title);
 
         final ArrayAdapter<FactoryEntry> adapter = new ArrayAdapter<FactoryEntry>(activity, android.R.layout.select_dialog_item, registry);
 

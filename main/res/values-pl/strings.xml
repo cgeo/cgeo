@@ -280,8 +280,6 @@
   <string name="caches_filter_type">typu</string>
   <string name="caches_filter_track">z przedmiotmi podróżnymi</string>
   <string name="caches_filter_clear">wykasój filter</string>
-  <string name="caches_filter_size_title">Wybierz wielkość</string>
-  <string name="caches_filter_type_title">Wybierz typ</string>
   <string name="caches_exporting_fieldnote">Eksportuj jako notatki terenowe…</string>
   <string name="caches_removing_from_history">Kasuję z historii…</string>
 

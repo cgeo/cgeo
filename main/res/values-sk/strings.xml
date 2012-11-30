@@ -319,8 +319,6 @@
   <string name="caches_filter_type">podľa typu</string>
   <string name="caches_filter_track">s trasovateľnými predmetmi</string>
   <string name="caches_filter_clear">vymazať filtre</string>
-  <string name="caches_filter_size_title">Výber veľkosti</string>
-  <string name="caches_filter_type_title">Výber typu</string>
   <string name="caches_filter_modified">S upravenými súradnicami</string>
   <string name="caches_exporting_fieldnote">Exportovanie ako poznámky…</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>

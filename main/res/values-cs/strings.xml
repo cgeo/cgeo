@@ -264,8 +264,6 @@
   <string name="caches_filter_type">Typ</string>
   <string name="caches_filter_track">Se sledovatelnými předměty</string>
   <string name="caches_filter_clear">Vymaž filtry</string>
-  <string name="caches_filter_size_title">Vyber velikost</string>
-  <string name="caches_filter_type_title">Vyber typ</string>
   <string name="caches_filter_modified">S upravenými souřadnicemi</string>
   <string name="caches_exporting_fieldnote">Exportuji jako Field Notes…</string>
   <string name="caches_removing_from_history">Mažu z Historie…</string>
