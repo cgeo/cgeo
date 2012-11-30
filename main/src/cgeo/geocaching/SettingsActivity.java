@@ -23,6 +23,7 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.openintents.intents.FileManagerIntents;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -566,9 +567,7 @@ public class SettingsActivity extends AbstractActivity {
 
             @Override
             public void onClick(View v) {
-                Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
-                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getCustomRenderThemeBaseFolder());
-                startActivityForResult(dirChooser, SELECT_THEMEFOLDER_REQUEST);
+                selectDirectory(Settings.getCustomRenderThemeBaseFolder(), SELECT_THEMEFOLDER_REQUEST);
             }
         });
 
@@ -580,9 +579,7 @@ public class SettingsActivity extends AbstractActivity {
 
             @Override
             public void onClick(View v) {
-                Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
-                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getGpxExportDir());
-                startActivityForResult(dirChooser, SELECT_GPX_EXPORT_REQUEST);
+                selectDirectory(Settings.getGpxExportDir(), SELECT_GPX_EXPORT_REQUEST);
             }
         });
 
@@ -594,9 +591,7 @@ public class SettingsActivity extends AbstractActivity {
 
             @Override
             public void onClick(View v) {
-                Intent dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
-                dirChooser.putExtra(SimpleDirChooser.START_DIR, Settings.getGpxImportDir());
-                startActivityForResult(dirChooser, SELECT_GPX_IMPORT_REQUEST);
+                selectDirectory(Settings.getGpxImportDir(), SELECT_GPX_IMPORT_REQUEST);
             }
         });
 
@@ -955,9 +950,12 @@ public class SettingsActivity extends AbstractActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
 
-        if (requestCode == SELECT_MAPFILE_REQUEST) {
-            if (resultCode == RESULT_OK) {
+        switch (requestCode) {
+            case SELECT_MAPFILE_REQUEST:
                 if (data.hasExtra("mapfile")) {
                     final String mapFile = data.getStringExtra("mapfile");
                     Settings.setMapFile(mapFile);
@@ -965,48 +963,76 @@ public class SettingsActivity extends AbstractActivity {
                         showToast(res.getString(R.string.warn_invalid_mapfile));
                     }
                 }
-            }
-            updateMapSourceMenu();
-            initMapDirectoryEdittext(true);
-        }
-        if (requestCode == SELECT_GPX_EXPORT_REQUEST) {
-            checkDirectory(resultCode, data, R.id.gpx_exportdir, new RunnableWithArgument<String>() {
+                updateMapSourceMenu();
+                initMapDirectoryEdittext(true);
+                break;
+            case SELECT_GPX_EXPORT_REQUEST:
+                checkDirectory(resultCode, data, R.id.gpx_exportdir, new RunnableWithArgument<String>() {
 
-                @Override
-                public void run(String directory) {
-                    Settings.setGpxExportDir(directory);
-                }
-            });
-        }
-        if (requestCode == SELECT_GPX_IMPORT_REQUEST) {
-            checkDirectory(resultCode, data, R.id.gpx_importdir, new RunnableWithArgument<String>() {
+                    @Override
+                    public void run(String directory) {
+                        Settings.setGpxExportDir(directory);
+                    }
+                });
+                break;
+            case SELECT_GPX_IMPORT_REQUEST:
+                checkDirectory(resultCode, data, R.id.gpx_importdir, new RunnableWithArgument<String>() {
 
-                @Override
-                public void run(String directory) {
-                    Settings.setGpxImportDir(directory);
-                }
-            });
-        }
-        if (requestCode == SELECT_THEMEFOLDER_REQUEST) {
-            checkDirectory(resultCode, data, R.id.themefolder, new RunnableWithArgument<String>() {
+                    @Override
+                    public void run(String directory) {
+                        Settings.setGpxImportDir(directory);
+                    }
+                });
+                break;
+            case SELECT_THEMEFOLDER_REQUEST:
+                checkDirectory(resultCode, data, R.id.themefolder, new RunnableWithArgument<String>() {
 
-                @Override
-                public void run(String directory) {
-                    Settings.setCustomRenderThemeBaseFolder(directory);
-                }
-            });
+                    @Override
+                    public void run(String directory) {
+                        Settings.setCustomRenderThemeBaseFolder(directory);
+                    }
+                });
+                break;
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
     private void checkDirectory(int resultCode, Intent data, int textField, RunnableWithArgument<String> runnableSetDir) {
-        if (resultCode == RESULT_OK) {
-            if (data.hasExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR)) {
-                final String directory = data.getStringExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR);
-                runnableSetDir.run(directory);
-                EditText directoryText = (EditText) findViewById(textField);
-                directoryText.setText(directory);
-                directoryText.requestFocus();
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        String directory = null;
+        // we may come back from either our selfmade chooser or from the Open Intent manager
+        if (data.hasExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR)) {
+            directory = data.getStringExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR);
+        }
+        else {
+            directory = new File(data.getData().getPath()).getAbsolutePath();
+        }
+        if (StringUtils.isNotBlank(directory)) {
+            runnableSetDir.run(directory);
+            EditText directoryText = (EditText) findViewById(textField);
+            directoryText.setText(directory);
+            directoryText.requestFocus();
+        }
+    }
+
+    private void selectDirectory(String startDirectory, int directoryKind) {
+        Intent dirChooser;
+        try {
+            dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
+            if (StringUtils.isNotBlank(startDirectory)) {
+                dirChooser.setData(Uri.parse("file://" + new File(startDirectory).getAbsolutePath()));
             }
+            dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE, res.getString(R.string.simple_dir_chooser_title));
+            dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT, res.getString(android.R.string.ok));
+            startActivityForResult(dirChooser, directoryKind);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // OI file manager not available
+            dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
+            dirChooser.putExtra(SimpleDirChooser.START_DIR, startDirectory);
+            startActivityForResult(dirChooser, directoryKind);
         }
     }
 
