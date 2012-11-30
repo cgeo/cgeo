@@ -864,20 +864,7 @@ public class cgeocaches extends AbstractListActivity {
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_FILTER:
-                new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>() {
-                    @Override
-                    public void run(IFilter selectedFilter) {
-                        if (selectedFilter != null) {
-                            setFilter(selectedFilter);
-                        }
-                        else {
-                            // clear filter
-                            if (adapter != null) {
-                                setFilter(null);
-                            }
-                        }
-                    }
-                });
+                showFilterMenu(null);
                 return true;
             case MENU_SORT:
                 new ComparatorUserInterface(this).selectComparator(adapter.getCacheComparator(), new RunnableWithArgument<CacheComparator>() {
@@ -904,6 +891,26 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
+    }
+
+    /**
+     * called from the filter bar view
+     */
+    public void showFilterMenu(@SuppressWarnings("unused") final View view) {
+        new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>() {
+            @Override
+            public void run(IFilter selectedFilter) {
+                if (selectedFilter != null) {
+                    setFilter(selectedFilter);
+                }
+                else {
+                    // clear filter
+                    if (adapter != null) {
+                        setFilter(null);
+                    }
+                }
+            }
+        });
     }
 
     private void setComparator(final CacheComparator comparator) {
