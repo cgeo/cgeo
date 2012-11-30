@@ -44,7 +44,10 @@ public class SimpleDirChooser extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Bundle extras = getIntent().getExtras();
-        String startDir = extras.getString(START_DIR);
+        String startDir = "";
+        if (extras != null) {
+            startDir = extras.getString(START_DIR);
+        }
         if (StringUtils.isBlank(startDir)) {
             startDir = Environment.getExternalStorageDirectory().getPath();
         } else {
