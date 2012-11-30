@@ -21,7 +21,7 @@
 			android:orientation="vertical" >
 		<LinearLayout
 				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
+				android:layout_height="wrap_content"
 				android:layout_marginTop="10dip"
 				android:orientation="vertical" >
 <!-- ** -->
@@ -296,7 +296,6 @@
 					<CheckBox android:id="@+id/offline_wp"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
