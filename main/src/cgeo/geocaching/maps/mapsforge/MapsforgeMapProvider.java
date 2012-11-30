@@ -65,6 +65,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                     }
                 }
             }
+            Collections.sort(mapFileList, String.CASE_INSENSITIVE_ORDER);
             return mapFileList;
         } catch (Exception e) {
             Log.e("Settings.getOfflineMaps: " + e);
