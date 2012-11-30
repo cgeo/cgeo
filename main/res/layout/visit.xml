@@ -131,7 +131,8 @@
 							android:layout_marginBottom="5dip"
 							android:gravity="right"
 							android:textSize="14dip"
-							android:text="@string/log_tb_changeall" />
+							android:text="@string/log_tb_changeall"
+							android:layout_height="0dp"/>
 				</LinearLayout>
 			</LinearLayout>
 		</LinearLayout>
