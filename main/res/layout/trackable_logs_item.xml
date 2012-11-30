@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:padding="3dip" >
+		android:paddingTop="3dip"
+        android:paddingBottom="3dip" >
 	<TextView android:id="@+id/author"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -62,9 +63,16 @@
 					android:ellipsize="marquee"
 					android:textSize="14dip"
 					android:textColor="?text_color_headline" />
-			</LinearLayout>
-	</LinearLayout>
-		<LinearLayout android:id="@+id/log_layout"  
+		</LinearLayout>
+		<ImageView android:id="@+id/log_mark"
+				android:layout_width="2dip"
+				android:layout_height="fill_parent"
+				android:layout_marginTop="2dip"
+				android:layout_marginBottom="2dip"
+				android:scaleType="fitXY"
+				android:src="@drawable/mark_green" />
+	</LinearLayout>	
+	<LinearLayout android:id="@+id/log_layout"  
 				android:layout_height="wrap_content"
 				android:layout_width="fill_parent" 
 				android:orientation="vertical"

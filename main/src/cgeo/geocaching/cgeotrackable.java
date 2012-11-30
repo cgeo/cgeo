@@ -471,6 +471,17 @@ public class cgeotrackable extends AbstractActivity {
                     logView.setText(logText);
                 }
 
+                ImageView statusMarker = (ImageView) rowView.findViewById(R.id.log_mark);
+                // colored marker
+                int marker = log.type.markerId;
+                if (marker != 0) {
+                    statusMarker.setVisibility(View.VISIBLE);
+                    statusMarker.setImageResource(marker);
+                }
+                else {
+                    statusMarker.setVisibility(View.GONE);
+                }
+
                 // add LogImages
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
 
