@@ -258,9 +258,9 @@
 
   <!-- caches -->
   <string name="caches_no_cache">Non ci sono cache</string>
-  <string name="caches_more_caches">Carica altri caches</string>
+  <string name="caches_more_caches">Carica altri cache</string>
   <string name="caches_more_caches_no">Nessun\'altro cache</string>
-  <string name="caches_more_caches_loading">Caricamento caches…</string>
+  <string name="caches_more_caches_loading">Caricamento dei cache…</string>
   <string name="caches_more_caches_currently">attualmente</string>
   <string name="caches_downloading">Download cache in corso…\nETA: </string>
   <string name="caches_eta_ltm">Meno di un minuto</string>
@@ -336,7 +336,7 @@
   <string name="list_dialog_create_ok">Lista creata</string>
   <string name="list_dialog_create_err">c:geo non è riuscito a creare la lista</string>
   <string name="list_dialog_remove_title">Rimuovi lista</string>
-  <string name="list_dialog_remove_description">Vuoi rimuovere la lista corrente? Tutte i cache contenuti verranno spostate nella lista base \"Salvate\".</string>
+  <string name="list_dialog_remove_description">Vuoi rimuovere la lista corrente? Tutti i cache contenuti verranno spostate nella lista base \"Salvati\".</string>
   <string name="list_dialog_remove">Rimuovi</string>
   <string name="list_dialog_remove_ok">Lista rimossa</string>
   <string name="list_dialog_remove_err">c:geo non è riuscito a rimuovere la lista corrente</string>
@@ -519,7 +519,7 @@
   <string name="cache_hint">Aiuto (spoiler)</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_logsfriends">Log amici</string>
-  <string name="cache_dialog_loading_details">Caricamento dettagli cache…</string>
+  <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
   <string name="cache_dialog_loading_details_status_details">Elaborazione dettagli</string>
   <string name="cache_dialog_loading_details_status_spoilers">Caricamento immagini spoiler</string>
@@ -530,15 +530,15 @@
   <string name="cache_dialog_loading_details_status_cache">Salvataggio dati</string>
   <string name="cache_dialog_loading_details_status_render">Creazione pagina</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Salvataggio cache per uso offline…</string>
+  <string name="cache_dialog_offline_save_message">Salvataggio del cache per uso offline…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Eliminazione cache dalla memoria del dispositivo…</string>
+  <string name="cache_dialog_offline_drop_message">Eliminazione del cache dalla memoria del dispositivo…</string>
   <string name="cache_dialog_refresh_title">Aggiorna</string>
   <string name="cache_dialog_refresh_message">Ricaricamento dettagli cache…</string>
   <string name="cache_dialog_watchlist_add_title">Watchlist</string>
-  <string name="cache_dialog_watchlist_add_message">Aggiunto cache alla watchlist in corso…</string>
+  <string name="cache_dialog_watchlist_add_message">Aggiunto il cache alla watchlist in corso…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
-  <string name="cache_dialog_watchlist_remove_message">Rimozione cache dalla tua watchlist…</string>
+  <string name="cache_dialog_watchlist_remove_message">Rimozione dei cache dalla tua watchlist…</string>
   <string name="cache_menu_navigate">Naviga</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mappa</string>
@@ -609,7 +609,7 @@
   <string name="simple_dir_chooser_current_path">Path:</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_caches">Caricamento caches da file GPX</string>
+  <string name="gpx_import_loading_caches">Caricamento dei cache da file GPX</string>
   <string name="gpx_import_loading_waypoints">Caricamento file waypoints</string>
   <string name="gpx_import_store_static_maps">Salvataggio mappe statiche</string>
   <string name="gpx_import_caches_imported">cache importati</string>
@@ -643,7 +643,7 @@
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
-  <string name="waypoint_cache_coordinates">Coordinate Cache</string>
+  <string name="waypoint_cache_coordinates">Coordinate cache</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">Coordinate attuali</string>
   <string name="waypoint_bearing">Angolo in gradi</string>
@@ -692,7 +692,7 @@
   <string name="map_static_title">Mappe statiche</string>
   <string name="map_static_loading">Caricamento mappe statiche…</string>
   <string name="map_token_err">Dato che c:geo riesce a scaricare solo dati parziali, le coordinate dei cache potrebbero non essere accurate.</string>
-  <string name="map_as_list">Mostra lista cache</string>
+  <string name="map_as_list">Mostra lista dei cache</string>
   <string name="map_strategy">Strategia</string>
   <string name="map_strategy_title">Strategia mappa Live</string>
   <string name="map_strategy_fastest">La più veloce</string>
@@ -798,8 +798,8 @@
   <string name="export_as">Esporta come…</string>
   <string name="export_exportedto">esportato in</string>
   <string name="export_failed">Esportazione fallita</string>
-  <string name="export_fieldnotes">Field Notes</string>
-  <string name="export_fieldnotes_info">Field Notes saranno esportate in /sdcard/field-notes con data e ora corrente nel nome file.</string>
+  <string name="export_fieldnotes">Field Note</string>
+  <string name="export_fieldnotes_info">Field Note saranno esportate in /sdcard/field-notes con data e ora corrente nel nome file.</string>
   <string name="export_fieldnotes_upload">Carica su geocaching.com</string>
   <string name="export_fieldnotes_uploading">Caricamento…</string>
   <string name="export_fieldnotes_upload_success">Caricato su geocaching.com con successo</string>
