@@ -170,8 +170,7 @@ public class SearchResult implements Parcelable {
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
         final ArrayList<cgCache> cachesForVote = new ArrayList<cgCache>();
-
-        final Set<cgCache> caches = cgeoapplication.getInstance().loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
+        final Set<cgCache> caches = cgData.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         for (cgCache cache : caches) {
             // Is there any reason to exclude the cache from the list?
             final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
@@ -188,13 +187,13 @@ public class SearchResult implements Parcelable {
 
     public cgCache getFirstCacheFromResult(final EnumSet<LoadFlag> loadFlags) {
         if (geocodes != null && geocodes.size() >= 1) {
-            return cgeoapplication.getInstance().loadCache((String) geocodes.toArray()[0], loadFlags);
+            return cgData.loadCache((String) geocodes.toArray()[0], loadFlags);
         }
         return null;
     }
 
     public Set<cgCache> getCachesFromSearchResult(final EnumSet<LoadFlag> loadFlags) {
-        return cgeoapplication.getInstance().loadCaches(geocodes, loadFlags);
+        return cgData.loadCaches(geocodes, loadFlags);
     }
 
     /** Add the geocode to the search. No cache is loaded into the CacheCache */
@@ -213,11 +212,24 @@ public class SearchResult implements Parcelable {
     /** Add the cache geocode to the search and store the cache in the CacheCache */
     public boolean addCache(final cgCache cache) {
         addGeocode(cache.getGeocode());
-        return cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+        return cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
     }
 
     public boolean isEmpty() {
         return geocodes.isEmpty();
+    }
+
+    public boolean hasUnsavedCaches() {
+        if (this == null) {
+            return false;
+        }
+    
+        for (final String geocode : getGeocodes()) {
+            if (!cgData.isOffline(geocode, null)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

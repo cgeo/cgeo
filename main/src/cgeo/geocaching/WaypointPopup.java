@@ -38,7 +38,7 @@ public class WaypointPopup extends AbstractPopupActivity {
     @Override
     protected void init() {
         super.init();
-        waypoint = app.loadWaypoint(waypointId);
+        waypoint = cgData.loadWaypoint(waypointId);
         try {
             if (StringUtils.isNotBlank(waypoint.getName())) {
                 setTitle(waypoint.getName());

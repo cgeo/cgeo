@@ -5,7 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -171,10 +171,9 @@ public class GPXImporter {
         protected abstract Collection<cgCache> doImport() throws IOException, ParserException;
 
         private boolean importStaticMaps(final SearchResult importedCaches) {
-            final cgeoapplication app = cgeoapplication.getInstance();
             int storedCacheMaps = 0;
             for (String geocode : importedCaches.getGeocodes()) {
-                cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
                 StaticMapsProvider.downloadMaps(cache);
                 storedCacheMaps++;

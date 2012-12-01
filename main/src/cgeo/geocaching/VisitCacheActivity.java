@@ -251,13 +251,12 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         }
 
         if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
-            cacheid = app.getCacheid(geocode);
+            cacheid = cgData.getCacheidForGeocode(geocode);
         }
         if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
-            geocode = app.getGeocode(cacheid);
+            geocode = cgData.getGeocodeForGuid(cacheid);
         }
-
-        cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (StringUtils.isNotBlank(cache.getName())) {
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
@@ -450,7 +449,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
         possibleLogTypes = cache.getPossibleLogTypes();
 
-        final LogEntry log = app.loadLogOffline(geocode);
+        final LogEntry log = cgData.loadLogOffline(geocode);
         if (log != null) {
             typeSelected = log.type;
             date.setTime(new Date(log.date));
@@ -576,7 +575,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         @Override
         public void onClick(View arg0) {
             //TODO: unify this method and the code in init()
-            app.clearLogOffline(geocode);
+            cgData.clearLogOffline(geocode);
 
             if (alreadyFound) {
                 typeSelected = LogType.NOTE;
@@ -687,11 +686,11 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                     cache.setFound(true);
                 }
 
-                app.updateCache(cache);
+                cgData.saveChangedCache(cache);
             }
 
             if (status == StatusCode.NO_ERROR) {
-                app.clearLogOffline(geocode);
+                cgData.clearLogOffline(geocode);
             }
 
             if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter()

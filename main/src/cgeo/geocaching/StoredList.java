@@ -50,7 +50,7 @@ public class StoredList {
         }
 
         public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyMoveTargets) {
-            final List<StoredList> lists = app.getLists();
+            final List<StoredList> lists = cgData.getLists();
 
             if (lists == null) {
                 return;
@@ -94,7 +94,7 @@ public class StoredList {
 
                 @Override
                 public void run(final String listName) {
-                    final int newId = app.createList(listName);
+                    final int newId = cgData.createList(listName);
 
                     if (newId >= cgData.customListIdOffset) {
                         activity.showToast(res.getString(R.string.list_dialog_create_ok));
@@ -137,12 +137,12 @@ public class StoredList {
         }
 
         public void promptForListRename(final int listId, final Runnable runAfterRename) {
-            final StoredList list = app.getList(listId);
+            final StoredList list = cgData.getList(listId);
             handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithArgument<String>() {
 
                 @Override
                 public void run(final String listName) {
-                    app.renameList(listId, listName);
+                    cgData.renameList(listId, listName);
                     if (runAfterRename != null) {
                         runAfterRename.run();
                     }

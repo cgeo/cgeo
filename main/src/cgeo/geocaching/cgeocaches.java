@@ -479,7 +479,7 @@ public class cgeocaches extends AbstractListActivity {
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);
                 } else {
-                    final StoredList list = app.getList(listId);
+                    final StoredList list = cgData.getList(listId);
                     // list.id may be different if listId was not valid
                     listId = list.id;
                     title = list.title;
@@ -642,7 +642,7 @@ public class cgeocaches extends AbstractListActivity {
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-            SearchResult newSearch = cgeoapplication.getInstance().getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
+            SearchResult newSearch = cgData.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
             if (newSearch != null && newSearch.getTotal() != search.getTotal()) {
                 refreshCurrentList();
             }
@@ -784,7 +784,7 @@ public class cgeocaches extends AbstractListActivity {
                 item.setVisible(isNonDefaultList);
             }
 
-            final boolean multipleLists = app.getLists().size() >= 2;
+            final boolean multipleLists = cgData.getLists().size() >= 2;
             item = menu.findItem(MENU_SWITCH_LIST);
             if (item != null) {
                 item.setVisible(multipleLists);
@@ -951,7 +951,7 @@ public class cgeocaches extends AbstractListActivity {
         }
         if (cache.isOffline()) {
             menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
-            final List<StoredList> cacheLists = app.getLists();
+            final List<StoredList> cacheLists = cgData.getLists();
             if (cacheLists.size() > 1) {
                 menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             }
@@ -967,7 +967,7 @@ public class cgeocaches extends AbstractListActivity {
 
             @Override
             public void run(Integer newListId) {
-                app.moveToList(adapter.getCheckedOrAllCaches(), newListId);
+                cgData.moveToList(adapter.getCheckedOrAllCaches(), newListId);
                 adapter.setSelectMode(false);
 
                 refreshCurrentList();
@@ -1028,7 +1028,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     @Override
                     public void run(Integer newListId) {
-                        app.moveToList(Collections.singletonList(cache), newListId);
+                        cgData.moveToList(Collections.singletonList(cache), newListId);
                         adapter.setSelectMode(false);
                         refreshCurrentList();
                     }
@@ -1290,7 +1290,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgeoapplication.getInstance().getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
+            search = cgData.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
             replaceCacheListFromSearch();
             loadCachesHandler.sendMessage(Message.obtain());
         }
@@ -1299,7 +1299,7 @@ public class cgeocaches extends AbstractListActivity {
     private class LoadByHistoryThread extends Thread {
         @Override
         public void run() {
-            search = cgeoapplication.getInstance().getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
+            search = cgData.getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
             replaceCacheListFromSearch();
             loadCachesHandler.sendMessage(Message.obtain());
         }
@@ -1588,7 +1588,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             removeGeoAndDir();
-            app.markDropped(selected);
+            cgData.markDropped(selected);
             handler.sendEmptyMessage(MSG_DONE);
 
             startGeoAndDir();
@@ -1607,7 +1607,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            app.clearVisitDate(selected);
+            cgData.clearVisitDate(selected);
             handler.sendEmptyMessage(MSG_DONE);
         }
     }
@@ -1657,7 +1657,7 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        StoredList list = app.getList(id);
+        StoredList list = cgData.getList(id);
         if (list == null) {
             return;
         }
@@ -1700,7 +1700,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             final List<cgCache> caches = adapter.getCheckedCaches();
-            app.moveToList(caches, listId);
+            cgData.moveToList(caches, listId);
             handler.sendEmptyMessage(listId);
         }
     }
@@ -1732,7 +1732,7 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     private void removeListInternal() {
-        if (app.removeList(listId)) {
+        if (cgData.removeList(listId)) {
             showToast(res.getString(R.string.list_dialog_remove_ok));
             switchListById(StoredList.STANDARD_LIST_ID);
         } else {

@@ -4,8 +4,8 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgWaypoint;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -213,7 +213,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
             }
         }
         // reload caches, because the parser only returns the minimum version of each cache
-        return new ArrayList<cgCache>(cgeoapplication.getInstance().loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
+        return new ArrayList<cgCache>(cgData.loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
     }
 
     public static void testParseDateWithFractionalSeconds() {
@@ -266,10 +266,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
         final List<cgCache> caches = readGPX10(R.raw.lazy);
         assertEquals(1, caches.size());
-        cgeoapplication.getInstance().removeAllFromCache();
-
+        cgData.removeAllFromCache();
         // load only the minimum cache, it has several members missing
-        final cgCache minimalCache = cgeoapplication.getInstance().loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+        final cgCache minimalCache = cgData.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
 
         // now check that we load lazy members on demand
         assertFalse(minimalCache.getAttributes().isEmpty());
@@ -298,17 +297,17 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        listId = cgeoapplication.getInstance().createList("Temporary unit testing");
+        listId = cgData.createList("Temporary unit testing");
         assertTrue(listId != StoredList.TEMPORARY_LIST_ID);
         assertTrue(listId != StoredList.STANDARD_LIST_ID);
     }
 
     @Override
     protected void tearDown() throws Exception {
-        SearchResult search = cgeoapplication.getInstance().getBatchOfStoredCaches(null, CacheType.ALL, listId);
+        SearchResult search = cgData.getBatchOfStoredCaches(null, CacheType.ALL, listId);
         assertNotNull(search);
-        cgeoapplication.getInstance().removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
-        cgeoapplication.getInstance().removeList(listId);
+        cgData.removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
+        cgData.removeList(listId);
         super.tearDown();
     }
 }

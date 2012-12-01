@@ -6,6 +6,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgWaypoint;
@@ -325,7 +326,7 @@ public abstract class GCParser {
 
             // save full detailed caches
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_cache);
-            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
             // update progress message so user knows we're still working. This is more of a place holder than
             // actual indication of what the program is doing
@@ -1051,7 +1052,7 @@ public abstract class GCParser {
                 Log.i("Log successfully posted to cache #" + cacheid);
 
                 if (geocode != null) {
-                    cgeoapplication.getInstance().saveVisitDate(geocode);
+                    cgData.saveVisitDate(geocode);
                 }
 
                 Login.getLoginStatus(page);
@@ -1420,7 +1421,7 @@ public abstract class GCParser {
         }
 
         if (cgeoapplication.getInstance() != null) {
-            cgeoapplication.getInstance().saveTrackable(trackable);
+            cgData.saveTrackable(trackable);
         }
 
         return trackable;

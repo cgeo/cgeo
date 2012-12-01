@@ -2,6 +2,7 @@ package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -55,7 +56,7 @@ public final class Twitter {
     }
 
     public static void postTweetCache(String geocode) {
-        final cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         String status;
         final String url = cache.getUrl();
         if (url.length() >= 100) {
@@ -76,7 +77,7 @@ public final class Twitter {
     }
 
     public static void postTweetTrackable(String geocode) {
-        final cgTrackable trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
+        final cgTrackable trackable = cgData.loadTrackable(geocode);
         String name = trackable.getName();
         if (name.length() > 82) {
             name = name.substring(0, 81) + '…';

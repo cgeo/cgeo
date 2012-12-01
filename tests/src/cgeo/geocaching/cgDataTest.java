@@ -18,7 +18,6 @@ public class cgDataTest extends CGeoTestCase {
 
     public static void testStoredLists() {
 
-        cgeoapplication app = cgeoapplication.getInstance();
         int listId1 = StoredList.STANDARD_LIST_ID;
         int listId2 = StoredList.STANDARD_LIST_ID;
 
@@ -32,11 +31,11 @@ public class cgDataTest extends CGeoTestCase {
         try {
 
             // create lists
-            listId1 = app.createList("cgData Test");
+            listId1 = cgData.createList("cgData Test");
             assertTrue(listId1 > StoredList.STANDARD_LIST_ID);
-            listId2 = app.createList("cgDataTest");
+            listId2 = cgData.createList("cgDataTest");
             assertTrue(listId2 > StoredList.STANDARD_LIST_ID);
-            assertTrue(app.getLists().size() >= 2);
+            assertTrue(cgData.getLists().size() >= 2);
 
             cache1.setDetailed(true);
             cache1.setListId(listId1);
@@ -44,33 +43,33 @@ public class cgDataTest extends CGeoTestCase {
             cache2.setListId(listId1);
 
             // save caches to DB (cache1=listId1, cache2=listId1)
-            app.saveCache(cache1, LoadFlags.SAVE_ALL);
-            app.saveCache(cache2, LoadFlags.SAVE_ALL);
-            assertTrue(cgeoapplication.getAllCachesCount() >= 2);
+            cgData.saveCache(cache1, LoadFlags.SAVE_ALL);
+            cgData.saveCache(cache2, LoadFlags.SAVE_ALL);
+            assertTrue(cgData.getAllCachesCount() >= 2);
 
             // rename list (cache1=listId1, cache2=listId1)
-            assertEquals(1, app.renameList(listId1, "cgData Test (renamed)"));
+            assertEquals(1, cgData.renameList(listId1, "cgData Test (renamed)"));
 
             // get list
-            StoredList list1 = app.getList(listId1);
+            StoredList list1 = cgData.getList(listId1);
             assertEquals("cgData Test (renamed)", list1.title);
 
             // move to list (cache1=listId2, cache2=listId2)
-            app.moveToList(Collections.singletonList(cache1), listId2);
-            assertEquals(1, app.getAllStoredCachesCount(CacheType.ALL, listId2));
+            cgData.moveToList(Collections.singletonList(cache1), listId2);
+            assertEquals(1, cgData.getAllStoredCachesCount(CacheType.ALL, listId2));
 
             // remove list (cache1=listId2, cache2=listId2)
-            assertTrue(app.removeList(listId1));
+            assertTrue(cgData.removeList(listId1));
 
             // mark dropped (cache1=1, cache2=0)
-            app.markDropped(Collections.singletonList(cache2));
+            cgData.markDropped(Collections.singletonList(cache2));
 
             // mark stored (cache1=1, cache2=listId2)
-            app.markStored(Collections.singletonList(cache2), listId2);
-            assertEquals(2, app.getAllStoredCachesCount(CacheType.ALL, listId2));
+            cgData.moveToList(Collections.singletonList(cache2), listId2);
+            assertEquals(2, cgData.getAllStoredCachesCount(CacheType.ALL, listId2));
 
             // drop stored (cache1=0, cache2=0)
-            app.removeList(listId2);
+            cgData.removeList(listId2);
 
         } finally {
 
@@ -78,32 +77,29 @@ public class cgDataTest extends CGeoTestCase {
             Set<String> geocodes = new HashSet<String>();
             geocodes.add(cache1.getGeocode());
             geocodes.add(cache2.getGeocode());
-            app.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
+            cgData.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
 
             // remove list
-            app.removeList(listId1);
-            app.removeList(listId2);
+            cgData.removeList(listId1);
+            cgData.removeList(listId2);
         }
     }
 
     // Check that queries don't throw an exception (see issue #1429).
     public static void testLoadWaypoints() {
         final Viewport viewport = new Viewport(new Geopoint(-1, -2), new Geopoint(3, 4));
-        final cgeoapplication app = cgeoapplication.getInstance();
-        app.getWaypointsInViewport(viewport, false, false, CacheType.ALL);
-        app.getWaypointsInViewport(viewport, false, true, CacheType.ALL);
-        app.getWaypointsInViewport(viewport, true, false, CacheType.ALL);
-        app.getWaypointsInViewport(viewport, true, true, CacheType.ALL);
-        app.getWaypointsInViewport(viewport, false, false, CacheType.TRADITIONAL);
-        app.getWaypointsInViewport(viewport, false, true, CacheType.TRADITIONAL);
-        app.getWaypointsInViewport(viewport, true, false, CacheType.TRADITIONAL);
-        app.getWaypointsInViewport(viewport, true, true, CacheType.TRADITIONAL);
+        cgData.loadWaypoints(viewport, false, false, CacheType.ALL);
+        cgData.loadWaypoints(viewport, false, true, CacheType.ALL);
+        cgData.loadWaypoints(viewport, true, false, CacheType.ALL);
+        cgData.loadWaypoints(viewport, true, true, CacheType.ALL);
+        cgData.loadWaypoints(viewport, false, false, CacheType.TRADITIONAL);
+        cgData.loadWaypoints(viewport, false, true, CacheType.TRADITIONAL);
+        cgData.loadWaypoints(viewport, true, false, CacheType.TRADITIONAL);
+        cgData.loadWaypoints(viewport, true, true, CacheType.TRADITIONAL);
     }
 
     // Check that saving a cache and trackable without logs works (see #2199)
     public static void testSaveWithoutLogs() {
-
-        cgeoapplication app = cgeoapplication.getInstance();
 
         final String GEOCODE_CACHE = "TEST";
 
@@ -118,21 +114,19 @@ public class cgDataTest extends CGeoTestCase {
         cache.setInventory(inventory);
 
         try {
-            app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-            final cgCache loadedCache = app.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            final cgCache loadedCache = cgData.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
             assertNotNull("Cache was not saved!", loadedCache);
             assertEquals(1, loadedCache.getInventory().size());
         } finally {
-            app.removeCache(GEOCODE_CACHE, LoadFlags.REMOVE_ALL);
+            cgData.removeCache(GEOCODE_CACHE, LoadFlags.REMOVE_ALL);
         }
     }
 
     // Loading logs for an empty geocode should return an empty list, not null!
     public static void testLoadLogsFromEmptyGeocode() {
 
-        cgeoapplication app = cgeoapplication.getInstance();
-
-        List<LogEntry> logs = app.loadLogs("");
+        List<LogEntry> logs = cgData.loadLogs("");
 
         assertNotNull("Logs must not be null", logs);
         assertEquals("Logs from empty geocode must be empty", 0, logs.size());

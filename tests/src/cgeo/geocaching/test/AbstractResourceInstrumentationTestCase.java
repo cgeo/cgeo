@@ -1,6 +1,6 @@
 package cgeo.geocaching.test;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 
@@ -18,7 +18,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     protected static void removeCacheCompletely(final String geocode) {
         final EnumSet<RemoveFlag> flags = EnumSet.copyOf(LoadFlags.REMOVE_ALL);
         flags.add(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING);
-        cgeoapplication.getInstance().removeCache(geocode, flags);
+        cgData.removeCache(geocode, flags);
     }
 
     protected InputStream getResourceStream(int resourceId) {

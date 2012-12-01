@@ -156,7 +156,7 @@ public class SearchActivity extends AbstractActivity {
                 findByGeocodeFn();
             }
         });
-        addHistoryEntries(geocodeEdit, app.geocodesInCache());
+        addHistoryEntries(geocodeEdit, cgData.getRecentGeocodesForSearch());
 
         final Button displayByGeocode = (Button) findViewById(R.id.display_geocode);
         displayByGeocode.setOnClickListener(new findByGeocodeListener());
@@ -208,7 +208,7 @@ public class SearchActivity extends AbstractActivity {
                 findTrackableFn();
             }
         });
-        addHistoryEntries(trackable, app.getTrackableCodes());
+        addHistoryEntries(trackable, cgData.getTrackableCodes());
 
         disableSuggestions(trackable);
 

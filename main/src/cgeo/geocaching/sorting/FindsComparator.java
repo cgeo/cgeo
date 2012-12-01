@@ -1,12 +1,10 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.LogType;
 
 public class FindsComparator extends AbstractCacheComparator {
-
-    private final cgeoapplication app = cgeoapplication.getInstance();
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
@@ -20,9 +18,9 @@ public class FindsComparator extends AbstractCacheComparator {
         return finds2 - finds1;
     }
 
-    private int getFindsCount(cgCache cache) {
+    private static int getFindsCount(cgCache cache) {
         if (cache.getLogCounts().isEmpty()) {
-            cache.setLogCounts(app.loadLogCounts(cache.getGeocode()));
+            cache.setLogCounts(cgData.loadLogCounts(cache.getGeocode()));
         }
         Integer logged = cache.getLogCounts().get(LogType.FOUND_IT);
         if (logged != null) {

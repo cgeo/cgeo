@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -82,11 +82,10 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
         if (StringUtils.isEmpty(page)) {
             final SearchResult search = new SearchResult();
-            if (cgeoapplication.getInstance().isThere(geocode, guid, true, false)) {
+            if (cgData.isThere(geocode, guid, true, false)) {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
                     Log.i("Loading old cache from cache.");
-
-                    search.addGeocode(cgeoapplication.getInstance().getGeocode(guid));
+                    search.addGeocode(cgData.getGeocodeForGuid(guid));
                 } else {
                     search.addGeocode(geocode);
                 }
@@ -128,7 +127,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static boolean addToWatchlist(cgCache cache) {
         final boolean added = GCParser.addToWatchlist(cache);
         if (added) {
-            cgeoapplication.getInstance().updateCache(cache);
+            cgData.saveChangedCache(cache);
         }
         return added;
     }
@@ -136,7 +135,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static boolean removeFromWatchlist(cgCache cache) {
         final boolean removed = GCParser.removeFromWatchlist(cache);
         if (removed) {
-            cgeoapplication.getInstance().updateCache(cache);
+            cgData.saveChangedCache(cache);
         }
         return removed;
     }
@@ -144,7 +143,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static boolean addToFavorites(cgCache cache) {
         final boolean added = GCParser.addToFavorites(cache);
         if (added) {
-            cgeoapplication.getInstance().updateCache(cache);
+            cgData.saveChangedCache(cache);
         }
         return added;
     }
@@ -152,7 +151,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static boolean removeFromFavorites(cgCache cache) {
         final boolean removed = GCParser.removeFromFavorites(cache);
         if (removed) {
-            cgeoapplication.getInstance().updateCache(cache);
+            cgData.saveChangedCache(cache);
         }
         return removed;
     }

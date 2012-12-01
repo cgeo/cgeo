@@ -759,7 +759,7 @@ public class SettingsActivity extends AbstractActivity {
      */
     public void backup(View view) {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
-        if (cgeoapplication.getAllCachesCount() == 0) {
+        if (cgData.getAllCachesCount() == 0) {
             helpDialog(res.getString(R.string.init_backup), res.getString(R.string.init_backup_unnecessary));
             return;
         }
@@ -768,7 +768,7 @@ public class SettingsActivity extends AbstractActivity {
         new Thread() {
             @Override
             public void run() {
-                final String backupFileName = app.backupDatabase();
+                final String backupFileName = cgData.backupDatabase();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -784,7 +784,7 @@ public class SettingsActivity extends AbstractActivity {
 
     private void refreshBackupLabel() {
         TextView lastBackup = (TextView) findViewById(R.id.backup_last);
-        File lastBackupFile = cgeoapplication.isRestoreFile();
+        File lastBackupFile = cgData.getRestoreFile();
         if (lastBackupFile != null) {
             lastBackup.setText(res.getString(R.string.init_backup_last) + " " + Formatter.formatTime(lastBackupFile.lastModified()) + ", " + Formatter.formatDate(lastBackupFile.lastModified()));
         } else {

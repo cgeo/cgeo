@@ -207,7 +207,7 @@ public class cgeopoint extends AbstractActivity {
     private List<Destination> getHistoryOfSearchedLocations() {
         if (historyOfSearchedLocations == null) {
             // Load from database
-            historyOfSearchedLocations = app.getHistoryOfSearchedLocations();
+            historyOfSearchedLocations = cgData.loadHistoryOfSearchedLocations();
         }
 
         return historyOfSearchedLocations;
@@ -393,7 +393,7 @@ public class cgeopoint extends AbstractActivity {
             getHistoryOfSearchedLocations().add(0, loc);
 
             // Save location
-            app.saveSearchedDestination(loc);
+            cgData.saveSearchedDestination(loc);
 
             // Ensure to remove the footer
             historyListView.removeFooterView(getEmptyHistoryFooter());
@@ -405,7 +405,7 @@ public class cgeopoint extends AbstractActivity {
             getHistoryOfSearchedLocations().remove(destination);
 
             // Save
-            app.removeSearchedDestinations(destination);
+            cgData.removeSearchedDestination(destination);
 
             if (getHistoryOfSearchedLocations().isEmpty()) {
                 if (historyListView.getFooterViewsCount() == 0) {
@@ -424,7 +424,7 @@ public class cgeopoint extends AbstractActivity {
             getHistoryOfSearchedLocations().clear();
 
             // Save
-            app.clearSearchedDestinations();
+            cgData.clearSearchedDestinations();
 
             if (historyListView.getFooterViewsCount() == 0) {
                 historyListView.addFooterView(getEmptyHistoryFooter());

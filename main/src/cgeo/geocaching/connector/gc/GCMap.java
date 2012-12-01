@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -341,7 +342,7 @@ public class GCMap {
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
                     if (Settings.isPremiumMember()) {
-                        lastSearchViewport = cgeoapplication.getInstance().getBounds(geocodes);
+                        lastSearchViewport = cgData.getBounds(geocodes);
                     } else {
                         lastSearchViewport = new Viewport(center, center);
                     }

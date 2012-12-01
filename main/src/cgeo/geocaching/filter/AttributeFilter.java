@@ -2,6 +2,7 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 
@@ -34,7 +35,7 @@ class AttributeFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(final cgCache cache) {
-        cgCache fullCache = cgeoapplication.getInstance().loadCache(cache.getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
+        cgCache fullCache = cgData.loadCache(cache.getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
         if (fullCache == null) {
             fullCache = cache;
         }

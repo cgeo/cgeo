@@ -250,7 +250,7 @@ public class EditWaypointActivity extends AbstractActivity {
         @Override
         public void run() {
             try {
-                waypoint = app.loadWaypoint(id);
+                waypoint = cgData.loadWaypoint(id);
 
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
@@ -269,7 +269,7 @@ public class EditWaypointActivity extends AbstractActivity {
             } else if (gpTemp != null) {
                 gp = gpTemp;
             }
-            cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+            cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
             cgeocoords coordsDialog = new cgeocoords(EditWaypointActivity.this, cache, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
@@ -401,9 +401,9 @@ public class EditWaypointActivity extends AbstractActivity {
             waypoint.setNote(note);
             waypoint.setId(id);
 
-            cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+            cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
             if (null != cache && cache.addOrChangeWaypoint(waypoint, true)) {
-                app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
                     StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);

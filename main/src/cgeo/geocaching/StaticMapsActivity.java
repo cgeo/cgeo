@@ -183,7 +183,7 @@ public class StaticMapsActivity extends AbstractActivity {
     }
 
     private boolean downloadStaticMaps() {
-        final cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (waypoint_id == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeCacheStaticMap(cache, true);

@@ -521,13 +521,13 @@ public class CacheDetailActivity extends AbstractActivity {
             }
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
                 if (cache.duplicateWaypoint(index)) {
-                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DELETE:
                 if (cache.deleteWaypoint(index)) {
-                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
@@ -1946,7 +1946,7 @@ public class CacheDetailActivity extends AbstractActivity {
                             public void update(CharSequence editorText) {
                                 cache.setPersonalNote(editorText.toString());
                                 setPersonalNote(personalNoteView);
-                                app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                                cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                             }
                         });
                         editor.show();

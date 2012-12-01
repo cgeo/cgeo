@@ -2,8 +2,8 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -171,9 +171,8 @@ final public class OkapiClient {
             cache.setUpdated(System.currentTimeMillis());
             cache.setDetailedUpdate(cache.getUpdated());
             cache.setDetailed(true);
-
             // save full detailed caches
-            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         } catch (JSONException e) {
             Log.e("OkapiClient.parseCache", e);
         }

@@ -6,7 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheType;
@@ -228,7 +228,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             final IWaypoint coordinate = item.getCoord();
 
             if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
-                cgCache cache = cgeoapplication.getInstance().loadCache(coordinate.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                cgCache cache = cgData.loadCache(coordinate.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
                 if (!requestDetailsThread.requestRequired()) {
                     // don't show popup if we have enough details

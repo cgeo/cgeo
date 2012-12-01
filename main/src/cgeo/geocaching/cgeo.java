@@ -415,7 +415,7 @@ public class cgeo extends AbstractActivity {
         // context menu for offline button
         if (v.getId() == R.id.search_offline) {
             menu.setHeaderTitle(res.getString(R.string.list_title));
-            for (final StoredList list : app.getLists()) {
+            for (final StoredList list : cgData.getLists()) {
                 menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.getTitleAndCount());
             }
             return;
@@ -572,7 +572,7 @@ public class cgeo extends AbstractActivity {
     }
 
     private void checkRestore() {
-        if (!cgData.isNewlyCreatedDatebase() || null == cgData.isRestoreFile()) {
+        if (!cgData.isNewlyCreatedDatebase() || null == cgData.getRestoreFile()) {
             return;
         }
         new AlertDialog.Builder(this)
@@ -759,7 +759,7 @@ public class cgeo extends AbstractActivity {
             }
 
             int checks = 0;
-            while (!app.storageStatus()) {
+            while (!cgData.isInitialized()) {
                 try {
                     wait(500);
                     checks++;
@@ -772,7 +772,7 @@ public class cgeo extends AbstractActivity {
                 }
             }
 
-            countBubbleCnt = cgeoapplication.getAllCachesCount();
+            countBubbleCnt = cgData.getAllCachesCount();
 
             countBubbleHandler.sendEmptyMessage(0);
         }
@@ -797,7 +797,7 @@ public class cgeo extends AbstractActivity {
             }
 
             cleanupRunning = true;
-            app.cleanDatabase(more);
+            cgData.clean(more);
             cleanupRunning = false;
 
             if (version > 0) {

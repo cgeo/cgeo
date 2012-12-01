@@ -99,20 +99,20 @@ public class cgCache implements ICache, IWaypoint {
     private LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
         @Override
         protected List<String> loadFromDatabase() {
-            return cgeoapplication.getInstance().loadAttributes(geocode);
+            return cgData.loadAttributes(geocode);
         }
     };
     private LazyInitializedList<cgWaypoint> waypoints = new LazyInitializedList<cgWaypoint>() {
         @Override
         protected List<cgWaypoint> loadFromDatabase() {
-            return cgeoapplication.getInstance().loadWaypoints(geocode);
+            return cgData.loadWaypoints(geocode);
         }
     };
     private List<cgImage> spoilers = null;
     private LazyInitializedList<LogEntry> logs = new LazyInitializedList<LogEntry>() {
         @Override
         protected List<LogEntry> loadFromDatabase() {
-            return cgeoapplication.getInstance().loadLogs(geocode);
+            return cgData.loadLogs(geocode);
         }
     };
     private List<cgTrackable> inventory = null;
@@ -457,13 +457,12 @@ public class cgCache implements ICache, IWaypoint {
         if (logType == LogType.UNKNOWN) {
             return;
         }
-        cgeoapplication app = (cgeoapplication) fromActivity.getApplication();
-        final boolean status = app.saveLogOffline(geocode, date.getTime(), logType, log);
+        final boolean status = cgData.saveLogOffline(geocode, date.getTime(), logType, log);
 
         Resources res = fromActivity.getResources();
         if (status) {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
-            app.saveVisitDate(geocode);
+            cgData.saveVisitDate(geocode);
             logOffline = true;
 
             notifyChange();
@@ -603,7 +602,7 @@ public class cgCache implements ICache, IWaypoint {
     @Override
     public String getDescription() {
         if (description == null) {
-            description = StringUtils.defaultString(cgeoapplication.getInstance().getCacheDescription(geocode));
+            description = StringUtils.defaultString(cgData.getCacheDescription(geocode));
         }
         return description;
     }
@@ -958,8 +957,7 @@ public class cgCache implements ICache, IWaypoint {
                 }
             }
         }
-
-        return saveToDatabase && cgeoapplication.getInstance().saveWaypoints(this);
+        return saveToDatabase && cgData.saveWaypoints(this);
     }
 
     /**
@@ -1166,8 +1164,7 @@ public class cgCache implements ICache, IWaypoint {
             // when waypoint was edited, finalDefined may have changed
             resetFinalDefined();
         }
-
-        return saveToDatabase && cgeoapplication.getInstance().saveWaypoint(waypoint.getId(), geocode, waypoint);
+        return saveToDatabase && cgData.saveWaypoint(waypoint.getId(), geocode, waypoint);
     }
 
     public boolean hasWaypoints() {
@@ -1219,7 +1216,7 @@ public class cgCache implements ICache, IWaypoint {
         copy.setUserDefined();
         copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
         waypoints.add(index + 1, copy);
-        return cgeoapplication.getInstance().saveWaypoint(-1, geocode, copy);
+        return cgData.saveWaypoint(-1, geocode, copy);
     }
 
     /**
@@ -1236,8 +1233,8 @@ public class cgCache implements ICache, IWaypoint {
         }
         if (waypoint.isUserDefined()) {
             waypoints.remove(index);
-            cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-            cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            cgData.deleteWaypoint(waypoint.getId());
+            cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             // Check status if Final is defined
             if (waypoint.isFinalWithCoords()) {
                 resetFinalDefined();
@@ -1391,8 +1388,8 @@ public class cgCache implements ICache, IWaypoint {
 
     public void drop(Handler handler) {
         try {
-            cgeoapplication.getInstance().markDropped(Collections.singletonList(this));
-            cgeoapplication.getInstance().removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            cgData.markDropped(Collections.singletonList(this));
+            cgData.removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
 
             handler.sendMessage(Message.obtain());
         } catch (Exception e) {
@@ -1443,7 +1440,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public void refresh(int newListId, CancellableHandler handler) {
-        cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
         storeCache(null, geocode, newListId, true, handler);
     }
 
@@ -1516,7 +1513,7 @@ public class cgCache implements ICache, IWaypoint {
             }
 
             cache.setListId(listId);
-            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
             if (CancellableHandler.isCancelled(handler)) {
                 return;
@@ -1538,10 +1535,9 @@ public class cgCache implements ICache, IWaypoint {
             return null;
         }
 
-        final cgeoapplication app = cgeoapplication.getInstance();
-        if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
+        if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (cgData.isOffline(geocode, guid) || cgData.isThere(geocode, guid, true, true))) {
             final SearchResult search = new SearchResult();
-            final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
+            final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : cgData.getGeocodeForGuid(guid);
             search.addGeocode(realGeocode);
             return search;
         }
@@ -1613,8 +1609,7 @@ public class cgCache implements ICache, IWaypoint {
      * @return
      */
     public boolean hasAttribute(CacheAttribute attribute, boolean yes) {
-        // lazy loading of attributes
-        cgCache fullCache = cgeoapplication.getInstance().loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
+        cgCache fullCache = cgData.loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
         if (fullCache == null) {
             fullCache = this;
         }

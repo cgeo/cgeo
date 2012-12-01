@@ -9,6 +9,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
@@ -368,7 +369,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
 
-        int countBubbleCnt = cgeoapplication.getAllCachesCount();
+        int countBubbleCnt = cgData.getAllCachesCount();
         caches = new LeastRecentlyUsedSet<cgCache>(MAX_CACHES + countBubbleCnt);
 
         final MapProvider mapProvider = Settings.getMapProvider();
@@ -494,7 +495,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
             for (String geocode : dirtyCaches) {
-                cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 // remove to update the cache
                 caches.remove(cache);
                 caches.add(cache);
@@ -594,7 +595,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-            menu.findItem(MENU_STORE_CACHES).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && app.hasUnsavedCaches(new SearchResult(geocodesInViewport)));
+            menu.findItem(MENU_STORE_CACHES).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
             item = menu.findItem(MENU_CIRCLE_MODE); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
@@ -640,7 +641,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     final List<String> geocodes = new ArrayList<String>();
 
                     for (final String geocode : geocodesInViewport) {
-                        if (!app.isOffline(geocode, null)) {
+                        if (!cgData.isOffline(geocode, null)) {
                             geocodes.add(geocode);
                         }
                     }
@@ -1121,7 +1122,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (isLiveEnabled) {
                         searchResult = new SearchResult();
                     } else {
-                        searchResult = new SearchResult(app.getStoredInViewport(viewport, Settings.getCacheType()));
+                        searchResult = new SearchResult(cgData.loadStoredInViewport(viewport, Settings.getCacheType()));
                     }
                 } else {
                     // map started from another activity
@@ -1132,7 +1133,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
                 // live mode search result
                 if (isLiveEnabled) {
-                    SearchResult liveResult = new SearchResult(app.getCachedInViewport(viewport, Settings.getCacheType()));
+                    SearchResult liveResult = new SearchResult(cgData.loadCachedInViewport(viewport, Settings.getCacheType()));
                     searchResult.addGeocodes(liveResult.getGeocodes());
                 }
 
@@ -1160,7 +1161,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (isLiveEnabled || mapMode == MapMode.COORDS) {
                         //All visible waypoints
                         CacheType type = Settings.getCacheType();
-                        Set<cgWaypoint> waypointsInViewport = app.getWaypointsInViewport(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches(), type);
+                        Set<cgWaypoint> waypointsInViewport = cgData.loadWaypoints(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches(), type);
                         waypoints.addAll(waypointsInViewport);
                     }
                     else
@@ -1394,7 +1395,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         break;
                     }
 
-                    if (!app.isOffline(geocode, null)) {
+                    if (!cgData.isOffline(geocode, null)) {
                         if ((System.currentTimeMillis() - last) < 1500) {
                             try {
                                 int delay = 1000 + (int) (Math.random() * 1000.0) - (int) (System.currentTimeMillis() - last);
@@ -1484,9 +1485,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 Viewport viewport = null;
 
                 if (geocodeCenter != null) {
-                    viewport = app.getBounds(geocodeCenter);
+                    viewport = cgData.getBounds(geocodeCenter);
                 } else if (searchCenter != null) {
-                    viewport = app.getBounds(searchCenter.getGeocodes());
+                    viewport = cgData.getBounds(searchCenter.getGeocodes());
                 }
 
                 if (viewport == null) {
