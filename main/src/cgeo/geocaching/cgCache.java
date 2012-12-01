@@ -1203,15 +1203,16 @@ public class cgCache implements ICache, IWaypoint {
 
     /**
      * Duplicate a waypoint.
-     *
-     * @param index the waypoint to duplicate
+     * 
+     * @param original
+     *            the waypoint to duplicate
      * @return <code>true</code> if the waypoint was duplicated, <code>false</code> otherwise (invalid index)
      */
-    public boolean duplicateWaypoint(final int index) {
-        final cgWaypoint original = getWaypoint(index);
+    public boolean duplicateWaypoint(final cgWaypoint original) {
         if (original == null) {
             return false;
         }
+        final int index = getWaypointIndex(original);
         final cgWaypoint copy = new cgWaypoint(original);
         copy.setUserDefined();
         copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
@@ -1222,16 +1223,19 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * delete a user defined waypoint
      *
-     * @param index
-     *            of the waypoint in cache's waypoint list
+     * @param waypoint
+     *            to be removed from cache
      * @return <code>true</code>, if the waypoint was deleted
      */
-    public boolean deleteWaypoint(final int index) {
-        final cgWaypoint waypoint = getWaypoint(index);
+    public boolean deleteWaypoint(final cgWaypoint waypoint) {
         if (waypoint == null) {
             return false;
         }
+        if (waypoint.getId() <= 0) {
+            return false;
+        }
         if (waypoint.isUserDefined()) {
+            final int index = getWaypointIndex(waypoint);
             waypoints.remove(index);
             cgData.deleteWaypoint(waypoint.getId());
             cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
@@ -1242,22 +1246,6 @@ public class cgCache implements ICache, IWaypoint {
             return true;
         }
         return false;
-    }
-
-    /**
-     * delete a user defined waypoint
-     *
-     * @param waypoint
-     *            to be removed from cache
-     * @return <code>true</code>, if the waypoint was deleted
-     */
-    public boolean deleteWaypoint(final cgWaypoint waypoint) {
-        if (waypoint.getId() <= 0) {
-            return false;
-        }
-
-        final int index = getWaypointIndex(waypoint);
-        return index >= 0 && deleteWaypoint(index);
     }
 
     /**

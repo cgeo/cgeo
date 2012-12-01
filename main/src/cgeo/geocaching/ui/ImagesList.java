@@ -179,10 +179,6 @@ public class ImagesList {
         bitmaps.clear();
     }
 
-    public cgImage getImage(int id) {
-        return images.get(id);
-    }
-
     public void onCreateContextMenu(ContextMenu menu, View v) {
         final Resources res = activity.getResources();
         menu.setHeaderTitle(res.getString(R.string.cache_image));

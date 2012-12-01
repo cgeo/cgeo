@@ -112,7 +112,6 @@ import java.util.regex.Pattern;
  */
 public class CacheDetailActivity extends AbstractActivity {
 
-    private static final String EXTRAS_PAGE = "page";
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
     private static final int MENU_FIELD_TRANSLATE_EN = 3;
@@ -345,13 +344,7 @@ public class CacheDetailActivity extends AbstractActivity {
         });
 
         // switch to entry page (last used or 2)
-        int entryPageIndex;
-        if (extras != null && extras.get(EXTRAS_PAGE) != null) {
-            entryPageIndex = extras.getInt(EXTRAS_PAGE);
-        }
-        else {
-            entryPageIndex = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
-        }
+        int entryPageIndex = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
         if (viewPagerAdapter.getCount() < entryPageIndex) {
             for (int i = 0; i <= entryPageIndex; i++) {
                 // we can't switch to a page that is out of bounds, so we add null-pages
@@ -511,46 +504,44 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
 
                 break;
-            case CONTEXT_MENU_WAYPOINT_EDIT: {
-                final cgWaypoint waypoint = cache.getWaypoint(index);
-                if (waypoint != null) {
-                    EditWaypointActivity.startActivityEditWaypoint(this, waypoint.getId());
+            case CONTEXT_MENU_WAYPOINT_EDIT:
+                final cgWaypoint waypointEdit = cache.getWaypoint(index);
+                if (waypointEdit != null) {
+                    EditWaypointActivity.startActivityEditWaypoint(this, waypointEdit.getId());
                     refreshOnResume = true;
                 }
                 break;
-            }
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-                if (cache.duplicateWaypoint(index)) {
+                final cgWaypoint waypointDuplicate = cache.getWaypoint(index);
+                if (cache.duplicateWaypoint(waypointDuplicate)) {
                     cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DELETE:
-                if (cache.deleteWaypoint(index)) {
+                final cgWaypoint waypointDelete = cache.getWaypoint(index);
+                if (cache.deleteWaypoint(waypointDelete)) {
                     cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
-            case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION: {
-                final cgWaypoint waypoint = cache.getWaypoint(index);
-                if (waypoint != null) {
-                    NavigationAppFactory.startDefaultNavigationApplication(1, this, waypoint);
+            case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
+                final cgWaypoint waypointNavigation = cache.getWaypoint(index);
+                if (waypointNavigation != null) {
+                    NavigationAppFactory.startDefaultNavigationApplication(1, this, waypointNavigation);
                 }
-            }
                 break;
-            case CONTEXT_MENU_WAYPOINT_NAVIGATE: {
-                final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
-                if (waypoint != null) {
-                    NavigationAppFactory.showNavigationMenu(this, null, waypoint, null);
+            case CONTEXT_MENU_WAYPOINT_NAVIGATE:
+                final cgWaypoint waypointNav = cache.getWaypoint(contextMenuWPIndex);
+                if (waypointNav != null) {
+                    NavigationAppFactory.showNavigationMenu(this, null, waypointNav, null);
                 }
-            }
                 break;
-            case CONTEXT_MENU_WAYPOINT_CACHES_AROUND: {
-                final cgWaypoint waypoint = cache.getWaypoint(index);
-                if (waypoint != null) {
-                    cgeocaches.startActivityCoordinates(this, waypoint.getCoords());
+            case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
+                final cgWaypoint waypointAround = cache.getWaypoint(index);
+                if (waypointAround != null) {
+                    cgeocaches.startActivityCoordinates(this, waypointAround.getCoords());
                 }
-            }
                 break;
             default: {
                 if (imagesList != null && imagesList.onContextItemSelected(item)) {
@@ -963,13 +954,6 @@ public class CacheDetailActivity extends AbstractActivity {
     public static void startActivity(final Context context, final String geocode) {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
         detailIntent.putExtra("geocode", geocode);
-        context.startActivity(detailIntent);
-    }
-
-    public static void startActivity(final Context context, final String geocode, final int page) {
-        final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
-        detailIntent.putExtra("geocode", geocode);
-        detailIntent.putExtra(EXTRAS_PAGE, page);
         context.startActivity(detailIntent);
     }
 

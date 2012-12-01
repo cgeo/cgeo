@@ -13,10 +13,6 @@ public class ParserException extends Exception {
         super(detailMessage);
     }
 
-    public ParserException(Throwable throwable) {
-        super(throwable);
-    }
-
     public ParserException(String detailMessage, Throwable throwable) {
         super(detailMessage, throwable);
     }

@@ -110,15 +110,6 @@ public enum CacheAttribute {
         FIND_BY_GCRAWNAME = Collections.unmodifiableMap(mapGcRawNames);
     }
 
-    public static CacheAttribute getById(final int id) {
-        for (CacheAttribute attr : values()) {
-            if (attr.id == id) {
-                return attr;
-            }
-        }
-        return UNKNOWN;
-    }
-
     public static CacheAttribute getByGcRawName(final String gcRawName) {
         final CacheAttribute result = gcRawName != null ? FIND_BY_GCRAWNAME.get(gcRawName) : null;
         if (result == null) {
