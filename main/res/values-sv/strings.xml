@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo kompass</string>
 
@@ -136,8 +136,6 @@
   <string name="err_license">Du har inte bekräftat licensavtalet med Geocaching.com, så c:geo kan inte läsa in koordinater för cacherna.</string>
   <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
   <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com.</string>
-  <string name="err_store">Tyvärr kan c:geo inte spara cachen.</string>
-  <string name="err_drop">Tyvärr kan c:geo inte ta bort cachen.</string>
   <string name="err_detail_open">Tyvärr kan c:geo inte visa detaljer om geocachen.</string>
   <string name="err_detail_cache">Tyvärr kan c:geo inte visa den geocache du önskar. Är det verkligen en geocache?</string>
   <string name="err_detail_cache_find">Tyvärr kan c:geo inte hitta geocache</string>
@@ -150,20 +148,15 @@
   <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
   <string name="err_detail_no_map_static">c:geo hittade inga sparade kartor för denna cache.</string>
   <string name="err_detail_not_load_map_static">Tyvärr misslyckades c:geo att ladda sparade kartor.</string>
-  <string name="err_detail_ask_store_map_static">c:geo kunde inte läsa in statiska kartor. Ladda ner nu?</string>
   <string name="err_detail_still_working">Arbetar fortfarande med annat.</string>
   <string name="err_watchlist_still_managing">Hanterar fortfarande din watchlist.</string>
   <string name="err_watchlist_failed">Hanteringen av din watchlist misslyckades.</string>
-  <string name="err_navigation_no">c:geo kan inte hitta något stöd för navigering.</string>
   <string name="err_application_no">c:geo kan inte hitta något lämpligt program.</string>
   <string name="err_auth_initialize">Tyvärr misslyckades c:geo att starta inloggningsproceduren.</string>
   <string name="err_auth_process">Inloggningsproceduren misslyckades.</string>
   <string name="err_cannot_log_visit">c:geo har inte tillräckligt med information för att logga ditt besök. Vänligen försök igen från vyn men all information om cachen.</string>
   <string name="err_init_cleared">Tyvärr kan c:geo inte rensa inloggningsinställningarna.</string>
   <string name="err_download_fail">Tyvärr misslyckades c:geo att ladda ner cacher pga</string>
-  <string name="err_list_load_fail">Tyvärr misslyckades c:geo att ladda listan med cacher.</string>
-  <string name="err_store_failed">Tyvärr kan c:geo inte spara geocachen.</string>
-  <string name="err_refresh_failed">Tyvärr kan c:geo inte uppdatera geocachen.</string>
   <string name="err_dwld_details_failed">Tyvärr misslyckades c:geo att ladda detaljer.</string>
   <string name="err_load_descr_failed">Tyvärr kan c:geo inte ladda beskrivningen.</string>
   <string name="err_location_unknown">c:geo har inte koordinaterna för cachen.</string>
@@ -171,18 +164,12 @@
 
   <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
-  <string name="err_tb_details_download">Tyvärr misslyckades c:geo att ladda ner detaljer för trackable pga</string>
-  <string name="err_tb_forgot">Tyvärr glömde c:geo vilken trackable önskade.</string>
   <string name="err_tb_forgot_saw">Tyvärr glömde c:geo vilken trackable du såg.</string>
   <string name="err_tb_find">Tyvärr kunde c:geo inte hitta trackable</string>
   <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
 
   <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
-  <string name="err_waypoint_unknown">Tyvärr glömde c:geo vilken punkt du ville visa.</string>
   <string name="err_waypoint_add_failed">Tyvärr misslyckades c:geo att lägga till din punkt.</string>
-  <string name="err_waypoint_load_failed">Tyvärr misslyckades c:geo att ladda punkten.</string>
-  <string name="err_waypoint_delete_failed">Tyvärr kan c:geo inte ta bort punkten.</string>
-  <string name="err_waypoint_open_cache_failed">c:geo kan inte öppna beskrivningen av cachen.</string>
   <string name="err_point_unknown_position">Tyvärr kan c:geo inte bestämma din position.</string>
   <string name="err_point_no_position_given_title">Mer info krävs</string>
   <string name="err_point_no_position_given">Ange minst latitud och longitud eller avstånd och riktning. Du kan också ange alla fyra.</string>
@@ -197,14 +184,11 @@
   <string name="err_log_failed_server">Tyvärr misslyckades c:geo att posta loggen eftersom servern inte svarade.</string>
   <string name="err_log_post_failed">Tyvärr misslyckades c:geo att posta loggen.</string>
 
-  <string name="err_search_address_no_match">Tyvärr hittade c:geo ingen plats som stämde.</string>
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
   <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
   <string name="err_parse_lon">Tyvärr kan c:geo inte tolka longitud.</string>
   <string name="err_parse_dist">Tyvärr kan c:geo inte tolka avstånd.</string>
   <string name="err_parse_lat_lon">Tyvärr kan c:geo inte tolka latitud eller longitud.</string>
-
-  <string name="err_fieldnotes_export_failed">Exportering av Field Notes misslyckades.</string>
 
   <string name="warn_save_nothing">Det finns inget att spara.</string>
   <string name="warn_no_cache_coord">Det finns inga koordinater för cachen.</string>
@@ -229,7 +213,6 @@
   <string name="info_log_cleared">Loggen har rensats.</string>
   <string name="info_log_type_changed">Typen av logg har ändrats!</string>
 
-  <string name="info_fieldnotes_exported_to">Field Notes har exporterats till</string>
   <string name="info_storing_static_maps">Försöker ladda ner statiska kartor</string>
 
   <!-- location service -->
@@ -319,7 +302,6 @@
   <string name="caches_filter_track">Med trackables</string>
   <string name="caches_filter_clear">Rensa filter</string>
   <string name="caches_filter_modified">Med tillagda koordinater</string>
-  <string name="caches_exporting_fieldnote">Exporterar som Field Notes…</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
 
   <!-- caches lists -->
@@ -426,8 +408,6 @@
   <string name="init_gpx_importdir">GPX-importkatalog</string>
   <string name="init_gpx_exportdir_description">Här kan du välja katalog för GPX-exporteringar.</string>
   <string name="init_gpx_importdir_description">Här kan du välja katalog för GPX-importeringar.</string>
-  <string name="init_gpx_exportdir_select">Välj katalog för GPX-export</string>
-  <string name="init_gpx_importdir_select">Välj katalog för GPX-import</string>
   <string name="init_maptrail">Visa spår på kartan</string>
   <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
   <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
@@ -443,7 +423,6 @@
   <string name="init_dbonsdcard_title">Databasplacering</string>
   <string name="init_dbonsdcard_note">Du kan placera c:geos databas på ditt minneskort. På detta sätt kan du spara internminne, men du kan också få något sämre prestanda och c:geo kommer inte fungera om ditt minneskort inte är tillgängligt (exempelvis när den är kopplad till en dator).</string>
   <string name="init_dbonsdcard">Databas på minneskort</string>
-  <string name="init_dbmove">Flyttar databasen</string>
   <string name="init_dbmove_dbmove">Flyttar databasen</string>
   <string name="init_dbmove_running">Flyttar databasen</string>
   <string name="init_dbmove_success">Databasen har ny flyttats.</string>
@@ -514,7 +493,6 @@
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
   <string name="cache_description_table_note">Varning från c:geo! Beskrivningen innehåller HTML-tabeller som eventuellt kan behöva öppnas i en webbläsare för att visas på önskat sätt.</string>
-  <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
   <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
   <string name="cache_watchlist_add">Lägg till i watchlist</string>
@@ -604,7 +582,6 @@
   <string name="cache_images_loading">Laddar bilder…</string>
   <string name="cache_log_types">Loggtyper</string>
   <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
-  <string name="cache_export_fieldnote">Exportera som Field Notes</string>
   <string name="cache_clear_history">Rensa historik</string>
   <string name="cache_remove_from_history">Ta bort från historik</string>
   <string name="cache_license">Licens</string>
@@ -651,10 +628,7 @@
   <string name="map_file_select_title">Välj kartfil</string>
 
   <!-- theme file select -->
-  <string name="theme_file_select_title">Välj fil med egna anpassningar för karttema</string>
-
   <!--  import -->
-  <string name="import_title">Importerar…</string>
   <string name="web_import_title">Importerar från webben</string>
   <string name="web_import_waiting">Väntar på nya cacher från webben…</string>
   <string name="web_downloading">Laddar ner</string>
@@ -665,7 +639,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">Punkt</string>
-  <string name="waypoint_title">Punkt</string>
   <string name="waypoint_cache_coordinates">Cache koordinater</string>
   <string name="waypoint_custom">Egen</string>
   <string name="waypoint_my_coordinates">Mina koordinater</string>
@@ -679,11 +652,9 @@
   <string name="waypoint_note">Kommentar</string>
   <string name="waypoint_save">Spara</string>
   <string name="waypoint_loading">Laddar punkt…</string>
-  <string name="waypoint_unknown_coordinates">Koordinaterna ogiltiga</string>
   <string name="waypoint_done">Klar</string>
   <string name="waypoint_duplicate">Duplicera</string>
   <string name="waypoint_copy_of">Kopia av</string>
-  <string name="waypoint_menu_open_cache">Visa cache</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare målpunkter</string>
   <string name="search_remove_destination">Punkten borttagen</string>
@@ -814,7 +785,6 @@
 
   <!-- export -->
   <string name="export">Exportera</string>
-  <string name="export_as">Exportera som…</string>
   <string name="export_exportedto">exporterat till</string>
   <string name="export_failed">Exporteringen misslyckades</string>
   <string name="export_fieldnotes">Field Notes</string>
@@ -839,11 +809,11 @@
   <string name="about_auth_2">Klicka på \"Påbörja koppling mot Twitter\" om du vill koppla ihop <b>c:geo</b> med Twitter. Twitters hemsida kommer att öppnas i en webbläsare. Logga in på den sidan och tillåt <b>c:geo</b> att ansluta till ditt konto. När du godkänt så kommer Twitter att visa en PIN kod. Kom ihåg denna PIN kod, stäng webbläsaren och skriv in PIN koden i <b>c:geo</b> och bekräfta.</string>
 
   <!-- status -->
-  <string name="status_new_release">Ny officiell version finns tillgänglig.\nKlicka för att installera.</string>
-  <string name="status_new_nightly">Nytt nattligt bygge finns tillgängligt.\nKlicka för att installera.</string>
-  <string name="status_new_rc">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
-  <string name="status_geocaching_change">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
-  <string name="status_geocaching_livemap">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">Ny officiell version finns tillgänglig.\nKlicka för att installera.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">Nytt nattligt bygge finns tillgängligt.\nKlicka för att installera.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
 
   <string name="clipboard_copy_ok">Kopierat till urklipp.</string>
   <plurals name="days_ago">

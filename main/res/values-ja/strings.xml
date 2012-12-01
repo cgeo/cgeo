@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo コンパス</string>
 
@@ -135,8 +135,6 @@
   <string name="err_license">Geocaching.comのライセンス契約に同意しなかったのでキャッシュの座標を見ることはできません。</string>
   <string name="err_unpublished">The requested cache is unpublished.</string>
   <string name="err_premium_only">このキャッシュはプレミアム会員のみ有効です。</string>
-  <string name="err_store">キャッシュ情報を保存することができません。</string>
-  <string name="err_drop">キャッシュ情報を破棄することができません。</string>
   <string name="err_detail_open">キャッシュの詳細を開くことができません。</string>
   <string name="err_detail_cache">キャッシュ情報を表示することができません。これは本当にジオキャッシュですか?</string>
   <string name="err_detail_cache_find">キャッシュ情報が見つかりません。</string>
@@ -149,20 +147,15 @@
   <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした。</string>
   <string name="err_detail_no_map_static">このキャッシュのオフライン地図を見つけることができませんでした。</string>
   <string name="err_detail_not_load_map_static">オフライン地図のロードに失敗しました。</string>
-  <string name="err_detail_ask_store_map_static">オフライン地図のロードに失敗しました。再度保存しますか?</string>
   <string name="err_detail_still_working">他のタスクがまだ動作中です。</string>
   <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
   <string name="err_watchlist_failed">ウォッチリストの変更に失敗しました。</string>
-  <string name="err_navigation_no">使用できるナビゲーションが見つかりません。</string>
   <string name="err_application_no">適切なアプリケーションが見つかりません。</string>
   <string name="err_auth_initialize">認証プロセスの初期化に失敗しました。</string>
   <string name="err_auth_process">認証プロセスに失敗しました。</string>
   <string name="err_cannot_log_visit">ログを保存するのに十分な情報がありません。キャッシュの詳細を全て入力してください。</string>
   <string name="err_init_cleared">ログイン情報を消去することができません。</string>
   <string name="err_download_fail">キャッシュ情報のダウンロードに失敗しました。</string>
-  <string name="err_list_load_fail">キャッシュリストのロードに失敗しました。</string>
-  <string name="err_store_failed">キャッシュ情報を保存することができません。</string>
-  <string name="err_refresh_failed">キャッシュ情報を更新することができません。</string>
   <string name="err_dwld_details_failed">キャッシュ情報の詳細をダウンロードすることができません。</string>
   <string name="err_load_descr_failed">キャッシュの説明をロードすることができません。</string>
   <string name="err_location_unknown">キャッシュの場所が分かりません。</string>
@@ -170,18 +163,12 @@
 
   <string name="err_tb_display">トラッカブルアイテムを表示することができません。本当にトラッカブルアイテムですか?</string>
   <string name="err_tb_details_open">トラッカブルアイテムの詳細を開くことができません。</string>
-  <string name="err_tb_details_download">トラッカブルアイテムの詳細をダウンロードすることができません。</string>
-  <string name="err_tb_forgot">c:geo forgot which trackable you want.</string>
   <string name="err_tb_forgot_saw">c:geo forgot which trackable you saw.</string>
   <string name="err_tb_find">トラッカブルアイテムが見つかりません。</string>
   <string name="err_tb_find_that">トラッカブルアイテムが見つかりません。</string>
 
   <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add waypoint.</string>
-  <string name="err_waypoint_unknown">c:geo forgot what waypoint you want to display.</string>
   <string name="err_waypoint_add_failed">ウェイポイントを追加することができませんでした。</string>
-  <string name="err_waypoint_load_failed">ウェイポイントをロードすることができませんでした。</string>
-  <string name="err_waypoint_delete_failed">ウェイポイントを削除することができません。</string>
-  <string name="err_waypoint_open_cache_failed">キャッシュの詳細を開くことができません。</string>
   <string name="err_point_unknown_position">現在地を認識できません。</string>
   <string name="err_point_no_position_given_title">必要な情報</string>
   <string name="err_point_no_position_given">少なくとも経度、緯度、または距離と方位を入力してください。全てを入力することもできます。</string>
@@ -196,14 +183,11 @@
   <string name="err_log_failed_server">サーバの反応がないのでログを投稿することができませんでした。</string>
   <string name="err_log_post_failed">ログを投稿することができなかったようです。geocaching.comで確認してください。</string>
 
-  <string name="err_search_address_no_match">該当する場所が見つかりません。</string>
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
   <string name="err_parse_lat">緯度の解析ができません。</string>
   <string name="err_parse_lon">経度の解析ができません。</string>
   <string name="err_parse_dist">距離の解析ができません。</string>
   <string name="err_parse_lat_lon">緯度または経度の解析ができません。</string>
-
-  <string name="err_fieldnotes_export_failed">フィールドノートのエクスポートに失敗しました。</string>
 
   <string name="warn_save_nothing">保存すべきものがありません。</string>
   <string name="warn_no_cache_coord">座標のあるキャッシュがありません。</string>
@@ -228,7 +212,6 @@
   <string name="info_log_cleared">ログを消去しました。</string>
   <string name="info_log_type_changed">ログのタイプを変更しました。</string>
 
-  <string name="info_fieldnotes_exported_to">フィールドノートとしてエクスポートしました</string>
   <string name="info_storing_static_maps">オフライン用に地図を保存中</string>
 
   <!-- location service -->
@@ -318,7 +301,6 @@
   <string name="caches_filter_track">トラッカブルアイテムあり</string>
   <string name="caches_filter_clear">フィルターをクリア</string>
   <string name="caches_filter_modified">座標の更新あり</string>
-  <string name="caches_exporting_fieldnote">フィールドノートとしてエクスポート中…</string>
   <string name="caches_removing_from_history">履歴から削除中…</string>
 
   <!-- caches lists -->
@@ -424,8 +406,6 @@
   <string name="init_gpx_importdir">GPXインポートフォルダ</string>
   <string name="init_gpx_exportdir_description">GPXファイルへエクスポートする際の保存先フォルダを選択できます。</string>
   <string name="init_gpx_importdir_description">GPXファイルへインポートする際の保存先フォルダを選択できます。</string>
-  <string name="init_gpx_exportdir_select">GPXファイルのエクスポートフォルダを選択</string>
-  <string name="init_gpx_importdir_select">GPXファイルのインポートフォルダを選択</string>
   <string name="init_maptrail">地図に軌跡を表示</string>
   <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
   <string name="init_trackautovisit">「見つけた」ログを書く際に、持っているトラッカブルアイテムを自動的に「訪れた」にする</string>
@@ -441,7 +421,6 @@
   <string name="init_dbonsdcard_title">データベースの保存場所</string>
   <string name="init_dbonsdcard_note">c:geoのデータベースを外部メディア(SDカード)に保存することもできます。その場合は端末の内蔵メモリの空き容量は増えますが、c:geoはSDカードなしでは使用できなくなり動作も少し遅くなるかもしれません。</string>
   <string name="init_dbonsdcard">SDカードにデータベースを保存</string>
-  <string name="init_dbmove">データベースの移動</string>
   <string name="init_dbmove_dbmove">データベースの移動</string>
   <string name="init_dbmove_running">データベースの移動中</string>
   <string name="init_dbmove_success">データベースを移動しました。</string>
@@ -507,7 +486,6 @@
   <string name="cache_description">説明</string>
   <string name="cache_description_long">全て表示</string>
   <string name="cache_description_table_note">キャッシュ情報の説明にはhtmlを使ったテーブル表が含まれています。正しく表示するにはブラウザで開く必要があるかもしれません。</string>
-  <string name="cache_watchlist">ウォッチリスト</string>
   <string name="cache_watchlist_on">このキャッシュはウォッチリストに登録されています。</string>
   <string name="cache_watchlist_not_on">このキャッシュはウォッチリストに登録されていません。</string>
   <string name="cache_watchlist_add">ウォッチリストに追加</string>
@@ -594,7 +572,6 @@
   <string name="cache_spoiler_images_loading">スポイラー画像をロード中…</string>
   <string name="cache_log_types">ログタイプ</string>
   <string name="cache_coordinates_no">このキャッシュに座標値はありません。</string>
-  <string name="cache_export_fieldnote">フィールドノートとしてエクスポート</string>
   <string name="cache_clear_history">全履歴を削除</string>
   <string name="cache_remove_from_history">履歴から削除</string>
   <string name="cache_license">ライセンス</string>
@@ -636,7 +613,6 @@
   <string name="map_file_select_title">地図ファイルの選択</string>
 
   <!--  import -->
-  <string name="import_title">インポート…</string>
   <string name="web_import_title">Webからインポート(Send 2 c:geo経由)</string>
   <string name="web_import_waiting">Webから新しいキャッシュ情報を確認中…</string>
   <string name="web_downloading">ダウンロード中</string>
@@ -647,7 +623,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">ウェイポイント</string>
-  <string name="waypoint_title">ウェイポイント</string>
   <string name="waypoint_cache_coordinates">キャッシュ座標</string>
   <string name="waypoint_custom">カスタム</string>
   <string name="waypoint_my_coordinates">現在地</string>
@@ -661,11 +636,9 @@
   <string name="waypoint_note">メモ</string>
   <string name="waypoint_save">保存</string>
   <string name="waypoint_loading">ウェイポイントをロード中…</string>
-  <string name="waypoint_unknown_coordinates">座標値が不明</string>
   <string name="waypoint_done">決定</string>
   <string name="waypoint_duplicate">複製</string>
   <string name="waypoint_copy_of">コピー ～ </string>
-  <string name="waypoint_menu_open_cache">Open Cache</string>
   <string name="search_history">履歴</string>
   <string name="search_history_empty">履歴はありません</string>
   <string name="search_remove_destination">履歴から削除しました</string>
@@ -808,7 +781,6 @@
 
   <!-- export -->
   <string name="export">エクスポート</string>
-  <string name="export_as">Export as…</string>
   <string name="export_exportedto">にエクスポートしました</string>
   <string name="export_failed">エクスポートに失敗しました</string>
   <string name="export_fieldnotes">フィールドノート</string>
@@ -979,11 +951,11 @@
   <string name="about_auth_2">「認証を開始する」ボタンを押すとブラウザでTwitterのページが開きます。そのページにログインすれば<b>c:geo</b>があなたのアカウントにアクセルする許可が得られます。ログインに成功したら数字のPINコードが表示されるので、この下の入力欄にコピー&amp;ペーストして「完了」ボタンを押してください。</string>
 
   <!-- status -->
-  <string name="status_new_release">新しいバージョンがあります。\nクリックしてインストールしてください。</string>
-  <string name="status_new_nightly">新しいナイトリービルドがあります。\nクリックしてインストールしてください。</string>
-  <string name="status_new_rc">新しいRCバージョンがあります。\nクリックしてインストールしてください。</string>
-  <string name="status_geocaching_change">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
-  <string name="status_geocaching_livemap">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります。\nクリックしてインストールしてください。</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">新しいナイトリービルドがあります。\nクリックしてインストールしてください。</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">新しいRCバージョンがあります。\nクリックしてインストールしてください。</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
 
   <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
   <plurals name="days_ago">

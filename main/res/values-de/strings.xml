@@ -136,8 +136,6 @@
   <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
   <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht</string>
   <string name="err_premium_only">Der Cache ist nur für Premium Mitglieder von Geocaching.com verfügbar</string>
-  <string name="err_store">c:geo konnte den Cache nicht speichern.</string>
-  <string name="err_drop">c:geo konnte den Cache nicht löschen.</string>
   <string name="err_detail_open">c:geo konnte die Cache-Details nicht öffnen.</string>
   <string name="err_detail_cache">c:geo konnte diesen Cache nicht darstellen. Ist es wirklich ein Cache?</string>
   <string name="err_detail_cache_find">c:geo konnte keinen Cache finden.</string>
@@ -150,20 +148,15 @@
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
   <string name="err_detail_no_map_static">c:geo hat keine statische Karte für diesen Cache gefunden.</string>
   <string name="err_detail_not_load_map_static">c:geo konnte die statische Karte nicht laden.</string>
-  <string name="err_detail_ask_store_map_static">c:geo konnte die statische Karte nicht laden. Jetzt speichern?</string>
   <string name="err_detail_still_working">Arbeite noch an anderer Aufgabe.</string>
   <string name="err_watchlist_still_managing">c:geo versucht noch immer die Watchlist zu aktualisieren.</string>
   <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
-  <string name="err_navigation_no">c:geo konnte keine unterstützte Art der Navigation finden.</string>
   <string name="err_application_no">c:geo konnte keine passende Anwendung finden.</string>
   <string name="err_auth_initialize">c:geo konnte die Autorisierung nicht initialisieren.</string>
   <string name="err_auth_process">Autorisierung fehlgeschlagen.</string>
   <string name="err_cannot_log_visit">c:geo hat nicht genügend Informationen um den Besuch zu loggen. Bitte über die Cache-Details versuchen.</string>
   <string name="err_init_cleared">c:geo konnte die Anmeldedaten nicht entfernen.</string>
   <string name="err_download_fail">c:geo konnte keine Caches laden, weil </string>
-  <string name="err_list_load_fail">Laden der Cacheliste fehlgeschlagen.</string>
-  <string name="err_store_failed">Speichern des Caches fehlgeschlagen.</string>
-  <string name="err_refresh_failed">Aktualisierung fehlgeschlagen.</string>
   <string name="err_dwld_details_failed">Download der Cache-Details fehlgeschlagen.</string>
   <string name="err_load_descr_failed">Laden der Cachebeschreibung fehlgeschlagen.</string>
   <string name="err_location_unknown">c:geo erkennt die Position des Caches nicht.</string>
@@ -171,18 +164,12 @@
 
   <string name="err_tb_display">"c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
-  <string name="err_tb_details_download">c:geo konnte die Details des Trackables nicht laden, weil</string>
-  <string name="err_tb_forgot">c:geo hat vergessen, welcher Trackable geöffnet werden sollte.</string>
   <string name="err_tb_forgot_saw">c:geo hat vergessen, welcher Trackable gesehen wurde.</string>
   <string name="err_tb_find">c:geo findet den Trackable nicht</string>
   <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
-  <string name="err_waypoint_unknown">c:geo hat vergessen, welcher Wegpunkt angesehen werden sollte.</string>
   <string name="err_waypoint_add_failed">c:geo konnte den Wegpunkt nicht hinzufügen.</string>
-  <string name="err_waypoint_load_failed">c:geo konnte den Wegpunkt nicht laden.</string>
-  <string name="err_waypoint_delete_failed">c:geo konnte den Wegpunkt nicht löschen.</string>
-  <string name="err_waypoint_open_cache_failed">c:geo konnte die Cachedetails nicht laden.</string>
   <string name="err_point_unknown_position">c:geo konnte den aktuellen Standort nicht bestimmen.</string>
   <string name="err_point_no_position_given_title">Info benötigt</string>
   <string name="err_point_no_position_given">Mindestens Längen- und Breitengrad oder Entfernung und Richtung angeben. Auch alle Angaben sind möglich.</string>
@@ -197,14 +184,11 @@
   <string name="err_log_failed_server">c:geo konnte Log nicht senden, weil der Server nicht antwortete.</string>
   <string name="err_log_post_failed">c:geo konnte Log nicht absenden.</string>
 
-  <string name="err_search_address_no_match">Keinen passenden Ort gefunden.</string>
   <string name="err_search_address_forgot">c:geo hat die Adresse vergessen, die gesucht wurde.</string>
   <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
   <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
   <string name="err_parse_lat_lon">c:geo konnte den Breiten- oder Längengrad nicht verarbeiten.</string>
-
-  <string name="err_fieldnotes_export_failed">Exportieren der Field-Notes fehlgeschlagen.</string>
 
   <string name="warn_save_nothing">Es gibt nichts zum Speichern.</string>
   <string name="warn_no_cache_coord">Es gibt hier keinen Cache mit Koordinaten.</string>
@@ -229,7 +213,6 @@
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
 
-  <string name="info_fieldnotes_exported_to">Field-Notes exportiert nach</string>
   <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
 
   <!-- location service -->
@@ -320,7 +303,6 @@
   <string name="caches_filter_track">Mit Trackables</string>
   <string name="caches_filter_clear">Filter zurücksetzen</string>
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
-  <string name="caches_exporting_fieldnote">Exportiere als Field-Notes…</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
 
   <!-- caches lists -->
@@ -426,8 +408,6 @@
   <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
   <string name="init_gpx_exportdir_description">Hier kann das Verzeichnis für GPX-Exporte gewählt werden.</string>
   <string name="init_gpx_importdir_description">Hier kann das Verzeichnis für GPX-Importe gewählt werden.</string>
-  <string name="init_gpx_exportdir_select">Wähle Verzeichnis für GPX-Exporte</string>
-  <string name="init_gpx_importdir_select">Wähle Verzeichnis für GPX-Importe</string>
   <string name="init_maptrail">Zeige Spur auf Karte</string>
   <string name="init_share_after_export">Weiterleiten nach dem Export</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
@@ -443,7 +423,6 @@
   <string name="init_dbonsdcard_title">Datenspeicherung</string>
   <string name="init_dbonsdcard_note">Die Datenbank von c:geo kann auf eine externe Speicherkarte verschoben werden. Hiermit kann interner Speicher gespart werden, allerdings wird sich die Leistung etwas reduzieren und c:geo funktioniert nicht mehr ohne verfügbare Speicherkarte.</string>
   <string name="init_dbonsdcard">Datenbank auf externer Karte</string>
-  <string name="init_dbmove">Verschiebe Datenbank</string>
   <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
   <string name="init_dbmove_running">Verschiebe Datenbank</string>
   <string name="init_dbmove_success">Die Datenbank wurde erfolgreich verschoben.</string>
@@ -512,7 +491,6 @@
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
   <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf Geocaching.com korrekt angezeigt werden.</string>
-  <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
   <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
   <string name="cache_watchlist_add">Hinzufügen</string>
@@ -602,7 +580,6 @@
   <string name="cache_spoiler_images_loading">Lade Hinweisbilder…</string>
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string>
-  <string name="cache_export_fieldnote">Exportiere als Field-Notes</string>
   <string name="cache_clear_history">Verlauf leeren</string>
   <string name="cache_remove_from_history">Aus Verlauf löschen</string>
   <string name="cache_license">Lizenz</string>
@@ -649,10 +626,7 @@
   <string name="map_file_select_title">Kartendatei wählen</string>
 
   <!-- theme file select -->
-  <string name="theme_file_select_title">Karten-Theme wählen</string>
-
   <!--  import -->
-  <string name="import_title">Importiere…</string>
   <string name="web_import_title">Aus dem Internet importieren</string>
   <string name="web_import_waiting">Warte auf neue Caches aus dem Internet…</string>
   <string name="web_downloading">Lade herunter</string>
@@ -663,7 +637,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">Wegpunkt</string>
-  <string name="waypoint_title">Wegpunkt</string>
   <string name="waypoint_cache_coordinates">Cache Koordinaten</string>
   <string name="waypoint_custom">Benutzerdefiniert</string>
   <string name="waypoint_my_coordinates">Meine Koordinaten</string>
@@ -677,11 +650,9 @@
   <string name="waypoint_note">Notiz</string>
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt…</string>
-  <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
   <string name="waypoint_done">Fertig</string>
   <string name="waypoint_duplicate">Duplizieren</string>
   <string name="waypoint_copy_of">Kopie von</string>
-  <string name="waypoint_menu_open_cache">Cache öffnen</string>
   <string name="search_history">Verlauf</string>
   <string name="search_history_empty">Keine Ziele bisher</string>
   <string name="search_remove_destination">Ziel gelöscht</string>
@@ -819,7 +790,6 @@
 
   <!-- export -->
   <string name="export">Exportieren</string>
-  <string name="export_as">Exportieren als…</string>
   <string name="export_exportedto">exportiert nach</string>
   <string name="export_failed">Exportieren fehlgeschlagen</string>
   <string name="export_fieldnotes">Field Notes</string>

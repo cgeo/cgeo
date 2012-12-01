@@ -91,8 +91,6 @@
   <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt.</string>
   <string name="err_wrong">Feilaktige innloggings-opplysninger</string>
   <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens-betingelse, så c:geo kan ikke laste cachens koordinater</string>
-  <string name="err_store">Beklager, c:geo klarte ikke å lagre cachen.</string>
-  <string name="err_drop">Beklager, c:geo klarte ikke å slette cachen.</string>
   <string name="err_detail_open">Beklager, c:geo klarte ikke å finne detaljene.</string>
   <string name="err_detail_cache">Beklager, c:geo klarte ikke å finne den forespurte cachen. Er du sikker på at den eksisterer?</string>
   <string name="err_detail_cache_find">Beklager, c:geo klarte ikke å finne geocachen</string>
@@ -103,24 +101,18 @@
   <string name="err_detail_cache_forgot_visit">Beklager, c:geo glemte hvilken cache du fant.</string>
   <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
   <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>
-  <string name="err_navigation_no">c:geo klarte ikke å finne støttet navigasjon.</string>
   <string name="err_application_no">c:geo klarte ikke å finne en passende applikasjon.</string>
   <string name="err_auth_initialize">Beklager, c:geo klarte ikke å igangsette autoriserings-prosessen.</string>
   <string name="err_auth_process">Autoriserings-prosessen mislyktes.</string>
   <string name="err_cannot_log_visit">c:geo har ikke nok informasjon til å logge funn. Prøv å laste inn cachens detaljer først.</string>
   <string name="err_init_cleared">Beklager, c:geo klarte ikke å fjerne innloggings-opplysningene.</string>
   <string name="err_download_fail">Beklager. c:geo klarte ikke å laste ned cachene p.g.a.</string>
-  <string name="err_list_load_fail">Beklager, c:geo klarte ikke å laste cache-listen..</string>
-  <string name="err_store_failed">Beklager, c:geo klarte ikke å lagre cachen.</string>
-  <string name="err_refresh_failed">Beklager, c:geo klarte ikke å oppdatere cachen.</string>
   <string name="err_dwld_details_failed">Beklager, c:geo klarte ikke å laste ned cachens detaljer</string>
   <string name="err_load_descr_failed">Beklager, c:geo klarte ikke å åpne beskrivelsen.</string>
 
   <string name="err_location_unknown">c:geo vet ikke hvor cachen er.</string>
   <string name="err_tb_display">"Beklager, c:geo klarte ikke å finne trackable\'en du etterspurte. Er det virkelig en trackable?</string>
   <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne tracable\'ens detaljer.</string>
-  <string name="err_tb_details_download">Beklager, c:geo klarte ikke å laste ned trackable\'ens detaljer p.g.a.</string>
-  <string name="err_tb_forgot">Beklager, c:geo glemte hvilken trackable du etterspurte.</string>
   <string name="err_tb_forgot_saw">Beklager, c:geo glemte hvilken trackable du oppdaget.</string>
   <string name="err_tb_find">Beklager, c:geo klarte ikke å finne noen trackable\'er.</string>
   <string name="err_tb_find_that">Beklager, c:geo kan ikke finne noen trackable\'er</string>
@@ -131,7 +123,6 @@
   <string name="err_log_failed_server">Beklager, c:geo klarte ikke å logge funnet fordi serveren er nede.</string>
   <string name="err_log_post_failed">Beklager, c:geo klarte ikke å logge funnet.</string>
 
-  <string name="err_search_address_no_match">Beklager, c:geo klarte ikke å finne den forespurte adressen.</string>
   <string name="err_search_address_forgot">Beklager, c:geo glemte adressen du prøvde å finne.</string>
   <string name="err_parse_lat">Beklager, c:geo klarte ikke å lese breddegraden.</string>
   <string name="err_parse_lon">Beklager, c:geo klarte ikke å lese lengdegraden.</string>

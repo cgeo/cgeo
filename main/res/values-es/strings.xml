@@ -118,8 +118,6 @@
   <string name="err_missing_auth">Falta nombre de usuario o contraseña.</string>
   <string name="err_wrong">Información de acceso errónea</string>
   <string name="err_license">El usuario no ha aceptado las condiciones de Geocaching.com license agreement, por lo que c:geo no puede cargar las coordenadas de los escondites.</string>
-  <string name="err_store">Lo siento, c:geo no puede almacenar el escondite.</string>
-  <string name="err_drop">Lo siento, c:geo no puede omitir el escondite.</string>
   <string name="err_detail_open">Lo siento, c:geo no puede abrir los detalles del escondite.</string>
   <string name="err_detail_cache">Lo siento, c:geo no puee mostrar el escondite que quieres. ¿Segur que es un geocache?</string>
   <string name="err_detail_cache_find">Lo siento, c:geo no puede encontrar escondites</string>
@@ -133,16 +131,12 @@
   <string name="err_detail_not_load_map_static">Lo siento, c:geo no ha podido cargar mapas estáticos.</string>
   <string name="err_watchlist_still_managing">Seguir gestionando tu lista de seguimiento.</string>
   <string name="err_watchlist_failed">Error al cambiar la lista de seguimiento.</string>
-  <string name="err_navigation_no">c:geo no encuentra ninguna navegación soportada.</string>
   <string name="err_application_no">c:geo no encuentra ninguna aplicación válida.</string>
   <string name="err_auth_initialize">Lo siento, c:geo no ha podido iniciar el proceso de autorización.</string>
   <string name="err_auth_process">El proceso de autorización ha fallado.</string>
   <string name="err_cannot_log_visit">c:geo no tiene información suficiente para registrar la visita. Inténtalo de nuevo con más detalles sobre el escondite.</string>
   <string name="err_init_cleared">Lo siento, c:geo no puede borrar la información registrada.</string>
   <string name="err_download_fail">Lo siento, c:geo no ha podido descargar escondites a causa de </string>
-  <string name="err_list_load_fail">Lo siento, c:geo no ha podido cargar la lista de escondites.</string>
-  <string name="err_store_failed">Lo siento, c:geo no puede guardar el escondite.</string>
-  <string name="err_refresh_failed">Lo siento, c:geo no puede actualizar el escondite.</string>
   <string name="err_dwld_details_failed">Lo siento, c:geo no ha podido descargar los detalles del escondite.</string>
   <string name="err_load_descr_failed">Lo siento, c:geo no ha podido cargar la descripción.</string>
   <string name="err_location_unknown">c:geo no conoce la ubicación del escondite.</string>
@@ -150,17 +144,12 @@
 
   <string name="err_tb_display">"Lo siento, c:geo no puede mostrar el rastreable que buscas. ¿Es realmente rastreable?</string>
   <string name="err_tb_details_open">Lo siento, c:geo no puede abrir los detalles del rastreable.</string>
-  <string name="err_tb_details_download">Lo siento, c:geo no ha podido descargar los detalles del rastreable a causa de</string>
-  <string name="err_tb_forgot">Lo siento, c:geo ha olvidado qué rastreable quieres.</string>
   <string name="err_tb_forgot_saw">Lo siento, c:geo ha olvidado qué rastreable has visto.</string>
   <string name="err_tb_find">Lo siento, c:geo no encuentra el rasteable</string>
   <string name="err_tb_find_that">Lo siento, c:geo no encuentra ese rastreable.</string>
 
   <string name="err_waypoint_cache_unknown">Lo siento, c:geo no sabe a qué escondite quieres añadir un punto de referencia.</string>
-  <string name="err_waypoint_unknown">Lo siento, c:geo ha olvidado qué punto de referencia quieres visualizar.</string>
   <string name="err_waypoint_add_failed">Lo siento, c:geo no ha podido añadir tu punto de referencia.</string>
-  <string name="err_waypoint_load_failed">Lo siento, c:geo no ha podido cargar el punto de referencia.</string>
-  <string name="err_waypoint_delete_failed">Lo siento, c:geo no puede borrar el punto de referencia.</string>
   <string name="err_point_unknown_position">Lo siento, c:geo n puedo identificar donde estás.</string>
   <string name="err_point_no_position_given_title">Información obligatoria</string>
   <string name="err_point_no_position_given">Rellena como mínimo latitud y longitud o distancia y orientación. También puedes rellenar los cuatro campos.</string>
@@ -176,13 +165,10 @@
   <string name="err_log_failed_server">Lo siento, c:geo no ha podido enviar el registro porque el servidor no responde.</string>
   <string name="err_log_post_failed">Lo siento, c:geo no ha podido enviar el registro.</string>
 
-  <string name="err_search_address_no_match">Lo siento, c:geo no encuentra ningún lugar coincidente.</string>
   <string name="err_search_address_forgot">Lo siento, c:geo ha olvidado la dirección que buscabas.</string>
   <string name="err_parse_lat">Lo siento, c:geo no puede procesar la latitud.</string>
   <string name="err_parse_lon">Lo siento, c:geo no puede procesar la longitud.</string>
   <string name="err_parse_dist">Lo siento, c:geo can\'t no puede procesar la distancia.</string>
-
-  <string name="err_fieldnotes_export_failed">Eror al exportar notas de campo.</string>
 
   <string name="warn_save_nothing">No hay nada para guardar.</string>
   <string name="warn_no_cache_coord">No hay escondite con coordenadas.</string>
@@ -204,8 +190,6 @@
   <string name="info_log_saved">c:geo guardado sin problemas.</string>
   <string name="info_log_cleared">Registro borrado.</string>
   <string name="info_log_type_changed">¡El tipo de registro ha sido cambiado!</string>
-
-  <string name="info_fieldnotes_exported_to">Notas de campo exportadas a</string>
 
   <!-- location service -->
   <string name="loc_last">Última conocida</string>
@@ -284,7 +268,6 @@
   <string name="caches_filter_type">tipo</string>
   <string name="caches_filter_track">con rastreables</string>
   <string name="caches_filter_clear">limpiar filtros</string>
-  <string name="caches_exporting_fieldnote">Exportando como Notas de campo…</string>
   <string name="caches_removing_from_history">Borrando del historial…</string>
 
   <!-- caches lists -->
@@ -424,7 +407,6 @@
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota personal</string>
   <string name="cache_description">Descripción</string>
-  <string name="cache_watchlist">Lista de seguimiento</string>
   <string name="cache_watchlist_on">Este escondite está en tu Lista de seguimiento.</string>
   <string name="cache_watchlist_not_on">Este escondite no está en tu Lista de seguimiento.</string>
   <string name="cache_watchlist_add">Añadir a Lista de seguimiento</string>
@@ -486,7 +468,6 @@
   <string name="cache_spoiler_images_loading">Cargando imágenes reveladoras…</string>
   <string name="cache_log_types">Tipos de registro</string>
   <string name="cache_coordinates_no">Este escondite no tiene coordenadas.</string>
-  <string name="cache_export_fieldnote">Exportar como Notas de campo</string>
   <string name="cache_clear_history">Borrar historial</string>
   <string name="cache_remove_from_history">Borrar del historial</string>
 
@@ -507,7 +488,6 @@
   <string name="map_file_select_title">Selecciona un mapa</string>
 
   <!--  import -->
-  <string name="import_title">Importar…</string>
   <string name="web_import_title">Importar de la web</string>
   <string name="web_import_waiting">Esperando por nuevos escondites desde la web…</string>
   <string name="web_downloading">Descargando</string>
@@ -517,7 +497,6 @@
   <string name="popup_more">Más detalles</string>
 
   <!-- waypoint -->
-  <string name="waypoint_title">Punto de referencia</string>
   <string name="waypoint_custom">A medida</string>
   <string name="waypoint_my_coordinates">Mis coordenadas</string>
   <string name="waypoint_bearing">Orientación</string>
@@ -530,7 +509,6 @@
   <string name="waypoint_note">Nota</string>
   <string name="waypoint_save">Guardar</string>
   <string name="waypoint_loading">Cargando punto de referencia…</string>
-  <string name="waypoint_unknown_coordinates">Coordenadas desconocidas</string>
   <string name="search_history">Historial</string>
   <string name="search_history_empty">No hay destinos anteriores</string>
   <string name="search_remove_destination">Destino borrado</string>

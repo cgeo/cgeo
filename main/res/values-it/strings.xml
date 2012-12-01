@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo bussola</string>
 
@@ -136,8 +136,6 @@
   <string name="err_license">L\'utente non ha approvato le condizione del Geocaching.com license agreement, così c:geo non può caricare le coordinate dei cache.</string>
   <string name="err_unpublished">Il cache richiesto è stato ritirato</string>
   <string name="err_premium_only">Cache disponibile solo per utenti premium di Geocaching.com</string>
-  <string name="err_store">c:geo non può salvare il cache.</string>
-  <string name="err_drop">c:geo non può eliminare il cache.</string>
   <string name="err_detail_open">c:geo non può aprire i dettagli del cache.</string>
   <string name="err_detail_cache">c:geo non può visualizzare il cache richiesto. È veramente un geocache?</string>
   <string name="err_detail_cache_find">c:geo non trova il geocache</string>
@@ -150,20 +148,15 @@
   <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questo cache.</string>
   <string name="err_detail_no_map_static">c:geo non trova alcuna mappa statica per questo cache.</string>
   <string name="err_detail_not_load_map_static">c:geo non riesce a caricare la mappe statiche.</string>
-  <string name="err_detail_ask_store_map_static">c:geo non riesce a caricare la mappa statica. La salvo ora?</string>
   <string name="err_detail_still_working">Momentaneamente occupato a svolgere un altro compito.</string>
   <string name="err_watchlist_still_managing">Sto ancora gestendo la tua watchlist.</string>
   <string name="err_watchlist_failed">La modifica alla tua watchlist è fallita.</string>
-  <string name="err_navigation_no">c:geo non trova nessun navigatore supportato.</string>
   <string name="err_application_no">c:geo non trova nessuna applicazione compatibile.</string>
   <string name="err_auth_initialize">c:geo ha fallito l\'inizializzazione del processo di autorizzazione.</string>
   <string name="err_auth_process">Processo di autorizzazione fallito.</string>
   <string name="err_cannot_log_visit">c:geo non ha abbastanza informazioni per salvare il log. Per cortesia effettuarlo dalla pagina dei dettagli completi del cache.</string>
   <string name="err_init_cleared">c:geo non può cancellare le informazioni di login.</string>
   <string name="err_download_fail">c:geo ha fallito il download dei cache perché </string>
-  <string name="err_list_load_fail">c:geo ha fallito il caricamento della lista cache.</string>
-  <string name="err_store_failed">c:geo non può salvare i geocache.</string>
-  <string name="err_refresh_failed">c:geo non può aggiornare i geocache.</string>
   <string name="err_dwld_details_failed">c:geo ha fallito il download dei dettagli del cache.</string>
   <string name="err_load_descr_failed">c:geo non può caricare la descrizione.</string>
   <string name="err_location_unknown">c:geo non conosce la posizione dei cache.</string>
@@ -171,18 +164,12 @@
 
   <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
   <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
-  <string name="err_tb_details_download">c:geo ha fallito il download dei dettagli del trackable perché </string>
-  <string name="err_tb_forgot">c:geo ha dimenticato quale trackable volevi.</string>
   <string name="err_tb_forgot_saw">c:geo ha dimenticato quale trackable vedevi.</string>
   <string name="err_tb_find">c:geo non trova nessun trackable</string>
   <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo non conosce a quale cache vuoi aggiungere un waypoint.</string>
-  <string name="err_waypoint_unknown">c:geo ha dimenticato quale waypoint vuoi visualizzare.</string>
   <string name="err_waypoint_add_failed">c:geo non è riuscito ad aggiungere il tuo waypoint.</string>
-  <string name="err_waypoint_load_failed">c:geo non è riuscito a caricare il waypoint.</string>
-  <string name="err_waypoint_delete_failed">c:geo non riesce a cancellare il waypoint.</string>
-  <string name="err_waypoint_open_cache_failed">c:geo non riesce ad aprire i dettagli del cache.</string>
   <string name="err_point_unknown_position">c:geo non capisce dove ti trovi.</string>
   <string name="err_point_no_position_given_title">Info richieste</string>
   <string name="err_point_no_position_given">Inserisci almeno latitudine, o longitudine, o distanza e angolo. Puoi anche inserire tutti e quattro i valori.</string>
@@ -197,14 +184,11 @@
   <string name="err_log_failed_server">c:geo non è riuscito ad inviare il log perché il server non risponde.</string>
   <string name="err_log_post_failed">Sembra che il log non sia stato inviato. Prego verificare su Geocaching.com.</string>
 
-  <string name="err_search_address_no_match">c:geo non ha trovato luoghi corrispondenti.</string>
   <string name="err_search_address_forgot">c:geo ha dimenticato l\'indirizzo che vuoi trovare.</string>
   <string name="err_parse_lat">c:geo non riesce ad interpretare la latitudine.</string>
   <string name="err_parse_lon">c:geo non riesce ad interpretare la longitudine.</string>
   <string name="err_parse_dist">c:geo non riesce ad interpretare la distanza.</string>
   <string name="err_parse_lat_lon">c:geo non riesce ad interpretare la latitudine o la longitudine.</string>
-
-  <string name="err_fieldnotes_export_failed">Esportazione delle note fallita.</string>
 
   <string name="warn_save_nothing">Non c\'è nulla da salvare.</string>
   <string name="warn_no_cache_coord">Non ci sono cache con coordinate.</string>
@@ -228,7 +212,6 @@
   <string name="info_log_cleared">Il log è stato azzerato.</string>
   <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
 
-  <string name="info_fieldnotes_exported_to">Note esportate verso </string>
   <string name="info_storing_static_maps">Tento di salvare la static map</string>
 
   <!-- location service -->
@@ -317,7 +300,6 @@
   <string name="caches_filter_track">Con oggetti trackables</string>
   <string name="caches_filter_clear">Rimuovi filtri</string>
   <string name="caches_filter_modified">Con coordinate modificate</string>
-  <string name="caches_exporting_fieldnote">Esportazione Field Notes…</string>
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
 
   <!-- caches lists -->
@@ -420,8 +402,6 @@
   <string name="init_gpx_importdir">Cartella di import GPX</string>
   <string name="init_gpx_exportdir_description">Qui puoi selezionare la cartella di esportazione GPX.</string>
   <string name="init_gpx_importdir_description">Qui puoi selezionare la cartella di importazione GPX.</string>
-  <string name="init_gpx_exportdir_select">Scegli la cartella di esportazione GPX</string>
-  <string name="init_gpx_importdir_select">Scegli la cartella di esportazione GPX</string>
   <string name="init_maptrail">Mostra la scia nella Mappa</string>
   <string name="init_share_after_export">Apri menu condividi dopo export GPX</string>
   <string name="init_trackautovisit">Setta i miei oggetti Trackables automaticamente su \"visit\" quando invio log</string>
@@ -438,7 +418,6 @@
   <string name="init_dbonsdcard_title">Posizione Database</string>
   <string name="init_dbonsdcard_note">Puoi decidere di salvare il database su memoria esterna. In questo caso risparmierai memoria interna ma potresti perdere un pochino di velocità e c:geo non funzionerà se la tua sdcard non sarà disponibile.</string>
   <string name="init_dbonsdcard">Database su memoria esterna</string>
-  <string name="init_dbmove">Spostamento Database</string>
   <string name="init_dbmove_dbmove">Spostamento Database</string>
   <string name="init_dbmove_running">Spostamento Database</string>
   <string name="init_dbmove_success">Database spostato con successo.</string>
@@ -499,7 +478,6 @@
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
   <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su geocaching.com per vederla correttamente.</string>
-  <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Questo cache è nella tua watchlist.</string>
   <string name="cache_watchlist_not_on">Questo cache non è nella tua watchlist.</string>
   <string name="cache_watchlist_add">Aggiungi alla watchlist</string>
@@ -585,7 +563,6 @@
   <string name="cache_spoiler_images_loading">Caricamento immagini spoiler…</string>
   <string name="cache_log_types">Tipi di Log</string>
   <string name="cache_coordinates_no">Questo cache non ha coordinate.</string>
-  <string name="cache_export_fieldnote">Esporta le note (Field Notes)</string>
   <string name="cache_clear_history">Cancella cronologia</string>
   <string name="cache_remove_from_history">Rimuovi dalla cronologia</string>
   <string name="cache_license">Licenza</string>
@@ -629,7 +606,6 @@
   <string name="map_file_select_title">Seleziona il file mappa</string>
 
   <!--  import -->
-  <string name="import_title">Importa…</string>
   <string name="web_import_title">Importa dal web</string>
   <string name="web_import_waiting">In attesa di nuovi cache dal web…</string>
   <string name="web_downloading">Download in corso</string>
@@ -640,7 +616,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
-  <string name="waypoint_title">Waypoint</string>
   <string name="waypoint_cache_coordinates">Coordinate cache</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">Coordinate attuali</string>
@@ -654,11 +629,9 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_save">Salva</string>
   <string name="waypoint_loading">Caricamento waypoint…</string>
-  <string name="waypoint_unknown_coordinates">Coordinate sconosciute</string>
   <string name="waypoint_done">Fatto</string>
   <string name="waypoint_duplicate">Duplicato</string>
   <string name="waypoint_copy_of">Copia di</string>
-  <string name="waypoint_menu_open_cache">Apri Cache</string>
   <string name="search_history">Cronologia</string>
   <string name="search_history_empty">Nessuna precedente destinazione</string>
   <string name="search_remove_destination">Destinazione rimossa</string>
@@ -793,7 +766,6 @@
 
  <!-- export -->
   <string name="export">Esporta</string>
-  <string name="export_as">Esporta come…</string>
   <string name="export_exportedto">esportato in</string>
   <string name="export_failed">Esportazione fallita</string>
   <string name="export_fieldnotes">Field Note</string>
@@ -964,11 +936,11 @@
   <string name="about_auth_2">Clicca sul pulsante \"Autorizza c:geo\" per iniziare. Questa procedura aprirà il browser sulla pagina Twitter. Fai Login su questa pagina e autorizza <b>c:geo</b> ad accedere al tuo account. Se accettato, Twitter mostrerà un PIN code numerico. Questo PIN deve essere riportato in <b>c:geo</b> e confermato.</string>
 
   <!-- status -->
-  <string name="status_new_release">Una nuova versione è disponibile.\nClicca per installarla.</string>
-  <string name="status_new_nightly">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
-  <string name="status_new_rc">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
-  <string name="status_geocaching_change">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
-  <string name="status_geocaching_livemap">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
 
   <string name="clipboard_copy_ok">Copiato nella clipboard</string>
   <plurals name="days_ago">

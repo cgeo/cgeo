@@ -108,8 +108,6 @@
   <string name="err_missing_auth">nevyplněné uživatelské jméno a/nebo heslo.</string>
   <string name="err_wrong">uložené přihlašovací údaje jsou špatné</string>
   <string name="err_license">uživatel nepotvrdil souhlas s licenčním ujednáním serveru Geocaching.com</string>
-  <string name="err_store">c:geo nemůže uložit keš.</string>
-  <string name="err_drop">c:geo nemůže smazat keš.</string>
   <string name="err_detail_open">c:geo nedokáže načíst detaily keše.</string>
   <string name="err_detail_cache">c:geo nedokáže načíst detaily keše. Je to opravdu keš?</string>
   <string name="err_detail_cache_find">c:geo nemůže najít keš</string>
@@ -120,31 +118,22 @@
   <string name="err_detail_cache_forgot_visit">c:geo zapomělo, jakou keš jste pohlížel.</string>
   <string name="err_detail_no_spoiler">c:geo nenašlo žádný obrázek pro tuto keš.</string>
   <string name="err_detail_no_map_static">c:geo nenašlo žádnou statickou mapu pro tuto keš.</string>
-  <string name="err_navigation_no">c:geo nemůže najít žádnou podporovanou navigaci.</string>
   <string name="err_application_no">c:geo nemůže najít žádnou použitelnou aplikaci.</string>
   <string name="err_auth_initialize">c:geo nedokázalo zahájit autorizaci.</string>
   <string name="err_auth_process">Autorizace selhala.</string>
   <string name="err_cannot_log_visit">c:geo nemá dostatek informací pro zapsání návštěvy. Prosím udělejte to z kompletního detailu keše.</string>
   <string name="err_init_cleared">c:geo nedokázalo smazat přihlašovací údaje.</string>
   <string name="err_download_fail">c:geo nemůže načíst keši, protože</string>
-  <string name="err_list_load_fail">c:geo nemůže načíst seznam keší</string>
-  <string name="err_store_failed">c:geo nemůže uložit keš</string>
-  <string name="err_refresh_failed">c:geo nemůže obnovit keš</string>
   <string name="err_dwld_details_failed">c:geo nemůže stáhnout detaily keše</string>
   <string name="err_load_descr_failed">c:geo nemůže stáhnout popis keše.</string>
   <string name="err_location_unknown">c:geo nezná souřadnice keše</string>
   <string name="err_tb_display">"C:geo nemůže zobrazit trackable. Je to opravdu trackable?</string>
   <string name="err_tb_details_open">C:geo nemůže otevřít podrobnosti k trackable.</string>
-  <string name="err_tb_details_download">C:geo nemůže stáhnout podronsti k trackable z důvodu</string>
-  <string name="err_tb_forgot">C:geo zapomělo, který trackable jste chtěli.</string>
   <string name="err_tb_forgot_saw">C:geo zapomělo, který trackable jste prohlíželi.</string>
   <string name="err_tb_find">c:geo nemůže najít trackable.</string>
   <string name="err_tb_find_that">c:geo nemůže najít toto trackable.</string>
   <string name="err_waypoint_cache_unknown">c:geo neví k jeké keši chcete přidat bod trasy.</string>
-  <string name="err_waypoint_unknown">c:geo zapomělo jaký bod trasy chcete zobrazit.</string>
   <string name="err_waypoint_add_failed">c:geo nemůže přidat bod trasy.</string>
-  <string name="err_waypoint_load_failed">c:geo nemůže načíst bod trasy.</string>
-  <string name="err_waypoint_delete_failed">c:geo nemůže smazat bod trasy.</string>
   <string name="err_point_unknown_position">c:geo neví kde jste.</string>
   <string name="err_point_no_position_given_title">popis je požadovaný</string>
   <string name="err_point_no_position_given">Vyplňte alespoň šířku nebo délku nebo vzdálenost a směr. Můžete také vyplnit všechny čtyři pole.</string>
@@ -157,7 +146,6 @@
   <string name="err_log_load_data_still">c:geo stále načítá data potřebná pro zalogování návštěvy. Prosím počkejte chvilku.</string>
   <string name="err_log_failed_server">c:geo nemohlo odeslat log, protože server neodpovídá.</string>
   <string name="err_log_post_failed">c:geo nemohlo odeslat log.</string>
-  <string name="err_search_address_no_match">c:geo nenašlo žádné odpovídající místo</string>
   <string name="err_search_address_forgot">c:geo zapomělo adresu, kterou se pokoušíte najít.</string>
   <string name="err_parse_lat">c:geo nemůže dopočítat šířku.</string>
   <string name="err_parse_lon">c:geo nemůže dopočítat délku.</string>
@@ -265,7 +253,6 @@
   <string name="caches_filter_track">Se sledovatelnými předměty</string>
   <string name="caches_filter_clear">Vymaž filtry</string>
   <string name="caches_filter_modified">S upravenými souřadnicemi</string>
-  <string name="caches_exporting_fieldnote">Exportuji jako Field Notes…</string>
   <string name="caches_removing_from_history">Mažu z Historie…</string>
 
   <!-- caches lists -->
@@ -434,7 +421,6 @@
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlouhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na geocaching.com, aby bylo správně zobrazené.</string>
-  <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Tato je ve vašem watchlistu.</string>
   <string name="cache_watchlist_not_on">Tato keš není ve vašem watchlistu.</string>
   <string name="cache_watchlist_add">Přidej na Watchlist</string>
@@ -513,7 +499,6 @@
   <string name="map_file_select_title">Vyber mapový soubor</string>
 
   <!--  import -->
-  <string name="import_title">Import…</string>
   <string name="web_import_title">Import z webu</string>
   <string name="web_import_waiting">Čekám na nové keše z webu…</string>
   <string name="web_downloading">Stahuji</string>
@@ -523,7 +508,6 @@
   <string name="popup_more">více detailů</string>
 
   <!-- waypoint -->
-  <string name="waypoint_title">Bod trasy</string>
   <string name="waypoint_custom">vlastní</string>
   <string name="waypoint_my_coordinates">Aktuální poloha</string>
   <string name="waypoint_bearing">Směr</string>

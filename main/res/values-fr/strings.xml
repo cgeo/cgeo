@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">boussole c:geo</string>
 
@@ -135,8 +135,6 @@
   <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
   <string name="err_unpublished">La cache a été retirée de la publication</string>
   <string name="err_premium_only">La cache est réservée aux membres Premium de Geocaching.com</string>
-  <string name="err_store">c:geo ne peut pas enregister la cache.</string>
-  <string name="err_drop">c:geo ne peut pas effacer la cache.</string>
   <string name="err_detail_open">c:geo ne peut pas ouvrir le détail de la cache.</string>
   <string name="err_detail_cache">c:geo ne peut pas afficher cette cache. Est-ce vraiment une géocache?</string>
   <string name="err_detail_cache_find">c:geo ne peut pas trouver de caches</string>
@@ -149,20 +147,15 @@
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
   <string name="err_detail_not_load_map_static">c:geo n\'a pas réussi à charger les cartes statiques.</string>
-  <string name="err_detail_ask_store_map_static">c:geo n\'a pas réussi à charger les cartes statiques. Les stocker maintenant ?</string>
   <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
   <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
   <string name="err_watchlist_failed">Échec lors du changement de votre liste de suivi.</string>
-  <string name="err_navigation_no">c:geo ne trouve pas de navigation supportée.</string>
   <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
   <string name="err_auth_initialize">c:geo a échoué dans la demande d\'autorisation.</string>
   <string name="err_auth_process">Échec de la demande d\'autorisation.</string>
   <string name="err_cannot_log_visit">c:geo n\'a pas assez d\'information pour logger votre visite. Faites le depuis le détail de la cache, s\'il vous plait!</string>
   <string name="err_init_cleared">c:geo ne peux pas effacer votre nom d\'utilisateur.</string>
   <string name="err_download_fail">c:geo n\'a pas réussi à télécharger les caches car </string>
-  <string name="err_list_load_fail">c:geo n\'a pas réussi à charger la liste des caches.</string>
-  <string name="err_store_failed">c:geo ne peut pas enregistrer la cache.</string>
-  <string name="err_refresh_failed">c:geo ne peut pas rafraîchir la cache.</string>
   <string name="err_dwld_details_failed">c:geo n\'a pas réussi à télécharger les détails de la cache.</string>
   <string name="err_load_descr_failed">c:geo ne peut pas charger la description.</string>
   <string name="err_location_unknown">c:geo ne connait pas la position de la cache.</string>
@@ -170,18 +163,12 @@
 
   <string name="err_tb_display">"c:geo ne peut pas afficher l\'objet voyageur demandé. Est-ce vraiment un objet voyageur?</string>
   <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
-  <string name="err_tb_details_download">c:geo ne peut pas télécharger le détail de l\'objet voyageur car </string>
-  <string name="err_tb_forgot">c:geo a oublié quel objet voyageur vous vouliez.</string>
   <string name="err_tb_forgot_saw">c:geo a oublié quel objet voyageur vous avez vu.</string>
   <string name="err_tb_find">c:geo ne peut pas trouver d\'objet voyageur.</string>
   <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quel cache vous voulez ajouter une étape.</string>
-  <string name="err_waypoint_unknown">c:geo a oublié quel étape vous vouliez afficher.</string>
   <string name="err_waypoint_add_failed">c:geo n\'a pas réussi à afficher l\'étape.</string>
-  <string name="err_waypoint_load_failed">c:geo n\'arrive pas à charger l\'étape.</string>
-  <string name="err_waypoint_delete_failed">c:geo ne peut pas effacer l\'étape.</string>
-  <string name="err_waypoint_open_cache_failed">c:geo n\'a pas réussi à obtenir les détails de la cache.</string>
   <string name="err_point_unknown_position">c:geo ne peut pas savoir où vous êtes.</string>
   <string name="err_point_no_position_given_title">Information obligatoire</string>
   <string name="err_point_no_position_given">Remplissez au moins la latitude ou la longitude ou la distance et le relèvement. Vous pouvez aussi remplir tous les champs.</string>
@@ -196,14 +183,11 @@
   <string name="err_log_failed_server">c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
   <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site geocaching.com.</string>
 
-  <string name="err_search_address_no_match">c:geo n\'a pas trouvé de lieu correspondant.</string>
   <string name="err_search_address_forgot">c:geo a oublié l\'adresse recherchée.</string>
   <string name="err_parse_lat">c:geo n\'arrive pas à lire la latitude.</string>
   <string name="err_parse_lon">c:geo n\'arrive pas à lire la longitude.</string>
   <string name="err_parse_dist">c:geo n\'arrive pas à lire la distance.</string>
   <string name="err_parse_lat_lon">c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
-
-  <string name="err_fieldnotes_export_failed">L\'export du champ Notes a échoué.</string>
 
   <string name="warn_save_nothing">Il n\'y a rien à sauver.</string>
   <string name="warn_no_cache_coord">Il n\'y pas de caches avec les coordonnées associées.</string>
@@ -227,7 +211,6 @@
   <string name="info_log_cleared">La visite a été effacée.</string>
   <string name="info_log_type_changed">Le type de visite a changé!</string>
 
-  <string name="info_fieldnotes_exported_to">Notes exporté vers</string>
   <string name="info_storing_static_maps">Sauvegarde des cartes statiques</string>
 
   <!-- location service -->
@@ -316,7 +299,6 @@
   <string name="caches_filter_track">avec des trackables</string>
   <string name="caches_filter_clear">effacer les filtres</string>
   <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
-  <string name="caches_exporting_fieldnote">Exporter commme notes de terrain…</string>
   <string name="caches_removing_from_history">Effacer de l\'historique…</string>
 
   <!-- caches lists -->
@@ -431,7 +413,6 @@
   <string name="init_dbonsdcard_title">Emplacement de la base</string>
   <string name="init_dbonsdcard_note">La base de données de c:geo peut être enregistrée sur un support externe. En choisissant cette option, vous récupérerez de l\'espace de stockage sur votre appareil au détriment de performances réduites. c:geo ne fonctionnera pas si votre carte SD est absente.</string>
   <string name="init_dbonsdcard">Base de données sur stockage externe</string>
-  <string name="init_dbmove">Déplacement de la base de données</string>
   <string name="init_dbmove_dbmove">Déplacement de la base de données</string>
   <string name="init_dbmove_running">Déplacement de la base de données</string>
   <string name="init_dbmove_success">Base de données déplacée</string>
@@ -496,7 +477,6 @@
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Description longue</string>
   <string name="cache_description_table_note">La description contient des informations de formattages qui nécessitent possiblement d\'être vues sur le site geocaching.com pour être affichées correctement.</string>
-  <string name="cache_watchlist">Liste de suivi</string>
   <string name="cache_watchlist_on">Cette cache est dans votre liste de suivi.</string>
   <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
   <string name="cache_watchlist_add">Ajouter à votre liste de suivi</string>
@@ -582,7 +562,6 @@
   <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
   <string name="cache_log_types">Types de visites</string>
   <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
-  <string name="cache_export_fieldnote">Export en tant que champ Notes</string>
   <string name="cache_clear_history">Effacer l\'historique</string>
   <string name="cache_remove_from_history">Effacer de l\'historique</string>
   <string name="cache_license">Licence</string>
@@ -619,7 +598,6 @@
   <string name="map_file_select_title">Choisir un fichier carte</string>
 
   <!--  import -->
-  <string name="import_title">Import…</string>
   <string name="web_import_title">Import depuis le web</string>
   <string name="web_import_waiting">En attente de nouvelles caches depuis le web…</string>
   <string name="web_downloading">Téléchargement</string>
@@ -630,7 +608,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">Étape</string>
-  <string name="waypoint_title">Étape</string>
   <string name="waypoint_cache_coordinates">Coordonnées de la cache</string>
   <string name="waypoint_custom">Personnalisé</string>
   <string name="waypoint_my_coordinates">Ma position</string>
@@ -644,11 +621,9 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_save">Sauver</string>
   <string name="waypoint_loading">Chargement d\'une étape…</string>
-  <string name="waypoint_unknown_coordinates">Coordonnées inconnues</string>
   <string name="waypoint_done">Ok</string>
   <string name="waypoint_duplicate">Dupliquer</string>
   <string name="waypoint_copy_of">Copie de</string>
-  <string name="waypoint_menu_open_cache">Ouvrir la cache</string>
   <string name="search_history">Historique</string>
   <string name="search_history_empty">Aucune destination précédente</string>
   <string name="search_remove_destination">Destination effacée</string>
@@ -783,7 +758,6 @@
 
   <!-- export -->
   <string name="export">Exporter</string>
-  <string name="export_as">Exporter en tant que…</string>
   <string name="export_exportedto">exporté vers</string>
   <string name="export_failed">Échec de l\'exportation</string>
   <string name="export_fieldnotes">Notes de terrain</string>
@@ -952,11 +926,11 @@
   <string name="about_auth_2">Cliquer sur le bouton \"début d\'autorisation\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
 
   <!-- status -->
-  <string name="status_new_release">Nouvelle version disponible.\nCliquer pour installer.</string>
-  <string name="status_new_nightly">Nouvelle version de test disponible.\nCliquer pour installer.</string>
-  <string name="status_new_rc">Nouvelle version candidate disponible.\nCliquer pour installer.</string>
-  <string name="status_geocaching_change">Des changements récents sur geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
-  <string name="status_geocaching_livemap">Des changements récents sur geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">Nouvelle version disponible.\nCliquer pour installer.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">Nouvelle version de test disponible.\nCliquer pour installer.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Nouvelle version candidate disponible.\nCliquer pour installer.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
 
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <plurals name="days_ago">

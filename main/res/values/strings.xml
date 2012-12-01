@@ -136,8 +136,6 @@
   <string name="err_license">You have not agreed to Geocaching.com license agreement, so c:geo can\'t load cache coordinates.</string>
   <string name="err_unpublished">The requested cache is unpublished.</string>
   <string name="err_premium_only">This Cache is only available to Geocaching.com Premium Members.</string>
-  <string name="err_store">c:geo can\'t store the cache.</string>
-  <string name="err_drop">c:geo can\'t drop cache.</string>
   <string name="err_detail_open">c:geo can\'t open geocache details.</string>
   <string name="err_detail_cache">c:geo can\'t display the geocache you want. Is it really a geocache?</string>
   <string name="err_detail_cache_find">c:geo can\'t find geocache</string>
@@ -150,20 +148,15 @@
   <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
   <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
   <string name="err_detail_not_load_map_static">c:geo failed to load static maps.</string>
-  <string name="err_detail_ask_store_map_static">c:geo failed to load static maps. Store now?</string>
   <string name="err_detail_still_working">Still working on another task.</string>
   <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
   <string name="err_watchlist_failed">Changing your watchlist failed.</string>
-  <string name="err_navigation_no">c:geo can\'t find any supported navigation.</string>
   <string name="err_application_no">c:geo can\'t find any suitable application.</string>
   <string name="err_auth_initialize">c:geo failed to initialize authorization process.</string>
   <string name="err_auth_process">Authorization process failed.</string>
   <string name="err_cannot_log_visit">c:geo is unable to log your visit. Please log your visit from full cache details screen.</string>
   <string name="err_init_cleared">c:geo can\'t clear login information.</string>
   <string name="err_download_fail">c:geo failed to download caches.</string>
-  <string name="err_list_load_fail">c:geo failed to load cache list.</string>
-  <string name="err_store_failed">c:geo can\'t store geocache.</string>
-  <string name="err_refresh_failed">c:geo can\'t refresh geocache.</string>
   <string name="err_dwld_details_failed">c:geo failed to download cache details.</string>
   <string name="err_load_descr_failed">c:geo can\'t load description.</string>
   <string name="err_location_unknown">c:geo doesn\'t know location of cache.</string>
@@ -171,18 +164,12 @@
 
   <string name="err_tb_display">c:geo can\'t display trackable you want. Is it really a trackable?</string>
   <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
-  <string name="err_tb_details_download">c:geo failed to download trackable details.</string>
-  <string name="err_tb_forgot">c:geo forgot which trackable you want.</string>
   <string name="err_tb_forgot_saw">c:geo forgot which trackable you saw.</string>
   <string name="err_tb_find">c:geo can\'t find trackable</string>
   <string name="err_tb_find_that">c:geo can\'t find that trackable.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add waypoint.</string>
-  <string name="err_waypoint_unknown">c:geo forgot what waypoint you want to display.</string>
   <string name="err_waypoint_add_failed">c:geo failed to add your waypoint.</string>
-  <string name="err_waypoint_load_failed">c:geo failed to load waypoint.</string>
-  <string name="err_waypoint_delete_failed">c:geo can\'t delete waypoint.</string>
-  <string name="err_waypoint_open_cache_failed">c:geo can\'t open cache details.</string>
   <string name="err_point_unknown_position">c:geo can\'t recognize where you are.</string>
   <string name="err_point_no_position_given_title">Info required</string>
   <string name="err_point_no_position_given">Fill at least latitude or longitude or distance and bearing. You can also fill all four fields.</string>
@@ -197,14 +184,11 @@
   <string name="err_log_failed_server">c:geo failed to post log because server is not responding.</string>
   <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
 
-  <string name="err_search_address_no_match">c:geo found no matching place.</string>
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
   <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
   <string name="err_parse_lon">c:geo can\'t parse longitude.</string>
   <string name="err_parse_dist">c:geo can\'t parse distance.</string>
   <string name="err_parse_lat_lon">c:geo can\'t parse latitude or longitude.</string>
-
-  <string name="err_fieldnotes_export_failed">Export of Field Notes failed.</string>
 
   <string name="warn_save_nothing">There is nothing to be saved.</string>
   <string name="warn_no_cache_coord">There is no cache with coordinates.</string>
@@ -230,7 +214,6 @@
   <string name="info_log_cleared">Log was cleared.</string>
   <string name="info_log_type_changed">Type of log has been changed!</string>
 
-  <string name="info_fieldnotes_exported_to">Field Notes exported to</string>
   <string name="info_storing_static_maps">Trying to store static maps</string>
 
   <!-- location service -->
@@ -320,7 +303,6 @@
   <string name="caches_filter_track">With Trackables</string>
   <string name="caches_filter_clear">Clear filters</string>
   <string name="caches_filter_modified">With modified coordinates</string>
-  <string name="caches_exporting_fieldnote">Exporting as Field Notes…</string>
   <string name="caches_removing_from_history">Removing from History…</string>
 
   <!-- caches lists -->
@@ -427,8 +409,6 @@
   <string name="init_gpx_importdir">GPX Import Directory</string>
   <string name="init_gpx_exportdir_description">Here you can select the directory for GPX exports.</string>
   <string name="init_gpx_importdir_description">Here you can select the directory for GPX imports.</string>
-  <string name="init_gpx_exportdir_select">Select GPX Export Directory</string>
-  <string name="init_gpx_importdir_select">Select GPX Import Directory</string>
   <string name="init_maptrail">Show trail on Map</string>
   <string name="init_share_after_export">Open share menu after GPX export</string>
   <string name="init_trackautovisit">Set trackables to \"Visited\" as a default</string>
@@ -444,7 +424,6 @@
   <string name="init_dbonsdcard_title">Database location</string>
   <string name="init_dbonsdcard_note">You may store the database of c:geo on the external storage medium. If you do so you will save internal memory, but you may loose a bit of performance and c:geo will not work if your sdcard is not available.</string>
   <string name="init_dbonsdcard">Database on external storage</string>
-  <string name="init_dbmove">Moving Database</string>
   <string name="init_dbmove_dbmove">Moving Database</string>
   <string name="init_dbmove_running">Moving Database</string>
   <string name="init_dbmove_success">Successfully moved the database.</string>
@@ -515,7 +494,6 @@
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Long Description</string>
   <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at geocaching.com to be seen correctly.</string>
-  <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">This cache is on your watchlist.</string>
   <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
   <string name="cache_watchlist_add">Add to Watchlist</string>
@@ -610,7 +588,6 @@
   <string name="cache_images_loading">Loading images…</string>
   <string name="cache_log_types">Log types</string>
   <string name="cache_coordinates_no">This cache has no coordinates.</string>
-  <string name="cache_export_fieldnote">Export as Field Notes</string>
   <string name="cache_clear_history">Clear history</string>
   <string name="cache_remove_from_history">Remove from history</string>
   <string name="cache_license">License</string>
@@ -657,10 +634,7 @@
   <string name="map_file_select_title">Select map file</string>
 
   <!-- theme file select -->
-  <string name="theme_file_select_title">Select custom map theme file</string>
-
   <!--  import -->
-  <string name="import_title">Import…</string>
   <string name="web_import_title">Import from web</string>
   <string name="web_import_waiting">Waiting for new caches from web…</string>
   <string name="web_downloading">Downloading</string>
@@ -671,7 +645,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
-  <string name="waypoint_title">Waypoint</string>
   <string name="waypoint_cache_coordinates">Cache coordinates</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">My coordinates</string>
@@ -685,11 +658,9 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_save">Save</string>
   <string name="waypoint_loading">Loading waypoint…</string>
-  <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
   <string name="waypoint_done">Done</string>
   <string name="waypoint_duplicate">Duplicate</string>
   <string name="waypoint_copy_of">Copy of</string>
-  <string name="waypoint_menu_open_cache">Open Cache</string>
   <string name="search_history">History</string>
   <string name="search_history_empty">No previous destinations</string>
   <string name="search_remove_destination">Destination removed</string>
@@ -828,7 +799,6 @@
 
   <!-- export -->
   <string name="export">Export</string>
-  <string name="export_as">Export as…</string>
   <string name="export_exportedto">exported to</string>
   <string name="export_failed">Export failed</string>
   <string name="export_fieldnotes">Field Notes</string>

@@ -133,8 +133,6 @@
   <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd.</string>
   <string name="err_unpublished">De cache is nog niet gepubliceerd</string>
   <string name="err_premium_only">Deze cache is alleen beschikbaar voor Geocaching.com premium leden.</string>
-  <string name="err_store">Sorry, c:geo kan de cache niet opslaan.</string>
-  <string name="err_drop">Sorry, c:geo kan de cache niet wissen.</string>
   <string name="err_detail_open">Sorry, c:geo kan de geocache details niet openen.</string>
   <string name="err_detail_cache">Sorry, c:geo kan de gezochte geocache niet weergeven.</string>
   <string name="err_detail_cache_find">Sorry, c:geo kan de geocache niet vinden.</string>
@@ -146,20 +144,15 @@
   <string name="err_detail_no_spoiler">c:geo Heeft geen spoiler images gevonden voor deze cache.</string>
   <string name="err_detail_no_map_static">c:geo Heeft geen statische kaarten gevonden voor deze cache.</string>
   <string name="err_detail_not_load_map_static">Sorry, c:geo kon de statische kaart niet laden.</string>
-  <string name="err_detail_ask_store_map_static">c:geo kon statische kaarten niet laden. Nu opslaan?</string>
   <string name="err_detail_still_working">Nog bezig met een andere (achtergrond)taak.</string>
   <string name="err_watchlist_still_managing">Bezig je watchlist te beheren.</string>
   <string name="err_watchlist_failed">Het veranderen van watchlist lukt niet.</string>
-  <string name="err_navigation_no">c:geo Kan geen ondersteunde navigatie applicatie vinden.</string>
   <string name="err_application_no">c:geo Kan geen geschikte applicatie vinden.</string>
   <string name="err_auth_initialize">Sorry, het is c:geo niet gelukt het autorisatie proces te initialiseren.</string>
   <string name="err_auth_process">Autorisatie proces mislukt.</string>
   <string name="err_cannot_log_visit">c:geo Heeft onvoldoende informatie om bezoek te loggen. Probeer het vanuit de volledige cache details.</string>
   <string name="err_init_cleared">Sorry, c:geo kan de inlog informatie niet wissen.</string>
   <string name="err_download_fail">Sorry, c:geo heeft caches niet kunnen downloaden omdat </string>
-  <string name="err_list_load_fail">Sorry, c:geo heeft cache lijst niet kunnen laden.</string>
-  <string name="err_store_failed">Sorry, c:geo kan de geocache niet opslaan.</string>
-  <string name="err_refresh_failed">Sorry, c:geo kan de geocache niet verversen.</string>
   <string name="err_dwld_details_failed">Sorry, c:geo kon de cache details niet downloaden.</string>
   <string name="err_load_descr_failed">Sorry, c:geo kan de omschrijving niet laden.</string>
   <string name="err_location_unknown">c:geo kent de locatie van de cache niet.</string>
@@ -167,18 +160,12 @@
 
   <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
   <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
-  <string name="err_tb_details_download">Sorry, c:geo kon de trackable details niet downloaden omdat</string>
-  <string name="err_tb_forgot">Sorry, c:geo is vergeten welke trackable je wilde.</string>
   <string name="err_tb_forgot_saw">Sorry, c:geo is vergeten welke trackable je gezien hebt.</string>
   <string name="err_tb_find">Sorry, c:geo kan de trackable niet vinden</string>
   <string name="err_tb_find_that">Sorry, c:geo kan die trackable niet vinden.</string>
 
   <string name="err_waypoint_cache_unknown">Sorry, c:geo weet niet aan welke cache je een waypoint wil toevoegen.</string>
-  <string name="err_waypoint_unknown">Sorry, c:geo is vergeten welke waypoint je wil laten zien.</string>
   <string name="err_waypoint_add_failed">Sorry, c:geo kon de waypoint niet toevoegen.</string>
-  <string name="err_waypoint_load_failed">Sorry, c:geo kon de waypoint niet laden.</string>
-  <string name="err_waypoint_delete_failed">Sorry, c:geo kan de waypoint niet wissen.</string>
-  <string name="err_waypoint_open_cache_failed">c:geo kan cachedetails niet openen.</string>
   <string name="err_point_unknown_position">Sorry, c:geo kan niet bepalen waar je bent.</string>
   <string name="err_point_no_position_given_title">Info benodigd</string>
   <string name="err_point_no_position_given">Geef op zijn minst lengte- en breedtegraad of afstand en richting. Of vul alle 4 de velden.</string>
@@ -193,14 +180,11 @@
   <string name="err_log_failed_server">Sorry, c:geo kon bezoek niet loggen omdat de server niet reageert.</string>
   <string name="err_log_post_failed">Sorry, het is c:geo niet gelukt het log te posten.</string>
 
-  <string name="err_search_address_no_match">Sorry, c:geo heeft geen gelijkende plaats gevonden.</string>
   <string name="err_search_address_forgot">Sorry, c:geo is het adres dat je zoekt vergeten.</string>
   <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
   <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
   <string name="err_parse_dist">Sorry, c:geo kan afstand niet verwerken.</string>
   <string name="err_parse_lat_lon">Sorry, c:geo kan breedtegraad of lengtegraad niet verwerken.</string>
-
-  <string name="err_fieldnotes_export_failed">Exporteren van Field Notes niet gelukt.</string>
 
   <string name="warn_save_nothing">Er is niets op te slaan.</string>
   <string name="warn_no_cache_coord">Er is geen cache met deze coördinaten.</string>
@@ -222,7 +206,6 @@
   <string name="info_log_cleared">Log is gewist.</string>
   <string name="info_log_type_changed">Type log is gewijzigd!</string>
 
-  <string name="info_fieldnotes_exported_to">Field Notes geëxporteerd naar</string>
   <string name="info_storing_static_maps">Probeer statische kaarten op te slaan</string>
 
   <!-- location service -->
@@ -308,7 +291,6 @@
   <string name="caches_filter_track">met trackables</string>
   <string name="caches_filter_clear">maak filters leeg</string>
   <string name="caches_filter_modified">Met aangepaste coordinaten</string>
-  <string name="caches_exporting_fieldnote">Exporteer als Field Notes…</string>
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
 
   <!-- caches lists -->
@@ -476,7 +458,6 @@
   <string name="cache_description">Omschrijving</string>
   <string name="cache_description_long">Lange omschrijving</string>
   <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op geocaching.com bekeken moet worden.</string>
-  <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Deze cache komt voor op je watchlist.</string>
   <string name="cache_watchlist_not_on">Deze cache komt niet voor op je watchlist.</string>
   <string name="cache_watchlist_add">Voeg aan watchlist toe</string>
@@ -555,7 +536,6 @@
   <string name="cache_spoiler_images_loading">Spoiler afbeeldingen laden…</string>
   <string name="cache_log_types">Log types</string>
   <string name="cache_coordinates_no">Deze cache heeft geen coördinaten.</string>
-  <string name="cache_export_fieldnote">Exporteer als Field Notes</string>
   <string name="cache_clear_history">Maak geschiedenis leeg</string>
   <string name="cache_remove_from_history">Verwijder uit geschiedenis</string>
   <string name="cache_license">Licentie</string>
@@ -592,7 +572,6 @@
   <string name="map_file_select_title">Selecteer mapbestand</string>
 
   <!--  import -->
-  <string name="import_title">Import…</string>
   <string name="web_import_title">Importeer van web</string>
   <string name="web_import_waiting">Aan het wachten voor nieuwe caches van het web…</string>
   <string name="web_downloading">Downloading</string>
@@ -603,7 +582,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
-  <string name="waypoint_title">Waypoint</string>
   <string name="waypoint_cache_coordinates">Cache coördinaten</string>
   <string name="waypoint_custom">Aangepast</string>
   <string name="waypoint_my_coordinates">Mijn coördinaten</string>
@@ -617,11 +595,9 @@
   <string name="waypoint_note">Notitie</string>
   <string name="waypoint_save">Opslaan</string>
   <string name="waypoint_loading">Waypoint laden…</string>
-  <string name="waypoint_unknown_coordinates">coördinaten niet bekend</string>
   <string name="waypoint_done">Klaar</string>
   <string name="waypoint_duplicate">Dubbel</string>
   <string name="waypoint_copy_of">Kopie van</string>
-  <string name="waypoint_menu_open_cache">Open Cache</string>
   <string name="search_history">Geschiedenis</string>
   <string name="search_history_empty">Geen eerdere bestemmingen</string>
   <string name="search_remove_destination">Bestemming verwijderd</string>

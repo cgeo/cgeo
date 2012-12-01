@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo kompas</string>
 
@@ -136,8 +136,6 @@
   <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať koordináty skrýše.</string>
   <string name="err_unpublished">Požadovaná skrýša nebola publikovaná</string>
   <string name="err_premium_only">Skrýša je dostupná iba pre platiacich používateľov Geocaching.com</string>
-  <string name="err_store">Prepáčte, c:geo nemôže uložiť skrýšu.</string>
-  <string name="err_drop">Prepáčte, c:geo nemôže zmazať skrýšu.</string>
   <string name="err_detail_open">Prepáčte, c:geo nedokáže načítať detaily skrýše.</string>
   <string name="err_detail_cache">Prepáčte, c:geo nedokáže načítať detaily skrýše. Je to naozaj skrýša?</string>
   <string name="err_detail_cache_find">Prepáčte, c:geo nemôže nájsť skrýšu</string>
@@ -150,20 +148,15 @@
   <string name="err_detail_no_spoiler">c:geo nenašla pre túto skrýšu žiaden spoilerový obrázok.</string>
   <string name="err_detail_no_map_static">c:geo nenašla žiadnu statickú mapu pre túto skrýšu.</string>
   <string name="err_detail_not_load_map_static">Prepáčte, c:geo sa nepodarilo načítať statické mapy.</string>
-  <string name="err_detail_ask_store_map_static">c:geo sa nepodarilo načítať statické mapy. Chcete ich uložiť teraz?</string>
   <string name="err_detail_still_working">Stále prebieha práca na inej úlohe.</string>
   <string name="err_watchlist_still_managing">Stále prebieha správa vášho zoznamu sledovaných.</string>
   <string name="err_watchlist_failed">Zlyhala zmena sledovaných.</string>
-  <string name="err_navigation_no">Prepáčte, c:geo nemôže nájsť žiadnu podporovanú navigáciu.</string>
   <string name="err_application_no">Prepáčte, c:geo nemôže násjť žiadnu použiteľnú aplikáciu.</string>
   <string name="err_auth_initialize">Prepáčte, c:geo nedokázalo zahájiť autorizáciu.</string>
   <string name="err_auth_process">Autorizácia zlyhala.</string>
   <string name="err_cannot_log_visit">c:geo nemá dostatok informácií pre zapísanie návštevy. Prosím urobte to z kompletného detailu skrýše.</string>
   <string name="err_init_cleared">Prepáčte, c:geo nedokázalo zmazať prihlasovacie údaje.</string>
   <string name="err_download_fail">Prepáčte, c:geo nemôže načítať skrýšu, pretože</string>
-  <string name="err_list_load_fail">c:geo nemôže načítať zoznam skrýš.</string>
-  <string name="err_store_failed">c:geo nemôže uložiť skrýšu.</string>
-  <string name="err_refresh_failed">c:geo nemôže obnoviť skrýšu.</string>
   <string name="err_dwld_details_failed">c:geo nemôže stiahnuť detaily skrýše.</string>
   <string name="err_load_descr_failed">c:geo nemôže načítať popis.</string>
   <string name="err_location_unknown">c:geo nepozná súradnice skrýše</string>
@@ -171,18 +164,12 @@
 
   <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný?</string>
   <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
-  <string name="err_tb_details_download">Prepáčte, c:geo nemôže stiahnuť podrobnosti k trasovateľnému predmetu, pretože</string>
-  <string name="err_tb_forgot">c:geo zabudlo, ktorý trasovateľný predmet ste chceli.</string>
   <string name="err_tb_forgot_saw">c:geo zabudlo, ktorý trasovateľný predmet ste pozerali.</string>
   <string name="err_tb_find">c:geo nemôže nájsť trasovateľný predmet.</string>
   <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
-  <string name="err_waypoint_unknown">c:geo zabudlo, ktorý bod trasy chcete zobraziť.</string>
   <string name="err_waypoint_add_failed">c:geo nemôže pridať bod trasy.</string>
-  <string name="err_waypoint_load_failed">c:geo nemôže načítať bod trasy.</string>
-  <string name="err_waypoint_delete_failed">c:geo nemôže zmazať bod trasy.</string>
-  <string name="err_waypoint_open_cache_failed">c:geo nemôže otvoriť detaily skrýše.</string>
   <string name="err_point_unknown_position">c:geo nevie, kde ste.</string>
   <string name="err_point_no_position_given_title">popis je požadovaný</string>
   <string name="err_point_no_position_given">Vyplňte aspoň šírku alebo dĺžku alebo vzdialenosť a smer. Môžete tiež vyplniť všetky štyri polia.</string>
@@ -197,14 +184,11 @@
   <string name="err_log_failed_server">c:geo nemohlo odoslať log, pretože server neodpovedá.</string>
   <string name="err_log_post_failed">c:geo nemohlo odoslať log.</string>
 
-  <string name="err_search_address_no_match">c:geo nenašlo žiadne zodpovedajúce miesto</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_parse_lat">c:geo nemôže dopočítať šírku.</string>
   <string name="err_parse_lon">c:geo nemôže dopočítať dĺžku.</string>
   <string name="err_parse_dist">c:geo nemôže dopočítať vzdialenosť.</string>
   <string name="err_parse_lat_lon">c:geo nemôže zistiť šírku a dĺžku.</string>
-
-  <string name="err_fieldnotes_export_failed">Zlyhal export poznámok v poli.</string>
 
   <string name="warn_save_nothing">Nie je čo uložiť.</string>
   <string name="warn_no_cache_coord">Nie je žiadna skrýša so súradnicami.</string>
@@ -230,7 +214,6 @@
   <string name="info_log_cleared">Log bol vyprázdnený.</string>
   <string name="info_log_type_changed">Typ logu bol zmenený!</string>
 
-  <string name="info_fieldnotes_exported_to">Poznámky exportované do</string>
   <string name="info_storing_static_maps">ukladanie statických máp</string>
 
   <!-- location service -->
@@ -320,7 +303,6 @@
   <string name="caches_filter_track">s trasovateľnými predmetmi</string>
   <string name="caches_filter_clear">vymazať filtre</string>
   <string name="caches_filter_modified">S upravenými súradnicami</string>
-  <string name="caches_exporting_fieldnote">Exportovanie ako poznámky…</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
 
   <!-- caches lists -->
@@ -427,8 +409,6 @@
   <string name="init_gpx_importdir">Priečinok pre GPX Import</string>
   <string name="init_gpx_exportdir_description">Tu si môžete vybrať priečinok pre GPX exporty.</string>
   <string name="init_gpx_importdir_description">Tu si môžete vybrať priečinok pre GPX importy.</string>
-  <string name="init_gpx_exportdir_select">Výber priečinka pre GPX export</string>
-  <string name="init_gpx_importdir_select">Výber priečinka pre GPX import</string>
   <string name="init_maptrail">Zobraziť stopu na mape</string>
   <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
   <string name="init_trackautovisit">Nastaviť trasovateľné predmety automaticky na „navštívené“</string>
@@ -444,7 +424,6 @@
   <string name="init_dbonsdcard_title">Umiestnenie databázy</string>
   <string name="init_dbonsdcard_note">Databázu c:geo môžete umiestniť na externé úložisko. Ak to spravíte, ušetríte vnútornú pamäť, ale môžete stratiť časť z výkonu a c:geo nebude fungovať, keď vaša SD karta nebude dostupná.</string>
   <string name="init_dbonsdcard">Databáza na externom úložisku</string>
-  <string name="init_dbmove">Presúvanie databázy</string>
   <string name="init_dbmove_dbmove">Presúvanie databázy</string>
   <string name="init_dbmove_running">Prebieha presúvanie databázy</string>
   <string name="init_dbmove_success">Databáza bola úspešne presunutá.</string>
@@ -515,7 +494,6 @@
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky, ktorý môže byť pre správne zobrazenie potrebné otvoriť v geocaching.com.</string>
-  <string name="cache_watchlist">Zoznam sledovaných</string>
   <string name="cache_watchlist_on">Skrýša je vo vašom zozname sledovaných.</string>
   <string name="cache_watchlist_not_on">Skrýša nie je vo vašom zozname sledovaných.</string>
   <string name="cache_watchlist_add">Pridať do zoznamu sledovaných</string>
@@ -608,7 +586,6 @@
   <string name="cache_images_loading">Prebieha načítanie obrázkov…</string>
   <string name="cache_log_types">Typy záznamov</string>
   <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string>
-  <string name="cache_export_fieldnote">Exportovať ako poznámky</string>
   <string name="cache_clear_history">Vymazať históriu</string>
   <string name="cache_remove_from_history">Odstrániť z histórie</string>
   <string name="cache_license">Licencia</string>
@@ -655,10 +632,7 @@
   <string name="map_file_select_title">Výber mapového súboru</string>
 
   <!-- theme file select -->
-  <string name="theme_file_select_title">Výber súboru s témou mapy</string>
-
   <!--  import -->
-  <string name="import_title">Import…</string>
   <string name="web_import_title">Import z webu</string>
   <string name="web_import_waiting">Čakanie na nové skrýše z webu…</string>
   <string name="web_downloading">Preberanie</string>
@@ -669,7 +643,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">Bod trasy</string>
-  <string name="waypoint_title">Bod trasy</string>
   <string name="waypoint_cache_coordinates">Súradnice skrýše</string>
   <string name="waypoint_custom">vlastný</string>
   <string name="waypoint_my_coordinates">Aktuálna poloha</string>
@@ -683,11 +656,9 @@
   <string name="waypoint_note">poznámka</string>
   <string name="waypoint_save">Uložiť</string>
   <string name="waypoint_loading">Načítanie bodu trasy…</string>
-  <string name="waypoint_unknown_coordinates">Neznáme súradnice</string>
   <string name="waypoint_done">Hotovo</string>
   <string name="waypoint_duplicate">Duplikovať</string>
   <string name="waypoint_copy_of">Kópia</string>
-  <string name="waypoint_menu_open_cache">Otvoriť skrýšu</string>
   <string name="search_history">História</string>
   <string name="search_history_empty">Bez predchádzajúcich cieľov</string>
   <string name="search_remove_destination">Cieľ odstránený</string>
@@ -826,7 +797,6 @@
 
   <!-- export -->
   <string name="export">Exportovať</string>
-  <string name="export_as">Exportovať ako…</string>
   <string name="export_exportedto">exportované do</string>
   <string name="export_failed">Export zlyhal</string>
   <string name="export_fieldnotes">Poznámky</string>
@@ -997,11 +967,11 @@
   <string name="about_auth_2">Ťuknutím na tlačidlo „Zahájiť autorizáciu“ celý proces začne. Tento proces otvorí webovú stránku Twitteru, kde sa sa prihlásite a tlačidlom „Authorize app“ umožníte aplikácii <b>c:geo</b> prístup k vášmu Twitter účtu. Potom čo ťuknete na „Authorize app“, Twitter vám pridelí PIN kód. Tento kód skopírujte a vložte do aplikácie <b>c:geo</b>. A potvrďte. To je všetko.</string>
 
   <!-- status -->
-  <string name="status_new_release">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>
-  <string name="status_new_nightly">Je dostupná nová nočná zostava.\nKliknite pre inštaláciu.</string>
-  <string name="status_new_rc">Je dostupná nová verzia „release candidate“.\nKliknite pre inštaláciu.</string>
-  <string name="status_geocaching_change">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
-  <string name="status_geocaching_livemap">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">Je dostupná nová nočná zostava.\nKliknite pre inštaláciu.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Je dostupná nová verzia „release candidate“.\nKliknite pre inštaláciu.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
 
   <string name="clipboard_copy_ok">Skopírované do schránky</string>
   <plurals name="days_ago">

@@ -73,8 +73,6 @@
   <string name="err_comm">Ukendt forbindelsesfejl</string>
   <string name="err_wrong">Fejl i login</string>
   <string name="err_license">Bruger accepterer betingelser på Geocaching.com</string>
-  <string name="err_store">Beklager, c:geo kan ikke gemme cachen.</string>
-  <string name="err_drop">Beklager, c:geo kan ikke slette cachen.</string>
   <string name="err_detail_open">Beklager, c:geo kan ikke indlæse cachedetaljer.</string>
   <string name="err_detail_cache">Beklager, c:geo kan ikke vise denne cache.</string>
   <string name="err_detail_cache_find">Beklager, c:geo kan ikke vise denne cache</string>
@@ -82,7 +80,6 @@
   <string name="err_detail_cache_forgot">Beklager, c:geo husker ikke hvilken cache du ønskede.</string>
   <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
   <string name="err_detail_no_map_static">c:geo fandt ingen statiske kort til denne cache.</string>
-  <string name="err_navigation_no">c:geo kan ikke finde understøttet navigation.</string>
   <string name="err_application_no">c:geo kan ikke finde en passende applikation.</string>
   <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
   <string name="err_auth_process">Godkendelse fejlede.</string>

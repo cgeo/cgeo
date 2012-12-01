@@ -118,8 +118,6 @@
   <string name="err_missing_auth">Nie wpisana nazwa użytkownika i/lób hasła.</string>
   <string name="err_wrong">Niepoprawne dane użytkownika</string>
   <string name="err_license">Użytkownik nie zgodził się jeszcze z regulaminem serwisu Geocaching.com, c:geo nie jest w stanie załadować współrzędnych.</string>
-  <string name="err_store">Przepraszam, c:geo nie mógł zapisać skrzynki.</string>
-  <string name="err_drop">Przepraszam, c:geo nie mógł skasować skrzynki.</string>
   <string name="err_detail_open">Przepraszam, c:geo nie mógł otworzyć szczegółów skrzynki.</string>
   <string name="err_detail_cache">Przepraszam, c:geo nie mógł pokazać tobie skrzynki. Czy to jest naprawdę skrzynka?</string>
   <string name="err_detail_cache_find">Przepraszam, c:geo nie mógł znaleść skrzynki.</string>
@@ -133,16 +131,12 @@
   <string name="err_detail_not_load_map_static">Przepraszam, c:geo nie mógł załadować statycznej mapki.</string>
   <string name="err_watchlist_still_managing">Nadal pracuję nad listą obserwowanych.</string>
   <string name="err_watchlist_failed">c:geo nie mógł zmienić listy obserwowanych.</string>
-  <string name="err_navigation_no">c:geo nie znalazł żadnych wsparć do nawigacji.</string>
   <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich aplikacji.</string>
   <string name="err_auth_initialize">Przepraszam, c:geo nie może zainicjować procesu autoryzacji.</string>
   <string name="err_auth_process">Proces autoryzacji nie udany.</string>
   <string name="err_cannot_log_visit">c:geo brakuje informacji aby dodać wpis wizyty. Proszę spróbuj przez szczegóły skrzynki.</string>
   <string name="err_init_cleared">Przepraszam, c:geo nie może skasować danych logowania.</string>
   <string name="err_download_fail">Przepraszam, c:geo nie może załadować skrzynki, ponieważ </string>
-  <string name="err_list_load_fail">Przepraszam, c:geo nie może załadować listy skrzynek.</string>
-  <string name="err_store_failed">Przepraszam, c:geo nie może zapisać skrzynki.</string>
-  <string name="err_refresh_failed">Przepraszam, c:geo nie może zaktualizować skrzynki.</string>
   <string name="err_dwld_details_failed">Przepraszam, c:geo nie może załadować szczegółów skrzynki.</string>
   <string name="err_load_descr_failed">Przepraszam, c:geo nie może załadować opisu.</string>
   <string name="err_location_unknown">c:geo nie zna lokalizacji skrzynki.</string>
@@ -150,17 +144,12 @@
 
   <string name="err_tb_display">"Przepraszam, c:geo nie może pokazać przedmiotów podróżnych. Czy to rzeczywiście jest przedmiot podróżny?</string>
   <string name="err_tb_details_open">Przepraszam, c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
-  <string name="err_tb_details_download">Przepraszam, c:geo nie może otworzyć szczegółów przedmiotu podróżnego, ponieważ</string>
-  <string name="err_tb_forgot">Przepraszam, c:geo zapomiał jaki przedmiot podróżny chciałeś.</string>
   <string name="err_tb_forgot_saw">Przepraszam, c:geo zapomiał jaki przedmiot podróżny widziałeś.</string>
   <string name="err_tb_find">Przepraszam, c:geo nie może znaleźć przedmiotu podróżnego.</string>
   <string name="err_tb_find_that">Przepraszam, c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
 
   <string name="err_waypoint_cache_unknown">Przepraszam, c:geo nie wie do jakiej skrzynki chcesz dodać punkt nawigacji.</string>
-  <string name="err_waypoint_unknown">Przepraszam, c:geo zapomiał jaki punkt nawigacyjny chciałeś obejrzeć.</string>
   <string name="err_waypoint_add_failed">Przepraszam, c:geo nie może dodać punktu nawigacyjnego.</string>
-  <string name="err_waypoint_load_failed">Przepraszam, c:geo nie może załadować punktu nawigacyjnego.</string>
-  <string name="err_waypoint_delete_failed">Przepraszam, c:geo nie może skasować punktu nawigacyjnego.</string>
   <string name="err_point_unknown_position">Przepraszam, c:geo nie może określić twojej lokalizacji.</string>
   <string name="err_point_no_position_given_title">Informacje wymagane</string>
   <string name="err_point_no_position_given">Wypełnij co najmniej szerokość i długość geograficzną lub odległość i namiar. Można również wypełnić wszystkie cztery pola.</string>
@@ -175,13 +164,10 @@
   <string name="err_log_failed_server">Przepraszam, c:geo nie może wysłać wpisu ponieważ serwer nie odpowiada.</string>
   <string name="err_log_post_failed">Przepraszam, c:geo nie mógł dodać wpisu do dziennika.</string>
 
-  <string name="err_search_address_no_match">Przepraszam, c:geo nie znalazł pasującego miejsca.</string>
   <string name="err_search_address_forgot">Przepraszam, c:geo zapomiał jaki adres szukałeś.</string>
   <string name="err_parse_lat">Przepraszam, c:geo nie może obliczyć szerokości geograficznej.</string>
   <string name="err_parse_lon">Przepraszam, c:geo nie może obliczyć długości geograficznej.</string>
   <string name="err_parse_dist">Przepraszam, c:geo nie może obliczyć odległości.</string>
-
-  <string name="err_fieldnotes_export_failed">Eksportowanie notatek terenowych nieudane.</string>
 
   <string name="warn_save_nothing">Nie ma nic do zapisania.</string>
   <string name="warn_no_cache_coord">Nie ma skrzynek z współrzędnymi GPS.</string>
@@ -201,8 +187,6 @@
   <string name="info_log_saved">Wpis został zapisany.</string>
   <string name="info_log_cleared">Wpis został skasowany.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
-
-  <string name="info_fieldnotes_exported_to">Notatki terenowe eksportowane do</string>
 
   <!-- location service -->
   <string name="loc_last">Ostatnie stanowisko</string>
@@ -280,7 +264,6 @@
   <string name="caches_filter_type">typu</string>
   <string name="caches_filter_track">z przedmiotmi podróżnymi</string>
   <string name="caches_filter_clear">wykasój filter</string>
-  <string name="caches_exporting_fieldnote">Eksportuj jako notatki terenowe…</string>
   <string name="caches_removing_from_history">Kasuję z historii…</string>
 
   <!-- caches lists -->
@@ -421,7 +404,6 @@
   <string name="cache_personal_note">osobista notatka</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Długi opis</string>
-  <string name="cache_watchlist">Lista obserwowanych</string>
   <string name="cache_watchlist_on">Ta skrzynka jest na twojej liscie obserwowanych.</string>
   <string name="cache_watchlist_not_on">Ta skrzynka nie jest na twojej liscie obserwowanych.</string>
   <string name="cache_watchlist_add">Obserwuj</string>
@@ -483,7 +465,6 @@
   <string name="cache_spoiler_images_loading">Ładuje zdjęcia spoiler…</string>
   <string name="cache_log_types">Rodzaj logu</string>
   <string name="cache_coordinates_no">Ta skrzynka nie ma współrzędnych GPS.</string>
-  <string name="cache_export_fieldnote">Eksportuj jako notatka terenowa</string>
   <string name="cache_clear_history">Wykasuj historię</string>
   <string name="cache_remove_from_history">Usuń z historii</string>
 
@@ -504,7 +485,6 @@
   <string name="map_file_select_title">Wybierz plik z mapą</string>
 
   <!--  import -->
-  <string name="import_title">Import…</string>
   <string name="web_import_title">Import z internetu</string>
   <string name="web_import_waiting">Czekam na nowe skrzynki z internetu…</string>
   <string name="web_downloading">Ściąganie</string>
@@ -515,7 +495,6 @@
 
   <!-- waypoint -->
   <string name="waypoint">Punkt nawigacji</string>
-  <string name="waypoint_title">Punkt nawigacji</string>
   <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
   <string name="waypoint_my_coordinates">Moje współrzędne</string>
   <string name="waypoint_bearing">Kierunek</string>
@@ -528,7 +507,6 @@
   <string name="waypoint_note">Notatka</string>
   <string name="waypoint_save">Zapisz</string>
   <string name="waypoint_loading">Ładuje punkt nawigacyjny…</string>
-  <string name="waypoint_unknown_coordinates">Współrzędne nieznane</string>
   <string name="search_history">Historia</string>
   <string name="search_history_empty">Brak poprzednich celów</string>
   <string name="search_remove_destination">Cel usunięty</string>
