@@ -2,9 +2,9 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.downloadservice.CacheDownloadService;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.ui.CacheDetailsCreator;
-import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,44 +22,10 @@ import android.widget.TextView;
 public class CachePopup extends AbstractPopupActivity {
     private final Progress progress = new Progress();
 
-    private class StoreCacheHandler extends CancellableHandler {
-        @Override
-        public void handleRegularMessage(Message msg) {
-            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
-                updateStatusMsg((String) msg.obj);
-            } else {
-                init();
-            }
-        }
-
-        private void updateStatusMsg(final String msg) {
-            progress.setMessage(res.getString(R.string.cache_dialog_offline_save_message)
-                    + "\n\n"
-                    + msg);
-        }
-    }
-
     private class DropCacheHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             init();
-        }
-    }
-
-    private class RefreshCacheHandler extends CancellableHandler {
-        @Override
-        public void handleRegularMessage(Message msg) {
-            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
-                updateStatusMsg((String) msg.obj);
-            } else {
-                init();
-            }
-        }
-
-        private void updateStatusMsg(final String msg) {
-            progress.setMessage(res.getString(R.string.cache_dialog_refresh_message)
-                    + "\n\n"
-                    + msg);
         }
     }
 
@@ -151,56 +117,22 @@ public class CachePopup extends AbstractPopupActivity {
     private class StoreCacheClickListener implements View.OnClickListener {
         @Override
         public void onClick(View arg0) {
-            if (progress.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_working));
-                return;
-            }
-
-            final StoreCacheHandler storeCacheHandler = new StoreCacheHandler();
-            progress.show(CachePopup.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-            new StoreCacheThread(storeCacheHandler).start();
-        }
-    }
-
-    private class StoreCacheThread extends Thread {
-        final private CancellableHandler handler;
-
-        public StoreCacheThread(final CancellableHandler handler) {
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            cache.store(handler);
-            invalidateOptionsMenuCompatible();
+            Intent serviceIntent = new Intent(getApplicationContext(), CacheDownloadService.class);
+            serviceIntent.putExtra(CacheDownloadService.EXTRA_GEOCODE, cache.getGeocode());
+            startService(serviceIntent);
+            finish();
         }
     }
 
     private class RefreshCacheClickListener implements View.OnClickListener {
         @Override
         public void onClick(View arg0) {
-            if (progress.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_working));
-                return;
-            }
-
-            final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler();
-            progress.show(CachePopup.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
-            new RefreshCacheThread(refreshCacheHandler).start();
-        }
-    }
-
-    private class RefreshCacheThread extends Thread {
-        final private CancellableHandler handler;
-
-        public RefreshCacheThread(final CancellableHandler handler) {
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            cache.refresh(cache.getListId(), handler);
-            handler.sendEmptyMessage(0);
+            Intent serviceIntent = new Intent(getApplicationContext(), CacheDownloadService.class);
+            serviceIntent.putExtra(CacheDownloadService.EXTRA_GEOCODE, cache.getGeocode());
+            serviceIntent.putExtra(CacheDownloadService.EXTRA_REFRESH, true);
+            serviceIntent.putExtra(CacheDownloadService.EXTRA_LIST_ID, cache.getListId());
+            startService(serviceIntent);
+            finish();
         }
     }
 
@@ -211,7 +143,6 @@ public class CachePopup extends AbstractPopupActivity {
                 showToast(res.getString(R.string.err_detail_still_working));
                 return;
             }
-
             final DropCacheHandler dropCacheHandler = new DropCacheHandler();
             progress.show(CachePopup.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
             new DropCacheThread(dropCacheHandler).start();

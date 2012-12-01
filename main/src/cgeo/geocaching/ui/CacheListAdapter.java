@@ -166,6 +166,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         return null;
     }
+
     /**
      * Called when a new page of caches was loaded.
      */
@@ -508,7 +509,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         return v;
     }
 
-    private static Drawable getCacheIcon(cgCache cache) {
+    public static Drawable getCacheIcon(cgCache cache) {
         int hashCode = getIconHashCode(cache.getType(), cache.hasUserModifiedCoords() || cache.hasFinalDefined());
         final Drawable drawable = gcIconDrawables.get(hashCode);
         if (drawable != null) {

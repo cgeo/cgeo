@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?background_color"
+    android:orientation="vertical" >
+
+    <LinearLayout style="@style/action_bar" >
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goHome" />
+
+        <View style="@style/action_bar_separator" />
+
+        <TextView
+            style="@style/action_bar_title"
+            android:text="@string/download_service_downloads" />
+    </LinearLayout>
+
+    <RelativeLayout style="@style/separator_horizontal_layout" >
+
+        <View style="@style/separator_horizontal" />
+
+        <TextView
+            style="@style/separator_horizontal_headline"
+            android:text="@string/download_service_downloading" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/webDownloadBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/webDownloadProgress"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:indeterminate="true"
+            android:indeterminateOnly="true"
+            android:max="10" />
+
+        <TextView
+            android:id="@+id/webDownloadText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/webDownloadStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/web_download_stop" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/actualDownload"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/download_queue_item" />
+
+    <RelativeLayout style="@style/separator_horizontal_layout" >
+
+        <View style="@style/separator_horizontal" />
+
+        <TextView
+            android:id="@+id/downloadQueueTitle"
+            style="@style/separator_horizontal_headline" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/downloadlistview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent" />
+
+</LinearLayout>

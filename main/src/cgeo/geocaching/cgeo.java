@@ -54,6 +54,7 @@ public class cgeo extends AbstractActivity {
     private static final int MENU_SETTINGS = 2;
     private static final int MENU_HISTORY = 3;
     private static final int MENU_SCAN = 4;
+    private static final int MENU_DOWNLOADS = 9;
     private static final int SCAN_REQUEST_CODE = 1;
     private static final int MENU_OPEN_LIST = 100;
 
@@ -325,6 +326,7 @@ public class cgeo extends AbstractActivity {
         menu.add(0, MENU_HELPERS, 0, res.getString(R.string.menu_helpers)).setIcon(R.drawable.ic_menu_shopping);
         menu.add(0, MENU_SCAN, 0, res.getString(R.string.menu_scan_geo)).setIcon(R.drawable.ic_menu_barcode);
         menu.add(0, MENU_ABOUT, 0, res.getString(R.string.menu_about)).setIcon(R.drawable.ic_menu_info_details);
+        menu.add(0, MENU_DOWNLOADS, 0, res.getString(R.string.menu_download));
         return true;
     }
 
@@ -365,6 +367,9 @@ public class cgeo extends AbstractActivity {
             case MENU_SCAN:
                 startScannerApplication();
                 return true;
+            case MENU_DOWNLOADS:
+                startActivity(new Intent(this, DownloadManagerActivity.class));
+                return true;
             default:
                 break;
         }
@@ -401,9 +406,9 @@ public class cgeo extends AbstractActivity {
                 }
                 new AlertDialog.Builder(this)
                         .setMessage(res.getString(R.string.unknown_scan) + "\n\n" + query)
-                .setPositiveButton(getString(android.R.string.ok), null)
-                .create()
-                .show();
+                        .setPositiveButton(getString(android.R.string.ok), null)
+                        .create()
+                        .show();
             }
         }
     }

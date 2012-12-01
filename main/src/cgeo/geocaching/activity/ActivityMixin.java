@@ -79,18 +79,18 @@ public final class ActivityMixin {
         }
     }
 
-    public static void showToast(final Activity activity, final String text) {
+    public static void showToast(final Context context, final String text) {
         if (StringUtils.isNotBlank(text)) {
-            Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
 
             toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
             toast.show();
         }
     }
 
-    public static void showShortToast(final Activity activity, final String text) {
+    public static void showShortToast(final Context context, final String text) {
         if (StringUtils.isNotBlank(text)) {
-            Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
 
             toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
             toast.show();
