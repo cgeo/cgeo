@@ -79,46 +79,12 @@
   <string name="changelog" translatable="false">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · If static maps are enabled, batch update of caches will now update caches without static maps first\n
-    · If a cache has a chirp attribute the navigation menu supports starting the Cache Beacon app\n
-    · Search bar on main screen now allows searching OC geocodes\n
-    · Removed Go4Cache support as this third party service is no longer available\n
-    · Selectable GPX import directory\n
-    · New log template for inserting owner name\n
-    · New option to remove colors from log entries\n 
-    · Ability to delete GPX files after import\n
-    · Quick signature insertion\n
-    · Template for inserting smilies when logging a cache\n
-    · Option to identify as android browser. Might help in case of login problems on mobile networks\n
-    · Create and edit a personal note for each cache (not yet synchronized to geocaching.com)\n
-    · Quick change between different offline maps within live map\n
-    · Support of custom themes for offline maps (e.g. nightview)\n
-    · Sygic navigation support\n
-    · Filter for non premium member caches\n
-    · New image tab in cache details\n 
+    · ...\n 
     \n
     <b>Bugfixing:</b>\n
-    · Crash when modifying lists fixed\n
-    · Improvement for cache description translation\n
-    · Avoid crash when searching for an unactivated TB\n
-    · Improvement for enabling live mode on map\n
-    · Improvement for GPX export operations\n
-    · Readability improvement for cache description with dark text when using black theme\n
-    · Store for offline on live map now always available for basic members\n
-    · Live map now stays live after display rotation\n  
-    · Open in browser improved to allow setting a default browser without losing the option to open coord.info URLs with c:geo\n
-    · Improve offline stability\n
-    · Static map download improvements\n
-    · Failure when importing previously exported GPX file fixed\n
-    · Opening a link from a TB description improved\n
-    · Last activity time on TB page corrected\n
-    · 4-digit favorite points shown correctly in lists\n
-    · File scan for offline maps improved\n
-    · Allow HTML in trackable description\n
-    · Live map filter now also working for basic members\n
-    · Improved stability for large GPX file import\n
+    · ...\n
      \n
-    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
+    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
     \n
     <b>Known Limitations/Bugs:</b>\n
     · Live map:\n
