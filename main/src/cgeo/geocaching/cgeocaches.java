@@ -28,6 +28,7 @@ import cgeo.geocaching.sorting.EventDateComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
@@ -156,57 +157,42 @@ public class cgeocaches extends AbstractListActivity {
      */
     private MenuItem navigationMenu;
 
-    private Handler loadCachesHandler = new Handler() {
+    public void handleCachesLoaded() {
+        try {
+            setAdapter();
 
-        @Override
-        public void handleMessage(Message msg) {
-            try {
-                setAdapter();
+            updateTitle();
 
-                updateTitle();
+            setDateComparatorForEventList();
 
-                setDateComparatorForEventList();
+            showFooterMoreCaches();
 
-                showFooterMoreCaches();
+            if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
+                dialog.setTitle(res.getString(R.string.license));
+                dialog.setMessage(res.getString(R.string.err_license));
+                dialog.setCancelable(true);
+                dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
 
-                if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
-                    dialog.setTitle(res.getString(R.string.license));
-                    dialog.setMessage(res.getString(R.string.err_license));
-                    dialog.setCancelable(true);
-                    dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        Cookies.clearCookies();
+                        dialog.cancel();
+                    }
+                });
+                dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            Cookies.clearCookies();
-                            dialog.cancel();
-                        }
-                    });
-                    dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        Cookies.clearCookies();
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
+                    }
+                });
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            Cookies.clearCookies();
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
-                        }
-                    });
-
-                    AlertDialog alert = dialog.create();
-                    alert.show();
-                } else if (search != null && search.getError() != null) {
-                    showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString(res) + '.');
-
-                    hideLoading();
-                    showProgress(false);
-
-                    finish();
-                    return;
-                }
-
-                setAdapterCurrentCoordinates(false);
-            } catch (Exception e) {
-                showToast(res.getString(R.string.err_detail_cache_find_any));
-                Log.e("cgeocaches.loadCachesHandler: " + e.toString());
+                AlertDialog alert = dialog.create();
+                alert.show();
+            } else if (search != null && search.getError() != null) {
+                showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString(res) + '.');
 
                 hideLoading();
                 showProgress(false);
@@ -215,16 +201,45 @@ public class cgeocaches extends AbstractListActivity {
                 return;
             }
 
-            try {
-                hideLoading();
-                showProgress(false);
-            } catch (Exception e2) {
-                Log.e("cgeocaches.loadCachesHandler.2: " + e2.toString());
-            }
+            setAdapterCurrentCoordinates(false);
+        } catch (Exception e) {
+            showToast(res.getString(R.string.err_detail_cache_find_any));
+            Log.e("cgeocaches.loadCachesHandler: " + e.toString());
 
-            if (adapter != null) {
-                adapter.setSelectMode(false);
+            hideLoading();
+            showProgress(false);
+
+            finish();
+            return;
+        }
+
+        try {
+            hideLoading();
+            showProgress(false);
+        } catch (Exception e2) {
+            Log.e("cgeocaches.loadCachesHandler.2: " + e2.toString());
+        }
+
+        if (adapter != null) {
+            adapter.setSelectMode(false);
+        }
+    }
+
+    private Handler loadCachesHandler = new LoadCachesHandler(this);
+
+    private static class LoadCachesHandler extends WeakReferenceHandler<cgeocaches> {
+
+        protected LoadCachesHandler(cgeocaches activity) {
+            super(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            final cgeocaches activity = getActivity();
+            if (activity == null) {
+                return;
             }
+            activity.handleCachesLoaded();
         }
     };
     private Handler loadNextPageHandler = new Handler() {
