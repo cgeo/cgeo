@@ -218,10 +218,10 @@ public class CacheDownloadService extends Service {
             return;
         }
         String status = getResources().getQuantityString(R.plurals.download_service_status, queue.size(), actualCache.geocode, queue.size());
-        Notification notification = new Notification(R.drawable.icon_sync, status, System.currentTimeMillis());
+        Notification notification = new Notification(R.drawable.icon_sync, null, System.currentTimeMillis());
         Intent notificationIntent = new Intent(this, DownloadManagerActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-        notification.setLatestEventInfo(getApplicationContext(), getString(R.string.download_service_name), status.toString(), contentIntent);
+        notification.setLatestEventInfo(getApplicationContext(), getString(R.string.download_service_name), status, contentIntent);
         startForeground(CGEO_DOWNLOAD_NOTIFICATION_ID, notification);
     }
 
