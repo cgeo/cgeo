@@ -28,7 +28,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DownloadManagerActivity extends AbstractActivity implements OnClickListener {
 
@@ -62,13 +62,8 @@ public class DownloadManagerActivity extends AbstractActivity implements OnClick
                     TextView textQueued = (TextView) findViewById(R.id.downloadQueueTitle);
                     textQueued.setText(getString(R.string.download_service_queued, msg.arg1));
                     try {
-                        String caches[] = downloadService.queuedCodes();
-                        ArrayList<String> cacheList = new ArrayList<String>(caches.length);
-                        for (String c : caches) {
-                            cacheList.add(c);
-                        }
+                        List<String> cacheList = downloadService.queuedCodes();
                         adapter = new CacheQueueAdapter(DownloadManagerActivity.this, cacheList);
-
                         ListView lv = (ListView) findViewById(R.id.downloadlistview);
                         lv.setAdapter(adapter);
                         View actualDownloadView = findViewById(R.id.actualDownload);

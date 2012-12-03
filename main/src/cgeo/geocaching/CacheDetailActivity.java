@@ -1524,6 +1524,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 intent.putExtra(CacheDownloadService.EXTRA_GEOCODE, cache.getGeocode());
                 intent.putExtra(CacheDownloadService.EXTRA_LIST_ID, cache.getListId());
                 intent.putExtra(CacheDownloadService.EXTRA_REFRESH, true);
+                intent.putExtra(CacheDownloadService.EXTRA_PRIORITY, true);
                 startService(intent);
             }
         }
@@ -2007,7 +2008,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see android.os.AsyncTask#onProgressUpdate(Progress[])
          */
         @Override
@@ -2149,7 +2150,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     holder.count.setVisibility(View.VISIBLE);
                     if (log.found == -1) {
                         holder.count.setVisibility(View.GONE);
-                    } else  {
+                    } else {
                         holder.count.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
                     }
 

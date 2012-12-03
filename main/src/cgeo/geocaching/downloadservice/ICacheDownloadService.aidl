@@ -7,7 +7,7 @@ interface ICacheDownloadService {
     
     String actualDownload();
     
-    String[] queuedCodes();
+    List<String> queuedCodes();
     
     void flushQueueAndStopService();
     

@@ -17,7 +17,9 @@ import android.os.IBinder;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 public class CacheDownloadService extends Service {
@@ -35,10 +37,11 @@ public class CacheDownloadService extends Service {
     public static final String EXTRA_LIST_ID = "LIST_ID";
     public static final String EXTRA_GEOCODE = "GEOCODE";
     public static final String EXTRA_REFRESH = "REFRESH";
+    public static final String EXTRA_PRIORITY = "PRIORITY";
 
     private int downloadedCaches = 0;
 
-    LinkedBlockingQueue<QueueItem> queue = new LinkedBlockingQueue<QueueItem>();
+    PriorityBlockingQueue<QueueItem> queue = new PriorityBlockingQueue<QueueItem>();
 
     private enum OperationType {
         STORE,
@@ -48,11 +51,13 @@ public class CacheDownloadService extends Service {
     /**
      * item container for processing queue
      */
-    private class QueueItem {
+    private class QueueItem implements Comparable<QueueItem>, Cloneable {
         private final String geocode;
         private final int startId;
         private final int listId;
         private final OperationType operation;
+        private boolean priority = false;
+        private boolean ghost = false;
 
         public QueueItem(String cacheCode, int startId, int listId, OperationType type) {
             this.startId = startId;
@@ -61,8 +66,24 @@ public class CacheDownloadService extends Service {
             this.operation = type;
         }
 
+        public QueueItem getGhostInstance() {
+            QueueItem qi;
+            try {
+                qi = (QueueItem) this.clone();
+                qi.ghost = true;
+                qi.priority = false;
+                return qi;
+            } catch (CloneNotSupportedException e) {
+                throw new RuntimeException("This should never be thrown, this class implements cloneable interface");
+            }
+        }
+
         public QueueItem(String geocode) {
             this(geocode, 0, 0, OperationType.STORE);
+        }
+
+        public void setMaxPriority() {
+            this.priority = true;
         }
 
         @Override
@@ -88,6 +109,13 @@ public class CacheDownloadService extends Service {
             }
             return true;
         }
+
+        @Override
+        public int compareTo(QueueItem another) {
+            Integer t = this.priority ? -this.startId : this.startId;
+            Integer a = another.priority ? -another.startId : another.startId;
+            return t.compareTo(a);
+        }
     }
 
     @Override
@@ -106,22 +134,25 @@ public class CacheDownloadService extends Service {
                         startId,
                         listId,
                         intent.hasExtra(EXTRA_REFRESH) ? OperationType.REFRESH : OperationType.STORE);
-        try {
+        if (intent.hasExtra(EXTRA_PRIORITY)) {
+            item.setMaxPriority();
+        }
+        synchronized (queue) {
             if (!queue.contains(item)) {
                 queue.put(item);
+                if (item.priority) {
+                    queue.put(item.getGhostInstance());
+                }
                 if (lastCacheAdded + 1000 < System.currentTimeMillis()) {
                     ActivityMixin.showShortToast(this, (getString(R.string.download_service_queued_cache, item.geocode)));
                     lastCacheAdded = System.currentTimeMillis();
                 }
                 notifyChanges();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        if (!downloadTaskRunning) {
-            downloadTaskRunning = true;
-            new DownloadCachesTask().execute();
+            if (!downloadTaskRunning) {
+                downloadTaskRunning = true;
+                new DownloadCachesTask().execute();
+            }
         }
         return START_STICKY;
     }
@@ -207,12 +238,15 @@ public class CacheDownloadService extends Service {
      *
      * @return transformed array
      */
-    public String[] queueAsArray() {
+    public List<String> queueAsArray() {
         Object[] queueAsArray = queue.toArray();
-        String[] result = new String[queueAsArray.length];
+        ArrayList<String> result = new ArrayList<String>();
 
         for (int i = 0; i < queueAsArray.length; i++) {
-            result[i] = ((QueueItem) (queueAsArray[i])).geocode;
+            QueueItem qi = ((QueueItem) (queueAsArray[i]));
+            if (!qi.ghost) {
+                result.add(qi.geocode);
+            }
         }
         return result;
     }
@@ -229,7 +263,7 @@ public class CacheDownloadService extends Service {
             }
 
             @Override
-            public String[] queuedCodes() throws RemoteException {
+            public List<String> queuedCodes() throws RemoteException {
                 return queueAsArray();
             }
 
@@ -307,6 +341,10 @@ public class CacheDownloadService extends Service {
             do {
                 try {
                     actualCache = queue.poll(5, TimeUnit.SECONDS);
+                    if (actualCache != null && actualCache.ghost) {
+                        stopSelf(actualCache.startId);
+                        continue;
+                    }
                     //Random wait between caches to prevent hogging of servers
                     Thread.sleep((long) (Math.random() * 5000) + 1000);
                 } catch (InterruptedException e) {
@@ -337,7 +375,11 @@ public class CacheDownloadService extends Service {
 
                     notifyChanges(queue.isEmpty());
                     sleep((int) (Math.random() * 3000) + 500);
-                    stopSelf(actualCache.startId);
+                    synchronized (queue) {
+                        if (!actualCache.priority) {
+                            stopSelf(actualCache.startId);
+                        }
+                    }
                 }
 
             } while (actualCache != null || downloadTaskRunning);
