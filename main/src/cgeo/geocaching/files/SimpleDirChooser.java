@@ -36,9 +36,8 @@ public class SimpleDirChooser extends ListActivity {
     private static final String PARENT_DIR = "..        ";
     private File currentDir;
     private FileArrayAdapter adapter;
-    private CheckBox lastBoxChecked = null;
     private Button okButton = null;
-    private String checkedText = null;
+    private int lastPosition = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,7 @@ public class SimpleDirChooser extends ListActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                String chosenDirName = File.separator + checkedText;
+                String chosenDirName = File.separator + adapter.getItem(lastPosition).getName();
                 intent.putExtra(EXTRA_CHOSEN_DIR, currentDir.getAbsolutePath() + chosenDirName);
                 setResult(RESULT_OK, intent);
                 finish();
@@ -142,7 +141,8 @@ public class SimpleDirChooser extends ListActivity {
                 }
                 CheckBox check = (CheckBox) v.findViewById(R.id.CheckBox);
                 if (check != null) {
-                    check.setOnClickListener(new OnCheckBoxClickListener(option.getName()));
+                    check.setOnClickListener(new OnCheckBoxClickListener(position));
+                    check.setChecked(option.isChecked());
                 }
             }
             return v;
@@ -173,37 +173,37 @@ public class SimpleDirChooser extends ListActivity {
     }
 
     public class OnCheckBoxClickListener implements OnClickListener {
-        private String checkedText;
+        private int position;
 
-        OnCheckBoxClickListener(String checkedText) {
-            this.checkedText = checkedText;
+        OnCheckBoxClickListener(int position) {
+            this.position = position;
         }
 
         @Override
         public void onClick(View arg0) {
-            CheckBox check = (CheckBox) arg0;
-            if (lastBoxChecked == check) {
-                check.setChecked(false);
-                lastBoxChecked = null;
-                okButton.setEnabled(false);
-                okButton.setVisibility(View.INVISIBLE);
-                SimpleDirChooser.this.checkedText = "";
-            } else {
-                if (lastBoxChecked != null) {
-                    lastBoxChecked.setChecked(false);
-                }
-                check.setChecked(true);
-                lastBoxChecked = check;
+            Option lastOption = (lastPosition > -1) ? adapter.getItem(lastPosition) : null;
+            Option currentOption = adapter.getItem(position);
+            if (lastOption != null) {
+                lastOption.setChecked(false);
+            }
+            if (currentOption != lastOption) {
+                currentOption.setChecked(true);
+                lastPosition = position;
                 okButton.setEnabled(true);
                 okButton.setVisibility(View.VISIBLE);
-                SimpleDirChooser.this.checkedText = checkedText;
+            } else {
+                lastPosition = -1;
+                okButton.setEnabled(false);
+                okButton.setVisibility(View.INVISIBLE);
             }
+            arg0.refreshDrawableState();
         }
     }
 
     public class Option implements Comparable<Option> {
         private final String name;
         private final String path;
+        private boolean checked = false;
 
         public Option(String name, String path) {
             this.name = name;
@@ -216,6 +216,14 @@ public class SimpleDirChooser extends ListActivity {
 
         public String getPath() {
             return path;
+        }
+
+        public boolean isChecked() {
+            return this.checked;
+        }
+
+        public void setChecked(boolean checked) {
+            this.checked = checked;
         }
 
         @Override
