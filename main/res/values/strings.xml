@@ -1098,7 +1098,7 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next release</b>\n\n
+    <b>2012.12.03</b>\n\n
     <b>New Features/Functions:</b>\n
     · If static maps are enabled, batch update of caches will now update caches without static maps first\n
     · If a cache has a chirp attribute the navigation menu supports starting the Cache Beacon app\n
