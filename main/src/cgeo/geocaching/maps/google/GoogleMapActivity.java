@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.google;
 
+import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -12,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class GoogleMapActivity extends MapActivity implements MapActivityImpl {
+public class GoogleMapActivity extends MapActivity implements MapActivityImpl, FilteredActivity {
 
     private AbstractMap mapBase;
 
@@ -127,4 +128,8 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl {
         mapBase.goManual(view);
     }
 
+    @Override
+    public void showFilterMenu(View view) {
+        // do nothing, the filter bar only shows the global filter
+    }
 }

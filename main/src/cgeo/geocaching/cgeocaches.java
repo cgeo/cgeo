@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
@@ -65,7 +66,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class cgeocaches extends AbstractListActivity {
+public class cgeocaches extends AbstractListActivity implements FilteredActivity {
 
     private static final String EXTRAS_USERNAME = "username";
     private static final String EXTRAS_ADDRESS = "address";
