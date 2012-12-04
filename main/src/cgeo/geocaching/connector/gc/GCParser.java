@@ -44,10 +44,6 @@ import org.json.JSONObject;
 
 import android.net.Uri;
 import android.text.Html;
-import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StrikethroughSpan;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -220,16 +216,6 @@ public abstract class GCParser {
                 }
             } catch (NumberFormatException e) {
                 Log.w("GCParser.parseSearch: Failed to parse favourite count");
-            }
-
-            if (cache.getNameSp() == null) {
-                cache.setNameSp((new Spannable.Factory()).newSpannable(cache.getName()));
-                if (cache.isDisabled() || cache.isArchived()) { // strike
-                    cache.getNameSp().setSpan(new StrikethroughSpan(), 0, cache.getNameSp().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-                if (cache.isArchived()) {
-                    cache.getNameSp().setSpan(new ForegroundColorSpan(cgeoapplication.getInstance().getResources().getColor(R.color.archived_cache_color)), 0, cache.getNameSp().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
             }
 
             searchResult.addCache(cache);

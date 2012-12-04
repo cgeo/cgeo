@@ -38,7 +38,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
-import android.text.Spannable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -66,7 +65,6 @@ public class cgCache implements ICache, IWaypoint {
     private String guid = "";
     private CacheType cacheType = CacheType.UNKNOWN;
     private String name = "";
-    private Spannable nameSp = null;
     private String ownerDisplayName = "";
     private String ownerUserId = "";
     private Date hidden = null;
@@ -227,9 +225,6 @@ public class cgCache implements ICache, IWaypoint {
         if (StringUtils.isBlank(name)) {
             name = other.name;
         }
-        if (StringUtils.isBlank(nameSp)) {
-            nameSp = other.nameSp;
-        }
         if (StringUtils.isBlank(ownerDisplayName)) {
             ownerDisplayName = other.ownerDisplayName;
         }
@@ -376,7 +371,6 @@ public class cgCache implements ICache, IWaypoint {
                 (direction != null ? direction.equals(other.direction) : null == other.direction) &&
                 (distance != null ? distance.equals(other.distance) : null == other.distance) &&
                 (elevation != null ? elevation.equals(other.elevation) : null == other.elevation) &&
-                nameSp == other.nameSp &&
                 rating == other.rating &&
                 votes == other.votes &&
                 myVote == other.myVote &&
@@ -806,14 +800,6 @@ public class cgCache implements ICache, IWaypoint {
 
     public void setDetailed(boolean detailed) {
         this.detailed = detailed;
-    }
-
-    public Spannable getNameSp() {
-        return nameSp;
-    }
-
-    public void setNameSp(Spannable nameSp) {
-        this.nameSp = nameSp;
     }
 
     public void setHidden(final Date hidden) {

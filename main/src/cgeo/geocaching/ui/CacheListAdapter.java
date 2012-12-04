@@ -390,17 +390,24 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             holder.logStatusMark.setVisibility(View.GONE);
         }
 
-        if (cache.getNameSp() == null) {
-            cache.setNameSp((new Spannable.Factory()).newSpannable(cache.getName()));
-            if (cache.isDisabled() || cache.isArchived()) { // strike
-                cache.getNameSp().setSpan(new StrikethroughSpan(), 0, cache.getNameSp().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        Spannable spannable = null;
+        if (cache.isDisabled() || cache.isArchived()) { // strike
+            spannable = Spannable.Factory.getInstance().newSpannable(cache.getName());
+            spannable.setSpan(new StrikethroughSpan(), 0, spannable.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        if (cache.isArchived()) { // red color
+            if (spannable == null) {
+                spannable = Spannable.Factory.getInstance().newSpannable(cache.getName());
             }
-            if (cache.isArchived()) {
-                cache.getNameSp().setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, cache.getNameSp().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
+            spannable.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, spannable.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
-        holder.text.setText(cache.getNameSp(), TextView.BufferType.SPANNABLE);
+        if (spannable != null) {
+            holder.text.setText(spannable, TextView.BufferType.SPANNABLE);
+        }
+        else {
+            holder.text.setText(cache.getName());
+        }
         holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache), null, null, null);
 
         if (cache.getInventoryItems() > 0) {
