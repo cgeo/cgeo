@@ -23,36 +23,39 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    public void testSingleSelection() {
-        assertChecked(0);
-
-        solo.scrollToBottom();
+    public void testSingleSelection() throws InterruptedException {
         final ArrayList<CheckBox> boxes = solo.getCurrentCheckBoxes();
         final int lastIndex = boxes.size() - 1;
+        assertChecked("Newly opened activity", 0);
+
+        solo.scrollToBottom();
         solo.clickOnCheckBox(lastIndex);
         assertTrue(solo.getCurrentCheckBoxes().get(lastIndex).isChecked());
         assertFalse(solo.getCurrentCheckBoxes().get(0).isChecked());
-        assertChecked(1);
+        assertChecked("Clicked last checkbox", 1);
 
         solo.scrollUp();
-        assertChecked(1);
+        Thread.sleep(20);
+        solo.scrollDown();
+        assertChecked("Refreshing last checkbox", 1);
 
+        solo.scrollToTop();
         solo.clickOnCheckBox(0);
-        assertChecked(1);
+        assertChecked("Clicked first checkbox", 1);
         assertTrue(solo.getCurrentCheckBoxes().get(0).isChecked());
     }
 
-    private void assertChecked(int expectedChecked) {
+    private void assertChecked(String message, int expectedChecked) {
         int checked = 0;
         final ArrayList<CheckBox> boxes = solo.getCurrentCheckBoxes();
-        assertNotNull(boxes);
-        assertTrue(boxes.size() > 1);
+        assertNotNull("Could not get checkboxes", boxes);
+        assertTrue("There are no checkboxes", boxes.size() > 1);
         for (CheckBox checkBox : boxes) {
             if (checkBox.isChecked()) {
                 checked++;
             }
         }
-        assertEquals(expectedChecked, checked);
+        assertEquals(message, expectedChecked, checked);
     }
 
 }
