@@ -1143,7 +1143,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 caches.removeAll(cachesFromSearchResult);
                 caches.addAll(cachesFromSearchResult);
 
-                if (isLiveEnabled) {
+                if (mapMode == MapMode.LIVE) {
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
