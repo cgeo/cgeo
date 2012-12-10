@@ -33,14 +33,9 @@
 					android:layout_height="wrap_content"
 					android:orientation="vertical" >
 			</LinearLayout>
-			<LinearLayout android:id="@+id/more_details_box"
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:orientation="vertical"  >
-				<Button style="@style/button_small"
-						android:id="@+id/more_details"
-						android:text="@string/popup_more" />
-			</LinearLayout>
+            <Button style="@style/button_small" android:id="@+id/more_details" android:text="@string/popup_more"
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"/>
             <RelativeLayout style="@style/separator_horizontal_layout" >
                 <View style="@style/separator_horizontal" />
             </RelativeLayout>
