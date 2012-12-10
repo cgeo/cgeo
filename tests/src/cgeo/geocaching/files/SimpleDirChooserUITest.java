@@ -37,6 +37,7 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
         solo.scrollUp();
         Thread.sleep(20);
         solo.scrollToBottom();
+        Thread.sleep(20);
         assertChecked("Refreshing last checkbox", 1);
 
         solo.scrollToTop();
