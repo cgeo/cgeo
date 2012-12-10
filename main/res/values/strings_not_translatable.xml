@@ -80,11 +80,13 @@
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
     · Alphabetical sorting of OSM:Offline maps in map selection\n 
-    · Color markes also in logbook\n
+    · Color markes also in trackable logbook\n
     · Edit cache type filter by clicking on filter bar\n
+    · Support for searching opencaching.nl caches\n
     \n
     <b>Bugfixing:</b>\n
     · Final flag icon lost when updating cache with self defined final\n
+    · Fixed selection bug in dir chooser\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
     \n
