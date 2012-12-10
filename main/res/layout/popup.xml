@@ -41,40 +41,35 @@
 						android:id="@+id/more_details"
 						android:text="@string/popup_more" />
 			</LinearLayout>
-			<LinearLayout android:id="@+id/offline_box"
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:orientation="vertical"  >
-				<RelativeLayout style="@style/separator_horizontal_layout" >
-					<View style="@style/separator_horizontal" />
-				</RelativeLayout>
-				<RelativeLayout
-						android:layout_width="fill_parent"
-						android:layout_height="wrap_content" >
-					<TextView android:id="@+id/offline_text"
-							android:layout_width="fill_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginLeft="6dip"
-							android:layout_marginRight="130dip"
-							android:layout_alignParentLeft="true"
-							android:layout_gravity="left"
-							android:paddingRight="3dip"
-							android:textSize="14dip"
-							android:textColor="?text_color" />
-					<Button style="@style/button_small"
-							android:id="@+id/offline_refresh"
-							android:visibility="gone"
-							android:layout_width="60dip"
-							android:layout_marginRight="71dip"
-							android:layout_alignParentRight="true"
-							android:text="@string/cache_offline_refresh" />
-					<Button style="@style/button_small"
-							android:id="@+id/offline_store"
-							android:layout_width="60dip"
-							android:layout_alignParentRight="true"
-							android:text="@string/cache_offline_store" />
-				</RelativeLayout>
-			</LinearLayout>
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+                <View style="@style/separator_horizontal" />
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                <TextView android:id="@+id/offline_text"
+                          android:layout_width="fill_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="6dip"
+                          android:layout_marginRight="130dip"
+                          android:layout_alignParentLeft="true"
+                          android:layout_gravity="left"
+                          android:paddingRight="3dip"
+                          android:textSize="14dip"
+                          android:textColor="?text_color" />
+                <Button style="@style/button_small"
+                        android:id="@+id/offline_refresh"
+                        android:visibility="gone"
+                        android:layout_width="60dip"
+                        android:layout_marginRight="71dip"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/cache_offline_refresh" />
+                <Button style="@style/button_small"
+                        android:id="@+id/offline_store"
+                        android:layout_width="60dip"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/cache_offline_store" />
+            </RelativeLayout>
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>
