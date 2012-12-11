@@ -127,11 +127,11 @@
                 resize: none;
             }
             legend.note{
-            background:url('../images/silk/note.png') no-repeat 0 0;
+            background:url('../images/icons/16/user_note.png') no-repeat 0 0;
             padding-left:18px;
             }
             legend.warning{
-            background:url('../images/silk/exclamation.png') no-repeat 0 0;
+            background:url('../images/icons/16/take_note.png') no-repeat 0 0;
             padding-left:18px;
             }
             fieldset.CacheNote{
@@ -154,6 +154,7 @@
             }
             #tiptip_content{
                 *background-color:#000;
+                box-shadow:none;
             }
             .maxed{
                 color:#992a2a;
@@ -167,7 +168,7 @@
             .edit-cache-coordinates{
                 text-decoration: none;
                 color: #000 !important;
-                background: url(/images/silk/pencil.png) no-repeat right 0;
+                background: url(/images/icons/16/edit.png) no-repeat right 0;
                 padding:2px 20px 2px 0px;
                 margin-right:4px;
             }
@@ -243,9 +244,10 @@
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
-<input type="hidden" name="__VIEWSTATEFIELDCOUNT" id="__VIEWSTATEFIELDCOUNT" value="2" />
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTI5ODA0Nzc1OQ8WAh4EQy5JRCgpWVN5c3RlbS5JbnQ2NCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BzE0MzM5MDkWAmYPZBYGZg9kFgoCBg8WAh4EVGV4dAViPG1ldGEgbmFtZT0iQ29weXJpZ2h0IiBjb250ZW50PSJDb3B5cmlnaHQgKGMpIDIwMDAtMjAxMiBHcm91bmRzcGVhaywgSW5jLiBBbGwgUmlnaHRzIFJlc2VydmVkLiIgLz5kAgcPFgIfAQVHPCEtLSBDb3B5cmlnaHQgKGMpIDIwMDAtMjAxMiBHcm91bmRzcGVhaywgSW5jLiBBbGwgUmlnaHRzIFJlc2VydmVkLiAtLT5kAhoPFgIeBGhyZWYFHX4vY3NzL3Rsbk1hc3RlclNjcmVlbi5jc3M/cj0xZAIbDxYCHwIFFX4vY3NzL3Rsbk1haW4uY3NzP3I9MWQCIA8WAh4HVmlzaWJsZWhkAgEPZBYQAgUPFgIfAWRkAggPFgIfA2cWCAIBDw8WAh4ISW1hZ2VVcmwFTmh0dHA6Ly9pbWcuZ2VvY2FjaGluZy5jb20vdXNlci9hdmF0YXIvNTBmODMxMjMtMjdkOC00ZGNmLTlmZGUtMmFmMDA2ZWZhZjJiLmpwZ2RkAgMPFgIfAQVoSGVsbG8sIDxhIGhyZWY9Ii9teS9kZWZhdWx0LmFzcHgiIHRpdGxlPSJWaWV3IFByb2ZpbGUgZm9yIGJsYWZvbyIgY2xhc3M9IlNpZ25lZEluUHJvZmlsZUxpbmsiPmJsYWZvbzwvYT5kAgUPDxYCHgtOYXZpZ2F0ZVVybAWtAWh0dHBzOi8vd3d3Lmdlb2NhY2hpbmcuY29tL2xvZ2luL2RlZmF1bHQuYXNweD9SRVNFVD1ZJnJlZGlyPWh0dHAlM2ElMmYlMmZ3d3cuZ2VvY2FjaGluZy5jb20lMmZzZWVrJTJmY2FjaGVfZGV0YWlscy5hc3B4JTNmbG9nJTNkeSUyNndwJTNkR0MxWlhYMiUyNm51bWxvZ3MlM2QzNSUyNmRlY3J5cHQlM2R5ZGQCCw8WAh8BBasBPGltZyBzcmM9Ii9pbWFnZXMvaWNvbnMvaWNvbl9zbWlsZS5wbmciIHRpdGxlPSJDYWNoZXMgRm91bmQiIC8+IDY5MiZuYnNwOyZuYnNwOyZuYnNwOzxpbWcgc3JjPSIvaW1hZ2VzL2NoYWxsZW5nZXMvdHlwZXMvc20vY2hhbGxlbmdlLnBuZyIgdGl0bGU9IkNoYWxsZW5nZXMgQ29tcGxldGVkIiAvPiAzZAINDxYCHwNnFgICDQ8PFgIfBQVAfi90cmFjay9zZWFyY2guYXNweD9vPTEmdWlkPTA1NjRhOTQwLTgzMTEtNDBlZS04ZTc2LTdlOTFiMmNmNjI4NGRkAhAPDxYCHwNnZGQCLg9kFgICAw8WAh8DaGQCLw8WAh4FY2xhc3MFDHNwYW4tMjQgbGFzdBYCAgEPZBYuAgEPZBYCZg9kFgICAQ8PFgIfAQUHR0MxWlhYMmRkAgIPFgIfAQWmATxhIGhyZWY9Ii9hYm91dC9jYWNoZV90eXBlcy5hc3B4IiB0YXJnZXQ9Il9ibGFuayIgdGl0bGU9IkFib3V0IENhY2hlIFR5cGVzIj48aW1nIHNyYz0iL2ltYWdlcy9XcHRUeXBlcy8yLmdpZiIgYWx0PSJUcmFkaXRpb25hbCBDYWNoZSIgdGl0bGU9IlRyYWRpdGlvbmFsIENhY2hlIiAvPjwvYT5kAgYPZBYEAgEPFgIfA2dkAgYPFgIfA2hkAgsPZBYEAgEPFgIfAQUCNDFkAgUPDxYCHwUFRC9zZWVrL2NhY2hlX2Zhdm9yaXRlZC5hc3B4P2d1aWQ9MzZkNDU4NzEtYjk5ZC00NmQ2LTk1ZmMtZmY4NmFiNTY0Yzk4ZGQCDQ8PFgIfA2hkZAIPDxYEHwEFvgE8cCBjbGFzcz0iT2xkV2FybmluZyBOb0JvdHRvbVNwYWNpbmciPjxzdHJvbmc+Q2FjaGUgSXNzdWVzOjwvc3Ryb25nPjwvcD48dWwgY2xhc3M9Ik9sZFdhcm5pbmciPjxsaT5UaGlzIGNhY2hlIGhhcyBiZWVuIGFyY2hpdmVkLCBidXQgaXMgYXZhaWxhYmxlIGZvciB2aWV3aW5nIGZvciBhcmNoaXZhbCBwdXJwb3Nlcy48L2xpPjwvdWw+HwNnZAIQDxYCHwNoZAIRDxYCHwNoZAISD2QWDAIDDxYCHgVzdHlsZQUPZGlzcGxheTppbmxpbmU7FgICAQ8WAh8BBRtVVE06IDMyVSBFIDU0ODM4OSBOIDU4MDI3ODdkAg0PDxYCHwUFM2NkcGYuYXNweD9ndWlkPTM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OGRkAg8PDxYCHwUFOGNkcGYuYXNweD9ndWlkPTM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OCZsYz01ZGQCEQ8PFgIfBQU5Y2RwZi5hc3B4P2d1aWQ9MzZkNDU4NzEtYjk5ZC00NmQ2LTk1ZmMtZmY4NmFiNTY0Yzk4JmxjPTEwZGQCEw8PFgQfBQWCAWh0dHA6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPWQmaGw9ZW4mc2FkZHI9NTIuNDE2Miw5LjU5NDExNyAoSG9tZSBMb2NhdGlvbikmZGFkZHI9NTIuMzczMjE3LDkuNzEwOChIYW5ub3BvbHklM2ErRWlzbGlzZW5zdHJhc3NlKykeBlRhcmdldAUGX2JsYW5rZGQCGw9kFggCAQ8PFgQeCUZvcmVDb2xvcgweBF8hU0ICBGRkAgMPDxYEHwkMHwoCBGRkAgUPDxYCHwNnFgIeB29uY2xpY2sFO3MyZ3BzKCczNmQ0NTg3MS1iOTlkLTQ2ZDYtOTVmYy1mZjg2YWI1NjRjOTgnKTtyZXR1cm4gZmFsc2U7ZAIHDw8WAh8DZxYCHwsFIHMycGhvbmUoJ0dDMVpYWDInKTtyZXR1cm4gZmFsc2U7ZAIUDxYCHwNnFgICAw8WAh8BBQ9UZXN0IGbDvHIgYzpnZW9kAhcPZBYIZg8WAh8DaGQCAQ8PFgIfA2hkZAICDw8WAh8DaGRkAgMPFgIfA2hkAhgPZBYCAgMPDxYCHwEFE05vIGhpbnRzIGF2YWlsYWJsZS4WAh8LBQ1yZXR1cm4gZmFsc2U7ZAIZDxYCHwNoZAIcDxYCHwNoZAIeDxYCHwNnZAIfDxYCHwNoZAIiD2QWAgIBD2QWBAIBDw8WAh8BBf8DPGlmcmFtZSB0eXBlPSJpZnJhbWUiIHNyYz0iaHR0cDovL2Fkcy5ncm91bmRzcGVhay5jb20vYS5hc3B4P1pvbmVJRD05JlRhc2s9R2V0JlNpdGVJRD0xJlg9J2M1OTI3MTFkY2E3NjQwZjU4YTgzMmEwOWIzZDYyMDdlJyIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyNDAiIE1hcmdpbndpZHRoPSIwIiBNYXJnaW5oZWlnaHQ9IjAiIEhzcGFjZT0iMCIgVnNwYWNlPSIwIiBGcmFtZWJvcmRlcj0iMCIgU2Nyb2xsaW5nPSJubyIgc3R5bGU9IndpZHRoOjEyMHB4O0hlaWdodDoyNDBweDsiPjxhIGhyZWY9Imh0dHA6Ly9hZHMuZ3JvdW5kc3BlYWsuY29tL2EuYXNweD9ab25lSUQ9OSZUYXNrPUNsaWNrJjtNb2RlPUhUTUwmU2l0ZUlEPTEiIHRhcmdldD0iX2JsYW5rIj48aW1nIHNyYz0iaHR0cDovL2Fkcy5ncm91bmRzcGVhay5jb20vYS5hc3B4P1pvbmVJRD05JlRhc2s9R2V0Jk1vZGU9SFRNTCZTaXRlSUQ9MSIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyNDAiIGJvcmRlcj0iMCIgYWx0PSIiIC8+PC9hPjwvaWZyYW1lPmRkAgMPFgIeCWlubmVyaHRtbAUTQWR2ZXJ0aXNpbmcgd2l0aCBVc2QCJg9kFgQCBw8PFgIfA2dkZAILDw8WAh8FBTx+L3RyYWNrL3NlYXJjaC5hc3B4P3dpZD0zNmQ0NTg3MS1iOTlkLTQ2ZDYtOTVmYy1mZjg2YWI1NjRjOThkZAInDw8WAh8DZ2QWAmYPFgIeC18hSXRlbUNvdW50AgMWBgIBD2QWBGYPFQMAV2h0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vYm9va21hcmtzL3ZpZXcuYXNweD9ndWlkPTQxY2Q1NmI2LTAwZjEtNDcwMi1iODY2LTFhMjY4YzY0OWQxMxVBbGxlIEhhbm5vcG9seSBDYWNoZXNkAgIPFQJMaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9wcm9maWxlLz9ndWlkPWRmMjE4NGFiLWE5ZWEtNGQzMC05OGVkLWVjNGU4NTFjMzcwNgpHdW1taXNlZWxlZAICD2QWBGYPFQMOQWx0ZXJuYXRpbmdSb3dXaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9ib29rbWFya3Mvdmlldy5hc3B4P2d1aWQ9MGRjZjNmODYtOTM3Mi00OTljLThiNTctZWQ0MTliZDQ4ZTIxEE1laW5lIEVtcGZlaGx1bmdkAgIPFQJMaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9wcm9maWxlLz9ndWlkPWM0NjU0MWZjLTZhZTktNDQ1Mi04ODMzLTQ3MGRkZmJlOWNlZQZza3JlbGxkAgMPZBYEZg8VAwBXaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9ib29rbWFya3Mvdmlldy5hc3B4P2d1aWQ9OWEyNDhkYjktMzA2My00NDU3LTkyMDUtODUxZmJlMDZhMDNlCUhhbm5vcG9seWQCAg8VAkxodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL3Byb2ZpbGUvP2d1aWQ9NWM0YjA5MTUtNWNlYy00ZmExLThhZmQt" />
-<input type="hidden" name="__VIEWSTATE1" id="__VIEWSTATE1" value="NGIzY2E2N2UwMDRlB2thaTI3MDdkAikPZBYWAgEPDxYCHwNoZGQCAw9kFgICAQ8PFgIfBQVFL2hpZGUvd3B0bGlzdC5hc3B4P1JlZldwdElEPTM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OCZEUz0xZGQCBw8PFgYeBlJEUy5JRAspdkdyb3VuZHNwZWFrLldlYi5HUFguV3B0RGF0YVNvdXJjZXMsIFR1Y3Nvbi5Db21tb24uTGVnYWN5LCBWZXJzaW9uPTMuMC40NjcyLjE3OTQzLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwBHgdSV1BULklEKCsEBzE0MzM5MDkfA2hkZAIJDw8WAh8DZ2QWAgIBDw8WBB8FBSovbWFwL2RlZmF1bHQuYXNweD9sYXQ9NTIuMzczMjE3JmxuZz05LjcxMDgfA2dkZAIRDw8WAh8FBR4vc2Vlay9uZWFyZXN0LmFzcHg/dT1kYW5pZWwzNTRkZAIVDw8WAh8FBR8vc2Vlay9uZWFyZXN0LmFzcHg/dWw9ZGFuaWVsMzU0ZGQCGQ9kFgoCAw8PFgIfBQVVL3NlZWsvbmVhcmVzdC5hc3B4P3R4PTMyYmM5MzMzLTVlNTItNDk1Ny1iMGY2LTVhMmM4ZmM3YjI1NyZsYXQ9NTIuMzczMjE3JmxuZz05LjcxMDgwMGRkAgUPDxYCHwUFWS9zZWVrL25lYXJlc3QuYXNweD90eD0zMmJjOTMzMy01ZTUyLTQ5NTctYjBmNi01YTJjOGZjN2IyNTcmbGF0PTUyLjM3MzIxNyZsbmc9OS43MTA4MDAmZj0xZGQCCQ8PFgIfBQUtL3NlZWsvbmVhcmVzdC5hc3B4P2xhdD01Mi4zNzMyMTcmbG5nPTkuNzEwODAwZGQCCw8PFgIfBQUxL3NlZWsvbmVhcmVzdC5hc3B4P2xhdD01Mi4zNzMyMTcmbG5nPTkuNzEwODAwJmY9MWRkAg8PDxYCHwUFR2h0dHA6Ly93d3cud2F5bWFya2luZy5jb20vZGlyZWN0b3J5LmFzcHg/Zj0xJmxhdD01Mi4zNzMyMTcmbG9uPTkuNzEwODAwZGQCGw8WAh8DaGQCHw8PFgIfBQUlL3Jldmlld3MvaG90ZWxzLWNvb3Jkcy01Mi4zNzMyLDkuNzEwOGRkAiMPZBYCAgEPDxYEHwEFtAc8bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9tYXAvZGVmYXVsdC5hc3B4P2xhdD01Mi4zNzMyMiZsbmc9OS43MTA4IiB0YXJnZXQ9Il9ibGFuayI+R2VvY2FjaGluZy5jb20gTWFwPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9xPU4rNTIlYzIlYjArMjIuMzkzK0UrMDA5JWMyJWIwKzQyLjY0OCsoR0MxWlhYMikrIiB0YXJnZXQ9Il9ibGFuayI+R29vZ2xlIE1hcHM8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5tYXBxdWVzdC5jb20vbWFwcy9tYXAuYWRwP3NlYXJjaHR5cGU9YWRkcmVzcyZmb3JtdHlwZT1sYXRsb25nJmxhdGxvbmd0eXBlPWRlY2ltYWwmbGF0aXR1ZGU9NTIuMzczMjImbG9uZ2l0dWRlPTkuNzEwOCZ6b29tPTEwIiB0YXJnZXQ9Il9ibGFuayI+TWFwUXVlc3Q8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL21hcHMueWFob28uY29tLyNsYXQ9NTIuMzczMjImbG9uPTkuNzEwOCZ6b29tPTE2JnE9NTIuMzczMjIsOS43MTA4JmNvbmY9MSZzdGFydD0xJm12dD1tJnRyZj0wIiB0YXJnZXQ9Il9ibGFuayI+WWFob28gTWFwczwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vd3d3LmJpbmcuY29tL21hcHMvZGVmYXVsdC5hc3B4P3Y9MiZsdmw9MTQmc3A9cG9pbnQuNTIuMzczMjJfOS43MTA4X0dDMVpYWDIiIHRhcmdldD0iX2JsYW5rIj5CaW5nIE1hcHM8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5vcGVuY3ljbGVtYXAub3JnLz96b29tPTEyJmxhdD01Mi4zNzMyMiZsb249OS43MTA4IiB0YXJnZXQ9Il9ibGFuayI+T3BlbiBDeWNsZSBNYXBzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cub3BlbnN0cmVldG1hcC5vcmcvP21sYXQ9NTIuMzczMjImbWxvbj05LjcxMDgmem9vbT0xMiIgdGFyZ2V0PSJfYmxhbmsiPk9wZW4gU3RyZWV0IE1hcHM8L2E+PC9saT4fA2dkZAInD2QWBgIBDxYCHwEFETQwMCBMb2dnZWQgVmlzaXRzZAIHDw8WAh8FBUN+L3NlZWsvY2FjaGVfbG9nYm9vay5hc3B4P2d1aWQ9MzZkNDU4NzEtYjk5ZC00NmQ2LTk1ZmMtZmY4NmFiNTY0Yzk4ZGQCCQ8PFgQfBQU9fi9zZWVrL2dhbGxlcnkuYXNweD9ndWlkPTM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OB8BBSJWaWV3IHRoZSBJbWFnZSBHYWxsZXJ5IG9mIDIgaW1hZ2VzZGQCKg8WAh8BBQR0cnVlZAIrDxYCHwEFSWxhdD01Mi4zNzMyMTc7IGxuZz05LjcxMDg7IGd1aWQ9JzM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OCc7DQpkAiwPFgIfAQVxdHJ5IHsgX2dhcS5wdXNoKFsnX3RyYWNrRXZlbnQnLCAnR2VvY2FjaGluZycsICdDYWNoZURldGFpbHNNZW1iZXJUeXBlJywgJ1ByZW1pdW0nLCBudWxsLCB0cnVlXSk7IH0gY2F0Y2goZXJyKSB7IH1kAjAPFgIfA2hkAjEPZBYEAgMPFgIfAQUHRW5nbGlzaGQCBQ8WAh8NAhAWIGYPZBYCAgEPDxYIHg9Db21tYW5kQXJndW1lbnQFBWVuLVVTHgtDb21tYW5kTmFtZQUNU2V0VGVtcExvY2FsZR8BBQdFbmdsaXNoHhBDYXVzZXNWYWxpZGF0aW9uaGRkAgEPZBYCAgEPDxYIHxAFBWRlLURFHxEFDVNldFRlbXBMb2NhbGUfAQUHRGV1dHNjaB8SaGRkAgIPZBYCAgEPDxYIHxAFBWZyLUZSHxEFDVNldFRlbXBMb2NhbGUfAQUJRnJhbsOnYWlzHxJoZGQCAw9kFgICAQ8PFggfEAUFcHQtUFQfEQUNU2V0VGVtcExvY2FsZR8BBQpQb3J0dWd1w6pzHxJoZGQCBA9kFgICAQ8PFggfEAUFY3MtQ1ofEQUNU2V0VGVtcExvY2FsZR8BBQnEjGXFoXRpbmEfEmhkZAIFD2QWAgIBDw8WCB8QBQVzdi1TRR8RBQ1TZXRUZW1wTG9jYWxlHwEFB1N2ZW5za2EfEmhkZAIGD2QWAgIBDw8WCB8QBQVlcy1FUx8RBQ1TZXRUZW1wTG9jYWxlHwEFCEVzcGHDsW9sHxJoZGQCBw9kFgICAQ8PFggfEAUFaXQtSVQfEQUNU2V0VGVtcExvY2FsZR8BBQhJdGFsaWFubx8SaGRkAggPZBYCAgEPDxYIHxAFBW5sLU5MHxEFDVNldFRlbXBMb2NhbGUfAQUKTmVkZXJsYW5kcx8SaGRkAgkPZBYCAgEPDxYIHxAFBWNhLUVTHxEFDVNldFRlbXBMb2NhbGUfAQUHQ2F0YWzDoB8SaGRkAgoPZBYCAgEPDxYIHxAFBXBsLVBMHxEFDVNldFRlbXBMb2NhbGUfAQUGUG9sc2tpHxJoZGQCCw9kFgICAQ8PFggfEAUFZXQtRUUfEQUNU2V0VGVtcExvY2FsZR8BBQVFZXN0aR8SaGRkAgwPZBYCAgEPDxYIHxAFBW5iLU5PHxEFDVNldFRlbXBMb2NhbGUfAQUOTm9yc2ssIEJva23DpWwfEmhkZAIND2QWAgIBDw8WCB8QBQVrby1LUh8RBQ1TZXRUZW1wTG9jYWxlHwEFCe2VnOq1reyWtB8SaGRkAg4PZBYCAgEPDxYIHxAFBWh1LUhVHxEFDVNldFRlbXBMb2NhbGUfAQUGTWFneWFyHxJoZGQCDw9kFgICAQ8PFggfEAUFcm8tUk8fEQUNU2V0VGVtcExvY2FsZR8BBQhSb23Dom7Egx8SaGRkAgMPFgIfAQUrU2VydmVyOiBXRUIwOTsgQnVpbGQ6IFdlYi5Ib3RGaXhfMjAxMjEwMTYuM2Rk2wmnTPC8XNAWQeyiCZT6l5TTkUo=" />
+<input type="hidden" name="__VIEWSTATEFIELDCOUNT" id="__VIEWSTATEFIELDCOUNT" value="3" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTc1MjcwNzgxNg8WAh4EQy5JRCgpWVN5c3RlbS5JbnQ2NCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BzE0MzM5MDkWAmYPZBYGZg9kFgoCBg8WAh4EVGV4dAViPG1ldGEgbmFtZT0iQ29weXJpZ2h0IiBjb250ZW50PSJDb3B5cmlnaHQgKGMpIDIwMDAtMjAxMiBHcm91bmRzcGVhaywgSW5jLiBBbGwgUmlnaHRzIFJlc2VydmVkLiIgLz5kAgcPFgIfAQVHPCEtLSBDb3B5cmlnaHQgKGMpIDIwMDAtMjAxMiBHcm91bmRzcGVhaywgSW5jLiBBbGwgUmlnaHRzIFJlc2VydmVkLiAtLT5kAhoPFgIeBGhyZWYFHX4vY3NzL3Rsbk1hc3RlclNjcmVlbi5jc3M/cj0xZAIbDxYCHwIFFX4vY3NzL3Rsbk1haW4uY3NzP3I9MWQCIA8WAh4HVmlzaWJsZWhkAgEPZBYSAgUPFgIfAWRkAggPFgIfA2cWCAIBDw8WAh4ISW1hZ2VVcmwFTmh0dHA6Ly9pbWcuZ2VvY2FjaGluZy5jb20vdXNlci9hdmF0YXIvNTBmODMxMjMtMjdkOC00ZGNmLTlmZGUtMmFmMDA2ZWZhZjJiLmpwZ2RkAgMPFgIfAQVoSGVsbG8sIDxhIGhyZWY9Ii9teS9kZWZhdWx0LmFzcHgiIHRpdGxlPSJWaWV3IFByb2ZpbGUgZm9yIGJsYWZvbyIgY2xhc3M9IlNpZ25lZEluUHJvZmlsZUxpbmsiPmJsYWZvbzwvYT5kAgUPDxYCHgtOYXZpZ2F0ZVVybAWtAWh0dHBzOi8vd3d3Lmdlb2NhY2hpbmcuY29tL2xvZ2luL2RlZmF1bHQuYXNweD9SRVNFVD1ZJnJlZGlyPWh0dHAlM2ElMmYlMmZ3d3cuZ2VvY2FjaGluZy5jb20lMmZzZWVrJTJmY2FjaGVfZGV0YWlscy5hc3B4JTNmbG9nJTNkeSUyNndwJTNkR0MxWlhYMiUyNm51bWxvZ3MlM2QzNSUyNmRlY3J5cHQlM2R5ZGQCCw8WAh8BBRA3MjUgQ2FjaGVzIEZvdW5kZAINDxYCHwNnFgICDQ8PFgIfBQVAfi90cmFjay9zZWFyY2guYXNweD9vPTEmdWlkPTA1NjRhOTQwLTgzMTEtNDBlZS04ZTc2LTdlOTFiMmNmNjI4NGRkAhAPDxYCHwNnZGQCLA9kFgQCAw8WAh8BBQdFbmdsaXNoZAIFDxYCHgtfIUl0ZW1Db3VudAIQFiBmD2QWAgIBDw8WCB4PQ29tbWFuZEFyZ3VtZW50BQVlbi1VUx4LQ29tbWFuZE5hbWUFDVNldFRlbXBMb2NhbGUfAQUHRW5nbGlzaB4QQ2F1c2VzVmFsaWRhdGlvbmhkZAIBD2QWAgIBDw8WCB8HBQVkZS1ERR8IBQ1TZXRUZW1wTG9jYWxlHwEFB0RldXRzY2gfCWhkZAICD2QWAgIBDw8WCB8HBQVmci1GUh8IBQ1TZXRUZW1wTG9jYWxlHwEFCUZyYW7Dp2Fpcx8JaGRkAgMPZBYCAgEPDxYIHwcFBXB0LVBUHwgFDVNldFRlbXBMb2NhbGUfAQUKUG9ydHVndcOqcx8JaGRkAgQPZBYCAgEPDxYIHwcFBWNzLUNaHwgFDVNldFRlbXBMb2NhbGUfAQUJxIxlxaF0aW5hHwloZGQCBQ9kFgICAQ8PFggfBwUFc3YtU0UfCAUNU2V0VGVtcExvY2FsZR8BBQdTdmVuc2thHwloZGQCBg9kFgICAQ8PFggfBwUFZXMtRVMfCAUNU2V0VGVtcExvY2FsZR8BBQhFc3Bhw7FvbB8JaGRkAgcPZBYCAgEPDxYIHwcFBWl0LUlUHwgFDVNldFRlbXBMb2NhbGUfAQUISXRhbGlhbm8fCWhkZAIID2QWAgIBDw8WCB8HBQVubC1OTB8IBQ1TZXRUZW1wTG9jYWxlHwEFCk5lZGVybGFuZHMfCWhkZAIJD2QWAgIBDw8WCB8HBQVjYS1FUx8IBQ1TZXRUZW1wTG9jYWxlHwEFB0NhdGFsw6AfCWhkZAIKD2QWAgIBDw8WCB8HBQVwbC1QTB8IBQ1TZXRUZW1wTG9jYWxlHwEFBlBvbHNraR8JaGRkAgsPZBYCAgEPDxYIHwcFBWV0LUVFHwgFDVNldFRlbXBMb2NhbGUfAQUFRWVzdGkfCWhkZAIMD2QWAgIBDw8WCB8HBQVuYi1OTx8IBQ1TZXRUZW1wTG9jYWxlHwEFDk5vcnNrLCBCb2ttw6VsHwloZGQCDQ9kFgICAQ8PFggfBwUFa28tS1IfCAUNU2V0VGVtcExvY2FsZR8BBQntlZzqta3slrQfCWhkZAIOD2QWAgIBDw8WCB8HBQVodS1IVR8IBQ1TZXRUZW1wTG9jYWxlHwEFBk1hZ3lhch8JaGRkAg8PZBYCAgEPDxYIHwcFBXJvLVJPHwgFDVNldFRlbXBMb2NhbGUfAQUIUm9tw6JuxIMfCWhkZAIuD2QWAgIDDxYCHwNoZAIvDxYCHgVjbGFzcwUMc3Bhbi0yNCBsYXN0FgICAQ9kFi4CAQ9kFgJmD2QWAgIBDw8WAh8BBQdHQzFaWFgyZGQCAg8WAh8BBaYBPGEgaHJlZj0iL2Fib3V0L2NhY2hlX3R5cGVzLmFzcHgiIHRhcmdldD0iX2JsYW5rIiB0aXRsZT0iQWJvdXQgQ2FjaGUgVHlwZXMiPjxpbWcgc3JjPSIvaW1hZ2VzL1dwdFR5cGVzLzIuZ2lmIiBhbHQ9IlRyYWRpdGlvbmFsIENhY2hlIiB0aXRsZT0iVHJhZGl0aW9uYWwgQ2FjaGUiIC8+PC9hPmQCBg9kFgQCAQ8WAh8DZ2QCBg8WAh8DaGQCCw9kFgQCAQ8WAh8BBQI0MWQCBQ8PFgIfBQVEL3NlZWsvY2FjaGVfZmF2b3JpdGVkLmFzcHg/Z3VpZD0zNmQ0NTg3MS1iOTlkLTQ2ZDYtOTVmYy1mZjg2YWI1NjRjOThkZAINDw8WAh8DaGRkAg8PFgQfAQW+ATxwIGNsYXNzPSJPbGRXYXJuaW5nIE5vQm90dG9tU3BhY2luZyI+PHN0cm9uZz5DYWNoZSBJc3N1ZXM6PC9zdHJvbmc+PC9wPjx1bCBjbGFzcz0iT2xkV2FybmluZyI+PGxpPlRoaXMgY2FjaGUgaGFzIGJlZW4gYXJjaGl2ZWQsIGJ1dCBpcyBhdmFpbGFibGUgZm9yIHZpZXdpbmcgZm9yIGFyY2hpdmFsIHB1cnBvc2VzLjwvbGk+PC91bD4fA2dkAhAPFgIfA2hkAhEPFgIfA2hkAhIPZBYMAgMPFgIeBXN0eWxlBQ9kaXNwbGF5OmlubGluZTsWAgIBDxYCHwEFG1VUTTogMzJVIEUgNTQ4Mzg5IE4gNTgwMjc4N2QCDQ8PFgIfBQUzY2RwZi5hc3B4P2d1aWQ9MzZkNDU4NzEtYjk5ZC00NmQ2LTk1ZmMtZmY4NmFiNTY0Yzk4ZGQCDw8PFgIfBQU4Y2RwZi5hc3B4P2d1aWQ9MzZkNDU4NzEtYjk5ZC00NmQ2LTk1ZmMtZmY4NmFiNTY0Yzk4JmxjPTVkZAIRDw8WAh8FBTljZHBmLmFzcHg/Z3VpZD0zNmQ0NTg3MS1iOTlkLTQ2ZDYtOTVmYy1mZjg2YWI1NjRjOTgmbGM9MTBkZAITDw8WBB8FBYIBaHR0cDovL21hcHMuZ29vZ2xlLmNvbS9tYXBzP2Y9ZCZobD1lbiZzYWRkcj01Mi40MTYyLDkuNTk0MTE3IChIb21lIExvY2F0aW9uKSZkYWRkcj01Mi4zNzMyMTcsOS43MTA4KEhhbm5vcG9seSUzYStFaXNsaXNlbnN0cmFzc2UrKR4GVGFyZ2V0BQZfYmxhbmtkZAIbD2QWCAIBDw8WBB4JRm9yZUNvbG9yDB4EXyFTQgIEZGQCAw8PFgQfDQwfDgIEZGQCBQ8PFgIfA2cWAh4Hb25jbGljawU7czJncHMoJzM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OCcpO3JldHVybiBmYWxzZTtkAgcPDxYCHwNnFgIfDwUgczJwaG9uZSgnR0MxWlhYMicpO3JldHVybiBmYWxzZTtkAhQPFgIfA2cWAgIDDxYCHwEFD1Rlc3QgZsO8ciBjOmdlb2QCFw9kFghmDxYCHwNoZAIBDw8WAh8DaGRkAgIPDxYCHwNoZGQCAw8WAh8DaGQCGA9kFgICAw8PFgIfAQUTTm8gaGludHMgYXZhaWxhYmxlLhYCHw8FDXJldHVybiBmYWxzZTtkAhkPFgIfA2hkAhwPFgIfA2hkAh4PFgIfA2dkAh8PFgIfA2hkAiIPZBYCAgEPZBYEAgEPDxYCHwEF/wM8aWZyYW1lIHR5cGU9ImlmcmFtZSIgc3JjPSJodHRwOi8vYWRzLmdyb3VuZHNwZWFrLmNvbS9hLmFzcHg/Wm9uZUlEPTkmVGFzaz1HZXQmU2l0ZUlEPTEmWD0nZTNjNjg4MTJhOGYyNDhkNzk0MTMwZTUxNzMzOTA1ZjQnIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjI0MCIgTWFyZ2lud2lkdGg9IjAiIE1hcmdpbmhlaWdodD0iMCIgSHNwYWNlPSIwIiBWc3BhY2U9IjAiIEZyYW1lYm9yZGVyPSIwIiBTY3JvbGxpbmc9Im5vIiBzdHlsZT0id2lkdGg6MTIwcHg7SGVpZ2h0OjI0MHB4OyI+PGEgaHJlZj0iaHR0cDovL2Fkcy5ncm91bmRzcGVhay5jb20vYS5hc3B4P1pvbmVJRD05JlRhc2s9Q2xpY2smO01vZGU9SFRNTCZTaXRlSUQ9MSIgdGFyZ2V0PSJfYmxhbmsiPjxpbWcgc3JjPSJodHRwOi8vYWRzLmdyb3VuZHNwZWFrLmNvbS9hLmFzcHg/Wm9uZUlEPTkmVGFzaz1HZXQmTW9kZT1IVE1MJlNpdGVJRD0xIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjI0MCIg" />
+<input type="hidden" name="__VIEWSTATE1" id="__VIEWSTATE1" value="Ym9yZGVyPSIwIiBhbHQ9IiIgLz48L2E+PC9pZnJhbWU+ZGQCAw8WAh4JaW5uZXJodG1sBRNBZHZlcnRpc2luZyB3aXRoIFVzZAImD2QWBAIFDw8WAh8DZ2RkAgkPDxYCHwUFPH4vdHJhY2svc2VhcmNoLmFzcHg/d2lkPTM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OGRkAicPDxYCHwNnZBYCZg8WAh8GAgMWBgIBD2QWBGYPFQMAV2h0dHA6Ly93d3cuZ2VvY2FjaGluZy5jb20vYm9va21hcmtzL3ZpZXcuYXNweD9ndWlkPTQxY2Q1NmI2LTAwZjEtNDcwMi1iODY2LTFhMjY4YzY0OWQxMxVBbGxlIEhhbm5vcG9seSBDYWNoZXNkAgIPFQJMaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9wcm9maWxlLz9ndWlkPWRmMjE4NGFiLWE5ZWEtNGQzMC05OGVkLWVjNGU4NTFjMzcwNgpHdW1taXNlZWxlZAICD2QWBGYPFQMOQWx0ZXJuYXRpbmdSb3dXaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9ib29rbWFya3Mvdmlldy5hc3B4P2d1aWQ9MGRjZjNmODYtOTM3Mi00OTljLThiNTctZWQ0MTliZDQ4ZTIxEE1laW5lIEVtcGZlaGx1bmdkAgIPFQJMaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9wcm9maWxlLz9ndWlkPWM0NjU0MWZjLTZhZTktNDQ1Mi04ODMzLTQ3MGRkZmJlOWNlZQZza3JlbGxkAgMPZBYEZg8VAwBXaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9ib29rbWFya3Mvdmlldy5hc3B4P2d1aWQ9OWEyNDhkYjktMzA2My00NDU3LTkyMDUtODUxZmJlMDZhMDNlCUhhbm5vcG9seWQCAg8VAkxodHRwOi8vd3d3Lmdlb2NhY2hpbmcuY29tL3Byb2ZpbGUvP2d1aWQ9NWM0YjA5MTUtNWNlYy00ZmExLThhZmQtNGIzY2E2N2UwMDRlB2thaTI3MDdkAikPZBYWAgEPDxYCHwNoZGQCAw9kFgICAQ8PFgIfBQVFL2hpZGUvd3B0bGlzdC5hc3B4P1JlZldwdElEPTM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OCZEUz0xZGQCBw8PFgYeBlJEUy5JRAspdkdyb3VuZHNwZWFrLldlYi5HUFguV3B0RGF0YVNvdXJjZXMsIFR1Y3Nvbi5Db21tb24uTGVnYWN5LCBWZXJzaW9uPTMuMC40NzI4LjE2MTUyLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwBHgdSV1BULklEKCsEBzE0MzM5MDkfA2hkZAIJDw8WAh8DZ2QWAgIBDw8WBB8FBSovbWFwL2RlZmF1bHQuYXNweD9sYXQ9NTIuMzczMjE3JmxuZz05LjcxMDgfA2dkZAIRDw8WAh8FBR4vc2Vlay9uZWFyZXN0LmFzcHg/dT1kYW5pZWwzNTRkZAIVDw8WAh8FBR8vc2Vlay9uZWFyZXN0LmFzcHg/dWw9ZGFuaWVsMzU0ZGQCGQ9kFgoCAw8PFgIfBQVVL3NlZWsvbmVhcmVzdC5hc3B4P3R4PTMyYmM5MzMzLTVlNTItNDk1Ny1iMGY2LTVhMmM4ZmM3YjI1NyZsYXQ9NTIuMzczMjE3JmxuZz05LjcxMDgwMGRkAgUPDxYCHwUFWS9zZWVrL25lYXJlc3QuYXNweD90eD0zMmJjOTMzMy01ZTUyLTQ5NTctYjBmNi01YTJjOGZjN2IyNTcmbGF0PTUyLjM3MzIxNyZsbmc9OS43MTA4MDAmZj0xZGQCCQ8PFgIfBQUtL3NlZWsvbmVhcmVzdC5hc3B4P2xhdD01Mi4zNzMyMTcmbG5nPTkuNzEwODAwZGQCCw8PFgIfBQUxL3NlZWsvbmVhcmVzdC5hc3B4P2xhdD01Mi4zNzMyMTcmbG5nPTkuNzEwODAwJmY9MWRkAg8PDxYCHwUFR2h0dHA6Ly93d3cud2F5bWFya2luZy5jb20vZGlyZWN0b3J5LmFzcHg/Zj0xJmxhdD01Mi4zNzMyMTcmbG9uPTkuNzEwODAwZGQCGw8WAh8DaGQCHw8PFgIfBQUlL3Jldmlld3MvaG90ZWxzLWNvb3Jkcy01Mi4zNzMyLDkuNzEwOGRkAiMPZBYCAgEPDxYEHwEFtAc8bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9tYXAvZGVmYXVsdC5hc3B4P2xhdD01Mi4zNzMyMiZsbmc9OS43MTA4IiB0YXJnZXQ9Il9ibGFuayI+R2VvY2FjaGluZy5jb20gTWFwPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9xPU4rNTIlYzIlYjArMjIuMzkzK0UrMDA5JWMyJWIwKzQyLjY0OCsoR0MxWlhYMikrIiB0YXJnZXQ9Il9ibGFuayI+R29vZ2xlIE1hcHM8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5tYXBxdWVzdC5jb20vbWFwcy9tYXAuYWRwP3NlYXJjaHR5cGU9YWRkcmVzcyZmb3JtdHlwZT1sYXRsb25nJmxhdGxvbmd0eXBlPWRlY2ltYWwmbGF0aXR1ZGU9NTIuMzczMjImbG9uZ2l0dWRlPTkuNzEwOCZ6b29tPTEwIiB0YXJnZXQ9Il9ibGFuayI+TWFwUXVlc3Q8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL21hcHMueWFob28uY29tLyNsYXQ9NTIuMzczMjImbG9uPTkuNzEwOCZ6b29tPTE2JnE9NTIuMzczMjIsOS43MTA4JmNvbmY9MSZzdGFydD0xJm12dD1tJnRyZj0wIiB0YXJnZXQ9Il9ibGFuayI+WWFob28gTWFwczwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vd3d3LmJpbmcuY29tL21hcHMvZGVmYXVsdC5hc3B4P3Y9MiZsdmw9MTQmc3A9cG9pbnQuNTIuMzczMjJfOS43MTA4X0dDMVpYWDIiIHRhcmdldD0iX2JsYW5rIj5CaW5nIE1hcHM8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5vcGVuY3ljbGVtYXAub3JnLz96b29tPTEyJmxhdD01Mi4zNzMyMiZsb249OS43MTA4IiB0YXJnZXQ9Il9ibGFuayI+T3BlbiBDeWNsZSBNYXBzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cub3BlbnN0cmVldG1hcC5vcmcvP21sYXQ9NTIuMzczMjImbWxvbj05LjcxMDgmem9vbT0xMiIgdGFyZ2V0PSJfYmxhbmsiPk9wZW4gU3RyZWV0IE1hcHM8L2E+PC9saT4fA2dkZAInD2QWBgIBDxYCHwEFETQwMCBMb2dnZWQgVmlzaXRzZAIHDw8WAh8FBUN+L3NlZWsvY2FjaGVfbG9nYm9vay5hc3B4P2d1aWQ9MzZkNDU4NzEtYjk5ZC00NmQ2LTk1ZmMtZmY4NmFiNTY0Yzk4ZGQCCQ8PFgQfBQU9fi9zZWVrL2dhbGxlcnkuYXNweD9ndWlkPTM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OB8BBSJWaWV3IHRoZSBJbWFnZSBHYWxsZXJ5IG9mIDIgaW1hZ2VzZGQCKg8WAh8BBQR0cnVlZAIrDxYCHwEFSWxhdD01Mi4zNzMyMTc7IGxuZz05LjcxMDg7IGd1aWQ9JzM2ZDQ1ODcxLWI5OWQtNDZkNi05NWZjLWZmODZhYjU2NGM5OCc7DQpkAiwPFgIfAQVxdHJ5IHsgX2dhcS5wdXNoKFsnX3RyYWNrRXZlbnQnLCAnR2VvY2FjaGluZycsICdDYWNoZURldGFpbHNNZW1iZXJUeXBlJywgJ1ByZW1pdW0nLCBudWxsLCB0cnVlXSk7IH0gY2F0Y2goZXJyKSB7IH1kAjAPFgIfA2hkAjEPZBYEAgMPFgIfAQUHRW5nbGlzaGQCBQ8WAh8GAhAWIGYPZBYCAgEPDxYIHwcFBWVuLVVTHwgFDVNldFRlbXBMb2NhbGUfAQUHRW5nbGlzaB8JaGRkAgEPZBYCAgEPDxYIHwcFBWRlLURFHwgFDVNldFRlbXBMb2NhbGUfAQUHRGV1dHNjaB8JaGRkAgIPZBYCAgEPDxYIHwcFBWZyLUZSHwgFDVNldFRlbXBMb2NhbGUfAQUJRnJhbsOnYWlzHwloZGQCAw9kFgICAQ8PFggfBwUFcHQtUFQfCAUNU2V0VGVtcExvY2FsZR8BBQpQb3J0dWd1w6pzHwloZGQCBA9kFgICAQ8PFggfBwUFY3MtQ1ofCAUNU2V0VGVtcExvY2FsZR8BBQnEjGXFoXRpbmEfCWhkZAIFD2QWAgIBDw8WCB8HBQVzdi1TRR8IBQ1TZXRUZW1wTG9jYWxlHwEFB1N2ZW5za2EfCWhkZAIGD2QWAgIBDw8WCB8HBQVlcy1FUx8IBQ1TZXRUZW1wTG9jYWxlHwEFCEVzcGHDsW9sHwloZGQCBw9kFgICAQ8PFggfBwUFaXQtSVQfCAUNU2V0VGVtcExvY2FsZR8BBQhJdGFsaWFubx8JaGRkAggPZBYCAgEPDxYIHwcFBW5sLU5MHwgFDVNldFRlbXBMb2NhbGUfAQUKTmVkZXJsYW5kcx8JaGRkAgkPZBYCAgEPDxYIHwcFBWNhLUVTHwgFDVNldFRlbXBMb2NhbGUfAQUHQ2F0YWzDoB8JaGRkAgoPZBYCAgEPDxYIHwcFBXBsLVBMHwgFDVNldFRlbXBMb2NhbGUfAQUGUG9sc2tpHwloZGQCCw9kFgICAQ8PFggfBwUFZXQtRUUfCAUNU2V0VGVtcExvY2FsZR8BBQVFZXN0aR8JaGRkAgwPZBYCAgEPDxYIHwcFBW5iLU5PHwgF" />
+<input type="hidden" name="__VIEWSTATE2" id="__VIEWSTATE2" value="DVNldFRlbXBMb2NhbGUfAQUOTm9yc2ssIEJva23DpWwfCWhkZAIND2QWAgIBDw8WCB8HBQVrby1LUh8IBQ1TZXRUZW1wTG9jYWxlHwEFCe2VnOq1reyWtB8JaGRkAg4PZBYCAgEPDxYIHwcFBWh1LUhVHwgFDVNldFRlbXBMb2NhbGUfAQUGTWFneWFyHwloZGQCDw9kFgICAQ8PFggfBwUFcm8tUk8fCAUNU2V0VGVtcExvY2FsZR8BBQhSb23Dom7Egx8JaGRkAgMPFgIfAQUrU2VydmVyOiBXRUIxMzsgQnVpbGQ6IFdlYi5Ib3RGaXhfMjAxMjEyMTEuMWRkGvEXY+k5iJfIFWyn2NnRG+pbJow=" />
 </div>
 
 <script type="text/javascript">
@@ -265,13 +267,13 @@ function __doPostBack(eventTarget, eventArgument) {
 </script>
 
 
-<script src="/WebResource.axd?d=Dh2VENdI9XyWNN0f7DnYfR8WWRCRIzdVqal2y0yjiQ5nC_eHhLchYgnQDHIk0d3RCcSUMVZ36ciRD0qmhXKmeu3S_RE1&amp;t=634320874095713794" type="text/javascript"></script>
+<script src="/WebResource.axd?d=Dh2VENdI9XyWNN0f7DnYfR8WWRCRIzdVqal2y0yjiQ5nC_eHhLchYgnQDHIk0d3RCcSUMVZ36ciRD0qmhXKmeu3S_RE1&amp;t=634811478295920770" type="text/javascript"></script>
 
 
-<script src="/ScriptResource.axd?d=I9_m2Hb1Tv_B0qTMDG8bMbnkNSHUkv5oUaG9-V5NZ8qQ2VFlu60I8y8gfr3vPmZjbiPnu43MOQdFVDeYF-nDAEKBLmyxD3DCTGmes9NNbbvaDEHyEuuRWgccIkK3ik5TI48YGDxjHjqdn-gTK4Fkgd17LGw1&amp;t=2610f696" type="text/javascript"></script>
-<script src="/ScriptResource.axd?d=8vNbe34dAujgZMPnfnacfjeoweX1vHgyns8KlAV4vpGpsZC9Cf3pro__lv8ekBa0NiCgXGMMolzOUNH__lrnEI_qjlNBIAuuLeemtAXV_i6E0QIMZa8nGSYmWGF5nQOJK3rmZzvTxsr2Mh4Ebdba_1ywGLUSH_U_XIe-jzecfRQwwvjZ0&amp;t=2610f696" type="text/javascript"></script>
-<script src="/ScriptResource.axd?d=xn_XthUDTB7olgcUtLPfBc6T8T6KQJeWQqX-S5SXQszTnUMfMoY-_5LGD_TTtk-ziPIcDt2u4ItIrMD8KSt1gxC4geqllJ30o1Wha1PY6q9Bu3kg0D9DC5M-XAaM-2yLG-E2ZJbNKvASegbH_2zGkDlJRJl9DxQFNJ0KuhdfR8Zre1hg4i3ncHbDUESrAb2Vzr2b9FqYpbFfGpAis__FnVeUutU1" type="text/javascript"></script>
-<script src="/ScriptResource.axd?d=5CyDhZ1QrMZSVcCqxKlXl3yO1U7ML8hppu9nneB8d06m0ASEsmoWvx8yKVZxdQgA6Uo4BZLAdyt7SUoqd9jZFjVos_CF_mGR4G3Vtsbub3PzOc5-yRg5gRLwSoDbah4m09wBVM5_FhjR68q6UT-yfhoG47eb2gPVrNdEdcHlcN0Xe7_BEJvnAvNgAXuVnpnmU3tN5c1Er5rvLNMh7i34YE2E4sPCUD9Ymg8ddmvCFrZMS7ISxiJyRxd_fs-4EPZ9G3SeBu8bcZ-PWCec7GCjObIbCPX5wPdL8s227n_qIOldojTRHFwCHOYTIOiBIneKedRKFqL10yu1HnvXprBGzr7bc17tnQQRYC-AtjxcPiQA6bdUp5qT-RMnXFIOeUBC5qDcx-nLVDRluEoGUo6_BcPatJleyDBr-Huz1EcedROE0pdAIGGY_JsTOni7hgsv3UaV8rhgvWDyyiqQ_QlQl1ScW3eV6CCKLxmU7_cnPlPI65v7_rAaVytJdSInQa9MemNiPirJGMaeTxcBcDVz3pWhNt2iuRrSuMjUMx1-TNPtnWZefOnrOKJX_Kg1CCdsQPZLcWgi3UXmjXd5kZ9XcHS92KR7GguI2SaRtb0_fx_Dd84Z6U852-sYEbr4wAyIoyqEuIw69TeTBbs1m6YwuUQeqNV3t0m8U95phK7TB5-P_c4N1JDsYMnb_dqb5b69_Rw1c-GM7xQB6MBu2jZ61mL9ZD9XiP5kdzqXHxoWZHWYG1ZG0" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=I9_m2Hb1Tv_B0qTMDG8bMbnkNSHUkv5oUaG9-V5NZ8qQ2VFlu60I8y8gfr3vPmZjbiPnu43MOQdFVDeYF-nDAEKBLmyxD3DCTGmes9NNbbvaDEHyEuuRWgccIkK3ik5TI48YGDxjHjqdn-gTK4Fkgd17LGw1&amp;t=ffffffff940d030f" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=8vNbe34dAujgZMPnfnacfjeoweX1vHgyns8KlAV4vpGpsZC9Cf3pro__lv8ekBa0NiCgXGMMolzOUNH__lrnEI_qjlNBIAuuLeemtAXV_i6E0QIMZa8nGSYmWGF5nQOJK3rmZzvTxsr2Mh4Ebdba_1ywGLUSH_U_XIe-jzecfRQwwvjZ0&amp;t=ffffffff940d030f" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=dR_fP-aTT-wJ0h4Kl4BIDCBBDS-bsINyUUisfmt6XGhnkXEezB-GAbsBSOjJBs1PwGfeyGYXrsKI5rjvB656mhG30LHrKxvfU-2NYKCxpxLK0hYG6ooF1pG6oP8oLMWhVpQbIt_fjHjdLjWOPzpGJX_L3fbMlwJFqwL6A35_t9C7Di9McDsCNk6mmIsVaQLzPAUiwge5EtjIHV5WOKnwkv9lVWc1" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=ZLUp71IFurmo9PJWgt4KAyNwGuWylI6HaHusH9-0d05t7twYSBEKMKX5_7TMGQzUCY_cVE4E_mIBGBVWK2hhG209IpahhwLh8LiuTU30A-9gRQTiOrfU5Z2Dj991D4w0ZC35T2e0uH60Acn9z2PmsDsj43jy9GAkjAnqhXbU3TqMChAch7_0XPqAV7ynsautHOiDQ4aCQugVDrwCSIZ8coHOoGbkoQNR9n7LtpFbsAojS0iyOe9gm3sTA5tarc1ThNXlQ0H7hGm_jFX-cLw_kDrNHGqjjd14dpdBa9qm8m6XD9LApMcyqBho13lWg4A4gPB_mF_W09lnFEcRsLPg3nBh2XH0oUGLYLNpE_g9-3Jo-K7zrRXfRx4pUe3fT0NEn4mLIRkSMjcrbmCcS47HnmsR0Nelw4--RjJPoVlU24Z3Mnlv-INjeG9JqMPZmHLO2gjR-ZT0sE3rlx61xDQNUBHv8YqyIK68DLjFhwXvnyfUEcbhJloV3faPxk6n7lw8EyuQG7lyq6yxhZdyUWuFdVDQMzgIVWUOigzr2XWFncCg6SYMHUiosTIiKvTI7V-lrNWYjl2UvtMN62HS0Yp4SGgARywHU9yYcVi2Ss0xjMWuwvbLURhgqKeuHoF4b-VkWMSYzkw9DM3-Q2cEUdMNJuo1e2fJ_3EIRd84Ib4niw-BZlkZjLXt5asRBWS5Rsx4gFIvbI7RhdU3z9HQgj1nslM5MmawfRSjQGsJ1EZDFmmWOxlR0" type="text/javascript"></script>
 <script src="js/cachedetails.js" type="text/javascript"></script>
 <script src="../js/latlng.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -325,7 +327,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                             <span id="ctl00_litPMLevel">Premium Member</span>
                         
                         <strong style="display:block">
-                            <img src="/images/icons/icon_smile.png" title="Caches Found" /> 692&nbsp;&nbsp;&nbsp;<img src="/images/challenges/types/sm/challenge.png" title="Challenges Completed" /> 3</strong>
+                            725 Caches Found</strong>
                         
                     </p>
                     
@@ -334,122 +336,196 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                 
             </div>
             
-            <nav id="Navigation" class="span-24 last">
-                
-                <ul class="Menu">
-                    <li>
-                        <a id="ctl00_hlNavLearn" accesskey="1" title="Learn" href="../guide/">Learn &#9660;</a>
-                        <ul class="SubMenu">
-                            <li>
-                                <a id="ctl00_hlSubNavGeocaching101" accesskey="i" title="Geocaching 101" href="../guide/">Geocaching 101</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavGeocaching2Minutes" title="Geocaching in 2 Minutes" href="../videos/#cat=cat:newbies&amp;vid=-4VFeYZTTYs">Geocaching in 2 Minutes</a></li>
-                        </ul>
-                    </li>
+            <div class="NavContainer span-24 last">
+                <nav id="Navigation">
                     
-                    <li id="ctl00_liNavProfile">
-                        <a id="ctl00_hlNavProfile" accesskey="2" title="Your Profile" href="../my/">Your Profile &#9660;</a>
-                        <ul class="SubMenu">
-                            <li>
-                                <a id="ctl00_hlSubNavQuickView" accesskey="p" title="Quick View" href="../my/">Quick View</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavLists" accesskey="q" title="Lists" href="../my/lists.aspx">Lists</a></li>
-                            <li class="ExtraText">
-                                <a id="ctl00_hlSubNavGeocaches" accesskey="m" title="Geocaches" class="NoRightPadding" href="../my/geocaches.aspx">Geocaches</a>
-                                (<a id="ctl00_hlSubNavGeocachesYours" accesskey="y" title="Yours" class="NoSidePadding" href="../my/owned.aspx">Yours</a>)</li>
-                            <li class="ExtraText">
-                                <a id="ctl00_hlSubNavProfileTrackables" title="Trackables" class="NoRightPadding" href="../my/travelbugs.aspx">Trackables</a>
-                                (<a id="ctl00_hlSubNavTrackablesYours" accesskey="8" title="Yours" class="NoSidePadding" href="../track/search.aspx?o=1&amp;uid=0564a940-8311-40ee-8e76-7e91b2cf6284">Yours</a>)</li>
-                            <li>
-                                <a id="ctl00_hlSubNavPocketQueries" accesskey="9" title="Pocket Queries" href="../pocket/">Pocket Queries</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavFieldNotes" accesskey="0" title="Field Notes" href="../my/fieldnotes.aspx">Field Notes</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavProfileChallenges" title="Challenges" href="../my/challenges.aspx">Challenges</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavAccount" accesskey="a" title="Account Details" href="../account/">Account Details</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a id="ctl00_hlNavPlay" accesskey="3" title="Play" href="./">Play &#9660;</a>
-                        <ul class="SubMenu">
-                            <li>
-                                <a id="ctl00_hlSubNavHide" accesskey="d" title="Hide &amp; Seek a Cache" href="./">Hide & Seek a Cache</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavLogCache" title="Log a Cache" href="../my/recentlyviewedcaches.aspx">Log a Cache</a></li>
-                            <li><a id="ctl00_hlSubNavMap" accesskey="/" title="View Geocache Map" href="../map/">View Geocache Map</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavChallenges" title="Find Challenges" href="../challenges/">Find Challenges</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavTrackables" accesskey="e" title="Find Trackables" href="../track/">Find Trackables</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavHelpCenter" title="Help Center" rel="external" href="http://support.groundspeak.com/index.php">Help Center</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a id="ctl00_hlNavCommunity" accesskey="6" title="Community" href="../forums/">Community &#9660;</a>
-                        <ul class="SubMenu">
-                            
-                            <li>
-                                <a id="ctl00_hlSubNavTellaFriend" accesskey="-" title="Tell a Friend" href="../account/SendReferral.aspx">Tell a Friend</a></li>
-                            
-                            <li><a id="ctl00_hlSubNavVolunteers" accesskey="+" title="Volunteers" href="../volunteers/">Volunteers</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavLocal" accesskey="z" title="Local Organizations" href="../organizations/">Local Organizations</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavDiscussionForums" accesskey="f" title="Discussion Forums" href="../forums/">Discussion Forums</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavBlog" accesskey="b" title="Blog" rel="external" href="http://blog.geocaching.com/">Blog</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavEvents" accesskey="v" title="Events" href="../calendar/">Events</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a id="ctl00_hlNavShop" accesskey="4" title="Shop" href="http://shop.geocaching.com/">Shop &#9660;</a>
-                        <ul class="SubMenu">
-                            <li>
-                                <a id="ctl00_hlSubNavShop" accesskey="j" title="Shop Geocaching" rel="external" href="http://shop.geocaching.com/">Shop Geocaching</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavIntlRetailers" title="International Retailers" rel="external" href="http://shop.geocaching.com/default/international-retailers/">International Retailers</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavGPSReviews" accesskey="w" title="GPS Reviews" href="/reviews/gps">GPS Reviews</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavGPSGuide" accesskey="k" title="Guide to Buying a GPS Device" href="../about/buying.aspx">Guide to Buying a GPS Device</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a id="ctl00_hlNavPartnering" accesskey="5" title="Partnering" href="../travel/">Partnering &#9660;</a>
-                        <ul class="SubMenu">
-                            <li>
-                                <a id="ctl00_hlSubNavTravel" title="Travel and GeoTourism" href="../travel/">Travel and GeoTourism</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavBrandedPromotions" title="Branded Promotions" href="../brandedpromotions/">Branded Promotions</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavEducation" title="Geocaching and Education" href="../education/">Geocaching and Education</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavAdvertisingWithUs" title="Advertising with Us" href="../about/advertising.aspx">Advertising with Us</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavAPIProgram" title="API Program" href="../live/apidevelopers/">API Program</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a id="ctl00_hlNavVideos" accesskey="7" title="Videos" href="../videos/">Videos</a></li>
-                    <li>
-                        <a id="ctl00_hlNavFollowUs" title="Follow Us" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts">Follow Us &#9660;</a>
-                        <ul class="SubMenu NavSocialMedia">
-                            <li>
-                                <a id="ctl00_hlSubNavFacebook" title="Facebook" class="SubNavFacebook" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts">Facebook</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavTwitter" title="Twitter" class="SubNavTwitter" href="http://twitter.com/GoGeocaching">Twitter</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavFlickr" title="Flickr" class="SubNavFlickr" href="http://www.flickr.com/photos/geocaching_com/">Flickr</a></li>
-                            <li>
-                                <a id="ctl00_hlSubNavYouTube" title="YouTube" class="SubNavYouTube" href="http://www.youtube.com/user/GoGeocaching">YouTube</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                
-            </nav>
+                    <ul class="Menu">
+                        <li>
+                            <a id="ctl00_hlNavLearn" accesskey="1" title="Learn" href="../guide/">Learn &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavGeocaching101" accesskey="i" title="Geocaching 101" href="../guide/">Geocaching 101</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavGeocaching2Minutes" title="Geocaching in 2 Minutes" href="../videos/#cat=cat:newbies&amp;vid=-4VFeYZTTYs">Geocaching in 2 Minutes</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li id="ctl00_liNavProfile">
+                            <a id="ctl00_hlNavProfile" accesskey="2" title="Your Profile" href="../my/">Your Profile &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavQuickView" accesskey="p" title="Quick View" href="../my/">Quick View</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavLists" accesskey="q" title="Lists" href="../my/lists.aspx">Lists</a></li>
+                                <li class="ExtraText">
+                                    <a id="ctl00_hlSubNavGeocaches" accesskey="m" title="Geocaches" class="NoRightPadding" href="../my/geocaches.aspx">Geocaches</a>
+                                    (<a id="ctl00_hlSubNavGeocachesYours" accesskey="y" title="Yours" class="NoSidePadding" href="../my/owned.aspx">Yours</a>)</li>
+                                <li class="ExtraText">
+                                    <a id="ctl00_hlSubNavProfileTrackables" title="Trackables" class="NoRightPadding" href="../my/travelbugs.aspx">Trackables</a>
+                                    (<a id="ctl00_hlSubNavTrackablesYours" accesskey="8" title="Yours" class="NoSidePadding" href="../track/search.aspx?o=1&amp;uid=0564a940-8311-40ee-8e76-7e91b2cf6284">Yours</a>)</li>
+                                <li>
+                                    <a id="ctl00_hlSubNavPocketQueries" accesskey="9" title="Pocket Queries" href="../pocket/">Pocket Queries</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavFieldNotes" accesskey="0" title="Field Notes" href="../my/fieldnotes.aspx">Field Notes</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavAccount" accesskey="a" title="Account Details" href="../account/">Account Details</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavPlay" accesskey="3" title="Play" href="./">Play &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavHide" accesskey="d" title="Hide &amp; Seek a Cache" href="./">Hide & Seek a Cache</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavLogCache" title="Log a Cache" href="../my/recentlyviewedcaches.aspx">Log a Cache</a></li>
+                                <li><a id="ctl00_hlSubNavMap" accesskey="/" title="View Geocache Map" href="../map/">View Geocache Map</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavTrackables" accesskey="e" title="Find Trackables" href="../track/">Find Trackables</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavHelpCenter" title="Help Center" rel="external" href="http://support.groundspeak.com/index.php">Help Center</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavCommunity" accesskey="6" title="Community" href="../forums/">Community &#9660;</a>
+                            <ul class="SubMenu">
+                                
+                                <li>
+                                    <a id="ctl00_hlSubNavTellaFriend" accesskey="-" title="Tell a Friend" href="../account/SendReferral.aspx">Tell a Friend</a></li>
+                                
+                                <li><a id="ctl00_hlSubNavVolunteers" accesskey="+" title="Volunteers" href="../volunteers/">Volunteers</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavLocal" accesskey="z" title="Local Organizations" href="../organizations/">Local Organizations</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavDiscussionForums" accesskey="f" title="Discussion Forums" href="../forums/">Discussion Forums</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavBlog" accesskey="b" title="Blog" rel="external" href="http://blog.geocaching.com/">Blog</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavEvents" accesskey="v" title="Events" href="../calendar/">Events</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavShop" accesskey="4" title="Shop" href="http://shop.geocaching.com/">Shop &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavShop" accesskey="j" title="Shop Geocaching" rel="external" href="http://shop.geocaching.com/">Shop Geocaching</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavIntlRetailers" title="International Retailers" rel="external" href="http://shop.geocaching.com/default/international-retailers/">International Retailers</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavGPSReviews" accesskey="w" title="GPS Reviews" href="/reviews/gps">GPS Reviews</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavGPSGuide" accesskey="k" title="Guide to Buying a GPS Device" href="../about/buying.aspx">Guide to Buying a GPS Device</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavPartnering" accesskey="5" title="Partnering" href="../travel/">Partnering &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavTravel" title="Travel and GeoTourism" href="../travel/">Travel and GeoTourism</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavBrandedPromotions" title="Branded Promotions" href="../brandedpromotions/">Branded Promotions</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavEducation" title="Geocaching and Education" href="../education/">Geocaching and Education</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavAdvertisingWithUs" title="Advertising with Us" href="../about/advertising.aspx">Advertising with Us</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavAPIProgram" title="API Program" href="../live/apidevelopers/">API Program</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavVideos" accesskey="7" title="Videos" href="../videos/">Videos</a></li>
+                        <li>
+                            <a id="ctl00_hlNavFollowUs" title="Follow Us" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts">Follow Us &#9660;</a>
+                            <ul class="SubMenu NavSocialMedia">
+                                <li>
+                                    <a id="ctl00_hlSubNavFacebook" title="Facebook" class="SubNavFacebook" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts">Facebook</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavTwitter" title="Twitter" class="SubNavTwitter" href="http://twitter.com/GoGeocaching">Twitter</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavFlickr" title="Flickr" class="SubNavFlickr" href="http://www.flickr.com/photos/geocaching_com/">Flickr</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavYouTube" title="YouTube" class="SubNavYouTube" href="http://www.youtube.com/user/GoGeocaching">YouTube</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                </nav>
+                <div class="LanguageSelector">
+                    
+
+<div class="LocaleText">
+    
+    <strong>Choose Your Language:</strong>
+    
+</div>
+<div class="LocaleList">
+    
+    <div class="selected-language">
+        
+        <a href="#">English&#9660;</a>
+        
+    </div>
+    <ul class="language-list">
+        
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl00_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl00$uxLocaleItem&#39;,&#39;&#39;)">English</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl01_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl01$uxLocaleItem&#39;,&#39;&#39;)">Deutsch</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl02_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl02$uxLocaleItem&#39;,&#39;&#39;)">Français</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl03_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl03$uxLocaleItem&#39;,&#39;&#39;)">Português</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl04_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl04$uxLocaleItem&#39;,&#39;&#39;)">Čeština</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl05_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl05$uxLocaleItem&#39;,&#39;&#39;)">Svenska</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl06_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl06$uxLocaleItem&#39;,&#39;&#39;)">Español</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl07_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl07$uxLocaleItem&#39;,&#39;&#39;)">Italiano</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl08_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl08$uxLocaleItem&#39;,&#39;&#39;)">Nederlands</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl09_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl09$uxLocaleItem&#39;,&#39;&#39;)">Català</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl10_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl10$uxLocaleItem&#39;,&#39;&#39;)">Polski</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl11_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl11$uxLocaleItem&#39;,&#39;&#39;)">Eesti</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl12_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl12$uxLocaleItem&#39;,&#39;&#39;)">Norsk, Bokmål</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl13_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl13$uxLocaleItem&#39;,&#39;&#39;)">한국어</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl14_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl14$uxLocaleItem&#39;,&#39;&#39;)">Magyar</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl15_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl15$uxLocaleItem&#39;,&#39;&#39;)">Română</a></li>
+            
+    </ul>
+    
+</div>
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+        jQuery(".selected-language a").click(function (e) {
+            e.preventDefault();
+            var $loc = jQuery(this).parent().next();
+            jQuery($loc).show().position({
+                of: $loc.parent(),
+                my: "left top",
+                at: "left bottom",
+                offset: "0 0",
+                collision: "fit fit"
+            });
+            jQuery(this).addClass("Expanded");
+            jQuery(document).click(function () {
+                jQuery(".language-list").fadeOut("fast");
+                jQuery(".selected-language a").removeClass("Expanded");
+            });
+            return false;
+        });
+    });
+</script>
+                </div>
+            </div>
+            
             
         </div>
         
@@ -485,8 +561,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
 </div>
 <div id="dlgClipboard">
     <input type="text" class="TextFormat" />
-    <a href="#" onclick="$('#dlgClipboard').hide();return false;">
-        <img src="/images/stockholm/mini/close.gif" alt="Close" title="Close" /></a>
+    <a href="#" onclick="$('#dlgClipboard').hide();return false;" title="Close" class="Close">
+        x</a>
 </div>
 <script type="text/javascript">
     $("a.CoordInfoLink").click(function (e) {
@@ -583,11 +659,11 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                         </dl>
                         <dl class="bottom">
                             <dt>
-                                <img src="/images/silk/group_go.png" alt="View Who Favorited this Cache" title="View Who Favorited this Cache" /></dt>
+                                <img src="/images/icons/16/view_user.png" alt="View Who Favorited this Cache" title="View Who Favorited this Cache" /></dt>
                             <dd>
                                 <a id="hlViewWhoFavorited" title="View Who Favorited this Cache" href="/seek/cache_favorited.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98">View Who Favorited this Cache</a></dd>
                             <dt>
-                                <img src="/images/silk/help.png" alt="About Favorites" title="About Favorites" /></dt>
+                                <img src="/images/icons/16/help.png" alt="About Favorites" title="About Favorites" /></dt>
                             <dd>
                                 <a id="hlAboutFavorites" title="About Favorites" href="http://support.groundspeak.com/index.php?pg=kb.page&amp;id=287" target="_blank">About Favorites</a>
                             </dd>
@@ -632,14 +708,14 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                     <br />
                     <small>
                         <a id="ctl00_ContentBody_lnkPrintFriendly" class="lnk" href="cdpf.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98" target="_blank">
-                            <img src="/images/silk/printer.png" alt="Print" title="Print" width="16" height="16" />&nbsp; <span>
+                            <img src="/images/icons/16/print.png" alt="Print" title="Print" width="16" height="16" />&nbsp; <span>
                                 No Logs
                             </span>
                         </a>&nbsp;
                         <a id="ctl00_ContentBody_lnkPrintFriendly5Logs" href="cdpf.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98&amp;lc=5" target="_blank">5 Logs</a>&nbsp;
                         <a id="ctl00_ContentBody_lnkPrintFriendly10Logs" href="cdpf.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98&amp;lc=10" target="_blank">10 Logs</a>&nbsp;&middot;&nbsp;
                         <a id="ctl00_ContentBody_lnkPrintDirectionsSimple" class="lnk" href="http://maps.google.com/maps?f=d&amp;hl=en&amp;saddr=52.4162,9.594117 (Home Location)&amp;daddr=52.373217,9.7108(Hannopoly%3a+Eislisenstrasse+)" target="_blank">
-                            <img src="/images/silk/car.png" alt="Driving Directions" title="Driving Directions" width="16" height="16" />&nbsp; <span>
+                            <img src="/images/icons/16/directions.png" alt="Driving Directions" title="Driving Directions" width="16" height="16" />&nbsp; <span>
                                 Driving Directions
                             </span>
                         </a></small></p>
@@ -683,7 +759,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
                 <legend class="note">
                     Personal Cache Note
                 </legend>
-                <img src="/images/silk/help.png" id="pcn_help" class="CacheNoteHelpImg" />
+                <img src="/images/icons/16/help.png" id="pcn_help" class="CacheNoteHelpImg" />
                 <p id="cache_note" class="NoBottomSpacing">
                     Test für c:geo</p>
             </fieldset>
@@ -781,17 +857,15 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
 <div class="CacheDetailNavigationWidget NoPrint">
     
     <h3 class="WidgetHeader">
-        <img id="ctl00_ContentBody_GeoNav2_uxHeaderImage" src="../images/stockholm/16x16/home.gif" alt="Navigation" style="border-width:0px;" />
         Navigation
     </h3>
     <div class="WidgetBody">
         
         <ul class="CacheDetailsNavLinks">
-            <li><a href="/seek/log.aspx?ID=1433909" class="lnk"><img src="/images/stockholm/16x16/comment_add.gif" />&nbsp;<span>Log your visit</span></a></li>
-<li><a href="/seek/gallery.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98" class="lnk"><img src="/images/stockholm/16x16/photos.gif" />&nbsp;<span>View Gallery</span></a></li>
-<li><a href="/my/watchlist.aspx?ds=1&id=1433909&action=rem" class="lnk"><img src="/images/stockholm/16x16/icon_stop_watchlist.gif" />&nbsp;<span>Remove from Watchlist</span></a></li>
-<li><a href="/bookmarks/ignore.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98&WptTypeID=2" class="lnk"><img src="/images/stockholm/16x16/cross.gif" />&nbsp;<span>Ignore Listing</span></a></li>
-<li><a href="/bookmarks/mark.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98&WptTypeID=2" class="lnk"><img src="/images/stockholm/16x16/book_open_mark.gif" />&nbsp;<span>Bookmark Listing</span></a></li>
+            <li><a href="/seek/log.aspx?ID=1433909" class="lnk"><img src="/images/icons/16/write_log.png" />&nbsp;<span>Log your visit</span></a></li>
+<li><a href="/my/watchlist.aspx?w=1433909" class="lnk"><img src="/images/icons/16/watch.png" />&nbsp;<span>Watch Listing</span></a></li>
+<li><a href="/bookmarks/ignore.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98&WptTypeID=2" class="lnk"><img src="/images/icons/16/ignore.png" />&nbsp;<span>Ignore Listing</span></a></li>
+<li><a href="/bookmarks/mark.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98&WptTypeID=2" class="lnk"><img src="/images/icons/16/bookmark_list.png" />&nbsp;<span>Bookmark Listing</span></a></li>
 
         </ul>
         
@@ -807,8 +881,8 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
             
             <div id="ctl00_ContentBody_pnlWatchedCount">
 		
-                <p>
-                    <img src="/images/icons/icon_watchlist.gif" alt="Watching" /> You are 1 of 6 users watching this.</p>
+                <p class="WatchIcon">
+                    5 user(s) watching this cache.</p>
             
 	</div>
             
@@ -824,8 +898,6 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
         <div id="ctl00_ContentBody_detailWidget" class="CacheDetailNavigationWidget TopSpacing BottomSpacing">
             
             <h3 class="WidgetHeader">
-                
-                <img src="/images/icon_Boardattention.gif" height="16" width="16" alt="Info" title="Info" />
                 Attributes</h3>
             <div class="WidgetBody">
                 <img src="/images/attributes/bicycles-yes.gif" alt="bikes allowed" title="bikes allowed" width="30" height="30" /> <img src="/images/attributes/available-yes.gif" alt="available 24-7" title="available 24-7" width="30" height="30" /> <img src="/images/attributes/stroller-yes.gif" alt="stroller accessible" title="stroller accessible" width="30" height="30" /> <img src="/images/attributes/parking-yes.gif" alt="parking available" title="parking available" width="30" height="30" /> <img src="/images/attributes/onehour-yes.gif" alt="takes less than 1  hour" title="takes less than 1  hour" width="30" height="30" /> <img src="/images/attributes/kids-yes.gif" alt="kid friendly" title="kid friendly" width="30" height="30" /> <img src="/images/attributes/dogs-yes.gif" alt="dogs allowed" title="dogs allowed" width="30" height="30" /> <img src="/images/attributes/attribute-blank.gif" alt="blank" title="blank" width="30" height="30" /> <img src="/images/attributes/attribute-blank.gif" alt="blank" title="blank" width="30" height="30" /> <img src="/images/attributes/attribute-blank.gif" alt="blank" title="blank" width="30" height="30" /> <img src="/images/attributes/attribute-blank.gif" alt="blank" title="blank" width="30" height="30" /> <img src="/images/attributes/attribute-blank.gif" alt="blank" title="blank" width="30" height="30" /> <p class="NoBottomSpacing"><small><a href="/about/icons.aspx" title="What are Attributes?">What are Attributes?</a></small></p>
@@ -839,7 +911,7 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
             <div id="ctl00_ContentBody_divContentSide">
                 
                 <p class="NoBottomSpacing">
-                    <span id="ctl00_ContentBody_ADModules_09"><iframe type="iframe" src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&SiteID=1&X='c592711dca7640f58a832a09b3d6207e'" width="120" height="240" Marginwidth="0" Marginheight="0" Hspace="0" Vspace="0" Frameborder="0" Scrolling="no" style="width:120px;Height:240px;"><a href="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Click&;Mode=HTML&SiteID=1" target="_blank"><img src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&Mode=HTML&SiteID=1" width="120" height="240" border="0" alt="" /></a></iframe></span>
+                    <span id="ctl00_ContentBody_ADModules_09"><iframe type="iframe" src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&SiteID=1&X='e3c68812a8f248d794130e51733905f4'" width="120" height="240" Marginwidth="0" Marginheight="0" Hspace="0" Vspace="0" Frameborder="0" Scrolling="no" style="width:120px;Height:240px;"><a href="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Click&;Mode=HTML&SiteID=1" target="_blank"><img src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&Mode=HTML&SiteID=1" width="120" height="240" border="0" alt="" /></a></iframe></span>
                 </p>
                 <p class="AlignCenter">
                     <small><a href="../about/advertising.aspx" id="ctl00_ContentBody_advertisingWithUs" title="Advertising with Us">Advertising with Us</a></small></p>
@@ -861,7 +933,6 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
 <div class="CacheDetailNavigationWidget">
     
     <h3 class="WidgetHeader">
-        <img id="ctl00_ContentBody_uxTravelBugList_uxInventoryIcon" src="../images/WptTypes/sm/tb_coin.gif" alt="Inventory" style="height:16px;width:16px;border-width:0px;" />
         <span id="ctl00_ContentBody_uxTravelBugList_uxInventoryLabel">Inventory</span>
     </h3>
     <div class="WidgetBody">
@@ -887,8 +958,7 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
         
 <div class="CacheDetailNavigationWidget">
     
-    <h3 class="WidgetHeader">
-        <img src="/images/stockholm/16x16/pages.gif" width="16" height="16" alt="" />&nbsp;Bookmark Lists</h3>
+    <h3 class="WidgetHeader">Bookmark Lists</h3>
     <div class="WidgetBody">
         
         
@@ -954,7 +1024,7 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
                 </div>
             <div class="CDMapWidget">
                 <p class="WidgetHeader NoBottomSpacing">
-                    <a id="ctl00_ContentBody_uxViewLargerMap" title="View Larger Map" class="lnk" href="/map/default.aspx?lat=52.373217&amp;lng=9.7108" target="_blank"><img src="/images/silk/map_go.png" /> <span>View Larger Map</span></a>
+                    <a id="ctl00_ContentBody_uxViewLargerMap" title="View Larger Map" href="/map/default.aspx?lat=52.373217&amp;lng=9.7108" target="_blank">View Larger Map</a>
                 </p>
                 
                 <div id="map_canvas" style="width: 325px; height: 325px;">
@@ -1026,7 +1096,7 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
                         Decrypt
                     </a>
                 </div>
-                <span id="ctl00_ContentBody_lblFindCounts"><p class="LogTotals"><img src="/images/icons/icon_smile.gif" alt="Found it" title="Found it" /> 368&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_sad.gif" alt="Didn't find it" title="Didn't find it" /> 7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_note.gif" alt="Write note" title="Write note" /> 10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/traffic_cone.gif" alt="Archive" title="Archive" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_disabled.gif" alt="Temporarily Disable Listing" title="Temporarily Disable Listing" /> 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_enabled.gif" alt="Enable Listing" title="Enable Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_greenlight.gif" alt="Publish Listing" title="Publish Listing" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_maint.gif" alt="Owner Maintenance" title="Owner Maintenance" /> 7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/big_smile.gif" alt="Post Reviewer Note" title="Post Reviewer Note" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></span>
+                <span id="ctl00_ContentBody_lblFindCounts"><p class="LogTotals"><img src="/images/logtypes/2.png" alt="Found it" title="Found it" /> 368&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/3.png" alt="Didn't find it" title="Didn't find it" /> 7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/4.png" alt="Write note" title="Write note" /> 10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/5.png" alt="Archive" title="Archive" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/22.png" alt="Temporarily Disable Listing" title="Temporarily Disable Listing" /> 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/23.png" alt="Enable Listing" title="Enable Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/24.png" alt="Publish Listing" title="Publish Listing" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/46.png" alt="Owner Maintenance" title="Owner Maintenance" /> 7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/68.png" alt="Post Reviewer Note" title="Post Reviewer Note" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></span>
                 <p class="HalfLeft">
                     <a id="ctl00_ContentBody_uxLogbookLink" href="cache_logbook.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98">View Logbook</a> | <a id="ctl00_ContentBody_uxGalleryImagesLink" DisplayFormatPlural="View the Image Gallery of {0:#,###} images" DisplayFormatSingular="View the Image Gallery" href="gallery.aspx?guid=36d45871-b99d-46d6-95fc-ff86ab564c98">View the Image Gallery of 2 images</a>
                 </p>
@@ -1057,7 +1127,7 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
             </div>
             <p>
                 <small>
-                    Current Time: <time datetime="2012-10-18T12:49:32Z">10/18/2012 12:49:32 Pacific Daylight Time (19:49 GMT)</time><br/>Last Updated: <time class="timeago" datetime="2012-10-13T22:07:50Z">2012-10-13T22:07:50Z</time> on 10/13/2012 15:07:50 Pacific Daylight Time (22:07 GMT) <br/>Rendered From:Unknown<br />Coordinates are in the WGS84 datum
+                    Current Time: <time datetime="2012-12-11T12:35:28Z">12/11/2012 12:35:28 (UTC-08:00) Pacific Time (US & Canada) (20:35 GMT)</time><br/>Last Updated: <time class="timeago" datetime="2012-10-13T22:07:50Z">2012-10-13T22:07:50Z</time> on 10/13/2012 15:07:50 Pacific Daylight Time (22:07 GMT) <br/>Rendered From:Unknown<br />Coordinates are in the WGS84 datum
                 </small>
             </p>
         
@@ -1070,7 +1140,7 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
                         <p class="logOwnerProfileName">
                             <strong><a id="143568283" href="/profile/?guid=${AccountGuid}">${UserName}</a></strong></p>
                         <p class="logOwnerBadge">
-                            <img title="${creator.GroupTitle}" src="${creator.GroupImageUrl}" align="absmiddle" style="vertical-align:middle">${creator.GroupTitle}
+                            <img title="${creator.GroupTitle}" src="${creator.GroupImageUrl}">${creator.GroupTitle}
                         </p>
                         <p class="logOwnerAvatar">
                             <a href="/profile/?guid=${AccountGuid}">
@@ -1085,18 +1155,13 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
                             {{if GeocacheFindCount > 0 }}
                             <img title="Caches Found" src="/images/icons/icon_smile.png"> ${GeocacheFindCount}
                             {{/if}}
-                            {{if GeocacheFindCount > 0 && ChallengesCompleted > 0 }}
-                            &nbsp;·&nbsp;
-                            {{/if}}
-                            {{if ChallengesCompleted > 0 }}
-                            <img title="Challenges Completed" src="/images/challenges/types/sm/challenge.png"> ${ChallengesCompleted}
-                            {{/if}}
+                            
                         </p>
                     </div>
                     <div class="FloatLeft LogDisplayRight">
                         <div class="HalfLeft LogType">
                             <strong>
-                                <img title="${LogType}" alt="${LogType}" src="/images/icons/${LogTypeImage}">&nbsp;${LogType}</strong></div>
+                                <img title="${LogType}" alt="${LogType}" src="/images/logtypes/${LogTypeImage}">&nbsp;${LogType}</strong></div>
                         <div class="HalfRight AlignRight">
                             <span class="minorDetails LogDate">${Visited}</span></div>
                         <div class="Clear LogContent">
@@ -1131,7 +1196,7 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
             <tr>
                 <td>
                     <a class="tb_images lnk" rel="tb_images[grp${LogID}]" href="http://img.geocaching.com/cache/log/large/${FileName}" data-title="{{tmpl "tmplCacheLogImagesTitle"}}">
-                        <img title="Photo" alt="Photo" src="/images/silk/photo.png"> 
+                        <img title="Photo" alt="Photo" src="/images/icons/16/photo.png"> 
                         <span>${ $('<div />').text($('<div />').html($item.data.Name).text()).html() }</span>
                     </a>
                 </td>
@@ -1710,7 +1775,8 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
                     if (parseCoords.length == 0) {
                         alert('Please provide valid coordinates.');    
                     } else {
-                        $.getJSON("/challenges/location.search", { p: parseCoords }, function (response) {
+                        //$.getJSON("/challenges/location.search", { p: parseCoords }, function (response) {
+                        $.getJSON("/api/geocode", { parse: parseCoords}, function (response) {
                             if (response.status == "success") {
                                 var newLatLng = new LatLon(response.data.lat, response.data.lng);
                                 
@@ -1826,12 +1892,12 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
 </div>
 <div class="LocaleList">
     
-    <div id="selected_language">
+    <div class="selected-language">
         
         <a href="#">English&#9660;</a>
         
     </div>
-    <ul id="locale_list">
+    <ul class="language-list">
         
                 <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl00_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem&#39;,&#39;&#39;)">English</a></li>
             
@@ -1869,19 +1935,22 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
     
 </div>
 <script type="text/javascript">
-    
-    jQuery(document).ready(function() {
-        jQuery("#selected_language a").click(function (e) {
+
+    jQuery(document).ready(function () {
+        jQuery(".selected-language a").click(function (e) {
             e.preventDefault();
-            jQuery("#locale_list").show().position({
-                of: $("#selected_language"),
+            var $loc = jQuery(this).parent().next();
+            jQuery($loc).show().position({
+                of: $loc.parent(),
                 my: "left top",
                 at: "left bottom",
-                offset: "0 3",
+                offset: "0 0",
                 collision: "fit fit"
             });
+            jQuery(this).addClass("Expanded");
             jQuery(document).click(function () {
-                jQuery("#locale_list").fadeOut("fast");
+                jQuery(".language-list").fadeOut("fast");
+                jQuery(".selected-language a").removeClass("Expanded");
             });
             return false;
         });
@@ -2003,14 +2072,14 @@ Man weiß hier Bescheid. Dieser Cache ist rund um die Uhr zu finden, ohne ein Ge
 
 <script type="text/javascript">
 //<![CDATA[
-var uvtoken = 'DbFDfIrSTaXyfNf74lbdopy%2bTw%2fC84Gn87pU%2b3r69toc4lYTKyii0cXY42BXT7amAeAEUCcV1MyzYH%2f69bWOOFRruXKz4Y7dmdEb5hkzMmPM3y5xmGJNt8gPIbp6rr%2fxkbM%2bQ7RJ5IHWFwhOFX37papOxiP%2fzlvJoxK2lSTYz4ZwueztzsjjdFlUj7xbPOcC10RFgjRsrwVyG81%2b4wjZBhipaDeY%2fZzTma2tnAAKkDnrxFqsw5Y0WIynIdFEn1JI8cu%2bnDhOVP6AO9mpVPRaXrN01V38EfI%2fkoZzQdjNVGlZ3Vby1lsyMV3AK%2b2C%2bhkJx%2fSdgJYr7sRuh5mlW8uTlNNuOZdZJEP7nMN2KpoZ8YGSsWqpOSQKlFmH7DsCZZ0OyVPANvEdZ7zw4m77AtIabAl6OIY%2bJJYf3rcDAkjyMwA%3d';var isLoggedIn = true;
+var uvtoken = 'DbFDfIrSTaXyfNf74lbdopy%2bTw%2fC84Gn87pU%2b3r69toc4lYTKyii0cXY42BXT7amAeAEUCcV1MyzYH%2f69bWOODB8zVLynRLbTkxx%2f8hPffEHKq%2ftoRaVm0yXjdPzGQ5n9jW1y0pwsokb3j6S7vVPg8iV8nDqEIU6a07uKMHBEDwwXGOXO%2bIfXpwATkAQ39JGxsiK8GPHlJE5%2besotPd2aFe0L69BktKUFC%2fpddxY6i9ToCvJI7%2fD81HsQ1pJjiigHa2tp6E4zFxJ50Re1NazmCpfLFU%2fd4ZvsZrk1MKlbEeUJIX5I9F5VsYFpnMiy07HwK7%2b4ehrPS3lhjbA0F2U%2fzt%2fBc8ut27HgDC4jDLGumKbDM7cEMEityUG%2fyqWaeD8Glm3UeHwjGMuURoYa9dIzbRafUqRp7qkrd2s1I9RyyY%3d';var isLoggedIn = true;
 var userDefinedCoords = {"status":"fail","data":{"isUserDefined":false,"oldLatLngDisplay":"N 52° 22.393' E 009° 42.648'"}};
 mapLatLng = {"lat":52.37322,"lng":9.7108,"type":2,"name":"Hannopoly: Eislisenstrasse "};
 var ccConversions = [{"t":"Decimal","k":"DD","d":"WGS84","v":"52.373217, 009.710800"},{"t":"DDD MM SS.SSS","k":"DMS","d":"WGS84","v":"N 52° 22' 23.581\" E 009° 42' 38.880\""},{"t":"UTM","k":"UTM","d":"WGS84","v":"32U E 548389 N 5802787"}];
 userInfo = {ID: 1912314};
-userToken = 'FOUTFKOKLELXOJAYT35WSZBNGADBNKFSYIMKJ2YI6247JORDCSRPR3LYUNKEOR2PQUOHC7OGY223V2X2ADNEDT25JD2QHOXIHYLH7J5XLOWJSK5WTLLQ5UJQMIZEGXYFSHPFRQQ5A374RP7GSKIVLW2RCI53UZFIABL6BZOBU6IDYHWJSCVNM2YEQ7AOUWCQHTAVICNX7GH7X5EMIOYV6DLOMJUFBTCCPD4PGRNFC325XROH2B6A';
+userToken = 'FOUTFKOKLELXOJAYT35WSZBNGADBNKFSYIMKJ2YI6247JORDCSRPR3LYUNKEOR2PQUOHC7OGY223V2X2ADNEDT25JD2QHOXIHYLH7J5XLOWJSK5WTLLQ5UJQMIZEGXYFSHPFRQQ5A374RP7GSKIVLW2RCI53UZFIABL6BZOBU6IDYHWJSCVNM2YEQ7AOUWCQHTAVICNX7GH7XGF2IUG5C6D4NTADU2FGQIFA7DRMYK2UKVVDS7IA';
 includeAvatars = true;
-initalLogs = {"status":"success", "data": [{"LogID":196904781,"CacheID":1433909,"LogGuid":"26f89faf-aa71-406e-9ea3-cdfa18a846e6","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Write note","LogTypeImage":"icon_note.gif","LogText":"s. mein Log bei Seestr.","Created":"05/11/2011","Visited":"05/11/2011","UserName":"daniel354","MembershipLevel":3,"AccountID":1477880,"AccountGuid":"8186d342-6f46-4d9e-8ba3-2e7b51426798","Email":"","AvatarImage":"b82a4dec-bd35-4cc8-b6dc-fe8bced5cbca.jpg","GeocacheFindCount":5177,"GeocacheHideCount":42,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":196899232,"CacheID":1433909,"LogGuid":"f755b34d-0cc1-4740-827a-07311fe1a3b1","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Write note","LogTypeImage":"icon_note.gif","LogText":"Äh, Logbuch ist nicht mehr vor Ort - wie kann man da \"Found\" loggen ? Ansonsten würde ich auch \"Found\" loggen da ich Dienstag vor Ort war und genau weiß vor sich der Cache befand....","Created":"05/11/2011","Visited":"05/11/2011","UserName":"blafoo","MembershipLevel":3,"AccountID":1912314,"AccountGuid":"0564a940-8311-40ee-8e76-7e91b2cf6284","Email":"","AvatarImage":"50f83123-27d8-4dcf-9fde-2af006efaf2b.jpg","GeocacheFindCount":692,"GeocacheHideCount":8,"ChallengesCompleted":3,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":189731769,"CacheID":1433909,"LogGuid":"e674d2ed-7cac-4b49-96b1-3020e5c7f479","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Archive","LogTypeImage":"traffic_cone.gif","LogText":"Auch hier fehlt mir leider eine passende neue Idee. Wie alle archivierten Hannopolys wird auch diese Besitzrechtskarte ab sofort auf www.hannopoly.de zu finden sein. Danke für die sehr schönen Logs!","Created":"01/10/2011","Visited":"01/10/2011","UserName":"daniel354","MembershipLevel":3,"AccountID":1477880,"AccountGuid":"8186d342-6f46-4d9e-8ba3-2e7b51426798","Email":"","AvatarImage":"b82a4dec-bd35-4cc8-b6dc-fe8bced5cbca.jpg","GeocacheFindCount":5177,"GeocacheHideCount":42,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":189390319,"CacheID":1433909,"LogGuid":"4510051e-2c87-4d09-b77d-d90f645bafe9","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"wahrscheinlich nicht mehr so schön wie geplant, dennoch alles da, was der logger so braucht ... sogar´n herry ;-)<br /><br />dfdc","Created":"29/09/2011","Visited":"29/09/2011","UserName":"Sir5al","MembershipLevel":3,"AccountID":3229535,"AccountGuid":"66de7735-1888-479b-8dbd-ada710747374","Email":"","AvatarImage":"9da1d6ed-3a3f-47cb-aba3-f5550abe7d11.jpg","GeocacheFindCount":987,"GeocacheHideCount":4,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":186118551,"CacheID":1433909,"LogGuid":"acce0114-1712-4f32-b120-4b8bd4ef7200","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Leider habe ich erst gesehen das der Cache auf Eis liegt nach dem ich ihn gefunden habe.<br /><br />Ich konnte ihn denn noch gut finden und mich im großem Logbuch eintragen!<br /><br /><br />DFDC","Created":"11/09/2011","Visited":"27/08/2011","UserName":"Smootje1","MembershipLevel":3,"AccountID":4186572,"AccountGuid":"41b96bb9-ed81-473a-9032-1096d5c94423","Email":"","AvatarImage":"6052e05a-f2ce-45f1-86c4-c56fe8da6d2b.jpg","GeocacheFindCount":3486,"GeocacheHideCount":33,"ChallengesCompleted":1,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":171398380,"CacheID":1433909,"LogGuid":"845e6ead-bf44-4dd8-900e-81a78afc0887","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Write note","LogTypeImage":"icon_note.gif","LogText":"Daniel, du sprichst uns aus der Seele.. gestern Nacht dagewesen, um ihn ENDLICH zu heben, aber ohne Erfolg.. SCHNIEF","Created":"08/07/2011","Visited":"08/07/2011","UserName":"Steinbreit","MembershipLevel":3,"AccountID":4430835,"AccountGuid":"86281f53-49a2-4051-bc15-394d43724d65","Email":"","AvatarImage":"90f468a9-7059-43a7-a3c5-256879458a63.jpg","GeocacheFindCount":479,"GeocacheHideCount":8,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":171063566,"CacheID":1433909,"LogGuid":"fc463b7b-ce41-4d16-a7a4-2107b8454a91","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Temporarily Disable Listing","LogTypeImage":"icon_disabled.gif","LogText":"Mist...","Created":"06/07/2011","Visited":"06/07/2011","UserName":"daniel354","MembershipLevel":3,"AccountID":1477880,"AccountGuid":"8186d342-6f46-4d9e-8ba3-2e7b51426798","Email":"","AvatarImage":"b82a4dec-bd35-4cc8-b6dc-fe8bced5cbca.jpg","GeocacheFindCount":5177,"GeocacheHideCount":42,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":170116614,"CacheID":1433909,"LogGuid":"09c89c9c-ec9f-4387-a6ae-05fe6d11d9bf","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Ging schneller als gedacht. :-)<br /><br />TFTC","Created":"02/07/2011","Visited":"01/07/2011","UserName":"urbannature","MembershipLevel":1,"AccountID":2510965,"AccountGuid":"1f223c0d-d9ee-44c4-b411-35eee724b868","Email":"","AvatarImage":"476ea58f-a917-46c4-8e5a-b99484b514f6.jpg","GeocacheFindCount":2019,"GeocacheHideCount":8,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":168683009,"CacheID":1433909,"LogGuid":"53e3436d-3bbc-4b46-aa34-ca28bbd0723a","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Erster Hanopoly-Cach! Nach langem suchen und richtig lesen gefunden! ;)","Created":"24/06/2011","Visited":"24/06/2011","UserName":"anady","MembershipLevel":3,"AccountID":3551788,"AccountGuid":"c6d0f76b-df41-44d0-9d1f-e60b0ffa4f0a","Email":"","AvatarImage":"","GeocacheFindCount":148,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":168640932,"CacheID":1433909,"LogGuid":"fc364b9d-8ddb-4d0e-aa42-09b4dce93c94","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Zusammen mit anady hier gewesen und die bald Karte gefunden. Doch irgendwie war kein Logbuch auffindbar. Während wir noch etwas hin und her hantierten wurde es uns überraschend übergeben. Ob das so sein soll?<br /><br />Die Idee aber ist prima.<br /><br />TFTC! :-)","Created":"24/06/2011","Visited":"24/06/2011","UserName":"CriDi","MembershipLevel":3,"AccountID":3383487,"AccountGuid":"78aeaa8b-044d-40ac-8a80-656a1c7f85c1","Email":"","AvatarImage":"09f0aca7-6fcf-4d9a-bbf9-0f4b31c68f36.jpg","GeocacheFindCount":989,"GeocacheHideCount":13,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":167383966,"CacheID":1433909,"LogGuid":"6a4c21a6-c795-4d8e-8f0c-a4d7a357f837","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Interessantes Geschehen am Sonnabendvormittag; die Müllabfuhr kommt, die Post bringt Neuigkeiten ins Haus, Nachbarn treffen sich auf der Straße und klönen eine Runde, ein Auto aus SFA blockiert die Kreuzung, ein Radfahrer entsorgt den Müll aus dem Fahrradkorb direkt am Baum und unser Team vergisst fast die Suche ...<br /><br />DfdC!","Created":"18/06/2011","Visited":"18/06/2011","UserName":"2bupa","MembershipLevel":3,"AccountID":2675170,"AccountGuid":"e6a84779-ad63-4ba1-93fa-558a7190c8b4","Email":"","AvatarImage":"e30c21ec-8bce-4b90-9c6f-ee7e618da9fe.jpg","GeocacheFindCount":4335,"GeocacheHideCount":13,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":167163052,"CacheID":1433909,"LogGuid":"2d51d81f-1581-4ae6-9254-0a5ffa163585","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"War schon öfters hier, aber die Muggels saßen da nur so rum. Heute früh aufgestanden....<br /><br />DFDC grüße Putze","Created":"16/06/2011","Visited":"15/06/2011","UserName":"Weltallputze","MembershipLevel":1,"AccountID":4512106,"AccountGuid":"07449e94-85c8-4d2f-b387-cb0910b2d854","Email":"","AvatarImage":"0b9746f6-1fd4-47b9-8f07-5b2bb3b21cc0.jpg","GeocacheFindCount":226,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":166633564,"CacheID":1433909,"LogGuid":"f6c8b6f6-527b-4ea0-ba85-8637cf47bd73","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Voll geil. Juhu und danke","Created":"13/06/2011","Visited":"13/06/2011","UserName":"Lumisch","MembershipLevel":1,"AccountID":4464524,"AccountGuid":"fcc7da31-928a-418f-ae3e-9f015b41ead6","Email":"","AvatarImage":"","GeocacheFindCount":54,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":165707570,"CacheID":1433909,"LogGuid":"1adb0f76-9bfa-47a4-a7f2-4b3aab0ffcfb","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"lecker eis :)","Created":"09/06/2011","Visited":"09/06/2011","UserName":"Nico Rohrssen","MembershipLevel":1,"AccountID":4523346,"AccountGuid":"3c66a437-1bbc-4cb1-bda0-8f609ac6efef","Email":"","AvatarImage":"","GeocacheFindCount":25,"GeocacheHideCount":2,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":164530395,"CacheID":1433909,"LogGuid":"477f0186-9c2a-40f9-8696-98afb9868205","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Nach langer sorgfältiger Vorplanung (an welchem Tag lohnt sich das frühe Aufstehen?) bei Sonnenaufgang angeschlichen und... gefunden! Gotcha! DfdC!","Created":"03/06/2011","Visited":"03/06/2011","UserName":"Deistermonster","MembershipLevel":3,"AccountID":4165483,"AccountGuid":"116149cb-3e0f-4c50-b51e-95b756d64da4","Email":"","AvatarImage":"54fe057c-f79a-4d82-b587-53c5b2b9386f.jpg","GeocacheFindCount":1414,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":164413372,"CacheID":1433909,"LogGuid":"e2c9bdad-9282-49f2-aba4-7e2ac058afa5","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Morgens um 6 Uhr muggelfrei geloggt.<img src=\"/images/icons/icon_smile_big.gif\" border=\"0\" align=\"middle\" />Endlich! Der war schon ewig geplant, aber um unserer Idee nachzugehen, fehlte zur \"normalen\" Tageszeit der Mut. Ist schon ein lustiges Versteck... TFTC sagt Soukousa","Created":"03/06/2011","Visited":"03/06/2011","UserName":"Soukousa","MembershipLevel":3,"AccountID":4154048,"AccountGuid":"399bef0c-1cdd-4024-a00e-3199484131af","Email":"","AvatarImage":"8480d5e4-f43e-48e5-a449-c01ce424ff05.jpg","GeocacheFindCount":1414,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":163515249,"CacheID":1433909,"LogGuid":"cda47e99-cd5f-4fc1-aa40-cb3bccff4f46","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Bei einem leckerem Eis das Logbuch siegniert.<br /><br />TFTC<br />Don Canallie","Created":"29/05/2011","Visited":"29/05/2011","UserName":"Don Canallie","MembershipLevel":3,"AccountID":3891097,"AccountGuid":"80970931-2e97-4291-abfd-564635f5d86f","Email":"","AvatarImage":"e6944e25-df18-45fb-acca-93ee08e923da.jpg","GeocacheFindCount":734,"GeocacheHideCount":2,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":163307833,"CacheID":1433909,"LogGuid":"caad1abc-eb5c-4b99-ae92-232057825f41","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Während einer schönen Li-Li-Ahlem Fahrrad Cachingtour gesucht und geborgen, danach wieder korrekt versteckt, damit es nicht zu einfach wird. dfdc <img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" />","Created":"29/05/2011","Visited":"28/05/2011","UserName":"rimini08","MembershipLevel":3,"AccountID":4088331,"AccountGuid":"2fe34526-d72d-478e-9b7f-9dc5c3e1d6c1","Email":"","AvatarImage":"","GeocacheFindCount":501,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":163325464,"CacheID":1433909,"LogGuid":"c3475f2f-1e55-43aa-89a8-3a1ce8ddc525","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"<i>gut gefunden, danke fürs verstecken!</i> <br /><br /><b> <font color=\"red\">TFTC<br /><br /><b> <font color=\"green\">...sprechenden Cachern kann geholfen werden <img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" /><br /><br /><img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" /> <b> <font size=\"3\"> <font color=\"green\">J<font color=\"black\">o<font color=\"green\">h<font color=\"black\">a<font color=\"green\">n<font color=\"black\">s<font color=\"green\">i<font color=\"black\">b<font color=\"green\">ä<font color=\"black\">r   <font color=\"orange\">2011</font> <img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" /></font></font></font></font></font></font></font></font></font></font></font></b><font size=\"3\"><font color=\"green\"><font color=\"black\"><font color=\"green\"><font color=\"black\"><font color=\"green\"><font color=\"black\"><font color=\"green\"><font color=\"black\"><font color=\"green\"><font color=\"black\"></font></font></font></font></font></font></font></font></font></font></font></font></b></font></b>","Created":"29/05/2011","Visited":"22/05/2011","UserName":"Johansibär","MembershipLevel":3,"AccountID":1858674,"AccountGuid":"05f9d911-9cdc-4224-84b3-8e4923228958","Email":"","AvatarImage":"4d235c2f-81b6-42c4-a28c-5df2182a289d.jpg","GeocacheFindCount":1191,"GeocacheHideCount":17,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":162246062,"CacheID":1433909,"LogGuid":"e9eec580-6831-40ba-8530-c9722017a142","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Schon vor ein paar Tagen die Karte entdeckt aber das loggen war uns nicht so klar...nun haben wir uns heute auch im Logbuch verewigt. Nette Idee, DfdC.","Created":"22/05/2011","Visited":"22/05/2011","UserName":"Flunin","MembershipLevel":3,"AccountID":3435189,"AccountGuid":"4c851b2a-967c-427d-91eb-268b5ffb0f0a","Email":"","AvatarImage":"","GeocacheFindCount":612,"GeocacheHideCount":2,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":161705502,"CacheID":1433909,"LogGuid":"0b303d23-fb26-4b29-b5d2-2bb8828682ae","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Nach nem kleinen Tipp dann doch noch loggen können :-)<br />DFDC","Created":"20/05/2011","Visited":"20/05/2011","UserName":"Leafhoppers","MembershipLevel":1,"AccountID":3766111,"AccountGuid":"37bd64d5-a74f-4a12-b040-460f83652198","Email":"","AvatarImage":"","GeocacheFindCount":582,"GeocacheHideCount":0,"ChallengesCompleted":7,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":161990811,"CacheID":1433909,"LogGuid":"1ac63b3e-075a-48b7-9a1f-222b19c71868","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Zusammen mit i-teg um 15:25 Uhr geloggt. <br />TFTC!<br />#488","Created":"21/05/2011","Visited":"19/05/2011","UserName":"justify-jay","MembershipLevel":1,"AccountID":3936481,"AccountGuid":"af49ff9e-5331-4565-97e8-5f5bf45e33b2","Email":"","AvatarImage":"198d173a-7efa-416c-b495-b15ed30f94a1.jpg","GeocacheFindCount":1105,"GeocacheHideCount":2,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":161988577,"CacheID":1433909,"LogGuid":"19a1ae8a-e3d7-492c-a866-002064968183","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Auf Spontantour zusammen mit justify-jay um 15:25 Uhr zum Logbuch durchgedrungen :-) ! <br />TFTC!<br />#488","Created":"21/05/2011","Visited":"19/05/2011","UserName":"i-teg","MembershipLevel":1,"AccountID":3936536,"AccountGuid":"a30caa8b-0ba4-4a20-875f-ac825eacbf41","Email":"","AvatarImage":"533a43c0-8416-452f-8011-f575dee42268.jpg","GeocacheFindCount":1105,"GeocacheHideCount":2,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":161489085,"CacheID":1433909,"LogGuid":"0686f7dd-e12b-4b99-b7c7-24df895f48fb","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Schnell gefunden da unsere Vorlogger scheinbar den Cache nicht wieder ganz genau plaziert hatten. Weils so schnell ging ne leckeres Eis in der Sonne genossen.<br />Ein super Cache, vielen Dank dafür.<br />Kartoffelhunter","Created":"18/05/2011","Visited":"18/05/2011","UserName":"Kartoffelhunter","MembershipLevel":3,"AccountID":3579558,"AccountGuid":"344121a1-10f3-443a-9ff6-f90fc43ba8be","Email":"","AvatarImage":"61105259-e319-4793-9bc3-51aae0eb9e10.jpg","GeocacheFindCount":1027,"GeocacheHideCount":2,"ChallengesCompleted":3,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":160254911,"CacheID":1433909,"LogGuid":"f315eb63-43e2-48ad-a3b9-fc775dfc9e27","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"icon_smile.gif","LogText":"Unsere erste gefundene Hannopoly-Karte, bei bestem Wetter. Und zur Belohnung ein Lecker Eis für Leona, Tomke und mich.","Created":"11/05/2011","Visited":"11/05/2011","UserName":"janko74","MembershipLevel":1,"AccountID":4460156,"AccountGuid":"bc9f2cab-dad8-465f-8b73-0d7d420e043c","Email":"","AvatarImage":"","GeocacheFindCount":4,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]}], "pageInfo": { "idx":1, "size": 25, "totalRows": 400, "rows": 400 } };
+initalLogs = {"status":"success", "data": [{"LogID":196904781,"CacheID":1433909,"LogGuid":"26f89faf-aa71-406e-9ea3-cdfa18a846e6","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Write note","LogTypeImage":"4.png","LogText":"s. mein Log bei Seestr.","Created":"05/11/2011","Visited":"05/11/2011","UserName":"daniel354","MembershipLevel":3,"AccountID":1477880,"AccountGuid":"8186d342-6f46-4d9e-8ba3-2e7b51426798","Email":"","AvatarImage":"b82a4dec-bd35-4cc8-b6dc-fe8bced5cbca.jpg","GeocacheFindCount":5203,"GeocacheHideCount":42,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":196899232,"CacheID":1433909,"LogGuid":"f755b34d-0cc1-4740-827a-07311fe1a3b1","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Write note","LogTypeImage":"4.png","LogText":"Äh, Logbuch ist nicht mehr vor Ort - wie kann man da \"Found\" loggen ? Ansonsten würde ich auch \"Found\" loggen da ich Dienstag vor Ort war und genau weiß vor sich der Cache befand....","Created":"05/11/2011","Visited":"05/11/2011","UserName":"blafoo","MembershipLevel":3,"AccountID":1912314,"AccountGuid":"0564a940-8311-40ee-8e76-7e91b2cf6284","Email":"","AvatarImage":"50f83123-27d8-4dcf-9fde-2af006efaf2b.jpg","GeocacheFindCount":725,"GeocacheHideCount":8,"ChallengesCompleted":3,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":189731769,"CacheID":1433909,"LogGuid":"e674d2ed-7cac-4b49-96b1-3020e5c7f479","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Archive","LogTypeImage":"5.png","LogText":"Auch hier fehlt mir leider eine passende neue Idee. Wie alle archivierten Hannopolys wird auch diese Besitzrechtskarte ab sofort auf www.hannopoly.de zu finden sein. Danke für die sehr schönen Logs!","Created":"01/10/2011","Visited":"01/10/2011","UserName":"daniel354","MembershipLevel":3,"AccountID":1477880,"AccountGuid":"8186d342-6f46-4d9e-8ba3-2e7b51426798","Email":"","AvatarImage":"b82a4dec-bd35-4cc8-b6dc-fe8bced5cbca.jpg","GeocacheFindCount":5203,"GeocacheHideCount":42,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":189390319,"CacheID":1433909,"LogGuid":"4510051e-2c87-4d09-b77d-d90f645bafe9","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"wahrscheinlich nicht mehr so schön wie geplant, dennoch alles da, was der logger so braucht ... sogar´n herry ;-)<br /><br />dfdc","Created":"29/09/2011","Visited":"29/09/2011","UserName":"Sir5al","MembershipLevel":3,"AccountID":3229535,"AccountGuid":"66de7735-1888-479b-8dbd-ada710747374","Email":"","AvatarImage":"9da1d6ed-3a3f-47cb-aba3-f5550abe7d11.jpg","GeocacheFindCount":1019,"GeocacheHideCount":4,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":186118551,"CacheID":1433909,"LogGuid":"acce0114-1712-4f32-b120-4b8bd4ef7200","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Leider habe ich erst gesehen das der Cache auf Eis liegt nach dem ich ihn gefunden habe.<br /><br />Ich konnte ihn denn noch gut finden und mich im großem Logbuch eintragen!<br /><br /><br />DFDC","Created":"11/09/2011","Visited":"27/08/2011","UserName":"Smootje1","MembershipLevel":3,"AccountID":4186572,"AccountGuid":"41b96bb9-ed81-473a-9032-1096d5c94423","Email":"","AvatarImage":"6052e05a-f2ce-45f1-86c4-c56fe8da6d2b.jpg","GeocacheFindCount":3836,"GeocacheHideCount":35,"ChallengesCompleted":1,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":171398380,"CacheID":1433909,"LogGuid":"845e6ead-bf44-4dd8-900e-81a78afc0887","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Write note","LogTypeImage":"4.png","LogText":"Daniel, du sprichst uns aus der Seele.. gestern Nacht dagewesen, um ihn ENDLICH zu heben, aber ohne Erfolg.. SCHNIEF","Created":"08/07/2011","Visited":"08/07/2011","UserName":"Steinbreit","MembershipLevel":3,"AccountID":4430835,"AccountGuid":"86281f53-49a2-4051-bc15-394d43724d65","Email":"","AvatarImage":"90f468a9-7059-43a7-a3c5-256879458a63.jpg","GeocacheFindCount":490,"GeocacheHideCount":8,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":171063566,"CacheID":1433909,"LogGuid":"fc463b7b-ce41-4d16-a7a4-2107b8454a91","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Temporarily Disable Listing","LogTypeImage":"22.png","LogText":"Mist...","Created":"06/07/2011","Visited":"06/07/2011","UserName":"daniel354","MembershipLevel":3,"AccountID":1477880,"AccountGuid":"8186d342-6f46-4d9e-8ba3-2e7b51426798","Email":"","AvatarImage":"b82a4dec-bd35-4cc8-b6dc-fe8bced5cbca.jpg","GeocacheFindCount":5203,"GeocacheHideCount":42,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":170116614,"CacheID":1433909,"LogGuid":"09c89c9c-ec9f-4387-a6ae-05fe6d11d9bf","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Ging schneller als gedacht. :-)<br /><br />TFTC","Created":"02/07/2011","Visited":"01/07/2011","UserName":"urbannature","MembershipLevel":1,"AccountID":2510965,"AccountGuid":"1f223c0d-d9ee-44c4-b411-35eee724b868","Email":"","AvatarImage":"476ea58f-a917-46c4-8e5a-b99484b514f6.jpg","GeocacheFindCount":2119,"GeocacheHideCount":8,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":168683009,"CacheID":1433909,"LogGuid":"53e3436d-3bbc-4b46-aa34-ca28bbd0723a","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Erster Hanopoly-Cach! Nach langem suchen und richtig lesen gefunden! ;)","Created":"24/06/2011","Visited":"24/06/2011","UserName":"anady","MembershipLevel":3,"AccountID":3551788,"AccountGuid":"c6d0f76b-df41-44d0-9d1f-e60b0ffa4f0a","Email":"","AvatarImage":"","GeocacheFindCount":148,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":168640932,"CacheID":1433909,"LogGuid":"fc364b9d-8ddb-4d0e-aa42-09b4dce93c94","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Zusammen mit anady hier gewesen und die bald Karte gefunden. Doch irgendwie war kein Logbuch auffindbar. Während wir noch etwas hin und her hantierten wurde es uns überraschend übergeben. Ob das so sein soll?<br /><br />Die Idee aber ist prima.<br /><br />TFTC! :-)","Created":"24/06/2011","Visited":"24/06/2011","UserName":"CriDi","MembershipLevel":3,"AccountID":3383487,"AccountGuid":"78aeaa8b-044d-40ac-8a80-656a1c7f85c1","Email":"","AvatarImage":"09f0aca7-6fcf-4d9a-bbf9-0f4b31c68f36.jpg","GeocacheFindCount":1026,"GeocacheHideCount":13,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":167383966,"CacheID":1433909,"LogGuid":"6a4c21a6-c795-4d8e-8f0c-a4d7a357f837","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Interessantes Geschehen am Sonnabendvormittag; die Müllabfuhr kommt, die Post bringt Neuigkeiten ins Haus, Nachbarn treffen sich auf der Straße und klönen eine Runde, ein Auto aus SFA blockiert die Kreuzung, ein Radfahrer entsorgt den Müll aus dem Fahrradkorb direkt am Baum und unser Team vergisst fast die Suche ...<br /><br />DfdC!","Created":"18/06/2011","Visited":"18/06/2011","UserName":"2bupa","MembershipLevel":3,"AccountID":2675170,"AccountGuid":"e6a84779-ad63-4ba1-93fa-558a7190c8b4","Email":"","AvatarImage":"e30c21ec-8bce-4b90-9c6f-ee7e618da9fe.jpg","GeocacheFindCount":4550,"GeocacheHideCount":13,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":167163052,"CacheID":1433909,"LogGuid":"2d51d81f-1581-4ae6-9254-0a5ffa163585","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"War schon öfters hier, aber die Muggels saßen da nur so rum. Heute früh aufgestanden....<br /><br />DFDC grüße Putze","Created":"16/06/2011","Visited":"15/06/2011","UserName":"Weltallputze","MembershipLevel":1,"AccountID":4512106,"AccountGuid":"07449e94-85c8-4d2f-b387-cb0910b2d854","Email":"","AvatarImage":"0b9746f6-1fd4-47b9-8f07-5b2bb3b21cc0.jpg","GeocacheFindCount":226,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":166633564,"CacheID":1433909,"LogGuid":"f6c8b6f6-527b-4ea0-ba85-8637cf47bd73","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Voll geil. Juhu und danke","Created":"13/06/2011","Visited":"13/06/2011","UserName":"Lumisch","MembershipLevel":1,"AccountID":4464524,"AccountGuid":"fcc7da31-928a-418f-ae3e-9f015b41ead6","Email":"","AvatarImage":"","GeocacheFindCount":54,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":165707570,"CacheID":1433909,"LogGuid":"1adb0f76-9bfa-47a4-a7f2-4b3aab0ffcfb","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"lecker eis :)","Created":"09/06/2011","Visited":"09/06/2011","UserName":"Nico Rohrssen","MembershipLevel":1,"AccountID":4523346,"AccountGuid":"3c66a437-1bbc-4cb1-bda0-8f609ac6efef","Email":"","AvatarImage":"","GeocacheFindCount":25,"GeocacheHideCount":2,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":164530395,"CacheID":1433909,"LogGuid":"477f0186-9c2a-40f9-8696-98afb9868205","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Nach langer sorgfältiger Vorplanung (an welchem Tag lohnt sich das frühe Aufstehen?) bei Sonnenaufgang angeschlichen und... gefunden! Gotcha! DfdC!","Created":"03/06/2011","Visited":"03/06/2011","UserName":"Deistermonster","MembershipLevel":3,"AccountID":4165483,"AccountGuid":"116149cb-3e0f-4c50-b51e-95b756d64da4","Email":"","AvatarImage":"54fe057c-f79a-4d82-b587-53c5b2b9386f.jpg","GeocacheFindCount":1506,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":164413372,"CacheID":1433909,"LogGuid":"e2c9bdad-9282-49f2-aba4-7e2ac058afa5","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Morgens um 6 Uhr muggelfrei geloggt.<img src=\"/images/icons/icon_smile_big.gif\" border=\"0\" align=\"middle\" />Endlich! Der war schon ewig geplant, aber um unserer Idee nachzugehen, fehlte zur \"normalen\" Tageszeit der Mut. Ist schon ein lustiges Versteck... TFTC sagt Soukousa","Created":"03/06/2011","Visited":"03/06/2011","UserName":"Soukousa","MembershipLevel":3,"AccountID":4154048,"AccountGuid":"399bef0c-1cdd-4024-a00e-3199484131af","Email":"","AvatarImage":"8480d5e4-f43e-48e5-a449-c01ce424ff05.jpg","GeocacheFindCount":1506,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":163515249,"CacheID":1433909,"LogGuid":"cda47e99-cd5f-4fc1-aa40-cb3bccff4f46","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Bei einem leckerem Eis das Logbuch siegniert.<br /><br />TFTC<br />Don Canallie","Created":"29/05/2011","Visited":"29/05/2011","UserName":"Don Canallie","MembershipLevel":3,"AccountID":3891097,"AccountGuid":"80970931-2e97-4291-abfd-564635f5d86f","Email":"","AvatarImage":"e6944e25-df18-45fb-acca-93ee08e923da.jpg","GeocacheFindCount":757,"GeocacheHideCount":2,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":163307833,"CacheID":1433909,"LogGuid":"caad1abc-eb5c-4b99-ae92-232057825f41","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Während einer schönen Li-Li-Ahlem Fahrrad Cachingtour gesucht und geborgen, danach wieder korrekt versteckt, damit es nicht zu einfach wird. dfdc <img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" />","Created":"29/05/2011","Visited":"28/05/2011","UserName":"rimini08","MembershipLevel":3,"AccountID":4088331,"AccountGuid":"2fe34526-d72d-478e-9b7f-9dc5c3e1d6c1","Email":"","AvatarImage":"","GeocacheFindCount":509,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":163325464,"CacheID":1433909,"LogGuid":"c3475f2f-1e55-43aa-89a8-3a1ce8ddc525","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"<i>gut gefunden, danke fürs verstecken!</i> <br /><br /><b> <font color=\"red\">TFTC<br /><br /><b> <font color=\"green\">...sprechenden Cachern kann geholfen werden <img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" /><br /><br /><img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" /> <b> <font size=\"3\"> <font color=\"green\">J<font color=\"black\">o<font color=\"green\">h<font color=\"black\">a<font color=\"green\">n<font color=\"black\">s<font color=\"green\">i<font color=\"black\">b<font color=\"green\">ä<font color=\"black\">r   <font color=\"orange\">2011</font> <img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" /></font></font></font></font></font></font></font></font></font></font></font></b><font size=\"3\"><font color=\"green\"><font color=\"black\"><font color=\"green\"><font color=\"black\"><font color=\"green\"><font color=\"black\"><font color=\"green\"><font color=\"black\"><font color=\"green\"><font color=\"black\"></font></font></font></font></font></font></font></font></font></font></font></font></b></font></b>","Created":"29/05/2011","Visited":"22/05/2011","UserName":"Johansibär","MembershipLevel":3,"AccountID":1858674,"AccountGuid":"05f9d911-9cdc-4224-84b3-8e4923228958","Email":"","AvatarImage":"4d235c2f-81b6-42c4-a28c-5df2182a289d.jpg","GeocacheFindCount":1193,"GeocacheHideCount":17,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":162246062,"CacheID":1433909,"LogGuid":"e9eec580-6831-40ba-8530-c9722017a142","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Schon vor ein paar Tagen die Karte entdeckt aber das loggen war uns nicht so klar...nun haben wir uns heute auch im Logbuch verewigt. Nette Idee, DfdC.","Created":"22/05/2011","Visited":"22/05/2011","UserName":"Flunin","MembershipLevel":3,"AccountID":3435189,"AccountGuid":"4c851b2a-967c-427d-91eb-268b5ffb0f0a","Email":"","AvatarImage":"","GeocacheFindCount":620,"GeocacheHideCount":2,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":161705502,"CacheID":1433909,"LogGuid":"0b303d23-fb26-4b29-b5d2-2bb8828682ae","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Nach nem kleinen Tipp dann doch noch loggen können :-)<br />DFDC","Created":"20/05/2011","Visited":"20/05/2011","UserName":"Leafhoppers","MembershipLevel":1,"AccountID":3766111,"AccountGuid":"37bd64d5-a74f-4a12-b040-460f83652198","Email":"","AvatarImage":"","GeocacheFindCount":588,"GeocacheHideCount":0,"ChallengesCompleted":7,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":161990811,"CacheID":1433909,"LogGuid":"1ac63b3e-075a-48b7-9a1f-222b19c71868","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Zusammen mit i-teg um 15:25 Uhr geloggt. <br />TFTC!<br />#488","Created":"21/05/2011","Visited":"19/05/2011","UserName":"justify-jay","MembershipLevel":1,"AccountID":3936481,"AccountGuid":"af49ff9e-5331-4565-97e8-5f5bf45e33b2","Email":"","AvatarImage":"198d173a-7efa-416c-b495-b15ed30f94a1.jpg","GeocacheFindCount":1105,"GeocacheHideCount":2,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":161988577,"CacheID":1433909,"LogGuid":"19a1ae8a-e3d7-492c-a866-002064968183","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Auf Spontantour zusammen mit justify-jay um 15:25 Uhr zum Logbuch durchgedrungen :-) ! <br />TFTC!<br />#488","Created":"21/05/2011","Visited":"19/05/2011","UserName":"i-teg","MembershipLevel":1,"AccountID":3936536,"AccountGuid":"a30caa8b-0ba4-4a20-875f-ac825eacbf41","Email":"","AvatarImage":"533a43c0-8416-452f-8011-f575dee42268.jpg","GeocacheFindCount":1105,"GeocacheHideCount":2,"ChallengesCompleted":2,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":161489085,"CacheID":1433909,"LogGuid":"0686f7dd-e12b-4b99-b7c7-24df895f48fb","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Schnell gefunden da unsere Vorlogger scheinbar den Cache nicht wieder ganz genau plaziert hatten. Weils so schnell ging ne leckeres Eis in der Sonne genossen.<br />Ein super Cache, vielen Dank dafür.<br />Kartoffelhunter","Created":"18/05/2011","Visited":"18/05/2011","UserName":"Kartoffelhunter","MembershipLevel":3,"AccountID":3579558,"AccountGuid":"344121a1-10f3-443a-9ff6-f90fc43ba8be","Email":"","AvatarImage":"61105259-e319-4793-9bc3-51aae0eb9e10.jpg","GeocacheFindCount":1027,"GeocacheHideCount":2,"ChallengesCompleted":3,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":160254911,"CacheID":1433909,"LogGuid":"f315eb63-43e2-48ad-a3b9-fc775dfc9e27","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Unsere erste gefundene Hannopoly-Karte, bei bestem Wetter. Und zur Belohnung ein Lecker Eis für Leona, Tomke und mich.","Created":"11/05/2011","Visited":"11/05/2011","UserName":"janko74","MembershipLevel":1,"AccountID":4460156,"AccountGuid":"bc9f2cab-dad8-465f-8b73-0d7d420e043c","Email":"","AvatarImage":"","GeocacheFindCount":4,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]}], "pageInfo": { "idx":1, "size": 25, "totalRows": 400, "rows": 400 } };
 //]]>
 </script>
 </form>
@@ -2072,38 +2141,14 @@ initalLogs = {"status":"success", "data": [{"LogID":196904781,"CacheID":1433909,
         });
     </script>
     
-    <script id="loc_favPointsWhatsThisDesc" type="text/html">
-        Geocaching Favorites is a simple way to track and share the caches that you enjoyed the most. For every 10 distinct caches that you have found, you will be able to Favorite 1 exceptional cache in your find history. The Favorites accumulated by a cache are displayed in search results and on the cache page so everyone can see which caches stand above the rest.
-    </script>
-    <script id="loc_favPointsWhatsThisTitle" type="text/html">
-        About Favorite Points
-    </script>
+    
     <script id="loc_favPointsScoreDesc" type="text/html">
         Favorites/Premium Logs
     </script>
     <script type="text/javascript" language="javascript">
             <!--
         
-            $('#uxFavPointsWhatsThis').qtip({
-                content: {
-                    text: $("#loc_favPointsWhatsThisDesc").html(),
-                    title: {
-                        text: $("#loc_favPointsWhatsThisTitle").html(),
-                        button: true
-                    }
-                },
-                position: {
-                    my: 'top center',
-                    at: 'bottom center'
-                },
-                show: {
-                    event: 'click'
-                },
-                hide: 'click unfocus',
-                style: {
-                    classes: 'ui-tooltip'
-                }
-            })
+
 
             var gotScore = false;
             var favDropDown = $('.favorite-dropdown');
@@ -2225,6 +2270,6 @@ initalLogs = {"status":"success", "data": [{"LogID":196904781,"CacheID":1433909,
     </div>
     <!-- End Quantcast tag -->
     
-    <!-- Server: WEB09; Build: Web.HotFix_20121016.3 -->
+    <!-- Server: WEB13; Build: Web.HotFix_20121211.1 -->
 </body>
 </html>
