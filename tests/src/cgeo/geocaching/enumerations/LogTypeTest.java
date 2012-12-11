@@ -13,7 +13,7 @@ public class LogTypeTest extends AndroidTestCase {
     public static void testGetByIconName() {
         assertEquals(LogType.UNKNOWN, LogType.getByIconName(""));
         assertEquals(LogType.UNKNOWN, LogType.getByIconName(null));
-        assertEquals(LogType.WEBCAM_PHOTO_TAKEN, LogType.getByIconName("icon_camera"));
+        assertEquals(LogType.WEBCAM_PHOTO_TAKEN, LogType.getByIconName("11"));
     }
 
     public static void testGetByType() {

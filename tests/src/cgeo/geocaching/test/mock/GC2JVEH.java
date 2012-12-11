@@ -114,7 +114,7 @@ public class GC2JVEH extends MockedCache {
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
-        logCounts.put(LogType.FOUND_IT, 66);
+        logCounts.put(LogType.FOUND_IT, 101);
         logCounts.put(LogType.NOTE, 7);
         logCounts.put(LogType.TEMP_DISABLE_LISTING, 1);
         logCounts.put(LogType.ENABLE_LISTING, 1);
