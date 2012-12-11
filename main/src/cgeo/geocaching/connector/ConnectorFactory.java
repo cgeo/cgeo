@@ -22,7 +22,7 @@ public final class ConnectorFactory {
             new OCConnector("OpenCaching.IT", "www.opencaching.it", "OC"),
             new OCConnector("OpenCaching.JP", "www.opencaching.jp", "OJ"),
             new OCConnector("OpenCaching.NO/SE", "www.opencaching.no", "OS"),
-            new OCConnector("OpenCaching.NL", "www.opencaching.nl", "OB"),
+            new OCApiConnector("OpenCaching.NL", "www.opencaching.nl", "OB", "PdzU8jzIlcfMADXaYN8j"),
             new OCApiConnector("OpenCaching.PL", "www.opencaching.pl", "OP", "GkxM47WkUkLQXXsZ9qSh"),
             new OCApiConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA"),
             new OXConnector(),
