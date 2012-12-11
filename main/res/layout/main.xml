@@ -33,7 +33,7 @@
 				android:layout_centerVertical="true"
 				android:layout_margin="4dip" />
 		<TextView android:id="@+id/status_message"
-				android:layout_width="wrap_content"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:layout_toRightOf="@id/status_icon"
 				android:layout_centerVertical="true"
