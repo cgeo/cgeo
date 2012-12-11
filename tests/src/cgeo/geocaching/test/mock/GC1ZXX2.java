@@ -85,14 +85,6 @@ public class GC1ZXX2 extends MockedCache {
     }
 
     @Override
-    public boolean isWatchlist() {
-        if ("blafoo".equals(this.getMockedDataUser())) {
-            return true;
-        }
-        return super.isWatchlist();
-    }
-
-    @Override
     public Date getHiddenDate() {
         try {
             return Login.parseGcCustomDate("16/10/2009", getDateFormat());

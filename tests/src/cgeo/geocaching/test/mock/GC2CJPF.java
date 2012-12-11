@@ -149,9 +149,9 @@ public class GC2CJPF extends MockedCache {
     public Map<LogType, Integer> getLogCounts() {
         Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
         logCounts.put(LogType.PUBLISH_LISTING, 1);
-        logCounts.put(LogType.FOUND_IT, 62);
+        logCounts.put(LogType.FOUND_IT, 119);
         logCounts.put(LogType.DIDNT_FIND_IT, 3);
-        logCounts.put(LogType.NOTE, 6);
+        logCounts.put(LogType.NOTE, 7);
         logCounts.put(LogType.ENABLE_LISTING, 2);
         logCounts.put(LogType.TEMP_DISABLE_LISTING, 2);
         logCounts.put(LogType.OWNER_MAINTENANCE, 3);

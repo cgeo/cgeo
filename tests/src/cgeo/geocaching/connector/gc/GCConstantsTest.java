@@ -20,14 +20,9 @@ public class GCConstantsTest extends AndroidTestCase {
     }
 
     public static void testCacheCount() {
-        assertCacheCount(149, "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 149</strong>");
-        assertCacheCount(692, MockedCache.readCachePage("GC2CJPF")); // # of caches found by blafoo at the point of time creating the mocked data
-        assertCacheCount(1510, "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 1,510&nbsp;&middot;&nbsp;<img src=\"/images/challenges/types/sm/challenge.png\" title=\"Challenges Completed\" /> 2</strong>");
-        assertCacheCount(67, "<strong><img title=\"Caches Found\" src=\"/images/icons/icon_smile.png\"/> 67</strong>");
-        assertCacheCount(1067, "<strong><img title=\"Caches Found\" src=\"/images/icons/icon_smile.png\"/> 1,067</strong>");
-        // now checking usage of "." as thousands separator
-        assertCacheCount(1510, "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 1.510&nbsp;&middot;&nbsp;<img src=\"/images/challenges/types/sm/challenge.png\" title=\"Challenges Completed\" /> 2</strong>");
-        assertCacheCount(1067, "<strong><img title=\"Caches Found\" src=\"/images/icons/icon_smile.png\"/> 1.067</strong>");
+        assertCacheCount(1510, "<strong style=\"display:block\"> 1.510 Caches Found</strong>");
+        assertCacheCount(1510, "<strong style=\"display:block\"> 1,510 Caches Found</strong>");
+        assertCacheCount(725, MockedCache.readCachePage("GC2CJPF")); // # of caches found by blafoo at the point of time creating the mocked data
     }
 
     private static void assertCacheCount(final int count, final String html) {
