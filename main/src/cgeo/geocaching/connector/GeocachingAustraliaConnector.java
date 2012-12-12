@@ -13,7 +13,7 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
 
     @Override
     public String getCacheUrl(final cgCache cache) {
-        return "http://" + getHost() + "/cache/" + cache.getGeocode();
+        return getCacheUrlPrefix() + cache.getGeocode();
     }
 
     @Override
@@ -24,5 +24,10 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
     @Override
     public boolean canHandle(final String geocode) {
         return (StringUtils.startsWithIgnoreCase(geocode, "GA") || StringUtils.startsWithIgnoreCase(geocode, "TP")) && isNumericId(geocode.substring(2));
+    }
+
+    @Override
+    protected String getCacheUrlPrefix() {
+        return "http://" + getHost() + "/cache/";
     }
 }

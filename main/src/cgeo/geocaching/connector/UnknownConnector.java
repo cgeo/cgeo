@@ -25,4 +25,9 @@ public class UnknownConnector extends AbstractConnector {
     public boolean canHandle(final String geocode) {
         return StringUtils.isNotBlank(geocode);
     }
+
+    @Override
+    protected String getCacheUrlPrefix() {
+        return null;
+    }
 }

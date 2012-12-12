@@ -4,6 +4,8 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.geopoint.Viewport;
 
+import org.apache.commons.lang3.StringUtils;
+
 public abstract class AbstractConnector implements IConnector {
 
     @Override
@@ -65,4 +67,18 @@ public abstract class AbstractConnector implements IConnector {
     public String[] getTokens() {
         return null;
     }
+
+    @Override
+    public String getGeocodeFromUrl(final String url) {
+        final String urlPrefix = getCacheUrlPrefix();
+        if (StringUtils.startsWith(url, urlPrefix)) {
+            String geocode = url.substring(urlPrefix.length());
+            if (canHandle(geocode)) {
+                return geocode;
+            }
+        }
+        return null;
+    }
+
+    abstract protected String getCacheUrlPrefix();
 }
