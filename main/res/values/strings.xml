@@ -1139,6 +1139,7 @@
     · Allow HTML in trackable description\n
     · Live map filter now also working for basic members\n
     · Improved stability for large GPX file import\n
+    · Adapting to geocaching.com changes\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
