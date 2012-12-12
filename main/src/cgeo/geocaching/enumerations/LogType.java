@@ -32,7 +32,7 @@ public enum LogType {
     UPDATE_COORDINATES(47, "47", "update coordinates", R.string.log_update),
     DISCOVERED_IT(48, "48", "discovered it", R.string.log_discovered),
     POST_REVIEWER_NOTE(18, "68", "post reviewer note", R.string.log_reviewer),
-    VISIT(1001, "1001", "visit", R.string.log_tb_visit),
+    VISIT(1001, "75", "visit", R.string.log_tb_visit),
     WEBCAM_PHOTO_TAKEN(11, "11", "webcam photo taken", R.string.log_webcam),
     ANNOUNCEMENT(74, "74", "announcement", R.string.log_announcement),
     MOVE_COLLECTION(69, "69", "unused_collection", R.string.log_movecollection),
