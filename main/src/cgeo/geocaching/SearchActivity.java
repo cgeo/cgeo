@@ -98,9 +98,14 @@ public class SearchActivity extends AbstractActivity {
      * @return true if a search was performed, else false
      */
     private boolean instantSearch(final String query, final boolean keywordSearch) {
+        // first check if this was a scanned URL
+        String geocode = ConnectorFactory.getGeocodeFromURL(query);
 
-        // Check if any connector can handle the query as a geocode
-        final String geocode = StringUtils.trim(query);
+        // otherwise see if this is a pure geocode
+        if (StringUtils.isEmpty(geocode)) {
+            geocode = StringUtils.trim(query);
+        }
+
         final IConnector connector = ConnectorFactory.getConnector(geocode);
         if (connector instanceof ISearchByGeocode) {
             final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);

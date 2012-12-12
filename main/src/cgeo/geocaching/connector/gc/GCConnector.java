@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter {
 
+    private static final String HTTP_COORD_INFO = "http://coord.info/";
     private static GCConnector instance;
     private static final Pattern gpxZipFilePattern = Pattern.compile("\\d{7,}(_.+)?\\.zip", Pattern.CASE_INSENSITIVE);
 
@@ -168,4 +169,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return true;
     }
 
+    @Override
+    protected String getCacheUrlPrefix() {
+        return HTTP_COORD_INFO;
+    }
 }

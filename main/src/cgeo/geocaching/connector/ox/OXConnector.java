@@ -27,7 +27,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
 
     @Override
     public String getCacheUrl(cgCache cache) {
-        return "http://www.opencaching.com/#!geocache/" + cache.getGeocode();
+        return getCacheUrlPrefix() + cache.getGeocode();
     }
 
     @Override
@@ -63,5 +63,10 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
             return null;
         }
         return new SearchResult(caches);
+    }
+
+    @Override
+    protected String getCacheUrlPrefix() {
+        return "http://www.opencaching.com/#!geocache/";
     }
 }

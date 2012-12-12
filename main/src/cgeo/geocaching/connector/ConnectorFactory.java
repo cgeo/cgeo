@@ -81,4 +81,14 @@ public final class ConnectorFactory {
         return GCConnector.getInstance().searchByViewport(viewport, tokens);
     }
 
+    public static String getGeocodeFromURL(final String url) {
+        for (IConnector connector : connectors) {
+            String geocode = connector.getGeocodeFromUrl(url);
+            if (StringUtils.isNotBlank(geocode)) {
+                return geocode;
+            }
+        }
+        return null;
+    }
+
 }

@@ -59,4 +59,10 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertTrue(ConnectorFactory.getConnector("   OZ 12345   ") instanceof UnknownConnector);
     }
 
+    public static void testGetGeocodeFromUrl() {
+        assertEquals("GC34PLO", ConnectorFactory.getGeocodeFromURL("http://coord.info/GC34PLO"));
+        assertEquals("OX1234", ConnectorFactory.getGeocodeFromURL("http://www.opencaching.com/#!geocache/OX1234"));
+        // make sure that a mixture of different connector and geocode is recognized as invalid
+        assertNull(ConnectorFactory.getGeocodeFromURL("http://www.opencaching.com/#!geocache/" + "GC12345"));
+    }
 }

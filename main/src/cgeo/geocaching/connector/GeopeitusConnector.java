@@ -13,7 +13,7 @@ public class GeopeitusConnector extends AbstractConnector {
 
     @Override
     public String getCacheUrl(final cgCache cache) {
-        return "http://" + getHost() + "/aare/" + StringUtils.stripStart(cache.getGeocode().substring(2), "0");
+        return getCacheUrlPrefix() + StringUtils.stripStart(cache.getGeocode().substring(2), "0");
     }
 
     @Override
@@ -24,5 +24,10 @@ public class GeopeitusConnector extends AbstractConnector {
     @Override
     public boolean canHandle(String geocode) {
         return StringUtils.startsWith(geocode, "GE") && isNumericId(geocode.substring(2));
+    }
+
+    @Override
+    protected String getCacheUrlPrefix() {
+        return "http://" + getHost() + "/aare/";
     }
 }

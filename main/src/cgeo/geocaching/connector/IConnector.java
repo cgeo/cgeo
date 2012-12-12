@@ -37,7 +37,7 @@ public interface IConnector {
 
     /**
      * enable/disable favorite points controls in cache details
-     * 
+     *
      * @return
      */
     public boolean supportsFavoritePoints();
@@ -103,5 +103,13 @@ public interface IConnector {
      * @return
      */
     public String[] getTokens();
+
+    /**
+     * extract a geocode from the given URL, if this connector can handle that URL somehow
+     * 
+     * @param url
+     * @return
+     */
+    public String getGeocodeFromUrl(final String url);
 
 }

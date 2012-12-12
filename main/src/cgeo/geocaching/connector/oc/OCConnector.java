@@ -33,7 +33,7 @@ public class OCConnector extends AbstractConnector {
 
     @Override
     public String getCacheUrl(cgCache cache) {
-        return "http://" + host + "/viewcache.php?wp=" + cache.getGeocode();
+        return getCacheUrlPrefix() + cache.getGeocode();
     }
 
     @Override
@@ -45,4 +45,10 @@ public class OCConnector extends AbstractConnector {
     public boolean isZippedGPXFile(String fileName) {
         return gpxZipFilePattern.matcher(fileName).matches();
     }
+
+    @Override
+    protected String getCacheUrlPrefix() {
+        return "http://" + host + "/viewcache.php?wp=";
+    }
+
 }
