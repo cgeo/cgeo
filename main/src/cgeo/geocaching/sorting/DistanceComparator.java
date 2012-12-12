@@ -11,8 +11,22 @@ import java.util.List;
  */
 public class DistanceComparator extends AbstractCacheComparator {
 
+    final private Geopoint coords;
+    final private List<cgCache> list;
+    private boolean cachedDistances;
+
     public DistanceComparator(final Geopoint coords, List<cgCache> list) {
-        // calculate all distances to avoid duplicate calculations during sorting
+        this.coords = coords;
+        this.list = list;
+    }
+
+    /**
+     * calculate all distances only once to avoid costly re-calculation of the same distance during sorting
+     */
+    private void calculateAllDistances() {
+        if (cachedDistances) {
+            return;
+        }
         for (cgCache cache : list) {
             if (cache.getCoords() != null) {
                 cache.setDistance(coords.distanceTo(cache.getCoords()));
@@ -21,6 +35,7 @@ public class DistanceComparator extends AbstractCacheComparator {
                 cache.setDistance(null);
             }
         }
+        cachedDistances = true;
     }
 
     @Override
@@ -30,6 +45,7 @@ public class DistanceComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final cgCache cache1, final cgCache cache2) {
+        calculateAllDistances();
         if (cache1.getCoords() == null && cache2.getCoords() == null) {
             return 0;
         }

@@ -242,7 +242,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
             activity.handleCachesLoaded();
         }
-    };
+    }
+
     private Handler loadNextPageHandler = new Handler() {
 
         @Override
@@ -912,7 +913,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     /**
      * called from the filter bar view
      */
-    public void showFilterMenu(@SuppressWarnings("unused") final View view) {
+    @Override
+    public void showFilterMenu(final View view) {
         new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>() {
             @Override
             public void run(IFilter selectedFilter) {

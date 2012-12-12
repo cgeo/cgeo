@@ -12,6 +12,7 @@ import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
+import cgeo.geocaching.sorting.InverseComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
@@ -43,6 +44,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -64,6 +66,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     final private Resources res;
     /** Resulting list of caches */
     final private List<cgCache> list;
+    private boolean inverseSort = false;
 
     private static final int SWIPE_MIN_DISTANCE = 60;
     private static final int SWIPE_MAX_OFF_PATH = 100;
@@ -149,6 +152,14 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
      * @param comparator
      */
     public void setComparator(final CacheComparator comparator) {
+        // selecting the same sorting twice will toggle the order
+        if (cacheComparator != null && comparator != null && cacheComparator.getClass() == comparator.getClass()) {
+            inverseSort = !inverseSort;
+        }
+        else {
+            // always reset the inversion for a new sorting criteria
+            inverseSort = false;
+        }
         cacheComparator = comparator;
         forceSort();
     }
@@ -257,7 +268,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             updateSortByDistance();
         }
         else {
-            Collections.sort(list, cacheComparator);
+            Collections.sort(list, getPotentialInversion(cacheComparator));
         }
 
         notifyDataSetChanged();
@@ -292,7 +303,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             return;
         }
         final ArrayList<cgCache> oldList = new ArrayList<cgCache>(list);
-        Collections.sort(list, new DistanceComparator(coords, list));
+        Collections.sort(list, getPotentialInversion(new DistanceComparator(coords, list)));
 
         // avoid an update if the list has not changed due to location update
         if (list.equals(oldList)) {
@@ -300,6 +311,13 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
         notifyDataSetChanged();
         lastSort = System.currentTimeMillis();
+    }
+
+    private Comparator<? super cgCache> getPotentialInversion(final CacheComparator comparator) {
+        if (inverseSort) {
+            return new InverseComparator(comparator);
+        }
+        return comparator;
     }
 
     private boolean isSortedByDistance() {
