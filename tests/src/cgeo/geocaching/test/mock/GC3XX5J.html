@@ -1,0 +1,2167 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head id="ctl00_Head1"><meta charset="utf-8" />
+    <!--[if IE]><![endif]-->
+    <title>
+	GC3XX5J Zaraščen Tir (Traditional Cache) in Slovenia created by David & Ajda
+</title><meta name="DC.title" content="Geocaching - The Official Global GPS Cache Hunt Site" /><meta name="author" content="Groundspeak, Inc." /><meta name="DC.creator" content="Groundspeak, Inc." /><meta name="Copyright" content="Copyright (c) 2000-2012 Groundspeak, Inc. All Rights Reserved." /><!-- Copyright (c) 2000-2012 Groundspeak, Inc. All Rights Reserved. --><meta name="description" content="Geocaching is a treasure hunting game where you use a GPS to hide and seek containers with other participants in the activity. Geocaching.com is the listing service for geocaches around the world." /><meta name="DC.subject" content="Geocaching is a treasure hunting game where you use a GPS to hide and seek containers with other participants in the activity. Geocaching.com is the listing service for geocaches around the world." /><meta http-equiv="imagetoolbar" content="no" /><meta name="distribution" content="global" /><meta name="MSSmartTagsPreventParsing" content="true" /><meta name="rating" content="general" /><meta name="revisit-after" content="1 days" /><meta name="robots" content="all" /><meta http-equiv="X-UA-Compatible" content="IE=8" /><link rel="icon" href="/favicon.ico" /><link rel="shortcut icon" href="/favicon.ico" /><link rel="apple-touch-icon" href="/apple-touch-icon.png" /><link rel="stylesheet" type="text/css" media="all" href="../css/blueprint/src/reset.css" /><link rel="stylesheet" type="text/css" media="all" href="../css/blueprint/src/typography.css" /><link rel="stylesheet" type="text/css" media="screen,projection" href="../css/blueprint/src/grid.css" />
+    <!--[if lt IE 8]>
+			<link rel="stylesheet" type="text/css" media="all" href="../css/blueprint/ie.css" />
+		<![endif]-->
+    <link id="uxCssMaster" rel="stylesheet" type="text/css" media="screen,projection" href="../css/tlnMasterScreen.css?r=1" /><link id="uxCssMain" rel="stylesheet" type="text/css" media="all" href="../css/tlnMain.css?r=1" /><link rel="Stylesheet" type="text/css" media="all" href="../css/jqueryui1810/jquery-ui-1.8.10.custom.css" /><link rel="stylesheet" type="text/css" media="all" href="/js/jquery_plugins/jquery.jgrowl.css" /><link rel="stylesheet" type="text/css" media="print" href="../css/tlnMasterPrint.css" />
+    <script type="text/javascript" src="/js/modernizr-1.7.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.truncate.min.js"></script>
+    
+    
+    
+    <link href="/css/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="/js/jquery_plugins/icalendar/jquery.icalendar.css" rel="stylesheet" type="text/css" />
+    <link href="/js/jquery_plugins/tipTip/tipTip.css" rel="stylesheet" type="text/css" />
+    <link href="/js/jquery_plugins/qtip/jquery.qtip.css" rel="stylesheet" type="text/css" />
+    <!--[if lte IE 8]>
+        <style type="text/css" media="all">
+            legend{
+            position: absolute;
+            top: -.6em;
+            left: 1em;
+            line-height: 1.3;
+            }
+            fieldset p{
+            margin-top:1em;
+            }
+            img.CacheNoteHelpImg{
+            top:-.2em;
+            }
+        </style>
+        <![endif]-->
+    <style type="text/css" media="screen,projection">
+            #otherSearchOptions li
+            {
+                list-style-image: none;
+                list-style-position: outside;
+                list-style-type: none;
+            }
+            .ff
+            {
+                font-family: "Andale Mono" , "Courier New" ,Courier,monospace;
+            }
+            .fr
+            {
+                margin-top: 1.5em;
+                float: right;
+            }
+            .fl
+            {
+                float: left;
+            }
+            .clsCell
+            {
+                border: 1px solid #c0cee3;
+                font-size: 80%;
+                background-color: #fff;
+            }
+            .clsResultTitle, .clsResultTitleNoBold
+            {
+                color: #0000de;
+            }
+            .clsResultDescription
+            {
+                color: #333;
+            }
+            .clsURL
+            {
+                color: #999;
+            }
+            a.title:link, a.title:visited, a.title:hover, a.title:active
+            {
+                color: #000;
+                text-decoration: underline;
+            }
+            a.title
+            {
+                text-align: right;
+                font-size: 10px;
+                font-family: arial,sans-serif;
+                padding: 0 1px 0 0;
+            }
+            #mapSizePager a:hover
+            {
+                font-weight: bold;
+            }
+            #mapSizePager ul
+            {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            #mapSizePager li
+            {
+                float: left;
+                list-style: none;
+            }
+            #mapSizePager li a
+            {
+                font-family: verdana,sans-serif;
+                font-size: x-small;
+                display: block;
+                margin: 0 2px 0 0;
+                padding: 4px;
+                text-decoration: none;
+                border: solid 1px #c0c0c0;
+                height: 10px;
+                min-width: 10px;
+                cursor: pointer;
+            }
+            #mapPrintingNotes
+            {
+                width: 280px;
+                text-align: left;
+                overflow: auto;
+            }
+            .inplace_field {
+                width:100%;
+                resize: none;
+            }
+            legend.note{
+            background:url('../images/icons/16/user_note.png') no-repeat 0 0;
+            padding-left:18px;
+            }
+            legend.warning{
+            background:url('../images/icons/16/take_note.png') no-repeat 0 0;
+            padding-left:18px;
+            }
+            fieldset.CacheNote{
+            border-color: #e9a24c !important;
+            background-color:#ffffde;
+            position:relative;
+            }
+            .CacheNoteHelpImg{
+            position:relative;
+            cursor:pointer;
+            top:-1em;
+            right:-.75em;
+            float:right;
+            }
+            .InformationWidget h3{
+            margin-bottom:.5em;
+            }
+            .InformationWidget .AlignRight{
+            font-size:.8em;
+            }
+            #tiptip_content{
+                *background-color:#000;
+                box-shadow:none;
+            }
+            .maxed{
+                color:#992a2a;
+            }
+
+            
+            span.ccu-parseverify-distance img{
+                text-align:center !important;
+                vertical-align:text-bottom !important;
+            }
+            .edit-cache-coordinates{
+                text-decoration: none;
+                color: #000 !important;
+                background: url(/images/icons/16/edit.png) no-repeat right 0;
+                padding:2px 20px 2px 0px;
+                margin-right:4px;
+            }
+            .ccc-coord{
+                cursor: text;
+                font-family: Courier New, Sans-Serif;
+            }
+            .ccu-update dl {
+                margin-bottom:.25em;
+            }
+            .ccu-update dt{
+                float:left;
+                min-width:90px;
+            }
+            .ccu-update .ui-button-text-only .ui-button-text{
+                padding:.3em .75em;
+            }
+            .ccu-parseverify-coords{
+                font-style:italic;
+                margin-right:.25em;
+            }
+            .ccu-parseverify-accept, .ccu-parseverify-cancel{
+                margin-top:-5px;
+            }
+            .ui-tooltip-widget .ui-tooltip-content{
+                border-width:1px;
+                background-color:#fff;
+                border-color:#c0cee3;
+                color:#594a42;
+                padding:1em;
+                width:420px;
+            }
+            .myLatLon {
+            border-bottom:2px solid #c0cee3;
+            font-style:italic;
+            }
+            .leaflet-control-attribution{
+            padding:3px !important;
+            }
+            .leaflet-control-attribution img{
+            vertical-align:middle;
+            }
+        </style>
+    <link rel="Stylesheet" type="text/css" media="screen" href="/hide/css/CSPScreen.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="/js/leaflet/v5/leaflet.css" />
+    <!--[if IE]>
+            <link rel="stylesheet" type="text/css" media="all" href="/js/leaflet/v5/leaflet.ie.css" />
+        <![endif]-->
+    <script type="text/javascript" language="javascript" src="/js/leaflet/v5/leaflet.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagemethods.js"></script>
+    <script type="text/javascript" src="/js/geometa.js"></script>
+    <script type="text/javascript">
+        var userToken = null,
+                urlParams = {},
+                mapLatLng = null,
+                cmapAdditionalWaypoints = [],
+                initalLogs = null, totalLogs = 0, includeAvatars = false;
+
+        (function () {
+            var e,
+            d = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); },
+            q = window.location.search.substring(1),
+            r = /([^&=]+)=?([^&]*)/g;
+
+            while (e = r.exec(q)) {
+                urlParams[d(e[1])] = d(e[2]);
+            }
+        })();
+    </script>
+<meta name="og:site_name" content="Geocaching.com" property="og:site_name" /><meta name="og:type" content="article" property="og:type" /><meta name="fb:app_id" content="251051881589204" property="fb:app_id" /><meta name="og:url" content="http://www.geocaching.com/seek/cache_details.aspx?wp=GC3XX5J&amp;Submit6=Go" property="og:url" /><meta name="og:description" content="Use a smartphone or GPS device to navigate to the provided coordinates. Look for a small hidden container. When you find it, write your name and date in the logbook. If you take something from the container, leave something in exchange. The terrain is 2 and difficulty is 1.5 (out of 5)." property="og:description" /><meta name="og:image" content="http://www.geocaching.com/images/facebook/wpttypes/2.png" property="og:image" /><meta name="og:title" content="Zaraščen Tir" property="og:title" /><meta name="description" content="Zaraščen Tir (GC3XX5J) was created by David &amp; Ajda on 10/01/2012. It&#39;s a Small size geocache, with difficulty of 1.5, terrain of 2. It&#39;s located in Slovenia. Kadar zbolimo nam pomaga...When we get sick, they are helpful... SLO:tir je danes zapuščen, včasih pa so ga uporabljala različna podjetja, da so po njem dostavljali material in odvažali končne izdelke." /></head>
+<body background="https://lh6.googleusercontent.com/-PoDn9PmtYmg/UGnOZLEQboI/AAAAAAAAAHM/hBXxerWnSdA/s254/lek-verovskova.jpg" class="CacheDetailsPage">
+    <form name="aspnetForm" method="post" action="cache_details.aspx?wp=GC3XX5J&amp;Submit6=Go" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATEFIELDCOUNT" id="__VIEWSTATEFIELDCOUNT" value="2" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTc1MjcwNzgxNg8WAh4EQy5JRCgpWVN5c3RlbS5JbnQ2NCwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BzMyMjA2NzIWAmYPZBYGZg9kFgoCBg8WAh4EVGV4dAViPG1ldGEgbmFtZT0iQ29weXJpZ2h0IiBjb250ZW50PSJDb3B5cmlnaHQgKGMpIDIwMDAtMjAxMiBHcm91bmRzcGVhaywgSW5jLiBBbGwgUmlnaHRzIFJlc2VydmVkLiIgLz5kAgcPFgIfAQVHPCEtLSBDb3B5cmlnaHQgKGMpIDIwMDAtMjAxMiBHcm91bmRzcGVhaywgSW5jLiBBbGwgUmlnaHRzIFJlc2VydmVkLiAtLT5kAhoPFgIeBGhyZWYFHX4vY3NzL3Rsbk1hc3RlclNjcmVlbi5jc3M/cj0xZAIbDxYCHwIFFX4vY3NzL3Rsbk1haW4uY3NzP3I9MWQCIA8WAh4HVmlzaWJsZWhkAgEPZBYSAgUPFgIfAWRkAggPFgIfA2cWCAIBDw8WAh4ISW1hZ2VVcmwFTmh0dHA6Ly9pbWcuZ2VvY2FjaGluZy5jb20vdXNlci9hdmF0YXIvZThhOTdhMDUtYTA1MS00ZGE5LWJjOTMtNmE4MzBiODY2YWZmLmpwZ2RkAgMPFgIfAQVsSGVsbG8sIDxhIGhyZWY9Ii9teS9kZWZhdWx0LmFzcHgiIHRpdGxlPSJWaWV3IFByb2ZpbGUgZm9yIEpvU2FNYUphIiBjbGFzcz0iU2lnbmVkSW5Qcm9maWxlTGluayI+Sm9TYU1hSmE8L2E+ZAIFDw8WAh4LTmF2aWdhdGVVcmwFlQFodHRwczovL3d3dy5nZW9jYWNoaW5nLmNvbS9sb2dpbi9kZWZhdWx0LmFzcHg/UkVTRVQ9WSZyZWRpcj1odHRwJTNhJTJmJTJmd3d3Lmdlb2NhY2hpbmcuY29tJTJmc2VlayUyZmNhY2hlX2RldGFpbHMuYXNweCUzZndwJTNkR0MzWFg1SiUyNlN1Ym1pdDYlM2RHb2RkAgsPFgIfAQUQMzcyIENhY2hlcyBGb3VuZGQCDQ8WAh8DZxYCAg0PDxYCHwUFQH4vdHJhY2svc2VhcmNoLmFzcHg/bz0xJnVpZD00ZDQxNjQ2MS1kMWE3LTRjYzUtOGVlNy0zMzZiYjkxMGZlYjhkZAIQDw8WAh8DZ2RkAiwPZBYEAgMPFgIfAQUHRW5nbGlzaGQCBQ8WAh4LXyFJdGVtQ291bnQCEBYgZg9kFgICAQ8PFggeD0NvbW1hbmRBcmd1bWVudAUFZW4tVVMeC0NvbW1hbmROYW1lBQ1TZXRUZW1wTG9jYWxlHwEFB0VuZ2xpc2geEENhdXNlc1ZhbGlkYXRpb25oZGQCAQ9kFgICAQ8PFggfBwUFZGUtREUfCAUNU2V0VGVtcExvY2FsZR8BBQdEZXV0c2NoHwloZGQCAg9kFgICAQ8PFggfBwUFZnItRlIfCAUNU2V0VGVtcExvY2FsZR8BBQlGcmFuw6dhaXMfCWhkZAIDD2QWAgIBDw8WCB8HBQVwdC1QVB8IBQ1TZXRUZW1wTG9jYWxlHwEFClBvcnR1Z3XDqnMfCWhkZAIED2QWAgIBDw8WCB8HBQVjcy1DWh8IBQ1TZXRUZW1wTG9jYWxlHwEFCcSMZcWhdGluYR8JaGRkAgUPZBYCAgEPDxYIHwcFBXN2LVNFHwgFDVNldFRlbXBMb2NhbGUfAQUHU3ZlbnNrYR8JaGRkAgYPZBYCAgEPDxYIHwcFBWVzLUVTHwgFDVNldFRlbXBMb2NhbGUfAQUIRXNwYcOxb2wfCWhkZAIHD2QWAgIBDw8WCB8HBQVpdC1JVB8IBQ1TZXRUZW1wTG9jYWxlHwEFCEl0YWxpYW5vHwloZGQCCA9kFgICAQ8PFggfBwUFbmwtTkwfCAUNU2V0VGVtcExvY2FsZR8BBQpOZWRlcmxhbmRzHwloZGQCCQ9kFgICAQ8PFggfBwUFY2EtRVMfCAUNU2V0VGVtcExvY2FsZR8BBQdDYXRhbMOgHwloZGQCCg9kFgICAQ8PFggfBwUFcGwtUEwfCAUNU2V0VGVtcExvY2FsZR8BBQZQb2xza2kfCWhkZAILD2QWAgIBDw8WCB8HBQVldC1FRR8IBQ1TZXRUZW1wTG9jYWxlHwEFBUVlc3RpHwloZGQCDA9kFgICAQ8PFggfBwUFbmItTk8fCAUNU2V0VGVtcExvY2FsZR8BBQ5Ob3JzaywgQm9rbcOlbB8JaGRkAg0PZBYCAgEPDxYIHwcFBWtvLUtSHwgFDVNldFRlbXBMb2NhbGUfAQUJ7ZWc6rWt7Ja0HwloZGQCDg9kFgICAQ8PFggfBwUFaHUtSFUfCAUNU2V0VGVtcExvY2FsZR8BBQZNYWd5YXIfCWhkZAIPD2QWAgIBDw8WCB8HBQVyby1STx8IBQ1TZXRUZW1wTG9jYWxlHwEFCFJvbcOibsSDHwloZGQCLg9kFgICAw8WAh8DaGQCLw8WAh4FY2xhc3MFDHNwYW4tMjQgbGFzdBYCAgEPZBYsAgEPZBYCZg9kFgICAQ8PFgIfAQUHR0MzWFg1SmRkAgIPFgIfAQWmATxhIGhyZWY9Ii9hYm91dC9jYWNoZV90eXBlcy5hc3B4IiB0YXJnZXQ9Il9ibGFuayIgdGl0bGU9IkFib3V0IENhY2hlIFR5cGVzIj48aW1nIHNyYz0iL2ltYWdlcy9XcHRUeXBlcy8yLmdpZiIgYWx0PSJUcmFkaXRpb25hbCBDYWNoZSIgdGl0bGU9IlRyYWRpdGlvbmFsIENhY2hlIiAvPjwvYT5kAgYPZBYEAgEPFgIfA2dkAgYPFgIfA2hkAgsPZBYEAgEPFgIfAQUBMWQCBQ8PFgIfBQVEL3NlZWsvY2FjaGVfZmF2b3JpdGVkLmFzcHg/Z3VpZD01MWU0MGRlYy02MjcyLTRkYWQtOTM0Yi1lMTc1ZGFhYWMyNjVkZAINDw8WAh8DaGRkAhAPFgIfA2hkAhEPFgIfA2hkAhIPZBYMAgMPFgIeBXN0eWxlBQ9kaXNwbGF5OmlubGluZTsWAgIBDxYCHwEFG1VUTTogMzNUIEUgNDYxMzQwIE4gNTEwMzEwOWQCDQ8PFgIfBQUzY2RwZi5hc3B4P2d1aWQ9NTFlNDBkZWMtNjI3Mi00ZGFkLTkzNGItZTE3NWRhYWFjMjY1ZGQCDw8PFgIfBQU4Y2RwZi5hc3B4P2d1aWQ9NTFlNDBkZWMtNjI3Mi00ZGFkLTkzNGItZTE3NWRhYWFjMjY1JmxjPTVkZAIRDw8WAh8FBTljZHBmLmFzcHg/Z3VpZD01MWU0MGRlYy02MjcyLTRkYWQtOTM0Yi1lMTc1ZGFhYWMyNjUmbGM9MTBkZAITDw8WBB8FBXpodHRwOi8vbWFwcy5nb29nbGUuY29tL21hcHM/Zj1kJmhsPWVuJnNhZGRyPTUyLjIxNjI1LDkuNzE0NDgzIChIb21lIExvY2F0aW9uKSZkYWRkcj00Ni4wODA0NjcsMTQuNShaYXJhJWM1JWExJWM0JThkZW4rVGlyKR4GVGFyZ2V0BQZfYmxhbmtkZAIbD2QWCAIBDw8WBB4JRm9yZUNvbG9yDB4EXyFTQgIEZGQCAw8PFgQfDQwfDgIEZGQCBQ8PFgIfA2cWAh4Hb25jbGljawU7czJncHMoJzUxZTQwZGVjLTYyNzItNGRhZC05MzRiLWUxNzVkYWFhYzI2NScpO3JldHVybiBmYWxzZTtkAgcPDxYCHwNnFgIfDwUgczJwaG9uZSgnR0MzWFg1SicpO3JldHVybiBmYWxzZTtkAhQPFgIfA2dkAhcPZBYIZg8WAh8DaGQCAQ8PFgIfA2hkZAICDw8WAh8DaGRkAgMPFgIfA2hkAhgPZBYCAgMPDxYCHwEFB0RlY3J5cHRkZAIZDxYCHwEFQkJxem54YXYgeG56cmEgYm8gZ3ZlaCAvIEVyemJpciBndXIgZmdiYXIganZwdSB5dnJmIG9yZnZxciBndXIgZW52eWQCHA8WAh8DaGQCHQ8PFgIfA2hkFgICAw8PFgIfA2hkZAIeDxYCHwNnZAIfDxYCHwNoZAIiD2QWAgIBD2QWBAIBDw8WAh8BBf8DPGlmcmFtZSB0eXBlPSJpZnJhbWUiIHNyYz0iaHR0cDovL2Fkcy5ncm91bmRzcGVhay5jb20vYS5hc3B4P1pvbmVJRD05JlRhc2s9R2V0JlNpdGVJRD0xJlg9JzM3NWNiNmJiY2NhODQ3MjI5NGIzYjJkNTkzMDE5NjA4JyIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyNDAiIE1hcmdpbndpZHRoPSIwIiBNYXJnaW5oZWlnaHQ9IjAiIEhzcGFjZT0iMCIgVnNwYWNlPSIwIiBGcmFtZWJvcmRlcj0iMCIgU2Nyb2xsaW5nPSJubyIgc3R5bGU9IndpZHRoOjEyMHB4O0hlaWdodDoyNDBweDsiPjxhIGhyZWY9Imh0dHA6Ly9hZHMuZ3JvdW5kc3BlYWsuY29tL2EuYXNweD9ab25lSUQ9OSZUYXNrPUNsaWNrJjtNb2RlPUhUTUwmU2l0ZUlEPTEiIHRhcmdldD0iX2JsYW5rIj48aW1nIHNyYz0iaHR0cDovL2Fkcy5ncm91bmRzcGVhay5jb20vYS5hc3B4P1pvbmVJRD05JlRhc2s9R2V0Jk1vZGU9SFRNTCZTaXRlSUQ9MSIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIyNDAiIGJvcmRlcj0iMCIgYWx0PSIiIC8+PC9hPjwvaWZyYW1lPmRkAgMPFgIeCWlubmVyaHRtbAUTQWR2ZXJ0aXNpbmcgd2l0aCBVc2QCJg9kFgQCBQ8PFgIfA2dkZAIJDw8WAh8FBTx+L3RyYWNrL3NlYXJjaC5hc3B4P3dpZD01MWU0MGRlYy02MjcyLTRkYWQtOTM0Yi1lMTc1ZGFhYWMyNjVkZAIpD2QWFgIBDw8WAh8DaGRkAgMPZBYCAgEPDxYCHwUFRS9oaWRl" />
+<input type="hidden" name="__VIEWSTATE1" id="__VIEWSTATE1" value="L3dwdGxpc3QuYXNweD9SZWZXcHRJRD01MWU0MGRlYy02MjcyLTRkYWQtOTM0Yi1lMTc1ZGFhYWMyNjUmRFM9MWRkAgcPDxYGHgZSRFMuSUQLKXZHcm91bmRzcGVhay5XZWIuR1BYLldwdERhdGFTb3VyY2VzLCBUdWNzb24uQ29tbW9uLkxlZ2FjeSwgVmVyc2lvbj0zLjAuNDcyOC4xNjE1MiwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAR4HUldQVC5JRCgrBAczMjIwNjcyHwNoZGQCCQ8PFgIfA2dkFgICAQ8PFgQfBQUoL21hcC9kZWZhdWx0LmFzcHg/bGF0PTQ2LjA4MDQ2NyZsbmc9MTQuNR8DZ2RkAhEPDxYCHwUFIy9zZWVrL25lYXJlc3QuYXNweD91PURhdmlkKyUyNitBamRhZGQCFQ8PFgIfBQUkL3NlZWsvbmVhcmVzdC5hc3B4P3VsPURhdmlkKyUyNitBamRhZGQCGQ9kFgoCAw8PFgIfBQVWL3NlZWsvbmVhcmVzdC5hc3B4P3R4PTMyYmM5MzMzLTVlNTItNDk1Ny1iMGY2LTVhMmM4ZmM3YjI1NyZsYXQ9NDYuMDgwNDY3JmxuZz0xNC41MDAwMDBkZAIFDw8WAh8FBVovc2Vlay9uZWFyZXN0LmFzcHg/dHg9MzJiYzkzMzMtNWU1Mi00OTU3LWIwZjYtNWEyYzhmYzdiMjU3JmxhdD00Ni4wODA0NjcmbG5nPTE0LjUwMDAwMCZmPTFkZAIJDw8WAh8FBS4vc2Vlay9uZWFyZXN0LmFzcHg/bGF0PTQ2LjA4MDQ2NyZsbmc9MTQuNTAwMDAwZGQCCw8PFgIfBQUyL3NlZWsvbmVhcmVzdC5hc3B4P2xhdD00Ni4wODA0NjcmbG5nPTE0LjUwMDAwMCZmPTFkZAIPDw8WAh8FBUhodHRwOi8vd3d3LndheW1hcmtpbmcuY29tL2RpcmVjdG9yeS5hc3B4P2Y9MSZsYXQ9NDYuMDgwNDY3Jmxvbj0xNC41MDAwMDBkZAIbDxYCHwNoZAIfDw8WAh8FBSMvcmV2aWV3cy9ob3RlbHMtY29vcmRzLTQ2LjA4MDUsMTQuNWRkAiMPZBYCAgEPDxYEHwEFpgc8bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5nZW9jYWNoaW5nLmNvbS9tYXAvZGVmYXVsdC5hc3B4P2xhdD00Ni4wODA0NyZsbmc9MTQuNSIgdGFyZ2V0PSJfYmxhbmsiPkdlb2NhY2hpbmcuY29tIE1hcDwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vbWFwcy5nb29nbGUuY29tL21hcHM/cT1OKzQ2JWMyJWIwKzA0LjgyOCtFKzAxNCVjMiViMCszMC4wMDArKEdDM1hYNUopKyIgdGFyZ2V0PSJfYmxhbmsiPkdvb2dsZSBNYXBzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cubWFwcXVlc3QuY29tL21hcHMvbWFwLmFkcD9zZWFyY2h0eXBlPWFkZHJlc3MmZm9ybXR5cGU9bGF0bG9uZyZsYXRsb25ndHlwZT1kZWNpbWFsJmxhdGl0dWRlPTQ2LjA4MDQ3JmxvbmdpdHVkZT0xNC41Jnpvb209MTAiIHRhcmdldD0iX2JsYW5rIj5NYXBRdWVzdDwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vbWFwcy55YWhvby5jb20vI2xhdD00Ni4wODA0NyZsb249MTQuNSZ6b29tPTE2JnE9NDYuMDgwNDcsMTQuNSZjb25mPTEmc3RhcnQ9MSZtdnQ9bSZ0cmY9MCIgdGFyZ2V0PSJfYmxhbmsiPllhaG9vIE1hcHM8L2E+PC9saT48bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5iaW5nLmNvbS9tYXBzL2RlZmF1bHQuYXNweD92PTImbHZsPTE0JnNwPXBvaW50LjQ2LjA4MDQ3XzE0LjVfR0MzWFg1SiIgdGFyZ2V0PSJfYmxhbmsiPkJpbmcgTWFwczwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vd3d3Lm9wZW5jeWNsZW1hcC5vcmcvP3pvb209MTImbGF0PTQ2LjA4MDQ3Jmxvbj0xNC41IiB0YXJnZXQ9Il9ibGFuayI+T3BlbiBDeWNsZSBNYXBzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cub3BlbnN0cmVldG1hcC5vcmcvP21sYXQ9NDYuMDgwNDcmbWxvbj0xNC41Jnpvb209MTIiIHRhcmdldD0iX2JsYW5rIj5PcGVuIFN0cmVldCBNYXBzPC9hPjwvbGk+HwNnZGQCJw9kFgYCAQ8WAh8BBRA2OCBMb2dnZWQgVmlzaXRzZAIHDw8WAh8FBUN+L3NlZWsvY2FjaGVfbG9nYm9vay5hc3B4P2d1aWQ9NTFlNDBkZWMtNjI3Mi00ZGFkLTkzNGItZTE3NWRhYWFjMjY1ZGQCCQ8PFgQfBQU9fi9zZWVrL2dhbGxlcnkuYXNweD9ndWlkPTUxZTQwZGVjLTYyNzItNGRhZC05MzRiLWUxNzVkYWFhYzI2NR8BBRZWaWV3IHRoZSBJbWFnZSBHYWxsZXJ5ZGQCKg8WAh8BBQVmYWxzZWQCKw8WAh8BBUdsYXQ9NDYuMDgwNDY3OyBsbmc9MTQuNTsgZ3VpZD0nNTFlNDBkZWMtNjI3Mi00ZGFkLTkzNGItZTE3NWRhYWFjMjY1JzsNCmQCLA8WAh8BBXF0cnkgeyBfZ2FxLnB1c2goWydfdHJhY2tFdmVudCcsICdHZW9jYWNoaW5nJywgJ0NhY2hlRGV0YWlsc01lbWJlclR5cGUnLCAnUHJlbWl1bScsIG51bGwsIHRydWVdKTsgfSBjYXRjaChlcnIpIHsgfWQCMA8WAh8DaGQCMQ9kFgQCAw8WAh8BBQdFbmdsaXNoZAIFDxYCHwYCEBYgZg9kFgICAQ8PFggfBwUFZW4tVVMfCAUNU2V0VGVtcExvY2FsZR8BBQdFbmdsaXNoHwloZGQCAQ9kFgICAQ8PFggfBwUFZGUtREUfCAUNU2V0VGVtcExvY2FsZR8BBQdEZXV0c2NoHwloZGQCAg9kFgICAQ8PFggfBwUFZnItRlIfCAUNU2V0VGVtcExvY2FsZR8BBQlGcmFuw6dhaXMfCWhkZAIDD2QWAgIBDw8WCB8HBQVwdC1QVB8IBQ1TZXRUZW1wTG9jYWxlHwEFClBvcnR1Z3XDqnMfCWhkZAIED2QWAgIBDw8WCB8HBQVjcy1DWh8IBQ1TZXRUZW1wTG9jYWxlHwEFCcSMZcWhdGluYR8JaGRkAgUPZBYCAgEPDxYIHwcFBXN2LVNFHwgFDVNldFRlbXBMb2NhbGUfAQUHU3ZlbnNrYR8JaGRkAgYPZBYCAgEPDxYIHwcFBWVzLUVTHwgFDVNldFRlbXBMb2NhbGUfAQUIRXNwYcOxb2wfCWhkZAIHD2QWAgIBDw8WCB8HBQVpdC1JVB8IBQ1TZXRUZW1wTG9jYWxlHwEFCEl0YWxpYW5vHwloZGQCCA9kFgICAQ8PFggfBwUFbmwtTkwfCAUNU2V0VGVtcExvY2FsZR8BBQpOZWRlcmxhbmRzHwloZGQCCQ9kFgICAQ8PFggfBwUFY2EtRVMfCAUNU2V0VGVtcExvY2FsZR8BBQdDYXRhbMOgHwloZGQCCg9kFgICAQ8PFggfBwUFcGwtUEwfCAUNU2V0VGVtcExvY2FsZR8BBQZQb2xza2kfCWhkZAILD2QWAgIBDw8WCB8HBQVldC1FRR8IBQ1TZXRUZW1wTG9jYWxlHwEFBUVlc3RpHwloZGQCDA9kFgICAQ8PFggfBwUFbmItTk8fCAUNU2V0VGVtcExvY2FsZR8BBQ5Ob3JzaywgQm9rbcOlbB8JaGRkAg0PZBYCAgEPDxYIHwcFBWtvLUtSHwgFDVNldFRlbXBMb2NhbGUfAQUJ7ZWc6rWt7Ja0HwloZGQCDg9kFgICAQ8PFggfBwUFaHUtSFUfCAUNU2V0VGVtcExvY2FsZR8BBQZNYWd5YXIfCWhkZAIPD2QWAgIBDw8WCB8HBQVyby1STx8IBQ1TZXRUZW1wTG9jYWxlHwEFCFJvbcOibsSDHwloZGQCAw8WAh8BBStTZXJ2ZXI6IFdFQjAzOyBCdWlsZDogV2ViLkhvdEZpeF8yMDEyMTIxMS4xZGSlzLtlM72IVb/6Up97VzeEWQHlyg==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=Dh2VENdI9XyWNN0f7DnYfR8WWRCRIzdVqal2y0yjiQ5nC_eHhLchYgnQDHIk0d3RCcSUMVZ36ciRD0qmhXKmeu3S_RE1&amp;t=634449413070371108" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=I9_m2Hb1Tv_B0qTMDG8bMbnkNSHUkv5oUaG9-V5NZ8qQ2VFlu60I8y8gfr3vPmZjbiPnu43MOQdFVDeYF-nDAEKBLmyxD3DCTGmes9NNbbvaDEHyEuuRWgccIkK3ik5TI48YGDxjHjqdn-gTK4Fkgd17LGw1&amp;t=2610f696" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=8vNbe34dAujgZMPnfnacfjeoweX1vHgyns8KlAV4vpGpsZC9Cf3pro__lv8ekBa0NiCgXGMMolzOUNH__lrnEI_qjlNBIAuuLeemtAXV_i6E0QIMZa8nGSYmWGF5nQOJK3rmZzvTxsr2Mh4Ebdba_1ywGLUSH_U_XIe-jzecfRQwwvjZ0&amp;t=2610f696" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=l5IqBBbOFPRmpVAJwxQpHQyZ16ITBnk7fYRIeFc1JaDh64igpOv-k92v3DpzWBikWWvRdoxgNXda9cdmIFt2Ryy2gD2Tv71tVdwVNB4i-d1_vwLdJifCsG55PNiibmPX-x1Vspbf6jGBVWDKxT4kuLr2vWh-XRcY7PiryWks0UgjSCXEHO05VytTmCI6A-IhnCg2kD_i3YytsXr36qf0k6q0vQ41" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=mw8CUwVrYP9IGhC7WIGT8qdlVInGzqviii3RV8GrEEiOV2Nqjk57cAorEy9ACR1-rU7I3CZphWXcx81x-LDKIItu7BGPceT7Q61MOAXhSyJyW2DF3crLIX0Xef7vI1s2RLsp2bf8Aazkh-w4559ltQCi1H8uzBcnORltR9bo05Oe5VlRs1WnFqxyOK9aLEH4pBXNx8Bhb2-oIOLExj6kkCQgF06_A6ksiNnQXuGaKfXh1LjjCyujVv1xsxL_muSivN4bS4R4JR4M2Z3WmsBSnQXzJkIKkQB7kOS3JYimpNQ7sw1_qOYPZVB0xYbSCGD-xptYnX3Q4DLGiBNW4mP5R1Xv0QiVlwA9uiMAy_mQKBalvK4YjYdSbW9T9WZdtn39cD799HNy--sDKm1hhlBWb8Dz1jgxR2B9glqCYkqQmk3DSoPhPx9eWxB5q9VFjw1Q4u3d0Rgu8lF3NszOnHmJ19E6XZOdbRPyOjljcqTy1MWgNSwFAV-E3kWUGiJ0QNel49k3VkdjBUTKhIqIdQ9wve0zAcvWgxHEaFuvXv92aYmJwFYFDbNPvkYfBRLakBbpHIzGs9e0xu5sbTAVijArOHlzTSMNx2jK2mdt8VSjThXQAkMSV5W0jY2I6tuqFunlegJeA9zrFE9HdfbBtj9gOSe3LQQNMG7NaUShNTYUbJ5eZbQ8g7O5gjKFbDylaSZqv0aXQu0Lgrn7EdKV3B0BMhNeG3pR32zEBX1T3hEAnDKiYVOX0" type="text/javascript"></script>
+<script src="js/cachedetails.js" type="text/javascript"></script>
+<script src="../js/latlng.js" type="text/javascript"></script>
+    <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnetForm', [], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+    <div id="Top" class="SkipLinks">
+        
+        <a id="ctl00_hlSkipLinksNavigation" accesskey="n" title="Skip to Navigation" href="#Navigation">Skip to Navigation</a>
+        <a id="ctl00_hlSkipLinksContent" accesskey="c" title="Skip to Content" href="#Content">Skip to Content</a>
+        
+    </div>
+    
+    <!--[if lte IE 6]>
+				<div class="WarningMessage PhaseOut">
+					
+					<p>Groundspeak is phasing out support for older browsers. Visit the <a href="http://support.groundspeak.com/index.php?pg=kb.page&id=215" title="Browser Support Information">Help Center</a> for more information.</p>
+					
+				</div>
+			<![endif]-->
+    
+    
+    
+    <div class="PrintOnly">
+        
+        <p>
+            <img src="/images/logo_print_bw.png" alt="Geocaching.com" /></p>
+        <hr />
+        
+    </div>
+    
+    <header>
+        
+        <div class="container">
+            
+            <h1 class="Logo span-16">
+                <a href="../" id="ctl00_HDHomeLink" title="Geocaching" accesskey="h">Geocaching</a></h1>
+            <div class="ProfileWidget span-8 last">
+                
+                
+                
+                <div id="ctl00_divSignedIn">
+                    
+                    <p class="Avatar NoBottomSpacing">
+                        <a id="ctl00_hlHeaderAvatar" accesskey="p" title="Your Profile" href="../my/"><img title="Your Profile" src="http://img.geocaching.com/user/avatar/e8a97a05-a051-4da9-bc93-6a830b866aff.jpg" alt="" style="border-width:0px;" /></a></p>
+                    <p class="SignedInText">
+                        <strong>
+                            Hello, <a href="/my/default.aspx" title="View Profile for JoSaMaJa" class="SignedInProfileLink">JoSaMaJa</a></strong> (<a id="ctl00_hlSignOut" accesskey="s" title="Sign Out" href="https://www.geocaching.com/login/default.aspx?RESET=Y&amp;redir=http%3a%2f%2fwww.geocaching.com%2fseek%2fcache_details.aspx%3fwp%3dGC3XX5J%26Submit6%3dGo">Sign Out</a>)<br />
+                            <span id="ctl00_litPMLevel">Premium Member</span>
+                        
+                        <strong style="display:block">
+                            372 Caches Found</strong>
+                        
+                    </p>
+                    
+                </div>
+                
+                
+            </div>
+            
+            <div class="NavContainer span-24 last">
+                <nav id="Navigation">
+                    
+                    <ul class="Menu">
+                        <li>
+                            <a id="ctl00_hlNavLearn" accesskey="1" title="Learn" href="../guide/">Learn &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavGeocaching101" accesskey="i" title="Geocaching 101" href="../guide/">Geocaching 101</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavGeocaching2Minutes" title="Geocaching in 2 Minutes" href="../videos/#cat=cat:newbies&amp;vid=-4VFeYZTTYs">Geocaching in 2 Minutes</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li id="ctl00_liNavProfile">
+                            <a id="ctl00_hlNavProfile" accesskey="2" title="Your Profile" href="../my/">Your Profile &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavQuickView" accesskey="p" title="Quick View" href="../my/">Quick View</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavLists" accesskey="q" title="Lists" href="../my/lists.aspx">Lists</a></li>
+                                <li class="ExtraText">
+                                    <a id="ctl00_hlSubNavGeocaches" accesskey="m" title="Geocaches" class="NoRightPadding" href="../my/geocaches.aspx">Geocaches</a>
+                                    (<a id="ctl00_hlSubNavGeocachesYours" accesskey="y" title="Yours" class="NoSidePadding" href="../my/owned.aspx">Yours</a>)</li>
+                                <li class="ExtraText">
+                                    <a id="ctl00_hlSubNavProfileTrackables" title="Trackables" class="NoRightPadding" href="../my/travelbugs.aspx">Trackables</a>
+                                    (<a id="ctl00_hlSubNavTrackablesYours" accesskey="8" title="Yours" class="NoSidePadding" href="../track/search.aspx?o=1&amp;uid=4d416461-d1a7-4cc5-8ee7-336bb910feb8">Yours</a>)</li>
+                                <li>
+                                    <a id="ctl00_hlSubNavPocketQueries" accesskey="9" title="Pocket Queries" href="../pocket/">Pocket Queries</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavFieldNotes" accesskey="0" title="Field Notes" href="../my/fieldnotes.aspx">Field Notes</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavAccount" accesskey="a" title="Account Details" href="../account/">Account Details</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavPlay" accesskey="3" title="Play" href="./">Play &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavHide" accesskey="d" title="Hide &amp; Seek a Cache" href="./">Hide & Seek a Cache</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavLogCache" title="Log a Cache" href="../my/recentlyviewedcaches.aspx">Log a Cache</a></li>
+                                <li><a id="ctl00_hlSubNavMap" accesskey="/" title="View Geocache Map" href="../map/">View Geocache Map</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavTrackables" accesskey="e" title="Find Trackables" href="../track/">Find Trackables</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavHelpCenter" title="Help Center" rel="external" href="http://support.groundspeak.com/index.php">Help Center</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavCommunity" accesskey="6" title="Community" href="../forums/">Community &#9660;</a>
+                            <ul class="SubMenu">
+                                
+                                <li>
+                                    <a id="ctl00_hlSubNavTellaFriend" accesskey="-" title="Tell a Friend" href="../account/SendReferral.aspx">Tell a Friend</a></li>
+                                
+                                <li><a id="ctl00_hlSubNavVolunteers" accesskey="+" title="Volunteers" href="../volunteers/">Volunteers</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavLocal" accesskey="z" title="Local Organizations" href="../organizations/">Local Organizations</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavDiscussionForums" accesskey="f" title="Discussion Forums" href="../forums/">Discussion Forums</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavBlog" accesskey="b" title="Blog" rel="external" href="http://blog.geocaching.com/">Blog</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavEvents" accesskey="v" title="Events" href="../calendar/">Events</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavShop" accesskey="4" title="Shop" href="http://shop.geocaching.com/">Shop &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavShop" accesskey="j" title="Shop Geocaching" rel="external" href="http://shop.geocaching.com/">Shop Geocaching</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavIntlRetailers" title="International Retailers" rel="external" href="http://shop.geocaching.com/default/international-retailers/">International Retailers</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavGPSReviews" accesskey="w" title="GPS Reviews" href="/reviews/gps">GPS Reviews</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavGPSGuide" accesskey="k" title="Guide to Buying a GPS Device" href="../about/buying.aspx">Guide to Buying a GPS Device</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavPartnering" accesskey="5" title="Partnering" href="../travel/">Partnering &#9660;</a>
+                            <ul class="SubMenu">
+                                <li>
+                                    <a id="ctl00_hlSubNavTravel" title="Travel and GeoTourism" href="../travel/">Travel and GeoTourism</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavBrandedPromotions" title="Branded Promotions" href="../brandedpromotions/">Branded Promotions</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavEducation" title="Geocaching and Education" href="../education/">Geocaching and Education</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavAdvertisingWithUs" title="Advertising with Us" href="../about/advertising.aspx">Advertising with Us</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavAPIProgram" title="API Program" href="../live/apidevelopers/">API Program</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="ctl00_hlNavVideos" accesskey="7" title="Videos" href="../videos/">Videos</a></li>
+                        <li>
+                            <a id="ctl00_hlNavFollowUs" title="Follow Us" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts">Follow Us &#9660;</a>
+                            <ul class="SubMenu NavSocialMedia">
+                                <li>
+                                    <a id="ctl00_hlSubNavFacebook" title="Facebook" class="SubNavFacebook" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts">Facebook</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavTwitter" title="Twitter" class="SubNavTwitter" href="http://twitter.com/GoGeocaching">Twitter</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavFlickr" title="Flickr" class="SubNavFlickr" href="http://www.flickr.com/photos/geocaching_com/">Flickr</a></li>
+                                <li>
+                                    <a id="ctl00_hlSubNavYouTube" title="YouTube" class="SubNavYouTube" href="http://www.youtube.com/user/GoGeocaching">YouTube</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                </nav>
+                <div class="LanguageSelector">
+                    
+
+<div class="LocaleText">
+    
+    <strong>Choose Your Language:</strong>
+    
+</div>
+<div class="LocaleList">
+    
+    <div class="selected-language">
+        
+        <a href="#">English&#9660;</a>
+        
+    </div>
+    <ul class="language-list">
+        
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl00_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl00$uxLocaleItem&#39;,&#39;&#39;)">English</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl01_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl01$uxLocaleItem&#39;,&#39;&#39;)">Deutsch</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl02_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl02$uxLocaleItem&#39;,&#39;&#39;)">Français</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl03_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl03$uxLocaleItem&#39;,&#39;&#39;)">Português</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl04_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl04$uxLocaleItem&#39;,&#39;&#39;)">Čeština</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl05_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl05$uxLocaleItem&#39;,&#39;&#39;)">Svenska</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl06_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl06$uxLocaleItem&#39;,&#39;&#39;)">Español</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl07_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl07$uxLocaleItem&#39;,&#39;&#39;)">Italiano</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl08_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl08$uxLocaleItem&#39;,&#39;&#39;)">Nederlands</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl09_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl09$uxLocaleItem&#39;,&#39;&#39;)">Català</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl10_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl10$uxLocaleItem&#39;,&#39;&#39;)">Polski</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl11_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl11$uxLocaleItem&#39;,&#39;&#39;)">Eesti</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl12_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl12$uxLocaleItem&#39;,&#39;&#39;)">Norsk, Bokmål</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl13_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl13$uxLocaleItem&#39;,&#39;&#39;)">한국어</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl14_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl14$uxLocaleItem&#39;,&#39;&#39;)">Magyar</a></li>
+            
+                <li><a id="ctl00_uxLocaleListTop_uxLocaleList_ctl15_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleListTop$uxLocaleList$ctl15$uxLocaleItem&#39;,&#39;&#39;)">Română</a></li>
+            
+    </ul>
+    
+</div>
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+        jQuery(".selected-language a").click(function (e) {
+            e.preventDefault();
+            var $loc = jQuery(this).parent().next();
+            jQuery($loc).show().position({
+                of: $loc.parent(),
+                my: "left top",
+                at: "left bottom",
+                offset: "0 0",
+                collision: "fit fit"
+            });
+            jQuery(this).addClass("Expanded");
+            jQuery(document).click(function () {
+                jQuery(".language-list").fadeOut("fast");
+                jQuery(".selected-language a").removeClass("Expanded");
+            });
+            return false;
+        });
+    });
+</script>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        
+    </header>
+    <section id="Content">
+        
+        
+        <div class="container">
+            
+            <div id="ctl00_divBreadcrumbs" class="BreadcrumbWidget span-24 last">
+                
+                <p>
+                    <span id="ctl00_Breadcrumbs"><span><a title="Geocaching - The Official Global GPS Cache Hunt Site" href="/">Geocaching</a></span><span> &gt; </span><span><a title="Hide and Seek A Geocache" href="/seek/default.aspx">Hide and Seek A Geocache</a></span><span> &gt; </span><span>Geocache Details</span></span>
+                </p>
+                
+                
+            </div>
+            
+            <div id="ctl00_divContentMain" class="span-24 last">
+                
+                
+    
+    
+    <div id="ctl00_ContentBody_CoordInfoLinkControl1_uxCoordInfoLinkPanel" class="CoordInfoLinkWidget">
+	
+    <p>
+        <a href="#" class="CoordInfoLink">
+            <span id="ctl00_ContentBody_CoordInfoLinkControl1_uxCoordInfoCode" class="CoordInfoCode">GC3XX5J</span>
+            <span class="arrow">&#9660;</span> </a>
+    </p>
+
+</div>
+<div id="dlgClipboard">
+    <input type="text" class="TextFormat" />
+    <a href="#" onclick="$('#dlgClipboard').hide();return false;" title="Close" class="Close">
+        x</a>
+</div>
+<script type="text/javascript">
+    $("a.CoordInfoLink").click(function (e) {
+        e.preventDefault();
+
+        $("#dlgClipboard")
+                    .show()
+                    .position({
+                        of: $("a.CoordInfoLink"),
+                        my: "right top",
+                        at: "right bottom",
+                        offset: "0 5"
+                    })
+                    .find("input")
+                        .val('http://coord.info/' + $('.CoordInfoCode').text())
+                        .focus()
+                        .select();
+
+        $(document).mouseup(function (e) {
+            if ($(e.target).parent("div#dlgClipboard").length == 0) {
+                $(this).unbind(e);
+                $("div#dlgClipboard").hide();
+            }
+        });
+
+        return false;
+    });
+
+ 
+</script>
+
+    <div class="span-17">
+        
+        <div class="span-17 last BottomSpacing" id="cacheDetails">
+            <p class="cacheImage">
+                <a href="/about/cache_types.aspx" target="_blank" title="About Cache Types"><img src="/images/WptTypes/2.gif" alt="Traditional Cache" title="Traditional Cache" /></a>
+            </p>
+            
+            <h2 class="NoBottomSpacing">
+                <span id="ctl00_ContentBody_CacheName">Zaraščen Tir</span></h2>
+            <div class="minorCacheDetails Clear">
+                <div id="ctl00_ContentBody_mcd1">
+                    A cache by <a href="http://www.geocaching.com/profile/?guid=7b1ed479-e378-4cfd-a5b4-3bd47bab619f&wid=51e40dec-6272-4dad-934b-e175daaac265&ds=2">David & Ajda</a></div>
+                <div id="ctl00_ContentBody_mcd2">
+                    Hidden:
+                    2012-10-01
+                    
+                </div>
+                <div></div>
+            </div>
+        </div>
+        <div id="ctl00_ContentBody_diffTerr" class="CacheStarLabels span-3 BottomSpacing">
+            
+            Difficulty:
+            <br />
+            Terrain:
+            
+        </div>
+        
+        <div id="ctl00_ContentBody_diffTerrStars" class="CacheStarImgs span-2">
+            
+            <span id="ctl00_ContentBody_uxLegendScale" title="(1 is easiest, 5 is hardest)"><img src="http://www.geocaching.com/images/stars/stars1_5.gif" alt="1.5 out of 5" /></span>
+            <span id="ctl00_ContentBody_Localize12" title="(1 is easiest, 5 is hardest)"><img src="http://www.geocaching.com/images/stars/stars2.gif" alt="2 out of 5" /></span>
+            
+        </div>
+        
+        <div id="ctl00_ContentBody_size" class="CacheSize span-9">
+            
+            <p style="text-align: center;">
+                Size:&nbsp;<span class="minorCacheDetails"><img src="/images/icons/container/small.gif" alt="Size: small" title="Size: small" />&nbsp<small>(small)</small></span></p>
+            
+        </div>
+        
+        
+        
+        <div class="span-3 right last">
+            
+            
+                <div class="favorite right">
+                    <a id="uxFavContainerLink" href="javascript:void(0);">
+                        <div class="favorite-container">
+                            <span class="favorite-value">
+                                1</span><br />
+                            Favorites
+                            <img id="imgFavoriteArrow" src="/images/arrow-down.png" alt="Expand" title="Expand" />
+                        </div>
+                    </a>
+                    <div class="favorite-dropdown">
+                        <dl class="top">
+                            <dt>
+                                <img id="imgFavoriteScore" src="/images/loading3.gif" width="20" height="20" alt="Loading" title="Loading" /></dt>
+                            <dd>
+                                <span id="uxFavoriteScore">&nbsp;</span></dd>
+                        </dl>
+                        <dl class="bottom">
+                            <dt>
+                                <img src="/images/icons/16/view_user.png" alt="View Who Favorited this Cache" title="View Who Favorited this Cache" /></dt>
+                            <dd>
+                                <a id="hlViewWhoFavorited" title="View Who Favorited this Cache" href="/seek/cache_favorited.aspx?guid=51e40dec-6272-4dad-934b-e175daaac265">View Who Favorited this Cache</a></dd>
+                            <dt>
+                                <img src="/images/icons/16/help.png" alt="About Favorites" title="About Favorites" /></dt>
+                            <dd>
+                                <a id="hlAboutFavorites" title="About Favorites" href="http://support.groundspeak.com/index.php?pg=kb.page&amp;id=287" target="_blank">About Favorites</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            
+            
+        </div>
+        
+       
+        <p class="Clear">
+            </p>
+        
+        
+        
+        
+        <div id="ctl00_ContentBody_CacheInformationTable" class="CacheInformationTable">
+            <div class="LocationData FloatContainer">
+                <div class="span-9">
+                    <p class="NoBottomSpacing">
+                        <a href="#" class="edit-cache-coordinates" id="uxLatLonLink" title="Correct these coordinates">
+                            <span id="uxLatLon" style="font-weight:bold;">N 46° 04.828 E 014° 30.000</span>
+                        </a>
+                        <br />
+                        <span id="ctl00_ContentBody_LocationSubPanel" style="display:inline;"><small>
+                            UTM: 33T E 461340 N 5103109</small>
+                            <br />
+                        </span><small>
+                            <a id="ctl00_ContentBody_lnkConversions" title="Other Conversions" href="/wpt/?lat=46.080467&amp;lon=14.5&amp;detail=1" target="_blank">Other Conversions</a>
+                        </small>
+                    </p>
+                </div>
+                <div class="span-7 last AlignRight">
+                    <span id="ctl00_ContentBody_Location">In Slovenia</span><br />
+                    <span id="lblDistFromHome"><img src="/images/icons/compass/SE.gif" alt="SE" style="vertical-align:text-bottom" />&nbsp;SE 765.5&nbsp;km from your home location</span>
+                </div>
+            </div>
+            <div id="Print">
+                <p class="NoBottomSpacing">
+                    <span id="ctl00_ContentBody_uxPrintHeader" style="font-weight:bold;">Print</span>:
+                    <br />
+                    <small>
+                        <a id="ctl00_ContentBody_lnkPrintFriendly" class="lnk" href="cdpf.aspx?guid=51e40dec-6272-4dad-934b-e175daaac265" target="_blank">
+                            <img src="/images/icons/16/print.png" alt="Print" title="Print" width="16" height="16" />&nbsp; <span>
+                                No Logs
+                            </span>
+                        </a>&nbsp;
+                        <a id="ctl00_ContentBody_lnkPrintFriendly5Logs" href="cdpf.aspx?guid=51e40dec-6272-4dad-934b-e175daaac265&amp;lc=5" target="_blank">5 Logs</a>&nbsp;
+                        <a id="ctl00_ContentBody_lnkPrintFriendly10Logs" href="cdpf.aspx?guid=51e40dec-6272-4dad-934b-e175daaac265&amp;lc=10" target="_blank">10 Logs</a>&nbsp;&middot;&nbsp;
+                        <a id="ctl00_ContentBody_lnkPrintDirectionsSimple" class="lnk" href="http://maps.google.com/maps?f=d&amp;hl=en&amp;saddr=52.21625,9.714483 (Home Location)&amp;daddr=46.080467,14.5(Zara%c5%a1%c4%8den+Tir)" target="_blank">
+                            <img src="/images/icons/16/directions.png" alt="Driving Directions" title="Driving Directions" width="16" height="16" />&nbsp; <span>
+                                Driving Directions
+                            </span>
+                        </a></small></p>
+                <div id="ctl00_ContentBody_uxPrintPDFSection" style="display: none;">
+                    <p>
+                        <img src="/images/pdf_icon.gif" width="16" height="16" alt="PDF" title="PDF" />&nbsp;<small>[PDF:]&nbsp;<a id="ctl00_ContentBody_lnkPDFPrintNoLogs" href="javascript:pl(0);">No Logs</a>&nbsp;<a id="ctl00_ContentBody_lnkPDFPrint5Logs" href="javascript:pl(5);">5 Logs</a>&nbsp;<a id="ctl00_ContentBody_lnkPDFPrint10Logs" href="javascript:pl(10);">10 Logs</a></small></p>
+                </div>
+            </div>
+            <div id="Download">
+                <p class="NoBottomSpacing">
+                    <span id="ctl00_ContentBody_uxDownloadLabel" style="font-weight:bold;">Download</span>:
+                    <small>
+                        <a id="ctl00_ContentBody_lnkDownloads" title="Read about waypoint downloads" href="/software/default.aspx">Read about waypoint downloads</a>
+                    </small>
+                </p>
+                
+                    <p class="NoBottomSpacing TopSpacing">
+                        <input type="submit" name="ctl00$ContentBody$btnLocDL" value="LOC waypoint file" id="ctl00_ContentBody_btnLocDL" />
+                        |
+                        <input type="submit" name="ctl00$ContentBody$btnGPXDL" value="GPX file" id="ctl00_ContentBody_btnGPXDL" />
+                        |
+                        <input type="submit" name="ctl00$ContentBody$btnSendToGPS" value="Send to My GPS" onclick="s2gps(&#39;51e40dec-6272-4dad-934b-e175daaac265&#39;);return false;" id="ctl00_ContentBody_btnSendToGPS" />
+                        |
+                        <input type="submit" name="ctl00$ContentBody$btnSendToPhone" value="Send to My Phone" onclick="s2phone(&#39;GC3XX5J&#39;);return false;" id="ctl00_ContentBody_btnSendToPhone" />
+                    </p>
+                
+            </div>
+        </div>
+        
+            <fieldset class="DisclaimerWidget">
+                <legend class="warning">
+                    Please note
+                </legend>
+                <p class="NoBottomSpacing">
+                    Use of geocaching.com services is subject to the terms and conditions <a href="/about/disclaimer.aspx" title="Read Our Disclaimer">in our disclaimer</a>.
+                </p>
+            </fieldset>
+        
+        
+            <fieldset class="NotesWidget">
+                <legend class="note">
+                    Personal Cache Note
+                </legend>
+                <img src="/images/icons/16/help.png" id="pcn_help" class="CacheNoteHelpImg" />
+                <p id="cache_note" class="NoBottomSpacing">
+                    </p>
+            </fieldset>
+        
+        <div class="UserSuppliedContent">
+            
+            <span id="ctl00_ContentBody_ShortDescription">Kadar zbolimo nam pomaga...<br />
+<br />
+When we get sick, they are helpful...
+</span>
+            
+        </div>
+        
+        <br />
+        <div class="UserSuppliedContent">
+            
+            <span id="ctl00_ContentBody_LongDescription">SLO:<br />
+tir je danes zapuščen, včasih pa so ga uporabljala različna podjetja, da so po njem dostavljali material in odvažali končne izdelke.<br />
+ <br />
+ENG:<br />
+rail is abandoned today, but once it was used by different companies, so they could have their materials delivered and products driven to final destinations .<br />
+ <br />
+PRINESI SVOJE PISALO / BRING YOUR OWN PEN<br /></span>
+            
+        </div>
+        
+        <p>
+            
+
+        </p>
+        <p id="ctl00_ContentBody_hints">
+            <strong>
+                Additional Hints</strong>
+            (<a id="ctl00_ContentBody_lnkDH" onclick="dht(this);return false;" title="Decrypt" href="#">Decrypt</a>)</p>
+        <div id="div_hint" class="span-8 WrapFix">
+            Bqznxav xnzra bo gveh / Erzbir gur fgbar jvpu yvrf orfvqr gur envy</div>
+        <div id='dk' style="display: block;" class="span-9 last">
+            <span id="ctl00_ContentBody_EncryptionKey" class="right"><div class="DecryptionKeyWidget"> <p class="WidgetHeader">Decryption Key</p> <p class="WidgetBody">A|B|C|D|E|F|G|H|I|J|K|L|M<br /> -------------------------<br /> N|O|P|Q|R|S|T|U|V|W|X|Y|Z</p> <p class="WidgetFooter">(letter above equals below, and vice versa)</p></div></span>
+        </div>
+        <div class="Clear">
+        </div>
+        
+    </div>
+    
+    
+    <div class="span-6 prepend-1 last">
+        
+        
+<div class="CacheDetailNavigationWidget NoPrint">
+    
+    <h3 class="WidgetHeader">
+        Navigation
+    </h3>
+    <div class="WidgetBody">
+        
+        <ul class="CacheDetailsNavLinks">
+            <li><a href="/seek/log.aspx?ID=3220672" class="lnk"><img src="/images/icons/16/write_log.png" />&nbsp;<span>Log your visit</span></a></li>
+<li><a href="/my/watchlist.aspx?w=3220672" class="lnk"><img src="/images/icons/16/watch.png" />&nbsp;<span>Watch Listing</span></a></li>
+<li><a href="/bookmarks/ignore.aspx?guid=51e40dec-6272-4dad-934b-e175daaac265&WptTypeID=2" class="lnk"><img src="/images/icons/16/ignore.png" />&nbsp;<span>Ignore Listing</span></a></li>
+<li><a href="/bookmarks/mark.aspx?guid=51e40dec-6272-4dad-934b-e175daaac265&WptTypeID=2" class="lnk"><img src="/images/icons/16/bookmark_list.png" />&nbsp;<span>Bookmark Listing</span></a></li>
+
+        </ul>
+        
+    </div>
+    
+    
+</div>
+
+        
+        
+        
+        
+            <div id="map_preview_canvas" class="TopSpacing" style="width: 228px; height: 175px;">
+            </div>
+        
+        
+        
+        <div id="ctl00_ContentBody_detailWidget" class="CacheDetailNavigationWidget TopSpacing BottomSpacing">
+            
+            <h3 class="WidgetHeader">
+                Attributes</h3>
+            <div class="WidgetBody">
+                <img src="/images/attributes/stroller-no.gif" alt="not stroller accessible" title="not stroller accessible" width="30" height="30" /> <img src="/images/attributes/kids-no.gif" alt="no kids" title="no kids" width="30" height="30" /> <img src="/images/attributes/bicycles-yes.gif" alt="bikes allowed" title="bikes allowed" width="30" height="30" /> <img src="/images/attributes/night-yes.gif" alt="recommended at night" title="recommended at night" width="30" height="30" /> <img src="/images/attributes/available-yes.gif" alt="available 24-7" title="available 24-7" width="30" height="30" /> <img src="/images/attributes/stealth-yes.gif" alt="stealth required" title="stealth required" width="30" height="30" /> <img src="/images/attributes/public-yes.gif" alt="public transit available" title="public transit available" width="30" height="30" /> <img src="/images/attributes/parking-yes.gif" alt="parking available" title="parking available" width="30" height="30" /> <img src="/images/attributes/onehour-yes.gif" alt="takes less than 1  hour" title="takes less than 1  hour" width="30" height="30" /> <img src="/images/attributes/hike_short-yes.gif" alt="hike shorter than 1km" title="hike shorter than 1km" width="30" height="30" /> <img src="/images/attributes/parkngrab-yes.gif" alt="park and grab" title="park and grab" width="30" height="30" /> <img src="/images/attributes/dogs-yes.gif" alt="dogs allowed" title="dogs allowed" width="30" height="30" /> <p class="NoBottomSpacing"><small><a href="/about/icons.aspx" title="What are Attributes?">What are Attributes?</a></small></p>
+            </div>
+            
+        </div>
+        
+        
+        <div id="ctl00_ContentBody_uxBanManWidget" class="CacheDetailPageAds clear">
+	
+            <div id="ctl00_ContentBody_divContentSide">
+                
+                <p class="NoBottomSpacing">
+                    <span id="ctl00_ContentBody_ADModules_09"><iframe type="iframe" src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&SiteID=1&X='375cb6bbcca8472294b3b2d593019608'" width="120" height="240" Marginwidth="0" Marginheight="0" Hspace="0" Vspace="0" Frameborder="0" Scrolling="no" style="width:120px;Height:240px;"><a href="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Click&;Mode=HTML&SiteID=1" target="_blank"><img src="http://ads.groundspeak.com/a.aspx?ZoneID=9&Task=Get&Mode=HTML&SiteID=1" width="120" height="240" border="0" alt="" /></a></iframe></span>
+                </p>
+                <p class="AlignCenter">
+                    <small><a href="../about/advertising.aspx" id="ctl00_ContentBody_advertisingWithUs" title="Advertising with Us">Advertising with Us</a></small></p>
+                
+            </div>
+        
+</div>
+        
+        
+        
+        <div class="GoogleAds AlignCenter BottomSpacing">
+            </div>
+        <div class="clear">
+        </div>
+        
+        <span id="ctl00_ContentBody_lnkTravelBugs"></span>
+        
+        
+<div class="CacheDetailNavigationWidget">
+    
+    <h3 class="WidgetHeader">
+        <span id="ctl00_ContentBody_uxTravelBugList_uxInventoryLabel">Inventory</span>
+    </h3>
+    <div class="WidgetBody">
+        
+        
+            <div id="ctl00_ContentBody_uxTravelBugList_uxNoTrackableItems">
+	
+                <p class="NoBottomSpacing"><span id="ctl00_ContentBody_uxTravelBugList_uxNoTrackableItemsLabel">There are no Trackables in this cache.</span></p>
+            
+</div>
+            <div class="TopSpacing">
+                
+                <p class="NoBottomSpacing"><a id="ctl00_ContentBody_uxTravelBugList_uxTrackableItemsHistory" href="../track/search.aspx?wid=51e40dec-6272-4dad-934b-e175daaac265">View past Trackables</a></p>
+                <p class="NoBottomSpacing"><a id="ctl00_ContentBody_uxTravelBugList_uxWhatAreTrackables" title="What are Trackable Items?" href="../track/default.aspx">What are Trackable Items?</a></p>
+            </div>
+
+        
+    </div>
+    
+    
+</div>
+
+        
+        
+        
+    </div>
+    
+    
+    <div id="ctl00_ContentBody_bottomSection" class="span-24 last">
+        
+        <p>
+            &nbsp;
+            <br />
+            
+            
+        </p>
+        
+        <div id="uxlrgMap" class="fr">
+	
+            <div class="PageBreakBefore">
+                </div>
+            <div class="CDMapWidget">
+                <p class="WidgetHeader NoBottomSpacing">
+                    <a id="ctl00_ContentBody_uxViewLargerMap" title="View Larger Map" href="/map/default.aspx?lat=46.080467&amp;lng=14.5" target="_blank">View Larger Map</a>
+                </p>
+                
+                <div id="map_canvas" style="width: 325px; height: 325px;">
+                </div>
+                <p class="WidgetFooter">
+                    <a id="ctl00_ContentBody_uxNotesAboutPrinting" href="#mapPrintingNotes" class="NoPrint">Notes about Printing Maps</a></p>
+            </div>
+            <div style="display: none;">
+                <div id="mapPrintingNotes">
+                    To print the map in Firefox and Opera, enable background images in the print dialog.
+                    <a href="#dlgMapPrintWarning" class="dialog" onclick="$.fancybox.close()">
+                        Close
+                    </a>
+                </div>
+            </div>
+        
+</div>
+        
+        <p class="NoPrint">
+            <span id="ctl00_ContentBody_uxFindLinksHeader" style="font-weight:bold;">Find...</span>
+            <br />
+            <span id="ctl00_ContentBody_FindText"></span>
+        </p>
+        <ul class="NoPrint">
+            <li>
+                ...other caches&nbsp;
+                <a id="ctl00_ContentBody_uxFindLinksHiddenByThisUser" href="/seek/nearest.aspx?u=David+%26+Ajda">hidden</a>&nbsp;
+                or&nbsp;
+                <a id="ctl00_ContentBody_uxFindLinksFoundByThisUser" href="/seek/nearest.aspx?ul=David+%26+Ajda">found</a>&nbsp;
+                by this user
+            </li>
+            
+                <li>
+                    ...nearby&nbsp;<a id="ctl00_ContentBody_uxFindLinksNearbyCachesOfType" href="/seek/nearest.aspx?tx=32bc9333-5e52-4957-b0f6-5a2c8fc7b257&amp;lat=46.080467&amp;lng=14.500000">caches of this type</a>,
+                    <a id="ctl00_ContentBody_uxFindLinksNearbyNotFound" href="/seek/nearest.aspx?tx=32bc9333-5e52-4957-b0f6-5a2c8fc7b257&amp;lat=46.080467&amp;lng=14.500000&amp;f=1">that I haven't found</a>
+                </li>
+                <li>
+                    ...all nearby&nbsp;<a id="ctl00_ContentBody_uxFindLinksAllNearbyCaches" href="/seek/nearest.aspx?lat=46.080467&amp;lng=14.500000">caches</a>,
+                    <a id="ctl00_ContentBody_uxFindLinksAllNearbyNotFound" href="/seek/nearest.aspx?lat=46.080467&amp;lng=14.500000&amp;f=1">that I haven't found</a>
+                </li>
+                <li>
+                    ...all nearby&nbsp;<a id="ctl00_ContentBody_uxFindLinksWaymarking" href="http://www.waymarking.com/directory.aspx?f=1&amp;lat=46.080467&amp;lon=14.500000">waymarks on Waymarking.com</a>
+                </li>
+            
+            
+            <li>
+                ...nearby&nbsp;<a id="ctl00_ContentBody_uxFindLinksHotels" href="/reviews/hotels-coords-46.0805,14.5">Hotels</a>
+            </li>
+        </ul>
+        <p class="NoPrint">
+            <span id="ctl00_ContentBody_uxMapLinkHeader" style="font-weight:bold;">For online maps...</span>
+        </p>
+        <span class="NoPrint">
+            
+<ul>
+    <span id="ctl00_ContentBody_MapLinks_MapLinks"><li><a href="http://www.geocaching.com/map/default.aspx?lat=46.08047&lng=14.5" target="_blank">Geocaching.com Map</a></li><li><a href="http://maps.google.com/maps?q=N+46%c2%b0+04.828+E+014%c2%b0+30.000+(GC3XX5J)+" target="_blank">Google Maps</a></li><li><a href="http://www.mapquest.com/maps/map.adp?searchtype=address&formtype=latlong&latlongtype=decimal&latitude=46.08047&longitude=14.5&zoom=10" target="_blank">MapQuest</a></li><li><a href="http://maps.yahoo.com/#lat=46.08047&lon=14.5&zoom=16&q=46.08047,14.5&conf=1&start=1&mvt=m&trf=0" target="_blank">Yahoo Maps</a></li><li><a href="http://www.bing.com/maps/default.aspx?v=2&lvl=14&sp=point.46.08047_14.5_GC3XX5J" target="_blank">Bing Maps</a></li><li><a href="http://www.opencyclemap.org/?zoom=12&lat=46.08047&lon=14.5" target="_blank">Open Cycle Maps</a></li><li><a href="http://www.openstreetmap.org/?mlat=46.08047&mlon=14.5&zoom=12" target="_blank">Open Street Maps</a></li></span>
+</ul>
+
+        </span>
+        <p class="NoPrint">
+            
+        </p>
+        
+            <div class="InformationWidget Clear">
+                <h3>
+                    68 Logged Visits</h3>
+                <div class="EncryptDecrypt">
+                    <a href="#" class="decrypt-link">
+                        Decrypt
+                    </a>
+                </div>
+                <span id="ctl00_ContentBody_lblFindCounts"><p class="LogTotals"><img src="/images/logtypes/2.png" alt="Found it" title="Found it" /> 65&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/24.png" alt="Publish Listing" title="Publish Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logtypes/25.png" alt="Retract Listing" title="Retract Listing" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></span>
+                <p class="HalfLeft">
+                    <a id="ctl00_ContentBody_uxLogbookLink" href="cache_logbook.aspx?guid=51e40dec-6272-4dad-934b-e175daaac265">View Logbook</a> | <a id="ctl00_ContentBody_uxGalleryImagesLink" DisplayFormatPlural="View the Image Gallery of {0:#,###} images" DisplayFormatSingular="View the Image Gallery" href="gallery.aspx?guid=51e40dec-6272-4dad-934b-e175daaac265">View the Image Gallery</a>
+                </p>
+                <p class="NoBottomSpacing AlignRight">
+                    <span class="Warning">**Warning!</span> <a href="/about/glossary.aspx#spoiler" title="Spoilers">Spoilers</a> may be included in the descriptions or links.
+                </p>
+            </div>
+            
+            <div id="cache_logs_container">
+                <table id="cache_logs_table" class="LogsTable NoBottomSpacing">
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="AlignCenter">
+                                <div id="pnlLazyLoad" style="display: none;">
+                                    <img src="/images/loading2.gif" class="StatusIcon" alt="Loading" />
+                                    Loading Cache Logs...
+                                </div>
+                                <div id="pnlButtonLoad" style="display: none;">
+                                    <a class="MobileButton">
+                                        Load More Logs...</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <p>
+                <small>
+                    Current Time: <time datetime="2012-12-12T11:09:29Z">12/12/2012 11:09:29 (UTC-08:00) Pacific Time (US & Canada) (19:09 GMT)</time><br/>Last Updated: <time class="timeago" datetime="2012-12-05T14:49:26Z">2012-12-05T14:49:26Z</time> on 12/05/2012 06:49:26 (UTC-08:00) Pacific Time (US & Canada) (14:49 GMT) <br/>Rendered From:Unknown<br />Coordinates are in the WGS84 datum
+                </small>
+            </p>
+        
+        
+    </div>
+    <script id="tmpl_CacheLogRow" type="text/x-jquery-tmpl">
+            <tr class="log-row" data-encoded="${IsEncoded}" >
+                <td>
+                    <div class="FloatLeft LogDisplayLeft" >
+                        <p class="logOwnerProfileName">
+                            <strong><a id="143568283" href="/profile/?guid=${AccountGuid}">${UserName}</a></strong></p>
+                        <p class="logOwnerBadge">
+                            <img title="${creator.GroupTitle}" src="${creator.GroupImageUrl}">${creator.GroupTitle}
+                        </p>
+                        <p class="logOwnerAvatar">
+                            <a href="/profile/?guid=${AccountGuid}">
+                                {{if includeAvatars && AvatarImage}}
+                                <img width="48" height="48" src="http://img.geocaching.com/user/avatar/${AvatarImage}">
+                                {{else includeAvatars }}
+                                <img width="48" height="48" src="/images/default_avatar.jpg">
+                                {{/if}}
+                            </a></p>
+                        <p class="logOwnerStats">
+                        
+                            {{if GeocacheFindCount > 0 }}
+                            <img title="Caches Found" src="/images/icons/icon_smile.png"> ${GeocacheFindCount}
+                            {{/if}}
+                            
+                        </p>
+                    </div>
+                    <div class="FloatLeft LogDisplayRight">
+                        <div class="HalfLeft LogType">
+                            <strong>
+                                <img title="${LogType}" alt="${LogType}" src="/images/logtypes/${LogTypeImage}">&nbsp;${LogType}</strong></div>
+                        <div class="HalfRight AlignRight">
+                            <span class="minorDetails LogDate">${Visited}</span></div>
+                        <div class="Clear LogContent">
+                            {{if LatLonString.length > 0}}
+                            <strong>${LatLonString}</strong>
+                            {{/if}}
+                            <p class="LogText">{{html LogText}}</p>
+                            {{if Images.length > 0}}
+                                <table cellspacing="0" cellpadding="3" class="LogImagesTable">
+                                {{tmpl(Images) "tmplCacheLogImages"}}
+                                </table>
+                            {{/if}}
+                            
+                            <div class="AlignRight">
+                                <small><a title="View Log" href="log.aspx?LUID=${LogGuid}" target="_blank">
+                                    {{if (userInfo.ID==AccountID)}}
+                                       View / Edit Log / Images
+                                    {{else}}
+                                       View Log
+                                    {{/if}}
+                                </a></small>&nbsp;
+                                {{if (userInfo.ID==AccountID)}}
+                                <small><a title="Upload Image" href="upload.aspx?LID=${LogID}" target="_blank">Upload Image</a></small>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>      
+    </script>
+    <script id="tmpl_CacheLogImages" type="text/x-jquery-tmpl">
+            <tr>
+                <td>
+                    <a class="tb_images lnk" rel="tb_images[grp${LogID}]" href="http://img.geocaching.com/cache/log/large/${FileName}" data-title="{{tmpl "tmplCacheLogImagesTitle"}}">
+                        <img title="Photo" alt="Photo" src="/images/icons/16/photo.png"> 
+                        <span>${ $('<div />').text($('<div />').html($item.data.Name).text()).html() }</span>
+                    </a>
+                </td>
+            </tr>
+    </script>
+    <script id="tmpl_CacheLogImagesTitle" type="text/x-jquery-tmpl">
+            &lt;span class=&quot;LogImgTitle&quot;&gt; ${ $('<div />').text($('<div />').text($('<div />').html($item.data.Name).text()).html()).html() } &nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;
+
+            &lt;a target=&quot;_blank&quot; href=&quot;log.aspx?LUID=${$item.parent.parent.data.LogGuid}&IID=${ImageGuid}&quot;>View Log&lt;/a&gt;&nbsp;
+        
+            &lt;a href=&quot;http://img.geocaching.com/cache/log/large/${FileName}&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;
+
+            {{if (Descr && Descr.length > 0) }}
+               &lt;br /&gt;&lt;p class=&quot;LogImgDescription&quot;&gt;${ $('<div />').text($('<div />').text($('<div />').html($item.data.Descr).text()).html()).html() }&lt;/p&gt;
+            {{/if}}
+    </script>
+    <script id="tmpl_CacheCoordinateUpdate" type="text/x-jquery-tmpl">
+            <div class="ccu-update" data-lat="${ll[0]}" data-lng="${ll[1]}">
+                <h4 class="BottomSpacing">Corrected Coordinates (hidden from others)</h4>
+                <dl>
+                    <dt>Original:</dt>
+                    <dd>${ll_formatted} <a href="#" class="ccu-restore">Restore</a></dd>
+                </dl>
+                <dl class="ccu-parse">
+                    <dt>Change To:</dt>
+                    <dd>
+                        <input type="text" max="40" size="35" class="cc-parse-text">
+                        <button class="ccu-button ccu-parse">Submit</button>
+                    </dd>
+                </dl>
+                <dl class="ccu-parseverify" style="display:none;">
+                    <dt>Change To:</dt>
+                    <dd>
+                        <span class="ccu-parseverify-coords">N 32°38.880′, W 097°23.755′</span>
+                        
+                            <button class="ccu-button ccu-parseverify-accept">Accept</button>&nbsp;<button class="ccu-button ccu-parseverify-cancel">Cancel</button>
+                    </dd>
+                </dl>            
+            </div>
+            <div class="Clear"></div>
+            
+    </script>
+    
+    <script type="text/javascript">
+                <!--
+                var dh, lat, lng, guid;
+
+                dh = 'false';
+
+                lat=46.080467; lng=14.5; guid='51e40dec-6272-4dad-934b-e175daaac265';
+
+
+                function s2gps(guid) {
+                    var w = window.open('sendtogps.aspx?guid=' + guid, 's2gps', config='width=450,height=450,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no');
+                    w.focus();
+                }
+
+                function s2phone(wpid) {
+                    window.location.href='sendtophone.aspx?gc=' + wpid;
+                }
+
+                function pl(lc) {
+                    document.location.href='cache_details_print.aspx?guid=' + guid + '&numlogs=' + lc +'&pt=full&lt=letter&decrypt='+ ((dh)?'y':'n');
+                }
+                function setNotification(id) {
+                    //new Effect.Highlight(id, {startcolor:'#ffffff', endcolor:'#ffff99', restorecolor:'#ffff99', duration:3.0, queue:'front'});
+                    //new Effect.Highlight(id, {startcolor:'#ffff99', endcolor:'#ffffff', restorecolor:'#ffffff', duration:5.0, queue:'end'});
+                }
+                function cmo(id) {
+                    //new Effect.Fade(id);
+                    Cookie.set('sn', true);
+                }
+                function pp(img) {
+                    var w = window.open(img);
+                    w.focus();
+                }
+
+                //-->
+    </script>
+    <script language="javascript" type="text/javascript">
+            var map, bounds;
+            var canUpdateFavoriteStatus = true;
+            var decryptLogs = (urlParams["decrypt"] && urlParams["decrypt"] == "y") ? true : false;
+            var logInitialLoaded = false;
+            var $tfoot = $("#cache_logs_table").find("tfoot");
+            var currentPageIdx = 1, totalPages = 1, pageSize = 10;
+            var isBusy = false;
+        
+            var locString = {
+                    decrypt: 'Decrypt',
+                    encrypt: 'Encrypt'
+            };
+
+            $("#tmpl_CacheLogImagesTitle").template("tmplCacheLogImagesTitle");
+            $("#tmpl_CacheLogImages").template("tmplCacheLogImages");
+            $("#tmpl_CacheLogRow").template("tmplCacheLogRow");
+
+            $(".EncryptDecrypt")
+                .button({ icons: { secondary: 'ui-icon-arrowreturnthick-1-w'} })
+                .click(function (e) {
+                    e.preventDefault();
+                    $("tr.log-row").each(function (i, obj) {
+                        var $obj = $(obj);
+                        if ($obj.data("encoded") == true) {
+                            var lt = $obj.find("p.LogText");
+                           //var ltDecoded = $('<div />').html(lt.html()).text();
+                            lt.html(convertROTStringWithBrackets(lt.html()));
+                        }
+                    });
+
+                    decryptLogs = !decryptLogs;
+
+                    $("a.decrypt-link").html(decryptLogs ? locString.encrypt : locString.decrypt);
+
+                    return false;
+                });
+            
+            function appendNewLogs(obj) {
+
+                totalPages = obj.pageInfo.totalPages;
+
+                var $newBody = $(document.createElement("TBODY"));
+
+                $("#tmpl_CacheLogRow").tmpl(obj.data,{ includeAvatars: includeAvatars }).appendTo($newBody);
+
+                $newBody.find("a.tb_images").each(function()
+                {
+                    var $this = $(this);
+                    $this.fancybox({
+                        'type': 'image', 
+                        'titlePosition': 'inside', 
+                        'padding': 10,
+                        titleFormat: function() { return $this.data('title'); } 
+                    });
+                });
+
+                $("#cache_logs_table")
+                    .append($newBody.children());
+
+                currentPageIdx = obj.pageInfo.idx + 1;
+                pageSize = obj.pageInfo.size;
+            }
+
+            function callLogLoad(hideFooter) {
+                $.getJSON("/seek/geocache.logbook", { tkn: userToken, idx: currentPageIdx, num: pageSize, decrypt: decryptLogs },
+                    function (response) {
+                        if (response.status == "success") {
+                            appendNewLogs(response);
+                            if( hideFooter || (totalPages < currentPageIdx) ) {
+                                $tfoot.hide();
+                            }
+                        } else if (response.status == "error" && response.value == "1") {
+                            // reload the page since the data had expired.
+                            window.location.reload();
+                        }
+                        isBusy = false;
+                });
+            }
+
+            $("#add_to_favorites").click(function () {
+
+                if (canUpdateFavoriteStatus) {
+                    canUpdateFavoriteStatus = false;
+
+                    var fv = parseInt($(".favorite-value").text());
+                    fv++;
+                    $(".favorite-value").text(fv);
+
+                    var fr = parseInt($(".favorite-rank").text());
+                    fr--;
+                    $(".favorite-rank").text(fr);
+
+                    $("#pnlNonfavoriteCache").fadeOut("fast", function () {
+                        $("#pnlFavoriteCache").fadeIn("fast");
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '/datastore/favorites.svc/update?u=' + userToken + '&f=true',
+                        success: function () {
+                            canUpdateFavoriteStatus = true;
+                            gotScore = false;
+                            showFavoriteScore();
+                        }
+                    });
+
+                    return false;
+                }
+            });
+
+            $("#remove_from_favorites").click(function () {
+
+                if (canUpdateFavoriteStatus) {
+                    canUpdateFavoriteStatus = false;
+
+                    var fv = parseInt($(".favorite-value").text());
+                    fv--;
+                    $(".favorite-value").text(fv);
+
+                    var fr = parseInt($(".favorite-rank").text());
+                    fr++;
+                    $(".favorite-rank").text(fr);
+
+                    $("#pnlFavoriteCache").fadeOut("fast", function () {
+                        $("#pnlNonfavoriteCache").fadeIn("fast");
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '/datastore/favorites.svc/update?u=' + userToken + '&f=false',
+                        success: function () {
+                            canUpdateFavoriteStatus = true;
+                            gotScore = false;
+                            showFavoriteScore();
+                        }
+                    });
+
+                    return false;
+                }
+            });
+
+            $(function () {
+
+                // CSP Section
+                if ($("#cspMessage").length) {
+                
+                    var editLink = $('a[href*="report.aspx"]').attr('href');
+
+                    $("#cspMessage").prepend('<P>Please take a moment to check the listing and ensure it is ready to enable. Clicking "Submit for Review" will enable your cache page.</P>');
+                    $("#cspMessage").prepend('<P>Once it is enabled, you will receive a confirmation email that it was successfully submitted. It is peak season for cache placement. Your volunteer reviewer will strive to begin the review process within the next 7 days.</P>');
+                    $("#cspMessage").prepend('<P>Your cache page has not been reviewed yet. It will not appear in the review queue until you enable it.</P>');
+                    
+                    $("#cspGoBack").click(function (e) {
+                        e.preventDefault();
+                        window.location = editLink;
+                        return false;
+                    });
+                    
+                    $("#cspSubmit").click(function (e) {
+                        e.preventDefault();
+                        $.pageMethod("EnableCSPCache", JSON.stringify({ dto: { ut: userToken } }), function (r) {
+                            var r = JSON.parse(r.d);
+                            if (r.success == true) {
+                                window.location = '/seek/cache_details.aspx?guid=' + r.guid;
+                            } else {
+                                alert("There was an error enabling your cache.");
+                            }
+                        });
+                        return false;
+                    });
+                    
+                    $("#cspConfirm").change(function() {
+                        if ($("#cspConfirm").is(":checked")) {
+                            $("#cspSubmit").removeAttr('disabled');
+                            $("#cspGoBack").attr('disabled', true);
+                        } else {
+                            $("#cspSubmit").attr('disabled', true);
+                            $("#cspGoBack").removeAttr('disabled');
+                        }
+                    });
+                }
+
+
+                //override coords
+                if (typeof(userDefinedCoords) != "undefined") {
+                    if (userDefinedCoords.status == "success" && userDefinedCoords.data.isUserDefined == true) {
+                        mapLatLng = $.extend({}, mapLatLng, userDefinedCoords.data);
+                        $("#uxLatLon")
+                            .data("isOverridden", true)
+                            .addClass("myLatLon");
+                    } else if (userDefinedCoords.status == "success") {
+                        mapLatLng = $.extend({}, mapLatLng, userDefinedCoords.data);
+                    } else {
+                        $("#uxLatLonLink").contents().unwrap();
+                    }
+                } else {
+                    $("#uxLatLonLink").contents().unwrap();
+                }
+            
+            
+                var cacheNoteText = {
+                    DefaultText: 'Click to enter a note',
+                    ErrorInSaving: 'There was an error saving page.  Please refresh the page and try again.',
+                    SavingText: 'Please wait, saving your note...'
+                };
+
+                
+
+                $("time.timeago").timeago();
+
+                $(".button").button();
+
+                var sn = Cookie.get('sn');
+
+                if ($('#trNotPM').length > 0) {
+                    $('#trNotPM').toggle(!sn);
+                }
+
+                $("#cache_note").editInPlace({
+                    callback: function (unused, enteredText) {
+                        var me = $(this);
+
+                        var et = $.trim(enteredText);
+                        if (et.length > 500)
+                            et = et.substr(0, 500);
+
+                        $.pageMethod("SetUserCacheNote", JSON.stringify({ dto: { et: et, ut: userToken} }), function (r) {
+                            var r = JSON.parse(r.d);
+                            if (r.success == true) {
+                                if ($.trim(r.note) == "") {
+                                    $("#cache_note").text(cacheNoteText.DefaultText);
+                                } else {
+                                    $("#cache_note").text(r.note);
+                                }
+
+                                me.effect('highlight', { color: '#ffb84c' }, 'slow');
+                            } else {
+                                alert(cacheNoteText.ErrorInSaving);
+                                $("#cache_note").text(cacheNoteText.DefaultText);
+                            }
+
+                        });
+
+                        return cacheNoteText.SavingText;
+                    }
+                        , default_text: cacheNoteText.DefaultText
+                        , field_type: "textarea"
+                        , textarea_rows: "7"
+                        , textarea_cols: "65"
+                        , show_buttons: true
+                        , bg_over: "#FDEBBB"
+                    //, callback_skip_dom_reset: true
+
+                });
+
+                $("#lnk_slippyMap").click(function(e) {
+                    e.preventDefault();
+                    loadDynamicMap();
+                    return false;
+                });
+
+                $(".inplace_field").live("focus", function () {
+                    if ($(this).data("created") == null) {
+                        $(this).data("created", true)
+                        $(this).countable({
+                            maxLength: 500
+                        });
+                    }
+                });
+
+                $("#pcn_help").tipTip({ activation: 'hover', content: 'Enter your own notes here.  No other user will be able to access them.' });
+
+                $("a.decrypt-link").html(decryptLogs ? locString.encrypt : locString.decrypt);
+                        
+                if ($("#cache_logs_container").length > 0) {
+            
+                    appendNewLogs(initalLogs);
+
+                    if (DetectMobileQuick()) {
+                        $("#pnlButtonLoad")
+                            .show()
+                            .find("a.MobileButton")
+                                .click(function (e) {
+                                    e.preventDefault();
+                                    callLogLoad(false);
+                                    return false;
+                                })
+                                .button();
+                            if(!DetectTierTablet()){
+                            $("a.MobileButton").addClass("Phone");
+                            }
+                    } else {
+                        $("#pnlLazyLoad").show();
+                    
+                        $(window).endlessScroll({
+		                    fireOnce: true,
+		                    fireDelay: 500,
+                            bottomPixels: ($(document).height() - $("#cache_logs_container").offset().top) + 50,
+	                        ceaseFire: function(){
+			                    // stop the scrolling if the last page is reached.
+                                return (isLoggedIn == false) || (totalPages < currentPageIdx);
+		                    },
+                            callback: function() {
+                                if (!isBusy) {
+                            
+                                    isBusy = true;
+                                    $tfoot.show();
+                                    callLogLoad(true);
+                                }
+	                       }
+	                    });
+                    }
+                }
+
+                if (!isLoggedIn) {
+                    $("#cache_logs_table").find("tfoot").hide();
+                }
+
+                if (mapLatLng != null) {
+
+                    $("#uxLatLonLink").qtip({
+                        suppress:false,
+                        content: buildCacheCoordMenu(),
+                        position: {
+                            my: 'left top',
+                            at: 'right top',
+                            adjust: {
+                                x: 10, y: -10
+                            }
+                        },
+                        show: {
+                            ready: false,
+                            event: "click",
+                            solo: true
+                        }, hide: {
+                            event: 'unfocus'
+                        },
+                        style: {
+                            tip: {
+                                corner: false
+                            },
+                            classes: 'ui-tooltip-widget'
+                        },
+                        events: {
+                            show: function () {
+                                if ($("#uxLatLon").data("isOverridden")) {
+                                    $("a.ccu-restore").show();
+                                } else {
+                                    $("a.ccu-restore").hide();
+                                }
+
+                                if (userDefinedCoords.status != "success") {
+                                    $("div.ccu-update").hide();
+                                } else {
+                                    $("div.ccu-update").show();
+                                }
+                            }
+                        }
+                    }).click(function (e) {
+                        e.preventDefault();
+                        return false;
+                    });
+            
+                    setStaticMaps();
+                    //$("#staticMap").lazyload();
+                }
+            });
+
+            function setStaticMaps() {
+
+                var map = new L.Map('map_preview_canvas', {
+                    center: new L.LatLng(mapLatLng.lat, mapLatLng.lng),
+                    zoom: 10,
+                    doubleClickZoom: false,
+                    dragging: false,
+                    touchZoom: false,
+                    scrollWheelZoom: false,
+                    attributionControl: false
+                })
+                .addControl(new L.Control.Attribution({ prefix: '<a href="/about/maps.aspx#leaflet" target="_blank">About our maps</a>' }));
+
+
+                var mapLarge = new L.Map('map_canvas', {
+                    center: new L.LatLng(mapLatLng.lat, mapLatLng.lng),
+                    zoom: 14,
+                    doubleClickZoom: true,
+                    dragging: true,
+                    touchZoom: false,
+                    scrollWheelZoom: false,
+                    zoomControl: true,
+                    attributionControl: false
+                })
+                .addControl(new L.Control.Attribution({ prefix: '<a href="/about/maps.aspx#leaflet" target="_blank">About our maps</a>' }))
+                .addControl(new L.Control.Scale());
+
+                var tileOptions = {
+                    tileUrl: "http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.jpg",
+                    name: "mpqosm",
+                    alt: "MapQuest",
+                    //attribution: "Tiles Courtesy of <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>, Map and map data © 2012 <a href=\"http://www.openstreetmap.org\" target='_blank'>OpenStreetMap</a> and contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>. ",
+                    subdomains: "1234",
+                    tileSize: 256,
+                    minZoom: 0,
+                    maxZoom: 18
+                };
+
+                map.addLayer(new L.TileLayer(tileOptions.tileUrl, tileOptions));
+                mapLarge.addLayer(new L.TileLayer(tileOptions.tileUrl, tileOptions));
+
+                var pinIcon = L.Icon.extend({
+                    iconSize: new L.Point(20, 23),
+                    iconAnchor: new L.Point(10,23),
+                    shadowUrl: null
+                });
+
+                var mkA = new L.Marker(new L.LatLng(mapLatLng.lat, mapLatLng.lng), 
+                    {
+                        icon: new pinIcon({iconUrl:'/images/wpttypes/pins/' + mapLatLng.type + '.png', iconAnchor: new L.Point(10,23)}),
+                        title: mapLatLng.name
+                    })
+                    .on("click", function () {
+                        document.getElementById("uxlrgMap").scrollIntoView(true);
+                        return false;
+                    });
+
+                var mkA2 = new L.Marker(new L.LatLng(mapLatLng.lat, mapLatLng.lng), {
+                    icon: new pinIcon({iconUrl:'/images/wpttypes/pins/' + mapLatLng.type + '.png', iconAnchor: new L.Point(10,23)}),
+                    clickable: false, zIndexOffset:99, title: mapLatLng.name
+                });
+
+                map.addLayer(mkA);
+                mapLarge.addLayer(mkA2);
+
+                $("#ctl00_ContentBody_uxNotesAboutPrinting").fancybox({
+                    overlayShow: false
+                });
+                
+                
+                if (cmapAdditionalWaypoints != null && cmapAdditionalWaypoints.length > 0) {
+                    var llBounds = new L.LatLngBounds();
+
+                    for (var x = 0, len = cmapAdditionalWaypoints.length; x < len; x++) {
+                        var item = cmapAdditionalWaypoints[x],
+                            ll = new L.LatLng(item.lat, item.lng),
+                            marker = new L.Marker(ll, {
+                                icon: new pinIcon({iconUrl:'/images/wpttypes/pins/' + item.type + '.png', iconAnchor: new L.Point(10,23)}),
+                                title: item.name, 
+                                clickable:false
+                            });
+
+                        llBounds.extend(ll);
+                        mapLarge.addLayer(marker);
+                    }
+                    var bz = mapLarge.getBoundsZoom(llBounds);
+
+                    mapLarge.setView(new L.LatLng(mapLatLng.lat, mapLatLng.lng), bz);
+                } 
+            }
+
+            
+        
+            function dht() {
+                try {
+                    $('#div_hint').html(convertROTStringWithBrackets($('#div_hint').html()));
+                    var linkText = (($('#ctl00_ContentBody_lnkDH').attr('title') == 'Decrypt') ? 'Encrypt' : 'Decrypt');
+                    $('#ctl00_ContentBody_lnkDH').text(linkText);
+                    $('#ctl00_ContentBody_lnkDH').attr('title', linkText);
+                } catch (e) {
+                    alert(e);
+                    return false;
+                }
+                return false;
+            } 
+
+            function buildCacheCoordMenu() {
+                var curLatLng = new LatLon(mapLatLng.lat, mapLatLng.lng)
+                $.template( "tmplCacheCoordinateUpdate_CoordItem", "<tr><td nowrap='nowrap'>${t}</td><td class='ccc-coord' nowrap='nowrap' dataum='${k}'>${v}</td></tr>" );
+
+                var $menu = $("<div></div>");
+
+                $( "#tmpl_CacheCoordinateUpdate" ).tmpl( {
+                    ll: [mapLatLng.lat, mapLatLng.lng], 
+                    ll_formatted: mapLatLng.oldLatLngDisplay
+                } ).appendTo( $menu );
+
+                $menu.find("button.ccu-button").button();
+
+                $menu.delegate("button.ccu-parse", "click", function (e) {
+                    e.preventDefault();
+				    var $this = $(e.target),
+					    $parse =$this.closest('dd').find(".cc-parse-text"),
+					    parseCoords = $.trim($parse.val());
+					
+                    if (parseCoords.length == 0) {
+                        alert('Please provide valid coordinates.');    
+                    } else {
+                        $.getJSON("/api/geocode", { parse: parseCoords}, function (response) {
+                            if (response.status == "success") {
+                                var newLatLng = new LatLon(response.data.lat, response.data.lng);
+                                
+                                // update the displayed coords    
+                                var dist = curLatLng.rhumbDistanceTo(newLatLng);
+                                var bearingTo = curLatLng.rhumbBearingTo(newLatLng);
+                                var bearing = bearingTo >= 0 || bearingTo < 22.5 ? "N" : bearingTo >= 22.5 || bearingTo < 67.5 ? "NE" : bearingTo >= 67.5 || bearingTo < 112.5 ? "E" : bearingTo >= 112.5 || bearingTo < 157.5 ? "SE" : bearingTo >= 157.5 || bearingTo < 202.5 ? "S" : bearingTo >= 202.5 || bearingTo < 247.5 ? "SW" : bearingTo >= 247.5 || bearingTo < 292.5 ? "W" : bearingTo >= 292.5 || bearingTo < 337.5 ? "NW" : "N";
+                                
+                                var formats = response.data.formats;
+                                // all these finds, make me feel dirty
+                                $menu
+                                    .find("span.ccu-parseverify-coords").text(formats.DM).end()
+                                    .find("dl.ccu-parse").hide().end()
+                                    .find("dl.ccu-parseverify").show().end()
+								    .find("button.ccu-parseverify-accept")
+                                        .data("utm", '')
+                                        .data("dm", formats.DM)
+                                        .data("lat", response.data.lat)
+                                        .data("lng", response.data.lng)
+                                        .end();
+                            } else {
+                                alert("Sorry unable to parse the coordinates you entered.");
+                            }
+                        });
+                    }
+                        
+                    return false;
+                });
+
+                $menu.delegate("button.ccu-parseverify-accept", "click", function (e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    // update to webmethod
+                    $.pageMethod("SetUserCoordinate", JSON.stringify({ dto: { data: {lat: $this.data("lat"), lng: $this.data("lng") }, ut: userToken } }), function (r) {
+                        var r = JSON.parse(r.d);
+                        if (r.status == "success") {
+                            window.location.reload();
+                        } else {
+                            $("#uxLatLonLink").qtip('hide');
+                        }
+                    
+                    });
+                
+                    return false;
+                });
+
+                $menu.delegate("button.ccu-parseverify-cancel", "click", function (e) {
+                    e.preventDefault();
+                    $menu
+                        .find("input.cc-parse-text").val('').end()
+                        .find("dl.ccu-parse").show().end()
+                        .find("dl.ccu-parseverify").hide().end();
+                    return false;
+                });
+
+                $menu.delegate("a.ccu-restore", "click", function (e) {
+                    e.preventDefault();
+
+                        $.pageMethod("ResetUserCoordinate", JSON.stringify({ dto: { ut: userToken } }), function (r) {
+                            var r = JSON.parse(r.d);
+                            if (r.status == "success") {
+                                window.location.reload();
+                            }
+                        });
+                
+                    return false;
+                });
+
+                return $menu;
+            }
+
+            GSPK = window.GSPK || {};
+            GSPK.Selector = {};
+            GSPK.Selector.getSelected = function(){
+              var t = null;
+              if ( window.getSelection ){
+                t = window.getSelection();
+              }else if(document.getSelection){
+                t = document.getSelection();
+              }else if(document.selection){
+                t = document.selection.createRange().text;
+              }
+              return t;
+            }
+    
+            try { _gaq.push(['_trackEvent', 'Geocaching', 'CacheDetailsMemberType', 'Premium', null, true]); } catch(err) { }
+    </script>
+    
+    
+                
+            </div>
+            
+            
+            
+            
+        </div>
+        
+        
+    </section>
+    
+    <footer>
+        
+        <div class="container">
+            
+            <div class="span-24 last FooterTop">
+                
+                
+
+<div class="LocaleText">
+    
+    <strong>Choose Your Language:</strong>
+    
+</div>
+<div class="LocaleList">
+    
+    <div class="selected-language">
+        
+        <a href="#">English&#9660;</a>
+        
+    </div>
+    <ul class="language-list">
+        
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl00_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem&#39;,&#39;&#39;)">English</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl01_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl01$uxLocaleItem&#39;,&#39;&#39;)">Deutsch</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl02_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl02$uxLocaleItem&#39;,&#39;&#39;)">Français</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl03_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl03$uxLocaleItem&#39;,&#39;&#39;)">Português</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl04_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl04$uxLocaleItem&#39;,&#39;&#39;)">Čeština</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl05_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl05$uxLocaleItem&#39;,&#39;&#39;)">Svenska</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl06_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl06$uxLocaleItem&#39;,&#39;&#39;)">Español</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl07_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl07$uxLocaleItem&#39;,&#39;&#39;)">Italiano</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl08_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl08$uxLocaleItem&#39;,&#39;&#39;)">Nederlands</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl09_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl09$uxLocaleItem&#39;,&#39;&#39;)">Català</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl10_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl10$uxLocaleItem&#39;,&#39;&#39;)">Polski</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl11_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl11$uxLocaleItem&#39;,&#39;&#39;)">Eesti</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl12_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl12$uxLocaleItem&#39;,&#39;&#39;)">Norsk, Bokmål</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl13_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl13$uxLocaleItem&#39;,&#39;&#39;)">한국어</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl14_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl14$uxLocaleItem&#39;,&#39;&#39;)">Magyar</a></li>
+            
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl15_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl15$uxLocaleItem&#39;,&#39;&#39;)">Română</a></li>
+            
+    </ul>
+    
+</div>
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+        jQuery(".selected-language a").click(function (e) {
+            e.preventDefault();
+            var $loc = jQuery(this).parent().next();
+            jQuery($loc).show().position({
+                of: $loc.parent(),
+                my: "left top",
+                at: "left bottom",
+                offset: "0 0",
+                collision: "fit fit"
+            });
+            jQuery(this).addClass("Expanded");
+            jQuery(document).click(function () {
+                jQuery(".language-list").fadeOut("fast");
+                jQuery(".selected-language a").removeClass("Expanded");
+            });
+            return false;
+        });
+    });
+</script>
+                
+            </div>
+            
+            <div class="span-4">
+                
+                <p class="FooterHeader">
+                    <strong>
+                        About</strong></p>
+                <ul class="FooterLinks">
+                    <li>
+                        <a id="ctl00_hlFooterGlossary" title="Glossary of Terms" href="../about/glossary.aspx">Glossary of Terms</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterBrochures" title="Brochures" href="../tools/#Guide">Brochures</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterAbout" title="About Groundspeak" href="../about/groundspeak.aspx">About Groundspeak</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterVolunteers" title="About Our Volunteers" href="../volunteers/">About Our Volunteers</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterHistory" title="History" href="../about/history.aspx">History</a></li>
+                </ul>
+                
+            </div>
+            
+            <div class="span-4">
+                
+                <p class="FooterHeader">
+                    <strong>
+                        Press</strong></p>
+                <ul class="FooterLinks">
+                    <li>
+                        <a id="ctl00_hlFooterNews" title="News Articles" href="../press/">News Articles</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterMediaFAQs" title="Media FAQs" rel="document" href="../articles/Brochures/footer/FAQ_Media.pdf">Media FAQs</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterMediaInquiries" title="Media Inquiries" rel="external" href="http://support.groundspeak.com/index.php?pg=request&amp;xCategory=11">Media Inquiries</a></li>
+                </ul>
+                
+            </div>
+            
+            <div class="span-5">
+                
+                <p class="FooterHeader">
+                    <strong>
+                        Questions & Suggestions</strong></p>
+                <ul class="FooterLinks">
+                    <li>
+                        <a id="ctl00_hlFooterHelpCenterLink" title="Help Center" rel="external" href="http://support.groundspeak.com/index.php">Help Center</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterDiscussionForums" accesskey="f" title="Discussion Forums" href="../forums/">Discussion Forums</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterParksPoliceLink" title="Land Management and Law Enforcement" href="../parksandpolice/">Land Management and Law&nbsp;Enforcement</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterContactUs" title="Contact Us" href="../contact/">Contact Us</a></li>
+                </ul>
+                
+            </div>
+            
+            <div class="span-4">
+                
+                <p class="FooterHeader">
+                    <strong>
+                        Resources</strong></p>
+                <ul class="FooterLinks">
+                    <li>
+                        <a id="ctl00_hlFooterTools" accesskey="o" title="Tools and Downloads" href="../tools/">Tools and Downloads</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterAPIProgram" title="API Program" href="../live/">API Program</a></li>
+                    <li>
+                        <a id="ctl00_hlFooterBenchmarks" title="Find a Benchmark" href="../mark/">Find a Benchmark</a></li>
+                </ul>
+                
+            </div>
+            <div class="span-4 append-3 last">
+                
+                <p class="FooterHeader">
+                    <strong>
+                        Follow Us</strong></p>
+                        <ul class="FooterLinks FollowUsLinks">
+                            <li><a id="ctl00_hlFacebook" title="Facebook" href="http://www.facebook.com/pages/Geocachingcom/45625464679?ref=ts"><img id="ctl00_imgFacebook" title="Facebook" src="../images/home/icon_facebook.png" alt="Facebook" style="border-width:0px;" /></a></li>
+                            <li><a id="ctl00_hlTwitter" title="Twitter" href="http://twitter.com/GoGeocaching"><img id="ctl00_imgTwitter" title="Twitter" src="../images/twitter/twitter_icon_white_22.png" alt="Twitter" style="border-width:0px;" /></a></li>
+                            <li><a id="ctl00_hlFlickr" title=" Flickr" href="http://www.flickr.com/photos/geocaching_com/"><img id="ctl00_imgFlickr" title="Flickr" src="../images/home/icon_flickr.png" alt="Flickr" style="border-width:0px;" /></a></li>
+                            <li><a id="ctl00_hlYouTube" title="YouTube" href="http://www.youtube.com/user/GoGeocaching"><img id="ctl00_imgYouTube" title="YouTube" src="../images/home/icon_youtube.png" alt="YouTube" style="border-width:0px;" /></a></li>
+                        </ul>
+                
+            </div>
+            
+            <p class="span-24 last FooterBottom">
+                Copyright
+                &copy; 2000-2012
+                <a href="http://www.groundspeak.com/" title="Groundspeak, Inc." accesskey="g">Groundspeak, Inc.</a>
+                All Rights Reserved.<br />
+                <a id="ctl00_hlFooterTerms" accesskey="u" title="Groundspeak Terms of Use" href="../about/termsofuse.aspx">Groundspeak Terms of Use</a>
+                |
+                <a id="ctl00_hlFooterPrivacy" accesskey="x" title="Privacy Policy" href="../about/privacypolicy.aspx">Privacy Policy</a>
+                |
+                <a id="ctl00_hlFooterLogo" accesskey="l" title="Geocaching Logo Usage Guidelines" href="../about/logousage.aspx">Geocaching Logo Usage Guidelines</a>
+                |
+                <a id="ctl00_hlFooterAPI" accesskey="`" title="API License Agreement" href="../live/api_license_agreement.aspx">API License Agreement</a>
+                |
+                <a id="ctl00_HlFooterStatus" accesskey="`" title="Current Service Status" href="http://status.geocaching.com">Service Status</a></p>
+            
+        </div>
+        
+        
+    </footer>
+    <div class="SkipLinks">
+        
+        <a id="ctl00_hlSkipLinksTop" accesskey="t" title="Return to the Top of the Page" href="#Top">Return to the Top of the Page</a>
+        
+    </div>
+    
+    
+    
+
+<script type="text/javascript">
+//<![CDATA[
+var uvtoken = 'rzS0IMO8IOgZlU5x5CWros8eSvYUNNM4iZDsHYncKgZSSugA9geMZznUe0T%2fY6KTIrqHCvVyuCWa4kMjoIVUZ%2buDYhATkkAkSdZd7HVVUGIsv2bN0cTBsG2fR8hQEBxtyO2Pl6nN%2bLzayWsnUFS3%2bK7OFG5q%2bnwJUdiDR3sDTZ3aVK4XlGCxrW3G4W2qL%2ft8KuKL1O2R2fP8Qs5cqvywtMl2wmKqZwxyArUzNp7k2WwRAggH6MKWJ%2fCjvlh3jjvHu75rPlhheDz1YKLHeJVP5X14ipXPvXr%2fIYNL74gbxYHCmiHkH2RW%2fY0gbtIs48gmmN2mtN3GjW7jTPMJUXj7ly3o42B3G36ukE1QaGAss0eBOEeqqTxufqvHJ%2fEUsdq69j4v0uIBm%2fMwr8nSmStQR6zrrLa%2fgxZpvO9%2f%2frbEsCM%3d';var isLoggedIn = true;
+var userDefinedCoords = {"status":"fail","data":{"isUserDefined":false,"oldLatLngDisplay":"N 46° 04.828' E 014° 30.000'"}};
+mapLatLng = {"lat":46.08047,"lng":14.5,"type":2,"name":"Zaraščen Tir"};
+var ccConversions = [{"t":"Decimal","k":"DD","d":"WGS84","v":"46.080467, 014.500000"},{"t":"DDD MM SS.SSS","k":"DMS","d":"WGS84","v":"N 46° 04' 49.681\" E 014° 30' 00.000\""},{"t":"UTM","k":"UTM","d":"WGS84","v":"33T E 461340 N 5103109"}];
+userInfo = {ID: 4793174};
+userToken = '4OB3GFHLRR3CGMZFUAPD6CWPE24ZHP6Q7KCBEDNYY5CUNWNQIA32GZPVPFMH6IGAEYKVNNSFLMQ7BBGFDKQBT3BZGZBYKVQ4H5BWKD6MVBKYBTM627XPOUSUP6U4JF7NKKEOYJ4A6LEG2T5B6MG5AMMFOS27KNE4U2BAU4PZHXTIASIYWFYVKCUOKL22KFA6QAHSYC5LPKUTBNJFQSM3QEGVIHYVVXSF5KDHSUDQHXOKCHVSE4PQ';
+includeAvatars = true;
+initalLogs = {"status":"success", "data": [{"LogID":282928300,"CacheID":3220672,"LogGuid":"04183b59-fd84-4880-9195-edac89ffecd6","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Zakladek nas je pripeljal v zanimiv industrijski del Ljubljane. V okolici smo bili že velikokrat, a tale košcek \"zemljišca\" nam je bil neznan. Sprehod je bil zanimiv in v bližini je dišalo - po plinu. Tu si verjetno res ni najbolje vzeti pavzo za cigareto <img src=\"/images/icons/icon_smile_wink.gif\" border=\"0\" align=\"middle\" />. Se pa seveda lahko poišce zakladek. <br /><br />Bunkeljni na okoliških delovišcih so usmerjeni v izvedbo svojih del in nalog, tako da geosledcem pristop ne bi smel biti problematicen - No, vsaj nam ni povzrocal težav. V bližini je sicer varnostna kamera a mislimo, da je zakladek dovolj dalec, da se varnostnikom na drugi strani ne prižigajo rdece lucke.<br /><br />Škatlico smo našli brez vecjih težav a zapis naše najdbe v knjižico obiskov je bil nekoliko težaven. Listki so namrec popolnoma premoceni! Bilo bi dobro, da bi lastniki opravili vzdrževalna dela!!!<br /><br />Hvala za zakladek!<br />---------------------------<br />This cache will take you to a lost place in the industrial part of Ljubljana. It si an interesting experience<br /><br />The box is wet and log book is soaked. Needs maintenance.<br /><br />TFTC!","Created":"2012-12-05","Visited":"2012-12-02","UserName":"sonček","MembershipLevel":3,"AccountID":312137,"AccountGuid":"658a025e-b36f-417c-b929-6ed7bf85b790","Email":"","AvatarImage":"11e42460-b659-47b2-a22f-79d6798b92c7.jpg","GeocacheFindCount":1671,"GeocacheHideCount":12,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":282298908,"CacheID":3220672,"LogGuid":"9cefe38c-acfe-4512-a394-dd9d08bfb32c","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Našli po hitrem postopku.","Created":"2012-12-01","Visited":"2012-12-01","UserName":"tomsetki","MembershipLevel":1,"AccountID":5435784,"AccountGuid":"653835a9-cb32-4792-b226-fd2667163c8e","Email":"","AvatarImage":"6ab147f3-0b31-401d-bf1c-f4148cd51324.gif","GeocacheFindCount":390,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":281522369,"CacheID":3220672,"LogGuid":"c290e3ef-7354-49d7-b885-f596519a08fb","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Zanimiva, kolesarska, \"blatna\" jesenska sobota je minila v duhu geolova, 17 najdenih zakladov in spoznavanje kotickov Ljubljane. Hitro najden tir, zakladek pa me je malo begal, najprej sem morala odstraniti tone listja, ker so koordinate nekoliko mimo, nato sem iskala kamen...a je bilo nato ocitno, saj sem že prej gledala kupcek, he, he. HZZ<br />YakominiYi","Created":"2012-11-25","Visited":"2012-11-24","UserName":"YakominiYi","MembershipLevel":3,"AccountID":4304234,"AccountGuid":"e785ce97-a1b3-4aae-8bc0-28b43186be31","Email":"","AvatarImage":"c13b9ef5-0c39-4dfa-a94a-a1335ca0ff19.jpg","GeocacheFindCount":776,"GeocacheHideCount":55,"ChallengesCompleted":16,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":280713139,"CacheID":3220672,"LogGuid":"b22275bb-798b-4010-9293-8f8eca9ff941","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Uspelo mi je izbrati pravi dostop in do kecka sem pristopil brez težav. Na sreco v dopoldanskem casu ni bilo zaposlenih na dvorišcih levo ali desno, verjetno je bilo premraz za cikanje in kafetkanje. tako sem lahko v miru opravil svoje...<br />Na lov sem šel brez pisala, pa tudi v zakladku ni nobenega. Na sreco je telefon ovekovecil mojo najdbo <img src=\"/images/icons/icon_smile_cool.gif\" border=\"0\" align=\"middle\" />","Created":"2012-11-20","Visited":"2012-11-20","UserName":"ATA ORU","MembershipLevel":1,"AccountID":4495291,"AccountGuid":"5e4c6b0d-c81f-4519-a5cb-0b6fb02f764b","Email":"","AvatarImage":"f24d91bd-2c43-4e50-aa29-b263ed988be2.jpg","GeocacheFindCount":726,"GeocacheHideCount":0,"ChallengesCompleted":14,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[{"ImageID":16223026,"ImageGuid":"bfaea6a8-502d-4095-9e84-6888e33c920a","Name":"2012-11-20 09.13.39","Descr":"","FileName":"bfaea6a8-502d-4095-9e84-6888e33c920a.jpg","Created":"2012-11-20","LogID":280713139,"CacheID":3220672,"ImageUrl":null}]},{"LogID":280243063,"CacheID":3220672,"LogGuid":"6ddcafde-f5e6-4e79-9915-341f154bb2aa","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"TFTC","Created":"2012-11-18","Visited":"2012-11-18","UserName":"AndyDee","MembershipLevel":1,"AccountID":5069819,"AccountGuid":"ff6c96c4-8972-46f9-849f-89766e2fc2eb","Email":"","AvatarImage":"a79d055f-6449-498d-8441-3bf81650209e.jpg","GeocacheFindCount":124,"GeocacheHideCount":3,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":280233178,"CacheID":3220672,"LogGuid":"71462f9c-73cd-4290-a540-25ce5ccb9ac1","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Logbook je bil kar precej namocen, ampak je vpis vseeno vspel, HZZ.","Created":"2012-11-18","Visited":"2012-11-18","UserName":"rain.si","MembershipLevel":3,"AccountID":4209103,"AccountGuid":"85668cec-e8af-4a66-882a-1cea1639ac02","Email":"","AvatarImage":"d07ac7bb-d91d-4217-b630-d63c09c247cd.jpg","GeocacheFindCount":124,"GeocacheHideCount":5,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":280210122,"CacheID":3220672,"LogGuid":"523b8ff9-d3f2-440e-8624-e207df957028","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"TFTC :) T & J <br />in: TB<br />out: smrkec","Created":"2012-11-18","Visited":"2012-11-18","UserName":"GeoCachingSLO","MembershipLevel":1,"AccountID":6088292,"AccountGuid":"3f88e53f-3b03-4a88-b054-c8cd91fb0afd","Email":"","AvatarImage":"7f6b598c-7514-48f1-8f01-8e600710bd2d.jpg","GeocacheFindCount":28,"GeocacheHideCount":1,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":279931139,"CacheID":3220672,"LogGuid":"9604d087-268d-46f0-b52f-6fadfaadfc1e","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Malce sem se vozil naokoli, da sem našel pravi pristop...<br />Vmes mi je še skoraj nov mobitel padel na tla iz kolesa in staknil lepo odgrnino...vsaj zakladek sem našel <img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" />","Created":"2012-11-17","Visited":"2012-11-17","UserName":"Vrhobir","MembershipLevel":3,"AccountID":5222683,"AccountGuid":"062b9547-7973-4438-9ff6-ddecdd117c3f","Email":"","AvatarImage":"","GeocacheFindCount":221,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":281037984,"CacheID":3220672,"LogGuid":"064708a3-2727-44a4-a250-c5c44ed74c12","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Pr' tolk kamna je blo težko najdt pravega :)","Created":"2012-11-23","Visited":"2012-11-14","UserName":"alenka12","MembershipLevel":1,"AccountID":6546465,"AccountGuid":"dfa1727c-ab02-4529-9cf3-04781671e0d2","Email":"","AvatarImage":"","GeocacheFindCount":62,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":279501752,"CacheID":3220672,"LogGuid":"4fcd61ba-0090-46d9-b7cf-0682d7f21b49","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Ce sem pred tem našel 3 zaklade takoj, pa mi tukaj ni šlo najhitreje, pa vseeno v 10ih minutah. HZZ","Created":"2012-11-14","Visited":"2012-11-14","UserName":"Simon07","MembershipLevel":3,"AccountID":4074208,"AccountGuid":"88adea12-ae5a-471b-97b2-413e6c4e5433","Email":"","AvatarImage":"178d4ebe-bb91-4c26-a4ab-0a81e7ea7cdc.jpg","GeocacheFindCount":721,"GeocacheHideCount":13,"ChallengesCompleted":22,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":278635825,"CacheID":3220672,"LogGuid":"e4134282-8ea2-4324-b5d6-afdcf662acc8","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Kar s kolesom po slepem tiru do zakladka! :)<br />HZZ","Created":"2012-11-10","Visited":"2012-11-10","UserName":"strgacom","MembershipLevel":1,"AccountID":5106851,"AccountGuid":"7aa5ff75-478e-441a-9c2c-146ba7445777","Email":"","AvatarImage":"731d212e-0986-4081-a3e9-166bd77a7215.jpg","GeocacheFindCount":412,"GeocacheHideCount":4,"ChallengesCompleted":24,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":278635402,"CacheID":3220672,"LogGuid":"9624533c-5edc-445e-ac9d-0698cc937816","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Sploh nisem vedla, da je tukaj se en tir, poleg ocitnega :-).<br />HZZ","Created":"2012-11-10","Visited":"2012-11-10","UserName":"str82barby","MembershipLevel":1,"AccountID":6023888,"AccountGuid":"c60d7b09-831a-42a1-b965-df2d004ce0b0","Email":"","AvatarImage":"7767e510-ff52-4a4b-a104-73bb3bf33d9b.jpg","GeocacheFindCount":290,"GeocacheHideCount":3,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":278619491,"CacheID":3220672,"LogGuid":"264118b6-aaf9-42fe-975f-6df477442b07","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Danes smo se sprehodili in našli....","Created":"2012-11-10","Visited":"2012-11-10","UserName":"AfnGuncarji","MembershipLevel":1,"AccountID":6325823,"AccountGuid":"dc951c8c-94da-4db3-af7b-9b3ff8d0f96d","Email":"","AvatarImage":"7349fbca-0f34-4a9c-b187-24e6366cd130.jpg","GeocacheFindCount":19,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":278382644,"CacheID":3220672,"LogGuid":"45d0864d-6514-4554-97a1-c20b3077a289","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Wasn't to hard, nice walk on the railroad. ;-)","Created":"2012-11-08","Visited":"2012-11-08","UserName":"Heybobby5","MembershipLevel":1,"AccountID":5595016,"AccountGuid":"2ea83205-4232-4a17-aff6-38e1adeb29e0","Email":"","AvatarImage":"","GeocacheFindCount":164,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":278303201,"CacheID":3220672,"LogGuid":"88d218de-50cb-4508-9645-15c3b2d4318c","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Na hitro pred sluzbo :-)<br />Ta tir je pa res zarascen - z Bicikelj-om je dostop kar precej otezen in izgleda precej smesno ko potiskas kolo ob tirih :o)<br />Cache je bil premocen - voda je stala v posodici - vendar je bil logbook presenetljivo suh<br />TFTC","Created":"2012-11-08","Visited":"2012-11-08","UserName":"jota!","MembershipLevel":1,"AccountID":1867648,"AccountGuid":"029ffa9d-b1c2-4e9b-a618-f2554c9414b8","Email":"","AvatarImage":"71459410-cdd8-4167-a063-241e11113c15.jpg","GeocacheFindCount":255,"GeocacheHideCount":0,"ChallengesCompleted":5,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":277688180,"CacheID":3220672,"LogGuid":"946aa258-519b-47b4-bdb3-dc201ac93a1d","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Cetrti v današnji seriji zakladkov Davida in Ajde se ni dolgo upiral..<img src=\"/images/icons/icon_smile.gif\" border=\"0\" align=\"middle\" />","Created":"2012-11-04","Visited":"2012-11-04","UserName":"klemen05","MembershipLevel":1,"AccountID":5183611,"AccountGuid":"0629dc42-11ca-4225-bce6-cea8d9ef6593","Email":"","AvatarImage":"61ef2ccb-102e-4692-abcb-9dcad4cf35ef.jpg","GeocacheFindCount":464,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":277622132,"CacheID":3220672,"LogGuid":"89778391-3192-430c-bfd2-16c51aa568db","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Vremenoslovci so za današnjo soboto napovedali še lepo vreme. Dan je bilo potrebno izkoristit. Le kam bi se podali danes? No pa gremo proti Ljubljani. <br /><br />Hitra najdba na terenu.<br /><br />TFTC!<br /><br />Lagosi<br /><br />PS: Vsebina škatlice je mokra.","Created":"2012-11-04","Visited":"2012-11-03","UserName":"lagosi","MembershipLevel":3,"AccountID":665117,"AccountGuid":"1dbd534e-d41e-4717-9645-c5e91adae6db","Email":"","AvatarImage":"52aed91c-40eb-4884-94ec-1082aef6b162.jpg","GeocacheFindCount":2999,"GeocacheHideCount":21,"ChallengesCompleted":25,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":277333574,"CacheID":3220672,"LogGuid":"fccef41f-5108-4759-8a17-c3b93174ada3","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Vsak teden se peljem tu mimo, danes pa sem se ustavila in si vzela minutko tudi za ta zakladek :) <br />Ven sem vzela TB.   TFTC!","Created":"2012-11-03","Visited":"2012-11-03","UserName":"kattra","MembershipLevel":1,"AccountID":5252674,"AccountGuid":"09858df9-a968-4685-a4fd-a41c88e2d1fc","Email":"","AvatarImage":"41a38548-7c8f-4a81-9e45-42968eaa8a79.jpg","GeocacheFindCount":110,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":277265784,"CacheID":3220672,"LogGuid":"a4e68ac5-b949-4605-be3b-71ce29ba75d9","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Ta je pa moj \"slu&#382;beni\", vsak delavnik sem se vozil vsaj 5x mimo, a je &#353;ele danes pri&#353;el na vrsto... :-)","Created":"2012-11-03","Visited":"2012-11-03","UserName":"scenic16","MembershipLevel":1,"AccountID":4231189,"AccountGuid":"7893db69-f54e-4a8f-91ba-4e54341d2167","Email":"","AvatarImage":"4308a700-1820-4ca8-92bb-e3d3f316bb29.jpg","GeocacheFindCount":317,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":276838688,"CacheID":3220672,"LogGuid":"1f0311dc-69a5-4f46-ae65-45b3bc26c6b2","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"HZZ","Created":"2012-10-31","Visited":"2012-10-31","UserName":"radovedni taček","MembershipLevel":1,"AccountID":5404362,"AccountGuid":"fcfffd2f-67ba-4da0-8aa7-e9e84b1cf158","Email":"","AvatarImage":"37de6b79-3e2f-4596-b09e-4574d8e43e78.jpg","GeocacheFindCount":103,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":276097614,"CacheID":3220672,"LogGuid":"b0a739de-2094-4278-b879-0e60fd997af0","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Še zadnje cofotanje po dežju, jutri se bomo že kepali :-)","Created":"2012-10-28","Visited":"2012-10-27","UserName":"Master X","MembershipLevel":1,"AccountID":3599706,"AccountGuid":"4820736f-238c-4af0-ba51-663a47c19d46","Email":"","AvatarImage":"","GeocacheFindCount":427,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":275899302,"CacheID":3220672,"LogGuid":"b638d2ff-8c8e-48f3-aad5-3e477b898f3b","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Just Walkin' in the Rain... [:D","Created":"2012-10-27","Visited":"2012-10-27","UserName":"tatanata","MembershipLevel":3,"AccountID":2271974,"AccountGuid":"3bf0f44e-223d-4687-a454-689a40898185","Email":"","AvatarImage":"8cbd8421-77e5-4e56-9555-d2126ef2b352.jpg","GeocacheFindCount":1795,"GeocacheHideCount":7,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Premium Member","GroupImageUrl":"/images/icons/prem_user.gif"},"Images":[]},{"LogID":275540445,"CacheID":3220672,"LogGuid":"5ce1fa26-0724-4502-986c-4bb28bd0a6c9","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"kamen mi je kar skocil pod noge, tako da je bil zakladek kaj hitro v mojih rokah. je pa iskanje popestila sveže pokošena trava, katere vonj še vedno ne vem dolocit, nekaj sumljivega je bilo hkrati s travo pokošeno :)))))))) HZZ","Created":"2012-10-25","Visited":"2012-10-25","UserName":"ancka","MembershipLevel":1,"AccountID":5829296,"AccountGuid":"56f4009c-c509-4fb3-843d-90e34b6b83b0","Email":"","AvatarImage":"dd1af8dc-2831-4d01-810a-bc77a7a8fad9.jpg","GeocacheFindCount":110,"GeocacheHideCount":0,"ChallengesCompleted":7,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":275536101,"CacheID":3220672,"LogGuid":"b0a3b517-dcde-44f5-82a0-02072afc4413","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Yay!","Created":"2012-10-25","Visited":"2012-10-25","UserName":"amy111","MembershipLevel":1,"AccountID":4101997,"AccountGuid":"73efb9a2-ea6e-45e6-ab63-d4a522f7a8a8","Email":"","AvatarImage":"6f55c559-0eb6-45cc-8f1c-5ceca9f88b27.jpg","GeocacheFindCount":88,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]},{"LogID":274631274,"CacheID":3220672,"LogGuid":"69410e02-4405-43db-8f50-f71beab46bac","Latitude":null,"Longitude":null,"LatLonString":"","LogType":"Found it","LogTypeImage":"2.png","LogText":"Hitro najden. TFTC!","Created":"2012-10-21","Visited":"2012-10-21","UserName":"zorkici","MembershipLevel":1,"AccountID":6327311,"AccountGuid":"4c56730f-e845-4be5-bc2f-c011f5ff875c","Email":"","AvatarImage":"","GeocacheFindCount":32,"GeocacheHideCount":0,"ChallengesCompleted":0,"IsEncoded":false,"creator":{"GroupTitle":"Member","GroupImageUrl":"/images/icons/reg_user.gif"},"Images":[]}], "pageInfo": { "idx":1, "size": 25, "totalRows": 68, "rows": 68 } };
+//]]>
+</script>
+</form>
+    <script type="text/javascript">
+        var browserType = {
+            IE: !!(window.attachEvent && !window.opera),
+            Opera: !!window.opera,
+            WebKit: navigator.userAgent.indexOf('AppleWebKit/') > -1,
+            Gecko: navigator.userAgent.indexOf('Gecko') > -1 && navigator.userAgent.indexOf('KHTML') == -1,
+            MobileSafari: !!navigator.userAgent.match(/Apple.*Mobile.*Safari/)
+        };
+
+        $(function () {
+            // Make the menu system play nice with all browsers:
+            $('ul.Menu li').hover(function () {
+                $(this).addClass('hover');
+                $('ul:first', this).css('visibility', 'visible');
+            }, function () {
+                $(this).removeClass('hover');
+                $('ul:first', this).css('visibility', 'hidden');
+            });
+            if (!isiOS()) {
+                // Constructing a Twitter-esque Login:
+                $(".SignInLink").click(function (e) {
+                    e.preventDefault();
+                    $("#SignInWidget").toggle();
+                    $(".ProfileWidget").toggleClass("WidgetOpen");
+                    $(this).blur();
+                    $("#ctl00_tbUsername").focus();
+                });
+                $(".SignInCloseLink").click(function () {
+                    $("#SignInWidget").toggle();
+                    $(".ProfileWidget").toggleClass("WidgetOpen");
+                });
+            }
+            $('.SignedInProfileLink').truncate({
+                width: 120,
+                after: '&amp;hellip;',
+                center: false,
+                addclass: false,
+                addtitle: false
+            });
+
+            // Hide the warning message if the user closed it already
+            if ($.cookie('hide_warning') != null) {
+                $(".WarningMessage").hide();
+            } else {
+                $("#warningCloseButton").click(function () {
+                    $('.WarningMessage').hide('blind');
+                    $.cookie('hide_warning', 'true', { expires: 1 });
+                });
+            }
+
+            function isiOS() {
+                return (
+                        (navigator.userAgent.match(/(iPhone)|(iPod)|(iPad)/i))
+                    );
+            }
+        });
+    </script>
+    
+    
+    <script id="loc_favPointsScoreDesc" type="text/html">
+        Favorites/Premium Logs
+    </script>
+    <script type="text/javascript" language="javascript">
+            <!--
+        
+
+
+            var gotScore = false;
+            var favDropDown = $('.favorite-dropdown');
+            var favContainer = $('.favorite-container');
+
+            function showFavoriteScore() {
+                $('#imgFavoriteScore').attr('src', '/images/loading3.gif');
+
+                $('#uxFavoriteScore').parent().fadeTo(200, .001, function () {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: '/datastore/favorites.svc/score?u=' + userToken,
+                        success: function (scoreResult) {
+                            gotScore = true;
+
+                            var score = 0;
+
+                            if(scoreResult)
+                                score = scoreResult;
+
+                            if(score > 100)
+                                score = 100;
+                       
+                            $('#imgFavoriteScore').attr('src', '/images/favorites/piecharts/' + score + '.png');
+                            var pieDesc = (score < 1 ? "<1" : score) + '% ' + $("#loc_favPointsScoreDesc").text().trim();
+                            $('#imgFavoriteScore').attr('alt', pieDesc);
+                            $('#imgFavoriteScore').attr('title', pieDesc);
+
+                            $('#uxFavoriteScore').parent().fadeTo(1000, 1);
+                            $('#uxFavoriteScore').html('<strong>' + (score < 1 ? "<1" : score) + '%</strong> ' + $("#loc_favPointsScoreDesc").html());
+                        }
+                    });
+                });
+            }
+
+        
+            
+            $(document).bind('mouseup', function (e) {
+                var $clicked = $(e.target);
+            
+                
+                if (!$clicked.parents().hasClass("favorite-dropdown") && !$clicked.parents().hasClass("FavoriteWidget")) {
+                    favDropDown.hide(1, function () {
+                        favContainer.addClass('favorite-container');
+                        favContainer.removeClass('favorite-container-open');
+                        $('#imgFavoriteArrow').attr('src', '/images/arrow-down.png');
+                    });
+                }
+            });
+
+            $('#uxFavContainerLink').click(function () {
+                if ($(favDropDown).is(':visible')) {
+                    favDropDown.hide(1, function(){
+                        favContainer.addClass('favorite-container');
+                        favContainer.removeClass('favorite-container-open');
+                        $('#imgFavoriteArrow').attr('src', '/images/arrow-down.png');
+                    });                
+                }
+                else {
+                    if (!gotScore) {
+                        showFavoriteScore();
+                    }
+
+                    favContainer.addClass('favorite-container-open');
+                    favContainer.removeClass('favorite-container');
+                    $('#imgFavoriteArrow').attr('src', '/images/arrow-up.png');
+                    favDropDown.show(1);
+                }
+            });
+            //  End -->
+    </script>
+
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-2020240-1']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script');
+            ga.src = ('https:' == document.location.protocol ?
+								'https://ssl' : 'http://www') +
+								'.google-analytics.com/ga.js';
+            ga.setAttribute('async', 'true');
+            document.documentElement.firstChild.appendChild(ga);
+        })();
+        $(function () {
+            $("a.language").click(function (e) {
+                e.preventDefault();
+                window.location.replace(window.location.href + (window.location.search.indexOf("?") == -1 ? "?" : "&") + "lang=" + $(this).attr("lang"));
+            });
+        });
+    </script>
+    
+    
+    <!-- Quantcast Tag -->
+    <div id="Quantcast">
+        <script type="text/javascript">
+            var _qevents = _qevents || [];
+
+            (function () {
+                var elem = document.createElement('script');
+
+                elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+                elem.async = true;
+                elem.type = "text/javascript";
+                var scpt = document.getElementsByTagName('script')[0];
+                scpt.parentNode.insertBefore(elem, scpt);
+            })();
+        </script>
+        <script type="text/javascript">
+            _qevents.push({ qacct: "p-f6VPrfmR4cujU" });
+        </script>
+        <noscript>
+            <div style="display: none;">
+                <img src="http://pixel.quantserve.com/pixel/p-f6VPrfmR4cujU.gif" height="1" width="1"
+                    alt="Quantcast" /></div>
+        </noscript>
+    </div>
+    <!-- End Quantcast tag -->
+    
+    <!-- Server: WEB03; Build: Web.HotFix_20121211.1 -->
+</body>
+</html>
