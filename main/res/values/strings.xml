@@ -1098,6 +1098,12 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>2012.12.12</b>\n\n
+    <b>New Features/Functions:</b>\n
+    · Opencaching.NL support in search function\n
+    <b>Bugfixing:</b>\n
+    · Adapting to geocaching.com changes\n
+	\n
     <b>2012.12.03</b>\n\n
     <b>New Features/Functions:</b>\n
     · If static maps are enabled, batch update of caches will now update caches without static maps first\n
@@ -1117,7 +1123,6 @@
     · Sygic navigation support\n
     · Filter for non premium member caches\n
     · New image tab in cache details\n 
-    · Opencaching.NL support in search function\n
     \n
     <b>Bugfixing:</b>\n
     · Crash when modifying lists fixed\n
@@ -1139,7 +1144,6 @@
     · Allow HTML in trackable description\n
     · Live map filter now also working for basic members\n
     · Improved stability for large GPX file import\n
-    · Adapting to geocaching.com changes\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=8&amp;state=closed">Detailed list of all changes</a>\n
     \n
