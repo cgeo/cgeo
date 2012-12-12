@@ -3,6 +3,7 @@ package cgeo.geocaching.test;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.GC2JVEH;
+import cgeo.geocaching.test.mock.GC3XX5J;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.BaseUtils;
 
@@ -68,7 +69,7 @@ public class RegExPerformanceTest extends TestCase {
     public final static Pattern PATTERN_DESCRIPTION = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
 
 
-    public final static MockedCache[] MOCKED_CACHES = { new GC2CJPF(), new GC1ZXX2(), new GC2JVEH() };
+    public final static MockedCache[] MOCKED_CACHES = { new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J() };
 
     public static void testRegEx() {
         List<String> output = doTheTests(10);
