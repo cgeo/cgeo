@@ -72,6 +72,7 @@
   <string name="log_maintenance_needed">Nécessite une maintenance</string>
   <string name="log_update">Coordonnées mises à jour</string>
   <string name="log_archived">Archivée</string>
+  <string name="log_unarchived">Désarchivée</string>
   <string name="log_needs_archived">Nécessite d\'être archivée</string>
   <string name="log_discovered">Découverte</string>
   <string name="log_reviewer">Note du relecteur</string>

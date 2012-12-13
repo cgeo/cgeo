@@ -72,6 +72,7 @@
   <string name="log_maintenance_needed">Needs Maintenance</string>
   <string name="log_update">Updated Coordinates</string>
   <string name="log_archived">Archived</string>
+  <string name="log_unarchived">Unarchived</string>
   <string name="log_needs_archived">Needs Archived</string>
   <string name="log_discovered">Discovered</string>
   <string name="log_reviewer">Reviewer Note</string>
