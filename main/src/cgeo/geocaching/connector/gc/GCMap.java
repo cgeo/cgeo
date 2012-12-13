@@ -211,8 +211,7 @@ public class GCMap {
                 cache.setCoords(tile.getCoord(xy));
                 if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
                     for (UTFGridPosition singlePos : singlePositions.get(id)) {
-                        if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomlevel()))
-                        {
+                        if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomlevel())) {
                             break; // cache parsed
                         }
                     }
