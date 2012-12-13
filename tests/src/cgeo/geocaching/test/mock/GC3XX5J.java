@@ -128,7 +128,7 @@ public class GC3XX5J extends MockedCache {
 
     @Override
     public String getHint() {
-        return "Bqznxav xnzra bo gveh / Erzbir gur fgbar jvpu yvrf orfvqr gur envy";
+        return "Odmakni kamen ob tiru / Remove the stone wich lies beside the rail";
     }
 
     @Override
