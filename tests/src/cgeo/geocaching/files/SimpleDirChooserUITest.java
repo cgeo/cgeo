@@ -24,11 +24,10 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
     }
 
     public void testSingleSelection() throws InterruptedException {
-        final ArrayList<CheckBox> boxes = solo.getCurrentCheckBoxes();
-        final int lastIndex = boxes.size() - 1;
         assertChecked("Newly opened activity", 0);
-
         solo.scrollToBottom();
+        final int lastIndex = solo.getCurrentCheckBoxes().size() - 1;
+
         solo.clickOnCheckBox(lastIndex);
         assertTrue(solo.getCurrentCheckBoxes().get(lastIndex).isChecked());
         assertFalse(solo.getCurrentCheckBoxes().get(0).isChecked());
