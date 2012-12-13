@@ -199,7 +199,7 @@ public class SimpleDirChooser extends ListActivity {
                 okButton.setEnabled(false);
                 okButton.setVisibility(View.INVISIBLE);
             }
-            arg0.refreshDrawableState();
+            adapter.notifyDataSetChanged();
         }
     }
 
