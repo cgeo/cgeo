@@ -204,8 +204,7 @@
 		</activity>
 		<activity
 				android:name=".cgeonavigate"
-				android:label="@string/app_name_compass"
-				android:screenOrientation="portrait">
+				android:label="@string/app_name_compass">
 		</activity>
 		<activity
 			android:name=".cgeogpxes"
