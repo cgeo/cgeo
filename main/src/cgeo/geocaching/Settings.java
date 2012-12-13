@@ -109,6 +109,8 @@ public final class Settings {
     private static final String KEY_PLAIN_LOGS = "plainLogs";
     private static final String KEY_NATIVE_UA = "nativeUa";
     private static final String KEY_MAP_DIRECTORY = "mapDirectory";
+    private static final String KEY_CONNECTOR_OC = "connectorOC";
+    private static final String KEY_CONNECTOR_OC_USER = "connectorOCUser";
 
     private final static int unitsMetric = 1;
 
@@ -300,6 +302,50 @@ public final class Settings {
                     edit.remove(KEY_MEMBER_STATUS);
                 } else {
                     edit.putString(KEY_MEMBER_STATUS, memberStatus);
+                }
+            }
+        });
+    }
+
+    public static boolean isOCConnectorActive() {
+        String ocConnectorSetting = sharedPrefs.getString(KEY_CONNECTOR_OC, null);
+        if (StringUtils.isBlank(ocConnectorSetting)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean setOCConnectorActive(final boolean isActive) {
+        return editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                if (isActive) {
+                    edit.putString(KEY_CONNECTOR_OC, "Active");
+                } else {
+                    edit.putString(KEY_CONNECTOR_OC, StringUtils.EMPTY);
+                }
+            }
+        });
+    }
+
+    public static String getOCConnectorUserName() {
+        String ocConnectorUser = sharedPrefs.getString(KEY_CONNECTOR_OC_USER, null);
+        if (StringUtils.isBlank(ocConnectorUser)) {
+            return StringUtils.EMPTY;
+        }
+        return ocConnectorUser;
+    }
+
+    public static boolean setOCConnectorUserName(final String userName) {
+        return editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                if (StringUtils.isBlank(userName)) {
+                    edit.remove(KEY_CONNECTOR_OC_USER);
+                } else {
+                    edit.putString(KEY_CONNECTOR_OC_USER, userName);
                 }
             }
         });

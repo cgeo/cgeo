@@ -242,6 +242,21 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        // opencaching.de settings
+        final CheckBox ocCheck = (CheckBox) findViewById(R.id.oc_option);
+        ocCheck.setChecked(Settings.isOCConnectorActive());
+        ocCheck.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setOCConnectorActive(ocCheck.isChecked());
+            }
+        });
+        EditText ocUserEdit = (EditText) findViewById(R.id.oc_username);
+        if (ocUserEdit.getText().length() == 0) {
+            ocUserEdit.setText(Settings.getOCConnectorUserName());
+        }
+
         // gcvote settings
         final ImmutablePair<String, String> gcvoteLogin = Settings.getGCvoteLogin();
         if (null != gcvoteLogin && null != gcvoteLogin.right) {
@@ -813,6 +828,7 @@ public class SettingsActivity extends AbstractActivity {
         String signatureNew = ((EditText) findViewById(R.id.signature)).getText().toString();
         String mapDirectoryNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.map_directory)).getText().toString());
         String themesDirectoryNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.themefolder)).getText().toString());
+        String ocUserName = StringUtils.trimToEmpty(((EditText) findViewById(R.id.oc_username)).getText().toString());
 
         String altitudeNew = StringUtils.trimToNull(((EditText) findViewById(R.id.altitude)).getText().toString());
         int altitudeNewInt = parseNumber(altitudeNew, 0);
@@ -826,6 +842,7 @@ public class SettingsActivity extends AbstractActivity {
         final boolean status4 = Settings.setAltCorrection(altitudeNewInt);
         final boolean status5 = Settings.setMapFileDirectory(mapDirectoryNew);
         final boolean status6 = Settings.setCustomRenderThemeBaseFolder(themesDirectoryNew);
+        final boolean status7 = Settings.setOCConnectorUserName(ocUserName);
         Settings.setShowWaypointsThreshold(waypointThreshold);
 
         String importNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_importdir)).getText().toString());
@@ -833,7 +850,7 @@ public class SettingsActivity extends AbstractActivity {
         Settings.setGpxImportDir(importNew);
         Settings.setGpxExportDir(exportNew);
 
-        return status1 && status2 && status3 && status4 && status5 && status6;
+        return status1 && status2 && status3 && status4 && status5 && status6 && status7;
     }
 
     /**

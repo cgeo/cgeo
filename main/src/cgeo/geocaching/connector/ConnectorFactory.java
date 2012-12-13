@@ -2,10 +2,13 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
+import cgeo.geocaching.connector.oc.OCXMLApiConnector;
 import cgeo.geocaching.connector.ox.OXConnector;
 import cgeo.geocaching.geopoint.Viewport;
 
@@ -15,13 +18,13 @@ public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final IConnector[] connectors = new IConnector[] {
             GCConnector.getInstance(),
-            new OCConnector("OpenCaching.DE", "www.opencaching.de", "OC"),
+            new OCXMLApiConnector("OpenCaching.DE", "www.opencaching.de", "OC"),
             new OCConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
             new OCApiConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq"),
             new OCConnector("OpenCaching.ES", "www.opencachingspain.es", "OC"),
             new OCConnector("OpenCaching.IT", "www.opencaching.it", "OC"),
             new OCConnector("OpenCaching.JP", "www.opencaching.jp", "OJ"),
-            new OCConnector("OpenCaching.NO/SE", "www.opencaching.no", "OS"),
+            new OCConnector("OpenCaching.NO/SE", "www.opencaching.se", "OS"),
             new OCApiConnector("OpenCaching.NL", "www.opencaching.nl", "OB", "PdzU8jzIlcfMADXaYN8j"),
             new OCApiConnector("OpenCaching.PL", "www.opencaching.pl", "OP", "GkxM47WkUkLQXXsZ9qSh"),
             new OCApiConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA"),
@@ -74,11 +77,24 @@ public final class ConnectorFactory {
         return StringUtils.isBlank(geocode) || !Character.isLetterOrDigit(geocode.charAt(0));
     }
 
-    /** @see IConnector#searchByViewport */
+    /** @see ISearchByViewPort#searchByViewport */
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
         // We have only connector capable of doing a 'searchByViewport()'
         // If there is a second connector the information has to be collected from all collectors
-        return GCConnector.getInstance().searchByViewport(viewport, tokens);
+        SearchResult result = new SearchResult();
+        ISearchByViewPort vpconn = GCConnector.getInstance();
+        SearchResult temp = vpconn.searchByViewport(viewport, tokens);
+        if (temp != null) {
+            result.addGeocodes(temp.getGeocodes());
+        }
+        if (Settings.isOCConnectorActive()) {
+            vpconn = (ISearchByViewPort) ConnectorFactory.getConnector("OCXXX");
+            temp = vpconn.searchByViewport(viewport, tokens);
+            if (temp != null) {
+                result.addGeocodes(temp.getGeocodes());
+            }
+        }
+        return result;
     }
 
     public static String getGeocodeFromURL(final String url) {

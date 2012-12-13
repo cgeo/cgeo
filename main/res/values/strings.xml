@@ -339,6 +339,10 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_oc">opencaching.de</string>
+  <string name="init_oc_activate">Activate opencaching.de on live-map and in searches</string>
+  <string name="init_oc_username_description">Enter your opencaching.de user name in order to allow marking your finds.</string>
+  <string name="init_oc_username">Enter your user name</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Username</string>
