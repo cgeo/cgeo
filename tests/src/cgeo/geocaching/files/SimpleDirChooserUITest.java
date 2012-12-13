@@ -44,6 +44,9 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
         solo.clickOnCheckBox(0);
         assertChecked("Clicked first checkbox", 1);
         assertTrue(solo.getCurrentCheckBoxes().get(0).isChecked());
+        solo.clickOnCheckBox(1);
+        assertChecked("Clicked second checkbox", 1);
+        assertTrue(solo.getCurrentCheckBoxes().get(1).isChecked());
     }
 
     private void assertChecked(String message, int expectedChecked) {
