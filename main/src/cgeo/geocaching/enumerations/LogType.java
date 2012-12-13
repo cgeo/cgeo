@@ -20,6 +20,7 @@ public enum LogType {
     PUBLISH_LISTING(1003, "24", "publish listing", R.string.log_published),
     ENABLE_LISTING(23, "23", "enable listing", R.string.log_enabled),
     ARCHIVE(5, "5", "archive", R.string.log_archived),
+    UNARCHIVE(12, "12", "unarchive", R.string.log_unarchived),
     TEMP_DISABLE_LISTING(22, "22", "temporarily disable listing", R.string.log_disabled),
     NEEDS_ARCHIVE(7, "7", "needs archived", R.string.log_needs_archived),
     WILL_ATTEND(9, "9", "will attend", R.string.log_attend),
