@@ -167,6 +167,8 @@ public class GCMap {
 
             // iterate over the data and construct all caches in this tile
             Map<String, List<UTFGridPosition>> positions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
+            Map<String, List<UTFGridPosition>> singlePositions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
+
             for (int i = 1; i < keys.length(); i++) { // index 0 is empty
                 String key = keys.getString(i);
                 if (StringUtils.isNotBlank(key)) {
@@ -178,12 +180,20 @@ public class GCMap {
                         nameCache.put(id, cacheInfo.getString("n"));
 
                         List<UTFGridPosition> listOfPositions = positions.get(id);
+                        List<UTFGridPosition> singleListOfPositions = singlePositions.get(id);
+
                         if (listOfPositions == null) {
                             listOfPositions = new ArrayList<UTFGridPosition>();
                             positions.put(id, listOfPositions);
+                            singleListOfPositions = new ArrayList<UTFGridPosition>();
+                            singlePositions.put(id, singleListOfPositions);
                         }
 
                         listOfPositions.add(pos);
+                        if (dataForKey.length() == 1) {
+                            singleListOfPositions.add(pos);
+                        }
+
                     }
                 }
             }
@@ -199,12 +209,17 @@ public class GCMap {
                 cache.setName(nameCache.get(id));
                 cache.setZoomlevel(tile.getZoomlevel());
                 cache.setCoords(tile.getCoord(xy));
-                if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && positions.size() < 64 && bitmap != null) {
-                    // don't parse if there are too many caches. The decoding would return too much wrong results
-                    IconDecoder.parseMapPNG(cache, bitmap, xy, tile.getZoomlevel());
+                if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
+                    for (UTFGridPosition singlePos : singlePositions.get(id)) {
+                        if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomlevel()))
+                        {
+                            break; // cache parsed
+                        }
+                    }
                 } else {
                     cache.setType(CacheType.UNKNOWN);
                 }
+
                 boolean exclude = false;
                 if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwn())) { // workaround for BM
                     exclude = true;
