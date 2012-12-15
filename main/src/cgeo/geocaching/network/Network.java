@@ -407,8 +407,7 @@ public abstract class Network {
         try {
             return URLDecoder.decode(text, CharEncoding.UTF_8);
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e("Network.decode", e);
         }
         return null;
     }
@@ -417,8 +416,7 @@ public abstract class Network {
         try {
             return URLEncoder.encode(text, CharEncoding.UTF_8);
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e("Network.encode", e);
         }
         return null;
     }

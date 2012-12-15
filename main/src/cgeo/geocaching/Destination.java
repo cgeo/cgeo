@@ -34,7 +34,13 @@ public final class Destination implements ICoordinates {
 
     @Override
     public boolean equals(final Object obj) {
-        return obj != null && obj instanceof Destination && ((Destination) obj).coords.equals(coords);
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Destination)) {
+            return false;
+        }
+        return ((Destination) obj).coords.equals(coords);
     }
 
     public long getId() {

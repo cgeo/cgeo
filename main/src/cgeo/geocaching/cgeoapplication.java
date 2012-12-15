@@ -22,7 +22,7 @@ public class cgeoapplication extends Application {
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShown = false; // livemap hint has been shown
     final private StatusUpdater statusUpdater = new StatusUpdater();
-    private static cgeoapplication instance = null;
+    private static cgeoapplication instance;
 
     public cgeoapplication() {
         instance = this;

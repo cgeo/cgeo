@@ -31,7 +31,7 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
     private void requestUpdate() {
         final JSONObject response =
                 Network.requestJSON("http://status.cgeo.org/api/status.json",
-                        new Parameters("version_code", "" + Version.getVersionCode(cgeoapplication.getInstance()),
+                        new Parameters("version_code", String.valueOf(Version.getVersionCode(cgeoapplication.getInstance())),
                                 "version_name", Version.getVersionName(cgeoapplication.getInstance()),
                                 "locale", Locale.getDefault().toString()));
         if (response != null) {

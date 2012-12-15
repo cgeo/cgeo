@@ -153,7 +153,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
      */
     public void setComparator(final CacheComparator comparator) {
         // selecting the same sorting twice will toggle the order
-        if (cacheComparator != null && comparator != null && cacheComparator.getClass() == comparator.getClass()) {
+        if (cacheComparator != null && comparator != null && cacheComparator.getClass().equals(comparator.getClass())) {
             inverseSort = !inverseSort;
         }
         else {

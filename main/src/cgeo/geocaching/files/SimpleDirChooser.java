@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -102,11 +101,6 @@ public class SimpleDirChooser extends ListActivity {
         }
         this.adapter = new FileArrayAdapter(this, R.layout.simple_dir_item, listDirs);
         this.setListAdapter(adapter);
-    }
-
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
     }
 
     public class FileArrayAdapter extends ArrayAdapter<Option> {
@@ -203,7 +197,7 @@ public class SimpleDirChooser extends ListActivity {
         }
     }
 
-    public class Option implements Comparable<Option> {
+    public static class Option implements Comparable<Option> {
         private final String name;
         private final String path;
         private boolean checked = false;

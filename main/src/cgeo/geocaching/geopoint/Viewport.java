@@ -164,7 +164,10 @@ public class Viewport {
 
     @Override
     public boolean equals(final Object other) {
-        if (other == null || !(other instanceof Viewport)) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Viewport)) {
             return false;
         }
         final Viewport vp = (Viewport) other;

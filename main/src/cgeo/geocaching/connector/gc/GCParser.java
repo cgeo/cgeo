@@ -175,7 +175,11 @@ public abstract class GCParser {
             final Matcher matcherTbs = GCConstants.PATTERN_SEARCH_TRACKABLES.matcher(row);
             while (matcherTbs.find()) {
                 if (matcherTbs.groupCount() > 0) {
-                    cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
+                    try {
+                        cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
+                    } catch (NumberFormatException e) {
+                        Log.e("Error parsing trackables count", e);
+                    }
                     inventoryPre = matcherTbs.group(2);
                 }
             }
@@ -387,13 +391,21 @@ public abstract class GCParser {
             // cache terrain
             String result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_TERRAIN, true, null);
             if (result != null) {
-                cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
+                try {
+                    cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
+                } catch (NumberFormatException e) {
+                    Log.e("Error parsing terrain value", e);
+                }
             }
 
             // cache difficulty
             result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_DIFFICULTY, true, null);
             if (result != null) {
-                cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
+                try {
+                    cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
+                } catch (NumberFormatException e) {
+                    Log.e("Error parsing difficulty value", e);
+                }
             }
 
             // owner
@@ -418,7 +430,11 @@ public abstract class GCParser {
             }
 
             // favourite
-            cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
+            try {
+                cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
+            } catch (NumberFormatException e) {
+                Log.e("Error parsing favourite count", e);
+            }
 
             // cache size
             cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id)));
@@ -1546,10 +1562,13 @@ public abstract class GCParser {
             final Matcher typeMatcher = GCConstants.PATTERN_TYPE2.matcher(typesText);
             while (typeMatcher.find()) {
                 if (typeMatcher.groupCount() > 1) {
-                    final int type = Integer.parseInt(typeMatcher.group(2));
-
-                    if (type > 0) {
-                        types.add(LogType.getById(type));
+                    try {
+                        int type = Integer.parseInt(typeMatcher.group(2));
+                        if (type > 0) {
+                            types.add(LogType.getById(type));
+                        }
+                    } catch (NumberFormatException e) {
+                        Log.e("Error parsing log types", e);
                     }
                 }
             }
