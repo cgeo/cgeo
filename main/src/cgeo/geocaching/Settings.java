@@ -1315,7 +1315,7 @@ public final class Settings {
 
         FileUtils.listDir(result, directory, new ExtensionsBasedFileSelector(new String[] { "xml" }), null);
 
-        return result.toArray(new File[] {});
+        return result.toArray(new File[result.size()]);
     }
 
     private static class ExtensionsBasedFileSelector extends FileSelector {

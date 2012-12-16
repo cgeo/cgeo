@@ -767,7 +767,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         builder.setTitle(R.string.map_theme_select);
 
-        builder.setSingleChoiceItems(names.toArray(new String[] {}), selectedItem,
+        builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem,
                 new DialogInterface.OnClickListener() {
 
                     @Override
