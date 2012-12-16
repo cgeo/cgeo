@@ -2088,12 +2088,12 @@ public class cgData {
         try {
             StringBuilder sql = new StringBuilder("select count(_id) from " + dbTableCaches + " where detailed = 1");
             if (cacheType != CacheType.ALL) {
-                sql.append(" and type = " + DatabaseUtils.sqlEscapeString(cacheType.id));
+                sql.append(" and type = ").append(DatabaseUtils.sqlEscapeString(cacheType.id));
             }
             if (list == 0) {
                 sql.append(" and reason > 0");
             } else if (list >= 1) {
-                sql.append(" and reason = " + list);
+                sql.append(" and reason = ").append(list);
             }
 
             String key = "CountCaches_" + cacheType.id + "_" + Integer.toString(list);
