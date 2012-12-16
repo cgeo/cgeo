@@ -1100,12 +1100,19 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next maintenance release</b>\n\n
+    <b>New Features/Functions:</b>\n
+    · ...\n
+    <b>Bugfixing:</b>\n
+    · Found caches not shown correctly for basic members\n
+    · Some special log types not recognized\n
+    · Correction in directory selector\n
+	\n
     <b>2012.12.12</b>\n\n
     <b>New Features/Functions:</b>\n
     · Opencaching.NL support in search function\n
     <b>Bugfixing:</b>\n
-    · Adapting to geocaching.com changes\n
-	\n
+    · Adapting to geocaching.com changes\n\n
     <b>2012.12.03</b>\n\n
     <b>New Features/Functions:</b>\n
     · If static maps are enabled, batch update of caches will now update caches without static maps first\n
