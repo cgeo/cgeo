@@ -263,10 +263,12 @@ public class cgeoApplicationTest extends CGeoTestCase {
         // backup user settings
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final Strategy strategy = Settings.getLiveMapStrategy();
+        final CacheType cacheType = Settings.getCacheType();
 
         try {
             // set up settings required for test
             Settings.setExcludeMine(false);
+            Settings.setCacheType(CacheType.ALL);
 
             final GC2CJPF mockedCache = new GC2CJPF();
             deleteCacheFromDB(mockedCache.getGeocode());
@@ -300,6 +302,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             // restore user settings
             Settings.setExcludeMine(excludeMine);
             Settings.setLiveMapStrategy(strategy);
+            Settings.setCacheType(cacheType);
         }
     }
 
@@ -314,6 +317,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
         Strategy strategy = Settings.getLiveMapStrategy();
         Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
         Settings.setLiveMapStrategy(testStrategy);
+        final CacheType cacheType = Settings.getCacheType();
 
         try {
 
@@ -323,6 +327,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             MockedCache cache = new GC2CJPF();
             deleteCacheFromDBAndLogout(cache.getGeocode());
             Tile.Cache.removeFromTileCache(cache);
+            Settings.setCacheType(CacheType.ALL);
 
             Viewport viewport = new Viewport(cache, 0.003, 0.003);
             SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
@@ -354,6 +359,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             Settings.setMemberStatus(memberStatus);
             Login.login();
             Settings.setLiveMapStrategy(strategy);
+            Settings.setCacheType(cacheType);
         }
     }
 

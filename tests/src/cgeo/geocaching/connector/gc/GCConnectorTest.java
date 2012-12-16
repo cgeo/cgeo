@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
@@ -12,9 +13,11 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     public static void testGetViewport() {
         // backup user settings
         final boolean excludeMine = Settings.isExcludeMyCaches();
+        final CacheType cacheType = Settings.getCacheType();
         try {
             // set up settings required for test
             Settings.setExcludeMine(false);
+            Settings.setCacheType(CacheType.ALL);
             Login.login();
 
             String[] tokens = Login.getMapTokens();
@@ -37,6 +40,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         } finally {
             // restore user settings
             Settings.setExcludeMine(excludeMine);
+            Settings.setCacheType(cacheType);
         }
     }
 
