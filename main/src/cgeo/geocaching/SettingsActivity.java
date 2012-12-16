@@ -1026,7 +1026,7 @@ public class SettingsActivity extends AbstractActivity {
             startActivityForResult(dirChooser, directoryKind);
         } catch (android.content.ActivityNotFoundException ex) {
             // OI file manager not available
-            dirChooser = new Intent(SettingsActivity.this, SimpleDirChooser.class);
+            dirChooser = new Intent(this, SimpleDirChooser.class);
             dirChooser.putExtra(SimpleDirChooser.START_DIR, startDirectory);
             startActivityForResult(dirChooser, directoryKind);
         }

@@ -947,7 +947,7 @@ public class CacheDetailActivity extends AbstractActivity {
         if (imageView == null) {
             return;
         }
-        imagesList = new ImagesList(CacheDetailActivity.this, cache.getGeocode());
+        imagesList = new ImagesList(this, cache.getGeocode());
         imagesList.loadImages(imageView, cache.getImages(), ImageType.AllImages, false);
     }
 

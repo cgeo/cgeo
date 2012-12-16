@@ -169,7 +169,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             showFooterMoreCaches();
 
             if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setTitle(res.getString(R.string.license));
                 dialog.setMessage(res.getString(R.string.err_license));
                 dialog.setCancelable(true);
