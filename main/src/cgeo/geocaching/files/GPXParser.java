@@ -806,13 +806,17 @@ public abstract class GPXParser extends FileParser {
     static WaypointType convertWaypointSym2Type(final String sym) {
         if ("parking area".equalsIgnoreCase(sym)) {
             return WaypointType.PARKING;
-        } else if ("stages of a multicache".equalsIgnoreCase(sym)) {
+        }
+        if ("stages of a multicache".equalsIgnoreCase(sym)) {
             return WaypointType.STAGE;
-        } else if ("question to answer".equalsIgnoreCase(sym)) {
+        }
+        if ("question to answer".equalsIgnoreCase(sym)) {
             return WaypointType.PUZZLE;
-        } else if ("trailhead".equalsIgnoreCase(sym)) {
+        }
+        if ("trailhead".equalsIgnoreCase(sym)) {
             return WaypointType.TRAILHEAD;
-        } else if ("final location".equalsIgnoreCase(sym)) {
+        }
+        if ("final location".equalsIgnoreCase(sym)) {
             return WaypointType.FINAL;
         }
         // this is not fully correct, but lets also look for localized waypoint types
