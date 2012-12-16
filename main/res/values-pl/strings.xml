@@ -208,12 +208,12 @@
   <string name="info_fieldnotes_exported_to">Notatki terenowe eksportowane do</string>
 
   <!-- location service -->
-  <string name="loc_last">Ostatnie stanowisko</string>
+  <string name="loc_last">Ostatnia pozycja</string>
   <string name="loc_net">Sieć</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Próba lokalizacji</string>
-  <string name="loc_no_addr">Nieznany andres</string>
+  <string name="loc_no_addr">Nieznany adres</string>
 
   <!-- standard menu -->
   <string name="menu_about">O c:geo</string>
