@@ -61,8 +61,7 @@ public class cgeonavigate extends AbstractActivity {
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            final String geocode = extras.getString(EXTRAS_GEOCODE);
-            title = geocode;
+            title = extras.getString(EXTRAS_GEOCODE);
             final String name = extras.getString(EXTRAS_NAME);
             dstCoords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
             info = extras.getString(EXTRAS_CACHE_INFO);
