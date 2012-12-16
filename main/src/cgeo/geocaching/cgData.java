@@ -2136,15 +2136,16 @@ public class cgData {
 
         Set<String> geocodes = new HashSet<String>();
 
-        StringBuilder specifySql = new StringBuilder();
+        StringBuilder selection = new StringBuilder();
 
-        specifySql.append("reason ");
-        specifySql.append(listId != StoredList.ALL_LIST_ID ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
-        specifySql.append(" and detailed = 1 ");
+        selection.append("reason ");
+        selection.append(listId != StoredList.ALL_LIST_ID ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
+        selection.append(" and detailed = 1 ");
 
+        String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            specifySql.append(" and type = ");
-            specifySql.append(DatabaseUtils.sqlEscapeString(cacheType.id));
+            selection.append(" and type = ?");
+            selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
         try {
@@ -2154,8 +2155,8 @@ public class cgData {
                         dbTableCaches,
                         new String[]{"geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
                                 ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif"},
-                        specifySql.toString(),
-                        null,
+                        selection.toString(),
+                        selectionArgs,
                         null,
                         null,
                         "dif",
@@ -2164,8 +2165,8 @@ public class cgData {
                 cursor = database.query(
                         dbTableCaches,
                         new String[]{"geocode"},
-                        specifySql.toString(),
-                        null,
+                        selection.toString(),
+                        selectionArgs,
                         null,
                         null,
                         "geocode");
@@ -2193,23 +2194,23 @@ public class cgData {
 
         Set<String> geocodes = new HashSet<String>();
 
-        StringBuilder specifySql = new StringBuilder();
-        specifySql.append("visiteddate > 0");
+        StringBuilder selection = new StringBuilder("visiteddate > 0");
 
         if (detailedOnly) {
-            specifySql.append(" and detailed = 1");
+            selection.append(" and detailed = 1");
         }
+        String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            specifySql.append(" and type = ");
-            specifySql.append(DatabaseUtils.sqlEscapeString(cacheType.id));
+            selection.append(" and type = ?");
+            selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
         try {
             Cursor cursor = database.query(
                     dbTableCaches,
                     new String[]{"geocode"},
-                    specifySql.toString(),
-                    null,
+                    selection.toString(),
+                    selectionArgs,
                     null,
                     null,
                     "visiteddate",
@@ -2270,25 +2271,26 @@ public class cgData {
         }
 
         // viewport limitation
-        final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableCaches, viewport));
+        final StringBuilder selection = new StringBuilder(buildCoordinateWhere(dbTableCaches, viewport));
 
         // cacheType limitation
+        String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            where.append(" and type = ");
-            where.append(DatabaseUtils.sqlEscapeString(cacheType.id));
+            selection.append(" and type = ?");
+            selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
         // offline caches only
         if (stored) {
-            where.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
+            selection.append(" and reason >= " + StoredList.STANDARD_LIST_ID);
         }
 
         try {
             final Cursor cursor = database.query(
                     dbTableCaches,
                     new String[]{"geocode"},
-                    where.toString(),
-                    null,
+                    selection.toString(),
+                    selectionArgs,
                     null,
                     null,
                     null,
@@ -2614,8 +2616,8 @@ public class cgData {
             Cursor cursor = database.query(
                     dbTableLists,
                     new String[]{"_id", "title"},
-                    "_id = " + (id - customListIdOffset),
-                    null,
+                    "_id = ? ",
+                    new String[] { String.valueOf(id - customListIdOffset) },
                     null,
                     null,
                     null);
