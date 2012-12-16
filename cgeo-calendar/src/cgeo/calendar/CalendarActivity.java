@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 public final class CalendarActivity extends Activity {
     static final String LOG_TAG = "cgeo.calendar";
-    private Uri uri;
 
     /** Called when the activity is first created. */
     @Override
@@ -21,7 +20,7 @@ public final class CalendarActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         try {
-            uri = getIntent().getData();
+            final Uri uri = getIntent().getData();
             if (uri == null) {
                 finish();
                 return;
