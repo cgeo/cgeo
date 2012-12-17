@@ -2206,7 +2206,7 @@ public class cgData {
         }
 
         try {
-            Cursor cursor = database.query(
+            final Cursor cursor = database.query(
                     dbTableCaches,
                     new String[]{"geocode"},
                     selection.toString(),
@@ -2215,22 +2215,10 @@ public class cgData {
                     null,
                     "visiteddate",
                     null);
-
-            if (cursor != null) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-                    int index = cursor.getColumnIndex("geocode");
-
-                    do {
-                        geocodes.add(cursor.getString(index));
-                    } while (cursor.moveToNext());
-                } else {
-                    cursor.close();
-                    return null;
-                }
-
-                cursor.close();
+            while (cursor.moveToNext()) {
+                geocodes.add(cursor.getString(0));
             }
+            cursor.close();
         } catch (Exception e) {
             Log.e("cgData.loadBatchOfHistoricGeocodes: " + e.toString());
         }
