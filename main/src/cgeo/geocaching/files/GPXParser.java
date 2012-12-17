@@ -816,7 +816,7 @@ public abstract class GPXParser extends FileParser {
             return WaypointType.FINAL;
         }
         // this is not fully correct, but lets also look for localized waypoint types
-        for (WaypointType waypointType : WaypointType.ALL_TYPES_EXCEPT_OWN) {
+        for (WaypointType waypointType : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
             final String localized = waypointType.getL10n();
             if (StringUtils.isNotEmpty(localized)) {
                 if (localized.equalsIgnoreCase(sym)) {
