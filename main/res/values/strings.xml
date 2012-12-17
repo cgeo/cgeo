@@ -1101,8 +1101,6 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>Next maintenance release</b>\n\n
-    <b>New Features/Functions:</b>\n
-    · ...\n
     <b>Bugfixing:</b>\n
     · Found caches not shown correctly for basic members\n
     · Some special log types not recognized\n
