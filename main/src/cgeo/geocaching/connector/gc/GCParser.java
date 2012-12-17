@@ -197,7 +197,7 @@ public abstract class GCParser {
             }
 
             // premium cache
-            cache.setPremiumMembersOnly(row.contains("/images/small_profile.gif"));
+            cache.setPremiumMembersOnly(row.contains("/images/icons/16/premium_only.png"));
 
             // found it
             cache.setFound(row.contains("/images/icons/icon_smile"));
