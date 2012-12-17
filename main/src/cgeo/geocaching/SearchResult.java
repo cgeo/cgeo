@@ -220,10 +220,6 @@ public class SearchResult implements Parcelable {
     }
 
     public boolean hasUnsavedCaches() {
-        if (this == null) {
-            return false;
-        }
-    
         for (final String geocode : getGeocodes()) {
             if (!cgData.isOffline(geocode, null)) {
                 return true;
