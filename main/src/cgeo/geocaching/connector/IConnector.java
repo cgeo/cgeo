@@ -1,8 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.geopoint.Viewport;
 
 public interface IConnector {
     /**
@@ -37,7 +35,7 @@ public interface IConnector {
 
     /**
      * enable/disable favorite points controls in cache details
-     *
+     * 
      * @return
      */
     public boolean supportsFavoritePoints();
@@ -70,15 +68,6 @@ public interface IConnector {
      * @return
      */
     public boolean supportsUserActions();
-
-    /**
-     * Search caches by viewport.
-     *
-     * @param viewport
-     * @param tokens
-     * @return
-     */
-    public SearchResult searchByViewport(final Viewport viewport, final String[] tokens);
 
     /**
      * return true if this is a ZIP file containing a GPX file

@@ -7,6 +7,8 @@ import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.gc.AbstractSearchThread;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.SearchHandler;
@@ -1345,6 +1347,12 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         @Override
         public void runSearch() {
             search = GCParser.searchByCoords(coords, Settings.getCacheType(), Settings.isShowCaptcha());
+            if (Settings.isOCConnectorActive()) {
+                SearchResult temp = ((ISearchByCenter) ConnectorFactory.getConnector("OCXXX")).searchByCenter(coords);
+                if (temp != null) {
+                    search.addGeocodes(temp.getGeocodes());
+                }
+            }
             replaceCacheListFromSearch();
         }
     }

@@ -1,8 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.geopoint.Viewport;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,11 +34,6 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public boolean supportsUserActions() {
         return false;
-    }
-
-    @Override
-    public SearchResult searchByViewport(Viewport viewport, String tokens[]) {
-        return null;
     }
 
     protected static boolean isNumericId(final String string) {
