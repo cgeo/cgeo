@@ -30,7 +30,7 @@ public class StaticMapsProvider {
     private static final String ROADMAP = "roadmap";
     private static final String WAYPOINT_PREFIX = "wp";
     private static final String MAP_FILENAME_PREFIX = "map_";
-    private static final String MARKERS_URL = "http://cgeo.carnero.cc/_markers/";
+    private static final String MARKERS_URL = "http://status.cgeo.org/assets/markers/";
     /** We assume there is no real usable image with less than 1k */
     private static final int MIN_MAP_IMAGE_BYTES = 1000;
     /** ThreadPool restricting this to 1 Thread. **/
