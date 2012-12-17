@@ -791,7 +791,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     /**
-     * @return a Set of geocodes corresponding to the caches that are shown on screen.
+     * @return a non-null Set of geocodes corresponding to the caches that are shown on screen.
      */
     private Set<String> getGeocodesForCachesInViewport() {
         final Set<String> geocodes = new HashSet<String>();

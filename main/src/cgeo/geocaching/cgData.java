@@ -2126,7 +2126,7 @@ public class cgData {
      *            the current coordinates to sort by distance, or null to sort by geocode
      * @param cacheType
      * @param listId
-     * @return
+     * @return a non-null set of geocodes
      */
     private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId) {
         if (cacheType == null) {
@@ -2134,9 +2134,9 @@ public class cgData {
         }
         init();
 
-        Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<String>();
 
-        StringBuilder selection = new StringBuilder();
+        final StringBuilder selection = new StringBuilder();
 
         selection.append("reason ");
         selection.append(listId != StoredList.ALL_LIST_ID ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
@@ -2192,9 +2192,9 @@ public class cgData {
     private static Set<String> loadBatchOfHistoricGeocodes(final boolean detailedOnly, final CacheType cacheType) {
         init();
 
-        Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<String>();
 
-        StringBuilder selection = new StringBuilder("visiteddate > 0");
+        final StringBuilder selection = new StringBuilder("visiteddate > 0");
 
         if (detailedOnly) {
             selection.append(" and detailed = 1");
