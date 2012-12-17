@@ -40,38 +40,49 @@ public class SearchResult implements Parcelable {
         }
     };
 
+    /**
+     * Build a new empty search result.
+     */
     public SearchResult() {
-        this((Set<String>) null);
+        this(new HashSet<String>());
     }
 
-    public SearchResult(SearchResult searchResult) {
-        if (searchResult != null) {
-            this.geocodes = new HashSet<String>(searchResult.geocodes);
-            this.error = searchResult.error;
-            this.url = searchResult.url;
-            this.viewstates = searchResult.viewstates;
-            this.setTotal(searchResult.getTotal());
-        } else {
-            this.geocodes = new HashSet<String>();
-        }
+    /**
+     * Copy a search result, for example to apply different filters on it.
+     *
+     * @param searchResult the original search result, which cannot be null
+     */
+    public SearchResult(final SearchResult searchResult) {
+        geocodes = new HashSet<String>(searchResult.geocodes);
+        error = searchResult.error;
+        url = searchResult.url;
+        viewstates = searchResult.viewstates;
+        setTotal(searchResult.getTotal());
     }
 
-    public SearchResult(final Set<String> geocodes, final int total) {
-        if (geocodes == null) {
-            this.geocodes = new HashSet<String>();
-        } else {
-            this.geocodes = new HashSet<String>(geocodes.size());
-            this.geocodes.addAll(geocodes);
-        }
+    /**
+     * Build a search result from an existing collection of geocodes.
+     *
+     * @param geocodes a non-null collection of geocodes
+     * @param total the total number of geocodes (FIXME: what is the meaning of this number wrt to geocodes.size()?)
+     */
+    public SearchResult(final Collection<String> geocodes, final int total) {
+        this.geocodes = new HashSet<String>(geocodes.size());
+        this.geocodes.addAll(geocodes);
         this.setTotal(total);
     }
 
+    /**
+     * Build a search result from an existing collection of geocodes.
+     *
+     * @param geocodes a non-null set of geocodes
+     */
     public SearchResult(final Set<String> geocodes) {
-        this(geocodes, geocodes == null ? 0 : geocodes.size());
+        this(geocodes, geocodes.size());
     }
 
     public SearchResult(final Parcel in) {
-        ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> list = new ArrayList<String>();
         in.readStringList(list);
         geocodes = new HashSet<String>(list);
         error = (StatusCode) in.readSerializable();
@@ -84,14 +95,24 @@ public class SearchResult implements Parcelable {
         setTotal(in.readInt());
     }
 
-    public SearchResult(cgCache cache) {
-        this();
-        addCache(cache);
+    /**
+     * Build a search result designating a single cache.
+     *
+     * @param cache the cache to include
+     */
+
+    public SearchResult(final cgCache cache) {
+        this(Collections.singletonList(cache));
     }
 
-    public SearchResult(Collection<cgCache> caches) {
+    /**
+     * Build a search result from a collection of caches.
+     *
+     * @param caches the non-null collection of caches to include
+     */
+    public SearchResult(final Collection<cgCache> caches) {
         this();
-        for (cgCache cache : caches) {
+        for (final cgCache cache : caches) {
             addCache(cache);
         }
     }
