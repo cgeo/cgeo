@@ -65,7 +65,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public SearchResult searchByViewport(Viewport viewport, String tokens[]) {
+    public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
         return null;
     }
 
