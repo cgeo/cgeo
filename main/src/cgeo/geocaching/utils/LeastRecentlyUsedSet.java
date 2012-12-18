@@ -120,7 +120,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Object clone() {
+    public Object clone() throws CloneNotSupportedException {
         try {
             synchronized (this) {
                 final LeastRecentlyUsedSet<E> newSet = (LeastRecentlyUsedSet<E>) super.clone();
