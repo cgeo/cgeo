@@ -29,7 +29,7 @@ public final class UTFGrid {
     }
 
     /** Calculate from a list of positions (x/y) the coords */
-    protected static UTFGridPosition getPositionInGrid(List<UTFGridPosition> positions) {
+    public static UTFGridPosition getPositionInGrid(List<UTFGridPosition> positions) {
         int minX = GRID_MAXX;
         int maxX = 0;
         int minY = GRID_MAXY;
