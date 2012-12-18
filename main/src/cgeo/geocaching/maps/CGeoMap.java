@@ -1119,14 +1119,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 SearchResult searchResult;
                 if (mapMode == MapMode.LIVE) {
-                    if (isLiveEnabled) {
-                        searchResult = new SearchResult();
-                    } else {
-                        searchResult = new SearchResult(cgData.loadStoredInViewport(viewport, Settings.getCacheType()));
-                    }
+                    searchResult = isLiveEnabled ? new SearchResult() : new SearchResult(cgData.loadStoredInViewport(viewport, Settings.getCacheType()));
                 } else {
                     // map started from another activity
-                    searchResult = new SearchResult(searchIntent);
+                    searchResult = searchIntent != null ? new SearchResult(searchIntent) : new SearchResult();
                     if (geocodeIntent != null) {
                         searchResult.addGeocode(geocodeIntent);
                     }
