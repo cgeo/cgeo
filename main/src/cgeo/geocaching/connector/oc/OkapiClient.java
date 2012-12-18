@@ -153,9 +153,8 @@ final public class OkapiClient {
 
             final JSONArray images = response.getJSONArray(CACHE_IMAGES);
             if (images != null) {
-                JSONObject imageResponse;
                 for (int i = 0; i < images.length(); i++) {
-                    imageResponse = images.getJSONObject(i);
+                    JSONObject imageResponse = images.getJSONObject(i);
                     if (imageResponse.getBoolean(CACHE_IMAGE_IS_SPOILER)) {
                         final String title = imageResponse.getString(CACHE_IMAGE_CAPTION);
                         final String url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.getGeocode());

@@ -41,10 +41,10 @@ public class GCMap {
         final SearchResult result = new SearchResult();
 
         final String geocodeList = StringUtils.join(geocodes.toArray(), "|");
-        final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
 
         try {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
+            final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
             final String data = StringUtils.defaultString(Tile.requestMapInfo(referer, params, referer));
 
             // Example JSON information

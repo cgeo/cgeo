@@ -51,12 +51,11 @@ public abstract class IconDecoder {
         final int bitmapWidth = bitmap.getWidth();
         final int bitmapHeight = bitmap.getHeight();
 
-        int[] pngType = new int[7];
-
         if ((topX < 0) || (topY < 0) || (topX + 4 > bitmapWidth) || (topY + 4 > bitmapHeight)) {
             return false; //out of image position
         }
 
+        int[] pngType = new int[7];
         for (int x = topX; x < topX + 4; x++) {
             for (int y = topY; y < topY + 4; y++) {
                 int color = bitmap.getPixel(x, y);
@@ -132,12 +131,11 @@ public abstract class IconDecoder {
         final int bitmapWidth = bitmap.getWidth();
         final int bitmapHeight = bitmap.getHeight();
 
-        int[] pngType = new int[5];
-
         if ((topX < 0) || (topY < 0) || (topX + 4 > bitmapWidth) || (topY + 4 > bitmapHeight)) {
             return false; //out of image position
         }
 
+        int[] pngType = new int[5];
         for (int x = topX; x < topX + 4; x++) {
             for (int y = topY; y < topY + 4; y++) {
                 int color = bitmap.getPixel(x, y);
@@ -212,12 +210,11 @@ public abstract class IconDecoder {
         final int bitmapWidth = bitmap.getWidth();
         final int bitmapHeight = bitmap.getHeight();
 
-        int[] pngType = new int[13];
-
         if ((topX < 0) || (topY < 0) || (topX + 4 > bitmapWidth) || (topY + 4 > bitmapHeight)) {
             return false; //out of image position
         }
 
+        int[] pngType = new int[13];
         for (int x = topX; x < topX + 4; x++) {
             for (int y = topY; y < topY + 4; y++) {
                 int color = bitmap.getPixel(x, y);

@@ -46,16 +46,14 @@ public final class CryptUtils {
         boolean plaintext = false;
 
         final int length = text.length();
-        int c;
-        int capitalized;
         for (int index = 0; index < length; index++) {
-            c = text.charAt(index);
+            int c = text.charAt(index);
             if (c == '[') {
                 plaintext = true;
             } else if (c == ']') {
                 plaintext = false;
             } else if (!plaintext) {
-                capitalized = c & 32;
+                int capitalized = c & 32;
                 c &= ~capitalized;
                 c = ((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c)
                         | capitalized;
@@ -116,16 +114,14 @@ public final class CryptUtils {
         boolean plaintext = false;
 
         final int length = span.length();
-        int c;
-        int capitalized;
         for (int index = 0; index < length; index++) {
-            c = span.charAt(index);
+            int c = span.charAt(index);
             if (c == '[') {
                 plaintext = true;
             } else if (c == ']') {
                 plaintext = false;
             } else if (!plaintext) {
-                capitalized = c & 32;
+                int capitalized = c & 32;
                 c &= ~capitalized;
                 c = ((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c)
                         | capitalized;

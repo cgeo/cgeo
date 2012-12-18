@@ -132,10 +132,9 @@ public class GPXImporter {
 
         @Override
         public void run() {
-            final Collection<cgCache> caches;
             try {
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_START));
-                caches = doImport();
+                final Collection<cgCache> caches = doImport();
                 Log.i("Imported successfully " + caches.size() + " caches.");
 
                 final SearchResult search = new SearchResult();

@@ -487,8 +487,6 @@ public class cgeopoint extends AbstractActivity {
     }
 
     private Geopoint getDestination() {
-        Geopoint result;
-        Geopoint coords;
 
         String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
         // combine distance from EditText and distanceUnit saved from Spinner
@@ -502,6 +500,7 @@ public class cgeopoint extends AbstractActivity {
             return null;
         }
 
+        Geopoint coords;
         if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
             try {
                 coords = new Geopoint(latText, lonText);
@@ -518,6 +517,7 @@ public class cgeopoint extends AbstractActivity {
             coords = app.currentGeo().getCoords();
         }
 
+        Geopoint result;
         if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
             double bearing;

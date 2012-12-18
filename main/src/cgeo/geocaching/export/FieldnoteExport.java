@@ -160,10 +160,9 @@ class FieldnoteExport extends AbstractExport {
                 SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
                 exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
 
-                OutputStream os;
                 Writer fw = null;
                 try {
-                    os = new FileOutputStream(exportFile);
+                    OutputStream os = new FileOutputStream(exportFile);
                     fw = new OutputStreamWriter(os, "UTF-16");
                     fw.write(fieldNoteBuffer.toString());
                 } catch (IOException e) {
@@ -186,8 +185,6 @@ class FieldnoteExport extends AbstractExport {
             if (upload) {
                 publishProgress(STATUS_UPLOAD);
 
-                final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
-
                 if (!Login.isActualLoginStatus()) {
                     // no need to upload (possibly large file) if we're not logged in
                     final StatusCode loginState = Login.login();
@@ -196,6 +193,7 @@ class FieldnoteExport extends AbstractExport {
                     }
                 }
 
+                final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
                 String page = Network.getResponseData(Network.getRequest(uri));
 
                 if (!Login.getLoginStatus(page)) {

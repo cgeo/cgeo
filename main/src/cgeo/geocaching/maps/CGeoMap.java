@@ -578,9 +578,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
         }
 
-        MenuItem item;
         try {
-            item = menu.findItem(MENU_TRAIL_MODE); // show trail
+            MenuItem item = menu.findItem(MENU_TRAIL_MODE);
             if (Settings.isMapTrail()) {
                 item.setTitle(res.getString(R.string.map_trail_hide));
             } else {
@@ -751,9 +750,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             currentTheme = currentThemeFile.getName();
         }
 
-        int currentItem = 0;
         List<String> names = new ArrayList<String>();
         names.add(res.getString(R.string.map_theme_builtin));
+        int currentItem = 0;
         for (File file : themeFiles) {
             if (currentTheme.equalsIgnoreCase(file.getName())) {
                 currentItem = names.size();

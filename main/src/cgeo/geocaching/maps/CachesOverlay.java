@@ -209,10 +209,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             progress.show(context, context.getResources().getString(R.string.map_live), context.getResources().getString(R.string.cache_dialog_loading_details), true, null);
 
-            CachesOverlayItemImpl item = null;
-
             // prevent concurrent changes
             getOverlayImpl().lock();
+            CachesOverlayItemImpl item = null;
             try {
                 if (index < items.size()) {
                     item = items.get(index);

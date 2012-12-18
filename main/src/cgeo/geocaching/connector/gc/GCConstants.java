@@ -186,7 +186,6 @@ public final class GCConstants {
      * see http://support.groundspeak.com/index.php?pg=kb.printer.friendly&id=1#p221
      */
     public static long gccodeToGCId(final String gccode) {
-        long gcid = 0;
         long base = GC_BASE31;
         String geocodeWO = gccode.substring(2).toUpperCase(Locale.US);
 
@@ -194,6 +193,7 @@ public final class GCConstants {
             base = GC_BASE16;
         }
 
+        long gcid = 0;
         for (int p = 0; p < geocodeWO.length(); p++) {
             gcid = base * gcid + SEQUENCE_GCID.indexOf(geocodeWO.charAt(p));
         }

@@ -164,8 +164,7 @@ public abstract class Network {
      * @return the HTTP response, or null in case of an encoding error params
      */
     public static HttpResponse postJsonRequest(final String uri, final JSONObject json) {
-        HttpPost request;
-        request = new HttpPost(uri);
+        HttpPost request = new HttpPost(uri);
         request.addHeader("Content-Type", "application/json; charset=utf-8");
         if (json != null) {
             try {

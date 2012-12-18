@@ -157,9 +157,8 @@ public class EditWaypointActivity extends AbstractActivity {
             initializeWaypointTypeSelector();
         }
 
-        IConnector con;
         if (geocode != null) {
-            con = ConnectorFactory.getConnector(geocode);
+            IConnector con = ConnectorFactory.getConnector(geocode);
             setUploadingCheckBoxVisibleByConnector(con);
         }
 

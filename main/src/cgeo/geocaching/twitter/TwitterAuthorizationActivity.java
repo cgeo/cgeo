@@ -130,14 +130,13 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
     }
 
     private void requestToken() {
-        final String host = "api.twitter.com";
-        final String pathRequest = "/oauth/request_token";
-        final String pathAuthorize = "/oauth/authorize";
-        final String method = "GET";
 
         int status = 0;
         try {
             final Parameters params = new Parameters();
+            final String method = "GET";
+            final String pathRequest = "/oauth/request_token";
+            final String host = "api.twitter.com";
             OAuth.signOAuth(host, pathRequest, method, true, params, null, null);
             final String line = Network.getResponseData(Network.getRequest("https://" + host + pathRequest, params));
 
@@ -157,6 +156,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
                     try {
                         final Parameters paramsBrowser = new Parameters();
                         paramsBrowser.put("oauth_callback", "oob");
+                        final String pathAuthorize = "/oauth/authorize";
                         OAuth.signOAuth(host, pathAuthorize, "GET", true, paramsBrowser, OAtoken, OAtokenSecret);
                         final String encodedParams = EntityUtils.toString(new UrlEncodedFormEntity(paramsBrowser));
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://" + host + pathAuthorize + "?" + encodedParams)));
@@ -174,15 +174,15 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
     }
 
     private void changeToken() {
-        final String host = "api.twitter.com";
-        final String path = "/oauth/access_token";
-        final String method = "POST";
 
         int status = 0;
 
         try {
             final Parameters params = new Parameters("oauth_verifier", pinEntry.getText().toString());
 
+            final String method = "POST";
+            final String path = "/oauth/access_token";
+            final String host = "api.twitter.com";
             OAuth.signOAuth(host, path, method, true, params, OAtoken, OAtokenSecret);
             final String line = StringUtils.defaultString(Network.getResponseData(Network.postRequest("https://" + host + path, params)));
 

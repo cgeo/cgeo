@@ -67,8 +67,6 @@ public abstract class GCParser {
         }
 
         final List<String> cids = new ArrayList<String>();
-        String recaptchaChallenge = null;
-        String recaptchaText = null;
         String page = pageContent;
 
         final SearchResult searchResult = new SearchResult();
@@ -77,6 +75,7 @@ public abstract class GCParser {
 
         // recaptcha
         AbstractSearchThread thread = AbstractSearchThread.getCurrentInstance();
+        String recaptchaChallenge = null;
         if (showCaptcha) {
             String recaptchaJsParam = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_RECAPTCHA, false, null);
 
@@ -159,8 +158,6 @@ public abstract class GCParser {
                 continue;
             }
 
-            String inventoryPre = null;
-
             cache.setGeocode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
 
             // cache type
@@ -173,6 +170,7 @@ public abstract class GCParser {
 
             // cache inventory
             final Matcher matcherTbs = GCConstants.PATTERN_SEARCH_TRACKABLES.matcher(row);
+            String inventoryPre = null;
             while (matcherTbs.find()) {
                 if (matcherTbs.groupCount() > 0) {
                     try {
@@ -235,6 +233,7 @@ public abstract class GCParser {
             Log.w("GCParser.parseSearch: Failed to parse cache count");
         }
 
+        String recaptchaText = null;
         if (thread != null && recaptchaChallenge != null) {
             if (thread.getText() == null) {
                 thread.waitForUser();
@@ -632,10 +631,7 @@ public abstract class GCParser {
         } catch (Geopoint.GeopointException e) {
         }
 
-        int wpBegin;
-        int wpEnd;
-
-        wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
+        int wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
         if (wpBegin != -1) { // parse waypoints
             if (CancellableHandler.isCancelled(handler)) {
                 return null;
@@ -644,7 +640,7 @@ public abstract class GCParser {
 
             String wpList = page.substring(wpBegin);
 
-            wpEnd = wpList.indexOf("</p>");
+            int wpEnd = wpList.indexOf("</p>");
             if (wpEnd > -1 && wpEnd <= wpList.length()) {
                 wpList = wpList.substring(0, wpEnd);
             }
@@ -661,9 +657,8 @@ public abstract class GCParser {
 
                 final String[] wpItems = wpList.split("<tr");
 
-                String[] wp;
                 for (int j = 1; j < wpItems.length; j++) {
-                    wp = wpItems[j].split("<td");
+                    String[] wp = wpItems[j].split("<td");
 
                     // waypoint name
                     // res is null during the unit tests
@@ -1694,10 +1689,9 @@ public abstract class GCParser {
         if (StringUtils.isEmpty(userToken)) {
             return false;
         }
-        final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
 
-        JSONObject jo;
         try {
+            JSONObject jo;
             if (wpt != null) {
                 jo = new JSONObject().put("dto", (new JSONObject().put("ut", userToken)
                         .put("data", new JSONObject()
@@ -1709,6 +1703,7 @@ public abstract class GCParser {
 
             final String uriSuffix = wpt != null ? "SetUserCoordinate" : "ResetUserCoordinate";
 
+            final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
             HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
             Log.i("Sending to " + uriPrefix + uriSuffix + " :" + jo.toString());
 

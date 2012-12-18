@@ -158,7 +158,6 @@ public class PositionOverlay implements GeneralOverlay {
         if (Settings.isMapTrail()) {
             int size = history.size();
             if (size > 1) {
-                int alpha;
                 int alphaCnt = size - 201;
                 if (alphaCnt < 1) {
                     alphaCnt = 1;
@@ -172,6 +171,7 @@ public class PositionOverlay implements GeneralOverlay {
                         projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
                         projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
 
+                        int alpha;
                         if ((alphaCnt - cnt) > 0) {
                             alpha = 255 / (alphaCnt - cnt);
                         }
@@ -211,11 +211,8 @@ public class PositionOverlay implements GeneralOverlay {
             heightArrowHalf = arrow.getHeight() / 2;
         }
 
-        int marginLeft;
-        int marginTop;
-
-        marginLeft = center.x - widthArrowHalf;
-        marginTop = center.y - heightArrowHalf;
+        int marginLeft = center.x - widthArrowHalf;
+        int marginTop = center.y - heightArrowHalf;
 
         Matrix matrix = new Matrix();
         matrix.setRotate(heading, widthArrowHalf, heightArrowHalf);

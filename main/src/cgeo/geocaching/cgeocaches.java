@@ -1526,13 +1526,13 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         @Override
         public void run() {
-            int ret = MSG_DONE;
 
             removeGeoAndDir();
 
             int delay = -1;
             int times = 0;
 
+            int ret = MSG_DONE;
             while (!needToStop && times < 3 * 60 / 5) // maximum: 3 minutes, every 5 seconds
             {
                 //download new code

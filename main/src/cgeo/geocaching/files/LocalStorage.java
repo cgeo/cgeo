@@ -299,9 +299,9 @@ public class LocalStorage {
     }
 
     private static boolean copy(final InputStream input, final OutputStream output) {
-        final byte[] buffer = new byte[4096];
-        int length;
         try {
+            int length;
+            final byte[] buffer = new byte[4096];
             while ((length = input.read(buffer)) > 0) {
                 output.write(buffer, 0, length);
             }

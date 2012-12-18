@@ -185,16 +185,13 @@ public class CompassView extends View {
         int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
         int canvasCenterY = (compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
 
-        int marginLeftTemp;
-        int marginTopTemp;
-
         super.onDraw(canvas);
 
         canvas.save();
         canvas.setDrawFilter(setfil);
 
-        marginLeftTemp = (getWidth() - compassUnderlayWidth) / 2;
-        marginTopTemp = (getHeight() - compassUnderlayHeight) / 2;
+        int marginLeftTemp = (getWidth() - compassUnderlayWidth) / 2;
+        int marginTopTemp = (getHeight() - compassUnderlayHeight) / 2;
 
         canvas.drawBitmap(compassUnderlay, marginLeftTemp, marginTopTemp, null);
 

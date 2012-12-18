@@ -222,11 +222,10 @@ public class cgeotrackable extends AbstractActivity {
 
                         @Override
                         public void run() {
-                            BitmapDrawable image;
                             try {
                                 HtmlImage imgGetter = new HtmlImage(geocode, true, 0, false);
 
-                                image = imgGetter.getDrawable(trackable.getImage());
+                                BitmapDrawable image = imgGetter.getDrawable(trackable.getImage());
                                 Message message = handler.obtainMessage(0, image);
                                 handler.sendMessage(message);
                             } catch (Exception e) {
@@ -431,11 +430,9 @@ public class cgeotrackable extends AbstractActivity {
         LinearLayout listView = (LinearLayout) findViewById(R.id.log_list);
         listView.removeAllViews();
 
-        RelativeLayout rowView;
-
         if (trackable != null && trackable.getLogs() != null) {
             for (LogEntry log : trackable.getLogs()) {
-                rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logs_item, null);
+                RelativeLayout rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logs_item, null);
 
                 if (log.date > 0) {
                     ((TextView) rowView.findViewById(R.id.added)).setText(Formatter.formatShortDate(log.date));
@@ -544,11 +541,10 @@ public class cgeotrackable extends AbstractActivity {
                 return;
             }
 
-            BitmapDrawable image;
             try {
                 HtmlImage imgGetter = new HtmlImage(trackable.getGeocode(), false, 0, false);
 
-                image = imgGetter.getDrawable(url);
+                BitmapDrawable image = imgGetter.getDrawable(url);
                 Message message = handler.obtainMessage(0, image);
                 handler.sendMessage(message);
             } catch (Exception e) {

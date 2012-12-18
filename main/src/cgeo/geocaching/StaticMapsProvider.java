@@ -154,12 +154,12 @@ public class StaticMapsProvider {
             return;
         }
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-        final String markerUrl = MARKERS_URL + "my_location_mdpi.png";
         final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
         final int width = metrics.widthPixels;
         final int height = (int) (110 * metrics.density);
+        final String markerUrl = MARKERS_URL + "my_location_mdpi.png";
         downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, width, height, null);
     }
 

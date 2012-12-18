@@ -232,8 +232,6 @@ public class CacheDetailActivity extends AbstractActivity {
         setTitle(res.getString(R.string.cache));
 
         String geocode = null;
-        String guid = null;
-        String name = null;
 
         // TODO Why can it happen that search is not null? onCreate should be called only once and it is not set before.
         if (search != null) {
@@ -248,6 +246,8 @@ public class CacheDetailActivity extends AbstractActivity {
         final Uri uri = getIntent().getData();
 
         // try to get data from extras
+        String name = null;
+        String guid = null;
         if (geocode == null && extras != null) {
             geocode = extras.getString("geocode");
             name = extras.getString("name");

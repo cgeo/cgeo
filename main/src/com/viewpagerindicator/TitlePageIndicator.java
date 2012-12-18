@@ -686,15 +686,13 @@ public class TitlePageIndicator extends View implements PageIndicator {
      * @return The width of the view, honoring constraints from measureSpec
      */
     private int measureWidth(int measureSpec) {
-        int result;
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
 
         if (specMode != MeasureSpec.EXACTLY) {
             throw new IllegalStateException(getClass().getSimpleName() + " can only be used in EXACTLY mode.");
         }
-        result = specSize;
-        return result;
+        return specSize;
     }
 
     /**

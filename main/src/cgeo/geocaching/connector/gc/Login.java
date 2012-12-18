@@ -361,10 +361,10 @@ public abstract class Login {
         String[] viewstates = new String[count];
 
         // Get the viewstates
-        int no;
         final Matcher matcherViewstates = GCConstants.PATTERN_VIEWSTATES.matcher(page);
         while (matcherViewstates.find()) {
             String sno = matcherViewstates.group(1); // number of viewstate
+            int no;
             if (sno.isEmpty()) {
                 no = 0;
             }

@@ -764,11 +764,10 @@ public class cgData {
                     "100");
 
             if (cursor != null) {
-                int index;
 
                 if (cursor.getCount() > 0) {
                     cursor.moveToFirst();
-                    index = cursor.getColumnIndex("geocode");
+                    int index = cursor.getColumnIndex("geocode");
 
                     do {
                         list.add(cursor.getString(index));
@@ -825,13 +824,12 @@ public class cgData {
             }
 
             if (cursor != null) {
-                int index;
                 cnt = cursor.getCount();
 
                 if (cnt > 0) {
                     cursor.moveToFirst();
 
-                    index = cursor.getColumnIndex("updated");
+                    int index = cursor.getColumnIndex("updated");
                     dataUpdated = cursor.getLong(index);
                     index = cursor.getColumnIndex("detailedupdate");
                     dataDetailedUpdate = cursor.getLong(index);
@@ -1033,12 +1031,12 @@ public class cgData {
         values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
         values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
 
-        boolean result = false;
         init();
 
         //try to update record else insert fresh..
         database.beginTransaction();
 
+        boolean result = false;
         try {
             saveAttributesWithoutTransaction(cache);
             saveOriginalWaypointsWithoutTransaction(cache);
@@ -1105,10 +1103,10 @@ public class cgData {
     }
 
     public static boolean saveWaypoints(final cgCache cache) {
-        boolean result = false;
         init();
         database.beginTransaction();
 
+        boolean result = false;
         try {
             saveOriginalWaypointsWithoutTransaction(cache);
             database.setTransactionSuccessful();
@@ -1191,8 +1189,8 @@ public class cgData {
 
         init();
 
-        boolean ok = false;
         database.beginTransaction();
+        boolean ok = false;
         try {
             ContentValues values = new ContentValues();
             values.put("geocode", geocode);
@@ -1558,7 +1556,6 @@ public class cgData {
      * @return Cache from DB
      */
     private static cgCache createCacheFromDatabaseContent(Cursor cursor) {
-        int index;
         cgCache cache = new cgCache();
 
         if (cacheColumnIndex == null) {
@@ -1627,7 +1624,7 @@ public class cgData {
         cache.setHint(cursor.getString(cacheColumnIndex[14]));
         cache.setSize(CacheSize.getById(cursor.getString(cacheColumnIndex[15])));
         cache.setDifficulty(cursor.getFloat(cacheColumnIndex[16]));
-        index = cacheColumnIndex[17];
+        int index = cacheColumnIndex[17];
         if (cursor.isNull(index)) {
             cache.setDirection(null);
         } else {
@@ -1714,8 +1711,6 @@ public class cgData {
 
         init();
 
-        cgWaypoint waypoint = null;
-
         Cursor cursor = database.query(
                 dbTableWaypoints,
                 WAYPOINT_COLUMNS,
@@ -1728,6 +1723,7 @@ public class cgData {
 
         Log.d("cgData.loadWaypoint(" + id + ")");
 
+        cgWaypoint waypoint = null;
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
 
@@ -1880,10 +1876,10 @@ public class cgData {
     }
 
     public static boolean clearSearchedDestinations() {
-        boolean success = true;
         init();
         database.beginTransaction();
 
+        boolean success = true;
         try {
             database.delete(dbTableSearchDestionationHistory, null, null);
             database.setTransactionSuccessful();
@@ -2344,10 +2340,10 @@ public class cgData {
 
         Log.d("Database clean: started");
 
-        Cursor cursor;
         Set<String> geocodes = new HashSet<String>();
 
         try {
+            Cursor cursor;
             if (more) {
                 cursor = database.query(
                         dbTableCaches,
@@ -2701,8 +2697,8 @@ public class cgData {
 
         init();
 
-        int count = 0;
         database.beginTransaction();
+        int count = 0;
         try {
             ContentValues values = new ContentValues();
             values.put("title", name);
@@ -2730,8 +2726,8 @@ public class cgData {
 
         init();
 
-        boolean status = false;
         database.beginTransaction();
+        boolean status = false;
         try {
             int cnt = database.delete(dbTableLists, "_id = " + (listId - customListIdOffset), null);
 
@@ -2787,8 +2783,8 @@ public class cgData {
         }
         init();
 
-        boolean result = false;
         database.beginTransaction();
+        boolean result = false;
         try {
             database.delete(dbTableSearchDestionationHistory, "_id = " + destination.getId(), null);
             database.setTransactionSuccessful();

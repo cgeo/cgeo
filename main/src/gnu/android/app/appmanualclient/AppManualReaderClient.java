@@ -233,9 +233,8 @@ public class AppManualReaderClient {
 		// manuals this doesn't matter, as the user then can choose which
 		// one to use on a single or permanent basis.
 		//
-		String logTag = "appmanualclient";
-		for ( ;; ) {
-			Uri uri = Uri.parse(URI_SCHEME_APPMANUAL + "://" + manualIdentifier
+        while (true) {
+            Uri uri = Uri.parse(URI_SCHEME_APPMANUAL + "://" + manualIdentifier
 					+ localePath + "#topic='" + topic + "'");
 			// Note: we do not use a MIME type for this.
 			intent.setData(uri);
@@ -300,7 +299,8 @@ public class AppManualReaderClient {
 						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 			}
 			try {
-				if ( Log.isLoggable(logTag, Log.INFO) ) {
+                String logTag = "appmanualclient";
+                if ( Log.isLoggable(logTag, Log.INFO) ) {
 					Log.i(logTag,
 							"Trying to activate manual: uri=" + uri.toString());
 				}
