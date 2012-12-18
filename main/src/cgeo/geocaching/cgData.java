@@ -2934,10 +2934,6 @@ public class cgData {
 
         private static HashMap<String, SQLiteStatement> statements = new HashMap<String, SQLiteStatement>();
 
-        private PreparedStatements() {
-            // utility class
-        }
-
         public static SQLiteStatement getMoveToStandardList() {
             return getStatement("MoveToStandardList", "UPDATE " + dbTableCaches + " SET reason = " + StoredList.STANDARD_LIST_ID + " WHERE reason = ?");
         }
