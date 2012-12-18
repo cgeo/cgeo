@@ -24,7 +24,6 @@ public class Parameters extends ArrayList<NameValuePair> {
      *             if the number of key/values is unbalanced
      */
     public Parameters(final String... keyValues) {
-        super();
         put(keyValues);
     }
 

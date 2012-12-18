@@ -2145,7 +2145,6 @@ public class CacheDetailActivity extends AbstractActivity {
         private boolean allLogs;
 
         LogsViewCreator(boolean allLogs) {
-            super();
             this.allLogs = allLogs;
         }
 
