@@ -45,7 +45,7 @@ public enum CacheType {
     private final int stringId;
     public final int markerId;
 
-    private CacheType(String id, String pattern, String guid, int stringId, int markerId) {
+    CacheType(String id, String pattern, String guid, int stringId, int markerId) {
         this.id = id;
         this.pattern = pattern;
         this.guid = guid;

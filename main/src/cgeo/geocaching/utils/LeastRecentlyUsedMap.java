@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
 
-    private static enum OperationModes {
+    private enum OperationModes {
         LRU_CACHE, BOUNDED
     }
 

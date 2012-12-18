@@ -26,7 +26,7 @@ public interface LiveMapStrategy {
         public final EnumSet<StrategyFlag> flags;
         private final int stringId;
 
-        private Strategy(int id, EnumSet<StrategyFlag> flags, int stringId) {
+        Strategy(int id, EnumSet<StrategyFlag> flags, int stringId) {
             this.id = id;
             this.flags = flags;
             this.stringId = stringId;

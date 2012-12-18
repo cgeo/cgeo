@@ -1100,7 +1100,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         final private int titleStringId;
 
-        private Page(final int titleStringId) {
+        Page(final int titleStringId) {
             this.titleStringId = titleStringId;
         }
     }

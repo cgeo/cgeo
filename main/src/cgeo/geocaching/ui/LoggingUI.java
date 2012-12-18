@@ -52,7 +52,7 @@ public class LoggingUI extends AbstractUIFactory {
 
         private final int stringId;
 
-        private SpecialLogType(final int stringId) {
+        SpecialLogType(final int stringId) {
             this.stringId = stringId;
         }
 

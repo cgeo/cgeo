@@ -53,7 +53,7 @@ public class ImagesList {
         private final int titleResId;
         private final int loadingResId;
 
-        private ImageType(final int title, final int loading) {
+        ImageType(final int title, final int loading) {
             this.titleResId = title;
             this.loadingResId = loading;
         }

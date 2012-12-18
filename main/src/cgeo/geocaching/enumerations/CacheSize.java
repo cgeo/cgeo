@@ -25,7 +25,7 @@ public enum CacheSize {
     public final int comparable;
     private final int stringId;
 
-    private CacheSize(String id, int comparable, int stringId) {
+    CacheSize(String id, int comparable, int stringId) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;

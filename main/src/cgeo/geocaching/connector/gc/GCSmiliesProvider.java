@@ -26,7 +26,7 @@ public class GCSmiliesProvider {
 
         public final String text;
 
-        private Smiley(final String text) {
+        Smiley(final String text) {
             this.text = text;
         }
 

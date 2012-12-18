@@ -88,7 +88,7 @@ public enum CacheAttribute {
     public final int stringIdYes;
     public final int stringIdNo;
 
-    private CacheAttribute(final int id, final String gcRawName, final int drawableId, final int stringIdYes, final int stringIdNo) {
+    CacheAttribute(final int id, final String gcRawName, final int drawableId, final int stringIdYes, final int stringIdNo) {
         this.id = id;
         this.gcRawName = gcRawName;
         this.drawableId = drawableId;

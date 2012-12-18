@@ -48,7 +48,7 @@ public enum LogType {
     private final int stringId;
     public final int markerId;
 
-    private LogType(int id, String iconName, String type, int stringId, int markerId) {
+    LogType(int id, String iconName, String type, int stringId, int markerId) {
         this.id = id;
         this.iconName = iconName;
         this.type = type;
@@ -56,7 +56,7 @@ public enum LogType {
         this.markerId = markerId;
     }
 
-    private LogType(int id, String iconName, String type, int stringId) {
+    LogType(int id, String iconName, String type, int stringId) {
         this(id, iconName, type, stringId, R.drawable.mark_gray);
     }
 

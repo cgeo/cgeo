@@ -9,7 +9,7 @@ public enum LocationProviderType {
 
     public final int resourceId;
 
-    private LocationProviderType(final int resourceId) {
+    LocationProviderType(final int resourceId) {
         this.resourceId = resourceId;
     }
 }

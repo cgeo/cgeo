@@ -11,7 +11,7 @@ public enum LogTypeTrackable {
     final public String action;
     final public int resourceId;
 
-    private LogTypeTrackable(int id, String action, int resourceId) {
+    LogTypeTrackable(int id, String action, int resourceId) {
         this.id = id;
         this.action = action;
         this.resourceId = resourceId;

@@ -26,7 +26,7 @@ public enum WaypointType {
     public final int stringId;
     public final int markerId;
 
-    private WaypointType(String id, int stringId, int markerId) {
+    WaypointType(String id, int stringId, int markerId) {
         this.id = id;
         this.stringId = stringId;
         this.markerId = markerId;
