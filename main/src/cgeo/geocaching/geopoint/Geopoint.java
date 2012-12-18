@@ -259,7 +259,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof Geopoint)) {
+        if (!(obj instanceof Geopoint)) {
             return false;
         }
         final Geopoint gp = (Geopoint) obj;

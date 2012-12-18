@@ -37,7 +37,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     }
 
     public static boolean isSatelliteSource(final MapSource mapSource) {
-        return mapSource != null && mapSource instanceof GoogleSatelliteSource;
+        return mapSource instanceof GoogleSatelliteSource;
     }
 
     @Override
