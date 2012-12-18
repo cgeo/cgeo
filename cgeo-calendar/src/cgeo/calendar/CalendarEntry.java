@@ -1,5 +1,7 @@
 package cgeo.calendar;
 
+import cgeo.geocaching.utils.Log;
+
 import android.net.Uri;
 import android.text.Html;
 import android.text.Spanned;
@@ -35,6 +37,7 @@ class CalendarEntry {
             try {
                 this.startTimeMinutes = Integer.valueOf(startTime);
             } catch (NumberFormatException e) {
+                Log.e("CalendarEntry creation", e);
             }
         }
     }
@@ -47,6 +50,7 @@ class CalendarEntry {
             }
             return URLDecoder.decode(param, "UTF-8").trim();
         } catch (UnsupportedEncodingException e) {
+            Log.e("CalendarEntry.getParameter", e);
         }
         return "";
     }
