@@ -160,7 +160,7 @@
 
   <string name="err_log_load_data">Przepraszam, c:geo nie może załadować dane wymagane do zalogowania wizyty.</string>
   <string name="err_log_load_data_again">Przepraszam, c:geo nie może załadować dane wymagane do zalogowania wizyty. Próbuję ponownie.</string>
-  <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać...</string>
+  <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
   <string name="err_log_failed_server">Przepraszam, c:geo nie może wysłać wpisu ponieważ serwer nie odpowiada.</string>
   <string name="err_log_post_failed">Przepraszam, c:geo nie mógł dodać wpisu do dziennika.</string>
 
