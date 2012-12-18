@@ -1100,13 +1100,12 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next maintenance release</b>\n\n
+    <b>2012.12.18</b>\n\n
     <b>Bugfixing:</b>\n
     · Found caches not shown correctly for basic members\n
-    · Some special log types not recognized\n
+    · Recognition of some special log types\n
     · Correction in directory selector\n
-    · Corrected detection of premium caches in nearby search\n
-	\n
+    · Corrected detection of premium caches in nearby search\n\n
     <b>2012.12.12</b>\n\n
     <b>New Features/Functions:</b>\n
     · Opencaching.NL support in search function\n
