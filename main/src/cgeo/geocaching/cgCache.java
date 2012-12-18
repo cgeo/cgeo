@@ -313,9 +313,18 @@ public class cgCache implements ICache, IWaypoint {
         if (logCounts.size() == 0) {
             logCounts = other.logCounts;
         }
-        if (!userModifiedCoords) {
-            userModifiedCoords = other.userModifiedCoords;
+
+        // if cache has ORIGINAL type waypoint ... it is considered that it has modified coordinates, otherwise not
+        userModifiedCoords = false;
+        if (waypoints != null) {
+            for (cgWaypoint wpt : waypoints) {
+                if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
+                    userModifiedCoords = true;
+                    break;
+                }
+            }
         }
+
         if (!reliableLatLon) {
             reliableLatLon = other.reliableLatLon;
         }
@@ -335,7 +344,8 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * Compare two caches quickly. For map and list fields only the references are compared !
      *
-     * @param other the other cache to compare this one to
+     * @param other
+     *            the other cache to compare this one to
      * @return true if both caches have the same content
      */
     private boolean isEqualTo(final cgCache other) {
@@ -531,6 +541,10 @@ public class cgCache implements ICache, IWaypoint {
         return getConnector().supportsLogging();
     }
 
+    public boolean supportsOwnCoordinates() {
+        return getConnector().supportsOwnCoordinates();
+    }
+
     @Override
     public float getDifficulty() {
         return difficulty;
@@ -692,7 +706,6 @@ public class cgCache implements ICache, IWaypoint {
     public void setFavorite(boolean favourite) {
         this.favorite = favourite;
     }
-
 
     @Override
     public boolean isWatchlist() {
@@ -1184,12 +1197,12 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public void setUserModifiedCoords(boolean coordsChanged) {
-        this.userModifiedCoords = coordsChanged;
+        userModifiedCoords = coordsChanged;
     }
 
     /**
      * Duplicate a waypoint.
-     * 
+     *
      * @param original
      *            the waypoint to duplicate
      * @return <code>true</code> if the waypoint was duplicated, <code>false</code> otherwise (invalid index)
@@ -1235,6 +1248,20 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     /**
+     * deletes any waypoint
+     *
+     * @param waypoint
+     */
+
+    public void deleteWaypointForce(cgWaypoint waypoint) {
+        final int index = getWaypointIndex(waypoint);
+        waypoints.remove(index);
+        cgData.deleteWaypoint(waypoint.getId());
+        cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        resetFinalDefined();
+    }
+
+    /**
      * Find index of given <code>waypoint</code> in cache's <code>waypoints</code> list
      *
      * @param waypoint
@@ -1254,7 +1281,8 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * Retrieve a given waypoint.
      *
-     * @param index the index of the waypoint
+     * @param index
+     *            the index of the waypoint
      * @return waypoint or <code>null</code> if index is out of range
      */
     public cgWaypoint getWaypoint(final int index) {
@@ -1264,7 +1292,8 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * Lookup a waypoint by its id.
      *
-     * @param id the id of the waypoint to look for
+     * @param id
+     *            the id of the waypoint to look for
      * @return waypoint or <code>null</code>
      */
     public cgWaypoint getWaypointById(final int id) {

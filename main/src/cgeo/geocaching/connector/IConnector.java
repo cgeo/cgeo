@@ -2,6 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
 public interface IConnector {
@@ -106,10 +107,34 @@ public interface IConnector {
 
     /**
      * extract a geocode from the given URL, if this connector can handle that URL somehow
-     * 
+     *
      * @param url
      * @return
      */
     public String getGeocodeFromUrl(final String url);
+
+    /**
+     * enable/disable uploading modified coordinates to website
+     * 
+     * @return true, when uploading is possible
+     */
+    public boolean supportsOwnCoordinates();
+
+    /**
+     * Uploading modified coordinates to website
+     *
+     * @param cache
+     * @param wpt
+     * @return success
+     */
+    public boolean uploadModifiedCoordinates(cgCache cache, Geopoint wpt);
+
+    /**
+     * Reseting of modified coordinates on website to details
+     *
+     * @param cache
+     * @return success
+     */
+    public boolean deleteModifiedCoordinates(cgCache cache);
 
 }

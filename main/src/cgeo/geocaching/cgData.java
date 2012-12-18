@@ -77,7 +77,7 @@ public class cgData {
     private static int[] cacheColumnIndex;
     private static CacheCache cacheCache = new CacheCache();
     private static SQLiteDatabase database = null;
-    private static final int dbVersion = 64;
+    private static final int dbVersion = 65;
     public static final int customListIdOffset = 10;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
@@ -644,6 +644,15 @@ public class cgData {
                             db.execSQL("update " + dbTableCaches + " set reason=1 where reason=2");
                         } catch (Exception e) {
                             Log.e("Failed to upgrade to ver. 64", e);
+                        }
+                    }
+
+                    if (oldVersion < 65) {
+                        try {
+                            // Set all waypoints where name is Original coordinates to type ORIGINAL
+                            db.execSQL("update " + dbTableWaypoints + " set type='original', own=0 where name='Original Coordinates'");
+                        } catch (Exception e) {
+                            Log.e("Failed to upgrade to ver. 65:", e);
                         }
                     }
                 }

@@ -22,6 +22,7 @@ import ch.boye.httpclientandroidlib.client.methods.HttpGet;
 import ch.boye.httpclientandroidlib.client.methods.HttpPost;
 import ch.boye.httpclientandroidlib.client.methods.HttpRequestBase;
 import ch.boye.httpclientandroidlib.client.params.ClientPNames;
+import ch.boye.httpclientandroidlib.entity.StringEntity;
 import ch.boye.httpclientandroidlib.entity.mime.MultipartEntity;
 import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
@@ -153,6 +154,28 @@ public abstract class Network {
      */
     public static HttpResponse postRequest(final String uri, final Parameters params, final Parameters headers) {
         return request("POST", uri, params, headers, null);
+    }
+
+    /**
+     *  POST HTTP request with Json POST DATA
+     *
+     * @param uri the URI to request
+     * @param json the json object to add to the POST request
+     * @return the HTTP response, or null in case of an encoding error params
+     */
+    public static HttpResponse postJsonRequest(final String uri, final JSONObject json) {
+        HttpPost request;
+        request = new HttpPost(uri);
+        request.addHeader("Content-Type", "application/json; charset=utf-8");
+        if (json != null) {
+            try {
+                request.setEntity(new StringEntity(json.toString()));
+            } catch (UnsupportedEncodingException e) {
+                Log.e("postJsonRequest:JSON Entity: UnsupportedEncodingException");
+                return null;
+            }
+        }
+        return doRepeatedRequests(request);
     }
 
     /**
