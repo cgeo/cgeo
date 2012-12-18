@@ -1473,7 +1473,6 @@ public class cgData {
             final Set<cgCache> caches = new HashSet<cgCache>();
             int logIndex = -1;
             do {
-                //Extracted Method = LOADDBMINIMAL
                 cgCache cache = cgData.createCacheFromDatabaseContent(cursor);
 
                 if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
@@ -2080,25 +2079,42 @@ public class cgData {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
-        if (list < 0) {
-            throw new IllegalArgumentException("list must be >= 0");
+        if (list <= 0) {
+            throw new IllegalArgumentException("list must be > 0");
         }
         init();
 
         try {
             StringBuilder sql = new StringBuilder("select count(_id) from " + dbTableCaches + " where detailed = 1");
+            String typeKey;
+            int reasonIndex;
             if (cacheType != CacheType.ALL) {
-                sql.append(" and type = ").append(DatabaseUtils.sqlEscapeString(cacheType.id));
+                sql.append(" and type = ?");
+                typeKey = cacheType.id;
+                reasonIndex = 2;
             }
-            if (list == 0) {
+            else {
+                typeKey = "all_types";
+                reasonIndex = 1;
+            }
+            String listKey;
+            if (list == StoredList.ALL_LIST_ID) {
                 sql.append(" and reason > 0");
-            } else if (list >= 1) {
-                sql.append(" and reason = ").append(list);
+                listKey = "all_list";
+            } else {
+                sql.append(" and reason = ?");
+                listKey = "list";
             }
 
-            String key = "CountCaches_" + cacheType.id + "_" + Integer.toString(list);
+            String key = "CountCaches_" + typeKey + "_" + listKey;
 
             SQLiteStatement compiledStmnt = PreparedStatements.getStatement(key, sql.toString());
+            if (cacheType != CacheType.ALL) {
+                compiledStmnt.bindString(1, cacheType.id);
+            }
+            if (list != StoredList.ALL_LIST_ID) {
+                compiledStmnt.bindLong(reasonIndex, list);
+            }
             return (int) compiledStmnt.simpleQueryForLong();
         } catch (Exception e) {
             Log.e("cgData.loadAllStoredCachesCount: " + e.toString());
