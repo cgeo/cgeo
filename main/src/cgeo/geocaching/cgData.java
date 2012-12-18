@@ -2842,7 +2842,7 @@ public class cgData {
     private static String whereGeocodeIn(Set<String> geocodes) {
         final StringBuilder where = new StringBuilder();
 
-        if (geocodes != null && geocodes.size() > 0) {
+        if (geocodes != null && !geocodes.isEmpty()) {
             StringBuilder all = new StringBuilder();
             for (String geocode : geocodes) {
                 if (all.length() > 0) {

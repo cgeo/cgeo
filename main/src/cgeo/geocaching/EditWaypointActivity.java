@@ -407,7 +407,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
             String name = ((EditText) findViewById(R.id.name)).getText().toString().trim();
             // if no name is given, just give the waypoint its number as name
-            if (name.length() == 0) {
+            if (name.isEmpty()) {
                 name = res.getString(R.string.waypoint) + " " + String.valueOf(wpCount + 1);
             }
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();

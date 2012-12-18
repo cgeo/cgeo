@@ -310,7 +310,7 @@ public class cgCache implements ICache, IWaypoint {
         if (logs.isEmpty()) { // keep last known logs if none
             logs.set(other.logs);
         }
-        if (logCounts.size() == 0) {
+        if (logCounts.isEmpty()) {
             logCounts = other.logCounts;
         }
 

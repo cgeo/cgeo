@@ -2183,7 +2183,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                 }
 
-                if (sortedLogCounts.size() > 0) {
+                if (!sortedLogCounts.isEmpty()) {
                     // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
                     Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
 

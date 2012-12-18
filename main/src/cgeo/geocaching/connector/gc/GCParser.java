@@ -243,7 +243,7 @@ public abstract class GCParser {
             recaptchaText = thread.getText();
         }
 
-        if (cids.size() > 0 && (Settings.isPremiumMember() || showCaptcha) && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
+        if (!cids.isEmpty() && (Settings.isPremiumMember() || showCaptcha) && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
 
             try {
@@ -511,7 +511,7 @@ public abstract class GCParser {
 
                         // if the image name can be recognized, use the image name as attribute
                         String imageName = matcherAttributesInside.group(1).trim();
-                        if (imageName.length() > 0) {
+                        if (!imageName.isEmpty()) {
                             int start = imageName.lastIndexOf('/');
                             int end = imageName.lastIndexOf('.');
                             if (start >= 0 && end >= 0) {

@@ -227,7 +227,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                     countVisibleCaches();
-                    if (caches != null && caches.size() > 0 && !mapTitle.contains("[")) {
+                    if (caches != null && !caches.isEmpty() && !mapTitle.contains("[")) {
                         title.append(" [").append(cachesCnt);
                         if (cachesCnt != caches.size()) {
                             title.append('/').append(caches.size());
@@ -339,7 +339,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         final List<cgCache> protectedCaches = caches.getAsList();
 
         int count = 0;
-        if (protectedCaches.size() > 0) {
+        if (!protectedCaches.isEmpty()) {
             final Viewport viewport = mapView.getViewport();
 
             for (final cgCache cache : protectedCaches) {

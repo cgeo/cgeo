@@ -365,7 +365,7 @@ public abstract class Login {
         final Matcher matcherViewstates = GCConstants.PATTERN_VIEWSTATES.matcher(page);
         while (matcherViewstates.find()) {
             String sno = matcherViewstates.group(1); // number of viewstate
-            if (sno.length() == 0) {
+            if (sno.isEmpty()) {
                 no = 0;
             }
             else {

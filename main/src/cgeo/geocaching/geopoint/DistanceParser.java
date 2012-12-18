@@ -29,7 +29,7 @@ public final class DistanceParser {
         final float value = Float.parseFloat(matcher.group(1).replace(',', '.'));
         final String unit = matcher.group(2).toLowerCase(Locale.US);
 
-        if (unit.equals("m") || (unit.length() == 0 && metricUnit)) {
+        if (unit.equals("m") || (unit.isEmpty() && metricUnit)) {
             return value / 1000;
         }
         if (unit.equals("km")) {

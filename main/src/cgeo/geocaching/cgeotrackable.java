@@ -506,7 +506,7 @@ public class cgeotrackable extends AbstractActivity {
                 listView.addView(rowView);
             }
 
-            if (trackable.getLogs().size() > 0) {
+            if (!trackable.getLogs().isEmpty()) {
                 findViewById(R.id.log_box).setVisibility(View.VISIBLE);
             }
         }
