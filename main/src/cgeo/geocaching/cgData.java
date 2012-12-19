@@ -677,10 +677,12 @@ public class cgData {
                     return filename.startsWith("map_") && filename.contains("__");
                 }
             };
-            for (File dir : geocodeDirs) {
-                File[] wrongFiles = dir.listFiles(filter);
-                for (File wrongFile : wrongFiles) {
-                    wrongFile.delete();
+            for (final File dir : geocodeDirs) {
+                final File[] wrongFiles = dir.listFiles(filter);
+                if (wrongFiles != null) {
+                    for (final File wrongFile : wrongFiles) {
+                        wrongFile.delete();
+                    }
                 }
             }
         }
