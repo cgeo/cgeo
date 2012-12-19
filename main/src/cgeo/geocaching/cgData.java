@@ -458,7 +458,7 @@ public class cgData {
                         try {
                             db.execSQL(dbCreateLogImages);
                         } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 54: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 54", e);
 
                         }
                     }
@@ -467,7 +467,7 @@ public class cgData {
                         try {
                             db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
                         } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 55: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 55", e);
                         }
                     }
 
@@ -479,7 +479,7 @@ public class cgData {
                                     "lower(attribute) where attribute like \"%_yes\" " +
                                     "or attribute like \"%_no\"");
                         } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 56: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 56", e);
                         }
                     }
 
@@ -494,7 +494,7 @@ public class cgData {
                             db.execSQL("drop index in_f");
                             createIndices(db);
                         } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 57: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 57", e);
                         }
                     }
 
@@ -612,7 +612,7 @@ public class cgData {
                             db.execSQL("alter table " + dbTableLogs + " add column friend integer");
                             db.execSQL("alter table " + dbTableCaches + " add column coordsChanged integer default 0");
                         } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 61: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 61", e);
 
                         }
                     }
@@ -623,7 +623,7 @@ public class cgData {
                             db.execSQL("alter table " + dbTableWaypoints + " add column own integer default 0");
                             db.execSQL("update " + dbTableWaypoints + " set own = 1 where type = 'own'");
                         } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 62: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 62", e);
 
                         }
                     }
@@ -631,7 +631,7 @@ public class cgData {
                         try {
                             removeDoubleUnderscoreMapFiles();
                         } catch (Exception e) {
-                            Log.e("Failed to upgrade to ver. 63: " + e.toString());
+                            Log.e("Failed to upgrade to ver. 63", e);
 
                         }
                     }
@@ -778,7 +778,7 @@ public class cgData {
                 }
             }
         } catch (Exception e) {
-            Log.e("cgData.allDetailedThere: " + e.toString());
+            Log.e("cgData.allDetailedThere", e);
         }
 
         if (cursor != null) {
@@ -838,7 +838,7 @@ public class cgData {
                 }
             }
         } catch (Exception e) {
-            Log.e("cgData.isThere: " + e.toString());
+            Log.e("cgData.isThere", e);
         }
 
         if (cursor != null) {
@@ -2122,7 +2122,7 @@ public class cgData {
             }
             return (int) compiledStmnt.simpleQueryForLong();
         } catch (Exception e) {
-            Log.e("cgData.loadAllStoredCachesCount: " + e.toString());
+            Log.e("cgData.loadAllStoredCachesCount", e);
         }
 
         return 0;
@@ -2134,7 +2134,7 @@ public class cgData {
         try {
             return (int) PreparedStatements.getCountHistoryCaches().simpleQueryForLong();
         } catch (Exception e) {
-            Log.e("cgData.getAllHistoricCachesCount: " + e.toString());
+            Log.e("cgData.getAllHistoricCachesCount", e);
         }
 
         return 0;
@@ -2204,7 +2204,7 @@ public class cgData {
             cursor.close();
 
         } catch (Exception e) {
-            Log.e("cgData.loadBatchOfStoredGeocodes: " + e.toString());
+            Log.e("cgData.loadBatchOfStoredGeocodes", e);
         }
 
         return geocodes;
@@ -2241,7 +2241,7 @@ public class cgData {
             }
             cursor.close();
         } catch (Exception e) {
-            Log.e("cgData.loadBatchOfHistoricGeocodes: " + e.toString());
+            Log.e("cgData.loadBatchOfHistoricGeocodes", e);
         }
 
         return geocodes;
@@ -2314,7 +2314,7 @@ public class cgData {
             }
             cursor.close();
         } catch (Exception e) {
-            Log.e("cgData.loadInViewport: " + e.toString());
+            Log.e("cgData.loadInViewport", e);
         }
 
         return new SearchResult(geocodes);
@@ -2389,7 +2389,7 @@ public class cgData {
             }
 
         } catch (Exception e) {
-            Log.w("cgData.clean: " + e.toString());
+            Log.w("cgData.clean", e);
         }
 
         Log.d("Database clean: finished");
@@ -2591,7 +2591,7 @@ public class cgData {
             lists.addAll(storedLists);
 
         } catch (Exception e) {
-            Log.e("cgData.readLists: " + e.toString());
+            Log.e("cgData.readLists", e);
         }
         return lists;
     }
