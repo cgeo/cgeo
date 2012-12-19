@@ -35,7 +35,7 @@ public final class CacheDetailsCreator {
     }
 
     public TextView add(final int nameId, final CharSequence value) {
-        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_item, null);
+        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_layout, null);
         final TextView nameView = (TextView) layout.findViewById(R.id.name);
         nameView.setText(res.getString(nameId));
         lastValueView = (TextView) layout.findViewById(R.id.value);
@@ -56,16 +56,15 @@ public final class CacheDetailsCreator {
 
         nameView.setText(activity.getResources().getString(nameId));
         lastValueView.setText(String.format("%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + " 5");
-        layoutStars.addView(createStarImages(value), 1);
+        createStarImages(layoutStars, value);
+        layoutStars.setVisibility(View.VISIBLE);
 
         parentView.addView(layout);
         return layout;
     }
 
-    private LinearLayout createStarImages(final float value) {
+    private void createStarImages(final ViewGroup starsContainer, final float value) {
         final LayoutInflater inflater = LayoutInflater.from(activity);
-        final LinearLayout starsContainer = new LinearLayout(activity);
-        starsContainer.setOrientation(LinearLayout.HORIZONTAL);
 
         for (int i = 0; i < 5; i++) {
             ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
@@ -78,8 +77,6 @@ public final class CacheDetailsCreator {
             }
             starsContainer.addView(star);
         }
-
-        return starsContainer;
     }
 
     public void addCacheState(cgCache cache) {
