@@ -1402,43 +1402,43 @@ public class cgCache implements ICache, IWaypoint {
 
     public void checkFields() {
         if (StringUtils.isBlank(getGeocode())) {
-            Log.e("geo code not parsed correctly");
+            Log.w("geo code not parsed correctly for " + geocode);
         }
         if (StringUtils.isBlank(getName())) {
-            Log.e("name not parsed correctly");
+            Log.w("name not parsed correctly for " + geocode);
         }
         if (StringUtils.isBlank(getGuid())) {
-            Log.e("guid not parsed correctly");
+            Log.w("guid not parsed correctly for " + geocode);
         }
         if (getTerrain() == 0.0) {
-            Log.e("terrain not parsed correctly");
+            Log.w("terrain not parsed correctly for " + geocode);
         }
         if (getDifficulty() == 0.0) {
-            Log.e("difficulty not parsed correctly");
+            Log.w("difficulty not parsed correctly for " + geocode);
         }
         if (StringUtils.isBlank(getOwnerDisplayName())) {
-            Log.e("owner display name not parsed correctly");
+            Log.w("owner display name not parsed correctly for " + geocode);
         }
         if (StringUtils.isBlank(getOwnerUserId())) {
-            Log.e("owner user id real not parsed correctly");
+            Log.w("owner user id real not parsed correctly for " + geocode);
         }
         if (getHiddenDate() == null) {
-            Log.e("hidden not parsed correctly");
+            Log.w("hidden not parsed correctly for " + geocode);
         }
         if (getFavoritePoints() < 0) {
-            Log.e("favoriteCount not parsed correctly");
+            Log.w("favoriteCount not parsed correctly for " + geocode);
         }
         if (getSize() == null) {
-            Log.e("size not parsed correctly");
+            Log.w("size not parsed correctly for " + geocode);
         }
         if (getType() == null || getType() == CacheType.UNKNOWN) {
-            Log.e("type not parsed correctly");
+            Log.w("type not parsed correctly for " + geocode);
         }
         if (getCoords() == null) {
-            Log.e("coordinates not parsed correctly");
+            Log.w("coordinates not parsed correctly for " + geocode);
         }
         if (StringUtils.isBlank(getLocation())) {
-            Log.e("location not parsed correctly");
+            Log.w("location not parsed correctly for " + geocode);
         }
     }
 

@@ -916,7 +916,7 @@ public abstract class GCParser {
 
         trackable = parseTrackable(page, geocode);
         if (trackable == null) {
-            Log.e("GCParser.searchTrackable: No trackable parsed");
+            Log.w("GCParser.searchTrackable: No trackable parsed");
             return null;
         }
 
