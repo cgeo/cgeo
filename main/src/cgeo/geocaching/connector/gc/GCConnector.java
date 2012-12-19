@@ -107,7 +107,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         final SearchResult searchResult = GCParser.parseCache(page, handler);
 
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e("GCConnector.searchByGeocode: No cache parsed");
+            Log.w("GCConnector.searchByGeocode: No cache parsed");
             return searchResult;
         }
 

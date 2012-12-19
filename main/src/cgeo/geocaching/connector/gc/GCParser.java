@@ -749,7 +749,7 @@ public abstract class GCParser {
 
         final SearchResult searchResult = parseSearch(url, page, showCaptcha);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e("GCParser.searchByNextPage: No cache parsed");
+            Log.w("GCParser.searchByNextPage: No cache parsed");
             return search;
         }
 
