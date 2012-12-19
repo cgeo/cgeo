@@ -2546,20 +2546,16 @@ public class CacheDetailActivity extends AbstractActivity {
                 public void onClick(View v) {
                     dismiss();
                     final ProgressDialog p = ProgressDialog.show(CacheDetailActivity.this, res.getString(R.string.cache), res.getString(R.string.waypoint_reset), true);
-                    Handler h = new Handler() {
-                        private boolean remoteFinished=false;
-                        private boolean localFinished=false;
+                    final Handler h = new Handler() {
+                        private boolean remoteFinished = false;
+                        private boolean localFinished = false;
 
                         @Override
                         public void handleMessage(Message msg) {
-                            switch (msg.what) {
-                                case ResetCoordsThread.LOCAL:
-                                    localFinished=true;
-                                    break;
-                                    case ResetCoordsThread.ON_WEBSITE:
-                                        remoteFinished=true;
-                                    break;
-
+                            if (msg.what == ResetCoordsThread.LOCAL) {
+                                localFinished = true;
+                            } else {
+                                remoteFinished = true;
                             }
 
                             if ((localFinished || !resetLocalyOption.isChecked()) && (remoteFinished || !uploadOption.isChecked())) {
