@@ -119,7 +119,6 @@ public abstract class Network {
                     if (contentEncoding != null) {
                         for (final HeaderElement codec : contentEncoding.getElements()) {
                             if (codec.getName().equalsIgnoreCase("gzip")) {
-                                Log.d("Decompressing response");
                                 response.setEntity(new GzipDecompressingEntity(response.getEntity()));
                                 return;
                             }

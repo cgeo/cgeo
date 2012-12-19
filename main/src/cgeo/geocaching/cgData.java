@@ -2977,7 +2977,7 @@ public class cgData {
         private static synchronized SQLiteStatement getStatement(final String key, final String query) {
             SQLiteStatement statement = statements.get(key);
             if (statement == null) {
-                Log.i("Compiling " + key);
+                Log.d("Compiling " + key);
                 statement = database.compileStatement(query);
                 statements.put(key, statement);
             }
