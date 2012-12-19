@@ -774,7 +774,7 @@ public abstract class GPXParser extends FileParser {
             Xml.parse(progressStream, Xml.Encoding.UTF_8, root.getContentHandler());
             return cgData.loadCaches(result, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
         } catch (SAXException e) {
-            Log.e("Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
+            Log.w("Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
     }
