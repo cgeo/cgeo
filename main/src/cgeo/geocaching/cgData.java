@@ -1435,7 +1435,7 @@ public class cgData {
         }
 
         if (remaining.size() >= 1) {
-            Log.e("cgData.loadCaches(" + remaining.toString() + ") failed");
+            Log.i("cgData.loadCaches(" + remaining.toString() + ") failed");
         }
         return result;
     }
