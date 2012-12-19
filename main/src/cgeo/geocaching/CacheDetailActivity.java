@@ -2548,11 +2548,27 @@ public class CacheDetailActivity extends AbstractActivity {
                     dismiss();
                     final ProgressDialog p = ProgressDialog.show(CacheDetailActivity.this, res.getString(R.string.cache), res.getString(R.string.waypoint_reset), true);
                     Handler h = new Handler() {
+                        private boolean remoteFinished=false;
+                        private boolean localFinished=false;
+
                         @Override
                         public void handleMessage(Message msg) {
-                            p.dismiss();
-                            notifyDataSetChanged();
+                            switch (msg.what) {
+                                case ResetCoordsThread.LOCAL:
+                                    localFinished=true;
+                                    break;
+                                    case ResetCoordsThread.ON_WEBSITE:
+                                        remoteFinished=true;
+                                    break;
+
+                            }
+
+                            if ((localFinished || !resetLocalyOption.isChecked()) && (remoteFinished || !uploadOption.isChecked())) {
+                                p.dismiss();
+                                notifyDataSetChanged();
+                            }
                         }
+
                     };
                     new ResetCoordsThread(cache, h, wpt, resetLocalyOption.isChecked(), uploadOption.isChecked(), p).start();
                 }
@@ -2574,6 +2590,8 @@ public class CacheDetailActivity extends AbstractActivity {
         private final boolean remote;
         private final cgWaypoint wpt;
         private ProgressDialog progress;
+        public static final int LOCAL = 0;
+        public static final int ON_WEBSITE = 1;
 
         public ResetCoordsThread(cgCache cache, Handler handler, final cgWaypoint wpt, boolean local, boolean remote, final ProgressDialog progress) {
             this.cache = cache;
@@ -2598,6 +2616,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 cache.setUserModifiedCoords(false);
                 cache.deleteWaypointForce(wpt);
                 cgData.saveChangedCache(cache);
+                handler.sendEmptyMessage(LOCAL);
             }
 
             IConnector con = ConnectorFactory.getConnector(cache);
@@ -2620,7 +2639,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         } else {
                             showToast(getString(R.string.waypoint_coordinates_upload_error));
                         }
-                        handler.sendMessage(Message.obtain());
+                        handler.sendEmptyMessage(ON_WEBSITE);
                         notifyDataSetChanged();
                     }
 
