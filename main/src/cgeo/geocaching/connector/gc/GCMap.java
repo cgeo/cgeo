@@ -328,7 +328,7 @@ public class GCMap {
 
                     String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP);
                     if (StringUtils.isEmpty(data)) {
-                        Log.e("GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                        Log.w("GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
                     } else {
                         final SearchResult search = GCMap.parseMapJSON(data, tile, bitmap, strategy);
                         if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
