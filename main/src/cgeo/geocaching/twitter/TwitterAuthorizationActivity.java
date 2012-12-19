@@ -242,7 +242,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            if (StringUtils.isEmpty(((EditText) findViewById(R.id.pin).getText().toString())) {
+            if (StringUtils.isEmpty(((EditText) findViewById(R.id.pin)).getText().toString())) {
                 helpDialog(res.getString(R.string.auth_dialog_pin_title), res.getString(R.string.auth_dialog_pin_message));
                 return;
             }
