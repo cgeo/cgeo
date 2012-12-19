@@ -509,8 +509,8 @@ public abstract class GCParser {
                         String attribute = matcherAttributesInside.group(2).toLowerCase(Locale.US);
 
                         // if the image name can be recognized, use the image name as attribute
-                        String imageName = matcherAttributesInside.group(1).trim();
-                        if (!imageName.isEmpty()) {
+                        final String imageName = matcherAttributesInside.group(1).trim();
+                        if (StringUtils.isNotEmpty(imageName)) {
                             int start = imageName.lastIndexOf('/');
                             int end = imageName.lastIndexOf('.');
                             if (start >= 0 && end >= 0) {

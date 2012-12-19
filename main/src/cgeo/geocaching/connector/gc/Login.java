@@ -365,10 +365,9 @@ public abstract class Login {
         while (matcherViewstates.find()) {
             String sno = matcherViewstates.group(1); // number of viewstate
             int no;
-            if (sno.isEmpty()) {
+            if (StringUtils.isEmpty(sno)) {
                 no = 0;
-            }
-            else {
+            } else {
                 try {
                     no = Integer.parseInt(sno);
                 } catch (NumberFormatException e) {

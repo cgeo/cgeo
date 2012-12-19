@@ -717,7 +717,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         // Do not erase the saved log if the user has removed all the characters
         // without using "Clear". This may be a manipulation mistake, and erasing
         // again will be easy using "Clear" while retyping the text may not be.
-        if (force || (!log.isEmpty() && !StringUtils.equals(log, text))) {
+        if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text))) {
             cache.logOffline(this, log, date, typeSelected);
         }
         text = log;

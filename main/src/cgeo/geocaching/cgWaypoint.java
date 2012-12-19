@@ -86,7 +86,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
             for (cgWaypoint old : oldPoints) {
                 if (old != null) {
                     boolean merged = false;
-                    if (old.name != null && !old.name.isEmpty()) {
+                    if (StringUtils.isNotEmpty(old.name)) {
                         for (cgWaypoint waypoint : newPoints) {
                             if (waypoint != null && waypoint.name != null) {
                                 if (old.name.equalsIgnoreCase(waypoint.name)) {

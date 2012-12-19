@@ -283,8 +283,8 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     private void setExtensions(final String[] extensionsIn) {
         extensions = extensionsIn;
         for (int i = 0; i < extensions.length; i++) {
-            String extension = extensions[i];
-            if (extension.isEmpty() || extension.charAt(0) != '.') {
+            final String extension = extensions[i];
+            if (StringUtils.isEmpty(extension) || extension.charAt(0) != '.') {
                 extensions[i] = "." + extension;
             }
         }

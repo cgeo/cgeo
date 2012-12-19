@@ -1,5 +1,7 @@
 package cgeo.geocaching.geopoint;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +31,7 @@ public final class DistanceParser {
         final float value = Float.parseFloat(matcher.group(1).replace(',', '.'));
         final String unit = matcher.group(2).toLowerCase(Locale.US);
 
-        if (unit.equals("m") || (unit.isEmpty() && metricUnit)) {
+        if (unit.equals("m") || (StringUtils.isEmpty(unit) && metricUnit)) {
             return value / 1000;
         }
         if (unit.equals("km")) {
