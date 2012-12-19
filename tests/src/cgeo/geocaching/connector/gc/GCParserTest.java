@@ -18,6 +18,7 @@ import cgeo.test.Compare;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.os.Handler;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import java.util.ArrayList;
@@ -127,14 +128,14 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         cache.setGeocode("GC2ZN4G");
         // upload coordinates
         GCParser.editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566"));
-        cache.drop(null);
+        cache.drop(new Handler());
         String page = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
         cgCache cache2 = GCParser.parseCacheFromText(page, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertTrue(cache2.hasUserModifiedCoords());
         assertEquals(new Geopoint("N51 21.544", "E07 02.566"), cache2.getCoords());
         // delete coordinates
         GCParser.deleteModifiedCoordinates(cache2);
-        cache2.drop(null);
+        cache2.drop(new Handler());
         String page2 = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
         cgCache cache3 = GCParser.parseCacheFromText(page2, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertFalse(cache3.hasUserModifiedCoords());
