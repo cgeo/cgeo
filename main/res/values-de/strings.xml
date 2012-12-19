@@ -637,7 +637,7 @@
 
   <!-- waypoint -->
   <string name="waypoint">Wegpunkt</string>
-  <string name="waypoint_cache_coordinates">Cache Koordinaten</string>
+  <string name="waypoint_cache_coordinates">Cache-Koordinaten</string>
   <string name="waypoint_custom">Benutzerdefiniert</string>
   <string name="waypoint_my_coordinates">Meine Koordinaten</string>
   <string name="waypoint_bearing">Richtung in °</string>
@@ -650,6 +650,22 @@
   <string name="waypoint_note">Notiz</string>
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt…</string>
+  <string name="waypoint_unknown_coordinates">Koordinaten unbekannt</string>
+  <string name="waypoint_set_as_cache_coords">Als Cache-Koordinaten setzen</string>
+  <string name="waypoint_reset_cache_coords">Cache-Koordinaten zurücksetzen</string>
+  <string name="waypoint_reset_cache_coords_on_website">Cache-Koordinaten auf Webseite zurücksetzen</string>
+  <string name="waypoint_coordinates_has_been_reset_on_website">Koordinaten auf Webseite zurückgesetzt</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Koordinaten werden zurückgesetzt</string>
+  <string name="waypoint_reset_cache_coords_info">Rücksetz-Optionen</string>
+  <string name="waypoint_reset">Zurücksetzen</string>
+  <string name="waypoint_localy_reset_cache_coords">Koodinaten lokal zurücksetzen</string>
+  <string name="waypoint_modify_on_website">Koordinaten auf der Webseite zurücksetzen</string>
+  <string name="waypoint_coordinates_couldnt_be_modified_on_website">Cache-Koordinaten auf der Webseite konnten nicht zurückgesetzt werden</string>
+  <string name="waypoint_coordinates_upload_error">Fehler beim Hochladen der Koordinaten zur Webseite</string>
+  <string name="waypoint_coordinates_uploading_to_website">Setze %s auf der Webseite</string>
+  <string name="waypoint_coordinates_reseting_on_website">Setze Koordinaten auf der Webseite zurück</string>
+  <string name="waypoint_coordinates_has_been_modified_on_website">Koordinaten wurden auf der Webseite geändert: %s</string>
+  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Koordinaten wurden lokal geändert: %s</string>
   <string name="waypoint_done">Fertig</string>
   <string name="waypoint_duplicate">Duplizieren</string>
   <string name="waypoint_copy_of">Kopie von</string>
