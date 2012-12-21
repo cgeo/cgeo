@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -158,8 +159,11 @@ public class EditWaypointActivity extends AbstractActivity {
         }
 
         if (geocode != null) {
-            IConnector con = ConnectorFactory.getConnector(geocode);
-            setUploadingCheckBoxVisibleByConnector(con);
+            cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache != null && (cache.getType() == CacheType.MYSTERY || cache.getType() == CacheType.MULTI)) {
+                IConnector con = ConnectorFactory.getConnector(geocode);
+                setUploadingCheckBoxVisibleByConnector(con);
+            }
         }
 
         initializeDistanceUnitSelector();
