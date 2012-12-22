@@ -436,7 +436,7 @@ public class EditWaypointActivity extends AbstractActivity {
                     cache.setCoords(waypoint.getCoords());
                     cgData.saveChangedCache(cache);
                 }
-                if (uploadCoordsToWebsiteCheckBox.isChecked() && waypoint != null && waypoint.getCoords() != null) {
+                if (uploadCoordsToWebsiteCheckBox.isChecked() && waypoint.getCoords() != null) {
                     if (cache.supportsOwnCoordinates()) {
                         final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_coordinates_uploading_to_website, waypoint.getCoords()), true);
                         Handler finishHandler = new Handler() {
