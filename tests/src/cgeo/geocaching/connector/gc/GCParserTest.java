@@ -24,12 +24,40 @@ import android.test.suitebuilder.annotation.MediumTest;
 import java.util.ArrayList;
 
 public class GCParserTest extends AbstractResourceInstrumentationTestCase {
-    public void testUnpublishedCache() {
-        final String page = getFileContent(R.raw.cache_unpublished);
+
+    public void testUnpublishedCacheNotOwner() {
+        final int cache = R.raw.cache_unpublished;
+        assertUnpublished(cache);
+    }
+
+    public void testUnpublishedCacheOwner() {
+        final int cache = R.raw.gc433yc_owner_unpublished;
+        assertUnpublished(cache);
+    }
+
+    private void assertUnpublished(final int cache) {
+        final String page = getFileContent(cache);
         SearchResult result = GCParser.parseCacheFromText(page, null);
         assertNotNull(result);
         assertTrue(result.isEmpty());
         assertEquals(StatusCode.UNPUBLISHED_CACHE, result.getError());
+    }
+
+    public void testPublishedCacheWithUnpublishedInDescription1() {
+        assertPublishedCache(R.raw.gc430fm_published, "Cache is Unpublished");
+    }
+
+    public void testPublishedCacheWithUnpublishedInDescription2() {
+        assertPublishedCache(R.raw.gc431f2_published, "Needle in a Haystack");
+    }
+
+    private void assertPublishedCache(final int cachePage, final String cacheName) {
+        final String page = getFileContent(cachePage);
+        SearchResult result = GCParser.parseCacheFromText(page, null);
+        assertNotNull(result);
+        assertEquals(1, result.getCount());
+        cgCache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+        assertEquals(cacheName, cache.getName());
     }
 
     public void testOwnCache() {

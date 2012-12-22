@@ -334,7 +334,7 @@ public abstract class GCParser {
 
         final SearchResult searchResult = new SearchResult();
 
-        if (page.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || page.contains(GCConstants.STRING_UNPUBLISHED_OWNER)) {
+        if (page.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || page.contains(GCConstants.STRING_UNPUBLISHED_OWNER) || page.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
             searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
             return searchResult;
         }
