@@ -1,7 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.calendar.ICalendar;
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.CacheDetailActivity.Page;
+import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -19,6 +20,7 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditorDialog;
@@ -37,12 +39,11 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
-import com.viewpagerindicator.TitlePageIndicator;
-import com.viewpagerindicator.TitleProvider;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import android.R.color;
 import android.app.Activity;
@@ -62,10 +63,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
@@ -103,7 +100,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -116,7 +112,7 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractActivity {
+public class CacheDetailActivity extends AbstractViewPagerActivity<Page> {
 
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
@@ -173,33 +169,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private CharSequence clickedItemText = null;
     private int contextMenuWPIndex = -1;
-
-    /**
-     * A {@link List} of all available pages.
-     *
-     * TODO Move to adapter
-     */
-    private final List<Page> pageOrder = new ArrayList<Page>();
-
-    /**
-     * Instances of all {@link PageViewCreator}.
-     */
-    private final Map<Page, PageViewCreator> viewCreators = new HashMap<Page, PageViewCreator>();
-
-    /**
-     * The {@link ViewPager} for this activity.
-     */
-    private ViewPager viewPager;
-
-    /**
-     * The {@link ViewPagerAdapter} for this activity.
-     */
-    private ViewPagerAdapter viewPagerAdapter;
-
-    /**
-     * The {@link TitlePageIndicator} for this activity.
-     */
-    private TitlePageIndicator titleIndicator;
 
     /**
      * If another activity is called and can modify the data of this activity, we refresh it on resume.
@@ -322,43 +291,20 @@ public class CacheDetailActivity extends AbstractActivity {
             }
         });
 
-        // initialize ViewPager
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPagerAdapter = new ViewPagerAdapter();
-        viewPager.setAdapter(viewPagerAdapter);
+        final int pageToOpen = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+        initializeViewPager(pageToOpen, new OnPageSelectedListener() {
 
-        titleIndicator = (TitlePageIndicator) findViewById(R.id.pager_indicator);
-        titleIndicator.setViewPager(viewPager);
-        titleIndicator.setOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 if (Settings.isOpenLastDetailsPage()) {
                     Settings.setLastDetailsPage(position);
                 }
                 // lazy loading of cache images
-                if (pageOrder.get(position) == Page.IMAGES) {
+                if (getPage(position) == Page.IMAGES) {
                     loadCacheImages();
                 }
             }
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
         });
-
-        // switch to entry page (last used or 2)
-        int entryPageIndex = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
-        if (viewPagerAdapter.getCount() < entryPageIndex) {
-            for (int i = 0; i <= entryPageIndex; i++) {
-                // we can't switch to a page that is out of bounds, so we add null-pages
-                pageOrder.add(null);
-            }
-        }
-        viewPager.setCurrentItem(entryPageIndex, false);
 
         // Initialization done. Let's load the data with the given information.
         new LoadCacheThread(geocode, guid, loadCacheHandler).start();
@@ -693,12 +639,7 @@ public class CacheDetailActivity extends AbstractActivity {
         // allow cache to notify CacheDetailActivity when it changes so it can be reloaded
         cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
 
-        // notify all creators that the data has changed
-        for (PageViewCreator creator : viewCreators.values()) {
-            creator.notifyDataSetChanged();
-        }
-
-        // action bar: title and icon (default: mystery icon)
+        // action bar: title and icon
         if (StringUtils.isNotBlank(cache.getName())) {
             setTitle(cache.getName() + " (" + cache.getGeocode() + ')');
         } else {
@@ -706,36 +647,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
         ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
 
-        // add available pages (remove old pages first)
-        pageOrder.clear();
-
-        pageOrder.add(Page.WAYPOINTS);
-        pageOrder.add(Page.DETAILS);
-        final int detailsIndex = pageOrder.size() - 1;
-        pageOrder.add(Page.DESCRIPTION);
-        if (cache.getLogs().isNotEmpty()) {
-            pageOrder.add(Page.LOGS);
-        }
-        if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
-            pageOrder.add(Page.LOGSFRIENDS);
-        }
-        if (CollectionUtils.isNotEmpty(cache.getInventory())) {
-            pageOrder.add(Page.INVENTORY);
-        }
-        if (CollectionUtils.isNotEmpty(cache.getImages())) {
-            pageOrder.add(Page.IMAGES);
-        }
-
-        // switch to details page, if we're out of bounds
-        if (viewPager.getCurrentItem() < 0 || viewPager.getCurrentItem() >= viewPagerAdapter.getCount()) {
-            viewPager.setCurrentItem(detailsIndex, false);
-        }
-
-        // notify the adapter that the data has changed
-        viewPagerAdapter.notifyDataSetChanged();
-
-        // notify the indicator that the data has changed
-        titleIndicator.notifyDataSetChanged();
+        reinitializeViewPager();
 
         // rendering done! remove progress popup if any there
         progress.dismiss();
@@ -953,7 +865,7 @@ public class CacheDetailActivity extends AbstractActivity {
         if (imagesList != null) {
             return;
         }
-        PageViewCreator creator = viewCreators.get(Page.IMAGES);
+        PageViewCreator creator = getViewCreator(Page.IMAGES);
         if (creator == null) {
             return;
         }
@@ -969,121 +881,6 @@ public class CacheDetailActivity extends AbstractActivity {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
         detailIntent.putExtra("geocode", geocode);
         context.startActivity(detailIntent);
-    }
-
-    /**
-     * The ViewPagerAdapter for scrolling through pages of the CacheDetailActivity.
-     */
-    private class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
-
-        @Override
-        public void destroyItem(View container, int position, Object object) {
-            ((ViewPager) container).removeView((View) object);
-        }
-
-        @Override
-        public void finishUpdate(View container) {
-        }
-
-        @Override
-        public int getCount() {
-            return pageOrder.size();
-        }
-
-        @Override
-        public Object instantiateItem(View container, int position) {
-            final Page page = pageOrder.get(position);
-
-            PageViewCreator creator = viewCreators.get(page);
-
-            if (null == creator && null != page) {
-                // The creator is not instantiated yet, let's do it.
-                switch (page) {
-                    case DETAILS:
-                        creator = new DetailsViewCreator();
-                        break;
-
-                    case DESCRIPTION:
-                        creator = new DescriptionViewCreator();
-                        break;
-
-                    case LOGS:
-                        creator = new LogsViewCreator(true);
-                        break;
-
-                    case LOGSFRIENDS:
-                        creator = new LogsViewCreator(false);
-                        break;
-
-                    case WAYPOINTS:
-                        creator = new WaypointsViewCreator();
-                        break;
-
-                    case INVENTORY:
-                        creator = new InventoryViewCreator();
-                        break;
-
-                    case IMAGES:
-                        creator = new ImagesViewCreator();
-                        break;
-                }
-                viewCreators.put(page, creator);
-            }
-
-            View view = null;
-
-            try {
-                if (null != creator) {
-                    // Result from getView() is maybe cached, but it should be valid because the
-                    // creator should be informed about data-changes with notifyDataSetChanged()
-                    view = creator.getView();
-                    ((ViewPager) container).addView(view, 0);
-                }
-            } catch (Exception e) {
-                Log.e("ViewPagerAdapter.instantiateItem ", e);
-            }
-
-            return view;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public void restoreState(Parcelable arg0, ClassLoader arg1) {
-        }
-
-        @Override
-        public Parcelable saveState() {
-            return null;
-        }
-
-        @Override
-        public void startUpdate(View arg0) {
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            // We are doing the caching. So pretend that the view is gone.
-            // The ViewPager will get it back in instantiateItem()
-            return POSITION_NONE;
-        }
-
-        @Override
-        public String getTitle(int position) {
-            final Page page = pageOrder.get(position);
-            if (null == page) {
-                return "";
-            }
-            // show number of waypoints directly in waypoint title
-            if (page == Page.WAYPOINTS) {
-                final int waypointCount = cache.getWaypoints().size();
-                return res.getQuantityString(R.plurals.waypoints, waypointCount, waypointCount);
-            }
-            return res.getString(page.titleStringId);
-        }
     }
 
     /**
@@ -1291,36 +1088,10 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
-    private interface PageViewCreator {
-        /**
-         * Returns a validated view.
-         *
-         * @return
-         */
-        public View getDispatchedView();
-
-        /**
-         * Returns a (maybe cached) view.
-         *
-         * @return
-         */
-        public View getView();
-
-        /**
-         * Handles changed data-sets.
-         */
-        public void notifyDataSetChanged();
-    }
-
     /**
      * Creator for details-view.
      */
-    private class DetailsViewCreator implements PageViewCreator {
-        /**
-         * The main view for this creator
-         */
-        private ScrollView view;
-
+    private class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
         /**
          * Reference to the details list, so that the helper-method can access it without an additional argument
          */
@@ -1332,22 +1103,7 @@ public class CacheDetailActivity extends AbstractActivity {
         private Thread watchlistThread;
 
         @Override
-        public void notifyDataSetChanged() {
-            // There is a lot of data in this view, let's update everything
-            view = null;
-        }
-
-        @Override
-        public View getView() {
-            if (view == null) {
-                view = (ScrollView) getDispatchedView();
-            }
-
-            return view;
-        }
-
-        @Override
-        public View getDispatchedView() {
+        public ScrollView getDispatchedView() {
             if (cache == null) {
                 // something is really wrong
                 return null;
@@ -1878,26 +1634,10 @@ public class CacheDetailActivity extends AbstractActivity {
 
     }
 
-    private class DescriptionViewCreator implements PageViewCreator {
-
-        private ScrollView view;
+    private class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @Override
-        public void notifyDataSetChanged() {
-            view = null;
-        }
-
-        @Override
-        public View getView() {
-            if (view == null) {
-                view = (ScrollView) getDispatchedView();
-            }
-
-            return view;
-        }
-
-        @Override
-        public View getDispatchedView() {
+        public ScrollView getDispatchedView() {
             if (cache == null) {
                 // something is really wrong
                 return null;
@@ -2140,30 +1880,15 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
-    private class LogsViewCreator implements PageViewCreator {
-        private ListView view;
-        private boolean allLogs;
+    private class LogsViewCreator extends AbstractCachingPageViewCreator<ListView> {
+        private final boolean allLogs;
 
         LogsViewCreator(boolean allLogs) {
             this.allLogs = allLogs;
         }
 
         @Override
-        public void notifyDataSetChanged() {
-            view = null;
-        }
-
-        @Override
-        public View getView() {
-            if (view == null) {
-                view = (ListView) getDispatchedView();
-            }
-
-            return view;
-        }
-
-        @Override
-        public View getDispatchedView() {
+        public ListView getDispatchedView() {
             if (cache == null) {
                 // something is really wrong
                 return null;
@@ -2310,26 +2035,10 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
-    private class WaypointsViewCreator implements PageViewCreator {
-
-        private ScrollView view;
+    private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @Override
-        public void notifyDataSetChanged() {
-            view = null;
-        }
-
-        @Override
-        public View getView() {
-            if (view == null) {
-                view = (ScrollView) getDispatchedView();
-            }
-
-            return view;
-        }
-
-        @Override
-        public View getDispatchedView() {
+        public ScrollView getDispatchedView() {
             if (cache == null) {
                 // something is really wrong
                 return null;
@@ -2425,26 +2134,10 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
-    private class InventoryViewCreator implements PageViewCreator {
-
-        private ListView view;
+    private class InventoryViewCreator extends AbstractCachingPageViewCreator<ListView> {
 
         @Override
-        public void notifyDataSetChanged() {
-            view = null;
-        }
-
-        @Override
-        public View getView() {
-            if (view == null) {
-                view = (ListView) getDispatchedView();
-            }
-
-            return view;
-        }
-
-        @Override
-        public View getDispatchedView() {
+        public ListView getDispatchedView() {
             if (cache == null) {
                 // something is really wrong
                 return null;
@@ -2470,23 +2163,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
-    private class ImagesViewCreator implements PageViewCreator {
-
-        private View view;
-
-        @Override
-        public void notifyDataSetChanged() {
-            view = null;
-        }
-
-        @Override
-        public View getView() {
-            if (view == null) {
-                view = getDispatchedView();
-            }
-
-            return view;
-        }
+    private class ImagesViewCreator extends AbstractCachingPageViewCreator<View> {
 
         @Override
         public View getDispatchedView() {
@@ -2495,7 +2172,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             view = getLayoutInflater().inflate(R.layout.caches_images, null);
-            if (imagesList == null && viewPager.getCurrentItem() == pageOrder.indexOf(Page.IMAGES)) {
+            if (imagesList == null && isCurrentPage(Page.IMAGES)) {
                 loadCacheImages();
             }
             return view;
@@ -2643,4 +2320,66 @@ public class CacheDetailActivity extends AbstractActivity {
             }
         }
     }
+
+    @Override
+    protected String getTitle(Page page) {
+        // show number of waypoints directly in waypoint title
+        if (page == Page.WAYPOINTS) {
+            final int waypointCount = cache.getWaypoints().size();
+            return res.getQuantityString(R.plurals.waypoints, waypointCount, waypointCount);
+        }
+        return res.getString(page.titleStringId);
+    }
+
+    @Override
+    protected Pair<List<? extends Page>, Integer> getOrderedPages() {
+        final ArrayList<Page> pages = new ArrayList<Page>();
+        pages.add(Page.WAYPOINTS);
+        pages.add(Page.DETAILS);
+        final int detailsIndex = pages.size() - 1;
+        pages.add(Page.DESCRIPTION);
+        if (cache.getLogs().isNotEmpty()) {
+            pages.add(Page.LOGS);
+        }
+        if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
+            pages.add(Page.LOGSFRIENDS);
+        }
+        if (CollectionUtils.isNotEmpty(cache.getInventory())) {
+            pages.add(Page.INVENTORY);
+        }
+        if (CollectionUtils.isNotEmpty(cache.getImages())) {
+            pages.add(Page.IMAGES);
+        }
+        return new ImmutablePair<List<? extends Page>, Integer>(pages, detailsIndex);
+    }
+
+    @Override
+    protected AbstractViewPagerActivity.PageViewCreator createViewCreator(Page page) {
+        switch (page) {
+            case DETAILS:
+                return new DetailsViewCreator();
+
+            case DESCRIPTION:
+                return new DescriptionViewCreator();
+
+            case LOGS:
+                return new LogsViewCreator(true);
+
+            case LOGSFRIENDS:
+                return new LogsViewCreator(false);
+
+            case WAYPOINTS:
+                return new WaypointsViewCreator();
+
+            case INVENTORY:
+                return new InventoryViewCreator();
+
+            case IMAGES:
+                return new ImagesViewCreator();
+
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
 }
