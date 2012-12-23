@@ -32,8 +32,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -380,89 +382,123 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
     }
 
-    public class LogsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    public class LogsViewCreator extends AbstractCachingPageViewCreator<ListView> {
+
+        private class LogViewHolder {
+
+            private final TextView added;
+            private final TextView type;
+            private final TextView author;
+            private final TextView location;
+            private final TextView log;
+            private final ImageView marker;
+            private final LinearLayout logImages;
+
+            public LogViewHolder(View rowView) {
+                added = ((TextView) rowView.findViewById(R.id.added));
+                type = ((TextView) rowView.findViewById(R.id.type));
+                author = ((TextView) rowView.findViewById(R.id.author));
+                location = ((TextView) rowView.findViewById(R.id.location));
+                log = (TextView) rowView.findViewById(R.id.log);
+                marker = (ImageView) rowView.findViewById(R.id.log_mark);
+                logImages = (LinearLayout) rowView.findViewById(R.id.log_layout);
+            }
+        }
 
         @Override
-        public ScrollView getDispatchedView() {
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.trackable_logs_view, null);
-
-            LinearLayout listView = (LinearLayout) view.findViewById(R.id.log_list);
-            listView.removeAllViews();
+        public ListView getDispatchedView() {
+            view = (ListView) getLayoutInflater().inflate(R.layout.trackable_logs_view, null);
 
             if (trackable != null && trackable.getLogs() != null) {
-                for (LogEntry log : trackable.getLogs()) {
-                    RelativeLayout rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logs_item, null);
+                view.setAdapter(new ArrayAdapter<LogEntry>(TrackableActivity.this, R.layout.trackable_logs_item, trackable.getLogs()) {
+                    @Override
+                    public View getView(int position, View convertView, android.view.ViewGroup parent) {
+                        View rowView = convertView;
+                        if (null == rowView) {
+                            rowView = getLayoutInflater().inflate(R.layout.trackable_logs_item, null);
+                        }
+                        LogViewHolder holder = (LogViewHolder) rowView.getTag();
+                        if (null == holder) {
+                            holder = new LogViewHolder(rowView);
+                            rowView.setTag(holder);
+                        }
 
-                    if (log.date > 0) {
-                        ((TextView) rowView.findViewById(R.id.added)).setText(Formatter.formatShortDate(log.date));
+                        final LogEntry log = getItem(position);
+                        fillViewHolder(holder, log);
+                        return rowView;
                     }
-
-                    ((TextView) rowView.findViewById(R.id.type)).setText(log.type.getL10n());
-                    ((TextView) rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
-
-                    if (StringUtils.isBlank(log.cacheName)) {
-                        rowView.findViewById(R.id.location).setVisibility(View.GONE);
-                    } else {
-                        ((TextView) rowView.findViewById(R.id.location)).setText(Html.fromHtml(log.cacheName));
-                        final String cacheGuid = log.cacheGuid;
-                        final String cacheName = log.cacheName;
-                        rowView.findViewById(R.id.location).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View arg0) {
-                                CacheDetailActivity.startActivityGuid(TrackableActivity.this, cacheGuid, Html.fromHtml(cacheName).toString());
-                            }
-                        });
-                    }
-
-                    TextView logView = (TextView) rowView.findViewById(R.id.log);
-                    logView.setMovementMethod(LinkMovementMethod.getInstance());
-
-                    String logText = log.log;
-                    if (BaseUtils.containsHtml(logText)) {
-                        logText = log.getDisplayText();
-                        logView.setText(Html.fromHtml(logText, new HtmlImage(null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
-                    }
-                    else {
-                        logView.setText(logText);
-                    }
-
-                    ImageView statusMarker = (ImageView) rowView.findViewById(R.id.log_mark);
-                    // colored marker
-                    int marker = log.type.markerId;
-                    if (marker != 0) {
-                        statusMarker.setVisibility(View.VISIBLE);
-                        statusMarker.setImageResource(marker);
-                    }
-                    else {
-                        statusMarker.setVisibility(View.GONE);
-                    }
-
-                    // add LogImages
-                    LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
-
-                    if (log.hasLogImages()) {
-
-                        final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.getLogImages());
-
-                        final View.OnClickListener listener = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                ImagesActivity.startActivityLogImages(TrackableActivity.this, trackable.getGeocode(), logImages);
-                            }
-                        };
-
-                        LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.trackable_logs_img, null);
-                        TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
-                        log_img_title.setText(log.getImageTitles());
-                        log_img_title.setOnClickListener(listener);
-                        logLayout.addView(log_imgView);
-                    }
-
-                    rowView.findViewById(R.id.author).setOnClickListener(new UserActionsListener());
-                    listView.addView(rowView);
-                }
+                });
             }
             return view;
+        }
+
+        protected void fillViewHolder(LogViewHolder holder, LogEntry log) {
+            if (log.date > 0) {
+                holder.added.setText(Formatter.formatShortDate(log.date));
+            }
+
+            holder.type.setText(log.type.getL10n());
+            holder.author.setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
+
+            if (StringUtils.isBlank(log.cacheName)) {
+                holder.location.setVisibility(View.GONE);
+            } else {
+                holder.location.setText(Html.fromHtml(log.cacheName));
+                final String cacheGuid = log.cacheGuid;
+                final String cacheName = log.cacheName;
+                holder.location.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        CacheDetailActivity.startActivityGuid(TrackableActivity.this, cacheGuid, Html.fromHtml(cacheName).toString());
+                    }
+                });
+            }
+
+            TextView logView = holder.log;
+            logView.setMovementMethod(LinkMovementMethod.getInstance());
+
+            String logText = log.log;
+            if (BaseUtils.containsHtml(logText)) {
+                logText = log.getDisplayText();
+                logView.setText(Html.fromHtml(logText, new HtmlImage(null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
+            }
+            else {
+                logView.setText(logText);
+            }
+
+            ImageView statusMarker = holder.marker;
+            // colored marker
+            int marker = log.type.markerId;
+            if (marker != 0) {
+                statusMarker.setVisibility(View.VISIBLE);
+                statusMarker.setImageResource(marker);
+            }
+            else {
+                statusMarker.setVisibility(View.GONE);
+            }
+
+            // add LogImages
+            LinearLayout logLayout = holder.logImages;
+
+            if (log.hasLogImages()) {
+
+                final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.getLogImages());
+
+                final View.OnClickListener listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ImagesActivity.startActivityLogImages(TrackableActivity.this, trackable.getGeocode(), logImages);
+                    }
+                };
+
+                LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.trackable_logs_img, null);
+                TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
+                log_img_title.setText(log.getImageTitles());
+                log_img_title.setOnClickListener(listener);
+                logLayout.addView(log_imgView);
+            }
+
+            holder.author.setOnClickListener(new UserActionsListener());
         }
 
     }
