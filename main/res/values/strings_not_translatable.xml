@@ -84,6 +84,7 @@
     · Edit cache type filter by clicking on filter bar\n
     · Support for searching opencaching.nl caches\n
     · Inverse sorting of cache lists (hit the same menu again)\n
+    · view pager in trackable activity\n
     \n
     <b>Bugfixing:</b>\n
     · Final flag icon lost when updating cache with self defined final\n

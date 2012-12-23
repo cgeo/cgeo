@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="4dip">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/details_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/goal_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+
+                <View style="@style/separator_horizontal" />
+
+                <TextView
+                    style="@style/separator_horizontal_headline"
+                    android:text="@string/trackable_goal" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/goal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:linksClickable="true"
+                android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
+                android:textSize="14dip"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/details_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+
+                <View style="@style/separator_horizontal" />
+
+                <TextView
+                    style="@style/separator_horizontal_headline"
+                    android:text="@string/trackable_details" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:linksClickable="true"
+                android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
+                android:textSize="14dip"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/image_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+
+                <View style="@style/separator_horizontal" />
+
+                <TextView
+                    style="@style/separator_horizontal_headline"
+                    android:text="@string/trackable_image" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/image"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dip"
+                android:orientation="vertical"
+                android:padding="3dip" >
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -8,6 +8,7 @@ import com.viewpagerindicator.TitleProvider;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import android.app.Activity;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -170,7 +171,15 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
     }
 
-    protected final void initializeViewPager(int entryPageIndex, final OnPageSelectedListener pageSelectedListener) {
+    /**
+     * Create the view pager. Call this from the {@link Activity#onCreate} implementation.
+     * 
+     * @param startPageIndex
+     *            index of the page shown first
+     * @param pageSelectedListener
+     *            page selection listener or <code>null</code>
+     */
+    protected final void createViewPager(int startPageIndex, final OnPageSelectedListener pageSelectedListener) {
         // initialize ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerAdapter = new ViewPagerAdapter();
@@ -196,13 +205,13 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         // switch to entry page (last used or 2)
-        if (viewPagerAdapter.getCount() < entryPageIndex) {
-            for (int i = 0; i <= entryPageIndex; i++) {
+        if (viewPagerAdapter.getCount() < startPageIndex) {
+            for (int i = 0; i <= startPageIndex; i++) {
                 // we can't switch to a page that is out of bounds, so we add null-pages
                 pageOrder.add(null);
             }
         }
-        viewPager.setCurrentItem(entryPageIndex, false);
+        viewPager.setCurrentItem(startPageIndex, false);
     }
 
     /**

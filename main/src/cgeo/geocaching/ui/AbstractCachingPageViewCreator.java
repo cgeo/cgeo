@@ -11,7 +11,7 @@ import android.view.View;
  */
 public abstract class AbstractCachingPageViewCreator<ViewClass extends View> implements PageViewCreator {
 
-    protected ViewClass view;
+    public ViewClass view;
 
     @Override
     public final void notifyDataSetChanged() {

@@ -19,15 +19,6 @@
         <View style="@style/action_bar_separator" />
 
         <ImageView
-            android:id="@+id/defaultNavigation"
-            style="@style/action_bar_action"
-            android:longClickable="true"
-            android:onClick="startDefaultNavigation"
-            android:src="@drawable/actionbar_compass_dark" />
-
-        <View style="@style/action_bar_separator" />
-
-        <ImageView
             style="@style/action_bar_action"
             android:onClick="goManual"
             android:src="@drawable/actionbar_manual" />

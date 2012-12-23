@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.calendar.ICalendar;
-import cgeo.geocaching.CacheDetailActivity.Page;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
@@ -112,7 +111,7 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractViewPagerActivity<Page> {
+public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> {
 
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
@@ -292,7 +291,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<Page> {
         });
 
         final int pageToOpen = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
-        initializeViewPager(pageToOpen, new OnPageSelectedListener() {
+        createViewPager(pageToOpen, new OnPageSelectedListener() {
 
             @Override
             public void onPageSelected(int position) {
@@ -1622,13 +1621,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<Page> {
                     return;
                 }
 
-                final Bitmap bitmap = image.getBitmap();
-                if (bitmap == null || bitmap.getWidth() <= 10) {
-                    return;
-                }
+                try {
+                    final Bitmap bitmap = image.getBitmap();
+                    if (bitmap == null || bitmap.getWidth() <= 10) {
+                        return;
+                    }
 
-                ((ImageView) view.findViewById(R.id.map_preview)).setImageDrawable(image);
-                view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
+                    ((ImageView) view.findViewById(R.id.map_preview)).setImageDrawable(image);
+                    view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    Log.e("CacheDetailActivity.PreviewMapTask", e);
+                }
             }
         }
 
@@ -2154,7 +2157,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<Page> {
                     Object selection = arg0.getItemAtPosition(arg2);
                     if (selection instanceof cgTrackable) {
                         cgTrackable trackable = (cgTrackable) selection;
-                        cgeotrackable.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
+                        TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
                     }
                 }
             });

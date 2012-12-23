@@ -119,7 +119,7 @@ public class SearchActivity extends AbstractActivity {
         // Check if the query is a TB code
         final String trackable = BaseUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
         if (StringUtils.isNotBlank(trackable)) {
-            final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
+            final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra("geocode", trackable.toUpperCase(Locale.US));
             startActivity(trackablesIntent);
             return true;
@@ -408,7 +408,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
+        final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
         trackablesIntent.putExtra("geocode", trackableText.toUpperCase(Locale.US));
         startActivity(trackablesIntent);
     }
