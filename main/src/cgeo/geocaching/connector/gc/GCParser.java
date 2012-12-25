@@ -1249,8 +1249,6 @@ public abstract class GCParser {
      *
      * @param page
      *            the HTML page to parse, already processed through {@link BaseUtils#replaceWhitespace}
-     * @param app
-     *            if not null, the application to use to save the trackable
      * @return the parsed trackable, or null if none could be parsed
      */
     static cgTrackable parseTrackable(final String page, final String possibleTrackingcode) {
@@ -1397,7 +1395,9 @@ public abstract class GCParser {
                 }
 
                 // Apply the pattern for images in a trackable log entry against each full log (group(0))
-                final Matcher matcherLogImages = GCConstants.PATTERN_TRACKABLE_LOG_IMAGES.matcher(matcherLogs.group(0));
+                final String logEntry = matcherLogs.group(0);
+                System.out.println(logEntry);
+                final Matcher matcherLogImages = GCConstants.PATTERN_TRACKABLE_LOG_IMAGES.matcher(logEntry);
                 /*
                  * 1. Image URL
                  * 2. Image title

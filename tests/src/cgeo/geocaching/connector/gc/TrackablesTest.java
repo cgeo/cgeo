@@ -4,6 +4,7 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.BaseUtils;
@@ -71,7 +72,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseTrackableWithoutReleaseDate() {
-        cgTrackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb14wfv), null);
+        cgTrackable trackable = parseTrackable(R.raw.tb14wfv);
         assertNotNull(trackable);
         assertEquals("The Brickster", trackable.getName());
         assertEquals("Adrian C", trackable.getOwner());
@@ -84,7 +85,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseRelativeLink() {
-        final cgTrackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb4cwjx), null);
+        final cgTrackable trackable = parseTrackable(R.raw.tb4cwjx);
         assertNotNull(trackable);
         assertEquals("The Golden Lisa", trackable.getName());
         final String goal = trackable.getGoal();
@@ -93,12 +94,27 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertTrue(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\""));
     }
 
+    private cgTrackable parseTrackable(int trackablePage) {
+        String pageContent = getFileContent(trackablePage);
+        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(pageContent), null);
+    }
+
+    public void testParseMarkMissing() {
+        final cgTrackable trackable = parseTrackable(R.raw.tb29ggq);
+        assertNotNull(trackable);
+        final List<LogEntry> logs = trackable.getLogs();
+        assertNotNull(logs);
+        assertFalse(logs.isEmpty());
+        LogEntry marked = logs.get(4);
+        assertEquals(LogType.MARKED_MISSING, marked.type);
+    }
+
     private cgTrackable getTB2R124() {
-        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tb2r124)), null);
+        return parseTrackable(R.raw.trackable_tb2r124);
     }
 
     private cgTrackable getTBXATG() {
-        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tbxatg)), null);
+        return parseTrackable(R.raw.trackable_tbxatg);
     }
 
     public void testParseTrackableNotExisting() {
