@@ -567,7 +567,7 @@ public class cgeo extends AbstractActivity {
         (new cleanDatabase()).start();
     }
 
-    private void updateCacheCounter() {
+    void updateCacheCounter() {
         (new CountBubbleUpdateThread()).start();
     }
 
@@ -585,7 +585,6 @@ public class cgeo extends AbstractActivity {
                         dialog.dismiss();
                         cgData.resetNewlyCreatedDatabase();
                         app.restoreDatabase(cgeo.this);
-                        updateCacheCounter();
                     }
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
