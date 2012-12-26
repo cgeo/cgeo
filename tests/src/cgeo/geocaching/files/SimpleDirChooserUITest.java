@@ -26,6 +26,10 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
     public void testSingleSelection() throws InterruptedException {
         assertChecked("Newly opened activity", 0);
         solo.scrollToBottom();
+        pause();
+        // according to the documentation, automatic pauses only happen in the clickXYZ() methods.
+        // Therefore lets introduce a manual pause after the scrolling methods.
+
         final int lastIndex = solo.getCurrentCheckBoxes().size() - 1;
 
         solo.clickOnCheckBox(lastIndex);
@@ -34,18 +38,23 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
         assertChecked("Clicked last checkbox", 1);
 
         solo.scrollUp();
-        Thread.sleep(20);
+        pause();
         solo.scrollToBottom();
-        Thread.sleep(20);
+        pause();
         assertChecked("Refreshing last checkbox", 1);
 
         solo.scrollToTop();
+        pause();
         solo.clickOnCheckBox(0);
         assertChecked("Clicked first checkbox", 1);
         assertTrue(solo.getCurrentCheckBoxes().get(0).isChecked());
         solo.clickOnCheckBox(1);
         assertChecked("Clicked second checkbox", 1);
         assertTrue(solo.getCurrentCheckBoxes().get(1).isChecked());
+    }
+
+    private static void pause() throws InterruptedException {
+        Thread.sleep(500);
     }
 
     private void assertChecked(String message, int expectedChecked) {
