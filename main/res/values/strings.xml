@@ -290,6 +290,7 @@
   <string name="caches_drop_stored">Drop stored</string>
   <string name="caches_drop_progress">Removing caches</string>
   <string name="caches_drop_all_and_list">Drop all and remove list</string>
+  <string name="caches_delete_events">Delete past events</string>
   <string name="caches_refresh_selected">Refresh selected</string>
   <string name="caches_refresh_all">Refresh all</string>
   <string name="caches_move_selected">Move selected</string>

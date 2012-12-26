@@ -85,6 +85,7 @@
     · Support for searching opencaching.nl caches\n
     · Inverse sorting of cache lists (hit the same menu again)\n
     · view pager in trackable activity\n
+    · menu item to delete past events\n
     \n
     <b>Bugfixing:</b>\n
     · Final flag icon lost when updating cache with self defined final\n

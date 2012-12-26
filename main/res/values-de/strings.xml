@@ -288,6 +288,7 @@
   <string name="caches_drop_stored">Gespeicherte löschen</string>
   <string name="caches_drop_progress">Entferne Caches…</string>
   <string name="caches_drop_all_and_list">Alle und Liste löschen</string>
+  <string name="caches_delete_events">Vergangene Events löschen</string>
   <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
   <string name="caches_refresh_all">Alle aktualisieren</string>
   <string name="caches_move_selected">Ausgewählte verschieben</string>

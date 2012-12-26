@@ -30,6 +30,7 @@ import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
@@ -62,6 +63,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -100,6 +102,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private static final int MENU_NAVIGATION = 69;
     private static final int MENU_STORE_CACHE = 73;
     private static final int MENU_FILTER = 74;
+    private static final int MENU_DELETE_EVENTS = 75;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_RESTART_GEO_AND_DIR = -2;
@@ -708,6 +711,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
             subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
             subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
+            subMenu.add(0, MENU_DELETE_EVENTS, 0, res.getString(R.string.caches_delete_events));
 
             //TODO: add submenu/AlertDialog and use R.string.gpx_import_title
             subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
@@ -770,6 +774,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             setVisible(menu, MENU_REFRESH_STORED, !isEmpty && (isConcrete || type != CacheListType.OFFLINE));
             setVisible(menu, MENU_DROP_CACHES, !isEmpty);
             setVisible(menu, MENU_DROP_CACHES_AND_LIST, isConcrete && !isEmpty);
+            setVisible(menu, MENU_DELETE_EVENTS, isConcrete && !isEmpty && containsEvents());
             setVisible(menu, MENU_MOVE_TO_LIST, !isEmpty);
             setVisible(menu, MENU_EXPORT, !isEmpty);
             setVisible(menu, MENU_REMOVE_FROM_HISTORY, !isEmpty);
@@ -818,6 +823,15 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
 
         return true;
+    }
+
+    private boolean containsEvents() {
+        for (cgCache cache : adapter.getCheckedOrAllCaches()) {
+            if (cache.isEventCache()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void setMenuItemLabel(final Menu menu, final int menuId, final int resIdSelection, final int resId) {
@@ -905,9 +919,27 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 moveCachesToOtherList();
                 invalidateOptionsMenuCompatible();
                 return true;
+            case MENU_DELETE_EVENTS:
+                deletePastEvents();
+                invalidateOptionsMenuCompatible();
+                return true;
             default:
                 return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
         }
+    }
+
+    public void deletePastEvents() {
+        progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
+        final List<cgCache> deletion = new ArrayList<cgCache>();
+        for (cgCache cache : adapter.getCheckedOrAllCaches()) {
+            if (cache.isEventCache()) {
+                final Date eventDate = cache.getHiddenDate();
+                if (DateUtils.daysSince(eventDate.getTime()) > 0) {
+                    deletion.add(cache);
+                }
+            }
+        }
+        new DropDetailsThread(dropDetailsHandler, deletion).start();
     }
 
     /**
@@ -1294,7 +1326,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     public void dropSelected() {
         progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
-        new DropDetailsThread(dropDetailsHandler).start();
+        new DropDetailsThread(dropDetailsHandler, adapter.getCheckedOrAllCaches()).start();
     }
 
     private class LoadByOfflineThread extends Thread {
@@ -1598,9 +1630,9 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         final private Handler handler;
         final private List<cgCache> selected;
 
-        public DropDetailsThread(Handler handlerIn) {
+        public DropDetailsThread(Handler handlerIn, List<cgCache> selectedIn) {
             handler = handlerIn;
-            selected = adapter.getCheckedOrAllCaches();
+            selected = selectedIn;
         }
 
         @Override
