@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -80,8 +81,8 @@ public class EditWaypointActivity extends AbstractActivity {
                     else {
                         ((EditText) findViewById(R.id.note)).setText(StringUtils.trimToEmpty(waypoint.getNote()));
                     }
-
-                    setUploadingCheckBoxVisibleByConnector(ConnectorFactory.getConnector(geocode));
+                    cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+                    setCoordsCheckBoxesVisibility(ConnectorFactory.getConnector(geocode), cache);
                 }
 
                 if (own) {
@@ -158,8 +159,9 @@ public class EditWaypointActivity extends AbstractActivity {
         }
 
         if (geocode != null) {
+            cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             IConnector con = ConnectorFactory.getConnector(geocode);
-            setUploadingCheckBoxVisibleByConnector(con);
+            setCoordsCheckBoxesVisibility(con, cache);
         }
 
         initializeDistanceUnitSelector();
@@ -167,9 +169,13 @@ public class EditWaypointActivity extends AbstractActivity {
         disableSuggestions((EditText) findViewById(R.id.distance));
     }
 
-    private void setUploadingCheckBoxVisibleByConnector(IConnector con) {
-        if (con.supportsOwnCoordinates()) {
-            findViewById(R.id.uploadCoordsToWebsiteCheckBox).setVisibility(View.VISIBLE);
+    private void setCoordsCheckBoxesVisibility(IConnector con, cgCache cache) {
+        if (cache != null && (cache.getType() == CacheType.MYSTERY || cache.getType() == CacheType.MULTI)) {
+            findViewById(R.id.setAsCacheCoordsLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.uploadCoordsToWebsiteLayout).setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
+        } else {
+            findViewById(R.id.setAsCacheCoordsLayout).setVisibility(View.GONE);
+            findViewById(R.id.uploadCoordsToWebsiteLayout).setVisibility(View.GONE);
         }
     }
 
