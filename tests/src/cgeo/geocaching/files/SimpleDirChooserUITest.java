@@ -25,6 +25,9 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
     }
 
     public void testSingleSelection() throws InterruptedException {
+        // normally our activity should be ready, but we already had Jenkins report no checkboxes right here at the beginning
+        solo.waitForActivity(solo.getCurrentActivity().getClass().getSimpleName(), 2000);
+
         assertChecked("Newly opened activity", 0);
         solo.scrollToBottom();
         pause();
@@ -71,4 +74,9 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
         assertEquals(message, expectedChecked, checked);
     }
 
+    @Override
+    public void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
 }
