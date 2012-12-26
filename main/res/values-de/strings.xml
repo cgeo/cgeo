@@ -536,6 +536,7 @@
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
   <string name="cache_menu_navigation_walk">Navigation (Gehen)</string>
+  <string name="cache_menu_maps_directions">Google Maps Route</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Karte</string>
   <string name="cache_menu_map_static">Statische Karten</string>
