@@ -566,16 +566,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return true;
                 }
                 return false;
-        }
-        if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
-            return true;
-        }
-        if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
-            return true;
-        }
-        if (LoggingUI.onMenuItemSelected(item, this, cache)) {
-            refreshOnResume = true;
-            return true;
+            default:
+                if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
+                    return true;
+                }
+                if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
+                    return true;
+                }
+                if (LoggingUI.onMenuItemSelected(item, this, cache)) {
+                    refreshOnResume = true;
+                    return true;
+                }
         }
 
         return true;

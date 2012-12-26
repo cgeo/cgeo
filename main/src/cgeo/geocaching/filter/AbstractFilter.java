@@ -8,7 +8,7 @@ import java.util.List;
 abstract class AbstractFilter implements IFilter {
     private final String name;
 
-    public AbstractFilter(String name) {
+    protected AbstractFilter(String name) {
         this.name = name;
     }
 

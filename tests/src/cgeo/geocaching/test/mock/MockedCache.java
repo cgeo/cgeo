@@ -70,7 +70,7 @@ public abstract class MockedCache implements ICache {
 
             return BaseUtils.replaceWhitespace(buffer.toString());
         } catch (IOException e) {
-            e.printStackTrace();
+            Assert.fail(e.getMessage());
         } finally {
             IOUtils.closeQuietly(is);
             IOUtils.closeQuietly(br);

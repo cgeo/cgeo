@@ -102,7 +102,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @param lonDegFrac
      */
     public Geopoint(final String latDir, final String latDeg, final String latDegFrac,
-                    final String lonDir, final String lonDeg, final String lonDegFrac) {
+            final String lonDir, final String lonDeg, final String lonDegFrac) {
         latitude = Double.parseDouble(latDeg + "." + addZeros(Integer.parseInt(latDegFrac), 5)) *
                 getLatSign(latDir);
         longitude = Double.parseDouble(lonDeg + "." + addZeros(Integer.parseInt(lonDegFrac), 5)) *
@@ -122,7 +122,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @param lonMinFrac
      */
     public Geopoint(final String latDir, final String latDeg, final String latMin, final String latMinFrac,
-                    final String lonDir, final String lonDeg, final String lonMin, final String lonMinFrac) {
+            final String lonDir, final String lonDeg, final String lonMin, final String lonMinFrac) {
         latitude = (Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac), 3)) / 60) *
                 (getLatSign(latDir));
         longitude = (Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac), 3)) / 60) *
@@ -144,7 +144,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @param lonSecFrac
      */
     public Geopoint(final String latDir, final String latDeg, final String latMin, final String latSec, final String latSecFrac,
-                    final String lonDir, final String lonDeg, final String lonMin, final String lonSec, final String lonSecFrac) {
+            final String lonDir, final String lonDeg, final String lonMin, final String lonSec, final String lonSecFrac) {
         latitude = (Double.parseDouble(latDeg) + Double.parseDouble(latMin) / 60 + Double.parseDouble(latSec + "." + addZeros(Integer.parseInt(latSecFrac), 3)) / 3600) *
                 (getLatSign(latDir));
         longitude = (Double.parseDouble(lonDeg) + Double.parseDouble(lonMin) / 60 + Double.parseDouble(lonSec + "." + addZeros(Integer.parseInt(lonSecFrac), 3)) / 3600) *
@@ -280,8 +280,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *            tolerance in km
      * @return true if similar, false otherwise
      */
-    public boolean isEqualTo(Geopoint gp, double tolerance)
-    {
+    public boolean isEqualTo(Geopoint gp, double tolerance) {
         return null != gp && distanceTo(gp) <= tolerance;
     }
 
@@ -293,42 +292,35 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @see GeopointFormatter
      * @return formatted coordinates
      */
-    public String format(GeopointFormatter.Format format)
-    {
+    public String format(GeopointFormatter.Format format) {
         return GeopointFormatter.format(format, this);
     }
 
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);
     }
 
-    abstract public static class GeopointException
-            extends RuntimeException
-    {
+    abstract public static class GeopointException extends NumberFormatException {
         private static final long serialVersionUID = 1L;
 
-        public GeopointException(String msg)
+        protected GeopointException(String msg)
         {
             super(msg);
         }
     }
 
-    public static class ParseException
-            extends GeopointException
-    {
+    public static class ParseException extends GeopointException {
         private static final long serialVersionUID = 1L;
         public final int resource;
 
-        public ParseException(final String msg, final GeopointParser.LatLon faulty)
-        {
+        public ParseException(final String msg, final GeopointParser.LatLon faulty) {
             super(msg);
             resource = faulty == GeopointParser.LatLon.LAT ? R.string.err_parse_lat : R.string.err_parse_lon;
         }

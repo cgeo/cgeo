@@ -16,7 +16,6 @@ public final class GoogleMapProvider extends AbstractMapProvider {
 
     public static final String GOOGLE_MAP_ID = "GOOGLE_MAP";
     public static final String GOOGLE_SATELLITE_ID = "GOOGLE_SATELLITE";
-    private static GoogleMapProvider instance;
 
     private final MapItemFactory mapItemFactory;
 
@@ -29,11 +28,12 @@ public final class GoogleMapProvider extends AbstractMapProvider {
         mapItemFactory = new GoogleMapItemFactory();
     }
 
+    private static class Holder {
+        private static final GoogleMapProvider INSTANCE = new GoogleMapProvider();
+    }
+
     public static GoogleMapProvider getInstance() {
-        if (instance == null) {
-            instance = new GoogleMapProvider();
-        }
-        return instance;
+        return Holder.INSTANCE;
     }
 
     public static boolean isSatelliteSource(final MapSource mapSource) {
@@ -67,7 +67,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
 
     private static abstract class AbstractGoogleMapSource extends AbstractMapSource {
 
-        public AbstractGoogleMapSource(final String id, final MapProvider mapProvider, final String name) {
+        protected AbstractGoogleMapSource(final String id, final MapProvider mapProvider, final String name) {
             super(id, mapProvider, name);
         }
 

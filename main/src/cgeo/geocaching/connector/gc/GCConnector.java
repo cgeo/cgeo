@@ -21,18 +21,21 @@ import java.util.regex.Pattern;
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter {
 
     private static final String HTTP_COORD_INFO = "http://coord.info/";
-    private static GCConnector instance;
     private static final Pattern gpxZipFilePattern = Pattern.compile("\\d{7,}(_.+)?\\.zip", Pattern.CASE_INSENSITIVE);
 
     private GCConnector() {
         // singleton
     }
 
+    /**
+     * initialization on demand holder pattern
+     */
+    private static class Holder {
+        private static final GCConnector INSTANCE = new GCConnector();
+    }
+
     public static GCConnector getInstance() {
-        if (instance == null) {
-            instance = new GCConnector();
-        }
-        return instance;
+        return Holder.INSTANCE;
     }
 
     @Override

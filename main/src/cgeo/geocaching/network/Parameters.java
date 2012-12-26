@@ -4,6 +4,8 @@ import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.client.utils.URLEncodedUtils;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
+import org.apache.commons.lang3.CharEncoding;
+
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,7 +67,7 @@ public class Parameters extends ArrayList<NameValuePair> {
 
     @Override
     public String toString() {
-        return URLEncodedUtils.format(this, "UTF-8");
+        return URLEncodedUtils.format(this, CharEncoding.UTF_8);
     }
 
     /**

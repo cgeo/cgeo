@@ -2,6 +2,8 @@ package cgeo.calendar;
 
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.CharEncoding;
+
 import android.net.Uri;
 import android.text.Html;
 import android.text.Spanned;
@@ -48,7 +50,7 @@ class CalendarEntry {
             if (param == null) {
                 return "";
             }
-            return URLDecoder.decode(param, "UTF-8").trim();
+            return URLDecoder.decode(param, CharEncoding.UTF_8).trim();
         } catch (UnsupportedEncodingException e) {
             Log.e("CalendarEntry.getParameter", e);
         }
@@ -56,7 +58,7 @@ class CalendarEntry {
     }
 
     public boolean isValid() {
-        return (getName().length() > 0 && getHiddenDate().length() > 0);
+        return getName().length() > 0 && getHiddenDate().length() > 0;
     }
 
     public String getHiddenDate() {

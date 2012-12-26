@@ -13,13 +13,7 @@ public class NameComparatorTest extends AndroidTestCase {
         }
     }
 
-    private NameComparator comp;
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        comp = new NameComparator();
-    }
+    private NameComparator comp = new NameComparator();
 
     public void testLexical() {
         assertSorted(new NamedCache("A"), new NamedCache("Z"));

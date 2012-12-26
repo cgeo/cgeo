@@ -304,7 +304,7 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     }
 
-    private class changeWaypointType implements OnItemSelectedListener {
+    private static class changeWaypointType implements OnItemSelectedListener {
 
         private changeWaypointType(EditWaypointActivity wpView) {
             this.wpView = wpView;
@@ -328,7 +328,7 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     }
 
-    private class changeDistanceUnit implements OnItemSelectedListener {
+    private static class changeDistanceUnit implements OnItemSelectedListener {
 
         private changeDistanceUnit(EditWaypointActivity unitView) {
             this.unitView = unitView;

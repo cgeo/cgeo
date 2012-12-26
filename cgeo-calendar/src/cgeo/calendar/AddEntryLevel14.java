@@ -35,7 +35,7 @@ class AddEntryLevel14 extends AbstractAddEntry {
                 .putExtra("eventTimezone", "UTC")
                 .putExtra("eventLocation", eventLocation);
         if (entry.getStartTimeMinutes() >= 0) {
-            intent.putExtra("beginTime", eventDate.getTime() + entry.getStartTimeMinutes() * 60000);
+            intent.putExtra("beginTime", eventDate.getTime() + entry.getStartTimeMinutes() * 60000L);
         }
         else {
             intent.putExtra("beginTime", eventDate.getTime() + 43200000);

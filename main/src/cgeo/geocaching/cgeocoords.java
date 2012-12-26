@@ -378,6 +378,8 @@ public class cgeocoords extends Dialog {
                 break;
             case Plain:
                 // This case has been handled above
+            default:
+                throw new IllegalArgumentException();
         }
 
         return true;

@@ -29,6 +29,9 @@ public class MapsforgeOverlay extends Overlay implements OverlayImpl {
                 break;
             case ScaleOverlay:
                 overlayBase = new ScaleOverlay(activityIn, this);
+                break;
+            default:
+                throw new IllegalArgumentException();
         }
     }
 

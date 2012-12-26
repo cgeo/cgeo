@@ -9,7 +9,7 @@ public abstract class AbstractMapSource implements MapSource {
     private final MapProvider mapProvider;
     private final String id;
 
-    public AbstractMapSource(final String id, final MapProvider mapProvider, final String name) {
+    protected AbstractMapSource(final String id, final MapProvider mapProvider, final String name) {
         this.id = id;
         this.mapProvider = mapProvider;
         this.name = name;

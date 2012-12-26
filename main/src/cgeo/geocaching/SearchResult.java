@@ -169,7 +169,7 @@ public class SearchResult implements Parcelable {
             return;
         }
 
-        this.viewstates = viewstates;
+        System.arraycopy(viewstates, 0, this.viewstates, 0, viewstates.length);
     }
 
     public int getTotal() {

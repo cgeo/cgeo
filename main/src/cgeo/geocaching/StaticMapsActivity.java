@@ -10,7 +10,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,7 +35,6 @@ public class StaticMapsActivity extends AbstractActivity {
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private LinearLayout smapsView = null;
-    private BitmapFactory factory = null;
     private final Handler loadMapsHandler = new Handler() {
 
         @Override
@@ -131,10 +129,6 @@ public class StaticMapsActivity extends AbstractActivity {
         @Override
         public void run() {
             try {
-                if (factory == null) {
-                    factory = new BitmapFactory();
-                }
-
                 // try downloading 2 times
                 for (int trials = 0; trials < 2; trials++) {
                     for (int level = 1; level <= 5; level++) {

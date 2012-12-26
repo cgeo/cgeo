@@ -124,7 +124,7 @@ public class RegExPerformanceTest extends TestCase {
         for (int j = 0; j < iterations; j++) {
             BaseUtils.getMatch(page, pattern, true, "");
         }
-        return (System.currentTimeMillis() - start);
+        return System.currentTimeMillis() - start;
 
     }
 

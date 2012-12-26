@@ -20,6 +20,7 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
 
     @Override
     public void setUp() throws Exception {
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 

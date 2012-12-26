@@ -216,26 +216,16 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         return new ArrayList<cgCache>(cgData.loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
     }
 
-    public static void testParseDateWithFractionalSeconds() {
+    public static void testParseDateWithFractionalSeconds() throws ParseException {
         // was experienced in GSAK file
         final String dateString = "2011-08-13T02:52:18.103Z";
-        try {
-            GPXParser.parseDate(dateString);
-        } catch (ParseException e) {
-            fail();
-            e.printStackTrace();
-        }
+        GPXParser.parseDate(dateString);
     }
 
-    public static void testParseDateWithHugeFraction() {
+    public static void testParseDateWithHugeFraction() throws ParseException {
         // see issue 821
         String dateString = "2011-11-07T00:00:00.0000000-07:00";
-        try {
-            GPXParser.parseDate(dateString);
-        } catch (ParseException e) {
-            fail();
-            e.printStackTrace();
-        }
+        GPXParser.parseDate(dateString);
     }
 
     public void testSelfmadeGPXWithoutGeocodes() throws Exception {

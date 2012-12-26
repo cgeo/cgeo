@@ -304,7 +304,7 @@ public class cgeopoint extends AbstractActivity {
         }
     }
 
-    private class changeDistanceUnit implements OnItemSelectedListener {
+    private static class changeDistanceUnit implements OnItemSelectedListener {
 
         private changeDistanceUnit(cgeopoint unitView) {
             this.unitView = unitView;

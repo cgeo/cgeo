@@ -1336,7 +1336,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         final protected Viewport viewport;
 
-        public DoRunnable(final Viewport viewport) {
+        protected DoRunnable(final Viewport viewport) {
             this.viewport = viewport;
         }
 

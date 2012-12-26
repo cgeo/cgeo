@@ -905,9 +905,9 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 moveCachesToOtherList();
                 invalidateOptionsMenuCompatible();
                 return true;
+            default:
+                return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
         }
-
-        return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
     }
 
     /**

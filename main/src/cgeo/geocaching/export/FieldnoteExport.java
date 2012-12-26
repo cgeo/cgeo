@@ -12,7 +12,9 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.core.IOUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -154,32 +156,25 @@ class FieldnoteExport extends AbstractExport {
 
             fieldNoteBuffer.append('\n');
 
-            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                exportLocation.mkdirs();
-
-                SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-                exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
-
-                Writer fw = null;
-                try {
-                    OutputStream os = new FileOutputStream(exportFile);
-                    fw = new OutputStreamWriter(os, "UTF-16");
-                    fw.write(fieldNoteBuffer.toString());
-                } catch (IOException e) {
-                    Log.e("FieldnoteExport.ExportTask export", e);
-                    return false;
-                } finally {
-                    if (fw != null) {
-                        try {
-                            fw.close();
-                        } catch (IOException e) {
-                            Log.e("FieldnoteExport.ExportTask export", e);
-                            return false;
-                        }
-                    }
-                }
-            } else {
+            if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 return false;
+            }
+
+            exportLocation.mkdirs();
+
+            SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
+            exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
+
+            Writer fw = null;
+            try {
+                OutputStream os = new FileOutputStream(exportFile);
+                fw = new OutputStreamWriter(os, CharEncoding.UTF_16);
+                fw.write(fieldNoteBuffer.toString());
+            } catch (IOException e) {
+                Log.e("FieldnoteExport.ExportTask export", e);
+                return false;
+            } finally {
+                IOUtils.closeQuietly(fw);
             }
 
             if (upload) {

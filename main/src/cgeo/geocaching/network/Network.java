@@ -62,7 +62,7 @@ public abstract class Network {
     private final static HttpParams clientParams = new BasicHttpParams();
 
     static {
-        Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, "UTF-8");
+        Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, CharEncoding.UTF_8);
         Network.clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
         Network.clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
         Network.clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
@@ -230,7 +230,7 @@ public abstract class Network {
             request = new HttpPost(uri);
             if (params != null) {
                 try {
-                    ((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+                    ((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, CharEncoding.UTF_8));
                 } catch (final UnsupportedEncodingException e) {
                     Log.e("request", e);
                     return null;
@@ -401,7 +401,7 @@ public abstract class Network {
 
     private static String getResponseDataNoError(final HttpResponse response, boolean replaceWhitespace) {
         try {
-            String data = EntityUtils.toString(response.getEntity(), "UTF-8");
+            String data = EntityUtils.toString(response.getEntity(), CharEncoding.UTF_8);
             return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
         } catch (Exception e) {
             Log.e("getResponseData", e);

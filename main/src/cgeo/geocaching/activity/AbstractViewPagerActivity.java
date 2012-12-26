@@ -29,7 +29,7 @@ import java.util.Map;
  */
 public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends AbstractActivity {
 
-    public AbstractViewPagerActivity(String helpTopic) {
+    protected AbstractViewPagerActivity(String helpTopic) {
         super(helpTopic);
     }
 
@@ -173,7 +173,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
     /**
      * Create the view pager. Call this from the {@link Activity#onCreate} implementation.
-     * 
+     *
      * @param startPageIndex
      *            index of the page shown first
      * @param pageSelectedListener

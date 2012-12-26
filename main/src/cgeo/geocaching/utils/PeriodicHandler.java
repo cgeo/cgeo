@@ -26,7 +26,7 @@ abstract public class PeriodicHandler extends Handler {
      * @param period
      *            The period in milliseconds.
      */
-    public PeriodicHandler(final long period) {
+    protected PeriodicHandler(final long period) {
         this.period = period;
     }
 

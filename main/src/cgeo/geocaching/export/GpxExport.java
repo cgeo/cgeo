@@ -51,7 +51,7 @@ class GpxExport extends AbstractExport {
         if (null == activity) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
-            new ExportTask(caches, activity).execute((Void) null);
+            new ExportTask(caches, null).execute((Void) null);
 
         } else {
             // Show configuration dialog

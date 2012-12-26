@@ -32,7 +32,7 @@ class AddEntry extends AbstractAddEntry {
         final ContentValues event = new ContentValues();
         event.put("calendar_id", calendarId);
         if (entry.getStartTimeMinutes() >= 0) {
-            event.put("dtstart", eventDate.getTime() + entry.getStartTimeMinutes() * 60000);
+            event.put("dtstart", eventDate.getTime() + entry.getStartTimeMinutes() * 60000L);
         }
         else {
             event.put("dtstart", eventDate.getTime() + 43200000); // noon

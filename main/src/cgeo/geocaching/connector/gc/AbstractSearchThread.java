@@ -12,7 +12,7 @@ abstract public class AbstractSearchThread extends Thread {
     private final Handler handler;
     private static AbstractSearchThread currentInstance;
 
-    public AbstractSearchThread(final Handler handler) {
+    protected AbstractSearchThread(final Handler handler) {
         this.handler = handler;
     }
 

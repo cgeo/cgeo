@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Activity;
 
 abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp {
-    public AbstractStaticMapsApp(String name) {
+    protected AbstractStaticMapsApp(String name) {
         super(name, null);
     }
 

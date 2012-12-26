@@ -73,7 +73,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         }
     };
 
-    public AbstractPopupActivity(String helpTopic, int layout) {
+    protected AbstractPopupActivity(String helpTopic, int layout) {
         super(helpTopic);
         this.layout = layout;
     }
@@ -186,10 +186,10 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             case MENU_SHOW_IN_BROWSER:
                 showInBrowser();
                 return true;
-        }
-
-        if (LoggingUI.onMenuItemSelected(item, this, cache)) {
-            return true;
+            default:
+                if (LoggingUI.onMenuItemSelected(item, this, cache)) {
+                    return true;
+                }
         }
 
         return true;

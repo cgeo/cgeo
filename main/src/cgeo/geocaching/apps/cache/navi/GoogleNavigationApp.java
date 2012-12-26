@@ -12,7 +12,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
     private final String mode;
 
-    GoogleNavigationApp(final int nameResourceId, final String mode) {
+    protected GoogleNavigationApp(final int nameResourceId, final String mode) {
         super(getString(nameResourceId), null);
         this.mode = mode;
     }

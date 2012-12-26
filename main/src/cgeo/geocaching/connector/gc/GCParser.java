@@ -1396,7 +1396,6 @@ public abstract class GCParser {
 
                 // Apply the pattern for images in a trackable log entry against each full log (group(0))
                 final String logEntry = matcherLogs.group(0);
-                System.out.println(logEntry);
                 final Matcher matcherLogImages = GCConstants.PATTERN_TRACKABLE_LOG_IMAGES.matcher(logEntry);
                 /*
                  * 1. Image URL
@@ -1713,8 +1712,7 @@ public abstract class GCParser {
             }
 
         } catch (JSONException e) {
-            Log.e("Unknown exception with json wrap code");
-            e.printStackTrace();
+            Log.e("Unknown exception with json wrap code", e);
         }
         Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords");
         return false;
