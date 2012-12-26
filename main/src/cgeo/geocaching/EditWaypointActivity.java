@@ -106,7 +106,7 @@ public class EditWaypointActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
 
         setTheme();
-        setContentView(R.layout.waypoint_new);
+        setContentView(R.layout.edit_waypoint_activity);
         setTitle("waypoint");
 
         // get parameters
@@ -170,12 +170,14 @@ public class EditWaypointActivity extends AbstractActivity {
     }
 
     private void setCoordsCheckBoxesVisibility(IConnector con, cgCache cache) {
+        final View cacheCoords = findViewById(R.id.setAsCacheCoordsCheckBox);
+        final View uploadWebsite = findViewById(R.id.uploadCoordsToWebsiteCheckBox);
         if (cache != null && (cache.getType() == CacheType.MYSTERY || cache.getType() == CacheType.MULTI)) {
-            findViewById(R.id.setAsCacheCoordsLayout).setVisibility(View.VISIBLE);
-            findViewById(R.id.uploadCoordsToWebsiteLayout).setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
+            cacheCoords.setVisibility(View.VISIBLE);
+            uploadWebsite.setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
         } else {
-            findViewById(R.id.setAsCacheCoordsLayout).setVisibility(View.GONE);
-            findViewById(R.id.uploadCoordsToWebsiteLayout).setVisibility(View.GONE);
+            cacheCoords.setVisibility(View.GONE);
+            uploadWebsite.setVisibility(View.GONE);
         }
     }
 
