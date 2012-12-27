@@ -8,9 +8,11 @@
   <string name="detail">Szczegóły</string>
   <string name="search">Szukaj</string>
   <string name="settings">Ustawienia</string>
-  <string name="helpers">Przydatne aplikacje</string>
+  <string name="helpers">Przydatne programy</string>
   <string name="about">O c:geo</string>
-  <string name="helper">Chcesz dowiedzieć się więcej o <b>c:geo</b>?\nZajrzyj do instrukcji obsługi programu.</string>
+  <string name="helper">Chcesz dowiedzieć się więcej o <b>c:geo</b>?\nZajrzyj do instrukcji obsługi.</string>
+  <string name="latitude">Szerokość geograficzna</string>
+  <string name="longitude">Długość geograficzna</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Podziel się linkiem do skrzynki</string>
@@ -21,39 +23,41 @@
   <string name="multi">Skrzynki wieloetapowe</string>
   <string name="mystery">Skrzynki zagadkowe</string>
   <string name="letterbox">Hybrydowe Letterbox</string>
-  <string name="event">Typu wydarzenie</string>
+  <string name="event">Wydarzenie</string>
   <string name="mega">Mega-Wydarzenie</string>
   <string name="earth">Earthcache</string>
   <string name="cito">CITO</string>
-  <string name="webcam">Skrzynki webcam</string>
+  <string name="webcam">Skrzynki Webcam</string>
   <string name="virtual">Skrzynki wirtualne</string>
   <string name="wherigo">Scenariusze Wherigo</string>
   <string name="lostfound">Lost &amp; found</string>
-  <string name="ape">Projekt ape cache</string>
+  <string name="ape">Projekt APE Cache</string>
   <string name="gchq">Groundspeak HQ</string>
-  <string name="gps">GPS cache exhibit</string>
+  <string name="gps">GPS Adventures exhibit</string>
+  <string name="unknown">Nieznana</string>
 
   <!-- cache sizes -->
-  <string name="cache_size_micro">mikro</string>
-  <string name="cache_size_small">mała</string>
-  <string name="cache_size_regular">normalna</string>
-  <string name="cache_size_large">duża</string>
-  <string name="cache_size_other">inna</string>
-  <string name="cache_size_virtual">wirtualna</string>
-  <string name="cache_size_notchosen">niewybrana</string>
-  <string name="cache_size_unknown">nieznana</string>
+  <string name="cache_size_micro">Mikro</string>
+  <string name="cache_size_small">Mała</string>
+  <string name="cache_size_regular">Normalna</string>
+  <string name="cache_size_large">Duża</string>
+  <string name="cache_size_other">Inna</string>
+  <string name="cache_size_virtual">Wirtualna</string>
+  <string name="cache_size_notchosen">Niewybrana</string>
+  <string name="cache_size_unknown">Nieznana</string>
 
   <!-- waypoints -->
   <string name="wp_final">Finał</string>
-  <string name="wp_stage">Etap do skrzynki</string>
+  <string name="wp_stage">Etap</string>
   <string name="wp_puzzle">Zagadka</string>
   <string name="wp_pkg">Parking</string>
   <string name="wp_trailhead">Punkt wyjścia</string>
   <string name="wp_waypoint">Punkt nawigacji</string>
+  <string name="wp_original">Oryginalne współrzędne</string>
 
   <!-- logs -->
-  <string name="log_found">Znalezione</string>
-  <string name="log_dnf">Nie znalezione</string>
+  <string name="log_found">Znalazłem</string>
+  <string name="log_dnf">Nie znalazłem</string>
   <string name="log_note">Notatka</string>
   <string name="log_published">Opublikowano</string>
   <string name="log_enabled">Aktywny</string>
@@ -63,23 +67,28 @@
   <string name="log_retrieved">Zabrałem</string>
   <string name="log_placed">Umieściłem</string>
   <string name="log_grabbed">Znalazłem gdzieś indziej</string>
+  <string name="log_movecollection">Przenieś do Kolekcji</string>
+  <string name="log_moveinventory">Przenieś do Inwentarza</string>
   <string name="log_maintained">Przegląd przeprowadzony</string>
-  <string name="log_maintenance_needed">Przegląd potrzebny</string>
-  <string name="log_update">Zmienione współrzędne</string>
-  <string name="log_archived">Zarchiwizowane</string>
-  <string name="log_needs_archived">Powinno zostać zarchiwizowane</string>
-  <string name="log_discovered">Odkryty</string>
-  <string name="log_reviewer">Sprawdzony</string>
+  <string name="log_maintenance_needed">Wymaga przeglądu</string>
+  <string name="log_update">Zmieniono współrzędne</string>
+  <string name="log_archived">Zarchiwizowana</string>
+  <string name="log_unarchived">Nie jest zarchiwizowana</string>
+  <string name="log_needs_archived">Powinna zostać zarchiwizowana</string>
+  <string name="log_discovered">Odkryta</string>
+  <string name="log_reviewer">Sprawdzona</string>
+  <string name="log_retractlisting">Wycofaj listing</string>
   <string name="log_tb_nothing">Nie rób nic</string>
-  <string name="log_tb_visit">Odwiedzić</string>
-  <string name="log_tb_drop">Odłożyć</string>
-  <string name="log_tb_changeall">Wszystkie zmienić</string>
+  <string name="log_tb_visit">Odwiedzony</string>
+  <string name="log_tb_drop">Odłożony</string>
+  <string name="log_tb_changeall">Zmień wszystko</string>
   <string name="log_save">Zapisz</string>
-  <string name="log_saving">Wpis w dzienniku…</string>
-  <string name="log_clear">Oczyść</string>
+  <string name="log_saving">Zapisuję w dzienniku…</string>
+  <string name="log_clear">Wyczyść</string>
   <string name="log_post">Wpisz do dziennika</string>
   <string name="log_post_rate">Wpisz do dziennika &amp; oceń</string>
   <string name="log_post_no_rate">Wpisz do dziennika &amp; nie oceniaj</string>
+  <string name="log_post_not_possible">Ładuję dziennik…</string>
   <string name="log_add">Dodaj</string>
   <string name="log_rating">Ocena</string>
   <string name="log_no_rating">Bez oceny</string>
@@ -92,101 +101,123 @@
   <string name="log_stars_4">4 gwiazdki</string>
   <string name="log_stars_45">4,5 gwiazdki</string>
   <string name="log_stars_5">5 gwiazdek</string>
-  <string name="log_stars_1_description">bardzo słaba</string>
-  <string name="log_stars_15_description">słaba</string>
-  <string name="log_stars_2_description">raczej słaba</string>
-  <string name="log_stars_25_description">może być</string>
-  <string name="log_stars_3_description">średnia</string>
-  <string name="log_stars_35_description">prawie dobra</string>
-  <string name="log_stars_4_description">dobra</string>
-  <string name="log_stars_45_description">bardzo dobra</string>
-  <string name="log_stars_5_description">świetna</string>
+  <string name="log_stars_1_description">Słaba</string>
+  <string name="log_stars_15_description">Raczej słaba</string>
+  <string name="log_stars_2_description">Poniżej średniej</string>
+  <string name="log_stars_25_description">Niezła</string>
+  <string name="log_stars_3_description">Średnia</string>
+  <string name="log_stars_35_description">Całkiem dobra</string>
+  <string name="log_stars_4_description">Powyżej średniej</string>
+  <string name="log_stars_45_description">Bardzo dobra</string>
+  <string name="log_stars_5_description">Świetna</string>
   <string name="log_webcam">Zdjęcie Webcam zrobione</string>
   <string name="log_new_log">Dodaj wpis</string>
   <string name="log_new_log_text">Komentarz</string>
   <string name="log_announcement">Ogłoszenie</string>
+  <string name="log_today">Dzisiaj</string>
+  <string name="log_yesterday">Wczoraj</string>
+  <string name="log_smilies">Uśmiechy</string>
+
+  <!-- translation -->
+  <string name="translate_to_sys_lang">Przetłumacz na %s</string>
+  <string name="translate_to_english">Przetłumacz na angielski</string>
+  <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
 
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
-  <string name="err_start">Komunikacja nie wystartowana</string>
-  <string name="err_parse">Nieudana analiza strony logowania.</string>
-  <string name="err_server">Nieudane połączenie z Geocaching.com (serwer albo połączenie nieaktywne?)</string>
-  <string name="err_login">Brakuje danych do logowania.</string>
-  <string name="err_login_failed">Przepraszam, c:geo nie może się zalogować.</string>
+  <string name="err_start">Komunikacja nie rozpoczeła się</string>
+  <string name="err_parse">Nieudany odczyt strony logowania.</string>
+  <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>   
+  <string name="err_login">Brak danych do logowania.</string>
+  <string name="err_login_failed">c:geo nie może zalogować się.</string>
+  <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź dane logowania i połączenie z internetem.</string>
   <string name="err_unknown">Nieznany błąd</string>
   <string name="err_comm">Nieznany błąd w komunikacji</string>
-  <string name="err_missing_auth">Nie wpisana nazwa użytkownika i/lub hasła.</string>
+  <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła.</string>
   <string name="err_wrong">Niepoprawne dane użytkownika</string>
-  <string name="err_license">Użytkownik nie zgodził się jeszcze z regulaminem serwisu Geocaching.com, c:geo nie jest w stanie załadować współrzędnych.</string>
-  <string name="err_detail_open">Przepraszam, c:geo nie mógł otworzyć szczegółów skrzynki.</string>
-  <string name="err_detail_cache">Przepraszam, c:geo nie mógł pokazać Tobie skrzynki. Czy to jest naprawdę skrzynka?</string>
-  <string name="err_detail_cache_find">Przepraszam, c:geo nie mógł znaleść skrzynki.</string>
-  <string name="err_detail_cache_find_some">Przepraszam, c:geo nie mógł znaleść tej skrzynki.</string>
-  <string name="err_detail_cache_find_any">Przepraszam, c:geo nie mógł znaleść żadnej skrzynki.</string>
-  <string name="err_detail_cache_find_next">Przepraszam, c:geo nie mógł znaleść następnej skrzynki.</string>
-  <string name="err_detail_cache_forgot">Przepraszam, c:geo zapomniał którą skrzynkę chciałeś obejrzeć.</string>
-  <string name="err_detail_cache_forgot_visit">Przepraszam, c:geo zapomniał którą skrzynkę chciałeś odwiedzić.</string>
+  <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrzynkami.</string>
+  <string name="err_license">Użytkownik nie zaakceptował jeszcze regulaminu Geocaching.com, więc c:geo nie może załadować współrzędnych skrzynek.</string>
+  <string name="err_unpublished">Szukana skrzynka nie została opublikowana.</string>
+  <string name="err_premium_only">Ta skrzynka jest dostępna tylko dla użytkowników Premium serwisu Geocaching.com.</string>
+  <string name="err_detail_open">c:geo nie mógł otworzyć szczegółów skrzynki.</string>
+  <string name="err_detail_cache">c:geo nie mógł pokazać skrzynki. Czy to naprawdę jest skrzynka?</string>
+  <string name="err_detail_cache_find">c:geo nie mógł znaleźć skrzynki.</string>
+  <string name="err_detail_cache_find_some">c:geo nie mógł znaleźć tej skrzynki.</string>
+  <string name="err_detail_cache_find_any">c:geo nie mógł znaleźć żadnej skrzynki.</string>
+  <string name="err_detail_cache_find_next">c:geo nie mógł znaleźć następnych skrzynek.</string>
+  <string name="err_detail_cache_forgot">c:geo zapomniał którą skrzynkę chcesz obejrzeć.</string>
+  <string name="err_detail_cache_forgot_visit">c:geo zapomniał którą skrzynkę odwiedziłeś.</string>
+  <string name="err_detail_google_maps_limit_reached">c:geo nie był w stanie pobrać map statycznych. Może limit map Google został wyczerpany.</string>
   <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęcia spoilera dla tej skrzynki.</string>
-  <string name="err_detail_no_map_static">c:geo nie znalazł mapki statycznej dla tej skrzynki.</string>
-  <string name="err_detail_not_load_map_static">Przepraszam, c:geo nie mógł załadować statycznej mapki.</string>
-  <string name="err_watchlist_still_managing">Nadal pracuję nad listą obserwowanych.</string>
-  <string name="err_watchlist_failed">c:geo nie mógł zmienić listy obserwowanych.</string>
-  <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich aplikacji.</string>
-  <string name="err_auth_initialize">Przepraszam, c:geo nie może zainicjować procesu autoryzacji.</string>
-  <string name="err_auth_process">Proces autoryzacji nieudany.</string>
-  <string name="err_cannot_log_visit">c:geo brakuje informacji aby dodać wpis wizyty. Proszę spróbuj przez szczegóły skrzynki.</string>
-  <string name="err_init_cleared">Przepraszam, c:geo nie może skasować danych logowania.</string>
-  <string name="err_download_fail">Przepraszam, c:geo nie może załadować skrzynki, ponieważ </string>
-  <string name="err_dwld_details_failed">Przepraszam, c:geo nie może załadować szczegółów skrzynki.</string>
-  <string name="err_load_descr_failed">Przepraszam, c:geo nie może załadować opisu.</string>
+  <string name="err_detail_no_map_static">c:geo nie znalazł map statycznych dla tej skrzynki.</string>
+  <string name="err_detail_not_load_map_static">c:geo nie mógł załadować map statycznych.</string>
+  <string name="err_detail_still_working">Wciąż pracuję nad innym zadaniem.</string>
+  <string name="err_watchlist_still_managing">Wciąż pracuję nad listą obserwowanych.</string>
+  <string name="err_watchlist_failed">Zmiana listy obserwowanych zakończona niepowodzeniem.</string>
+  <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich programów.</string>
+  <string name="err_auth_initialize">c:geo nie może rozpocząć autoryzacji.</string>
+  <string name="err_auth_process">Autoryzacja zakończona niepowodzeniem.</string>
+  <string name="err_cannot_log_visit">c:geo nie może dodać wpisu wizyty. Proszę spróbuj przez szczegóły skrzynki.</string>
+  <string name="err_init_cleared">c:geo nie może usunąć danych logowania.</string>
+  <string name="err_download_fail">c:geo nie może załadować skrzynek.</string>
+  <string name="err_dwld_details_failed">c:geo nie może załadować szczegółów skrzynki.</string>
+  <string name="err_load_descr_failed">c:geo nie może załadować opisu.</string>
   <string name="err_location_unknown">c:geo nie zna lokalizacji skrzynki.</string>
   <string name="err_missing_device_name">Proszę podać nazwę urządzenia przed zarejestrowaniem.</string>
 
-  <string name="err_tb_display">"Przepraszam, c:geo nie może pokazać przedmiotów podróżnych. Czy to rzeczywiście jest przedmiot podróżny?</string>
-  <string name="err_tb_details_open">Przepraszam, c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
-  <string name="err_tb_forgot_saw">Przepraszam, c:geo zapomiał jaki przedmiot podróżny widziałeś.</string>
-  <string name="err_tb_find">Przepraszam, c:geo nie może znaleźć przedmiotu podróżnego.</string>
-  <string name="err_tb_find_that">Przepraszam, c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
+  <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
+  <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
+  <string name="err_tb_forgot_saw">c:geo zapomiał, który przedmiot podróżny widziałeś.</string>
+  <string name="err_tb_find">c:geo nie może znaleźć przedmiotu podróżnego.</string>
+  <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
 
-  <string name="err_waypoint_cache_unknown">Przepraszam, c:geo nie wie do jakiej skrzynki chcesz dodać punkt nawigacji.</string>
-  <string name="err_waypoint_add_failed">Przepraszam, c:geo nie może dodać punktu nawigacyjnego.</string>
-  <string name="err_point_unknown_position">Przepraszam, c:geo nie może określić twojej lokalizacji.</string>
+  <string name="err_waypoint_cache_unknown">c:geo nie wie, do której skrzynki chcesz dodać punkt nawigacji.</string>
+  <string name="err_waypoint_add_failed">c:geo nie może dodać punktu nawigacyjnego.</string>
+  <string name="err_point_unknown_position">c:geo nie może określić Twojej lokalizacji.</string>
   <string name="err_point_no_position_given_title">Informacje wymagane</string>
-  <string name="err_point_no_position_given">Wypełnij co najmniej szerokość i długość geograficzną lub odległość i namiar. Można również wypełnić wszystkie cztery pola.</string>
+  <string name="err_point_no_position_given">Wypełnij co najmniej szerokość i długość geograficzną lub odległość i namiar. Możesz również wypełnić wszystkie cztery pola.</string>
   <string name="err_point_curr_position_unavailable">c:geo nadal nie zna aktualnych współrzędnych. Proszę chwilę poczekać…</string>
   <string name="err_point_bear_and_dist_title">Potrzebujesz pomocy?</string>
   <string name="err_point_bear_and_dist">Wypełnij zarówno namiar i odległość. Biorąc kąt od 0 do 360 stopni w stosunku do północy. Odległość z lub bez jednostki.</string>
-  <string name="err_point_location_error">Przepraszam, c:geo nie może rozpoznać lokalizacji punktu nawigacyjnego.</string>
+  <string name="err_point_location_error">c:geo nie może otrzymać lokalizacji punktu nawigacyjnego.</string>
 
-  <string name="err_log_load_data">Przepraszam, c:geo nie może załadować dane wymagane do zalogowania wizyty.</string>
-  <string name="err_log_load_data_again">Przepraszam, c:geo nie może załadować dane wymagane do zalogowania wizyty. Próbuję ponownie.</string>
+  <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
+  <string name="err_log_load_data_again">c:geo nie może załadować danych wymaganych do wpisania wizyty. Próbuję ponownie.</string>
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
-  <string name="err_log_failed_server">Przepraszam, c:geo nie może wysłać wpisu ponieważ serwer nie odpowiada.</string>
-  <string name="err_log_post_failed">Przepraszam, c:geo nie mógł dodać wpisu do dziennika.</string>
+  <string name="err_log_failed_server">c:geo nie może dokonać wpisu ponieważ serwer nie odpowiada.</string>
+  <string name="err_log_post_failed">Wygląda na to, że Twój wpis nie został zapisany. Proszę sprawdź na Geocaching.com.</string>
 
-  <string name="err_search_address_forgot">Przepraszam, c:geo zapomiał jaki adres szukałeś.</string>
-  <string name="err_parse_lat">Przepraszam, c:geo nie może obliczyć szerokości geograficznej.</string>
-  <string name="err_parse_lon">Przepraszam, c:geo nie może obliczyć długości geograficznej.</string>
-  <string name="err_parse_dist">Przepraszam, c:geo nie może obliczyć odległości.</string>
+  <string name="err_search_address_forgot">c:geo zapomniał adresu, którego szukałeś.</string>
+  <string name="err_parse_lat">c:geo nie może obliczyć szerokości geograficznej.</string>
+  <string name="err_parse_lon">c:geo nie może obliczyć długości geograficznej.</string>
+  <string name="err_parse_dist">c:geo nie może obliczyć odległości.</string>
+  <string name="err_parse_lat_lon">c:geo nie może obliczyć szerokości lub długości geograficznej.</string>
 
   <string name="warn_save_nothing">Nie ma nic do zapisania.</string>
-  <string name="warn_no_cache_coord">Nie ma skrzynek z współrzędnymi GPS.</string>
-  <string name="warn_no_coordinates">Nie podane współrzędne.</string>
-  <string name="warn_no_keyword">Nie podane słowo kluczowe.</string>
-  <string name="warn_no_username">Nie podana nazwa użytkownika.</string>
+  <string name="warn_no_cache_coord">Brak skrzynek z współrzędnymi.</string>
+  <string name="warn_no_coordinates">Brak współrzędnych.</string>
+  <string name="warn_no_keyword">Brak słowa kluczowego.</string>
+  <string name="warn_no_username">Brak nazwy użytkownika.</string>
   <string name="warn_search_help_title">Potrzebujesz pomocy?</string>
   <string name="warn_search_help_address">Wpisz adres lub nazwę, np. adres ulicy \"ul. Grunwaldzka, Gdańsk, Polska\", nazwę miasta \"Koszalin\" lub po prostu nazwę jak \"Łazienki Królewskie\".</string>
-  <string name="warn_search_help_gccode">Wpisz kod GC. Na przykład \"GC1VCAZ\".</string>
-  <string name="warn_search_help_keyword">Wpisz jakieś słowo, które może być gdzieś w nazwie skrytki którą chcesz znaleźć.</string>
+  <string name="warn_search_help_gccode">Wpisz kod GC skrzynki. Na przykład \"GC1VCAZ\".</string>
+  <string name="warn_search_help_keyword">Wpisz pełną nazwę skrzynki lub jej część. Na przykład \"Kicia\".</string>
   <string name="warn_search_help_user">Wpisz nazwę użytkownika serwisu Geocaching.com.</string>
   <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
-  <string name="warn_log_text_fill">Proszę wypełnić jakimś tekstem.</string>
+  <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
+  <string name="warn_load_images">c:geo nie był w stanie załadować obrazków.</string>
+  <string name="warn_invalid_mapfile">Wybrany plik mapy nie jest poprawnym plikiem mapsforge wersji 0.3.0.\nMapy offline są niedostępne.</string>
+  <string name="warn_deprecated_mapfile">Używasz przestarzałego pliku mapy w wersji 0.2.4.\nRozważ przejście na wersję mapy 0.3.0.\nNiedługo c:geo przestanie wspierać wersję 0.2.4.</string>
+  <string name="warn_nonexistant_mapfile">Wybrany plik z mapą nie istnieje.\nMapy offline są niedostępne.</string>
+  <string name="warn_rendertheme_missing">Nie znaleziono tytułu mapy.</string>
 
 
-  <string name="info_log_posted">Wpis został dodany.</string>
+  <string name="info_log_posted">Wpis został wysłany.</string>
   <string name="info_log_saved">Wpis został zapisany.</string>
-  <string name="info_log_cleared">Wpis został skasowany.</string>
+  <string name="info_log_cleared">Wpis został usunięty.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
+  
+  <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>  
 
   <!-- location service -->
   <string name="loc_last">Ostatnia pozycja</string>
@@ -195,20 +226,23 @@
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Próba lokalizacji</string>
   <string name="loc_no_addr">Nieznany adres</string>
+  <string name="loc_gps_disabled">GPS wyłączony</string>
 
   <!-- standard menu -->
   <string name="menu_about">O c:geo</string>
-  <string name="menu_helpers">Przydatne Apps</string>
+  <string name="menu_helpers">Przydatne programy</string>
   <string name="menu_settings">Ustawienia</string>
   <string name="menu_history">Historia</string>
   <string name="menu_filter">Filter</string>
+  <string name="menu_scan_geo">Zeskanuj geokod</string>
 
   <!-- main screen -->
-  <string name="live_map_button">Mapka</string>
+  <string name="live_map_button">Mapa Live</string>
   <string name="caches_nearby_button">Najbliższe</string>
   <string name="advanced_search_button">Szukaj</string>
   <string name="stored_caches_button">Zapisane</string>
   <string name="any_button">Wszędzie</string>
+  <string name="unknown_scan">c:geo nie znalazł żadnego geokodu w wynikach skanowania.</string>
 
   <!-- caches -->
   <string name="caches_no_cache">Nie ma skrzynki</string>
