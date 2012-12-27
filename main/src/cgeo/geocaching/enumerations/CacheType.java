@@ -89,4 +89,9 @@ public enum CacheType {
     public boolean isEvent() {
         return CacheType.EVENT == this || CacheType.MEGA_EVENT == this || CacheType.CITO == this || CacheType.LOSTANDFOUND == this;
     }
+
+    @Override
+    public String toString() {
+        return getL10n();
+    }
 }

@@ -13,12 +13,14 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.Version;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,8 +33,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,21 +44,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
 public class cgeo extends AbstractActivity {
 
     private static final String SCAN_INTENT = "com.google.zxing.client.android.SCAN";
-    private static final int MENU_ABOUT = 0;
-    private static final int MENU_HELPERS = 1;
-    private static final int MENU_SETTINGS = 2;
-    private static final int MENU_HISTORY = 3;
-    private static final int MENU_SCAN = 4;
     private static final int SCAN_REQUEST_CODE = 1;
-    private static final int MENU_OPEN_LIST = 100;
-
     public static final int SEARCH_REQUEST_CODE = 2;
 
     private int version = 0;
@@ -320,18 +317,15 @@ public class cgeo extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_SETTINGS, 0, res.getString(R.string.menu_settings)).setIcon(R.drawable.ic_menu_preferences);
-        menu.add(0, MENU_HISTORY, 0, res.getString(R.string.menu_history)).setIcon(R.drawable.ic_menu_recent_history);
-        menu.add(0, MENU_HELPERS, 0, res.getString(R.string.menu_helpers)).setIcon(R.drawable.ic_menu_shopping);
-        menu.add(0, MENU_SCAN, 0, res.getString(R.string.menu_scan_geo)).setIcon(R.drawable.ic_menu_barcode);
-        menu.add(0, MENU_ABOUT, 0, res.getString(R.string.menu_about)).setIcon(R.drawable.ic_menu_info_details);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_options, menu);
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem item = menu.findItem(MENU_SCAN);
+        MenuItem item = menu.findItem(R.id.menu_scan);
         if (item != null) {
             item.setEnabled(isIntentAvailable(SCAN_INTENT));
         }
@@ -350,26 +344,25 @@ public class cgeo extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
-            case MENU_ABOUT:
+            case R.id.menu_about:
                 showAbout(null);
                 return true;
-            case MENU_HELPERS:
+            case R.id.menu_helpers:
                 startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
-            case MENU_SETTINGS:
+            case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
-            case MENU_HISTORY:
+            case R.id.menu_history:
                 cgeocaches.startActivityHistory(this);
                 return true;
-            case MENU_SCAN:
+            case R.id.menu_scan:
                 startScannerApplication();
                 return true;
             default:
-                break;
+                return super.onOptionsItemSelected(item);
         }
 
-        return false;
     }
 
     private void startScannerApplication() {
@@ -406,90 +399,6 @@ public class cgeo extends AbstractActivity {
                 .show();
             }
         }
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        // context menu for offline button
-        if (v.getId() == R.id.search_offline) {
-            menu.setHeaderTitle(res.getString(R.string.list_title));
-            for (final StoredList list : cgData.getLists()) {
-                menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.getTitleAndCount());
-            }
-            return;
-        }
-
-        // standard context menu
-        menu.setHeaderTitle(res.getString(R.string.menu_filter));
-
-        //first add the most used types
-        menu.add(1, 0, 0, CacheType.ALL.getL10n());
-        menu.add(1, 1, 0, CacheType.TRADITIONAL.getL10n());
-        menu.add(1, 2, 0, CacheType.MULTI.getL10n());
-        menu.add(1, 3, 0, CacheType.MYSTERY.getL10n());
-
-        // then add all other cache types sorted alphabetically
-        List<String> sorted = new ArrayList<String>();
-        for (CacheType ct : CacheType.values()) {
-            if (ct == CacheType.ALL ||
-                    ct == CacheType.TRADITIONAL ||
-                    ct == CacheType.MULTI ||
-                    ct == CacheType.MYSTERY) {
-                continue;
-            }
-            sorted.add(ct.getL10n());
-        }
-        Collections.sort(sorted);
-        for (String choice : sorted) {
-            menu.add(1, menu.size(), 0, choice);
-        }
-
-        // mark current filter as checked
-        menu.setGroupCheckable(1, true, true);
-        boolean foundItem = false;
-        int itemCount = menu.size();
-        String typeTitle = Settings.getCacheType().getL10n();
-        for (int i = 0; i < itemCount; i++) {
-            if (menu.getItem(i).getTitle().equals(typeTitle)) {
-                menu.getItem(i).setChecked(true);
-                foundItem = true;
-                break;
-            }
-        }
-        if (!foundItem) {
-            menu.getItem(0).setChecked(true);
-        }
-    }
-
-    @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        final int id = item.getItemId();
-        if (id < 0) {
-            return false;
-        }
-
-        if (id == 0) {
-            Settings.setCacheType(CacheType.ALL);
-            setFilterTitle();
-        } else if (id > MENU_OPEN_LIST) {
-            Settings.saveLastList(id - MENU_OPEN_LIST);
-            cgeocaches.startActivityOffline(this);
-        } else {
-            final String itemTitle = item.getTitle().toString();
-            CacheType cacheType = CacheType.ALL;
-            for (final CacheType ct : CacheType.values()) {
-                if (ct.getL10n().equalsIgnoreCase(itemTitle)) {
-                    cacheType = ct;
-                    break;
-                }
-            }
-            Settings.setCacheType(cacheType);
-            setFilterTitle();
-        }
-
-        return true;
     }
 
     private void setFilterTitle() {
@@ -530,7 +439,22 @@ public class cgeo extends AbstractActivity {
                 cgeoFindByOffline(v);
             }
         });
-        registerForContextMenu(findByOffline);
+        findByOffline.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                new StoredList.UserInterface(cgeo.this).promptForListSelection(R.string.list_title, new RunnableWithArgument<Integer>() {
+
+                    @Override
+                    public void run(Integer selectedListId) {
+                        Settings.saveLastList(selectedListId);
+                        cgeocaches.startActivityOffline(cgeo.this);
+                    }
+                });
+                return true;
+            }
+        });
+        findByOffline.setLongClickable(true);
 
         final View advanced = findViewById(R.id.advanced_button);
         advanced.setClickable(true);
@@ -552,11 +476,18 @@ public class cgeo extends AbstractActivity {
 
         final View filter = findViewById(R.id.filter_button);
         filter.setClickable(true);
-        registerForContextMenu(filter);
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openContextMenu(v);
+                selectGlobalTypeFilter();
+            }
+        });
+        filter.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                selectGlobalTypeFilter();
+                return true;
             }
         });
 
@@ -565,6 +496,56 @@ public class cgeo extends AbstractActivity {
         setFilterTitle();
         checkRestore();
         (new cleanDatabase()).start();
+    }
+
+    protected void selectGlobalTypeFilter() {
+        final List<CacheType> cacheTypes = new ArrayList<CacheType>();
+
+        //first add the most used types
+        cacheTypes.add(CacheType.ALL);
+        cacheTypes.add(CacheType.TRADITIONAL);
+        cacheTypes.add(CacheType.MULTI);
+        cacheTypes.add(CacheType.MYSTERY);
+
+        // then add all other cache types sorted alphabetically
+        List<CacheType> sorted = new ArrayList<CacheType>();
+        sorted.addAll(Arrays.asList(CacheType.values()));
+        sorted.removeAll(cacheTypes);
+
+        Collections.sort(sorted, new Comparator<CacheType>() {
+
+            @Override
+            public int compare(CacheType left, CacheType right) {
+                return left.getL10n().compareToIgnoreCase(right.getL10n());
+            }
+        });
+
+        cacheTypes.addAll(sorted);
+
+        int checkedItem = cacheTypes.indexOf(Settings.getCacheType());
+        if (checkedItem < 0) {
+            checkedItem = 0;
+        }
+
+        String[] items = new String[cacheTypes.size()];
+        for (int i = 0; i < cacheTypes.size(); i++) {
+            items[i] = cacheTypes.get(i).getL10n();
+        }
+
+        Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.menu_filter);
+        builder.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int position) {
+                CacheType cacheType = cacheTypes.get(position);
+                Settings.setCacheType(cacheType);
+                setFilterTitle();
+                dialog.dismiss();
+            }
+
+        });
+        builder.create().show();
     }
 
     void updateCacheCounter() {
