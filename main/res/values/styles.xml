@@ -26,6 +26,15 @@
         <item name="android:capitalize">none</item>
     </style>
 
+    <style name="checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:textColor">?text_color</item>
+    </style>
+
+    <style name="checkbox_full" parent="checkbox">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <!-- own definitions -->
     <!-- actionbar -->
     <style name="action_bar">
