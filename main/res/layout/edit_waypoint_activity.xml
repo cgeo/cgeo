@@ -92,14 +92,12 @@
 
             <CheckBox
                 android:id="@+id/setAsCacheCoordsCheckBox"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/checkbox_full"
                 android:text="@string/waypoint_set_as_cache_coords" />
 
             <CheckBox
                 android:id="@+id/uploadCoordsToWebsiteCheckBox"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/checkbox_full"
                 android:text="@string/waypoint_modify_on_website" />
 
             <Button
