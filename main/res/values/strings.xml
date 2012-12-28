@@ -665,7 +665,6 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_save">Save</string>
   <string name="waypoint_loading">Loading waypoint…</string>
-  <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
   <string name="waypoint_set_as_cache_coords">Set as cache coordinates</string>
   <string name="waypoint_reset_cache_coords">Reset cache coordinates</string>
   <string name="waypoint_reset_cache_coords_on_website">Reset cache coordinates on website</string>

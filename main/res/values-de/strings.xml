@@ -654,7 +654,6 @@
   <string name="waypoint_note">Notiz</string>
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt…</string>
-  <string name="waypoint_unknown_coordinates">Koordinaten unbekannt</string>
   <string name="waypoint_set_as_cache_coords">Als Cache-Koordinaten lokal setzen</string>
   <string name="waypoint_reset_cache_coords">Zurücksetzen</string>
   <string name="waypoint_reset_cache_coords_on_website">Cache-Koordinaten auf Webseite zurücksetzen</string>
