@@ -153,8 +153,9 @@ public abstract class Formatter {
 
     public static String formatWaypointInfo(cgWaypoint waypoint) {
         final List<String> infos = new ArrayList<String>(3);
-        if (WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL.contains(waypoint.getWaypointType())) {
-            infos.add(waypoint.getWaypointType().getL10n());
+        WaypointType waypointType = waypoint.getWaypointType();
+        if (waypointType != WaypointType.OWN && waypointType != null) {
+            infos.add(waypointType.getL10n());
         }
         if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(waypoint.getPrefix())) {
             infos.add(cgeoapplication.getInstance().getString(R.string.waypoint_custom));
