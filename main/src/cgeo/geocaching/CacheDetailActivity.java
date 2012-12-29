@@ -533,10 +533,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(null != cache.getCoords());
-        menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
-        menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
-        menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
+        if (cache != null) {
+            menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(null != cache.getCoords());
+            menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
+            menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
+            menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -650,6 +652,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         reinitializeViewPager();
 
         // rendering done! remove progress popup if any there
+        invalidateOptionsMenuCompatible();
         progress.dismiss();
     }
 

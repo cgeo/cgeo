@@ -95,6 +95,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     setTitle(trackable.getName());
                 }
 
+                invalidateOptionsMenuCompatible();
                 reinitializeViewPager();
 
             } catch (Exception e) {
@@ -257,8 +258,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(MENU_LOG_TOUCH).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
-        menu.findItem(MENU_BROWSER_TRACKABLE).setEnabled(StringUtils.isNotBlank(trackable.getUrl()));
+        if (trackable != null) {
+            menu.findItem(MENU_LOG_TOUCH).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
+            menu.findItem(MENU_BROWSER_TRACKABLE).setEnabled(StringUtils.isNotBlank(trackable.getUrl()));
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 
