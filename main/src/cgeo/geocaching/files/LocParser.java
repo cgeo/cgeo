@@ -140,6 +140,7 @@ public final class LocParser extends FileParser {
             cache.setType(CacheType.UNKNOWN); // type is not given in the LOC file
             cache.setListId(listId);
             cache.setDetailed(true);
+            cache.store(null);
         }
         Log.i("Caches found in .loc file: " + caches.size());
         return caches;
@@ -167,21 +168,25 @@ public final class LocParser extends FileParser {
         }
 
         final Matcher matcherDifficulty = patternDifficulty.matcher(pointString);
-        if (matcherDifficulty.find()) {
-            cache.setDifficulty(Float.parseFloat(matcherDifficulty.group(1).trim()));
-        }
-
-        final Matcher matcherTerrain = patternTerrain.matcher(pointString);
-        if (matcherTerrain.find()) {
-            cache.setTerrain(Float.parseFloat(matcherTerrain.group(1).trim()));
-        }
-
-        final Matcher matcherContainer = patternContainer.matcher(pointString);
-        if (matcherContainer.find()) {
-            final int size = Integer.parseInt(matcherContainer.group(1).trim());
-            if (size >= 1 && size <= 8) {
-                cache.setSize(SIZES[size - 1]);
+        try {
+            if (matcherDifficulty.find()) {
+                cache.setDifficulty(Float.parseFloat(matcherDifficulty.group(1).trim()));
             }
+
+            final Matcher matcherTerrain = patternTerrain.matcher(pointString);
+            if (matcherTerrain.find()) {
+                cache.setTerrain(Float.parseFloat(matcherTerrain.group(1).trim()));
+            }
+
+            final Matcher matcherContainer = patternContainer.matcher(pointString);
+            if (matcherContainer.find()) {
+                final int size = Integer.parseInt(matcherContainer.group(1).trim());
+                if (size >= 1 && size <= 8) {
+                    cache.setSize(SIZES[size - 1]);
+                }
+            }
+        } catch (NumberFormatException e) {
+            Log.e("LocParser.parseCache", e);
         }
 
         return cache;
