@@ -8,6 +8,7 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.BaseUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -69,7 +70,10 @@ public class RegExPerformanceTest extends TestCase {
     public final static Pattern PATTERN_DESCRIPTION = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
 
 
-    public final static MockedCache[] MOCKED_CACHES = { new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J() };
+    public final static List<MockedCache> MOCKED_CACHES;
+    static {
+        MOCKED_CACHES = Arrays.asList(new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J());
+    }
 
     public static void testRegEx() {
         List<String> output = doTheTests(10);

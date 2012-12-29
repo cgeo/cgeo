@@ -50,7 +50,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         DETAILS(R.string.detail),
         LOGS(R.string.cache_logs);
 
-        protected final int resId;
+        private final int resId;
 
         private Page(final int resId) {
             this.resId = resId;

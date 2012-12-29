@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.core.IOUtils;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -242,15 +243,8 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 Log.e("Could not get additional mount points for user content. " +
                         "Proceeding with external storage only (" + extStorage + ")");
             } finally {
-                try {
-                    if (fr != null) {
-                        fr.close();
-                    }
-                    if (br != null) {
-                        br.close();
-                    }
-                } catch (IOException e) {
-                }
+                IOUtils.closeQuietly(fr);
+                IOUtils.closeQuietly(br);
             }
         }
         return storages;

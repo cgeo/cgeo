@@ -62,21 +62,21 @@ public class StaticMapsProvider {
         }
         final HttpResponse httpResponse = Network.getRequest(GOOGLE_STATICMAP_URL, params);
 
-        if (httpResponse != null) {
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                final File file = getMapFile(geocode, prefix, true);
-                if (LocalStorage.saveEntityToFile(httpResponse, file)) {
-                    // Delete image if it has no contents
-                    final long fileSize = file.length();
-                    if (fileSize < MIN_MAP_IMAGE_BYTES) {
-                        file.delete();
-                    }
-                }
-            } else {
-                Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + httpResponse.getStatusLine().getStatusCode());
-            }
-        } else {
+        if (httpResponse == null) {
             Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
+            return;
+        }
+        if (httpResponse.getStatusLine().getStatusCode() != 200) {
+            Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + httpResponse.getStatusLine().getStatusCode());
+            return;
+        }
+        final File file = getMapFile(geocode, prefix, true);
+        if (LocalStorage.saveEntityToFile(httpResponse, file)) {
+            // Delete image if it has no contents
+            final long fileSize = file.length();
+            if (fileSize < MIN_MAP_IMAGE_BYTES) {
+                file.delete();
+            }
         }
     }
 
