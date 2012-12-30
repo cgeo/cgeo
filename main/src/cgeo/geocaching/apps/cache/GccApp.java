@@ -2,8 +2,8 @@ package cgeo.geocaching.apps.cache;
 
 import cgeo.geocaching.R;
 
-class GccApp extends AbstractGeneralApp {
-    GccApp() {
+public class GccApp extends AbstractGeneralApp {
+    public GccApp() {
         super(getString(R.string.cache_menu_gcc), "eisbehr.gcc");
     }
 }

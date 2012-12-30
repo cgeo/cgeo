@@ -4,13 +4,13 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
 
-class WhereYouGoApp extends AbstractGeneralApp {
-    WhereYouGoApp() {
+public class WhereYouGoApp extends AbstractGeneralApp {
+    public WhereYouGoApp() {
         super(getString(R.string.cache_menu_whereyougo), "menion.android.whereyougo");
     }
 
     @Override
     public boolean isEnabled(cgCache cache) {
-        return cache != null && cache.getType() == CacheType.WHERIGO;
+        return cache.getType() == CacheType.WHERIGO;
     }
 }

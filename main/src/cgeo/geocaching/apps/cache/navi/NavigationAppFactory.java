@@ -8,6 +8,9 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.apps.App;
+import cgeo.geocaching.apps.cache.CacheBeaconApp;
+import cgeo.geocaching.apps.cache.GccApp;
+import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -58,7 +61,11 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         /**
          * Google Maps Directions
          */
-        GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13);
+        GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13),
+
+        CACHE_BEACON(new CacheBeaconApp(), 14),
+        GCC(new GccApp(), 15),
+        WHERE_YOU_GO(new WhereYouGoApp(), 16);
 
         NavigationAppsEnum(App app, int id) {
             this.app = app;
@@ -125,7 +132,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             final boolean showInternalMap, final boolean showDefaultNavigation) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
-        builder.setIcon(R.drawable.ic_menu_mapmode);
         final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
         for (NavigationAppsEnum navApp : getInstalledNavigationApps()) {
@@ -156,17 +162,15 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 NavigationAppsEnum selectedItem = adapter.getItem(item);
+                App app = selectedItem.app;
                 if (cache != null) {
-                    CacheNavigationApp cacheApp = (CacheNavigationApp) selectedItem.app;
-                    cacheApp.navigate(activity, cache);
+                    navigateCache(activity, cache, app);
                 }
                 else if (waypoint != null) {
-                    WaypointNavigationApp waypointApp = (WaypointNavigationApp) selectedItem.app;
-                    waypointApp.navigate(activity, waypoint);
+                    navigateWaypoint(activity, waypoint, app);
                 }
                 else {
-                    GeopointNavigationApp geopointApp = (GeopointNavigationApp) selectedItem.app;
-                    geopointApp.navigate(activity, destination);
+                    navigateGeopoint(activity, destination, app);
                 }
             }
         });

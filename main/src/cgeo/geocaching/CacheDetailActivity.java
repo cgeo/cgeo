@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.calendar.ICalendar;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -520,7 +519,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             final SubMenu subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
             NavigationAppFactory.addMenuItems(subMenu, cache);
-            GeneralAppsFactory.addMenuItems(subMenu, cache);
 
             menu.add(0, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(R.drawable.ic_menu_agenda); // add event to calendar
             LoggingUI.addMenuItems(menu, cache);
@@ -570,9 +568,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return false;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
-                    return true;
-                }
-                if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
                     return true;
                 }
                 if (LoggingUI.onMenuItemSelected(item, this, cache)) {
