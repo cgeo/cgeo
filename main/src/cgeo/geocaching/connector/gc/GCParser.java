@@ -1204,6 +1204,8 @@ public abstract class GCParser {
     /**
      * Adds the cache to the favorites of the user.
      *
+     * This must not be called from the UI thread.
+     *
      * @param cache
      *            the cache to add
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
@@ -1234,7 +1236,9 @@ public abstract class GCParser {
     }
 
     /**
-     * Removes the cache from the Favorites
+     * Removes the cache from the favorites.
+     *
+     * This must not be called from the UI thread.
      *
      * @param cache
      *            the cache to remove

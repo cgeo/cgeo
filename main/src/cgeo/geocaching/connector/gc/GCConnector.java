@@ -149,6 +149,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return removed;
     }
 
+    /**
+     * Add a cache to the favorites list.
+     *
+     * This must not be called from the UI thread.
+     *
+     * @param cache the cache to add
+     * @return <code>true</code> if the cache was sucessfully added, <code>false</code> otherwise
+     */
+
     public static boolean addToFavorites(cgCache cache) {
         final boolean added = GCParser.addToFavorites(cache);
         if (added) {
@@ -156,6 +165,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         }
         return added;
     }
+
+    /**
+     * Remove a cache from the favorites list.
+     *
+     * This must not be called from the UI thread.
+     *
+     * @param cache the cache to add
+     * @return <code>true</code> if the cache was sucessfully added, <code>false</code> otherwise
+     */
 
     public static boolean removeFromFavorites(cgCache cache) {
         final boolean removed = GCParser.removeFromFavorites(cache);
