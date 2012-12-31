@@ -1,9 +1,8 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Viewport;
 
 public interface IConnector {
     /**
@@ -73,15 +72,6 @@ public interface IConnector {
     public boolean supportsUserActions();
 
     /**
-     * Search caches by viewport.
-     *
-     * @param viewport
-     * @param tokens
-     * @return
-     */
-    public SearchResult searchByViewport(final Viewport viewport, final String[] tokens);
-
-    /**
      * return true if this is a ZIP file containing a GPX file
      *
      * @param fileName
@@ -115,7 +105,7 @@ public interface IConnector {
 
     /**
      * enable/disable uploading modified coordinates to website
-     * 
+     *
      * @return true, when uploading is possible
      */
     public boolean supportsOwnCoordinates();
@@ -137,4 +127,18 @@ public interface IConnector {
      */
     public boolean deleteModifiedCoordinates(cgCache cache);
 
+    /**
+     * The CacheRealm this cache belongs to
+     *
+     * @return
+     */
+    public CacheRealm getCacheRealm();
+
+    /**
+     * Return true if this connector is activated for online
+     * interaction (download details, do searches, ...)
+     *
+     * @return
+     */
+    public boolean isActivated();
 }

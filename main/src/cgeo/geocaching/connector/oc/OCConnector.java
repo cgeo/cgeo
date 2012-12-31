@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.enumerations.CacheRealm;
 
 import java.util.regex.Pattern;
 
@@ -49,6 +50,11 @@ public class OCConnector extends AbstractConnector {
     @Override
     protected String getCacheUrlPrefix() {
         return "http://" + host + "/viewcache.php?wp=";
+    }
+
+    @Override
+    public CacheRealm getCacheRealm() {
+        return CacheRealm.OC;
     }
 
 }

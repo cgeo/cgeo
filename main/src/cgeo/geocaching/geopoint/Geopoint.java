@@ -23,6 +23,8 @@ public final class Geopoint implements ICoordinates, Parcelable {
     public static final double rad2deg = 180 / Math.PI;
     public static final float erad = 6371.0f;
 
+    public static final Geopoint ZERO = new Geopoint(0.0, 0.0);
+
     private final double latitude;
     private final double longitude;
 

@@ -10,4 +10,5 @@ import cgeo.geocaching.geopoint.Geopoint;
 public interface ISearchByCenter {
     public SearchResult searchByCenter(final Geopoint center);
 
+    public boolean isActivated();
 }
