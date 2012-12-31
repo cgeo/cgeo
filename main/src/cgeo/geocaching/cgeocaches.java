@@ -1710,6 +1710,11 @@ public class cgeocaches extends AbstractListActivity {
             if (cachesFromSearchResult != null) {
                 cacheList.addAll(cachesFromSearchResult);
             }
+            if (adapter != null) {
+                adapter.reFilter();
+            }
+            updateTitle();
+            showFooterMoreCaches();
         }
     };
 
