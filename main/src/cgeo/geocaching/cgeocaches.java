@@ -291,6 +291,9 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 public void run() {
                     cacheList.clear();
                     cacheList.addAll((Set<cgCache>) cachesFromSearchResult);
+                    adapter.reFilter();
+                    updateTitle();
+                    showFooterMoreCaches();
                 }
             });
         }
