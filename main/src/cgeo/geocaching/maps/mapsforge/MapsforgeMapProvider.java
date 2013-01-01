@@ -92,7 +92,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     private static boolean isMapfile024(String mapFileIn) {
-        return org.mapsforge.android.mapsold.MapDatabase.isValidMapFile(mapFileIn);
+        return mapFileIn != null && org.mapsforge.android.mapsold.MapDatabase.isValidMapFile(mapFileIn);
     }
 
     @Override
