@@ -372,6 +372,8 @@ public class cgData {
 
     private static class DbHelper extends SQLiteOpenHelper {
 
+        private static boolean firstRun = true;
+
         DbHelper(Context context) {
             super(context, databasePath().getPath(), null, dbVersion);
         }
@@ -663,6 +665,29 @@ public class cgData {
             }
 
             Log.i("Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
+        }
+
+        @Override
+        public void onOpen(final SQLiteDatabase db) {
+            if (firstRun) {
+                sanityChecks(db);
+                firstRun = false;
+            }
+        }
+
+        /**
+         * Execute sanity checks that should be performed once per application after the database has been
+         * opened.
+         *
+         * @param db the database to perform sanity checks against
+         */
+        private static void sanityChecks(final SQLiteDatabase db) {
+            // Check that the history of searches is well formed as some dates seem to be missing according
+            // to NPE traces.
+            final int staleHistorySearches = db.delete(dbTableSearchDestionationHistory, "date is null", null);
+            if (staleHistorySearches > 0) {
+                Log.w(String.format("cgData.dbHelper.onOpen: removed %d bad search history entries", staleHistorySearches));
+            }
         }
 
         /**
