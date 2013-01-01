@@ -246,10 +246,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         @Override
         public void handleMessage(Message msg) {
             try {
-                if (search != null) {
-                    replaceCacheListFromSearch();
-                    adapter.reFilter();
-                }
+                replaceCacheListFromSearch();
                 setAdapter();
 
                 updateTitle();
@@ -279,17 +276,24 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             adapter.setSelectMode(false);
         }
     };
-    private Set<cgCache> cachesFromSearchResult;
 
     /**
-     * Loads the caches and fills the cachelist
+     * Loads the caches and fills the cachelist according to {@link #search} content.
+     *
+     * If {@link #search} is <code>null</code>, this does nothing.
      */
 
     private void replaceCacheListFromSearch() {
-        if (search!=null) {
-            cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+        if (search != null) {
+            final Set<cgCache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    cacheList.clear();
+                    cacheList.addAll((Set<cgCache>) cachesFromSearchResult);
+                }
+            });
         }
-        refreshCacheListHandler.sendEmptyMessage(0);
     }
 
     protected void updateTitle() {
@@ -1713,22 +1717,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             handler.sendEmptyMessage(listId);
         }
     }
-
-    /**
-     * Handler to refresh the current list of caches. This list is shared with the Adapter and therefore must be updated
-     * in the UI-Thread
-     */
-
-    private Handler refreshCacheListHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            cacheList.clear();
-            if (cachesFromSearchResult != null) {
-                cacheList.addAll(cachesFromSearchResult);
-            }
-        }
-    };
-
 
     private void renameList() {
         new StoredList.UserInterface(this).promptForListRename(listId, new Runnable() {
