@@ -1216,21 +1216,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // favorite points
             Button buttonFavPointAdd = (Button) view.findViewById(R.id.add_to_favpoint);
             Button buttonFavPointRemove = (Button) view.findViewById(R.id.remove_from_favpoint);
-            buttonFavPointAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    GCConnector.addToFavorites(cache);
-                    updateFavPointBox();
-                }
-            });
-            buttonFavPointRemove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    GCConnector.removeFromFavorites(cache);
-                    updateFavPointBox();
-                }
-            });
-
+            buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
+            buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
             updateFavPointBox();
 
             // data license
@@ -1462,6 +1449,65 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 handler.sendEmptyMessage(GCConnector.removeFromWatchlist(cache) ? 1 : -1);
+            }
+        }
+
+        /** Thread to add this cache to the favourite list of the user */
+        private class FavoriteAddThread extends Thread {
+            private final Handler handler;
+
+            public FavoriteAddThread(Handler handler) {
+                this.handler = handler;
+            }
+
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(GCConnector.addToFavorites(cache) ? 1 : -1);
+            }
+        }
+
+        /** Thread to remove this cache to the favourite list of the user */
+        private class FavoriteRemoveThread extends Thread {
+            private final Handler handler;
+
+            public FavoriteRemoveThread(Handler handler) {
+                this.handler = handler;
+            }
+
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(GCConnector.removeFromFavorites(cache) ? 1 : -1);
+            }
+        }
+
+        private class FavoriteUpdateHandler extends Handler {
+            @Override
+            public void handleMessage(Message msg) {
+                updateFavPointBox();
+            }
+        }
+
+        /**
+         * Listener for "add to favourites" button
+         */
+        private class FavoriteAddClickListener extends AbstractWatchlistClickListener {
+            @Override
+            public void onClick(View arg0) {
+                doExecute(R.string.cache_dialog_favourite_add_title,
+                        R.string.cache_dialog_favourite_add_message,
+                        new FavoriteAddThread(new FavoriteUpdateHandler()));
+            }
+        }
+
+        /**
+         * Listener for "remove from favourites" button
+         */
+        private class FavoriteRemoveClickListener extends AbstractWatchlistClickListener {
+            @Override
+            public void onClick(View arg0) {
+                doExecute(R.string.cache_dialog_favourite_remove_title,
+                        R.string.cache_dialog_favourite_remove_message,
+                        new FavoriteRemoveThread(new FavoriteUpdateHandler()));
             }
         }
 
