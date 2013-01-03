@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.content.Context;
 import android.text.format.DateUtils;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,8 +71,8 @@ public abstract class Formatter {
      * @return the formatted string
      */
     public static String formatShortDate(long date) {
-        return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE
-                | DateUtils.FORMAT_NUMERIC_DATE);
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+        return dateFormat.format(date);
     }
 
     /**
