@@ -539,15 +539,19 @@ public abstract class GCParser {
             while (matcherSpoilersInside.find()) {
                 // the original spoiler URL (include .../display/... contains a low-resolution image
                 // if we shorten the URL we get the original-resolution image
-                String url = matcherSpoilersInside.group(1).replace("/display", "");
+                //
+                // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
+                String url = new String(matcherSpoilersInside.group(1).replace("/display", ""));
 
                 String title = null;
                 if (matcherSpoilersInside.group(3) != null) {
-                    title = matcherSpoilersInside.group(3);
+                    // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
+                    title = new String(matcherSpoilersInside.group(3));
                 }
                 String description = null;
                 if (matcherSpoilersInside.group(4) != null) {
-                    description = matcherSpoilersInside.group(4);
+                    // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
+                    description = new String(matcherSpoilersInside.group(4));
                 }
                 cache.addSpoiler(new cgImage(url, title, description));
             }
@@ -575,8 +579,10 @@ public abstract class GCParser {
                         while (matcherInventoryInside.find()) {
                             if (matcherInventoryInside.groupCount() > 0) {
                                 final cgTrackable inventoryItem = new cgTrackable();
-                                inventoryItem.setGuid(matcherInventoryInside.group(1));
-                                inventoryItem.setName(matcherInventoryInside.group(2));
+                                // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
+                                inventoryItem.setGuid(new String(matcherInventoryInside.group(1)));
+                                // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
+                                inventoryItem.setName(new String(matcherInventoryInside.group(2)));
 
                                 cache.getInventory().add(inventoryItem);
                                 cache.setInventoryItems(cache.getInventoryItems() + 1);
