@@ -1100,6 +1100,18 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next release</b>\n\n
+    <b>Bugfixing:</b>\n
+    · Bad watchlist status detection\n
+    · Wrong cache count in cache list\n
+    · Failed filtering in nearby search\n
+    · Crash in history search when used with an old database\n
+    · Crash when using old OSM offline maps\n
+    · Crash when using OSM offline maps without sdcard\n
+    · Error when backing up the phone\n
+    · Problem with some caches in live maps\n
+    · Out of memory issues when loading large caches lists\n
+    · Some hint pictures not shown\n\n
     <b>2012.12.18</b>\n\n
     <b>Bugfixing:</b>\n
     · Found caches not shown correctly for basic members\n
