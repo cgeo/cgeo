@@ -538,6 +538,10 @@
   <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist…</string>
+  <string name="cache_dialog_favourite_add_title">Favourite</string>
+  <string name="cache_dialog_favourite_add_message">Adding cache to your favourites…</string>
+  <string name="cache_dialog_favourite_remove_title">Favourite</string>
+  <string name="cache_dialog_favourite_remove_message">Removing cache from your favourites…</string>
   <string name="cache_menu_navigate">Navigate</string>
   <string name="cache_menu_navigation_drive">Navigation (Driving)</string>
   <string name="cache_menu_navigation_walk">Navigation (Walking)</string>
