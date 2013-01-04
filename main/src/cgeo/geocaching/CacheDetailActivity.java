@@ -83,13 +83,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -2246,10 +2244,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     /**
      * A dialog to allow the user to select reseting coordinates local/remote/both.
      */
-    private class ResetCacheCoordinatesDialog extends AlertDialog implements OnCheckedChangeListener {
+    private class ResetCacheCoordinatesDialog extends AlertDialog {
 
-        final CheckBox uploadOption;
-        final CheckBox resetLocalyOption;
+        final RadioButton resetBoth;
+        final RadioButton resetLocal;
 
         public ResetCacheCoordinatesDialog(final cgCache cache, final cgWaypoint wpt, final Activity activity) {
             super(activity);
@@ -2257,16 +2255,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             View layout = activity.getLayoutInflater().inflate(R.layout.reset_cache_coords_dialog, null);
             setView(layout);
 
-            uploadOption = (CheckBox) layout.findViewById(R.id.upload);
-            resetLocalyOption = (CheckBox) layout.findViewById(R.id.local);
+            resetLocal = (RadioButton) layout.findViewById(R.id.reset_cache_coordinates_local);
+            resetBoth = (RadioButton) layout.findViewById(R.id.reset_cache_coordinates_local_and_remote);
 
             if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-                uploadOption.setChecked(true);
-                uploadOption.setVisibility(View.VISIBLE);
+                resetBoth.setVisibility(View.VISIBLE);
             }
-
-            uploadOption.setOnCheckedChangeListener(this);
-            resetLocalyOption.setOnCheckedChangeListener(this);
 
             layout.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2285,22 +2279,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 remoteFinished = true;
                             }
 
-                            if ((localFinished || !resetLocalyOption.isChecked()) && (remoteFinished || !uploadOption.isChecked())) {
+                            if ((localFinished) && (remoteFinished || !resetBoth.isChecked())) {
                                 p.dismiss();
                                 notifyDataSetChanged();
                             }
                         }
 
                     };
-                    new ResetCoordsThread(cache, h, wpt, resetLocalyOption.isChecked(), uploadOption.isChecked(), p).start();
+                    new ResetCoordsThread(cache, h, wpt, resetLocal.isChecked() || resetBoth.isChecked(), resetBoth.isChecked(), p).start();
                 }
             });
-        }
-
-        @Override
-        public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-            findViewById(R.id.reset).setEnabled(
-                    (uploadOption.isChecked() || resetLocalyOption.isChecked()));
         }
     }
 

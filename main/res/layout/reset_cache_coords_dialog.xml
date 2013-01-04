@@ -10,20 +10,25 @@
         android:layout_height="wrap_content"
         android:text="@string/waypoint_reset_cache_coords_info" />
 
-    <CheckBox
-        android:id="@+id/local"
+    <RadioGroup
+        android:id="@+id/modify_cache_coordinates_group"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/waypoint_localy_reset_cache_coords" />
+        android:layout_height="wrap_content" >
 
-    <CheckBox
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:visibility="gone"
-        android:text="@string/waypoint_reset_cache_coords_on_website" />
+        <RadioButton
+            android:id="@+id/reset_cache_coordinates_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/waypoint_localy_reset_cache_coords" />
+
+        <RadioButton
+            android:id="@+id/reset_cache_coordinates_local_and_remote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/waypoint_reset_local_and_remote_cache_coords"
+            android:visibility="gone" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/reset"
