@@ -1139,8 +1139,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             details.addTerrain(cache);
             details.addRating(cache);
 
-            // favourite count
-            details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+            // favorite count
+            if (cache.getFavoritePoints() > 0) {
+                details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+            }
 
             // own rating
             if (cache.getMyVote() > 0) {
