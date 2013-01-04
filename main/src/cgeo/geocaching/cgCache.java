@@ -273,6 +273,8 @@ public class cgCache implements ICache, IWaypoint {
         if (StringUtils.isBlank(description)) {
             description = other.description;
         }
+        // FIXME: this makes no sense to favor this over the other. 0 should not be a special case here as it is
+        // in the range of acceptable values. This is probably the case at other places (rating, votes, etc.) too.
         if (favoritePoints == 0) {
             favoritePoints = other.favoritePoints;
         }
