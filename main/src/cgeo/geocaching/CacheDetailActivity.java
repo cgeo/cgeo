@@ -1485,7 +1485,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class FavoriteUpdateHandler extends Handler {
             @Override
             public void handleMessage(Message msg) {
-                updateFavPointBox();
+                CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
             }
         }
 
@@ -1591,7 +1591,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (msg.what == -1) {
                     showToast(res.getString(R.string.err_watchlist_failed));
                 } else {
-                    updateWatchlistBox();
+                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
                 }
             }
         }
