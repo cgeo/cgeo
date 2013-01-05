@@ -1114,6 +1114,7 @@
     · Error when scanning cache QR code\n
     · Unspported multi-user mode\n
     · Some hint pictures not shown\n\n
+    · Avoid crash when leaving nearby search before results are returned\n
     <b>2012.12.18</b>\n\n
     <b>Bugfixing:</b>\n
     · Found caches not shown correctly for basic members\n
