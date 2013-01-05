@@ -1485,7 +1485,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class FavoriteUpdateHandler extends Handler {
             @Override
             public void handleMessage(Message msg) {
-                updateFavPointBox();
+                progress.dismiss();
+                if (msg.what == -1) {
+                    showToast(res.getString(R.string.err_favorite_failed));
+                } else {
+                    updateFavPointBox();
+                }
             }
         }
 
