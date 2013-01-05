@@ -1,11 +1,11 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Environment;
@@ -29,6 +29,8 @@ public class LocalStorage {
 
     /** Name of the local private directory used to hold cached information */
     public final static String cache = ".cgeo";
+
+    private static File internalStorageBase;
 
     /**
      * Return the primary storage cache root (external media if mounted, phone otherwise).
@@ -67,7 +69,11 @@ public class LocalStorage {
     }
 
     private static File getInternalStorageBase() {
-        return new File(new File(Environment.getDataDirectory(), "data"), "cgeo.geocaching");
+        if (internalStorageBase == null) {
+            // A race condition will do no harm as the operation is idempotent. No need to synchronize.
+            internalStorageBase = cgeoapplication.getInstance().getApplicationContext().getFilesDir().getParentFile();
+        }
+        return internalStorageBase;
     }
 
     /**
