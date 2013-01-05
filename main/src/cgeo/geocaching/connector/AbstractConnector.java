@@ -1,9 +1,8 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Viewport;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,7 +25,7 @@ public abstract class AbstractConnector implements IConnector {
 
     /**
      * Uploading modified coordinates to website
-     * 
+     *
      * @param cache
      * @param wpt
      * @return success
@@ -62,11 +61,6 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public boolean supportsUserActions() {
         return false;
-    }
-
-    @Override
-    public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
-        return null;
     }
 
     protected static boolean isNumericId(final String string) {
@@ -107,4 +101,20 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     abstract protected String getCacheUrlPrefix();
+
+    /**
+     * {@link IConnector}
+     */
+    @Override
+    public CacheRealm getCacheRealm() {
+        return CacheRealm.OTHER;
+    }
+
+    /**
+     * {@link IConnector}
+     */
+    @Override
+    public boolean isActivated() {
+        return false;
+    }
 }

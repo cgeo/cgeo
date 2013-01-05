@@ -109,6 +109,8 @@ public final class Settings {
     private static final String KEY_PLAIN_LOGS = "plainLogs";
     private static final String KEY_NATIVE_UA = "nativeUa";
     private static final String KEY_MAP_DIRECTORY = "mapDirectory";
+    private static final String KEY_CONNECTOR_OC_ACTIVE = "connectorOCActive";
+    private static final String KEY_CONNECTOR_OC_USER = "connectorOCUser";
 
     private final static int unitsMetric = 1;
 
@@ -300,6 +302,42 @@ public final class Settings {
                     edit.remove(KEY_MEMBER_STATUS);
                 } else {
                     edit.putString(KEY_MEMBER_STATUS, memberStatus);
+                }
+            }
+        });
+    }
+
+    public static boolean isOCConnectorActive() {
+        return sharedPrefs.getBoolean(KEY_CONNECTOR_OC_ACTIVE, false);
+    }
+
+    public static boolean setOCConnectorActive(final boolean isActive) {
+        return editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_CONNECTOR_OC_ACTIVE, isActive);
+            }
+        });
+    }
+
+    public static String getOCConnectorUserName() {
+        String ocConnectorUser = sharedPrefs.getString(KEY_CONNECTOR_OC_USER, null);
+        if (StringUtils.isBlank(ocConnectorUser)) {
+            return StringUtils.EMPTY;
+        }
+        return ocConnectorUser;
+    }
+
+    public static boolean setOCConnectorUserName(final String userName) {
+        return editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                if (StringUtils.isBlank(userName)) {
+                    edit.remove(KEY_CONNECTOR_OC_USER);
+                } else {
+                    edit.putString(KEY_CONNECTOR_OC_USER, userName);
                 }
             }
         });

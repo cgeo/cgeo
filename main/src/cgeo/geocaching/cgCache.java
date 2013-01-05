@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -545,6 +546,10 @@ public class cgCache implements ICache, IWaypoint {
 
     public boolean supportsOwnCoordinates() {
         return getConnector().supportsOwnCoordinates();
+    }
+
+    public CacheRealm getCacheRealm() {
+        return getConnector().getCacheRealm();
     }
 
     @Override
