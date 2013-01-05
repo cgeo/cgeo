@@ -165,7 +165,8 @@
   <string name="err_load_descr_failed">c:geo can\'t load description.</string>
   <string name="err_location_unknown">c:geo doesn\'t know location of cache.</string>
   <string name="err_missing_device_name">Please enter a device name before registering.</string>
-
+  <string name="err_favorite_failed">Changing favorite status failed.</string>
+  
   <string name="err_tb_display">c:geo can\'t display trackable you want. Is it really a trackable?</string>
   <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
   <string name="err_tb_forgot_saw">c:geo forgot which trackable you saw.</string>

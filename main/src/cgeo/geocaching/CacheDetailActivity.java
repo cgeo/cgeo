@@ -1485,7 +1485,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class FavoriteUpdateHandler extends Handler {
             @Override
             public void handleMessage(Message msg) {
-                CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
+                progress.dismiss();
+                if (msg.what == -1) {
+                    showToast(res.getString(R.string.err_favorite_failed));
+                } else {
+                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
+                }
             }
         }
 
