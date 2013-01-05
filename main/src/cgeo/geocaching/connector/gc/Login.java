@@ -10,6 +10,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -26,7 +27,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Matcher;
 
 public abstract class Login {
 
@@ -349,7 +349,7 @@ public abstract class Login {
         }
 
         int count = 1;
-        final Matcher matcherViewstateCount = GCConstants.PATTERN_VIEWSTATEFIELDCOUNT.matcher(page);
+        final MatcherWrapper matcherViewstateCount = new MatcherWrapper(GCConstants.PATTERN_VIEWSTATEFIELDCOUNT, page);
         if (matcherViewstateCount.find()) {
             try {
                 count = Integer.parseInt(matcherViewstateCount.group(1));
@@ -361,7 +361,7 @@ public abstract class Login {
         String[] viewstates = new String[count];
 
         // Get the viewstates
-        final Matcher matcherViewstates = GCConstants.PATTERN_VIEWSTATES.matcher(page);
+        final MatcherWrapper matcherViewstates = new MatcherWrapper(GCConstants.PATTERN_VIEWSTATES, page);
         while (matcherViewstates.find()) {
             String sno = matcherViewstates.group(1); // number of viewstate
             int no;

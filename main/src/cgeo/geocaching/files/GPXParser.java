@@ -19,6 +19,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
@@ -42,7 +43,6 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class GPXParser extends FileParser {
@@ -209,7 +209,7 @@ public abstract class GPXParser extends FileParser {
                 return null;
             }
             // cut out baseName
-            final Matcher m = BASENAME_PATTERN.matcher(stringName);
+            final MatcherWrapper m = new MatcherWrapper(BASENAME_PATTERN, stringName);
             if (!m.matches()) {
                 return null;
             }
@@ -235,7 +235,7 @@ public abstract class GPXParser extends FileParser {
     static Date parseDate(String inputUntrimmed) throws ParseException {
         String input = inputUntrimmed.trim();
         // remove milliseconds to reduce number of needed patterns
-        final Matcher matcher = PATTERN_MILLISECONDS.matcher(input);
+        final MatcherWrapper matcher = new MatcherWrapper(PATTERN_MILLISECONDS, input);
         input = matcher.replaceFirst("");
         if (input.contains("Z")) {
             return formatSimpleZ.parse(input);
@@ -432,14 +432,14 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end(String url) {
-                final Matcher matcher = patternGuid.matcher(url);
+                final MatcherWrapper matcher = new MatcherWrapper(patternGuid, url);
                 if (matcher.matches()) {
                     final String guid = matcher.group(1);
                     if (StringUtils.isNotBlank(guid)) {
                         cache.setGuid(guid);
                     }
                 }
-                final Matcher matcherCode = patternUrlGeocode.matcher(url);
+                final MatcherWrapper matcherCode = new MatcherWrapper(patternUrlGeocode, url);
                 if (matcherCode.matches()) {
                     String geocode = matcherCode.group(1);
                     cache.setGeocode(geocode);
@@ -836,7 +836,7 @@ public abstract class GPXParser extends FileParser {
             return;
         }
         final String trimmed = input.trim();
-        final Matcher matcherGeocode = patternGeocode.matcher(trimmed);
+        final MatcherWrapper matcherGeocode = new MatcherWrapper(patternGeocode, trimmed);
         if (matcherGeocode.find()) {
             final String geocode = matcherGeocode.group(1);
             // a geocode should not be part of a word

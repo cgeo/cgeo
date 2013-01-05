@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
-import java.util.regex.Matcher;
+import cgeo.geocaching.utils.MatcherWrapper;
+
 import java.util.regex.Pattern;
 
 
@@ -35,7 +36,7 @@ public final class UTFGridPosition {
      * @return
      */
     static UTFGridPosition fromString(String key) {
-        final Matcher matcher = UTFGridPosition.PATTERN_JSON_KEY.matcher(key);
+        final MatcherWrapper matcher = new MatcherWrapper(UTFGridPosition.PATTERN_JSON_KEY, key);
         try {
             if (matcher.matches()) {
                 final int x = Integer.parseInt(matcher.group(1));

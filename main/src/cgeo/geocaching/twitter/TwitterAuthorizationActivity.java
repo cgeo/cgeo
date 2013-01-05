@@ -7,6 +7,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
@@ -24,7 +25,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TwitterAuthorizationActivity extends AbstractActivity {
@@ -142,11 +142,11 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
 
 
             if (StringUtils.isNotBlank(line)) {
-                final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
+                final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
                 if (paramsMatcher1.find()) {
                     OAtoken = paramsMatcher1.group(1);
                 }
-                final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
+                final MatcherWrapper paramsMatcher2 = new MatcherWrapper(paramsPattern2, line);
                 if (paramsMatcher2.find()) {
                     OAtokenSecret = paramsMatcher2.group(1);
                 }
@@ -189,11 +189,11 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
             OAtoken = "";
             OAtokenSecret = "";
 
-            final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
+            final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
             if (paramsMatcher1.find()) {
                 OAtoken = paramsMatcher1.group(1);
             }
-            final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
+            final MatcherWrapper paramsMatcher2 = new MatcherWrapper(paramsPattern2, line);
             if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
                 OAtokenSecret = paramsMatcher2.group(1);
             }

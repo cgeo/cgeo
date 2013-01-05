@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.utils.DateUtils;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class LogEntry {
@@ -107,7 +107,7 @@ public final class LogEntry {
      */
     public String getDisplayText() {
         if (Settings.getPlainLogs()) {
-            Matcher matcher = PATTERN_REMOVE_COLORS.matcher(log);
+            MatcherWrapper matcher = new MatcherWrapper(PATTERN_REMOVE_COLORS, log);
             return matcher.replaceAll("");
         }
         return log;

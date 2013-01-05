@@ -1,9 +1,10 @@
 package cgeo.geocaching.geopoint;
 
 
+import cgeo.geocaching.utils.MatcherWrapper;
+
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -105,7 +106,7 @@ class GeopointParser {
     {
 
         final Pattern pattern = LatLon.LAT == latlon ? patternLat : patternLon;
-        final Matcher matcher = pattern.matcher(text);
+        final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
 
         if (matcher.find()) {
             final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;

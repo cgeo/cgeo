@@ -34,6 +34,7 @@ import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
@@ -102,7 +103,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -1926,7 +1926,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 backcolor = color.darker_gray;
             }
             else {
-                Matcher matcher = DARK_COLOR_PATTERN.matcher(text);
+                MatcherWrapper matcher = new MatcherWrapper(DARK_COLOR_PATTERN, text);
                 if (matcher.find()) {
                     backcolor = color.darker_gray;
                 }

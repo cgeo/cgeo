@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class LocParser extends FileParser {
@@ -148,12 +148,12 @@ public final class LocParser extends FileParser {
 
     public static cgCache parseCache(final String pointString) {
         final cgCache cache = new cgCache();
-        final Matcher matcherGeocode = patternGeocode.matcher(pointString);
+        final MatcherWrapper matcherGeocode = new MatcherWrapper(patternGeocode, pointString);
         if (matcherGeocode.find()) {
             cache.setGeocode(matcherGeocode.group(1).trim());
         }
 
-        final Matcher matcherName = patternName.matcher(pointString);
+        final MatcherWrapper matcherName = new MatcherWrapper(patternName, pointString);
         if (matcherName.find()) {
             final String name = matcherName.group(1).trim();
             cache.setName(StringUtils.substringBeforeLast(name, " by ").trim());
@@ -161,24 +161,24 @@ public final class LocParser extends FileParser {
             cache.setName(cache.getGeocode());
         }
 
-        final Matcher matcherLat = patternLat.matcher(pointString);
-        final Matcher matcherLon = patternLon.matcher(pointString);
+        final MatcherWrapper matcherLat = new MatcherWrapper(patternLat, pointString);
+        final MatcherWrapper matcherLon = new MatcherWrapper(patternLon, pointString);
         if (matcherLat.find() && matcherLon.find()) {
             cache.setCoords(parsePoint(matcherLat.group(1).trim(), matcherLon.group(1).trim()));
         }
 
-        final Matcher matcherDifficulty = patternDifficulty.matcher(pointString);
+        final MatcherWrapper matcherDifficulty = new MatcherWrapper(patternDifficulty, pointString);
         try {
             if (matcherDifficulty.find()) {
                 cache.setDifficulty(Float.parseFloat(matcherDifficulty.group(1).trim()));
             }
 
-            final Matcher matcherTerrain = patternTerrain.matcher(pointString);
+            final MatcherWrapper matcherTerrain = new MatcherWrapper(patternTerrain, pointString);
             if (matcherTerrain.find()) {
                 cache.setTerrain(Float.parseFloat(matcherTerrain.group(1).trim()));
             }
 
-            final Matcher matcherContainer = patternContainer.matcher(pointString);
+            final MatcherWrapper matcherContainer = new MatcherWrapper(patternContainer, pointString);
             if (matcherContainer.find()) {
                 final int size = Integer.parseInt(matcherContainer.group(1).trim());
                 if (size >= 1 && size <= 8) {

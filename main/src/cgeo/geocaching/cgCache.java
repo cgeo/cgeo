@@ -27,6 +27,7 @@ import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -47,7 +48,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -757,7 +757,7 @@ public class cgCache implements ICache, IWaypoint {
     @Override
     public String getNameForSorting() {
         if (null == nameForSorting) {
-            final Matcher matcher = NUMBER_PATTERN.matcher(name);
+            final MatcherWrapper matcher = new MatcherWrapper(NUMBER_PATTERN, name);
             if (matcher.find()) {
                 nameForSorting = name.replace(matcher.group(), StringUtils.leftPad(matcher.group(), 6, '0'));
             }
@@ -1315,7 +1315,7 @@ public class cgCache implements ICache, IWaypoint {
             final Pattern coordPattern = Pattern.compile("\\b[nNsS]{1}\\s*\\d"); // begin of coordinates
             int count = 1;
             String note = getPersonalNote();
-            Matcher matcher = coordPattern.matcher(note);
+            MatcherWrapper matcher = new MatcherWrapper(coordPattern, note);
             while (matcher.find()) {
                 try {
                     final Geopoint point = new Geopoint(note.substring(matcher.start()));
@@ -1332,7 +1332,7 @@ public class cgCache implements ICache, IWaypoint {
                 }
 
                 note = note.substring(matcher.start() + 1);
-                matcher = coordPattern.matcher(note);
+                matcher = new MatcherWrapper(coordPattern, note);
             }
         } catch (Exception e) {
             Log.e("cgCache.parseWaypointsFromNote: " + e.toString());
@@ -1574,7 +1574,7 @@ public class cgCache implements ICache, IWaypoint {
         }
         // 12:34
         final Pattern time = Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b");
-        final Matcher matcher = time.matcher(getDescription());
+        final MatcherWrapper matcher = new MatcherWrapper(time, getDescription());
         while (matcher.find()) {
             try {
                 final int hours = Integer.valueOf(matcher.group(1));
@@ -1590,7 +1590,7 @@ public class cgCache implements ICache, IWaypoint {
         final String hourLocalized = cgeoapplication.getInstance().getString(R.string.cache_time_full_hours);
         if (StringUtils.isNotBlank(hourLocalized)) {
             final Pattern fullHours = Pattern.compile("\\b(\\d{1,2})\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE);
-            final Matcher matcherHours = fullHours.matcher(getDescription());
+            final MatcherWrapper matcherHours = new MatcherWrapper(fullHours, getDescription());
             if (matcherHours.find()) {
                 try {
                     final int hours = Integer.valueOf(matcherHours.group(1));

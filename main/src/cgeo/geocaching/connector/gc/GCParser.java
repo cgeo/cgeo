@@ -31,6 +31,7 @@ import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -54,7 +55,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.regex.Matcher;
 
 public abstract class GCParser {
     private final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
@@ -128,7 +128,7 @@ public abstract class GCParser {
             }
 
             try {
-                final Matcher matcherGuidAndDisabled = GCConstants.PATTERN_SEARCH_GUIDANDDISABLED.matcher(row);
+                final MatcherWrapper matcherGuidAndDisabled = new MatcherWrapper(GCConstants.PATTERN_SEARCH_GUIDANDDISABLED, row);
 
                 while (matcherGuidAndDisabled.find()) {
                     if (matcherGuidAndDisabled.groupCount() > 0) {
@@ -169,7 +169,7 @@ public abstract class GCParser {
             }
 
             // cache inventory
-            final Matcher matcherTbs = GCConstants.PATTERN_SEARCH_TRACKABLES.matcher(row);
+            final MatcherWrapper matcherTbs = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES, row);
             String inventoryPre = null;
             while (matcherTbs.find()) {
                 if (matcherTbs.groupCount() > 0) {
@@ -183,7 +183,7 @@ public abstract class GCParser {
             }
 
             if (StringUtils.isNotBlank(inventoryPre)) {
-                final Matcher matcherTbsInside = GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE.matcher(inventoryPre);
+                final MatcherWrapper matcherTbsInside = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE, inventoryPre);
                 while (matcherTbsInside.find()) {
                     if (matcherTbsInside.groupCount() == 2 &&
                             matcherTbsInside.group(2) != null &&
@@ -500,7 +500,7 @@ public abstract class GCParser {
         try {
             final String attributesPre = BaseUtils.getMatch(page, GCConstants.PATTERN_ATTRIBUTES, true, null);
             if (null != attributesPre) {
-                final Matcher matcherAttributesInside = GCConstants.PATTERN_ATTRIBUTESINSIDE.matcher(attributesPre);
+                final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
 
                 final ArrayList<String> attributes = new ArrayList<String>();
                 while (matcherAttributesInside.find()) {
@@ -534,24 +534,20 @@ public abstract class GCParser {
             }
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
 
-            final Matcher matcherSpoilersInside = GCConstants.PATTERN_SPOILER_IMAGE.matcher(page);
+            final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, page);
 
             while (matcherSpoilersInside.find()) {
                 // the original spoiler URL (include .../display/... contains a low-resolution image
                 // if we shorten the URL we get the original-resolution image
-                //
-                // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
-                String url = new String(matcherSpoilersInside.group(1).replace("/display", ""));
+                String url = matcherSpoilersInside.group(1).replace("/display", "");
 
                 String title = null;
                 if (matcherSpoilersInside.group(3) != null) {
-                    // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
-                    title = new String(matcherSpoilersInside.group(3));
+                    title = matcherSpoilersInside.group(3);
                 }
                 String description = null;
                 if (matcherSpoilersInside.group(4) != null) {
-                    // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
-                    description = new String(matcherSpoilersInside.group(4));
+                    description = matcherSpoilersInside.group(4);
                 }
                 cache.addSpoiler(new cgImage(url, title, description));
             }
@@ -564,7 +560,7 @@ public abstract class GCParser {
         try {
             cache.setInventoryItems(0);
 
-            final Matcher matcherInventory = GCConstants.PATTERN_INVENTORY.matcher(page);
+            final MatcherWrapper matcherInventory = new MatcherWrapper(GCConstants.PATTERN_INVENTORY, page);
             if (matcherInventory.find()) {
                 if (cache.getInventory() == null) {
                     cache.setInventory(new ArrayList<cgTrackable>());
@@ -574,15 +570,13 @@ public abstract class GCParser {
                     final String inventoryPre = matcherInventory.group(2);
 
                     if (StringUtils.isNotBlank(inventoryPre)) {
-                        final Matcher matcherInventoryInside = GCConstants.PATTERN_INVENTORYINSIDE.matcher(inventoryPre);
+                        final MatcherWrapper matcherInventoryInside = new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE, inventoryPre);
 
                         while (matcherInventoryInside.find()) {
                             if (matcherInventoryInside.groupCount() > 0) {
                                 final cgTrackable inventoryItem = new cgTrackable();
-                                // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
-                                inventoryItem.setGuid(new String(matcherInventoryInside.group(1)));
-                                // Create a new string to avoid referencing the whole page though the matcher (@see BaseUtils.getMatch())
-                                inventoryItem.setName(new String(matcherInventoryInside.group(2)));
+                                inventoryItem.setGuid(matcherInventoryInside.group(1));
+                                inventoryItem.setName(matcherInventoryInside.group(2));
 
                                 cache.getInventory().add(inventoryItem);
                                 cache.setInventoryItems(cache.getInventoryItems() + 1);
@@ -597,14 +591,12 @@ public abstract class GCParser {
         }
 
         // cache logs counts
-        try
-        {
+        try {
             final String countlogs = BaseUtils.getMatch(page, GCConstants.PATTERN_COUNTLOGS, true, null);
             if (null != countlogs) {
-                final Matcher matcherLog = GCConstants.PATTERN_COUNTLOG.matcher(countlogs);
+                final MatcherWrapper matcherLog = new MatcherWrapper(GCConstants.PATTERN_COUNTLOG, countlogs);
 
-                while (matcherLog.find())
-                {
+                while (matcherLog.find()) {
                     String typeStr = matcherLog.group(1);
                     String countStr = matcherLog.group(2).replaceAll("[.,]", "");
 
@@ -615,8 +607,7 @@ public abstract class GCParser {
                     }
                 }
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             // failed to parse logs
             Log.w("GCParser.parseCache: Failed to parse cache log count");
         }
@@ -1003,7 +994,7 @@ public abstract class GCParser {
 
         // maintenance, archived needs to be confirmed
 
-        final Matcher matcher = GCConstants.PATTERN_MAINTENANCE.matcher(page);
+        final MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_MAINTENANCE, page);
 
         try {
             if (matcher.find() && matcher.groupCount() > 0) {
@@ -1052,7 +1043,7 @@ public abstract class GCParser {
 
         try {
 
-            final Matcher matcherOk = GCConstants.PATTERN_OK1.matcher(page);
+            final MatcherWrapper matcherOk = new MatcherWrapper(GCConstants.PATTERN_OK1, page);
             if (matcherOk.find()) {
                 Log.i("Log successfully posted to cache #" + cacheid);
 
@@ -1121,7 +1112,7 @@ public abstract class GCParser {
 
         try {
 
-            final Matcher matcherOk = GCConstants.PATTERN_OK2.matcher(page);
+            final MatcherWrapper matcherOk = new MatcherWrapper(GCConstants.PATTERN_OK2, page);
             if (matcherOk.find()) {
                 Log.i("Log successfully posted to trackable #" + trackingCode);
                 return StatusCode.NO_ERROR;
@@ -1292,7 +1283,7 @@ public abstract class GCParser {
 
         // trackable owner name
         try {
-            final Matcher matcherOwner = GCConstants.PATTERN_TRACKABLE_OWNER.matcher(page);
+            final MatcherWrapper matcherOwner = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER, page);
             if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
                 trackable.setOwnerGuid(matcherOwner.group(1));
                 trackable.setOwner(matcherOwner.group(2).trim());
@@ -1307,14 +1298,14 @@ public abstract class GCParser {
 
         // trackable spotted
         try {
-            final Matcher matcherSpottedCache = GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE.matcher(page);
+            final MatcherWrapper matcherSpottedCache = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE, page);
             if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
                 trackable.setSpottedGuid(matcherSpottedCache.group(1));
                 trackable.setSpottedName(matcherSpottedCache.group(2).trim());
                 trackable.setSpottedType(cgTrackable.SPOTTED_CACHE);
             }
 
-            final Matcher matcherSpottedUser = GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER.matcher(page);
+            final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
             if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
                 trackable.setSpottedGuid(matcherSpottedUser.group(1));
                 trackable.setSpottedName(matcherSpottedUser.group(2).trim());
@@ -1357,7 +1348,7 @@ public abstract class GCParser {
 
         // trackable details & image
         try {
-            final Matcher matcherDetailsImage = GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE.matcher(page);
+            final MatcherWrapper matcherDetailsImage = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE, page);
             if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
                 final String image = StringUtils.trim(matcherDetailsImage.group(3));
                 final String details = StringUtils.trim(matcherDetailsImage.group(4));
@@ -1376,7 +1367,7 @@ public abstract class GCParser {
 
         // trackable logs
         try {
-            final Matcher matcherLogs = GCConstants.PATTERN_TRACKABLE_LOG.matcher(page);
+            final MatcherWrapper matcherLogs = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG, page);
             /*
              * 1. Type (image)
              * 2. Date
@@ -1406,7 +1397,7 @@ public abstract class GCParser {
 
                 // Apply the pattern for images in a trackable log entry against each full log (group(0))
                 final String logEntry = matcherLogs.group(0);
-                final Matcher matcherLogImages = GCConstants.PATTERN_TRACKABLE_LOG_IMAGES.matcher(logEntry);
+                final MatcherWrapper matcherLogImages = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG_IMAGES, logEntry);
                 /*
                  * 1. Image URL
                  * 2. Image title
@@ -1456,7 +1447,7 @@ public abstract class GCParser {
         String rawResponse;
 
         if (!getDataFromPage) {
-            final Matcher userTokenMatcher = GCConstants.PATTERN_USERTOKEN.matcher(page);
+            final MatcherWrapper userTokenMatcher = new MatcherWrapper(GCConstants.PATTERN_USERTOKEN, page);
             if (!userTokenMatcher.find()) {
                 Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
                 return null;
@@ -1555,7 +1546,7 @@ public abstract class GCParser {
 
         final List<LogType> types = new ArrayList<LogType>();
 
-        final Matcher typeBoxMatcher = GCConstants.PATTERN_TYPEBOX.matcher(page);
+        final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
         String typesText = null;
         if (typeBoxMatcher.find()) {
             if (typeBoxMatcher.groupCount() > 0) {
@@ -1565,7 +1556,7 @@ public abstract class GCParser {
 
         if (typesText != null) {
 
-            final Matcher typeMatcher = GCConstants.PATTERN_TYPE2.matcher(typesText);
+            final MatcherWrapper typeMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPE2, typesText);
             while (typeMatcher.find()) {
                 if (typeMatcher.groupCount() > 1) {
                     try {
@@ -1603,7 +1594,7 @@ public abstract class GCParser {
 
         final List<TrackableLog> trackableLogs = new ArrayList<TrackableLog>();
 
-        final Matcher trackableMatcher = GCConstants.PATTERN_TRACKABLE.matcher(page);
+        final MatcherWrapper trackableMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE, page);
         while (trackableMatcher.find()) {
             if (trackableMatcher.groupCount() > 0) {
 

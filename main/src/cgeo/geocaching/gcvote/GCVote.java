@@ -6,6 +6,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class GCVote {
@@ -98,7 +98,7 @@ public final class GCVote {
                 return null;
             }
 
-            final Matcher matcherVoteElement = patternVoteElement.matcher(page);
+            final MatcherWrapper matcherVoteElement = new MatcherWrapper(patternVoteElement, page);
             while (matcherVoteElement.find()) {
                 String voteData = matcherVoteElement.group(1);
                 if (voteData == null) {
@@ -107,7 +107,7 @@ public final class GCVote {
 
                 String guid = null;
                 try {
-                    final Matcher matcherGuid = patternGuid.matcher(voteData);
+                    final MatcherWrapper matcherGuid = new MatcherWrapper(patternGuid, voteData);
                     if (matcherGuid.find()) {
                         if (matcherGuid.groupCount() > 0) {
                             guid = matcherGuid.group(1);
@@ -122,7 +122,7 @@ public final class GCVote {
 
                 boolean loggedIn = false;
                 try {
-                    final Matcher matcherLoggedIn = patternLogIn.matcher(page);
+                    final MatcherWrapper matcherLoggedIn = new MatcherWrapper(patternLogIn, page);
                     if (matcherLoggedIn.find()) {
                         if (matcherLoggedIn.groupCount() > 0) {
                             if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
@@ -136,7 +136,7 @@ public final class GCVote {
 
                 float rating = 0;
                 try {
-                    final Matcher matcherRating = patternRating.matcher(voteData);
+                    final MatcherWrapper matcherRating = new MatcherWrapper(patternRating, voteData);
                     if (matcherRating.find()) {
                         rating = Float.parseFloat(matcherRating.group(1));
                     }
@@ -149,7 +149,7 @@ public final class GCVote {
 
                 int votes = -1;
                 try {
-                    final Matcher matcherVotes = patternVotes.matcher(voteData);
+                    final MatcherWrapper matcherVotes = new MatcherWrapper(patternVotes, voteData);
                     if (matcherVotes.find()) {
                         votes = Integer.parseInt(matcherVotes.group(1));
                     }
@@ -163,7 +163,7 @@ public final class GCVote {
                 float myVote = 0;
                 if (loggedIn) {
                     try {
-                        final Matcher matcherVote = patternVote.matcher(voteData);
+                        final MatcherWrapper matcherVote = new MatcherWrapper(patternVote, voteData);
                         if (matcherVote.find()) {
                             myVote = Float.parseFloat(matcherVote.group(1));
                         }

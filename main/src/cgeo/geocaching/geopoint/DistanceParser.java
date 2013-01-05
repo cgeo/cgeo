@@ -1,9 +1,10 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.geocaching.utils.MatcherWrapper;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class DistanceParser {
@@ -22,7 +23,7 @@ public final class DistanceParser {
      *             if the given number is invalid
      */
     public static float parseDistance(String distanceText, final boolean metricUnit) {
-        final Matcher matcher = pattern.matcher(distanceText);
+        final MatcherWrapper matcher = new MatcherWrapper(pattern, distanceText);
 
         if (!matcher.find()) {
             throw new NumberFormatException(distanceText);
