@@ -7,6 +7,8 @@ import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -18,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort {
 
     private static final String HTTP_COORD_INFO = "http://coord.info/";
     private static final Pattern gpxZipFilePattern = Pattern.compile("\\d{7,}(_.+)?\\.zip", Pattern.CASE_INSENSITIVE);
@@ -215,5 +217,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     protected String getCacheUrlPrefix() {
         return HTTP_COORD_INFO;
+    }
+
+    @Override
+    public CacheRealm getCacheRealm() {
+        return CacheRealm.GC;
+    }
+
+    @Override
+    public boolean isActivated() {
+        return true;
     }
 }

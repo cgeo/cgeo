@@ -34,4 +34,10 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         }
         return new SearchResult(cache);
     }
+
+    @Override
+    public boolean isActivated() {
+        // currently always active, but only for details download
+        return true;
+    }
 }
