@@ -53,6 +53,7 @@
   <string name="wp_pkg">Parkeringsplats</string>
   <string name="wp_trailhead">Stigstart</string>
   <string name="wp_waypoint">Referensplats</string>
+  <string name="wp_original">Ursprungliga koordinater</string>
 
   <!-- logs -->
   <string name="log_found">Hittad</string>
@@ -72,9 +73,12 @@
   <string name="log_maintenance_needed">Behöver underhåll</string>
   <string name="log_update">Uppdaterade koordinaterna</string>
   <string name="log_archived">Arkiverad</string>
+  <string name="log_unarchived">Återöppnad</string>
   <string name="log_needs_archived">Behöver arkiveras</string>
   <string name="log_discovered">Såg den</string>
   <string name="log_reviewer">Meddelande från reviewern</string>
+  <string name="log_retractlisting">Återkallad</string>
+  <string name="log_marked_missing">Markerad saknad</string>
   <string name="log_tb_nothing">Gör inget</string>
   <string name="log_tb_visit">Besök</string>
   <string name="log_tb_drop">Lämna här</string>
@@ -161,6 +165,7 @@
   <string name="err_load_descr_failed">Tyvärr kan c:geo inte ladda beskrivningen.</string>
   <string name="err_location_unknown">c:geo har inte koordinaterna för cachen.</string>
   <string name="err_missing_device_name">Vänligen ange ett namn för din enhet innan registering.</string>
+  <string name="err_favorite_failed">Misslyckades att ändra favoritstatus.</string>
 
   <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
@@ -285,6 +290,7 @@
   <string name="caches_drop_stored">Ta bort sparade</string>
   <string name="caches_drop_progress">Tar bort cacher</string>
   <string name="caches_drop_all_and_list">Ta bort listan och dess cacher</string>
+  <string name="caches_delete_events">Ta bort gamla event</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
   <string name="caches_refresh_all">Uppdatera alla</string>
   <string name="caches_move_selected">Flytta valda</string>
@@ -337,6 +343,10 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_oc">opencaching.de</string>
+  <string name="init_oc_activate">Aktivera opencaching.de i live-kartor och sökningar</string>
+  <string name="init_oc_username_description">Ange användarnamn till opencaching.de för att kunna markera dina hittade cacher.</string>
+  <string name="init_oc_username">Ange ditt användarnamn</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Användare</string>
@@ -401,7 +411,7 @@
   <string name="init_backup_last">Tillgänglig kopia från</string>
   <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
   <string name="init_mapsources">Kartkällor</string>
-  <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer).</string>
+  <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer). Ytterligare valbara teman stödjs också.</string>
   <string name="init_mapsource_select">Välj kartkälla</string>
   <string name="init_map_directory_description">Katalog med offline kartor</string>
   <string name="init_gpx_exportdir">GPX-exportkatalog</string>
@@ -429,7 +439,7 @@
   <string name="init_dbmove_failed">Misslyckades att flytta databasen</string>
   <string name="init_plain_logs">Visa loggar utan färger</string>
   <string name="init_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
-  <string name="init_rendertheme_folder">Välj katalog för egna offline kartteman</string>
+  <string name="init_rendertheme_folder">Katalog för offline kartteman (valfritt)</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
@@ -531,7 +541,14 @@
   <string name="cache_dialog_watchlist_add_message">Lägger till cachen till din watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist…</string>
+  <string name="cache_dialog_favourite_add_title">Favorit</string>
+  <string name="cache_dialog_favourite_add_message">Lägger till cachen till dina favoriter…</string>
+  <string name="cache_dialog_favourite_remove_title">Favorit</string>
+  <string name="cache_dialog_favourite_remove_message">Tar bort cachen från dina favoriter…</string>
   <string name="cache_menu_navigate">Navigera</string>
+  <string name="cache_menu_navigation_drive">Navigering (med bil)</string>
+  <string name="cache_menu_navigation_walk">Navigering (till fots)</string>
+  <string name="cache_menu_maps_directions">Google Maps Navigering</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Visa på karta</string>
   <string name="cache_menu_map_static">Sparade kartor</string>
@@ -544,6 +561,8 @@
   <string name="cache_menu_visit_offline">Logga besök offline</string>
   <string name="cache_menu_spoilers">Spoiler bilder</string>
   <string name="cache_menu_around">Cacher i närheten</string>
+  <string name="cache_menu_set_as_cache_coords">Sätt som cachens koordinater</string>
+  <string name="cache_menu_upload_wpt_to_gc_com">Sätt som cachens koordinater och ladda upp waypoint till Geocaching.com</string>
   <string name="cache_menu_event">Lägg till i kalender</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_share">Skicka länk</string>
@@ -558,6 +577,7 @@
   <string name="cache_status_archived">Arkiverad</string>
   <string name="cache_status_disabled">Inaktiverad</string>
   <string name="cache_status_premium">Enbart för Premium medlemmar</string>
+  <string name="cache_status_not_premium">Tillgänglig för alla medlemmar</string>
   <string name="cache_geocode">GC-kod</string>
   <string name="cache_name">Namn</string>
   <string name="cache_type">Typ</string>
@@ -616,7 +636,7 @@
   <string name="gpx_import_title_caches_imported">Resultat</string>
   <string name="gpx_import_title_caches_import_failed">Importeringen misslyckades</string>
   <string name="gpx_import_error_io">Kan inte läsa filen</string>
-  <string name="gpx_import_error_parser">Filens format är felaktigt</string>
+  <string name="gpx_import_error_parser">Felaktigt filformat</string>
   <string name="gpx_import_error_unexpected">Oväntat fel</string>
   <string name="gpx_import_confirm">Vill du importera GPX filen till c:geo?</string>
   <string name="gpx_import_canceled">Importeringen av GPX filen avbröts</string>
@@ -651,6 +671,21 @@
   <string name="waypoint_note">Kommentar</string>
   <string name="waypoint_save">Spara</string>
   <string name="waypoint_loading">Laddar punkt…</string>
+  <string name="waypoint_set_as_cache_coords">Ange som cachens koordinater i c:geo</string>
+  <string name="waypoint_reset_cache_coords">Återställ cachens koordinater</string>
+  <string name="waypoint_reset_cache_coords_on_website">Återställ koordinaterna på hemsidan</string>
+  <string name="waypoint_coordinates_has_been_reset_on_website">Cachens koordinater har återställts på hemsidan.</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Återställer cachens koordinater på hemsidan…</string>
+  <string name="waypoint_reset_cache_coords_info">Återställningsalternativ</string>
+  <string name="waypoint_reset">Återställ</string>
+  <string name="waypoint_localy_reset_cache_coords">Återställ koordinaterna i c:geo</string>
+  <string name="waypoint_modify_on_website">Ange som cachens koordinater på hemsidan</string>
+  <string name="waypoint_coordinates_couldnt_be_modified_on_website">Hemsidan kan inte hantera att ändra cachens koordinater.</string>
+  <string name="waypoint_coordinates_upload_error">Ett fel inträffade när koordinaterna skulle ändras på hemsidan.</string>
+  <string name="waypoint_coordinates_uploading_to_website">Laddar upp koordinaterna %s till hemsidan.</string>
+  <string name="waypoint_coordinates_reseting_on_website">Återställer till ursprungliga koordinaterna på hemsidan.</string>
+  <string name="waypoint_coordinates_has_been_modified_on_website">Cachens koordinater på hemsidan har ändrats till: %s.</string>
+  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Cachens koordinater har ändrats i c:geo till: %s.</string>
   <string name="waypoint_done">Klar</string>
   <string name="waypoint_duplicate">Duplicera</string>
   <string name="waypoint_copy_of">Kopia av</string>
@@ -674,7 +709,7 @@
   <string name="map_trail_hide">Dölj spår</string>
   <string name="map_circles_show">Visa cirklar</string>
   <string name="map_circles_hide">Dölj cirklar</string>
-  <string name="map_theme_builtin">Inbyggt karttema</string>
+  <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Välj karttema</string>
   <string name="map_live_enable">Aktivera live</string>
   <string name="map_live_disable">Inaktivera live</string>
