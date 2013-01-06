@@ -79,51 +79,59 @@ public class OC11XMLParser {
     }
 
     private static CacheSize getCacheSize(final String sizeId) {
-        int size = Integer.parseInt(sizeId);
+        try {
+            int size = Integer.parseInt(sizeId);
 
-        switch (size) {
-            case 1:
-                return CacheSize.OTHER;
-            case 2:
-                return CacheSize.MICRO;
-            case 3:
-                return CacheSize.SMALL;
-            case 4:
-                return CacheSize.REGULAR;
-            case 5:
-            case 6:
-                return CacheSize.LARGE;
-            case 8:
-                return CacheSize.VIRTUAL;
-            default:
-                break;
+            switch (size) {
+                case 1:
+                    return CacheSize.OTHER;
+                case 2:
+                    return CacheSize.MICRO;
+                case 3:
+                    return CacheSize.SMALL;
+                case 4:
+                    return CacheSize.REGULAR;
+                case 5:
+                case 6:
+                    return CacheSize.LARGE;
+                case 8:
+                    return CacheSize.VIRTUAL;
+                default:
+                    break;
+            }
+        } catch (NumberFormatException e) {
+            Log.e("OC11XMLParser.getCacheSize", e);
         }
         return CacheSize.NOT_CHOSEN;
     }
 
     private static CacheType getCacheType(final String typeId) {
-        int type = Integer.parseInt(typeId);
-        switch (type) {
-            case 1: // Other/unbekannter Cachetyp
-                return CacheType.UNKNOWN;
-            case 2: // Trad./normaler Cache
-                return CacheType.TRADITIONAL;
-            case 3: // Multi/Multicache
-                return CacheType.MULTI;
-            case 4: // Virt./virtueller Cache
-                return CacheType.VIRTUAL;
-            case 5: // ICam./Webcam-Cache
-                return CacheType.WEBCAM;
-            case 6: // Event/Event-Cache
-                return CacheType.EVENT;
-            case 7: // Quiz/Rätselcache
-                return CacheType.MYSTERY;
-            case 8: // Math/Mathe-/Physikcache
-                return CacheType.MYSTERY;
-            case 9: // Moving/beweglicher Cache
-                return CacheType.UNKNOWN;
-            case 10: // Driv./Drive-In
-                return CacheType.TRADITIONAL;
+        try {
+            int type = Integer.parseInt(typeId);
+            switch (type) {
+                case 1: // Other/unbekannter Cachetyp
+                    return CacheType.UNKNOWN;
+                case 2: // Trad./normaler Cache
+                    return CacheType.TRADITIONAL;
+                case 3: // Multi/Multicache
+                    return CacheType.MULTI;
+                case 4: // Virt./virtueller Cache
+                    return CacheType.VIRTUAL;
+                case 5: // ICam./Webcam-Cache
+                    return CacheType.WEBCAM;
+                case 6: // Event/Event-Cache
+                    return CacheType.EVENT;
+                case 7: // Quiz/Rätselcache
+                    return CacheType.MYSTERY;
+                case 8: // Math/Mathe-/Physikcache
+                    return CacheType.MYSTERY;
+                case 9: // Moving/beweglicher Cache
+                    return CacheType.UNKNOWN;
+                case 10: // Driv./Drive-In
+                    return CacheType.TRADITIONAL;
+            }
+        } catch (NumberFormatException e) {
+            Log.e("OC11XMLParser.getCacheType", e);
         }
         return CacheType.UNKNOWN;
     }
@@ -140,8 +148,9 @@ public class OC11XMLParser {
                 return LogType.ATTENDED;
             case 8:
                 return LogType.WILL_ATTEND;
+            default:
+                return LogType.UNKNOWN;
         }
-        return LogType.UNKNOWN;
     }
 
     private static void setCacheStatus(final int statusId, final cgCache cache) {
@@ -328,7 +337,11 @@ public class OC11XMLParser {
             @Override
             public void end(String body) {
                 final String content = body.trim();
-                cacheHolder.cache.setDifficulty(Float.valueOf(content));
+                try {
+                    cacheHolder.cache.setDifficulty(Float.valueOf(content));
+                } catch (NumberFormatException e) {
+                    Log.e("OC11XMLParser: unknown difficulty " + content, e);
+                }
             }
         });
 
@@ -338,7 +351,11 @@ public class OC11XMLParser {
             @Override
             public void end(String body) {
                 final String content = body.trim();
-                cacheHolder.cache.setTerrain(Float.valueOf(content));
+                try {
+                    cacheHolder.cache.setTerrain(Float.valueOf(content));
+                } catch (NumberFormatException e) {
+                    Log.e("OC11XMLParser: unknown terrain " + content, e);
+                }
             }
         });
 
@@ -444,7 +461,7 @@ public class OC11XMLParser {
                 if (cache != null && logHolder.logEntry.type != LogType.UNKNOWN) {
                     cache.getLogs().prepend(logHolder.logEntry);
                     if (logHolder.logEntry.type == LogType.FOUND_IT
-                            && StringUtils.equals(logHolder.logEntry.author, Settings.getOCConnectorUserName())) {
+                            && StringUtils.equalsIgnoreCase(logHolder.logEntry.author, Settings.getOCConnectorUserName())) {
                         cache.setFound(true);
                         cache.setVisitedDate(logHolder.logEntry.date);
                     }
@@ -468,8 +485,8 @@ public class OC11XMLParser {
             public void end(String body) {
                 try {
                     logHolder.logEntry.date = parseDayDate(body).getTime();
-                } catch (Exception e) {
-                    Log.w("Failed to parse log date: " + e.toString());
+                } catch (NullPointerException e) {
+                    Log.w("Failed to parse log date", e);
                 }
             }
         });
@@ -480,8 +497,13 @@ public class OC11XMLParser {
             @Override
             public void start(Attributes attrs) {
                 if (attrs.getIndex("id") > -1) {
-                    final int typeId = Integer.parseInt(attrs.getValue("id"));
-                    logHolder.logEntry.type = getLogType(typeId);
+                    final String id = attrs.getValue("id");
+                    try {
+                        final int typeId = Integer.parseInt(id);
+                        logHolder.logEntry.type = getLogType(typeId);
+                    } catch (NumberFormatException e) {
+                        Log.e("OC11XMLParser, unknown logtype " + id, e);
+                    }
                 }
             }
         });
