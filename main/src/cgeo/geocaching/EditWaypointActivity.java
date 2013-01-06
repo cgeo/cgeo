@@ -30,8 +30,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public class EditWaypointActivity extends AbstractActivity {
                         ((EditText) findViewById(R.id.note)).setText(StringUtils.trimToEmpty(waypoint.getNote()));
                     }
                     cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
-                    setCoordsCheckBoxesVisibility(ConnectorFactory.getConnector(geocode), cache);
+                    setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
                 }
 
                 if (own) {
@@ -161,7 +161,7 @@ public class EditWaypointActivity extends AbstractActivity {
         if (geocode != null) {
             cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             IConnector con = ConnectorFactory.getConnector(geocode);
-            setCoordsCheckBoxesVisibility(con, cache);
+            setCoordsModificationVisibility(con, cache);
         }
 
         initializeDistanceUnitSelector();
@@ -169,15 +169,13 @@ public class EditWaypointActivity extends AbstractActivity {
         disableSuggestions((EditText) findViewById(R.id.distance));
     }
 
-    private void setCoordsCheckBoxesVisibility(IConnector con, cgCache cache) {
-        final View cacheCoords = findViewById(R.id.setAsCacheCoordsCheckBox);
-        final View uploadWebsite = findViewById(R.id.uploadCoordsToWebsiteCheckBox);
+    private void setCoordsModificationVisibility(IConnector con, cgCache cache) {
         if (cache != null && (cache.getType() == CacheType.MYSTERY || cache.getType() == CacheType.MULTI)) {
-            cacheCoords.setVisibility(View.VISIBLE);
-            uploadWebsite.setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
+            findViewById(R.id.modify_cache_coordinates_group).setVisibility(View.VISIBLE);
+            findViewById(R.id.modify_cache_coordinates_local_and_remote).setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
         } else {
-            cacheCoords.setVisibility(View.GONE);
-            uploadWebsite.setVisibility(View.GONE);
+            findViewById(R.id.modify_cache_coordinates_group).setVisibility(View.GONE);
+            findViewById(R.id.modify_cache_coordinates_local_and_remote).setVisibility(View.GONE);
         }
     }
 
@@ -365,8 +363,7 @@ public class EditWaypointActivity extends AbstractActivity {
             final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString() + distanceUnit;
             final String latText = ((Button) findViewById(R.id.buttonLatitude)).getText().toString();
             final String lonText = ((Button) findViewById(R.id.buttonLongitude)).getText().toString();
-            final CheckBox setAsCacheCoordsCheckBox = (CheckBox) findViewById(R.id.setAsCacheCoordsCheckBox);
-            final CheckBox uploadCoordsToWebsiteCheckBox = (CheckBox) findViewById(R.id.uploadCoordsToWebsiteCheckBox);
+
             if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
                     && StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
                 helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
@@ -434,7 +431,9 @@ public class EditWaypointActivity extends AbstractActivity {
                 if (Settings.isStoreOfflineWpMaps()) {
                     StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
                 }
-                if (setAsCacheCoordsCheckBox.isChecked()) {
+                final RadioButton modifyLocal = (RadioButton) findViewById(R.id.modify_cache_coordinates_local);
+                final RadioButton modifyBoth = (RadioButton) findViewById(R.id.modify_cache_coordinates_local_and_remote);
+                if (modifyLocal.isChecked() || modifyBoth.isChecked()) {
                     if (!cache.hasUserModifiedCoords()) {
                         final cgWaypoint origWaypoint = new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
                         origWaypoint.setCoords(cache.getCoords());
@@ -444,7 +443,7 @@ public class EditWaypointActivity extends AbstractActivity {
                     cache.setCoords(waypoint.getCoords());
                     cgData.saveChangedCache(cache);
                 }
-                if (uploadCoordsToWebsiteCheckBox.isChecked() && waypoint.getCoords() != null) {
+                if (modifyBoth.isChecked() && waypoint.getCoords() != null) {
                     if (cache.supportsOwnCoordinates()) {
                         final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_coordinates_uploading_to_website, waypoint.getCoords()), true);
                         Handler finishHandler = new Handler() {
