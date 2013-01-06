@@ -411,7 +411,6 @@
   <string name="cache_offline_time_days">dny</string>
   <string name="cache_premium">placený účet</string>
   <string name="cache_attributes">atributy</string>
-  <string name="cache_attributes_no_icons">(obnov cache ke zobrazení atributů)</string>
   <string name="cache_inventory">Inventář</string>
   <string name="cache_log_offline">offline log</string>
   <string name="cache_log_images_loading">Načítám obrázky z logů…</string>

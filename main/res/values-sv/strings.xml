@@ -482,7 +482,6 @@
   <string name="cache_offline_time_days">dagar sedan</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attribut</string>
-  <string name="cache_attributes_no_icons">(uppdatera cachen för att visa bilder för attribut)</string>
   <string name="cache_inventory">Innehåll</string>
   <string name="cache_log_offline">Offline logg</string>
   <string name="cache_log_images_loading">Laddar loggbilder…</string>

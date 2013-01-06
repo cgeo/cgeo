@@ -905,9 +905,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
         private boolean attributesShowAsIcons = true; // default: show icons
         /**
-         * True, if the cache was imported with an older version of c:geo.
-         * These older versions parsed the attribute description from the tooltip in the web
-         * page and put them into the DB. No icons can be matched for these.
+         * If the cache is from a non GC source, it might be without icons. Disable switching in those cases.
          */
         private boolean noAttributeIconsFound = false;
         private int attributeBoxMaxWidth;
@@ -1074,10 +1072,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     buffer.append('\n');
                 }
                 buffer.append(attributeName);
-            }
-
-            if (noAttributeIconsFound) {
-                buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
             }
 
             attribView.setText(buffer);

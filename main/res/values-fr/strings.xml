@@ -468,7 +468,6 @@
   <string name="cache_offline_time_days">jours</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributs</string>
-  <string name="cache_attributes_no_icons">(recharger la cache pour voir les icônes des attributs)</string>
   <string name="cache_inventory">Inventaire</string>
   <string name="cache_log_offline">Visite hors-ligne</string>
   <string name="cache_log_images_loading">Chargement de l\'image de la visite…</string>

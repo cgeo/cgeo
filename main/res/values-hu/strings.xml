@@ -483,7 +483,6 @@
   <string name="cache_offline_time_days">nappal ezelőtt</string>
   <string name="cache_premium">Prémium</string>
   <string name="cache_attributes">Tulajdonságok</string>
-  <string name="cache_attributes_no_icons">(frissítsd a ládát, hogy lásd a tulajdonság ikonokat)</string>
   <string name="cache_inventory">Tárgyak</string>
   <string name="cache_log_offline">Offline bejegyzés</string>
   <string name="cache_log_images_loading">Bejegyzés kép betöltése…</string>

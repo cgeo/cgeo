@@ -476,7 +476,6 @@
   <string name="cache_offline_time_days">日前</string>
   <string name="cache_premium">プレミアム会員</string>
   <string name="cache_attributes">属性</string>
-  <string name="cache_attributes_no_icons">(属性アイコンを表示するためにはキャッシュ情報を更新してください)</string>
   <string name="cache_inventory">目録</string>
   <string name="cache_log_offline">オフラインログ</string>
   <string name="cache_log_images_loading">添付画像をロード中…</string>
