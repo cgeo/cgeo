@@ -1632,4 +1632,11 @@ public class cgCache implements ICache, IWaypoint {
         }
         return result;
     }
+
+    public void setDetailedUpdatedNow() {
+        final long now = System.currentTimeMillis();
+        setUpdated(now);
+        setDetailedUpdate(now);
+        setDetailed(true);
+    }
 }

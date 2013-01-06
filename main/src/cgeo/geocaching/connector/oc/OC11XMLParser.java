@@ -216,6 +216,7 @@ public class OC11XMLParser {
                         && !cache.isArchived()
                         && caches.size() < CACHE_PARSE_LIMIT) {
                     cache.setCoords(coords);
+                    cache.setDetailedUpdatedNow();
                     caches.put(cache.getCacheId(), cache);
                 }
             }

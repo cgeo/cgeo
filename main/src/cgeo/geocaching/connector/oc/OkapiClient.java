@@ -167,9 +167,7 @@ final public class OkapiClient {
             cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
             cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
 
-            cache.setUpdated(System.currentTimeMillis());
-            cache.setDetailedUpdate(cache.getUpdated());
-            cache.setDetailed(true);
+            cache.setDetailedUpdatedNow();
             // save full detailed caches
             cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         } catch (JSONException e) {

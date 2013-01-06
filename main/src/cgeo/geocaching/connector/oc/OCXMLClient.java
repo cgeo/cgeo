@@ -13,12 +13,12 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.zip.GZIPInputStream;
 
@@ -42,18 +42,16 @@ public class OCXMLClient {
             Collection<cgCache> caches = OC11XMLParser.parseCaches(new GZIPInputStream(data));
             if (caches.iterator().hasNext()) {
                 cgCache cache = caches.iterator().next();
-                cache.setDetailed(true);
                 cgData.saveCache(cache, LoadFlags.SAVE_ALL);
                 return cache;
             }
             return null;
         } catch (IOException e) {
-            Log.e("Error parsing cache '" + geoCode + "': " + e.toString());
+            Log.e("Error parsing cache '" + geoCode + "'", e);
             return null;
         }
     }
 
-    @SuppressWarnings("unchecked")
     public static Collection<cgCache> getCachesAround(final Geopoint center, final double distance) {
         try {
             final Parameters params = getOCXmlQueryParameters(false, false);
@@ -63,13 +61,13 @@ public class OCXMLClient {
             final InputStream data = request(ConnectorFactory.getConnector("OCXXX"), SERVICE_CACHE, params);
 
             if (data == null) {
-                return CollectionUtils.EMPTY_COLLECTION;
+                return Collections.emptyList();
             }
 
             return OC11XMLParser.parseCaches(new GZIPInputStream(data));
         } catch (IOException e) {
-            Log.e("Error parsing nearby search result: " + e.toString());
-            return CollectionUtils.EMPTY_COLLECTION;
+            Log.e("Error parsing nearby search result", e);
+            return Collections.emptyList();
         }
     }
 

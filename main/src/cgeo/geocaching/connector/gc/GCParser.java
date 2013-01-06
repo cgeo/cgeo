@@ -306,9 +306,7 @@ public abstract class GCParser {
         if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
             final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             getExtraOnlineInfo(cache, page, handler);
-            cache.setUpdated(System.currentTimeMillis());
-            cache.setDetailedUpdate(cache.getUpdated());
-            cache.setDetailed(true);
+            cache.setDetailedUpdatedNow();
             if (CancellableHandler.isCancelled(handler)) {
                 return null;
             }
