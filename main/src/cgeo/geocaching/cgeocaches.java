@@ -280,7 +280,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     };
 
     /**
-     * Loads the caches and fills the cachelist according to {@link #search} content.
+     * Loads the caches and fills the {@link #cacheList} according to {@link #search} content.
      *
      * If {@link #search} is <code>null</code>, this does nothing.
      */
@@ -292,7 +292,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 @Override
                 public void run() {
                     cacheList.clear();
-                    cacheList.addAll((Set<cgCache>) cachesFromSearchResult);
+                    cacheList.addAll(cachesFromSearchResult);
                     adapter.reFilter();
                     updateTitle();
                     showFooterMoreCaches();
@@ -791,7 +791,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
             item = menu.findItem(MENU_MOVE_TO_LIST);
             if (item != null) {
-                item.setVisible(multipleLists && !isEmpty);
+                item.setVisible(!isEmpty);
             }
 
             setMenuItemLabel(menu, MENU_REMOVE_FROM_HISTORY, R.string.cache_remove_from_history, R.string.cache_clear_history);
@@ -967,10 +967,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
         if (cache.isOffline()) {
             menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
-            final List<StoredList> cacheLists = cgData.getLists();
-            if (cacheLists.size() > 1) {
-                menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
-            }
+            menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             menu.add(0, MENU_EXPORT, 0, res.getString(R.string.export));
         }
         else {
