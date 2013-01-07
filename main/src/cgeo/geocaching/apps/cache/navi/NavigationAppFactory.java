@@ -2,8 +2,8 @@ package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractAppFactory;
@@ -96,7 +96,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * Default way to handle selection of navigation tool.<br />
      * A dialog is created for tool selection and the selected tool is started afterwards.
      * <p />
-     * Delegates to {@link #showNavigationMenu(Activity, cgCache, cgWaypoint, Geopoint, boolean, boolean)} with
+     * Delegates to {@link #showNavigationMenu(Activity, cgCache, cgeo.geocaching.Waypoint, Geopoint, boolean, boolean)} with
      * <code>showInternalMap = true</code> and <code>showDefaultNavigation = false</code>
      *
      * @param activity
@@ -105,7 +105,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param destination
      */
     public static void showNavigationMenu(final Activity activity,
-            final cgCache cache, final cgWaypoint waypoint, final Geopoint destination) {
+            final cgCache cache, final Waypoint waypoint, final Geopoint destination) {
         showNavigationMenu(activity, cache, waypoint, destination, true, false);
     }
 
@@ -125,10 +125,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param showDefaultNavigation
      *            should be <code>false</code> by default
      *
-     * @see #showNavigationMenu(Activity, cgCache, cgWaypoint, Geopoint)
+     * @see #showNavigationMenu(Activity, cgCache, cgeo.geocaching.Waypoint, Geopoint)
      */
     public static void showNavigationMenu(final Activity activity,
-            final cgCache cache, final cgWaypoint waypoint, final Geopoint destination,
+            final cgCache cache, final Waypoint waypoint, final Geopoint destination,
             final boolean showInternalMap, final boolean showDefaultNavigation) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
@@ -219,7 +219,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * Use {@link #onMenuItemSelected(MenuItem, Activity, cgCache)} on
      * selection event to start the selected navigation tool.
      *
-     * <b>Only use this way if {@link #showNavigationMenu(Activity, cgCache, cgWaypoint, Geopoint, boolean, boolean)} is
+     * <b>Only use this way if {@link #showNavigationMenu(Activity, cgCache, cgeo.geocaching.Waypoint, Geopoint, boolean, boolean)} is
      * not suitable for the given usecase.</b>
      *
      * @param menu
@@ -235,7 +235,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         }
     }
 
-    public static void addMenuItems(final Menu menu, final cgWaypoint waypoint) {
+    public static void addMenuItems(final Menu menu, final Waypoint waypoint) {
         for (NavigationAppsEnum navApp : getInstalledNavigationApps()) {
             if (navApp.app instanceof WaypointNavigationApp) {
                 WaypointNavigationApp waypointApp = (WaypointNavigationApp) navApp.app;
@@ -267,13 +267,13 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, Activity activity, cgWaypoint waypoint) {
+    public static boolean onMenuItemSelected(final MenuItem item, Activity activity, Waypoint waypoint) {
         final App menuItem = getAppFromMenuItem(item);
         navigateWaypoint(activity, waypoint, menuItem);
         return menuItem != null;
     }
 
-    private static void navigateWaypoint(Activity activity, cgWaypoint waypoint, App app) {
+    private static void navigateWaypoint(Activity activity, Waypoint waypoint, App app) {
         if (app instanceof WaypointNavigationApp) {
             WaypointNavigationApp waypointApp = (WaypointNavigationApp) app;
             waypointApp.navigate(activity, waypoint);
@@ -327,7 +327,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param activity
      * @param waypoint
      */
-    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, cgWaypoint waypoint) {
+    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, Waypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {
             ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_location_unknown));
             return;

@@ -4,9 +4,9 @@ import cgeo.geocaching.ILogable;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StaticMapsActivity;
 import cgeo.geocaching.StaticMapsProvider;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
 
@@ -29,7 +29,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         return false;
     }
 
-    protected static boolean hasStaticMap(cgWaypoint waypoint) {
+    protected static boolean hasStaticMap(Waypoint waypoint) {
         if (waypoint==null) {
             return false;
         }
@@ -41,7 +41,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         return false;
     }
 
-    protected static boolean invokeStaticMaps(final Activity activity, final cgCache cache, final cgWaypoint waypoint, final boolean download) {
+    protected static boolean invokeStaticMaps(final Activity activity, final cgCache cache, final Waypoint waypoint, final boolean download) {
         final ILogable logable = cache != null && cache.getListId() != 0 ? cache : waypoint;
         // If the cache is not stored for offline, cache seems to be null and waypoint may be null too
         if (logable==null || logable.getGeocode()==null ) {

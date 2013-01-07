@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
+public class Waypoint implements IWaypoint, Comparable<Waypoint> {
 
     public static final String PREFIX_OWN = "OWN";
     private static final int ORDER_UNDEFINED = -2;
@@ -32,7 +32,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
      * @param name
      * @param type
      */
-    public cgWaypoint(final String name, final WaypointType type, final boolean own) {
+    public Waypoint(final String name, final WaypointType type, final boolean own) {
         this.name = name;
         this.waypointType = type;
         this.own = own;
@@ -43,7 +43,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
      *
      * @param other
      */
-    public cgWaypoint(final cgWaypoint other) {
+    public Waypoint(final Waypoint other) {
         merge(other);
         this.waypointType = other.waypointType;
         id = 0;
@@ -53,7 +53,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(waypointType.markerId), null, null, null);
     }
 
-    public void merge(final cgWaypoint old) {
+    public void merge(final Waypoint old) {
         if (StringUtils.isBlank(prefix)) {
             setPrefix(old.prefix);
         }
@@ -79,15 +79,15 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         }
     }
 
-    public static void mergeWayPoints(List<cgWaypoint> newPoints,
-            List<cgWaypoint> oldPoints, boolean forceMerge) {
+    public static void mergeWayPoints(List<Waypoint> newPoints,
+            List<Waypoint> oldPoints, boolean forceMerge) {
         // copy user modified details of the waypoints
         if (newPoints != null && oldPoints != null) {
-            for (cgWaypoint old : oldPoints) {
+            for (Waypoint old : oldPoints) {
                 if (old != null) {
                     boolean merged = false;
                     if (StringUtils.isNotEmpty(old.name)) {
-                        for (cgWaypoint waypoint : newPoints) {
+                        for (Waypoint waypoint : newPoints) {
                             if (waypoint != null && waypoint.name != null) {
                                 if (old.name.equalsIgnoreCase(waypoint.name)) {
                                     waypoint.merge(old);
@@ -142,7 +142,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     @Override
-    public int compareTo(cgWaypoint other) {
+    public int compareTo(Waypoint other) {
         return order() - other.order();
     }
 

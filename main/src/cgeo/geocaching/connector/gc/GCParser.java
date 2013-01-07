@@ -5,11 +5,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.TrackableLog;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgTrackable;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -611,14 +611,14 @@ public abstract class GCParser {
         }
 
         // waypoints - reset collection
-        cache.setWaypoints(Collections.<cgWaypoint> emptyList(), false);
+        cache.setWaypoints(Collections.<Waypoint> emptyList(), false);
 
         // add waypoint for original coordinates in case of user-modified listing-coordinates
         try {
             final String originalCoords = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
 
             if (null != originalCoords) {
-                final cgWaypoint waypoint = new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+                final Waypoint waypoint = new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
                 waypoint.setCoords(new Geopoint(originalCoords));
                 cache.addOrChangeWaypoint(waypoint, false);
                 cache.setUserModifiedCoords(true);
@@ -662,7 +662,7 @@ public abstract class GCParser {
                     // waypoint type
                     final String resulttype = BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
 
-                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.findById(resulttype), false);
+                    final Waypoint waypoint = new Waypoint(name, WaypointType.findById(resulttype), false);
 
                     // waypoint prefix
                     waypoint.setPrefix(BaseUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));

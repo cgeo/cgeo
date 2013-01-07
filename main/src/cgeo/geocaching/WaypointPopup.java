@@ -19,7 +19,7 @@ import android.widget.TextView;
 public class WaypointPopup extends AbstractPopupActivity {
     private static final String EXTRA_WAYPOINT_ID = "waypoint_id";
     private int waypointId = 0;
-    private cgWaypoint waypoint = null;
+    private Waypoint waypoint = null;
 
     public WaypointPopup() {
         super("c:geo-waypoint-info", R.layout.waypoint_popup);

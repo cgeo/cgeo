@@ -101,9 +101,9 @@ public class cgCache implements ICache, IWaypoint {
             return cgData.loadAttributes(geocode);
         }
     };
-    private LazyInitializedList<cgWaypoint> waypoints = new LazyInitializedList<cgWaypoint>() {
+    private LazyInitializedList<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
-        protected List<cgWaypoint> loadFromDatabase() {
+        protected List<Waypoint> loadFromDatabase() {
             return cgData.loadWaypoints(geocode);
         }
     };
@@ -146,7 +146,7 @@ public class cgCache implements ICache, IWaypoint {
     public cgCache(GPXParser gpxParser) {
         setReliableLatLon(true);
         setAttributes(Collections.<String> emptyList());
-        setWaypoints(Collections.<cgWaypoint> emptyList(), false);
+        setWaypoints(Collections.<Waypoint> emptyList(), false);
         setLogs(Collections.<LogEntry> emptyList());
     }
 
@@ -295,8 +295,8 @@ public class cgCache implements ICache, IWaypoint {
             this.setWaypoints(other.waypoints.asList(), false);
         }
         else {
-            ArrayList<cgWaypoint> newPoints = new ArrayList<cgWaypoint>(waypoints.asList());
-            cgWaypoint.mergeWayPoints(newPoints, other.waypoints.asList(), false);
+            ArrayList<Waypoint> newPoints = new ArrayList<Waypoint>(waypoints.asList());
+            Waypoint.mergeWayPoints(newPoints, other.waypoints.asList(), false);
             this.setWaypoints(newPoints, false);
         }
         if (spoilers == null) {
@@ -320,7 +320,7 @@ public class cgCache implements ICache, IWaypoint {
         // if cache has ORIGINAL type waypoint ... it is considered that it has modified coordinates, otherwise not
         userModifiedCoords = false;
         if (waypoints != null) {
-            for (cgWaypoint wpt : waypoints) {
+            for (Waypoint wpt : waypoints) {
                 if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
                     userModifiedCoords = true;
                     break;
@@ -934,7 +934,7 @@ public class cgCache implements ICache, IWaypoint {
      *
      * @return always non <code>null</code>
      */
-    public List<cgWaypoint> getWaypoints() {
+    public List<Waypoint> getWaypoints() {
         return waypoints.asList();
     }
 
@@ -946,11 +946,11 @@ public class cgCache implements ICache, IWaypoint {
      *            called while loading or building a cache
      * @return <code>true</code> if waypoints successfully added to waypoint database
      */
-    public boolean setWaypoints(List<cgWaypoint> waypoints, boolean saveToDatabase) {
+    public boolean setWaypoints(List<Waypoint> waypoints, boolean saveToDatabase) {
         this.waypoints.set(waypoints);
         finalDefined = false;
         if (waypoints != null) {
-            for (cgWaypoint waypoint : waypoints) {
+            for (Waypoint waypoint : waypoints) {
                 waypoint.setGeocode(geocode);
                 if (waypoint.isFinalWithCoords()) {
                     finalDefined = true;
@@ -1147,7 +1147,7 @@ public class cgCache implements ICache, IWaypoint {
      *            called while loading or building a cache
      * @return <code>true</code> if waypoint successfully added to waypoint database
      */
-    public boolean addOrChangeWaypoint(final cgWaypoint waypoint, boolean saveToDatabase) {
+    public boolean addOrChangeWaypoint(final Waypoint waypoint, boolean saveToDatabase) {
         waypoint.setGeocode(geocode);
 
         if (waypoint.getId() <= 0) { // this is a new waypoint
@@ -1185,7 +1185,7 @@ public class cgCache implements ICache, IWaypoint {
      */
     private void resetFinalDefined() {
         finalDefined = false;
-        for (cgWaypoint wp : waypoints) {
+        for (Waypoint wp : waypoints) {
             if (wp.isFinalWithCoords()) {
                 finalDefined = true;
                 break;
@@ -1208,12 +1208,12 @@ public class cgCache implements ICache, IWaypoint {
      *            the waypoint to duplicate
      * @return <code>true</code> if the waypoint was duplicated, <code>false</code> otherwise (invalid index)
      */
-    public boolean duplicateWaypoint(final cgWaypoint original) {
+    public boolean duplicateWaypoint(final Waypoint original) {
         if (original == null) {
             return false;
         }
         final int index = getWaypointIndex(original);
-        final cgWaypoint copy = new cgWaypoint(original);
+        final Waypoint copy = new Waypoint(original);
         copy.setUserDefined();
         copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
         waypoints.add(index + 1, copy);
@@ -1227,7 +1227,7 @@ public class cgCache implements ICache, IWaypoint {
      *            to be removed from cache
      * @return <code>true</code>, if the waypoint was deleted
      */
-    public boolean deleteWaypoint(final cgWaypoint waypoint) {
+    public boolean deleteWaypoint(final Waypoint waypoint) {
         if (waypoint == null) {
             return false;
         }
@@ -1254,7 +1254,7 @@ public class cgCache implements ICache, IWaypoint {
      * @param waypoint
      */
 
-    public void deleteWaypointForce(cgWaypoint waypoint) {
+    public void deleteWaypointForce(Waypoint waypoint) {
         final int index = getWaypointIndex(waypoint);
         waypoints.remove(index);
         cgData.deleteWaypoint(waypoint.getId());
@@ -1269,7 +1269,7 @@ public class cgCache implements ICache, IWaypoint {
      *            to find index for
      * @return index in <code>waypoints</code> if found, -1 otherwise
      */
-    private int getWaypointIndex(final cgWaypoint waypoint) {
+    private int getWaypointIndex(final Waypoint waypoint) {
         final int id = waypoint.getId();
         for (int index = 0; index < waypoints.size(); index++) {
             if (waypoints.get(index).getId() == id) {
@@ -1286,7 +1286,7 @@ public class cgCache implements ICache, IWaypoint {
      *            the index of the waypoint
      * @return waypoint or <code>null</code> if index is out of range
      */
-    public cgWaypoint getWaypoint(final int index) {
+    public Waypoint getWaypoint(final int index) {
         return index >= 0 && index < waypoints.size() ? waypoints.get(index) : null;
     }
 
@@ -1297,8 +1297,8 @@ public class cgCache implements ICache, IWaypoint {
      *            the id of the waypoint to look for
      * @return waypoint or <code>null</code>
      */
-    public cgWaypoint getWaypointById(final int id) {
-        for (final cgWaypoint waypoint : waypoints) {
+    public Waypoint getWaypointById(final int id) {
+        for (final Waypoint waypoint : waypoints) {
             if (waypoint.getId() == id) {
                 return waypoint;
             }
@@ -1321,7 +1321,7 @@ public class cgCache implements ICache, IWaypoint {
                     // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
                     if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
                         final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                        final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT, false);
+                        final Waypoint waypoint = new Waypoint(name, WaypointType.WAYPOINT, false);
                         waypoint.setCoords(point);
                         addOrChangeWaypoint(waypoint, false);
                         count++;

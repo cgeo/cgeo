@@ -43,7 +43,7 @@ public class EditWaypointActivity extends AbstractActivity {
     private String geocode = null;
     private int id = -1;
     private ProgressDialog waitDialog = null;
-    private cgWaypoint waypoint = null;
+    private Waypoint waypoint = null;
     private Geopoint gpTemp = null;
     private WaypointType type = WaypointType.OWN;
     private String prefix = "OWN";
@@ -419,7 +419,7 @@ public class EditWaypointActivity extends AbstractActivity {
             }
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
 
-            final cgWaypoint waypoint = new cgWaypoint(name, type, own);
+            final Waypoint waypoint = new Waypoint(name, type, own);
             waypoint.setGeocode(geocode);
             waypoint.setPrefix(prefix);
             waypoint.setLookup(lookup);
@@ -436,7 +436,7 @@ public class EditWaypointActivity extends AbstractActivity {
                 }
                 if (setAsCacheCoordsCheckBox.isChecked()) {
                     if (!cache.hasUserModifiedCoords()) {
-                        final cgWaypoint origWaypoint = new cgWaypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+                        final Waypoint origWaypoint = new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
                         origWaypoint.setCoords(cache.getCoords());
                         cache.addOrChangeWaypoint(origWaypoint, false);
                         cache.setUserModifiedCoords(true);

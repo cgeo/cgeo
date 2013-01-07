@@ -183,7 +183,7 @@ public class StaticMapsActivity extends AbstractActivity {
             StaticMapsProvider.storeCacheStaticMap(cache, true);
             return cache.hasStaticMap();
         }
-        final cgWaypoint waypoint = cache.getWaypointById(waypoint_id);
+        final Waypoint waypoint = cache.getWaypointById(waypoint_id);
         if (waypoint != null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, true);
@@ -193,7 +193,7 @@ public class StaticMapsActivity extends AbstractActivity {
         return false;
     }
 
-    public static void startActivity(final Context activity, final String geocode, final boolean download, final cgWaypoint waypoint) {
+    public static void startActivity(final Context activity, final String geocode, final boolean download, final Waypoint waypoint) {
         final Intent intent = new Intent(activity, StaticMapsActivity.class);
         // if resuming our app within this activity, finish it and return to the cache activity
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);

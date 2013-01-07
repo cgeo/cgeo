@@ -3,9 +3,9 @@ package cgeo.geocaching.export;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.CacheAttribute;
@@ -282,10 +282,10 @@ class GpxExport extends AbstractExport {
         }
 
         private void writeWaypoints(final cgCache cache) throws IOException {
-            List<cgWaypoint> waypoints = cache.getWaypoints();
-            List<cgWaypoint> ownWaypoints = new ArrayList<cgWaypoint>(waypoints.size());
-            List<cgWaypoint> originWaypoints = new ArrayList<cgWaypoint>(waypoints.size());
-            for (cgWaypoint wp : cache.getWaypoints()) {
+            List<Waypoint> waypoints = cache.getWaypoints();
+            List<Waypoint> ownWaypoints = new ArrayList<Waypoint>(waypoints.size());
+            List<Waypoint> originWaypoints = new ArrayList<Waypoint>(waypoints.size());
+            for (Waypoint wp : cache.getWaypoints()) {
                 if (wp.isUserDefined()) {
                     ownWaypoints.add(wp);
                 } else {
@@ -293,7 +293,7 @@ class GpxExport extends AbstractExport {
                 }
             }
             int maxPrefix = 0;
-            for (cgWaypoint wp : originWaypoints) {
+            for (Waypoint wp : originWaypoints) {
                 String prefix = wp.getPrefix();
                 try {
                     maxPrefix = Math.max(Integer.parseInt(prefix), maxPrefix);
@@ -302,7 +302,7 @@ class GpxExport extends AbstractExport {
                 }
                 writeCacheWaypoint(wp, prefix);
             }
-            for (cgWaypoint wp : ownWaypoints) {
+            for (Waypoint wp : ownWaypoints) {
                 maxPrefix++;
                 String prefix = StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0');
                 writeCacheWaypoint(wp, prefix);
@@ -318,7 +318,7 @@ class GpxExport extends AbstractExport {
          * @param prefix
          * @throws IOException
          */
-        private void writeCacheWaypoint(final cgWaypoint wp, final String prefix) throws IOException {
+        private void writeCacheWaypoint(final Waypoint wp, final String prefix) throws IOException {
             gpx.write("<wpt lat=\"");
             final Geopoint coords = wp.getCoords();
             gpx.write(coords != null ? Double.toString(coords.getLatitude()) : ""); // TODO: check whether is the best way to handle unknown waypoint coordinates

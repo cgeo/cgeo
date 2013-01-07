@@ -8,9 +8,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -180,7 +180,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /** List of caches in the viewport */
     private LeastRecentlyUsedSet<cgCache> caches = null;
     /** List of waypoints in the viewport */
-    private final LeastRecentlyUsedSet<cgWaypoint> waypoints = new LeastRecentlyUsedSet<cgWaypoint>(MAX_CACHES);
+    private final LeastRecentlyUsedSet<Waypoint> waypoints = new LeastRecentlyUsedSet<Waypoint>(MAX_CACHES);
     // storing for offline
     private ProgressDialog waitDialog = null;
     private int detailTotal = 0;
@@ -1156,7 +1156,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (isLiveEnabled || mapMode == MapMode.COORDS) {
                         //All visible waypoints
                         CacheType type = Settings.getCacheType();
-                        Set<cgWaypoint> waypointsInViewport = cgData.loadWaypoints(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches(), type);
+                        Set<Waypoint> waypointsInViewport = cgData.loadWaypoints(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches(), type);
                         waypoints.addAll(waypointsInViewport);
                     }
                     else
@@ -1261,14 +1261,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 // display caches
                 final List<cgCache> cachesToDisplay = caches.getAsList();
-                final List<cgWaypoint> waypointsToDisplay = new ArrayList<cgWaypoint>(waypoints);
+                final List<Waypoint> waypointsToDisplay = new ArrayList<Waypoint>(waypoints);
                 final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
 
                 if (!cachesToDisplay.isEmpty()) {
                     // Only show waypoints for single view or setting
                     // when less than showWaypointsthreshold Caches shown
                     if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
-                        for (cgWaypoint waypoint : waypointsToDisplay) {
+                        for (Waypoint waypoint : waypointsToDisplay) {
 
                             if (waypoint == null || waypoint.getCoords() == null) {
                                 continue;
@@ -1316,7 +1316,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             if (coordsIntent != null) {
-                final cgWaypoint waypoint = new cgWaypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT, false);
+                final Waypoint waypoint = new Waypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT, false);
                 waypoint.setCoords(coordsIntent);
 
                 final CachesOverlayItemImpl item = getItem(waypoint, null, waypoint);
@@ -1626,7 +1626,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      *            Waypoint. Mutally exclusive with cache
      * @return
      */
-    private CachesOverlayItemImpl getItem(final IWaypoint coord, final cgCache cache, final cgWaypoint waypoint) {
+    private CachesOverlayItemImpl getItem(final IWaypoint coord, final cgCache cache, final Waypoint waypoint) {
         if (cache != null) {
             final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(coord, cache.getType());
 

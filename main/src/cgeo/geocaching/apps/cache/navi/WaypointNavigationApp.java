@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.Waypoint;
 
 import android.app.Activity;
 
@@ -9,7 +9,7 @@ import android.app.Activity;
  *
  */
 public interface WaypointNavigationApp {
-    void navigate(final Activity activity, final cgWaypoint waypoint);
+    void navigate(final Activity activity, final Waypoint waypoint);
 
-    boolean isEnabled(final cgWaypoint waypoint);
+    boolean isEnabled(final Waypoint waypoint);
 }

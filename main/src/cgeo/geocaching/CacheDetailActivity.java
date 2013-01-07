@@ -375,9 +375,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         final ViewGroup parent = ((ViewGroup) view.getParent());
                         for (int i = 0; i < parent.getChildCount(); i++) {
                             if (parent.getChildAt(i) == view) {
-                                final List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.getWaypoints());
+                                final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
                                 Collections.sort(sortedWaypoints);
-                                final cgWaypoint waypoint = sortedWaypoints.get(i);
+                                final Waypoint waypoint = sortedWaypoints.get(i);
                                 final int index = cache.getWaypoints().indexOf(waypoint);
                                 menu.setHeaderTitle(res.getString(R.string.waypoint));
                                 if (waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
@@ -460,40 +460,40 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 break;
             case CONTEXT_MENU_WAYPOINT_EDIT:
-                final cgWaypoint waypointEdit = cache.getWaypoint(index);
+                final Waypoint waypointEdit = cache.getWaypoint(index);
                 if (waypointEdit != null) {
                     EditWaypointActivity.startActivityEditWaypoint(this, waypointEdit.getId());
                     refreshOnResume = true;
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-                final cgWaypoint waypointDuplicate = cache.getWaypoint(index);
+                final Waypoint waypointDuplicate = cache.getWaypoint(index);
                 if (cache.duplicateWaypoint(waypointDuplicate)) {
                     cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DELETE:
-                final cgWaypoint waypointDelete = cache.getWaypoint(index);
+                final Waypoint waypointDelete = cache.getWaypoint(index);
                 if (cache.deleteWaypoint(waypointDelete)) {
                     cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
-                final cgWaypoint waypointNavigation = cache.getWaypoint(index);
+                final Waypoint waypointNavigation = cache.getWaypoint(index);
                 if (waypointNavigation != null) {
                     NavigationAppFactory.startDefaultNavigationApplication(1, this, waypointNavigation);
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_NAVIGATE:
-                final cgWaypoint waypointNav = cache.getWaypoint(contextMenuWPIndex);
+                final Waypoint waypointNav = cache.getWaypoint(contextMenuWPIndex);
                 if (waypointNav != null) {
                     NavigationAppFactory.showNavigationMenu(this, null, waypointNav, null);
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
-                final cgWaypoint waypointAround = cache.getWaypoint(index);
+                final Waypoint waypointAround = cache.getWaypoint(index);
                 if (waypointAround != null) {
                     cgeocaches.startActivityCoordinates(this, waypointAround.getCoords());
                 }
@@ -2098,10 +2098,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final LinearLayout waypoints = (LinearLayout) view.findViewById(R.id.waypoints);
 
             // sort waypoints: PP, Sx, FI, OWN
-            final List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.getWaypoints());
+            final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
             Collections.sort(sortedWaypoints);
 
-            for (final cgWaypoint wpt : sortedWaypoints) {
+            for (final Waypoint wpt : sortedWaypoints) {
                 final LinearLayout waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
 
                 // coordinates
@@ -2250,7 +2250,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final CheckBox uploadOption;
         final CheckBox resetLocalyOption;
 
-        public ResetCacheCoordinatesDialog(final cgCache cache, final cgWaypoint wpt, final Activity activity) {
+        public ResetCacheCoordinatesDialog(final cgCache cache, final Waypoint wpt, final Activity activity) {
             super(activity);
 
             View layout = activity.getLayoutInflater().inflate(R.layout.reset_cache_coords_dialog, null);
@@ -2309,12 +2309,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private final Handler handler;
         private final boolean local;
         private final boolean remote;
-        private final cgWaypoint wpt;
+        private final Waypoint wpt;
         private ProgressDialog progress;
         public static final int LOCAL = 0;
         public static final int ON_WEBSITE = 1;
 
-        public ResetCoordsThread(cgCache cache, Handler handler, final cgWaypoint wpt, boolean local, boolean remote, final ProgressDialog progress) {
+        public ResetCoordsThread(cgCache cache, Handler handler, final Waypoint wpt, boolean local, boolean remote, final ProgressDialog progress) {
             this.cache = cache;
             this.handler = handler;
             this.local = local;

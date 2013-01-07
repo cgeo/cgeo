@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
 import android.app.Activity;
@@ -11,7 +11,7 @@ import java.util.Collections;
 class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointNavigationApp {
 
     @Override
-    public boolean isEnabled(cgWaypoint waypoint) {
+    public boolean isEnabled(Waypoint waypoint) {
         return waypoint.getCoords() != null;
     }
 
@@ -21,7 +21,7 @@ class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointN
      *
      */
     @Override
-    public void navigate(Activity activity, cgWaypoint waypoint) {
+    public void navigate(Activity activity, Waypoint waypoint) {
         showInLocus(Collections.singletonList(waypoint), true, false, activity);
     }
 

@@ -5,7 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -167,7 +167,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static void assertGc31j2hWaypoints(final cgCache cache) {
         assertNotNull(cache.getWaypoints());
         assertEquals(2, cache.getWaypoints().size());
-        cgWaypoint wp = cache.getWaypoints().get(1);
+        Waypoint wp = cache.getWaypoints().get(1);
         assertEquals("GC31J2H", wp.getGeocode());
         assertEquals("00", wp.getPrefix());
         assertEquals("---", wp.getLookup());

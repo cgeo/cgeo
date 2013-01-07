@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -27,12 +27,12 @@ class InternalMap extends AbstractApp implements CacheNavigationApp, WaypointNav
     }
 
     @Override
-    public void navigate(Activity activity, cgWaypoint waypoint) {
+    public void navigate(Activity activity, Waypoint waypoint) {
         CGeoMap.startActivityCoords(activity, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
     }
 
     @Override
-    public boolean isEnabled(cgWaypoint waypoint) {
+    public boolean isEnabled(Waypoint waypoint) {
         return waypoint.getCoords() != null;
     }
 

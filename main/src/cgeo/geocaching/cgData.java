@@ -1112,11 +1112,11 @@ public class cgData {
         String geocode = cache.getGeocode();
         database.delete(dbTableWaypoints, "geocode = ? and type <> ? and own = 0", new String[]{geocode, "own"});
 
-        List<cgWaypoint> waypoints = cache.getWaypoints();
+        List<Waypoint> waypoints = cache.getWaypoints();
         if (CollectionUtils.isNotEmpty(waypoints)) {
             ContentValues values = new ContentValues();
             long timeStamp = System.currentTimeMillis();
-            for (cgWaypoint oneWaypoint : waypoints) {
+            for (Waypoint oneWaypoint : waypoints) {
                 if (oneWaypoint.isUserDefined()) {
                     continue;
                 }
@@ -1171,7 +1171,7 @@ public class cgData {
         return new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
     }
 
-    private static boolean saveWaypointInternal(int id, String geocode, cgWaypoint waypoint) {
+    private static boolean saveWaypointInternal(int id, String geocode, Waypoint waypoint) {
         if ((StringUtils.isBlank(geocode) && id <= 0) || waypoint == null) {
             return false;
         }
@@ -1473,7 +1473,7 @@ public class cgData {
                 }
 
                 if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
-                    final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
+                    final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
                     if (CollectionUtils.isNotEmpty(waypoints)) {
                         cache.setWaypoints(waypoints, false);
                     }
@@ -1683,7 +1683,7 @@ public class cgData {
         return attributes;
     }
 
-    public static cgWaypoint loadWaypoint(int id) {
+    public static Waypoint loadWaypoint(int id) {
         if (id == 0) {
             return null;
         }
@@ -1702,21 +1702,21 @@ public class cgData {
 
         Log.d("cgData.loadWaypoint(" + id + ")");
 
-        final cgWaypoint waypoint = cursor.moveToFirst() ? createWaypointFromDatabaseContent(cursor) : null;
+        final Waypoint waypoint = cursor.moveToFirst() ? createWaypointFromDatabaseContent(cursor) : null;
 
         cursor.close();
 
         return waypoint;
     }
 
-    public static List<cgWaypoint> loadWaypoints(final String geocode) {
+    public static List<Waypoint> loadWaypoints(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
         init();
 
-        final List<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
+        final List<Waypoint> waypoints = new ArrayList<Waypoint>();
 
         final Cursor cursor = database.query(
                 dbTableWaypoints,
@@ -1737,11 +1737,11 @@ public class cgData {
         return waypoints;
     }
 
-    private static cgWaypoint createWaypointFromDatabaseContent(final Cursor cursor) {
+    private static Waypoint createWaypointFromDatabaseContent(final Cursor cursor) {
         final String name = cursor.getString(cursor.getColumnIndex("name"));
         final WaypointType type = WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
         final boolean own = cursor.getInt(cursor.getColumnIndex("own")) != 0;
-        final cgWaypoint waypoint = new cgWaypoint(name, type, own);
+        final Waypoint waypoint = new Waypoint(name, type, own);
 
         waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
         waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
@@ -2729,7 +2729,7 @@ public class cgData {
      * @return
      */
 
-    public static Set<cgWaypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled, CacheType type) {
+    public static Set<Waypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled, CacheType type) {
         final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableWaypoints, viewport));
         if (excludeMine) {
             where.append(" and ").append(dbTableCaches).append(".own == 0 and ").append(dbTableCaches).append(".found == 0");
@@ -2748,7 +2748,7 @@ public class cgData {
         }
         query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where);
 
-        final Set<cgWaypoint> waypoints = new HashSet<cgWaypoint>();
+        final Set<Waypoint> waypoints = new HashSet<Waypoint>();
         final Cursor cursor = database.rawQuery(query.toString(), null);
         while (cursor.moveToNext()) {
             waypoints.add(createWaypointFromDatabaseContent(cursor));
@@ -2925,7 +2925,7 @@ public class cgData {
         return new SearchResult(geocodes, cgData.getAllHistoryCachesCount());
     }
 
-    public static boolean saveWaypoint(int id, String geocode, cgWaypoint waypoint) {
+    public static boolean saveWaypoint(int id, String geocode, Waypoint waypoint) {
         if (cgData.saveWaypointInternal(id, geocode, waypoint)) {
             cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             return true;

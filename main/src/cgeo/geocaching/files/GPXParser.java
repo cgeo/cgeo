@@ -3,10 +3,10 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgTrackable;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -331,7 +331,7 @@ public abstract class GPXParser extends FileParser {
                     // lookup cache for waypoint in already parsed caches
                     final cgCache cacheForWaypoint = cgData.loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cacheForWaypoint != null) {
-                        final cgWaypoint waypoint = new cgWaypoint(cache.getShortdesc(), convertWaypointSym2Type(sym), false);
+                        final Waypoint waypoint = new Waypoint(cache.getShortdesc(), convertWaypointSym2Type(sym), false);
                         waypoint.setId(-1);
                         waypoint.setGeocode(cacheGeocodeForWaypoint);
                         waypoint.setPrefix(cache.getName().substring(0, 2));
@@ -340,12 +340,12 @@ public abstract class GPXParser extends FileParser {
                         waypoint.setCoords(cache.getCoords());
                         waypoint.setNote(cache.getDescription());
 
-                        final ArrayList<cgWaypoint> mergedWayPoints = new ArrayList<cgWaypoint>();
+                        final ArrayList<Waypoint> mergedWayPoints = new ArrayList<Waypoint>();
                         mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
 
-                        final ArrayList<cgWaypoint> newPoints = new ArrayList<cgWaypoint>();
+                        final ArrayList<Waypoint> newPoints = new ArrayList<Waypoint>();
                         newPoints.add(waypoint);
-                        cgWaypoint.mergeWayPoints(newPoints, mergedWayPoints, true);
+                        Waypoint.mergeWayPoints(newPoints, mergedWayPoints, true);
                         cacheForWaypoint.setWaypoints(newPoints, false);
                         cgData.saveCache(cacheForWaypoint, EnumSet.of(SaveFlag.SAVE_DB));
                         showProgressMessage(progressHandler, progressStream.getProgress());

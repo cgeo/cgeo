@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.apps.AbstractApp;
 
 import android.app.Activity;
@@ -25,7 +25,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     @Override
-    public void navigate(Activity activity, cgWaypoint waypoint) {
+    public void navigate(Activity activity, Waypoint waypoint) {
         navigate(activity, waypoint.getCoords());
     }
 
@@ -35,7 +35,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     @Override
-    public boolean isEnabled(cgWaypoint waypoint) {
+    public boolean isEnabled(Waypoint waypoint) {
         return waypoint.getCoords() != null;
     }
 }

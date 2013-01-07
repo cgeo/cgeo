@@ -2,7 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -152,13 +152,13 @@ public abstract class Formatter {
         return StringUtils.join(infos, Formatter.SEPARATOR);
     }
 
-    public static String formatWaypointInfo(cgWaypoint waypoint) {
+    public static String formatWaypointInfo(Waypoint waypoint) {
         final List<String> infos = new ArrayList<String>(3);
         WaypointType waypointType = waypoint.getWaypointType();
         if (waypointType != WaypointType.OWN && waypointType != null) {
             infos.add(waypointType.getL10n());
         }
-        if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(waypoint.getPrefix())) {
+        if (Waypoint.PREFIX_OWN.equalsIgnoreCase(waypoint.getPrefix())) {
             infos.add(cgeoapplication.getInstance().getString(R.string.waypoint_custom));
         } else {
             if (StringUtils.isNotBlank(waypoint.getPrefix())) {

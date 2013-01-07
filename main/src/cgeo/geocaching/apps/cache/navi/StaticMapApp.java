@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
 
 import android.app.Activity;
 
@@ -18,7 +18,7 @@ class StaticMapApp extends AbstractStaticMapsApp {
     }
 
     @Override
-    public boolean isEnabled(cgWaypoint waypoint) {
+    public boolean isEnabled(Waypoint waypoint) {
         return hasStaticMap(waypoint);
     }
 
@@ -28,7 +28,7 @@ class StaticMapApp extends AbstractStaticMapsApp {
     }
 
     @Override
-    public void navigate(Activity activity, cgWaypoint waypoint) {
+    public void navigate(Activity activity, Waypoint waypoint) {
         invokeStaticMaps(activity, null, waypoint, false);
     }
 }

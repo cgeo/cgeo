@@ -99,18 +99,18 @@ public class StaticMapsProvider {
         if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
             // remove all waypoint static map files due to origin cache waypoint id changed on saveCache
             LocalStorage.deleteFilesWithPrefix(cache.getGeocode(), MAP_FILENAME_PREFIX + WAYPOINT_PREFIX);
-            for (cgWaypoint waypoint : cache.getWaypoints()) {
+            for (Waypoint waypoint : cache.getWaypoints()) {
                 storeWaypointStaticMap(cache.getGeocode(), edge, waypoint, false);
             }
         }
     }
 
-    public static void storeWaypointStaticMap(cgCache cache, cgWaypoint waypoint, boolean waitForResult) {
+    public static void storeWaypointStaticMap(cgCache cache, Waypoint waypoint, boolean waitForResult) {
         int edge = StaticMapsProvider.guessMaxDisplaySide();
         storeWaypointStaticMap(cache.getGeocode(), edge, waypoint, waitForResult);
     }
 
-    private static void storeWaypointStaticMap(final String geocode, int edge, cgWaypoint waypoint, final boolean waitForResult) {
+    private static void storeWaypointStaticMap(final String geocode, int edge, Waypoint waypoint, final boolean waitForResult) {
         if (geocode == null) {
             Log.e("storeWaypointStaticMap - missing input parameter geocode");
             return;
@@ -136,7 +136,7 @@ public class StaticMapsProvider {
     private static void storeCacheStaticMap(final cgCache cache, final int edge, final boolean waitForResult) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Parameters waypoints = new Parameters();
-        for (final cgWaypoint waypoint : cache.getWaypoints()) {
+        for (final Waypoint waypoint : cache.getWaypoints()) {
             if (waypoint.getCoords() == null) {
                 continue;
             }
@@ -205,7 +205,7 @@ public class StaticMapsProvider {
         return url.toString();
     }
 
-    private static String getWpMarkerUrl(final cgWaypoint waypoint) {
+    private static String getWpMarkerUrl(final Waypoint waypoint) {
         String type = waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null;
         return MARKERS_URL + "marker_waypoint_" + type + ".png";
     }

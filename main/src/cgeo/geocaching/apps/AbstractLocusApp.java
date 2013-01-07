@@ -2,7 +2,7 @@ package cgeo.geocaching.apps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -68,8 +68,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
             // get icon and Point
             if (o instanceof cgCache) {
                 p = getCachePoint((cgCache) o, withCacheWaypoints, withCacheDetails);
-            } else if (o instanceof cgWaypoint) {
-                p = getWaypointPoint((cgWaypoint) o);
+            } else if (o instanceof Waypoint) {
+                p = getWaypointPoint((Waypoint) o);
             }
             if (p != null) {
                 pd.addPoint(p);
@@ -146,7 +146,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
         if (withWaypoints && cache.hasWaypoints()) {
             pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
-            for (cgWaypoint waypoint : cache.getWaypoints()) {
+            for (Waypoint waypoint : cache.getWaypoints()) {
                 if (waypoint == null || waypoint.getCoords() == null) {
                     continue;
                 }
@@ -182,7 +182,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @param waypoint
      * @return null, when the <code>Point</code> could not be constructed
      */
-    private static Point getWaypointPoint(cgWaypoint waypoint) {
+    private static Point getWaypointPoint(Waypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {
             return null;
         }

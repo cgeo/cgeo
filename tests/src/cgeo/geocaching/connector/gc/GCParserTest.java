@@ -4,7 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -171,7 +171,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     private static void assertWaypointsFromNote(final cgCache cache, Geopoint[] expected, String note) {
         cache.setPersonalNote(note);
-        cache.setWaypoints(new ArrayList<cgWaypoint>(), false);
+        cache.setWaypoints(new ArrayList<Waypoint>(), false);
         cache.parseWaypointsFromNote();
         assertEquals(expected.length, cache.getWaypoints().size());
         for (int i = 0; i < expected.length; i++) {

@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -27,13 +27,13 @@ class CompassApp extends AbstractApp implements CacheNavigationApp, WaypointNavi
     }
 
     @Override
-    public void navigate(Activity activity, cgWaypoint waypoint) {
+    public void navigate(Activity activity, Waypoint waypoint) {
         cgeonavigate.startActivity(activity, waypoint.getPrefix() + "/" + waypoint.getLookup(), waypoint.getName(), waypoint.getCoords(), null,
                 waypoint.getWaypointType().getL10n());
     }
 
     @Override
-    public boolean isEnabled(cgWaypoint waypoint) {
+    public boolean isEnabled(Waypoint waypoint) {
         return waypoint.getCoords() != null;
     }
 
