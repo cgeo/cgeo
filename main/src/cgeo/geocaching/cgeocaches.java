@@ -303,7 +303,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     protected void updateTitle() {
         ArrayList<Integer> numbers = new ArrayList<Integer>();
-        if (adapter != null && adapter.isFiltered()) {
+        if (adapter.isFiltered()) {
             numbers.add(adapter.getCount());
         }
         if (search != null) {
@@ -664,13 +664,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 adapter.forceSort();
             }
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        adapter = null;
-
-        super.onDestroy();
     }
 
     @Override
