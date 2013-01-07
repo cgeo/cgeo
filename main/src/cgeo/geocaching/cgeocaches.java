@@ -985,7 +985,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
                 refreshCurrentList();
             }
-        }, true);
+        }, true, listId);
     }
 
     @Override
@@ -1045,7 +1045,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                         adapter.setSelectMode(false);
                         refreshCurrentList();
                     }
-                }, true);
+                }, true, listId);
                 break;
             case MENU_STORE_CACHE:
                 //FIXME: this must use the same handler like in the CacheDetailActivity. Will be done by moving the handler into the store method.

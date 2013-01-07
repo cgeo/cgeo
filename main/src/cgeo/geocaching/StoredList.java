@@ -34,6 +34,29 @@ public class StoredList {
         return title + " [" + count + "]";
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof StoredList)) {
+            return false;
+        }
+        StoredList other = (StoredList) obj;
+        if (id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
     public static class UserInterface {
         private final IAbstractActivity activity;
         private final cgeoapplication app;
@@ -46,14 +69,21 @@ public class StoredList {
         }
 
         public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards) {
-            promptForListSelection(titleId, runAfterwards, false);
+            promptForListSelection(titleId, runAfterwards, false, -1);
         }
 
-        public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyMoveTargets) {
+        public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyMoveTargets, final int exceptListId) {
             final List<StoredList> lists = cgData.getLists();
 
             if (lists == null) {
                 return;
+            }
+
+            if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
+                StoredList exceptList = cgData.getList(exceptListId);
+                if (exceptList != null) {
+                    lists.remove(exceptList);
+                }
             }
 
             final List<CharSequence> listsTitle = new ArrayList<CharSequence>();
