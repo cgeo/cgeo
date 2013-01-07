@@ -34,6 +34,8 @@ import java.util.regex.Pattern;
 
 public class OC11XMLParser {
 
+    private static final String PARAGRAPH_END = "</p>";
+    private static final String PARAGRAPH_BEGIN = "<p>";
     private static Pattern STRIP_DATE = Pattern.compile("\\+0([0-9]){1}\\:00");
 
     private static class CacheHolder {
@@ -522,7 +524,7 @@ public class OC11XMLParser {
 
             @Override
             public void end(String logText) {
-                logHolder.logEntry.log = logText;
+                logHolder.logEntry.log = stripMarkup(logText);
             }
         });
 
@@ -533,5 +535,18 @@ public class OC11XMLParser {
             Log.e("Cannot parse .gpx file as oc11xml: could not parse XML - " + e.toString());
             return null;
         }
+    }
+
+    /**
+     * removes unneeded markup
+     */
+    protected static String stripMarkup(String input) {
+        if (StringUtils.startsWith(input, PARAGRAPH_BEGIN) && StringUtils.endsWith(input, PARAGRAPH_END)) {
+            String inner = input.substring(PARAGRAPH_BEGIN.length(), input.length() - PARAGRAPH_END.length());
+            if (inner.indexOf(PARAGRAPH_BEGIN) < 0) {
+                return inner;
+            }
+        }
+        return input;
     }
 }
