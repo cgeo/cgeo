@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.TrackableLog;
-import cgeo.geocaching.cgImage;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
@@ -50,7 +50,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(10, log.size());
         // log entry 4 has several images; just check first two
 
-        final List<cgImage> log4Images = log.get(4).getLogImages();
+        final List<Image> log4Images = log.get(4).getLogImages();
         assertNotNull(log4Images);
         assertEquals(5, log4Images.size());
         assertEquals("http://img.geocaching.com/track/log/large/f2e24c50-394c-4d74-8fb4-87298d8bff1d.jpg", log4Images.get(0).getUrl());
@@ -59,7 +59,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("8 Crater Lake Natl Park Oregon", log4Images.get(1).getTitle());
 
         // third log entry has one image
-        final List<cgImage> log5Images = log.get(5).getLogImages();
+        final List<Image> log5Images = log.get(5).getLogImages();
         assertNotNull(log5Images);
         assertEquals(1, log5Images.size());
         assertEquals("http://img.geocaching.com/track/log/large/0096b42d-4d10-45fa-9be2-2d08c0d5cc61.jpg", log5Images.get(0).getUrl());

@@ -1223,11 +1223,11 @@ public class cgData {
         String geocode = cache.getGeocode();
         database.delete(dbTableSpoilers, "geocode = ?", new String[]{geocode});
 
-        List<cgImage> spoilers = cache.getSpoilers();
+        List<Image> spoilers = cache.getSpoilers();
         if (CollectionUtils.isNotEmpty(spoilers)) {
             SQLiteStatement insertSpoiler = PreparedStatements.getInsertSpoiler();
             final long timestamp = System.currentTimeMillis();
-            for (cgImage spoiler : spoilers) {
+            for (Image spoiler : spoilers) {
                 insertSpoiler.bindString(1, geocode);
                 insertSpoiler.bindLong(2, timestamp);
                 insertSpoiler.bindString(3, spoiler.getUrl());
@@ -1266,7 +1266,7 @@ public class cgData {
             long logId = insertLog.executeInsert();
             if (log.hasLogImages()) {
                 SQLiteStatement insertImage = PreparedStatements.getInsertLogImage();
-                for (cgImage img : log.getLogImages()) {
+                for (Image img : log.getLogImages()) {
                     insertImage.bindLong(1, logId);
                     insertImage.bindString(2, img.getTitle());
                     insertImage.bindString(3, img.getUrl());
@@ -1480,7 +1480,7 @@ public class cgData {
                 }
 
                 if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
-                    final List<cgImage> spoilers = loadSpoilers(cache.getGeocode());
+                    final List<Image> spoilers = loadSpoilers(cache.getGeocode());
                     cache.setSpoilers(spoilers);
                 }
 
@@ -1754,14 +1754,14 @@ public class cgData {
         return waypoint;
     }
 
-    private static List<cgImage> loadSpoilers(final String geocode) {
+    private static List<Image> loadSpoilers(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
         init();
 
-        final List<cgImage> spoilers = new ArrayList<cgImage>();
+        final List<Image> spoilers = new ArrayList<Image>();
 
         final Cursor cursor = database.query(
                 dbTableSpoilers,
@@ -1774,7 +1774,7 @@ public class cgData {
                 "100");
 
         while (cursor.moveToNext()) {
-            spoilers.add(new cgImage(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
+            spoilers.add(new Image(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
         }
 
         cursor.close();
@@ -1863,7 +1863,7 @@ public class cgData {
                 logs.add(log);
             }
             if (!cursor.isNull(7)) {
-                log.addLogImage(new cgImage(cursor.getString(10), cursor.getString(9)));
+                log.addLogImage(new Image(cursor.getString(10), cursor.getString(9)));
             }
         }
 

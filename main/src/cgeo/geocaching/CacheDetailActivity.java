@@ -2031,7 +2031,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         holder.images.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                ImagesActivity.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), new ArrayList<cgImage>(log.getLogImages()));
+                                ImagesActivity.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), new ArrayList<Image>(log.getLogImages()));
                             }
                         });
                     } else {

@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.cgImage;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -158,7 +158,7 @@ final public class OkapiClient {
                     if (imageResponse.getBoolean(CACHE_IMAGE_IS_SPOILER)) {
                         final String title = imageResponse.getString(CACHE_IMAGE_CAPTION);
                         final String url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.getGeocode());
-                        cache.addSpoiler(new cgImage(url, title));
+                        cache.addSpoiler(new Image(url, title));
                     }
                 }
             }

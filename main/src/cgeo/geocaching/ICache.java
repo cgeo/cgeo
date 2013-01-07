@@ -117,7 +117,7 @@ public interface ICache extends IBasicCache {
     /**
      * @return the list of spoiler images
      */
-    public List<cgImage> getSpoilers();
+    public List<Image> getSpoilers();
 
     /**
      * @return a statistic how often the caches has been found, disabled, archived etc.

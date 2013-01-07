@@ -8,22 +8,22 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class cgImage implements Parcelable {
+public class Image implements Parcelable {
     private final String url;
     private final String title;
     private final String description;
 
-    public cgImage(final String url, final String title, final String description) {
+    public Image(final String url, final String title, final String description) {
         this.url = url;
         this.title = title;
         this.description = description;
     }
 
-    public cgImage(final String url, final String title) {
+    public Image(final String url, final String title) {
         this(url, title, null);
     }
 
-    public cgImage(final Parcel in) {
+    public Image(final Parcel in) {
         url = in.readString();
         title = in.readString();
         description = in.readString();
@@ -41,15 +41,15 @@ public class cgImage implements Parcelable {
         dest.writeString(description);
     }
 
-    public static final Parcelable.Creator<cgImage> CREATOR = new Parcelable.Creator<cgImage>() {
+    public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
         @Override
-        public cgImage createFromParcel(Parcel in) {
-            return new cgImage(in);
+        public Image createFromParcel(Parcel in) {
+            return new Image(in);
         }
 
         @Override
-        public cgImage[] newArray(int size) {
-            return new cgImage[size];
+        public Image[] newArray(int size) {
+            return new Image[size];
         }
     };
 

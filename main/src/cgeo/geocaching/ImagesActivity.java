@@ -24,7 +24,7 @@ public class ImagesActivity extends AbstractActivity {
     private static final String EXTRAS_GEOCODE = "geocode";
 
     private boolean offline;
-    private ArrayList<cgImage> imageNames;
+    private ArrayList<Image> imageNames;
     private ImagesList imagesList;
     private ImageType imgType = ImageType.SpoilerImages;
 
@@ -78,11 +78,11 @@ public class ImagesActivity extends AbstractActivity {
         super.onStop();
     }
 
-    public static void startActivityLogImages(final Context fromActivity, final String geocode, List<cgImage> logImages) {
+    public static void startActivityLogImages(final Context fromActivity, final String geocode, List<Image> logImages) {
         startActivity(fromActivity, geocode, logImages, ImageType.LogImages);
     }
 
-    private static void startActivity(final Context fromActivity, final String geocode, List<cgImage> logImages, ImageType imageType) {
+    private static void startActivity(final Context fromActivity, final String geocode, List<Image> logImages, ImageType imageType) {
         final Intent logImgIntent = new Intent(fromActivity, ImagesActivity.class);
         // if resuming our app within this activity, finish it and return to the cache activity
         logImgIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
@@ -90,12 +90,12 @@ public class ImagesActivity extends AbstractActivity {
                 .putExtra(EXTRAS_TYPE, imageType);
 
         // avoid forcing the array list as parameter type
-        final ArrayList<cgImage> arrayList = new ArrayList<cgImage>(logImages);
+        final ArrayList<Image> arrayList = new ArrayList<Image>(logImages);
         logImgIntent.putParcelableArrayListExtra(EXTRAS_IMAGES, arrayList);
         fromActivity.startActivity(logImgIntent);
     }
 
-    public static void startActivitySpoilerImages(final Context fromActivity, String geocode, List<cgImage> spoilers) {
+    public static void startActivitySpoilerImages(final Context fromActivity, String geocode, List<Image> spoilers) {
         startActivity(fromActivity, geocode, spoilers, ImageType.SpoilerImages);
     }
 

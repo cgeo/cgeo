@@ -9,7 +9,7 @@ import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.cgImage;
+import cgeo.geocaching.Image;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -547,7 +547,7 @@ public abstract class GCParser {
                 if (matcherSpoilersInside.group(4) != null) {
                     description = matcherSpoilersInside.group(4);
                 }
-                cache.addSpoiler(new cgImage(url, title, description));
+                cache.addSpoiler(new Image(url, title, description));
             }
         } catch (Exception e) {
             // failed to parse cache spoilers
@@ -1401,7 +1401,7 @@ public abstract class GCParser {
                  * 2. Image title
                  */
                 while (matcherLogImages.find()) {
-                    final cgImage logImage = new cgImage(matcherLogImages.group(1), matcherLogImages.group(2));
+                    final Image logImage = new Image(matcherLogImages.group(1), matcherLogImages.group(2));
                     logDone.addLogImage(logImage);
                 }
 
@@ -1523,7 +1523,7 @@ public abstract class GCParser {
                     final JSONObject image = images.getJSONObject(i);
                     String url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
                     String title = image.getString("Name");
-                    final cgImage logImage = new cgImage(url, title);
+                    final Image logImage = new Image(url, title);
                     logDone.addLogImage(logImage);
                 }
 

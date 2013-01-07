@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.Image;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgImage;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -65,7 +65,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(cache);
         assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
         assertEquals(1, cache.getSpoilers().size());
-        final cgImage spoiler = cache.getSpoilers().get(0);
+        final Image spoiler = cache.getSpoilers().get(0);
         assertEquals("http://img.geocaching.com/cache/large/3f9365c3-f55c-4e55-9992-ee0e5175712c.jpg", spoiler.getUrl());
         assertEquals("SPOILER", spoiler.getTitle());
         assertNull(spoiler.getDescription());

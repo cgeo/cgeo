@@ -486,7 +486,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             if (log.hasLogImages()) {
 
-                final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.getLogImages());
+                final ArrayList<Image> logImages = new ArrayList<Image>(log.getLogImages());
 
                 final View.OnClickListener listener = new View.OnClickListener() {
                     @Override

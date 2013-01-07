@@ -1,7 +1,7 @@
 package cgeo.geocaching.test.mock;
 
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.cgImage;
+import cgeo.geocaching.Image;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -139,7 +139,7 @@ public abstract class MockedCache implements ICache {
     }
 
     @Override
-    public List<cgImage> getSpoilers() {
+    public List<Image> getSpoilers() {
         return null;
     }
 

@@ -25,7 +25,7 @@ public final class LogEntry {
     public int found = -1;
     /** Friend's log entry */
     public boolean friend = false;
-    private List<cgImage> logImages = null;
+    private List<Image> logImages = null;
     public String cacheName = ""; // used for trackables
     public String cacheGuid = ""; // used for trackables
 
@@ -64,9 +64,9 @@ public final class LogEntry {
                 log.compareTo(otherLog.log) == 0;
     }
 
-    public void addLogImage(final cgImage image) {
+    public void addLogImage(final Image image) {
         if (logImages == null) {
-            logImages = new ArrayList<cgImage>();
+            logImages = new ArrayList<Image>();
         }
         logImages.add(image);
     }
@@ -74,7 +74,7 @@ public final class LogEntry {
     /**
      * @return the log images or an empty list, never <code>null</code>
      */
-    public List<cgImage> getLogImages() {
+    public List<Image> getLogImages() {
         if (logImages == null) {
             return Collections.emptyList();
         }
@@ -87,7 +87,7 @@ public final class LogEntry {
 
     public CharSequence getImageTitles() {
         final List<String> titles = new ArrayList<String>(5);
-        for (cgImage image : getLogImages()) {
+        for (Image image : getLogImages()) {
             if (StringUtils.isNotBlank(image.getTitle())) {
                 titles.add(image.getTitle());
             }

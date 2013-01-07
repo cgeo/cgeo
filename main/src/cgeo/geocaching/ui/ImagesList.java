@@ -1,8 +1,8 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.Image;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
-import cgeo.geocaching.cgImage;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.Log;
@@ -43,7 +43,7 @@ public class ImagesList {
     private static final int MENU_BROWSER = 202;
 
     private BitmapDrawable currentDrawable;
-    private cgImage currentImage;
+    private Image currentImage;
 
     public enum ImageType {
         LogImages(R.string.cache_log_images_title, R.string.cache_log_images_loading),
@@ -73,7 +73,7 @@ public class ImagesList {
     /**
      * map image view id to image
      */
-    private final SparseArray<cgImage> images = new SparseArray<cgImage>();
+    private final SparseArray<Image> images = new SparseArray<Image>();
     private final String geocode;
     private LinearLayout imagesView;
 
@@ -83,7 +83,7 @@ public class ImagesList {
         inflater = activity.getLayoutInflater();
     }
 
-    public void loadImages(final View parentView, final List<cgImage> images, ImageType imageType, final boolean offline) {
+    public void loadImages(final View parentView, final List<Image> images, ImageType imageType, final boolean offline) {
 
         imagesView = (LinearLayout) parentView.findViewById(R.id.spoiler_list);
 
@@ -95,7 +95,7 @@ public class ImagesList {
         progressDialog.setMax(count);
         progressDialog.show();
 
-        for (final cgImage img : images) {
+        for (final Image img : images) {
             LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
 
             if (StringUtils.isNotBlank(img.getTitle())) {
@@ -117,10 +117,10 @@ public class ImagesList {
     private class AsyncImgLoader extends AsyncTask<Void, Void, BitmapDrawable> {
 
         final private LinearLayout view;
-        final private cgImage img;
+        final private Image img;
         final boolean offline;
 
-        public AsyncImgLoader(final LinearLayout view, final cgImage img, final boolean offline) {
+        public AsyncImgLoader(final LinearLayout view, final Image img, final boolean offline) {
             this.view = view;
             this.img = img;
             this.offline = offline;

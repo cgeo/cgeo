@@ -107,7 +107,7 @@ public class cgCache implements ICache, IWaypoint {
             return cgData.loadWaypoints(geocode);
         }
     };
-    private List<cgImage> spoilers = null;
+    private List<Image> spoilers = null;
     private LazyInitializedList<LogEntry> logs = new LazyInitializedList<LogEntry>() {
         @Override
         protected List<LogEntry> loadFromDatabase() {
@@ -728,15 +728,15 @@ public class cgCache implements ICache, IWaypoint {
         return inventory;
     }
 
-    public void addSpoiler(final cgImage spoiler) {
+    public void addSpoiler(final Image spoiler) {
         if (spoilers == null) {
-            spoilers = new ArrayList<cgImage>();
+            spoilers = new ArrayList<Image>();
         }
         spoilers.add(spoiler);
     }
 
     @Override
-    public List<cgImage> getSpoilers() {
+    public List<Image> getSpoilers() {
         if (spoilers == null) {
             return Collections.emptyList();
         }
@@ -1085,7 +1085,7 @@ public class cgCache implements ICache, IWaypoint {
         this.attributes.set(attributes);
     }
 
-    public void setSpoilers(List<cgImage> spoilers) {
+    public void setSpoilers(List<Image> spoilers) {
         this.spoilers = spoilers;
     }
 
@@ -1492,7 +1492,7 @@ public class cgCache implements ICache, IWaypoint {
 
             // store spoilers
             if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-                for (cgImage oneSpoiler : cache.getSpoilers()) {
+                for (Image oneSpoiler : cache.getSpoilers()) {
                     imgGetter.getDrawable(oneSpoiler.getUrl());
                 }
             }
@@ -1505,7 +1505,7 @@ public class cgCache implements ICache, IWaypoint {
             if (Settings.isStoreLogImages()) {
                 for (LogEntry log : cache.getLogs()) {
                     if (log.hasLogImages()) {
-                        for (cgImage oneLogImg : log.getLogImages()) {
+                        for (Image oneLogImg : log.getLogImages()) {
                             imgGetter.getDrawable(oneLogImg.getUrl());
                         }
                     }
@@ -1624,8 +1624,8 @@ public class cgCache implements ICache, IWaypoint {
         return StaticMapsProvider.hasStaticMap(this);
     }
 
-    public List<cgImage> getImages() {
-        List<cgImage> result = new ArrayList<cgImage>();
+    public List<Image> getImages() {
+        List<Image> result = new ArrayList<Image>();
         result.addAll(getSpoilers());
         for (LogEntry log : getLogs()) {
             result.addAll(log.getLogImages());

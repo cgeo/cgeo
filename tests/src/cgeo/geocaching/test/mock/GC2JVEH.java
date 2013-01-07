@@ -1,7 +1,7 @@
 package cgeo.geocaching.test.mock;
 
+import cgeo.geocaching.Image;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.cgImage;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -140,9 +140,9 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public List<cgImage> getSpoilers() {
-        final ArrayList<cgImage> spoilers = new ArrayList<cgImage>();
-        final cgImage mockedImage = new cgImage(null, null, null);
+    public List<Image> getSpoilers() {
+        final ArrayList<Image> spoilers = new ArrayList<Image>();
+        final Image mockedImage = new Image(null, null, null);
         spoilers.add(mockedImage);
         spoilers.add(mockedImage);
         spoilers.add(mockedImage);
