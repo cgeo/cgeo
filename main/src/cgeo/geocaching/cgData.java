@@ -1296,7 +1296,7 @@ public class cgData {
         }
     }
 
-    public static boolean saveTrackable(final cgTrackable trackable) {
+    public static boolean saveTrackable(final Trackable trackable) {
         init();
 
         database.beginTransaction();
@@ -1310,7 +1310,7 @@ public class cgData {
         return true;
     }
 
-    private static void saveInventoryWithoutTransaction(final String geocode, final List<cgTrackable> trackables) {
+    private static void saveInventoryWithoutTransaction(final String geocode, final List<Trackable> trackables) {
         if (geocode != null) {
             database.delete(dbTableTrackables, "geocode = ?", new String[]{geocode});
         }
@@ -1318,7 +1318,7 @@ public class cgData {
         if (CollectionUtils.isNotEmpty(trackables)) {
             ContentValues values = new ContentValues();
             long timeStamp = System.currentTimeMillis();
-            for (cgTrackable trackable : trackables) {
+            for (Trackable trackable : trackables) {
                 final String tbCode = trackable.getGeocode();
                 if (StringUtils.isNotBlank(tbCode)) {
                     database.delete(dbTableTrackables, "tbcode = ?", new String[] { tbCode });
@@ -1494,10 +1494,10 @@ public class cgData {
                 }
 
                 if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
-                    final List<cgTrackable> inventory = loadInventory(cache.getGeocode());
+                    final List<Trackable> inventory = loadInventory(cache.getGeocode());
                     if (CollectionUtils.isNotEmpty(inventory)) {
                         if (cache.getInventory() == null) {
-                            cache.setInventory(new ArrayList<cgTrackable>());
+                            cache.setInventory(new ArrayList<Trackable>());
                         } else {
                             cache.getInventory().clear();
                         }
@@ -1900,14 +1900,14 @@ public class cgData {
         return logCounts;
     }
 
-    private static List<cgTrackable> loadInventory(String geocode) {
+    private static List<Trackable> loadInventory(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
         init();
 
-        final List<cgTrackable> trackables = new ArrayList<cgTrackable>();
+        final List<Trackable> trackables = new ArrayList<Trackable>();
 
         final Cursor cursor = database.query(
                 dbTableTrackables,
@@ -1928,7 +1928,7 @@ public class cgData {
         return trackables;
     }
 
-    public static cgTrackable loadTrackable(final String geocode) {
+    public static Trackable loadTrackable(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
@@ -1945,15 +1945,15 @@ public class cgData {
                 null,
                 "1");
 
-        final cgTrackable trackable = cursor.moveToFirst() ? createTrackableFromDatabaseContent(cursor) : null;
+        final Trackable trackable = cursor.moveToFirst() ? createTrackableFromDatabaseContent(cursor) : null;
 
         cursor.close();
 
         return trackable;
     }
 
-    private static cgTrackable createTrackableFromDatabaseContent(final Cursor cursor) {
-        final cgTrackable trackable = new cgTrackable();
+    private static Trackable createTrackableFromDatabaseContent(final Cursor cursor) {
+        final Trackable trackable = new Trackable();
         trackable.setGeocode(cursor.getString(cursor.getColumnIndex("tbcode")));
         trackable.setGuid(cursor.getString(cursor.getColumnIndex("guid")));
         trackable.setName(cursor.getString(cursor.getColumnIndex("title")));

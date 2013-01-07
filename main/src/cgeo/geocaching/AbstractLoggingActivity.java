@@ -55,7 +55,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
         if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
             smileyVisible = true;
         }
-        final cgTrackable trackable = getLogContext().getTrackable();
+        final Trackable trackable = getLogContext().getTrackable();
         if (trackable != null && ConnectorFactory.getConnector(trackable).equals(GCConnector.getInstance())) {
             smileyVisible = true;
         }

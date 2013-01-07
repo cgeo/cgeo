@@ -2196,13 +2196,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
-            view.setAdapter(new ArrayAdapter<cgTrackable>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
+            view.setAdapter(new ArrayAdapter<Trackable>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
             view.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                     Object selection = arg0.getItemAtPosition(arg2);
-                    if (selection instanceof cgTrackable) {
-                        cgTrackable trackable = (cgTrackable) selection;
+                    if (selection instanceof Trackable) {
+                        Trackable trackable = (Trackable) selection;
                         TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
                     }
                 }

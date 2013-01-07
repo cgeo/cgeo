@@ -1,7 +1,7 @@
 package cgeo.geocaching.test.mock;
 
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -133,9 +133,9 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public List<cgTrackable> getInventory() {
-        final ArrayList<cgTrackable> inventory = new ArrayList<cgTrackable>();
-        inventory.add(new cgTrackable());
+    public List<Trackable> getInventory() {
+        final ArrayList<Trackable> inventory = new ArrayList<Trackable>();
+        inventory.add(new Trackable());
         return inventory;
     }
 

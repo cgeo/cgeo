@@ -58,7 +58,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
     private static final int MENU_LOG_TOUCH = 1;
     private static final int MENU_BROWSER_TRACKABLE = 2;
-    private cgTrackable trackable = null;
+    private Trackable trackable = null;
     private String geocode = null;
     private String name = null;
     private String guid = null;
@@ -545,18 +545,18 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             // trackable spotted
             if (StringUtils.isNotBlank(trackable.getSpottedName()) ||
-                    trackable.getSpottedType() == cgTrackable.SPOTTED_UNKNOWN ||
-                    trackable.getSpottedType() == cgTrackable.SPOTTED_OWNER) {
+                    trackable.getSpottedType() == Trackable.SPOTTED_UNKNOWN ||
+                    trackable.getSpottedType() == Trackable.SPOTTED_OWNER) {
                 boolean showTimeSpan = true;
                 StringBuilder text;
 
-                if (trackable.getSpottedType() == cgTrackable.SPOTTED_CACHE) {
+                if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
                     text = new StringBuilder(res.getString(R.string.trackable_spotted_in_cache) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
-                } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_USER) {
+                } else if (trackable.getSpottedType() == Trackable.SPOTTED_USER) {
                     text = new StringBuilder(res.getString(R.string.trackable_spotted_at_user) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
-                } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_UNKNOWN) {
+                } else if (trackable.getSpottedType() == Trackable.SPOTTED_UNKNOWN) {
                     text = new StringBuilder(res.getString(R.string.trackable_spotted_unknown_location));
-                } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_OWNER) {
+                } else if (trackable.getSpottedType() == Trackable.SPOTTED_OWNER) {
                     text = new StringBuilder(res.getString(R.string.trackable_spotted_owner));
                 } else {
                     text = new StringBuilder("N/A");
@@ -576,14 +576,14 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 final TextView spotted = details.add(R.string.trackable_spotted, text.toString());
                 spotted.setClickable(true);
-                if (cgTrackable.SPOTTED_CACHE == trackable.getSpottedType()) {
+                if (Trackable.SPOTTED_CACHE == trackable.getSpottedType()) {
                     spotted.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View arg0) {
                             CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
                         }
                     });
-                } else if (cgTrackable.SPOTTED_USER == trackable.getSpottedType()) {
+                } else if (Trackable.SPOTTED_USER == trackable.getSpottedType()) {
                     spotted.setOnClickListener(new UserActionsListener());
                 }
             }

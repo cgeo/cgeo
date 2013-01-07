@@ -2,7 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -84,7 +84,7 @@ public final class ConnectorFactory {
         return getConnector(cache.getGeocode());
     }
 
-    public static IConnector getConnector(cgTrackable trackable) {
+    public static IConnector getConnector(Trackable trackable) {
         return getConnector(trackable.getGeocode());
     }
 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class cgTrackable implements ILogable {
+public class Trackable implements ILogable {
     static final public int SPOTTED_UNSET = 0;
     static final public int SPOTTED_CACHE = 1;
     static final public int SPOTTED_USER = 2;
@@ -44,7 +44,7 @@ public class cgTrackable implements ILogable {
                 int id = Integer.parseInt(hex, 16);
                 return "http://geokrety.org/konkret.php?id=" + id;
             } catch (NumberFormatException e) {
-                Log.e("cgTrackable.getUrl", e);
+                Log.e("Trackable.getUrl", e);
                 return null;
             }
         }

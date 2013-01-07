@@ -114,7 +114,7 @@ public class cgCache implements ICache, IWaypoint {
             return cgData.loadLogs(geocode);
         }
     };
-    private List<cgTrackable> inventory = null;
+    private List<Trackable> inventory = null;
     private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
     private boolean logOffline = false;
     private boolean userModifiedCoords = false;
@@ -724,7 +724,7 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     @Override
-    public List<cgTrackable> getInventory() {
+    public List<Trackable> getInventory() {
         return inventory;
     }
 
@@ -1089,7 +1089,7 @@ public class cgCache implements ICache, IWaypoint {
         this.spoilers = spoilers;
     }
 
-    public void setInventory(List<cgTrackable> inventory) {
+    public void setInventory(List<Trackable> inventory) {
         this.inventory = inventory;
     }
 

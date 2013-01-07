@@ -56,7 +56,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchTrackableNotExisting() {
-        cgTrackable tb = GCParser.searchTrackable("123456", null, null);
+        Trackable tb = GCParser.searchTrackable("123456", null, null);
         assertNull(tb);
     }
 
@@ -65,7 +65,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchTrackable() {
-        final cgTrackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
+        final Trackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
         // fix data
         assertEquals("aefffb86-099f-444f-b132-605436163aa8", tb.getGuid());
         assertEquals("TB2J1VZ", tb.getGeocode());
@@ -82,7 +82,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
         // Following data can change over time
         assertTrue(tb.getDistance() >= 10617.8f);
         assertTrue(tb.getLogs().size() >= 10);
-        assertTrue(cgTrackable.SPOTTED_CACHE == tb.getSpottedType() || cgTrackable.SPOTTED_USER == tb.getSpottedType());
+        assertTrue(Trackable.SPOTTED_CACHE == tb.getSpottedType() || Trackable.SPOTTED_USER == tb.getSpottedType());
         // no assumption possible: assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
         // no assumption possible: assertEquals("Nice place for a break cache", tb.getSpottedName());
 

@@ -47,7 +47,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private int attempts = 0;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
-    private cgTrackable trackable;
+    private Trackable trackable;
 
     private Handler showProgressHandler = new Handler() {
         @Override
@@ -207,7 +207,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         tweetCheck.setChecked(true);
 
         if (CollectionUtils.isEmpty(possibleLogTypes)) {
-            possibleLogTypes = cgTrackable.getPossibleLogTypes();
+            possibleLogTypes = Trackable.getPossibleLogTypes();
         }
 
         final Button buttonPost = (Button) findViewById(R.id.post);
@@ -355,7 +355,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         return StatusCode.LOG_POST_ERROR;
     }
 
-    public static void startActivity(final Context context, final cgTrackable trackable) {
+    public static void startActivity(final Context context, final Trackable trackable) {
         final Intent logTouchIntent = new Intent(context, LogTrackableActivity.class);
         logTouchIntent.putExtra("geocode", trackable.getGeocode());
         logTouchIntent.putExtra("guid", trackable.getGuid());

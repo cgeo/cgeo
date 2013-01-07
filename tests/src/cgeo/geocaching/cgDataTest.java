@@ -107,9 +107,9 @@ public class cgDataTest extends CGeoTestCase {
         final cgCache cache = new cgCache();
         cache.setGeocode(GEOCODE_CACHE);
         cache.setDetailed(true);
-        final cgTrackable trackable = new cgTrackable();
+        final Trackable trackable = new Trackable();
         trackable.setLogs(null);
-        final List<cgTrackable> inventory = new ArrayList<cgTrackable>();
+        final List<Trackable> inventory = new ArrayList<Trackable>();
         inventory.add(trackable);
         cache.setInventory(inventory);
 

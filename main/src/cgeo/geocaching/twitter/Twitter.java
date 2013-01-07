@@ -1,9 +1,9 @@
 package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -77,7 +77,7 @@ public final class Twitter {
     }
 
     public static void postTweetTrackable(String geocode) {
-        final cgTrackable trackable = cgData.loadTrackable(geocode);
+        final Trackable trackable = cgData.loadTrackable(geocode);
         String name = trackable.getName();
         if (name.length() > 82) {
             name = name.substring(0, 81) + '…';

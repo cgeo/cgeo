@@ -6,7 +6,7 @@ import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -81,7 +81,7 @@ public abstract class GPXParser extends FileParser {
     final private String version;
 
     private cgCache cache;
-    private cgTrackable trackable = new cgTrackable();
+    private Trackable trackable = new Trackable();
     private LogEntry log = null;
 
     private String type = null;
@@ -661,7 +661,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void start(Attributes attrs) {
-                    trackable = new cgTrackable();
+                    trackable = new Trackable();
 
                     try {
                         if (attrs.getIndex("ref") > -1) {
@@ -679,7 +679,7 @@ public abstract class GPXParser extends FileParser {
                 public void end() {
                     if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
                         if (cache.getInventory() == null) {
-                            cache.setInventory(new ArrayList<cgTrackable>());
+                            cache.setInventory(new ArrayList<Trackable>());
                         }
                         cache.getInventory().add(trackable);
                     }

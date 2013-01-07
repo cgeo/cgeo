@@ -4,12 +4,12 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -561,7 +561,7 @@ public abstract class GCParser {
             final MatcherWrapper matcherInventory = new MatcherWrapper(GCConstants.PATTERN_INVENTORY, page);
             if (matcherInventory.find()) {
                 if (cache.getInventory() == null) {
-                    cache.setInventory(new ArrayList<cgTrackable>());
+                    cache.setInventory(new ArrayList<Trackable>());
                 }
 
                 if (matcherInventory.groupCount() > 1) {
@@ -572,7 +572,7 @@ public abstract class GCParser {
 
                         while (matcherInventoryInside.find()) {
                             if (matcherInventoryInside.groupCount() > 0) {
-                                final cgTrackable inventoryItem = new cgTrackable();
+                                final Trackable inventoryItem = new Trackable();
                                 inventoryItem.setGuid(matcherInventoryInside.group(1));
                                 inventoryItem.setName(matcherInventoryInside.group(2));
 
@@ -884,13 +884,13 @@ public abstract class GCParser {
         return null;
     }
 
-    public static cgTrackable searchTrackable(final String geocode, final String guid, final String id) {
+    public static Trackable searchTrackable(final String geocode, final String guid, final String id) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
             Log.w("GCParser.searchTrackable: No geocode nor guid nor id given");
             return null;
         }
 
-        cgTrackable trackable = new cgTrackable();
+        Trackable trackable = new Trackable();
 
         final Parameters params = new Parameters();
         if (StringUtils.isNotBlank(geocode)) {
@@ -1244,13 +1244,13 @@ public abstract class GCParser {
     }
 
     /**
-     * Parse a trackable HTML description into a cgTrackable object
+     * Parse a trackable HTML description into a Trackable object
      *
      * @param page
      *            the HTML page to parse, already processed through {@link BaseUtils#replaceWhitespace}
      * @return the parsed trackable, or null if none could be parsed
      */
-    static cgTrackable parseTrackable(final String page, final String possibleTrackingcode) {
+    static Trackable parseTrackable(final String page, final String possibleTrackingcode) {
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.parseTrackable: No page given");
             return null;
@@ -1260,7 +1260,7 @@ public abstract class GCParser {
             return null;
         }
 
-        final cgTrackable trackable = new cgTrackable();
+        final Trackable trackable = new Trackable();
 
         // trackable geocode
         trackable.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()));
@@ -1300,22 +1300,22 @@ public abstract class GCParser {
             if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
                 trackable.setSpottedGuid(matcherSpottedCache.group(1));
                 trackable.setSpottedName(matcherSpottedCache.group(2).trim());
-                trackable.setSpottedType(cgTrackable.SPOTTED_CACHE);
+                trackable.setSpottedType(Trackable.SPOTTED_CACHE);
             }
 
             final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
             if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
                 trackable.setSpottedGuid(matcherSpottedUser.group(1));
                 trackable.setSpottedName(matcherSpottedUser.group(2).trim());
-                trackable.setSpottedType(cgTrackable.SPOTTED_USER);
+                trackable.setSpottedType(Trackable.SPOTTED_USER);
             }
 
             if (BaseUtils.matches(page, GCConstants.PATTERN_TRACKABLE_SPOTTEDUNKNOWN)) {
-                trackable.setSpottedType(cgTrackable.SPOTTED_UNKNOWN);
+                trackable.setSpottedType(Trackable.SPOTTED_UNKNOWN);
             }
 
             if (BaseUtils.matches(page, GCConstants.PATTERN_TRACKABLE_SPOTTEDOWNER)) {
-                trackable.setSpottedType(cgTrackable.SPOTTED_OWNER);
+                trackable.setSpottedType(Trackable.SPOTTED_OWNER);
             }
         } catch (Exception e) {
             // failed to parse trackable last known place

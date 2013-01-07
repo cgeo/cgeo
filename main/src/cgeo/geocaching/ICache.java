@@ -112,7 +112,7 @@ public interface ICache extends IBasicCache {
     /**
      * @return the list of trackables in this cache
      */
-    public List<cgTrackable> getInventory();
+    public List<Trackable> getInventory();
 
     /**
      * @return the list of spoiler images

@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.cgImage;
-import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
@@ -29,20 +29,20 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testTrackable() {
-        final cgTrackable trackable = getTB2R124();
+        final Trackable trackable = getTB2R124();
         assertEquals("TB2R124", trackable.getGeocode());
         assertEquals("Bor. Dortmund - FC Schalke 04", trackable.getName());
         assertEquals("Spiridon Lui", trackable.getOwner());
     }
 
     public void testTrackableWithoutImage() {
-        final cgTrackable trackable = getTB2R124();
+        final Trackable trackable = getTB2R124();
         assertNull(trackable.getImage());
         assertNotNull(trackable.getDetails());
     }
 
     public void testTrackableWithLogImages() {
-        final cgTrackable trackable = getTBXATG();
+        final Trackable trackable = getTBXATG();
         assertEquals("TBXATG", trackable.getGeocode());
 
         List<LogEntry> log = trackable.getLogs();
@@ -72,7 +72,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseTrackableWithoutReleaseDate() {
-        cgTrackable trackable = parseTrackable(R.raw.tb14wfv);
+        Trackable trackable = parseTrackable(R.raw.tb14wfv);
         assertNotNull(trackable);
         assertEquals("The Brickster", trackable.getName());
         assertEquals("Adrian C", trackable.getOwner());
@@ -85,7 +85,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseRelativeLink() {
-        final cgTrackable trackable = parseTrackable(R.raw.tb4cwjx);
+        final Trackable trackable = parseTrackable(R.raw.tb4cwjx);
         assertNotNull(trackable);
         assertEquals("The Golden Lisa", trackable.getName());
         final String goal = trackable.getGoal();
@@ -94,13 +94,13 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertTrue(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\""));
     }
 
-    private cgTrackable parseTrackable(int trackablePage) {
+    private Trackable parseTrackable(int trackablePage) {
         String pageContent = getFileContent(trackablePage);
         return GCParser.parseTrackable(BaseUtils.replaceWhitespace(pageContent), null);
     }
 
     public void testParseMarkMissing() {
-        final cgTrackable trackable = parseTrackable(R.raw.tb29ggq);
+        final Trackable trackable = parseTrackable(R.raw.tb29ggq);
         assertNotNull(trackable);
         final List<LogEntry> logs = trackable.getLogs();
         assertNotNull(logs);
@@ -109,16 +109,16 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(LogType.MARKED_MISSING, marked.type);
     }
 
-    private cgTrackable getTB2R124() {
+    private Trackable getTB2R124() {
         return parseTrackable(R.raw.trackable_tb2r124);
     }
 
-    private cgTrackable getTBXATG() {
+    private Trackable getTBXATG() {
         return parseTrackable(R.raw.trackable_tbxatg);
     }
 
     public void testParseTrackableNotExisting() {
-        cgTrackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing), null);
+        Trackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing), null);
         assertNull(trackable);
     }
 
