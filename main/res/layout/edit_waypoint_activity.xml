@@ -90,15 +90,32 @@
                 android:minLines="5"
                 android:singleLine="false" />
 
-            <CheckBox
-                android:id="@+id/setAsCacheCoordsCheckBox"
-                style="@style/checkbox_full"
-                android:text="@string/waypoint_set_as_cache_coords" />
+            <RadioGroup
+                android:id="@+id/modify_cache_coordinates_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" >
 
-            <CheckBox
-                android:id="@+id/uploadCoordsToWebsiteCheckBox"
-                style="@style/checkbox_full"
-                android:text="@string/waypoint_modify_on_website" />
+                <RadioButton
+                    android:id="@+id/modify_cache_coordinates_nothing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/waypoint_do_not_touch_cache_coordinates" />
+
+                <RadioButton
+                    android:id="@+id/modify_cache_coordinates_local"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waypoint_set_as_cache_coords" />
+
+                <RadioButton
+                    android:id="@+id/modify_cache_coordinates_local_and_remote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waypoint_save_and_modify_on_website"
+                    android:visibility="gone" />
+            </RadioGroup>
 
             <Button
                 android:id="@+id/add_waypoint"
