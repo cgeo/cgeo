@@ -251,7 +251,6 @@ public class EditWaypointActivity extends AbstractActivity {
     final private GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoData(final IGeoData geo) {
-            Log.d("EditWaypointActivity.updateLocation called");
             if (geo.getCoords() == null) {
                 return;
             }
@@ -261,8 +260,8 @@ public class EditWaypointActivity extends AbstractActivity {
                 Button bLon = (Button) findViewById(R.id.buttonLongitude);
                 bLat.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 bLon.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-            } catch (Exception e) {
-                Log.w("Failed to update location.");
+            } catch (final Exception e) {
+                Log.e("failed to update location", e);
             }
         }
     };
