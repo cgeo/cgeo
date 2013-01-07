@@ -126,7 +126,7 @@ public class OC11XMLParser {
                 case 8: // Math/Mathe-/Physikcache
                     return CacheType.MYSTERY;
                 case 9: // Moving/beweglicher Cache
-                    return CacheType.UNKNOWN;
+                    return CacheType.VIRTUAL;
                 case 10: // Driv./Drive-In
                     return CacheType.TRADITIONAL;
             }
