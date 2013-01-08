@@ -479,7 +479,7 @@
   <string name="cache_log_images_loading">Caricamento immagini log…</string>
   <string name="cache_log_images_title">Immagini Log</string>
   <string name="cache_log_image_default_title">Foto</string>
-  <string name="cache_personal_note">Note personali</string>  
+  <string name="cache_personal_note">Note personali</string>
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
   <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su geocaching.com per vederla correttamente.</string>
