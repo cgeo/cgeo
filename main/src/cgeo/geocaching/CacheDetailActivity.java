@@ -470,7 +470,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 showToast(res.getString(R.string.translate_length_warning));
             }
             menu.add(viewId, MENU_FIELD_TRANSLATE, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
-            if (Settings.isUseEnglish() && Locale.getDefault() != Locale.ENGLISH) {
+            if (Settings.isUseEnglish() && !StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
                 menu.add(viewId, MENU_FIELD_TRANSLATE_EN, 0, res.getString(R.string.translate_to_english));
             }
 
