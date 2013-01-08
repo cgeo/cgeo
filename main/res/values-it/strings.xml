@@ -206,6 +206,7 @@
   <string name="warn_invalid_mapfile">La mappa selezionata non è mapsforge versione 0.3.0.\nMappa offline non disponibile.</string>
   <string name="warn_deprecated_mapfile">Stai usando una vecchia mappa 0.2.4.\nAggiornala alla 0.3.0 appena puoi.\nIl supporto alla 0.2.4 sarà rimosso nella prossima versione.</string>
   <string name="warn_nonexistant_mapfile">La mappa selezionata non esiste.\nMappa offline non disponibile.</string>
+  <string name="warn_rendertheme_missing">Tema mappa non trovato.</string>
 
   <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
   <string name="info_log_saved">c:geo ha salvato il log.</string>
@@ -398,6 +399,9 @@
   <string name="init_mapsources">Tipi di mappe</string>
   <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).</string>
   <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
+  <string name="init_select_themefolder">…</string>
+  <string name="init_map_directory_description">Cartella con le mappe offline</string>
+  <string name="init_select_map_directory">…</string>
   <string name="init_gpx_exportdir">Cartella di export GPX</string>
   <string name="init_gpx_importdir">Cartella di import GPX</string>
   <string name="init_gpx_exportdir_description">Qui puoi selezionare la cartella di esportazione GPX.</string>
@@ -423,6 +427,8 @@
   <string name="init_dbmove_success">Database spostato con successo.</string>
   <string name="init_dbmove_failed">Spostamento fallito</string>
   <string name="init_plain_logs">Visualizza i LOG senza colori</string>
+  <string name="init_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
+  <string name="init_rendertheme_folder">Seleziona la cartella di base per i temi mappa personali off-line</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
@@ -473,7 +479,7 @@
   <string name="cache_log_images_loading">Caricamento immagini log…</string>
   <string name="cache_log_images_title">Immagini Log</string>
   <string name="cache_log_image_default_title">Foto</string>
-  <string name="cache_personal_note">Note personali</string>
+  <string name="cache_personal_note">Note personali</string>  
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
   <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su geocaching.com per vederla correttamente.</string>
@@ -485,6 +491,8 @@
   <string name="cache_favpoint_not_on">Questo cache non è uno dei tuoi favoriti.</string>
   <string name="cache_favpoint_add">Aggiungi</string>
   <string name="cache_favpoint_remove">Rimuovi</string>
+  <string name="cache_images">Immagini</string>
+  
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
       <item quantity="one">1 Waypoint</item>
@@ -560,6 +568,8 @@
   <string name="cache_coordinates_original">Coordinate originali</string>
   <string name="cache_spoiler_images_title">Immagini spoiler</string>
   <string name="cache_spoiler_images_loading">Caricamento immagini spoiler…</string>
+  <string name="cache_images_title">Immaginis</string>
+  <string name="cache_images_loading">Caricamento immagini…</string>
   <string name="cache_log_types">Tipi di Log</string>
   <string name="cache_coordinates_no">Questo cache non ha coordinate.</string>
   <string name="cache_clear_history">Cancella cronologia</string>
@@ -570,6 +580,9 @@
   <string name="cache_image_open_browser">Apri nel browser</string>
   <string name="cache_share_field">Condividi</string>
   <string name="cache_time_full_hours">Precise</string>
+
+ <!--  editor dialog -->
+  <string name="editor_save">Salva</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Ricerca file\nin</string>
@@ -603,6 +616,9 @@
 
   <!-- map file select -->
   <string name="map_file_select_title">Seleziona il file mappa</string>
+
+  <!-- theme file select -->
+  <string name="theme_file_select_title">Seleziona il tema personale</string>
 
   <!--  import -->
   <string name="web_import_title">Importa dal web</string>
@@ -653,10 +669,13 @@
   <string name="map_map">Mappa</string>
   <string name="map_live">Mappa Live</string>
   <string name="map_view_map">Scegli mappa</string>
+  <string name="map_modes">Modi mappa</string>
   <string name="map_trail_show">Mostra scia</string>
   <string name="map_trail_hide">Nasconde scia</string>
   <string name="map_circles_show">Mostra area cache</string>
   <string name="map_circles_hide">Nascondi area cache</string>
+  <string name="map_theme_builtin">Tema mappa predefinito</string>
+  <string name="map_theme_select">Scegli un tema mappa</string>
   <string name="map_live_enable">Attiva online</string>
   <string name="map_live_disable">Disattiva online</string>
   <string name="map_static_title">Mappe statiche</string>
