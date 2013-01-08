@@ -721,7 +721,7 @@
 
   <!-- trackable -->
   <string name="trackable">Oggetto trackable</string>
-  <string name="trackable_details_loading">Caricamente dettagli trackable…</string>
+  <string name="trackable_details_loading">Caricamento dettagli trackable…</string>
   <string name="trackable_log_touch">Documenta il contatto</string>
   <string name="trackable_browser_open">Apri nel Browser</string>
   <string name="trackable_goal">Obbiettivo</string>
