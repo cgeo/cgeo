@@ -7,7 +7,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.network.Network;
+import cgeo.geocaching.loaders.UrlLoader;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DateDialog;
@@ -22,10 +22,11 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,13 +45,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class VisitCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
+public class VisitCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent, LoaderManager.LoaderCallbacks<String> {
     static final String EXTRAS_FOUND = "found";
     static final String EXTRAS_TEXT = "text";
     static final String EXTRAS_GEOCODE = "geocode";
     static final String EXTRAS_ID = "id";
 
     private static final int SUBMENU_VOTE = 3;
+    private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
+    private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
+    private static final String SAVED_STATE_DATE = "cgeo.geocaching.saved_state_date";
 
     private LayoutInflater inflater = null;
     private cgCache cache = null;
@@ -61,116 +65,125 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private boolean alreadyFound = false;
     private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private String[] viewstates = null;
-    private boolean gettingViewstate = true;
     private List<TrackableLog> trackables = null;
-    private Calendar date = Calendar.getInstance();
-    private LogType typeSelected = LogType.UNKNOWN;
-    private int attempts = 0;
     private Button postButton = null;
     private Button clearButton = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
-    private double rating = 0.0;
     private boolean tbChanged = false;
 
-    // handlers
-    private final Handler loadDataHandler = new Handler() {
+    // Data to be saved while reconfiguring
+    private double rating;
+    private LogType typeSelected;
+    private Calendar date;
 
-        @Override
-        public void handleMessage(Message msg) {
-            if (!possibleLogTypes.contains(typeSelected)) {
-                typeSelected = possibleLogTypes.get(0);
-                setType(typeSelected);
-
-                showToast(res.getString(R.string.info_log_type_changed));
-            }
-
-            if (Login.isEmpty(viewstates)) {
-                if (attempts < 2) {
-                    new LoadDataThread().start();
-                } else {
-                    showToast(res.getString(R.string.err_log_load_data));
-                    showProgress(false);
-                }
-                return;
-            }
-
-            gettingViewstate = false; // we're done, user can post log
-
-            enablePostButton(true);
-
-            // add trackables
-            if (CollectionUtils.isNotEmpty(trackables)) {
-                if (inflater == null) {
-                    inflater = getLayoutInflater();
-                }
-
-                final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
-                inventoryView.removeAllViews();
-
-                for (TrackableLog tb : trackables) {
-                    LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.visit_trackable, null);
-
-                    ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
-                    ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-                    ((TextView) inventoryItem.findViewById(R.id.action))
-                            .setText(res.getString(Settings.isTrackableAutoVisit()
-                                    ? LogTypeTrackable.VISITED.resourceId
-                                    : LogTypeTrackable.DO_NOTHING.resourceId)
-                                    + " ▼");
-
-                    inventoryItem.setId(tb.id);
-                    final String tbCode = tb.trackCode;
-                    inventoryItem.setClickable(true);
-                    registerForContextMenu(inventoryItem);
-                    inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View view) {
-                            final Intent trackablesIntent = new Intent(VisitCacheActivity.this, TrackableActivity.class);
-                            trackablesIntent.putExtra(EXTRAS_GEOCODE, tbCode);
-                            startActivity(trackablesIntent);
-                        }
-                    });
-                    inventoryItem.findViewById(R.id.action).setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View view) {
-                            openContextMenu(view);
-                        }
-                    });
-
-                    inventoryView.addView(inventoryItem);
-
-                    if (Settings.isTrackableAutoVisit()) {
-                        tb.action = LogTypeTrackable.VISITED;
-                        tbChanged = true;
-                    }
-                }
-
-                if (inventoryView.getChildCount() > 0) {
-                    findViewById(R.id.inventory_box).setVisibility(View.VISIBLE);
-                }
-                if (inventoryView.getChildCount() > 1) {
-                    final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
-
-                    final Button changeButton = (Button) inventoryChangeAllView.findViewById(R.id.changebutton);
-                    registerForContextMenu(changeButton);
-                    changeButton.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View view) {
-                            openContextMenu(view);
-                        }
-                    });
-
-                    inventoryChangeAllView.setVisibility(View.VISIBLE);
-                }
-            }
-
-            showProgress(false);
+    @Override
+    public Loader<String> onCreateLoader(final int id, final Bundle args) {
+        if (!Settings.isLogin()) { // allow offline logging
+            showToast(res.getString(R.string.err_login));
+            return null;
         }
-    };
+        return new UrlLoader(getBaseContext(), "http://www.geocaching.com/seek/log.aspx", new Parameters("ID", cacheid));
+    }
+
+    @Override
+    public void onLoaderReset(final Loader<String> loader) {
+        // Nothing to do
+    }
+
+    @Override
+    public void onLoadFinished(final Loader<String> loader, final String page) {
+        if (page == null) {
+            showToast(res.getString(R.string.err_log_load_data));
+            showProgress(false);
+            return;
+        }
+
+        viewstates = Login.getViewstates(page);
+        trackables = GCParser.parseTrackableLog(page);
+        possibleLogTypes = GCParser.parseTypes(page);
+        possibleLogTypes.remove(LogType.UPDATE_COORDINATES);
+
+        if (!possibleLogTypes.contains(typeSelected)) {
+            typeSelected = possibleLogTypes.get(0);
+            setType(typeSelected);
+
+            showToast(res.getString(R.string.info_log_type_changed));
+        }
+
+        enablePostButton(true);
+
+        // add trackables
+        if (CollectionUtils.isNotEmpty(trackables)) {
+            if (inflater == null) {
+                inflater = getLayoutInflater();
+            }
+
+            final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
+            inventoryView.removeAllViews();
+
+            for (TrackableLog tb : trackables) {
+                LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.visit_trackable, null);
+
+                ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
+                ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
+                ((TextView) inventoryItem.findViewById(R.id.action))
+                        .setText(res.getString(Settings.isTrackableAutoVisit()
+                                ? LogTypeTrackable.VISITED.resourceId
+                                : LogTypeTrackable.DO_NOTHING.resourceId)
+                                + " ▼");
+
+                inventoryItem.setId(tb.id);
+                final String tbCode = tb.trackCode;
+                inventoryItem.setClickable(true);
+                registerForContextMenu(inventoryItem);
+                inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        final Intent trackablesIntent = new Intent(VisitCacheActivity.this, TrackableActivity.class);
+                        trackablesIntent.putExtra(EXTRAS_GEOCODE, tbCode);
+                        startActivity(trackablesIntent);
+                    }
+                });
+                inventoryItem.findViewById(R.id.action).setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        openContextMenu(view);
+                    }
+                });
+
+                inventoryView.addView(inventoryItem);
+
+                if (Settings.isTrackableAutoVisit()) {
+                    tb.action = LogTypeTrackable.VISITED;
+                    tbChanged = true;
+                }
+            }
+
+            if (inventoryView.getChildCount() > 0) {
+                findViewById(R.id.inventory_box).setVisibility(View.VISIBLE);
+            }
+            if (inventoryView.getChildCount() > 1) {
+                final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
+
+                final Button changeButton = (Button) inventoryChangeAllView.findViewById(R.id.changebutton);
+                registerForContextMenu(changeButton);
+                changeButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        openContextMenu(view);
+                    }
+                });
+
+                inventoryChangeAllView.setVisibility(View.VISIBLE);
+            }
+        }
+
+        showProgress(false);
+    }
 
     private void enablePostButton(boolean enabled) {
         postButton.setEnabled(enabled);
@@ -234,14 +247,14 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTheme();
         setContentView(R.layout.visit);
         setTitle(res.getString(R.string.log_new_log));
 
-        // get parameters
+        // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             cacheid = extras.getString(EXTRAS_ID);
@@ -264,26 +277,85 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
         }
 
-        init();
-    }
+        // Get ids for later use
+        postButton = (Button) findViewById(R.id.post);
+        tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
+        tweetCheck = (CheckBox) findViewById(R.id.tweet);
+        clearButton = (Button) findViewById(R.id.clear);
 
-    @Override
-    public void onResume() {
-        super.onResume();
+        // Restore previous state or initialize with default values
+        date = Calendar.getInstance();
+        if (savedInstanceState != null) {
+            rating = savedInstanceState.getDouble(SAVED_STATE_RATING);
+            typeSelected = LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
+            date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
+        } else {
+            rating = 0.0;
+            if (alreadyFound) {
+                typeSelected = LogType.NOTE;
+            } else {
+                typeSelected = LogType.FOUND_IT;
+            }
 
+            // If log had been previously saved, load it now, otherwise initialize signature as needed
+            final LogEntry log = cgData.loadLogOffline(geocode);
+            if (log != null) {
+                typeSelected = log.type;
+                date.setTime(new Date(log.date));
+                text = log.log;
+            } else if (StringUtils.isNotBlank(Settings.getSignature())
+                    && Settings.isAutoInsertSignature()
+                    && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
+                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache)), false);
+            }
+        }
+        updatePostButtonText();
+
+        final Button saveButton = (Button) findViewById(R.id.save);
+
+        possibleLogTypes = cache.getPossibleLogTypes();
+
+        enablePostButton(false);
+
+        final Button typeButton = (Button) findViewById(R.id.type);
+        registerForContextMenu(typeButton);
+        typeButton.setText(typeSelected.getL10n());
+        typeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                openContextMenu(view);
+            }
+        });
+
+        final Button dateButton = (Button) findViewById(R.id.date);
+        setDate(date);
+        dateButton.setOnClickListener(new DateListener());
+
+        final EditText logView = (EditText) findViewById(R.id.log);
+        if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text)) {
+            logView.setText(text);
+        }
+
+        tweetCheck.setChecked(true);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                saveLog(true);
+            }
+        });
+
+        clearButton.setOnClickListener(new ClearListener());
+
+        getSupportLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         saveLog(false);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        init();
     }
 
     @Override
@@ -346,7 +418,6 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         if (viewId == R.id.type) {
             for (final LogType typeOne : possibleLogTypes) {
                 menu.add(viewId, typeOne.id, 0, typeOne.getL10n());
-                Log.w("Adding " + typeOne + " " + typeOne.getL10n());
             }
         } else if (viewId == R.id.changebutton) {
             final int textId = findViewById(viewId).getId();
@@ -440,79 +511,12 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         return false;
     }
 
-    public void init() {
-        postButton = (Button) findViewById(R.id.post);
-        tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
-        tweetCheck = (CheckBox) findViewById(R.id.tweet);
-        clearButton = (Button) findViewById(R.id.clear);
-        final Button saveButton = (Button) findViewById(R.id.save);
-
-        possibleLogTypes = cache.getPossibleLogTypes();
-
-        final LogEntry log = cgData.loadLogOffline(geocode);
-        if (log != null) {
-            typeSelected = log.type;
-            date.setTime(new Date(log.date));
-            text = log.log;
-            updatePostButtonText();
-        } else if (StringUtils.isNotBlank(Settings.getSignature())
-                && Settings.isAutoInsertSignature()
-                && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache)), false);
-        }
-
-        if (!possibleLogTypes.contains(typeSelected)) {
-            if (alreadyFound) {
-                typeSelected = LogType.NOTE;
-            } else {
-                typeSelected = possibleLogTypes.get(0);
-            }
-            setType(typeSelected);
-        }
-
-        final Button typeButton = (Button) findViewById(R.id.type);
-        registerForContextMenu(typeButton);
-        typeButton.setText(typeSelected.getL10n());
-        typeButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                openContextMenu(view);
-            }
-        });
-
-        final Button dateButton = (Button) findViewById(R.id.date);
-        setDate(date);
-        dateButton.setOnClickListener(new DateListener());
-
-        final EditText logView = (EditText) findViewById(R.id.log);
-        if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text)) {
-            logView.setText(text);
-        }
-
-        tweetCheck.setChecked(true);
-
-        final ActivityState lastState = (ActivityState) getLastNonConfigurationInstance();
-        if (lastState != null) {
-            lastState.restore(this);
-        }
-
-        if (Login.isEmpty(viewstates)) {
-            enablePostButton(false);
-            new LoadDataThread().start();
-        } else {
-            enablePostButton(true);
-        }
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                saveLog(true);
-            }
-        });
-
-        clearButton.setOnClickListener(new ClearListener());
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putDouble(SAVED_STATE_RATING, rating);
+        outState.putInt(SAVED_STATE_TYPE, typeSelected.id);
+        outState.putLong(SAVED_STATE_DATE, date.getTimeInMillis());
     }
 
     @Override
@@ -554,19 +558,14 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     private class PostListener implements View.OnClickListener {
-
         @Override
         public void onClick(View arg0) {
-            if (!gettingViewstate) {
-                waitDialog = ProgressDialog.show(VisitCacheActivity.this, null, res.getString(R.string.log_saving), true);
-                waitDialog.setCancelable(true);
+            waitDialog = ProgressDialog.show(VisitCacheActivity.this, null, res.getString(R.string.log_saving), true);
+            waitDialog.setCancelable(true);
 
-                final String log = ((EditText) findViewById(R.id.log)).getText().toString();
-                final Thread thread = new PostLogThread(postLogHandler, log);
-                thread.start();
-            } else {
-                showToast(res.getString(R.string.err_log_load_data_still));
-            }
+            final String log = ((EditText) findViewById(R.id.log)).getText().toString();
+            final Thread thread = new PostLogThread(postLogHandler, log);
+            thread.start();
         }
     }
 
@@ -597,59 +596,6 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             clearButton.setOnClickListener(new ClearListener());
 
             showToast(res.getString(R.string.info_log_cleared));
-        }
-    }
-
-    private class LoadDataThread extends Thread {
-
-        public LoadDataThread() {
-            super("Load data for logging");
-            if (cacheid == null) {
-                showToast(res.getString(R.string.err_detail_cache_forgot_visit));
-
-                finish();
-                return;
-            }
-            if (!Settings.isLogin()) { // allow offline logging
-                showToast(res.getString(R.string.err_login));
-            }
-        }
-
-        @Override
-        public void run() {
-            if (!Settings.isLogin()) {
-                // enable only offline logging, don't get the current state of the cache
-                return;
-            }
-            final Parameters params = new Parameters();
-
-            gettingViewstate = true;
-            attempts++;
-
-            try {
-                if (StringUtils.isNotBlank(cacheid)) {
-                    params.put("ID", cacheid);
-                } else {
-                    loadDataHandler.sendEmptyMessage(0);
-                    return;
-                }
-
-                final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/seek/log.aspx", params));
-
-                viewstates = Login.getViewstates(page);
-                trackables = GCParser.parseTrackableLog(page);
-
-                final List<LogType> typesPre = GCParser.parseTypes(page);
-                if (CollectionUtils.isNotEmpty(typesPre)) {
-                    possibleLogTypes.clear();
-                    possibleLogTypes.addAll(typesPre);
-                    possibleLogTypes.remove(LogType.UPDATE_COORDINATES);
-                }
-            } catch (Exception e) {
-                Log.e("cgeovisit.loadData.run: " + e.toString());
-            }
-
-            loadDataHandler.sendEmptyMessage(0);
         }
     }
 
@@ -727,36 +673,19 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         return ((EditText) findViewById(R.id.log)).getText().toString();
     }
 
-    private static class ActivityState {
+    public static class ActivityState {
         private final String[] viewstates;
         private final List<TrackableLog> trackables;
-        private final int attempts;
         private final List<LogType> possibleLogTypes;
-        private final LogType typeSelected;
-        private final double rating;
 
-        public ActivityState(VisitCacheActivity activity) {
-            this.viewstates = activity.viewstates;
-            this.trackables = activity.trackables;
-            this.attempts = activity.attempts;
-            this.possibleLogTypes = activity.possibleLogTypes;
-            this.typeSelected = activity.typeSelected;
-            this.rating = activity.rating;
+        public ActivityState(final String[] viewstates,
+                             final List<TrackableLog> trackables,
+                             final List<LogType> possibleLogTypes) {
+            this.viewstates = viewstates;
+            this.trackables = trackables;
+            this.possibleLogTypes = possibleLogTypes;
         }
 
-        public void restore(final VisitCacheActivity activity) {
-            activity.viewstates = this.viewstates;
-            activity.trackables = this.trackables;
-            activity.attempts = this.attempts;
-            activity.possibleLogTypes = this.possibleLogTypes;
-            activity.typeSelected = this.typeSelected;
-            activity.rating = this.rating;
-        }
-    }
-
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-        return new ActivityState(this);
     }
 
     @Override

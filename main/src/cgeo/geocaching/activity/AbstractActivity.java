@@ -5,14 +5,14 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
 
-public abstract class AbstractActivity extends Activity implements IAbstractActivity {
+public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
 
     private String helpTopic;
 
