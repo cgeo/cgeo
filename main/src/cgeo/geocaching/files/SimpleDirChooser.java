@@ -43,13 +43,7 @@ public class SimpleDirChooser extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Bundle extras = getIntent().getExtras();
-        String startDir = extras.getString(START_DIR);
-        if (StringUtils.isBlank(startDir)) {
-            startDir = Environment.getExternalStorageDirectory().getPath();
-        } else {
-            startDir = startDir.substring(0, startDir.lastIndexOf(File.separatorChar));
-        }
-        currentDir = new File(startDir);
+        currentDir = dirContaining(extras.getString(START_DIR));
 
         ActivityMixin.setTheme(this);
         setContentView(R.layout.simple_dir_chooser);
@@ -80,6 +74,18 @@ public class SimpleDirChooser extends ListActivity {
                 finish();
             }
         });
+    }
+
+    /**
+     * Return the directory containing a given path, or a sensible default.
+     *
+     * @param path the path to get the enclosing directory from, can be null or empty
+     * @return the directory containing <code>path</code>, or a sensible default if none
+     */
+    private static File dirContaining(final String path) {
+        return StringUtils.contains(path, File.separatorChar) ?
+                new File(StringUtils.substringBeforeLast(path, Character.toString(File.separatorChar))) :
+                Environment.getExternalStorageDirectory();
     }
 
     private void fill(File dir) {
