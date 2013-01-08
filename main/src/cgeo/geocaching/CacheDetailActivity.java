@@ -586,6 +586,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (search == null) {
                     showToast(res.getString(R.string.err_dwld_details_failed));
 
+                    progress.dismiss();
                     finish();
                     return;
                 }
@@ -593,6 +594,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (search.getError() != null) {
                     showToast(res.getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(res) + ".");
 
+                    progress.dismiss();
                     finish();
                     return;
                 }
@@ -664,6 +666,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
                 showToast(res.getString(R.string.err_detail_cache_forgot));
 
+                progress.dismiss();
                 finish();
                 return;
             }
