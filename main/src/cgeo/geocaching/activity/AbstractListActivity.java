@@ -3,13 +3,13 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 
-import android.app.ListActivity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentListActivity;
 import android.view.View;
 
-public abstract class AbstractListActivity extends ListActivity implements
+public abstract class AbstractListActivity extends FragmentListActivity implements
         IAbstractActivity {
 
     private String helpTopic;
