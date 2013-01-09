@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
 
-    private String helpTopic;
+    final private String helpTopic;
 
     protected cgeoapplication app = null;
     protected Resources res = null;
