@@ -1787,16 +1787,14 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
 
-        SearchResult searchToUse = search;
-
         // apply filter settings (if there's a filter)
         Set<String> geocodes = new HashSet<String>();
         for (cgCache cache : adapter.getFilteredList()) {
             geocodes.add(cache.getGeocode());
         }
-        searchToUse = new SearchResult(geocodes);
 
-        int count = searchToUse.getCount();
+        final SearchResult searchToUse = new SearchResult(geocodes);
+        final int count = searchToUse.getCount();
         String mapTitle = title;
         if (count > 0) {
             mapTitle = title + " [" + count + "]";
