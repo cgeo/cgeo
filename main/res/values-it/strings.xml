@@ -53,6 +53,7 @@
   <string name="wp_pkg">Area parcheggio</string>
   <string name="wp_trailhead">Partenza percorso</string>
   <string name="wp_waypoint">Punto di riferimento</string>
+  <string name="wp_original">Coordinate originali</string>
 
   <!-- logs -->
   <string name="log_found">Trovato</string>
@@ -72,9 +73,12 @@
   <string name="log_maintenance_needed">Richiede manutenzione</string>
   <string name="log_update">Coordinate aggiornate</string>
   <string name="log_archived">Archiviato</string>
+  <string name="log_unarchived">Reinserito</string>
   <string name="log_needs_archived">Necessita archiviazione</string>
   <string name="log_discovered">Scoperto</string>
   <string name="log_reviewer">Nota del reviewer</string>
+  <string name="log_retractlisting">Ritirato</string>
+  <string name="log_marked_missing">Segnalato come mancante</string>
   <string name="log_tb_nothing">Non fare nulla</string>
   <string name="log_tb_visit">Visitato</string>
   <string name="log_tb_drop">Lasciato</string>
@@ -161,6 +165,8 @@
   <string name="err_load_descr_failed">c:geo non può caricare la descrizione.</string>
   <string name="err_location_unknown">c:geo non conosce la posizione dei cache.</string>
   <string name="err_missing_device_name">Per cortesia inserire il nome del dispositivo prima di registrarsi.</string>
+  
+  <string name="err_favorite_failed">Errore nella modifica dello stato preferiti.</string>
 
   <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
   <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
@@ -284,6 +290,7 @@
   <string name="caches_drop_stored">Elimina i cache salvati</string>
   <string name="caches_drop_progress">Eliminando caches</string>
   <string name="caches_drop_all_and_list">Elimina tutti ed elimina la lista</string>
+  <string name="caches_delete_events">Cancella eventi passati</string>
   <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
   <string name="caches_refresh_all">Aggiorna tutti</string>
   <string name="caches_move_selected">Muovi i cache selezionati</string>
@@ -334,6 +341,10 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_oc">opencaching.de</string>
+  <string name="init_oc_activate">Attiva opencaching.de su mappa live e nelle ricerche</string>
+  <string name="init_oc_username_description">Inserisci il tuo utente opencaching.de per marcare i tuoi ritrovamenti.</string>
+  <string name="init_oc_username">Inserisci nome utente</string>  
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Utente</string>
@@ -397,7 +408,7 @@
   <string name="init_backup_last">Disponibile Backup delle</string>
   <string name="init_backup_last_no">Non esiste il file con il backup.</string>
   <string name="init_mapsources">Tipi di mappe</string>
-  <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).</string>
+  <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).\nIn aggiunta, temi personalizzati sono disponibili per le mappe offline</string>
   <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
   <string name="init_select_themefolder">…</string>
   <string name="init_map_directory_description">Cartella con le mappe offline</string>
@@ -428,7 +439,7 @@
   <string name="init_dbmove_failed">Spostamento fallito</string>
   <string name="init_plain_logs">Visualizza i LOG senza colori</string>
   <string name="init_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
-  <string name="init_rendertheme_folder">Seleziona la cartella di base per i temi mappa personali off-line</string>
+  <string name="init_rendertheme_folder">Cartella per i temi mappa personali off-line</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
@@ -522,7 +533,14 @@
   <string name="cache_dialog_watchlist_add_message">Aggiunto il cache alla watchlist in corso…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Rimozione dei cache dalla tua watchlist…</string>
+  <string name="cache_dialog_favourite_add_title">Preferiti</string>
+  <string name="cache_dialog_favourite_add_message">Aggiungi il cache ai tuoi preferiti…</string>
+  <string name="cache_dialog_favourite_remove_title">Preferiti</string>
+  <string name="cache_dialog_favourite_remove_message">Rimozione cache dai tuoi preferiti…</string>  
   <string name="cache_menu_navigate">Naviga</string>
+  <string name="cache_menu_navigation_drive">Naviga (in auto)</string>
+  <string name="cache_menu_navigation_walk">Naviga (a piedi)</string>
+  <string name="cache_menu_maps_directions">Direzioni su Google Maps</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mappa</string>
   <string name="cache_menu_map_static">Mappe statiche</string>
@@ -535,6 +553,8 @@
   <string name="cache_menu_visit_offline">Scrivi Log offline</string>
   <string name="cache_menu_spoilers">Immagini spoiler</string>
   <string name="cache_menu_around">Cache qui intorno</string>
+  <string name="cache_menu_set_as_cache_coords">Setta come coordinate cache</string>
+  <string name="cache_menu_upload_wpt_to_gc_com">Setta come coordinate cache e carica il waypoint su Geocaching.com</string>
   <string name="cache_menu_event">Aggiungi al calendario</string>
   <string name="cache_menu_details">Dettagli</string>
   <string name="cache_menu_share">Condividi cache</string>
@@ -543,12 +563,14 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
+  <string name="cache_menu_sygic" translatable="false">Sygic</string>
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>
   <string name="cache_status_found">Trovato</string>
   <string name="cache_status_archived">Archiviato</string>
   <string name="cache_status_disabled">Non attivo</string>
   <string name="cache_status_premium">Solo per utenti Premium</string>
+  <string name="cache_status_not_premium">Per tutti gli utenti</string>
   <string name="cache_geocode">GC-code</string>
   <string name="cache_name">Nome</string>
   <string name="cache_type">Tipo</string>
@@ -644,6 +666,22 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_save">Salva</string>
   <string name="waypoint_loading">Caricamento waypoint…</string>
+  <string name="waypoint_do_not_touch_cache_coordinates">Nessuna modifica alle coordinate cache</string>
+  <string name="waypoint_set_as_cache_coords">Setta come coordinate cache</string>
+  <string name="waypoint_coordinates_has_been_reset_on_website">Le coordinates sono state resettate su web</string>
+  <string name="waypoint_save_and_modify_on_website">Setta come coordinate cache in c:geo e su web</string>
+  <string name="waypoint_reset_cache_coords">Resetta le coordinate cache</string>  
+  <string name="waypoint_coordinates_being_reset_on_website">Le coordinate sono in fase di reset su web</string>
+  <string name="waypoint_reset_cache_coords_info">Opzioni di reset</string>
+  <string name="waypoint_reset">Reset</string>
+  <string name="waypoint_localy_reset_cache_coords">Resetta in c:geo</string>
+  <string name="waypoint_reset_local_and_remote_cache_coords">Resetta in c:geo e su web.</string>
+  <string name="waypoint_coordinates_couldnt_be_modified_on_website">Il sito web non supporta la modifica delle coordinate</string>
+  <string name="waypoint_coordinates_upload_error">Errore durante il caricamento delle coordinate su web</string>
+  <string name="waypoint_coordinates_uploading_to_website">Caricamento delle coordinate %s su web</string>
+  <string name="waypoint_coordinates_reseting_on_website">Reset alle coordinate originali su web</string>
+  <string name="waypoint_coordinates_has_been_modified_on_website">Le coordinate cache su web sono state modificate in: %s.</string>
+  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Le coordinate cache sono state modificate in c:geo in: %s.</string>
   <string name="waypoint_done">Fatto</string>
   <string name="waypoint_duplicate">Duplicato</string>
   <string name="waypoint_copy_of">Copia di</string>
@@ -674,7 +712,7 @@
   <string name="map_trail_hide">Nasconde scia</string>
   <string name="map_circles_show">Mostra area cache</string>
   <string name="map_circles_hide">Nascondi area cache</string>
-  <string name="map_theme_builtin">Tema mappa predefinito</string>
+  <string name="map_theme_builtin">Tema predefinito</string>
   <string name="map_theme_select">Scegli un tema mappa</string>
   <string name="map_live_enable">Attiva online</string>
   <string name="map_live_disable">Disattiva online</string>
