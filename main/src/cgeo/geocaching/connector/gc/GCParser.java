@@ -198,10 +198,10 @@ public abstract class GCParser {
             cache.setPremiumMembersOnly(row.contains("/images/icons/16/premium_only.png"));
 
             // found it
-            cache.setFound(row.contains("/images/icons/icon_smile"));
+            cache.setFound(row.contains("/images/icons/16/found.png"));
 
             // own it
-            cache.setOwn(row.contains("/images/silk/star.png"));
+            cache.setOwn(row.contains("/images/icons/16/placed.png"));
 
             // id
             String result = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_ID, null);
