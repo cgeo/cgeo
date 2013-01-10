@@ -58,7 +58,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         int mystery = 0;
         mystery = parseMapPNG(bitmap, 37, 25, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
         mystery = parseMapPNG(bitmap, 49, 183, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
-        mystery = parseMapPNG(bitmap, 183, 181, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
+        mystery = parseMapPNG(bitmap, 184, 181, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
         mystery = parseMapPNG(bitmap, 176, 94, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
         mystery = parseMapPNG(bitmap, 161, 124, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
         mystery = parseMapPNG(bitmap, 168, 118, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
