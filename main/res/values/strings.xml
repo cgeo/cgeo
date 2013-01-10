@@ -1100,7 +1100,7 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next release/b>\n\n
+    <b>2013.01.10</b>\n\n
     <b>Bugfixing:</b>\n
     · Avoid crash in dir chooser\n
     · Allow translation of cache description in case the app is forced to english\n
