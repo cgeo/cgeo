@@ -100,7 +100,7 @@ public abstract class IconDecoder {
     private final static int COLOR_TRADITIONAL = 0x316013;
     private final static int COLOR_MYSTERY = 0x243C97;
     private final static int COLOR_MULTI = 0xFFDE19;
-    private final static int COLOR_FOUND = 0xFBEA5D;
+    private final static int COLOR_FOUND = 0xFF0000;
 
     // Offset inside cache icon
     private final static int POSX_TRADI = 7;
@@ -109,8 +109,8 @@ public abstract class IconDecoder {
     private final static int POSY_MULTI = -9; // for orange 10
     private final static int POSX_MYSTERY = 5;
     private final static int POSY_MYSTERY = -13;
-    private final static int POSX_FOUND = 10;
-    private final static int POSY_FOUND = -8;
+    private final static int POSX_FOUND = 9;
+    private final static int POSY_FOUND = -6;
 
     /**
      * For level 14 find the borders of the icons and then use a single pixel and color to match.
