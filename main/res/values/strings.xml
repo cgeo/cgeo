@@ -1100,6 +1100,11 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next release/b>\n\n
+    <b>Bugfixing:</b>\n
+    · Avoid crash in dir chooser\n
+    · Allow translation of cache description in case the app is forced to english\n
+    · Adapt to changes on gc.com (own and found caches)\n\n
     <b>2013.01.07</b>\n\n
     <b>Bugfixing:</b>\n
     · Bad watchlist status detection\n
