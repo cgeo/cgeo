@@ -5,10 +5,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.core.IOUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

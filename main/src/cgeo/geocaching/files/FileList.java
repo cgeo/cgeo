@@ -4,11 +4,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.core.IOUtils;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;

@@ -2,19 +2,19 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.core.IOUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;

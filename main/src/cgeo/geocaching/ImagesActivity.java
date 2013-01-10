@@ -28,7 +28,6 @@ public class ImagesActivity extends AbstractActivity {
     private ImagesList imagesList;
     private ImageType imgType = ImageType.SpoilerImages;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
