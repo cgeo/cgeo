@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?background_color"
     android:orientation="vertical"
     android:padding="3dip" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="?text_color"
         android:text="@string/waypoint_reset_cache_coords_info" />
 
     <RadioGroup
@@ -17,15 +19,13 @@
 
         <RadioButton
             android:id="@+id/reset_cache_coordinates_local"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/radiobutton_wrap"
             android:checked="true"
             android:text="@string/waypoint_localy_reset_cache_coords" />
 
         <RadioButton
             android:id="@+id/reset_cache_coordinates_local_and_remote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/radiobutton_wrap"
             android:text="@string/waypoint_reset_local_and_remote_cache_coords"
             android:visibility="gone" />
     </RadioGroup>
