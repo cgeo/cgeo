@@ -196,7 +196,6 @@ public abstract class IconDecoder {
         return false;
     }
 
-
     /**
      * For level 14 find the borders of the icons and then use a single pixel and color to match.
      *
