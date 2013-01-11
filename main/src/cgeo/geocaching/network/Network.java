@@ -259,11 +259,8 @@ public abstract class Network {
                 "X-Requested-With", "XMLHttpRequest")) {
             request.setHeader(header.getName(), header.getValue());
         }
-        if (Settings.getUseNativeUa()) {
-            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.NATIVE_USER_AGENT);
-        } else {
-            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Network.PC_USER_AGENT);
-        }
+        request.getParams().setParameter(CoreProtocolPNames.USER_AGENT,
+                Settings.getUseNativeUa() ? Network.NATIVE_USER_AGENT : Network.PC_USER_AGENT);
     }
 
     /**
