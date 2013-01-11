@@ -259,6 +259,13 @@ public class cgData {
             database = dbHelper.getWritableDatabase();
         } catch (Exception e) {
             Log.e("cgData.init: unable to open database for R/W", e);
+            if (!newlyCreatedDatabase) {
+                newlyCreatedDatabase = true;
+                if (databasePath().delete()) {
+                    Log.w("cgData.init: resetting unusable database");
+                    init();
+                }
+            }
         }
     }
 
