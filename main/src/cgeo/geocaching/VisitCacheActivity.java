@@ -19,15 +19,19 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.view.ContextMenu;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,6 +75,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
     private boolean tbChanged = false;
+    private SparseArray<TrackableLog> actionButtons;
 
     // Data to be saved while reconfiguring
     private double rating;
@@ -113,76 +118,82 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
         enablePostButton(true);
 
-        // add trackables
-        if (CollectionUtils.isNotEmpty(trackables)) {
-            if (inflater == null) {
-                inflater = getLayoutInflater();
-            }
-
-            final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
-            inventoryView.removeAllViews();
-
-            for (TrackableLog tb : trackables) {
-                LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.visit_trackable, null);
-
-                ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
-                ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-                ((TextView) inventoryItem.findViewById(R.id.action))
-                        .setText(res.getString(Settings.isTrackableAutoVisit()
-                                ? LogTypeTrackable.VISITED.resourceId
-                                : LogTypeTrackable.DO_NOTHING.resourceId)
-                                + " ▼");
-
-                inventoryItem.setId(tb.id);
-                final String tbCode = tb.trackCode;
-                inventoryItem.setClickable(true);
-                registerForContextMenu(inventoryItem);
-                inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        final Intent trackablesIntent = new Intent(VisitCacheActivity.this, TrackableActivity.class);
-                        trackablesIntent.putExtra(EXTRAS_GEOCODE, tbCode);
-                        startActivity(trackablesIntent);
-                    }
-                });
-                inventoryItem.findViewById(R.id.action).setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        openContextMenu(view);
-                    }
-                });
-
-                inventoryView.addView(inventoryItem);
-
-                if (Settings.isTrackableAutoVisit()) {
-                    tb.action = LogTypeTrackable.VISITED;
-                    tbChanged = true;
-                }
-            }
-
-            if (inventoryView.getChildCount() > 0) {
-                findViewById(R.id.inventory_box).setVisibility(View.VISIBLE);
-            }
-            if (inventoryView.getChildCount() > 1) {
-                final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
-
-                final Button changeButton = (Button) inventoryChangeAllView.findViewById(R.id.changebutton);
-                registerForContextMenu(changeButton);
-                changeButton.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        openContextMenu(view);
-                    }
-                });
-
-                inventoryChangeAllView.setVisibility(View.VISIBLE);
-            }
-        }
+        initializeTrackablesAction();
+        updateTrackablesList();
 
         showProgress(false);
+    }
+
+    private void initializeTrackablesAction() {
+        if (Settings.isTrackableAutoVisit()) {
+            for (TrackableLog trackable : trackables) {
+                trackable.action = LogTypeTrackable.VISITED;
+                tbChanged = true;
+            }
+        }
+    }
+
+    private void updateTrackablesList() {
+        if (CollectionUtils.isEmpty(trackables)) {
+            return;
+        }
+        if (inflater == null) {
+            inflater = getLayoutInflater();
+        }
+        actionButtons = new SparseArray<TrackableLog>();
+
+        final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
+        inventoryView.removeAllViews();
+
+        for (TrackableLog tb : trackables) {
+            LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.visit_trackable, null);
+
+            ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
+            ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
+            final TextView actionButton = (TextView) inventoryItem.findViewById(R.id.action);
+            actionButton.setId(tb.id);
+            actionButtons.put(actionButton.getId(), tb);
+            actionButton.setText(res.getString(tb.action.resourceId) + " ▼");
+            actionButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    selectTrackableAction(view);
+                }
+            });
+
+            final String tbCode = tb.trackCode;
+            inventoryItem.setClickable(true);
+            inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    final Intent trackablesIntent = new Intent(VisitCacheActivity.this, TrackableActivity.class);
+                    trackablesIntent.putExtra(EXTRAS_GEOCODE, tbCode);
+                    startActivity(trackablesIntent);
+                }
+            });
+
+            inventoryView.addView(inventoryItem);
+        }
+
+        if (inventoryView.getChildCount() > 0) {
+            findViewById(R.id.inventory_box).setVisibility(View.VISIBLE);
+        }
+        if (inventoryView.getChildCount() > 1) {
+            final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
+
+            final Button changeButton = (Button) inventoryChangeAllView.findViewById(R.id.changebutton);
+            changeButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    selectAllTrackablesAction();
+                }
+            });
+
+            inventoryChangeAllView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void enablePostButton(boolean enabled) {
@@ -198,20 +209,20 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     private void updatePostButtonText() {
-        if (postButton.isEnabled()) {
-            if (typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
-                if (rating == 0) {
-                    postButton.setText(res.getString(R.string.log_post_no_rate));
-                } else {
-                    postButton.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*");
-                }
-            } else {
-                postButton.setText(res.getString(R.string.log_post));
-            }
+        postButton.setText(getPostButtonText());
+    }
+
+    private String getPostButtonText() {
+        if (!postButton.isEnabled()) {
+            return res.getString(R.string.log_post_not_possible);
         }
-        else {
-            postButton.setText(res.getString(R.string.log_post_not_possible));
+        if (typeSelected != LogType.FOUND_IT || !Settings.isGCvoteLogin()) {
+            return res.getString(R.string.log_post);
         }
+        if (rating == 0) {
+            return res.getString(R.string.log_post_no_rate);
+        }
+        return res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*";
     }
 
     private final Handler postLogHandler = new Handler() {
@@ -318,13 +329,12 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         enablePostButton(false);
 
         final Button typeButton = (Button) findViewById(R.id.type);
-        registerForContextMenu(typeButton);
         typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                openContextMenu(view);
+                selectLogType();
             }
         });
 
@@ -411,107 +421,6 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
-        super.onCreateContextMenu(menu, view, info);
-        final int viewId = view.getId();
-
-        if (viewId == R.id.type) {
-            for (final LogType typeOne : possibleLogTypes) {
-                menu.add(viewId, typeOne.id, 0, typeOne.getL10n());
-            }
-        } else if (viewId == R.id.changebutton) {
-            final int textId = findViewById(viewId).getId();
-
-            menu.setHeaderTitle(res.getString(R.string.log_tb_changeall));
-            for (LogTypeTrackable logType : LogTypeTrackable.values()) {
-                menu.add(textId, logType.id, 0, res.getString(logType.resourceId));
-            }
-        } else {
-            final int realViewId = findViewById(viewId).getId();
-
-            for (final TrackableLog tb : trackables) {
-                if (tb.id == realViewId) {
-                    menu.setHeaderTitle(tb.name);
-                }
-            }
-            for (LogTypeTrackable logType : LogTypeTrackable.values()) {
-                menu.add(realViewId, logType.id, 0, res.getString(logType.resourceId));
-            }
-        }
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        final int group = item.getGroupId();
-        final int id = item.getItemId();
-
-        if (group == R.id.type) {
-            setType(LogType.getById(id));
-            return true;
-        }
-
-        if (group == R.id.changebutton) {
-            try {
-                final LogTypeTrackable logType = LogTypeTrackable.findById(id);
-                if (logType != null) {
-                    final LinearLayout inventView = (LinearLayout) findViewById(R.id.inventory);
-                    for (int count = 0; count < inventView.getChildCount(); count++) {
-                        final LinearLayout tbView = (LinearLayout) inventView.getChildAt(count);
-                        if (tbView == null) {
-                            return false;
-                        }
-
-                        final TextView tbText = (TextView) tbView.findViewById(R.id.action);
-                        if (tbText == null) {
-                            return false;
-                        }
-                        tbText.setText(res.getString(logType.resourceId) + " ▼");
-                    }
-                    for (TrackableLog tb : trackables) {
-                        tb.action = logType;
-                    }
-                    tbChanged = true;
-                    return true;
-                }
-            } catch (Exception e) {
-                Log.e("cgeovisit.onContextItemSelected: " + e.toString());
-            }
-        } else {
-            try {
-                final LogTypeTrackable logType = LogTypeTrackable.findById(id);
-                if (logType != null) {
-                    final LinearLayout tbView = (LinearLayout) findViewById(group);
-                    if (tbView == null) {
-                        return false;
-                    }
-
-                    final TextView tbText = (TextView) tbView.findViewById(R.id.action);
-                    if (tbText == null) {
-                        return false;
-                    }
-
-                    for (TrackableLog tb : trackables) {
-                        if (tb.id == group) {
-                            tbChanged = true;
-
-                            tb.action = logType;
-                            tbText.setText(res.getString(logType.resourceId) + " ▼");
-
-                            Log.i("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
-                        }
-                    }
-
-                    return true;
-                }
-            } catch (Exception e) {
-                Log.e("cgeovisit.onContextItemSelected: " + e.toString());
-            }
-        }
-
-        return false;
-    }
-
-    @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putDouble(SAVED_STATE_RATING, rating);
@@ -591,7 +500,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             setDate(date);
 
             final EditText logView = (EditText) findViewById(R.id.log);
-            logView.setText("");
+            logView.setText(StringUtils.EMPTY);
 
             clearButton.setOnClickListener(new ClearListener());
 
@@ -673,23 +582,76 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         return ((EditText) findViewById(R.id.log)).getText().toString();
     }
 
-    public static class ActivityState {
-        private final String[] viewstates;
-        private final List<TrackableLog> trackables;
-        private final List<LogType> possibleLogTypes;
-
-        public ActivityState(final String[] viewstates,
-                             final List<TrackableLog> trackables,
-                             final List<LogType> possibleLogTypes) {
-            this.viewstates = viewstates;
-            this.trackables = trackables;
-            this.possibleLogTypes = possibleLogTypes;
-        }
-
-    }
-
     @Override
     protected LogContext getLogContext() {
         return new LogContext(cache);
     }
+
+    private void selectAllTrackablesAction() {
+        Builder alert = new AlertDialog.Builder(VisitCacheActivity.this);
+        alert.setTitle(res.getString(R.string.log_tb_changeall));
+        String[] tbLogTypes = getTBLogTypes();
+        alert.setItems(tbLogTypes, new OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int position) {
+                final LogTypeTrackable logType = LogTypeTrackable.values()[position];
+                for (TrackableLog tb : trackables) {
+                    tb.action = logType;
+                }
+                tbChanged = true;
+                updateTrackablesList();
+                dialog.dismiss();
+            }
+        });
+        alert.create().show();
+    }
+
+    private String[] getTBLogTypes() {
+        final LogTypeTrackable[] logTypeValues = LogTypeTrackable.values();
+        String[] logTypes = new String[logTypeValues.length];
+        for (int i = 0; i < logTypes.length; i++) {
+            logTypes[i] = res.getString(logTypeValues[i].resourceId);
+        }
+        return logTypes;
+    }
+
+    private void selectLogType() {
+        Builder alert = new AlertDialog.Builder(VisitCacheActivity.this);
+        String[] choices = new String[possibleLogTypes.size()];
+        for (int i = 0; i < choices.length; i++) {
+            choices[i] = possibleLogTypes.get(i).getL10n();
+        }
+        alert.setSingleChoiceItems(choices, possibleLogTypes.indexOf(typeSelected), new OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int position) {
+                setType(possibleLogTypes.get(position));
+                dialog.dismiss();
+            }
+        });
+        alert.create().show();
+    }
+
+    private void selectTrackableAction(View view) {
+        final int realViewId = view.getId();
+        Builder alert = new AlertDialog.Builder(VisitCacheActivity.this);
+        final TrackableLog trackableLog = actionButtons.get(realViewId);
+        alert.setTitle(trackableLog.name);
+        String[] tbLogTypes = getTBLogTypes();
+        alert.setItems(tbLogTypes, new OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int position) {
+                final LogTypeTrackable logType = LogTypeTrackable.values()[position];
+                tbChanged = true;
+                trackableLog.action = logType;
+                Log.i("Trackable " + trackableLog.trackCode + " (" + trackableLog.name + ") has new action: #" + logType);
+                updateTrackablesList();
+                dialog.dismiss();
+            }
+        });
+        alert.create().show();
+    }
+
 }
