@@ -1515,7 +1515,7 @@ public class cgData {
                 cacheCache.putCacheInCache(cache);
 
                 caches.add(cache);
-            } while (cursor.moveToNext());
+            }
             return caches;
         } finally {
             cursor.close();
