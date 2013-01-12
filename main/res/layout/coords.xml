@@ -38,7 +38,6 @@
                 android:layout_height="wrap_content" />
 
             <TableLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/coordTable"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"

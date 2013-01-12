@@ -410,9 +410,7 @@
   <string name="init_mapsources">Tipi di mappe</string>
   <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).\nIn aggiunta, temi personalizzati sono disponibili per le mappe offline</string>
   <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
-  <string name="init_select_themefolder">…</string>
   <string name="init_map_directory_description">Cartella con le mappe offline</string>
-  <string name="init_select_map_directory">…</string>
   <string name="init_gpx_exportdir">Cartella di export GPX</string>
   <string name="init_gpx_importdir">Cartella di import GPX</string>
   <string name="init_gpx_exportdir_description">Qui puoi selezionare la cartella di esportazione GPX.</string>
@@ -563,7 +561,6 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
-  <string name="cache_menu_sygic" translatable="false">Sygic</string>
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>
   <string name="cache_status_found">Trovato</string>
@@ -638,9 +635,6 @@
 
   <!-- map file select -->
   <string name="map_file_select_title">Seleziona il file mappa</string>
-
-  <!-- theme file select -->
-  <string name="theme_file_select_title">Seleziona il tema personale</string>
 
   <!--  import -->
   <string name="web_import_title">Importa dal web</string>

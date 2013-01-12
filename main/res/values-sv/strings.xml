@@ -673,13 +673,11 @@
   <string name="waypoint_loading">Laddar punkt…</string>
   <string name="waypoint_set_as_cache_coords">Ange som cachens koordinater i c:geo</string>
   <string name="waypoint_reset_cache_coords">Återställ cachens koordinater</string>
-  <string name="waypoint_reset_cache_coords_on_website">Återställ koordinaterna på hemsidan</string>
   <string name="waypoint_coordinates_has_been_reset_on_website">Cachens koordinater har återställts på hemsidan.</string>
   <string name="waypoint_coordinates_being_reset_on_website">Återställer cachens koordinater på hemsidan…</string>
   <string name="waypoint_reset_cache_coords_info">Återställningsalternativ</string>
   <string name="waypoint_reset">Återställ</string>
   <string name="waypoint_localy_reset_cache_coords">Återställ koordinaterna i c:geo</string>
-  <string name="waypoint_modify_on_website">Ange som cachens koordinater på hemsidan</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Hemsidan kan inte hantera att ändra cachens koordinater.</string>
   <string name="waypoint_coordinates_upload_error">Ett fel inträffade när koordinaterna skulle ändras på hemsidan.</string>
   <string name="waypoint_coordinates_uploading_to_website">Laddar upp koordinaterna %s till hemsidan.</string>
