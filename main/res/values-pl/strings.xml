@@ -254,7 +254,6 @@
   <plurals name="caches_eta_mins">
     <item quantity="one">minuta</item>
     <item quantity="two">minuty</item>
-    <item quantity="few">minuty</item>
     <item quantity="other">minut</item>
   </plurals>
   <string name="caches_store_offline">Zapisz offline</string>
