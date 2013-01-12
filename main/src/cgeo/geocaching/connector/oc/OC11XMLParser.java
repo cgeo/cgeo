@@ -3,6 +3,8 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
@@ -30,6 +32,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OC11XMLParser {
@@ -37,6 +40,7 @@ public class OC11XMLParser {
     private static final String PARAGRAPH_END = "</p>";
     private static final String PARAGRAPH_BEGIN = "<p>";
     private static Pattern STRIP_DATE = Pattern.compile("\\+0([0-9]){1}\\:00");
+    private static Pattern LOCAL_URL = Pattern.compile("href=\"(.*)\"");
 
     private static class CacheHolder {
         public cgCache cache;
@@ -420,7 +424,7 @@ public class OC11XMLParser {
             @Override
             public void end(String body) {
                 final String content = body.trim();
-                descHolder.shortDesc = content;
+                descHolder.shortDesc = linkify(content);
             }
         });
 
@@ -430,7 +434,7 @@ public class OC11XMLParser {
             @Override
             public void end(String body) {
                 final String content = body.trim();
-                descHolder.desc = content;
+                descHolder.desc = linkify(content);
             }
         });
 
@@ -535,6 +539,21 @@ public class OC11XMLParser {
             Log.e("Cannot parse .gpx file as oc11xml: could not parse XML - " + e.toString());
             return null;
         }
+    }
+
+    private static String linkify(String input) {
+        String result = input;
+        Matcher matcher = LOCAL_URL.matcher(result);
+        while (matcher.find()) {
+            String url = matcher.group(1);
+            if (!url.contains(":/")) {
+                IConnector ocConnector = ConnectorFactory.getConnector("OCXXX");
+                String prefix = "http://" + ocConnector.getHost() + "/";
+                result = StringUtils.replace(result, url, prefix + url);
+                matcher = LOCAL_URL.matcher(result);
+            }
+        }
+        return result;
     }
 
     /**
