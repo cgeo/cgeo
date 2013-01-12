@@ -73,7 +73,7 @@ public class WaypointPopup extends AbstractPopupActivity {
             addCacheDetails();
 
         } catch (Exception e) {
-            Log.e("cgeopopup.init: " + e.toString());
+            Log.e("cgeopopup.init", e);
         }
     }
 

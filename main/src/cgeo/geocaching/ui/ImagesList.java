@@ -210,7 +210,7 @@ public class ImagesList {
             fos = new FileOutputStream(file);
             image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
         } catch (Exception e) {
-            Log.e("ImagesActivity.handleMessage.onClick: " + e.toString());
+            Log.e("ImagesActivity.handleMessage.onClick", e);
             return;
         } finally {
             IOUtils.closeQuietly(fos);

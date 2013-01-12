@@ -19,7 +19,7 @@ public abstract class AbstractCacheComparator implements CacheComparator {
             }
             return compareCaches(cache1, cache2);
         } catch (Exception e) {
-            Log.e("AbstractCacheComparator.compare: " + e.toString());
+            Log.e("AbstractCacheComparator.compare", e);
         }
         return 0;
     }

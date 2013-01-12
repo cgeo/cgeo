@@ -61,7 +61,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
             super.draw(canvas);
         } catch (Exception e) {
-            Log.e("GoogleMapView.draw: " + e.toString());
+            Log.e("GoogleMapView.draw", e);
         }
     }
 
@@ -75,7 +75,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
             super.displayZoomControls(takeFocus);
         } catch (Exception e) {
-            Log.e("GoogleMapView.displayZoomControls: " + e.toString());
+            Log.e("GoogleMapView.displayZoomControls", e);
         }
     }
 

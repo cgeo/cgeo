@@ -20,7 +20,7 @@ abstract class AbstractAddEntry {
         } catch (Exception e) {
             activity.showToast(R.string.event_fail);
 
-            Log.e(CalendarActivity.LOG_TAG, "addToCalendar: " + e.toString());
+            Log.e(CalendarActivity.LOG_TAG, "addToCalendar", e);
         }
     }
 

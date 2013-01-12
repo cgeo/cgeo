@@ -41,6 +41,7 @@ public class OC11XMLParser {
     private static final String PARAGRAPH_BEGIN = "<p>";
     private static Pattern STRIP_DATE = Pattern.compile("\\+0([0-9]){1}\\:00");
     private static Pattern LOCAL_URL = Pattern.compile("href=\"(.*)\"");
+    private static final int CACHE_PARSE_LIMIT = 250;
 
     private static class CacheHolder {
         public cgCache cache;
@@ -160,7 +161,6 @@ public class OC11XMLParser {
     }
 
     private static void setCacheStatus(final int statusId, final cgCache cache) {
-
         switch (statusId) {
             case 1:
                 cache.setArchived(false);
@@ -198,8 +198,6 @@ public class OC11XMLParser {
     }
 
     public static Collection<cgCache> parseCaches(final InputStream stream) throws IOException {
-
-        final int CACHE_PARSE_LIMIT = 250;
 
         final Map<String, cgCache> caches = new HashMap<String, cgCache>();
 
@@ -536,7 +534,7 @@ public class OC11XMLParser {
             Xml.parse(stream, Xml.Encoding.UTF_8, root.getContentHandler());
             return caches.values();
         } catch (SAXException e) {
-            Log.e("Cannot parse .gpx file as oc11xml: could not parse XML - " + e.toString());
+            Log.e("Cannot parse .gpx file as oc11xml: could not parse XML", e);
             return null;
         }
     }
@@ -557,7 +555,8 @@ public class OC11XMLParser {
     }
 
     /**
-     * removes unneeded markup
+     * Removes unneeded markup. Log texts are typically encapsulated in paragraph tags which lead to more empty space on
+     * rendering.
      */
     protected static String stripMarkup(String input) {
         if (StringUtils.startsWith(input, PARAGRAPH_BEGIN) && StringUtils.endsWith(input, PARAGRAPH_END)) {

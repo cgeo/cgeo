@@ -206,7 +206,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             setAdapterCurrentCoordinates(false);
         } catch (Exception e) {
             showToast(res.getString(R.string.err_detail_cache_find_any));
-            Log.e("cgeocaches.loadCachesHandler: " + e.toString());
+            Log.e("cgeocaches.loadCachesHandler", e);
 
             hideLoading();
             showProgress(false);
@@ -219,7 +219,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             hideLoading();
             showProgress(false);
         } catch (Exception e2) {
-            Log.e("cgeocaches.loadCachesHandler.2: " + e2.toString());
+            Log.e("cgeocaches.loadCachesHandler.2", e2);
         }
 
         adapter.setSelectMode(false);
@@ -269,7 +269,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 setAdapterCurrentCoordinates(false);
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_detail_cache_find_next));
-                Log.e("cgeocaches.loadNextPageHandler: " + e.toString());
+                Log.e("cgeocaches.loadNextPageHandler", e);
             }
 
             hideLoading();
@@ -947,7 +947,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         try {
             adapterInfo = (AdapterContextMenuInfo) info;
         } catch (Exception e) {
-            Log.w("cgeocaches.onCreateContextMenu: " + e.toString());
+            Log.w("cgeocaches.onCreateContextMenu", e);
         }
 
         if (adapterInfo == null || adapterInfo.position >= adapter.getCount()) {
@@ -1003,7 +1003,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         try {
             adapterInfo = (AdapterContextMenuInfo) info;
         } catch (Exception e) {
-            Log.w("cgeocaches.onContextItemSelected: " + e.toString());
+            Log.w("cgeocaches.onContextItemSelected", e);
         }
 
         final cgCache cache = adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
@@ -1483,7 +1483,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
                         Log.i("Waiting for next cache " + delay + " ms");
                     } catch (Exception e) {
-                        Log.e("cgeocaches.LoadDetailsThread.sleep: " + e.toString());
+                        Log.e("cgeocaches.LoadDetailsThread.sleep", e);
                     }
                 }
 
@@ -1501,7 +1501,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 Log.i(e.getMessage());
                 return false;
             } catch (Exception e) {
-                Log.e("cgeocaches.LoadDetailsThread: " + e.toString());
+                Log.e("cgeocaches.LoadDetailsThread", e);
             }
 
             last = System.currentTimeMillis();
@@ -1583,7 +1583,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                         times = 0;
                     }
                 } catch (InterruptedException e) {
-                    Log.e("cgeocaches.LoadFromWebThread.sleep: " + e.toString());
+                    Log.e("cgeocaches.LoadFromWebThread.sleep", e);
                 }
             }
 

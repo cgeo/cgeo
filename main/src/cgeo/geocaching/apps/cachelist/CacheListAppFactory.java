@@ -64,7 +64,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
                 activity.invalidateOptionsMenuCompatible();
                 return result;
             } catch (Exception e) {
-                Log.e("CacheListAppFactory.onMenuItemSelected: " + e.toString());
+                Log.e("CacheListAppFactory.onMenuItemSelected", e);
             }
         }
         return false;

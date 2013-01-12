@@ -363,7 +363,7 @@ public class LocalStorage {
                     Log.w("LocalStorage.deleteFilesPrefix: Can't delete file " + file.getName());
                 }
             } catch (Exception e) {
-                Log.e("LocalStorage.deleteFilesPrefix: " + e.toString());
+                Log.e("LocalStorage.deleteFilesPrefix", e);
             }
         }
     }

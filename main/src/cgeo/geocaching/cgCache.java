@@ -1333,7 +1333,7 @@ public class cgCache implements ICache, IWaypoint {
                 matcher = new MatcherWrapper(coordPattern, note);
             }
         } catch (Exception e) {
-            Log.e("cgCache.parseWaypointsFromNote: " + e.toString());
+            Log.e("cgCache.parseWaypointsFromNote", e);
         }
     }
 

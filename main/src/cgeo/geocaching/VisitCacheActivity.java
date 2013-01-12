@@ -557,7 +557,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
             return status;
         } catch (Exception e) {
-            Log.e("cgeovisit.postLogFn: " + e.toString());
+            Log.e("cgeovisit.postLogFn", e);
         }
 
         return StatusCode.LOG_POST_ERROR;

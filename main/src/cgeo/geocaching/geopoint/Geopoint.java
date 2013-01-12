@@ -350,7 +350,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
                 return result.getDouble("elevation");
             }
         } catch (Exception e) {
-            Log.w("cgBase.getElevation: " + e.toString());
+            Log.w("cgBase.getElevation", e);
         }
 
         return null;

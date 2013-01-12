@@ -652,7 +652,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
                     return true;
                 }
             } catch (Exception e) {
-                Log.w("CacheListAdapter.FlingGesture.onFling: " + e.toString());
+                Log.w("CacheListAdapter.FlingGesture.onFling", e);
             }
 
             return false;

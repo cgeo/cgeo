@@ -311,7 +311,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                     possibleLogTypes.addAll(typesPre);
                 }
             } catch (Exception e) {
-                Log.e("LogTrackableActivity.LoadDataThread.run: " + e.toString());
+                Log.e("LogTrackableActivity.LoadDataThread.run", e);
             }
 
             loadDataHandler.sendEmptyMessage(0);
@@ -349,7 +349,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
             return status;
         } catch (Exception e) {
-            Log.e("LogTrackableActivity.postLogFn: " + e.toString());
+            Log.e("LogTrackableActivity.postLogFn", e);
         }
 
         return StatusCode.LOG_POST_ERROR;

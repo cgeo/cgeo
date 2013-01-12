@@ -132,7 +132,7 @@ public class CachePopup extends AbstractPopupActivity {
                 offlineStore.setOnClickListener(new StoreCacheClickListener());
             }
         } catch (Exception e) {
-            Log.e("cgeopopup.init: " + e.toString());
+            Log.e("cgeopopup.init", e);
         }
 
         // cache is loaded. remove progress-popup if any there

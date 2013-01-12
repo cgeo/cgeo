@@ -91,7 +91,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
                 initializeDistanceUnitSelector();
             } catch (Exception e) {
-                Log.e("EditWaypointActivity.loadWaypointHandler: " + e.toString());
+                Log.e("EditWaypointActivity.loadWaypointHandler", e);
             } finally {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
@@ -275,7 +275,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
-                Log.e("cgeowaypoint.loadWaypoint.run: " + e.toString());
+                Log.e("cgeowaypoint.loadWaypoint.run", e);
             }
         }
     }

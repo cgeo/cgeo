@@ -183,7 +183,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                     Log.w("No external media mounted.");
                 }
             } catch (Exception e) {
-                Log.e("cgFileList.loadFiles.run: " + e.toString());
+                Log.e("cgFileList.loadFiles.run", e);
             }
 
             changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, 0, "loaded directories"));

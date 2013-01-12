@@ -59,7 +59,7 @@ public class StaticMapsActivity extends AbstractActivity {
                     showStaticMaps();
                 }
             } catch (Exception e) {
-                Log.e("StaticMapsActivity.loadMapsHandler: " + e.toString());
+                Log.e("StaticMapsActivity.loadMapsHandler", e);
             }
         }
     };
@@ -145,7 +145,7 @@ public class StaticMapsActivity extends AbstractActivity {
                                 }
                             }
                         } catch (Exception e) {
-                            Log.e("StaticMapsActivity.LoadMapsThread.run: " + e.toString());
+                            Log.e("StaticMapsActivity.LoadMapsThread.run", e);
                         }
                     }
                     if (!maps.isEmpty()) {
@@ -155,7 +155,7 @@ public class StaticMapsActivity extends AbstractActivity {
 
                 loadMapsHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
-                Log.e("StaticMapsActivity.LoadMapsThread.run: " + e.toString());
+                Log.e("StaticMapsActivity.LoadMapsThread.run", e);
             }
         }
     }

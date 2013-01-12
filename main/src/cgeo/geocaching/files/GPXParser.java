@@ -362,7 +362,7 @@ public abstract class GPXParser extends FileParser {
                 try {
                     cache.setHidden(parseDate(body));
                 } catch (Exception e) {
-                    Log.w("Failed to parse cache date: " + e.toString());
+                    Log.w("Failed to parse cache date", e);
                 }
             }
         });
@@ -578,7 +578,7 @@ public abstract class GPXParser extends FileParser {
                     try {
                         cache.setDifficulty(Float.parseFloat(body));
                     } catch (NumberFormatException e) {
-                        Log.w("Failed to parse difficulty: " + e.toString());
+                        Log.w("Failed to parse difficulty", e);
                     }
                 }
             });
@@ -591,7 +591,7 @@ public abstract class GPXParser extends FileParser {
                     try {
                         cache.setTerrain(Float.parseFloat(body));
                     } catch (NumberFormatException e) {
-                        Log.w("Failed to parse terrain: " + e.toString());
+                        Log.w("Failed to parse terrain", e);
                     }
                 }
             });
@@ -735,7 +735,7 @@ public abstract class GPXParser extends FileParser {
                     try {
                         log.date = parseDate(body).getTime();
                     } catch (Exception e) {
-                        Log.w("Failed to parse log date: " + e.toString());
+                        Log.w("Failed to parse log date", e);
                     }
                 }
             });
@@ -774,7 +774,7 @@ public abstract class GPXParser extends FileParser {
             Xml.parse(progressStream, Xml.Encoding.UTF_8, root.getContentHandler());
             return cgData.loadCaches(result, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
         } catch (SAXException e) {
-            Log.w("Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
+            Log.w("Cannot parse .gpx file as GPX " + version + ": could not parse XML - ", e);
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
     }

@@ -164,7 +164,7 @@ public class cgeo extends AbstractActivity {
                     showToast(res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
                 }
             } catch (Exception e) {
-                Log.w("cgeo.firstLoginHander: " + e.toString());
+                Log.w("cgeo.firstLoginHander", e);
             }
         }
     };
@@ -663,7 +663,7 @@ public class cgeo extends AbstractActivity {
                         countBubble.setVisibility(View.VISIBLE);
                     }
                 } catch (Exception e) {
-                    Log.w("cgeo.countBubbleHander: " + e.toString());
+                    Log.w("cgeo.countBubbleHander", e);
                 }
             }
         };

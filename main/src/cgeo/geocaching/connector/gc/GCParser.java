@@ -284,7 +284,7 @@ public abstract class GCParser {
                 LocParser.parseLoc(searchResult, coordinates);
 
             } catch (Exception e) {
-                Log.e("GCParser.parseSearch.CIDs: " + e.toString());
+                Log.e("GCParser.parseSearch.CIDs", e);
             }
         }
 
@@ -466,7 +466,7 @@ public abstract class GCParser {
                 cache.setCoords(new Geopoint(cache.getLatlon()));
                 cache.setReliableLatLon(true);
             } catch (Geopoint.GeopointException e) {
-                Log.w("GCParser.parseCache: Failed to parse cache coordinates: " + e.toString());
+                Log.w("GCParser.parseCache: Failed to parse cache coordinates", e);
             }
         }
 
@@ -1036,7 +1036,7 @@ public abstract class GCParser {
                 page = Network.getResponseData(Network.postRequest(uri, params));
             }
         } catch (Exception e) {
-            Log.e("GCParser.postLog.confim: " + e.toString());
+            Log.e("GCParser.postLog.confim", e);
         }
 
         try {
@@ -1057,7 +1057,7 @@ public abstract class GCParser {
                 return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
-            Log.e("GCParser.postLog.check: " + e.toString());
+            Log.e("GCParser.postLog.check", e);
         }
 
         Log.e("GCParser.postLog: Failed to post log because of unknown error");
@@ -1116,7 +1116,7 @@ public abstract class GCParser {
                 return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
-            Log.e("GCParser.postLogTrackable.check: " + e.toString());
+            Log.e("GCParser.postLogTrackable.check", e);
         }
 
         Log.e("GCParser.postLogTrackable: Failed to post log because of unknown error");
@@ -1409,7 +1409,7 @@ public abstract class GCParser {
             }
         } catch (Exception e) {
             // failed to parse logs
-            Log.w("GCParser.parseCache: Failed to parse cache logs" + e.toString());
+            Log.w("GCParser.parseCache: Failed to parse cache logs", e);
         }
 
         // tracking code

@@ -179,7 +179,7 @@ public final class GCVote {
                 }
             }
         } catch (Exception e) {
-            Log.e("GCVote.getRating: " + e.toString());
+            Log.e("GCVote.getRating", e);
         }
 
         return ratings;
@@ -254,7 +254,7 @@ public final class GCVote {
                 }
             }
         } catch (Exception e) {
-            Log.e("GCvote.loadRatings: " + e.toString());
+            Log.e("GCvote.loadRatings", e);
         }
     }
 }

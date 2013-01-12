@@ -161,7 +161,7 @@ public class HtmlImage implements Html.ImageGetter {
             final File fileSec = LocalStorage.getStorageSecFile(pseudoGeocode, url, true);
             return loadCachedImage(fileSec, forceKeep);
         } catch (Exception e) {
-            Log.w("HtmlImage.getDrawable (reading cache): " + e.toString());
+            Log.w("HtmlImage.getDrawable (reading cache)", e);
         }
         return null;
     }
