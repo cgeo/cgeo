@@ -112,4 +112,8 @@ public final class LogEntry {
         }
         return log;
     }
+
+    public boolean isOwn() {
+        return author.equalsIgnoreCase(Settings.getUsername());
+    }
 }

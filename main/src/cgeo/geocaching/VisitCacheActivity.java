@@ -50,8 +50,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class VisitCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent, LoaderManager.LoaderCallbacks<String> {
-    static final String EXTRAS_FOUND = "found";
-    static final String EXTRAS_TEXT = "text";
     static final String EXTRAS_GEOCODE = "geocode";
     static final String EXTRAS_ID = "id";
 
@@ -66,12 +64,10 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private String cacheid = null;
     private String geocode = null;
     private String text = null;
-    private boolean alreadyFound = false;
     private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private String[] viewstates = null;
     private List<TrackableLog> trackables = null;
     private Button postButton = null;
-    private Button clearButton = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
     private boolean tbChanged = false;
@@ -270,8 +266,6 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         if (extras != null) {
             cacheid = extras.getString(EXTRAS_ID);
             geocode = extras.getString(EXTRAS_GEOCODE);
-            text = extras.getString(EXTRAS_TEXT);
-            alreadyFound = extras.getBoolean(EXTRAS_FOUND);
         }
 
         if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
@@ -280,7 +274,9 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
             geocode = cgData.getGeocodeForGuid(cacheid);
         }
+
         cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        possibleLogTypes = cache.getPossibleLogTypes();
 
         if (StringUtils.isNotBlank(cache.getName())) {
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
@@ -292,22 +288,16 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         postButton = (Button) findViewById(R.id.post);
         tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
         tweetCheck = (CheckBox) findViewById(R.id.tweet);
-        clearButton = (Button) findViewById(R.id.clear);
 
-        // Restore previous state or initialize with default values
-        date = Calendar.getInstance();
+        // initialize with default values
+        setDefaultValues();
+
+        // Restore previous state
         if (savedInstanceState != null) {
             rating = savedInstanceState.getDouble(SAVED_STATE_RATING);
             typeSelected = LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
             date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
         } else {
-            rating = 0.0;
-            if (alreadyFound) {
-                typeSelected = LogType.NOTE;
-            } else {
-                typeSelected = LogType.FOUND_IT;
-            }
-
             // If log had been previously saved, load it now, otherwise initialize signature as needed
             final LogEntry log = cgData.loadLogOffline(geocode);
             if (log != null) {
@@ -316,16 +306,11 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                 text = log.log;
             } else if (StringUtils.isNotBlank(Settings.getSignature())
                     && Settings.isAutoInsertSignature()
-                    && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
+                    && StringUtils.isBlank(currentLogText())) {
                 insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache)), false);
             }
         }
         updatePostButtonText();
-
-        final Button saveButton = (Button) findViewById(R.id.save);
-
-        possibleLogTypes = cache.getPossibleLogTypes();
-
         enablePostButton(false);
 
         final Button typeButton = (Button) findViewById(R.id.type);
@@ -343,12 +328,13 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         dateButton.setOnClickListener(new DateListener());
 
         final EditText logView = (EditText) findViewById(R.id.log);
-        if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text)) {
+        if (StringUtils.isBlank(currentLogText()) && StringUtils.isNotBlank(text)) {
             logView.setText(text);
         }
 
         tweetCheck.setChecked(true);
 
+        final Button saveButton = (Button) findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -357,9 +343,51 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             }
         });
 
-        clearButton.setOnClickListener(new ClearListener());
+        final Button clearButton = (Button) findViewById(R.id.clear);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                clearLog();
+            }
+        });
 
         getSupportLoaderManager().initLoader(0, null, this);
+    }
+
+    private void setDefaultValues() {
+        date = Calendar.getInstance();
+        rating = 0.0;
+        if (cache.isEventCache()) {
+            if (cache.hasOwnLog(LogType.WILL_ATTEND)) {
+                typeSelected = LogType.ATTENDED;
+            }
+            else {
+                typeSelected = LogType.WILL_ATTEND;
+            }
+        }
+        else {
+            if (cache.isFound()) {
+                typeSelected = LogType.NOTE;
+            } else {
+                typeSelected = LogType.FOUND_IT;
+            }
+        }
+        text = null;
+    }
+
+    private void clearLog() {
+        cgData.clearLogOffline(geocode);
+
+        setDefaultValues();
+
+        setType(typeSelected);
+        setDate(date);
+
+        final EditText logView = (EditText) findViewById(R.id.log);
+        logView.setText(StringUtils.EMPTY);
+
+        showToast(res.getString(R.string.info_log_cleared));
     }
 
     @Override
@@ -472,39 +500,8 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             waitDialog = ProgressDialog.show(VisitCacheActivity.this, null, res.getString(R.string.log_saving), true);
             waitDialog.setCancelable(true);
 
-            final String log = ((EditText) findViewById(R.id.log)).getText().toString();
-            final Thread thread = new PostLogThread(postLogHandler, log);
+            final Thread thread = new PostLogThread(postLogHandler, currentLogText());
             thread.start();
-        }
-    }
-
-    private class ClearListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            //TODO: unify this method and the code in init()
-            cgData.clearLogOffline(geocode);
-
-            if (alreadyFound) {
-                typeSelected = LogType.NOTE;
-            } else {
-                typeSelected = possibleLogTypes.get(0);
-            }
-            date.setTime(new Date());
-            text = null;
-
-            setType(typeSelected);
-
-            final Button dateButton = (Button) findViewById(R.id.date);
-            dateButton.setOnClickListener(new DateListener());
-            setDate(date);
-
-            final EditText logView = (EditText) findViewById(R.id.log);
-            logView.setText(StringUtils.EMPTY);
-
-            clearButton.setOnClickListener(new ClearListener());
-
-            showToast(res.getString(R.string.info_log_cleared));
         }
     }
 

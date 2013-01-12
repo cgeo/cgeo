@@ -443,7 +443,6 @@ public class cgCache implements ICache, IWaypoint {
         Intent logVisitIntent = new Intent((Activity) fromActivity, VisitCacheActivity.class);
         logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_ID, cacheId);
         logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_GEOCODE, geocode);
-        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_FOUND, found);
 
         ((Activity) fromActivity).startActivity(logVisitIntent);
     }
@@ -1638,5 +1637,18 @@ public class cgCache implements ICache, IWaypoint {
         setUpdated(now);
         setDetailedUpdate(now);
         setDetailed(true);
+    }
+
+    /**
+     * Gets whether the user has logged the specific log type for this cache. Only checks the currently stored logs of
+     * the cache, so the result might be wrong.
+     */
+    public boolean hasOwnLog(LogType logType) {
+        for (LogEntry logEntry : getLogs()) {
+            if (logEntry.type == logType && logEntry.isOwn()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
