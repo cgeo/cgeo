@@ -497,8 +497,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             for (String geocode : dirtyCaches) {
                 cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 if (cache != null) {
-                    // remove to update the cache
-                    caches.remove(cache);
+                    // re-add to update the freshness
                     caches.add(cache);
                 }
             }
