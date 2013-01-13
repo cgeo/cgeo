@@ -1,9 +1,9 @@
 package cgeo.geocaching.geopoint;
 
-import junit.framework.Assert;
-
 import android.os.Bundle;
 import android.test.AndroidTestCase;
+
+import junit.framework.Assert;
 
 public class GeopointTest extends AndroidTestCase {
 
@@ -234,4 +234,67 @@ public class GeopointTest extends AndroidTestCase {
         assertEquals(125.663703918457, (new Geopoint(48.0, 2.0)).getElevation(), 0.1);
     }
 
+    private static void assertParseException(Runnable runnable) {
+        try {
+            runnable.run();
+            Assert.fail("Should have thrown Geopoint.ParseException");
+        } catch (Geopoint.ParseException e) {
+            //success
+        }
+    }
+
+    public static void testParseParam1() {
+        assertParseException(new Runnable() {
+
+            @SuppressWarnings("unused")
+            @Override
+            public void run() {
+                new Geopoint("some nonsense text");
+            }
+        });
+    }
+
+    public static void testParseParam2() throws Exception {
+        assertParseException(new Runnable() {
+
+            @SuppressWarnings("unused")
+            @Override
+            public void run() {
+                new Geopoint("latitude", "longitude");
+            }
+        });
+    }
+
+    public static void testParseParam6() throws Exception {
+        assertParseException(new Runnable() {
+
+            @SuppressWarnings("unused")
+            @Override
+            public void run() {
+                new Geopoint("latDir", "latDeg", "latDegFrac", "lonDir", "lonDeg", "lonDegFrac");
+            }
+        });
+    }
+
+    public static void testParseParam8() throws Exception {
+        assertParseException(new Runnable() {
+
+            @SuppressWarnings("unused")
+            @Override
+            public void run() {
+                new Geopoint("latDir", "latDeg", "latMin", "latMinFrac", "lonDir", "lonDeg", "lonMin", "lonMinFrac");
+            }
+        });
+    }
+
+    public static void testParseParam10() throws Exception {
+        assertParseException(new Runnable() {
+
+            @SuppressWarnings("unused")
+            @Override
+            public void run() {
+                new Geopoint("latDir", "latDeg", "latMin", "latSec", "latSecFrac", "lonDir", "lonDeg", "lonMin", "lonSec", "lonSecFrac");
+            }
+        });
+    }
 }
