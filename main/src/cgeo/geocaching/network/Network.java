@@ -408,10 +408,26 @@ public abstract class Network {
         }
     }
 
+    /**
+     * Get the body of a HTTP response.
+     *
+     * {@link BaseUtils#replaceWhitespace(String)} will be called on the result
+     *
+     * @param response a HTTP response, which can be null
+     * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
+     */
     public static String getResponseData(final HttpResponse response) {
         return Network.getResponseData(response, true);
     }
 
+    /**
+     * Get the body of a HTTP response.
+     *
+     * @param response a HTTP response, which can be null
+     * @param replaceWhitespace <code>true</code> if {@link BaseUtils#replaceWhitespace(String)}
+     *                          should be called on the body
+     * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
+     */
     public static String getResponseData(final HttpResponse response, boolean replaceWhitespace) {
         if (!isSuccess(response)) {
             return null;
