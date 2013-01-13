@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Synchronized set wrapper for the LeastRecentlyUsedMap.
- * 
+ *
  * This code is heavily based on the HashSet code that represent Map as a Set.
  * Unfortunately HashSet does not allow to use a custom Map as its Storage.
  * Therefore overriding removeEldestEntry() is impossible for a normal LinkedHashSet.
@@ -50,7 +50,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     /**
      * Synchronized access to set size
      * Copy of the HashSet code if size()
-     * 
+     *
      * @see HashSet
      */
     @Override
@@ -61,7 +61,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     /**
      * Synchronized check of set emptiness
      * Copy of the HashSet code if isEmpty()
-     * 
+     *
      * @see HashSet
      */
     @Override
@@ -72,7 +72,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     /**
      * Synchronized check for containment
      * Copy of the HashSet code if contains()
-     * 
+     *
      * @see HashSet
      */
     @Override
@@ -83,18 +83,21 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     /**
      * Synchronized addition of an item
      * Copy of the HashSet code if add()
-     * 
+     *
      * @see HashSet
      */
     @Override
     public synchronized boolean add(E e) {
+        if (e == null) {
+            throw new IllegalArgumentException("LeastRecentlyUsedSet cannot take null element");
+        }
         return map.put(e, PRESENT) == null;
     }
 
     /**
      * Synchronized removal of a contained item
      * Copy of the HashSet code if remove()
-     * 
+     *
      * @see HashSet
      */
     @Override
@@ -117,7 +120,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     /**
      * Synchronized clearing of the set
      * Copy of the HashSet code if clear()
-     * 
+     *
      * @see HashSet
      */
     @Override
@@ -128,7 +131,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     /**
      * (synchronized) Clone of the set
      * Copy of the HashSet code if clone()
-     * 
+     *
      * @see HashSet
      */
     @Override
