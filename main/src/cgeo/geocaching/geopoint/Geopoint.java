@@ -103,10 +103,8 @@ public final class Geopoint implements ICoordinates, Parcelable {
      */
     public Geopoint(final String latDir, final String latDeg, final String latDegFrac,
                     final String lonDir, final String lonDeg, final String lonDegFrac) {
-        latitude = Double.parseDouble(latDeg + "." + addZeros(Integer.parseInt(latDegFrac), 5)) *
-                getLatSign(latDir);
-        longitude = Double.parseDouble(lonDeg + "." + addZeros(Integer.parseInt(lonDegFrac), 5)) *
-                getLonSign(lonDir);
+        this(getLatSign(latDir) + latDeg + "." + addZeros(latDegFrac, 5),
+                getLonSign(lonDir) + lonDeg + "." + addZeros(lonDegFrac, 5));
     }
 
     /**
@@ -123,10 +121,8 @@ public final class Geopoint implements ICoordinates, Parcelable {
      */
     public Geopoint(final String latDir, final String latDeg, final String latMin, final String latMinFrac,
                     final String lonDir, final String lonDeg, final String lonMin, final String lonMinFrac) {
-        latitude = (Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac), 3)) / 60) *
-                (getLatSign(latDir));
-        longitude = (Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac), 3)) / 60) *
-                (getLonSign(lonDir));
+        this(latDir + " " + latDeg + " " + latMin + "." + addZeros(latMinFrac, 3),
+                lonDir + " " + lonDeg + " " + lonMin + "." + addZeros(lonMinFrac, 3));
     }
 
     /**
@@ -145,10 +141,8 @@ public final class Geopoint implements ICoordinates, Parcelable {
      */
     public Geopoint(final String latDir, final String latDeg, final String latMin, final String latSec, final String latSecFrac,
                     final String lonDir, final String lonDeg, final String lonMin, final String lonSec, final String lonSecFrac) {
-        latitude = (Double.parseDouble(latDeg) + Double.parseDouble(latMin) / 60 + Double.parseDouble(latSec + "." + addZeros(Integer.parseInt(latSecFrac), 3)) / 3600) *
-                (getLatSign(latDir));
-        longitude = (Double.parseDouble(lonDeg) + Double.parseDouble(lonMin) / 60 + Double.parseDouble(lonSec + "." + addZeros(Integer.parseInt(lonSecFrac), 3)) / 3600) *
-                (getLonSign(lonDir));
+        this(latDir + " " + latDeg + " " + latMin + " " + latSec + "." + addZeros(latSecFrac, 3),
+                lonDir + " " + lonDeg + " " + lonMin + " " + lonSec + "." + addZeros(lonSecFrac, 3));
     }
 
     /**
@@ -586,16 +580,15 @@ public final class Geopoint implements ICoordinates, Parcelable {
         return (Math.abs(deg) * 3600) % 60;
     }
 
-    private static String addZeros(final int value, final int len) {
-        return StringUtils.leftPad(Integer.toString(value), len, '0');
+    private static String addZeros(final String value, final int len) {
+        return StringUtils.leftPad(value.trim(), len, '0');
     }
 
-    private static int getLonSign(final String lonDir) {
-        return "W".equalsIgnoreCase(lonDir) ? -1 : 1;
+    private static String getLonSign(final String lonDir) {
+        return "W".equalsIgnoreCase(lonDir) ? "-" : "";
     }
 
-    private static int getLatSign(final String latDir) {
-        return "S".equalsIgnoreCase(latDir) ? -1 : 1;
+    private static String getLatSign(final String latDir) {
+        return "S".equalsIgnoreCase(latDir) ? "-" : "";
     }
-
 }
