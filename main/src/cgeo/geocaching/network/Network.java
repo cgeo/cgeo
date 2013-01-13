@@ -383,15 +383,21 @@ public abstract class Network {
         return response != null && response.getStatusLine().getStatusCode() == 200;
     }
 
+    /**
+     * Get the result of a GET HTTP request returning a JSON body.
+     *
+     * @param uri the base URI of the GET HTTP request
+     * @param params the query parameters, or <code>null</code> if there are none
+     * @return a JSON object if the request was successful and the body could be decoded, <code>null</code> otherwise
+     */
     public static JSONObject requestJSON(final String uri, final Parameters params) {
         final HttpResponse response = request("GET", uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"), null);
-        if (isSuccess(response)) {
+        final String responseData = Network.getResponseData(response, false);
+        if (responseData != null) {
             try {
-                return new JSONObject(Network.getResponseData(response));
+                return new JSONObject(responseData);
             } catch (final JSONException e) {
-                Log.e("Network.requestJSON", e);
-            } catch (final NullPointerException e) {
-                Log.e("Network.requestJSON", e);
+                Log.w("Network.requestJSON", e);
             }
         }
 
