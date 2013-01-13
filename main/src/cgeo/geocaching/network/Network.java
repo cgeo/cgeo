@@ -390,6 +390,8 @@ public abstract class Network {
                 return new JSONObject(Network.getResponseData(response));
             } catch (final JSONException e) {
                 Log.e("Network.requestJSON", e);
+            } catch (final NullPointerException e) {
+                Log.e("Network.requestJSON", e);
             }
         }
 
