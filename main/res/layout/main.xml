@@ -18,7 +18,6 @@
 				android:onClick="goManual" />
 	</LinearLayout>
     <fragment android:id="@+id/status"
-        android:visibility="invisible"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_alignParentTop="true"
