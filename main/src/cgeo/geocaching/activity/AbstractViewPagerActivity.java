@@ -238,7 +238,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         // switch to details page, if we're out of bounds
         final int defaultPage = pagesAndIndex.getRight().intValue();
-        if (viewPager.getCurrentItem() < 0 || viewPager.getCurrentItem() >= viewPagerAdapter.getCount()) {
+        if (getCurrentItem() < 0 || getCurrentItem() >= viewPagerAdapter.getCount()) {
             viewPager.setCurrentItem(defaultPage, false);
         }
 
@@ -267,6 +267,10 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     }
 
     protected final boolean isCurrentPage(Page page) {
-        return viewPager.getCurrentItem() == getPageIndex(page);
+        return getCurrentItem() == getPageIndex(page);
+    }
+
+    protected int getCurrentItem() {
+        return viewPager.getCurrentItem();
     }
 }

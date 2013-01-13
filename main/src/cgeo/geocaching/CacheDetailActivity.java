@@ -129,6 +129,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private static final int CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES = 1241;
 
     private static final Pattern DARK_COLOR_PATTERN = Pattern.compile(Pattern.quote("color=\"#") + "(0[0-9]){3}" + "\"");
+    public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
 
     private cgCache cache;
     private final Progress progress = new Progress();
@@ -287,7 +288,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         });
 
-        final int pageToOpen = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+        final int pageToOpen = savedInstanceState != null ?
+                savedInstanceState.getInt(STATE_PAGE_INDEX, 0) :
+                Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
         createViewPager(pageToOpen, new OnPageSelectedListener() {
 
             @Override
@@ -304,6 +307,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // Initialization done. Let's load the data with the given information.
         new LoadCacheThread(geocode, guid, loadCacheHandler).start();
+    }
+
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_PAGE_INDEX, getCurrentItem());
     }
 
     @Override
