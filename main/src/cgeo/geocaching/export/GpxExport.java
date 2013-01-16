@@ -149,11 +149,9 @@ class GpxExport extends AbstractExport {
                 gpx.startTag(PREFIX_GPX, "gpx");
                 gpx.attribute("", "version", "1.0");
                 gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
-                gpx.attribute(PREFIX_XSI, "schemaLocation", "http://www.topografix.com/GPX/1/0 " +
-                        "http://www.topografix.com/GPX/1/0/gpx.xsd " +
-                        "http://www.topografix.com/GPX/1/0 " +
-                        "http://www.topografix.com/GPX/1/0/gpx.xsd " +
-                        "http://www.groundspeak.com/cache/1/0/1/cache.xsd");
+                gpx.attribute(PREFIX_XSI, "schemaLocation",
+                        PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " +
+                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd");
 
                 for (int i = 0; i < caches.size(); i++) {
                     final cgCache cache = cgData.loadCache(caches.get(i).getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
