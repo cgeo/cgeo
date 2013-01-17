@@ -75,6 +75,18 @@
 							android:textColor="?text_color"
 							android:text="@string/visit_tweet" />
 				</LinearLayout>
+				<ImageView 
+				    	android:id="@+id/image_preview"
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:layout_marginTop="5dip"
+					    android:layout_marginBottom="5dip"
+					    android:background="#000000"
+                        android:padding="1dp"
+				    	android:visibility="gone"/>
+				<Button style="@style/button_full"
+						android:id="@+id/image_btn"
+						android:text="@string/log_image_attach" />				
 				<Button style="@style/button_full"
 						android:id="@+id/post"
 						android:text="@string/log_post" />
