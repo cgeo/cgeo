@@ -1071,9 +1071,13 @@ public abstract class GCParser {
 
     /**
      * Upload an image to a log that has already been posted
-     *
+     * 
      * @param logId
      *            the ID of the log to upload the image to. Found on page returned when log is uploaded
+     * @param caption
+     *            of the image; max 50 chars
+     * @param description
+     *            of the image; max 250 chars
      * @param imageUri
      *            the URI for the image to be uploaded
      * @return status code to indicate success or failure
