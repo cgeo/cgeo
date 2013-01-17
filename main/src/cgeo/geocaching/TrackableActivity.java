@@ -216,6 +216,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
         menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
         menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
+        menu.add(viewId, 4, 0, res.getString(R.string.user_menu_send_message));
     }
 
     @Override
@@ -229,6 +230,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 return true;
             case 3:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(contextMenuUser))));
+                return true;
+            case 4:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(contextMenuUser))));
                 return true;
             default:
                 return false;

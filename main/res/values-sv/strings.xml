@@ -783,6 +783,7 @@
   <string name="user_menu_view_hidden">Gömda cacher</string>
   <string name="user_menu_view_found">Hittade cacher</string>
   <string name="user_menu_open_browser">Öppna profil i webbläsaren</string>
+  <string name="user_menu_send_message">Skicka meddelande</string>
 
   <!-- navigation -->
   <string name="navigation">Navigering</string>

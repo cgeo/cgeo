@@ -842,7 +842,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private void showUserActionsDialog(final CharSequence name) {
         final CharSequence[] items = { res.getString(R.string.user_menu_view_hidden),
                 res.getString(R.string.user_menu_view_found),
-                res.getString(R.string.user_menu_open_browser)
+                res.getString(R.string.user_menu_open_browser),
+                res.getString(R.string.user_menu_send_message)
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -859,6 +860,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         return;
                     case 2:
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(name.toString()))));
+                        return;
+                    case 3:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(name.toString()))));
                         return;
                     default:
                         break;
