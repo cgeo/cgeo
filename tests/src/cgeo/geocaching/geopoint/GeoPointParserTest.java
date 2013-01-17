@@ -28,7 +28,7 @@ public class GeoPointParserTest extends AndroidTestCase {
         } catch (Geopoint.ParseException e) {
             // expected
         }
-        assertEquals(null, point);
+        assertNull(point);
     }
 
 
@@ -55,7 +55,7 @@ public class GeoPointParserTest extends AndroidTestCase {
         final Geopoint p2 = GeopointParser.parse("N51 21.523", "E07 02.680");
         assertNotNull(p1);
         assertNotNull(p2);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     public static void testUnrelatedParts() {
@@ -65,7 +65,7 @@ public class GeoPointParserTest extends AndroidTestCase {
         } catch (Geopoint.ParseException e) {
             // expected
         }
-        assertEquals(null, point);
+        assertNull(point);
     }
 
     public static void testComma() {
@@ -75,6 +75,15 @@ public class GeoPointParserTest extends AndroidTestCase {
                 "E 15° 53' 41.68''");
         assertNotNull(pointComma);
         assertNotNull(pointDot);
-        assertTrue(pointComma.equals(pointDot));
+        assertEquals(pointComma, pointDot);
     }
+
+    public static void testBlankAddedByAutocorrectionDot() {
+        assertEquals(refLatitude, GeopointParser.parseLatitude("N 49° 56. 031"), 1e-8);
+    }
+
+    public static void testBlankAddedByAutocorrectionComma() {
+        assertEquals(refLatitude, GeopointParser.parseLatitude("N 49° 56, 031"), 1e-8);
+    }
+
 }

@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
  * Parse coordinates.
  */
 class GeopointParser {
+
     private static class ResultWrapper {
         final double result;
         final int matcherPos;
@@ -23,12 +24,13 @@ class GeopointParser {
         }
     }
 
-    //                                                         ( 1  )    ( 2  )         ( 3  )       ( 4  )       (        5        )
-    private static final Pattern patternLat = Pattern.compile("\\b([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternLon = Pattern.compile("\\b([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    //                                                            ( 1  )    ( 2  )         ( 3  )       ( 4  )       (        5        )
+    private static final Pattern PATTERN_LAT = Pattern.compile("\\b([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_LON = Pattern.compile("\\b([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
-    enum LatLon
-    {
+    private static final Pattern PATTERN_BAD_BLANK = Pattern.compile("(\\d)[,.] (\\d{2,})");
+
+    enum LatLon {
         LAT,
         LON
     }
@@ -53,8 +55,7 @@ class GeopointParser {
      * @throws Geopoint.ParseException
      *             if lat or lon could not be parsed
      */
-    public static Geopoint parse(final String text)
-    {
+    public static Geopoint parse(final String text) {
         final ResultWrapper latitudeWrapper = parseHelper(text, LatLon.LAT);
         final double lat = latitudeWrapper.result;
         // cut away the latitude part when parsing the longitude
@@ -90,8 +91,7 @@ class GeopointParser {
      * @throws Geopoint.ParseException
      *             if lat or lon could not be parsed
      */
-    public static Geopoint parse(final String latitude, final String longitude)
-    {
+    public static Geopoint parse(final String latitude, final String longitude) {
         final double lat = parseLatitude(latitude);
         final double lon = parseLongitude(longitude);
 
@@ -102,11 +102,13 @@ class GeopointParser {
      * (non JavaDoc)
      * Helper for coordinates-parsing.
      */
-    private static ResultWrapper parseHelper(final String text, final LatLon latlon)
-    {
+    private static ResultWrapper parseHelper(final String text, final LatLon latlon) {
 
-        final Pattern pattern = LatLon.LAT == latlon ? patternLat : patternLon;
-        final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
+        MatcherWrapper matcher = new MatcherWrapper(PATTERN_BAD_BLANK, text);
+        String replaceSpaceAfterComma = matcher.replaceAll("$1.$2");
+
+        final Pattern pattern = LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON;
+        matcher = new MatcherWrapper(pattern, replaceSpaceAfterComma);
 
         if (matcher.find()) {
             final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
@@ -154,8 +156,7 @@ class GeopointParser {
      * @throws Geopoint.ParseException
      *             if latitude could not be parsed
      */
-    public static double parseLatitude(final String text)
-    {
+    public static double parseLatitude(final String text) {
         return parseHelper(text, LatLon.LAT).result;
     }
 
@@ -169,8 +170,7 @@ class GeopointParser {
      * @throws Geopoint.ParseException
      *             if longitude could not be parsed
      */
-    public static double parseLongitude(final String text)
-    {
+    public static double parseLongitude(final String text) {
         return parseHelper(text, LatLon.LON).result;
     }
 }
