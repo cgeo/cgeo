@@ -53,11 +53,15 @@ public class Tile {
     private final Viewport viewPort;
 
     public Tile(Geopoint origin, int zoomlevel) {
+        this(calcX(origin, clippedZoomlevel(zoomlevel)), calcY(origin, clippedZoomlevel(zoomlevel)), clippedZoomlevel(zoomlevel));
+    }
 
-        this.zoomlevel = Math.max(Math.min(zoomlevel, ZOOMLEVEL_MAX), ZOOMLEVEL_MIN);
+    private Tile(int tileX, int tileY, int zoomlevel) {
 
-        tileX = calcX(origin);
-        tileY = calcY(origin);
+        this.zoomlevel = clippedZoomlevel(zoomlevel);
+
+        this.tileX = tileX;
+        this.tileY = tileY;
 
         viewPort = new Viewport(getCoord(new UTFGridPosition(0, 0)), getCoord(new UTFGridPosition(63, 63)));
     }
@@ -66,28 +70,32 @@ public class Tile {
         return zoomlevel;
     }
 
+    private static int clippedZoomlevel(int zoomlevel) {
+        return Math.max(Math.min(zoomlevel, ZOOMLEVEL_MAX), ZOOMLEVEL_MIN);
+    }
+
     /**
      * Calculate the tile for a Geopoint based on the Spherical Mercator.
      *
      * @see <a
      *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
-    private int calcX(final Geopoint origin) {
-        return (int) ((origin.getLongitude() + 180.0) / 360.0 * NUMBER_OF_TILES[this.zoomlevel]);
+    private static int calcX(final Geopoint origin, final int zoomlevel) {
+        return (int) ((origin.getLongitude() + 180.0) / 360.0 * NUMBER_OF_TILES[zoomlevel]);
     }
 
     /**
      * Calculate the tile for a Geopoint based on the Spherical Mercator.
      *
      */
-    private int calcY(final Geopoint origin) {
+    private static int calcY(final Geopoint origin, final int zoomlevel) {
 
         // double latRad = Math.toRadians(origin.getLatitude());
         // return (int) ((1 - (Math.log(Math.tan(latRad) + (1 / Math.cos(latRad))) / Math.PI)) / 2 * numberOfTiles);
 
         // Optimization from Bing
         double sinLatRad = Math.sin(Math.toRadians(origin.getLatitude()));
-        return (int) ((0.5 - Math.log((1 + sinLatRad) / (1 - sinLatRad)) / (4 * Math.PI)) * NUMBER_OF_TILES[this.zoomlevel]);
+        return (int) ((0.5 - Math.log((1 + sinLatRad) / (1 - sinLatRad)) / (4 * Math.PI)) * NUMBER_OF_TILES[zoomlevel]);
     }
 
     public int getX() {
@@ -121,7 +129,12 @@ public class Tile {
 
     /**
      * Calculates the maximum possible zoom level where the supplied points
-     * are covered by adjacent tiles on the east/west axis.
+     * are covered by at least by the supplied number of
+     * adjacent tiles on the east/west axis.
+     * This criterion can be exactly met for even numbers of tiles
+     * while it may result in one more tile as requested for odd numbers
+     * of tiles.
+     *
      * The order of the points (left/right) is irrelevant.
      *
      * @param left
@@ -130,17 +143,17 @@ public class Tile {
      *            Second point
      * @return
      */
-    public static int calcZoomLon(final Geopoint left, final Geopoint right) {
+    public static int calcZoomLon(final Geopoint left, final Geopoint right, final int numberOfTiles) {
 
         int zoom = (int) Math.floor(
-                Math.log(360.0 / Math.abs(left.getLongitude() - right.getLongitude()))
+                Math.log(360.0 * numberOfTiles / (2.0 * Math.abs(left.getLongitude() - right.getLongitude())))
                         / Math.log(2)
                 );
 
         Tile tileLeft = new Tile(left, zoom);
         Tile tileRight = new Tile(right, zoom);
 
-        if (tileLeft.tileX == tileRight.tileX) {
+        if (Math.abs(tileLeft.tileX - tileRight.tileX) < (numberOfTiles - 1)) {
             zoom += 1;
         }
 
@@ -149,7 +162,12 @@ public class Tile {
 
     /**
      * Calculates the maximum possible zoom level where the supplied points
-     * are covered by adjacent tiles on the north/south axis.
+     * are covered by at least by the supplied number of
+     * adjacent tiles on the north/south axis.
+     * This criterion can be exactly met for even numbers of tiles
+     * while it may result in one more tile as requested for odd numbers
+     * of tiles.
+     *
      * The order of the points (bottom/top) is irrelevant.
      *
      * @param bottom
@@ -158,21 +176,21 @@ public class Tile {
      *            Second point
      * @return
      */
-    public static int calcZoomLat(final Geopoint bottom, final Geopoint top) {
+    public static int calcZoomLat(final Geopoint bottom, final Geopoint top, final int numberOfTiles) {
 
         int zoom = (int) Math.ceil(
-                Math.log(2.0 * Math.PI /
+                Math.log(2.0 * Math.PI * numberOfTiles / (
                         Math.abs(
                                 asinh(tanGrad(bottom.getLatitude()))
                                         - asinh(tanGrad(top.getLatitude()))
-                                )
+                                ) * 2.0)
                         ) / Math.log(2)
                 );
 
         Tile tileBottom = new Tile(bottom, zoom);
         Tile tileTop = new Tile(top, zoom);
 
-        if (Math.abs(tileBottom.tileY - tileTop.tileY) > 1) {
+        if (Math.abs(tileBottom.tileY - tileTop.tileY) > (numberOfTiles - 1)) {
             zoom -= 1;
         }
 
@@ -185,7 +203,7 @@ public class Tile {
 
     /**
      * Calculates the inverted hyperbolic sine
-     * (after Bronstein, Semendjajew: Taschenbuch der Mathematik
+     * (after Bronstein, Semendjajew: Taschenbuch der Mathematik)
      *
      * @param x
      * @return
@@ -233,19 +251,48 @@ public class Tile {
     }
 
     /**
-     * Calculate needed tiles for the given viewport
-     *
+     * Calculate needed tiles for the given viewport to cover it with
+     * max 2x2 tiles
+     * 
      * @param viewport
      * @return
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport) {
+        return getTilesForViewport(viewport, 2, Tile.ZOOMLEVEL_MIN);
+    }
+
+    /**
+     * Calculate needed tiles for the given viewport.
+     * You can define the minimum number of tiles on the longer axis
+     * and/or the minimum zoom level.
+     *
+     * @param viewport
+     * @param tilesOnAxis
+     * @param minZoom
+     * @return
+     */
+    protected static Set<Tile> getTilesForViewport(final Viewport viewport, final int tilesOnAxis, final int minZoom) {
         Set<Tile> tiles = new HashSet<Tile>();
-        int zoom = Math.min(Tile.calcZoomLon(viewport.bottomLeft, viewport.topRight),
-                Tile.calcZoomLat(viewport.bottomLeft, viewport.topRight));
-        tiles.add(new Tile(viewport.bottomLeft, zoom));
-        tiles.add(new Tile(new Geopoint(viewport.getLatitudeMin(), viewport.getLongitudeMax()), zoom));
-        tiles.add(new Tile(new Geopoint(viewport.getLatitudeMax(), viewport.getLongitudeMin()), zoom));
-        tiles.add(new Tile(viewport.topRight, zoom));
+        int zoom = Math.max(
+                Math.min(Tile.calcZoomLon(viewport.bottomLeft, viewport.topRight, tilesOnAxis),
+                        Tile.calcZoomLat(viewport.bottomLeft, viewport.topRight, tilesOnAxis)),
+                minZoom);
+
+        Tile tileBottomLeft = new Tile(viewport.bottomLeft, zoom);
+        Tile tileTopRight = new Tile(viewport.topRight, zoom);
+
+        int xLow = Math.min(tileBottomLeft.getX(), tileTopRight.getX());
+        int xHigh = Math.max(tileBottomLeft.getX(), tileTopRight.getX());
+
+        int yLow = Math.min(tileBottomLeft.getY(), tileTopRight.getY());
+        int yHigh = Math.max(tileBottomLeft.getY(), tileTopRight.getY());
+
+        for (int xNum = xLow; xNum <= xHigh; xNum++) {
+            for (int yNum = yLow; yNum <= yHigh; yNum++) {
+                tiles.add(new Tile(xNum, yNum, zoom));
+            }
+        }
+
         return tiles;
     }
 
