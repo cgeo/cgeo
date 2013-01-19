@@ -132,6 +132,11 @@ public abstract class Login {
             return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }
 
+        if (loginData.contains("You must validate your account before you can log in.")) {
+            Log.i("Failued to log in Geocaching.com as " + login.left + " because account needs to be validated first");
+            return StatusCode.UNVALIDATED_ACCOUNT;
+        }
+
         Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
         if (retry) {
             Login.switchToEnglish(loginData);

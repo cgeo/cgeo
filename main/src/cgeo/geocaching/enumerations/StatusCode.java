@@ -16,6 +16,7 @@ public enum StatusCode {
     COMMUNICATION_ERROR(R.string.err_comm),
     WRONG_LOGIN_DATA(R.string.err_wrong),
     UNAPPROVED_LICENSE(R.string.err_license),
+    UNVALIDATED_ACCOUNT(R.string.err_unvalidated_account),
     UNPUBLISHED_CACHE(R.string.err_unpublished),
     PREMIUM_ONLY(R.string.err_premium_only),
     MAINTENANCE(R.string.err_maintenance),
