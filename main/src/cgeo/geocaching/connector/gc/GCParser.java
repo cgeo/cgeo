@@ -29,6 +29,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -933,23 +934,7 @@ public abstract class GCParser {
             return new ImmutablePair<StatusCode, String>(StatusCode.NO_LOG_TEXT, "");
         }
 
-        // fix log (non-Latin characters converted to HTML entities)
-        final int logLen = log.length();
-        final StringBuilder logUpdated = new StringBuilder();
-
-        for (int i = 0; i < logLen; i++) {
-            char c = log.charAt(i);
-
-            if (c > 300) {
-                logUpdated.append("&#");
-                logUpdated.append(Integer.toString(c));
-                logUpdated.append(';');
-            } else {
-                logUpdated.append(c);
-            }
-        }
-
-        final String logInfo = logUpdated.toString().replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
+        final String logInfo = HtmlUtils.convertNonLatinCharactersToHTML(log).replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
 
         if (trackables != null) {
             Log.i("Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + logInfo + "; trackables: " + trackables.size());
@@ -1071,7 +1056,7 @@ public abstract class GCParser {
 
     /**
      * Upload an image to a log that has already been posted
-     * 
+     *
      * @param logId
      *            the ID of the log to upload the image to. Found on page returned when log is uploaded
      * @param caption
@@ -1104,8 +1089,8 @@ public abstract class GCParser {
         final Parameters uploadParams = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
-                "ctl00$ContentBody$ImageUploadControl1$uxFileCaption", caption,
-                "ctl00$ContentBody$ImageUploadControl1$uxFileDesc", description,
+                "ctl00$ContentBody$ImageUploadControl1$uxFileCaption", HtmlUtils.convertNonLatinCharactersToHTML(caption),
+                "ctl00$ContentBody$ImageUploadControl1$uxFileDesc", HtmlUtils.convertNonLatinCharactersToHTML(description),
                 "ctl00$ContentBody$ImageUploadControl1$uxUpload", "Upload");
         Login.putViewstates(uploadParams, viewstates);
 
@@ -1162,7 +1147,7 @@ public abstract class GCParser {
 
         Log.i("Trying to post log for trackable #" + trackingCode + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log);
 
-        final String logInfo = log.replace("\n", "\r\n"); // windows' eol
+        final String logInfo = HtmlUtils.convertNonLatinCharactersToHTML(log).replace("\n", "\r\n"); // windows' eol
 
         final Calendar currentDate = Calendar.getInstance();
         final Parameters params = new Parameters(
