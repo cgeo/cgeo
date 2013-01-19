@@ -237,7 +237,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         pageOrder.addAll(pagesAndIndex.getLeft());
 
         // switch to details page, if we're out of bounds
-        final int defaultPage = pagesAndIndex.getRight().intValue();
+        final int defaultPage = pagesAndIndex.getRight();
         if (getCurrentItem() < 0 || getCurrentItem() >= viewPagerAdapter.getCount()) {
             viewPager.setCurrentItem(defaultPage, false);
         }
