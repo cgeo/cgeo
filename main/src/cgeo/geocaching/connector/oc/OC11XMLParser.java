@@ -441,8 +441,7 @@ public class OC11XMLParser {
 
             @Override
             public void end(String body) {
-                final String content = body.trim();
-                descHolder.hint = content;
+                descHolder.hint = body.trim();
             }
         });
 
