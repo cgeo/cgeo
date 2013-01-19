@@ -133,7 +133,7 @@ public abstract class Login {
         }
 
         if (loginData.contains("You must validate your account before you can log in.")) {
-            Log.i("Failued to log in Geocaching.com as " + login.left + " because account needs to be validated first");
+            Log.i("Failed to log in Geocaching.com as " + login.left + " because account needs to be validated first");
             return StatusCode.UNVALIDATED_ACCOUNT;
         }
 
