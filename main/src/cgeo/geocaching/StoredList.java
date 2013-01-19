@@ -50,11 +50,7 @@ public class StoredList {
         if (!(obj instanceof StoredList)) {
             return false;
         }
-        StoredList other = (StoredList) obj;
-        if (id != other.id) {
-            return false;
-        }
-        return true;
+        return id == ((StoredList) obj).id;
     }
 
     public static class UserInterface {
