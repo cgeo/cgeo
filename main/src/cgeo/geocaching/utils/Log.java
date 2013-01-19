@@ -1,5 +1,9 @@
 package cgeo.geocaching.utils;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 final public class Log {
 
@@ -9,6 +13,7 @@ final public class Log {
      * the debug flag is cached here so that we don't need to access the settings every time we have to evaluate it
      */
     private static boolean isDebug = true;
+    private static boolean first = true;
 
     public static boolean isDebug() {
         return isDebug;
@@ -73,5 +78,32 @@ final public class Log {
 
     public static void e(final String msg, final Throwable t) {
         android.util.Log.e(TAG, msg, t);
+    }
+
+    /**
+     * Log the whole content of a string into "/sdcard/cgeo-debug.log".
+     * <br/>
+     * Sometimes, the string we want to work on while debugging or developing a new feature is too long to
+     * be fully stored in Android logcat. This method will log the content of the string in a file named
+     * "/sdcard/cgeo-debug.log". The file will be reset at every run, and if called several times during a run,
+     * the contents will be appended to one another.
+     * <br/>
+     * <strong>This method should never be called in production.</strong>
+     *
+     * @param msg the message to log, or to add to the log if other messages have been stored in the same run
+     */
+    public synchronized static void logToFile(final String msg) {
+        final File file = new File("/sdcard/cgeo-debug.log");
+        if (first) {
+            first = false;
+            file.delete();
+        }
+        try {
+            final Writer writer = new FileWriter(file, true);
+            writer.write(msg);
+            writer.close();
+        } catch (final IOException e) {
+            Log.e("logToFile: cannot write to " + file, e);
+        }
     }
 }
