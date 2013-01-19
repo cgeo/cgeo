@@ -346,9 +346,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final int viewId = view.getId();
         contextMenuWPIndex = -1;
         switch (viewId) {
-            case R.id.value: // coordinates
+            case R.id.value: // coordinates, gc-code, name
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_coordinates), true);
+                String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
+                buildOptionsContextmenu(menu, viewId, itemTitle, true);
                 break;
             case R.id.shortdesc:
                 clickedItemText = ((TextView) view).getText();
@@ -1134,10 +1135,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            details.add(R.string.cache_name, span);
+            registerForContextMenu(details.add(R.string.cache_name, span));
             details.add(R.string.cache_type, cache.getType().getL10n());
             details.addSize(cache);
-            details.add(R.string.cache_geocode, cache.getGeocode());
+            registerForContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()));
             details.addCacheState(cache);
 
             details.addDistance(cache, cacheDistanceView);
