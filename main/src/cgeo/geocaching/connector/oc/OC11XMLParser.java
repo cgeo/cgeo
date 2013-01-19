@@ -560,7 +560,7 @@ public class OC11XMLParser {
     protected static String stripMarkup(String input) {
         if (StringUtils.startsWith(input, PARAGRAPH_BEGIN) && StringUtils.endsWith(input, PARAGRAPH_END)) {
             String inner = input.substring(PARAGRAPH_BEGIN.length(), input.length() - PARAGRAPH_END.length());
-            if (inner.indexOf(PARAGRAPH_BEGIN) < 0) {
+            if (!inner.contains(PARAGRAPH_BEGIN)) {
                 return inner;
             }
         }
