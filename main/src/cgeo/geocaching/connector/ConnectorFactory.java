@@ -48,7 +48,7 @@ public final class ConnectorFactory {
                 vpConns.add((ISearchByViewPort) conn);
             }
         }
-        searchByViewPortConns = vpConns.toArray(new ISearchByViewPort[] {});
+        searchByViewPortConns = vpConns.toArray(new ISearchByViewPort[vpConns.size()]);
 
         List<ISearchByCenter> centerConns = new ArrayList<ISearchByCenter>();
         for (IConnector conn : connectors) {
@@ -57,7 +57,7 @@ public final class ConnectorFactory {
                 centerConns.add((ISearchByCenter) conn);
             }
         }
-        searchByCenterConns = centerConns.toArray(new ISearchByCenter[] {});
+        searchByCenterConns = centerConns.toArray(new ISearchByCenter[centerConns.size()]);
     }
 
     public static IConnector[] getConnectors() {
