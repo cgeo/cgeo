@@ -81,6 +81,7 @@ public class Tile {
      *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
     private static int calcX(final Geopoint origin, final int zoomlevel) {
+        // The cut of the fractional part instead of rounding to the nearest integer is intentional and part of the algorithm
         return (int) ((origin.getLongitude() + 180.0) / 360.0 * NUMBER_OF_TILES[zoomlevel]);
     }
 
@@ -95,6 +96,7 @@ public class Tile {
 
         // Optimization from Bing
         double sinLatRad = Math.sin(Math.toRadians(origin.getLatitude()));
+        // The cut of the fractional part instead of rounding to the nearest integer is intentional and part of the algorithm
         return (int) ((0.5 - Math.log((1 + sinLatRad) / (1 - sinLatRad)) / (4 * Math.PI)) * NUMBER_OF_TILES[zoomlevel]);
     }
 
@@ -253,7 +255,7 @@ public class Tile {
     /**
      * Calculate needed tiles for the given viewport to cover it with
      * max 2x2 tiles
-     * 
+     *
      * @param viewport
      * @return
      */
