@@ -188,6 +188,7 @@ public class FragmentListActivity extends FragmentActivity {
     private boolean mFinishedStart = false;
 
     private Runnable mRequestFocus = new Runnable() {
+        @Override
         public void run() {
             mList.focusableViewAvailable(mList);
         }
@@ -305,6 +306,7 @@ public class FragmentListActivity extends FragmentActivity {
     }
 
     private AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {
+        @Override
         public void onItemClick(AdapterView<?> parent, View v, int position, long id)
         {
             onListItemClick((ListView)parent, v, position, id);
