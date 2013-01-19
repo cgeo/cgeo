@@ -585,7 +585,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     private void selectAllTrackablesAction() {
-        Builder alert = new AlertDialog.Builder(VisitCacheActivity.this);
+        Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(res.getString(R.string.log_tb_changeall));
         String[] tbLogTypes = getTBLogTypes();
         alert.setItems(tbLogTypes, new OnClickListener() {
@@ -614,7 +614,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     private void selectLogType() {
-        Builder alert = new AlertDialog.Builder(VisitCacheActivity.this);
+        Builder alert = new AlertDialog.Builder(this);
         String[] choices = new String[possibleLogTypes.size()];
         for (int i = 0; i < choices.length; i++) {
             choices[i] = possibleLogTypes.get(i).getL10n();
@@ -632,7 +632,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
     private void selectTrackableAction(View view) {
         final int realViewId = view.getId();
-        Builder alert = new AlertDialog.Builder(VisitCacheActivity.this);
+        Builder alert = new AlertDialog.Builder(this);
         final TrackableLog trackableLog = actionButtons.get(realViewId);
         alert.setTitle(trackableLog.name);
         String[] tbLogTypes = getTBLogTypes();
