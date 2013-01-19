@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import android.os.Environment;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -93,7 +95,7 @@ final public class Log {
      * @param msg the message to log, or to add to the log if other messages have been stored in the same run
      */
     public synchronized static void logToFile(final String msg) {
-        final File file = new File("/sdcard/cgeo-debug.log");
+        final File file = new File(Environment.getExternalStorageDirectory(), "cgeo-debug.log");
         if (first) {
             first = false;
             file.delete();
