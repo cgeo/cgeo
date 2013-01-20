@@ -126,7 +126,7 @@
   <string name="err_none">OK</string>
   <string name="err_start">Kommunikation nicht gestartet</string>
   <string name="err_parse">Parsing der Anmeldung gescheitert</string>
-  <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
+  <string name="err_server">Verbindung zu geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed">Login fehlgeschlagen.</string>
   <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
@@ -135,9 +135,10 @@
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>
   <string name="err_wrong">Falsche Anmeldedaten</string>
   <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
-  <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
+  <string name="err_license">Die geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
+  <string name="err_unvalidated_account">Die Logindaten müssen zuerst auf geocaching.com validiert werden.</string>
   <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht</string>
-  <string name="err_premium_only">Der Cache ist nur für Premium Mitglieder von Geocaching.com verfügbar</string>
+  <string name="err_premium_only">Der Cache ist nur für Premium Mitglieder von geocaching.com verfügbar</string>
   <string name="err_detail_open">c:geo konnte die Cache-Details nicht öffnen.</string>
   <string name="err_detail_cache">c:geo konnte diesen Cache nicht darstellen. Ist es wirklich ein Cache?</string>
   <string name="err_detail_cache_find">c:geo konnte keinen Cache finden.</string>
@@ -201,7 +202,7 @@
   <string name="warn_search_help_address">Adresse oder Ort eingeben, z.B. Straßenname und Ort \"Dorfstraße 333, Berlin, Deutschland\", Ort \"Berlin\" oder den Namen eines beliebigen Ortes wie z.B. \"Tiergarten\".</string>
   <string name="warn_search_help_gccode">GC-Code eingeben. z.B. \"GC1VCAZ\".</string>
   <string name="warn_search_help_keyword">Stichwörter eingeben, die im Namen des zu suchenden Caches enthalten sind.</string>
-  <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
+  <string name="warn_search_help_user">Name eines Benutzers auf geocaching.com eingeben.</string>
   <string name="warn_search_help_tb">Code des Trackables eingeben, z.B. \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Bitte Text einfügen.</string>
   <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
@@ -496,7 +497,7 @@
   <string name="cache_personal_note_edit">Bearbeiten</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
-  <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf Geocaching.com korrekt angezeigt werden.</string>
+  <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf geocaching.com korrekt angezeigt werden.</string>
   <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
   <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
   <string name="cache_watchlist_add">Hinzufügen</string>
@@ -536,6 +537,10 @@
   <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
+  <string name="cache_dialog_favourite_add_title">Favorit/string>
+  <string name="cache_dialog_favourite_add_message">Füge den Cache als dein Favorit hinzu…</string>
+  <string name="cache_dialog_favourite_remove_title">Favorit</string>
+  <string name="cache_dialog_favourite_remove_message">Entferne den Cache von deinen Favoriten…</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
   <string name="cache_menu_navigation_walk">Navigation (Gehen)</string>
@@ -776,6 +781,7 @@
   <string name="user_menu_view_hidden">Versteckte Caches</string>
   <string name="user_menu_view_found">Gefundene Caches</string>
   <string name="user_menu_open_browser">Profil im Browser öffnen</string>
+  <string name="user_menu_send_message">Nachricht senden/string>
 
   <!-- navigation -->
   <string name="navigation">Navigation</string>
@@ -971,7 +977,7 @@
   <string name="attribute_food_no">Keine Lebensmittel in der Nähe</string>
 
   <!-- next things -->
-  <string name="legal_note">Um die Dienste von Geocaching.com nutzen zu können, müssen die <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak-Nutzungsbedingungen</a> (englisch) akzeptiert werden.</string>
+  <string name="legal_note">Um die Dienste von geocaching.com nutzen zu können, müssen die <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak-Nutzungsbedingungen</a> (englisch) akzeptiert werden.</string>
   <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
   <string name="powered_by">carnero</string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
