@@ -15,7 +15,6 @@ import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -90,47 +89,8 @@ public class CachePopup extends AbstractPopupActivity {
             addCacheDetails();
 
             // offline use
-            final TextView offlineText = (TextView) findViewById(R.id.offline_text);
-            final Button offlineRefresh = (Button) findViewById(R.id.offline_refresh);
-            final Button offlineStore = (Button) findViewById(R.id.offline_store);
+            CacheDetailActivity.updateOfflineBox(findViewById(android.R.id.content), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
-            if (cache.getListId() > 0) {
-                final long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
-
-                String ago;
-                if (diff < 15) {
-                    ago = res.getString(R.string.cache_offline_time_mins_few);
-                } else if (diff < 50) {
-                    ago = res.getString(R.string.cache_offline_time_about) + " " + diff + " " + res.getString(R.string.cache_offline_time_mins);
-                } else if (diff < 90) {
-                    ago = res.getString(R.string.cache_offline_time_about) + " " + res.getString(R.string.cache_offline_time_hour);
-                } else if (diff < (48 * 60)) {
-                    ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / 60) + " " + res.getString(R.string.cache_offline_time_hours);
-                } else {
-                    ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60)) + " " + res.getString(R.string.cache_offline_time_days);
-                }
-
-                offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-
-                offlineRefresh.setVisibility(View.VISIBLE);
-                offlineRefresh.setEnabled(true);
-                offlineRefresh.setOnClickListener(new RefreshCacheClickListener());
-
-                offlineStore.setText(res.getString(R.string.cache_offline_drop));
-                offlineStore.setEnabled(true);
-                offlineStore.setOnClickListener(new DropCacheClickListener());
-            } else {
-                offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-
-                offlineRefresh.setVisibility(View.GONE);
-                offlineRefresh.setEnabled(false);
-                offlineRefresh.setOnTouchListener(null);
-                offlineRefresh.setOnClickListener(null);
-
-                offlineStore.setText(res.getString(R.string.cache_offline_store));
-                offlineStore.setEnabled(true);
-                offlineStore.setOnClickListener(new StoreCacheClickListener());
-            }
         } catch (Exception e) {
             Log.e("cgeopopup.init", e);
         }

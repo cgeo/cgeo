@@ -53,6 +53,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -76,6 +77,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -1215,7 +1217,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
             }
 
-            updateOfflineBox();
+            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
             // watchlist
             Button buttonWatchlistAdd = (Button) view.findViewById(R.id.add_to_watchlist);
@@ -1608,46 +1610,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
                 }
             }
-        }
-
-        private void updateOfflineBox() {
-            // offline use
-            final TextView offlineText = (TextView) view.findViewById(R.id.offline_text);
-            final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
-            final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
-
-            if (cache.isOffline()) {
-                long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
-
-                String ago;
-                if (diff < 15) {
-                    ago = res.getString(R.string.cache_offline_time_mins_few);
-                } else if (diff < 50) {
-                    ago = res.getString(R.string.cache_offline_time_about) + " " + diff + " " + res.getString(R.string.cache_offline_time_mins);
-                } else if (diff < 90) {
-                    ago = res.getString(R.string.cache_offline_time_about) + " " + res.getString(R.string.cache_offline_time_hour);
-                } else if (diff < (48 * 60)) {
-                    ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / 60) + " " + res.getString(R.string.cache_offline_time_hours);
-                } else {
-                    ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60)) + " " + res.getString(R.string.cache_offline_time_days);
-                }
-
-                offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-                offlineRefresh.setOnClickListener(new RefreshCacheClickListener());
-
-                offlineStore.setText(res.getString(R.string.cache_offline_drop));
-                offlineStore.setClickable(true);
-                offlineStore.setOnClickListener(new DropCacheClickListener());
-            } else {
-                offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-                offlineRefresh.setOnClickListener(new RefreshCacheClickListener());
-
-                offlineStore.setText(res.getString(R.string.cache_offline_store));
-                offlineStore.setClickable(true);
-                offlineStore.setOnClickListener(new StoreCacheClickListener());
-            }
-            offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
-            offlineRefresh.setClickable(true);
         }
 
         private class PreviewMapTask extends AsyncTask<Void, Void, BitmapDrawable> {
@@ -2434,6 +2396,49 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             default:
                 throw new IllegalArgumentException();
         }
+    }
+
+    static void updateOfflineBox(final View view, final cgCache cache, final Resources res,
+                                 final OnClickListener refreshCacheClickListener,
+                                 final OnClickListener dropCacheClickListener,
+                                 final OnClickListener storeCacheClickListener) {
+        // offline use
+        final TextView offlineText = (TextView) view.findViewById(R.id.offline_text);
+        final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
+        final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
+
+        if (cache.isOffline()) {
+            long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
+
+            String ago;
+            if (diff < 15) {
+                ago = res.getString(R.string.cache_offline_time_mins_few);
+            } else if (diff < 50) {
+                ago = res.getString(R.string.cache_offline_time_about) + " " + diff + " " + res.getString(R.string.cache_offline_time_mins);
+            } else if (diff < 90) {
+                ago = res.getString(R.string.cache_offline_time_about) + " " + res.getString(R.string.cache_offline_time_hour);
+            } else if (diff < (48 * 60)) {
+                ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / 60) + " " + res.getString(R.string.cache_offline_time_hours);
+            } else {
+                ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60)) + " " + res.getString(R.string.cache_offline_time_days);
+            }
+
+            offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
+            offlineRefresh.setOnClickListener(refreshCacheClickListener);
+
+            offlineStore.setText(res.getString(R.string.cache_offline_drop));
+            offlineStore.setClickable(true);
+            offlineStore.setOnClickListener(dropCacheClickListener);
+        } else {
+            offlineText.setText(res.getString(R.string.cache_offline_not_ready));
+            offlineRefresh.setOnClickListener(refreshCacheClickListener);
+
+            offlineStore.setText(res.getString(R.string.cache_offline_store));
+            offlineStore.setClickable(true);
+            offlineStore.setOnClickListener(storeCacheClickListener);
+        }
+        offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
+        offlineRefresh.setClickable(true);
     }
 
 }
