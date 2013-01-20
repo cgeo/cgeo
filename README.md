@@ -9,7 +9,12 @@ Get the source
 
 Fork the project source code on [github](https://github.com/cgeo/c-geo-opensource):
 
-	git clone git://github.com/cgeo/c-geo-opensource.git
+    git clone git://github.com/cgeo/c-geo-opensource.git
+
+### Branches ###
+
+- **master** is for development of new features. Nightly builds are created from this branch.
+- **release** is for all bug fixes of already existing features. So if a bug is reported in released version, it should be fixed on this branch (and merged to master afterwards).
 
 Set up Eclipse
 --------------
@@ -71,7 +76,7 @@ Further information can be found at http://developer.android.com/guide/topics/te
 
 ### Code coverage / Emma ###
 
-A code coverage report can be generated with Emma. A little how-to (german) can be found at http://www.blafoo.de/blog/index.php#param=id_32
+A code coverage report can be generated with Emma. A little how-to (German) can be found at http://www.blafoo.de/blog/index.php#param=id_32
 
 License
 -------
@@ -81,9 +86,9 @@ c:geo is distributed under [Apache License, Version 2.0](http://www.apache.org/l
 Contact
 -------
 
-- original author: Radovan Paska aka carnero
-- questions: support@cgeo.org
-- website: http://www.cgeo.org/
-- support: support@cgeo.org
-- twitter: http://twitter.com/android_gc
-- facebook: http://www.facebook.com/android.geocaching
+- Website: http://www.cgeo.org/
+- Support: support@cgeo.org
+- Twitter: http://twitter.com/android_gc
+- Facebook: http://www.facebook.com/android.geocaching
+- Google+: https://plus.google.com/105588163414303246956
+- Google Play: https://play.google.com/store/apps/details?id=cgeo.geocaching
