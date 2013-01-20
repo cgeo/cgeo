@@ -475,12 +475,6 @@
   <string name="cache_offline_store">Salva</string>
   <string name="cache_offline_stored">Salvato nel dispositivo</string>
   <string name="cache_offline_not_ready">Non disponibile offline</string>
-  <string name="cache_offline_time_about">circa</string>
-  <string name="cache_offline_time_mins">minuti fa</string>
-  <string name="cache_offline_time_mins_few">qualche minuto fa</string>
-  <string name="cache_offline_time_hour">un\'ora fa</string>
-  <string name="cache_offline_time_hours">ore fa</string>
-  <string name="cache_offline_time_days">giorni fa</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributi</string>
   <string name="cache_inventory">Oggetti</string>

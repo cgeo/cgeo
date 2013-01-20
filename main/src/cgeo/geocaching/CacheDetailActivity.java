@@ -2408,21 +2408,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
 
         if (cache.isOffline()) {
-            long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
-
-            String ago;
-            if (diff < 15) {
-                ago = res.getString(R.string.cache_offline_time_mins_few);
-            } else if (diff < 50) {
-                ago = res.getString(R.string.cache_offline_time_about) + " " + diff + " " + res.getString(R.string.cache_offline_time_mins);
-            } else if (diff < 90) {
-                ago = res.getString(R.string.cache_offline_time_about) + " " + res.getString(R.string.cache_offline_time_hour);
-            } else if (diff < (48 * 60)) {
-                ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / 60) + " " + res.getString(R.string.cache_offline_time_hours);
-            } else {
-                ago = res.getString(R.string.cache_offline_time_about) + " " + (diff / (24 * 60)) + " " + res.getString(R.string.cache_offline_time_days);
-            }
-
+            final CharSequence ago = DateUtils.getRelativeTimeSpanString(cache.getDetailedUpdate(), System.currentTimeMillis(),DateUtils.SECOND_IN_MILLIS, 0);
             offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
             offlineRefresh.setOnClickListener(refreshCacheClickListener);
 

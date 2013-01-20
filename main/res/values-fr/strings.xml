@@ -460,12 +460,6 @@
   <string name="cache_offline_store">Enregistrer</string>
   <string name="cache_offline_stored">Enregistrée</string>
   <string name="cache_offline_not_ready">Hors ligne indisponible</string>
-  <string name="cache_offline_time_about">il y a environ</string>
-  <string name="cache_offline_time_mins">minutes</string>
-  <string name="cache_offline_time_mins_few">il y a quelques minutes</string>
-  <string name="cache_offline_time_hour">une heure</string>
-  <string name="cache_offline_time_hours">heures</string>
-  <string name="cache_offline_time_days">jours</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributs</string>
   <string name="cache_inventory">Inventaire</string>

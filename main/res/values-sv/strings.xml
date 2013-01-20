@@ -484,12 +484,6 @@
   <string name="cache_offline_store">Spara</string>
   <string name="cache_offline_stored">Sparad i enheten</string>
   <string name="cache_offline_not_ready">Inte redo\nför användning offline</string>
-  <string name="cache_offline_time_about">för</string>
-  <string name="cache_offline_time_mins">minuter sedan</string>
-  <string name="cache_offline_time_mins_few">för några minuter sedan</string>
-  <string name="cache_offline_time_hour">en timme sedan</string>
-  <string name="cache_offline_time_hours">timmar sedan</string>
-  <string name="cache_offline_time_days">dagar sedan</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attribut</string>
   <string name="cache_inventory">Innehåll</string>

@@ -440,12 +440,6 @@
   <string name="cache_offline_store">Opslaan</string>
   <string name="cache_offline_stored">Opgeslagen in apparaat</string>
   <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
-  <string name="cache_offline_time_about">ongeveer</string>
-  <string name="cache_offline_time_mins">minuten geleden</string>
-  <string name="cache_offline_time_mins_few">paar minuten geleden</string>
-  <string name="cache_offline_time_hour">een uur geleden</string>
-  <string name="cache_offline_time_hours">uren geleden</string>
-  <string name="cache_offline_time_days">dagen geleden</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributen</string>
   <string name="cache_inventory">Inventaris</string>

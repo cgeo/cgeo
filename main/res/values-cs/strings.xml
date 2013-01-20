@@ -406,12 +406,6 @@
   <string name="cache_offline_store">Uložit</string>
   <string name="cache_offline_stored">Uložena v zařízení</string>
   <string name="cache_offline_not_ready">Není připravena\npro použití offline</string>
-  <string name="cache_offline_time_about">přibližně před</string>
-  <string name="cache_offline_time_mins">minutami</string>
-  <string name="cache_offline_time_mins_few">několika minutami</string>
-  <string name="cache_offline_time_hour">jednou hodinou</string>
-  <string name="cache_offline_time_hours">hodinami</string>
-  <string name="cache_offline_time_days">dny</string>
   <string name="cache_premium">placený účet</string>
   <string name="cache_attributes">atributy</string>
   <string name="cache_inventory">Inventář</string>
