@@ -686,7 +686,7 @@ public class cgData {
             // to NPE traces.
             final int staleHistorySearches = db.delete(dbTableSearchDestionationHistory, "date is null", null);
             if (staleHistorySearches > 0) {
-                Log.w(String.format("cgData.dbHelper.onOpen: removed %d bad search history entries", staleHistorySearches));
+                Log.w(String.format(Locale.getDefault(), "cgData.dbHelper.onOpen: removed %d bad search history entries", staleHistorySearches));
             }
         }
 

@@ -91,7 +91,6 @@
                 android:layout_marginRight="1dip"
                 android:layout_marginLeft="1dip"
                 android:layout_gravity="center_vertical"
-                android:layout_centerInParent="true"
                 android:keepScreenOn="true"
                 android:gravity="center"
                 android:padding="4dip"
