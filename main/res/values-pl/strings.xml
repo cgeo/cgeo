@@ -480,12 +480,6 @@
   <string name="cache_offline_store">Zapisz</string>
   <string name="cache_offline_stored">Zapisane w pamięci</string>
   <string name="cache_offline_not_ready">Nie jest gotowy\ndo użytku offline</string>
-  <string name="cache_offline_time_about">około</string>
-  <string name="cache_offline_time_mins">minut temu</string>
-  <string name="cache_offline_time_mins_few">przed kilkoma minutami</string>
-  <string name="cache_offline_time_hour">przed jedną godziną</string>
-  <string name="cache_offline_time_hours">przed godzinami</string>
-  <string name="cache_offline_time_days">przed kilkoma dniami</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atrybuty</string>
   <string name="cache_inventory">Inwentarz</string>

@@ -476,12 +476,6 @@
   <string name="cache_offline_store">Arquivar</string>
   <string name="cache_offline_stored">Arquivada no dispositivo</string>
   <string name="cache_offline_not_ready">Não está pronta\npara utilização offline</string>
-  <string name="cache_offline_time_about">há</string>
-  <string name="cache_offline_time_mins">minutos atrás</string>
-  <string name="cache_offline_time_mins_few">alguns minutos atrás</string>
-  <string name="cache_offline_time_hour">uma hora atrás</string>
-  <string name="cache_offline_time_hours">horas atrás</string>
-  <string name="cache_offline_time_days">dias atrás</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributos</string>
   <string name="cache_inventory">Inventário</string>

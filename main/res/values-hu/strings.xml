@@ -475,12 +475,6 @@
   <string name="cache_offline_store">Tárolás</string>
   <string name="cache_offline_stored">Tárolva az eszközön</string>
   <string name="cache_offline_not_ready">Nincs kész\noffline használathoz</string>
-  <string name="cache_offline_time_about">Információ mentve</string>
-  <string name="cache_offline_time_mins">perccel ezelőtt</string>
-  <string name="cache_offline_time_mins_few">néhány perccel ezelőtt</string>
-  <string name="cache_offline_time_hour">egy órával ezelőtt</string>
-  <string name="cache_offline_time_hours">órával ezelőtt</string>
-  <string name="cache_offline_time_days">nappal ezelőtt</string>
   <string name="cache_premium">Prémium</string>
   <string name="cache_attributes">Tulajdonságok</string>
   <string name="cache_inventory">Tárgyak</string>

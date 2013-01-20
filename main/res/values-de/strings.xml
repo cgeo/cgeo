@@ -479,12 +479,6 @@
   <string name="cache_offline_store">Speichern</string>
   <string name="cache_offline_stored">Auf dem Gerät gespeichert</string>
   <string name="cache_offline_not_ready">Nicht offline verfügbar</string>
-  <string name="cache_offline_time_about">vor etwa</string>
-  <string name="cache_offline_time_mins">Minuten</string>
-  <string name="cache_offline_time_mins_few">vor ein paar Minuten</string>
-  <string name="cache_offline_time_hour">einer Stunde</string>
-  <string name="cache_offline_time_hours">Stunden</string>
-  <string name="cache_offline_time_days">Tagen</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attribute</string>
   <string name="cache_inventory">Inventar</string>

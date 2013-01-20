@@ -247,12 +247,6 @@
   <string name="cache_offline_store">Lagre</string>
   <string name="cache_offline_stored">Lagret på enheten for</string>
   <string name="cache_offline_not_ready">Kan ikke brukes\noffline (ikke lagret)</string>
-  <string name="cache_offline_time_about"></string>
-  <string name="cache_offline_time_mins">minutter siden</string>
-  <string name="cache_offline_time_mins_few">en liten stund siden</string>
-  <string name="cache_offline_time_hour">én time siden</string>
-  <string name="cache_offline_time_hours">timer siden</string>
-  <string name="cache_offline_time_days">dager siden</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributer</string>
   <string name="cache_inventory">Inventar</string>
