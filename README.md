@@ -92,3 +92,4 @@ Contact
 - Facebook: http://www.facebook.com/android.geocaching
 - Google+: https://plus.google.com/105588163414303246956
 - Google Play: https://play.google.com/store/apps/details?id=cgeo.geocaching
+- Live status: http://status.cgeo.org/
