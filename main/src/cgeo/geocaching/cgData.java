@@ -1110,7 +1110,6 @@ public class cgData {
 
     private static void saveOriginalWaypointsWithoutTransaction(final cgCache cache) {
         String geocode = cache.getGeocode();
-        //        database.delete(dbTableWaypoints, "geocode = ? and type <> ? and own = 0", new String[]{geocode, "own"});
 
         List<Waypoint> waypoints = cache.getWaypoints();
         if (CollectionUtils.isNotEmpty(waypoints)) {
@@ -1136,8 +1135,7 @@ public class cgData {
                 if (oneWaypoint.getId() < 0) {
                     final long rowId = database.insert(dbTableWaypoints, null, values);
                     oneWaypoint.setId((int) rowId);
-                }
-                else {
+                } else {
                     database.update(dbTableWaypoints, values, "_id = " + oneWaypoint.getId(), null);
                 }
             }
