@@ -2838,7 +2838,7 @@ public class cgData {
         private static synchronized SQLiteStatement getStatement(final String key, final String query) {
             SQLiteStatement statement = statements.get(key);
             if (statement == null) {
-                Log.d("Compiling " + key);
+                init();
                 statement = database.compileStatement(query);
                 statements.put(key, statement);
             }
