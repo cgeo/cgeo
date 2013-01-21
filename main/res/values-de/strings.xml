@@ -537,7 +537,7 @@
   <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
-  <string name="cache_dialog_favourite_add_title">Favorit/string>
+  <string name="cache_dialog_favourite_add_title">Favorit</string>
   <string name="cache_dialog_favourite_add_message">Füge den Cache als dein Favorit hinzu…</string>
   <string name="cache_dialog_favourite_remove_title">Favorit</string>
   <string name="cache_dialog_favourite_remove_message">Entferne den Cache von deinen Favoriten…</string>
