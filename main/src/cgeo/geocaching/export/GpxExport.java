@@ -4,10 +4,10 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -20,7 +20,9 @@ import org.xmlpull.v1.XmlSerializer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -58,44 +60,40 @@ class GpxExport extends AbstractExport {
 
         } else {
             // Show configuration dialog
-            new ExportOptionsDialog(caches, activity).show();
+            getExportDialog(caches, activity).show();
         }
     }
 
-    /**
-     * A dialog to allow the user to set options for the export.
-     *
-     * Currently available option is: opening of share menu after successful export
-     */
-    private class ExportOptionsDialog extends AlertDialog {
-        public ExportOptionsDialog(final List<cgCache> caches, final Activity activity) {
-            super(activity);
+    private Dialog getExportDialog(final List<cgCache> caches, final Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-            View layout = activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog, null);
-            setView(layout);
+        View layout = activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog, null);
+        builder.setView(layout);
 
-            final TextView text = (TextView) layout.findViewById(R.id.info);
-            text.setText(getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
+        final TextView text = (TextView) layout.findViewById(R.id.info);
+        text.setText(getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
 
-            final CheckBox shareOption = (CheckBox) layout.findViewById(R.id.share);
+        final CheckBox shareOption = (CheckBox) layout.findViewById(R.id.share);
 
-            shareOption.setChecked(Settings.getShareAfterExport());
+        shareOption.setChecked(Settings.getShareAfterExport());
 
-            shareOption.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Settings.setShareAfterExport(shareOption.isChecked());
-                }
-            });
+        shareOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Settings.setShareAfterExport(shareOption.isChecked());
+            }
+        });
 
-            layout.findViewById(R.id.export).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dismiss();
-                    new ExportTask(caches, activity).execute((Void) null);
-                }
-            });
-        }
+        builder.setPositiveButton(R.string.export, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                new ExportTask(caches, activity).execute((Void) null);
+            }
+        });
+
+        return builder.create();
     }
 
     private class ExportTask extends AsyncTask<Void, Integer, File> {

@@ -10,17 +10,12 @@
         android:id="@id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?text_color"
-        android:text="@string/export_gpx_info" />
+        android:text="@string/export_gpx_info"
+        android:textColor="?text_color" />
 
     <CheckBox
         android:id="@+id/share"
         style="@style/checkbox_full"
         android:text="@string/init_share_after_export" />
-
-    <Button
-        android:id="@+id/export"
-        style="@style/button_full"
-        android:text="@string/export" />
 
 </LinearLayout>
