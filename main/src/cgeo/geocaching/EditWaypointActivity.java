@@ -415,12 +415,9 @@ public class EditWaypointActivity extends AbstractActivity {
                 coords = coords.project(bearing, distance);
             }
 
-            String tmpName = ((EditText) findViewById(R.id.name)).getText().toString().trim();
             // if no name is given, just give the waypoint its number as name
-            if (StringUtils.isEmpty(tmpName)) {
-                tmpName = res.getString(R.string.waypoint) + " " + (wpCount + 1);
-            }
-            final String name = tmpName;
+            final String givenName = ((EditText) findViewById(R.id.name)).getText().toString().trim();
+            final String name = StringUtils.isNotEmpty(givenName) ? givenName : res.getString(R.string.waypoint) + " " + (wpCount + 1);
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
             final Geopoint coordsToSave = coords;
             final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_being_saved), true);
