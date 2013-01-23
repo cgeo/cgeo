@@ -31,6 +31,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
 
     private static cgCache parseMapPNG(Bitmap bitmap, int x, int y, int zoomlevel) {
         final cgCache cache = new cgCache();
+        cache.setGeocode("GC30");
         IconDecoder.parseMapPNG(cache, bitmap, new UTFGridPosition(x / 4, y / 4), zoomlevel);
         return cache;
     }
