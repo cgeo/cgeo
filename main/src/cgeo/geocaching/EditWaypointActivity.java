@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -352,11 +353,17 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     }
 
+    public static final int SUCCESS = 0;
+    public static final int UPLOAD_START = 1;
+    public static final int UPLOAD_ERROR = 2;
+    public static final int UPLOAD_NOT_POSSIBLE = 3;
+    public static final int UPLOAD_SUCCESS = 4;
+    public static final int SAVE_ERROR = 5;
+
     private class coordsListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
-            // TODO Show progress across whole function, it is performing very long time on slower devices
             final String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
             // combine distance from EditText and distanceUnit saved from Spinner
             final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString() + distanceUnit;
@@ -408,101 +415,110 @@ public class EditWaypointActivity extends AbstractActivity {
                 coords = coords.project(bearing, distance);
             }
 
-            String name = ((EditText) findViewById(R.id.name)).getText().toString().trim();
+            String tmpName = ((EditText) findViewById(R.id.name)).getText().toString().trim();
             // if no name is given, just give the waypoint its number as name
-            if (StringUtils.isEmpty(name)) {
-                name = res.getString(R.string.waypoint) + " " + (wpCount + 1);
+            if (StringUtils.isEmpty(tmpName)) {
+                tmpName = res.getString(R.string.waypoint) + " " + (wpCount + 1);
             }
+            final String name = tmpName;
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
+            final Geopoint coordsToSave = coords;
+            final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_being_saved), true);
+            final Handler finishHandler = new Handler() {
 
-            final Waypoint waypoint = new Waypoint(name, type, own);
-            waypoint.setGeocode(geocode);
-            waypoint.setPrefix(prefix);
-            waypoint.setLookup(lookup);
-            waypoint.setCoords(coords);
-            waypoint.setNote(note);
-            waypoint.setId(id);
-
-            cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            if (null != cache && cache.addOrChangeWaypoint(waypoint, true)) {
-                cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-                StaticMapsProvider.removeWpStaticMaps(id, geocode);
-                if (Settings.isStoreOfflineWpMaps()) {
-                    StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
-                }
-                final RadioButton modifyLocal = (RadioButton) findViewById(R.id.modify_cache_coordinates_local);
-                final RadioButton modifyBoth = (RadioButton) findViewById(R.id.modify_cache_coordinates_local_and_remote);
-                if (modifyLocal.isChecked() || modifyBoth.isChecked()) {
-                    if (!cache.hasUserModifiedCoords()) {
-                        final Waypoint origWaypoint = new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
-                        origWaypoint.setCoords(cache.getCoords());
-                        cache.addOrChangeWaypoint(origWaypoint, false);
-                        cache.setUserModifiedCoords(true);
+                @Override
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case UPLOAD_SUCCESS:
+                            showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, coordsToSave));
+                            //$FALL-THROUGH$
+                        case SUCCESS:
+                            progress.dismiss();
+                            finish();
+                            break;
+                        case UPLOAD_START:
+                            progress.setMessage(getString(R.string.waypoint_coordinates_uploading_to_website, coordsToSave));
+                            break;
+                        case UPLOAD_ERROR:
+                            progress.dismiss();
+                            finish();
+                            showToast(getString(R.string.waypoint_coordinates_upload_error));
+                            break;
+                        case UPLOAD_NOT_POSSIBLE:
+                            progress.dismiss();
+                            finish();
+                            showToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                            break;
+                        case SAVE_ERROR:
+                            progress.dismiss();
+                            finish(); //TODO: should we close activity here ?
+                            showToast(res.getString(R.string.err_waypoint_add_failed));
+                            break;
                     }
-                    cache.setCoords(waypoint.getCoords());
-                    cgData.saveChangedCache(cache);
                 }
-                if (modifyBoth.isChecked() && waypoint.getCoords() != null) {
-                    if (cache.supportsOwnCoordinates()) {
-                        final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_coordinates_uploading_to_website, waypoint.getCoords()), true);
-                        Handler finishHandler = new Handler() {
-                            @Override
-                            public void handleMessage(Message msg) {
-                                progress.dismiss();
-                                finish();
+            };
+
+            class SaveWptTask extends AsyncTask<Void, Void, Void> {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    final Waypoint waypoint = new Waypoint(name, type, own);
+                    waypoint.setGeocode(geocode);
+                    waypoint.setPrefix(prefix);
+                    waypoint.setLookup(lookup);
+                    waypoint.setCoords(coordsToSave);
+                    waypoint.setNote(note);
+                    waypoint.setId(id);
+
+                    cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                    if (null != cache && cache.addOrChangeWaypoint(waypoint, true)) {
+                        cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                        StaticMapsProvider.removeWpStaticMaps(id, geocode);
+                        if (Settings.isStoreOfflineWpMaps()) {
+                            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
+                        }
+                        final RadioButton modifyLocal = (RadioButton) findViewById(R.id.modify_cache_coordinates_local);
+                        final RadioButton modifyBoth = (RadioButton) findViewById(R.id.modify_cache_coordinates_local_and_remote);
+                        if (modifyLocal.isChecked() || modifyBoth.isChecked()) {
+                            if (!cache.hasUserModifiedCoords()) {
+                                final Waypoint origWaypoint = new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+                                origWaypoint.setCoords(cache.getCoords());
+                                cache.addOrChangeWaypoint(origWaypoint, false);
+                                cache.setUserModifiedCoords(true);
                             }
-                        };
-                        new UploadModifiedCoordsThread(cache, waypoint.getCoords(), progress, finishHandler).start();
+                            cache.setCoords(waypoint.getCoords());
+                            cgData.saveChangedCache(cache);
+                        }
+                        if (modifyBoth.isChecked() && waypoint.getCoords() != null) {
+                            finishHandler.sendEmptyMessage(UPLOAD_START);
+
+                            if (cache.supportsOwnCoordinates()) {
+                                boolean result = uploadModifiedCoords(cache, waypoint.getCoords());
+                                finishHandler.sendEmptyMessage(result ? SUCCESS : UPLOAD_ERROR);
+                            } else {
+                                showToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                                finishHandler.sendEmptyMessage(UPLOAD_NOT_POSSIBLE);
+                            }
+                        } else {
+                            finishHandler.sendEmptyMessage(SUCCESS);
+                        }
                     } else {
-                        showToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                        finishHandler.sendEmptyMessage(SAVE_ERROR);
                     }
-                } else {
-                    finish();
+                    return null;
                 }
-            } else {
-                showToast(res.getString(R.string.err_waypoint_add_failed));
             }
+            new SaveWptTask().execute();
         }
     }
 
-    private class UploadModifiedCoordsThread extends Thread {
+    private static boolean uploadModifiedCoords(cgCache cache, Geopoint waypoint_uploaded) {
 
-        private final Geopoint waypoint_uploaded;
-        private final ProgressDialog progress;
-        private final cgCache cache;
-        private final Handler handler;
-
-        public UploadModifiedCoordsThread(cgCache cache, Geopoint wpt, ProgressDialog progress, Handler finishHandler) {
-            this.cache = cache;
-            this.waypoint_uploaded = wpt;
-            this.progress = progress;
-            this.handler = finishHandler;
+        IConnector con = ConnectorFactory.getConnector(cache);
+        if (con.supportsOwnCoordinates()) {
+            return con.uploadModifiedCoordinates(cache, waypoint_uploaded);
         }
-
-        @Override
-        public void run() {
-            boolean result = false;
-            IConnector con = ConnectorFactory.getConnector(cache);
-            if (con.supportsOwnCoordinates()) {
-                result = con.uploadModifiedCoordinates(cache, waypoint_uploaded);
-            }
-            final boolean res = result;
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    if (res) {
-                        showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, waypoint_uploaded.getCoords().toString()));
-                    } else {
-                        showToast(getString(R.string.waypoint_coordinates_upload_error));
-                    }
-                    if (progress != null) {
-                        progress.dismiss();
-                    }
-                    handler.sendMessage(Message.obtain());
-                }
-            });
-        }
+        return false;
     }
 
     @Override
