@@ -103,11 +103,11 @@ public class GC2CJPF extends MockedCache {
      * @see cgeo.geocaching.test.mock.MockedCache#isOwn()
      */
     @Override
-    public boolean isOwn() {
+    public boolean isOwner() {
         if ("Tom03".equals(Settings.getUsername())) {
             return true;
         }
-        return super.isOwn();
+        return super.isOwner();
     }
 
     @Override

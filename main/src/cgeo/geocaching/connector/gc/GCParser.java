@@ -200,9 +200,6 @@ public abstract class GCParser {
             // found it
             cache.setFound(row.contains("/images/icons/16/found.png"));
 
-            // own it
-            cache.setOwn(row.contains("/images/icons/16/placed.png"));
-
             // id
             String result = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_ID, null);
             if (null != result) {
@@ -371,8 +368,6 @@ public abstract class GCParser {
 
         // owner real name
         cache.setOwnerUserId(Network.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNER_USERID, true, cache.getOwnerUserId())));
-
-        cache.setOwn(StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getUsername()));
 
         cache.setUserModifiedCoords(false);
 

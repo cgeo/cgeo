@@ -59,7 +59,7 @@ public class cgData {
 
     /** The list of fields needed for mapping. */
     private static final String[] CACHE_COLUMNS = new String[] {
-            "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
+            "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "owner", "owner_real", "hidden", "hint", "size",
             "difficulty", "distance", "direction", "terrain", "latlon", "location", "latitude", "longitude", "elevation", "shortdesc",
             "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
             "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon", "coordsChanged", "finalDefined"
@@ -104,7 +104,7 @@ public class cgData {
             + "guid text, "
             + "type text, "
             + "name text, "
-            + "own integer not null default 0, "
+            + "own integer not null default 0, "  // TODO: remove this column during the next database upgrade
             + "owner text, "
             + "owner_real text, "
             + "hidden long, "
@@ -984,7 +984,6 @@ public class cgData {
         values.put("guid", cache.getGuid());
         values.put("type", cache.getType().id);
         values.put("name", cache.getName());
-        values.put("own", cache.isOwn() ? 1 : 0);
         values.put("owner", cache.getOwnerDisplayName());
         values.put("owner_real", cache.getOwnerUserId());
         if (cache.getHiddenDate() == null) {
@@ -1559,7 +1558,7 @@ public class cgData {
             local_cci[7] = cursor.getColumnIndex("guid");
             local_cci[8] = cursor.getColumnIndex("type");
             local_cci[9] = cursor.getColumnIndex("name");
-            local_cci[10] = cursor.getColumnIndex("own");
+            // TODO: entry number 10 has been removed, all should be renumbered
             local_cci[11] = cursor.getColumnIndex("owner");
             local_cci[12] = cursor.getColumnIndex("owner_real");
             local_cci[13] = cursor.getColumnIndex("hidden");
@@ -1603,7 +1602,6 @@ public class cgData {
         cache.setGuid(cursor.getString(cacheColumnIndex[7]));
         cache.setType(CacheType.getById(cursor.getString(cacheColumnIndex[8])));
         cache.setName(cursor.getString(cacheColumnIndex[9]));
-        cache.setOwn(cursor.getInt(cacheColumnIndex[10]) == 1);
         cache.setOwnerDisplayName(cursor.getString(cacheColumnIndex[11]));
         cache.setOwnerUserId(cursor.getString(cacheColumnIndex[12]));
         long dateValue = cursor.getLong(cacheColumnIndex[13]);
@@ -2735,7 +2733,7 @@ public class cgData {
     public static Set<Waypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled, CacheType type) {
         final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableWaypoints, viewport));
         if (excludeMine) {
-            where.append(" and ").append(dbTableCaches).append(".own == 0 and ").append(dbTableCaches).append(".found == 0");
+            where.append(" and ").append(dbTableCaches).append(".found == 0");
         }
         if (excludeDisabled) {
             where.append(" and ").append(dbTableCaches).append(".disabled == 0");

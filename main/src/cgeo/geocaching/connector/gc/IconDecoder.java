@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
 
@@ -105,7 +106,7 @@ public abstract class IconDecoder {
                     cache.setFound(true);
                     return true;
                 case CT_OWN:
-                    cache.setOwn(true);
+                    cache.setOwnerUserId(Settings.getUsername());
                     return true;
                 case CT_MEGAEVENT:
                     cache.setType(CacheType.MEGA_EVENT);

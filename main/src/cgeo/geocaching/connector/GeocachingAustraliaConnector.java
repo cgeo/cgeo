@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.cgCache;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +20,11 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
     @Override
     public String getHost() {
         return "geocaching.com.au";
+    }
+
+    @Override
+    public boolean isOwner(final ICache cache) {
+        return false;
     }
 
     @Override

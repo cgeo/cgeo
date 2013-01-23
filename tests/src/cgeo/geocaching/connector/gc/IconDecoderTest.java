@@ -106,25 +106,25 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
 
         assertTrue(parseMapPNG(bitmap, 132, 136, 12).isFound()); // GC3JDBW
         assertTrue(parseMapPNG(bitmap, 68, 24, 12).isFound()); // GC2T0AH
-        assertTrue(parseMapPNG(bitmap, 176, 232, 12).isOwn()); // GC2RPBX
+        assertTrue(parseMapPNG(bitmap, 176, 232, 12).isOwner()); // GC2RPBX
         assertTrue(parseMapPNG(bitmap, 148, 60, 12).isFound()); // GC31FY6
         assertTrue(parseMapPNG(bitmap, 216, 20, 12).isFound()); // GC2KP3M
-        assertTrue(parseMapPNG(bitmap, 212, 184, 12).isOwn()); // GC30W3K
-        assertTrue(parseMapPNG(bitmap, 148, 72, 12).isOwn()); // GC2RPAZ
-        assertTrue(parseMapPNG(bitmap, 216, 48, 12).isOwn()); // GC2RP8W
+        assertTrue(parseMapPNG(bitmap, 212, 184, 12).isOwner()); // GC30W3K
+        assertTrue(parseMapPNG(bitmap, 148, 72, 12).isOwner()); // GC2RPAZ
+        assertTrue(parseMapPNG(bitmap, 216, 48, 12).isOwner()); // GC2RP8W
         assertTrue(parseMapPNG(bitmap, 212, 60, 12).isFound()); // GC3CC97
-        assertTrue(parseMapPNG(bitmap, 148, 100, 12).isOwn()); // GC2RPAT
+        assertTrue(parseMapPNG(bitmap, 148, 100, 12).isOwner()); // GC2RPAT
         assertTrue(parseMapPNG(bitmap, 104, 136, 12).isFound()); // GC3AE31
-        assertTrue(parseMapPNG(bitmap, 52, 96, 12).isOwn()); // GC2RPCH
-        assertTrue(parseMapPNG(bitmap, 172, 156, 12).isOwn()); // GC2RQ07
+        assertTrue(parseMapPNG(bitmap, 52, 96, 12).isOwner()); // GC2RPCH
+        assertTrue(parseMapPNG(bitmap, 172, 156, 12).isOwner()); // GC2RQ07
         assertTrue(parseMapPNG(bitmap, 116, 56, 12).isFound()); // GC3AYR2
-        assertTrue(parseMapPNG(bitmap, 208, 68, 12).isOwn()); // GC2RP93
-        assertTrue(parseMapPNG(bitmap, 200, 52, 12).isOwn()); // GC2RPAA
+        assertTrue(parseMapPNG(bitmap, 208, 68, 12).isOwner()); // GC2RP93
+        assertTrue(parseMapPNG(bitmap, 200, 52, 12).isOwner()); // GC2RPAA
         assertTrue(parseMapPNG(bitmap, 208, 44, 12).isFound()); // GC3HE15
-        assertTrue(parseMapPNG(bitmap, 112, 76, 12).isOwn()); // GC2RPBE
-        assertTrue(parseMapPNG(bitmap, 232, 192, 12).isOwn()); // GC2E1KF
+        assertTrue(parseMapPNG(bitmap, 112, 76, 12).isOwner()); // GC2RPBE
+        assertTrue(parseMapPNG(bitmap, 232, 192, 12).isOwner()); // GC2E1KF
         assertTrue(parseMapPNG(bitmap, 184, 76, 12).isFound()); // GC2NK5R
-        assertTrue(parseMapPNG(bitmap, 132, 148, 12).isOwn()); // GC2RPBC
+        assertTrue(parseMapPNG(bitmap, 132, 148, 12).isOwner()); // GC2RPBC
     }
 
     public void testParseExtraMap3() {
@@ -389,9 +389,9 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertTrue(parseMapPNG(bitmap, 72, 16, 14).isFound());
         assertTrue(parseMapPNG(bitmap, 100, 16, 14).isFound());
         assertTrue(parseMapPNG(bitmap, 128, 16, 14).isFound());
-        assertTrue(parseMapPNG(bitmap, 44, 44, 14).isOwn());
-        assertTrue(parseMapPNG(bitmap, 76, 44, 14).isOwn());
-        assertTrue(parseMapPNG(bitmap, 132, 44, 14).isOwn());
+        assertTrue(parseMapPNG(bitmap, 44, 44, 14).isOwner());
+        assertTrue(parseMapPNG(bitmap, 76, 44, 14).isOwner());
+        assertTrue(parseMapPNG(bitmap, 132, 44, 14).isOwner());
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 40, 72, 14).getType());
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 72, 72, 14).getType());
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 100, 72, 14).getType());

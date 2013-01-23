@@ -28,7 +28,7 @@ public interface ICache extends IBasicCache {
     /**
      * @return true if the user is the owner of the cache, false else
      */
-    public boolean isOwn();
+    public boolean isOwner();
 
     /**
      * @return true is the cache is archived, false else

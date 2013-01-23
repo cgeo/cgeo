@@ -220,7 +220,7 @@ public class GCMap {
                 }
 
                 boolean exclude = false;
-                if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwn())) { // workaround for BM
+                if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwner())) { // workaround for BM
                     exclude = true;
                 }
                 if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {

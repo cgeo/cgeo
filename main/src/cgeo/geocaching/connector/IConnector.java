@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -140,5 +141,14 @@ public interface IConnector {
      *
      * @return
      */
+
     public boolean isActivated();
+
+    /**
+     * Check if the current user is the owner of the given cache.
+     *
+     * @param cache a cache that this connector must be able to handle
+     * @return <code>true</code> if the current user is the cache owner, <code>false</code> otherwise
+     */
+    public boolean isOwner(final ICache cache);
 }

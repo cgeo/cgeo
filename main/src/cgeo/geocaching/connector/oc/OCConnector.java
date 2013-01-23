@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.CacheRealm;
@@ -45,6 +46,11 @@ public class OCConnector extends AbstractConnector {
     @Override
     public boolean isZippedGPXFile(String fileName) {
         return gpxZipFilePattern.matcher(fileName).matches();
+    }
+
+    @Override
+    public boolean isOwner(final ICache cache) {
+        return false;
     }
 
     @Override

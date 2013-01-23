@@ -94,7 +94,7 @@ public abstract class MockedCache implements ICache {
     }
 
     @Override
-    public boolean isOwn() {
+    public boolean isOwner() {
         return false;
     }
 

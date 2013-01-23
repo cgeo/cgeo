@@ -1145,7 +1145,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     final List<cgCache> tempList = caches.getAsList();
 
                     for (cgCache cache : tempList) {
-                        if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
+                        if ((cache.isFound() && excludeMine) || (cache.isOwner() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
                             caches.remove(cache);
                         }
                     }
@@ -1634,7 +1634,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     .append(cache.getType().id)
                     .append(cache.isDisabled() || cache.isArchived())
                     .append(cache.getCacheRealm().id)
-                    .append(cache.isOwn())
+                    .append(cache.isOwner())
                     .append(cache.isFound())
                     .append(cache.hasUserModifiedCoords())
                     .append(cache.getPersonalNote())
@@ -1665,7 +1665,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             layers.add(getResources().getDrawable(cache.getType().markerId));
             insets.add(INSET_TYPE[resolution]);
             // own
-            if (cache.isOwn()) {
+            if (cache.isOwner()) {
                 layers.add(getResources().getDrawable(R.drawable.marker_own));
                 insets.add(INSET_OWN[resolution]);
                 // if not, checked if stored
