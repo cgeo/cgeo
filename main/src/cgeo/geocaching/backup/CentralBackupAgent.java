@@ -1,6 +1,6 @@
 package cgeo.geocaching.backup;
 
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.utils.ApplicationSettings;
 
 import android.annotation.TargetApi;
 import android.app.backup.BackupAgentHelper;
@@ -13,7 +13,7 @@ public class CentralBackupAgent extends BackupAgentHelper {
 
     @Override
     public void onCreate() {
-        final SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, Settings.getPreferencesName());
+        final SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, ApplicationSettings.getPreferencesName());
         addHelper(PREFS_BACKUP_KEY, helper);
     }
 
