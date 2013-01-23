@@ -2,10 +2,10 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
@@ -18,6 +18,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.view.View;
@@ -53,43 +55,6 @@ class FieldnoteExport extends AbstractExport {
         super(getString(R.string.export_fieldnotes));
     }
 
-    /**
-     * A dialog to allow the user to set options for the export.
-     *
-     * Currently available options are: upload field notes, only new logs since last export/upload
-     */
-    private class ExportOptionsDialog extends AlertDialog {
-        public ExportOptionsDialog(final List<cgCache> caches, final Activity activity) {
-            super(activity);
-
-            View layout = activity.getLayoutInflater().inflate(R.layout.fieldnote_export_dialog, null);
-            setView(layout);
-
-            final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);
-            final CheckBox onlyNewOption = (CheckBox) layout.findViewById(R.id.onlynew);
-
-            uploadOption.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onlyNewOption.setEnabled(uploadOption.isChecked());
-                }
-            });
-
-            layout.findViewById(R.id.export).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dismiss();
-                    new ExportTask(
-                            caches,
-                            activity,
-                            uploadOption.isChecked(),
-                            onlyNewOption.isChecked())
-                            .execute((Void) null);
-                }
-            });
-        }
-    }
-
     @Override
     public void export(final List<cgCache> caches, final Activity activity) {
         if (null == activity) {
@@ -98,8 +63,41 @@ class FieldnoteExport extends AbstractExport {
             new ExportTask(caches, null, false, false).execute((Void) null);
         } else {
             // Show configuration dialog
-            new ExportOptionsDialog(caches, activity).show();
+            getExportOptionsDialog(caches, activity).show();
         }
+    }
+
+    private Dialog getExportOptionsDialog(final List<cgCache> caches, final Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        View layout = activity.getLayoutInflater().inflate(R.layout.fieldnote_export_dialog, null);
+        builder.setView(layout);
+
+        final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);
+        final CheckBox onlyNewOption = (CheckBox) layout.findViewById(R.id.onlynew);
+
+        uploadOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onlyNewOption.setEnabled(uploadOption.isChecked());
+            }
+        });
+
+        builder.setPositiveButton(R.string.export, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                new ExportTask(
+                        caches,
+                        activity,
+                        uploadOption.isChecked(),
+                        onlyNewOption.isChecked())
+                        .execute((Void) null);
+            }
+        });
+
+        return builder.create();
     }
 
     private class ExportTask extends AsyncTask<Void, Integer, Boolean> {
