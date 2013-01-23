@@ -512,33 +512,24 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     }
 
-    private static boolean uploadModifiedCoords(cgCache cache, Geopoint waypoint_uploaded) {
-
-        IConnector con = ConnectorFactory.getConnector(cache);
-        if (con.supportsOwnCoordinates()) {
-            return con.uploadModifiedCoordinates(cache, waypoint_uploaded);
-        }
-        return false;
+    private static boolean uploadModifiedCoords(final cgCache cache, final Geopoint waypointUploaded) {
+        final IConnector con = ConnectorFactory.getConnector(cache);
+        return con.supportsOwnCoordinates() && con.uploadModifiedCoordinates(cache, waypointUploaded);
     }
 
     @Override
-    public void goManual(View view) {
-        if (id >= 0) {
-            ActivityMixin.goManual(this, "c:geo-waypoint-edit");
-        } else {
-            ActivityMixin.goManual(this, "c:geo-waypoint-new");
-        }
+    public void goManual(final View view) {
+        ActivityMixin.goManual(this, id >= 0 ? "c:geo-waypoint-edit" : "c:geo-waypoint-new");
     }
 
     public static void startActivityEditWaypoint(final Context context, final int waypointId) {
-        final Intent editIntent = new Intent(context, EditWaypointActivity.class);
-        editIntent.putExtra("waypoint", waypointId);
-        context.startActivity(editIntent);
+        context.startActivity(new Intent(context, EditWaypointActivity.class)
+                .putExtra("waypoint", waypointId));
     }
 
     public static void startActivityAddWaypoint(final Context context, final cgCache cache) {
-        final Intent addWptIntent = new Intent(context, EditWaypointActivity.class);
-        addWptIntent.putExtra("geocode", cache.getGeocode()).putExtra("count", cache.getWaypoints().size());
-        context.startActivity(addWptIntent);
+        context.startActivity(new Intent(context, EditWaypointActivity.class)
+                .putExtra("geocode", cache.getGeocode())
+                .putExtra("count", cache.getWaypoints().size()));
     }
 }
