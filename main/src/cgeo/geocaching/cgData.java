@@ -104,7 +104,6 @@ public class cgData {
             + "guid text, "
             + "type text, "
             + "name text, "
-            + "own integer not null default 0, "  // TODO: remove this column during the next database upgrade
             + "owner text, "
             + "owner_real text, "
             + "hidden long, "
