@@ -1381,12 +1381,6 @@ public final class Settings {
         }
     }
 
-    public static String getPreferencesName() {
-        // There is currently no Android API to get the file name of the shared preferences. Let's hardcode
-        // it without needing a cgeoapplication instance.
-        return "cgeo.geocaching_preferences";
-    }
-
     public static boolean getPlainLogs() {
         return sharedPrefs.getBoolean(KEY_PLAIN_LOGS, false);
     }
