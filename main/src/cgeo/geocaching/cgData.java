@@ -59,10 +59,14 @@ public class cgData {
 
     /** The list of fields needed for mapping. */
     private static final String[] CACHE_COLUMNS = new String[] {
-            "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "owner", "owner_real", "hidden", "hint", "size",
-            "difficulty", "distance", "direction", "terrain", "latlon", "location", "latitude", "longitude", "elevation", "shortdesc",
-            "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
-            "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon", "coordsChanged", "finalDefined"
+            //  0          1         2               3              4              5         6         7       8       9      10          11         12        13      14
+            "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "owner", "owner_real", "hidden", "hint", "size",
+            //    15          16           17          18        19         20          21              22            23
+            "difficulty", "direction", "distance", "terrain", "latlon", "location", "elevation", "personal_note", "shortdesc",
+            //    24             25       26       27         28          29         30         31         32
+            "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite",
+            //        33               34              35                36            37           38              39         40          41              42
+            "inventoryunknown", "onWatchlist", "reliable_latlon", "coordsChanged", "latitude", "longitude",  "finalDefined", "_id", "inventorycoins", "inventorytags"
             // reason is replaced by listId in cgCache
     };
     /** The list of fields needed for mapping. */
@@ -1546,48 +1550,10 @@ public class cgData {
         cgCache cache = new cgCache();
 
         if (cacheColumnIndex == null) {
-            int[] local_cci = new int[41]; // use a local variable to avoid having the not yet fully initialized array be visible to other threads
-            local_cci[0] = cursor.getColumnIndex("updated");
-            local_cci[1] = cursor.getColumnIndex("reason");
-            local_cci[2] = cursor.getColumnIndex("detailed");
-            local_cci[3] = cursor.getColumnIndex("detailedupdate");
-            local_cci[4] = cursor.getColumnIndex("visiteddate");
-            local_cci[5] = cursor.getColumnIndex("geocode");
-            local_cci[6] = cursor.getColumnIndex("cacheid");
-            local_cci[7] = cursor.getColumnIndex("guid");
-            local_cci[8] = cursor.getColumnIndex("type");
-            local_cci[9] = cursor.getColumnIndex("name");
-            // TODO: entry number 10 has been removed, all should be renumbered
-            local_cci[11] = cursor.getColumnIndex("owner");
-            local_cci[12] = cursor.getColumnIndex("owner_real");
-            local_cci[13] = cursor.getColumnIndex("hidden");
-            local_cci[14] = cursor.getColumnIndex("hint");
-            local_cci[15] = cursor.getColumnIndex("size");
-            local_cci[16] = cursor.getColumnIndex("difficulty");
-            local_cci[17] = cursor.getColumnIndex("direction");
-            local_cci[18] = cursor.getColumnIndex("distance");
-            local_cci[19] = cursor.getColumnIndex("terrain");
-            local_cci[20] = cursor.getColumnIndex("latlon");
-            local_cci[21] = cursor.getColumnIndex("location");
-            local_cci[22] = cursor.getColumnIndex("elevation");
-            local_cci[23] = cursor.getColumnIndex("personal_note");
-            local_cci[24] = cursor.getColumnIndex("shortdesc");
-            local_cci[25] = cursor.getColumnIndex("favourite_cnt");
-            local_cci[26] = cursor.getColumnIndex("rating");
-            local_cci[27] = cursor.getColumnIndex("votes");
-            local_cci[28] = cursor.getColumnIndex("myvote");
-            local_cci[29] = cursor.getColumnIndex("disabled");
-            local_cci[30] = cursor.getColumnIndex("archived");
-            local_cci[31] = cursor.getColumnIndex("members");
-            local_cci[32] = cursor.getColumnIndex("found");
-            local_cci[33] = cursor.getColumnIndex("favourite");
-            local_cci[34] = cursor.getColumnIndex("inventoryunknown");
-            local_cci[35] = cursor.getColumnIndex("onWatchlist");
-            local_cci[36] = cursor.getColumnIndex("reliable_latlon");
-            local_cci[37] = cursor.getColumnIndex("coordsChanged");
-            local_cci[38] = cursor.getColumnIndex("latitude");
-            local_cci[39] = cursor.getColumnIndex("longitude");
-            local_cci[40] = cursor.getColumnIndex("finalDefined");
+            final int[] local_cci = new int[CACHE_COLUMNS.length]; // use a local variable to avoid having the not yet fully initialized array be visible to other threads
+            for (int i = 0; i < CACHE_COLUMNS.length; i++) {
+                local_cci[i] = cursor.getColumnIndex(CACHE_COLUMNS[i]);
+            }
             cacheColumnIndex = local_cci;
         }
 
@@ -1601,54 +1567,54 @@ public class cgData {
         cache.setGuid(cursor.getString(cacheColumnIndex[7]));
         cache.setType(CacheType.getById(cursor.getString(cacheColumnIndex[8])));
         cache.setName(cursor.getString(cacheColumnIndex[9]));
-        cache.setOwnerDisplayName(cursor.getString(cacheColumnIndex[11]));
-        cache.setOwnerUserId(cursor.getString(cacheColumnIndex[12]));
-        long dateValue = cursor.getLong(cacheColumnIndex[13]);
+        cache.setOwnerDisplayName(cursor.getString(cacheColumnIndex[10]));
+        cache.setOwnerUserId(cursor.getString(cacheColumnIndex[11]));
+        long dateValue = cursor.getLong(cacheColumnIndex[12]);
         if (dateValue != 0) {
             cache.setHidden(new Date(dateValue));
         }
-        cache.setHint(cursor.getString(cacheColumnIndex[14]));
-        cache.setSize(CacheSize.getById(cursor.getString(cacheColumnIndex[15])));
-        cache.setDifficulty(cursor.getFloat(cacheColumnIndex[16]));
-        int index = cacheColumnIndex[17];
+        cache.setHint(cursor.getString(cacheColumnIndex[13]));
+        cache.setSize(CacheSize.getById(cursor.getString(cacheColumnIndex[14])));
+        cache.setDifficulty(cursor.getFloat(cacheColumnIndex[15]));
+        int index = cacheColumnIndex[16];
         if (cursor.isNull(index)) {
             cache.setDirection(null);
         } else {
             cache.setDirection(cursor.getFloat(index));
         }
-        index = cacheColumnIndex[18];
+        index = cacheColumnIndex[17];
         if (cursor.isNull(index)) {
             cache.setDistance(null);
         } else {
             cache.setDistance(cursor.getFloat(index));
         }
-        cache.setTerrain(cursor.getFloat(cacheColumnIndex[19]));
-        cache.setLatlon(cursor.getString(cacheColumnIndex[20]));
-        cache.setLocation(cursor.getString(cacheColumnIndex[21]));
-        cache.setCoords(getCoords(cursor, cacheColumnIndex[38], cacheColumnIndex[39]));
-        index = cacheColumnIndex[22];
+        cache.setTerrain(cursor.getFloat(cacheColumnIndex[18]));
+        cache.setLatlon(cursor.getString(cacheColumnIndex[19]));
+        cache.setLocation(cursor.getString(cacheColumnIndex[20]));
+        cache.setCoords(getCoords(cursor, cacheColumnIndex[37], cacheColumnIndex[38]));
+        index = cacheColumnIndex[21];
         if (cursor.isNull(index)) {
             cache.setElevation(null);
         } else {
             cache.setElevation(cursor.getDouble(index));
         }
-        cache.setPersonalNote(cursor.getString(cacheColumnIndex[23]));
-        cache.setShortdesc(cursor.getString(cacheColumnIndex[24]));
+        cache.setPersonalNote(cursor.getString(cacheColumnIndex[22]));
+        cache.setShortdesc(cursor.getString(cacheColumnIndex[23]));
         // do not set cache.description !
-        cache.setFavoritePoints(cursor.getInt(cacheColumnIndex[25]));
-        cache.setRating(cursor.getFloat(cacheColumnIndex[26]));
-        cache.setVotes(cursor.getInt(cacheColumnIndex[27]));
-        cache.setMyVote(cursor.getFloat(cacheColumnIndex[28]));
-        cache.setDisabled(cursor.getInt(cacheColumnIndex[29]) == 1);
-        cache.setArchived(cursor.getInt(cacheColumnIndex[30]) == 1);
-        cache.setPremiumMembersOnly(cursor.getInt(cacheColumnIndex[31]) == 1);
-        cache.setFound(cursor.getInt(cacheColumnIndex[32]) == 1);
-        cache.setFavorite(cursor.getInt(cacheColumnIndex[33]) == 1);
-        cache.setInventoryItems(cursor.getInt(cacheColumnIndex[34]));
-        cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
-        cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
-        cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
-        cache.setFinalDefined(cursor.getInt(cacheColumnIndex[40]) > 0);
+        cache.setFavoritePoints(cursor.getInt(cacheColumnIndex[24]));
+        cache.setRating(cursor.getFloat(cacheColumnIndex[25]));
+        cache.setVotes(cursor.getInt(cacheColumnIndex[26]));
+        cache.setMyVote(cursor.getFloat(cacheColumnIndex[27]));
+        cache.setDisabled(cursor.getInt(cacheColumnIndex[28]) == 1);
+        cache.setArchived(cursor.getInt(cacheColumnIndex[29]) == 1);
+        cache.setPremiumMembersOnly(cursor.getInt(cacheColumnIndex[30]) == 1);
+        cache.setFound(cursor.getInt(cacheColumnIndex[31]) == 1);
+        cache.setFavorite(cursor.getInt(cacheColumnIndex[32]) == 1);
+        cache.setInventoryItems(cursor.getInt(cacheColumnIndex[33]));
+        cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[34]) == 1);
+        cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[35]) > 0);
+        cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[36]) > 0);
+        cache.setFinalDefined(cursor.getInt(cacheColumnIndex[39]) > 0);
 
         Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
