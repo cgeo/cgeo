@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,31 +39,16 @@ public final class GCVote {
      * @return
      */
     public static GCVoteRating getRating(String guid, String geocode) {
-        List<String> guids = null;
-        List<String> geocodes = null;
-
-        if (StringUtils.isNotBlank(guid)) {
-
-            GCVoteRating rating = ratingsCache.get(guid);
-            if (rating != null) {
-                return rating;
-            }
-            guids = new ArrayList<String>();
-            guids.add(guid);
-        } else if (StringUtils.isNotBlank(geocode)) {
-            geocodes = new ArrayList<String>();
-            geocodes.add(geocode);
-        } else {
-            return null;
+        if (StringUtils.isNotBlank(guid) && ratingsCache.containsKey(guid)) {
+            return ratingsCache.get(guid);
         }
 
-        final Map<String, GCVoteRating> ratings = getRating(guids, geocodes);
+        final Map<String, GCVoteRating> ratings = getRating(singletonOrNull(guid), singletonOrNull(geocode));
+        return MapUtils.isNotEmpty(ratings) ? ratings.values().iterator().next() : null;
+    }
 
-        if (MapUtils.isEmpty(ratings)) {
-            return null;
-        }
-
-        return ratings.values().iterator().next();
+    private static List<String> singletonOrNull(final String item) {
+        return StringUtils.isNotBlank(item) ? Collections.singletonList(item) : null;
     }
 
     /**
