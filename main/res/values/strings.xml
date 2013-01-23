@@ -684,6 +684,7 @@
   <string name="waypoint_reset">Reset</string>
   <string name="waypoint_localy_reset_cache_coords">Reset in c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Reset in c:geo and on website</string>
+  <string name="waypoint_being_saved">Waypoint is being saved…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Website doesn\'t support modifying cache coordinates.</string>
   <string name="waypoint_coordinates_upload_error">Error occurred while modifying coordinates on website.</string>
   <string name="waypoint_coordinates_uploading_to_website">Uploading coordinates %s to website.</string>
