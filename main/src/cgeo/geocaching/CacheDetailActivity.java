@@ -1728,7 +1728,7 @@ public class CacheDetailActivity extends AbstractActivity {
             Button buttonRemove = (Button) view.findViewById(R.id.remove_from_watchlist);
             TextView text = (TextView) view.findViewById(R.id.watchlist_text);
 
-            if (cache.isOnWatchlist() || cache.isOwn()) {
+            if (cache.isOnWatchlist() || cache.isOwner()) {
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setVisibility(View.VISIBLE);
                 text.setText(R.string.cache_watchlist_on);
@@ -1739,7 +1739,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // the owner of a cache has it always on his watchlist. Adding causes an error
-            if (cache.isOwn()) {
+            if (cache.isOwner()) {
                 buttonAdd.setEnabled(false);
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setEnabled(false);
@@ -1755,7 +1755,7 @@ public class CacheDetailActivity extends AbstractActivity {
             LinearLayout layout = (LinearLayout) view.findViewById(R.id.favpoint_box);
             boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
-            if (!supportsFavoritePoints || cache.isOwn() || !Settings.isPremiumMember()) {
+            if (!supportsFavoritePoints || cache.isOwner() || !Settings.isPremiumMember()) {
                 return;
             }
             Button buttonAdd = (Button) view.findViewById(R.id.add_to_favpoint);

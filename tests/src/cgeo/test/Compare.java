@@ -27,7 +27,7 @@ public abstract class Compare {
         if (all) {
             assertEquals(expected.getCoords(), actual.getCoords());
             assertTrue(actual.isReliableLatLon());
-            assertEquals(expected.isOwn(), actual.isOwn());
+            assertEquals(expected.isOwner(), actual.isOwner());
             assertEquals(expected.getOwnerUserId(), actual.getOwnerUserId());
             assertEquals(expected.getHint(), actual.getHint());
             assertTrue(actual.getDescription().startsWith(expected.getDescription()));

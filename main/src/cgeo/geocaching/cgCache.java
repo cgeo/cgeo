@@ -46,6 +46,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -89,7 +90,6 @@ public class cgCache implements ICache, IWaypoint {
     private boolean premiumMembersOnly = false;
     private boolean found = false;
     private boolean favorite = false;
-    private boolean own = false;
     private int favoritePoints = 0;
     private float rating = 0; // valid ratings are larger than zero
     private int votes = 0;
@@ -188,7 +188,6 @@ public class cgCache implements ICache, IWaypoint {
             reliableLatLon = other.reliableLatLon;
             archived = other.archived;
             found = other.found;
-            own = other.own;
             disabled = other.disabled;
             favorite = other.favorite;
             onWatchlist = other.onWatchlist;
@@ -350,7 +349,6 @@ public class cgCache implements ICache, IWaypoint {
                 cacheType == other.cacheType &&
                 size == other.size &&
                 found == other.found &&
-                own == other.own &&
                 premiumMembersOnly == other.premiumMembersOnly &&
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
@@ -473,14 +471,13 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     public List<LogType> getPossibleLogTypes() {
-        boolean isOwner = getOwnerUserId() != null && getOwnerUserId().equalsIgnoreCase(Settings.getUsername());
-        List<LogType> logTypes = new ArrayList<LogType>();
+        final List<LogType> logTypes = new LinkedList<LogType>();
         if (isEventCache()) {
             logTypes.add(LogType.WILL_ATTEND);
             logTypes.add(LogType.NOTE);
             logTypes.add(LogType.ATTENDED);
             logTypes.add(LogType.NEEDS_ARCHIVE);
-            if (isOwner) {
+            if (isOwner()) {
                 logTypes.add(LogType.ANNOUNCEMENT);
             }
         } else if (CacheType.WEBCAM == cacheType) {
@@ -496,7 +493,7 @@ public class cgCache implements ICache, IWaypoint {
             logTypes.add(LogType.NEEDS_ARCHIVE);
             logTypes.add(LogType.NEEDS_MAINTENANCE);
         }
-        if (isOwner) {
+        if (isOwner()) {
             logTypes.add(LogType.OWNER_MAINTENANCE);
             logTypes.add(LogType.TEMP_DISABLE_LISTING);
             logTypes.add(LogType.ENABLE_LISTING);
@@ -586,8 +583,8 @@ public class cgCache implements ICache, IWaypoint {
     }
 
     @Override
-    public boolean isOwn() {
-        return own;
+    public boolean isOwner() {
+        return getConnector().isOwner(this);
     }
 
     @Override
@@ -1077,10 +1074,6 @@ public class cgCache implements ICache, IWaypoint {
 
     public void setFound(boolean found) {
         this.found = found;
-    }
-
-    public void setOwn(boolean own) {
-        this.own = own;
     }
 
     public void setAttributes(List<String> attributes) {

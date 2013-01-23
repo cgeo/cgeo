@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.ox;
 
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
@@ -44,6 +45,11 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     public String getLicenseText(cgCache cache) {
         // NOT TO BE TRANSLATED
         return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons BY-SA 3.0 License";
+    }
+
+    @Override
+    public boolean isOwner(final ICache cache) {
+        return false;
     }
 
     @Override

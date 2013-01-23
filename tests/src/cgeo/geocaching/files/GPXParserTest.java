@@ -140,7 +140,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertFalse(cache.isDisabled());
         assertFalse(cache.isEventCache());
         assertFalse(cache.isPremiumMembersOnly());
-        assertFalse(cache.isOwn());
+        assertFalse(cache.isOwner());
         assertTrue(cache.isFound());
         assertEquals("Station3: Der zerbrochene Stein zählt doppelt.\nFinal: Oben neben dem Tor", cache.getHint());
         // logs

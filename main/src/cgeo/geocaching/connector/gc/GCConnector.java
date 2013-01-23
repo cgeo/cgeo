@@ -1,7 +1,9 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -124,6 +126,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean isReliableLatLon(boolean cacheHasReliableLatLon) {
         return cacheHasReliableLatLon;
+    }
+
+    @Override
+    public boolean isOwner(final ICache cache) {
+        return StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getUsername());
+
     }
 
     public static boolean addToWatchlist(cgCache cache) {
