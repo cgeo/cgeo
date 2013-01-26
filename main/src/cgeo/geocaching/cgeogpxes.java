@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 
 import java.io.File;
 import java.util.Collections;
@@ -22,8 +21,6 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
         super(new String[] { "gpx", "loc", "zip" });
     }
 
-    private int listId = StoredList.STANDARD_LIST_ID;
-
     @Override
     protected GPXListAdapter getAdapter(List<File> files) {
         return new GPXListAdapter(this, files);
@@ -32,19 +29,6 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
     @Override
     protected List<File> getBaseFolders() {
         return Collections.singletonList(new File(Settings.getGpxImportDir()));
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            listId = extras.getInt(Intents.EXTRA_LIST_ID);
-        }
-        if (listId <= StoredList.TEMPORARY_LIST_ID) {
-            listId = StoredList.STANDARD_LIST_ID;
-        }
     }
 
     @Override

@@ -35,7 +35,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     private T adapter = null;
     private ProgressDialog waitDialog = null;
     private SearchFilesThread searchingThread = null;
-    private int listId = StoredList.STANDARD_LIST_ID;
+    protected int listId = StoredList.STANDARD_LIST_ID;
     private String[] extensions;
 
     final private Handler changeWaitDialogHandler = new Handler() {
