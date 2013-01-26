@@ -14,7 +14,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
 
     public static final String PREFIX_OWN = "OWN";
     private static final int ORDER_UNDEFINED = -2;
-    private int id = 0;
+    private int id = -1;
     private String geocode = "geocode";
     private WaypointType waypointType = WaypointType.WAYPOINT;
     private String prefix = "";
@@ -46,7 +46,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     public Waypoint(final Waypoint other) {
         merge(other);
         this.waypointType = other.waypointType;
-        id = 0;
+        id = -1;
     }
 
     public void setIcon(final Resources res, final TextView nameView) {
