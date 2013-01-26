@@ -217,9 +217,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         String name = null;
         String guid = null;
         if (geocode == null && extras != null) {
-            geocode = extras.getString("geocode");
-            name = extras.getString("name");
-            guid = extras.getString("guid");
+            geocode = extras.getString(Intents.EXTRA_GEOCODE);
+            name = extras.getString(Intents.EXTRA_NAME);
+            guid = extras.getString(Intents.EXTRA_GUID);
         }
 
         // try to get data from URI
@@ -894,7 +894,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     public static void startActivity(final Context context, final String geocode) {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
-        detailIntent.putExtra("geocode", geocode);
+        detailIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         context.startActivity(detailIntent);
     }
 
@@ -2207,15 +2207,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     public static void startActivity(final Context context, final String geocode, final String cacheName) {
         final Intent cachesIntent = new Intent(context, CacheDetailActivity.class);
-        cachesIntent.putExtra("geocode", geocode);
-        cachesIntent.putExtra("name", cacheName);
+        cachesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        cachesIntent.putExtra(Intents.EXTRA_NAME, cacheName);
         context.startActivity(cachesIntent);
     }
 
     public static void startActivityGuid(final Context context, final String guid, final String cacheName) {
         final Intent cacheIntent = new Intent(context, CacheDetailActivity.class);
-        cacheIntent.putExtra("guid", guid);
-        cacheIntent.putExtra("name", cacheName);
+        cacheIntent.putExtra(Intents.EXTRA_GUID, guid);
+        cacheIntent.putExtra(Intents.EXTRA_NAME, cacheName);
         context.startActivity(cacheIntent);
     }
 

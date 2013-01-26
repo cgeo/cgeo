@@ -32,8 +32,6 @@ import java.util.Locale;
 
 public class SearchActivity extends AbstractActivity {
 
-    private static final String EXTRAS_KEYWORDSEARCH = "keywordsearch";
-
     private static final int MENU_SEARCH_OWN_CACHES = 1;
     private EditText latEdit = null;
     private EditText lonEdit = null;
@@ -50,7 +48,7 @@ public class SearchActivity extends AbstractActivity {
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             final String query = intent.getStringExtra(SearchManager.QUERY);
-            final boolean keywordSearch = intent.getBooleanExtra(EXTRAS_KEYWORDSEARCH, true);
+            final boolean keywordSearch = intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH, true);
 
             if (instantSearch(query, keywordSearch)) {
                 setResult(RESULT_OK);
@@ -111,7 +109,7 @@ public class SearchActivity extends AbstractActivity {
         final IConnector connector = ConnectorFactory.getConnector(geocode);
         if (connector instanceof ISearchByGeocode) {
             final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-            cachesIntent.putExtra("geocode", geocode.toUpperCase(Locale.US));
+            cachesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
             startActivity(cachesIntent);
             return true;
         }
@@ -120,7 +118,7 @@ public class SearchActivity extends AbstractActivity {
         final String trackable = BaseUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
         if (StringUtils.isNotBlank(trackable)) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-            trackablesIntent.putExtra("geocode", trackable.toUpperCase(Locale.US));
+            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackable.toUpperCase(Locale.US));
             startActivity(trackablesIntent);
             return true;
         }
@@ -335,7 +333,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         final Intent addressesIntent = new Intent(this, AdressListActivity.class);
-        addressesIntent.putExtra("keyword", addText);
+        addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addText);
         startActivity(addressesIntent);
     }
 
@@ -409,7 +407,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-        trackablesIntent.putExtra("geocode", trackableText.toUpperCase(Locale.US));
+        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
         startActivity(trackablesIntent);
     }
 
@@ -432,7 +430,7 @@ public class SearchActivity extends AbstractActivity {
         final Intent searchIntent = new Intent(fromActivity, SearchActivity.class);
         searchIntent.setAction(Intent.ACTION_SEARCH).
                 putExtra(SearchManager.QUERY, scan).
-                putExtra(SearchActivity.EXTRAS_KEYWORDSEARCH, false);
+                putExtra(Intents.EXTRA_KEYWORD_SEARCH, false);
         fromActivity.startActivityForResult(searchIntent, cgeo.SEARCH_REQUEST_CODE);
     }
 }

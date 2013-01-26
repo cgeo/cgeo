@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class WaypointPopup extends AbstractPopupActivity {
-    private static final String EXTRA_WAYPOINT_ID = "waypoint_id";
     private int waypointId = 0;
     private Waypoint waypoint = null;
 
@@ -31,7 +30,7 @@ public class WaypointPopup extends AbstractPopupActivity {
         // get parameters
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            waypointId = extras.getInt(EXTRA_WAYPOINT_ID);
+            waypointId = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
         }
     }
 
@@ -97,8 +96,8 @@ public class WaypointPopup extends AbstractPopupActivity {
 
     public static void startActivity(final Context context, final int waypointId, final String geocode) {
         final Intent popupIntent = new Intent(context, WaypointPopup.class);
-        popupIntent.putExtra(EXTRA_WAYPOINT_ID, waypointId);
-        popupIntent.putExtra(EXTRA_GEOCODE, geocode);
+        popupIntent.putExtra(Intents.EXTRA_WAYPOINT_ID, waypointId);
+        popupIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         context.startActivity(popupIntent);
     }
 

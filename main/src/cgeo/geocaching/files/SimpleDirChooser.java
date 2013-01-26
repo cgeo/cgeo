@@ -1,5 +1,6 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 
@@ -30,8 +31,6 @@ import java.util.List;
  * Dialog for choosing a file or directory.
  */
 public class SimpleDirChooser extends ListActivity {
-    public static final String EXTRA_CHOSEN_DIR = "chosenDir";
-    public static final String START_DIR = "start_dir";
     private static final String PARENT_DIR = "..        ";
     private File currentDir;
     private FileArrayAdapter adapter;
@@ -42,7 +41,7 @@ public class SimpleDirChooser extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Bundle extras = getIntent().getExtras();
-        currentDir = dirContaining(extras.getString(START_DIR));
+        currentDir = dirContaining(extras.getString(Intents.EXTRA_START_DIR));
 
         ActivityMixin.setTheme(this);
         setContentView(R.layout.simple_dir_chooser);

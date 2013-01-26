@@ -72,12 +72,6 @@ import java.util.Set;
 
 public class cgeocaches extends AbstractListActivity implements FilteredActivity {
 
-    private static final String EXTRAS_USERNAME = "username";
-    private static final String EXTRAS_ADDRESS = "address";
-    private static final String EXTRAS_SEARCH = "search";
-    private static final String EXTRAS_KEYWORD = "keyword";
-    private static final String EXTRAS_LIST_TYPE = "type";
-    private static final String EXTRAS_COORDS = "coords";
     private static final int MAX_LIST_ITEMS = 1000;
     private static final int MENU_REFRESH_STORED = 2;
     private static final int MENU_CACHE_DETAILS = 4;
@@ -455,9 +449,9 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            Object typeObject = extras.get(EXTRAS_LIST_TYPE);
+            Object typeObject = extras.get(Intents.EXTRA_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
-            coords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
+            coords = (Geopoint) extras.getParcelable(Intents.EXTRAS_COORDS);
         }
         else {
             extras = new Bundle();
@@ -480,7 +474,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         Thread threadPure;
         AbstractSearchThread thread;
 
-        final String username = extras.getString(EXTRAS_USERNAME);
+        final String username = extras.getString(Intents.EXTRA_USERNAME);
         switch (type) {
             case OFFLINE:
                 listId = Settings.getLastList();
@@ -532,7 +526,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 thread.start();
                 break;
             case KEYWORD:
-                final String keyword = extras.getString(EXTRAS_KEYWORD);
+                final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
                 title = keyword;
                 setTitle(title);
                 showProgress(true);
@@ -543,7 +537,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 thread.start();
                 break;
             case ADDRESS:
-                final String address = extras.getString(EXTRAS_ADDRESS);
+                final String address = extras.getString(Intents.EXTRA_ADDRESS);
                 if (StringUtils.isNotBlank(address)) {
                     title = address;
                 } else {
@@ -586,7 +580,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 title = res.getString(R.string.map_map);
                 setTitle(title);
                 showProgress(true);
-                search = (SearchResult) extras.get(EXTRAS_SEARCH);
+                search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
                 break;
@@ -1023,8 +1017,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 break;
             case MENU_CACHE_DETAILS:
                 final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-                cachesIntent.putExtra("geocode", cache.getGeocode());
-                cachesIntent.putExtra("name", cache.getName());
+                cachesIntent.putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
+                cachesIntent.putExtra(Intents.EXTRA_NAME, cache.getName());
                 startActivity(cachesIntent);
                 break;
             case MENU_DROP_CACHE:
@@ -1823,7 +1817,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     public static void startActivityOffline(final Context context) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.OFFLINE);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.OFFLINE);
         context.startActivity(cachesIntent);
     }
 
@@ -1832,8 +1826,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.OWNER);
-        cachesIntent.putExtra(EXTRAS_USERNAME, userName);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.OWNER);
+        cachesIntent.putExtra(Intents.EXTRA_USERNAME, userName);
         context.startActivity(cachesIntent);
     }
 
@@ -1850,8 +1844,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.USERNAME);
-        cachesIntent.putExtra(EXTRAS_USERNAME, userName);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.USERNAME);
+        cachesIntent.putExtra(Intents.EXTRA_USERNAME, userName);
         context.startActivity(cachesIntent);
     }
 
@@ -1902,22 +1896,22 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.NEAREST);
-        cachesIntent.putExtra(EXTRAS_COORDS, coordsNow);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.NEAREST);
+        cachesIntent.putExtra(Intents.EXTRAS_COORDS, coordsNow);
         context.startActivity(cachesIntent);
     }
 
     public static void startActivityHistory(Context context) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.HISTORY);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.HISTORY);
         context.startActivity(cachesIntent);
     }
 
     public static void startActivityAddress(final Context context, final Geopoint coords, final String address) {
         final Intent addressIntent = new Intent(context, cgeocaches.class);
-        addressIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.ADDRESS);
-        addressIntent.putExtra(EXTRAS_COORDS, coords);
-        addressIntent.putExtra(EXTRAS_ADDRESS, address);
+        addressIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.ADDRESS);
+        addressIntent.putExtra(Intents.EXTRAS_COORDS, coords);
+        addressIntent.putExtra(Intents.EXTRA_ADDRESS, address);
         context.startActivity(addressIntent);
     }
 
@@ -1926,8 +1920,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.COORDINATE);
-        cachesIntent.putExtra(EXTRAS_COORDS, coords);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.COORDINATE);
+        cachesIntent.putExtra(Intents.EXTRAS_COORDS, coords);
         context.startActivity(cachesIntent);
     }
 
@@ -1945,15 +1939,15 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.KEYWORD);
-        cachesIntent.putExtra(EXTRAS_KEYWORD, keyword);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.KEYWORD);
+        cachesIntent.putExtra(Intents.EXTRA_KEYWORD, keyword);
         context.startActivity(cachesIntent);
     }
 
     public static void startActivityMap(final Context context, final SearchResult search) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.MAP);
-        cachesIntent.putExtra(EXTRAS_SEARCH, search);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.MAP);
+        cachesIntent.putExtra(Intents.EXTRA_SEARCH, search);
         context.startActivity(cachesIntent);
     }
 }

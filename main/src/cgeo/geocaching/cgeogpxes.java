@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class cgeogpxes extends FileList<GPXListAdapter> {
-    private static final String EXTRAS_LIST_ID = "list";
 
     public cgeogpxes() {
         super(new String[] { "gpx", "loc", "zip" });
@@ -41,7 +40,7 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            listId = extras.getInt(EXTRAS_LIST_ID);
+            listId = extras.getInt(Intents.EXTRA_LIST_ID);
         }
         if (listId <= StoredList.TEMPORARY_LIST_ID) {
             listId = StoredList.STANDARD_LIST_ID;
@@ -55,7 +54,7 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
 
     public static void startSubActivity(Activity fromActivity, int listId) {
         final Intent intent = new Intent(fromActivity, cgeogpxes.class);
-        intent.putExtra(EXTRAS_LIST_ID, listId);
+        intent.putExtra(Intents.EXTRA_LIST_ID, listId);
         fromActivity.startActivityForResult(intent, 0);
     }
 

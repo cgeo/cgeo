@@ -126,10 +126,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         // try to get data from extras
         if (extras != null) {
-            geocode = extras.getString("geocode");
-            name = extras.getString("name");
-            guid = extras.getString("guid");
-            id = extras.getString("id");
+            geocode = extras.getString(Intents.EXTRA_GEOCODE);
+            name = extras.getString(Intents.EXTRA_NAME);
+            guid = extras.getString(Intents.EXTRA_GUID);
+            id = extras.getString(Intents.EXTRA_ID);
         }
 
         // try to get data from URI
@@ -357,9 +357,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public static void startActivity(final AbstractActivity fromContext,
             final String guid, final String geocode, final String name) {
         final Intent trackableIntent = new Intent(fromContext, TrackableActivity.class);
-        trackableIntent.putExtra("guid", guid);
-        trackableIntent.putExtra("geocode", geocode);
-        trackableIntent.putExtra("name", name);
+        trackableIntent.putExtra(Intents.EXTRA_GUID, guid);
+        trackableIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        trackableIntent.putExtra(Intents.EXTRA_NAME, name);
         fromContext.startActivity(trackableIntent);
     }
 

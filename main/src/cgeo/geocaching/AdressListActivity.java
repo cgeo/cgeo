@@ -27,7 +27,7 @@ public class AdressListActivity extends AbstractListActivity {
         setTitle(res.getString(R.string.search_address_result));
 
         // get parameters
-        final String keyword = getIntent().getStringExtra("keyword");
+        final String keyword = getIntent().getStringExtra(Intents.EXTRA_KEYWORD);
 
         if (keyword == null) {
             showToast(res.getString(R.string.err_search_address_forgot));

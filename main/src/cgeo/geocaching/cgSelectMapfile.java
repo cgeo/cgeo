@@ -31,7 +31,7 @@ public class cgSelectMapfile extends FileList<FileSelectionListAdapter> implemen
     public void close() {
 
         Intent intent = new Intent();
-        intent.putExtra("mapfile", mapFile);
+        intent.putExtra(Intents.EXTRA_MAP_FILE, mapFile);
 
         setResult(RESULT_OK, intent);
 

@@ -1,5 +1,6 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.activity.AbstractListActivity;
@@ -92,7 +93,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            listId = extras.getInt("list");
+            listId = extras.getInt(Intents.EXTRA_LIST_ID);
         }
         if (listId <= StoredList.TEMPORARY_LIST_ID) {
             listId = StoredList.STANDARD_LIST_ID;

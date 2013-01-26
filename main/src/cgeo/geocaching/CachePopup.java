@@ -209,7 +209,7 @@ public class CachePopup extends AbstractPopupActivity {
 
     public static void startActivity(final Context context, final String geocode) {
         final Intent popupIntent = new Intent(context, CachePopup.class);
-        popupIntent.putExtra(EXTRA_GEOCODE, geocode);
+        popupIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         context.startActivity(popupIntent);
     }
 

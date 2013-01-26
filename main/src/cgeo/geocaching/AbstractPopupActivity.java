@@ -37,7 +37,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     private static final int MENU_NAVIGATION = 3;
     private static final int MENU_DEFAULT_NAVIGATION = 2;
     private static final int MENU_SHOW_IN_BROWSER = 7;
-    protected static final String EXTRA_GEOCODE = "geocode";
 
     protected cgCache cache = null;
     protected String geocode = null;
@@ -137,7 +136,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         // get parameters
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            geocode = extras.getString(EXTRA_GEOCODE);
+            geocode = extras.getString(Intents.EXTRA_GEOCODE);
         }
 
         if (StringUtils.isBlank(geocode)) {
