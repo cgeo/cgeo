@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.IAbstractActivity;
+import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -1142,7 +1142,7 @@ public class cgCache implements ICache, IWaypoint {
     public boolean addOrChangeWaypoint(final Waypoint waypoint, boolean saveToDatabase) {
         waypoint.setGeocode(geocode);
 
-        if (waypoint.getId() <= 0) { // this is a new waypoint
+        if (waypoint.getId() < 0) { // this is a new waypoint
             waypoints.add(waypoint);
             if (waypoint.isFinalWithCoords()) {
                 finalDefined = true;
@@ -1223,7 +1223,7 @@ public class cgCache implements ICache, IWaypoint {
         if (waypoint == null) {
             return false;
         }
-        if (waypoint.getId() <= 0) {
+        if (waypoint.getId() < 0) {
             return false;
         }
         if (waypoint.isUserDefined()) {
