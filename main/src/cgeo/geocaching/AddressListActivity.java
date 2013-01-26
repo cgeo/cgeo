@@ -16,7 +16,7 @@ import android.os.Bundle;
 import java.util.List;
 import java.util.Locale;
 
-public class AdressListActivity extends AbstractListActivity {
+public class AddressListActivity extends AbstractListActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class AdressListActivity extends AbstractListActivity {
 
             @Override
             protected List<Address> doInBackground(Void... params) {
-                final Geocoder geocoder = new Geocoder(AdressListActivity.this, Locale.getDefault());
+                final Geocoder geocoder = new Geocoder(AddressListActivity.this, Locale.getDefault());
                 try {
                     return geocoder.getFromLocationName(keyword, 20);
                 } catch (Exception e) {
@@ -55,7 +55,7 @@ public class AdressListActivity extends AbstractListActivity {
                         Log.i("No geocoder available");
                     }
                     else {
-                        Log.e("AdressListActivity.doInBackground", e);
+                        Log.e("AddressListActivity.doInBackground", e);
                     }
                     return null;
                 }
@@ -70,7 +70,7 @@ public class AdressListActivity extends AbstractListActivity {
                     }
                 } else {
                     finish();
-                    cgeocaches.startActivityAddress(AdressListActivity.this, null, keyword);
+                    cgeocaches.startActivityAddress(AddressListActivity.this, null, keyword);
                 }
             }
 

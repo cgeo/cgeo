@@ -332,7 +332,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        final Intent addressesIntent = new Intent(this, AdressListActivity.class);
+        final Intent addressesIntent = new Intent(this, AddressListActivity.class);
         addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addText);
         startActivity(addressesIntent);
     }

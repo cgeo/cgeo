@@ -91,7 +91,7 @@
 			android:configChanges="keyboardHidden|orientation" >
 		</activity>
 		<activity
-			android:name=".AdressListActivity"
+			android:name=".AddressListActivity"
 			android:label="@string/app_name"
 			android:windowSoftInputMode="stateHidden"
 			android:configChanges="keyboardHidden|orientation" >
