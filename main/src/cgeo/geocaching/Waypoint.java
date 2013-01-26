@@ -8,7 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import android.content.res.Resources;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Waypoint implements IWaypoint, Comparable<Waypoint> {
 
@@ -82,29 +84,20 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         }
     }
 
-    public static void mergeWayPoints(List<Waypoint> newPoints,
-            List<Waypoint> oldPoints, boolean forceMerge) {
-        // copy user modified details of the waypoints
-        if (newPoints != null && oldPoints != null) {
-            for (Waypoint old : oldPoints) {
-                if (old != null) {
-                    boolean merged = false;
-                    if (StringUtils.isNotEmpty(old.name)) {
-                        for (Waypoint waypoint : newPoints) {
-                            if (waypoint != null && waypoint.name != null) {
-                                if (old.name.equalsIgnoreCase(waypoint.name)) {
-                                    waypoint.merge(old);
-                                    merged = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    // user added waypoints should also be in the new list
-                    if (!merged && (old.isUserDefined() || forceMerge)) {
-                        newPoints.add(old);
-                    }
-                }
+    public static void mergeWayPoints(final List<Waypoint> newPoints, final List<Waypoint> oldPoints, final boolean forceMerge) {
+        // Build a map of new waypoints for faster subsequent lookups
+        final Map<String, Waypoint> newPrefixes = new HashMap<String, Waypoint>(newPoints.size());
+        for (final Waypoint waypoint : newPoints) {
+            newPrefixes.put(waypoint.getPrefix(), waypoint);
+        }
+
+        // Copy user modified details of the old waypoints over the new ones
+        for (final Waypoint oldWaypoint : oldPoints) {
+            final String prefix = oldWaypoint.getPrefix();
+            if (newPrefixes.containsKey(prefix)) {
+                newPrefixes.get(prefix).merge(oldWaypoint);
+            } else if (oldWaypoint.isUserDefined() || forceMerge) {
+                newPoints.add(oldWaypoint);
             }
         }
     }
