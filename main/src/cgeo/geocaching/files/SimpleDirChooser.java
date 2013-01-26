@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -55,10 +56,8 @@ public class SimpleDirChooser extends ListActivity {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                String chosenDirName = File.separator + adapter.getItem(lastPosition).getName();
-                intent.putExtra(EXTRA_CHOSEN_DIR, currentDir.getAbsolutePath() + chosenDirName);
-                setResult(RESULT_OK, intent);
+                setResult(RESULT_OK, new Intent()
+                        .setData(Uri.fromFile(new File(currentDir, adapter.getItem(lastPosition).getName()))));
                 finish();
             }
         });

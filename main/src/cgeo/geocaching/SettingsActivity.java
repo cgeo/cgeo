@@ -1019,10 +1019,7 @@ public class SettingsActivity extends AbstractActivity {
         if (resultCode != RESULT_OK) {
             return;
         }
-        // we may come back from either our selfmade chooser or from the Open Intent manager
-        final String directory = data.hasExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR) ?
-                data.getStringExtra(SimpleDirChooser.EXTRA_CHOSEN_DIR) :
-                new File(data.getData().getPath()).getAbsolutePath();
+        final String directory = new File(data.getData().getPath()).getAbsolutePath();
         if (StringUtils.isNotBlank(directory)) {
             runnableSetDir.run(directory);
             EditText directoryText = (EditText) findViewById(textField);
@@ -1035,7 +1032,7 @@ public class SettingsActivity extends AbstractActivity {
         try {
             final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
             if (StringUtils.isNotBlank(startDirectory)) {
-                dirChooser.setData(Uri.parse("file://" + new File(startDirectory).getAbsolutePath()));
+                dirChooser.setData(Uri.fromFile(new File(startDirectory)));
             }
             dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE, res.getString(R.string.simple_dir_chooser_title));
             dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT, res.getString(android.R.string.ok));
