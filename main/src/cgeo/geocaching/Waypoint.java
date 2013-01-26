@@ -77,6 +77,9 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
                 note = old.note;
             }
         }
+        if (id < 0) {
+            id = old.id;
+        }
     }
 
     public static void mergeWayPoints(List<Waypoint> newPoints,
