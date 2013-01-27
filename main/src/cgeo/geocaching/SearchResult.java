@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Parcel;
@@ -207,10 +208,7 @@ public class SearchResult implements Parcelable {
     }
 
     public cgCache getFirstCacheFromResult(final EnumSet<LoadFlag> loadFlags) {
-        if (geocodes != null && geocodes.size() >= 1) {
-            return cgData.loadCache((String) geocodes.toArray()[0], loadFlags);
-        }
-        return null;
+        return CollectionUtils.isNotEmpty(geocodes) ? cgData.loadCache(geocodes.iterator().next(), loadFlags) : null;
     }
 
     public Set<cgCache> getCachesFromSearchResult(final EnumSet<LoadFlag> loadFlags) {
