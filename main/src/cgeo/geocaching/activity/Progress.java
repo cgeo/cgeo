@@ -1,6 +1,6 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.ui.CustomProgressDialog;
+import cgeo.geocaching.ui.dialog.CustomProgressDialog;
 
 import android.app.ProgressDialog;
 import android.content.Context;

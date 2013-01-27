@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -255,9 +256,9 @@ public class SearchActivity extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            cgeocoords coordsDialog = new cgeocoords(SearchActivity.this, null, null, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(SearchActivity.this, null, null, app.currentGeo());
             coordsDialog.setCancelable(true);
-            coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
+            coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
                 public void update(Geopoint gp) {
                     ((Button) findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));

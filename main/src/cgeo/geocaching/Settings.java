@@ -128,7 +128,7 @@ public final class Settings {
         Min,
         Sec;
 
-        static coordInputFormatEnum fromInt(int id) {
+        public static coordInputFormatEnum fromInt(int id) {
             final coordInputFormatEnum[] values = coordInputFormatEnum.values();
             if (id < 0 || id >= values.length) {
                 return Min;

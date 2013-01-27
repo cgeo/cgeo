@@ -11,6 +11,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -292,9 +293,9 @@ public class EditWaypointActivity extends AbstractActivity {
                 gp = gpTemp;
             }
             cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            cgeocoords coordsDialog = new cgeocoords(EditWaypointActivity.this, cache, gp, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(EditWaypointActivity.this, cache, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
-            coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
+            coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
                 public void update(final Geopoint gp) {
                     ((Button) findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));

@@ -6,6 +6,7 @@ import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -290,9 +291,9 @@ public class cgeopoint extends AbstractActivity {
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
                 gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
             }
-            cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, null, gp, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(cgeopoint.this, null, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
-            coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
+            coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
                 public void update(Geopoint gp) {
                     latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));

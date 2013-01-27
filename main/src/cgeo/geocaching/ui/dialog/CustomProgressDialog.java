@@ -1,4 +1,4 @@
-package cgeo.geocaching.ui;
+package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.utils.Log;
 

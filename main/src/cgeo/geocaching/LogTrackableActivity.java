@@ -7,8 +7,8 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.Twitter;
-import cgeo.geocaching.ui.DateDialog;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 

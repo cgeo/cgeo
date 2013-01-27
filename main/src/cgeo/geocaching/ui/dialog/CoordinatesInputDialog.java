@@ -1,5 +1,13 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.IGeoData;
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.R.array;
+import cgeo.geocaching.R.id;
+import cgeo.geocaching.R.layout;
+import cgeo.geocaching.R.string;
 import cgeo.geocaching.Settings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -24,7 +32,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class cgeocoords extends Dialog {
+public class CoordinatesInputDialog extends Dialog {
 
     final private AbstractActivity context;
     final private IGeoData geo;
@@ -42,7 +50,7 @@ public class cgeocoords extends Dialog {
 
     private coordInputFormatEnum currentFormat = null;
 
-    public cgeocoords(final AbstractActivity context, final cgCache cache, final Geopoint gp, final IGeoData geo) {
+    public CoordinatesInputDialog(final AbstractActivity context, final cgCache cache, final Geopoint gp, final IGeoData geo) {
         super(context);
         this.context = context;
         this.geo = geo;
