@@ -24,8 +24,9 @@ import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.ImagesList.ImageType;
-import cgeo.geocaching.ui.dialog.EditorDialog;
 import cgeo.geocaching.ui.LoggingUI;
+import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.ui.dialog.EditorDialog;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -45,7 +46,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import android.R.color;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -90,7 +90,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -510,7 +509,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 break;
 
             case CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES:
-                new ResetCacheCoordinatesDialog(cache, cache.getWaypoint(index), this).show();
+                final Waypoint waypointReset = cache.getWaypoint(index);
+                if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
+                    createResetCacheCoordinatesDialog(cache, waypointReset).show();
+                }
+                else {
+                    final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
+                    final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, progressDialog, false);
+                    new ResetCoordsThread(cache, handler, waypointReset, true, false, progressDialog).start();
+                }
                 break;
 
             default:
@@ -2222,52 +2229,54 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     /**
      * A dialog to allow the user to select reseting coordinates local/remote/both.
      */
-    private class ResetCacheCoordinatesDialog extends AlertDialog {
+    private AlertDialog createResetCacheCoordinatesDialog(final cgCache cache, final Waypoint wpt) {
 
-        final RadioButton resetBoth;
-        final RadioButton resetLocal;
+        AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+        builder.setTitle(R.string.waypoint_reset_cache_coords);
 
-        public ResetCacheCoordinatesDialog(final cgCache cache, final Waypoint wpt, final Activity activity) {
+        String[] items = new String[] {res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords)};
+        builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, final int which) {
+                dialog.dismiss();
+                final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
+                final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, progressDialog, which == 1);
+                new ResetCoordsThread(cache, handler, wpt, which == 0 || which == 1, which == 1, progressDialog).start();
+            }
+        });
+        return builder.create();
+    }
+
+    private static class HandlerResetCoordinates extends WeakReferenceHandler<CacheDetailActivity> {
+        private boolean remoteFinished = false;
+        private boolean localFinished = false;
+        private final ProgressDialog progressDialog;
+        private final boolean resetRemote;
+
+        protected HandlerResetCoordinates(CacheDetailActivity activity, ProgressDialog progressDialog, boolean resetRemote) {
             super(activity);
+            this.progressDialog = progressDialog;
+            this.resetRemote = resetRemote;
+        }
 
-            View layout = activity.getLayoutInflater().inflate(R.layout.reset_cache_coords_dialog, null);
-            setView(layout);
-
-            resetLocal = (RadioButton) layout.findViewById(R.id.reset_cache_coordinates_local);
-            resetBoth = (RadioButton) layout.findViewById(R.id.reset_cache_coordinates_local_and_remote);
-
-            if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-                resetBoth.setVisibility(View.VISIBLE);
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == ResetCoordsThread.LOCAL) {
+                localFinished = true;
+            } else {
+                remoteFinished = true;
             }
 
-            layout.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dismiss();
-                    final ProgressDialog p = ProgressDialog.show(CacheDetailActivity.this, res.getString(R.string.cache), res.getString(R.string.waypoint_reset), true);
-                    final Handler h = new Handler() {
-                        private boolean remoteFinished = false;
-                        private boolean localFinished = false;
-
-                        @Override
-                        public void handleMessage(Message msg) {
-                            if (msg.what == ResetCoordsThread.LOCAL) {
-                                localFinished = true;
-                            } else {
-                                remoteFinished = true;
-                            }
-
-                            if ((localFinished) && (remoteFinished || !resetBoth.isChecked())) {
-                                p.dismiss();
-                                notifyDataSetChanged();
-                            }
-                        }
-
-                    };
-                    new ResetCoordsThread(cache, h, wpt, resetLocal.isChecked() || resetBoth.isChecked(), resetBoth.isChecked(), p).start();
+            if (localFinished && (remoteFinished || !resetRemote)) {
+                progressDialog.dismiss();
+                final CacheDetailActivity activity = getActivity();
+                if (activity != null) {
+                    activity.notifyDataSetChanged();
                 }
-            });
+            }
         }
+
     }
 
     private class ResetCoordsThread extends Thread {
