@@ -3,7 +3,6 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.IWaypoint;
-import cgeo.geocaching.LiveMapInfo;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
@@ -32,6 +31,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -470,9 +470,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         prepareFilterBar();
 
         if (!app.isLiveMapHintShown() && !Settings.getHideLiveMapHint()) {
-            Intent hintIntent = new Intent(activity, LiveMapInfo.class);
-            activity.startActivity(hintIntent);
-            app.setLiveMapHintShown();
+            LiveMapInfoDialogBuilder.create(activity).show();
         }
     }
 
