@@ -140,7 +140,6 @@
   <string name="err_detail_cache_find_any">Sorry, c:geo kan geen enkele geocache vinden.</string>
   <string name="err_detail_cache_find_next">Sorry, c:geo kan de volgende cache niet vinden.</string>
   <string name="err_detail_cache_forgot">Sorry, c:geo is kwijt welke geocache je wilde openen.</string>
-  <string name="err_detail_cache_forgot_visit">Sorry, c:geo is vergeten welke cache je bezocht.</string>
   <string name="err_detail_no_spoiler">c:geo Heeft geen spoiler images gevonden voor deze cache.</string>
   <string name="err_detail_no_map_static">c:geo Heeft geen statische kaarten gevonden voor deze cache.</string>
   <string name="err_detail_not_load_map_static">Sorry, c:geo kon de statische kaart niet laden.</string>

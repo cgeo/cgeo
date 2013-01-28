@@ -98,7 +98,6 @@
   <string name="err_detail_cache_find_any">Beklager, c:geo klarte ikke finne geocacher..</string>
   <string name="err_detail_cache_find_next">Beklager, c:geo klarte ikke å finne den neste geocachen.</string>
   <string name="err_detail_cache_forgot">Beklager, c:geo glemte hvilken cache du ønsket.</string>
-  <string name="err_detail_cache_forgot_visit">Beklager, c:geo glemte hvilken cache du fant.</string>
   <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
   <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>
   <string name="err_application_no">c:geo klarte ikke å finne en passende applikasjon.</string>

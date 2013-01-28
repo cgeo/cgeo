@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dip" >
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="false"
+        android:layout_centerVertical="true"
+        android:layout_gravity="left|top"
+        android:layout_marginRight="4dip"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@null"
+        android:textColor="?text_color_headline"
+        android:textIsSelectable="false"
+        android:textSize="12dip" />
+
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dip"
+        android:layout_toRightOf="@+id/name"
+        android:gravity="center_vertical"
+        android:textColor="?text_color"
+        android:textIsSelectable="false"
+        android:textSize="14dip" />
+
+    <LinearLayout
+        android:id="@+id/stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/value"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/addition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@+id/stars"
+        android:gravity="center_vertical"
+        android:textColor="?text_color_grey"
+        android:textIsSelectable="false"
+        android:textSize="11dip"
+        android:visibility="gone" />
+
+</RelativeLayout>

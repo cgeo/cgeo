@@ -143,7 +143,6 @@
   <string name="err_detail_cache_find_any">Prepáčte, c:geo nemôže nájsť žiadnu skrýšu.</string>
   <string name="err_detail_cache_find_next">Prepáčte, c:geo nemôže nájsť ďalšiu skrýšu.</string>
   <string name="err_detail_cache_forgot">Prepáčte, c:geo zabudlo, akú skrýšu chcete zobraziť.</string>
-  <string name="err_detail_cache_forgot_visit">Prepáčte, c:geo zabudlo, akú skrýšu ste prezerali.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo sa nepodarilo prevziať statické mapy. Je možné, že bol dosiahnutý limit Google mapy.</string>
   <string name="err_detail_no_spoiler">c:geo nenašla pre túto skrýšu žiaden spoilerový obrázok.</string>
   <string name="err_detail_no_map_static">c:geo nenašla žiadnu statickú mapu pre túto skrýšu.</string>
@@ -700,7 +699,6 @@
   <string name="map_strategy_auto">Podľa rýchlosti</string>
   <string name="map_strategy_detailed">Podrobná</string>
   <string name="live_map_notification">Na novej aktívnej mape nemusia byť súradnice vždy presné. Súradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\nPo otvorení detailu skrýše, alebo po jej uložení pre použitie offline, sú získané vždy presné súradnice.\n\nViac informácií ku všetkým zmenám sa nachádzajú na stránke „O c:geo“ v aplikácii.</string>
-  <string name="live_map_note_close">Zatvoriť</string>
   <string name="live_map_note_dontshow">Nabudúce nezobrazovať</string>
 
 

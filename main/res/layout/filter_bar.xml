@@ -14,6 +14,7 @@
 
     <TextView
         android:id="@+id/filter_text"
-        style="@style/filter_bar_text" />
+        style="@style/filter_bar_text"
+        android:textIsSelectable="false" />
 
 </LinearLayout>

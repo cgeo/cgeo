@@ -12,7 +12,8 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/separator_horizontal_headline" />
+            style="@style/separator_horizontal_headline"
+            android:textIsSelectable="true" />
     </RelativeLayout>
 
     <LinearLayout
@@ -41,6 +42,7 @@
             android:padding="3dip"
             android:textColor="?text_color"
             android:textColorLink="?text_color_link"
+            android:textIsSelectable="false"
             android:textSize="14dip" />
     </LinearLayout>
 

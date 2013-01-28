@@ -147,7 +147,6 @@
   <string name="err_detail_cache_find_any">Tyvärr kan c:geo inte hitta någon geocache.</string>
   <string name="err_detail_cache_find_next">Tyvärr kan c:geo inte hitta nästa geocache.</string>
   <string name="err_detail_cache_forgot">Tyvärr glömde c:geo vilken geocache du ville se.</string>
-  <string name="err_detail_cache_forgot_visit">Tyvärr glömde c:geo vilken cache tittade på.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo kunde inte hämta kartor. Eventuellt kan Google Maps gräns ha uppnåtts.</string>
   <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
   <string name="err_detail_no_map_static">c:geo hittade inga sparade kartor för denna cache.</string>
@@ -561,8 +560,6 @@
   <string name="cache_menu_visit_offline">Logga besök offline</string>
   <string name="cache_menu_spoilers">Spoiler bilder</string>
   <string name="cache_menu_around">Cacher i närheten</string>
-  <string name="cache_menu_set_as_cache_coords">Sätt som cachens koordinater</string>
-  <string name="cache_menu_upload_wpt_to_gc_com">Sätt som cachens koordinater och ladda upp waypoint till Geocaching.com</string>
   <string name="cache_menu_event">Lägg till i kalender</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_share">Skicka länk</string>
@@ -677,16 +674,13 @@
   <string name="waypoint_reset_cache_coords">Återställ cachens koordinater</string>
   <string name="waypoint_coordinates_has_been_reset_on_website">Cachens koordinater har återställts på hemsidan.</string>
   <string name="waypoint_coordinates_being_reset_on_website">Återställer cachens koordinater på hemsidan…</string>
-  <string name="waypoint_reset_cache_coords_info">Återställningsalternativ</string>
   <string name="waypoint_reset">Återställ</string>
   <string name="waypoint_localy_reset_cache_coords">Återställ koordinaterna i c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Återställ i c:geo och på hemsidan</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Hemsidan kan inte hantera att ändra cachens koordinater.</string>
   <string name="waypoint_coordinates_upload_error">Ett fel inträffade när koordinaterna skulle ändras på hemsidan.</string>
   <string name="waypoint_coordinates_uploading_to_website">Laddar upp koordinaterna %s till hemsidan.</string>
-  <string name="waypoint_coordinates_reseting_on_website">Återställer till ursprungliga koordinaterna på hemsidan.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Cachens koordinater på hemsidan har ändrats till: %s.</string>
-  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Cachens koordinater har ändrats i c:geo till: %s.</string>
   <string name="waypoint_done">Klar</string>
   <string name="waypoint_duplicate">Duplicera</string>
   <string name="waypoint_copy_of">Kopia av</string>
@@ -725,7 +719,6 @@
   <string name="map_strategy_auto">Hastighetsberoende (gps)</string>
   <string name="map_strategy_detailed">Exakta positioner</string>
   <string name="live_map_notification">I den nya Live kartan så är koordinaterna inte alltid exakta. En cache med potentiellt oexakta koordinater är markerad med en orange cirkel.\nGenom att visa detaljer för cachen eller genom att spara cachen för offline kommer alltid exakta koordinater att hämtas.\n\nMer information om alla förändringar finns på \"Om c:geo\" sidan, som kan nås från c:geo\'s startsida.</string>
-  <string name="live_map_note_close">Stäng</string>
   <string name="live_map_note_dontshow">Visa inte mer</string>
 
   <!-- search -->

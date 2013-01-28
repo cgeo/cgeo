@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/status"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/status"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-	android:background="@drawable/helper_bcg"
-	android:visibility="invisible">
-    <ImageView android:id="@+id/status_icon"
+    android:background="@drawable/helper_bcg"
+    android:visibility="invisible" >
+
+    <ImageView
+        android:id="@+id/status_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_margin="4dip" />
-    <TextView android:id="@+id/status_message"
+
+    <TextView
+        android:id="@+id/status_message"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/status_icon"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/status_icon"
         android:gravity="center"
         android:padding="4dip"
-        android:textSize="14dip"
-        android:textColor="@color/text_icon" />
+        android:textColor="@color/text_icon"
+        android:textIsSelectable="false"
+        android:textSize="14dip" />
+
 </RelativeLayout>

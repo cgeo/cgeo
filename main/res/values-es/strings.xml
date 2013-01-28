@@ -125,7 +125,6 @@
   <string name="err_detail_cache_find_any">Lo siento, c:geo no puede encontrar algunos escondites.</string>
   <string name="err_detail_cache_find_next">Lo siento, c:geo no puede encontrar los siguientes escondites.</string>
   <string name="err_detail_cache_forgot">Lo siento, c:geo ha olvidado el escondite que quieres.</string>
-  <string name="err_detail_cache_forgot_visit">Lo siento, c:geo ha olvidado que escondite has visitado.</string>
   <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este escondite.</string>
   <string name="err_detail_no_map_static">c:geo no ha encontrado mapas estáticos para este escondite.</string>
   <string name="err_detail_not_load_map_static">Lo siento, c:geo no ha podido cargar mapas estáticos.</string>

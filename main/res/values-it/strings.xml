@@ -147,7 +147,6 @@
   <string name="err_detail_cache_find_any">c:geo non trova nessun geocache.</string>
   <string name="err_detail_cache_find_next">c:geo non trova il prossimo geocache.</string>
   <string name="err_detail_cache_forgot">c:geo ha dimenticato quale geocache hai richiesto.</string>
-  <string name="err_detail_cache_forgot_visit">c:geo ha dimenticato quale cache hai visitato.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo non riesce a scaricare le mappe statiche. Forse raggiunto il limite di google map. Riprova domani.</string>
   <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questo cache.</string>
   <string name="err_detail_no_map_static">c:geo non trova alcuna mappa statica per questo cache.</string>
@@ -551,8 +550,6 @@
   <string name="cache_menu_visit_offline">Scrivi Log offline</string>
   <string name="cache_menu_spoilers">Immagini spoiler</string>
   <string name="cache_menu_around">Cache qui intorno</string>
-  <string name="cache_menu_set_as_cache_coords">Setta come coordinate cache</string>
-  <string name="cache_menu_upload_wpt_to_gc_com">Setta come coordinate cache e carica il waypoint su Geocaching.com</string>
   <string name="cache_menu_event">Aggiungi al calendario</string>
   <string name="cache_menu_details">Dettagli</string>
   <string name="cache_menu_share">Condividi cache</string>
@@ -666,16 +663,13 @@
   <string name="waypoint_save_and_modify_on_website">Setta come coordinate cache in c:geo e su web</string>
   <string name="waypoint_reset_cache_coords">Resetta le coordinate cache</string>  
   <string name="waypoint_coordinates_being_reset_on_website">Le coordinate sono in fase di reset su web</string>
-  <string name="waypoint_reset_cache_coords_info">Opzioni di reset</string>
   <string name="waypoint_reset">Reset</string>
   <string name="waypoint_localy_reset_cache_coords">Resetta in c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Resetta in c:geo e su web.</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Il sito web non supporta la modifica delle coordinate</string>
   <string name="waypoint_coordinates_upload_error">Errore durante il caricamento delle coordinate su web</string>
   <string name="waypoint_coordinates_uploading_to_website">Caricamento delle coordinate %s su web</string>
-  <string name="waypoint_coordinates_reseting_on_website">Reset alle coordinate originali su web</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Le coordinate cache su web sono state modificate in: %s.</string>
-  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Le coordinate cache sono state modificate in c:geo in: %s.</string>
   <string name="waypoint_done">Fatto</string>
   <string name="waypoint_duplicate">Duplicato</string>
   <string name="waypoint_copy_of">Copia di</string>
@@ -721,7 +715,6 @@
   <string name="map_strategy_auto">In base alla tua velocità</string>
   <string name="map_strategy_detailed">Dettagliata</string>
   <string name="live_map_notification">Nella nuova Mappa Live le coordinate potrebbero non essere sempre precise. Coordinate possibilmente imprecise sono marcate da un cerchio arancione.\nAprendo i dettagli del cache o salvando il cache per uso offline farà calcolare sempre coordinate precise.\n\nInformazioni addizionali su tutte le modifiche si possono trovare nel menu \"Info c:geo\" sulla pagina principale di questa app.</string>
-  <string name="live_map_note_close">Chiudi</string>
   <string name="live_map_note_dontshow">Non mostrare ancora</string>
 
   <!-- search -->

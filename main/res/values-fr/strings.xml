@@ -143,7 +143,6 @@
   <string name="err_detail_cache_find_any">c:geo ne peut pas trouver de caches.</string>
   <string name="err_detail_cache_find_next">c:geo ne peut pas trouver les caches suivantes.</string>
   <string name="err_detail_cache_forgot">c:geo a oublié la cache demandée.</string>
-  <string name="err_detail_cache_forgot_visit">c:geo a oublié la cache que vous avez visité.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo n\'a pas pu charger les cartes statiques. La limite de Google Maps est peut être temporairement atteinte.</string>
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
@@ -663,7 +662,6 @@
   <string name="map_strategy_auto">En fonction du déplacement</string>
   <string name="map_strategy_detailed">Détaillée</string>
   <string name="live_map_notification">Lors de l\'affichage de la carte active, certaines coordonnées de géocaches peuvent être imprécises et sont indiquées par un cercle orange.\nDemander les détails d\'une géocache ou la sauver pour une utilisation hors-ligne récupérera les coordonnées exactes.\n\nVous trouverez plus d\'informations sur les changements sur la page \"À propos de c:geo\".</string>
-  <string name="live_map_note_close">Fermer</string>
   <string name="live_map_note_dontshow">Ne plus afficher</string>
 
   <!-- search -->

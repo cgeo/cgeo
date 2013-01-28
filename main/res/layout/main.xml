@@ -1,198 +1,256 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:id="@+id/mainscreen"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_gravity="center" >
-	<LinearLayout style="@style/action_bar">
-		<ImageView style="@style/action_bar_icon_cgeo"
-				android:onClick="showAbout" />
-		<TextView style="@style/action_bar_title" />
-		<View style="@style/action_bar_separator" />
-		<ImageView style="@style/action_bar_action"
-				android:src="@drawable/actionbar_search"
-				android:onClick="goSearch" />
-		<View style="@style/action_bar_separator" />
-		<ImageView style="@style/action_bar_action"
-				android:src="@drawable/actionbar_manual"
-				android:onClick="goManual" />
-	</LinearLayout>
-    <fragment android:id="@+id/status"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_alignParentTop="true"
-			android:layout_marginLeft="16dip"
-			android:layout_marginRight="16dip"
-			android:layout_marginTop="60dip"
-        android:name="cgeo.geocaching.StatusFragment" />
-<!-- ** -->
-	<LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="45dip"
-			android:layout_centerInParent="true"
-			android:gravity="center"
-			android:orientation="vertical" >
-		<LinearLayout
-				android:layout_width="wrap_content"
-				android:layout_height="fill_parent"
-				android:layout_margin="4dip"
-				android:gravity="center_horizontal"
-				android:orientation="horizontal" >
-			<LinearLayout 
-					android:layout_width="74dip"
-					android:layout_height="wrap_content"
-					android:layout_margin="4dip"
-					android:orientation="vertical"
-					android:onClick="cgeoFindOnMap" >
-				<View
-						android:id="@+id/map"
-						style="@style/icon_mainscreen"
-						android:background="@drawable/main_live" />
-				<TextView
-						style="@style/icon_mainscreen_text"
-						android:text="@string/live_map_button" />
-			</LinearLayout>
-			<LinearLayout
-					android:layout_width="74dip"
-					android:layout_height="wrap_content"
-					android:layout_margin="4dip"
-					android:orientation="vertical">
-				<View
-						android:id="@+id/nearest"
-						style="@style/icon_mainscreen"
-						android:background="@drawable/main_nearby_disabled" />
-				<TextView
-						style="@style/icon_mainscreen_text"
-						android:text="@string/caches_nearby_button" />
-			</LinearLayout>
-			<RelativeLayout
-					android:layout_width="74dip"
-					android:layout_height="wrap_content"
-					android:layout_margin="4dip"
-					android:onClick="cgeoFindByOffline" >
-				<TextView android:id="@+id/offline_count"
-						style="@style/icon_mainscreen_count" />
-				<LinearLayout
-						android:layout_width="74dip"
-						android:layout_height="wrap_content"
-						android:orientation="vertical"
-						android:layout_alignParentTop="true" >
-					<View
-							android:id="@+id/search_offline"
-							style="@style/icon_mainscreen"
-							android:background="@drawable/main_stored" />
-					<TextView
-							style="@style/icon_mainscreen_text"
-							android:text="@string/stored_caches_button" />
-				</LinearLayout>
-			</RelativeLayout>
-		</LinearLayout>
-		<LinearLayout
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
-				android:layout_margin="4dip"
-				android:gravity="center_horizontal"
-				android:orientation="horizontal" >
-			<LinearLayout
-					android:layout_width="74dip"
-					android:layout_height="wrap_content"
-					android:layout_margin="4dip"
-					android:orientation="vertical"
-					android:onClick="cgeoSearch" >
-				<View
-						android:id="@+id/advanced_button"
-						style="@style/icon_mainscreen"
-						android:background="@drawable/main_search" />
-				<TextView
-						style="@style/icon_mainscreen_text"
-						android:text="@string/advanced_search_button" />
-			</LinearLayout>
-			<LinearLayout
-					android:layout_width="74dip"
-					android:layout_height="wrap_content"
-					android:layout_margin="4dip"
-					android:orientation="vertical"
-					android:onClick="cgeoPoint" >
-				<View
-						android:id="@+id/any_button"
-						style="@style/icon_mainscreen"
-						android:background="@drawable/main_any" />
-				<TextView
-						style="@style/icon_mainscreen_text"
-						android:text="@string/any_button" />
-			</LinearLayout>
-			<LinearLayout
-					android:layout_width="74dip"
-					android:layout_height="wrap_content"
-					android:layout_margin="4dip"
-					android:orientation="vertical"
-					android:onClick="cgeoFilter" >
-				<View
-						android:id="@+id/filter_button"
-						style="@style/icon_mainscreen"
-						android:background="@drawable/main_filter" />
-				<TextView android:id="@+id/filter_button_title"
-						style="@style/icon_mainscreen_text"
-						android:text="@null" />
-			</LinearLayout>
-		</LinearLayout>
-	</LinearLayout>
-<!-- ** -->
-	<RelativeLayout android:id="@+id/helper"
-			android:visibility="gone"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"
-			android:layout_marginLeft="16dip"
-			android:layout_marginRight="16dip"
-			android:layout_marginBottom="64dip"
-			android:background="@drawable/helper_bcg" >
-		<ImageView
-				android:layout_width="32dip"
-				android:layout_height="32dip"
-				android:layout_alignParentLeft="true"
-				android:layout_gravity="center"
-				android:gravity="center"
-				android:layout_margin="4dip"
-				android:scaleType="center"
-				android:src="@drawable/actionbar_manual" />
-		<TextView
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:layout_alignParentLeft="true"
-				android:layout_marginLeft="34dip"
-				android:layout_gravity="center"
-				android:gravity="center"
-				android:padding="4dip"
-				android:textSize="14dip"
-				android:textColor="@color/text_icon"
-				android:text="@string/helper" />
-	</RelativeLayout>
-<!-- ** -->
-	<LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"
-			android:layout_marginRight="6dip"
-			android:layout_marginLeft="6dip"
-			android:orientation="vertical"
-			android:onClick="cgeoNavSettings">
-		<TextView android:id="@+id/user_info"
-				style="@style/location_current"
-				android:text="@string/init_login_popup_working"/>
-		<TextView android:id="@+id/nav_location"
-				style="@style/location_current"
-				android:text="@string/loc_trying" />
-		<RelativeLayout
-				android:layout_width="fill_parent"
-				android:layout_height="16dip" >
-			<TextView android:id="@+id/nav_type"
-					style="@style/location_current_type" />
-			<TextView android:id="@+id/nav_accuracy"
-					style="@style/location_current_accuracy" />
-			<TextView android:id="@+id/nav_satellites"
-					style="@style/location_current_satellites" />
-		</RelativeLayout>
-	</LinearLayout>
+    android:id="@+id/mainscreen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center" >
+
+    <LinearLayout style="@style/action_bar" >
+
+        <ImageView
+            style="@style/action_bar_icon_cgeo"
+            android:onClick="showAbout" />
+
+        <TextView style="@style/action_bar_title" />
+
+        <View style="@style/action_bar_separator" />
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goSearch"
+            android:src="@drawable/actionbar_search" />
+
+        <View style="@style/action_bar_separator" />
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goManual"
+            android:src="@drawable/actionbar_manual" />
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/status"
+        android:name="cgeo.geocaching.StatusFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dip"
+        android:layout_marginRight="16dip"
+        android:layout_marginTop="60dip" />
+    <!-- ** -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="45dip"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_margin="4dip"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="74dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                android:onClick="cgeoFindOnMap"
+                android:orientation="vertical" >
+
+                <View
+                    android:id="@+id/map"
+                    style="@style/icon_mainscreen"
+                    android:background="@drawable/main_live" />
+
+                <TextView
+                    style="@style/icon_mainscreen_text"
+                    android:text="@string/live_map_button" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="74dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                android:orientation="vertical" >
+
+                <View
+                    android:id="@+id/nearest"
+                    style="@style/icon_mainscreen"
+                    android:background="@drawable/main_nearby_disabled" />
+
+                <TextView
+                    style="@style/icon_mainscreen_text"
+                    android:text="@string/caches_nearby_button" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="74dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                android:onClick="cgeoFindByOffline" >
+
+                <TextView
+                    android:id="@+id/offline_count"
+                    style="@style/icon_mainscreen_count"
+                    android:textIsSelectable="false" />
+
+                <LinearLayout
+                    android:layout_width="74dip"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:orientation="vertical" >
+
+                    <View
+                        android:id="@+id/search_offline"
+                        style="@style/icon_mainscreen"
+                        android:background="@drawable/main_stored" />
+
+                    <TextView
+                        style="@style/icon_mainscreen_text"
+                        android:text="@string/stored_caches_button" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="4dip"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="74dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                android:onClick="cgeoSearch"
+                android:orientation="vertical" >
+
+                <View
+                    android:id="@+id/advanced_button"
+                    style="@style/icon_mainscreen"
+                    android:background="@drawable/main_search" />
+
+                <TextView
+                    style="@style/icon_mainscreen_text"
+                    android:text="@string/advanced_search_button" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="74dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                android:onClick="cgeoPoint"
+                android:orientation="vertical" >
+
+                <View
+                    android:id="@+id/any_button"
+                    style="@style/icon_mainscreen"
+                    android:background="@drawable/main_any" />
+
+                <TextView
+                    style="@style/icon_mainscreen_text"
+                    android:text="@string/any_button" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="74dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                android:onClick="cgeoFilter"
+                android:orientation="vertical" >
+
+                <View
+                    android:id="@+id/filter_button"
+                    style="@style/icon_mainscreen"
+                    android:background="@drawable/main_filter" />
+
+                <TextView
+                    android:id="@+id/filter_button_title"
+                    style="@style/icon_mainscreen_text"
+                    android:text="@null" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- ** -->
+
+    <RelativeLayout
+        android:id="@+id/helper"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="64dip"
+        android:layout_marginLeft="16dip"
+        android:layout_marginRight="16dip"
+        android:background="@drawable/helper_bcg"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:layout_margin="4dip"
+            android:gravity="center"
+            android:scaleType="center"
+            android:src="@drawable/actionbar_manual" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="34dip"
+            android:gravity="center"
+            android:padding="4dip"
+            android:text="@string/helper"
+            android:textColor="@color/text_icon"
+            android:textSize="14dip" />
+    </RelativeLayout>
+    <!-- ** -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="6dip"
+        android:layout_marginRight="6dip"
+        android:onClick="cgeoNavSettings"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/user_info"
+            style="@style/location_current"
+            android:text="@string/init_login_popup_working" />
+
+        <TextView
+            android:id="@+id/nav_location"
+            style="@style/location_current"
+            android:text="@string/loc_trying" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="16dip" >
+
+            <TextView
+                android:id="@+id/nav_type"
+                style="@style/location_current_type"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/nav_accuracy"
+                style="@style/location_current_accuracy"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/nav_satellites"
+                style="@style/location_current_satellites"
+                android:textIsSelectable="false" />
+        </RelativeLayout>
+    </LinearLayout>
+
 </RelativeLayout>

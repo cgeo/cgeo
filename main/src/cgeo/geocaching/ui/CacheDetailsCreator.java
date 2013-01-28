@@ -35,7 +35,7 @@ public final class CacheDetailsCreator {
     }
 
     public TextView add(final int nameId, final CharSequence value) {
-        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_layout, null);
+        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null);
         final TextView nameView = (TextView) layout.findViewById(R.id.name);
         nameView.setText(res.getString(nameId));
         lastValueView = (TextView) layout.findViewById(R.id.value);
@@ -49,7 +49,7 @@ public final class CacheDetailsCreator {
     }
 
     public RelativeLayout addStars(final int nameId, final float value) {
-        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_layout, null);
+        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null);
         final TextView nameView = (TextView) layout.findViewById(R.id.name);
         lastValueView = (TextView) layout.findViewById(R.id.value);
         final LinearLayout layoutStars = (LinearLayout) layout.findViewById(R.id.stars);

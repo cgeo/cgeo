@@ -146,7 +146,6 @@
   <string name="err_detail_cache_find_any">c:geo nie mógł znaleźć żadnej skrzynki.</string>
   <string name="err_detail_cache_find_next">c:geo nie mógł znaleźć następnych skrzynek.</string>
   <string name="err_detail_cache_forgot">c:geo zapomniał którą skrzynkę chcesz obejrzeć.</string>
-  <string name="err_detail_cache_forgot_visit">c:geo zapomniał którą skrzynkę odwiedziłeś.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo nie był w stanie pobrać map statycznych. Może limit map Google został wyczerpany.</string>
   <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęcia spoilera dla tej skrzynki.</string>
   <string name="err_detail_no_map_static">c:geo nie znalazł map statycznych dla tej skrzynki.</string>
@@ -555,8 +554,6 @@
   <string name="cache_menu_visit_offline">Wpisz wizytę offline</string>
   <string name="cache_menu_spoilers">Zdjęcia spoiler</string>
   <string name="cache_menu_around">Skrzynki w okręgu</string>
-  <string name="cache_menu_set_as_cache_coords">Ustaw jako współrzędne skrzynki</string>
-  <string name="cache_menu_upload_wpt_to_gc_com">Ustaw jako współrzędne skrzynki i wyślij punkt nawigacji do Geocaching.com</string>  
   <string name="cache_menu_event">Dodaj do kalendarza</string>
   <string name="cache_menu_details">Szczegóły</string>
   <string name="cache_menu_share">Podziel się skrzynką</string>
@@ -670,16 +667,13 @@
   <string name="waypoint_reset_cache_coords">Ustaw ponownie współrzędne skrzynki</string>  
   <string name="waypoint_coordinates_has_been_reset_on_website">Współrzędne skrzynki zostały ustawione ponownie na stronie WWW.</string>
   <string name="waypoint_coordinates_being_reset_on_website">Ponowne ustawianie współrzędnych skrzynki na na stronie WWW…</string>
-  <string name="waypoint_reset_cache_coords_info">Opcje ponownego ustawiania współrzędnych</string>
   <string name="waypoint_reset">Ponowne ustawianie</string>
   <string name="waypoint_localy_reset_cache_coords">Ponowne ustawianie w c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Ponowne ustawianie w c:geo i na stronie WWW</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Strona WWW nie wspiera zmiany współrzędnych skrzynki.</string>
   <string name="waypoint_coordinates_upload_error">Wystąpił błąd podczas modyfikacji współrzędnych na stronie WWW.</string>
   <string name="waypoint_coordinates_uploading_to_website">Wysyłanie współrzędnych %s do strony WWW.</string>
-  <string name="waypoint_coordinates_reseting_on_website">Powracanie do oryginalnych współrzędnych na stronie WWW.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Współrzędne skrzynki zostały zmienione na stronie WWW na: %s.</string>
-  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Współrzędne skrzynki zostały zmieonone w c:geo na: %s.</string>
   <string name="waypoint_done">Wykonane</string>
   <string name="waypoint_duplicate">Duplikat</string>
   <string name="waypoint_copy_of">Kopia</string>  
@@ -725,7 +719,6 @@
   <string name="map_strategy_auto">Zależna od prędkości</string>
   <string name="map_strategy_detailed">Szczegółowa</string>
   <string name="live_map_notification">Na nowej mapie live, współrzędnie nie zawsze muszą być dokładne. Prawdopodobne niedokładne współrzędne są zaznaczane za pomocą pomarańczowych okręgów.\nOtworzenie współrzędnych skrzynki lub zapisanie skrzynki do użytku offline zawsze używa precyzyjnych współrzędnych.\n\nWięcej informacji na temat wszystkich zmian można odnaleźć na stronie \"O c:geo\" wewnątrz programu.</string>
-  <string name="live_map_note_close">Zamknij</string>
   <string name="live_map_note_dontshow">Nie pokazuj ponownie</string>
 
   <!-- search -->

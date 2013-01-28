@@ -143,7 +143,6 @@
   <string name="err_detail_cache_find_any">Sajnáljuk, a c:geo nem talál geoládákat.</string>
   <string name="err_detail_cache_find_next">Sajnáljuk, a c:geo nem találja a következő geoládákat.</string>
   <string name="err_detail_cache_forgot">Sajnáljuk, a c:geo elfelejtette melyik geoládát szeretnéd.</string>
-  <string name="err_detail_cache_forgot_visit">Sajnáljuk, a c:geo elfelejtette melyik geoládát látogattad meg.</string>
   <string name="err_detail_google_maps_limit_reached">A c:geonak nem sikerült letölteni a statikus térképeket. Lehet hogy elérted a Google Maps limitjét.</string>
   <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
   <string name="err_detail_no_map_static">A c:geo nem talált statikus térképeket ehhez a ládához.</string>
@@ -698,7 +697,6 @@
   <string name="map_strategy_auto">Sebességfüggő</string>
   <string name="map_strategy_detailed">Részletes</string>
   <string name="live_map_notification">A koordináták az élő térképen nem mindig pontosak. A vélhetően pontatlan koordinátákat narancssárga kör jelöli.\nA geoláda részleteinek megnyitása vagy a geoláda mentése mindig pontos koordinátákkal történik.\n\nTovábbi információ az összes változásról a \"A c:georól\" oldalon található az appon belül.</string>
-  <string name="live_map_note_close">Bezárás</string>
   <string name="live_map_note_dontshow">Ne mutasd újra</string> 
 
   

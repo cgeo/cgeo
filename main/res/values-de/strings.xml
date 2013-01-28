@@ -146,7 +146,6 @@
   <string name="err_detail_cache_find_any">c:geo konnte keine Caches finden.</string>
   <string name="err_detail_cache_find_next">c:geo konnte die nächsten Caches nicht finden.</string>
   <string name="err_detail_cache_forgot">c:geo hat vergessen, welcher Cache aufgerufen werden sollte.</string>
-  <string name="err_detail_cache_forgot_visit">c:geo hat vergessen, welcher Cache besucht werden sollte.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo kann die statischen Karten nicht herunterladen. Google Maps Limit könnte erreicht sein.</string>
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
   <string name="err_detail_no_map_static">c:geo hat keine statische Karte für diesen Cache gefunden.</string>
@@ -668,16 +667,13 @@
   <string name="waypoint_reset_cache_coords">Zurücksetzen</string>
   <string name="waypoint_coordinates_has_been_reset_on_website">Koordinaten auf Webseite zurückgesetzt</string>
   <string name="waypoint_coordinates_being_reset_on_website">Koordinaten werden zurückgesetzt</string>
-  <string name="waypoint_reset_cache_coords_info">Rücksetz-Optionen</string>
   <string name="waypoint_reset">Zurücksetzen</string>
   <string name="waypoint_localy_reset_cache_coords">Koodinaten lokal zurücksetzen</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Koordinaten lokal und auf Webseite zurücksetzen</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Cache-Koordinaten auf der Webseite konnten nicht zurückgesetzt werden</string>
   <string name="waypoint_coordinates_upload_error">Fehler beim Hochladen der Koordinaten zur Webseite</string>
   <string name="waypoint_coordinates_uploading_to_website">Setze %s auf der Webseite</string>
-  <string name="waypoint_coordinates_reseting_on_website">Setze Koordinaten auf der Webseite zurück</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Koordinaten wurden auf der Webseite geändert: %s</string>
-  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">Koordinaten wurden lokal geändert: %s</string>
   <string name="waypoint_done">Fertig</string>
   <string name="waypoint_duplicate">Duplizieren</string>
   <string name="waypoint_copy_of">Kopie von</string>
@@ -723,7 +719,6 @@
   <string name="map_strategy_auto">Geschwindigkeitsabhängig</string>
   <string name="map_strategy_detailed">Detailliert</string>
   <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau. Eventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.\n\nMehr Informationen über alle Änderungen befinden sich auf der \"Über c:geo\"-Seite in der App.</string>
-  <string name="live_map_note_close">Schließen</string>
   <string name="live_map_note_dontshow">Nicht mehr anzeigen</string>
 
 <!-- search -->

@@ -148,7 +148,6 @@
   <string name="err_detail_cache_find_any">キャッシュ情報が一つも見つかりません。</string>
   <string name="err_detail_cache_find_next">次のキャッシュ情報が見つかりません。</string>
   <string name="err_detail_cache_forgot">c:geo forgot which geocache you want.</string>
-  <string name="err_detail_cache_forgot_visit">c:geo forgot which cache you visited.</string>
   <string name="err_detail_google_maps_limit_reached">オフライン用の地図のダウンロードに失敗しました。大量のデータをダウンロードしたと判断されGoogleマップ側に制限されたかもしれません。</string>
   <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした。</string>
   <string name="err_detail_no_map_static">このキャッシュのオフライン地図を見つけることができませんでした。</string>
@@ -563,8 +562,6 @@
   <string name="cache_menu_visit_offline">ログを書く(オフライン)</string>
   <string name="cache_menu_spoilers">スポイラー画像</string>
   <string name="cache_menu_around">近くのキャッシュ</string>
-  <string name="cache_menu_set_as_cache_coords">キャッシュの座標として登録</string>
-  <string name="cache_menu_upload_wpt_to_gc_com">キャッシュの座標として登録し、ウェイポイントをGeocaching.comにアップロード</string>
   <string name="cache_menu_event">カレンダーに登録</string>
   <string name="cache_menu_details">詳細</string>
   <string name="cache_menu_share">キャッシュを共有</string>
@@ -680,7 +677,6 @@
   <string name="waypoint_reset_cache_coords">キャッシュ座標をリセット</string>  
   <string name="waypoint_coordinates_has_been_reset_on_website">Webサイトでのキャッシュ座標をリセットしました。</string>
   <string name="waypoint_coordinates_being_reset_on_website">Webサイトでのキャッシュ座標をリセットしています…</string>
-  <string name="waypoint_reset_cache_coords_info">座標リセットオプション</string>
   <string name="waypoint_reset">リセット</string>
   <string name="waypoint_localy_reset_cache_coords">c:geo内部のみでリセット</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">c:geo内部とWebサイトでリセット</string>
@@ -688,9 +684,7 @@
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Webサイトではキャッシュ座標の修正に対応していません。</string>
   <string name="waypoint_coordinates_upload_error">Webサイトで座標の修正中にエラーが起こりました。</string>
   <string name="waypoint_coordinates_uploading_to_website">Webサイトに座標 %s をアップロードしています。</string>
-  <string name="waypoint_coordinates_reseting_on_website">Webサイトの初公開時の座標をリセットしています。</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Webサイトのキャッシュ座標は %s に修正されました。</string>
-  <string name="waypoint_coordinates_has_been_set_as_cache_coordinates">c:geo内部のキャッシュ座標は %s に変更されました。</string>
   <string name="waypoint_done">決定</string>
   <string name="waypoint_duplicate">複製</string>
   <string name="waypoint_copy_of">コピー ～ </string>
@@ -736,7 +730,6 @@
   <string name="map_strategy_auto">自動(移動速度に依存)</string>
   <string name="map_strategy_detailed">詳細(「速い」+詳細)</string>
   <string name="live_map_notification">現バージョンではオンライン地図の座標は正確とは限りません。不正確と思われる座標のキャッシュはオレンジ色の丸で表示されます。\nキャッシュの詳細を表示したりオフライン用に保存する際には正確な座標を取得します。\n\n詳しくはアプリ内の「c:geoについて」の変更履歴(英語)をご覧ください。</string>
-  <string name="live_map_note_close">閉じる</string>
   <string name="live_map_note_dontshow">再び表示しない</string>
 
 
