@@ -34,7 +34,7 @@
   <string name="gchq">Ústředí Groundspeaku</string>
   <string name="gps">Gps cache exhibit</string>
   <string name="unknown">Neznámý typ</string>
-  
+
   <string name="cache_size_micro">Mikro</string>
   <string name="cache_size_small">Malá</string>
   <string name="cache_size_regular">Střední</string>
@@ -66,7 +66,7 @@
   <string name="log_placed">Umístěn</string>
   <string name="log_grabbed">Převzat</string>
   <string name="log_movecollection">Přesun do sbírky</string>
-  <string name="log_moveinventory">Přesun do inventáře</string>    
+  <string name="log_moveinventory">Přesun do inventáře</string>
   <string name="log_maintained">Udržována</string>
   <string name="log_maintenance_needed">Vyžaduje údržbu</string>
   <string name="log_update">Změna souřadnic</string>
@@ -111,21 +111,21 @@
   <string name="log_stars_5_description">Vynikající</string>
   <string name="log_webcam">Vyfocen webkamerou</string>
   <string name="log_new_log">Log</string>
-  <string name="log_new_log_text">Text logu</string>      
+  <string name="log_new_log_text">Text logu</string>
   <string name="log_announcement">Oznámení</string>
   <string name="log_today">Dnes</string>
   <string name="log_yesterday">Včera</string>
   <string name="log_smilies">Smajlíci</string>
-  
+
   <!-- translation -->
   <string name="translate_to_sys_lang">Překlad do jazyka %s</string>
   <string name="translate_to_english">Překlad do angličtiny</string>
   <string name="translate_length_warning">Překlad může selhat s velkým množstvím textu.</string>
-  
+
   <!-- errors -->
   <string name="err_none">ok</string>
   <string name="err_start">komunikace nezačala</string>
-  <string name="err_parse">selhalo čtení logovací stránky</string>  
+  <string name="err_parse">selhalo čtení logovací stránky</string>
   <string name="err_server">selhalo připojení k serveru Geocaching.com (server umřel?)</string>
   <string name="err_login">nejsou uložené žádné přihlašovací údaje</string>
   <string name="err_login_failed">promiňte, ale c:geo se nemůže přihlásit.</string>
@@ -164,7 +164,7 @@
   <string name="err_location_unknown">c:geo nezná souřadnice keše</string>
   <string name="err_missing_device_name">Prosím zadejte název zařízení před registrací.</string>
   <string name="err_favorite_failed">Označení oblíbenosti keše selhalo.</string>
-  
+
   <string name="err_tb_display">"C:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
   <string name="err_tb_details_open">C:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
   <string name="err_tb_forgot_saw">C:geo zapomělo, který sledovatelný předmět jste prohlíželi.</string>
@@ -493,7 +493,7 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Zobrazit na mapě</string>
   <string name="cache_menu_map_static">Statické mapy</string>
-  <string name="cache_menu_map_ext">Zobrazit na jiné mapě</string>  
+  <string name="cache_menu_map_ext">Zobrazit na jiné mapě</string>
   <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">zapsat návštěvu</string>
   <string name="cache_menu_spoilers">obrázky</string>
@@ -643,11 +643,11 @@
   <string name="license">Licence</string>
   <string name="license_show">zobrazit licenci</string>
   <string name="license_dismiss">zamítnutí</string>
-  
+
   <!-- add-ons -->
   <string name="addon_missing_title">Chybějící modul</string>
   <string name="addon_download_prompt">Stáhnout teď z Google Play.</string>
-  
+
   <!-- export -->
   <string name="export">Export</string>
   <string name="export_exportedto">exportováno do</string>
@@ -662,11 +662,11 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
   <string name="export_gpx_to">Odeslat GPX</string>
-  
+
   <!--  attribute unknown -->
   <string name="attribute_unknown_yes">Neznámý atribut</string>
-  <string name="attribute_unknown_no">Neznámý atribut negativní</string>  
-  
+  <string name="attribute_unknown_no">Neznámý atribut negativní</string>
+
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Vstup se psy povolen</string>
   <string name="attribute_dogs_no">Vstup se psy zakázán</string>
@@ -685,7 +685,7 @@
   <string name="attribute_campfires_yes">Táborové ohně povoleny</string>
   <string name="attribute_campfires_no">Táborové ohně zakázány</string>
   <string name="attribute_rv_yes">Kamiony povoleny</string>
-  <string name="attribute_rv_no">Kamiony zakázány</string>  
+  <string name="attribute_rv_no">Kamiony zakázány</string>
   <string name="attribute_kids_yes">Doporučeno pro děti</string>
   <string name="attribute_kids_no">Nedoporučeno pro děti</string>
   <string name="attribute_onehour_yes">Trvá méně než hodinu</string>
@@ -798,7 +798,7 @@
   <string name="attribute_fuel_no">Žádná čerpací stanice poblíž</string>
   <string name="attribute_food_yes">Jídlo poblíž</string>
   <string name="attribute_food_no">Žádné jídlo poblíž</string>
-  
+
   <!-- next things -->
   <string name="legal_note">Před používáním služeb serveru Geocaching.com je potřeba souhlasit s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčním ujednáním Groundspeaku</a>.</string>
   <string name="support">podpora: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
