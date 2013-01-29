@@ -203,10 +203,16 @@
   <string name="warn_log_text_fill">prosím vyplňte nějaký text do logu.</string>
   <string name="warn_load_images">c:geo nemohlo načíst obrázky.</string>
   <string name="warn_invalid_mapfile">Vybraný soubor není platným souborem mapsforge verze 0.3.0.\nOffline nejsou k dispozici.</string>
+  <string name="warn_deprecated_mapfile">Používáte zastaralou verzi(0.2.4) mapsforge offline mapového souboru souboru 0.2.4 map file.\nZvažte stažení nové verze pro mapsforge 0.3.0 map.\nPodpora map pro verzi 0.2.4 bude ukončena příštím vydáním aplikace.</string>
+  <string name="warn_nonexistant_mapfile">Vybraný mapový soubor neexistuje.\nOffline mapy nejsou k dispozici.</string>
+  <string name="warn_rendertheme_missing">Skin pro mapu není k dispozici.</string>
+  
   <string name="info_log_posted">c:geo úspěšně zaslalo log.</string>
   <string name="info_log_saved">c:geo úspěšně uložilo log.</string>
   <string name="info_log_cleared">Log byl vyprázdněn.</string>
   <string name="info_log_type_changed">Typ logu byl změněn!</string>
+  
+  <string name="info_storing_static_maps">Zkouším uložit statické mapy</string>
 
   <!-- location service -->
   <string name="loc_last">poslední známá</string>
@@ -280,6 +286,7 @@
   <string name="caches_drop_stored">Smazat uložené</string>
   <string name="caches_drop_progress">Mažu keše</string>
   <string name="caches_drop_all_and_list">Vymaž všechny a zruš seznam</string>
+  <string name="caches_delete_events">Vymaž proběhlé eventy</string>
   <string name="caches_refresh_selected">Aktualizovat vybrané</string>
   <string name="caches_refresh_all">Aktualizovat vše</string>
   <string name="caches_move_selected">Přesuň vybrané</string>
@@ -302,11 +309,13 @@
   <!-- caches lists -->
   <string name="list_menu">Seznam</string>
   <string name="list_menu_create">Vytvoř nový seznam</string>
+  <string name="list_menu_all_lists">Všechny keše</string>
   <string name="list_menu_drop">Zahoď aktuální seznam</string>
   <string name="list_menu_change">Změň seznam</string>
   <string name="list_menu_rename">Přejmenuj aktuální seznam</string>
   <string name="list_title">Vyber seznam</string>
   <string name="list_inbox">Uložené</string>
+  <string name="list_all_lists">Všechny keše</string>
   <string name="list_dialog_create_title">Nový seznam</string>
   <string name="list_dialog_create">Vytvoř</string>
   <string name="list_dialog_cancel">Zruš</string>
@@ -330,6 +339,10 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_oc">opencaching.de</string>
+  <string name="init_oc_activate">Aktivuj opencaching.de na živé mapě a v hledání</string>
+  <string name="init_oc_username_description">Vložte svůj přístup na opencaching.de pro povolení možnosti označovat nálezy.</string>
+  <string name="init_oc_username">Vložte své uživatelské jméno</string>
   <string name="init_gcvote">gcvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Uživatelské jméno</string>
@@ -353,6 +366,7 @@
   <string name="init_signature_template_datetime">Datum a čas</string>
   <string name="init_signature_template_user">Uživatel</string>
   <string name="init_signature_template_number">Číslo (pořadí nálezu)</string>
+  <string name="init_signature_template_owner">Vlastník</string>
   <string name="init_details">Detaily keše</string>
   <string name="init_ratingwanted">Načti hodnocení keše z GCvote.com</string>
   <string name="init_elevationwanted">Načti výšková data ke keši</string>
@@ -396,7 +410,13 @@
   <string name="init_mapsources">Zdroje map</string>
   <string name="init_mapsources_description">Zde můžete vybrat zdroj map. Alternativou ke Google maps jsou různé typy OpenStreetMap, jakož i offline mapové podklady (Více viz na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyber zdroj mapy</string>
+  <string name="init_map_directory_description">Adresář s offline mapami</string>
+  <string name="init_gpx_exportdir">Adresář pro GPX Export</string>
+  <string name="init_gpx_importdir">Adresář pro GPX Import</string>
+  <string name="init_gpx_exportdir_description">Zde můžete vybrat adresář pro GPX exporty.</string>
+  <string name="init_gpx_importdir_description">Zde můžete vybrat adresář pro GPX importy.</string>
   <string name="init_maptrail">Zobrazuj trasu na mapě</string>
+  <string name="init_share_after_export">Zobrazuj nabídku pro sdílení po GPX exportu</string>
   <string name="init_trackautovisit">Nastav sledovatelné předměty na \"Návštěva\" jako výchozí.</string>
   <string name="init_sigautoinsert">Automaticky vkládej podpis</string>
   <string name="init_loaddirectionimg">V případě potřeby stáhni směrový obrázek (jen Basic Member)</string>
@@ -410,7 +430,22 @@
   <string name="init_dbonsdcard_title">Umístění databáze</string>
   <string name="init_dbonsdcard_note">Databáze c:geo může být umístěna na SD kartě. Ušetříte tím část interní paměti, avšak za cenu případného snížení rychlosti aplikace. Bez SD karty aplikace nebude následně fungovat.</string>
   <string name="init_dbonsdcard">Databáze na SD kartě</string>
+  <string name="init_dbmove_dbmove">Přesouvám databázi</string>
+  <string name="init_dbmove_running">Přesouvám databázi</string>
+  <string name="init_dbmove_success">Databáze byla úspěšně přesunuta.</string>
+  <string name="init_dbmove_failed">Přesun databáze se nezdařil.</string>
+  <string name="init_plain_logs">Zobrazuj logy s barvami</string>
+  <string name="init_use_native_ua">Tvářit se jako webový prohlížeč. Řeší problémy v některých sítích.</string>
+  <string name="init_rendertheme_folder">Adresář s tématy map (nepovinné)</string>
 
+  <!-- map sources -->
+  <string name="map_source_google_map">Google: Mapa</string>
+  <string name="map_source_google_satellite">Google: Satelitní</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+  <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
+    
+  <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Jméno vašeho zařízení:</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožnuje stahování keší pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečtěte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registraci proveďte pouze pokud potřebujete send2cgeo. c:geo bude normálně fungovat i bez registrace.</string>
   <string name="init_sendToCgeo_register">Požádat o registraci</string>
