@@ -514,8 +514,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     createResetCacheCoordinatesDialog(cache, waypointReset).show();
                 }
                 else {
-                    final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
-                    final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, progressDialog, false);
+                    final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
+                    final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
                     new ResetCoordsThread(cache, handler, waypointReset, true, false, progressDialog).start();
                 }
                 break;
@@ -2231,7 +2231,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      */
     private AlertDialog createResetCacheCoordinatesDialog(final cgCache cache, final Waypoint wpt) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.waypoint_reset_cache_coords);
 
         String[] items = new String[] {res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords)};
