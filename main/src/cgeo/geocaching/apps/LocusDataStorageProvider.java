@@ -4,8 +4,6 @@ import menion.android.locus.addon.publiclib.geoData.PointsData;
 import menion.android.locus.addon.publiclib.utils.DataCursor;
 import menion.android.locus.addon.publiclib.utils.DataStorage;
 
-import org.apache.commons.collections.CollectionUtils;
-
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -23,21 +21,14 @@ public class LocusDataStorageProvider extends ContentProvider {
     public Cursor query(Uri aUri, String[] aProjection, String aSelection,
             String[] aSelectionArgs, String aSortOrder) {
 
-        DataCursor cursor = new DataCursor(new String[] { "data" });
+        final DataCursor cursor = new DataCursor(new String[] { "data" });
 
-        ArrayList<PointsData> data = DataStorage.getData();
-        if (CollectionUtils.isEmpty(data)) {
-            return cursor;
-        }
-
-        for (int i = 0; i < data.size(); i++) {
-            // get byte array
+        for (final PointsData item : DataStorage.getData()) {
             final Parcel par = Parcel.obtain();
-            data.get(i).writeToParcel(par, 0);
-            final byte[] byteData = par.marshall();
+            item.writeToParcel(par, 0);
+            // add byte array to row
+            cursor.addRow(new Object[] { par.marshall() });
             par.recycle();
-            // add to row
-            cursor.addRow(new Object[] { byteData });
         }
         // data filled to cursor, clear reference to prevent some memory issue
         DataStorage.clearData();
