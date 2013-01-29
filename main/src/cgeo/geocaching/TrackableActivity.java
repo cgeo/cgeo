@@ -52,7 +52,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         private final int resId;
 
-        private Page(final int resId) {
+        Page(final int resId) {
             this.resId = resId;
         }
     }
