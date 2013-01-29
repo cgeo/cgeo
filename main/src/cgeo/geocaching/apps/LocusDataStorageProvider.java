@@ -10,8 +10,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 
-import java.util.ArrayList;
-
 /**
  * code provided by menion - developer of Locus
  */
