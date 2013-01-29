@@ -32,9 +32,10 @@ public class LocusDataStorageProvider extends ContentProvider {
 
         for (int i = 0; i < data.size(); i++) {
             // get byte array
-            Parcel par = Parcel.obtain();
+            final Parcel par = Parcel.obtain();
             data.get(i).writeToParcel(par, 0);
-            byte[] byteData = par.marshall();
+            final byte[] byteData = par.marshall();
+            par.recycle();
             // add to row
             cursor.addRow(new Object[] { byteData });
         }
