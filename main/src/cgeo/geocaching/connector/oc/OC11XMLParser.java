@@ -1,10 +1,13 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
@@ -15,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import android.content.res.Resources;
 import android.sax.Element;
 import android.sax.EndElementListener;
 import android.sax.EndTextElementListener;
@@ -42,6 +46,7 @@ public class OC11XMLParser {
     private static Pattern STRIP_DATE = Pattern.compile("\\+0([0-9]){1}\\:00");
     private static Pattern LOCAL_URL = Pattern.compile("href=\"(.*)\"");
     private static final int CACHE_PARSE_LIMIT = 250;
+    private static final Resources res = cgeoapplication.getInstance().getResources();
 
     private static class CacheHolder {
         public cgCache cache;
@@ -289,7 +294,7 @@ public class OC11XMLParser {
                 if (attrs.getIndex("gccom") > -1) {
                     String gccode = attrs.getValue("gccom");
                     if (!StringUtils.isBlank(gccode)) {
-                        cacheHolder.cache.setDescription(String.format("Listed on geocaching com: <a href=\"http://coord.info/%s\">%s</a><br /><br />", gccode, gccode));
+                        cacheHolder.cache.setDescription(res.getString(R.string.cache_listed_on, GCConnector.getInstance().getName()) + ": <a href=\"http://coord.info/" + gccode + "\">" + gccode + "</a><br /><br />");
                     }
                 }
             }
