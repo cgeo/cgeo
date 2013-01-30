@@ -495,7 +495,7 @@
   <string name="cache_personal_note">Notatka osobista</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Długi opis</string>
-  <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia geocaching.com.</string> 
+  <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string> 
   <string name="cache_watchlist_on">Ta skrzynka jest na Twojej liście obserwowanych.</string>
   <string name="cache_watchlist_not_on">Ta skrzynka nie jest na Twojej liście obserwowanych.</string>
   <string name="cache_watchlist_add">Dodaj do listy obserwowanych</string>

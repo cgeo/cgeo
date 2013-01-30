@@ -463,7 +463,7 @@
   <string name="cache_personal_note">Osobní poznámka</string>
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlouhý popis</string>
-  <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na geocaching.com, aby bylo správně zobrazené.</string>
+  <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>
   <string name="cache_watchlist_on">Tato je ve vašem watchlistu.</string>
   <string name="cache_watchlist_not_on">Tato keš není ve vašem watchlistu.</string>
   <string name="cache_watchlist_add">Přidej na Watchlist</string>

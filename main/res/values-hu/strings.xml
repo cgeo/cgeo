@@ -491,7 +491,7 @@
   <string name="cache_personal_note_edit">Szerkesztés</string> 
   <string name="cache_description">Leírás</string>
   <string name="cache_description_long">Hosszú leírás</string>
-  <string name="cache_description_table_note">A leírás táblázatot is tartalmaz aminek helyes megjelenítéséhez szükség lehet a geocaching.com meglátogatására.</string> 
+  <string name="cache_description_table_note">A leírás táblázatot is tartalmaz aminek helyes megjelenítéséhez szükség lehet a %s meglátogatására.</string> 
   <string name="cache_watchlist_on">Ez a láda a figyelőlistádon van.</string>
   <string name="cache_watchlist_not_on">Ez a láda nincs a figyelőlistádon.</string>
   <string name="cache_watchlist_add">Figyelőlistához adás</string>

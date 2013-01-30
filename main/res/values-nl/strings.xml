@@ -455,7 +455,7 @@
   <string name="cache_personal_note">Persoonlijke aantekening</string>
   <string name="cache_description">Omschrijving</string>
   <string name="cache_description_long">Lange omschrijving</string>
-  <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op geocaching.com bekeken moet worden.</string>
+  <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op %s bekeken moet worden.</string>
   <string name="cache_watchlist_on">Deze cache komt voor op je watchlist.</string>
   <string name="cache_watchlist_not_on">Deze cache komt niet voor op je watchlist.</string>
   <string name="cache_watchlist_add">Voeg aan watchlist toe</string>

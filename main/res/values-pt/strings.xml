@@ -492,7 +492,7 @@
   <string name="cache_personal_note_edit">Editar</string>
   <string name="cache_description">Descrição</string>
   <string name="cache_description_long">Descrição longa</string>
-  <string name="cache_description_table_note">A descrição contém a formatação da tabela que pode ser necessário para ser vista correctamente em Geocaching.com.</string>
+  <string name="cache_description_table_note">A descrição contém a formatação da tabela que pode ser necessário para ser vista correctamente em %s.</string>
   <string name="cache_watchlist_on">Esta cache está na sua lista de observação.</string>
   <string name="cache_watchlist_not_on">Esta cache não está na sua lista de observação.</string>
   <string name="cache_watchlist_add">Adicionar à lista de observação</string>

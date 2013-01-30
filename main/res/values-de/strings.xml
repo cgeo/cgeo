@@ -496,7 +496,7 @@
   <string name="cache_personal_note_edit">Bearbeiten</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
-  <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf der Webseite korrekt angezeigt werden.</string>
+  <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>
   <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
   <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
   <string name="cache_watchlist_add">Hinzufügen</string>

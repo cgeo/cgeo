@@ -475,7 +475,7 @@
   <string name="cache_personal_note">Note personnelle</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Description longue</string>
-  <string name="cache_description_table_note">La description contient des informations de formattages qui nécessitent possiblement d\'être vues sur le site geocaching.com pour être affichées correctement.</string>
+  <string name="cache_description_table_note">La description contient des informations de formattages qui nécessitent possiblement d\'être vues sur le site %s pour être affichées correctement.</string>
   <string name="cache_watchlist_on">Cette cache est dans votre liste de suivi.</string>
   <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
   <string name="cache_watchlist_add">Ajouter à votre liste de suivi</string>

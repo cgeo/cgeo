@@ -500,7 +500,7 @@
   <string name="cache_personal_note_edit">Redigera</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
-  <string name="cache_description_table_note">Varning från c:geo! Beskrivningen innehåller HTML-tabeller som eventuellt kan behöva öppnas i en webbläsare för att visas på önskat sätt.</string>
+  <string name="cache_description_table_note">Varning från c:geo! Beskrivningen innehåller HTML-tabeller som eventuellt kan behöva öppnas i en webbläsare för att visas på önskat sätt %s.</string>
   <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
   <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
   <string name="cache_watchlist_add">Lägg till i watchlist</string>
