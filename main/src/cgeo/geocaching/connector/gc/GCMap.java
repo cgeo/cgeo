@@ -226,7 +226,7 @@ public class GCMap {
                 if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {
                     exclude = true;
                 }
-                if (Settings.getCacheType() != CacheType.ALL && Settings.getCacheType() != cache.getType() && cache.getType() != CacheType.UNKNOWN) { // workaround for BM
+                if (!Settings.getCacheType().contains(cache) && cache.getType() != CacheType.UNKNOWN) { // workaround for BM
                     exclude = true;
                 }
                 if (!exclude) {

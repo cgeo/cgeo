@@ -87,7 +87,7 @@ public class CacheCache {
                 Log.e("CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
                 continue;
             }
-            if ((CacheType.ALL == cacheType || cache.getType() == cacheType) && viewport.contains(cache)) {
+            if (cacheType.contains(cache) && viewport.contains(cache)) {
                 geocodes.add(cache.getGeocode());
             }
         }

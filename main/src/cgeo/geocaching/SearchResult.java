@@ -197,7 +197,7 @@ public class SearchResult implements Parcelable {
             // Is there any reason to exclude the cache from the list?
             final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
                     (excludeMine && (cache.isOwner() || cache.isFound())) ||
-                    (cacheType != CacheType.ALL && cacheType != cache.getType());
+                    (!cacheType.contains(cache));
             if (!excludeCache) {
                 result.addCache(cache);
                 cachesForVote.add(cache);

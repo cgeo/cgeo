@@ -1,5 +1,7 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.cgCache;
+
 import android.test.AndroidTestCase;
 
 import java.util.Locale;
@@ -34,5 +36,14 @@ public class CacheTypeTest extends AndroidTestCase {
             assertEquals(type, CacheType.getByPattern(type.pattern.toLowerCase(Locale.US)));
             assertEquals(type, CacheType.getByPattern(type.pattern.toUpperCase(Locale.US)));
         }
+    }
+
+    public static void testContainsCache() throws Exception {
+        final cgCache traditional = new cgCache();
+        traditional.setType(CacheType.TRADITIONAL);
+
+        assertTrue(CacheType.ALL.contains(traditional));
+        assertTrue(CacheType.TRADITIONAL.contains(traditional));
+        assertFalse(CacheType.MYSTERY.contains(traditional));
     }
 }
