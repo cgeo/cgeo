@@ -232,6 +232,7 @@ public class OC11XMLParser {
                 if (StringUtils.isNotBlank(cache.getGeocode())
                         && !coords.equals(Geopoint.ZERO)
                         && !cache.isArchived()
+                        && Settings.getCacheType().contains(cache)
                         && caches.size() < CACHE_PARSE_LIMIT) {
                     cache.setCoords(coords);
                     cache.setDetailedUpdatedNow();
