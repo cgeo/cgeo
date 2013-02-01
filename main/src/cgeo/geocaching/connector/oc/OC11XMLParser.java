@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
@@ -48,6 +49,8 @@ public class OC11XMLParser {
     private static final int CACHE_PARSE_LIMIT = 250;
     private static final Resources res = cgeoapplication.getInstance().getResources();
 
+    private static ImageHolder imageHolder = null;
+
     private static class CacheHolder {
         public cgCache cache;
         public String latitude;
@@ -64,6 +67,13 @@ public class OC11XMLParser {
         public String shortDesc;
         public String desc;
         public String hint;
+    }
+
+    private static class ImageHolder {
+        public String url;
+        public String cacheId;
+        protected String title;
+        protected boolean isSpoiler;
     }
 
     private static Date parseFullDate(final String date) {
@@ -532,6 +542,70 @@ public class OC11XMLParser {
             @Override
             public void end(String logText) {
                 logHolder.logEntry.log = stripMarkup(logText);
+            }
+        });
+
+        // pictures
+        final Element picture = root.getChild("picture");
+
+        picture.setStartElementListener(new StartElementListener() {
+
+            @Override
+            public void start(Attributes attrs) {
+                imageHolder = new ImageHolder();
+            }
+        });
+
+        picture.setEndElementListener(new EndElementListener() {
+
+            @Override
+            public void end() {
+                if (imageHolder.isSpoiler) {
+                    final cgCache cache = caches.get(imageHolder.cacheId);
+                    if (cache != null) {
+                        Image spoiler = new Image(imageHolder.url, imageHolder.title);
+                        cache.addSpoiler(spoiler);
+                    }
+                }
+            }
+        });
+
+        // picture.object
+        picture.getChild("object").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String body) {
+                imageHolder.cacheId = StringUtils.trim(body);
+            }
+        });
+
+        // picture.title
+        picture.getChild("title").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String body) {
+                imageHolder.title = StringUtils.trim(body);
+            }
+        });
+
+        // picture.url
+        picture.getChild("url").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String body) {
+                imageHolder.url = StringUtils.trim(body);
+            }
+        });
+
+        // picture.attributes
+        picture.getChild("attributes").setStartElementListener(new StartElementListener() {
+
+            @Override
+            public void start(Attributes attributes) {
+                if (attributes.getIndex("spoiler") > -1) {
+                    String spoiler = attributes.getValue("spoiler");
+                    imageHolder.isSpoiler = ("1".equals(spoiler));
+                }
             }
         });
 
