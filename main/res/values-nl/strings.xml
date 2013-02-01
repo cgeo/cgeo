@@ -255,7 +255,7 @@
   <string name="caches_sort_size">formaat</string>
   <string name="caches_sort_favorites">populariteit</string>
   <string name="caches_sort_name">naam</string>
-  <string name="caches_sort_gccode">GC-code</string>
+  <string name="caches_sort_geocode">geocode</string>
   <string name="caches_sort_rating">waardering</string>
   <string name="caches_sort_vote">stemmen (eigen waardering)</string>
   <string name="caches_sort_inventory">aantal items</string>
@@ -633,8 +633,8 @@
   <string name="search_coordinates_button">Zoeken op coördinaten</string>
   <string name="search_address">Adres</string>
   <string name="search_address_button">Zoeken op adres</string>
-  <string name="search_gc">Geocode</string>
-  <string name="search_gc_button">Zoeken op geocode</string>
+  <string name="search_geo">Geocode</string>
+  <string name="search_geo_button">Zoeken op geocode</string>
   <string name="search_kw">Trefwoorden</string>
   <string name="search_kw_prefill">Trefwoord</string>
   <string name="search_kw_button">Zoeken op trefwoord</string>

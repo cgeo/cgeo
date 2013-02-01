@@ -259,8 +259,8 @@
   <string name="search_coordinates_button">Søg fra koordinater</string>
   <string name="search_address">Adresse</string>
   <string name="search_address_button">Søg adresse</string>
-  <string name="search_gc">Geocode</string>
-  <string name="search_gc_button">Søg geocode</string>
+  <string name="search_geo">Geocode</string>
+  <string name="search_geo_button">Søg geocode</string>
   <string name="search_kw">Nøgleord</string>
   <string name="search_kw_prefill">Nøgleord</string>
   <string name="search_kw_button">Søg efter nøgleord</string>

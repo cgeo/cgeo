@@ -267,7 +267,7 @@
   <string name="caches_sort_size">Größe</string>
   <string name="caches_sort_favorites">Beliebtheit</string>
   <string name="caches_sort_name">Name</string>
-  <string name="caches_sort_gccode">GC-Code</string>
+  <string name="caches_sort_geocode">Geo-Code</string>
   <string name="caches_sort_rating">Bewertung</string>
   <string name="caches_sort_vote">Eigene Bewertung</string>
   <string name="caches_sort_inventory">Inventaranzahl</string>
@@ -729,8 +729,8 @@
   <string name="search_coordinates_button">Suche mit Koordinaten</string>
   <string name="search_address">Adresse</string>
   <string name="search_address_button">Suche mit Adresse</string>
-  <string name="search_gc">GC-Code</string>
-  <string name="search_gc_button">Suche mit GC-Code</string>
+  <string name="search_geo">Geo-Code</string>
+  <string name="search_geo_button">Suche mit Geo-Code</string>
   <string name="search_kw">Stichworte</string>
   <string name="search_kw_prefill">Stichwörter</string>
   <string name="search_kw_button">Suche mit Stichwörtern</string>

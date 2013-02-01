@@ -265,7 +265,7 @@
   <string name="caches_sort_size">Velikosti</string>
   <string name="caches_sort_favorites">Oblíbenosti</string>
   <string name="caches_sort_name">Jména</string>
-  <string name="caches_sort_gccode">GC-kódu</string>
+  <string name="caches_sort_geocode">Geokódu</string>
   <string name="caches_sort_rating">Hodnocení</string>
   <string name="caches_sort_vote">Hlasů (vlastní hodnocení)</string>
   <string name="caches_sort_inventory">Počtu položek v inventáři</string>
@@ -736,8 +736,8 @@
   <string name="search_coordinates_button">Hledat podle souřadnic</string>
   <string name="search_address">Adresa</string>
   <string name="search_address_button">Hledat podle adresy</string>
-  <string name="search_gc">Geokód</string>
-  <string name="search_gc_button">Hledat podle geokódu</string>
+  <string name="search_geo">Geokód</string>
+  <string name="search_geo_button">Hledat podle geokódu</string>
   <string name="search_kw">Klíčová slova</string>
   <string name="search_kw_prefill">Klíčové slovo</string>
   <string name="search_kw_button">Hledat dle klíčového slova</string>

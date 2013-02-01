@@ -268,7 +268,6 @@
   <string name="caches_sort_size">Storlek</string>
   <string name="caches_sort_favorites">Favoriter</string>
   <string name="caches_sort_name">Namn</string>
-  <string name="caches_sort_gccode">GC-kod (ålder)</string>
   <string name="caches_sort_rating">Betyg (GC-vote)</string>
   <string name="caches_sort_vote">Betyg (eget)</string>
   <string name="caches_sort_inventory">Antal trackable</string>
@@ -728,8 +727,6 @@
   <string name="search_coordinates_button">Sök med koordinater</string>
   <string name="search_address">Adress</string>
   <string name="search_address_button">Sök med adress</string>
-  <string name="search_gc">GC-kod</string>
-  <string name="search_gc_button">Sök med GC-kod</string>
   <string name="search_kw">Nyckelord</string>
   <string name="search_kw_prefill">Nyckelord</string>
   <string name="search_kw_button">Sök med nyckelord</string>

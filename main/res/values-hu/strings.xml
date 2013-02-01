@@ -264,7 +264,6 @@
   <string name="caches_sort_size">méret</string>
   <string name="caches_sort_favorites">sikeresség</string>
   <string name="caches_sort_name">név</string>
-  <string name="caches_sort_gccode">GC-kód</string>
   <string name="caches_sort_rating">osztályzat</string>
   <string name="caches_sort_vote">szavazat (saját osztályzat)</string>
   <string name="caches_sort_inventory">tárgyak száma</string>
@@ -707,8 +706,6 @@
   <string name="search_coordinates_button">Keresés koordinátákkal</string>
   <string name="search_address">Cím</string>
   <string name="search_address_button">Keresés címmel</string>
-  <string name="search_gc">GC-kód</string>
-  <string name="search_gc_button">Keresés GC-kóddal</string>
   <string name="search_kw">Kulcsszavak</string>
   <string name="search_kw_prefill">Kulcsszó</string>
   <string name="search_kw_button">Keresés kulcsszóval</string>

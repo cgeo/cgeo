@@ -270,7 +270,6 @@
   <string name="caches_sort_size">サイズ</string>
   <string name="caches_sort_favorites">人気</string>
   <string name="caches_sort_name">名前</string>
-  <string name="caches_sort_gccode">GCコード</string>
   <string name="caches_sort_rating">評価</string>
   <string name="caches_sort_vote">Vote (Own Rating)</string>
   <string name="caches_sort_inventory">目録の数</string>
@@ -740,8 +739,6 @@
   <string name="search_coordinates_button">座標で検索</string>
   <string name="search_address">住所</string>
   <string name="search_address_button">住所で検索</string>
-  <string name="search_gc">GCコード</string>
-  <string name="search_gc_button">GCコードで検索</string>
   <string name="search_kw">キーワード</string>
   <string name="search_kw_prefill">キーワード</string>
   <string name="search_kw_button">キーワードで検索</string>

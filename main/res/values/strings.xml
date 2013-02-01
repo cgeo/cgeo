@@ -270,7 +270,7 @@
   <string name="caches_sort_size">Size</string>
   <string name="caches_sort_favorites">Popularity</string>
   <string name="caches_sort_name">Name</string>
-  <string name="caches_sort_gccode">GC-Code</string>
+  <string name="caches_sort_geocode">Geo Code</string>
   <string name="caches_sort_rating">Rating</string>
   <string name="caches_sort_vote">Vote (Own Rating)</string>
   <string name="caches_sort_inventory">Count of Inventory</string>
@@ -578,7 +578,7 @@
   <string name="cache_status_disabled">Disabled</string>
   <string name="cache_status_premium">Premium Members only</string>
   <string name="cache_status_not_premium">All Members Access</string>
-  <string name="cache_geocode">GC-code</string>
+  <string name="cache_geocode">Geo code</string>
   <string name="cache_name">Name</string>
   <string name="cache_type">Type</string>
   <string name="cache_size">Size</string>
@@ -741,8 +741,8 @@
   <string name="search_coordinates_button">Search by coordinates</string>
   <string name="search_address">Address</string>
   <string name="search_address_button">Search by address</string>
-  <string name="search_gc">GC-code</string>
-  <string name="search_gc_button">Search by GC-code</string>
+  <string name="search_geo">Geo code</string>
+  <string name="search_geo_button">Search by geo code</string>
   <string name="search_kw">Keywords</string>
   <string name="search_kw_prefill">Keyword</string>
   <string name="search_kw_button">Search by keyword</string>

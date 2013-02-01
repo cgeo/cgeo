@@ -43,7 +43,7 @@ public class ComparatorUserInterface {
         register(R.string.caches_sort_date_hidden, DateComparator.class);
         register(R.string.caches_sort_difficulty, DifficultyComparator.class);
         register(R.string.caches_sort_finds, FindsComparator.class);
-        register(R.string.caches_sort_gccode, GeocodeComparator.class);
+        register(R.string.caches_sort_geocode, GeocodeComparator.class);
         register(R.string.caches_sort_inventory, InventoryComparator.class);
         register(R.string.caches_sort_name, NameComparator.class);
         register(R.string.caches_sort_favorites, PopularityComparator.class);

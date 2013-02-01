@@ -89,13 +89,13 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/search_gc" />
+                    android:text="@string/search_geo" />
             </RelativeLayout>
 
             <AutoCompleteTextView
                 android:id="@+id/geocode"
                 style="@style/edittext_full"
-                android:hint="@string/search_gc"
+                android:hint="@string/search_geo"
                 android:imeOptions="actionGo"
                 android:inputType="textCapCharacters"
                 android:text="GC"
@@ -104,7 +104,7 @@
             <Button
                 android:id="@+id/display_geocode"
                 style="@style/button_full"
-                android:text="@string/search_gc_button" />
+                android:text="@string/search_geo_button" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >

@@ -264,7 +264,7 @@
   <string name="caches_sort_size">veľkosti</string>
   <string name="caches_sort_favorites">obľúbenosti</string>
   <string name="caches_sort_name">názvu</string>
-  <string name="caches_sort_gccode">GC kódu</string>
+  <string name="caches_sort_geocode">Geokódu</string>
   <string name="caches_sort_rating">hodnotenia</string>
   <string name="caches_sort_vote">hlasovania (vlastného hodn.)</string>
   <string name="caches_sort_inventory">počtu položiek v skrýši</string>
@@ -709,8 +709,8 @@
   <string name="search_coordinates_button">Hľadať podľa súradníc</string>
   <string name="search_address">Adresa</string>
   <string name="search_address_button">Hľadať podľa adresy</string>
-  <string name="search_gc">Geokód</string>
-  <string name="search_gc_button">Hľadať podľa Geokódu</string>
+  <string name="search_geo">Geokód</string>
+  <string name="search_geo_button">Hľadať podľa Geokódu</string>
   <string name="search_kw">Kľúčové slová</string>
   <string name="search_kw_prefill">Kľúčové slová</string>
   <string name="search_kw_button">Hľadať podľa kľúčových slov</string>

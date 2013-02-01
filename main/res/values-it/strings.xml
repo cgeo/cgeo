@@ -270,7 +270,6 @@
   <string name="caches_sort_size">Dimensione</string>
   <string name="caches_sort_favorites">Popolarità</string>
   <string name="caches_sort_name">Nome</string>
-  <string name="caches_sort_gccode">GC-code</string>
   <string name="caches_sort_rating">Voto</string>
   <string name="caches_sort_vote">Il tuo voto</string>
   <string name="caches_sort_inventory">Oggetti trackables</string>
@@ -727,8 +726,6 @@
   <string name="search_coordinates_button">Cerca per coordinate</string>
   <string name="search_address">Indirizzo</string>
   <string name="search_address_button">Cerca per indirizzo</string>
-  <string name="search_gc">GC-code</string>
-  <string name="search_gc_button">Cerca per GC-code</string>
   <string name="search_kw">Parole chiave</string>
   <string name="search_kw_prefill">Parola chiave</string>
   <string name="search_kw_button">Cerca per parola chiave</string>
