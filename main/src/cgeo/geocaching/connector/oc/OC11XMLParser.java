@@ -58,6 +58,7 @@ public class OC11XMLParser {
     }
 
     private static class CacheLog {
+        public String id;
         public String cacheId;
         public LogEntry logEntry;
     }
@@ -71,9 +72,9 @@ public class OC11XMLParser {
 
     private static class ImageHolder {
         public String url;
-        public String cacheId;
+        public String objectId;
         protected String title;
-        protected boolean isSpoiler;
+        protected boolean isSpoiler = false;
     }
 
     private static Date parseFullDate(final String date) {
@@ -215,6 +216,7 @@ public class OC11XMLParser {
     public static Collection<cgCache> parseCaches(final InputStream stream) throws IOException {
 
         final Map<String, cgCache> caches = new HashMap<String, cgCache>();
+        final Map<String, LogEntry> logs = new HashMap<String, LogEntry>();
 
         final CacheHolder cacheHolder = new CacheHolder();
         final CacheLog logHolder = new CacheLog();
@@ -478,6 +480,7 @@ public class OC11XMLParser {
             public void end() {
                 final cgCache cache = caches.get(logHolder.cacheId);
                 if (cache != null && logHolder.logEntry.type != LogType.UNKNOWN) {
+                    logs.put(logHolder.id, logHolder.logEntry);
                     cache.getLogs().prepend(logHolder.logEntry);
                     if (logHolder.logEntry.type == LogType.FOUND_IT
                             && StringUtils.equalsIgnoreCase(logHolder.logEntry.author, Settings.getOCConnectorUserName())) {
@@ -485,6 +488,15 @@ public class OC11XMLParser {
                         cache.setVisitedDate(logHolder.logEntry.date);
                     }
                 }
+            }
+        });
+
+        // cachelog.id
+        cacheLog.getChild("id").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String body) {
+                logHolder.id = StringUtils.trim(body);
             }
         });
 
@@ -561,10 +573,16 @@ public class OC11XMLParser {
             @Override
             public void end() {
                 if (imageHolder.isSpoiler) {
-                    final cgCache cache = caches.get(imageHolder.cacheId);
+                    final cgCache cache = caches.get(imageHolder.objectId);
                     if (cache != null) {
                         Image spoiler = new Image(imageHolder.url, imageHolder.title);
                         cache.addSpoiler(spoiler);
+                    }
+                }
+                else {
+                    final LogEntry log = logs.get(imageHolder.objectId);
+                    if (log != null) {
+                        log.addLogImage(new Image(imageHolder.url, imageHolder.title));
                     }
                 }
             }
@@ -575,7 +593,7 @@ public class OC11XMLParser {
 
             @Override
             public void end(String body) {
-                imageHolder.cacheId = StringUtils.trim(body);
+                imageHolder.objectId = StringUtils.trim(body);
             }
         });
 
