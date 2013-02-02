@@ -53,6 +53,7 @@
   <string name="wp_pkg">Parkplatz</string>
   <string name="wp_trailhead">Ausgangspunkt</string>
   <string name="wp_waypoint">Referenzpunkt</string>
+  <string name="wp_original">Ursprüngliche Koordinaten</string>
 
   <!-- logs -->
   <string name="log_found">Gefunden</string>
@@ -671,6 +672,7 @@
   <string name="waypoint_reset">Zurücksetzen</string>
   <string name="waypoint_localy_reset_cache_coords">Koodinaten lokal zurücksetzen</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Koordinaten lokal und auf Webseite zurücksetzen</string>
+  <string name="waypoint_being_saved">Wegpunkt wird gespeichert…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Cache-Koordinaten auf der Webseite konnten nicht zurückgesetzt werden</string>
   <string name="waypoint_coordinates_upload_error">Fehler beim Hochladen der Koordinaten zur Webseite</string>
   <string name="waypoint_coordinates_uploading_to_website">Setze %s auf der Webseite</string>
