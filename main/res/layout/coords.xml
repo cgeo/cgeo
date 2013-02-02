@@ -3,7 +3,6 @@
     android:id="@+id/linearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="?background_color"
     android:orientation="vertical" >
 
     <LinearLayout style="@style/action_bar" >
