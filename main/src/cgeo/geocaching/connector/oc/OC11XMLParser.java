@@ -9,6 +9,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
@@ -213,6 +214,8 @@ public class OC11XMLParser {
         desc.hint = StringUtils.EMPTY;
     }
 
+    protected static int attributeId;
+
     public static Collection<cgCache> parseCaches(final InputStream stream) throws IOException {
 
         final Map<String, cgCache> caches = new HashMap<String, cgCache>();
@@ -392,11 +395,34 @@ public class OC11XMLParser {
         });
 
         // cache.attributes.attribute
-        cacheNode.getChild("attributes").getChild("attribute").setEndTextElementListener(new EndTextElementListener() {
+        final Element attributeNode = cacheNode.getChild("attributes").getChild("attribute");
+
+        attributeNode.setStartElementListener(new StartElementListener() {
+
+            @Override
+            public void start(Attributes attributes) {
+                if (attributes.getIndex("id") > -1) {
+                    try {
+                        attributeId = Integer.parseInt(attributes.getValue("id"));
+                    } catch (NumberFormatException e) {
+                        Log.w(String.format("Failed to parse attribute id of cache '%s'.", cacheHolder.cache.getGeocode()));
+                    }
+                }
+            }
+        });
+
+        attributeNode.setEndTextElementListener(new EndTextElementListener() {
             @Override
             public void end(String body) {
-                if (StringUtils.isNotBlank(body)) {
-                    cacheHolder.cache.getAttributes().add(body.trim());
+                CacheAttribute attribute = AttributeMapper.getAttribute(attributeId);
+                if (attribute != null) {
+                    // semantic of attributes on opencaching is always "yes"
+                    cacheHolder.cache.getAttributes().add(attribute.getAttributeName(true));
+                }
+                else {
+                    if (StringUtils.isNotBlank(body)) {
+                        cacheHolder.cache.getAttributes().add(body.trim());
+                    }
                 }
             }
         });
