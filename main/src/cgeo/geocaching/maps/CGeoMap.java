@@ -1050,22 +1050,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                         // check if map moved or zoomed
                         //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                        boolean moved = false;
-
-                        if (liveChanged) {
-                            moved = true;
-                        } else if (isLiveEnabled && !downloaded) {
-                            moved = true;
-                        } else if (viewport == null) {
-                            moved = true;
-                        } else if (zoomNow != zoom) {
-                            moved = true;
-                        } else if (mapMoved(viewport, viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow))) {
-                            moved = true;
-                        }
+                        final boolean moved = liveChanged || (isLiveEnabled && !downloaded) || (viewport == null) || zoomNow != zoom ||
+                                (mapMoved(viewport, viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow)));
 
                         // update title on any change
-                        if (moved || zoomNow != zoom || !viewportNow.equals(viewport)) {
+                        if (moved || !viewportNow.equals(viewport)) {
                             displayHandler.sendEmptyMessage(UPDATE_TITLE);
                         }
                         zoom = zoomNow;
