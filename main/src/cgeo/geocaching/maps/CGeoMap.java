@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.DirectionProvider;
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
