@@ -291,11 +291,11 @@ public class Geocache implements ICache, IWaypoint {
             attributes.set(other.attributes);
         }
         if (waypoints.isEmpty()) {
-            this.setWaypoints(other.waypoints.asList(), false);
+            this.setWaypoints(other.waypoints, false);
         }
         else {
-            ArrayList<Waypoint> newPoints = new ArrayList<Waypoint>(waypoints.asList());
-            Waypoint.mergeWayPoints(newPoints, other.waypoints.asList(), false);
+            ArrayList<Waypoint> newPoints = new ArrayList<Waypoint>(waypoints);
+            Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
             this.setWaypoints(newPoints, false);
         }
         if (spoilers == null) {
@@ -931,7 +931,7 @@ public class Geocache implements ICache, IWaypoint {
      * @return always non <code>null</code>
      */
     public List<Waypoint> getWaypoints() {
-        return waypoints.asList();
+        return waypoints;
     }
 
     /**

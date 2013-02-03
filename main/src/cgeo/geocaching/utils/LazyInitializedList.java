@@ -1,11 +1,10 @@
 package cgeo.geocaching.utils;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-public abstract class LazyInitializedList<ElementType> implements Iterable<ElementType> {
+public abstract class LazyInitializedList<ElementType> extends AbstractList<ElementType> {
 
     private volatile List<ElementType> list;
 
@@ -21,83 +20,48 @@ public abstract class LazyInitializedList<ElementType> implements Iterable<Eleme
 
     protected abstract List<ElementType> loadFromDatabase();
 
-    public void add(final ElementType element) {
+    @Override
+    public boolean add(final ElementType element) {
         initializeList();
-        list.add(element);
+        return list.add(element);
     }
 
     public void prepend(final ElementType element) {
-        initializeList();
-        list.add(0, element);
+        add(0, element);
     }
 
     public void set(final List<ElementType> elements) {
-        if (elements != null) {
-            list = new ArrayList<ElementType>(elements);
-        } else {
-            list = new ArrayList<ElementType>();
-        }
+        list = elements != null ? new ArrayList<ElementType>(elements) : new ArrayList<ElementType>();
     }
 
-    public void set(LazyInitializedList<ElementType> other) {
-        if (other != null) {
-            list = new ArrayList<ElementType>(other.asList());
-        } else {
-            list = new ArrayList<ElementType>();
-        }
-    }
-
-    public boolean isEmpty() {
+    @Override
+    public ElementType set(final int index, final ElementType element) {
         initializeList();
-        return list.isEmpty();
+        return list.set(index, element);
     }
 
+    @Override
     public ElementType remove(final int index) {
         initializeList();
         return list.remove(index);
     }
 
+    @Override
     public void add(int index, final ElementType element) {
         initializeList();
         list.add(index, element);
     }
 
+    @Override
     public int size() {
         initializeList();
         return list.size();
     }
 
     @Override
-    public Iterator<ElementType> iterator() {
-        initializeList();
-        return list.iterator();
-    }
-
     public ElementType get(final int index) {
         initializeList();
         return list.get(index);
     }
 
-    public boolean contains(final ElementType element) {
-        initializeList();
-        return list.contains(element);
-    }
-
-    public boolean isNotEmpty() {
-        initializeList();
-        return !list.isEmpty();
-    }
-
-    /**
-     * @return an unmodifiable list of the elements
-     */
-    public List<ElementType> asList() {
-        initializeList();
-        return Collections.unmodifiableList(list);
-    }
-
-    public int indexOf(ElementType element) {
-        initializeList();
-        return list.indexOf(element);
-    }
 }

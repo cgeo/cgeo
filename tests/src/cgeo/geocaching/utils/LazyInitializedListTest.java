@@ -34,14 +34,4 @@ public class LazyInitializedListTest extends TestCase {
         list.set((ArrayList<String>) null);
     }
 
-    public static void testUnmodifiable() {
-        final MockedLazyInitializedList list = new MockedLazyInitializedList();
-        boolean unsupported = false;
-        try {
-            list.asList().add("this is not possible");
-        } catch (UnsupportedOperationException e) {
-            unsupported = true;
-        }
-        assertTrue(unsupported);
-    }
 }

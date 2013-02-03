@@ -1219,7 +1219,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // cache attributes
-            if (cache.getAttributes().isNotEmpty()) {
+            if (!cache.getAttributes().isEmpty()) {
                 new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
                 view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
             }
@@ -1963,7 +1963,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             }
 
-            final List<LogEntry> logs = allLogs ? cache.getLogs().asList() : cache.getFriendsLogs();
+            final List<LogEntry> logs = allLogs ? cache.getLogs() : cache.getFriendsLogs();
             view.setAdapter(new ArrayAdapter<LogEntry>(CacheDetailActivity.this, R.layout.cacheview_logs_item, logs) {
                 final UserActionsClickListener userActionsClickListener = new UserActionsClickListener();
                 final DecryptTextClickListener decryptTextClickListener = new DecryptTextClickListener();
@@ -2365,7 +2365,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         pages.add(Page.DETAILS);
         final int detailsIndex = pages.size() - 1;
         pages.add(Page.DESCRIPTION);
-        if (cache.getLogs().isNotEmpty()) {
+        if (!cache.getLogs().isEmpty()) {
             pages.add(Page.LOGS);
         }
         if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
