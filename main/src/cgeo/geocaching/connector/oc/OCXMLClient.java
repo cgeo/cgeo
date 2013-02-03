@@ -31,7 +31,7 @@ public class OCXMLClient {
 
     public static cgCache getCache(final String geoCode) {
         try {
-            final Parameters params = getOCXmlQueryParameters(true, true);
+            final Parameters params = getOCXmlQueryParameters(true, true, true);
             params.put("wp", geoCode);
             final InputStream data = request(ConnectorFactory.getConnector(geoCode), SERVICE_CACHE, params);
 
@@ -54,7 +54,7 @@ public class OCXMLClient {
 
     public static Collection<cgCache> getCachesAround(final Geopoint center, final double distance) {
         try {
-            final Parameters params = getOCXmlQueryParameters(false, false);
+            final Parameters params = getOCXmlQueryParameters(false, false, false);
             params.put("lat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center));
             params.put("lon", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center));
             params.put("distance", String.format(Locale.US, "%f", distance));
@@ -98,18 +98,18 @@ public class OCXMLClient {
         return null;
     }
 
-    private static Parameters getOCXmlQueryParameters(final boolean withDescription, final boolean withLogs) {
+    private static Parameters getOCXmlQueryParameters(final boolean withDescription, final boolean withLogs, final boolean withImages) {
         return new Parameters("modifiedsince", "20060320000000",
                 "user", "0",
                 "cache", "1",
                 "cachedesc", withDescription ? "1" : "0",
                 "cachelog", withLogs ? "1" : "0",
-                "picture", "1",
+                "picture", withImages ? "1" : "0",
                 "removedobject", "0",
                 "session", "0",
                 "doctype", "0",
                 "charset", "utf-8",
                 "zip", "gzip",
-                "picturefromcachelog", "1");
+                "picturefromcachelog", withImages ? "1" : "0");
     }
 }
