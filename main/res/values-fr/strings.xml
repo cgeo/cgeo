@@ -364,7 +364,7 @@
   <string name="init_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
   <string name="init_autoload">Afficher automatiquement les descriptions longues</string>
   <string name="init_other">Autres options</string>
-  <string name="init_skin">Aspect sobre (nécessite le redémarrage de c:geo)</string>
+  <string name="init_skin">Fond clair (nécessite le redémarrage de c:geo)</string>
   <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
   <string name="init_captcha">Afficher le CAPTCHA si nécessaire</string>
   <string name="init_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
