@@ -1683,11 +1683,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, null);
-        Drawable[] layers = new Drawable[2];
-        layers[0] = getResources().getDrawable(R.drawable.marker);
-        layers[1] = getResources().getDrawable(waypoint.getWaypointType().markerId);
-
-        LayerDrawable ld = new LayerDrawable(layers);
+        final Drawable[] layers = new Drawable[] {
+            getResources().getDrawable(R.drawable.marker),
+            getResources().getDrawable(waypoint.getWaypointType().markerId)
+        };
+        final LayerDrawable ld = new LayerDrawable(layers);
         if (layers[0].getIntrinsicWidth() > 40) {
             ld.setLayerInset(1, 9, 12, 10, 13);
         } else {
