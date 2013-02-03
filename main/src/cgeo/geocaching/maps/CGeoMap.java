@@ -1601,17 +1601,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         dirtyCaches.add(geocode);
     }
 
-    /**
-     * Returns a OverlayItem represented by an icon
-     *
-     * @param coord
-     *            The coords
-     * @param cache
-     *            Cache
-     * @param waypoint
-     *            Waypoint. Mutally exclusive with cache
-     * @return
-     */
     private CachesOverlayItemImpl getCacheItem(final cgCache cache) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.getType());
 
