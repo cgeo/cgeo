@@ -244,15 +244,25 @@ public class OC11XMLParser {
             public void end() {
                 cgCache cache = cacheHolder.cache;
                 Geopoint coords = new Geopoint(cacheHolder.latitude, cacheHolder.longitude);
-                if (StringUtils.isNotBlank(cache.getGeocode())
-                        && !coords.equals(Geopoint.ZERO)
-                        && !cache.isArchived()
-                        && Settings.getCacheType().contains(cache)
-                        && caches.size() < CACHE_PARSE_LIMIT) {
-                    cache.setCoords(coords);
+                cache.setCoords(coords);
+                if (caches.size() < CACHE_PARSE_LIMIT && isValid(cache) && !isExcluded(cache)) {
                     cache.setDetailedUpdatedNow();
                     caches.put(cache.getCacheId(), cache);
                 }
+            }
+
+            private boolean isExcluded(cgCache cache) {
+                if (cache.isArchived() && Settings.isExcludeDisabledCaches()) {
+                    return true;
+                }
+                if (cache.isFound() && Settings.isExcludeMyCaches()) {
+                    return true;
+                }
+                return !Settings.getCacheType().contains(cache);
+            }
+
+            private boolean isValid(cgCache cache) {
+                return StringUtils.isNotBlank(cache.getGeocode()) && !cache.getCoords().equals(Geopoint.ZERO);
             }
         });
 
@@ -662,6 +672,9 @@ public class OC11XMLParser {
         }
     }
 
+    /**
+     * Converts local links to absolute links targeting the OC website.
+     */
     private static String linkify(String input) {
         String result = input;
         Matcher matcher = LOCAL_URL.matcher(result);
@@ -685,7 +698,7 @@ public class OC11XMLParser {
         if (StringUtils.startsWith(input, PARAGRAPH_BEGIN) && StringUtils.endsWith(input, PARAGRAPH_END)) {
             String inner = input.substring(PARAGRAPH_BEGIN.length(), input.length() - PARAGRAPH_END.length());
             if (!inner.contains(PARAGRAPH_BEGIN)) {
-                return inner;
+                return inner.trim();
             }
         }
         return input;
