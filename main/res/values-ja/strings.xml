@@ -607,7 +607,7 @@
   <string name="cache_image_open_file">他のアプリで開く</string>
   <string name="cache_image_open_browser">ブラウザで開く</string>
   <string name="cache_share_field">共有</string>
-  <string name="cache_time_full_hours">時</string>  <!-- issues#1858 main/src/cgeo/geocaching/cgCache.java:public String guessEventTimeMinutes()説明分からイベントキャッシュの開催時間を推測 -->
+  <string name="cache_time_full_hours">時</string>  <!-- issues#1858 main/src/cgeo/geocaching/Geocache.java:public String guessEventTimeMinutes()説明分からイベントキャッシュの開催時間を推測 -->
 
   <!--  editor dialog -->
   <string name="editor_save">保存</string>

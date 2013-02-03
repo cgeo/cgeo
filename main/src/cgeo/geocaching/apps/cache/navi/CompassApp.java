@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -38,13 +38,13 @@ class CompassApp extends AbstractApp implements CacheNavigationApp, WaypointNavi
     }
 
     @Override
-    public void navigate(Activity activity, cgCache cache) {
+    public void navigate(Activity activity, Geocache cache) {
         cgeonavigate.startActivity(activity, cache.getGeocode(), cache.getName(), cache.getCoords(), null,
                 Formatter.formatCacheInfoShort(cache));
     }
 
     @Override
-    public boolean isEnabled(cgCache cache) {
+    public boolean isEnabled(Geocache cache) {
         return cache.getGeocode() != null;
     }
 

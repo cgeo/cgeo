@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.utils.Log;
 
 
@@ -11,7 +11,7 @@ import cgeo.geocaching.utils.Log;
 public abstract class AbstractCacheComparator implements CacheComparator {
 
     @Override
-    public final int compare(final cgCache cache1, final cgCache cache2) {
+    public final int compare(final Geocache cache1, final Geocache cache2) {
         try {
             // first check that we have all necessary data for the comparison
             if (!canCompare(cache1, cache2)) {
@@ -31,7 +31,7 @@ public abstract class AbstractCacheComparator implements CacheComparator {
      * @param cache2
      * @return
      */
-    protected abstract boolean canCompare(final cgCache cache1, final cgCache cache2);
+    protected abstract boolean canCompare(final Geocache cache1, final Geocache cache2);
 
     /**
      * Compares two caches. Logging and exception handling is implemented outside this method already.
@@ -44,5 +44,5 @@ public abstract class AbstractCacheComparator implements CacheComparator {
      * @return an integer < 0 if cache1 is less than cache2, 0 if they are equal, and > 0 if cache1 is greater than
      *         cache2.
      */
-    protected abstract int compareCaches(final cgCache cache1, final cgCache cache2);
+    protected abstract int compareCaches(final Geocache cache1, final Geocache cache2);
 }

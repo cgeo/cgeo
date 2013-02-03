@@ -1,10 +1,10 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
@@ -52,7 +52,7 @@ class GpxExport extends AbstractExport {
     }
 
     @Override
-    public void export(final List<cgCache> caches, final Activity activity) {
+    public void export(final List<Geocache> caches, final Activity activity) {
         if (null == activity) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
@@ -64,7 +64,7 @@ class GpxExport extends AbstractExport {
         }
     }
 
-    private Dialog getExportDialog(final List<cgCache> caches, final Activity activity) {
+    private Dialog getExportDialog(final List<Geocache> caches, final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         View layout = activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog, null);
@@ -97,7 +97,7 @@ class GpxExport extends AbstractExport {
     }
 
     private class ExportTask extends AsyncTask<Void, Integer, File> {
-        private final List<cgCache> caches;
+        private final List<Geocache> caches;
         private final Activity activity;
         private final Progress progress = new Progress();
 
@@ -105,11 +105,11 @@ class GpxExport extends AbstractExport {
          * Instantiates and configures the task for exporting field notes.
          *
          * @param caches
-         *            The {@link List} of {@link cgCache} to be exported
+         *            The {@link List} of {@link cgeo.geocaching.Geocache} to be exported
          * @param activity
          *            optional: Show a progress bar and toasts
          */
-        public ExportTask(final List<cgCache> caches, final Activity activity) {
+        public ExportTask(final List<Geocache> caches, final Activity activity) {
             this.caches = caches;
             this.activity = activity;
         }
@@ -152,7 +152,7 @@ class GpxExport extends AbstractExport {
                         PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd");
 
                 for (int i = 0; i < caches.size(); i++) {
-                    final cgCache cache = cgData.loadCache(caches.get(i).getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
+                    final Geocache cache = cgData.loadCache(caches.get(i).getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
 
                     gpx.startTag(PREFIX_GPX, "wpt");
                     gpx.attribute("", "lat", Double.toString(cache.getCoords().getLatitude()));
@@ -234,7 +234,7 @@ class GpxExport extends AbstractExport {
             return exportFile;
         }
 
-        private void writeWaypoints(final XmlSerializer gpx, final cgCache cache) throws IOException {
+        private void writeWaypoints(final XmlSerializer gpx, final Geocache cache) throws IOException {
             List<Waypoint> waypoints = cache.getWaypoints();
             List<Waypoint> ownWaypoints = new ArrayList<Waypoint>(waypoints.size());
             List<Waypoint> originWaypoints = new ArrayList<Waypoint>(waypoints.size());
@@ -285,7 +285,7 @@ class GpxExport extends AbstractExport {
             gpx.endTag(PREFIX_GPX, "wpt");
         }
 
-        private void writeLogs(final XmlSerializer gpx, final cgCache cache) throws IOException {
+        private void writeLogs(final XmlSerializer gpx, final Geocache cache) throws IOException {
             if (cache.getLogs().isEmpty()) {
                 return;
             }
@@ -314,7 +314,7 @@ class GpxExport extends AbstractExport {
             gpx.endTag(PREFIX_GROUNDSPEAK, "logs");
         }
 
-        private void writeAttributes(final XmlSerializer gpx, final cgCache cache) throws IOException {
+        private void writeAttributes(final XmlSerializer gpx, final Geocache cache) throws IOException {
             if (cache.getAttributes().isEmpty()) {
                 return;
             }

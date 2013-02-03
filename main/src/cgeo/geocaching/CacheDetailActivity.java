@@ -132,7 +132,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private static final Pattern DARK_COLOR_PATTERN = Pattern.compile(Pattern.quote("color=\"#") + "(0[0-9]){3}" + "\"");
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
 
-    private cgCache cache;
+    private Geocache cache;
     private final Progress progress = new Progress();
     private SearchResult search;
 
@@ -696,7 +696,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void run() {
-            search = cgCache.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
+            search = Geocache.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
             handler.sendMessage(Message.obtain());
         }
     }
@@ -776,14 +776,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     /**
-     * Tries to navigate to the {@link cgCache} of this activity.
+     * Tries to navigate to the {@link Geocache} of this activity.
      */
     private void startDefaultNavigation() {
         NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
     }
 
     /**
-     * Tries to navigate to the {@link cgCache} of this activity.
+     * Tries to navigate to the {@link Geocache} of this activity.
      */
     private void startDefaultNavigation2() {
         NavigationAppFactory.startDefaultNavigationApplication(2, this, cache);
@@ -1641,7 +1641,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             }
 
-            private Bitmap decode(final cgCache cache) {
+            private Bitmap decode(final Geocache cache) {
                 return StaticMapsProvider.getPreviewMap(cache.getGeocode());
             }
 
@@ -2231,7 +2231,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     /**
      * A dialog to allow the user to select reseting coordinates local/remote/both.
      */
-    private AlertDialog createResetCacheCoordinatesDialog(final cgCache cache, final Waypoint wpt) {
+    private AlertDialog createResetCacheCoordinatesDialog(final Geocache cache, final Waypoint wpt) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.waypoint_reset_cache_coords);
@@ -2283,7 +2283,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private class ResetCoordsThread extends Thread {
 
-        private final cgCache cache;
+        private final Geocache cache;
         private final Handler handler;
         private final boolean local;
         private final boolean remote;
@@ -2292,7 +2292,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         public static final int LOCAL = 0;
         public static final int ON_WEBSITE = 1;
 
-        public ResetCoordsThread(cgCache cache, Handler handler, final Waypoint wpt, boolean local, boolean remote, final ProgressDialog progress) {
+        public ResetCoordsThread(Geocache cache, Handler handler, final Waypoint wpt, boolean local, boolean remote, final ProgressDialog progress) {
             this.cache = cache;
             this.handler = handler;
             this.local = local;
@@ -2409,7 +2409,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    static void updateOfflineBox(final View view, final cgCache cache, final Resources res,
+    static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
                                  final OnClickListener refreshCacheClickListener,
                                  final OnClickListener dropCacheClickListener,
                                  final OnClickListener storeCacheClickListener) {

@@ -55,7 +55,7 @@ import java.util.regex.Pattern;
 /**
  * Internal c:geo representation of a "cache"
  */
-public class cgCache implements ICache, IWaypoint {
+public class Geocache implements ICache, IWaypoint {
 
     private long updated = 0;
     private long detailedUpdate = 0;
@@ -133,7 +133,7 @@ public class cgCache implements ICache, IWaypoint {
     /**
      * Create a new cache. To be used everywhere except for the GPX parser
      */
-    public cgCache() {
+    public Geocache() {
         // empty
     }
 
@@ -143,7 +143,7 @@ public class cgCache implements ICache, IWaypoint {
      *
      * @param gpxParser
      */
-    public cgCache(GPXParser gpxParser) {
+    public Geocache(GPXParser gpxParser) {
         setReliableLatLon(true);
         setAttributes(Collections.<String> emptyList());
         setWaypoints(Collections.<Waypoint> emptyList(), false);
@@ -170,7 +170,7 @@ public class cgCache implements ICache, IWaypoint {
      *            the other version, or null if non-existent
      * @return true if this cache is "equal" to the other version
      */
-    public boolean gatherMissingFrom(final cgCache other) {
+    public boolean gatherMissingFrom(final Geocache other) {
         if (other == null) {
             return false;
         }
@@ -344,7 +344,7 @@ public class cgCache implements ICache, IWaypoint {
      *            the other cache to compare this one to
      * @return true if both caches have the same content
      */
-    private boolean isEqualTo(final cgCache other) {
+    private boolean isEqualTo(final Geocache other) {
         return detailed == other.detailed &&
                 StringUtils.equalsIgnoreCase(geocode, other.geocode) &&
                 StringUtils.equalsIgnoreCase(name, other.name) &&
@@ -425,7 +425,7 @@ public class cgCache implements ICache, IWaypoint {
             return false;
         }
         final Boolean found = Pattern.compile(guid, Pattern.CASE_INSENSITIVE).matcher(page).find();
-        Log.i("cgCache.isGuidContainedInPage: guid '" + guid + "' " + (found ? "" : "not ") + "found");
+        Log.i("Geocache.isGuidContainedInPage: guid '" + guid + "' " + (found ? "" : "not ") + "found");
         return found;
     }
 
@@ -1326,7 +1326,7 @@ public class cgCache implements ICache, IWaypoint {
                 matcher = new MatcherWrapper(coordPattern, note);
             }
         } catch (Exception e) {
-            Log.e("cgCache.parseWaypointsFromNote", e);
+            Log.e("Geocache.parseWaypointsFromNote", e);
         }
     }
 
@@ -1351,11 +1351,11 @@ public class cgCache implements ICache, IWaypoint {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof cgCache)) {
+        if (!(obj instanceof Geocache)) {
             return false;
         }
         // just compare the geocode even if that is not what "equals" normally does
-        return StringUtils.isNotBlank(geocode) && geocode.equals(((cgCache) obj).geocode);
+        return StringUtils.isNotBlank(geocode) && geocode.equals(((Geocache) obj).geocode);
     }
 
     public void store(CancellableHandler handler) {
@@ -1440,9 +1440,9 @@ public class cgCache implements ICache, IWaypoint {
         storeCache(null, geocode, newListId, true, handler);
     }
 
-    public static void storeCache(cgCache origCache, String geocode, int listId, boolean forceRedownload, CancellableHandler handler) {
+    public static void storeCache(Geocache origCache, String geocode, int listId, boolean forceRedownload, CancellableHandler handler) {
         try {
-            cgCache cache;
+            Geocache cache;
             // get cache details, they may not yet be complete
             if (origCache != null) {
                 // only reload the cache if it was already stored or doesn't have full details (by checking the description)
@@ -1527,7 +1527,7 @@ public class cgCache implements ICache, IWaypoint {
 
     public static SearchResult searchByGeocode(final String geocode, final String guid, final int listId, final boolean forceReload, final CancellableHandler handler) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
-            Log.e("cgCache.searchByGeocode: No geocode nor guid given");
+            Log.e("Geocache.searchByGeocode: No geocode nor guid given");
             return null;
         }
 
@@ -1605,7 +1605,7 @@ public class cgCache implements ICache, IWaypoint {
      * @return
      */
     public boolean hasAttribute(CacheAttribute attribute, boolean yes) {
-        cgCache fullCache = cgData.loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
+        Geocache fullCache = cgData.loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
         if (fullCache == null) {
             fullCache = this;
         }

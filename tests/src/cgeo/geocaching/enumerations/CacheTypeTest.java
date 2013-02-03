@@ -1,6 +1,6 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import android.test.AndroidTestCase;
 
@@ -39,7 +39,7 @@ public class CacheTypeTest extends AndroidTestCase {
     }
 
     public static void testContainsCache() throws Exception {
-        final cgCache traditional = new cgCache();
+        final Geocache traditional = new Geocache();
         traditional.setType(CacheType.TRADITIONAL);
 
         assertTrue(CacheType.ALL.contains(traditional));

@@ -1,6 +1,6 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
@@ -13,9 +13,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {
-    private List<cgCache> readLoc(int resourceId) throws IOException, ParserException {
+    private List<Geocache> readLoc(int resourceId) throws IOException, ParserException {
         final LocParser parser = new LocParser(1);
-        Collection<cgCache> caches = null;
+        Collection<Geocache> caches = null;
         final InputStream instream = getResourceStream(resourceId);
         try {
             caches = parser.parse(instream, null);
@@ -25,13 +25,13 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
             instream.close();
         }
 
-        return new ArrayList<cgCache>(caches);
+        return new ArrayList<Geocache>(caches);
     }
 
     public void testOCLoc() throws IOException, ParserException {
-        final List<cgCache> caches = readLoc(R.raw.oc5952_loc);
+        final List<Geocache> caches = readLoc(R.raw.oc5952_loc);
         assertEquals(1, caches.size());
-        final cgCache cache = caches.get(0);
+        final Geocache cache = caches.get(0);
         assertNotNull(cache);
         assertEquals("OC5952", cache.getGeocode());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
@@ -39,9 +39,9 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testGCLoc() throws IOException, ParserException {
-        final List<cgCache> caches = readLoc(R.raw.gc1bkp3_loc);
+        final List<Geocache> caches = readLoc(R.raw.gc1bkp3_loc);
         assertEquals(1, caches.size());
-        final cgCache cache = caches.get(0);
+        final Geocache cache = caches.get(0);
         assertNotNull(cache);
         assertEquals("GC1BKP3", cache.getGeocode());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());

@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -56,12 +56,12 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         SearchResult result = GCParser.parseCacheFromText(page, null);
         assertNotNull(result);
         assertEquals(1, result.getCount());
-        cgCache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+        Geocache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
         assertEquals(cacheName, cache.getName());
     }
 
     public void testOwnCache() {
-        final cgCache cache = parseCache(R.raw.own_cache);
+        final Geocache cache = parseCache(R.raw.own_cache);
         assertNotNull(cache);
         assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
         assertEquals(1, cache.getSpoilers().size());
@@ -71,7 +71,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertNull(spoiler.getDescription());
     }
 
-    private static cgCache createCache(int index) {
+    private static Geocache createCache(int index) {
         final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES.get(index);
         // to get the same results we have to use the date format used when the mocked data was created
         String oldCustomDate = Settings.getGcCustomDate();
@@ -87,7 +87,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(searchResult);
         assertEquals(1, searchResult.getCount());
 
-        final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
         assertNotNull(cache);
         return cache;
     }
@@ -104,7 +104,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
                 // to get the same results we have to use the date format used when the mocked data was created
                 Settings.setGcCustomDate(MockedCache.getDateFormat());
                 SearchResult searchResult = GCParser.parseCacheFromText(mockedCache.getData(), null);
-                cgCache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                Geocache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
                 Compare.assertCompareCaches(mockedCache, parsedCache, true);
             }
@@ -114,7 +114,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public static void testWaypointsFromNote() {
-        final cgCache cache = createCache(0);
+        final Geocache cache = createCache(0);
 
         final Geopoint[] empty = new Geopoint[] {};
         final Geopoint[] one = new Geopoint[] { new Geopoint("N51 21.523", "E7 2.680") };
@@ -152,24 +152,24 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     @MediumTest
     public static void testEditModifiedCoordinates() {
-        cgCache cache = new cgCache();
+        Geocache cache = new Geocache();
         cache.setGeocode("GC2ZN4G");
         // upload coordinates
         GCParser.editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566"));
         cache.drop(new Handler());
         String page = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        cgCache cache2 = GCParser.parseCacheFromText(page, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+        Geocache cache2 = GCParser.parseCacheFromText(page, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertTrue(cache2.hasUserModifiedCoords());
         assertEquals(new Geopoint("N51 21.544", "E07 02.566"), cache2.getCoords());
         // delete coordinates
         GCParser.deleteModifiedCoordinates(cache2);
         cache2.drop(new Handler());
         String page2 = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        cgCache cache3 = GCParser.parseCacheFromText(page2, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+        Geocache cache3 = GCParser.parseCacheFromText(page2, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertFalse(cache3.hasUserModifiedCoords());
     }
 
-    private static void assertWaypointsFromNote(final cgCache cache, Geopoint[] expected, String note) {
+    private static void assertWaypointsFromNote(final Geocache cache, Geopoint[] expected, String note) {
         cache.setPersonalNote(note);
         cache.setWaypoints(new ArrayList<Waypoint>(), false);
         cache.parseWaypointsFromNote();
@@ -180,14 +180,14 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testWaypointParsing() {
-        cgCache cache = parseCache(R.raw.gc366bq);
+        Geocache cache = parseCache(R.raw.gc366bq);
         assertEquals(13, cache.getWaypoints().size());
         //make sure that waypoints are not duplicated
         cache = parseCache(R.raw.gc366bq);
         assertEquals(13, cache.getWaypoints().size());
     }
 
-    private cgCache parseCache(int resourceId) {
+    private Geocache parseCache(int resourceId) {
         final String page = getFileContent(resourceId);
         SearchResult result = GCParser.parseCacheFromText(page, null);
         assertNotNull(result);

@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
@@ -21,7 +21,7 @@ public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByGeocode(final String geocode, final String guid, CancellableHandler handler) {
-        final cgCache cache = OCXMLClient.getCache(geocode);
+        final Geocache cache = OCXMLClient.getCache(geocode);
         if (cache == null) {
             return null;
         }

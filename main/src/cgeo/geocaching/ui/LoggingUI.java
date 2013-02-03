@@ -1,9 +1,9 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
@@ -65,7 +65,7 @@ public class LoggingUI extends AbstractUIFactory {
     private static final int MENU_LOG_VISIT = 100;
     private static final int MENU_LOG_VISIT_OFFLINE = 101;
 
-    public static void addMenuItems(final Menu menu, final cgCache cache) {
+    public static void addMenuItems(final Menu menu, final Geocache cache) {
         if (cache == null) {
             return;
         }
@@ -80,7 +80,7 @@ public class LoggingUI extends AbstractUIFactory {
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, IAbstractActivity activity, cgCache cache) {
+    public static boolean onMenuItemSelected(final MenuItem item, IAbstractActivity activity, Geocache cache) {
         switch (item.getItemId()) {
             case MENU_LOG_VISIT:
                 cache.logVisit(activity);
@@ -93,7 +93,7 @@ public class LoggingUI extends AbstractUIFactory {
         }
     }
 
-    private static void showOfflineMenu(final cgCache cache, final Activity activity) {
+    private static void showOfflineMenu(final Geocache cache, final Activity activity) {
         final LogEntry currentLog = cgData.loadLogOffline(cache.getGeocode());
         final LogType currentLogType = currentLog == null ? null : currentLog.type;
 

@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 /**
  * sorts caches by size
@@ -9,12 +9,12 @@ import cgeo.geocaching.cgCache;
 public class SizeComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
+    protected boolean canCompare(Geocache cache1, Geocache cache2) {
         return cache1.getSize() != null && cache2.getSize() != null;
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
+    protected int compareCaches(Geocache cache1, Geocache cache2) {
         return cache2.getSize().comparable - cache1.getSize().comparable;
     }
 }

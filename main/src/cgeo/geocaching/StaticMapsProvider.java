@@ -80,7 +80,7 @@ public class StaticMapsProvider {
         }
     }
 
-    public static void downloadMaps(cgCache cache) {
+    public static void downloadMaps(Geocache cache) {
         if (cache == null) {
             Log.e("downloadMaps - missing input parameter cache");
             return;
@@ -105,7 +105,7 @@ public class StaticMapsProvider {
         }
     }
 
-    public static void storeWaypointStaticMap(cgCache cache, Waypoint waypoint, boolean waitForResult) {
+    public static void storeWaypointStaticMap(Geocache cache, Waypoint waypoint, boolean waitForResult) {
         int edge = StaticMapsProvider.guessMaxDisplaySide();
         storeWaypointStaticMap(cache.getGeocode(), edge, waypoint, waitForResult);
     }
@@ -128,12 +128,12 @@ public class StaticMapsProvider {
         downloadMaps(geocode, wpMarkerUrl, WAYPOINT_PREFIX + waypoint.getId() + '_', wpLatlonMap, edge, null, waitForResult);
     }
 
-    public static void storeCacheStaticMap(cgCache cache, final boolean waitForResult) {
+    public static void storeCacheStaticMap(Geocache cache, final boolean waitForResult) {
         int edge = guessMaxDisplaySide();
         storeCacheStaticMap(cache, edge, waitForResult);
     }
 
-    private static void storeCacheStaticMap(final cgCache cache, final int edge, final boolean waitForResult) {
+    private static void storeCacheStaticMap(final Geocache cache, final int edge, final boolean waitForResult) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Parameters waypoints = new Parameters();
         for (final Waypoint waypoint : cache.getWaypoints()) {
@@ -148,7 +148,7 @@ public class StaticMapsProvider {
         downloadMaps(cache.getGeocode(), cacheMarkerUrl, "", latlonMap, edge, waypoints, waitForResult);
     }
 
-    public static void storeCachePreviewMap(final cgCache cache) {
+    public static void storeCachePreviewMap(final Geocache cache) {
         if (cache == null) {
             Log.e("storeCachePreviewMap - missing input parameter cache");
             return;
@@ -193,7 +193,7 @@ public class StaticMapsProvider {
         }
     }
 
-    private static String getCacheMarkerUrl(final cgCache cache) {
+    private static String getCacheMarkerUrl(final Geocache cache) {
         StringBuilder url = new StringBuilder(MARKERS_URL);
         url.append("marker_cache_").append(cache.getType().id);
         if (cache.isFound()) {
@@ -229,7 +229,7 @@ public class StaticMapsProvider {
      * @param cache
      * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
      */
-    public static boolean hasStaticMap(final cgCache cache) {
+    public static boolean hasStaticMap(final Geocache cache) {
         if (cache == null) {
             return false;
         }

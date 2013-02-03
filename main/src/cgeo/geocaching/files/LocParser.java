@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -56,7 +56,7 @@ public final class LocParser extends FileParser {
     private int listId;
 
     public static void parseLoc(final SearchResult searchResult, final String fileContent) {
-        final Map<String, cgCache> cidCoords = parseCoordinates(fileContent);
+        final Map<String, Geocache> cidCoords = parseCoordinates(fileContent);
 
         // save found cache coordinates
         final HashSet<String> contained = new HashSet<String>();
@@ -65,14 +65,14 @@ public final class LocParser extends FileParser {
                 contained.add(geocode);
             }
         }
-        Set<cgCache> caches = cgData.loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
-        for (cgCache cache : caches) {
-            cgCache coord = cidCoords.get(cache.getGeocode());
+        Set<Geocache> caches = cgData.loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
+        for (Geocache cache : caches) {
+            Geocache coord = cidCoords.get(cache.getGeocode());
             copyCoordToCache(coord, cache);
         }
     }
 
-    private static void copyCoordToCache(final cgCache coord, final cgCache cache) {
+    private static void copyCoordToCache(final Geocache coord, final Geocache cache) {
         cache.setCoords(coord.getCoords());
         cache.setDifficulty(coord.getDifficulty());
         cache.setTerrain(coord.getTerrain());
@@ -84,8 +84,8 @@ public final class LocParser extends FileParser {
         }
     }
 
-    static Map<String, cgCache> parseCoordinates(final String fileContent) {
-        final Map<String, cgCache> coords = new HashMap<String, cgCache>();
+    static Map<String, Geocache> parseCoordinates(final String fileContent) {
+        final Map<String, Geocache> coords = new HashMap<String, Geocache>();
         if (StringUtils.isBlank(fileContent)) {
             return coords;
         }
@@ -95,7 +95,7 @@ public final class LocParser extends FileParser {
 
         // parse coordinates
         for (String pointString : points) {
-            final cgCache pointCoord = parseCache(pointString);
+            final Geocache pointCoord = parseCache(pointString);
             if (StringUtils.isNotBlank(pointCoord.getGeocode())) {
                 coords.put(pointCoord.getGeocode(), pointCoord);
             }
@@ -121,17 +121,17 @@ public final class LocParser extends FileParser {
     }
 
     @Override
-    public Collection<cgCache> parse(InputStream stream, CancellableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(InputStream stream, CancellableHandler progressHandler) throws IOException, ParserException {
         // TODO: progress reporting happens during reading stream only, not during parsing
         String streamContent = readStream(stream, progressHandler).toString();
-        final Map<String, cgCache> coords = parseCoordinates(streamContent);
-        final List<cgCache> caches = new ArrayList<cgCache>();
-        for (Entry<String, cgCache> entry : coords.entrySet()) {
-            cgCache coord = entry.getValue();
+        final Map<String, Geocache> coords = parseCoordinates(streamContent);
+        final List<Geocache> caches = new ArrayList<Geocache>();
+        for (Entry<String, Geocache> entry : coords.entrySet()) {
+            Geocache coord = entry.getValue();
             if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
                 continue;
             }
-            cgCache cache = new cgCache();
+            Geocache cache = new Geocache();
             cache.setReliableLatLon(true);
             copyCoordToCache(coord, cache);
             caches.add(cache);
@@ -146,8 +146,8 @@ public final class LocParser extends FileParser {
         return caches;
     }
 
-    public static cgCache parseCache(final String pointString) {
-        final cgCache cache = new cgCache();
+    public static Geocache parseCache(final String pointString) {
+        final Geocache cache = new Geocache();
         final MatcherWrapper matcherGeocode = new MatcherWrapper(patternGeocode, pointString);
         if (matcherGeocode.find()) {
             cache.setGeocode(matcherGeocode.group(1).trim());

@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.apps.AbstractApp;
 
@@ -20,7 +20,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     @Override
-    public void navigate(Activity activity, cgCache cache) {
+    public void navigate(Activity activity, Geocache cache) {
         navigate(activity, cache.getCoords());
     }
 
@@ -30,7 +30,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     @Override
-    public boolean isEnabled(cgCache cache) {
+    public boolean isEnabled(Geocache cache) {
         return cache.getCoords() != null;
     }
 

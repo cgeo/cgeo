@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.List;
 public class DistanceComparator extends AbstractCacheComparator {
 
     final private Geopoint coords;
-    final private List<cgCache> list;
+    final private List<Geocache> list;
     private boolean cachedDistances;
 
-    public DistanceComparator(final Geopoint coords, List<cgCache> list) {
+    public DistanceComparator(final Geopoint coords, List<Geocache> list) {
         this.coords = coords;
         this.list = list;
     }
@@ -27,7 +27,7 @@ public class DistanceComparator extends AbstractCacheComparator {
         if (cachedDistances) {
             return;
         }
-        for (cgCache cache : list) {
+        for (Geocache cache : list) {
             if (cache.getCoords() != null) {
                 cache.setDistance(coords.distanceTo(cache.getCoords()));
             }
@@ -39,12 +39,12 @@ public class DistanceComparator extends AbstractCacheComparator {
     }
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
+    protected boolean canCompare(Geocache cache1, Geocache cache2) {
         return true;
     }
 
     @Override
-    protected int compareCaches(final cgCache cache1, final cgCache cache2) {
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         calculateAllDistances();
         if (cache1.getCoords() == null && cache2.getCoords() == null) {
             return 0;

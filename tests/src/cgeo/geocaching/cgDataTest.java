@@ -22,9 +22,9 @@ public class cgDataTest extends CGeoTestCase {
         int listId2 = StoredList.STANDARD_LIST_ID;
 
         // create caches
-        final cgCache cache1 = new cgCache();
+        final Geocache cache1 = new Geocache();
         cache1.setGeocode("Cache 1");
-        final cgCache cache2 = new cgCache();
+        final Geocache cache2 = new Geocache();
         cache2.setGeocode("Cache 2");
         assertNotNull(cache2);
 
@@ -104,7 +104,7 @@ public class cgDataTest extends CGeoTestCase {
         final String GEOCODE_CACHE = "TEST";
 
         // create cache and trackable
-        final cgCache cache = new cgCache();
+        final Geocache cache = new Geocache();
         cache.setGeocode(GEOCODE_CACHE);
         cache.setDetailed(true);
         final Trackable trackable = new Trackable();
@@ -115,7 +115,7 @@ public class cgDataTest extends CGeoTestCase {
 
         try {
             cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-            final cgCache loadedCache = cgData.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+            final Geocache loadedCache = cgData.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
             assertNotNull("Cache was not saved!", loadedCache);
             assertEquals(1, loadedCache.getInventory().size());
         } finally {

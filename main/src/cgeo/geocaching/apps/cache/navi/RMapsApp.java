@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
@@ -39,7 +39,7 @@ class RMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNaviga
     }
 
     @Override
-    public void navigate(Activity activity, cgCache cache) {
+    public void navigate(Activity activity, Geocache cache) {
         navigate(activity, cache.getCoords(), cache.getGeocode(), cache.getName());
     }
 

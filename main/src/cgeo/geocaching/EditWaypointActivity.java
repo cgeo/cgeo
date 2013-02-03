@@ -83,7 +83,7 @@ public class EditWaypointActivity extends AbstractActivity {
                     else {
                         ((EditText) findViewById(R.id.note)).setText(StringUtils.trimToEmpty(waypoint.getNote()));
                     }
-                    cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+                    Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
                     setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
                 }
 
@@ -161,7 +161,7 @@ public class EditWaypointActivity extends AbstractActivity {
         }
 
         if (geocode != null) {
-            cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             IConnector con = ConnectorFactory.getConnector(geocode);
             setCoordsModificationVisibility(con, cache);
         }
@@ -171,7 +171,7 @@ public class EditWaypointActivity extends AbstractActivity {
         disableSuggestions((EditText) findViewById(R.id.distance));
     }
 
-    private void setCoordsModificationVisibility(IConnector con, cgCache cache) {
+    private void setCoordsModificationVisibility(IConnector con, Geocache cache) {
         if (cache != null && (cache.getType() == CacheType.MYSTERY || cache.getType() == CacheType.MULTI)) {
             findViewById(R.id.modify_cache_coordinates_group).setVisibility(View.VISIBLE);
             findViewById(R.id.modify_cache_coordinates_local_and_remote).setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
@@ -292,7 +292,7 @@ public class EditWaypointActivity extends AbstractActivity {
             } else if (gpTemp != null) {
                 gp = gpTemp;
             }
-            cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+            Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
             CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(EditWaypointActivity.this, cache, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
@@ -468,7 +468,7 @@ public class EditWaypointActivity extends AbstractActivity {
                     waypoint.setNote(note);
                     waypoint.setId(id);
 
-                    cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                    Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                     if (null != cache && cache.addOrChangeWaypoint(waypoint, true)) {
                         cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                         StaticMapsProvider.removeWpStaticMaps(id, geocode);
@@ -510,7 +510,7 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     }
 
-    private static boolean uploadModifiedCoords(final cgCache cache, final Geopoint waypointUploaded) {
+    private static boolean uploadModifiedCoords(final Geocache cache, final Geopoint waypointUploaded) {
         final IConnector con = ConnectorFactory.getConnector(cache);
         return con.supportsOwnCoordinates() && con.uploadModifiedCoordinates(cache, waypointUploaded);
     }
@@ -525,7 +525,7 @@ public class EditWaypointActivity extends AbstractActivity {
                 .putExtra(Intents.EXTRA_WAYPOINT_ID, waypointId));
     }
 
-    public static void startActivityAddWaypoint(final Context context, final cgCache cache) {
+    public static void startActivityAddWaypoint(final Context context, final Geocache cache) {
         context.startActivity(new Intent(context, EditWaypointActivity.class)
                 .putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode())
                 .putExtra(Intents.EXTRA_COUNT, cache.getWaypoints().size()));

@@ -82,7 +82,7 @@ public class WaypointPopup extends AbstractPopupActivity {
     }
 
     /**
-     * Tries to navigate to the {@link cgCache} of this activity.
+     * Tries to navigate to the {@link Geocache} of this activity.
      */
     @Override
     protected void startDefaultNavigation2() {

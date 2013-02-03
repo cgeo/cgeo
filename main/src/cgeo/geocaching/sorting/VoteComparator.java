@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 /**
  * sorts caches by the users own voting (if available at all)
@@ -8,12 +8,12 @@ import cgeo.geocaching.cgCache;
 public class VoteComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
+    protected boolean canCompare(Geocache cache1, Geocache cache2) {
         return true;
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
+    protected int compareCaches(Geocache cache1, Geocache cache2) {
         // if there is no vote available, put that cache at the end of the list
         return Float.compare(cache2.getMyVote(), cache1.getMyVote());
     }

@@ -3,7 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.network.Network;
@@ -28,11 +28,11 @@ public class LogTemplateProvider {
      *
      */
     public static class LogContext {
-        private cgCache cache;
+        private Geocache cache;
         private Trackable trackable;
         private boolean offline = false;
 
-        public LogContext(final cgCache cache) {
+        public LogContext(final Geocache cache) {
             this(cache, false);
         }
 
@@ -44,12 +44,12 @@ public class LogTemplateProvider {
             this(null, offline);
         }
 
-        public LogContext(final cgCache cache, boolean offline) {
+        public LogContext(final Geocache cache, boolean offline) {
             this.cache = cache;
             this.offline = offline;
         }
 
-        public cgCache getCache() {
+        public Geocache getCache() {
             return cache;
         }
 
@@ -152,7 +152,7 @@ public class LogTemplateProvider {
                 if (trackable != null) {
                     return trackable.getOwner();
                 }
-                cgCache cache = context.getCache();
+                Geocache cache = context.getCache();
                 if (cache != null) {
                     return cache.getOwnerDisplayName();
                 }

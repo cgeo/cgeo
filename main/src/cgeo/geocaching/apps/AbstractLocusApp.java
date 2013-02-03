@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -66,8 +66,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
         for (Object o : objectsToShow) {
             Point p = null;
             // get icon and Point
-            if (o instanceof cgCache) {
-                p = getCachePoint((cgCache) o, withCacheWaypoints, withCacheDetails);
+            if (o instanceof Geocache) {
+                p = getCachePoint((Geocache) o, withCacheWaypoints, withCacheDetails);
             } else if (o instanceof Waypoint) {
                 p = getWaypointPoint((Waypoint) o);
             }
@@ -104,7 +104,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
      *            should be false for all if more then 200 Caches are transferred
      * @return null, when the <code>Point</code> could not be constructed
      */
-    private static Point getCachePoint(cgCache cache, boolean withWaypoints, boolean withCacheDetails) {
+    private static Point getCachePoint(Geocache cache, boolean withWaypoints, boolean withCacheDetails) {
         if (cache == null || cache.getCoords() == null) {
             return null;
         }

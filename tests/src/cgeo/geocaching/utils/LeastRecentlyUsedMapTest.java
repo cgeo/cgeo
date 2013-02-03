@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import java.util.Map;
 
@@ -45,11 +45,11 @@ public class LeastRecentlyUsedMapTest extends AbstractLRUTest {
     }
 
     public static void testRemoveEldestEntry() {
-        final LeastRecentlyUsedMap<String, cgCache> cache = new LeastRecentlyUsedMap.LruCache<String, cgCache>(10);
-        final cgCache first = new cgCache();
+        final LeastRecentlyUsedMap<String, Geocache> cache = new LeastRecentlyUsedMap.LruCache<String, Geocache>(10);
+        final Geocache first = new Geocache();
         assertNull(cache.put("1", first));
 
-        final cgCache second = new cgCache();
+        final Geocache second = new Geocache();
         assertNull(cache.put("2", second));
 
         assertEquals(2, cache.size());
@@ -59,7 +59,7 @@ public class LeastRecentlyUsedMapTest extends AbstractLRUTest {
         assertTrue(cache.containsValue(second));
 
         for (int i = 3; i <= 10; i++) {
-            assertNull(cache.put(Integer.toString(i), new cgCache()));
+            assertNull(cache.put(Integer.toString(i), new Geocache()));
         }
 
         assertEquals(10, cache.size());
@@ -69,8 +69,8 @@ public class LeastRecentlyUsedMapTest extends AbstractLRUTest {
         assertTrue(cache.containsValue(second));
 
         assertNotNull(cache.remove("1")); // just replacing the old entry would not work
-        assertNull(cache.put("1", new cgCache()));
-        assertNull(cache.put("11", new cgCache()));
+        assertNull(cache.put("1", new Geocache()));
+        assertNull(cache.put("11", new Geocache()));
 
         assertEquals(10, cache.size());
 

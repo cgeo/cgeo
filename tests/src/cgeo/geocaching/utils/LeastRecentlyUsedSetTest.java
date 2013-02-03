@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import java.util.Set;
 
@@ -26,12 +26,12 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
     }
 
     public static void testRemoveEldestEntry() {
-        final LeastRecentlyUsedSet<cgCache> caches = new LeastRecentlyUsedSet<cgCache>(10);
-        final cgCache first = new cgCache();
+        final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<Geocache>(10);
+        final Geocache first = new Geocache();
         first.setGeocode("1");
         assertTrue(caches.add(first));
 
-        final cgCache second = new cgCache();
+        final Geocache second = new Geocache();
         second.setGeocode("2");
         assertTrue(caches.add(second));
 
@@ -44,7 +44,7 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
         assertEquals(2, caches.size());
 
         for (int i = 3; i <= 10; i++) {
-            final cgCache cache = new cgCache();
+            final Geocache cache = new Geocache();
             cache.setGeocode(Integer.toString(i));
             assertTrue(caches.add(cache));
         }
@@ -53,7 +53,7 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
         assertTrue(caches.contains(first));
         assertTrue(caches.contains(second));
 
-        final cgCache c11 = new cgCache();
+        final Geocache c11 = new Geocache();
         c11.setGeocode("11");
         assertTrue(caches.add(c11));
 

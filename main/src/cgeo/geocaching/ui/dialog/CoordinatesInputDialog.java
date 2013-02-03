@@ -1,9 +1,9 @@
 package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.Settings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -32,7 +32,7 @@ public class CoordinatesInputDialog extends Dialog {
 
     final private AbstractActivity context;
     final private IGeoData geo;
-    final private cgCache cache;
+    final private Geocache cache;
     private Geopoint gp;
 
     private EditText eLat, eLon;
@@ -46,7 +46,7 @@ public class CoordinatesInputDialog extends Dialog {
 
     private coordInputFormatEnum currentFormat = null;
 
-    public CoordinatesInputDialog(final AbstractActivity context, final cgCache cache, final Geopoint gp, final IGeoData geo) {
+    public CoordinatesInputDialog(final AbstractActivity context, final Geocache cache, final Geopoint gp, final IGeoData geo) {
         super(context);
         this.context = context;
         this.geo = geo;

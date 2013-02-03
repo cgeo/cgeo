@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps.cache;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
 public class WhereYouGoApp extends AbstractGeneralApp {
@@ -10,7 +10,7 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     }
 
     @Override
-    public boolean isEnabled(cgCache cache) {
+    public boolean isEnabled(Geocache cache) {
         return cache.getType() == CacheType.WHERIGO;
     }
 }

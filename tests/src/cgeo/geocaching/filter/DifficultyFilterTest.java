@@ -1,15 +1,15 @@
 package cgeo.geocaching.filter;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 public class DifficultyFilterTest extends CGeoTestCase {
 
     public static void testTerrainFilter() {
-        final cgCache easy = new cgCache();
+        final Geocache easy = new Geocache();
         easy.setDifficulty(1.5f);
 
-        final cgCache hard = new cgCache();
+        final Geocache hard = new Geocache();
         hard.setDifficulty(5f);
 
         final DifficultyFilter easyFilter = new DifficultyFilter(1);

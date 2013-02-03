@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -31,7 +31,7 @@ public abstract class AbstractConnector implements IConnector {
      * @return success
      */
     @Override
-    public boolean uploadModifiedCoordinates(cgCache cache, Geopoint wpt) {
+    public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt) {
         throw new UnsupportedOperationException();
     }
 
@@ -39,7 +39,7 @@ public abstract class AbstractConnector implements IConnector {
      * {@link IConnector}
      */
     @Override
-    public boolean deleteModifiedCoordinates(cgCache cache) {
+    public boolean deleteModifiedCoordinates(Geocache cache) {
         throw new UnsupportedOperationException();
     }
 
@@ -54,7 +54,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public String getLicenseText(final cgCache cache) {
+    public String getLicenseText(final Geocache cache) {
         return null;
     }
 

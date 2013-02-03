@@ -1,10 +1,10 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -49,7 +49,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CacheListAdapter extends ArrayAdapter<cgCache> {
+public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     private LayoutInflater inflater = null;
     private CacheComparator cacheComparator = null;
@@ -58,14 +58,14 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     private long lastSort = 0L;
     private boolean selectMode = false;
     private IFilter currentFilter = null;
-    private List<cgCache> originalList = null;
+    private List<Geocache> originalList = null;
 
     final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
     final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
     final private CacheListType cacheListType;
     final private Resources res;
     /** Resulting list of caches */
-    final private List<cgCache> list;
+    final private List<Geocache> list;
     private boolean inverseSort = false;
 
     private static final int SWIPE_MIN_DISTANCE = 60;
@@ -107,7 +107,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         ImageView dirImg;
     }
 
-    public CacheListAdapter(final Activity activity, final List<cgCache> list, CacheListType cacheListType) {
+    public CacheListAdapter(final Activity activity, final List<Geocache> list, CacheListType cacheListType) {
         super(activity, 0, list);
         final IGeoData currentGeo = cgeoapplication.getInstance().currentGeo();
         if (currentGeo != null) {
@@ -168,7 +168,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         return cacheComparator;
     }
 
-    public cgCache findCacheByGeocode(String geocode) {
+    public Geocache findCacheByGeocode(String geocode) {
         for (int i = 0; i < getCount(); i++) {
             if (getItem(i).getGeocode().equalsIgnoreCase(geocode)) {
                 return getItem(i);
@@ -183,7 +183,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     public void reFilter() {
         if (currentFilter != null) {
             // Back up the list again
-            originalList = new ArrayList<cgCache>(list);
+            originalList = new ArrayList<Geocache>(list);
 
             currentFilter.filter(list);
         }
@@ -195,7 +195,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     public void setFilter(final IFilter filter) {
         // Backup current caches list if it isn't backed up yet
         if (originalList == null) {
-            originalList = new ArrayList<cgCache>(list);
+            originalList = new ArrayList<Geocache>(list);
         }
 
         // If there is already a filter in place, this is a request to change or clear the filter, so we have to
@@ -224,7 +224,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     public int getCheckedCount() {
         int checked = 0;
-        for (cgCache cache : list) {
+        for (Geocache cache : list) {
             if (cache.isStatusChecked()) {
                 checked++;
             }
@@ -236,7 +236,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         this.selectMode = selectMode;
 
         if (!selectMode) {
-            for (final cgCache cache : list) {
+            for (final Geocache cache : list) {
                 cache.setStatusChecked(false);
             }
         }
@@ -252,7 +252,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     public void invertSelection() {
-        for (cgCache cache : list) {
+        for (Geocache cache : list) {
             cache.setStatusChecked(!cache.isStatusChecked());
         }
         notifyDataSetChanged();
@@ -302,7 +302,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         if (coords == null) {
             return;
         }
-        final ArrayList<cgCache> oldList = new ArrayList<cgCache>(list);
+        final ArrayList<Geocache> oldList = new ArrayList<Geocache>(list);
         Collections.sort(list, getPotentialInversion(new DistanceComparator(coords, list)));
 
         // avoid an update if the list has not changed due to location update
@@ -313,7 +313,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         lastSort = System.currentTimeMillis();
     }
 
-    private Comparator<? super cgCache> getPotentialInversion(final CacheComparator comparator) {
+    private Comparator<? super Geocache> getPotentialInversion(final CacheComparator comparator) {
         if (inverseSort) {
             return new InverseComparator(comparator);
         }
@@ -346,7 +346,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             return null;
         }
 
-        final cgCache cache = getItem(position);
+        final Geocache cache = getItem(position);
 
         View v = rowView;
 
@@ -533,7 +533,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         return v;
     }
 
-    private static Drawable getCacheIcon(cgCache cache) {
+    private static Drawable getCacheIcon(Geocache cache) {
         int hashCode = getIconHashCode(cache.getType(), cache.hasUserModifiedCoords() || cache.hasFinalDefined());
         final Drawable drawable = gcIconDrawables.get(hashCode);
         if (drawable != null) {
@@ -554,9 +554,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     private static class SelectionCheckBoxListener implements View.OnClickListener {
 
-        private final cgCache cache;
+        private final Geocache cache;
 
-        public SelectionCheckBoxListener(cgCache cache) {
+        public SelectionCheckBoxListener(Geocache cache) {
             this.cache = cache;
         }
 
@@ -571,9 +571,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         private boolean touch = true;
         private final GestureDetector gestureDetector;
-        private final cgCache cache;
+        private final Geocache cache;
 
-        public TouchListener(final cgCache cache) {
+        public TouchListener(final Geocache cache) {
             this.cache = cache;
             final FlingGesture dGesture = new FlingGesture(cache);
             gestureDetector = new GestureDetector(getContext(), dGesture);
@@ -622,9 +622,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     private class FlingGesture extends GestureDetector.SimpleOnGestureListener {
 
-        private final cgCache cache;
+        private final Geocache cache;
 
-        public FlingGesture(cgCache cache) {
+        public FlingGesture(Geocache cache) {
             this.cache = cache;
         }
 
@@ -659,13 +659,13 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
     }
 
-    public List<cgCache> getFilteredList() {
+    public List<Geocache> getFilteredList() {
         return list;
     }
 
-    public List<cgCache> getCheckedCaches() {
-        final ArrayList<cgCache> result = new ArrayList<cgCache>();
-        for (cgCache cache : list) {
+    public List<Geocache> getCheckedCaches() {
+        final ArrayList<Geocache> result = new ArrayList<Geocache>();
+        for (Geocache cache : list) {
             if (cache.isStatusChecked()) {
                 result.add(cache);
             }
@@ -673,12 +673,12 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         return result;
     }
 
-    public List<cgCache> getCheckedOrAllCaches() {
-        final List<cgCache> result = getCheckedCaches();
+    public List<Geocache> getCheckedOrAllCaches() {
+        final List<Geocache> result = getCheckedCaches();
         if (!result.isEmpty()) {
             return result;
         }
-        return new ArrayList<cgCache>(list);
+        return new ArrayList<Geocache>(list);
     }
 
     public int getCheckedOrAllCount() {

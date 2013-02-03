@@ -1,6 +1,6 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheSize;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ class SizeFilter extends AbstractFilter {
     }
 
     @Override
-    public boolean accepts(cgCache cache) {
+    public boolean accepts(Geocache cache) {
         return cacheSize == cache.getSize();
     }
 

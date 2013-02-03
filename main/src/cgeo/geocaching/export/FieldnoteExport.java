@@ -2,7 +2,7 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
@@ -56,7 +56,7 @@ class FieldnoteExport extends AbstractExport {
     }
 
     @Override
-    public void export(final List<cgCache> caches, final Activity activity) {
+    public void export(final List<Geocache> caches, final Activity activity) {
         if (null == activity) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
@@ -67,7 +67,7 @@ class FieldnoteExport extends AbstractExport {
         }
     }
 
-    private Dialog getExportOptionsDialog(final List<cgCache> caches, final Activity activity) {
+    private Dialog getExportOptionsDialog(final List<Geocache> caches, final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         View layout = activity.getLayoutInflater().inflate(R.layout.fieldnote_export_dialog, null);
@@ -101,7 +101,7 @@ class FieldnoteExport extends AbstractExport {
     }
 
     private class ExportTask extends AsyncTask<Void, Integer, Boolean> {
-        private final List<cgCache> caches;
+        private final List<Geocache> caches;
         private final Activity activity;
         private final boolean upload;
         private final boolean onlyNew;
@@ -114,7 +114,7 @@ class FieldnoteExport extends AbstractExport {
          * Instantiates and configurates the task for exporting field notes.
          *
          * @param caches
-         *            The {@link List} of {@link cgCache} to be exported
+         *            The {@link List} of {@link cgeo.geocaching.Geocache} to be exported
          * @param activity
          *            optional: Show a progress bar and toasts
          * @param upload
@@ -122,7 +122,7 @@ class FieldnoteExport extends AbstractExport {
          * @param onlyNew
          *            Upload/export only new logs since last export
          */
-        public ExportTask(final List<cgCache> caches, final Activity activity, final boolean upload, final boolean onlyNew) {
+        public ExportTask(final List<Geocache> caches, final Activity activity, final boolean upload, final boolean onlyNew) {
             this.caches = caches;
             this.activity = activity;
             this.upload = upload;
@@ -141,7 +141,7 @@ class FieldnoteExport extends AbstractExport {
             final StringBuilder fieldNoteBuffer = new StringBuilder();
             try {
                 int i = 0;
-                for (cgCache cache : caches) {
+                for (Geocache cache : caches) {
                     if (cache.isLogOffline()) {
                         appendFieldNote(fieldNoteBuffer, cache, cgData.loadLogOffline(cache.getGeocode()));
                         publishProgress(++i);
@@ -257,7 +257,7 @@ class FieldnoteExport extends AbstractExport {
         }
     }
 
-    static void appendFieldNote(final StringBuilder fieldNoteBuffer, final cgCache cache, final LogEntry log) {
+    static void appendFieldNote(final StringBuilder fieldNoteBuffer, final Geocache cache, final LogEntry log) {
         fieldNoteBuffer.append(cache.getGeocode())
                 .append(',')
                 .append(fieldNoteDateFormat.format(new Date(log.date)))

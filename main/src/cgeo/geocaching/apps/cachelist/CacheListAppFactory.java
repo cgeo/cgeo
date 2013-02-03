@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cachelist;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.utils.Log;
@@ -55,7 +55,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, final List<cgCache> caches, final IAbstractActivity activity,
+    public static boolean onMenuItemSelected(final MenuItem item, final List<Geocache> caches, final IAbstractActivity activity,
             final SearchResult search) {
         final CacheListApp app = (CacheListApp) getAppFromMenuItem(item, LazyHolder.apps);
         if (app != null) {

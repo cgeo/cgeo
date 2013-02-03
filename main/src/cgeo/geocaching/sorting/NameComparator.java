@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,12 +11,12 @@ import org.apache.commons.lang3.StringUtils;
 public class NameComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
+    protected boolean canCompare(Geocache cache1, Geocache cache2) {
         return StringUtils.isNotBlank(cache1.getName()) && StringUtils.isNotBlank(cache2.getName());
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
+    protected int compareCaches(Geocache cache1, Geocache cache2) {
         return cache1.getNameForSorting().compareToIgnoreCase(cache2.getNameForSorting());
     }
 }

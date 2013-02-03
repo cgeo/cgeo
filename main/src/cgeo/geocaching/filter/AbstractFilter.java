@@ -1,6 +1,6 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ abstract class AbstractFilter implements IFilter {
     }
 
     @Override
-    public void filter(List<cgCache> list) {
-        final List<cgCache> itemsToRemove = new ArrayList<cgCache>();
-        for (cgCache item : list) {
+    public void filter(List<Geocache> list) {
+        final List<Geocache> itemsToRemove = new ArrayList<Geocache>();
+        for (Geocache item : list) {
             if (!accepts(item)) {
                 itemsToRemove.add(item);
             }

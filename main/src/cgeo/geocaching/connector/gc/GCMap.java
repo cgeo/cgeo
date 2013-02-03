@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -68,7 +68,7 @@ public class GCMap {
             }
 
             for (int j = 0; j < dataArray.length(); j++) {
-                final cgCache cache = new cgCache();
+                final Geocache cache = new Geocache();
 
                 JSONObject dataObject = dataArray.getJSONObject(j);
                 cache.setName(dataObject.getString("name"));
@@ -202,7 +202,7 @@ public class GCMap {
                 String id = entry.getKey();
                 List<UTFGridPosition> pos = entry.getValue();
                 UTFGridPosition xy = UTFGrid.getPositionInGrid(pos);
-                cgCache cache = new cgCache();
+                Geocache cache = new Geocache();
                 cache.setDetailed(false);
                 cache.setReliableLatLon(false);
                 cache.setGeocode(id);

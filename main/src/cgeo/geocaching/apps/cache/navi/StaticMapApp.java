@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import android.app.Activity;
 
@@ -13,7 +13,7 @@ class StaticMapApp extends AbstractStaticMapsApp {
     }
 
     @Override
-    public boolean isEnabled(cgCache cache) {
+    public boolean isEnabled(Geocache cache) {
         return cache.hasStaticMap();
     }
 
@@ -23,7 +23,7 @@ class StaticMapApp extends AbstractStaticMapsApp {
     }
 
     @Override
-    public void navigate(Activity activity, cgCache cache) {
+    public void navigate(Activity activity, Geocache cache) {
         invokeStaticMaps(activity, cache, null, false);
     }
 

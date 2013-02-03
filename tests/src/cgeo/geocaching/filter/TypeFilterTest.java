@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
 import java.util.ArrayList;
@@ -9,18 +9,18 @@ import java.util.ArrayList;
 public class TypeFilterTest extends CGeoTestCase {
 
     private TypeFilter traditionalFilter;
-    private cgCache traditional;
-    private cgCache mystery;
+    private Geocache traditional;
+    private Geocache mystery;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         traditionalFilter = new TypeFilter(CacheType.TRADITIONAL);
 
-        traditional = new cgCache();
+        traditional = new Geocache();
         traditional.setType(CacheType.TRADITIONAL);
 
-        mystery = new cgCache();
+        mystery = new Geocache();
         mystery.setType(CacheType.MYSTERY);
     }
 
@@ -30,7 +30,7 @@ public class TypeFilterTest extends CGeoTestCase {
     }
 
     public void testFilter() {
-        final ArrayList<cgCache> list = new ArrayList<cgCache>();
+        final ArrayList<Geocache> list = new ArrayList<Geocache>();
         traditionalFilter.filter(list);
         assertEquals(0, list.size());
 

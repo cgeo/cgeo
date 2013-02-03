@@ -2,8 +2,8 @@ package cgeo.geocaching.sorting;
 
 import java.util.Comparator;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
-public interface CacheComparator extends Comparator<cgCache> {
+public interface CacheComparator extends Comparator<Geocache> {
 
 }

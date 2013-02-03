@@ -20,10 +20,10 @@ import java.util.Set;
 public class CacheCache {
 
     private static final int MAX_CACHED_CACHES = 1000;
-    final private LeastRecentlyUsedMap<String, cgCache> cachesCache;
+    final private LeastRecentlyUsedMap<String, Geocache> cachesCache;
 
     public CacheCache() {
-        cachesCache = new LeastRecentlyUsedMap.LruCache<String, cgCache>(MAX_CACHED_CACHES);
+        cachesCache = new LeastRecentlyUsedMap.LruCache<String, Geocache>(MAX_CACHED_CACHES);
         cachesCache.setRemoveHandler(new CacheRemoveHandler());
     }
 
@@ -51,7 +51,7 @@ public class CacheCache {
      *            Cache
      *
      */
-    public void putCacheInCache(final cgCache cache) {
+    public void putCacheInCache(final Geocache cache) {
         if (cache == null) {
             throw new IllegalArgumentException("cache must not be null");
         }
@@ -69,7 +69,7 @@ public class CacheCache {
      *            Geocode of the cache to retrieve from the cache
      * @return cache if found, null else
      */
-    public cgCache getCacheFromCache(final String geocode) {
+    public Geocache getCacheFromCache(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             throw new IllegalArgumentException("geocode must not be empty");
         }
@@ -80,7 +80,7 @@ public class CacheCache {
 
     public synchronized Set<String> getInViewport(final Viewport viewport, final CacheType cacheType) {
         final Set<String> geocodes = new HashSet<String>();
-        for (final cgCache cache : cachesCache.values()) {
+        for (final Geocache cache : cachesCache.values()) {
             if (cache.getCoords() == null) {
                 // FIXME: this kludge must be removed, it is only present to help us debug the cases where
                 // caches contain null coordinates.
@@ -99,10 +99,10 @@ public class CacheCache {
         return StringUtils.join(cachesCache.keySet(), ' ');
     }
 
-    private static class CacheRemoveHandler implements RemoveHandler<cgCache> {
+    private static class CacheRemoveHandler implements RemoveHandler<Geocache> {
 
         @Override
-        public void onRemove(final cgCache removed) {
+        public void onRemove(final Geocache removed) {
             // FIXME: as above, we sometimes get caches with null coordinates, that may then provoke
             // a NullPointerException down the invocation chain.
             if (removed.getCoords() != null) {

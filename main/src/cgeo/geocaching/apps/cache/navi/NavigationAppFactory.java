@@ -1,9 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractAppFactory;
@@ -96,7 +96,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * Default way to handle selection of navigation tool.<br />
      * A dialog is created for tool selection and the selected tool is started afterwards.
      * <p />
-     * Delegates to {@link #showNavigationMenu(Activity, cgCache, cgeo.geocaching.Waypoint, Geopoint, boolean, boolean)} with
+     * Delegates to {@link #showNavigationMenu(Activity, cgeo.geocaching.Geocache, cgeo.geocaching.Waypoint, Geopoint, boolean, boolean)} with
      * <code>showInternalMap = true</code> and <code>showDefaultNavigation = false</code>
      *
      * @param activity
@@ -105,7 +105,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param destination
      */
     public static void showNavigationMenu(final Activity activity,
-            final cgCache cache, final Waypoint waypoint, final Geopoint destination) {
+            final Geocache cache, final Waypoint waypoint, final Geopoint destination) {
         showNavigationMenu(activity, cache, waypoint, destination, true, false);
     }
 
@@ -125,10 +125,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param showDefaultNavigation
      *            should be <code>false</code> by default
      *
-     * @see #showNavigationMenu(Activity, cgCache, cgeo.geocaching.Waypoint, Geopoint)
+     * @see #showNavigationMenu(Activity, cgeo.geocaching.Geocache, cgeo.geocaching.Waypoint, Geopoint)
      */
     public static void showNavigationMenu(final Activity activity,
-            final cgCache cache, final Waypoint waypoint, final Geopoint destination,
+            final Geocache cache, final Waypoint waypoint, final Geopoint destination,
             final boolean showInternalMap, final boolean showDefaultNavigation) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
@@ -216,15 +216,15 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     /**
      * Adds the installed navigation tools to the given menu.
-     * Use {@link #onMenuItemSelected(MenuItem, Activity, cgCache)} on
+     * Use {@link #onMenuItemSelected(MenuItem, Activity, cgeo.geocaching.Geocache)} on
      * selection event to start the selected navigation tool.
      *
-     * <b>Only use this way if {@link #showNavigationMenu(Activity, cgCache, cgeo.geocaching.Waypoint, Geopoint, boolean, boolean)} is
+     * <b>Only use this way if {@link #showNavigationMenu(Activity, cgeo.geocaching.Geocache, cgeo.geocaching.Waypoint, Geopoint, boolean, boolean)} is
      * not suitable for the given usecase.</b>
      *
      * @param menu
      */
-    public static void addMenuItems(final Menu menu, final cgCache cache) {
+    public static void addMenuItems(final Menu menu, final Geocache cache) {
         for (NavigationAppsEnum navApp : getInstalledNavigationApps()) {
             if (navApp.app instanceof CacheNavigationApp) {
                 CacheNavigationApp cacheApp = (CacheNavigationApp) navApp.app;
@@ -247,20 +247,20 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     /**
-     * Handles menu selections for menu entries created with {@link #addMenuItems(Menu, cgCache)}.
+     * Handles menu selections for menu entries created with {@link #addMenuItems(Menu, cgeo.geocaching.Geocache)}.
      *
      * @param item
      * @param activity
      * @param cache
      * @return
      */
-    public static boolean onMenuItemSelected(final MenuItem item, Activity activity, cgCache cache) {
+    public static boolean onMenuItemSelected(final MenuItem item, Activity activity, Geocache cache) {
         final App menuItem = getAppFromMenuItem(item);
         navigateCache(activity, cache, menuItem);
         return menuItem != null;
     }
 
-    private static void navigateCache(Activity activity, cgCache cache, App app) {
+    private static void navigateCache(Activity activity, Geocache cache, App app) {
         if (app instanceof CacheNavigationApp) {
             CacheNavigationApp cacheApp = (CacheNavigationApp) app;
             cacheApp.navigate(activity, cache);
@@ -305,7 +305,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param activity
      * @param cache
      */
-    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, cgCache cache) {
+    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, Geocache cache) {
         if (cache == null || cache.getCoords() == null) {
             ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_location_unknown));
             return;

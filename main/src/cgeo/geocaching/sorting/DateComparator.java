@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgeoapplication;
 
 import java.util.ArrayList;
@@ -12,19 +12,19 @@ import java.util.Date;
 public class DateComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
+    protected boolean canCompare(Geocache cache1, Geocache cache2) {
         return true;
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
+    protected int compareCaches(Geocache cache1, Geocache cache2) {
         final Date date1 = cache1.getHiddenDate();
         final Date date2 = cache2.getHiddenDate();
         if (date1 != null && date2 != null) {
             final int dateDifference = date1.compareTo(date2);
             // for equal dates, sort by distance
             if (dateDifference == 0) {
-                final ArrayList<cgCache> list = new ArrayList<cgCache>();
+                final ArrayList<Geocache> list = new ArrayList<Geocache>();
                 list.add(cache1);
                 list.add(cache2);
                 final DistanceComparator distanceComparator = new DistanceComparator(cgeoapplication.getInstance().currentGeo().getCoords(), list);

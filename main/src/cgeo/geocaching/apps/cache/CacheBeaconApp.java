@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps.cache;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheAttribute;
 
 public class CacheBeaconApp extends AbstractGeneralApp {
@@ -11,7 +11,7 @@ public class CacheBeaconApp extends AbstractGeneralApp {
     }
 
     @Override
-    public boolean isEnabled(cgCache cache) {
+    public boolean isEnabled(Geocache cache) {
         return cache.hasAttribute(CacheAttribute.WIRELESS_BEACON, true);
     }
 

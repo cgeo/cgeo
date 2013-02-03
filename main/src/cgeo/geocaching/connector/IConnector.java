@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -27,7 +27,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
-    public String getCacheUrl(final cgCache cache);
+    public String getCacheUrl(final Geocache cache);
 
     /**
      * enable/disable watchlist controls in cache details
@@ -63,7 +63,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
-    public String getLicenseText(final cgCache cache);
+    public String getLicenseText(final Geocache cache);
 
     /**
      * enable/disable user actions in cache details
@@ -118,7 +118,7 @@ public interface IConnector {
      * @param wpt
      * @return success
      */
-    public boolean uploadModifiedCoordinates(cgCache cache, Geopoint wpt);
+    public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt);
 
     /**
      * Reseting of modified coordinates on website to details
@@ -126,7 +126,7 @@ public interface IConnector {
      * @param cache
      * @return success
      */
-    public boolean deleteModifiedCoordinates(cgCache cache);
+    public boolean deleteModifiedCoordinates(Geocache cache);
 
     /**
      * The CacheRealm this cache belongs to

@@ -1,9 +1,9 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StoredList;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -35,11 +35,11 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         testGPXVersion(R.raw.gc1bkp3_gpx100);
     }
 
-    private cgCache testGPXVersion(final int resourceId) throws IOException, ParserException {
-        final List<cgCache> caches = readGPX10(resourceId);
+    private Geocache testGPXVersion(final int resourceId) throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(resourceId);
         assertNotNull(caches);
         assertEquals(1, caches.size());
-        final cgCache cache = caches.get(0);
+        final Geocache cache = caches.get(0);
         assertEquals("GC1BKP3", cache.getGeocode());
         assertEquals("9946f030-a514-46d8-a050-a60e92fd2e1a", cache.getGuid());
         assertEquals(CacheType.TRADITIONAL, cache.getType());
@@ -58,14 +58,14 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testGPXVersion101() throws IOException, ParserException {
-        final cgCache cache = testGPXVersion(R.raw.gc1bkp3_gpx101);
+        final Geocache cache = testGPXVersion(R.raw.gc1bkp3_gpx101);
         assertNotNull(cache.getAttributes());
         assertEquals(10, cache.getAttributes().size());
     }
 
     public void testOC() throws IOException, ParserException {
-        final List<cgCache> caches = readGPX10(R.raw.oc5952_gpx);
-        final cgCache cache = caches.get(0);
+        final List<Geocache> caches = readGPX10(R.raw.oc5952_gpx);
+        final Geocache cache = caches.get(0);
         assertEquals("OC5952", cache.getGeocode());
         assertEquals(CacheType.TRADITIONAL, cache.getType());
         assertEquals(false, cache.isArchived());
@@ -84,9 +84,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testGc31j2h() throws IOException, ParserException {
         removeCacheCompletely("GC31J2H");
-        final List<cgCache> caches = readGPX10(R.raw.gc31j2h);
+        final List<Geocache> caches = readGPX10(R.raw.gc31j2h);
         assertEquals(1, caches.size());
-        final cgCache cache = caches.get(0);
+        final Geocache cache = caches.get(0);
 
         assertGc31j2h(cache);
         assertSame(cache, caches.get(0));
@@ -98,15 +98,15 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testGc31j2hWpts() throws IOException, ParserException {
         removeCacheCompletely("GC31J2H");
-        List<cgCache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts);
+        List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts);
         assertEquals(1, caches.size());
-        cgCache cache = caches.get(0);
+        Geocache cache = caches.get(0);
         assertGc31j2h(cache);
         assertGc31j2hWaypoints(cache);
     }
 
     public void testGc31j2hWptsWithoutCache() throws IOException, ParserException {
-        final List<cgCache> caches = readGPX10(R.raw.gc31j2h_wpts);
+        final List<Geocache> caches = readGPX10(R.raw.gc31j2h_wpts);
         assertEquals(0, caches.size());
     }
 
@@ -123,7 +123,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(WaypointType.PARKING, GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n()));
     }
 
-    private static void assertGc31j2h(final cgCache cache) {
+    private static void assertGc31j2h(final Geocache cache) {
         assertEquals("GC31J2H", cache.getGeocode());
         assertEquals("Hockenheimer City-Brunnen", cache.getName());
         assertTrue("Hockenheimer City-Brunnen by vptsz, Multi-cache (2/1)", cache.getShortDescription().startsWith("Kurzer informativer Multi entlang der Brunnen"));
@@ -164,7 +164,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
-    private static void assertGc31j2hWaypoints(final cgCache cache) {
+    private static void assertGc31j2hWaypoints(final Geocache cache) {
         assertNotNull(cache.getWaypoints());
         assertEquals(2, cache.getWaypoints().size());
         Waypoint wp = cache.getWaypoints().get(0);
@@ -188,24 +188,24 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(8.545100, wp.getCoords().getLongitude(), 0.000001);
     }
 
-    private List<cgCache> readGPX10(int... resourceIds) throws IOException, ParserException {
+    private List<Geocache> readGPX10(int... resourceIds) throws IOException, ParserException {
         final GPX10Parser parser = new GPX10Parser(listId);
         return readVersionedGPX(parser, resourceIds);
     }
 
-    private List<cgCache> readGPX11(int... resourceIds) throws IOException, ParserException {
+    private List<Geocache> readGPX11(int... resourceIds) throws IOException, ParserException {
         final GPX11Parser parser = new GPX11Parser(listId);
         return readVersionedGPX(parser, resourceIds);
     }
 
-    private List<cgCache> readVersionedGPX(final GPXParser parser, int... resourceIds) throws IOException, ParserException {
+    private List<Geocache> readVersionedGPX(final GPXParser parser, int... resourceIds) throws IOException, ParserException {
         final Set<String> result = new HashSet<String>();
         for (int resourceId : resourceIds) {
             final InputStream instream = getResourceStream(resourceId);
             try {
-                Collection<cgCache> caches = parser.parse(instream, null);
+                Collection<Geocache> caches = parser.parse(instream, null);
                 assertNotNull(caches);
-                for (cgCache cache : caches) {
+                for (Geocache cache : caches) {
                     result.add(cache.getGeocode());
                 }
             } finally {
@@ -213,7 +213,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
             }
         }
         // reload caches, because the parser only returns the minimum version of each cache
-        return new ArrayList<cgCache>(cgData.loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
+        return new ArrayList<Geocache>(cgData.loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
     }
 
     public static void testParseDateWithFractionalSeconds() throws ParseException {
@@ -229,21 +229,21 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testSelfmadeGPXWithoutGeocodes() throws Exception {
-        final List<cgCache> caches = readGPX11(R.raw.no_connector);
+        final List<Geocache> caches = readGPX11(R.raw.no_connector);
         assertEquals(13, caches.size());
     }
 
     public void testTexasChallenge2012() throws Exception {
-        final List<cgCache> caches = readGPX10(R.raw.challenge);
+        final List<Geocache> caches = readGPX10(R.raw.challenge);
         // previously these caches overwrote each other during parsing
         assertEquals(130, caches.size());
     }
 
     public void testGeoToad() throws Exception {
-        final List<cgCache> caches = readGPX10(R.raw.geotoad);
+        final List<Geocache> caches = readGPX10(R.raw.geotoad);
         assertEquals(2, caches.size());
         List<String> codes = new ArrayList<String>();
-        for (cgCache cache : caches) {
+        for (Geocache cache : caches) {
             codes.add(cache.getGeocode());
         }
         assertTrue(codes.contains("GC2KN6K"));
@@ -254,11 +254,11 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         // this test should be in CacheTest, but it is easier to create here due to the GPX import abilities
         final String geocode = "GC31J2H";
         removeCacheCompletely(geocode);
-        final List<cgCache> caches = readGPX10(R.raw.lazy);
+        final List<Geocache> caches = readGPX10(R.raw.lazy);
         assertEquals(1, caches.size());
         cgData.removeAllFromCache();
         // load only the minimum cache, it has several members missing
-        final cgCache minimalCache = cgData.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+        final Geocache minimalCache = cgData.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
 
         // now check that we load lazy members on demand
         assertFalse(minimalCache.getAttributes().isEmpty());
@@ -272,7 +272,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
 
         // first import
-        List<cgCache> caches = readGPX10(R.raw.lazy);
+        List<Geocache> caches = readGPX10(R.raw.lazy);
         assertEquals(1, caches.size());
         assertEquals(6, caches.get(0).getLogs().size());
 

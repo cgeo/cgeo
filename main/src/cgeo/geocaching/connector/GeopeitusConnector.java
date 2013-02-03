@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.cgCache;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,7 +13,7 @@ public class GeopeitusConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(final cgCache cache) {
+    public String getCacheUrl(final Geocache cache) {
         return getCacheUrlPrefix() + StringUtils.stripStart(cache.getGeocode().substring(2), "0");
     }
 

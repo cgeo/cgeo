@@ -1,7 +1,7 @@
 package cgeo.geocaching.gcvote;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
@@ -178,7 +178,7 @@ public final class GCVote {
      * @param vote
      * @return
      */
-    public static boolean setRating(cgCache cache, double vote) {
+    public static boolean setRating(Geocache cache, double vote) {
         if (!cache.supportsGCVote()) {
             return false;
         }
@@ -207,13 +207,13 @@ public final class GCVote {
         return result.trim().equalsIgnoreCase("ok");
     }
 
-    public static void loadRatings(ArrayList<cgCache> caches) {
+    public static void loadRatings(ArrayList<Geocache> caches) {
         if (!Settings.isRatingWanted()) {
             return;
         }
 
         final ArrayList<String> guids = new ArrayList<String>(caches.size());
-        for (final cgCache cache : caches) {
+        for (final Geocache cache : caches) {
             String guid = cache.getGuid();
             if (StringUtils.isNotBlank(guid)) {
                 guids.add(guid);
@@ -229,7 +229,7 @@ public final class GCVote {
 
             if (MapUtils.isNotEmpty(ratings)) {
                 // save found cache coordinates
-                for (cgCache cache : caches) {
+                for (Geocache cache : caches) {
                     if (ratings.containsKey(cache.getGuid())) {
                         GCVoteRating rating = ratings.get(cache.getGuid());
 

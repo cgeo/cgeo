@@ -1,6 +1,6 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import java.io.BufferedReader;
@@ -26,7 +26,7 @@ public abstract class FileParser {
      * @throws ParserException
      *             if the input stream contains data not matching the file format of the parser
      */
-    public abstract Collection<cgCache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException;
+    public abstract Collection<Geocache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException;
 
     /**
      * Convenience method for parsing a file.
@@ -37,7 +37,7 @@ public abstract class FileParser {
      * @throws IOException
      * @throws ParserException
      */
-    public Collection<cgCache> parse(final File file, final CancellableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(final File file, final CancellableHandler progressHandler) throws IOException, ParserException {
         FileInputStream fis = new FileInputStream(file);
         try {
             return parse(fis, progressHandler);
@@ -72,7 +72,7 @@ public abstract class FileParser {
         }
     }
 
-    protected static void fixCache(cgCache cache) {
+    protected static void fixCache(Geocache cache) {
         if (cache.getInventory() != null) {
             cache.setInventoryItems(cache.getInventory().size());
         } else {

@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -18,8 +18,8 @@ public class WaypointsTest extends CGeoTestCase {
         }
     };
 
-    private static cgCache downloadCache(final String geocode) {
-        final SearchResult searchResult = cgCache.searchByGeocode(geocode, null, 0, true, handler);
+    private static Geocache downloadCache(final String geocode) {
+        final SearchResult searchResult = Geocache.searchByGeocode(geocode, null, 0, true, handler);
         assertEquals(1, searchResult.getCount());
         return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_WAYPOINTS);
     }

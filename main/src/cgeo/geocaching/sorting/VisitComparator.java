@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 /**
  * sorts caches by last visited date
@@ -9,12 +9,12 @@ import cgeo.geocaching.cgCache;
 public class VisitComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(final cgCache cache1, final cgCache cache2) {
+    protected boolean canCompare(final Geocache cache1, final Geocache cache2) {
         return true;
     }
 
     @Override
-    protected int compareCaches(final cgCache cache1, final cgCache cache2) {
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         return Long.valueOf(cache2.getVisitedDate()).compareTo(cache1.getVisitedDate());
     }
 }

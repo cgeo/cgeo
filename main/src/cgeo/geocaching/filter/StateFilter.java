@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 
 import android.content.res.Resources;
@@ -25,7 +25,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(cgCache cache) {
+        public boolean accepts(Geocache cache) {
             return cache.isFound();
         }
 
@@ -37,7 +37,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(cgCache cache) {
+        public boolean accepts(Geocache cache) {
             return cache.isArchived();
         }
     }
@@ -48,7 +48,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(cgCache cache) {
+        public boolean accepts(Geocache cache) {
             return cache.isDisabled();
         }
     }
@@ -59,7 +59,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(cgCache cache) {
+        public boolean accepts(Geocache cache) {
             return cache.isPremiumMembersOnly();
         }
     }
@@ -70,7 +70,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(cgCache cache) {
+        public boolean accepts(Geocache cache) {
             return !cache.isPremiumMembersOnly();
         }
     }
@@ -81,7 +81,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(cgCache cache) {
+        public boolean accepts(Geocache cache) {
             return cache.isLogOffline();
         }
     }

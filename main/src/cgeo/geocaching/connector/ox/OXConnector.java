@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.ox;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -27,7 +27,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public String getCacheUrl(cgCache cache) {
+    public String getCacheUrl(Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
@@ -42,7 +42,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public String getLicenseText(cgCache cache) {
+    public String getLicenseText(Geocache cache) {
         // NOT TO BE TRANSLATED
         return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons BY-SA 3.0 License";
     }
@@ -54,7 +54,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
 
     @Override
     public SearchResult searchByGeocode(String geocode, String guid, CancellableHandler handler) {
-        final cgCache cache = OpenCachingApi.searchByGeoCode(geocode);
+        final Geocache cache = OpenCachingApi.searchByGeoCode(geocode);
         if (cache == null) {
             return null;
         }
@@ -64,7 +64,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
 
     @Override
     public SearchResult searchByCenter(Geopoint center) {
-        Collection<cgCache> caches = OpenCachingApi.searchByCenter(center);
+        Collection<Geocache> caches = OpenCachingApi.searchByCenter(center);
         if (caches == null) {
             return null;
         }

@@ -1,10 +1,10 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.cgeoapplication;
@@ -80,7 +80,7 @@ public abstract class GPXParser extends FileParser {
     final protected String namespace;
     final private String version;
 
-    private cgCache cache;
+    private Geocache cache;
     private Trackable trackable = new Trackable();
     private LogEntry log = null;
 
@@ -248,7 +248,7 @@ public abstract class GPXParser extends FileParser {
     }
 
     @Override
-    public Collection<cgCache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException {
         resetCache();
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
@@ -329,7 +329,7 @@ public abstract class GPXParser extends FileParser {
                 if (cache.getName().length() > 2) {
                     final String cacheGeocodeForWaypoint = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
                     // lookup cache for waypoint in already parsed caches
-                    final cgCache cacheForWaypoint = cgData.loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
+                    final Geocache cacheForWaypoint = cgData.loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cacheForWaypoint != null) {
                         final Waypoint waypoint = new Waypoint(cache.getShortdesc(), convertWaypointSym2Type(sym), false);
                         waypoint.setId(-1);
@@ -783,7 +783,7 @@ public abstract class GPXParser extends FileParser {
      * @param cache
      *            currently imported cache
      */
-    protected void afterParsing(cgCache cache) {
+    protected void afterParsing(Geocache cache) {
         // can be overridden by sub classes
     }
 
@@ -858,7 +858,7 @@ public abstract class GPXParser extends FileParser {
         desc = null;
         cmt = null;
 
-        cache = new cgCache(this);
+        cache = new Geocache(this);
         for (int i = 0; i < userData.length; i++) {
             userData[i] = null;
         }

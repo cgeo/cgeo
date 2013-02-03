@@ -1,6 +1,6 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface IFilter {
      * @param cache
      * @return true if the filter accepts the cache, false otherwise
      */
-    public abstract boolean accepts(final cgCache cache);
+    public abstract boolean accepts(final Geocache cache);
 
-    public void filter(final List<cgCache> list);
+    public void filter(final List<Geocache> list);
 }

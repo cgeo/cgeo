@@ -1,10 +1,10 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StaticMapsProvider;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.activity.Progress;
@@ -134,11 +134,11 @@ public class GPXImporter {
         public void run() {
             try {
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_START));
-                final Collection<cgCache> caches = doImport();
+                final Collection<Geocache> caches = doImport();
                 Log.i("Imported successfully " + caches.size() + " caches.");
 
                 final SearchResult search = new SearchResult();
-                for (cgCache cache : caches) {
+                for (Geocache cache : caches) {
                     search.addCache(cache);
                 }
 
@@ -167,12 +167,12 @@ public class GPXImporter {
             }
         }
 
-        protected abstract Collection<cgCache> doImport() throws IOException, ParserException;
+        protected abstract Collection<Geocache> doImport() throws IOException, ParserException;
 
         private boolean importStaticMaps(final SearchResult importedCaches) {
             int storedCacheMaps = 0;
             for (String geocode : importedCaches.getGeocodes()) {
-                cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
                 StaticMapsProvider.downloadMaps(cache);
                 storedCacheMaps++;
@@ -194,7 +194,7 @@ public class GPXImporter {
         }
 
         @Override
-        protected Collection<cgCache> doImport() throws IOException, ParserException {
+        protected Collection<Geocache> doImport() throws IOException, ParserException {
             Log.i("Import LOC file: " + file.getAbsolutePath());
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) file.length()));
             LocParser parser = new LocParser(listId);
@@ -209,7 +209,7 @@ public class GPXImporter {
         }
 
         @Override
-        protected Collection<cgCache> doImport() throws IOException, ParserException {
+        protected Collection<Geocache> doImport() throws IOException, ParserException {
             try {
                 // try to parse cache file as GPX 10
                 return doImport(new GPX10Parser(listId));
@@ -219,7 +219,7 @@ public class GPXImporter {
             }
         }
 
-        protected abstract Collection<cgCache> doImport(GPXParser parser) throws IOException, ParserException;
+        protected abstract Collection<Geocache> doImport(GPXParser parser) throws IOException, ParserException;
     }
 
     static class ImportGpxFileThread extends ImportGpxThread {
@@ -231,10 +231,10 @@ public class GPXImporter {
         }
 
         @Override
-        protected Collection<cgCache> doImport(GPXParser parser) throws IOException, ParserException {
+        protected Collection<Geocache> doImport(GPXParser parser) throws IOException, ParserException {
             Log.i("Import GPX file: " + cacheFile.getAbsolutePath());
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) cacheFile.length()));
-            Collection<cgCache> caches = parser.parse(cacheFile, progressHandler);
+            Collection<Geocache> caches = parser.parse(cacheFile, progressHandler);
 
             final String wptsFilename = getWaypointsFileNameForGpxFile(cacheFile);
             if (wptsFilename != null) {
@@ -260,7 +260,7 @@ public class GPXImporter {
         }
 
         @Override
-        protected Collection<cgCache> doImport(GPXParser parser) throws IOException, ParserException {
+        protected Collection<Geocache> doImport(GPXParser parser) throws IOException, ParserException {
             Log.i("Import GPX from uri: " + uri);
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, -1));
             InputStream is = contentResolver.openInputStream(uri);
@@ -279,8 +279,8 @@ public class GPXImporter {
         }
 
         @Override
-        protected Collection<cgCache> doImport(GPXParser parser) throws IOException, ParserException {
-            Collection<cgCache> caches = Collections.emptySet();
+        protected Collection<Geocache> doImport(GPXParser parser) throws IOException, ParserException {
+            Collection<Geocache> caches = Collections.emptySet();
             // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
             // 1. parse GPX files
             ZipInputStream zis = new ZipInputStream(getInputStream());

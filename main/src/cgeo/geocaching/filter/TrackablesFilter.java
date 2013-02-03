@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgeoapplication;
 
 class TrackablesFilter extends AbstractFilter implements IFilterFactory {
@@ -10,7 +10,7 @@ class TrackablesFilter extends AbstractFilter implements IFilterFactory {
     }
 
     @Override
-    public boolean accepts(cgCache cache) {
+    public boolean accepts(Geocache cache) {
         return cache.hasTrackables();
     }
 

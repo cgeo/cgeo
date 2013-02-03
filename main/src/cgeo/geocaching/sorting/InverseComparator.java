@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 /**
  * comparator which inverses the sort order of the given other comparator
@@ -15,7 +15,7 @@ public class InverseComparator implements CacheComparator {
     }
 
     @Override
-    public int compare(cgCache lhs, cgCache rhs) {
+    public int compare(Geocache lhs, Geocache rhs) {
         return originalComparator.compare(rhs, lhs);
     }
 

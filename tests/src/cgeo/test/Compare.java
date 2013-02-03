@@ -4,12 +4,12 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.LogType;
 
 public abstract class Compare {
 
-    public static void assertCompareCaches(ICache expected, cgCache actual, boolean all) {
+    public static void assertCompareCaches(ICache expected, Geocache actual, boolean all) {
         assertEquals(expected.getGeocode(), actual.getGeocode());
         assertTrue(expected.getType() == actual.getType());
         assertEquals(expected.getOwnerDisplayName(), actual.getOwnerDisplayName());

@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ class DifficultyFilter extends AbstractRangeFilter {
     }
 
     @Override
-    public boolean accepts(cgCache cache) {
+    public boolean accepts(Geocache cache) {
         return rangeMin <= cache.getDifficulty() && cache.getDifficulty() < rangeMax;
     }
 

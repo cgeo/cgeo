@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -53,7 +53,7 @@ public class OC11XMLParser {
     private static ImageHolder imageHolder = null;
 
     private static class CacheHolder {
-        public cgCache cache;
+        public Geocache cache;
         public String latitude;
         public String longitude;
     }
@@ -177,7 +177,7 @@ public class OC11XMLParser {
         }
     }
 
-    private static void setCacheStatus(final int statusId, final cgCache cache) {
+    private static void setCacheStatus(final int statusId, final Geocache cache) {
         switch (statusId) {
             case 1:
                 cache.setArchived(false);
@@ -195,7 +195,7 @@ public class OC11XMLParser {
     }
 
     private static void resetCache(final CacheHolder cacheHolder) {
-        cacheHolder.cache = new cgCache(null);
+        cacheHolder.cache = new Geocache(null);
         cacheHolder.cache.setReliableLatLon(true);
         cacheHolder.cache.setDescription(StringUtils.EMPTY);
         cacheHolder.latitude = "0.0";
@@ -216,9 +216,9 @@ public class OC11XMLParser {
 
     protected static int attributeId;
 
-    public static Collection<cgCache> parseCaches(final InputStream stream) throws IOException {
+    public static Collection<Geocache> parseCaches(final InputStream stream) throws IOException {
 
-        final Map<String, cgCache> caches = new HashMap<String, cgCache>();
+        final Map<String, Geocache> caches = new HashMap<String, Geocache>();
         final Map<String, LogEntry> logs = new HashMap<String, LogEntry>();
 
         final CacheHolder cacheHolder = new CacheHolder();
@@ -242,7 +242,7 @@ public class OC11XMLParser {
 
             @Override
             public void end() {
-                cgCache cache = cacheHolder.cache;
+                Geocache cache = cacheHolder.cache;
                 Geopoint coords = new Geopoint(cacheHolder.latitude, cacheHolder.longitude);
                 cache.setCoords(coords);
                 if (caches.size() < CACHE_PARSE_LIMIT && isValid(cache) && !isExcluded(cache)) {
@@ -251,7 +251,7 @@ public class OC11XMLParser {
                 }
             }
 
-            private boolean isExcluded(cgCache cache) {
+            private boolean isExcluded(Geocache cache) {
                 if (cache.isArchived() && Settings.isExcludeDisabledCaches()) {
                     return true;
                 }
@@ -261,7 +261,7 @@ public class OC11XMLParser {
                 return !Settings.getCacheType().contains(cache);
             }
 
-            private boolean isValid(cgCache cache) {
+            private boolean isValid(Geocache cache) {
                 return StringUtils.isNotBlank(cache.getGeocode()) && !cache.getCoords().equals(Geopoint.ZERO);
             }
         });
@@ -452,7 +452,7 @@ public class OC11XMLParser {
 
             @Override
             public void end() {
-                final cgCache cache = caches.get(descHolder.cacheId);
+                final Geocache cache = caches.get(descHolder.cacheId);
                 if (cache != null) {
                     cache.setShortdesc(descHolder.shortDesc);
                     cache.setDescription(cache.getDescription() + descHolder.desc);
@@ -514,7 +514,7 @@ public class OC11XMLParser {
 
             @Override
             public void end() {
-                final cgCache cache = caches.get(logHolder.cacheId);
+                final Geocache cache = caches.get(logHolder.cacheId);
                 if (cache != null && logHolder.logEntry.type != LogType.UNKNOWN) {
                     logs.put(logHolder.id, logHolder.logEntry);
                     cache.getLogs().prepend(logHolder.logEntry);
@@ -609,7 +609,7 @@ public class OC11XMLParser {
             @Override
             public void end() {
                 if (imageHolder.isSpoiler) {
-                    final cgCache cache = caches.get(imageHolder.objectId);
+                    final Geocache cache = caches.get(imageHolder.objectId);
                     if (cache != null) {
                         Image spoiler = new Image(imageHolder.url, imageHolder.title);
                         cache.addSpoiler(spoiler);

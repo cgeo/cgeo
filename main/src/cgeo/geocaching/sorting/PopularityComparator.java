@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 /**
  * sorts caches by popularity (favorite count)
@@ -9,12 +9,12 @@ import cgeo.geocaching.cgCache;
 public class PopularityComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(final cgCache cache1, final cgCache cache2) {
+    protected boolean canCompare(final Geocache cache1, final Geocache cache2) {
         return true;
     }
 
     @Override
-    protected int compareCaches(final cgCache cache1, final cgCache cache2) {
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         return cache2.getFavoritePoints() - cache1.getFavoritePoints();
     }
 }

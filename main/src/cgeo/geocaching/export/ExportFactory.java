@@ -1,7 +1,7 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -34,11 +34,11 @@ public abstract class ExportFactory {
      * Creates a dialog so that the user can select an exporter.
      *
      * @param caches
-     *            The {@link List} of {@link cgCache} to be exported
+     *            The {@link List} of {@link cgeo.geocaching.Geocache} to be exported
      * @param activity
      *            The {@link Activity} in whose context the dialog should be shown
      */
-    public static void showExportMenu(final List<cgCache> caches, final Activity activity) {
+    public static void showExportMenu(final List<Geocache> caches, final Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.export).setIcon(R.drawable.ic_menu_share);
 

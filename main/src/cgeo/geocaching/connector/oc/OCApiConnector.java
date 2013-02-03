@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -21,14 +21,14 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     }
 
     @Override
-    public String getLicenseText(final cgCache cache) {
+    public String getLicenseText(final Geocache cache) {
         // NOT TO BE TRANSLATED
         return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons BY-SA 3.0 License";
     }
 
     @Override
     public SearchResult searchByGeocode(final String geocode, final String guid, final CancellableHandler handler) {
-        final cgCache cache = OkapiClient.getCache(geocode);
+        final Geocache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;
         }

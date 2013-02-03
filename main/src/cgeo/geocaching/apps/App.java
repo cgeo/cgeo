@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 public interface App {
     public boolean isInstalled();
@@ -17,5 +17,5 @@ public interface App {
      * @param cache
      * @return
      */
-    boolean isEnabled(final cgCache cache);
+    boolean isEnabled(final Geocache cache);
 }

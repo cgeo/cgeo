@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cachelist;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.maps.CGeoMap;
 
@@ -22,7 +22,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
     }
 
     @Override
-    public boolean invoke(List<cgCache> caches, Activity activity, final SearchResult search) {
+    public boolean invoke(List<Geocache> caches, Activity activity, final SearchResult search) {
         CGeoMap.startActivitySearch(activity, search, null);
         return true;
     }

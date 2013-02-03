@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -109,7 +109,7 @@ public abstract class Formatter {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
     }
 
-    public static String formatCacheInfoLong(cgCache cache, CacheListType cacheListType) {
+    public static String formatCacheInfoLong(Geocache cache, CacheListType cacheListType) {
         final ArrayList<String> infos = new ArrayList<String>();
         if (StringUtils.isNotBlank(cache.getGeocode())) {
             infos.add(cache.getGeocode());
@@ -126,7 +126,7 @@ public abstract class Formatter {
         return StringUtils.join(infos, Formatter.SEPARATOR);
     }
 
-    public static String formatCacheInfoShort(cgCache cache) {
+    public static String formatCacheInfoShort(Geocache cache) {
         final ArrayList<String> infos = new ArrayList<String>();
         if (cache.hasDifficulty()) {
             infos.add("D " + String.format("%.1f", cache.getDifficulty()));
@@ -144,7 +144,7 @@ public abstract class Formatter {
         return StringUtils.join(infos, Formatter.SEPARATOR);
     }
 
-    public static String formatCacheInfoHistory(cgCache cache) {
+    public static String formatCacheInfoHistory(Geocache cache) {
         final ArrayList<String> infos = new ArrayList<String>(3);
         infos.add(StringUtils.upperCase(cache.getGeocode()));
         infos.add(Formatter.formatDate(cache.getVisitedDate()));

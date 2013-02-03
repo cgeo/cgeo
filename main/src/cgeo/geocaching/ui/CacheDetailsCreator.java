@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
@@ -79,7 +79,7 @@ public final class CacheDetailsCreator {
         }
     }
 
-    public void addCacheState(cgCache cache) {
+    public void addCacheState(Geocache cache) {
         if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
             final List<String> states = new ArrayList<String>(5);
             if (cache.isLogOffline()) {
@@ -101,7 +101,7 @@ public final class CacheDetailsCreator {
         }
     }
 
-    public void addRating(cgCache cache) {
+    public void addRating(Geocache cache) {
         if (cache.getRating() > 0) {
             final RelativeLayout itemLayout = addStars(R.string.cache_rating, cache.getRating());
             if (cache.getVotes() > 0) {
@@ -112,25 +112,25 @@ public final class CacheDetailsCreator {
         }
     }
 
-    public void addSize(cgCache cache) {
+    public void addSize(Geocache cache) {
         if (null != cache.getSize() && cache.showSize()) {
             add(R.string.cache_size, cache.getSize().getL10n());
         }
     }
 
-    public void addDifficulty(cgCache cache) {
+    public void addDifficulty(Geocache cache) {
         if (cache.getDifficulty() > 0) {
             addStars(R.string.cache_difficulty, cache.getDifficulty());
         }
     }
 
-    public void addTerrain(cgCache cache) {
+    public void addTerrain(Geocache cache) {
         if (cache.getTerrain() > 0) {
             addStars(R.string.cache_terrain, cache.getTerrain());
         }
     }
 
-    public void addDistance(final cgCache cache, final TextView cacheDistanceView) {
+    public void addDistance(final Geocache cache, final TextView cacheDistanceView) {
         Float distance = null;
         if (cache.getCoords() != null) {
             final Geopoint currentCoords = cgeoapplication.getInstance().currentGeo().getCoords();

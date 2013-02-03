@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.apps.App;
 
 import android.app.Activity;
@@ -10,8 +10,8 @@ import android.app.Activity;
  *
  */
 public interface CacheNavigationApp extends App {
-    void navigate(final Activity activity, final cgCache cache);
+    void navigate(final Activity activity, final Geocache cache);
 
     @Override
-    boolean isEnabled(final cgCache cache);
+    boolean isEnabled(final Geocache cache);
 }

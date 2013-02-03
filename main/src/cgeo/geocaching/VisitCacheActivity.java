@@ -59,7 +59,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private static final String SAVED_STATE_DATE = "cgeo.geocaching.saved_state_date";
 
     private LayoutInflater inflater = null;
-    private cgCache cache = null;
+    private Geocache cache = null;
     private ProgressDialog waitDialog = null;
     private String cacheid = null;
     private String geocode = null;

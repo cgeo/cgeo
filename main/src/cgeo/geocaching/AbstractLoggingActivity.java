@@ -51,7 +51,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
         menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
 
         boolean smileyVisible = false;
-        final cgCache cache = getLogContext().getCache();
+        final Geocache cache = getLogContext().getCache();
         if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
             smileyVisible = true;
         }

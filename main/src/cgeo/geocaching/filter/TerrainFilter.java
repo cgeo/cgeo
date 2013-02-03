@@ -2,7 +2,7 @@ package cgeo.geocaching.filter;
 
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ class TerrainFilter extends AbstractRangeFilter {
     }
 
     @Override
-    public boolean accepts(cgCache cache) {
+    public boolean accepts(Geocache cache) {
         return rangeMin <= cache.getTerrain() && cache.getTerrain() < rangeMax;
     }
 

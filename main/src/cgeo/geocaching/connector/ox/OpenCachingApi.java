@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.ox;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.StoredList;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.Network;
@@ -20,25 +20,25 @@ public class OpenCachingApi {
 
     private static final String DEV_KEY = CryptUtils.rot13("PtqQnHo9RUTht3Np");
 
-    public static cgCache searchByGeoCode(final String geocode) {
+    public static Geocache searchByGeoCode(final String geocode) {
         final HttpResponse response = Network.getRequest("http://www.opencaching.com/api/geocache/" + geocode + ".gpx",
                 new Parameters(
                         "Authorization", DEV_KEY,
                         "log_limit", "30",
                         "hint", "true",
                         "description", "html"));
-        final Collection<cgCache> caches = importCachesFromResponse(response, true);
+        final Collection<Geocache> caches = importCachesFromResponse(response, true);
         if (CollectionUtils.isNotEmpty(caches)) {
             return caches.iterator().next();
         }
         return null;
     }
 
-    private static Collection<cgCache> importCachesFromResponse(final HttpResponse response, final boolean isDetailed) {
+    private static Collection<Geocache> importCachesFromResponse(final HttpResponse response, final boolean isDetailed) {
         if (response == null) {
             return Collections.emptyList();
         }
-        Collection<cgCache> caches;
+        Collection<Geocache> caches;
         try {
             caches = new OXGPXParser(StoredList.STANDARD_LIST_ID, isDetailed).parse(response.getEntity().getContent(), null);
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class OpenCachingApi {
         return caches;
     }
 
-    public static Collection<cgCache> searchByCenter(final Geopoint center) {
+    public static Collection<Geocache> searchByCenter(final Geopoint center) {
         final HttpResponse response = Network.getRequest("http://www.opencaching.com/api/geocache/.gpx",
                 new Parameters(
                         "Authorization", DEV_KEY,

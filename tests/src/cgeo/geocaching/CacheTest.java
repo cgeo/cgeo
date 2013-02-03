@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class CacheTest extends AndroidTestCase {
 
-    final static private class MockedEventCache extends cgCache {
+    final static private class MockedEventCache extends Geocache {
         public MockedEventCache(final Date date) {
             setHidden(date);
             setType(CacheType.EVENT);
@@ -17,7 +17,7 @@ public class CacheTest extends AndroidTestCase {
 
     public static void testCanBeAddedToCalendar() {
         final Date today = new Date();
-        final cgCache cacheToday = new MockedEventCache(today);
+        final Geocache cacheToday = new MockedEventCache(today);
         assertTrue(cacheToday.canBeAddedToCalendar());
 
         final Date yesterday = new Date(today.getTime() - 86400 * 1000);
@@ -26,8 +26,8 @@ public class CacheTest extends AndroidTestCase {
     }
 
     public static void testEquality() {
-        final cgCache one = new cgCache();
-        final cgCache two = new cgCache();
+        final Geocache one = new Geocache();
+        final Geocache two = new Geocache();
 
         // identity
         assertTrue(one.equals(one));
@@ -43,7 +43,7 @@ public class CacheTest extends AndroidTestCase {
     }
 
     public static void testGeocodeUppercase() {
-        cgCache cache = new cgCache();
+        Geocache cache = new Geocache();
         cache.setGeocode("gc1234");
         assertEquals("GC1234", cache.getGeocode());
     }

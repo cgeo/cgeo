@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -29,7 +29,7 @@ public class OCXMLClient {
     // Url for single cache requests
     // http://www.opencaching.de/xml/ocxml11.php?modifiedsince=20060320000000&user=0&cache=1&cachedesc=1&cachelog=1&picture=1&removedobject=0&session=0&doctype=0&charset=utf-8&wp=OCC9BE
 
-    public static cgCache getCache(final String geoCode) {
+    public static Geocache getCache(final String geoCode) {
         try {
             final Parameters params = getOCXmlQueryParameters(true, true, true);
             params.put("wp", geoCode);
@@ -39,9 +39,9 @@ public class OCXMLClient {
                 return null;
             }
 
-            Collection<cgCache> caches = OC11XMLParser.parseCaches(new GZIPInputStream(data));
+            Collection<Geocache> caches = OC11XMLParser.parseCaches(new GZIPInputStream(data));
             if (caches.iterator().hasNext()) {
-                cgCache cache = caches.iterator().next();
+                Geocache cache = caches.iterator().next();
                 cgData.saveCache(cache, LoadFlags.SAVE_ALL);
                 return cache;
             }
@@ -52,7 +52,7 @@ public class OCXMLClient {
         }
     }
 
-    public static Collection<cgCache> getCachesAround(final Geopoint center, final double distance) {
+    public static Collection<Geocache> getCachesAround(final Geopoint center, final double distance) {
         try {
             final Parameters params = getOCXmlQueryParameters(false, false, false);
             params.put("lat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center));

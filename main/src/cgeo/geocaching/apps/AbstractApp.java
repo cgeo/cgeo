@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgeo;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -56,7 +56,7 @@ public abstract class AbstractApp implements App {
     }
 
     @Override
-    public boolean isEnabled(cgCache cache) {
+    public boolean isEnabled(Geocache cache) {
         return cache != null;
     }
 }

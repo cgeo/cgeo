@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
 import android.graphics.Bitmap;
@@ -25,7 +25,7 @@ public abstract class IconDecoder {
     private static final int CT_VIRTUAL = 11;
     private static final int CT_LETTERBOX = 12;
 
-    public static boolean parseMapPNG(final cgCache cache, Bitmap bitmap, UTFGridPosition xy, int zoomlevel) {
+    public static boolean parseMapPNG(final Geocache cache, Bitmap bitmap, UTFGridPosition xy, int zoomlevel) {
         final int topX = xy.getX() * 4;
         final int topY = xy.getY() * 4;
         final int bitmapWidth = bitmap.getWidth();

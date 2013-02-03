@@ -1,6 +1,6 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ class TypeFilter extends AbstractFilter {
     }
 
     @Override
-    public boolean accepts(final cgCache cache) {
+    public boolean accepts(final Geocache cache) {
         return cacheType == cache.getType();
     }
 

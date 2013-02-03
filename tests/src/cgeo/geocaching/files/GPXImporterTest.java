@@ -1,8 +1,8 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -71,7 +71,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(GPXImporter.IMPORT_STEP_FINISHED, iMsg.next().what);
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
-        cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
 
         assertTrue(cache.getWaypoints().isEmpty());
@@ -98,7 +98,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
-        cgCache cache = cgData.loadCache("GC31J2H", LoadFlags.LOAD_CACHE_OR_DB);
+        Geocache cache = cgData.loadCache("GC31J2H", LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
         assertEquals(2, cache.getWaypoints().size());
     }
@@ -111,7 +111,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
-        final cgCache cache = cgData.loadCache("AID1", LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = cgData.loadCache("AID1", LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
         assertEquals("First Aid Station #1", cache.getName());
     }
@@ -133,11 +133,11 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("OC5952"), new ArrayList<String>(search.getGeocodes()));
-        cgCache cache = cgData.loadCache("OC5952", LoadFlags.LOAD_CACHE_OR_DB);
+        Geocache cache = cgData.loadCache("OC5952", LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
     }
 
-    private static void assertCacheProperties(cgCache cache) {
+    private static void assertCacheProperties(Geocache cache) {
         assertNotNull(cache);
         assertFalse(cache.getLocation().startsWith(","));
         assertTrue(cache.isReliableLatLon());
@@ -175,7 +175,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
-        cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
 
         assertTrue(cache.getWaypoints().isEmpty());
@@ -193,7 +193,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
-        cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
         assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }
@@ -219,7 +219,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
-        cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
         assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }
@@ -272,7 +272,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     @Override
     protected void tearDown() throws Exception {
         SearchResult search = cgData.getBatchOfStoredCaches(null, CacheType.ALL, listId);
-        List<cgCache> cachesInList = new ArrayList<cgCache>();
+        List<Geocache> cachesInList = new ArrayList<Geocache>();
         cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
         cgData.markDropped(cachesInList);
         cgData.removeList(listId);

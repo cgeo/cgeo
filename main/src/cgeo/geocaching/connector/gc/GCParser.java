@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -7,7 +8,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.cgeoapplication;
@@ -119,7 +119,7 @@ public abstract class GCParser {
         final int rows_count = rows.length;
 
         for (int z = 1; z < rows_count; z++) {
-            final cgCache cache = new cgCache();
+            final Geocache cache = new Geocache();
             String row = rows[z];
 
             // check for cache type presence
@@ -287,8 +287,8 @@ public abstract class GCParser {
 
         // get direction images
         if (Settings.getLoadDirImg()) {
-            final Set<cgCache> caches = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            for (cgCache cache : caches) {
+            final Set<Geocache> caches = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+            for (Geocache cache : caches) {
                 if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
                     DirectionImage.getDrawable(cache.getGeocode(), cache.getDirectionImg());
                 }
@@ -301,7 +301,7 @@ public abstract class GCParser {
     static SearchResult parseCache(final String page, final CancellableHandler handler) {
         final SearchResult searchResult = parseCacheFromText(page, handler);
         if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
-            final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+            final Geocache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             getExtraOnlineInfo(cache, page, handler);
             cache.setDetailedUpdatedNow();
             if (CancellableHandler.isCancelled(handler)) {
@@ -345,7 +345,7 @@ public abstract class GCParser {
             return searchResult;
         }
 
-        final cgCache cache = new cgCache();
+        final Geocache cache = new Geocache();
         cache.setDisabled(page.contains(GCConstants.STRING_DISABLED));
 
         cache.setArchived(page.contains(GCConstants.STRING_ARCHIVED));
@@ -744,7 +744,7 @@ public abstract class GCParser {
         }
 
         // search results don't need to be filtered so load GCVote ratings here
-        GCVote.loadRatings(new ArrayList<cgCache>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
+        GCVote.loadRatings(new ArrayList<Geocache>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
 
         // save to application
         search.setError(searchResult.getError());
@@ -1125,7 +1125,7 @@ public abstract class GCParser {
      *            the cache to add
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
-    static boolean addToWatchlist(final cgCache cache) {
+    static boolean addToWatchlist(final Geocache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
         String page = Login.postRequestLogged(uri, null);
 
@@ -1151,7 +1151,7 @@ public abstract class GCParser {
      *            the cache to remove
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
-    static boolean removeFromWatchlist(final cgCache cache) {
+    static boolean removeFromWatchlist(final Geocache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
         String page = Login.postRequestLogged(uri, null);
 
@@ -1200,11 +1200,11 @@ public abstract class GCParser {
      *            the cache to add
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
-    static boolean addToFavorites(final cgCache cache) {
+    static boolean addToFavorites(final Geocache cache) {
         return changeFavorite(cache, true);
     }
 
-    private static boolean changeFavorite(final cgCache cache, final boolean add) {
+    private static boolean changeFavorite(final Geocache cache, final boolean add) {
         final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
         final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
         if (StringUtils.isEmpty(userToken)) {
@@ -1234,7 +1234,7 @@ public abstract class GCParser {
      *            the cache to remove
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
-    static boolean removeFromFavorites(final cgCache cache) {
+    static boolean removeFromFavorites(final Geocache cache) {
         return changeFavorite(cache, false);
     }
 
@@ -1436,7 +1436,7 @@ public abstract class GCParser {
      * @param friends
      *            retrieve friend logs
      */
-    private static List<LogEntry> loadLogsFromDetails(final String page, final cgCache cache, final boolean friends, final boolean getDataFromPage) {
+    private static List<LogEntry> loadLogsFromDetails(final String page, final Geocache cache, final boolean friends, final boolean getDataFromPage) {
         String rawResponse;
 
         if (!getDataFromPage) {
@@ -1623,7 +1623,7 @@ public abstract class GCParser {
         params.put("tx", cacheType.guid);
     }
 
-    private static void getExtraOnlineInfo(final cgCache cache, final String page, final CancellableHandler handler) {
+    private static void getExtraOnlineInfo(final Geocache cache, final String page, final CancellableHandler handler) {
         if (CancellableHandler.isCancelled(handler)) {
             return;
         }
@@ -1668,15 +1668,15 @@ public abstract class GCParser {
         }
     }
 
-    public static boolean uploadModifiedCoordinates(cgCache cache, Geopoint wpt) {
+    public static boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt) {
         return editModifiedCoordinates(cache, wpt);
     }
 
-    public static boolean deleteModifiedCoordinates(cgCache cache) {
+    public static boolean deleteModifiedCoordinates(Geocache cache) {
         return editModifiedCoordinates(cache, null);
     }
 
-    public static boolean editModifiedCoordinates(cgCache cache, Geopoint wpt) {
+    public static boolean editModifiedCoordinates(Geocache cache, Geopoint wpt) {
         final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
         final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
         if (StringUtils.isEmpty(userToken)) {

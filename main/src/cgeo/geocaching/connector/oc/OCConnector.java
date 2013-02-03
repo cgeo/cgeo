@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.CacheRealm;
 
@@ -34,7 +34,7 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(cgCache cache) {
+    public String getCacheUrl(Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 

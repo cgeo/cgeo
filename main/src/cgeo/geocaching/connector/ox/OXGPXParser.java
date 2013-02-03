@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.ox;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.files.GPX10Parser;
 
 public class OXGPXParser extends GPX10Parser {
@@ -13,7 +13,7 @@ public class OXGPXParser extends GPX10Parser {
     }
 
     @Override
-    protected void afterParsing(cgCache cache) {
+    protected void afterParsing(Geocache cache) {
         cache.setUpdated(System.currentTimeMillis());
         if (isDetailed) {
             cache.setDetailedUpdate(cache.getUpdated());

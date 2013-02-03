@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
@@ -26,7 +26,7 @@ class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointN
     }
 
     @Override
-    public void navigate(Activity activity, cgCache cache) {
+    public void navigate(Activity activity, Geocache cache) {
         showInLocus(Collections.singletonList(cache), true, false, activity);
     }
 }

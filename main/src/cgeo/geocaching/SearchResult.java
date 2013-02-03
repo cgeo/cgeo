@@ -102,7 +102,7 @@ public class SearchResult implements Parcelable {
      * @param cache the cache to include
      */
 
-    public SearchResult(final cgCache cache) {
+    public SearchResult(final Geocache cache) {
         this(Collections.singletonList(cache));
     }
 
@@ -111,9 +111,9 @@ public class SearchResult implements Parcelable {
      *
      * @param caches the non-null collection of caches to include
      */
-    public SearchResult(final Collection<cgCache> caches) {
+    public SearchResult(final Collection<Geocache> caches) {
         this();
-        for (final cgCache cache : caches) {
+        for (final Geocache cache : caches) {
             addCache(cache);
         }
     }
@@ -191,9 +191,9 @@ public class SearchResult implements Parcelable {
 
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
-        final ArrayList<cgCache> cachesForVote = new ArrayList<cgCache>();
-        final Set<cgCache> caches = cgData.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
-        for (cgCache cache : caches) {
+        final ArrayList<Geocache> cachesForVote = new ArrayList<Geocache>();
+        final Set<Geocache> caches = cgData.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
+        for (Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
             final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
                     (excludeMine && (cache.isOwner() || cache.isFound())) ||
@@ -207,11 +207,11 @@ public class SearchResult implements Parcelable {
         return result;
     }
 
-    public cgCache getFirstCacheFromResult(final EnumSet<LoadFlag> loadFlags) {
+    public Geocache getFirstCacheFromResult(final EnumSet<LoadFlag> loadFlags) {
         return CollectionUtils.isNotEmpty(geocodes) ? cgData.loadCache(geocodes.iterator().next(), loadFlags) : null;
     }
 
-    public Set<cgCache> getCachesFromSearchResult(final EnumSet<LoadFlag> loadFlags) {
+    public Set<Geocache> getCachesFromSearchResult(final EnumSet<LoadFlag> loadFlags) {
         return cgData.loadCaches(geocodes, loadFlags);
     }
 
@@ -229,7 +229,7 @@ public class SearchResult implements Parcelable {
     }
 
     /** Add the cache geocode to the search and store the cache in the CacheCache */
-    public boolean addCache(final cgCache cache) {
+    public boolean addCache(final Geocache cache) {
         addGeocode(cache.getGeocode());
         return cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
     }

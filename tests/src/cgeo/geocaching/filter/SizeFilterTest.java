@@ -1,15 +1,15 @@
 package cgeo.geocaching.filter;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheSize;
 
 import java.util.ArrayList;
 
 public class SizeFilterTest extends CGeoTestCase {
 
-    private cgCache micro;
-    private cgCache regular;
+    private Geocache micro;
+    private Geocache regular;
     private SizeFilter microFilter;
 
     @Override
@@ -17,10 +17,10 @@ public class SizeFilterTest extends CGeoTestCase {
         super.setUp();
 
         // cache initialization can only be done without errors after application setup
-        micro = new cgCache();
+        micro = new Geocache();
         micro.setSize(CacheSize.MICRO);
 
-        regular = new cgCache();
+        regular = new Geocache();
         regular.setSize(CacheSize.REGULAR);
 
         microFilter = new SizeFilter(CacheSize.MICRO);
@@ -37,7 +37,7 @@ public class SizeFilterTest extends CGeoTestCase {
     }
 
     public void testFilter() {
-        final ArrayList<cgCache> list = new ArrayList<cgCache>();
+        final ArrayList<Geocache> list = new ArrayList<Geocache>();
         list.add(regular);
         list.add(micro);
         assertEquals(2, list.size());

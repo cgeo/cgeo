@@ -108,7 +108,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private Geopoint coords = null;
     private SearchResult search = null;
     /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
-    private final List<cgCache> cacheList = new ArrayList<cgCache>();
+    private final List<Geocache> cacheList = new ArrayList<Geocache>();
     private CacheListAdapter adapter = null;
     private LayoutInflater inflater = null;
     private View listFooter = null;
@@ -281,7 +281,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     private void replaceCacheListFromSearch() {
         if (search != null) {
-            final Set<cgCache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+            final Set<Geocache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -339,7 +339,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 startGeoAndDir();
             } else {
                 if (search != null) {
-                    final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                    final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
@@ -798,7 +798,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     }
 
     private boolean containsEvents() {
-        for (cgCache cache : adapter.getCheckedOrAllCaches()) {
+        for (Geocache cache : adapter.getCheckedOrAllCaches()) {
             if (cache.isEventCache()) {
                 return true;
             }
@@ -898,8 +898,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     public void deletePastEvents() {
         progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
-        final List<cgCache> deletion = new ArrayList<cgCache>();
-        for (cgCache cache : adapter.getCheckedOrAllCaches()) {
+        final List<Geocache> deletion = new ArrayList<Geocache>();
+        for (Geocache cache : adapter.getCheckedOrAllCaches()) {
             if (cache.isEventCache()) {
                 final Date eventDate = cache.getHiddenDate();
                 if (DateUtils.daysSince(eventDate.getTime()) > 0) {
@@ -947,7 +947,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         if (adapterInfo == null || adapterInfo.position >= adapter.getCount()) {
             return;
         }
-        final cgCache cache = adapter.getItem(adapterInfo.position);
+        final Geocache cache = adapter.getItem(adapterInfo.position);
 
         menu.setHeaderTitle(StringUtils.defaultIfBlank(cache.getName(), cache.getGeocode()));
 
@@ -1000,7 +1000,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             Log.w("cgeocaches.onContextItemSelected", e);
         }
 
-        final cgCache cache = adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
+        final Geocache cache = adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
 
         // just in case the list got resorted while we are executing this code
         if (cache == null) {
@@ -1066,8 +1066,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
      *            an adapterInfo
      * @return the pointed cache
      */
-    private cgCache getCacheFromAdapter(final AdapterContextMenuInfo adapterInfo) {
-        final cgCache cache = adapter.getItem(adapterInfo.position);
+    private Geocache getCacheFromAdapter(final AdapterContextMenuInfo adapterInfo) {
+        final Geocache cache = adapter.getItem(adapterInfo.position);
         if (cache.getGeocode().equalsIgnoreCase(contextMenuGeocode)) {
             return cache;
         }
@@ -1413,7 +1413,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         final private int listIdLD;
         private volatile boolean needToStop = false;
         private long last = 0L;
-        final private List<cgCache> selected;
+        final private List<Geocache> selected;
 
         public LoadDetailsThread(Handler handlerIn, int listId) {
             handler = handlerIn;
@@ -1431,8 +1431,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         public void run() {
             removeGeoAndDir();
 
-            final List<cgCache> cachesWithStaticMaps = new ArrayList<cgCache>(selected.size());
-            for (cgCache cache : selected) {
+            final List<Geocache> cachesWithStaticMaps = new ArrayList<Geocache>(selected.size());
+            for (Geocache cache : selected) {
                 if (Settings.isStoreOfflineMaps() && cache.hasStaticMap()) {
                     cachesWithStaticMaps.add(cache);
                     continue;
@@ -1444,7 +1444,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 }
             }
 
-            for (cgCache cache : cachesWithStaticMaps) {
+            for (Geocache cache : cachesWithStaticMaps) {
                 if (!refreshCache(cache)) {
                     break;
                 }
@@ -1462,7 +1462,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
          * @return
          *         <code>false</code> if the storing was interrupted, <code>true</code> otherwise
          */
-        private boolean refreshCache(cgCache cache) {
+        private boolean refreshCache(Geocache cache) {
             try {
                 if (needToStop) {
                     throw new InterruptedException("Stopped storing process.");
@@ -1544,7 +1544,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                         handler.sendMessage(handler.obtainMessage(1, response));
                         yield();
 
-                        cgCache.storeCache(null, response, listIdLFW, false, null);
+                        Geocache.storeCache(null, response, listIdLFW, false, null);
 
                         handler.sendMessage(handler.obtainMessage(2, response));
                         yield();
@@ -1590,9 +1590,9 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private class DropDetailsThread extends Thread {
 
         final private Handler handler;
-        final private List<cgCache> selected;
+        final private List<Geocache> selected;
 
-        public DropDetailsThread(Handler handlerIn, List<cgCache> selectedIn) {
+        public DropDetailsThread(Handler handlerIn, List<Geocache> selectedIn) {
             handler = handlerIn;
             selected = selectedIn;
         }
@@ -1610,7 +1610,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private class RemoveFromHistoryThread extends Thread {
 
         final private Handler handler;
-        final private List<cgCache> selected;
+        final private List<Geocache> selected;
 
         public RemoveFromHistoryThread(Handler handlerIn) {
             handler = handlerIn;
@@ -1711,7 +1711,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         @Override
         public void run() {
-            final List<cgCache> caches = adapter.getCheckedCaches();
+            final List<Geocache> caches = adapter.getCheckedCaches();
             cgData.moveToList(caches, listId);
             handler.sendEmptyMessage(listId);
         }
@@ -1783,7 +1783,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         // apply filter settings (if there's a filter)
         Set<String> geocodes = new HashSet<String>();
-        for (cgCache cache : adapter.getFilteredList()) {
+        for (Geocache cache : adapter.getFilteredList()) {
             geocodes.add(cache.getGeocode());
         }
 
@@ -1873,7 +1873,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private void setDateComparatorForEventList() {
         if (CollectionUtils.isNotEmpty(cacheList)) {
             boolean eventsOnly = true;
-            for (cgCache cache : cacheList) {
+            for (Geocache cache : cacheList) {
                 if (!cache.isEventCache()) {
                     eventsOnly = false;
                     break;

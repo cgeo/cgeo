@@ -38,7 +38,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     private static final int MENU_DEFAULT_NAVIGATION = 2;
     private static final int MENU_SHOW_IN_BROWSER = 7;
 
-    protected cgCache cache = null;
+    protected Geocache cache = null;
     protected String geocode = null;
     protected CacheDetailsCreator details;
 

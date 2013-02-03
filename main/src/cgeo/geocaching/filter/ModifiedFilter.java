@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 
 class ModifiedFilter extends AbstractFilter implements IFilterFactory {
@@ -11,7 +11,7 @@ class ModifiedFilter extends AbstractFilter implements IFilterFactory {
     }
 
     @Override
-    public boolean accepts(final cgCache cache) {
+    public boolean accepts(final Geocache cache) {
         // modified on GC
         return cache.hasUserModifiedCoords() || cache.hasFinalDefined();
     }

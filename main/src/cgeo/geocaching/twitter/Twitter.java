@@ -1,8 +1,8 @@
 package cgeo.geocaching.twitter;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -56,7 +56,7 @@ public final class Twitter {
     }
 
     public static void postTweetCache(String geocode) {
-        final cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         String status;
         final String url = cache.getUrl();
         if (url.length() >= 100) {

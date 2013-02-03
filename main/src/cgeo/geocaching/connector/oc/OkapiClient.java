@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -68,7 +68,7 @@ final public class OkapiClient {
 
     private static final String SERVICE_NEAREST = "/okapi/services/caches/search/nearest";
 
-    public static cgCache getCache(final String geoCode) {
+    public static Geocache getCache(final String geoCode) {
         final Parameters params = new Parameters("cache_code", geoCode, "fields", SERVICE_CACHE_FIELDS);
         final JSONObject data = request(ConnectorFactory.getConnector(geoCode), SERVICE_CACHE, params);
 
@@ -79,7 +79,7 @@ final public class OkapiClient {
         return parseCache(data);
     }
 
-    public static List<cgCache> getCachesAround(final Geopoint center, IConnector connector) {
+    public static List<Geocache> getCachesAround(final Geopoint center, IConnector connector) {
         String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
         final Parameters params = new Parameters("center", centerString);
         final JSONObject data = request(connector, SERVICE_NEAREST, params);
@@ -91,7 +91,7 @@ final public class OkapiClient {
         return parseCaches(data);
     }
 
-    private static List<cgCache> parseCaches(final JSONObject response) {
+    private static List<Geocache> parseCaches(final JSONObject response) {
         try {
             final JSONArray cachesResponse = response.getJSONArray("results");
             if (cachesResponse != null) {
@@ -102,9 +102,9 @@ final public class OkapiClient {
                         geocodes.add(geocode);
                     }
                 }
-                List<cgCache> caches = new ArrayList<cgCache>(geocodes.size());
+                List<Geocache> caches = new ArrayList<Geocache>(geocodes.size());
                 for (String geocode : geocodes) {
-                    cgCache cache = getCache(geocode);
+                    Geocache cache = getCache(geocode);
                     if (cache != null) {
                         caches.add(cache);
                     }
@@ -117,8 +117,8 @@ final public class OkapiClient {
         return null;
     }
 
-    private static cgCache parseCache(final JSONObject response) {
-        final cgCache cache = new cgCache();
+    private static Geocache parseCache(final JSONObject response) {
+        final Geocache cache = new Geocache();
         cache.setReliableLatLon(true);
         try {
             cache.setGeocode(response.getString(CACHE_CODE));
@@ -235,7 +235,7 @@ final public class OkapiClient {
         return null;
     }
 
-    private static void setLocation(final cgCache cache, final String location) {
+    private static void setLocation(final Geocache cache, final String location) {
         final String latitude = StringUtils.substringBefore(location, "|");
         final String longitude = StringUtils.substringAfter(location, "|");
         cache.setCoords(new Geopoint(latitude, longitude));

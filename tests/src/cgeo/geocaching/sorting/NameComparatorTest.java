@@ -1,12 +1,12 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 import android.test.AndroidTestCase;
 
 public class NameComparatorTest extends AndroidTestCase {
 
-    private static class NamedCache extends cgCache {
+    private static class NamedCache extends Geocache {
 
         public NamedCache(final String name) {
             this.setName(name);
@@ -31,11 +31,11 @@ public class NameComparatorTest extends AndroidTestCase {
         assertEquals("abc000123def456", (new NamedCache("abc123def456")).getNameForSorting());
     }
 
-    private void assertSorted(final cgCache cache1, final cgCache cache2) {
+    private void assertSorted(final Geocache cache1, final Geocache cache2) {
         assertTrue(comp.compare(cache1, cache2) < 0);
     }
 
-    private void assertNotSorted(final cgCache cache1, final cgCache cache2) {
+    private void assertNotSorted(final Geocache cache1, final Geocache cache2) {
         assertTrue(comp.compare(cache1, cache2) > 0);
     }
 }

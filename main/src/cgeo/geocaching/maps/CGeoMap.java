@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.DirectionProvider;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -8,7 +9,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
@@ -177,7 +177,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /** Count of caches currently visible */
     private int cachesCnt = 0;
     /** List of caches in the viewport */
-    private LeastRecentlyUsedSet<cgCache> caches = null;
+    private LeastRecentlyUsedSet<Geocache> caches = null;
     /** List of waypoints in the viewport */
     private final LeastRecentlyUsedSet<Waypoint> waypoints = new LeastRecentlyUsedSet<Waypoint>(MAX_CACHES);
     // storing for offline
@@ -335,13 +335,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     protected void countVisibleCaches() {
-        final List<cgCache> protectedCaches = caches.getAsList();
+        final List<Geocache> protectedCaches = caches.getAsList();
 
         int count = 0;
         if (!protectedCaches.isEmpty()) {
             final Viewport viewport = mapView.getViewport();
 
-            for (final cgCache cache : protectedCaches) {
+            for (final Geocache cache : protectedCaches) {
                 if (cache != null && cache.getCoords() != null) {
                     if (viewport.contains(cache)) {
                         count++;
@@ -369,7 +369,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         app = (cgeoapplication) activity.getApplication();
 
         int countBubbleCnt = cgData.getAllCachesCount();
-        caches = new LeastRecentlyUsedSet<cgCache>(MAX_CACHES + countBubbleCnt);
+        caches = new LeastRecentlyUsedSet<Geocache>(MAX_CACHES + countBubbleCnt);
 
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
@@ -492,7 +492,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
             for (String geocode : dirtyCaches) {
-                cgCache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 if (cache != null) {
                     // re-add to update the freshness
                     caches.add(cache);
@@ -792,11 +792,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      */
     private Set<String> getGeocodesForCachesInViewport() {
         final Set<String> geocodes = new HashSet<String>();
-        final List<cgCache> cachesProtected = caches.getAsList();
+        final List<Geocache> cachesProtected = caches.getAsList();
 
         final Viewport viewport = mapView.getViewport();
 
-        for (final cgCache cache : cachesProtected) {
+        for (final Geocache cache : cachesProtected) {
             if (viewport.contains(cache)) {
                 geocodes.add(cache.getGeocode());
             }
@@ -1120,7 +1120,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
 
                 downloaded = true;
-                Set<cgCache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
                 // update the caches
                 caches.addAll(cachesFromSearchResult);
 
@@ -1128,9 +1128,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
-                    final List<cgCache> tempList = caches.getAsList();
+                    final List<Geocache> tempList = caches.getAsList();
 
-                    for (cgCache cache : tempList) {
+                    for (Geocache cache : tempList) {
                         if ((cache.isFound() && excludeMine) || (cache.isOwner() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
                             caches.remove(cache);
                         }
@@ -1148,7 +1148,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     else
                     {
                         //All waypoints from the viewed caches
-                        for (cgCache c : caches.getAsList()) {
+                        for (Geocache c : caches.getAsList()) {
                             waypoints.addAll(c.getWaypoints());
                         }
                     }
@@ -1209,7 +1209,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 } while (count < 2);
 
                 if (searchResult != null) {
-                    Set<cgCache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                    Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     // update the caches
                     caches.addAll(result);
                     lastSearchResult = searchResult;
@@ -1245,7 +1245,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
 
                 // display caches
-                final List<cgCache> cachesToDisplay = caches.getAsList();
+                final List<Geocache> cachesToDisplay = caches.getAsList();
                 final List<Waypoint> waypointsToDisplay = new ArrayList<Waypoint>(waypoints);
                 final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
 
@@ -1262,7 +1262,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             itemsToDisplay.add(getWaypointItem(waypoint));
                         }
                     }
-                    for (cgCache cache : cachesToDisplay) {
+                    for (Geocache cache : cachesToDisplay) {
 
                         if (cache == null || cache.getCoords() == null) {
                             continue;
@@ -1395,7 +1395,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             break;
                         }
 
-                        cgCache.storeCache(null, geocode, StoredList.STANDARD_LIST_ID, false, handler);
+                        Geocache.storeCache(null, geocode, StoredList.STANDARD_LIST_ID, false, handler);
                     }
                 } catch (Exception e) {
                     Log.e("cgeocaches.LoadDetails.run", e);
@@ -1600,7 +1600,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         dirtyCaches.add(geocode);
     }
 
-    private CachesOverlayItemImpl getCacheItem(final cgCache cache) {
+    private CachesOverlayItemImpl getCacheItem(final Geocache cache) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.getType());
 
         final int hashcode = new HashCodeBuilder()
