@@ -53,6 +53,7 @@
         <!-- system values -->
 
         <!-- own values: colors -->
+        <item name="android:windowBackground">@color/just_white</item>
         <item name="text_color">@color/text_light</item>
         <item name="text_color_headline">@color/text_headline_light</item>
         <item name="text_color_grey">@color/text_grey_light</item>
