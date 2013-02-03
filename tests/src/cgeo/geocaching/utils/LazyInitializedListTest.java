@@ -9,7 +9,7 @@ public class LazyInitializedListTest extends TestCase {
 
     private static final class MockedLazyInitializedList extends LazyInitializedList<String> {
         @Override
-        protected List<String> loadFromDatabase() {
+        public List<String> call() {
             return new ArrayList<String>();
         }
     }

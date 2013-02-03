@@ -9,15 +9,12 @@ import java.util.List;
 class MockedLazyInitializedList<ElementType> extends LazyInitializedList<ElementType> {
 
     public MockedLazyInitializedList(ElementType[] elements) {
-        final List<ElementType> elements1 = Arrays.asList(elements);
         clear();
-        if (elements1 != null) {
-            addAll(elements1);
-        }
+        addAll(Arrays.asList(elements));
     }
 
     @Override
-    protected List<ElementType> loadFromDatabase() {
+    public List<ElementType> call() {
         return new ArrayList<ElementType>();
     }
 

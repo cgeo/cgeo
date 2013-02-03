@@ -97,20 +97,20 @@ public class Geocache implements ICache, IWaypoint {
     private boolean onWatchlist = false;
     private List<String> attributes = new LazyInitializedList<String>() {
         @Override
-        protected List<String> loadFromDatabase() {
+        public List<String> call() {
             return cgData.loadAttributes(geocode);
         }
     };
     private List<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
-        protected List<Waypoint> loadFromDatabase() {
+        public List<Waypoint> call() {
             return cgData.loadWaypoints(geocode);
         }
     };
     private List<Image> spoilers = null;
     private List<LogEntry> logs = new LazyInitializedList<LogEntry>() {
         @Override
-        protected List<LogEntry> loadFromDatabase() {
+        public List<LogEntry> call() {
             return cgData.loadLogs(geocode);
         }
     };

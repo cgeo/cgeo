@@ -1,58 +1,63 @@
 package cgeo.geocaching.utils;
 
 import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
-public abstract class LazyInitializedList<ElementType> extends AbstractList<ElementType> {
+public abstract class LazyInitializedList<ElementType> extends AbstractList<ElementType> implements Callable<List<ElementType>> {
 
     private volatile List<ElementType> list;
 
-    private void initializeList() {
+    private List<ElementType> getList() {
         if (list == null) {
-            synchronized (this) {
-                if (list == null) {
-                    list = loadFromDatabase();
+            synchronized(this) {
+                try {
+                    list = call();
+                    if (list == null) {
+                        Log.e("LazyInitializedList.getList: null result");
+                    }
+                } catch (final Exception e) {
+                    Log.e("LazyInitializedList.getList", e);
                 }
             }
         }
+        return list;
     }
-
-    protected abstract List<ElementType> loadFromDatabase();
 
     @Override
     public boolean add(final ElementType element) {
-        initializeList();
-        return list.add(element);
+        return getList().add(element);
     }
 
     @Override
     public ElementType set(final int index, final ElementType element) {
-        initializeList();
-        return list.set(index, element);
+        return getList().set(index, element);
     }
 
     @Override
     public ElementType remove(final int index) {
-        initializeList();
-        return list.remove(index);
+        return getList().remove(index);
     }
 
     @Override
     public void add(int index, final ElementType element) {
-        initializeList();
-        list.add(index, element);
+        getList().add(index, element);
     }
 
     @Override
     public int size() {
-        initializeList();
-        return list.size();
+        return getList().size();
     }
 
     @Override
     public ElementType get(final int index) {
-        initializeList();
-        return list.get(index);
+        return getList().get(index);
+    }
+
+    @Override
+    public void clear() {
+        list = new ArrayList<ElementType>();
     }
 
 }
