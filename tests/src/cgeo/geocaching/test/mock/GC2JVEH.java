@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.utils.LazyInitializedList;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -98,7 +97,7 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public LazyInitializedList<String> getAttributes() {
+    public List<String> getAttributes() {
         final String[] attributes = new String[] {
                 "winter_yes",
                 "flashlight_yes",

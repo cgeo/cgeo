@@ -5,11 +5,11 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.utils.LazyInitializedList;
 
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -95,7 +95,7 @@ public class GC3XX5J extends MockedCache {
     }
 
     @Override
-    public LazyInitializedList<String> getAttributes() {
+    public List<String> getAttributes() {
         String[] attributes = new String[] {
                 "stroller_no",
                 "kids_no",

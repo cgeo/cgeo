@@ -517,7 +517,7 @@ public class OC11XMLParser {
                 final Geocache cache = caches.get(logHolder.cacheId);
                 if (cache != null && logHolder.logEntry.type != LogType.UNKNOWN) {
                     logs.put(logHolder.id, logHolder.logEntry);
-                    cache.getLogs().prepend(logHolder.logEntry);
+                    cache.getLogs().add(0, logHolder.logEntry);
                     if (logHolder.logEntry.type == LogType.FOUND_IT
                             && StringUtils.equalsIgnoreCase(logHolder.logEntry.author, Settings.getOCConnectorUserName())) {
                         cache.setFound(true);

@@ -95,20 +95,20 @@ public class Geocache implements ICache, IWaypoint {
     private float myVote = 0; // valid ratings are larger than zero
     private int inventoryItems = 0;
     private boolean onWatchlist = false;
-    private LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
+    private List<String> attributes = new LazyInitializedList<String>() {
         @Override
         protected List<String> loadFromDatabase() {
             return cgData.loadAttributes(geocode);
         }
     };
-    private LazyInitializedList<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
+    private List<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
         protected List<Waypoint> loadFromDatabase() {
             return cgData.loadWaypoints(geocode);
         }
     };
     private List<Image> spoilers = null;
-    private LazyInitializedList<LogEntry> logs = new LazyInitializedList<LogEntry>() {
+    private List<LogEntry> logs = new LazyInitializedList<LogEntry>() {
         @Override
         protected List<LogEntry> loadFromDatabase() {
             return cgData.loadLogs(geocode);
@@ -288,7 +288,10 @@ public class Geocache implements ICache, IWaypoint {
             myVote = other.myVote;
         }
         if (attributes.isEmpty()) {
-            attributes.set(other.attributes);
+            attributes.clear();
+            if (other.attributes != null) {
+                attributes.addAll(other.attributes);
+            }
         }
         if (waypoints.isEmpty()) {
             this.setWaypoints(other.waypoints, false);
@@ -310,7 +313,10 @@ public class Geocache implements ICache, IWaypoint {
             inventoryItems = other.inventoryItems;
         }
         if (logs.isEmpty()) { // keep last known logs if none
-            logs.set(other.logs);
+            logs.clear();
+            if (other.logs != null) {
+                logs.addAll(other.logs);
+            }
         }
         if (logCounts.isEmpty()) {
             logCounts = other.logCounts;
@@ -715,7 +721,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     @Override
-    public LazyInitializedList<String> getAttributes() {
+    public List<String> getAttributes() {
         return attributes;
     }
 
@@ -943,7 +949,10 @@ public class Geocache implements ICache, IWaypoint {
      * @return <code>true</code> if waypoints successfully added to waypoint database
      */
     public boolean setWaypoints(List<Waypoint> waypoints, boolean saveToDatabase) {
-        this.waypoints.set(waypoints);
+        this.waypoints.clear();
+        if (waypoints != null) {
+            this.waypoints.addAll(waypoints);
+        }
         finalDefined = false;
         if (waypoints != null) {
             for (Waypoint waypoint : waypoints) {
@@ -959,7 +968,7 @@ public class Geocache implements ICache, IWaypoint {
     /**
      * @return never <code>null</code>
      */
-    public LazyInitializedList<LogEntry> getLogs() {
+    public List<LogEntry> getLogs() {
         return logs;
     }
 
@@ -981,7 +990,10 @@ public class Geocache implements ICache, IWaypoint {
      *            the log entries
      */
     public void setLogs(List<LogEntry> logs) {
-        this.logs.set(logs);
+        this.logs.clear();
+        if (logs != null) {
+            this.logs.addAll(logs);
+        }
     }
 
     public boolean isLogOffline() {
@@ -1074,7 +1086,10 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void setAttributes(List<String> attributes) {
-        this.attributes.set(attributes);
+        this.attributes.clear();
+        if (attributes != null) {
+            this.attributes.addAll(attributes);
+        }
     }
 
     public void setSpoilers(List<Image> spoilers) {

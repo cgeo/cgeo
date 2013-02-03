@@ -1631,7 +1631,7 @@ public abstract class GCParser {
         //cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            LazyInitializedList<LogEntry> allLogs = cache.getLogs();
+            List<LogEntry> allLogs = cache.getLogs();
             List<LogEntry> friendLogs = loadLogsFromDetails(page, cache, true, false);
             if (friendLogs != null) {
                 for (LogEntry log : friendLogs) {

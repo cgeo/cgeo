@@ -1,9 +1,9 @@
 package cgeo.geocaching.utils;
 
+import junit.framework.TestCase;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import junit.framework.TestCase;
 
 public class LazyInitializedListTest extends TestCase {
 
@@ -26,12 +26,6 @@ public class LazyInitializedListTest extends TestCase {
             iterations++;
         }
         assertEquals(1, iterations);
-    }
-
-    public static void testNull() {
-        final LazyInitializedList<String> list = new MockedLazyInitializedList();
-        list.set((LazyInitializedList<String>) null);
-        list.set((ArrayList<String>) null);
     }
 
 }

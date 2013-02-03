@@ -107,7 +107,7 @@ public interface ICache extends IBasicCache {
      * 
      * @return the list of attributes for this cache
      */
-    public LazyInitializedList<String> getAttributes();
+    public List<String> getAttributes();
 
     /**
      * @return the list of trackables in this cache

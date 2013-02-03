@@ -1,7 +1,6 @@
 package cgeo.geocaching.utils;
 
 import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class LazyInitializedList<ElementType> extends AbstractList<ElementType> {
@@ -24,14 +23,6 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
     public boolean add(final ElementType element) {
         initializeList();
         return list.add(element);
-    }
-
-    public void prepend(final ElementType element) {
-        add(0, element);
-    }
-
-    public void set(final List<ElementType> elements) {
-        list = elements != null ? new ArrayList<ElementType>(elements) : new ArrayList<ElementType>();
     }
 
     @Override
