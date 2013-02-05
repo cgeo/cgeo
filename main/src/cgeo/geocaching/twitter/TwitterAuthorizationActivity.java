@@ -92,7 +92,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
 
         setTheme();
-        setContentView(R.layout.auth);
+        setContentView(R.layout.twitter_authorization_activity);
         setTitle(res.getString(R.string.auth_twitter));
 
         init();

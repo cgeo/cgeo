@@ -17,7 +17,7 @@ public class AboutActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
 
         setTheme();
-        setContentView(R.layout.about);
+        setContentView(R.layout.about_activity);
         setTitle(res.getString(R.string.about));
 
         ((TextView) findViewById(R.id.about_version_string)).setText(Version.getVersionName(this));
