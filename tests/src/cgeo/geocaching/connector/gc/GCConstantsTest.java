@@ -33,6 +33,20 @@ public class GCConstantsTest extends AndroidTestCase {
         }
     }
 
+    /**
+     * Test that we can parse the cache find count of the user.
+     * <p>
+     * This test requires a real user name and password to be stored on the device or emulator.
+     * </p>
+     */
+
+    public static void testCacheCountOnline() {
+        Login.logout();
+        Login.setActualCachesFound(0);
+        Login.login();
+        assertTrue(Login.getActualCachesFound() > 0);
+    }
+
     public static void testConstants() {
         String session = "userSession = new Groundspeak.Map.UserSession('aKWZ', userOptions:'XPTf', sessionToken:'123pNKwdktYGZL0xd-I7yqA6nm_JE1BDUtM4KcOkifin2TRCMutBd_PZE14Ohpffs2ZgkTnxTSnxYpBigK4hBA2', subscriberType: 3, enablePersonalization: true });";
         assertEquals("aKWZ", BaseUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, ""));
