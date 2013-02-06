@@ -1101,6 +1101,12 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next bugfix release</b>\n\n
+    <b>Bugfixing:</b>\n
+    · Adaption to changes on gc.com (find count)\n
+    · Fixed some possible crashes\n
+    · Improved login failure message if account is unvalidated\n
+    · Another correction for errors when backing up the phone\n\n
     <b>2013.01.10</b>\n\n
     <b>Bugfixing:</b>\n
     · Avoid crash in dir chooser\n
