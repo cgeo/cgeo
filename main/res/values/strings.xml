@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo compass</string>
@@ -1101,7 +1101,7 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next bugfix release</b>\n\n
+    <b>2013.02.07</b>\n\n
     <b>Bugfixing:</b>\n
     · Adaption to changes on gc.com (find count)\n
     · Fixed some possible crashes\n
