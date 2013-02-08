@@ -392,6 +392,7 @@
   <string name="init_save_log_img">Save Images from Logs</string>
   <string name="init_units">Use Imperial Units instead of Metric Units</string>
   <string name="init_log_offline">Enable Offline Logging\n(Don\'t show online Log screen when logging, don\'t send the Log online)</string>
+  <string name="init_choose_list">Ask for list when storing caches</string>
   <string name="init_livelist">Show Direction to caches in the list</string>
   <string name="init_altitude">Altitude Correction</string>
   <string name="init_altitude_description">If your GPS is calculating a wrong altitude, you can correct it with a positive or negative number. The correction always has to be given in meters.</string>
@@ -511,6 +512,9 @@
   <string name="cache_favpoint_not_on">This cache is not one of your favorites.</string>
   <string name="cache_favpoint_add">Add</string>
   <string name="cache_favpoint_remove">Remove</string>
+  <string name="cache_list_text">List:</string>
+  <string name="cache_list_change">Move</string>
+  <string name="cache_list_unknown">Not in a list</string>
   <string name="cache_images">Images</string>
   
   <string name="cache_waypoints">Waypoints</string>

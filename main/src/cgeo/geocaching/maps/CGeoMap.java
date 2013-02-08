@@ -8,10 +8,10 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
@@ -36,6 +36,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -652,42 +653,18 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         return true;
                     }
 
-                    final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
-
-                    waitDialog = new ProgressDialog(activity);
-                    waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                    waitDialog.setCancelable(true);
-                    waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
-                    waitDialog.setMax(detailTotal);
-                    waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                        @Override
-                        public void onCancel(DialogInterface arg0) {
-                            try {
-                                if (loadDetailsThread != null) {
-                                    loadDetailsThread.stopIt();
-                                }
-
-                                geoDirUpdate.startDir();
-                            } catch (Exception e) {
-                                Log.e("cgeocaches.onPrepareOptionsMenu.onCancel", e);
-                            }
-                        }
-                    });
-
-                    float etaTime = detailTotal * 7.0f / 60.0f;
-                    int roundedEta = Math.round(etaTime);
-                    if (etaTime < 0.4) {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-                    } else  {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + roundedEta + " " + res.getQuantityString(R.plurals.caches_eta_mins, roundedEta));
+                    if (Settings.getChooseList()) {
+                        // let user select list to store cache in
+                        new StoredList.UserInterface(activity).promptForListSelection(R.string.list_title,
+                                new RunnableWithArgument<Integer>() {
+                                    @Override
+                                    public void run(final Integer selectedListId) {
+                                        storeCaches(geocodes, selectedListId);
+                                    }
+                                }, true, StoredList.TEMPORARY_LIST_ID);
+                    } else {
+                        storeCaches(geocodes, StoredList.STANDARD_LIST_ID);
                     }
-                    waitDialog.show();
-
-                    detailProgressTime = System.currentTimeMillis();
-
-                    loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes);
-                    loadDetailsThread.start();
                 }
                 return true;
             case MENU_CIRCLE_MODE:
@@ -1343,6 +1320,51 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     /**
+     * store caches, invoked by "store offline" menu item
+     *
+     * @param listId
+     *            the list to store the caches in
+     */
+    private void storeCaches(List<String> geocodes, int listId) {
+        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
+
+        waitDialog = new ProgressDialog(activity);
+        waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        waitDialog.setCancelable(true);
+        waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
+        waitDialog.setMax(detailTotal);
+        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface arg0) {
+                try {
+                    if (loadDetailsThread != null) {
+                        loadDetailsThread.stopIt();
+                    }
+
+                    geoDirUpdate.startDir();
+                } catch (Exception e) {
+                    Log.e("cgeocaches.onPrepareOptionsMenu.onCancel", e);
+                }
+            }
+        });
+
+        float etaTime = detailTotal * 7.0f / 60.0f;
+        int roundedEta = Math.round(etaTime);
+        if (etaTime < 0.4) {
+            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+        } else {
+            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + roundedEta + " " + res.getQuantityString(R.plurals.caches_eta_mins, roundedEta));
+        }
+        waitDialog.show();
+
+        detailProgressTime = System.currentTimeMillis();
+
+        loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes, listId);
+        loadDetailsThread.start();
+    }
+
+    /**
      * Thread to store the caches in the viewport. Started by Activity.
      */
 
@@ -1350,11 +1372,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         final private CancellableHandler handler;
         final private List<String> geocodes;
+        final private int listId;
         private long last = 0L;
 
-        public LoadDetails(final CancellableHandler handler, final List<String> geocodes) {
+        public LoadDetails(final CancellableHandler handler, final List<String> geocodes, final int listId) {
             this.handler = handler;
             this.geocodes = geocodes;
+            this.listId = listId;
         }
 
         public void stopIt() {
@@ -1395,7 +1419,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             break;
                         }
 
-                        Geocache.storeCache(null, geocode, StoredList.STANDARD_LIST_ID, false, handler);
+                        Geocache.storeCache(null, geocode, listId, false, handler);
                     }
                 } catch (Exception e) {
                     Log.e("cgeocaches.LoadDetails.run", e);

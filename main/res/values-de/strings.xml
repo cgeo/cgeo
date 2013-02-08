@@ -389,6 +389,7 @@
   <string name="init_save_log_img">Logbilder abspeichern</string>
   <string name="init_units">Imperiale Einheiten (Meilen/Fuß)</string>
   <string name="init_log_offline">Offline loggen (Dialog für Online-Log nicht anzeigen)</string>
+  <string name="init_choose_list">Beim Speichern von Caches nach Liste fragen</string>
   <string name="init_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
   <string name="init_altitude">Höhenkorrektur</string>
   <string name="init_altitude_description">Falls das GPS eine falsche Höhe ermittelt, kann dies durch Angabe eines positiven oder negativen Wertes in Metern korrigiert werden.</string>
@@ -506,8 +507,10 @@
   <string name="cache_favpoint_not_on">Dieser Cache ist kein Favorit.</string>
   <string name="cache_favpoint_add">Hinzufügen</string>
   <string name="cache_favpoint_remove">Entfernen</string>
+  <string name="cache_list_text">Liste:</string>
+  <string name="cache_list_change">Verschieben</string>
+  <string name="cache_list_unknown">In keiner Liste</string>
   <string name="cache_images">Bilder</string>
-  <string name="cache_images_loading">Lade Bilder…</string>
   <string name="cache_waypoints">Wegpunkte</string>
   <plurals name="waypoints">
       <item quantity="one">1 Wegpunkt</item>
@@ -590,6 +593,7 @@
   <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
   <string name="cache_spoiler_images_title">Hinweisbilder</string>
   <string name="cache_spoiler_images_loading">Lade Hinweisbilder…</string>
+  <string name="cache_images_loading">Lade Bilder…</string>
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string>
   <string name="cache_clear_history">Verlauf leeren</string>

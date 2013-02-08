@@ -36,6 +36,7 @@ import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
@@ -1240,6 +1241,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
             updateFavPointBox();
 
+            // list
+            Button buttonChangeList = (Button) view.findViewById(R.id.change_list);
+            buttonChangeList.setOnClickListener(new ChangeListClickListener());
+            updateListBox();
+
             // data license
             IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector != null) {
@@ -1309,6 +1315,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
 
+                if (Settings.getChooseList()) {
+                    // let user select list to store cache in
+                    new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
+                            new RunnableWithArgument<Integer>() {
+                                @Override
+                                public void run(final Integer selectedListId) {
+                                    storeCache(selectedListId);
+                                }
+                            }, true, StoredList.TEMPORARY_LIST_ID);
+                } else {
+                    storeCache(StoredList.TEMPORARY_LIST_ID);
+                }
+            }
+
+            protected void storeCache(int listId) {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler();
 
                 progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
@@ -1317,7 +1338,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     storeThread.interrupt();
                 }
 
-                storeThread = new StoreCacheThread(storeCacheHandler);
+                storeThread = new StoreCacheThread(listId, storeCacheHandler);
                 storeThread.start();
             }
         }
@@ -1344,15 +1365,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private class StoreCacheThread extends Thread {
+            final private int listId;
             final private CancellableHandler handler;
 
-            public StoreCacheThread(final CancellableHandler handler) {
+            public StoreCacheThread(final int listId, final CancellableHandler handler) {
+                this.listId = listId;
                 this.handler = handler;
             }
 
             @Override
             public void run() {
-                cache.store(handler);
+                cache.store(listId, handler);
             }
         }
 
@@ -1537,6 +1560,38 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /**
+         * Listener for "change list" button
+         */
+        private class ChangeListClickListener implements View.OnClickListener {
+            @Override
+            public void onClick(View view) {
+                new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
+                        new RunnableWithArgument<Integer>() {
+                            @Override
+                            public void run(final Integer selectedListId) {
+                                switchListById(selectedListId);
+                            }
+                        }, true, cache.getListId());
+            }
+        }
+
+        /**
+         * move cache to another list
+         *
+         * @param listId
+         *            the ID of the list
+         */
+        public void switchListById(int listId) {
+            if (listId < 0) {
+                return;
+            }
+
+            Settings.saveLastList(listId);
+            cgData.moveToList(cache, listId);
+            updateListBox();
+        }
+
+        /**
          * shows/hides buttons, sets text in watchlist box
          */
         private void updateWatchlistBox() {
@@ -1600,6 +1655,31 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setEnabled(false);
                 buttonRemove.setVisibility(View.GONE);
+            }
+        }
+
+        /**
+         * shows/hides/updates list box
+         */
+        private void updateListBox() {
+            View box = view.findViewById(R.id.list_box);
+
+            if (cache.isOffline()) {
+                // show box
+                box.setVisibility(View.VISIBLE);
+
+                // update text
+                TextView text = (TextView) view.findViewById(R.id.list_text);
+                StoredList list = cgData.getList(cache.getListId());
+                if (list != null) {
+                    text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
+                } else {
+                    // this should not happen
+                    text.setText(R.string.cache_list_unknown);
+                }
+            } else {
+                // hide box
+                box.setVisibility(View.GONE);
             }
         }
 
