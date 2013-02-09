@@ -840,10 +840,7 @@
   <string name="export_gpx_info">The GPX file will be exported to %1$s with current date and time as file name.</string>
   <string name="export_gpx_to">Send exported GPX to</string>
 
-  <!--  attribute unknown -->
-  <string name="attribute_unknown_yes">Unknown attribute present</string>
-  <string name="attribute_unknown_no">Unknown attribute not present</string>
-  <!--  attributes (permissions -> allowed, not allowed) -->
+  <!-- GC attributes -->
   <string name="attribute_dogs_yes">Dogs allowed</string>
   <string name="attribute_dogs_no">Dogs not allowed</string>
   <string name="attribute_bicycles_yes">Bicycles allowed</string>
@@ -862,8 +859,6 @@
   <string name="attribute_campfires_no">Campfires not allowed</string>
   <string name="attribute_rv_yes">Truck driver/RV allowed</string>
   <string name="attribute_rv_no">Truck driver/RV not allowed</string>
-
-  <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Recommended for kids</string>
   <string name="attribute_kids_no">Not recommended for kids</string>
   <string name="attribute_onehour_yes">Takes less than an hour</string>
@@ -916,8 +911,6 @@
   <string name="attribute_landf_no">No lost and found tour</string>
   <string name="attribute_partnership_yes">Partnership cache</string>
   <string name="attribute_partnership_no">No partnership cache</string>
-
-  <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Access or parking fee required</string>
   <string name="attribute_fee_no">Access or parking fee not required</string>
   <string name="attribute_rappelling_yes">Climbing gear required</string>
@@ -940,8 +933,6 @@
   <string name="attribute_wirelessbeacon_no">No wireless beacon</string>
   <string name="attribute_treeclimbing_yes">Tree climbing required</string>
   <string name="attribute_treeclimbing_no">Tree climbing not required</string>
-
-  <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Poisonous plants</string>
   <string name="attribute_poisonoak_no">No poisonous plants</string>
   <string name="attribute_dangerousanimals_yes">Dangerous animals</string>
@@ -958,8 +949,6 @@
   <string name="attribute_danger_no">No dangerous area</string>
   <string name="attribute_thorn_yes">Thorns</string>
   <string name="attribute_thorn_no">No thorns</string>
-
-  <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Wheelchair accessible</string>
   <string name="attribute_wheelchair_no">Not wheelchair accessible</string>
   <string name="attribute_parking_yes">Parking available</string>
@@ -982,6 +971,64 @@
   <string name="attribute_fuel_no">No fuel nearby</string>
   <string name="attribute_food_yes">Food nearby</string>
   <string name="attribute_food_no">No food nearby</string>
+  <string name="attribute_oc_only_yes">Only loggable at Opencaching</string>
+  <string name="attribute_oc_only_no">Not only loggable at Opencaching</string>
+  <string name="attribute_link_only_yes">Hyperlink to another caching portal only</string>
+  <string name="attribute_link_only_no">Not only a hyperlink to another caching portal</string>
+  <string name="attribute_letterbox_yes">Letterbox (needs stamp)</string>
+  <string name="attribute_letterbox_no">No letterbox (no stamp needed)</string>
+  <string name="attribute_railway_yes">Active railway nearby</string>
+  <string name="attribute_railway_no">No active railway nearby</string>
+  <string name="attribute_syringe_yes">First aid available</string>
+  <string name="attribute_syringe_no">No first aid available</string>
+  <string name="attribute_swamp_yes">Swamp or marsh</string>
+  <string name="attribute_swamp_no">No swamp or marsh</string>
+  <string name="attribute_hills_yes">Hilly area</string>
+  <string name="attribute_hills_no">No hilly area</string>
+  <string name="attribute_poi_yes">Point of interest</string>
+  <string name="attribute_poi_no">No point of interest</string>
+  <string name="attribute_moving_target_yes">Moving target</string>
+  <string name="attribute_moving_target_no">No moving target</string>
+  <string name="attribute_webcam_yes">Webcam</string>
+  <string name="attribute_webcam_no">No webcam</string>
+  <string name="attribute_inside_yes">Within enclosed rooms (caves, buildings etc.)</string>
+  <string name="attribute_inside_no">Not within enclosed rooms</string>
+  <string name="attribute_in_water_yes">In the water</string>
+  <string name="attribute_in_water_no">Not in the water</string>
+  <string name="attribute_no_gps_yes">Without GPS (letterboxes, cistes, compass juggling ...)</string>
+  <string name="attribute_no_gps_no">With GPS</string>
+  <string name="attribute_overnight_yes">Overnight stay necessary</string>
+  <string name="attribute_overnight_no">No overnight stay necessary</string>
+  <string name="attribute_specific_times_yes">Only available at specified times</string>
+  <string name="attribute_specific_times_no">Not only available at specified times</string>
+  <string name="attribute_day_yes">by day only</string>
+  <string name="attribute_day_no">Not only by day</string>
+  <string name="attribute_tide_yes">Tide</string>
+  <string name="attribute_tide_no">No tide</string>
+  <string name="attribute_all_seasons_yes">All seasons</string>
+  <string name="attribute_all_seasons_no">Not all seasons</string>
+  <string name="attribute_breeding_yes">Breeding season / protected nature</string>
+  <string name="attribute_breeding_no">No breeding season / protected nature</string>
+  <string name="attribute_snow_proof_yes">Snow-proof hiding place</string>
+  <string name="attribute_snow_proof_no">No snow-proof hiding place</string>
+  <string name="attribute_compass_yes">Compass</string>
+  <string name="attribute_compass_no">No compass</string>
+  <string name="attribute_cave_yes">Cave equipment</string>
+  <string name="attribute_cave_no">No cave equipment</string>
+  <string name="attribute_aircraft_yes">Aircraft</string>
+  <string name="attribute_aircraft_no">No aircraft</string>
+  <string name="attribute_investigation_yes">Investigation</string>
+  <string name="attribute_investigation_no">No investigation</string>
+  <string name="attribute_puzzle_yes">Puzzle / Mystery</string>
+  <string name="attribute_puzzle_no">No puzzle / mystery</string>
+  <string name="attribute_arithmetic_yes">Arithmetical problem</string>
+  <string name="attribute_arithmetic_no">No arithmetical problem</string>
+  <string name="attribute_other_cache_yes">Other cache type</string>
+  <string name="attribute_other_cache_no">No other cache type</string>
+  <string name="attribute_ask_owner_yes">Ask owner for start conditions</string>
+  <string name="attribute_ask_owner_no">Don\'t ask owner for start conditions</string>
+  <string name="attribute_unknown_yes">Unknown attribute present</string>
+  <string name="attribute_unknown_no">No unknown attribute present</string>
 
   <!-- next things -->
   <string name="legal_note">To use the services of Geocaching.com, terms and conditions of the <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> have to be agreed.</string>

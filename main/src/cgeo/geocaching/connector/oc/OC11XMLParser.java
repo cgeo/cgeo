@@ -424,7 +424,7 @@ public class OC11XMLParser {
         attributeNode.setEndTextElementListener(new EndTextElementListener() {
             @Override
             public void end(String body) {
-                CacheAttribute attribute = AttributeMapper.getAttribute(attributeId);
+                CacheAttribute attribute = CacheAttribute.getByOcId(attributeId);
                 if (attribute != null) {
                     // semantic of attributes on opencaching is always "yes"
                     cacheHolder.cache.getAttributes().add(attribute.getAttributeName(true));
