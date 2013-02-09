@@ -279,7 +279,7 @@ public class AttributeMapper {
             case 22:
                 return CacheAttribute.PHONE;
             case 23:
-                return CacheAttribute.FIRSTAID;
+                return null;
             case 24:
                 return CacheAttribute.PARKNGRAB;
             case 25:
