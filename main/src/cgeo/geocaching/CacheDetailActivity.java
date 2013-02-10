@@ -1092,7 +1092,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (attrib == null) {
                     attrib = CacheAttribute.UNKNOWN;
                 }
-                attributeName = attrib.getGcL10n(enabled);
+                attributeName = attrib.getL10n(enabled);
                 if (buffer.length() > 0) {
                     buffer.append('\n');
                 }

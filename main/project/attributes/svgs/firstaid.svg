@@ -43,8 +43,8 @@
    id="namedview2905"
    showgrid="false"
    inkscape:zoom="2.3602597"
-   inkscape:cx="50.000003"
-   inkscape:cy="49.994502"
+   inkscape:cx="-135.99648"
+   inkscape:cy="49.994504"
    inkscape:window-x="49"
    inkscape:window-y="24"
    inkscape:window-maximized="0"
@@ -52,6 +52,6 @@
 <polygon
    points="67.298,0 67.298,32.713 100,32.713 100,67.333 67.562,67.333 67.562,99.989 32.702,99.989 32.702,67.333 0,67.333 0,32.713 32.569,32.713 32.569,0 "
    id="polygon2903"
-   style="fill:#ffffff"
+   style="fill:#a00000;fill-opacity:1"
    transform="matrix(0.79661017,0,0,0.79661017,10.169491,10.168373)" />
 </svg>

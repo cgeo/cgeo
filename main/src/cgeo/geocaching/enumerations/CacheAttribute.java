@@ -5,6 +5,8 @@ import cgeo.geocaching.cgeoapplication;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.util.SparseArray;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -131,7 +133,14 @@ public enum CacheAttribute {
         this.stringIdNo = stringIdNo;
     }
 
-    public String getGcL10n(final boolean enabled) {
+    /**
+     * get localized text
+     *
+     * @param enabled
+     *            true: for positive text, false: for negative text
+     * @return the localized text
+     */
+    public String getL10n(final boolean enabled) {
         return cgeoapplication.getInstance().getResources().getString(
                 enabled ? stringIdYes : stringIdNo);
     }
@@ -145,26 +154,22 @@ public enum CacheAttribute {
         FIND_BY_GCRAWNAME = Collections.unmodifiableMap(mapGcRawNames);
     }
 
-    private final static Map<Integer, CacheAttribute> FIND_BY_GCID;
+    private final static SparseArray<CacheAttribute> FIND_BY_GCID = new SparseArray<CacheAttribute>();
     static {
-        final HashMap<Integer, CacheAttribute> mapGcIds = new HashMap<Integer, CacheAttribute>();
         for (CacheAttribute attr : values()) {
             if (attr.gcid != NO_ID) {
-                mapGcIds.put(attr.gcid, attr);
+                FIND_BY_GCID.put(attr.gcid, attr);
             }
         }
-        FIND_BY_GCID = Collections.unmodifiableMap(mapGcIds);
     }
 
-    private final static Map<Integer, CacheAttribute> FIND_BY_OCID;
+    private final static SparseArray<CacheAttribute> FIND_BY_OCID = new SparseArray<CacheAttribute>();
     static {
-        final HashMap<Integer, CacheAttribute> mapOcIds = new HashMap<Integer, CacheAttribute>();
         for (CacheAttribute attr : values()) {
             if (attr.ocid != NO_ID) {
-                mapOcIds.put(attr.ocid, attr);
+                FIND_BY_OCID.put(attr.ocid, attr);
             }
         }
-        FIND_BY_OCID = Collections.unmodifiableMap(mapOcIds);
     }
 
     public static CacheAttribute getByRawName(final String rawName) {

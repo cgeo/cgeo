@@ -331,7 +331,7 @@ class GpxExport extends AbstractExport {
                 gpx.startTag(PREFIX_GROUNDSPEAK, "attribute");
                 gpx.attribute("", "id", Integer.toString(attr.gcid));
                 gpx.attribute("", "inc", enabled ? "1" : "0");
-                gpx.text(attr.getGcL10n(enabled));
+                gpx.text(attr.getL10n(enabled));
                 gpx.endTag(PREFIX_GROUNDSPEAK, "attribute");
             }
 
