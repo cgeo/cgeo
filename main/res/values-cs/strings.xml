@@ -206,12 +206,12 @@
   <string name="warn_deprecated_mapfile">Používáte zastaralou verzi(0.2.4) mapsforge offline mapového souboru souboru 0.2.4 map file.\nZvažte stažení nové verze pro mapsforge 0.3.0 map.\nPodpora map pro verzi 0.2.4 bude ukončena příštím vydáním aplikace.</string>
   <string name="warn_nonexistant_mapfile">Vybraný mapový soubor neexistuje.\nOffline mapy nejsou k dispozici.</string>
   <string name="warn_rendertheme_missing">Téma pro mapu není k dispozici.</string>
-  
+
   <string name="info_log_posted">c:geo úspěšně zaslalo log.</string>
   <string name="info_log_saved">c:geo úspěšně uložilo log.</string>
   <string name="info_log_cleared">Log byl vyprázdněn.</string>
   <string name="info_log_type_changed">Typ logu byl změněn!</string>
-  
+
   <string name="info_storing_static_maps">Zkouším uložit statické mapy</string>
 
   <!-- location service -->
@@ -444,7 +444,7 @@
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">OSM: Offline</string>
-    
+
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Jméno vašeho zařízení:</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožnuje stahování keší pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečtěte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registraci proveďte pouze pokud potřebujete send2cgeo. c:geo bude normálně fungovat i bez registrace.</string>
@@ -555,7 +555,7 @@
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Zobrazit na jiné mapě</string>
   <string name="cache_menu_streetview">Street View</string>
-  <string name="cache_menu_browser">Otevřít v prohlížečí</string>  
+  <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">Zapsat návštěvu</string>
   <string name="cache_menu_visit_offline">Zapsat návštěvu (offline)</string>
   <string name="cache_menu_spoilers">obrázky</string>
@@ -606,10 +606,10 @@
   <string name="cache_image_open_browser">Otevřít v prohlížeči</string>
   <string name="cache_share_field">Sdílet</string>
   <string name="cache_time_full_hours">hodin</string>
-  
+
   <!--  editor dialog -->
-  <string name="editor_save">Uložit</string>  
-  
+  <string name="editor_save">Uložit</string>
+
   <!-- file list base -->
   <string name="file_searching_in">Hledám soubory\nv</string>
   <string name="file_searching_sdcard_in">Žádné soubory ve výchozích složkách:\n%1$s\n\nHledám soubory na celé SD kartě:\n</string>
@@ -620,7 +620,7 @@
   <!-- simple_dir_chooser -->
   <string name="simple_dir_chooser_title">Zvolte složku</string>
   <string name="simple_dir_chooser_current_path">Cesta:</string>
-  
+ 
   <!-- gpx -->
   <string name="gpx_import_loading_caches">nahrávání keší z .gpx souboru</string>
   <string name="gpx_import_loading_waypoints">Načítám soubor s waypointy</string>
@@ -676,7 +676,7 @@
   <string name="waypoint_reset">Obnova</string>
   <string name="waypoint_localy_reset_cache_coords">Obnovit souřadnice keše v zařízení</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Obnovit původní souřadnice v c:geo a na webu</string>
-  <string name="waypoint_being_saved">Bod trasy se ukládá…</string>  
+  <string name="waypoint_being_saved">Bod trasy se ukládá…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Souřadnice keše nemohou být změněny na webu.</string>
   <string name="waypoint_coordinates_upload_error">Při nahrávání souřadnic na web se vyskytla chyba.</string>
   <string name="waypoint_coordinates_uploading_to_website">Nahrávám %s na web</string>
@@ -684,7 +684,7 @@
   <string name="waypoint_done">Hotovo</string>
   <string name="waypoint_duplicate">Zdvojit</string>
   <string name="waypoint_copy_of">Kopie</string>
-  
+
   <string name="search_history">Historie</string>
   <string name="search_history_empty">Žádný předchozí cíl</string>
   <string name="search_remove_destination">Cíl smazán</string>
@@ -692,14 +692,14 @@
   <string name="search_history_cleared">Historie vymazána</string>
 
   <string name="waypoint_coordinate_formats_plain">Prostý</string>
-  
+ 
     <!-- distance units -->
   <string name="unit_m">m (metry)</string>
   <string name="unit_km">km (kilometry)</string>
   <string name="unit_ft">ft (stopy)</string>
   <string name="unit_yd">yd (yardy)</string>
   <string name="unit_mi">mi (míle)</string>
-  
+ 
   <!-- visit -->
   <string name="visit_tweet">informovat o nálezu na twitteru</string>
 
@@ -778,7 +778,7 @@
   <string name="trackable_released">Vypuštění</string>
   <string name="trackable_distance">Nacestoval</string>
   <string name="trackable_touch">Dotyk</string>
-  
+ 
   <!--  user -->
   <string name="user_menu_title">O</string>
   <string name="user_menu_view_hidden">Skryté keše</string>
@@ -815,7 +815,7 @@
   <string name="helper_bluetoothgps_description">Umožňuje používat externí GPS přijímač k získání přesnější polohy a také může ušetřit energii v baterii.</string>
   <string name="helper_barcode_title">Barcode Scanner</string>
   <string name="helper_barcode_description">Existují skripty pro Greasemonkey and weby které zobrazují geokód jako čárový kód. S touto aplikací může c:geo přečíst tyto kódy rovnou z obrazovky počítače.</string> 
-  
+ 
   <!-- add-ons -->
   <string name="addon_missing_title">Chybějící modul</string>
   <string name="addon_download_prompt">Stáhnout teď z Google Play.</string>
@@ -983,14 +983,14 @@
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napsalo na Váš Twitter pokaždé, když zapíšete nález kešky?</string>
   <string name="about_auth_1">Pomocí následujícího procesu můžete umožnit <b>c:geo</b> aplikaci odesílání příspěvků na Váš Twitter.</string>
   <string name="about_auth_2">Tapnutím na tlačítko "zahájit autorizaci" celý proces začne. Tento proces otevře webovou stránku Twitteru, kde se budete muset přihlásit a tlačítkem Accept pak umožnit aplikaci <b>c:geo</b>přístup k Vašemu Twitteru. Twitter Vám přidělí PIN kód pokud tapnete na Accept. Tento kód zkopírujte a vložte do aplikace <b>c:geo</b>. A potvrďte. To je vše.</string>
-  
+ 
   <!-- status (used via string based resource loading) -->
   <string name="status_new_release" tools:ignore="UnusedResources">Nové vydání je k dispozici.\nKlikněte k instalaci.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nové noční sestavení je k dispozici.\nKlikněte k instalaci.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nový kandidát k vydání je k dispozici.\nKlikněte k instalaci.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na tom, zkuste znovu brzy.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny on geocaching.com rozbily aktivní mapu c:geo.\nPracujeme na tom, zkuste znovu brzy.</string>
-  
+ 
   <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
   <plurals name="days_ago">
       <item quantity="one">včera</item>
