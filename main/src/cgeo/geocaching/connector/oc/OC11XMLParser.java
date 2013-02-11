@@ -394,7 +394,7 @@ public class OC11XMLParser {
             }
         });
 
-        // cache.terrain
+        // cache.datehidden
         cacheNode.getChild("datehidden").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
@@ -404,11 +404,13 @@ public class OC11XMLParser {
             }
         });
 
+        // cache.userid
         cacheNode.getChild("userid").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
             public void end(String body) {
                 cacheHolder.cache.setOwnerDisplayName(body);
+                cacheHolder.cache.setOwnerUserId(body);
             }
         });
 

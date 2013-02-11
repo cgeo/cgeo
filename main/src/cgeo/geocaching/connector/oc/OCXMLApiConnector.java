@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -9,6 +10,8 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CancellableHandler;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort {
 
@@ -47,6 +50,11 @@ public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, 
     public boolean isActivated() {
         // currently only tested and working with oc.de
         return Settings.isOCConnectorActive();
+    }
+
+    @Override
+    public boolean isOwner(ICache cache) {
+        return StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getOCConnectorUserName());
     }
 
 }
