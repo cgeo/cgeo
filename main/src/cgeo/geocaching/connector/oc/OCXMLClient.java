@@ -99,7 +99,7 @@ public class OCXMLClient {
     }
 
     private static Parameters getOCXmlQueryParameters(final boolean withDescription, final boolean withLogs, final boolean withImages) {
-        return new Parameters("modifiedsince", "20060320000000",
+        return new Parameters("modifiedsince", "20000101000000",
                 "user", "0",
                 "cache", "1",
                 "cachedesc", withDescription ? "1" : "0",
