@@ -8,10 +8,10 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
@@ -494,6 +494,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             for (String geocode : dirtyCaches) {
                 Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 if (cache != null) {
+                    // new collection type needs to remove first
+                    caches.remove(cache);
                     // re-add to update the freshness
                     caches.add(cache);
                 }
