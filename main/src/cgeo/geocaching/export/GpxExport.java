@@ -322,11 +322,14 @@ class GpxExport extends AbstractExport {
             gpx.startTag(PREFIX_GROUNDSPEAK, "attributes");
 
             for (String attribute : cache.getAttributes()) {
-                final CacheAttribute attr = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attribute));
+                final CacheAttribute attr = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attribute));
+                if (attr == null) {
+                    continue;
+                }
                 final boolean enabled = CacheAttribute.isEnabled(attribute);
 
                 gpx.startTag(PREFIX_GROUNDSPEAK, "attribute");
-                gpx.attribute("", "id", Integer.toString(attr.id));
+                gpx.attribute("", "id", Integer.toString(attr.gcid));
                 gpx.attribute("", "inc", enabled ? "1" : "0");
                 gpx.text(attr.getL10n(enabled));
                 gpx.endTag(PREFIX_GROUNDSPEAK, "attribute");

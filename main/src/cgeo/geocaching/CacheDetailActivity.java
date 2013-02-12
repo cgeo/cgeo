@@ -1047,8 +1047,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
 
                 final boolean strikethru = !CacheAttribute.isEnabled(attributeName);
-                final CacheAttribute attrib = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
-                if (attrib != CacheAttribute.UNKNOWN) {
+                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+                if (attrib != null) {
                     noAttributeIconsFound = false;
                     Drawable d = res.getDrawable(attrib.drawableId);
                     iv.setImageDrawable(d);
@@ -1062,7 +1062,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         fl.addView(strikethruImage);
                     }
                 } else {
-                    Drawable d = res.getDrawable(R.drawable.attribute_icon_not_found);
+                    Drawable d = res.getDrawable(R.drawable.attribute_unknown);
                     iv.setImageDrawable(d);
                 }
 
@@ -1089,10 +1089,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             for (String attributeName : cache.getAttributes()) {
                 final boolean enabled = CacheAttribute.isEnabled(attributeName);
                 // search for a translation of the attribute
-                CacheAttribute attrib = CacheAttribute.getByGcRawName(CacheAttribute.trimAttributeName(attributeName));
-                if (attrib != CacheAttribute.UNKNOWN) {
-                    attributeName = attrib.getL10n(enabled);
+                CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+                if (attrib == null) {
+                    attrib = CacheAttribute.UNKNOWN;
                 }
+                attributeName = attrib.getL10n(enabled);
                 if (buffer.length() > 0) {
                     buffer.append('\n');
                 }
