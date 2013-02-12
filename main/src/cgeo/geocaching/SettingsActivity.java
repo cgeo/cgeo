@@ -521,6 +521,17 @@ public class SettingsActivity extends AbstractActivity {
             }
         });
 
+        final CheckBox chooseList = (CheckBox) findViewById(R.id.choose_list);
+        chooseList.setChecked(Settings.getChooseList());
+        chooseList.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setChooseList(!Settings.getChooseList());
+                chooseList.setChecked(Settings.getChooseList());
+            }
+        });
+
         final CheckBox plainLogs = (CheckBox) findViewById(R.id.plain_logs);
         plainLogs.setChecked(Settings.getPlainLogs());
         plainLogs.setOnClickListener(new View.OnClickListener() {

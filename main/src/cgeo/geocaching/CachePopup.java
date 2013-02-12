@@ -6,6 +6,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -114,22 +115,39 @@ public class CachePopup extends AbstractPopupActivity {
                 return;
             }
 
+            if (Settings.getChooseList()) {
+                // let user select list to store cache in
+                new StoredList.UserInterface(CachePopup.this).promptForListSelection(R.string.list_title,
+                        new RunnableWithArgument<Integer>() {
+                            @Override
+                            public void run(final Integer selectedListId) {
+                                storeCache(selectedListId);
+                            }
+                        }, true, StoredList.TEMPORARY_LIST_ID);
+            } else {
+                storeCache(StoredList.TEMPORARY_LIST_ID);
+            }
+        }
+
+        protected void storeCache(final int listId) {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler();
             progress.show(CachePopup.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-            new StoreCacheThread(storeCacheHandler).start();
+            new StoreCacheThread(listId, storeCacheHandler).start();
         }
     }
 
     private class StoreCacheThread extends Thread {
+        final private int listId;
         final private CancellableHandler handler;
 
-        public StoreCacheThread(final CancellableHandler handler) {
+        public StoreCacheThread(final int listId, final CancellableHandler handler) {
+            this.listId = listId;
             this.handler = handler;
         }
 
         @Override
         public void run() {
-            cache.store(handler);
+            cache.store(listId, handler);
             invalidateOptionsMenuCompatible();
         }
     }

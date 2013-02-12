@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.IAbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.lang3.StringUtils;
@@ -54,11 +54,11 @@ public class StoredList {
     }
 
     public static class UserInterface {
-        private final IAbstractActivity activity;
+        private final Activity activity;
         private final cgeoapplication app;
         private final Resources res;
 
-        public UserInterface(final IAbstractActivity activity) {
+        public UserInterface(final Activity activity) {
             this.activity = activity;
             app = cgeoapplication.getInstance();
             res = app.getResources();
@@ -93,7 +93,7 @@ public class StoredList {
 
             final CharSequence[] items = new CharSequence[listsTitle.size()];
 
-            AlertDialog.Builder builder = new AlertDialog.Builder((Activity) activity);
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle(res.getString(titleId));
             builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
                 @Override
@@ -123,20 +123,20 @@ public class StoredList {
                     final int newId = cgData.createList(listName);
 
                     if (newId >= cgData.customListIdOffset) {
-                        activity.showToast(res.getString(R.string.list_dialog_create_ok));
+                        ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_ok));
                         if (runAfterwards != null) {
                             runAfterwards.run(newId);
                         }
                     } else {
-                        activity.showToast(res.getString(R.string.list_dialog_create_err));
+                        ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
                     }
                 }
             });
         }
 
         private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithArgument<String> runnable) {
-            final AlertDialog.Builder alert = new AlertDialog.Builder((Activity) activity);
-            final View view = ((Activity) activity).getLayoutInflater().inflate(R.layout.list_create_dialog, null);
+            final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+            final View view = activity.getLayoutInflater().inflate(R.layout.list_create_dialog, null);
             final EditText input = (EditText) view.findViewById(R.id.text);
             input.setText(defaultValue);
 

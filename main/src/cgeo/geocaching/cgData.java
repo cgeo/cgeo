@@ -2581,6 +2581,10 @@ public class cgData {
         return status;
     }
 
+    public static void moveToList(final Geocache cache, final int listId) {
+        moveToList(Collections.singletonList(cache), listId);
+    }
+
     public static void moveToList(final List<Geocache> caches, final int listId) {
         if (listId == StoredList.ALL_LIST_ID) {
             return;

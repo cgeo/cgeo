@@ -87,6 +87,8 @@
     · Inverse sorting of cache lists (hit the same menu again)\n
     · View pager in trackable activity\n
     · Menu item to delete past events\n
+    · Settings: Option to ask for list to store caches in\n
+    · Change list in cache details\n
     · Ability to select \"All\" list from main screen\n
     · Default log type for event caches will be \"Attended\" if \"Will attend\" was logged before\n
     · Improved and extended cache type detection on live map\n

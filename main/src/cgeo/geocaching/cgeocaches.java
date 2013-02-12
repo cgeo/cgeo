@@ -828,7 +828,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 invalidateOptionsMenuCompatible();
                 return true;
             case MENU_REFRESH_STORED:
-                refreshStored();
+                refreshStored(adapter.getCheckedOrAllCaches());
                 invalidateOptionsMenuCompatible();
                 return true;
             case MENU_DROP_CACHES:
@@ -1042,8 +1042,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 }, true, listId);
                 break;
             case MENU_STORE_CACHE:
-                //FIXME: this must use the same handler like in the CacheDetailActivity. Will be done by moving the handler into the store method.
-                cache.store(null);
+                refreshStored(Collections.singletonList(cache));
                 break;
             case MENU_EXPORT:
                 ExportFactory.showExportMenu(Collections.singletonList(cache), this);
@@ -1175,8 +1174,27 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         refreshCurrentList();
     }
 
-    public void refreshStored() {
-        detailTotal = adapter.getCheckedOrAllCount();
+    public void refreshStored(final List<Geocache> caches) {
+        detailTotal = caches.size();
+        if (detailTotal == 0) {
+            return;
+        }
+
+        if (Settings.getChooseList() && type != CacheListType.OFFLINE) {
+            // let user select list to store cache in
+            new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,
+                    new RunnableWithArgument<Integer>() {
+                        @Override
+                        public void run(final Integer selectedListId) {
+                            refreshStored(caches, selectedListId);
+                        }
+                    }, true, StoredList.TEMPORARY_LIST_ID);
+        } else {
+            refreshStored(caches, this.listId);
+        }
+    }
+
+    private void refreshStored(final List<Geocache> caches, final int storeListId) {
         detailProgress = 0;
 
         showProgress(false);
@@ -1194,7 +1212,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         detailProgressTime = System.currentTimeMillis();
 
-        threadDetails = new LoadDetailsThread(loadDetailsHandler, listId);
+        threadDetails = new LoadDetailsThread(loadDetailsHandler, caches, storeListId);
         threadDetails.start();
     }
 
@@ -1413,11 +1431,11 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         final private int listIdLD;
         private volatile boolean needToStop = false;
         private long last = 0L;
-        final private List<Geocache> selected;
+        final private List<Geocache> caches;
 
-        public LoadDetailsThread(Handler handlerIn, int listId) {
+        public LoadDetailsThread(Handler handlerIn, List<Geocache> caches, int listId) {
             handler = handlerIn;
-            selected = adapter.getCheckedOrAllCaches();
+            this.caches = caches;
 
             // in case of online lists, set the list id to the standard list
             this.listIdLD = Math.max(listId, StoredList.STANDARD_LIST_ID);
@@ -1431,8 +1449,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         public void run() {
             removeGeoAndDir();
 
-            final List<Geocache> cachesWithStaticMaps = new ArrayList<Geocache>(selected.size());
-            for (Geocache cache : selected) {
+            final List<Geocache> cachesWithStaticMaps = new ArrayList<Geocache>(this.caches.size());
+            for (Geocache cache : this.caches) {
                 if (Settings.isStoreOfflineMaps() && cache.hasStaticMap()) {
                     cachesWithStaticMaps.add(cache);
                     continue;
