@@ -34,4 +34,26 @@ public class OCXMLTest extends CGeoTestCase {
             Settings.setOCConnectorUserName(oldOCName);
         }
     }
+
+    public static void testOCOwner() {
+        String oldOCName = Settings.getOCConnectorUserName();
+        try {
+            Settings.setOCConnectorUserName("andi12.2");
+            String geoCode = "OCC9BE";
+            Geocache cache = OCXMLClient.getCache(geoCode);
+            assertNotNull(cache);
+
+            assertTrue(cache.isOwner());
+        } finally {
+            Settings.setOCConnectorUserName(oldOCName);
+        }
+    }
+
+    public static void testOC0537Description() {
+        String geoCode = "OC0537";
+        Geocache cache = OCXMLClient.getCache(geoCode);
+        assertNotNull(cache);
+
+        assertFalse(cache.getDescription().length() < 100);
+    }
 }
