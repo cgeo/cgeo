@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.IAbstractActivity;
-import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -1374,8 +1374,14 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void store(CancellableHandler handler) {
-        final int listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
-        storeCache(this, null, listId, false, handler);
+        store(StoredList.TEMPORARY_LIST_ID, handler);
+    }
+
+    public void store(final int listId, CancellableHandler handler) {
+        int newListId = listId < StoredList.STANDARD_LIST_ID
+                ? Math.max(getListId(), StoredList.STANDARD_LIST_ID)
+                : listId;
+        storeCache(this, null, newListId, false, handler);
     }
 
     public void setZoomlevel(int zoomlevel) {

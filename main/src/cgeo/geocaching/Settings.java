@@ -86,6 +86,7 @@ public final class Settings {
     private static final String KEY_MEMBER_STATUS = "memberstatus";
     private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
     private static final String KEY_LOG_OFFLINE = "log_offline";
+    private static final String KEY_CHOOSE_LIST = "choose_list";
     private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
     private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
     private static final String KEY_SHOW_WAYPOINTS_THRESHOLD = "gcshowwaypointsthreshold";
@@ -204,6 +205,7 @@ public final class Settings {
             e.putString(KEY_MEMBER_STATUS, old.getString(KEY_MEMBER_STATUS, ""));
             e.putInt(KEY_COORD_INPUT_FORMAT, old.getInt(KEY_COORD_INPUT_FORMAT, 0));
             e.putBoolean(KEY_LOG_OFFLINE, old.getBoolean(KEY_LOG_OFFLINE, false));
+            e.putBoolean(KEY_CHOOSE_LIST, old.getBoolean(KEY_CHOOSE_LIST, false));
             e.putBoolean(KEY_LOAD_DIRECTION_IMG, old.getBoolean(KEY_LOAD_DIRECTION_IMG, true));
             e.putString(KEY_GC_CUSTOM_DATE, old.getString(KEY_GC_CUSTOM_DATE, null));
             e.putInt(KEY_SHOW_WAYPOINTS_THRESHOLD, old.getInt(KEY_SHOW_WAYPOINTS_THRESHOLD, 0));
@@ -550,6 +552,20 @@ public final class Settings {
 
     public static boolean getLogOffline() {
         return sharedPrefs.getBoolean(KEY_LOG_OFFLINE, false);
+    }
+
+    static void setChooseList(final boolean choose) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_CHOOSE_LIST, choose);
+            }
+        });
+    }
+
+    public static boolean getChooseList() {
+        return sharedPrefs.getBoolean(KEY_CHOOSE_LIST, false);
     }
 
     static void setLoadDirImg(final boolean value) {
