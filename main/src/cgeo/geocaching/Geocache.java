@@ -1377,11 +1377,11 @@ public class Geocache implements ICache, IWaypoint {
         store(StoredList.TEMPORARY_LIST_ID, handler);
     }
 
-    public void store(int listId, CancellableHandler handler) {
-        if (listId < StoredList.STANDARD_LIST_ID) {
-            listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
-        }
-        storeCache(this, null, listId, false, handler);
+    public void store(final int listId, CancellableHandler handler) {
+        int newListId = listId < StoredList.STANDARD_LIST_ID
+                ? Math.max(getListId(), StoredList.STANDARD_LIST_ID)
+                : listId;
+        storeCache(this, null, newListId, false, handler);
     }
 
     public void setZoomlevel(int zoomlevel) {
