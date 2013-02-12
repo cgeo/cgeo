@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 # creates attribute icons in one resolution only
-# target dir: ./drawable
 
 require () {
     hash $1 2>&- || { echo >&2 "I require $1 but it's not installed.  Aborting."; exit 1; }
@@ -12,6 +11,8 @@ require convert
 require composite
 require sed
 
+# directory for icons
+ICONDIR="./drawable-mdpi"
 # size of the image itself (inside border)
 IMGSIZE=32
 # size of the whole icon
@@ -31,14 +32,14 @@ SSTROKE=5
 # color of the strikethru bar
 SCOL=\#c00000
 # file name of strike thru bar
-SFNAME="drawable/attribute__strikethru.png"
+SFNAME="$ICONDIR/attribute__strikethru.png"
 
 #calculated values
 BNDIST=$(( ${ICONSIZE} - ${BDIST} ))
 res=48
 
 # create output directory if missing
-[ -d drawable ] || mkdir drawable
+[ -d $ICONDIR ] || mkdir $ICONDIR
 
 # create border
 echo "drawing border"
@@ -67,7 +68,7 @@ else
     svgs="svgs/*.svg"
 fi
 for s in $svgs; do
-    n=drawable/attribute_`basename "$s" | sed "s/\.svg//"`
+    n=$ICONDIR/attribute_`basename "$s" | sed "s/\.svg//"`
 
     # don't draw icons if svg is older than icon
     [ -f "${n}.png" ] && [ "$s" -ot "${n}.png" ] && continue
