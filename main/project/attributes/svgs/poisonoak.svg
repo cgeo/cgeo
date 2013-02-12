@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="Neues Dokument 1">
+   sodipodi:docname="poisonoak.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,13 +58,13 @@
      transform="translate(-33.924109,-240.92962)">
     <path
        style="fill:#ffffff;fill-opacity:1;stroke:none"
-       d="m 366.0358,240.93362 c 134.05764,-0.72222 381.36726,96.50796 317.14286,214.28571 -217.49585,48.31337 -461.30786,45.34455 -642.745711,0 C -7.4327303,316.77773 219.55517,241.72276 366.0358,240.93362 z"
+       d="m 365.6954,295.21873 c 113.84883,-0.61335 323.87722,81.95966 269.33447,181.98274 -184.70896,41.03027 -391.767,38.50899 -545.853604,0 C 48.526203,359.62956 241.29632,295.88891 365.6954,295.21873 z"
        id="rect2985"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="sccs" />
     <path
        style="fill:#ffffff;fill-opacity:1;stroke:none"
-       d="m 282.85714,512.36219 c 62.97609,8.45248 117.02391,2.7382 162.85714,0 68.69037,68.69037 98.99495,321.00505 0,420 -38.3858,38.3858 -124.47134,38.3858 -162.85714,0 -98.99495,-98.99495 -68.69037,-351.30963 0,-420 z"
+       d="m 295.05569,525.73021 c 53.48262,7.17829 99.38289,2.32542 138.30689,0 58.33549,58.33549 84.07174,272.61444 0,356.68618 -32.59925,32.59925 -105.70764,32.59925 -138.30689,0 -84.07174,-84.07174 -58.33549,-298.35069 0,-356.68618 z"
        id="rect2987"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />

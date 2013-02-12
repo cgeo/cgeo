@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.CacheRealm;
 
