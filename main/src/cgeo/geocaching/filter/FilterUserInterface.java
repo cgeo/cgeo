@@ -53,6 +53,7 @@ public final class FilterUserInterface {
         register(R.string.cache_status, StateFilter.Factory.class);
         register(R.string.caches_filter_track, TrackablesFilter.class);
         register(R.string.caches_filter_modified, ModifiedFilter.class);
+        register(R.string.caches_filter_origin, OriginFilter.Factory.class);
 
         // sort by localized names
         Collections.sort(registry, new Comparator<FactoryEntry>() {

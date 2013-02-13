@@ -307,6 +307,7 @@
   <string name="caches_filter_track">Mit Trackables</string>
   <string name="caches_filter_clear">Filter zurücksetzen</string>
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
+  <string name="caches_filter_origin">Herkunft</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
 
   <!-- caches lists -->
