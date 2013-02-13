@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
@@ -176,7 +177,7 @@ public class cgeotrackable extends AbstractActivity {
                     TextView descView = (TextView) findViewById(R.id.goal);
                     descView.setVisibility(View.VISIBLE);
                     descView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
-                    descView.setMovementMethod(LinkMovementMethod.getInstance());
+                    descView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 }
 
                 // trackable details
@@ -185,7 +186,7 @@ public class cgeotrackable extends AbstractActivity {
                     TextView descView = (TextView) findViewById(R.id.details);
                     descView.setVisibility(View.VISIBLE);
                     descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
-                    descView.setMovementMethod(LinkMovementMethod.getInstance());
+                    descView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 }
 
                 // trackable image

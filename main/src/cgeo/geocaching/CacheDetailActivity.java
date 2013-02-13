@@ -16,6 +16,7 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditorDialog;
@@ -2105,7 +2106,7 @@ public class CacheDetailActivity extends AbstractActivity {
             if (description != null) {
                 if (StringUtils.isNotBlank(descriptionString)) {
                     descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                    descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     fixBlackTextColor(descriptionView, descriptionString);
                 }
 
