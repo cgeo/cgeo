@@ -19,6 +19,7 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
@@ -1958,7 +1959,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (description != null) {
                 if (StringUtils.isNotBlank(descriptionString)) {
                     descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                    descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     fixBlackTextColor(descriptionView, descriptionString);
                 }
 
