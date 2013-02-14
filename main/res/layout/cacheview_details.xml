@@ -67,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="left"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
@@ -91,6 +92,37 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <!-- list box -->
+
+        <RelativeLayout
+            android:id="@+id/list_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" 
+            android:visibility="gone" >
+            
+            <TextView
+                android:id="@+id/list_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="left"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dip"
+                android:layout_marginRight="130dip"
+                android:paddingRight="3dip"
+                android:textColor="?text_color"
+                android:textSize="14dip" />
+
+            <Button
+                android:id="@+id/change_list"
+                style="@style/button_small"
+                android:layout_alignParentRight="true"
+                android:text="@string/cache_list_change"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
         <!-- Watchlist box -->
 
         <LinearLayout
@@ -114,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="left"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
@@ -159,6 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="left"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
@@ -178,47 +212,6 @@
                     android:layout_alignParentRight="true"
                     android:text="@string/cache_favpoint_remove"
                     android:visibility="gone" />
-            </RelativeLayout>
-        </LinearLayout>
-        
-        <!-- list box -->
-
-        <LinearLayout
-            android:id="@+id/list_box"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" 
-            android:visibility="gone" >
-
-            <View
-                style="@style/separator_horizontal"
-                android:layout_marginBottom="9dp"
-                android:layout_marginTop="9dp" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/list_text"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="left"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="6dip"
-                    android:layout_marginRight="130dip"
-                    android:paddingRight="3dip"
-                    android:textColor="?text_color"
-                    android:textSize="14dip" />
-
-                <Button
-                    android:id="@+id/change_list"
-                    style="@style/button_small"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/cache_list_change"
-                    android:visibility="visible" />
-
             </RelativeLayout>
         </LinearLayout>
 
