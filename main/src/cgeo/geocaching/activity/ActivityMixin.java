@@ -79,6 +79,22 @@ public final class ActivityMixin {
         }
     }
 
+    public static int getTheme() {
+        if (Settings.isLightSkin()) {
+            return R.style.light;
+        }
+
+        return R.style.dark;
+    }
+
+    public static int getDialogTheme() {
+        if (Settings.isLightSkin()) {
+            return R.style.popup_light;
+        }
+
+        return R.style.popup_dark;
+    }
+
     public static void showToast(final Activity activity, final String text) {
         if (StringUtils.isNotBlank(text)) {
             Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);

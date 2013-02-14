@@ -56,7 +56,6 @@
 		<activity
 			android:name=".CachePopup"
 			android:label="@string/app_name"
-			android:theme="@style/popup_dark"
 			android:windowSoftInputMode="stateHidden"
 			android:configChanges="keyboardHidden|orientation" >
 		</activity>
@@ -219,7 +218,6 @@
             android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
 		<activity android:name="WaypointPopup"
 		    android:label="@string/app_name"
-			android:theme="@style/popup_dark"
 			android:windowSoftInputMode="stateHidden"
 			android:configChanges="keyboardHidden|orientation" >
 		</activity>

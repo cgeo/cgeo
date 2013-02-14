@@ -7,6 +7,7 @@ import cgeo.geocaching.cgeoapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -15,7 +16,8 @@ public class LiveMapInfoDialogBuilder {
     public static AlertDialog create(Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        final View layout = activity.getLayoutInflater().inflate(R.layout.livemapinfo, null);
+        // AlertDialog has always dark style, so we have to apply it as well always
+        final View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.livemapinfo, null);
         builder.setView(layout);
 
         final CheckBox checkBoxHide = (CheckBox) layout.findViewById(R.id.live_map_hint_hide);

@@ -1,8 +1,8 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -70,7 +71,8 @@ class FieldnoteExport extends AbstractExport {
     private Dialog getExportOptionsDialog(final List<Geocache> caches, final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        View layout = activity.getLayoutInflater().inflate(R.layout.fieldnote_export_dialog, null);
+        // AlertDialog has always dark style, so we have to apply it as well always
+        View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.fieldnote_export_dialog, null);
         builder.setView(layout);
 
         final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);

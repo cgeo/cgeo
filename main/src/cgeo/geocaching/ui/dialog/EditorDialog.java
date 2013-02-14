@@ -2,6 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class EditorDialog extends Dialog {
     private EditorUpdate editorUpdate;
 
     public EditorDialog(CacheDetailActivity cacheDetailActivity, CharSequence editable) {
-        super(cacheDetailActivity);
+        super(cacheDetailActivity, ActivityMixin.getTheme());
         this.editorText = editable;
     }
 

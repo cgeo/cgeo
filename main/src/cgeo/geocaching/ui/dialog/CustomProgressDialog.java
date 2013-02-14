@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
@@ -18,7 +19,7 @@ import java.lang.reflect.Method;
 public class CustomProgressDialog extends ProgressDialog {
 
     public CustomProgressDialog(Context context) {
-        super(context);
+        super(context, ActivityMixin.getTheme());
     }
 
     @Override

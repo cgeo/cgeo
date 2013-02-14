@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Xml;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -67,7 +68,8 @@ class GpxExport extends AbstractExport {
     private Dialog getExportDialog(final List<Geocache> caches, final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        View layout = activity.getLayoutInflater().inflate(R.layout.gpx_export_dialog, null);
+        // AlertDialog has always dark style, so we have to apply it as well always
+        View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.gpx_export_dialog, null);
         builder.setView(layout);
 
         final TextView text = (TextView) layout.findViewById(R.id.info);

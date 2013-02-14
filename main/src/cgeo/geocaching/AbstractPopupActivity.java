@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -129,6 +130,8 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // set theme
+        this.setTheme(ActivityMixin.getDialogTheme());
         // set layout
         setContentView(layout);
         setTitle(res.getString(R.string.detail));

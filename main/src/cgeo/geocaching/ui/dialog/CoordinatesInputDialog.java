@@ -47,7 +47,7 @@ public class CoordinatesInputDialog extends Dialog {
     private coordInputFormatEnum currentFormat = null;
 
     public CoordinatesInputDialog(final AbstractActivity context, final Geocache cache, final Geopoint gp, final IGeoData geo) {
-        super(context);
+        super(context, ActivityMixin.getTheme());
         this.context = context;
         this.geo = geo;
         this.cache = cache;
