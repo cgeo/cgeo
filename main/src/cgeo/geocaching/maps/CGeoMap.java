@@ -1173,6 +1173,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
                     }
                 }
+                else {
+                    // we don't want to see any stale waypoints any more fixes #2479
+                    waypoints.clear();
+                }
 
                 //render
                 displayExecutor.execute(new DisplayRunnable(viewport));
