@@ -4,8 +4,8 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StoredList;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -52,7 +52,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(1.0f, cache.getDifficulty());
         assertEquals(5.0f, cache.getTerrain());
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
-        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.getShortdesc());
+        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.getShortDescription());
         assertEquals(new Geopoint(48.859683, 9.1874), cache.getCoords());
         return cache;
     }
@@ -77,7 +77,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(1.0f, cache.getDifficulty());
         assertEquals(4.0f, cache.getTerrain());
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
-        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortdesc());
+        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortDescription());
         assertEquals(new Geopoint(48.85968, 9.18740), cache.getCoords());
         assertTrue(cache.isReliableLatLon());
     }

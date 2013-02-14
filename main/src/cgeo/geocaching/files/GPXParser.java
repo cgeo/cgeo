@@ -331,7 +331,7 @@ public abstract class GPXParser extends FileParser {
                     // lookup cache for waypoint in already parsed caches
                     final Geocache cacheForWaypoint = cgData.loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cacheForWaypoint != null) {
-                        final Waypoint waypoint = new Waypoint(cache.getShortdesc(), convertWaypointSym2Type(sym), false);
+                        final Waypoint waypoint = new Waypoint(cache.getShortDescription(), convertWaypointSym2Type(sym), false);
                         waypoint.setId(-1);
                         waypoint.setGeocode(cacheGeocodeForWaypoint);
                         waypoint.setPrefix(cache.getName().substring(0, 2));
@@ -388,7 +388,7 @@ public abstract class GPXParser extends FileParser {
             public void end(String body) {
                 desc = body;
 
-                cache.setShortdesc(validate(body));
+                cache.setShortDescription(validate(body));
             }
         });
 
@@ -638,7 +638,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String shortDesc) {
-                    cache.setShortdesc(validate(shortDesc));
+                    cache.setShortDescription(validate(shortDesc));
                 }
             });
 
@@ -859,6 +859,13 @@ public abstract class GPXParser extends FileParser {
         cmt = null;
 
         cache = new Geocache(this);
+
+        // explicitly set all properties which could lead to database access, if left as null value
+        cache.setLocation("");
+        cache.setDescription("");
+        cache.setShortDescription("");
+        cache.setHint("");
+
         for (int i = 0; i < userData.length; i++) {
             userData[i] = null;
         }

@@ -69,6 +69,9 @@ public class cgData {
             "inventoryunknown", "onWatchlist", "reliable_latlon", "coordsChanged", "latitude", "longitude",  "finalDefined", "_id", "inventorycoins", "inventorytags"
             // reason is replaced by listId in Geocache
     };
+
+    //TODO: remove "latlon" field from cache table
+
     /** The list of fields needed for mapping. */
     private static final String[] WAYPOINT_COLUMNS = new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" };
 
@@ -998,14 +1001,13 @@ public class cgData {
         values.put("size", cache.getSize() == null ? "" : cache.getSize().id);
         values.put("difficulty", cache.getDifficulty());
         values.put("terrain", cache.getTerrain());
-        values.put("latlon", cache.getLatlon());
         values.put("location", cache.getLocation());
         values.put("distance", cache.getDistance());
         values.put("direction", cache.getDirection());
         putCoords(values, cache.getCoords());
         values.put("reliable_latlon", cache.isReliableLatLon() ? 1 : 0);
         values.put("elevation", cache.getElevation());
-        values.put("shortdesc", cache.getShortdesc());
+        values.put("shortdesc", cache.getShortDescription());
         values.put("personal_note", cache.getPersonalNote());
         values.put("description", cache.getDescription());
         values.put("favourite_cnt", cache.getFavoritePoints());
@@ -1444,9 +1446,7 @@ public class cgData {
             return Collections.emptySet();
         }
 
-
-        Log.d("cgData.loadCachesFromGeocodes(" + geocodes.toString() + ") from DB");
-
+        // do not log the entire collection of geo codes to the debug log. This can be more than 100 KB of text for large lists!
         init();
 
         final StringBuilder query = new StringBuilder("SELECT ");
@@ -1573,7 +1573,7 @@ public class cgData {
         if (dateValue != 0) {
             cache.setHidden(new Date(dateValue));
         }
-        cache.setHint(cursor.getString(cacheColumnIndex[13]));
+        // do not set cache.hint
         cache.setSize(CacheSize.getById(cursor.getString(cacheColumnIndex[14])));
         cache.setDifficulty(cursor.getFloat(cacheColumnIndex[15]));
         int index = cacheColumnIndex[16];
@@ -1589,8 +1589,7 @@ public class cgData {
             cache.setDistance(cursor.getFloat(index));
         }
         cache.setTerrain(cursor.getFloat(cacheColumnIndex[18]));
-        cache.setLatlon(cursor.getString(cacheColumnIndex[19]));
-        cache.setLocation(cursor.getString(cacheColumnIndex[20]));
+        // do not set cache.location
         cache.setCoords(getCoords(cursor, cacheColumnIndex[37], cacheColumnIndex[38]));
         index = cacheColumnIndex[21];
         if (cursor.isNull(index)) {
@@ -1599,8 +1598,8 @@ public class cgData {
             cache.setElevation(cursor.getDouble(index));
         }
         cache.setPersonalNote(cursor.getString(cacheColumnIndex[22]));
-        cache.setShortdesc(cursor.getString(cacheColumnIndex[23]));
-        // do not set cache.description !
+        // do not set cache.shortdesc
+        // do not set cache.description
         cache.setFavoritePoints(cursor.getInt(cacheColumnIndex[24]));
         cache.setRating(cursor.getFloat(cacheColumnIndex[25]));
         cache.setVotes(cursor.getInt(cacheColumnIndex[26]));
@@ -2635,18 +2634,32 @@ public class cgData {
         return result;
     }
 
-    public static String getCacheDescription(String geocode) {
+    public static String loadCacheTexts(final Geocache cache) {
+        final String geocode = cache.getGeocode();
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
         init();
 
         try {
-            final SQLiteStatement description = PreparedStatements.getDescriptionOfGeocode();
-            synchronized (description) {
-                description.bindString(1, geocode);
-                return description.simpleQueryForString();
+            final Cursor cursor = database.query(
+                    dbTableCaches,
+                    new String[] { "description", "shortdesc", "hint", "location" },
+                    "geocode = ?",
+                    new String[] { geocode },
+                    null,
+                    null,
+                    null,
+                    "1");
+
+            if (cursor.moveToFirst()) {
+                cache.setDescription(StringUtils.defaultString(cursor.getString(0)));
+                cache.setShortDescription(StringUtils.defaultString(cursor.getString(1)));
+                cache.setHint(StringUtils.defaultString(cursor.getString(2)));
+                cache.setLocation(StringUtils.defaultString(cursor.getString(3)));
             }
+
+            cursor.close();
         } catch (SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
@@ -2672,14 +2685,14 @@ public class cgData {
         newlyCreatedDatabase = false;
     }
 
-    private static String whereGeocodeIn(Set<String> geocodes) {
+    private static StringBuilder whereGeocodeIn(Set<String> geocodes) {
         final StringBuilder where = new StringBuilder();
 
         if (geocodes != null && !geocodes.isEmpty()) {
             StringBuilder all = new StringBuilder();
             for (String geocode : geocodes) {
                 if (all.length() > 0) {
-                    all.append(", ");
+                    all.append(',');
                 }
                 all.append(DatabaseUtils.sqlEscapeString(geocode));
             }
@@ -2687,7 +2700,7 @@ public class cgData {
             where.append("geocode in (").append(all).append(')');
         }
 
-        return where.toString();
+        return where;
     }
 
     /**
@@ -2837,10 +2850,6 @@ public class cgData {
 
         private static SQLiteStatement getInsertAttribute() {
             return getStatement("InsertAttribute", "INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)");
-        }
-
-        private static SQLiteStatement getDescriptionOfGeocode() {
-            return getStatement("descriptionFromGeocode", "SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
         }
 
         private static SQLiteStatement getListIdOfGeocode() {

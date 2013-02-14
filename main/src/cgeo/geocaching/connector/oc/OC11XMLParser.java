@@ -464,7 +464,7 @@ public class OC11XMLParser {
             public void end() {
                 final Geocache cache = caches.get(descHolder.cacheId);
                 if (cache != null) {
-                    cache.setShortdesc(descHolder.shortDesc);
+                    cache.setShortDescription(descHolder.shortDesc);
                     cache.setDescription(cache.getDescription() + descHolder.desc);
                     cache.setHint(descHolder.hint);
                 }

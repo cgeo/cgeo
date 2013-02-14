@@ -281,11 +281,15 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     private void replaceCacheListFromSearch() {
         if (search != null) {
-            final Set<Geocache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     cacheList.clear();
+
+                    // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
+                    // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
+                    final Set<Geocache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+
                     cacheList.addAll(cachesFromSearchResult);
                     adapter.reFilter();
                     updateTitle();

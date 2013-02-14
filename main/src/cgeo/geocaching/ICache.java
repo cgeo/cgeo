@@ -4,7 +4,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.utils.LazyInitializedList;
 
 import java.util.Date;
 import java.util.List;

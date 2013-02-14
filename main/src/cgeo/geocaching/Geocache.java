@@ -70,19 +70,30 @@ public class Geocache implements ICache, IWaypoint {
     private String ownerDisplayName = "";
     private String ownerUserId = "";
     private Date hidden = null;
-    private String hint = "";
+    /**
+     * lazy initialized
+     */
+    private String hint = null;
     private CacheSize size = CacheSize.UNKNOWN;
     private float difficulty = 0;
     private float terrain = 0;
     private Float direction = null;
     private Float distance = null;
-    private String latlon = "";
-    private String location = "";
+    /**
+     * lazy initialized
+     */
+    private String location = null;
     private Geopoint coords = null;
     private boolean reliableLatLon = false;
     private Double elevation = null;
     private String personalNote = null;
-    private String shortdesc = "";
+    /**
+     * lazy initialized
+     */
+    private String shortdesc = null;
+    /**
+     * lazy initialized
+     */
     private String description = null;
     private boolean disabled = false;
     private boolean archived = false;
@@ -234,8 +245,8 @@ public class Geocache implements ICache, IWaypoint {
         if (hidden == null) {
             hidden = other.hidden;
         }
-        if (StringUtils.isBlank(hint)) {
-            hint = other.hint;
+        if (StringUtils.isBlank(getHint())) {
+            hint = other.getHint();
         }
         if (size == null || CacheSize.UNKNOWN == size) {
             size = other.size;
@@ -252,11 +263,8 @@ public class Geocache implements ICache, IWaypoint {
         if (distance == null) {
             distance = other.distance;
         }
-        if (StringUtils.isBlank(latlon)) {
-            latlon = other.latlon;
-        }
-        if (StringUtils.isBlank(location)) {
-            location = other.location;
+        if (StringUtils.isBlank(getLocation())) {
+            location = other.getLocation();
         }
         if (coords == null) {
             coords = other.coords;
@@ -267,11 +275,11 @@ public class Geocache implements ICache, IWaypoint {
         if (personalNote == null) { // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
             personalNote = other.personalNote;
         }
-        if (StringUtils.isBlank(shortdesc)) {
-            shortdesc = other.shortdesc;
+        if (StringUtils.isBlank(getShortDescription())) {
+            shortdesc = other.getShortDescription();
         }
-        if (StringUtils.isBlank(description)) {
-            description = other.description;
+        if (StringUtils.isBlank(getDescription())) {
+            description = other.getDescription();
         }
         // FIXME: this makes no sense to favor this over the other. 0 should not be a special case here as it is
         // in the range of acceptable values. This is probably the case at other places (rating, votes, etc.) too.
@@ -367,17 +375,16 @@ public class Geocache implements ICache, IWaypoint {
                 listId == other.listId &&
                 StringUtils.equalsIgnoreCase(ownerDisplayName, other.ownerDisplayName) &&
                 StringUtils.equalsIgnoreCase(ownerUserId, other.ownerUserId) &&
-                StringUtils.equalsIgnoreCase(description, other.description) &&
+                StringUtils.equalsIgnoreCase(getDescription(), other.getDescription()) &&
                 StringUtils.equalsIgnoreCase(personalNote, other.personalNote) &&
-                StringUtils.equalsIgnoreCase(shortdesc, other.shortdesc) &&
-                StringUtils.equalsIgnoreCase(latlon, other.latlon) &&
-                StringUtils.equalsIgnoreCase(location, other.location) &&
+                StringUtils.equalsIgnoreCase(getShortDescription(), other.getShortDescription()) &&
+                StringUtils.equalsIgnoreCase(getLocation(), other.getLocation()) &&
                 favorite == other.favorite &&
                 favoritePoints == other.favoritePoints &&
                 onWatchlist == other.onWatchlist &&
                 (hidden != null ? hidden.equals(other.hidden) : null == other.hidden) &&
                 StringUtils.equalsIgnoreCase(guid, other.guid) &&
-                StringUtils.equalsIgnoreCase(hint, other.hint) &&
+                StringUtils.equalsIgnoreCase(getHint(), other.getHint()) &&
                 StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
                 (direction != null ? direction.equals(other.direction) : null == other.direction) &&
                 (distance != null ? distance.equals(other.distance) : null == other.distance) &&
@@ -605,21 +612,39 @@ public class Geocache implements ICache, IWaypoint {
         return ownerUserId;
     }
 
+    /**
+     * Attention, calling this method may trigger a database access for the cache!
+     */
     @Override
     public String getHint() {
+        initializeCacheTexts();
         return hint;
     }
 
+    /**
+     * Attention, calling this method may trigger a database access for the cache!
+     */
     @Override
     public String getDescription() {
-        if (description == null) {
-            description = StringUtils.defaultString(cgData.getCacheDescription(geocode));
-        }
+        initializeCacheTexts();
         return description;
     }
 
+    /**
+     * loads long text parts of a cache on demand (but all fields together)
+     */
+    private void initializeCacheTexts() {
+        if (description == null || shortdesc == null || hint == null || location == null) {
+            cgData.loadCacheTexts(this);
+        }
+    }
+
+    /**
+     * Attention, calling this method may trigger a database access for the cache!
+     */
     @Override
     public String getShortDescription() {
+        initializeCacheTexts();
         return shortdesc;
     }
 
@@ -642,8 +667,12 @@ public class Geocache implements ICache, IWaypoint {
         return guid;
     }
 
+    /**
+     * Attention, calling this method may trigger a database access for the cache!
+     */
     @Override
     public String getLocation() {
+        initializeCacheTexts();
         return location;
     }
 
@@ -843,14 +872,6 @@ public class Geocache implements ICache, IWaypoint {
         this.distance = distance;
     }
 
-    public String getLatlon() {
-        return latlon;
-    }
-
-    public void setLatlon(String latlon) {
-        this.latlon = latlon;
-    }
-
     @Override
     public Geopoint getCoords() {
         return coords;
@@ -879,11 +900,7 @@ public class Geocache implements ICache, IWaypoint {
         this.elevation = elevation;
     }
 
-    public String getShortdesc() {
-        return shortdesc;
-    }
-
-    public void setShortdesc(String shortdesc) {
+    public void setShortDescription(String shortdesc) {
         this.shortdesc = shortdesc;
     }
 

@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -9,7 +10,6 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.Image;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -29,7 +29,6 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -455,10 +454,10 @@ public abstract class GCParser {
         cache.setOnWatchlist(BaseUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
 
         // latitude and longitude. Can only be retrieved if user is logged in
-        cache.setLatlon(BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, cache.getLatlon()));
-        if (StringUtils.isNotEmpty(cache.getLatlon())) {
+        String latlon = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, "");
+        if (StringUtils.isNotEmpty(latlon)) {
             try {
-                cache.setCoords(new Geopoint(cache.getLatlon()));
+                cache.setCoords(new Geopoint(latlon));
                 cache.setReliableLatLon(true);
             } catch (Geopoint.GeopointException e) {
                 Log.w("GCParser.parseCache: Failed to parse cache coordinates", e);
@@ -466,7 +465,7 @@ public abstract class GCParser {
         }
 
         // cache location
-        cache.setLocation(BaseUtils.getMatch(page, GCConstants.PATTERN_LOCATION, true, cache.getLocation()));
+        cache.setLocation(BaseUtils.getMatch(page, GCConstants.PATTERN_LOCATION, true, ""));
 
         // cache hint
         String result = BaseUtils.getMatch(page, GCConstants.PATTERN_HINT, false, null);
@@ -484,7 +483,7 @@ public abstract class GCParser {
         cache.setPersonalNote(BaseUtils.getMatch(page, GCConstants.PATTERN_PERSONALNOTE, true, cache.getPersonalNote()));
 
         // cache short description
-        cache.setShortdesc(BaseUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, cache.getShortdesc()));
+        cache.setShortDescription(BaseUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
 
         // cache description
         cache.setDescription(BaseUtils.getMatch(page, GCConstants.PATTERN_DESC, true, ""));
@@ -666,7 +665,7 @@ public abstract class GCParser {
                     waypoint.setLookup(BaseUtils.getMatch(wp[5], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
 
                     // waypoint latitude and logitude
-                    String latlon = Html.fromHtml(BaseUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
+                    latlon = Html.fromHtml(BaseUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
                     if (!StringUtils.startsWith(latlon, "???")) {
                         waypoint.setLatlon(latlon);
                         waypoint.setCoords(new Geopoint(latlon));
