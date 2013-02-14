@@ -32,6 +32,9 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -51,6 +54,7 @@ public class EditWaypointActivity extends AbstractActivity {
     private String prefix = "OWN";
     private String lookup = "---";
     private boolean own = true;
+    private boolean visited = false;
     ArrayList<WaypointType> wpTypes = null;
     String distanceUnit = "";
 
@@ -71,6 +75,7 @@ public class EditWaypointActivity extends AbstractActivity {
                     prefix = waypoint.getPrefix();
                     lookup = waypoint.getLookup();
                     own = waypoint.isUserDefined();
+                    visited = waypoint.isVisited();
 
                     if (waypoint.getCoords() != null) {
                         ((Button) findViewById(R.id.buttonLatitude)).setText(waypoint.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
@@ -90,6 +95,7 @@ public class EditWaypointActivity extends AbstractActivity {
                 if (own) {
                     initializeWaypointTypeSelector();
                 }
+                ((CheckBox) findViewById(R.id.wpt_visited_checkbox)).setChecked(visited);
 
                 initializeDistanceUnitSelector();
             } catch (Exception e) {
@@ -165,6 +171,14 @@ public class EditWaypointActivity extends AbstractActivity {
             IConnector con = ConnectorFactory.getConnector(geocode);
             setCoordsModificationVisibility(con, cache);
         }
+        CheckBox visitedCheckBox = ((CheckBox) findViewById(R.id.wpt_visited_checkbox));
+        visitedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                visited = isChecked;
+            }
+        });
+        buttonLat.setOnClickListener(new coordDialogListener());
 
         initializeDistanceUnitSelector();
 
@@ -466,6 +480,7 @@ public class EditWaypointActivity extends AbstractActivity {
                     waypoint.setLookup(lookup);
                     waypoint.setCoords(coordsToSave);
                     waypoint.setNote(note);
+                    waypoint.setVisited(visited);
                     waypoint.setId(id);
 
                     Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);

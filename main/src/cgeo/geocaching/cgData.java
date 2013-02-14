@@ -70,7 +70,7 @@ public class cgData {
             // reason is replaced by listId in Geocache
     };
     /** The list of fields needed for mapping. */
-    private static final String[] WAYPOINT_COLUMNS = new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" };
+    private static final String[] WAYPOINT_COLUMNS = new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own", "visited" };
 
     /** Number of days (as ms) after temporarily saved caches are deleted */
     private final static long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
@@ -81,7 +81,7 @@ public class cgData {
     private static int[] cacheColumnIndex;
     private static CacheCache cacheCache = new CacheCache();
     private static SQLiteDatabase database = null;
-    private static final int dbVersion = 65;
+    private static final int dbVersion = 66;
     public static final int customListIdOffset = 10;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
@@ -172,6 +172,7 @@ public class cgData {
             + "longitude double, "
             + "note text, "
             + "own integer default 0"
+            + "visited integer default 0"
             + "); ";
     private static final String dbCreateSpoilers = ""
             + "create table " + dbTableSpoilers + " ("
@@ -660,6 +661,15 @@ public class cgData {
                             Log.e("Failed to upgrade to ver. 65:", e);
                         }
                     }
+                    // Introduces visited feature on waypoints
+                    if (oldVersion < 66) {
+                        try {
+                            db.execSQL("alter table " + dbTableWaypoints + " add column visited integer default 0");
+                        } catch (Exception e) {
+                            Log.e("Failed to upgrade to ver. 66", e);
+
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -1133,6 +1143,7 @@ public class cgData {
                 putCoords(values, oneWaypoint.getCoords());
                 values.put("note", oneWaypoint.getNote());
                 values.put("own", oneWaypoint.isUserDefined() ? 1 : 0);
+                values.put("visited", oneWaypoint.isVisited());
 
                 if (oneWaypoint.getId() < 0) {
                     final long rowId = database.insert(dbTableWaypoints, null, values);
@@ -1708,7 +1719,7 @@ public class cgData {
         final WaypointType type = WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
         final boolean own = cursor.getInt(cursor.getColumnIndex("own")) != 0;
         final Waypoint waypoint = new Waypoint(name, type, own);
-
+        waypoint.setVisited(cursor.getInt(cursor.getColumnIndex("visited")) != 0);
         waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
         waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
         waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));

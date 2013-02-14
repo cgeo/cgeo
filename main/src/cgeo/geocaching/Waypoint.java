@@ -27,6 +27,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     private String note = "";
     private int cachedOrder = ORDER_UNDEFINED;
     private boolean own = false;
+    private boolean visited = false;
 
     /**
      * require name and type for every waypoint
@@ -237,5 +238,13 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     @Override
     public String getCoordType() {
         return "waypoint";
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public boolean isVisited() {
+        return visited;
     }
 }
