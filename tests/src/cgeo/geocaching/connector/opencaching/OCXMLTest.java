@@ -44,6 +44,7 @@ public class OCXMLTest extends CGeoTestCase {
             assertNotNull(cache);
 
             assertTrue(cache.isOwner());
+            assertEquals("180571", cache.getOwnerUserId());
         } finally {
             Settings.setOCConnectorUserName(oldOCName);
         }

@@ -405,12 +405,23 @@ public class OC11XMLParser {
         });
 
         // cache.userid
-        cacheNode.getChild("userid").setEndTextElementListener(new EndTextElementListener() {
+        final Element useridNode = cacheNode.getChild("userid");
+
+        useridNode.setStartElementListener(new StartElementListener() {
+
+            @Override
+            public void start(Attributes attributes) {
+                if (attributes.getIndex("id") > -1) {
+                    cacheHolder.cache.setOwnerUserId(attributes.getValue("id"));
+                }
+            }
+        });
+
+        useridNode.setEndTextElementListener(new EndTextElementListener() {
 
             @Override
             public void end(String body) {
                 cacheHolder.cache.setOwnerDisplayName(body);
-                cacheHolder.cache.setOwnerUserId(body);
             }
         });
 

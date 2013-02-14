@@ -54,7 +54,7 @@ public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isOwner(ICache cache) {
-        return StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getOCConnectorUserName());
+        return StringUtils.equalsIgnoreCase(cache.getOwnerDisplayName(), Settings.getOCConnectorUserName());
     }
 
 }
