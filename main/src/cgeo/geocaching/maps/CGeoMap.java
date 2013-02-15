@@ -1144,10 +1144,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 caches.removeAll(cachesFromSearchResult);
                 caches.addAll(cachesFromSearchResult);
 
+                final boolean excludeMine = Settings.isExcludeMyCaches();
+                final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
                 if (mapMode == MapMode.LIVE) {
-                    final boolean excludeMine = Settings.isExcludeMyCaches();
-                    final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-
                     final List<cgCache> tempList = caches.getAsList();
 
                     for (cgCache cache : tempList) {
@@ -1159,10 +1158,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 countVisibleCaches();
                 if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
                     waypoints.clear();
-                    if (isLiveEnabled || mapMode == MapMode.COORDS) {
+                    if (mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
                         //All visible waypoints
                         CacheType type = Settings.getCacheType();
-                        Set<cgWaypoint> waypointsInViewport = app.getWaypointsInViewport(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches(), type);
+                        Set<cgWaypoint> waypointsInViewport = app.getWaypointsInViewport(viewport, excludeMine, excludeDisabled, type);
                         waypoints.addAll(waypointsInViewport);
                     }
                     else
@@ -1174,7 +1173,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                 }
                 else {
-                    // we don't want to see any stale waypoints any more fixes #2479
+                    // we don't want to see any stale waypoints when above threshold
                     waypoints.clear();
                 }
 
