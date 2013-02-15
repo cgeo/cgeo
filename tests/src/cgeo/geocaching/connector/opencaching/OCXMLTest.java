@@ -6,6 +6,8 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.oc.OCXMLClient;
 import cgeo.geocaching.enumerations.CacheType;
 
+import java.util.Collection;
+
 public class OCXMLTest extends CGeoTestCase {
 
     public static void testOCGetCache() {
@@ -56,5 +58,26 @@ public class OCXMLTest extends CGeoTestCase {
         assertNotNull(cache);
 
         assertFalse(cache.getDescription().length() < 100);
+    }
+
+    public static void testNoArchivedInNearby() {
+
+        boolean oldExcludeDisabled = Settings.isExcludeDisabledCaches();
+        boolean oldExcludeMine = Settings.isExcludeMyCaches();
+        try {
+            Settings.setExcludeDisabledCaches(false);
+            Settings.setExcludeMine(false);
+            // get an archived cache
+            Geocache cache = OCXMLClient.getCache("OCD541");
+            assertNotNull(cache);
+            assertTrue(cache.isArchived());
+            // Get nearby for this cache
+            Collection<Geocache> caches = OCXMLClient.getCachesAround(cache.getCoords(), 0.5);
+            // Should not be in the result!
+            assertFalse(caches.contains(cache));
+        } finally {
+            Settings.setExcludeDisabledCaches(oldExcludeDisabled);
+            Settings.setExcludeMine(oldExcludeMine);
+        }
     }
 }

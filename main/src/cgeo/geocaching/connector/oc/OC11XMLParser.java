@@ -217,6 +217,16 @@ public class OC11XMLParser {
     protected static int attributeId;
 
     public static Collection<Geocache> parseCaches(final InputStream stream) throws IOException {
+        // parse and return caches without filtering
+        return parseCaches(stream, true);
+    }
+
+    public static Collection<Geocache> parseCachesFiltered(final InputStream stream) throws IOException {
+        // parse caches and filter result
+        return parseCaches(stream, false);
+    }
+
+    private static Collection<Geocache> parseCaches(final InputStream stream, boolean ignoreFiltersIn) throws IOException {
 
         final Map<String, Geocache> caches = new HashMap<String, Geocache>();
         final Map<String, LogEntry> logs = new HashMap<String, LogEntry>();
@@ -227,6 +237,8 @@ public class OC11XMLParser {
 
         final RootElement root = new RootElement("oc11xml");
         final Element cacheNode = root.getChild("cache");
+
+        final boolean ignoreFilters = ignoreFiltersIn;
 
         // cache
         cacheNode.setStartElementListener(new StartElementListener() {
@@ -245,17 +257,20 @@ public class OC11XMLParser {
                 Geocache cache = cacheHolder.cache;
                 Geopoint coords = new Geopoint(cacheHolder.latitude, cacheHolder.longitude);
                 cache.setCoords(coords);
-                if (caches.size() < CACHE_PARSE_LIMIT && isValid(cache) && !isExcluded(cache)) {
+                if (caches.size() < CACHE_PARSE_LIMIT && isValid(cache) && (ignoreFilters || !isExcluded(cache))) {
                     cache.setDetailedUpdatedNow();
                     caches.put(cache.getCacheId(), cache);
                 }
             }
 
             private boolean isExcluded(Geocache cache) {
-                if (cache.isArchived() && Settings.isExcludeDisabledCaches()) {
+                if (cache.isArchived()) {
                     return true;
                 }
-                if (cache.isFound() && Settings.isExcludeMyCaches()) {
+                if (cache.isDisabled() && Settings.isExcludeDisabledCaches()) {
+                    return true;
+                }
+                if ((cache.isFound() || cache.isOwner()) && Settings.isExcludeMyCaches()) {
                     return true;
                 }
                 return !Settings.getCacheType().contains(cache);

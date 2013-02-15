@@ -64,7 +64,7 @@ public class OCXMLClient {
                 return Collections.emptyList();
             }
 
-            return OC11XMLParser.parseCaches(new GZIPInputStream(data));
+            return OC11XMLParser.parseCachesFiltered(new GZIPInputStream(data));
         } catch (IOException e) {
             Log.e("Error parsing nearby search result", e);
             return Collections.emptyList();
