@@ -83,6 +83,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         if (id < 0) {
             id = old.id;
         }
+        visited = old.visited;
     }
 
     public static void mergeWayPoints(final List<Waypoint> newPoints, final List<Waypoint> oldPoints, final boolean forceMerge) {

@@ -1143,8 +1143,7 @@ public class cgData {
                 putCoords(values, oneWaypoint.getCoords());
                 values.put("note", oneWaypoint.getNote());
                 values.put("own", oneWaypoint.isUserDefined() ? 1 : 0);
-                values.put("visited", oneWaypoint.isVisited());
-
+                values.put("visited", oneWaypoint.isVisited() ? 1 : 0);
                 if (oneWaypoint.getId() < 0) {
                     final long rowId = database.insert(dbTableWaypoints, null, values);
                     oneWaypoint.setId((int) rowId);
@@ -1208,7 +1207,7 @@ public class cgData {
             putCoords(values, waypoint.getCoords());
             values.put("note", waypoint.getNote());
             values.put("own", waypoint.isUserDefined() ? 1 : 0);
-
+            values.put("visited", waypoint.isVisited() ? 1 : 0);
             if (id <= 0) {
                 final long rowId = database.insert(dbTableWaypoints, null, values);
                 waypoint.setId((int) rowId);
