@@ -6,6 +6,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -53,7 +55,11 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     }
 
     public void setIcon(final Resources res, final TextView nameView) {
-        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(waypointType.markerId), null, null, null);
+        final LayerDrawable ld = new LayerDrawable(new Drawable[] {
+                res.getDrawable(waypointType.markerId), visited ?
+                        res.getDrawable(R.drawable.tick) : res.getDrawable(R.drawable.cross) });
+        ld.setLayerInset(1, 0, 20, 20, 0);
+        nameView.setCompoundDrawablesWithIntrinsicBounds(ld, null, null, null);
     }
 
     public void merge(final Waypoint old) {
