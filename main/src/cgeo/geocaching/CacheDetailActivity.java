@@ -2168,7 +2168,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // sort waypoints: PP, Sx, FI, OWN
             final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
             Collections.sort(sortedWaypoints);
-
+            boolean ticks = false;
+            for (final Waypoint wpt : sortedWaypoints) {
+                if (wpt.isVisited()) {
+                    ticks = true;
+                }
+            }
             for (final Waypoint wpt : sortedWaypoints) {
                 final LinearLayout waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
 
@@ -2196,7 +2201,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 } else {
                     nameView.setText(res.getString(R.string.waypoint));
                 }
-                wpt.setIcon(res, nameView);
+                wpt.setIcon(res, nameView, ticks);
 
                 // visited
                 if (wpt.isVisited()) {
