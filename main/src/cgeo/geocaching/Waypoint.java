@@ -54,13 +54,14 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         id = -1;
     }
 
-    public void setIcon(final Resources res, final TextView nameView, final boolean ticks) {
+    public void setIcon(final Resources res, final TextView nameView) {
         Drawable icon;
-        if (ticks) {
+        if (visited) {
             LayerDrawable ld = new LayerDrawable(new Drawable[] {
-                    res.getDrawable(waypointType.markerId), visited ?
-                            res.getDrawable(R.drawable.tick) : res.getDrawable(R.drawable.cross) });
-            ld.setLayerInset(1, 0, 20, 20, 0);
+                    res.getDrawable(waypointType.markerId),
+                    res.getDrawable(R.drawable.tick) });
+            ld.setLayerInset(0, 0, 0, 10, 10);
+            ld.setLayerInset(1, 10, 10, 0, 0);
             icon = ld;
         } else {
             icon = res.getDrawable(waypointType.markerId);
