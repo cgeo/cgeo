@@ -85,6 +85,7 @@
   <string name="log_tb_changeall">Change All</string>
   <string name="log_save">Save</string>
   <string name="log_saving">Sending log…</string>
+  <string name="log_saving_and_uploading">Sending log and uploading image…</string>
   <string name="log_clear">Clear</string>
   <string name="log_post">Submit Log</string>
   <string name="log_post_rate">Submit Log &amp; Rate</string>
@@ -118,6 +119,13 @@
   <string name="log_today">Today</string>
   <string name="log_yesterday">Yesterday</string>
   <string name="log_smilies">Smilies</string>
+  <string name="log_image">Image</string>
+  <string name="log_image_attach">Attach Image</string>
+  <string name="log_image_edit">Edit Image</string>
+  <string name="log_image_stored">Existing</string>
+  <string name="log_image_camera">New</string>
+  <string name="log_image_caption">Caption</string>
+  <string name="log_image_description">Description</string>
   
   <!-- translation -->
   <string name="translate_to_sys_lang">Translate to %s</string>

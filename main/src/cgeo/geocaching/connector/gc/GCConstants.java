@@ -163,6 +163,8 @@ public final class GCConstants {
     public final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
     public final static Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
 
+    public final static Pattern PATTERN_LOG_IMAGE_UPLOAD = Pattern.compile("/seek/upload\\.aspx\\?LID=(\\d+)", Pattern.CASE_INSENSITIVE);
+
     public final static String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
     public final static String STRING_PREMIUMONLY_1 = "has chosen to make this cache listing visible to Premium Members only.";
     public final static String STRING_UNPUBLISHED_OWNER = "cache has not been published yet";
