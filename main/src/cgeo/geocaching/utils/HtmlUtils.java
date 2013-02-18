@@ -54,8 +54,8 @@ public class HtmlUtils {
     }
 
     /**
-     * Convert any non-Latin characters into their HTML escaped equivalents
-     * 
+     * Convert any non-Latin characters into HTML unicode entities
+     *
      * @param input
      *            String
      * @return output String

@@ -1073,7 +1073,7 @@ public abstract class GCParser {
             if (loginState == StatusCode.NO_ERROR) {
                 page = Network.getResponseData(Network.getRequest(uri));
             } else {
-                Log.e("xxx upload: No login (error: " + loginState + ')');
+                Log.e("Image upload: No login (error: " + loginState + ')');
                 return StatusCode.NOT_LOGGED_IN;
             }
         }
@@ -1091,42 +1091,18 @@ public abstract class GCParser {
         final File image = new File(imageUri.getPath());
         final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image));
 
-        //TODO: check response and return correct error codes
+        MatcherWrapper matcherOK = new MatcherWrapper(GCConstants.PATTERN_OK_IMAGEUPLOAD, response);
 
-        /*
-         * String page = Login.postRequestLogged(uri, params);
-         * if (!Login.getLoginStatus(page)) {
-         * Log.e("GCParser.postLogTrackable: Can not log in geocaching");
-         * return StatusCode.NOT_LOGGED_IN;
-         * }
-         *
-         * try {
-         *
-         * final MatcherWrapper matcherOk = new MatcherWrapper(GCConstants.PATTERN_OK1, page);
-         * if (matcherOk.find()) {
-         * Log.i("Log successfully posted to cache #" + cacheid);
-         *
-         * if (geocode != null) {
-         * cgData.saveVisitDate(geocode);
-         * }
-         *
-         * Login.getLoginStatus(page);
-         * // the log-successful-page contains still the old value
-         * if (Login.getActualCachesFound() >= 0) {
-         * Login.setActualCachesFound(Login.getActualCachesFound() + 1);
-         * }
-         *
-         * final String logID = BaseUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
-         *
-         * return StatusCode.NO_ERROR;
-         * }
-         * } catch (Exception e) {
-         * Log.e("GCParser.postLog.check", e);
-         * }
-         */
-        Log.e("GCParser.postLog: Failed to post log because of unknown error");
-        return StatusCode.LOG_POST_ERROR;
+        if (matcherOK.find()) {
+            Log.i("Logimage successfully uploaded.");
+
+            return StatusCode.NO_ERROR;
+        }
+        Log.e("GCParser.uploadLogIMage: Failed to upload image because of unknown error");
+
+        return StatusCode.LOGIMAGE_POST_ERROR;
     }
+
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day, final String log) {
         if (Login.isEmpty(viewstates)) {

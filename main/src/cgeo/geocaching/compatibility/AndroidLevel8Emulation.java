@@ -3,7 +3,10 @@ package cgeo.geocaching.compatibility;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.os.Environment;
 import android.view.Display;
+
+import java.io.File;
 
 @TargetApi(value = 7)
 public class AndroidLevel8Emulation implements AndroidLevel8Interface {
@@ -26,5 +29,11 @@ public class AndroidLevel8Emulation implements AndroidLevel8Interface {
             return 90;
         }
         return 0;
+    }
+
+    @Override
+    public File getExternalPictureDir() {
+        // Use externalStorage/Pictures as default
+        return new File(Environment.getExternalStorageDirectory(), "Pictures");
     }
 }

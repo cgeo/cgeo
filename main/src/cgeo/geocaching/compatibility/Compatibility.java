@@ -13,6 +13,8 @@ import android.os.Build;
 import android.text.InputType;
 import android.widget.EditText;
 
+import java.io.File;
+
 public final class Compatibility {
 
     private final static int sdkVersion = Build.VERSION.SDK_INT;
@@ -106,6 +108,10 @@ public final class Compatibility {
 
     public static Point getDisplaySize() {
         return level13.getDisplaySize();
+    }
+
+    public static File getExternalPictureDir() {
+        return level8.getExternalPictureDir();
     }
 
 }

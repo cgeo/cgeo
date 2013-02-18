@@ -324,6 +324,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             }
         }
         updatePostButtonText();
+        setImageButtonText();
         enablePostButton(false);
 
         final Button typeButton = (Button) findViewById(R.id.type);
@@ -412,6 +413,8 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         final EditText logView = (EditText) findViewById(R.id.log);
         logView.setText(StringUtils.EMPTY);
 
+        setImageButtonText();
+
         showToast(res.getString(R.string.info_log_cleared));
     }
 
@@ -480,7 +483,8 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         outState.putInt(SAVED_STATE_TYPE, typeSelected.id);
         outState.putLong(SAVED_STATE_DATE, date.getTimeInMillis());
         outState.putString(SAVED_STATE_IMAGE_URI, imageUri.getPath());
-        Log.d("saved state");
+        outState.putString(SAVED_STATE_IMAGE_CAPTION, imageCaption);
+        outState.putString(SAVED_STATE_IMAGE_DESCRIPTION, imageDescription);
     }
 
     @Override
@@ -552,25 +556,23 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     public StatusCode postLogFn(String log) {
+
+        StatusCode result = StatusCode.LOG_POST_ERROR;
+
         try {
-            // test call only
-            //            if (imageUri != null) {
-            //                final StatusCode status = GCParser.uploadLogImage("289163155", imageUri);
-            //                if (status == StatusCode.LOG_POST_ERROR) {
-            //                    return status;
-            //                }
-            //            }
 
             final ImmutablePair<StatusCode, String> logResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackables);
+
+            result = logResult.left;
 
             if (logResult.left == StatusCode.NO_ERROR) {
                 final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
                 cache.getLogs().add(0, logNow);
 
-                if (typeSelected == LogType.FOUND_IT) {
+                if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
                     cache.setFound(true);
                 }
 
@@ -591,11 +593,11 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                 GCVote.setRating(cache, rating);
             }
 
-            if (StringUtils.isNotBlank(imageUri.getPath())) {
-                final StatusCode status = GCParser.uploadLogImage(logResult.right, imageCaption, imageDescription, imageUri);
+            if (logResult.left == StatusCode.NO_ERROR && StringUtils.isNotBlank(imageUri.getPath())) {
+                result = GCParser.uploadLogImage(logResult.right, imageCaption, imageDescription, imageUri);
             }
 
-            return logResult.left;
+            return result;
         } catch (Exception e) {
             Log.e("cgeovisit.postLogFn", e);
         }
@@ -707,19 +709,18 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                 imageCaption = data.getStringExtra(ImageSelectActivity.EXTRAS_CAPTION);
                 imageDescription = data.getStringExtra(ImageSelectActivity.EXTRAS_DESCRIPTION);
                 imageUri = Uri.parse(data.getStringExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING));
-                // Image captured and saved to fileUri specified in the Intent
-                showToast("Image saved to:\n" + imageUri);
-            } else if (resultCode == RESULT_CANCELED) {
-                // User cancelled the image capture
-                showToast("Cancelled");
-            } else {
+            } else if (resultCode != RESULT_CANCELED) {
                 // Image capture failed, advise user
-                showToast("Unknown Error");
+                showToast(getResources().getString(R.string.err_select_logimage_failed));
             }
-            final Button imageButton = (Button) findViewById(R.id.image_btn);
-            imageButton.setText(StringUtils.isNotBlank(imageUri.getPath()) ?
-                    res.getString(R.string.log_image_edit) : res.getString(R.string.log_image_attach));
+            setImageButtonText();
 
         }
+    }
+
+    private void setImageButtonText() {
+        final Button imageButton = (Button) findViewById(R.id.image_btn);
+        imageButton.setText(StringUtils.isNotBlank(imageUri.getPath()) ?
+                res.getString(R.string.log_image_edit) : res.getString(R.string.log_image_attach));
     }
 }

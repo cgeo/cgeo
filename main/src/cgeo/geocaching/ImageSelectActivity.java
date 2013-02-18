@@ -1,18 +1,17 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.view.View;
@@ -46,7 +45,7 @@ public class ImageSelectActivity extends AbstractActivity {
     private Uri imageUri;
 
     public ImageSelectActivity() {
-        super("ImageSelectActivity");
+        super("c:geo-selectimage");
     }
 
     @Override
@@ -126,14 +125,9 @@ public class ImageSelectActivity extends AbstractActivity {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
-        currentEditTexts();
+        syncEditTexts();
         outState.putString(SAVED_STATE_IMAGE_CAPTION, imageCaption);
         outState.putString(SAVED_STATE_IMAGE_DESCRIPTION, imageDescription);
         outState.putString(SAVED_STATE_IMAGE_URI, imageUri != null ? imageUri.getPath() : StringUtils.EMPTY);
@@ -142,7 +136,7 @@ public class ImageSelectActivity extends AbstractActivity {
     public void saveImageInfo(boolean saveInfo) {
         if (saveInfo) {
             Intent intent = new Intent();
-            currentEditTexts();
+            syncEditTexts();
             intent.putExtra(EXTRAS_CAPTION, imageCaption);
             intent.putExtra(EXTRAS_DESCRIPTION, imageDescription);
             intent.putExtra(EXTRAS_URI_AS_STRING, imageUri.toString());
@@ -155,7 +149,7 @@ public class ImageSelectActivity extends AbstractActivity {
         finish();
     }
 
-    private void currentEditTexts() {
+    private void syncEditTexts() {
         imageCaption = captionView.getText().toString();
         imageDescription = descriptionView.getText().toString();
     }
@@ -172,10 +166,6 @@ public class ImageSelectActivity extends AbstractActivity {
     }
 
     private void selectImageFromStorage() {
-        //Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-
-        //Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        //intent.addCategory(Intent.CATEGORY_OPENABLE);
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/jpeg");
 
@@ -186,22 +176,12 @@ public class ImageSelectActivity extends AbstractActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_CANCELED) {
             // User cancelled the image capture
-            showToast("Cancelled");
+            showToast(getResources().getString(R.string.info_select_logimage_cancelled));
             return;
         }
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_NEW_IMAGE) {
-
-                // Image captured and saved to fileUri specified in the Intent
-                //TODO: Some camera program ignore the URI passed in and store it in a location given in data
-                showToast("Image saved to:\n" + imageUri);//data.getData());
-                if (data != null) {
-                    Log.d("SELECT_NEW_IMAGE data = " + data.toString());
-                } else {
-                    Log.d("SELECT_NEW_IMAGE data is null");
-                }
-            } else if (requestCode == SELECT_STORED_IMAGE) {
+            if (data != null) {
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = { MediaColumns.DATA };
 
@@ -212,16 +192,18 @@ public class ImageSelectActivity extends AbstractActivity {
                 String filePath = cursor.getString(columnIndex);
                 imageUri = Uri.parse(filePath);
                 cursor.close();
-                if (data != null) {
-                    Log.d("SELECT_STORED_IMAGE data = " + data.toString());
-                } else {
-                    Log.d("SELECT_STORED_IMAGE data is null");
-                }
-                //                imageUri = data.getData();
+
+                Log.d("SELECT IMAGE data = " + data.toString());
+            } else {
+                Log.d("SELECT IMAGE data is null");
+            }
+
+            if (requestCode == SELECT_NEW_IMAGE) {
+                showToast(getResources().getString(R.string.info_stored_image) + "\n" + imageUri);
             }
         } else {
             // Image capture failed, advise user
-            showToast("Unknown Error");
+            showToast(getResources().getString(R.string.err_aquire_image_failed));
             return;
         }
 
@@ -231,7 +213,7 @@ public class ImageSelectActivity extends AbstractActivity {
     private void loadImagePreview()
     {
         if (!new File(imageUri.getPath()).exists()) {
-            Log.i("loading Image Preview with nonexistant file");
+            Log.i("Image does not exist");
             return;
         }
 
@@ -248,14 +230,11 @@ public class ImageSelectActivity extends AbstractActivity {
     }
 
     /** Create a File for saving an image or video */
-    @SuppressLint("NewApi")
-    // TODO: Get rid of that suppress
     private static File getOutputImageFile() {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "cgeo");
+        File mediaStorageDir = new File(Compatibility.getExternalPictureDir(), "cgeo");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
