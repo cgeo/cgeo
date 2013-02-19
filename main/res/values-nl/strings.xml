@@ -64,9 +64,9 @@
   <string name="log_disabled">Uitgeschakeld</string>
   <string name="log_attend">Zal aanwezig zijn</string>
   <string name="log_attended">Was aanwezig</string>
-  <string name="log_retrieved">Teruggevonden</string>
+  <string name="log_retrieved">Meegenomen</string>
   <string name="log_placed">Geplaatst</string>
-  <string name="log_grabbed">Gepakt</string>
+  <string name="log_grabbed">Ergens gepakt</string>
   <string name="log_movecollection">Verplaats naar collectie</string>
   <string name="log_moveinventory">Verplaats naar inventaris</string>
   <string name="log_maintained">Onderhoud uitgevoerd</string>
