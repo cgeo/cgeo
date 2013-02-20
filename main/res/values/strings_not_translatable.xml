@@ -74,6 +74,9 @@
     · <a href="http://androidicons.com/">Android Icons</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
     · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n
   </string>
+  
+  <!-- cache menu -->
+  <string name="cache_menu_sygic" translatable="false">Sygic</string>
 
   <!-- changelog -->
   <string name="changelog" translatable="false">\n
