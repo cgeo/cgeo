@@ -32,4 +32,9 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
     public static void testSettings() {
         assertEquals(Settings.getMemberStatus(), GCConstants.MEMBER_STATUS_PM);
     }
+
+    public static void testDeviceHasNormalLogin() {
+        // if the unit tests were interrupted in a previous run, the device might still have the "temporary" login data from the last tests
+        assertFalse("c:geo".equals(Settings.getUsername()));
+    }
 }
