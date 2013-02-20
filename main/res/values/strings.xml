@@ -1101,6 +1101,10 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next version</b>\n\n
+    <b>Bugfixing:</b>\n
+     · Adaption to changes on gc.com (login failure)\n
+     · Avoid crash if cache description contains an anchor element\n\n
     <b>2013.02.07</b>\n\n
     <b>Bugfixing:</b>\n
     · Adaption to changes on gc.com (find count)\n
