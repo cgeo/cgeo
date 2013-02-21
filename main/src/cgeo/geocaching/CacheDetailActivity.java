@@ -1883,6 +1883,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
+    private class HtmlImageCounter implements Html.ImageGetter {
+
+        private int imageCount = 0;
+
+        @Override
+        public Drawable getDrawable(String url) {
+            imageCount++;
+            return null;
+        }
+
+        public int getImageCount() {
+            return imageCount;
+        }
+    }
+
     /**
      * Loads the description in background. <br />
      * <br />
@@ -1899,20 +1914,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private String descriptionString;
         private Spanned description;
 
-        private class HtmlImageCounter implements Html.ImageGetter {
-
-            private int imageCount = 0;
-
-            @Override
-            public Drawable getDrawable(String url) {
-                imageCount++;
-                return null;
-            }
-
-            public int getImageCount() {
-                return imageCount;
-            }
-        }
 
         @Override
         protected Void doInBackground(Object... params) {
@@ -2086,7 +2087,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     String logText = log.log;
                     if (BaseUtils.containsHtml(logText)) {
                         logText = log.getDisplayText();
-                        holder.text.setText(Html.fromHtml(logText, new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                        // Fast preview: parse only HTML without loading any images
+                        HtmlImageCounter imageCounter = new HtmlImageCounter();
+                        final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
+                        holder.text.setText(Html.fromHtml(logText, imageCounter, unknownTagsHandler));
+                        if (imageCounter.getImageCount() > 0) {
+                            // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
+                            LogImageLoader loader = new LogImageLoader(holder);
+                            loader.execute(new String[] { logText });
+                        }
                     }
                     else {
                         holder.text.setText(logText);
@@ -2129,6 +2138,28 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             });
 
             return view;
+        }
+
+        /** Loads the Log Images outside the ui thread. */
+
+        private class LogImageLoader extends AsyncTask<String, Progress, Spanned>
+        {
+            private LogViewHolder holder;
+
+            public LogImageLoader(LogViewHolder holder) {
+                this.holder = holder;
+            }
+
+            @Override
+            protected Spanned doInBackground(String... logtext) {
+                return Html.fromHtml(logtext[0], new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null); //, TextView.BufferType.SPANNABLE)
+            }
+
+            @Override
+            protected void onPostExecute(Spanned result) {
+                holder.text.setText(result);
+            }
+
         }
 
         private class LogViewHolder {
