@@ -5,8 +5,11 @@ import cgeo.geocaching.utils.Log;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.backup.BackupManager;
+import android.os.Environment;
 import android.view.Display;
 import android.view.Surface;
+
+import java.io.File;
 
 @TargetApi(8)
 public class AndroidLevel8 implements AndroidLevel8Interface {
@@ -40,5 +43,11 @@ public class AndroidLevel8 implements AndroidLevel8Interface {
         }
 
         return 0;
+    }
+
+    @Override
+    public File getExternalPictureDir() {
+        return Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
     }
 }

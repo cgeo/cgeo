@@ -53,4 +53,29 @@ public class HtmlUtils {
         return StringUtils.replace(result, "<br />", "\n").trim();
     }
 
+    /**
+     * Convert any non-Latin characters into HTML unicode entities
+     *
+     * @param input
+     *            String
+     * @return output String
+     */
+    public static String convertNonLatinCharactersToHTML(final String input) {
+        final int inputLen = input.length();
+        final StringBuilder output = new StringBuilder();
+
+        for (int i = 0; i < inputLen; i++) {
+            char c = input.charAt(i);
+
+            if (c > 300) {
+                output.append("&#");
+                output.append(Integer.toString(c));
+                output.append(';');
+            } else {
+                output.append(c);
+            }
+        }
+
+        return output.toString();
+    }
 }

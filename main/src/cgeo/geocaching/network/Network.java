@@ -291,9 +291,9 @@ public abstract class Network {
                 final String timeSpan = Network.formatTimeSpan(before);
                 final String tries = (i + 1) + "/" + (Network.NB_DOWNLOAD_RETRIES + 1);
                 if (i == Network.NB_DOWNLOAD_RETRIES) {
-                    Log.e("Failure " + tries + timeSpan + reqLogStr, e);
+                    Log.w("Failure " + tries + timeSpan + reqLogStr + " (" + e.toString() + ")");
                 } else {
-                    Log.e("Failure " + tries + " (" + e.toString() + ")" + timeSpan + "- retrying " + reqLogStr);
+                    Log.w("Failure " + tries + " (" + e.toString() + ")" + timeSpan + "- retrying " + reqLogStr);
                 }
             }
         }

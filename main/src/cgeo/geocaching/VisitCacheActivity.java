@@ -18,6 +18,7 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -26,6 +27,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -57,6 +59,11 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
     private static final String SAVED_STATE_DATE = "cgeo.geocaching.saved_state_date";
+    private static final String SAVED_STATE_IMAGE_CAPTION = "cgeo.geocaching.saved_state_image_caption";
+    private static final String SAVED_STATE_IMAGE_DESCRIPTION = "cgeo.geocaching.saved_state_image_description";
+    private static final String SAVED_STATE_IMAGE_URI = "cgeo.geocaching.saved_state_image_uri";
+
+    private static final int SELECT_IMAGE = 101;
 
     private LayoutInflater inflater = null;
     private Geocache cache = null;
@@ -77,6 +84,9 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private double rating;
     private LogType typeSelected;
     private Calendar date;
+    private String imageCaption;
+    private String imageDescription;
+    private Uri imageUri;
 
     @Override
     public Loader<String> onCreateLoader(final int id, final Bundle args) {
@@ -297,6 +307,9 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             rating = savedInstanceState.getDouble(SAVED_STATE_RATING);
             typeSelected = LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
             date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
+            imageCaption = savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
+            imageDescription = savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
+            imageUri = Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
         } else {
             // If log had been previously saved, load it now, otherwise initialize signature as needed
             final LogEntry log = cgData.loadLogOffline(geocode);
@@ -311,6 +324,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             }
         }
         updatePostButtonText();
+        setImageButtonText();
         enablePostButton(false);
 
         final Button typeButton = (Button) findViewById(R.id.type);
@@ -333,6 +347,15 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         }
 
         tweetCheck.setChecked(true);
+
+        final Button imageButton = (Button) findViewById(R.id.image_btn);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
 
         final Button saveButton = (Button) findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -374,6 +397,9 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             }
         }
         text = null;
+        imageCaption = "";
+        imageDescription = "";
+        imageUri = Uri.EMPTY;
     }
 
     private void clearLog() {
@@ -386,6 +412,8 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
         final EditText logView = (EditText) findViewById(R.id.log);
         logView.setText(StringUtils.EMPTY);
+
+        setImageButtonText();
 
         showToast(res.getString(R.string.info_log_cleared));
     }
@@ -454,6 +482,9 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         outState.putDouble(SAVED_STATE_RATING, rating);
         outState.putInt(SAVED_STATE_TYPE, typeSelected.id);
         outState.putLong(SAVED_STATE_DATE, date.getTimeInMillis());
+        outState.putString(SAVED_STATE_IMAGE_URI, imageUri.getPath());
+        outState.putString(SAVED_STATE_IMAGE_CAPTION, imageCaption);
+        outState.putString(SAVED_STATE_IMAGE_DESCRIPTION, imageDescription);
     }
 
     @Override
@@ -497,7 +528,8 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private class PostListener implements View.OnClickListener {
         @Override
         public void onClick(View arg0) {
-            waitDialog = ProgressDialog.show(VisitCacheActivity.this, null, res.getString(R.string.log_saving), true);
+            waitDialog = ProgressDialog.show(VisitCacheActivity.this, null,
+                    res.getString(StringUtils.isBlank(imageUri.getPath()) ? R.string.log_saving : R.string.log_saving_and_uploading), true);
             waitDialog.setCancelable(true);
 
             final Thread thread = new PostLogThread(postLogHandler, currentLogText());
@@ -524,38 +556,48 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     public StatusCode postLogFn(String log) {
+
+        StatusCode result = StatusCode.LOG_POST_ERROR;
+
         try {
-            final StatusCode status = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
+
+            final ImmutablePair<StatusCode, String> logResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackables);
 
-            if (status == StatusCode.NO_ERROR) {
+            result = logResult.left;
+
+            if (logResult.left == StatusCode.NO_ERROR) {
                 final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
                 cache.getLogs().add(0, logNow);
 
-                if (typeSelected == LogType.FOUND_IT) {
+                if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
                     cache.setFound(true);
                 }
 
                 cgData.saveChangedCache(cache);
             }
 
-            if (status == StatusCode.NO_ERROR) {
+            if (logResult.left == StatusCode.NO_ERROR) {
                 cgData.clearLogOffline(geocode);
             }
 
-            if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter()
+            if (logResult.left == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter()
                     && Settings.isTwitterLoginValid()
                     && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                 Twitter.postTweetCache(geocode);
             }
 
-            if (status == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
+            if (logResult.left == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
                 GCVote.setRating(cache, rating);
             }
 
-            return status;
+            if (logResult.left == StatusCode.NO_ERROR && StringUtils.isNotBlank(imageUri.getPath())) {
+                result = GCParser.uploadLogImage(logResult.right, imageCaption, imageDescription, imageUri);
+            }
+
+            return result;
         } catch (Exception e) {
             Log.e("cgeovisit.postLogFn", e);
         }
@@ -651,4 +693,34 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         alert.create().show();
     }
 
+    private void selectImage() {
+        Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
+        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_CAPTION, imageCaption);
+        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_DESCRIPTION, imageDescription);
+        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING, imageUri.toString());
+
+        startActivityForResult(selectImageIntent, SELECT_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SELECT_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                imageCaption = data.getStringExtra(ImageSelectActivity.EXTRAS_CAPTION);
+                imageDescription = data.getStringExtra(ImageSelectActivity.EXTRAS_DESCRIPTION);
+                imageUri = Uri.parse(data.getStringExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING));
+            } else if (resultCode != RESULT_CANCELED) {
+                // Image capture failed, advise user
+                showToast(getResources().getString(R.string.err_select_logimage_failed));
+            }
+            setImageButtonText();
+
+        }
+    }
+
+    private void setImageButtonText() {
+        final Button imageButton = (Button) findViewById(R.id.image_btn);
+        imageButton.setText(StringUtils.isNotBlank(imageUri.getPath()) ?
+                res.getString(R.string.log_image_edit) : res.getString(R.string.log_image_attach));
+    }
 }

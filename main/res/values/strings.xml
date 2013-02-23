@@ -85,6 +85,7 @@
   <string name="log_tb_changeall">Change All</string>
   <string name="log_save">Save</string>
   <string name="log_saving">Sending log…</string>
+  <string name="log_saving_and_uploading">Sending log and uploading image…</string>
   <string name="log_clear">Clear</string>
   <string name="log_post">Submit Log</string>
   <string name="log_post_rate">Submit Log &amp; Rate</string>
@@ -118,6 +119,13 @@
   <string name="log_today">Today</string>
   <string name="log_yesterday">Yesterday</string>
   <string name="log_smilies">Smilies</string>
+  <string name="log_image">Image</string>
+  <string name="log_image_attach">Attach Image</string>
+  <string name="log_image_edit">Edit Image</string>
+  <string name="log_image_stored">Existing</string>
+  <string name="log_image_camera">New</string>
+  <string name="log_image_caption">Caption</string>
+  <string name="log_image_description">Description</string>
   
   <!-- translation -->
   <string name="translate_to_sys_lang">Translate to %s</string>
@@ -166,6 +174,8 @@
   <string name="err_location_unknown">c:geo doesn\'t know location of cache.</string>
   <string name="err_missing_device_name">Please enter a device name before registering.</string>
   <string name="err_favorite_failed">Changing favorite status failed.</string>
+  <string name="err_select_logimage_failed">Selecting an image for the log failed.</string>
+  <string name="err_aquire_image_failed">Acquiring an image failed.</string>
   
   <string name="err_tb_display">c:geo can\'t display trackable you want. Is it really a trackable?</string>
   <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
@@ -188,6 +198,7 @@
   <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
   <string name="err_log_failed_server">c:geo failed to post log because server is not responding.</string>
   <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
+  <string name="err_logimage_post_failed">It seems that your log image was not uploaded. Please check it on Geocaching.com.</string>
 
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
   <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
@@ -213,11 +224,12 @@
   <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
   <string name="warn_rendertheme_missing">Map theme not found.</string>
 
-
   <string name="info_log_posted">c:geo successfully submitted the log.</string>
   <string name="info_log_saved">c:geo successfully saved the log.</string>
   <string name="info_log_cleared">Log was cleared.</string>
   <string name="info_log_type_changed">Type of log has been changed!</string>
+  <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
+  <string name="info_stored_image">New image saved to:</string>
 
   <string name="info_storing_static_maps">Trying to store static maps</string>
 
