@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -55,6 +56,12 @@ public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, 
     @Override
     public boolean isOwner(ICache cache) {
         return StringUtils.equalsIgnoreCase(cache.getOwnerDisplayName(), Settings.getOCConnectorUserName());
+    }
+
+    @Override
+    public String getLicenseText(Geocache cache) {
+        // not to be translated
+        return "© " + cache.getOwnerDisplayName() + ", " + "<a href=\"" + getCacheUrl(cache) + "\">www.opencaching.de</a>, CC-BY-NC-ND, Stand: " + Formatter.formatFullDate(cache.getUpdated());
     }
 
 }
