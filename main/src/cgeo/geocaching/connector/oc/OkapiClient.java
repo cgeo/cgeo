@@ -297,8 +297,18 @@ final public class OkapiClient {
             return null;
         }
 
-        final String uri = "http://" + host + service;
         ((OCApiConnector) connector).addAuthentication(params);
+        params.add("langpref", getPreferredLanguage());
+
+        final String uri = "http://" + host + service;
         return Network.requestJSON(uri, params);
+    }
+
+    private static String getPreferredLanguage() {
+        final String code = Locale.getDefault().getCountry();
+        if (StringUtils.isNotBlank(code)) {
+            return StringUtils.lowerCase(code) + "|en";
+        }
+        return "en";
     }
 }

@@ -104,4 +104,8 @@ public class Parameters extends ArrayList<NameValuePair> {
         return params;
     }
 
+    public void add(final String key, final String value) {
+        put(key, value);
+    }
+
 }
