@@ -214,7 +214,7 @@
   <string name="cache_status_archived">Arkiveret</string>
   <string name="cache_status_disabled">Deaktiveret</string>
   <string name="cache_status_premium">Kun premium-medlemmer</string>
-  <string name="cache_geocode">GC-code</string>
+  <string name="cache_geocode">geo code</string>
   <string name="cache_type">Type</string>
   <string name="cache_distance">Distance</string>
   <string name="cache_difficulty">Sværhed</string>

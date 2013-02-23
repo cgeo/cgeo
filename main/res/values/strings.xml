@@ -740,7 +740,7 @@
 
   <!-- search -->
   <string name="search_bar_hint">Search for caches</string>
-  <string name="search_bar_desc">Caches (GC-code, keyword), Trackables (TB-code)</string>
+  <string name="search_bar_desc">Caches (geo code, keyword), Trackables (TB code)</string>
   <string name="search_coordinates">Coordinates</string>
   <string name="search_coordinates_button">Search by coordinates</string>
   <string name="search_address">Address</string>

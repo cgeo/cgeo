@@ -565,7 +565,7 @@
   <string name="cache_status_disabled">Non attivo</string>
   <string name="cache_status_premium">Solo per utenti Premium</string>
   <string name="cache_status_not_premium">Per tutti gli utenti</string>
-  <string name="cache_geocode">GC-code</string>
+  <string name="cache_geocode">geo code</string>
   <string name="cache_name">Nome</string>
   <string name="cache_type">Tipo</string>
   <string name="cache_size">Dimensione</string>
@@ -721,7 +721,7 @@
 
   <!-- search -->
   <string name="search_bar_hint">Cerca caches</string>
-  <string name="search_bar_desc">Cache (GC-code, parole chiave), Oggetti trackables (TB-code)</string>
+  <string name="search_bar_desc">Cache (geo code, parole chiave), Oggetti trackables (TB-code)</string>
   <string name="search_coordinates">Coordinate</string>
   <string name="search_coordinates_button">Cerca per coordinate</string>
   <string name="search_address">Indirizzo</string>

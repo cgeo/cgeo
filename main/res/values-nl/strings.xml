@@ -582,7 +582,7 @@
   <string name="cache_status_disabled">Uitgeschakeld</string>
   <string name="cache_status_premium">Alleen voor premium leden</string>
   <string name="cache_status_not_premium">Toegang voor alle leden</string>
-  <string name="cache_geocode">gc-code</string>
+  <string name="cache_geocode">geo code</string>
   <string name="cache_name">Naam</string>
   <string name="cache_type">Type</string>
   <string name="cache_size">Grootte</string>
@@ -740,7 +740,7 @@
 
   <!-- search -->
   <string name="search_bar_hint">Zoek naar caches</string>
-  <string name="search_bar_desc">Caches (GC-code, trefwoord), Trackables (TB-code)</string>
+  <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
   <string name="search_coordinates">Coördinaten</string>
   <string name="search_coordinates_button">Zoeken op coördinaten</string>
   <string name="search_address">Adres</string>

@@ -200,7 +200,7 @@
   <string name="warn_no_username">Kein Benutzername angegeben.</string>
   <string name="warn_search_help_title">Hilfe benötigt?</string>
   <string name="warn_search_help_address">Adresse oder Ort eingeben, z.B. Straßenname und Ort \"Dorfstraße 333, Berlin, Deutschland\", Ort \"Berlin\" oder den Namen eines beliebigen Ortes wie z.B. \"Tiergarten\".</string>
-  <string name="warn_search_help_gccode">GC-Code eingeben. z.B. \"GC1VCAZ\".</string>
+  <string name="warn_search_help_gccode">Geocode eingeben. z.B. \"GC1VCAZ\".</string>
   <string name="warn_search_help_keyword">Stichwörter eingeben, die im Namen des zu suchenden Caches enthalten sind.</string>
   <string name="warn_search_help_user">Name eines Benutzers auf geocaching.com eingeben.</string>
   <string name="warn_search_help_tb">Code des Trackables eingeben, z.B. \"TB29QMZ\".</string>
@@ -241,7 +241,7 @@
   <string name="advanced_search_button">Suche</string>
   <string name="stored_caches_button">Gespeichert</string>
   <string name="any_button">Überall</string>
-  <string name="unknown_scan">Konnte keinen GC-Code im Scan finden.</string>
+  <string name="unknown_scan">Konnte keinen Geocode im Scan finden.</string>
 
   <!-- caches -->
   <string name="caches_no_cache">Kein Cache</string>
@@ -575,7 +575,7 @@
   <string name="cache_status_disabled">Deaktiviert</string>
   <string name="cache_status_premium">Nur für Premium-Mitglieder</string>
   <string name="cache_status_not_premium">Für alle Mitglieder</string>
-  <string name="cache_geocode">GC-Code</string>
+  <string name="cache_geocode">Geocode</string>
   <string name="cache_name">Name</string>
   <string name="cache_type">Typ</string>
   <string name="cache_size">Größe</string>
@@ -731,7 +731,7 @@
 
 <!-- search -->
   <string name="search_bar_hint">Suche nach Caches</string>
-  <string name="search_bar_desc">Caches (GC-Code, Stichwort), Trackables (TB-Code)</string>
+  <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
   <string name="search_coordinates">Koordinaten</string>
   <string name="search_coordinates_button">Suche mit Koordinaten</string>
   <string name="search_address">Adresse</string>
