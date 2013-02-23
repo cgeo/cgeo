@@ -29,6 +29,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -38,6 +39,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +47,7 @@ import org.json.JSONObject;
 import android.net.Uri;
 import android.text.Html;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -912,36 +915,20 @@ public abstract class GCParser {
         return trackable;
     }
 
-    public static StatusCode postLog(final String geocode, final String cacheid, final String[] viewstates,
+    public static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day,
             final String log, final List<TrackableLog> trackables) {
         if (Login.isEmpty(viewstates)) {
             Log.e("GCParser.postLog: No viewstate given");
-            return StatusCode.LOG_POST_ERROR;
+            return new ImmutablePair<StatusCode, String>(StatusCode.LOG_POST_ERROR, "");
         }
 
         if (StringUtils.isBlank(log)) {
             Log.e("GCParser.postLog: No log text given");
-            return StatusCode.NO_LOG_TEXT;
+            return new ImmutablePair<StatusCode, String>(StatusCode.NO_LOG_TEXT, "");
         }
 
-        // fix log (non-Latin characters converted to HTML entities)
-        final int logLen = log.length();
-        final StringBuilder logUpdated = new StringBuilder();
-
-        for (int i = 0; i < logLen; i++) {
-            char c = log.charAt(i);
-
-            if (c > 300) {
-                logUpdated.append("&#");
-                logUpdated.append(Integer.toString(c));
-                logUpdated.append(';');
-            } else {
-                logUpdated.append(c);
-            }
-        }
-
-        final String logInfo = logUpdated.toString().replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
+        final String logInfo = HtmlUtils.convertNonLatinCharactersToHTML(log).replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
 
         if (trackables != null) {
             Log.i("Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + logInfo + "; trackables: " + trackables.size());
@@ -981,7 +968,7 @@ public abstract class GCParser {
         String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Can not log in geocaching");
-            return StatusCode.NOT_LOGGED_IN;
+            return new ImmutablePair<StatusCode, String>(StatusCode.NOT_LOGGED_IN, "");
         }
 
         // maintenance, archived needs to be confirmed
@@ -994,7 +981,7 @@ public abstract class GCParser {
 
                 if (Login.isEmpty(viewstatesConfirm)) {
                     Log.e("GCParser.postLog: No viewstate for confirm log");
-                    return StatusCode.LOG_POST_ERROR;
+                    return new ImmutablePair<StatusCode, String>(StatusCode.LOG_POST_ERROR, "");
                 }
 
                 params.clear();
@@ -1048,14 +1035,72 @@ public abstract class GCParser {
                 if (Login.getActualCachesFound() >= 0) {
                     Login.setActualCachesFound(Login.getActualCachesFound() + 1);
                 }
-                return StatusCode.NO_ERROR;
+
+                final String logID = BaseUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
+
+                return new ImmutablePair<StatusCode, String>(StatusCode.NO_ERROR, logID);
             }
         } catch (Exception e) {
             Log.e("GCParser.postLog.check", e);
         }
 
         Log.e("GCParser.postLog: Failed to post log because of unknown error");
-        return StatusCode.LOG_POST_ERROR;
+        return new ImmutablePair<StatusCode, String>(StatusCode.LOG_POST_ERROR, "");
+    }
+
+    /**
+     * Upload an image to a log that has already been posted
+     *
+     * @param logId
+     *            the ID of the log to upload the image to. Found on page returned when log is uploaded
+     * @param caption
+     *            of the image; max 50 chars
+     * @param description
+     *            of the image; max 250 chars
+     * @param imageUri
+     *            the URI for the image to be uploaded
+     * @return status code to indicate success or failure
+     */
+    public static StatusCode uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri)
+    {
+        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
+
+        String page = Network.getResponseData(Network.getRequest(uri));
+
+        if (!Login.getLoginStatus(page)) {
+            // Login.isActualLoginStatus() was wrong, we are not logged in
+            final StatusCode loginState = Login.login();
+            if (loginState == StatusCode.NO_ERROR) {
+                page = Network.getResponseData(Network.getRequest(uri));
+            } else {
+                Log.e("Image upload: No login (error: " + loginState + ')');
+                return StatusCode.NOT_LOGGED_IN;
+            }
+        }
+
+        final String[] viewstates = Login.getViewstates(page);
+
+        final Parameters uploadParams = new Parameters(
+                "__EVENTTARGET", "",
+                "__EVENTARGUMENT", "",
+                "ctl00$ContentBody$ImageUploadControl1$uxFileCaption", HtmlUtils.convertNonLatinCharactersToHTML(caption),
+                "ctl00$ContentBody$ImageUploadControl1$uxFileDesc", HtmlUtils.convertNonLatinCharactersToHTML(description),
+                "ctl00$ContentBody$ImageUploadControl1$uxUpload", "Upload");
+        Login.putViewstates(uploadParams, viewstates);
+
+        final File image = new File(imageUri.getPath());
+        final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image));
+
+        MatcherWrapper matcherOK = new MatcherWrapper(GCConstants.PATTERN_OK_IMAGEUPLOAD, response);
+
+        if (matcherOK.find()) {
+            Log.i("Logimage successfully uploaded.");
+
+            return StatusCode.NO_ERROR;
+        }
+        Log.e("GCParser.uploadLogIMage: Failed to upload image because of unknown error");
+
+        return StatusCode.LOGIMAGE_POST_ERROR;
     }
 
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
@@ -1072,7 +1117,7 @@ public abstract class GCParser {
 
         Log.i("Trying to post log for trackable #" + trackingCode + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log);
 
-        final String logInfo = log.replace("\n", "\r\n"); // windows' eol
+        final String logInfo = HtmlUtils.convertNonLatinCharactersToHTML(log).replace("\n", "\r\n"); // windows' eol
 
         final Calendar currentDate = Calendar.getInstance();
         final Parameters params = new Parameters(

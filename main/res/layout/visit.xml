@@ -76,6 +76,9 @@
 							android:text="@string/visit_tweet" />
 				</LinearLayout>
 				<Button style="@style/button_full"
+						android:id="@+id/image_btn"
+						android:text="@string/log_image_attach" />				
+				<Button style="@style/button_full"
 						android:id="@+id/post"
 						android:text="@string/log_post" />
 				<RelativeLayout style="@style/separator_horizontal_layout" >
