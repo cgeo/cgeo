@@ -1105,10 +1105,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 caches.removeAll(cachesFromSearchResult);
                 caches.addAll(cachesFromSearchResult);
 
+                final boolean excludeMine = Settings.isExcludeMyCaches();
+                final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
                 if (mapMode == MapMode.LIVE) {
-                    final boolean excludeMine = Settings.isExcludeMyCaches();
-                    final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-
                     final List<Geocache> tempList = caches.getAsList();
 
                     for (Geocache cache : tempList) {
@@ -1120,19 +1119,25 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 countVisibleCaches();
                 if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
                     waypoints.clear();
-                    if (isLiveEnabled || mapMode == MapMode.COORDS) {
+                    if (isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
                         //All visible waypoints
                         CacheType type = Settings.getCacheType();
-                        Set<Waypoint> waypointsInViewport = cgData.loadWaypoints(viewport, Settings.isExcludeMyCaches(), Settings.isExcludeDisabledCaches(), type);
+                        Set<Waypoint> waypointsInViewport = cgData.loadWaypoints(viewport, excludeMine, excludeDisabled, type);
                         waypoints.addAll(waypointsInViewport);
                     }
                     else
                     {
+                        // we don't want to see any stale
+                        waypoints.clear();
                         //All waypoints from the viewed caches
                         for (Geocache c : caches.getAsList()) {
                             waypoints.addAll(c.getWaypoints());
                         }
                     }
+                }
+                else {
+                    // we don't want to see any stale waypoints when above threshold
+                    waypoints.clear();
                 }
 
                 //render
