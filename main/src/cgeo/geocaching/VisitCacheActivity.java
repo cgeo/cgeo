@@ -175,7 +175,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                 @Override
                 public void onClick(View view) {
                     final Intent trackablesIntent = new Intent(VisitCacheActivity.this, TrackableActivity.class);
-                    trackablesIntent.putExtra(EXTRAS_GEOCODE, tbCode);
+                    trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
                     startActivity(trackablesIntent);
                 }
             });
