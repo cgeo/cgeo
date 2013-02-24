@@ -3,7 +3,6 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
-import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
@@ -12,7 +11,7 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 
-class RMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
+class RMapsApp extends AbstractPointNavigationApp {
 
     private static final String INTENT = "com.robert.maps.action.SHOW_POINTS";
 
@@ -31,11 +30,6 @@ class RMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNaviga
         final Intent intent = new Intent(INTENT);
         intent.putStringArrayListExtra("locations", locations);
         activity.startActivity(intent);
-    }
-
-    @Override
-    public boolean isEnabled(cgWaypoint waypoint) {
-        return waypoint.getCoords() != null;
     }
 
     @Override
