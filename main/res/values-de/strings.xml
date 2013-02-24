@@ -117,6 +117,13 @@
   <string name="log_today">Heute</string>
   <string name="log_yesterday">Gestern</string>
   <string name="log_smilies">Smilies</string>
+  <string name="log_image">Bild</string>
+  <string name="log_image_attach">Bild hinzufügen</string>
+  <string name="log_image_edit">Bild bearbeiten</string>
+  <string name="log_image_stored">Vorhandenes</string>
+  <string name="log_image_camera">Neues</string>
+  <string name="log_image_caption">Überschrift</string>
+  <string name="log_image_description">Beschreibung</string>
 
 <!-- translation -->
   <string name="translate_to_sys_lang">Übersetze in %s</string>
