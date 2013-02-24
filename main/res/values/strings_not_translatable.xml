@@ -82,25 +82,29 @@
   <string name="changelog" translatable="false">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
+    · Support of attaching pictures to logs\n
     · Support of opencaching.de online API in live map and nearby search\n
     · Support for searching opencaching.nl caches\n
     · Alphabetical sorting of OSM:Offline maps in map selection\n 
     · Color markers also in trackable logbook\n
     · Edit cache type filter by clicking on filter bar\n
     · Inverse sorting of cache lists (hit the same menu again)\n
-    · View pager in trackable activity\n
+    · View pager for trackable activity\n
     · Menu item to delete past events\n
-    · Settings: Option to ask for list to store caches in\n
+    · Settings: Option to ask for list to store caches\n
     · Change list in cache details\n
     · Ability to select \"All\" list from main screen\n
     · Default log type for event caches will be \"Attended\" if \"Will attend\" was logged before\n
     · Improved and extended cache type detection on live map\n
+    · Waypoints can be marked as visited\n
     \n
     <b>Bugfixing:</b>\n
     · Final flag icon lost when updating cache with self defined final\n
     · Bad selection in directory chooser\n
     · Log type \"Retract Listing\" now parsed correctly\n
     · Active cache detail page now remembered when rotating device\n
+    · Replaced the term \"GC-Code\" by \"Geocode\"\n
+    · Improvements for light theme\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
     \n
