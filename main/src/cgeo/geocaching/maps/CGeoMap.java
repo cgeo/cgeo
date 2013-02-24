@@ -85,7 +85,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /** max. number of caches displayed in the Live Map */
     public static final int MAX_CACHES = 500;
 
-    /**Controls the behaviour of the map*/
+    /** Controls the behaviour of the map */
     public enum MapMode {
         /** Live Map */
         LIVE,
@@ -96,6 +96,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         /** Map with a list of caches (no reload on move) */
         LIST
     }
+
     /** Handler Messages */
     private static final int HIDE_PROGRESS = 0;
     private static final int SHOW_PROGRESS = 1;
@@ -189,7 +190,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     // views
     private ImageSwitcher myLocSwitch = null;
 
-    /**Controls the map behaviour*/
+    /** Controls the map behaviour */
     private MapMode mapMode = null;
     /** Live mode enabled for map. **/
     private boolean isLiveEnabled;
@@ -289,7 +290,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                     } else {
                         int minsRemaining = secondsRemaining / 60;
-                            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minsRemaining + " " + res.getQuantityString(R.plurals.caches_eta_mins,minsRemaining));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minsRemaining + " " + res.getQuantityString(R.plurals.caches_eta_mins, minsRemaining));
                     }
                 }
             } else if (msg.what == FINISHED_LOADING_DETAILS) {
@@ -1275,7 +1276,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
     }
 
-
     /**
      * Thread to display one point. Started on opening if in single mode.
      */
@@ -1716,9 +1716,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, null);
+        Drawable marker = getResources().getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
         final Drawable[] layers = new Drawable[] {
-            getResources().getDrawable(R.drawable.marker),
-            getResources().getDrawable(waypoint.getWaypointType().markerId)
+                marker,
+                getResources().getDrawable(waypoint.getWaypointType().markerId)
         };
         final LayerDrawable ld = new LayerDrawable(layers);
         if (layers[0].getIntrinsicWidth() > 40) {

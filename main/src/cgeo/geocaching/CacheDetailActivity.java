@@ -2228,6 +2228,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 wpt.setIcon(res, nameView);
 
+                // visited
+                if (wpt.isVisited()) {
+                    nameView.setTextColor(getResources().getColor(R.color.text_grey_dark));
+                }
+
                 // note
                 if (StringUtils.isNotBlank(wpt.getNote())) {
                     final TextView noteView = (TextView) waypointView.findViewById(R.id.note);
@@ -2348,7 +2353,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.waypoint_reset_cache_coords);
 
-        String[] items = new String[] {res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords)};
+        String[] items = new String[] { res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords) };
         builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
 
             @Override
@@ -2522,9 +2527,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
-                                 final OnClickListener refreshCacheClickListener,
-                                 final OnClickListener dropCacheClickListener,
-                                 final OnClickListener storeCacheClickListener) {
+            final OnClickListener refreshCacheClickListener,
+            final OnClickListener dropCacheClickListener,
+            final OnClickListener storeCacheClickListener) {
         // offline use
         final TextView offlineText = (TextView) view.findViewById(R.id.offline_text);
         final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
