@@ -15,6 +15,11 @@ class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointN
         return waypoint.getCoords() != null;
     }
 
+    @Override
+    public boolean isEnabled(Geocache cache) {
+        return cache.getCoords() != null;
+    }
+
     /**
      * Show a single cache with waypoints or a single waypoint in Locus.
      * This method constructs a list of cache and waypoints only.

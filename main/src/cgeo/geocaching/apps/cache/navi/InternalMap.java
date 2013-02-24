@@ -3,14 +3,13 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 
 import android.app.Activity;
 
-class InternalMap extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
+class InternalMap extends AbstractPointNavigationApp {
 
     InternalMap() {
         super(getString(R.string.cache_menu_map), null);
@@ -32,17 +31,8 @@ class InternalMap extends AbstractApp implements CacheNavigationApp, WaypointNav
     }
 
     @Override
-    public boolean isEnabled(Waypoint waypoint) {
-        return waypoint.getCoords() != null;
-    }
-
-    @Override
     public void navigate(Activity activity, Geocache cache) {
         CGeoMap.startActivityGeoCode(activity, cache.getGeocode());
     }
 
-    @Override
-    public boolean isEnabled(Geocache cache) {
-        return cache.getCoords() != null;
-    }
 }
