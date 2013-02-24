@@ -35,6 +35,8 @@ public class cgeoapplication extends Application {
     @Override
     public void onCreate() {
         new Thread(statusUpdater).start();
+        // Initialize densitiy related waypoint data
+        Waypoint.initializeScale();
     }
 
     @Override

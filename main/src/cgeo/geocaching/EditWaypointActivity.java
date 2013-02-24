@@ -178,7 +178,6 @@ public class EditWaypointActivity extends AbstractActivity {
                 visited = isChecked;
             }
         });
-        buttonLat.setOnClickListener(new coordDialogListener());
 
         initializeDistanceUnitSelector();
 

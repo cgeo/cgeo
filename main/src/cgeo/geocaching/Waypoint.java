@@ -30,6 +30,13 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     private int cachedOrder = ORDER_UNDEFINED;
     private boolean own = false;
     private boolean visited = false;
+    // preliminary default for mdpi screens
+    private static int VISITED_INSET = 7;
+
+    public static void initializeScale() {
+        // Calculate visited inset based on screen density
+        VISITED_INSET = (int) (6.6f * cgeoapplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
+    }
 
     /**
      * require name and type for every waypoint
@@ -60,8 +67,8 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
             LayerDrawable ld = new LayerDrawable(new Drawable[] {
                     res.getDrawable(waypointType.markerId),
                     res.getDrawable(R.drawable.tick) });
-            ld.setLayerInset(0, 0, 0, 10, 10);
-            ld.setLayerInset(1, 10, 10, 0, 0);
+            ld.setLayerInset(0, 0, 0, VISITED_INSET, VISITED_INSET);
+            ld.setLayerInset(1, VISITED_INSET, VISITED_INSET, 0, 0);
             icon = ld;
         } else {
             icon = res.getDrawable(waypointType.markerId);

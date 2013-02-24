@@ -74,6 +74,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -2230,7 +2231,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 // visited
                 if (wpt.isVisited()) {
-                    nameView.setTextColor(getResources().getColor(R.color.text_grey_dark));
+                    TypedValue a = new TypedValue();
+                    getTheme().resolveAttribute(R.attr.text_color_grey, a, true);
+                    if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+                        // really should be just a color!
+                        nameView.setTextColor(a.data);
+                    }
                 }
 
                 // note

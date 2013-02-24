@@ -174,7 +174,7 @@ public class cgData {
             + "latitude double, "
             + "longitude double, "
             + "note text, "
-            + "own integer default 0"
+            + "own integer default 0, "
             + "visited integer default 0"
             + "); ";
     private static final String dbCreateSpoilers = ""
