@@ -1011,7 +1011,7 @@
   <string name="attribute_inside_no">Not within enclosed rooms</string>
   <string name="attribute_in_water_yes">In the water</string>
   <string name="attribute_in_water_no">Not in the water</string>
-  <string name="attribute_no_gps_yes">Without GPS (letterboxes, cistes, compass juggling ...)</string>
+  <string name="attribute_no_gps_yes">Without GPS (letterboxes, compass juggling, …)</string>
   <string name="attribute_no_gps_no">With GPS</string>
   <string name="attribute_overnight_yes">Overnight stay necessary</string>
   <string name="attribute_overnight_no">No overnight stay necessary</string>

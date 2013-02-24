@@ -990,7 +990,7 @@
   <string name="attribute_inside_no">Nicht in geschlossenen Räumen (Höhle, Gebäude, etc.)</string>
   <string name="attribute_in_water_yes">Im Wasser</string>
   <string name="attribute_in_water_no">Nicht im Wasser</string>
-  <string name="attribute_no_gps_yes">Ohne GPS (Letterboxen, cistes, compass-juggling, ...)</string>
+  <string name="attribute_no_gps_yes">Ohne GPS (Letterboxen, kein Empfang möglich, …)</string>
   <string name="attribute_no_gps_no">Mit GPS</string>
   <string name="attribute_overnight_yes">Übernachtung erforderlich</string>
   <string name="attribute_overnight_no">Keine Übernachtung erforderlich</string>

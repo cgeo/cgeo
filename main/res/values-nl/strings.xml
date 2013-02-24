@@ -999,7 +999,7 @@
   <string name="attribute_inside_no">Niet met gesloten ruimten</string>
   <string name="attribute_in_water_yes">In het water</string>
   <string name="attribute_in_water_no">Niet in het water</string>
-  <string name="attribute_no_gps_yes">Zonder GPS (Brievenbus, cistes, compass juggling ...)</string>
+  <string name="attribute_no_gps_yes">Zonder GPS (Brievenbus, compass juggling, …)</string>
   <string name="attribute_no_gps_no">Met GPS</string>
   <string name="attribute_overnight_yes">Overnachting noodzakelijk</string>
   <string name="attribute_overnight_no">Geen overnachting noodzakelijk</string>
