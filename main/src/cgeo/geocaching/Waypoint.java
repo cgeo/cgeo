@@ -6,6 +6,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -27,6 +29,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     private String note = "";
     private int cachedOrder = ORDER_UNDEFINED;
     private boolean own = false;
+    private boolean visited = false;
 
     /**
      * require name and type for every waypoint
@@ -52,7 +55,19 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     }
 
     public void setIcon(final Resources res, final TextView nameView) {
-        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(waypointType.markerId), null, null, null);
+        Drawable icon;
+        if (visited) {
+            LayerDrawable ld = new LayerDrawable(new Drawable[] {
+                    res.getDrawable(waypointType.markerId),
+                    res.getDrawable(R.drawable.tick) });
+            ld.setLayerInset(0, 0, 0, 10, 10);
+            ld.setLayerInset(1, 10, 10, 0, 0);
+            icon = ld;
+        } else {
+            icon = res.getDrawable(waypointType.markerId);
+        }
+        final Drawable fIcon = icon;
+        nameView.setCompoundDrawablesWithIntrinsicBounds(fIcon, null, null, null);
     }
 
     public void merge(final Waypoint old) {
@@ -82,6 +97,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         if (id < 0) {
             id = old.id;
         }
+        visited = old.visited;
     }
 
     public static void mergeWayPoints(final List<Waypoint> newPoints, final List<Waypoint> oldPoints, final boolean forceMerge) {
@@ -237,5 +253,13 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     @Override
     public String getCoordType() {
         return "waypoint";
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public boolean isVisited() {
+        return visited;
     }
 }

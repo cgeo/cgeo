@@ -89,6 +89,12 @@
                 android:minLines="5"
                 android:singleLine="false" />
 
+            <CheckBox
+                android:id="@+id/wpt_visited_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/waypoint_visited" />
+
             <RadioGroup
                 android:id="@+id/modify_cache_coordinates_group"
                 android:layout_width="wrap_content"
