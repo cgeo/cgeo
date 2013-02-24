@@ -673,6 +673,7 @@
   <string name="waypoint_edit_title">Wegpunkt bearbeiten</string>
   <string name="waypoint_add_title">Wegpunkt hinzufügen</string>
   <string name="waypoint_note">Notiz</string>
+  <string name="waypoint_visited">Besucht</string>
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Cache-Koordinaten nicht ändern</string>
