@@ -76,7 +76,7 @@ public class RegExPerformanceTest extends TestCase {
     }
 
     public static void testRegEx() {
-        List<String> output = doTheTests(10);
+        final List<String> output = doTheTests(10);
 
         for (String s : output) {
             System.out.println(s);
@@ -85,7 +85,7 @@ public class RegExPerformanceTest extends TestCase {
 
     public static List<String> doTheTests(final int iterations) {
 
-        List<String> output = new ArrayList<String>();
+        final List<String> output = new ArrayList<String>();
 
         output.addAll(measure(iterations, "description", PATTERN_DESCRIPTION_OLD, PATTERN_DESCRIPTION));
 
@@ -94,7 +94,7 @@ public class RegExPerformanceTest extends TestCase {
 
     private static List<String> measure(int iterations, String fieldName, Pattern p1, Pattern p2) {
 
-        List<String> output = new ArrayList<String>();
+        final List<String> output = new ArrayList<String>();
         output.add(fieldName + ":");
 
         for (MockedCache cache : MOCKED_CACHES) {
@@ -106,15 +106,13 @@ public class RegExPerformanceTest extends TestCase {
             long diff1, diff2;
 
             output.add("Parsing " + cache.getGeocode() + " " + cache.getName());
-            {
-                diff1 = parse(page, p1, iterations);
-                output.add("Time pattern 1:\t" + diff1 + " ms");
-            }
 
-            {
-                diff2 = parse(page, p2, iterations);
-                output.add("Time pattern 2:\t" + diff2 + " ms");
-            }
+            diff1 = parse(page, p1, iterations);
+            output.add("Time pattern 1:\t" + diff1 + " ms");
+
+            diff2 = parse(page, p2, iterations);
+            output.add("Time pattern 2:\t" + diff2 + " ms");
+
             float reduction = (float) diff2 * 100 / diff1;
             output.add("New runtime:\t" + String.format("%.1f", reduction) + "%\n");
         }
@@ -124,7 +122,7 @@ public class RegExPerformanceTest extends TestCase {
     }
 
     private static long parse(String page, Pattern pattern, int iterations) {
-        long start = System.currentTimeMillis();
+        final long start = System.currentTimeMillis();
         for (int j = 0; j < iterations; j++) {
             BaseUtils.getMatch(page, pattern, true, "");
         }

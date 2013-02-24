@@ -24,7 +24,7 @@ public class CacheAttributeTest extends AndroidTestCase {
     }
 
     public static void testGetL10n() {
-        CacheAttribute attribute = CacheAttribute.HIKING;
+        final CacheAttribute attribute = CacheAttribute.HIKING;
         // This test is language dependend. It does not make sense to test it
         // with every attribute. We just want to know if getL10n works
         // correctly
@@ -33,7 +33,7 @@ public class CacheAttributeTest extends AndroidTestCase {
     }
 
     public static void testGetBy() {
-        CacheAttribute attribute = CacheAttribute.HIKING; // an attribute that is present in GC and OC
+        final CacheAttribute attribute = CacheAttribute.HIKING; // an attribute that is present in GC and OC
         assertTrue("Test cannot be run with this attribute", attribute.gcid >= 0);
         assertTrue("Test cannot be run with this attribute", attribute.ocid >= 0);
         assertSame(CacheAttribute.getByRawName(attribute.rawName), attribute);
@@ -42,9 +42,9 @@ public class CacheAttributeTest extends AndroidTestCase {
     }
 
     public static void testIsEnabled() {
-        CacheAttribute attribute = CacheAttribute.HIKING;
-        String hiking_yes = attribute.getAttributeName(true);
-        String hiking_no = attribute.getAttributeName(false);
+        final CacheAttribute attribute = CacheAttribute.HIKING;
+        final String hiking_yes = attribute.getAttributeName(true);
+        final String hiking_no = attribute.getAttributeName(false);
         assertTrue(CacheAttribute.isEnabled(hiking_yes));
         assertFalse(CacheAttribute.isEnabled(hiking_no));
     }

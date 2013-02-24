@@ -135,11 +135,11 @@ public class SearchActivity extends AbstractActivity {
     private void init() {
         Settings.getLogin();
 
-        findViewById(R.id.buttonLatitude).setOnClickListener(new findByCoordsAction());
-        findViewById(R.id.buttonLongitude).setOnClickListener(new findByCoordsAction());
+        findViewById(R.id.buttonLatitude).setOnClickListener(new FindByCoordsAction());
+        findViewById(R.id.buttonLongitude).setOnClickListener(new FindByCoordsAction());
 
         final Button findByCoords = (Button) findViewById(R.id.search_coordinates);
-        findByCoords.setOnClickListener(new findByCoordsListener());
+        findByCoords.setOnClickListener(new FindByCoordsListener());
 
         EditUtils.setActionListener((EditText) findViewById(R.id.address), new Runnable() {
 
@@ -150,7 +150,7 @@ public class SearchActivity extends AbstractActivity {
         });
 
         final Button findByAddress = (Button) findViewById(R.id.search_address);
-        findByAddress.setOnClickListener(new findByAddressListener());
+        findByAddress.setOnClickListener(new FindByAddressListener());
 
         final AutoCompleteTextView geocodeEdit = (AutoCompleteTextView) findViewById(R.id.geocode);
         EditUtils.setActionListener(geocodeEdit, new Runnable() {
@@ -163,7 +163,7 @@ public class SearchActivity extends AbstractActivity {
         addHistoryEntries(geocodeEdit, cgData.getRecentGeocodesForSearch());
 
         final Button displayByGeocode = (Button) findViewById(R.id.display_geocode);
-        displayByGeocode.setOnClickListener(new findByGeocodeListener());
+        displayByGeocode.setOnClickListener(new FindByGeocodeListener());
 
         EditUtils.setActionListener((EditText) findViewById(R.id.keyword), new Runnable() {
 
@@ -174,7 +174,7 @@ public class SearchActivity extends AbstractActivity {
         });
 
         final Button findByKeyword = (Button) findViewById(R.id.search_keyword);
-        findByKeyword.setOnClickListener(new findByKeywordListener());
+        findByKeyword.setOnClickListener(new FindByKeywordListener());
 
         EditUtils.setActionListener((EditText) findViewById(R.id.username), new Runnable() {
 
@@ -185,7 +185,7 @@ public class SearchActivity extends AbstractActivity {
         });
 
         final Button findByUserName = (Button) findViewById(R.id.search_username);
-        findByUserName.setOnClickListener(new findByUsernameListener());
+        findByUserName.setOnClickListener(new FindByUsernameListener());
 
         EditUtils.setActionListener((EditText) findViewById(R.id.owner), new Runnable() {
 
@@ -217,7 +217,7 @@ public class SearchActivity extends AbstractActivity {
         disableSuggestions(trackable);
 
         final Button displayTrackable = (Button) findViewById(R.id.display_trackable);
-        displayTrackable.setOnClickListener(new findTrackableListener());
+        displayTrackable.setOnClickListener(new FindTrackableListener());
     }
 
     private void addHistoryEntries(final AutoCompleteTextView textView, final String[] entries) {
@@ -252,7 +252,7 @@ public class SearchActivity extends AbstractActivity {
         }
     };
 
-    private class findByCoordsAction implements OnClickListener {
+    private class FindByCoordsAction implements OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -269,7 +269,7 @@ public class SearchActivity extends AbstractActivity {
         }
     }
 
-    private class findByCoordsListener implements View.OnClickListener {
+    private class FindByCoordsListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -298,7 +298,7 @@ public class SearchActivity extends AbstractActivity {
         }
     }
 
-    private class findByKeywordListener implements View.OnClickListener {
+    private class FindByKeywordListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -318,7 +318,7 @@ public class SearchActivity extends AbstractActivity {
         cgeocaches.startActivityKeyword(this, keyText);
     }
 
-    private class findByAddressListener implements View.OnClickListener {
+    private class FindByAddressListener implements View.OnClickListener {
         @Override
         public void onClick(View arg0) {
             findByAddressFn();
@@ -338,7 +338,7 @@ public class SearchActivity extends AbstractActivity {
         startActivity(addressesIntent);
     }
 
-    private class findByUsernameListener implements View.OnClickListener {
+    private class FindByUsernameListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -372,7 +372,7 @@ public class SearchActivity extends AbstractActivity {
         cgeocaches.startActivityOwner(this, usernameText);
     }
 
-    private class findByGeocodeListener implements View.OnClickListener {
+    private class FindByGeocodeListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -391,7 +391,7 @@ public class SearchActivity extends AbstractActivity {
         CacheDetailActivity.startActivity(this, geocodeText);
     }
 
-    private class findTrackableListener implements View.OnClickListener {
+    private class FindTrackableListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {

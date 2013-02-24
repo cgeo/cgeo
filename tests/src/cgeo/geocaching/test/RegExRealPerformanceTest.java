@@ -17,7 +17,7 @@ public class RegExRealPerformanceTest extends AndroidTestCase {
 
     public static void testRegEx() {
 
-        List<String> output = RegExPerformanceTest.doTheTests(10);
+        final List<String> output = RegExPerformanceTest.doTheTests(10);
 
         for (String s : output) {
             Log.d(s);

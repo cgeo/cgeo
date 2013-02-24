@@ -72,7 +72,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDDD(gp1, 'N', 51, 30000, 'E', 13, 80000);
 
-        Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatDegFrac()),
+        final Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatDegFrac()),
                 String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonDegFrac()));
 
         Assert.assertTrue(gp1a.equals(gp1));
@@ -82,7 +82,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDDD(gp2, 'N', 51, 34567, 'E', 13, 87654);
 
-        Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatDegFrac()),
+        final Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatDegFrac()),
                 String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonDegFrac()));
 
         Assert.assertTrue(gp2a.equals(gp2));
@@ -92,7 +92,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDDD(gp3, 'N', 51, 30000, 'E', 13, 80000);
 
-        Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatDegFrac()),
+        final Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatDegFrac()),
                 String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonDegFrac()));
 
         checkTolerance(gp3, gp3a, 5e-5);
@@ -102,7 +102,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDDD(gp4, 'N', 51, 12, 'E', 13, 89);
 
-        Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatDegFrac()),
+        final Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatDegFrac()),
                 String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonDegFrac()));
 
         checkTolerance(gp4, gp4a, 5e-5);
@@ -128,7 +128,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDMM(gp1, 'N', 51, 18, 0, 'E', 13, 48, 0);
 
-        Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatMin()), String.valueOf(gp1.getLatMinFrac()),
+        final Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatMin()), String.valueOf(gp1.getLatMinFrac()),
                 String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonMin()), String.valueOf(gp1.getLonMinFrac()));
 
         Assert.assertTrue(gp1a.equals(gp1));
@@ -138,7 +138,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDMM(gp2, 'N', 51, 20, 740, 'E', 13, 52, 592);
 
-        Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatMin()), String.valueOf(gp2.getLatMinFrac()),
+        final Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatMin()), String.valueOf(gp2.getLatMinFrac()),
                 String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonMin()), String.valueOf(gp2.getLonMinFrac()));
 
         checkTolerance(gp2, gp2a, 5e-5);
@@ -148,7 +148,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDMM(gp3, 'N', 51, 18, 0, 'E', 13, 48, 0);
 
-        Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatMin()), String.valueOf(gp3.getLatMinFrac()),
+        final Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatMin()), String.valueOf(gp3.getLatMinFrac()),
                 String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonMin()), String.valueOf(gp3.getLonMinFrac()));
 
         checkTolerance(gp3, gp3a, 5e-5);
@@ -158,7 +158,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDMM(gp4, 'N', 51, 0, 7, 'E', 13, 0, 53);
 
-        Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatMin()), String.valueOf(gp4.getLatMinFrac()),
+        final Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatMin()), String.valueOf(gp4.getLatMinFrac()),
                 String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonMin()), String.valueOf(gp4.getLonMinFrac()));
 
         checkTolerance(gp4, gp4a, 5e-5);
@@ -181,7 +181,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDMS(gp1, 'N', 51, 18, 0, 0, 'E', 13, 48, 0, 0);
 
-        Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatMin()), String.valueOf(gp1.getLatSec()), String.valueOf(gp1.getLatSecFrac()),
+        final Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatMin()), String.valueOf(gp1.getLatSec()), String.valueOf(gp1.getLatSecFrac()),
                 String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonMin()), String.valueOf(gp1.getLonSec()), String.valueOf(gp1.getLonSecFrac()));
 
         Assert.assertTrue(gp1a.equals(gp1));
@@ -191,7 +191,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDMS(gp2, 'N', 51, 20, 44, 412, 'E', 13, 52, 35, 544);
 
-        Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatMin()), String.valueOf(gp2.getLatSec()), String.valueOf(gp2.getLatSecFrac()),
+        final Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatMin()), String.valueOf(gp2.getLatSec()), String.valueOf(gp2.getLatSecFrac()),
                 String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonMin()), String.valueOf(gp2.getLonSec()), String.valueOf(gp2.getLonSecFrac()));
 
         checkTolerance(gp2, gp2a, 5e-6);
@@ -201,7 +201,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDMS(gp3, 'N', 51, 17, 59, 994, 'E', 13, 48, 0, 0);
 
-        Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatMin()), String.valueOf(gp3.getLatSec()), String.valueOf(gp3.getLatSecFrac()),
+        final Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatMin()), String.valueOf(gp3.getLatSec()), String.valueOf(gp3.getLatSecFrac()),
                 String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonMin()), String.valueOf(gp3.getLonSec()), String.valueOf(gp3.getLonSecFrac()));
 
         checkTolerance(gp3, gp3a, 5e-6);
@@ -211,7 +211,7 @@ public class GeopointTest extends AndroidTestCase {
 
         checkDMS(gp4, 'N', 51, 0, 0, 432, 'E', 13, 0, 3, 204);
 
-        Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatMin()), String.valueOf(gp4.getLatSec()), String.valueOf(gp4.getLatSecFrac()),
+        final Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatMin()), String.valueOf(gp4.getLatSec()), String.valueOf(gp4.getLatSecFrac()),
                 String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonMin()), String.valueOf(gp4.getLonSec()), String.valueOf(gp4.getLonSecFrac()));
 
         checkTolerance(gp4, gp4a, 5e-6);
@@ -254,7 +254,7 @@ public class GeopointTest extends AndroidTestCase {
         });
     }
 
-    public static void testParseParam2() throws Exception {
+    public static void testParseParam2() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")
@@ -265,7 +265,7 @@ public class GeopointTest extends AndroidTestCase {
         });
     }
 
-    public static void testParseParam6() throws Exception {
+    public static void testParseParam6() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")
@@ -276,7 +276,7 @@ public class GeopointTest extends AndroidTestCase {
         });
     }
 
-    public static void testParseParam8() throws Exception {
+    public static void testParseParam8() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")
@@ -287,7 +287,7 @@ public class GeopointTest extends AndroidTestCase {
         });
     }
 
-    public static void testParseParam10() throws Exception {
+    public static void testParseParam10() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")

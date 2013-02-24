@@ -31,7 +31,7 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertTrue(ConnectorFactory.getConnector("OP12345") instanceof OCConnector); // opencaching PL
     }
 
-    public static void testGeocodeInvalidFormat() throws Exception {
+    public static void testGeocodeInvalidFormat() {
         // all codes are invalid
         assertTrue(ConnectorFactory.getConnector("GC") instanceof UnknownConnector);
         assertTrue(ConnectorFactory.getConnector("OC") instanceof UnknownConnector);

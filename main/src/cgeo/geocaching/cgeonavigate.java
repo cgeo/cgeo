@@ -74,7 +74,7 @@ public class cgeonavigate extends AbstractActivity {
                 }
             }
         } else {
-            Intent pointIntent = new Intent(this, cgeopoint.class);
+            Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
             startActivity(pointIntent);
 
             finish();
@@ -156,7 +156,7 @@ public class cgeonavigate extends AbstractActivity {
                 geoDirHandler.startDir();
             }
         } else if (id == 2) {
-            Intent pointIntent = new Intent(this, cgeopoint.class);
+            Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
             startActivity(pointIntent);
 
             finish();

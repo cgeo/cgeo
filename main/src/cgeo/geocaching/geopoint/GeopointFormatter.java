@@ -5,8 +5,7 @@ import java.util.Locale;
 /**
  * Formatting of Geopoint.
  */
-public class GeopointFormatter
-{
+public class GeopointFormatter {
     /**
      * Predefined formats.
      */
@@ -54,8 +53,7 @@ public class GeopointFormatter
      *            one of the predefined formats
      * @return the formatted coordinates
      */
-    public static String format(final Format format, final Geopoint gp)
-    {
+    public static String format(final Format format, final Geopoint gp) {
         final double latSigned = gp.getLatitude();
         final double lonSigned = gp.getLongitude();
 

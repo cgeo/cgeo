@@ -208,7 +208,13 @@ public abstract class Login {
         setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
         if (isActualLoginStatus()) {
             setActualUserName(BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
-            setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
+            int cachesCount = 0;
+            try {
+                cachesCount = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
+            } catch (NumberFormatException e) {
+                Log.e("getLoginStatus: bad cache count", e);
+            }
+            setActualCachesFound(cachesCount);
             Settings.setMemberStatus(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if ( page.contains(GCConstants.MEMBER_STATUS_RENEW) ) {
                 Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);

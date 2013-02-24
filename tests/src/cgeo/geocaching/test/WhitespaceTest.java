@@ -57,10 +57,10 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testRegex() {
-        Pattern pattern = Pattern.compile("\\s+");
+        final Pattern pattern = Pattern.compile("\\s+");
         final long start = System.currentTimeMillis();
-        Matcher matcher = pattern.matcher(data);
-        String result = matcher.replaceAll(" ").trim();
+        final Matcher matcher = pattern.matcher(data);
+        final String result = matcher.replaceAll(" ").trim();
         final long end = System.currentTimeMillis();
         assertEquals(EXPECTED_SIZE - 1, result.length());
         Log.d((end - start) + " ms regex");
@@ -68,14 +68,14 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
 
     public void testReplaceAll() {
         final long start = System.currentTimeMillis();
-        String result = data.replaceAll("\\s+", " ");
+        final String result = data.replaceAll("\\s+", " ");
         final long end = System.currentTimeMillis();
         assertEquals(EXPECTED_SIZE + 1, result.length());
         Log.d((end - start) + " ms replaceAll");
     }
 
     public void testActualImplementation() {
-        String result;
+        final String result;
         final long start = System.currentTimeMillis();
         result = BaseUtils.replaceWhitespace(data);
         final long end = System.currentTimeMillis();
@@ -84,7 +84,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testManually() {
-        String result;
+        final String result;
         final long start = System.currentTimeMillis();
         result = replaceWhitespaceManually(data);
         final long end = System.currentTimeMillis();
@@ -93,7 +93,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testStringUtils() {
-        String result;
+        final String result;
         final long start = System.currentTimeMillis();
         result = replaceWhitespaceStringUtils(data);
         final long end = System.currentTimeMillis();

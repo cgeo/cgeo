@@ -96,7 +96,7 @@ public class GC3XX5J extends MockedCache {
 
     @Override
     public List<String> getAttributes() {
-        String[] attributes = new String[] {
+        final String[] attributes = new String[] {
                 "stroller_no",
                 "kids_no",
                 "bicycles_yes",
@@ -114,7 +114,7 @@ public class GC3XX5J extends MockedCache {
 
     @Override
     public Map<LogType, Integer> getLogCounts() {
-        Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
         logCounts.put(LogType.PUBLISH_LISTING, 2);
         logCounts.put(LogType.FOUND_IT, 65);
         logCounts.put(LogType.RETRACT, 1);

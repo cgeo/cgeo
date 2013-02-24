@@ -18,7 +18,7 @@ public class FormatterTest extends AndroidTestCase {
     }
 
     public static void testOwnWaypoint() {
-        Waypoint own = new Waypoint("my own", WaypointType.OWN, true);
+        final Waypoint own = new Waypoint("my own", WaypointType.OWN, true);
         own.setPrefix(Waypoint.PREFIX_OWN);
         assertFormatting(own, cgeoapplication.getInstance().getString(R.string.waypoint_custom));
     }

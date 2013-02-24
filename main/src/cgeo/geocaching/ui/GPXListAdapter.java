@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeogpxes;
+import cgeo.geocaching.GpxFileListActivity;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.utils.Log;
 
@@ -18,7 +18,7 @@ import java.io.File;
 import java.util.List;
 
 public class GPXListAdapter extends ArrayAdapter<File> {
-    private cgeogpxes activity = null;
+    private GpxFileListActivity activity = null;
     private LayoutInflater inflater = null;
 
     private static class ViewHolder {
@@ -26,7 +26,7 @@ public class GPXListAdapter extends ArrayAdapter<File> {
         TextView filename;
     }
 
-    public GPXListAdapter(cgeogpxes parentIn, List<File> listIn) {
+    public GPXListAdapter(GpxFileListActivity parentIn, List<File> listIn) {
         super(parentIn, 0, listIn);
 
         activity = parentIn;

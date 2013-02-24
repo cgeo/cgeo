@@ -230,7 +230,7 @@ public class SettingsActivity extends AbstractActivity {
         }
 
         Button logMeIn = (Button) findViewById(R.id.log_me_in);
-        logMeIn.setOnClickListener(new logIn());
+        logMeIn.setOnClickListener(new LoginListener());
 
         TextView legalNote = (TextView) findViewById(R.id.legal_note);
         legalNote.setClickable(true);
@@ -570,7 +570,7 @@ public class SettingsActivity extends AbstractActivity {
         }
 
         Button webAuth = (Button) findViewById(R.id.sendToCgeo_register);
-        webAuth.setOnClickListener(new webAuth());
+        webAuth.setOnClickListener(new WebAuthListener());
 
         // Map source settings
         updateMapSourceMenu();
@@ -580,7 +580,7 @@ public class SettingsActivity extends AbstractActivity {
 
             @Override
             public void onClick(View v) {
-                Intent selectIntent = new Intent(SettingsActivity.this, cgSelectMapfile.class);
+                Intent selectIntent = new Intent(SettingsActivity.this, SelectMapfileActivity.class);
                 startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
             }
         });
@@ -758,7 +758,7 @@ public class SettingsActivity extends AbstractActivity {
         mapSourceSelector.setAdapter(adapter);
         final int index = MapProviderFactory.getMapSources().indexOf(Settings.getMapSource());
         mapSourceSelector.setSelection(index);
-        mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
+        mapSourceSelector.setOnItemSelectedListener(new ChangeMapSourceListener());
 
         initMapDirectoryEdittext(false);
     }
@@ -882,7 +882,7 @@ public class SettingsActivity extends AbstractActivity {
         }
     }
 
-    private static class cgeoChangeMapSource implements OnItemSelectedListener {
+    private static class ChangeMapSourceListener implements OnItemSelectedListener {
 
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
@@ -896,7 +896,7 @@ public class SettingsActivity extends AbstractActivity {
         }
     }
 
-    private class logIn implements View.OnClickListener {
+    private class LoginListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -930,7 +930,7 @@ public class SettingsActivity extends AbstractActivity {
         }
     }
 
-    private class webAuth implements View.OnClickListener {
+    private class WebAuthListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {

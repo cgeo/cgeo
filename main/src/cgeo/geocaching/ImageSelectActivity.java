@@ -210,8 +210,7 @@ public class ImageSelectActivity extends AbstractActivity {
         loadImagePreview();
     }
 
-    private void loadImagePreview()
-    {
+    private void loadImagePreview() {
         if (!new File(imageUri.getPath()).exists()) {
             Log.i("Image does not exist");
             return;

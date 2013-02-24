@@ -37,7 +37,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     private void assertUnpublished(final int cache) {
         final String page = getFileContent(cache);
-        SearchResult result = GCParser.parseCacheFromText(page, null);
+        final SearchResult result = GCParser.parseCacheFromText(page, null);
         assertNotNull(result);
         assertTrue(result.isEmpty());
         assertEquals(StatusCode.UNPUBLISHED_CACHE, result.getError());
@@ -53,10 +53,10 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     private void assertPublishedCache(final int cachePage, final String cacheName) {
         final String page = getFileContent(cachePage);
-        SearchResult result = GCParser.parseCacheFromText(page, null);
+        final SearchResult result = GCParser.parseCacheFromText(page, null);
         assertNotNull(result);
         assertEquals(1, result.getCount());
-        Geocache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
         assertEquals(cacheName, cache.getName());
     }
 
@@ -74,9 +74,9 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     private static Geocache createCache(int index) {
         final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES.get(index);
         // to get the same results we have to use the date format used when the mocked data was created
-        String oldCustomDate = Settings.getGcCustomDate();
+        final String oldCustomDate = Settings.getGcCustomDate();
 
-        SearchResult searchResult;
+        final SearchResult searchResult;
         try {
             Settings.setGcCustomDate(MockedCache.getDateFormat());
             searchResult = GCParser.parseCacheFromText(mockedCache.getData(), null);
@@ -98,7 +98,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
      */
     @MediumTest
     public static void testParseCacheFromTextWithMockedData() {
-        String gcCustomDate = Settings.getGcCustomDate();
+        final String gcCustomDate = Settings.getGcCustomDate();
         try {
             for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
                 // to get the same results we have to use the date format used when the mocked data was created
@@ -152,20 +152,20 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     @MediumTest
     public static void testEditModifiedCoordinates() {
-        Geocache cache = new Geocache();
+        final Geocache cache = new Geocache();
         cache.setGeocode("GC2ZN4G");
         // upload coordinates
         GCParser.editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566"));
         cache.drop(new Handler());
-        String page = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        Geocache cache2 = GCParser.parseCacheFromText(page, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+        final String page = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final Geocache cache2 = GCParser.parseCacheFromText(page, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertTrue(cache2.hasUserModifiedCoords());
         assertEquals(new Geopoint("N51 21.544", "E07 02.566"), cache2.getCoords());
         // delete coordinates
         GCParser.deleteModifiedCoordinates(cache2);
         cache2.drop(new Handler());
-        String page2 = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        Geocache cache3 = GCParser.parseCacheFromText(page2, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
+        final String page2 = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final Geocache cache3 = GCParser.parseCacheFromText(page2, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertFalse(cache3.hasUserModifiedCoords());
     }
 
@@ -189,7 +189,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     private Geocache parseCache(int resourceId) {
         final String page = getFileContent(resourceId);
-        SearchResult result = GCParser.parseCacheFromText(page, null);
+        final SearchResult result = GCParser.parseCacheFromText(page, null);
         assertNotNull(result);
         assertFalse(result.isEmpty());
         return result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);

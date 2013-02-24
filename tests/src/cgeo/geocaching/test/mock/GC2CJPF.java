@@ -130,7 +130,7 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public List<String> getAttributes() {
-        String[] attributes = new String[] {
+        final String[] attributes = new String[] {
                 "motorcycles_no",
                 "wheelchair_no",
                 "winter_yes",
@@ -147,7 +147,7 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public Map<LogType, Integer> getLogCounts() {
-        Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
         logCounts.put(LogType.PUBLISH_LISTING, 1);
         logCounts.put(LogType.FOUND_IT, 119);
         logCounts.put(LogType.DIDNT_FIND_IT, 3);

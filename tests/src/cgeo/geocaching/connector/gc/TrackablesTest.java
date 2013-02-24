@@ -14,16 +14,16 @@ import java.util.List;
 public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 
     public void testLogPageWithTrackables() {
-        List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
+        final List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
         assertNotNull(tbLogs);
         assertEquals(2, tbLogs.size());
-        TrackableLog log = tbLogs.get(0);
+        final TrackableLog log = tbLogs.get(0);
         assertEquals("Steffen's Kaiserwagen", log.name);
         assertEquals("1QG1EE", log.trackCode);
     }
 
     public void testLogPageWithoutTrackables() {
-        List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_without_tb));
+        final List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_without_tb));
         assertNotNull(tbLogs);
         assertEquals(0, tbLogs.size());
     }
@@ -45,7 +45,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         final Trackable trackable = getTBXATG();
         assertEquals("TBXATG", trackable.getGeocode());
 
-        List<LogEntry> log = trackable.getLogs();
+        final List<LogEntry> log = trackable.getLogs();
         assertNotNull(log);
         assertEquals(10, log.size());
         // log entry 4 has several images; just check first two
@@ -72,7 +72,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseTrackableWithoutReleaseDate() {
-        Trackable trackable = parseTrackable(R.raw.tb14wfv);
+        final Trackable trackable = parseTrackable(R.raw.tb14wfv);
         assertNotNull(trackable);
         assertEquals("The Brickster", trackable.getName());
         assertEquals("Adrian C", trackable.getOwner());
@@ -95,7 +95,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private Trackable parseTrackable(int trackablePage) {
-        String pageContent = getFileContent(trackablePage);
+        final String pageContent = getFileContent(trackablePage);
         return GCParser.parseTrackable(BaseUtils.replaceWhitespace(pageContent), null);
     }
 
@@ -105,7 +105,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         final List<LogEntry> logs = trackable.getLogs();
         assertNotNull(logs);
         assertFalse(logs.isEmpty());
-        LogEntry marked = logs.get(4);
+        final LogEntry marked = logs.get(4);
         assertEquals(LogType.MARKED_MISSING, marked.type);
     }
 
@@ -118,7 +118,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseTrackableNotExisting() {
-        Trackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing), null);
+        final Trackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing), null);
         assertNull(trackable);
     }
 

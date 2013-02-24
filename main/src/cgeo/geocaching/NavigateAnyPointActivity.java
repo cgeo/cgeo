@@ -36,7 +36,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class cgeopoint extends AbstractActivity {
+public class NavigateAnyPointActivity extends AbstractActivity {
     private static final int MENU_DEFAULT_NAVIGATION = 2;
     private static final int MENU_NAVIGATE = 0;
     private static final int MENU_CACHES_AROUND = 5;
@@ -102,7 +102,7 @@ public class cgeopoint extends AbstractActivity {
 
     String distanceUnit = "";
 
-    public cgeopoint() {
+    public NavigateAnyPointActivity() {
         super("c:geo-navigate-any");
     }
 
@@ -248,8 +248,8 @@ public class cgeopoint extends AbstractActivity {
         latButton = (Button) findViewById(R.id.buttonLatitude);
         lonButton = (Button) findViewById(R.id.buttonLongitude);
 
-        latButton.setOnClickListener(new coordDialogListener());
-        lonButton.setOnClickListener(new coordDialogListener());
+        latButton.setOnClickListener(new CoordDialogListener());
+        lonButton.setOnClickListener(new CoordDialogListener());
 
         final Geopoint coords = Settings.getAnyCoordinates();
         if (coords != null) {
@@ -258,7 +258,7 @@ public class cgeopoint extends AbstractActivity {
         }
 
         Button buttonCurrent = (Button) findViewById(R.id.current);
-        buttonCurrent.setOnClickListener(new currentListener());
+        buttonCurrent.setOnClickListener(new CurrentListener());
 
         getDestionationHistoryAdapter().notifyDataSetChanged();
         disableSuggestions((EditText) findViewById(R.id.distance));
@@ -280,10 +280,10 @@ public class cgeopoint extends AbstractActivity {
             }
         }
 
-        distanceUnitSelector.setOnItemSelectedListener(new changeDistanceUnit(this));
+        distanceUnitSelector.setOnItemSelectedListener(new ChangeDistanceUnit(this));
     }
 
-    private class coordDialogListener implements View.OnClickListener {
+    private class CoordDialogListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -291,7 +291,7 @@ public class cgeopoint extends AbstractActivity {
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
                 gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
             }
-            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(cgeopoint.this, null, gp, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(NavigateAnyPointActivity.this, null, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
@@ -305,13 +305,13 @@ public class cgeopoint extends AbstractActivity {
         }
     }
 
-    private static class changeDistanceUnit implements OnItemSelectedListener {
+    private static class ChangeDistanceUnit implements OnItemSelectedListener {
 
-        private changeDistanceUnit(cgeopoint unitView) {
+        private ChangeDistanceUnit(NavigateAnyPointActivity unitView) {
             this.unitView = unitView;
         }
 
-        private cgeopoint unitView;
+        private NavigateAnyPointActivity unitView;
 
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
@@ -470,7 +470,7 @@ public class cgeopoint extends AbstractActivity {
         }
     };
 
-    private class currentListener implements View.OnClickListener {
+    private class CurrentListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {

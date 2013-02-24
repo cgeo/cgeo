@@ -5,8 +5,8 @@ import android.test.AndroidTestCase;
 public class MemorySubjectTest extends AndroidTestCase {
 
     private static class Observer implements IObserver<Integer> {
-        public int times = 0;
-        public Integer value;
+        private int times = 0;
+        private Integer value;
 
         @Override
         public void update(final Integer data) {

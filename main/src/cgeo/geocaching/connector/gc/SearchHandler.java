@@ -57,7 +57,7 @@ public class SearchHandler extends Handler {
 
                 imageView = (ImageView) view.findViewById(R.id.image);
 
-                (new getCaptcha(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
+                (new GetCaptchaThread(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
 
                 dlg.setTitle(res.getString(R.string.caches_recaptcha_title));
                 dlg.setView(view);
@@ -79,10 +79,10 @@ public class SearchHandler extends Handler {
         }
     }
 
-    private class getCaptcha extends Thread {
+    private class GetCaptchaThread extends Thread {
         private URL uri = null;
 
-        public getCaptcha(URL uriIn) {
+        public GetCaptchaThread(URL uriIn) {
             uri = uriIn;
         }
 

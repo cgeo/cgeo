@@ -38,7 +38,7 @@ public class CacheTypeTest extends AndroidTestCase {
         }
     }
 
-    public static void testContainsCache() throws Exception {
+    public static void testContainsCache() {
         final Geocache traditional = new Geocache();
         traditional.setType(CacheType.TRADITIONAL);
 

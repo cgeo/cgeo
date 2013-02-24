@@ -1061,8 +1061,7 @@ public abstract class GCParser {
      *            the URI for the image to be uploaded
      * @return status code to indicate success or failure
      */
-    public static StatusCode uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri)
-    {
+    public static StatusCode uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
         String page = Network.getResponseData(Network.getRequest(uri));

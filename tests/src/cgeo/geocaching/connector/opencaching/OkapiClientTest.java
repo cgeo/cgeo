@@ -9,7 +9,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 public class OkapiClientTest extends CGeoTestCase {
 
     public static void testGetOCCache() {
-        String geoCode = "OU0331";
+        final String geoCode = "OU0331";
         Geocache cache = OkapiClient.getCache(geoCode);
         assertNotNull(cache);
         assertEquals(geoCode, cache.getGeocode());

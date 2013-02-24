@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.files.FileList;
+import cgeo.geocaching.files.AbstractFileListActivity;
 import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.ui.FileSelectionListAdapter;
@@ -13,9 +13,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class cgSelectMapfile extends FileList<FileSelectionListAdapter> implements IFileSelectionView {
+public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectionListAdapter> implements IFileSelectionView {
 
-    public cgSelectMapfile() {
+    public SelectMapfileActivity() {
         super("map");
     }
 

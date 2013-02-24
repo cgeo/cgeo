@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
+public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> extends AbstractListActivity {
     private static final int MSG_SEARCH_WHOLE_SD_CARD = 1;
 
     private final List<File> files = new ArrayList<File>();
@@ -184,7 +184,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                     Log.w("No external media mounted.");
                 }
             } catch (Exception e) {
-                Log.e("cgFileList.loadFiles.run", e);
+                Log.e("AbstractFileListActivity.loadFiles.run", e);
             }
 
             changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, 0, "loaded directories"));
@@ -252,7 +252,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     }
 
     /**
-     * Check if a filename belongs to the FileList. This implementation checks for file extensions.
+     * Check if a filename belongs to the AbstractFileListActivity. This implementation checks for file extensions.
      * Subclasses may override this method to filter out specific files.
      *
      * @param filename
@@ -267,11 +267,11 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         return false;
     }
 
-    protected FileList(final String extension) {
+    protected AbstractFileListActivity(final String extension) {
         setExtensions(new String[] { extension });
     }
 
-    protected FileList(final String[] extensions) {
+    protected AbstractFileListActivity(final String[] extensions) {
         setExtensions(extensions);
     }
 

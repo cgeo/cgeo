@@ -34,7 +34,7 @@ public class WaypointTest extends AndroidTestCase {
 	}
 
     public static void testGeocode() {
-        Waypoint waypoint = new Waypoint("Test waypoint", WaypointType.PARKING, false);
+        final Waypoint waypoint = new Waypoint("Test waypoint", WaypointType.PARKING, false);
         waypoint.setGeocode("p1");
         assertEquals("P1", waypoint.getGeocode());
     }

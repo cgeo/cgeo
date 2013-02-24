@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -11,7 +11,7 @@ import android.os.Message;
 
 public class WaypointsTest extends CGeoTestCase {
 
-    public static CancellableHandler handler = new CancellableHandler() {
+    public static final CancellableHandler handler = new CancellableHandler() {
         @Override
         protected void handleRegularMessage(final Message message) {
             // Dummy

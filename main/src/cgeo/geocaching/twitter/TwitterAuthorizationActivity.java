@@ -45,7 +45,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
                 requestTokenDialog.dismiss();
             }
 
-            startButton.setOnClickListener(new startListener());
+            startButton.setOnClickListener(new StartListener());
             startButton.setEnabled(true);
 
             if (msg.what == 1) {
@@ -53,7 +53,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
 
                 pinEntry.setVisibility(View.VISIBLE);
                 pinEntryButton.setVisibility(View.VISIBLE);
-                pinEntryButton.setOnClickListener(new confirmPINListener());
+                pinEntryButton.setOnClickListener(new ConfirmPINListener());
             } else {
                 showToast(res.getString(R.string.err_auth_initialize));
                 startButton.setText(res.getString(R.string.auth_start));
@@ -68,7 +68,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
                 changeTokensDialog.dismiss();
             }
 
-            pinEntryButton.setOnClickListener(new confirmPINListener());
+            pinEntryButton.setOnClickListener(new ConfirmPINListener());
             pinEntryButton.setEnabled(true);
 
             if (msg.what == 1) {
@@ -114,7 +114,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
         OAtokenSecret = tempToken.right;
 
         startButton.setEnabled(true);
-        startButton.setOnClickListener(new startListener());
+        startButton.setOnClickListener(new StartListener());
 
         if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
             // start authorization process
@@ -125,7 +125,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
 
             pinEntry.setVisibility(View.VISIBLE);
             pinEntryButton.setVisibility(View.VISIBLE);
-            pinEntryButton.setOnClickListener(new confirmPINListener());
+            pinEntryButton.setOnClickListener(new ConfirmPINListener());
         }
     }
 
@@ -213,7 +213,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
         changeTokensHandler.sendEmptyMessage(status);
     }
 
-    private class startListener implements View.OnClickListener {
+    private class StartListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -238,7 +238,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
         }
     }
 
-    private class confirmPINListener implements View.OnClickListener {
+    private class ConfirmPINListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {

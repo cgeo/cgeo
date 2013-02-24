@@ -36,8 +36,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @param lon
      *            longitude
      */
-    public Geopoint(final double lat, final double lon)
-    {
+    public Geopoint(final double lat, final double lon) {
         latitude = lat;
         longitude = lon;
     }
@@ -152,8 +151,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *
      * @return latitude
      */
-    public double getLatitude()
-    {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -162,8 +160,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *
      * @return latitude
      */
-    public int getLatitudeE6()
-    {
+    public int getLatitudeE6() {
         return (int) Math.round(latitude * 1E6);
     }
 
@@ -172,8 +169,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *
      * @return longitude
      */
-    public double getLongitude()
-    {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -182,8 +178,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *
      * @return longitude
      */
-    public int getLongitudeE6()
-    {
+    public int getLongitudeE6() {
         return (int) Math.round(longitude * 1E6);
     }
 
@@ -209,8 +204,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @throws GeopointException
      *             if there is an error in distance calculation
      */
-    public float distanceTo(final ICoordinates point)
-    {
+    public float distanceTo(final ICoordinates point) {
         return pathTo(point.getCoords())[0] / 1000;
     }
 
@@ -221,8 +215,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *            target
      * @return bearing in degree, in the [0,360[ range
      */
-    public float bearingTo(final ICoordinates point)
-    {
+    public float bearingTo(final ICoordinates point) {
         // Android library returns a bearing in the [-180;180] range
         final float bearing = pathTo(point.getCoords())[1];
         return bearing < 0 ? bearing + 360 : bearing;
@@ -237,8 +230,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *            distance in km
      * @return the projected geopoint
      */
-    public Geopoint project(final double bearing, final double distance)
-    {
+    public Geopoint project(final double bearing, final double distance) {
         final double rlat1 = latitude * deg2rad;
         final double rlon1 = longitude * deg2rad;
         final double rbearing = bearing * deg2rad;
@@ -295,7 +287,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     * 
+     *
      * @return formatted coordinates
      */
     @Override
@@ -306,8 +298,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     abstract public static class GeopointException extends NumberFormatException {
         private static final long serialVersionUID = 1L;
 
-        protected GeopointException(String msg)
-        {
+        protected GeopointException(String msg) {
             super(msg);
         }
     }

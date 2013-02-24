@@ -133,12 +133,12 @@ public class EditWaypointActivity extends AbstractActivity {
         }
 
         Button buttonLat = (Button) findViewById(R.id.buttonLatitude);
-        buttonLat.setOnClickListener(new coordDialogListener());
+        buttonLat.setOnClickListener(new CoordDialogListener());
         Button buttonLon = (Button) findViewById(R.id.buttonLongitude);
-        buttonLon.setOnClickListener(new coordDialogListener());
+        buttonLon.setOnClickListener(new CoordDialogListener());
 
         Button addWaypoint = (Button) findViewById(R.id.add_waypoint);
-        addWaypoint.setOnClickListener(new coordsListener());
+        addWaypoint.setOnClickListener(new CoordsListener());
 
         List<String> wayPointNames = new ArrayList<String>();
         for (WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
@@ -155,7 +155,7 @@ public class EditWaypointActivity extends AbstractActivity {
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
             waitDialog.setCancelable(true);
 
-            (new loadWaypoint()).start();
+            (new LoadWaypointThread()).start();
         } else {
             initializeWaypointTypeSelector();
         }
@@ -192,7 +192,7 @@ public class EditWaypointActivity extends AbstractActivity {
                 waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
                 waitDialog.setCancelable(true);
 
-                (new loadWaypoint()).start();
+                (new LoadWaypointThread()).start();
             }
         }
     }
@@ -228,7 +228,7 @@ public class EditWaypointActivity extends AbstractActivity {
         }
 
         waypointTypeSelector.setSelection(typeIndex);
-        waypointTypeSelector.setOnItemSelectedListener(new changeWaypointType(this));
+        waypointTypeSelector.setOnItemSelectedListener(new ChangeWaypointType(this));
 
         waypointTypeSelector.setVisibility(View.VISIBLE);
     }
@@ -247,7 +247,7 @@ public class EditWaypointActivity extends AbstractActivity {
             }
         }
 
-        distanceUnitSelector.setOnItemSelectedListener(new changeDistanceUnit(this));
+        distanceUnitSelector.setOnItemSelectedListener(new ChangeDistanceUnit(this));
     }
 
     final private GeoDirHandler geoDirHandler = new GeoDirHandler() {
@@ -268,7 +268,7 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     };
 
-    private class loadWaypoint extends Thread {
+    private class LoadWaypointThread extends Thread {
 
         @Override
         public void run() {
@@ -282,7 +282,7 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     }
 
-    private class coordDialogListener implements View.OnClickListener {
+    private class CoordDialogListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -311,9 +311,9 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     }
 
-    private static class changeWaypointType implements OnItemSelectedListener {
+    private static class ChangeWaypointType implements OnItemSelectedListener {
 
-        private changeWaypointType(EditWaypointActivity wpView) {
+        private ChangeWaypointType(EditWaypointActivity wpView) {
             this.wpView = wpView;
         }
 
@@ -335,9 +335,9 @@ public class EditWaypointActivity extends AbstractActivity {
         }
     }
 
-    private static class changeDistanceUnit implements OnItemSelectedListener {
+    private static class ChangeDistanceUnit implements OnItemSelectedListener {
 
-        private changeDistanceUnit(EditWaypointActivity unitView) {
+        private ChangeDistanceUnit(EditWaypointActivity unitView) {
             this.unitView = unitView;
         }
 
@@ -361,7 +361,7 @@ public class EditWaypointActivity extends AbstractActivity {
     public static final int UPLOAD_SUCCESS = 4;
     public static final int SAVE_ERROR = 5;
 
-    private class coordsListener implements View.OnClickListener {
+    private class CoordsListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -426,10 +426,13 @@ public class EditWaypointActivity extends AbstractActivity {
 
                 @Override
                 public void handleMessage(Message msg) {
+                    // TODO: The order of showToast, progress.dismiss and finish is different in these cases. Why?
                     switch (msg.what) {
                         case UPLOAD_SUCCESS:
                             showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, coordsToSave));
-                            //$FALL-THROUGH$
+                            progress.dismiss();
+                            finish();
+                            break;
                         case SUCCESS:
                             progress.dismiss();
                             finish();
@@ -452,6 +455,8 @@ public class EditWaypointActivity extends AbstractActivity {
                             finish(); //TODO: should we close activity here ?
                             showToast(res.getString(R.string.err_waypoint_add_failed));
                             break;
+                        default:
+                            throw new UnsupportedOperationException();
                     }
                 }
             };

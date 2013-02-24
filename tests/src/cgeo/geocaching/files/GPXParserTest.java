@@ -98,9 +98,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testGc31j2hWpts() throws IOException, ParserException {
         removeCacheCompletely("GC31J2H");
-        List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts);
+        final List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts);
         assertEquals(1, caches.size());
-        Geocache cache = caches.get(0);
+        final Geocache cache = caches.get(0);
         assertGc31j2h(cache);
         assertGc31j2hWaypoints(cache);
     }
@@ -224,7 +224,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testParseDateWithHugeFraction() throws ParseException {
         // see issue 821
-        String dateString = "2011-11-07T00:00:00.0000000-07:00";
+        final String dateString = "2011-11-07T00:00:00.0000000-07:00";
         GPXParser.parseDate(dateString);
     }
 
@@ -242,7 +242,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     public void testGeoToad() throws Exception {
         final List<Geocache> caches = readGPX10(R.raw.geotoad);
         assertEquals(2, caches.size());
-        List<String> codes = new ArrayList<String>();
+        final List<String> codes = new ArrayList<String>();
         for (Geocache cache : caches) {
             codes.add(cache.getGeocode());
         }
@@ -294,7 +294,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        SearchResult search = cgData.getBatchOfStoredCaches(null, CacheType.ALL, listId);
+        final SearchResult search = cgData.getBatchOfStoredCaches(null, CacheType.ALL, listId);
         assertNotNull(search);
         cgData.removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
         cgData.removeList(listId);

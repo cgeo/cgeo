@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.enumerations.CacheType;
 
 import android.graphics.Bitmap;
@@ -77,8 +77,7 @@ public abstract class IconDecoder {
         int type = -1;
         int count = 0;
 
-        for (int x = 0; x < pngType.length; x++)
-        {
+        for (int x = 0; x < pngType.length; x++) {
             if (pngType[x] > count) {
                 count = pngType[x];
                 type = x;

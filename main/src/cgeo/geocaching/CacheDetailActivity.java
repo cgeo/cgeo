@@ -1883,7 +1883,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
-    private class HtmlImageCounter implements Html.ImageGetter {
+    private static class HtmlImageCounter implements Html.ImageGetter {
 
         private int imageCount = 0;
 
@@ -2142,8 +2142,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         /** Loads the Log Images outside the ui thread. */
 
-        private class LogImageLoader extends AsyncTask<String, Progress, Spanned>
-        {
+        private class LogImageLoader extends AsyncTask<String, Progress, Spanned> {
             private LogViewHolder holder;
 
             public LogImageLoader(LogViewHolder holder) {

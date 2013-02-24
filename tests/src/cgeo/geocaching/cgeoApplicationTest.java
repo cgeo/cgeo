@@ -56,7 +56,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchTrackableNotExisting() {
-        Trackable tb = GCParser.searchTrackable("123456", null, null);
+        final Trackable tb = GCParser.searchTrackable("123456", null, null);
         assertNull(tb);
     }
 
@@ -130,8 +130,8 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByGeocodeNotLoggedIn() {
-        ImmutablePair<String, String> login = Settings.getLogin();
-        String memberStatus = Settings.getMemberStatus();
+        final ImmutablePair<String, String> login = Settings.getLogin();
+        final String memberStatus = Settings.getMemberStatus();
 
         try {
             // non premium cache
@@ -143,7 +143,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             assertNotNull(search);
             assertEquals(1, search.getGeocodes().size());
             assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-            Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+            final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             // coords must be null if the user is not logged in
             assertNull(searchedCache.getCoords());
 
@@ -169,16 +169,16 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchErrorOccured() {
-        ImmutablePair<String, String> login = Settings.getLogin();
-        String memberStatus = Settings.getMemberStatus();
+        final ImmutablePair<String, String> login = Settings.getLogin();
+        final String memberStatus = Settings.getMemberStatus();
 
         try {
             // non premium cache
-            MockedCache cache = new GC1ZXX2();
+            final MockedCache cache = new GC1ZXX2();
 
             deleteCacheFromDBAndLogout(cache.getGeocode());
 
-            SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+            final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
             assertNotNull(search);
             assertEquals(0, search.getGeocodes().size());
 
@@ -325,10 +325,10 @@ public class cgeoApplicationTest extends CGeoTestCase {
     @MediumTest
     public static void testSearchByViewportNotLoggedIn() {
 
-        ImmutablePair<String, String> login = Settings.getLogin();
-        String memberStatus = Settings.getMemberStatus();
-        Strategy strategy = Settings.getLiveMapStrategy();
-        Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
+        final ImmutablePair<String, String> login = Settings.getLogin();
+        final String memberStatus = Settings.getMemberStatus();
+        final Strategy strategy = Settings.getLiveMapStrategy();
+        final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
         Settings.setLiveMapStrategy(testStrategy);
         final CacheType cacheType = Settings.getCacheType();
 
@@ -348,7 +348,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             assertNotNull(search);
             assertTrue(search.getGeocodes().contains(cache.getGeocode()));
             // coords differ
-            Geocache cacheFromViewport = cgData.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+            final Geocache cacheFromViewport = cgData.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
             Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
             assertFalse(cache.getCoords().isEqualTo(cacheFromViewport.getCoords(), 1e-3));
@@ -398,10 +398,10 @@ public class cgeoApplicationTest extends CGeoTestCase {
      * Caches that are good test cases
      */
     public static void testSearchByGeocodeSpecialties() {
-        Geocache GCV2R9 = cgeoApplicationTest.testSearchByGeocode("GCV2R9");
+        final Geocache GCV2R9 = cgeoApplicationTest.testSearchByGeocode("GCV2R9");
         Assert.assertEquals("California, United States", GCV2R9.getLocation());
 
-        Geocache GC1ZXEZ = cgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
+        final Geocache GC1ZXEZ = cgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
         Assert.assertEquals("Ms.Marple/Mr.Stringer", GC1ZXEZ.getOwnerUserId());
     }
 

@@ -153,6 +153,8 @@ public class OC11XMLParser {
                     return CacheType.VIRTUAL;
                 case 10: // Driv./Drive-In
                     return CacheType.TRADITIONAL;
+                default:
+                    return CacheType.UNKNOWN;
             }
         } catch (NumberFormatException e) {
             Log.e("OC11XMLParser.getCacheType", e);
@@ -214,7 +216,7 @@ public class OC11XMLParser {
         desc.hint = StringUtils.EMPTY;
     }
 
-    protected static int attributeId;
+    private static int attributeId;
 
     public static Collection<Geocache> parseCaches(final InputStream stream) throws IOException {
         // parse and return caches without filtering

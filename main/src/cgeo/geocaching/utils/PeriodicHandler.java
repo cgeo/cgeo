@@ -48,6 +48,9 @@ abstract public class PeriodicHandler extends Handler {
             case ACT:
                 sendEmptyMessageDelayed(ACT, period);
                 act();
+                break;
+            default:
+                throw new UnsupportedOperationException();
         }
     }
 

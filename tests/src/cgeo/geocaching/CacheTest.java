@@ -43,7 +43,7 @@ public class CacheTest extends AndroidTestCase {
     }
 
     public static void testGeocodeUppercase() {
-        Geocache cache = new Geocache();
+        final Geocache cache = new Geocache();
         cache.setGeocode("gc1234");
         assertEquals("GC1234", cache.getGeocode());
     }

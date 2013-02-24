@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class BaseUtilsTest extends AndroidTestCase {
     public static void testRegEx() {
-        String page = MockedCache.readCachePage("GC2CJPF");
+        final String page = MockedCache.readCachePage("GC2CJPF");
         assertEquals("blafoo", BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
         assertTrue(page.contains("id=\"ctl00_hlRenew\"") || GCConstants.MEMBER_STATUS_PM.equals(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???")));
         int cachesFound = 0;
@@ -26,7 +26,7 @@ public class BaseUtilsTest extends AndroidTestCase {
     }
 
     public static void testControlCharactersCleanup() {
-        Pattern patternAll = Pattern.compile("(.*)", Pattern.DOTALL);
+        final Pattern patternAll = Pattern.compile("(.*)", Pattern.DOTALL);
         assertEquals("some control characters removed", BaseUtils.getMatch("some" + "\u001C" + "control" + (char) 0x1D + "characters removed", patternAll, ""));
         assertEquals("newline also removed", BaseUtils.getMatch("newline\nalso\nremoved", patternAll, ""));
     }

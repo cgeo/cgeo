@@ -355,7 +355,7 @@ public class cgeo extends AbstractActivity {
         Settings.getLogin();
 
         if (app.firstRun) {
-            (new firstLogin()).start();
+            (new FirstLoginThread()).start();
         }
 
         final View findOnMap = findViewById(R.id.map);
@@ -431,7 +431,7 @@ public class cgeo extends AbstractActivity {
 
         setFilterTitle();
         checkRestore();
-        (new cleanDatabase()).start();
+        (new CleanDatabaseThread()).start();
     }
 
     protected void selectGlobalTypeFilter() {
@@ -624,7 +624,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoPoint(View v) {
         findViewById(R.id.any_button).setPressed(true);
-        startActivity(new Intent(this, cgeopoint.class));
+        startActivity(new Intent(this, NavigateAnyPointActivity.class));
     }
 
     /**
@@ -694,7 +694,7 @@ public class cgeo extends AbstractActivity {
         }
     }
 
-    private class cleanDatabase extends Thread {
+    private class CleanDatabaseThread extends Thread {
 
         @Override
         public void run() {
@@ -722,7 +722,7 @@ public class cgeo extends AbstractActivity {
         }
     }
 
-    private class firstLogin extends Thread {
+    private class FirstLoginThread extends Thread {
 
         @Override
         public void run() {

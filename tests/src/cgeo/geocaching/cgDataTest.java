@@ -51,7 +51,7 @@ public class cgDataTest extends CGeoTestCase {
             assertEquals(1, cgData.renameList(listId1, "cgData Test (renamed)"));
 
             // get list
-            StoredList list1 = cgData.getList(listId1);
+            final StoredList list1 = cgData.getList(listId1);
             assertEquals("cgData Test (renamed)", list1.title);
 
             // move to list (cache1=listId2, cache2=listId2)
@@ -74,7 +74,7 @@ public class cgDataTest extends CGeoTestCase {
         } finally {
 
             // remove caches
-            Set<String> geocodes = new HashSet<String>();
+            final Set<String> geocodes = new HashSet<String>();
             geocodes.add(cache1.getGeocode());
             geocodes.add(cache2.getGeocode());
             cgData.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
@@ -126,7 +126,7 @@ public class cgDataTest extends CGeoTestCase {
     // Loading logs for an empty geocode should return an empty list, not null!
     public static void testLoadLogsFromEmptyGeocode() {
 
-        List<LogEntry> logs = cgData.loadLogs("");
+        final List<LogEntry> logs = cgData.loadLogs("");
 
         assertNotNull("Logs must not be null", logs);
         assertEquals("Logs from empty geocode must be empty", 0, logs.size());

@@ -10,8 +10,8 @@ import junit.framework.TestCase;
 public class AutoZoomTest extends TestCase {
 
     public static void testZoom1() {
-        Geopoint bottomLeft = new Geopoint(49.3, 8.3);
-        Geopoint topRight = new Geopoint(49.4, 8.4);
+        final Geopoint bottomLeft = new Geopoint(49.3, 8.3);
+        final Geopoint topRight = new Geopoint(49.4, 8.4);
 
         int zoom = Tile.calcZoomLat(bottomLeft, topRight, 2);
 
@@ -26,8 +26,8 @@ public class AutoZoomTest extends TestCase {
     }
 
     public static void testZoom2() {
-        Geopoint bottomLeft = new Geopoint(49.3, 8.3);
-        Geopoint topRight = new Geopoint(49.4, 8.4);
+        final Geopoint bottomLeft = new Geopoint(49.3, 8.3);
+        final Geopoint topRight = new Geopoint(49.4, 8.4);
 
         int zoom = Tile.calcZoomLat(bottomLeft, topRight, 3);
 
@@ -42,28 +42,28 @@ public class AutoZoomTest extends TestCase {
     }
 
     public static void testTiles1x2() {
-        Geopoint bottomLeft = new Geopoint(49.3, 8.3);
-        Geopoint topRight = new Geopoint(49.4, 8.4);
+        final Geopoint bottomLeft = new Geopoint(49.3, 8.3);
+        final Geopoint topRight = new Geopoint(49.4, 8.4);
 
-        Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight));
+        final Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight));
 
         assertEquals(2, tiles.size());
     }
 
     public static void testTiles2x3() {
-        Geopoint bottomLeft = new Geopoint(49.3, 8.3);
-        Geopoint topRight = new Geopoint(49.4, 8.4);
+        final Geopoint bottomLeft = new Geopoint(49.3, 8.3);
+        final Geopoint topRight = new Geopoint(49.4, 8.4);
 
-        Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight), 3, Tile.ZOOMLEVEL_MIN);
+        final Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight), 3, Tile.ZOOMLEVEL_MIN);
 
         assertEquals(6, tiles.size());
     }
 
     public static void testTilesZoom13() {
-        Geopoint bottomLeft = new Geopoint(49.3, 8.3);
-        Geopoint topRight = new Geopoint(49.4, 8.4);
+        final Geopoint bottomLeft = new Geopoint(49.3, 8.3);
+        final Geopoint topRight = new Geopoint(49.4, 8.4);
 
-        Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight), 3, 13);
+        final Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight), 3, 13);
 
         assertEquals(16, tiles.size());
     }

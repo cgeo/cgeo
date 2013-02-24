@@ -61,7 +61,7 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
             holder.filename.setTypeface(holder.filename.getTypeface(), Typeface.NORMAL);
         }
 
-        final touchListener touchLst = new touchListener(file);
+        final TouchListener touchLst = new TouchListener(file);
         v.setOnClickListener(touchLst);
 
         holder.filepath.setText(file.getParent());
@@ -70,10 +70,10 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
         return v;
     }
 
-    private class touchListener implements View.OnClickListener {
+    private class TouchListener implements View.OnClickListener {
         private File file = null;
 
-        public touchListener(File fileIn) {
+        public TouchListener(File fileIn) {
             file = fileIn;
         }
 

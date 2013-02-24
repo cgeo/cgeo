@@ -2,7 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.files.FileList;
+import cgeo.geocaching.files.AbstractFileListActivity;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.ui.GPXListAdapter;
 
@@ -15,9 +15,9 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public class cgeogpxes extends FileList<GPXListAdapter> {
+public class GpxFileListActivity extends AbstractFileListActivity<GPXListAdapter> {
 
-    public cgeogpxes() {
+    public GpxFileListActivity() {
         super(new String[] { "gpx", "loc", "zip" });
     }
 
@@ -37,7 +37,7 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
     }
 
     public static void startSubActivity(Activity fromActivity, int listId) {
-        final Intent intent = new Intent(fromActivity, cgeogpxes.class);
+        final Intent intent = new Intent(fromActivity, GpxFileListActivity.class);
         intent.putExtra(Intents.EXTRA_LIST_ID, listId);
         fromActivity.startActivityForResult(intent, 0);
     }

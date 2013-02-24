@@ -4,11 +4,11 @@ import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
 @TargetApi(8)
-public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
-    private final cgeogpxes importGpxActivity = new cgeogpxes();
+public class GpxFileListActivityTest extends ActivityInstrumentationTestCase2<GpxFileListActivity> {
+    private final GpxFileListActivity importGpxActivity = new GpxFileListActivity();
 
-    public cgeogpxesTest() {
-        super(cgeogpxes.class);
+    public GpxFileListActivityTest() {
+        super(GpxFileListActivity.class);
     }
 
     public void testFileNameMatches() {

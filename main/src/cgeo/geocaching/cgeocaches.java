@@ -1169,7 +1169,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     }
 
     private void importGpx() {
-        cgeogpxes.startSubActivity(this, listId);
+        GpxFileListActivity.startSubActivity(this, listId);
     }
 
     @Override
@@ -1549,8 +1549,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             int times = 0;
 
             int ret = MSG_DONE;
-            while (!needToStop && times < 3 * 60 / 5) // maximum: 3 minutes, every 5 seconds
-            {
+            while (!needToStop && times < 3 * 60 / 5) { // maximum: 3 minutes, every 5 seconds
                 //download new code
                 String deviceCode = Settings.getWebDeviceCode();
                 if (deviceCode == null) {
@@ -1590,8 +1589,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
                 try {
                     yield();
-                    if (delay == 0)
-                    {
+                    if (delay == 0) {
                         sleep(5000); //No caches 5s
                         times++;
                     } else {

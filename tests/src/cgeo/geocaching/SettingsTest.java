@@ -13,11 +13,6 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
         super(cgeo.class);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
     /**
      * access settings.
      * this should work fine without an exception (once there was an exception because of the empty map file string)

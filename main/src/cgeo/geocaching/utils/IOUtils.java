@@ -5,7 +5,9 @@ import java.io.IOException;
 
 final public class IOUtils {
 
-    private IOUtils() {}
+    private IOUtils() {
+        // utility class
+    }
 
     public static void closeQuietly(final Closeable closeable) {
         if (closeable != null) {
