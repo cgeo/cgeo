@@ -2,14 +2,12 @@
 
 You want to contribute?
 -----------------------
-Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/c-geo-opensource/issues) before hacking** on your great new feature. It would be bad if you have implemented something great, but we can't include it because it doesn't fit the remaining architecture and code.
+Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/c-geo-opensource/issues) before hacking** on your great new feature. It would be bad if you have implemented something great, but we can't include it because it doesn't fit the remaining architecture and code. You might also want to chat with the developers on channel #cgeo on the freenode IRC network.
 
 Get the source
 --------------
 
-Fork the project source code on [github](https://github.com/cgeo/c-geo-opensource):
-
-    git clone git://github.com/cgeo/c-geo-opensource.git
+Fork the [project source code](https://github.com/cgeo/c-geo-opensource), make changes to your clone and [create a pull request](https://help.github.com/articles/using-pull-requests) afterwards.
 
 ### Branches ###
 
@@ -25,7 +23,7 @@ Set up Eclipse
 - Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
 - Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
 - After the workbench has started, select File | Import | Install | Install Software Items From File and select a locally downloaded copy of https://github.com/cgeo/c-geo-opensource/tree/master/main/project/eclipse%20installation/cgeo%20eclipse%20components.p2f. This way you can easily install all necessary plugins.
-- After forking the project you should import the two Eclipse projects in your workspace with File | Import | Projects from Git.
+- After forking the project you should import the Eclipse projects in your workspace with File | Import | Projects from Git.
 
 Build
 -----
@@ -67,19 +65,14 @@ or use the Ant view of Eclipse
 
 ### Debugging ###
 
-In Eclipse, create a Debug Configuration for an Android Application using the menu Run->Debug Configurations
+In Eclipse, create a Debug Configuration for an Android Application using the menu Run | Debug Configurations
 
 ### Testing ###
 
 The Test classes can be found in the project cgeo-os-test. Test classes should be located in the same package as
 the class under test.
-Every class can be "Run As" (or "Debug As") an "Android JUnit Test" from Eclipse.
-To run all tests use the test suite in CgeoTestSuite in package cgeo.geocaching.test.
-Further information can be found at http://developer.android.com/guide/topics/testing/testing_android.html
-
-### Code coverage / Emma ###
-
-A code coverage report can be generated with Emma. A little how-to (German) can be found at http://www.blafoo.de/blog/index.php#param=id_32
+Every class can be "Run As" (or "Debug As") an [Android JUnit Test](http://developer.android.com/guide/topics/testing/testing_android.html) from Eclipse.
+To run all tests use the same "Run As" menu item from the context menu of the test project.
 
 License
 -------
