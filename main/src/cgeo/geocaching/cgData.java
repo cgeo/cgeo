@@ -2382,6 +2382,22 @@ public class cgData {
         database.delete(dbTableLogsOffline, "geocode = ?", new String[]{geocode});
     }
 
+    public static void clearLogsOffline(List<Geocache> caches) {
+        if (CollectionUtils.isEmpty(caches)) {
+            return;
+        }
+
+        init();
+
+        Set<String> geocodes = new HashSet<String>(caches.size());
+        for (Geocache cache : caches) {
+            geocodes.add(cache.getGeocode());
+            cache.setLogOffline(false);
+        }
+
+        database.execSQL(String.format("DELETE FROM %s where %s", dbTableLogsOffline, whereGeocodeIn(geocodes)));
+    }
+
     public static boolean hasLogOffline(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return false;

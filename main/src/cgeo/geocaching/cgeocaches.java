@@ -99,6 +99,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private static final int MENU_STORE_CACHE = 73;
     private static final int MENU_FILTER = 74;
     private static final int MENU_DELETE_EVENTS = 75;
+    private static final int MENU_CLEAR_OFFLINE_LOGS = 76;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_RESTART_GEO_AND_DIR = -2;
@@ -431,6 +432,21 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
         }
     };
+    private Handler clearOfflineLogsHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what != MSG_CANCEL) {
+                adapter.setSelectMode(false);
+
+                refreshCurrentList();
+
+                replaceCacheListFromSearch();
+
+                progress.dismiss();
+            }
+        }
+    };
 
     private Handler importGpxAttachementFinishedHandler = new Handler() {
         @Override
@@ -688,6 +704,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
             subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             subMenu.add(0, MENU_DELETE_EVENTS, 0, res.getString(R.string.caches_delete_events));
+            subMenu.add(0, MENU_CLEAR_OFFLINE_LOGS, 0, res.getString(R.string.caches_clear_offlinelogs));
 
             //TODO: add submenu/AlertDialog and use R.string.gpx_import_title
             subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
@@ -754,6 +771,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             setVisible(menu, MENU_MOVE_TO_LIST, !isEmpty);
             setVisible(menu, MENU_EXPORT, !isEmpty);
             setVisible(menu, MENU_REMOVE_FROM_HISTORY, !isEmpty);
+            setVisible(menu, MENU_CLEAR_OFFLINE_LOGS, !isEmpty && containsOfflineLogs());
             setVisible(menu, MENU_IMPORT_GPX, isConcrete);
             setVisible(menu, MENU_IMPORT_WEB, isConcrete);
 
@@ -804,6 +822,15 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private boolean containsEvents() {
         for (Geocache cache : adapter.getCheckedOrAllCaches()) {
             if (cache.isEventCache()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean containsOfflineLogs() {
+        for (Geocache cache : adapter.getCheckedOrAllCaches()) {
+            if (cache.isLogOffline()) {
                 return true;
             }
         }
@@ -895,6 +922,10 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 deletePastEvents();
                 invalidateOptionsMenuCompatible();
                 return true;
+            case MENU_CLEAR_OFFLINE_LOGS:
+                clearOfflineLogs();
+                invalidateOptionsMenuCompatible();
+                return true;
             default:
                 return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
         }
@@ -912,6 +943,11 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
         }
         new DropDetailsThread(dropDetailsHandler, deletion).start();
+    }
+
+    public void clearOfflineLogs() {
+        progress.show(this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.obtainMessage(MSG_CANCEL));
+        new ClearOfflineLogsThread(clearOfflineLogsHandler).start();
     }
 
     /**
@@ -1640,6 +1676,23 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         @Override
         public void run() {
             cgData.clearVisitDate(selected);
+            handler.sendEmptyMessage(MSG_DONE);
+        }
+    }
+
+    private class ClearOfflineLogsThread extends Thread {
+
+        final private Handler handler;
+        final private List<Geocache> selected;
+
+        public ClearOfflineLogsThread(Handler handlerIn) {
+            handler = handlerIn;
+            selected = adapter.getCheckedOrAllCaches();
+        }
+
+        @Override
+        public void run() {
+            cgData.clearLogsOffline(selected);
             handler.sendEmptyMessage(MSG_DONE);
         }
     }
