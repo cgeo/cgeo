@@ -316,6 +316,8 @@
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
   <string name="caches_filter_origin">Herkunft</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
+  <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
+  <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
 
   <!-- caches lists -->
   <string name="list_menu">Liste</string>
