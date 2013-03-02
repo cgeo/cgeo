@@ -1,4 +1,4 @@
-package cgeo.geocaching.connector.opencaching;
+package cgeo.geocaching.connector.oc;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
