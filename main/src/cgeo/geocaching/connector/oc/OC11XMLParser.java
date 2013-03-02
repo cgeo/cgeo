@@ -43,8 +43,7 @@ import java.util.regex.Pattern;
 
 public class OC11XMLParser {
 
-    private static final String PARAGRAPH_END = "</p>";
-    private static final String PARAGRAPH_BEGIN = "<p>";
+    private static final String[] MARKUP = new String[] { "p", "span" };
     private static Pattern STRIP_DATE = Pattern.compile("\\+0([0-9]){1}\\:00");
     private static Pattern LOCAL_URL = Pattern.compile("href=\"(.*)\"");
     private static final int CACHE_PARSE_LIMIT = 250;
@@ -514,7 +513,7 @@ public class OC11XMLParser {
             @Override
             public void end(String body) {
                 final String content = body.trim();
-                descHolder.shortDesc = linkify(content);
+                descHolder.shortDesc = linkify(stripMarkup(content));
             }
         });
 
@@ -524,7 +523,7 @@ public class OC11XMLParser {
             @Override
             public void end(String body) {
                 final String content = body.trim();
-                descHolder.desc = linkify(content);
+                descHolder.desc = linkify(stripMarkup(content));
             }
         });
 
@@ -733,12 +732,23 @@ public class OC11XMLParser {
      * rendering.
      */
     protected static String stripMarkup(String input) {
-        if (StringUtils.startsWith(input, PARAGRAPH_BEGIN) && StringUtils.endsWith(input, PARAGRAPH_END)) {
-            String inner = input.substring(PARAGRAPH_BEGIN.length(), input.length() - PARAGRAPH_END.length());
-            if (!inner.contains(PARAGRAPH_BEGIN)) {
-                return inner.trim();
+        if (!StringUtils.startsWith(input, "<")) {
+            return input;
+        }
+        String result = input.trim();
+        for (String tagName : MARKUP) {
+            final String startTag = "<" + tagName + ">";
+            if (StringUtils.startsWith(result, startTag)) {
+                final String endTag = "</" + tagName + ">";
+                if (StringUtils.endsWith(result, endTag)) {
+                    String inner = result.substring(startTag.length(), result.length() - endTag.length()).trim();
+                    String nested = stripMarkup(inner);
+                    if (!nested.contains(startTag)) {
+                        result = nested;
+                    }
+                }
             }
         }
-        return input;
+        return result;
     }
 }
