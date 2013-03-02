@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.oc;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.connector.oc.OCXMLClient;
 import cgeo.geocaching.enumerations.CacheType;
 
 import java.util.Collection;
@@ -78,6 +77,27 @@ public class OCXMLTest extends CGeoTestCase {
         } finally {
             Settings.setExcludeDisabledCaches(oldExcludeDisabled);
             Settings.setExcludeMine(oldExcludeMine);
+        }
+    }
+
+    public static void testFetchTwiceDuplicatesDescription() {
+        final String geoCode = "OCEFBA";
+        final String description = "<p><span>Bei dem Cache kannst du einen kleinen Schatz bergen. Bitte lege aber einen ander Schatz in das Döschen. Achtung vor Automuggels.</span></p>";
+
+        deleteCacheFromDB(geoCode);
+        Geocache cache = OCXMLClient.getCache(geoCode);
+        assertNotNull(cache);
+        try {
+            assertEquals(geoCode, cache.getGeocode());
+            assertEquals(description, cache.getDescription());
+            cache.store(null);
+
+            // reload, make sure description is not duplicated
+            cache = OCXMLClient.getCache(geoCode);
+            assertNotNull(cache);
+            assertEquals(description, cache.getDescription());
+        } finally {
+            deleteCacheFromDB(geoCode);
         }
     }
 }

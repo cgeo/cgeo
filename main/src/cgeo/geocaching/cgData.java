@@ -2660,11 +2660,21 @@ public class cgData {
         return result;
     }
 
-    public static String loadCacheTexts(final Geocache cache) {
-        final String geocode = cache.getGeocode();
-        if (StringUtils.isBlank(geocode)) {
-            return null;
-        }
+    /**
+     * Load the lazily initialized fields of a cache and return them as partial cache (all other fields unset).
+     *
+     * @param geocode
+     * @return
+     */
+    public static Geocache loadCacheTexts(final String geocode) {
+        final Geocache partial = new Geocache();
+
+        // in case of database issues, we still need to return a result to avoid endless loops
+        partial.setDescription(StringUtils.EMPTY);
+        partial.setShortDescription(StringUtils.EMPTY);
+        partial.setHint(StringUtils.EMPTY);
+        partial.setLocation(StringUtils.EMPTY);
+
         init();
 
         try {
@@ -2679,10 +2689,10 @@ public class cgData {
                     "1");
 
             if (cursor.moveToFirst()) {
-                cache.setDescription(StringUtils.defaultString(cursor.getString(0)));
-                cache.setShortDescription(StringUtils.defaultString(cursor.getString(1)));
-                cache.setHint(StringUtils.defaultString(cursor.getString(2)));
-                cache.setLocation(StringUtils.defaultString(cursor.getString(3)));
+                partial.setDescription(StringUtils.defaultString(cursor.getString(0)));
+                partial.setShortDescription(StringUtils.defaultString(cursor.getString(1)));
+                partial.setHint(StringUtils.defaultString(cursor.getString(2)));
+                partial.setLocation(StringUtils.defaultString(cursor.getString(3)));
             }
 
             cursor.close();
@@ -2692,7 +2702,7 @@ public class cgData {
             Log.e("cgData.getCacheDescription", e);
         }
 
-        return null;
+        return partial;
     }
 
     /**
