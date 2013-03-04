@@ -84,6 +84,7 @@
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_save">Speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
+  <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post">Loggen</string>
   <string name="log_post_rate">Loggen &amp; bewerten</string>
@@ -120,8 +121,8 @@
   <string name="log_image">Bild</string>
   <string name="log_image_attach">Bild hinzufügen</string>
   <string name="log_image_edit">Bild bearbeiten</string>
-  <string name="log_image_stored">Vorhandenes</string>
-  <string name="log_image_camera">Neues</string>
+  <string name="log_image_stored">Vorhanden</string>
+  <string name="log_image_camera">Neu</string>
   <string name="log_image_caption">Überschrift</string>
   <string name="log_image_description">Beschreibung</string>
 
