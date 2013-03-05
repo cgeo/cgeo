@@ -379,7 +379,7 @@
   <string name="init_captcha">Pokaż CAPTCHA w razie potrzeby (tylko użytkownicy Basic)</string>
   <string name="init_useenglish">Użyj języka angielskiego wewnątrz c:geo\n(wymaga restartu)</string>
   <string name="init_exclude">Wyklucz własne lub już znalezione skrzynki</string>
-  <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie Live</string>
+  <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
   <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>  
   <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
   <string name="init_offline">Zapisuj mapy statyczne skrzynek do użytku offline</string>

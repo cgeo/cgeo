@@ -396,9 +396,9 @@
   <string name="init_captcha">Ukaž CAPTCHA obrázek, pokud je třeba. (jen Basic Member)</string>
   <string name="init_useenglish">Používej angličtinu pro c:geo (vyžaduje restart)</string>
   <string name="init_exclude">Nezobrazovat vlastní a nalezené keše</string>
-  <string name="init_showwaypoints">Zobrazuj waypointy na živé mapě</string>
+  <string name="init_showwaypoints">Zobrazuj waypointy na mapě</string>
   <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich waypointy.</string>
-  <string name="init_disabled">Nezobrazovat zrušené keše</string>
+  <string name="init_disabled">Nezobrazovat deaktivované keše</string>
   <string name="init_offline">Ukládat mapy pro offline použití</string>
   <string name="init_offline_wp">Ukládat statické mapy k waypointům pro offline použití</string>
   <string name="init_save_log_img">Ulož obrázky ze zápisů</string>
@@ -592,7 +592,7 @@
   <string name="cache_status_offline_log">Připravený zápis</string>
   <string name="cache_status_found">Nalezena</string>
   <string name="cache_status_archived">Archivována</string>
-  <string name="cache_status_disabled">Zrušena</string>
+  <string name="cache_status_disabled">Deaktivována</string>
   <string name="cache_status_premium">Pouze pro platící uživatele</string>
   <string name="cache_status_not_premium">Přístupná všem uživatelům</string>
   <string name="cache_geocode">GC kód</string>

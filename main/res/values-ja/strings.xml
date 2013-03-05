@@ -383,7 +383,7 @@
   <string name="init_captcha">必要ならCAPTCHAを表示(ベーシック会員のみ)</string>
   <string name="init_useenglish">英語表示\n(c:geoの再起動が必要)</string>
   <string name="init_exclude">自分で所有または見つけたキャッシュは除く</string>
-  <string name="init_showwaypoints">オンライン地図でウェイポイントの表示</string>
+  <string name="init_showwaypoints">地図でウェイポイントの表示</string>
   <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示します。</string>
   <string name="init_disabled">無効化キャッシュは除く</string>
   <string name="init_offline">オフライン用にキャッシュの地図を保存</string>

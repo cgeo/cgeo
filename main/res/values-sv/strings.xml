@@ -381,8 +381,8 @@
   <string name="init_captcha">Visa CAPTCHA (robotfällor) vid behov (enbart för Basic Member)</string>
   <string name="init_useenglish">Använd engelska i c:geo (kräver omstart)</string>
   <string name="init_exclude">Dölj egna och hittade cacher</string>
-  <string name="init_showwaypoints">Extra punkter på Live kartan</string>
-  <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i Live kartan. Bör vara mellan 5 och 50.</string>
+  <string name="init_showwaypoints">Extra punkter på kartan</string>
+  <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan. Bör vara mellan 5 och 50.</string>
   <string name="init_disabled">Dölj inaktiva cacher</string>
   <string name="init_offline">Spara kartor för cacher för användning offline</string>
   <string name="init_offline_wp">Spara kartor för extra punkter för användning offline</string>
