@@ -373,7 +373,7 @@
   <string name="init_captcha">Mostrar CAPTCHA se necessário</string>
   <string name="init_useenglish">Utilizar inglês no c:geo\n(necessário reiniciar)</string>
   <string name="init_exclude">Excluir caches encontradas e minhas</string>
-  <string name="init_showwaypoints">Mostrar Waypoints no mapa ao vivo</string>
+  <string name="init_showwaypoints">Mostrar Waypoints no mapa</string>
   <string name="init_showwaypoint_description">Se menos do que o número de caches encontradas são mostradas no mapa, os seus waypoints são mostrados adicionalmente.</string>
   <string name="init_disabled">Excluir caches desactivadas</string>
   <string name="init_offline">Armazenar a cache de mapas estáticos para utilização offline</string>
