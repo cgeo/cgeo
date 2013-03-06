@@ -146,7 +146,7 @@
   <string name="err_wrong">Felaktiga inloggningsuppgifter</string>
   <string name="err_maintenance">Arbete pågår med servern Geocaching.com. c:geo fungerar under tiden i offline läge med sparade cacher.</string>
   <string name="err_license">Du har inte bekräftat licensavtalet med Geocaching.com, så c:geo kan inte läsa in koordinater för cacherna.</string>
-  <string name="err_unvalidated_account">Du måste verifiera ditt konto på Geocaching.com's hemsida först.</string>
+  <string name="err_unvalidated_account">Du måste verifiera ditt konto på Geocaching.com\'s hemsida först.</string>
   <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
   <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com.</string>
   <string name="err_detail_open">Tyvärr kan c:geo inte visa detaljer om geocachen.</string>
