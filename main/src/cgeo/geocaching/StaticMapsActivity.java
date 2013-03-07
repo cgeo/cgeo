@@ -134,7 +134,8 @@ public class StaticMapsActivity extends AbstractActivity {
                     for (int level = 1; level <= 5; level++) {
                         try {
                             if (waypoint_id != null) {
-                                final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, waypoint_id, level);
+                                final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                                final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypoint_id), level);
                                 if (image != null) {
                                     maps.add(image);
                                 }
@@ -186,8 +187,10 @@ public class StaticMapsActivity extends AbstractActivity {
         final Waypoint waypoint = cache.getWaypointById(waypoint_id);
         if (waypoint != null) {
             showToast(res.getString(R.string.info_storing_static_maps));
+            // refresh always removes old waypoint files
+            StaticMapsProvider.removeWpStaticMaps(waypoint, geocode);
             StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, true);
-            return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint_id);
+            return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));
         return false;
