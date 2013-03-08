@@ -24,7 +24,9 @@ import java.util.regex.Pattern;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort {
 
-    private static final String HTTP_COORD_INFO = "http://coord.info/";
+    private static final String CACHE_URL_SHORT = "http://coord.info/";
+    // Double slash is used to force open in browser
+    private static final String CACHE_URL_LONG = "http://www.geocaching.com//seek/cache_details.aspx?wp=";
     private static final Pattern gpxZipFilePattern = Pattern.compile("\\d{7,}(_.+)?\\.zip", Pattern.CASE_INSENSITIVE);
 
     private GCConnector() {
@@ -51,9 +53,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public String getLongCacheUrl(Geocache cache) {
+        return CACHE_URL_LONG + cache.getGeocode();
+    }
+
+    @Override
     public String getCacheUrl(Geocache cache) {
-        // it would also be possible to use "http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode();
-        return "http://www.geocaching.com//seek/cache_details.aspx?wp=" + cache.getGeocode();
+        return CACHE_URL_SHORT + cache.getGeocode();
     }
 
     @Override
@@ -224,7 +230,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     protected String getCacheUrlPrefix() {
-        return HTTP_COORD_INFO;
+        return CACHE_URL_SHORT;
     }
 
     @Override

@@ -516,11 +516,15 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void openInBrowser(Activity fromActivity) {
-        fromActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getCacheUrl())));
+        fromActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getBrowserCacheUrl())));
     }
 
     private String getCacheUrl() {
         return getConnector().getCacheUrl(this);
+    }
+
+    private String getBrowserCacheUrl() {
+        return getConnector().getLongCacheUrl(this);
     }
 
     private IConnector getConnector() {

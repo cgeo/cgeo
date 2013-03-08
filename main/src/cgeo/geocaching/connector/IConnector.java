@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -28,6 +28,14 @@ public interface IConnector {
      * @return
      */
     public String getCacheUrl(final Geocache cache);
+
+    /**
+     * get long browser URL for the given cache
+     *
+     * @param cache
+     * @return
+     */
+    public String getLongCacheUrl(final Geocache cache);
 
     /**
      * enable/disable watchlist controls in cache details
