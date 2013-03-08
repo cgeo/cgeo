@@ -9,7 +9,7 @@
 	<classpathentry exported="true" kind="lib" path="libs/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="libs/locus-api-4.0.jar"/>
 	<classpathentry kind="lib" path="libs/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="libs/android-support-v4.jar" sourcepath="D:/Program Files (x86)/Android/android-sdk/extras/android/support/v4/src/java"/>
+	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry kind="lib" path="libs/mapsforge-map-0.3.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="libs/mapsforge-map-0.2.4.jar"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
