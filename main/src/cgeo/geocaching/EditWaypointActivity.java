@@ -488,11 +488,18 @@ public class EditWaypointActivity extends AbstractActivity {
                     waypoint.setId(id);
 
                     Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-                    if (null != cache && cache.addOrChangeWaypoint(waypoint, true)) {
+                    if (cache == null) {
+                        finishHandler.sendEmptyMessage(SAVE_ERROR);
+                        return null;
+                    }
+                    Waypoint oldWaypoint = cache.getWaypointById(id);
+                    if (cache.addOrChangeWaypoint(waypoint, true)) {
                         cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-                        StaticMapsProvider.removeWpStaticMaps(id, geocode);
-                        if (Settings.isStoreOfflineWpMaps()) {
-                            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
+                        if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode, waypoint)) {
+                            StaticMapsProvider.removeWpStaticMaps(oldWaypoint, geocode);
+                            if (Settings.isStoreOfflineWpMaps()) {
+                                StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
+                            }
                         }
                         final RadioButton modifyLocal = (RadioButton) findViewById(R.id.modify_cache_coordinates_local);
                         final RadioButton modifyBoth = (RadioButton) findViewById(R.id.modify_cache_coordinates_local_and_remote);

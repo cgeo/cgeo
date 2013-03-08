@@ -1,11 +1,11 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ILogable;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StaticMapsActivity;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
@@ -34,9 +34,8 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
             return false;
         }
         String geocode = waypoint.getGeocode();
-        int id = waypoint.getId();
         if (StringUtils.isNotEmpty(geocode) && cgData.isOffline(geocode, null)) {
-            return StaticMapsProvider.hasStaticMapForWaypoint(geocode, id);
+            return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
         return false;
     }
