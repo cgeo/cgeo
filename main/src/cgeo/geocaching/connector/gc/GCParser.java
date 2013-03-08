@@ -24,6 +24,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DirectionImage;
@@ -62,7 +63,7 @@ public abstract class GCParser {
     private final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
     private final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 
-    private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha) {
+    private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha, RecaptchaReceiver thread) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("GCParser.parseSearch: No page given");
             return null;
@@ -76,7 +77,6 @@ public abstract class GCParser {
         searchResult.viewstates = Login.getViewstates(page);
 
         // recaptcha
-        AbstractSearchThread thread = AbstractSearchThread.getCurrentInstance();
         String recaptchaChallenge = null;
         if (showCaptcha) {
             String recaptchaJsParam = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_RECAPTCHA, false, null);
@@ -702,7 +702,7 @@ public abstract class GCParser {
         return searchResult;
     }
 
-    public static SearchResult searchByNextPage(final SearchResult search, boolean showCaptcha) {
+    public static SearchResult searchByNextPage(final SearchResult search, boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (search == null) {
             return search;
         }
@@ -739,7 +739,7 @@ public abstract class GCParser {
             return search;
         }
 
-        final SearchResult searchResult = parseSearch(url, page, showCaptcha);
+        final SearchResult searchResult = parseSearch(url, page, showCaptcha, recaptchaReceiver);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByNextPage: No cache parsed");
             return search;
@@ -784,9 +784,10 @@ public abstract class GCParser {
      * @param showCaptcha
      * @param params
      *            the parameters to add to the request URI
+     * @param recaptchaReceiver
      * @return
      */
-    private static SearchResult searchByAny(final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params) {
+    private static SearchResult searchByAny(final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params, RecaptchaReceiver recaptchaReceiver) {
         insertCacheType(params, cacheType);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
@@ -798,7 +799,7 @@ public abstract class GCParser {
             return null;
         }
 
-        final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha);
+        final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha, recaptchaReceiver);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e("GCParser.searchByAny: No cache parsed");
             return searchResult;
@@ -811,22 +812,22 @@ public abstract class GCParser {
         return search;
     }
 
-    public static SearchResult searchByCoords(final Geopoint coords, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByCoords(final Geopoint coords, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(cacheType, false, showCaptcha, params);
+        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByKeyword(final String keyword, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByKeyword(final String keyword, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("GCParser.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        return searchByAny(cacheType, false, showCaptcha, params);
+        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByUsername(final String userName, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByUsername(final String userName, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
             return null;
@@ -840,20 +841,20 @@ public abstract class GCParser {
             Log.i("GCParser.searchByUsername: Overriding users choice, downloading all caches.");
         }
 
-        return searchByAny(cacheType, my, showCaptcha, params);
+        return searchByAny(cacheType, my, showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByOwner(final String userName, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByOwner(final String userName, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", userName);
-        return searchByAny(cacheType, false, showCaptcha, params);
+        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByAddress(final String address, final CacheType cacheType, final boolean showCaptcha) {
+    public static SearchResult searchByAddress(final String address, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(address)) {
             Log.e("GCParser.searchByAddress: No address given");
             return null;
@@ -873,7 +874,7 @@ public abstract class GCParser {
             if (data == null) {
                 return null;
             }
-            return searchByCoords(new Geopoint(data.getDouble("lat"), data.getDouble("lng")), cacheType, showCaptcha);
+            return searchByCoords(new Geopoint(data.getDouble("lat"), data.getDouble("lng")), cacheType, showCaptcha, recaptchaReceiver);
         } catch (JSONException e) {
             Log.w("GCParser.searchByAddress", e);
         }

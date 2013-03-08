@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.AbstractSearchThread;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.connector.gc.Tile;
@@ -222,7 +221,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final SearchResult search = GCParser.searchByCoords(new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, false);
+                final SearchResult search = GCParser.searchByCoords(new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, false, null);
                 assertNotNull(search);
                 assertTrue(20 <= search.getGeocodes().size());
                 assertTrue(search.getGeocodes().contains("GC1RMM2"));
@@ -239,7 +238,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY, false);
+                final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY, false, null);
                 assertNotNull(search);
                 assertEquals(3, search.getGeocodes().size());
                 assertTrue(search.getGeocodes().contains("GC36RT6"));
@@ -256,7 +255,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM, false);
+                final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM, false, null);
                 assertNotNull(search);
                 assertEquals(3, search.getTotal());
                 assertTrue(search.getGeocodes().contains("GCP0A9"));

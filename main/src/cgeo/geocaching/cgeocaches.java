@@ -7,10 +7,6 @@ import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.capability.ISearchByCenter;
-import cgeo.geocaching.connector.gc.AbstractSearchThread;
-import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.SearchHandler;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -21,6 +17,16 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.loaders.AbstractSearchLoader;
+import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
+import cgeo.geocaching.loaders.AddressGeocacheListLoader;
+import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
+import cgeo.geocaching.loaders.HistoryGeocacheListLoader;
+import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
+import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
+import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
+import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
+import cgeo.geocaching.loaders.UsernameGeocacheListLoader;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
@@ -47,10 +53,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -70,8 +79,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class cgeocaches extends AbstractListActivity implements FilteredActivity {
+public class cgeocaches extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
+    private static final String EXTRA_CACHELIST = "CACHELIST";
     private static final int MAX_LIST_ITEMS = 1000;
     private static final int MENU_REFRESH_STORED = 2;
     private static final int MENU_CACHE_DETAILS = 4;
@@ -120,12 +130,12 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private long detailProgressTime = 0L;
     private LoadDetailsThread threadDetails = null;
     private LoadFromWebThread threadWeb = null;
-    private int listId = StoredList.TEMPORARY_LIST_ID;  // Only meaningful for the OFFLINE type
+    private int listId = StoredList.TEMPORARY_LIST_ID; // Only meaningful for the OFFLINE type
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
         public void updateGeoData(final IGeoData geo) {
-           if (geo.getCoords() != null) {
+            if (geo.getCoords() != null) {
                 adapter.setActualCoordinates(geo.getCoords());
             }
             if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
@@ -145,7 +155,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
         }
 
-	};
+    };
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     /**
@@ -237,42 +247,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
     }
 
-    private Handler loadNextPageHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            try {
-                replaceCacheListFromSearch();
-                setAdapter();
-
-                updateTitle();
-
-                showFooterMoreCaches();
-
-                if (search != null && search.getError() != null) {
-                    showToast(res.getString(R.string.err_download_fail) + " " + search.getError().getErrorString(res) + ".");
-
-                    listFooter.setOnClickListener(new MoreCachesListener());
-                    hideLoading();
-                    showProgress(false);
-
-                    finish();
-                    return;
-                }
-
-                setAdapterCurrentCoordinates(false);
-            } catch (Exception e) {
-                showToast(res.getString(R.string.err_detail_cache_find_next));
-                Log.e("cgeocaches.loadNextPageHandler", e);
-            }
-
-            hideLoading();
-            showProgress(false);
-
-            adapter.setSelectMode(false);
-        }
-    };
-
     /**
      * Loads the caches and fills the {@link #cacheList} according to {@link #search} content.
      *
@@ -332,8 +306,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 progress.setProgress(detailProgress);
                 if (minutesRemaining < 1) {
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-                } else  {
-                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getQuantityString(R.plurals.caches_eta_mins,minutesRemaining));
+                } else {
+                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getQuantityString(R.plurals.caches_eta_mins, minutesRemaining));
                 }
             } else if (msg.what == MSG_CANCEL) {
                 if (threadDetails != null) {
@@ -413,24 +387,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
         }
     };
-    private Handler removeFromHistoryHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            setAdapter();
-
-            if (msg.what > -1) {
-                progress.setProgress(detailProgress);
-            } else {
-                adapter.setSelectMode(false);
-
-                // reload history list
-                (new LoadByHistoryThread()).start();
-
-                progress.dismiss();
-            }
-        }
-    };
 
     private Handler importGpxAttachementFinishedHandler = new Handler() {
         @Override
@@ -438,6 +394,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             refreshCurrentList();
         }
     };
+    private AbstractSearchLoader currentLoader;
 
     public cgeocaches() {
         super(true);
@@ -467,137 +424,36 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
         }
 
+        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(type.ordinal(), extras, this);
+
         // init
         if (CollectionUtils.isNotEmpty(cacheList)) {
-            showFooterMoreCaches();
+            if (currentLoader.isStarted())
+            {
+                showFooterLoadingCaches();
+            }
+            else
+            {
+                showFooterMoreCaches();
+            }
         }
 
         setTitle(title);
         setAdapter();
 
-        Thread threadPure;
-        AbstractSearchThread thread;
-
-        final String username = extras.getString(Intents.EXTRA_USERNAME);
-        switch (type) {
-            case OFFLINE:
-                listId = Settings.getLastList();
-                if (listId <= StoredList.TEMPORARY_LIST_ID) {
-                    listId = StoredList.STANDARD_LIST_ID;
-                    title = res.getString(R.string.stored_caches_button);
-                } else {
-                    final StoredList list = cgData.getList(listId);
-                    // list.id may be different if listId was not valid
-                    listId = list.id;
-                    title = list.title;
-                }
-
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                threadPure = new LoadByOfflineThread(coords, listId);
-                threadPure.start();
-
-                break;
-            case HISTORY:
-                title = res.getString(R.string.caches_history);
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                threadPure = new LoadByHistoryThread();
-                threadPure.start();
-                break;
-            case NEAREST:
-                title = res.getString(R.string.caches_nearby);
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                thread = new LoadByCoordsThread(coords);
-                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
-                thread.start();
-                break;
-            case COORDINATE:
-                title = coords.toString();
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                thread = new LoadByCoordsThread(coords);
-                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
-                thread.start();
-                break;
-            case KEYWORD:
-                final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
-                title = keyword;
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                thread = new LoadByKeywordThread(keyword);
-                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
-                thread.start();
-                break;
-            case ADDRESS:
-                final String address = extras.getString(Intents.EXTRA_ADDRESS);
-                if (StringUtils.isNotBlank(address)) {
-                    title = address;
-                } else {
-                    title = coords.toString();
-                }
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                if (coords != null) {
-                    thread = new LoadByCoordsThread(coords);
-                }
-                else {
-                    thread = new LoadByAddressThread(address);
-                }
-                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
-                thread.start();
-                break;
-            case USERNAME:
-                title = username;
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                thread = new LoadByUserNameThread(username);
-                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
-                thread.start();
-                break;
-            case OWNER:
-                title = username;
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                thread = new LoadByOwnerThread(username);
-                thread.setRecaptchaHandler(new SearchHandler(this, res, thread));
-                thread.start();
-                break;
-            case MAP:
-                title = res.getString(R.string.map_map);
-                setTitle(title);
-                showProgress(true);
-                search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
-                replaceCacheListFromSearch();
-                loadCachesHandler.sendMessage(Message.obtain());
-                break;
-            default:
-                title = "caches";
-                setTitle(title);
-                Log.e("cgeocaches.onCreate: No action or unknown action specified");
-                break;
-        }
         prepareFilterBar();
 
         if (isInvokedFromAttachment()) {
             importGpxAttachement();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (currentLoader.isLoading())
+        {
+            showFooterLoadingCaches();
         }
     }
 
@@ -1158,14 +1014,14 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     }
 
     private void startGeoAndDir() {
-	geoDirHandler.startGeo();
-	if (Settings.isLiveMap()) {
-	    geoDirHandler.startDir();
-	}
+        geoDirHandler.startGeo();
+        if (Settings.isLiveMap()) {
+            geoDirHandler.startDir();
+        }
     }
 
     private void removeGeoAndDir() {
-	geoDirHandler.stopGeoAndDir();
+        geoDirHandler.stopGeoAndDir();
     }
 
     private void importGpx() {
@@ -1208,7 +1064,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         if (etaTime < 1) {
             message = res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
         } else {
-            message = res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getQuantityString(R.plurals.caches_eta_mins,etaTime);
+            message = res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getQuantityString(R.plurals.caches_eta_mins, etaTime);
         }
 
         progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.obtainMessage(MSG_CANCEL));
@@ -1245,14 +1101,14 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     }
 
     public void removeFromHistory() {
-        detailTotal = adapter.getCheckedOrAllCount();
-        detailProgress = 0;
+        ArrayList<String> geocodes = new ArrayList<String>(adapter.getCheckedOrAllCaches().size());
+        for (Geocache cache : adapter.getCheckedOrAllCaches()) {
+            geocodes.add(cache.getGeocode());
+        }
 
-        showProgress(false);
-        progress.show(this, null, res.getString(R.string.caches_removing_from_history), ProgressDialog.STYLE_HORIZONTAL, removeFromHistoryHandler.obtainMessage(MSG_CANCEL));
-        progress.setMaxProgressAndReset(detailTotal);
-
-        new RemoveFromHistoryThread(removeFromHistoryHandler).start();
+        Bundle b = new Bundle();
+        b.putStringArray(EXTRA_CACHELIST, geocodes.toArray(new String[geocodes.size()]));
+        getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.ordinal(), b, this);
     }
 
     public void importWeb() {
@@ -1301,128 +1157,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     public void dropSelected() {
         progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
         new DropDetailsThread(dropDetailsHandler, adapter.getCheckedOrAllCaches()).start();
-    }
-
-    private class LoadByOfflineThread extends Thread {
-        final private Geopoint coords;
-        final private int listId;
-
-        public LoadByOfflineThread(final Geopoint coordsIn, int listIdIn) {
-            coords = coordsIn;
-            listId = listIdIn;
-        }
-
-        @Override
-        public void run() {
-            search = cgData.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
-            replaceCacheListFromSearch();
-            loadCachesHandler.sendMessage(Message.obtain());
-        }
-    }
-
-    private class LoadByHistoryThread extends Thread {
-        @Override
-        public void run() {
-            search = cgData.getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
-            replaceCacheListFromSearch();
-            loadCachesHandler.sendMessage(Message.obtain());
-        }
-    }
-
-    private class LoadNextPageThread extends AbstractSearchThread {
-        public LoadNextPageThread() {
-            super(loadNextPageHandler);
-        }
-
-        @Override
-        public void runSearch() {
-            search = GCParser.searchByNextPage(search, Settings.isShowCaptcha());
-        }
-    }
-
-    private class LoadByCoordsThread extends AbstractSearchThread {
-        final private Geopoint coords;
-
-        public LoadByCoordsThread(final Geopoint coords) {
-            super(loadCachesHandler);
-            this.coords = coords;
-        }
-
-        @Override
-        public void runSearch() {
-
-            search = GCParser.searchByCoords(coords, Settings.getCacheType(), Settings.isShowCaptcha());
-
-            for (ISearchByCenter centerConn : ConnectorFactory.getSearchByCenterConnectors()) {
-                if (centerConn.isActivated()) {
-                    SearchResult temp = centerConn.searchByCenter(coords);
-                    if (temp != null) {
-                        search.addGeocodes(temp.getGeocodes());
-                    }
-                }
-            }
-            replaceCacheListFromSearch();
-        }
-    }
-
-    private class LoadByKeywordThread extends AbstractSearchThread {
-        final private String keyword;
-
-        public LoadByKeywordThread(final String keyword) {
-            super(loadCachesHandler);
-            this.keyword = keyword;
-        }
-
-        @Override
-        public void runSearch() {
-            search = GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha());
-            replaceCacheListFromSearch();
-        }
-    }
-
-    private class LoadByUserNameThread extends AbstractSearchThread {
-        final private String username;
-
-        public LoadByUserNameThread(final String username) {
-            super(loadCachesHandler);
-            this.username = username;
-        }
-
-        @Override
-        public void runSearch() {
-            search = GCParser.searchByUsername(username, Settings.getCacheType(), Settings.isShowCaptcha());
-            replaceCacheListFromSearch();
-        }
-    }
-
-    private class LoadByOwnerThread extends AbstractSearchThread {
-        final private String username;
-
-        public LoadByOwnerThread(final String username) {
-            super(loadCachesHandler);
-            this.username = username;
-        }
-
-        @Override
-        public void runSearch() {
-            search = GCParser.searchByOwner(username, Settings.getCacheType(), Settings.isShowCaptcha());
-            replaceCacheListFromSearch();
-        }
-    }
-
-    private class LoadByAddressThread extends AbstractSearchThread {
-        final private String address;
-
-        public LoadByAddressThread(final String address) {
-            super(loadCachesHandler);
-            this.address = address;
-        }
-
-        @Override
-        public void runSearch() {
-            search = GCParser.searchByAddress(address, Settings.getCacheType(), Settings.isShowCaptcha());
-            replaceCacheListFromSearch();
-        }
     }
 
     /**
@@ -1627,23 +1361,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
     }
 
-    private class RemoveFromHistoryThread extends Thread {
-
-        final private Handler handler;
-        final private List<Geocache> selected;
-
-        public RemoveFromHistoryThread(Handler handlerIn) {
-            handler = handlerIn;
-            selected = adapter.getCheckedOrAllCaches();
-        }
-
-        @Override
-        public void run() {
-            cgData.clearVisitDate(selected);
-            handler.sendEmptyMessage(MSG_DONE);
-        }
-    }
-
     private class MoreCachesListener implements View.OnClickListener {
 
         @Override
@@ -1652,9 +1369,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             showFooterLoadingCaches();
             listFooter.setOnClickListener(null);
 
-            final LoadNextPageThread thread = new LoadNextPageThread();
-            thread.setRecaptchaHandler(new SearchHandler(cgeocaches.this, res, thread));
-            thread.start();
+            currentLoader.startLoading();
+            //            currentLoader.forceLoad();
         }
     }
 
@@ -1701,40 +1417,14 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         showProgress(true);
         showFooterLoadingCaches();
+        final List<Geocache> caches = adapter.getCheckedCaches();
+        cgData.moveToList(caches, listId);
 
-        (new MoveCachesToListThread(listId, new MoveHandler())).start();
+        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(), new Bundle(), this);
+        currentLoader.reset();
+        currentLoader.startLoading();
+
         invalidateOptionsMenuCompatible();
-    }
-
-    /**
-     * TODO Possible refactoring. IMO The Handler is obsolete
-     * @author keith.paterson
-     *
-     */
-
-    private class MoveHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            Thread threadPure = new LoadByOfflineThread(coords, msg.what);
-            threadPure.start();
-        }
-    }
-
-    private class MoveCachesToListThread extends Thread {
-        final private int listId;
-        final private Handler handler;
-
-        public MoveCachesToListThread(int listIdIn, Handler handlerIn) {
-            listId = listIdIn;
-            handler = handlerIn;
-        }
-
-        @Override
-        public void run() {
-            final List<Geocache> caches = adapter.getCheckedCaches();
-            cgData.moveToList(caches, listId);
-            handler.sendEmptyMessage(listId);
-        }
     }
 
     private void renameList() {
@@ -1970,4 +1660,153 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         cachesIntent.putExtra(Intents.EXTRA_SEARCH, search);
         context.startActivity(cachesIntent);
     }
+
+    // Loaders
+
+    @Override
+    public Loader<SearchResult> onCreateLoader(int type, Bundle extras) {
+        AbstractSearchLoader loader = null;
+        CacheListLoaderType enumType = CacheListLoaderType.values()[type];
+        final String username = extras.getString(Intents.EXTRA_USERNAME);
+        switch (enumType) {
+            case OFFLINE:
+                listId = Settings.getLastList();
+                if (listId <= StoredList.TEMPORARY_LIST_ID) {
+                    listId = StoredList.STANDARD_LIST_ID;
+                    title = res.getString(R.string.stored_caches_button);
+                } else {
+                    final StoredList list = cgData.getList(listId);
+                    // list.id may be different if listId was not valid
+                    listId = list.id;
+                    title = list.title;
+                }
+
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                loader = new OfflineGeocacheListLoader(this.getBaseContext(), coords, listId);
+
+                break;
+            case HISTORY:
+                title = res.getString(R.string.caches_history);
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                loader = new HistoryGeocacheListLoader(app, coords);
+                break;
+            case NEAREST:
+                title = res.getString(R.string.caches_nearby);
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                loader = new CoordsGeocacheListLoader(app, coords);
+                break;
+            case COORDINATE:
+                title = coords.toString();
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                loader = new CoordsGeocacheListLoader(app, coords);
+                break;
+            case KEYWORD:
+                final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
+                title = keyword;
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                loader = new KeywordGeocacheListLoader(app, keyword);
+                break;
+            case ADDRESS:
+                final String address = extras.getString(Intents.EXTRA_ADDRESS);
+                if (StringUtils.isNotBlank(address)) {
+                    title = address;
+                } else {
+                    title = coords.toString();
+                }
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                if (coords != null) {
+                    loader = new CoordsGeocacheListLoader(app, coords);
+                    }
+                else {
+                    loader = new AddressGeocacheListLoader(app, address);
+                }
+                break;
+            case USERNAME:
+                title = username;
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                loader = new UsernameGeocacheListLoader(app, username);
+                break;
+            case OWNER:
+                title = username;
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                loader = new OwnerGeocacheListLoader(app, username);
+                break;
+            case MAP:
+                //TODO Build Nullloader
+                title = res.getString(R.string.map_map);
+                setTitle(title);
+                showProgress(true);
+                search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
+                replaceCacheListFromSearch();
+                loadCachesHandler.sendMessage(Message.obtain());
+                break;
+            case REMOVE_FROM_HISTORY:
+                title = res.getString(R.string.caches_history);
+                setTitle(title);
+                showProgress(true);
+                showFooterLoadingCaches();
+
+                loader = new RemoveFromHistoryLoader(app, extras.getStringArray(EXTRA_CACHELIST), coords);
+                break;
+
+            default:
+                title = "caches";
+                setTitle(title);
+                Log.e("cgeocaches.onCreate: No action or unknown action specified");
+                break;
+        }
+        if (loader != null) {
+            loader.setRecaptchaHandler(new SearchHandler(this, res, loader));
+        }
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<SearchResult> arg0, SearchResult searchIn) {
+        // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
+        // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
+        if (searchIn != null)
+        {
+            cacheList.clear();
+            final Set<Geocache> cachesFromSearchResult = searchIn.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+            cacheList.addAll(cachesFromSearchResult);
+            search = searchIn;
+            adapter.reFilter();
+            updateTitle();
+            showFooterMoreCaches();
+        }
+        showProgress(false);
+        hideLoading();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<SearchResult> arg0) {
+        // TODO Auto-generated method stub
+
+    }
 }
+

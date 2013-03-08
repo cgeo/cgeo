@@ -2896,10 +2896,10 @@ public class cgData {
         return cgData.getBounds(Collections.singleton(geocode));
     }
 
-    public static void clearVisitDate(List<Geocache> caches) {
-        ArrayList<String> geocodes = new ArrayList<String>(caches.size());
-        for (Geocache cache : caches) {
-            geocodes.add(cache.getGeocode());
+    public static void clearVisitDate(String[] selected) {
+        ArrayList<String> geocodes = new ArrayList<String>();
+        for (int i = 0; i < selected.length; i++) {
+            geocodes.add(selected[i]);
         }
         setVisitDate(geocodes, 0);
     }
