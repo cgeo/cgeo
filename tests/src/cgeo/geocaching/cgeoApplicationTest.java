@@ -405,11 +405,6 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
-    private static void deleteCacheFromDB(String geocode) {
-        cgData.removeCache(geocode, LoadFlags.REMOVE_ALL);
-    }
-
-    /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
     private static void deleteCacheFromDBAndLogout(String geocode) {
         deleteCacheFromDB(geocode);
 

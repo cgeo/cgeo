@@ -1,9 +1,8 @@
-package cgeo.geocaching.connector.opencaching;
+package cgeo.geocaching.connector.oc;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.connector.oc.OCXMLClient;
 import cgeo.geocaching.enumerations.CacheType;
 
 import java.util.Collection;
@@ -79,5 +78,46 @@ public class OCXMLTest extends CGeoTestCase {
             Settings.setExcludeDisabledCaches(oldExcludeDisabled);
             Settings.setExcludeMine(oldExcludeMine);
         }
+    }
+
+    public static void testFetchTwiceDuplicatesDescription() {
+        final String geoCode = "OCEFBA";
+        final String description = "Bei dem Cache kannst du einen kleinen Schatz bergen. Bitte lege aber einen ander Schatz in das Döschen. Achtung vor Automuggels.";
+
+        deleteCacheFromDB(geoCode);
+        Geocache cache = OCXMLClient.getCache(geoCode);
+        assertNotNull(cache);
+        try {
+            assertEquals(geoCode, cache.getGeocode());
+            assertEquals(description, cache.getDescription());
+            cache.store(null);
+
+            // reload, make sure description is not duplicated
+            cache = OCXMLClient.getCache(geoCode);
+            assertNotNull(cache);
+            assertEquals(description, cache.getDescription());
+        } finally {
+            deleteCacheFromDB(geoCode);
+        }
+    }
+
+    public static void testRemoveMarkupCache() {
+        final String geoCode = "OCEFBA";
+        final String description = "Bei dem Cache kannst du einen kleinen Schatz bergen. Bitte lege aber einen ander Schatz in das Döschen. Achtung vor Automuggels.";
+
+        Geocache cache = OCXMLClient.getCache(geoCode);
+        assertNotNull(cache);
+        assertEquals(description, cache.getDescription());
+    }
+
+    public static void testRemoveMarkup() {
+        assertEquals("", OC11XMLParser.stripMarkup(""));
+        assertEquals("Test", OC11XMLParser.stripMarkup("Test"));
+        assertEquals("<b>bold and others not removed</b>", OC11XMLParser.stripMarkup("<b>bold and others not removed</b>"));
+        assertEquals("unnecessary paragraph", OC11XMLParser.stripMarkup("<p>unnecessary paragraph</p>"));
+        assertEquals("unnecessary span", OC11XMLParser.stripMarkup("<span>unnecessary span</span>"));
+        assertEquals("nested", OC11XMLParser.stripMarkup("<span><span>nested</span></span>"));
+        assertEquals("mixed", OC11XMLParser.stripMarkup("<span> <p> mixed </p> </span>"));
+        assertEquals("<p>not</p><p>removable</p>", OC11XMLParser.stripMarkup("<p>not</p><p>removable</p>"));
     }
 }

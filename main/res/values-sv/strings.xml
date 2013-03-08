@@ -85,6 +85,7 @@
   <string name="log_tb_changeall">Ändra alla</string>
   <string name="log_save">Spara</string>
   <string name="log_saving">Sparar logg…</string>
+  <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
   <string name="log_post">Posta logg</string>
   <string name="log_post_rate">Posta logg &amp; ge betyget</string>
@@ -118,6 +119,13 @@
   <string name="log_today">Idag</string>
   <string name="log_yesterday">Igår</string>
   <string name="log_smilies">Smileys</string>
+  <string name="log_image">Bild</string>
+  <string name="log_image_attach">Lägg till bild</string>
+  <string name="log_image_edit">Redigera bild</string>
+  <string name="log_image_stored">Från fil</string>
+  <string name="log_image_camera">Ny</string>
+  <string name="log_image_caption">Bildtext</string>
+  <string name="log_image_description">Beskrivning</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Översätt till %s</string>
@@ -138,6 +146,7 @@
   <string name="err_wrong">Felaktiga inloggningsuppgifter</string>
   <string name="err_maintenance">Arbete pågår med servern Geocaching.com. c:geo fungerar under tiden i offline läge med sparade cacher.</string>
   <string name="err_license">Du har inte bekräftat licensavtalet med Geocaching.com, så c:geo kan inte läsa in koordinater för cacherna.</string>
+  <string name="err_unvalidated_account">Du måste verifiera ditt konto på Geocaching.com\'s hemsida först.</string>
   <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
   <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com.</string>
   <string name="err_detail_open">Tyvärr kan c:geo inte visa detaljer om geocachen.</string>
@@ -166,6 +175,8 @@
   <string name="err_missing_device_name">Vänligen ange ett namn för din enhet innan registering.</string>
   <string name="err_favorite_failed">Misslyckades att ändra favoritstatus.</string>
 
+  <string name="err_select_logimage_failed">Misslyckades att välja bild till loggen.</string>
+  <string name="err_aquire_image_failed">Hämtning av bilden misslyckades.</string>
   <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
   <string name="err_tb_forgot_saw">Tyvärr glömde c:geo vilken trackable du såg.</string>
@@ -187,6 +198,7 @@
   <string name="err_log_load_data_still">c:geo laddar fortfarande data för att kunna posta loggen. Vänligen vänta en stund till.</string>
   <string name="err_log_failed_server">Tyvärr misslyckades c:geo att posta loggen eftersom servern inte svarade.</string>
   <string name="err_log_post_failed">Tyvärr misslyckades c:geo att posta loggen.</string>
+  <string name="err_logimage_post_failed">Det verkar som om din bild till loggen inte kunde laddas upp. Vänligen kontrollera den på Geocaching.com.</string>
 
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
   <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
@@ -216,6 +228,8 @@
   <string name="info_log_saved">c:geo har sparat din logg.</string>
   <string name="info_log_cleared">Loggen har rensats.</string>
   <string name="info_log_type_changed">Typen av logg har ändrats!</string>
+  <string name="info_select_logimage_cancelled">Val av bild avbröts.</string>
+  <string name="info_stored_image">Ny bild sparad som:</string>
 
   <string name="info_storing_static_maps">Försöker ladda ner statiska kartor</string>
 
@@ -268,6 +282,7 @@
   <string name="caches_sort_size">Storlek</string>
   <string name="caches_sort_favorites">Favoriter</string>
   <string name="caches_sort_name">Namn</string>
+  <string name="caches_sort_geocode">Geo kod</string>
   <string name="caches_sort_rating">Betyg (GC-vote)</string>
   <string name="caches_sort_vote">Betyg (eget)</string>
   <string name="caches_sort_inventory">Antal trackable</string>
@@ -306,7 +321,10 @@
   <string name="caches_filter_track">Med trackables</string>
   <string name="caches_filter_clear">Rensa filter</string>
   <string name="caches_filter_modified">Med tillagda koordinater</string>
+  <string name="caches_filter_origin">Ursprung</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
+  <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
+  <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
 
   <!-- caches lists -->
   <string name="list_menu">Listor</string>
@@ -341,6 +359,7 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gc_activate">Aktivera Geocaching.com i live-kartor och sökningar</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Aktivera opencaching.de i live-kartor och sökningar</string>
   <string name="init_oc_username_description">Ange användarnamn till opencaching.de för att kunna markera dina hittade cacher.</string>
@@ -381,14 +400,15 @@
   <string name="init_captcha">Visa CAPTCHA (robotfällor) vid behov (enbart för Basic Member)</string>
   <string name="init_useenglish">Använd engelska i c:geo (kräver omstart)</string>
   <string name="init_exclude">Dölj egna och hittade cacher</string>
-  <string name="init_showwaypoints">Extra punkter på Live kartan</string>
-  <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i Live kartan. Bör vara mellan 5 och 50.</string>
+  <string name="init_showwaypoints">Extra punkter på kartan</string>
+  <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan. Bör vara mellan 5 och 50.</string>
   <string name="init_disabled">Dölj inaktiva cacher</string>
   <string name="init_offline">Spara kartor för cacher för användning offline</string>
   <string name="init_offline_wp">Spara kartor för extra punkter för användning offline</string>
   <string name="init_save_log_img">Spara bilder från loggar</string>
   <string name="init_units">Använd amerikanska enheter för avstånd</string>
   <string name="init_log_offline">Vid loggning: spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
+  <string name="init_choose_list">Fråga efter lista när cacher sparas</string>
   <string name="init_livelist">Visa riktning till cacher i listan</string>
   <string name="init_altitude">Höjd justering</string>
   <string name="init_altitude_description">Det är möjligt att justera höjden över havet om din GPS visar fel. Detta görs med ett positivt eller negativt tal, angivet i meter.</string>
@@ -508,6 +528,9 @@
   <string name="cache_favpoint_not_on">Den här cachen är inte en av dina favoriter.</string>
   <string name="cache_favpoint_add">Lägg till</string>
   <string name="cache_favpoint_remove">Ta bort</string>
+  <string name="cache_list_text">Lista:</string>
+  <string name="cache_list_change">Flytta</string>
+  <string name="cache_list_unknown">Ej i någon lista</string>
   <string name="cache_images">Bilder</string>
 
   <string name="cache_waypoints">Punkter</string>
@@ -605,6 +628,7 @@
   <string name="cache_image_open_browser">Öppna i webbläsare</string>
   <string name="cache_share_field">Dela</string>
   <string name="cache_time_full_hours">prick</string>
+  <string name="cache_listed_on">Listad på %s</string>
 
   <!--  editor dialog -->
   <string name="editor_save">Spara</string>
@@ -665,6 +689,7 @@
   <string name="waypoint_edit_title">Redigera punkt</string>
   <string name="waypoint_add_title">Lägg till punkt</string>
   <string name="waypoint_note">Kommentar</string>
+  <string name="waypoint_visited">Besökt</string>
   <string name="waypoint_save">Spara</string>
   <string name="waypoint_loading">Laddar punkt…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Ingen förändring av cachens koordinater</string>
@@ -676,6 +701,7 @@
   <string name="waypoint_reset">Återställ</string>
   <string name="waypoint_localy_reset_cache_coords">Återställ koordinaterna i c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Återställ i c:geo och på hemsidan</string>
+  <string name="waypoint_being_saved">Punkten sparas…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Hemsidan kan inte hantera att ändra cachens koordinater.</string>
   <string name="waypoint_coordinates_upload_error">Ett fel inträffade när koordinaterna skulle ändras på hemsidan.</string>
   <string name="waypoint_coordinates_uploading_to_website">Laddar upp koordinaterna %s till hemsidan.</string>
@@ -727,6 +753,8 @@
   <string name="search_coordinates_button">Sök med koordinater</string>
   <string name="search_address">Adress</string>
   <string name="search_address_button">Sök med adress</string>
+  <string name="search_geo">Geo kod</string>
+  <string name="search_geo_button">Sök med geo kod</string>
   <string name="search_kw">Nyckelord</string>
   <string name="search_kw_prefill">Nyckelord</string>
   <string name="search_kw_button">Sök med nyckelord</string>

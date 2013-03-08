@@ -84,6 +84,7 @@
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_save">Speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
+  <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post">Loggen</string>
   <string name="log_post_rate">Loggen &amp; bewerten</string>
@@ -117,6 +118,13 @@
   <string name="log_today">Heute</string>
   <string name="log_yesterday">Gestern</string>
   <string name="log_smilies">Smilies</string>
+  <string name="log_image">Bild</string>
+  <string name="log_image_attach">Bild hinzufügen</string>
+  <string name="log_image_edit">Bild bearbeiten</string>
+  <string name="log_image_stored">Vorhanden</string>
+  <string name="log_image_camera">Neu</string>
+  <string name="log_image_caption">Überschrift</string>
+  <string name="log_image_description">Beschreibung</string>
 
 <!-- translation -->
   <string name="translate_to_sys_lang">Übersetze in %s</string>
@@ -309,6 +317,8 @@
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
   <string name="caches_filter_origin">Herkunft</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
+  <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
+  <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
 
   <!-- caches lists -->
   <string name="list_menu">Liste</string>
@@ -382,7 +392,7 @@
   <string name="init_captcha">Zeige CAPTCHA wenn notwendig (nur Basic Member)</string>
   <string name="init_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches ausblenden</string>
-  <string name="init_showwaypoints">Wegpunkte auf Live-Karte zeigen</string>
+  <string name="init_showwaypoints">Wegpunkte auf Karte zeigen</string>
   <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
   <string name="init_disabled">Deaktivierte Caches ausblenden</string>
   <string name="init_offline">Statische Karten zum Cache für Offline-Verwendung speichern</string>
@@ -666,6 +676,7 @@
   <string name="waypoint_edit_title">Wegpunkt bearbeiten</string>
   <string name="waypoint_add_title">Wegpunkt hinzufügen</string>
   <string name="waypoint_note">Notiz</string>
+  <string name="waypoint_visited">Besucht</string>
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Cache-Koordinaten nicht ändern</string>

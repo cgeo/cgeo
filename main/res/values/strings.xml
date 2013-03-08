@@ -323,6 +323,8 @@
   <string name="caches_filter_modified">With modified coordinates</string>
   <string name="caches_filter_origin">Origin</string>
   <string name="caches_removing_from_history">Removing from History…</string>
+  <string name="caches_clear_offlinelogs">Clear offline logs</string>
+  <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
 
   <!-- caches lists -->
   <string name="list_menu">List</string>
@@ -357,6 +359,7 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gc_activate">Activate Geocaching.com on live-map and in searches</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Activate opencaching.de on live-map and in searches</string>
   <string name="init_oc_username_description">Enter your opencaching.de user name in order to allow marking your finds.</string>
@@ -397,7 +400,7 @@
   <string name="init_captcha">Show CAPTCHA if necessary (only Basic Member)</string>
   <string name="init_useenglish">Use English language for c:geo\n(Restart needed)</string>
   <string name="init_exclude">Exclude own and found caches</string>
-  <string name="init_showwaypoints">Show Waypoints on Live map</string>
+  <string name="init_showwaypoints">Show Waypoints on map</string>
   <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
   <string name="init_disabled">Exclude disabled caches</string>
   <string name="init_offline">Store cache static maps for offline use</string>

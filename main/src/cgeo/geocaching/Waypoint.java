@@ -269,4 +269,13 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     public boolean isVisited() {
         return visited;
     }
+
+    public int calculateStaticMapsHashcode() {
+        long hash = 0;
+        if (coords != null) {
+            hash = coords.hashCode();
+        }
+        hash = hash ^ waypointType.markerId;
+        return (int) hash;
+    }
 }

@@ -385,8 +385,8 @@
   <string name="init_captcha">Laat CAPTCHA zien indien noodzakelijk</string>
   <string name="init_useenglish">Use English inside c:geo\n(restart needed)</string>
   <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
-  <string name="init_showwaypoints">Laat waypoints zien in live map</string>
-  <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de live map.</string>
+  <string name="init_showwaypoints">Laat waypoints zien in map</string>
+  <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
   <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
   <string name="init_offline">Kaarten opslaan voor gebruik zonder verbinding</string>
   <string name="init_offline_wp">Statische kaarten van waipoints opslaan voor gebruik zonder verbinding</string>

@@ -516,11 +516,15 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void openInBrowser(Activity fromActivity) {
-        fromActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getCacheUrl())));
+        fromActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getBrowserCacheUrl())));
     }
 
     private String getCacheUrl() {
         return getConnector().getCacheUrl(this);
+    }
+
+    private String getBrowserCacheUrl() {
+        return getConnector().getLongCacheUrl(this);
     }
 
     private IConnector getConnector() {
@@ -618,7 +622,18 @@ public class Geocache implements ICache, IWaypoint {
     @Override
     public String getHint() {
         initializeCacheTexts();
+        assertTextNotNull(hint, "Hint");
         return hint;
+    }
+
+    /**
+     * After lazy loading the lazily loaded field must be non {@code null}.
+     *
+     */
+    private static void assertTextNotNull(final String field, final String name) throws InternalError {
+        if (field == null) {
+            throw new InternalError(name + " field is not allowed to be null here");
+        }
     }
 
     /**
@@ -627,6 +642,7 @@ public class Geocache implements ICache, IWaypoint {
     @Override
     public String getDescription() {
         initializeCacheTexts();
+        assertTextNotNull(description, "Description");
         return description;
     }
 
@@ -635,7 +651,19 @@ public class Geocache implements ICache, IWaypoint {
      */
     private void initializeCacheTexts() {
         if (description == null || shortdesc == null || hint == null || location == null) {
-            cgData.loadCacheTexts(this);
+            Geocache partial = cgData.loadCacheTexts(this.getGeocode());
+            if (description == null) {
+                setDescription(partial.getDescription());
+            }
+            if (shortdesc == null) {
+                setShortDescription(partial.getShortDescription());
+            }
+            if (hint == null) {
+                setHint(partial.getHint());
+            }
+            if (location == null) {
+                setLocation(partial.getLocation());
+            }
         }
     }
 
@@ -645,6 +673,7 @@ public class Geocache implements ICache, IWaypoint {
     @Override
     public String getShortDescription() {
         initializeCacheTexts();
+        assertTextNotNull(shortdesc, "Short description");
         return shortdesc;
     }
 
@@ -673,6 +702,7 @@ public class Geocache implements ICache, IWaypoint {
     @Override
     public String getLocation() {
         initializeCacheTexts();
+        assertTextNotNull(location, "Location");
         return location;
     }
 
