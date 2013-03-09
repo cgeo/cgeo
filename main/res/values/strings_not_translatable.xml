@@ -106,6 +106,7 @@
     · Active cache detail page now remembered when rotating device\n
     · Replaced the term \"GC-Code\" by \"Geocode\"\n
     · Improvements for light theme\n
+    · Share function uses short URL again\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
     \n
