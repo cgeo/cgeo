@@ -158,7 +158,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public boolean isFound() {
-        if ("blafoo".equals(this.getMockedDataUser())) {
+        if ("blafoo".equals(this.getMockedDataUser()) || "JoSaMaJa".equals(this.getMockedDataUser())) {
             return true;
         }
         return super.isFound();
