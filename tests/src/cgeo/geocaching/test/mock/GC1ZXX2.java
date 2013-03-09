@@ -131,7 +131,7 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public String getPersonalNote() {
-        if ("blafoo".equals(this.getMockedDataUser())) {
+        if ("blafoo".equals(this.getMockedDataUser()) || "JoSaMaJa".equals(this.getMockedDataUser())) {
             return "Test für c:geo";
         }
         return super.getPersonalNote();
