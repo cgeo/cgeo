@@ -15,8 +15,10 @@ public class StaticMapsProviderTest extends TestCase {
         final double lon = 9.745685d;
         String geocode = "GCTEST1";
 
+        boolean backupStore = Settings.isStoreOfflineMaps();
         boolean backupStoreWP = Settings.isStoreOfflineWpMaps();
         Settings.setStoreOfflineMaps(true);
+        Settings.setStoreOfflineWpMaps(true);
         try {
             Geopoint gp = new Geopoint(lat + 0.25d, lon + 0.25d);
             Geocache cache = new Geocache();
@@ -36,6 +38,13 @@ public class StaticMapsProviderTest extends TestCase {
             trailhead.setId(2);
             cache.addOrChangeWaypoint(trailhead, false);
 
+            // make sure we don't have stale downloads
+            deleteCacheDirectory(geocode);
+            assertFalse(StaticMapsProvider.hasStaticMap(cache));
+            assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, theFinal));
+            assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
+
+            // download
             StaticMapsProvider.downloadMaps(cache);
 
             try {
@@ -43,6 +52,8 @@ public class StaticMapsProviderTest extends TestCase {
             } catch (InterruptedException e) {
                 fail();
             }
+
+            // check download
             assertTrue(StaticMapsProvider.hasStaticMap(cache));
             assertTrue(StaticMapsProvider.hasStaticMapForWaypoint(geocode, theFinal));
             assertTrue(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
@@ -52,11 +63,14 @@ public class StaticMapsProviderTest extends TestCase {
             assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
         } finally {
             Settings.setStoreOfflineWpMaps(backupStoreWP);
-            File cacheDir = LocalStorage.getStorageDir(geocode);
-            if (!cacheDir.delete()) {
-                cacheDir.deleteOnExit();
-            }
+            Settings.setStoreOfflineMaps(backupStore);
+            deleteCacheDirectory(geocode);
         }
+    }
+
+    private static void deleteCacheDirectory(String geocode) {
+        File cacheDir = LocalStorage.getStorageDir(geocode);
+        LocalStorage.deleteDirectory(cacheDir);
     }
 
 }
