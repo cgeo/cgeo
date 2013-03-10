@@ -8,7 +8,7 @@ import android.content.Context;
 
 public class UsernameGeocacheListLoader extends AbstractSearchLoader {
 
-    private String username;
+    private final String username;
 
     public UsernameGeocacheListLoader(Context context, String username) {
         super(context);

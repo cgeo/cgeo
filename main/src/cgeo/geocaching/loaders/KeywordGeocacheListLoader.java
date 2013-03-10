@@ -8,7 +8,7 @@ import android.content.Context;
 
 public class KeywordGeocacheListLoader extends AbstractSearchLoader {
 
-    private String keyword;
+    private final String keyword;
 
     public KeywordGeocacheListLoader(Context context, String keyword) {
         super(context);

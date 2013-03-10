@@ -7,7 +7,7 @@ import cgeo.geocaching.connector.gc.GCParser;
 import android.content.Context;
 
 public class NextPageGeocacheListLoader extends AbstractSearchLoader {
-    private SearchResult search;
+    private final SearchResult search;
 
     public NextPageGeocacheListLoader(Context context, SearchResult search) {
         super(context);

@@ -9,8 +9,8 @@ import android.content.Context;
 
 public class OfflineGeocacheListLoader extends AbstractSearchLoader {
 
-    private int listId;
-    private Geopoint searchCenter;
+    private final int listId;
+    private final Geopoint searchCenter;
 
     public OfflineGeocacheListLoader(Context context, Geopoint searchCenter, int listId) {
         super(context);

@@ -9,9 +9,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import android.content.Context;
 
 public class HistoryGeocacheListLoader extends AbstractSearchLoader {
-
-
-    private Geopoint coords;
+    private final Geopoint coords;
 
     public HistoryGeocacheListLoader(Context context, Geopoint coords) {
         super(context);

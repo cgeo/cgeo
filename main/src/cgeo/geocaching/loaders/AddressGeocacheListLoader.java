@@ -8,7 +8,7 @@ import android.content.Context;
 
 public class AddressGeocacheListLoader extends AbstractSearchLoader {
 
-    private String address;
+    private final String address;
 
     public AddressGeocacheListLoader(Context context, String address) {
         super(context);

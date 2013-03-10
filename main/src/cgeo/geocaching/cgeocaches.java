@@ -81,7 +81,6 @@ import java.util.Set;
 
 public class cgeocaches extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
-    private static final String EXTRA_CACHELIST = "CACHELIST";
     private static final int MAX_LIST_ITEMS = 1000;
     private static final int MENU_REFRESH_STORED = 2;
     private static final int MENU_CACHE_DETAILS = 4;
@@ -444,12 +443,10 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         // init
         if (CollectionUtils.isNotEmpty(cacheList)) {
-            if (currentLoader.isStarted())
-            {
+            if (currentLoader.isStarted()) {
                 showFooterLoadingCaches();
             }
-            else
-            {
+            else {
                 showFooterMoreCaches();
             }
         }
@@ -467,8 +464,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (currentLoader.isLoading())
-        {
+        if (currentLoader.isLoading()) {
             showFooterLoadingCaches();
         }
     }
@@ -1137,13 +1133,13 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     }
 
     public void removeFromHistory() {
-        ArrayList<String> geocodes = new ArrayList<String>(adapter.getCheckedOrAllCaches().size());
-        for (Geocache cache : adapter.getCheckedOrAllCaches()) {
-            geocodes.add(cache.getGeocode());
+        final List<Geocache> caches = adapter.getCheckedOrAllCaches();
+        final String geocodes[] = new String[caches.size()];
+        for (int i = 0; i < geocodes.length; i++) {
+            geocodes[i] = caches.get(i).getGeocode();
         }
-
         Bundle b = new Bundle();
-        b.putStringArray(EXTRA_CACHELIST, geocodes.toArray(new String[geocodes.size()]));
+        b.putStringArray(Intents.EXTRA_CACHELIST, geocodes);
         getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.ordinal(), b, this);
     }
 
@@ -1423,7 +1419,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             listFooter.setOnClickListener(null);
 
             currentLoader.startLoading();
-            //            currentLoader.forceLoad();
         }
     }
 
@@ -1470,8 +1465,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         showProgress(true);
         showFooterLoadingCaches();
-        final List<Geocache> caches = adapter.getCheckedCaches();
-        cgData.moveToList(caches, listId);
+        cgData.moveToList(adapter.getCheckedCaches(), listId);
 
         currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(), new Bundle(), this);
         currentLoader.reset();
@@ -1734,44 +1728,24 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                     title = list.title;
                 }
 
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
                 loader = new OfflineGeocacheListLoader(this.getBaseContext(), coords, listId);
 
                 break;
             case HISTORY:
                 title = res.getString(R.string.caches_history);
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
                 loader = new HistoryGeocacheListLoader(app, coords);
                 break;
             case NEAREST:
                 title = res.getString(R.string.caches_nearby);
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
                 loader = new CoordsGeocacheListLoader(app, coords);
                 break;
             case COORDINATE:
                 title = coords.toString();
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
                 loader = new CoordsGeocacheListLoader(app, coords);
                 break;
             case KEYWORD:
                 final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
                 title = keyword;
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
                 loader = new KeywordGeocacheListLoader(app, keyword);
                 break;
             case ADDRESS:
@@ -1781,10 +1755,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 } else {
                     title = coords.toString();
                 }
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
                 if (coords != null) {
                     loader = new CoordsGeocacheListLoader(app, coords);
                     }
@@ -1794,44 +1764,34 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 break;
             case USERNAME:
                 title = username;
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
                 loader = new UsernameGeocacheListLoader(app, username);
                 break;
             case OWNER:
                 title = username;
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
                 loader = new OwnerGeocacheListLoader(app, username);
                 break;
             case MAP:
                 //TODO Build Nullloader
                 title = res.getString(R.string.map_map);
-                setTitle(title);
-                showProgress(true);
                 search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
                 break;
             case REMOVE_FROM_HISTORY:
                 title = res.getString(R.string.caches_history);
-                setTitle(title);
-                showProgress(true);
-                showFooterLoadingCaches();
-
-                loader = new RemoveFromHistoryLoader(app, extras.getStringArray(EXTRA_CACHELIST), coords);
+                loader = new RemoveFromHistoryLoader(app, extras.getStringArray(Intents.EXTRA_CACHELIST), coords);
                 break;
 
             default:
                 title = "caches";
                 setTitle(title);
                 Log.e("cgeocaches.onCreate: No action or unknown action specified");
-                break;
+                return null;
         }
+        setTitle(title);
+        showProgress(true);
+        showFooterLoadingCaches();
+
         if (loader != null) {
             loader.setRecaptchaHandler(new SearchHandler(this, res, loader));
         }
@@ -1842,8 +1802,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     public void onLoadFinished(Loader<SearchResult> arg0, SearchResult searchIn) {
         // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
         // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
-        if (searchIn != null)
-        {
+        if (searchIn != null) {
             cacheList.clear();
             final Set<Geocache> cachesFromSearchResult = searchIn.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             cacheList.addAll(cachesFromSearchResult);

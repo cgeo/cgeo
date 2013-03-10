@@ -10,8 +10,8 @@ import android.content.Context;
 
 public class RemoveFromHistoryLoader extends AbstractSearchLoader {
 
-    private String[] selected;
-    private Geopoint coords;
+    private final String[] selected;
+    private final Geopoint coords;
 
     public RemoveFromHistoryLoader(Context context, String[] selected, Geopoint coords) {
         super(context);
