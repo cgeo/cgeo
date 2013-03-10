@@ -270,7 +270,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         return visited;
     }
 
-    public int calculateStaticMapsHashcode() {
+    public int getStaticMapsHashcode() {
         long hash = 0;
         if (coords != null) {
             hash = coords.hashCode();

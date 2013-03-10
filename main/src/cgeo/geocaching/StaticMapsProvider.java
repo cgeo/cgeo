@@ -142,7 +142,7 @@ public class StaticMapsProvider {
         String wpMarkerUrl = getWpMarkerUrl(waypoint);
         if (!hasAllStaticMapsForWaypoint(geocode, waypoint)) {
             // download map images in separate background thread for higher performance
-            downloadMaps(geocode, wpMarkerUrl, WAYPOINT_PREFIX + waypoint.getId() + '_' + waypoint.calculateStaticMapsHashcode() + "_", wpLatlonMap, edge, null, waitForResult);
+            downloadMaps(geocode, wpMarkerUrl, WAYPOINT_PREFIX + waypoint.getId() + '_' + waypoint.getStaticMapsHashcode() + "_", wpLatlonMap, edge, null, waitForResult);
         }
     }
 
@@ -233,7 +233,7 @@ public class StaticMapsProvider {
             return;
         }
         int waypointId = waypoint.getId();
-        int waypointMapHash = waypoint.calculateStaticMapsHashcode();
+        int waypointMapHash = waypoint.getStaticMapsHashcode();
         for (int level = 1; level <= 5; level++) {
             try {
                 StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + '_' + level, false).delete();
@@ -245,9 +245,9 @@ public class StaticMapsProvider {
 
     /**
      * Check if at least one map file exists for the given cache.
-     *
+     * 
      * @param cache
-     * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
+     * @return <code>true</code> if at least one map file exists; <code>false</code> otherwise
      */
     public static boolean hasStaticMap(final Geocache cache) {
         if (cache == null) {
@@ -259,7 +259,7 @@ public class StaticMapsProvider {
         }
         for (int level = 1; level <= 5; level++) {
             File mapFile = StaticMapsProvider.getMapFile(geocode, String.valueOf(level), false);
-            if (mapFile != null && mapFile.exists()) {
+            if (mapFile.exists()) {
                 return true;
             }
         }
@@ -268,17 +268,17 @@ public class StaticMapsProvider {
 
     /**
      * Checks if at least one map file exists for the given geocode and waypoint ID.
-     *
+     * 
      * @param geocode
      * @param waypoint
-     * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
+     * @return <code>true</code> if at least one map file exists; <code>false</code> otherwise
      */
     public static boolean hasStaticMapForWaypoint(String geocode, Waypoint waypoint) {
         int waypointId = waypoint.getId();
-        int waypointMapHash = waypoint.calculateStaticMapsHashcode();
+        int waypointMapHash = waypoint.getStaticMapsHashcode();
         for (int level = 1; level <= 5; level++) {
             File mapFile = StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false);
-            if (mapFile != null && mapFile.exists()) {
+            if (mapFile.exists()) {
                 return true;
             }
         }
@@ -286,20 +286,17 @@ public class StaticMapsProvider {
     }
 
     /**
-     * Checks if at least one map file exists for the given geocode and waypoint ID.
-     *
+     * Checks if all map files exist for the given geocode and waypoint ID.
+     * 
      * @param geocode
      * @param waypoint
-     * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
+     * @return <code>true</code> if all map files exist; <code>false</code> otherwise
      */
     public static boolean hasAllStaticMapsForWaypoint(String geocode, Waypoint waypoint) {
         int waypointId = waypoint.getId();
-        int waypointMapHash = waypoint.calculateStaticMapsHashcode();
+        int waypointMapHash = waypoint.getStaticMapsHashcode();
         for (int level = 1; level <= 5; level++) {
             File mapFile = StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false);
-            if (mapFile == null) {
-                return false;
-            }
             boolean mapExists = mapFile.exists();
             if (!mapExists) {
                 return false;
@@ -314,7 +311,7 @@ public class StaticMapsProvider {
 
     public static Bitmap getWaypointMap(final String geocode, Waypoint waypoint, int level) {
         int waypointId = waypoint.getId();
-        int waypointMapHash = waypoint.calculateStaticMapsHashcode();
+        int waypointMapHash = waypoint.getStaticMapsHashcode();
         return decodeFile(StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false));
     }
 
