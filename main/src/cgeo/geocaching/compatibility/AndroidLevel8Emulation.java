@@ -12,11 +12,6 @@ import java.io.File;
 public class AndroidLevel8Emulation implements AndroidLevel8Interface {
 
     @Override
-    public int getRotation(final Activity activity) {
-        return 0;
-    }
-
-    @Override
     public void dataChanged(final String name) {
         // do nothing
     }

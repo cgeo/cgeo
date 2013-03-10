@@ -6,19 +6,12 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.os.Environment;
-import android.view.Display;
 import android.view.Surface;
 
 import java.io.File;
 
 @TargetApi(8)
 public class AndroidLevel8 implements AndroidLevel8Interface {
-
-    @Override
-    public int getRotation(final Activity activity) {
-        Display display = activity.getWindowManager().getDefaultDisplay();
-        return display.getRotation();
-    }
 
     @Override
     public void dataChanged(final String name) {
@@ -28,21 +21,16 @@ public class AndroidLevel8 implements AndroidLevel8Interface {
 
     @Override
     public int getRotationOffset(final Activity activity) {
-        try {
-            final int rotation = getRotation(activity);
-            if (rotation == Surface.ROTATION_90) {
+        switch (activity.getWindowManager().getDefaultDisplay().getRotation()) {
+            case Surface.ROTATION_90:
                 return 90;
-            } else if (rotation == Surface.ROTATION_180) {
+            case Surface.ROTATION_180:
                 return 180;
-            } else if (rotation == Surface.ROTATION_270) {
+            case Surface.ROTATION_270:
                 return 270;
-            }
-        } catch (final Exception e) {
-            // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
-            Log.e("Cannot call getRotation()", e);
+            default:
+                return 0;
         }
-
-        return 0;
     }
 
     @Override
