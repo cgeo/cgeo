@@ -1817,8 +1817,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     @Override
     public void onLoaderReset(Loader<SearchResult> arg0) {
-        // TODO Auto-generated method stub
-
+        //Not interessting
     }
 }
 
