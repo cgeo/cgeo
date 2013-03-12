@@ -69,6 +69,7 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -1109,13 +1110,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 final boolean excludeMine = Settings.isExcludeMyCaches();
                 final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
                 if (mapMode == MapMode.LIVE) {
-                    final List<Geocache> tempList = caches.getAsList();
-
-                    for (Geocache cache : tempList) {
-                        if ((cache.isFound() && excludeMine) || (cache.isOwner() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
-                            caches.remove(cache);
-                        }
-                    }
+                    CGeoMap.filter(caches);
                 }
                 countVisibleCaches();
                 if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
@@ -1196,6 +1191,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 if (searchResult != null) {
                     Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                    CGeoMap.filter(result);
                     // update the caches
                     // new collection type needs to remove first
                     caches.removeAll(result);
@@ -1449,6 +1445,19 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
             addGeoDirObservers();
         }
+    }
+
+    private static void filter(Collection<Geocache> caches) {
+        boolean excludeMine = Settings.isExcludeMyCaches();
+        boolean excludeDisabled = Settings.isExcludeDisabledCaches();
+
+        List<Geocache> removeList = new ArrayList<Geocache>();
+        for (Geocache cache : caches) {
+            if ((cache.isFound() && excludeMine) || (cache.isOwner() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
+                removeList.add(cache);
+            }
+        }
+        caches.removeAll(removeList);
     }
 
     private static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {
