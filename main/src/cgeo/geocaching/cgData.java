@@ -32,6 +32,7 @@ import android.database.sqlite.SQLiteStatement;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -2922,12 +2923,8 @@ public class cgData {
         return cgData.getBounds(Collections.singleton(geocode));
     }
 
-    public static void clearVisitDate(List<Geocache> caches) {
-        ArrayList<String> geocodes = new ArrayList<String>(caches.size());
-        for (Geocache cache : caches) {
-            geocodes.add(cache.getGeocode());
-        }
-        setVisitDate(geocodes, 0);
+    public static void clearVisitDate(String[] selected) {
+        setVisitDate(Arrays.asList(selected), 0);
     }
 
     public static SearchResult getBatchOfStoredCaches(Geopoint coords, CacheType cacheType, int listId) {

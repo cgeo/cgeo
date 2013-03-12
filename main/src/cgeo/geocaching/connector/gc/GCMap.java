@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -352,7 +352,8 @@ public class GCMap {
         if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
             final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
-                SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false);
+                //FIXME We don't have a RecaptchaReceiver!?
+                SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
                     if (Settings.isPremiumMember()) {
