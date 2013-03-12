@@ -53,8 +53,8 @@
 
             <ProgressBar
                 style="?progressSpinnerLarge"
-        		android:layout_width="wrap_content"
-         		android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:indeterminate="true"
@@ -129,11 +129,11 @@
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
                 android:textSize="14dip" />
+
             <Button
-            	android:id="@+id/edit_personalnote"
-            	style="@style/button_small"
-            	android:text="@string/cache_personal_note_edit" />
-            
+                android:id="@+id/edit_personalnote"
+                style="@style/button_small"
+                android:text="@string/cache_personal_note_edit" />
         </LinearLayout>
     </LinearLayout>
 

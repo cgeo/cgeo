@@ -1,93 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:paddingTop="3dip"
-        android:paddingBottom="3dip" >
-	<TextView android:id="@+id/author"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentTop="true"
-			android:layout_gravity="left|top"
-			android:lines="1"
-			android:singleLine="true"
-			android:scrollHorizontally="true"
-			android:ellipsize="marquee"
-			android:textSize="18dip"
-			android:textColor="?text_color" />
-	<LinearLayout
-			android:layout_width="102dip"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentTop="true"
-			android:layout_marginTop="22dip"
-			android:layout_gravity="left|top"
-			android:orientation="horizontal"  >
-		<LinearLayout
-				android:layout_width="100dip"
-				android:layout_height="wrap_content"
-				android:layout_gravity="right|top"
-				android:padding="3dip"
-				android:orientation="vertical" >
-			<TextView android:id="@+id/added"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="right"
-					android:gravity="left"
-					android:lines="1"
-					android:singleLine="true"
-					android:scrollHorizontally="true"
-					android:ellipsize="marquee"
-					android:textSize="14dip"
-					android:textColor="?text_color_headline" />
-			<TextView android:id="@+id/type"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="right"
-					android:gravity="left"
-					android:lines="1"
-					android:singleLine="true"
-					android:scrollHorizontally="true"
-					android:ellipsize="marquee"
-					android:textSize="14dip"
-					android:textColor="?text_color_headline" />
-			<TextView android:id="@+id/location"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="right"
-					android:gravity="left"
-					android:lines="1"
-					android:singleLine="true"
-					android:scrollHorizontally="true"
-					android:ellipsize="marquee"
-					android:textSize="14dip"
-					android:textColor="?text_color_headline" />
-		</LinearLayout>
-		<ImageView android:id="@+id/log_mark"
-				android:layout_width="2dip"
-				android:layout_height="fill_parent"
-				android:layout_marginTop="2dip"
-				android:layout_marginBottom="2dip"
-				android:scaleType="fitXY"
-				android:src="@drawable/mark_green" />
-	</LinearLayout>	
-	<LinearLayout android:id="@+id/log_layout"  
-				android:layout_height="wrap_content"
-				android:layout_width="fill_parent" 
-				android:orientation="vertical"
-				android:padding="3dip"
-				android:textSize="14dip"
-				android:layout_marginLeft="102dip">
-			<TextView android:id="@+id/log"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="22dip"				
-				android:layout_gravity="left"
-				android:gravity="left"
-				android:padding="3dip"
-				android:textSize="14dip"
-				android:textColor="?text_color"
-				android:autoLink="web" />
-	</LinearLayout>
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="3dip"
+    android:paddingTop="3dip" >
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="left|top"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="?text_color"
+        android:textSize="18dip" />
+
+    <LinearLayout
+        android:layout_width="102dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="22dip"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:orientation="vertical"
+            android:padding="3dip" >
+
+            <TextView
+                android:id="@+id/added"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:ellipsize="marquee"
+                android:gravity="left"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textColor="?text_color_headline"
+                android:textSize="14dip" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:ellipsize="marquee"
+                android:gravity="left"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textColor="?text_color_headline"
+                android:textSize="14dip" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:ellipsize="marquee"
+                android:gravity="left"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textColor="?text_color_headline"
+                android:textSize="14dip" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/log_mark"
+            android:layout_width="2dip"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="2dip"
+            android:layout_marginTop="2dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/mark_green" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/log_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="102dip"
+        android:orientation="vertical"
+        android:padding="3dip"
+        android:textSize="14dip" >
+
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="22dip"
+            android:autoLink="web"
+            android:gravity="left"
+            android:padding="3dip"
+            android:textColor="?text_color"
+            android:textSize="14dip" />
+    </LinearLayout>
+
 </RelativeLayout>

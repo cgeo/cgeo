@@ -1,51 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical" >
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+
+            <View style="@style/separator_horizontal" />
+
+            <TextView
+                style="@style/separator_horizontal_headline"
+                android:text="@string/simple_dir_chooser_title" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/simple_dir_chooser_path"
+            style="@style/edittext_full"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="textNoSuggestions"
+            android:lines="0"
+            android:scrollHorizontally="true"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/android:list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-		android:orientation="vertical">
+        android:layout_weight="100" />
+
     <LinearLayout
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="vertical"
-	        android:layout_weight="2">
-		<RelativeLayout style="@style/separator_horizontal_layout" >
-			<View style="@style/separator_horizontal" />
-			<TextView style="@style/separator_horizontal_headline"
-					android:text="@string/simple_dir_chooser_title" />
-		</RelativeLayout>
-	    <EditText 
-		        style="@style/edittext_full"
-				android:id="@+id/simple_dir_chooser_path"
-				android:singleLine="true"
-				android:lines="0"
-				android:clickable="false" 
-		        android:cursorVisible="false" 
-		        android:focusable="false" 
-		        android:focusableInTouchMode="false"
-        		android:scrollHorizontally="true"
-				android:inputType="textNoSuggestions" />
-	</LinearLayout>
-   	<ListView 
-	        android:layout_height="fill_parent" 
-	        android:layout_width="fill_parent" 
-			android:layout_weight="100"
-	        android:id="@+id/android:list" />
-	<LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:paddingTop="10dip"
-			android:layout_weight="1">
-	    <Button style="@style/button_full"
-				android:id="@+id/simple_dir_chooser_ok"
-				android:text="@android:string/ok"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-		<Button style="@style/button_full"
-				android:id="@+id/simple_dir_chooser_cancel"
-				android:text="@android:string/cancel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-	</LinearLayout>
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingTop="10dip" >
+
+        <Button
+            android:id="@+id/simple_dir_chooser_ok"
+            style="@style/button_full"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@android:string/ok" />
+
+        <Button
+            android:id="@+id/simple_dir_chooser_cancel"
+            style="@style/button_full"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@android:string/cancel" />
+    </LinearLayout>
+
 </LinearLayout>

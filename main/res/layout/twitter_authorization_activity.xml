@@ -9,7 +9,7 @@
 
         <ImageView
             style="@style/action_bar_action"
-            android:onClick="goHome"/>
+            android:onClick="goHome" />
 
         <View style="@style/action_bar_separator" />
 

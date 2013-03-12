@@ -66,8 +66,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_gravity="left"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
@@ -98,16 +98,16 @@
             android:id="@+id/list_box"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" 
+            android:orientation="vertical"
             android:visibility="gone" >
-            
+
             <TextView
                 android:id="@+id/list_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_gravity="left"
                 android:layout_centerVertical="true"
+                android:layout_gravity="left"
                 android:layout_marginLeft="6dip"
                 android:layout_marginRight="130dip"
                 android:paddingRight="3dip"
@@ -120,7 +120,6 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/cache_list_change"
                 android:visibility="visible" />
-
         </RelativeLayout>
 
         <!-- Watchlist box -->
@@ -145,8 +144,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_gravity="left"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
@@ -168,7 +167,7 @@
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
-        
+
         <!-- Favorite points box -->
 
         <LinearLayout
@@ -191,8 +190,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_gravity="left"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
@@ -265,9 +264,9 @@
                 android:layout_height="80dip"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:onClick="showNavigationMenu"
                 android:scaleType="centerCrop"
-                android:src="@null"
-                android:onClick="showNavigationMenu" />
+                android:src="@null" />
         </LinearLayout>
     </LinearLayout>
 

@@ -1,80 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:orientation="vertical">
-	<LinearLayout style="@style/action_bar">
-		<ImageView style="@style/action_bar_action"
-				android:onClick="goHome" />
-		<View style="@style/action_bar_separator" />
-		<TextView style="@style/action_bar_title" />
-		<View style="@style/action_bar_separator" />
-		<ProgressBar style="@style/action_bar_progress"
-				android:visibility="gone" />
-		<ImageView style="@style/action_bar_action"
-				android:src="@drawable/actionbar_manual"
-				android:onClick="goManual" />
-	</LinearLayout>
-	<ScrollView
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:padding="4dip"
-			android:orientation="vertical" >
-		<LinearLayout
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical" >
-			<LinearLayout
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:orientation="horizontal" >
-				<Button style="@style/button_full"
-						android:id="@+id/type"
-						android:layout_width="0dip"
-						android:layout_weight="1"/>
-				<Button style="@style/button_full"
-						android:id="@+id/date"
-						android:layout_width="0dip"
-						android:layout_weight="1"/>
-			</LinearLayout>
-			<EditText style="@style/edittext_full"
-					android:id="@+id/tracking"
-					android:inputType="textCapCharacters"
-					android:hint="@string/trackable_code" />
-			<EditText style="@style/edittext_full"
-					android:id="@+id/log"
-                    android:hint="@string/log_new_log_text"
-					android:singleLine="false"
-					android:lines="5"
-					android:maxLength="4000"
-					android:inputType="textMultiLine|textCapSentences" />
-			<LinearLayout android:id="@+id/tweet_box"
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:orientation="horizontal"
-					android:layout_marginLeft="10dip"
-					android:layout_marginRight="10dip"
-					android:layout_marginBottom="5dip"
-					android:visibility="gone" >
-				<CheckBox android:id="@+id/tweet"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="left"
-						android:padding="1px"
-						android:gravity="center" />
-				<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
-						android:gravity="left"
-						android:paddingRight="3dip"
-						android:textSize="14dip"
-						android:textColor="?text_color"
-						android:text="@string/visit_tweet" />
-			</LinearLayout>
-			<Button style="@style/button_full"
-					android:id="@+id/post"
-					android:text="@string/log_post" />
-		</LinearLayout>
-	</ScrollView>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout style="@style/action_bar" >
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goHome" />
+
+        <View style="@style/action_bar_separator" />
+
+        <TextView style="@style/action_bar_title" />
+
+        <View style="@style/action_bar_separator" />
+
+        <ProgressBar
+            style="@style/action_bar_progress"
+            android:visibility="gone" />
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goManual"
+            android:src="@drawable/actionbar_manual" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="4dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/type"
+                    style="@style/button_full"
+                    android:layout_width="0dip"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/date"
+                    style="@style/button_full"
+                    android:layout_width="0dip"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/tracking"
+                style="@style/edittext_full"
+                android:hint="@string/trackable_code"
+                android:inputType="textCapCharacters" />
+
+            <EditText
+                android:id="@+id/log"
+                style="@style/edittext_full"
+                android:hint="@string/log_new_log_text"
+                android:inputType="textMultiLine|textCapSentences"
+                android:lines="5"
+                android:maxLength="4000"
+                android:singleLine="false" />
+
+            <LinearLayout
+                android:id="@+id/tweet_box"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <CheckBox
+                    android:id="@+id/tweet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:gravity="center"
+                    android:padding="1px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="left"
+                    android:paddingRight="3dip"
+                    android:text="@string/visit_tweet"
+                    android:textColor="?text_color"
+                    android:textSize="14dip" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/post"
+                style="@style/button_full"
+                android:text="@string/log_post" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
