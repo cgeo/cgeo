@@ -106,4 +106,9 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
 
+    @Override
+    public void reset() {
+        super.reset();
+        search = null;
+    }
 }

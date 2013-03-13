@@ -1467,9 +1467,12 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         showFooterLoadingCaches();
         cgData.moveToList(adapter.getCheckedCaches(), listId);
 
-        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(), new Bundle(), this);
+        currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(), new Bundle(), this);
         currentLoader.reset();
+        ((OfflineGeocacheListLoader) currentLoader).setListId(listId);
+        ((OfflineGeocacheListLoader) currentLoader).setSearchCenter(coords);
         currentLoader.startLoading();
+
 
         invalidateOptionsMenuCompatible();
     }
