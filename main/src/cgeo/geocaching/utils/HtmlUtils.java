@@ -67,7 +67,7 @@ public class HtmlUtils {
         for (int i = 0; i < inputLen; i++) {
             char c = input.charAt(i);
 
-            if (c > 300) {
+            if (c > 127) {
                 output.append("&#");
                 output.append(Integer.toString(c));
                 output.append(';');
