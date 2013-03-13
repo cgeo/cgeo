@@ -274,9 +274,15 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void finish() {
         saveLog(false);
+        super.finish();
+    }
+
+    @Override
+    public void onStop() {
+        saveLog(false);
+        super.onStop();
     }
 
     @Override
