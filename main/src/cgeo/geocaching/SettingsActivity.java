@@ -223,6 +223,15 @@ public class SettingsActivity extends AbstractActivity {
     public void init() {
 
         // geocaching.com settings
+        final CheckBox gcCheck = (CheckBox) findViewById(R.id.gc_option);
+        gcCheck.setChecked(Settings.isGCConnectorActive());
+        gcCheck.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setGCConnectorActive(gcCheck.isChecked());
+            }
+        });
         final ImmutablePair<String, String> login = Settings.getLogin();
         if (login != null) {
             ((EditText) findViewById(R.id.username)).setText(login.left);

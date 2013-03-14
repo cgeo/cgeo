@@ -110,6 +110,7 @@ public final class Settings {
     private static final String KEY_PLAIN_LOGS = "plainLogs";
     private static final String KEY_NATIVE_UA = "nativeUa";
     private static final String KEY_MAP_DIRECTORY = "mapDirectory";
+    private static final String KEY_CONNECTOR_GC_ACTIVE = "connectorGCActive";
     private static final String KEY_CONNECTOR_OC_ACTIVE = "connectorOCActive";
     private static final String KEY_CONNECTOR_OC_USER = "connectorOCUser";
     private static final String KEY_LOG_IMAGE_SCALE = "logImageScale";
@@ -280,6 +281,20 @@ public final class Settings {
                     edit.putString(KEY_USERNAME, username);
                     edit.putString(KEY_PASSWORD, password);
                 }
+            }
+        });
+    }
+
+    public static boolean isGCConnectorActive() {
+        return sharedPrefs.getBoolean(KEY_CONNECTOR_GC_ACTIVE, true);
+    }
+
+    public static boolean setGCConnectorActive(final boolean isActive) {
+        return editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_CONNECTOR_GC_ACTIVE, isActive);
             }
         });
     }
