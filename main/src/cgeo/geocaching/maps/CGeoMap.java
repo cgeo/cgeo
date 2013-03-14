@@ -1146,7 +1146,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
                     if (searchResult != null) {
                         downloaded = true;
-                        if (searchResult.getError() == StatusCode.NOT_LOGGED_IN) {
+                        if (searchResult.getError() == StatusCode.NOT_LOGGED_IN && Settings.isGCConnectorActive()) {
                             Login.login();
                             tokens = null;
                         } else {

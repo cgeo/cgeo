@@ -696,6 +696,10 @@ public class MainActivity extends AbstractActivity {
                 return;
             }
 
+            if (!Settings.isGCConnectorActive()) {
+                return;
+            }
+
             // login
             final StatusCode status = Login.login();
 

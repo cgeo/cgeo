@@ -240,6 +240,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isActivated() {
-        return true;
+        return Settings.isGCConnectorActive();
     }
 }
