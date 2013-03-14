@@ -53,7 +53,7 @@
   <string name="wp_pkg">Parkoviště</string>
   <string name="wp_trailhead">Rozcestník</string>
   <string name="wp_waypoint">Referenční bod</string>
-  <string name="wp_original">Originální souřadnice</string>
+  <string name="wp_original">Původní souřadnice</string>
 
   <!-- logs -->
   <string name="log_found">Nález</string>
@@ -75,7 +75,7 @@
   <string name="log_archived">Archivace</string>
   <string name="log_unarchived">Odarchivována</string>
   <string name="log_needs_archived">Vyžaduje archivaci</string>
-  <string name="log_discovered">Nalezeno</string>
+  <string name="log_discovered">Spatřen</string>
   <string name="log_reviewer">Poznámka revírníka</string>
   <string name="log_retractlisting">Vrácení Listingu</string>
   <string name="log_marked_missing">Označeno za ztracené</string>
@@ -138,7 +138,7 @@
   <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
   <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
   <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
-  <string name="err_login_failed">c:geo se nemůže přhlásit.</string>
+  <string name="err_login_failed">c:geo se nemůže přihlásit.</string>
   <string name="err_login_failed_toast">Nelze se přihlásit. c:geo bude pracovat Offline s uloženými informacemi. Zkontroluj nastavení přihlašování a připojení k Internetu.</string>
   <string name="err_unknown">Neznámá chyba</string>
   <string name="err_comm">Neznámá komunikační chyba</string>
@@ -391,13 +391,13 @@
   <string name="init_signature_template_number">Číslo nálezu</string>
   <string name="init_signature_template_owner">Vlastník</string>
   <string name="init_details">Detaily keše</string>
-  <string name="init_ratingwanted">Načíst hodnocení keše z GCvote.com</string>
-  <string name="init_elevationwanted">Načíst výšková data keše</string>
-  <string name="init_friendlogswanted">Načíst doplňkový Logbook s logy od kámošů</string>
+  <string name="init_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
+  <string name="init_elevationwanted">Načítat výšková data keše</string>
+  <string name="init_friendlogswanted">Načítat doplňkový Logbook s logy od kámošů</string>
   <string name="init_openlastdetailspage">Otevřít detaily na naposledy použité stránce</string>
   <string name="init_autoload">Automaticky načítat dlouhý popis</string>
   <string name="init_other">Další možnosti</string>
-  <string name="init_skin">Použít světlý vzhled\n(Vyžaduje restart)</string>
+  <string name="init_skin">Používat světlý vzhled\n(Vyžaduje restart)</string>
   <string name="init_address">Zobrazovat adresu na hlavní obrazovce</string>
   <string name="init_captcha">Zobrazit obrázek CAPTCHA, pokud je třeba (pouze Basic Member)</string>
   <string name="init_useenglish">Používat angličtinu pro c:geo\n(Vyžaduje restart)</string>
@@ -942,7 +942,7 @@
   <string name="attribute_boat_no">Loď není potřeba</string>
   <string name="attribute_scuba_yes">Potápěčský přístroj je nutný</string>
   <string name="attribute_scuba_no">Potápěčský přístroj není potřeba</string>
-  <string name="attribute_flashlight_yes">Svítilna je potreba</string>
+  <string name="attribute_flashlight_yes">Svítilna je potřeba</string>
   <string name="attribute_flashlight_no">Svítilna není potřeba</string>
   <string name="attribute_uv_yes">UV světlo je potřeba</string>
   <string name="attribute_uv_no">UV světlo není potřeba</string>
@@ -957,7 +957,7 @@
   <string name="attribute_treeclimbing_yes">Lezení na strom</string>
   <string name="attribute_treeclimbing_no">Není třeba lézt na strom</string>
   <string name="attribute_poisonoak_yes">Jedovaté rostliny</string>
-  <string name="attribute_poisonoak_no">Žádné jedovaté rostliny</string></string>
+  <string name="attribute_poisonoak_no">Žádné jedovaté rostliny</string>
   <string name="attribute_dangerousanimals_yes">Nebezpečná zvířata</string>
   <string name="attribute_dangerousanimals_no">Žádná nebezpečná zvířata</string>
   <string name="attribute_ticks_yes">Klíšťata</string>
@@ -1064,8 +1064,8 @@
   <string name="nutshellmanual">Návod: <a href="http://manual.cgeo.org/">c:geo v Nutshell</a></string>
   <string name="about_go4cache">Služba <b>Go 4 Cache</b> zobrazuje ostatní geokačery na mapě (v <b>c:geo</b> nebo v prohlížeči) v reálném čase. Může zobrazovat - na příklad - jakou keš zrovna hledají. Připojením se k <b>Go 4 Cache</b> získá aplikace <b>c:geo</b> povolení zveřejňovat tvou polohu při geocachingu (pouze když je <b>c:geo</b> spuštěno).</string>
   <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
-  <string name="about_auth_1">Následující proces dovoluje aplikaci <b>c:geo</b> přístup na Twitter - pokud souhlasíš.</string>
-  <string name="about_auth_2">Klepnutím na tlačítko \"Autorizovat c:geo\" bude proces zahájen. Tento proces otevře webový prohlížeč s Twitterem. Přihlaš se na této stránce a povol <b>c:geu</b> přístup k tvému účtu. Pokud je to povoleno, Twitter ti ukáže číselný PIN kód. Tento PIN kód musíš zadat do <b>c:geo</b> a potvrdit. To je vše.</string>
+  <string name="about_auth_1">Následující proces dovoluje aplikaci <b>c:geo</b> přístup na Twitter - pokud budeš souhlasit.</string>
+  <string name="about_auth_2">Klepnutím na tlačítko \"Zahájit autorizaci\" bude proces zahájen. Tento proces otevře webový prohlížeč s Twitterem. Přihlaš se na této stránce a povol <b>c:geu</b> přístup k tvému účtu. Pokud je to povoleno, Twitter ti ukáže číselný PIN kód. Tento PIN kód musíš zadat do <b>c:geo</b> a potvrdit. To je vše.</string>
 
   <!-- status (used via string based resource loading) -->
   <string name="status_new_release" tools:ignore="UnusedResources">Dostupné nové vydání.\nKlepni pro instalaci.</string>
