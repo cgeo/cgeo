@@ -1467,9 +1467,12 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         showFooterLoadingCaches();
         cgData.moveToList(adapter.getCheckedCaches(), listId);
 
-        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(), new Bundle(), this);
+        currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(), new Bundle(), this);
         currentLoader.reset();
+        ((OfflineGeocacheListLoader) currentLoader).setListId(listId);
+        ((OfflineGeocacheListLoader) currentLoader).setSearchCenter(coords);
         currentLoader.startLoading();
+
 
         invalidateOptionsMenuCompatible();
     }
@@ -1800,7 +1803,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     @Override
     public void onLoadFinished(Loader<SearchResult> arg0, SearchResult searchIn) {
-        // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
+        // The database search was mowved into the UI call intentionally. If this is done before the runOnUIThread,
         // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
         if (searchIn != null) {
             cacheList.clear();
@@ -1808,6 +1811,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             cacheList.addAll(cachesFromSearchResult);
             search = searchIn;
             adapter.reFilter();
+            adapter.notifyDataSetChanged();
             updateTitle();
             showFooterMoreCaches();
         }
