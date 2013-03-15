@@ -66,8 +66,8 @@ public class cgData {
             "difficulty", "direction", "distance", "terrain", "latlon", "location", "elevation", "personal_note", "shortdesc",
             //    24             25       26       27         28          29         30         31         32
             "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite",
-            //        33               34              35                36            37           38              39         40          41              42
-            "inventoryunknown", "onWatchlist", "reliable_latlon", "coordsChanged", "latitude", "longitude",  "finalDefined", "_id", "inventorycoins", "inventorytags"
+            //        33               34              35                36            37           38              39         40          41              42               43
+            "inventoryunknown", "onWatchlist", "reliable_latlon", "coordsChanged", "latitude", "longitude", "finalDefined", "_id", "inventorycoins", "inventorytags", "related_webpage"
             // reason is replaced by listId in Geocache
     };
 
@@ -85,7 +85,7 @@ public class cgData {
     private static int[] cacheColumnIndex;
     private static CacheCache cacheCache = new CacheCache();
     private static SQLiteDatabase database = null;
-    private static final int dbVersion = 66;
+    private static final int dbVersion = 67;
     public static final int customListIdOffset = 10;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
@@ -144,7 +144,8 @@ public class cgData {
             + "inventoryunknown integer default 0, "
             + "onWatchlist integer default 0, "
             + "coordsChanged integer default 0, "
-            + "finalDefined integer default 0"
+            + "finalDefined integer default 0, "
+            + "related_webpage text"
             + "); ";
     private static final String dbCreateLists = ""
             + "create table " + dbTableLists + " ("
@@ -674,6 +675,16 @@ public class cgData {
 
                         }
                     }
+
+                    // Introduces link to Related webpage
+                    if (oldVersion < 67) {
+                        try {
+                            db.execSQL("alter table " + dbTableCaches + " add column related_webpage text");
+                        } catch (Exception e) {
+                            Log.e("Failed to upgrade to ver. 67", e);
+
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -1034,6 +1045,7 @@ public class cgData {
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
         values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
         values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
+        values.put("related_webpage", cache.getRelatedWebpage());
 
         init();
 
@@ -1625,6 +1637,7 @@ public class cgData {
         cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[35]) > 0);
         cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[36]) > 0);
         cache.setFinalDefined(cursor.getInt(cacheColumnIndex[39]) > 0);
+        cache.setRelatedWebpage(cursor.getString(cacheColumnIndex[43]));
 
         Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 

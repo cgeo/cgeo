@@ -1222,6 +1222,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 registerForContextMenu(valueView);
             }
 
+            // cache related webpage
+            if (cache.getRelatedWebpage() != null) {
+                TextView valueView = details.add(R.string.cache_related_webpage, getString(R.string.cache_related_webpage_link));
+                valueView.setOnClickListener(new View.OnClickListener() {
+                    // open browser
+                    @Override
+                    public void onClick(View view) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(cache.getRelatedWebpage()));
+                        startActivity(browserIntent);
+                    }
+                });
+                registerForContextMenu(valueView);
+            }
+
             // cache attributes
             if (!cache.getAttributes().isEmpty()) {
                 new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
