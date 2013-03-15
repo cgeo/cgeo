@@ -43,13 +43,20 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     @Override
     public SearchResult loadInBackground() {
         loading = true;
-        if (search == null) {
-            search = runSearch();
-        } else {
-            // Unless we make a new Search the Loader framework won't deliver results. It does't do equals only identity
-            search = GCParser.searchByNextPage(new SearchResult(search), Settings.isShowCaptcha(), this);
+        try {
+            if (search == null) {
+                search = runSearch();
+            } else {
+                // Unless we make a new Search the Loader framework won't deliver results. It does't do equals only identity
+                search = GCParser.searchByNextPage(new SearchResult(search), Settings.isShowCaptcha(), this);
+            }
+        } catch (Exception e) {
+            Log.e("Error in Loader ", e);
         }
         loading = false;
+        if (search == null) {
+            search = new SearchResult();
+        }
         return search;
     }
 
