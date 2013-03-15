@@ -271,8 +271,8 @@ public class Geocache implements ICache, IWaypoint {
         if (coords == null) {
             coords = other.coords;
         }
-        if (relatedWebpage == null) {
-            relatedWebpage = other.relatedWebpage;
+        if (StringUtils.isBlank(getRelatedWebpage())) {
+            relatedWebpage = other.getRelatedWebpage();
         }
         if (elevation == null) {
             elevation = other.elevation;
