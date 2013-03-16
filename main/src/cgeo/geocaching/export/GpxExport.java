@@ -151,7 +151,7 @@ class GpxExport extends AbstractExport {
                 gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
                 gpx.attribute(PREFIX_XSI, "schemaLocation",
                         PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " +
-                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd");
+                                PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd");
 
                 for (int i = 0; i < caches.size(); i++) {
                     final Geocache cache = cgData.loadCache(caches.get(i).getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
@@ -177,7 +177,6 @@ class GpxExport extends AbstractExport {
                     gpx.attribute("", "id", cache.getCacheId());
                     gpx.attribute("", "available", !cache.isDisabled() ? "True" : "False");
                     gpx.attribute("", "archives", cache.isArchived() ? "True" : "False");
-
 
                     XmlUtils.multipleTexts(gpx, PREFIX_GROUNDSPEAK,
                             "name", cache.getName(),
@@ -274,17 +273,20 @@ class GpxExport extends AbstractExport {
          * @throws IOException
          */
         private void writeCacheWaypoint(final XmlSerializer gpx, final Waypoint wp, final String prefix) throws IOException {
-            gpx.startTag(PREFIX_GPX, "wpt");
             final Geopoint coords = wp.getCoords();
-            gpx.attribute("", "lat", coords != null ? Double.toString(coords.getLatitude()) : ""); // TODO: check whether is the best way to handle unknown waypoint coordinates
-            gpx.attribute("", "lon", coords != null ? Double.toString(coords.getLongitude()) : "");
-            XmlUtils.multipleTexts(gpx, PREFIX_GPX,
-                    "name", prefix + wp.getGeocode().substring(2),
-                    "cmt", wp.getNote(),
-                    "desc", wp.getName(),
-                    "sym", wp.getWaypointType().toString(),                 //TODO: Correct identifier string
-                    "type", "Waypoint|" + wp.getWaypointType().toString()); //TODO: Correct identifier string
-            gpx.endTag(PREFIX_GPX, "wpt");
+            // TODO: create some extension to GPX to include waypoint without coords
+            if (coords != null) {
+                gpx.startTag(PREFIX_GPX, "wpt");
+                gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
+                gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
+                XmlUtils.multipleTexts(gpx, PREFIX_GPX,
+                        "name", prefix + wp.getGeocode().substring(2),
+                        "cmt", wp.getNote(),
+                        "desc", wp.getName(),
+                        "sym", wp.getWaypointType().toString(), //TODO: Correct identifier string
+                        "type", "Waypoint|" + wp.getWaypointType().toString()); //TODO: Correct identifier string
+                gpx.endTag(PREFIX_GPX, "wpt");
+            }
         }
 
         private void writeLogs(final XmlSerializer gpx, final Geocache cache) throws IOException {
