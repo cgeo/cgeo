@@ -9,8 +9,8 @@ import android.content.Context;
 
 public class OfflineGeocacheListLoader extends AbstractSearchLoader {
 
-    private final int listId;
-    private final Geopoint searchCenter;
+    private int listId;
+    private Geopoint searchCenter;
 
     public OfflineGeocacheListLoader(Context context, Geopoint searchCenter, int listId) {
         super(context);
@@ -21,6 +21,14 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
     @Override
     public SearchResult runSearch() {
         return cgData.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId);
+    }
+
+    public void setListId(int listId) {
+        this.listId = listId;
+    }
+
+    public void setSearchCenter(Geopoint searchCenter) {
+        this.searchCenter = searchCenter;
     }
 
 }
