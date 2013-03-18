@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 
 public abstract class Network {
 
@@ -58,6 +59,13 @@ public abstract class Network {
     private final static String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
     private static final String PATTERN_PASSWORD = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
+
+    /**
+     * charset for requests
+     *
+     * @see "http://docs.oracle.com/javase/1.5.0/docs/api/java/nio/charset/Charset.html"
+     */
+    private static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
 
     private final static HttpParams clientParams = new BasicHttpParams();
 
@@ -187,11 +195,11 @@ public abstract class Network {
      * @return the HTTP response, or null in case of an encoding error param
      */
     public static HttpResponse postRequest(final String uri, final Parameters params,
-                                           final String fileFieldName, final String fileContentType, final File file) {
+            final String fileFieldName, final String fileContentType, final File file) {
         final MultipartEntity entity = new MultipartEntity();
         for (final NameValuePair param : params) {
             try {
-                entity.addPart(param.getName(), new StringBody(param.getValue()));
+                entity.addPart(param.getName(), new StringBody(param.getValue(), CHARSET_UTF8));
             } catch (final UnsupportedEncodingException e) {
                 Log.e("Network.postRequest: unsupported encoding for parameter " + param.getName(), e);
                 return null;
