@@ -30,7 +30,6 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -929,13 +928,11 @@ public abstract class GCParser {
             return new ImmutablePair<StatusCode, String>(StatusCode.NO_LOG_TEXT, "");
         }
 
-        final String logInfo = HtmlUtils.convertNonLatinCharactersToHTML(log).replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
+        final String logInfo = log.replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
 
-        if (trackables != null) {
-            Log.i("Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + logInfo + "; trackables: " + trackables.size());
-        } else {
-            Log.i("Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + logInfo + "; trackables: 0");
-        }
+        Log.i("Trying to post log for cache #" + cacheid + " - action: " + logType
+                + "; date: " + year + "." + month + "." + day + ", log: " + logInfo
+                + "; trackables: " + (trackables != null ? trackables.size() : "0"));
 
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
@@ -1083,8 +1080,8 @@ public abstract class GCParser {
         final Parameters uploadParams = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
-                "ctl00$ContentBody$ImageUploadControl1$uxFileCaption", HtmlUtils.convertNonLatinCharactersToHTML(caption),
-                "ctl00$ContentBody$ImageUploadControl1$uxFileDesc", HtmlUtils.convertNonLatinCharactersToHTML(description),
+                "ctl00$ContentBody$ImageUploadControl1$uxFileCaption", caption,
+                "ctl00$ContentBody$ImageUploadControl1$uxFileDesc", description,
                 "ctl00$ContentBody$ImageUploadControl1$uxUpload", "Upload");
         Login.putViewstates(uploadParams, viewstates);
 
@@ -1117,7 +1114,7 @@ public abstract class GCParser {
 
         Log.i("Trying to post log for trackable #" + trackingCode + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log);
 
-        final String logInfo = HtmlUtils.convertNonLatinCharactersToHTML(log).replace("\n", "\r\n"); // windows' eol
+        final String logInfo = log.replace("\n", "\r\n"); // windows' eol
 
         final Calendar currentDate = Calendar.getInstance();
         final Parameters params = new Parameters(
