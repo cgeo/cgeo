@@ -98,7 +98,7 @@
     · Improved and extended cache type detection on live map\n
     · Waypoints can be marked as visited\n
     · Possibility to delete offline logs in lists\n
-    · Use UTF8 for log text\n
+    · Support of language specific characters in log text equally to the website\n
     \n
     <b>Bugfixing:</b>\n
     · Final flag icon lost when updating cache with self defined final\n
