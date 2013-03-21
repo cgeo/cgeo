@@ -4,7 +4,7 @@
 		android:versionCode="20121203"
 		package="cgeo.geocaching"
 		android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="13" />
+	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="8" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
