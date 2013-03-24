@@ -98,6 +98,7 @@
     · Improved and extended cache type detection on live map\n
     · Waypoints can be marked as visited\n
     · Possibility to delete offline logs in lists\n
+    · Support of language specific characters in log text equally to the website\n
     \n
     <b>Bugfixing:</b>\n
     · Final flag icon lost when updating cache with self defined final\n
@@ -107,6 +108,8 @@
     · Replaced the term \"GC-Code\" by \"Geocode\"\n
     · Improvements for light theme\n
     · Share function uses short URL again\n
+    · Offline log marker now shown after autosave of log\n
+    · GPX export no longer exports waypoints without coordinates\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
     \n
@@ -115,13 +118,12 @@
       Approximated coords due to limitations on the GC-website\n
       Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
       In fast mode the cache type might be wrong in rare cases\n
-      Fast mode only detectes Tradi, Multi, Mystery, Event caches\n
       On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
       Log images with huge size cause a long loading time\n
-      In special situations the logbook might not be shown completely after logging a cache\n
       The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
       On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
+      A huge amount of pictures on the image tab of a cache might cause a crash\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
