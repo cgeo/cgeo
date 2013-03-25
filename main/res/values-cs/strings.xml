@@ -409,7 +409,6 @@
   <string name="init_offline_wp">Ukládat statické mapy k bodům trasy pro offline použití</string>
   <string name="init_save_log_img">Ukládat obrázky z logů</string>
   <string name="init_units">Používat imperiální jednotky vzdálenosti</string>
-  <string name="init_nav">Používat Google Navigaci</string>
   <string name="init_log_offline">Povolit Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat Log na server)</string>
   <string name="init_choose_list">Ptát se na seznam pro uložení keše</string>
   <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
@@ -1062,7 +1061,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">Stránka c:geo</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Návod: <a href="http://manual.cgeo.org/">c:geo v Nutshell</a></string>
-  <string name="about_go4cache">Služba <b>Go 4 Cache</b> zobrazuje ostatní geokačery na mapě (v <b>c:geo</b> nebo v prohlížeči) v reálném čase. Může zobrazovat - na příklad - jakou keš zrovna hledají. Připojením se k <b>Go 4 Cache</b> získá aplikace <b>c:geo</b> povolení zveřejňovat tvou polohu při geocachingu (pouze když je <b>c:geo</b> spuštěno).</string>
   <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
   <string name="about_auth_1">Následující proces dovoluje aplikaci <b>c:geo</b> přístup na Twitter - pokud budeš souhlasit.</string>
   <string name="about_auth_2">Klepnutím na tlačítko \"Zahájit autorizaci\" bude proces zahájen. Tento proces otevře webový prohlížeč s Twitterem. Přihlaš se na této stránce a povol <b>c:geu</b> přístup k tvému účtu. Pokud je to povoleno, Twitter ti ukáže číselný PIN kód. Tento PIN kód musíš zadat do <b>c:geo</b> a potvrdit. To je vše.</string>
