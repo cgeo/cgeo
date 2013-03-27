@@ -49,7 +49,7 @@ public class StaticMapsProvider {
         downloadMap(geocode, 11, ROADMAP, markerUrl, prefix + '5', "", latlonMap, edge, edge, waypoints);
     }
 
-    private static DownloadState downloadMap(String geocode, int zoom, String mapType, String markerUrl, String prefix, String shadow, String latlonMap, int width, int height, final Parameters waypoints) {
+    private static void downloadMap(String geocode, int zoom, String mapType, String markerUrl, String prefix, String shadow, String latlonMap, int width, int height, final Parameters waypoints) {
         final Parameters params = new Parameters(
                 "center", latlonMap,
                 "zoom", String.valueOf(zoom),
@@ -64,11 +64,11 @@ public class StaticMapsProvider {
 
         if (httpResponse == null) {
             Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
-            return DownloadState.REQUEST_FAILED;
+            return;
         }
         if (httpResponse.getStatusLine().getStatusCode() != 200) {
             Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + httpResponse.getStatusLine().getStatusCode());
-            return DownloadState.STATUS_CODE_NOK;
+            return;
         }
         final File file = getMapFile(geocode, prefix, true);
         if (LocalStorage.saveEntityToFile(httpResponse, file)) {
@@ -76,11 +76,11 @@ public class StaticMapsProvider {
             final long fileSize = file.length();
             if (fileSize < MIN_MAP_IMAGE_BYTES) {
                 file.delete();
-                return DownloadState.FILE_TOO_SMALL;
+                return;
             }
-            return DownloadState.OK;
+            return;
         }
-        return DownloadState.NOT_SAVED;
+        return;
     }
 
     public static void downloadMaps(Geocache cache) {
@@ -169,10 +169,10 @@ public class StaticMapsProvider {
         downloadMaps(cache.getGeocode(), cacheMarkerUrl, "", latlonMap, edge, waypoints, waitForResult);
     }
 
-    public static DownloadState storeCachePreviewMap(final Geocache cache) {
+    public static void storeCachePreviewMap(final Geocache cache) {
         if (cache == null) {
             Log.e("storeCachePreviewMap - missing input parameter cache");
-            return DownloadState.FAILED;
+            return;
         }
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -181,8 +181,7 @@ public class StaticMapsProvider {
         final int width = metrics.widthPixels;
         final int height = (int) (110 * metrics.density);
         final String markerUrl = MARKERS_URL + "my_location_mdpi.png";
-        DownloadState state = downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, width, height, null);
-        return state;
+        downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, width, height, null);
     }
 
     private static int guessMaxDisplaySide() {
@@ -329,9 +328,5 @@ public class StaticMapsProvider {
             return BitmapFactory.decodeFile(mapFile.getPath());
         }
         return null;
-    }
-
-    public enum DownloadState {
-        OK, REQUEST_FAILED, STATUS_CODE_NOK, FILE_TOO_SMALL, NOT_SAVED, FAILED
     }
 }
