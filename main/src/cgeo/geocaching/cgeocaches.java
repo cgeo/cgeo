@@ -439,22 +439,22 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
         }
 
-        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(type.ordinal(), extras, this);
-
-        // init
-        if (CollectionUtils.isNotEmpty(cacheList)) {
-            if (currentLoader.isStarted()) {
-                showFooterLoadingCaches();
-            }
-            else {
-                showFooterMoreCaches();
-            }
-        }
-
         setTitle(title);
         setAdapter();
 
         prepareFilterBar();
+
+        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(type.ordinal(), extras, this);
+
+        // init
+        if (CollectionUtils.isNotEmpty(cacheList)) {
+            // currentLoader can be null if this activity is created from a map, as onCreateLoader() will return null.
+            if (currentLoader != null && currentLoader.isStarted()) {
+                showFooterLoadingCaches();
+            } else {
+                showFooterMoreCaches();
+            }
+        }
 
         if (isInvokedFromAttachment()) {
             importGpxAttachement();
