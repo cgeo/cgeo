@@ -749,9 +749,18 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 showFilterMenu(null);
                 return true;
             case MENU_SORT:
-                new ComparatorUserInterface(this).selectComparator(adapter.getCacheComparator(), new RunnableWithArgument<CacheComparator>() {
+                final CacheComparator oldComparator = adapter.getCacheComparator();
+                new ComparatorUserInterface(this).selectComparator(oldComparator, new RunnableWithArgument<CacheComparator>() {
                     @Override
                     public void run(CacheComparator selectedComparator) {
+                        // selecting the same sorting twice will toggle the order
+                        if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
+                            adapter.toggleInverseSort();
+                        }
+                        else {
+                            // always reset the inversion for a new sorting criteria
+                            adapter.resetInverseSort();
+                        }
                         setComparator(selectedComparator);
                     }
                 });

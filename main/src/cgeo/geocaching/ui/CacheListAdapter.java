@@ -152,16 +152,16 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
      * @param comparator
      */
     public void setComparator(final CacheComparator comparator) {
-        // selecting the same sorting twice will toggle the order
-        if (cacheComparator != null && comparator != null && cacheComparator.getClass().equals(comparator.getClass())) {
-            inverseSort = !inverseSort;
-        }
-        else {
-            // always reset the inversion for a new sorting criteria
-            inverseSort = false;
-        }
         cacheComparator = comparator;
         forceSort();
+    }
+
+    public void resetInverseSort() {
+        inverseSort = false;
+    }
+
+    public void toggleInverseSort() {
+        inverseSort = !inverseSort;
     }
 
     public CacheComparator getCacheComparator() {
