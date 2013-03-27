@@ -44,6 +44,8 @@ public class StaticMapsProviderTest extends TestCase {
             assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, theFinal));
             assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
 
+            StaticMapsProvider.DownloadState state = StaticMapsProvider.storeCachePreviewMap(cache);
+            assertEquals(StaticMapsProvider.DownloadState.OK, state);
             // download
             StaticMapsProvider.downloadMaps(cache);
 
