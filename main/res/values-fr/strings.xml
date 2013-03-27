@@ -53,6 +53,7 @@
   <string name="wp_pkg">Parking</string>
   <string name="wp_trailhead">Départ du sentier</string>
   <string name="wp_waypoint">Point de repère</string>
+  <string name="wp_original">Coordonnées originales</string>
 
   <!-- logs -->
   <string name="log_found">Trouvée</string>
@@ -76,12 +77,15 @@
   <string name="log_needs_archived">Nécessite d\'être archivée</string>
   <string name="log_discovered">Découverte</string>
   <string name="log_reviewer">Note du relecteur</string>
+  <string name="log_retractlisting">Retirer l\'entrée</string>
+  <string name="log_marked_missing">Marquer comme absente</string>
   <string name="log_tb_nothing">Ne fait rien</string>
   <string name="log_tb_visit">Visité</string>
   <string name="log_tb_drop">Déposé ici</string>
   <string name="log_tb_changeall">Tout modifié</string>
   <string name="log_save">Enregistrer</string>
   <string name="log_saving">Enregistrement en cours…</string>
+  <string name="log_saving_and_uploading">Envoi de la note et de l\'image…</string>
   <string name="log_clear">Effacer</string>
   <string name="log_post">Envoyer</string>
   <string name="log_post_rate">Envoyer &amp; noter</string>
@@ -114,6 +118,14 @@
   <string name="log_announcement">Annonce</string>
   <string name="log_today">Aujourd\'hui</string>
   <string name="log_yesterday">Hier</string>
+  <string name="log_smilies">Sourillards</string>
+  <string name="log_image">Image</string>
+  <string name="log_image_attach">Ajouter une image</string>
+  <string name="log_image_edit">Éditer l\'image</string>
+  <string name="log_image_stored">Existante</string>
+  <string name="log_image_camera">Nouvelle</string>
+  <string name="log_image_caption">Légende</string>
+  <string name="log_image_description">Description</string>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduire en %s</string>
@@ -134,6 +146,7 @@
   <string name="err_wrong">Nom d\'utilisateur inconnu ou mauvais mot de passe</string>
   <string name="err_maintenance">Le site de Geocaching.com est en cours de maintenance, essayez plus tard. c:geo fonctionne en mode hors-ligne.</string>
   <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
+  <string name="err_unvalidated_account">Vous devez d\'abord confirmer votre compte sur le site web Geocaching.com</string>
   <string name="err_unpublished">La cache a été retirée de la publication</string>
   <string name="err_premium_only">La cache est réservée aux membres Premium de Geocaching.com</string>
   <string name="err_detail_open">c:geo ne peut pas ouvrir le détail de la cache.</string>
@@ -160,6 +173,9 @@
   <string name="err_load_descr_failed">c:geo ne peut pas charger la description.</string>
   <string name="err_location_unknown">c:geo ne connait pas la position de la cache.</string>
   <string name="err_missing_device_name">Veuillez saisir un nom pour votre appareil avant l\'enregistrement.</string>
+  <string name="err_favorite_failed">c:geo ne peut pas changer le status de favori.</string>
+  <string name="err_select_logimage_failed">La sélection d\'une image pour la note a échoué.</string>
+  <string name="err_aquire_image_failed">L\'acquisition d\'une nouvelle image pour la note a échoué.</string>
 
   <string name="err_tb_display">"c:geo ne peut pas afficher l\'objet voyageur demandé. Est-ce vraiment un objet voyageur?</string>
   <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
@@ -181,7 +197,8 @@
   <string name="err_log_load_data_again">c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
   <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
   <string name="err_log_failed_server">c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
-  <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site geocaching.com.</string>
+  <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Geocaching.com.</string>
+  <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site Geocaching.com.</string>
 
   <string name="err_search_address_forgot">c:geo a oublié l\'adresse recherchée.</string>
   <string name="err_parse_lat">c:geo n\'arrive pas à lire la latitude.</string>
@@ -205,11 +222,14 @@
   <string name="warn_invalid_mapfile">Le fichier sélectionné n\'est pas un fichier de carte mapsforge version 0.3.0.\nLes cartes hors-lignes ne sont pas disponibles.</string>
   <string name="warn_deprecated_mapfile">Vous utilisez un fichier de carte obsolète de version 0.2.4.\nVous devriez charger sans tarder une carte version 0.3.\nLe support des cartes 0.2.4 disparaîtra dans une prochaine version de c:geo.</string>
   <string name="warn_nonexistant_mapfile">Le fichier de carte spécifié n\'existe pas.\nLes cartes hors ligne ne sont pas disponibles.</string>
+  <string name="warn_rendertheme_missing">Le thème de la carte n\'a pas été trouvé.</string>
 
   <string name="info_log_posted">Envoi de la visite réussi.</string>
   <string name="info_log_saved">Sauvegarde de la visite réussie.</string>
   <string name="info_log_cleared">La visite a été effacée.</string>
   <string name="info_log_type_changed">Le type de visite a changé!</string>
+  <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
+  <string name="info_stored_image">Nouvelle image sauvée dans :</string>
 
   <string name="info_storing_static_maps">Sauvegarde des cartes statiques</string>
 
@@ -266,7 +286,8 @@
   <string name="caches_sort_rating">note</string>
   <string name="caches_sort_vote">vote (note perso)</string>
   <string name="caches_sort_inventory">nombre d\'objets dans l\'inventaire</string>
-  <string name="caches_sort_date_hidden">date</string>
+  <string name="caches_sort_date_hidden">date de création</string>
+  <string name="caches_sort_date_logged">date du carnet</string>
   <string name="caches_sort_finds">trouvées</string>
   <string name="caches_sort_state">état</string>
   <string name="caches_sort_storage">date de sauvegarde dans l\'appareil</string>
@@ -282,6 +303,7 @@
   <string name="caches_drop_stored">Effacer les caches stockées</string>
   <string name="caches_drop_progress">Suppression des caches en cours</string>
   <string name="caches_drop_all_and_list">Suppression des caches et de la liste</string>
+  <string name="caches_delete_events">Effacer les événements précédents</string>
   <string name="caches_refresh_selected">Rafraîchir les caches sélectionnées</string>
   <string name="caches_refresh_all">Tout rafraîchir</string>
   <string name="caches_move_selected">Déplacer les caches sélectionnées</string>
@@ -299,7 +321,10 @@
   <string name="caches_filter_track">avec des trackables</string>
   <string name="caches_filter_clear">effacer les filtres</string>
   <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
+  <string name="caches_filter_origin">Avec les coordonées originales</string>
   <string name="caches_removing_from_history">Effacer de l\'historique…</string>
+  <string name="caches_clear_offlinelogs">Effacer les entrées de carnet hors-ligne</string>
+  <string name="caches_clear_offlinelogs_progress">Effacement des entrées de carnet hors-ligne</string>
 
   <!-- caches lists -->
   <string name="list_menu">Listes</string>
@@ -334,6 +359,11 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gc_activate">Utiliser Geocaching.com pour la carte active et les recherches.</string>
+  <string name="init_oc">opencaching.de</string>
+  <string name="init_oc_activate">Utiliser opencaching.de pour la carte active et les recherches.</string>
+  <string name="init_oc_username_description">Entrer votre nom d\'utilisateur opencaching.de afin de pouvoir marquer vos trouvailles.</string>
+  <string name="init_oc_username">Entrer votre nom d\'utilisateur</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Identifiant</string>
@@ -357,6 +387,7 @@
   <string name="init_signature_template_datetime">Date &amp; Heure</string>
   <string name="init_signature_template_user">Utilisateur</string>
   <string name="init_signature_template_number">Nombre</string>
+  <string name="init_signature_template_owner">Propriétaire</string>
   <string name="init_details">Détails des caches</string>
   <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
   <string name="init_elevationwanted">Charger l\'altitude de la cache</string>
@@ -377,6 +408,7 @@
   <string name="init_save_log_img">Sauver les images des visites</string>
   <string name="init_units">Utiliser des unités de distance impériales</string>
   <string name="init_log_offline">Toujours utiliser le mode hors-ligne, même si connecté.</string>
+  <string name="init_choose_list">Demander dans quelle liste sauver les caches.</string>
   <string name="init_livelist">Afficher la direction des caches dans les listes</string>
   <string name="init_altitude">Correction de l\'altitude</string>
   <string name="init_altitude_description">Si le GPS indique une mauvaise altitude, vous pouvez la corriger avec une valeur en mètres, positive ou négative.</string>
@@ -399,7 +431,13 @@
   <string name="init_mapsources">Source des cartes</string>
   <string name="init_mapsources_description">Vous pouvez choisir la source de vos cartes. En tant qu\'alternative aux cartes Google, diverses cartes de type OpenStreetMap sont disponibles et même en hors-ligne (voir <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> pour plus de détails).</string>
   <string name="init_mapsource_select">Choisir la source des cartes</string>
+  <string name="init_map_directory_description">Dossier contenant les cartes hors-ligne</string>
+  <string name="init_gpx_exportdir">Dossier d\'exportation GPX</string>
+  <string name="init_gpx_importdir">Dossier d\'importation GPX</string>
+  <string name="init_gpx_exportdir_description">Vous pouvez choisir le dossier dans lequel les exportations au format GPX seront stockées.</string>
+  <string name="init_gpx_importdir_description">Vous pouvez choisir le dossier à partir duquel les exportations au format GPX seront effectuées.</string>
   <string name="init_maptrail">Montrer la trace sur la carte</string>
+  <string name="init_share_after_export">Ouvrir le menu de partage après les exportations GPX.</string>
   <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"visité\"</string>
   <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
   <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
@@ -417,6 +455,9 @@
   <string name="init_dbmove_running">Déplacement de la base de données</string>
   <string name="init_dbmove_success">Base de données déplacée</string>
   <string name="init_dbmove_failed">Erreur lors du déplacement de la base de données</string>
+  <string name="init_plain_logs">Afficher les entrées de journal sans les couleurs</string>
+  <string name="init_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles.</string>
+  <string name="init_rendertheme_folder">Dossier contenant les cartes hors-ligne personnelles (optionnelles).</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google Maps : plan</string>
@@ -427,13 +468,15 @@
 
   <string name="init_sendToCgeo">Envoyers vers c:geo</string>
   <string name="init_sendToCgeo_name">Votre nom d\'appareil:</string>
-  <string name="init_sendToCgeo_description">Envoyers vers c:geo permet de recevoir les caches directement depuis le site geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
+  <string name="init_sendToCgeo_description">Envoyers vers c:geo permet de recevoir les caches directement depuis le site Geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
   <string name="init_sendToCgeo_register">Demande d\'enregistrement</string>
   <string name="init_sendToCgeo_registering">Enregistrer votre appareil pour "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
   <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
+
   <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Pas de connexion Internet ou problème avec le site send2c:geo.</string>
   <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'abonnement à send2c:geo a expiré. Merci de vous réenregistrer dans les Paramètres.</string>
+
 
   <!-- auth -->
   <string name="auth_twitter">twitter</string>
@@ -473,6 +516,7 @@
   <string name="cache_log_images_title">Image de la visite</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Note personnelle</string>
+  <string name="cache_personal_note_edit">Éditer</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Description longue</string>
   <string name="cache_description_table_note">La description contient des informations de formattages qui nécessitent possiblement d\'être vues sur le site %s pour être affichées correctement.</string>
@@ -484,6 +528,10 @@
   <string name="cache_favpoint_not_on">Cette cache n\'est pas dans vos favoris.</string>
   <string name="cache_favpoint_add">Ajouter</string>
   <string name="cache_favpoint_remove">Enlever</string>
+  <string name="cache_list_text">Liste :</string>
+  <string name="cache_list_change">Déplacer</string>
+  <string name="cache_list_unknown">Dans aucune liste</string>
+  <string name="cache_images">Images</string>
 
   <string name="cache_waypoints">Étapes</string>
   <plurals name="waypoints">
@@ -514,7 +562,14 @@
   <string name="cache_dialog_watchlist_add_message">Ajout de la cache à votre liste de suivi…</string>
   <string name="cache_dialog_watchlist_remove_title">Liste de suivi</string>
   <string name="cache_dialog_watchlist_remove_message">Retrait de la cache de votre liste de suivi…</string>
+  <string name="cache_dialog_favourite_add_title">Favori</string>
+  <string name="cache_dialog_favourite_add_message">Ajout de la cache à vos favoris…</string>
+  <string name="cache_dialog_favourite_remove_title">Favori</string>
+  <string name="cache_dialog_favourite_remove_message">Suppression de la cache de vos favoris…</string>
   <string name="cache_menu_navigate">Navigation</string>
+  <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
+  <string name="cache_menu_navigation_walk">Navigation (piéton)</string>
+  <string name="cache_menu_maps_directions">Directions Google Maps</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Carte</string>
   <string name="cache_menu_map_static">Cartes statiques</string>
@@ -534,12 +589,14 @@
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>
   <string name="cache_status_archived">Archivée</string>
   <string name="cache_status_disabled">Désactivée</string>
   <string name="cache_status_premium">Membres privilégiés seulement</string>
+  <string name="cache_status_not_premium">Pour tous les membres</string>
   <string name="cache_geocode">Code gc</string>
   <string name="cache_name">Nom</string>
   <string name="cache_type">Type</string>
@@ -559,6 +616,8 @@
   <string name="cache_coordinates_original">Coordonnées d\'origine</string>
   <string name="cache_spoiler_images_title">Images indices</string>
   <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
+  <string name="cache_images_title">Images</string>
+  <string name="cache_images_loading">Chargement des images…</string>
   <string name="cache_log_types">Types de visites</string>
   <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
   <string name="cache_clear_history">Effacer l\'historique</string>
@@ -568,6 +627,11 @@
   <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
   <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
   <string name="cache_share_field">Partager</string>
+  <string name="cache_time_full_hours">heures</string>
+  <string name="cache_listed_on">Listée le %s</string>
+
+  <!-- editor dialog -->
+  <string name="editor_save">Enregistrer</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Recherche de fichiers\nin</string>
@@ -575,6 +639,10 @@
   <string name="file_list_no_files">c:geo n\'a pas trouvé les fichiers nécessaires.</string>
   <string name="file_searching">Recherche des fichiers nécessaires</string>
   <string name="file_title_searching">Recherche en cours</string>
+
+  <!-- simple_dir_chooser -->
+  <string name="simple_dir_chooser_title">Choisir le dossier</string>
+  <string name="simple_dir_chooser_current_path">Chemin :</string>
 
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx</string>
@@ -592,10 +660,13 @@
   <string name="gpx_import_error_unexpected">Erreur inattendue</string>
   <string name="gpx_import_confirm">Voulez vous importer le fichier GPX dans c:geo ?</string>
   <string name="gpx_import_canceled">Importation GPX interrompue</string>
+  <string name="gpx_import_delete_title">Effacer le fichier</string>
+  <string name="gpx_import_delete_message">Voulez vous effacer %s ?</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Choisir un fichier carte</string>
 
+  <!--  theme file select -->
   <!--  import -->
   <string name="web_import_title">Import depuis le web</string>
   <string name="web_import_waiting">En attente de nouvelles caches depuis le web…</string>
@@ -618,8 +689,23 @@
   <string name="waypoint_edit_title">Éditer une étape</string>
   <string name="waypoint_add_title">Ajouter une étape</string>
   <string name="waypoint_note">Note</string>
+  <string name="waypoint_visited">Marquer comme visité</string>
   <string name="waypoint_save">Sauver</string>
   <string name="waypoint_loading">Chargement d\'une étape…</string>
+  <string name="waypoint_do_not_touch_cache_coordinates">Ne pas modifier les coordonnées de la cache</string>
+  <string name="waypoint_set_as_cache_coords">Utiliser comme coordonnées de la cache dans c:geo</string>
+  <string name="waypoint_save_and_modify_on_website">Utiliser comme coordonnées de la cache dans c:geo et sur le site web</string>
+  <string name="waypoint_reset_cache_coords">Réinitialiser les coordonnées de la cache</string>
+  <string name="waypoint_coordinates_has_been_reset_on_website">Les coordonnées de la cache ont été reinitialisées sur le site web.</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Réinitialisation des coordonnées de la cache sur le site web…</string>
+  <string name="waypoint_reset">Réinitialiser</string>
+  <string name="waypoint_localy_reset_cache_coords">Réinitialiser dans c:geo</string>
+  <string name="waypoint_reset_local_and_remote_cache_coords">Réinitialiser dans c:geo et sur le site web</string>
+  <string name="waypoint_being_saved">Étape en cours de sauvegarde…</string>
+  <string name="waypoint_coordinates_couldnt_be_modified_on_website">Le site web n\'accepte pas la modification des coordonnées de la cache.</string>
+  <string name="waypoint_coordinates_upload_error">Erreur lors de la modification des coordonnées sur le site web.</string>
+  <string name="waypoint_coordinates_uploading_to_website">Envoi des coordonnées %s sur le site web.</string>
+  <string name="waypoint_coordinates_has_been_modified_on_website">Les coordonnées de la cache ont été modifiées sur le site web en : %s</string>
   <string name="waypoint_done">Ok</string>
   <string name="waypoint_duplicate">Dupliquer</string>
   <string name="waypoint_copy_of">Copie de</string>
@@ -645,10 +731,13 @@
   <string name="map_map">Carte</string>
   <string name="map_live">Carte active</string>
   <string name="map_view_map">Voir carte</string>
+  <string name="map_modes">Marqueurs</string>
   <string name="map_trail_show">Afficher le parcours</string>
   <string name="map_trail_hide">Cacher le parcours</string>
   <string name="map_circles_show">Afficher les cercles</string>
   <string name="map_circles_hide">Cacher les cercles</string>
+  <string name="map_theme_builtin">Défault</string>
+  <string name="map_theme_select">Sélectionner le thème</string>
   <string name="map_live_enable">Activer Temps réel</string>
   <string name="map_live_disable">Désactiver Temps réel</string>
   <string name="map_static_title">Cartes statiques</string>
@@ -664,6 +753,7 @@
   <string name="live_map_notification">Lors de l\'affichage de la carte active, certaines coordonnées de géocaches peuvent être imprécises et sont indiquées par un cercle orange.\nDemander les détails d\'une géocache ou la sauver pour une utilisation hors-ligne récupérera les coordonnées exactes.\n\nVous trouverez plus d\'informations sur les changements sur la page \"À propos de c:geo\".</string>
   <string name="live_map_note_dontshow">Ne plus afficher</string>
 
+  
   <!-- search -->
   <string name="search_bar_hint">Recherche de caches</string>
   <string name="search_bar_desc">Caches (code GC, mot clé), Objets voyageurs (code TB)</string>
@@ -719,6 +809,7 @@
   <string name="user_menu_view_hidden">Caches cachées</string>
   <string name="user_menu_view_found">Caches trouvées</string>
   <string name="user_menu_open_browser">Ouvrir le profil dans un navigateur</string>
+  <string name="user_menu_send_message">Envoyer un message</string>
 
   <!-- navigation -->
   <string name="navigation">Navigation</string>
@@ -760,17 +851,16 @@
   <string name="export_failed">Échec de l\'exportation</string>
   <string name="export_fieldnotes">Notes de terrain</string>
   <string name="export_fieldnotes_info">Les notes de terrain seront sauvées dans le dossier /sdcard/field-notes avec, comme nom de fichier, la date et l\'heure courantes.</string>
-  <string name="export_fieldnotes_upload">Envoyer vers geocaching.com</string>
+  <string name="export_fieldnotes_upload">Envoyer vers Geocaching.com</string>
   <string name="export_fieldnotes_uploading">Envoi en cours…</string>
   <string name="export_fieldnotes_upload_success">Envoi effectué avec succès</string>
   <string name="export_fieldnotes_onlynew">Uniquement les nouveautés depuis le dernier envoi</string>
   <string name="export_fieldnotes_creating">Création des notes de terrain…</string>
   <string name="export_gpx">GPX</string>
+  <string name="export_gpx_info">Le fichier GPX sera exporté dans %1$s avec la date et l\'heure courantes comme nom de fichier.</string>
+  <string name="export_gpx_to">Envoyer le GPX exporté vers</string>
 
-  <!--  attribute unknown -->
-  <string name="attribute_unknown_yes">Attribut inconnu</string>
-  <string name="attribute_unknown_no">Attribut inconnu négatif</string>
-  <!--  attributes (permissions -> allowed, not allowed) -->
+  <!--  GC attributes  -->
   <string name="attribute_dogs_yes">Chiens autorisés</string>
   <string name="attribute_dogs_no">Chiens interdits</string>
   <string name="attribute_bicycles_yes">Vélos autorisés</string>
@@ -789,8 +879,6 @@
   <string name="attribute_campfires_no">Feux de camp interdits</string>
   <string name="attribute_rv_yes">Camions/Camping-cars autorisés</string>
   <string name="attribute_rv_no">Camions/Camping-cars interdits</string>
-
-  <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Recommandé pour les enfants</string>
   <string name="attribute_kids_no">Non recommandé pour les enfants</string>
   <string name="attribute_onehour_yes">Prend moins d\'une heure</string>
@@ -843,8 +931,6 @@
   <string name="attribute_landf_no">Pas un circuit Perdu et trouvé</string>
   <string name="attribute_partnership_yes">Cache en partenariat</string>
   <string name="attribute_partnership_no">Pas de cache en partenariat</string>
-
-  <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Parking payant</string>
   <string name="attribute_fee_no">Pas de parking payant</string>
   <string name="attribute_rappelling_yes">Matériel d\'escalade nécessaire</string>
@@ -867,8 +953,6 @@
   <string name="attribute_wirelessbeacon_no">Pas de balise sans fil</string>
   <string name="attribute_treeclimbing_yes">Escalade d\'arbre nécessaire</string>
   <string name="attribute_treeclimbing_no">Pas d\'escalade d\'arbre nécessaire</string>
-
-  <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Plantes toxiques</string>
   <string name="attribute_poisonoak_no">Pas de plantes toxiques</string>
   <string name="attribute_dangerousanimals_yes">Animaux dangereux</string>
@@ -885,8 +969,6 @@
   <string name="attribute_danger_no">Pas de zone dangereuse</string>
   <string name="attribute_thorn_yes">Épines</string>
   <string name="attribute_thorn_no">Pas d\'épine</string>
-
-  <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Accessible en fauteuil roulant</string>
   <string name="attribute_wheelchair_no">Pas accessible en fauteuil roulant</string>
   <string name="attribute_parking_yes">Parking possible</string>
@@ -909,9 +991,67 @@
   <string name="attribute_fuel_no">Pas d\'essence proche</string>
   <string name="attribute_food_yes">Nourriture proche</string>
   <string name="attribute_food_no">Pas de nourriture proche</string>
+  <string name="attribute_oc_only_yes">Uniquement enregistrable sur Opencaching</string>
+  <string name="attribute_oc_only_no">Pas uniquement enregistrable sur Opencaching</string>
+  <string name="attribute_link_only_yes">Hyperlien vers un autre portail</string>
+  <string name="attribute_link_only_no">Pas uniquement les hyperliens vers un autre portail</string>
+  <string name="attribute_letterbox_yes">Boîte à lettres (timbre requis)</string>
+  <string name="attribute_letterbox_no">Pas de boîte à lettres avec timbre requis</string>
+  <string name="attribute_railway_yes">Chemin de fer en service à proximité</string>
+  <string name="attribute_railway_no">Pas de chemin de fer en service à proximité</string>
+  <string name="attribute_syringe_yes">Premier secours disponible</string>
+  <string name="attribute_syringe_no">Pas de premier secours disponible</string>
+  <string name="attribute_swamp_yes">Marais</string>
+  <string name="attribute_swamp_no">Pas de marais</string>
+  <string name="attribute_hills_yes">Endroit vallonné</string>
+  <string name="attribute_hills_no">Pas d\'endroit vallonné</string>
+  <string name="attribute_poi_yes">Point d\'intérêt</string>
+  <string name="attribute_poi_no">Pas de point d\'intérêt</string>
+  <string name="attribute_moving_target_yes">Cible mouvante</string>
+  <string name="attribute_moving_target_no">Pas de cible mouvante</string>
+  <string name="attribute_webcam_yes">Webcam</string>
+  <string name="attribute_webcam_no">Pas de webcam</string>
+  <string name="attribute_inside_yes">Dans un endroit clos (grotte, bâtiment, etc.)</string>
+  <string name="attribute_inside_no">Pas dans un endroit clos</string>
+  <string name="attribute_in_water_yes">Dans l\'eau</string>
+  <string name="attribute_in_water_no">Hors de l\'eau</string>
+  <string name="attribute_no_gps_yes">Sans GPS (boîte à lettres, boussole, etc.)</string>
+  <string name="attribute_no_gps_no">Avec GPS</string>
+  <string name="attribute_overnight_yes">Passage de la nuit sur place nécessaire</string>
+  <string name="attribute_overnight_no">Pas de passage de la nuit sur place nécessaire</string>
+  <string name="attribute_specific_times_yes">Seulement possible à certaines heures</string>
+  <string name="attribute_specific_times_no">Possible à toute heure</string>
+  <string name="attribute_day_yes">Seulement de jour</string>
+  <string name="attribute_day_no">Pas uniquement de jour</string>
+  <string name="attribute_tide_yes">Marée</string>
+  <string name="attribute_tide_no">Pas de marée</string>
+  <string name="attribute_all_seasons_yes">Par toute saison</string>
+  <string name="attribute_all_seasons_no">Pas par toute saison</string>
+  <string name="attribute_breeding_yes">Période de reproduction / nature protégée</string>
+  <string name="attribute_breeding_no">Pas de pérstiode de reproduction / nature protégée</string>
+  <string name="attribute_snow_proof_yes">Cache protégée contre la neige</string>
+  <string name="attribute_snow_proof_no">Cache non protégeé contre la neige</string>
+  <string name="attribute_compass_yes">Boussole</string>
+  <string name="attribute_compass_no">Pas de boussole</string>
+  <string name="attribute_cave_yes">Équipement de spéléologie</string>
+  <string name="attribute_cave_no">Sans équipement de spéléologie</string>
+  <string name="attribute_aircraft_yes">Avion</string>
+  <string name="attribute_aircraft_no">Pas d\'avion</string>
+  <string name="attribute_investigation_yes">Enquête</string>
+  <string name="attribute_investigation_no">Sans enquête</string>
+  <string name="attribute_puzzle_yes">Puzzle / Mystère</string>
+  <string name="attribute_puzzle_no">Sans puzzle / mystère</string>
+  <string name="attribute_arithmetic_yes">Problème arithmétique</string>
+  <string name="attribute_arithmetic_no">Sans problème arithmétique</string>
+  <string name="attribute_other_cache_yes">Autre type de cache</string>
+  <string name="attribute_other_cache_no">Pas d\'autre type de cache</string>
+  <string name="attribute_ask_owner_yes">Demander les conditions au propriétaire</string>
+  <string name="attribute_ask_owner_no">Ne pas demander les conditions au propriétaire</string>
+  <string name="attribute_unknown_yes">Attribut inconnu</string>
+  <string name="attribute_unknown_no">Attribut inconnu négatif</string>
 
   <!-- next things -->
-  <string name="legal_note">Pour utiliser les services de geocaching.com, vous devez accepter les termes et conditions de la <a href="http://www.geocaching.com/about/termsofuse.aspx">mise en garde de Groundspeak</a>.</string>
+  <string name="legal_note">Pour utiliser les services de Geocaching.com, vous devez accepter les termes et conditions de la <a href="http://www.geocaching.com/about/termsofuse.aspx">mise en garde de Groundspeak</a>.</string>
   <string name="quote">Pour faciliter le géocaching.</string>
   <string name="powered_by">carnero</string>
   <string name="support">support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
@@ -927,8 +1067,8 @@
   <string name="status_new_release" tools:ignore="UnusedResources">Nouvelle version disponible.\nCliquer pour installer.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nouvelle version de test disponible.\nCliquer pour installer.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nouvelle version candidate disponible.\nCliquer pour installer.</string>
-  <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
-  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
 
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <plurals name="days_ago">
