@@ -105,8 +105,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     @Override
     public void onLoadFinished(final Loader<String> loader, final String page) {
         if (page == null) {
-            showToast(res.getString(R.string.err_log_load_data));
-            showProgress(false);
+            showErrorLoadingData();
             return;
         }
 
@@ -114,6 +113,11 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         trackables = GCParser.parseTrackableLog(page);
         possibleLogTypes = GCParser.parseTypes(page);
         possibleLogTypes.remove(LogType.UPDATE_COORDINATES);
+
+        if (possibleLogTypes.isEmpty()) {
+            showErrorLoadingData();
+            return;
+        }
 
         if (!possibleLogTypes.contains(typeSelected)) {
             typeSelected = possibleLogTypes.get(0);
@@ -127,6 +131,11 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         initializeTrackablesAction();
         updateTrackablesList();
 
+        showProgress(false);
+    }
+
+    private void showErrorLoadingData() {
+        showToast(res.getString(R.string.err_log_load_data));
         showProgress(false);
     }
 
