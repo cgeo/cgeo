@@ -21,6 +21,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.ImagesList;
@@ -1202,23 +1203,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // cache coordinates
             if (cache.getCoords() != null) {
                 TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
-                valueView.setOnClickListener(new View.OnClickListener() {
-                    private int position = 0;
-                    private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
-                            GeopointFormatter.Format.LAT_LON_DECMINUTE,
-                            GeopointFormatter.Format.LAT_LON_DECSECOND,
-                            GeopointFormatter.Format.LAT_LON_DECDEGREE
-                    };
-
-                    // rotate coordinate formats on click
-                    @Override
-                    public void onClick(View view) {
-                        position = (position + 1) % availableFormats.length;
-
-                        final TextView valueView = (TextView) view.findViewById(R.id.value);
-                        valueView.setText(cache.getCoords().format(availableFormats[position]));
-                    }
-                });
+                valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
                 registerForContextMenu(valueView);
             }
 
@@ -2206,6 +2191,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 // coordinates
                 if (null != wpt.getCoords()) {
                     final TextView coordinatesView = (TextView) waypointView.findViewById(R.id.coordinates);
+                    coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(wpt.getCoords()));
                     coordinatesView.setText(wpt.getCoords().toString());
                     coordinatesView.setVisibility(View.VISIBLE);
                 }
