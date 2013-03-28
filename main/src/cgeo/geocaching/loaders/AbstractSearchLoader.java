@@ -1,8 +1,6 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
-import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -48,7 +46,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
                 search = runSearch();
             } else {
                 // Unless we make a new Search the Loader framework won't deliver results. It does't do equals only identity
-                search = GCParser.searchByNextPage(new SearchResult(search), Settings.isShowCaptcha(), this);
+                search = new SearchResult(search);
             }
         } catch (Exception e) {
             Log.e("Error in Loader ", e);
