@@ -250,12 +250,14 @@ class GpxExport extends AbstractExport {
             for (Waypoint wp : originWaypoints) {
                 String prefix = wp.getPrefix();
                 try {
-                    maxPrefix = Math.max(Integer.parseInt(prefix), maxPrefix);
+                    final int numericPrefix = Integer.parseInt(prefix);
+                    maxPrefix = Math.max(numericPrefix, maxPrefix);
                 } catch (NumberFormatException ex) {
-                    Log.e("Unexpected origin waypoint prefix='" + prefix + "'", ex);
+                    // ignore non numeric prefix, as it should be unique in the list of non-own waypoints already
                 }
                 writeCacheWaypoint(gpx, wp, prefix);
             }
+            // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints
             for (Waypoint wp : ownWaypoints) {
                 maxPrefix++;
                 String prefix = StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0');
