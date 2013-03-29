@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -88,7 +89,8 @@ public final class ActivityMixin {
     }
 
     public static int getDialogTheme() {
-        if (Settings.isLightSkin()) {
+        // Light theme dialogs don't work on Android Api < 11
+        if (Settings.isLightSkin() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             return R.style.popup_light;
         }
 
