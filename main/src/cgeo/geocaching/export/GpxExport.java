@@ -6,11 +6,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.XmlUtils;
@@ -21,11 +22,9 @@ import org.xmlpull.v1.XmlSerializer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Xml;
 import android.view.ContextThemeWrapper;
@@ -98,10 +97,9 @@ class GpxExport extends AbstractExport {
         return builder.create();
     }
 
-    private class ExportTask extends AsyncTask<Void, Integer, File> {
+    private class ExportTask extends AsyncTaskWithProgress<Void, File> {
         private final List<Geocache> caches;
         private final Activity activity;
-        private final Progress progress = new Progress();
 
         /**
          * Instantiates and configures the task for exporting field notes.
@@ -112,16 +110,9 @@ class GpxExport extends AbstractExport {
          *            optional: Show a progress bar and toasts
          */
         public ExportTask(final List<Geocache> caches, final Activity activity) {
+            super(activity, caches.size(), getProgressTitle(), cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches.size(), caches.size()));
             this.caches = caches;
             this.activity = activity;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            if (null != activity) {
-                progress.show(activity, null, getString(R.string.export) + ": " + getName(), ProgressDialog.STYLE_HORIZONTAL, null);
-                progress.setMaxProgressAndReset(caches.size());
-            }
         }
 
         @Override
@@ -344,8 +335,8 @@ class GpxExport extends AbstractExport {
 
         @Override
         protected void onPostExecute(final File exportFile) {
+            super.onPostExecute(exportFile);
             if (null != activity) {
-                progress.dismiss();
                 if (exportFile != null) {
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
                     if (Settings.getShareAfterExport()) {
@@ -361,11 +352,5 @@ class GpxExport extends AbstractExport {
             }
         }
 
-        @Override
-        protected void onProgressUpdate(Integer... status) {
-            if (null != activity) {
-                progress.setProgress(status[0]);
-            }
-        }
     }
 }

@@ -5,11 +5,11 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -102,18 +101,17 @@ class FieldnoteExport extends AbstractExport {
         return builder.create();
     }
 
-    private class ExportTask extends AsyncTask<Void, Integer, Boolean> {
+    private class ExportTask extends AsyncTaskWithProgress<Void, Boolean> {
         private final List<Geocache> caches;
         private final Activity activity;
         private final boolean upload;
         private final boolean onlyNew;
-        private final Progress progress = new Progress();
         private File exportFile;
 
         private static final int STATUS_UPLOAD = -1;
 
         /**
-         * Instantiates and configurates the task for exporting field notes.
+         * Instantiates and configures the task for exporting field notes.
          *
          * @param caches
          *            The {@link List} of {@link cgeo.geocaching.Geocache} to be exported
@@ -125,17 +123,11 @@ class FieldnoteExport extends AbstractExport {
          *            Upload/export only new logs since last export
          */
         public ExportTask(final List<Geocache> caches, final Activity activity, final boolean upload, final boolean onlyNew) {
+            super(activity, getProgressTitle(), getString(R.string.export_fieldnotes_creating));
             this.caches = caches;
             this.activity = activity;
             this.upload = upload;
             this.onlyNew = onlyNew;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            if (null != activity) {
-                progress.show(activity, getString(R.string.export) + ": " + getName(), getString(R.string.export_fieldnotes_creating), true, null);
-            }
         }
 
         @Override
@@ -228,9 +220,8 @@ class FieldnoteExport extends AbstractExport {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
             if (null != activity) {
-                progress.dismiss();
-
                 if (result) {
                     //                    if (onlyNew) {
                     //                        // update last export time in settings when doing it ourself (currently we use the date check from gc.com)
@@ -251,9 +242,9 @@ class FieldnoteExport extends AbstractExport {
         protected void onProgressUpdate(Integer... status) {
             if (null != activity) {
                 if (STATUS_UPLOAD == status[0]) {
-                    progress.setMessage(getString(R.string.export_fieldnotes_uploading));
+                    setMessage(getString(R.string.export_fieldnotes_uploading));
                 } else {
-                    progress.setMessage(getString(R.string.export_fieldnotes_creating) + " (" + status[0] + ')');
+                    setMessage(getString(R.string.export_fieldnotes_creating) + " (" + status[0] + ')');
                 }
             }
         }

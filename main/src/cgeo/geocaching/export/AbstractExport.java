@@ -1,5 +1,6 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 
 abstract class AbstractExport implements Export {
@@ -27,7 +28,7 @@ abstract class AbstractExport implements Export {
 
     /**
      * Generates a localized string from a resource id.
-     * 
+     *
      * @param resourceId
      *            the resource id of the string
      * @param params
@@ -42,5 +43,9 @@ abstract class AbstractExport implements Export {
     public String toString() {
         // used in the array adapter of the dialog showing the exports
         return getName();
+    }
+
+    protected String getProgressTitle() {
+        return getString(R.string.export) + ": " + getName();
     }
 }
