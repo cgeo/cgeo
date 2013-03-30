@@ -1100,6 +1100,11 @@ public abstract class GCParser {
         return StatusCode.LOGIMAGE_POST_ERROR;
     }
 
+    /**
+     * Post a log to GC.com.
+     *
+     * @return status code of the upload and ID of the log
+     */
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day, final String log) {
         if (Login.isEmpty(viewstates)) {

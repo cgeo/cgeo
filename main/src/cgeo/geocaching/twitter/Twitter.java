@@ -56,6 +56,12 @@ public final class Twitter {
     }
 
     public static void postTweetCache(String geocode) {
+        if (!Settings.isUseTwitter()) {
+            return;
+        }
+        if (!Settings.isTwitterLoginValid()) {
+            return;
+        }
         final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         String status;
         final String url = cache.getUrl();

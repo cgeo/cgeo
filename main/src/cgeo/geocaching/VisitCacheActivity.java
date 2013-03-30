@@ -571,18 +571,16 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     public StatusCode postLogFn(String log) {
-
         StatusCode result = StatusCode.LOG_POST_ERROR;
 
         try {
 
-            final ImmutablePair<StatusCode, String> logResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
+            final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackables);
+            result = postResult.left;
 
-            result = logResult.left;
-
-            if (logResult.left == StatusCode.NO_ERROR) {
+            if (result == StatusCode.NO_ERROR) {
                 final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
                 cache.getLogs().add(0, logNow);
@@ -592,24 +590,18 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                 }
 
                 cgData.saveChangedCache(cache);
-            }
-
-            if (logResult.left == StatusCode.NO_ERROR) {
                 cgData.clearLogOffline(geocode);
-            }
 
-            if (logResult.left == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isUseTwitter()
-                    && Settings.isTwitterLoginValid()
-                    && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                Twitter.postTweetCache(geocode);
-            }
+                if (typeSelected == LogType.FOUND_IT) {
+                    if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+                        Twitter.postTweetCache(geocode);
+                    }
+                    GCVote.setRating(cache, rating);
+                }
 
-            if (logResult.left == StatusCode.NO_ERROR && typeSelected == LogType.FOUND_IT && Settings.isGCvoteLogin()) {
-                GCVote.setRating(cache, rating);
-            }
-
-            if (logResult.left == StatusCode.NO_ERROR && StringUtils.isNotBlank(imageUri.getPath())) {
-                result = GCParser.uploadLogImage(logResult.right, imageCaption, imageDescription, imageUri);
+                if (StringUtils.isNotBlank(imageUri.getPath())) {
+                    result = GCParser.uploadLogImage(postResult.right, imageCaption, imageDescription, imageUri);
+                }
             }
 
             return result;
