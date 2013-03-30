@@ -600,7 +600,13 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                 }
 
                 if (StringUtils.isNotBlank(imageUri.getPath())) {
-                    result = GCParser.uploadLogImage(postResult.right, imageCaption, imageDescription, imageUri);
+                    ImmutablePair<StatusCode, String> imageResult = GCParser.uploadLogImage(postResult.right, imageCaption, imageDescription, imageUri);
+                    final String uploadedImageUrl = imageResult.right;
+                    if (StringUtils.isNotEmpty(uploadedImageUrl)) {
+                        logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
+                        cgData.saveChangedCache(cache);
+                    }
+                    result = imageResult.left;
                 }
             }
 

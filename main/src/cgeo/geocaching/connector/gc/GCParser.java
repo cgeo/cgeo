@@ -1059,7 +1059,7 @@ public abstract class GCParser {
      *            the URI for the image to be uploaded
      * @return status code to indicate success or failure
      */
-    public static StatusCode uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
+    public static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
         String page = Network.getResponseData(Network.getRequest(uri));
@@ -1071,7 +1071,7 @@ public abstract class GCParser {
                 page = Network.getResponseData(Network.getRequest(uri));
             } else {
                 Log.e("Image upload: No login (error: " + loginState + ')');
-                return StatusCode.NOT_LOGGED_IN;
+                return ImmutablePair.of(StatusCode.NOT_LOGGED_IN, null);
             }
         }
 
@@ -1088,16 +1088,16 @@ public abstract class GCParser {
         final File image = new File(imageUri.getPath());
         final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image));
 
-        MatcherWrapper matcherOK = new MatcherWrapper(GCConstants.PATTERN_OK_IMAGEUPLOAD, response);
+        MatcherWrapper matcherUrl = new MatcherWrapper(GCConstants.PATTERN_IMAGE_UPLOAD_URL, response);
 
-        if (matcherOK.find()) {
+        if (matcherUrl.find()) {
             Log.i("Logimage successfully uploaded.");
-
-            return StatusCode.NO_ERROR;
+            final String uploadedImageUrl = matcherUrl.group(1);
+            return ImmutablePair.of(StatusCode.NO_ERROR, uploadedImageUrl);
         }
         Log.e("GCParser.uploadLogIMage: Failed to upload image because of unknown error");
 
-        return StatusCode.LOGIMAGE_POST_ERROR;
+        return ImmutablePair.of(StatusCode.LOGIMAGE_POST_ERROR, null);
     }
 
     /**
