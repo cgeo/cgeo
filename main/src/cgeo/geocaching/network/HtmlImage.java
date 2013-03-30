@@ -193,7 +193,11 @@ public class HtmlImage implements Html.ImageGetter {
         if (file.exists()) {
             if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep) {
                 setSampleSize(file);
-                return BitmapFactory.decodeFile(file.getPath(), bfOptions);
+                final Bitmap image = BitmapFactory.decodeFile(file.getPath(), bfOptions);
+                if (image == null) {
+                    Log.e("Cannot decode bitmap from " + file.getPath());
+                }
+                return image;
             }
         }
         return null;
