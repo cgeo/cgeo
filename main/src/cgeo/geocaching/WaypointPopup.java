@@ -65,6 +65,7 @@ public class WaypointPopup extends AbstractPopupActivity {
             details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
             details.addDistance(waypoint, waypointDistance);
             waypointDistance = details.getValueView();
+            details.add(R.string.waypoint_note, waypoint.getNote());
 
             // Edit Button
             final Button buttonEdit = (Button) findViewById(R.id.edit);
