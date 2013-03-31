@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
 
@@ -19,6 +20,7 @@ import android.widget.TextView;
 public class WaypointPopup extends AbstractPopupActivity {
     private int waypointId = 0;
     private Waypoint waypoint = null;
+    private TextView waypointDistance = null;
 
     public WaypointPopup() {
         super("c:geo-waypoint-info", R.layout.waypoint_popup);
@@ -31,6 +33,14 @@ public class WaypointPopup extends AbstractPopupActivity {
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             waypointId = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
+        }
+    }
+
+    @Override
+    public void onUpdateGeoData(IGeoData geo) {
+        if (geo.getCoords() != null && waypoint != null && waypoint.getCoords() != null) {
+            waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(waypoint.getCoords())));
+            waypointDistance.bringToFront();
         }
     }
 
@@ -53,6 +63,8 @@ public class WaypointPopup extends AbstractPopupActivity {
 
             //Waypoint geocode
             details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
+            details.addDistance(waypoint, waypointDistance);
+            waypointDistance = details.getValueView();
 
             // Edit Button
             final Button buttonEdit = (Button) findViewById(R.id.edit);
