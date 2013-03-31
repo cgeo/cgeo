@@ -23,6 +23,7 @@ import cgeo.geocaching.loaders.AddressGeocacheListLoader;
 import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
 import cgeo.geocaching.loaders.HistoryGeocacheListLoader;
 import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
+import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
@@ -1427,7 +1428,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             showFooterLoadingCaches();
             listFooter.setOnClickListener(null);
 
-            currentLoader.startLoading();
+            getSupportLoaderManager().restartLoader(CacheListLoaderType.NEXT_PAGE.ordinal(), null, cgeocaches.this);
         }
     }
 
@@ -1725,8 +1726,10 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     @Override
     public Loader<SearchResult> onCreateLoader(int type, Bundle extras) {
         AbstractSearchLoader loader = null;
+        if (type >= CacheListLoaderType.values().length) {
+            throw new IllegalArgumentException("invalid loader type " + type);
+        }
         CacheListLoaderType enumType = CacheListLoaderType.values()[type];
-        final String username = extras.getString(Intents.EXTRA_USERNAME);
         switch (enumType) {
             case OFFLINE:
                 listId = Settings.getLastList();
@@ -1775,12 +1778,14 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 }
                 break;
             case USERNAME:
+                final String username = extras.getString(Intents.EXTRA_USERNAME);
                 title = username;
                 loader = new UsernameGeocacheListLoader(app, username);
                 break;
             case OWNER:
-                title = username;
-                loader = new OwnerGeocacheListLoader(app, username);
+                final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
+                title = ownerName;
+                loader = new OwnerGeocacheListLoader(app, ownerName);
                 break;
             case MAP:
                 //TODO Build Nullloader
@@ -1793,12 +1798,9 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 title = res.getString(R.string.caches_history);
                 loader = new RemoveFromHistoryLoader(app, extras.getStringArray(Intents.EXTRA_CACHELIST), coords);
                 break;
-
-            default:
-                title = "caches";
-                setTitle(title);
-                Log.e("cgeocaches.onCreate: No action or unknown action specified");
-                return null;
+            case NEXT_PAGE:
+                loader = new NextPageGeocacheListLoader(app, search);
+                break;
         }
         setTitle(title);
         showProgress(true);

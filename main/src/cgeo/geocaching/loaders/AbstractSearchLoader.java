@@ -19,7 +19,8 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         USERNAME,
         OWNER,
         MAP,
-        REMOVE_FROM_HISTORY;
+        REMOVE_FROM_HISTORY,
+        NEXT_PAGE;
     }
 
     private Handler recaptchaHandler = null;
