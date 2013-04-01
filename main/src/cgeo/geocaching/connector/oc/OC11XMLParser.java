@@ -48,6 +48,8 @@ public class OC11XMLParser {
     private static Pattern LOCAL_URL = Pattern.compile("href=\"(.*)\"");
     private static final int CACHE_PARSE_LIMIT = 250;
     private static final Resources res = cgeoapplication.getInstance().getResources();
+    private static final Pattern WHITESPACE = Pattern.compile("<p>(\\s|&nbsp;)*</p>");
+
 
     private static ImageHolder imageHolder = null;
 
@@ -513,7 +515,7 @@ public class OC11XMLParser {
             @Override
             public void end(String body) {
                 final String content = body.trim();
-                descHolder.shortDesc = linkify(stripMarkup(content));
+                descHolder.shortDesc = linkify(stripEmptyText(content));
             }
         });
 
@@ -523,7 +525,7 @@ public class OC11XMLParser {
             @Override
             public void end(String body) {
                 final String content = body.trim();
-                descHolder.desc = linkify(stripMarkup(content));
+                descHolder.desc = linkify(stripEmptyText(content));
             }
         });
 
@@ -626,7 +628,7 @@ public class OC11XMLParser {
 
             @Override
             public void end(String logText) {
-                logHolder.logEntry.log = stripMarkup(logText);
+                logHolder.logEntry.log = stripEmptyText(logText);
             }
         });
 
@@ -728,14 +730,20 @@ public class OC11XMLParser {
     }
 
     /**
-     * Removes unneeded markup. Log texts are typically encapsulated in paragraph tags which lead to more empty space on
-     * rendering.
+     * Removes some unneeded markup and whitespace. Log texts are typically encapsulated in paragraph tags which lead to
+     * more empty space on rendering.
      */
-    protected static String stripMarkup(String input) {
-        if (!StringUtils.startsWith(input, "<")) {
-            return input;
+    protected static String stripEmptyText(String input) {
+        final Matcher matcher = WHITESPACE.matcher(input);
+        String result = matcher.replaceAll("").trim();
+        if (!StringUtils.startsWith(result, "<")) {
+            return result;
         }
-        String result = input.trim();
+        return stripMarkup(result);
+    }
+
+    private static String stripMarkup(final String input) {
+        String result = input;
         for (String tagName : MARKUP) {
             final String startTag = "<" + tagName + ">";
             if (StringUtils.startsWith(result, startTag)) {
