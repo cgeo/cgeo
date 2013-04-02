@@ -110,6 +110,8 @@
     · Share function uses short URL again\n
     · Offline log marker now shown after autosave of log\n
     · GPX export no longer exports waypoints without coordinates\n
+    · Corrections for light scheme on Adnroid 2.x devices\n
+    · Avoid crash if logging page is opened while not connected correctly\n
      \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
     \n
@@ -121,6 +123,7 @@
       On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
       Log images with huge size cause a long loading time\n
+      After uploading log images they are only shown in the logview after refreshing the cache\n
       The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
       On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
       A huge amount of pictures on the image tab of a cache might cause a crash\n
