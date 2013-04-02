@@ -15,7 +15,10 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 public final class Twitter {
+    private static final String HASH_PREFIX_WITH_BLANK = " #";
     public static final int MAX_TWEET_SIZE = 140;
 
     public static void postTweet(final cgeoapplication app, final String status, final Geopoint coords) {
@@ -47,12 +50,10 @@ public final class Twitter {
         }
     }
 
-    public static String appendHashTag(final String status, final String tag) {
-        String result = status;
-        if (result.length() + 2 + tag.length() <= 140) {
-            result += " #" + tag;
+    public static void appendHashTag(final StringBuilder status, final String tag) {
+        if (status.length() + HASH_PREFIX_WITH_BLANK.length() + tag.length() <= MAX_TWEET_SIZE) {
+            status.append(HASH_PREFIX_WITH_BLANK).append(tag);
         }
-        return result;
     }
 
     public static void postTweetCache(String geocode) {
@@ -63,39 +64,40 @@ public final class Twitter {
             return;
         }
         final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        String status;
-        final String url = cache.getUrl();
-        if (url.length() >= 100) {
-            status = "I found " + url;
-        }
-        else {
-            String name = cache.getName();
-            status = "I found " + name + " (" + url + ")";
-            if (status.length() > MAX_TWEET_SIZE) {
-                name = name.substring(0, name.length() - (status.length() - MAX_TWEET_SIZE) - 1) + '…';
-            }
-            status = "I found " + name + " (" + url + ")";
-            status = appendHashTag(status, "cgeo");
-            status = appendHashTag(status, "geocaching");
-        }
+        postTweet(cgeoapplication.getInstance(), getStatusMessage(cache), null);
+    }
 
-        postTweet(cgeoapplication.getInstance(), status, null);
+    static String getStatusMessage(Geocache cache) {
+        String name = cache.getName();
+        if (name.length() > 100) {
+            name = name.substring(0, 100) + '…';
+            }
+        final String url = StringUtils.defaultString(cache.getUrl());
+        String status = "I found [NAME] ([URL])";
+        return fillTemplate(status, name, url);
+    }
+
+    private static String fillTemplate(String template, String name, final String url) {
+        String result = StringUtils.replace(template, "[NAME]", name);
+        result = StringUtils.replace(result, "[URL]", url);
+        StringBuilder builder = new StringBuilder(result);
+        appendHashTag(builder, "cgeo");
+        appendHashTag(builder, "geocaching");
+        return builder.toString();
     }
 
     public static void postTweetTrackable(String geocode) {
         final Trackable trackable = cgData.loadTrackable(geocode);
+        postTweet(cgeoapplication.getInstance(), getStatusMessage(trackable), null);
+    }
+
+    static String getStatusMessage(Trackable trackable) {
         String name = trackable.getName();
         if (name.length() > 82) {
             name = name.substring(0, 81) + '…';
         }
-        StringBuilder builder = new StringBuilder("I touched ");
-        builder.append(name);
-        if (trackable.getUrl() != null) {
-            builder.append(" (").append(trackable.getUrl()).append(')');
-        }
-        builder.append('!');
-        String status = appendHashTag(builder.toString(), "cgeo");
-        status = appendHashTag(status, "geocaching");
-        postTweet(cgeoapplication.getInstance(), status, null);
+        String url = StringUtils.defaultString(trackable.getUrl());
+        String status = "I touched [NAME] ([URL])!";
+        return fillTemplate(status, name, url);
     }
 }
