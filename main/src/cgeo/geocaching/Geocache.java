@@ -74,6 +74,7 @@ public class Geocache implements ICache, IWaypoint {
      * lazy initialized
      */
     private String hint = null;
+    private String relatedWebpage = null;
     private CacheSize size = CacheSize.UNKNOWN;
     private float difficulty = 0;
     private float terrain = 0;
@@ -203,6 +204,7 @@ public class Geocache implements ICache, IWaypoint {
             onWatchlist = other.onWatchlist;
             logOffline = other.logOffline;
             finalDefined = other.finalDefined;
+            relatedWebpage = other.relatedWebpage;
         }
 
         /*
@@ -268,6 +270,9 @@ public class Geocache implements ICache, IWaypoint {
         }
         if (coords == null) {
             coords = other.coords;
+        }
+        if (StringUtils.isBlank(getRelatedWebpage())) {
+            relatedWebpage = other.getRelatedWebpage();
         }
         if (elevation == null) {
             elevation = other.elevation;
@@ -909,6 +914,14 @@ public class Geocache implements ICache, IWaypoint {
 
     public void setCoords(Geopoint coords) {
         this.coords = coords;
+    }
+
+    public String getRelatedWebpage() {
+        return relatedWebpage;
+    }
+
+    public void setRelatedWebpage(String relatedWebpage) {
+        this.relatedWebpage = relatedWebpage;
     }
 
     /**

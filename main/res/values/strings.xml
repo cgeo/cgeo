@@ -629,6 +629,8 @@
   <string name="cache_share_field">Share</string>
   <string name="cache_time_full_hours">o\'clock</string>
   <string name="cache_listed_on">Listed on %s</string>
+  <string name="cache_related_webpage">Link</string>
+  <string name="cache_related_webpage_link">Open related web page</string>
   
   <!--  editor dialog -->
   <string name="editor_save">Save</string>

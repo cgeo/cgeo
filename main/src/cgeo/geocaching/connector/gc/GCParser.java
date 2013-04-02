@@ -521,6 +521,17 @@ public abstract class GCParser {
             Log.w("GCParser.parseCache: Failed to parse cache attributes");
         }
 
+        // related web page
+        try {
+            final String relatedWebpage = BaseUtils.getMatch(page, GCConstants.PATTERN_RELATED_WEBPAGE, true, 1, null, false);
+            if (StringUtils.isNotBlank(relatedWebpage)) {
+                cache.setRelatedWebpage(relatedWebpage);
+            }
+        } catch (Exception e) {
+            // failed to parse related web page
+            Log.w("GCParser.parseCache: Failed to parse related web page");
+        }
+
         // cache spoilers
         try {
             if (CancellableHandler.isCancelled(handler)) {
