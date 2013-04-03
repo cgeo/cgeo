@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string-array name="waypoint_coordinate_formats" translatable="false">
     <item>@string/waypoint_coordinate_formats_plain</item>
@@ -80,7 +80,7 @@
 
   <!-- changelog -->
   <string name="changelog" translatable="false">\n
-    <b>Next release</b>\n\n
+    <b>2013.04.03</b>\n\n
     <b>New Features/Functions:</b>\n
     · Support of attaching pictures to logs\n
     · Support of opencaching.de online API in live map and nearby search\n
