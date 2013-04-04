@@ -149,6 +149,7 @@ public final class Settings {
 
     // maps
     private static MapProvider mapProvider = null;
+    private static String cacheTwitterMessage = "I found [NAME] ([URL])";
 
     private Settings() {
         // this class is not to be instantiated;
@@ -1423,5 +1424,19 @@ public final class Settings {
                 edit.putBoolean(KEY_NATIVE_UA, useNativeUa);
             }
         });
+    }
+
+    public static String getCacheTwitterMessage() {
+        // TODO make customizable from UI
+        return cacheTwitterMessage;
+    }
+
+    public static String getTrackableTwitterMessage() {
+        // TODO make customizable from UI
+        return "I touched [NAME] ([URL])!";
+    }
+
+    public static void setCacheTwitterMessage(final String message) {
+        cacheTwitterMessage = message;
     }
 }

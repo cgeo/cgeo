@@ -52,7 +52,10 @@ public final class Twitter {
 
     public static void appendHashTag(final StringBuilder status, final String tag) {
         if (status.length() + HASH_PREFIX_WITH_BLANK.length() + tag.length() <= MAX_TWEET_SIZE) {
-            status.append(HASH_PREFIX_WITH_BLANK).append(tag);
+            final String tagWithPrefix = HASH_PREFIX_WITH_BLANK + tag;
+            if (status.indexOf(tagWithPrefix, 0) == -1) {
+                status.append(tagWithPrefix);
+            }
         }
     }
 
@@ -73,8 +76,7 @@ public final class Twitter {
             name = name.substring(0, 100) + '…';
             }
         final String url = StringUtils.defaultString(cache.getUrl());
-        String status = "I found [NAME] ([URL])";
-        return fillTemplate(status, name, url);
+        return fillTemplate(Settings.getCacheTwitterMessage(), name, url);
     }
 
     private static String fillTemplate(String template, String name, final String url) {
@@ -97,7 +99,7 @@ public final class Twitter {
             name = name.substring(0, 81) + '…';
         }
         String url = StringUtils.defaultString(trackable.getUrl());
-        String status = "I touched [NAME] ([URL])!";
+        String status = Settings.getTrackableTwitterMessage();
         return fillTemplate(status, name, url);
     }
 }
