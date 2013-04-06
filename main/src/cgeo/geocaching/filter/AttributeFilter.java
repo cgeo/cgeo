@@ -1,12 +1,10 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.R;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
 
@@ -24,13 +22,7 @@ class AttributeFilter extends AbstractFilter {
     private static String getName(final String attribute, final Resources res, final String packageName) {
         // dynamically search for a translation of the attribute
         final int id = res.getIdentifier(attribute, "string", packageName);
-        if (id > 0) {
-            final String translated = res.getString(id);
-            if (StringUtils.isNotBlank(translated)) {
-                return translated;
-            }
-        }
-        return attribute;
+        return id > 0 ? res.getString(id) : attribute;
     }
 
     @Override
