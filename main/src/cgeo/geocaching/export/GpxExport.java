@@ -5,9 +5,9 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -37,9 +37,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -106,7 +105,7 @@ class GpxExport extends AbstractExport {
     }
 
     private class ExportTask extends AsyncTaskWithProgress<Void, File> {
-        private final Set<String> allGeocodes = new HashSet<String>();
+        private final List<String> allGeocodes;
         private final Activity activity;
         private int countExported = 0;
 
@@ -122,7 +121,8 @@ class GpxExport extends AbstractExport {
             super(activity, caches.size(), getProgressTitle(), cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches.size(), caches.size()));
 
             // get rid of the (half loaded) caches, we will reload them as full caches during the export
-            for (Geocache geocache : caches) {
+            allGeocodes = new ArrayList<String>(caches.size());
+            for (final Geocache geocache : caches) {
                 allGeocodes.add(geocache.getGeocode());
             }
             this.activity = activity;
@@ -159,17 +159,10 @@ class GpxExport extends AbstractExport {
 
                 // Split the overall set of geocodes into small chunks. That is a compromise between memory efficiency (because
                 // we don't load all caches fully into memory) and speed (because we don't query each cache separately).
-
                 while (!allGeocodes.isEmpty()) {
-                    int cachesInBatch = 0;
-                    HashSet<String> geocodesOfBatch = new HashSet<String>(CACHES_PER_BATCH);
-                    for (Iterator<String> iterator = allGeocodes.iterator(); iterator.hasNext() && cachesInBatch < CACHES_PER_BATCH;) {
-                        final String geocode = iterator.next();
-                        geocodesOfBatch.add(geocode);
-                        cachesInBatch++;
-                    }
-                    allGeocodes.removeAll(geocodesOfBatch);
-                    exportBatch(gpx, geocodesOfBatch);
+                    final List<String> batch = allGeocodes.subList(0, Math.min(CACHES_PER_BATCH, allGeocodes.size()));
+                    exportBatch(gpx, batch);
+                    batch.clear();
                 }
 
                 gpx.endTag(PREFIX_GPX, "gpx");
@@ -195,7 +188,7 @@ class GpxExport extends AbstractExport {
             return exportFile;
         }
 
-        private void exportBatch(final XmlSerializer gpx, HashSet<String> geocodesOfBatch) throws IOException {
+        private void exportBatch(final XmlSerializer gpx, Collection<String> geocodesOfBatch) throws IOException {
             Set<Geocache> caches = cgData.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
             for (Geocache cache : caches) {
                 gpx.startTag(PREFIX_GPX, "wpt");

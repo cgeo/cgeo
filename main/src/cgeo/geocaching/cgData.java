@@ -33,6 +33,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -1396,7 +1397,7 @@ public class cgData {
      * @param geocodes
      * @return Set of loaded caches. Never null.
      */
-    public static Set<Geocache> loadCaches(final Set<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
+    public static Set<Geocache> loadCaches(final Collection<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
         if (CollectionUtils.isEmpty(geocodes)) {
             return new HashSet<Geocache>();
         }
