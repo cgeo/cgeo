@@ -2087,7 +2087,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         if (imageCounter.getImageCount() > 0) {
                             // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
                             LogImageLoader loader = new LogImageLoader(holder);
-                            loader.execute(new String[] { logText });
+                            loader.execute(logText);
                         }
                     }
                     else {
