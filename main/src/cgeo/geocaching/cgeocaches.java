@@ -1144,7 +1144,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     public void removeFromHistory() {
         final List<Geocache> caches = adapter.getCheckedOrAllCaches();
-        final String geocodes[] = new String[caches.size()];
+        final String[] geocodes = new String[caches.size()];
         for (int i = 0; i < geocodes.length; i++) {
             geocodes[i] = caches.get(i).getGeocode();
         }
