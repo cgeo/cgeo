@@ -465,7 +465,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (currentLoader.isLoading()) {
+        if (currentLoader != null && currentLoader.isLoading()) {
             showFooterLoadingCaches();
         }
     }
