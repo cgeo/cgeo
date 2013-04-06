@@ -22,12 +22,13 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.DecryptTextClickListener;
+import cgeo.geocaching.ui.EditNoteDialog;
+import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.ImagesList.ImageType;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.ui.dialog.EditorDialog;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -65,6 +66,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
@@ -112,7 +114,8 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> {
+public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page>
+    implements EditNoteDialogListener {
 
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
@@ -138,6 +141,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private Geocache cache;
     private final Progress progress = new Progress();
     private SearchResult search;
+
+    private EditNoteDialogListener editNoteDialogListener;
 
     private final GeoDirHandler locationUpdater = new GeoDirHandler() {
         @Override
@@ -1794,16 +1799,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 personalNoteEdit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        EditorDialog editor = new EditorDialog(CacheDetailActivity.this, personalNoteView.getText());
-                        editor.setOnEditorUpdate(new EditorDialog.EditorUpdate() {
+                        editNoteDialogListener = new EditNoteDialogListener() {
                             @Override
-                            public void update(CharSequence editorText) {
-                                cache.setPersonalNote(editorText.toString());
+                            public void onFinishEditNoteDialog(final String note) {
+                                cache.setPersonalNote(note);
                                 setPersonalNote(personalNoteView);
-                                cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-                            }
-                        });
-                        editor.show();
+                                cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));                            }
+                        };
+                        final FragmentManager fm = getSupportFragmentManager();
+                        final EditNoteDialog dialog = new EditNoteDialog(cache.getPersonalNote());
+                        dialog.show(fm, "fragment_edit_note");
                     }
                 });
             } else {
@@ -1866,13 +1871,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
             if (StringUtils.isNotBlank(personalNote)) {
                 personalNoteView.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 personalNoteView.setVisibility(View.GONE);
             }
-        }
-
-        private void loadLongDescription() {
+        }private void loadLongDescription() {
             Button showDesc = (Button) view.findViewById(R.id.show_description);
             showDesc.setVisibility(View.GONE);
             showDesc.setOnClickListener(null);
@@ -1882,6 +1884,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             registerForContextMenu(view.findViewById(R.id.longdesc));
         }
 
+    }
+
+    @Override
+    public void onFinishEditNoteDialog(final String note) {
+        editNoteDialogListener.onFinishEditNoteDialog(note);
     }
 
     private static class HtmlImageCounter implements Html.ImageGetter {
