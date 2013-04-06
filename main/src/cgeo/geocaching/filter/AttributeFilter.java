@@ -9,6 +9,8 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import android.content.res.Resources;
 
 import java.util.EnumSet;
+import java.util.LinkedList;
+import java.util.List;
 
 class AttributeFilter extends AbstractFilter {
 
@@ -37,14 +39,13 @@ class AttributeFilter extends AbstractFilter {
     public static class Factory implements IFilterFactory {
 
         @Override
-        public IFilter[] getFilters() {
+        public List<IFilter> getFilters() {
             final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
             final Resources res = cgeoapplication.getInstance().getResources();
 
-            final String[] ids = res.getStringArray(R.array.attribute_ids);
-            final IFilter[] filters = new IFilter[ids.length];
-            for (int i = 0; i < ids.length; i++) {
-                filters[i] = new AttributeFilter(getName("attribute_" + ids[i], res, packageName), ids[i]);
+            final List<IFilter> filters = new LinkedList<IFilter>();
+            for (final String id: res.getStringArray(R.array.attribute_ids)) {
+                filters.add(new AttributeFilter(getName("attribute_" + id, res, packageName), id));
             }
             return filters;
         }

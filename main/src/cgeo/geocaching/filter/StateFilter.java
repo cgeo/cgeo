@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 abstract class StateFilter extends AbstractFilter {
 
@@ -89,8 +90,8 @@ abstract class StateFilter extends AbstractFilter {
     public static class Factory implements IFilterFactory {
 
         @Override
-        public IFilter[] getFilters() {
-            final ArrayList<StateFilter> filters = new ArrayList<StateFilter>();
+        public List<StateFilter> getFilters() {
+            final List<StateFilter> filters = new ArrayList<StateFilter>(6);
             filters.add(new StateFoundFilter());
             filters.add(new StateArchivedFilter());
             filters.add(new StateDisabledFilter());
@@ -106,7 +107,7 @@ abstract class StateFilter extends AbstractFilter {
                 }
             });
 
-            return filters.toArray(new StateFilter[filters.size()]);
+            return filters;
         }
 
     }

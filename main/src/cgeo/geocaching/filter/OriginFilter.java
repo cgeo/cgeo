@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.IConnector;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class OriginFilter extends AbstractFilter {
 
@@ -25,7 +26,7 @@ public class OriginFilter extends AbstractFilter {
     public static final class Factory implements IFilterFactory {
 
         @Override
-        public IFilter[] getFilters() {
+        public List<OriginFilter> getFilters() {
             final ArrayList<OriginFilter> filters = new ArrayList<OriginFilter>();
             for (IConnector connector : ConnectorFactory.getConnectors()) {
                 filters.add(new OriginFilter(connector));
@@ -40,7 +41,7 @@ public class OriginFilter extends AbstractFilter {
                 }
             });
 
-            return filters.toArray(new OriginFilter[filters.size()]);
+            return filters;
         }
 
     }

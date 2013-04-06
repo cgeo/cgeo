@@ -4,6 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class DifficultyFilter extends AbstractRangeFilter {
 
@@ -19,12 +20,12 @@ class DifficultyFilter extends AbstractRangeFilter {
     public static class Factory implements IFilterFactory {
 
         @Override
-        public IFilter[] getFilters() {
+        public List<IFilter> getFilters() {
             final ArrayList<IFilter> filters = new ArrayList<IFilter>(5);
             for (int difficulty = 1; difficulty <= 5; difficulty++) {
                 filters.add(new DifficultyFilter(difficulty));
             }
-            return filters.toArray(new IFilter[filters.size()]);
+            return filters;
         }
 
     }
