@@ -49,6 +49,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -1360,6 +1361,9 @@ public class Geocache implements ICache, IWaypoint {
         return null;
     }
 
+    /**
+     * Detect coordinates in the personal note and convert them to user defined waypoints. Works by rule of thumb.
+     */
     public void parseWaypointsFromNote() {
         try {
             if (StringUtils.isBlank(getPersonalNote())) {
@@ -1375,7 +1379,8 @@ public class Geocache implements ICache, IWaypoint {
                     // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
                     if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
                         final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                        final Waypoint waypoint = new Waypoint(name, WaypointType.WAYPOINT, false);
+                        final String potentialWaypointType = note.substring(Math.max(0, matcher.start() - 15));
+                        final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), false);
                         waypoint.setCoords(point);
                         addOrChangeWaypoint(waypoint, false);
                         count++;
@@ -1390,6 +1395,25 @@ public class Geocache implements ICache, IWaypoint {
         } catch (Exception e) {
             Log.e("Geocache.parseWaypointsFromNote", e);
         }
+    }
+
+    /**
+     * Detect waypoint types in the personal note text. It works by rule of thumb only.
+     */
+    private static WaypointType parseWaypointType(final String input) {
+        final String lowerInput = StringUtils.substring(input, 0, 20).toLowerCase(Locale.getDefault());
+        for (WaypointType wpType : WaypointType.values()) {
+            if (lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
+                return wpType;
+            }
+            if (lowerInput.contains(wpType.id)) {
+                return wpType;
+            }
+            if (lowerInput.contains(wpType.name().toLowerCase(Locale.US))) {
+                return wpType;
+            }
+        }
+        return WaypointType.WAYPOINT;
     }
 
     /*
