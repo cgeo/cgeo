@@ -81,10 +81,6 @@ public class StaticMapsProvider {
     }
 
     public static void downloadMaps(Geocache cache) {
-        if (cache == null) {
-            Log.e("downloadMaps - missing input parameter cache");
-            return;
-        }
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
