@@ -711,10 +711,7 @@ public class Geocache implements ICache, IWaypoint {
     public String getPersonalNote() {
         // non premium members have no personal notes, premium members have an empty string by default.
         // map both to null, so other code doesn't need to differentiate
-        if (StringUtils.isBlank(personalNote)) {
-            return null;
-        }
-        return personalNote;
+        return StringUtils.defaultIfBlank(personalNote, null);
     }
 
     public boolean supportsUserActions() {
