@@ -173,6 +173,16 @@ public final class Geopoint implements ICoordinates, Parcelable {
         return longitude;
     }
 
+    /*
+     * Return a waypoint which is the copy of this one rounded to the given limit.
+     * For example, to get a waypoint adapter to a display with 3 digits after the
+     * seconds decimal point, a rounding factor of 3600*1000 would be appropriate.
+     */
+    Geopoint roundedAt(final long factor) {
+        return new Geopoint(((double) Math.round(latitude * factor)) / factor,
+                            ((double) Math.round(longitude * factor)) / factor);
+    }
+
     /**
      * Get longitude in microdegree.
      *
