@@ -12,6 +12,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
+import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
@@ -20,17 +21,15 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.util.SparseArray;
@@ -67,7 +66,6 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
     private LayoutInflater inflater = null;
     private Geocache cache = null;
-    private ProgressDialog waitDialog = null;
     private String cacheid = null;
     private String geocode = null;
     private String text = null;
@@ -239,34 +237,6 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         }
         return res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*";
     }
-
-    private final Handler postLogHandler = new Handler() {
-
-        @Override
-        public void handleMessage(final Message msg) {
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-            }
-
-            final StatusCode error = (StatusCode) msg.obj;
-            if (error == StatusCode.NO_ERROR) {
-                showToast(res.getString(R.string.info_log_posted));
-                // No need to save the log when quitting if it has been posted.
-                text = currentLogText();
-                finish();
-            } else if (error == StatusCode.LOG_SAVED) {
-                showToast(res.getString(R.string.info_log_saved));
-
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
-
-                finish();
-            } else {
-                showToast(error.getErrorString(res));
-            }
-        }
-    };
 
     public VisitCacheActivity() {
         super("c:geo-log");
@@ -543,75 +513,80 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private class PostListener implements View.OnClickListener {
         @Override
         public void onClick(View arg0) {
-            waitDialog = ProgressDialog.show(VisitCacheActivity.this, null,
-                    res.getString(StringUtils.isBlank(imageUri.getPath()) ? R.string.log_saving : R.string.log_saving_and_uploading), true);
-            waitDialog.setCancelable(true);
-
-            final Thread thread = new PostLogThread(postLogHandler, currentLogText());
-            thread.start();
+            final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
+                    R.string.log_saving :
+                    R.string.log_saving_and_uploading);
+            new Poster(VisitCacheActivity.this, message).execute(currentLogText());
         }
     }
 
-    private class PostLogThread extends Thread {
+    private class Poster extends AsyncTaskWithProgress<String, StatusCode> {
 
-        private final Handler handler;
-        private final String log;
-
-        public PostLogThread(Handler handlerIn, String logIn) {
-            super("Post log");
-            handler = handlerIn;
-            log = logIn;
+        public Poster(final Activity activity, final String progressMessage) {
+            super(activity, 0, null, progressMessage);
         }
 
         @Override
-        public void run() {
-            final StatusCode status = postLogFn(log);
-            handler.sendMessage(handler.obtainMessage(0, status));
-        }
-    }
+        protected StatusCode doInBackground(final String... args) {
+            final String log = args[0];
+            try {
+                final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
+                        date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
+                        log, trackables);
 
-    public StatusCode postLogFn(String log) {
-        try {
-            final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
-                    date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
-                    log, trackables);
+                if (postResult.left == StatusCode.NO_ERROR) {
+                    final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
-            if (postResult.left == StatusCode.NO_ERROR) {
-                final LogEntry logNow = new LogEntry(date, typeSelected, log);
+                    cache.getLogs().add(0, logNow);
 
-                cache.getLogs().add(0, logNow);
-
-                if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
-                    cache.setFound(true);
-                }
-
-                cgData.saveChangedCache(cache);
-                cgData.clearLogOffline(geocode);
-
-                if (typeSelected == LogType.FOUND_IT) {
-                    if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                        Twitter.postTweetCache(geocode);
+                    if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
+                        cache.setFound(true);
                     }
-                    GCVote.setRating(cache, rating);
+
+                    cgData.saveChangedCache(cache);
+                    cgData.clearLogOffline(geocode);
+
+                    if (typeSelected == LogType.FOUND_IT) {
+                        if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+                            Twitter.postTweetCache(geocode);
+                        }
+                        GCVote.setRating(cache, rating);
+                    }
+
+                    if (StringUtils.isNotBlank(imageUri.getPath())) {
+                        ImmutablePair<StatusCode, String> imageResult = GCParser.uploadLogImage(postResult.right, imageCaption, imageDescription, imageUri);
+                        final String uploadedImageUrl = imageResult.right;
+                        if (StringUtils.isNotEmpty(uploadedImageUrl)) {
+                            logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
+                            cgData.saveChangedCache(cache);
+                        }
+                        return imageResult.left;
+                    }
                 }
 
-                if (StringUtils.isNotBlank(imageUri.getPath())) {
-                    ImmutablePair<StatusCode, String> imageResult = GCParser.uploadLogImage(postResult.right, imageCaption, imageDescription, imageUri);
-                    final String uploadedImageUrl = imageResult.right;
-                    if (StringUtils.isNotEmpty(uploadedImageUrl)) {
-                        logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
-                        cgData.saveChangedCache(cache);
-                    }
-                    return imageResult.left;
-                }
+                return postResult.left;
+            } catch (Exception e) {
+                Log.e("cgeovisit.postLogFn", e);
             }
 
-            return postResult.left;
-        } catch (Exception e) {
-            Log.e("cgeovisit.postLogFn", e);
+            return StatusCode.LOG_POST_ERROR;
         }
 
-        return StatusCode.LOG_POST_ERROR;
+        @Override
+        protected void onPostExecute(final StatusCode status) {
+            super.onPostExecute(status);
+            if (status == StatusCode.NO_ERROR) {
+                showToast(res.getString(R.string.info_log_posted));
+                // No need to save the log when quitting if it has been posted.
+                text = currentLogText();
+                finish();
+            } else if (status == StatusCode.LOG_SAVED) {
+                showToast(res.getString(R.string.info_log_saved));
+                finish();
+            } else {
+                showToast(status.getErrorString(res));
+            }
+        }
     }
 
     private void saveLog(final boolean force) {
