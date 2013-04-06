@@ -1,16 +1,16 @@
 /*
  * Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or
  * sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,8 +20,9 @@
  * IN THE SOFTWARE.
  */
 
-package org.kxml2.io;
+package cgeo.org.kxml2.io;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedWriter;
@@ -76,11 +77,11 @@ public class KXmlSerializer implements XmlSerializer {
         for (int i = nspCounts[depth - 1]; i < nspCounts[depth]; i++) {
             writer.write(' ');
             writer.write("xmlns");
-            if (!nspStack[i * 2].isEmpty()) {
+            if (!StringUtils.isEmpty(nspStack[i * 2])) {
                 writer.write(':');
                 writer.write(nspStack[i * 2]);
             }
-            else if (getNamespace().isEmpty() && !nspStack[i * 2 + 1].isEmpty()) {
+            else if (StringUtils.isEmpty(getNamespace()) && !StringUtils.isEmpty(nspStack[i * 2 + 1])) {
                 throw new IllegalStateException("Cannot set default namespace for elements in no namespace");
             }
             writer.write("=\"");
@@ -207,7 +208,7 @@ public class KXmlSerializer implements XmlSerializer {
 
         for (int i = nspCounts[depth + 1] * 2 - 2; i >= 0; i -= 2) {
             if (nspStack[i + 1].equals(namespace)
-                    && (includeDefault || !nspStack[i].isEmpty())) {
+                    && (includeDefault || !StringUtils.isEmpty(nspStack[i]))) {
                 String cand = nspStack[i];
                 for (int j = i + 2; j < nspCounts[depth + 1] * 2; j++) {
                     if (nspStack[j].equals(cand)) {
@@ -227,7 +228,7 @@ public class KXmlSerializer implements XmlSerializer {
 
         String prefix;
 
-        if (namespace.isEmpty()) {
+        if (StringUtils.isEmpty(namespace)) {
             prefix = "";
         } else {
             do {
@@ -396,9 +397,9 @@ public class KXmlSerializer implements XmlSerializer {
                         ? ""
                         : getPrefix(namespace, true, true);
 
-        if (namespace != null && namespace.isEmpty()) {
+        if (namespace != null && StringUtils.isEmpty(namespace)) {
             for (int i = nspCounts[depth]; i < nspCounts[depth + 1]; i++) {
-                if (nspStack[i * 2].isEmpty() && !nspStack[i * 2 + 1].isEmpty()) {
+                if (StringUtils.isEmpty(nspStack[i * 2]) && !StringUtils.isEmpty(nspStack[i * 2 + 1])) {
                     throw new IllegalStateException("Cannot set default namespace for elements in no namespace");
                 }
             }
@@ -409,7 +410,7 @@ public class KXmlSerializer implements XmlSerializer {
         elementStack[esp] = name;
 
         writer.write('<');
-        if (!prefix.isEmpty()) {
+        if (!StringUtils.isEmpty(prefix)) {
             writer.write(prefix);
             writer.write(':');
         }
@@ -440,7 +441,7 @@ public class KXmlSerializer implements XmlSerializer {
         //        pending = false;
 
         String prefix =
-                namespace.isEmpty()
+                StringUtils.isEmpty(namespace)
                         ? ""
                         : getPrefix(namespace, false, true);
 
@@ -462,7 +463,7 @@ public class KXmlSerializer implements XmlSerializer {
          */
 
         writer.write(' ');
-        if (!prefix.isEmpty()) {
+        if (!StringUtils.isEmpty(prefix)) {
             writer.write(prefix);
             writer.write(':');
         }
@@ -480,7 +481,7 @@ public class KXmlSerializer implements XmlSerializer {
         check(false);
         writer.flush();
     }
-    
+
     /*
      * public void close() throws IOException {
      * check();
@@ -519,7 +520,7 @@ public class KXmlSerializer implements XmlSerializer {
 
             writer.write("</");
             String prefix = elementStack[depth * 3 + 1];
-            if (!prefix.isEmpty()) {
+            if (!StringUtils.isEmpty(prefix)) {
                 writer.write(prefix);
                 writer.write(':');
             }
