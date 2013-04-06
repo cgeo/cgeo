@@ -163,10 +163,6 @@ public class StaticMapsProvider {
     }
 
     public static void storeCachePreviewMap(final Geocache cache) {
-        if (cache == null) {
-            Log.e("storeCachePreviewMap - missing input parameter cache");
-            return;
-        }
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
