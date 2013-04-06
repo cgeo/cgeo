@@ -76,11 +76,8 @@ public class StaticMapsProvider {
             final long fileSize = file.length();
             if (fileSize < MIN_MAP_IMAGE_BYTES) {
                 file.delete();
-                return;
             }
-            return;
         }
-        return;
     }
 
     public static void downloadMaps(Geocache cache) {
