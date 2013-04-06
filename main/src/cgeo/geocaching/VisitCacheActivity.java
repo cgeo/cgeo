@@ -571,16 +571,12 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     public StatusCode postLogFn(String log) {
-        StatusCode result = StatusCode.LOG_POST_ERROR;
-
         try {
-
             final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackables);
-            result = postResult.left;
 
-            if (result == StatusCode.NO_ERROR) {
+            if (postResult.left == StatusCode.NO_ERROR) {
                 final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
                 cache.getLogs().add(0, logNow);
@@ -606,11 +602,11 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                         logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
                         cgData.saveChangedCache(cache);
                     }
-                    result = imageResult.left;
+                    return imageResult.left;
                 }
             }
 
-            return result;
+            return postResult.left;
         } catch (Exception e) {
             Log.e("cgeovisit.postLogFn", e);
         }
