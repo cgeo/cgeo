@@ -92,8 +92,8 @@ public class StaticMapsProvider {
         }
 
         // clean old and download static maps for waypoints if one is missing
-        if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
-            for (Waypoint waypoint : cache.getWaypoints()) {
+        if (Settings.isStoreOfflineWpMaps()) {
+            for (final Waypoint waypoint : cache.getWaypoints()) {
                 if (!hasAllStaticMapsForWaypoint(cache.getGeocode(), waypoint)) {
                     refreshAllWpStaticMaps(cache, edge);
                 }
