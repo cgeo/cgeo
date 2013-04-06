@@ -1725,11 +1725,11 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     @Override
     public Loader<SearchResult> onCreateLoader(int type, Bundle extras) {
-        AbstractSearchLoader loader = null;
         if (type >= CacheListLoaderType.values().length) {
             throw new IllegalArgumentException("invalid loader type " + type);
         }
         CacheListLoaderType enumType = CacheListLoaderType.values()[type];
+        AbstractSearchLoader loader = null;
         switch (enumType) {
             case OFFLINE:
                 listId = Settings.getLastList();
