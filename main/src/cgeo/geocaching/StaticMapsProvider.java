@@ -174,12 +174,7 @@ public class StaticMapsProvider {
 
     private static int guessMaxDisplaySide() {
         Point displaySize = Compatibility.getDisplaySize();
-        final int maxWidth = displaySize.x - 25;
-        final int maxHeight = displaySize.y - 25;
-        if (maxWidth > maxHeight) {
-            return maxWidth;
-        }
-        return maxHeight;
+        return Math.max(displaySize.x, displaySize.y) - 25;
     }
 
     private static void downloadMaps(final String geocode, final String markerUrl, final String prefix, final String latlonMap, final int edge,
