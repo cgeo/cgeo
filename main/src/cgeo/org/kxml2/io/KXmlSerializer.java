@@ -130,11 +130,21 @@ public class KXmlSerializer implements XmlSerializer {
                     }
                     // BEGIN android-changed: refuse to output invalid characters
                     // See http://www.w3.org/TR/REC-xml/#charsets for definition.
-                    // No other Java XML writer we know of does this, but no Java
-                    // XML reader we know of is able to parse the bad output we'd
-                    // otherwise generate.
+                    // Corrected for c:geo to handle utf-16 codepoint surrogates correctly
+                    // See http://en.wikipedia.org/wiki/UTF-16#Code_points_U.2B10000_to_U.2B10FFFF
                     // Note: tab, newline, and carriage return have already been
                     // handled above.
+                    // Check for lead surrogate
+                    if (c >= 0xd800 && c <= 0xdbff) {
+
+                        if (i + 1 < s.length()) {
+                            writer.write(s.substring(i, i + 1));
+                            i++;
+                            break;
+                        }
+                        // if the lead surrogate is at the string end, it's not valid utf-16
+                        reportInvalidCharacter(c);
+                    }
                     boolean valid = (c >= 0x20 && c <= 0xd7ff) || (c >= 0xe000 && c <= 0xfffd);
                     if (!valid) {
                         reportInvalidCharacter(c);
