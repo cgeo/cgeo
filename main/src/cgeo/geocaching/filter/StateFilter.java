@@ -87,6 +87,28 @@ abstract class StateFilter extends AbstractFilter {
         }
     }
 
+    static class StateStoredFilter extends StateFilter {
+        public StateStoredFilter() {
+            super(res.getString(R.string.cache_status_stored));
+        }
+
+        @Override
+        public boolean accepts(Geocache cache) {
+            return cache.isOffline();
+        }
+    }
+
+    static class StateNotStoredFilter extends StateFilter {
+        public StateNotStoredFilter() {
+            super(res.getString(R.string.cache_status_not_stored));
+        }
+
+        @Override
+        public boolean accepts(Geocache cache) {
+            return !cache.isOffline();
+        }
+    }
+
     public static class Factory implements IFilterFactory {
 
         @Override
@@ -98,6 +120,8 @@ abstract class StateFilter extends AbstractFilter {
             filters.add(new StatePremiumFilter());
             filters.add(new StateNonPremiumFilter());
             filters.add(new StateOfflineLogFilter());
+            filters.add(new StateStoredFilter());
+            filters.add(new StateNotStoredFilter());
 
             Collections.sort(filters, new Comparator<StateFilter>() {
 

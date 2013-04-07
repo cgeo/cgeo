@@ -596,6 +596,8 @@
   <string name="cache_status_disabled">Disabled</string>
   <string name="cache_status_premium">Premium Members only</string>
   <string name="cache_status_not_premium">All Members Access</string>
+  <string name="cache_status_stored">Stored</string>
+  <string name="cache_status_not_stored">Not stored</string>
   <string name="cache_geocode">Geo code</string>
   <string name="cache_name">Name</string>
   <string name="cache_type">Type</string>
