@@ -291,7 +291,7 @@ public class SearchActivity extends AbstractActivity {
             }
         } else {
             try {
-                cgeocaches.startActivityCoordinates(this, new Geopoint(latText, lonText));
+                cgeocaches.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latText), StringUtils.trim(lonText)));
             } catch (Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
             }
@@ -315,7 +315,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityKeyword(this, keyText);
+        cgeocaches.startActivityKeyword(this, StringUtils.trim(keyText));
     }
 
     private class FindByAddressListener implements View.OnClickListener {
@@ -334,7 +334,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         final Intent addressesIntent = new Intent(this, AddressListActivity.class);
-        addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addText);
+        addressesIntent.putExtra(Intents.EXTRA_KEYWORD, StringUtils.trim(addText));
         startActivity(addressesIntent);
     }
 
@@ -354,7 +354,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityUserName(this, usernameText);
+        cgeocaches.startActivityUserName(this, StringUtils.trim(usernameText));
     }
 
     private void findByOwnerFn() {
@@ -369,7 +369,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityOwner(this, usernameText);
+        cgeocaches.startActivityOwner(this, StringUtils.trim(usernameText));
     }
 
     private class FindByGeocodeListener implements View.OnClickListener {
@@ -388,7 +388,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        CacheDetailActivity.startActivity(this, geocodeText);
+        CacheDetailActivity.startActivity(this, StringUtils.trim(geocodeText));
     }
 
     private class FindTrackableListener implements View.OnClickListener {
@@ -408,7 +408,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
+        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, StringUtils.trim(trackableText).toUpperCase(Locale.US));
         startActivity(trackablesIntent);
     }
 
