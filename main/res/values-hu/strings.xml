@@ -483,7 +483,6 @@
   <string name="cache_attributes">Tulajdonságok</string>
   <string name="cache_inventory">Tárgyak</string>
   <string name="cache_log_offline">Offline bejegyzés</string>
-  <string name="cache_log_images_loading">Bejegyzés kép betöltése…</string>
   <string name="cache_log_images_title">Bejegyzés kép</string>
   <string name="cache_log_image_default_title">Fotó</string>
   <string name="cache_personal_note">Személyes megjegyzés</string>
@@ -577,9 +576,7 @@
   <string name="cache_coordinates">Koordináták</string>
   <string name="cache_coordinates_original">Eredeti koordináták</string> 
   <string name="cache_spoiler_images_title">Spoiler képek</string>
-  <string name="cache_spoiler_images_loading">Spoiler képek betöltése…</string>
   <string name="cache_images_title">Képek</string>
-  <string name="cache_images_loading">Képek betéltése…</string> 
   <string name="cache_log_types">Bejegyzés típusok</string>
   <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
   <string name="cache_clear_history">Előzmények törlése</string>

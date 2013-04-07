@@ -11,7 +11,6 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -46,16 +45,14 @@ public class ImagesList {
     private Image currentImage;
 
     public enum ImageType {
-        LogImages(R.string.cache_log_images_title, R.string.cache_log_images_loading),
-        SpoilerImages(R.string.cache_spoiler_images_title, R.string.cache_spoiler_images_loading),
-        AllImages(R.string.cache_images_title, R.string.cache_images_loading);
+        LogImages(R.string.cache_log_images_title),
+        SpoilerImages(R.string.cache_spoiler_images_title),
+        AllImages(R.string.cache_images_title);
 
         private final int titleResId;
-        private final int loadingResId;
 
-        ImageType(final int title, final int loading) {
+        ImageType(final int title) {
             this.titleResId = title;
-            this.loadingResId = loading;
         }
 
         public int getTitle() {
@@ -64,9 +61,6 @@ public class ImagesList {
     }
 
     private LayoutInflater inflater = null;
-    private ProgressDialog progressDialog = null;
-    private int count = 0;
-    private int countDone = 0;
     private final Activity activity;
     // We could use a Set here, but we will insert no duplicates, so there is no need to check for uniqueness.
     private final Collection<Bitmap> bitmaps = new LinkedList<Bitmap>();
@@ -83,17 +77,9 @@ public class ImagesList {
         inflater = activity.getLayoutInflater();
     }
 
-    public void loadImages(final View parentView, final List<Image> images, ImageType imageType, final boolean offline) {
+    public void loadImages(final View parentView, final List<Image> images, final boolean offline) {
 
         imagesView = (LinearLayout) parentView.findViewById(R.id.spoiler_list);
-
-        count = images.size();
-        progressDialog = new ProgressDialog(activity);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMessage(activity.getString(imageType.loadingResId));
-        progressDialog.setCancelable(true);
-        progressDialog.setMax(count);
-        progressDialog.show();
 
         for (final Image img : images) {
             LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
@@ -154,18 +140,11 @@ public class ImagesList {
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setLayoutParams(new LayoutParams(bounds.width(), bounds.height()));
 
+                view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
                 view.addView(imageView);
 
                 imageView.setId(image.hashCode());
                 images.put(imageView.getId(), img);
-            }
-
-            synchronized (activity) {
-                countDone++;
-                progressDialog.setProgress(countDone);
-                if (progressDialog.getProgress() >= count) {
-                    progressDialog.dismiss();
-                }
             }
         }
     }

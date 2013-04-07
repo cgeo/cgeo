@@ -512,7 +512,6 @@
   <string name="cache_attributes">Attribut</string>
   <string name="cache_inventory">Innehåll</string>
   <string name="cache_log_offline">Offline logg</string>
-  <string name="cache_log_images_loading">Laddar loggbilder…</string>
   <string name="cache_log_images_title">Loggbild</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Personlig anteckning</string>
@@ -615,9 +614,7 @@
   <string name="cache_coordinates">Koordinater</string>
   <string name="cache_coordinates_original">Ursprungliga koordinater</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
-  <string name="cache_spoiler_images_loading">Laddar spoiler bilder…</string>
   <string name="cache_images_title">Bilder</string>
-  <string name="cache_images_loading">Laddar bilder…</string>
   <string name="cache_log_types">Loggtyper</string>
   <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
   <string name="cache_clear_history">Rensa historik</string>

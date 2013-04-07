@@ -494,7 +494,6 @@
   <string name="cache_attributes">属性</string>
   <string name="cache_inventory">目録</string>
   <string name="cache_log_offline">オフラインログ</string>
-  <string name="cache_log_images_loading">添付画像をロード中…</string>
   <string name="cache_log_images_title">ログの添付画像</string>
   <string name="cache_log_image_default_title">写真</string>
   <string name="cache_personal_note">パーソナルノート</string>
@@ -595,9 +594,7 @@
   <string name="cache_coordinates">座標</string>
   <string name="cache_coordinates_original">オリジナル座標</string>   <!-- 「初公開時の座標」の方がいいかも -->
   <string name="cache_spoiler_images_title">スポイラー画像</string>
-  <string name="cache_spoiler_images_loading">スポイラー画像をロード中…</string>
   <string name="cache_images_title">画像</string>
-  <string name="cache_images_loading">画像をロード中…</string>
   <string name="cache_log_types">ログタイプ</string>
   <string name="cache_coordinates_no">このキャッシュに座標値はありません。</string>
   <string name="cache_clear_history">全履歴を削除</string>

@@ -512,7 +512,6 @@
   <string name="cache_attributes">Attributs</string>
   <string name="cache_inventory">Inventaire</string>
   <string name="cache_log_offline">Visite hors-ligne</string>
-  <string name="cache_log_images_loading">Chargement de l\'image de la visite…</string>
   <string name="cache_log_images_title">Image de la visite</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Note personnelle</string>
@@ -615,9 +614,7 @@
   <string name="cache_coordinates">Coordonnées</string>
   <string name="cache_coordinates_original">Coordonnées d\'origine</string>
   <string name="cache_spoiler_images_title">Images indices</string>
-  <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
   <string name="cache_images_title">Images</string>
-  <string name="cache_images_loading">Chargement des images…</string>
   <string name="cache_log_types">Types de visites</string>
   <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
   <string name="cache_clear_history">Effacer l\'historique</string>
