@@ -74,8 +74,13 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         }
     };
 
+    /**
+     * Callback to run when new location information is available.
+     * This may be overriden by deriving classes. The default implementation does nothing.
+     *
+     * @param geo the new data
+     */
     public void onUpdateGeoData(final IGeoData geo) {
-
     }
 
     protected AbstractPopupActivity(String helpTopic, int layout) {
