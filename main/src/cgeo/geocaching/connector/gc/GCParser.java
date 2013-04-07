@@ -790,7 +790,7 @@ public abstract class GCParser {
         insertCacheType(params, cacheType);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + addFToParams(params, false, true);
+        final String fullUri = uri + "?" + addFToParams(params, my, true);
         final String page = Login.getRequestLogged(uri, addFToParams(params, my, true));
 
         if (StringUtils.isBlank(page)) {
