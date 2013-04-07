@@ -5,9 +5,9 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -37,6 +37,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -60,18 +61,19 @@ class GpxExport extends AbstractExport {
 
     @Override
     public void export(final List<Geocache> caches, final Activity activity) {
+        String[] geocodes = getGeocodes(caches);
         if (null == activity) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
-            new ExportTask(caches, null).execute((Void) null);
+            new ExportTask(null).execute(geocodes);
 
         } else {
             // Show configuration dialog
-            getExportDialog(caches, activity).show();
+            getExportDialog(geocodes, activity).show();
         }
     }
 
-    private Dialog getExportDialog(final List<Geocache> caches, final Activity activity) {
+    private Dialog getExportDialog(final String[] geocodes, final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         // AlertDialog has always dark style, so we have to apply it as well always
@@ -97,43 +99,46 @@ class GpxExport extends AbstractExport {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                new ExportTask(caches, activity).execute((Void) null);
+                new ExportTask(activity).execute(geocodes);
             }
         });
 
         return builder.create();
     }
 
-    private class ExportTask extends AsyncTaskWithProgress<Void, File> {
-        private final List<String> allGeocodes;
+    private static String[] getGeocodes(final List<Geocache> caches) {
+        ArrayList<String> allGeocodes = new ArrayList<String>(caches.size());
+        for (final Geocache geocache : caches) {
+            allGeocodes.add(geocache.getGeocode());
+        }
+        return allGeocodes.toArray(new String[allGeocodes.size()]);
+    }
+
+    private class ExportTask extends AsyncTaskWithProgress<String, File> {
         private final Activity activity;
         private int countExported = 0;
 
         /**
          * Instantiates and configures the task for exporting field notes.
          *
-         * @param caches
-         *            The {@link List} of {@link cgeo.geocaching.Geocache} to be exported
          * @param activity
          *            optional: Show a progress bar and toasts
          */
-        public ExportTask(final List<Geocache> caches, final Activity activity) {
-            super(activity, caches.size(), getProgressTitle(), cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches.size(), caches.size()));
-
-            // get rid of the (half loaded) caches, we will reload them as full caches during the export
-            allGeocodes = new ArrayList<String>(caches.size());
-            for (final Geocache geocache : caches) {
-                allGeocodes.add(geocache.getGeocode());
-            }
+        public ExportTask(final Activity activity) {
+            super(activity, getProgressTitle());
             this.activity = activity;
         }
 
         @Override
-        protected File doInBackground(Void... params) {
+        protected File doInBackgroundInternal(String[] geocodes) {
             // quick check for being able to write the GPX file
             if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 return null;
             }
+
+            List<String> allGeocodes = new ArrayList<String>(Arrays.asList(geocodes));
+
+            setMessage(cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
 
             final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
             final File exportFile = new File(Settings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(new Date()) + ".gpx");
@@ -359,8 +364,7 @@ class GpxExport extends AbstractExport {
         }
 
         @Override
-        protected void onPostExecute(final File exportFile) {
-            super.onPostExecute(exportFile);
+        protected void onPostExecuteInternal(final File exportFile) {
             if (null != activity) {
                 if (exportFile != null) {
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());

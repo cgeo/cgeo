@@ -523,12 +523,12 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private class Poster extends AsyncTaskWithProgress<String, StatusCode> {
 
         public Poster(final Activity activity, final String progressMessage) {
-            super(activity, 0, null, progressMessage);
+            super(activity, null, progressMessage, true);
         }
 
         @Override
-        protected StatusCode doInBackground(final String... args) {
-            final String log = args[0];
+        protected StatusCode doInBackgroundInternal(final String[] logTexts) {
+            final String log = logTexts[0];
             try {
                 final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
                         date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
@@ -573,8 +573,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         }
 
         @Override
-        protected void onPostExecute(final StatusCode status) {
-            super.onPostExecute(status);
+        protected void onPostExecuteInternal(final StatusCode status) {
             if (status == StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.info_log_posted));
                 // No need to save the log when quitting if it has been posted.

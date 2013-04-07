@@ -56,18 +56,19 @@ class FieldnoteExport extends AbstractExport {
     }
 
     @Override
-    public void export(final List<Geocache> caches, final Activity activity) {
+    public void export(final List<Geocache> cachesList, final Activity activity) {
+        final Geocache[] caches = cachesList.toArray(new Geocache[cachesList.size()]);
         if (null == activity) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
-            new ExportTask(caches, null, false, false).execute((Void) null);
+            new ExportTask(null, false, false).execute(caches);
         } else {
             // Show configuration dialog
             getExportOptionsDialog(caches, activity).show();
         }
     }
 
-    private Dialog getExportOptionsDialog(final List<Geocache> caches, final Activity activity) {
+    private Dialog getExportOptionsDialog(final Geocache[] caches, final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         // AlertDialog has always dark style, so we have to apply it as well always
@@ -90,19 +91,17 @@ class FieldnoteExport extends AbstractExport {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 new ExportTask(
-                        caches,
                         activity,
                         uploadOption.isChecked(),
                         onlyNewOption.isChecked())
-                        .execute((Void) null);
+                        .execute(caches);
             }
         });
 
         return builder.create();
     }
 
-    private class ExportTask extends AsyncTaskWithProgress<Void, Boolean> {
-        private final List<Geocache> caches;
+    private class ExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
         private final Activity activity;
         private final boolean upload;
         private final boolean onlyNew;
@@ -113,8 +112,6 @@ class FieldnoteExport extends AbstractExport {
         /**
          * Instantiates and configures the task for exporting field notes.
          *
-         * @param caches
-         *            The {@link List} of {@link cgeo.geocaching.Geocache} to be exported
          * @param activity
          *            optional: Show a progress bar and toasts
          * @param upload
@@ -122,16 +119,15 @@ class FieldnoteExport extends AbstractExport {
          * @param onlyNew
          *            Upload/export only new logs since last export
          */
-        public ExportTask(final List<Geocache> caches, final Activity activity, final boolean upload, final boolean onlyNew) {
+        public ExportTask(final Activity activity, final boolean upload, final boolean onlyNew) {
             super(activity, getProgressTitle(), getString(R.string.export_fieldnotes_creating));
-            this.caches = caches;
             this.activity = activity;
             this.upload = upload;
             this.onlyNew = onlyNew;
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Boolean doInBackgroundInternal(Geocache[] caches) {
             final StringBuilder fieldNoteBuffer = new StringBuilder();
             try {
                 int i = 0;
@@ -219,8 +215,7 @@ class FieldnoteExport extends AbstractExport {
         }
 
         @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
+        protected void onPostExecuteInternal(Boolean result) {
             if (null != activity) {
                 if (result) {
                     //                    if (onlyNew) {
@@ -239,12 +234,12 @@ class FieldnoteExport extends AbstractExport {
         }
 
         @Override
-        protected void onProgressUpdate(Integer... status) {
+        protected void onProgressUpdateInternal(int status) {
             if (null != activity) {
-                if (STATUS_UPLOAD == status[0]) {
+                if (STATUS_UPLOAD == status) {
                     setMessage(getString(R.string.export_fieldnotes_uploading));
                 } else {
-                    setMessage(getString(R.string.export_fieldnotes_creating) + " (" + status[0] + ')');
+                    setMessage(getString(R.string.export_fieldnotes_creating) + " (" + status + ')');
                 }
             }
         }
