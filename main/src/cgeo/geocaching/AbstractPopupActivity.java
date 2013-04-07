@@ -67,11 +67,16 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                     cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }
+                onUpdateGeoData(geo);
             } catch (Exception e) {
                 Log.w("Failed to UpdateLocation location.");
             }
         }
     };
+
+    public void onUpdateGeoData(final IGeoData geo) {
+
+    }
 
     protected AbstractPopupActivity(String helpTopic, int layout) {
         super(helpTopic);
