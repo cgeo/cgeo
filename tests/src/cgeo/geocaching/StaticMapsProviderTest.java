@@ -4,10 +4,13 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 
-import java.io.File;
-
 import junit.framework.TestCase;
 
+import android.test.suitebuilder.annotation.Suppress;
+
+import java.io.File;
+
+@Suppress
 public class StaticMapsProviderTest extends TestCase {
 
     public static void testDownloadStaticMaps() {
