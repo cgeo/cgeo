@@ -19,10 +19,6 @@ import java.util.List;
 
 public class ImagesActivity extends AbstractActivity {
 
-    private static final String EXTRAS_IMAGES = "images";
-    private static final String EXTRAS_TYPE = "type";
-    private static final String EXTRAS_GEOCODE = "geocode";
-
     private boolean offline;
     private ArrayList<Image> imageNames;
     private ImagesList imagesList;
@@ -37,8 +33,8 @@ public class ImagesActivity extends AbstractActivity {
 
         String geocode = null;
         if (extras != null) {
-            geocode = extras.getString(EXTRAS_GEOCODE);
-            imgType = (ImageType) extras.getSerializable(EXTRAS_TYPE);
+            geocode = extras.getString(Intents.EXTRA_GEOCODE);
+            imgType = (ImageType) extras.getSerializable(Intents.EXTRA_TYPE);
         }
 
         if (extras == null || geocode == null) {
@@ -54,7 +50,7 @@ public class ImagesActivity extends AbstractActivity {
 
         imagesList = new ImagesList(this, geocode);
 
-        imageNames = extras.getParcelableArrayList(EXTRAS_IMAGES);
+        imageNames = extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
         if (CollectionUtils.isEmpty(imageNames)) {
             showToast(res.getString(R.string.warn_load_images));
             finish();
@@ -85,12 +81,12 @@ public class ImagesActivity extends AbstractActivity {
         final Intent logImgIntent = new Intent(fromActivity, ImagesActivity.class);
         // if resuming our app within this activity, finish it and return to the cache activity
         logImgIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                .putExtra(EXTRAS_GEOCODE, geocode)
-                .putExtra(EXTRAS_TYPE, imageType);
+                .putExtra(Intents.EXTRA_GEOCODE, geocode)
+                .putExtra(Intents.EXTRA_TYPE, imageType);
 
         // avoid forcing the array list as parameter type
         final ArrayList<Image> arrayList = new ArrayList<Image>(logImages);
-        logImgIntent.putParcelableArrayListExtra(EXTRAS_IMAGES, arrayList);
+        logImgIntent.putParcelableArrayListExtra(Intents.EXTRA_IMAGES, arrayList);
         fromActivity.startActivity(logImgIntent);
     }
 
