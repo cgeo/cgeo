@@ -190,6 +190,9 @@ public abstract class GPXParser extends FileParser {
 
         // map GPX-Attribute-Id to baseName
         public static String getBaseName(final int id) {
+            if (id < 0) {
+                return null;
+            }
             // get String out of array
             if (CACHE_ATTRIBUTES.length <= id) {
                 return null;
