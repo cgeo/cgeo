@@ -39,6 +39,7 @@ import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -74,6 +75,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -366,21 +368,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 }
             } else {
                 adapter.setSelectMode(false);
-
-                replaceCacheListFromSearch();
-
-                progress.dismiss();
-            }
-        }
-    };
-    private Handler dropDetailsHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what != MSG_CANCEL) {
-                adapter.setSelectMode(false);
-
-                refreshCurrentList();
 
                 replaceCacheListFromSearch();
 
@@ -794,7 +781,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     }
 
     public void deletePastEvents() {
-        progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
         final List<Geocache> deletion = new ArrayList<Geocache>();
         for (Geocache cache : adapter.getCheckedOrAllCaches()) {
             if (cache.isEventCache()) {
@@ -804,7 +790,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 }
             }
         }
-        new DropDetailsThread(dropDetailsHandler, deletion).start();
+        new DropDetailsTask(false).execute(deletion.toArray(new Geocache[deletion.size()]));
     }
 
     public void clearOfflineLogs() {
@@ -1177,10 +1163,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                dropSelected();
-                if (removeListAfterwards) {
-                    removeList(false);
-                }
+                dropSelected(removeListAfterwards);
                 dialog.cancel();
             }
         });
@@ -1196,9 +1179,9 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         alert.show();
     }
 
-    public void dropSelected() {
-        progress.show(this, null, res.getString(R.string.caches_drop_progress), true, dropDetailsHandler.obtainMessage(MSG_CANCEL));
-        new DropDetailsThread(dropDetailsHandler, adapter.getCheckedOrAllCaches()).start();
+    public void dropSelected(boolean removeListAfterwards) {
+        final List<Geocache> selected = adapter.getCheckedOrAllCaches();
+        new DropDetailsTask(removeListAfterwards).execute(selected.toArray(new Geocache[selected.size()]));
     }
 
     /**
@@ -1383,24 +1366,35 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
     }
 
-    private class DropDetailsThread extends Thread {
+    private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
 
-        final private Handler handler;
-        final private List<Geocache> selected;
+        private final boolean removeListAfterwards;
 
-        public DropDetailsThread(Handler handlerIn, List<Geocache> selectedIn) {
-            handler = handlerIn;
-            selected = selectedIn;
+        public DropDetailsTask(boolean removeListAfterwards) {
+            super(cgeocaches.this, null, res.getString(R.string.caches_drop_progress), true);
+            this.removeListAfterwards = removeListAfterwards;
         }
 
         @Override
-        public void run() {
+        protected Void doInBackgroundInternal(Geocache[] caches) {
             removeGeoAndDir();
-            cgData.markDropped(selected);
-            handler.sendEmptyMessage(MSG_DONE);
-
+            cgData.markDropped(Arrays.asList(caches));
             startGeoAndDir();
+            return null;
         }
+
+        @Override
+        protected void onPostExecuteInternal(Void result) {
+            // remove list in UI because of toast
+            if (removeListAfterwards) {
+                removeList(false);
+            }
+
+            adapter.setSelectMode(false);
+            refreshCurrentList();
+            replaceCacheListFromSearch();
+        }
+
     }
 
     private class ClearOfflineLogsThread extends Thread {
