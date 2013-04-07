@@ -1373,8 +1373,11 @@ public class Geocache implements ICache, IWaypoint {
             while (matcher.find()) {
                 try {
                     final Geopoint point = new Geopoint(note.substring(matcher.start()));
-                    // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
-                    if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
+                    // Coords must have non zero latitude and longitude, at least one part shall have fractional degrees,
+                    // and there must exist no waypoint with the same coordinates already.
+                    if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 &&
+                            ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0) &&
+                            !hasIdenticalWaypoint(point)) {
                         final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
                         final String potentialWaypointType = note.substring(Math.max(0, matcher.start() - 15));
                         final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), false);
@@ -1411,6 +1414,15 @@ public class Geocache implements ICache, IWaypoint {
             }
         }
         return WaypointType.WAYPOINT;
+    }
+
+    private boolean hasIdenticalWaypoint(final Geopoint point) {
+        for (final Waypoint waypoint: waypoints) {
+            if (waypoint.getCoords() == point) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /*
