@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
@@ -151,6 +152,26 @@ public final class CacheDetailsCreator {
             // if there is already a distance in cacheDistance, use it instead of resetting to default.
             // this prevents displaying "--" while waiting for a new position update (See bug #1468)
             text = cacheDistanceView.getText().toString();
+        }
+        add(R.string.cache_distance, text);
+    }
+
+    public void addDistance(final Waypoint wpt, final TextView waypointDistanceView) {
+        Float distance = null;
+        if (wpt.getCoords() != null) {
+            final Geopoint currentCoords = cgeoapplication.getInstance().currentGeo().getCoords();
+            if (currentCoords != null) {
+                distance = currentCoords.distanceTo(wpt);
+            }
+        }
+        String text = "--";
+        if (distance != null) {
+            text = Units.getDistanceFromKilometers(distance);
+        }
+        else if (waypointDistanceView != null) {
+            // if there is already a distance in waypointDistance, use it instead of resetting to default.
+            // this prevents displaying "--" while waiting for a new position update (See bug #1468)
+            text = waypointDistanceView.getText().toString();
         }
         add(R.string.cache_distance, text);
     }
