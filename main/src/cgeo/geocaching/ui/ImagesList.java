@@ -140,6 +140,7 @@ public class ImagesList {
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setLayoutParams(new LayoutParams(bounds.width(), bounds.height()));
 
+                view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
                 view.addView(imageView);
 
                 imageView.setId(image.hashCode());
