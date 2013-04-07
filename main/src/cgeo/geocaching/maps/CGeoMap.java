@@ -382,9 +382,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (extras != null) {
             mapMode = (MapMode) extras.get(EXTRAS_MAP_MODE);
             isLiveEnabled = extras.getBoolean(EXTRAS_LIVE_ENABLED, false);
-            searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
+            searchIntent = extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
-            coordsIntent = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
+            coordsIntent = extras.getParcelable(EXTRAS_COORDS);
             waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);

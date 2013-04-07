@@ -63,7 +63,7 @@ public class cgeonavigate extends AbstractActivity {
         if (extras != null) {
             title = extras.getString(EXTRAS_GEOCODE);
             final String name = extras.getString(EXTRAS_NAME);
-            dstCoords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
+            dstCoords = extras.getParcelable(EXTRAS_COORDS);
             info = extras.getString(EXTRAS_CACHE_INFO);
 
             if (StringUtils.isNotBlank(name)) {

@@ -428,7 +428,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         if (extras != null) {
             Object typeObject = extras.get(Intents.EXTRA_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
-            coords = (Geopoint) extras.getParcelable(Intents.EXTRAS_COORDS);
+            coords = extras.getParcelable(Intents.EXTRAS_COORDS);
         }
         else {
             extras = new Bundle();
