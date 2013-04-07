@@ -9,7 +9,7 @@ public class Intents {
     private static final String PREFIX = "cgeo.geocaching.intent.extra.";
 
     public static final String EXTRA_ADDRESS = PREFIX + "address";
-    public static final String EXTRAS_COORDS = PREFIX + "coords";
+    public static final String EXTRA_COORDS = PREFIX + "coords";
     public static final String EXTRA_COUNT = PREFIX + "count";
     public static final String EXTRA_GEOCODE = PREFIX + "geocode";
     public static final String EXTRA_GUID = PREFIX + "guid";

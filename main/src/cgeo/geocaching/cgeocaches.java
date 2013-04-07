@@ -415,7 +415,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         if (extras != null) {
             Object typeObject = extras.get(Intents.EXTRA_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
-            coords = extras.getParcelable(Intents.EXTRAS_COORDS);
+            coords = extras.getParcelable(Intents.EXTRA_COORDS);
         }
         else {
             extras = new Bundle();
@@ -1661,7 +1661,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
         cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.NEAREST);
-        cachesIntent.putExtra(Intents.EXTRAS_COORDS, coordsNow);
+        cachesIntent.putExtra(Intents.EXTRA_COORDS, coordsNow);
         context.startActivity(cachesIntent);
     }
 
@@ -1674,7 +1674,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     public static void startActivityAddress(final Context context, final Geopoint coords, final String address) {
         final Intent addressIntent = new Intent(context, cgeocaches.class);
         addressIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.ADDRESS);
-        addressIntent.putExtra(Intents.EXTRAS_COORDS, coords);
+        addressIntent.putExtra(Intents.EXTRA_COORDS, coords);
         addressIntent.putExtra(Intents.EXTRA_ADDRESS, address);
         context.startActivity(addressIntent);
     }
@@ -1685,7 +1685,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
         cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.COORDINATE);
-        cachesIntent.putExtra(Intents.EXTRAS_COORDS, coords);
+        cachesIntent.putExtra(Intents.EXTRA_COORDS, coords);
         context.startActivity(cachesIntent);
     }
 
