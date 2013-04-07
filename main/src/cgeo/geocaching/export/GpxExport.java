@@ -98,7 +98,7 @@ class GpxExport extends AbstractExport {
         return builder.create();
     }
 
-    private class ExportTask extends AsyncTask<Void, Integer, File> {
+    protected class ExportTask extends AsyncTask<Void, Integer, File> {
         private final List<Geocache> caches;
         private final Activity activity;
         private final Progress progress = new Progress();
