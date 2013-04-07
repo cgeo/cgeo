@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.XmlUtils;
+import cgeo.org.kxml2.io.KXmlSerializer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlSerializer;
@@ -26,7 +27,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Xml;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
@@ -114,7 +114,7 @@ class GpxExport extends AbstractExport {
         return allGeocodes.toArray(new String[allGeocodes.size()]);
     }
 
-    private class ExportTask extends AsyncTaskWithProgress<String, File> {
+    protected class ExportTask extends AsyncTaskWithProgress<String, File> {
         private final Activity activity;
         private int countExported = 0;
 
@@ -147,7 +147,7 @@ class GpxExport extends AbstractExport {
                 final File exportLocation = new File(Settings.getGpxExportDir());
                 exportLocation.mkdirs();
 
-                final XmlSerializer gpx = Xml.newSerializer();
+                final XmlSerializer gpx = new KXmlSerializer();
                 writer = new FileWriter(exportFile);
                 gpx.setOutput(writer);
 
