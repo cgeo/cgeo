@@ -497,7 +497,6 @@
   <string name="cache_attributes">Attributen</string>
   <string name="cache_inventory">Inventaris</string>
   <string name="cache_log_offline">Offline log</string>
-  <string name="cache_log_images_loading">Laden van logafbeeldingen…</string>
   <string name="cache_log_images_title">Logafbeelding</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Persoonlijke aantekening</string>
@@ -600,9 +599,7 @@
   <string name="cache_coordinates">Coördinaten</string>
   <string name="cache_coordinates_original">Originele coordinaten</string>
   <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
-  <string name="cache_spoiler_images_loading">Spoiler afbeeldingen laden…</string>
   <string name="cache_images_title">Afbeeldingen</string>
-  <string name="cache_images_loading">Afbeeldingen laden…</string>
   <string name="cache_log_types">Log types</string>
   <string name="cache_coordinates_no">Deze cache heeft geen coördinaten.</string>
   <string name="cache_clear_history">Maak geschiedenis leeg</string>

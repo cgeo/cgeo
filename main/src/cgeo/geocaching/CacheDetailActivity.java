@@ -27,7 +27,6 @@ import cgeo.geocaching.ui.EditNoteDialog;
 import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.ImagesList;
-import cgeo.geocaching.ui.ImagesList.ImageType;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.BaseUtils;
@@ -905,7 +904,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
         imagesList = new ImagesList(this, cache.getGeocode());
-        imagesList.loadImages(imageView, cache.getImages(), ImageType.AllImages, false);
+        imagesList.loadImages(imageView, cache.getImages(), false);
     }
 
     public static void startActivity(final Context context, final String geocode) {

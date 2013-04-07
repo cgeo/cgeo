@@ -63,7 +63,7 @@ public class ImagesActivity extends AbstractActivity {
     @Override
     public void onStart() {
         super.onStart();
-        imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames, imgType, offline);
+        imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames, offline);
     }
 
     @Override
