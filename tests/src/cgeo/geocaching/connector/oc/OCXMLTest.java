@@ -5,6 +5,10 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.enumerations.CacheType;
 
+import org.apache.commons.lang3.StringUtils;
+
+import android.text.Html;
+
 import java.util.Collection;
 
 public class OCXMLTest extends CGeoTestCase {
@@ -89,25 +93,21 @@ public class OCXMLTest extends CGeoTestCase {
         assertNotNull(cache);
         try {
             assertEquals(geoCode, cache.getGeocode());
-            assertEquals(description, cache.getDescription());
+            // ignore copyright as the date part will change all the time
+            assertEquals(description, removeCopyrightAndTags(cache.getDescription()));
             cache.store(null);
 
             // reload, make sure description is not duplicated
             cache = OCXMLClient.getCache(geoCode);
             assertNotNull(cache);
-            assertEquals(description, cache.getDescription());
+            assertEquals(description, removeCopyrightAndTags(cache.getDescription()));
         } finally {
             deleteCacheFromDB(geoCode);
         }
     }
 
-    public static void testRemoveMarkupCache() {
-        final String geoCode = "OCEFBA";
-        final String description = "Bei dem Cache kannst du einen kleinen Schatz bergen. Bitte lege aber einen ander Schatz in das Döschen. Achtung vor Automuggels.";
-
-        Geocache cache = OCXMLClient.getCache(geoCode);
-        assertNotNull(cache);
-        assertEquals(description, cache.getDescription());
+    private static String removeCopyrightAndTags(String input) {
+        return Html.fromHtml(StringUtils.substringBefore(input, "&copy")).toString().trim();
     }
 
     public static void testRemoveMarkup() {
