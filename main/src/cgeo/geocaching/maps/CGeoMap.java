@@ -750,9 +750,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     @Override
                     public void onClick(DialogInterface dialog, int newItem) {
-                        if (newItem == selectedItem) {
-                            // no change
-                        } else {
+                        if (newItem != selectedItem) {
                             // Adjust index because of <default> selection
                             if (newItem > 0) {
                                 Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());

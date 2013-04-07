@@ -311,6 +311,7 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == SCAN_REQUEST_CODE) {
+            // Only handle positive results, don't do anything if cancelled.
             if (resultCode == RESULT_OK) {
                 String scan = intent.getStringExtra("SCAN_RESULT");
                 if (StringUtils.isBlank(scan)) {
@@ -318,8 +319,6 @@ public class cgeo extends AbstractActivity {
                 }
 
                 SearchActivity.startActivityScan(scan, this);
-            } else if (resultCode == RESULT_CANCELED) {
-                // do nothing
             }
         } else if (requestCode == SEARCH_REQUEST_CODE) {
             // SearchActivity activity returned without making a search
