@@ -484,7 +484,6 @@
   <string name="cache_attributes">Attributi</string>
   <string name="cache_inventory">Oggetti</string>
   <string name="cache_log_offline">Log Offline</string>
-  <string name="cache_log_images_loading">Caricamento immagini log…</string>
   <string name="cache_log_images_title">Immagini Log</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Note personali</string>
@@ -583,9 +582,7 @@
   <string name="cache_coordinates">Coordinate</string>
   <string name="cache_coordinates_original">Coordinate originali</string>
   <string name="cache_spoiler_images_title">Immagini spoiler</string>
-  <string name="cache_spoiler_images_loading">Caricamento immagini spoiler…</string>
   <string name="cache_images_title">Immaginis</string>
-  <string name="cache_images_loading">Caricamento immagini…</string>
   <string name="cache_log_types">Tipi di Log</string>
   <string name="cache_coordinates_no">Questo cache non ha coordinate.</string>
   <string name="cache_clear_history">Cancella cronologia</string>

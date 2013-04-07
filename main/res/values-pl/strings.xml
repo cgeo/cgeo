@@ -488,7 +488,6 @@
   <string name="cache_attributes">Atrybuty</string>
   <string name="cache_inventory">Inwentarz</string>
   <string name="cache_log_offline">Wpis offline</string>
-  <string name="cache_log_images_loading">Trwa ładowanie zdjęć z wpisu…</string>
   <string name="cache_log_images_title">Zdjęcie z wpisu</string>
   <string name="cache_log_image_default_title">Zdjęcie</string>
   <string name="cache_personal_note">Notatka osobista</string>
@@ -586,9 +585,7 @@
   <string name="cache_coordinates">Współrzędne</string>
   <string name="cache_coordinates_original">Oryginalne współrzędne</string>
   <string name="cache_spoiler_images_title">Zdjęcia spoiler</string>
-  <string name="cache_spoiler_images_loading">Ładuję zdjęcia spoiler…</string>
   <string name="cache_images_title">Zdjęcia</string>
-  <string name="cache_images_loading">Ładuję zdjęcia…</string>  
   <string name="cache_log_types">Rodzaj wpisu</string>
   <string name="cache_coordinates_no">Ta skrzynka nie ma współrzędnych GPS.</string>
   <string name="cache_clear_history">Usuń historię</string>

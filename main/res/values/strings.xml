@@ -512,7 +512,6 @@
   <string name="cache_attributes">Attributes</string>
   <string name="cache_inventory">Inventory</string>
   <string name="cache_log_offline">Offline Log</string>
-  <string name="cache_log_images_loading">Loading Log images…</string>
   <string name="cache_log_images_title">Log images</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Personal note</string>
@@ -615,9 +614,7 @@
   <string name="cache_coordinates">Coordinates</string>
   <string name="cache_coordinates_original">Original Coordinates</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
-  <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
   <string name="cache_images_title">Images</string>
-  <string name="cache_images_loading">Loading images…</string>
   <string name="cache_log_types">Log types</string>
   <string name="cache_coordinates_no">This cache has no coordinates.</string>
   <string name="cache_clear_history">Clear history</string>
