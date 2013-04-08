@@ -159,6 +159,10 @@ public class ImageSelectActivity extends AbstractActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         imageUri = getOutputImageFileUri(); // create a file to save the image
+        if (imageUri == null) {
+            showFailure();
+            return;
+        }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // set the image file name
 
         // start the image capture Intent
@@ -180,37 +184,61 @@ public class ImageSelectActivity extends AbstractActivity {
             return;
         }
 
-        if (resultCode == RESULT_OK) {
-            if (data != null) {
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaColumns.DATA };
+        if (resultCode != RESULT_OK) {
+            // Image capture failed, advise user
+            showFailure();
+            return;
+        }
 
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+        if (data != null) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaColumns.DATA };
+
+            Cursor cursor = null;
+            try {
+                cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                if (cursor == null) {
+                    showFailure();
+                    return;
+                }
                 cursor.moveToFirst();
 
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 String filePath = cursor.getString(columnIndex);
+                if (StringUtils.isBlank(filePath)) {
+                    showFailure();
+                    return;
+                }
                 imageUri = Uri.parse(filePath);
-                cursor.close();
-
-                Log.d("SELECT IMAGE data = " + data.toString());
-            } else {
-                Log.d("SELECT IMAGE data is null");
+            } catch (Exception e) {
+                Log.e("ImageSelectActivity.onActivityResult", e);
+                showFailure();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
             }
 
-            if (requestCode == SELECT_NEW_IMAGE) {
-                showToast(getResources().getString(R.string.info_stored_image) + "\n" + imageUri);
-            }
+            Log.d("SELECT IMAGE data = " + data.toString());
         } else {
-            // Image capture failed, advise user
-            showToast(getResources().getString(R.string.err_aquire_image_failed));
-            return;
+            Log.d("SELECT IMAGE data is null");
+        }
+
+        if (requestCode == SELECT_NEW_IMAGE) {
+            showToast(getResources().getString(R.string.info_stored_image) + "\n" + imageUri);
         }
 
         loadImagePreview();
     }
 
+    private void showFailure() {
+        showToast(getResources().getString(R.string.err_aquire_image_failed));
+    }
+
     private void loadImagePreview() {
+        if (imageUri == null) {
+            return;
+        }
         if (!new File(imageUri.getPath()).exists()) {
             Log.i("Image does not exist");
             return;
@@ -225,7 +253,11 @@ public class ImageSelectActivity extends AbstractActivity {
     }
 
     private static Uri getOutputImageFileUri() {
-        return Uri.fromFile(getOutputImageFile());
+        final File file = getOutputImageFile();
+        if (file == null) {
+            return null;
+        }
+        return Uri.fromFile(file);
     }
 
     /** Create a File for saving an image or video */
