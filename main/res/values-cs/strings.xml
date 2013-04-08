@@ -90,7 +90,7 @@
   <string name="log_post">Odeslat Log</string>
   <string name="log_post_rate">Odeslat Log a hlasovat</string>
   <string name="log_post_no_rate">Odeslat Log a nehlasovat</string>
-  <string name="log_post_not_possible">Načítání stránky s Logy…</string>
+  <string name="log_post_not_possible">Načítání stránky s Logovacím formulářem…</string>
   <string name="log_add">Přidat</string>
   <string name="log_rating">Hodnocení</string>
   <string name="log_no_rating">Bez hodnocení</string>
@@ -323,7 +323,7 @@
   <string name="caches_filter_track">Se sledovatelnými předměty</string>
   <string name="caches_filter_clear">Vymazat filtry</string>
   <string name="caches_filter_modified">S upravenými souřadnicemi</string>
-  <string name="caches_filter_origin">Originální</string>
+  <string name="caches_filter_origin">Původ keše</string>
   <string name="caches_removing_from_history">Čištění Historie…</string>
   <string name="caches_clear_offlinelogs">Smazat offline Logy</string>
   <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
@@ -552,7 +552,7 @@
   <string name="cache_dialog_loading_details_status_gcvote">Načítání GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Načítání údajů o nadmořské výšce</string>
   <string name="cache_dialog_loading_details_status_cache">Ukládání do mezipaměti</string>
-  <string name="cache_dialog_loading_details_status_render">Renderování zobrazení</string>
+  <string name="cache_dialog_loading_details_status_render">Vykreslování pohledu</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Ukládání keše pro offline použití…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
