@@ -716,13 +716,6 @@
 
   <string name="waypoint_coordinate_formats_plain">Prostý</string>
 
-  <!-- distance units -->
-  <string name="unit_m">m (Metry)</string>
-  <string name="unit_km">km (Kilometry)</string>
-  <string name="unit_ft">ft (Stopy)</string>
-  <string name="unit_yd">yd (Yardy)</string>
-  <string name="unit_mi">mi (Míle)</string>
-
   <!-- visit -->
   <string name="visit_tweet">Oznámit nález na Twitteru</string>
 
