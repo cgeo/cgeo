@@ -685,13 +685,6 @@
 
   <string name="waypoint_coordinate_formats_plain">zwykłe</string>
 
-  <!-- distance units -->
-  <string name="unit_m">m</string>
-  <string name="unit_km">km</string>
-  <string name="unit_ft">stopy</string>
-  <string name="unit_yd">jardy</string>
-  <string name="unit_mi">mile</string>
-
   <!-- visit -->
   <string name="visit_tweet">Wyślij informację do Twitter</string>
 

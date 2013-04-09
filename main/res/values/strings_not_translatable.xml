@@ -8,7 +8,14 @@
   </string-array>
   
   <!-- distance units -->
-  <string-array name="distance_units">
+  <string name="unit_m" translatable="false">m</string>
+  <string name="unit_km" translatable="false">km</string>
+  <string name="unit_ft" translatable="false">ft</string>
+  <string name="unit_yd" translatable="false">yd</string>
+  <string name="unit_mi" translatable="false">mi</string>
+  
+  <!-- distance units -->
+  <string-array name="distance_units" translatable="false">
     <item>@string/unit_m</item>
     <item>@string/unit_km</item>
     <item>@string/unit_ft</item>

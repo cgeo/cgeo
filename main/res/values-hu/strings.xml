@@ -661,13 +661,6 @@
   <string name="search_history_cleared">Előzmények törölve</string>
 
   <string name="waypoint_coordinate_formats_plain">Egyszerű</string>
-  
-  <!-- distance units -->
-  <string name="unit_m">m</string>
-  <string name="unit_km">km</string>
-  <string name="unit_ft">ft</string>
-  <string name="unit_yd">yd</string>
-  <string name="unit_mi">mi</string>
 
   <!-- visit -->
   <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>
