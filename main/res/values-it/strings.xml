@@ -680,13 +680,6 @@
 
   <string name="waypoint_coordinate_formats_plain">Plain</string>
 
-  <!-- distance units -->
-  <string name="unit_m">m</string>
-  <string name="unit_km">km</string>
-  <string name="unit_ft">piedi</string>
-  <string name="unit_yd">iarde</string>
-  <string name="unit_mi">miglia</string>
-
   <!-- visit -->
   <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
 
