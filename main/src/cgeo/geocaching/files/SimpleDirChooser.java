@@ -238,7 +238,7 @@ public class SimpleDirChooser extends ListActivity {
         @Override
         public boolean accept(File dir, String filename) {
             File file = new File(dir, filename);
-            return file.isDirectory();
+            return file.isDirectory() && file.canWrite();
         }
 
     }
