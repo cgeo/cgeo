@@ -85,6 +85,7 @@
   <string name="log_tb_changeall">Cambia tutto</string>
   <string name="log_save">Salva</string>
   <string name="log_saving">Invio log…</string>
+  <string name="log_saving_and_uploading">Invio log e immagine…</string> 
   <string name="log_clear">Azzera</string>
   <string name="log_post">Invia log</string>
   <string name="log_post_rate">Invia log + voto</string>
@@ -118,6 +119,13 @@
   <string name="log_today">Oggi</string>
   <string name="log_yesterday">Ieri</string>
   <string name="log_smilies">Smile</string>
+  <string name="log_image">Immagine</string>
+  <string name="log_image_attach">Aggiungi immagine</string>
+  <string name="log_image_edit">Modifica immagine</string>
+  <string name="log_image_stored">Esistente</string>
+  <string name="log_image_camera">Nuova</string>
+  <string name="log_image_caption">Didascalia</string>
+  <string name="log_image_description">Descrizione</string> 
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -167,6 +175,8 @@
   <string name="err_missing_device_name">Per cortesia inserire il nome del dispositivo prima di registrarsi.</string>
   
   <string name="err_favorite_failed">Errore nella modifica dello stato preferiti.</string>
+  <string name="err_select_logimage_failed">La selezione dell\'immagine per il log è fallita.</string>
+  <string name="err_aquire_image_failed">Acquisizione immagine fallita.</string> 
 
   <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
   <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
@@ -189,6 +199,7 @@
   <string name="err_log_load_data_still">c:geo sta ancora caricando i dati necessari per salvare il log. Per cortesia attendere ancora un pochino.</string>
   <string name="err_log_failed_server">c:geo non è riuscito ad inviare il log perché il server non risponde.</string>
   <string name="err_log_post_failed">Sembra che il log non sia stato inviato. Prego verificare su Geocaching.com.</string>
+  <string name="err_logimage_post_failed">Sembra la l\'immagine non sia stata caricata. Si prega di controllare su Geocaching.com.</string>
 
   <string name="err_search_address_forgot">c:geo ha dimenticato l\'indirizzo che vuoi trovare.</string>
   <string name="err_parse_lat">c:geo non riesce ad interpretare la latitudine.</string>
@@ -218,6 +229,8 @@
   <string name="info_log_saved">c:geo ha salvato il log.</string>
   <string name="info_log_cleared">Il log è stato azzerato.</string>
   <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
+  <string name="info_select_logimage_cancelled">Selezione o cattura immagine annnulata.</string>
+  <string name="info_stored_image">Nuova immagine salvata su:</string> 
 
   <string name="info_storing_static_maps">Tento di salvare la static map</string>
 
@@ -307,6 +320,7 @@
   <string name="caches_filter_track">Con oggetti trackables</string>
   <string name="caches_filter_clear">Rimuovi filtri</string>
   <string name="caches_filter_modified">Con coordinate modificate</string>
+  <string name="caches_filter_origin">Origine</string> 
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
 
   <!-- caches lists -->
@@ -387,6 +401,7 @@
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
   <string name="init_units">Usa miglia/piedi</string>
   <string name="init_log_offline">Quando salvi log, fallo sempre offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
+  <string name="init_choose_list">Ask for list when storing caches</string> 
   <string name="init_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
   <string name="init_altitude">Correzione di altitudine</string>
   <string name="init_altitude_description">Se il GPS restituisce un\'errata altitudine, puoi correggerla inserendo un valore positivo o negativo, in metri.</string>
@@ -498,6 +513,9 @@
   <string name="cache_favpoint_not_on">Questo cache non è uno dei tuoi favoriti.</string>
   <string name="cache_favpoint_add">Aggiungi</string>
   <string name="cache_favpoint_remove">Rimuovi</string>
+  <string name="cache_list_text">Lista:</string>
+  <string name="cache_list_change">Sposta</string>
+  <string name="cache_list_unknown">Non in una lista</string>
   <string name="cache_images">Immagini</string>
   
   <string name="cache_waypoints">Waypoints</string>
@@ -653,6 +671,7 @@
   <string name="waypoint_edit_title">Modifica waypoint</string>
   <string name="waypoint_add_title">Aggiungi waypoint</string>
   <string name="waypoint_note">Note</string>
+  <string name="waypoint_visited">Visitato</string> 
   <string name="waypoint_save">Salva</string>
   <string name="waypoint_loading">Caricamento waypoint…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Nessuna modifica alle coordinate cache</string>
@@ -813,10 +832,7 @@
   <string name="export_gpx_info">Il file GPX sarà esportato in %1$s con data ed ora correnti come nome file.</string>
   <string name="export_gpx_to">Invia il GPX esportato a</string>
 
-<!--  attribute unknown -->
-  <string name="attribute_unknown_yes">(attributo sconosciuto) permesso</string>
-  <string name="attribute_unknown_no">(attributo sconosciuto) non permesso</string>
-  <!--  attributes (permissions -> allowed, not allowed) -->
+  <!-- GC attributes --> 
   <string name="attribute_dogs_yes">Cani permessi</string>
   <string name="attribute_dogs_no">Cani NON permessi</string>
   <string name="attribute_bicycles_yes">Biciclette permesse</string>
@@ -835,8 +851,6 @@
   <string name="attribute_campfires_no">Fuochi da campo NON permessi</string>
   <string name="attribute_rv_yes">Camper/roulotte permessi</string>
   <string name="attribute_rv_no">Camper/roulotte NON permessi</string>
-
-  <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Raccomandato per bambini</string>
   <string name="attribute_kids_no">Non raccomandato per bambini</string>
   <string name="attribute_onehour_yes">Richiede meno di un\'ora</string>
@@ -889,8 +903,6 @@
   <string name="attribute_landf_no">Non è un tour \"Lost and found\"</string>
   <string name="attribute_partnership_yes">Cache di gruppo</string>
   <string name="attribute_partnership_no">Cache non di gruppo</string>
-
-  <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Accesso o parcheggio a pagamento</string>
   <string name="attribute_fee_no">Accesso o parcheggio non a pagamento</string>
   <string name="attribute_rappelling_yes">Richiesta attrezzatura da arrampicata</string>
@@ -913,8 +925,6 @@
   <string name="attribute_wirelessbeacon_no">Segnalatore radio non necessario</string>
   <string name="attribute_treeclimbing_yes">Richiede di salire su un albero</string>
   <string name="attribute_treeclimbing_no">Non richiede di salire su un albero</string>
-
-  <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Piante velenose</string>
   <string name="attribute_poisonoak_no">Piante non velenose</string>
   <string name="attribute_dangerousanimals_yes">Animali pericolosi</string>
@@ -931,8 +941,6 @@
   <string name="attribute_danger_no">Area non pericolosa</string>
   <string name="attribute_thorn_yes">Rovi</string>
   <string name="attribute_thorn_no">Senza rovi</string>
-
-  <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Accessibile con sedia a rotelle</string>
   <string name="attribute_wheelchair_no">Non accessibile con sedia a rotelle</string>
   <string name="attribute_parking_yes">Parcheggio</string>
@@ -955,6 +963,65 @@
   <string name="attribute_fuel_no">Lontano da pompa carburante</string>
   <string name="attribute_food_yes">Vicino a punto ristoro</string>
   <string name="attribute_food_no">Lontano da punti ristoro</string>
+  
+  <string name="attribute_oc_only_yes">Loggabile solo su Opencaching</string>
+  <string name="attribute_oc_only_no">Loggabile non solo su Opencaching</string>
+  <string name="attribute_link_only_yes">Hyperlink solo verso un altro portale di cache</string>
+  <string name="attribute_link_only_no">Non solo hyperlink ad un altro portale di cache</string>
+  <string name="attribute_letterbox_yes">Lettera (richiede francobollo)</string>
+  <string name="attribute_letterbox_no">No lettera (non richiede francobollo)</string>
+  <string name="attribute_railway_yes">Ferrovia attiva nelle vicinanze</string>
+  <string name="attribute_railway_no">Nessuna ferrovia nelle vicinanze</string>
+  <string name="attribute_syringe_yes">Pronto soccorso disponibile</string>
+  <string name="attribute_syringe_no">Pronto soccorso non disponibile</string>
+  <string name="attribute_swamp_yes">Paludoso</string>
+  <string name="attribute_swamp_no">Non paludoso</string>
+  <string name="attribute_hills_yes">Area collinare</string>
+  <string name="attribute_hills_no">Area non collinare</string>
+  <string name="attribute_poi_yes">Punto di interesse</string>
+  <string name="attribute_poi_no">Nessun punto di interesse</string>
+  <string name="attribute_moving_target_yes">Obiettivo in movimento</string>
+  <string name="attribute_moving_target_no">Obiettivo non in movimento</string>
+  <string name="attribute_webcam_yes">Webcam</string>
+  <string name="attribute_webcam_no">No webcam</string>
+  <string name="attribute_inside_yes">Con aree interne (cave, edifici etc.)</string>
+  <string name="attribute_inside_no">Senza aree interne</string>
+  <string name="attribute_in_water_yes">In acqua</string>
+  <string name="attribute_in_water_no">Non in acqua</string>
+  <string name="attribute_no_gps_yes">Senza GPS (lettere, cistes, carta e bussola...)</string>
+  <string name="attribute_no_gps_no">Con GPS</string>
+  <string name="attribute_overnight_yes">Necessario permanere di notte</string>
+  <string name="attribute_overnight_no">Permanenza notturna non necessaria</string>
+  <string name="attribute_specific_times_yes">Disponibile solo in certi orari</string>
+  <string name="attribute_specific_times_no">Disponibile a tutte le ore</string>
+  <string name="attribute_day_yes">Solo di giorno</string>
+  <string name="attribute_day_no">Non solo di giorno</string>
+  <string name="attribute_tide_yes">Marea</string>
+  <string name="attribute_tide_no">Senza marea</string>
+  <string name="attribute_all_seasons_yes">Tutte le stagioni</string>
+  <string name="attribute_all_seasons_no">Non in tutte le stagioni</string>
+  <string name="attribute_breeding_yes">Stagione di riproduzione / natura protetta</string>
+  <string name="attribute_breeding_no">Disponibile anche in stagione di riproduzione / natura protetta</string>
+  <string name="attribute_snow_proof_yes">Nascondiglio a prova di neve</string>
+  <string name="attribute_snow_proof_no">Nascondiglio non a prova di neve</string>
+  <string name="attribute_compass_yes">Bussola</string>
+  <string name="attribute_compass_no">Senza bussola</string>
+  <string name="attribute_cave_yes">Equipaggiamento da caverna</string>
+  <string name="attribute_cave_no">Senza equipaggiamento da caverna</string>
+  <string name="attribute_aircraft_yes">Aircraft</string>
+  <string name="attribute_aircraft_no">Senza aircraft</string>
+  <string name="attribute_investigation_yes">Investigazione</string>
+  <string name="attribute_investigation_no">Senza investigazione</string>
+  <string name="attribute_puzzle_yes">Puzzle / Mystery</string>
+  <string name="attribute_puzzle_no">No puzzle / mystery</string>
+  <string name="attribute_arithmetic_yes">Problema aritmetico</string>
+  <string name="attribute_arithmetic_no">Problema non aritmetico</string>
+  <string name="attribute_other_cache_yes">Cache di altro tipo</string>
+  <string name="attribute_other_cache_no">Cache non di altro tipo</string>
+  <string name="attribute_ask_owner_yes">Chiedere al proprietario per le condizioni di partenza</string>
+  <string name="attribute_ask_owner_no">Non chiedere al proprietario per le condizioni di partenza</string>
+  <string name="attribute_unknown_yes">Attributo sconosciuto</string>
+  <string name="attribute_unknown_no">Senza attributo sconosciuto</string> 
 
   <!-- next things -->
   <string name="legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del <a href="http://www.geocaching.com/about/termsofuse.aspx">Contratto Groundspeak</a> che deve essere approvato dall\'utente.</string>
