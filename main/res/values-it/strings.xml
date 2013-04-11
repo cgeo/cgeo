@@ -387,6 +387,7 @@
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
   <string name="init_units">Usa miglia/piedi</string>
   <string name="init_log_offline">Quando salvi log, fallo sempre offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
+  <string name="init_choose_list">Chiedi la lista quando salvi un cache</string>  
   <string name="init_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
   <string name="init_altitude">Correzione di altitudine</string>
   <string name="init_altitude_description">Se il GPS restituisce un\'errata altitudine, puoi correggerla inserendo un valore positivo o negativo, in metri.</string>
