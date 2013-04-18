@@ -306,7 +306,7 @@
   <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
   <string name="caches_refresh_all">Aggiorna tutti</string>
   <string name="caches_move_selected">Muovi i cache selezionati</string>
-  <string name="caches_move_all">Muovi tutte</string>
+  <string name="caches_move_all">Muovi tutti</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Esporta in Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -322,6 +322,8 @@
   <string name="caches_filter_modified">Con coordinate modificate</string>
   <string name="caches_filter_origin">Origine</string> 
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
+  <string name="caches_clear_offlinelogs">Cancella i log offline</string>
+	<string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
 
   <!-- caches lists -->
   <string name="list_menu">Lista</string>
@@ -354,6 +356,7 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gc_activate">Attiva Geocaching.com su mappa live e nelle ricerche</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Attiva opencaching.de su mappa live e nelle ricerche</string>
   <string name="init_oc_username_description">Inserisci il tuo utente opencaching.de per marcare i tuoi ritrovamenti.</string>
@@ -400,7 +403,7 @@
   <string name="init_offline_wp">Salva i waypoints delle mappe per uso offline</string>
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
   <string name="init_units">Usa miglia/piedi</string>
-  <string name="init_log_offline">Quando salvi log, fallo sempre offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
+  <string name="init_log_offline">Attiva log offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
   <string name="init_choose_list">Chiedi la lista quando salvi un cache</string>  
   <string name="init_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
   <string name="init_altitude">Correzione di altitudine</string>
@@ -452,6 +455,12 @@
   <string name="init_plain_logs">Visualizza i LOG senza colori</string>
   <string name="init_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
   <string name="init_rendertheme_folder">Cartella per i temi mappa personali off-line</string>
+  <!-- map sources -->
+	<string name="map_source_google_map">Google: Map</string>
+	<string name="map_source_google_satellite">Google: Satellite</string>
+	<string name="map_source_osm_mapnik">OSM: Mapnik</string>
+	<string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+	<string name="map_source_osm_offline">OSM: Offline</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
