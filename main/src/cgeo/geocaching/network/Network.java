@@ -40,6 +40,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 
 import java.io.File;
@@ -469,6 +472,21 @@ public abstract class Network {
             Log.e("Network.encode", e);
         }
         return null;
+    }
+
+    /**
+     * Checks if the device has network connection.
+     * 
+     * @param context
+     *            context of the application, cannot be null
+     * 
+     * @return <code>true</code> if the device is connected to the network.
+     */
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager conMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = conMan.getActiveNetworkInfo();
+
+        return activeNetwork != null && activeNetwork.isConnected();
     }
 
 }
