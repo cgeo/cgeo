@@ -12,7 +12,10 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.EditText;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class StoredList {
@@ -69,7 +72,7 @@ public class StoredList {
         }
 
         public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyMoveTargets, final int exceptListId) {
-            final List<StoredList> lists = cgData.getLists();
+            final List<StoredList> lists = getSortedLists();
 
             if (lists == null) {
                 return;
@@ -113,6 +116,19 @@ public class StoredList {
                 }
             });
             builder.create().show();
+        }
+
+        private static List<StoredList> getSortedLists() {
+            final Collator collator = Collator.getInstance();
+            final List<StoredList> lists = cgData.getLists();
+            Collections.sort(lists, new Comparator<StoredList>() {
+
+                @Override
+                public int compare(StoredList lhs, StoredList rhs) {
+                    return collator.compare(lhs.getTitle(), rhs.getTitle());
+                }
+            });
+            return lists;
         }
 
         public void promptForListCreation(final RunnableWithArgument<Integer> runAfterwards) {
@@ -175,5 +191,14 @@ public class StoredList {
                 }
             });
         }
+    }
+
+    /**
+     * Get the list title. This method is not public by intention to make clients use the {@link UserInterface} class.
+     *
+     * @return
+     */
+    protected String getTitle() {
+        return title;
     }
 }
