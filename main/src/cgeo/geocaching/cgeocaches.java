@@ -1082,6 +1082,11 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
 
+        if (!Network.isNetworkConnected(getApplicationContext())) {
+            showToast(getString(R.string.err_server));
+            return;
+        }
+
         if (Settings.getChooseList() && type != CacheListType.OFFLINE) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,
