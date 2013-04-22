@@ -1354,6 +1354,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
 
+                if (!Network.isNetworkConnected(getApplicationContext())) {
+                    showToast(getString(R.string.err_server));
+                    return;
+                }
+
                 final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler();
 
                 progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
