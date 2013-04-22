@@ -1444,7 +1444,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void selectList(@SuppressWarnings("unused") View view) {
+    public void selectList(View view) {
         if (type != CacheListType.OFFLINE) {
             return;
         }
@@ -1543,7 +1543,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void goMap(@SuppressWarnings("unused") View view) {
+    public void goMap(View view) {
         if (search == null || CollectionUtils.isEmpty(cacheList)) {
             showToast(res.getString(R.string.warn_no_cache_coord));
 
