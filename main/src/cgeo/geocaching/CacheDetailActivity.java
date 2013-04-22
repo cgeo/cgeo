@@ -1752,8 +1752,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                new LoadDescriptionTask().execute(cache.getShortDescription(), view.findViewById(R.id.shortdesc), null);
-                registerForContextMenu(view.findViewById(R.id.shortdesc));
+                new LoadDescriptionTask(cache.getShortDescription(), view.findViewById(R.id.shortdesc), null, null).execute();
             }
 
             // long description
@@ -1858,14 +1857,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             } else {
                 personalNoteView.setVisibility(View.GONE);
             }
-        }private void loadLongDescription() {
+        }
+
+        private void loadLongDescription() {
             Button showDesc = (Button) view.findViewById(R.id.show_description);
             showDesc.setVisibility(View.GONE);
             showDesc.setOnClickListener(null);
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
-            new LoadDescriptionTask().execute(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading));
-            registerForContextMenu(view.findViewById(R.id.longdesc));
+            new LoadDescriptionTask(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading), view.findViewById(R.id.shortdesc)).execute();
         }
 
     }
@@ -1901,28 +1901,33 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      * </ol>
      */
     private class LoadDescriptionTask extends AsyncTask<Object, Void, Void> {
-        private View loadingIndicatorView;
-        private TextView descriptionView;
-        private String descriptionString;
+        private final View loadingIndicatorView;
+        private final TextView descriptionView;
+        private final String descriptionString;
         private Spanned description;
+        private final View shortDescView;
 
+        public LoadDescriptionTask(final String description, final View descriptionView, final View loadingIndicatorView, final View shortDescView) {
+            this.descriptionString = description;
+            this.descriptionView = (TextView) descriptionView;
+            this.loadingIndicatorView = loadingIndicatorView;
+            this.shortDescView = shortDescView;
+        }
 
         @Override
         protected Void doInBackground(Object... params) {
             try {
-                descriptionString = ((String) params[0]);
-                descriptionView = (TextView) params[1];
-                loadingIndicatorView = (View) params[2];
-
                 // Fast preview: parse only HTML without loading any images
                 HtmlImageCounter imageCounter = new HtmlImageCounter();
                 final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
                 description = Html.fromHtml(descriptionString, imageCounter, unknownTagsHandler);
                 publishProgress();
+
+                boolean needsRefresh = false;
                 if (imageCounter.getImageCount() > 0) {
                     // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
                     description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
-                    publishProgress();
+                    needsRefresh = true;
                 }
 
                 // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
@@ -1934,6 +1939,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
                     ((Editable) description).append("\n\n").append(tableNote);
                     ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    needsRefresh = true;
+                }
+
+                if (needsRefresh) {
                     publishProgress();
                 }
             } catch (Exception e) {
@@ -1942,25 +1951,40 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return null;
         }
 
-        /*
-         * (non-Javadoc)
-         *
-         * @see android.os.AsyncTask#onProgressUpdate(Progress[])
-         */
         @Override
         protected void onProgressUpdate(Void... values) {
-            if (description != null) {
-                if (StringUtils.isNotBlank(descriptionString)) {
-                    descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                    fixBlackTextColor(descriptionView, descriptionString);
-                }
-
-                descriptionView.setVisibility(View.VISIBLE);
-            } else {
+            if (description == null) {
                 showToast(res.getString(R.string.err_load_descr_failed));
+                return;
             }
+            if (StringUtils.isNotBlank(descriptionString)) {
+                descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                fixBlackTextColor(descriptionView, descriptionString);
+                descriptionView.setVisibility(View.VISIBLE);
+                registerForContextMenu(descriptionView);
 
+                hideDuplicatedShortDescription();
+            }
+        }
+
+        /**
+         * Hide the short description, if it is contained somewhere at the start of the long description.
+         */
+        private void hideDuplicatedShortDescription() {
+            if (shortDescView != null) {
+                final String shortDescription = cache.getShortDescription();
+                if (StringUtils.isNotBlank(shortDescription)) {
+                    int index = descriptionString.indexOf(shortDescription);
+                    if (index >= 0 && index < 200) {
+                        shortDescView.setVisibility(View.GONE);
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
             if (null != loadingIndicatorView) {
                 loadingIndicatorView.setVisibility(View.GONE);
             }
