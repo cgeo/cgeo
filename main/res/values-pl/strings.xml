@@ -252,7 +252,7 @@
   <string name="caches_eta_ltm">Mniej niż minuta</string>
   <plurals name="caches_eta_mins">
     <item quantity="one">minuta</item>
-    <item quantity="two">minuty</item>
+    <item quantity="few">minut</item>
     <item quantity="other">minut</item>
   </plurals>
   <string name="caches_store_offline">Zapisz offline</string>
@@ -468,9 +468,9 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">Brak skrzynek</item>
     <item quantity="one">Jedna skrzynka</item>
-    <item quantity="other">Liczba skrzynek: %1$d</item>
+    <item quantity="few">%1$d skrzynki</item>
+    <item quantity="other">%1$d skrzynek</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Odśwież</string>
@@ -507,6 +507,7 @@
   <string name="cache_waypoints">Punkty nawigacji</string>
   <plurals name="waypoints">
       <item quantity="one">Jeden punkt nawigacji</item>
+      <item quantity="few">%d punkty nawigacji</item>
       <item quantity="other">%d punktów nawigacji</item>
   </plurals>    
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
@@ -989,6 +990,7 @@
   <string name="clipboard_copy_ok">Skopiowano do schowka</string>
   <plurals name="days_ago">
       <item quantity="one">wczoraj</item>
+      <item quantity="few">%d dni temu</item>
       <item quantity="other">%d dni temu</item>
   </plurals>
 </resources>
