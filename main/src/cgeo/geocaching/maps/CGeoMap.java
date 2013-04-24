@@ -625,6 +625,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         switch (id) {
             case MENU_TRAIL_MODE:
                 Settings.setMapTrail(!Settings.isMapTrail());
+                mapView.repaintRequired(overlayPosition);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_MAP_LIVE:
