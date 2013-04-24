@@ -115,7 +115,7 @@ public abstract class Formatter {
             infos.add(cache.getGeocode());
         }
 
-        infos.add(Formatter.formatCacheInfoShort(cache));
+        addShortInfos(cache, infos);
 
         if (cache.isPremiumMembersOnly()) {
             infos.add(cgeoapplication.getInstance().getString(R.string.cache_premium));
@@ -128,6 +128,11 @@ public abstract class Formatter {
 
     public static String formatCacheInfoShort(Geocache cache) {
         final ArrayList<String> infos = new ArrayList<String>();
+        addShortInfos(cache, infos);
+        return StringUtils.join(infos, Formatter.SEPARATOR);
+    }
+
+    private static void addShortInfos(Geocache cache, final ArrayList<String> infos) {
         if (cache.hasDifficulty()) {
             infos.add("D " + String.format("%.1f", cache.getDifficulty()));
         }
@@ -141,7 +146,6 @@ public abstract class Formatter {
         } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
             infos.add(Formatter.formatShortDate(cache.getHiddenDate().getTime()));
         }
-        return StringUtils.join(infos, Formatter.SEPARATOR);
     }
 
     public static String formatCacheInfoHistory(Geocache cache) {
