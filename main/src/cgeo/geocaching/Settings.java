@@ -112,6 +112,7 @@ public final class Settings {
     private static final String KEY_MAP_DIRECTORY = "mapDirectory";
     private static final String KEY_CONNECTOR_OC_ACTIVE = "connectorOCActive";
     private static final String KEY_CONNECTOR_OC_USER = "connectorOCUser";
+    private static final String KEY_LOG_IMAGE_SCALE = "logImageScale";
 
     private final static int unitsMetric = 1;
 
@@ -1438,5 +1439,19 @@ public final class Settings {
 
     public static void setCacheTwitterMessage(final String message) {
         cacheTwitterMessage = message;
+    }
+
+    public static int getLogImageScale() {
+        return sharedPrefs.getInt(KEY_LOG_IMAGE_SCALE, -1);
+    }
+
+    public static void setLogImageScale(final int scale) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_LOG_IMAGE_SCALE, scale);
+            }
+        });
     }
 }
