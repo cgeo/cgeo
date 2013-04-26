@@ -65,6 +65,7 @@ public class HtmlImage implements Html.ImageGetter {
 
         bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
+        bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
 
         Point displaySize = Compatibility.getDisplaySize();
         this.maxWidth = displaySize.x - 25;
