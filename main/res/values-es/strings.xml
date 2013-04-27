@@ -251,6 +251,7 @@
   <string name="caches_drop_all_ask">¿Quieres borrar todos los escondites guardados en el dispositivo?</string>
   <string name="caches_drop_stored">Descartar guardados</string>
   <string name="caches_drop_progress">Borrando escondites</string>
+  <string name="caches_drop_all_and_list">Descartar todos y borrar lista</string>
   <string name="caches_refresh_selected">Actualizar seleccionados</string>
   <string name="caches_refresh_all">Actualizar todos</string>
   <string name="caches_move_selected">Mover seleccionados</string>
@@ -263,7 +264,7 @@
   <string name="caches_recaptcha_continue">Continuar</string>
   <string name="caches_filter">Filtrar</string>
   <string name="caches_filter_title">Filtrar por</string>
-  <string name="caches_filter_size">tamaó</string>
+  <string name="caches_filter_size">tamaño</string>
   <string name="caches_filter_type">tipo</string>
   <string name="caches_filter_track">con rastreables</string>
   <string name="caches_filter_clear">limpiar filtros</string>
