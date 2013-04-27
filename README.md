@@ -4,6 +4,8 @@ You want to contribute?
 -----------------------
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/c-geo-opensource/issues) before hacking** on your great new feature. It would be bad if you have implemented something great, but we can't include it because it doesn't fit the remaining architecture and code. You might also want to chat with the developers on channel #cgeo on the freenode IRC network.
 
+[![Build Status](https://buildhive.cloudbees.com/job/cgeo/job/c-geo-opensource/badge/icon)](https://buildhive.cloudbees.com/job/cgeo/job/c-geo-opensource/)
+
 Get the source
 --------------
 
