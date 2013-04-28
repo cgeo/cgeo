@@ -125,7 +125,15 @@
   <string name="log_image_camera">Neu</string>
   <string name="log_image_caption">Überschrift</string>
   <string name="log_image_description">Beschreibung</string>
-
+  <string name="log_image_scale">Skalierung</string>
+  <string-array name="log_image_scales">
+      <item>Keine Skalierung</item>
+      <item>512 px</item>
+      <item>640 px</item>
+      <item>800 px</item>
+      <item>1024 px</item>
+  </string-array>
+  
 <!-- translation -->
   <string name="translate_to_sys_lang">Übersetze in %s</string>
   <string name="translate_to_english">Übersetze in Englisch</string>

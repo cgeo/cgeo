@@ -28,6 +28,15 @@
   <string name="init_select_gpx_exportdir" translatable="false">…</string>
   <string name="init_select_gpx_importdir" translatable="false">…</string>
   
+  <!-- upload image scaling -->
+  <integer-array name="log_image_scale_values">
+      <item>-1</item>
+      <item>512</item>
+      <item>640</item>
+      <item>800</item>
+      <item>1024</item>
+  </integer-array>
+  
   <!-- contributors -->
   <string name="contributors" translatable="false">\n
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
@@ -89,7 +98,8 @@
   <string name="changelog" translatable="false">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · ...\n
+    · Log images can be scaled before upload to save traffic
+    · \n
     \n
     <b>Bugfixing:</b>\n
     · Do not apply encryption/decryption when clicking on a link in a log\n
