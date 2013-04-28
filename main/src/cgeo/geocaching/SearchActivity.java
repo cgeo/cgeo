@@ -64,7 +64,6 @@ public class SearchActivity extends AbstractActivity {
 
         setTheme();
         setContentView(R.layout.search);
-        setTitle(res.getString(R.string.search));
 
         init();
     }

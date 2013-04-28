@@ -55,11 +55,6 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     }
 
     @Override
-    protected void setTitle() {
-        setTitle(res.getString(R.string.map_file_select_title));
-    }
-
-    @Override
     public String getCurrentFile() {
         return mapFile;
     }

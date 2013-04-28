@@ -199,12 +199,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // initialize the main view and set a default title
-        setTheme();
-        setContentView(R.layout.cacheview);
-        setTitle(res.getString(R.string.cache));
+        super.onCreate(savedInstanceState, R.layout.cacheview);
 
         String geocode = null;
 

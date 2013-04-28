@@ -59,11 +59,7 @@ public class ImageSelectActivity extends AbstractActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.visit_image);
-        setTitle(res.getString(R.string.log_image));
+        super.onCreate(savedInstanceState, R.layout.visit_image);
 
         scaleChoiceIndex = Settings.getLogImageScale();
         imageCaption = "";

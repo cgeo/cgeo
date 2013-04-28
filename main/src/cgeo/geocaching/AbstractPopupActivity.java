@@ -144,7 +144,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         this.setTheme(ActivityMixin.getDialogTheme());
         // set layout
         setContentView(layout);
-        setTitle(res.getString(R.string.detail));
 
         // get parameters
         final Bundle extras = getIntent().getExtras();

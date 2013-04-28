@@ -52,11 +52,7 @@ public class cgeonavigate extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.navigate);
-        setTitle(res.getString(R.string.compass_title));
+        super.onCreate(savedInstanceState, R.layout.navigate);
 
         // get parameters
         Bundle extras = getIntent().getExtras();

@@ -114,11 +114,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.trackable_activity);
-        setTitle(res.getString(R.string.trackable));
+        super.onCreate(savedInstanceState, R.layout.trackable_activity);
 
         // get parameters
         Bundle extras = getIntent().getExtras();

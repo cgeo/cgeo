@@ -88,11 +88,7 @@ public class StaticMapsActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.map_static);
-        setTitle(res.getString(R.string.map_static_title));
+        super.onCreate(savedInstanceState, R.layout.map_static);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();

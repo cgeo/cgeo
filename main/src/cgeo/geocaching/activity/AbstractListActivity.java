@@ -71,7 +71,10 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeCommonFields();
+    }
 
+    private void initializeCommonFields() {
         // init
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
@@ -79,12 +82,28 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
         ActivityMixin.keepScreenOn(this, keepScreenOn);
     }
 
-    final public void setTitle(final String title) {
+    final protected void setTitle(final String title) {
         ActivityMixin.setTitle(this, title);
     }
 
     @Override
     public void invalidateOptionsMenuCompatible() {
         Compatibility.invalidateOptionsMenu(this);
+    }
+
+    public void onCreate(Bundle savedInstanceState, int resourceLayoutID) {
+        super.onCreate(savedInstanceState);
+        initializeCommonFields();
+
+        setTheme();
+        setContentView(resourceLayoutID);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        // initialize action bar title with activity title
+        ActivityMixin.setTitle(this, getTitle());
     }
 }
