@@ -432,6 +432,6 @@ public class SearchActivity extends AbstractActivity {
         searchIntent.setAction(Intent.ACTION_SEARCH).
                 putExtra(SearchManager.QUERY, scan).
                 putExtra(Intents.EXTRA_KEYWORD_SEARCH, false);
-        fromActivity.startActivityForResult(searchIntent, cgeo.SEARCH_REQUEST_CODE);
+        fromActivity.startActivityForResult(searchIntent, MainActivity.SEARCH_REQUEST_CODE);
     }
 }

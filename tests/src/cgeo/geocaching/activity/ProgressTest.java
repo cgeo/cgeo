@@ -1,14 +1,14 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.cgeo;
+import cgeo.geocaching.MainActivity;
 
 import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
 @TargetApi(8)
-public class ProgressTest extends ActivityInstrumentationTestCase2<cgeo> {
+public class ProgressTest extends ActivityInstrumentationTestCase2<MainActivity> {
     public ProgressTest() {
-        super(cgeo.class);
+        super(MainActivity.class);
     }
 
     public void testProgressWrapper() {

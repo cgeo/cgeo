@@ -7,10 +7,10 @@ import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
 @TargetApi(8)
-public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
+public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     public SettingsTest() {
-        super(cgeo.class);
+        super(MainActivity.class);
     }
 
     /**

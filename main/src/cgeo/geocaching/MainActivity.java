@@ -45,7 +45,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-public class cgeo extends AbstractActivity {
+public class MainActivity extends AbstractActivity {
 
     private static final String SCAN_INTENT = "com.google.zxing.client.android.SCAN";
     private static final int SCAN_REQUEST_CODE = 1;
@@ -169,7 +169,7 @@ public class cgeo extends AbstractActivity {
         }
     };
 
-    public cgeo() {
+    public MainActivity() {
         super("c:geo-main-screen");
     }
 
@@ -199,7 +199,7 @@ public class cgeo extends AbstractActivity {
 
                         @Override
                         public void onClick(View view) {
-                            ActivityMixin.goManual(cgeo.this, "c:geo-intro");
+                            ActivityMixin.goManual(MainActivity.this, "c:geo-intro");
                             view.setVisibility(View.GONE);
                         }
                     });
@@ -378,12 +378,12 @@ public class cgeo extends AbstractActivity {
 
             @Override
             public boolean onLongClick(View v) {
-                new StoredList.UserInterface(cgeo.this).promptForListSelection(R.string.list_title, new RunnableWithArgument<Integer>() {
+                new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, new RunnableWithArgument<Integer>() {
 
                     @Override
                     public void run(Integer selectedListId) {
                         Settings.saveLastList(selectedListId);
-                        cgeocaches.startActivityOffline(cgeo.this);
+                        cgeocaches.startActivityOffline(MainActivity.this);
                     }
                 });
                 return true;
@@ -500,7 +500,7 @@ public class cgeo extends AbstractActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                         cgData.resetNewlyCreatedDatabase();
-                        app.restoreDatabase(cgeo.this);
+                        app.restoreDatabase(MainActivity.this);
                     }
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
@@ -744,7 +744,7 @@ public class cgeo extends AbstractActivity {
 
                 // invoke settings activity to insert login details
                 if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                    SettingsActivity.startActivity(cgeo.this);
+                    SettingsActivity.startActivity(MainActivity.this);
                 }
             }
         }
@@ -764,7 +764,7 @@ public class cgeo extends AbstractActivity {
             addressObtaining = true;
 
             try {
-                final Geocoder geocoder = new Geocoder(cgeo.this, Locale.getDefault());
+                final Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                 final Geopoint coords = app.currentGeo().getCoords();
                 addresses = geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1);
             } catch (Exception e) {

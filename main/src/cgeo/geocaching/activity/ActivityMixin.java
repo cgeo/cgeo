@@ -2,7 +2,7 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgeo;
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +26,7 @@ import gnu.android.app.appmanualclient.AppManualReaderClient;
 public final class ActivityMixin {
 
     public final static void goHome(final Activity fromActivity) {
-        final Intent intent = new Intent(fromActivity, cgeo.class);
+        final Intent intent = new Intent(fromActivity, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         fromActivity.startActivity(intent);
