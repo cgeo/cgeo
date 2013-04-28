@@ -8,6 +8,9 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+
 public class ImageHelper {
 
     // Do not let this class be instantiated, this is a utility class.
@@ -22,11 +25,21 @@ public class ImageHelper {
      * @return BitmapDrawable The scaled image
      */
     public static BitmapDrawable scaleBitmapToFitDisplay(final Bitmap image) {
-        final cgeoapplication app = cgeoapplication.getInstance();
         Point displaySize = Compatibility.getDisplaySize();
         final int maxWidth = displaySize.x - 25;
         final int maxHeight = displaySize.y - 25;
+        return scaleBitmapTo(image, maxWidth, maxHeight);
+    }
 
+    /**
+     * Scales a bitmap to the given bounds if it is larger, otherwise returns the original bitmap.
+     *
+     * @param image
+     *            The bitmap to scale
+     * @return BitmapDrawable The scaled image
+     */
+    public static BitmapDrawable scaleBitmapTo(final Bitmap image, final int maxWidth, final int maxHeight) {
+        final cgeoapplication app = cgeoapplication.getInstance();
         Bitmap result = image;
         int width = image.getWidth();
         int height = image.getHeight();
@@ -43,4 +56,27 @@ public class ImageHelper {
         return resultDrawable;
     }
 
+    /**
+     * Store a bitmap to file.
+     *
+     * @param bitmap
+     *            The bitmap to store
+     * @param format
+     *            The image format
+     * @param quality
+     *            The image quality
+     * @param pathOfOutputImage
+     *            Path to store to
+     */
+    public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final String pathOfOutputImage) {
+        try {
+            FileOutputStream out = new FileOutputStream(pathOfOutputImage);
+            BufferedOutputStream bos = new BufferedOutputStream(out);
+            bitmap.compress(format, quality, bos);
+            bos.flush();
+            bos.close();
+        } catch (Exception e) {
+            Log.e("Image", e);
+        }
+    }
 }

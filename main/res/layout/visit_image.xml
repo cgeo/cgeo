@@ -98,6 +98,13 @@
                 android:minLines="5"
                 android:singleLine="false" />
 
+            <Spinner
+                android:id="@+id/logImageScale"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/log_image_scale"
+                android:entries="@array/log_image_scales"/>
+            
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
