@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -12,7 +13,9 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
@@ -29,8 +32,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 final public class OkapiClient {
     private static final String CACHE_SIZE = "size";
@@ -64,9 +70,15 @@ final public class OkapiClient {
     private static final String USER_USERNAME = "username";
 
     private static final String SERVICE_CACHE = "/okapi/services/caches/geocache";
-    private static final String SERVICE_CACHE_FIELDS = "code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden";
 
-    private static final String SERVICE_NEAREST = "/okapi/services/caches/search/nearest";
+    private static final String SERVICE_CACHE_FIELDS = "code|name|location|type|status|owner|founds|notfounds|is_found|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden";
+    private static final String SERVICE_CACHE_SMALL_FIELDS = "code|name|location|type|status|difficulty|terrain|size|is_found";
+
+    private static final String SERVICE_SEARCH_AND_RETRIEVE = "/okapi/services/caches/shortcuts/search_and_retrieve";
+
+    private static final String METHOD_SEARCH_NEAREST = "services/caches/search/nearest";
+    private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
+    private static final String METHOD_RETRIEVE_CACHES = "services/caches/geocaches";
 
     public static Geocache getCache(final String geoCode) {
         final Parameters params = new Parameters("cache_code", geoCode, "fields", SERVICE_CACHE_FIELDS);
@@ -81,11 +93,50 @@ final public class OkapiClient {
 
     public static List<Geocache> getCachesAround(final Geopoint center, IConnector connector) {
         String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
-        final Parameters params = new Parameters("center", centerString);
-        final JSONObject data = request(connector, SERVICE_NEAREST, params);
+        final Parameters params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
+        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        valueMap.put("center", centerString);
+        valueMap.put("limit", "20");
+
+        addFilterParams(valueMap);
+
+        params.add("search_params", new JSONObject(valueMap).toString());
+        params.add("retr_method", METHOD_RETRIEVE_CACHES);
+        params.add("retr_params", "{\"fields\": \"" + SERVICE_CACHE_SMALL_FIELDS + "\"}");
+        params.add("wrap", "true");
+        final JSONObject data = request(connector, SERVICE_SEARCH_AND_RETRIEVE, params);
 
         if (data == null) {
-            return null;
+            return new ArrayList<Geocache>();
+        }
+
+        return parseCaches(data);
+    }
+
+    public static List<Geocache> getCachesBBox(final Viewport viewport, IConnector connector) {
+
+        if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
+            return new ArrayList<Geocache>();
+        }
+
+        String bboxString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.bottomLeft)
+                + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.bottomLeft)
+                + "|" + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
+                + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight);
+        final Parameters params = new Parameters("search_method", METHOD_SEARCH_BBOX);
+        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        valueMap.put("bbox", bboxString);
+
+        addFilterParams(valueMap);
+
+        params.add("search_params", new JSONObject(valueMap).toString());
+        params.add("retr_method", "services/caches/geocaches");
+        params.add("retr_params", "{\"fields\": \"code|name|location|type|status|difficulty|terrain|size|is_found\"}");
+        params.add("wrap", "true");
+        final JSONObject data = request(connector, SERVICE_SEARCH_AND_RETRIEVE, params);
+
+        if (data == null) {
+            return new ArrayList<Geocache>();
         }
 
         return parseCaches(data);
@@ -93,18 +144,21 @@ final public class OkapiClient {
 
     private static List<Geocache> parseCaches(final JSONObject response) {
         try {
-            final JSONArray cachesResponse = response.getJSONArray("results");
+            // Check for empty result
+            final String result = response.getString("results");
+            if (result.equals("[]")) {
+                return new ArrayList<Geocache>();
+            }
+
+            // Get and iterate result list
+            final JSONObject cachesResponse = response.getJSONObject("results");
             if (cachesResponse != null) {
-                ArrayList<String> geocodes = new ArrayList<String>(cachesResponse.length());
-                for (int i = 0; i < cachesResponse.length(); i++) {
-                    String geocode = cachesResponse.getString(i);
-                    if (StringUtils.isNotBlank(geocode)) {
-                        geocodes.add(geocode);
-                    }
-                }
-                List<Geocache> caches = new ArrayList<Geocache>(geocodes.size());
-                for (String geocode : geocodes) {
-                    Geocache cache = getCache(geocode);
+                List<Geocache> caches = new ArrayList<Geocache>(cachesResponse.length());
+                @SuppressWarnings("unchecked")
+                Iterator<String> keys = cachesResponse.keys();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    Geocache cache = parseSmallCache(cachesResponse.getJSONObject(key));
                     if (cache != null) {
                         caches.add(cache);
                     }
@@ -112,9 +166,36 @@ final public class OkapiClient {
                 return caches;
             }
         } catch (JSONException e) {
-            Log.e("OkapiClient.parseCaches", e);
+            Log.e("OkapiClient.parseCachesResult", e);
         }
-        return null;
+        return new ArrayList<Geocache>();
+    }
+
+    private static Geocache parseSmallCache(final JSONObject response) {
+        final Geocache cache = new Geocache();
+        cache.setReliableLatLon(true);
+        try {
+            cache.setGeocode(response.getString(CACHE_CODE));
+            cache.setName(response.getString(CACHE_NAME));
+            // not used: names
+            setLocation(cache, response.getString(CACHE_LOCATION));
+            cache.setType(getCacheType(response.getString(CACHE_TYPE)));
+
+            final String status = response.getString(CACHE_STATUS);
+            cache.setDisabled(status.equalsIgnoreCase("Temporarily unavailable"));
+            cache.setArchived(status.equalsIgnoreCase("Archived"));
+
+            cache.setSize(getCacheSize(response));
+            cache.setDifficulty((float) response.getDouble(CACHE_DIFFICULTY));
+            cache.setTerrain((float) response.getDouble(CACHE_TERRAIN));
+
+            cache.setFound(response.getBoolean("is_found"));
+
+            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+        } catch (JSONException e) {
+            Log.e("OkapiClient.parseCache", e);
+        }
+        return cache;
     }
 
     private static Geocache parseCache(final JSONObject response) {
@@ -144,6 +225,8 @@ final public class OkapiClient {
                 cache.setRating((float) response.getDouble(CACHE_RATING));
             }
             cache.setVotes(response.getInt(CACHE_VOTES));
+
+            cache.setFound(response.getBoolean("is_found"));
 
             cache.setFavoritePoints(response.getInt(CACHE_RECOMMENDATIONS));
             // not used: req_password
@@ -297,8 +380,9 @@ final public class OkapiClient {
             return null;
         }
 
-        ((OCApiConnector) connector).addAuthentication(params);
         params.add("langpref", getPreferredLanguage());
+
+        OAuth.signOAuth(host, service, "GET", false, params, Settings.getOCDETokenPublic(), Settings.getOCDETokenSecret(), ((OCApiLiveConnector) connector).getCK(), ((OCApiLiveConnector) connector).getCS());
 
         final String uri = "http://" + host + service;
         return Network.requestJSON(uri, params);
@@ -311,4 +395,37 @@ final public class OkapiClient {
         }
         return "en";
     }
+
+    private static void addFilterParams(final Map<String, String> valueMap) {
+        if (!Settings.isExcludeDisabledCaches()) {
+            valueMap.put("status", "Available|Temporarily unavailable");
+        }
+        if (Settings.isExcludeMyCaches()) {
+            valueMap.put("exclude_my_own", "true");
+            valueMap.put("found_status", "notfound_only");
+        }
+        if (Settings.getCacheType() != CacheType.ALL) {
+            valueMap.put("type", getFilterFromType(Settings.getCacheType()));
+        }
+    }
+
+    private static String getFilterFromType(CacheType cacheType) {
+        switch (cacheType) {
+            case EVENT:
+                return "Event";
+            case MULTI:
+                return "Multi";
+            case MYSTERY:
+                return "Quiz";
+            case TRADITIONAL:
+                return "Traditional";
+            case VIRTUAL:
+                return "Virtual";
+            case WEBCAM:
+                return "Webcam";
+            default:
+                return "";
+        }
+    }
+
 }

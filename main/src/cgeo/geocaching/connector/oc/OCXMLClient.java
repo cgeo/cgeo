@@ -29,7 +29,7 @@ public class OCXMLClient {
     // Url for single cache requests
     // http://www.opencaching.de/xml/ocxml11.php?modifiedsince=20060320000000&user=0&cache=1&cachedesc=1&cachelog=1&picture=1&removedobject=0&session=0&doctype=0&charset=utf-8&wp=OCC9BE
 
-    public static Geocache getCache(final String geoCode) {
+    public static Geocache getCache(final String geoCode, String user) {
         try {
             final Parameters params = getOCXmlQueryParameters(true, true, true);
             params.put("wp", geoCode);
@@ -39,7 +39,7 @@ public class OCXMLClient {
                 return null;
             }
 
-            Collection<Geocache> caches = OC11XMLParser.parseCaches(new GZIPInputStream(data));
+            Collection<Geocache> caches = OC11XMLParser.parseCaches(new GZIPInputStream(data), user);
             if (caches.iterator().hasNext()) {
                 Geocache cache = caches.iterator().next();
                 cgData.saveCache(cache, LoadFlags.SAVE_ALL);
@@ -52,7 +52,7 @@ public class OCXMLClient {
         }
     }
 
-    public static Collection<Geocache> getCachesAround(final Geopoint center, final double distance) {
+    public static Collection<Geocache> getCachesAround(final Geopoint center, final double distance, final String user) {
         try {
             final Parameters params = getOCXmlQueryParameters(false, false, false);
             params.put("lat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center));
@@ -64,7 +64,7 @@ public class OCXMLClient {
                 return Collections.emptyList();
             }
 
-            return OC11XMLParser.parseCachesFiltered(new GZIPInputStream(data));
+            return OC11XMLParser.parseCachesFiltered(new GZIPInputStream(data), user);
         } catch (IOException e) {
             Log.e("Error parsing nearby search result", e);
             return Collections.emptyList();

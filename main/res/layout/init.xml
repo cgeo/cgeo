@@ -44,7 +44,32 @@
                     style="@style/separator_horizontal_headline"
                     android:text="@string/init_geocaching" />
             </RelativeLayout>
-
+			
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dip"
+                android:orientation="horizontal"
+                android:padding="3dip" >
+                
+                <CheckBox android:id="@+id/gc_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:padding="1dip"
+                    android:gravity="center" />
+                
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="left"
+                    android:paddingRight="3dip"
+                    android:textSize="14sp"
+                    android:textColor="?text_color"
+                    android:text="@string/init_gc_activate" />
+            </LinearLayout>
+			
             <TextView
                 android:id="@+id/legal_note"
                 android:layout_width="wrap_content"
@@ -101,14 +126,17 @@
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
                 android:padding="3dip"
-                android:text="@string/init_oc_username_description"
+                android:text="@string/init_oc_de_description"
                 android:textColor="?text_color"
                 android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/oc_username"
-                style="@style/edittext_full"
-                android:hint="@string/init_oc_username" />
+            <Button
+                android:id="@+id/register_oc_de"
+                style="@style/button_full"
+                android:lines="2"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
+                android:text="@string/init_register_oc_de" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >

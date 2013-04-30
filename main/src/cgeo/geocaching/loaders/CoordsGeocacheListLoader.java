@@ -19,7 +19,11 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        SearchResult search = GCParser.searchByCoords(coords, Settings.getCacheType(), Settings.isShowCaptcha(), this);
+
+        SearchResult search = new SearchResult();
+        if (Settings.isGCConnectorActive()) {
+            search = GCParser.searchByCoords(coords, Settings.getCacheType(), Settings.isShowCaptcha(), this);
+        }
 
         for (ISearchByCenter centerConn : ConnectorFactory.getSearchByCenterConnectors()) {
             if (centerConn.isActivated()) {

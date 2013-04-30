@@ -19,13 +19,16 @@ public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, 
     private final static double SEARCH_DISTANCE_LIMIT = 15.0;
     private final static double NEARBY_SEARCH_DISTANCE = 5.0;
 
-    public OCXMLApiConnector(String name, String host, String prefix) {
+    private String user;
+
+    public OCXMLApiConnector(String name, String host, String prefix, String user) {
         super(name, host, prefix);
+        this.user = user;
     }
 
     @Override
     public SearchResult searchByGeocode(final String geocode, final String guid, CancellableHandler handler) {
-        final Geocache cache = OCXMLClient.getCache(geocode);
+        final Geocache cache = OCXMLClient.getCache(geocode, user);
         if (cache == null) {
             return null;
         }
@@ -34,7 +37,7 @@ public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByCenter(final Geopoint center) {
-        return new SearchResult(OCXMLClient.getCachesAround(center, NEARBY_SEARCH_DISTANCE));
+        return new SearchResult(OCXMLClient.getCachesAround(center, NEARBY_SEARCH_DISTANCE, user));
     }
 
     @Override
@@ -44,7 +47,7 @@ public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, 
         if (distance > SEARCH_DISTANCE_LIMIT) {
             distance = SEARCH_DISTANCE_LIMIT;
         }
-        return new SearchResult(OCXMLClient.getCachesAround(center, distance));
+        return new SearchResult(OCXMLClient.getCachesAround(center, distance, user));
     }
 
     @Override
@@ -55,13 +58,21 @@ public class OCXMLApiConnector extends OCConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isOwner(ICache cache) {
-        return StringUtils.equalsIgnoreCase(cache.getOwnerDisplayName(), Settings.getOCConnectorUserName());
+        return StringUtils.equalsIgnoreCase(cache.getOwnerDisplayName(), user);
     }
 
     @Override
     public String getLicenseText(Geocache cache) {
         // not to be translated
         return "© " + cache.getOwnerDisplayName() + ", " + "<a href=\"" + getCacheUrl(cache) + "\">www.opencaching.de</a>, CC-BY-NC-ND, Stand: " + Formatter.formatFullDate(cache.getUpdated());
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String newUser) {
+        user = newUser;
     }
 
 }

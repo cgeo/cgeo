@@ -370,8 +370,8 @@
   <string name="init_gc_activate">Activate Geocaching.com on live-map and in searches</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Activate opencaching.de on live-map and in searches</string>
-  <string name="init_oc_username_description">Enter your opencaching.de user name in order to allow marking your finds.</string>
-  <string name="init_oc_username">Enter your user name</string>
+  <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
+  <string name="init_register_oc_de">Authorize c:geo</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Username</string>
@@ -488,6 +488,7 @@
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
+  <string name="auth_ocde">opencaching.de</string>
   <string name="auth_authorize">Authorize c:geo</string>
   <string name="auth_start">Start authorization</string>
   <string name="auth_again">Start again</string>

@@ -219,17 +219,17 @@ public class OC11XMLParser {
 
     private static int attributeId;
 
-    public static Collection<Geocache> parseCaches(final InputStream stream) throws IOException {
+    public static Collection<Geocache> parseCaches(final InputStream stream, final String userIn) throws IOException {
         // parse and return caches without filtering
-        return parseCaches(stream, true);
+        return parseCaches(stream, true, userIn);
     }
 
-    public static Collection<Geocache> parseCachesFiltered(final InputStream stream) throws IOException {
+    public static Collection<Geocache> parseCachesFiltered(final InputStream stream, final String userIn) throws IOException {
         // parse caches and filter result
-        return parseCaches(stream, false);
+        return parseCaches(stream, false, userIn);
     }
 
-    private static Collection<Geocache> parseCaches(final InputStream stream, boolean ignoreFiltersIn) throws IOException {
+    private static Collection<Geocache> parseCaches(final InputStream stream, boolean ignoreFiltersIn, final String userIn) throws IOException {
 
         final Map<String, Geocache> caches = new HashMap<String, Geocache>();
         final Map<String, LogEntry> logs = new HashMap<String, LogEntry>();
@@ -242,6 +242,8 @@ public class OC11XMLParser {
         final Element cacheNode = root.getChild("cache");
 
         final boolean ignoreFilters = ignoreFiltersIn;
+
+        final String user = userIn;
 
         // cache
         cacheNode.setStartElementListener(new StartElementListener() {
@@ -558,7 +560,7 @@ public class OC11XMLParser {
                     logs.put(logHolder.id, logHolder.logEntry);
                     cache.getLogs().add(0, logHolder.logEntry);
                     if ((logHolder.logEntry.type == LogType.FOUND_IT || logHolder.logEntry.type == LogType.ATTENDED)
-                            && StringUtils.equalsIgnoreCase(logHolder.logEntry.author, Settings.getOCConnectorUserName())) {
+                            && StringUtils.equalsIgnoreCase(logHolder.logEntry.author, user)) {
                         cache.setFound(true);
                         cache.setVisitedDate(logHolder.logEntry.date);
                     }

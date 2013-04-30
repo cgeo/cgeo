@@ -296,6 +296,8 @@ public abstract class Network {
                     Log.d(status + Network.formatTimeSpan(before) + reqLogStr);
                 } else {
                     Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + Network.formatTimeSpan(before) + reqLogStr);
+                    String data = EntityUtils.toString(response.getEntity(), CharEncoding.UTF_8);
+                    Log.w(data);
                 }
                 return response;
             } catch (IOException e) {
