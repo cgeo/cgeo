@@ -11,6 +11,8 @@
   <string name="helpers">¿Qué instalar?</string>
   <string name="about">Sobre c:geo</string>
   <string name="helper">Si quieres aprender cosas sobre <b>c:geo</b>?\nEcha un ojo a nuestro manual.</string>
+  <string name="latitude">Latitud</string>
+  <string name="longitude">Longitud</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Compartir enlace a escondite</string>
@@ -19,19 +21,20 @@
   <string name="all_types">Todos los escondites</string>
   <string name="traditional">Tradicionales</string>
   <string name="multi">Multis</string>
-  <string name="mystery">Desconocidos</string>
+  <string name="mystery">Desconocidos/Mistery</string>
   <string name="letterbox">Buzón híbrido</string>
-  <string name="event">Por pistas</string>
-  <string name="mega">Mega-eventos</string>
+  <string name="event">Eventos</string>
+  <string name="mega">Mega-Eventos</string>
   <string name="earth">Educativos (Earth)</string>
-  <string name="cito">Limpieza de escondites</string>
+  <string name="cito">Eventos Limpieza(CITO)</string>
   <string name="webcam">Webcams</string>
   <string name="virtual">Virtuales</string>
   <string name="wherigo">Wherigo</string>
-  <string name="lostfound">Perdidos y encontrados</string>
+  <string name="lostfound">Eventos Perdidos y Encontrados</string>
   <string name="ape">Proyecto APE</string>
   <string name="gchq">Groundspeak HQ</string>
-  <string name="gps">Exhibición de escondites GPS </string>
+  <string name="gps">Exhibición de escondites GPS</string>
+  <string name="unknown">De tipo desconocido</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
@@ -46,36 +49,43 @@
   <!-- waypoints -->
   <string name="wp_final">Ubicación final</string>
   <string name="wp_stage">Etapa de multi escondite</string>
-  <string name="wp_puzzle">Preguntar sin contestar</string>
+  <string name="wp_puzzle">Preguntar a contestar</string>
   <string name="wp_pkg">Zona de aparcamiento</string>
   <string name="wp_trailhead">Sendero</string>
   <string name="wp_waypoint">Punto de referencia</string>
+  <string name="wp_original">Coordenadas originales</string>
 
   <!-- logs -->
   <string name="log_found">Encontrado</string>
   <string name="log_dnf">No encontrado</string>
   <string name="log_note">Nota</string>
   <string name="log_published">Publicado</string>
-  <string name="log_enabled">Activo</string>
-  <string name="log_disabled">Inactivo</string>
-  <string name="log_attend">Iré</string>
+  <string name="log_enabled">Activado</string>
+  <string name="log_disabled">Desactivado</string>
+  <string name="log_attend">Asistiré</string>
   <string name="log_attended">Asistí</string>
-  <string name="log_retrieved">Obtenido</string>
-  <string name="log_placed">Colocado</string>
-  <string name="log_grabbed">Guardado en alguna parte</string>
+  <string name="log_retrieved">Recogido</string>
+  <string name="log_placed">Depositado</string>
+  <string name="log_grabbed">Recogido de alguna parte</string>
+  <string name="log_movecollection">Mover a la colección</string>
+	<string name="log_moveinventory">Mover al inventario</string>
   <string name="log_maintained">Mantenimiento efectuado</string>
   <string name="log_maintenance_needed">Necesita mantenimiento</string>
   <string name="log_update">Coordenadas actualizadas</string>
   <string name="log_archived">Archivado</string>
+  <string name="log_unarchived">Desarchivado</string>
   <string name="log_needs_archived">Necesita ser archivado</string>
   <string name="log_discovered">Descubierto</string>
   <string name="log_reviewer">Nota del revisor</string>
+  <string name="log_retractlisting">Retirar ficha del escondite</string>
+	<string name="log_marked_missing">Marcado como perdido</string>
   <string name="log_tb_nothing">No hacer nada</string>
-  <string name="log_tb_visit">Visita</string>
-  <string name="log_tb_drop">Colocar aquí</string>
+  <string name="log_tb_visit">Visitado</string>
+  <string name="log_tb_drop">Dejar aquí</string>
   <string name="log_tb_changeall">Cambiar todo</string>
   <string name="log_save">Guardar</string>
-  <string name="log_saving">Guardando registo…</string>
+  <string name="log_saving">Enviando registo…</string>
+  <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
   <string name="log_clear">Limpiar</string>
   <string name="log_post">Enviar registro</string>
   <string name="log_post_rate">Enviar registro y puntuación</string>
@@ -84,27 +94,45 @@
   <string name="log_rating">Puntuación</string>
   <string name="log_no_rating">Sin puntuación</string>
   <string name="log_stars_1">1 estrella</string>
-<string name="log_stars_15">1,5  estrellas</string>
+  <string name="log_stars_15">1,5 estrellas</string>
   <string name="log_stars_2">2 estrellas</string>
-  <string name="log_stars_25">2,5  estrellas</string>
+  <string name="log_stars_25">2,5 estrellas</string>
   <string name="log_stars_3">3 estrellas</string>
-  <string name="log_stars_35">3,5  estrellas</string>
+  <string name="log_stars_35">3,5 estrellas</string>
   <string name="log_stars_4">4 estrellas</string>
-  <string name="log_stars_45">4,5  estrellas</string>
+  <string name="log_stars_45">4,5 estrellas</string>
   <string name="log_stars_5">5 estrellas</string>
-<string name="log_stars_1_description">poor</string>
-  <string name="log_stars_15_description">fairly poor</string>
-  <string name="log_stars_2_description">below average</string>
-  <string name="log_stars_25_description">not so bad</string>
-  <string name="log_stars_3_description">average </string>
-  <string name="log_stars_35_description">not bad at all</string>
-  <string name="log_stars_4_description">better than average</string>
-  <string name="log_stars_45_description">very good</string>
-  <string name="log_stars_5_description">awesome</string>
+  <string name="log_stars_1_description">malísimo</string>
+  <string name="log_stars_15_description">muy malo</string>
+  <string name="log_stars_2_description">malo</string>
+  <string name="log_stars_25_description">un poco malo</string>
+  <string name="log_stars_3_description">aceptable</string>
+  <string name="log_stars_35_description">algo bueno</string>
+  <string name="log_stars_4_description">bueno</string>
+  <string name="log_stars_45_description">muy bueno</string>
+  <string name="log_stars_5_description">buenísimo</string>
   <string name="log_webcam">Foto de webcam tomada</string>
   <string name="log_new_log">Registro</string>
   <string name="log_new_log_text">Texto del registro</string>
   <string name="log_announcement">Aviso</string>
+  <string name="log_today">Hoy</string>
+  <string name="log_yesterday">Ayer</string>
+  <string name="log_smilies">Emoticonos</string>
+  <string name="log_image">Imagen</string>
+  <string name="log_image_attach">Adjuntar imagen</string>
+  <string name="log_image_edit">Editar imagen</string>
+  <string name="log_image_stored">Galería</string>
+  <string name="log_image_camera">Tomar foto</string>
+  <string name="log_image_caption">Título</string>
+  <string name="log_image_description">Descripción</string>
+  <string name="log_image_scale">Redimensionamiento</string>
+  <string-array name="log_image_scales">
+      <item>Sin redimensionar</item>
+      <item>512 px</item>
+      <item>640 px</item>
+      <item>800 px</item>
+      <item>1024 px</item>
+  </string-array>
 
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Aceptar</string>
@@ -402,7 +430,7 @@
   <string name="cache_attributes">Atributos</string>
   <string name="cache_inventory">Inventario</string>
   <string name="cache_log_offline">Registro desconectado</string>
-  <string name="cache_log_images_title">Imagen de resgistro</string>
+  <string name="cache_log_images_title">Imagen de registro</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota personal</string>
   <string name="cache_description">Descripción</string>
