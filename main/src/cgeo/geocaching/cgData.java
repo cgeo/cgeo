@@ -86,7 +86,7 @@ public class cgData {
     private static int[] cacheColumnIndex;
     private static CacheCache cacheCache = new CacheCache();
     private static SQLiteDatabase database = null;
-    private static final int dbVersion = 66;
+    private static final int dbVersion = 67;
     public static final int customListIdOffset = 10;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
@@ -672,6 +672,16 @@ public class cgData {
                             db.execSQL("alter table " + dbTableWaypoints + " add column visited integer default 0");
                         } catch (Exception e) {
                             Log.e("Failed to upgrade to ver. 66", e);
+
+                        }
+                    }
+                    // issue2662 OC: Leichtes Klettern / Easy climbing
+                    if (oldVersion < 67) {
+                        try {
+                            db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_yes' where geocode like 'O%' and attribute = 'climbing_yes'");
+                            db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_no' where geocode like 'O%' and attribute = 'climbing_no'");
+                        } catch (Exception e) {
+                            Log.e("Failed to upgrade to ver. 67", e);
 
                         }
                     }

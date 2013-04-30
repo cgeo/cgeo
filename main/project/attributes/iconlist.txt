@@ -27,7 +27,7 @@ kids              |   6  |  59  |  x  | PD      |                           | ht
 onehour           |   7  |      |  x  | CC0     | The Noun Project          | http://thenounproject.com/noun/clock/#icon-No2306
 scenic            |   8  |      |     | PD      | USA National Park Service | http://thenounproject.com/noun/binoculars/#icon-No112
 hiking            |   9  |  25  |     | PD      | USA National Park Service | http://thenounproject.com/noun/hiker/#icon-No562
-climbing          |  10  |  28  |     | PD      | USA National Park Service | http://thenounproject.com/noun/climbing/#icon-No526
+climbing          |  10  |      |     | PD      | USA National Park Service | http://thenounproject.com/noun/climbing/#icon-No526
 wading            |  11  |      |  x  | PD      | USA National Park Service | http://thenounproject.com/noun/wading/#icon-No581
 swimming          |  12  |  29  |     | PD      | USA National Park Service | http://thenounproject.com/noun/swimming/#icon-No226
 available         |  13  |  38  |  x  | PD      | koem                      | selfmade
@@ -86,6 +86,7 @@ railway           |      |  10  |     | CC0     |                           | ht
 syringe           |      |  23  |     | CC0     | Betovarg Jabib            | http://thenounproject.com/noun/syringe/#icon-No1508
 swamp             |      |  26  |  x  | CC0     | Megan Strickland          | http://thenounproject.com/noun/hand/#icon-No1477
 hills             |      |  27  |  x  | PD      | koem                      | selfmade
+easy_climbing     |      |  28  |  x  | PD      | USA National Park Service | http://thenounproject.com/noun/climbing/#icon-No526
 poi               |      |  30  |     | PD      |                           | http://thenounproject.com/noun/point-of-interest/#icon-No522
 moving_target     |      |  31  |  x  | PD      |                           | http://thenounproject.com/noun/running/#icon-No246
 webcam            |      |  32  |     | PD      |                           | http://thenounproject.com/noun/video-camera/#icon-No637

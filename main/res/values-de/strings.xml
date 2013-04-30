@@ -991,6 +991,8 @@
   <string name="attribute_swamp_no">Nicht sumpfig / kein matschiges Gelände</string>
   <string name="attribute_hills_yes">Hügeliges Gelände</string>
   <string name="attribute_hills_no">Kein hügeliges Gelände</string>
+  <string name="attribute_easy_climbing_yes">Einfaches Klettern</string>
+  <string name="attribute_easy_climbing_no">Kein einfaches Klettern</string>
   <string name="attribute_poi_yes">Interessanter Ort</string>
   <string name="attribute_poi_no">Uninteressanter Ort</string>
   <string name="attribute_moving_target_yes">Bewegliches Ziel</string>
