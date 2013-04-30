@@ -1,14 +1,15 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.ICache;
+import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
+import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
-import cgeo.geocaching.connector.oc.OCXMLApiConnector;
 import cgeo.geocaching.connector.ox.OXConnector;
 import cgeo.geocaching.geopoint.Viewport;
 
@@ -21,7 +22,8 @@ public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final IConnector[] connectors = new IConnector[] {
             GCConnector.getInstance(),
-            new OCXMLApiConnector("OpenCaching.DE", "www.opencaching.de", "OC"),
+            //            new OCXMLApiConnector("OpenCaching.DE", "www.opencaching.de", "OC"),
+            new OCApiLiveConnector("Opencaching.de", "www.opencaching.de", "OC", R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret),
             new OCConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
             new OCApiConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq"),
             new OCConnector("OpenCaching.ES", "www.opencachingspain.es", "OC"),

@@ -126,14 +126,17 @@
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
                 android:padding="3dip"
-                android:text="@string/init_oc_username_description"
+                android:text="@string/init_oc_de_description"
                 android:textColor="?text_color"
                 android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/oc_username"
-                style="@style/edittext_full"
-                android:hint="@string/init_oc_username" />
+            <Button
+                android:id="@+id/register_oc_de"
+                style="@style/button_full"
+                android:lines="2"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
+                android:text="@string/init_register_oc_de" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >

@@ -40,4 +40,8 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         // currently always active, but only for details download
         return true;
     }
+
+    public String getCK() {
+        return CryptUtils.rot13(cK);
+    }
 }
