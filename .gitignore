@@ -13,3 +13,4 @@ gen/
 /cgeo-calendar/private.properties
 .directory
 org.moreunit.prefs
+annotation_gen/

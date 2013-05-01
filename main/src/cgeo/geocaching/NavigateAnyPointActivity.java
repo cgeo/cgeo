@@ -108,11 +108,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.point);
-        setTitle(res.getString(R.string.search_destination));
+        super.onCreate(savedInstanceState, R.layout.point);
 
         createHistoryView();
 

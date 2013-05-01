@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.Login;
@@ -46,13 +49,26 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AbstractActivity {
+    @InjectView(R.id.user_info) protected TextView userInfoView;
+    @InjectView(R.id.nav_satellites) protected TextView navSatellites;
+    @InjectView(R.id.helper) protected RelativeLayout helper;
+    @InjectView(R.id.filter_button_title)protected TextView filterTitle;
+    @InjectView(R.id.map) protected View findOnMap;
+    @InjectView(R.id.search_offline) protected View findByOffline;
+    @InjectView(R.id.advanced_button) protected View advanced;
+    @InjectView(R.id.any_button) protected View any;
+    @InjectView(R.id.filter_button) protected View filter;
+    @InjectView(R.id.nearest) protected View nearestView ;
+    @InjectView(R.id.nav_type) protected TextView navType ;
+    @InjectView(R.id.nav_accuracy) protected TextView navAccuracy ;
+    @InjectView(R.id.nav_location) protected TextView navLocation ;
+    @InjectView(R.id.offline_count) protected TextView countBubble ;
 
     private static final String SCAN_INTENT = "com.google.zxing.client.android.SCAN";
     private static final int SCAN_REQUEST_CODE = 1;
     public static final int SEARCH_REQUEST_CODE = 2;
 
     private int version = 0;
-    private TextView filterTitle = null;
     private boolean cleanupRunning = false;
     private int countBubbleCnt = 0;
     private Geopoint addCoords = null;
@@ -66,8 +82,6 @@ public class MainActivity extends AbstractActivity {
 
         @Override
         public void handleMessage(Message msg) {
-
-            TextView userInfoView = (TextView) findViewById(R.id.user_info);
 
             StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
             if (Login.isActualLoginStatus()) {
@@ -109,7 +123,6 @@ public class MainActivity extends AbstractActivity {
 
                     addCoords = app.currentGeo().getCoords();
 
-                    TextView navLocation = (TextView) findViewById(R.id.nav_location);
                     navLocation.setText(addText.toString());
                 }
             } catch (Exception e) {
@@ -137,7 +150,6 @@ public class MainActivity extends AbstractActivity {
             satellitesFixed = data.getSatellitesFixed();
             satellitesVisible = data.getSatellitesVisible();
 
-            final TextView navSatellites = (TextView) findViewById(R.id.nav_satellites);
             if (gpsEnabled) {
                 if (satellitesFixed > 0) {
                     navSatellites.setText(res.getString(R.string.loc_sat) + ": " + satellitesFixed + '/' + satellitesVisible);
@@ -175,7 +187,10 @@ public class MainActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        Views.inject(this);
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             // If we had been open already, start from the last used activity.
@@ -183,7 +198,6 @@ public class MainActivity extends AbstractActivity {
             return;
         }
 
-        setContentView(R.layout.main);
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 
         version = Version.getVersionCode(this);
@@ -191,7 +205,6 @@ public class MainActivity extends AbstractActivity {
 
         try {
             if (!Settings.isHelpShown()) {
-                final RelativeLayout helper = (RelativeLayout) findViewById(R.id.helper);
                 if (helper != null) {
                     helper.setVisibility(View.VISIBLE);
                     helper.setClickable(true);
@@ -337,9 +350,6 @@ public class MainActivity extends AbstractActivity {
     }
 
     private void setFilterTitle() {
-        if (filterTitle == null) {
-            filterTitle = (TextView) findViewById(R.id.filter_button_title);
-        }
         filterTitle.setText(Settings.getCacheType().getL10n());
     }
 
@@ -357,7 +367,6 @@ public class MainActivity extends AbstractActivity {
             (new FirstLoginThread()).start();
         }
 
-        final View findOnMap = findViewById(R.id.map);
         findOnMap.setClickable(true);
         findOnMap.setOnClickListener(new OnClickListener() {
             @Override
@@ -366,7 +375,6 @@ public class MainActivity extends AbstractActivity {
             }
         });
 
-        final View findByOffline = findViewById(R.id.search_offline);
         findByOffline.setClickable(true);
         findByOffline.setOnClickListener(new OnClickListener() {
             @Override
@@ -391,7 +399,6 @@ public class MainActivity extends AbstractActivity {
         });
         findByOffline.setLongClickable(true);
 
-        final View advanced = findViewById(R.id.advanced_button);
         advanced.setClickable(true);
         advanced.setOnClickListener(new OnClickListener() {
             @Override
@@ -400,7 +407,6 @@ public class MainActivity extends AbstractActivity {
             }
         });
 
-        final View any = findViewById(R.id.any_button);
         any.setClickable(true);
         any.setOnClickListener(new OnClickListener() {
             @Override
@@ -409,7 +415,6 @@ public class MainActivity extends AbstractActivity {
             }
         });
 
-        final View filter = findViewById(R.id.filter_button);
         filter.setClickable(true);
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -518,10 +523,6 @@ public class MainActivity extends AbstractActivity {
 
         @Override
         public void updateGeoData(final IGeoData geo) {
-            final View nearestView = findViewById(R.id.nearest);
-            final TextView navType = (TextView) findViewById(R.id.nav_type);
-            final TextView navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
-            final TextView navLocation = (TextView) findViewById(R.id.nav_location);
             try {
                 if (geo.getCoords() != null) {
                     if (!nearestView.isClickable()) {
@@ -582,7 +583,7 @@ public class MainActivity extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindOnMap(View v) {
-        findViewById(R.id.map).setPressed(true);
+        findOnMap.setPressed(true);
         CGeoMap.startActivityLiveMap(this);
     }
 
@@ -595,7 +596,7 @@ public class MainActivity extends AbstractActivity {
             return;
         }
 
-        findViewById(R.id.nearest).setPressed(true);
+        nearestView.setPressed(true);
         cgeocaches.startActivityNearest(this, app.currentGeo().getCoords());
     }
 
@@ -604,7 +605,7 @@ public class MainActivity extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindByOffline(View v) {
-        findViewById(R.id.search_offline).setPressed(true);
+        findByOffline.setPressed(true);
         cgeocaches.startActivityOffline(this);
     }
 
@@ -613,7 +614,7 @@ public class MainActivity extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoSearch(View v) {
-        findViewById(R.id.advanced_button).setPressed(true);
+        advanced.setPressed(true);
         startActivity(new Intent(this, SearchActivity.class));
     }
 
@@ -622,7 +623,7 @@ public class MainActivity extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoPoint(View v) {
-        findViewById(R.id.any_button).setPressed(true);
+        any.setPressed(true);
         startActivity(new Intent(this, NavigateAnyPointActivity.class));
     }
 
@@ -631,8 +632,8 @@ public class MainActivity extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFilter(View v) {
-        findViewById(R.id.filter_button).setPressed(true);
-        findViewById(R.id.filter_button).performClick();
+        filter.setPressed(true);
+        filter.performClick();
     }
 
     /**
@@ -645,15 +646,10 @@ public class MainActivity extends AbstractActivity {
 
     private class CountBubbleUpdateThread extends Thread {
         private Handler countBubbleHandler = new Handler() {
-            private TextView countBubble = null;
 
             @Override
             public void handleMessage(Message msg) {
                 try {
-                    if (countBubble == null) {
-                        countBubble = (TextView) findViewById(R.id.offline_count);
-                    }
-
                     if (countBubbleCnt == 0) {
                         countBubble.setVisibility(View.GONE);
                     } else {

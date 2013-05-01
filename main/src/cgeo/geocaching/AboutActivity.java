@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Version;
 
@@ -11,18 +13,17 @@ import android.view.View;
 import android.widget.TextView;
 
 public class AboutActivity extends AbstractActivity {
+    @InjectView(R.id.about_version_string) protected TextView version;
+    @InjectView(R.id.contributors) protected TextView contributors;
+    @InjectView(R.id.changelog) protected TextView changeLog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState, R.layout.about_activity);
 
-        setTheme();
-        setContentView(R.layout.about_activity);
-        setTitle(res.getString(R.string.about));
-
-        ((TextView) findViewById(R.id.about_version_string)).setText(Version.getVersionName(this));
-        ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
-        ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
+        version.setText(Version.getVersionName(this));
+        contributors.setMovementMethod(LinkMovementMethod.getInstance());
+        changeLog.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /**

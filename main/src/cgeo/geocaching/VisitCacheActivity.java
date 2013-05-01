@@ -244,11 +244,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.visit);
-        setTitle(res.getString(R.string.log_new_log));
+        super.onCreate(savedInstanceState, R.layout.visit);
 
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();

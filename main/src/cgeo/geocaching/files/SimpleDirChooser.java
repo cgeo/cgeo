@@ -2,11 +2,11 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Dialog for choosing a file or directory.
  */
-public class SimpleDirChooser extends ListActivity {
+public class SimpleDirChooser extends AbstractListActivity {
     private static final String PARENT_DIR = "..        ";
     private File currentDir;
     private FileArrayAdapter adapter;
@@ -46,7 +46,6 @@ public class SimpleDirChooser extends ListActivity {
 
         ActivityMixin.setTheme(this);
         setContentView(R.layout.simple_dir_chooser);
-        setTitle(this.getResources().getString(R.string.simple_dir_chooser_title));
 
         fill(currentDir);
 
@@ -106,13 +105,13 @@ public class SimpleDirChooser extends ListActivity {
 
     public class FileArrayAdapter extends ArrayAdapter<Option> {
 
-        private Context content;
+        private Context context;
         private int id;
         private List<Option> items;
 
         public FileArrayAdapter(Context context, int simpleDirItemResId, List<Option> objects) {
             super(context, simpleDirItemResId, objects);
-            this.content = context;
+            this.context = context;
             this.id = simpleDirItemResId;
             this.items = objects;
         }
@@ -126,7 +125,7 @@ public class SimpleDirChooser extends ListActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             View v = convertView;
             if (v == null) {
-                LayoutInflater vi = (LayoutInflater) content.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(id, null);
             }
 
