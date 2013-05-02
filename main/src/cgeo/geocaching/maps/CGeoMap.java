@@ -116,21 +116,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final String EXTRAS_MAP_MODE = "mapMode";
     private static final String EXTRAS_LIVE_ENABLED = "liveEnabled";
 
-    private static final int MENU_SELECT_MAPVIEW = 1;
-    private static final int MENU_MAP_LIVE = 2;
-    private static final int MENU_STORE_CACHES = 3;
-    private static final int SUBMENU_MODES = 4;
-    private static final int MENU_TRAIL_MODE = 81;
-    private static final int MENU_THEME_MODE = 82;
-    private static final int MENU_CIRCLE_MODE = 83;
-    private static final int SUBMENU_STRATEGY = 5;
-    private static final int MENU_STRATEGY_FASTEST = 51;
-    private static final int MENU_STRATEGY_FAST = 52;
-    private static final int MENU_STRATEGY_AUTO = 53;
-    private static final int MENU_STRATEGY_DETAILED = 74;
-
-    private static final int MENU_AS_LIST = 7;
-
     private static final String BUNDLE_MAP_SOURCE = "mapSource";
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
@@ -173,8 +158,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final int[][] INSET_FOUND = { { 0, 0, 21, 28 }, { 0, 0, 25, 35 } }; // top left, 12x12 / 16x16
     private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 } }; // bottom right, 12x12 / 26x26
     private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 } }; // bottom left, 12x12 / 26x26
-    private static final int MENU_GROUP_MAP_SOURCES = 1;
-    private static final int MENU_GROUP_MAP_STRATEGY = 2;
 
     private SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
     /** Count of caches currently visible */
@@ -541,34 +524,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // menu inflation happens in Google/Mapsforge specific classes
 
-        SubMenu submenu = menu.addSubMenu(0, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(R.drawable.ic_menu_mapmode);
-        addMapViewMenuItems(submenu);
+        MapProviderFactory.addMapviewMenuItems(menu);
 
-        menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
-        menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as).setEnabled(false);
-        SubMenu subMenuModes = menu.addSubMenu(0, SUBMENU_MODES, 0, res.getString(R.string.map_modes)).setIcon(R.drawable.ic_menu_mark);
-        subMenuModes.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
-        subMenuModes.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
-        subMenuModes.add(0, MENU_THEME_MODE, 0, res.getString(R.string.map_theme_select)).setIcon(R.drawable.ic_menu_preferences);
-
-        Strategy strategy = Settings.getLiveMapStrategy();
-        SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy)).setIcon(R.drawable.ic_menu_preferences);
+        final SubMenu subMenuStrategy = menu.findItem(R.id.submenu_strategy).getSubMenu();
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
-        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_FASTEST, 0, Strategy.FASTEST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FASTEST);
-        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_FAST, 0, Strategy.FAST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FAST);
-        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_AUTO, 0, Strategy.AUTO.getL10n()).setCheckable(true).setChecked(strategy == Strategy.AUTO);
-        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_DETAILED, 0, Strategy.DETAILED.getL10n()).setCheckable(true).setChecked(strategy == Strategy.DETAILED);
-        subMenuStrategy.setGroupCheckable(MENU_GROUP_MAP_STRATEGY, true, true);
-
-        menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(R.drawable.ic_menu_agenda);
-
         return true;
-    }
-
-    private static void addMapViewMenuItems(final Menu menu) {
-        MapProviderFactory.addMapviewMenuItems(menu, MENU_GROUP_MAP_SOURCES);
-        menu.setGroupCheckable(MENU_GROUP_MAP_SOURCES, true, true);
     }
 
     @Override
@@ -582,14 +544,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         try {
-            MenuItem item = menu.findItem(MENU_TRAIL_MODE);
+            MenuItem item = menu.findItem(R.id.menu_trail_mode);
             if (Settings.isMapTrail()) {
                 item.setTitle(res.getString(R.string.map_trail_hide));
             } else {
                 item.setTitle(res.getString(R.string.map_trail_show));
             }
 
-            item = menu.findItem(MENU_MAP_LIVE); // live map
+            item = menu.findItem(R.id.menu_map_live); // live map
             if (isLiveEnabled) {
                 item.setTitle(res.getString(R.string.map_live_disable));
             } else {
@@ -597,21 +559,27 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-            menu.findItem(MENU_STORE_CACHES).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
+            menu.findItem(R.id.menu_store_caches).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
-            item = menu.findItem(MENU_CIRCLE_MODE); // show circles
+            item = menu.findItem(R.id.menu_circle_mode); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
                 item.setTitle(res.getString(R.string.map_circles_hide));
             } else {
                 item.setTitle(res.getString(R.string.map_circles_show));
             }
 
-            item = menu.findItem(MENU_THEME_MODE); // show theme selection
+            item = menu.findItem(R.id.menu_theme_mode); // show theme selection
             item.setVisible(mapView.hasMapThemes());
 
-            menu.findItem(MENU_AS_LIST).setEnabled(isLiveEnabled && !isLoading());
+            menu.findItem(R.id.menu_as_list).setEnabled(isLiveEnabled && !isLoading());
 
-            menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveEnabled);
+            menu.findItem(R.id.submenu_strategy).setEnabled(isLiveEnabled);
+
+            Strategy strategy = Settings.getLiveMapStrategy();
+            menu.findItem(R.id.menu_strategy_fastest).setChecked(strategy == Strategy.FASTEST);
+            menu.findItem(R.id.menu_strategy_fast).setChecked(strategy == Strategy.FAST);
+            menu.findItem(R.id.menu_strategy_auto).setChecked(strategy == Strategy.AUTO);
+            menu.findItem(R.id.menu_strategy_detailed).setChecked(strategy == Strategy.DETAILED);
         } catch (Exception e) {
             Log.e("cgeomap.onPrepareOptionsMenu", e);
         }
@@ -623,12 +591,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
-            case MENU_TRAIL_MODE:
+            case R.id.menu_trail_mode:
                 Settings.setMapTrail(!Settings.isMapTrail());
                 mapView.repaintRequired(overlayPosition);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
-            case MENU_MAP_LIVE:
+            case R.id.menu_map_live:
                 isLiveEnabled = !isLiveEnabled;
                 if (mapMode == MapMode.LIVE) {
                     Settings.setLiveMap(isLiveEnabled);
@@ -638,7 +606,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 searchIntent = null;
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
-            case MENU_STORE_CACHES:
+            case R.id.menu_store_caches:
                 if (!isLoading()) {
                     final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
                     final List<String> geocodes = new ArrayList<String>();
@@ -672,7 +640,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                 }
                 return true;
-            case MENU_CIRCLE_MODE:
+            case R.id.menu_circle_mode:
                 if (overlayCaches == null) {
                     return false;
                 }
@@ -681,29 +649,29 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 mapView.repaintRequired(overlayCaches);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
-            case MENU_THEME_MODE:
+            case R.id.menu_theme_mode:
                 selectMapTheme();
                 return true;
-            case MENU_AS_LIST: {
+            case R.id.menu_as_list: {
                 cgeocaches.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
                 return true;
             }
-            case MENU_STRATEGY_FASTEST: {
+            case R.id.menu_strategy_fastest: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(Strategy.FASTEST);
                 return true;
             }
-            case MENU_STRATEGY_FAST: {
+            case R.id.menu_strategy_fast: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(Strategy.FAST);
                 return true;
             }
-            case MENU_STRATEGY_AUTO: {
+            case R.id.menu_strategy_auto: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(Strategy.AUTO);
                 return true;
             }
-            case MENU_STRATEGY_DETAILED: {
+            case R.id.menu_strategy_detailed: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(Strategy.DETAILED);
                 return true;

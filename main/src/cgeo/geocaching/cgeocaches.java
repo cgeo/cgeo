@@ -852,7 +852,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         if (cache.getCoords() != null) {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
             menu.add(1, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-            LoggingUI.addMenuItems(menu, cache);
+            LoggingUI.addMenuItems(this, menu, cache);
             menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
         }
         if (cache.isOffline()) {

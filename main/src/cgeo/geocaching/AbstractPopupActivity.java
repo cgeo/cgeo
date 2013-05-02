@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.gcvote.GCVote;
@@ -33,11 +32,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public abstract class AbstractPopupActivity extends AbstractActivity {
-
-    private static final int MENU_CACHES_AROUND = 5;
-    private static final int MENU_NAVIGATION = 3;
-    private static final int MENU_DEFAULT_NAVIGATION = 2;
-    private static final int MENU_SHOW_IN_BROWSER = 7;
 
     protected Geocache cache = null;
     protected String geocode = null;
@@ -76,9 +70,10 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
     /**
      * Callback to run when new location information is available.
-     * This may be overriden by deriving classes. The default implementation does nothing.
+     * This may be overridden by deriving classes. The default implementation does nothing.
      *
-     * @param geo the new data
+     * @param geo
+     *            the new data
      */
     public void onUpdateGeoData(final IGeoData geo) {
     }
@@ -164,12 +159,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
-        menu.add(0, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-        LoggingUI.addMenuItems(menu, cache);
-        menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
-        menu.add(0, MENU_SHOW_IN_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_info_details); // browser
-
+        getMenuInflater().inflate(R.menu.abstract_popup_activity, menu);
         return true;
     }
 
@@ -178,16 +168,16 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         final int menuItem = item.getItemId();
 
         switch (menuItem) {
-            case MENU_DEFAULT_NAVIGATION:
+            case R.id.menu_default_navigation:
                 navigateTo();
                 return true;
-            case MENU_NAVIGATION:
+            case R.id.menu_navigate:
                 showNavigationMenu();
                 return true;
-            case MENU_CACHES_AROUND:
+            case R.id.menu_caches_around:
                 cachesAround();
                 return true;
-            case MENU_SHOW_IN_BROWSER:
+            case R.id.menu_show_in_browser:
                 showInBrowser();
                 return true;
             default:
@@ -211,11 +201,11 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
         try {
             final boolean visible = getCoordinates() != null;
-            menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(visible);
-            menu.findItem(MENU_NAVIGATION).setVisible(visible);
-            menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
+            menu.findItem(R.id.menu_default_navigation).setVisible(visible);
+            menu.findItem(R.id.menu_navigate).setVisible(visible);
+            menu.findItem(R.id.menu_caches_around).setVisible(visible);
 
-            LoggingUI.onPrepareOptionsMenu(menu);
+            LoggingUI.onPrepareOptionsMenu(menu, cache);
         } catch (Exception e) {
             // nothing
         }

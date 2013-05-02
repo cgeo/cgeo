@@ -536,7 +536,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             NavigationAppFactory.addMenuItems(subMenu, cache);
 
             menu.add(0, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(R.drawable.ic_menu_agenda); // add event to calendar
-            LoggingUI.addMenuItems(menu, cache);
+            LoggingUI.addMenuItems(this, menu, cache);
             menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
             menu.add(0, MENU_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
             menu.add(0, MENU_SHARE, 0, res.getString(R.string.cache_menu_share)).setIcon(R.drawable.ic_menu_share); // share cache
@@ -552,6 +552,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
             menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
         }
+        LoggingUI.onPrepareOptionsMenu(menu, cache);
         return super.onPrepareOptionsMenu(menu);
     }
 

@@ -27,7 +27,6 @@ public class StaticMapsActivity extends AbstractActivity {
     private static final String EXTRAS_WAYPOINT = "waypoint";
     private static final String EXTRAS_DOWNLOAD = "download";
     private static final String EXTRAS_GEOCODE = "geocode";
-    private static final int MENU_REFRESH = 1;
     private final List<Bitmap> maps = new ArrayList<Bitmap>();
     private boolean download = false;
     private Integer waypoint_id = null;
@@ -159,13 +158,13 @@ public class StaticMapsActivity extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_REFRESH, 0, res.getString(R.string.cache_offline_refresh));
+        getMenuInflater().inflate(R.menu.static_maps_activity_options, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == MENU_REFRESH) {
+        if (item.getItemId() == R.id.menu_refresh) {
             downloadStaticMaps();
             restartActivity();
             return true;

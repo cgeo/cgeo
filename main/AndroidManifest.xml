@@ -203,7 +203,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-				android:name=".cgeonavigate"
+				android:name=".CompassActivity"
 				android:label="@string/compass_title">
 		</activity>
 		<activity

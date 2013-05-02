@@ -40,10 +40,6 @@ import android.widget.TextView;
 import java.util.List;
 
 public class NavigateAnyPointActivity extends AbstractActivity {
-    private static final int MENU_DEFAULT_NAVIGATION = 2;
-    private static final int MENU_NAVIGATE = 0;
-    private static final int MENU_CACHES_AROUND = 5;
-    private static final int MENU_CLEAR_HISTORY = 6;
 
     protected static class ViewHolder {
         @InjectView(R.id.simple_way_point_longitude) protected TextView longitude;
@@ -320,14 +316,8 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
-
-        menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-
-        menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
-
-        menu.add(0, MENU_CLEAR_HISTORY, 0, res.getString(R.string.search_clear_history)).setIcon(R.drawable.ic_menu_delete); // clear history
-
+        getMenuInflater().inflate(R.menu.navigate_any_point_activity_options, menu);
+        menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
         return true;
     }
 
@@ -337,11 +327,11 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
         try {
             boolean visible = getDestination() != null;
-            menu.findItem(MENU_NAVIGATE).setVisible(visible);
-            menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(visible);
-            menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
+            menu.findItem(R.id.menu_navigate).setVisible(visible);
+            menu.findItem(R.id.menu_default_navigation).setVisible(visible);
+            menu.findItem(R.id.menu_caches_around).setVisible(visible);
 
-            menu.findItem(MENU_CLEAR_HISTORY).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
+            menu.findItem(R.id.menu_clear_history).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
         } catch (Exception e) {
             // nothing
         }
@@ -360,19 +350,19 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         }
 
         switch (menuItem) {
-            case MENU_DEFAULT_NAVIGATION:
+            case R.id.menu_default_navigation:
                 navigateTo();
                 return true;
 
-            case MENU_CACHES_AROUND:
+            case R.id.menu_caches_around:
                 cachesAround();
                 return true;
 
-            case MENU_CLEAR_HISTORY:
+            case R.id.menu_clear_history:
                 clearHistory();
                 return true;
 
-            case MENU_NAVIGATE:
+            case R.id.menu_navigate:
                 NavigationAppFactory.showNavigationMenu(this, null, null, coords);
                 return true;
             default:

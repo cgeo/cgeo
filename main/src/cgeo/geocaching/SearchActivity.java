@@ -33,7 +33,6 @@ import java.util.Locale;
 
 public class SearchActivity extends AbstractActivity {
 
-    private static final int MENU_SEARCH_OWN_CACHES = 1;
     private EditText latEdit = null;
     private EditText lonEdit = null;
 
@@ -409,13 +408,13 @@ public class SearchActivity extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_SEARCH_OWN_CACHES, 0, res.getString(R.string.search_own_caches)).setIcon(R.drawable.ic_menu_myplaces);
+        getMenuInflater().inflate(R.menu.search_activity_options, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == MENU_SEARCH_OWN_CACHES) {
+        if (item.getItemId() == R.id.menu_search_own_caches) {
             findByOwnerFn(Settings.getUsername());
             return true;
         }

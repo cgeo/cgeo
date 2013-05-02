@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeonavigate;
+import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.ui.Formatter;
 
@@ -22,18 +22,18 @@ class CompassApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(Activity activity, Geopoint coords) {
-        cgeonavigate.startActivity(activity, getString(R.string.navigation_direct_navigation), getString(R.string.navigation_target), coords, null);
+        CompassActivity.startActivity(activity, getString(R.string.navigation_direct_navigation), getString(R.string.navigation_target), coords, null);
     }
 
     @Override
     public void navigate(Activity activity, Waypoint waypoint) {
-        cgeonavigate.startActivity(activity, waypoint.getPrefix() + "/" + waypoint.getLookup(), waypoint.getName(), waypoint.getCoords(), null,
+        CompassActivity.startActivity(activity, waypoint.getPrefix() + "/" + waypoint.getLookup(), waypoint.getName(), waypoint.getCoords(), null,
                 waypoint.getWaypointType().getL10n());
     }
 
     @Override
     public void navigate(Activity activity, Geocache cache) {
-        cgeonavigate.startActivity(activity, cache.getGeocode(), cache.getName(), cache.getCoords(), null,
+        CompassActivity.startActivity(activity, cache.getGeocode(), cache.getName(), cache.getCoords(), null,
                 Formatter.formatCacheInfoShort(cache));
     }
 

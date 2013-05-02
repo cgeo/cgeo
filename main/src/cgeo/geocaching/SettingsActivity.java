@@ -159,14 +159,13 @@ public class SettingsActivity extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, res.getString(R.string.init_clear)).setIcon(R.drawable.ic_menu_delete);
-
+        getMenuInflater().inflate(R.menu.settings_activity_options, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == 0) {
+        if (item.getItemId() == R.id.menu_clear) {
             ((EditText) findViewById(R.id.username)).setText("");
             ((EditText) findViewById(R.id.password)).setText("");
             ((EditText) findViewById(R.id.passvote)).setText("");

@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
@@ -7,6 +8,7 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 
 import android.view.Menu;
+import android.view.SubMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +45,14 @@ public class MapProviderFactory {
         return provider1 == provider2 && provider1.isSameActivity(source1, source2);
     }
 
-    public static void addMapviewMenuItems(final Menu parentMenu, final int groupId) {
+    public static void addMapviewMenuItems(Menu menu) {
+        final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
+
         final int currentSource = Settings.getMapSource().getNumericalId();
         for (int i = 0; i < mapSources.size(); i++) {
             final MapSource mapSource = mapSources.get(i);
             final int id = mapSource.getNumericalId();
-            parentMenu.add(groupId, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
+            parentMenu.add(R.id.menu_group_map_sources, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
         }
     }
 

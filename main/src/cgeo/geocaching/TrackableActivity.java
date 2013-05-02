@@ -56,8 +56,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             this.resId = resId;
         }
     }
-    private static final int MENU_LOG_TOUCH = 1;
-    private static final int MENU_BROWSER_TRACKABLE = 2;
     private Trackable trackable = null;
     private String geocode = null;
     private String name = null;
@@ -233,18 +231,17 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_LOG_TOUCH, 0, res.getString(R.string.trackable_log_touch)).setIcon(R.drawable.ic_menu_agenda); // log touch
-        menu.add(0, MENU_BROWSER_TRACKABLE, 0, res.getString(R.string.trackable_browser_open)).setIcon(R.drawable.ic_menu_info_details); // browser
+        getMenuInflater().inflate(R.menu.trackable_activity, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_LOG_TOUCH:
+            case R.id.menu_log_touch:
                 LogTrackableActivity.startActivity(this, trackable);
                 return true;
-            case MENU_BROWSER_TRACKABLE:
+            case R.id.menu_browser_trackable:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
                 return true;
             default:
@@ -255,8 +252,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (trackable != null) {
-            menu.findItem(MENU_LOG_TOUCH).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
-            menu.findItem(MENU_BROWSER_TRACKABLE).setEnabled(StringUtils.isNotBlank(trackable.getUrl()));
+            menu.findItem(R.id.menu_log_touch).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
+            menu.findItem(R.id.menu_browser_trackable).setEnabled(StringUtils.isNotBlank(trackable.getUrl()));
         }
         return super.onPrepareOptionsMenu(menu);
     }

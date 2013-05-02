@@ -17,23 +17,17 @@ import android.view.SubMenu;
 import android.widget.EditText;
 
 public abstract class AbstractLoggingActivity extends AbstractActivity {
-    private static final int MENU_SIGNATURE = 1;
-    private static final int MENU_SMILEY = 2;
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        // signature menu
-        menu.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature)).setIcon(R.drawable.ic_menu_edit);
+        getMenuInflater().inflate(R.menu.abstract_logging_activity, menu);
 
-        // templates menu
-        final SubMenu menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
+        final SubMenu menuLog = menu.findItem(R.id.menu_templates).getSubMenu();
         for (LogTemplate template : LogTemplateProvider.getTemplates()) {
             menuLog.add(0, template.getItemId(), 0, template.getResourceId());
         }
-        menuLog.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature));
 
-        // smilies
-        final SubMenu menuSmilies = menu.addSubMenu(0, MENU_SMILEY, 0, res.getString(R.string.log_smilies)).setIcon(R.drawable.ic_menu_emoticons);
+        final SubMenu menuSmilies = menu.findItem(R.id.menu_smilies).getSubMenu();
         for (Smiley smiley : GCSmiliesProvider.getSmilies()) {
             menuSmilies.add(0, smiley.getItemId(), 0, smiley.text);
         }
@@ -44,7 +38,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean signatureAvailable = StringUtils.isNotBlank(Settings.getSignature());
-        menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
+        menu.findItem(R.id.menu_signature).setVisible(signatureAvailable);
 
         boolean smileyVisible = false;
         final Geocache cache = getLogContext().getCache();
@@ -56,7 +50,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
             smileyVisible = true;
         }
 
-        menu.findItem(MENU_SMILEY).setVisible(smileyVisible);
+        menu.findItem(R.id.menu_smilies).setVisible(smileyVisible);
 
         return true;
     }
@@ -65,7 +59,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
 
-        if (id == MENU_SIGNATURE) {
+        if (id == R.id.menu_signature) {
             insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), getLogContext()), true);
             return true;
         }

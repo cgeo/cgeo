@@ -24,15 +24,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class cgeonavigate extends AbstractActivity {
+public class CompassActivity extends AbstractActivity {
 
     private static final String EXTRAS_COORDS = "coords";
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final String EXTRAS_CACHE_INFO = "cacheinfo";
     private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
-    private static final int MENU_MAP = 0;
-    private static final int MENU_SWITCH_COMPASS_GPS = 1;
     private PowerManager pm = null;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
@@ -45,10 +43,6 @@ public class cgeonavigate extends AbstractActivity {
     private TextView distanceView = null;
     private TextView headingView = null;
     private CompassView compassView = null;
-
-    public cgeonavigate() {
-        super(true);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,18 +107,17 @@ public class cgeonavigate extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass)).setIcon(R.drawable.ic_menu_compass);
-        menu.add(0, MENU_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(R.drawable.ic_menu_mapmode);
-        menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(R.drawable.ic_menu_edit);
+        getMenuInflater().inflate(R.menu.compass_activity_options, menu);
+        final SubMenu subMenu = menu.findItem(R.id.menu_select_destination).getSubMenu();
         if (coordinates.size() > 1) {
-            final SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(R.drawable.ic_menu_myplaces);
             int cnt = 4;
             for (final IWaypoint coordinate : coordinates) {
                 subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
                 cnt++;
             }
-        } else {
-            menu.add(0, 3, 0, res.getString(R.string.destination_select)).setIcon(R.drawable.ic_menu_myplaces).setEnabled(false);
+        }
+        else {
+            menu.findItem(R.id.menu_select_destination).setVisible(false);
         }
         return true;
     }
@@ -132,45 +125,48 @@ public class cgeonavigate extends AbstractActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(MENU_SWITCH_COMPASS_GPS).setTitle(res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
+        menu.findItem(R.id.menu_switch_compass_gps).setTitle(res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_map:
+                CGeoMap.startActivityCoords(this, dstCoords, null, null);
+                return true;
+            case R.id.menu_switch_compass_gps:
+                boolean oldSetting = Settings.isUseCompass();
+                Settings.setUseCompass(!oldSetting);
+                invalidateOptionsMenuCompatible();
+                if (oldSetting) {
+                    geoDirHandler.stopDir();
+                } else {
+                    geoDirHandler.startDir();
+                }
+                return true;
+            case R.id.menu_edit_destination:
+                Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
+                startActivity(pointIntent);
 
-        if (id == MENU_MAP) {
-            CGeoMap.startActivityCoords(this, dstCoords, null, null);
-        } else if (id == MENU_SWITCH_COMPASS_GPS) {
-            boolean oldSetting = Settings.isUseCompass();
-            Settings.setUseCompass(!oldSetting);
-            invalidateOptionsMenuCompatible();
-            if (oldSetting) {
-                geoDirHandler.stopDir();
-            } else {
-                geoDirHandler.startDir();
-            }
-        } else if (id == 2) {
-            Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
-            startActivity(pointIntent);
+                finish();
+                return true;
+            default:
+                if (id > 3 && coordinates.get(id - 4) != null) {
+                    final IWaypoint coordinate = coordinates.get(id - 4);
 
-            finish();
-            return true;
-        } else if (id > 3 && coordinates.get(id - 4) != null) {
-            final IWaypoint coordinate = coordinates.get(id - 4);
+                    title = coordinate.getName();
+                    dstCoords = coordinate.getCoords();
+                    setTitle();
+                    setDestCoords();
+                    setCacheInfo();
+                    updateDistanceInfo(app.currentGeo());
 
-            title = coordinate.getName();
-            dstCoords = coordinate.getCoords();
-            setTitle();
-            setDestCoords();
-            setCacheInfo();
-            updateDistanceInfo(app.currentGeo());
-
-            Log.d("destination set: " + title + " (" + dstCoords + ")");
-            return true;
+                    Log.d("destination set: " + title + " (" + dstCoords + ")");
+                    return true;
+                }
         }
-
         return false;
     }
 
@@ -268,7 +264,7 @@ public class cgeonavigate extends AbstractActivity {
         @Override
         public void updateDirection(final float direction) {
             if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
-                updateNorthHeading(DirectionProvider.getDirectionNow(cgeonavigate.this, direction));
+                updateNorthHeading(DirectionProvider.getDirectionNow(CompassActivity.this, direction));
             }
         }
     };
@@ -286,7 +282,7 @@ public class cgeonavigate extends AbstractActivity {
             coordinates.addAll(coordinatesWithType);
         }
 
-        final Intent navigateIntent = new Intent(context, cgeonavigate.class);
+        final Intent navigateIntent = new Intent(context, CompassActivity.class);
         navigateIntent.putExtra(EXTRAS_COORDS, coords);
         navigateIntent.putExtra(EXTRAS_GEOCODE, geocode);
         if (null != displayedName) {
@@ -297,7 +293,7 @@ public class cgeonavigate extends AbstractActivity {
     }
 
     public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType) {
-        cgeonavigate.startActivity(context, geocode, displayedName, coords, coordinatesWithType, null);
+        CompassActivity.startActivity(context, geocode, displayedName, coords, coordinatesWithType, null);
     }
 
 }
