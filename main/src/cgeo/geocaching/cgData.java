@@ -678,8 +678,8 @@ public class cgData {
                     // issue2662 OC: Leichtes Klettern / Easy climbing
                     if (oldVersion < 67) {
                         try {
-                            db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_yes' where geocode like 'O%' and attribute = 'climbing_yes'");
-                            db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_no' where geocode like 'O%' and attribute = 'climbing_no'");
+                            db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_yes' where geocode like 'OC%' and attribute = 'climbing_yes'");
+                            db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_no' where geocode like 'OC%' and attribute = 'climbing_no'");
                         } catch (Exception e) {
                             Log.e("Failed to upgrade to ver. 67", e);
 
