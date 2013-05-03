@@ -1005,6 +1005,8 @@
   <string name="attribute_swamp_no">No swamp or marsh</string>
   <string name="attribute_hills_yes">Hilly area</string>
   <string name="attribute_hills_no">No hilly area</string>
+  <string name="attribute_easy_climbing_yes">Lightweight climbing</string>
+  <string name="attribute_easy_climbing_no">No lightweight climbing</string>
   <string name="attribute_poi_yes">Point of interest</string>
   <string name="attribute_poi_no">No point of interest</string>
   <string name="attribute_moving_target_yes">Moving target</string>
