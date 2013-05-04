@@ -1163,7 +1163,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // favorite count
             if (cache.getFavoritePoints() > 0) {
-                details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+                details.add(R.string.cache_favorite, cache.getFavoritePoints() + "×");
             }
 
             // own rating
@@ -1487,7 +1487,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
-        /** Thread to add this cache to the favourite list of the user */
+        /** Thread to add this cache to the favorite list of the user */
         private class FavoriteAddThread extends Thread {
             private final Handler handler;
 
@@ -1501,7 +1501,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
-        /** Thread to remove this cache to the favourite list of the user */
+        /** Thread to remove this cache to the favorite list of the user */
         private class FavoriteRemoveThread extends Thread {
             private final Handler handler;
 
@@ -1528,25 +1528,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /**
-         * Listener for "add to favourites" button
+         * Listener for "add to favorites" button
          */
         private class FavoriteAddClickListener extends AbstractWatchlistClickListener {
             @Override
             public void onClick(View arg0) {
-                doExecute(R.string.cache_dialog_favourite_add_title,
-                        R.string.cache_dialog_favourite_add_message,
+                doExecute(R.string.cache_dialog_favorite_add_title,
+                        R.string.cache_dialog_favorite_add_message,
                         new FavoriteAddThread(new FavoriteUpdateHandler()));
             }
         }
 
         /**
-         * Listener for "remove from favourites" button
+         * Listener for "remove from favorites" button
          */
         private class FavoriteRemoveClickListener extends AbstractWatchlistClickListener {
             @Override
             public void onClick(View arg0) {
-                doExecute(R.string.cache_dialog_favourite_remove_title,
-                        R.string.cache_dialog_favourite_remove_message,
+                doExecute(R.string.cache_dialog_favorite_remove_title,
+                        R.string.cache_dialog_favorite_remove_message,
                         new FavoriteRemoveThread(new FavoriteUpdateHandler()));
             }
         }

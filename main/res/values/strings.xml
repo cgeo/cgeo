@@ -183,7 +183,7 @@
   <string name="err_missing_device_name">Please enter a device name before registering.</string>
   <string name="err_favorite_failed">Changing favorite status failed.</string>
   <string name="err_select_logimage_failed">Selecting an image for the log failed.</string>
-  <string name="err_aquire_image_failed">Acquiring an image failed.</string>
+  <string name="err_acquire_image_failed">Acquiring an image failed.</string>
   
   <string name="err_tb_display">c:geo can\'t display trackable you want. Is it really a trackable?</string>
   <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
@@ -569,10 +569,10 @@
   <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist…</string>
-  <string name="cache_dialog_favourite_add_title">Favourite</string>
-  <string name="cache_dialog_favourite_add_message">Adding cache to your favourites…</string>
-  <string name="cache_dialog_favourite_remove_title">Favourite</string>
-  <string name="cache_dialog_favourite_remove_message">Removing cache from your favourites…</string>
+  <string name="cache_dialog_favorite_add_title">Favorite</string>
+  <string name="cache_dialog_favorite_add_message">Adding cache to your favorites…</string>
+  <string name="cache_dialog_favorite_remove_title">Favorite</string>
+  <string name="cache_dialog_favorite_remove_message">Removing cache from your favorites…</string>
   <string name="cache_menu_navigate">Navigate</string>
   <string name="cache_menu_navigation_drive">Navigation (Driving)</string>
   <string name="cache_menu_navigation_walk">Navigation (Walking)</string>
@@ -616,7 +616,7 @@
   <string name="cache_rating">Rating</string>
   <string name="cache_own_rating">Own Rating</string>
   <string name="cache_rating_of">of</string>
-  <string name="cache_favourite">Favorite</string>
+  <string name="cache_favorite">Favorite</string>
   <string name="cache_owner">Owner</string>
   <string name="cache_hidden">Hidden</string>
   <string name="cache_event">Date</string>

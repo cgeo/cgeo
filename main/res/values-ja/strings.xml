@@ -540,10 +540,10 @@
   <string name="cache_dialog_watchlist_add_message">ウォッチリストに追加中…</string>
   <string name="cache_dialog_watchlist_remove_title">ウォッチリスト</string>
   <string name="cache_dialog_watchlist_remove_message">ウォッチリストから削除中…</string>
-  <string name="cache_dialog_favourite_add_title">お気に入り</string>
-  <string name="cache_dialog_favourite_add_message">お気に入りに追加中…</string>
-  <string name="cache_dialog_favourite_remove_title">お気に入り</string>
-  <string name="cache_dialog_favourite_remove_message">お気に入りから削除中…</string>
+  <string name="cache_dialog_favorite_add_title">お気に入り</string>
+  <string name="cache_dialog_favorite_add_message">お気に入りに追加中…</string>
+  <string name="cache_dialog_favorite_remove_title">お気に入り</string>
+  <string name="cache_dialog_favorite_remove_message">お気に入りから削除中…</string>
   <string name="cache_menu_navigate">ナビゲーション</string>
   <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
   <string name="cache_menu_navigation_walk">ナビゲーション(徒歩)</string>
@@ -586,7 +586,7 @@
   <string name="cache_rating">評価</string>
   <string name="cache_own_rating">Own Rating</string>
   <string name="cache_rating_of">/</string>
-  <string name="cache_favourite">お気に入り</string>
+  <string name="cache_favorite">お気に入り</string>
   <string name="cache_owner">所有者</string>
   <string name="cache_hidden">隠した日</string>
   <string name="cache_event">イベント日付</string>

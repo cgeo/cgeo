@@ -533,10 +533,10 @@
   <string name="cache_dialog_watchlist_add_message">Dodaję skrzynkę do listy obserwowanych…</string>
   <string name="cache_dialog_watchlist_remove_title">Lista obserwowanych</string>
   <string name="cache_dialog_watchlist_remove_message">Usuwam skrzynkę z listy obserwowanych…</string>
-  <string name="cache_dialog_favourite_add_title">Ulubione</string>
-  <string name="cache_dialog_favourite_add_message">Dodaję skrzynkę do listy ulubionych…</string>
-  <string name="cache_dialog_favourite_remove_title">Ulubione</string>
-  <string name="cache_dialog_favourite_remove_message">Usuwam skrzynkę z listy ulubionych…</string>
+  <string name="cache_dialog_favorite_add_title">Ulubione</string>
+  <string name="cache_dialog_favorite_add_message">Dodaję skrzynkę do listy ulubionych…</string>
+  <string name="cache_dialog_favorite_remove_title">Ulubione</string>
+  <string name="cache_dialog_favorite_remove_message">Usuwam skrzynkę z listy ulubionych…</string>
   <string name="cache_menu_navigate">Nawiguj</string>
   <string name="cache_menu_navigation_drive">Nawigacja (jazda)</string>
   <string name="cache_menu_navigation_walk">Nawigacja (pieszo)</string>
@@ -578,7 +578,7 @@
   <string name="cache_rating">Ocena</string>
   <string name="cache_own_rating">Własna ocena</string>
   <string name="cache_rating_of">od</string>
-  <string name="cache_favourite">Ulubiona</string>
+  <string name="cache_favorite">Ulubiona</string>
   <string name="cache_owner">Właściciel</string>
   <string name="cache_hidden">Ukryta</string>
   <string name="cache_event">Data</string>

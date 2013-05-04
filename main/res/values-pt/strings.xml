@@ -571,7 +571,7 @@
   <string name="cache_rating">Pontuação</string>
   <string name="cache_own_rating">A minha pontuação</string>
   <string name="cache_rating_of">de</string>
-  <string name="cache_favourite">Favorita</string>
+  <string name="cache_favorite">Favorita</string>
   <string name="cache_owner">Dono</string>
   <string name="cache_hidden">Escondida</string>
   <string name="cache_event">Data</string>

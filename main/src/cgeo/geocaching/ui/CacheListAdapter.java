@@ -79,13 +79,13 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private static final int[] RATING_BACKGROUND = new int[3];
     static {
         if (Settings.isLightSkin()) {
-            RATING_BACKGROUND[0] = R.drawable.favourite_background_red_light;
-            RATING_BACKGROUND[1] = R.drawable.favourite_background_orange_light;
-            RATING_BACKGROUND[2] = R.drawable.favourite_background_green_light;
+            RATING_BACKGROUND[0] = R.drawable.favorite_background_red_light;
+            RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_light;
+            RATING_BACKGROUND[2] = R.drawable.favorite_background_green_light;
         } else {
-            RATING_BACKGROUND[0] = R.drawable.favourite_background_red_dark;
-            RATING_BACKGROUND[1] = R.drawable.favourite_background_orange_dark;
-            RATING_BACKGROUND[2] = R.drawable.favourite_background_green_dark;
+            RATING_BACKGROUND[0] = R.drawable.favorite_background_red_dark;
+            RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_dark;
+            RATING_BACKGROUND[2] = R.drawable.favorite_background_green_dark;
         }
     }
 
@@ -97,7 +97,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         CheckBox checkbox;
         ImageView logStatusMark;
         TextView text;
-        TextView favourite;
+        TextView favorite;
         TextView info;
         ImageView inventory;
         RelativeLayout directionLayout;
@@ -364,7 +364,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.dirImgLayout = (RelativeLayout) v.findViewById(R.id.dirimg_layout);
             holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
             holder.inventory = (ImageView) v.findViewById(R.id.inventory);
-            holder.favourite = (TextView) v.findViewById(R.id.favourite);
+            holder.favorite = (TextView) v.findViewById(R.id.favorite);
             holder.info = (TextView) v.findViewById(R.id.info);
 
             v.setTag(holder);
@@ -494,14 +494,14 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             }
         }
 
-        holder.favourite.setText(Integer.toString(cache.getFavoritePoints()));
+        holder.favorite.setText(Integer.toString(cache.getFavoritePoints()));
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
         if (lightSkin) {
-            favoriteBack = R.drawable.favourite_background_light;
+            favoriteBack = R.drawable.favorite_background_light;
         } else {
-            favoriteBack = R.drawable.favourite_background_dark;
+            favoriteBack = R.drawable.favorite_background_dark;
         }
         final float myVote = cache.getMyVote();
         if (myVote > 0) { // use my own rating for display, if I have voted
@@ -522,7 +522,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
                 favoriteBack = RATING_BACKGROUND[0];
             }
         }
-        holder.favourite.setBackgroundResource(favoriteBack);
+        holder.favorite.setBackgroundResource(favoriteBack);
 
         if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
             holder.info.setText(Formatter.formatCacheInfoHistory(cache));

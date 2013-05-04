@@ -546,10 +546,10 @@
   <string name="cache_dialog_watchlist_add_message">Voeg cache toe aan watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Verwijder cache van watchlist…</string>
-  <string name="cache_dialog_favourite_add_title">Favoriet</string>
-  <string name="cache_dialog_favourite_add_message">Voeg cache toe aan favorieten…</string>
-  <string name="cache_dialog_favourite_remove_title">Favoriet</string>
-  <string name="cache_dialog_favourite_remove_message">Verwijder cache van je favorieten…</string>
+  <string name="cache_dialog_favorite_add_title">Favoriet</string>
+  <string name="cache_dialog_favorite_add_message">Voeg cache toe aan favorieten…</string>
+  <string name="cache_dialog_favorite_remove_title">Favoriet</string>
+  <string name="cache_dialog_favorite_remove_message">Verwijder cache van je favorieten…</string>
   <string name="cache_menu_navigate">Navigeer</string>
   <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
   <string name="cache_menu_navigation_walk">Navigeer (lopen)</string>
@@ -591,7 +591,7 @@
   <string name="cache_rating">Waardering</string>
   <string name="cache_own_rating">Eigen waardering</string>
   <string name="cache_rating_of">van</string>
-  <string name="cache_favourite">Favoriet</string>
+  <string name="cache_favorite">Favoriet</string>
   <string name="cache_owner">Eigenaar</string>
   <string name="cache_hidden">Verstopt</string>
   <string name="cache_event">Datum</string>

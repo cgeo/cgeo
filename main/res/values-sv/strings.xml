@@ -176,7 +176,7 @@
   <string name="err_favorite_failed">Misslyckades att ändra favoritstatus.</string>
 
   <string name="err_select_logimage_failed">Misslyckades att välja bild till loggen.</string>
-  <string name="err_aquire_image_failed">Hämtning av bilden misslyckades.</string>
+  <string name="err_acquire_image_failed">Hämtning av bilden misslyckades.</string>
   <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
   <string name="err_tb_forgot_saw">Tyvärr glömde c:geo vilken trackable du såg.</string>
@@ -561,10 +561,10 @@
   <string name="cache_dialog_watchlist_add_message">Lägger till cachen till din watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist…</string>
-  <string name="cache_dialog_favourite_add_title">Favorit</string>
-  <string name="cache_dialog_favourite_add_message">Lägger till cachen till dina favoriter…</string>
-  <string name="cache_dialog_favourite_remove_title">Favorit</string>
-  <string name="cache_dialog_favourite_remove_message">Tar bort cachen från dina favoriter…</string>
+  <string name="cache_dialog_favorite_add_title">Favorit</string>
+  <string name="cache_dialog_favorite_add_message">Lägger till cachen till dina favoriter…</string>
+  <string name="cache_dialog_favorite_remove_title">Favorit</string>
+  <string name="cache_dialog_favorite_remove_message">Tar bort cachen från dina favoriter…</string>
   <string name="cache_menu_navigate">Navigera</string>
   <string name="cache_menu_navigation_drive">Navigering (med bil)</string>
   <string name="cache_menu_navigation_walk">Navigering (till fots)</string>
@@ -606,7 +606,7 @@
   <string name="cache_rating">Betyg</string>
   <string name="cache_own_rating">Eget betyg</string>
   <string name="cache_rating_of">av</string>
-  <string name="cache_favourite">Favorit</string>
+  <string name="cache_favorite">Favorit</string>
   <string name="cache_owner">Ägare</string>
   <string name="cache_hidden">Gömd</string>
   <string name="cache_event">Datum</string>

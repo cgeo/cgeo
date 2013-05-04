@@ -108,7 +108,7 @@ public class cgData {
             + "detailedupdate long, "
             + "visiteddate long, "
             + "geocode text unique not null, "
-            + "reason integer not null default 0, " // cached, favourite...
+            + "reason integer not null default 0, " // cached, favorite...
             + "cacheid text, "
             + "guid text, "
             + "type text, "

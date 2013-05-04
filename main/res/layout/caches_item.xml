@@ -159,14 +159,14 @@
             android:src="@drawable/trackable_all" />
 
         <TextView
-            android:id="@+id/favourite"
+            android:id="@+id/favorite"
             android:layout_width="35dip"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="22dip"
-            android:background="?favourite"
+            android:background="?favorite"
             android:ellipsize="marquee"
             android:gravity="center"
             android:lines="1"

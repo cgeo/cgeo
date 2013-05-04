@@ -570,7 +570,7 @@
   <string name="cache_rating">Hodnotenie</string>
   <string name="cache_own_rating">Vlastné hodnotenie</string>
   <string name="cache_rating_of">z</string>
-  <string name="cache_favourite">Obľúbené</string>
+  <string name="cache_favorite">Obľúbené</string>
   <string name="cache_owner">Vlastník</string>
   <string name="cache_hidden">Skrytá</string>
   <string name="cache_event">Dátum</string>

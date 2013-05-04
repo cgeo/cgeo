@@ -215,7 +215,7 @@ public abstract class GCParser {
                     cache.setFavoritePoints(Integer.parseInt(result));
                 }
             } catch (NumberFormatException e) {
-                Log.w("GCParser.parseSearch: Failed to parse favourite count");
+                Log.w("GCParser.parseSearch: Failed to parse favorite count");
             }
 
             searchResult.addCache(cache);
@@ -424,11 +424,11 @@ public abstract class GCParser {
                 Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
             }
 
-            // favourite
+            // favorite
             try {
                 cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
             } catch (NumberFormatException e) {
-                Log.e("Error parsing favourite count", e);
+                Log.e("Error parsing favorite count", e);
             }
 
             // cache size

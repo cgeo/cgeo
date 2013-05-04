@@ -763,8 +763,8 @@ public class Geocache implements ICache, IWaypoint {
         return favorite;
     }
 
-    public void setFavorite(boolean favourite) {
-        this.favorite = favourite;
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 
     @Override

@@ -175,7 +175,7 @@
   <string name="err_missing_device_name">Před registrací prosím zadej název zařízení.</string>
   <string name="err_favorite_failed">Označení oblíbenosti keše selhalo.</string>
   <string name="err_select_logimage_failed">Výběr obrázku pro zápis selhal.</string>
-  <string name="err_aquire_image_failed">Získání obrázku selhalo.</string>
+  <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
 
   <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
   <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
@@ -563,10 +563,10 @@
   <string name="cache_dialog_watchlist_add_message">Přidávání keše do tvého Watchlistu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Odstraňování keše z tvého Watchlistu…</string>
-  <string name="cache_dialog_favourite_add_title">Oblíbené</string>
-  <string name="cache_dialog_favourite_add_message">Přidávání keše do Oblíbených…</string>
-  <string name="cache_dialog_favourite_remove_title">Oblíbené</string>
-  <string name="cache_dialog_favourite_remove_message">Odstraňování keše z Oblíbených…</string>
+  <string name="cache_dialog_favorite_add_title">Oblíbené</string>
+  <string name="cache_dialog_favorite_add_message">Přidávání keše do Oblíbených…</string>
+  <string name="cache_dialog_favorite_remove_title">Oblíbené</string>
+  <string name="cache_dialog_favorite_remove_message">Odstraňování keše z Oblíbených…</string>
   <string name="cache_menu_navigate">Navigovat</string>
   <string name="cache_menu_navigation_drive">Navigace (Řízení)</string>
   <string name="cache_menu_navigation_walk">Navigace (Chůze)</string>
@@ -608,7 +608,7 @@
   <string name="cache_rating">Hodnocení</string>
   <string name="cache_own_rating">Vlastní hodnocení</string>
   <string name="cache_rating_of">z</string>
-  <string name="cache_favourite">Oblíbená</string>
+  <string name="cache_favorite">Oblíbená</string>
   <string name="cache_owner">Zakladatel</string>
   <string name="cache_hidden">Skryta</string>
   <string name="cache_event">Datum</string>

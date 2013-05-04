@@ -558,10 +558,10 @@
   <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
-  <string name="cache_dialog_favourite_add_title">Favorit</string>
-  <string name="cache_dialog_favourite_add_message">Füge den Cache als dein Favorit hinzu…</string>
-  <string name="cache_dialog_favourite_remove_title">Favorit</string>
-  <string name="cache_dialog_favourite_remove_message">Entferne den Cache von deinen Favoriten…</string>
+  <string name="cache_dialog_favorite_add_title">Favorit</string>
+  <string name="cache_dialog_favorite_add_message">Füge den Cache zu Favoriten hinzu…</string>
+  <string name="cache_dialog_favorite_remove_title">Favorit</string>
+  <string name="cache_dialog_favorite_remove_message">Entferne den Cache von deinen Favoriten…</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
   <string name="cache_menu_navigation_walk">Navigation (Gehen)</string>
@@ -604,7 +604,7 @@
   <string name="cache_rating">Bewertung</string>
   <string name="cache_own_rating">Eigene Bewertung</string>
   <string name="cache_rating_of">von</string>
-  <string name="cache_favourite">Favorit</string>
+  <string name="cache_favorite">Favorit</string>
   <string name="cache_owner">Besitzer</string>
   <string name="cache_hidden">Versteckt</string>
   <string name="cache_event">Zeitangabe</string>

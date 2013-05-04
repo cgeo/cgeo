@@ -485,7 +485,7 @@
   <string name="cache_terrain">Terreno</string>
   <string name="cache_rating">Puntuación</string>
   <string name="cache_rating_of">de</string>
-  <string name="cache_favourite">Favorito</string>
+  <string name="cache_favorite">Favorito</string>
   <string name="cache_owner">Propietario</string>
   <string name="cache_hidden">Oculto</string>
   <string name="cache_event">Fecha</string>

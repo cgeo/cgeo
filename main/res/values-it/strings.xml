@@ -176,7 +176,7 @@
   
   <string name="err_favorite_failed">Errore nella modifica dello stato preferiti.</string>
   <string name="err_select_logimage_failed">La selezione dell\'immagine per il log è fallita.</string>
-  <string name="err_aquire_image_failed">Acquisizione immagine fallita.</string> 
+  <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string> 
 
   <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
   <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
@@ -556,10 +556,10 @@
   <string name="cache_dialog_watchlist_add_message">Aggiunto il cache alla watchlist in corso…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Rimozione dei cache dalla tua watchlist…</string>
-  <string name="cache_dialog_favourite_add_title">Preferiti</string>
-  <string name="cache_dialog_favourite_add_message">Aggiungi il cache ai tuoi preferiti…</string>
-  <string name="cache_dialog_favourite_remove_title">Preferiti</string>
-  <string name="cache_dialog_favourite_remove_message">Rimozione cache dai tuoi preferiti…</string>  
+  <string name="cache_dialog_favorite_add_title">Preferiti</string>
+  <string name="cache_dialog_favorite_add_message">Aggiungi il cache ai tuoi preferiti…</string>
+  <string name="cache_dialog_favorite_remove_title">Preferiti</string>
+  <string name="cache_dialog_favorite_remove_message">Rimozione cache dai tuoi preferiti…</string>  
   <string name="cache_menu_navigate">Naviga</string>
   <string name="cache_menu_navigation_drive">Naviga (in auto)</string>
   <string name="cache_menu_navigation_walk">Naviga (a piedi)</string>
@@ -601,7 +601,7 @@
   <string name="cache_rating">Voto</string>
   <string name="cache_own_rating">Il tuo voto</string>
   <string name="cache_rating_of">di</string>
-  <string name="cache_favourite">Popolarità</string>
+  <string name="cache_favorite">Popolarità</string>
   <string name="cache_owner">Proprietario</string>
   <string name="cache_hidden">Nascosto il</string>
   <string name="cache_event">Data</string>

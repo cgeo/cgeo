@@ -278,7 +278,7 @@ public class ImageSelectActivity extends AbstractActivity {
     }
 
     private void showFailure() {
-        showToast(getResources().getString(R.string.err_aquire_image_failed));
+        showToast(getResources().getString(R.string.err_acquire_image_failed));
     }
 
     private void loadImagePreview() {
