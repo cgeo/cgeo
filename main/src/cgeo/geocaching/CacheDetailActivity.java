@@ -795,7 +795,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     /**
      * Wrapper for the referenced method in the xml-layout.
      */
-    public void startDefaultNavigation(@SuppressWarnings("unused") View view) {
+    public void goDefaultNavigation(@SuppressWarnings("unused") View view) {
         startDefaultNavigation();
     }
 

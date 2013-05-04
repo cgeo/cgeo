@@ -74,7 +74,7 @@ public class CoordinatesInputDialog extends Dialog {
 
         setContentView(R.layout.coords);
 
-        findViewById(R.id.actionBarManualbutton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.action_bar_manual).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {

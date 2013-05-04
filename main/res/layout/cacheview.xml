@@ -8,29 +8,11 @@
 
     <LinearLayout style="@style/action_bar" >
 
-        <ImageView
-            style="@style/action_bar_action"
-            android:onClick="goHome" />
+        <include layout="@layout/actionbar_title" />
 
-        <View style="@style/action_bar_separator" />
+        <include layout="@layout/actionbar_button_compass" />
 
-        <TextView style="@style/action_bar_title" />
-
-        <View style="@style/action_bar_separator" />
-
-        <ImageView
-            android:id="@+id/defaultNavigation"
-            style="@style/action_bar_action"
-            android:longClickable="true"
-            android:onClick="startDefaultNavigation"
-            android:src="@drawable/actionbar_compass_dark" />
-
-        <View style="@style/action_bar_separator" />
-
-        <ImageView
-            style="@style/action_bar_action"
-            android:onClick="goManual"
-            android:src="@drawable/actionbar_manual" />
+        <include layout="@layout/actionbar_button_manual" />
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

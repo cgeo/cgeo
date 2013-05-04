@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <View style="@style/action_bar_separator" />
+
+    <ImageView
+        android:id="@+id/defaultNavigation"
+        style="@style/action_bar_action"
+        android:longClickable="true"
+        android:onClick="goDefaultNavigation"
+        android:src="@drawable/actionbar_compass_dark" />
+
+</merge>
