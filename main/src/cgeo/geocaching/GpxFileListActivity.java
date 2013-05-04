@@ -33,7 +33,7 @@ public class GpxFileListActivity extends AbstractFileListActivity<GPXListAdapter
 
     public static void startSubActivity(Activity fromActivity, int listId) {
         final Intent intent = new Intent(fromActivity, GpxFileListActivity.class);
-        intent.putExtra(Intents.EXTRA_LIST_ID, listId);
+        intent.putExtra(Intents.EXTRA_LIST_ID, StoredList.getConcreteList(listId));
         fromActivity.startActivityForResult(intent, 0);
     }
 

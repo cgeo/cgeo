@@ -612,8 +612,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             setVisible(menu, MENU_EXPORT, !isEmpty);
             setVisible(menu, MENU_REMOVE_FROM_HISTORY, !isEmpty);
             setVisible(menu, MENU_CLEAR_OFFLINE_LOGS, !isEmpty && containsOfflineLogs());
-            setVisible(menu, MENU_IMPORT_GPX, isConcrete);
-            setVisible(menu, MENU_IMPORT_WEB, isConcrete);
 
             if (navigationMenu != null) {
                 navigationMenu.setVisible(!isEmpty);
@@ -1297,7 +1295,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         public LoadFromWebThread(Handler handlerIn, int listId) {
             handler = handlerIn;
-            listIdLFW = listId;
+            listIdLFW = StoredList.getConcreteList(listId);
         }
 
         public void kill() {

@@ -201,4 +201,14 @@ public class StoredList {
     protected String getTitle() {
         return title;
     }
+
+    /**
+     * Return the given list, if it is a concrete list. Return the default list otherwise.
+     */
+    public static int getConcreteList(int listId) {
+        if (listId == ALL_LIST_ID || listId == TEMPORARY_LIST_ID) {
+            return STANDARD_LIST_ID;
+        }
+        return listId;
+    }
 }
