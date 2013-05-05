@@ -99,14 +99,22 @@
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
     · Log images can be scaled before upload to save traffic
-    · \n
+    · Improved online detection when refreshing caches\n
     \n
     <b>Bugfixing:</b>\n
     · Do not apply encryption/decryption when clicking on a link in a log\n
     · Also show a picture attached to a log locally after sending the log\n
     · Improved display of log text for OC-caches\n
     · Improved performance of GPX exports\n
-     \n
+    · GPX import option now also shown on all caches list\n
+    · OC.de attributes correction\n
+    · Reduce memory usage for images to avoid crashes\n
+    · Do not show short description if it is contained in long description for OC.de caches\n
+    · Do not allow setting the GPX dir to a not accessible directory\n
+    · Failure in waypoint projection for some languages corrected\n
+    · Avoid crashes when selecting images for logs\n
+    · Ignore hide setting when searching for owned caches\n
+    \n
     <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=17&amp;state=closed">Detailed list of all changes</a>\n
     \n
     <b>Known Limitations/Bugs:</b>\n
