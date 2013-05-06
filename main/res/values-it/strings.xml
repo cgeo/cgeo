@@ -125,7 +125,15 @@
   <string name="log_image_stored">Esistente</string>
   <string name="log_image_camera">Nuova</string>
   <string name="log_image_caption">Didascalia</string>
-  <string name="log_image_description">Descrizione</string> 
+  <string name="log_image_description">Descrizione</string>
+  <string name="log_image_scale">Ridimensiona</string>
+  <string-array name="log_image_scales">
+      <item>Dimensioni originali</item>
+      <item>512 px</item>
+      <item>640 px</item>
+      <item>800 px</item>
+      <item>1024 px</item>
+  </string-array>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -987,6 +995,8 @@
   <string name="attribute_swamp_no">Non paludoso</string>
   <string name="attribute_hills_yes">Area collinare</string>
   <string name="attribute_hills_no">Area non collinare</string>
+  <string name="attribute_easy_climbing_yes">Facile scalata</string>
+  <string name="attribute_easy_climbing_no">Nessuna facile scalata</string>  
   <string name="attribute_poi_yes">Punto di interesse</string>
   <string name="attribute_poi_no">Nessun punto di interesse</string>
   <string name="attribute_moving_target_yes">Obiettivo in movimento</string>
