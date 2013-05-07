@@ -1586,15 +1586,8 @@ public abstract class GCParser {
         final List<LogType> types = new ArrayList<LogType>();
 
         final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
-        String typesText = null;
-        if (typeBoxMatcher.find()) {
-            if (typeBoxMatcher.groupCount() > 0) {
-                typesText = typeBoxMatcher.group(1);
-            }
-        }
-
-        if (typesText != null) {
-
+        if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {
+            String typesText = typeBoxMatcher.group(1);
             final MatcherWrapper typeMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPE2, typesText);
             while (typeMatcher.find()) {
                 if (typeMatcher.groupCount() > 1) {
@@ -1609,6 +1602,9 @@ public abstract class GCParser {
                 }
             }
         }
+
+        // we don't support this log type
+        types.remove(LogType.UPDATE_COORDINATES);
 
         return types;
     }

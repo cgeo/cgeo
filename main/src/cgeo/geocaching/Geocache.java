@@ -47,7 +47,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -484,7 +483,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public List<LogType> getPossibleLogTypes() {
-        final List<LogType> logTypes = new LinkedList<LogType>();
+        final List<LogType> logTypes = new ArrayList<LogType>();
         if (isEventCache()) {
             logTypes.add(LogType.WILL_ATTEND);
             logTypes.add(LogType.NOTE);
@@ -511,7 +510,6 @@ public class Geocache implements ICache, IWaypoint {
             logTypes.add(LogType.TEMP_DISABLE_LISTING);
             logTypes.add(LogType.ENABLE_LISTING);
             logTypes.add(LogType.ARCHIVE);
-            logTypes.remove(LogType.UPDATE_COORDINATES);
         }
         return logTypes;
     }

@@ -110,7 +110,6 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         viewstates = Login.getViewstates(page);
         trackables = GCParser.parseTrackableLog(page);
         possibleLogTypes = GCParser.parseTypes(page);
-        possibleLogTypes.remove(LogType.UPDATE_COORDINATES);
 
         if (possibleLogTypes.isEmpty()) {
             showErrorLoadingData();
