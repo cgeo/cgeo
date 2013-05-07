@@ -186,13 +186,12 @@ public class SimpleDirChooser extends AbstractListActivity {
             if (currentOption != lastOption) {
                 currentOption.setChecked(true);
                 lastPosition = position;
-                okButton.setEnabled(true);
-                okButton.setVisibility(View.VISIBLE);
             } else {
                 lastPosition = -1;
-                okButton.setEnabled(false);
-                okButton.setVisibility(View.INVISIBLE);
             }
+            final boolean enabled = currentOption.isChecked() && !currentOption.getName().equals(PARENT_DIR);
+            okButton.setEnabled(enabled);
+            okButton.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
             adapter.notifyDataSetChanged();
         }
     }
