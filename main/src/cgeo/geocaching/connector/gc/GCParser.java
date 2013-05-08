@@ -826,6 +826,15 @@ public abstract class GCParser {
         return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
+    private static boolean isSearchForMyCaches(final String userName) {
+        boolean my = false;
+        if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
+            my = true;
+            Log.i("Overriding users choice because of self search, downloading all caches.");
+        }
+        return my;
+    }
+
     public static SearchResult searchByUsername(final String userName, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
@@ -834,13 +843,7 @@ public abstract class GCParser {
 
         final Parameters params = new Parameters("ul", userName);
 
-        boolean my = false;
-        if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
-            my = true;
-            Log.i("GCParser.searchByUsername: Overriding users choice, downloading all caches.");
-        }
-
-        return searchByAny(cacheType, my, showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
     }
 
     public static SearchResult searchByOwner(final String userName, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
@@ -850,7 +853,7 @@ public abstract class GCParser {
         }
 
         final Parameters params = new Parameters("u", userName);
-        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
     }
 
     public static SearchResult searchByAddress(final String address, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
