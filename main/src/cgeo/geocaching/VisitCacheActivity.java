@@ -356,6 +356,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         }
 
         tweetCheck.setChecked(true);
+        updateTweetBox(typeSelected);
 
         final Button imageButton = (Button) findViewById(R.id.image_btn);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -522,12 +523,17 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             // TODO: change action
         }
 
+        updateTweetBox(type);
+
+        updatePostButtonText();
+    }
+
+    private void updateTweetBox(LogType type) {
         if (type == LogType.FOUND_IT && Settings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);
         }
-        updatePostButtonText();
     }
 
     private class DateListener implements View.OnClickListener {
