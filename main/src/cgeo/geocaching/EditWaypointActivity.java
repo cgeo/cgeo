@@ -216,16 +216,6 @@ public class EditWaypointActivity extends AbstractActivity {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
     public void onPause() {
         geoDirHandler.stopGeo();
         super.onPause();

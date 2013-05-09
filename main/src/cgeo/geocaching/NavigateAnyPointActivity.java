@@ -52,21 +52,18 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
         @Override
         public View getView(final int position, final View convertView, final ViewGroup parent) {
-
-            Destination loc = getItem(position);
-
-            View v = convertView;
-
-            if (v == null) {
-                v = getInflater().inflate(R.layout.simple_way_point,
+            View rowView = convertView;
+            if (rowView == null) {
+                rowView = getInflater().inflate(R.layout.simple_way_point,
                         null);
             }
-            TextView longitude = (TextView) v
+            TextView longitude = (TextView) rowView
                     .findViewById(R.id.simple_way_point_longitude);
-            TextView latitude = (TextView) v
+            TextView latitude = (TextView) rowView
                     .findViewById(R.id.simple_way_point_latitude);
-            TextView date = (TextView) v.findViewById(R.id.date);
+            TextView date = (TextView) rowView.findViewById(R.id.date);
 
+            Destination loc = getItem(position);
             String lonString = loc.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE);
             String latString = loc.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE);
 
@@ -74,7 +71,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             latitude.setText(latString);
             date.setText(Formatter.formatShortDateTime(getContext(), loc.getDate()));
 
-            return v;
+            return rowView;
         }
 
         private LayoutInflater getInflater() {
@@ -90,7 +87,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     private Button lonButton = null;
     private boolean changed = false;
     private List<Destination> historyOfSearchedLocations;
-    private DestinationHistoryAdapter destionationHistoryAdapter;
+    private DestinationHistoryAdapter destinationHistoryAdapter;
     private ListView historyListView;
     private TextView historyFooter;
 
@@ -100,7 +97,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private int contextMenuItemPosition;
 
-    String distanceUnit = "";
+    private String distanceUnit = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -190,11 +187,11 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     }
 
     private DestinationHistoryAdapter getDestionationHistoryAdapter() {
-        if (destionationHistoryAdapter == null) {
-            destionationHistoryAdapter = new DestinationHistoryAdapter(this,
+        if (destinationHistoryAdapter == null) {
+            destinationHistoryAdapter = new DestinationHistoryAdapter(this,
                     getHistoryOfSearchedLocations());
         }
-        return destionationHistoryAdapter;
+        return destinationHistoryAdapter;
     }
 
     private List<Destination> getHistoryOfSearchedLocations() {
@@ -218,16 +215,6 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         super.onResume();
         geoDirHandler.startGeo();
         init();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     @Override
