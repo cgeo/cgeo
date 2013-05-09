@@ -69,7 +69,7 @@
 		</activity>
 		<activity
 			android:name=".UsefulAppsActivity"
-			android:label="@string/helper"
+			android:label="@string/helpers"
 			android:windowSoftInputMode="stateHidden"
 			android:configChanges="keyboardHidden|orientation" >
 		</activity>

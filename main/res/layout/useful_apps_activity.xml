@@ -5,20 +5,19 @@
     android:background="?background_color"
     android:orientation="vertical" >
 
-    <include layout="@layout/actionbar"/>
+    <include layout="@layout/actionbar" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/apps_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
+        android:cacheColorHint="?background_color"
+        android:divider="?background_color"
+        android:fastScrollEnabled="true"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:listSelector="?background_color"
         android:padding="4dip" >
-
-        <LinearLayout
-            android:id="@+id/parent"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-        </LinearLayout>
-    </ScrollView>
+    </ListView>
 
 </LinearLayout>

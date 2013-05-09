@@ -4,6 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginBottom="10dip"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
 
     <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -43,7 +44,7 @@
             android:textColor="?text_color"
             android:textColorLink="?text_color_link"
             android:textIsSelectable="false"
-            android:textSize="14dip" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>
