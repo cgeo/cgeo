@@ -83,8 +83,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     public void onUpdateGeoData(final IGeoData geo) {
     }
 
-    protected AbstractPopupActivity(String helpTopic, int layout) {
-        super(helpTopic);
+    protected AbstractPopupActivity(int layout) {
         this.layout = layout;
     }
 
@@ -110,12 +109,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                 ratingHandler.sendMessage(msg);
             }
         }).start();
-    }
-
-    @Override
-    public void goManual(View view) {
-        super.goManual(view);
-        finish();
     }
 
     protected void init() {

@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -1572,21 +1571,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             mapTitle = title + " [" + count + "]";
         }
         CGeoMap.startActivitySearch(this, searchToUse, mapTitle);
-    }
-
-    @Override
-    public void goManual(View view) {
-        switch (type) {
-            case OFFLINE:
-                ActivityMixin.goManual(this, "c:geo-stored");
-                break;
-            case HISTORY:
-                ActivityMixin.goManual(this, "c:geo-history");
-                break;
-            default:
-                ActivityMixin.goManual(this, "c:geo-nearby");
-                break;
-        }
     }
 
     private void refreshCurrentList() {

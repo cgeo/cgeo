@@ -108,10 +108,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         }
     };
 
-    public TrackableActivity() {
-        super("c:geo-trackable-details");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.trackable_activity);

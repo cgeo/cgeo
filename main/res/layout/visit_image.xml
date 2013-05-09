@@ -7,11 +7,9 @@
 
     <LinearLayout style="@style/action_bar" >
 
-        <include layout="@layout/actionbar_title"/>
+        <include layout="@layout/actionbar_title" />
 
         <include layout="@layout/actionbar_progress" />
-
-        <include layout="@layout/actionbar_button_manual"/>
     </LinearLayout>
 
     <ScrollView
@@ -89,9 +87,9 @@
                 android:id="@+id/logImageScale"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:prompt="@string/log_image_scale"
-                android:entries="@array/log_image_scales"/>
-            
+                android:entries="@array/log_image_scales"
+                android:prompt="@string/log_image_scale" />
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

@@ -7,12 +7,10 @@
     <LinearLayout style="@style/action_bar" >
 
         <include layout="@layout/actionbar_title" />
-        
-        <include layout="@layout/actionbar_progress" />
-        
-        <include layout="@layout/actionbar_button_map" />
 
-        <include layout="@layout/actionbar_button_manual" />
+        <include layout="@layout/actionbar_progress" />
+
+        <include layout="@layout/actionbar_button_map" />
     </LinearLayout>
 
     <include layout="@layout/filter_bar" />

@@ -819,8 +819,6 @@
   <string name="license_dismiss">Zamítnout</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manuál</string>
-  <string name="helper_manual_description">Komplexní příručka aplikace c:geo obsahující popis všech možností této aplikace (včetně těch skrytých).</string>
   <string name="helper_calendar_title">c:geo modul kalendáře</string>
   <string name="helper_calendar_missing">c:geo modul kalendáře není nainstalován.</string>
   <string name="helper_calendar_description">Umožňuje exportovat události keší do tvého kalendáře.</string>

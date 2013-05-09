@@ -192,11 +192,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     };
     protected ImagesList imagesList;
 
-    public CacheDetailActivity() {
-        // identifier for manual
-        super("c:geolocation-cache-details");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.cacheview);

@@ -123,10 +123,6 @@ public class SettingsActivity extends AbstractActivity {
         }
     };
 
-    public SettingsActivity() {
-        super("c:geo-configuration");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.init);

@@ -4,7 +4,6 @@ import butterknife.InjectView;
 import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -38,7 +37,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -51,7 +49,6 @@ import java.util.Locale;
 public class MainActivity extends AbstractActivity {
     @InjectView(R.id.user_info) protected TextView userInfoView;
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
-    @InjectView(R.id.helper) protected RelativeLayout helper;
     @InjectView(R.id.filter_button_title)protected TextView filterTitle;
     @InjectView(R.id.map) protected View findOnMap;
     @InjectView(R.id.search_offline) protected View findByOffline;
@@ -181,10 +178,6 @@ public class MainActivity extends AbstractActivity {
         }
     };
 
-    public MainActivity() {
-        super("c:geo-main-screen");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // don't call the super implementation with the layout argument, as that would set the wrong theme
@@ -202,26 +195,6 @@ public class MainActivity extends AbstractActivity {
 
         version = Version.getVersionCode(this);
         Log.i("Starting " + getPackageName() + ' ' + version + " a.k.a " + Version.getVersionName(this));
-
-        try {
-            if (!Settings.isHelpShown()) {
-                if (helper != null) {
-                    helper.setVisibility(View.VISIBLE);
-                    helper.setClickable(true);
-                    helper.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View view) {
-                            ActivityMixin.goManual(MainActivity.this, "c:geo-intro");
-                            view.setVisibility(View.GONE);
-                        }
-                    });
-                    Settings.setHelpShown();
-                }
-            }
-        } catch (Exception e) {
-            // nothing
-        }
 
         init();
     }

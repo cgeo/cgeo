@@ -10,8 +10,6 @@
         <TextView
             style="@style/action_bar_title"
             android:text="@string/cache_coordinates" />
-
-        <include layout="@layout/actionbar_button_manual"/>
     </LinearLayout>
 
     <ScrollView

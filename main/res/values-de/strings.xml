@@ -813,8 +813,6 @@
   <string name="license_dismiss">Ablehnen</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Anleitung</string>
-  <string name="helper_manual_description">Umfangreiche Anleitung für c:geo mit Beschreibung aller Möglichkeiten dieser App (auch versteckte).</string>
   <string name="helper_calendar_title">c:geo Kalender Add-on</string>
   <string name="helper_calendar_missing">c:geo Kalender Add-on nicht installiert</string>
   <string name="helper_calendar_description">Ermöglicht die Übernahme von Event-Caches in den Kalender.</string>

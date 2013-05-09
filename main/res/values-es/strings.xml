@@ -627,8 +627,6 @@
   <string name="license_dismiss">Descartar</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manual</string>
-  <string name="helper_manual_description">Sencillo manual de c:geo que contiene todas las capacidades de este programa (incluidas las ocultas).</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Sencilla aplicación que muestra mapas en línea y permite descargarlos para ser usados sin conexión (sólo mapas no vectoriales). También permite registrar el recorrido, gestionar puntos de interés y más funciones interesantes.</string>
 

@@ -16,33 +16,21 @@ import android.widget.EditText;
 
 public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
 
-    final private String helpTopic;
-
     protected cgeoapplication app = null;
     protected Resources res = null;
     private boolean keepScreenOn = false;
 
     protected AbstractActivity() {
-        this(null);
+        this(false);
     }
 
-    protected AbstractActivity(final String helpTopic) {
-        this.helpTopic = helpTopic;
-    }
-
-    protected AbstractActivity(final String helpTopic, final boolean keepScreenOn) {
-        this(helpTopic);
+    protected AbstractActivity(final boolean keepScreenOn) {
         this.keepScreenOn = keepScreenOn;
     }
 
     @Override
     final public void goHome(final View view) {
         ActivityMixin.goHome(this);
-    }
-
-    @Override
-    public void goManual(final View view) {
-        ActivityMixin.goManual(this, helpTopic);
     }
 
     final protected void setTitle(final String title) {

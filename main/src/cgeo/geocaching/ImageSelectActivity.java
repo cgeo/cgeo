@@ -53,10 +53,6 @@ public class ImageSelectActivity extends AbstractActivity {
     private int scaleChoiceIndex;
     private Uri imageUri;
 
-    public ImageSelectActivity() {
-        super("c:geo-selectimage");
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.visit_image);

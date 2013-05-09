@@ -781,8 +781,6 @@
   <string name="license_dismiss">Odmów</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Instrukcja obsługi</string>
-  <string name="helper_manual_description">Obszerny przewodnik do c:geo wraz z opisem wszystkich możliwości tego programu (także ukrytych).</string>
   <string name="helper_calendar_title">Dodatek Kalendarz c:geo</string>
   <string name="helper_calendar_missing">Dodatek Kalendarz c:geo nie jest zainstalowany.</string>
   <string name="helper_calendar_description">Umożliwia Tobie eksport skrzynek Wydarzenie do kalendarza w Twoim urządzeniu.</string>  

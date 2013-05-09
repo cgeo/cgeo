@@ -816,8 +816,6 @@
   <string name="license_dismiss">Chiudi</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manual</string>
-  <string name="helper_manual_description">Manuale dettagliato di c:geo che contiene la descrizione di tutte le possibilità offerte da questa applicazione, comprese quelle nascoste (in inglese).</string>
   <string name="helper_calendar_title">c:geo calendario add-on</string>
   <string name="helper_calendar_missing">c:geo calendario add-on non installato</string>
   <string name="helper_calendar_description">Permette di esportare gli eventi cache nel calendario del tuo dispositivo.</string>

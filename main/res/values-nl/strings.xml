@@ -801,8 +801,6 @@
   <string name="license_dismiss">Afwijzen</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Handleiding</string>
-  <string name="helper_manual_description">Uitgebreide handleiding voor c:geo welke alle mogelijkheden van deze applicatie uitlegt (ook de verborgen mogelijkheden).</string>
   <string name="helper_calendar_title">c:geo kalender add-on</string>
   <string name="helper_calendar_missing">c:geo kalender add-on niet geinstalleerd.</string>
   <string name="helper_calendar_description">Maakt het mogelijk om Geocaching events in je kalender op te slaan.</string>

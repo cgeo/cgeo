@@ -763,8 +763,6 @@
   <string name="license_dismiss">Dispensar</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manual</string>
-  <string name="helper_manual_description">Manual prático do c:geo, que contém a descrição de todas as funcionalidades desta aplicação (mesmo as que estão escondidas).</string>
   <string name="helper_calendar_title">Add on calendário para c:geo </string>
   <string name="helper_calendar_missing">Add on calendário para o c:geo não está instalado.</string>
   <string name="helper_calendar_description">Permite exportar caches evento para o calendário do seu dispositivo.</string>

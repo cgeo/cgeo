@@ -6,13 +6,11 @@
 
     <LinearLayout style="@style/action_bar" >
 
-        <include layout="@layout/actionbar_title"/>
+        <include layout="@layout/actionbar_title" />
 
         <include layout="@layout/actionbar_progress" />
 
-        <include layout="@layout/actionbar_button_myposition"/>
-        
-        <include layout="@layout/actionbar_button_manual"/>
+        <include layout="@layout/actionbar_button_myposition" />
     </LinearLayout>
 
     <include layout="@layout/filter_bar" />

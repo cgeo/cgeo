@@ -793,8 +793,6 @@
   <string name="license_dismiss">閉じる</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">マニュアル</string>
-  <string name="helper_manual_description">c:geoのマニュアル(英語)はこのアプリでできる事(隠れ機能も)の全てについて書いてあります。</string>
   <string name="helper_calendar_title">c:geo - カレンダープラグイン</string>
   <string name="helper_calendar_missing">c:geo - カレンダープラグインはインストールされていません。</string>
   <string name="helper_calendar_description">イベントキャッシュをカレンダーアプリに登録することができます。</string>

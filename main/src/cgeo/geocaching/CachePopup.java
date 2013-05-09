@@ -65,7 +65,7 @@ public class CachePopup extends AbstractPopupActivity {
     }
 
     public CachePopup() {
-        super("c:geo-cache-info", R.layout.popup);
+        super(R.layout.popup);
     }
 
     @Override

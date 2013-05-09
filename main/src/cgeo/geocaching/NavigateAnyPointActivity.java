@@ -102,10 +102,6 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     String distanceUnit = "";
 
-    public NavigateAnyPointActivity() {
-        super("c:geo-navigate-any");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.point);

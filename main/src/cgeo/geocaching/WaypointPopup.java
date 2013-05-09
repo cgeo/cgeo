@@ -23,7 +23,7 @@ public class WaypointPopup extends AbstractPopupActivity {
     private TextView waypointDistance = null;
 
     public WaypointPopup() {
-        super("c:geo-waypoint-info", R.layout.waypoint_popup);
+        super(R.layout.waypoint_popup);
     }
 
     @Override

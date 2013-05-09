@@ -237,10 +237,6 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         return res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*";
     }
 
-    public VisitCacheActivity() {
-        super("c:geo-log");
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.visit);

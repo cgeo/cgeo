@@ -47,7 +47,7 @@ public class cgeonavigate extends AbstractActivity {
     private CompassView compassView = null;
 
     public cgeonavigate() {
-        super("c:geo-compass", true);
+        super(true);
     }
 
     @Override

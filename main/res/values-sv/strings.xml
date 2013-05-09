@@ -816,8 +816,6 @@
   <string name="license_dismiss">Avbryt</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manual</string>
-  <string name="helper_manual_description">En utförlig manual för c:geo som beskriver alla möjligheter och ger en hel del tips. Manualen finns enbart på engelska.</string>
   <string name="helper_calendar_title">c:geo kalendertillägg</string>
   <string name="helper_calendar_missing">c:geo kalendertillägg är inte installerat</string>
   <string name="helper_calendar_description">Gör det möjligt att exportera event till din kalender.</string>

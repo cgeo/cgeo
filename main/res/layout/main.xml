@@ -13,9 +13,7 @@
 
         <TextView style="@style/action_bar_title" />
 
-        <include layout="@layout/actionbar_button_search"/>
-
-        <include layout="@layout/actionbar_button_manual"/>
+        <include layout="@layout/actionbar_button_search" />
     </LinearLayout>
 
     <fragment
@@ -166,41 +164,6 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <!-- ** -->
-
-    <RelativeLayout
-        android:id="@+id/helper"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="64dip"
-        android:layout_marginLeft="16dip"
-        android:layout_marginRight="16dip"
-        android:background="@drawable/helper_bcg"
-        android:visibility="gone" >
-
-        <ImageView
-            android:layout_width="32dip"
-            android:layout_height="32dip"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center"
-            android:layout_margin="4dip"
-            android:gravity="center"
-            android:scaleType="center"
-            android:src="@drawable/actionbar_manual" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="34dip"
-            android:gravity="center"
-            android:padding="4dip"
-            android:text="@string/helper"
-            android:textColor="@color/text_icon"
-            android:textSize="14dip" />
-    </RelativeLayout>
     <!-- ** -->
 
     <LinearLayout

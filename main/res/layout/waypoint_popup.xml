@@ -11,9 +11,7 @@
             android:id="@+id/actionbar_title"
             style="@style/action_bar_title" />
 
-        <include layout="@layout/actionbar_button_compass"/>
-        
-        <include layout="@layout/actionbar_button_manual"/>
+        <include layout="@layout/actionbar_button_compass" />
     </LinearLayout>
 
     <ScrollView

@@ -74,14 +74,6 @@ public class CoordinatesInputDialog extends Dialog {
 
         setContentView(R.layout.coords);
 
-        findViewById(R.id.action_bar_manual).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                ActivityMixin.goManual(context, "c:geo-geocoordinate-input");
-            }
-        });
-
         final Spinner spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(context,

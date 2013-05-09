@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheType;
@@ -535,11 +534,6 @@ public class EditWaypointActivity extends AbstractActivity {
     private static boolean uploadModifiedCoords(final Geocache cache, final Geopoint waypointUploaded) {
         final IConnector con = ConnectorFactory.getConnector(cache);
         return con.supportsOwnCoordinates() && con.uploadModifiedCoordinates(cache, waypointUploaded);
-    }
-
-    @Override
-    public void goManual(final View view) {
-        ActivityMixin.goManual(this, id >= 0 ? "c:geo-waypoint-edit" : "c:geo-waypoint-new");
     }
 
     public static void startActivityEditWaypoint(final Context context, final int waypointId) {

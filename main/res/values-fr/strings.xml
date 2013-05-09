@@ -817,8 +817,6 @@
   <string name="license_dismiss">Rejeter</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manuel</string>
-  <string name="helper_manual_description">Manuel complet pour c:geo contenant la description de toutes les fonctionnalités de cette application (y compris celle secrètes).</string>
   <string name="helper_calendar_title">Module supplémentaire c:geo agenda</string>
   <string name="helper_calendar_missing">Module supplémentaire c:geo agenda non installé</string>
   <string name="helper_calendar_description">Permet d\'exporter les événements liés aux caches dans le calendrier Android.</string>

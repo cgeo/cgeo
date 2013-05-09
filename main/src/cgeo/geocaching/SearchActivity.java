@@ -37,10 +37,6 @@ public class SearchActivity extends AbstractActivity {
     private EditText latEdit = null;
     private EditText lonEdit = null;
 
-    public SearchActivity() {
-        super("c:geo-search");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
