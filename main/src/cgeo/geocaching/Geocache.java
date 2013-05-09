@@ -486,30 +486,34 @@ public class Geocache implements ICache, IWaypoint {
         final List<LogType> logTypes = new ArrayList<LogType>();
         if (isEventCache()) {
             logTypes.add(LogType.WILL_ATTEND);
-            logTypes.add(LogType.NOTE);
             logTypes.add(LogType.ATTENDED);
-            logTypes.add(LogType.NEEDS_ARCHIVE);
             if (isOwner()) {
                 logTypes.add(LogType.ANNOUNCEMENT);
             }
         } else if (CacheType.WEBCAM == cacheType) {
             logTypes.add(LogType.WEBCAM_PHOTO_TAKEN);
-            logTypes.add(LogType.DIDNT_FIND_IT);
-            logTypes.add(LogType.NOTE);
-            logTypes.add(LogType.NEEDS_ARCHIVE);
-            logTypes.add(LogType.NEEDS_MAINTENANCE);
         } else {
             logTypes.add(LogType.FOUND_IT);
+        }
+        if (!isEventCache()) {
             logTypes.add(LogType.DIDNT_FIND_IT);
-            logTypes.add(LogType.NOTE);
-            logTypes.add(LogType.NEEDS_ARCHIVE);
+        }
+        logTypes.add(LogType.NOTE);
+        if (!isEventCache()) {
             logTypes.add(LogType.NEEDS_MAINTENANCE);
         }
         if (isOwner()) {
             logTypes.add(LogType.OWNER_MAINTENANCE);
-            logTypes.add(LogType.TEMP_DISABLE_LISTING);
-            logTypes.add(LogType.ENABLE_LISTING);
+            if (isDisabled()) {
+                logTypes.add(LogType.ENABLE_LISTING);
+            }
+            else {
+                logTypes.add(LogType.TEMP_DISABLE_LISTING);
+            }
             logTypes.add(LogType.ARCHIVE);
+        }
+        if (!isArchived() && !isOwner()) {
+            logTypes.add(LogType.NEEDS_ARCHIVE);
         }
         return logTypes;
     }

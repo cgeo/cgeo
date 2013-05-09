@@ -636,16 +636,19 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     }
 
     private void selectLogType() {
+        // use a local copy of the possible types, as that one might be modified in the background by the loader
+        final ArrayList<LogType> possible = new ArrayList<LogType>(possibleLogTypes);
+
         Builder alert = new AlertDialog.Builder(this);
-        String[] choices = new String[possibleLogTypes.size()];
+        String[] choices = new String[possible.size()];
         for (int i = 0; i < choices.length; i++) {
-            choices[i] = possibleLogTypes.get(i).getL10n();
+            choices[i] = possible.get(i).getL10n();
         }
-        alert.setSingleChoiceItems(choices, possibleLogTypes.indexOf(typeSelected), new OnClickListener() {
+        alert.setSingleChoiceItems(choices, possible.indexOf(typeSelected), new OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int position) {
-                setType(possibleLogTypes.get(position));
+                setType(possible.get(position));
                 dialog.dismiss();
             }
         });
