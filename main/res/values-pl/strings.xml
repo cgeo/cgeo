@@ -78,12 +78,14 @@
   <string name="log_discovered">Odkryta</string>
   <string name="log_reviewer">Sprawdzona</string>
   <string name="log_retractlisting">Wycofaj listing</string>
+  <string name="log_marked_missing">Oznacz jako zaginiona</string>
   <string name="log_tb_nothing">Nie rób nic</string>
   <string name="log_tb_visit">Odwiedzony</string>
   <string name="log_tb_drop">Odłożony</string>
   <string name="log_tb_changeall">Zmień wszystko</string>
   <string name="log_save">Zapisz</string>
   <string name="log_saving">Zapisuję w dzienniku…</string>
+  <string name="log_saving_and_uploading">Zaloguj i dodaj zdjęcie…</string>
   <string name="log_clear">Wyczyść</string>
   <string name="log_post">Wpisz do dziennika</string>
   <string name="log_post_rate">Wpisz do dziennika &amp; oceń</string>
@@ -117,7 +119,14 @@
   <string name="log_today">Dzisiaj</string>
   <string name="log_yesterday">Wczoraj</string>
   <string name="log_smilies">Uśmiechy</string>
-
+  <string name="log_image">Obraz</string>
+  <string name="log_image_attach">Załącz obraz</string>
+  <string name="log_image_edit">Edytuj obraz</string>
+  <string name="log_image_stored">Zapisany</string>
+  <string name="log_image_camera">Nowy</string>
+  <string name="log_image_caption">Podpis</string>
+  <string name="log_image_description">Opis</string>
+  
   <!-- translation -->
   <string name="translate_to_sys_lang">Przetłumacz na %s</string>
   <string name="translate_to_english">Przetłumacz na angielski</string>
@@ -137,6 +146,7 @@
   <string name="err_wrong">Niepoprawne dane użytkownika</string>
   <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrzynkami.</string>
   <string name="err_license">Użytkownik nie zaakceptował jeszcze regulaminu Geocaching.com, więc c:geo nie może załadować współrzędnych skrzynek.</string>
+  <string name="err_unvalidated_account">Musisz najpierw zatwierdzić swoje konto na stronie Geocaching.com.</string>
   <string name="err_unpublished">Szukana skrzynka nie została opublikowana.</string>
   <string name="err_premium_only">Ta skrzynka jest dostępna tylko dla użytkowników Premium serwisu Geocaching.com.</string>
   <string name="err_detail_open">c:geo nie mógł otworzyć szczegółów skrzynki.</string>
@@ -163,6 +173,9 @@
   <string name="err_load_descr_failed">c:geo nie może załadować opisu.</string>
   <string name="err_location_unknown">c:geo nie zna lokalizacji skrzynki.</string>
   <string name="err_missing_device_name">Proszę podać nazwę urządzenia przed zarejestrowaniem.</string>
+  <string name="err_favorite_failed">Zmiana statusu skrzynki ulubiona nie powiodła się.</string>
+  <string name="err_select_logimage_failed">Nie można wybrać obrazu.</string>
+  <string name="err_aquire_image_failed">NIe można pobrać obrazu.</string>
 
   <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
   <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
@@ -185,6 +198,7 @@
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
   <string name="err_log_failed_server">c:geo nie może dokonać wpisu ponieważ serwer nie odpowiada.</string>
   <string name="err_log_post_failed">Wygląda na to, że Twój wpis nie został zapisany. Proszę sprawdź na Geocaching.com.</string>
+  <string name="err_logimage_post_failed">Wygląda na to, że Twój obraz nie został dodany. Proszę sprawdź to na Geocaching.com.</string>
 
   <string name="err_search_address_forgot">c:geo zapomniał adresu, którego szukałeś.</string>
   <string name="err_parse_lat">c:geo nie może obliczyć szerokości geograficznej.</string>
@@ -210,11 +224,12 @@
   <string name="warn_nonexistant_mapfile">Wybrany plik z mapą nie istnieje.\nMapy offline są niedostępne.</string>
   <string name="warn_rendertheme_missing">Nie znaleziono tytułu mapy.</string>
 
-
   <string name="info_log_posted">Wpis został wysłany.</string>
   <string name="info_log_saved">Wpis został zapisany.</string>
   <string name="info_log_cleared">Wpis został usunięty.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
+  <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
+  <string name="info_stored_image">Nowy obraz zapisany w:</string>
   
   <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>  
 
@@ -248,6 +263,7 @@
   <string name="caches_more_caches">Więcej skrzynek</string>
   <string name="caches_more_caches_no">Nie ma więcej skrzynek</string>
   <string name="caches_more_caches_loading">Ładuję skrzynki…</string>
+  <string name="caches_more_caches_currently">Obecnie</string>
   <string name="caches_downloading">Pobieram skrzynki…\nSzacowany czas: </string>
   <string name="caches_eta_ltm">Mniej niż minuta</string>
   <plurals name="caches_eta_mins">
@@ -267,6 +283,7 @@
   <string name="caches_sort_size">rozmiaru</string>
   <string name="caches_sort_favorites">popularności</string>
   <string name="caches_sort_name">nazwy</string>
+  <string name="caches_sort_geocode">Kod skrytki</string>
   <string name="caches_sort_rating">oceny</string>
   <string name="caches_sort_vote">głosów (Twoja ocena)</string>
   <string name="caches_sort_inventory">liczebności inwentarza</string>
@@ -304,7 +321,11 @@
   <string name="caches_filter_type">typu</string>
   <string name="caches_filter_track">z przedmiotmi podróżnymi</string>
   <string name="caches_filter_clear">usuń filtr</string>
+  <string name="caches_filter_modified">Zmiany koordynatów </string>
+  <string name="caches_filter_origin">Źródło</string>
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
+  <string name="caches_clear_offlinelogs">Usuń logi offline</string>
+  <string name="caches_clear_offlinelogs_progress">Usuwanie logów offline</string>
 
   <!-- caches lists -->
   <string name="list_menu">Lista</string>
@@ -339,6 +360,7 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gc_activate">Aktywuj Geocaching.com na aktualnej mapie i w wyszukiwaniu</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Aktywuj opencaching.de na mapie Live i w wyszukiwaniu</string>
   <string name="init_oc_username_description">Wpisz swoją nazwę użytkownika opencaching.de w celu umożliwienia zaznaczania znalezionych przez Ciebie skrzynek.</string>
@@ -387,6 +409,7 @@
   <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
   <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
   <string name="init_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
+  <string name="init_choose_list">Zapytaj o wykaz podczas zapisywania skrzynek</string>  
   <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
   <string name="init_altitude">Korekta wysokości</string>
   <string name="init_altitude_description">Jeśli GPS podaje Tobie złą wysokość, możesz skorygować ją liczbą dodatnią lub ujemną. Poprawka musi być zawsze wyrażona w metrach.</string>
@@ -492,6 +515,7 @@
   <string name="cache_log_images_title">Zdjęcie z wpisu</string>
   <string name="cache_log_image_default_title">Zdjęcie</string>
   <string name="cache_personal_note">Notatka osobista</string>
+  <string name="cache_personal_note_edit">Edytuj</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Długi opis</string>
   <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string> 
@@ -503,7 +527,11 @@
   <string name="cache_favpoint_not_on">Ta skrzynka nie jest na Twojej liście ulubionych.</string>
   <string name="cache_favpoint_add">Dodaj</string>
   <string name="cache_favpoint_remove">Usuń</string>
-  <string name="cache_images">Zdjęcia</string>    
+  <string name="cache_list_text">Wykaz:</string>
+  <string name="cache_list_change">Przenieś</string>
+  <string name="cache_list_unknown">Nie znajduje się w wykazie</string>
+  <string name="cache_images">Zdjęcia</string>
+  
   <string name="cache_waypoints">Punkty nawigacji</string>
   <plurals name="waypoints">
       <item quantity="one">Jeden punkt nawigacji</item>
@@ -600,6 +628,7 @@
   <string name="cache_image_open_browser">Otwórz w przeglądarce</string>
   <string name="cache_share_field">Współdziel</string>
   <string name="cache_time_full_hours"></string>
+  <string name="cache_listed_on">Zapisana w %s</string>
   
   <!--  editor dialog -->
   <string name="editor_save">Zapisz</string>
@@ -659,6 +688,7 @@
   <string name="waypoint_edit_title">Edytuj punkt nawigacji</string>
   <string name="waypoint_add_title">Dodaj punkt nawigacji</string>
   <string name="waypoint_note">Notatka</string>
+  <string name="waypoint_visited">Odwiedzony</string>
   <string name="waypoint_save">Zapisz</string>
   <string name="waypoint_loading">Ładuję punkt nawigacji…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Współrzędne skrzynki bez zmian</string>
@@ -670,6 +700,7 @@
   <string name="waypoint_reset">Ponowne ustawianie</string>
   <string name="waypoint_localy_reset_cache_coords">Ponowne ustawianie w c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Ponowne ustawianie w c:geo i na stronie WWW</string>
+  <string name="waypoint_being_saved">Punkt nawigacyjny został zapisany</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Strona WWW nie wspiera zmiany współrzędnych skrzynki.</string>
   <string name="waypoint_coordinates_upload_error">Wystąpił błąd podczas modyfikacji współrzędnych na stronie WWW.</string>
   <string name="waypoint_coordinates_uploading_to_website">Wysyłanie współrzędnych %s do strony WWW.</string>
@@ -721,6 +752,8 @@
   <string name="search_coordinates_button">Szukaj według współrzędnych</string>
   <string name="search_address">Adres</string>
   <string name="search_address_button">Szukaj według adresu</string>
+  <string name="search_geo">Kod skrzynki</string>
+  <string name="search_geo_button">Szukaj według  kodu skrzynki</string>
   <string name="search_kw">Słowa kluczowe</string>
   <string name="search_kw_prefill">Słowo kluczowe</string>
   <string name="search_kw_button">Szukaj wg słowa kluczowego</string>
@@ -767,6 +800,7 @@
   <string name="user_menu_view_hidden">Schowane skrzynki</string>
   <string name="user_menu_view_found">Znalezione skrzynki</string>
   <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
+  <string name="user_menu_send_message">Wyślij wiadomość</string>
 
   <!-- navigation -->
   <string name="navigation">Nawigacja</string>
@@ -817,10 +851,7 @@
   <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
   <string name="export_gpx_to">Wyślij wyeksportowany GPX do</string>
   
-  <!--  attribute unknown -->
-  <string name="attribute_unknown_yes">Nieznany atrybut obecny</string>
-  <string name="attribute_unknown_no">Nieznany atrybut nieobecny</string>
-  <!--  attributes (permissions -> allowed, not allowed) -->
+  <!-- GC attributes -->
   <string name="attribute_dogs_yes">Psy dozwolone</string>
   <string name="attribute_dogs_no">Psy niedozwolone</string>
   <string name="attribute_bicycles_yes">Rowery dozwolone</string>
@@ -839,8 +870,6 @@
   <string name="attribute_campfires_no">Ogniska niedozwolone</string>
   <string name="attribute_rv_yes">Truck Driver/RV dozwolone</string>
   <string name="attribute_rv_no">Truck Driver/RV niedozwolone</string>
-
-  <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Polecane dla dzieci</string>
   <string name="attribute_kids_no">Niepolecane dla dzieci</string>
   <string name="attribute_onehour_yes">Odnalezienie zajmuje mniej niż godzinę</string>
@@ -893,8 +922,6 @@
   <string name="attribute_landf_no">Bez wyprawy Lost And Found</string>
   <string name="attribute_partnership_yes">Skrytka partnerska</string>
   <string name="attribute_partnership_no">Skrytka nie jest partnerska</string>
-
-  <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Opłata za wejście lub parking</string>
   <string name="attribute_fee_no">Bez opłaty za wejście lub parking</string>
   <string name="attribute_rappelling_yes">Sprzęt wspinaczkowy potrzebny</string>
@@ -917,8 +944,6 @@
   <string name="attribute_wirelessbeacon_no">Bez bezprzewodowych nadajników</string>
   <string name="attribute_treeclimbing_yes">Wspinaczka na drzewo</string>
   <string name="attribute_treeclimbing_no">Bez wspinaczki na drzewo</string>
-
-  <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Trujące rośliny</string>
   <string name="attribute_poisonoak_no">Bez trujących roślin</string>
   <string name="attribute_dangerousanimals_yes">Niebezpieczne zwierzęta</string>
@@ -935,8 +960,6 @@
   <string name="attribute_danger_no">Bez niebezpiecznego obszaru</string>
   <string name="attribute_thorn_yes">Kolce</string>
   <string name="attribute_thorn_no">Bez kolców</string>
-
-  <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Dostępne dla wózków inwalidzkich</string>
   <string name="attribute_wheelchair_no">Niedostępne dla wózków inwalidzkich</string>
   <string name="attribute_parking_yes">Parking dostępny</string>
@@ -959,6 +982,64 @@
   <string name="attribute_fuel_no">Bez stacji benzynowej w pobliżu</string>
   <string name="attribute_food_yes">Gastronomia w pobliżu</string>
   <string name="attribute_food_no">Bez gastronomii w pobliżu</string>
+  <string name="attribute_oc_only_yes">Możliwy do zalogowania tylko na Opencaching</string>
+  <string name="attribute_oc_only_no">Mozliwy do zalogowanie nie tylko na Opencaching</string>
+  <string name="attribute_link_only_yes">Hiperłączę tylko do innego portalu</string>
+  <string name="attribute_link_only_no">Hiperłącze nie tylko do innego portalu</string>
+  <string name="attribute_letterbox_yes">Letterbox (wymaga pieczątki)</string>
+  <string name="attribute_letterbox_no">Nie letterbox (pieczątka nie jest wymagana)</string>
+  <string name="attribute_railway_yes">Czynna stacja kolejowa w pobliżu</string>
+  <string name="attribute_railway_no">Nieczynna stacja kolejowa w pobliżu</string>
+  <string name="attribute_syringe_yes">Pierwsza pomoc dostępna</string>
+  <string name="attribute_syringe_no">Pierwsza pomoc niedostępna</string>
+  <string name="attribute_swamp_yes">Bagna lub mokradła</string>
+  <string name="attribute_swamp_no">Brak bagien lub mokradeł</string>
+  <string name="attribute_hills_yes">Pagórki</string>
+  <string name="attribute_hills_no">Brak pagórków</string>
+  <string name="attribute_poi_yes">Ciekawe miejsce</string>
+  <string name="attribute_poi_no">Brak ciekawych miejsc</string>
+  <string name="attribute_moving_target_yes">Skrzynka moblina</string>
+  <string name="attribute_moving_target_no">Nie jest to skrzynka mobilna</string>
+  <string name="attribute_webcam_yes"> Skrzynka webcam</string>
+  <string name="attribute_webcam_no">Nie jest to skrzynka webcam</string>
+  <string name="attribute_inside_yes">W zamkniętych pamieszczeniach (jaskninie, budynki itd.)</string>
+  <string name="attribute_inside_no">Nie w zamkniętych pomieszczeniach</string>
+  <string name="attribute_in_water_yes">W wodzie</string>
+  <string name="attribute_in_water_no">Nie w wodzie</string>
+  <string name="attribute_no_gps_yes" >GPS nie jest konieczny  (letterboxy, skrzynki do znalezienia z użyciem kompasu, …)</string>
+  <string name="attribute_no_gps_no">Konieczny GPS</string>
+  <string name="attribute_overnight_yes">Konieczny nocleg</string>
+  <string name="attribute_overnight_no">Nocleg nie jest konieczny</string>
+  <string name="attribute_specific_times_yes">Dostępna tylko w określonym czasie</string>
+  <string name="attribute_specific_times_no">Dostępna niezależnie od czasu</string>
+  <string name="attribute_day_yes">Dostępna jedynie w ciągu dnia</string>
+  <string name="attribute_day_no">Dostępna nie tylko w ciągu dnia</string>
+  <string name="attribute_tide_yes">Przed rozpoczęciem poszukiwań sprawdź przypływ</string>
+  <string name="attribute_tide_no">Nie jest konieczne sprawdzanie przypływu przed rozpoczęciem poszukiwań</string>
+  <string name="attribute_all_seasons_yes">Dostępna przez cały rok</string>
+  <string name="attribute_all_seasons_no">Dostępna nie przez cały rok</string>
+  <string name="attribute_breeding_yes">Dostępna w okres lęgowym/ obszarze chronionym</string>
+  <string name="attribute_breeding_no">Niedostepna w okresie lęgowym / obszarze chronionym</string>
+  <string name="attribute_snow_proof_yes">W miejscu odpornym na śnieg</string>
+  <string name="attribute_snow_proof_no">Nie w miejscu odpornym na śnieg</string>
+  <string name="attribute_compass_yes">Kompas</string>
+  <string name="attribute_compass_no">Kompas niepotrzebny</string>
+  <string name="attribute_cave_yes">Potrzebny sprzęt jaskiniowy </string>
+  <string name="attribute_cave_no">Sprzęt jaskiniowy niepotrzebny</string>
+  <string name="attribute_aircraft_yes"> Do skrzynki można dotrzeć jedynie samolotem</string>
+  <string name="attribute_aircraft_no">Dostęp do skrzynki nie tylko drogą lotniczą</string>
+  <string name="attribute_investigation_yes">Detektywistyka</string>
+  <string name="attribute_investigation_no">Detektywistyka nie jest wymagana</string>
+  <string name="attribute_puzzle_yes">Puzzle / Zagadka</string>
+  <string name="attribute_puzzle_no"> nie jest to Puzzle / Zagadka</string>
+  <string name="attribute_arithmetic_yes">Zagadka arytmetyczna</string>
+  <string name="attribute_arithmetic_no">Nie jest to zagadka arytmetyczna</string>
+  <string name="attribute_other_cache_yes">Inny typ skrzynki</string>
+  <string name="attribute_other_cache_no">Nie jest to inny typ skrzynki</string>
+  <string name="attribute_ask_owner_yes">Zapytaj założyciela o specjalne warunki przed rozpoczęciem poszukiwań</string>
+  <string name="attribute_ask_owner_no">Kontakt z założycielem przed rozpoczęciem poszukiwań nie jest konieczny</string>
+  <string name="attribute_unknown_yes">Nieznany atrybut obecny</string>
+  <string name="attribute_unknown_no">Nie ma żadnego nieznanego atrybutu</string>
 
   <!-- next things -->
   <string name="legal_note">Aby móc korzystać z usług serwisu Geocaching.com <a href="http://www.geocaching.com/about/termsofuse.aspx">warunki korzystania Groundspeak</a> muszą być zaakceptowane.</string>
