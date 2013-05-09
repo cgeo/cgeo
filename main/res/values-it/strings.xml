@@ -1005,7 +1005,7 @@
   <string name="attribute_inside_no">Senza aree interne</string>
   <string name="attribute_in_water_yes">In acqua</string>
   <string name="attribute_in_water_no">Non in acqua</string>
-  <string name="attribute_no_gps_yes">Senza GPS (lettere, cistes, carta e bussola...)</string>
+  <string name="attribute_no_gps_yes">Senza GPS (lettere, cistes, carta e bussola…)</string>
   <string name="attribute_no_gps_no">Con GPS</string>
   <string name="attribute_overnight_yes">Necessario permanere di notte</string>
   <string name="attribute_overnight_no">Permanenza notturna non necessaria</string>

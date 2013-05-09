@@ -1785,7 +1785,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));                            }
                         };
                         final FragmentManager fm = getSupportFragmentManager();
-                        final EditNoteDialog dialog = new EditNoteDialog(cache.getPersonalNote());
+                        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
                         dialog.show(fm, "fragment_edit_note");
                     }
                 });

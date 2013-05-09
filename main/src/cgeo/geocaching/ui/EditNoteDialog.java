@@ -21,6 +21,8 @@ public class EditNoteDialog extends DialogFragment implements OnEditorActionList
         void onFinishEditNoteDialog(final String inputText);
     }
 
+    public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
+
     private EditText mEditText;
     private String initialNote;
 
@@ -28,8 +30,14 @@ public class EditNoteDialog extends DialogFragment implements OnEditorActionList
         // Empty constructor required for DialogFragment
     }
 
-    public EditNoteDialog(final String initialNote) {
-        this.initialNote = initialNote;
+    public static EditNoteDialog newInstance(final String initialNote) {
+        EditNoteDialog dialog = new EditNoteDialog();
+
+        Bundle arguments = new Bundle();
+        arguments.putString(EditNoteDialog.ARGUMENT_INITIAL_NOTE, initialNote);
+        dialog.setArguments(arguments);
+
+        return dialog;
     }
 
     @Override
@@ -37,6 +45,7 @@ public class EditNoteDialog extends DialogFragment implements OnEditorActionList
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_note, container);
         mEditText = (EditText) view.findViewById(R.id.note);
+        initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             mEditText.setText(initialNote);
             initialNote = null;
