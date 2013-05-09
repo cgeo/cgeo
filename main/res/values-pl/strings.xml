@@ -126,6 +126,7 @@
   <string name="log_image_camera">Nowy</string>
   <string name="log_image_caption">Podpis</string>
   <string name="log_image_description">Opis</string>
+  <string name="log_image_scale">Skalowanie obrazu</string>
   
   <!-- translation -->
   <string name="translate_to_sys_lang">Przetłumacz na %s</string>
@@ -175,7 +176,7 @@
   <string name="err_missing_device_name">Proszę podać nazwę urządzenia przed zarejestrowaniem.</string>
   <string name="err_favorite_failed">Zmiana statusu skrzynki ulubiona nie powiodła się.</string>
   <string name="err_select_logimage_failed">Nie można wybrać obrazu.</string>
-  <string name="err_aquire_image_failed">NIe można pobrać obrazu.</string>
+  <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
 
   <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
   <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
@@ -596,6 +597,8 @@
   <string name="cache_status_disabled">Niedostępna</string>
   <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
   <string name="cache_status_not_premium">Dostępna dla wszystkich użytkowników</string>
+  <string name="cache_status_stored">Zapisano</string>
+  <string name="cache_status_not_stored">Nie zapisano</string>
   <string name="cache_geocode">GC-kod</string>
   <string name="cache_name">Nazwa</string>
   <string name="cache_type">Typ</string>
@@ -991,6 +994,8 @@
   <string name="attribute_swamp_no">Brak bagien lub mokradeł</string>
   <string name="attribute_hills_yes">Pagórki</string>
   <string name="attribute_hills_no">Brak pagórków</string>
+  <string name="attribute_easy_climbing_yes">Łatwa wspinaczka </string>
+  <string name="attribute_easy_climbing_no">Nie jest to łatwa wspinaczka</string>
   <string name="attribute_poi_yes">Ciekawe miejsce</string>
   <string name="attribute_poi_no">Brak ciekawych miejsc</string>
   <string name="attribute_moving_target_yes">Skrzynka moblina</string>
