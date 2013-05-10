@@ -126,6 +126,14 @@
   <string name="log_image_camera">Ny</string>
   <string name="log_image_caption">Bildtext</string>
   <string name="log_image_description">Beskrivning</string>
+  <string name="log_image_scale">Skalning</string>
+  <string-array name="log_image_scales">
+      <item>Ingen skalning</item>
+      <item>512 px</item>
+      <item>640 px</item>
+      <item>800 px</item>
+      <item>1024 px</item>
+  </string-array>
 
   <!-- translation -->
   <string name="translate_to_sys_lang">Översätt till %s</string>
@@ -374,7 +382,7 @@
   <string name="init_login_popup_working">Testar inloggning mot gc.com…</string>
   <string name="init_login_popup_ok">Inloggning OK</string>
   <string name="init_login_popup_failed">Inloggning misslyckades</string>
-  <string name="init_login_popup_failed_reason">Inloggning misslyckades pga </string>
+  <string name="init_login_popup_failed_reason">Inloggning misslyckades:</string>
   <string name="init_twitter_authorize">Inställningar för Twitter</string>
   <string name="init_twitter_publish">Publicera status när en cache hittats</string>
   <string name="init_signature">Signatur</string>
@@ -596,6 +604,8 @@
   <string name="cache_status_disabled">Inaktiverad</string>
   <string name="cache_status_premium">Enbart för Premium medlemmar</string>
   <string name="cache_status_not_premium">Tillgänglig för alla medlemmar</string>
+  <string name="cache_status_stored">Sparad</string>
+  <string name="cache_status_not_stored">Ej sparad</string>
   <string name="cache_geocode">GC-kod</string>
   <string name="cache_name">Namn</string>
   <string name="cache_type">Typ</string>
@@ -869,4 +879,10 @@
       <item quantity="one">igår</item>
       <item quantity="other">%d dagar sedan</item>
   </plurals>
+  <string name="tts_service">Talande kompass</string>
+  <string name="tts_start">Starta tal</string>
+  <string name="tts_stop">Stoppa tal</string>
+  <string name="tts_kilometers">%s kilometer</string>
+  <string name="tts_meters">%s meter</string>
+  <string name="tts_oclock">Klockan %s</string>
 </resources>
