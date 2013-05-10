@@ -7,7 +7,9 @@
 
     <LinearLayout style="@style/action_bar" >
 
-        <include layout="@layout/actionbar_title_no_home" />
+        <TextView
+            style="@style/action_bar_title"
+            android:text="@string/cache_coordinates" />
     </LinearLayout>
 
     <ScrollView
