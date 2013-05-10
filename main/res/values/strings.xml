@@ -1075,4 +1075,10 @@
       <item quantity="one">yesterday</item>
       <item quantity="other">%d days ago</item>
   </plurals>
+  <string name="tts_service">Talking compass</string>
+  <string name="tts_start">Start talking</string>
+  <string name="tts_stop">Stop talking</string>
+  <string name="tts_kilometers">%s kilometers</string>
+  <string name="tts_meters">%s meters</string>
+  <string name="tts_oclock">%s o\'clock</string>
 </resources>

@@ -1061,4 +1061,10 @@
       <item quantity="one">gestern</item>
       <item quantity="other">vor %d Tagen</item>
   </plurals>
+  <string name="tts_service">Sprechender Kompass</string>
+  <string name="tts_start">Starte Sprache</string>
+  <string name="tts_stop">Stoppe Sprache</string>
+  <string name="tts_kilometers">%s Kilometer</string>
+  <string name="tts_meters">%s Meter</string>
+  <string name="tts_oclock">%s Uhr</string>
 </resources>

@@ -22,4 +22,15 @@
         android:title="@string/destination_select">
         <menu/> <!-- filled dynamically -->
     </item>
+    <item
+        android:id="@+id/menu_tts_start"
+        android:icon="@drawable/ic_menu_start_conversation"
+        android:title="@string/tts_start">
+    </item>
+    <item
+        android:id="@+id/menu_tts_stop"
+        android:icon="@drawable/ic_menu_start_conversation"
+        android:title="@string/tts_stop"
+        android:visible="false">
+    </item>
 </menu>

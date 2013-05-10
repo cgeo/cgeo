@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -96,6 +97,7 @@ public class CompassActivity extends AbstractActivity {
     @Override
     public void onDestroy() {
         compassView.destroyDrawingCache();
+        SpeechService.stopService(this);
         super.onDestroy();
     }
 
@@ -119,6 +121,8 @@ public class CompassActivity extends AbstractActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_switch_compass_gps).setTitle(res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
+        menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
+        menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
         return true;
     }
 
@@ -144,6 +148,12 @@ public class CompassActivity extends AbstractActivity {
                 startActivity(pointIntent);
 
                 finish();
+                return true;
+            case R.id.menu_tts_start:
+                SpeechService.startService(this, dstCoords);
+                return true;
+            case R.id.menu_tts_stop:
+                SpeechService.stopService(this);
                 return true;
             default:
                 int coordinatesIndex = id - COORDINATES_OFFSET;

@@ -230,6 +230,10 @@
 		<activity
 			android:name=".ImageSelectActivity"
 			android:label="@string/log_image">
-		</activity>		
-	</application>
+		</activity>
+		<service
+            android:name=".speech.SpeechService"
+            android:label="@string/tts_service" >
+        </service>
+</application>
 </manifest>
