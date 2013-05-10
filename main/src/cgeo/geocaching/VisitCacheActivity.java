@@ -13,6 +13,7 @@ import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
@@ -353,7 +354,10 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         date = Calendar.getInstance();
         rating = 0.0;
         if (cache.isEventCache()) {
-            if (cache.hasOwnLog(LogType.WILL_ATTEND)) {
+            final Date eventDate = cache.getHiddenDate();
+            boolean expired = DateUtils.daysSince(eventDate.getTime()) > 0;
+
+            if (cache.hasOwnLog(LogType.WILL_ATTEND) || expired) {
                 typeSelected = LogType.ATTENDED;
             }
             else {
