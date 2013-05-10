@@ -21,13 +21,14 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
+import cgeo.geocaching.ui.EditNoteDialog;
+import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.ImagesList;
-import cgeo.geocaching.ui.ImagesList.ImageType;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.ui.dialog.EditorDialog;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -65,6 +66,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
@@ -112,7 +114,8 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> {
+public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page>
+    implements EditNoteDialogListener {
 
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
@@ -138,6 +141,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private Geocache cache;
     private final Progress progress = new Progress();
     private SearchResult search;
+
+    private EditNoteDialogListener editNoteDialogListener;
 
     private final GeoDirHandler locationUpdater = new GeoDirHandler() {
         @Override
@@ -187,19 +192,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     };
     protected ImagesList imagesList;
 
-    public CacheDetailActivity() {
-        // identifier for manual
-        super("c:geolocation-cache-details");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // initialize the main view and set a default title
-        setTheme();
-        setContentView(R.layout.cacheview);
-        setTitle(res.getString(R.string.cache));
+        super.onCreate(savedInstanceState, R.layout.cacheview);
 
         String geocode = null;
 
@@ -795,7 +790,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     /**
      * Wrapper for the referenced method in the xml-layout.
      */
-    public void startDefaultNavigation(@SuppressWarnings("unused") View view) {
+    public void goDefaultNavigation(@SuppressWarnings("unused") View view) {
         startDefaultNavigation();
     }
 
@@ -899,7 +894,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
         imagesList = new ImagesList(this, cache.getGeocode());
-        imagesList.loadImages(imageView, cache.getImages(), ImageType.AllImages, false);
+        imagesList.loadImages(imageView, cache.getImages(), false);
     }
 
     public static void startActivity(final Context context, final String geocode) {
@@ -1163,7 +1158,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // favorite count
             if (cache.getFavoritePoints() > 0) {
-                details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+                details.add(R.string.cache_favorite, cache.getFavoritePoints() + "×");
             }
 
             // own rating
@@ -1202,23 +1197,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // cache coordinates
             if (cache.getCoords() != null) {
                 TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
-                valueView.setOnClickListener(new View.OnClickListener() {
-                    private int position = 0;
-                    private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
-                            GeopointFormatter.Format.LAT_LON_DECMINUTE,
-                            GeopointFormatter.Format.LAT_LON_DECSECOND,
-                            GeopointFormatter.Format.LAT_LON_DECDEGREE
-                    };
-
-                    // rotate coordinate formats on click
-                    @Override
-                    public void onClick(View view) {
-                        position = (position + 1) % availableFormats.length;
-
-                        final TextView valueView = (TextView) view.findViewById(R.id.value);
-                        valueView.setText(cache.getCoords().format(availableFormats[position]));
-                    }
-                });
+                valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
                 registerForContextMenu(valueView);
             }
 
@@ -1351,6 +1330,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 if (progress.isShowing()) {
                     showToast(res.getString(R.string.err_detail_still_working));
+                    return;
+                }
+
+                if (!Network.isNetworkConnected(getApplicationContext())) {
+                    showToast(getString(R.string.err_server));
                     return;
                 }
 
@@ -1498,7 +1482,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
-        /** Thread to add this cache to the favourite list of the user */
+        /** Thread to add this cache to the favorite list of the user */
         private class FavoriteAddThread extends Thread {
             private final Handler handler;
 
@@ -1512,7 +1496,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
-        /** Thread to remove this cache to the favourite list of the user */
+        /** Thread to remove this cache to the favorite list of the user */
         private class FavoriteRemoveThread extends Thread {
             private final Handler handler;
 
@@ -1539,25 +1523,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /**
-         * Listener for "add to favourites" button
+         * Listener for "add to favorites" button
          */
         private class FavoriteAddClickListener extends AbstractWatchlistClickListener {
             @Override
             public void onClick(View arg0) {
-                doExecute(R.string.cache_dialog_favourite_add_title,
-                        R.string.cache_dialog_favourite_add_message,
+                doExecute(R.string.cache_dialog_favorite_add_title,
+                        R.string.cache_dialog_favorite_add_message,
                         new FavoriteAddThread(new FavoriteUpdateHandler()));
             }
         }
 
         /**
-         * Listener for "remove from favourites" button
+         * Listener for "remove from favorites" button
          */
         private class FavoriteRemoveClickListener extends AbstractWatchlistClickListener {
             @Override
             public void onClick(View arg0) {
-                doExecute(R.string.cache_dialog_favourite_remove_title,
-                        R.string.cache_dialog_favourite_remove_message,
+                doExecute(R.string.cache_dialog_favorite_remove_title,
+                        R.string.cache_dialog_favorite_remove_message,
                         new FavoriteRemoveThread(new FavoriteUpdateHandler()));
             }
         }
@@ -1763,8 +1747,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                new LoadDescriptionTask().execute(cache.getShortDescription(), view.findViewById(R.id.shortdesc), null);
-                registerForContextMenu(view.findViewById(R.id.shortdesc));
+                new LoadDescriptionTask(cache.getShortDescription(), view.findViewById(R.id.shortdesc), null, null).execute();
             }
 
             // long description
@@ -1794,16 +1777,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 personalNoteEdit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        EditorDialog editor = new EditorDialog(CacheDetailActivity.this, personalNoteView.getText());
-                        editor.setOnEditorUpdate(new EditorDialog.EditorUpdate() {
+                        editNoteDialogListener = new EditNoteDialogListener() {
                             @Override
-                            public void update(CharSequence editorText) {
-                                cache.setPersonalNote(editorText.toString());
+                            public void onFinishEditNoteDialog(final String note) {
+                                cache.setPersonalNote(note);
                                 setPersonalNote(personalNoteView);
-                                cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-                            }
-                        });
-                        editor.show();
+                                cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));                            }
+                        };
+                        final FragmentManager fm = getSupportFragmentManager();
+                        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
+                        dialog.show(fm, "fragment_edit_note");
                     }
                 });
             } else {
@@ -1866,8 +1849,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
             if (StringUtils.isNotBlank(personalNote)) {
                 personalNoteView.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 personalNoteView.setVisibility(View.GONE);
             }
         }
@@ -1878,10 +1860,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             showDesc.setOnClickListener(null);
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
-            new LoadDescriptionTask().execute(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading));
-            registerForContextMenu(view.findViewById(R.id.longdesc));
+            new LoadDescriptionTask(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading), view.findViewById(R.id.shortdesc)).execute();
         }
 
+    }
+
+    @Override
+    public void onFinishEditNoteDialog(final String note) {
+        editNoteDialogListener.onFinishEditNoteDialog(note);
     }
 
     private static class HtmlImageCounter implements Html.ImageGetter {
@@ -1910,28 +1896,33 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      * </ol>
      */
     private class LoadDescriptionTask extends AsyncTask<Object, Void, Void> {
-        private View loadingIndicatorView;
-        private TextView descriptionView;
-        private String descriptionString;
+        private final View loadingIndicatorView;
+        private final TextView descriptionView;
+        private final String descriptionString;
         private Spanned description;
+        private final View shortDescView;
 
+        public LoadDescriptionTask(final String description, final View descriptionView, final View loadingIndicatorView, final View shortDescView) {
+            this.descriptionString = description;
+            this.descriptionView = (TextView) descriptionView;
+            this.loadingIndicatorView = loadingIndicatorView;
+            this.shortDescView = shortDescView;
+        }
 
         @Override
         protected Void doInBackground(Object... params) {
             try {
-                descriptionString = ((String) params[0]);
-                descriptionView = (TextView) params[1];
-                loadingIndicatorView = (View) params[2];
-
                 // Fast preview: parse only HTML without loading any images
                 HtmlImageCounter imageCounter = new HtmlImageCounter();
                 final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
                 description = Html.fromHtml(descriptionString, imageCounter, unknownTagsHandler);
                 publishProgress();
+
+                boolean needsRefresh = false;
                 if (imageCounter.getImageCount() > 0) {
                     // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
                     description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
-                    publishProgress();
+                    needsRefresh = true;
                 }
 
                 // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
@@ -1943,6 +1934,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
                     ((Editable) description).append("\n\n").append(tableNote);
                     ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    needsRefresh = true;
+                }
+
+                if (needsRefresh) {
                     publishProgress();
                 }
             } catch (Exception e) {
@@ -1951,25 +1946,40 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return null;
         }
 
-        /*
-         * (non-Javadoc)
-         *
-         * @see android.os.AsyncTask#onProgressUpdate(Progress[])
-         */
         @Override
         protected void onProgressUpdate(Void... values) {
-            if (description != null) {
-                if (StringUtils.isNotBlank(descriptionString)) {
-                    descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                    fixBlackTextColor(descriptionView, descriptionString);
-                }
-
-                descriptionView.setVisibility(View.VISIBLE);
-            } else {
+            if (description == null) {
                 showToast(res.getString(R.string.err_load_descr_failed));
+                return;
             }
+            if (StringUtils.isNotBlank(descriptionString)) {
+                descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                fixBlackTextColor(descriptionView, descriptionString);
+                descriptionView.setVisibility(View.VISIBLE);
+                registerForContextMenu(descriptionView);
 
+                hideDuplicatedShortDescription();
+            }
+        }
+
+        /**
+         * Hide the short description, if it is contained somewhere at the start of the long description.
+         */
+        private void hideDuplicatedShortDescription() {
+            if (shortDescView != null) {
+                final String shortDescription = cache.getShortDescription();
+                if (StringUtils.isNotBlank(shortDescription)) {
+                    int index = descriptionString.indexOf(shortDescription);
+                    if (index >= 0 && index < 200) {
+                        shortDescView.setVisibility(View.GONE);
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
             if (null != loadingIndicatorView) {
                 loadingIndicatorView.setVisibility(View.GONE);
             }
@@ -2095,7 +2105,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         if (imageCounter.getImageCount() > 0) {
                             // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
                             LogImageLoader loader = new LogImageLoader(holder);
-                            loader.execute(new String[] { logText });
+                            loader.execute(logText);
                         }
                     }
                     else {
@@ -2206,6 +2216,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 // coordinates
                 if (null != wpt.getCoords()) {
                     final TextView coordinatesView = (TextView) waypointView.findViewById(R.id.coordinates);
+                    coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(wpt.getCoords()));
                     coordinatesView.setText(wpt.getCoords().toString());
                     coordinatesView.setVisibility(View.VISIBLE);
                 }

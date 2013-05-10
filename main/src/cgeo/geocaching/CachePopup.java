@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
@@ -64,7 +65,7 @@ public class CachePopup extends AbstractPopupActivity {
     }
 
     public CachePopup() {
-        super("c:geo-cache-info", R.layout.popup);
+        super(R.layout.popup);
     }
 
     @Override
@@ -157,6 +158,11 @@ public class CachePopup extends AbstractPopupActivity {
         public void onClick(View arg0) {
             if (progress.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_working));
+                return;
+            }
+
+            if (!Network.isNetworkConnected(getApplicationContext())) {
+                showToast(getString(R.string.err_server));
                 return;
             }
 

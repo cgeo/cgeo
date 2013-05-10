@@ -108,17 +108,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         }
     };
 
-    public TrackableActivity() {
-        super("c:geo-trackable-details");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.trackable_activity);
-        setTitle(res.getString(R.string.trackable));
+        super.onCreate(savedInstanceState, R.layout.trackable_activity);
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -398,18 +390,18 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             private final TextView type;
             private final TextView author;
             private final TextView location;
-            private final TextView log;
+            private final TextView text;
+            private final TextView images;
             private final ImageView marker;
-            private final LinearLayout logImages;
 
             public LogViewHolder(View rowView) {
                 added = ((TextView) rowView.findViewById(R.id.added));
                 type = ((TextView) rowView.findViewById(R.id.type));
                 author = ((TextView) rowView.findViewById(R.id.author));
                 location = ((TextView) rowView.findViewById(R.id.location));
-                log = (TextView) rowView.findViewById(R.id.log);
+                text = (TextView) rowView.findViewById(R.id.log);
+                images = (TextView) rowView.findViewById(R.id.log_images);
                 marker = (ImageView) rowView.findViewById(R.id.log_mark);
-                logImages = (LinearLayout) rowView.findViewById(R.id.log_layout);
             }
         }
 
@@ -440,7 +432,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             return view;
         }
 
-        protected void fillViewHolder(LogViewHolder holder, LogEntry log) {
+        protected void fillViewHolder(LogViewHolder holder, final LogEntry log) {
             if (log.date > 0) {
                 holder.added.setText(Formatter.formatShortDate(log.date));
             }
@@ -462,7 +454,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 });
             }
 
-            TextView logView = holder.log;
+            TextView logView = holder.text;
             logView.setMovementMethod(LinkMovementMethod.getInstance());
 
             String logText = log.log;
@@ -485,25 +477,18 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 statusMarker.setVisibility(View.GONE);
             }
 
-            // add LogImages
-            LinearLayout logLayout = holder.logImages;
-
+            // images
             if (log.hasLogImages()) {
-
-                final ArrayList<Image> logImages = new ArrayList<Image>(log.getLogImages());
-
-                final View.OnClickListener listener = new View.OnClickListener() {
+                holder.images.setText(log.getImageTitles());
+                holder.images.setVisibility(View.VISIBLE);
+                holder.images.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ImagesActivity.startActivityLogImages(TrackableActivity.this, trackable.getGeocode(), logImages);
+                        ImagesActivity.startActivityLogImages(TrackableActivity.this, trackable.getGeocode(), new ArrayList<Image>(log.getLogImages()));
                     }
-                };
-
-                LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.trackable_logs_img, null);
-                TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
-                log_img_title.setText(log.getImageTitles());
-                log_img_title.setOnClickListener(listener);
-                logLayout.addView(log_imgView);
+                });
+            } else {
+                holder.images.setVisibility(View.GONE);
             }
 
             holder.author.setOnClickListener(new UserActionsListener());

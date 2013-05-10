@@ -29,10 +29,6 @@ import java.util.Map;
  */
 public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends AbstractActivity {
 
-    protected AbstractViewPagerActivity(String helpTopic) {
-        super(helpTopic);
-    }
-
     /**
      * A {@link List} of all available pages.
      *

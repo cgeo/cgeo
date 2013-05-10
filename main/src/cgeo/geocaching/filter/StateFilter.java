@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 abstract class StateFilter extends AbstractFilter {
 
@@ -86,17 +87,41 @@ abstract class StateFilter extends AbstractFilter {
         }
     }
 
+    static class StateStoredFilter extends StateFilter {
+        public StateStoredFilter() {
+            super(res.getString(R.string.cache_status_stored));
+        }
+
+        @Override
+        public boolean accepts(Geocache cache) {
+            return cache.isOffline();
+        }
+    }
+
+    static class StateNotStoredFilter extends StateFilter {
+        public StateNotStoredFilter() {
+            super(res.getString(R.string.cache_status_not_stored));
+        }
+
+        @Override
+        public boolean accepts(Geocache cache) {
+            return !cache.isOffline();
+        }
+    }
+
     public static class Factory implements IFilterFactory {
 
         @Override
-        public IFilter[] getFilters() {
-            final ArrayList<StateFilter> filters = new ArrayList<StateFilter>();
+        public List<StateFilter> getFilters() {
+            final List<StateFilter> filters = new ArrayList<StateFilter>(6);
             filters.add(new StateFoundFilter());
             filters.add(new StateArchivedFilter());
             filters.add(new StateDisabledFilter());
             filters.add(new StatePremiumFilter());
             filters.add(new StateNonPremiumFilter());
             filters.add(new StateOfflineLogFilter());
+            filters.add(new StateStoredFilter());
+            filters.add(new StateNotStoredFilter());
 
             Collections.sort(filters, new Comparator<StateFilter>() {
 
@@ -106,7 +131,7 @@ abstract class StateFilter extends AbstractFilter {
                 }
             });
 
-            return filters.toArray(new StateFilter[filters.size()]);
+            return filters;
         }
 
     }

@@ -46,7 +46,7 @@ public class TypeFilterTest extends CGeoTestCase {
 
     public static void testGetAllFilters() {
         final int expectedEntries = CacheType.values().length - 1; // hide "all"
-        assertEquals(expectedEntries, new TypeFilter.Factory().getFilters().length);
+        assertEquals(expectedEntries, new TypeFilter.Factory().getFilters().size());
     }
 
 }

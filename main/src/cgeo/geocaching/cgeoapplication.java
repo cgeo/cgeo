@@ -103,8 +103,8 @@ public class cgeoapplication extends Application {
                     boolean restored = atomic.get();
                     String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
                     ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_backup_restore), message);
-                    if (fromActivity instanceof cgeo) {
-                        ((cgeo) fromActivity).updateCacheCounter();
+                    if (fromActivity instanceof MainActivity) {
+                        ((MainActivity) fromActivity).updateCacheCounter();
                     }
                 }
             };

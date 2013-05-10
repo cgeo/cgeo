@@ -47,23 +47,19 @@ public class cgeonavigate extends AbstractActivity {
     private CompassView compassView = null;
 
     public cgeonavigate() {
-        super("c:geo-compass", true);
+        super(true);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.navigate);
-        setTitle(res.getString(R.string.compass_title));
+        super.onCreate(savedInstanceState, R.layout.navigate);
 
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             title = extras.getString(EXTRAS_GEOCODE);
             final String name = extras.getString(EXTRAS_NAME);
-            dstCoords = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
+            dstCoords = extras.getParcelable(EXTRAS_COORDS);
             info = extras.getString(EXTRAS_CACHE_INFO);
 
             if (StringUtils.isNotBlank(name)) {

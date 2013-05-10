@@ -24,7 +24,7 @@ public class ExportTest extends CGeoTestCase {
         assertEquals("Non matching export " + logStr.toString(), "GCX1234,2012-11-18T13:20:20Z,Found it,\"Hidden in a tree\"\n", logStr.toString());
     }
 
-    public static void testGpxExportSmilies() {
+    public static void testGpxExportSmilies() throws InterruptedException, ExecutionException {
         final Geocache cache = new Geocache();
         cache.setGeocode("GCX1234");
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
@@ -37,10 +37,6 @@ public class ExportTest extends CGeoTestCase {
         File result = null;
         try {
             result = gpxExport.testExportSync(exportList);
-        } catch (InterruptedException e) {
-            fail(e.getCause().toString());
-        } catch (ExecutionException e) {
-            fail(e.getCause().toString());
         } finally {
             cgData.removeCache(cache.getGeocode(), LoadFlags.REMOVE_ALL);
         }
@@ -57,10 +53,12 @@ public class ExportTest extends CGeoTestCase {
         }
 
         public File testExportSync(List<Geocache> caches) throws InterruptedException, ExecutionException {
-            ExportTask task = new ExportTask(caches, null);
-
-            task.execute((Void) null);
-
+            final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
+            for (final Geocache cache: caches) {
+                geocodes.add(cache.getGeocode());
+            }
+            final ExportTask task = new ExportTask(null);
+            task.execute(geocodes.toArray(new String[geocodes.size()]));
             return task.get();
         }
 

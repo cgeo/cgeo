@@ -1,17 +1,17 @@
 package cgeo.geocaching.compatibility;
 
-import cgeo.geocaching.cgeo;
+import cgeo.geocaching.MainActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 
 import junit.framework.Assert;
 
-public class CompatibilityTest extends ActivityInstrumentationTestCase2<cgeo> {
+public class CompatibilityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    private cgeo activity;
+    private MainActivity activity;
 
     public CompatibilityTest() {
-        super("cgeo.geocaching", cgeo.class);
+        super("cgeo.geocaching", MainActivity.class);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package cgeo.geocaching.activity;
 
+import butterknife.Views;
+
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -14,22 +16,15 @@ import android.widget.EditText;
 
 public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
 
-    final private String helpTopic;
-
     protected cgeoapplication app = null;
     protected Resources res = null;
     private boolean keepScreenOn = false;
 
     protected AbstractActivity() {
-        this(null);
+        this(false);
     }
 
-    protected AbstractActivity(final String helpTopic) {
-        this.helpTopic = helpTopic;
-    }
-
-    protected AbstractActivity(final String helpTopic, final boolean keepScreenOn) {
-        this(helpTopic);
+    protected AbstractActivity(final boolean keepScreenOn) {
         this.keepScreenOn = keepScreenOn;
     }
 
@@ -38,20 +33,15 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         ActivityMixin.goHome(this);
     }
 
-    @Override
-    public void goManual(final View view) {
-        ActivityMixin.goManual(this, helpTopic);
-    }
-
-    final public void setTitle(final String title) {
+    final protected void setTitle(final String title) {
         ActivityMixin.setTitle(this, title);
     }
 
-    final public void showProgress(final boolean show) {
+    final protected void showProgress(final boolean show) {
         ActivityMixin.showProgress(this, show);
     }
 
-    final public void setTheme() {
+    final protected void setTheme() {
         ActivityMixin.setTheme(this);
     }
 
@@ -70,22 +60,14 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         ActivityMixin.helpDialog(this, title, message);
     }
 
-    public final void helpDialog(final String title, final String message, final Drawable icon) {
+    protected final void helpDialog(final String title, final String message, final Drawable icon) {
         ActivityMixin.helpDialog(this, title, message, icon);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // init
-        res = this.getResources();
-        app = (cgeoapplication) this.getApplication();
-
-        // Restore cookie store if needed
-        Cookies.restoreCookieStore(Settings.getCookieStore());
-
-        ActivityMixin.keepScreenOn(this, keepScreenOn);
+        initializeCommonFields();
     }
 
     protected static void disableSuggestions(final EditText edit) {
@@ -128,4 +110,34 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         editText.setSelection(newCursor, newCursor);
     }
 
+    protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
+        super.onCreate(savedInstanceState);
+
+        initializeCommonFields();
+
+        // non declarative part of layout
+        setTheme();
+        setContentView(resourceLayoutID);
+
+        // create view variables
+        Views.inject(this);
+    }
+
+    private void initializeCommonFields() {
+        // initialize commonly used members
+        res = this.getResources();
+        app = (cgeoapplication) this.getApplication();
+
+        // only needed in some activities, but implemented in super class nonetheless
+        Cookies.restoreCookieStore(Settings.getCookieStore());
+        ActivityMixin.keepScreenOn(this, keepScreenOn);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        // initialize the action bar title with the activity title for single source
+        ActivityMixin.setTitle(this, getTitle());
+    }
 }

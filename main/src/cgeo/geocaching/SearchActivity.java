@@ -37,10 +37,6 @@ public class SearchActivity extends AbstractActivity {
     private EditText latEdit = null;
     private EditText lonEdit = null;
 
-    public SearchActivity() {
-        super("c:geo-search");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +60,6 @@ public class SearchActivity extends AbstractActivity {
 
         setTheme();
         setContentView(R.layout.search);
-        setTitle(res.getString(R.string.search));
 
         init();
     }
@@ -432,6 +427,6 @@ public class SearchActivity extends AbstractActivity {
         searchIntent.setAction(Intent.ACTION_SEARCH).
                 putExtra(SearchManager.QUERY, scan).
                 putExtra(Intents.EXTRA_KEYWORD_SEARCH, false);
-        fromActivity.startActivityForResult(searchIntent, cgeo.SEARCH_REQUEST_CODE);
+        fromActivity.startActivityForResult(searchIntent, MainActivity.SEARCH_REQUEST_CODE);
     }
 }

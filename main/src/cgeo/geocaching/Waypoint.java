@@ -275,7 +275,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         if (coords != null) {
             hash = coords.hashCode();
         }
-        hash = hash ^ waypointType.markerId;
+        hash ^= waypointType.markerId;
         return (int) hash;
     }
 }

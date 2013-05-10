@@ -484,7 +484,6 @@
   <string name="cache_attributes">Atribúty</string>
   <string name="cache_inventory">Obsah</string>
   <string name="cache_log_offline">Offline log</string>
-  <string name="cache_log_images_loading">Načítanie obrázku z logu…</string>
   <string name="cache_log_images_title">Obrázok z logu</string>
   <string name="cache_log_image_default_title">Fotografia</string>
   <string name="cache_personal_note">Osobná poznámka</string>
@@ -571,7 +570,7 @@
   <string name="cache_rating">Hodnotenie</string>
   <string name="cache_own_rating">Vlastné hodnotenie</string>
   <string name="cache_rating_of">z</string>
-  <string name="cache_favourite">Obľúbené</string>
+  <string name="cache_favorite">Obľúbené</string>
   <string name="cache_owner">Vlastník</string>
   <string name="cache_hidden">Skrytá</string>
   <string name="cache_event">Dátum</string>
@@ -579,9 +578,7 @@
   <string name="cache_coordinates">Súradnice</string>
   <string name="cache_coordinates_original">Pôvodné súradnice</string>
   <string name="cache_spoiler_images_title">Spoilerové obrázky</string>
-  <string name="cache_spoiler_images_loading">Načítanie spoilerových obrázkov…</string>
   <string name="cache_images_title">Obrázky</string>
-  <string name="cache_images_loading">Prebieha načítanie obrázkov…</string>
   <string name="cache_log_types">Typy záznamov</string>
   <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string>
   <string name="cache_clear_history">Vymazať históriu</string>
@@ -767,8 +764,6 @@
   <string name="license_dismiss">Zamietnutie</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manuál</string>
-  <string name="helper_manual_description">Obsiahly manuál pre c:geo, ktorý obsahuje popisy všetkých možností tejto aplikácie (dokonca i skrytých).</string>
   <string name="helper_calendar_title">Doplnok c:geo calendar</string>
   <string name="helper_calendar_missing">Doplnok c:geo calendar nie je nainštalovaný</string>
   <string name="helper_calendar_description">Umožní vám exportovať skrýše udalostí do kalendára na vašom zariadení.</string>

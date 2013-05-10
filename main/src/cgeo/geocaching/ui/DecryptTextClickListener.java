@@ -16,6 +16,12 @@ public class DecryptTextClickListener implements View.OnClickListener {
 
         try {
             final TextView logView = (TextView) view;
+
+            // do not run the click listener if a link was clicked
+            if (logView.getSelectionStart() != -1 || logView.getSelectionEnd() != -1) {
+                return;
+            }
+
             CharSequence text = logView.getText();
             if (text instanceof Spannable) {
                 Spannable span = (Spannable) text;

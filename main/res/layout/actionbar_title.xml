@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        style="@style/action_bar_action"
+        android:onClick="goHome" />
+
+    <View style="@style/action_bar_separator" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        style="@style/action_bar_title" />
+
+</merge>

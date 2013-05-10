@@ -7,6 +7,7 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
@@ -22,6 +23,7 @@ import android.os.Handler;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
@@ -185,6 +187,22 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         //make sure that waypoints are not duplicated
         cache = parseCache(R.raw.gc366bq);
         assertEquals(13, cache.getWaypoints().size());
+    }
+
+    public static void testNoteParsingWaypointTypes() {
+        final Geocache cache = new Geocache();
+        cache.setWaypoints(new ArrayList<Waypoint>(), false);
+        cache.setPersonalNote("\"Parking area at PARKING=N 50° 40.666E 006° 58.222\n" +
+                "My calculated final coordinates: FINAL=N 50° 40.777E 006° 58.111\n" +
+                "Get some ice cream at N 50° 40.555E 006° 58.000\"");
+
+        cache.parseWaypointsFromNote();
+        final List<Waypoint> waypoints = cache.getWaypoints();
+
+        assertEquals(3, waypoints.size());
+        assertEquals(WaypointType.PARKING, waypoints.get(0).getWaypointType());
+        assertEquals(WaypointType.FINAL, waypoints.get(1).getWaypointType());
+        assertEquals(WaypointType.WAYPOINT, waypoints.get(2).getWaypointType());
     }
 
     private Geocache parseCache(int resourceId) {

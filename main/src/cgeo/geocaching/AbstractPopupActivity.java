@@ -67,14 +67,23 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                     cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }
+                onUpdateGeoData(geo);
             } catch (Exception e) {
                 Log.w("Failed to UpdateLocation location.");
             }
         }
     };
 
-    protected AbstractPopupActivity(String helpTopic, int layout) {
-        super(helpTopic);
+    /**
+     * Callback to run when new location information is available.
+     * This may be overriden by deriving classes. The default implementation does nothing.
+     *
+     * @param geo the new data
+     */
+    public void onUpdateGeoData(final IGeoData geo) {
+    }
+
+    protected AbstractPopupActivity(int layout) {
         this.layout = layout;
     }
 
@@ -100,12 +109,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                 ratingHandler.sendMessage(msg);
             }
         }).start();
-    }
-
-    @Override
-    public void goManual(View view) {
-        super.goManual(view);
-        finish();
     }
 
     protected void init() {
@@ -134,7 +137,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         this.setTheme(ActivityMixin.getDialogTheme());
         // set layout
         setContentView(layout);
-        setTitle(res.getString(R.string.detail));
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -269,8 +271,8 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             aquireGCVote();
         }
 
-        // favourite count
-        details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+        // favorite count
+        details.add(R.string.cache_favorite, cache.getFavoritePoints() + "×");
 
         // more details
         final Button buttonMore = (Button) findViewById(R.id.more_details);

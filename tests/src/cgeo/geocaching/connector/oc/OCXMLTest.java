@@ -111,13 +111,13 @@ public class OCXMLTest extends CGeoTestCase {
     }
 
     public static void testRemoveMarkup() {
-        assertEquals("", OC11XMLParser.stripMarkup(""));
-        assertEquals("Test", OC11XMLParser.stripMarkup("Test"));
-        assertEquals("<b>bold and others not removed</b>", OC11XMLParser.stripMarkup("<b>bold and others not removed</b>"));
-        assertEquals("unnecessary paragraph", OC11XMLParser.stripMarkup("<p>unnecessary paragraph</p>"));
-        assertEquals("unnecessary span", OC11XMLParser.stripMarkup("<span>unnecessary span</span>"));
-        assertEquals("nested", OC11XMLParser.stripMarkup("<span><span>nested</span></span>"));
-        assertEquals("mixed", OC11XMLParser.stripMarkup("<span> <p> mixed </p> </span>"));
-        assertEquals("<p>not</p><p>removable</p>", OC11XMLParser.stripMarkup("<p>not</p><p>removable</p>"));
+        assertEquals("", OC11XMLParser.stripEmptyText(""));
+        assertEquals("Test", OC11XMLParser.stripEmptyText("Test"));
+        assertEquals("<b>bold and others not removed</b>", OC11XMLParser.stripEmptyText("<b>bold and others not removed</b>"));
+        assertEquals("unnecessary paragraph", OC11XMLParser.stripEmptyText("<p>unnecessary paragraph</p>"));
+        assertEquals("unnecessary span", OC11XMLParser.stripEmptyText("<span>unnecessary span</span>"));
+        assertEquals("nested", OC11XMLParser.stripEmptyText("<span><span>nested</span></span>"));
+        assertEquals("mixed", OC11XMLParser.stripEmptyText("<span> <p> mixed </p> </span>"));
+        assertEquals("<p>not</p><p>removable</p>", OC11XMLParser.stripEmptyText("<p>not</p><p>removable</p>"));
     }
 }

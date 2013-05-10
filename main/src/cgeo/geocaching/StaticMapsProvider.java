@@ -10,7 +10,6 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
@@ -81,10 +80,6 @@ public class StaticMapsProvider {
     }
 
     public static void downloadMaps(Geocache cache) {
-        if (cache == null) {
-            Log.e("downloadMaps - missing input parameter cache");
-            return;
-        }
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
@@ -96,8 +91,8 @@ public class StaticMapsProvider {
         }
 
         // clean old and download static maps for waypoints if one is missing
-        if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
-            for (Waypoint waypoint : cache.getWaypoints()) {
+        if (Settings.isStoreOfflineWpMaps()) {
+            for (final Waypoint waypoint : cache.getWaypoints()) {
                 if (!hasAllStaticMapsForWaypoint(cache.getGeocode(), waypoint)) {
                     refreshAllWpStaticMaps(cache, edge);
                 }
@@ -167,10 +162,6 @@ public class StaticMapsProvider {
     }
 
     public static void storeCachePreviewMap(final Geocache cache) {
-        if (cache == null) {
-            Log.e("storeCachePreviewMap - missing input parameter cache");
-            return;
-        }
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
@@ -183,12 +174,7 @@ public class StaticMapsProvider {
 
     private static int guessMaxDisplaySide() {
         Point displaySize = Compatibility.getDisplaySize();
-        final int maxWidth = displaySize.x - 25;
-        final int maxHeight = displaySize.y - 25;
-        if (maxWidth > maxHeight) {
-            return maxWidth;
-        }
-        return maxHeight;
+        return Math.max(displaySize.x, displaySize.y) - 25;
     }
 
     private static void downloadMaps(final String geocode, final String markerUrl, final String prefix, final String latlonMap, final int edge,
@@ -245,7 +231,7 @@ public class StaticMapsProvider {
 
     /**
      * Check if at least one map file exists for the given cache.
-     * 
+     *
      * @param cache
      * @return <code>true</code> if at least one map file exists; <code>false</code> otherwise
      */
@@ -268,7 +254,7 @@ public class StaticMapsProvider {
 
     /**
      * Checks if at least one map file exists for the given geocode and waypoint ID.
-     * 
+     *
      * @param geocode
      * @param waypoint
      * @return <code>true</code> if at least one map file exists; <code>false</code> otherwise
@@ -287,7 +273,7 @@ public class StaticMapsProvider {
 
     /**
      * Checks if all map files exist for the given geocode and waypoint ID.
-     * 
+     *
      * @param geocode
      * @param waypoint
      * @return <code>true</code> if all map files exist; <code>false</code> otherwise
@@ -326,5 +312,4 @@ public class StaticMapsProvider {
         }
         return null;
     }
-
 }

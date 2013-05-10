@@ -89,19 +89,9 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.twitter_authorization_activity);
-        setTitle(res.getString(R.string.auth_twitter));
+        super.onCreate(savedInstanceState, R.layout.twitter_authorization_activity);
 
         init();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
     }
 
     private void init() {

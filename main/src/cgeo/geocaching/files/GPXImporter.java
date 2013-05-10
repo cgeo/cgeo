@@ -171,10 +171,14 @@ public class GPXImporter {
 
         private boolean importStaticMaps(final SearchResult importedCaches) {
             int storedCacheMaps = 0;
-            for (String geocode : importedCaches.getGeocodes()) {
-                Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-                Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
-                StaticMapsProvider.downloadMaps(cache);
+            for (final String geocode : importedCaches.getGeocodes()) {
+                final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                if (cache != null) {
+                    Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
+                    StaticMapsProvider.downloadMaps(cache);
+                } else {
+                    Log.d("GPXImporter.ImportThread.importStaticMaps: no data found for " + geocode);
+                }
                 storedCacheMaps++;
                 if (progressHandler.isCancelled()) {
                     return false;

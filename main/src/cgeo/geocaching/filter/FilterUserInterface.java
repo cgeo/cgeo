@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public final class FilterUserInterface {
 
@@ -101,9 +102,9 @@ public final class FilterUserInterface {
     }
 
     private void selectFromFactory(final IFilterFactory factory, final String menuTitle, final RunnableWithArgument<IFilter> runAfterwards) {
-        final IFilter[] filters = factory.getFilters();
-        if (filters.length == 1) {
-            runAfterwards.run(filters[0]);
+        final List<IFilter> filters = Collections.unmodifiableList(factory.getFilters());
+        if (filters.size() == 1) {
+            runAfterwards.run(filters.get(0));
             return;
         }
 
@@ -114,7 +115,7 @@ public final class FilterUserInterface {
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                runAfterwards.run(filters[item]);
+                runAfterwards.run(filters.get(item));
             }
         });
 

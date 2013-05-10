@@ -20,10 +20,6 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
     private static final int MENU_SIGNATURE = 1;
     private static final int MENU_SMILEY = 2;
 
-    protected AbstractLoggingActivity(String helpTopic) {
-        super(helpTopic);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // signature menu

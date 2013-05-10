@@ -7,24 +7,9 @@
 
     <LinearLayout style="@style/action_bar" >
 
-        <ImageView
-            style="@style/action_bar_action"
-            android:onClick="goHome" />
+        <include layout="@layout/actionbar_title" />
 
-        <View style="@style/action_bar_separator" />
-
-        <TextView style="@style/action_bar_title" />
-
-        <View style="@style/action_bar_separator" />
-
-        <ProgressBar
-            style="@style/action_bar_progress"
-            android:visibility="gone" />
-
-        <ImageView
-            style="@style/action_bar_action"
-            android:onClick="goManual"
-            android:src="@drawable/actionbar_manual" />
+        <include layout="@layout/actionbar_progress" />
     </LinearLayout>
 
     <ScrollView
@@ -97,6 +82,13 @@
                 android:maxLength="250"
                 android:minLines="5"
                 android:singleLine="false" />
+
+            <Spinner
+                android:id="@+id/logImageScale"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/log_image_scales"
+                android:prompt="@string/log_image_scale" />
 
             <LinearLayout
                 android:layout_width="fill_parent"

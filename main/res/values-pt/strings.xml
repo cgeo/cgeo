@@ -484,7 +484,6 @@
   <string name="cache_attributes">Atributos</string>
   <string name="cache_inventory">Inventário</string>
   <string name="cache_log_offline">Registo Offline</string>
-  <string name="cache_log_images_loading">A carregar imagem do registo…</string>
   <string name="cache_log_images_title">Imagem do registo</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota pessoal</string>
@@ -572,7 +571,7 @@
   <string name="cache_rating">Pontuação</string>
   <string name="cache_own_rating">A minha pontuação</string>
   <string name="cache_rating_of">de</string>
-  <string name="cache_favourite">Favorita</string>
+  <string name="cache_favorite">Favorita</string>
   <string name="cache_owner">Dono</string>
   <string name="cache_hidden">Escondida</string>
   <string name="cache_event">Data</string>
@@ -580,9 +579,7 @@
   <string name="cache_coordinates">Coordenadas</string>
   <string name="cache_coordinates_original">Coordenadas originais</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
-  <string name="cache_spoiler_images_loading">A carregar imagens spoiler…</string>
   <string name="cache_images_title">Imagens</string> 
-  <string name="cache_images_loading">A carregar as imagens…</string>
   <string name="cache_log_types">Tipos de log</string>
   <string name="cache_coordinates_no">Esta cache não tem coordenadas.</string>
   <string name="cache_clear_history">Apagar histórico</string>
@@ -766,8 +763,6 @@
   <string name="license_dismiss">Dispensar</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manual</string>
-  <string name="helper_manual_description">Manual prático do c:geo, que contém a descrição de todas as funcionalidades desta aplicação (mesmo as que estão escondidas).</string>
   <string name="helper_calendar_title">Add on calendário para c:geo </string>
   <string name="helper_calendar_missing">Add on calendário para o c:geo não está instalado.</string>
   <string name="helper_calendar_description">Permite exportar caches evento para o calendário do seu dispositivo.</string>

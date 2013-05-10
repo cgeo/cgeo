@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,14 +11,18 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -28,34 +33,31 @@ public class ImageSelectActivity extends AbstractActivity {
     static final String EXTRAS_CAPTION = "caption";
     static final String EXTRAS_DESCRIPTION = "description";
     static final String EXTRAS_URI_AS_STRING = "uri";
+    static final String EXTRAS_SCALE = "scale";
 
     private static final String SAVED_STATE_IMAGE_CAPTION = "cgeo.geocaching.saved_state_image_caption";
     private static final String SAVED_STATE_IMAGE_DESCRIPTION = "cgeo.geocaching.saved_state_image_description";
     private static final String SAVED_STATE_IMAGE_URI = "cgeo.geocaching.saved_state_image_uri";
+    private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
 
     private static final int SELECT_NEW_IMAGE = 1;
     private static final int SELECT_STORED_IMAGE = 2;
 
     private EditText captionView;
     private EditText descriptionView;
+    private Spinner scaleView;
 
     // Data to be saved while reconfiguring
     private String imageCaption;
     private String imageDescription;
+    private int scaleChoiceIndex;
     private Uri imageUri;
-
-    public ImageSelectActivity() {
-        super("c:geo-selectimage");
-    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState, R.layout.visit_image);
 
-        setTheme();
-        setContentView(R.layout.visit_image);
-        setTitle(res.getString(R.string.log_image));
-
+        scaleChoiceIndex = Settings.getLogImageScale();
         imageCaption = "";
         imageDescription = "";
         imageUri = Uri.EMPTY;
@@ -66,6 +68,7 @@ public class ImageSelectActivity extends AbstractActivity {
             imageCaption = extras.getString(EXTRAS_CAPTION);
             imageDescription = extras.getString(EXTRAS_DESCRIPTION);
             imageUri = Uri.parse(extras.getString(EXTRAS_URI_AS_STRING));
+            scaleChoiceIndex = extras.getInt(EXTRAS_SCALE, scaleChoiceIndex);
         }
 
         // Restore previous state
@@ -73,6 +76,7 @@ public class ImageSelectActivity extends AbstractActivity {
             imageCaption = savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
             imageDescription = savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
             imageUri = Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+            scaleChoiceIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
         }
 
         final Button cameraButton = (Button) findViewById(R.id.camera);
@@ -103,6 +107,20 @@ public class ImageSelectActivity extends AbstractActivity {
             descriptionView.setText(imageDescription);
         }
 
+        scaleView = (Spinner) findViewById(R.id.logImageScale);
+        scaleView.setSelection(scaleChoiceIndex);
+        scaleView.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                scaleChoiceIndex = scaleView.getSelectedItemPosition();
+                Settings.setLogImageScale(scaleChoiceIndex);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
         final Button saveButton = (Button) findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -131,15 +149,19 @@ public class ImageSelectActivity extends AbstractActivity {
         outState.putString(SAVED_STATE_IMAGE_CAPTION, imageCaption);
         outState.putString(SAVED_STATE_IMAGE_DESCRIPTION, imageDescription);
         outState.putString(SAVED_STATE_IMAGE_URI, imageUri != null ? imageUri.getPath() : StringUtils.EMPTY);
+        outState.putInt(SAVED_STATE_IMAGE_SCALE, scaleChoiceIndex);
     }
 
     public void saveImageInfo(boolean saveInfo) {
         if (saveInfo) {
+            String filename = writeScaledImage(imageUri.getPath());
+            imageUri = Uri.parse(filename);
             Intent intent = new Intent();
             syncEditTexts();
             intent.putExtra(EXTRAS_CAPTION, imageCaption);
             intent.putExtra(EXTRAS_DESCRIPTION, imageDescription);
             intent.putExtra(EXTRAS_URI_AS_STRING, imageUri.toString());
+            intent.putExtra(EXTRAS_SCALE, scaleChoiceIndex);
 
             setResult(RESULT_OK, intent);
         } else {
@@ -152,6 +174,7 @@ public class ImageSelectActivity extends AbstractActivity {
     private void syncEditTexts() {
         imageCaption = captionView.getText().toString();
         imageDescription = descriptionView.getText().toString();
+        scaleChoiceIndex = scaleView.getSelectedItemPosition();
     }
 
     private void selectImageFromCamera() {
@@ -231,8 +254,27 @@ public class ImageSelectActivity extends AbstractActivity {
         loadImagePreview();
     }
 
+    /**
+     * Scales and writes the scaled image.
+     *
+     * @param filePath
+     * @return
+     */
+    private String writeScaledImage(String filePath) {
+        Bitmap image = BitmapFactory.decodeFile(filePath);
+        scaleChoiceIndex = scaleView.getSelectedItemPosition();
+        int maxXY = getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
+        String uploadFilename = filePath;
+        if (maxXY > 0) {
+            BitmapDrawable scaledImage = ImageHelper.scaleBitmapTo(image, maxXY, maxXY);
+            uploadFilename = getOutputImageFile().getPath();
+            ImageHelper.storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
+        }
+        return uploadFilename;
+    }
+
     private void showFailure() {
-        showToast(getResources().getString(R.string.err_aquire_image_failed));
+        showToast(getResources().getString(R.string.err_acquire_image_failed));
     }
 
     private void loadImagePreview() {

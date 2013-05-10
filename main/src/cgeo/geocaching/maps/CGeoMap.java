@@ -382,9 +382,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (extras != null) {
             mapMode = (MapMode) extras.get(EXTRAS_MAP_MODE);
             isLiveEnabled = extras.getBoolean(EXTRAS_LIVE_ENABLED, false);
-            searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
+            searchIntent = extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
-            coordsIntent = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
+            coordsIntent = extras.getParcelable(EXTRAS_COORDS);
             waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
@@ -751,9 +751,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     @Override
                     public void onClick(DialogInterface dialog, int newItem) {
-                        if (newItem == selectedItem) {
-                            // no change
-                        } else {
+                        if (newItem != selectedItem) {
                             // Adjust index because of <default> selection
                             if (newItem > 0) {
                                 Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
@@ -1576,12 +1574,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public void goHome(View view) {
         ActivityMixin.goHome(activity);
-    }
-
-    // open manual entry
-    @Override
-    public void goManual(View view) {
-        ActivityMixin.goManual(activity, "c:geo-live-map");
     }
 
     @Override

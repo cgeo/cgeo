@@ -33,7 +33,7 @@ public class SizeFilterTest extends CGeoTestCase {
 
     public static void testGetAllFilters() {
         final int expectedSizes = CacheSize.values().length - 1; // hide "UNKNOWN"
-        assertEquals(expectedSizes, new SizeFilter.Factory().getFilters().length);
+        assertEquals(expectedSizes, new SizeFilter.Factory().getFilters().size());
     }
 
     public void testFilter() {

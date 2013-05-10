@@ -125,7 +125,15 @@
   <string name="log_image_camera">Neu</string>
   <string name="log_image_caption">Überschrift</string>
   <string name="log_image_description">Beschreibung</string>
-
+  <string name="log_image_scale">Skalierung</string>
+  <string-array name="log_image_scales">
+      <item>Keine Skalierung</item>
+      <item>512 px</item>
+      <item>640 px</item>
+      <item>800 px</item>
+      <item>1024 px</item>
+  </string-array>
+  
 <!-- translation -->
   <string name="translate_to_sys_lang">Übersetze in %s</string>
   <string name="translate_to_english">Übersetze in Englisch</string>
@@ -502,7 +510,6 @@
   <string name="cache_attributes">Attribute</string>
   <string name="cache_inventory">Inventar</string>
   <string name="cache_log_offline">Offline-Log</string>
-  <string name="cache_log_images_loading">Lade Logbild…</string>
   <string name="cache_log_images_title">Logbild</string>
   <string name="cache_log_image_default_title">Bild</string>
   <string name="cache_personal_note">Persönliche Notiz</string>
@@ -551,10 +558,10 @@
   <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
-  <string name="cache_dialog_favourite_add_title">Favorit</string>
-  <string name="cache_dialog_favourite_add_message">Füge den Cache als dein Favorit hinzu…</string>
-  <string name="cache_dialog_favourite_remove_title">Favorit</string>
-  <string name="cache_dialog_favourite_remove_message">Entferne den Cache von deinen Favoriten…</string>
+  <string name="cache_dialog_favorite_add_title">Favorit</string>
+  <string name="cache_dialog_favorite_add_message">Füge den Cache zu Favoriten hinzu…</string>
+  <string name="cache_dialog_favorite_remove_title">Favorit</string>
+  <string name="cache_dialog_favorite_remove_message">Entferne den Cache von deinen Favoriten…</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
   <string name="cache_menu_navigation_walk">Navigation (Gehen)</string>
@@ -585,6 +592,8 @@
   <string name="cache_status_disabled">Deaktiviert</string>
   <string name="cache_status_premium">Nur für Premium-Mitglieder</string>
   <string name="cache_status_not_premium">Für alle Mitglieder</string>
+  <string name="cache_status_stored">Gespeichert</string>
+  <string name="cache_status_not_stored">Nicht gespeichert</string>
   <string name="cache_geocode">Geocode</string>
   <string name="cache_name">Name</string>
   <string name="cache_type">Typ</string>
@@ -595,7 +604,7 @@
   <string name="cache_rating">Bewertung</string>
   <string name="cache_own_rating">Eigene Bewertung</string>
   <string name="cache_rating_of">von</string>
-  <string name="cache_favourite">Favorit</string>
+  <string name="cache_favorite">Favorit</string>
   <string name="cache_owner">Besitzer</string>
   <string name="cache_hidden">Versteckt</string>
   <string name="cache_event">Zeitangabe</string>
@@ -603,8 +612,6 @@
   <string name="cache_coordinates">Koordinaten</string>
   <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
   <string name="cache_spoiler_images_title">Hinweisbilder</string>
-  <string name="cache_spoiler_images_loading">Lade Hinweisbilder…</string>
-  <string name="cache_images_loading">Lade Bilder…</string>
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string>
   <string name="cache_clear_history">Verlauf leeren</string>
@@ -806,8 +813,6 @@
   <string name="license_dismiss">Ablehnen</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Anleitung</string>
-  <string name="helper_manual_description">Umfangreiche Anleitung für c:geo mit Beschreibung aller Möglichkeiten dieser App (auch versteckte).</string>
   <string name="helper_calendar_title">c:geo Kalender Add-on</string>
   <string name="helper_calendar_missing">c:geo Kalender Add-on nicht installiert</string>
   <string name="helper_calendar_description">Ermöglicht die Übernahme von Event-Caches in den Kalender.</string>
@@ -984,6 +989,8 @@
   <string name="attribute_swamp_no">Nicht sumpfig / kein matschiges Gelände</string>
   <string name="attribute_hills_yes">Hügeliges Gelände</string>
   <string name="attribute_hills_no">Kein hügeliges Gelände</string>
+  <string name="attribute_easy_climbing_yes">Einfaches Klettern</string>
+  <string name="attribute_easy_climbing_no">Kein einfaches Klettern</string>
   <string name="attribute_poi_yes">Interessanter Ort</string>
   <string name="attribute_poi_no">Uninteressanter Ort</string>
   <string name="attribute_moving_target_yes">Bewegliches Ziel</string>

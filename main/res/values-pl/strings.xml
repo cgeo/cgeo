@@ -126,6 +126,7 @@
   <string name="log_image_camera">Nowy</string>
   <string name="log_image_caption">Podpis</string>
   <string name="log_image_description">Opis</string>
+  <string name="log_image_scale">Skalowanie obrazu</string>
   
   <!-- translation -->
   <string name="translate_to_sys_lang">Przetłumacz na %s</string>
@@ -175,7 +176,7 @@
   <string name="err_missing_device_name">Proszę podać nazwę urządzenia przed zarejestrowaniem.</string>
   <string name="err_favorite_failed">Zmiana statusu skrzynki ulubiona nie powiodła się.</string>
   <string name="err_select_logimage_failed">Nie można wybrać obrazu.</string>
-  <string name="err_aquire_image_failed">NIe można pobrać obrazu.</string>
+  <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
 
   <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
   <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
@@ -511,7 +512,6 @@
   <string name="cache_attributes">Atrybuty</string>
   <string name="cache_inventory">Inwentarz</string>
   <string name="cache_log_offline">Wpis offline</string>
-  <string name="cache_log_images_loading">Trwa ładowanie zdjęć z wpisu…</string>
   <string name="cache_log_images_title">Zdjęcie z wpisu</string>
   <string name="cache_log_image_default_title">Zdjęcie</string>
   <string name="cache_personal_note">Notatka osobista</string>
@@ -562,10 +562,10 @@
   <string name="cache_dialog_watchlist_add_message">Dodaję skrzynkę do listy obserwowanych…</string>
   <string name="cache_dialog_watchlist_remove_title">Lista obserwowanych</string>
   <string name="cache_dialog_watchlist_remove_message">Usuwam skrzynkę z listy obserwowanych…</string>
-  <string name="cache_dialog_favourite_add_title">Ulubione</string>
-  <string name="cache_dialog_favourite_add_message">Dodaję skrzynkę do listy ulubionych…</string>
-  <string name="cache_dialog_favourite_remove_title">Ulubione</string>
-  <string name="cache_dialog_favourite_remove_message">Usuwam skrzynkę z listy ulubionych…</string>
+  <string name="cache_dialog_favorite_add_title">Ulubione</string>
+  <string name="cache_dialog_favorite_add_message">Dodaję skrzynkę do listy ulubionych…</string>
+  <string name="cache_dialog_favorite_remove_title">Ulubione</string>
+  <string name="cache_dialog_favorite_remove_message">Usuwam skrzynkę z listy ulubionych…</string>
   <string name="cache_menu_navigate">Nawiguj</string>
   <string name="cache_menu_navigation_drive">Nawigacja (jazda)</string>
   <string name="cache_menu_navigation_walk">Nawigacja (pieszo)</string>
@@ -597,6 +597,8 @@
   <string name="cache_status_disabled">Niedostępna</string>
   <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
   <string name="cache_status_not_premium">Dostępna dla wszystkich użytkowników</string>
+  <string name="cache_status_stored">Zapisano</string>
+  <string name="cache_status_not_stored">Nie zapisano</string>
   <string name="cache_geocode">GC-kod</string>
   <string name="cache_name">Nazwa</string>
   <string name="cache_type">Typ</string>
@@ -607,7 +609,7 @@
   <string name="cache_rating">Ocena</string>
   <string name="cache_own_rating">Własna ocena</string>
   <string name="cache_rating_of">od</string>
-  <string name="cache_favourite">Ulubiona</string>
+  <string name="cache_favorite">Ulubiona</string>
   <string name="cache_owner">Właściciel</string>
   <string name="cache_hidden">Ukryta</string>
   <string name="cache_event">Data</string>
@@ -615,9 +617,7 @@
   <string name="cache_coordinates">Współrzędne</string>
   <string name="cache_coordinates_original">Oryginalne współrzędne</string>
   <string name="cache_spoiler_images_title">Zdjęcia spoiler</string>
-  <string name="cache_spoiler_images_loading">Ładuję zdjęcia spoiler…</string>
   <string name="cache_images_title">Zdjęcia</string>
-  <string name="cache_images_loading">Ładuję zdjęcia…</string>  
   <string name="cache_log_types">Rodzaj wpisu</string>
   <string name="cache_coordinates_no">Ta skrzynka nie ma współrzędnych GPS.</string>
   <string name="cache_clear_history">Usuń historię</string>
@@ -818,8 +818,6 @@
   <string name="license_dismiss">Odmów</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Instrukcja obsługi</string>
-  <string name="helper_manual_description">Obszerny przewodnik do c:geo wraz z opisem wszystkich możliwości tego programu (także ukrytych).</string>
   <string name="helper_calendar_title">Dodatek Kalendarz c:geo</string>
   <string name="helper_calendar_missing">Dodatek Kalendarz c:geo nie jest zainstalowany.</string>
   <string name="helper_calendar_description">Umożliwia Tobie eksport skrzynek Wydarzenie do kalendarza w Twoim urządzeniu.</string>  
@@ -996,6 +994,8 @@
   <string name="attribute_swamp_no">Brak bagien lub mokradeł</string>
   <string name="attribute_hills_yes">Pagórki</string>
   <string name="attribute_hills_no">Brak pagórków</string>
+  <string name="attribute_easy_climbing_yes">Łatwa wspinaczka </string>
+  <string name="attribute_easy_climbing_no">Nie jest to łatwa wspinaczka</string>
   <string name="attribute_poi_yes">Ciekawe miejsce</string>
   <string name="attribute_poi_no">Brak ciekawych miejsc</string>
   <string name="attribute_moving_target_yes">Skrzynka moblina</string>

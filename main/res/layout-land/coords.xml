@@ -10,13 +10,6 @@
         <TextView
             style="@style/action_bar_title"
             android:text="@string/cache_coordinates" />
-
-        <View style="@style/action_bar_separator" />
-
-        <ImageView
-            android:id="@+id/actionBarManualbutton"
-            style="@style/action_bar_action"
-            android:src="@drawable/actionbar_manual" />
     </LinearLayout>
 
     <ScrollView

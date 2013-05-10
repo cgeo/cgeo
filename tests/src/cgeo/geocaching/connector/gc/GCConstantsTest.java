@@ -10,7 +10,7 @@ public class GCConstantsTest extends AndroidTestCase {
 
     // adapt the following after downloading new mock html files
     public static final String MOCK_LOGIN_NAME = "JoSaMaJa";
-    public static final int MOCK_CACHES_FOUND = 419;
+    public static final int MOCK_CACHES_FOUND = 426;
 
     public static void testLocation() {
         // GC37GFJ

@@ -4,6 +4,9 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 
+import java.util.Collections;
+import java.util.List;
+
 class ModifiedFilter extends AbstractFilter implements IFilterFactory {
 
     public ModifiedFilter() {
@@ -17,7 +20,7 @@ class ModifiedFilter extends AbstractFilter implements IFilterFactory {
     }
 
     @Override
-    public IFilter[] getFilters() {
-        return new IFilter[] { this };
+    public List<ModifiedFilter> getFilters() {
+        return Collections.singletonList(this);
     }
 }

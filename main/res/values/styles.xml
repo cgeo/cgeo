@@ -81,7 +81,6 @@
     </style>
 
     <style name="action_bar_progress" parent="@android:style/Widget.ProgressBar.Small">
-        <item name="android:id">@id/actionbar_progress</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">15dip</item>
@@ -90,7 +89,6 @@
     </style>
 
     <style name="action_bar_title">
-        <item name="android:id">@id/actionbar_title</item>
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>

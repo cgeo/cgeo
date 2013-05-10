@@ -1,15 +1,14 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgeo;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -21,34 +20,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 public final class ActivityMixin {
 
     public final static void goHome(final Activity fromActivity) {
-        final Intent intent = new Intent(fromActivity, cgeo.class);
+        final Intent intent = new Intent(fromActivity, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         fromActivity.startActivity(intent);
         fromActivity.finish();
     }
 
-    public static void goManual(final Context context, final String helpTopic) {
-        if (StringUtils.isBlank(helpTopic)) {
-            return;
-        }
-        try {
-            AppManualReaderClient.openManual(
-                    "c-geo",
-                    helpTopic,
-                    context,
-                    "http://manual.cgeo.org/");
-        } catch (Exception e) {
-            // nothing
-        }
-    }
-
-    public static void setTitle(final Activity activity, final String text) {
+    public static void setTitle(final Activity activity, final CharSequence text) {
         if (StringUtils.isBlank(text)) {
             return;
         }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string-array name="waypoint_coordinate_formats" translatable="false">
     <item>@string/waypoint_coordinate_formats_plain</item>
@@ -27,6 +27,15 @@
   <string name="init_select_map_directory" translatable="false">…</string>
   <string name="init_select_gpx_exportdir" translatable="false">…</string>
   <string name="init_select_gpx_importdir" translatable="false">…</string>
+  
+  <!-- upload image scaling -->
+  <integer-array name="log_image_scale_values">
+      <item>-1</item>
+      <item>512</item>
+      <item>640</item>
+      <item>800</item>
+      <item>1024</item>
+  </integer-array>
   
   <!-- contributors -->
   <string name="contributors" translatable="false">\n
@@ -87,40 +96,26 @@
 
   <!-- changelog -->
   <string name="changelog" translatable="false">\n
-    <b>2013.04.03</b>\n\n
+    <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · Support of attaching pictures to logs\n
-    · Support of opencaching.de online API in live map and nearby search\n
-    · Support for searching opencaching.nl caches\n
-    · Alphabetical sorting of OSM:Offline maps in map selection\n 
-    · Color markers also in trackable logbook\n
-    · Edit cache type filter by clicking on filter bar\n
-    · Inverse sorting of cache lists (hit the same menu again)\n
-    · View pager for trackable activity\n
-    · Menu item to delete past events\n
-    · Settings: Option to ask for list to store caches\n
-    · Change list in cache details\n
-    · Ability to select \"All\" list from main screen\n
-    · Default log type for event caches will be \"Attended\" if \"Will attend\" was logged before\n
-    · Improved and extended cache type detection on live map\n
-    · Waypoints can be marked as visited\n
-    · Possibility to delete offline logs in lists\n
-    · Support of language specific characters in log text equally to the website\n
+    · Log images can be scaled before upload to save traffic
+    · Improved online detection when refreshing caches\n
     \n
     <b>Bugfixing:</b>\n
-    · Final flag icon lost when updating cache with self defined final\n
-    · Bad selection in directory chooser\n
-    · Log type \"Retract Listing\" now parsed correctly\n
-    · Active cache detail page now remembered when rotating device\n
-    · Replaced the term \"GC-Code\" by \"Geocode\"\n
-    · Improvements for light theme\n
-    · Share function uses short URL again\n
-    · Offline log marker now shown after autosave of log\n
-    · GPX export no longer exports waypoints without coordinates\n
-    · Corrections for light scheme on Adnroid 2.x devices\n
-    · Avoid crash if logging page is opened while not connected correctly\n
-     \n
-    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
+    · Do not apply encryption/decryption when clicking on a link in a log\n
+    · Also show a picture attached to a log locally after sending the log\n
+    · Improved display of log text for OC-caches\n
+    · Improved performance of GPX exports\n
+    · GPX import option now also shown on all caches list\n
+    · OC.de attributes correction\n
+    · Reduce memory usage for images to avoid crashes\n
+    · Do not show short description if it is contained in long description for OC.de caches\n
+    · Do not allow setting the GPX dir to a not accessible directory\n
+    · Failure in waypoint projection for some languages corrected\n
+    · Avoid crashes when selecting images for logs\n
+    · Ignore hide setting when searching for owned caches\n
+    \n
+    <a href="https://github.com/cgeo/c-geo-opensource/issues?milestone=17&amp;state=closed">Detailed list of all changes</a>\n
     \n
     <b>Known Limitations/Bugs:</b>\n
     · Live map:\n
@@ -130,7 +125,6 @@
       On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
       Log images with huge size cause a long loading time\n
-      After uploading log images they are only shown in the logview after refreshing the cache\n
       The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
       On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
       A huge amount of pictures on the image tab of a cache might cause a crash\n

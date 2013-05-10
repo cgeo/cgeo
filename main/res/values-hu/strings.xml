@@ -483,7 +483,6 @@
   <string name="cache_attributes">Tulajdonságok</string>
   <string name="cache_inventory">Tárgyak</string>
   <string name="cache_log_offline">Offline bejegyzés</string>
-  <string name="cache_log_images_loading">Bejegyzés kép betöltése…</string>
   <string name="cache_log_images_title">Bejegyzés kép</string>
   <string name="cache_log_image_default_title">Fotó</string>
   <string name="cache_personal_note">Személyes megjegyzés</string>
@@ -569,7 +568,7 @@
   <string name="cache_rating">Osztályzat</string>
   <string name="cache_own_rating">Saját értékelés</string> 
   <string name="cache_rating_of">/</string>
-  <string name="cache_favourite">Kedvenc</string>
+  <string name="cache_favorite">Kedvenc</string>
   <string name="cache_owner">Tulajdonos</string>
   <string name="cache_hidden">Elrejtve</string>
   <string name="cache_event">Dátum</string>
@@ -577,9 +576,7 @@
   <string name="cache_coordinates">Koordináták</string>
   <string name="cache_coordinates_original">Eredeti koordináták</string> 
   <string name="cache_spoiler_images_title">Spoiler képek</string>
-  <string name="cache_spoiler_images_loading">Spoiler képek betöltése…</string>
   <string name="cache_images_title">Képek</string>
-  <string name="cache_images_loading">Képek betéltése…</string> 
   <string name="cache_log_types">Bejegyzés típusok</string>
   <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
   <string name="cache_clear_history">Előzmények törlése</string>
@@ -762,8 +759,6 @@
   <string name="license_dismiss">Elutasítás</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Kézikönyv</string>
-  <string name="helper_manual_description">Részletes kézikönyv a c:geo-hoz amiben az összes lehetőség leírása szerepel. (még a rejtettek is).</string>
   <string name="helper_calendar_title">c:geo naptár add-on</string>
   <string name="helper_calendar_missing">c:geo naptár add-on nincs telepítve.</string>
   <string name="helper_calendar_description">Lehetővé teszi a geoládák exportálását az eszközöd naptárába.</string> 

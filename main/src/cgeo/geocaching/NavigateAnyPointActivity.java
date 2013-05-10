@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
@@ -42,6 +45,17 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     private static final int MENU_CACHES_AROUND = 5;
     private static final int MENU_CLEAR_HISTORY = 6;
 
+    protected static class ViewHolder {
+        @InjectView(R.id.simple_way_point_longitude) protected TextView longitude;
+        @InjectView(R.id.simple_way_point_latitude) protected TextView latitude;
+        @InjectView(R.id.date) protected TextView date;
+
+        public ViewHolder(View rowView) {
+            Views.inject(this, rowView);
+            rowView.setTag(this);
+        }
+    }
+
     private static class DestinationHistoryAdapter extends ArrayAdapter<Destination> {
         private LayoutInflater inflater = null;
 
@@ -52,29 +66,29 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
         @Override
         public View getView(final int position, final View convertView, final ViewGroup parent) {
+            View rowView = convertView;
 
-            Destination loc = getItem(position);
-
-            View v = convertView;
-
-            if (v == null) {
-                v = getInflater().inflate(R.layout.simple_way_point,
-                        null);
+            ViewHolder viewHolder;
+            if (rowView == null) {
+                rowView = getInflater().inflate(R.layout.simple_way_point, null);
+                viewHolder = new ViewHolder(rowView);
             }
-            TextView longitude = (TextView) v
-                    .findViewById(R.id.simple_way_point_longitude);
-            TextView latitude = (TextView) v
-                    .findViewById(R.id.simple_way_point_latitude);
-            TextView date = (TextView) v.findViewById(R.id.date);
+            else {
+                viewHolder = (ViewHolder) rowView.getTag();
+            }
 
+            fillViewHolder(viewHolder, getItem(position));
+
+            return rowView;
+        }
+
+        private void fillViewHolder(ViewHolder viewHolder, Destination loc) {
             String lonString = loc.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE);
             String latString = loc.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE);
 
-            longitude.setText(lonString);
-            latitude.setText(latString);
-            date.setText(Formatter.formatShortDateTime(getContext(), loc.getDate()));
-
-            return v;
+            viewHolder.longitude.setText(lonString);
+            viewHolder.latitude.setText(latString);
+            viewHolder.date.setText(Formatter.formatShortDateTime(getContext(), loc.getDate()));
         }
 
         private LayoutInflater getInflater() {
@@ -90,7 +104,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     private Button lonButton = null;
     private boolean changed = false;
     private List<Destination> historyOfSearchedLocations;
-    private DestinationHistoryAdapter destionationHistoryAdapter;
+    private DestinationHistoryAdapter destinationHistoryAdapter;
     private ListView historyListView;
     private TextView historyFooter;
 
@@ -100,19 +114,11 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private int contextMenuItemPosition;
 
-    String distanceUnit = "";
-
-    public NavigateAnyPointActivity() {
-        super("c:geo-navigate-any");
-    }
+    private String distanceUnit = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.point);
-        setTitle(res.getString(R.string.search_destination));
+        super.onCreate(savedInstanceState, R.layout.point);
 
         createHistoryView();
 
@@ -146,7 +152,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v,
-                                            ContextMenuInfo menuInfo) {
+                    ContextMenuInfo menuInfo) {
                 menu.add(Menu.NONE, CONTEXT_MENU_NAVIGATE, Menu.NONE, res.getString(R.string.cache_menu_navigate));
                 menu.add(Menu.NONE, CONTEXT_MENU_EDIT_WAYPOINT, Menu.NONE, R.string.waypoint_edit);
                 menu.add(Menu.NONE, CONTEXT_MENU_DELETE_WAYPOINT, Menu.NONE, R.string.waypoint_delete);
@@ -190,19 +196,17 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private TextView getEmptyHistoryFooter() {
         if (historyFooter == null) {
-            historyFooter = (TextView) getLayoutInflater().inflate(
-                    R.layout.caches_footer, null);
+            historyFooter = (TextView) getLayoutInflater().inflate(R.layout.caches_footer, null);
             historyFooter.setText(R.string.search_history_empty);
         }
         return historyFooter;
     }
 
     private DestinationHistoryAdapter getDestionationHistoryAdapter() {
-        if (destionationHistoryAdapter == null) {
-            destionationHistoryAdapter = new DestinationHistoryAdapter(this,
-                    getHistoryOfSearchedLocations());
+        if (destinationHistoryAdapter == null) {
+            destinationHistoryAdapter = new DestinationHistoryAdapter(this, getHistoryOfSearchedLocations());
         }
-        return destionationHistoryAdapter;
+        return destinationHistoryAdapter;
     }
 
     private List<Destination> getHistoryOfSearchedLocations() {
@@ -226,16 +230,6 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         super.onResume();
         geoDirHandler.startGeo();
         init();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     @Override
@@ -402,7 +396,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    destionationHistoryAdapter.notifyDataSetChanged();
+                    destinationHistoryAdapter.notifyDataSetChanged();
                 }
             });
         }

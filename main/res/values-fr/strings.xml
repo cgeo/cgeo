@@ -175,7 +175,7 @@
   <string name="err_missing_device_name">Veuillez saisir un nom pour votre appareil avant l\'enregistrement.</string>
   <string name="err_favorite_failed">c:geo ne peut pas changer le status de favori.</string>
   <string name="err_select_logimage_failed">La sélection d\'une image pour la note a échoué.</string>
-  <string name="err_aquire_image_failed">L\'acquisition d\'une nouvelle image pour la note a échoué.</string>
+  <string name="err_acquire_image_failed">L\'acquisition d\'une nouvelle image pour la note a échoué.</string>
 
   <string name="err_tb_display">"c:geo ne peut pas afficher l\'objet voyageur demandé. Est-ce vraiment un objet voyageur?</string>
   <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
@@ -512,7 +512,6 @@
   <string name="cache_attributes">Attributs</string>
   <string name="cache_inventory">Inventaire</string>
   <string name="cache_log_offline">Visite hors-ligne</string>
-  <string name="cache_log_images_loading">Chargement de l\'image de la visite…</string>
   <string name="cache_log_images_title">Image de la visite</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Note personnelle</string>
@@ -562,10 +561,10 @@
   <string name="cache_dialog_watchlist_add_message">Ajout de la cache à votre liste de suivi…</string>
   <string name="cache_dialog_watchlist_remove_title">Liste de suivi</string>
   <string name="cache_dialog_watchlist_remove_message">Retrait de la cache de votre liste de suivi…</string>
-  <string name="cache_dialog_favourite_add_title">Favori</string>
-  <string name="cache_dialog_favourite_add_message">Ajout de la cache à vos favoris…</string>
-  <string name="cache_dialog_favourite_remove_title">Favori</string>
-  <string name="cache_dialog_favourite_remove_message">Suppression de la cache de vos favoris…</string>
+  <string name="cache_dialog_favorite_add_title">Favori</string>
+  <string name="cache_dialog_favorite_add_message">Ajout de la cache à vos favoris…</string>
+  <string name="cache_dialog_favorite_remove_title">Favori</string>
+  <string name="cache_dialog_favorite_remove_message">Suppression de la cache de vos favoris…</string>
   <string name="cache_menu_navigate">Navigation</string>
   <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
   <string name="cache_menu_navigation_walk">Navigation (piéton)</string>
@@ -607,7 +606,7 @@
   <string name="cache_rating">Note</string>
   <string name="cache_own_rating">Note personnelle</string>
   <string name="cache_rating_of">de</string>
-  <string name="cache_favourite">Favori</string>
+  <string name="cache_favorite">Favori</string>
   <string name="cache_owner">Propriétaire</string>
   <string name="cache_hidden">Cachée</string>
   <string name="cache_event">Date</string>
@@ -615,9 +614,7 @@
   <string name="cache_coordinates">Coordonnées</string>
   <string name="cache_coordinates_original">Coordonnées d\'origine</string>
   <string name="cache_spoiler_images_title">Images indices</string>
-  <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
   <string name="cache_images_title">Images</string>
-  <string name="cache_images_loading">Chargement des images…</string>
   <string name="cache_log_types">Types de visites</string>
   <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
   <string name="cache_clear_history">Effacer l\'historique</string>
@@ -820,8 +817,6 @@
   <string name="license_dismiss">Rejeter</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manuel</string>
-  <string name="helper_manual_description">Manuel complet pour c:geo contenant la description de toutes les fonctionnalités de cette application (y compris celle secrètes).</string>
   <string name="helper_calendar_title">Module supplémentaire c:geo agenda</string>
   <string name="helper_calendar_missing">Module supplémentaire c:geo agenda non installé</string>
   <string name="helper_calendar_description">Permet d\'exporter les événements liés aux caches dans le calendrier Android.</string>

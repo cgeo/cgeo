@@ -117,12 +117,6 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
         mapBase.goHome(view);
     }
 
-    // open manual entry
-    @Override
-    public void goManual(View view) {
-        mapBase.goManual(view);
-    }
-
     @Override
     public void showFilterMenu(View view) {
         // do nothing, the filter bar only shows the global filter

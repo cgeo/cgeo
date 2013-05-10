@@ -47,8 +47,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -483,34 +483,37 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public List<LogType> getPossibleLogTypes() {
-        final List<LogType> logTypes = new LinkedList<LogType>();
+        final List<LogType> logTypes = new ArrayList<LogType>();
         if (isEventCache()) {
             logTypes.add(LogType.WILL_ATTEND);
-            logTypes.add(LogType.NOTE);
             logTypes.add(LogType.ATTENDED);
-            logTypes.add(LogType.NEEDS_ARCHIVE);
             if (isOwner()) {
                 logTypes.add(LogType.ANNOUNCEMENT);
             }
         } else if (CacheType.WEBCAM == cacheType) {
             logTypes.add(LogType.WEBCAM_PHOTO_TAKEN);
-            logTypes.add(LogType.DIDNT_FIND_IT);
-            logTypes.add(LogType.NOTE);
-            logTypes.add(LogType.NEEDS_ARCHIVE);
-            logTypes.add(LogType.NEEDS_MAINTENANCE);
         } else {
             logTypes.add(LogType.FOUND_IT);
+        }
+        if (!isEventCache()) {
             logTypes.add(LogType.DIDNT_FIND_IT);
-            logTypes.add(LogType.NOTE);
-            logTypes.add(LogType.NEEDS_ARCHIVE);
+        }
+        logTypes.add(LogType.NOTE);
+        if (!isEventCache()) {
             logTypes.add(LogType.NEEDS_MAINTENANCE);
         }
         if (isOwner()) {
             logTypes.add(LogType.OWNER_MAINTENANCE);
-            logTypes.add(LogType.TEMP_DISABLE_LISTING);
-            logTypes.add(LogType.ENABLE_LISTING);
+            if (isDisabled()) {
+                logTypes.add(LogType.ENABLE_LISTING);
+            }
+            else {
+                logTypes.add(LogType.TEMP_DISABLE_LISTING);
+            }
             logTypes.add(LogType.ARCHIVE);
-            logTypes.remove(LogType.UPDATE_COORDINATES);
+        }
+        if (!isArchived() && !isOwner()) {
+            logTypes.add(LogType.NEEDS_ARCHIVE);
         }
         return logTypes;
     }
@@ -710,10 +713,7 @@ public class Geocache implements ICache, IWaypoint {
     public String getPersonalNote() {
         // non premium members have no personal notes, premium members have an empty string by default.
         // map both to null, so other code doesn't need to differentiate
-        if (StringUtils.isBlank(personalNote)) {
-            return null;
-        }
-        return personalNote;
+        return StringUtils.defaultIfBlank(personalNote, null);
     }
 
     public boolean supportsUserActions() {
@@ -765,8 +765,8 @@ public class Geocache implements ICache, IWaypoint {
         return favorite;
     }
 
-    public void setFavorite(boolean favourite) {
-        this.favorite = favourite;
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 
     @Override
@@ -1360,6 +1360,9 @@ public class Geocache implements ICache, IWaypoint {
         return null;
     }
 
+    /**
+     * Detect coordinates in the personal note and convert them to user defined waypoints. Works by rule of thumb.
+     */
     public void parseWaypointsFromNote() {
         try {
             if (StringUtils.isBlank(getPersonalNote())) {
@@ -1378,7 +1381,8 @@ public class Geocache implements ICache, IWaypoint {
                             ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0) &&
                             !hasIdenticalWaypoint(point)) {
                         final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                        final Waypoint waypoint = new Waypoint(name, WaypointType.WAYPOINT, false);
+                        final String potentialWaypointType = note.substring(Math.max(0, matcher.start() - 15));
+                        final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), false);
                         waypoint.setCoords(point);
                         addOrChangeWaypoint(waypoint, false);
                         count++;
@@ -1393,6 +1397,25 @@ public class Geocache implements ICache, IWaypoint {
         } catch (Exception e) {
             Log.e("Geocache.parseWaypointsFromNote", e);
         }
+    }
+
+    /**
+     * Detect waypoint types in the personal note text. It works by rule of thumb only.
+     */
+    private static WaypointType parseWaypointType(final String input) {
+        final String lowerInput = StringUtils.substring(input, 0, 20).toLowerCase(Locale.getDefault());
+        for (WaypointType wpType : WaypointType.values()) {
+            if (lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
+                return wpType;
+            }
+            if (lowerInput.contains(wpType.id)) {
+                return wpType;
+            }
+            if (lowerInput.contains(wpType.name().toLowerCase(Locale.US))) {
+                return wpType;
+            }
+        }
+        return WaypointType.WAYPOINT;
     }
 
     private boolean hasIdenticalWaypoint(final Geopoint point) {

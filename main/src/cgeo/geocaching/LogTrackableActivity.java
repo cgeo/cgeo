@@ -104,17 +104,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
     };
 
-    public LogTrackableActivity() {
-        super("c:geo-log-trackable");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.touch);
-        setTitle(res.getString(R.string.trackable_touch));
+        super.onCreate(savedInstanceState, R.layout.touch);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();

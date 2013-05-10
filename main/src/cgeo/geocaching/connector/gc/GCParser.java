@@ -215,7 +215,7 @@ public abstract class GCParser {
                     cache.setFavoritePoints(Integer.parseInt(result));
                 }
             } catch (NumberFormatException e) {
-                Log.w("GCParser.parseSearch: Failed to parse favourite count");
+                Log.w("GCParser.parseSearch: Failed to parse favorite count");
             }
 
             searchResult.addCache(cache);
@@ -424,11 +424,11 @@ public abstract class GCParser {
                 Log.w("GCParser.parseCache: Failed to parse cache hidden (event) date");
             }
 
-            // favourite
+            // favorite
             try {
                 cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
             } catch (NumberFormatException e) {
-                Log.e("Error parsing favourite count", e);
+                Log.e("Error parsing favorite count", e);
             }
 
             // cache size
@@ -826,6 +826,15 @@ public abstract class GCParser {
         return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
+    private static boolean isSearchForMyCaches(final String userName) {
+        boolean my = false;
+        if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
+            my = true;
+            Log.i("Overriding users choice because of self search, downloading all caches.");
+        }
+        return my;
+    }
+
     public static SearchResult searchByUsername(final String userName, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
@@ -834,13 +843,7 @@ public abstract class GCParser {
 
         final Parameters params = new Parameters("ul", userName);
 
-        boolean my = false;
-        if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
-            my = true;
-            Log.i("GCParser.searchByUsername: Overriding users choice, downloading all caches.");
-        }
-
-        return searchByAny(cacheType, my, showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
     }
 
     public static SearchResult searchByOwner(final String userName, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
@@ -850,7 +853,7 @@ public abstract class GCParser {
         }
 
         final Parameters params = new Parameters("u", userName);
-        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
     }
 
     public static SearchResult searchByAddress(final String address, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
@@ -1059,7 +1062,7 @@ public abstract class GCParser {
      *            the URI for the image to be uploaded
      * @return status code to indicate success or failure
      */
-    public static StatusCode uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
+    public static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
         String page = Network.getResponseData(Network.getRequest(uri));
@@ -1071,7 +1074,7 @@ public abstract class GCParser {
                 page = Network.getResponseData(Network.getRequest(uri));
             } else {
                 Log.e("Image upload: No login (error: " + loginState + ')');
-                return StatusCode.NOT_LOGGED_IN;
+                return ImmutablePair.of(StatusCode.NOT_LOGGED_IN, null);
             }
         }
 
@@ -1088,18 +1091,23 @@ public abstract class GCParser {
         final File image = new File(imageUri.getPath());
         final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image));
 
-        MatcherWrapper matcherOK = new MatcherWrapper(GCConstants.PATTERN_OK_IMAGEUPLOAD, response);
+        MatcherWrapper matcherUrl = new MatcherWrapper(GCConstants.PATTERN_IMAGE_UPLOAD_URL, response);
 
-        if (matcherOK.find()) {
+        if (matcherUrl.find()) {
             Log.i("Logimage successfully uploaded.");
-
-            return StatusCode.NO_ERROR;
+            final String uploadedImageUrl = matcherUrl.group(1);
+            return ImmutablePair.of(StatusCode.NO_ERROR, uploadedImageUrl);
         }
         Log.e("GCParser.uploadLogIMage: Failed to upload image because of unknown error");
 
-        return StatusCode.LOGIMAGE_POST_ERROR;
+        return ImmutablePair.of(StatusCode.LOGIMAGE_POST_ERROR, null);
     }
 
+    /**
+     * Post a log to GC.com.
+     *
+     * @return status code of the upload and ID of the log
+     */
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day, final String log) {
         if (Login.isEmpty(viewstates)) {
@@ -1581,15 +1589,8 @@ public abstract class GCParser {
         final List<LogType> types = new ArrayList<LogType>();
 
         final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
-        String typesText = null;
-        if (typeBoxMatcher.find()) {
-            if (typeBoxMatcher.groupCount() > 0) {
-                typesText = typeBoxMatcher.group(1);
-            }
-        }
-
-        if (typesText != null) {
-
+        if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {
+            String typesText = typeBoxMatcher.group(1);
             final MatcherWrapper typeMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPE2, typesText);
             while (typeMatcher.find()) {
                 if (typeMatcher.groupCount() > 1) {
@@ -1604,6 +1605,9 @@ public abstract class GCParser {
                 }
             }
         }
+
+        // we don't support this log type
+        types.remove(LogType.UPDATE_COORDINATES);
 
         return types;
     }

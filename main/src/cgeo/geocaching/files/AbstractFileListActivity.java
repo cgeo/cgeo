@@ -89,7 +89,6 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
 
         setTheme();
         setContentView(R.layout.gpx);
-        setTitle();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -145,11 +144,6 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
      * @return The folder to start the recursive search in
      */
     protected abstract List<File> getBaseFolders();
-
-    /**
-     * Triggers the deriving class to set the title
-     */
-    protected abstract void setTitle();
 
     private class SearchFilesThread extends Thread {
 

@@ -173,12 +173,15 @@ public final class GCVote {
 
     /**
      * Transmit user vote to gcvote.com
-     *
+     * 
      * @param cache
      * @param vote
-     * @return
+     * @return {@code true} if the rating was submitted successfully
      */
     public static boolean setRating(Geocache cache, double vote) {
+        if (!Settings.isGCvoteLogin()) {
+            return false;
+        }
         if (!cache.supportsGCVote()) {
             return false;
         }

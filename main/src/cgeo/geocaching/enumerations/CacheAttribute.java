@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum CacheAttribute {
-    // THIS LIST IS GENERATED: don't change anything here but in
-    // project/attributes/makeEnum.sh
+    // THIS LIST IS GENERATED: don't change anything here but read
+    // project/attributes/readme.txt
     DOGS(1, -1, "dogs", R.drawable.attribute_dogs, R.string.attribute_dogs_yes, R.string.attribute_dogs_no),
     BICYCLES(32, -1, "bicycles", R.drawable.attribute_bicycles, R.string.attribute_bicycles_yes, R.string.attribute_bicycles_no),
     MOTORCYCLES(33, -1, "motorcycles", R.drawable.attribute_motorcycles, R.string.attribute_motorcycles_yes, R.string.attribute_motorcycles_no),
@@ -27,7 +27,7 @@ public enum CacheAttribute {
     ONEHOUR(7, -1, "onehour", R.drawable.attribute_onehour, R.string.attribute_onehour_yes, R.string.attribute_onehour_no),
     SCENIC(8, -1, "scenic", R.drawable.attribute_scenic, R.string.attribute_scenic_yes, R.string.attribute_scenic_no),
     HIKING(9, 25, "hiking", R.drawable.attribute_hiking, R.string.attribute_hiking_yes, R.string.attribute_hiking_no),
-    CLIMBING(10, 28, "climbing", R.drawable.attribute_climbing, R.string.attribute_climbing_yes, R.string.attribute_climbing_no),
+    CLIMBING(10, -1, "climbing", R.drawable.attribute_climbing, R.string.attribute_climbing_yes, R.string.attribute_climbing_no),
     WADING(11, -1, "wading", R.drawable.attribute_wading, R.string.attribute_wading_yes, R.string.attribute_wading_no),
     SWIMMING(12, 29, "swimming", R.drawable.attribute_swimming, R.string.attribute_swimming_yes, R.string.attribute_swimming_no),
     AVAILABLE(13, 38, "available", R.drawable.attribute_available, R.string.attribute_available_yes, R.string.attribute_available_no),
@@ -86,6 +86,7 @@ public enum CacheAttribute {
     SYRINGE(-1, 23, "syringe", R.drawable.attribute_syringe, R.string.attribute_syringe_yes, R.string.attribute_syringe_no),
     SWAMP(-1, 26, "swamp", R.drawable.attribute_swamp, R.string.attribute_swamp_yes, R.string.attribute_swamp_no),
     HILLS(-1, 27, "hills", R.drawable.attribute_hills, R.string.attribute_hills_yes, R.string.attribute_hills_no),
+    EASY_CLIMBING(-1, 28, "easy_climbing", R.drawable.attribute_easy_climbing, R.string.attribute_easy_climbing_yes, R.string.attribute_easy_climbing_no),
     POI(-1, 30, "poi", R.drawable.attribute_poi, R.string.attribute_poi_yes, R.string.attribute_poi_no),
     MOVING_TARGET(-1, 31, "moving_target", R.drawable.attribute_moving_target, R.string.attribute_moving_target_yes, R.string.attribute_moving_target_no),
     WEBCAM(-1, 32, "webcam", R.drawable.attribute_webcam, R.string.attribute_webcam_yes, R.string.attribute_webcam_no),
@@ -108,8 +109,8 @@ public enum CacheAttribute {
     OTHER_CACHE(-1, 57, "other_cache", R.drawable.attribute_other_cache, R.string.attribute_other_cache_yes, R.string.attribute_other_cache_no),
     ASK_OWNER(-1, 58, "ask_owner", R.drawable.attribute_ask_owner, R.string.attribute_ask_owner_yes, R.string.attribute_ask_owner_no),
     UNKNOWN(-1, -1, "unknown", R.drawable.attribute_unknown, R.string.attribute_unknown_yes, R.string.attribute_unknown_no);
-    // THIS LIST IS GENERATED: don't change anything here but in
-    // project/attributes/makeEnum.sh
+    // THIS LIST IS GENERATED: don't change anything here but read
+    // project/attributes/readme.txt
 
     private static final String INTERNAL_YES = "_yes";
     private static final String INTERNAL_NO = "_no";
@@ -146,30 +147,20 @@ public enum CacheAttribute {
     }
 
     private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME;
+    private final static SparseArray<CacheAttribute> FIND_BY_GCID = new SparseArray<CacheAttribute>();
+    private final static SparseArray<CacheAttribute> FIND_BY_OCID = new SparseArray<CacheAttribute>();
     static {
         final HashMap<String, CacheAttribute> mapGcRawNames = new HashMap<String, CacheAttribute>();
         for (CacheAttribute attr : values()) {
             mapGcRawNames.put(attr.rawName, attr);
-        }
-        FIND_BY_GCRAWNAME = Collections.unmodifiableMap(mapGcRawNames);
-    }
-
-    private final static SparseArray<CacheAttribute> FIND_BY_GCID = new SparseArray<CacheAttribute>();
-    static {
-        for (CacheAttribute attr : values()) {
             if (attr.gcid != NO_ID) {
                 FIND_BY_GCID.put(attr.gcid, attr);
             }
-        }
-    }
-
-    private final static SparseArray<CacheAttribute> FIND_BY_OCID = new SparseArray<CacheAttribute>();
-    static {
-        for (CacheAttribute attr : values()) {
             if (attr.ocid != NO_ID) {
                 FIND_BY_OCID.put(attr.ocid, attr);
             }
         }
+        FIND_BY_GCRAWNAME = Collections.unmodifiableMap(mapGcRawNames);
     }
 
     public static CacheAttribute getByRawName(final String rawName) {

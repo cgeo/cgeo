@@ -3,7 +3,8 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 class TypeFilter extends AbstractFilter {
     private final CacheType cacheType;
@@ -26,15 +27,15 @@ class TypeFilter extends AbstractFilter {
     public static class Factory implements IFilterFactory {
 
         @Override
-        public IFilter[] getFilters() {
+        public List<IFilter> getFilters() {
             final CacheType[] types = CacheType.values();
-            final ArrayList<IFilter> filters = new ArrayList<IFilter>(types.length);
+            final List<IFilter> filters = new LinkedList<IFilter>();
             for (CacheType cacheType : types) {
                 if (cacheType != CacheType.ALL) {
                     filters.add(new TypeFilter(cacheType));
                 }
             }
-            return filters.toArray(new IFilter[filters.size()]);
+            return filters;
         }
 
     }

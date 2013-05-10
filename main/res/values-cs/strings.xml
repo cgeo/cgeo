@@ -90,7 +90,7 @@
   <string name="log_post">Odeslat Log</string>
   <string name="log_post_rate">Odeslat Log a hlasovat</string>
   <string name="log_post_no_rate">Odeslat Log a nehlasovat</string>
-  <string name="log_post_not_possible">Načítání stránky s Logy…</string>
+  <string name="log_post_not_possible">Načítání stránky s Logovacím formulářem…</string>
   <string name="log_add">Přidat</string>
   <string name="log_rating">Hodnocení</string>
   <string name="log_no_rating">Bez hodnocení</string>
@@ -175,7 +175,7 @@
   <string name="err_missing_device_name">Před registrací prosím zadej název zařízení.</string>
   <string name="err_favorite_failed">Označení oblíbenosti keše selhalo.</string>
   <string name="err_select_logimage_failed">Výběr obrázku pro zápis selhal.</string>
-  <string name="err_aquire_image_failed">Získání obrázku selhalo.</string>
+  <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
 
   <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
   <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
@@ -323,7 +323,7 @@
   <string name="caches_filter_track">Se sledovatelnými předměty</string>
   <string name="caches_filter_clear">Vymazat filtry</string>
   <string name="caches_filter_modified">S upravenými souřadnicemi</string>
-  <string name="caches_filter_origin">Originální</string>
+  <string name="caches_filter_origin">Původ keše</string>
   <string name="caches_removing_from_history">Čištění Historie…</string>
   <string name="caches_clear_offlinelogs">Smazat offline Logy</string>
   <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
@@ -409,7 +409,6 @@
   <string name="init_offline_wp">Ukládat statické mapy k bodům trasy pro offline použití</string>
   <string name="init_save_log_img">Ukládat obrázky z logů</string>
   <string name="init_units">Používat imperiální jednotky vzdálenosti</string>
-  <string name="init_nav">Používat Google Navigaci</string>
   <string name="init_log_offline">Povolit Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat Log na server)</string>
   <string name="init_choose_list">Ptát se na seznam pro uložení keše</string>
   <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
@@ -515,7 +514,6 @@
   <string name="cache_attributes">Atributy</string>
   <string name="cache_inventory">Inventář</string>
   <string name="cache_log_offline">Offline Log</string>
-  <string name="cache_log_images_loading">Načítání obrázků z logů…</string>
   <string name="cache_log_images_title">Obrázky z Logů</string>
   <string name="cache_log_image_default_title">Fotografie</string>
   <string name="cache_personal_note">Osobní poznámka</string>
@@ -554,7 +552,7 @@
   <string name="cache_dialog_loading_details_status_gcvote">Načítání GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Načítání údajů o nadmořské výšce</string>
   <string name="cache_dialog_loading_details_status_cache">Ukládání do mezipaměti</string>
-  <string name="cache_dialog_loading_details_status_render">Renderování zobrazení</string>
+  <string name="cache_dialog_loading_details_status_render">Vykreslování pohledu</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Ukládání keše pro offline použití…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
@@ -565,10 +563,10 @@
   <string name="cache_dialog_watchlist_add_message">Přidávání keše do tvého Watchlistu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Odstraňování keše z tvého Watchlistu…</string>
-  <string name="cache_dialog_favourite_add_title">Oblíbené</string>
-  <string name="cache_dialog_favourite_add_message">Přidávání keše do Oblíbených…</string>
-  <string name="cache_dialog_favourite_remove_title">Oblíbené</string>
-  <string name="cache_dialog_favourite_remove_message">Odstraňování keše z Oblíbených…</string>
+  <string name="cache_dialog_favorite_add_title">Oblíbené</string>
+  <string name="cache_dialog_favorite_add_message">Přidávání keše do Oblíbených…</string>
+  <string name="cache_dialog_favorite_remove_title">Oblíbené</string>
+  <string name="cache_dialog_favorite_remove_message">Odstraňování keše z Oblíbených…</string>
   <string name="cache_menu_navigate">Navigovat</string>
   <string name="cache_menu_navigation_drive">Navigace (Řízení)</string>
   <string name="cache_menu_navigation_walk">Navigace (Chůze)</string>
@@ -610,7 +608,7 @@
   <string name="cache_rating">Hodnocení</string>
   <string name="cache_own_rating">Vlastní hodnocení</string>
   <string name="cache_rating_of">z</string>
-  <string name="cache_favourite">Oblíbená</string>
+  <string name="cache_favorite">Oblíbená</string>
   <string name="cache_owner">Zakladatel</string>
   <string name="cache_hidden">Skryta</string>
   <string name="cache_event">Datum</string>
@@ -618,9 +616,7 @@
   <string name="cache_coordinates">Souřadnice</string>
   <string name="cache_coordinates_original">Původní souřadnice</string>
   <string name="cache_spoiler_images_title">Obrázky s nápovědou</string>
-  <string name="cache_spoiler_images_loading">Načítání obrázků s nápovědou…</string>
   <string name="cache_images_title">Obrázky</string>
-  <string name="cache_images_loading">Načítání obrázků…</string>
   <string name="cache_log_types">Typy zápisů</string>
   <string name="cache_coordinates_no">Tato keš nemá souřadnice.</string>
   <string name="cache_clear_history">Vymazat historii</string>
@@ -823,8 +819,6 @@
   <string name="license_dismiss">Zamítnout</string>
 
   <!-- helpers -->
-  <string name="helper_manual_title">Manuál</string>
-  <string name="helper_manual_description">Komplexní příručka aplikace c:geo obsahující popis všech možností této aplikace (včetně těch skrytých).</string>
   <string name="helper_calendar_title">c:geo modul kalendáře</string>
   <string name="helper_calendar_missing">c:geo modul kalendáře není nainstalován.</string>
   <string name="helper_calendar_description">Umožňuje exportovat události keší do tvého kalendáře.</string>
@@ -1055,7 +1049,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">Stránka c:geo</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Návod: <a href="http://manual.cgeo.org/">c:geo v Nutshell</a></string>
-  <string name="about_go4cache">Služba <b>Go 4 Cache</b> zobrazuje ostatní geokačery na mapě (v <b>c:geo</b> nebo v prohlížeči) v reálném čase. Může zobrazovat - na příklad - jakou keš zrovna hledají. Připojením se k <b>Go 4 Cache</b> získá aplikace <b>c:geo</b> povolení zveřejňovat tvou polohu při geocachingu (pouze když je <b>c:geo</b> spuštěno).</string>
   <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
   <string name="about_auth_1">Následující proces dovoluje aplikaci <b>c:geo</b> přístup na Twitter - pokud budeš souhlasit.</string>
   <string name="about_auth_2">Klepnutím na tlačítko \"Zahájit autorizaci\" bude proces zahájen. Tento proces otevře webový prohlížeč s Twitterem. Přihlaš se na této stránce a povol <b>c:geu</b> přístup k tvému účtu. Pokud je to povoleno, Twitter ti ukáže číselný PIN kód. Tento PIN kód musíš zadat do <b>c:geo</b> a potvrdit. To je vše.</string>

@@ -1,10 +1,10 @@
 package cgeo.geocaching.filter;
 
-
-import cgeo.geocaching.R;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class TerrainFilter extends AbstractRangeFilter {
 
@@ -19,12 +19,12 @@ class TerrainFilter extends AbstractRangeFilter {
 
     public static class Factory implements IFilterFactory {
         @Override
-        public IFilter[] getFilters() {
+        public List<IFilter> getFilters() {
             final ArrayList<IFilter> filters = new ArrayList<IFilter>(5);
             for (int terrain = 1; terrain <= 5; terrain++) {
                 filters.add(new TerrainFilter(terrain));
             }
-            return filters.toArray(new IFilter[filters.size()]);
+            return filters;
         }
     }
 
