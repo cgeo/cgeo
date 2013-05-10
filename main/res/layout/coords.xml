@@ -5,7 +5,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <include layout="@layout/actionbar" />
+    <LinearLayout style="@style/action_bar" >
+
+        <include layout="@layout/actionbar_title_no_home" />
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scroller"
