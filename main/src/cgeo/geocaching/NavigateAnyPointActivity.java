@@ -398,6 +398,13 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
             // Ensure to remove the footer
             historyListView.removeFooterView(getEmptyHistoryFooter());
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    destionationHistoryAdapter.notifyDataSetChanged();
+                }
+            });
         }
     }
 
