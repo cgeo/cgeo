@@ -90,6 +90,7 @@
     · Do not duplicate waypoints retrieved from the personal note when updating a cache\n
     · Fixed a possible crash when device is rotated while cache list is shown\n
     · Fixed a possible crash in \"Any destination\" menu\n
+    · Ignore hide setting when searching for owned caches\n
     \n
     \n
     <b>2013.04.03</b>\n
