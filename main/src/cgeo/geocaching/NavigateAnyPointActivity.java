@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
@@ -42,6 +45,17 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     private static final int MENU_CACHES_AROUND = 5;
     private static final int MENU_CLEAR_HISTORY = 6;
 
+    protected static class ViewHolder {
+        @InjectView(R.id.simple_way_point_longitude) protected TextView longitude;
+        @InjectView(R.id.simple_way_point_latitude) protected TextView latitude;
+        @InjectView(R.id.date) protected TextView date;
+
+        public ViewHolder(View rowView) {
+            Views.inject(this, rowView);
+            rowView.setTag(this);
+        }
+    }
+
     private static class DestinationHistoryAdapter extends ArrayAdapter<Destination> {
         private LayoutInflater inflater = null;
 
@@ -53,25 +67,28 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         @Override
         public View getView(final int position, final View convertView, final ViewGroup parent) {
             View rowView = convertView;
-            if (rowView == null) {
-                rowView = getInflater().inflate(R.layout.simple_way_point,
-                        null);
-            }
-            TextView longitude = (TextView) rowView
-                    .findViewById(R.id.simple_way_point_longitude);
-            TextView latitude = (TextView) rowView
-                    .findViewById(R.id.simple_way_point_latitude);
-            TextView date = (TextView) rowView.findViewById(R.id.date);
 
-            Destination loc = getItem(position);
+            ViewHolder viewHolder;
+            if (rowView == null) {
+                rowView = getInflater().inflate(R.layout.simple_way_point, null);
+                viewHolder = new ViewHolder(rowView);
+            }
+            else {
+                viewHolder = (ViewHolder) rowView.getTag();
+            }
+
+            fillViewHolder(viewHolder, getItem(position));
+
+            return rowView;
+        }
+
+        private void fillViewHolder(ViewHolder viewHolder, Destination loc) {
             String lonString = loc.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE);
             String latString = loc.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE);
 
-            longitude.setText(lonString);
-            latitude.setText(latString);
-            date.setText(Formatter.formatShortDateTime(getContext(), loc.getDate()));
-
-            return rowView;
+            viewHolder.longitude.setText(lonString);
+            viewHolder.latitude.setText(latString);
+            viewHolder.date.setText(Formatter.formatShortDateTime(getContext(), loc.getDate()));
         }
 
         private LayoutInflater getInflater() {
@@ -135,7 +152,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v,
-                                            ContextMenuInfo menuInfo) {
+                    ContextMenuInfo menuInfo) {
                 menu.add(Menu.NONE, CONTEXT_MENU_NAVIGATE, Menu.NONE, res.getString(R.string.cache_menu_navigate));
                 menu.add(Menu.NONE, CONTEXT_MENU_EDIT_WAYPOINT, Menu.NONE, R.string.waypoint_edit);
                 menu.add(Menu.NONE, CONTEXT_MENU_DELETE_WAYPOINT, Menu.NONE, R.string.waypoint_delete);
@@ -179,8 +196,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private TextView getEmptyHistoryFooter() {
         if (historyFooter == null) {
-            historyFooter = (TextView) getLayoutInflater().inflate(
-                    R.layout.caches_footer, null);
+            historyFooter = (TextView) getLayoutInflater().inflate(R.layout.caches_footer, null);
             historyFooter.setText(R.string.search_history_empty);
         }
         return historyFooter;
@@ -188,8 +204,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private DestinationHistoryAdapter getDestionationHistoryAdapter() {
         if (destinationHistoryAdapter == null) {
-            destinationHistoryAdapter = new DestinationHistoryAdapter(this,
-                    getHistoryOfSearchedLocations());
+            destinationHistoryAdapter = new DestinationHistoryAdapter(this, getHistoryOfSearchedLocations());
         }
         return destinationHistoryAdapter;
     }
