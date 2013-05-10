@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -31,7 +30,7 @@ public class CompassActivity extends AbstractActivity {
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final String EXTRAS_CACHE_INFO = "cacheinfo";
     private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
-    private PowerManager pm = null;
+    private static final int COORDINATES_OFFSET = 10;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private String title = null;
@@ -86,11 +85,6 @@ public class CompassActivity extends AbstractActivity {
 
         // sensor & geolocation manager
         geoDirHandler.startGeoAndDir();
-
-        // keep backlight on
-        if (pm == null) {
-            pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        }
     }
 
     @Override
@@ -110,10 +104,9 @@ public class CompassActivity extends AbstractActivity {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
         final SubMenu subMenu = menu.findItem(R.id.menu_select_destination).getSubMenu();
         if (coordinates.size() > 1) {
-            int cnt = 4;
-            for (final IWaypoint coordinate : coordinates) {
-                subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
-                cnt++;
+            for (int i = 0; i < coordinates.size(); i++) {
+                final IWaypoint coordinate = coordinates.get(i);
+                subMenu.add(0, COORDINATES_OFFSET + i, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
             }
         }
         else {
@@ -153,9 +146,9 @@ public class CompassActivity extends AbstractActivity {
                 finish();
                 return true;
             default:
-                if (id > 3 && coordinates.get(id - 4) != null) {
-                    final IWaypoint coordinate = coordinates.get(id - 4);
-
+                int coordinatesIndex = id - COORDINATES_OFFSET;
+                if (coordinatesIndex >= 0 && coordinatesIndex < coordinates.size()) {
+                    final IWaypoint coordinate = coordinates.get(coordinatesIndex);
                     title = coordinate.getName();
                     dstCoords = coordinate.getCoords();
                     setTitle();
@@ -278,8 +271,12 @@ public class CompassActivity extends AbstractActivity {
     public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType,
             final String info) {
         coordinates.clear();
-        if (coordinatesWithType != null) { // avoid possible NPE
-            coordinates.addAll(coordinatesWithType);
+        if (coordinatesWithType != null) {
+            for (IWaypoint coordinate : coordinatesWithType) {
+                if (coordinate != null) {
+                    coordinates.add(coordinate);
+                }
+            }
         }
 
         final Intent navigateIntent = new Intent(context, CompassActivity.class);
