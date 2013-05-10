@@ -827,12 +827,11 @@ public abstract class GCParser {
     }
 
     private static boolean isSearchForMyCaches(final String userName) {
-        boolean my = false;
         if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
-            my = true;
             Log.i("Overriding users choice because of self search, downloading all caches.");
+            return true;
         }
-        return my;
+        return false;
     }
 
     public static SearchResult searchByUsername(final String userName, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
