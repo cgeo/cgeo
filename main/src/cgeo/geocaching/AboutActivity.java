@@ -3,12 +3,12 @@ package cgeo.geocaching;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.Version;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,8 +22,8 @@ public class AboutActivity extends AbstractActivity {
         super.onCreate(savedInstanceState, R.layout.about_activity);
 
         version.setText(Version.getVersionName(this));
-        contributors.setMovementMethod(LinkMovementMethod.getInstance());
-        changeLog.setMovementMethod(LinkMovementMethod.getInstance());
+        contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+        changeLog.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
     }
 
     /**

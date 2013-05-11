@@ -8,6 +8,7 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
@@ -26,7 +27,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -452,7 +452,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             TextView logView = holder.text;
-            logView.setMovementMethod(LinkMovementMethod.getInstance());
+            logView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
 
             String logText = log.log;
             if (BaseUtils.containsHtml(logText)) {
@@ -596,7 +596,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 TextView descView = (TextView) view.findViewById(R.id.goal);
                 descView.setVisibility(View.VISIBLE);
                 descView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
-                descView.setMovementMethod(LinkMovementMethod.getInstance());
+                descView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
 
             // trackable details
@@ -605,7 +605,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 TextView descView = (TextView) view.findViewById(R.id.details);
                 descView.setVisibility(View.VISIBLE);
                 descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
-                descView.setMovementMethod(LinkMovementMethod.getInstance());
+                descView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
 
             // trackable image

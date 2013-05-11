@@ -72,7 +72,6 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.format.DateUtils;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
@@ -1238,7 +1237,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     TextView licenseView = ((TextView) view.findViewById(R.id.license));
                     licenseView.setText(Html.fromHtml(license), BufferType.SPANNABLE);
                     licenseView.setClickable(true);
-                    licenseView.setMovementMethod(LinkMovementMethod.getInstance());
+                    licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 } else {
                     view.findViewById(R.id.license_box).setVisibility(View.GONE);
                 }
@@ -1770,7 +1769,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // cache personal note
             final TextView personalNoteView = (TextView) view.findViewById(R.id.personalnote);
             setPersonalNote(personalNoteView);
-            personalNoteView.setMovementMethod(LinkMovementMethod.getInstance());
+            personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             registerForContextMenu(personalNoteView);
             final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
             if (cache.isOffline()) {
@@ -2140,7 +2139,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     if (null == convertView) {
                         // if convertView != null then this listeners are already set
                         holder.author.setOnClickListener(userActionsClickListener);
-                        holder.text.setMovementMethod(LinkMovementMethod.getInstance());
+                        holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                         holder.text.setOnClickListener(decryptTextClickListener);
                         registerForContextMenu(holder.text);
                     }
