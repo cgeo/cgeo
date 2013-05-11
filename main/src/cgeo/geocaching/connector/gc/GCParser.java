@@ -1381,7 +1381,11 @@ public abstract class GCParser {
         // trackable distance
         final String distance = BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
         if (null != distance) {
-            trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
+            try {
+                trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
+            } catch (NumberFormatException e) {
+                Log.e("GCParser.parseTrackable: Failed to parse distance", e);
+            }
         }
 
         // trackable goal
