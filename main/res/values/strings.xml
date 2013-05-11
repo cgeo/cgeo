@@ -1061,6 +1061,7 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="http://manual.cgeo.org/">c:geo in a Nutshell</a></string>
+  <string name="market">Android: <a href="https://play.google.com/store/apps/details?id=cgeo.geocaching">c:geo on Google Play</a></string>
   <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
   <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
   <string name="about_auth_2">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>

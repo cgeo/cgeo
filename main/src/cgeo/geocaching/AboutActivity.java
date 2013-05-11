@@ -73,4 +73,14 @@ public class AboutActivity extends AbstractActivity {
     public void nutshellmanual(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cgeo.org/")));
     }
+
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
+    public void market(View view) {
+        Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName()));
+        marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        startActivity(marketIntent);
+    }
 }
