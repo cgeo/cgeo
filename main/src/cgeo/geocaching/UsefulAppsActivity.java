@@ -5,6 +5,7 @@ import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,23 +34,24 @@ public class UsefulAppsActivity extends AbstractActivity {
         private final int titleId;
         private final int descriptionId;
         private final int iconId;
-        private final String market;
+        private final String packageName;
 
-        public HelperApp(final int title, final int description, final int icon, final String market) {
+        public HelperApp(final int title, final int description, final int icon, final String packageName) {
             this.titleId = title;
             this.descriptionId = description;
             this.iconId = icon;
-            this.market = market;
+            this.packageName = packageName;
         }
 
-        private void installFromMarket(UsefulAppsActivity activity) {
+        private void installFromMarket(Activity activity) {
             try {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + market)));
+                Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
+                marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                activity.startActivity(marketIntent);
+
             } catch (Exception e) {
                 // market not available in standard emulator
             }
-
-            activity.finish();
         }
     }
 
