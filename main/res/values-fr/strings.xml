@@ -1063,5 +1063,10 @@
     <item quantity="one">hier</item>
     <item quantity="other">il y a %d jours</item>
   </plurals>
-
+  <string name="tts_service">Boussole parlante</string>
+  <string name="tts_start">Commencer à parler</string>
+  <string name="tts_stop">Arrêter de parler</string>
+  <string name="tts_kilometers">%s kilomètres</string>
+  <string name="tts_meters">%s mètres</string>
+  <string name="tts_oclock">%s heures</string>
 </resources>
