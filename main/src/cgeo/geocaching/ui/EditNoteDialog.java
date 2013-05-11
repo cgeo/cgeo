@@ -26,10 +26,6 @@ public class EditNoteDialog extends DialogFragment implements OnEditorActionList
     private EditText mEditText;
     private String initialNote;
 
-    public EditNoteDialog() {
-        // Empty constructor required for DialogFragment
-    }
-
     public static EditNoteDialog newInstance(final String initialNote) {
         EditNoteDialog dialog = new EditNoteDialog();
 
