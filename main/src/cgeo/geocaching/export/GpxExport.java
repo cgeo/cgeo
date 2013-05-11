@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -142,13 +143,13 @@ class GpxExport extends AbstractExport {
 
             final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
             final File exportFile = new File(Settings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(new Date()) + ".gpx");
-            FileWriter writer = null;
+            BufferedWriter writer = null;
             try {
                 final File exportLocation = new File(Settings.getGpxExportDir());
                 exportLocation.mkdirs();
 
                 final XmlSerializer gpx = new KXmlSerializer();
-                writer = new FileWriter(exportFile);
+                writer = new BufferedWriter(new FileWriter(exportFile));
                 gpx.setOutput(writer);
 
                 gpx.startDocument("UTF-8", true);

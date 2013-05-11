@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Collection;
@@ -184,15 +185,15 @@ public class ImagesList {
 
     private void viewImageInStandardApp(final BitmapDrawable image) {
         final File file = LocalStorage.getStorageFile(null, "temp.jpg", false, true);
-        FileOutputStream fos = null;
+        BufferedOutputStream stream = null;
         try {
-            fos = new FileOutputStream(file);
-            image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
+            stream = new BufferedOutputStream(new FileOutputStream(file));
+            image.getBitmap().compress(CompressFormat.JPEG, 100, stream);
         } catch (Exception e) {
             Log.e("ImagesActivity.handleMessage.onClick", e);
             return;
         } finally {
-            IOUtils.closeQuietly(fos);
+            IOUtils.closeQuietly(stream);
         }
 
         final Intent intent = new Intent();

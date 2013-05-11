@@ -9,12 +9,14 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -39,10 +41,12 @@ public class OCXMLClient {
                 return null;
             }
 
-            Collection<Geocache> caches = OC11XMLParser.parseCaches(new GZIPInputStream(data));
+            final BufferedInputStream stream = new BufferedInputStream(new GZIPInputStream(data));
+            Collection<Geocache> caches = OC11XMLParser.parseCaches(stream);
             if (caches.iterator().hasNext()) {
                 Geocache cache = caches.iterator().next();
                 cgData.saveCache(cache, LoadFlags.SAVE_ALL);
+                IOUtils.closeQuietly(stream);
                 return cache;
             }
             return null;
@@ -64,7 +68,10 @@ public class OCXMLClient {
                 return Collections.emptyList();
             }
 
-            return OC11XMLParser.parseCachesFiltered(new GZIPInputStream(data));
+            final BufferedInputStream stream = new BufferedInputStream(new GZIPInputStream(data));
+            final Collection<Geocache> result = OC11XMLParser.parseCachesFiltered(stream);
+            IOUtils.closeQuietly(stream);
+            return result;
         } catch (IOException e) {
             Log.e("Error parsing nearby search result", e);
             return Collections.emptyList();

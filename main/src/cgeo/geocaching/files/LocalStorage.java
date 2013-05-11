@@ -2,14 +2,18 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Environment;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -275,19 +279,14 @@ public class LocalStorage {
         destination.getParentFile().mkdirs();
 
         InputStream input = null;
-        OutputStream output;
+        OutputStream output = null;
         try {
-            input = new FileInputStream(source);
-            output = new FileOutputStream(destination);
+            input = new BufferedInputStream(new FileInputStream(source));
+            output = new BufferedOutputStream(new FileOutputStream(destination));
         } catch (FileNotFoundException e) {
             Log.e("LocalStorage.copy: could not open file", e);
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e1) {
-                    // ignore
-                }
-            }
+            IOUtils.closeQuietly(input);
+            IOUtils.closeQuietly(output);
             return false;
         }
 

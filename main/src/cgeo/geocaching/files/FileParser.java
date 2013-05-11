@@ -2,7 +2,9 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.IOUtils;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +18,7 @@ import java.util.concurrent.CancellationException;
 public abstract class FileParser {
     /**
      * Parses caches from input stream.
-     * 
+     *
      * @param stream
      * @param progressHandler
      *            for reporting parsing progress (in bytes read from input stream)
@@ -38,11 +40,11 @@ public abstract class FileParser {
      * @throws ParserException
      */
     public Collection<Geocache> parse(final File file, final CancellableHandler progressHandler) throws IOException, ParserException {
-        FileInputStream fis = new FileInputStream(file);
+        BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file));
         try {
-            return parse(fis, progressHandler);
+            return parse(stream, progressHandler);
         } finally {
-            fis.close();
+            IOUtils.closeQuietly(stream);
         }
     }
 
@@ -59,7 +61,7 @@ public abstract class FileParser {
             }
             return buffer;
         } finally {
-            input.close();
+            IOUtils.closeQuietly(input);
         }
     }
 

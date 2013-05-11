@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -287,7 +288,7 @@ public class GPXImporter {
             Collection<Geocache> caches = Collections.emptySet();
             // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
             // 1. parse GPX files
-            ZipInputStream zis = new ZipInputStream(getInputStream());
+            ZipInputStream zis = new ZipInputStream(new BufferedInputStream(getInputStream()));
             try {
                 for (ZipEntry zipEntry = zis.getNextEntry(); zipEntry != null; zipEntry = zis.getNextEntry()) {
                     if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPX_FILE_EXTENSION)) {
@@ -305,7 +306,7 @@ public class GPXImporter {
             }
 
             // 2. parse waypoint files
-            zis = new ZipInputStream(getInputStream());
+            zis = new ZipInputStream(new BufferedInputStream(getInputStream()));
             try {
                 for (ZipEntry zipEntry = zis.getNextEntry(); zipEntry != null; zipEntry = zis.getNextEntry()) {
                     if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {

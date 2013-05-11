@@ -6,6 +6,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.ImageHelper;
 import cgeo.geocaching.utils.Log;
 
@@ -21,10 +22,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.Html;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Date;
 
 public class HtmlImage implements Html.ImageGetter {
@@ -209,20 +210,14 @@ public class HtmlImage implements Html.ImageGetter {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
-        FileInputStream fis = null;
+        BufferedInputStream stream = null;
         try {
-            fis = new FileInputStream(file);
-            BitmapFactory.decodeStream(fis, null, options);
+            stream = new BufferedInputStream(new FileInputStream(file));
+            BitmapFactory.decodeStream(stream, null, options);
         } catch (FileNotFoundException e) {
             Log.e("HtmlImage.setSampleSize", e);
         } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
+            IOUtils.closeQuietly(stream);
         }
 
         int scale = 1;

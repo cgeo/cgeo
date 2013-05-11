@@ -25,6 +25,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -153,16 +154,19 @@ class FieldnoteExport extends AbstractExport {
             SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
             exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
 
-            Writer fw = null;
+            Writer fileWriter = null;
+            BufferedOutputStream buffer = null;
             try {
                 OutputStream os = new FileOutputStream(exportFile);
-                fw = new OutputStreamWriter(os, CharEncoding.UTF_16);
-                fw.write(fieldNoteBuffer.toString());
+                buffer = new BufferedOutputStream(os);
+                fileWriter = new OutputStreamWriter(buffer, CharEncoding.UTF_16);
+                fileWriter.write(fieldNoteBuffer.toString());
             } catch (IOException e) {
                 Log.e("FieldnoteExport.ExportTask export", e);
                 return false;
             } finally {
-                IOUtils.closeQuietly(fw);
+                IOUtils.closeQuietly(buffer);
+                IOUtils.closeQuietly(fileWriter);
             }
 
             if (upload) {

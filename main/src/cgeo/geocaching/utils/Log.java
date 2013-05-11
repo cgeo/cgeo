@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import android.os.Environment;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -100,12 +101,14 @@ final public class Log {
             first = false;
             file.delete();
         }
+        Writer writer = null;
         try {
-            final Writer writer = new FileWriter(file, true);
+            writer = new BufferedWriter(new FileWriter(file, true));
             writer.write(msg);
-            writer.close();
         } catch (final IOException e) {
             Log.e("logToFile: cannot write to " + file, e);
+        } finally {
+            IOUtils.closeQuietly(writer);
         }
     }
 }
