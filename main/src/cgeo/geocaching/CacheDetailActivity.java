@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.calendar.ICalendar;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.Progress;
@@ -1734,7 +1737,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
-    private class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+
+        @InjectView(R.id.personalnote) protected TextView personalNoteView;
 
         @Override
         public ScrollView getDispatchedView() {
@@ -1744,6 +1749,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_description, null);
+            Views.inject(this, view);
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
@@ -1767,31 +1773,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // cache personal note
-            final TextView personalNoteView = (TextView) view.findViewById(R.id.personalnote);
-            setPersonalNote(personalNoteView);
+            setPersonalNote();
             personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             registerForContextMenu(personalNoteView);
             final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
-            if (cache.isOffline()) {
-                personalNoteEdit.setVisibility(View.VISIBLE);
-                personalNoteEdit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        editNoteDialogListener = new EditNoteDialogListener() {
-                            @Override
-                            public void onFinishEditNoteDialog(final String note) {
-                                cache.setPersonalNote(note);
-                                setPersonalNote(personalNoteView);
-                                cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));                            }
-                        };
-                        final FragmentManager fm = getSupportFragmentManager();
-                        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
-                        dialog.show(fm, "fragment_edit_note");
+            personalNoteEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (cache.isOffline()) {
+                        editPersonalNote();
+                    } else {
+                        warnPersonalNoteNeedsStoring();
                     }
-                });
-            } else {
-                personalNoteEdit.setVisibility(View.INVISIBLE);
-            }
+                }
+            });
 
             // cache hint and spoiler images
             final View hintBoxView = view.findViewById(R.id.hint_box);
@@ -1844,7 +1839,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return view;
         }
 
-        private void setPersonalNote(final TextView personalNoteView) {
+        private void editPersonalNote() {
+            if (cache.isOffline()) {
+                editNoteDialogListener = new EditNoteDialogListener() {
+                    @Override
+                    public void onFinishEditNoteDialog(final String note) {
+                        cache.setPersonalNote(note);
+                        setPersonalNote();
+                        cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    }
+                };
+                final FragmentManager fm = getSupportFragmentManager();
+                final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
+                dialog.show(fm, "fragment_edit_note");
+            }
+        }
+
+        private void setPersonalNote() {
             final String personalNote = cache.getPersonalNote();
             personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
             if (StringUtils.isNotBlank(personalNote)) {
@@ -1861,6 +1872,33 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
             new LoadDescriptionTask(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading), view.findViewById(R.id.shortdesc)).execute();
+        }
+
+        private void warnPersonalNoteNeedsStoring() {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+            builder.setTitle(R.string.cache_personal_note_unstored);
+            builder.setMessage(R.string.cache_personal_note_store);
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // do nothing
+                }
+            });
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    cache.store(null);
+                    editPersonalNote();
+                }
+
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.setOwnerActivity(CacheDetailActivity.this);
+            dialog.show();
         }
 
     }

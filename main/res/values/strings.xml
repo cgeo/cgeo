@@ -524,6 +524,8 @@
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Personal note</string>
   <string name="cache_personal_note_edit">Edit</string>
+  <string name="cache_personal_note_unstored">Cache not stored</string>
+  <string name="cache_personal_note_store">The cache will be stored first to enable personal notes.</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Long Description</string>
   <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
