@@ -358,7 +358,12 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             boolean expired = DateUtils.daysSince(eventDate.getTime()) > 0;
 
             if (cache.hasOwnLog(LogType.WILL_ATTEND) || expired) {
-                typeSelected = LogType.ATTENDED;
+                if (cache.hasOwnLog(LogType.ATTENDED)) {
+                    typeSelected = LogType.NOTE;
+                }
+                else {
+                    typeSelected = LogType.ATTENDED;
+                }
             }
             else {
                 typeSelected = LogType.WILL_ATTEND;
@@ -372,8 +377,8 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             }
         }
         text = null;
-        imageCaption = "";
-        imageDescription = "";
+        imageCaption = StringUtils.EMPTY;
+        imageDescription = StringUtils.EMPTY;
         imageUri = Uri.EMPTY;
     }
 
