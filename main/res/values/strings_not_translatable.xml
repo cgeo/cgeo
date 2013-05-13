@@ -87,7 +87,7 @@
 
   <!-- changelog -->
   <string name="changelog" translatable="false">\n
-    <b>Next bugfix release</b>\n
+    <b>2013.05.13</b>\n
     <b>Bugfixing:</b>\n
     · Twitter option was not shown on logging page\n
     · Disable trail on map did only work after refresh of the map\n
