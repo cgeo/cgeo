@@ -13,6 +13,7 @@
 	<uses-feature android:name="android.hardware.camera" android:required="false"/>
 	<supports-screens
 		android:largeScreens="true"
+		android:xlargeScreens="true"
 		android:normalScreens="true"
 		android:smallScreens="true"
 		android:anyDensity="true" />
