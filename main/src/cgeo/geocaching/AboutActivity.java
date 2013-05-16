@@ -71,7 +71,7 @@ public class AboutActivity extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void nutshellmanual(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cgeo.org/")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://manual.cgeo.org/")));
     }
 
     /**

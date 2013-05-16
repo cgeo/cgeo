@@ -779,11 +779,12 @@
   <string name="legal_note">Para utilizar los servicios de Geocaching.com, debes aceptar las <a href="http://www.geocaching.com/about/termsofuse.aspx">condiciones de Groundspeak</a>.</string>
   <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
 
-  <string name="support">Soporte: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">Web: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">Manual: <a href="http://itw.bidix.info/cgeo/">c:geo en breve</a></string>
+  <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support">Soporte: <a href="">support@cgeo.org</a></string>
+  <string name="website">Web: <a href="">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
+  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Manual: <a href="">c:geo en breve</a></string>
 
   <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un escondite?</string>
   <string name="about_auth_1">El siguiente proceso permite a  <b>c:geo</b> acceder a Twitter - si estás de acuerdo.</string>
