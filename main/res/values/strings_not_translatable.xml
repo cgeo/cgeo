@@ -98,7 +98,7 @@
   <string name="changelog" translatable="false">\n
     <b>Next release</b>\n\n
     <b>New Features/Functions:</b>\n
-    · Log images can be scaled before upload to save traffic
+    · Log images can be scaled before upload to save traffic\n
     · Improved online detection when refreshing caches\n
     · Talking compass (accessible in compass menu)\n
     \n
