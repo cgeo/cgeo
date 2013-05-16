@@ -44,6 +44,7 @@ public class GCMap {
 
         try {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
+            params.add("app", "cgeo");
             final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
             final String data = StringUtils.defaultString(Tile.requestMapInfo(referer, params, referer));
 
@@ -297,7 +298,8 @@ public class GCMap {
                             "x", String.valueOf(tile.getX()),
                             "y", String.valueOf(tile.getY()),
                             "z", String.valueOf(tile.getZoomlevel()),
-                            "ep", "1");
+                            "ep", "1",
+                            "app", "cgeo");
                     if (tokens != null) {
                         params.put("k", tokens[0], "st", tokens[1]);
                     }

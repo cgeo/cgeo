@@ -13,14 +13,15 @@ import java.util.regex.Pattern;
 public final class GCConstants {
 
     static final String GC_URL = "http://www.geocaching.com/";
+    static final String GC_TILE_URL = "http://tiles.geocaching.com/";
     /** Live Map */
     public final static String URL_LIVE_MAP = GC_URL + "map/default.aspx";
     /** Live Map pop-up */
-    public final static String URL_LIVE_MAP_DETAILS = GC_URL + "map/map.details";
+    public final static String URL_LIVE_MAP_DETAILS = GC_TILE_URL + "map.details";
     /** Caches in a tile */
-    public final static String URL_MAP_INFO = GC_URL + "map/map.info";
+    public final static String URL_MAP_INFO = GC_TILE_URL + "map.info";
     /** Tile itself */
-    public final static String URL_MAP_TILE = GC_URL + "map/map.png";
+    public final static String URL_MAP_TILE = GC_TILE_URL + "map.png";
 
     /**
      * Patterns for parsing the result of a (detailed) search
