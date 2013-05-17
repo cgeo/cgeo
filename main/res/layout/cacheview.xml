@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res/cgeo.geocaching"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?background_color"
     android:orientation="vertical" >
 
     <LinearLayout style="@style/action_bar" >
