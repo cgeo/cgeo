@@ -971,11 +971,12 @@
   <string name="legal_note">Geocaching.comを使うには<a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak 利用規約</a>(英語)に同意している必要があります。</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">サポート: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">Webサイト: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">マニュアル: <a href="http://manual.cgeo.org/">c:geo マニュアル</a>(英語)</string>
+  <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support">サポート: <a href="">support@cgeo.org</a></string>
+  <string name="website">Webサイト: <a href="">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
+  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">マニュアル: <a href="">c:geo マニュアル</a>(英語)</string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="about_auth_1"><b>c:geo</b>がTwitterにアクセスする許可を得るには次のようにしてください。</string>
   <string name="about_auth_2">「認証を開始する」ボタンを押すとブラウザでTwitterのページが開きます。そのページにログインすれば<b>c:geo</b>があなたのアカウントにアクセルする許可が得られます。ログインに成功したら数字のPINコードが表示されるので、この下の入力欄にコピー&amp;ペーストして「完了」ボタンを押してください。</string>

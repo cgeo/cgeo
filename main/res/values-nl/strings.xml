@@ -1026,11 +1026,12 @@
   <string name="legal_note">Voor het gebruik van de diensten van Geocaching.com, dient akkoord te worden gegaan met de <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak voorwaarden</a>.</string>
   <string name="quote">Om geocahing makkelijker te maken en gebruikers luier te maken.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">support:<a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">website: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">Handleiding: <a href="http://manual.cgeo.org/">c:geo in een notendop</a></string>
+  <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support">support:<a href="">support@cgeo.org</a></string>
+  <string name="website">website: <a href="">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
+  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Handleiding: <a href="">c:geo in een notendop</a></string>
   <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
   <string name="about_auth_1">Het volgende proces staat <b>c:geo</b> toe om Twitter toegang te verkrijgen bij goedkeuring.</string>
   <string name="about_auth_2">Klik op de \"autoriseer c:geo\" knop om het proces te starten. Dit proces zal een browser openen met een Twitter pagina. Login op deze pagina en sta <b>c:geo</b> toegang tot je account toe. Bij goedkeuring laat Twitter een numerieke PIN code zien. Deze PIN dien je te plakken en te bevestigen in <b>c:geo</b>.</string>

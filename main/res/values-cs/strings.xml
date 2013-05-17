@@ -1044,11 +1044,12 @@
   <string name="legal_note">Pro používání služeb Geocaching.com musíš souhlasit s podmínkami použití <a href="http://www.geocaching.com/about/termsofuse.aspx">společnosti Groundspeak</a></string>
   <string name="quote">Učinit Geocaching lehčí a uživatelé línější.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Podpora: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">Stránka: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">Stránka c:geo</a></string>
-  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">Návod: <a href="http://manual.cgeo.org/">c:geo v Nutshell</a></string>
+  <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support">Podpora: <a href="">support@cgeo.org</a></string>
+  <string name="website">Stránka: <a href="">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="">Stránka c:geo</a></string>
+  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Návod: <a href="">c:geo v Nutshell</a></string>
   <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
   <string name="about_auth_1">Následující proces dovoluje aplikaci <b>c:geo</b> přístup na Twitter - pokud budeš souhlasit.</string>
   <string name="about_auth_2">Klepnutím na tlačítko \"Zahájit autorizaci\" bude proces zahájen. Tento proces otevře webový prohlížeč s Twitterem. Přihlaš se na této stránce a povol <b>c:geu</b> přístup k tvému účtu. Pokud je to povoleno, Twitter ti ukáže číselný PIN kód. Tento PIN kód musíš zadat do <b>c:geo</b> a potvrdit. To je vše.</string>

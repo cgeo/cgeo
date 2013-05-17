@@ -1045,11 +1045,12 @@
   <string name="legal_note">Aby móc korzystać z usług serwisu Geocaching.com <a href="http://www.geocaching.com/about/termsofuse.aspx">warunki korzystania Groundspeak</a> muszą być zaakceptowane.</string>
   <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">Website: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo strona</a></string>
-  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">Podręcznik: <a href="http://manual.cgeo.org/">c:geo skrócona instrukcja obsługi</a></string>
+  <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support">Support: <a href="">support@cgeo.org</a></string>
+  <string name="website">Website: <a href="">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="">c:geo strona</a></string>
+  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Podręcznik: <a href="">c:geo skrócona instrukcja obsługi</a></string>
   <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
   <string name="about_auth_1">Poniższy proces pozwala <b>c:geo</b> uzyskać dostęp do Twitter za Twoim pozwoleniem.</string>
   <string name="about_auth_2">Kliknięcie na \"Autoryzacja c:geo\" spowoduje rozpoczęcie procesu. Ten proces spowoduje otwarcie przeglądarki internetowej na stronie Twitter. Zaloguj się na tej stronie i pozwól <b>c:geo</b> uzyskać dostęp do Twojego konta. Jeśli zostanie zaakceptowany, Twitter wyświetli kod numeryczny PIN. Kod PIN musi zostać wklejony do <b>c:geo</b> i potwierdzony. To wszystko.</string>

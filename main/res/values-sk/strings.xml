@@ -942,11 +942,12 @@
   <string name="legal_note">Pred používaním služieb serveru Geocaching.com je potrebné súhlasiť s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčnou dohodou Groundspeaku</a>.</string>
   <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Podpora: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">Web: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">Manuál: <a href="http://manual.cgeo.org/">c:geo v kocke</a></string>
+  <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support">Podpora: <a href="">support@cgeo.org</a></string>
+  <string name="website">Web: <a href="">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
+  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Manuál: <a href="">c:geo v kocke</a></string>
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy keď zapíšete nájdenie skrýše?</string>
   <string name="about_auth_1">Pomocou nasledujúceho procesu môžete aplikácii <b>c:geo</b> umožniť odosielanie príspevkov na váš Twitter.  </string>
   <string name="about_auth_2">Ťuknutím na tlačidlo „Zahájiť autorizáciu“ celý proces začne. Tento proces otvorí webovú stránku Twitteru, kde sa sa prihlásite a tlačidlom „Authorize app“ umožníte aplikácii <b>c:geo</b> prístup k vášmu Twitter účtu. Potom čo ťuknete na „Authorize app“, Twitter vám pridelí PIN kód. Tento kód skopírujte a vložte do aplikácie <b>c:geo</b>. A potvrďte. To je všetko.</string>
