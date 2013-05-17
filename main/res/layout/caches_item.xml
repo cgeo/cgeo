@@ -3,8 +3,7 @@
     xmlns:cc="http://schemas.android.com/apk/res/cgeo.geocaching"
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="?background_color" >
+    android:layout_height="wrap_content" >
 
     <!-- selection mode checkbox -->
 
@@ -166,7 +165,6 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="22dip"
-            android:background="?favorite"
             android:ellipsize="marquee"
             android:gravity="center"
             android:lines="1"
