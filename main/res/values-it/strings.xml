@@ -1052,12 +1052,13 @@
   <string name="legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del <a href="http://www.geocaching.com/about/termsofuse.aspx">Contratto Groundspeak</a> che deve essere approvato dall\'utente.</string>
   <string name="quote">Per rendere il geocaching più facile e rendere gli utenti più pigri.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Supporto: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">Sito: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">pagina c:geo </a></string>
-  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">Manuale: <a href="http://manual.cgeo.org/">c:geo in a Nutshell</a></string>
-  <string name="market">Android: <a href="https://play.google.com/store/apps/details?id=cgeo.geocaching">c:geo su Google Play</a></string>
+  <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support">Supporto: <a href="">support@cgeo.org</a></string>
+  <string name="website">Sito: <a href="">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="">pagina c:geo </a></string>
+  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Manuale: <a href="">c:geo in a Nutshell</a></string>
+  <string name="market">Android: <a href="">c:geo su Google Play</a></string>
   <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
   <string name="about_auth_1">La procesura seguente autorizza <b>c:geo</b> ad accedere a Twitter - se confermato.</string>
   <string name="about_auth_2">Clicca sul pulsante \"Autorizza c:geo\" per iniziare. Questa procedura aprirà il browser sulla pagina Twitter. Fai Login su questa pagina e autorizza <b>c:geo</b> ad accedere al tuo account. Se accettato, Twitter mostrerà un PIN code numerico. Questo PIN deve essere riportato in <b>c:geo</b> e confermato.</string>
