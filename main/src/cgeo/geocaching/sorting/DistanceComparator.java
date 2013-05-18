@@ -27,12 +27,9 @@ public class DistanceComparator extends AbstractCacheComparator {
         if (cachedDistances) {
             return;
         }
-        for (Geocache cache : list) {
+        for (final Geocache cache : list) {
             if (cache.getCoords() != null) {
                 cache.setDistance(coords.distanceTo(cache.getCoords()));
-            }
-            else {
-                cache.setDistance(null);
             }
         }
         cachedDistances = true;
