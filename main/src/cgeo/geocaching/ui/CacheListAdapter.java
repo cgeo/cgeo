@@ -39,7 +39,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -100,10 +99,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         TextView favourite;
         TextView info;
         ImageView inventory;
-        RelativeLayout directionLayout;
         DistanceView distance;
         CompassMiniView direction;
-        RelativeLayout dirImgLayout;
         ImageView dirImg;
     }
 
@@ -358,10 +355,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
             holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
             holder.text = (TextView) v.findViewById(R.id.text);
-            holder.directionLayout = (RelativeLayout) v.findViewById(R.id.direction_layout);
             holder.distance = (DistanceView) v.findViewById(R.id.distance);
             holder.direction = (CompassMiniView) v.findViewById(R.id.direction);
-            holder.dirImgLayout = (RelativeLayout) v.findViewById(R.id.dirimg_layout);
             holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
             holder.inventory = (ImageView) v.findViewById(R.id.inventory);
             holder.favourite = (TextView) v.findViewById(R.id.favourite);
@@ -434,35 +429,23 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.inventory.setVisibility(View.GONE);
         }
 
-        boolean setDiDi = false;
+        if (cache.getDistance() != null) {
+            holder.distance.setDistance(cache.getDistance());
+        }
         if (cache.getCoords() != null) {
             holder.direction.setVisibility(View.VISIBLE);
+            holder.dirImg.setVisibility(View.GONE);
             holder.direction.updateAzimuth(azimuth);
             if (coords != null) {
                 holder.distance.update(coords);
                 holder.direction.updateCurrentCoords(coords);
             }
-            setDiDi = true;
+        } else if (cache.getDirection() != null) {
+            holder.direction.setVisibility(View.VISIBLE);
+            holder.dirImg.setVisibility(View.GONE);
+            holder.direction.updateAzimuth(azimuth);
+            holder.direction.updateHeading(cache.getDirection());
         } else {
-            if (cache.getDistance() != null) {
-                holder.distance.setDistance(cache.getDistance());
-                setDiDi = true;
-            }
-            if (cache.getDirection() != null) {
-                holder.direction.setVisibility(View.VISIBLE);
-                holder.direction.updateAzimuth(azimuth);
-                holder.direction.updateHeading(cache.getDirection());
-                setDiDi = true;
-            }
-        }
-
-        if (setDiDi) {
-            holder.directionLayout.setVisibility(View.VISIBLE);
-            holder.dirImgLayout.setVisibility(View.GONE);
-        } else {
-            holder.directionLayout.setVisibility(View.GONE);
-            holder.distance.clear();
-
             final Bitmap dirImgPre = BitmapFactory.decodeFile(DirectionImage.getDirectionFile(cache.getGeocode(), false).getPath());
             final Bitmap dirImg;
             if (dirImgPre != null) { // null happens for invalid caches (not yet released)
@@ -487,10 +470,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
                 }
 
                 holder.dirImg.setImageBitmap(dirImg);
-                holder.dirImgLayout.setVisibility(View.VISIBLE);
-            } else {
-                holder.dirImg.setImageBitmap(null);
-                holder.dirImgLayout.setVisibility(View.GONE);
+                holder.dirImg.setVisibility(View.VISIBLE);
+                holder.direction.setVisibility(View.GONE);
             }
         }
 

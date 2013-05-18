@@ -2,7 +2,6 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +16,7 @@ public class DirectionImage {
         }
 
         final HttpResponse httpResponse =
-                Network.getRequest("http://www.geocaching.com/ImgGen/seek/CacheDir.ashx", new Parameters("k", code));
+                Network.getRequest("http://www.geocaching.com/images/icons/compass/" + code + ".gif");
         if (httpResponse != null) {
             LocalStorage.saveEntityToFile(httpResponse, getDirectionFile(geocode, true));
         }
