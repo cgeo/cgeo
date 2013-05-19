@@ -43,16 +43,12 @@ public class DistanceComparator extends AbstractCacheComparator {
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         calculateAllDistances();
-        if (cache1.getCoords() == null && cache2.getCoords() == null) {
-            return 0;
+        final Float distance1 = cache1.getDistance();
+        final Float distance2 = cache2.getDistance();
+        if (distance1 == null) {
+            return distance2 == null ? 0 : 1;
         }
-        if (cache1.getCoords() == null) {
-            return 1;
-        }
-        if (cache2.getCoords() == null) {
-            return -1;
-        }
-        return Float.compare(cache1.getDistance(), cache2.getDistance());
+        return distance2 == null ? -1 : Float.compare(distance1, distance2);
     }
 
 }
