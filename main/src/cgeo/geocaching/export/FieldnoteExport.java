@@ -165,8 +165,8 @@ class FieldnoteExport extends AbstractExport {
                 Log.e("FieldnoteExport.ExportTask export", e);
                 return false;
             } finally {
-                IOUtils.closeQuietly(buffer);
                 IOUtils.closeQuietly(fileWriter);
+                IOUtils.closeQuietly(buffer);
             }
 
             if (upload) {
