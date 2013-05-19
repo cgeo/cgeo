@@ -189,6 +189,10 @@ public abstract class GCParser {
                 }
             }
 
+            // size
+            final String container = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_CONTAINER, false, 1, null, false);
+            cache.setSize(CacheSize.getById(container));
+
             // cache inventory
             final MatcherWrapper matcherTbs = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES, row);
             String inventoryPre = null;
