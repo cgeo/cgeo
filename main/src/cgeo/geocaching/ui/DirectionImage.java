@@ -1,29 +1,22 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.files.LocalStorage;
-import cgeo.geocaching.network.Network;
+import cgeo.geocaching.StoredList;
+import cgeo.geocaching.network.HtmlImage;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
+import android.graphics.drawable.BitmapDrawable;
 
 public class DirectionImage {
 
-    public static void getDrawable(final String geocode, final String code) {
-        if (StringUtils.isBlank(geocode) || StringUtils.isBlank(code)) {
-            return;
-        }
+    static private HtmlImage htmlImage = new HtmlImage(HtmlImage.SHARED, false, StoredList.STANDARD_LIST_ID, false);
 
-        final HttpResponse httpResponse =
-                Network.getRequest("http://www.geocaching.com/images/icons/compass/" + code + ".gif");
-        if (httpResponse != null) {
-            LocalStorage.saveEntityToFile(httpResponse, getDirectionFile(geocode, true));
-        }
-    }
-
-    public static File getDirectionFile(final String geocode, final boolean createDirs) {
-        return LocalStorage.getStorageFile(geocode, "direction.png", false, createDirs);
+    /**
+     * Retrieve the direction image corresponding to the direction code.
+     *
+     * @param directionCode one of the eight cardinal points
+     * @return a drawable with the arrow pointing into the right direction
+     */
+    public static BitmapDrawable getDrawable(final String directionCode) {
+        return htmlImage.getDrawable("http://www.geocaching.com/images/icons/compass/" + directionCode + ".gif");
     }
 
 }

@@ -298,7 +298,7 @@ public abstract class GCParser {
             final Set<Geocache> caches = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             for (Geocache cache : caches) {
                 if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
-                    DirectionImage.getDrawable(cache.getGeocode(), cache.getDirectionImg());
+                    DirectionImage.getDrawable(cache.getDirectionImg());
                 }
             }
         }

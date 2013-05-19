@@ -22,8 +22,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.text.Spannable;
@@ -446,33 +444,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.direction.updateAzimuth(azimuth);
             holder.direction.updateHeading(cache.getDirection());
         } else {
-            final Bitmap dirImgPre = BitmapFactory.decodeFile(DirectionImage.getDirectionFile(cache.getGeocode(), false).getPath());
-            final Bitmap dirImg;
-            if (dirImgPre != null) { // null happens for invalid caches (not yet released)
-                dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
-                dirImgPre.recycle();
-            }
-            else {
-                dirImg = null;
-            }
-
-            if (dirImg != null) {
-                if (!lightSkin) {
-                    final int length = dirImg.getWidth() * dirImg.getHeight();
-                    final int[] pixels = new int[length];
-                    dirImg.getPixels(pixels, 0, dirImg.getWidth(), 0, 0, dirImg.getWidth(), dirImg.getHeight());
-                    for (int i = 0; i < length; i++) {
-                        if (pixels[i] == 0xff000000) { // replace black with white
-                            pixels[i] = 0xffffffff;
-                        }
-                    }
-                    dirImg.setPixels(pixels, 0, dirImg.getWidth(), 0, 0, dirImg.getWidth(), dirImg.getHeight());
-                }
-
-                holder.dirImg.setImageBitmap(dirImg);
-                holder.dirImg.setVisibility(View.VISIBLE);
-                holder.direction.setVisibility(View.GONE);
-            }
+            holder.dirImg.setImageDrawable(DirectionImage.getDrawable(cache.getDirectionImg()));
+            holder.dirImg.setVisibility(View.VISIBLE);
+            holder.direction.setVisibility(View.GONE);
         }
 
         holder.favourite.setText(Integer.toString(cache.getFavoritePoints()));
