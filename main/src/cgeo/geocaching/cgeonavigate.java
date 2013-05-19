@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.view.Menu;
@@ -45,6 +47,7 @@ public class cgeonavigate extends AbstractActivity {
     private TextView distanceView = null;
     private TextView headingView = null;
     private CompassView compassView = null;
+    private boolean hasMagneticFieldSensor;
 
     public cgeonavigate() {
         super("c:geo-compass", true);
@@ -57,6 +60,12 @@ public class cgeonavigate extends AbstractActivity {
         setTheme();
         setContentView(R.layout.navigate);
         setTitle(res.getString(R.string.compass_title));
+
+        final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        hasMagneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
+        if (!hasMagneticFieldSensor) {
+            Settings.setUseCompass(false);
+        }
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -118,6 +127,7 @@ public class cgeonavigate extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass)).setIcon(R.drawable.ic_menu_compass);
+        menu.findItem(MENU_SWITCH_COMPASS_GPS).setVisible(hasMagneticFieldSensor);
         menu.add(0, MENU_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(R.drawable.ic_menu_mapmode);
         menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(R.drawable.ic_menu_edit);
         if (coordinates.size() > 1) {
