@@ -13,6 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,10 +45,17 @@ public class CompassActivity extends AbstractActivity {
     private TextView distanceView = null;
     private TextView headingView = null;
     private CompassView compassView = null;
+    private boolean hasMagneticFieldSensor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.navigate);
+
+        final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        hasMagneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
+        if (!hasMagneticFieldSensor) {
+            Settings.setUseCompass(false);
+        }
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -104,6 +113,7 @@ public class CompassActivity extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
+        menu.findItem(R.id.menu_switch_compass_gps).setVisible(hasMagneticFieldSensor);
         final SubMenu subMenu = menu.findItem(R.id.menu_select_destination).getSubMenu();
         if (coordinates.size() > 1) {
             for (int i = 0; i < coordinates.size(); i++) {
