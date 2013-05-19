@@ -1084,5 +1084,7 @@
   <string name="tts_stop">Stop talking</string>
   <string name="tts_kilometers">%s kilometers</string>
   <string name="tts_meters">%s meters</string>
+  <string name="tts_miles">%s miles</string>
+  <string name="tts_feet">%s feet</string>
   <string name="tts_oclock">%s o\'clock</string>
 </resources>
