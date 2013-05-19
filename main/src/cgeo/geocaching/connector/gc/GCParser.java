@@ -166,7 +166,14 @@ public abstract class GCParser {
 
             // cache direction - image
             if (Settings.getLoadDirImg()) {
-                cache.setDirectionImg(Network.decode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION, true, 1, cache.getDirectionImg(), true)));
+                final String direction = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 1, null, false);
+                final String distance = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
+                if (direction != null) {
+                    cache.setDirectionImg(direction);
+                }
+                if (distance != null) {
+                    cache.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
+                }
             }
 
             // cache inventory
@@ -291,7 +298,7 @@ public abstract class GCParser {
             final Set<Geocache> caches = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             for (Geocache cache : caches) {
                 if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
-                    DirectionImage.getDrawable(cache.getGeocode(), cache.getDirectionImg());
+                    DirectionImage.getDrawable(cache.getDirectionImg());
                 }
             }
         }

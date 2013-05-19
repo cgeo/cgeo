@@ -22,8 +22,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.text.Spannable;
@@ -39,7 +37,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -100,10 +97,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         TextView favorite;
         TextView info;
         ImageView inventory;
-        RelativeLayout directionLayout;
         DistanceView distance;
         CompassMiniView direction;
-        RelativeLayout dirImgLayout;
         ImageView dirImg;
     }
 
@@ -358,10 +353,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
             holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
             holder.text = (TextView) v.findViewById(R.id.text);
-            holder.directionLayout = (RelativeLayout) v.findViewById(R.id.direction_layout);
             holder.distance = (DistanceView) v.findViewById(R.id.distance);
             holder.direction = (CompassMiniView) v.findViewById(R.id.direction);
-            holder.dirImgLayout = (RelativeLayout) v.findViewById(R.id.dirimg_layout);
             holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
             holder.inventory = (ImageView) v.findViewById(R.id.inventory);
             holder.favorite = (TextView) v.findViewById(R.id.favorite);
@@ -434,64 +427,26 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.inventory.setVisibility(View.GONE);
         }
 
-        boolean setDiDi = false;
+        if (cache.getDistance() != null) {
+            holder.distance.setDistance(cache.getDistance());
+        }
         if (cache.getCoords() != null) {
             holder.direction.setVisibility(View.VISIBLE);
+            holder.dirImg.setVisibility(View.GONE);
             holder.direction.updateAzimuth(azimuth);
             if (coords != null) {
                 holder.distance.update(coords);
                 holder.direction.updateCurrentCoords(coords);
             }
-            setDiDi = true;
+        } else if (cache.getDirection() != null) {
+            holder.direction.setVisibility(View.VISIBLE);
+            holder.dirImg.setVisibility(View.GONE);
+            holder.direction.updateAzimuth(azimuth);
+            holder.direction.updateHeading(cache.getDirection());
         } else {
-            if (cache.getDistance() != null) {
-                holder.distance.setDistance(cache.getDistance());
-                setDiDi = true;
-            }
-            if (cache.getDirection() != null) {
-                holder.direction.setVisibility(View.VISIBLE);
-                holder.direction.updateAzimuth(azimuth);
-                holder.direction.updateHeading(cache.getDirection());
-                setDiDi = true;
-            }
-        }
-
-        if (setDiDi) {
-            holder.directionLayout.setVisibility(View.VISIBLE);
-            holder.dirImgLayout.setVisibility(View.GONE);
-        } else {
-            holder.directionLayout.setVisibility(View.GONE);
-            holder.distance.clear();
-
-            final Bitmap dirImgPre = BitmapFactory.decodeFile(DirectionImage.getDirectionFile(cache.getGeocode(), false).getPath());
-            final Bitmap dirImg;
-            if (dirImgPre != null) { // null happens for invalid caches (not yet released)
-                dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
-                dirImgPre.recycle();
-            }
-            else {
-                dirImg = null;
-            }
-
-            if (dirImg != null) {
-                if (!lightSkin) {
-                    final int length = dirImg.getWidth() * dirImg.getHeight();
-                    final int[] pixels = new int[length];
-                    dirImg.getPixels(pixels, 0, dirImg.getWidth(), 0, 0, dirImg.getWidth(), dirImg.getHeight());
-                    for (int i = 0; i < length; i++) {
-                        if (pixels[i] == 0xff000000) { // replace black with white
-                            pixels[i] = 0xffffffff;
-                        }
-                    }
-                    dirImg.setPixels(pixels, 0, dirImg.getWidth(), 0, 0, dirImg.getWidth(), dirImg.getHeight());
-                }
-
-                holder.dirImg.setImageBitmap(dirImg);
-                holder.dirImgLayout.setVisibility(View.VISIBLE);
-            } else {
-                holder.dirImg.setImageBitmap(null);
-                holder.dirImgLayout.setVisibility(View.GONE);
-            }
+            holder.dirImg.setImageDrawable(DirectionImage.getDrawable(cache.getDirectionImg()));
+            holder.dirImg.setVisibility(View.VISIBLE);
+            holder.direction.setVisibility(View.GONE);
         }
 
         holder.favorite.setText(Integer.toString(cache.getFavoritePoints()));

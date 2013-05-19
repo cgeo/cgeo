@@ -45,6 +45,7 @@ public class HtmlImage implements Html.ImageGetter {
             "trendcounter.com",
             "hit-counter-download.com"
     };
+    public static final String SHARED = "shared";
 
     final private String geocode;
     /**
@@ -82,7 +83,7 @@ public class HtmlImage implements Html.ImageGetter {
         }
 
         final boolean shared = url.contains("/images/icons/icon_");
-        final String pseudoGeocode = shared ? "shared" : geocode;
+        final String pseudoGeocode = shared ? SHARED : geocode;
 
         Bitmap imagePre = loadImageFromStorage(url, pseudoGeocode, shared);
 
