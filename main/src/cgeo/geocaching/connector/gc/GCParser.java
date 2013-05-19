@@ -176,6 +176,23 @@ public abstract class GCParser {
                 }
             }
 
+            // difficulty/terrain
+            final MatcherWrapper matcherDT = new MatcherWrapper(GCConstants.PATTERN_SEARCH_DIFFICULTY_TERRAIN, row);
+            if (matcherDT.find()) {
+                final Float difficulty = parseStars(matcherDT.group(1));
+                if (difficulty != null) {
+                    cache.setDifficulty(difficulty);
+                }
+                final Float terrain = parseStars(matcherDT.group(3));
+                if (terrain != null) {
+                    cache.setTerrain(terrain);
+                }
+            }
+
+            // size
+            final String container = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_CONTAINER, false, 1, null, false);
+            cache.setSize(CacheSize.getById(container));
+
             // cache inventory
             final MatcherWrapper matcherTbs = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES, row);
             String inventoryPre = null;
@@ -304,6 +321,11 @@ public abstract class GCParser {
         }
 
         return searchResult;
+    }
+
+    private static Float parseStars(final String value) {
+        float floatValue = Float.parseFloat(StringUtils.replaceChars(value, ',', '.'));
+        return floatValue >= 0.5 && floatValue <= 5.0 ? floatValue : null;
     }
 
     static SearchResult parseCache(final String page, final CancellableHandler handler) {
