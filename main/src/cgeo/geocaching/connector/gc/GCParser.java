@@ -166,8 +166,32 @@ public abstract class GCParser {
 
             // cache direction - image
             if (Settings.getLoadDirImg()) {
-                cache.setDirectionImg(Network.decode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION, true, 1, cache.getDirectionImg(), true)));
+                final String direction = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 1, null, false);
+                final String distance = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
+                if (direction != null) {
+                    cache.setDirectionImg(direction);
+                }
+                if (distance != null) {
+                    cache.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
+                }
             }
+
+            // difficulty/terrain
+            final MatcherWrapper matcherDT = new MatcherWrapper(GCConstants.PATTERN_SEARCH_DIFFICULTY_TERRAIN, row);
+            if (matcherDT.find()) {
+                final Float difficulty = parseStars(matcherDT.group(1));
+                if (difficulty != null) {
+                    cache.setDifficulty(difficulty);
+                }
+                final Float terrain = parseStars(matcherDT.group(3));
+                if (terrain != null) {
+                    cache.setTerrain(terrain);
+                }
+            }
+
+            // size
+            final String container = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_CONTAINER, false, 1, null, false);
+            cache.setSize(CacheSize.getById(container));
 
             // cache inventory
             final MatcherWrapper matcherTbs = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES, row);
@@ -291,12 +315,17 @@ public abstract class GCParser {
             final Set<Geocache> caches = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             for (Geocache cache : caches) {
                 if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
-                    DirectionImage.getDrawable(cache.getGeocode(), cache.getDirectionImg());
+                    DirectionImage.getDrawable(cache.getDirectionImg());
                 }
             }
         }
 
         return searchResult;
+    }
+
+    private static Float parseStars(final String value) {
+        float floatValue = Float.parseFloat(StringUtils.replaceChars(value, ',', '.'));
+        return floatValue >= 0.5 && floatValue <= 5.0 ? floatValue : null;
     }
 
     static SearchResult parseCache(final String page, final CancellableHandler handler) {

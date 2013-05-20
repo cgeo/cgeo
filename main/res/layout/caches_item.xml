@@ -75,15 +75,13 @@
     <!-- real text based direction and distance -->
 
     <RelativeLayout
-        android:id="@+id/direction_layout"
         android:layout_width="78dip"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginBottom="1dip"
         android:layout_marginRight="30dip"
-        android:layout_marginTop="1dip"
-        android:visibility="gone" >
+        android:layout_marginTop="1dip" >
 
         <view
             android:id="@+id/distance"
@@ -111,31 +109,21 @@
             android:gravity="center"
             android:minHeight="28px"
             android:minWidth="28px"
-            cc:skin="?compass" />
-    </RelativeLayout>
-
-    <!-- image based direction and distance -->
-
-    <RelativeLayout
-        android:id="@+id/dirimg_layout"
-        android:layout_width="78dip"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="1dip"
-        android:layout_marginRight="30dip"
-        android:layout_marginTop="1dip"
-        android:visibility="gone" >
+            cc:skin="?compass"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/dirimg"
-            android:layout_width="55dip"
-            android:layout_height="30dip"
-            android:layout_centerInParent="true"
+            android:layout_width="78dip"
+            android:layout_height="28px"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
+            android:layout_marginTop="21dip"
             android:gravity="center"
-            android:scaleType="fitXY"
-            android:src="@null" />
+            android:minHeight="28px"
+            android:minWidth="28px"
+            android:src="@null"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <!-- inventory and favorites -->

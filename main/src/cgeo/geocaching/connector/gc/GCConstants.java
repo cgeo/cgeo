@@ -117,7 +117,9 @@ public final class GCConstants {
     public final static Pattern PATTERN_SEARCH_TRACKABLES = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>");
     /** Second group used */
     public final static Pattern PATTERN_SEARCH_TRACKABLESINSIDE = Pattern.compile("(<img src=\"[^\"]+\" alt=\"([^\"]+)\" title=\"[^\"]*\" />[^<]*)");
-    public final static Pattern PATTERN_SEARCH_DIRECTION = Pattern.compile("<img id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxDistanceAndHeading\" title=\"[^\"]*\" src=\"[^\"]*/seek/CacheDir\\.ashx\\?k=([^\"]+)\"[^>]*>");
+    public final static Pattern PATTERN_SEARCH_DIRECTION_DISTANCE = Pattern.compile("<img src=\"/images/icons/compass/([^\\.]+)\\.gif\"[^>]*>[^<]*<br />([^<]+)</span>");
+    public final static Pattern PATTERN_SEARCH_DIFFICULTY_TERRAIN = Pattern.compile("<span class=\"small\">([0-5]([\\.,]5)?)/([0-5]([\\.,]5)?)</span><br />");
+    public final static Pattern PATTERN_SEARCH_CONTAINER = Pattern.compile("<img src=\"/images/icons/container/([^\\.]+)\\.gif\"");
     public final static Pattern PATTERN_SEARCH_GEOCODE = Pattern.compile("\\|\\W*(GC[0-9A-Z]+)[^\\|]*\\|");
     public final static Pattern PATTERN_SEARCH_ID = Pattern.compile("name=\"CID\"[^v]*value=\"([0-9]+)\"");
     public final static Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("<span id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxFavoritesValue\" title=\"[^\"]*\" class=\"favorite-rank\">([0-9]+)</span>");
