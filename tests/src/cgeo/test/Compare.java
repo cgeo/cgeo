@@ -1,15 +1,17 @@
 package cgeo.test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.enumerations.LogType;
 
 public abstract class Compare {
 
     public static void assertCompareCaches(ICache expected, Geocache actual, boolean all) {
+        assertNotNull(actual);
         assertEquals(expected.getGeocode(), actual.getGeocode());
         assertTrue(expected.getType() == actual.getType());
         assertEquals(expected.getOwnerDisplayName(), actual.getOwnerDisplayName());
