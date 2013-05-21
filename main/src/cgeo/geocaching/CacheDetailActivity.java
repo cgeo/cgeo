@@ -2111,6 +2111,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         holder = new LogViewHolder(rowView);
                         rowView.setTag(holder);
                     }
+                    holder.setPosition(position);
 
                     final LogEntry log = getItem(position);
 
@@ -2192,10 +2193,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         /** Loads the Log Images outside the ui thread. */
 
         private class LogImageLoader extends AsyncTask<String, Progress, Spanned> {
-            private LogViewHolder holder;
+            final private LogViewHolder holder;
+            final private int position;
 
             public LogImageLoader(LogViewHolder holder) {
                 this.holder = holder;
+                this.position = holder.getPosition();
             }
 
             @Override
@@ -2205,7 +2208,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             protected void onPostExecute(Spanned result) {
-                holder.text.setText(result);
+                // Ensure that this holder and its view still references the right item before updating the text.
+                if (position == holder.getPosition()) {
+                    holder.text.setText(result);
+                }
             }
 
         }
@@ -2218,8 +2224,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView text;
             final TextView images;
             final ImageView statusMarker;
+            private int position;
 
-            public LogViewHolder(View base) {
+            public LogViewHolder(final View base) {
                 date = (TextView) base.findViewById(R.id.added);
                 type = (TextView) base.findViewById(R.id.type);
                 author = (TextView) base.findViewById(R.id.author);
@@ -2228,6 +2235,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 images = (TextView) base.findViewById(R.id.log_images);
                 statusMarker = (ImageView) base.findViewById(R.id.log_mark);
             }
+
+            public int getPosition() {
+                return position;
+            }
+
+            public void setPosition(final int position) {
+                this.position = position;
+            }
+
         }
     }
 
