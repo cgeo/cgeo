@@ -22,7 +22,8 @@ import java.util.Locale;
  */
 public class SpeechService extends Service implements OnInitListener {
 
-    private static final int SPEECH_PAUSE_SECONDS = 30;
+    private static final int SPEECH_MINPAUSE_SECONDS = 5;
+    private static final int SPEECH_MAXPAUSE_SECONDS = 30;
     private static final String EXTRA_TARGET_COORDS = "target";
     private static Activity startingActivity;
     private static boolean isRunning = false;
@@ -62,6 +63,7 @@ public class SpeechService extends Service implements OnInitListener {
      * remember when we talked the last time
      */
     private long lastSpeechTime = 0;
+    private float lastSpeechDistance = 0.0f;
     private Geopoint target;
 
     @Override
@@ -76,15 +78,42 @@ public class SpeechService extends Service implements OnInitListener {
         }
 
         // avoid any calculation, if the delay since the last output is not long enough
-        long now = System.currentTimeMillis();
-        if (now - lastSpeechTime <= SPEECH_PAUSE_SECONDS * 1000) {
+        final long now = System.currentTimeMillis();
+        if (now - lastSpeechTime <= SPEECH_MINPAUSE_SECONDS * 1000) {
             return;
+        }
+
+        // to speak, we want max pause to have elapsed or distance to geopoint to have changed by a given amount
+        final float distance = position.distanceTo(target);
+        if (now - lastSpeechTime <= SPEECH_MAXPAUSE_SECONDS * 1000) {
+            if (Math.abs(lastSpeechDistance - distance) < getDeltaForDistance(distance)) {
+                return;
+            }
         }
 
         final String text = TextFactory.getText(position, target, direction);
         if (StringUtils.isNotEmpty(text)) {
+            lastSpeechTime = System.currentTimeMillis();
+            lastSpeechDistance = distance;
             speak(text);
         }
+    }
+
+    /**
+     * Return distance required to be moved based on overall distance.<br>
+     *
+     * @param distance
+     *            in km
+     * @return delta in km
+     */
+    private static float getDeltaForDistance(final float distance) {
+        if (distance > 1.0) {
+            return 0.2f;
+        } else if (distance > 0.05) {
+            return distance / 5.0f;
+        }
+
+        return 0f;
     }
 
     @Override
@@ -136,7 +165,6 @@ public class SpeechService extends Service implements OnInitListener {
         if (!initialized) {
             return;
         }
-        lastSpeechTime = System.currentTimeMillis();
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
