@@ -500,6 +500,12 @@
     <item quantity="one">Un cache</item>
     <item quantity="other">%1$d Cache</item>
   </plurals>
+  <string name="tts_service">Bussola parlante</string>
+  <string name="tts_start">Start voce</string>
+  <string name="tts_stop">Stop voce</string>
+  <string name="tts_kilometers">%s chilometri</string>
+  <string name="tts_meters">%s metri</string>
+  <string name="tts_oclock">%s precisi</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aggiorna</string>
   <string name="cache_offline_drop">Elimina</string>
@@ -519,6 +525,8 @@
   <string name="cache_log_images_title">Immagini Log</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Note personali</string>
+  <string name="cache_personal_note_unstored">Cache non salvati</string>
+  <string name="cache_personal_note_store">Il cache verrà prima salvato per abilitare le note personali.</string>  
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
   <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su %s per vederla correttamente.</string>
@@ -1049,6 +1057,7 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">pagina c:geo </a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manuale: <a href="http://manual.cgeo.org/">c:geo in a Nutshell</a></string>
+  <string name="market">Android: <a href="https://play.google.com/store/apps/details?id=cgeo.geocaching">c:geo su Google Play</a></string>
   <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
   <string name="about_auth_1">La procesura seguente autorizza <b>c:geo</b> ad accedere a Twitter - se confermato.</string>
   <string name="about_auth_2">Clicca sul pulsante \"Autorizza c:geo\" per iniziare. Questa procedura aprirà il browser sulla pagina Twitter. Fai Login su questa pagina e autorizza <b>c:geo</b> ad accedere al tuo account. Se accettato, Twitter mostrerà un PIN code numerico. Questo PIN deve essere riportato in <b>c:geo</b> e confermato.</string>

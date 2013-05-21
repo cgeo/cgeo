@@ -54,6 +54,7 @@ public class MapProviderFactory {
             final int id = mapSource.getNumericalId();
             parentMenu.add(R.id.menu_group_map_sources, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
         }
+        parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
     }
 
     public static MapSource getMapSource(int id) {

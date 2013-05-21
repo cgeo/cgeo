@@ -525,6 +525,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // menu inflation happens in Google/Mapsforge specific classes
+        super.onCreateOptionsMenu(menu);
 
         MapProviderFactory.addMapviewMenuItems(menu);
 

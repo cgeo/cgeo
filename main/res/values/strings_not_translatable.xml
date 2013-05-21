@@ -97,8 +97,29 @@
   <!-- changelog -->
   <string name="changelog" translatable="false">\n
     <b>Next release</b>\n\n
+    \n
+    \n
+    <b>2013.05.16</b>\n
+    <b>Bugfixing:</b>\n
+    · Adaption to changes on gc.com (live map)\n
+    \n
+    \n
+    <b>2013.05.13</b>\n
+    <b>Bugfixing:</b>\n
+    · Twitter option was not shown on logging page\n
+    · Disable trail on map did only work after refresh of the map\n
+    · Stability improvements when selecting log pictures to be attached\n
+    · Remove accidentely appended spaces in searches\n
+    · Stability improvements for GPX import and export\n
+    · Do not duplicate waypoints retrieved from the personal note when updating a cache\n
+    · Fixed a possible crash when device is rotated while cache list is shown\n
+    · Fixed a possible crash in \"Any destination\" menu\n
+    · Ignore hide setting when searching for owned caches\n
+    \n
+    \n
+    <b>2013.04.03</b>\n
     <b>New Features/Functions:</b>\n
-    · Log images can be scaled before upload to save traffic
+    · Log images can be scaled before upload to save traffic\n
     · Improved online detection when refreshing caches\n
     · Talking compass (accessible in compass menu)\n
     \n
