@@ -2236,10 +2236,24 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 statusMarker = (ImageView) base.findViewById(R.id.log_mark);
             }
 
+            /**
+             * Read the position of the cursor pointed to by this holder.
+             * <br/>
+             * This must be called by the UI thread.
+             *
+             * @return the cursor position
+             */
             public int getPosition() {
                 return position;
             }
 
+            /**
+             * Set the position of the cursor pointed to by this holder.
+             * <br/>
+             * This must be called by the UI thread.
+             *
+             * @param position the cursor position
+             */
             public void setPosition(final int position) {
                 this.position = position;
             }
