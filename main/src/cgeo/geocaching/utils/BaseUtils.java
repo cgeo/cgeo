@@ -143,7 +143,7 @@ public final class BaseUtils {
      * @return True, if <code>str</code> could contain html
      */
     public static boolean containsHtml(final String str) {
-        return str.indexOf('<') != -1 || str.indexOf('&') != -1;
+        return str.indexOf("</") != -1 || str.indexOf("/>") != -1 || str.indexOf("/ >") != -1;
     }
 
 }
