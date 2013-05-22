@@ -87,7 +87,7 @@
 
   <!-- changelog -->
   <string name="changelog" translatable="false">\n
-    <b>Next bugfix release</b>\n
+    <b>2013.05.22</b>\n
     <b>Bugfixing:</b>\n
     · Fixed and improved nearby search for basic members after gc.com changes\n
     · Avoid inconsistency of logbook while pictures are loaded in the background\n
