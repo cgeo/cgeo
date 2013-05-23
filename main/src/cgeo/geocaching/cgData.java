@@ -984,7 +984,7 @@ public class cgData {
         final boolean dbUpdateRequired =
                 !cache.gatherMissingFrom(cacheFromCache != null ?
                         cacheFromCache :
-                        loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY)) ||
+                        loadCache(geocode, LoadFlags.LOAD_ALL_DB_ONLY)) ||
                 cacheFromCache != null;
         cache.addStorageLocation(StorageLocation.CACHE);
         cacheCache.putCacheInCache(cache);
