@@ -973,25 +973,32 @@ public class cgData {
             throw new IllegalArgumentException("cache must not be null");
         }
 
-        // merge always with data already stored in the CacheCache or DB
-        if (saveFlags.contains(SaveFlag.SAVE_CACHE)) {
-            cache.gatherMissingFrom(cacheCache.getCacheFromCache(cache.getGeocode()));
-            cacheCache.putCacheInCache(cache);
-        }
+        // Merge with the data already stored in the CacheCache or in the database if
+        // the cache had not been loaded before, and update the CacheCache.
+        // Also, a DB update is required if the merge data comes from the CacheCache
+        // (as it may be more recent than the version in the database), or if the
+        // version coming from the database is different than the version we are entering
+        // into the cache (that includes absence from the database).
+        final String geocode = cache.getGeocode();
+        final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
+        final boolean dbUpdateRequired =
+                !cache.gatherMissingFrom(cacheFromCache != null ?
+                        cacheFromCache :
+                        loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY)) ||
+                cacheFromCache != null;
+        cache.addStorageLocation(StorageLocation.CACHE);
+        cacheCache.putCacheInCache(cache);
 
+        // Only save the cache in the database if it is requested by the caller and
+        // the cache contains detailed information.
         if (!saveFlags.contains(SaveFlag.SAVE_DB)) {
             return true;
         }
-        boolean updateRequired = !cache.gatherMissingFrom(loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY));
 
-        // only save a cache to the database if
-        // - the cache is detailed
-        // - there are changes
-        // - the cache is only stored in the CacheCache so far
-        if ((!updateRequired || !cache.isDetailed()) && cache.getStorageLocation().contains(StorageLocation.DATABASE)) {
-            return false;
-        }
+        return cache.isDetailed() && dbUpdateRequired ? storeIntoDatabase(cache) : false;
+    }
 
+    private static boolean storeIntoDatabase(final Geocache cache) {
         cache.addStorageLocation(StorageLocation.DATABASE);
         cacheCache.putCacheInCache(cache);
         Log.d("Saving " + cache.toString() + " (" + cache.getListId() + ") to DB");
