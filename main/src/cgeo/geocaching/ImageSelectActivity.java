@@ -260,17 +260,17 @@ public class ImageSelectActivity extends AbstractActivity {
      * @param filePath
      * @return
      */
-    private String writeScaledImage(String filePath) {
+    private String writeScaledImage(final String filePath) {
         scaleChoiceIndex = scaleView.getSelectedItemPosition();
-        int maxXY = getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
+        final int maxXY = getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
         if (maxXY == 0) {
             return filePath;
         }
         BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
         sizeOnlyOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
-        int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
-        int sampleSize = myMaxXY / maxXY;
+        final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
+        final int sampleSize = myMaxXY / maxXY;
         Bitmap image;
         if (sampleSize > 1) {
             BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
@@ -279,8 +279,9 @@ public class ImageSelectActivity extends AbstractActivity {
         } else {
             image = BitmapFactory.decodeFile(filePath);
         }
-        BitmapDrawable scaledImage = ImageHelper.scaleBitmapTo(image, maxXY, maxXY);
-        String uploadFilename = getOutputImageFile().getPath();
+        final BitmapDrawable scaledImage = ImageHelper.scaleBitmapTo(image, maxXY, maxXY);
+        image = null;
+        final String uploadFilename = getOutputImageFile().getPath();
         ImageHelper.storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
         return uploadFilename;
     }
