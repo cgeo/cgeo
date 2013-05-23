@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech.Engine;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -34,6 +35,7 @@ public class CompassActivity extends AbstractActivity {
     private static final String EXTRAS_CACHE_INFO = "cacheinfo";
     private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
     private static final int COORDINATES_OFFSET = 10;
+    private static final int REQUEST_TTS_DATA_CHECK = 1;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private String title = null;
@@ -160,7 +162,7 @@ public class CompassActivity extends AbstractActivity {
                 finish();
                 return true;
             case R.id.menu_tts_start:
-                SpeechService.startService(this, dstCoords);
+                initTextToSpeech();
                 return true;
             case R.id.menu_tts_stop:
                 SpeechService.stopService(this);
@@ -181,6 +183,21 @@ public class CompassActivity extends AbstractActivity {
                 }
         }
         return false;
+    }
+
+    private void initTextToSpeech() {
+        Intent intent = new Intent(Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(intent, REQUEST_TTS_DATA_CHECK);
+    }
+
+    @Override
+    protected void onActivityResult(int request, int result, Intent data) {
+        if (request == REQUEST_TTS_DATA_CHECK && result == Engine.CHECK_VOICE_DATA_PASS) {
+            SpeechService.startService(this, dstCoords);
+        }
+        else {
+            startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
+        }
     }
 
     private void setTitle() {
