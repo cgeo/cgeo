@@ -236,7 +236,7 @@
   <string name="menu_settings">設定</string>
   <string name="menu_history">履歴</string>
   <string name="menu_filter">フィルター</string>
-  <string name="menu_scan_geo">QRコードスキャン</string> <!-- It is more suitable "QRcode" than "Geocode" in Japanese, because "Geocode" is not commonly known. Issue #794 https://github.com/cgeo/c-geo-opensource/issues/794 -->
+  <string name="menu_scan_geo">QRコードスキャン</string> <!-- It is more suitable "QRcode" than "Geocode" in Japanese, because "Geocode" is not commonly known. Issue #794 https://github.com/cgeo/cgeo/issues/794 -->
 
   <!-- main screen -->
   <string name="live_map_button">地図</string>
