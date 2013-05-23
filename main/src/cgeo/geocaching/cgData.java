@@ -995,7 +995,7 @@ public class cgData {
             return true;
         }
 
-        return cache.isDetailed() && dbUpdateRequired ? storeIntoDatabase(cache) : false;
+        return cache.isDetailed() && dbUpdateRequired && storeIntoDatabase(cache);
     }
 
     private static boolean storeIntoDatabase(final Geocache cache) {
