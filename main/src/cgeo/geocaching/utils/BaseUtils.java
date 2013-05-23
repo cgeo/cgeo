@@ -137,10 +137,11 @@ public final class BaseUtils {
     }
 
     /**
-     * Quick and naive check for possible html-content of a string.
+     * Quick and naive check for possible rich HTML content in a string.
      *
-     * @param str
-     * @return True, if <code>str</code> could contain html
+     * @param str A string containing HTML code.
+     * @return <tt>true</tt> if <tt>str</tt> contains HTML code that needs to go through a HTML renderer before
+     *         being displayed, <tt>false</tt> if it can be displayed as-is without any loss
      */
     public static boolean containsHtml(final String str) {
         return str.indexOf('<') != -1 || str.indexOf('&') != -1;
