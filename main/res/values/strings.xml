@@ -34,6 +34,7 @@
   <string name="ape">Project APE Cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS Adventures Exhibit</string>
+  <string name="block">Groundspeak Block Party</string>
   <string name="unknown">Unknown Type</string>
 
   <!-- cache sizes -->
