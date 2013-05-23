@@ -11,6 +11,8 @@ import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.net.Uri;
 import android.os.Message;
 
@@ -257,8 +259,12 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        tempDir = new File(System.getProperty("java.io.tmpdir"), "cgeogpxesTest");
+        final String globalTempDir = System.getProperty("java.io.tmpdir");
+        assertTrue("java.io.tmpdir is not defined", StringUtils.isNotBlank(globalTempDir));
+
+        tempDir = new File(globalTempDir, "cgeogpxesTest");
         tempDir.mkdir();
+        assertTrue("Could not create directory " + tempDir.getPath(), tempDir.exists());
         // workaround to get storage initialized
         cgData.getAllHistoryCachesCount();
         listId = cgData.createList("cgeogpxesTest");
