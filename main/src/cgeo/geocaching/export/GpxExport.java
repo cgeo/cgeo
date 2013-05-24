@@ -331,7 +331,8 @@ class GpxExport extends AbstractExport {
 
                 gpx.startTag(PREFIX_GROUNDSPEAK, "text");
                 gpx.attribute("", "encoded", "False");
-                gpx.text(log.log);
+                // remove illegal characters
+                gpx.text(log.log.replaceAll("[\u0000-\u001f]", ""));
                 gpx.endTag(PREFIX_GROUNDSPEAK, "text");
 
                 gpx.endTag(PREFIX_GROUNDSPEAK, "log");
