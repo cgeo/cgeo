@@ -1059,15 +1059,18 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
 
-  <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
-  <plurals name="days_ago">
-    <item quantity="one">hier</item>
-    <item quantity="other">il y a %d jours</item>
-  </plurals>
+  <!-- text-to-speech for compass view -->
   <string name="tts_service">Boussole parlante</string>
   <string name="tts_start">Commencer à parler</string>
   <string name="tts_stop">Arrêter de parler</string>
   <string name="tts_kilometers">%s kilomètres</string>
   <string name="tts_meters">%s mètres</string>
   <string name="tts_oclock">%s heures</string>
+
+  <!-- various -->
+  <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
+  <plurals name="days_ago">
+    <item quantity="one">hier</item>
+    <item quantity="other">il y a %d jours</item>
+  </plurals>
 </resources>

@@ -874,15 +874,18 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
 
-  <string name="clipboard_copy_ok">Kopierat till urklipp.</string>
-  <plurals name="days_ago">
-      <item quantity="one">igår</item>
-      <item quantity="other">%d dagar sedan</item>
-  </plurals>
+  <!-- text-to-speech for compass view -->
   <string name="tts_service">Talande kompass</string>
   <string name="tts_start">Starta tal</string>
   <string name="tts_stop">Stoppa tal</string>
   <string name="tts_kilometers">%s kilometer</string>
   <string name="tts_meters">%s meter</string>
   <string name="tts_oclock">Klockan %s</string>
+
+  <!-- various -->
+  <string name="clipboard_copy_ok">Kopierat till urklipp.</string>
+  <plurals name="days_ago">
+      <item quantity="one">igår</item>
+      <item quantity="other">%d dagar sedan</item>
+  </plurals>
 </resources>

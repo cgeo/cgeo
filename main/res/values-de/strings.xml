@@ -1057,15 +1057,18 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
 
-  <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
-  <plurals name="days_ago">
-      <item quantity="one">gestern</item>
-      <item quantity="other">vor %d Tagen</item>
-  </plurals>
+  <!-- text-to-speech for compass view -->
   <string name="tts_service">Sprechender Kompass</string>
   <string name="tts_start">Starte Sprache</string>
   <string name="tts_stop">Stoppe Sprache</string>
   <string name="tts_kilometers">%s Kilometer</string>
   <string name="tts_meters">%s Meter</string>
   <string name="tts_oclock">%s Uhr</string>
+
+  <!-- various -->
+  <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
+  <plurals name="days_ago">
+      <item quantity="one">gestern</item>
+      <item quantity="other">vor %d Tagen</item>
+  </plurals>
 </resources>

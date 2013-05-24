@@ -1075,11 +1075,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
 
-  <string name="clipboard_copy_ok">Copied to clipboard</string>
-  <plurals name="days_ago">
-      <item quantity="one">yesterday</item>
-      <item quantity="other">%d days ago</item>
-  </plurals>
+  <!-- text-to-speech for compass view -->
   <string name="tts_service">Talking compass</string>
   <string name="tts_start">Start talking</string>
   <string name="tts_stop">Stop talking</string>
@@ -1088,4 +1084,11 @@
   <string name="tts_miles">%s miles</string>
   <string name="tts_feet">%s feet</string>
   <string name="tts_oclock">%s o\'clock</string>
+
+  <!-- various -->
+  <string name="clipboard_copy_ok">Copied to clipboard</string>
+  <plurals name="days_ago">
+      <item quantity="one">yesterday</item>
+      <item quantity="other">%d days ago</item>
+  </plurals>
 </resources>

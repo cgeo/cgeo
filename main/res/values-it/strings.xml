@@ -500,12 +500,6 @@
     <item quantity="one">Un cache</item>
     <item quantity="other">%1$d Cache</item>
   </plurals>
-  <string name="tts_service">Bussola parlante</string>
-  <string name="tts_start">Start voce</string>
-  <string name="tts_stop">Stop voce</string>
-  <string name="tts_kilometers">%s chilometri</string>
-  <string name="tts_meters">%s metri</string>
-  <string name="tts_oclock">%s precisi</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aggiorna</string>
   <string name="cache_offline_drop">Elimina</string>
@@ -1070,6 +1064,15 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
 
+  <!-- text-to-speech for compass view -->
+  <string name="tts_service">Bussola parlante</string>
+  <string name="tts_start">Start voce</string>
+  <string name="tts_stop">Stop voce</string>
+  <string name="tts_kilometers">%s chilometri</string>
+  <string name="tts_meters">%s metri</string>
+  <string name="tts_oclock">%s precisi</string>
+
+  <!-- various -->
   <string name="clipboard_copy_ok">Copiato nella clipboard</string>
   <plurals name="days_ago">
     <item quantity="one">ieri</item>
