@@ -664,6 +664,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
         ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
 
+        // reset imagesList so Images view page will be redrawn
+        imagesList = null;
         reinitializeViewPager();
 
         // rendering done! remove progress popup if any there
