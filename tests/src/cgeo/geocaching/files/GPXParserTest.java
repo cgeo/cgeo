@@ -2,8 +2,6 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -29,7 +27,6 @@ import java.util.Set;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SimpleDateFormat LOG_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
-    private int listId;
 
     public void testGPXVersion100() throws Exception {
         testGPXVersion(R.raw.gc1bkp3_gpx100);
@@ -189,12 +186,12 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private List<Geocache> readGPX10(int... resourceIds) throws IOException, ParserException {
-        final GPX10Parser parser = new GPX10Parser(listId);
+        final GPX10Parser parser = new GPX10Parser(getTemporaryListId());
         return readVersionedGPX(parser, resourceIds);
     }
 
     private List<Geocache> readGPX11(int... resourceIds) throws IOException, ParserException {
-        final GPX11Parser parser = new GPX11Parser(listId);
+        final GPX11Parser parser = new GPX11Parser(getTemporaryListId());
         return readVersionedGPX(parser, resourceIds);
     }
 
@@ -284,20 +281,4 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        listId = cgData.createList("Temporary unit testing");
-        assertTrue(listId != StoredList.TEMPORARY_LIST_ID);
-        assertTrue(listId != StoredList.STANDARD_LIST_ID);
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        final SearchResult search = cgData.getBatchOfStoredCaches(null, CacheType.ALL, listId);
-        assertNotNull(search);
-        cgData.removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
-        cgData.removeList(listId);
-        super.tearDown();
-    }
 }

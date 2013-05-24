@@ -14,7 +14,7 @@ import java.util.List;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {
     private List<Geocache> readLoc(int resourceId) throws IOException, ParserException {
-        final LocParser parser = new LocParser(1);
+        final LocParser parser = new LocParser(getTemporaryListId());
         Collection<Geocache> caches = null;
         final InputStream instream = getResourceStream(resourceId);
         try {
