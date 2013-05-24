@@ -326,7 +326,8 @@ class GpxExport extends AbstractExport {
                         "type", log.type.type);
 
                 gpx.startTag(PREFIX_GROUNDSPEAK, "finder");
-                gpx.attribute("", "id", log.author);
+                gpx.attribute("", "id", "");
+                gpx.text(log.author);
                 gpx.endTag(PREFIX_GROUNDSPEAK, "finder");
 
                 gpx.startTag(PREFIX_GROUNDSPEAK, "text");
