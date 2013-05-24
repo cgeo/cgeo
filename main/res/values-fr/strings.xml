@@ -127,7 +127,7 @@
   <string name="log_image_camera">Nouvelle</string>
   <string name="log_image_caption">Légende</string>
   <string name="log_image_description">Description</string>
-  <string name="log_image_scale">Mise à l'échelle</string>
+  <string name="log_image_scale">Mise à l\'échelle</string>
   <string-array name="log_image_scales">
       <item>Taille originale</item>
       <item>512 px</item>
@@ -526,7 +526,7 @@
   <string name="cache_personal_note">Note personnelle</string>
   <string name="cache_personal_note_edit">Éditer</string>
   <string name="cache_personal_note_unstored">Cache non sauvegardée localement</string>
-  <string name="cache_personal_note_store">La cache va être sauvegardée localement avant d'autoriser les notes personnelles.</string>
+  <string name="cache_personal_note_store">La cache va être sauvegardée localement avant d\'autoriser les notes personnelles.</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Description longue</string>
   <string name="cache_description_table_note">La description contient des informations de formattages qui nécessitent possiblement d\'être vues sur le site %s pour être affichées correctement.</string>
@@ -1007,7 +1007,7 @@
   <string name="attribute_hills_yes">Endroit vallonné</string>
   <string name="attribute_hills_no">Pas d\'endroit vallonné</string>
   <string name="attribute_easy_climbing_yes">Escalade facile</string>
-  <string name="attribute_easy_climbing_no">Pas d'escalade facile</string>
+  <string name="attribute_easy_climbing_no">Pas d\'escalade facile</string>
   <string name="attribute_poi_yes">Point d\'intérêt</string>
   <string name="attribute_poi_no">Pas de point d\'intérêt</string>
   <string name="attribute_moving_target_yes">Cible mouvante</string>
