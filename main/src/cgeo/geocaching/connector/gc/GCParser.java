@@ -1588,8 +1588,8 @@ public abstract class GCParser {
                 final JSONArray images = entry.getJSONArray("Images");
                 for (int i = 0; i < images.length(); i++) {
                     final JSONObject image = images.getJSONObject(i);
-                    String url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
-                    String title = image.getString("Name");
+                    final String url = "http://img.geocaching.com/cache/log/large/" + image.getString("FileName");
+                    final String title = image.getString("Name");
                     final Image logImage = new Image(url, title);
                     logDone.addLogImage(logImage);
                 }
