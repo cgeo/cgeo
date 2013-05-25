@@ -1052,7 +1052,9 @@
   <string name="attribute_ask_owner_no">Don\'t ask owner for start conditions</string>
   <string name="attribute_unknown_yes">Unknown attribute present</string>
   <string name="attribute_unknown_no">No unknown attribute present</string>
-
+  <string name="attribute_geotour_yes">Part of GeoTour</string>
+  <string name="attribute_geotour_no">Not part of GeoTour</string>
+  
   <!-- next things -->
   <string name="legal_note">To use the services of Geocaching.com, terms and conditions of the <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> have to be agreed.</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>

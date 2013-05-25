@@ -69,3 +69,6 @@ If you made new icons:
 
 ./listEnStrings.sh will list all attribute strings from strings.xml and creates empty string tags for missing strings. The output of the missing string tags lack a ">" sign so that you get a compiler error as a reminder, when you inserted them into values/strings.xml.
 
+7. Edit res/values/cache_attributes.xml so that filtering can be performed with new attribute
+
+8. Edit src/cgeo/geocaching/files/GPXParser.java so attribute is recognized in GPX import
