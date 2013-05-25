@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
     android:orientation="vertical" >
 
     <LinearLayout
+            android:id="@+id/info1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -54,24 +55,9 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <view
-        android:id="@+id/rose"
-        android:layout_width="fill_parent"
-        android:layout_height="295dip"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="1dip"
-        android:layout_marginLeft="1dip"
-        android:layout_marginRight="1dip"
-        android:layout_marginTop="6dip"
-        class="cgeo.geocaching.ui.CompassView"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:minHeight="289dip"
-        android:minWidth="289dip"
-        android:padding="4dip" />
 
     <LinearLayout
+        android:id="@+id/info2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -108,4 +94,24 @@
         </RelativeLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <view
+        android:id="@+id/rose"
+        android:layout_width="fill_parent"
+        android:layout_height="295dip"
+        android:layout_below="@id/info1"
+        android:layout_above="@id/info2"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="1dip"
+        android:layout_marginLeft="1dip"
+        android:layout_marginRight="1dip"
+        android:layout_marginTop="6dip"
+        class="cgeo.geocaching.ui.CompassView"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:minHeight="289dip"
+        android:minWidth="289dip"
+        android:padding="4dip" />
+
+
+</RelativeLayout>
