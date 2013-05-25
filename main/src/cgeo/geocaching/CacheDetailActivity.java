@@ -198,6 +198,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.cacheview);
 
+        // set title in code, as the activity needs a hard coded title due to the intent filters
+        setTitle(res.getString(R.string.cache));
+
         String geocode = null;
 
         // TODO Why can it happen that search is not null? onCreate should be called only once and it is not set before.

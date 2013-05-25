@@ -110,6 +110,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.trackable_activity);
 
+        // set title in code, as the activity needs a hard coded title due to the intent filters
+        setTitle(res.getString(R.string.trackable));
+
         // get parameters
         Bundle extras = getIntent().getExtras();
         Uri uri = getIntent().getData();
