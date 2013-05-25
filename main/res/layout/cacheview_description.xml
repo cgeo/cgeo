@@ -20,7 +20,7 @@
             android:linksClickable="true"
             android:textColor="?text_color"
             android:textColorLink="?text_color_link"
-            android:textSize="14dip"
+            android:textSize="14sp"
             android:visibility="gone" />
 
         <!-- Long description -->
@@ -34,7 +34,7 @@
             android:linksClickable="true"
             android:textColor="?text_color"
             android:textColorLink="?text_color_link"
-            android:textSize="14dip"
+            android:textSize="14sp"
             android:visibility="gone" />
 
         <Button
@@ -88,7 +88,7 @@
                 android:linksClickable="true"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/hint_spoilerlink"
@@ -100,7 +100,7 @@
                 android:drawablePadding="3dip"
                 android:text="@string/cache_menu_spoilers"
                 android:textColor="?text_color"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!-- Personal note box -->
@@ -128,7 +128,7 @@
                 android:linksClickable="true"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/edit_personalnote"

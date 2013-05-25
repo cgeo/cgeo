@@ -42,7 +42,7 @@
                     android:layout_marginTop="5dip"
                     android:text="@string/quote"
                     android:textColor="?text_color"
-                    android:textSize="14dip" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                     android:layout_marginRight="10dip"
                     android:text="@string/powered_by"
                     android:textColor="?text_color"
-                    android:textSize="14dip" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -75,7 +75,7 @@
                 android:layout_marginRight="10dip"
                 android:textColor="?text_color"
                 android:textIsSelectable="true"
-                android:textSize="14dip"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -127,7 +127,7 @@
                 android:text="@string/support"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/website"
@@ -144,7 +144,7 @@
                 android:text="@string/website"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/facebook"
@@ -161,7 +161,7 @@
                 android:text="@string/facebook"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/twitter"
@@ -178,7 +178,7 @@
                 android:text="@string/twitter"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/nutshellmanual"
@@ -195,7 +195,7 @@
                 android:text="@string/nutshellmanual"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/market"
@@ -212,7 +212,7 @@
                 android:text="@string/market"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -234,7 +234,7 @@
                 android:text="@string/changelog"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="12dip" />
+                android:textSize="12sp" />
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -256,7 +256,7 @@
                 android:text="@string/contributors"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
 

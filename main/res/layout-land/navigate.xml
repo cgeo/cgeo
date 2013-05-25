@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
                 android:textColor="?text_color"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/cacheinfo"
@@ -41,7 +41,7 @@
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
                 android:textColor="?text_color"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/heading"
@@ -53,7 +53,7 @@
                 android:layout_marginLeft="3dip"
                 android:text="@null"
                 android:textColor="?text_color"
-                android:textSize="26dip" />
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/distance"
@@ -65,7 +65,7 @@
                 android:layout_marginRight="3dip"
                 android:text="@null"
                 android:textColor="?text_color"
-                android:textSize="26dip" />
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/nav_location"

@@ -42,7 +42,7 @@
                 android:text="@string/legal_note"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/username"
@@ -133,7 +133,7 @@
                 android:text="@string/about_twitter"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/authorize_twitter"
@@ -174,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_weight="2"
                     android:text="@string/init_signature_template_button"
-                    android:textSize="14dip" />
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/signature_help"
@@ -182,7 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/init_signature_help_button"
-                    android:textSize="14dip" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <CheckBox
@@ -370,7 +370,7 @@
                 android:text="@string/init_showwaypoint_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
             <!-- maps -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -395,7 +395,7 @@
                 android:text="@string/init_mapsources_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/mapsource"
@@ -416,7 +416,7 @@
                 android:text="@string/init_map_directory_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:id="@+id/init_mapdir_group"
@@ -450,7 +450,7 @@
                 android:padding="3dip"
                 android:text="@string/init_rendertheme_folder"
                 android:textColor="?text_color"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:id="@+id/init_themefilegroup"
@@ -497,7 +497,7 @@
                 android:text="@string/init_gpx_exportdir_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:id="@+id/init_gpx_export_group"
@@ -543,7 +543,7 @@
                 android:text="@string/init_gpx_importdir_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:id="@+id/init_gpx_import_group"
@@ -596,7 +596,7 @@
                 android:text="@string/init_altitude_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -620,7 +620,7 @@
                 android:text="@string/init_default_navigation_tool_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/default_navigation_tool"
@@ -640,7 +640,7 @@
                 android:text="@string/init_default_navigation_tool_2_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/default_navigation_tool_2"
@@ -670,7 +670,7 @@
                 android:text="@string/init_sendToCgeo_name"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/webDeviceName"
@@ -694,7 +694,7 @@
                 android:text="@string/init_sendToCgeo_description"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/sendToCgeo_register"
@@ -724,7 +724,7 @@
                 android:text="@null"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -762,7 +762,7 @@
                 android:text="@string/init_backup_note"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -786,7 +786,7 @@
                 android:text="@string/init_dbonsdcard_note"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <CheckBox
                 android:id="@+id/dbonsdcard"
@@ -815,7 +815,7 @@
                 android:text="@string/init_debug_note"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <CheckBox
                 android:id="@+id/debug"

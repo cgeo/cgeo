@@ -22,6 +22,6 @@
         app:footerColor="#ff888888"
         app:footerIndicatorHeight="3dp"
         app:footerIndicatorStyle="underline"
-        app:textSize="16dp" />
+        app:textSize="16sp" />
 
 </LinearLayout>

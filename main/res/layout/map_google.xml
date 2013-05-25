@@ -33,7 +33,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textColor="@color/text_icon"
-            android:textSize="12dip"
+            android:textSize="12sp"
             android:visibility="gone" />
 
         <view

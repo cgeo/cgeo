@@ -72,7 +72,7 @@
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
-                    android:textSize="14dip" />
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/offline_refresh"
@@ -112,7 +112,7 @@
                 android:layout_marginRight="130dip"
                 android:paddingRight="3dip"
                 android:textColor="?text_color"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/change_list"
@@ -150,7 +150,7 @@
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
-                    android:textSize="14dip" />
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/add_to_watchlist"
@@ -196,7 +196,7 @@
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
-                    android:textSize="14dip" />
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/add_to_favpoint"
@@ -241,7 +241,7 @@
                 android:padding="3dip"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!-- Map Preview Box -->

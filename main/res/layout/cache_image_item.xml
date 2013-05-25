@@ -24,7 +24,7 @@
         android:layout_gravity="left"
         android:padding="3dip"
         android:textColor="?text_color"
-        android:textSize="14dip"
+        android:textSize="14sp"
         android:visibility="gone" />
 
     <ProgressBar

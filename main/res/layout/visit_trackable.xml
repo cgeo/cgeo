@@ -27,7 +27,7 @@
             android:singleLine="true"
             android:textColor="?text_color"
             android:textIsSelectable="false"
-            android:textSize="14dip" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/trackcode"
@@ -41,7 +41,7 @@
             android:singleLine="true"
             android:textColor="?text_color"
             android:textIsSelectable="false"
-            android:textSize="14dip" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <TextView
@@ -57,6 +57,6 @@
         android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="14dip" />
+        android:textSize="14sp" />
 
 </LinearLayout>

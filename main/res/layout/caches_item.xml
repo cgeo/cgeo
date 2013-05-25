@@ -49,7 +49,7 @@
         android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="18dip" />
+        android:textSize="18sp" />
 
     <!-- cache attributes and other info -->
 
@@ -70,7 +70,7 @@
         android:singleLine="true"
         android:textColor="?text_color_grey"
         android:textIsSelectable="false"
-        android:textSize="12dip" />
+        android:textSize="12sp" />
 
     <!-- real text based direction and distance -->
 
@@ -96,7 +96,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textColor="?text_color"
-            android:textSize="16dip" />
+            android:textSize="16sp" />
 
         <view
             android:id="@+id/direction"
@@ -165,7 +165,7 @@
             android:singleLine="true"
             android:textColor="?text_color"
             android:textIsSelectable="false"
-            android:textSize="12dip"
+            android:textSize="12sp"
             android:textStyle="bold" />
     </RelativeLayout>
 

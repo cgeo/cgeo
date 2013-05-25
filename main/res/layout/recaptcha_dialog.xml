@@ -29,6 +29,6 @@
         android:paddingLeft="3dip"
         android:text="@string/caches_recaptcha_explanation"
         android:textColor="@color/text_grey_dark"
-        android:textSize="12dip" />
+        android:textSize="12sp" />
 
 </LinearLayout>

@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="?text_color"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/cacheinfo"
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="?text_color"
-                android:textSize="14dip" />
+                android:textSize="14sp" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -43,7 +43,7 @@
                     android:layout_marginLeft="3dip"
                     android:text="@null"
                     android:textColor="?text_color"
-                    android:textSize="26dip" />
+                    android:textSize="26sp" />
 
                 <TextView
                     android:id="@+id/distance"
@@ -54,7 +54,7 @@
                     android:layout_marginRight="3dip"
                     android:text="@null"
                     android:textColor="?text_color"
-                    android:textSize="26dip" />
+                    android:textSize="26sp" />
             </RelativeLayout>
         </LinearLayout>
 
