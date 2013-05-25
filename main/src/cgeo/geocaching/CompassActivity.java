@@ -196,6 +196,7 @@ public class CompassActivity extends AbstractActivity {
             SpeechService.startService(this, dstCoords);
         }
         else {
+            Log.i("TTS failed to start. Request: " + request + " result: " + result);
             startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
         }
     }
