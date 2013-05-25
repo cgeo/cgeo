@@ -194,15 +194,19 @@ public class Geocache implements ICache, IWaypoint {
             cacheType = other.cacheType;
             zoomlevel = other.zoomlevel;
             // boolean values must be enumerated here. Other types are assigned outside this if-statement
+            // TODO: check whether a search or a live map systematically returns those, in which case
+            // we want to keep the most recent one instead of getting information from the previously
+            // stored data. This is the case for "archived" for example which has been taken out of this
+            // list.
             premiumMembersOnly = other.premiumMembersOnly;
             reliableLatLon = other.reliableLatLon;
-            archived = other.archived;
             found = other.found;
             disabled = other.disabled;
             favorite = other.favorite;
             onWatchlist = other.onWatchlist;
             logOffline = other.logOffline;
             finalDefined = other.finalDefined;
+            // archived is kept from the most recent data
         }
 
         /*
