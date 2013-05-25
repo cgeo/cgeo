@@ -169,6 +169,7 @@ public class SettingsActivity extends AbstractActivity {
             ((EditText) findViewById(R.id.username)).setText("");
             ((EditText) findViewById(R.id.password)).setText("");
             ((EditText) findViewById(R.id.passvote)).setText("");
+            ((EditText) findViewById(R.id.oc_username)).setText("");
 
             if (saveValues()) {
                 showToast(res.getString(R.string.init_cleared));
