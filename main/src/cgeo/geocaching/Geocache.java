@@ -833,8 +833,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public boolean isVirtual() {
-        return CacheType.VIRTUAL == cacheType || CacheType.WEBCAM == cacheType
-                || CacheType.EARTH == cacheType;
+        return cacheType.isVirtual();
     }
 
     public boolean showSize() {

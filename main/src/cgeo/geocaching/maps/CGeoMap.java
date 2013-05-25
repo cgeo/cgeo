@@ -1606,7 +1606,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     private CachesOverlayItemImpl getCacheItem(final Geocache cache) {
-        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.getType());
+        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.getType().applyDistanceRule());
 
         final int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
@@ -1686,7 +1686,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
-        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, null);
+        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.getWaypointType().applyDistanceRule());
         Drawable marker = getResources().getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
         final Drawable[] layers = new Drawable[] {
                 marker,

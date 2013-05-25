@@ -1,11 +1,11 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CachePopup;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.GCMap;
@@ -58,14 +58,14 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         mapItemFactory = mapProvider.getMapItemFactory();
     }
 
-    public void updateItems(CachesOverlayItemImpl item) {
+    void updateItems(CachesOverlayItemImpl item) {
         List<CachesOverlayItemImpl> itemsPre = new ArrayList<CachesOverlayItemImpl>();
         itemsPre.add(item);
 
         updateItems(itemsPre);
     }
 
-    public void updateItems(List<CachesOverlayItemImpl> itemsPre) {
+    void updateItems(List<CachesOverlayItemImpl> itemsPre) {
         if (itemsPre == null) {
             return;
         }
@@ -86,11 +86,11 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         }
     }
 
-    public boolean getCircles() {
+    boolean getCircles() {
         return displayCircles;
     }
 
-    public void switchCircles() {
+    void switchCircles() {
         displayCircles = !displayCircles;
     }
 
@@ -130,18 +130,17 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
                 projection.toPixels(itemGeo, center);
 
-                final CacheType type = item.getType();
-                if (type == null || type == CacheType.MULTI || type == CacheType.MYSTERY || type == CacheType.VIRTUAL || type.isEvent()) {
-                    blockedCircle.setColor(0x66000000);
-                    blockedCircle.setStyle(Style.STROKE);
-                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-                } else {
+                if (item.applyDistanceRule()) {
                     blockedCircle.setColor(0x66BB0000);
                     blockedCircle.setStyle(Style.STROKE);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
 
                     blockedCircle.setColor(0x44BB0000);
                     blockedCircle.setStyle(Style.FILL);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+                } else {
+                    blockedCircle.setColor(0x66000000);
+                    blockedCircle.setStyle(Style.STROKE);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
                 }
             }
@@ -209,9 +208,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             progress.show(context, context.getResources().getString(R.string.map_live), context.getResources().getString(R.string.cache_dialog_loading_details), true, null);
 
+            CachesOverlayItemImpl item = null;
             // prevent concurrent changes
             getOverlayImpl().lock();
-            CachesOverlayItemImpl item = null;
             try {
                 if (index < items.size()) {
                     item = items.get(index);

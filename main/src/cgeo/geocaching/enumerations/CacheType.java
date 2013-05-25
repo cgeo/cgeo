@@ -113,4 +113,12 @@ public enum CacheType {
         }
         return cache.getType() == this;
     }
+
+    public boolean applyDistanceRule() {
+        return !isVirtual() && !isEvent();
+    }
+
+    public boolean isVirtual() {
+        return VIRTUAL == this || WEBCAM == this || EARTH == this;
+    }
 }

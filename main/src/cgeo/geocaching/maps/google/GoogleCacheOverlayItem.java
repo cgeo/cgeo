@@ -1,21 +1,20 @@
 package cgeo.geocaching.maps.google;
 
 import cgeo.geocaching.IWaypoint;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
 
 public class GoogleCacheOverlayItem extends OverlayItem implements CachesOverlayItemImpl {
-    final private CacheType cacheType;
     final private IWaypoint coord;
+    final private boolean applyDistanceRule;
 
-    public GoogleCacheOverlayItem(final IWaypoint coordinate, final CacheType type) {
+    public GoogleCacheOverlayItem(final IWaypoint coordinate, boolean applyDistanceRule) {
         super(new GeoPoint(coordinate.getCoords().getLatitudeE6(), coordinate.getCoords().getLongitudeE6()), coordinate.getName(), "");
 
-        this.cacheType = type;
         this.coord = coordinate;
+        this.applyDistanceRule = applyDistanceRule;
     }
 
     @Override
@@ -24,8 +23,8 @@ public class GoogleCacheOverlayItem extends OverlayItem implements CachesOverlay
     }
 
     @Override
-    public CacheType getType() {
-        return cacheType;
+    public boolean applyDistanceRule() {
+        return applyDistanceRule;
     }
 
 }

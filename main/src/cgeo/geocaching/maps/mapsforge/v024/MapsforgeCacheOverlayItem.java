@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.IWaypoint;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 
 import org.mapsforge.android.mapsold.GeoPoint;
@@ -10,14 +9,14 @@ import org.mapsforge.android.mapsold.OverlayItem;
 import android.graphics.drawable.Drawable;
 
 public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOverlayItemImpl {
-    final private CacheType cacheType;
     final private IWaypoint coord;
+    final private boolean applyDistanceRule;
 
-    public MapsforgeCacheOverlayItem(IWaypoint coordinate, final CacheType type) {
+    public MapsforgeCacheOverlayItem(IWaypoint coordinate, boolean applyDistanceRule) {
         super(new GeoPoint(coordinate.getCoords().getLatitudeE6(), coordinate.getCoords().getLongitudeE6()), coordinate.getName(), "");
 
-        this.cacheType = type;
         this.coord = coordinate;
+        this.applyDistanceRule = applyDistanceRule;
     }
 
     @Override
@@ -26,13 +25,13 @@ public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOver
     }
 
     @Override
-    public CacheType getType() {
-        return cacheType;
+    public Drawable getMarker(int index) {
+        return getMarker();
     }
 
     @Override
-    public Drawable getMarker(int index) {
-        return getMarker();
+    public boolean applyDistanceRule() {
+        return applyDistanceRule;
     }
 
 }

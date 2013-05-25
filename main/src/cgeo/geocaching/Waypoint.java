@@ -278,4 +278,5 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         hash ^= waypointType.markerId;
         return (int) hash;
     }
+
 }
