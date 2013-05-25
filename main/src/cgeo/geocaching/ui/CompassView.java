@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.PeriodicHandler;
+import cgeo.geocaching.utils.PeriodicHandler.PeriodicHandlerListener;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,7 +15,7 @@ import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.View;
 
-public class CompassView extends View {
+public class CompassView extends View implements PeriodicHandlerListener {
 
     private Context context = null;
     private Bitmap compassUnderlay = null;
@@ -48,7 +49,7 @@ public class CompassView extends View {
     private int compassOverlayWidth = 0;
     private int compassOverlayHeight = 0;
     private boolean initialDisplay;
-    private final RedrawHandler redrawHandler = new RedrawHandler();
+    private final PeriodicHandler redrawHandler = new PeriodicHandler(40, this);
 
     public CompassView(Context contextIn) {
         super(contextIn);
@@ -145,26 +146,18 @@ public class CompassView extends View {
         return AngleUtils.normalize(actual + offset);
     }
 
-    private class RedrawHandler extends PeriodicHandler {
-
-        public RedrawHandler() {
-            super(40);
-        }
-
-        @Override
-        public void act() {
-            final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
-            final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-            if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
-                    Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
-                synchronized(CompassView.this) {
-                    azimuthShown = newAzimuthShown;
-                    cacheHeadingShown = newCacheHeadingShown;
-                }
-                invalidate();
+    @Override
+    public void onPeriodic() {
+        final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
+        final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+        if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
+            synchronized(this) {
+                azimuthShown = newAzimuthShown;
+                cacheHeadingShown = newCacheHeadingShown;
             }
+            invalidate();
         }
-
     }
 
     @Override

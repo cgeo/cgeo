@@ -3,16 +3,26 @@ package cgeo.geocaching.utils;
 import android.os.Handler;
 import android.os.Message;
 
+import java.lang.ref.WeakReference;
+
 /**
  * A PeriodicHandler class helps with the implementation of a periodic
  * action embedded in a thread with a looper such as the UI thread.
- * The act() method will be called periodically. The clock may drift
- * as the implementation does not target real-time actions.
+ * The onPeriodic() method of the listener will be called periodically.
+ * The clock may drift as the implementation does not target real-time
+ * actions.
  *
  * The handler will be interrupted if the device goes to sleep.
  *
+ * The handler only keeps a weak reference to the listener. If the listener
+ * is garbage-collected without having stopped the timer, the handler will
+ * stop itself.
  */
-abstract public class PeriodicHandler extends Handler {
+final public class PeriodicHandler extends Handler {
+
+    public static interface PeriodicHandlerListener {
+        public void onPeriodic();
+    }
 
     final static private int START = 0;
     final static private int STOP = 1;
@@ -20,20 +30,18 @@ abstract public class PeriodicHandler extends Handler {
 
     final private long period;
 
+    final private WeakReference<PeriodicHandlerListener> listenerRef;
+
     /**
      * Create a new PeriodicHandler object.
      *
      * @param period
      *            The period in milliseconds.
      */
-    protected PeriodicHandler(final long period) {
+    public PeriodicHandler(final long period, final PeriodicHandlerListener listener) {
         this.period = period;
+        listenerRef = new WeakReference<PeriodicHandlerListener>(listener);
     }
-
-    /**
-     * Subclasses of PeriodicHandler must implement this method.
-     */
-    abstract public void act();
 
     @Override
     public void handleMessage(final Message msg) {
@@ -46,8 +54,11 @@ abstract public class PeriodicHandler extends Handler {
                 removeMessages(ACT);
                 break;
             case ACT:
-                sendEmptyMessageDelayed(ACT, period);
-                act();
+                final PeriodicHandlerListener listener = listenerRef.get();
+                if (listener != null) {
+                    sendEmptyMessageDelayed(ACT, period);
+                    listener.onPeriodic();
+                }
                 break;
             default:
                 throw new UnsupportedOperationException();

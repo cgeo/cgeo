@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.MemorySubject;
 import cgeo.geocaching.utils.PeriodicHandler;
+import cgeo.geocaching.utils.PeriodicHandler.PeriodicHandlerListener;
 import cgeo.geocaching.utils.Version;
 
 import org.json.JSONException;
@@ -12,7 +13,7 @@ import android.os.Looper;
 
 import java.util.Locale;
 
-public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implements Runnable {
+public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implements Runnable, PeriodicHandlerListener {
 
     static public class Status {
         final public String message;
@@ -28,7 +29,8 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
         }
     }
 
-    private void requestUpdate() {
+    @Override
+    public void onPeriodic() {
         final JSONObject response =
                 Network.requestJSON("http://status.cgeo.org/api/status.json",
                         new Parameters("version_code", String.valueOf(Version.getVersionCode(cgeoapplication.getInstance())),
@@ -50,12 +52,7 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
     @Override
     public void run() {
         Looper.prepare();
-        new PeriodicHandler(1800000L) {
-            @Override
-            public void act() {
-                requestUpdate();
-            }
-        }.start();
+        new PeriodicHandler(1800000L, this).start();
         Looper.loop();
     }
 
