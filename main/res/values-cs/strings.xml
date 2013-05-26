@@ -364,8 +364,6 @@
   <string name="init_gc_activate">Aktivace Geocaching.com na Aktivní mapě a ve vyhledávání</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Aktivace opencaching.de na Aktivní mapě a ve vyhledávání</string>
-  <string name="init_oc_username_description">Zadej své uživatelské jméno pro opencaching.de kvůli možnosti označovat nálezy.</string>
-  <string name="init_oc_username">Zadej své uživatelské jméno</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Uživatelské jméno</string>

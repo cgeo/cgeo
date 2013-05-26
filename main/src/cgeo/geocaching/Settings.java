@@ -40,8 +40,8 @@ import java.util.Locale;
  */
 public final class Settings {
 
-    private static final String KEY_TEMP_TOKEN_SECRET = "temp-token-secret";
-    private static final String KEY_TEMP_TOKEN_PUBLIC = "temp-token-public";
+    private static final String KEY_TEMP_TWITTER_TOKEN_SECRET = "temp-token-secret";
+    private static final String KEY_TEMP_TWITTER_TOKEN_PUBLIC = "temp-token-public";
     private static final String KEY_HELP_SHOWN = "helper";
     private static final String KEY_ANYLONGITUDE = "anylongitude";
     private static final String KEY_ANYLATITUDE = "anylatitude";
@@ -112,8 +112,12 @@ public final class Settings {
     private static final String KEY_MAP_DIRECTORY = "mapDirectory";
     private static final String KEY_CONNECTOR_GC_ACTIVE = "connectorGCActive";
     private static final String KEY_CONNECTOR_OC_ACTIVE = "connectorOCActive";
-    private static final String KEY_CONNECTOR_OC_USER = "connectorOCUser";
     private static final String KEY_LOG_IMAGE_SCALE = "logImageScale";
+    private static final String KEY_OCDE_TOKEN_SECRET = "ocde_tokensecret";
+    private static final String KEY_OCDE_TOKEN_PUBLIC = "ocde_tokenpublic";
+    private static final String KEY_TEMP_OCDE_TOKEN_SECRET = "ocde-temp-token-secret";
+    private static final String KEY_TEMP_OCDE_TOKEN_PUBLIC = "ocde-temp-token-public";
+
 
     private final static int unitsMetric = 1;
 
@@ -164,8 +168,8 @@ public final class Settings {
             final SharedPreferences old = cgeoapplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
             final Editor e = sharedPrefs.edit();
 
-            e.putString(KEY_TEMP_TOKEN_SECRET, old.getString(KEY_TEMP_TOKEN_SECRET, null));
-            e.putString(KEY_TEMP_TOKEN_PUBLIC, old.getString(KEY_TEMP_TOKEN_PUBLIC, null));
+            e.putString(KEY_TEMP_TWITTER_TOKEN_SECRET, old.getString(KEY_TEMP_TWITTER_TOKEN_SECRET, null));
+            e.putString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, old.getString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, null));
             e.putBoolean(KEY_HELP_SHOWN, old.getInt(KEY_HELP_SHOWN, 0) != 0);
             e.putFloat(KEY_ANYLONGITUDE, old.getFloat(KEY_ANYLONGITUDE, 0));
             e.putFloat(KEY_ANYLATITUDE, old.getFloat(KEY_ANYLATITUDE, 0));
@@ -340,26 +344,44 @@ public final class Settings {
         });
     }
 
-    public static String getOCConnectorUserName() {
-        String ocConnectorUser = sharedPrefs.getString(KEY_CONNECTOR_OC_USER, null);
-        if (StringUtils.isBlank(ocConnectorUser)) {
-            return StringUtils.EMPTY;
-        }
-        return ocConnectorUser;
+    public static String getOCDETokenPublic() {
+        return sharedPrefs.getString(KEY_OCDE_TOKEN_PUBLIC, "");
     }
 
-    public static boolean setOCConnectorUserName(final String userName) {
-        return editSharedSettings(new PrefRunnable() {
+    public static String getOCDETokenSecret() {
+        return sharedPrefs.getString(KEY_OCDE_TOKEN_SECRET, "");
+    }
+
+    public static void setOCDETokens(final String tokenPublic, final String tokenSecret, boolean enableOcDe) {
+        editSharedSettings(new PrefRunnable() {
 
             @Override
             public void edit(Editor edit) {
-                if (StringUtils.isBlank(userName)) {
-                    edit.remove(KEY_CONNECTOR_OC_USER);
-                } else {
-                    edit.putString(KEY_CONNECTOR_OC_USER, userName);
+                edit.putString(KEY_OCDE_TOKEN_PUBLIC, tokenPublic);
+                edit.putString(KEY_OCDE_TOKEN_SECRET, tokenSecret);
+                if (tokenPublic != null) {
+                    edit.remove(KEY_TEMP_OCDE_TOKEN_PUBLIC);
+                    edit.remove(KEY_TEMP_OCDE_TOKEN_SECRET);
                 }
             }
         });
+        setOCConnectorActive(enableOcDe);
+    }
+
+    public static void setOCDETempTokens(final String tokenPublic, final String tokenSecret) {
+        editSharedSettings(new PrefRunnable() {
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_TEMP_OCDE_TOKEN_PUBLIC, tokenPublic);
+                edit.putString(KEY_TEMP_OCDE_TOKEN_SECRET, tokenSecret);
+            }
+        });
+    }
+
+    public static ImmutablePair<String, String> getTempOCDEToken() {
+        String tokenPublic = sharedPrefs.getString(KEY_TEMP_OCDE_TOKEN_PUBLIC, null);
+        String tokenSecret = sharedPrefs.getString(KEY_TEMP_OCDE_TOKEN_SECRET, null);
+        return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
     }
 
     public static boolean isGCvoteLogin() {
@@ -1137,8 +1159,8 @@ public final class Settings {
                 edit.putString(KEY_TWITTER_TOKEN_PUBLIC, tokenPublic);
                 edit.putString(KEY_TWITTER_TOKEN_SECRET, tokenSecret);
                 if (tokenPublic != null) {
-                    edit.remove(KEY_TEMP_TOKEN_PUBLIC);
-                    edit.remove(KEY_TEMP_TOKEN_SECRET);
+                    edit.remove(KEY_TEMP_TWITTER_TOKEN_PUBLIC);
+                    edit.remove(KEY_TEMP_TWITTER_TOKEN_SECRET);
                 }
             }
         });
@@ -1149,15 +1171,15 @@ public final class Settings {
         editSharedSettings(new PrefRunnable() {
             @Override
             public void edit(Editor edit) {
-                edit.putString(KEY_TEMP_TOKEN_PUBLIC, tokenPublic);
-                edit.putString(KEY_TEMP_TOKEN_SECRET, tokenSecret);
+                edit.putString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, tokenPublic);
+                edit.putString(KEY_TEMP_TWITTER_TOKEN_SECRET, tokenSecret);
             }
         });
     }
 
     public static ImmutablePair<String, String> getTempToken() {
-        String tokenPublic = sharedPrefs.getString(KEY_TEMP_TOKEN_PUBLIC, null);
-        String tokenSecret = sharedPrefs.getString(KEY_TEMP_TOKEN_SECRET, null);
+        String tokenPublic = sharedPrefs.getString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, null);
+        String tokenSecret = sharedPrefs.getString(KEY_TEMP_TWITTER_TOKEN_SECRET, null);
         return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
     }
 

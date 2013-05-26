@@ -1472,7 +1472,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(GCConnector.addToWatchlist(cache) ? 1 : -1);
+                handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).addToWatchlist(cache) ? 1 : -1);
             }
         }
 
@@ -1486,7 +1486,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(GCConnector.removeFromWatchlist(cache) ? 1 : -1);
+                handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).removeFromWatchlist(cache) ? 1 : -1);
             }
         }
 

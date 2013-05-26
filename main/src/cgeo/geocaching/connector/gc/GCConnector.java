@@ -7,6 +7,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
@@ -19,6 +20,8 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import android.app.Activity;
 
 import java.util.regex.Pattern;
 
@@ -75,6 +78,16 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean supportsLogging() {
         return true;
+    }
+
+    @Override
+    public boolean supportsLogImages() {
+        return true;
+    }
+
+    @Override
+    public ILoggingManager getLoggingManager(Activity activity, Geocache cache) {
+        return new GCLoggingManager(activity, cache);
     }
 
     @Override
@@ -149,7 +162,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     }
 
-    public static boolean addToWatchlist(Geocache cache) {
+    @Override
+    public boolean addToWatchlist(Geocache cache) {
         final boolean added = GCParser.addToWatchlist(cache);
         if (added) {
             cgData.saveChangedCache(cache);
@@ -157,7 +171,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return added;
     }
 
-    public static boolean removeFromWatchlist(Geocache cache) {
+    @Override
+    public boolean removeFromWatchlist(Geocache cache) {
         final boolean removed = GCParser.removeFromWatchlist(cache);
         if (removed) {
             cgData.saveChangedCache(cache);

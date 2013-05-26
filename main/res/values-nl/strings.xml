@@ -347,8 +347,6 @@
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Activeer opencaching.de op live-kaart en in zoekopdrachten.</string>
-  <string name="init_oc_username_description">Vul je opencaching.de gebruikersnaam in op caches als gevonden te markeren.</string>
-  <string name="init_oc_username">Vul gebruikersnaam in</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Gebruikersnaam</string>

@@ -5,6 +5,8 @@ import cgeo.geocaching.ICache;
 import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import android.app.Activity;
+
 public interface IConnector {
     /**
      * get name for display (currently only used in links)
@@ -45,6 +47,22 @@ public interface IConnector {
     public boolean supportsWatchList();
 
     /**
+     * Add the cache to the watchlist
+     *
+     * @param cache
+     * @return True - success/False - failure
+     */
+    public boolean addToWatchlist(Geocache cache);
+
+    /**
+     * Remove the cache from the watchlist
+     *
+     * @param cache
+     * @return True - success/False - failure
+     */
+    public boolean removeFromWatchlist(Geocache cache);
+
+    /**
      * enable/disable favorite points controls in cache details
      *
      * @return
@@ -57,6 +75,20 @@ public interface IConnector {
      * @return
      */
     public boolean supportsLogging();
+
+    /**
+     * enable/disable attaching image to log
+     *
+     * @return
+     */
+    public boolean supportsLogImages();
+
+    /**
+     * Get an ILoggingManager to guide the logging process.
+     *
+     * @return
+     */
+    public ILoggingManager getLoggingManager(Activity activity, Geocache cache);
 
     /**
      * get host name of the connector server for dynamic loading of data

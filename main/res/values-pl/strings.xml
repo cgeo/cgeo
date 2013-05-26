@@ -364,8 +364,6 @@
   <string name="init_gc_activate">Aktywuj Geocaching.com na aktualnej mapie i w wyszukiwaniu</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Aktywuj opencaching.de na mapie Live i w wyszukiwaniu</string>
-  <string name="init_oc_username_description">Wpisz swoją nazwę użytkownika opencaching.de w celu umożliwienia zaznaczania znalezionych przez Ciebie skrzynek.</string>
-  <string name="init_oc_username">Wpisz swoją nazwę użytkownika</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Nazwa użytkownika</string>
