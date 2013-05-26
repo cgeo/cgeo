@@ -34,6 +34,7 @@
   <string name="ape">Project Ape-Cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS Cache Exhibit</string>
+  <string name="block">Groundspeak Block Party</string>
   <string name="unknown">Unbekannter Typ</string>
 
   <!-- cache sizes -->
@@ -73,6 +74,7 @@
   <string name="log_maintenance_needed">Benötigt Wartung</string>
   <string name="log_update">Geänderte Koordinaten</string>
   <string name="log_archived">Archiviert</string>
+  <string name="log_unarchived">Aus dem Archiv geholt</string>
   <string name="log_needs_archived">Sollte archiviert werden</string>
   <string name="log_discovered">Gesehen</string>
   <string name="log_reviewer">Review(er)-Anmerkung</string>
@@ -180,7 +182,10 @@
   <string name="err_load_descr_failed">Laden der Cachebeschreibung fehlgeschlagen.</string>
   <string name="err_location_unknown">c:geo erkennt die Position des Caches nicht.</string>
   <string name="err_missing_device_name">Vor der Registrierung muss ein Name für das Endgerät festlegt werden.</string>
-
+  <string name="err_favorite_failed">Ändern des Favoriten-Status ist fehlgeschlagen.</string>
+  <string name="err_select_logimage_failed">Auswahl eines Bildes für das Log ist fehlgeschlagen.</string>
+  <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
+  
   <string name="err_tb_display">"c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
   <string name="err_tb_forgot_saw">c:geo hat vergessen, welcher Trackable gesehen wurde.</string>
@@ -202,6 +207,7 @@
   <string name="err_log_load_data_still">c:geo lädt gerade die benötigten Daten. Bitte kurz warten.</string>
   <string name="err_log_failed_server">c:geo konnte Log nicht senden, weil der Server nicht antwortete.</string>
   <string name="err_log_post_failed">c:geo konnte Log nicht absenden.</string>
+  <string name="err_logimage_post_failed">Es scheint dass Ihr Logfoto nicht hochgeladen werden konnte. Bitte prüfen Sie es auf Geocaching.com nach.</string>
 
   <string name="err_search_address_forgot">c:geo hat die Adresse vergessen, die gesucht wurde.</string>
   <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
@@ -231,6 +237,8 @@
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
+  <string name="info_select_logimage_cancelled">Foto Auswahl oder Erstellung abgebrochen.</string>
+  <string name="info_stored_image">Neues Foto gespeichert nach:</string>
 
   <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
 
@@ -361,6 +369,7 @@
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gc_activate">Geocaching.com auf Live-Karte und für die Suche aktivieren</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Opencaching.de auf Live-Karte und für die Suche aktivieren</string>
   <string name="init_oc_username_description">Benutzername für opencaching.de eingeben damit gefundene Caches markiert werden können.</string>
@@ -388,6 +397,7 @@
   <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
   <string name="init_signature_template_user">Benutzer</string>
   <string name="init_signature_template_number">Nummer</string>
+  <string name="init_signature_template_owner">Besitzer</string>
   <string name="init_details">Cache Details</string>
   <string name="init_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
   <string name="init_elevationwanted">Lade Höhe des Caches</string>
@@ -514,6 +524,8 @@
   <string name="cache_log_image_default_title">Bild</string>
   <string name="cache_personal_note">Persönliche Notiz</string>
   <string name="cache_personal_note_edit">Bearbeiten</string>
+  <string name="cache_personal_note_unstored">Cache noch nicht gespeichert</string>
+  <string name="cache_personal_note_store">Der Cache wird zunächst gespeichert, damit persönliche Notizen möglich sind.</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
   <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>
@@ -586,6 +598,7 @@
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_menu_cachebeacon">Cache Beacon</string>  
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
@@ -613,6 +626,7 @@
   <string name="cache_coordinates">Koordinaten</string>
   <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
   <string name="cache_spoiler_images_title">Hinweisbilder</string>
+  <string name="cache_images_title">Bilder</string>
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string>
   <string name="cache_clear_history">Verlauf leeren</string>
@@ -1038,6 +1052,8 @@
   <string name="attribute_ask_owner_no">Keine Startbedingungen beim Owner erfragen</string>
   <string name="attribute_unknown_yes">Unbekannte Attribute vorhanden</string>
   <string name="attribute_unknown_no">Keine unbekannten Attribute</string>
+  <string name="attribute_geotour_yes">Teil einer GeoTour</string>
+  <string name="attribute_geotour_no">Kein Teil einer GeoTour</string>
 
   <!-- next things -->
   <string name="legal_note">Um die Dienste von geocaching.com nutzen zu können, müssen die <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak-Nutzungsbedingungen</a> (englisch) akzeptiert werden.</string>
@@ -1066,6 +1082,8 @@
   <string name="tts_stop">Stoppe Sprache</string>
   <string name="tts_kilometers">%s Kilometer</string>
   <string name="tts_meters">%s Meter</string>
+  <string name="tts_miles">%s Meilen</string>
+  <string name="tts_feet">%s Fuß</string>
   <string name="tts_oclock">%s Uhr</string>
 
   <!-- various -->

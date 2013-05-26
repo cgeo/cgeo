@@ -112,7 +112,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private static final int MENU_FILTER = 74;
     private static final int MENU_DELETE_EVENTS = 75;
     private static final int MENU_CLEAR_OFFLINE_LOGS = 76;
-    private static final int MENU_EXPORT_FIELDNOTES = 77;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_RESTART_GEO_AND_DIR = -2;
