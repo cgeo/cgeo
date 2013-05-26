@@ -33,7 +33,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.Uri;
-import android.text.Html;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -297,7 +296,7 @@ final public class OkapiClient {
             description.append(response.getString(CACHE_DESCRIPTION));
             cache.setDescription(description.toString());
 
-            cache.setHint(Html.escapeHtml(response.getString(CACHE_HINT)));
+            cache.setHint(response.getString(CACHE_HINT));
             // not used: hints
 
             final JSONArray images = response.getJSONArray(CACHE_IMAGES);
