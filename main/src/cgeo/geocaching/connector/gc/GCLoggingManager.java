@@ -54,19 +54,16 @@ public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<String> arg0, String page) {
+
         if (page == null) {
             hasLoaderError = true;
         } else {
 
-        viewstates = Login.getViewstates(page);
-        trackables = GCParser.parseTrackableLog(page);
-        possibleLogTypes = GCParser.parseTypes(page);
+            viewstates = Login.getViewstates(page);
+            trackables = GCParser.parseTrackableLog(page);
+            possibleLogTypes = GCParser.parseTypes(page);
 
-        if (possibleLogTypes.isEmpty()) {
-            hasLoaderError = true;
-            } else {
-                hasLoaderError = false;
-            }
+            hasLoaderError = possibleLogTypes.isEmpty();
         }
 
         activity.onLoadFinished();

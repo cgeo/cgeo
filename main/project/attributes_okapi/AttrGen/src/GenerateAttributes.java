@@ -5,13 +5,13 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;;
 
 
 public class GenerateAttributes {
@@ -20,24 +20,24 @@ public class GenerateAttributes {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		File inFile = new File(args[0]);
 		InputStream inputStream; 
-		
+
 		try {
-			
+
 			writeHeader();
-		
+
 			inputStream = new FileInputStream(inFile);
 			Reader reader = new InputStreamReader(inputStream,"UTF-8");
-		
+
 			InputSource is = new InputSource(reader);
 			is.setEncoding("UTF-8");
-			
+
 			parseAttributes(is);
-			
+
 			writeTrailer();
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,7 +65,7 @@ public class GenerateAttributes {
 	}
 
     private static void writeAttr(AttrInfo attr) {
-    	
+
     	for(String name : attr.names) {
     		if (attr.oc_de_id > 0) {
     			System.out.println("        attrMapDe.put(\"" + name + "\", " + attr.oc_de_id + ");");
@@ -74,9 +74,9 @@ public class GenerateAttributes {
     			System.out.println("        attrMapPl.put(\"" + name + "\", " + attr.oc_pl_id + ");");
     		}
     	}
-		
+
 	}
-    
+
 	private static void writeTrailer() {
 		System.out.print(
 "        // first trailer line\n" +
@@ -92,13 +92,13 @@ public class GenerateAttributes {
 "        }\n" +
 "        return result;\n" +
 "    }\n" +
-"}\n");		
+"}\n");
 	}
 
 	private static void parseAttributes(InputSource stream) {
-		
+
 		try {
-		
+
 	      SAXParserFactory factory = SAXParserFactory.newInstance();
 	      SAXParser saxParser = factory.newSAXParser();
 
@@ -133,14 +133,14 @@ public class GenerateAttributes {
 	        public void endElement(String uri, String localName,
 	                String qName)
 	                throws SAXException {
-	        	
+
 	        	if (attr != null && qName.equalsIgnoreCase("attr")) {
 	        	  attr.names = names.toArray(new String[]{});
 	        	  names = null;
 	              writeAttr(attr);
 	              attr = null;
 	        	}
-	        	
+
 	        	readingName = false;
 	        }
 

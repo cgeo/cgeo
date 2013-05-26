@@ -23,7 +23,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     @Override
     public String getLicenseText(final Geocache cache) {
         // NOT TO BE TRANSLATED
-        return "©" + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, CC-BY-NC-ND, alle Logeinträge © jeweiliger Autor";
+        return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, CC-BY-NC-ND, alle Logeinträge © jeweiliger Autor";
     }
 
     @Override
