@@ -110,3 +110,5 @@ other_cache       |      |  57  |  x  | PD      | koem                      | se
 ask_owner         |      |  58  |  x  | PD      | koem                      | selfmade
 #
 unknown           |  -1  |  -1  |  x  | PD      | koem                      | selfmade
+geotour           |  67  |      |     | CC0     | James Keuning             | http://thenounproject.com/noun/suitcase/#icon-No9097
+

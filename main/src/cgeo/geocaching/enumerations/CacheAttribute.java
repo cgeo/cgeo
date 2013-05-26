@@ -108,7 +108,8 @@ public enum CacheAttribute {
     ARITHMETIC(-1, 56, "arithmetic", R.drawable.attribute_arithmetic, R.string.attribute_arithmetic_yes, R.string.attribute_arithmetic_no),
     OTHER_CACHE(-1, 57, "other_cache", R.drawable.attribute_other_cache, R.string.attribute_other_cache_yes, R.string.attribute_other_cache_no),
     ASK_OWNER(-1, 58, "ask_owner", R.drawable.attribute_ask_owner, R.string.attribute_ask_owner_yes, R.string.attribute_ask_owner_no),
-    UNKNOWN(-1, -1, "unknown", R.drawable.attribute_unknown, R.string.attribute_unknown_yes, R.string.attribute_unknown_no);
+    UNKNOWN(-1, -1, "unknown", R.drawable.attribute_unknown, R.string.attribute_unknown_yes, R.string.attribute_unknown_no),
+    GEOTOUR(67, -1, "geotour", R.drawable.attribute_geotour, R.string.attribute_geotour_yes, R.string.attribute_geotour_no);
     // THIS LIST IS GENERATED: don't change anything here but read
     // project/attributes/readme.txt
 

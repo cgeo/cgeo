@@ -183,6 +183,7 @@ public abstract class GPXParser extends FileParser {
                 R.string.attribute_treeclimbing_yes, // 64
                 R.string.attribute_frontyard_yes, // 65
                 R.string.attribute_teamwork_yes, // 66
+                R.string.attribute_geotour_yes, // 67
         };
         private static final String YES = "_yes";
         private static final String NO = "_no";
