@@ -467,6 +467,7 @@
   <string name="cache_menu_around">Alrededores</string>
   <string name="cache_menu_event">Añadir a calendario</string>
   <string name="cache_menu_details">Detalles</string>
+  <string name="cache_menu_refresh">Actualizar</string>
   <string name="cache_menu_share">Compartir escondite</string>
   <string name="cache_menu_move_list">Mover a otra lista</string>
   <string name="cache_menu_gcc">GCC</string>

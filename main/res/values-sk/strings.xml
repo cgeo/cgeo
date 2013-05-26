@@ -546,6 +546,7 @@
   <string name="cache_menu_around">Skrýše v okolí</string>
   <string name="cache_menu_event">Pridať do kalendára</string>
   <string name="cache_menu_details">Detaily</string>
+  <string name="cache_menu_refresh">Obnoviť</string>
   <string name="cache_menu_share">Zdielať skrýšu</string>
   <string name="cache_menu_move_list">Presunúť do iného zoznamu</string>
   <string name="cache_menu_gcc">GCC</string>

@@ -585,6 +585,7 @@
   <string name="cache_menu_around">Keš v okolí</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>
   <string name="cache_menu_details">Detaily</string>
+  <string name="cache_menu_refresh">Obnovit</string>
   <string name="cache_menu_share">Sdílet keš</string>
   <string name="cache_menu_move_list">Přesunout do jiného seznamu</string>
   <string name="cache_menu_gcc">GCC</string>

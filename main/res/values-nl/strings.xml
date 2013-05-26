@@ -568,6 +568,7 @@
   <string name="cache_menu_around">Caches rondom</string>
   <string name="cache_menu_event">Toevoegen aan kalender</string>
   <string name="cache_menu_details">Details</string>
+  <string name="cache_menu_refresh">Verversen</string>
   <string name="cache_menu_share">Deel cache</string>
   <string name="cache_menu_move_list">Verplaats naar andere lijst</string>
   <string name="cache_menu_gcc">GCC</string>

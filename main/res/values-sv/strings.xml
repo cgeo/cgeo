@@ -594,6 +594,7 @@
   <string name="cache_menu_around">Cacher i närheten</string>
   <string name="cache_menu_event">Lägg till i kalender</string>
   <string name="cache_menu_details">Detaljer</string>
+  <string name="cache_menu_refresh">Uppdatera</string>
   <string name="cache_menu_share">Skicka länk</string>
   <string name="cache_menu_move_list">Flytta till annan lista</string>
   <string name="cache_menu_gcc">GCC</string>

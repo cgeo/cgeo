@@ -588,6 +588,7 @@
   <string name="cache_menu_around">Cache qui intorno</string>
   <string name="cache_menu_event">Aggiungi al calendario</string>
   <string name="cache_menu_details">Dettagli</string>
+  <string name="cache_menu_refresh">Aggiorna</string>
   <string name="cache_menu_share">Condividi cache</string>
   <string name="cache_menu_move_list">Muovi in un\'altra lista</string>
   <string name="cache_menu_gcc">GCC</string>

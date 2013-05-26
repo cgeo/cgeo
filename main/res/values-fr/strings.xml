@@ -594,6 +594,7 @@
   <string name="cache_menu_around">Alentours</string>
   <string name="cache_menu_event">Ajouter à l\'agenda</string>
   <string name="cache_menu_details">Détails</string>
+  <string name="cache_menu_refresh">Recharger</string>
   <string name="cache_menu_share">Partager la cache</string>
   <string name="cache_menu_move_list">Déplacer dans une autre liste</string>
   <string name="cache_menu_gcc">GCC</string>

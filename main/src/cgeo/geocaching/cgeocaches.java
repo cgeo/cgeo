@@ -97,6 +97,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private static final int MENU_REMOVE_FROM_HISTORY = 23;
     private static final int MENU_DROP_CACHE = 24;
     private static final int MENU_MOVE_TO_LIST = 25;
+    private static final int MENU_REFRESH = 26;
     private static final int MENU_SWITCH_SELECT_MODE = 52;
     private static final int SUBMENU_SHOW_MAP = 54;
     private static final int SUBMENU_MANAGE_LISTS = 55;
@@ -111,6 +112,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private static final int MENU_FILTER = 74;
     private static final int MENU_DELETE_EVENTS = 75;
     private static final int MENU_CLEAR_OFFLINE_LOGS = 76;
+    private static final int MENU_EXPORT_FIELDNOTES = 77;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_RESTART_GEO_AND_DIR = -2;
@@ -568,8 +570,11 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_HISTORY, 0, res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
                 subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
                 subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
+                subMenu.add(0, MENU_CLEAR_OFFLINE_LOGS, 0, res.getString(R.string.caches_clear_offlinelogs));
+                menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)).setIcon(R.drawable.ic_menu_set_as);
+            } else {
+                menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as); // download details for all caches
             }
-            menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as); // download details for all caches
         }
 
         navigationMenu = CacheListAppFactory.addMenuItems(menu, this, res);
@@ -630,12 +635,12 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             final boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
             final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
 
-            if (type == CacheListType.OFFLINE) { // only offline list
+            if (type == CacheListType.OFFLINE || type == CacheListType.HISTORY) { // only offline list
                 setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
                 menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
                 setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
-            } else { // search and history list (all other than offline)
+            } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
             }
 
@@ -859,6 +864,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
             menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             menu.add(0, MENU_EXPORT, 0, res.getString(R.string.export));
+            menu.add(0, MENU_REFRESH, 0, res.getString(R.string.cache_menu_refresh));
         }
         else {
             menu.add(0, MENU_STORE_CACHE, 0, res.getString(R.string.cache_offline_store));
@@ -938,6 +944,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 }, true, listId);
                 break;
             case MENU_STORE_CACHE:
+            case MENU_REFRESH:
                 refreshStored(Collections.singletonList(cache));
                 break;
             case MENU_EXPORT:

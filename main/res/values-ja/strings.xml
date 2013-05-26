@@ -562,6 +562,7 @@
   <string name="cache_menu_around">近くのキャッシュ</string>
   <string name="cache_menu_event">カレンダーに登録</string>
   <string name="cache_menu_details">詳細</string>
+  <string name="cache_menu_refresh">更新</string>
   <string name="cache_menu_share">キャッシュを共有</string>
   <string name="cache_menu_move_list">他のリストに移動</string>
   <string name="cache_menu_gcc">GCC</string>

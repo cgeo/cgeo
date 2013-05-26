@@ -594,6 +594,7 @@
   <string name="cache_menu_around">Caches around</string>
   <string name="cache_menu_event">Add to calendar</string>
   <string name="cache_menu_details">Details</string>
+  <string name="cache_menu_refresh">Refresh</string>
   <string name="cache_menu_share">Share cache</string>
   <string name="cache_menu_move_list">Move to other list</string>
   <string name="cache_menu_gcc">GCC</string>

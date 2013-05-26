@@ -548,6 +548,7 @@
   <string name="cache_menu_around">Caches próximas</string>
   <string name="cache_menu_event">Adicionar ao calendário</string>
   <string name="cache_menu_details">Detalhes</string>
+  <string name="cache_menu_refresh">Actualizar</string>
   <string name="cache_menu_share">Partilhar cache</string>
   <string name="cache_menu_move_list">Mover para outra lista</string>
   <string name="cache_menu_gcc">GCC</string>

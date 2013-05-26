@@ -584,6 +584,7 @@
   <string name="cache_menu_around">Skrzynki w okręgu</string>
   <string name="cache_menu_event">Dodaj do kalendarza</string>
   <string name="cache_menu_details">Szczegóły</string>
+  <string name="cache_menu_refresh">Odśwież</string>
   <string name="cache_menu_share">Podziel się skrzynką</string>
   <string name="cache_menu_move_list">Przenieś do innej listy</string>
   <string name="cache_menu_gcc">GCC</string>

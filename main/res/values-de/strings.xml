@@ -580,6 +580,7 @@
   <string name="cache_menu_around">Caches im Umkreis</string>
   <string name="cache_menu_event">Zum Kalender hinzufügen</string>
   <string name="cache_menu_details">Details</string>
+  <string name="cache_menu_refresh">Aktualisieren</string>
   <string name="cache_menu_share">Weiterleiten</string>
   <string name="cache_menu_move_list">Auf andere Liste verschieben</string>
   <string name="cache_menu_gcc">GCC</string>

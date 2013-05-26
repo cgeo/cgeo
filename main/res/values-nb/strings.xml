@@ -280,6 +280,7 @@
   <string name="cache_menu_around">Cacher i nærheten</string>
   <string name="cache_menu_event">Eksporter til kalender</string>
   <string name="cache_menu_details">Detaljer</string>
+  <string name="cache_menu_refresh">Oppdater</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Logg lagret</string>
   <string name="cache_status_found">Funnet</string>

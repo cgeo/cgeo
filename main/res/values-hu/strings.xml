@@ -544,6 +544,7 @@
   <string name="cache_menu_around">Közeli ládák</string>
   <string name="cache_menu_event">Hozzáadás a naptárhoz</string>
   <string name="cache_menu_details">Részletek</string>
+  <string name="cache_menu_refresh">Frissítés</string>
   <string name="cache_menu_share">Láda megosztása</string>
   <string name="cache_menu_move_list">Mozgatás másik listára</string>
   <string name="cache_menu_gcc">GCC</string>
