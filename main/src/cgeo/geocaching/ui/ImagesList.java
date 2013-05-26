@@ -39,9 +39,6 @@ import java.util.List;
 
 public class ImagesList {
 
-    private static final int MENU_FILE = 201;
-    private static final int MENU_BROWSER = 202;
-
     private BitmapDrawable currentDrawable;
     private Image currentImage;
 
@@ -159,10 +156,9 @@ public class ImagesList {
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v) {
+        activity.getMenuInflater().inflate(R.menu.images_list_context, menu);
         final Resources res = activity.getResources();
         menu.setHeaderTitle(res.getString(R.string.cache_image));
-        menu.add(0, MENU_FILE, 0, res.getString(R.string.cache_image_open_file));
-        menu.add(0, MENU_BROWSER, 0, res.getString(R.string.cache_image_open_browser));
         final ImageView view = (ImageView) v;
         currentDrawable = (BitmapDrawable) view.getDrawable();
         currentImage = images.get(view.getId());
@@ -170,10 +166,10 @@ public class ImagesList {
 
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_FILE:
+            case R.id.image_open_file:
                 viewImageInStandardApp(currentDrawable);
                 return true;
-            case MENU_BROWSER:
+            case R.id.image_open_browser:
                 if (currentImage != null) {
                     currentImage.openInBrowser(activity);
                 }

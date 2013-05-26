@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/image_open_file"
+        android:title="@string/cache_image_open_file">
+    </item>
+    <item
+        android:id="@+id/image_open_browser"
+        android:title="@string/cache_image_open_browser">
+    </item>
+</menu>
