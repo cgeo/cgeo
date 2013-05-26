@@ -34,6 +34,7 @@
   <string name="ape">Projekt APE cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS cache utställning</string>
+  <string name="block">Groundspeak Gatufest</string>
   <string name="unknown">Okänd typ</string>
 
   <!-- cache sizes -->
@@ -524,6 +525,8 @@
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Personlig anteckning</string>
   <string name="cache_personal_note_edit">Redigera</string>
+  <string name="cache_personal_note_unstored">Cachen ej sparad</string>
+  <string name="cache_personal_note_store">Cachen kommera tt sparas först för att kunna hantera personlig anteckning.</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
   <string name="cache_description_table_note">Varning från c:geo! Beskrivningen innehåller HTML-tabeller som eventuellt kan behöva öppnas i en webbläsare för att visas på önskat sätt %s.</string>
@@ -859,10 +862,15 @@
 
   <!-- next things -->
   <string name="legal_note">För att använda tjänster hos Geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
-  <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">Hemsida: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo</a></string>
-  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
+  <string name="quote">To make geocaching easier, to make users lazier.</string>
+  <string name="powered_by">carnero</string>
+  <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support">Support: <a href="">support@cgeo.org</a></string>
+  <string name="website">Hemsida: <a href="">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="">c:geo</a></string>
+  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
+  <string name="market">Android: <a href="">c:geo på Google Play</a></string>
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
   <string name="about_auth_1">Nedan tillåter du <b>c:geo</b> att ansluta till Twitter.</string>
   <string name="about_auth_2">Klicka på \"Påbörja koppling mot Twitter\" om du vill koppla ihop <b>c:geo</b> med Twitter. Twitters hemsida kommer att öppnas i en webbläsare. Logga in på den sidan och tillåt <b>c:geo</b> att ansluta till ditt konto. När du godkänt så kommer Twitter att visa en PIN kod. Kom ihåg denna PIN kod, stäng webbläsaren och skriv in PIN koden i <b>c:geo</b> och bekräfta.</string>
@@ -880,10 +888,12 @@
   <string name="tts_stop">Stoppa tal</string>
   <string name="tts_kilometers">%s kilometer</string>
   <string name="tts_meters">%s meter</string>
+  <string name="tts_miles">%s eng. mil</string>
+  <string name="tts_feet">%s fot</string>
   <string name="tts_oclock">Klockan %s</string>
 
   <!-- various -->
-  <string name="clipboard_copy_ok">Kopierat till urklipp.</string>
+  <string name="clipboard_copy_ok">Kopierat till urklipp</string>
   <plurals name="days_ago">
       <item quantity="one">igår</item>
       <item quantity="other">%d dagar sedan</item>
