@@ -175,7 +175,9 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     /**
-     * Gather missing information from another cache object.
+     * Gather missing information for new Geocache object from the stored Geocache object.
+     * This is called in the new Geocache parsed from website to set information not yet
+     * parsed.
      *
      * @param other
      *            the other version, or null if non-existent
@@ -187,6 +189,8 @@ public class Geocache implements ICache, IWaypoint {
         }
 
         updated = System.currentTimeMillis();
+        // if parsed cache is not yet detailed and stored is, the information of
+        // the parsed cache will be overwritten
         if (!detailed && (other.detailed || zoomlevel < other.zoomlevel)) {
             detailed = other.detailed;
             detailedUpdate = other.detailedUpdate;
@@ -206,7 +210,7 @@ public class Geocache implements ICache, IWaypoint {
             onWatchlist = other.onWatchlist;
             logOffline = other.logOffline;
             finalDefined = other.finalDefined;
-            // archived is kept from the most recent data
+            archived = other.archived;
         }
 
         /*
