@@ -14,6 +14,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,12 +92,12 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     private class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 
         @Override
-        public void destroyItem(View container, int position, Object object) {
+        public void destroyItem(ViewGroup container, int position, Object object) {
             ((ViewPager) container).removeView((View) object);
         }
 
         @Override
-        public void finishUpdate(View container) {
+        public void finishUpdate(ViewGroup container) {
         }
 
         @Override
@@ -105,7 +106,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public Object instantiateItem(View container, int position) {
+        public Object instantiateItem(ViewGroup container, int position) {
             final Page page = pageOrder.get(position);
 
             PageViewCreator creator = viewCreators.get(page);
@@ -146,7 +147,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public void startUpdate(View arg0) {
+        public void startUpdate(ViewGroup arg0) {
         }
 
         @Override
