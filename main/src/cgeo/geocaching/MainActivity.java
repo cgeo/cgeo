@@ -36,6 +36,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -49,12 +50,12 @@ public class MainActivity extends AbstractActivity {
     @InjectView(R.id.user_info) protected TextView userInfoView;
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
     @InjectView(R.id.filter_button_title)protected TextView filterTitle;
-    @InjectView(R.id.map) protected View findOnMap;
-    @InjectView(R.id.search_offline) protected View findByOffline;
-    @InjectView(R.id.advanced_button) protected View advanced;
-    @InjectView(R.id.any_button) protected View any;
-    @InjectView(R.id.filter_button) protected View filter;
-    @InjectView(R.id.nearest) protected View nearestView ;
+    @InjectView(R.id.map) protected ImageView findOnMap;
+    @InjectView(R.id.search_offline) protected ImageView findByOffline;
+    @InjectView(R.id.advanced_button) protected ImageView advanced;
+    @InjectView(R.id.any_button) protected ImageView any;
+    @InjectView(R.id.filter_button) protected ImageView filter;
+    @InjectView(R.id.nearest) protected ImageView nearestView;
     @InjectView(R.id.nav_type) protected TextView navType ;
     @InjectView(R.id.nav_accuracy) protected TextView navAccuracy ;
     @InjectView(R.id.nav_location) protected TextView navLocation ;

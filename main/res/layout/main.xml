@@ -49,7 +49,7 @@
                 android:onClick="cgeoFindOnMap"
                 android:orientation="vertical" >
 
-                <View
+                <ImageView
                     android:id="@+id/map"
                     style="@style/icon_mainscreen"
                     android:background="@drawable/main_live" />
@@ -65,7 +65,7 @@
                 android:layout_margin="4dip"
                 android:orientation="vertical" >
 
-                <View
+                <ImageView
                     android:id="@+id/nearest"
                     style="@style/icon_mainscreen"
                     android:background="@drawable/main_nearby_disabled" />
@@ -92,7 +92,7 @@
                     android:layout_alignParentTop="true"
                     android:orientation="vertical" >
 
-                    <View
+                    <ImageView
                         android:id="@+id/search_offline"
                         style="@style/icon_mainscreen"
                         android:background="@drawable/main_stored" />
@@ -118,7 +118,7 @@
                 android:onClick="cgeoSearch"
                 android:orientation="vertical" >
 
-                <View
+                <ImageView
                     android:id="@+id/advanced_button"
                     style="@style/icon_mainscreen"
                     android:background="@drawable/main_search" />
@@ -135,7 +135,7 @@
                 android:onClick="cgeoPoint"
                 android:orientation="vertical" >
 
-                <View
+                <ImageView
                     android:id="@+id/any_button"
                     style="@style/icon_mainscreen"
                     android:background="@drawable/main_any" />
@@ -152,7 +152,7 @@
                 android:onClick="cgeoFilter"
                 android:orientation="vertical" >
 
-                <View
+                <ImageView
                     android:id="@+id/filter_button"
                     style="@style/icon_mainscreen"
                     android:background="@drawable/main_filter" />
