@@ -179,6 +179,24 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 				<data android:scheme="http" android:host="www.geocaching.com" android:pathPrefix="/seek/cache_details.aspx" />
 			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="http" android:host="opencaching.de" android:pathPrefix="/OC" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="http" android:host="www.opencaching.de" android:pathPrefix="/OC" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="http" android:host="www.opencaching.de" android:pathPrefix="/viewcache.php" />
+			</intent-filter>
 		</activity>
 		<activity
 				android:name="cgeo.geocaching.TrackableActivity"
