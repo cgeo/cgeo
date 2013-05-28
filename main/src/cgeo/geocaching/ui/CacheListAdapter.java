@@ -18,6 +18,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.app.Activity;
@@ -443,9 +444,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.dirImg.setVisibility(View.GONE);
             holder.direction.updateAzimuth(azimuth);
             holder.direction.updateHeading(cache.getDirection());
-        } else {
+        } else if (StringUtils.isNotBlank(cache.getDirectionImg())) {
             holder.dirImg.setImageDrawable(DirectionImage.getDrawable(cache.getDirectionImg()));
             holder.dirImg.setVisibility(View.VISIBLE);
+            holder.direction.setVisibility(View.GONE);
+        } else {
+            holder.dirImg.setVisibility(View.GONE);
             holder.direction.setVisibility(View.GONE);
         }
 
