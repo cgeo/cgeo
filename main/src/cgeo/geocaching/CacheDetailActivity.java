@@ -2145,7 +2145,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         // Fast preview: parse only HTML without loading any images
                         HtmlImageCounter imageCounter = new HtmlImageCounter();
                         final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                        holder.text.setText(Html.fromHtml(logText, imageCounter, unknownTagsHandler));
+                        holder.text.setText(Html.fromHtml(logText, imageCounter, unknownTagsHandler), TextView.BufferType.SPANNABLE);
                         if (imageCounter.getImageCount() > 0) {
                             // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
                             LogImageLoader loader = new LogImageLoader(holder);
@@ -2153,7 +2153,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         }
                     }
                     else {
-                        holder.text.setText(logText);
+                        holder.text.setText(logText, TextView.BufferType.SPANNABLE);
                     }
 
                     // images
