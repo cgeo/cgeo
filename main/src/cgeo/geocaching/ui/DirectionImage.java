@@ -3,6 +3,8 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.graphics.drawable.BitmapDrawable;
 
 public class DirectionImage {
@@ -16,7 +18,7 @@ public class DirectionImage {
      * @return a drawable with the arrow pointing into the right direction
      */
     public static BitmapDrawable getDrawable(final String directionCode) {
-        return htmlImage.getDrawable("http://www.geocaching.com/images/icons/compass/" + directionCode + ".gif");
+        return StringUtils.isNotBlank(directionCode) ? htmlImage.getDrawable("http://www.geocaching.com/images/icons/compass/" + directionCode + ".gif") : null;
     }
 
 }
