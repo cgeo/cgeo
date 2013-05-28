@@ -244,7 +244,7 @@ public abstract class GCParser {
                 Log.w("GCParser.parseSearch: Failed to parse favorite count");
             }
 
-            searchResult.addCache(cache);
+            searchResult.addAndPutInCache(cache);
         }
 
         // total caches found
@@ -731,7 +731,7 @@ public abstract class GCParser {
         }
 
         cache.setDetailedUpdatedNow();
-        searchResult.addCache(cache);
+        searchResult.addAndPutInCache(cache);
         return searchResult;
     }
 

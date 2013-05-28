@@ -92,7 +92,7 @@ public class GCMap {
                 JSONObject ownerObj = dataObject.getJSONObject("owner");
                 cache.setOwnerDisplayName(ownerObj.getString("text"));
 
-                result.addCache(cache);
+                result.addAndPutInCache(cache);
 
             }
         } catch (JSONException e) {
@@ -231,7 +231,7 @@ public class GCMap {
                     exclude = true;
                 }
                 if (!exclude) {
-                    searchResult.addCache(cache);
+                    searchResult.addAndPutInCache(cache);
                 }
             }
             Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
