@@ -114,7 +114,7 @@ public class SearchResult implements Parcelable {
     public SearchResult(final Collection<Geocache> caches) {
         this();
         for (final Geocache cache : caches) {
-            addCache(cache);
+            addAndPutInCache(cache);
         }
     }
 
@@ -199,7 +199,7 @@ public class SearchResult implements Parcelable {
                     (excludeMine && (cache.isOwner() || cache.isFound())) ||
                     (!cacheType.contains(cache));
             if (!excludeCache) {
-                result.addCache(cache);
+                result.addAndPutInCache(cache);
                 cachesForVote.add(cache);
             }
         }
@@ -229,7 +229,7 @@ public class SearchResult implements Parcelable {
     }
 
     /** Add the cache geocode to the search and store the cache in the CacheCache */
-    public boolean addCache(final Geocache cache) {
+    public boolean addAndPutInCache(final Geocache cache) {
         addGeocode(cache.getGeocode());
         return cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
     }
