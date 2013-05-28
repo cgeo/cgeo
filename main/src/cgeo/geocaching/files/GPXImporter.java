@@ -140,7 +140,7 @@ public class GPXImporter {
 
                 final SearchResult search = new SearchResult();
                 for (Geocache cache : caches) {
-                    search.addCache(cache);
+                    search.addAndPutInCache(cache);
                 }
 
                 if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {
