@@ -83,6 +83,12 @@
         <copy file="./templates/mapsapikey.xml" todir="./res/values/" overwrite="true">
             <filterset refid="build-tokens" />
         </copy>
+        <copy file="./templates/ocde_okapi.xml" todir="./res/values/" overwrite="true">
+            <filterset>
+                <filter token="ocde.okapi.consumer.key" value="${ocde.okapi.consumer.key}"/>
+                <filter token="ocde.okapi.consumer.secret" value="${ocde.okapi.consumer.secret}"/>
+            </filterset>
+        </copy>
     </target>
 
 <!--
