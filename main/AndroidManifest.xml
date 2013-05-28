@@ -25,7 +25,20 @@
 			android:backupAgent="cgeo.geocaching.backup.CentralBackupAgent"
 			android:allowBackup="true" >
 		<uses-library android:name="com.google.android.maps" android:required="false" />
-		<meta-data
+  
+        <!-- Samsung Multi-Window support -->
+        <uses-library android:name="com.sec.android.app.multiwindow" android:required="false" />
+        <meta-data 
+            android:name="com.sec.android.support.multiwindow" 
+            android:value="true" />
+        <meta-data 
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" 
+            android:resource="@dimen/app_defaultsize_w" />
+        <meta-data 
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" 
+            android:resource="@dimen/app_defaultsize_h" />
+
+        <meta-data
 			android:name="android.app.default_searchable"
 			android:value=".SearchActivity" />
 		<meta-data
@@ -40,6 +53,7 @@
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
+				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
 			</intent-filter>
 		</activity>
 		<activity
