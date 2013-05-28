@@ -191,4 +191,13 @@ public interface IConnector {
      * @return <code>true</code> if the current user is the cache owner, <code>false</code> otherwise
      */
     public boolean isOwner(final ICache cache);
+
+    /**
+     * Check if the cache information is complete enough to be
+     * able to log online.
+     *
+     * @param geocache
+     * @return
+     */
+    public boolean canLog(Geocache geocache);
 }

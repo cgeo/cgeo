@@ -452,7 +452,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void logVisit(final IAbstractActivity fromActivity) {
-        if (StringUtils.isBlank(cacheId)) {
+        if (!getConnector().canLog(this)) {
             fromActivity.showToast(((Activity) fromActivity).getResources().getString(R.string.err_cannot_log_visit));
             return;
         }

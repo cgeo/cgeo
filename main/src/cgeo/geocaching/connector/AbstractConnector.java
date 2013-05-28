@@ -71,6 +71,11 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public boolean canLog(Geocache cache) {
+        return false;
+    }
+
+    @Override
     public ILoggingManager getLoggingManager(Activity activity, Geocache cache) {
         return new NoLoggingManager();
     }

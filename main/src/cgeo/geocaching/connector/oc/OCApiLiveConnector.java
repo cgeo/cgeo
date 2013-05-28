@@ -75,4 +75,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
         return new OkapiLoggingManager(activity, this, cache);
     }
 
+    @Override
+    public boolean canLog(Geocache cache) {
+        return true;
+    }
 }

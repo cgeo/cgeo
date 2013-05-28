@@ -91,6 +91,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public boolean canLog(Geocache cache) {
+        return StringUtils.isNotBlank(cache.getCacheId());
+    }
+
+    @Override
     public String getName() {
         return "GeoCaching.com";
     }
