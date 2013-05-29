@@ -371,8 +371,6 @@
   <string name="init_gc_activate">Aktivera Geocaching.com i live-kartor och sökningar</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Aktivera opencaching.de i live-kartor och sökningar</string>
-  <string name="init_oc_username_description">Ange användarnamn till opencaching.de för att kunna markera dina hittade cacher.</string>
-  <string name="init_oc_username">Ange ditt användarnamn</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Användare</string>

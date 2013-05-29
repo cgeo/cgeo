@@ -23,7 +23,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     @Override
     public String getLicenseText(final Geocache cache) {
         // NOT TO BE TRANSLATED
-        return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons BY-SA 3.0 License";
+        return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, CC-BY-NC-ND, alle Logeinträge © jeweiliger Autor";
     }
 
     @Override
@@ -39,5 +39,9 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     public boolean isActivated() {
         // currently always active, but only for details download
         return true;
+    }
+
+    public String getCK() {
+        return CryptUtils.rot13(cK);
     }
 }

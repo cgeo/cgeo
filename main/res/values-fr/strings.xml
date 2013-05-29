@@ -371,8 +371,6 @@
   <string name="init_gc_activate">Utiliser Geocaching.com pour la carte active et les recherches.</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Utiliser opencaching.de pour la carte active et les recherches.</string>
-  <string name="init_oc_username_description">Entrer votre nom d\'utilisateur opencaching.de afin de pouvoir marquer vos trouvailles.</string>
-  <string name="init_oc_username">Entrer votre nom d\'utilisateur</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Identifiant</string>

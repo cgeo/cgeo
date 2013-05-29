@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="oc_de_okapi_consumer_key" translatable="false">@ocde.okapi.consumer.key@</string>
+    <string name="oc_de_okapi_consumer_secret" translatable="false">@ocde.okapi.consumer.secret@</string>
+</resources>

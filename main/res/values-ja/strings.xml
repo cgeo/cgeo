@@ -345,8 +345,6 @@
   <string name="init_geocaching">Geocaching.com</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">オンライン地図や検索でopencaching.deも使用する</string>
-  <string name="init_oc_username_description">見つけたキャッシュなどをマークするにはopencaching.deのユーザ名を入力してください。</string>
-  <string name="init_oc_username">ユーザ名</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">ユーザ名</string>

@@ -367,8 +367,6 @@
   <string name="init_gc_activate">Attiva Geocaching.com su mappa live e nelle ricerche</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Attiva opencaching.de su mappa live e nelle ricerche</string>
-  <string name="init_oc_username_description">Inserisci il tuo utente opencaching.de per marcare i tuoi ritrovamenti.</string>
-  <string name="init_oc_username">Inserisci nome utente</string>  
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Utente</string>

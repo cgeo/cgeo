@@ -1,14 +1,13 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.ImageResult;
+import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.loaders.UrlLoader;
-import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
@@ -20,7 +19,6 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,8 +29,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,7 +47,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class VisitCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent, LoaderManager.LoaderCallbacks<String> {
+public class VisitCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
     static final String EXTRAS_GEOCODE = "geocode";
     static final String EXTRAS_ID = "id";
 
@@ -71,13 +67,14 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private String geocode = null;
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<LogType>();
-    private String[] viewstates = null;
     private List<TrackableLog> trackables = null;
     private Button postButton = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
     private boolean tbChanged = false;
     private SparseArray<TrackableLog> actionButtons;
+
+    private ILoggingManager loggingManager;
 
     // Data to be saved while reconfiguring
     private double rating;
@@ -87,30 +84,16 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     private String imageDescription;
     private Uri imageUri;
 
-    @Override
-    public Loader<String> onCreateLoader(final int id, final Bundle args) {
-        if (!Settings.isLogin()) { // allow offline logging
-            showToast(res.getString(R.string.err_login));
-            return null;
-        }
-        return new UrlLoader(getBaseContext(), "http://www.geocaching.com/seek/log.aspx", new Parameters("ID", cacheid));
-    }
 
-    @Override
-    public void onLoaderReset(final Loader<String> loader) {
-        // Nothing to do
-    }
+    public void onLoadFinished() {
 
-    @Override
-    public void onLoadFinished(final Loader<String> loader, final String page) {
-        if (page == null) {
+        if (loggingManager.hasLoaderError()) {
             showErrorLoadingData();
             return;
         }
 
-        viewstates = Login.getViewstates(page);
-        trackables = GCParser.parseTrackableLog(page);
-        possibleLogTypes = GCParser.parseTypes(page);
+        trackables = loggingManager.getTrackables();
+        possibleLogTypes = loggingManager.getPossibleLogTypes();
 
         if (possibleLogTypes.isEmpty()) {
             showErrorLoadingData();
@@ -229,7 +212,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         if (!postButton.isEnabled()) {
             return res.getString(R.string.log_post_not_possible);
         }
-        if (typeSelected != LogType.FOUND_IT || !Settings.isGCvoteLogin()) {
+        if (typeSelected != LogType.FOUND_IT || !Settings.isGCvoteLogin() || !cache.supportsGCVote()) {
             return res.getString(R.string.log_post);
         }
         if (rating == 0) {
@@ -295,7 +278,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             }
         }
         updatePostButtonText();
-        setImageButtonText();
+        updateImageButton();
         enablePostButton(false);
 
         final Button typeButton = (Button) findViewById(R.id.type);
@@ -347,7 +330,9 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             }
         });
 
-        getSupportLoaderManager().initLoader(0, null, this);
+        loggingManager = cache.getLoggingManager(this);
+
+        loggingManager.init();
     }
 
     private void setDefaultValues() {
@@ -393,7 +378,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         final EditText logView = (EditText) findViewById(R.id.log);
         logView.setText(StringUtils.EMPTY);
 
-        setImageButtonText();
+        updateImageButton();
 
         showToast(res.getString(R.string.info_log_cleared));
     }
@@ -433,7 +418,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == LogType.FOUND_IT && StringUtils.isNotBlank(cache.getGuid());
+        final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == LogType.FOUND_IT && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
         return true;
@@ -536,11 +521,9 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         protected StatusCode doInBackgroundInternal(final String[] logTexts) {
             final String log = logTexts[0];
             try {
-                final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(geocode, cacheid, viewstates, typeSelected,
-                        date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
-                        log, trackables);
+                final LogResult logResult = loggingManager.postLog(cache, typeSelected, date, log, trackables);
 
-                if (postResult.left == StatusCode.NO_ERROR) {
+                if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     final LogEntry logNow = new LogEntry(date, typeSelected, log);
 
                     cache.getLogs().add(0, logNow);
@@ -560,17 +543,17 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                     }
 
                     if (StringUtils.isNotBlank(imageUri.getPath())) {
-                        ImmutablePair<StatusCode, String> imageResult = GCParser.uploadLogImage(postResult.right, imageCaption, imageDescription, imageUri);
-                        final String uploadedImageUrl = imageResult.right;
+                        ImageResult imageResult = loggingManager.postLogImage(logResult.getLogId(), imageCaption, imageDescription, imageUri);
+                        final String uploadedImageUrl = imageResult.getImageUri();
                         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
                             logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
                             cgData.saveChangedCache(cache);
                         }
-                        return imageResult.left;
+                        return imageResult.getPostResult();
                     }
                 }
 
-                return postResult.left;
+                return logResult.getPostLogResult();
             } catch (Exception e) {
                 Log.e("cgeovisit.postLogFn", e);
             }
@@ -705,14 +688,19 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
                 // Image capture failed, advise user
                 showToast(getResources().getString(R.string.err_select_logimage_failed));
             }
-            setImageButtonText();
+            updateImageButton();
 
         }
     }
 
-    private void setImageButtonText() {
+    private void updateImageButton() {
         final Button imageButton = (Button) findViewById(R.id.image_btn);
-        imageButton.setText(StringUtils.isNotBlank(imageUri.getPath()) ?
+        if (cache.supportsLogImages()) {
+            imageButton.setVisibility(View.VISIBLE);
+            imageButton.setText(StringUtils.isNotBlank(imageUri.getPath()) ?
                 res.getString(R.string.log_image_edit) : res.getString(R.string.log_image_attach));
+        } else {
+            imageButton.setVisibility(View.GONE);
+        }
     }
 }

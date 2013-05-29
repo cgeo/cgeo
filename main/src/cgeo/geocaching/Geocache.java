@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -455,7 +456,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void logVisit(final IAbstractActivity fromActivity) {
-        if (StringUtils.isBlank(cacheId)) {
+        if (!getConnector().canLog(this)) {
             fromActivity.showToast(((Activity) fromActivity).getResources().getString(R.string.err_cannot_log_visit));
             return;
         }
@@ -562,12 +563,20 @@ public class Geocache implements ICache, IWaypoint {
         return getConnector().supportsLogging();
     }
 
+    public boolean supportsLogImages() {
+        return getConnector().supportsLogImages();
+    }
+
     public boolean supportsOwnCoordinates() {
         return getConnector().supportsOwnCoordinates();
     }
 
     public CacheRealm getCacheRealm() {
         return getConnector().getCacheRealm();
+    }
+
+    public ILoggingManager getLoggingManager(Activity activity) {
+        return getConnector().getLoggingManager(activity, this);
     }
 
     @Override
