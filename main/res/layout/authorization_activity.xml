@@ -19,6 +19,7 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/auth_1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center_vertical"
@@ -28,11 +29,11 @@
                 android:drawableLeft="@drawable/cgeo"
                 android:drawablePadding="15dip"
                 android:gravity="left|center_vertical"
-                android:text="@string/about_auth_1"
                 android:textColor="?text_color"
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/auth_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center_vertical"
@@ -40,7 +41,6 @@
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
                 android:gravity="left|center_vertical"
-                android:text="@string/about_auth_2"
                 android:textColor="?text_color"
                 android:textSize="14sp" />
 
@@ -52,20 +52,17 @@
 
                 <Button
                     android:id="@+id/start"
-                    style="@style/button_full"
-                    android:text="@string/auth_authorize" />
+                    style="@style/button_full" />
 
                 <EditText
                     android:id="@+id/pin"
                     style="@style/edittext_full"
-                    android:hint="@string/auth_pin_hint"
                     android:inputType="number"
                     android:visibility="gone" />
 
                 <Button
                     android:id="@+id/pin_button"
                     style="@style/button_full"
-                    android:text="@string/auth_finish"
                     android:visibility="visible" />
             </LinearLayout>
         </LinearLayout>

@@ -371,8 +371,8 @@
   <string name="init_gc_activate">Activate Geocaching.com on live-map and in searches</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Activate opencaching.de on live-map and in searches</string>
-  <string name="init_oc_username_description">Enter your opencaching.de user name in order to allow marking your finds.</string>
-  <string name="init_oc_username">Enter your user name</string>
+  <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
+  <string name="init_register_oc_de">Authorize c:geo</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Username</string>
@@ -486,8 +486,7 @@
   <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection or send2c:geo is down.</string>
   <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2c:geo expired. Please register in settings.</string>
 
-
-  <!-- auth -->
+  <!-- auth twitter -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Authorize c:geo</string>
   <string name="auth_start">Start authorization</string>
@@ -498,6 +497,22 @@
   <string name="auth_dialog_pin_title">PIN code</string>
   <string name="auth_dialog_pin_message">Please type in PIN code provided by the Twitter website. It is mandatory to complete the authorization.</string>
   <string name="auth_dialog_completed">c:geo is now authorized to post on Twitter.</string>
+  <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
+  <string name="about_auth_2">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
+  
+  <!-- auth opencaching -->
+  <string name="auth_ocde">opencaching.de</string>
+  <string name="auth_authorize_oc">Authorize c:geo</string>
+  <string name="auth_start_oc">Start authorization</string>
+  <string name="auth_again_oc">Start again</string>
+  <string name="auth_pin_hint_oc">PIN assigned by %s</string>
+  <string name="auth_finish_oc">Finish</string>
+  <string name="auth_dialog_wait_oc">Waiting for %s…</string>
+  <string name="auth_dialog_pin_title_oc">PIN code</string>
+  <string name="auth_dialog_pin_message_oc">Please type in PIN code provided by the %s website. It is mandatory to complete the authorization.</string>
+  <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
+  <string name="about_auth_1_oc">The following process allows <b>c:geo</b> to access %s - if agreed.</string>
+  <string name="about_auth_2_oc">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, %s will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
 
   <!-- cache -->
   <plurals name="cache_counts">
@@ -1070,8 +1085,6 @@
   <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo on Google Play</a></string>
   <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
-  <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
-  <string name="about_auth_2">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
 
   <!-- status (used via string based resource loading) -->
   <string name="status_new_release" tools:ignore="UnusedResources">New release available.\nClick to install.</string>

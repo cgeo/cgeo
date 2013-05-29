@@ -117,7 +117,7 @@ import java.util.regex.Pattern;
  * e.g. details, description, logs, waypoints, inventory...
  */
 public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page>
-    implements EditNoteDialogListener {
+        implements EditNoteDialogListener {
 
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
@@ -259,6 +259,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     finish();
                     return;
                 }
+            } else if (uriHost.contains("opencaching.de")) {
+                if (uriPath != null && uriPath.startsWith("/oc")) {
+                    geocode = uriPath.substring(1).toUpperCase(Locale.US);
+                } else {
+                    geocode = uri.getQueryParameter("wp");
+                    if (StringUtils.isNotBlank(geocode)) {
+                        geocode = geocode.toUpperCase(Locale.US);
+                    } else {
+                        showToast(res.getString(R.string.err_detail_open));
+                        finish();
+                        return;
+                    }
+                }
+            } else {
+                showToast(res.getString(R.string.err_detail_open));
+                finish();
+                return;
             }
         }
 
@@ -1472,7 +1489,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(GCConnector.addToWatchlist(cache) ? 1 : -1);
+                handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).addToWatchlist(cache) ? 1 : -1);
             }
         }
 
@@ -1486,7 +1503,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void run() {
-                handler.sendEmptyMessage(GCConnector.removeFromWatchlist(cache) ? 1 : -1);
+                handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).removeFromWatchlist(cache) ? 1 : -1);
             }
         }
 
@@ -2242,8 +2259,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             /**
-             * Read the position of the cursor pointed to by this holder.
-             * <br/>
+             * Read the position of the cursor pointed to by this holder. <br/>
              * This must be called by the UI thread.
              *
              * @return the cursor position
@@ -2253,11 +2269,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             /**
-             * Set the position of the cursor pointed to by this holder.
-             * <br/>
+             * Set the position of the cursor pointed to by this holder. <br/>
              * This must be called by the UI thread.
              *
-             * @param position the cursor position
+             * @param position
+             *            the cursor position
              */
             public void setPosition(final int position) {
                 this.position = position;

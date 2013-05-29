@@ -6,6 +6,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.Activity;
+
 public abstract class AbstractConnector implements IConnector {
 
     @Override
@@ -15,6 +17,16 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     public boolean supportsWatchList() {
+        return false;
+    }
+
+    @Override
+    public boolean addToWatchlist(Geocache cache) {
+        return false;
+    }
+
+    @Override
+    public boolean removeFromWatchlist(Geocache cache) {
         return false;
     }
 
@@ -51,6 +63,21 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public boolean supportsLogging() {
         return false;
+    }
+
+    @Override
+    public boolean supportsLogImages() {
+        return false;
+    }
+
+    @Override
+    public boolean canLog(Geocache cache) {
+        return false;
+    }
+
+    @Override
+    public ILoggingManager getLoggingManager(Activity activity, Geocache cache) {
+        return new NoLoggingManager();
     }
 
     @Override

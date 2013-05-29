@@ -372,8 +372,8 @@
   <string name="init_gc_activate">Geocaching.com auf Live-Karte und für die Suche aktivieren</string>
   <string name="init_oc">opencaching.de</string>
   <string name="init_oc_activate">Opencaching.de auf Live-Karte und für die Suche aktivieren</string>
-  <string name="init_oc_username_description">Benutzername für opencaching.de eingeben damit gefundene Caches markiert werden können.</string>
-  <string name="init_oc_username">Benutzername</string>
+  <string name="init_oc_de_description">Autorisiere c:geo dazu auf opencaching.de zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_register_oc_de">c:geo autorisieren</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Benutzername</string>
@@ -486,7 +486,7 @@
   <string name="sendToCgeo_download_fail">c:geo konnte Caches nicht laden. Entweder besteht keine Internetverbindung oder send2c:geo funktioniert nicht.</string>
   <string name="sendToCgeo_no_registration">c:geo konnte Caches nicht laden. Registrierung für send2c:geo ungültig. Bitte in Einstellungen neu registrieren.</string>
 
-  <!-- auth -->
+  <!-- auth twitter -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">c:geo autorisieren</string>
   <string name="auth_start">Starte Autorisierung</string>
@@ -497,6 +497,22 @@
   <string name="auth_dialog_pin_title">PIN Code</string>
   <string name="auth_dialog_pin_message">Bitte den Twitter-PIN-Code eingeben, dies ist notwendig um die Autorisierung abzuschließen.</string>
   <string name="auth_dialog_completed">c:geo ist nun autorisiert, Tweets bei Twitter zu erstellen.</string>
+  <string name="about_auth_1">Der folgende Prozess erlaubt es <b>c:geo</b> auf den persönlichen Twitter-Account zuzugreifen, wenn zugestimmt wird.</string>
+  <string name="about_auth_2">Ein Klick auf \"Starte Autorisierung\" öffnet eine Twitter-Seite in einem Browserfenster. Durch die Anmeldung und die Bestätigung wird <b>c:geo</b> ermöglicht, auf den persönlichen Twitter-Account zuzugreifen. Wird dies bestätigt, nennt Twitter eine numerische PIN, diese muss kopiert und in <b>c:geo</b> eingefügt werden. Das ist alles.</string>
+
+    <!-- auth opencaching -->
+  <string name="auth_ocde">opencaching.de</string>
+  <string name="auth_authorize_oc">c:geo autorisieren</string>
+  <string name="auth_start_oc">Starte Autorisierung</string>
+  <string name="auth_again_oc">Neustarten</string>
+  <string name="auth_pin_hint_oc">%s-PIN</string>
+  <string name="auth_finish_oc">Fertig</string>
+  <string name="auth_dialog_wait_oc">Warten auf %s…</string>
+  <string name="auth_dialog_pin_title_oc">PIN Code</string>
+  <string name="auth_dialog_pin_message_oc">Bitte den %s-PIN-Code eingeben, dies ist notwendig um die Autorisierung abzuschließen.</string>
+  <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, caches zu laden und auf %s zu loggen.</string>
+  <string name="about_auth_1_oc">Der folgende Prozess erlaubt es <b>c:geo</b> auf den persönlichen %s-Account zuzugreifen, wenn zugestimmt wird.</string>
+  <string name="about_auth_2_oc">Ein Klick auf \"Starte Autorisierung\" öffnet eine %s-Seite in einem Browserfenster. Durch die Anmeldung und die Bestätigung wird <b>c:geo</b> ermöglicht, auf den persönlichen Account zuzugreifen. Wird dies bestätigt, nennt %s eine numerische PIN, diese muss kopiert und in <b>c:geo</b> eingefügt werden. Das ist alles.</string>
 
   <!-- cache -->
   <plurals name="cache_counts">
@@ -1066,8 +1082,6 @@
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
   <string name="nutshellmanual">Benutzung: <a href="">c:geo Kurzanleitung</a></string>
   <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
-  <string name="about_auth_1">Der folgende Prozess erlaubt es <b>c:geo</b> auf den persönlichen Twitter-Account zuzugreifen, wenn zugestimmt wird.</string>
-  <string name="about_auth_2">Ein Klick auf \"Starte Autorisierung\" öffnet eine Twitter-Seite in einem Browserfenster. Durch die Anmeldung und die Bestätigung wird <b>c:geo</b> ermöglicht, auf den persönlichen Twitter-Account zuzugreifen. Wird dies bestätigt, nennt Twitter eine numerische PIN, diese muss kopiert und in <b>c:geo</b> eingefügt werden. Das ist alles.</string>
 
   <!-- status -->
   <string name="status_new_release" tools:ignore="UnusedResources">Neuer Release verfügbar.\nKlicken zum Installieren.</string>
