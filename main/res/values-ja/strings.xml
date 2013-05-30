@@ -10,7 +10,6 @@
   <string name="settings">設定</string>
   <string name="helpers">役に立つアプリ</string>
   <string name="about">c:geoについて</string>
-  <string name="helper"><b>c:geo</b>についてもっと知りたい?\nマニュアル(英語)を読んでね。</string>
   <string name="latitude">緯度</string>
   <string name="longitude">経度</string>
 
@@ -146,7 +145,6 @@
   <string name="err_detail_cache_find">キャッシュ情報が見つかりません。</string>
   <string name="err_detail_cache_find_some">キャッシュ情報が見つかりません。</string>
   <string name="err_detail_cache_find_any">キャッシュ情報が一つも見つかりません。</string>
-  <string name="err_detail_cache_find_next">次のキャッシュ情報が見つかりません。</string>
   <string name="err_detail_cache_forgot">c:geo forgot which geocache you want.</string>
   <string name="err_detail_google_maps_limit_reached">オフライン用の地図のダウンロードに失敗しました。大量のデータをダウンロードしたと判断されGoogleマップ側に制限されたかもしれません。</string>
   <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした。</string>
@@ -255,7 +253,6 @@
   <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
   <string name="caches_eta_ltm">1分以内</string>
   <plurals name="caches_eta_mins">
-    <item quantity="one">分</item>
     <item quantity="other">分</item>
   </plurals>
   <string name="caches_store_offline">オフライン用に保存</string>
@@ -472,8 +469,6 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">キャッシュがありません</item>
-    <item quantity="one">1つのキャッシュ</item>
     <item quantity="other">%1$d 個のキャッシュ</item>
   </plurals>
   <string name="cache_offline">オフライン</string>
@@ -511,7 +506,6 @@
 
   <string name="cache_waypoints">ウェイポイント</string>
   <plurals name="waypoints">
-      <item quantity="one">1 ウェイポイント</item>
       <item quantity="other">%d ウェイポイント</item>
   </plurals>
   <string name="cache_waypoints_add">ウェイポイントを追加</string>
@@ -989,7 +983,6 @@
 
   <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
   <plurals name="days_ago">
-      <item quantity="one">昨日</item>
       <item quantity="other">%d日前</item>
   </plurals>
 </resources>

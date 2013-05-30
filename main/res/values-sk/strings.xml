@@ -10,7 +10,6 @@
   <string name="settings">Nastavenie</string>
   <string name="helpers">Pomocné aplikácie</string>
   <string name="about">O aplikácii</string>
-  <string name="helper">Chcete sa dozvedieť viac o <b>c:geo</b>?\nPozrite si manuál.</string>
   <string name="latitude">Zemepisná šírka</string>
   <string name="longitude">Zemepisná dĺžka</string>
 
@@ -141,7 +140,6 @@
   <string name="err_detail_cache_find">Prepáčte, c:geo nemôže nájsť skrýšu</string>
   <string name="err_detail_cache_find_some">Prepáčte, c:geo nemôže nájsť požadovanú skrýšu.</string>
   <string name="err_detail_cache_find_any">Prepáčte, c:geo nemôže nájsť žiadnu skrýšu.</string>
-  <string name="err_detail_cache_find_next">Prepáčte, c:geo nemôže nájsť ďalšiu skrýšu.</string>
   <string name="err_detail_cache_forgot">Prepáčte, c:geo zabudlo, akú skrýšu chcete zobraziť.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo sa nepodarilo prevziať statické mapy. Je možné, že bol dosiahnutý limit Google mapy.</string>
   <string name="err_detail_no_spoiler">c:geo nenašla pre túto skrýšu žiaden spoilerový obrázok.</string>
@@ -464,7 +462,6 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">žiadna skrýša</item>
     <item quantity="one">jedna skrýša</item>
     <item quantity="other">%1$d skrýš</item>
   </plurals>

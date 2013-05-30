@@ -96,7 +96,6 @@
   <string name="err_detail_cache_find">Beklager, c:geo klarte ikke å finne geocachen</string>
   <string name="err_detail_cache_find_some">Beklager, c:geo klarte ikke å finne den forespurte cachen.</string>
   <string name="err_detail_cache_find_any">Beklager, c:geo klarte ikke finne geocacher..</string>
-  <string name="err_detail_cache_find_next">Beklager, c:geo klarte ikke å finne den neste geocachen.</string>
   <string name="err_detail_cache_forgot">Beklager, c:geo glemte hvilken cache du ønsket.</string>
   <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
   <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>
@@ -236,9 +235,8 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">Ingen cacher</item>
     <item quantity="one">Én cache</item>
-    <item quantity="other">%1$d Cacher</item>
+    <item quantity="other">%1$d cacher</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Oppdater</string>

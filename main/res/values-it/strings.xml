@@ -10,7 +10,6 @@
   <string name="settings">Settaggi</string>
   <string name="helpers">Apps utili</string>
   <string name="about">Info c:geo</string>
-  <string name="helper">Vuoi imparare di più su <b>c:geo</b>?\nLeggi il semplice manuale.</string>
   <string name="latitude">Latitudine</string>
   <string name="longitude">Longitudine</string>
 
@@ -162,7 +161,6 @@
   <string name="err_detail_cache_find">c:geo non trova il geocache</string>
   <string name="err_detail_cache_find_some">c:geo non trova quel geocache.</string>
   <string name="err_detail_cache_find_any">c:geo non trova nessun geocache.</string>
-  <string name="err_detail_cache_find_next">c:geo non trova il prossimo geocache.</string>
   <string name="err_detail_cache_forgot">c:geo ha dimenticato quale geocache hai richiesto.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo non riesce a scaricare le mappe statiche. Forse raggiunto il limite di google map. Riprova domani.</string>
   <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questo cache.</string>
@@ -494,9 +492,8 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">Nessun cache</item>
     <item quantity="one">Un cache</item>
-    <item quantity="other">%1$d Cache</item>
+    <item quantity="other">%1$d cache</item>
   </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aggiorna</string>

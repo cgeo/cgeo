@@ -10,7 +10,6 @@
   <string name="settings">Instellingen</string>
   <string name="helpers">Wat te installeren</string>
   <string name="about">Over c:geo</string>
-  <string name="helper">Wil je meer weten over <b>c:geo</b>?\nKijk dan in de (makkelijk te lezen) handleiding.</string>
   <string name="latitude">Breedtegraad</string>
   <string name="longitude">Lengtegraad</string>
 
@@ -146,7 +145,6 @@
   <string name="err_detail_cache_find">Sorry, c:geo kan de geocache niet vinden.</string>
   <string name="err_detail_cache_find_some">Sorry, c:geo kan die geocache niet vinden.</string>
   <string name="err_detail_cache_find_any">Sorry, c:geo kan geen enkele geocache vinden.</string>
-  <string name="err_detail_cache_find_next">Sorry, c:geo kan de volgende cache niet vinden.</string>
   <string name="err_detail_cache_forgot">Sorry, c:geo is kwijt welke geocache je wilde openen.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo kon de statische kaarten niet downloaden. Wellicht dat de Google Maps limiet is bereikt.</string>
   <string name="err_detail_no_spoiler">c:geo Heeft geen spoiler images gevonden voor deze cache.</string>
@@ -475,7 +473,6 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">Geen cache</item>
     <item quantity="one">Een cache</item>
     <item quantity="other">%1$d Caches</item>
   </plurals>

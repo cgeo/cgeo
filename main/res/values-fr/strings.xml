@@ -10,7 +10,6 @@
   <string name="settings">Paramètres</string>
   <string name="helpers">Aide à l\'installation</string>
   <string name="about">À propos de c:geo</string>
-  <string name="helper">Voulez-vous en savoir plus au sujet de <b>c:geo</b> ?\nLisez notre manuel (en anglais).</string>
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
 
@@ -163,7 +162,6 @@
   <string name="err_detail_cache_find">c:geo ne peut pas trouver de caches</string>
   <string name="err_detail_cache_find_some">c:geo ne peut pas trouver cette cache.</string>
   <string name="err_detail_cache_find_any">c:geo ne peut pas trouver de caches.</string>
-  <string name="err_detail_cache_find_next">c:geo ne peut pas trouver les caches suivantes.</string>
   <string name="err_detail_cache_forgot">c:geo a oublié la cache demandée.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo n\'a pas pu charger les cartes statiques. La limite de Google Maps est peut être temporairement atteinte.</string>
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
@@ -499,7 +497,6 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">aucune cache</item>
     <item quantity="one">une cache</item>
     <item quantity="other">%1$d caches</item>
   </plurals>

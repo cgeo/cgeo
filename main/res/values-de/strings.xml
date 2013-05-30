@@ -10,7 +10,6 @@
   <string name="settings">Einstellungen</string>
   <string name="helpers">Nützliche Apps</string>
   <string name="about">Über c:geo</string>
-  <string name="helper">Um mehr über <b>c:geo</b> zu erfahren\neinfach die Bedienungsanleitung öffnen.</string>
   <string name="latitude">Breitengrad</string>
   <string name="longitude">Längengrad</string>
 
@@ -163,7 +162,6 @@
   <string name="err_detail_cache_find">c:geo konnte keinen Cache finden.</string>
   <string name="err_detail_cache_find_some">c:geo konnte diesen Cache nicht finden.</string>
   <string name="err_detail_cache_find_any">c:geo konnte keine Caches finden.</string>
-  <string name="err_detail_cache_find_next">c:geo konnte die nächsten Caches nicht finden.</string>
   <string name="err_detail_cache_forgot">c:geo hat vergessen, welcher Cache aufgerufen werden sollte.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo kann die statischen Karten nicht herunterladen. Google Maps Limit könnte erreicht sein.</string>
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
@@ -276,7 +274,6 @@
   <string name="caches_downloading">Lade Caches…\nGeschätzte Zeit: </string>
   <string name="caches_eta_ltm">Weniger als eine Minute</string>
   <plurals name="caches_eta_mins">
-    <item quantity="zero">Minuten</item>
     <item quantity="one">Minute</item>
     <item quantity="other">Minuten</item>
   </plurals>
@@ -516,7 +513,6 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">Kein Cache</item>
     <item quantity="one">Ein Cache</item>
     <item quantity="other">%1$d Caches</item>
   </plurals>

@@ -10,7 +10,6 @@
   <string name="settings">Ajustes</string>
   <string name="helpers">¿Qué instalar?</string>
   <string name="about">Sobre c:geo</string>
-  <string name="helper">Si quieres aprender cosas sobre <b>c:geo</b>?\nEcha un ojo a nuestro manual.</string>
   <string name="latitude">Latitud</string>
   <string name="longitude">Longitud</string>
 
@@ -151,7 +150,6 @@
   <string name="err_detail_cache_find">Lo siento, c:geo no puede encontrar escondites</string>
   <string name="err_detail_cache_find_some">Lo siento, c:geo no puede encontrar ese escondite.</string>
   <string name="err_detail_cache_find_any">Lo siento, c:geo no puede encontrar algunos escondites.</string>
-  <string name="err_detail_cache_find_next">Lo siento, c:geo no puede encontrar los siguientes escondites.</string>
   <string name="err_detail_cache_forgot">Lo siento, c:geo ha olvidado el escondite que quieres.</string>
   <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este escondite.</string>
   <string name="err_detail_no_map_static">c:geo no ha encontrado mapas estáticos para este escondite.</string>
@@ -410,7 +408,6 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">Sin escondites</item>
     <item quantity="one">Un escondite</item>
     <item quantity="other">%1$d Escondites</item>
   </plurals>

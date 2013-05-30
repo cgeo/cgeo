@@ -10,7 +10,6 @@
   <string name="settings">Nastavení</string>
   <string name="helpers">Užitečné aplikace</string>
   <string name="about">O aplikaci</string>
-  <string name="helper">Chceš zjistit více o <b>c:geo</b>?\nMrkni na snadno čitelný návod.</string>
   <string name="latitude">Zeměpisná šířka</string>
   <string name="longitude">Zeměpisná délka</string>
 
@@ -154,7 +153,6 @@
   <string name="err_detail_cache_find">c:geo nemůže najít geokeš</string>
   <string name="err_detail_cache_find_some">c:geo nemůže najít tuto geokeš.</string>
   <string name="err_detail_cache_find_any">c:geo nemůže najít žádnou geokeš.</string>
-  <string name="err_detail_cache_find_next">c:geo nemůže najít další geokeše.</string>
   <string name="err_detail_cache_forgot">c:geo zapomnělo, jakou keš chceš zobrazit.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo nemůže stáhnout statické mapy. Možná byl dosažen limit Google map.</string>
   <string name="err_detail_no_spoiler">c:geo nenašlo žádný obrázek pro tuto keš.</string>
@@ -267,7 +265,6 @@
   <string name="caches_downloading">Stahování keší…\nETA:</string>
   <string name="caches_eta_ltm">Méně než minutu</string>
   <plurals name="caches_eta_mins">
-    <item quantity="zero">minut</item>
     <item quantity="one">minuta</item>
     <item quantity="few">minuty</item>
     <item quantity="other">minuty</item>
@@ -492,7 +489,6 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">Žádná keš</item>
     <item quantity="one">Jedna keš</item>
     <item quantity="other">%1$d keší</item>
   </plurals>

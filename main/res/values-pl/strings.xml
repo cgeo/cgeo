@@ -10,7 +10,6 @@
   <string name="settings">Ustawienia</string>
   <string name="helpers">Przydatne programy</string>
   <string name="about">O c:geo</string>
-  <string name="helper">Chcesz dowiedzieć się więcej o <b>c:geo</b>?\nZajrzyj do instrukcji obsługi.</string>
   <string name="latitude">Szerokość geograficzna</string>
   <string name="longitude">Długość geograficzna</string>
 
@@ -155,7 +154,6 @@
   <string name="err_detail_cache_find">c:geo nie mógł znaleźć skrzynki.</string>
   <string name="err_detail_cache_find_some">c:geo nie mógł znaleźć tej skrzynki.</string>
   <string name="err_detail_cache_find_any">c:geo nie mógł znaleźć żadnej skrzynki.</string>
-  <string name="err_detail_cache_find_next">c:geo nie mógł znaleźć następnych skrzynek.</string>
   <string name="err_detail_cache_forgot">c:geo zapomniał którą skrzynkę chcesz obejrzeć.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo nie był w stanie pobrać map statycznych. Może limit map Google został wyczerpany.</string>
   <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęcia spoilera dla tej skrzynki.</string>

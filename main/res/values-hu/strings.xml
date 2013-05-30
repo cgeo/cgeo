@@ -10,7 +10,6 @@
   <string name="settings">Beállítások</string>
   <string name="helpers">Hasznos segédprogramok</string>
   <string name="about">A c:geo-ról</string>
-  <string name="helper">Szeretnél többet megtudni a <b>c:geo</b>-ról?\nNézd meg a kézikönyvünket.</string>
   <string name="latitude">Szélesség</string>
   <string name="longitude">Hosszúság</string>
 
@@ -141,7 +140,6 @@
   <string name="err_detail_cache_find">Sajnáljuk, a c:geo nem találja a geoládát.</string>
   <string name="err_detail_cache_find_some">Sajnáljuk, a c:geo nem találja azt a geoládát.</string>
   <string name="err_detail_cache_find_any">Sajnáljuk, a c:geo nem talál geoládákat.</string>
-  <string name="err_detail_cache_find_next">Sajnáljuk, a c:geo nem találja a következő geoládákat.</string>
   <string name="err_detail_cache_forgot">Sajnáljuk, a c:geo elfelejtette melyik geoládát szeretnéd.</string>
   <string name="err_detail_google_maps_limit_reached">A c:geonak nem sikerült letölteni a statikus térképeket. Lehet hogy elérted a Google Maps limitjét.</string>
   <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
@@ -248,10 +246,6 @@
   <string name="caches_more_caches_currently">jelenleg</string> 
   <string name="caches_downloading">Ládák letöltése…\nkb.: </string>
   <string name="caches_eta_ltm">Kevesebb mint egy perc</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minute</item>
-    <item quantity="other">perc</item>
-  </plurals>
   <string name="caches_store_offline">Offlineba mentés</string>
   <string name="caches_store_selected">Kijelöltek mentése</string>
   <string name="caches_history">Előzmények</string>
@@ -463,8 +457,6 @@
 
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="zero">Nincs megtalálás</item>
-    <item quantity="one">Megtalálás</item>
     <item quantity="other">%1$d Megtalálások</item>
   </plurals>
   <string name="cache_offline">Offline</string>
@@ -502,7 +494,6 @@
    
   <string name="cache_waypoints">Útpontok</string>
   <plurals name="waypoints">
-      <item quantity="one">1 Útpontok</item>
       <item quantity="other">%d Útpontok</item>
   </plurals>
   <string name="cache_waypoints_add">Útpont hozzáadása</string>
@@ -957,7 +948,6 @@
 
   <string name="clipboard_copy_ok">Kimásolva a vágólapra</string>
   <plurals name="days_ago">
-    <item quantity="one">tegnap</item>
     <item quantity="other">%d nappal ezelőtt</item>
   </plurals> 
 </resources>
