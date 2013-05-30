@@ -16,6 +16,9 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.Version;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -62,7 +65,6 @@ public class MainActivity extends AbstractActivity {
     @InjectView(R.id.offline_count) protected TextView countBubble ;
 
     private static final String SCAN_INTENT = "com.google.zxing.client.android.SCAN";
-    private static final int SCAN_REQUEST_CODE = 1;
     public static final int SEARCH_REQUEST_CODE = 2;
 
     private int version = 0;
@@ -287,24 +289,19 @@ public class MainActivity extends AbstractActivity {
     }
 
     private void startScannerApplication() {
-        Intent intent = new Intent(SCAN_INTENT);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET); // when resuming our app, cancel this activity
-        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-        startActivityForResult(intent, SCAN_REQUEST_CODE);
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == SCAN_REQUEST_CODE) {
-            // Only handle positive results, don't do anything if cancelled.
-            if (resultCode == RESULT_OK) {
-                String scan = intent.getStringExtra("SCAN_RESULT");
-                if (StringUtils.isBlank(scan)) {
-                    return;
-                }
-
-                SearchActivity.startActivityScan(scan, this);
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            String scan = scanResult.getContents();
+            if (StringUtils.isBlank(scan)) {
+                return;
             }
+            SearchActivity.startActivityScan(scan, this);
         } else if (requestCode == SEARCH_REQUEST_CODE) {
             // SearchActivity activity returned without making a search
             if (resultCode == RESULT_CANCELED) {
