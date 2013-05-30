@@ -3,7 +3,6 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.cgeoapplication;
 
 import android.content.Context;
-import android.text.ClipboardManager;
 
 /**
  * Clipboard Utilities. Functions to copy data to the Android clipboard.
@@ -20,7 +19,8 @@ public final class ClipboardUtils {
      *            The text to place in the clipboard.
      */
     public static void copyToClipboard(final CharSequence text) {
-        final ClipboardManager clipboard = (ClipboardManager) cgeoapplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        // fully qualified name used here to avoid buggy deprecation warning (of javac) on the import statement
+        final android.text.ClipboardManager clipboard = (android.text.ClipboardManager) cgeoapplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
         clipboard.setText(text);
     }
 

@@ -14,7 +14,7 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
 
     private final SensorManager sensorManager;
 
-    // Previous values signaled to observers to avoid resending the same value when the
+    // Previous values signaled to observers to avoid re-sending the same value when the
     // device doesn't change orientation. The orientation is usually given with a 1 degree
     // precision by Android, so it is not uncommon to obtain exactly the same value several
     // times.
@@ -27,7 +27,8 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
 
     @Override
     protected void onFirstObserver() {
-        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_NORMAL);
+        final Sensor defaultSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        sensorManager.registerListener(this, defaultSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
          * this event leads to the log being flooded with multiple entries _per second_,
          * which I experienced when running cgeo in a building (with GPS and network being
          * unreliable).
-         * 
+         *
          * See for example https://code.google.com/p/android/issues/detail?id=14792
          */
 

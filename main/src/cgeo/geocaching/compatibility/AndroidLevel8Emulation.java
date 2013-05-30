@@ -19,7 +19,11 @@ public class AndroidLevel8Emulation implements AndroidLevel8Interface {
     @Override
     public int getRotationOffset(Activity activity) {
         final Display display = activity.getWindowManager().getDefaultDisplay();
+
+        // the non deprecated method is available in API 8+ only, so we cannot deal better with this
+        @SuppressWarnings("deprecation")
         final int rotation = display.getOrientation();
+
         if (rotation == Configuration.ORIENTATION_LANDSCAPE) {
             return 90;
         }
