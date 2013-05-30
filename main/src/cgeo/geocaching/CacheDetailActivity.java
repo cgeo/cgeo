@@ -137,7 +137,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
     private static final int CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES = 1241;
 
-    private static final Pattern DARK_COLOR_PATTERN = Pattern.compile(Pattern.quote("color=\"#") + "(0[0-9]){3}" + "\"");
+    private static final Pattern[] DARK_COLOR_PATTERNS = {
+            Pattern.compile("((?<!bg)color)=\"#" + "(0[0-9]){3}" + "\"", Pattern.CASE_INSENSITIVE),
+            Pattern.compile("((?<!bg)color)=\"" + "black" + "\"", Pattern.CASE_INSENSITIVE),
+            Pattern.compile("((?<!bg)color)=\"#" + "000080" + "\"", Pattern.CASE_INSENSITIVE) };
+    private static final Pattern[] LIGHT_COLOR_PATTERNS = {
+            Pattern.compile("((?<!bg)color)=\"#" + "([F][6-9A-F]){3}" + "\"", Pattern.CASE_INSENSITIVE),
+            Pattern.compile("((?<!bg)color)=\"" + "white" + "\"", Pattern.CASE_INSENSITIVE) };
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
 
     private Geocache cache;
@@ -2015,7 +2021,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (StringUtils.isNotBlank(descriptionString)) {
                 descriptionView.setText(description, TextView.BufferType.SPANNABLE);
                 descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                fixBlackTextColor(descriptionView, descriptionString);
+                fixTextColor(descriptionView, descriptionString);
                 descriptionView.setVisibility(View.VISIBLE);
                 registerForContextMenu(descriptionView);
 
@@ -2046,23 +2052,35 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /**
-         * handle caches with black font color
-         *
+         * Handle caches with black font color in dark skin and white font color in light skin
+         * by changing background color of the view
+         * 
          * @param view
+         *            containing the text
          * @param text
+         *            to be checked
          */
-        private void fixBlackTextColor(final TextView view, final String text) {
+        private void fixTextColor(final TextView view, final String text) {
+            int backcolor;
             if (Settings.isLightSkin()) {
-                return;
-            }
-            int backcolor = color.black;
-            if (-1 != StringUtils.indexOfAny(text, new String[] { "color=\"black", "color=\"#000080\"" })) {
-                backcolor = color.darker_gray;
-            }
-            else {
-                MatcherWrapper matcher = new MatcherWrapper(DARK_COLOR_PATTERN, text);
-                if (matcher.find()) {
-                    backcolor = color.darker_gray;
+                backcolor = color.white;
+
+                for (Pattern pattern : LIGHT_COLOR_PATTERNS) {
+                    final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
+                    if (matcher.find()) {
+                        view.setBackgroundResource(color.darker_gray);
+                        return;
+                    }
+                }
+            } else {
+                backcolor = color.black;
+
+                for (Pattern pattern : DARK_COLOR_PATTERNS) {
+                    final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
+                    if (matcher.find()) {
+                        view.setBackgroundResource(color.darker_gray);
+                        return;
+                    }
                 }
             }
             view.setBackgroundResource(backcolor);
