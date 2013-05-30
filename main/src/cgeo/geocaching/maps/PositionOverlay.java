@@ -22,7 +22,6 @@ import android.graphics.Point;
 import android.location.Location;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PositionOverlay implements GeneralOverlay {
     private Location coordinates = null;
@@ -39,7 +38,7 @@ public class PositionOverlay implements GeneralOverlay {
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
     private Location historyRecent = null;
-    private List<Location> history = new ArrayList<Location>();
+    private ArrayList<Location> history = new ArrayList<Location>();
     private Point historyPointN = new Point();
     private Point historyPointP = new Point();
     private Activity activity;
@@ -228,5 +227,13 @@ public class PositionOverlay implements GeneralOverlay {
     @Override
     public OverlayImpl getOverlayImpl() {
         return this.ovlImpl;
+    }
+
+    public ArrayList<Location> getHistory() {
+        return history;
+    }
+
+    public void setHistory(ArrayList<Location> inHistory) {
+        history = inHistory;
     }
 }

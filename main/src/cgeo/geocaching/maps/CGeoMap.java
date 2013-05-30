@@ -119,6 +119,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final String BUNDLE_MAP_SOURCE = "mapSource";
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
+    private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
 
     private Resources res = null;
     private MapItemFactory mapItemFactory = null;
@@ -343,6 +344,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putIntArray(BUNDLE_MAP_STATE, currentMapState());
         outState.putBoolean(BUNDLE_LIVE_ENABLED, isLiveEnabled);
+        if (overlayPosition != null) {
+            outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPosition.getHistory());
+        }
     }
 
     @Override
@@ -380,11 +384,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             mapTitle = res.getString(R.string.map_map);
         }
 
+        ArrayList<Location> trailHistory = null;
+
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
             currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource().getNumericalId());
             mapStateIntent = savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
             isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
+            trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
         }
@@ -421,6 +428,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         if (overlayPosition == null) {
             overlayPosition = mapView.createAddPositionOverlay(activity);
+            if (trailHistory != null) {
+                overlayPosition.setHistory(trailHistory);
+            }
         }
 
         if (overlayScale == null) {
