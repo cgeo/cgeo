@@ -89,7 +89,7 @@
   <string name="changelog" translatable="false">\n
     <b>2013.05.31</b>\n
     <b>Bugfixing:</b>\n
-    · Adaption to changes on gc.com (cache log not possible, cache attributes not shown)\n
+    · Adaption to changes on gc.com (cache and TB log not possible, cache attributes not shown)\n
     · Pictures in logs are now loaded in standard resolution like on the website to improve performance\n
     · Corrected missing information and performance issues on nearby search for basic members\n
     \n
