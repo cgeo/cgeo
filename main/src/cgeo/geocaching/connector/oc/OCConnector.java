@@ -62,5 +62,4 @@ public class OCConnector extends AbstractConnector {
     public CacheRealm getCacheRealm() {
         return CacheRealm.OC;
     }
-
 }

@@ -7,13 +7,31 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
-    private final String cK;
+    // Levels of Okapi we support
+    // oldapi is around rev 500
+    // current is from rev 798 onwards
+    public enum ApiSupport {
+        oldapi,
+        current
+    }
 
-    public OCApiConnector(String name, String host, String prefix, String cK) {
+    // Levels of OAuth-Authentication we support
+    public enum OAuthLevel {
+        Level1,
+        Level3
+    }
+
+    private final String cK;
+    private final ApiSupport apiSupport;
+
+    public OCApiConnector(String name, String host, String prefix, String cK, ApiSupport apiSupport) {
         super(name, host, prefix);
         this.cK = cK;
+        this.apiSupport = apiSupport;
     }
 
     public void addAuthentication(final Parameters params) {
@@ -41,7 +59,22 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         return true;
     }
 
+    @SuppressWarnings("static-method")
+    public OAuthLevel getSupportedAuthLevel() {
+        return OAuthLevel.Level1;
+    }
+
     public String getCK() {
         return CryptUtils.rot13(cK);
     }
+
+    @SuppressWarnings("static-method")
+    public String getCS() {
+        return StringUtils.EMPTY;
+    }
+
+    public ApiSupport getApiSupport() {
+        return apiSupport;
+    }
+
 }

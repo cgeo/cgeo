@@ -17,8 +17,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     private String cS;
 
-    public OCApiLiveConnector(String name, String host, String prefix, int cKResId, int cSResId) {
-        super(name, host, prefix, CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cKResId)));
+    public OCApiLiveConnector(String name, String host, String prefix, int cKResId, int cSResId, ApiSupport apiSupport) {
+        super(name, host, prefix, CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cKResId)), apiSupport);
 
         cS = CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cSResId));
     }
@@ -34,6 +34,12 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
         return new SearchResult(OkapiClient.getCachesAround(center, this));
     }
 
+    @Override
+    public OAuthLevel getSupportedAuthLevel() {
+        return OAuthLevel.Level3;
+    }
+
+    @Override
     public String getCS() {
         return CryptUtils.rot13(cS);
     }

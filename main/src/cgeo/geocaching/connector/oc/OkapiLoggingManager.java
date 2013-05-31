@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.VisitCacheActivity;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
@@ -20,14 +19,14 @@ import java.util.List;
 
 public class OkapiLoggingManager implements ILoggingManager {
 
-    private final IConnector connector;
+    private final OCApiConnector connector;
     private final Geocache cache;
     private VisitCacheActivity activity;
 
     private final static List<LogType> standardLogTypes = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE, LogType.NEEDS_MAINTENANCE);
     private final static List<LogType> eventLogTypes = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
 
-    public OkapiLoggingManager(Activity activity, IConnector connector, Geocache cache) {
+    public OkapiLoggingManager(Activity activity, OCApiConnector connector, Geocache cache) {
         this.connector = connector;
         this.cache = cache;
         this.activity = (VisitCacheActivity) activity;

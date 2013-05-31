@@ -12,6 +12,8 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
+import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -99,8 +101,14 @@ final public class OkapiClient {
 
     private static final String SERVICE_CACHE = "/okapi/services/caches/geocache";
 
-    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|is_found";
-    private static final String SERVICE_CACHE_FIELDS = SERVICE_CACHE_CORE_FIELDS + "|owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden|attribution_note|alt_wpts|is_watched|attrnames|gc_code";
+    // the several realms of possible field s for cache retrieval:
+    // Core: for livemap requests (L3 - only with level 3 auth)
+    // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
+    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size";
+    private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
+    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden|alt_wpts|attrnames";
+    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note";
+    private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched";
 
     private static final String SERVICE_SEARCH_AND_RETRIEVE = "/okapi/services/caches/shortcuts/search_and_retrieve";
 
@@ -113,8 +121,18 @@ final public class OkapiClient {
     private static final String SERVICE_SUBMIT_LOG = "/okapi/services/logs/submit";
 
     public static Geocache getCache(final String geoCode) {
-        final Parameters params = new Parameters("cache_code", geoCode, "fields", SERVICE_CACHE_FIELDS, "attribution_append", "none");
-        final JSONObject data = request(ConnectorFactory.getConnector(geoCode), SERVICE_CACHE, params);
+        final Parameters params = new Parameters("cache_code", geoCode);
+        IConnector connector = ConnectorFactory.getConnector(geoCode);
+        if (!(connector instanceof OCApiConnector)) {
+            return null;
+        }
+
+        OCApiConnector ocapiConn = (OCApiConnector) connector;
+
+        params.add("fields", getFullFields(ocapiConn));
+        params.add("attribution_append", "none");
+
+        final JSONObject data = request(ocapiConn, SERVICE_CACHE, params);
 
         if (data == null) {
             return null;
@@ -123,18 +141,24 @@ final public class OkapiClient {
         return parseCache(data);
     }
 
-    public static List<Geocache> getCachesAround(final Geopoint center, IConnector connector) {
+    // Assumes level 3 OAuth
+    public static List<Geocache> getCachesAround(final Geopoint center, OCApiConnector connector) {
         String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("center", centerString);
         valueMap.put("limit", "20");
 
+        if (connector.getSupportedAuthLevel() != OAuthLevel.Level3) {
+            Log.e("Calling OkapiClient.getCachesAround with wrong connector");
+            return Collections.emptyList();
+        }
+
         addFilterParams(valueMap);
 
         params.add("search_params", new JSONObject(valueMap).toString());
 
-        addRetrieveParams(params);
+        addRetrieveParams(params, connector);
 
         final JSONObject data = request(connector, SERVICE_SEARCH_AND_RETRIEVE, params);
 
@@ -145,7 +169,8 @@ final public class OkapiClient {
         return parseCaches(data);
     }
 
-    public static List<Geocache> getCachesBBox(final Viewport viewport, IConnector connector) {
+    // Assumes level 3 OAuth
+    public static List<Geocache> getCachesBBox(final Viewport viewport, OCApiConnector connector) {
 
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
             return Collections.emptyList();
@@ -159,11 +184,16 @@ final public class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("bbox", bboxString);
 
+        if (connector.getSupportedAuthLevel() != OAuthLevel.Level3) {
+            Log.e("Calling OkapiClient.getCachesBBox with wrong connector");
+            return Collections.emptyList();
+        }
+
         addFilterParams(valueMap);
 
         params.add("search_params", new JSONObject(valueMap).toString());
 
-        addRetrieveParams(params);
+        addRetrieveParams(params, connector);
 
         final JSONObject data = request(connector, SERVICE_SEARCH_AND_RETRIEVE, params);
 
@@ -174,7 +204,7 @@ final public class OkapiClient {
         return parseCaches(data);
     }
 
-    public static boolean setWatchState(final Geocache cache, final boolean watched, IConnector connector) {
+    public static boolean setWatchState(final Geocache cache, final boolean watched, OCApiConnector connector) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("watched", watched ? "true" : "false");
 
@@ -189,7 +219,7 @@ final public class OkapiClient {
         return true;
     }
 
-    public static LogResult postLog(final Geocache cache, LogType logType, Calendar date, String log, IConnector connector) {
+    public static LogResult postLog(final Geocache cache, LogType logType, Calendar date, String log, OCApiConnector connector) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("logtype", logType.oc_type);
         params.add("comment", log);
@@ -317,7 +347,9 @@ final public class OkapiClient {
             //TODO: Store license per cache
             //cache.setLicense(response.getString("attribution_note"));
             cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)), false);
-            cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
+            if (!response.isNull(CACHE_IS_WATCHED)) {
+                cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
+            }
 
             cache.setDetailedUpdatedNow();
             // save full detailed caches
@@ -343,7 +375,9 @@ final public class OkapiClient {
         cache.setDifficulty((float) response.getDouble(CACHE_DIFFICULTY));
         cache.setTerrain((float) response.getDouble(CACHE_TERRAIN));
 
-        cache.setFound(response.getBoolean(CACHE_IS_FOUND));
+        if (!response.isNull(CACHE_IS_FOUND)) {
+            cache.setFound(response.getBoolean(CACHE_IS_FOUND));
+        }
     }
 
     private static String absoluteUrl(String url, String geocode) {
@@ -545,11 +579,42 @@ final public class OkapiClient {
         return CacheType.UNKNOWN;
     }
 
-    private static JSONObject request(final IConnector connector, final String service, final Parameters params) {
+    private static String getCoreFields(OCApiConnector connector) {
         if (connector == null) {
-            return null;
+            Log.e("OkapiClient.getCoreFields called with invalid connector");
+            return StringUtils.EMPTY;
         }
-        if (!(connector instanceof OCApiConnector)) {
+
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            return SERVICE_CACHE_CORE_FIELDS + "|" + SERVICE_CACHE_CORE_L3_FIELDS;
+        }
+
+        return SERVICE_CACHE_CORE_FIELDS;
+    }
+
+    private static String getFullFields(OCApiConnector connector) {
+        if (connector == null) {
+            Log.e("OkapiClient.getFullFields called with invalid connector");
+            return StringUtils.EMPTY;
+        }
+
+        StringBuilder res = new StringBuilder(500);
+
+        res.append(SERVICE_CACHE_CORE_FIELDS);
+        res.append("|").append(SERVICE_CACHE_ADDITIONAL_FIELDS);
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            res.append("|").append(SERVICE_CACHE_CORE_L3_FIELDS);
+            res.append("|").append(SERVICE_CACHE_ADDITIONAL_L3_FIELDS);
+        }
+        if (connector.getApiSupport() == ApiSupport.current) {
+            res.append("|").append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS);
+        }
+
+        return res.toString();
+    }
+
+    private static JSONObject request(final OCApiConnector connector, final String service, final Parameters params) {
+        if (connector == null) {
             return null;
         }
 
@@ -560,7 +625,11 @@ final public class OkapiClient {
 
         params.add("langpref", getPreferredLanguage());
 
-        OAuth.signOAuth(host, service, "GET", false, params, Settings.getOCDETokenPublic(), Settings.getOCDETokenSecret(), ((OCApiLiveConnector) connector).getCK(), ((OCApiLiveConnector) connector).getCS());
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            OAuth.signOAuth(host, service, "GET", false, params, Settings.getOCDETokenPublic(), Settings.getOCDETokenSecret(), connector.getCK(), connector.getCS());
+        } else {
+            connector.addAuthentication(params);
+        }
 
         final String uri = "http://" + host + service;
         return Network.requestJSON(uri, params);
@@ -574,6 +643,7 @@ final public class OkapiClient {
         return "en";
     }
 
+    // assumes level 3 oauth
     private static void addFilterParams(final Map<String, String> valueMap) {
         if (!Settings.isExcludeDisabledCaches()) {
             valueMap.put("status", "Available|Temporarily unavailable");
@@ -587,9 +657,9 @@ final public class OkapiClient {
         }
     }
 
-    private static void addRetrieveParams(final Parameters params) {
+    private static void addRetrieveParams(final Parameters params, OCApiConnector connector) {
         params.add("retr_method", METHOD_RETRIEVE_CACHES);
-        params.add("retr_params", "{\"fields\": \"" + SERVICE_CACHE_CORE_FIELDS + "\"}");
+        params.add("retr_params", "{\"fields\": \"" + getCoreFields(connector) + "\"}");
         params.add("wrap", "true");
     }
 

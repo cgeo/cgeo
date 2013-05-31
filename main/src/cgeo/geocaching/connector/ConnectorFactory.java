@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
+import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.ox.OXConnector;
@@ -22,16 +23,16 @@ public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final IConnector[] connectors = new IConnector[] {
             GCConnector.getInstance(),
-            new OCApiLiveConnector("Opencaching.de", "www.opencaching.de", "OC", R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret),
+            new OCApiLiveConnector("Opencaching.de", "www.opencaching.de", "OC", R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret, ApiSupport.current),
             new OCConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
-            new OCApiConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq"),
+            new OCApiConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq", ApiSupport.oldapi),
             new OCConnector("OpenCaching.ES", "www.opencachingspain.es", "OC"),
             new OCConnector("OpenCaching.IT", "www.opencaching.it", "OC"),
             new OCConnector("OpenCaching.JP", "www.opencaching.jp", "OJ"),
             new OCConnector("OpenCaching.NO/SE", "www.opencaching.se", "OS"),
-            new OCApiConnector("OpenCaching.NL", "www.opencaching.nl", "OB", "PdzU8jzIlcfMADXaYN8j"),
-            new OCApiConnector("OpenCaching.PL", "www.opencaching.pl", "OP", "GkxM47WkUkLQXXsZ9qSh"),
-            new OCApiConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA"),
+            new OCApiConnector("OpenCaching.NL", "www.opencaching.nl", "OB", "PdzU8jzIlcfMADXaYN8j", ApiSupport.current),
+            new OCApiConnector("OpenCaching.PL", "www.opencaching.pl", "OP", "GkxM47WkUkLQXXsZ9qSh", ApiSupport.current),
+            new OCApiConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA", ApiSupport.oldapi),
             new OXConnector(),
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),
