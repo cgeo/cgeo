@@ -3,8 +3,8 @@ package cgeo.test;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.enumerations.LogType;
 
 public abstract class Compare {
@@ -39,7 +39,7 @@ public abstract class Compare {
             assertEquals(expected.isWatchlist(), actual.isWatchlist());
 
             for (String attribute : expected.getAttributes()) {
-                assertTrue(actual.getAttributes().contains(attribute));
+                assertTrue("Expected attribute '" + attribute + "' not found in " + actual.getGeocode(), actual.getAttributes().contains(attribute));
             }
             for (LogType logType : expected.getLogCounts().keySet()) {
                 assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
