@@ -41,7 +41,7 @@ public abstract class Compare {
             assertEquals(expected.isWatchlist(), actual.isWatchlist());
 
             for (String attribute : expected.getAttributes()) {
-                assertTrue(actual.getAttributes().contains(attribute));
+                assertTrue("Expected attribute '" + attribute + "' not found in " + actual.getGeocode(), actual.getAttributes().contains(attribute));
             }
             for (LogType logType : expected.getLogCounts().keySet()) {
                 assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));

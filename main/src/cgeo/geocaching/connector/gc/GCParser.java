@@ -975,12 +975,13 @@ public abstract class GCParser {
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%04d", year),
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month),
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%04d", year),
+                "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month", Integer.toString(month),
+                "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day", Integer.toString(day),
+                "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year", Integer.toString(year),
                 "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
-                "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
+                "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
+                "ctl00$ContentBody$LogBookPanel1$uxLogCreationSource", "Old",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
         Login.putViewstates(params, viewstates);
         if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed

@@ -121,7 +121,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     public static void testSearchByGeocodeNotExisting() {
         final SearchResult search = Geocache.searchByGeocode("GC123456", null, 0, true, null);
         assertNotNull(search);
-        assertEquals(StatusCode.UNPUBLISHED_CACHE, search.getError());
+        assertEquals(StatusCode.COMMUNICATION_ERROR, search.getError());
     }
 
     /**
