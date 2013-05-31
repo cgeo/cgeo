@@ -83,14 +83,19 @@ public class MainActivity extends AbstractActivity {
         public void handleMessage(Message msg) {
 
             StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
-            if (Login.isActualLoginStatus()) {
-                userInfo.append(Login.getActualUserName());
-                if (Login.getActualCachesFound() >= 0) {
-                    userInfo.append(" (").append(String.valueOf(Login.getActualCachesFound())).append(')');
+            if (Settings.isGCConnectorActive()) {
+                if (Login.isActualLoginStatus()) {
+                    userInfo.append(Login.getActualUserName());
+                    if (Login.getActualCachesFound() >= 0) {
+                        userInfo.append(" (").append(String.valueOf(Login.getActualCachesFound())).append(')');
+                    }
+                    userInfo.append(Formatter.SEPARATOR);
                 }
-                userInfo.append(Formatter.SEPARATOR);
+                userInfo.append(Login.getActualStatus());
             }
-            userInfo.append(Login.getActualStatus());
+            else {
+                userInfo.append("<disabled>"); // TODO this is just a quick fix. We need some better status implementation showing multiple connectors.
+            }
 
             userInfoView.setText(userInfo.toString());
         }
