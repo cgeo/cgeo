@@ -427,7 +427,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             }
         }
 
-        // Add the list selection in code. This way we can leave the XML layout the same as for other activities.
+        // Add the list selection in code. This way we can leave the XML layout of the action bar the same as for other activities.
         final View titleBar = findViewById(R.id.actionbar_title);
         titleBar.setClickable(true);
         titleBar.setOnClickListener(new View.OnClickListener() {

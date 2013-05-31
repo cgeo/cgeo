@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.utils.ImageHelper;
@@ -30,6 +33,16 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ImageSelectActivity extends AbstractActivity {
+
+    @InjectView(R.id.caption) protected EditText captionView;
+    @InjectView(R.id.description) protected EditText descriptionView;
+    @InjectView(R.id.logImageScale) protected Spinner scaleView;
+    @InjectView(R.id.camera) protected Button cameraButton;
+    @InjectView(R.id.stored) protected Button storedButton;
+    @InjectView(R.id.save) protected Button saveButton;
+    @InjectView(R.id.cancel) protected Button clearButton;
+    @InjectView(R.id.image_preview) protected ImageView imagePreview;
+
     static final String EXTRAS_CAPTION = "caption";
     static final String EXTRAS_DESCRIPTION = "description";
     static final String EXTRAS_URI_AS_STRING = "uri";
@@ -43,10 +56,6 @@ public class ImageSelectActivity extends AbstractActivity {
     private static final int SELECT_NEW_IMAGE = 1;
     private static final int SELECT_STORED_IMAGE = 2;
 
-    private EditText captionView;
-    private EditText descriptionView;
-    private Spinner scaleView;
-
     // Data to be saved while reconfiguring
     private String imageCaption;
     private String imageDescription;
@@ -56,6 +65,7 @@ public class ImageSelectActivity extends AbstractActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.visit_image);
+        Views.inject(this);
 
         scaleChoiceIndex = Settings.getLogImageScale();
         imageCaption = "";
@@ -79,7 +89,6 @@ public class ImageSelectActivity extends AbstractActivity {
             scaleChoiceIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
         }
 
-        final Button cameraButton = (Button) findViewById(R.id.camera);
         cameraButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -88,7 +97,6 @@ public class ImageSelectActivity extends AbstractActivity {
             }
         });
 
-        final Button storedButton = (Button) findViewById(R.id.stored);
         storedButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -97,17 +105,14 @@ public class ImageSelectActivity extends AbstractActivity {
             }
         });
 
-        captionView = (EditText) findViewById(R.id.caption);
         if (StringUtils.isNotBlank(imageCaption)) {
             captionView.setText(imageCaption);
         }
 
-        descriptionView = (EditText) findViewById(R.id.description);
         if (StringUtils.isNotBlank(imageDescription)) {
             descriptionView.setText(imageDescription);
         }
 
-        scaleView = (Spinner) findViewById(R.id.logImageScale);
         scaleView.setSelection(scaleChoiceIndex);
         scaleView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -121,7 +126,6 @@ public class ImageSelectActivity extends AbstractActivity {
             }
         });
 
-        final Button saveButton = (Button) findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -130,7 +134,6 @@ public class ImageSelectActivity extends AbstractActivity {
             }
         });
 
-        final Button clearButton = (Button) findViewById(R.id.cancel);
         clearButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -299,7 +302,6 @@ public class ImageSelectActivity extends AbstractActivity {
             return;
         }
 
-        final ImageView imagePreview = (ImageView) findViewById(R.id.image_preview);
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
         bitmapOptions.inSampleSize = 8;
         final Bitmap bitmap = BitmapFactory.decodeFile(imageUri.getPath(), bitmapOptions);

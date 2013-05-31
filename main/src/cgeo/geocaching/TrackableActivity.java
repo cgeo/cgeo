@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.gc.GCParser;
@@ -384,24 +387,18 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     public class LogsViewCreator extends AbstractCachingPageViewCreator<ListView> {
 
-        private class LogViewHolder {
-
-            private final TextView added;
-            private final TextView type;
-            private final TextView author;
-            private final TextView location;
-            private final TextView text;
-            private final TextView images;
-            private final ImageView marker;
+        protected class LogViewHolder {
+            @InjectView(R.id.added) protected TextView added ;
+            @InjectView(R.id.type) protected TextView type;
+            @InjectView(R.id.author) protected TextView author;
+            @InjectView(R.id.location) protected TextView location;
+            @InjectView(R.id.log) protected TextView text;
+            @InjectView(R.id.log_images) protected TextView images;
+            @InjectView(R.id.log_mark) protected ImageView marker;
 
             public LogViewHolder(View rowView) {
-                added = ((TextView) rowView.findViewById(R.id.added));
-                type = ((TextView) rowView.findViewById(R.id.type));
-                author = ((TextView) rowView.findViewById(R.id.author));
-                location = ((TextView) rowView.findViewById(R.id.location));
-                text = (TextView) rowView.findViewById(R.id.log);
-                images = (TextView) rowView.findViewById(R.id.log_images);
-                marker = (ImageView) rowView.findViewById(R.id.log_mark);
+                Views.inject(this, rowView);
+                rowView.setTag(this);
             }
         }
 
@@ -420,7 +417,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         LogViewHolder holder = (LogViewHolder) rowView.getTag();
                         if (null == holder) {
                             holder = new LogViewHolder(rowView);
-                            rowView.setTag(holder);
                         }
 
                         final LogEntry log = getItem(position);
@@ -498,10 +494,20 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
+        @InjectView(R.id.goal_box) protected View goalBox;
+        @InjectView(R.id.goal) protected TextView goalTextView;
+        @InjectView(R.id.details_box) protected View detailsBox;
+        @InjectView(R.id.details) protected TextView detailsTextView;
+        @InjectView(R.id.image_box) protected View imageBox;
+        @InjectView(R.id.details_list) protected LinearLayout detailsList;
+        @InjectView(R.id.image) protected LinearLayout imageView;
+
         @Override
         public ScrollView getDispatchedView() {
             view = (ScrollView) getLayoutInflater().inflate(R.layout.trackable_details_view, null);
-            final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, (LinearLayout) view.findViewById(R.id.details_list));
+            Views.inject(this, view);
+
+            final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, detailsList);
 
             // action bar icon
             if (StringUtils.isNotBlank(trackable.getIconUrl())) {
@@ -595,27 +601,23 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             // trackable goal
             if (StringUtils.isNotBlank(trackable.getGoal())) {
-                view.findViewById(R.id.goal_box).setVisibility(View.VISIBLE);
-                TextView descView = (TextView) view.findViewById(R.id.goal);
-                descView.setVisibility(View.VISIBLE);
-                descView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
-                descView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                goalBox.setVisibility(View.VISIBLE);
+                goalTextView.setVisibility(View.VISIBLE);
+                goalTextView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+                goalTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
 
             // trackable details
             if (StringUtils.isNotBlank(trackable.getDetails())) {
-                view.findViewById(R.id.details_box).setVisibility(View.VISIBLE);
-                TextView descView = (TextView) view.findViewById(R.id.details);
-                descView.setVisibility(View.VISIBLE);
-                descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
-                descView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                detailsBox.setVisibility(View.VISIBLE);
+                detailsTextView.setVisibility(View.VISIBLE);
+                detailsTextView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                detailsTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
 
             // trackable image
             if (StringUtils.isNotBlank(trackable.getImage())) {
-                view.findViewById(R.id.image_box).setVisibility(View.VISIBLE);
-                LinearLayout imgView = (LinearLayout) view.findViewById(R.id.image);
-
+                imageBox.setVisibility(View.VISIBLE);
                 final ImageView trackableImage = (ImageView) inflater.inflate(R.layout.trackable_image, null);
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
@@ -656,7 +658,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     }
                 }.start();
 
-                imgView.addView(trackableImage);
+                imageView.addView(trackableImage);
             }
             return view;
         }

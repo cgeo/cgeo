@@ -41,6 +41,27 @@ import java.util.List;
 
 public class NavigateAnyPointActivity extends AbstractActivity {
 
+    @InjectView(R.id.buttonLatitude) protected Button latButton;
+    @InjectView(R.id.buttonLongitude) protected Button lonButton;
+    @InjectView(R.id.current) protected Button buttonCurrent;
+    @InjectView(R.id.historyList) protected ListView historyListView;
+    @InjectView(R.id.distanceUnit) protected Spinner distanceUnitSelector;
+    @InjectView(R.id.bearing) protected EditText bearingEditText;
+    @InjectView(R.id.distance) protected EditText distanceEditText;
+
+    private boolean changed = false;
+    private List<Destination> historyOfSearchedLocations;
+    private DestinationHistoryAdapter destinationHistoryAdapter;
+    private TextView historyFooter;
+
+    private static final int CONTEXT_MENU_NAVIGATE = 1;
+    private static final int CONTEXT_MENU_DELETE_WAYPOINT = 2;
+    private static final int CONTEXT_MENU_EDIT_WAYPOINT = 3;
+
+    private int contextMenuItemPosition;
+
+    private String distanceUnit = "";
+
     protected static class ViewHolder {
         @InjectView(R.id.simple_way_point_longitude) protected TextView longitude;
         @InjectView(R.id.simple_way_point_latitude) protected TextView latitude;
@@ -96,37 +117,21 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         }
     }
 
-    private Button latButton = null;
-    private Button lonButton = null;
-    private boolean changed = false;
-    private List<Destination> historyOfSearchedLocations;
-    private DestinationHistoryAdapter destinationHistoryAdapter;
-    private ListView historyListView;
-    private TextView historyFooter;
-
-    private static final int CONTEXT_MENU_NAVIGATE = 1;
-    private static final int CONTEXT_MENU_DELETE_WAYPOINT = 2;
-    private static final int CONTEXT_MENU_EDIT_WAYPOINT = 3;
-
-    private int contextMenuItemPosition;
-
-    private String distanceUnit = "";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.point);
+        Views.inject(this);
 
         createHistoryView();
-
         init();
     }
 
     private void createHistoryView() {
-        historyListView = (ListView) findViewById(R.id.historyList);
-
-        final View pointControls = getLayoutInflater().inflate(
-                R.layout.point_controls, null);
+        final View pointControls = getLayoutInflater().inflate(R.layout.point_controls, null);
         historyListView.addHeaderView(pointControls, null, false);
+
+        // inject a second time to also find the dynamically expanded views above
+        Views.inject(this);
 
         if (getHistoryOfSearchedLocations().isEmpty()) {
             historyListView.addFooterView(getEmptyHistoryFooter(), null, false);
@@ -235,9 +240,6 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     }
 
     private void init() {
-        latButton = (Button) findViewById(R.id.buttonLatitude);
-        lonButton = (Button) findViewById(R.id.buttonLongitude);
-
         latButton.setOnClickListener(new CoordDialogListener());
         lonButton.setOnClickListener(new CoordDialogListener());
 
@@ -247,19 +249,15 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
         }
 
-        Button buttonCurrent = (Button) findViewById(R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
 
         getDestionationHistoryAdapter().notifyDataSetChanged();
-        disableSuggestions((EditText) findViewById(R.id.distance));
+        disableSuggestions(distanceEditText);
 
         initializeDistanceUnitSelector();
     }
 
     private void initializeDistanceUnitSelector() {
-
-        Spinner distanceUnitSelector = (Spinner) findViewById(R.id.distanceUnit);
-
         if (StringUtils.isBlank(distanceUnit)) {
             if (Settings.isUseMetricUnits()) {
                 distanceUnitSelector.setSelection(0); // m
@@ -479,10 +477,9 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     }
 
     private Geopoint getDestination() {
-
-        String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
+        String bearingText = bearingEditText.getText().toString();
         // combine distance from EditText and distanceUnit saved from Spinner
-        String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString() + distanceUnit;
+        String distanceText = distanceEditText.getText().toString() + distanceUnit;
         String latText = latButton.getText().toString();
         String lonText = lonButton.getText().toString();
 

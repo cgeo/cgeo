@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -33,8 +36,25 @@ import java.util.Locale;
 
 public class SearchActivity extends AbstractActivity {
 
-    private EditText latEdit = null;
-    private EditText lonEdit = null;
+    @InjectView(R.id.buttonLatitude) protected Button buttonLatitude;
+    @InjectView(R.id.buttonLongitude) protected Button buttonLongitude;
+    @InjectView(R.id.search_coordinates) protected Button findByCoords;
+    @InjectView(R.id.search_address) protected Button findByAddress;
+    @InjectView(R.id.geocode) protected AutoCompleteTextView geocodeEdit;
+    @InjectView(R.id.display_geocode) protected Button displayByGeocode;
+    @InjectView(R.id.search_keyword) protected Button findByKeyword;
+    @InjectView(R.id.search_username) protected Button findByUserName;
+    @InjectView(R.id.search_owner) protected Button findByOwner;
+    @InjectView(R.id.trackable) protected AutoCompleteTextView trackable;
+    @InjectView(R.id.display_trackable) protected Button displayTrackable;
+    @InjectView(R.id.latitude) protected EditText latEdit;
+    @InjectView(R.id.longitude) protected EditText lonEdit;
+    @InjectView(R.id.keyword) protected EditText keywordEditText;
+    @InjectView(R.id.address) protected EditText addressEditText;
+    @InjectView(R.id.username) protected EditText userNameEditText;
+    @InjectView(R.id.owner) protected EditText ownerNameEditText;
+    @InjectView(R.id.geocode) protected EditText geocodeEditText;
+    @InjectView(R.id.trackable) protected EditText trackableEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +83,7 @@ public class SearchActivity extends AbstractActivity {
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
 
+        Views.inject(this);
         init();
     }
 
@@ -132,10 +153,8 @@ public class SearchActivity extends AbstractActivity {
     private void init() {
         Settings.getLogin();
 
-        findViewById(R.id.buttonLatitude).setOnClickListener(new FindByCoordsAction());
-        findViewById(R.id.buttonLongitude).setOnClickListener(new FindByCoordsAction());
-
-        final Button findByCoords = (Button) findViewById(R.id.search_coordinates);
+        buttonLatitude.setOnClickListener(new FindByCoordsAction());
+        buttonLongitude.setOnClickListener(new FindByCoordsAction());
         findByCoords.setOnClickListener(new FindByCoordsListener());
 
         EditUtils.setActionListener((EditText) findViewById(R.id.address), new Runnable() {
@@ -145,11 +164,8 @@ public class SearchActivity extends AbstractActivity {
                 findByAddressFn();
             }
         });
-
-        final Button findByAddress = (Button) findViewById(R.id.search_address);
         findByAddress.setOnClickListener(new FindByAddressListener());
 
-        final AutoCompleteTextView geocodeEdit = (AutoCompleteTextView) findViewById(R.id.geocode);
         EditUtils.setActionListener(geocodeEdit, new Runnable() {
 
             @Override
@@ -158,8 +174,6 @@ public class SearchActivity extends AbstractActivity {
             }
         });
         addHistoryEntries(geocodeEdit, cgData.getRecentGeocodesForSearch());
-
-        final Button displayByGeocode = (Button) findViewById(R.id.display_geocode);
         displayByGeocode.setOnClickListener(new FindByGeocodeListener());
 
         EditUtils.setActionListener((EditText) findViewById(R.id.keyword), new Runnable() {
@@ -169,8 +183,6 @@ public class SearchActivity extends AbstractActivity {
                 findByKeywordFn();
             }
         });
-
-        final Button findByKeyword = (Button) findViewById(R.id.search_keyword);
         findByKeyword.setOnClickListener(new FindByKeywordListener());
 
         EditUtils.setActionListener((EditText) findViewById(R.id.username), new Runnable() {
@@ -180,8 +192,6 @@ public class SearchActivity extends AbstractActivity {
                 findByUsernameFn();
             }
         });
-
-        final Button findByUserName = (Button) findViewById(R.id.search_username);
         findByUserName.setOnClickListener(new FindByUsernameListener());
 
         EditUtils.setActionListener((EditText) findViewById(R.id.owner), new Runnable() {
@@ -191,8 +201,6 @@ public class SearchActivity extends AbstractActivity {
                 findByOwnerFn();
             }
         });
-
-        final Button findByOwner = (Button) findViewById(R.id.search_owner);
         findByOwner.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -201,7 +209,6 @@ public class SearchActivity extends AbstractActivity {
             }
         });
 
-        AutoCompleteTextView trackable = (AutoCompleteTextView) findViewById(R.id.trackable);
         EditUtils.setActionListener(trackable, new Runnable() {
 
             @Override
@@ -210,10 +217,7 @@ public class SearchActivity extends AbstractActivity {
             }
         });
         addHistoryEntries(trackable, cgData.getTrackableCodes());
-
         disableSuggestions(trackable);
-
-        final Button displayTrackable = (Button) findViewById(R.id.display_trackable);
         displayTrackable.setOnClickListener(new FindTrackableListener());
     }
 
@@ -228,13 +232,6 @@ public class SearchActivity extends AbstractActivity {
         @Override
         public void updateGeoData(final IGeoData geo) {
             try {
-                if (latEdit == null) {
-                    latEdit = (EditText) findViewById(R.id.latitude);
-                }
-                if (lonEdit == null) {
-                    lonEdit = (EditText) findViewById(R.id.longitude);
-                }
-
                 if (geo.getCoords() != null) {
                     if (latEdit != null) {
                         latEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
@@ -258,8 +255,8 @@ public class SearchActivity extends AbstractActivity {
             coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
                 public void update(Geopoint gp) {
-                    ((Button) findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                    ((Button) findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+                    buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                    buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 }
             });
             coordsDialog.show();
@@ -275,16 +272,14 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void findByCoordsFn() {
-        final Button latView = (Button) findViewById(R.id.buttonLatitude);
-        final Button lonView = (Button) findViewById(R.id.buttonLongitude);
-        final String latText = latView.getText().toString();
-        final String lonText = lonView.getText().toString();
+        final String latText = buttonLatitude.getText().toString();
+        final String lonText = buttonLongitude.getText().toString();
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
             final IGeoData geo = app.currentGeo();
             if (geo.getCoords() != null) {
-                latView.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
-                lonView.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
+                buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
+                buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
             }
         } else {
             try {
@@ -305,7 +300,7 @@ public class SearchActivity extends AbstractActivity {
 
     private void findByKeywordFn() {
         // find caches by coordinates
-        String keyText = ((EditText) findViewById(R.id.keyword)).getText().toString();
+        String keyText = keywordEditText.getText().toString();
 
         if (StringUtils.isBlank(keyText)) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_keyword));
@@ -323,7 +318,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void findByAddressFn() {
-        final String addText = ((EditText) findViewById(R.id.address)).getText().toString();
+        final String addText = addressEditText.getText().toString();
 
         if (StringUtils.isBlank(addText)) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_address));
@@ -344,7 +339,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     public void findByUsernameFn() {
-        final String usernameText = ((EditText) findViewById(R.id.username)).getText().toString();
+        final String usernameText = userNameEditText.getText().toString();
 
         if (StringUtils.isBlank(usernameText)) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
@@ -355,7 +350,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void findByOwnerFn() {
-        findByOwnerFn(((EditText) findViewById(R.id.owner)).getText().toString());
+        findByOwnerFn(ownerNameEditText.getText().toString());
     }
 
     private void findByOwnerFn(String userName) {
@@ -378,7 +373,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void findByGeocodeFn() {
-        final String geocodeText = ((EditText) findViewById(R.id.geocode)).getText().toString();
+        final String geocodeText = geocodeEditText.getText().toString();
 
         if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_gccode));
@@ -397,7 +392,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void findTrackableFn() {
-        final String trackableText = ((EditText) findViewById(R.id.trackable)).getText().toString();
+        final String trackableText = trackableEditText.getText().toString();
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_tb));

@@ -1,5 +1,8 @@
 package cgeo.geocaching.ui;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
@@ -91,16 +94,21 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
      * view holder for the cache list adapter
      *
      */
-    private static class ViewHolder {
-        CheckBox checkbox;
-        ImageView logStatusMark;
-        TextView text;
-        TextView favorite;
-        TextView info;
-        ImageView inventory;
-        DistanceView distance;
-        CompassMiniView direction;
-        ImageView dirImg;
+    protected static class ViewHolder {
+        @InjectView(R.id.checkbox) protected CheckBox checkbox;
+        @InjectView(R.id.log_status_mark) protected ImageView logStatusMark;
+        @InjectView(R.id.text) protected TextView text;
+        @InjectView(R.id.distance) protected DistanceView distance;
+        @InjectView(R.id.favorite) protected TextView favorite;
+        @InjectView(R.id.info) protected TextView info;
+        @InjectView(R.id.inventory) protected ImageView inventory;
+        @InjectView(R.id.direction) protected CompassMiniView direction;
+        @InjectView(R.id.dirimg) protected ImageView dirImg;
+
+        public ViewHolder(View view) {
+            Views.inject(this, view);
+            view.setTag(this);
+        }
     }
 
     public CacheListAdapter(final Activity activity, final List<Geocache> list, CacheListType cacheListType) {
@@ -350,18 +358,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (v == null) {
             v = inflater.inflate(R.layout.caches_item, null);
 
-            holder = new ViewHolder();
-            holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-            holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
-            holder.text = (TextView) v.findViewById(R.id.text);
-            holder.distance = (DistanceView) v.findViewById(R.id.distance);
-            holder.direction = (CompassMiniView) v.findViewById(R.id.direction);
-            holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
-            holder.inventory = (ImageView) v.findViewById(R.id.inventory);
-            holder.favorite = (TextView) v.findViewById(R.id.favorite);
-            holder.info = (TextView) v.findViewById(R.id.info);
-
-            v.setTag(holder);
+            holder = new ViewHolder(v);
         } else {
             holder = (ViewHolder) v.getTag();
         }

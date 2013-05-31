@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
@@ -29,6 +32,16 @@ import java.util.List;
 
 public class CompassActivity extends AbstractActivity {
 
+    @InjectView(R.id.nav_type) protected TextView navType;
+    @InjectView(R.id.nav_accuracy) protected TextView navAccuracy;
+    @InjectView(R.id.nav_satellites) protected TextView navSatellites;
+    @InjectView(R.id.nav_location) protected TextView navLocation;
+    @InjectView(R.id.distance) protected TextView distanceView;
+    @InjectView(R.id.heading) protected TextView headingView;
+    @InjectView(R.id.rose) protected CompassView compassView;
+    @InjectView(R.id.destination) protected TextView destinationTextView;
+    @InjectView(R.id.cacheinfo) protected TextView cacheInfoView;
+
     private static final String EXTRAS_COORDS = "coords";
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
@@ -40,13 +53,6 @@ public class CompassActivity extends AbstractActivity {
     private float cacheHeading = 0;
     private String title = null;
     private String info = null;
-    private TextView navType = null;
-    private TextView navAccuracy = null;
-    private TextView navSatellites = null;
-    private TextView navLocation = null;
-    private TextView distanceView = null;
-    private TextView headingView = null;
-    private CompassView compassView = null;
     private boolean hasMagneticFieldSensor;
 
     @Override
@@ -87,8 +93,7 @@ public class CompassActivity extends AbstractActivity {
         setDestCoords();
         setCacheInfo();
 
-        // get textviews once
-        compassView = (CompassView) findViewById(R.id.rose);
+        Views.inject(this);
     }
 
     @Override
@@ -214,11 +219,10 @@ public class CompassActivity extends AbstractActivity {
             return;
         }
 
-        ((TextView) findViewById(R.id.destination)).setText(dstCoords.toString());
+        destinationTextView.setText(dstCoords.toString());
     }
 
     private void setCacheInfo() {
-        final TextView cacheInfoView = (TextView) findViewById(R.id.cacheinfo);
         if (info == null) {
             cacheInfoView.setVisibility(View.GONE);
             return;
@@ -232,13 +236,6 @@ public class CompassActivity extends AbstractActivity {
             return;
         }
 
-        if (distanceView == null) {
-            distanceView = (TextView) findViewById(R.id.distance);
-        }
-        if (headingView == null) {
-            headingView = (TextView) findViewById(R.id.heading);
-        }
-
         cacheHeading = geo.getCoords().bearingTo(dstCoords);
         distanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(dstCoords)));
         headingView.setText(Math.round(cacheHeading) + "°");
@@ -248,13 +245,6 @@ public class CompassActivity extends AbstractActivity {
         @Override
         public void updateGeoData(final IGeoData geo) {
             try {
-                if (navType == null || navLocation == null || navAccuracy == null) {
-                    navType = (TextView) findViewById(R.id.nav_type);
-                    navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
-                    navSatellites = (TextView) findViewById(R.id.nav_satellites);
-                    navLocation = (TextView) findViewById(R.id.nav_location);
-                }
-
                 if (geo.getCoords() != null) {
                     if (geo.getSatellitesVisible() >= 0) {
                         navSatellites.setText(res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible());

@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.LogType;
@@ -36,6 +39,14 @@ import java.util.Calendar;
 import java.util.List;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
+
+    @InjectView(R.id.post) protected Button buttonPost;
+    @InjectView(R.id.type) protected Button typeButton;
+    @InjectView(R.id.date) protected Button dateButton;
+    @InjectView(R.id.tracking) protected EditText trackingEditText;
+    @InjectView(R.id.tweet) protected CheckBox tweetCheck;
+    @InjectView(R.id.tweet_box) protected LinearLayout tweetBox;
+
     private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private ProgressDialog waitDialog = null;
     private String guid = null;
@@ -45,8 +56,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private Calendar date = Calendar.getInstance();
     private LogType typeSelected = LogType.getById(Settings.getTrackableAction());
     private int attempts = 0;
-    private CheckBox tweetCheck = null;
-    private LinearLayout tweetBox = null;
     private Trackable trackable;
 
     private Handler showProgressHandler = new Handler() {
@@ -57,6 +66,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     };
 
     private Handler loadDataHandler = new Handler() {
+
         @Override
         public void handleMessage(final Message msg) {
             if (!possibleLogTypes.contains(typeSelected)) {
@@ -78,7 +88,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
             gettingViewstate = false; // we're done, user can post log
 
-            final Button buttonPost = (Button) findViewById(R.id.post);
             buttonPost.setEnabled(true);
             buttonPost.setOnClickListener(new PostListener());
 
@@ -107,6 +116,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.touch);
+        Views.inject(this);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -115,7 +125,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             guid = extras.getString(Intents.EXTRA_GUID);
 
             if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
-                ((EditText) findViewById(R.id.tracking)).setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
+                trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
             }
         }
 
@@ -135,11 +145,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
 
         init();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -176,7 +181,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     public void init() {
-        final Button typeButton = (Button) findViewById(R.id.type);
         registerForContextMenu(typeButton);
         typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
@@ -186,23 +190,15 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             }
         });
 
-        final Button dateButton = (Button) findViewById(R.id.date);
         dateButton.setOnClickListener(new DateListener());
         setDate(date);
 
-        if (tweetBox == null) {
-            tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
-        }
-        if (tweetCheck == null) {
-            tweetCheck = (CheckBox) findViewById(R.id.tweet);
-        }
         tweetCheck.setChecked(true);
 
         if (CollectionUtils.isEmpty(possibleLogTypes)) {
             possibleLogTypes = Trackable.getPossibleLogTypes();
         }
 
-        final Button buttonPost = (Button) findViewById(R.id.post);
         if (Login.isEmpty(viewstates)) {
             buttonPost.setEnabled(false);
             buttonPost.setOnTouchListener(null);
@@ -213,20 +209,17 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             buttonPost.setEnabled(true);
             buttonPost.setOnClickListener(new PostListener());
         }
-        disableSuggestions((EditText) findViewById(R.id.tracking));
+        disableSuggestions(trackingEditText);
     }
 
     @Override
     public void setDate(Calendar dateIn) {
         date = dateIn;
 
-        final Button dateButton = (Button) findViewById(R.id.date);
         dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
     public void setType(LogType type) {
-        final Button typeButton = (Button) findViewById(R.id.type);
-
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
 
@@ -249,6 +242,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     private class PostListener implements View.OnClickListener {
 
+        protected EditText logEditText = (EditText) findViewById(R.id.log);
+
         @Override
         public void onClick(View arg0) {
             if (!gettingViewstate) {
@@ -257,8 +252,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
                 Settings.setTrackableAction(typeSelected.id);
 
-                final String tracking = ((EditText) findViewById(R.id.tracking)).getText().toString();
-                final String log = ((EditText) findViewById(R.id.log)).getText().toString();
+                final String tracking = trackingEditText.getText().toString();
+                final String log = logEditText.getText().toString();
                 new PostLogThread(postLogHandler, tracking, log).start();
             } else {
                 showToast(res.getString(R.string.err_log_load_data_still));
