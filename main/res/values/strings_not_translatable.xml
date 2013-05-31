@@ -90,6 +90,8 @@
     <b>Next bugfix release</b>\n
     <b>Bugfixing:</b>\n
     · Pictures in logs are now loaded in standard resolution like on the website to improve performance\n
+    · Adaption to changes on gc.com (cache log not possible)\n
+    · Corrected missing information and performance issues on nearby search for basic members\n
     \n
     \n
     <b>2013.05.22</b>\n
