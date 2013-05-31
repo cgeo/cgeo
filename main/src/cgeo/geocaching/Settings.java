@@ -192,7 +192,7 @@ public final class Settings {
             e.putString(KEY_TWITTER_TOKEN_SECRET, old.getString(KEY_TWITTER_TOKEN_SECRET, null));
             e.putString(KEY_TWITTER_TOKEN_PUBLIC, old.getString(KEY_TWITTER_TOKEN_PUBLIC, null));
             e.putInt(KEY_VERSION, old.getInt(KEY_VERSION, 0));
-            e.putBoolean(KEY_LOAD_DESCRIPTION, 0 != old.getInt(KEY_LOAD_DESCRIPTION, 0));
+            e.putBoolean(KEY_LOAD_DESCRIPTION, 0 != old.getInt(KEY_LOAD_DESCRIPTION, 1));
             e.putBoolean(KEY_RATING_WANTED, old.getBoolean(KEY_RATING_WANTED, true));
             e.putBoolean(KEY_ELEVATION_WANTED, old.getBoolean(KEY_ELEVATION_WANTED, true));
             e.putBoolean(KEY_FRIENDLOGS_WANTED, old.getBoolean(KEY_FRIENDLOGS_WANTED, true));
@@ -764,7 +764,7 @@ public final class Settings {
     }
 
     public static boolean isAutoLoadDescription() {
-        return sharedPrefs.getBoolean(KEY_LOAD_DESCRIPTION, false);
+        return sharedPrefs.getBoolean(KEY_LOAD_DESCRIPTION, true);
     }
 
     public static void setAutoLoadDesc(final boolean autoLoad) {
