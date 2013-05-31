@@ -494,11 +494,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.goal_box) protected View goalBox;
+        @InjectView(R.id.goal_box) protected LinearLayout goalBox;
         @InjectView(R.id.goal) protected TextView goalTextView;
-        @InjectView(R.id.details_box) protected View detailsBox;
+        @InjectView(R.id.details_box) protected LinearLayout detailsBox;
         @InjectView(R.id.details) protected TextView detailsTextView;
-        @InjectView(R.id.image_box) protected View imageBox;
+        @InjectView(R.id.image_box) protected LinearLayout imageBox;
         @InjectView(R.id.details_list) protected LinearLayout detailsList;
         @InjectView(R.id.image) protected LinearLayout imageView;
 
