@@ -979,6 +979,11 @@ public abstract class GCParser {
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month", Integer.toString(month),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day", Integer.toString(day),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year", Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%04d", year),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
                 "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
                 "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
                 "ctl00$ContentBody$LogBookPanel1$uxLogCreationSource", "Old",
@@ -1167,17 +1172,24 @@ public abstract class GCParser {
                 "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode);
         Login.putViewstates(params, viewstates);
         if (currentDate.get(Calendar.YEAR) == year && (currentDate.get(Calendar.MONTH) + 1) == month && currentDate.get(Calendar.DATE) == day) {
+            params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", "");
             params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", "");
         } else {
+            params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
             params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
         }
         params.put(
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day", Integer.toString(day),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month", Integer.toString(month),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year", Integer.toString(year),
                 "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
                 "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
-                "ctl00$ContentBody$uxVistOtherTrackableTB", "");
+                "ctl00$ContentBody$uxVistOtherTrackableTB", "",
+                "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
+                "ctl00$ContentBody$uxVistOtherListingGC", "");
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         final String page = Login.postRequestLogged(uri, params);
