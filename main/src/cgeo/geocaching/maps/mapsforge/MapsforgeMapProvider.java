@@ -167,7 +167,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         final List<String> offlineMaps = getOfflineMaps();
         for (String mapFile : offlineMaps) {
             final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(), "."));
-            registerMapSource(new OfflineMapSource(mapFile, this, resources.getString(R.string.map_source_osm_offline) + " - " + mapName, MapGeneratorInternal.DATABASE_RENDERER));
+            registerMapSource(new OfflineMapSource(mapFile, this, mapName + " (" + resources.getString(R.string.map_source_osm_offline) + ")", MapGeneratorInternal.DATABASE_RENDERER));
         }
         // have a default entry, if no map files are available. otherwise we cannot select "offline" in the settings
         if (offlineMaps.isEmpty()) {

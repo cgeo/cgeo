@@ -469,7 +469,7 @@
   <string name="map_source_google_satellite">Google Maps : satellite</string>
   <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM : pistes cyclables</string>
-  <string name="map_source_osm_offline">OSM : hors-ligne</string>
+  <string name="map_source_osm_offline">hors-ligne</string>
 
   <string name="init_sendToCgeo">Envoyers vers c:geo</string>
   <string name="init_sendToCgeo_name">Votre nom d\'appareil:</string>

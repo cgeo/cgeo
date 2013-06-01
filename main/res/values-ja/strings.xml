@@ -441,7 +441,7 @@
   <string name="map_source_google_satellite">Googleマップ:航空写真</string>
   <string name="map_source_osm_mapnik">OpenStreetMap</string>
   <string name="map_source_osm_cyclemap">OpenStreetMap:Cyclemap</string>
-  <string name="map_source_osm_offline">OpenStreetMap:オフライン用</string>
+  <string name="map_source_osm_offline">オフライン用</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">この端末のモデル番号:</string>

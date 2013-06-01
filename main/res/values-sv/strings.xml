@@ -469,7 +469,7 @@
   <string name="map_source_google_satellite">Google: Satellit</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
-  <string name="map_source_osm_offline">OSM: Offline</string>
+  <string name="map_source_osm_offline">Offline</string>
 
   <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
   <string name="init_sendToCgeo_name">Namnet på din enhet:</string>

@@ -429,7 +429,7 @@
   <string name="map_source_google_satellite">Google: Műholdkép</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM: Biciklis térkép</string>
-  <string name="map_source_osm_offline">OSM: Offline</string>
+  <string name="map_source_osm_offline">Offline</string>
 
   <string name="init_sendToCgeo">Küldés a c:geo-hoz</string>
   <string name="init_sendToCgeo_name">Az eszközöd neve:</string>
