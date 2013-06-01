@@ -86,7 +86,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /** max. number of caches displayed in the Live Map */
     public static final int MAX_CACHES = 500;
 
-    /** Controls the behaviour of the map */
+    /** Controls the behavior of the map */
     public enum MapMode {
         /** Live Map */
         LIVE,

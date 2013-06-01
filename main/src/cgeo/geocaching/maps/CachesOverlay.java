@@ -126,21 +126,19 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             final Point center = new Point();
 
             for (CachesOverlayItemImpl item : items) {
-                final Geopoint itemCoord = item.getCoord().getCoords();
-                final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
-                projection.toPixels(itemGeo, center);
-
                 if (item.applyDistanceRule()) {
+                    final Geopoint itemCoord = item.getCoord().getCoords();
+                    final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
+                    projection.toPixels(itemGeo, center);
+
+                    // dashed circle around the waypoint
                     blockedCircle.setColor(0x66BB0000);
                     blockedCircle.setStyle(Style.STROKE);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
 
+                    // filling the circle area with a transparent color
                     blockedCircle.setColor(0x44BB0000);
                     blockedCircle.setStyle(Style.FILL);
-                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-                } else {
-                    blockedCircle.setColor(0x66000000);
-                    blockedCircle.setStyle(Style.STROKE);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
                 }
             }
