@@ -194,7 +194,7 @@ public final class Settings {
             e.putInt(KEY_VERSION, old.getInt(KEY_VERSION, 0));
             e.putBoolean(KEY_LOAD_DESCRIPTION, 0 != old.getInt(KEY_LOAD_DESCRIPTION, 1));
             e.putBoolean(KEY_RATING_WANTED, old.getBoolean(KEY_RATING_WANTED, true));
-            e.putBoolean(KEY_ELEVATION_WANTED, old.getBoolean(KEY_ELEVATION_WANTED, true));
+            e.putBoolean(KEY_ELEVATION_WANTED, old.getBoolean(KEY_ELEVATION_WANTED, false));
             e.putBoolean(KEY_FRIENDLOGS_WANTED, old.getBoolean(KEY_FRIENDLOGS_WANTED, true));
             e.putBoolean(KEY_USE_ENGLISH, old.getBoolean(KEY_USE_ENGLISH, false));
             e.putBoolean(KEY_USE_COMPASS, 0 != old.getInt(KEY_USE_COMPASS, 1));
@@ -792,7 +792,7 @@ public final class Settings {
     }
 
     public static boolean isElevationWanted() {
-        return sharedPrefs.getBoolean(KEY_ELEVATION_WANTED, true);
+        return sharedPrefs.getBoolean(KEY_ELEVATION_WANTED, false);
     }
 
     public static void setElevationWanted(final boolean elevationWanted) {
