@@ -2019,7 +2019,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return;
             }
             if (StringUtils.isNotBlank(descriptionString)) {
-                descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                try {
+                    descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                } catch (Exception e) {
+                    // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
+                    Log.e("Android bug setting text: ", e);
+                    // remove the formatting by converting to a simple string
+                    descriptionView.setText(description.toString());
+                }
                 descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 fixTextColor(descriptionView, descriptionString);
                 descriptionView.setVisibility(View.VISIBLE);
