@@ -1631,12 +1631,15 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 .append(cache.getListId() > 0)
                 .toHashCode();
 
-        final LayerDrawable ldFromCache = overlaysCache.get(hashcode);
-        if (ldFromCache != null) {
-            item.setMarker(ldFromCache);
-            return item;
+        LayerDrawable drawable = overlaysCache.get(hashcode);
+        if (drawable == null) {
+            drawable = createCacheItem(cache, hashcode);
         }
+        item.setMarker(drawable);
+        return item;
+    }
 
+    private LayerDrawable createCacheItem(final Geocache cache, final int hashcode) {
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
         final ArrayList<Drawable> layers = new ArrayList<Drawable>(9);
         final ArrayList<int[]> insets = new ArrayList<int[]>(8);
@@ -1690,9 +1693,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         overlaysCache.put(hashcode, ld);
-
-        item.setMarker(ld);
-        return item;
+        return ld;
     }
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
