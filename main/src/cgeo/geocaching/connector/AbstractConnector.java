@@ -48,6 +48,17 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     /**
+     * Uploading personal note to website
+     *
+     * @param cache
+     * @return success
+     */
+    @Override
+    public boolean uploadPersonalNote(Geocache cache) {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * {@link IConnector}
      */
     @Override

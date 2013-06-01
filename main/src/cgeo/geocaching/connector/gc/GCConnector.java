@@ -241,6 +241,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public boolean uploadPersonalNote(Geocache cache) {
+        final boolean uploaded = GCParser.uploadPersonalNote(cache);
+        if (uploaded) {
+            cgData.saveChangedCache(cache);
+        }
+        return uploaded;
+    }
+
+    @Override
     public SearchResult searchByCenter(Geopoint center) {
         // TODO make search by coordinate use this method. currently it is just a marker that this connector supports search by center
         return null;
