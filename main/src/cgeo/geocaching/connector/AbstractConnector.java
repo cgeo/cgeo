@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.enumerations.CacheRealm;
+import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -138,15 +138,15 @@ public abstract class AbstractConnector implements IConnector {
      * {@link IConnector}
      */
     @Override
-    public CacheRealm getCacheRealm() {
-        return CacheRealm.OTHER;
-    }
-
-    /**
-     * {@link IConnector}
-     */
-    @Override
     public boolean isActivated() {
         return false;
+    }
+
+    @Override
+    public int getCacheMapMarkerId(boolean disabled) {
+        if (disabled) {
+            return R.drawable.marker_disabled_other;
+        }
+        return R.drawable.marker_other;
     }
 }

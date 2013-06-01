@@ -11,7 +11,6 @@ import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -258,12 +257,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public CacheRealm getCacheRealm() {
-        return CacheRealm.GC;
+    public boolean isActivated() {
+        return Settings.isGCConnectorActive();
     }
 
     @Override
-    public boolean isActivated() {
-        return Settings.isGCConnectorActive();
+    public int getCacheMapMarkerId(boolean disabled) {
+        if (disabled) {
+            return R.drawable.marker_disabled;
+        }
+        return R.drawable.marker;
     }
 }

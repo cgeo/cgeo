@@ -2,7 +2,6 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
@@ -169,13 +168,6 @@ public interface IConnector {
     public boolean deleteModifiedCoordinates(Geocache cache);
 
     /**
-     * The CacheRealm this cache belongs to
-     *
-     * @return
-     */
-    public CacheRealm getCacheRealm();
-
-    /**
      * Return true if this connector is activated for online
      * interaction (download details, do searches, ...)
      *
@@ -200,4 +192,13 @@ public interface IConnector {
      * @return
      */
     public boolean canLog(Geocache geocache);
+
+    /**
+     * Return the marker id of the caches for this connector. This creates the different backgrounds for cache markers
+     * on the map.
+     *
+     * @param disabled
+     *            Whether to return the enabled or disabled marker type
+     */
+    public int getCacheMapMarkerId(boolean disabled);
 }

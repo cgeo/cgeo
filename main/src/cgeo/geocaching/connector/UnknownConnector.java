@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICache;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,4 +36,5 @@ public class UnknownConnector extends AbstractConnector {
     protected String getCacheUrlPrefix() {
         return null;
     }
+
 }

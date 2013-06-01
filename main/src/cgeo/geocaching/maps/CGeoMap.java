@@ -1622,7 +1622,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 .append(cache.isReliableLatLon())
                 .append(cache.getType().id)
                 .append(cache.isDisabled() || cache.isArchived())
-                .append(cache.getCacheRealm().id)
+                .append(cache.getMapMarkerId())
                 .append(cache.isOwner())
                 .append(cache.isFound())
                 .append(cache.hasUserModifiedCoords())
@@ -1645,7 +1645,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         final ArrayList<int[]> insets = new ArrayList<int[]>(8);
 
         // background: disabled or not
-        final Drawable marker = getResources().getDrawable(cache.isDisabled() || cache.isArchived() ? cache.getCacheRealm().markerDisabledId : cache.getCacheRealm().markerId);
+        final Drawable marker = getResources().getDrawable(cache.getMapMarkerId());
         layers.add(marker);
         final int resolution = marker.getIntrinsicWidth() > 40 ? 1 : 0;
         // reliable or not

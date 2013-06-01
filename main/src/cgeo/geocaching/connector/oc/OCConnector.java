@@ -2,8 +2,8 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.enumerations.CacheRealm;
 
 import java.util.regex.Pattern;
 
@@ -59,7 +59,11 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public CacheRealm getCacheRealm() {
-        return CacheRealm.OC;
+    public int getCacheMapMarkerId(boolean disabled) {
+        if (disabled) {
+            return R.drawable.marker_disabled_oc;
+        }
+        return R.drawable.marker_oc;
     }
+
 }
