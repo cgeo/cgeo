@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class StoredList {
+public final class StoredList {
     public static final int TEMPORARY_LIST_ID = 0;
     public static final int STANDARD_LIST_ID = 1;
     public static final int ALL_LIST_ID = 2;
