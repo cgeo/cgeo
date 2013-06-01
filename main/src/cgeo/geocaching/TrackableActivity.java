@@ -430,7 +430,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         protected void fillViewHolder(LogViewHolder holder, final LogEntry log) {
             if (log.date > 0) {
-                holder.added.setText(Formatter.formatShortDate(log.date));
+                holder.added.setText(Formatter.formatShortDateVerbally(log.date));
             }
 
             holder.type.setText(log.type.getL10n());

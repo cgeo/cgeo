@@ -2054,7 +2054,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         /**
          * Handle caches with black font color in dark skin and white font color in light skin
          * by changing background color of the view
-         * 
+         *
          * @param view
          *            containing the text
          * @param text
@@ -2156,7 +2156,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     final LogEntry log = getItem(position);
 
                     if (log.date > 0) {
-                        holder.date.setText(Formatter.formatShortDate(log.date));
+                        holder.date.setText(Formatter.formatShortDateVerbally(log.date));
                         holder.date.setVisibility(View.VISIBLE);
                     } else {
                         holder.date.setVisibility(View.GONE);
