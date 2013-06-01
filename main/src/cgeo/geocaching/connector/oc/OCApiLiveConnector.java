@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -10,6 +11,8 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CryptUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 
@@ -36,7 +39,11 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public OAuthLevel getSupportedAuthLevel() {
-        return OAuthLevel.Level3;
+        // TODO the tokens must be available connector specific
+        if (StringUtils.isNotBlank(Settings.getOCDETokenPublic()) && StringUtils.isNotBlank(Settings.getOCDETokenSecret())) {
+            return OAuthLevel.Level3;
+        }
+        return OAuthLevel.Level1;
     }
 
     @Override

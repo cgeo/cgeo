@@ -99,9 +99,7 @@ final public class OkapiClient {
 
     private static final String USER_USERNAME = "username";
 
-    private static final String SERVICE_CACHE = "/okapi/services/caches/geocache";
-
-    // the several realms of possible field s for cache retrieval:
+    // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
     private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size";
@@ -110,15 +108,9 @@ final public class OkapiClient {
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched";
 
-    private static final String SERVICE_SEARCH_AND_RETRIEVE = "/okapi/services/caches/shortcuts/search_and_retrieve";
-
     private static final String METHOD_SEARCH_NEAREST = "services/caches/search/nearest";
     private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
     private static final String METHOD_RETRIEVE_CACHES = "services/caches/geocaches";
-
-    private static final String SERVICE_MARK_CACHE = "/okapi/services/caches/mark";
-
-    private static final String SERVICE_SUBMIT_LOG = "/okapi/services/logs/submit";
 
     public static Geocache getCache(final String geoCode) {
         final Parameters params = new Parameters("cache_code", geoCode);
@@ -132,7 +124,7 @@ final public class OkapiClient {
         params.add("fields", getFullFields(ocapiConn));
         params.add("attribution_append", "none");
 
-        final JSONObject data = request(ocapiConn, SERVICE_CACHE, params);
+        final JSONObject data = request(ocapiConn, OkapiService.SERVICE_CACHE, params);
 
         if (data == null) {
             return null;
@@ -160,7 +152,7 @@ final public class OkapiClient {
 
         addRetrieveParams(params, connector);
 
-        final JSONObject data = request(connector, SERVICE_SEARCH_AND_RETRIEVE, params);
+        final JSONObject data = request(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params);
 
         if (data == null) {
             return Collections.emptyList();
@@ -184,6 +176,7 @@ final public class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("bbox", bboxString);
 
+        // FIXME Why is this testing level 3? The to be used service is level 1 only.
         if (connector.getSupportedAuthLevel() != OAuthLevel.Level3) {
             Log.e("Calling OkapiClient.getCachesBBox with wrong connector");
             return Collections.emptyList();
@@ -195,7 +188,7 @@ final public class OkapiClient {
 
         addRetrieveParams(params, connector);
 
-        final JSONObject data = request(connector, SERVICE_SEARCH_AND_RETRIEVE, params);
+        final JSONObject data = request(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params);
 
         if (data == null) {
             return Collections.emptyList();
@@ -208,7 +201,7 @@ final public class OkapiClient {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("watched", watched ? "true" : "false");
 
-        final JSONObject data = request(connector, SERVICE_MARK_CACHE, params);
+        final JSONObject data = request(connector, OkapiService.SERVICE_MARK_CACHE, params);
 
         if (data == null) {
             return false;
@@ -229,7 +222,7 @@ final public class OkapiClient {
             params.add("needs_maintenance", "true");
         }
 
-        final JSONObject data = request(connector, SERVICE_SUBMIT_LOG, params);
+        final JSONObject data = request(connector, OkapiService.SERVICE_SUBMIT_LOG, params);
 
         if (data == null) {
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
@@ -613,7 +606,7 @@ final public class OkapiClient {
         return res.toString();
     }
 
-    private static JSONObject request(final OCApiConnector connector, final String service, final Parameters params) {
+    private static JSONObject request(final OCApiConnector connector, final OkapiService service, final Parameters params) {
         if (connector == null) {
             return null;
         }
@@ -625,13 +618,13 @@ final public class OkapiClient {
 
         params.add("langpref", getPreferredLanguage());
 
-        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            OAuth.signOAuth(host, service, "GET", false, params, Settings.getOCDETokenPublic(), Settings.getOCDETokenSecret(), connector.getCK(), connector.getCS());
+        if (service.level == OAuthLevel.Level3 && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            OAuth.signOAuth(host, service.methodName, "GET", false, params, Settings.getOCDETokenPublic(), Settings.getOCDETokenSecret(), connector.getCK(), connector.getCS());
         } else {
             connector.addAuthentication(params);
         }
 
-        final String uri = "http://" + host + service;
+        final String uri = "http://" + host + service.methodName;
         return Network.requestJSON(uri, params);
     }
 

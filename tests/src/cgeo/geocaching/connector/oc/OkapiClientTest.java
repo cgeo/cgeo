@@ -21,4 +21,11 @@ public class OkapiClientTest extends CGeoTestCase {
         assertEquals("Oshkosh Municipal Tank", cache.getName());
         assertTrue(cache.isDetailed());
     }
+
+    public static void testOCSearchMustWorkWithoutOAuthAccessTokens() {
+        final String geoCode = "OC1234";
+        Geocache cache = OkapiClient.getCache(geoCode);
+        assertNotNull(cache);
+        assertEquals("Wupper-Schein", cache.getName());
+    }
 }
