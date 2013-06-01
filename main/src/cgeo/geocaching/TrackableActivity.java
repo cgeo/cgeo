@@ -653,7 +653,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                             Message message = handler.obtainMessage(0, image);
                             handler.sendMessage(message);
                         } catch (Exception e) {
-                            Log.e("cgeospoilers.onCreate.onClick.run: ", e);
+                            Log.e("TrackableActivity.DetailsViewCreator.ImageGetterThread: ", e);
                         }
                     }
                 }.start();
