@@ -1807,4 +1807,35 @@ public abstract class GCParser {
         return false;
     }
 
+    public static boolean uploadPersonalNote(Geocache cache) {
+        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        if (StringUtils.isEmpty(userToken)) {
+            return false;
+        }
+
+        try {
+            JSONObject jo = new JSONObject()
+                    .put("dto", (new JSONObject()
+                            .put("et", cache.getPersonalNote())
+                            .put("ut", userToken)));
+
+            final String uriSuffix = "SetUserCacheNote";
+
+            final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
+            HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
+            Log.i("Sending to " + uriPrefix + uriSuffix + " :" + jo.toString());
+
+            if (response != null && response.getStatusLine().getStatusCode() == 200) {
+                Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
+                return true;
+            }
+
+        } catch (JSONException e) {
+            Log.e("Unknown exception with json wrap code", e);
+        }
+        Log.e("GCParser.uploadPersonalNote - cannot upload personal note");
+        return false;
+    }
+
 }

@@ -151,13 +151,12 @@ public interface IConnector {
     public boolean supportsOwnCoordinates();
 
     /**
-     * Uploading modified coordinates to website
+     * Uploading personal note to website
      *
      * @param cache
-     * @param wpt
      * @return success
      */
-    public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt);
+    public boolean uploadPersonalNote(Geocache cache);
 
     /**
      * Reseting of modified coordinates on website to details
@@ -166,6 +165,15 @@ public interface IConnector {
      * @return success
      */
     public boolean deleteModifiedCoordinates(Geocache cache);
+
+    /**
+     * Uploading modified coordinates to website
+     *
+     * @param cache
+     * @param wpt
+     * @return success
+     */
+    public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt);
 
     /**
      * Return true if this connector is activated for online
