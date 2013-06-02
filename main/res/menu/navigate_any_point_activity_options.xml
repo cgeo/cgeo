@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_mapmode"
@@ -10,15 +11,15 @@
         android:icon="@drawable/ic_menu_compass"
         android:title="@string/cache_menu_navigate"> <!-- will be replaced in code -->
     </item>
-        <item
+    <item
         android:id="@+id/menu_caches_around"
         android:icon="@drawable/ic_menu_rotate"
         android:title="@string/cache_menu_around">
     </item>
-        <item
+    <item
         android:id="@+id/menu_clear_history"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/search_clear_history">
     </item>
-        
+
 </menu>

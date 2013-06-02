@@ -191,7 +191,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
     /**
      * mock the "exclude disabled caches" and "exclude my caches" options for the execution of the runnable
-     *
+     * 
      * @param runnable
      */
     private static void withMockedFilters(Runnable runnable) {
@@ -415,4 +415,3 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
 }
-

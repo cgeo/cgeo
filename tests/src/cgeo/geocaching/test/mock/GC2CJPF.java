@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class GC2CJPF extends MockedCache {
 
     public GC2CJPF() {
@@ -39,6 +38,7 @@ public class GC2CJPF extends MockedCache {
     public String getOwnerDisplayName() {
         return "Tom03";
     }
+
     @Override
     public String getOwnerUserId() {
         return getOwnerDisplayName();
@@ -99,7 +99,7 @@ public class GC2CJPF extends MockedCache {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see cgeo.geocaching.test.mock.MockedCache#isOwn()
      */
     @Override

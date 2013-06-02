@@ -54,7 +54,7 @@ public class ExportTest extends CGeoTestCase {
 
         public File testExportSync(List<Geocache> caches) throws InterruptedException, ExecutionException {
             final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
-            for (final Geocache cache: caches) {
+            for (final Geocache cache : caches) {
                 geocodes.add(cache.getGeocode());
             }
             final ExportTask task = new ExportTask(null);

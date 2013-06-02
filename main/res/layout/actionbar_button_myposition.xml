@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-        <View style="@style/action_bar_separator" />
+    <View style="@style/action_bar_separator" />
 
-        <ImageSwitcher
-            android:id="@+id/my_position"
-            style="@style/action_bar_action" />
+    <ImageSwitcher
+        android:id="@+id/my_position"
+        style="@style/action_bar_action" />
 
 </merge>

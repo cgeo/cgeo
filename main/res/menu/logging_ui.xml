@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
@@ -10,4 +11,5 @@
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit">
     </item>
+
 </menu>

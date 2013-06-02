@@ -31,7 +31,7 @@ public class WaypointTest extends AndroidTestCase {
         assertTrue(parking.compareTo(cache) < 0);
         assertTrue(parking.compareTo(own) < 0);
         assertTrue(parking.compareTo(trailhead) < 0);
-	}
+    }
 
     public static void testGeocode() {
         final Waypoint waypoint = new Waypoint("Test waypoint", WaypointType.PARKING, false);

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <searchable xmlns:android="http://schemas.android.com/apk/res/android"
-	android:label="@string/app_name"
-	android:hint="@string/search_bar_hint"
-	android:searchSettingsDescription="@string/search_bar_desc"
-	android:includeInGlobalSearch="true"
-	android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
-	android:inputType="textNoSuggestions"
-	android:imeOptions="actionSearch">
+    android:hint="@string/search_bar_hint"
+    android:imeOptions="actionSearch"
+    android:includeInGlobalSearch="true"
+    android:inputType="textNoSuggestions"
+    android:label="@string/app_name"
+    android:searchSettingsDescription="@string/search_bar_desc"
+    android:voiceSearchMode="showVoiceSearchButton|launchRecognizer" >
+
 </searchable>

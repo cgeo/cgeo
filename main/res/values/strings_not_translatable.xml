@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string-array name="waypoint_coordinate_formats" translatable="false">
-    <item>@string/waypoint_coordinate_formats_plain</item>
-    <item>DDD.DDDDD°</item>
-    <item>DDD°MM.MMM\'</item>
-    <item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
-  
-  <!-- distance units -->
-  <string name="unit_m" translatable="false">m</string>
-  <string name="unit_km" translatable="false">km</string>
-  <string name="unit_ft" translatable="false">ft</string>
-  <string name="unit_yd" translatable="false">yd</string>
-  <string name="unit_mi" translatable="false">mi</string>
-  
-  <!-- distance units -->
-  <string-array name="distance_units" translatable="false">
-    <item>@string/unit_m</item>
-    <item>@string/unit_km</item>
-    <item>@string/unit_ft</item>
-    <item>@string/unit_yd</item>
-    <item>@string/unit_mi</item>
-  </string-array>
-  
-  <string name="init_select_themefolder" translatable="false">…</string>
-  <string name="init_select_map_directory" translatable="false">…</string>
-  <string name="init_select_gpx_exportdir" translatable="false">…</string>
-  <string name="init_select_gpx_importdir" translatable="false">…</string>
-  
-  <!-- upload image scaling -->
-  <integer-array name="log_image_scale_values">
-      <item>-1</item>
-      <item>512</item>
-      <item>640</item>
-      <item>800</item>
-      <item>1024</item>
-  </integer-array>
-  
-  <!-- contributors -->
-  <string name="contributors" translatable="false">\n
+
+    <string-array name="waypoint_coordinate_formats" translatable="false">
+        <item>@string/waypoint_coordinate_formats_plain</item>
+        <item>DDD.DDDDD°</item>
+        <item>DDD°MM.MMM\'</item>
+        <item>DDD°MM\'SS.SSS\"</item>
+    </string-array>
+
+    <!-- distance units -->
+    <string name="unit_m" translatable="false">m</string>
+    <string name="unit_km" translatable="false">km</string>
+    <string name="unit_ft" translatable="false">ft</string>
+    <string name="unit_yd" translatable="false">yd</string>
+    <string name="unit_mi" translatable="false">mi</string>
+
+    <!-- distance units -->
+    <string-array name="distance_units" translatable="false">
+        <item>@string/unit_m</item>
+        <item>@string/unit_km</item>
+        <item>@string/unit_ft</item>
+        <item>@string/unit_yd</item>
+        <item>@string/unit_mi</item>
+    </string-array>
+
+    <string name="init_select_themefolder" translatable="false">…</string>
+    <string name="init_select_map_directory" translatable="false">…</string>
+    <string name="init_select_gpx_exportdir" translatable="false">…</string>
+    <string name="init_select_gpx_importdir" translatable="false">…</string>
+
+    <!-- upload image scaling -->
+    <integer-array name="log_image_scale_values">
+        <item>-1</item>
+        <item>512</item>
+        <item>640</item>
+        <item>800</item>
+        <item>1024</item>
+    </integer-array>
+
+    <!-- contributors -->
+    <string name="contributors" translatable="false">\n
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
     · 0xErnie (localization DE)\n
@@ -88,39 +89,28 @@
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons)\n
     · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
     · <a href="http://androidicons.com/">Android Icons</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
-    · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n
-  </string>
-  
-  <!-- cache menu -->
-  <string name="cache_menu_sygic" translatable="false">Sygic</string>
+    · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n</string>
 
-  <!-- changelog -->
-  <string name="changelog" translatable="false">\n
-    <b>2013.05.31</b>\n
-    <b>Bugfixing:</b>\n
+    <!-- cache menu -->
+    <string name="cache_menu_sygic" translatable="false">Sygic</string>
+
+    <!-- changelog -->
+    <string name="changelog" translatable="false">\n<b>2013.05.31</b>\n<b>Bugfixing:</b>\n
     · Adaption to changes on gc.com (cache and TB log not possible, cache attributes not shown)\n
     · Pictures in logs are now loaded in standard resolution like on the website to improve performance\n
     · Corrected missing information and performance issues on nearby search for basic members\n
     \n
-    \n
-    <b>2013.05.22</b>\n
-    <b>Bugfixing:</b>\n
+    \n<b>2013.05.22</b>\n<b>Bugfixing:</b>\n
     · Fixed and improved nearby search for basic members after gc.com changes\n
     · Avoid inconsistency of logbook while pictures are loaded in the background\n
     \n
-    \n
-    <b>2013.05.18</b>\n
-    <b>Bugfixing:</b>\n
+    \n<b>2013.05.18</b>\n<b>Bugfixing:</b>\n
     · Correction for compatibility issue with tablet devices\n
     \n
-    \n
-    <b>2013.05.16</b>\n
-    <b>Bugfixing:</b>\n
+    \n<b>2013.05.16</b>\n<b>Bugfixing:</b>\n
     · Adaption to changes on gc.com (live map)\n
     \n
-    \n
-    <b>2013.05.13</b>\n
-    <b>Bugfixing:</b>\n
+    \n<b>2013.05.13</b>\n<b>Bugfixing:</b>\n
     · Twitter option was not shown on logging page\n
     · Disable trail on map did only work after refresh of the map\n
     · Stability improvements when selecting log pictures to be attached\n
@@ -131,9 +121,7 @@
     · Fixed a possible crash in \"Any destination\" menu\n
     · Ignore hide setting when searching for owned caches\n
     \n
-    \n
-    <b>2013.04.03</b>\n
-    <b>New Features/Functions:</b>\n
+    \n<b>2013.04.03</b>\n<b>New Features/Functions:</b>\n
     · Support of attaching pictures to logs\n
     · Support of opencaching.de online API in live map and nearby search\n
     · Support for searching opencaching.nl caches\n
@@ -151,8 +139,7 @@
     · Waypoints can be marked as visited\n
     · Possibility to delete offline logs in lists\n
     · Support of language specific characters in log text equally to the website\n
-    \n
-    <b>Bugfixing:</b>\n
+    \n<b>Bugfixing:</b>\n
     · Final flag icon lost when updating cache with self defined final\n
     · Bad selection in directory chooser\n
     · Log type \"Retract Listing\" now parsed correctly\n
@@ -164,10 +151,8 @@
     · GPX export no longer exports waypoints without coordinates\n
     · Corrections for light scheme on Adnroid 2.x devices\n
     · Avoid crash if logging page is opened while not connected correctly\n
-     \n
-    <a href="https://github.com/cgeo/cgeo/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
-    \n
-    <b>Known Limitations/Bugs:</b>\n
+     \n<a href="https://github.com/cgeo/cgeo/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
+    \n<b>Known Limitations/Bugs:</b>\n
     · Live map:\n
       Approximated coords due to limitations on the GC-website\n
       Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
@@ -178,9 +163,8 @@
       After uploading log images they are only shown in the logview after refreshing the cache\n
       The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
       On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
-      A huge amount of pictures on the image tab of a cache might cause a crash\n
-    <b>Old releases</b>\n
+      A huge amount of pictures on the image tab of a cache might cause a crash\n<b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>
-  
+
 </resources>

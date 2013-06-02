@@ -6,10 +6,10 @@
     android:orientation="vertical" >
 
     <LinearLayout
-            android:id="@+id/info1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+        android:id="@+id/info1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/destination"
@@ -55,7 +55,6 @@
         </RelativeLayout>
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/info2"
         android:layout_width="fill_parent"
@@ -98,8 +97,8 @@
         android:id="@+id/rose"
         android:layout_width="fill_parent"
         android:layout_height="295dip"
-        android:layout_below="@id/info1"
         android:layout_above="@id/info2"
+        android:layout_below="@id/info1"
         android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="1dip"
@@ -112,6 +111,5 @@
         android:minHeight="289dip"
         android:minWidth="289dip"
         android:padding="4dip" />
-
 
 </RelativeLayout>

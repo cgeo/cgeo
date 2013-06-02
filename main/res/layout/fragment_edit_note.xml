@@ -1,15 +1,15 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/edit_note"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
-  <EditText
-      android:id="@+id/note"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:inputType="text"
-      android:imeOptions="actionDone"/>
+    <EditText
+        android:id="@+id/note"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionDone"
+        android:inputType="text" />
+
 </LinearLayout>

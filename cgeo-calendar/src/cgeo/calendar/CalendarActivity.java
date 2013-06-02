@@ -43,7 +43,7 @@ public final class CalendarActivity extends Activity {
 
     /**
      * Adds the cache to the Android-calendar if it is an event.
-     *
+     * 
      * @param entry
      */
     private void selectCalendarForAdding(final CalendarEntry entry) {

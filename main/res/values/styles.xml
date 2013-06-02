@@ -43,7 +43,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    
+
     <!-- own definitions -->
     <!-- actionbar -->
     <style name="action_bar">

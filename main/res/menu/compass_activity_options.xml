@@ -20,7 +20,7 @@
         android:id="@+id/menu_select_destination"
         android:icon="@drawable/ic_menu_myplaces"
         android:title="@string/destination_select">
-        <menu/> <!-- filled dynamically -->
+        <menu /> <!-- filled dynamically -->
     </item>
     <item
         android:id="@+id/menu_tts_start"
@@ -33,4 +33,5 @@
         android:title="@string/tts_stop"
         android:visible="false">
     </item>
+
 </menu>

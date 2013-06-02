@@ -109,8 +109,8 @@
             android:gravity="center"
             android:minHeight="28px"
             android:minWidth="28px"
-            cc:skin="?compass"
-            android:visibility="gone" />
+            android:visibility="gone"
+            cc:skin="?compass" />
 
         <ImageView
             android:id="@+id/dirimg"

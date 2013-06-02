@@ -31,7 +31,6 @@ public class GeoPointParserTest extends AndroidTestCase {
         assertNull(point);
     }
 
-
     public static void testSouth() {
         assertEquals(-refLatitude, GeopointParser.parseLatitude("S 49° 56.031"), 1e-8);
     }

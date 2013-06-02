@@ -1,6 +1,5 @@
 package cgeo.geocaching.test;
 
-
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -12,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * This test is meant for performance measurements of different whitespace replacement implementations.
  * It does not test semantical correctness.
- *
+ * 
  */
 public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
 
@@ -28,7 +27,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
     /**
      * The place for the implementation to prove that the new version of replaceWhitespace is faster than
      * BaseUtils.replaceWhitespace()
-     *
+     * 
      * @param data
      * @return
      */

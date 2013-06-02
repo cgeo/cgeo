@@ -2,16 +2,18 @@
 <resources>
 
     <style name="cgeo_main" parent="android:style/Theme.Wallpaper.NoTitleBar">
+
         <!-- system elements -->
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="cgeo" parent="android:style/Theme.NoTitleBar">
+
         <!-- system elements -->
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
         <item name="android:windowContentOverlay">@null</item>
-        
+
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
         <item name="text_color_link">@color/link</item>
@@ -20,7 +22,9 @@
     </style>
 
     <style name="dark" parent="cgeo">
+
         <!-- system values -->
+
 
         <!-- own values: colors -->
         <item name="text_color">@color/text_dark</item>
@@ -50,7 +54,9 @@
     </style>
 
     <style name="light" parent="cgeo">
+
         <!-- system values -->
+
 
         <!-- own values: colors -->
         <item name="android:windowBackground">@color/just_white</item>
@@ -81,6 +87,7 @@
     </style>
 
     <style name="cgeo_popup" parent="android:style/Theme.Dialog">
+
         <!-- system elements -->
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
@@ -89,7 +96,9 @@
 
     <!-- TODO: Popup probably doesn't need all these fields set. Should delete unnecessary ones. -->
     <style name="popup_dark" parent="cgeo_popup">
+
         <!-- system values -->
+
 
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
@@ -124,7 +133,9 @@
 
     <!-- TODO: Popup probably doesn't need all these fields set. Should delete unnecessary ones. -->
     <style name="popup_light" parent="cgeo_popup">
+
         <!-- system values -->
+
 
         <!-- own values: colors -->
         <item name="android:windowBackground">@color/just_white</item>

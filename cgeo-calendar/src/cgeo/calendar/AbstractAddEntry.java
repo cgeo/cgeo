@@ -2,7 +2,6 @@ package cgeo.calendar;
 
 import android.util.Log;
 
-
 abstract class AbstractAddEntry {
 
     protected CalendarEntry entry;

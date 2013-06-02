@@ -18,7 +18,7 @@ import junit.framework.TestCase;
  * Test class to compare the performance of two regular expressions on given data.
  * Can be used to improve the time needed to parse the cache data
  * Run As "JUnit Test"
- *
+ * 
  * @author blafoo
  */
 public class RegExPerformanceTest extends TestCase {
@@ -68,7 +68,6 @@ public class RegExPerformanceTest extends TestCase {
 
     public final static Pattern PATTERN_DESCRIPTION_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     public final static Pattern PATTERN_DESCRIPTION = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
-
 
     public final static List<MockedCache> MOCKED_CACHES;
     static {

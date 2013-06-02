@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+
     <string-array name="attribute_ids" translatable="false">
         <item>dogs_yes</item>
         <item>dogs_no</item>
@@ -144,4 +145,5 @@
         <item>food_yes</item>
         <item>food_no</item>
     </string-array>
+
 </resources>

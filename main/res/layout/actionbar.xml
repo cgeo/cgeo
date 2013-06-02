@@ -2,5 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/action_bar" >
 
-    <include layout="@layout/actionbar_title"/>
+    <include layout="@layout/actionbar_title" />
+
 </LinearLayout>

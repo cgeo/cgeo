@@ -82,4 +82,3 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC"));
     }
 }
-
