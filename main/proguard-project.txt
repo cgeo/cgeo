@@ -1,30 +1,26 @@
+# We use the general android proguard config. See project.properties for details.
+
+# Suppress notes about classes from the general config, which we don't use at all. 
+-dontnote **.ILicensingService
+
 -optimizationpasses 2
--dontpreverify
 -dontobfuscate
 -allowaccessmodification
 -optimizations !code/simplification/arithmetic,!code/allocation/variable
 
+# apache.commons.collections has some bean related collections, which are undefined in Android
 -dontwarn java.beans.*
--dontwarn org.mapsforge.android.maps.Test*
--dontwarn android.support.v4.**
--dontwarn org.apache.log4j.**
--dontwarn org.apache.commons.logging.**
--dontwarn ch.boye.httpclientandroidlib.impl.auth.NegotiateScheme
 
--dontnote org.apache.commons.logging.**
+#-dontnote org.apache.commons.logging.**
 
--keep public class * extends android.app.Activity
--keep public class * extends android.app.Application
--keep public class * extends android.app.Service
--keep public class * extends android.content.BroadcastReceiver
--keep public class * extends android.content.ContentProvider
 -keep public class cgeo.geocaching.*
 -keep class android.support.v4.os.** { *; }
+
 -keep class ch.boye.httpclientandroidlib.conn.scheme.Scheme { *; }
 -keep class ch.boye.httpclientandroidlib.params.HttpParams { *; }
 -keep class ch.boye.httpclientandroidlib.client.HttpClient { *; }
-
 -dontnote ch.boye.httpclientandroidlib.**
+-dontwarn ch.boye.httpclientandroidlib.impl.auth.NegotiateScheme
 
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
@@ -32,23 +28,6 @@
 
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
-}
-
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
-
--keepclassmembers class **.R$* {
-    public static <fields>;
-}
-
--keepclassmembers class cgeo.geocaching.** {
-    public void *(android.view.View);
 }
 
 -keep public class * extends android.view.View {
@@ -58,6 +37,7 @@
     public void set*(...);
 }
 
+# The backup agent class is not called from our code.
 -keep public class cgeo.geocaching.backup.CentralBackupAgent
 
 -keepclassmembers class cgeo.geocaching.compatibility.AndroidLevel8 {
