@@ -2156,7 +2156,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     LogViewHolder holder = (LogViewHolder) rowView.getTag();
                     if (null == holder) {
                         holder = new LogViewHolder(rowView);
-                        rowView.setTag(holder);
                     }
                     holder.setPosition(position);
 
@@ -2173,11 +2172,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     holder.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
                     // finds count
-                    holder.count.setVisibility(View.VISIBLE);
+                    holder.countOrLocation.setVisibility(View.VISIBLE);
                     if (log.found == -1) {
-                        holder.count.setVisibility(View.GONE);
+                        holder.countOrLocation.setVisibility(View.GONE);
                     } else {
-                        holder.count.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
+                        holder.countOrLocation.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
                     }
 
                     // logtext, avoid parsing HTML if not necessary
@@ -2215,11 +2214,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     // colored marker
                     int marker = log.type.markerId;
                     if (marker != 0) {
-                        holder.statusMarker.setVisibility(View.VISIBLE);
-                        holder.statusMarker.setImageResource(marker);
+                        holder.marker.setVisibility(View.VISIBLE);
+                        holder.marker.setImageResource(marker);
                     }
                     else {
-                        holder.statusMarker.setVisibility(View.GONE);
+                        holder.marker.setVisibility(View.GONE);
                     }
 
                     if (null == convertView) {
@@ -2263,48 +2262,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         }
 
-        private class LogViewHolder {
-            final TextView date;
-            final TextView type;
-            final TextView author;
-            final TextView count;
-            final TextView text;
-            final TextView images;
-            final ImageView statusMarker;
-            private int position;
-
-            public LogViewHolder(final View base) {
-                date = (TextView) base.findViewById(R.id.added);
-                type = (TextView) base.findViewById(R.id.type);
-                author = (TextView) base.findViewById(R.id.author);
-                count = (TextView) base.findViewById(R.id.count_or_location);
-                text = (TextView) base.findViewById(R.id.log);
-                images = (TextView) base.findViewById(R.id.log_images);
-                statusMarker = (ImageView) base.findViewById(R.id.log_mark);
-            }
-
-            /**
-             * Read the position of the cursor pointed to by this holder. <br/>
-             * This must be called by the UI thread.
-             *
-             * @return the cursor position
-             */
-            public int getPosition() {
-                return position;
-            }
-
-            /**
-             * Set the position of the cursor pointed to by this holder. <br/>
-             * This must be called by the UI thread.
-             *
-             * @param position
-             *            the cursor position
-             */
-            public void setPosition(final int position) {
-                this.position = position;
-            }
-
-        }
     }
 
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {

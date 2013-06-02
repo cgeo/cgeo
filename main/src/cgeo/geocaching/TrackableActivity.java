@@ -387,21 +387,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     public class LogsViewCreator extends AbstractCachingPageViewCreator<ListView> {
 
-        protected class LogViewHolder {
-            @InjectView(R.id.added) protected TextView added ;
-            @InjectView(R.id.type) protected TextView type;
-            @InjectView(R.id.author) protected TextView author;
-            @InjectView(R.id.count_or_location) protected TextView location;
-            @InjectView(R.id.log) protected TextView text;
-            @InjectView(R.id.log_images) protected TextView images;
-            @InjectView(R.id.log_mark) protected ImageView marker;
-
-            public LogViewHolder(View rowView) {
-                Views.inject(this, rowView);
-                rowView.setTag(this);
-            }
-        }
-
         @Override
         public ListView getDispatchedView() {
             view = (ListView) getLayoutInflater().inflate(R.layout.trackable_logs_view, null);
@@ -430,19 +415,19 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         protected void fillViewHolder(LogViewHolder holder, final LogEntry log) {
             if (log.date > 0) {
-                holder.added.setText(Formatter.formatShortDateVerbally(log.date));
+                holder.date.setText(Formatter.formatShortDateVerbally(log.date));
             }
 
             holder.type.setText(log.type.getL10n());
             holder.author.setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
 
             if (StringUtils.isBlank(log.cacheName)) {
-                holder.location.setVisibility(View.GONE);
+                holder.countOrLocation.setVisibility(View.GONE);
             } else {
-                holder.location.setText(Html.fromHtml(log.cacheName));
+                holder.countOrLocation.setText(Html.fromHtml(log.cacheName));
                 final String cacheGuid = log.cacheGuid;
                 final String cacheName = log.cacheName;
-                holder.location.setOnClickListener(new View.OnClickListener() {
+                holder.countOrLocation.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
                         CacheDetailActivity.startActivityGuid(TrackableActivity.this, cacheGuid, Html.fromHtml(cacheName).toString());
