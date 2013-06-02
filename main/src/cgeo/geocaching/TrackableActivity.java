@@ -391,7 +391,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             @InjectView(R.id.added) protected TextView added ;
             @InjectView(R.id.type) protected TextView type;
             @InjectView(R.id.author) protected TextView author;
-            @InjectView(R.id.location) protected TextView location;
+            @InjectView(R.id.count_or_location) protected TextView location;
             @InjectView(R.id.log) protected TextView text;
             @InjectView(R.id.log_images) protected TextView images;
             @InjectView(R.id.log_mark) protected ImageView marker;
@@ -407,12 +407,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             view = (ListView) getLayoutInflater().inflate(R.layout.trackable_logs_view, null);
 
             if (trackable != null && trackable.getLogs() != null) {
-                view.setAdapter(new ArrayAdapter<LogEntry>(TrackableActivity.this, R.layout.trackable_logs_item, trackable.getLogs()) {
+                view.setAdapter(new ArrayAdapter<LogEntry>(TrackableActivity.this, R.layout.logs_item, trackable.getLogs()) {
                     @Override
                     public View getView(int position, View convertView, android.view.ViewGroup parent) {
                         View rowView = convertView;
                         if (null == rowView) {
-                            rowView = getLayoutInflater().inflate(R.layout.trackable_logs_item, null);
+                            rowView = getLayoutInflater().inflate(R.layout.logs_item, null);
                         }
                         LogViewHolder holder = (LogViewHolder) rowView.getTag();
                         if (null == holder) {

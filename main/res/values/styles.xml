@@ -294,4 +294,44 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <!-- author of a log item -->
+    <style name="logitem_author">
+        <item name="android:id">@+id/author</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_gravity">left|top</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:lines">1</item>
+        <item name="android:scrollHorizontally">true</item> 
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">?text_color</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- date, found state on the left of a log entry -->
+    <style name="logitem_property">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">left</item>
+        <item name="android:lines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">?text_color_headline</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- separator between log author and log content -->
+    <style name="logitem_mark">
+        <item name="android:layout_width">2dip</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginBottom">2dip</item>
+        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@drawable/mark_green</item>
+    </style>
+
 </resources>

@@ -2143,7 +2143,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             final List<LogEntry> logs = allLogs ? cache.getLogs() : cache.getFriendsLogs();
-            view.setAdapter(new ArrayAdapter<LogEntry>(CacheDetailActivity.this, R.layout.cacheview_logs_item, logs) {
+            view.setAdapter(new ArrayAdapter<LogEntry>(CacheDetailActivity.this, R.layout.logs_item, logs) {
                 final UserActionsClickListener userActionsClickListener = new UserActionsClickListener();
                 final DecryptTextClickListener decryptTextClickListener = new DecryptTextClickListener();
 
@@ -2151,7 +2151,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 public View getView(final int position, final View convertView, final ViewGroup parent) {
                     View rowView = convertView;
                     if (null == rowView) {
-                        rowView = getLayoutInflater().inflate(R.layout.cacheview_logs_item, null);
+                        rowView = getLayoutInflater().inflate(R.layout.logs_item, null);
                     }
                     LogViewHolder holder = (LogViewHolder) rowView.getTag();
                     if (null == holder) {
@@ -2277,7 +2277,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 date = (TextView) base.findViewById(R.id.added);
                 type = (TextView) base.findViewById(R.id.type);
                 author = (TextView) base.findViewById(R.id.author);
-                count = (TextView) base.findViewById(R.id.count);
+                count = (TextView) base.findViewById(R.id.count_or_location);
                 text = (TextView) base.findViewById(R.id.log);
                 images = (TextView) base.findViewById(R.id.log_images);
                 statusMarker = (ImageView) base.findViewById(R.id.log_mark);
