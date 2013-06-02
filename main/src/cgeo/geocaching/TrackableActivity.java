@@ -15,6 +15,7 @@ import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
@@ -585,7 +586,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             // trackable goal
-            if (StringUtils.isNotBlank(trackable.getGoal())) {
+            if (StringUtils.isNotBlank(HtmlUtils.extractText(trackable.getGoal()))) {
                 goalBox.setVisibility(View.VISIBLE);
                 goalTextView.setVisibility(View.VISIBLE);
                 goalTextView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
@@ -593,7 +594,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             // trackable details
-            if (StringUtils.isNotBlank(trackable.getDetails())) {
+            if (StringUtils.isNotBlank(HtmlUtils.extractText(trackable.getDetails()))) {
                 detailsBox.setVisibility(View.VISIBLE);
                 detailsTextView.setVisibility(View.VISIBLE);
                 detailsTextView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
