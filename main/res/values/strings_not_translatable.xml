@@ -87,6 +87,11 @@
 
   <!-- changelog -->
   <string name="changelog" translatable="false">\n
+    <b>2013.06.05</b>\n
+    <b>Bugfixing:</b>\n
+    · Adaption to changes on gc.com (Logging date could be wrong in some cases)\n
+    \n
+    \n
     <b>2013.05.31</b>\n
     <b>Bugfixing:</b>\n
     · Adaption to changes on gc.com (cache and TB log not possible, cache attributes not shown)\n
