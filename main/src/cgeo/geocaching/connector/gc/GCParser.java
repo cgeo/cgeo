@@ -967,13 +967,12 @@ public abstract class GCParser {
                 + "; date: " + year + "." + month + "." + day + ", log: " + logInfo
                 + "; trackables: " + (trackables != null ? trackables.size() : "0"));
 
-        final String dateString = String.format("%04d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
-                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", dateString,
+                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%04d", year),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month", Integer.toString(month),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day", Integer.toString(day),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year", Integer.toString(year),
@@ -1169,8 +1168,7 @@ public abstract class GCParser {
             params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", "");
         } else {
             params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
-            final String dateString = String.format("%04d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
-            params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", dateString);
+            params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
         }
         params.put(
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
