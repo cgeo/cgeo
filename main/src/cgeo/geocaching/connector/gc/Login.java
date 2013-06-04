@@ -328,6 +328,15 @@ public abstract class Login {
         return parseGcCustomDate(input, Settings.getGcCustomDate());
     }
 
+    public static SimpleDateFormat getCustomGcDateFormat() {
+        final String format = Settings.getGcCustomDate();
+        if (gcCustomDateFormats.containsKey(format)) {
+            return gcCustomDateFormats.get(format);
+        }
+
+        return gcCustomDateFormats.get("MM/dd/yyyy");
+    }
+
     /**
      * checks if an Array of Strings is empty or not. Empty means:
      * - Array is null
