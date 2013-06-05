@@ -107,6 +107,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private static final int MENU_NAVIGATION = 69;
     private static final int MENU_STORE_CACHE = 73;
     private static final int MENU_FILTER = 74;
+    private static final int MENU_NEGATE_FILTER = 77;
     private static final int MENU_DELETE_EVENTS = 75;
     private static final int MENU_CLEAR_OFFLINE_LOGS = 76;
 
@@ -542,6 +543,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
+        menu.add(0, MENU_NEGATE_FILTER, 0, "Negate Filters").setIcon(R.drawable.ic_menu_filter);
 
         if (type != CacheListType.HISTORY) {
             menu.add(0, MENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(R.drawable.ic_menu_sort_alphabetically);
@@ -748,6 +750,25 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             case MENU_FILTER:
                 showFilterMenu(null);
                 return true;
+                        case MENU_NEGATE_FILTER:
+                if (filter != null) {
+                cacheList.clear();
+                    cacheList.addAll(adapter.negateFilter(filter));
+
+                    int duplicates = 0;
+                    int size = cacheList.size();
+                    for (int i = 0; i < size - 1; i++) {
+                        for (int j = i + 1; j < size; j++) {
+                            if (!cacheList.get(j).equals(cacheList.get(i))) {
+                                continue;
+                            }
+                            duplicates++;
+                            cacheList.remove(j);
+                            j--;
+                            size--;
+                        }
+                }
+                }
             case MENU_SORT:
                 new ComparatorUserInterface(this).selectComparator(adapter.getCacheComparator(), new RunnableWithArgument<CacheComparator>() {
                     @Override
