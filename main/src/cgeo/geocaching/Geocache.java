@@ -1431,7 +1431,9 @@ public class Geocache implements ICache, IWaypoint {
 
     private boolean hasIdenticalWaypoint(final Geopoint point) {
         for (final Waypoint waypoint: waypoints) {
-            if (waypoint.getCoords().equals(point)) {
+            // waypoint can have no coords such as a Final set by cache owner
+            final Geopoint coords = waypoint.getCoords();
+            if (coords != null && coords.equals(point)) {
                 return true;
             }
         }
