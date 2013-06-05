@@ -188,6 +188,15 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             currentFilter.filter(list);
         }
     }
+    
+        public List<Geocache> negateFilter(final IFilter filter) {
+
+        list.clear();
+        list.addAll(originalList);
+        filter.notfilter(list);
+        return list;
+
+    }
 
     /**
      * Called after a user action on the filter menu.
