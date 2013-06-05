@@ -618,7 +618,7 @@ final public class OkapiClient {
 
         params.add("langpref", getPreferredLanguage());
 
-        if (service.level == OAuthLevel.Level3 && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
             OAuth.signOAuth(host, service.methodName, "GET", false, params, Settings.getOCDETokenPublic(), Settings.getOCDETokenSecret(), connector.getCK(), connector.getCS());
         } else {
             connector.addAuthentication(params);
