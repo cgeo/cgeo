@@ -23,17 +23,6 @@ abstract class AbstractFilter implements IFilter {
         list.removeAll(itemsToRemove);
     }
     
-    @Override
-    public void notfilter(List<Geocache> list) {
-        List<Geocache> itemsToRemove = new ArrayList<Geocache>();
-        for (Geocache item : list) {
-            if (accepts(item)) {
-                itemsToRemove.add(item);
-            }
-        }
-
-        list.removeAll(itemsToRemove);
-    }
 
     @Override
     public String getName() {
