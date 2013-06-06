@@ -46,7 +46,7 @@ public final class Twitter {
                 Log.e("Tweet could not be posted");
             }
         } catch (Exception e) {
-            Log.e("cgBase.postTweet", e);
+            Log.e("Twitter.postTweet", e);
         }
     }
 

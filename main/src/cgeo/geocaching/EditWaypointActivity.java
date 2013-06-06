@@ -277,7 +277,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
-                Log.e("cgeowaypoint.loadWaypoint.run", e);
+                Log.e("EditWaypointActivity.loadWaypoint.run", e);
             }
         }
     }

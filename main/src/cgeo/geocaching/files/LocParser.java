@@ -110,7 +110,7 @@ public final class LocParser extends FileParser {
         try {
             return new Geopoint(Double.valueOf(latitude), Double.valueOf(longitude));
         } catch (NumberFormatException e) {
-            Log.e("LOC format has changed");
+            Log.e("LOC format has changed", e);
         }
         // fall back to parser, just in case the format changes
         return new Geopoint(latitude, longitude);

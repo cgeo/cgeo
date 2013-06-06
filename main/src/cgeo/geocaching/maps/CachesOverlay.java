@@ -244,7 +244,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             progress.dismiss();
         } catch (Exception e) {
-            Log.e("cgMapOverlay.onTap", e);
+            Log.e("CachesOverlay.onTap", e);
             if (progress != null) {
                 progress.dismiss();
             }
@@ -258,7 +258,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         try {
             return items.get(index);
         } catch (Exception e) {
-            Log.e("cgMapOverlay.createItem", e);
+            Log.e("CachesOverlay.createItem", e);
         }
 
         return null;
@@ -269,7 +269,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         try {
             return items.size();
         } catch (Exception e) {
-            Log.e("cgMapOverlay.size", e);
+            Log.e("CachesOverlay.size", e);
         }
 
         return 0;

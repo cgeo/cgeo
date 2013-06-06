@@ -30,7 +30,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
                             + coords.getLongitude() + mode)));
 
         } catch (Exception e) {
-            Log.i("cgBase.runNavigation: No navigation application available.");
+            Log.i("GoogleNavigationApp.navigate: No navigation application available.", e);
         }
     }
 

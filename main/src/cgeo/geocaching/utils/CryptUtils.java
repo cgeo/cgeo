@@ -71,7 +71,7 @@ public final class CryptUtils {
             digest.update(text.getBytes(), 0, text.length());
             hashed = new BigInteger(1, digest.digest()).toString(16);
         } catch (Exception e) {
-            Log.e("cgBase.md5", e);
+            Log.e("CryptUtils.md5", e);
         }
 
         return hashed;
@@ -85,7 +85,7 @@ public final class CryptUtils {
             digest.update(text.getBytes(), 0, text.length());
             hashed = new BigInteger(1, digest.digest()).toString(16);
         } catch (Exception e) {
-            Log.e("cgBase.sha1", e);
+            Log.e("CryptUtils.sha1", e);
         }
 
         return hashed;
@@ -100,7 +100,7 @@ public final class CryptUtils {
             mac.init(secretKeySpec);
             macBytes = mac.doFinal(text.getBytes());
         } catch (Exception e) {
-            Log.e("cgBase.hashHmac", e);
+            Log.e("CryptUtils.hashHmac", e);
         }
 
         return macBytes;
