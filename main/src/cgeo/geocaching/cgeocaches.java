@@ -14,8 +14,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.ExportFactory;
 import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.filter.FilterUserInterface;
-import cgeo.geocaching.filter.IFilter;
+import cgeo.geocaching.filter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
@@ -750,25 +749,13 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             case MENU_FILTER:
                 showFilterMenu(null);
                 return true;
-                        case MENU_NEGATE_FILTER:
+            case MENU_NEGATE_FILTER:
                 if (filter != null) {
                 cacheList.clear();
-                    cacheList.addAll(adapter.negateFilter(filter));
-
-                    int duplicates = 0;
-                    int size = cacheList.size();
-                    for (int i = 0; i < size - 1; i++) {
-                        for (int j = i + 1; j < size; j++) {
-                            if (!cacheList.get(j).equals(cacheList.get(i))) {
-                                continue;
-                            }
-                            duplicates++;
-                            cacheList.remove(j);
-                            j--;
-                            size--;
-                        }
+                cacheList.addAll(adapter.negateFilter(filter));
+                adapter.notifyDataSetChanged();
                 }
-                }
+                return true;
             case MENU_SORT:
                 new ComparatorUserInterface(this).selectComparator(adapter.getCacheComparator(), new RunnableWithArgument<CacheComparator>() {
                     @Override
