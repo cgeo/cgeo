@@ -16,5 +16,4 @@ public interface IFilter {
 
     public void filter(final List<Geocache> list);
     
-        public void notfilter(final List<Geocache> list);
 }
