@@ -34,6 +34,7 @@
     <string name="ape">Project Ape cache</string>
     <string name="gchq">Groundspeak hq</string>
     <string name="gps">Fiera GPS cache</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Tipo sconosciuto</string>
 
     <!-- cache sizes -->
@@ -470,7 +471,7 @@
     <string name="sendToCgeo_download_fail">c:geo non riesce a scaricare cache. Nessuna connessione internet o server send2c:geo non attivo.</string>
     <string name="sendToCgeo_no_registration">c:geo non riesce a scaricare cache. La registrazione a send2c:geo è scaduta. Si prega di ripeterla nei settaggi.</string>
 
-    <!-- auth -->
+    <!-- auth twitter -->
     <string name="auth_twitter">Twitter</string>
     <string name="auth_authorize">Autorizza c:geo</string>
     <string name="auth_start">Avvia autorizzazione</string>
@@ -481,7 +482,23 @@
     <string name="auth_dialog_pin_title">Codice PIN</string>
     <string name="auth_dialog_pin_message">Prego inserire il codice PIN fornito dal sito Twitter. È necessario per completare l\'autorizzazione.</string>
     <string name="auth_dialog_completed">c:geo è ora autorizzato ad inviare a Twitter.</string>
+	<string name="about_auth_1">La procedura seguente consente a <b>c:geo</b> di accedere a Twitter - se consentito.</string>
+	<string name="about_auth_2">Un click sul pulsante \"Autorizza c:geo\" inizerà la procedura. Verrà aperta la pagina di Twitter nel browser. Effettua Login sulla pagina ed acconsenti a <b>c:geo</b> di accedere al tuo account. Se accettato, Twitter mostrerà un codice PIN numerico. Devi riportare o incollare il PIN in <b>c:geo</b> e confermare.</string>
 
+	<!-- auth opencaching -->
+	<string name="auth_ocde">opencaching.de</string>
+	<string name="auth_authorize_oc">Autorizza c:geo</string>
+	<string name="auth_start_oc">Start autorizzazione</string>
+	<string name="auth_again_oc">Start nuovamente</string>
+	<string name="auth_pin_hint_oc">PIN assegnato da %s</string>
+	<string name="auth_finish_oc">Fine</string>
+	<string name="auth_dialog_wait_oc">In attesa di %s…</string>
+	<string name="auth_dialog_pin_title_oc">PIN code</string>
+	<string name="auth_dialog_pin_message_oc">Prego riportare il PIN fornito dal sito %s. È necessario per completare l\'autorizzazione.</string>
+	<string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
+	<string name="about_auth_1_oc">La procedura seguente consentirà a <b>c:geo</b> di accedere a %s - se confermata.</string>
+	<string name="about_auth_2_oc">Un click sul pulsante \"Autorizza c:geo\" inizierà la procedura. Verrà aperta la pagina %s nel browser. Effettua Login sulla pagina ed acconsenti a <b>c:geo</b> di accedere al tuo account. Se accettatto, %s mostrerà un codice PIN. Devi riportare il PIN in <b>c:geo</b> e confermare.</string>
+  
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">Un cache</item>
@@ -818,6 +835,8 @@
     <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del dispositivo.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
+	<string name="helper_pocketquery_title">Creatore di Pocket Query</string>
+	<string name="helper_pocketquery_description">Consente di creare facilmente Pocket Queries centrate sulla tua posizione attuale o un punto scelto dalla mappa. Richiede un account premium su Geocaching.com.</string>
 
     <!-- add-ons -->
     <string name="addon_missing_title">Add-On mancante</string>
@@ -1029,6 +1048,8 @@
     <string name="attribute_ask_owner_no">Non chiedere al proprietario per le condizioni di partenza</string>
     <string name="attribute_unknown_yes">Attributo sconosciuto</string>
     <string name="attribute_unknown_no">Senza attributo sconosciuto</string>
+	<string name="attribute_geotour_yes">Parte di un GeoTour</string>
+	<string name="attribute_geotour_no">Non fa parte di un GeoTour</string>
 
     <!-- next things -->
     <string name="legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del <a href="http://www.geocaching.com/about/termsofuse.aspx">Contratto Groundspeak</a> che deve essere approvato dall\'utente.</string>
@@ -1058,6 +1079,8 @@
     <string name="tts_stop">Stop voce</string>
     <string name="tts_kilometers">%s chilometri</string>
     <string name="tts_meters">%s metri</string>
+	<string name="tts_miles">%s miglia</string>
+	<string name="tts_feet">%s piedi</string>
     <string name="tts_oclock">%s precisi</string>
 
     <!-- various -->
