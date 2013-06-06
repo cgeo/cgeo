@@ -40,7 +40,7 @@ public class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
             }
 
         } catch (Exception e) {
-            Log.i("GoogleMapsDirection: application not available.");
+            Log.i("GoogleMapsDirectionApp: application not available.", e);
         }
 
     }

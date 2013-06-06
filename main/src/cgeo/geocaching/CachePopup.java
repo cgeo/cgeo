@@ -94,7 +94,7 @@ public class CachePopup extends AbstractPopupActivity {
             CacheDetailActivity.updateOfflineBox(findViewById(android.R.id.content), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
         } catch (Exception e) {
-            Log.e("cgeopopup.init", e);
+            Log.e("CachePopup.init", e);
         }
 
         // cache is loaded. remove progress-popup if any there

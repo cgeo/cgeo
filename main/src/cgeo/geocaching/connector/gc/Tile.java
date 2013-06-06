@@ -243,7 +243,7 @@ public class Tile {
         try {
             return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
         } catch (IOException e) {
-            Log.e("cgBase.requestMapTile() " + e.getMessage());
+            Log.e("Tile.requestMapTile() ", e);
         }
         return null;
     }

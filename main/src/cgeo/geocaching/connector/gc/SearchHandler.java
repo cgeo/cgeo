@@ -102,7 +102,7 @@ public class SearchHandler extends Handler {
 
                 imgHandler.sendEmptyMessage(0);
             } catch (IOException e) {
-                Log.e("Failed to download reCAPTCHA image");
+                Log.e("Failed to download reCAPTCHA image", e);
             }
         }
     }

@@ -154,10 +154,10 @@ public class GPXImporter {
 
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED, search.getCount(), 0, search));
             } catch (IOException e) {
-                Log.i("Importing caches failed - error reading data: " + e.getMessage());
+                Log.i("Importing caches failed - error reading data: ", e);
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_io, 0, e.getLocalizedMessage()));
             } catch (ParserException e) {
-                Log.i("Importing caches failed - data format error" + e.getMessage());
+                Log.i("Importing caches failed - data format error", e);
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_parser, 0, e.getLocalizedMessage()));
             } catch (CancellationException e) {
                 Log.i("Importing caches canceled");

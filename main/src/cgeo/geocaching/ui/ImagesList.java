@@ -186,7 +186,7 @@ public class ImagesList {
             stream = new BufferedOutputStream(new FileOutputStream(file));
             image.getBitmap().compress(CompressFormat.JPEG, 100, stream);
         } catch (Exception e) {
-            Log.e("ImagesActivity.handleMessage.onClick", e);
+            Log.e("ImagesList.viewImageInStandardApp", e);
             return;
         } finally {
             IOUtils.closeQuietly(stream);

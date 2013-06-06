@@ -76,7 +76,7 @@ public class ImageHelper {
             bos.flush();
             bos.close();
         } catch (Exception e) {
-            Log.e("Image", e);
+            Log.e("ImageHelper.storeBitmap", e);
         }
     }
 }

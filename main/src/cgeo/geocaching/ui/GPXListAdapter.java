@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.GpxFileListActivity;
+import cgeo.geocaching.R;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.utils.Log;
 
@@ -39,7 +39,7 @@ public class GPXListAdapter extends ArrayAdapter<File> {
         }
 
         if (position > getCount()) {
-            Log.w("cgGPXListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w("GPXListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 

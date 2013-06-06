@@ -297,7 +297,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
     @Override
@@ -345,7 +345,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
                 return result.getDouble("elevation");
             }
         } catch (Exception e) {
-            Log.w("cgBase.getElevation", e);
+            Log.w("Geopoint.getElevation", e);
         }
 
         return null;
