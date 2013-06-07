@@ -34,6 +34,7 @@
     <string name="ape">Project Ape cache</string>
     <string name="gchq">Groundspeak hq</string>
     <string name="gps">Fiera GPS cache</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Tipo sconosciuto</string>
 
     <!-- cache sizes -->
@@ -285,10 +286,12 @@
     <string name="caches_sort_size">Dimensione</string>
     <string name="caches_sort_favorites">Popolarità</string>
     <string name="caches_sort_name">Nome</string>
+    <string name="caches_sort_geocode">Geo Code</string>
     <string name="caches_sort_rating">Voto</string>
     <string name="caches_sort_vote">Il tuo voto</string>
     <string name="caches_sort_inventory">Oggetti trackables</string>
     <string name="caches_sort_date_hidden">Data</string>
+    <string name="caches_sort_date_logged">Data Log</string>
     <string name="caches_sort_finds">Numero ritrovamenti</string>
     <string name="caches_sort_state">Stato</string>
     <string name="caches_sort_storage">Data salvataggio</string>
@@ -330,11 +333,13 @@
     <!-- caches lists -->
     <string name="list_menu">Lista</string>
     <string name="list_menu_create">Crea nuova lista</string>
+    <string name="list_menu_all_lists">Tutte i cache</string>
     <string name="list_menu_drop">Elimina la lista corrente</string>
     <string name="list_menu_change">Cambia lista</string>
     <string name="list_menu_rename">Rinomina la lista corrente</string>
     <string name="list_title">Seleziona una lista</string>
     <string name="list_inbox">Salvate</string>
+    <string name="list_all_lists">Tutti i cache</string>
     <string name="list_dialog_create_title">Nuova lista</string>
     <string name="list_dialog_create">Crea</string>
     <string name="list_dialog_cancel">Annulla</string>
@@ -361,6 +366,8 @@
     <string name="init_gc_activate">Attiva Geocaching.com su mappa live e nelle ricerche</string>
     <string name="init_oc">opencaching.de</string>
     <string name="init_oc_activate">Attiva opencaching.de su mappa live e nelle ricerche</string>
+    <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
+    <string name="init_register_oc_de">Autorizza c:geo</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Utente</string>
@@ -384,6 +391,7 @@
     <string name="init_signature_template_datetime">Data e Ora</string>
     <string name="init_signature_template_user">Utente</string>
     <string name="init_signature_template_number">Numero cache</string>
+    <string name="init_signature_template_owner">Proprietario</string>
     <string name="init_details">Dettagli cache</string>
     <string name="init_ratingwanted">Carica il rating del cache da GCvote.com</string>
     <string name="init_elevationwanted">Carica dati altitudine cache</string>
@@ -482,8 +490,23 @@
     <string name="auth_dialog_pin_message">Prego inserire il codice PIN fornito dal sito Twitter. È necessario per completare l\'autorizzazione.</string>
     <string name="auth_dialog_completed">c:geo è ora autorizzato ad inviare a Twitter.</string>
 
+    <!-- auth opencaching -->
+    <string name="auth_ocde">opencaching.de</string>
+    <string name="auth_authorize_oc">Autorizza c:geo</string>
+    <string name="auth_start_oc">Start autorizzazione</string>
+    <string name="auth_again_oc">Start nuovamente</string>
+    <string name="auth_pin_hint_oc">PIN assegnato da %s</string>
+    <string name="auth_finish_oc">Fine</string>
+    <string name="auth_dialog_wait_oc">In attesa di %s…</string>
+    <string name="auth_dialog_pin_title_oc">PIN code</string>
+    <string name="auth_dialog_pin_message_oc">Prego riportare il PIN fornito dal sito %s. È necessario per completare l\'autorizzazione.</string>
+    <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
+    <string name="about_auth_1_oc">La procedura seguente consentirà a <b>c:geo</b></string>
+    <string name="about_auth_2_oc">Un click sul pulsante \"Autorizza c:geo\" inizierà la procedura. Verrà aperta la pagina %s nel browser. Effettua Login sulla pagina ed acconsenti a <b>c:geo</b></string>
+
     <!-- cache -->
     <plurals name="cache_counts">
+        <item quantity="zero">Nessun cache</item>
         <item quantity="one">Un cache</item>
         <item quantity="other">%1$d cache</item>
     </plurals>
@@ -507,6 +530,7 @@
     <string name="cache_log_images_title">Immagini Log</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Note personali</string>
+    <string name="cache_personal_note_edit">Modifica</string>
     <string name="cache_personal_note_unstored">Cache non salvati</string>
     <string name="cache_personal_note_store">Il cache verrà prima salvato per abilitare le note personali.</string>
     <string name="cache_description">Descrizione</string>
@@ -591,6 +615,8 @@
     <string name="cache_status_disabled">Non attivo</string>
     <string name="cache_status_premium">Solo per utenti Premium</string>
     <string name="cache_status_not_premium">Per tutti gli utenti</string>
+    <string name="cache_status_stored">Salvato</string>
+    <string name="cache_status_not_stored">Non salvato</string>
     <string name="cache_geocode">geo code</string>
     <string name="cache_name">Nome</string>
     <string name="cache_type">Tipo</string>
@@ -743,6 +769,8 @@
     <string name="search_coordinates_button">Cerca per coordinate</string>
     <string name="search_address">Indirizzo</string>
     <string name="search_address_button">Cerca per indirizzo</string>
+    <string name="search_geo">Geo code</string>
+    <string name="search_geo_button">Cerca per geo code</string>
     <string name="search_kw">Parole chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
@@ -818,7 +846,8 @@
     <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del dispositivo.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
-
+    <string name="helper_pocketquery_title">Creatore di Pocket Query</string>
+    <string name="helper_pocketquery_description">Consente di creare facilmente Pocket Queries centrate sulla tua posizione attuale o un punto scelto dalla mappa. Richiede un account premium su Geocaching.com.</string>
     <!-- add-ons -->
     <string name="addon_missing_title">Add-On mancante</string>
     <string name="addon_download_prompt">Scaricalo ora da Google Play.</string>
@@ -1029,6 +1058,8 @@
     <string name="attribute_ask_owner_no">Non chiedere al proprietario per le condizioni di partenza</string>
     <string name="attribute_unknown_yes">Attributo sconosciuto</string>
     <string name="attribute_unknown_no">Senza attributo sconosciuto</string>
+    <string name="attribute_geotour_yes">Parte di un GeoTour</string>
+    <string name="attribute_geotour_no">Non fa parte di un GeoTour</string>
 
     <!-- next things -->
     <string name="legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del <a href="http://www.geocaching.com/about/termsofuse.aspx">Contratto Groundspeak</a> che deve essere approvato dall\'utente.</string>
@@ -1058,6 +1089,8 @@
     <string name="tts_stop">Stop voce</string>
     <string name="tts_kilometers">%s chilometri</string>
     <string name="tts_meters">%s metri</string>
+    <string name="tts_miles">%s miglia</string>
+    <string name="tts_feet">%s piedi</string>
     <string name="tts_oclock">%s precisi</string>
 
     <!-- various -->
