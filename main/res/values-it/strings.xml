@@ -506,7 +506,6 @@
 
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="zero">Nessun cache</item>
         <item quantity="one">Un cache</item>
         <item quantity="other">%1$d cache</item>
     </plurals>
