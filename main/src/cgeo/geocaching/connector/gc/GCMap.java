@@ -237,7 +237,7 @@ public class GCMap {
             Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
         } catch (Exception e) {
-            Log.e("GCBase.parseMapJSON", e);
+            Log.e("GCMap.parseMapJSON", e);
         }
 
         return searchResult;
@@ -283,7 +283,7 @@ public class GCMap {
      * @return
      */
     private static SearchResult searchByViewport(final Viewport viewport, final String[] tokens, Strategy strategy) {
-        Log.d("GCBase.searchByViewport" + viewport.toString());
+        Log.d("GCMap.searchByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();
         searchResult.setUrl(GCConstants.URL_LIVE_MAP + "?ll=" + viewport.getCenter().getLatitude() + "," + viewport.getCenter().getLongitude());
@@ -330,11 +330,11 @@ public class GCMap {
 
                     String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP);
                     if (StringUtils.isEmpty(data)) {
-                        Log.w("GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                        Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
                     } else {
                         final SearchResult search = GCMap.parseMapJSON(data, tile, bitmap, strategy);
                         if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
-                            Log.e("GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+                            Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
                         }
                         else {
                             searchResult.addGeocodes(search.getGeocodes());

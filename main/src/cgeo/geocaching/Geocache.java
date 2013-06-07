@@ -1637,7 +1637,7 @@ public class Geocache implements ICache, IWaypoint {
                 handler.sendMessage(Message.obtain());
             }
         } catch (Exception e) {
-            Log.e("cgBase.storeCache");
+            Log.e("Geocache.storeCache", e);
         }
     }
 

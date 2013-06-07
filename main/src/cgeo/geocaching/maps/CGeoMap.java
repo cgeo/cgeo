@@ -592,7 +592,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             menu.findItem(R.id.menu_strategy_auto).setChecked(strategy == Strategy.AUTO);
             menu.findItem(R.id.menu_strategy_detailed).setChecked(strategy == Strategy.DETAILED);
         } catch (Exception e) {
-            Log.e("cgeomap.onPrepareOptionsMenu", e);
+            Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
 
         return true;
@@ -1032,7 +1032,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     yield();
                 } catch (Exception e) {
-                    Log.w("cgeomap.LoadTimer.run", e);
+                    Log.w("CGeoMap.LoadTimer.run", e);
                 }
             }
         }
@@ -1328,7 +1328,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     geoDirUpdate.startDir();
                 } catch (Exception e) {
-                    Log.e("cgeocaches.onPrepareOptionsMenu.onCancel", e);
+                    Log.e("CGeoMap.storeCaches.onCancel", e);
                 }
             }
         });
@@ -1406,7 +1406,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         Geocache.storeCache(null, geocode, listId, false, handler);
                     }
                 } catch (Exception e) {
-                    Log.e("cgeocaches.LoadDetails.run", e);
+                    Log.e("CGeoMap.LoadDetails.run", e);
                 } finally {
                     // one more cache over
                     detailProgress++;

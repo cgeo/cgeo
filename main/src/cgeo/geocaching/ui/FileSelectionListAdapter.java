@@ -33,7 +33,7 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
         }
 
         if (position > getCount()) {
-            Log.w("cgGPXListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w("FileSelectionListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 

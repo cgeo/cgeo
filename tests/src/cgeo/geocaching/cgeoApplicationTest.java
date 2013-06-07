@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
@@ -51,7 +52,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchTrackable(String, String, String)}
+     * Test {@link GCParser#searchTrackable(String, String, String)}
      */
     @MediumTest
     public static void testSearchTrackableNotExisting() {
@@ -60,7 +61,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchTrackable(String, String, String)}
+     * Test {@link GCParser#searchTrackable(String, String, String)}
      */
     @MediumTest
     public static void testSearchTrackable() {
@@ -99,7 +100,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link GCParser#searchByGeocode(String, String, int, boolean, CancellableHandler)}
      */
     @MediumTest
     public static Geocache testSearchByGeocode(final String geocode) {
@@ -115,7 +116,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
      */
     @MediumTest
     public static void testSearchByGeocodeNotExisting() {
@@ -125,7 +126,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
      */
     @MediumTest
     public static void testSearchByGeocodeNotLoggedIn() {
@@ -164,7 +165,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
      */
     @MediumTest
     public static void testSearchErrorOccured() {
@@ -213,7 +214,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByCoords(AbstractSearchThread, Geopoint, String, int, boolean)}
+     * Test {@link GCParser#searchByCoords(Geopoint, CacheType, boolean, RecaptchaReceiver)}
      */
     @MediumTest
     public static void testSearchByCoords() {
@@ -230,7 +231,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByOwner(String, String, int, boolean, CancellableHandler)}
+     * Test {@link GCParser#searchByOwner(String, CacheType, boolean, RecaptchaReceiver)}
      */
     @MediumTest
     public static void testSearchByOwner() {
@@ -247,7 +248,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByUsername(String, String, int, boolean, CancellableHandler)}
+     * Test {@link GCParser#searchByUsername(String, CacheType, boolean, RecaptchaReceiver)}
      */
     @MediumTest
     public static void testSearchByUsername() {
@@ -264,7 +265,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByViewport(String, Viewport)}
+     * Test {@link ConnectorFactory#searchByViewport(Viewport, String)}
      */
     @MediumTest
     public static void testSearchByViewport() {
@@ -319,7 +320,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link cgBase#searchByViewport(String, Viewport)}
+     * Test {@link ConnectorFactory#searchByViewport(Viewport, String)}
      */
     @MediumTest
     public static void testSearchByViewportNotLoggedIn() {
