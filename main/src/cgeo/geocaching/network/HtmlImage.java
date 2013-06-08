@@ -43,7 +43,8 @@ public class HtmlImage implements Html.ImageGetter {
             "hitwebcounter.com",
             "kostenloser-counter.eu",
             "trendcounter.com",
-            "hit-counter-download.com"
+            "hit-counter-download.com,
+            gcwetterau.de/counter/newcounter.png"
     };
     public static final String SHARED = "shared";
 
