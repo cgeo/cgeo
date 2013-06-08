@@ -112,7 +112,6 @@
         </activity>
         <activity
             android:name=".EditWaypointActivity"
-            android:configChanges="keyboardHidden|orientation"
             android:label="@string/waypoint_edit_title"
             android:windowSoftInputMode="stateHidden" >
         </activity>
