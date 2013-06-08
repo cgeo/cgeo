@@ -37,28 +37,36 @@ public final class CryptUtils {
         }
     }
 
+    private static class Rot13Encryption {
+        private boolean plaintext = false;
+
+        char getNextEncryptedCharacter(final char c) {
+            int result = c;
+            if (result == '[') {
+                plaintext = true;
+            } else if (result == ']') {
+                plaintext = false;
+            } else if (!plaintext) {
+                int capitalized = result & 32;
+                result &= ~capitalized;
+                result = ((result >= 'A') && (result <= 'Z') ? ((result - 'A' + 13) % 26 + 'A') : result)
+                        | capitalized;
+            }
+            return (char) result;
+        }
+    }
+
     public static String rot13(String text) {
         if (text == null) {
             return "";
         }
         final StringBuilder result = new StringBuilder();
-        // plaintext flag (do not convert)
-        boolean plaintext = false;
+        Rot13Encryption rot13 = new Rot13Encryption();
 
         final int length = text.length();
         for (int index = 0; index < length; index++) {
-            int c = text.charAt(index);
-            if (c == '[') {
-                plaintext = true;
-            } else if (c == ']') {
-                plaintext = false;
-            } else if (!plaintext) {
-                int capitalized = c & 32;
-                c &= ~capitalized;
-                c = ((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c)
-                        | capitalized;
-            }
-            result.append((char) c);
+            char c = text.charAt(index);
+            result.append(rot13.getNextEncryptedCharacter(c));
         }
         return result.toString();
     }
@@ -111,22 +119,12 @@ public final class CryptUtils {
         // a SpannableStringBuilder instead of the pure text and we must replace each character inline.
         // Otherwise we loose all the images, colors and so on...
         final SpannableStringBuilder buffer = new SpannableStringBuilder(span);
-        boolean plaintext = false;
+        Rot13Encryption rot13 = new Rot13Encryption();
 
         final int length = span.length();
         for (int index = 0; index < length; index++) {
-            int c = span.charAt(index);
-            if (c == '[') {
-                plaintext = true;
-            } else if (c == ']') {
-                plaintext = false;
-            } else if (!plaintext) {
-                int capitalized = c & 32;
-                c &= ~capitalized;
-                c = ((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c)
-                        | capitalized;
-            }
-            buffer.replace(index, index + 1, String.valueOf((char) c));
+            char c = span.charAt(index);
+            buffer.replace(index, index + 1, String.valueOf(rot13.getNextEncryptedCharacter(c)));
         }
         return buffer;
     }
