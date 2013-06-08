@@ -52,6 +52,8 @@ import java.util.TimeZone;
 
 final public class OkapiClient {
 
+    private static final char SEPARATOR = '|';
+    private static final String SEPARATOR_STRING = Character.toString(SEPARATOR);
     private static final SimpleDateFormat logDateFormat;
 
     static {
@@ -135,7 +137,7 @@ final public class OkapiClient {
 
     // Assumes level 3 OAuth
     public static List<Geocache> getCachesAround(final Geopoint center, OCApiConnector connector) {
-        String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
+        String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("center", centerString);
@@ -169,9 +171,9 @@ final public class OkapiClient {
         }
 
         String bboxString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.bottomLeft)
-                + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.bottomLeft)
-                + "|" + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
-                + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight);
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.bottomLeft)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight);
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_BBOX);
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("bbox", bboxString);
@@ -482,8 +484,8 @@ final public class OkapiClient {
     }
 
     private static Geopoint parseCoords(final String location) {
-        final String latitude = StringUtils.substringBefore(location, "|");
-        final String longitude = StringUtils.substringAfter(location, "|");
+        final String latitude = StringUtils.substringBefore(location, SEPARATOR_STRING);
+        final String longitude = StringUtils.substringAfter(location, SEPARATOR_STRING);
         if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
             return new Geopoint(latitude, longitude);
         }
@@ -512,8 +514,8 @@ final public class OkapiClient {
     }
 
     private static void setLocation(final Geocache cache, final String location) {
-        final String latitude = StringUtils.substringBefore(location, "|");
-        final String longitude = StringUtils.substringAfter(location, "|");
+        final String latitude = StringUtils.substringBefore(location, SEPARATOR_STRING);
+        final String longitude = StringUtils.substringAfter(location, SEPARATOR_STRING);
         cache.setCoords(new Geopoint(latitude, longitude));
     }
 
@@ -579,7 +581,7 @@ final public class OkapiClient {
         }
 
         if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            return SERVICE_CACHE_CORE_FIELDS + "|" + SERVICE_CACHE_CORE_L3_FIELDS;
+            return SERVICE_CACHE_CORE_FIELDS + SEPARATOR + SERVICE_CACHE_CORE_L3_FIELDS;
         }
 
         return SERVICE_CACHE_CORE_FIELDS;
@@ -594,13 +596,13 @@ final public class OkapiClient {
         StringBuilder res = new StringBuilder(500);
 
         res.append(SERVICE_CACHE_CORE_FIELDS);
-        res.append("|").append(SERVICE_CACHE_ADDITIONAL_FIELDS);
+        res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_FIELDS);
         if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            res.append("|").append(SERVICE_CACHE_CORE_L3_FIELDS);
-            res.append("|").append(SERVICE_CACHE_ADDITIONAL_L3_FIELDS);
+            res.append(SEPARATOR).append(SERVICE_CACHE_CORE_L3_FIELDS);
+            res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_L3_FIELDS);
         }
         if (connector.getApiSupport() == ApiSupport.current) {
-            res.append("|").append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS);
+            res.append(SEPARATOR).append(SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS);
         }
 
         return res.toString();
