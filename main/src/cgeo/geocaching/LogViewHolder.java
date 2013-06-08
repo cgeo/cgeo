@@ -1,13 +1,14 @@
 package cgeo.geocaching;
 
 import butterknife.InjectView;
-import butterknife.Views;
+
+import cgeo.geocaching.ui.AbstractViewHolder;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class LogViewHolder {
+public class LogViewHolder extends AbstractViewHolder {
     @InjectView(R.id.added) protected TextView date ;
     @InjectView(R.id.type) protected TextView type;
     @InjectView(R.id.author) protected TextView author;
@@ -19,14 +20,13 @@ public class LogViewHolder {
     private int position;
 
     public LogViewHolder(View rowView) {
-        Views.inject(this, rowView);
-        rowView.setTag(this);
+        super(rowView);
     }
 
     /**
      * Read the position of the cursor pointed to by this holder. <br/>
      * This must be called by the UI thread.
-     * 
+     *
      * @return the cursor position
      */
     public int getPosition() {
@@ -36,7 +36,7 @@ public class LogViewHolder {
     /**
      * Set the position of the cursor pointed to by this holder. <br/>
      * This must be called by the UI thread.
-     * 
+     *
      * @param position
      *            the cursor position
      */

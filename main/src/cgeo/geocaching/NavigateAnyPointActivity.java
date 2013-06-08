@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -62,14 +63,13 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private String distanceUnit = "";
 
-    protected static class ViewHolder {
+    protected static class ViewHolder extends AbstractViewHolder {
         @InjectView(R.id.simple_way_point_longitude) protected TextView longitude;
         @InjectView(R.id.simple_way_point_latitude) protected TextView latitude;
         @InjectView(R.id.date) protected TextView date;
 
         public ViewHolder(View rowView) {
-            Views.inject(this, rowView);
-            rowView.setTag(this);
+            super(rowView);
         }
     }
 

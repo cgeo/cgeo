@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import butterknife.InjectView;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
@@ -24,9 +26,13 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     final private LayoutInflater inflater;
     final private Geopoint location;
 
-    private static final class ViewHolder {
-        TextView label;
-        TextView distance;
+    protected static final class ViewHolder extends AbstractViewHolder {
+        @InjectView(R.id.label) protected TextView label;
+        @InjectView(R.id.distance) protected TextView distance;
+
+        public ViewHolder(View view) {
+            super(view);
+        }
     }
 
     public AddressListAdapter(final Context context) {
@@ -45,12 +51,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
         final ViewHolder holder;
         if (view == null) {
             view = inflater.inflate(R.layout.addresses_item, null);
-
-            holder = new ViewHolder();
-            holder.label = (TextView) view.findViewById(R.id.label);
-            holder.distance = (TextView) view.findViewById(R.id.distance);
-
-            view.setTag(holder);
+            holder = new ViewHolder(view);
         } else {
             holder = (ViewHolder) view.getTag();
         }

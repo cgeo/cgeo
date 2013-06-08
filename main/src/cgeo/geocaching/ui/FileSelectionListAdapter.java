@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import butterknife.InjectView;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.utils.Log;
@@ -17,21 +19,18 @@ import java.util.List;
 
 public class FileSelectionListAdapter extends ArrayAdapter<File> {
 
-    private IFileSelectionView parentView;
-    private LayoutInflater inflater;
+    private final IFileSelectionView parentView;
+    private final LayoutInflater inflater;
 
     public FileSelectionListAdapter(IFileSelectionView parentIn, List<File> listIn) {
         super(parentIn.getContext(), 0, listIn);
 
         parentView = parentIn;
+        inflater = ((Activity) getContext()).getLayoutInflater();
     }
 
     @Override
     public View getView(final int position, final View rowView, final ViewGroup parent) {
-        if (inflater == null) {
-            inflater = ((Activity) getContext()).getLayoutInflater();
-        }
-
         if (position > getCount()) {
             Log.w("FileSelectionListAdapter.getView: Attempt to access missing item #" + position);
             return null;
@@ -44,12 +43,7 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
         ViewHolder holder;
         if (v == null) {
             v = inflater.inflate(R.layout.mapfile_item, null);
-
-            holder = new ViewHolder();
-            holder.filepath = (TextView) v.findViewById(R.id.mapfilepath);
-            holder.filename = (TextView) v.findViewById(R.id.mapfilename);
-
-            v.setTag(holder);
+            holder = new ViewHolder(v);
         } else {
             holder = (ViewHolder) v.getTag();
         }
@@ -85,8 +79,12 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
         }
     }
 
-    private static final class ViewHolder {
-        TextView filepath;
-        TextView filename;
+    protected static final class ViewHolder extends AbstractViewHolder {
+        @InjectView(R.id.mapfilepath) protected TextView filepath;
+        @InjectView(R.id.mapfilename) protected TextView filename;
+
+        public ViewHolder(View view) {
+            super(view);
+        }
     }
 }

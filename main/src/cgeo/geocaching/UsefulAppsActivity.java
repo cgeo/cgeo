@@ -4,6 +4,7 @@ import butterknife.InjectView;
 import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.ui.AbstractViewHolder;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,13 +21,13 @@ public class UsefulAppsActivity extends AbstractActivity {
 
     @InjectView(R.id.apps_list) protected ListView list;
 
-    protected static class ViewHolder {
+    protected static class ViewHolder extends AbstractViewHolder {
         @InjectView(R.id.title) protected TextView title;
         @InjectView(R.id.image) protected ImageView image;
         @InjectView(R.id.description) protected TextView description;
 
         public ViewHolder(View rowView) {
-            Views.inject(this, rowView);
+            super(rowView);
         }
     }
 
@@ -80,7 +81,6 @@ public class UsefulAppsActivity extends AbstractActivity {
                 ViewHolder holder = (ViewHolder) rowView.getTag();
                 if (null == holder) {
                     holder = new ViewHolder(rowView);
-                    rowView.setTag(holder);
                 }
 
                 final HelperApp app = getItem(position);
