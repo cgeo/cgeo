@@ -296,11 +296,7 @@ public abstract class GPXParser extends FileParser {
                     }
                 }
 
-                if (StringUtils.isNotBlank(cache.getGeocode())
-                        && cache.getCoords() != null
-                        && ((type == null && sym == null)
-                                || StringUtils.contains(type, "geocache")
-                                || StringUtils.contains(sym, "geocache"))) {
+                if (isValidForImport()) {
                     fixCache(cache);
                     cache.setListId(listId);
                     cache.setDetailed(true);
@@ -447,6 +443,17 @@ public abstract class GPXParser extends FileParser {
                 if (matcherCode.matches()) {
                     String geocode = matcherCode.group(1);
                     cache.setGeocode(geocode);
+                }
+            }
+        });
+
+        // waypoint.urlname (name for waymarks)
+        waypoint.getChild(namespace, "urlname").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String urlName) {
+                if (cache.getName().equals(cache.getGeocode()) && StringUtils.startsWith(cache.getGeocode(), "WM")) {
+                    cache.setName(StringUtils.trim(urlName));
                 }
             }
         });
@@ -891,5 +898,18 @@ public abstract class GPXParser extends FileParser {
                 cache.setPersonalNote(note);
             }
         }
+    }
+
+    private boolean isValidForImport() {
+        if (StringUtils.isBlank(cache.getGeocode())) {
+            return false;
+        }
+        if (cache.getCoords() == null) {
+            return false;
+        }
+        return ((type == null && sym == null)
+                || StringUtils.contains(type, "geocache")
+                || StringUtils.contains(sym, "geocache")
+                || StringUtils.containsIgnoreCase(sym, "waymark"));
     }
 }
