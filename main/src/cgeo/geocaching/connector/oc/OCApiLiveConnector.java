@@ -27,6 +27,11 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
+    public boolean isActivated() {
+        return Settings.isOCConnectorActive();
+    }
+
+    @Override
     public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
         return new SearchResult(OkapiClient.getCachesBBox(viewport, this));
     }
