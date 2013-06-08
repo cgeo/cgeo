@@ -1561,9 +1561,12 @@ public class Geocache implements ICache, IWaypoint {
             Geocache cache;
             // get cache details, they may not yet be complete
             if (origCache != null) {
+                SearchResult search = null;
                 // only reload the cache if it was already stored or doesn't have full details (by checking the description)
                 if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
-                    final SearchResult search = searchByGeocode(origCache.getGeocode(), null, listId, false, handler);
+                    search = searchByGeocode(origCache.getGeocode(), null, listId, false, handler);
+                }
+                if (search != null) {
                     cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 } else {
                     cache = origCache;
