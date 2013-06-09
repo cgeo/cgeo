@@ -1,36 +1,43 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.StaticMapsActivity_.IntentBuilder_;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.Log;
+
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.Extra;
+import com.googlecode.androidannotations.annotations.OptionsItem;
+import com.googlecode.androidannotations.annotations.OptionsMenu;
 
 import org.apache.commons.collections.CollectionUtils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@EActivity
+@OptionsMenu(R.menu.static_maps_activity_options)
 public class StaticMapsActivity extends AbstractActivity {
 
     private static final String EXTRAS_WAYPOINT = "waypoint";
     private static final String EXTRAS_DOWNLOAD = "download";
     private static final String EXTRAS_GEOCODE = "geocode";
+
+    @Extra(EXTRAS_DOWNLOAD) boolean download = false;
+    @Extra(EXTRAS_WAYPOINT) Integer waypoint_id = null;
+    @Extra(EXTRAS_GEOCODE) String geocode = null;
+
     private final List<Bitmap> maps = new ArrayList<Bitmap>();
-    private boolean download = false;
-    private Integer waypoint_id = null;
-    private String geocode = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private LinearLayout smapsView = null;
@@ -89,18 +96,6 @@ public class StaticMapsActivity extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.map_static);
 
-        // get parameters
-        final Bundle extras = getIntent().getExtras();
-
-        // try to get data from extras
-        if (extras != null) {
-            download = extras.getBoolean(EXTRAS_DOWNLOAD, false);
-            geocode = extras.getString(EXTRAS_GEOCODE);
-            if (extras.containsKey(EXTRAS_WAYPOINT)) {
-                waypoint_id = extras.getInt(EXTRAS_WAYPOINT);
-            }
-        }
-
         if (geocode == null) {
             showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
             finish();
@@ -156,20 +151,10 @@ public class StaticMapsActivity extends AbstractActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.static_maps_activity_options, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_refresh) {
-            downloadStaticMaps();
-            restartActivity();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    @OptionsItem(R.id.menu_refresh)
+    void refreshMaps() {
+        downloadStaticMaps();
+        restartActivity();
     }
 
     private boolean downloadStaticMaps() {
@@ -192,16 +177,10 @@ public class StaticMapsActivity extends AbstractActivity {
     }
 
     public static void startActivity(final Context activity, final String geocode, final boolean download, final Waypoint waypoint) {
-        final Intent intent = new Intent(activity, StaticMapsActivity.class);
-        // if resuming our app within this activity, finish it and return to the cache activity
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        intent.putExtra(EXTRAS_GEOCODE, geocode);
-        if (download) {
-            intent.putExtra(EXTRAS_DOWNLOAD, true);
-        }
+        IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
         if (waypoint != null) {
-            intent.putExtra(EXTRAS_WAYPOINT, waypoint.getId());
+            builder.waypoint_id(waypoint.getId());
         }
-        activity.startActivity(intent);
+        builder.start();
     }
 }
