@@ -126,7 +126,7 @@ public class SettingsActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.init);
+        super.onCreate(savedInstanceState, R.layout.settings_activity);
 
         init();
     }

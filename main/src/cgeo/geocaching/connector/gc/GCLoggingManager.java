@@ -4,7 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.TrackableLog;
-import cgeo.geocaching.VisitCacheActivity;
+import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
@@ -30,7 +30,7 @@ import java.util.List;
 
 public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCallbacks<String> {
 
-    private final VisitCacheActivity activity;
+    private final LogCacheActivity activity;
     private final Geocache cache;
 
     private String[] viewstates;
@@ -39,7 +39,7 @@ public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCa
     private boolean hasLoaderError = true;
 
     public GCLoggingManager(Activity activity, Geocache cache) {
-        this.activity = (VisitCacheActivity) activity;
+        this.activity = (LogCacheActivity) activity;
         this.cache = cache;
     }
 

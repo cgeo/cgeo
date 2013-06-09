@@ -47,7 +47,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class VisitCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
+public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
     static final String EXTRAS_GEOCODE = "geocode";
     static final String EXTRAS_ID = "id";
 
@@ -142,7 +142,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
         inventoryView.removeAllViews();
 
         for (TrackableLog tb : trackables) {
-            LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.visit_trackable, null);
+            LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, null);
 
             ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
             ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
@@ -164,7 +164,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
                 @Override
                 public void onClick(View view) {
-                    final Intent trackablesIntent = new Intent(VisitCacheActivity.this, TrackableActivity.class);
+                    final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
                     trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
                     startActivity(trackablesIntent);
                 }
@@ -223,7 +223,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.visit);
+        super.onCreate(savedInstanceState, R.layout.logcache_activity);
 
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
@@ -495,7 +495,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
 
         @Override
         public void onClick(View arg0) {
-            final Dialog dateDialog = new DateDialog(VisitCacheActivity.this, VisitCacheActivity.this, date);
+            final Dialog dateDialog = new DateDialog(LogCacheActivity.this, LogCacheActivity.this, date);
             dateDialog.setCancelable(true);
             dateDialog.show();
         }
@@ -507,7 +507,7 @@ public class VisitCacheActivity extends AbstractLoggingActivity implements DateD
             final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
                     R.string.log_saving :
                     R.string.log_saving_and_uploading);
-            new Poster(VisitCacheActivity.this, message).execute(currentLogText());
+            new Poster(LogCacheActivity.this, message).execute(currentLogText());
         }
     }
 

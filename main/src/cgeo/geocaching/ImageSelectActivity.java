@@ -64,7 +64,7 @@ public class ImageSelectActivity extends AbstractActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.visit_image);
+        super.onCreate(savedInstanceState, R.layout.imageselect_activity);
         Views.inject(this);
 
         scaleChoiceIndex = Settings.getLogImageScale();

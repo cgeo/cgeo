@@ -57,7 +57,7 @@ public class CompassActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.navigate);
+        super.onCreate(savedInstanceState, R.layout.compass_activity);
 
         final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         hasMagneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;

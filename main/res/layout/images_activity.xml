@@ -7,6 +7,6 @@
 
     <include layout="@layout/actionbar" />
 
-    <include layout="@layout/caches_images" />
+    <include layout="@layout/cachedetail_images_page" />
 
 </LinearLayout>

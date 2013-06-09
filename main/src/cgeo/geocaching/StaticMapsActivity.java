@@ -85,7 +85,7 @@ public class StaticMapsActivity extends AbstractActivity {
 
         for (final Bitmap image : maps) {
             if (image != null) {
-                final ImageView map = (ImageView) inflater.inflate(R.layout.map_static_item, null);
+                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, null);
                 map.setImageBitmap(image);
                 smapsView.addView(map);
             }
@@ -94,7 +94,7 @@ public class StaticMapsActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.map_static);
+        super.onCreate(savedInstanceState, R.layout.staticmaps_activity);
 
         if (geocode == null) {
             showToast("Sorry, c:geo forgot for what cache you want to load static maps.");

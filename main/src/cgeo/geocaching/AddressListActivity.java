@@ -20,7 +20,7 @@ public class AddressListActivity extends AbstractListActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.addresses);
+        super.onCreate(savedInstanceState, R.layout.addresslist_activity);
 
         // get parameters
         final String keyword = getIntent().getStringExtra(Intents.EXTRA_KEYWORD);

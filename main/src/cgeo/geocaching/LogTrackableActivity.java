@@ -115,7 +115,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.touch);
+        super.onCreate(savedInstanceState, R.layout.logtrackable_activity);
         Views.inject(this);
 
         // get parameters

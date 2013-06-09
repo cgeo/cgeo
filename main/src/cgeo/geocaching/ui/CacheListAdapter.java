@@ -354,7 +354,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         final ViewHolder holder;
         if (v == null) {
-            v = inflater.inflate(R.layout.caches_item, null);
+            v = inflater.inflate(R.layout.cacheslist_item, null);
 
             holder = new ViewHolder(v);
         } else {

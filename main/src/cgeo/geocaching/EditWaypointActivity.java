@@ -126,7 +126,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.edit_waypoint_activity);
+        super.onCreate(savedInstanceState, R.layout.editwaypoint_activity);
 
         // get parameters
         Bundle extras = getIntent().getExtras();

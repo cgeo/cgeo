@@ -67,16 +67,16 @@ public class UsefulAppsActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.useful_apps_activity);
+        super.onCreate(savedInstanceState, R.layout.usefulapps_activity);
 
         Views.inject(this);
 
-        list.setAdapter(new ArrayAdapter<HelperApp>(this, R.layout.useful_apps_item, HELPER_APPS) {
+        list.setAdapter(new ArrayAdapter<HelperApp>(this, R.layout.usefulapps_item, HELPER_APPS) {
             @Override
             public View getView(int position, View convertView, android.view.ViewGroup parent) {
                 View rowView = convertView;
                 if (null == rowView) {
-                    rowView = getLayoutInflater().inflate(R.layout.useful_apps_item, null);
+                    rowView = getLayoutInflater().inflate(R.layout.usefulapps_item, null);
                 }
                 ViewHolder holder = (ViewHolder) rowView.getTag();
                 if (null == holder) {

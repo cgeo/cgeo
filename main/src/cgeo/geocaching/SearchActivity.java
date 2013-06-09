@@ -78,7 +78,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         setTheme();
-        setContentView(R.layout.search);
+        setContentView(R.layout.search_activity);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));

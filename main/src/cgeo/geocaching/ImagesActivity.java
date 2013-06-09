@@ -45,7 +45,7 @@ public class ImagesActivity extends AbstractActivity {
 
         // init
         setTheme();
-        setContentView(R.layout.spoilers);
+        setContentView(R.layout.images_activity);
         setTitle(res.getString(imgType.getTitle()));
 
         imagesList = new ImagesList(this, geocode);

@@ -68,7 +68,7 @@ public final class CacheDetailsCreator {
         final LayoutInflater inflater = LayoutInflater.from(activity);
 
         for (int i = 0; i < 5; i++) {
-            ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
+            ImageView star = (ImageView) inflater.inflate(R.layout.star_image, null);
             if (value - i >= 0.75) {
                 star.setImageResource(R.drawable.star_on);
             } else if (value - i >= 0.25) {

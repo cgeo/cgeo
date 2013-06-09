@@ -172,7 +172,7 @@
             android:label="@string/map_static_title" >
         </activity>
         <activity
-            android:name=".VisitCacheActivity"
+            android:name=".LogCacheActivity"
             android:label="@string/log_new_log" >
         </activity>
         <activity

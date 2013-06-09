@@ -70,7 +70,7 @@
             <TextView
                 android:id="@+id/nav_location"
                 style="@style/location_current"
-                android:layout_above="@id/status"
+                android:layout_above="@+id/status"
                 android:layout_alignParentBottom="false"
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentTop="false"

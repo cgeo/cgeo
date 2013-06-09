@@ -72,7 +72,7 @@ public class CoordinatesInputDialog extends Dialog {
             // nothing
         }
 
-        setContentView(R.layout.coords);
+        setContentView(R.layout.coordinatesinput_dialog);
 
         final Spinner spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =

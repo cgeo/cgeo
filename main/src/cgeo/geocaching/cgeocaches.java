@@ -408,7 +408,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         super.onCreate(savedInstanceState);
 
         setTheme();
-        setContentView(R.layout.caches);
+        setContentView(R.layout.cacheslist_activity);
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -1000,7 +1000,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             if (inflater == null) {
                 inflater = getLayoutInflater();
             }
-            listFooter = inflater.inflate(R.layout.caches_footer, null);
+            listFooter = inflater.inflate(R.layout.cacheslist_footer, null);
             listFooter.setClickable(true);
             listFooter.setOnClickListener(new MoreCachesListener());
 

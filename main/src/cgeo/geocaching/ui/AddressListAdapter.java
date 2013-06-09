@@ -50,7 +50,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
         // holder pattern implementation
         final ViewHolder holder;
         if (view == null) {
-            view = inflater.inflate(R.layout.addresses_item, null);
+            view = inflater.inflate(R.layout.addresslist_item, null);
             holder = new ViewHolder(view);
         } else {
             holder = (ViewHolder) view.getTag();

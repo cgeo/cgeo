@@ -119,7 +119,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.point);
+        super.onCreate(savedInstanceState, R.layout.navigateanypoint_activity);
         Views.inject(this);
 
         createHistoryView();
@@ -127,7 +127,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     }
 
     private void createHistoryView() {
-        final View pointControls = getLayoutInflater().inflate(R.layout.point_controls, null);
+        final View pointControls = getLayoutInflater().inflate(R.layout.navigateanypoint_header, null);
         historyListView.addHeaderView(pointControls, null, false);
 
         // inject a second time to also find the dynamically expanded views above
@@ -197,7 +197,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private TextView getEmptyHistoryFooter() {
         if (historyFooter == null) {
-            historyFooter = (TextView) getLayoutInflater().inflate(R.layout.caches_footer, null);
+            historyFooter = (TextView) getLayoutInflater().inflate(R.layout.cacheslist_footer, null);
             historyFooter.setText(R.string.search_history_empty);
         }
         return historyFooter;

@@ -202,7 +202,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.cacheview);
+        super.onCreate(savedInstanceState, R.layout.cachedetail_activity);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.cache));
@@ -1155,7 +1155,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_details, null);
+            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
             if (Settings.isStoreOfflineMaps()) {
@@ -1776,7 +1776,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_description, null);
+            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_description_page, null);
             Views.inject(this, view);
 
             // cache short description
@@ -2108,7 +2108,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return null;
             }
 
-            view = (ListView) getLayoutInflater().inflate(R.layout.cacheview_logs, null);
+            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_logs_page, null);
 
             // log count
             final Map<LogType, Integer> logCounts = cache.getLogCounts();
@@ -2273,7 +2273,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_waypoints, null);
+            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, null);
 
             final LinearLayout waypoints = (LinearLayout) view.findViewById(R.id.waypoints);
 
@@ -2392,7 +2392,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return null;
             }
 
-            view = (ListView) getLayoutInflater().inflate(R.layout.cacheview_inventory, null);
+            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_inventory_page, null);
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
@@ -2420,7 +2420,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return null; // something is really wrong
             }
 
-            view = getLayoutInflater().inflate(R.layout.caches_images, null);
+            view = getLayoutInflater().inflate(R.layout.cachedetail_images_page, null);
             if (imagesList == null && isCurrentPage(Page.IMAGES)) {
                 loadCacheImages();
             }
