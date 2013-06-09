@@ -2356,6 +2356,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     }
                 });
 
+                waypointView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, wpt.getId());
+                        refreshOnResume = true;
+                        return true;
+                    }
+                });
+
                 waypoints.addView(waypointView);
             }
 
