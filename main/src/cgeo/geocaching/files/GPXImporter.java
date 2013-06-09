@@ -49,6 +49,7 @@ public class GPXImporter {
     static final int IMPORT_STEP_STATIC_MAPS_SKIPPED = 9;
 
     public static final String GPX_FILE_EXTENSION = ".gpx";
+    public static final String LOC_FILE_EXTENSION = ".loc";
     public static final String ZIP_FILE_EXTENSION = ".zip";
     public static final String WAYPOINTS_FILE_SUFFIX = "-wpts";
     public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = WAYPOINTS_FILE_SUFFIX + GPX_FILE_EXTENSION;
@@ -101,7 +102,7 @@ public class GPXImporter {
         // Google search says: there is no solution for this problem
         // Gmail doesn't work at all, see #967
         if (mimeType == null) {
-            if (StringUtils.endsWithIgnoreCase(uri.getPath(), GPX_FILE_EXTENSION)) {
+            if (StringUtils.endsWithIgnoreCase(uri.getPath(), GPX_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(uri.getPath(), LOC_FILE_EXTENSION)) {
                 mimeType = "application/xml";
             } else {
                 // if we can't determine a better type, default to zip import
@@ -112,7 +113,11 @@ public class GPXImporter {
 
         Log.i("importGPX: " + uri + ", mimetype=" + mimeType);
         if (GPX_MIME_TYPES.contains(mimeType)) {
-            new ImportGpxAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+            if (StringUtils.endsWithIgnoreCase(uri.getPath(), LOC_FILE_EXTENSION)) {
+                new ImportLocAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+            } else {
+                new ImportGpxAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+            }
         } else if (ZIP_MIME_TYPES.contains(mimeType)) {
             new ImportGpxZipAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
         } else {
@@ -204,6 +209,30 @@ public class GPXImporter {
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) file.length()));
             LocParser parser = new LocParser(listId);
             return parser.parse(file, progressHandler);
+        }
+    }
+
+    static class ImportLocAttachmentThread extends ImportThread {
+        private final Uri uri;
+        private ContentResolver contentResolver;
+
+        public ImportLocAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+            super(listId, importStepHandler, progressHandler);
+            this.uri = uri;
+            this.contentResolver = contentResolver;
+        }
+
+        @Override
+        protected Collection<Geocache> doImport() throws IOException, ParserException {
+            Log.i("Import LOC from uri: " + uri);
+            importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, -1));
+            InputStream is = contentResolver.openInputStream(uri);
+            LocParser parser = new LocParser(listId);
+            try {
+                return parser.parse(is, progressHandler);
+            } finally {
+                is.close();
+            }
         }
     }
 
