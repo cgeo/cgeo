@@ -295,4 +295,23 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheSize.UNKNOWN, waymark.getSize());
     }
 
+    public void testOX() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(R.raw.ox1ry0y_gpx);
+        assertEquals(1, caches.size());
+        final Geocache cache = caches.get(0);
+        assertEquals("OX1RY0Y", cache.getGeocode());
+        assertEquals(CacheType.TRADITIONAL, cache.getType());
+        assertEquals(false, cache.isArchived());
+        assertEquals(false, cache.isDisabled());
+        assertEquals("Kornwestheim und die Römer", cache.getName());
+        assertEquals("Thomas&Dani", cache.getOwnerDisplayName());
+        assertEquals(CacheSize.SMALL, cache.getSize());
+        assertEquals(1.5f, cache.getDifficulty());
+        assertEquals(1.0f, cache.getTerrain());
+        assertTrue(cache.getDescription().startsWith("Dieses sind die Reste einer in Kornwestheim gefundenen"));
+        assertEquals(new Geopoint(48.8642167, 9.1836), cache.getCoords());
+        assertTrue(cache.isReliableLatLon());
+        assertEquals("Wasserleitung", cache.getHint());
+    }
+
 }
