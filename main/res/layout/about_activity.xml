@@ -99,7 +99,6 @@
                     android:id="@+id/donate"
                     android:layout_width="280dip"
                     android:lines="2"
-                    android:onClick="donate"
                     android:singleLine="false"
                     android:text="@string/about_donation_more" />
             </LinearLayout>
@@ -124,7 +123,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:linksClickable="false"
-                android:onClick="support"
                 android:text="@string/support"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
