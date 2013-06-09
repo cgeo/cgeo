@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 public class CustomProgressDialog extends ProgressDialog {
 
     public CustomProgressDialog(Context context) {
-        super(context, ActivityMixin.getTheme());
+        super(context, ActivityMixin.getDialogTheme());
     }
 
     @Override

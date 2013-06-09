@@ -54,7 +54,7 @@ public class Progress {
             dialog = new CustomProgressDialog(context);
         }
         else {
-            dialog = new ProgressDialog(context);
+            dialog = new ProgressDialog(context, ActivityMixin.getDialogTheme());
         }
         dialog.setTitle(title);
         dialog.setMessage(message);
