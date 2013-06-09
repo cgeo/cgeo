@@ -100,6 +100,8 @@ final public class OkapiClient {
     private static final String LOG_USER = "user";
 
     private static final String USER_USERNAME = "username";
+    private static final String USER_CACHES_FOUND = "caches_found";
+    private static final String USER_INFO_FIELDS = "username|caches_found";
 
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
@@ -674,6 +676,69 @@ final public class OkapiClient {
                 return "Webcam";
             default:
                 return "";
+        }
+    }
+
+    public static UserInfo getUserInfo(OCApiLiveConnector connector) {
+        final Parameters params = new Parameters("fields", USER_INFO_FIELDS);
+
+        final JSONObject data = request(connector, OkapiService.SERVICE_USER, params);
+
+        if (data == null) {
+            return new UserInfo(StringUtils.EMPTY, 0, false);
+        }
+
+        String name = StringUtils.EMPTY;
+        int finds = 0;
+        boolean success = true;
+
+        if (!data.isNull(USER_USERNAME)) {
+            try {
+                name = data.getString(USER_USERNAME);
+            } catch (JSONException e) {
+                Log.e("OkapiClient.getUserInfo - name", e);
+                success = false;
+            }
+        } else {
+            success = false;
+        }
+
+        if (!data.isNull(USER_CACHES_FOUND)) {
+            try {
+                finds = data.getInt(USER_CACHES_FOUND);
+            } catch (JSONException e) {
+                Log.e("OkapiClient.getUserInfo - finds", e);
+                success = false;
+            }
+        } else {
+            success = false;
+        }
+
+        return new UserInfo(name, finds, success);
+    }
+
+    public static class UserInfo {
+
+        private final String name;
+        private final int finds;
+        private final boolean retrieveSuccessful;
+
+        UserInfo(String name, int finds, boolean retrieveSuccessful) {
+            this.name = name;
+            this.finds = finds;
+            this.retrieveSuccessful = retrieveSuccessful;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getFinds() {
+            return finds;
+        }
+
+        public boolean isRetrieveSuccessful() {
+            return retrieveSuccessful;
         }
     }
 
