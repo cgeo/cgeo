@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.StaticMapsActivity_.IntentBuilder_;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.Log;
@@ -177,7 +176,7 @@ public class StaticMapsActivity extends AbstractActivity {
     }
 
     public static void startActivity(final Context activity, final String geocode, final boolean download, final Waypoint waypoint) {
-        IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
+        StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
         if (waypoint != null) {
             builder.waypoint_id(waypoint.getId());
         }
