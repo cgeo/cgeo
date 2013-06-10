@@ -321,6 +321,7 @@ final public class OkapiClient {
             description.append(response.getString(CACHE_DESCRIPTION));
             cache.setDescription(description.toString());
 
+            // currently the hint is delivered as HTML (contrary to OKAPI documentation), so we can store it directly
             cache.setHint(response.getString(CACHE_HINT));
             // not used: hints
 
