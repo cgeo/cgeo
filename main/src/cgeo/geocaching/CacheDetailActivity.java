@@ -1873,8 +1873,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     @Override
                     public void onFinishEditNoteDialog(final String note) {
                         cache.setPersonalNote(note);
+                        cache.parseWaypointsFromNote();
                         setPersonalNote();
                         cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                        CacheDetailActivity.this.notifyDataSetChanged();
                     }
                 };
                 final FragmentManager fm = getSupportFragmentManager();
