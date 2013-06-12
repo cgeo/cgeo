@@ -6,7 +6,7 @@ import android.test.AndroidTestCase;
 
 import java.util.Date;
 
-public class CacheTest extends AndroidTestCase {
+public class GeocacheTest extends AndroidTestCase {
 
     final static private class MockedEventCache extends Geocache {
         public MockedEventCache(final Date date) {
