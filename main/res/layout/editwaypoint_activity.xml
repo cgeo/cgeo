@@ -21,12 +21,14 @@
             <Button
                 android:id="@+id/buttonLatitude"
                 style="@style/button_full"
-                android:hint="@string/latitude" />
+                android:hint="@string/latitude"
+                android:freezesText="true" />
 
             <Button
                 android:id="@+id/buttonLongitude"
                 style="@style/button_full"
-                android:hint="@string/longitude" />
+                android:hint="@string/longitude"
+                android:freezesText="true" />
 
             <EditText
                 android:id="@+id/bearing"
@@ -62,7 +64,8 @@
             <Spinner
                 android:id="@+id/type"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/note"
