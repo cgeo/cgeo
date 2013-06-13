@@ -208,6 +208,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
                 pageOrder.add(null);
             }
         }
+        viewPagerAdapter.notifyDataSetChanged();
         viewPager.setCurrentItem(startPageIndex, false);
     }
 
@@ -233,14 +234,18 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         final Pair<List<? extends Page>, Integer> pagesAndIndex = getOrderedPages();
         pageOrder.addAll(pagesAndIndex.getLeft());
 
-        // switch to details page, if we're out of bounds
-        final int defaultPage = pagesAndIndex.getRight();
-        if (getCurrentItem() < 0 || getCurrentItem() >= viewPagerAdapter.getCount()) {
-            viewPager.setCurrentItem(defaultPage, false);
-        }
+        // Since we just added pages notifyDataSetChanged needs to be called before we possibly setCurrentItem below.
+        //  But, calling it will reset current item and we won't be able to tell if we would have been out of bounds
+        final int currentItem = getCurrentItem();
 
         // notify the adapter that the data has changed
         viewPagerAdapter.notifyDataSetChanged();
+
+        // switch to details page, if we're out of bounds
+        final int defaultPage = pagesAndIndex.getRight();
+        if (currentItem < 0 || currentItem >= viewPagerAdapter.getCount()) {
+            viewPager.setCurrentItem(defaultPage, false);
+        }
 
         // notify the indicator that the data has changed
         titleIndicator.notifyDataSetChanged();
