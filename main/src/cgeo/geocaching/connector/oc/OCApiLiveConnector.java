@@ -8,6 +8,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.oc.OkapiClient.UserInfo;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CryptUtils;
@@ -19,6 +20,7 @@ import android.app.Activity;
 public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort {
 
     private String cS;
+    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, false);
 
     public OCApiLiveConnector(String name, String host, String prefix, int cKResId, int cSResId, ApiSupport apiSupport) {
         super(name, host, prefix, CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cKResId)), apiSupport);
@@ -96,5 +98,22 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     @Override
     public boolean canLog(Geocache cache) {
         return true;
+    }
+
+    public boolean supportsPersonalization() {
+        return getSupportedAuthLevel() == OAuthLevel.Level3;
+    }
+
+    public boolean retrieveUserInfo() {
+        userInfo = OkapiClient.getUserInfo(this);
+        return userInfo.isRetrieveSuccessful();
+    }
+
+    public Object getUserName() {
+        return userInfo.getName();
+    }
+
+    public int getCachesFound() {
+        return userInfo.getFinds();
     }
 }
