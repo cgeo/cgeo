@@ -4,9 +4,10 @@
 // @description    Add button "Send to c:geo" to geocaching.com
 // @include        http://www.geocaching.com/seek/cache_details*
 // @include        http://www.geocaching.com/map/*
+// @include        http://www.geocaching.com/geocache/*
 // @icon           http://send2.cgeo.org/content/images/logo.png
 // @updateURL      http://send2.cgeo.org/send2cgeo.user.js
-// @version        0.26
+// @version        0.27
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button. The closure
@@ -81,6 +82,7 @@ s.textContent =  '(' + function() {
              + '/>';
 
     $('#Download p:last').append(html);
+    $('#Download dd:last').append(html);
   }
 } + ')();';
 
