@@ -7,7 +7,7 @@
 // @include        http://www.geocaching.com/geocache/*
 // @icon           http://send2.cgeo.org/content/images/logo.png
 // @updateURL      http://send2.cgeo.org/send2cgeo.user.js
-// @version        0.27
+// @version        0.27b
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button. The closure
@@ -81,7 +81,7 @@ s.textContent =  '(' + function() {
              + 'return false;" '
              + '/>';
 
-    $('#Download p:last').append(html);
+    $('#DownloadLinks p:last').append(html);
   }
 } + ')();';
 
