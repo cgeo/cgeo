@@ -586,11 +586,19 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
             menu.findItem(R.id.submenu_strategy).setEnabled(isLiveEnabled);
 
-            Strategy strategy = Settings.getLiveMapStrategy();
-            menu.findItem(R.id.menu_strategy_fastest).setChecked(strategy == Strategy.FASTEST);
-            menu.findItem(R.id.menu_strategy_fast).setChecked(strategy == Strategy.FAST);
-            menu.findItem(R.id.menu_strategy_auto).setChecked(strategy == Strategy.AUTO);
-            menu.findItem(R.id.menu_strategy_detailed).setChecked(strategy == Strategy.DETAILED);
+            switch (Settings.getLiveMapStrategy()) {
+                case FASTEST:
+                    menu.findItem(R.id.menu_strategy_fastest).setChecked(true);
+                    break;
+                case FAST:
+                    menu.findItem(R.id.menu_strategy_fast).setChecked(true);
+                    break;
+                case AUTO:
+                    menu.findItem(R.id.menu_strategy_auto).setChecked(true);
+                    break;
+                default: // DETAILED
+                    menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
+            }
         } catch (Exception e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
