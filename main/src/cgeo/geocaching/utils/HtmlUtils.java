@@ -20,6 +20,9 @@ public class HtmlUtils {
      * @return
      */
     public static String extractText(CharSequence html) {
+        if (StringUtils.isBlank(html)) {
+            return StringUtils.EMPTY;
+        }
         String result = html.toString();
 
         // recognize images in textview HTML contents
