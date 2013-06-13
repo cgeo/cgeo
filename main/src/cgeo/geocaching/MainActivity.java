@@ -4,7 +4,10 @@ import butterknife.InjectView;
 import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -50,7 +53,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AbstractActivity {
-    @InjectView(R.id.user_info) protected TextView userInfoView;
+    @InjectView(R.id.user_info_gc) protected TextView userInfoViewGc;
+    @InjectView(R.id.user_info_ocde) protected TextView userInfoViewOcDe;
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
     @InjectView(R.id.filter_button_title)protected TextView filterTitle;
     @InjectView(R.id.map) protected ImageView findOnMap;
@@ -82,8 +86,8 @@ public class MainActivity extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
 
-            StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
             if (Settings.isGCConnectorActive()) {
+                StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
                 if (Login.isActualLoginStatus()) {
                     userInfo.append(Login.getActualUserName());
                     if (Login.getActualCachesFound() >= 0) {
@@ -92,12 +96,36 @@ public class MainActivity extends AbstractActivity {
                     userInfo.append(Formatter.SEPARATOR);
                 }
                 userInfo.append(Login.getActualStatus());
+
+                userInfoViewGc.setText(userInfo.toString());
+                userInfoViewGc.setVisibility(View.VISIBLE);
             }
             else {
-                userInfo.append("<disabled>"); // TODO this is just a quick fix. We need some better status implementation showing multiple connectors.
+                userInfoViewGc.setVisibility(View.GONE);
             }
 
-            userInfoView.setText(userInfo.toString());
+            if (Settings.isOCConnectorActive()) {
+                StringBuilder userInfo = new StringBuilder("opencaching.de").append(Formatter.SEPARATOR);
+                IConnector conn = ConnectorFactory.getConnector("OCXXXX");
+                if (conn instanceof OCApiLiveConnector) {
+                    OCApiLiveConnector ocapiConn = (OCApiLiveConnector) conn;
+                    if (ocapiConn.supportsPersonalization()) {
+                        userInfo.append(ocapiConn.getUserName());
+                        int count = ocapiConn.getCachesFound();
+                        if (count >= 0) {
+                            userInfo.append(" (").append(String.valueOf(count)).append(')');
+                        }
+                    } else {
+                        userInfo.append("Anonymous");
+                    }
+                }
+                userInfoViewOcDe.setText(userInfo.toString());
+                userInfoViewOcDe.setVisibility(View.VISIBLE);
+            }
+            else {
+                userInfoViewOcDe.setVisibility(View.GONE);
+            }
+
         }
     };
 
@@ -699,26 +727,34 @@ public class MainActivity extends AbstractActivity {
                 return;
             }
 
-            if (!Settings.isGCConnectorActive()) {
-                return;
+            if (Settings.isGCConnectorActive()) {
+                // login
+                final StatusCode status = Login.login();
+
+                if (status == StatusCode.NO_ERROR) {
+                    app.firstRun = false;
+                    Login.detectGcCustomDate();
+                    updateUserInfoHandler.sendEmptyMessage(-1);
+                }
+
+                if (app.showLoginToast) {
+                    firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0, status));
+                    app.showLoginToast = false;
+
+                    // invoke settings activity to insert login details
+                    if (status == StatusCode.NO_LOGIN_INFO_STORED) {
+                        SettingsActivity.startActivity(MainActivity.this);
+                    }
+                }
             }
-
-            // login
-            final StatusCode status = Login.login();
-
-            if (status == StatusCode.NO_ERROR) {
-                app.firstRun = false;
-                Login.detectGcCustomDate();
-                updateUserInfoHandler.sendEmptyMessage(-1);
-            }
-
-            if (app.showLoginToast) {
-                firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0, status));
-                app.showLoginToast = false;
-
-                // invoke settings activity to insert login details
-                if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                    SettingsActivity.startActivity(MainActivity.this);
+            if (Settings.isOCConnectorActive()) {
+                IConnector conn = ConnectorFactory.getConnector("OCXXXX");
+                if (conn instanceof OCApiLiveConnector) {
+                    OCApiLiveConnector ocapiConn = (OCApiLiveConnector) conn;
+                    if (ocapiConn.supportsPersonalization()) {
+                        ocapiConn.retrieveUserInfo();
+                    }
+                    updateUserInfoHandler.sendEmptyMessage(-1);
                 }
             }
         }
