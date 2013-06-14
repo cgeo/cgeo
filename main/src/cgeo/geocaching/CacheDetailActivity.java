@@ -1875,6 +1875,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         cache.setPersonalNote(note);
                         setPersonalNote();
                         cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                        IConnector connector = ConnectorFactory.getConnector(cache);
+                        if (connector.supportsPersonalNote()) {
+                            connector.uploadPersonalNote(cache);
+                        }
                     }
                 };
                 final FragmentManager fm = getSupportFragmentManager();
