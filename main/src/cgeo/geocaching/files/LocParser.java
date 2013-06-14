@@ -76,7 +76,7 @@ public final class LocParser extends FileParser {
         if (StringUtils.isBlank(cache.getName())) {
             cache.setName(coord.getName());
         }
-        cache.setOwnerDisplayName(coord.getOwnerDisplayName());
+        cache.setOwnerUserId(coord.getOwnerUserId());
     }
 
     static Map<String, Geocache> parseCoordinates(final String fileContent) {
@@ -152,8 +152,8 @@ public final class LocParser extends FileParser {
         if (matcherName.find()) {
             final String name = matcherName.group(1).trim();
             String ownerName = StringUtils.trim(StringUtils.substringAfterLast(name, NAME_OWNER_SEPARATOR));
-            if (StringUtils.isEmpty(cache.getOwnerDisplayName()) && StringUtils.isNotEmpty(ownerName)) {
-                cache.setOwnerDisplayName(ownerName);
+            if (StringUtils.isEmpty(cache.getOwnerUserId()) && StringUtils.isNotEmpty(ownerName)) {
+                cache.setOwnerUserId(ownerName);
             }
             cache.setName(StringUtils.substringBeforeLast(name, NAME_OWNER_SEPARATOR).trim());
         } else {
