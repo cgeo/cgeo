@@ -36,7 +36,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(cache);
         assertEquals("OC5952", cache.getGeocode());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerDisplayName());
+        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerUserId());
         assertEquals(new Geopoint(48.85968, 9.18740), cache.getCoords());
     }
 
@@ -47,7 +47,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(cache);
         assertEquals("GC1BKP3", cache.getGeocode());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerDisplayName());
+        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerUserId());
         assertEquals(new Geopoint(48.859683, 9.1874), cache.getCoords());
         assertEquals(1.0f, cache.getDifficulty());
         assertEquals(5.0f, cache.getTerrain());
@@ -61,7 +61,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(waymark);
         assertEquals("WM7BK7", waymark.getGeocode());
         assertEquals("Römerstrasse Kornwestheim", waymark.getName());
-        assertEquals("travelling", waymark.getOwnerDisplayName());
+        assertEquals("travelling", waymark.getOwnerUserId());
         assertEquals(new Geopoint(48.856733, 9.197683), waymark.getCoords());
         // links are not yet stored for single caches
         // assertEquals("http://www.waymarking.com/waymarks/WM7BK7_Rmerstrasse_Kornwestheim", waymark.getUrl());

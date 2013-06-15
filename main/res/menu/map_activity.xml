@@ -55,22 +55,18 @@
                 android:checkableBehavior="single" >
                 <item
                     android:id="@+id/menu_strategy_fastest"
-                    android:checkable="true"
                     android:title="@string/map_strategy_fastest">
                 </item>
                 <item
                     android:id="@+id/menu_strategy_fast"
-                    android:checkable="true"
                     android:title="@string/map_strategy_fast">
                 </item>
                 <item
                     android:id="@+id/menu_strategy_auto"
-                    android:checkable="true"
                     android:title="@string/map_strategy_auto">
                 </item>
                 <item
                     android:id="@+id/menu_strategy_detailed"
-                    android:checkable="true"
                     android:title="@string/map_strategy_detailed">
                 </item>
             </group>

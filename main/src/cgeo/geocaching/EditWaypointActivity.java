@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.InjectView;
-
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -17,11 +15,15 @@ import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.Extra;
+import com.googlecode.androidannotations.annotations.InstanceState;
+import com.googlecode.androidannotations.annotations.ViewById;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,90 +31,88 @@ import android.os.Message;
 import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
+@EActivity
 public class EditWaypointActivity extends AbstractActivity {
-    @InjectView(R.id.buttonLatitude) protected Button buttonLat;
-    @InjectView(R.id.buttonLongitude) protected Button buttonLon;
-    @InjectView(R.id.add_waypoint) protected Button addWaypoint;
-    @InjectView(R.id.note) protected EditText note;
-    @InjectView(R.id.wpt_visited_checkbox) protected CheckBox visitedCheckBox;
-    @InjectView(R.id.name) protected AutoCompleteTextView waypointName;
-    @InjectView(R.id.type) protected Spinner waypointTypeSelector;
-    @InjectView(R.id.distance) protected EditText distanceView;
-    @InjectView(R.id.modify_cache_coordinates_group) protected RadioGroup coordinatesGroup;
-    @InjectView(R.id.modify_cache_coordinates_local_and_remote) protected RadioButton modifyBoth;
-    @InjectView(R.id.distanceUnit) protected Spinner distanceUnitSelector;
-    @InjectView(R.id.bearing) protected EditText bearing;
-    @InjectView(R.id.modify_cache_coordinates_local) protected RadioButton modifyLocal;
+    @ViewById(R.id.buttonLatitude) protected Button buttonLat;
+    @ViewById(R.id.buttonLongitude) protected Button buttonLon;
+    @ViewById(R.id.add_waypoint) protected Button addWaypoint;
+    @ViewById(R.id.note) protected EditText note;
+    @ViewById(R.id.wpt_visited_checkbox) protected CheckBox visitedCheckBox;
+    @ViewById(R.id.name) protected AutoCompleteTextView waypointName;
+    @ViewById(R.id.type) protected Spinner waypointTypeSelector;
+    @ViewById(R.id.distance) protected EditText distanceView;
+    @ViewById(R.id.modify_cache_coordinates_group) protected RadioGroup coordinatesGroup;
+    @ViewById(R.id.modify_cache_coordinates_local_and_remote) protected RadioButton modifyBoth;
+    @ViewById(R.id.distanceUnit) protected Spinner distanceUnitSelector;
+    @ViewById(R.id.bearing) protected EditText bearing;
+    @ViewById(R.id.modify_cache_coordinates_local) protected RadioButton modifyLocal;
 
-    private String geocode = null;
-    private int id = -1;
-    private ProgressDialog waitDialog = null;
-    private Waypoint waypoint = null;
-    private Geopoint gpTemp = null;
-    private WaypointType type = WaypointType.OWN;
-    private String prefix = "OWN";
-    private String lookup = "---";
-    private boolean own = true;
-    private boolean visited = false;
-    ArrayList<WaypointType> wpTypes = null;
-    String distanceUnit = "";
-
+    @Extra(Intents.EXTRA_GEOCODE) protected String geocode = null;
+    @Extra(Intents.EXTRA_WAYPOINT_ID) protected int id = -1;
     /**
      * number of waypoints that the corresponding cache has until now
      */
-    private int wpCount = 0;
+    @Extra(Intents.EXTRA_COUNT) protected int wpCount = 0;
+
+    @InstanceState protected int waypointTypeSelectorPosition = -1;
+    private ProgressDialog waitDialog = null;
+    private Waypoint waypoint = null;
+    private String prefix = "OWN";
+    private String lookup = "---";
+    private boolean own = true;
+    ArrayList<WaypointType> wpTypes = null;
+    ArrayList<String> distanceUnits = null;
+    private boolean initViews = true;
+
     private Handler loadWaypointHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
             try {
                 if (waypoint == null) {
+                    Log.d("No waypoint loaded to edit. id= " + id);
                     id = -1;
                 } else {
                     geocode = waypoint.getGeocode();
-                    type = waypoint.getWaypointType();
                     prefix = waypoint.getPrefix();
                     lookup = waypoint.getLookup();
                     own = waypoint.isUserDefined();
-                    visited = waypoint.isVisited();
 
-                    if (waypoint.getCoords() != null) {
-                        buttonLat.setText(waypoint.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
-                        buttonLon.setText(waypoint.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
+                    if (initViews) {
+                        visitedCheckBox.setChecked(waypoint.isVisited());
+                        if (waypoint.getCoords() != null) {
+                            buttonLat.setText(waypoint.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
+                            buttonLon.setText(waypoint.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
+                        }
+                        waypointName.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
+                        if (BaseUtils.containsHtml(waypoint.getNote())) {
+                            note.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString());
+                        }
+                        else {
+                            note.setText(StringUtils.trimToEmpty(waypoint.getNote()));
+                        }
                     }
-                    waypointName.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
-                    if (BaseUtils.containsHtml(waypoint.getNote())) {
-                        note.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString());
-                    }
-                    else {
-                        note.setText(StringUtils.trimToEmpty(waypoint.getNote()));
-                    }
-                    Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+                    final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
                     setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
                 }
 
                 if (own) {
                     initializeWaypointTypeSelector();
                 }
-                visitedCheckBox.setChecked(visited);
-
-                initializeDistanceUnitSelector();
             } catch (Exception e) {
                 Log.e("EditWaypointActivity.loadWaypointHandler", e);
             } finally {
@@ -127,14 +127,6 @@ public class EditWaypointActivity extends AbstractActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.editwaypoint_activity);
-
-        // get parameters
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            geocode = extras.getString(Intents.EXTRA_GEOCODE);
-            wpCount = extras.getInt(Intents.EXTRA_COUNT, 0);
-            id = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
-        }
 
         if (StringUtils.isBlank(geocode) && id <= 0) {
             showToast(res.getString(R.string.err_waypoint_cache_unknown));
@@ -152,7 +144,7 @@ public class EditWaypointActivity extends AbstractActivity {
         buttonLat.setOnClickListener(new CoordDialogListener());
         buttonLon.setOnClickListener(new CoordDialogListener());
 
-        addWaypoint.setOnClickListener(new CoordsListener());
+        addWaypoint.setOnClickListener(new SaveWaypointListener());
 
         List<String> wayPointNames = new ArrayList<String>();
         for (WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
@@ -161,28 +153,24 @@ public class EditWaypointActivity extends AbstractActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
         waypointName.setAdapter(adapter);
 
-        if (id > 0) {
-            waypointTypeSelector.setVisibility(View.GONE);
+        if (savedInstanceState != null) {
+            initViews = false;
+        }
 
+        if (id > 0) { // existing waypoint
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
             waitDialog.setCancelable(true);
 
             (new LoadWaypointThread()).start();
-        } else {
-            initializeWaypointTypeSelector();
-        }
 
-        if (geocode != null) {
-            Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            IConnector con = ConnectorFactory.getConnector(geocode);
-            setCoordsModificationVisibility(con, cache);
-        }
-        visitedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                visited = isChecked;
+        } else { // new waypoint
+            initializeWaypointTypeSelector();
+
+            if (geocode != null) {
+                final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
             }
-        });
+        }
 
         initializeDistanceUnitSelector();
 
@@ -204,15 +192,6 @@ public class EditWaypointActivity extends AbstractActivity {
         super.onResume();
 
         geoDirHandler.startGeo();
-
-        if (id > 0) {
-            if (waitDialog == null) {
-                waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
-                waitDialog.setCancelable(true);
-
-                (new LoadWaypointThread()).start();
-            }
-        }
     }
 
     @Override
@@ -227,29 +206,35 @@ public class EditWaypointActivity extends AbstractActivity {
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waypointTypeSelector.setAdapter(wpAdapter);
 
-        int typeIndex = wpTypes.indexOf(type);
-        if (typeIndex < 0) {
-            typeIndex = wpTypes.indexOf(WaypointType.WAYPOINT);
-        }
+        waypointTypeSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
+                waypointTypeSelectorPosition = pos;
+            }
 
-        waypointTypeSelector.setSelection(typeIndex);
-        waypointTypeSelector.setOnItemSelectedListener(new ChangeWaypointType(this));
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        if (initViews) {
+            int typeIndex = -1;
+            if (waypoint != null) {
+                typeIndex = wpTypes.indexOf(waypoint.getWaypointType());
+            }
+            waypointTypeSelector.setSelection(typeIndex >= 0 ? typeIndex : wpTypes.indexOf(WaypointType.WAYPOINT));
+        } else {
+            waypointTypeSelector.setSelection(waypointTypeSelectorPosition);
+        }
 
         waypointTypeSelector.setVisibility(View.VISIBLE);
     }
 
     private void initializeDistanceUnitSelector() {
-        if (StringUtils.isBlank(distanceUnit)) {
-            if (Settings.isUseMetricUnits()) {
-                distanceUnitSelector.setSelection(0); // m
-                distanceUnit = res.getStringArray(R.array.distance_units)[0];
-            } else {
-                distanceUnitSelector.setSelection(2); // ft
-                distanceUnit = res.getStringArray(R.array.distance_units)[2];
-            }
+        distanceUnits = new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.distance_units)));
+        if (initViews) {
+            distanceUnitSelector.setSelection(Settings.isUseMetricUnits() ? 0 : 2); //0:m, 2:ft
         }
-
-        distanceUnitSelector.setOnItemSelectedListener(new ChangeDistanceUnit(this));
     }
 
     final private GeoDirHandler geoDirHandler = new GeoDirHandler() {
@@ -287,10 +272,10 @@ public class EditWaypointActivity extends AbstractActivity {
         @Override
         public void onClick(View arg0) {
             Geopoint gp = null;
-            if (waypoint != null && waypoint.getCoords() != null) {
-                gp = waypoint.getCoords();
-            } else if (gpTemp != null) {
-                gp = gpTemp;
+            try {
+                gp = new Geopoint(buttonLat.getText().toString(), buttonLon.getText().toString());
+            } catch (Geopoint.ParseException e) {
+                // button text is blank when creating new waypoint
             }
             Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
             CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(EditWaypointActivity.this, cache, gp, app.currentGeo());
@@ -300,57 +285,9 @@ public class EditWaypointActivity extends AbstractActivity {
                 public void update(final Geopoint gp) {
                     buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
                     buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-                    if (waypoint != null) {
-                        waypoint.setCoords(gp);
-                    } else {
-                        gpTemp = gp;
-                    }
                 }
             });
             coordsDialog.show();
-        }
-    }
-
-    private static class ChangeWaypointType implements OnItemSelectedListener {
-
-        private ChangeWaypointType(EditWaypointActivity wpView) {
-            this.wpView = wpView;
-        }
-
-        private EditWaypointActivity wpView;
-
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-                long arg3) {
-            if (null != wpView.wpTypes) {
-                wpView.type = wpView.wpTypes.get(arg2);
-            }
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            if (null != wpView.wpTypes) {
-                arg0.setSelection(wpView.wpTypes.indexOf(wpView.type));
-            }
-        }
-    }
-
-    private static class ChangeDistanceUnit implements OnItemSelectedListener {
-
-        private ChangeDistanceUnit(EditWaypointActivity unitView) {
-            this.unitView = unitView;
-        }
-
-        private EditWaypointActivity unitView;
-
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-                long arg3) {
-            unitView.distanceUnit = (String) arg0.getItemAtPosition(arg2);
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
         }
     }
 
@@ -361,13 +298,13 @@ public class EditWaypointActivity extends AbstractActivity {
     public static final int UPLOAD_SUCCESS = 4;
     public static final int SAVE_ERROR = 5;
 
-    private class CoordsListener implements View.OnClickListener {
+    private class SaveWaypointListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
             final String bearingText = bearing.getText().toString();
             // combine distance from EditText and distanceUnit saved from Spinner
-            final String distanceText = distanceView.getText().toString() + distanceUnit;
+            final String distanceText = distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
             final String latText = buttonLat.getText().toString();
             final String lonText = buttonLon.getText().toString();
 
@@ -421,6 +358,8 @@ public class EditWaypointActivity extends AbstractActivity {
             final String name = StringUtils.isNotEmpty(givenName) ? givenName : res.getString(R.string.waypoint) + " " + (wpCount + 1);
             final String noteText = note.getText().toString().trim();
             final Geopoint coordsToSave = coords;
+            final WaypointType type = wpTypes.get(waypointTypeSelector.getSelectedItemPosition());
+            final boolean visited = visitedCheckBox.isChecked();
             final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_being_saved), true);
             final Handler finishHandler = new Handler() {
 
@@ -527,13 +466,10 @@ public class EditWaypointActivity extends AbstractActivity {
     }
 
     public static void startActivityEditWaypoint(final Context context, final int waypointId) {
-        context.startActivity(new Intent(context, EditWaypointActivity.class)
-                .putExtra(Intents.EXTRA_WAYPOINT_ID, waypointId));
+        EditWaypointActivity_.intent(context).id(waypointId).start();
     }
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache) {
-        context.startActivity(new Intent(context, EditWaypointActivity.class)
-                .putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode())
-                .putExtra(Intents.EXTRA_COUNT, cache.getWaypoints().size()));
+        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).wpCount(cache.getWaypoints().size()).start();
     }
 }

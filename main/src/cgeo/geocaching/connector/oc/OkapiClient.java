@@ -100,6 +100,8 @@ final public class OkapiClient {
     private static final String LOG_USER = "user";
 
     private static final String USER_USERNAME = "username";
+    private static final String USER_CACHES_FOUND = "caches_found";
+    private static final String USER_INFO_FIELDS = "username|caches_found";
 
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
@@ -135,7 +137,6 @@ final public class OkapiClient {
         return parseCache(data);
     }
 
-    // Assumes level 3 OAuth
     public static List<Geocache> getCachesAround(final Geopoint center, OCApiConnector connector) {
         String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
@@ -143,12 +144,7 @@ final public class OkapiClient {
         valueMap.put("center", centerString);
         valueMap.put("limit", "20");
 
-        if (connector.getSupportedAuthLevel() != OAuthLevel.Level3) {
-            Log.e("Calling OkapiClient.getCachesAround with wrong connector");
-            return Collections.emptyList();
-        }
-
-        addFilterParams(valueMap);
+        addFilterParams(valueMap, connector);
 
         params.add("search_params", new JSONObject(valueMap).toString());
 
@@ -178,13 +174,7 @@ final public class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("bbox", bboxString);
 
-        // FIXME Why is this testing level 3? The to be used service is level 1 only.
-        if (connector.getSupportedAuthLevel() != OAuthLevel.Level3) {
-            Log.e("Calling OkapiClient.getCachesBBox with wrong connector");
-            return Collections.emptyList();
-        }
-
-        addFilterParams(valueMap);
+        addFilterParams(valueMap, connector);
 
         params.add("search_params", new JSONObject(valueMap).toString());
 
@@ -639,12 +629,11 @@ final public class OkapiClient {
         return "en";
     }
 
-    // assumes level 3 oauth
-    private static void addFilterParams(final Map<String, String> valueMap) {
+    private static void addFilterParams(final Map<String, String> valueMap, OCApiConnector connector) {
         if (!Settings.isExcludeDisabledCaches()) {
             valueMap.put("status", "Available|Temporarily unavailable");
         }
-        if (Settings.isExcludeMyCaches()) {
+        if (Settings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
             valueMap.put("exclude_my_own", "true");
             valueMap.put("found_status", "notfound_only");
         }
@@ -675,6 +664,69 @@ final public class OkapiClient {
                 return "Webcam";
             default:
                 return "";
+        }
+    }
+
+    public static UserInfo getUserInfo(OCApiLiveConnector connector) {
+        final Parameters params = new Parameters("fields", USER_INFO_FIELDS);
+
+        final JSONObject data = request(connector, OkapiService.SERVICE_USER, params);
+
+        if (data == null) {
+            return new UserInfo(StringUtils.EMPTY, 0, false);
+        }
+
+        String name = StringUtils.EMPTY;
+        int finds = 0;
+        boolean success = true;
+
+        if (!data.isNull(USER_USERNAME)) {
+            try {
+                name = data.getString(USER_USERNAME);
+            } catch (JSONException e) {
+                Log.e("OkapiClient.getUserInfo - name", e);
+                success = false;
+            }
+        } else {
+            success = false;
+        }
+
+        if (!data.isNull(USER_CACHES_FOUND)) {
+            try {
+                finds = data.getInt(USER_CACHES_FOUND);
+            } catch (JSONException e) {
+                Log.e("OkapiClient.getUserInfo - finds", e);
+                success = false;
+            }
+        } else {
+            success = false;
+        }
+
+        return new UserInfo(name, finds, success);
+    }
+
+    public static class UserInfo {
+
+        private final String name;
+        private final int finds;
+        private final boolean retrieveSuccessful;
+
+        UserInfo(String name, int finds, boolean retrieveSuccessful) {
+            this.name = name;
+            this.finds = finds;
+            this.retrieveSuccessful = retrieveSuccessful;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getFinds() {
+            return finds;
+        }
+
+        public boolean isRetrieveSuccessful() {
+            return retrieveSuccessful;
         }
     }
 
