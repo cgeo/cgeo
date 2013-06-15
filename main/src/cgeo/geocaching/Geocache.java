@@ -490,6 +490,11 @@ public class Geocache implements ICache, IWaypoint {
         }
     }
 
+    public void clearOfflineLog() {
+        cgData.clearLogOffline(geocode);
+        notifyChange();
+    }
+
     public List<LogType> getPossibleLogTypes() {
         final List<LogType> logTypes = new ArrayList<LogType>();
         if (isEventCache()) {
