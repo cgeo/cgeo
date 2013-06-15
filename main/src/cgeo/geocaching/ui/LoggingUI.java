@@ -104,7 +104,7 @@ public class LoggingUI extends AbstractUIFactory {
                             break;
 
                         case CLEAR_LOG:
-                            cgData.clearLogOffline(cache.getGeocode());
+                            cache.clearOfflineLog();
                             break;
                     }
                 } else {

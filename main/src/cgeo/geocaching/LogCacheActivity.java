@@ -368,7 +368,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void clearLog() {
-        cgData.clearLogOffline(geocode);
+        cache.clearOfflineLog();
 
         setDefaultValues();
 
@@ -533,7 +533,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     }
 
                     cgData.saveChangedCache(cache);
-                    cgData.clearLogOffline(geocode);
+                    cache.clearOfflineLog();
 
                     if (typeSelected == LogType.FOUND_IT) {
                         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
