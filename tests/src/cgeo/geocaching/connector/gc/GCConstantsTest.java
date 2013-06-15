@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.test.mock.MockedCache;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.test.AndroidTestCase;
 import android.text.Html;
@@ -20,7 +20,7 @@ public class GCConstantsTest extends AndroidTestCase {
     }
 
     private static String parseLocation(final String html) {
-        return BaseUtils.getMatch(html, GCConstants.PATTERN_LOCATION, true, "");
+        return TextUtils.getMatch(html, GCConstants.PATTERN_LOCATION, true, "");
     }
 
     public static void testCacheCount() {
@@ -31,7 +31,7 @@ public class GCConstantsTest extends AndroidTestCase {
 
     private static void assertCacheCount(final int count, final String html) {
         try {
-            assertEquals(count, Integer.parseInt(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
+            assertEquals(count, Integer.parseInt(TextUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
         } catch (NumberFormatException e) {
             fail();
         }
@@ -53,12 +53,12 @@ public class GCConstantsTest extends AndroidTestCase {
 
     public static void testConstants() {
         final String session = "userSession = new Groundspeak.Map.UserSession('aKWZ', userOptions:'XPTf', sessionToken:'123pNKwdktYGZL0xd-I7yqA6nm_JE1BDUtM4KcOkifin2TRCMutBd_PZE14Ohpffs2ZgkTnxTSnxYpBigK4hBA2', subscriberType: 3, enablePersonalization: true });";
-        assertEquals("aKWZ", BaseUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, ""));
-        assertTrue(BaseUtils.getMatch(session, GCConstants.PATTERN_SESSIONTOKEN, "").startsWith("123pNK"));
+        assertEquals("aKWZ", TextUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, ""));
+        assertTrue(TextUtils.getMatch(session, GCConstants.PATTERN_SESSIONTOKEN, "").startsWith("123pNK"));
     }
 
     public static void testTBWithSpecialChar() {
         final String page = "<meta name=\"og:site_name\" content=\"Geocaching.com\" property=\"og:site_name\" /><meta name=\"og:type\" content=\"article\" property=\"og:type\" /><meta name=\"fb:app_id\" content=\"100167303362705\" property=\"fb:app_id\" /><meta name=\"og:url\" content=\"http://coord.info/TB4VPZD\" property=\"og:url\" /><meta name=\"og:description\" property=\"og:description\" /><meta name=\"og:image\" content=\"http://www.geocaching.com/images/facebook/wpttypes/24.png\" property=\"og:image\" /><meta name=\"og:title\" content=\"Schlauchen&amp;ravestorm\" property=\"og:title\" /></head>\n";
-        assertEquals("Schlauchen&ravestorm", Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString());
+        assertEquals("Schlauchen&ravestorm", Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString());
     }
 }

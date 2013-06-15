@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-public class AngleUtils {
+public final class AngleUtils {
 
     private AngleUtils() {
         // Do not instantiate
@@ -8,7 +8,7 @@ public class AngleUtils {
 
     /**
      * Return the angle to turn of to go from an angle to the other
-     * 
+     *
      * @param from
      *            the origin angle in degrees
      * @param to

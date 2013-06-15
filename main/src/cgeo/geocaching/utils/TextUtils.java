@@ -9,9 +9,13 @@ import java.util.regex.Pattern;
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
  */
-public final class BaseUtils {
+public final class TextUtils {
 
     private static final Pattern PATTERN_REMOVE_NONPRINTABLE = Pattern.compile("\\p{Cntrl}");
+
+    private TextUtils() {
+        // utility class
+    }
 
     /**
      * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
@@ -69,7 +73,7 @@ public final class BaseUtils {
      * @return defaultValue or the first group if the pattern matches (trimmed if wanted)
      */
     public static String getMatch(final String data, final Pattern p, final boolean trim, final String defaultValue) {
-        return BaseUtils.getMatch(data, p, trim, 1, defaultValue, false);
+        return TextUtils.getMatch(data, p, trim, 1, defaultValue, false);
     }
 
     /**
@@ -84,7 +88,7 @@ public final class BaseUtils {
      * @return defaultValue or the first group if the pattern matches (trimmed)
      */
     public static String getMatch(final String data, final Pattern p, final String defaultValue) {
-        return BaseUtils.getMatch(data, p, true, 1, defaultValue, false);
+        return TextUtils.getMatch(data, p, true, 1, defaultValue, false);
     }
 
     /**

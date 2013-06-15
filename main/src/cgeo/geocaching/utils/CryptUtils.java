@@ -12,6 +12,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 public final class CryptUtils {
 
+    private CryptUtils() {
+        // utility class
+    }
+
     private static char[] base64map1 = new char[64];
     private static byte[] base64map2 = new byte[128];
 

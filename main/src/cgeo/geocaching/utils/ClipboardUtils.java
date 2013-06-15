@@ -12,6 +12,10 @@ import android.content.Context;
 @SuppressWarnings("deprecation")
 public final class ClipboardUtils {
 
+    private ClipboardUtils() {
+        // utility class
+    }
+
     /**
      * Places the text passed in onto the clipboard as text
      *

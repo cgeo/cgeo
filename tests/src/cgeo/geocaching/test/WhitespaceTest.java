@@ -1,6 +1,6 @@
 package cgeo.geocaching.test;
 
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -76,7 +76,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
     public void testActualImplementation() {
         final String result;
         final long start = System.currentTimeMillis();
-        result = BaseUtils.replaceWhitespace(data);
+        result = TextUtils.replaceWhitespace(data);
         final long end = System.currentTimeMillis();
         assertEquals(EXPECTED_SIZE, result.length());
         Log.d((end - start) + " ms actual implementation");

@@ -11,7 +11,7 @@ import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -99,7 +99,7 @@ public class EditWaypointActivity extends AbstractActivity {
                             buttonLon.setText(waypoint.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
                         }
                         waypointName.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
-                        if (BaseUtils.containsHtml(waypoint.getNote())) {
+                        if (TextUtils.containsHtml(waypoint.getNote())) {
                             note.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString());
                         }
                         else {

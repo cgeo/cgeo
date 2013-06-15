@@ -32,13 +32,13 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.HtmlUtils;
-import cgeo.geocaching.utils.ImageHelper;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.RunnableWithArgument;
@@ -1732,7 +1732,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         }
                     }
 
-                    return ImageHelper.scaleBitmapToFitDisplay(image);
+                    return ImageUtils.scaleBitmapToFitDisplay(image);
                 } catch (Exception e) {
                     Log.w("CacheDetailActivity.PreviewMapTask", e);
                     return null;
@@ -1826,7 +1826,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             final TextView hintView = ((TextView) view.findViewById(R.id.hint));
             if (StringUtils.isNotBlank(cache.getHint())) {
-                if (BaseUtils.containsHtml(cache.getHint())) {
+                if (TextUtils.containsHtml(cache.getHint())) {
                     hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                     hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
                 }
@@ -2183,7 +2183,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                     // logtext, avoid parsing HTML if not necessary
                     String logText = log.log;
-                    if (BaseUtils.containsHtml(logText)) {
+                    if (TextUtils.containsHtml(logText)) {
                         logText = log.getDisplayText();
                         // Fast preview: parse only HTML without loading any images
                         HtmlImageCounter imageCounter = new HtmlImageCounter();
@@ -2327,7 +2327,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (StringUtils.isNotBlank(wpt.getNote())) {
                     final TextView noteView = (TextView) waypointView.findViewById(R.id.note);
                     noteView.setVisibility(View.VISIBLE);
-                    if (BaseUtils.containsHtml(wpt.getNote())) {
+                    if (TextUtils.containsHtml(wpt.getNote())) {
                         noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
                     }
                     else {

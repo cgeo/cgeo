@@ -9,12 +9,16 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Utiliy class for files
+ * Utility class for files
  *
  * @author rsudev
  *
  */
-public class FileUtils {
+public final class FileUtils {
+
+    private FileUtils() {
+        // utility class
+    }
 
     public static void listDir(List<File> result, File directory, FileSelector chooser, Handler feedBackHandler) {
 

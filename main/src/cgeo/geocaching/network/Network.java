@@ -2,7 +2,7 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.files.LocalStorage;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
@@ -418,7 +418,7 @@ public abstract class Network {
     private static String getResponseDataNoError(final HttpResponse response, boolean replaceWhitespace) {
         try {
             String data = EntityUtils.toString(response.getEntity(), CharEncoding.UTF_8);
-            return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
+            return replaceWhitespace ? TextUtils.replaceWhitespace(data) : data;
         } catch (Exception e) {
             Log.e("getResponseData", e);
             return null;
@@ -428,7 +428,7 @@ public abstract class Network {
     /**
      * Get the body of a HTTP response.
      *
-     * {@link BaseUtils#replaceWhitespace(String)} will be called on the result
+     * {@link TextUtils#replaceWhitespace(String)} will be called on the result
      *
      * @param response a HTTP response, which can be null
      * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
@@ -441,7 +441,7 @@ public abstract class Network {
      * Get the body of a HTTP response.
      *
      * @param response a HTTP response, which can be null
-     * @param replaceWhitespace <code>true</code> if {@link BaseUtils#replaceWhitespace(String)}
+     * @param replaceWhitespace <code>true</code> if {@link TextUtils#replaceWhitespace(String)}
      *                          should be called on the body
      * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
      */

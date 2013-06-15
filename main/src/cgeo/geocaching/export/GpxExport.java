@@ -12,7 +12,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
@@ -234,12 +234,12 @@ class GpxExport extends AbstractExport {
                 writeAttributes(gpx, cache);
 
                 gpx.startTag(PREFIX_GROUNDSPEAK, "short_description");
-                gpx.attribute("", "html", BaseUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
+                gpx.attribute("", "html", TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
                 gpx.text(cache.getShortDescription());
                 gpx.endTag(PREFIX_GROUNDSPEAK, "short_description");
 
                 gpx.startTag(PREFIX_GROUNDSPEAK, "long_description");
-                gpx.attribute("", "html", BaseUtils.containsHtml(cache.getDescription()) ? "True" : "False");
+                gpx.attribute("", "html", TextUtils.containsHtml(cache.getDescription()) ? "True" : "False");
                 gpx.text(cache.getDescription());
                 gpx.endTag(PREFIX_GROUNDSPEAK, "long_description");
 

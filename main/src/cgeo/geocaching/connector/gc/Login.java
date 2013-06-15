@@ -8,7 +8,7 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -77,7 +77,7 @@ public abstract class Login {
         Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
         HttpResponse loginResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
         String loginData = Network.getResponseData(loginResponse);
-        if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
+        if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
             return StatusCode.MAINTENANCE;
         }
 
@@ -149,7 +149,7 @@ public abstract class Login {
     public static StatusCode logout() {
         HttpResponse logoutResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f");
         String logoutData = Network.getResponseData(logoutResponse);
-        if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
+        if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
             return StatusCode.MAINTENANCE;
         }
 
@@ -205,17 +205,17 @@ public abstract class Login {
         setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_ok));
 
         // on every page except login page
-        setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
+        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
         if (isActualLoginStatus()) {
-            setActualUserName(BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
+            setActualUserName(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
             int cachesCount = 0;
             try {
-                cachesCount = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
+                cachesCount = Integer.parseInt(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
             } catch (NumberFormatException e) {
                 Log.e("getLoginStatus: bad cache count", e);
             }
             setActualCachesFound(cachesCount);
-            Settings.setMemberStatus(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            Settings.setMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if ( page.contains(GCConstants.MEMBER_STATUS_RENEW) ) {
                 Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
@@ -223,7 +223,7 @@ public abstract class Login {
         }
 
         // login page
-        setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
+        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
         if (isActualLoginStatus()) {
             setActualUserName(Settings.getUsername());
             // number of caches found is not part of this page
@@ -260,16 +260,16 @@ public abstract class Login {
 
     public static BitmapDrawable downloadAvatarAndGetMemberStatus() {
         try {
-            final String profile = BaseUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
+            final String profile = TextUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
 
-            Settings.setMemberStatus(BaseUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            Settings.setMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
                 Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
 
-            setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));
+            setActualCachesFound(Integer.parseInt(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));
 
-            final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
+            final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (null != avatarURL) {
                 final HtmlImage imgGetter = new HtmlImage("", false, 0, false);
                 return imgGetter.getDrawable(avatarURL);
@@ -294,7 +294,7 @@ public abstract class Login {
             return;
         }
 
-        String customDate = BaseUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
+        String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
         if (null != customDate) {
             Settings.setGcCustomDate(customDate);
         }
@@ -476,8 +476,8 @@ public abstract class Login {
     public static String[] getMapTokens() {
         final HttpResponse response = Network.getRequest(GCConstants.URL_LIVE_MAP);
         final String data = Network.getResponseData(response);
-        final String userSession = BaseUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
-        final String sessionToken = BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
+        final String userSession = TextUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
+        final String sessionToken = TextUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
         return new String[] { userSession, sessionToken };
     }
 }

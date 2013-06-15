@@ -11,10 +11,10 @@ import android.graphics.drawable.BitmapDrawable;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 
-public class ImageHelper {
+public final class ImageUtils {
 
-    // Do not let this class be instantiated, this is a utility class.
-    private ImageHelper() {
+    private ImageUtils() {
+        // Do not let this class be instantiated, this is a utility class.
     }
 
     /**

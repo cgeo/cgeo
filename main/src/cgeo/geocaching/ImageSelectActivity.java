@@ -5,7 +5,7 @@ import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.utils.ImageHelper;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -282,10 +282,10 @@ public class ImageSelectActivity extends AbstractActivity {
         } else {
             image = BitmapFactory.decodeFile(filePath);
         }
-        final BitmapDrawable scaledImage = ImageHelper.scaleBitmapTo(image, maxXY, maxXY);
+        final BitmapDrawable scaledImage = ImageUtils.scaleBitmapTo(image, maxXY, maxXY);
         image = null;
         final String uploadFilename = getOutputImageFile().getPath();
-        ImageHelper.storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
+        ImageUtils.storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
         return uploadFilename;
     }
 

@@ -5,7 +5,11 @@ import cgeo.geocaching.cgeoapplication;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
-public class ProcessUtils {
+public final class ProcessUtils {
+
+    private ProcessUtils() {
+        // utility class
+    }
 
     public static boolean isInstalled(final String packageName) {
         return getLaunchIntent(packageName) != null;

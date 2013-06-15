@@ -14,7 +14,7 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UnknownTagsHandler;
@@ -440,7 +440,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             logView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
 
             String logText = log.log;
-            if (BaseUtils.containsHtml(logText)) {
+            if (TextUtils.containsHtml(logText)) {
                 logText = log.getDisplayText();
                 logView.setText(Html.fromHtml(logText, new HtmlImage(null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
             }

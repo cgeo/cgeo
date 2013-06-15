@@ -1,10 +1,13 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.geopoint.Geopoint;
 
 import android.test.AndroidTestCase;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GeocacheTest extends AndroidTestCase {
 
@@ -46,5 +49,31 @@ public class GeocacheTest extends AndroidTestCase {
         final Geocache cache = new Geocache();
         cache.setGeocode("gc1234");
         assertEquals("GC1234", cache.getGeocode());
+    }
+
+    public static void testUpdateWaypointFromNote() {
+        assertWaypointsParsed("Test N51 13.888 E007 03.444", 1);
+    }
+
+    public static void testUpdateWaypointsFromNote() {
+        assertWaypointsParsed("Test N51 13.888 E007 03.444 Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444", 3);
+    }
+
+    private static void assertWaypointsParsed(String note, int expectedWaypoints) {
+        Geocache cache = new Geocache();
+        cache.setGeocode("Test");
+        cache.setWaypoints(new ArrayList<Waypoint>(), false);
+        for (int i = 0; i < 2; i++) {
+            cache.setPersonalNote(note);
+            cache.parseWaypointsFromNote();
+            final List<Waypoint> waypoints = cache.getWaypoints();
+            assertNotNull(waypoints);
+            assertEquals(expectedWaypoints, waypoints.size());
+            final Waypoint waypoint = waypoints.get(0);
+            assertEquals(new Geopoint("N51 13.888 E007 03.444"), waypoint.getCoords());
+            //            assertEquals("Test", waypoint.getNote());
+            assertEquals(cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " 1", waypoint.getName());
+            cache.store(StoredList.TEMPORARY_LIST_ID, null);
+        }
     }
 }

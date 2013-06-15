@@ -5,7 +5,7 @@ import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3XX5J;
 import cgeo.geocaching.test.mock.MockedCache;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -98,8 +98,8 @@ public class RegExPerformanceTest extends TestCase {
 
         for (MockedCache cache : MOCKED_CACHES) {
             String page = cache.getData();
-            String result1 = BaseUtils.getMatch(page, p1, true, "");
-            String result2 = BaseUtils.getMatch(page, p2, true, "");
+            String result1 = TextUtils.getMatch(page, p1, true, "");
+            String result2 = TextUtils.getMatch(page, p2, true, "");
             assertEquals(result1, result2);
 
             long diff1, diff2;
@@ -123,7 +123,7 @@ public class RegExPerformanceTest extends TestCase {
     private static long parse(String page, Pattern pattern, int iterations) {
         final long start = System.currentTimeMillis();
         for (int j = 0; j < iterations; j++) {
-            BaseUtils.getMatch(page, pattern, true, "");
+            TextUtils.getMatch(page, pattern, true, "");
         }
         return System.currentTimeMillis() - start;
 

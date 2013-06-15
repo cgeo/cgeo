@@ -7,7 +7,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.IOUtils;
-import cgeo.geocaching.utils.ImageHelper;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -132,7 +132,7 @@ public class HtmlImage implements Html.ImageGetter {
             }
         }
 
-        return imagePre != null ? ImageHelper.scaleBitmapToFitDisplay(imagePre) : null;
+        return imagePre != null ? ImageUtils.scaleBitmapToFitDisplay(imagePre) : null;
     }
 
     /**

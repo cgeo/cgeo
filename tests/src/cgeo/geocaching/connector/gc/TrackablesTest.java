@@ -7,7 +7,7 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import java.util.List;
 
@@ -96,7 +96,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 
     private Trackable parseTrackable(int trackablePage) {
         final String pageContent = getFileContent(trackablePage);
-        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(pageContent), null);
+        return GCParser.parseTrackable(TextUtils.replaceWhitespace(pageContent), null);
     }
 
     public void testParseMarkMissing() {

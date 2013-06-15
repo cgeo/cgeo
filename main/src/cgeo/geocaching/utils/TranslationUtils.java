@@ -19,6 +19,10 @@ public final class TranslationUtils {
     public static final int translationTextLengthToWarn = 500;
     private static final String TRANSLATION_APP = "com.google.android.apps.translate";
 
+    private TranslationUtils() {
+        // utility class
+    }
+
     /**
      * Build a URI for Google Translate
      *

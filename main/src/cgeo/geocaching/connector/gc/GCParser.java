@@ -28,7 +28,7 @@ import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DirectionImage;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -79,14 +79,14 @@ public abstract class GCParser {
         // recaptcha
         String recaptchaChallenge = null;
         if (showCaptcha) {
-            String recaptchaJsParam = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_RECAPTCHA, false, null);
+            String recaptchaJsParam = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_RECAPTCHA, false, null);
 
             if (recaptchaJsParam != null) {
                 final Parameters params = new Parameters("k", recaptchaJsParam.trim());
                 final String recaptchaJs = Network.getResponseData(Network.getRequest("http://www.google.com/recaptcha/api/challenge", params));
 
                 if (StringUtils.isNotBlank(recaptchaJs)) {
-                    recaptchaChallenge = BaseUtils.getMatch(recaptchaJs, GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE, true, 1, null, true);
+                    recaptchaChallenge = TextUtils.getMatch(recaptchaJs, GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE, true, 1, null, true);
                 }
             }
             if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
@@ -160,21 +160,21 @@ public abstract class GCParser {
                 continue;
             }
 
-            cache.setGeocode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
+            cache.setGeocode(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
 
             // cache type
-            cache.setType(CacheType.getByPattern(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, true, 1, null, true)));
+            cache.setType(CacheType.getByPattern(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, true, 1, null, true)));
 
             // cache direction - image
             if (Settings.getLoadDirImg()) {
-                final String direction = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 1, null, false);
+                final String direction = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 1, null, false);
                 if (direction != null) {
                     cache.setDirectionImg(direction);
                 }
             }
 
             // cache distance - estimated distance for basic members
-            final String distance = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
+            final String distance = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
             if (distance != null) {
                 cache.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
             }
@@ -193,7 +193,7 @@ public abstract class GCParser {
             }
 
             // size
-            final String container = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_CONTAINER, false, 1, null, false);
+            final String container = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_CONTAINER, false, 1, null, false);
             cache.setSize(CacheSize.getById(container));
 
             // cache inventory
@@ -229,7 +229,7 @@ public abstract class GCParser {
             cache.setFound(row.contains("/images/icons/16/found.png"));
 
             // id
-            String result = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_ID, null);
+            String result = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_ID, null);
             if (null != result) {
                 cache.setCacheId(result);
                 cids.add(cache.getCacheId());
@@ -237,7 +237,7 @@ public abstract class GCParser {
 
             // favorite count
             try {
-                result = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true);
+                result = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true);
                 if (null != result) {
                     cache.setFavoritePoints(Integer.parseInt(result));
                 }
@@ -250,7 +250,7 @@ public abstract class GCParser {
 
         // total caches found
         try {
-            String result = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
+            String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (null != result) {
                 searchResult.setTotal(Integer.parseInt(result));
             }
@@ -374,7 +374,7 @@ public abstract class GCParser {
             return searchResult;
         }
 
-        final String cacheName = Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_NAME, true, "")).toString();
+        final String cacheName = Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_NAME, true, "")).toString();
         if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
             searchResult.setError(StatusCode.UNKNOWN_ERROR);
             return searchResult;
@@ -385,24 +385,24 @@ public abstract class GCParser {
 
         cache.setArchived(page.contains(GCConstants.STRING_ARCHIVED));
 
-        cache.setPremiumMembersOnly(BaseUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
+        cache.setPremiumMembersOnly(TextUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
-        cache.setFavorite(BaseUtils.matches(page, GCConstants.PATTERN_FAVORITE));
+        cache.setFavorite(TextUtils.matches(page, GCConstants.PATTERN_FAVORITE));
 
         // cache geocode
-        cache.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
+        cache.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
 
         // cache id
-        cache.setCacheId(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHEID, true, cache.getCacheId()));
+        cache.setCacheId(TextUtils.getMatch(page, GCConstants.PATTERN_CACHEID, true, cache.getCacheId()));
 
         // cache guid
-        cache.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.getGuid()));
+        cache.setGuid(TextUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.getGuid()));
 
         // name
         cache.setName(cacheName);
 
         // owner real name
-        cache.setOwnerUserId(Network.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNER_USERID, true, cache.getOwnerUserId())));
+        cache.setOwnerUserId(Network.decode(TextUtils.getMatch(page, GCConstants.PATTERN_OWNER_USERID, true, cache.getOwnerUserId())));
 
         cache.setUserModifiedCoords(false);
 
@@ -418,7 +418,7 @@ public abstract class GCParser {
 
         if (StringUtils.isNotBlank(tableInside)) {
             // cache terrain
-            String result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_TERRAIN, true, null);
+            String result = TextUtils.getMatch(tableInside, GCConstants.PATTERN_TERRAIN, true, null);
             if (result != null) {
                 try {
                     cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
@@ -428,7 +428,7 @@ public abstract class GCParser {
             }
 
             // cache difficulty
-            result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_DIFFICULTY, true, null);
+            result = TextUtils.getMatch(tableInside, GCConstants.PATTERN_DIFFICULTY, true, null);
             if (result != null) {
                 try {
                     cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
@@ -438,17 +438,17 @@ public abstract class GCParser {
             }
 
             // owner
-            cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_DISPLAYNAME, true, cache.getOwnerDisplayName())));
+            cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(TextUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_DISPLAYNAME, true, cache.getOwnerDisplayName())));
 
             // hidden
             try {
-                String hiddenString = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDEN, true, null);
+                String hiddenString = TextUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDEN, true, null);
                 if (StringUtils.isNotBlank(hiddenString)) {
                     cache.setHidden(Login.parseGcCustomDate(hiddenString));
                 }
                 if (cache.getHiddenDate() == null) {
                     // event date
-                    hiddenString = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDENEVENT, true, null);
+                    hiddenString = TextUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDENEVENT, true, null);
                     if (StringUtils.isNotBlank(hiddenString)) {
                         cache.setHidden(Login.parseGcCustomDate(hiddenString));
                     }
@@ -460,21 +460,21 @@ public abstract class GCParser {
 
             // favorite
             try {
-                cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
+                cache.setFavoritePoints(Integer.parseInt(TextUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
             } catch (NumberFormatException e) {
                 Log.e("Error parsing favorite count", e);
             }
 
             // cache size
-            cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id)));
+            cache.setSize(CacheSize.getById(TextUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id)));
         }
 
         // cache found
-        cache.setFound(BaseUtils.matches(page, GCConstants.PATTERN_FOUND) || BaseUtils.matches(page, GCConstants.PATTERN_FOUND_ALTERNATIVE));
+        cache.setFound(TextUtils.matches(page, GCConstants.PATTERN_FOUND) || TextUtils.matches(page, GCConstants.PATTERN_FOUND_ALTERNATIVE));
 
         // cache found date
         try {
-            final String foundDateString = BaseUtils.getMatch(page, GCConstants.PATTERN_FOUND_DATE, true, null);
+            final String foundDateString = TextUtils.getMatch(page, GCConstants.PATTERN_FOUND_DATE, true, null);
             if (StringUtils.isNotBlank(foundDateString)) {
                 cache.setVisitedDate(Login.parseGcCustomDate(foundDateString).getTime());
             }
@@ -484,13 +484,13 @@ public abstract class GCParser {
         }
 
         // cache type
-        cache.setType(CacheType.getByPattern(BaseUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType().id)));
+        cache.setType(CacheType.getByPattern(TextUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType().id)));
 
         // on watchlist
-        cache.setOnWatchlist(BaseUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
+        cache.setOnWatchlist(TextUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
 
         // latitude and longitude. Can only be retrieved if user is logged in
-        String latlon = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, "");
+        String latlon = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, "");
         if (StringUtils.isNotEmpty(latlon)) {
             try {
                 cache.setCoords(new Geopoint(latlon));
@@ -501,10 +501,10 @@ public abstract class GCParser {
         }
 
         // cache location
-        cache.setLocation(BaseUtils.getMatch(page, GCConstants.PATTERN_LOCATION, true, ""));
+        cache.setLocation(TextUtils.getMatch(page, GCConstants.PATTERN_LOCATION, true, ""));
 
         // cache hint
-        String result = BaseUtils.getMatch(page, GCConstants.PATTERN_HINT, false, null);
+        String result = TextUtils.getMatch(page, GCConstants.PATTERN_HINT, false, null);
         if (result != null) {
             // replace linebreak and paragraph tags
             String hint = GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
@@ -516,17 +516,17 @@ public abstract class GCParser {
         cache.checkFields();
 
         // cache personal note
-        cache.setPersonalNote(BaseUtils.getMatch(page, GCConstants.PATTERN_PERSONALNOTE, true, cache.getPersonalNote()));
+        cache.setPersonalNote(TextUtils.getMatch(page, GCConstants.PATTERN_PERSONALNOTE, true, cache.getPersonalNote()));
 
         // cache short description
-        cache.setShortDescription(BaseUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
+        cache.setShortDescription(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
 
         // cache description
-        cache.setDescription(BaseUtils.getMatch(page, GCConstants.PATTERN_DESC, true, ""));
+        cache.setDescription(TextUtils.getMatch(page, GCConstants.PATTERN_DESC, true, ""));
 
         // cache attributes
         try {
-            final String attributesPre = BaseUtils.getMatch(page, GCConstants.PATTERN_ATTRIBUTES, true, null);
+            final String attributesPre = TextUtils.getMatch(page, GCConstants.PATTERN_ATTRIBUTES, true, null);
             if (null != attributesPre) {
                 final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
 
@@ -620,7 +620,7 @@ public abstract class GCParser {
 
         // cache logs counts
         try {
-            final String countlogs = BaseUtils.getMatch(page, GCConstants.PATTERN_COUNTLOGS, true, null);
+            final String countlogs = TextUtils.getMatch(page, GCConstants.PATTERN_COUNTLOGS, true, null);
             if (null != countlogs) {
                 final MatcherWrapper matcherLog = new MatcherWrapper(GCConstants.PATTERN_COUNTLOG, countlogs);
 
@@ -645,7 +645,7 @@ public abstract class GCParser {
 
         // add waypoint for original coordinates in case of user-modified listing-coordinates
         try {
-            final String originalCoords = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
+            final String originalCoords = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
 
             if (null != originalCoords) {
                 final Waypoint waypoint = new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
@@ -687,21 +687,21 @@ public abstract class GCParser {
 
                     // waypoint name
                     // res is null during the unit tests
-                    final String name = BaseUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, cgeoapplication.getInstance().getString(R.string.waypoint), true);
+                    final String name = TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, cgeoapplication.getInstance().getString(R.string.waypoint), true);
 
                     // waypoint type
-                    final String resulttype = BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
+                    final String resulttype = TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
 
                     final Waypoint waypoint = new Waypoint(name, WaypointType.findById(resulttype), false);
 
                     // waypoint prefix
-                    waypoint.setPrefix(BaseUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
+                    waypoint.setPrefix(TextUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
 
                     // waypoint lookup
-                    waypoint.setLookup(BaseUtils.getMatch(wp[5], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
+                    waypoint.setLookup(TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
 
                     // waypoint latitude and logitude
-                    latlon = Html.fromHtml(BaseUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
+                    latlon = Html.fromHtml(TextUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
                     if (!StringUtils.startsWith(latlon, "???")) {
                         waypoint.setLatlon(latlon);
                         waypoint.setCoords(new Geopoint(latlon));
@@ -713,7 +713,7 @@ public abstract class GCParser {
                     }
 
                     // waypoint note
-                    waypoint.setNote(BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
+                    waypoint.setNote(TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
 
                     cache.addOrChangeWaypoint(waypoint, false);
                 }
@@ -1077,7 +1077,7 @@ public abstract class GCParser {
                     Login.setActualCachesFound(Login.getActualCachesFound() + 1);
                 }
 
-                final String logID = BaseUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
+                final String logID = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
 
                 return new ImmutablePair<StatusCode, String>(StatusCode.NO_ERROR, logID);
             }
@@ -1302,7 +1302,7 @@ public abstract class GCParser {
 
     private static boolean changeFavorite(final Geocache cache, final boolean add) {
         final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        final String userToken = TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
         if (StringUtils.isEmpty(userToken)) {
             return false;
         }
@@ -1338,7 +1338,7 @@ public abstract class GCParser {
      * Parse a trackable HTML description into a Trackable object
      *
      * @param page
-     *            the HTML page to parse, already processed through {@link BaseUtils#replaceWhitespace}
+     *            the HTML page to parse, already processed through {@link TextUtils#replaceWhitespace}
      * @return the parsed trackable, or null if none could be parsed
      */
     static Trackable parseTrackable(final String page, final String possibleTrackingcode) {
@@ -1354,20 +1354,20 @@ public abstract class GCParser {
         final Trackable trackable = new Trackable();
 
         // trackable geocode
-        trackable.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()));
+        trackable.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()));
 
         // trackable id
-        trackable.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GUID, true, trackable.getGuid()));
+        trackable.setGuid(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GUID, true, trackable.getGuid()));
 
         // trackable icon
-        trackable.setIconUrl(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ICON, true, trackable.getIconUrl()));
+        trackable.setIconUrl(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ICON, true, trackable.getIconUrl()));
 
         // trackable name
-        trackable.setName(Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, "")).toString());
+        trackable.setName(Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, "")).toString());
 
         // trackable type
         if (StringUtils.isNotBlank(trackable.getName())) {
-            trackable.setType(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType()));
+            trackable.setType(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType()));
         }
 
         // trackable owner name
@@ -1383,7 +1383,7 @@ public abstract class GCParser {
         }
 
         // trackable origin
-        trackable.setOrigin(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ORIGIN, true, trackable.getOrigin()));
+        trackable.setOrigin(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ORIGIN, true, trackable.getOrigin()));
 
         // trackable spotted
         try {
@@ -1401,11 +1401,11 @@ public abstract class GCParser {
                 trackable.setSpottedType(Trackable.SPOTTED_USER);
             }
 
-            if (BaseUtils.matches(page, GCConstants.PATTERN_TRACKABLE_SPOTTEDUNKNOWN)) {
+            if (TextUtils.matches(page, GCConstants.PATTERN_TRACKABLE_SPOTTEDUNKNOWN)) {
                 trackable.setSpottedType(Trackable.SPOTTED_UNKNOWN);
             }
 
-            if (BaseUtils.matches(page, GCConstants.PATTERN_TRACKABLE_SPOTTEDOWNER)) {
+            if (TextUtils.matches(page, GCConstants.PATTERN_TRACKABLE_SPOTTEDOWNER)) {
                 trackable.setSpottedType(Trackable.SPOTTED_OWNER);
             }
         } catch (Exception e) {
@@ -1415,7 +1415,7 @@ public abstract class GCParser {
 
         // released date - can be missing on the page
         try {
-            String releaseString = BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null);
+            String releaseString = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null);
             if (releaseString != null) {
                 trackable.setReleased(dateTbIn1.parse(releaseString));
                 if (trackable.getReleased() == null) {
@@ -1427,7 +1427,7 @@ public abstract class GCParser {
         }
 
         // trackable distance
-        final String distance = BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
+        final String distance = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
         if (null != distance) {
             try {
                 trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
@@ -1437,7 +1437,7 @@ public abstract class GCParser {
         }
 
         // trackable goal
-        trackable.setGoal(convertLinks(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal())));
+        trackable.setGoal(convertLinks(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal())));
 
         // trackable details & image
         try {
@@ -1572,7 +1572,7 @@ public abstract class GCParser {
             }
         } else {
             // extract embedded JSON data from page
-            rawResponse = BaseUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, "");
+            rawResponse = TextUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, "");
         }
 
         List<LogEntry> logs = new ArrayList<LogEntry>();
@@ -1774,7 +1774,7 @@ public abstract class GCParser {
 
     public static boolean editModifiedCoordinates(Geocache cache, Geopoint wpt) {
         final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        final String userToken = TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
         if (StringUtils.isEmpty(userToken)) {
             return false;
         }
@@ -1810,7 +1810,7 @@ public abstract class GCParser {
 
     public static boolean uploadPersonalNote(Geocache cache) {
         final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        final String userToken = BaseUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        final String userToken = TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
         if (StringUtils.isEmpty(userToken)) {
             return false;
         }

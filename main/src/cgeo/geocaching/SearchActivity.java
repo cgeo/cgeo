@@ -11,7 +11,7 @@ import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -134,7 +134,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         // Check if the query is a TB code
-        final String trackable = BaseUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
+        final String trackable = TextUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
         if (StringUtils.isNotBlank(trackable)) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackable.toUpperCase(Locale.US));
