@@ -25,7 +25,7 @@ public class OkapiClientTest extends CGeoTestCase {
     public static void testOCSearchMustWorkWithoutOAuthAccessTokens() {
         final String geoCode = "OC1234";
         Geocache cache = OkapiClient.getCache(geoCode);
-        assertNotNull(cache);
+        assertNotNull("You must have a valid OKAPI key installed for running this test (but you do not need to set credentials in the app).", cache);
         assertEquals("Wupper-Schein", cache.getName());
     }
 }
