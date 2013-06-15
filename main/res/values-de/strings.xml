@@ -533,6 +533,10 @@
     <string name="cache_log_image_default_title">Bild</string>
     <string name="cache_personal_note">Persönliche Notiz</string>
     <string name="cache_personal_note_edit">Bearbeiten</string>
+    <string name="cache_personal_note_upload">Hochladen</string>
+    <string name="cache_personal_note_uploading">Persönliche Notizen werden gesendet</string>
+    <string name="cache_personal_note_upload_done">Persönliche Notizen wurden hochgeladen</string>
+    <string name="cache_personal_note_upload_cancelled">Hochladen der Notizen abgebrochen</string>
     <string name="cache_personal_note_unstored">Cache noch nicht gespeichert</string>
     <string name="cache_personal_note_store">Der Cache wird zunächst gespeichert, damit persönliche Notizen möglich sind.</string>
     <string name="cache_description">Beschreibung</string>
