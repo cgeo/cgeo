@@ -31,30 +31,22 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public boolean supportsPersonalNote() {
+        return false;
+    }
+
+    @Override
+    public boolean uploadPersonalNote(Geocache cache) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean supportsOwnCoordinates() {
         return false;
     }
 
-    /**
-     * Uploading modified coordinates to website
-     *
-     * @param cache
-     * @param wpt
-     * @return success
-     */
     @Override
     public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Uploading personal note to website
-     *
-     * @param cache
-     * @return success
-     */
-    @Override
-    public boolean uploadPersonalNote(Geocache cache) {
         throw new UnsupportedOperationException();
     }
 

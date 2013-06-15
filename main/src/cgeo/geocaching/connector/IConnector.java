@@ -144,11 +144,11 @@ public interface IConnector {
     public String getGeocodeFromUrl(final String url);
 
     /**
-     * enable/disable uploading modified coordinates to website
-     *
+     * enable/disable uploading personal note
+     * 
      * @return true, when uploading is possible
      */
-    public boolean supportsOwnCoordinates();
+    public boolean supportsPersonalNote();
 
     /**
      * Uploading personal note to website
@@ -159,8 +159,15 @@ public interface IConnector {
     public boolean uploadPersonalNote(Geocache cache);
 
     /**
+     * enable/disable uploading modified coordinates to website
+     * 
+     * @return true, when uploading is possible
+     */
+    public boolean supportsOwnCoordinates();
+
+    /**
      * Reseting of modified coordinates on website to details
-     *
+     * 
      * @param cache
      * @return success
      */
