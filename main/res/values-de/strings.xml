@@ -814,7 +814,8 @@
     <string name="trackable_released">Ausgesetzt</string>
     <string name="trackable_distance">Gereiste Strecke</string>
     <string name="trackable_touch">Trackable-Aktion</string>
-
+    <string name="trackable_not_activated">Trackable nicht aktiviert</string>
+    
     <!-- user -->
     <string name="user_menu_title">Über</string>
     <string name="user_menu_view_hidden">Versteckte Caches</string>

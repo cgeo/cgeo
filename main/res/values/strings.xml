@@ -815,7 +815,8 @@
     <string name="trackable_released">Released</string>
     <string name="trackable_distance">Travelled</string>
     <string name="trackable_touch">Touch</string>
-
+    <string name="trackable_not_activated">Trackable not activated</string>
+    
     <!-- user -->
     <string name="user_menu_title">About</string>
     <string name="user_menu_view_hidden">Caches hidden</string>

@@ -7,11 +7,10 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
-import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -61,7 +60,7 @@ public class SearchActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
 
         // search query
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             final String query = intent.getStringExtra(SearchManager.QUERY);
             final boolean keywordSearch = intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH, true);
@@ -122,7 +121,7 @@ public class SearchActivity extends AbstractActivity {
 
         // otherwise see if this is a pure geocode
         if (StringUtils.isEmpty(geocode)) {
-            geocode = StringUtils.trim(query);
+            geocode = StringUtils.upperCase(StringUtils.trim(query));
         }
 
         final IConnector connector = ConnectorFactory.getConnector(geocode);
@@ -134,10 +133,10 @@ public class SearchActivity extends AbstractActivity {
         }
 
         // Check if the query is a TB code
-        final String trackable = TextUtils.getMatch(query, GCConstants.PATTERN_TB_CODE, true, 0, "", false);
-        if (StringUtils.isNotBlank(trackable)) {
+        final TrackableConnector trackableConnector = ConnectorFactory.getTrackableConnector(geocode);
+        if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackable.toUpperCase(Locale.US));
+            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
             startActivity(trackablesIntent);
             return true;
         }
@@ -240,7 +239,7 @@ public class SearchActivity extends AbstractActivity {
                         lonEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.w("Failed to update location.");
             }
         }
@@ -250,7 +249,7 @@ public class SearchActivity extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(SearchActivity.this, null, null, app.currentGeo());
+            final CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(SearchActivity.this, null, null, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
@@ -284,7 +283,7 @@ public class SearchActivity extends AbstractActivity {
         } else {
             try {
                 cgeocaches.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latText), StringUtils.trim(lonText)));
-            } catch (Geopoint.ParseException e) {
+            } catch (final Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
             }
         }
@@ -300,7 +299,7 @@ public class SearchActivity extends AbstractActivity {
 
     private void findByKeywordFn() {
         // find caches by coordinates
-        String keyText = keywordEditText.getText().toString();
+        final String keyText = keywordEditText.getText().toString();
 
         if (StringUtils.isBlank(keyText)) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_keyword));

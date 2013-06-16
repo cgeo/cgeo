@@ -35,6 +35,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      */
     private static final Pattern gpxZipFilePattern = Pattern.compile("((\\d{7,})|(pocketquery))" + "(_.+)?" + "\\.zip", Pattern.CASE_INSENSITIVE);
 
+    /**
+     * Pattern for GC codes
+     */
+    private final static Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
+
     private GCConnector() {
         // singleton
     }
@@ -55,7 +60,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         if (geocode == null) {
             return false;
         }
-        return GCConstants.PATTERN_GC_CODE.matcher(geocode).matches() || GCConstants.PATTERN_TB_CODE.matcher(geocode).matches();
+        return GCConnector.PATTERN_GC_CODE.matcher(geocode).matches();
     }
 
     @Override

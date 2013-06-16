@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -46,8 +47,14 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testCanHandle() {
         assertTrue(GCConnector.getInstance().canHandle("GC2MEGA"));
-        assertTrue(GCConnector.getInstance().canHandle("TB3F651"));
         assertFalse(GCConnector.getInstance().canHandle("OXZZZZZ"));
+    }
+
+    /**
+     * functionality moved to {@link TravelBugConnector}
+     */
+    public static void testCanNotHandleTrackablesAnymore() {
+        assertFalse(GCConnector.getInstance().canHandle("TB3F651"));
     }
 
     public static void testBaseCodings() {

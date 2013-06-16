@@ -12,6 +12,10 @@ import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.ox.OXConnector;
+import cgeo.geocaching.connector.trackable.GeokretyConnector;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TravelBugConnector;
+import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.geopoint.Viewport;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,21 +44,28 @@ public final class ConnectorFactory {
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     };
 
+    public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
+    private static final TrackableConnector[] TRACKABLE_CONNECTORS = new TrackableConnector[] {
+            new TravelBugConnector(),
+            new GeokretyConnector(),
+            UNKNOWN_TRACKABLE_CONNECTOR // must be last
+    };
+
     private static final ISearchByViewPort[] searchByViewPortConns;
 
     private static final ISearchByCenter[] searchByCenterConns;
 
     static {
-        List<ISearchByViewPort> vpConns = new ArrayList<ISearchByViewPort>();
-        for (IConnector conn : connectors) {
+        final List<ISearchByViewPort> vpConns = new ArrayList<ISearchByViewPort>();
+        for (final IConnector conn : connectors) {
             if (conn instanceof ISearchByViewPort) {
                 vpConns.add((ISearchByViewPort) conn);
             }
         }
         searchByViewPortConns = vpConns.toArray(new ISearchByViewPort[vpConns.size()]);
 
-        List<ISearchByCenter> centerConns = new ArrayList<ISearchByCenter>();
-        for (IConnector conn : connectors) {
+        final List<ISearchByCenter> centerConns = new ArrayList<ISearchByCenter>();
+        for (final IConnector conn : connectors) {
             // GCConnector is handled specially, omit it here!
             if (conn instanceof ISearchByCenter && !(conn instanceof GCConnector)) {
                 centerConns.add((ISearchByCenter) conn);
@@ -75,7 +86,7 @@ public final class ConnectorFactory {
         if (isInvalidGeocode(geocode)) {
             return false;
         }
-        for (IConnector connector : connectors) {
+        for (final IConnector connector : connectors) {
             if (connector.canHandle(geocode)) {
                 return true;
             }
@@ -87,8 +98,17 @@ public final class ConnectorFactory {
         return getConnector(cache.getGeocode());
     }
 
-    public static IConnector getConnector(Trackable trackable) {
-        return getConnector(trackable.getGeocode());
+    public static TrackableConnector getConnector(Trackable trackable) {
+        return getTrackableConnector(trackable.getGeocode());
+    }
+
+    public static TrackableConnector getTrackableConnector(String geocode) {
+        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+            if (connector.canHandleTrackable(geocode)) {
+                return connector;
+            }
+        }
+        return UNKNOWN_TRACKABLE_CONNECTOR; // avoid null checks by returning a non implementing connector
     }
 
     public static IConnector getConnector(final String geocodeInput) {
@@ -97,12 +117,12 @@ public final class ConnectorFactory {
         if (isInvalidGeocode(geocode)) {
             return UNKNOWN_CONNECTOR;
         }
-        for (IConnector connector : connectors) {
+        for (final IConnector connector : connectors) {
             if (connector.canHandle(geocode)) {
                 return connector;
             }
         }
-        // in case of errors, take UNKNOWN
+        // in case of errors, take UNKNOWN to avoid null checks everywhere
         return UNKNOWN_CONNECTOR;
     }
 
@@ -113,10 +133,10 @@ public final class ConnectorFactory {
     /** @see ISearchByViewPort#searchByViewport */
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
 
-        SearchResult result = new SearchResult();
-        for (ISearchByViewPort vpconn : searchByViewPortConns) {
+        final SearchResult result = new SearchResult();
+        for (final ISearchByViewPort vpconn : searchByViewPortConns) {
             if (vpconn.isActivated()) {
-                SearchResult temp = vpconn.searchByViewport(viewport, tokens);
+                final SearchResult temp = vpconn.searchByViewport(viewport, tokens);
                 if (temp != null) {
                     result.addGeocodes(temp.getGeocodes());
                 }
@@ -126,8 +146,8 @@ public final class ConnectorFactory {
     }
 
     public static String getGeocodeFromURL(final String url) {
-        for (IConnector connector : connectors) {
-            String geocode = connector.getGeocodeFromUrl(url);
+        for (final IConnector connector : connectors) {
+            final String geocode = connector.getGeocodeFromUrl(url);
             if (StringUtils.isNotBlank(geocode)) {
                 return geocode;
             }

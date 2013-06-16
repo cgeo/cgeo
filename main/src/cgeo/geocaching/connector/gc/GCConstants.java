@@ -84,6 +84,7 @@ public final class GCConstants {
     public final static String ERROR_TB_DOES_NOT_EXIST = "does not exist in the system";
     public final static String ERROR_TB_ELEMENT_EXCEPTION = "ElementNotFound Exception";
     public final static String ERROR_TB_ARITHMETIC_OVERFLOW = "operation resulted in an overflow";
+    public final static String ERROR_TB_NOT_ACTIVATED = "hasn't been activated";
     /**
      * some parts of the webpage don't correctly encode the name, therefore this pattern must be checked with a
      * trackable name that needs HTML encoding
@@ -157,12 +158,6 @@ public final class GCConstants {
     public final static Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     public final static Pattern PATTERN_USERTOKEN = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
 
-    /**
-     * Patterns for GC and TB codes
-     */
-    public final static Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
-    public final static Pattern PATTERN_TB_CODE = Pattern.compile("TB[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
-
     /** Live Map since 14.02.2012 */
     public final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
     public final static Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
@@ -194,7 +189,7 @@ public final class GCConstants {
      */
     public static long gccodeToGCId(final String gccode) {
         long base = GC_BASE31;
-        String geocodeWO = gccode.substring(2).toUpperCase(Locale.US);
+        final String geocodeWO = gccode.substring(2).toUpperCase(Locale.US);
 
         if ((geocodeWO.length() < 4) || (geocodeWO.length() == 4 && SEQUENCE_GCID.indexOf(geocodeWO.charAt(0)) < 16)) {
             base = GC_BASE16;
