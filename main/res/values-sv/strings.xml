@@ -139,14 +139,14 @@
 
     <!-- translation -->
     <string name="translate_to_sys_lang">Översätt till %s</string>
-    <string name="translate_to_english">Översätt till Engelska</string>
+    <string name="translate_to_english">Översätt till engelska</string>
     <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
 
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_start">Kommunikationen har inte påbörjats</string>
     <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
-    <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutningen till Internet.</string>
+    <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
     <string name="err_login">Inloggningsinformationen ej sparad</string>
     <string name="err_login_failed">Tyvärr kan c:geo inte logga in.</string>
     <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
@@ -157,7 +157,7 @@
     <string name="err_maintenance">Arbete pågår med servern Geocaching.com. c:geo fungerar under tiden i offline läge med sparade cacher.</string>
     <string name="err_license">Du har inte bekräftat licensavtalet med Geocaching.com, så c:geo kan inte läsa in koordinater för cacherna.</string>
     <string name="err_unvalidated_account">Du måste verifiera ditt konto på Geocaching.com\'s hemsida först.</string>
-    <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
+    <string name="err_unpublished">Den sökta cachen är opublicerad.</string>
     <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com.</string>
     <string name="err_detail_open">Tyvärr kan c:geo inte visa detaljer om geocachen.</string>
     <string name="err_detail_cache">Tyvärr kan c:geo inte visa den geocache du önskar. Är det verkligen en geocache?</string>
@@ -175,9 +175,9 @@
     <string name="err_application_no">c:geo kan inte hitta något lämpligt program.</string>
     <string name="err_auth_initialize">Tyvärr misslyckades c:geo att starta inloggningsproceduren.</string>
     <string name="err_auth_process">Inloggningsproceduren misslyckades.</string>
-    <string name="err_cannot_log_visit">c:geo har inte tillräckligt med information för att logga ditt besök. Vänligen försök igen från vyn men all information om cachen.</string>
+    <string name="err_cannot_log_visit">c:geo har inte tillräckligt med information för att logga ditt besök. Vänligen försök igen från vyn med all information om cachen.</string>
     <string name="err_init_cleared">Tyvärr kan c:geo inte rensa inloggningsinställningarna.</string>
-    <string name="err_download_fail">Tyvärr misslyckades c:geo att ladda ner cacher pga</string>
+    <string name="err_download_fail">Tyvärr misslyckades c:geo att ladda ner cacher.</string>
     <string name="err_dwld_details_failed">Tyvärr misslyckades c:geo att ladda detaljer.</string>
     <string name="err_load_descr_failed">Tyvärr kan c:geo inte ladda beskrivningen.</string>
     <string name="err_location_unknown">c:geo har inte koordinaterna för cachen.</string>
@@ -431,7 +431,7 @@
     <string name="init_backup_last">Tillgänglig kopia från</string>
     <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
     <string name="init_mapsources">Kartkällor</string>
-    <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer). Ytterligare valbara teman stödjs också.</string>
+    <string name="init_mapsources_description">Här kan du välja vilken kartkälla du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer). Ytterligare valbara teman stödjs också.</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_map_directory_description">Katalog med offline kartor</string>
     <string name="init_gpx_exportdir">GPX-exportkatalog</string>
@@ -455,7 +455,7 @@
     <string name="init_dbonsdcard">Databas på minneskort</string>
     <string name="init_dbmove_dbmove">Flyttar databasen</string>
     <string name="init_dbmove_running">Flyttar databasen</string>
-    <string name="init_dbmove_success">Databasen har ny flyttats.</string>
+    <string name="init_dbmove_success">Databasen har nu flyttats.</string>
     <string name="init_dbmove_failed">Misslyckades att flytta databasen</string>
     <string name="init_plain_logs">Visa loggar utan färger</string>
     <string name="init_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
@@ -475,7 +475,7 @@
     <string name="init_sendToCgeo_register_ok">Registreringen lyckades. PIN koden är ####. Använd den på c:geos hemsida för att lägga till enheten i den webbläsare.</string>
     <string name="init_sendToCgeo_register_fail">Registreringen misslyckades.</string>
     <string name="sendToCgeo_download_fail">c:geo misslyckades med att hämta cacher. Internetanslutning saknas eller send2c:geo är inte tillgänglig.</string>
-    <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2c:geo har gå. Vänligen registrera dig på nytt i inställningarna.</string>
+    <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2c:geo har upphört att gälla. Vänligen registrera dig på nytt i inställningarna.</string>
 
     <!-- auth -->
     <string name="auth_twitter">Twitter</string>
@@ -516,10 +516,10 @@
     <string name="cache_personal_note">Personlig anteckning</string>
     <string name="cache_personal_note_edit">Redigera</string>
     <string name="cache_personal_note_unstored">Cachen ej sparad</string>
-    <string name="cache_personal_note_store">Cachen kommera tt sparas först för att kunna hantera personlig anteckning.</string>
+    <string name="cache_personal_note_store">Cachen kommer att sparas först för att kunna hantera personlig anteckning.</string>
     <string name="cache_description">Beskrivning</string>
     <string name="cache_description_long">Lång beskrivning</string>
-    <string name="cache_description_table_note">Varning från c:geo! Beskrivningen innehåller HTML-tabeller som eventuellt kan behöva öppnas i en webbläsare för att visas på önskat sätt %s.</string>
+    <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
     <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
     <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
     <string name="cache_watchlist_add">Lägg till i watchlist</string>
@@ -547,7 +547,7 @@
     <string name="cache_dialog_loading_details_status_loadpage">Hämtar från gc.com</string>
     <string name="cache_dialog_loading_details_status_details">Analyserar cacheinformation</string>
     <string name="cache_dialog_loading_details_status_spoilers">Hämtar spoilerbilder</string>
-    <string name="cache_dialog_loading_details_status_logs">Hämtar tidgare loggar</string>
+    <string name="cache_dialog_loading_details_status_logs">Hämtar tidigare loggar</string>
     <string name="cache_dialog_loading_details_status_waypoints">Analyserar punkter</string>
     <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote.com</string>
     <string name="cache_dialog_loading_details_status_elevation">Hämtar höjddata</string>
