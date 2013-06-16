@@ -817,7 +817,13 @@
     <string name="trackable_touch">Touch</string>
     <string name="trackable_not_activated">Trackable not activated</string>
     
-    <!-- user -->
+    <string name="geokret_type_traditional">Traditional</string>
+    <string name="geokret_type_book_or_media">Book or electronic media</string>
+    <string name="geokret_type_human">Human</string>
+    <string name="geokret_type_coin">Coin</string>
+    <string name="geokret_type_post">Mail</string>
+
+	<!-- user -->
     <string name="user_menu_title">About</string>
     <string name="user_menu_view_hidden">Caches hidden</string>
     <string name="user_menu_view_found">Caches found</string>

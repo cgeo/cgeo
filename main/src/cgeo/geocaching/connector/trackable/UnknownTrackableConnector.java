@@ -16,4 +16,9 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
         return StringUtils.EMPTY;
     }
 
+    @Override
+    public Trackable searchTrackable(String geocode, String guid, String id) {
+        return null;
+    }
+
 }

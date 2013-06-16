@@ -5,7 +5,8 @@ import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
-import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
@@ -14,9 +15,9 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -68,7 +69,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private String contextMenuUser = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
-    private Handler loadTrackableHandler = new Handler() {
+    private final Handler loadTrackableHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -100,7 +101,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 invalidateOptionsMenuCompatible();
                 reinitializeViewPager();
 
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("TrackableActivity.loadTrackableHandler: ", e);
             }
 
@@ -118,8 +119,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         setTitle(res.getString(R.string.trackable));
 
         // get parameters
-        Bundle extras = getIntent().getExtras();
-        Uri uri = getIntent().getData();
+        final Bundle extras = getIntent().getExtras();
+        final Uri uri = getIntent().getData();
 
         // try to get data from extras
         if (extras != null) {
@@ -131,7 +132,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         // try to get data from URI
         if (geocode == null && guid == null && id == null && uri != null) {
-            String uriHost = uri.getHost().toLowerCase(Locale.US);
+            final String uriHost = uri.getHost().toLowerCase(Locale.US);
             if (uriHost.contains("geocaching.com")) {
                 geocode = uri.getQueryParameter("tracker");
                 guid = uri.getQueryParameter("guid");
@@ -155,7 +156,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     return;
                 }
             } else if (uriHost.contains("coord.info")) {
-                String uriPath = uri.getPath().toLowerCase(Locale.US);
+                final String uriPath = uri.getPath().toLowerCase(Locale.US);
                 if (uriPath != null && uriPath.startsWith("/tb")) {
                     geocode = uriPath.substring(1).toUpperCase(Locale.US);
                     guid = null;
@@ -186,7 +187,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
 
         createViewPager(0, null);
-        LoadTrackableThread thread = new LoadTrackableThread(loadTrackableHandler, geocode, guid, id);
+        final LoadTrackableThread thread = new LoadTrackableThread(loadTrackableHandler, geocode, guid, id);
         thread.start();
     }
 
@@ -198,10 +199,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         if (viewId == R.id.author) { // Log item author
             contextMenuUser = ((TextView) view).getText().toString();
         } else { // Trackable owner, and user holding trackable now
-            RelativeLayout itemLayout = (RelativeLayout) view.getParent();
-            TextView itemName = (TextView) itemLayout.findViewById(R.id.name);
+            final RelativeLayout itemLayout = (RelativeLayout) view.getParent();
+            final TextView itemName = (TextView) itemLayout.findViewById(R.id.name);
 
-            String selectedName = itemName.getText().toString();
+            final String selectedName = itemName.getText().toString();
             if (selectedName.equals(res.getString(R.string.trackable_owner))) {
                 contextMenuUser = trackable.getOwner();
             } else if (selectedName.equals(res.getString(R.string.trackable_spotted))) {
@@ -282,8 +283,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         public void run() {
             trackable = cgData.loadTrackable(geocode);
 
-            if ((trackable == null || trackable.isLoggable()) && !StringUtils.startsWithIgnoreCase(geocode, "GK")) {
-                trackable = GCParser.searchTrackable(geocode, guid, id);
+            if (trackable == null || trackable.isLoggable()) {
+                final TrackableConnector trackableConnector = ConnectorFactory.getTrackableConnector(geocode);
+                trackable = trackableConnector.searchTrackable(geocode, guid, id);
             }
             handler.sendMessage(Message.obtain());
         }
@@ -300,7 +302,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             try {
                 registerForContextMenu(view);
                 openContextMenu(view);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("TrackableActivity.UserActionsListener.onClick ", e);
             }
         }
@@ -322,12 +324,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             try {
-                HtmlImage imgGetter = new HtmlImage(trackable.getGeocode(), false, 0, false);
+                final HtmlImage imgGetter = new HtmlImage(trackable.getGeocode(), false, 0, false);
 
-                BitmapDrawable image = imgGetter.getDrawable(url);
-                Message message = handler.obtainMessage(0, image);
+                final BitmapDrawable image = imgGetter.getDrawable(url);
+                final Message message = handler.obtainMessage(0, image);
                 handler.sendMessage(message);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("TrackableActivity.TrackableIconThread.run: ", e);
             }
         }
@@ -378,7 +380,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     protected Pair<List<? extends Page>, Integer> getOrderedPages() {
-        List<Page> pages = new ArrayList<TrackableActivity.Page>();
+        final List<Page> pages = new ArrayList<TrackableActivity.Page>();
         pages.add(Page.DETAILS);
         if (!trackable.getLogs().isEmpty()) {
             pages.add(Page.LOGS);
@@ -436,7 +438,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 });
             }
 
-            TextView logView = holder.text;
+            final TextView logView = holder.text;
             logView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
 
             String logText = log.log;
@@ -448,9 +450,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 logView.setText(logText);
             }
 
-            ImageView statusMarker = holder.marker;
+            final ImageView statusMarker = holder.marker;
             // colored marker
-            int marker = log.type.markerId;
+            final int marker = log.type.markerId;
             if (marker != 0) {
                 statusMarker.setVisibility(View.VISIBLE);
                 statusMarker.setImageResource(marker);
@@ -518,7 +520,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             details.add(R.string.trackable_code, trackable.getGeocode());
 
             // trackable owner
-            TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown));
+            final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown));
             if (StringUtils.isNotBlank(trackable.getOwner())) {
                 owner.setText(Html.fromHtml(trackable.getOwner()), TextView.BufferType.SPANNABLE);
                 owner.setOnClickListener(new UserActionsListener());
@@ -546,7 +548,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 // days since last spotting
                 if (showTimeSpan && trackable.getLogs() != null) {
-                    for (LogEntry log : trackable.getLogs()) {
+                    for (final LogEntry log : trackable.getLogs()) {
                         if (log.type == LogType.RETRIEVED_IT || log.type == LogType.GRABBED_IT || log.type == LogType.DISCOVERED_IT || log.type == LogType.PLACED_IT) {
                             final int days = log.daysSinceLog();
                             text.append(" (").append(res.getQuantityString(R.plurals.days_ago, days, days)).append(')');
@@ -571,7 +573,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             // trackable origin
             if (StringUtils.isNotBlank(trackable.getOrigin())) {
-                TextView origin = details.add(R.string.trackable_origin, "");
+                final TextView origin = details.add(R.string.trackable_origin, "");
                 origin.setText(Html.fromHtml(trackable.getOrigin()), TextView.BufferType.SPANNABLE);
             }
 
@@ -621,7 +623,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                     @Override
                     public void handleMessage(Message message) {
-                        BitmapDrawable image = (BitmapDrawable) message.obj;
+                        final BitmapDrawable image = (BitmapDrawable) message.obj;
                         if (image != null) {
                             trackableImage.setImageDrawable((BitmapDrawable) message.obj);
                         }
@@ -633,12 +635,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     @Override
                     public void run() {
                         try {
-                            HtmlImage imgGetter = new HtmlImage(geocode, true, 0, false);
+                            final HtmlImage imgGetter = new HtmlImage(geocode, true, 0, false);
 
-                            BitmapDrawable image = imgGetter.getDrawable(trackable.getImage());
-                            Message message = handler.obtainMessage(0, image);
+                            final BitmapDrawable image = imgGetter.getDrawable(trackable.getImage());
+                            final Message message = handler.obtainMessage(0, image);
                             handler.sendMessage(message);
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
                             Log.e("TrackableActivity.DetailsViewCreator.ImageGetterThread: ", e);
                         }
                     }

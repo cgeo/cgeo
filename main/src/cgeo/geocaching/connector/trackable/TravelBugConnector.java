@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.connector.gc.GCParser;
 
 import java.util.regex.Pattern;
 
@@ -24,5 +25,10 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     public boolean isLoggable() {
         return true;
+    }
+
+    @Override
+    public Trackable searchTrackable(String geocode, String guid, String id) {
+        return GCParser.searchTrackable(geocode, guid, id);
     }
 }
