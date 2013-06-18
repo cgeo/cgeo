@@ -86,6 +86,7 @@ public class MainActivity extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
 
+            //TODO: Rework to be fully dynamic
             if (Settings.isGCConnectorActive()) {
                 StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
                 if (Login.isActualLoginStatus()) {
@@ -727,6 +728,7 @@ public class MainActivity extends AbstractActivity {
                 return;
             }
 
+            //TODO: Rework to be fully dynamic
             if (Settings.isGCConnectorActive()) {
                 // login
                 final StatusCode status = Login.login();
