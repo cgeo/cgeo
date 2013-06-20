@@ -1069,10 +1069,22 @@
     <string name="tts_service">Boussole parlante</string>
     <string name="tts_start">Commencer à parler</string>
     <string name="tts_stop">Arrêter de parler</string>
-    <string name="tts_kilometers">%s kilomètres</string>
-    <string name="tts_meters">%s mètres</string>
-    <string name="tts_miles">%s milles</string>
-    <string name="tts_feet">%s pieds</string>
+    <plurals name="tts_kilometers">
+        <item quantity="one">%s kilomètre</item>
+        <item quantity="other">%s kilomètres</item>
+    </plurals>
+    <plurals name="tts_meters">
+        <item quantity="one">%s mètre</item>
+        <item quantity="other">%s mètres</item>
+    </plurals>
+    <plurals name="tts_miles">
+        <item quantity="one">%s mille</item>
+        <item quantity="other">%s milles</item>
+    </plurals>
+    <plurals name="tts_feet">
+        <item quantity="one">%s pied</item>
+        <item quantity="other">%s pieds</item>
+    </plurals>
     <string name="tts_oclock">%s heures</string>
 
     <!-- various -->

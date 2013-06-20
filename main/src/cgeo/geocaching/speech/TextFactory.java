@@ -26,36 +26,60 @@ public class TextFactory {
 
         if (Settings.isUseMetricUnits()) {
             if (kilometers >= 5.0) {
-                return getString(R.string.tts_kilometers, String.valueOf(Math.round(kilometers)));
+                int quantity = Math.round(kilometers);
+                return getQuantityString(R.plurals.tts_kilometers, quantity, String.valueOf(quantity));
             }
             if (kilometers >= 1.0) {
+                float precision1 = Math.round(kilometers * 10.0f) / 10.0f;
+                float precision0 = Math.round(kilometers);
+                if (precision1 == precision0) {
+                    // this is an int - e.g. 2 kilometers
+                    int quantity = (int) precision0;
+                    return getQuantityString(R.plurals.tts_kilometers, quantity, String.valueOf(quantity));
+                }
+                // this is no int - e.g. 1.7 kilometers
                 String digits = String.format(Locale.getDefault(), "%.1f", kilometers);
-                return getString(R.string.tts_kilometers, digits);
+                // always use the plural (9 leads to plural)
+                return getQuantityString(R.plurals.tts_kilometers, 9, digits);
             }
-            int meters = (int) (kilometers * 1000.0);
+            int meters = (int) Math.round(kilometers * 1000.0);
             if (meters > 50) {
-                return getString(R.string.tts_meters, String.valueOf(Math.round(meters / 10.0) * 10));
+                meters = (int) Math.round(meters / 10.0) * 10;
             }
-            return getString(R.string.tts_meters, String.valueOf(meters));
+            return getQuantityString(R.plurals.tts_meters, meters, String.valueOf(meters));
         }
 
         float miles = kilometers / IConversion.MILES_TO_KILOMETER;
         if (miles >= 3.0) {
-            return getString(R.string.tts_miles, String.valueOf(Math.round(miles)));
+            int quantity = Math.round(miles);
+            return getQuantityString(R.plurals.tts_miles, quantity, String.valueOf(quantity));
         }
         if (miles >= 0.2) { // approx 1000 ft
+            float precision1 = Math.round(miles * 10.0f) / 10.0f;
+            float precision0 = Math.round(miles);
+            if (precision1 == precision0) {
+                // this is an int - e.g. 2 miles
+                int quantity = (int) precision0;
+                return getQuantityString(R.plurals.tts_miles, quantity, String.valueOf(quantity));
+            }
+            // this is no int - e.g. 1.7 miles
             String digits = String.format(Locale.getDefault(), "%.1f", miles);
-            return getString(R.string.tts_miles, digits);
+            // always use the plural (9 leads to plural)
+            return getQuantityString(R.plurals.tts_miles, 9, digits);
         }
         int feet = (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET);
         if (feet > 300) {
-            return getString(R.string.tts_feet, String.valueOf(Math.round(feet / 10.0) * 10));
+            feet = (int) Math.round(feet / 10.0) * 10;
         }
-        return getString(R.string.tts_feet, String.valueOf(feet));
+        return getQuantityString(R.plurals.tts_feet, feet, String.valueOf(feet));
     }
 
     private static String getString(int resourceId, Object... formatArgs) {
         return cgeoapplication.getInstance().getString(resourceId, formatArgs);
+    }
+
+    private static String getQuantityString(int resourceId, int quantity, Object... formatArgs) {
+        return cgeoapplication.getInstance().getResources().getQuantityString(resourceId, quantity, formatArgs);
     }
 
     private static String getDirection(Geopoint position, Geopoint target, float direction) {
