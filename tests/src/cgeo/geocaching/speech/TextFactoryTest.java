@@ -41,7 +41,7 @@ public class TextFactoryTest extends AndroidTestCase {
         setLocale(defaultLocale1, defaultLocale2, defaultMetric);
     }
 
-    public void testGetDistanceEn() {
+    public void testGetTextEn() {
         setLocale(Locale.UK, true);
         assertEquals("one o'clock. 6 kilometers", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
         assertEquals("9 o'clock. 1.6 kilometers", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
@@ -61,7 +61,7 @@ public class TextFactoryTest extends AndroidTestCase {
         assertEquals("12 o'clock. 0 feet", TextFactory.getText(MY_POSITION, MY_POSITION, 0));
     }
 
-    public void testGetDistanceDe() {
+    public void testGetTextDe() {
         setLocale(Locale.GERMANY, true);
         assertEquals("ein Uhr. 6 Kilometer", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
         assertEquals("9 Uhr. 1,6 Kilometer", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
@@ -81,7 +81,7 @@ public class TextFactoryTest extends AndroidTestCase {
         assertEquals("12 Uhr. 0 Fuß", TextFactory.getText(MY_POSITION, MY_POSITION, 0));
     }
 
-    public void testGetDistanceFr() {
+    public void testGetTextFr() {
         setLocale(Locale.FRANCE, true);
         assertEquals("une heure. 6 kilomètres", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
         assertEquals("9 heures. 1,6 kilomètres", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
@@ -101,7 +101,7 @@ public class TextFactoryTest extends AndroidTestCase {
         assertEquals("12 heures. 0 pied", TextFactory.getText(MY_POSITION, MY_POSITION, 0));
     }
 
-    public void testGetDistanceIt() {
+    public void testGetTextIt() {
         setLocale(Locale.ITALY, true);
         assertEquals("a ore una. 6 chilometri", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
         assertEquals("a ore 9. 1,6 chilometri", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
@@ -121,7 +121,7 @@ public class TextFactoryTest extends AndroidTestCase {
         assertEquals("a ore 12. 0 piedi", TextFactory.getText(MY_POSITION, MY_POSITION, 0));
     }
 
-    public void testGetDistanceSv() {
+    public void testGetTextSv() {
         setLocale(new Locale("sv", "SE"), true);
         assertEquals("Klockan ett. 6 kilometer", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
         assertEquals("Klockan 9. 1,6 kilometer", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
