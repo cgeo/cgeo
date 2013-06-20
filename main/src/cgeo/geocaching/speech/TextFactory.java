@@ -25,53 +25,56 @@ public class TextFactory {
         float kilometers = position.distanceTo(target);
 
         if (Settings.isUseMetricUnits()) {
-            if (kilometers >= 5.0) {
-                int quantity = Math.round(kilometers);
-                return getQuantityString(R.plurals.tts_kilometers, quantity, String.valueOf(quantity));
-            }
-            if (kilometers >= 1.0) {
-                float precision1 = Math.round(kilometers * 10.0f) / 10.0f;
-                float precision0 = Math.round(kilometers);
-                if (precision1 == precision0) {
-                    // this is an int - e.g. 2 kilometers
-                    int quantity = (int) precision0;
-                    return getQuantityString(R.plurals.tts_kilometers, quantity, String.valueOf(quantity));
-                }
-                // this is no int - e.g. 1.7 kilometers
-                String digits = String.format(Locale.getDefault(), "%.1f", kilometers);
-                // always use the plural (9 leads to plural)
-                return getQuantityString(R.plurals.tts_kilometers, 9, digits);
-            }
-            int meters = (int) Math.round(kilometers * 1000.0);
-            if (meters > 50) {
-                meters = (int) Math.round(meters / 10.0) * 10;
-            }
-            return getQuantityString(R.plurals.tts_meters, meters, String.valueOf(meters));
+            return getDistance(kilometers, (int) (kilometers * 1000.0),
+                    5.0f, 1.0f, 50,
+                    R.plurals.tts_kilometers, R.string.tts_one_kilometer,
+                    R.plurals.tts_meters, R.string.tts_one_meter);
         }
+        return getDistance(kilometers / IConversion.MILES_TO_KILOMETER,
+                (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET),
+                3.0f, 0.2f, 300,
+                R.plurals.tts_miles, R.string.tts_one_mile,
+                R.plurals.tts_feet, R.string.tts_one_foot);
+    }
 
-        float miles = kilometers / IConversion.MILES_TO_KILOMETER;
-        if (miles >= 3.0) {
-            int quantity = Math.round(miles);
-            return getQuantityString(R.plurals.tts_miles, quantity, String.valueOf(quantity));
-        }
-        if (miles >= 0.2) { // approx 1000 ft
-            float precision1 = Math.round(miles * 10.0f) / 10.0f;
-            float precision0 = Math.round(miles);
-            if (precision1 == precision0) {
-                // this is an int - e.g. 2 miles
-                int quantity = (int) precision0;
-                return getQuantityString(R.plurals.tts_miles, quantity, String.valueOf(quantity));
+    private static String getDistance(float farDistance, int nearDistance,
+            float farFarAway, float farNearAway, int nearFarAway,
+            int farId, int farOneId, int nearId, int nearOneId) {
+        if (farDistance >= farFarAway) {
+            // example: "5 kilometers" - always without decimal digits
+            int quantity = Math.round(farDistance);
+            if (quantity == 1) {
+                return getString(farOneId, quantity, String.valueOf(quantity));
             }
-            // this is no int - e.g. 1.7 miles
-            String digits = String.format(Locale.getDefault(), "%.1f", miles);
+            return getQuantityString(farId, quantity, String.valueOf(quantity));
+        }
+        if (farDistance >= farNearAway) {
+            // example: "2.2 kilometers" - decimals if necessary
+            float precision1 = Math.round(farDistance * 10.0f) / 10.0f;
+            float precision0 = Math.round(farDistance);
+            if (precision1 == precision0) {
+                // this is an int - e.g. 2 kilometers
+                int quantity = (int) precision0;
+                if (quantity == 1) {
+                    return getString(farOneId, quantity, String.valueOf(quantity));
+                }
+                return getQuantityString(farId, quantity, String.valueOf(quantity));
+            }
+            // this is no int - e.g. 1.7 kilometers
+            String digits = String.format(Locale.getDefault(), "%.1f", farDistance);
             // always use the plural (9 leads to plural)
-            return getQuantityString(R.plurals.tts_miles, 9, digits);
+            return getQuantityString(farId, 9, digits);
         }
-        int feet = (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET);
-        if (feet > 300) {
-            feet = (int) Math.round(feet / 10.0) * 10;
+        // example: "34 meters"
+        int quantity = nearDistance;
+        if (quantity > nearFarAway) {
+            // example: "120 meters" - rounded to 10 meters
+            quantity = (int) Math.round(quantity / 10.0) * 10;
         }
-        return getQuantityString(R.plurals.tts_feet, feet, String.valueOf(feet));
+        if (quantity == 1) {
+            return getString(nearOneId, quantity, String.valueOf(quantity));
+        }
+        return getQuantityString(nearId, quantity, String.valueOf(quantity));
     }
 
     private static String getString(int resourceId, Object... formatArgs) {
@@ -89,6 +92,9 @@ public class TextFactory {
         int hours = (degrees + 15) / 30;
         if (hours == 0) {
             hours = 12;
+        }
+        if (hours == 1) {
+            return getString(R.string.tts_one_oclock, String.valueOf(hours));
         }
         return getString(R.string.tts_oclock, String.valueOf(hours));
     }

@@ -877,24 +877,29 @@
     <string name="tts_service">Talande kompass</string>
     <string name="tts_start">Starta tal</string>
     <string name="tts_stop">Stoppa tal</string>
+    <string name="tts_one_kilometer">ett kilometer</string>
     <plurals name="tts_kilometers">
         <item quantity="one">%s kilometer</item>
         <item quantity="other">%s kilometer</item>
     </plurals>
+    <string name="tts_one_meter">ett meter</string>
     <plurals name="tts_meters">
         <item quantity="one">%s meter</item>
         <item quantity="other">%s meter</item>
     </plurals>
+    <string name="tts_one_mile">ett engelsk mil</string>
     <plurals name="tts_miles">
-        <item quantity="one">%s eng. mil</item>
-        <item quantity="other">%s eng. mil</item>
+        <item quantity="one">%s engelsk mil</item>
+        <item quantity="other">%s engelsk mil</item>
     </plurals>
+    <string name="tts_one_foot">ett fot</string>
     <plurals name="tts_feet">
         <item quantity="one">%s fot</item>
         <item quantity="other">%s fot</item>
     </plurals>
+    <string name="tts_one_oclock">Klockan ett</string>
     <string name="tts_oclock">Klockan %s</string>
-
+    
     <!-- various -->
     <string name="clipboard_copy_ok">Kopierat till urklipp</string>
 
