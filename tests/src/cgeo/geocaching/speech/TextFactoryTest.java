@@ -125,19 +125,19 @@ public class TextFactoryTest extends AndroidTestCase {
         setLocale(new Locale("sv", "SE"), true);
         assertEquals("Klockan ett. 6 kilometer", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
         assertEquals("Klockan 9. 1,6 kilometer", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
-        assertEquals("Klockan 6. ett kilometer", TextFactory.getText(MY_POSITION, SOUTH_1020M, 0));
+        assertEquals("Klockan 6. en kilometer", TextFactory.getText(MY_POSITION, SOUTH_1020M, 0));
         assertEquals("Klockan 3. 120 meter", TextFactory.getText(MY_POSITION, EAST_123M, 0));
         assertEquals("Klockan 11. 34 meter", TextFactory.getText(MY_POSITION, WEST_34M, 290));
-        assertEquals("Klockan 9. ett meter", TextFactory.getText(MY_POSITION, EAST_1M, 180));
+        assertEquals("Klockan 9. en meter", TextFactory.getText(MY_POSITION, EAST_1M, 180));
         assertEquals("Klockan 12. 0 meter", TextFactory.getText(MY_POSITION, MY_POSITION, 0));
 
         setLocale(new Locale("sv", "SE"), false);
         assertEquals("Klockan ett. 4 engelsk mil", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
-        assertEquals("Klockan 9. ett engelsk mil", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
+        assertEquals("Klockan 9. en engelsk mil", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
         assertEquals("Klockan 6. 0,6 engelsk mil", TextFactory.getText(MY_POSITION, SOUTH_1020M, 0));
         assertEquals("Klockan 3. 400 fot", TextFactory.getText(MY_POSITION, EAST_123M, 0));
         assertEquals("Klockan 11. 111 fot", TextFactory.getText(MY_POSITION, WEST_34M, 290));
-        assertEquals("Klockan 9. ett fot", TextFactory.getText(MY_POSITION, EAST_1FT, 180));
+        assertEquals("Klockan 9. en fot", TextFactory.getText(MY_POSITION, EAST_1FT, 180));
         assertEquals("Klockan 12. 0 fot", TextFactory.getText(MY_POSITION, MY_POSITION, 0));
     }
 

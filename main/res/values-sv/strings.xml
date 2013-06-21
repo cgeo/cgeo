@@ -877,22 +877,22 @@
     <string name="tts_service">Talande kompass</string>
     <string name="tts_start">Starta tal</string>
     <string name="tts_stop">Stoppa tal</string>
-    <string name="tts_one_kilometer">ett kilometer</string>
+    <string name="tts_one_kilometer">en kilometer</string>
     <plurals name="tts_kilometers">
         <item quantity="one">%s kilometer</item>
         <item quantity="other">%s kilometer</item>
     </plurals>
-    <string name="tts_one_meter">ett meter</string>
+    <string name="tts_one_meter">en meter</string>
     <plurals name="tts_meters">
         <item quantity="one">%s meter</item>
         <item quantity="other">%s meter</item>
     </plurals>
-    <string name="tts_one_mile">ett engelsk mil</string>
+    <string name="tts_one_mile">en engelsk mil</string>
     <plurals name="tts_miles">
         <item quantity="one">%s engelsk mil</item>
         <item quantity="other">%s engelsk mil</item>
     </plurals>
-    <string name="tts_one_foot">ett fot</string>
+    <string name="tts_one_foot">en fot</string>
     <plurals name="tts_feet">
         <item quantity="one">%s fot</item>
         <item quantity="other">%s fot</item>
