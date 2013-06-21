@@ -1097,10 +1097,27 @@
     <string name="tts_service">Talking compass</string>
     <string name="tts_start">Start talking</string>
     <string name="tts_stop">Stop talking</string>
-    <string name="tts_kilometers">%s kilometers</string>
-    <string name="tts_meters">%s meters</string>
-    <string name="tts_miles">%s miles</string>
-    <string name="tts_feet">%s feet</string>
+    <string name="tts_one_kilometer">one kilometer</string>
+    <plurals name="tts_kilometers">
+        <item quantity="one">%s kilometer</item>
+        <item quantity="other">%s kilometers</item>
+    </plurals>
+    <string name="tts_one_meter">one meter</string>
+    <plurals name="tts_meters">
+        <item quantity="one">%s meter</item>
+        <item quantity="other">%s meters</item>
+    </plurals>
+    <string name="tts_one_mile">one mile</string>
+    <plurals name="tts_miles">
+        <item quantity="one">%s mile</item>
+        <item quantity="other">%s miles</item>
+    </plurals>
+    <string name="tts_one_foot">one foot</string>
+    <plurals name="tts_feet">
+        <item quantity="one">%s foot</item>
+        <item quantity="other">%s feet</item>
+    </plurals>
+    <string name="tts_one_oclock">one o\'clock</string>
     <string name="tts_oclock">%s o\'clock</string>
 
     <!-- various -->

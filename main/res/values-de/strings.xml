@@ -1095,10 +1095,27 @@
     <string name="tts_service">Sprechender Kompass</string>
     <string name="tts_start">Starte Sprache</string>
     <string name="tts_stop">Stoppe Sprache</string>
-    <string name="tts_kilometers">%s Kilometer</string>
-    <string name="tts_meters">%s Meter</string>
-    <string name="tts_miles">%s Meilen</string>
-    <string name="tts_feet">%s Fuß</string>
+    <string name="tts_one_kilometer">ein Kilometer</string>
+    <plurals name="tts_kilometers">
+        <item quantity="one">%s Kilometer</item>
+        <item quantity="other">%s Kilometer</item>
+    </plurals>
+    <string name="tts_one_meter">ein Meter</string>
+    <plurals name="tts_meters">
+        <item quantity="one">%s Meter</item>
+        <item quantity="other">%s Meter</item>
+    </plurals>
+    <string name="tts_one_mile">eine Meile</string>
+    <plurals name="tts_miles">
+        <item quantity="one">%s Meile</item>
+        <item quantity="other">%s Meilen</item>
+    </plurals>
+    <string name="tts_one_foot">ein Fuß</string>
+    <plurals name="tts_feet">
+        <item quantity="one">%s Fuß</item>
+        <item quantity="other">%s Fuß</item>
+    </plurals>
+    <string name="tts_one_oclock">ein Uhr</string>
     <string name="tts_oclock">%s Uhr</string>
 
     <!-- various -->
