@@ -5,6 +5,8 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.ProcessUtils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Intent;
 
 public abstract class AbstractApp implements App {
@@ -26,7 +28,7 @@ public abstract class AbstractApp implements App {
 
     @Override
     public boolean isInstalled() {
-        if (ProcessUtils.isInstalled(packageName)) {
+        if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isInstalled(packageName)) {
             return true;
         }
         return MainActivity.isIntentAvailable(intent);
