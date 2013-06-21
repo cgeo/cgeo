@@ -8,6 +8,10 @@
         android:minSdkVersion="4"
         android:targetSdkVersion="13" />
 
+    <uses-feature
+        android:name="android.hardware.screen.portrait"
+        android:required="false" />
+
     <instrumentation
         android:name="com.zutubi.android.junitreport.JUnitReportTestRunner"
         android:targetPackage="cgeo.geocaching" />
