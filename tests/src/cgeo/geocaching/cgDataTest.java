@@ -131,4 +131,15 @@ public class cgDataTest extends CGeoTestCase {
         assertNotNull("Logs must not be null", logs);
         assertEquals("Logs from empty geocode must be empty", 0, logs.size());
     }
+
+    public static void testLoadCacheHistory() {
+        int sumCaches = 0;
+        for (CacheType cacheType : CacheType.values()) {
+            SearchResult historyOfType = cgData.getHistoryOfCaches(false, cacheType);
+            assertNotNull(historyOfType);
+            sumCaches += historyOfType.getCount();
+        }
+        // check that two different routines behave the same
+        assertEquals(cgData.getAllHistoryCachesCount(), sumCaches);
+    }
 }
