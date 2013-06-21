@@ -171,12 +171,12 @@ public class CompassView extends View implements PeriodicHandlerListener {
             headingDrawn = cacheHeadingShown;
         }
 
-        float azimuthTemp = azimuthDrawn;
+        final float azimuthTemp = azimuthDrawn;
         final float azimuthRelative = AngleUtils.normalize(azimuthTemp - headingDrawn);
 
         // compass margins
-        int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
-        int canvasCenterY = (compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
+        final int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
+        final int canvasCenterY = (compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
 
         super.onDraw(canvas);
 
@@ -217,38 +217,36 @@ public class CompassView extends View implements PeriodicHandlerListener {
     }
 
     private int measureWidth(int measureSpec) {
-        int result;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
+        final int specMode = MeasureSpec.getMode(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
 
         if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
-        } else {
-            result = compassArrow.getWidth() + getPaddingLeft() + getPaddingRight();
-
-            if (specMode == MeasureSpec.AT_MOST) {
-                result = Math.min(result, specSize);
-            }
+            return specSize;
         }
 
-        return result;
+        final int desired = compassArrow.getWidth() + getPaddingLeft() + getPaddingRight();
+        if (specMode == MeasureSpec.AT_MOST) {
+            return Math.min(desired, specSize);
+        }
+
+        return desired;
     }
 
     private int measureHeight(int measureSpec) {
-        int result;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
+        // The duplicated code in measureHeight and measureWidth cannot be avoided.
+        // Those methods must be efficient, therefore we cannot extract the code differences and unify the remainder.
+        final int specMode = MeasureSpec.getMode(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
 
         if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
-        } else {
-            result = compassArrow.getHeight() + getPaddingTop() + getPaddingBottom();
-
-            if (specMode == MeasureSpec.AT_MOST) {
-                result = Math.min(result, specSize);
-            }
+            return specSize;
         }
 
-        return result;
+        final int desired = compassArrow.getHeight() + getPaddingTop() + getPaddingBottom();
+        if (specMode == MeasureSpec.AT_MOST) {
+            return Math.min(desired, specSize);
+        }
+
+        return desired;
     }
 }
