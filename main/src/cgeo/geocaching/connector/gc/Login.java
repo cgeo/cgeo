@@ -8,9 +8,9 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -52,9 +52,9 @@ public abstract class Login {
                 "dd/MM/yyyy"
         };
 
-        Map<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
+        final Map<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
 
-        for (String format : formats) {
+        for (final String format : formats) {
             map.put(format, new SimpleDateFormat(format, Locale.ENGLISH));
         }
 
@@ -147,8 +147,8 @@ public abstract class Login {
     }
 
     public static StatusCode logout() {
-        HttpResponse logoutResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f");
-        String logoutData = Network.getResponseData(logoutResponse);
+        final HttpResponse logoutResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f");
+        final String logoutData = Network.getResponseData(logoutResponse);
         if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
             return StatusCode.MAINTENANCE;
         }
@@ -211,7 +211,7 @@ public abstract class Login {
             int cachesCount = 0;
             try {
                 cachesCount = Integer.parseInt(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 Log.e("getLoginStatus: bad cache count", e);
             }
             setActualCachesFound(cachesCount);
@@ -276,7 +276,7 @@ public abstract class Login {
             }
             // No match? There may be no avatar set by user.
             Log.d("No avatar set for user");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.w("Error when retrieving user avatar", e);
         }
         return null;
@@ -294,7 +294,7 @@ public abstract class Login {
             return;
         }
 
-        String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
+        final String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
         if (null != customDate) {
             Settings.setGcCustomDate(customDate);
         }
@@ -310,14 +310,14 @@ public abstract class Login {
         if (gcCustomDateFormats.containsKey(format)) {
             try {
                 return gcCustomDateFormats.get(format).parse(trimmed);
-            } catch (ParseException e) {
+            } catch (final ParseException e) {
             }
         }
 
-        for (SimpleDateFormat sdf : gcCustomDateFormats.values()) {
+        for (final SimpleDateFormat sdf : gcCustomDateFormats.values()) {
             try {
                 return sdf.parse(trimmed);
-            } catch (ParseException e) {
+            } catch (final ParseException e) {
             }
         }
 
@@ -347,7 +347,7 @@ public abstract class Login {
             return true;
         }
 
-        for (String s : a) {
+        for (final String s : a) {
             if (StringUtils.isNotEmpty(s)) {
                 return false;
             }
@@ -373,24 +373,24 @@ public abstract class Login {
         if (matcherViewstateCount.find()) {
             try {
                 count = Integer.parseInt(matcherViewstateCount.group(1));
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 Log.e("getViewStates", e);
             }
         }
 
-        String[] viewstates = new String[count];
+        final String[] viewstates = new String[count];
 
         // Get the viewstates
         final MatcherWrapper matcherViewstates = new MatcherWrapper(GCConstants.PATTERN_VIEWSTATES, page);
         while (matcherViewstates.find()) {
-            String sno = matcherViewstates.group(1); // number of viewstate
+            final String sno = matcherViewstates.group(1); // number of viewstate
             int no;
             if (StringUtils.isEmpty(sno)) {
                 no = 0;
             } else {
                 try {
                     no = Integer.parseInt(sno);
-                } catch (NumberFormatException e) {
+                } catch (final NumberFormatException e) {
                     Log.e("getViewStates", e);
                     no = 0;
                 }
@@ -436,17 +436,17 @@ public abstract class Login {
      * @return
      */
     public static String postRequestLogged(final String uri, final Parameters params) {
-        HttpResponse response = Network.postRequest(uri, params);
-        String data = Network.getResponseData(response);
+        final String data = Network.getResponseData(Network.postRequest(uri, params));
 
-        if (!getLoginStatus(data)) {
-            if (login() == StatusCode.NO_ERROR) {
-                response = Network.postRequest(uri, params);
-                data = Network.getResponseData(response);
-            } else {
-                Log.i("Working as guest.");
-            }
+        if (getLoginStatus(data)) {
+            return data;
         }
+
+        if (login() == StatusCode.NO_ERROR) {
+            return Network.getResponseData(Network.postRequest(uri, params));
+        }
+
+        Log.i("Working as guest.");
         return data;
     }
 
