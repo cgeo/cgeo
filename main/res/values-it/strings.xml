@@ -506,7 +506,7 @@
 
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Un cache</item>
+        <item quantity="one">un cache</item>
         <item quantity="other">%1$d cache</item>
     </plurals>
 
@@ -550,7 +550,7 @@
     <string name="cache_waypoints">Waypoints</string>
 
     <plurals name="waypoints">
-        <item quantity="one">1 Waypoint</item>
+        <item quantity="one">un Waypoint</item>
         <item quantity="other">%d Waypoint</item>
     </plurals>
 
@@ -1088,22 +1088,22 @@
     <string name="tts_stop">Stop voce</string>
     <string name="tts_one_kilometer">uno chilometro</string>
     <plurals name="tts_kilometers">
-        <item quantity="one">%s chilometro</item>
+        <item quantity="one">un chilometro</item>
         <item quantity="other">%s chilometri</item>
     </plurals>
-    <string name="tts_one_meter">uno metro</string>
+    <string name="tts_one_meter">un metro</string>
     <plurals name="tts_meters">
-        <item quantity="one">%s metro</item>
+        <item quantity="one">un metro</item>
         <item quantity="other">%s metri</item>
     </plurals>
-    <string name="tts_one_mile">uno miglio</string>
+    <string name="tts_one_mile">un miglio</string>
     <plurals name="tts_miles">
-        <item quantity="one">%s miglio</item>
+        <item quantity="one">un miglio</item>
         <item quantity="other">%s miglia</item>
     </plurals>
-    <string name="tts_one_foot">uno piede</string>
+    <string name="tts_one_foot">un piede</string>
     <plurals name="tts_feet">
-        <item quantity="one">%s piede</item>
+        <item quantity="one">un piede</item>
         <item quantity="other">%s piedi</item>
     </plurals>
     <string name="tts_one_oclock">a ore una</string>
