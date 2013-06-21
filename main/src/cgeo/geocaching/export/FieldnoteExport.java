@@ -70,10 +70,10 @@ class FieldnoteExport extends AbstractExport {
     }
 
     private Dialog getExportOptionsDialog(final Geocache[] caches, final Activity activity) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         // AlertDialog has always dark style, so we have to apply it as well always
-        View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.fieldnote_export_dialog, null);
+        final View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.fieldnote_export_dialog, null);
         builder.setView(layout);
 
         final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);
@@ -132,13 +132,13 @@ class FieldnoteExport extends AbstractExport {
             final StringBuilder fieldNoteBuffer = new StringBuilder();
             try {
                 int i = 0;
-                for (Geocache cache : caches) {
+                for (final Geocache cache : caches) {
                     if (cache.isLogOffline()) {
                         appendFieldNote(fieldNoteBuffer, cache, cgData.loadLogOffline(cache.getGeocode()));
                         publishProgress(++i);
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("FieldnoteExport.ExportTask generation", e);
                 return false;
             }
@@ -151,17 +151,17 @@ class FieldnoteExport extends AbstractExport {
 
             exportLocation.mkdirs();
 
-            SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
+            final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
             exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
 
             Writer fileWriter = null;
             BufferedOutputStream buffer = null;
             try {
-                OutputStream os = new FileOutputStream(exportFile);
+                final OutputStream os = new FileOutputStream(exportFile);
                 buffer = new BufferedOutputStream(os);
                 fileWriter = new OutputStreamWriter(buffer, CharEncoding.UTF_16);
                 fileWriter.write(fieldNoteBuffer.toString());
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 Log.e("FieldnoteExport.ExportTask export", e);
                 return false;
             } finally {
@@ -181,17 +181,11 @@ class FieldnoteExport extends AbstractExport {
                 }
 
                 final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
-                String page = Network.getResponseData(Network.getRequest(uri));
+                final String page = Login.getRequestLogged(uri, null);
 
-                if (!Login.getLoginStatus(page)) {
-                    // Login.isActualLoginStatus() was wrong, we are not logged in
-                    final StatusCode loginState = Login.login();
-                    if (loginState == StatusCode.NO_ERROR) {
-                        page = Network.getResponseData(Network.getRequest(uri));
-                    } else {
-                        Log.e("FieldnoteExport.ExportTask upload: No login (error: " + loginState + ')');
-                        return false;
-                    }
+                if (StringUtils.isBlank(page)) {
+                    Log.e("FieldnoteExport.ExportTask get page: No data from server");
+                    return false;
                 }
 
                 final String[] viewstates = Login.getViewstates(page);

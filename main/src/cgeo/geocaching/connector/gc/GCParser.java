@@ -1008,7 +1008,7 @@ public abstract class GCParser {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
         String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
-            Log.e("GCParser.postLogTrackable: Can not log in geocaching");
+            Log.e("GCParser.postLog: Cannot log in geocaching");
             return new ImmutablePair<StatusCode, String>(StatusCode.NOT_LOGGED_IN, "");
         }
 
@@ -1103,19 +1103,12 @@ public abstract class GCParser {
      * @return status code to indicate success or failure
      */
     public static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
-        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
+        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").build().toString();
 
-        String page = Network.getResponseData(Network.getRequest(uri));
-
-        if (!Login.getLoginStatus(page)) {
-            // Login.isActualLoginStatus() was wrong, we are not logged in
-            final StatusCode loginState = Login.login();
-            if (loginState == StatusCode.NO_ERROR) {
-                page = Network.getResponseData(Network.getRequest(uri));
-            } else {
-                Log.e("Image upload: No login (error: " + loginState + ')');
-                return ImmutablePair.of(StatusCode.NOT_LOGGED_IN, null);
-            }
+        final String page = Login.getRequestLogged(uri, new Parameters("LID=", logId));
+        if (StringUtils.isBlank(page)) {
+            Log.e("GCParser.uploadLogImage: No data from server");
+            return new ImmutablePair<StatusCode, String>(StatusCode.UNKNOWN_ERROR, null);
         }
 
         final String[] viewstates = Login.getViewstates(page);
@@ -1195,7 +1188,7 @@ public abstract class GCParser {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         final String page = Login.postRequestLogged(uri, params);
         if (!Login.getLoginStatus(page)) {
-            Log.e("GCParser.postLogTrackable: Can not log in geocaching");
+            Log.e("GCParser.postLogTrackable: Cannot log in geocaching");
             return StatusCode.NOT_LOGGED_IN;
         }
 
