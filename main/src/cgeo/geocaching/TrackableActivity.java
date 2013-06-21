@@ -193,6 +193,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
+
+        // FIXME: replace this context menu stuff by a UserActionsClickListener instead.
+
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
 
