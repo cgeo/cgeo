@@ -127,8 +127,7 @@ public class CompassActivity extends AbstractActivity {
                 final IWaypoint coordinate = coordinates.get(i);
                 subMenu.add(0, COORDINATES_OFFSET + i, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
             }
-        }
-        else {
+        } else {
             menu.findItem(R.id.menu_select_destination).setVisible(false);
         }
         return true;
@@ -199,8 +198,7 @@ public class CompassActivity extends AbstractActivity {
     protected void onActivityResult(int request, int result, Intent data) {
         if (request == REQUEST_TTS_DATA_CHECK && result == Engine.CHECK_VOICE_DATA_PASS) {
             SpeechService.startService(this, dstCoords);
-        }
-        else {
+        } else {
             Log.i("TTS failed to start. Request: " + request + " result: " + result);
             startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
         }
@@ -248,8 +246,7 @@ public class CompassActivity extends AbstractActivity {
                 if (geo.getCoords() != null) {
                     if (geo.getSatellitesVisible() >= 0) {
                         navSatellites.setText(res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible());
-                    }
-                    else {
+                    } else {
                         navSatellites.setText("");
                     }
                     navType.setText(res.getString(geo.getLocationProvider().resourceId));

@@ -25,37 +25,64 @@ public class TextFactory {
         float kilometers = position.distanceTo(target);
 
         if (Settings.isUseMetricUnits()) {
-            if (kilometers >= 5.0) {
-                return getString(R.string.tts_kilometers, String.valueOf(Math.round(kilometers)));
-            }
-            if (kilometers >= 1.0) {
-                String digits = String.format(Locale.getDefault(), "%.1f", kilometers);
-                return getString(R.string.tts_kilometers, digits);
-            }
-            int meters = (int) (kilometers * 1000.0);
-            if (meters > 50) {
-                return getString(R.string.tts_meters, String.valueOf(Math.round(meters / 10.0) * 10));
-            }
-            return getString(R.string.tts_meters, String.valueOf(meters));
+            return getDistance(kilometers, (int) (kilometers * 1000.0),
+                    5.0f, 1.0f, 50,
+                    R.plurals.tts_kilometers, R.string.tts_one_kilometer,
+                    R.plurals.tts_meters, R.string.tts_one_meter);
         }
+        return getDistance(kilometers / IConversion.MILES_TO_KILOMETER,
+                (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET),
+                3.0f, 0.2f, 300,
+                R.plurals.tts_miles, R.string.tts_one_mile,
+                R.plurals.tts_feet, R.string.tts_one_foot);
+    }
 
-        float miles = kilometers / IConversion.MILES_TO_KILOMETER;
-        if (miles >= 3.0) {
-            return getString(R.string.tts_miles, String.valueOf(Math.round(miles)));
+    private static String getDistance(float farDistance, int nearDistance,
+            float farFarAway, float farNearAway, int nearFarAway,
+            int farId, int farOneId, int nearId, int nearOneId) {
+        if (farDistance >= farFarAway) {
+            // example: "5 kilometers" - always without decimal digits
+            int quantity = Math.round(farDistance);
+            if (quantity == 1) {
+                return getString(farOneId, quantity, String.valueOf(quantity));
+            }
+            return getQuantityString(farId, quantity, String.valueOf(quantity));
         }
-        if (miles >= 0.2) { // approx 1000 ft
-            String digits = String.format(Locale.getDefault(), "%.1f", miles);
-            return getString(R.string.tts_miles, digits);
+        if (farDistance >= farNearAway) {
+            // example: "2.2 kilometers" - decimals if necessary
+            float precision1 = Math.round(farDistance * 10.0f) / 10.0f;
+            float precision0 = Math.round(farDistance);
+            if (precision1 == precision0) {
+                // this is an int - e.g. 2 kilometers
+                int quantity = (int) precision0;
+                if (quantity == 1) {
+                    return getString(farOneId, quantity, String.valueOf(quantity));
+                }
+                return getQuantityString(farId, quantity, String.valueOf(quantity));
+            }
+            // this is no int - e.g. 1.7 kilometers
+            String digits = String.format(Locale.getDefault(), "%.1f", farDistance);
+            // always use the plural (9 leads to plural)
+            return getQuantityString(farId, 9, digits);
         }
-        int feet = (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET);
-        if (feet > 300) {
-            return getString(R.string.tts_feet, String.valueOf(Math.round(feet / 10.0) * 10));
+        // example: "34 meters"
+        int quantity = nearDistance;
+        if (quantity > nearFarAway) {
+            // example: "120 meters" - rounded to 10 meters
+            quantity = (int) Math.round(quantity / 10.0) * 10;
         }
-        return getString(R.string.tts_feet, String.valueOf(feet));
+        if (quantity == 1) {
+            return getString(nearOneId, quantity, String.valueOf(quantity));
+        }
+        return getQuantityString(nearId, quantity, String.valueOf(quantity));
     }
 
     private static String getString(int resourceId, Object... formatArgs) {
         return cgeoapplication.getInstance().getString(resourceId, formatArgs);
+    }
+
+    private static String getQuantityString(int resourceId, int quantity, Object... formatArgs) {
+        return cgeoapplication.getInstance().getResources().getQuantityString(resourceId, quantity, formatArgs);
     }
 
     private static String getDirection(Geopoint position, Geopoint target, float direction) {
@@ -65,6 +92,9 @@ public class TextFactory {
         int hours = (degrees + 15) / 30;
         if (hours == 0) {
             hours = 12;
+        }
+        if (hours == 1) {
+            return getString(R.string.tts_one_oclock, String.valueOf(hours));
         }
         return getString(R.string.tts_oclock, String.valueOf(hours));
     }

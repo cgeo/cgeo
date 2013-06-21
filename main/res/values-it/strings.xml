@@ -1086,12 +1086,29 @@
     <string name="tts_service">Bussola parlante</string>
     <string name="tts_start">Start voce</string>
     <string name="tts_stop">Stop voce</string>
-    <string name="tts_kilometers">%s chilometri</string>
-    <string name="tts_meters">%s metri</string>
-    <string name="tts_miles">%s miglia</string>
-    <string name="tts_feet">%s piedi</string>
-    <string name="tts_oclock">%s precisi</string>
-
+    <string name="tts_one_kilometer">uno chilometro</string>
+    <plurals name="tts_kilometers">
+        <item quantity="one">%s chilometro</item>
+        <item quantity="other">%s chilometri</item>
+    </plurals>
+    <string name="tts_one_meter">uno metro</string>
+    <plurals name="tts_meters">
+        <item quantity="one">%s metro</item>
+        <item quantity="other">%s metri</item>
+    </plurals>
+    <string name="tts_one_mile">uno miglio</string>
+    <plurals name="tts_miles">
+        <item quantity="one">%s miglio</item>
+        <item quantity="other">%s miglia</item>
+    </plurals>
+    <string name="tts_one_foot">uno piede</string>
+    <plurals name="tts_feet">
+        <item quantity="one">%s piede</item>
+        <item quantity="other">%s piedi</item>
+    </plurals>
+    <string name="tts_one_oclock">a ore una</string>
+    <string name="tts_oclock">a ore %s</string>
+    
     <!-- various -->
     <string name="clipboard_copy_ok">Copiato nella clipboard</string>
 
