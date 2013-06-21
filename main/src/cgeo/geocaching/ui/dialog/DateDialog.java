@@ -3,15 +3,12 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.R;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-public class DateDialog extends Dialog {
+public class DateDialog extends NoTitleDialog {
 
     public interface DateDialogParent {
         abstract public void setDate(final Calendar date);
@@ -31,13 +28,6 @@ public class DateDialog extends Dialog {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        try {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        } catch (Exception e) {
-            // nothing
-        }
 
         setContentView(R.layout.date);
 

@@ -13,13 +13,10 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -28,7 +25,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class CoordinatesInputDialog extends Dialog {
+public class CoordinatesInputDialog extends NoTitleDialog {
 
     final private AbstractActivity context;
     final private IGeoData geo;
@@ -64,13 +61,6 @@ public class CoordinatesInputDialog extends Dialog {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        try {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        } catch (Exception e) {
-            // nothing
-        }
 
         setContentView(R.layout.coordinatesinput_dialog);
 
@@ -338,7 +328,7 @@ public class CoordinatesInputDialog extends Dialog {
         if (currentFormat == coordInputFormatEnum.Plain) {
             try {
                 gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
-            } catch (Geopoint.ParseException e) {
+            } catch (final Geopoint.ParseException e) {
                 if (signalError) {
                     context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
                 }
@@ -347,20 +337,20 @@ public class CoordinatesInputDialog extends Dialog {
             return true;
         }
 
-        String latDir = bLat.getText().toString();
-        String lonDir = bLon.getText().toString();
-        String latDeg = eLatDeg.getText().toString();
-        String lonDeg = eLonDeg.getText().toString();
-        String latDegFrac = eLatMin.getText().toString();
-        String lonDegFrac = eLonMin.getText().toString();
-        String latMin = eLatMin.getText().toString();
-        String lonMin = eLonMin.getText().toString();
-        String latMinFrac = eLatSec.getText().toString();
-        String lonMinFrac = eLonSec.getText().toString();
-        String latSec = eLatSec.getText().toString();
-        String lonSec = eLonSec.getText().toString();
-        String latSecFrac = eLatSub.getText().toString();
-        String lonSecFrac = eLonSub.getText().toString();
+        final String latDir = bLat.getText().toString();
+        final String lonDir = bLon.getText().toString();
+        final String latDeg = eLatDeg.getText().toString();
+        final String lonDeg = eLonDeg.getText().toString();
+        final String latDegFrac = eLatMin.getText().toString();
+        final String lonDegFrac = eLonMin.getText().toString();
+        final String latMin = eLatMin.getText().toString();
+        final String lonMin = eLonMin.getText().toString();
+        final String latMinFrac = eLatSec.getText().toString();
+        final String lonMinFrac = eLonSec.getText().toString();
+        final String latSec = eLatSec.getText().toString();
+        final String lonSec = eLonSec.getText().toString();
+        final String latSecFrac = eLatSub.getText().toString();
+        final String lonSecFrac = eLonSub.getText().toString();
 
         switch (currentFormat) {
             case Deg:
