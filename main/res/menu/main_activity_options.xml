@@ -7,6 +7,11 @@
         android:title="@string/menu_settings">
     </item>
     <item
+        android:id="@+id/menu_newsettings"
+        android:icon="@drawable/ic_menu_preferences"
+        android:title="@string/menu_newsettings">
+    </item>
+    <item
         android:id="@+id/menu_history"
         android:icon="@drawable/ic_menu_recent_history"
         android:title="@string/menu_history">

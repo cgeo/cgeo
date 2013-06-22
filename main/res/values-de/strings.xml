@@ -248,6 +248,7 @@
     <string name="menu_about">über c:geo</string>
     <string name="menu_helpers">Nützliche Apps</string>
     <string name="menu_settings">Einstellungen</string>
+    <string name="menu_newsettings">NewSettings</string>
     <string name="menu_history">Verlauf</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>

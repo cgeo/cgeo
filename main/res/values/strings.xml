@@ -361,6 +361,26 @@
     <string name="about_donation_more">Donate\ndevelopment</string>
     <string name="about_contributors">Contributors</string>
 
+    <!-- preferences -->
+    <string name="pref_screen_services_title">Services</string>
+    <string name="pref_screen_services_summary">geocaching.com, opencaching, gcvote, …</string>
+    <string name="pref_screen_appearance_title">Appearance</string>
+    <string name="pref_screen_appearance_summary">general appearance</string>
+    <string name="pref_screen_cachedetails_title">Cache Details</string>
+    <string name="pref_screen_cachedetails_summary">what to show</string>
+    <string name="pref_screen_offlinedata_title">Offline Data</string>
+    <string name="pref_screen_offlinedata_summary">static maps, log images, …</string>
+    <string name="pref_screen_logging_title">Logging</string>
+    <string name="pref_screen_logging_summary">signature, TBs, …</string>
+    <string name="pref_screen_map_title">Map</string>
+    <string name="pref_screen_map_summary">map details</string>
+    <string name="pref_screen_gpx_title">GPX</string>
+    <string name="pref_screen_gpx_summary">directories</string>
+    <string name="pref_screen_basicmembers_title">Basic Members</string>
+    <string name="pref_screen_basicmembers_summary">reCAPTCHA, …</string>
+    <string name="pref_screen_miscellaneous_title">Miscellaneous</string>
+    <string name="pref_screen_miscellaneous_summary">backup, external storage, …</string>
+
     <!-- init -->
     <string name="init_geocaching">Geocaching.com</string>
     <string name="init_gc_activate">Activate Geocaching.com on live-map and in searches</string>

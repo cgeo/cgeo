@@ -310,6 +310,9 @@ public class MainActivity extends AbstractActivity {
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
+            case R.id.menu_newsettings:
+                startActivity(new Intent(this, NewSettingsActivity.class));
+                return true;
             case R.id.menu_history:
                 cgeocaches.startActivityHistory(this);
                 return true;
