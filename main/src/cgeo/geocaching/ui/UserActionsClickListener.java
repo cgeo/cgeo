@@ -11,7 +11,11 @@ import android.widget.TextView;
 public class UserActionsClickListener extends AbstractUserClickListener {
 
     public UserActionsClickListener(Geocache cache) {
-        super(cache);
+        super(cache.supportsUserActions());
+    }
+
+    public UserActionsClickListener() {
+        super(true);
     }
 
     @Override

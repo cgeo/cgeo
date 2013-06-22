@@ -1,7 +1,8 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui.logs;
 
 import butterknife.InjectView;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.ui.AbstractViewHolder;
 
 import android.view.View;
