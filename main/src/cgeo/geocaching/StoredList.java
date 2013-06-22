@@ -71,7 +71,7 @@ public final class StoredList {
             promptForListSelection(titleId, runAfterwards, false, -1);
         }
 
-        public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyMoveTargets, final int exceptListId) {
+        public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
             final List<StoredList> lists = getSortedLists();
 
             if (lists == null) {
@@ -89,7 +89,7 @@ public final class StoredList {
             for (StoredList list : lists) {
                 listsTitle.add(list.getTitleAndCount());
             }
-            if (!onlyMoveTargets) {
+            if (!onlyConcreteLists) {
                 listsTitle.add("<" + res.getString(R.string.list_menu_all_lists) + ">");
             }
             listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
@@ -101,7 +101,7 @@ public final class StoredList {
             builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int itemId) {
-                    if (itemId == lists.size() && !onlyMoveTargets) {
+                    if (itemId == lists.size() && !onlyConcreteLists) {
                         // all lists
                         runAfterwards.run(StoredList.ALL_LIST_ID);
                     } else if (itemId >= lists.size()) {

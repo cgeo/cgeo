@@ -611,7 +611,6 @@
     <string name="gpx_import_error_io">Não consegue ler o ficheiro</string>
     <string name="gpx_import_error_parser">Formato de ficheiro errado</string>
     <string name="gpx_import_error_unexpected">Erro inesperado</string>
-    <string name="gpx_import_confirm">Quer importat o ficheiro GPX para o c:geo?</string>
     <string name="gpx_import_canceled">A importação GPX foi cancelada</string>
     <string name="gpx_import_delete_title">Eliminar ficheiro</string>
     <string name="gpx_import_delete_message">Quer eliminar %s?</string>

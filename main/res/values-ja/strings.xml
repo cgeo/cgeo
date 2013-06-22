@@ -624,7 +624,6 @@
     <string name="gpx_import_error_io">ファイルが読み込めません</string>
     <string name="gpx_import_error_parser">ファイルフォーマットが正しくありません</string>
     <string name="gpx_import_error_unexpected">予期せぬエラー</string>
-    <string name="gpx_import_confirm">c:geoにGPXファイルをインポートしますか?</string>
     <string name="gpx_import_canceled">GPXファイルのインポートが中止されました</string>
     <string name="gpx_import_delete_title">ファイル削除</string>
     <string name="gpx_import_delete_message">%sを削除しますか?</string>

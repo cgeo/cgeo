@@ -599,7 +599,6 @@
     <string name="gpx_import_error_io">A fájl olvasása sikertelen</string>
     <string name="gpx_import_error_parser">Rossz fájlformátum</string>
     <string name="gpx_import_error_unexpected">Váratlan hiba</string>
-    <string name="gpx_import_confirm">Szeretnéd a GPX fájlt a c:geoba importálni?</string>
     <string name="gpx_import_canceled">A GPX importálás megszakítva</string>
     <string name="gpx_import_delete_title">Fájl törlése</string>
     <string name="gpx_import_delete_message">Szeretnéd törölni ezt: %s?</string>

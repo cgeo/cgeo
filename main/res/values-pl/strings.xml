@@ -652,7 +652,6 @@
     <string name="gpx_import_error_io">Nie mogę odczytać pliku</string>
     <string name="gpx_import_error_parser">Zły format pliku</string>
     <string name="gpx_import_error_unexpected">Nieoczekiwany błąd</string>
-    <string name="gpx_import_confirm">Czy na pewno chcesz zaimportować plik GPX do c:geo?</string>
     <string name="gpx_import_canceled">Import pliku GPX został anulowany</string>
     <string name="gpx_import_delete_title">Usuń plik</string>
     <string name="gpx_import_delete_message">Czy na pewno chcesz usunąć %s?</string>

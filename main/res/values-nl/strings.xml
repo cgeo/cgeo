@@ -630,7 +630,6 @@
     <string name="gpx_import_error_io">Kan bestand niet lezen</string>
     <string name="gpx_import_error_parser">Bestandsformaat niet goed</string>
     <string name="gpx_import_error_unexpected">Onbekend probleem</string>
-    <string name="gpx_import_confirm">Wil je de GPX gegevens in c:geo laden?</string>
     <string name="gpx_import_canceled">GPX import is afgebroken</string>
     <string name="gpx_import_delete_title">Verwijder file</string>
     <string name="gpx_import_delete_message">Weet je zeker dat je %s wil verwijderen?</string>

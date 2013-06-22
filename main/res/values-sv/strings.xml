@@ -660,8 +660,6 @@
     <string name="gpx_import_error_io">Kan inte läsa filen</string>
     <string name="gpx_import_error_parser">Felaktigt filformat</string>
     <string name="gpx_import_error_unexpected">Oväntat fel</string>
-    <string name="gpx_import_confirm">Vill du importera GPX filen till c:geo?</string>
-    <string name="gpx_import_canceled">Importeringen av GPX filen avbröts</string>
     <string name="gpx_import_delete_title">Ta bort fil</string>
     <string name="gpx_import_delete_message">Vill du radera %s?</string>
 

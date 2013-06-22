@@ -678,11 +678,11 @@
     <string name="gpx_import_error_io">Fehler beim Lesen der Datei</string>
     <string name="gpx_import_error_parser">Dateiformat nicht ok</string>
     <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
-    <string name="gpx_import_confirm">Soll die GPX-Datei importiert werden?</string>
     <string name="gpx_import_canceled">Der GPX-Import wurde abgebrochen</string>
     <string name="gpx_import_delete_title">Datei löschen</string>
     <string name="gpx_import_delete_message">Datei %s löschen?</string>
-
+    <string name="gpx_import_select_list_title">Importiere GPX nach</string>
+    
     <!-- map file select -->
     <string name="map_file_select_title">Kartendatei wählen</string>
 

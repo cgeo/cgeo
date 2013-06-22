@@ -647,7 +647,6 @@
     <string name="gpx_import_error_io">Nemohu načíst soubor</string>
     <string name="gpx_import_error_parser">Formát souboru je chybný</string>
     <string name="gpx_import_error_unexpected">Neočekávaná chyba</string>
-    <string name="gpx_import_confirm">Chceš nahrát GPX soubor do c:geo?</string>
     <string name="gpx_import_canceled">GPX import byl zrušen</string>
     <string name="gpx_import_delete_title">Smazat soubor</string>
     <string name="gpx_import_delete_message">Chceš smazat %s?</string>
