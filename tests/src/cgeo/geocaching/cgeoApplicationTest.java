@@ -13,6 +13,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
@@ -130,7 +131,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByGeocodeNotLoggedIn() {
-        final ImmutablePair<String, String> login = Settings.getLogin();
+        final ImmutablePair<String, String> login = Settings.getGcLogin();
         final String memberStatus = Settings.getMemberStatus();
 
         try {
@@ -169,7 +170,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchErrorOccured() {
-        final ImmutablePair<String, String> login = Settings.getLogin();
+        final ImmutablePair<String, String> login = Settings.getGcLogin();
         final String memberStatus = Settings.getMemberStatus();
 
         try {
@@ -325,7 +326,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     @MediumTest
     public static void testSearchByViewportNotLoggedIn() {
 
-        final ImmutablePair<String, String> login = Settings.getLogin();
+        final ImmutablePair<String, String> login = Settings.getGcLogin();
         final String memberStatus = Settings.getMemberStatus();
         final Strategy strategy = Settings.getLiveMapStrategy();
         final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests

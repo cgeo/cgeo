@@ -1,7 +1,7 @@
 package cgeo.geocaching.gcvote;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;

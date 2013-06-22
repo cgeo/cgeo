@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.IGeoData;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 
 import android.os.Handler;

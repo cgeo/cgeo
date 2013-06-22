@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.connector.gc.GCConstants;

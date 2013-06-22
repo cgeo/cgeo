@@ -8,6 +8,7 @@
     <string name="detail">Detalhes</string>
     <string name="search">Pesquisar</string>
     <string name="settings">Definições</string>
+    <string name="settings_titlebar">c:geo Definições</string>
     <string name="helpers">Apps Úteis</string>
     <string name="about">Sobre c:geo</string>
     <string name="latitude">Latitude</string>
@@ -219,6 +220,7 @@
     <string name="menu_about">Sobre o c:geo</string>
     <string name="menu_helpers">Utilitários</string>
     <string name="menu_settings">Definições</string>
+    <string name="menu_oldsettings">old Definições</string>
     <string name="menu_history">Histórico</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -328,7 +330,7 @@
     <string name="about_contributors">Contribuidores</string>
 
     <!-- init -->
-    <string name="init_geocaching">Geocaching.com</string>
+    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Nome de utilizador</string>
@@ -341,7 +343,6 @@
     <string name="init_login_popup_failed">Login falhado.</string>
     <string name="init_login_popup_failed_reason">Login falhado porque </string>
     <string name="init_twitter_authorize">Autorize o c:geo</string>
-    <string name="init_twitter_publish">Publicar estado quando encontrar cache</string>
     <string name="init_signature">Assinatura</string>
     <string name="init_signature_help_button">Ajuda</string>
     <string name="init_signature_help_title">Dicas para assinaturas</string>
@@ -355,25 +356,42 @@
     <string name="init_signature_template_owner">Dono</string>
     <string name="init_details">Detalhes da cache</string>
     <string name="init_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
+    <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_elevationwanted">Carregar dados de elevação de cache</string>
+    <string name="init_summary_elevationwanted">Carregar dados de elevação de cache</string>
     <string name="init_friendlogswanted">Carregar página adicional de registos de amigos</string>
+    <string name="init_summary_friendlogswanted">Carregar página adicional de registos de amigos</string>
     <string name="init_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
+    <string name="init_summary_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
     <string name="init_autoload">Carregar automaticamente a descrição longa</string>
+    <string name="init_summary_autoload">Carregar automaticamente a descrição longa</string>
     <string name="init_other">Outras opções</string>
     <string name="init_skin">Tema leve (precisa reiniciar o c:geo)</string>
+    <string name="init_summary_skin">Tema leve (precisa reiniciar o c:geo)</string>
     <string name="init_address">Mostrar endereços no ecrã principal</string>
+    <string name="init_summary_address">Mostrar endereços no ecrã principal</string>
     <string name="init_captcha">Mostrar CAPTCHA se necessário</string>
+    <string name="init_summary_captcha">Mostrar CAPTCHA se necessário</string>
     <string name="init_useenglish">Utilizar inglês no c:geo\n(necessário reiniciar)</string>
+    <string name="init_summary_useenglish">Utilizar inglês no c:geo\n(necessário reiniciar)</string>
     <string name="init_exclude">Excluir caches encontradas e minhas</string>
+    <string name="init_summary_exclude">Excluir caches encontradas e minhas</string>
     <string name="init_showwaypoints">Mostrar Waypoints no mapa</string>
     <string name="init_showwaypoint_description">Se menos do que o número de caches encontradas são mostradas no mapa, os seus waypoints são mostrados adicionalmente.</string>
     <string name="init_disabled">Excluir caches desactivadas</string>
+    <string name="init_summary_disabled">Excluir caches desactivadas</string>
     <string name="init_offline">Armazenar a cache de mapas estáticos para utilização offline</string>
+    <string name="init_summary_offline">Armazenar a cache de mapas estáticos para utilização offline</string>
     <string name="init_offline_wp">Armazenar waypoints de mapas estáticos para utilização offline</string>
+    <string name="init_summary_offline_wp">Armazenar waypoints de mapas estáticos para utilização offline</string>
     <string name="init_save_log_img">Guardar imagens dos registos</string>
+    <string name="init_summary_save_log_img">Guardar imagens dos registos</string>
     <string name="init_units">Utilizar distância nas unidades do sistema imperial</string>
+    <string name="init_summary_units">Utilizar distância nas unidades do sistema imperial</string>
     <string name="init_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
+    <string name="init_summary_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
     <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
+    <string name="init_summary_livelist">Mostrar a direcção para a cache na lista</string>
     <string name="init_altitude">Correcção de altitude</string>
     <string name="init_altitude_description">Se o GPS estiver a dar uma altitude errada, pode corrigi-la com um número positivo ou negativo. A correcção é sempre em metros.</string>
     <string name="init_clear">Limpar login</string>
@@ -393,7 +411,6 @@
     <string name="init_backup_last">Disponível backup de</string>
     <string name="init_backup_last_no">Não existe nenhum ficheiro de backup.</string>
     <string name="init_mapsources">Fontes de mapa</string>
-    <string name="init_mapsources_description">Aqui pode seleccionar a fonte dos seus mapas. Como alternativa ao Google Maps, vários estilos de OpenStreetMap estão disponíveis, e até ficheiros de mapas offline (veja <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para mais detalhes).</string>
     <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
     <string name="init_map_directory_description">Directório com os mapas offline</string>
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
@@ -401,10 +418,13 @@
     <string name="init_gpx_exportdir_description">Aqui pode selecionar o directório para exportar os GPX.</string>
     <string name="init_gpx_importdir_description">Aqui pode selecionar o directório para importar os GPX.</string>
     <string name="init_maptrail">Mostrar rasto no mapa</string>
+    <string name="init_summary_maptrail">Mostrar rasto no mapa</string>
     <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
     <string name="init_trackautovisit">Marcar automaticamente os trackables como \"visitados\"</string>
-    <string name="init_sigautoinsert">Inserir assinatura automaticamente</string>
+    <string name="init_summary_trackautovisit">Marcar automaticamente os trackables como \"visitados\"</string>
+    <string name="init_sigautoinsert">Inserir automaticamente</string>
     <string name="init_loaddirectionimg">Carregar a imagem de dricção se necessário</string>
+    <string name="init_summary_loaddirectionimg">Carregar a imagem de dricção se necessário</string>
     <string name="init_default_navigation_tool">Navegador principal</string>
     <string name="init_default_navigation_tool_description">Aqui pode selecionar o seu navegador preferido.</string>
     <string name="init_default_navigation_tool_select">Ferramenta de selecção</string>
@@ -414,14 +434,15 @@
     <string name="init_debug">Gerar informação de depuração</string>
     <string name="init_dbonsdcard_title">Localização da base de dados</string>
     <string name="init_dbonsdcard_note">Pode armazenar a base de dados do c:geo no armazenamento externo. Se o fizer vai poupar memória interna, mas pode perder um pouco de performance e o c:geo pode não funcionar se o armazenamento externo não estiver disponível.</string>
-    <string name="init_dbonsdcard">base de dados no armazenamento externo</string>
+    <string name="init_dbonsdcard">No armazenamento externo</string>
     <string name="init_dbmove_dbmove">A mover a base de dados</string>
     <string name="init_dbmove_running">A mover a base de dados</string>
     <string name="init_dbmove_success">Base de dados movida com sucesso.</string>
     <string name="init_dbmove_failed">Falha ao mover a base de dados.</string>
     <string name="init_plain_logs">Mostrar os logs sem as cores</string>
+    <string name="init_summary_plain_logs">Mostrar os logs sem as cores</string>
     <string name="init_use_native_ua">Identificar como se fosse o browser do Android. Resolve os problemas de login em alguns provedores de rede.</string>
-    <string name="init_rendertheme_folder">Directório com os temas de mapas offline personalizados (opcional)</string>
+    <string name="init_summary_use_native_ua">Identificar como se fosse o browser do Android. Resolve os problemas de login em alguns provedores de rede.</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
@@ -430,7 +451,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
-    <string name="init_sendToCgeo_name">Nome do seu dispositivo:</string>
+    <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
     <string name="init_sendToCgeo_description">Enviar para o c: geo permite-lhe receber caches directamente do site Geocaching.com, utilizando um plugin especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Apenas necessita de registar, se pretender utilizar o send2cgeo. O c:geo irá funcionar mesmo sem este registo.</string>
     <string name="init_sendToCgeo_register">Solicitar registo</string>
     <string name="init_sendToCgeo_registering">Registando o seu dispositivo para "Enviar para o c:geo"…</string>
@@ -924,7 +945,7 @@
     <string name="attribute_food_no">Sem comida por perto</string>
 
     <!-- next things -->
-    <string name="legal_note">Para utilizar os serviços de Geocaching.com, tem de concordar com os termos e condições da <a href="http://www.geocaching.com/about/termsofuse.aspx">declaração Groundspeak</a>.</string>
+    <string name="settings_gc_legal_note">Para utilizar os serviços de Geocaching.com, tem de concordar com os termos e condições da declaração Groundspeak.</string>
     <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
     <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

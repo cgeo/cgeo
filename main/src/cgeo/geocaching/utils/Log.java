@@ -23,11 +23,11 @@ final public class Log {
     }
 
     /**
-     * make a non persisted copy of the debug flag from the settings for performance reasons
-     *
+     * save a copy of the debug flag from the settings for performance reasons
+     * 
      * @param isDebug
      */
-    public static void setDebugUnsaved(boolean isDebug) {
+    public static void setDebug(boolean isDebug) {
         Log.isDebug = isDebug;
     }
 

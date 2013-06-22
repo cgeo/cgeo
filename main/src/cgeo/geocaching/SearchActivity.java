@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -150,7 +151,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void init() {
-        Settings.getLogin();
+        Settings.getGcLogin();
 
         buttonLatitude.setOnClickListener(new FindByCoordsAction());
         buttonLongitude.setOnClickListener(new FindByCoordsAction());

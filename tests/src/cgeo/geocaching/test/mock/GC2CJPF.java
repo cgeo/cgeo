@@ -1,11 +1,11 @@
 package cgeo.geocaching.test.mock;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -99,7 +99,7 @@ public class GC2CJPF extends MockedCache {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cgeo.geocaching.test.mock.MockedCache#isOwn()
      */
     @Override

@@ -1,7 +1,7 @@
 package cgeo.geocaching.speech;
 
 import cgeo.geocaching.DirectionProvider;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;

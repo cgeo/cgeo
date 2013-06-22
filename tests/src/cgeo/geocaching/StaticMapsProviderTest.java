@@ -3,12 +3,13 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
-
-import junit.framework.TestCase;
+import cgeo.geocaching.settings.Settings;
 
 import android.test.suitebuilder.annotation.Suppress;
 
 import java.io.File;
+
+import junit.framework.TestCase;
 
 @Suppress
 public class StaticMapsProviderTest extends TestCase {
