@@ -569,6 +569,7 @@
     <string name="cache_menu_navigate">Navigation</string>
     <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
     <string name="cache_menu_navigation_walk">Navigation (piéton)</string>
+    <string name="cache_menu_navigation_bike">Navigation (vélo)</string>
     <string name="cache_menu_maps_directions">Directions Google Maps</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Carte</string>
