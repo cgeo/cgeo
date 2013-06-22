@@ -27,22 +27,28 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
         try {
             activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                     .parse("google.navigation:ll=" + coords.getLatitude() + ","
-                            + coords.getLongitude() + mode)));
+                            + coords.getLongitude() + "&mode=" + mode)));
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.i("GoogleNavigationApp.navigate: No navigation application available.", e);
         }
     }
 
     static class GoogleNavigationWalkingApp extends GoogleNavigationApp {
         GoogleNavigationWalkingApp() {
-            super(R.string.cache_menu_navigation_walk, "&mode=w");
+            super(R.string.cache_menu_navigation_walk, "w");
         }
     }
 
     static class GoogleNavigationDrivingApp extends GoogleNavigationApp {
         GoogleNavigationDrivingApp() {
-            super(R.string.cache_menu_navigation_drive, "&mode=d");
+            super(R.string.cache_menu_navigation_drive, "d");
+        }
+    }
+
+    static class GoogleNavigationBikeApp extends GoogleNavigationApp {
+        GoogleNavigationBikeApp() {
+            super(R.string.cache_menu_navigation_bike, "b");
         }
     }
 }
