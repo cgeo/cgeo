@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.gcvote.GCVote;
@@ -46,7 +47,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         public void handleMessage(Message msg) {
             try {
                 details.addRating(cache);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 // nothing
             }
         }
@@ -62,7 +63,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                     cacheDistance.bringToFront();
                 }
                 onUpdateGeoData(geo);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.w("Failed to UpdateLocation location.");
             }
         }
@@ -205,8 +206,9 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             menu.findItem(R.id.menu_navigate).setVisible(visible);
             menu.findItem(R.id.menu_caches_around).setVisible(visible);
 
+            menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
             LoggingUI.onPrepareOptionsMenu(menu, cache);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // nothing
         }
 
