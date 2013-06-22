@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">c:geo</string>
-    <string name="app_name_compass">c:geo kompass</string>
 
     <!-- basics -->
     <string name="cache">Cache</string>

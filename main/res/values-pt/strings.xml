@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">c:geo</string>
-    <string name="app_name_compass">c:geo bússola</string>
 
     <!-- basics -->
     <string name="cache">Cache</string>
