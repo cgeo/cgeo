@@ -10,7 +10,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     /**
      * TB codes really start with TB1, there is no padding or minimum length
      */
-    private final static Pattern PATTERN_TB_CODE = Pattern.compile("TB[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_TB_CODE = Pattern.compile("(TB[0-9A-Z]+)|([0-9A-Z]{6})", Pattern.CASE_INSENSITIVE);
 
     @Override
     public boolean canHandleTrackable(String geocode) {

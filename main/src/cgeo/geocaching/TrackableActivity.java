@@ -287,8 +287,15 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             trackable = cgData.loadTrackable(geocode);
 
             if (trackable == null || trackable.isLoggable()) {
-                final TrackableConnector trackableConnector = ConnectorFactory.getTrackableConnector(geocode);
-                trackable = trackableConnector.searchTrackable(geocode, guid, id);
+                // iterate over the connectors as some codes may be handled by multiple connectors
+                for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+                    if (trackableConnector.canHandleTrackable(geocode)) {
+                        trackable = trackableConnector.searchTrackable(geocode, guid, id);
+                        if (trackable != null) {
+                            break;
+                        }
+                    }
+                }
             }
             handler.sendMessage(Message.obtain());
         }
