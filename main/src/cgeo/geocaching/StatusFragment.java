@@ -57,7 +57,7 @@ public class StatusFragment extends Fragment {
         @Override
         public void handleMessage(final Message msg) {
             final Status data = (Status) msg.obj;
-            updateDisplay(data != null && data.message != null ? data : null);
+            updateDisplay(data != null && data.message != null ? data : Status.defaultStatus());
         }
 
         private void updateDisplay(final Status data) {
