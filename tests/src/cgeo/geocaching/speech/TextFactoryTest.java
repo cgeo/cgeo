@@ -1,8 +1,8 @@
 package cgeo.geocaching.speech;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -32,7 +32,7 @@ public class TextFactoryTest extends AndroidTestCase {
         final Configuration config = resources.getConfiguration();
         defaultLocale1 = config.locale;
         defaultLocale2 = Locale.getDefault();
-        defaultMetric = Settings.isUseMetricUnits();
+        defaultMetric = !Settings.isUseImperialUnits();
     }
 
     @Override
@@ -152,6 +152,6 @@ public class TextFactoryTest extends AndroidTestCase {
         resources.updateConfiguration(config, resources.getDisplayMetrics());
 
         Locale.setDefault(locale2);
-        Settings.setUseMetricUnits(metric);
+        Settings.setUseImperialUnits(!metric);
     }
 }

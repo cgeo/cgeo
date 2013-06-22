@@ -10,10 +10,11 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
@@ -233,7 +234,7 @@ public class EditWaypointActivity extends AbstractActivity {
     private void initializeDistanceUnitSelector() {
         distanceUnits = new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
-            distanceUnitSelector.setSelection(Settings.isUseMetricUnits() ? 0 : 2); //0:m, 2:ft
+            distanceUnitSelector.setSelection(Settings.isUseImperialUnits() ? 2 : 0); //0:m, 2:ft
         }
     }
 
@@ -344,7 +345,8 @@ public class EditWaypointActivity extends AbstractActivity {
 
                 double distance;
                 try {
-                    distance = DistanceParser.parseDistance(distanceText, Settings.isUseMetricUnits());
+                    distance = DistanceParser.parseDistance(distanceText,
+                            !Settings.isUseImperialUnits());
                 } catch (NumberFormatException e) {
                     showToast(res.getString(R.string.err_parse_dist));
                     return;

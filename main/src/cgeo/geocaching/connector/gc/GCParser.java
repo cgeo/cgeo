@@ -5,7 +5,7 @@ import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
@@ -178,7 +178,8 @@ public abstract class GCParser {
             // cache distance - estimated distance for basic members
             final String distance = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
             if (distance != null) {
-                cache.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
+                cache.setDistance(DistanceParser.parseDistance(distance,
+                        !Settings.isUseImperialUnits()));
             }
 
             // difficulty/terrain
@@ -871,7 +872,7 @@ public abstract class GCParser {
     }
 
     private static boolean isSearchForMyCaches(final String userName) {
-        if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
+        if (userName.equalsIgnoreCase(Settings.getGcLogin().left)) {
             Log.i("Overriding users choice because of self search, downloading all caches.");
             return true;
         }
@@ -1432,7 +1433,8 @@ public abstract class GCParser {
         final String distance = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
         if (null != distance) {
             try {
-                trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
+                trackable.setDistance(DistanceParser.parseDistance(distance,
+                        !Settings.isUseImperialUnits()));
             } catch (final NumberFormatException e) {
                 Log.e("GCParser.parseTrackable: Failed to parse distance", e);
             }
