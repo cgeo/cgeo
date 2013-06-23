@@ -193,6 +193,21 @@
         <item name="android:background">@drawable/count_bcg</item>
         <item name="android:text"></item>
     </style>
+    <style name="icon_mainscreen_cell_counter">
+        <item name="android:layout_width">74dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="icon_mainscreen_cell" parent="icon_mainscreen_cell_counter">
+        <item name="android:layout_margin">4dip</item>
+    </style>
+    <style name="icon_mainscreen_row">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_margin">4dip</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
 
     <!-- current location -->
     <style name="location_current">

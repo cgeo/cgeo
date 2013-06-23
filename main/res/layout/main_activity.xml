@@ -36,18 +36,11 @@
         android:orientation="vertical" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_margin="4dip"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            style="@style/icon_mainscreen_row" >
 
             <LinearLayout
-                android:layout_width="74dip"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dip"
-                android:onClick="cgeoFindOnMap"
-                android:orientation="vertical" >
+                style="@style/icon_mainscreen_cell"
+                android:onClick="cgeoFindOnMap" >
 
                 <ImageView
                     android:id="@+id/map"
@@ -60,10 +53,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="74dip"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dip"
-                android:orientation="vertical" >
+                style="@style/icon_mainscreen_cell" >
 
                 <ImageView
                     android:id="@+id/nearest"
@@ -87,10 +77,7 @@
                     android:textIsSelectable="false" />
 
                 <LinearLayout
-                    android:layout_width="74dip"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:orientation="vertical" >
+                    style="@style/icon_mainscreen_cell_counter" >
 
                     <ImageView
                         android:id="@+id/search_offline"
@@ -105,18 +92,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_margin="4dip"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            style="@style/icon_mainscreen_row" >
 
             <LinearLayout
-                android:layout_width="74dip"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dip"
-                android:onClick="cgeoSearch"
-                android:orientation="vertical" >
+                style="@style/icon_mainscreen_cell"
+                android:onClick="cgeoSearch" >
 
                 <ImageView
                     android:id="@+id/advanced_button"
@@ -129,11 +109,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="74dip"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dip"
-                android:onClick="cgeoPoint"
-                android:orientation="vertical" >
+                style="@style/icon_mainscreen_cell"
+                android:onClick="cgeoPoint" >
 
                 <ImageView
                     android:id="@+id/any_button"
@@ -146,11 +123,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="74dip"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dip"
-                android:onClick="cgeoFilter"
-                android:orientation="vertical" >
+                style="@style/icon_mainscreen_cell"
+                android:onClick="cgeoFilter" >
 
                 <ImageView
                     android:id="@+id/filter_button"
