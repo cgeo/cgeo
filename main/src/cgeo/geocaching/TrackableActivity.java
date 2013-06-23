@@ -7,6 +7,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
@@ -231,18 +232,24 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         @Override
         public void run() {
-            trackable = cgData.loadTrackable(geocode);
+            if (StringUtils.isNotEmpty(geocode)) {
+                trackable = cgData.loadTrackable(geocode);
 
-            if (trackable == null || trackable.isLoggable()) {
-                // iterate over the connectors as some codes may be handled by multiple connectors
-                for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
-                    if (trackableConnector.canHandleTrackable(geocode)) {
-                        trackable = trackableConnector.searchTrackable(geocode, guid, id);
-                        if (trackable != null) {
-                            break;
+                if (trackable == null || trackable.isLoggable()) {
+                    // iterate over the connectors as some codes may be handled by multiple connectors
+                    for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+                        if (trackableConnector.canHandleTrackable(geocode)) {
+                            trackable = trackableConnector.searchTrackable(geocode, guid, id);
+                            if (trackable != null) {
+                                break;
+                            }
                         }
                     }
                 }
+            }
+            // fall back to GC search by GUID
+            if (trackable == null) {
+                trackable = TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
             }
             handler.sendMessage(Message.obtain());
         }

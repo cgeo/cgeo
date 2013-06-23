@@ -31,4 +31,20 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     public Trackable searchTrackable(String geocode, String guid, String id) {
         return GCParser.searchTrackable(geocode, guid, id);
     }
+
+    /**
+     * initialization on demand holder pattern
+     */
+    private static class Holder {
+        private static final TravelBugConnector INSTANCE = new TravelBugConnector();
+    }
+
+    private TravelBugConnector() {
+        // singleton
+    }
+
+    public static TravelBugConnector getInstance() {
+        return Holder.INSTANCE;
+    }
+
 }

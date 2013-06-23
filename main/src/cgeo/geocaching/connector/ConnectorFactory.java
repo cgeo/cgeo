@@ -47,7 +47,7 @@ public final class ConnectorFactory {
     public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
     private static final TrackableConnector[] TRACKABLE_CONNECTORS = new TrackableConnector[] {
             new GeokretyConnector(), // GK must be first, as it overlaps with the secret codes of travel bugs
-            new TravelBugConnector(),
+            TravelBugConnector.getInstance(),
             UNKNOWN_TRACKABLE_CONNECTOR // must be last
     };
 
