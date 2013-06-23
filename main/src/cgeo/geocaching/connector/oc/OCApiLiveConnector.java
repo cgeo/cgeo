@@ -1,14 +1,17 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.oc.OkapiClient.UserInfo;
+import cgeo.geocaching.connector.oc.OkapiClient.UserInfo.UserInfoStatus;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CryptUtils;
@@ -16,11 +19,13 @@ import cgeo.geocaching.utils.CryptUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Handler;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin {
 
     private String cS;
-    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, false);
+    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
 
     public OCApiLiveConnector(String name, String host, String prefix, int cKResId, int cSResId, ApiSupport apiSupport) {
         super(name, host, prefix, CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cKResId)), apiSupport);
@@ -104,16 +109,40 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
         return getSupportedAuthLevel() == OAuthLevel.Level3;
     }
 
-    public boolean retrieveUserInfo() {
-        userInfo = OkapiClient.getUserInfo(this);
-        return userInfo.isRetrieveSuccessful();
+    @Override
+    public boolean login(Handler handler, Context fromActivity) {
+        if (supportsPersonalization()) {
+            userInfo = OkapiClient.getUserInfo(this);
+        }
+        return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
     }
 
-    public Object getUserName() {
+    @Override
+    public String getUserName() {
         return userInfo.getName();
     }
 
+    @Override
     public int getCachesFound() {
         return userInfo.getFinds();
+    }
+
+    @Override
+    public String getLoginStatusString() {
+        switch (userInfo.getStatus()) {
+            case NOT_RETRIEVED:
+                return cgeoapplication.getInstance().getString(R.string.init_login_popup_working);
+            case SUCCESSFUL:
+                return cgeoapplication.getInstance().getString(R.string.init_login_popup_ok);
+            case FAILED:
+                return cgeoapplication.getInstance().getString(R.string.init_login_popup_failed);
+            default:
+                return "Error";
+        }
+    }
+
+    @Override
+    public boolean isLoggedIn() {
+        return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
     }
 }
