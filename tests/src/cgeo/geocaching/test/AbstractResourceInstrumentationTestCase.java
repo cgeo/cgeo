@@ -1,11 +1,14 @@
 package cgeo.geocaching.test;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
+import cgeo.geocaching.files.GPX10Parser;
+import cgeo.geocaching.files.ParserException;
 
 import android.content.res.Resources;
 import android.test.InstrumentationTestCase;
@@ -14,6 +17,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Scanner;
 
@@ -77,5 +81,18 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
 
     protected final int getTemporaryListId() {
         return temporaryListId;
+    }
+
+    final protected Geocache loadCacheFromResource(int resourceId) throws IOException, ParserException {
+        final InputStream instream = getResourceStream(resourceId);
+        try {
+            GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
+            Collection<Geocache> caches = parser.parse(instream, null);
+            assertNotNull(caches);
+            assertFalse(caches.isEmpty());
+            return caches.iterator().next();
+        } finally {
+            instream.close();
+        }
     }
 }

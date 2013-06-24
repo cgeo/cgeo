@@ -1,6 +1,6 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.Login;
@@ -62,13 +62,13 @@ public class CheckGcCredentialsPreference extends Preference {
 
                     if (msg.obj == null || (msg.obj instanceof Drawable)) {
                         ActivityMixin.helpDialog(activity,
-                                res.getString(R.string.oldinit_login_popup),
-                                res.getString(R.string.oldinit_login_popup_ok),
+                                res.getString(R.string.init_login_popup),
+                                res.getString(R.string.init_login_popup_ok),
                                 (Drawable) msg.obj);
                     } else {
                         ActivityMixin.helpDialog(activity,
-                                res.getString(R.string.oldinit_login_popup),
-                                res.getString(R.string.oldinit_login_popup_failed_reason)
+                                res.getString(R.string.init_login_popup),
+                                res.getString(R.string.init_login_popup_failed_reason)
                                         + " "
                                         + ((StatusCode) msg.obj).getErrorString(res)
                                         + ".");
@@ -89,7 +89,7 @@ public class CheckGcCredentialsPreference extends Preference {
             this.activity = (Activity) CheckGcCredentialsPreference.this.getContext();
             this.res = activity.getResources();
 
-            ImmutablePair<String, String> credentials = OldSettings.getGcLogin();
+            ImmutablePair<String, String> credentials = Settings.getGcLogin();
 
             // check credentials for validity
             if (credentials == null || StringUtils.isBlank(credentials.getLeft())
@@ -99,8 +99,8 @@ public class CheckGcCredentialsPreference extends Preference {
             }
 
             loginDialog = ProgressDialog.show(activity,
-                    res.getString(R.string.oldinit_login_popup),
-                    res.getString(R.string.oldinit_login_popup_working), true);
+                    res.getString(R.string.init_login_popup),
+                    res.getString(R.string.init_login_popup_working), true);
             loginDialog.setCancelable(false);
             Cookies.clearCookies();
 

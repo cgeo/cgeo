@@ -121,7 +121,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void initializeTrackablesAction() {
-        if (OldSettings.isTrackableAutoVisit()) {
+        if (Settings.isTrackableAutoVisit()) {
             for (TrackableLog trackable : trackables) {
                 trackable.action = LogTypeTrackable.VISITED;
                 tbChanged = true;
@@ -212,7 +212,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (!postButton.isEnabled()) {
             return res.getString(R.string.log_post_not_possible);
         }
-        if (typeSelected != LogType.FOUND_IT || !OldSettings.isGCvoteLogin() || !cache.supportsGCVote()) {
+        if (typeSelected != LogType.FOUND_IT || !Settings.isGCvoteLogin() || !cache.supportsGCVote()) {
             return res.getString(R.string.log_post);
         }
         if (rating == 0) {
@@ -271,10 +271,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 typeSelected = log.type;
                 date.setTime(new Date(log.date));
                 text = log.log;
-            } else if (StringUtils.isNotBlank(OldSettings.getSignature())
-                    && OldSettings.isAutoInsertSignature()
+            } else if (StringUtils.isNotBlank(Settings.getSignature())
+                    && Settings.isAutoInsertSignature()
                     && StringUtils.isBlank(currentLogText())) {
-                insertIntoLog(LogTemplateProvider.applyTemplates(OldSettings.getSignature(), new LogContext(cache)), false);
+                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache)), false);
             }
         }
         updatePostButtonText();
@@ -418,7 +418,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        final boolean voteAvailable = OldSettings.isGCvoteLogin() && typeSelected == LogType.FOUND_IT && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
+        final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == LogType.FOUND_IT && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
         return true;
@@ -484,7 +484,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void updateTweetBox(LogType type) {
-        if (type == LogType.FOUND_IT && OldSettings.isUseTwitter()) {
+        if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);

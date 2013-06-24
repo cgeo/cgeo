@@ -150,7 +150,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void init() {
-        OldSettings.getGcLogin();
+        Settings.getGcLogin();
 
         buttonLatitude.setOnClickListener(new FindByCoordsAction());
         buttonLongitude.setOnClickListener(new FindByCoordsAction());
@@ -412,7 +412,7 @@ public class SearchActivity extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_search_own_caches) {
-            findByOwnerFn(OldSettings.getUsername());
+            findByOwnerFn(Settings.getUsername());
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -1,7 +1,7 @@
 package cgeo.geocaching.speech;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.IConversion;
@@ -24,7 +24,7 @@ public class TextFactory {
     private static String getDistance(Geopoint position, Geopoint target) {
         float kilometers = position.distanceTo(target);
 
-        if (OldSettings.isUseMetricUnits()) {
+        if (Settings.isUseMetricUnits()) {
             return getDistance(kilometers, (int) (kilometers * 1000.0),
                     5.0f, 1.0f, 50,
                     R.plurals.tts_kilometers, R.string.tts_one_kilometer,

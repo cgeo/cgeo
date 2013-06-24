@@ -1,7 +1,7 @@
 package cgeo.geocaching.gcvote;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
@@ -67,8 +67,8 @@ public final class GCVote {
 
         try {
             final Parameters params = new Parameters();
-            if (OldSettings.isLogin()) {
-                final ImmutablePair<String, String> login = OldSettings.getGCvoteLogin();
+            if (Settings.isLogin()) {
+                final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
                 if (login != null) {
                     params.put("userName", login.left, "password", login.right);
                 }
@@ -179,7 +179,7 @@ public final class GCVote {
      * @return {@code true} if the rating was submitted successfully
      */
     public static boolean setRating(Geocache cache, double vote) {
-        if (!OldSettings.isGCvoteLogin()) {
+        if (!Settings.isGCvoteLogin()) {
             return false;
         }
         if (!cache.supportsGCVote()) {
@@ -193,7 +193,7 @@ public final class GCVote {
             return false;
         }
 
-        final ImmutablePair<String, String> login = OldSettings.getGCvoteLogin();
+        final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
         if (login == null) {
             return false;
         }
@@ -211,7 +211,7 @@ public final class GCVote {
     }
 
     public static void loadRatings(ArrayList<Geocache> caches) {
-        if (!OldSettings.isRatingWanted()) {
+        if (!Settings.isRatingWanted()) {
             return;
         }
 

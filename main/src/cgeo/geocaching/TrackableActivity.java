@@ -7,17 +7,18 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.UserActionsClickListener;
+import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -32,16 +33,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -61,12 +58,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             this.resId = resId;
         }
     }
+
     private Trackable trackable = null;
     private String geocode = null;
     private String name = null;
     private String guid = null;
     private String id = null;
-    private String contextMenuUser = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private final Handler loadTrackableHandler = new Handler() {
@@ -192,55 +189,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
-
-        // FIXME: replace this context menu stuff by a UserActionsClickListener instead.
-
-        super.onCreateContextMenu(menu, view, info);
-        final int viewId = view.getId();
-
-        if (viewId == R.id.author) { // Log item author
-            contextMenuUser = ((TextView) view).getText().toString();
-        } else { // Trackable owner, and user holding trackable now
-            final RelativeLayout itemLayout = (RelativeLayout) view.getParent();
-            final TextView itemName = (TextView) itemLayout.findViewById(R.id.name);
-
-            final String selectedName = itemName.getText().toString();
-            if (selectedName.equals(res.getString(R.string.trackable_owner))) {
-                contextMenuUser = trackable.getOwner();
-            } else if (selectedName.equals(res.getString(R.string.trackable_spotted))) {
-                contextMenuUser = trackable.getSpottedName();
-            }
-        }
-
-        menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
-        menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
-        menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
-        menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
-        menu.add(viewId, 4, 0, res.getString(R.string.user_menu_send_message));
-    }
-
-    @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case 1:
-                cgeocaches.startActivityOwner(this, contextMenuUser);
-                return true;
-            case 2:
-                cgeocaches.startActivityUserName(this, contextMenuUser);
-                return true;
-            case 3:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(contextMenuUser))));
-                return true;
-            case 4:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(contextMenuUser))));
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.trackable_activity, menu);
         return true;
@@ -284,30 +232,26 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         @Override
         public void run() {
-            trackable = cgData.loadTrackable(geocode);
+            if (StringUtils.isNotEmpty(geocode)) {
+                trackable = cgData.loadTrackable(geocode);
 
-            if (trackable == null || trackable.isLoggable()) {
-                final TrackableConnector trackableConnector = ConnectorFactory.getTrackableConnector(geocode);
-                trackable = trackableConnector.searchTrackable(geocode, guid, id);
+                if (trackable == null || trackable.isLoggable()) {
+                    // iterate over the connectors as some codes may be handled by multiple connectors
+                    for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+                        if (trackableConnector.canHandleTrackable(geocode)) {
+                            trackable = trackableConnector.searchTrackable(geocode, guid, id);
+                            if (trackable != null) {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            // fall back to GC search by GUID
+            if (trackable == null) {
+                trackable = TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
             }
             handler.sendMessage(Message.obtain());
-        }
-    }
-
-    private class UserActionsListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View view) {
-            if (view == null) {
-                return;
-            }
-
-            try {
-                registerForContextMenu(view);
-                openContextMenu(view);
-            } catch (final Exception e) {
-                Log.e("TrackableActivity.UserActionsListener.onClick ", e);
-            }
         }
     }
 
@@ -370,7 +314,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             case DETAILS:
                 return new DetailsViewCreator();
             case LOGS:
-                return new LogsViewCreator();
+                return new TrackableLogsViewCreator(this, trackable);
             default:
                 throw new IllegalArgumentException();
         }
@@ -389,98 +333,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             pages.add(Page.LOGS);
         }
         return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
-    }
-
-    public class LogsViewCreator extends AbstractCachingPageViewCreator<ListView> {
-
-        @Override
-        public ListView getDispatchedView() {
-            view = (ListView) getLayoutInflater().inflate(R.layout.trackable_logs_view, null);
-
-            if (trackable != null && trackable.getLogs() != null) {
-                view.setAdapter(new ArrayAdapter<LogEntry>(TrackableActivity.this, R.layout.logs_item, trackable.getLogs()) {
-                    @Override
-                    public View getView(int position, View convertView, android.view.ViewGroup parent) {
-                        View rowView = convertView;
-                        if (null == rowView) {
-                            rowView = getLayoutInflater().inflate(R.layout.logs_item, null);
-                        }
-                        LogViewHolder holder = (LogViewHolder) rowView.getTag();
-                        if (null == holder) {
-                            holder = new LogViewHolder(rowView);
-                        }
-
-                        final LogEntry log = getItem(position);
-                        fillViewHolder(holder, log);
-                        return rowView;
-                    }
-                });
-            }
-            return view;
-        }
-
-        protected void fillViewHolder(LogViewHolder holder, final LogEntry log) {
-            if (log.date > 0) {
-                holder.date.setText(Formatter.formatShortDateVerbally(log.date));
-            }
-
-            holder.type.setText(log.type.getL10n());
-            holder.author.setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
-
-            if (StringUtils.isBlank(log.cacheName)) {
-                holder.countOrLocation.setVisibility(View.GONE);
-            } else {
-                holder.countOrLocation.setText(Html.fromHtml(log.cacheName));
-                final String cacheGuid = log.cacheGuid;
-                final String cacheName = log.cacheName;
-                holder.countOrLocation.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        CacheDetailActivity.startActivityGuid(TrackableActivity.this, cacheGuid, Html.fromHtml(cacheName).toString());
-                    }
-                });
-            }
-
-            final TextView logView = holder.text;
-            logView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-
-            String logText = log.log;
-            if (TextUtils.containsHtml(logText)) {
-                logText = log.getDisplayText();
-                logView.setText(Html.fromHtml(logText, new HtmlImage(null, false, StoredList.TEMPORARY_LIST_ID, false), null), TextView.BufferType.SPANNABLE);
-            }
-            else {
-                logView.setText(logText);
-            }
-
-            final ImageView statusMarker = holder.marker;
-            // colored marker
-            final int marker = log.type.markerId;
-            if (marker != 0) {
-                statusMarker.setVisibility(View.VISIBLE);
-                statusMarker.setImageResource(marker);
-            }
-            else {
-                statusMarker.setVisibility(View.GONE);
-            }
-
-            // images
-            if (log.hasLogImages()) {
-                holder.images.setText(log.getImageTitles());
-                holder.images.setVisibility(View.VISIBLE);
-                holder.images.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ImagesActivity.startActivityLogImages(TrackableActivity.this, trackable.getGeocode(), new ArrayList<Image>(log.getLogImages()));
-                    }
-                });
-            } else {
-                holder.images.setVisibility(View.GONE);
-            }
-
-            holder.author.setOnClickListener(new UserActionsListener());
-        }
-
     }
 
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -526,7 +378,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown));
             if (StringUtils.isNotBlank(trackable.getOwner())) {
                 owner.setText(Html.fromHtml(trackable.getOwner()), TextView.BufferType.SPANNABLE);
-                owner.setOnClickListener(new UserActionsListener());
+                owner.setOnClickListener(new UserActionsClickListener());
             }
 
             // trackable spotted
@@ -570,7 +422,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         }
                     });
                 } else if (Trackable.SPOTTED_USER == trackable.getSpottedType()) {
-                    spotted.setOnClickListener(new UserActionsListener());
+                    spotted.setOnClickListener(new UserActionsClickListener());
                 }
             }
 

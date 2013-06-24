@@ -4,7 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -171,7 +171,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isOwner(final ICache cache) {
-        return StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), OldSettings.getUsername());
+        return StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getUsername());
 
     }
 
@@ -272,7 +272,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isActivated() {
-        return OldSettings.isGCConnectorActive();
+        return Settings.isGCConnectorActive();
     }
 
     @Override

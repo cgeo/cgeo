@@ -24,7 +24,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mapFile = OldSettings.getMapFile();
+        mapFile = Settings.getMapFile();
     }
 
     @Override

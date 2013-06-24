@@ -67,7 +67,7 @@ public class ImageSelectActivity extends AbstractActivity {
         super.onCreate(savedInstanceState, R.layout.imageselect_activity);
         Views.inject(this);
 
-        scaleChoiceIndex = OldSettings.getLogImageScale();
+        scaleChoiceIndex = Settings.getLogImageScale();
         imageCaption = "";
         imageDescription = "";
         imageUri = Uri.EMPTY;
@@ -118,7 +118,7 @@ public class ImageSelectActivity extends AbstractActivity {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 scaleChoiceIndex = scaleView.getSelectedItemPosition();
-                OldSettings.setLogImageScale(scaleChoiceIndex);
+                Settings.setLogImageScale(scaleChoiceIndex);
             }
 
             @Override

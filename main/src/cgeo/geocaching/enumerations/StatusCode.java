@@ -23,7 +23,7 @@ public enum StatusCode {
     LOG_POST_ERROR(R.string.err_log_post_failed),
     NO_LOG_TEXT(R.string.warn_log_text_fill),
     NO_DATA_FROM_SERVER(R.string.err_log_failed_server),
-    NOT_LOGGED_IN(R.string.oldinit_login_popup_failed),
+    NOT_LOGGED_IN(R.string.init_login_popup_failed),
     LOGIMAGE_POST_ERROR(R.string.err_logimage_post_failed);
 
     final private int error_string;

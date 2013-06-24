@@ -1,6 +1,5 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.AbstractActivity;
@@ -15,10 +14,10 @@ import android.view.View;
 
 abstract class AbstractUserClickListener implements View.OnClickListener {
 
-    protected final Geocache cache;
+    private final boolean enabled;
 
-    public AbstractUserClickListener(final Geocache cache) {
-        this.cache = cache;
+    public AbstractUserClickListener(final boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
@@ -26,7 +25,7 @@ abstract class AbstractUserClickListener implements View.OnClickListener {
         if (view == null) {
             return;
         }
-        if (!cache.supportsUserActions()) {
+        if (!enabled) {
             return;
         }
 

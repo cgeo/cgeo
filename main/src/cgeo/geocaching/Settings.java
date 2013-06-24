@@ -38,7 +38,7 @@ import java.util.Locale;
 /**
  * General c:geo preferences/settings set by the user
  */
-public final class OldSettings {
+public final class Settings {
 
     private static final String KEY_TEMP_TWITTER_TOKEN_SECRET = "temp-token-secret";
     private static final String KEY_TEMP_TWITTER_TOKEN_PUBLIC = "temp-token-public";
@@ -157,7 +157,7 @@ public final class OldSettings {
     private static MapProvider mapProvider = null;
     private static String cacheTwitterMessage = "I found [NAME] ([URL])";
 
-    private OldSettings() {
+    private Settings() {
         // this class is not to be instantiated;
     }
 
@@ -251,11 +251,11 @@ public final class OldSettings {
      * @return a pair (login, password) or null if no valid information is stored
      */
     public static ImmutablePair<String, String> getGcLogin() {
-        if (username == null || password == null) {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             final String preUsername = sharedPrefs.getString(KEY_USERNAME, null);
             final String prePassword = sharedPrefs.getString(KEY_PASSWORD, null);
 
-            if (preUsername == null || prePassword == null) {
+            if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
                 return null;
             }
 
@@ -270,8 +270,8 @@ public final class OldSettings {
     }
 
     public static boolean setLogin(final String username, final String password) {
-        OldSettings.username = username;
-        OldSettings.password = password;
+        Settings.username = username;
+        Settings.password = password;
         return editSharedSettings(new PrefRunnable() {
 
             @Override
@@ -305,7 +305,7 @@ public final class OldSettings {
 
     public static boolean isPremiumMember() {
         // Basic Member, Premium Member, ???
-        String memberStatus = OldSettings.getMemberStatus();
+        String memberStatus = Settings.getMemberStatus();
         if (memberStatus == null) {
             return false;
         }
@@ -967,7 +967,7 @@ public final class OldSettings {
             case MFMAP_BASEID + CYCLEMAP:
                 return MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode();
             case MFMAP_BASEID + OFFLINE: {
-                final String mapFile = OldSettings.getMapFile();
+                final String mapFile = Settings.getMapFile();
                 if (StringUtils.isNotEmpty(mapFile)) {
                     return mapFile.hashCode();
                 }
@@ -1402,7 +1402,7 @@ public final class OldSettings {
 
     public static File[] getMapThemeFiles() {
 
-        File directory = new File(OldSettings.getCustomRenderThemeBaseFolder());
+        File directory = new File(Settings.getCustomRenderThemeBaseFolder());
 
         List<File> result = new ArrayList<File>();
 

@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -221,13 +221,13 @@ public class GCMap {
                 }
 
                 boolean exclude = false;
-                if (OldSettings.isExcludeMyCaches() && (cache.isFound() || cache.isOwner())) { // workaround for BM
+                if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwner())) { // workaround for BM
                     exclude = true;
                 }
-                if (OldSettings.isExcludeDisabledCaches() && cache.isDisabled()) {
+                if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {
                     exclude = true;
                 }
-                if (!OldSettings.getCacheType().contains(cache) && cache.getType() != CacheType.UNKNOWN) { // workaround for BM
+                if (!Settings.getCacheType().contains(cache) && cache.getType() != CacheType.UNKNOWN) { // workaround for BM
                     exclude = true;
                 }
                 if (!exclude) {
@@ -254,14 +254,14 @@ public class GCMap {
      */
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
         int speed = (int) cgeoapplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
-        Strategy strategy = OldSettings.getLiveMapStrategy();
+        Strategy strategy = Settings.getLiveMapStrategy();
         if (strategy == Strategy.AUTO) {
             strategy = speed >= 30 ? Strategy.FAST : Strategy.DETAILED;
         }
 
         SearchResult result = searchByViewport(viewport, tokens, strategy);
 
-        if (OldSettings.isDebug()) {
+        if (Settings.isDebug()) {
             StringBuilder text = new StringBuilder(Formatter.SEPARATOR).append(strategy.getL10n()).append(Formatter.SEPARATOR).append(Units.getSpeed(speed));
             result.setUrl(result.getUrl() + text);
         }
@@ -303,14 +303,14 @@ public class GCMap {
                     if (tokens != null) {
                         params.put("k", tokens[0], "st", tokens[1]);
                     }
-                    if (OldSettings.isExcludeMyCaches()) { // works only for PM
+                    if (Settings.isExcludeMyCaches()) { // works only for PM
                         params.put("hf", "1", "hh", "1"); // hide found, hide hidden
                     }
-                    if (OldSettings.getCacheType() == CacheType.TRADITIONAL) {
+                    if (Settings.getCacheType() == CacheType.TRADITIONAL) {
                         params.put("ect", "9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
-                    } else if (OldSettings.getCacheType() == CacheType.MULTI) {
+                    } else if (Settings.getCacheType() == CacheType.MULTI) {
                         params.put("ect", "9,5,2,6,453,13,1304,137,11,4,8,1858");
-                    } else if (OldSettings.getCacheType() == CacheType.MYSTERY) {
+                    } else if (Settings.getCacheType() == CacheType.MYSTERY) {
                         params.put("ect", "9,5,3,6,453,13,1304,137,11,4,2,1858");
                     }
                     if (tile.getZoomlevel() != 14) {
@@ -355,10 +355,10 @@ public class GCMap {
             final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 //FIXME We don't have a RecaptchaReceiver!?
-                SearchResult search = GCParser.searchByCoords(center, OldSettings.getCacheType(), false, null);
+                SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
-                    if (OldSettings.isPremiumMember()) {
+                    if (Settings.isPremiumMember()) {
                         lastSearchViewport = cgData.getBounds(geocodes);
                     } else {
                         lastSearchViewport = new Viewport(center, center);

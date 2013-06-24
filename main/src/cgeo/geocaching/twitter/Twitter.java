@@ -1,7 +1,7 @@
 package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
@@ -25,7 +25,7 @@ public final class Twitter {
         if (app == null) {
             return;
         }
-        if (!OldSettings.isTwitterLoginValid()) {
+        if (!Settings.isTwitterLoginValid()) {
             return;
         }
 
@@ -38,7 +38,7 @@ public final class Twitter {
                         "display_coordinates", "true");
             }
 
-            OAuth.signOAuth("api.twitter.com", "/1/statuses/update.json", "POST", false, parameters, OldSettings.getTokenPublic(), OldSettings.getTokenSecret(), OldSettings.getKeyConsumerPublic(), OldSettings.getKeyConsumerSecret());
+            OAuth.signOAuth("api.twitter.com", "/1/statuses/update.json", "POST", false, parameters, Settings.getTokenPublic(), Settings.getTokenSecret(), Settings.getKeyConsumerPublic(), Settings.getKeyConsumerSecret());
             final HttpResponse httpResponse = Network.postRequest("http://api.twitter.com/1/statuses/update.json", parameters);
             if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
                 Log.i("Tweet posted");
@@ -60,10 +60,7 @@ public final class Twitter {
     }
 
     public static void postTweetCache(String geocode) {
-        if (!OldSettings.isUseTwitter()) {
-            return;
-        }
-        if (!OldSettings.isTwitterLoginValid()) {
+        if (!Settings.isUseTwitter() || !Settings.isTwitterLoginValid()) {
             return;
         }
         final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
@@ -76,7 +73,7 @@ public final class Twitter {
             name = name.substring(0, 100) + '…';
             }
         final String url = StringUtils.defaultString(cache.getUrl());
-        return fillTemplate(OldSettings.getCacheTwitterMessage(), name, url);
+        return fillTemplate(Settings.getCacheTwitterMessage(), name, url);
     }
 
     private static String fillTemplate(String template, String name, final String url) {
@@ -99,7 +96,7 @@ public final class Twitter {
             name = name.substring(0, 81) + '…';
         }
         String url = StringUtils.defaultString(trackable.getUrl());
-        String status = OldSettings.getTrackableTwitterMessage();
+        String status = Settings.getTrackableTwitterMessage();
         return fillTemplate(status, name, url);
     }
 }

@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.network.OAuthAuthorizationActivity;
 
@@ -23,17 +23,17 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
     @Override
     protected ImmutablePair<String, String> getTempToken() {
-        return OldSettings.getTempOCDEToken();
+        return Settings.getTempOCDEToken();
     }
 
     @Override
     protected void setTempTokens(String tokenPublic, String tokenSecret) {
-        OldSettings.setOCDETempTokens(tokenPublic, tokenSecret);
+        Settings.setOCDETempTokens(tokenPublic, tokenSecret);
     }
 
     @Override
     protected void setTokens(String tokenPublic, String tokenSecret, boolean enable) {
-        OldSettings.setOCDETokens(tokenPublic, tokenSecret, enable);
+        Settings.setOCDETokens(tokenPublic, tokenSecret, enable);
     }
 
     @Override

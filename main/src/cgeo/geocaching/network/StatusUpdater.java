@@ -9,6 +9,8 @@ import cgeo.geocaching.utils.Version;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Looper;
 
 import java.util.Locale;
@@ -26,6 +28,13 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
             this.messageId = messageId;
             this.icon = icon;
             this.url = url;
+        }
+
+        final static public Status closeoutStatus =
+                new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://www.cgeo.org/closeout/");
+
+        final static public Status defaultStatus() {
+            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? closeoutStatus : null;
         }
     }
 

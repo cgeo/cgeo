@@ -18,7 +18,7 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity>
      * this should work fine without an exception (once there was an exception because of the empty map file string)
      */
     public static void testSettingsException() {
-        final String mapFile = OldSettings.getMapFile();
+        final String mapFile = Settings.getMapFile();
         // We just want to ensure that it does not throw any exception but we do not know anything about the result
         MapsforgeMapProvider.isValidMapFile(mapFile);
         assertTrue(true);
@@ -26,11 +26,11 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity>
 
     public static void testSettings() {
         // unfortunately, several other tests depend on being a premium member and will fail if run by a basic member
-        assertEquals(GCConstants.MEMBER_STATUS_PM, OldSettings.getMemberStatus());
+        assertEquals(GCConstants.MEMBER_STATUS_PM, Settings.getMemberStatus());
     }
 
     public static void testDeviceHasNormalLogin() {
         // if the unit tests were interrupted in a previous run, the device might still have the "temporary" login data from the last tests
-        assertFalse("c:geo".equals(OldSettings.getUsername()));
+        assertFalse("c:geo".equals(Settings.getUsername()));
     }
 }

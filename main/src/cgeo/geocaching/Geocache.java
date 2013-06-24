@@ -467,8 +467,8 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void logOffline(final Activity fromActivity, final LogType logType) {
-        final boolean mustIncludeSignature = StringUtils.isNotBlank(OldSettings.getSignature()) && OldSettings.isAutoInsertSignature();
-        final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(OldSettings.getSignature(), new LogContext(this, true)) : "";
+        final boolean mustIncludeSignature = StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature();
+        final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(this, true)) : "";
         logOffline(fromActivity, initial, Calendar.getInstance(), logType);
     }
 
@@ -1618,7 +1618,7 @@ public class Geocache implements ICache, IWaypoint {
             }
 
             // store images from logs
-            if (OldSettings.isStoreLogImages()) {
+            if (Settings.isStoreLogImages()) {
                 for (LogEntry log : cache.getLogs()) {
                     if (log.hasLogImages()) {
                         for (Image oneLogImg : log.getLogImages()) {

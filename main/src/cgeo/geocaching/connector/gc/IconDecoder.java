@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.enumerations.CacheType;
 
 import android.graphics.Bitmap;
@@ -105,7 +105,7 @@ public abstract class IconDecoder {
                     cache.setFound(true);
                     return true;
                 case CT_OWN:
-                    cache.setOwnerUserId(OldSettings.getUsername());
+                    cache.setOwnerUserId(Settings.getUsername());
                     return true;
                 case CT_MEGAEVENT:
                     cache.setType(CacheType.MEGA_EVENT);

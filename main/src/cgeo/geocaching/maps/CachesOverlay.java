@@ -4,7 +4,7 @@ import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.Progress;
@@ -54,7 +54,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
         context = contextIn;
 
-        final MapProvider mapProvider = OldSettings.getMapProvider();
+        final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
     }
 

@@ -14,7 +14,6 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Units;
@@ -27,12 +26,13 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditNoteDialog;
+import cgeo.geocaching.ui.HtmlImageCounter;
 import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
+import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.OwnerActionsClickListener;
-import cgeo.geocaching.ui.UserActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -105,12 +105,9 @@ import android.widget.TextView.BufferType;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 /**
@@ -319,13 +316,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final int pageToOpen = savedInstanceState != null ?
                 savedInstanceState.getInt(STATE_PAGE_INDEX, 0) :
-                OldSettings.isOpenLastDetailsPage() ? OldSettings.getLastDetailsPage() : 1;
+                Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
         createViewPager(pageToOpen, new OnPageSelectedListener() {
 
             @Override
             public void onPageSelected(int position) {
-                if (OldSettings.isOpenLastDetailsPage()) {
-                    OldSettings.setLastDetailsPage(position);
+                if (Settings.isOpenLastDetailsPage()) {
+                    Settings.setLastDetailsPage(position);
                 }
                 // lazy loading of cache images
                 if (getPage(position) == Page.IMAGES) {
@@ -455,7 +452,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 showToast(res.getString(R.string.translate_length_warning));
             }
             menu.add(viewId, MENU_FIELD_TRANSLATE, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
-            if (OldSettings.isUseEnglish() && !StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
+            if (Settings.isUseEnglish() && !StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
                 menu.add(viewId, MENU_FIELD_TRANSLATE_EN, 0, res.getString(R.string.translate_to_english));
             }
 
@@ -1080,7 +1077,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
-            if (OldSettings.isStoreOfflineMaps()) {
+            if (Settings.isStoreOfflineMaps()) {
                 new PreviewMapTask().execute((Void) null);
             }
 
@@ -1250,7 +1247,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
 
-                if (OldSettings.getChooseList()) {
+                if (Settings.getChooseList()) {
                     // let user select list to store cache in
                     new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
                             new RunnableWithArgument<Integer>() {
@@ -1526,7 +1523,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return;
             }
 
-            OldSettings.saveLastList(listId);
+            Settings.saveLastList(listId);
             cgData.moveToList(cache, listId);
             updateListBox();
         }
@@ -1572,7 +1569,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final LinearLayout layout = (LinearLayout) view.findViewById(R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
-            if (!supportsFavoritePoints || cache.isOwner() || !OldSettings.isPremiumMember()) {
+            if (!supportsFavoritePoints || cache.isOwner() || !Settings.isPremiumMember()) {
                 return;
             }
             final Button buttonAdd = (Button) view.findViewById(R.id.add_to_favpoint);
@@ -1684,7 +1681,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             }
         }
-
     }
 
     protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -1708,7 +1704,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // long description
             if (StringUtils.isNotBlank(cache.getDescription())) {
-                if (OldSettings.isAutoLoadDescription()) {
+                if (Settings.isAutoLoadDescription()) {
                     loadLongDescription();
                 } else {
                     final Button showDesc = (Button) view.findViewById(R.id.show_description);
@@ -1860,21 +1856,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         editNoteDialogListener.onFinishEditNoteDialog(note);
     }
 
-    private static class HtmlImageCounter implements Html.ImageGetter {
-
-        private int imageCount = 0;
-
-        @Override
-        public Drawable getDrawable(String url) {
-            imageCount++;
-            return null;
-        }
-
-        public int getImageCount() {
-            return imageCount;
-        }
-    }
-
     /**
      * Loads the description in background. <br />
      * <br />
@@ -1993,7 +1974,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private void fixTextColor(final TextView view, final String text) {
             int backcolor;
-            if (OldSettings.isLightSkin()) {
+            if (Settings.isLightSkin()) {
                 backcolor = color.white;
 
                 for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {
@@ -2016,176 +1997,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
             view.setBackgroundResource(backcolor);
         }
-    }
-
-    private class LogsViewCreator extends AbstractCachingPageViewCreator<ListView> {
-        private final boolean allLogs;
-
-        LogsViewCreator(boolean allLogs) {
-            this.allLogs = allLogs;
-        }
-
-        @Override
-        public ListView getDispatchedView() {
-            if (cache == null) {
-                // something is really wrong
-                return null;
-            }
-
-            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_logs_page, null);
-
-            // log count
-            final Map<LogType, Integer> logCounts = cache.getLogCounts();
-            if (logCounts != null) {
-                final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>(logCounts.size());
-                for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
-                    // it may happen that the label is unknown -> then avoid any output for this type
-                    if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getKey().getL10n() != null) {
-                        sortedLogCounts.add(entry);
-                    }
-                }
-
-                if (!sortedLogCounts.isEmpty()) {
-                    // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                    Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
-
-                        @Override
-                        public int compare(Entry<LogType, Integer> logCountItem1, Entry<LogType, Integer> logCountItem2) {
-                            return logCountItem1.getKey().compareTo(logCountItem2.getKey());
-                        }
-                    });
-
-                    final ArrayList<String> labels = new ArrayList<String>(sortedLogCounts.size());
-                    for (final Entry<LogType, Integer> pair : sortedLogCounts) {
-                        labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
-                    }
-
-                    final TextView countView = new TextView(CacheDetailActivity.this);
-                    countView.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
-                    view.addHeaderView(countView, null, false);
-                }
-            }
-
-            final List<LogEntry> logs = allLogs ? cache.getLogs() : cache.getFriendsLogs();
-            view.setAdapter(new ArrayAdapter<LogEntry>(CacheDetailActivity.this, R.layout.logs_item, logs) {
-                final UserActionsClickListener userActionsClickListener = new UserActionsClickListener(cache);
-                final DecryptTextClickListener decryptTextClickListener = new DecryptTextClickListener();
-
-                @Override
-                public View getView(final int position, final View convertView, final ViewGroup parent) {
-                    View rowView = convertView;
-                    if (null == rowView) {
-                        rowView = getLayoutInflater().inflate(R.layout.logs_item, null);
-                    }
-                    LogViewHolder holder = (LogViewHolder) rowView.getTag();
-                    if (null == holder) {
-                        holder = new LogViewHolder(rowView);
-                    }
-                    holder.setPosition(position);
-
-                    final LogEntry log = getItem(position);
-
-                    if (log.date > 0) {
-                        holder.date.setText(Formatter.formatShortDateVerbally(log.date));
-                        holder.date.setVisibility(View.VISIBLE);
-                    } else {
-                        holder.date.setVisibility(View.GONE);
-                    }
-
-                    holder.type.setText(log.type.getL10n());
-                    holder.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
-
-                    // finds count
-                    holder.countOrLocation.setVisibility(View.VISIBLE);
-                    if (log.found == -1) {
-                        holder.countOrLocation.setVisibility(View.GONE);
-                    } else {
-                        holder.countOrLocation.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
-                    }
-
-                    // logtext, avoid parsing HTML if not necessary
-                    String logText = log.log;
-                    if (TextUtils.containsHtml(logText)) {
-                        logText = log.getDisplayText();
-                        // Fast preview: parse only HTML without loading any images
-                        final HtmlImageCounter imageCounter = new HtmlImageCounter();
-                        final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                        holder.text.setText(Html.fromHtml(logText, imageCounter, unknownTagsHandler), TextView.BufferType.SPANNABLE);
-                        if (imageCounter.getImageCount() > 0) {
-                            // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
-                            final LogImageLoader loader = new LogImageLoader(holder);
-                            loader.execute(logText);
-                        }
-                    }
-                    else {
-                        holder.text.setText(logText, TextView.BufferType.SPANNABLE);
-                    }
-
-                    // images
-                    if (log.hasLogImages()) {
-                        holder.images.setText(log.getImageTitles());
-                        holder.images.setVisibility(View.VISIBLE);
-                        holder.images.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                ImagesActivity.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), new ArrayList<Image>(log.getLogImages()));
-                            }
-                        });
-                    } else {
-                        holder.images.setVisibility(View.GONE);
-                    }
-
-                    // colored marker
-                    final int marker = log.type.markerId;
-                    if (marker != 0) {
-                        holder.marker.setVisibility(View.VISIBLE);
-                        holder.marker.setImageResource(marker);
-                    }
-                    else {
-                        holder.marker.setVisibility(View.GONE);
-                    }
-
-                    if (null == convertView) {
-                        // if convertView != null then this listeners are already set
-                        holder.author.setOnClickListener(userActionsClickListener);
-                        holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                        holder.text.setOnClickListener(decryptTextClickListener);
-                        registerForContextMenu(holder.text);
-                    }
-
-                    return rowView;
-                }
-            });
-
-            return view;
-        }
-
-        /** Loads the Log Images outside the ui thread. */
-
-        private class LogImageLoader extends AsyncTask<String, Progress, Spanned> {
-            final private LogViewHolder holder;
-            final private int position;
-
-            public LogImageLoader(LogViewHolder holder) {
-                this.holder = holder;
-                this.position = holder.getPosition();
-            }
-
-            @Override
-            protected Spanned doInBackground(String... logtext) {
-                return Html.fromHtml(logtext[0], new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null); //, TextView.BufferType.SPANNABLE)
-            }
-
-            @Override
-            protected void onPostExecute(Spanned result) {
-                // Ensure that this holder and its view still references the right item before updating the text.
-                if (position == holder.getPosition()) {
-                    holder.text.setText(result);
-                }
-            }
-
-        }
-
     }
 
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -2528,10 +2339,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return new DescriptionViewCreator();
 
             case LOGS:
-                return new LogsViewCreator(true);
+                return new CacheLogsViewCreator(this, cache, true);
 
             case LOGSFRIENDS:
-                return new LogsViewCreator(false);
+                return new CacheLogsViewCreator(this, cache, false);
 
             case WAYPOINTS:
                 return new WaypointsViewCreator();

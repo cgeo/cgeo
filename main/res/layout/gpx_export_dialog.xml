@@ -15,6 +15,6 @@
     <CheckBox
         android:id="@+id/share"
         style="@style/checkbox_full"
-        android:text="@string/oldinit_share_after_export" />
+        android:text="@string/init_share_after_export" />
 
 </LinearLayout>

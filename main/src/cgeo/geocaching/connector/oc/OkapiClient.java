@@ -4,7 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
@@ -603,7 +603,7 @@ final public class OkapiClient {
         params.add("langpref", getPreferredLanguage());
 
         if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            OAuth.signOAuth(host, service.methodName, "GET", false, params, OldSettings.getOCDETokenPublic(), OldSettings.getOCDETokenSecret(), connector.getCK(), connector.getCS());
+            OAuth.signOAuth(host, service.methodName, "GET", false, params, Settings.getOCDETokenPublic(), Settings.getOCDETokenSecret(), connector.getCK(), connector.getCS());
         } else {
             connector.addAuthentication(params);
         }
@@ -621,15 +621,15 @@ final public class OkapiClient {
     }
 
     private static void addFilterParams(final Map<String, String> valueMap, OCApiConnector connector) {
-        if (!OldSettings.isExcludeDisabledCaches()) {
+        if (!Settings.isExcludeDisabledCaches()) {
             valueMap.put("status", "Available|Temporarily unavailable");
         }
-        if (OldSettings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+        if (Settings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
             valueMap.put("exclude_my_own", "true");
             valueMap.put("found_status", "notfound_only");
         }
-        if (OldSettings.getCacheType() != CacheType.ALL) {
-            valueMap.put("type", getFilterFromType(OldSettings.getCacheType()));
+        if (Settings.getCacheType() != CacheType.ALL) {
+            valueMap.put("type", getFilterFromType(Settings.getCacheType()));
         }
     }
 

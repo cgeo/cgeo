@@ -57,7 +57,7 @@ public class ImagesActivity extends AbstractActivity {
             return;
         }
 
-        offline = cgData.isOffline(geocode, null) && (imgType == ImageType.SpoilerImages || OldSettings.isStoreLogImages());
+        offline = cgData.isOffline(geocode, null) && (imgType == ImageType.SpoilerImages || Settings.isStoreLogImages());
     }
 
     @Override

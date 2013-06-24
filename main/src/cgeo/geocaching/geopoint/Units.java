@@ -1,6 +1,6 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -9,7 +9,7 @@ public class Units {
     public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
         double distance;
         String units;
-        if (OldSettings.isUseMetricUnits()) {
+        if (Settings.isUseMetricUnits()) {
             if (distanceKilometers >= 1) {
                 distance = distanceKilometers;
                 units = "km";
@@ -68,6 +68,6 @@ public class Units {
         if (speed.endsWith("mi")) {
             return speed.substring(0, speed.length() - 2) + "mph";
         }
-        return speed + (OldSettings.isUseMetricUnits() ? "/h" : "ph");
+        return speed + (Settings.isUseMetricUnits() ? "/h" : "ph");
     }
 }

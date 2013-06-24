@@ -88,7 +88,7 @@ public class MainActivity extends AbstractActivity {
         public void handleMessage(Message msg) {
 
             //TODO: Rework to be fully dynamic
-            if (OldSettings.isGCConnectorActive()) {
+            if (Settings.isGCConnectorActive()) {
                 StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
                 if (Login.isActualLoginStatus()) {
                     userInfo.append(Login.getActualUserName());
@@ -106,7 +106,7 @@ public class MainActivity extends AbstractActivity {
                 userInfoViewGc.setVisibility(View.GONE);
             }
 
-            if (OldSettings.isOCConnectorActive()) {
+            if (Settings.isOCConnectorActive()) {
                 StringBuilder userInfo = new StringBuilder("opencaching.de").append(Formatter.SEPARATOR);
                 IConnector conn = ConnectorFactory.getConnector("OCXXXX");
                 if (conn instanceof OCApiLiveConnector) {
@@ -309,7 +309,7 @@ public class MainActivity extends AbstractActivity {
                 startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
             case R.id.menu_settings:
-                startActivity(new Intent(this, OldSettingsActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case R.id.menu_newsettings:
                 startActivity(new Intent(this, NewSettingsActivity.class));
@@ -357,7 +357,7 @@ public class MainActivity extends AbstractActivity {
     }
 
     private void setFilterTitle() {
-        filterTitle.setText(OldSettings.getCacheType().getL10n());
+        filterTitle.setText(Settings.getCacheType().getL10n());
     }
 
     private void init() {
@@ -367,8 +367,8 @@ public class MainActivity extends AbstractActivity {
 
         initialized = true;
 
-        OldSettings.setLanguage(OldSettings.isUseEnglish());
-        OldSettings.getGcLogin();
+        Settings.setLanguage(Settings.isUseEnglish());
+        Settings.getGcLogin();
 
         if (app.firstRun) {
             (new FirstLoginThread()).start();
@@ -397,7 +397,7 @@ public class MainActivity extends AbstractActivity {
 
                     @Override
                     public void run(Integer selectedListId) {
-                        OldSettings.saveLastList(selectedListId);
+                        Settings.saveLastList(selectedListId);
                         cgeocaches.startActivityOffline(MainActivity.this);
                     }
                 });
@@ -469,7 +469,7 @@ public class MainActivity extends AbstractActivity {
 
         cacheTypes.addAll(sorted);
 
-        int checkedItem = cacheTypes.indexOf(OldSettings.getCacheType());
+        int checkedItem = cacheTypes.indexOf(Settings.getCacheType());
         if (checkedItem < 0) {
             checkedItem = 0;
         }
@@ -486,7 +486,7 @@ public class MainActivity extends AbstractActivity {
             @Override
             public void onClick(DialogInterface dialog, int position) {
                 CacheType cacheType = cacheTypes.get(position);
-                OldSettings.setCacheType(cacheType);
+                Settings.setCacheType(cacheType);
                 setFilterTitle();
                 dialog.dismiss();
             }
@@ -504,8 +504,8 @@ public class MainActivity extends AbstractActivity {
             return;
         }
         new AlertDialog.Builder(this)
-                .setTitle(res.getString(R.string.oldinit_backup_restore))
-                .setMessage(res.getString(R.string.oldinit_restore_confirm))
+                .setTitle(res.getString(R.string.init_backup_restore))
+                .setMessage(res.getString(R.string.init_restore_confirm))
                 .setCancelable(false)
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
@@ -553,7 +553,7 @@ public class MainActivity extends AbstractActivity {
                         navAccuracy.setText(null);
                     }
 
-                    if (OldSettings.isShowAddress()) {
+                    if (Settings.isShowAddress()) {
                         if (addCoords == null) {
                             navLocation.setText(res.getString(R.string.loc_no_addr));
                         }
@@ -708,8 +708,8 @@ public class MainActivity extends AbstractActivity {
             }
 
             boolean more = false;
-            if (version != OldSettings.getVersion()) {
-                Log.i("Initializing hard cleanup - version changed from " + OldSettings.getVersion() + " to " + version + ".");
+            if (version != Settings.getVersion()) {
+                Log.i("Initializing hard cleanup - version changed from " + Settings.getVersion() + " to " + version + ".");
 
                 more = true;
             }
@@ -719,7 +719,7 @@ public class MainActivity extends AbstractActivity {
             cleanupRunning = false;
 
             if (version > 0) {
-                OldSettings.setVersion(version);
+                Settings.setVersion(version);
             }
         }
     }
@@ -733,7 +733,7 @@ public class MainActivity extends AbstractActivity {
             }
 
             //TODO: Rework to be fully dynamic
-            if (OldSettings.isGCConnectorActive()) {
+            if (Settings.isGCConnectorActive()) {
                 // login
                 final StatusCode status = Login.login();
 
@@ -749,11 +749,11 @@ public class MainActivity extends AbstractActivity {
 
                     // invoke settings activity to insert login details
                     if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                        OldSettingsActivity.startActivity(MainActivity.this);
+                        SettingsActivity.startActivity(MainActivity.this);
                     }
                 }
             }
-            if (OldSettings.isOCConnectorActive()) {
+            if (Settings.isOCConnectorActive()) {
                 IConnector conn = ConnectorFactory.getConnector("OCXXXX");
                 if (conn instanceof OCApiLiveConnector) {
                     OCApiLiveConnector ocapiConn = (OCApiLiveConnector) conn;

@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
@@ -183,8 +183,8 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     @Override
     public void setMapSource() {
         setMapViewMode(MapViewMode.CANVAS_RENDERER);
-        setMapFile(OldSettings.getMapFile());
-        if (!MapDatabase.isValidMapFile(OldSettings.getMapFile())) {
+        setMapFile(Settings.getMapFile());
+        if (!MapDatabase.isValidMapFile(Settings.getMapFile())) {
             Log.e("MapsforgeMapView024: Invalid map file");
         }
         Toast.makeText(

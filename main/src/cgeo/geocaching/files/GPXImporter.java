@@ -3,7 +3,7 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;
@@ -146,7 +146,7 @@ public class GPXImporter {
                 final SearchResult search = new SearchResult(caches);
                 // Do not put imported caches into the cachecache. That would consume lots of memory for no benefit.
 
-                if (OldSettings.isStoreOfflineMaps() || OldSettings.isStoreOfflineWpMaps()) {
+                if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {
                     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_STATIC_MAPS, R.string.gpx_import_store_static_maps, search.getCount()));
                     final boolean finishedWithoutCancel = importStaticMaps(search);
                     // Skip last message if static maps where canceled

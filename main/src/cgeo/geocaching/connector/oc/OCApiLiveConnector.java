@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -30,7 +30,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public boolean isActivated() {
-        return OldSettings.isOCConnectorActive();
+        return Settings.isOCConnectorActive();
     }
 
     @Override
@@ -47,7 +47,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     @Override
     public OAuthLevel getSupportedAuthLevel() {
         // TODO the tokens must be available connector specific
-        if (StringUtils.isNotBlank(OldSettings.getOCDETokenPublic()) && StringUtils.isNotBlank(OldSettings.getOCDETokenSecret())) {
+        if (StringUtils.isNotBlank(Settings.getOCDETokenPublic()) && StringUtils.isNotBlank(Settings.getOCDETokenSecret())) {
             return OAuthLevel.Level3;
         }
         return OAuthLevel.Level1;

@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">c:geo</string>
-    <string name="app_name_compass">c:geo brújula</string>
 
     <!-- basics -->
     <string name="cache">Escondite</string>
@@ -317,59 +316,58 @@
 
     <!-- init -->
     <string name="settings_screen_gc_title">Geocaching.com</string>
-    <string name="oldinit_gcvote">GCvote.com</string>
-    <string name="oldinit_twitter">Twitter</string>
-    <string name="oldinit_username">Usuario</string>
-    <string name="oldinit_password">Contraseña</string>
-    <string name="oldinit_passvote">Contraseña</string>
-    <string name="oldinit_login">Acceder</string>
-    <string name="oldinit_login_popup">Acceso</string>
-    <string name="oldinit_login_popup_working">Accediendo a Geocaching.com…</string>
-    <string name="oldinit_login_popup_ok">Acceso conseguido.</string>
-    <string name="oldinit_login_popup_failed">Error en el acceso.</string>
-    <string name="oldinit_login_popup_failed_reason">El acceso ha fallado debido a </string>
-    <string name="oldinit_twitter_authorize">Autorizar a c:geo</string>
-    <string name="oldinit_twitter_publish">Publicar estado cuando se encuente un escondite</string>
-    <string name="oldinit_signature">Firma</string>
-    <string name="oldinit_signature_help_button">Ayuda</string>
-    <string name="oldinit_signature_help_title">Trucos para la firma</string>
-    <string name="oldinit_signature_help_text">Escribe la firma que quieres usar en los registros.\nLas palabras especiales que puedes usar son: [DATE], [TIME], [USER] y [NUMBER].\nSerán reemplazados por sus valores al insertar la firma.</string>
-    <string name="oldinit_signature_template_button">Insertar plantilla</string>
-    <string name="oldinit_signature_template_date">Fecha</string>
-    <string name="oldinit_signature_template_time">Hora</string>
-    <string name="oldinit_signature_template_user">Usuario</string>
-    <string name="oldinit_signature_template_number">Número</string>
-    <string name="oldinit_other">Otras opciones</string>
-    <string name="oldinit_skin">Fondo blanco (necesita reiniciar c:geo)</string>
-    <string name="oldinit_address">Mostrar dirección en lugar de posición en la pantalla principal</string>
-    <string name="oldinit_captcha">Mostrar CAPTCHA si es necesario</string>
-    <string name="oldinit_useenglish">Usar inglés interno (necesita reiniciar c:geo)</string>
-    <string name="oldinit_exclude">Excluir encontrados y propios</string>
-    <string name="oldinit_disabled">Excluir escondites desactivados</string>
-    <string name="oldinit_offline">Guardar mapas para usar sin conexión</string>
-    <string name="oldinit_save_log_img">Guardar imágenes de los registros</string>
-    <string name="oldinit_units">Usar millas/pies (unidades imperiales)</string>
-    <string name="oldinit_autoload">Autocargar descripción larga</string>
-    <string name="oldinit_livelist">Mostrar dirección a los escondites en su listado</string>
-    <string name="oldinit_altitude">Corrección de altitud</string>
-    <string name="oldinit_altitude_description">Si el GPS te indica una altitud errónea, puedes corregirla con un valor positivo o negativo. La corrección es siempre en metros.</string>
-    <string name="oldinit_clear">Borrar acceso</string>
-    <string name="oldinit_cleared">c:geo ha borrado la información de acceso.</string>
-    <string name="oldinit_backup">Backup</string>
-    <string name="oldinit_backup_backup">Copia de seguridad</string>
-    <string name="oldinit_backup_note">Esta opción copia/restaura la base de datos de escondites y puntos de referencia, no la configuración. Los datos de acceso y contraseña no se guardarán.</string>
-    <string name="oldinit_backup_restore">Restaurar</string>
-    <string name="oldinit_backup_success">La base de datos de c:geo se ha copiado satisfactoriamente</string>
-    <string name="oldinit_backup_failed">Ha fallado la copia de seguridad.</string>
-    <string name="oldinit_restore_success">Restauración completa.</string>
-    <string name="oldinit_restore_failed">Restauración errónea</string>
-    <string name="oldinit_backup_last">Copia guardada el</string>
-    <string name="oldinit_backup_last_no">No hay ninguna copia de seguridad.</string>
-    <string name="oldinit_mapsources">Proveedor de mapas</string>
-    <string name="oldinit_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de línea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string>
-    <string name="oldinit_mapsource_select">Elige proveedor de mapas</string>
-    <string name="oldinit_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
-    <string name="oldinit_sigautoinsert">Insertar firma automáticamente</string>
+    <string name="init_gcvote">GCvote.com</string>
+    <string name="init_twitter">Twitter</string>
+    <string name="init_username">Usuario</string>
+    <string name="init_password">Contraseña</string>
+    <string name="init_passvote">Contraseña</string>
+    <string name="init_login">Acceder</string>
+    <string name="init_login_popup">Acceso</string>
+    <string name="init_login_popup_working">Accediendo a Geocaching.com…</string>
+    <string name="init_login_popup_ok">Acceso conseguido.</string>
+    <string name="init_login_popup_failed">Error en el acceso.</string>
+    <string name="init_login_popup_failed_reason">El acceso ha fallado debido a </string>
+    <string name="init_twitter_authorize">Autorizar a c:geo</string>
+    <string name="init_signature">Firma</string>
+    <string name="init_signature_help_button">Ayuda</string>
+    <string name="init_signature_help_title">Trucos para la firma</string>
+    <string name="init_signature_help_text">Escribe la firma que quieres usar en los registros.\nLas palabras especiales que puedes usar son: [DATE], [TIME], [USER] y [NUMBER].\nSerán reemplazados por sus valores al insertar la firma.</string>
+    <string name="init_signature_template_button">Insertar plantilla</string>
+    <string name="init_signature_template_date">Fecha</string>
+    <string name="init_signature_template_time">Hora</string>
+    <string name="init_signature_template_user">Usuario</string>
+    <string name="init_signature_template_number">Número</string>
+    <string name="init_other">Otras opciones</string>
+    <string name="init_skin">Fondo blanco (necesita reiniciar c:geo)</string>
+    <string name="init_address">Mostrar dirección en lugar de posición en la pantalla principal</string>
+    <string name="init_captcha">Mostrar CAPTCHA si es necesario</string>
+    <string name="init_useenglish">Usar inglés interno (necesita reiniciar c:geo)</string>
+    <string name="init_exclude">Excluir encontrados y propios</string>
+    <string name="init_disabled">Excluir escondites desactivados</string>
+    <string name="init_offline">Guardar mapas para usar sin conexión</string>
+    <string name="init_save_log_img">Guardar imágenes de los registros</string>
+    <string name="init_units">Usar millas/pies (unidades imperiales)</string>
+    <string name="init_autoload">Autocargar descripción larga</string>
+    <string name="init_livelist">Mostrar dirección a los escondites en su listado</string>
+    <string name="init_altitude">Corrección de altitud</string>
+    <string name="init_altitude_description">Si el GPS te indica una altitud errónea, puedes corregirla con un valor positivo o negativo. La corrección es siempre en metros.</string>
+    <string name="init_clear">Borrar acceso</string>
+    <string name="init_cleared">c:geo ha borrado la información de acceso.</string>
+    <string name="init_backup">Backup</string>
+    <string name="init_backup_backup">Copia de seguridad</string>
+    <string name="init_backup_note">Esta opción copia/restaura la base de datos de escondites y puntos de referencia, no la configuración. Los datos de acceso y contraseña no se guardarán.</string>
+    <string name="init_backup_restore">Restaurar</string>
+    <string name="init_backup_success">La base de datos de c:geo se ha copiado satisfactoriamente</string>
+    <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
+    <string name="init_restore_success">Restauración completa.</string>
+    <string name="init_restore_failed">Restauración errónea</string>
+    <string name="init_backup_last">Copia guardada el</string>
+    <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
+    <string name="init_mapsources">Proveedor de mapas</string>
+    <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de línea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string>
+    <string name="init_mapsource_select">Elige proveedor de mapas</string>
+    <string name="init_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
+    <string name="init_sigautoinsert">Insertar automáticamente</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
@@ -377,13 +375,13 @@
     <string name="map_source_osm_mapnik">OSM: Mapnik</string>
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
-    <string name="oldinit_sendToCgeo">Enviar a c:geo</string>
-    <string name="oldinit_sendToCgeo_name">Nombre de tu dispositivo:</string>
-    <string name="oldinit_sendToCgeo_description">Enviar a c:geo (send2cgeo)te permite recibir escondites automáticamente desde la web de geocaching usando un complemento especialpara Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. C:geo funciona sin tener que registrar tu dispositivo.</string>
-    <string name="oldinit_sendToCgeo_register">Solicitar registro</string>
-    <string name="oldinit_sendToCgeo_registering">Registrando "Enviar a c:geo"…</string>
-    <string name="oldinit_sendToCgeo_register_ok">Registro finalizado. Tu código PIN ####. Úsalo en la web de c:geo para añadir este dispositivo a tu navegador.</string>
-    <string name="oldinit_sendToCgeo_register_fail">Error al registrarse.</string>
+    <string name="init_sendToCgeo">Enviar a c:geo</string>
+    <string name="init_sendToCgeo_name">Nombre de tu dispositivo:</string>
+    <string name="init_sendToCgeo_description">Enviar a c:geo (send2cgeo)te permite recibir escondites automáticamente desde la web de geocaching usando un complemento especialpara Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. C:geo funciona sin tener que registrar tu dispositivo.</string>
+    <string name="init_sendToCgeo_register">Solicitar registro</string>
+    <string name="init_sendToCgeo_registering">Registrando "Enviar a c:geo"…</string>
+    <string name="init_sendToCgeo_register_ok">Registro finalizado. Tu código PIN ####. Úsalo en la web de c:geo para añadir este dispositivo a tu navegador.</string>
+    <string name="init_sendToCgeo_register_fail">Error al registrarse.</string>
 
     <!-- auth -->
     <string name="auth_twitter">Twitter</string>

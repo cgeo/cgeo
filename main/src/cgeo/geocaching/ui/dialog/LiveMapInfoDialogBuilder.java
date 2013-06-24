@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 
 import android.app.Activity;
@@ -22,11 +22,11 @@ public class LiveMapInfoDialogBuilder {
 
         final CheckBox checkBoxHide = (CheckBox) layout.findViewById(R.id.live_map_hint_hide);
 
-        final int showCount = OldSettings.getLiveMapHintShowCount();
+        final int showCount = Settings.getLiveMapHintShowCount();
         if (showCount > 2) {
             checkBoxHide.setVisibility(View.VISIBLE);
         }
-        OldSettings.setLiveMapHintShowCount(showCount + 1);
+        Settings.setLiveMapHintShowCount(showCount + 1);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 
@@ -35,7 +35,7 @@ public class LiveMapInfoDialogBuilder {
                 dialog.dismiss();
                 cgeoapplication.getInstance().setLiveMapHintShown();
                 if (checkBoxHide.getVisibility() == View.VISIBLE && checkBoxHide.isChecked()) {
-                    OldSettings.setHideLiveHint(true);
+                    Settings.setHideLiveHint(true);
                 }
             }
         });

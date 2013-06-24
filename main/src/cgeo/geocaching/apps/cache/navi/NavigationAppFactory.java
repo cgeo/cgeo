@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.R;
-import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -11,6 +11,7 @@ import cgeo.geocaching.apps.App;
 import cgeo.geocaching.apps.cache.CacheBeaconApp;
 import cgeo.geocaching.apps.cache.GccApp;
 import cgeo.geocaching.apps.cache.WhereYouGoApp;
+import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -58,6 +59,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
          * Google Navigation in walking mode
          */
         GOOGLE_NAVIGATION_WALK(new GoogleNavigationWalkingApp(), 12),
+        /**
+         * Google Navigation in walking mode
+         */
+        GOOGLE_NAVIGATION_BIKE(new GoogleNavigationBikeApp(), 21),
         /**
          * Google Maps Directions
          */
@@ -133,8 +138,8 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
         final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
-        final int defaultNavigationTool = OldSettings.getDefaultNavigationTool();
-        for (NavigationAppsEnum navApp : getInstalledNavigationApps()) {
+        final int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
                 boolean add = false;
@@ -161,8 +166,8 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                NavigationAppsEnum selectedItem = adapter.getItem(item);
-                App app = selectedItem.app;
+                final NavigationAppsEnum selectedItem = adapter.getItem(item);
+                final App app = selectedItem.app;
                 if (cache != null) {
                     navigateCache(activity, cache, app);
                 }
@@ -185,7 +190,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      */
     public static List<NavigationAppsEnum> getInstalledNavigationApps() {
         final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
-        for (NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
+        for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
             if (appEnum.app.isInstalled()) {
                 installedNavigationApps.add(appEnum);
             }
@@ -200,7 +205,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      */
     public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
         final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
-        for (NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
+        for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
             if (appEnum.app.isInstalled() && appEnum.app.isDefaultNavigationApp()) {
                 installedNavigationApps.add(appEnum);
             }
@@ -225,9 +230,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param menu
      */
     public static void addMenuItems(final Menu menu, final Geocache cache) {
-        for (NavigationAppsEnum navApp : getInstalledNavigationApps()) {
+        for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
             if (navApp.app instanceof CacheNavigationApp) {
-                CacheNavigationApp cacheApp = (CacheNavigationApp) navApp.app;
+                final CacheNavigationApp cacheApp = (CacheNavigationApp) navApp.app;
                 if (cacheApp.isEnabled(cache)) {
                     menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
                 }
@@ -236,9 +241,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     public static void addMenuItems(final Menu menu, final Waypoint waypoint) {
-        for (NavigationAppsEnum navApp : getInstalledNavigationApps()) {
+        for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
             if (navApp.app instanceof WaypointNavigationApp) {
-                WaypointNavigationApp waypointApp = (WaypointNavigationApp) navApp.app;
+                final WaypointNavigationApp waypointApp = (WaypointNavigationApp) navApp.app;
                 if (waypointApp.isEnabled(waypoint)) {
                     menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
                 }
@@ -262,7 +267,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     private static void navigateCache(Activity activity, Geocache cache, App app) {
         if (app instanceof CacheNavigationApp) {
-            CacheNavigationApp cacheApp = (CacheNavigationApp) app;
+            final CacheNavigationApp cacheApp = (CacheNavigationApp) app;
             cacheApp.navigate(activity, cache);
         }
     }
@@ -275,21 +280,21 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     private static void navigateWaypoint(Activity activity, Waypoint waypoint, App app) {
         if (app instanceof WaypointNavigationApp) {
-            WaypointNavigationApp waypointApp = (WaypointNavigationApp) app;
+            final WaypointNavigationApp waypointApp = (WaypointNavigationApp) app;
             waypointApp.navigate(activity, waypoint);
         }
     }
 
     private static void navigateGeopoint(Activity activity, Geopoint destination, App app) {
         if (app instanceof GeopointNavigationApp) {
-            GeopointNavigationApp geopointApp = (GeopointNavigationApp) app;
+            final GeopointNavigationApp geopointApp = (GeopointNavigationApp) app;
             geopointApp.navigate(activity, destination);
         }
     }
 
     private static App getAppFromMenuItem(MenuItem item) {
         final int id = item.getItemId();
-        for (NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
+        for (final NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
             if (MENU_ITEM_OFFSET + navApp.id == id) {
                 return navApp.app;
             }
@@ -316,9 +321,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     private static App getDefaultNavigationApplication(int defaultNavigation) {
         if (defaultNavigation == 2) {
-            return getNavigationAppForId(OldSettings.getDefaultNavigationTool2());
+            return getNavigationAppForId(Settings.getDefaultNavigationTool2());
         }
-        return getNavigationAppForId(OldSettings.getDefaultNavigationTool());
+        return getNavigationAppForId(Settings.getDefaultNavigationTool());
     }
 
     /**
@@ -362,7 +367,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     private static App getNavigationAppForId(final int navigationAppId) {
         final List<NavigationAppsEnum> installedNavigationApps = getInstalledNavigationApps();
 
-        for (NavigationAppsEnum navigationApp : installedNavigationApps) {
+        for (final NavigationAppsEnum navigationApp : installedNavigationApps) {
             if (navigationApp.id == navigationAppId) {
                 return navigationApp.app;
             }

@@ -2,7 +2,7 @@ package cgeo.geocaching.activity;
 
 import butterknife.Views;
 
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
@@ -129,7 +129,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         app = (cgeoapplication) this.getApplication();
 
         // only needed in some activities, but implemented in super class nonetheless
-        Cookies.restoreCookieStore(OldSettings.getCookieStore());
+        Cookies.restoreCookieStore(Settings.getCookieStore());
         ActivityMixin.keepScreenOn(this, keepScreenOn);
     }
 

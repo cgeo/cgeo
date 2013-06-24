@@ -106,7 +106,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     public static Geocache testSearchByGeocode(final String geocode) {
         final SearchResult search = Geocache.searchByGeocode(geocode, null, 0, true, null);
         assertNotNull(search);
-        if (OldSettings.isPremiumMember() || search.getError() == null) {
+        if (Settings.isPremiumMember() || search.getError() == null) {
             assertEquals(1, search.getGeocodes().size());
             assertTrue(search.getGeocodes().contains(geocode));
             return cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
@@ -130,8 +130,8 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByGeocodeNotLoggedIn() {
-        final ImmutablePair<String, String> login = OldSettings.getLogin();
-        final String memberStatus = OldSettings.getMemberStatus();
+        final ImmutablePair<String, String> login = Settings.getLogin();
+        final String memberStatus = Settings.getMemberStatus();
 
         try {
             // non premium cache
@@ -158,8 +158,8 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            OldSettings.setLogin(login.left, login.right);
-            OldSettings.setMemberStatus(memberStatus);
+            Settings.setLogin(login.left, login.right);
+            Settings.setMemberStatus(memberStatus);
             Login.login();
         }
     }
@@ -169,8 +169,8 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchErrorOccured() {
-        final ImmutablePair<String, String> login = OldSettings.getLogin();
-        final String memberStatus = OldSettings.getMemberStatus();
+        final ImmutablePair<String, String> login = Settings.getLogin();
+        final String memberStatus = Settings.getMemberStatus();
 
         try {
             // non premium cache
@@ -184,8 +184,8 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            OldSettings.setLogin(login.left, login.right);
-            OldSettings.setMemberStatus(memberStatus);
+            Settings.setLogin(login.left, login.right);
+            Settings.setMemberStatus(memberStatus);
             Login.login();
         }
     }
@@ -197,19 +197,19 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     private static void withMockedFilters(Runnable runnable) {
         // backup user settings
-        final boolean excludeMine = OldSettings.isExcludeMyCaches();
-        final boolean excludeDisabled = OldSettings.isExcludeDisabledCaches();
+        final boolean excludeMine = Settings.isExcludeMyCaches();
+        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
         try {
             // set up settings required for test
-            OldSettings.setExcludeMine(false);
-            OldSettings.setExcludeDisabledCaches(false);
+            Settings.setExcludeMine(false);
+            Settings.setExcludeDisabledCaches(false);
 
             runnable.run();
 
         } finally {
             // restore user settings
-            OldSettings.setExcludeMine(excludeMine);
-            OldSettings.setExcludeDisabledCaches(excludeDisabled);
+            Settings.setExcludeMine(excludeMine);
+            Settings.setExcludeDisabledCaches(excludeDisabled);
         }
     }
 
@@ -274,13 +274,13 @@ public class cgeoApplicationTest extends CGeoTestCase {
             @Override
             public void run() {
                 // backup user settings
-                final Strategy strategy = OldSettings.getLiveMapStrategy();
-                final CacheType cacheType = OldSettings.getCacheType();
+                final Strategy strategy = Settings.getLiveMapStrategy();
+                final CacheType cacheType = Settings.getCacheType();
 
                 try {
                     // set up settings required for test
-                    OldSettings.setExcludeMine(false);
-                    OldSettings.setCacheType(CacheType.ALL);
+                    Settings.setExcludeMine(false);
+                    Settings.setCacheType(CacheType.ALL);
 
                     final GC2CJPF mockedCache = new GC2CJPF();
                     deleteCacheFromDB(mockedCache.getGeocode());
@@ -289,17 +289,17 @@ public class cgeoApplicationTest extends CGeoTestCase {
                     final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
                     // check coords for DETAILED
-                    OldSettings.setLiveMapStrategy(Strategy.DETAILED);
+                    Settings.setLiveMapStrategy(Strategy.DETAILED);
                     SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertNotNull(search);
                     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
                     Geocache parsedCache = cgData.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
 
-                    assertEquals(OldSettings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
-                    assertEquals(OldSettings.isPremiumMember(), parsedCache.isReliableLatLon());
+                    assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
+                    assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
 
                     // check update after switch strategy to FAST
-                    OldSettings.setLiveMapStrategy(Strategy.FAST);
+                    Settings.setLiveMapStrategy(Strategy.FAST);
                     Tile.Cache.removeFromTileCache(mockedCache);
 
                     search = ConnectorFactory.searchByViewport(viewport, tokens);
@@ -307,13 +307,13 @@ public class cgeoApplicationTest extends CGeoTestCase {
                     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
                     parsedCache = cgData.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
 
-                    assertEquals(OldSettings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
-                    assertEquals(OldSettings.isPremiumMember(), parsedCache.isReliableLatLon());
+                    assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
+                    assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
 
                 } finally {
                     // restore user settings
-                    OldSettings.setLiveMapStrategy(strategy);
-                    OldSettings.setCacheType(cacheType);
+                    Settings.setLiveMapStrategy(strategy);
+                    Settings.setCacheType(cacheType);
                 }
             }
         });
@@ -325,12 +325,12 @@ public class cgeoApplicationTest extends CGeoTestCase {
     @MediumTest
     public static void testSearchByViewportNotLoggedIn() {
 
-        final ImmutablePair<String, String> login = OldSettings.getLogin();
-        final String memberStatus = OldSettings.getMemberStatus();
-        final Strategy strategy = OldSettings.getLiveMapStrategy();
+        final ImmutablePair<String, String> login = Settings.getLogin();
+        final String memberStatus = Settings.getMemberStatus();
+        final Strategy strategy = Settings.getLiveMapStrategy();
         final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
-        OldSettings.setLiveMapStrategy(testStrategy);
-        final CacheType cacheType = OldSettings.getCacheType();
+        Settings.setLiveMapStrategy(testStrategy);
+        final CacheType cacheType = Settings.getCacheType();
 
         try {
 
@@ -340,7 +340,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             MockedCache cache = new GC2CJPF();
             deleteCacheFromDBAndLogout(cache.getGeocode());
             Tile.Cache.removeFromTileCache(cache);
-            OldSettings.setCacheType(CacheType.ALL);
+            Settings.setCacheType(CacheType.ALL);
 
             Viewport viewport = new Viewport(cache, 0.003, 0.003);
             SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
@@ -368,11 +368,11 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            OldSettings.setLogin(login.left, login.right);
-            OldSettings.setMemberStatus(memberStatus);
+            Settings.setLogin(login.left, login.right);
+            Settings.setMemberStatus(memberStatus);
             Login.login();
-            OldSettings.setLiveMapStrategy(strategy);
-            OldSettings.setCacheType(cacheType);
+            Settings.setLiveMapStrategy(strategy);
+            Settings.setCacheType(cacheType);
         }
     }
 
@@ -383,7 +383,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
         for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
             String oldUser = mockedCache.getMockedDataUser();
             try {
-                mockedCache.setMockedDataUser(OldSettings.getUsername());
+                mockedCache.setMockedDataUser(Settings.getUsername());
                 Geocache parsedCache = cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
                 if (null != parsedCache) {
                     Compare.assertCompareCaches(mockedCache, parsedCache, true);
@@ -411,8 +411,8 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         Login.logout();
         // Modify login data to avoid an automatic login again
-        OldSettings.setLogin("c:geo", "c:geo");
-        OldSettings.setMemberStatus("Basic member");
+        Settings.setLogin("c:geo", "c:geo");
+        Settings.setMemberStatus("Basic member");
     }
 
 }

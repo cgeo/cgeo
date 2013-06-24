@@ -1,7 +1,7 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.MainActivity;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 
@@ -55,7 +55,7 @@ public final class ActivityMixin {
     }
 
     public static void setTheme(final Activity activity) {
-        if (OldSettings.isLightSkin()) {
+        if (Settings.isLightSkin()) {
             activity.setTheme(R.style.light);
         } else {
             activity.setTheme(R.style.dark);
@@ -63,7 +63,7 @@ public final class ActivityMixin {
     }
 
     public static int getTheme() {
-        if (OldSettings.isLightSkin()) {
+        if (Settings.isLightSkin()) {
             return R.style.light;
         }
 
@@ -72,7 +72,7 @@ public final class ActivityMixin {
 
     public static int getDialogTheme() {
         // Light theme dialogs don't work on Android Api < 11
-        if (OldSettings.isLightSkin() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Settings.isLightSkin() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             return R.style.popup_light;
         }
 

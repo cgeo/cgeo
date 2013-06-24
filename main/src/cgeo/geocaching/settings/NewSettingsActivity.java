@@ -2,6 +2,8 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -41,7 +43,7 @@ public class NewSettingsActivity extends PreferenceActivity {
 
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
-    private static final String KEY_GC_CHECK_LOGIN = "settings_gc_check_login";
+    private static final String KEY_GCVOTE_PASSWORD = "pass-vote";
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class NewSettingsActivity extends PreferenceActivity {
         // Add 'general' preferences.
         addPreferencesFromResource(R.xml.preferences);
 
-        bindSummaryToValue(KEY_USERNAME, KEY_PASSWORD);
+        bindSummarysToValues(KEY_USERNAME, KEY_PASSWORD, KEY_GCVOTE_PASSWORD);
 
     }
 
@@ -103,7 +105,7 @@ public class NewSettingsActivity extends PreferenceActivity {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void onBuildHeaders(List<Header> target) {
         if (!isSimplePreferences(this)) {
-            loadHeadersFromResource(R.xml.pref_headers, target);
+            // loadHeadersFromResource(R.xml.pref_headers, target);
         }
     }
 
@@ -117,7 +119,11 @@ public class NewSettingsActivity extends PreferenceActivity {
             String stringValue = value.toString();
 
             if (preference instanceof EditPasswordPreference) {
-                preference.setSummary("\u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022");
+                if (StringUtils.isBlank((String) value)) {
+                    preference.setSummary("");
+                } else {
+                    preference.setSummary("\u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022");
+                }
             } else if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
@@ -135,7 +141,7 @@ public class NewSettingsActivity extends PreferenceActivity {
                 // using RingtoneManager.
                 if (TextUtils.isEmpty(stringValue)) {
                     // Empty values correspond to 'silent' (no ringtone).
-                    preference.setSummary(R.string.pref_ringtone_silent);
+                    //preference.setSummary(R.string.pref_ringtone_silent);
 
                 } else {
                     Ringtone ringtone = RingtoneManager.getRingtone(
@@ -185,7 +191,7 @@ public class NewSettingsActivity extends PreferenceActivity {
                         .getString(preference.getKey(), ""));
     }
 
-    private void bindSummaryToValue(String... keys) {
+    private void bindSummarysToValues(String... keys) {
         for (String key : keys) {
             bindSummaryToValue(findPreference(key));
         }
@@ -220,7 +226,7 @@ public class NewSettingsActivity extends PreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_notification);
+            // addPreferencesFromResource(R.xml.pref_notification);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
@@ -239,7 +245,7 @@ public class NewSettingsActivity extends PreferenceActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_data_sync);
+            // addPreferencesFromResource(R.xml.pref_data_sync);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are

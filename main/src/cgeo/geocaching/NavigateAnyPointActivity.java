@@ -243,7 +243,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         latButton.setOnClickListener(new CoordDialogListener());
         lonButton.setOnClickListener(new CoordDialogListener());
 
-        final Geopoint coords = OldSettings.getAnyCoordinates();
+        final Geopoint coords = Settings.getAnyCoordinates();
         if (coords != null) {
             latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
             lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
@@ -259,7 +259,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private void initializeDistanceUnitSelector() {
         if (StringUtils.isBlank(distanceUnit)) {
-            if (OldSettings.isUseMetricUnits()) {
+            if (Settings.isUseMetricUnits()) {
                 distanceUnitSelector.setSelection(0); // m
                 distanceUnit = res.getStringArray(R.array.distance_units)[0];
             } else {
@@ -519,7 +519,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
             double distance;
             try {
-                distance = DistanceParser.parseDistance(distanceText, OldSettings.isUseMetricUnits());
+                distance = DistanceParser.parseDistance(distanceText, Settings.isUseMetricUnits());
             } catch (NumberFormatException e) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;
@@ -548,6 +548,6 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         if (!changed) {
             return;
         }
-        OldSettings.setAnyCoordinates(coords);
+        Settings.setAnyCoordinates(coords);
     }
 }

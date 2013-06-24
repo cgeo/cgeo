@@ -10,7 +10,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     /**
      * TB codes really start with TB1, there is no padding or minimum length
      */
-    private final static Pattern PATTERN_TB_CODE = Pattern.compile("TB[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_TB_CODE = Pattern.compile("(TB[0-9A-Z]+)|([0-9A-Z]{6})", Pattern.CASE_INSENSITIVE);
 
     @Override
     public boolean canHandleTrackable(String geocode) {
@@ -31,4 +31,20 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     public Trackable searchTrackable(String geocode, String guid, String id) {
         return GCParser.searchTrackable(geocode, guid, id);
     }
+
+    /**
+     * initialization on demand holder pattern
+     */
+    private static class Holder {
+        private static final TravelBugConnector INSTANCE = new TravelBugConnector();
+    }
+
+    private TravelBugConnector() {
+        // singleton
+    }
+
+    public static TravelBugConnector getInstance() {
+        return Holder.INSTANCE;
+    }
+
 }

@@ -5,7 +5,7 @@ import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
@@ -155,7 +155,7 @@ public abstract class GCParser {
                 Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data");
             }
 
-            if (OldSettings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
+            if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
                 // skip disabled and archived caches
                 continue;
             }
@@ -166,7 +166,7 @@ public abstract class GCParser {
             cache.setType(CacheType.getByPattern(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, true, 1, null, true)));
 
             // cache direction - image
-            if (OldSettings.getLoadDirImg()) {
+            if (Settings.getLoadDirImg()) {
                 final String direction = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 1, null, false);
                 if (direction != null) {
                     cache.setDirectionImg(direction);
@@ -176,7 +176,7 @@ public abstract class GCParser {
             // cache distance - estimated distance for basic members
             final String distance = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
             if (distance != null) {
-                cache.setDistance(DistanceParser.parseDistance(distance, OldSettings.isUseMetricUnits()));
+                cache.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
             }
 
             // difficulty/terrain
@@ -267,7 +267,7 @@ public abstract class GCParser {
             recaptchaText = thread.getText();
         }
 
-        if (!cids.isEmpty() && (OldSettings.isPremiumMember() || showCaptcha) && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
+        if (!cids.isEmpty() && (Settings.isPremiumMember() || showCaptcha) && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
 
             try {
@@ -314,7 +314,7 @@ public abstract class GCParser {
         }
 
         // get direction images
-        if (OldSettings.getLoadDirImg()) {
+        if (Settings.getLoadDirImg()) {
             final Set<Geocache> caches = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             for (final Geocache cache : caches) {
                 if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
@@ -801,7 +801,7 @@ public abstract class GCParser {
      * @return the original params if not null, maybe augmented with f=1, or a new Parameters with f=1 or null otherwise
      */
     private static Parameters addFToParams(final Parameters params, final boolean my, final boolean addF) {
-        if (!my && OldSettings.isExcludeMyCaches() && addF) {
+        if (!my && Settings.isExcludeMyCaches() && addF) {
             if (params == null) {
                 return new Parameters("f", "1");
             }
@@ -839,7 +839,7 @@ public abstract class GCParser {
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults(OldSettings.isExcludeDisabledCaches(), false, cacheType);
+        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), false, cacheType);
 
         Login.getLoginStatus(page);
 
@@ -862,7 +862,7 @@ public abstract class GCParser {
     }
 
     private static boolean isSearchForMyCaches(final String userName) {
-        if (userName.equalsIgnoreCase(OldSettings.getGcLogin().left)) {
+        if (userName.equalsIgnoreCase(Settings.getGcLogin().left)) {
             Log.i("Overriding users choice because of self search, downloading all caches.");
             return true;
         }
@@ -1423,7 +1423,7 @@ public abstract class GCParser {
         final String distance = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
         if (null != distance) {
             try {
-                trackable.setDistance(DistanceParser.parseDistance(distance, OldSettings.isUseMetricUnits()));
+                trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
             } catch (final NumberFormatException e) {
                 Log.e("GCParser.parseTrackable: Failed to parse distance", e);
             }
@@ -1721,7 +1721,7 @@ public abstract class GCParser {
         }
 
         //cache.setLogs(loadLogsFromDetails(page, cache, false));
-        if (OldSettings.isFriendLogsWanted()) {
+        if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
             final List<LogEntry> allLogs = cache.getLogs();
             final List<LogEntry> friendLogs = loadLogsFromDetails(page, cache, true, false);
@@ -1736,7 +1736,7 @@ public abstract class GCParser {
             }
         }
 
-        if (OldSettings.isElevationWanted()) {
+        if (Settings.isElevationWanted()) {
             if (CancellableHandler.isCancelled(handler)) {
                 return;
             }
@@ -1746,7 +1746,7 @@ public abstract class GCParser {
             }
         }
 
-        if (OldSettings.isRatingWanted()) {
+        if (Settings.isRatingWanted()) {
             if (CancellableHandler.isCancelled(handler)) {
                 return;
             }

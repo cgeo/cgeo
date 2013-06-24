@@ -25,7 +25,7 @@ import java.util.List;
 
 public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
-    private static final IConnector[] connectors = new IConnector[] {
+    private static final IConnector[] CONNECTORS = new IConnector[] {
             GCConnector.getInstance(),
             new OCApiLiveConnector("Opencaching.de", "www.opencaching.de", "OC", R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret, ApiSupport.current),
             new OCConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
@@ -46,8 +46,8 @@ public final class ConnectorFactory {
 
     public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
     private static final TrackableConnector[] TRACKABLE_CONNECTORS = new TrackableConnector[] {
-            new TravelBugConnector(),
-            new GeokretyConnector(),
+            new GeokretyConnector(), // GK must be first, as it overlaps with the secret codes of travel bugs
+            TravelBugConnector.getInstance(),
             UNKNOWN_TRACKABLE_CONNECTOR // must be last
     };
 
@@ -57,7 +57,7 @@ public final class ConnectorFactory {
 
     static {
         final List<ISearchByViewPort> vpConns = new ArrayList<ISearchByViewPort>();
-        for (final IConnector conn : connectors) {
+        for (final IConnector conn : CONNECTORS) {
             if (conn instanceof ISearchByViewPort) {
                 vpConns.add((ISearchByViewPort) conn);
             }
@@ -65,7 +65,7 @@ public final class ConnectorFactory {
         searchByViewPortConns = vpConns.toArray(new ISearchByViewPort[vpConns.size()]);
 
         final List<ISearchByCenter> centerConns = new ArrayList<ISearchByCenter>();
-        for (final IConnector conn : connectors) {
+        for (final IConnector conn : CONNECTORS) {
             // GCConnector is handled specially, omit it here!
             if (conn instanceof ISearchByCenter && !(conn instanceof GCConnector)) {
                 centerConns.add((ISearchByCenter) conn);
@@ -75,7 +75,7 @@ public final class ConnectorFactory {
     }
 
     public static IConnector[] getConnectors() {
-        return connectors;
+        return CONNECTORS;
     }
 
     public static ISearchByCenter[] getSearchByCenterConnectors() {
@@ -86,7 +86,7 @@ public final class ConnectorFactory {
         if (isInvalidGeocode(geocode)) {
             return false;
         }
-        for (final IConnector connector : connectors) {
+        for (final IConnector connector : CONNECTORS) {
             if (connector.canHandle(geocode)) {
                 return true;
             }
@@ -117,7 +117,7 @@ public final class ConnectorFactory {
         if (isInvalidGeocode(geocode)) {
             return UNKNOWN_CONNECTOR;
         }
-        for (final IConnector connector : connectors) {
+        for (final IConnector connector : CONNECTORS) {
             if (connector.canHandle(geocode)) {
                 return connector;
             }
@@ -146,13 +146,17 @@ public final class ConnectorFactory {
     }
 
     public static String getGeocodeFromURL(final String url) {
-        for (final IConnector connector : connectors) {
+        for (final IConnector connector : CONNECTORS) {
             final String geocode = connector.getGeocodeFromUrl(url);
             if (StringUtils.isNotBlank(geocode)) {
                 return geocode;
             }
         }
         return null;
+    }
+
+    public static TrackableConnector[] getTrackableConnectors() {
+        return TRACKABLE_CONNECTORS;
     }
 
 }

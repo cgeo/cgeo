@@ -28,7 +28,7 @@ public class GpxFileListActivity extends AbstractFileListActivity<GPXListAdapter
 
     @Override
     protected List<File> getBaseFolders() {
-        return Collections.singletonList(new File(OldSettings.getGpxImportDir()));
+        return Collections.singletonList(new File(Settings.getGpxImportDir()));
     }
 
     public static void startSubActivity(Activity fromActivity, int listId) {

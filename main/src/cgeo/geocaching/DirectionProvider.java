@@ -27,6 +27,8 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
 
     @Override
     protected void onFirstObserver() {
+        @SuppressWarnings("deprecation")
+        // This will be removed when using a new location service. Until then, it is okay to be used.
         final Sensor defaultSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         sensorManager.registerListener(this, defaultSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
