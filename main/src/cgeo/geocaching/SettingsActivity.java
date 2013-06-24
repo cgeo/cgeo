@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -206,7 +207,7 @@ public class SettingsActivity extends AbstractActivity {
     private boolean insertSignatureTemplate(final LogTemplate template) {
         EditText sig = (EditText) findViewById(R.id.signature);
         String insertText = "[" + template.getTemplateString() + "]";
-        insertAtPosition(sig, insertText, true);
+        ActivityMixin.insertAtPosition(sig, insertText, true);
         return true;
     }
 

@@ -218,6 +218,7 @@
     <string name="menu_about">O aplikácii</string>
     <string name="menu_helpers">Pomocné programy</string>
     <string name="menu_settings">Nastavenia</string>
+    <string name="menu_oldsettings">old Nastavenia</string>
     <string name="menu_history">História</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Nasnímať geo kód</string>

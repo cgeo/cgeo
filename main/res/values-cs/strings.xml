@@ -237,6 +237,7 @@
     <string name="menu_about">O programu</string>
     <string name="menu_helpers">Pomocné programy</string>
     <string name="menu_settings">Nastavení</string>
+    <string name="menu_oldsettings">old Nastavení</string>
     <string name="menu_history">Historie</string>
     <string name="menu_filter">Filtr</string>
     <string name="menu_scan_geo">Naskenovat geokód</string>

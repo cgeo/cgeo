@@ -1,6 +1,10 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,7 +23,14 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
+import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,15 +52,50 @@ public class NewSettingsActivity extends PreferenceActivity {
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
-    private static final String KEY_USERNAME = "username";
-    private static final String KEY_PASSWORD = "password";
-    private static final String KEY_GCVOTE_PASSWORD = "pass-vote";
+    private EditText signatureText;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
         setupSimplePreferencesScreen();
+    }
+
+    // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
+    OnMenuItemClickListener TEMPLATE_CLICK = new OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            LogTemplate template = LogTemplateProvider.getTemplate(item.getItemId());
+            if (template != null) {
+                insertSignatureTemplate(template);
+                return true;
+            }
+            return false;
+        }
+    };
+
+    // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
+    void setSignatureTextView(EditText view) {
+        this.signatureText = view;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+            ContextMenuInfo menuInfo) {
+        if (v.getId() == R.id.signature_templates) {
+            menu.setHeaderTitle(R.string.init_signature_template_button);
+            ArrayList<LogTemplate> templates = LogTemplateProvider.getTemplates();
+            for (int i = 0; i < templates.size(); ++i) {
+                menu.add(0, templates.get(i).getItemId(), 0, templates.get(i).getResourceId());
+                menu.getItem(i).setOnMenuItemClickListener(TEMPLATE_CLICK);
+            }
+        }
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    private void insertSignatureTemplate(final LogTemplate template) {
+        String insertText = "[" + template.getTemplateString() + "]";
+        ActivityMixin.insertAtPosition(signatureText, insertText, true);
     }
 
     /**
@@ -68,7 +114,8 @@ public class NewSettingsActivity extends PreferenceActivity {
         // Add 'general' preferences.
         addPreferencesFromResource(R.xml.preferences);
 
-        bindSummarysToValues(KEY_USERNAME, KEY_PASSWORD, KEY_GCVOTE_PASSWORD);
+        bindSummarysToValues(Settings.KEY_USERNAME, Settings.KEY_PASSWORD,
+                Settings.KEY_GCVOTE_PASSWORD, Settings.KEY_SIGNATURE);
 
     }
 

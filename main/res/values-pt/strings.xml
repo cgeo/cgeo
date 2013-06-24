@@ -219,6 +219,7 @@
     <string name="menu_about">Sobre o c:geo</string>
     <string name="menu_helpers">Utilitários</string>
     <string name="menu_settings">Definições</string>
+    <string name="menu_oldsettings">old Definições</string>
     <string name="menu_history">Histórico</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Scan geocode</string>

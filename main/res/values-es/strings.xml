@@ -220,6 +220,7 @@
     <string name="menu_about">Sobre c:geo</string>
     <string name="menu_helpers">Programas útiles</string>
     <string name="menu_settings">Ajustes</string>
+    <string name="menu_oldsettings">old Ajustes</string>
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filtro</string>
 

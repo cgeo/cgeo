@@ -83,33 +83,6 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         ActivityMixin.invalidateOptionsMenu(this);
     }
 
-    /**
-     * insert text into the EditText at the current cursor position
-     *
-     * @param editText
-     * @param insertText
-     * @param moveCursor
-     *            place the cursor after the inserted text
-     */
-    public static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
-        int selectionStart = editText.getSelectionStart();
-        int selectionEnd = editText.getSelectionEnd();
-        int start = Math.min(selectionStart, selectionEnd);
-        int end = Math.max(selectionStart, selectionEnd);
-
-        final String content = editText.getText().toString();
-        String completeText;
-        if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
-            completeText = " " + insertText;
-        } else {
-            completeText = insertText;
-        }
-
-        editText.getText().replace(start, end, completeText);
-        int newCursor = moveCursor ? start + completeText.length() : start;
-        editText.setSelection(newCursor, newCursor);
-    }
-
     protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
         super.onCreate(savedInstanceState);
 

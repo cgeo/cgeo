@@ -144,6 +144,7 @@
     <!-- standard menu -->
     <string name="menu_about">Om c:geo</string>
     <string name="menu_settings">Instillinger</string>
+    <string name="menu_oldsettings">old Instillinger</string>
     <string name="menu_filter">Filter</string>
 
     <!-- main screen -->

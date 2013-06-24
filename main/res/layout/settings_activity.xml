@@ -67,6 +67,7 @@
                 android:padding="3dip"
                 android:text="@string/settings_gc_legal_note"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <EditText
@@ -157,6 +158,7 @@
                 android:padding="3dip"
                 android:text="@string/about_twitter"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Button
@@ -393,6 +395,7 @@
                 android:padding="3dip"
                 android:text="@string/init_showwaypoint_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
             <!-- maps -->
 
@@ -417,6 +420,7 @@
                 android:padding="3dip"
                 android:text="@string/init_mapsources_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Spinner
@@ -437,6 +441,7 @@
                 android:padding="3dip"
                 android:text="@string/init_map_directory_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -517,6 +522,7 @@
                 android:padding="3dip"
                 android:text="@string/init_gpx_exportdir_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -562,6 +568,7 @@
                 android:padding="3dip"
                 android:text="@string/init_gpx_importdir_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -614,6 +621,7 @@
                 android:padding="3dip"
                 android:text="@string/init_altitude_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
             <!-- ** -->
 
@@ -637,6 +645,7 @@
                 android:padding="3dip"
                 android:text="@string/init_default_navigation_tool_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Spinner
@@ -656,6 +665,7 @@
                 android:padding="3dip"
                 android:text="@string/init_default_navigation_tool_2_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Spinner
@@ -685,6 +695,7 @@
                 android:padding="3dip"
                 android:text="@string/init_sendToCgeo_name"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <EditText
@@ -708,6 +719,7 @@
                 android:padding="3dip"
                 android:text="@string/init_sendToCgeo_description"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Button
@@ -737,6 +749,7 @@
                 android:padding="3dip"
                 android:text="@null"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -774,6 +787,7 @@
                 android:padding="3dip"
                 android:text="@string/init_backup_note"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
             <!-- ** -->
 
@@ -797,6 +811,7 @@
                 android:padding="3dip"
                 android:text="@string/init_dbonsdcard_note"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <CheckBox
@@ -825,6 +840,7 @@
                 android:padding="3dip"
                 android:text="@string/init_debug_note"
                 android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <CheckBox

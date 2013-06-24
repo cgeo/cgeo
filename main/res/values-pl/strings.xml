@@ -238,6 +238,7 @@
     <string name="menu_about">O c:geo</string>
     <string name="menu_helpers">Przydatne programy</string>
     <string name="menu_settings">Ustawienia</string>
+    <string name="menu_oldsettings">old Ustawienia</string>
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>

@@ -79,10 +79,10 @@ public final class Settings {
     private static final String KEY_EXCLUDE_DISABLED = "excludedisabled";
     private static final String KEY_EXCLUDE_OWN = "excludemine";
     private static final String KEY_MAPFILE = "mfmapfile";
-    private static final String KEY_SIGNATURE = "signature";
-    private static final String KEY_GCVOTE_PASSWORD = "pass-vote";
-    private static final String KEY_PASSWORD = "password";
-    private static final String KEY_USERNAME = "username";
+    public static final String KEY_SIGNATURE = "signature";
+    public static final String KEY_GCVOTE_PASSWORD = "pass-vote";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_USERNAME = "username";
     private static final String KEY_MEMBER_STATUS = "memberstatus";
     private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
     private static final String KEY_LOG_OFFLINE = "log_offline";

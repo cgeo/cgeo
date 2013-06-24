@@ -224,6 +224,7 @@
     <string name="menu_about">Over c:geo</string>
     <string name="menu_helpers">Hulpprogramma\'s</string>
     <string name="menu_settings">Instellingen</string>
+    <string name="menu_oldsettings">old Instellingen</string>
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>

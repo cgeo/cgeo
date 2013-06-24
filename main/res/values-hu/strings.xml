@@ -218,6 +218,7 @@
     <string name="menu_about">A c:geo-ról</string>
     <string name="menu_helpers">Segédprogramok</string>
     <string name="menu_settings">Beállítások</string>
+    <string name="menu_oldsettings">old Beállítások</string>
     <string name="menu_history">Előzmények</string>
     <string name="menu_filter">Szűrő</string>
     <string name="menu_scan_geo">Geokód szkennelése</string>

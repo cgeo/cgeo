@@ -220,6 +220,7 @@
     <string name="menu_about">c:geoについて</string>
     <string name="menu_helpers">ユーティリティアプリ</string>
     <string name="menu_settings">設定</string>
+    <string name="menu_oldsettings">old 設定</string>
     <string name="menu_history">履歴</string>
     <string name="menu_filter">フィルター</string>
     <string name="menu_scan_geo">QRコードスキャン</string> <!-- It is more suitable "QRcode" than "Geocode" in Japanese, because "Geocode" is not commonly known. Issue #794 https://github.com/cgeo/cgeo/issues/794 -->

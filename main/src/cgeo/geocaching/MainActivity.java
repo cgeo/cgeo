@@ -308,10 +308,10 @@ public class MainActivity extends AbstractActivity {
             case R.id.menu_helpers:
                 startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
-            case R.id.menu_settings:
+            case R.id.menu_oldsettings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
-            case R.id.menu_newsettings:
+            case R.id.menu_settings:
                 startActivity(new Intent(this, NewSettingsActivity.class));
                 return true;
             case R.id.menu_history:

@@ -247,6 +247,7 @@
     <string name="menu_about">Om c:geo</string>
     <string name="menu_helpers">Tilläggsprogram</string>
     <string name="menu_settings">Inställningar</string>
+    <string name="menu_oldsettings">old Inställningar</string>
     <string name="menu_history">Hittade cacher</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scanna geokod</string>
