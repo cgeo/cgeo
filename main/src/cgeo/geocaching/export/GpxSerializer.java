@@ -41,7 +41,7 @@ public final class GpxSerializer {
      */
     private int countExported;
     private ProgressListener progressListener;
-    private XmlSerializer gpx;
+    private final XmlSerializer gpx = new KXmlSerializer();
 
     protected static interface ProgressListener {
 
@@ -54,7 +54,6 @@ public final class GpxSerializer {
         final ArrayList<String> allGeocodes = new ArrayList<String>(allGeocodesIn);
 
         this.progressListener = progressListener;
-        gpx = new KXmlSerializer();
         gpx.setOutput(writer);
 
         gpx.startDocument("UTF-8", true);
