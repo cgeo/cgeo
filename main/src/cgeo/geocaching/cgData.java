@@ -316,7 +316,7 @@ public class cgData {
         }
 
         source.delete();
-        Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
+        OldSettings.setDbOnSDCard(!OldSettings.isDbOnSDCard());
         Log.i("Database was moved to " + target);
         init();
         return true;
@@ -327,11 +327,11 @@ public class cgData {
     }
 
     private static File databasePath() {
-        return databasePath(!Settings.isDbOnSDCard());
+        return databasePath(!OldSettings.isDbOnSDCard());
     }
 
     private static File databaseAlternatePath() {
-        return databasePath(Settings.isDbOnSDCard());
+        return databasePath(OldSettings.isDbOnSDCard());
     }
 
     public static File getRestoreFile() {

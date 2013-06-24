@@ -26,7 +26,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_geocaching" />
+                    android:text="@string/oldinit_geocaching" />
             </RelativeLayout>
 
             <LinearLayout
@@ -50,7 +50,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="left"
                     android:paddingRight="3dip"
-                    android:text="@string/init_gc_activate"
+                    android:text="@string/oldinit_gc_activate"
                     android:textColor="?text_color"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -65,20 +65,19 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/legal_note"
+                android:text="@string/settings_gc_legal_note"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/username"
                 style="@style/edittext_full"
-                android:hint="@string/init_username" />
+                android:hint="@string/oldinit_username" />
 
             <EditText
                 android:id="@+id/password"
                 style="@style/edittext_full"
-                android:hint="@string/init_password"
+                android:hint="@string/oldinit_password"
                 android:inputType="textPassword" />
 
             <Button
@@ -87,7 +86,7 @@
                 android:lines="2"
                 android:scrollHorizontally="false"
                 android:singleLine="false"
-                android:text="@string/init_login" />
+                android:text="@string/oldinit_login" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -96,13 +95,13 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_oc" />
+                    android:text="@string/oldinit_oc" />
             </RelativeLayout>
 
             <CheckBox
                 android:id="@+id/oc_option"
                 style="@style/checkbox_full"
-                android:text="@string/init_oc_activate" />
+                android:text="@string/settings_activate_oc" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -111,14 +110,14 @@
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
                 android:padding="3dip"
-                android:text="@string/init_oc_de_description"
+                android:text="@string/oldinit_oc_de_description"
                 android:textColor="?text_color"
                 android:textSize="14sp" />
 
             <Button
                 android:id="@+id/register_oc_de"
                 style="@style/button_full"
-                android:text="@string/init_register_oc_de" />
+                android:text="@string/oldinit_register_oc_de" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -127,13 +126,13 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_gcvote" />
+                    android:text="@string/oldinit_gcvote" />
             </RelativeLayout>
 
             <EditText
                 android:id="@+id/passvote"
                 style="@style/edittext_full"
-                android:hint="@string/init_passvote"
+                android:hint="@string/oldinit_passvote"
                 android:inputType="textPassword" />
             <!-- ** -->
 
@@ -143,7 +142,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_twitter" />
+                    android:text="@string/oldinit_twitter" />
             </RelativeLayout>
 
             <TextView
@@ -158,18 +157,17 @@
                 android:padding="3dip"
                 android:text="@string/about_twitter"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Button
                 android:id="@+id/authorize_twitter"
                 style="@style/button_full"
-                android:text="@string/init_twitter_authorize" />
+                android:text="@string/oldinit_twitter_authorize" />
 
             <CheckBox
                 android:id="@+id/twitter_option"
                 style="@style/checkbox_full"
-                android:text="@string/init_twitter_publish" />
+                android:text="@string/oldinit_twitter_publish" />
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -177,14 +175,14 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_signature" />
+                    android:text="@string/oldinit_signature" />
             </RelativeLayout>
 
             <EditText
                 android:id="@+id/signature"
                 style="@style/edittext_full"
                 android:layout_height="wrap_content"
-                android:hint="@string/init_signature"
+                android:hint="@string/oldinit_signature"
                 android:inputType="textMultiLine|textCapSentences"
                 android:minLines="3"
                 android:singleLine="false" />
@@ -199,7 +197,7 @@
                     style="@style/button_full"
                     android:layout_width="wrap_content"
                     android:layout_weight="2"
-                    android:text="@string/init_signature_template_button"
+                    android:text="@string/oldinit_signature_template_button"
                     android:textSize="14sp" />
 
                 <Button
@@ -207,14 +205,14 @@
                     style="@style/button_full"
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/init_signature_help_button"
+                    android:text="@string/oldinit_signature_help_button"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <CheckBox
                 android:id="@+id/sigautoinsert"
                 style="@style/checkbox_full"
-                android:text="@string/init_sigautoinsert" />
+                android:text="@string/oldinit_sigautoinsert" />
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -222,7 +220,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_details" />
+                    android:text="@string/oldinit_details" />
             </RelativeLayout>
 
             <LinearLayout
@@ -235,42 +233,42 @@
                 <CheckBox
                     android:id="@+id/autoload"
                     style="@style/checkbox_full"
-                    android:text="@string/init_autoload" />
+                    android:text="@string/oldinit_autoload" />
 
                 <CheckBox
                     android:id="@+id/ratingwanted"
                     style="@style/checkbox_full"
-                    android:text="@string/init_ratingwanted" />
+                    android:text="@string/oldinit_ratingwanted" />
 
                 <CheckBox
                     android:id="@+id/elevationwanted"
                     style="@style/checkbox_full"
-                    android:text="@string/init_elevationwanted" />
+                    android:text="@string/oldinit_elevationwanted" />
 
                 <CheckBox
                     android:id="@+id/friendlogswanted"
                     style="@style/checkbox_full"
-                    android:text="@string/init_friendlogswanted" />
+                    android:text="@string/oldinit_friendlogswanted" />
 
                 <CheckBox
                     android:id="@+id/openlastdetailspage"
                     style="@style/checkbox_full"
-                    android:text="@string/init_openlastdetailspage" />
+                    android:text="@string/oldinit_openlastdetailspage" />
 
                 <CheckBox
                     android:id="@+id/offline"
                     style="@style/checkbox_full"
-                    android:text="@string/init_offline" />
+                    android:text="@string/oldinit_offline" />
 
                 <CheckBox
                     android:id="@+id/offline_wp"
                     style="@style/checkbox_full"
-                    android:text="@string/init_offline_wp" />
+                    android:text="@string/oldinit_offline_wp" />
 
                 <CheckBox
                     android:id="@+id/save_log_img"
                     style="@style/checkbox_full"
-                    android:text="@string/init_save_log_img" />
+                    android:text="@string/oldinit_save_log_img" />
             </LinearLayout>
             <!-- ** -->
 
@@ -280,7 +278,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_other" />
+                    android:text="@string/oldinit_other" />
             </RelativeLayout>
 
             <LinearLayout
@@ -293,77 +291,77 @@
                 <CheckBox
                     android:id="@+id/skin"
                     style="@style/checkbox_full"
-                    android:text="@string/init_skin" />
+                    android:text="@string/oldinit_skin" />
 
                 <CheckBox
                     android:id="@+id/address"
                     style="@style/checkbox_full"
-                    android:text="@string/init_address" />
+                    android:text="@string/oldinit_address" />
 
                 <CheckBox
                     android:id="@+id/captcha"
                     style="@style/checkbox_full"
-                    android:text="@string/init_captcha" />
+                    android:text="@string/oldinit_captcha" />
 
                 <CheckBox
                     android:id="@+id/livelist"
                     style="@style/checkbox_full"
-                    android:text="@string/init_livelist" />
+                    android:text="@string/oldinit_livelist" />
 
                 <CheckBox
                     android:id="@+id/loaddirectionimg"
                     style="@style/checkbox_full"
-                    android:text="@string/init_loaddirectionimg" />
+                    android:text="@string/oldinit_loaddirectionimg" />
 
                 <CheckBox
                     android:id="@+id/useenglish"
                     style="@style/checkbox_full"
-                    android:text="@string/init_useenglish" />
+                    android:text="@string/oldinit_useenglish" />
 
                 <CheckBox
                     android:id="@+id/units"
                     style="@style/checkbox_full"
-                    android:text="@string/init_units" />
+                    android:text="@string/oldinit_units" />
 
                 <CheckBox
                     android:id="@+id/exclude"
                     style="@style/checkbox_full"
-                    android:text="@string/init_exclude" />
+                    android:text="@string/oldinit_exclude" />
 
                 <CheckBox
                     android:id="@+id/disabled"
                     style="@style/checkbox_full"
-                    android:text="@string/init_disabled" />
+                    android:text="@string/oldinit_disabled" />
 
                 <CheckBox
                     android:id="@+id/trackautovisit"
                     style="@style/checkbox_full"
-                    android:text="@string/init_trackautovisit" />
+                    android:text="@string/oldinit_trackautovisit" />
 
                 <CheckBox
                     android:id="@+id/log_offline"
                     style="@style/checkbox_full"
-                    android:text="@string/init_log_offline" />
+                    android:text="@string/oldinit_log_offline" />
 
                 <CheckBox
                     android:id="@+id/choose_list"
                     style="@style/checkbox_full"
-                    android:text="@string/init_choose_list" />
+                    android:text="@string/oldinit_choose_list" />
 
                 <CheckBox
                     android:id="@+id/trail"
                     style="@style/checkbox_full"
-                    android:text="@string/init_maptrail" />
+                    android:text="@string/oldinit_maptrail" />
 
                 <CheckBox
                     android:id="@+id/plain_logs"
                     style="@style/checkbox_full"
-                    android:text="@string/init_plain_logs" />
+                    android:text="@string/oldinit_plain_logs" />
 
                 <CheckBox
                     android:id="@+id/use_native_ua"
                     style="@style/checkbox_full"
-                    android:text="@string/init_use_native_ua" />
+                    android:text="@string/oldinit_use_native_ua" />
             </LinearLayout>
             <!-- ** -->
 
@@ -373,7 +371,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_showwaypoints" />
+                    android:text="@string/oldinit_showwaypoints" />
             </RelativeLayout>
 
             <EditText
@@ -393,9 +391,8 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_showwaypoint_description"
+                android:text="@string/oldinit_showwaypoint_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
             <!-- maps -->
 
@@ -405,7 +402,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_mapsources" />
+                    android:text="@string/oldinit_mapsources" />
             </RelativeLayout>
 
             <TextView
@@ -418,16 +415,15 @@
                 android:autoLink="web"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_mapsources_description"
+                android:text="@string/oldinit_mapsources_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/mapsource"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:prompt="@string/init_mapsource_select" />
+                android:prompt="@string/oldinit_mapsource_select" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -439,13 +435,12 @@
                 android:autoLink="web"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_map_directory_description"
+                android:text="@string/oldinit_map_directory_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <LinearLayout
-                android:id="@+id/init_mapdir_group"
+                android:id="@+id/oldinit_mapdir_group"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -454,7 +449,7 @@
                     android:id="@+id/select_map_directory"
                     style="@style/button_full"
                     android:layout_width="wrap_content"
-                    android:text="@string/init_select_map_directory" />
+                    android:text="@string/oldinit_select_map_directory" />
 
                 <EditText
                     android:id="@+id/map_directory"
@@ -474,12 +469,12 @@
                 android:layout_marginRight="10dip"
                 android:gravity="left"
                 android:padding="3dip"
-                android:text="@string/init_rendertheme_folder"
+                android:text="@string/oldinit_rendertheme_folder"
                 android:textColor="?text_color"
                 android:textSize="14sp" />
 
             <LinearLayout
-                android:id="@+id/init_themefilegroup"
+                android:id="@+id/oldinit_themefilegroup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -488,7 +483,7 @@
                     android:id="@+id/select_themefolder"
                     style="@style/button_full"
                     android:layout_width="wrap_content"
-                    android:text="@string/init_select_themefolder" />
+                    android:text="@string/oldinit_select_themefolder" />
 
                 <EditText
                     android:id="@+id/themefolder"
@@ -507,7 +502,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_gpx_exportdir" />
+                    android:text="@string/oldinit_gpx_exportdir" />
             </RelativeLayout>
 
             <TextView
@@ -520,13 +515,12 @@
                 android:autoLink="web"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_gpx_exportdir_description"
+                android:text="@string/oldinit_gpx_exportdir_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <LinearLayout
-                android:id="@+id/init_gpx_export_group"
+                android:id="@+id/oldinit_gpx_export_group"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -535,7 +529,7 @@
                     android:id="@+id/select_gpx_exportdir"
                     style="@style/button_full"
                     android:layout_width="wrap_content"
-                    android:text="@string/init_select_gpx_exportdir" />
+                    android:text="@string/oldinit_select_gpx_exportdir" />
 
                 <EditText
                     android:id="@+id/gpx_exportdir"
@@ -553,7 +547,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_gpx_importdir" />
+                    android:text="@string/oldinit_gpx_importdir" />
             </RelativeLayout>
 
             <TextView
@@ -566,13 +560,12 @@
                 android:autoLink="web"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_gpx_importdir_description"
+                android:text="@string/oldinit_gpx_importdir_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <LinearLayout
-                android:id="@+id/init_gpx_import_group"
+                android:id="@+id/oldinit_gpx_import_group"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -581,7 +574,7 @@
                     android:id="@+id/select_gpx_importdir"
                     style="@style/button_full"
                     android:layout_width="wrap_content"
-                    android:text="@string/init_select_gpx_importdir" />
+                    android:text="@string/oldinit_select_gpx_importdir" />
 
                 <EditText
                     android:id="@+id/gpx_importdir"
@@ -599,7 +592,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_altitude" />
+                    android:text="@string/oldinit_altitude" />
             </RelativeLayout>
 
             <EditText
@@ -619,9 +612,8 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_altitude_description"
+                android:text="@string/oldinit_altitude_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
             <!-- ** -->
 
@@ -631,7 +623,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_default_navigation_tool" />
+                    android:text="@string/oldinit_default_navigation_tool" />
             </RelativeLayout>
 
             <TextView
@@ -643,16 +635,15 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_default_navigation_tool_description"
+                android:text="@string/oldinit_default_navigation_tool_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/default_navigation_tool"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:prompt="@string/init_default_navigation_tool_select" />
+                android:prompt="@string/oldinit_default_navigation_tool_select" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -663,16 +654,15 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_default_navigation_tool_2_description"
+                android:text="@string/oldinit_default_navigation_tool_2_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/default_navigation_tool_2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:prompt="@string/init_default_navigation_tool_select" />
+                android:prompt="@string/oldinit_default_navigation_tool_select" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -681,7 +671,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_sendToCgeo" />
+                    android:text="@string/oldinit_sendToCgeo" />
             </RelativeLayout>
 
             <TextView
@@ -693,9 +683,8 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_sendToCgeo_name"
+                android:text="@string/oldinit_sendToCgeo_name"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <EditText
@@ -717,15 +706,14 @@
                 android:autoLink="web"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_sendToCgeo_description"
+                android:text="@string/oldinit_sendToCgeo_description"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <Button
                 android:id="@+id/sendToCgeo_register"
                 style="@style/button_full"
-                android:text="@string/init_sendToCgeo_register" />
+                android:text="@string/oldinit_sendToCgeo_register" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -734,7 +722,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_backup" />
+                    android:text="@string/oldinit_backup" />
             </RelativeLayout>
 
             <TextView
@@ -749,7 +737,6 @@
                 android:padding="3dip"
                 android:text="@null"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -765,7 +752,7 @@
                     android:layout_width="0dip"
                     android:layout_weight="1"
                     android:onClick="backup"
-                    android:text="@string/init_backup_backup" />
+                    android:text="@string/oldinit_backup_backup" />
 
                 <Button
                     android:id="@+id/backup_restore"
@@ -773,7 +760,7 @@
                     android:layout_width="0dip"
                     android:layout_weight="1"
                     android:onClick="restore"
-                    android:text="@string/init_backup_restore" />
+                    android:text="@string/oldinit_backup_restore" />
             </LinearLayout>
 
             <TextView
@@ -785,9 +772,8 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_backup_note"
+                android:text="@string/oldinit_backup_note"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
             <!-- ** -->
 
@@ -797,7 +783,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_dbonsdcard_title" />
+                    android:text="@string/oldinit_dbonsdcard_title" />
             </RelativeLayout>
 
             <TextView
@@ -809,15 +795,14 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_dbonsdcard_note"
+                android:text="@string/oldinit_dbonsdcard_note"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <CheckBox
                 android:id="@+id/dbonsdcard"
                 style="@style/checkbox_full"
-                android:text="@string/init_dbonsdcard" />
+                android:text="@string/oldinit_dbonsdcard" />
             <!-- ** -->
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -826,7 +811,7 @@
 
                 <TextView
                     style="@style/separator_horizontal_headline"
-                    android:text="@string/init_debug_title" />
+                    android:text="@string/oldinit_debug_title" />
             </RelativeLayout>
 
             <TextView
@@ -838,15 +823,14 @@
                 android:layout_marginRight="10dip"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_debug_note"
+                android:text="@string/oldinit_debug_note"
                 android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
                 android:textSize="14sp" />
 
             <CheckBox
                 android:id="@+id/debug"
                 style="@style/checkbox_full"
-                android:text="@string/init_debug" />
+                android:text="@string/oldinit_debug" />
         </LinearLayout>
     </ScrollView>
 

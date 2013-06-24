@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -47,7 +47,7 @@ public class PositionOverlay implements GeneralOverlay {
 
     public PositionOverlay(Activity activity, OverlayImpl ovlImpl) {
         this.activity = activity;
-        this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
+        this.mapItemFactory = OldSettings.getMapProvider().getMapItemFactory();
         this.ovlImpl = ovlImpl;
     }
 
@@ -154,7 +154,7 @@ public class PositionOverlay implements GeneralOverlay {
             }
         }
 
-        if (Settings.isMapTrail()) {
+        if (OldSettings.isMapTrail()) {
             int size = history.size();
             if (size > 1) {
                 int alphaCnt = size - 201;

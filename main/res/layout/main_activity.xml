@@ -178,13 +178,13 @@
         <TextView
             android:id="@+id/user_info_gc"
             style="@style/location_current"
-            android:text="@string/init_login_popup_working"
+            android:text="@string/oldinit_login_popup_working"
             android:visibility="gone" />
 
         <TextView
             android:id="@+id/user_info_ocde"
             style="@style/location_current"
-            android:text="@string/init_login_popup_working"
+            android:text="@string/oldinit_login_popup_working"
             android:visibility="gone" />
 
         <TextView

@@ -83,7 +83,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     }
 
     private void aquireGCVote() {
-        if (!Settings.isRatingWanted()) {
+        if (!OldSettings.isRatingWanted()) {
             return;
         }
         if (!cache.supportsGCVote()) {

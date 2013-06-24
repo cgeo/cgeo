@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.CacheType;
@@ -13,12 +13,12 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testGetViewport() {
         // backup user settings
-        final boolean excludeMine = Settings.isExcludeMyCaches();
-        final CacheType cacheType = Settings.getCacheType();
+        final boolean excludeMine = OldSettings.isExcludeMyCaches();
+        final CacheType cacheType = OldSettings.getCacheType();
         try {
             // set up settings required for test
-            Settings.setExcludeMine(false);
-            Settings.setCacheType(CacheType.ALL);
+            OldSettings.setExcludeMine(false);
+            OldSettings.setCacheType(CacheType.ALL);
             Login.login();
 
             final String[] tokens = Login.getMapTokens();
@@ -40,8 +40,8 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             }
         } finally {
             // restore user settings
-            Settings.setExcludeMine(excludeMine);
-            Settings.setCacheType(cacheType);
+            OldSettings.setExcludeMine(excludeMine);
+            OldSettings.setCacheType(cacheType);
         }
     }
 

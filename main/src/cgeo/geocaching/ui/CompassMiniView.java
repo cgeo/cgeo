@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.AngleUtils;
 
@@ -64,7 +64,7 @@ final public class CompassMiniView extends View {
 
     private static void initializeResources(final Context context) {
         if (arrowSkin == 0) {
-            if (Settings.isLightSkin()) {
+            if (OldSettings.isLightSkin()) {
                 arrowSkin = R.drawable.compass_arrow_mini_black;
             } else {
                 arrowSkin = R.drawable.compass_arrow_mini_white;

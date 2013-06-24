@@ -62,7 +62,7 @@ public class CompassActivity extends AbstractActivity {
         final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         hasMagneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
         if (!hasMagneticFieldSensor) {
-            Settings.setUseCompass(false);
+            OldSettings.setUseCompass(false);
         }
 
         // get parameters
@@ -136,7 +136,7 @@ public class CompassActivity extends AbstractActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_switch_compass_gps).setTitle(res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
+        menu.findItem(R.id.menu_switch_compass_gps).setTitle(res.getString(OldSettings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
         menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
         menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
         return true;
@@ -150,8 +150,8 @@ public class CompassActivity extends AbstractActivity {
                 CGeoMap.startActivityCoords(this, dstCoords, null, null);
                 return true;
             case R.id.menu_switch_compass_gps:
-                boolean oldSetting = Settings.isUseCompass();
-                Settings.setUseCompass(!oldSetting);
+                boolean oldSetting = OldSettings.isUseCompass();
+                OldSettings.setUseCompass(!oldSetting);
                 invalidateOptionsMenuCompatible();
                 if (oldSetting) {
                     geoDirHandler.stopDir();
@@ -271,7 +271,7 @@ public class CompassActivity extends AbstractActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
 
-                if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                if (!OldSettings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
                     updateNorthHeading(geo.getBearing());
                 }
             } catch (Exception e) {

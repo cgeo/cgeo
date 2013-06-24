@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -45,7 +45,7 @@ public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCa
 
     @Override
     public Loader<String> onCreateLoader(int arg0, Bundle arg1) {
-        if (!Settings.isLogin()) { // allow offline logging
+        if (!OldSettings.isLogin()) { // allow offline logging
             ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_login));
             return null;
         }

@@ -37,7 +37,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        final boolean signatureAvailable = StringUtils.isNotBlank(Settings.getSignature());
+        final boolean signatureAvailable = StringUtils.isNotBlank(OldSettings.getSignature());
         menu.findItem(R.id.menu_signature).setVisible(signatureAvailable);
 
         boolean smileyVisible = false;
@@ -60,7 +60,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
         final int id = item.getItemId();
 
         if (id == R.id.menu_signature) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), getLogContext()), true);
+            insertIntoLog(LogTemplateProvider.applyTemplates(OldSettings.getSignature(), getLogContext()), true);
             return true;
         }
 

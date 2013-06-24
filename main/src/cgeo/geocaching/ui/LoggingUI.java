@@ -3,7 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
@@ -119,11 +119,11 @@ public class LoggingUI extends AbstractUIFactory {
 
     public static void onPrepareOptionsMenu(Menu menu, Geocache cache) {
         final MenuItem itemLog = menu.findItem(R.id.menu_log_visit);
-        itemLog.setVisible(cache.supportsLogging() && !Settings.getLogOffline());
-        itemLog.setEnabled(Settings.isLogin());
+        itemLog.setVisible(cache.supportsLogging() && !OldSettings.getLogOffline());
+        itemLog.setEnabled(OldSettings.isLogin());
 
         final MenuItem itemOffline = menu.findItem(R.id.menu_log_visit_offline);
-        itemOffline.setVisible(cache.supportsLogging() && Settings.getLogOffline());
+        itemOffline.setVisible(cache.supportsLogging() && OldSettings.getLogOffline());
     }
 
     public static void addMenuItems(Activity activity, Menu menu, Geocache cache) {

@@ -18,10 +18,10 @@ public class StaticMapsProviderTest extends TestCase {
         final double lon = 9.745685d;
         String geocode = "GCTEST1";
 
-        boolean backupStore = Settings.isStoreOfflineMaps();
-        boolean backupStoreWP = Settings.isStoreOfflineWpMaps();
-        Settings.setStoreOfflineMaps(true);
-        Settings.setStoreOfflineWpMaps(true);
+        boolean backupStore = OldSettings.isStoreOfflineMaps();
+        boolean backupStoreWP = OldSettings.isStoreOfflineWpMaps();
+        OldSettings.setStoreOfflineMaps(true);
+        OldSettings.setStoreOfflineWpMaps(true);
         try {
             Geopoint gp = new Geopoint(lat + 0.25d, lon + 0.25d);
             Geocache cache = new Geocache();
@@ -65,8 +65,8 @@ public class StaticMapsProviderTest extends TestCase {
             trailhead.setCoords(new Geopoint(lat + 0.24d + 2, lon + 0.25d + 2));
             assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
         } finally {
-            Settings.setStoreOfflineWpMaps(backupStoreWP);
-            Settings.setStoreOfflineMaps(backupStore);
+            OldSettings.setStoreOfflineWpMaps(backupStoreWP);
+            OldSettings.setStoreOfflineMaps(backupStore);
             deleteCacheDirectory(geocode);
         }
     }

@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.maps.AbstractMapProvider;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -50,7 +50,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     public static List<String> getOfflineMaps() {
-        final String mapFile = Settings.getMapFile();
+        final String mapFile = OldSettings.getMapFile();
         if (StringUtils.isEmpty(mapFile)) {
             return Collections.emptyList();
         }
@@ -99,14 +99,14 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     @Override
     public boolean isSameActivity(final MapSource source1, final MapSource source2) {
         return source1 == source2 ||
-                !isMapfile024(Settings.getMapFile()) ||
+                !isMapfile024(OldSettings.getMapFile()) ||
                 (!(source1 instanceof OfflineMapSource) && !(source2 instanceof OfflineMapSource));
     }
 
     @Override
     public Class<? extends Activity> getMapClass() {
-        final MapSource source = Settings.getMapSource();
-        if (source instanceof OfflineMapSource && isMapfile024(Settings.getMapFile())) {
+        final MapSource source = OldSettings.getMapSource();
+        if (source instanceof OfflineMapSource && isMapfile024(OldSettings.getMapFile())) {
             oldMap = true;
             mapItemFactory = new MapsforgeMapItemFactory024();
             return MapsforgeMapActivity024.class;

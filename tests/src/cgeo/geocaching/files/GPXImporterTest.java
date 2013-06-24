@@ -2,7 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -269,10 +269,10 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         cgData.getAllHistoryCachesCount();
         listId = cgData.createList("cgeogpxesTest");
 
-        importCacheStaticMaps = Settings.isStoreOfflineMaps();
-        Settings.setStoreOfflineMaps(true);
-        importWpStaticMaps = Settings.isStoreOfflineWpMaps();
-        Settings.setStoreOfflineWpMaps(true);
+        importCacheStaticMaps = OldSettings.isStoreOfflineMaps();
+        OldSettings.setStoreOfflineMaps(true);
+        importWpStaticMaps = OldSettings.isStoreOfflineWpMaps();
+        OldSettings.setStoreOfflineWpMaps(true);
     }
 
     @Override
@@ -283,8 +283,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         cgData.markDropped(cachesInList);
         cgData.removeList(listId);
         deleteDirectory(tempDir);
-        Settings.setStoreOfflineMaps(importCacheStaticMaps);
-        Settings.setStoreOfflineWpMaps(importWpStaticMaps);
+        OldSettings.setStoreOfflineMaps(importCacheStaticMaps);
+        OldSettings.setStoreOfflineWpMaps(importWpStaticMaps);
         super.tearDown();
     }
 

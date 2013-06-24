@@ -6,7 +6,7 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -78,7 +78,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     private static final int[] RATING_BACKGROUND = new int[3];
     static {
-        if (Settings.isLightSkin()) {
+        if (OldSettings.isLightSkin()) {
             RATING_BACKGROUND[0] = R.drawable.favorite_background_red_light;
             RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_light;
             RATING_BACKGROUND[2] = R.drawable.favorite_background_green_light;
@@ -361,7 +361,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder = (ViewHolder) v.getTag();
         }
 
-        final boolean lightSkin = Settings.isLightSkin();
+        final boolean lightSkin = OldSettings.isLightSkin();
 
         final TouchListener touchLst = new TouchListener(cache);
         v.setOnClickListener(touchLst);

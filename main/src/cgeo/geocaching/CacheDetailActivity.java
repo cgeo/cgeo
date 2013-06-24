@@ -319,13 +319,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final int pageToOpen = savedInstanceState != null ?
                 savedInstanceState.getInt(STATE_PAGE_INDEX, 0) :
-                Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+                OldSettings.isOpenLastDetailsPage() ? OldSettings.getLastDetailsPage() : 1;
         createViewPager(pageToOpen, new OnPageSelectedListener() {
 
             @Override
             public void onPageSelected(int position) {
-                if (Settings.isOpenLastDetailsPage()) {
-                    Settings.setLastDetailsPage(position);
+                if (OldSettings.isOpenLastDetailsPage()) {
+                    OldSettings.setLastDetailsPage(position);
                 }
                 // lazy loading of cache images
                 if (getPage(position) == Page.IMAGES) {
@@ -455,7 +455,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 showToast(res.getString(R.string.translate_length_warning));
             }
             menu.add(viewId, MENU_FIELD_TRANSLATE, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
-            if (Settings.isUseEnglish() && !StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
+            if (OldSettings.isUseEnglish() && !StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
                 menu.add(viewId, MENU_FIELD_TRANSLATE_EN, 0, res.getString(R.string.translate_to_english));
             }
 
@@ -1080,7 +1080,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
-            if (Settings.isStoreOfflineMaps()) {
+            if (OldSettings.isStoreOfflineMaps()) {
                 new PreviewMapTask().execute((Void) null);
             }
 
@@ -1250,7 +1250,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
 
-                if (Settings.getChooseList()) {
+                if (OldSettings.getChooseList()) {
                     // let user select list to store cache in
                     new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
                             new RunnableWithArgument<Integer>() {
@@ -1526,7 +1526,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return;
             }
 
-            Settings.saveLastList(listId);
+            OldSettings.saveLastList(listId);
             cgData.moveToList(cache, listId);
             updateListBox();
         }
@@ -1572,7 +1572,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final LinearLayout layout = (LinearLayout) view.findViewById(R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
-            if (!supportsFavoritePoints || cache.isOwner() || !Settings.isPremiumMember()) {
+            if (!supportsFavoritePoints || cache.isOwner() || !OldSettings.isPremiumMember()) {
                 return;
             }
             final Button buttonAdd = (Button) view.findViewById(R.id.add_to_favpoint);
@@ -1708,7 +1708,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // long description
             if (StringUtils.isNotBlank(cache.getDescription())) {
-                if (Settings.isAutoLoadDescription()) {
+                if (OldSettings.isAutoLoadDescription()) {
                     loadLongDescription();
                 } else {
                     final Button showDesc = (Button) view.findViewById(R.id.show_description);
@@ -1993,7 +1993,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private void fixTextColor(final TextView view, final String text) {
             int backcolor;
-            if (Settings.isLightSkin()) {
+            if (OldSettings.isLightSkin()) {
                 backcolor = color.white;
 
                 for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {

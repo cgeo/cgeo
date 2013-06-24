@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.IGeoData;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.cgeoapplication;
 
 import android.os.Handler;
@@ -95,7 +95,7 @@ public abstract class GeoDirHandler extends Handler implements IObserver<Object>
      * allow it.
      */
     public void startDir() {
-        if (Settings.isUseCompass()) {
+        if (OldSettings.isUseCompass()) {
             sendEmptyMessage(START_DIR);
         }
     }
@@ -105,7 +105,7 @@ public abstract class GeoDirHandler extends Handler implements IObserver<Object>
      * preferences allow it).
      */
     public void startGeoAndDir() {
-        sendEmptyMessage(START_GEO | (Settings.isUseCompass() ? START_DIR : 0));
+        sendEmptyMessage(START_GEO | (OldSettings.isUseCompass() ? START_DIR : 0));
     }
 
     /**

@@ -233,7 +233,7 @@ public class EditWaypointActivity extends AbstractActivity {
     private void initializeDistanceUnitSelector() {
         distanceUnits = new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
-            distanceUnitSelector.setSelection(Settings.isUseMetricUnits() ? 0 : 2); //0:m, 2:ft
+            distanceUnitSelector.setSelection(OldSettings.isUseMetricUnits() ? 0 : 2); //0:m, 2:ft
         }
     }
 
@@ -344,7 +344,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
                 double distance;
                 try {
-                    distance = DistanceParser.parseDistance(distanceText, Settings.isUseMetricUnits());
+                    distance = DistanceParser.parseDistance(distanceText, OldSettings.isUseMetricUnits());
                 } catch (NumberFormatException e) {
                     showToast(res.getString(R.string.err_parse_dist));
                     return;
@@ -423,7 +423,7 @@ public class EditWaypointActivity extends AbstractActivity {
                         cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                         if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode, waypoint)) {
                             StaticMapsProvider.removeWpStaticMaps(oldWaypoint, geocode);
-                            if (Settings.isStoreOfflineWpMaps()) {
+                            if (OldSettings.isStoreOfflineWpMaps()) {
                                 StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
                             }
                         }

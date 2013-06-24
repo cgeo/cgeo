@@ -31,6 +31,12 @@
     <attr name="log_img_icon" format="integer" />
     <attr name="actionbar_compass" format="integer" />
 
+    <!-- attributes for custom made preferences -->
+    <attr name="title" format="string" />
+    <attr name="text" format="string" />
+    <attr name="url" format="string" />
+    <attr name="urlButton" format="string" />
+    
     <!-- others -->
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />

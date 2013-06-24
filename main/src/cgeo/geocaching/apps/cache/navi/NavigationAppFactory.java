@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -133,7 +133,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
         final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
-        final int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        final int defaultNavigationTool = OldSettings.getDefaultNavigationTool();
         for (NavigationAppsEnum navApp : getInstalledNavigationApps()) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
@@ -316,9 +316,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     private static App getDefaultNavigationApplication(int defaultNavigation) {
         if (defaultNavigation == 2) {
-            return getNavigationAppForId(Settings.getDefaultNavigationTool2());
+            return getNavigationAppForId(OldSettings.getDefaultNavigationTool2());
         }
-        return getNavigationAppForId(Settings.getDefaultNavigationTool());
+        return getNavigationAppForId(OldSettings.getDefaultNavigationTool());
     }
 
     /**

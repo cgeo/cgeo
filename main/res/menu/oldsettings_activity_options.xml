@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_clear"
         android:icon="@drawable/ic_menu_delete"
-        android:title="@string/init_clear">
+        android:title="@string/oldinit_clear">
     </item>
 
 </menu>

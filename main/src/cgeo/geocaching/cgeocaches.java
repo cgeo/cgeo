@@ -141,14 +141,14 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             if (geo.getCoords() != null) {
                 adapter.setActualCoordinates(geo.getCoords());
             }
-            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+            if (!OldSettings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
                 adapter.setActualHeading(geo.getBearing());
             }
         }
 
         @Override
         public void updateDirection(final float direction) {
-            if (!Settings.isLiveList()) {
+            if (!OldSettings.isLiveList()) {
                 return;
             }
 
@@ -514,7 +514,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-            SearchResult newSearch = cgData.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
+            SearchResult newSearch = cgData.getBatchOfStoredCaches(coords, OldSettings.getCacheType(), listId);
             if (newSearch != null && newSearch.getTotal() != search.getTotal()) {
                 refreshCurrentList();
             }
@@ -559,7 +559,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
             //TODO: add submenu/AlertDialog and use R.string.gpx_import_title
             subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
-            if (Settings.getWebDeviceCode() != null) {
+            if (OldSettings.getWebDeviceCode() != null) {
                 subMenu.add(0, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title));
             }
 
@@ -1057,7 +1057,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     private void startGeoAndDir() {
         geoDirHandler.startGeo();
-        if (Settings.isLiveMap()) {
+        if (OldSettings.isLiveMap()) {
             geoDirHandler.startDir();
         }
     }
@@ -1087,7 +1087,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
 
-        if (Settings.getChooseList() && type != CacheListType.OFFLINE) {
+        if (OldSettings.getChooseList() && type != CacheListType.OFFLINE) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,
                     new RunnableWithArgument<Integer>() {
@@ -1233,7 +1233,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
             final List<Geocache> cachesWithStaticMaps = new ArrayList<Geocache>(this.caches.size());
             for (Geocache cache : this.caches) {
-                if (Settings.isStoreOfflineMaps() && cache.hasStaticMap()) {
+                if (OldSettings.isStoreOfflineMaps() && cache.hasStaticMap()) {
                     cachesWithStaticMaps.add(cache);
                     continue;
                 }
@@ -1329,7 +1329,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             int ret = MSG_DONE;
             while (!needToStop && times < 3 * 60 / 5) { // maximum: 3 minutes, every 5 seconds
                 //download new code
-                String deviceCode = Settings.getWebDeviceCode();
+                String deviceCode = OldSettings.getWebDeviceCode();
                 if (deviceCode == null) {
                     deviceCode = "";
                 }
@@ -1349,7 +1349,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                         yield();
                     } else if ("RG".equals(response)) {
                         //Server returned RG (registration) and this device no longer registered.
-                        Settings.setWebNameCode(null, null);
+                        OldSettings.setWebNameCode(null, null);
                         ret = -3;
                         needToStop = true;
                         break;
@@ -1484,7 +1484,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         listId = list.id;
         title = list.title;
 
-        Settings.saveLastList(listId);
+        OldSettings.saveLastList(listId);
 
         showProgress(true);
         showFooterLoadingCaches();
@@ -1618,8 +1618,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     }
 
     private void prepareFilterBar() {
-        if (Settings.getCacheType() != CacheType.ALL || adapter.isFiltered()) {
-            final StringBuilder output = new StringBuilder(Settings.getCacheType().getL10n());
+        if (OldSettings.getCacheType() != CacheType.ALL || adapter.isFiltered()) {
+            final StringBuilder output = new StringBuilder(OldSettings.getCacheType().getL10n());
 
             if (adapter.isFiltered()) {
                 output.append(", ").append(adapter.getFilterName());
@@ -1730,7 +1730,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         AbstractSearchLoader loader = null;
         switch (enumType) {
             case OFFLINE:
-                listId = Settings.getLastList();
+                listId = OldSettings.getLastList();
                 if (listId <= StoredList.TEMPORARY_LIST_ID) {
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);

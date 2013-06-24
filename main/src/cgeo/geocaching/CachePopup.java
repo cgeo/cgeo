@@ -116,7 +116,7 @@ public class CachePopup extends AbstractPopupActivity {
                 return;
             }
 
-            if (Settings.getChooseList()) {
+            if (OldSettings.getChooseList()) {
                 // let user select list to store cache in
                 new StoredList.UserInterface(CachePopup.this).promptForListSelection(R.string.list_title,
                         new RunnableWithArgument<Integer>() {

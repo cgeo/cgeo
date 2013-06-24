@@ -1,7 +1,7 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.connector.gc.GCParser;
 
 import android.content.Context;
@@ -17,7 +17,7 @@ public class UsernameGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return GCParser.searchByUsername(username, Settings.getCacheType(), Settings.isShowCaptcha(), this);
+        return GCParser.searchByUsername(username, OldSettings.getCacheType(), OldSettings.isShowCaptcha(), this);
     }
 
 }

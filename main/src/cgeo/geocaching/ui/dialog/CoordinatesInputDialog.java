@@ -3,8 +3,8 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
-import cgeo.geocaching.Settings.coordInputFormatEnum;
+import cgeo.geocaching.OldSettings;
+import cgeo.geocaching.OldSettings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -71,7 +71,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                         android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setSelection(Settings.getCoordInputFormat().ordinal());
+        spinner.setSelection(OldSettings.getCoordInputFormat().ordinal());
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
 
         bLat = (Button) findViewById(R.id.ButtonLat);
@@ -403,7 +403,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
             }
 
             currentFormat = coordInputFormatEnum.fromInt(pos);
-            Settings.setCoordInputFormat(currentFormat);
+            OldSettings.setCoordInputFormat(currentFormat);
             updateGUI();
         }
 

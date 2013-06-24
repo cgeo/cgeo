@@ -1,7 +1,7 @@
 package cgeo.geocaching.geopoint;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,7 +11,7 @@ public class UnitsTest extends CGeoTestCase {
         final String actual = Units.getDistanceFromKilometers(distance);
         if (!StringUtils.equals(expected, actual.replace(',', '.'))) { // make 1.2 the same as 1,2
             fail("getHumanDistance(" + distance +
-                    ") [metric: " + (Settings.isUseMetricUnits() ? "yes" : "no") +
+                    ") [metric: " + (OldSettings.isUseMetricUnits() ? "yes" : "no") +
                     "] fails to match " + expected + ": " + actual);
         }
     }
@@ -20,31 +20,31 @@ public class UnitsTest extends CGeoTestCase {
     @SuppressWarnings("static-method")
     public void testDistance() {
         assertEquals("?", Units.getDistanceFromKilometers(null));
-        final boolean savedMetrics = Settings.isUseMetricUnits();
+        final boolean savedMetrics = OldSettings.isUseMetricUnits();
         try {
-            Settings.setUseMetricUnits(true);
+            OldSettings.setUseMetricUnits(true);
             assertDistance("123 km", 122.782f);
             assertDistance("123 km", 123.456f);
             assertDistance("12.3 km", 12.3456f);
             assertDistance("1.23 km", 1.23456f);
             assertDistance("123 m", 0.123456f);
-            Settings.setUseMetricUnits(false);
+            OldSettings.setUseMetricUnits(false);
             assertDistance("76.7 mi", 123.456f);
             assertDistance("7.67 mi", 12.3456f);
             assertDistance("0.77 mi", 1.23456f);
             assertDistance("405 ft", 0.123456f);
             assertDistance("40.5 ft", 0.0123456f);
         } finally {
-            Settings.setUseMetricUnits(savedMetrics);
+            OldSettings.setUseMetricUnits(savedMetrics);
         }
     }
 
     // Make method non-static so that Settings is initialized
     @SuppressWarnings("static-method")
     public void testElevation() {
-        final boolean savedMetrics = Settings.isUseMetricUnits();
+        final boolean savedMetrics = OldSettings.isUseMetricUnits();
         try {
-            Settings.setUseMetricUnits(true);
+            OldSettings.setUseMetricUnits(true);
             assertElevation("↥ 123 m", 122.782f);
             assertElevation("↥ 123 m", 123.456f);
             assertElevation("↥ 12 m", 12.3456f);
@@ -57,11 +57,11 @@ public class UnitsTest extends CGeoTestCase {
             assertElevation("↧ 1 m", -1.23456f);
             assertElevation("↧ 2 m", -1.6f);
             assertElevation("↧ 0 m", -0.123456f);
-            Settings.setUseMetricUnits(false);
+            OldSettings.setUseMetricUnits(false);
             assertElevation("↥ 405 ft", 123.456f);
             assertElevation("↥ 41 ft", 12.3456f);
         } finally {
-            Settings.setUseMetricUnits(savedMetrics);
+            OldSettings.setUseMetricUnits(savedMetrics);
         }
     }
 
@@ -76,20 +76,20 @@ public class UnitsTest extends CGeoTestCase {
     @SuppressWarnings("static-method")
     public void testSpeed() {
         assertEquals("?", Units.getDistanceFromKilometers(null));
-        final boolean savedMetrics = Settings.isUseMetricUnits();
+        final boolean savedMetrics = OldSettings.isUseMetricUnits();
         try {
-            Settings.setUseMetricUnits(true);
+            OldSettings.setUseMetricUnits(true);
             assertSpeed("123 km/h", 122.782f);
             assertSpeed("123 km/h", 123.456f);
             assertSpeed("12.3 km/h", 12.3456f);
             assertSpeed("1.23 km/h", 1.23456f);
             assertSpeed("123 m/h", 0.123456f);
-            Settings.setUseMetricUnits(false);
+            OldSettings.setUseMetricUnits(false);
             assertSpeed("76.7 mph", 123.456f);
             assertSpeed("7.67 mph", 12.3456f);
             assertSpeed("0.77 mph", 1.23456f);
         } finally {
-            Settings.setUseMetricUnits(savedMetrics);
+            OldSettings.setUseMetricUnits(savedMetrics);
         }
     }
 

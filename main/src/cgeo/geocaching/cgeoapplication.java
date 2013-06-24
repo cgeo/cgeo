@@ -63,7 +63,7 @@ public class cgeoapplication extends Application {
      */
     public void moveDatabase(final Activity fromActivity) {
         final Resources res = this.getResources();
-        final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.init_dbmove_dbmove), res.getString(R.string.init_dbmove_running), true, false);
+        final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.oldinit_dbmove_dbmove), res.getString(R.string.oldinit_dbmove_running), true, false);
         final AtomicBoolean atomic = new AtomicBoolean(false);
         Thread moveThread = new Thread() {
             final Handler handler = new Handler() {
@@ -71,8 +71,8 @@ public class cgeoapplication extends Application {
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     boolean success = atomic.get();
-                    String message = success ? res.getString(R.string.init_dbmove_success) : res.getString(R.string.init_dbmove_failed);
-                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_dbmove_dbmove), message);
+                    String message = success ? res.getString(R.string.oldinit_dbmove_success) : res.getString(R.string.oldinit_dbmove_failed);
+                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.oldinit_dbmove_dbmove), message);
                 }
             };
 
@@ -93,7 +93,7 @@ public class cgeoapplication extends Application {
      */
     public void restoreDatabase(final Activity fromActivity) {
         final Resources res = this.getResources();
-        final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
+        final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.oldinit_backup_restore), res.getString(R.string.oldinit_restore_running), true, false);
         final AtomicBoolean atomic = new AtomicBoolean(false);
         Thread restoreThread = new Thread() {
             final Handler handler = new Handler() {
@@ -101,8 +101,8 @@ public class cgeoapplication extends Application {
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     boolean restored = atomic.get();
-                    String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_backup_restore), message);
+                    String message = restored ? res.getString(R.string.oldinit_restore_success) : res.getString(R.string.oldinit_restore_failed);
+                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.oldinit_backup_restore), message);
                     if (fromActivity instanceof MainActivity) {
                         ((MainActivity) fromActivity).updateCacheCounter();
                     }

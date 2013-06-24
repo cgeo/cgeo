@@ -1,7 +1,7 @@
 package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.network.OAuthAuthorizationActivity;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -14,23 +14,23 @@ public class TwitterAuthorizationActivity extends OAuthAuthorizationActivity {
                 "/oauth/authorize",
                 "/oauth/access_token",
                 true,
-                Settings.getKeyConsumerPublic(),
-                Settings.getKeyConsumerSecret());
+                OldSettings.getKeyConsumerPublic(),
+                OldSettings.getKeyConsumerSecret());
     }
 
     @Override
     protected ImmutablePair<String, String> getTempToken() {
-        return Settings.getTempToken();
+        return OldSettings.getTempToken();
     }
 
     @Override
     protected void setTempTokens(String tokenPublic, String tokenSecret) {
-        Settings.setTwitterTempTokens(tokenPublic, tokenSecret);
+        OldSettings.setTwitterTempTokens(tokenPublic, tokenSecret);
     }
 
     @Override
     protected void setTokens(String tokenPublic, String tokenSecret, boolean enable) {
-        Settings.setTwitterTokens(tokenPublic, tokenSecret, enable);
+        OldSettings.setTwitterTokens(tokenPublic, tokenSecret, enable);
     }
 
     @Override

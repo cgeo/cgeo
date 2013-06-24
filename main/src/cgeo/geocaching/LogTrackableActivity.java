@@ -54,7 +54,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private String[] viewstates = null;
     private boolean gettingViewstate = true;
     private Calendar date = Calendar.getInstance();
-    private LogType typeSelected = LogType.getById(Settings.getTrackableAction());
+    private LogType typeSelected = LogType.getById(OldSettings.getTrackableAction());
     private int attempts = 0;
     private Trackable trackable;
 
@@ -223,7 +223,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
 
-        if (Settings.isUseTwitter()) {
+        if (OldSettings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);
@@ -250,7 +250,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                 waitDialog = ProgressDialog.show(LogTrackableActivity.this, null, res.getString(R.string.log_saving), true);
                 waitDialog.setCancelable(true);
 
-                Settings.setTrackableAction(typeSelected.id);
+                OldSettings.setTrackableAction(typeSelected.id);
 
                 final String tracking = trackingEditText.getText().toString();
                 final String log = logEditText.getText().toString();
@@ -328,8 +328,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         try {
             final StatusCode status = GCParser.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
 
-            if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
-                    Settings.isTwitterLoginValid() &&
+            if (status == StatusCode.NO_ERROR && OldSettings.isUseTwitter() &&
+                    OldSettings.isTwitterLoginValid() &&
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                 Twitter.postTweetTrackable(geocode);
             }

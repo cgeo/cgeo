@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_signature"
         android:icon="@drawable/ic_menu_edit"
-        android:title="@string/init_signature">
+        android:title="@string/oldinit_signature">
     </item>
     <item
         android:id="@+id/menu_templates"

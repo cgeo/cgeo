@@ -30,11 +30,11 @@ public final class LogEntry {
     public String cacheGuid = ""; // used for trackables
 
     public LogEntry(final Calendar date, final LogType type, final String text) {
-        this(Settings.getUsername(), date.getTimeInMillis(), type, text);
+        this(OldSettings.getUsername(), date.getTimeInMillis(), type, text);
     }
 
     public LogEntry(final long dateInMilliSeconds, final LogType type, final String text) {
-        this(Settings.getUsername(), dateInMilliSeconds, type, text);
+        this(OldSettings.getUsername(), dateInMilliSeconds, type, text);
     }
 
     public LogEntry(final String author, long dateInMilliSeconds, final LogType type, final String text) {
@@ -106,7 +106,7 @@ public final class LogEntry {
      * Get the log text to be displayed. Depending on the settings, color tags might be removed.
      */
     public String getDisplayText() {
-        if (Settings.getPlainLogs()) {
+        if (OldSettings.getPlainLogs()) {
             MatcherWrapper matcher = new MatcherWrapper(PATTERN_REMOVE_COLORS, log);
             return matcher.replaceAll("");
         }
@@ -114,6 +114,6 @@ public final class LogEntry {
     }
 
     public boolean isOwn() {
-        return author.equalsIgnoreCase(Settings.getUsername());
+        return author.equalsIgnoreCase(OldSettings.getUsername());
     }
 }

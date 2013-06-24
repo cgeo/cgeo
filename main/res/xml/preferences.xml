@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:cgeo="http://schemas.android.com/apk/res/cgeo.geocaching" >
+
+    <PreferenceScreen
+        android:title="@string/settings_screen_services_title"
+        android:summary="@string/settings_screen_services_summary" 
+        android:icon="@drawable/ic_menu_add" >
+
+        <PreferenceScreen
+            android:title="@string/settings_screen_gc_title" >
+
+            <cgeo.geocaching.settings.CheckBoxWithPopupPreference 
+                android:key="connectorGCActive" 
+                android:title="@string/settings_activate_gc"
+                cgeo:title="@string/settings_screen_gc_title"
+                cgeo:text="@string/settings_gc_legal_note"
+                cgeo:url="@string/settings_gc_legal_note_url"
+                cgeo:urlButton="@string/settings_gc_legal_note_button"
+                android:defaultValue="false" />
+            <EditTextPreference
+                android:key="username"
+                android:title="@string/oldinit_username"
+                android:dialogTitle="@string/oldinit_username"
+                android:dependency="connectorGCActive" />
+            <cgeo.geocaching.settings.EditPasswordPreference 
+                android:key="password"
+                android:title="@string/oldinit_password"
+                android:dialogTitle="@string/oldinit_password"
+                android:inputType="textPassword"
+                android:dependency="connectorGCActive" />
+            <cgeo.geocaching.settings.CheckGcCredentialsPreference 
+                android:title="@string/oldinit_login"
+                android:dependency="connectorGCActive" />
+        </PreferenceScreen>
+
+
+        <PreferenceScreen
+            android:title="@string/oldinit_oc" >
+
+            <CheckBoxPreference 
+                android:key="connectorOCActive" 
+                android:title="@string/settings_activate_oc"
+                android:defaultValue="false" />
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/oldinit_oc_de_description"
+                android:dependency="connectorOCActive" />
+            <cgeo.geocaching.settings.AuthorizeOcDePreference 
+                android:title="@string/oldinit_register_oc_de"
+                android:dependency="connectorOCActive" />
+        </PreferenceScreen>
+    
+    </PreferenceScreen>
+    
+    <PreferenceScreen
+        android:title="@string/settings_screen_appearance_title"
+        android:summary="@string/settings_screen_appearance_summary"
+        android:icon="@drawable/ic_menu_agenda" >
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/settings_screen_cachedetails_title"
+        android:summary="@string/settings_screen_cachedetails_summary" 
+        android:icon="@drawable/ic_menu_barcode" >
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/settings_screen_logging_title"
+        android:summary="@string/settings_screen_logging_summary"
+        android:icon="@drawable/ic_menu_edit" >
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/settings_screen_offlinedata_title"
+        android:summary="@string/settings_screen_offlinedata_summary"
+        android:icon="@drawable/ic_menu_save" >
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/settings_screen_map_title"
+        android:summary="@string/settings_screen_map_summary" 
+        android:icon="@drawable/ic_menu_mapmode" >
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/settings_screen_gpx_title"
+        android:summary="@string/settings_screen_gpx_summary" 
+        android:icon="@drawable/ic_menu_filter" >
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/settings_screen_basicmembers_title"
+        android:summary="@string/settings_screen_basicmembers_summary"
+        android:icon="@drawable/ic_menu_trail" >
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/settings_screen_miscellaneous_title"
+        android:summary="@string/settings_screen_miscellaneous_summary" 
+        android:icon="@drawable/ic_menu_myplaces" >
+    </PreferenceScreen>
+</PreferenceScreen>

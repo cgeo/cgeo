@@ -80,18 +80,18 @@ public class StaticMapsProvider {
     }
 
     public static void downloadMaps(Geocache cache) {
-        if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
+        if ((!OldSettings.isStoreOfflineMaps() && !OldSettings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
         int edge = guessMaxDisplaySide();
 
-        if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
+        if (OldSettings.isStoreOfflineMaps() && cache.getCoords() != null) {
             storeCachePreviewMap(cache);
             storeCacheStaticMap(cache, edge, false);
         }
 
         // clean old and download static maps for waypoints if one is missing
-        if (Settings.isStoreOfflineWpMaps()) {
+        if (OldSettings.isStoreOfflineWpMaps()) {
             for (final Waypoint waypoint : cache.getWaypoints()) {
                 if (!hasAllStaticMapsForWaypoint(cache.getGeocode(), waypoint)) {
                     refreshAllWpStaticMaps(cache, edge);

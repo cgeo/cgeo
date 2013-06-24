@@ -1,7 +1,7 @@
 package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.Trackable;
 
 import junit.framework.TestCase;
@@ -23,15 +23,15 @@ public class TwitterTest extends TestCase {
     }
 
     public static void testAvoidDuplicateTags() {
-        String oldMessage = Settings.getCacheTwitterMessage();
+        String oldMessage = OldSettings.getCacheTwitterMessage();
         try {
             Geocache cache = new Geocache();
             cache.setGeocode("GC1234");
             cache.setName("TwitterTest");
-            Settings.setCacheTwitterMessage("[NAME] #cgeo");
+            OldSettings.setCacheTwitterMessage("[NAME] #cgeo");
             assertEquals("TwitterTest #cgeo #geocaching", Twitter.getStatusMessage(cache));
         } finally {
-            Settings.setCacheTwitterMessage(oldMessage);
+            OldSettings.setCacheTwitterMessage(oldMessage);
         }
     }
 }

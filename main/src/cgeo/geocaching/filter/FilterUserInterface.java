@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.utils.Log;
@@ -44,7 +44,7 @@ public final class FilterUserInterface {
         this.res = cgeoapplication.getInstance().getResources();
 
         registry = new ArrayList<FactoryEntry>();
-        if (Settings.getCacheType() == CacheType.ALL) {
+        if (OldSettings.getCacheType() == CacheType.ALL) {
             register(R.string.caches_filter_type, TypeFilter.Factory.class);
         }
         register(R.string.caches_filter_size, SizeFilter.Factory.class);

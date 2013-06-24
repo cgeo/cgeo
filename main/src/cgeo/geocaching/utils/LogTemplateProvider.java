@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -95,21 +95,21 @@ public class LogTemplateProvider {
 
     public static ArrayList<LogTemplate> getTemplates() {
         ArrayList<LogTemplate> templates = new ArrayList<LogTemplateProvider.LogTemplate>();
-        templates.add(new LogTemplate("DATE", R.string.init_signature_template_date) {
+        templates.add(new LogTemplate("DATE", R.string.oldinit_signature_template_date) {
 
             @Override
             public String getValue(final LogContext context) {
                 return Formatter.formatFullDate(System.currentTimeMillis());
             }
         });
-        templates.add(new LogTemplate("TIME", R.string.init_signature_template_time) {
+        templates.add(new LogTemplate("TIME", R.string.oldinit_signature_template_time) {
 
             @Override
             public String getValue(final LogContext context) {
                 return Formatter.formatTime(System.currentTimeMillis());
             }
         });
-        templates.add(new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
+        templates.add(new LogTemplate("DATETIME", R.string.oldinit_signature_template_datetime) {
 
             @Override
             public String getValue(final LogContext context) {
@@ -117,14 +117,14 @@ public class LogTemplateProvider {
                 return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
             }
         });
-        templates.add(new LogTemplate("USER", R.string.init_signature_template_user) {
+        templates.add(new LogTemplate("USER", R.string.oldinit_signature_template_user) {
 
             @Override
             public String getValue(final LogContext context) {
-                return Settings.getUsername();
+                return OldSettings.getUsername();
             }
         });
-        templates.add(new LogTemplate("NUMBER", R.string.init_signature_template_number) {
+        templates.add(new LogTemplate("NUMBER", R.string.oldinit_signature_template_number) {
 
             @Override
             public String getValue(final LogContext context) {
@@ -144,7 +144,7 @@ public class LogTemplateProvider {
                 return findCount;
             }
         });
-        templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {
+        templates.add(new LogTemplate("OWNER", R.string.oldinit_signature_template_owner) {
 
             @Override
             public String getValue(final LogContext context) {

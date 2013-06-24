@@ -3,7 +3,7 @@ package cgeo.geocaching.export;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
@@ -82,16 +82,16 @@ class GpxExport extends AbstractExport {
         builder.setView(layout);
 
         final TextView text = (TextView) layout.findViewById(R.id.info);
-        text.setText(getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
+        text.setText(getString(R.string.export_gpx_info, OldSettings.getGpxExportDir()));
 
         final CheckBox shareOption = (CheckBox) layout.findViewById(R.id.share);
 
-        shareOption.setChecked(Settings.getShareAfterExport());
+        shareOption.setChecked(OldSettings.getShareAfterExport());
 
         shareOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Settings.setShareAfterExport(shareOption.isChecked());
+                OldSettings.setShareAfterExport(shareOption.isChecked());
             }
         });
 
@@ -142,10 +142,10 @@ class GpxExport extends AbstractExport {
             setMessage(cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
 
             final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-            final File exportFile = new File(Settings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(new Date()) + ".gpx");
+            final File exportFile = new File(OldSettings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(new Date()) + ".gpx");
             BufferedWriter writer = null;
             try {
-                final File exportLocation = new File(Settings.getGpxExportDir());
+                final File exportLocation = new File(OldSettings.getGpxExportDir());
                 exportLocation.mkdirs();
 
                 final XmlSerializer gpx = new KXmlSerializer();
@@ -370,7 +370,7 @@ class GpxExport extends AbstractExport {
             if (null != activity) {
                 if (exportFile != null) {
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
-                    if (Settings.getShareAfterExport()) {
+                    if (OldSettings.getShareAfterExport()) {
                         Intent shareIntent = new Intent();
                         shareIntent.setAction(Intent.ACTION_SEND);
                         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportFile));

@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
@@ -66,7 +66,7 @@ public abstract class Login {
     }
 
     private static StatusCode login(boolean retry) {
-        final ImmutablePair<String, String> login = Settings.getLogin();
+        final ImmutablePair<String, String> login = OldSettings.getGcLogin();
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
@@ -74,7 +74,7 @@ public abstract class Login {
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
+        Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.oldinit_login_popup_working));
         HttpResponse loginResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
         String loginData = Network.getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
@@ -87,13 +87,13 @@ public abstract class Login {
         }
 
         if (Login.getLoginStatus(loginData)) {
-            Log.i("Already logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
+            Log.i("Already logged in Geocaching.com as " + login.left + " (" + OldSettings.getMemberStatus() + ')');
             Login.switchToEnglish(loginData);
             return StatusCode.NO_ERROR; // logged in
         }
 
         Cookies.clearCookies();
-        Settings.setCookieStore(null);
+        OldSettings.setCookieStore(null);
 
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
@@ -119,10 +119,10 @@ public abstract class Login {
         }
 
         if (Login.getLoginStatus(loginData)) {
-            Log.i("Successfully logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
+            Log.i("Successfully logged in Geocaching.com as " + login.left + " (" + OldSettings.getMemberStatus() + ')');
 
             Login.switchToEnglish(loginData);
-            Settings.setCookieStore(Cookies.dumpCookieStore());
+            OldSettings.setCookieStore(Cookies.dumpCookieStore());
 
             return StatusCode.NO_ERROR; // logged in
         }
@@ -154,7 +154,7 @@ public abstract class Login {
         }
 
         Cookies.clearCookies();
-        Settings.setCookieStore(null);
+        OldSettings.setCookieStore(null);
         return StatusCode.NO_ERROR;
     }
 
@@ -202,7 +202,7 @@ public abstract class Login {
             return false;
         }
 
-        setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_ok));
+        setActualStatus(cgeoapplication.getInstance().getString(R.string.oldinit_login_popup_ok));
 
         // on every page except login page
         setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
@@ -215,9 +215,9 @@ public abstract class Login {
                 Log.e("getLoginStatus: bad cache count", e);
             }
             setActualCachesFound(cachesCount);
-            Settings.setMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            OldSettings.setMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if ( page.contains(GCConstants.MEMBER_STATUS_RENEW) ) {
-                Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
+                OldSettings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
             return true;
         }
@@ -225,12 +225,12 @@ public abstract class Login {
         // login page
         setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
         if (isActualLoginStatus()) {
-            setActualUserName(Settings.getUsername());
+            setActualUserName(OldSettings.getUsername());
             // number of caches found is not part of this page
             return true;
         }
 
-        setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_failed));
+        setActualStatus(cgeoapplication.getInstance().getString(R.string.oldinit_login_popup_failed));
         return false;
     }
 
@@ -262,9 +262,9 @@ public abstract class Login {
         try {
             final String profile = TextUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
 
-            Settings.setMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            OldSettings.setMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
-                Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
+                OldSettings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
 
             setActualCachesFound(Integer.parseInt(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));
@@ -296,7 +296,7 @@ public abstract class Login {
 
         final String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
         if (null != customDate) {
-            Settings.setGcCustomDate(customDate);
+            OldSettings.setGcCustomDate(customDate);
         }
     }
 
@@ -325,11 +325,11 @@ public abstract class Login {
     }
 
     public static Date parseGcCustomDate(final String input) throws ParseException {
-        return parseGcCustomDate(input, Settings.getGcCustomDate());
+        return parseGcCustomDate(input, OldSettings.getGcCustomDate());
     }
 
     public static SimpleDateFormat getCustomGcDateFormat() {
-        final String format = Settings.getGcCustomDate();
+        final String format = OldSettings.getGcCustomDate();
         if (gcCustomDateFormats.containsKey(format)) {
             return gcCustomDateFormats.get(format);
         }

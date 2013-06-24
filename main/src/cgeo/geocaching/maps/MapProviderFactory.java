@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -48,7 +48,7 @@ public class MapProviderFactory {
     public static void addMapviewMenuItems(Menu menu) {
         final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
 
-        final int currentSource = Settings.getMapSource().getNumericalId();
+        final int currentSource = OldSettings.getMapSource().getNumericalId();
         for (int i = 0; i < mapSources.size(); i++) {
             final MapSource mapSource = mapSources.get(i);
             final int id = mapSource.getNumericalId();

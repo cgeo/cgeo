@@ -1,6 +1,6 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Log;
@@ -271,7 +271,7 @@ public abstract class Network {
             request.setHeader(header.getName(), header.getValue());
         }
         request.getParams().setParameter(CoreProtocolPNames.USER_AGENT,
-                Settings.getUseNativeUa() ? Network.NATIVE_USER_AGENT : Network.PC_USER_AGENT);
+                OldSettings.getUseNativeUa() ? Network.NATIVE_USER_AGENT : Network.PC_USER_AGENT);
     }
 
     /**

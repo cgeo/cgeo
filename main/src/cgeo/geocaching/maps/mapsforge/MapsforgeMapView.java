@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
@@ -190,7 +190,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     public void setMapSource() {
 
         MapGeneratorInternal newMapType = MapGeneratorInternal.MAPNIK;
-        final MapSource mapSource = Settings.getMapSource();
+        final MapSource mapSource = OldSettings.getMapSource();
         if (mapSource instanceof MapsforgeMapSource) {
             newMapType = ((MapsforgeMapSource) mapSource).getGenerator();
         }
@@ -205,7 +205,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
         setMapGenerator(mapGenerator);
         if (!mapGenerator.requiresInternetConnection()) {
-            if (!new File(Settings.getMapFile()).exists()) {
+            if (!new File(OldSettings.getMapFile()).exists()) {
                 Toast.makeText(
                         getContext(),
                         getContext().getResources().getString(R.string.warn_nonexistant_mapfile),
@@ -213,8 +213,8 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
                         .show();
                 return;
             }
-            setMapFile(new File(Settings.getMapFile()));
-            if (!Settings.isValidMapFile(Settings.getMapFile())) {
+            setMapFile(new File(OldSettings.getMapFile()));
+            if (!OldSettings.isValidMapFile(OldSettings.getMapFile())) {
                 Toast.makeText(
                         getContext(),
                         getContext().getResources().getString(R.string.warn_invalid_mapfile),
@@ -234,7 +234,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     @Override
     public void setMapTheme() {
-        String customRenderTheme = Settings.getCustomRenderThemeFilePath();
+        String customRenderTheme = OldSettings.getCustomRenderThemeFilePath();
         if (!StringUtils.isEmpty(customRenderTheme)) {
             try {
                 setRenderTheme(new File(customRenderTheme));

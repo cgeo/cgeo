@@ -13,6 +13,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.settings.NewSettingsActivity;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -87,7 +88,7 @@ public class MainActivity extends AbstractActivity {
         public void handleMessage(Message msg) {
 
             //TODO: Rework to be fully dynamic
-            if (Settings.isGCConnectorActive()) {
+            if (OldSettings.isGCConnectorActive()) {
                 StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
                 if (Login.isActualLoginStatus()) {
                     userInfo.append(Login.getActualUserName());
@@ -105,7 +106,7 @@ public class MainActivity extends AbstractActivity {
                 userInfoViewGc.setVisibility(View.GONE);
             }
 
-            if (Settings.isOCConnectorActive()) {
+            if (OldSettings.isOCConnectorActive()) {
                 StringBuilder userInfo = new StringBuilder("opencaching.de").append(Formatter.SEPARATOR);
                 IConnector conn = ConnectorFactory.getConnector("OCXXXX");
                 if (conn instanceof OCApiLiveConnector) {
@@ -308,7 +309,7 @@ public class MainActivity extends AbstractActivity {
                 startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
             case R.id.menu_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
+                startActivity(new Intent(this, OldSettingsActivity.class));
                 return true;
             case R.id.menu_newsettings:
                 startActivity(new Intent(this, NewSettingsActivity.class));
@@ -356,7 +357,7 @@ public class MainActivity extends AbstractActivity {
     }
 
     private void setFilterTitle() {
-        filterTitle.setText(Settings.getCacheType().getL10n());
+        filterTitle.setText(OldSettings.getCacheType().getL10n());
     }
 
     private void init() {
@@ -366,8 +367,8 @@ public class MainActivity extends AbstractActivity {
 
         initialized = true;
 
-        Settings.setLanguage(Settings.isUseEnglish());
-        Settings.getLogin();
+        OldSettings.setLanguage(OldSettings.isUseEnglish());
+        OldSettings.getGcLogin();
 
         if (app.firstRun) {
             (new FirstLoginThread()).start();
@@ -396,7 +397,7 @@ public class MainActivity extends AbstractActivity {
 
                     @Override
                     public void run(Integer selectedListId) {
-                        Settings.saveLastList(selectedListId);
+                        OldSettings.saveLastList(selectedListId);
                         cgeocaches.startActivityOffline(MainActivity.this);
                     }
                 });
@@ -468,7 +469,7 @@ public class MainActivity extends AbstractActivity {
 
         cacheTypes.addAll(sorted);
 
-        int checkedItem = cacheTypes.indexOf(Settings.getCacheType());
+        int checkedItem = cacheTypes.indexOf(OldSettings.getCacheType());
         if (checkedItem < 0) {
             checkedItem = 0;
         }
@@ -485,7 +486,7 @@ public class MainActivity extends AbstractActivity {
             @Override
             public void onClick(DialogInterface dialog, int position) {
                 CacheType cacheType = cacheTypes.get(position);
-                Settings.setCacheType(cacheType);
+                OldSettings.setCacheType(cacheType);
                 setFilterTitle();
                 dialog.dismiss();
             }
@@ -503,8 +504,8 @@ public class MainActivity extends AbstractActivity {
             return;
         }
         new AlertDialog.Builder(this)
-                .setTitle(res.getString(R.string.init_backup_restore))
-                .setMessage(res.getString(R.string.init_restore_confirm))
+                .setTitle(res.getString(R.string.oldinit_backup_restore))
+                .setMessage(res.getString(R.string.oldinit_restore_confirm))
                 .setCancelable(false)
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
@@ -552,7 +553,7 @@ public class MainActivity extends AbstractActivity {
                         navAccuracy.setText(null);
                     }
 
-                    if (Settings.isShowAddress()) {
+                    if (OldSettings.isShowAddress()) {
                         if (addCoords == null) {
                             navLocation.setText(res.getString(R.string.loc_no_addr));
                         }
@@ -707,8 +708,8 @@ public class MainActivity extends AbstractActivity {
             }
 
             boolean more = false;
-            if (version != Settings.getVersion()) {
-                Log.i("Initializing hard cleanup - version changed from " + Settings.getVersion() + " to " + version + ".");
+            if (version != OldSettings.getVersion()) {
+                Log.i("Initializing hard cleanup - version changed from " + OldSettings.getVersion() + " to " + version + ".");
 
                 more = true;
             }
@@ -718,7 +719,7 @@ public class MainActivity extends AbstractActivity {
             cleanupRunning = false;
 
             if (version > 0) {
-                Settings.setVersion(version);
+                OldSettings.setVersion(version);
             }
         }
     }
@@ -732,7 +733,7 @@ public class MainActivity extends AbstractActivity {
             }
 
             //TODO: Rework to be fully dynamic
-            if (Settings.isGCConnectorActive()) {
+            if (OldSettings.isGCConnectorActive()) {
                 // login
                 final StatusCode status = Login.login();
 
@@ -748,11 +749,11 @@ public class MainActivity extends AbstractActivity {
 
                     // invoke settings activity to insert login details
                     if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                        SettingsActivity.startActivity(MainActivity.this);
+                        OldSettingsActivity.startActivity(MainActivity.this);
                     }
                 }
             }
-            if (Settings.isOCConnectorActive()) {
+            if (OldSettings.isOCConnectorActive()) {
                 IConnector conn = ConnectorFactory.getConnector("OCXXXX");
                 if (conn instanceof OCApiLiveConnector) {
                     OCApiLiveConnector ocapiConn = (OCApiLiveConnector) conn;

@@ -1,6 +1,6 @@
 package cgeo.geocaching.test.mock;
 
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.OldSettings;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -104,7 +104,7 @@ public class GC2CJPF extends MockedCache {
      */
     @Override
     public boolean isOwner() {
-        if ("Tom03".equals(Settings.getUsername())) {
+        if ("Tom03".equals(OldSettings.getUsername())) {
             return true;
         }
         return super.isOwner();
