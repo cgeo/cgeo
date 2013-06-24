@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider.Smiley;
+import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
@@ -23,12 +24,12 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
         getMenuInflater().inflate(R.menu.abstract_logging_activity, menu);
 
         final SubMenu menuLog = menu.findItem(R.id.menu_templates).getSubMenu();
-        for (LogTemplate template : LogTemplateProvider.getTemplates()) {
+        for (final LogTemplate template : LogTemplateProvider.getTemplates()) {
             menuLog.add(0, template.getItemId(), 0, template.getResourceId());
         }
 
         final SubMenu menuSmilies = menu.findItem(R.id.menu_smilies).getSubMenu();
-        for (Smiley smiley : GCSmiliesProvider.getSmilies()) {
+        for (final Smiley smiley : GCSmiliesProvider.getSmilies()) {
             menuSmilies.add(0, smiley.getItemId(), 0, smiley.text);
         }
 
@@ -46,7 +47,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
             smileyVisible = true;
         }
         final Trackable trackable = getLogContext().getTrackable();
-        if (trackable != null && ConnectorFactory.getConnector(trackable).equals(GCConnector.getInstance())) {
+        if (trackable != null && ConnectorFactory.getConnector(trackable).equals(TravelBugConnector.getInstance())) {
             smileyVisible = true;
         }
 
