@@ -113,6 +113,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     public boolean login(Handler handler, Context fromActivity) {
         if (supportsPersonalization()) {
             userInfo = OkapiClient.getUserInfo(this);
+        } else {
+            userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_SUPPORTED);
         }
         return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
     }
@@ -136,6 +138,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
                 return cgeoapplication.getInstance().getString(R.string.init_login_popup_ok);
             case FAILED:
                 return cgeoapplication.getInstance().getString(R.string.init_login_popup_failed);
+            case NOT_SUPPORTED:
+                return cgeoapplication.getInstance().getString(R.string.init_login_popup_not_authorized);
             default:
                 return "Error";
         }

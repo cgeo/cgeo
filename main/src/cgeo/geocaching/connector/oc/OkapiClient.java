@@ -702,7 +702,8 @@ final public class OkapiClient {
         public enum UserInfoStatus {
             NOT_RETRIEVED,
             SUCCESSFUL,
-            FAILED
+            FAILED,
+            NOT_SUPPORTED
         }
 
         private final String name;
