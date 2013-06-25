@@ -26,14 +26,14 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditNoteDialog;
-import cgeo.geocaching.ui.HtmlImageCounter;
 import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
-import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.HtmlImageCounter;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
@@ -578,8 +578,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
             menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
             menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
+            LoggingUI.onPrepareOptionsMenu(menu, cache);
         }
-        LoggingUI.onPrepareOptionsMenu(menu, cache);
         return super.onPrepareOptionsMenu(menu);
     }
 

@@ -383,26 +383,44 @@
     <string name="init_signature_template_owner">Właściciel</string>
     <string name="init_details">Szczegóły skrzynki</string>
     <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
+    <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
     <string name="init_elevationwanted">Załaduj dane o ukształtowaniu terenu</string>
+    <string name="init_summary_elevationwanted">Załaduj dane o ukształtowaniu terenu</string>
     <string name="init_friendlogswanted">Załaduj dodatkowy dziennik dla wpisów od przyjaciół</string>
+    <string name="init_summary_friendlogswanted">Załaduj dodatkowy dziennik dla wpisów od przyjaciół</string>
     <string name="init_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
+    <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
     <string name="init_autoload">Automatyczne ładowanie długich opisów</string>
+    <string name="init_summary_autoload">Automatyczne ładowanie długich opisów</string>
     <string name="init_other">Inne opcje</string>
     <string name="init_skin">Light skin\n(wymaga restartu)</string>
+    <string name="init_summary_skin">Light skin\n(wymaga restartu)</string>
     <string name="init_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
+    <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_captcha">Pokaż CAPTCHA w razie potrzeby (tylko użytkownicy Basic)</string>
+    <string name="init_summary_captcha">Pokaż CAPTCHA w razie potrzeby (tylko użytkownicy Basic)</string>
     <string name="init_useenglish">Użyj języka angielskiego wewnątrz c:geo\n(wymaga restartu)</string>
+    <string name="init_summary_useenglish">Użyj języka angielskiego wewnątrz c:geo\n(wymaga restartu)</string>
     <string name="init_exclude">Wyklucz własne lub już znalezione skrzynki</string>
+    <string name="init_summary_exclude">Wyklucz własne lub już znalezione skrzynki</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
+    <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_offline">Zapisuj mapy statyczne skrzynek do użytku offline</string>
+    <string name="init_summary_offline">Zapisuj mapy statyczne skrzynek do użytku offline</string>
     <string name="init_offline_wp">Zapisuj mapy statyczne punktów nawigacji do użytku offline</string>
+    <string name="init_summary_offline_wp">Zapisuj mapy statyczne punktów nawigacji do użytku offline</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
+    <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
+    <string name="init_summary_units">Używaj angielskich jednostek miary\n(mile)</string>
     <string name="init_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
+    <string name="init_summary_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_choose_list">Zapytaj o wykaz podczas zapisywania skrzynek</string>
+    <string name="init_summary_choose_list">Zapytaj o wykaz podczas zapisywania skrzynek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
+    <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_altitude">Korekta wysokości</string>
     <string name="init_altitude_description">Jeśli GPS podaje Tobie złą wysokość, możesz skorygować ją liczbą dodatnią lub ujemną. Poprawka musi być zawsze wyrażona w metrach.</string>
     <string name="init_clear">Usuń nazwę użytkownika</string>
@@ -422,7 +440,6 @@
     <string name="init_backup_last">Kopia dostępna od</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
     <string name="init_mapsources">Źródła mapy</string>
-    <string name="init_mapsources_description">Tutaj możesz wybrać źródło dla Twoich map. Jako alternatywa do map Google, dostępne są różne wersje OpenStreetMap, a nawet pliki offline z mapą (szczegóły znajdziesz tutaj: <a href="http://code.google.com/p/mapsforge/"> http://code.google.com/p/mapsforge/</a>).\nPonadto wspierane są wybieralne motywy dla map offline.</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
     <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
@@ -430,10 +447,13 @@
     <string name="init_gpx_exportdir_description">Tutaj możesz wybrać katalog do eksportu plików GPX.</string>
     <string name="init_gpx_importdir_description">Tutaj możesz wybrać katalog do importu plików GPX.</string>
     <string name="init_maptrail">Pokaż szlak na mapie</string>
+    <string name="init_summary_maptrail">Pokaż szlak na mapie</string>
     <string name="init_share_after_export">Otwórz dzielone menu po eksporcie plików GPX</string>
     <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
+    <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
     <string name="init_sigautoinsert">Wstaw podpis automatycznie</string>
     <string name="init_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby (tylko użytkownicy Basic)</string>
+    <string name="init_summary_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby (tylko użytkownicy Basic)</string>
     <string name="init_default_navigation_tool">Domyślna nawigacja</string>
     <string name="init_default_navigation_tool_description">Tutaj możesz wybrać preferowane narzędzie nawigacji.</string>
     <string name="init_default_navigation_tool_select">Wybierz narzędzie</string>
@@ -449,8 +469,9 @@
     <string name="init_dbmove_success">Baza danych została przeniesiona.</string>
     <string name="init_dbmove_failed">Nie udało się przenieść bazy danych</string>
     <string name="init_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
+    <string name="init_summary_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
     <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
-    <string name="init_rendertheme_folder">Katalog z tematami map offline (opcja)</string>
+    <string name="init_summary_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>

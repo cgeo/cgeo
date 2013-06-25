@@ -1,28 +1,32 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.files.SimpleDirChooser;
+import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openintents.intents.FileManagerIntents;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -30,6 +34,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.widget.EditText;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +47,8 @@ import java.util.List;
  * See <a href="http://developer.android.com/design/patterns/settings.html"> Android Design: Settings</a> for design
  * guidelines and the <a href="http://developer.android.com/guide/topics/ui/settings.html">Settings API Guide</a> for
  * more information on developing a Settings UI.
+ *
+ * @author koem (initial author)
  */
 public class NewSettingsActivity extends PreferenceActivity {
     /**
@@ -50,15 +57,55 @@ public class NewSettingsActivity extends PreferenceActivity {
      * as a master/detail two-pane view on tablets. When true, a single pane is
      * shown on tablets.
      */
-    private static final boolean ALWAYS_SIMPLE_PREFS = false;
+    private static final boolean ALWAYS_SIMPLE_PREFS = true;
 
     private EditText signatureText;
+
+    /**
+     * Enum for dir choosers. This is how we can retrieve information about the
+     * directory and preference key in onActivityResult() easily just by knowing
+     * the result code.
+     */
+    private enum DirChooserType {
+        GPX_IMPORT_DIR(1, Settings.KEY_GPX_IMPORT_DIR, Environment.getExternalStorageDirectory().getPath() + "/gpx"),
+        GPX_EXPORT_DIR(2, Settings.KEY_GPX_EXPORT_DIR, Environment.getExternalStorageDirectory().getPath() + "/gpx"),
+        THEMES_DIR(3, Settings.KEY_RENDER_THEME_BASE_FOLDER, "");
+        public final int requestCode;
+        public final String key;
+        public final String defaultValue;
+
+        private DirChooserType(int requestCode, String key, String defaultValue) {
+            this.requestCode = requestCode;
+            this.key = key;
+            this.defaultValue = defaultValue;
+        }
+
+        public DirChooserType getByKey(int requestCode) {
+            for (DirChooserType dct : values()) {
+                if (dct.requestCode == requestCode) {
+                    return dct;
+                }
+            }
+            return null;
+        }
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
         setupSimplePreferencesScreen();
+    }
+
+    private void initPreferences() {
+        initMapSourcePreference();
+
+        bindSummarysToValues(Settings.KEY_USERNAME, Settings.KEY_PASSWORD,
+                Settings.KEY_GCVOTE_PASSWORD, Settings.KEY_SIGNATURE,
+                Settings.KEY_MAP_SOURCE, Settings.KEY_RENDER_THEME_BASE_FOLDER,
+                Settings.KEY_GPX_EXPORT_DIR, Settings.KEY_GPX_IMPORT_DIR);
+
+        initDirChoosers();
     }
 
     // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
@@ -82,6 +129,7 @@ public class NewSettingsActivity extends PreferenceActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
             ContextMenuInfo menuInfo) {
+        // context menu for signature templates
         if (v.getId() == R.id.signature_templates) {
             menu.setHeaderTitle(R.string.init_signature_template_button);
             ArrayList<LogTemplate> templates = LogTemplateProvider.getTemplates();
@@ -96,6 +144,111 @@ public class NewSettingsActivity extends PreferenceActivity {
     private void insertSignatureTemplate(final LogTemplate template) {
         String insertText = "[" + template.getTemplateString() + "]";
         ActivityMixin.insertAtPosition(signatureText, insertText, true);
+    }
+
+    /**
+     * fill the choice list for map sources
+     */
+    private void initMapSourcePreference() {
+        ListPreference pref = (ListPreference) findPreference(Settings.KEY_MAP_SOURCE);
+
+        List<MapSource> mapSources = MapProviderFactory.getMapSources();
+        CharSequence[] entries = new CharSequence[mapSources.size()];
+        CharSequence[] values = new CharSequence[mapSources.size()];
+        for (int i = 0; i < mapSources.size(); ++i) {
+            entries[i] = mapSources.get(i).getName();
+            values[i] = String.valueOf(mapSources.get(i).getNumericalId());
+        }
+        pref.setEntries(entries);
+        pref.setEntryValues(values);
+    }
+
+    /**
+     * fire up a dir chooser on click on the preference
+     *
+     * @see onActivityResult() for processing of the selected directory
+     *
+     * @param key
+     *            key of the preference
+     * @param defaultValue
+     *            default directory - in case the preference has never been
+     *            set yet
+     */
+    private void initDirChoosers() {
+        for (final DirChooserType dct : DirChooserType.values()) {
+            final String dir = Settings.getString(dct.key, dct.defaultValue);
+
+            findPreference(dct.key).setOnPreferenceClickListener(
+                    new OnPreferenceClickListener() {
+                        @Override
+                        public boolean onPreferenceClick(Preference preference) {
+                            startDirChooser(dct, dir);
+                            return false;
+                        }
+                    });
+        }
+    }
+
+    private void startDirChooser(DirChooserType dct, String startDirectory) {
+        try {
+            final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
+            if (StringUtils.isNotBlank(startDirectory)) {
+                dirChooser.setData(Uri.fromFile(new File(startDirectory)));
+            }
+            dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
+                    getString(R.string.simple_dir_chooser_title));
+            dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
+                    getString(android.R.string.ok));
+            startActivityForResult(dirChooser, dct.requestCode);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // OI file manager not available
+            final Intent dirChooser = new Intent(this, SimpleDirChooser.class);
+            dirChooser.putExtra(Intents.EXTRA_START_DIR, startDirectory);
+            startActivityForResult(dirChooser, dct.requestCode);
+        }
+    }
+
+    private void setChosenDirectory(DirChooserType dct, Intent data) {
+        final String directory = new File(data.getData().getPath()).getAbsolutePath();
+        if (StringUtils.isNotBlank(directory)) {
+            Preference p = findPreference(dct.key);
+            if (p == null) {
+                return;
+            }
+            Settings.setString(dct.key, directory);
+            p.setSummary(directory);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+
+        for (DirChooserType dct : DirChooserType.values()) {
+            if (requestCode == dct.requestCode) {
+                setChosenDirectory(dct, data);
+                return;
+            }
+        }
+
+        switch (requestCode) {
+        //            case SELECT_MAPFILE_REQUEST:
+        //                if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
+        //                    final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
+        //                    Settings.setMapFile(mapFile);
+        //                    if (!Settings.isValidMapFile(Settings.getMapFile())) {
+        //                        showToast(res.getString(R.string.warn_invalid_mapfile));
+        //                    }
+        //                }
+        //                updateMapSourceMenu();
+        //                initMapDirectoryEdittext(true);
+        //                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -114,9 +267,7 @@ public class NewSettingsActivity extends PreferenceActivity {
         // Add 'general' preferences.
         addPreferencesFromResource(R.xml.preferences);
 
-        bindSummarysToValues(Settings.KEY_USERNAME, Settings.KEY_PASSWORD,
-                Settings.KEY_GCVOTE_PASSWORD, Settings.KEY_SIGNATURE);
-
+        initPreferences();
     }
 
     /** {@inheritDoc} */
@@ -182,29 +333,6 @@ public class NewSettingsActivity extends PreferenceActivity {
                         index >= 0
                                 ? listPreference.getEntries()[index]
                                 : null);
-
-            } else if (preference instanceof RingtonePreference) {
-                // For ringtone preferences, look up the correct display value
-                // using RingtoneManager.
-                if (TextUtils.isEmpty(stringValue)) {
-                    // Empty values correspond to 'silent' (no ringtone).
-                    //preference.setSummary(R.string.pref_ringtone_silent);
-
-                } else {
-                    Ringtone ringtone = RingtoneManager.getRingtone(
-                            preference.getContext(), Uri.parse(stringValue));
-
-                    if (ringtone == null) {
-                        // Clear the summary if there was a lookup error.
-                        preference.setSummary(null);
-                    } else {
-                        // Set the summary to reflect the new ringtone display
-                        // name.
-                        String name = ringtone.getTitle(preference.getContext());
-                        preference.setSummary(name);
-                    }
-                }
-
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.

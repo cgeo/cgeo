@@ -16,7 +16,7 @@
                 cgeo:title="@string/settings_screen_gc_title"
                 cgeo:text="@string/settings_gc_legal_note"
                 cgeo:url="@string/settings_gc_legal_note_url"
-                cgeo:urlButton="@string/settings_gc_legal_note_button"
+                cgeo:urlButton="@string/settings_goto_url_button"
                 android:defaultValue="false" />
             <EditTextPreference
                 android:key="username"
@@ -83,11 +83,44 @@
             
         </PreferenceCategory>
         
+        <PreferenceCategory
+            android:title="@string/settings_category_browser" >
+
+            <CheckBoxPreference 
+                android:key="nativeUa"
+                android:title="@string/init_use_native_ua"
+                android:summary="@string/init_summary_use_native_ua"
+                android:defaultValue="false" />
+                
+        </PreferenceCategory>
+        
     </PreferenceScreen>
     
     <PreferenceScreen
         android:title="@string/settings_screen_appearance_title"
         android:icon="@drawable/attribute_scenic" >
+    
+        <CheckBoxPreference 
+            android:key="skin"
+            android:title="@string/init_skin"
+            android:summary="@string/init_summary_skin"
+            android:defaultValue="false" />
+        <CheckBoxPreference 
+            android:key="showaddress"
+            android:title="@string/init_address"
+            android:summary="@string/init_summary_address"
+            android:defaultValue="true" />
+        <CheckBoxPreference 
+            android:key="useenglish"
+            android:title="@string/init_useenglish"
+            android:summary="@string/init_summary_useenglish"
+            android:defaultValue="false" />
+        <CheckBoxPreference 
+            android:key="units"
+            android:title="@string/init_units"
+            android:summary="@string/init_summary_units"
+            android:defaultValue="false" />
+        
     </PreferenceScreen>
     
     <PreferenceScreen
@@ -97,24 +130,49 @@
         <CheckBoxPreference 
             android:key="autoloaddesc"
             android:title="@string/init_autoload"
-            android:summary="@string/init_autoload" />
+            android:summary="@string/init_summary_autoload"
+            android:defaultValue="true" />
         <CheckBoxPreference 
             android:key="ratingwanted"
             android:title="@string/init_ratingwanted"
-            android:summary="@string/init_ratingwanted" />
+            android:summary="@string/init_summary_ratingwanted"
+            android:defaultValue="true" />
         <CheckBoxPreference 
             android:key="elevationwanted"
             android:title="@string/init_elevationwanted"
-            android:summary="@string/init_elevationwanted" />
+            android:summary="@string/init_summary_elevationwanted"
+            android:defaultValue="false" />
         <CheckBoxPreference 
             android:key="friendlogswanted"
             android:title="@string/init_friendlogswanted"
-            android:summary="@string/init_friendlogswanted" />
+            android:summary="@string/init_summary_friendlogswanted"
+            android:defaultValue="true" />
         <CheckBoxPreference 
             android:key="opendetailslastpage"
             android:title="@string/init_openlastdetailspage"
-            android:summary="@string/init_openlastdetailspage" />
-                
+            android:summary="@string/init_summary_openlastdetailspage"
+            android:defaultValue="false" />
+        <CheckBoxPreference 
+            android:key="livelist"
+            android:title="@string/init_livelist"
+            android:summary="@string/init_summary_livelist"
+            android:defaultValue="true" />
+        <CheckBoxPreference 
+            android:key="excludemine"
+            android:title="@string/init_exclude"
+            android:summary="@string/init_summary_exclude"
+            android:defaultValue="false" />
+        <CheckBoxPreference 
+            android:key="excludedisabled"
+            android:title="@string/init_disabled"
+            android:summary="@string/init_summary_disabled"
+            android:defaultValue="false" />
+        <CheckBoxPreference 
+            android:key="plainLogs"
+            android:title="@string/init_plain_logs"
+            android:summary="@string/init_summary_plain_logs"
+            android:defaultValue="false" />
+        
     </PreferenceScreen>
     
     <PreferenceScreen
@@ -131,10 +189,26 @@
             <CheckBoxPreference 
                 android:key="sigautoinsert" 
                 android:title="@string/init_sigautoinsert"
-                android:defaultValue="false" />
+                android:defaultValue="true" />
             
         </PreferenceCategory>
         
+        <PreferenceCategory 
+            android:title="@string/init_signature">
+
+            <CheckBoxPreference 
+                android:key="trackautovisit"
+                android:title="@string/init_trackautovisit"
+                android:summary="@string/init_summary_trackautovisit"
+                android:defaultValue="false" />
+            <CheckBoxPreference 
+                android:key="log_offline"
+                android:title="@string/init_log_offline"
+                android:summary="@string/init_summary_log_offline"
+                android:defaultValue="false" />
+                
+        </PreferenceCategory>
+
     </PreferenceScreen>
     
     <PreferenceScreen
@@ -144,106 +218,98 @@
         <CheckBoxPreference 
             android:key="offlinemaps"
             android:title="@string/init_offline"
-            android:summary="@string/init_offline" />
+            android:summary="@string/init_summary_offline"
+            android:defaultValue="true" />
         <CheckBoxPreference 
             android:key="offlinewpmaps"
             android:title="@string/init_offline_wp"
-            android:summary="@string/init_offline_wp" />
+            android:summary="@string/init_summary_offline_wp"
+            android:defaultValue="false" />
         <CheckBoxPreference 
             android:key="logimages"
             android:title="@string/init_save_log_img"
-            android:summary="@string/init_save_log_img" />
-
-        <CheckBoxPreference 
-            android:key="skin"
-            android:title="@string/init_skin"
-            android:summary="@string/init_skin" />
-
-        <CheckBoxPreference 
-            android:key="showaddress"
-            android:title="@string/init_address"
-            android:summary="@string/init_address" />
-
-        <CheckBoxPreference 
-            android:key="showcaptcha"
-            android:title="@string/init_captcha"
-            android:summary="@string/init_captcha" />
-        
-        <CheckBoxPreference 
-            android:key="livelist"
-            android:title="@string/init_livelist"
-            android:summary="@string/init_livelist" />
-        
-        <CheckBoxPreference 
-            android:key="loaddirectionimg"
-            android:title="@string/init_loaddirectionimg"
-            android:summary="@string/init_loaddirectionimg" />
-        
-        <CheckBoxPreference 
-            android:key="useenglish"
-            android:title="@string/init_useenglish"
-            android:summary="@string/init_useenglish" />
-        
-        <CheckBoxPreference 
-            android:key="units"
-            android:title="@string/init_units"
-            android:summary="@string/init_units" />
-        
-        <CheckBoxPreference 
-            android:key="excludemine"
-            android:title="@string/init_exclude"
-            android:summary="@string/init_exclude" />
-        
-        <CheckBoxPreference 
-            android:key="excludedisabled"
-            android:title="@string/init_disabled"
-            android:summary="@string/init_disabled" />
-        
-        <CheckBoxPreference 
-            android:key="trackautovisit"
-            android:title="@string/init_trackautovisit"
-            android:summary="@string/init_trackautovisit" />
-        
-        <CheckBoxPreference 
-            android:key="log_offline"
-            android:title="@string/init_log_offline"
-            android:summary="@string/init_log_offline" />
-        
+            android:summary="@string/init_summary_save_log_img"
+            android:defaultValue="false" />
         <CheckBoxPreference 
             android:key="choose_list"
             android:title="@string/init_choose_list"
-            android:summary="@string/init_choose_list" />
-        
-        <CheckBoxPreference 
-            android:key="maptrail"
-            android:title="@string/init_maptrail"
-            android:summary="@string/init_maptrail" />
-        
-        <CheckBoxPreference 
-            android:key="plainLogs"
-            android:title="@string/init_plain_logs"
-            android:summary="@string/init_plain_logs" />
-        
-        <CheckBoxPreference 
-            android:key="nativeUa"
-            android:title="@string/init_use_native_ua"
-            android:summary="@string/init_use_native_ua" />
-        
+            android:summary="@string/init_summary_choose_list"
+            android:defaultValue="false" />
+
     </PreferenceScreen>
     
     <PreferenceScreen
         android:title="@string/settings_screen_map_title"
         android:icon="@drawable/ic_menu_mapmode" >
-    </PreferenceScreen>
     
+        <CheckBoxPreference 
+            android:key="maptrail"
+            android:title="@string/init_maptrail"
+            android:summary="@string/init_summary_maptrail"
+            android:defaultValue="true" />
+
+        <Preference
+            android:title="@string/init_showwaypoints"
+            android:summary="@string/init_showwaypoint_description"
+            android:selectable="false" />
+        <cgeo.geocaching.settings.WpThresholdPreference
+            android:key="gcshowwaypointsthreshold"
+            android:layout="@layout/wp_threshold_preference" />
+
+        <ListPreference
+            android:key="mapsource"
+            android:title="@string/init_mapsource_select"
+            android:dialogTitle="@string/init_mapsource_select"
+            android:defaultValue="0" />
+
+        <cgeo.geocaching.settings.InfoPreference 
+            android:title="@string/settings_info_offline_maps_title"
+            android:text="@string/settings_info_offline_maps"
+            cgeo:url="@string/settings_offline_maps_url"
+            cgeo:urlButton="@string/settings_goto_url_button" />
+
+
+        <cgeo.geocaching.settings.InfoPreference 
+            android:title="@string/settings_info_themes_title"
+            android:text="@string/settings_info_themes"
+            cgeo:url="@string/settings_themes_url"
+            cgeo:urlButton="@string/settings_goto_url_button" />
+
+        <Preference
+            android:key="renderthemepath"
+            android:title="@string/init_rendertheme_folder" />
+        
+    </PreferenceScreen>
+
     <PreferenceScreen
         android:title="@string/settings_screen_gpx_title"
         android:icon="@drawable/attribute_letterbox" >
-    </PreferenceScreen>
+
+        <Preference
+            android:key="gpxExportDir"
+            android:title="@string/init_gpx_exportdir" />
+
+        <Preference
+            android:key="gpxImportDir"
+            android:title="@string/init_gpx_importdir" />
     
+    </PreferenceScreen>
+
     <PreferenceScreen
         android:title="@string/settings_screen_basicmembers_title"
         android:icon="@drawable/attribute_frontyard" >
+
+        <CheckBoxPreference 
+            android:key="showcaptcha"
+            android:title="@string/init_captcha"
+            android:summary="@string/init_summary_captcha"
+            android:defaultValue="false" />
+        <CheckBoxPreference 
+            android:key="loaddirectionimg"
+            android:title="@string/init_loaddirectionimg"
+            android:summary="@string/init_summary_loaddirectionimg"
+            android:defaultValue="true" />
+    
     </PreferenceScreen>
     
     <PreferenceScreen

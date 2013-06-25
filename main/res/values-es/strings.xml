@@ -340,16 +340,27 @@
     <string name="init_signature_template_number">Número</string>
     <string name="init_other">Otras opciones</string>
     <string name="init_skin">Fondo blanco (necesita reiniciar c:geo)</string>
+    <string name="init_summary_skin">Fondo blanco (necesita reiniciar c:geo)</string>
     <string name="init_address">Mostrar dirección en lugar de posición en la pantalla principal</string>
+    <string name="init_summary_address">Mostrar dirección en lugar de posición en la pantalla principal</string>
     <string name="init_captcha">Mostrar CAPTCHA si es necesario</string>
+    <string name="init_summary_captcha">Mostrar CAPTCHA si es necesario</string>
     <string name="init_useenglish">Usar inglés interno (necesita reiniciar c:geo)</string>
+    <string name="init_summary_useenglish">Usar inglés interno (necesita reiniciar c:geo)</string>
     <string name="init_exclude">Excluir encontrados y propios</string>
+    <string name="init_summary_exclude">Excluir encontrados y propios</string>
     <string name="init_disabled">Excluir escondites desactivados</string>
+    <string name="init_summary_disabled">Excluir escondites desactivados</string>
     <string name="init_offline">Guardar mapas para usar sin conexión</string>
+    <string name="init_summary_offline">Guardar mapas para usar sin conexión</string>
     <string name="init_save_log_img">Guardar imágenes de los registros</string>
+    <string name="init_summary_save_log_img">Guardar imágenes de los registros</string>
     <string name="init_units">Usar millas/pies (unidades imperiales)</string>
+    <string name="init_summary_units">Usar millas/pies (unidades imperiales)</string>
     <string name="init_autoload">Autocargar descripción larga</string>
+    <string name="init_summary_autoload">Autocargar descripción larga</string>
     <string name="init_livelist">Mostrar dirección a los escondites en su listado</string>
+    <string name="init_summary_livelist">Mostrar dirección a los escondites en su listado</string>
     <string name="init_altitude">Corrección de altitud</string>
     <string name="init_altitude_description">Si el GPS te indica una altitud errónea, puedes corregirla con un valor positivo o negativo. La corrección es siempre en metros.</string>
     <string name="init_clear">Borrar acceso</string>
@@ -365,9 +376,9 @@
     <string name="init_backup_last">Copia guardada el</string>
     <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
     <string name="init_mapsources">Proveedor de mapas</string>
-    <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de línea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string>
     <string name="init_mapsource_select">Elige proveedor de mapas</string>
     <string name="init_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
+    <string name="init_summary_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
     <string name="init_sigautoinsert">Insertar automáticamente</string>
 
     <!-- map sources -->

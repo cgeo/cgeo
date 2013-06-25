@@ -391,26 +391,44 @@
     <string name="init_signature_template_owner">Propriétaire</string>
     <string name="init_details">Détails des caches</string>
     <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
+    <string name="init_summary_ratingwanted">Charger la note depuis GCvote.com</string>
     <string name="init_elevationwanted">Charger l\'altitude de la cache</string>
+    <string name="init_summary_elevationwanted">Charger l\'altitude de la cache</string>
     <string name="init_friendlogswanted">Charger le carnet (amis)</string>
+    <string name="init_summary_friendlogswanted">Charger le carnet (amis)</string>
     <string name="init_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
+    <string name="init_summary_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
     <string name="init_autoload">Afficher automatiquement les descriptions longues</string>
+    <string name="init_summary_autoload">Afficher automatiquement les descriptions longues</string>
     <string name="init_other">Autres options</string>
     <string name="init_skin">Fond clair (nécessite le redémarrage de c:geo)</string>
+    <string name="init_summary_skin">Fond clair (nécessite le redémarrage de c:geo)</string>
     <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
+    <string name="init_summary_address">Afficher l\'adresse sur l\'accueil</string>
     <string name="init_captcha">Afficher le CAPTCHA si nécessaire</string>
+    <string name="init_summary_captcha">Afficher le CAPTCHA si nécessaire</string>
     <string name="init_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
+    <string name="init_summary_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
     <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
+    <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_showwaypoints">Points intermédiaires</string>
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés sur la carte.</string>
     <string name="init_disabled">Exclure les caches désactivées</string>
+    <string name="init_summary_disabled">Exclure les caches désactivées</string>
     <string name="init_offline">Enregistrer les cartes pour une utilisation hors ligne</string>
+    <string name="init_summary_offline">Enregistrer les cartes pour une utilisation hors ligne</string>
     <string name="init_offline_wp">Enregistrer les cartes autour des points intermédiaires pour une utilisation hors ligne</string>
+    <string name="init_summary_offline_wp">Enregistrer les cartes autour des points intermédiaires pour une utilisation hors ligne</string>
     <string name="init_save_log_img">Sauver les images des visites</string>
+    <string name="init_summary_save_log_img">Sauver les images des visites</string>
     <string name="init_units">Utiliser des unités de distance impériales</string>
+    <string name="init_summary_units">Utiliser des unités de distance impériales</string>
     <string name="init_log_offline">Toujours utiliser le mode hors-ligne, même si connecté.</string>
+    <string name="init_summary_log_offline">Toujours utiliser le mode hors-ligne, même si connecté.</string>
     <string name="init_choose_list">Demander dans quelle liste sauver les caches.</string>
+    <string name="init_summary_choose_list">Demander dans quelle liste sauver les caches.</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
+    <string name="init_summary_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_altitude">Correction de l\'altitude</string>
     <string name="init_altitude_description">Si le GPS indique une mauvaise altitude, vous pouvez la corriger avec une valeur en mètres, positive ou négative.</string>
     <string name="init_clear">Effacer l\'identifiant</string>
@@ -430,7 +448,6 @@
     <string name="init_backup_last">Sauvegarde disponible depuis</string>
     <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
     <string name="init_mapsources">Source des cartes</string>
-    <string name="init_mapsources_description">Vous pouvez choisir la source de vos cartes. En tant qu\'alternative aux cartes Google, diverses cartes de type OpenStreetMap sont disponibles et même en hors-ligne (voir <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> pour plus de détails).</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
     <string name="init_map_directory_description">Dossier contenant les cartes hors-ligne</string>
     <string name="init_gpx_exportdir">Dossier d\'exportation GPX</string>
@@ -438,10 +455,13 @@
     <string name="init_gpx_exportdir_description">Vous pouvez choisir le dossier dans lequel les exportations au format GPX seront stockées.</string>
     <string name="init_gpx_importdir_description">Vous pouvez choisir le dossier à partir duquel les exportations au format GPX seront effectuées.</string>
     <string name="init_maptrail">Montrer la trace sur la carte</string>
+    <string name="init_summary_maptrail">Montrer la trace sur la carte</string>
     <string name="init_share_after_export">Ouvrir le menu de partage après les exportations GPX.</string>
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"visité\"</string>
+    <string name="init_summary_trackautovisit">Marquer automatiquement les objets voyageurs comme \"visité\"</string>
     <string name="init_sigautoinsert">Insérer automatiquement</string>
     <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
+    <string name="init_summary_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
     <string name="init_default_navigation_tool">Navigation par défaut</string>
     <string name="init_default_navigation_tool_description">Vous pouvez choisir ici l\'outil de navigation à utiliser par défaut.</string>
     <string name="init_default_navigation_tool_select">Sélectionner l\'outil</string>
@@ -457,8 +477,9 @@
     <string name="init_dbmove_success">Base de données déplacée</string>
     <string name="init_dbmove_failed">Erreur lors du déplacement de la base de données</string>
     <string name="init_plain_logs">Afficher les entrées de journal sans les couleurs</string>
+    <string name="init_summary_plain_logs">Afficher les entrées de journal sans les couleurs</string>
     <string name="init_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles.</string>
-    <string name="init_rendertheme_folder">Dossier contenant les cartes hors-ligne personnelles (optionnelles).</string>
+    <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles.</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google Maps : plan</string>

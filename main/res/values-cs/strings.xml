@@ -382,26 +382,44 @@
     <string name="init_signature_template_owner">Vlastník</string>
     <string name="init_details">Detaily keše</string>
     <string name="init_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
+    <string name="init_summary_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
     <string name="init_elevationwanted">Načítat výšková data keše</string>
+    <string name="init_summary_elevationwanted">Načítat výšková data keše</string>
     <string name="init_friendlogswanted">Načítat doplňkový Logbook s logy od kámošů</string>
+    <string name="init_summary_friendlogswanted">Načítat doplňkový Logbook s logy od kámošů</string>
     <string name="init_openlastdetailspage">Otevřít detaily na naposledy použité stránce</string>
+    <string name="init_summary_openlastdetailspage">Otevřít detaily na naposledy použité stránce</string>
     <string name="init_autoload">Automaticky načítat dlouhý popis</string>
+    <string name="init_summary_autoload">Automaticky načítat dlouhý popis</string>
     <string name="init_other">Další možnosti</string>
     <string name="init_skin">Používat světlý vzhled\n(Vyžaduje restart)</string>
+    <string name="init_summary_skin">Používat světlý vzhled\n(Vyžaduje restart)</string>
     <string name="init_address">Zobrazovat adresu na hlavní obrazovce</string>
+    <string name="init_summary_address">Zobrazovat adresu na hlavní obrazovce</string>
     <string name="init_captcha">Zobrazit obrázek CAPTCHA, pokud je třeba (pouze Basic Member)</string>
+    <string name="init_summary_captcha">Zobrazit obrázek CAPTCHA, pokud je třeba (pouze Basic Member)</string>
     <string name="init_useenglish">Používat angličtinu pro c:geo\n(Vyžaduje restart)</string>
+    <string name="init_summary_useenglish">Používat angličtinu pro c:geo\n(Vyžaduje restart)</string>
     <string name="init_exclude">Nezobrazovat mé vlastní a nalezené keše</string>
+    <string name="init_summary_exclude">Nezobrazovat mé vlastní a nalezené keše</string>
     <string name="init_showwaypoints">Zobrazovat body trasy na Aktivní mapě</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich body trasy.</string>
     <string name="init_disabled">Nezobrazovat deaktivované keše</string>
+    <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_offline">Ukládat mapy pro offline použití</string>
+    <string name="init_summary_offline">Ukládat mapy pro offline použití</string>
     <string name="init_offline_wp">Ukládat statické mapy k bodům trasy pro offline použití</string>
+    <string name="init_summary_offline_wp">Ukládat statické mapy k bodům trasy pro offline použití</string>
     <string name="init_save_log_img">Ukládat obrázky z logů</string>
+    <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
     <string name="init_units">Používat imperiální jednotky vzdálenosti</string>
+    <string name="init_summary_units">Používat imperiální jednotky vzdálenosti</string>
     <string name="init_log_offline">Povolit Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat Log na server)</string>
+    <string name="init_summary_log_offline">Povolit Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat Log na server)</string>
     <string name="init_choose_list">Ptát se na seznam pro uložení keše</string>
+    <string name="init_summary_choose_list">Ptát se na seznam pro uložení keše</string>
     <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
+    <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
     <string name="init_altitude">Výšková korekce</string>
     <string name="init_altitude_description">Pokud Tvoje GPS špatně počítá výšku, můžeš ji korigovat zde. Stačí zadat kladné či záporné číslo v metrech.</string>
     <string name="init_clear">Smazat přihlašovací údaje</string>
@@ -421,7 +439,6 @@
     <string name="init_backup_last">Dostupná záloha z</string>
     <string name="init_backup_last_no">Nenalezen žádný soubor se zálohou.</string>
     <string name="init_mapsources">Mapové zdroje</string>
-    <string name="init_mapsources_description">Zde můžeš vybrat zdroj map. Alternativou ke Google mapám jsou různé typy OpenStreetMap, jakož i offline mapové podklady (Více informací na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_gpx_exportdir">Složka pro GPX export</string>
@@ -429,10 +446,13 @@
     <string name="init_gpx_exportdir_description">Zde můžeš vybrat složku pro GPX exporty.</string>
     <string name="init_gpx_importdir_description">Zde můžeš vybrat složku pro GPX importy.</string>
     <string name="init_maptrail">Zobrazit trasu na mapě</string>
+    <string name="init_summary_maptrail">Zobrazit trasu na mapě</string>
     <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
     <string name="init_trackautovisit">Nastavit sledovatelné předměty na \"Navštíveno\" jako výchozí</string>
+    <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na \"Navštíveno\" jako výchozí</string>
     <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
     <string name="init_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Basic Member)</string>
+    <string name="init_summary_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Basic Member)</string>
     <string name="init_default_navigation_tool">Výchozí navigace</string>
     <string name="init_default_navigation_tool_description">Zde můžeš vybrat preferovaný navigační nástroj.</string>
     <string name="init_default_navigation_tool_select">Vyber nástroj</string>
@@ -448,8 +468,9 @@
     <string name="init_dbmove_success">Databáze úspěšně přesunuta.</string>
     <string name="init_dbmove_failed">Přesun databáze selhal</string>
     <string name="init_plain_logs">Zobrazovat logy bez barev</string>
+    <string name="init_summary_plain_logs">Zobrazovat logy bez barev</string>
     <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
-    <string name="init_rendertheme_folder">Složka s vlastními offline tématy map (nepovinné)</string>
+    <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>

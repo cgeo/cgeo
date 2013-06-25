@@ -365,26 +365,44 @@
     <string name="init_signature_template_owner">Eigenaar</string>
     <string name="init_details">Cache details</string>
     <string name="init_ratingwanted">Laad cachewaardering van GCvote.com</string>
+    <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
     <string name="init_elevationwanted">Laad cache hoogte gegevens</string>
+    <string name="init_summary_elevationwanted">Laad cache hoogte gegevens</string>
     <string name="init_friendlogswanted">Laad extra logbook pagina voor logs van vrienden</string>
+    <string name="init_summary_friendlogswanted">Laad extra logbook pagina voor logs van vrienden</string>
     <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
+    <string name="init_summary_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
     <string name="init_autoload">Automatisch laden van lange omschrijving</string>
+    <string name="init_summary_autoload">Automatisch laden van lange omschrijving</string>
     <string name="init_other">Overige opties</string>
     <string name="init_skin">Lichte skin (c:geo herstarten)</string>
+    <string name="init_summary_skin">Lichte skin (c:geo herstarten)</string>
     <string name="init_address">Toon adres in plaats van positie op hoofdscherm</string>
+    <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_captcha">Laat CAPTCHA zien indien noodzakelijk</string>
+    <string name="init_summary_captcha">Laat CAPTCHA zien indien noodzakelijk</string>
     <string name="init_useenglish">Use English inside c:geo\n(restart needed)</string>
+    <string name="init_summary_useenglish">Use English inside c:geo\n(restart needed)</string>
     <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
+    <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_showwaypoints">Laat waypoints zien in map</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
+    <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_offline">Kaarten opslaan voor gebruik zonder verbinding</string>
+    <string name="init_summary_offline">Kaarten opslaan voor gebruik zonder verbinding</string>
     <string name="init_offline_wp">Statische kaarten van waipoints opslaan voor gebruik zonder verbinding</string>
+    <string name="init_summary_offline_wp">Statische kaarten van waipoints opslaan voor gebruik zonder verbinding</string>
     <string name="init_save_log_img">Sla afbeeldingen van logs op</string>
+    <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
+    <string name="init_summary_units">Gebruik imperiale stelsel voor afstanden</string>
     <string name="init_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
+    <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst voor opslaan caches.</string>
+    <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches.</string>
     <string name="init_livelist">Toon afstand tot cache in lijst</string>
+    <string name="init_summary_livelist">Toon afstand tot cache in lijst</string>
     <string name="init_altitude">Hoogte correctie</string>
     <string name="init_altitude_description">Als de GPS een verkeerde hoogte aangeeft, kan dit gecorrigeerd worden met een positief of negatief nummer. De correctie is in meters.</string>
     <string name="init_clear">Login wissen</string>
@@ -404,7 +422,6 @@
     <string name="init_backup_last">Backup beschikbaar van</string>
     <string name="init_backup_last_no">Er is geen bestand met een backup.</string>
     <string name="init_mapsources">Kaartbron</string>
-    <string name="init_mapsources_description">Hier kan een kaartenbron geselecteerd worden. Als alternatief voor Google maps zijn verschillende OpenStreetMap varianten en ook offline kaarten-files beschikbaar (Zie <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> voor meer info).</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_map_directory_description">Directory met offline kaarten</string>
     <string name="init_gpx_exportdir">GPX Export Directory</string>
@@ -412,10 +429,13 @@
     <string name="init_gpx_exportdir_description">Hier kan je de directory voor GPX exports selecteren.</string>
     <string name="init_gpx_importdir_description">Hier kan je de directory voor GPX imports selecteren.</string>
     <string name="init_maptrail">Laat pad op kaart zien</string>
+    <string name="init_summary_maptrail">Laat pad op kaart zien</string>
     <string name="init_share_after_export">Open deel-menu na GPX export.</string>
     <string name="init_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
+    <string name="init_summary_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
     <string name="init_sigautoinsert">Voeg automatisch toe</string>
     <string name="init_loaddirectionimg">Laad de richting-afbeelding in, indien nodig (alleen basis-leden)</string>
+    <string name="init_summary_loaddirectionimg">Laad de richting-afbeelding in, indien nodig (alleen basis-leden)</string>
     <string name="init_default_navigation_tool">Standaard navigatie</string>
     <string name="init_default_navigation_tool_description">Hier kan je de navigatie-tool van jouw voorkeur instellen.</string>
     <string name="init_default_navigation_tool_select">Selecteer tool</string>
@@ -431,8 +451,9 @@
     <string name="init_dbmove_success">Database succesvol verplaatst.</string>
     <string name="init_dbmove_failed">Database kon niet verplaatst worden.</string>
     <string name="init_plain_logs">Laat logs zien zonder kleuren.</string>
+    <string name="init_summary_plain_logs">Laat logs zien zonder kleuren.</string>
     <string name="init_use_native_ua">Identificeer als Android browser (lost loginproblemen bij sommige mobiele aanbieders op).</string>
-    <string name="init_rendertheme_folder">Directory met aangepaste offline mapthema\'s (optioneel).</string>
+    <string name="init_summary_use_native_ua">Identificeer als Android browser (lost loginproblemen bij sommige mobiele aanbieders op).</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>

@@ -50,7 +50,7 @@ public final class Settings {
     private static final String KEY_WEB_DEVICE_CODE = "webDeviceCode";
     private static final String KEY_WEBDEVICE_NAME = "webDeviceName";
     private static final String KEY_MAP_LIVE = "maplive";
-    private static final String KEY_MAP_SOURCE = "mapsource";
+    public static final String KEY_MAP_SOURCE = "mapsource";
     private static final String KEY_USE_TWITTER = "twitter";
     private static final String KEY_SHOW_ADDRESS = "showaddress";
     private static final String KEY_SHOW_CAPTCHA = "showcaptcha";
@@ -59,7 +59,7 @@ public final class Settings {
     private static final String KEY_LAST_MAP_LAT = "maplat";
     private static final String KEY_LAST_MAP_LON = "maplon";
     private static final String KEY_LIVE_LIST = "livelist";
-    private static final String KEY_METRIC_UNITS = "units";
+    private static final String KEY_IMPERIAL_UNITS = "units";
     private static final String KEY_SKIN = "skin";
     private static final String KEY_LAST_USED_LIST = "lastlist";
     private static final String KEY_CACHE_TYPE = "cachetype";
@@ -103,10 +103,10 @@ public final class Settings {
     private static final String KEY_DB_ON_SDCARD = "dbonsdcard";
     private static final String KEY_LAST_TRACKABLE_ACTION = "trackableaction";
     private static final String KEY_SHARE_AFTER_EXPORT = "shareafterexport";
-    private static final String KEY_GPX_EXPORT_DIR = "gpxExportDir";
-    private static final String KEY_RENDER_THEME_BASE_FOLDER = "renderthemepath";
+    public static final String KEY_RENDER_THEME_BASE_FOLDER = "renderthemepath";
     private static final String KEY_RENDER_THEME_FILE_PATH = "renderthemefile";
-    private static final String KEY_GPX_IMPORT_DIR = "gpxImportDir";
+    public static final String KEY_GPX_EXPORT_DIR = "gpxExportDir";
+    public static final String KEY_GPX_IMPORT_DIR = "gpxImportDir";
     private static final String KEY_PLAIN_LOGS = "plainLogs";
     private static final String KEY_NATIVE_UA = "nativeUa";
     private static final String KEY_MAP_DIRECTORY = "mapDirectory";
@@ -118,6 +118,8 @@ public final class Settings {
     private static final String KEY_TEMP_OCDE_TOKEN_SECRET = "ocde-temp-token-secret";
     private static final String KEY_TEMP_OCDE_TOKEN_PUBLIC = "ocde-temp-token-public";
 
+    public static final int SHOW_WP_THRESHOLD_DEFAULT = 5;
+    public static final int SHOW_WP_THRESHOLD_MAX = 50;
 
     private final static int unitsMetric = 1;
 
@@ -163,7 +165,8 @@ public final class Settings {
 
     private static void migrateSettings() {
         // migrate from non standard file location and integer based boolean types
-        if (sharedPrefs.getInt(KEY_SETTINGS_VERSION, 0) < 1) {
+        int oldVersion = sharedPrefs.getInt(KEY_SETTINGS_VERSION, 0);
+        if (oldVersion < 1) {
             final String oldPreferencesName = "cgeo.pref";
             final SharedPreferences old = cgeoapplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
             final Editor e = sharedPrefs.edit();
@@ -185,7 +188,7 @@ public final class Settings {
             e.putBoolean(KEY_MAP_TRAIL, old.getInt(KEY_MAP_TRAIL, 1) != 0);
             e.putInt(KEY_LAST_MAP_ZOOM, old.getInt(KEY_LAST_MAP_ZOOM, 14));
             e.putBoolean(KEY_LIVE_LIST, 0 != old.getInt(KEY_LIVE_LIST, 1));
-            e.putBoolean(KEY_METRIC_UNITS, old.getInt(KEY_METRIC_UNITS, unitsMetric) == unitsMetric);
+            e.putBoolean(KEY_IMPERIAL_UNITS, old.getInt(KEY_IMPERIAL_UNITS, unitsMetric) == unitsMetric);
             e.putBoolean(KEY_SKIN, old.getInt(KEY_SKIN, 0) != 0);
             e.putInt(KEY_LAST_USED_LIST, old.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID));
             e.putString(KEY_CACHE_TYPE, old.getString(KEY_CACHE_TYPE, CacheType.ALL.id));
@@ -229,11 +232,75 @@ public final class Settings {
             e.putInt(KEY_SETTINGS_VERSION, 1); // mark migrated
             e.commit();
         }
+
+        // changes for new settings dialog
+        if (oldVersion < 2) {
+            final Editor e = sharedPrefs.edit();
+
+            e.putBoolean(KEY_IMPERIAL_UNITS, !isUseImperialUnits());
+
+            e.putInt(KEY_SETTINGS_VERSION, 2); // mark migrated
+            e.commit();
+        }
+        if (oldVersion < 3) {
+            final Editor e = sharedPrefs.edit();
+
+            // show waypoints threshold now as a slider
+            int wpThreshold = getWayPointsThreshold();
+            if (wpThreshold < 0) {
+                wpThreshold = 0;
+            } else if (wpThreshold > SHOW_WP_THRESHOLD_MAX) {
+                wpThreshold = SHOW_WP_THRESHOLD_MAX;
+            }
+            e.putInt(KEY_SHOW_WAYPOINTS_THRESHOLD, wpThreshold);
+
+            e.putInt(KEY_SETTINGS_VERSION, 3); // mark migrated
+            e.commit();
+        }
+        if (oldVersion < 4) {
+            final Editor e = sharedPrefs.edit();
+
+            // KEY_MAP_SOURCE must be string, because it is the key for a ListPreference now
+            int ms = sharedPrefs.getInt(KEY_MAP_SOURCE, 0);
+            e.remove(KEY_MAP_SOURCE);
+            e.putString(KEY_MAP_SOURCE, String.valueOf(ms));
+
+            e.putInt(KEY_SETTINGS_VERSION, 4); // mark migrated
+            e.commit();
+        }
+    }
+
+    // TODO: package protected
+    public static String getString(final String key, final String defaultValue) {
+        return sharedPrefs.getString(key, defaultValue);
+    }
+
+    // TODO: package protected
+    // TODO: use here in Settings.class
+    public static boolean setString(final String key, final String value) {
+        return editSharedSettings(new PrefRunnable() {
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(key, value);
+            }
+        });
+    }
+
+    /**
+     * edit some settings without knowing how to get the settings editor or how to commit
+     * 
+     * @param runnable
+     * @return
+     */
+    private static boolean editSharedSettings(final PrefRunnable runnable) {
+        final SharedPreferences.Editor prefsEdit = sharedPrefs.edit();
+        runnable.edit(prefsEdit);
+        return prefsEdit.commit();
     }
 
     public static void setLanguage(boolean useEnglish) {
         final Configuration config = new Configuration();
-        config.locale = useEnglish ? new Locale("en") : Locale.getDefault();
+        config.locale = useEnglish ? Locale.ENGLISH : Locale.getDefault();
         final Resources resources = cgeoapplication.getInstance().getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
@@ -475,16 +542,6 @@ public final class Settings {
         });
     }
 
-    public static void setLiveMap(final boolean live) {
-        editSharedSettings(new PrefRunnable() {
-
-            @Override
-            public void edit(Editor edit) {
-                edit.putBoolean(KEY_MAP_LIVE, live);
-            }
-        });
-    }
-
     public static int getLastList() {
         return sharedPrefs.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID);
     }
@@ -643,18 +700,6 @@ public final class Settings {
         return sharedPrefs.getBoolean(KEY_EXCLUDE_OWN, false);
     }
 
-    /**
-     * edit some settings without knowing how to get the settings editor or how to commit
-     *
-     * @param runnable
-     * @return
-     */
-    private static boolean editSharedSettings(final PrefRunnable runnable) {
-        final SharedPreferences.Editor prefsEdit = sharedPrefs.edit();
-        runnable.edit(prefsEdit);
-        return prefsEdit.commit();
-    }
-
     public static void setExcludeMine(final boolean exclude) {
         editSharedSettings(new PrefRunnable() {
 
@@ -670,7 +715,7 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putBoolean(KEY_USE_ENGLISH, english);
-                setLanguage(english);
+                setLanguage(english); // TODO
             }
         });
     }
@@ -865,22 +910,32 @@ public final class Settings {
         });
     }
 
-    public static boolean isUseMetricUnits() {
-        return sharedPrefs.getBoolean(KEY_METRIC_UNITS, true);
+    public static boolean isUseImperialUnits() {
+        return sharedPrefs.getBoolean(KEY_IMPERIAL_UNITS, false);
     }
 
-    public static void setUseMetricUnits(final boolean metric) {
+    public static void setUseImperialUnits(final boolean imperial) {
         editSharedSettings(new PrefRunnable() {
 
             @Override
             public void edit(Editor edit) {
-                edit.putBoolean(KEY_METRIC_UNITS, metric);
+                edit.putBoolean(KEY_IMPERIAL_UNITS, imperial);
             }
         });
     }
 
     public static boolean isLiveMap() {
         return sharedPrefs.getBoolean(KEY_MAP_LIVE, true);
+    }
+
+    public static void setLiveMap(final boolean live) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_MAP_LIVE, live);
+            }
+        });
     }
 
     public static boolean isMapTrail() {
@@ -956,7 +1011,9 @@ public final class Settings {
      * @return
      */
     private static int getConvertedMapId() {
-        final int id = sharedPrefs.getInt(KEY_MAP_SOURCE, 0);
+        // what the heck is happening here?? hashCodes of Strings?
+        // why not strings?
+        final int id = Integer.parseInt(sharedPrefs.getString(KEY_MAP_SOURCE, "0"));
         switch (id) {
             case GOOGLEMAP_BASEID + MAP:
                 return GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
@@ -987,7 +1044,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_MAP_SOURCE, newMapSource.getNumericalId());
+                edit.putString(KEY_MAP_SOURCE, String.valueOf(newMapSource.getNumericalId()));
             }
         });
         if (newMapSource instanceof OfflineMapSource) {
@@ -1071,11 +1128,11 @@ public final class Settings {
         return keyConsumerSecret;
     }
 
-    public static int getAltCorrection() {
+    public static int getAltitudeCorrection() {
         return sharedPrefs.getInt(KEY_ALTITUDE_CORRECTION, 0);
     }
 
-    public static boolean setAltCorrection(final int altitude) {
+    public static boolean setAltitudeCorrection(final int altitude) {
         return editSharedSettings(new PrefRunnable() {
 
             @Override
@@ -1102,12 +1159,9 @@ public final class Settings {
 
     /**
      * The Threshold for the showing of child waypoints
-     *
-     * @return
      */
-
     public static int getWayPointsThreshold() {
-        return sharedPrefs.getInt(KEY_SHOW_WAYPOINTS_THRESHOLD, 0);
+        return sharedPrefs.getInt(KEY_SHOW_WAYPOINTS_THRESHOLD, SHOW_WP_THRESHOLD_DEFAULT);
     }
 
     public static void setShowWaypointsThreshold(final int threshold) {
@@ -1147,10 +1201,6 @@ public final class Settings {
 
     }
 
-    public static int getVersion() {
-        return sharedPrefs.getInt(KEY_VERSION, 0);
-    }
-
     public static void setTwitterTokens(final String tokenPublic, final String tokenSecret, boolean enableTwitter) {
         editSharedSettings(new PrefRunnable() {
 
@@ -1181,6 +1231,10 @@ public final class Settings {
         String tokenPublic = sharedPrefs.getString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, null);
         String tokenSecret = sharedPrefs.getString(KEY_TEMP_TWITTER_TOKEN_SECRET, null);
         return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
+    }
+
+    public static int getVersion() {
+        return sharedPrefs.getInt(KEY_VERSION, 0);
     }
 
     public static void setVersion(final int version) {
@@ -1275,7 +1329,7 @@ public final class Settings {
                 edit.putBoolean(KEY_DEBUG, debug);
             }
         });
-        Log.setDebugUnsaved(debug);
+        Log.setDebugUnsaved(debug); // TODO
     }
 
     public static boolean getHideLiveMapHint() {
@@ -1403,9 +1457,7 @@ public final class Settings {
     public static File[] getMapThemeFiles() {
 
         File directory = new File(Settings.getCustomRenderThemeBaseFolder());
-
         List<File> result = new ArrayList<File>();
-
         FileUtils.listDir(result, directory, new ExtensionsBasedFileSelector(new String[] { "xml" }), null);
 
         return result.toArray(new File[result.size()]);

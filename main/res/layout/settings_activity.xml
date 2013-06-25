@@ -235,42 +235,42 @@
                 <CheckBox
                     android:id="@+id/autoload"
                     style="@style/checkbox_full"
-                    android:text="@string/init_autoload" />
+                    android:text="@string/init_summary_autoload" />
 
                 <CheckBox
                     android:id="@+id/ratingwanted"
                     style="@style/checkbox_full"
-                    android:text="@string/init_ratingwanted" />
+                    android:text="@string/init_summary_ratingwanted" />
 
                 <CheckBox
                     android:id="@+id/elevationwanted"
                     style="@style/checkbox_full"
-                    android:text="@string/init_elevationwanted" />
+                    android:text="@string/init_summary_elevationwanted" />
 
                 <CheckBox
                     android:id="@+id/friendlogswanted"
                     style="@style/checkbox_full"
-                    android:text="@string/init_friendlogswanted" />
+                    android:text="@string/init_summary_friendlogswanted" />
 
                 <CheckBox
                     android:id="@+id/openlastdetailspage"
                     style="@style/checkbox_full"
-                    android:text="@string/init_openlastdetailspage" />
+                    android:text="@string/init_summary_openlastdetailspage" />
 
                 <CheckBox
                     android:id="@+id/offline"
                     style="@style/checkbox_full"
-                    android:text="@string/init_offline" />
+                    android:text="@string/init_summary_offline" />
 
                 <CheckBox
                     android:id="@+id/offline_wp"
                     style="@style/checkbox_full"
-                    android:text="@string/init_offline_wp" />
+                    android:text="@string/init_summary_offline_wp" />
 
                 <CheckBox
                     android:id="@+id/save_log_img"
                     style="@style/checkbox_full"
-                    android:text="@string/init_save_log_img" />
+                    android:text="@string/init_summary_save_log_img" />
             </LinearLayout>
             <!-- ** -->
 
@@ -293,77 +293,77 @@
                 <CheckBox
                     android:id="@+id/skin"
                     style="@style/checkbox_full"
-                    android:text="@string/init_skin" />
+                    android:text="@string/init_summary_skin" />
 
                 <CheckBox
                     android:id="@+id/address"
                     style="@style/checkbox_full"
-                    android:text="@string/init_address" />
+                    android:text="@string/init_summary_address" />
 
                 <CheckBox
                     android:id="@+id/captcha"
                     style="@style/checkbox_full"
-                    android:text="@string/init_captcha" />
+                    android:text="@string/init_summary_captcha" />
 
                 <CheckBox
                     android:id="@+id/livelist"
                     style="@style/checkbox_full"
-                    android:text="@string/init_livelist" />
+                    android:text="@string/init_summary_livelist" />
 
                 <CheckBox
                     android:id="@+id/loaddirectionimg"
                     style="@style/checkbox_full"
-                    android:text="@string/init_loaddirectionimg" />
+                    android:text="@string/init_summary_loaddirectionimg" />
 
                 <CheckBox
                     android:id="@+id/useenglish"
                     style="@style/checkbox_full"
-                    android:text="@string/init_useenglish" />
+                    android:text="@string/init_summary_useenglish" />
 
                 <CheckBox
                     android:id="@+id/units"
                     style="@style/checkbox_full"
-                    android:text="@string/init_units" />
+                    android:text="@string/init_summary_units" />
 
                 <CheckBox
                     android:id="@+id/exclude"
                     style="@style/checkbox_full"
-                    android:text="@string/init_exclude" />
+                    android:text="@string/init_summary_exclude" />
 
                 <CheckBox
                     android:id="@+id/disabled"
                     style="@style/checkbox_full"
-                    android:text="@string/init_disabled" />
+                    android:text="@string/init_summary_disabled" />
 
                 <CheckBox
                     android:id="@+id/trackautovisit"
                     style="@style/checkbox_full"
-                    android:text="@string/init_trackautovisit" />
+                    android:text="@string/init_summary_trackautovisit" />
 
                 <CheckBox
                     android:id="@+id/log_offline"
                     style="@style/checkbox_full"
-                    android:text="@string/init_log_offline" />
+                    android:text="@string/init_summary_log_offline" />
 
                 <CheckBox
                     android:id="@+id/choose_list"
                     style="@style/checkbox_full"
-                    android:text="@string/init_choose_list" />
+                    android:text="@string/init_summary_choose_list" />
 
                 <CheckBox
                     android:id="@+id/trail"
                     style="@style/checkbox_full"
-                    android:text="@string/init_maptrail" />
+                    android:text="@string/init_summary_maptrail" />
 
                 <CheckBox
                     android:id="@+id/plain_logs"
                     style="@style/checkbox_full"
-                    android:text="@string/init_plain_logs" />
+                    android:text="@string/init_summary_plain_logs" />
 
                 <CheckBox
                     android:id="@+id/use_native_ua"
                     style="@style/checkbox_full"
-                    android:text="@string/init_use_native_ua" />
+                    android:text="@string/init_summary_use_native_ua" />
             </LinearLayout>
             <!-- ** -->
 
@@ -418,7 +418,7 @@
                 android:autoLink="web"
                 android:linksClickable="true"
                 android:padding="3dip"
-                android:text="@string/init_mapsources_description"
+                android:text="@string/settings_info_offline_maps"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
                 android:textSize="14sp" />

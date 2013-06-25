@@ -392,8 +392,6 @@ public class GPXImporter {
     };
 
     final private Handler importStepHandler = new Handler() {
-        private final boolean showProgressAfterCancel = false;
-
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -444,9 +442,6 @@ public class GPXImporter {
                 case IMPORT_STEP_CANCELED:
                     final StringBuilder bufferCanceled = new StringBuilder(20);
                     bufferCanceled.append(res.getString(R.string.gpx_import_canceled));
-                    if (showProgressAfterCancel) {
-                        bufferCanceled.append(", ").append(progress.getProgress()).append(' ').append(res.getString(R.string.gpx_import_caches_imported));
-                    }
                     fromActivity.showShortToast(bufferCanceled.toString());
                     importFinished();
                     break;

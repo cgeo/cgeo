@@ -359,25 +359,42 @@
     <string name="init_signature_template_owner">所有者</string>
     <string name="init_details">キャッシュの詳細</string>
     <string name="init_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
+    <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
     <string name="init_elevationwanted">キャッシュの標高値を取得</string> <!-- 正確に訳すと高度値 -->
+    <string name="init_summary_elevationwanted">キャッシュの標高値を取得</string> <!-- 正確に訳すと高度値 -->
     <string name="init_friendlogswanted">友達の書いたログを別ページに表示</string>
+    <string name="init_summary_friendlogswanted">友達の書いたログを別ページに表示</string>
     <string name="init_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
+    <string name="init_summary_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
     <string name="init_autoload">キャッシュの説明を自動的に全て表示</string>
+    <string name="init_summary_autoload">キャッシュの説明を自動的に全て表示</string>
     <string name="init_other">その他のオプション</string>
     <string name="init_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>
+    <string name="init_summary_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>
     <string name="init_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
+    <string name="init_summary_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
     <string name="init_captcha">必要ならCAPTCHAを表示(ベーシック会員のみ)</string>
+    <string name="init_summary_captcha">必要ならCAPTCHAを表示(ベーシック会員のみ)</string>
     <string name="init_useenglish">英語表示\n(c:geoの再起動が必要)</string>
+    <string name="init_summary_useenglish">英語表示\n(c:geoの再起動が必要)</string>
     <string name="init_exclude">自分で所有または見つけたキャッシュは除く</string>
+    <string name="init_summary_exclude">自分で所有または見つけたキャッシュは除く</string>
     <string name="init_showwaypoints">地図でウェイポイントの表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示します。</string>
     <string name="init_disabled">無効化キャッシュは除く</string>
+    <string name="init_summary_disabled">無効化キャッシュは除く</string>
     <string name="init_offline">オフライン用にキャッシュの地図を保存</string>
+    <string name="init_summary_offline">オフライン用にキャッシュの地図を保存</string>
     <string name="init_offline_wp">オフライン用にウェイポイントの地図を保存</string>
+    <string name="init_summary_offline_wp">オフライン用にウェイポイントの地図を保存</string>
     <string name="init_save_log_img">オフライン用にログの添付画像を保存</string>
+    <string name="init_summary_save_log_img">オフライン用にログの添付画像を保存</string>
     <string name="init_units">距離をマイル/フィートで表示</string>
+    <string name="init_summary_units">距離をマイル/フィートで表示</string>
     <string name="init_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオンラインでの投稿をしない。このチェックを外してもオフライン用に保存することはできます。)</string>
+    <string name="init_summary_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオンラインでの投稿をしない。このチェックを外してもオフライン用に保存することはできます。)</string>
     <string name="init_livelist">キャッシュの一覧で方向をアイコン表示</string>
+    <string name="init_summary_livelist">キャッシュの一覧で方向をアイコン表示</string>
     <string name="init_altitude">標高の修正</string>
     <string name="init_altitude_description">もし現在地の標高が正しくないなら修正できます。正または負のメートル単位で入力してください。</string>
     <string name="init_clear">ログイン情報を消去</string>
@@ -397,7 +414,6 @@
     <string name="init_backup_last">前回バックアップ日時:</string>
     <string name="init_backup_last_no">まだバックアップを取ったことがありません。</string>
     <string name="init_mapsources">地図の設定</string>
-    <string name="init_mapsources_description">オンライン地図をGoogleマップからOpenStreetMap(その派生オンライン地図やオフライン地図)に変更できます。詳細は<a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> (英語)をご覧ください。\nオフライン地図用のテーマも使用できます。</string>
     <string name="init_mapsource_select">地図の選択</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_gpx_exportdir">GPXエクスポートフォルダ</string>
@@ -405,10 +421,13 @@
     <string name="init_gpx_exportdir_description">GPXファイルへエクスポートする際の保存先フォルダを選択できます。</string>
     <string name="init_gpx_importdir_description">GPXファイルへインポートする際の保存先フォルダを選択できます。</string>
     <string name="init_maptrail">地図に軌跡を表示</string>
+    <string name="init_summary_maptrail">地図に軌跡を表示</string>
     <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
     <string name="init_trackautovisit">「見つけた」ログを書く際に、持っているトラッカブルアイテムを自動的に「訪れた」にする</string>
+    <string name="init_summary_trackautovisit">「見つけた」ログを書く際に、持っているトラッカブルアイテムを自動的に「訪れた」にする</string>
     <string name="init_sigautoinsert">署名を自動的に挿入</string>
     <string name="init_loaddirectionimg">必要なら方向アイコンを取得(ベーシック会員のみ)</string>
+    <string name="init_summary_loaddirectionimg">必要なら方向アイコンを取得(ベーシック会員のみ)</string>
     <string name="init_default_navigation_tool">デフォルトのナビ</string>
     <string name="init_default_navigation_tool_description">お好きなナビツールを選択できます。</string>
     <string name="init_default_navigation_tool_select">ナビツールの選択</string>
@@ -424,8 +443,9 @@
     <string name="init_dbmove_success">データベースを移動しました。</string>
     <string name="init_dbmove_failed">データベースの移動に失敗しました</string>
     <string name="init_plain_logs">ログブックのフォントカラーを無効化</string>
+    <string name="init_summary_plain_logs">ログブックのフォントカラーを無効化</string>
     <string name="init_use_native_ua">OSにブラウザとして認識させる\n(特定のインターネットプロバイダ経由でログインできない場合にチェックしてください。)</string>
-    <string name="init_rendertheme_folder">オフライン地図のテーマ用フォルダ(任意)</string>
+    <string name="init_summary_use_native_ua">OSにブラウザとして認識させる\n(特定のインターネットプロバイダ経由でログインできない場合にチェックしてください。)</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Googleマップ:地図</string>

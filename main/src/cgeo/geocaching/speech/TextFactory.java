@@ -22,19 +22,19 @@ public class TextFactory {
     }
 
     private static String getDistance(Geopoint position, Geopoint target) {
-        float kilometers = position.distanceTo(target);
+        final float kilometers = position.distanceTo(target);
 
-        if (Settings.isUseMetricUnits()) {
-            return getDistance(kilometers, (int) (kilometers * 1000.0),
-                    5.0f, 1.0f, 50,
-                    R.plurals.tts_kilometers, R.string.tts_one_kilometer,
-                    R.plurals.tts_meters, R.string.tts_one_meter);
+        if (Settings.isUseImperialUnits()) {
+            return getDistance(kilometers / IConversion.MILES_TO_KILOMETER,
+                    (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET),
+                    3.0f, 0.2f, 300,
+                    R.plurals.tts_miles, R.string.tts_one_mile,
+                    R.plurals.tts_feet, R.string.tts_one_foot);
         }
-        return getDistance(kilometers / IConversion.MILES_TO_KILOMETER,
-                (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET),
-                3.0f, 0.2f, 300,
-                R.plurals.tts_miles, R.string.tts_one_mile,
-                R.plurals.tts_feet, R.string.tts_one_foot);
+        return getDistance(kilometers, (int) (kilometers * 1000.0),
+                5.0f, 1.0f, 50,
+                R.plurals.tts_kilometers, R.string.tts_one_kilometer,
+                R.plurals.tts_meters, R.string.tts_one_meter);
     }
 
     private static String getDistance(float farDistance, int nearDistance,
@@ -42,7 +42,7 @@ public class TextFactory {
             int farId, int farOneId, int nearId, int nearOneId) {
         if (farDistance >= farFarAway) {
             // example: "5 kilometers" - always without decimal digits
-            int quantity = Math.round(farDistance);
+            final int quantity = Math.round(farDistance);
             if (quantity == 1) {
                 return getString(farOneId, quantity, String.valueOf(quantity));
             }
@@ -50,18 +50,18 @@ public class TextFactory {
         }
         if (farDistance >= farNearAway) {
             // example: "2.2 kilometers" - decimals if necessary
-            float precision1 = Math.round(farDistance * 10.0f) / 10.0f;
-            float precision0 = Math.round(farDistance);
-            if (precision1 == precision0) {
+            final float precision1 = Math.round(farDistance * 10.0f) / 10.0f;
+            final float precision0 = Math.round(farDistance);
+            if (Math.abs(precision1 - precision0) < 0.0001) {
                 // this is an int - e.g. 2 kilometers
-                int quantity = (int) precision0;
+                final int quantity = (int) precision0;
                 if (quantity == 1) {
                     return getString(farOneId, quantity, String.valueOf(quantity));
                 }
                 return getQuantityString(farId, quantity, String.valueOf(quantity));
             }
             // this is no int - e.g. 1.7 kilometers
-            String digits = String.format(Locale.getDefault(), "%.1f", farDistance);
+            final String digits = String.format(Locale.getDefault(), "%.1f", farDistance);
             // always use the plural (9 leads to plural)
             return getQuantityString(farId, 9, digits);
         }
@@ -87,7 +87,7 @@ public class TextFactory {
 
     private static String getDirection(Geopoint position, Geopoint target, float direction) {
         final int bearing = (int) position.bearingTo(target);
-        int degrees = (int) AngleUtils.normalize(bearing - direction);
+        final int degrees = (int) AngleUtils.normalize(bearing - direction);
 
         int hours = (degrees + 15) / 30;
         if (hours == 0) {

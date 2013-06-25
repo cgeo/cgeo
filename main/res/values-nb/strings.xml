@@ -205,13 +205,21 @@
     <string name="init_signature">Signatur</string>
     <string name="init_other">Andre instillinger</string>
     <string name="init_skin">Hvitt tema</string>
+    <string name="init_summary_skin">Hvitt tema</string>
     <string name="init_address">Vis adressen i menyen</string>
+    <string name="init_summary_address">Vis adressen i menyen</string>
     <string name="init_exclude">Ekskluder egne og funnede cacher fra kartet</string>
+    <string name="init_summary_exclude">Ekskluder egne og funnede cacher fra kartet</string>
     <string name="init_disabled">Ekskluder deaktiverte cacher</string>
+    <string name="init_summary_disabled">Ekskluder deaktiverte cacher</string>
     <string name="init_offline">Lagre kartet for offline-bruk (små deler)</string>
+    <string name="init_summary_offline">Lagre kartet for offline-bruk (små deler)</string>
     <string name="init_units">Bruk imperialistiske måleenheter</string>
+    <string name="init_summary_units">Bruk imperialistiske måleenheter</string>
     <string name="init_autoload">Last full beskrivelse automatisk</string>
+    <string name="init_summary_autoload">Last full beskrivelse automatisk</string>
     <string name="init_livelist">Vis cachers retning i listen</string>
+    <string name="init_summary_livelist">Vis cachers retning i listen</string>
     <string name="init_clear">Ikke husk meg</string>
     <string name="init_cleared">c:geo fjernet innloggings-opplysningene.</string>
 

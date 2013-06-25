@@ -129,7 +129,7 @@ class GpxExport extends AbstractExport {
 
                     @Override
                     public void publishProgress(int countExported) {
-                        this.publishProgress(countExported);
+                        ExportTask.this.publishProgress(countExported);
                     }
                 });
             } catch (final Exception e) {

@@ -391,26 +391,44 @@
     <string name="init_signature_template_owner">Ägare</string>
     <string name="init_details">Cacheinformation</string>
     <string name="init_ratingwanted">Ladda cache betyg från GCvote.com</string>
+    <string name="init_summary_ratingwanted">Ladda cache betyg från GCvote.com</string>
     <string name="init_elevationwanted">Ladda höjddata för cacher</string>
+    <string name="init_summary_elevationwanted">Ladda höjddata för cacher</string>
     <string name="init_friendlogswanted">Ladda extra sida med loggbok för dina vänner</string>
+    <string name="init_summary_friendlogswanted">Ladda extra sida med loggbok för dina vänner</string>
     <string name="init_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
+    <string name="init_summary_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
     <string name="init_autoload">Ladda full beskrivning automatiskt</string>
+    <string name="init_summary_autoload">Ladda full beskrivning automatiskt</string>
     <string name="init_other">Övriga inställningar</string>
     <string name="init_skin">Vitt skal (kräver omstart av c:geo)</string>
+    <string name="init_summary_skin">Vitt skal (kräver omstart av c:geo)</string>
     <string name="init_address">Visa adress istället för koordinater på startsidan</string>
+    <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_captcha">Visa CAPTCHA (robotfällor) vid behov (enbart för Basic Member)</string>
+    <string name="init_summary_captcha">Visa CAPTCHA (robotfällor) vid behov (enbart för Basic Member)</string>
     <string name="init_useenglish">Använd engelska i c:geo (kräver omstart)</string>
+    <string name="init_summary_useenglish">Använd engelska i c:geo (kräver omstart)</string>
     <string name="init_exclude">Dölj egna och hittade cacher</string>
+    <string name="init_summary_exclude">Dölj egna och hittade cacher</string>
     <string name="init_showwaypoints">Extra punkter på kartan</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan. Bör vara mellan 5 och 50.</string>
     <string name="init_disabled">Dölj inaktiva cacher</string>
+    <string name="init_summary_disabled">Dölj inaktiva cacher</string>
     <string name="init_offline">Spara kartor för cacher för användning offline</string>
+    <string name="init_summary_offline">Spara kartor för cacher för användning offline</string>
     <string name="init_offline_wp">Spara kartor för extra punkter för användning offline</string>
+    <string name="init_summary_offline_wp">Spara kartor för extra punkter för användning offline</string>
     <string name="init_save_log_img">Spara bilder från loggar</string>
+    <string name="init_summary_save_log_img">Spara bilder från loggar</string>
     <string name="init_units">Använd amerikanska enheter för avstånd</string>
+    <string name="init_summary_units">Använd amerikanska enheter för avstånd</string>
     <string name="init_log_offline">Vid loggning: spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
+    <string name="init_summary_log_offline">Vid loggning: spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
     <string name="init_choose_list">Fråga efter lista när cacher sparas</string>
+    <string name="init_summary_choose_list">Fråga efter lista när cacher sparas</string>
     <string name="init_livelist">Visa riktning till cacher i listan</string>
+    <string name="init_summary_livelist">Visa riktning till cacher i listan</string>
     <string name="init_altitude">Höjd justering</string>
     <string name="init_altitude_description">Det är möjligt att justera höjden över havet om din GPS visar fel. Detta görs med ett positivt eller negativt tal, angivet i meter.</string>
     <string name="init_clear">Rensa inloggningsinfo</string>
@@ -430,7 +448,6 @@
     <string name="init_backup_last">Tillgänglig kopia från</string>
     <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
     <string name="init_mapsources">Kartkällor</string>
-    <string name="init_mapsources_description">Här kan du välja vilken kartkälla du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer). Ytterligare valbara teman stödjs också.</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_map_directory_description">Katalog med offline kartor</string>
     <string name="init_gpx_exportdir">GPX-exportkatalog</string>
@@ -438,10 +455,13 @@
     <string name="init_gpx_exportdir_description">Här kan du välja katalog för GPX-exporteringar.</string>
     <string name="init_gpx_importdir_description">Här kan du välja katalog för GPX-importeringar.</string>
     <string name="init_maptrail">Visa spår på kartan</string>
+    <string name="init_summary_maptrail">Visa spår på kartan</string>
     <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
     <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
+    <string name="init_summary_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
     <string name="init_sigautoinsert">Infoga automatiskt i loggar</string>
     <string name="init_loaddirectionimg">Ladda riktningsbild om det behövs (enbart Basic Member)</string>
+    <string name="init_summary_loaddirectionimg">Ladda riktningsbild om det behövs (enbart Basic Member)</string>
     <string name="init_default_navigation_tool">Förvald navigering</string>
     <string name="init_default_navigation_tool_description">Här kan du välja ditt förvalda navigeringsprogram.</string>
     <string name="init_default_navigation_tool_select">Välj program</string>
@@ -457,8 +477,9 @@
     <string name="init_dbmove_success">Databasen har nu flyttats.</string>
     <string name="init_dbmove_failed">Misslyckades att flytta databasen</string>
     <string name="init_plain_logs">Visa loggar utan färger</string>
+    <string name="init_summary_plain_logs">Visa loggar utan färger</string>
     <string name="init_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
-    <string name="init_rendertheme_folder">Katalog för offline kartteman (valfritt)</string>
+    <string name="init_summary_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
