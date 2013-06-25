@@ -378,6 +378,7 @@
     <string name="init_login_popup_ok">Login OK</string>
     <string name="init_login_popup_failed">Login failed</string>
     <string name="init_login_popup_failed_reason">Login failed:</string>
+    <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_twitter_authorize">Authorize c:geo</string>
     <string name="init_twitter_publish">Publish status when a cache has been found</string>
     <string name="init_signature">Signature</string>

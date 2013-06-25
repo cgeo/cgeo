@@ -141,7 +141,6 @@
     <!-- ** -->
 
     <LinearLayout
-        android:id="@+id/info_area"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -149,6 +148,12 @@
         android:layout_marginRight="6dip"
         android:onClick="cgeoNavSettings"
         android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/info_area"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
 
         <TextView
             android:id="@+id/nav_location"

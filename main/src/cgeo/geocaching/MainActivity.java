@@ -77,7 +77,6 @@ public class MainActivity extends AbstractActivity {
     private List<Address> addresses = null;
     private boolean addressObtaining = false;
     private boolean initialized = false;
-    private List<TextView> connectorInfos = new ArrayList<TextView>();
 
     final private UpdateLocation locationUpdater = new UpdateLocation();
 
@@ -89,21 +88,15 @@ public class MainActivity extends AbstractActivity {
             // Get active connectors with login status
             ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
-            // Adjust number of available connector info views
-            LayoutInflater inflater = getLayoutInflater();
-            while (loginConns.length > connectorInfos.size()) {
-                TextView connectorInfo = (TextView) inflater.inflate(R.layout.main_activity_connectorstatus, null);
-                connectorInfos.add(connectorInfo);
-                infoArea.addView(connectorInfo, connectorInfos.size() - 1);
-            }
-            while (loginConns.length < connectorInfos.size()) {
-                infoArea.removeViewAt(connectorInfos.size() - 1);
-                connectorInfos.remove(connectorInfos.size() - 1);
-            }
-
             // Update UI
-            int index = 0;
+            infoArea.removeAllViews();
+            LayoutInflater inflater = getLayoutInflater();
+
             for (ILogin conn : loginConns) {
+
+                TextView connectorInfo = (TextView) inflater.inflate(R.layout.main_activity_connectorstatus, null);
+                infoArea.addView(connectorInfo);
+
                 StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
                 if (conn.isLoggedIn()) {
                     userInfo.append(conn.getUserName());
@@ -114,8 +107,7 @@ public class MainActivity extends AbstractActivity {
                 }
                 userInfo.append(conn.getLoginStatusString());
 
-                connectorInfos.get(index).setText(userInfo.toString());
-                index++;
+                connectorInfo.setText(userInfo);
             }
         }
     };
