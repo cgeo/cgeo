@@ -14,6 +14,7 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
+import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -664,7 +665,7 @@ final public class OkapiClient {
         final JSONObject data = request(connector, OkapiService.SERVICE_USER, params);
 
         if (data == null) {
-            return new UserInfo(StringUtils.EMPTY, 0, false);
+            return new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.FAILED);
         }
 
         String name = StringUtils.EMPTY;
@@ -693,32 +694,7 @@ final public class OkapiClient {
             success = false;
         }
 
-        return new UserInfo(name, finds, success);
-    }
-
-    public static class UserInfo {
-
-        private final String name;
-        private final int finds;
-        private final boolean retrieveSuccessful;
-
-        UserInfo(String name, int finds, boolean retrieveSuccessful) {
-            this.name = name;
-            this.finds = finds;
-            this.retrieveSuccessful = retrieveSuccessful;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getFinds() {
-            return finds;
-        }
-
-        public boolean isRetrieveSuccessful() {
-            return retrieveSuccessful;
-        }
+        return new UserInfo(name, finds, success ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
     }
 
 }

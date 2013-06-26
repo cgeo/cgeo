@@ -5,9 +5,12 @@ import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.SettingsActivity;
 import cgeo.geocaching.cgData;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
@@ -21,10 +24,12 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Handler;
 
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin {
 
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
@@ -105,7 +110,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getName() {
-        return "GeoCaching.com";
+        return "geocaching.com";
     }
 
     @Override
@@ -281,5 +286,47 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             return R.drawable.marker_disabled;
         }
         return R.drawable.marker;
+    }
+
+    @Override
+    public boolean login(Handler handler, Context fromActivity) {
+        // login
+        final StatusCode status = Login.login();
+
+        if (status == StatusCode.NO_ERROR) {
+            cgeoapplication.getInstance().firstRun = false;
+            Login.detectGcCustomDate();
+        }
+
+        if (cgeoapplication.getInstance().showLoginToast && handler != null) {
+            handler.sendMessage(handler.obtainMessage(0, status));
+            cgeoapplication.getInstance().showLoginToast = false;
+
+            // invoke settings activity to insert login details
+            if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
+                SettingsActivity.startActivity(fromActivity);
+            }
+        }
+        return status == StatusCode.NO_ERROR;
+    }
+
+    @Override
+    public String getUserName() {
+        return Login.getActualUserName();
+    }
+
+    @Override
+    public int getCachesFound() {
+        return Login.getActualCachesFound();
+    }
+
+    @Override
+    public String getLoginStatusString() {
+        return Login.getActualStatus();
+    }
+
+    @Override
+    public boolean isLoggedIn() {
+        return Login.isActualLoginStatus();
     }
 }

@@ -5,9 +5,7 @@ import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.gc.Login;
-import cgeo.geocaching.connector.oc.OCApiLiveConnector;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -38,11 +36,13 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -53,8 +53,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AbstractActivity {
-    @InjectView(R.id.user_info_gc) protected TextView userInfoViewGc;
-    @InjectView(R.id.user_info_ocde) protected TextView userInfoViewOcDe;
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
     @InjectView(R.id.filter_button_title)protected TextView filterTitle;
     @InjectView(R.id.map) protected ImageView findOnMap;
@@ -67,6 +65,7 @@ public class MainActivity extends AbstractActivity {
     @InjectView(R.id.nav_accuracy) protected TextView navAccuracy ;
     @InjectView(R.id.nav_location) protected TextView navLocation ;
     @InjectView(R.id.offline_count) protected TextView countBubble ;
+    @InjectView(R.id.info_area) protected LinearLayout infoArea;
 
     private static final String SCAN_INTENT = "com.google.zxing.client.android.SCAN";
     public static final int SEARCH_REQUEST_CODE = 2;
@@ -86,47 +85,30 @@ public class MainActivity extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
 
-            //TODO: Rework to be fully dynamic
-            if (Settings.isGCConnectorActive()) {
-                StringBuilder userInfo = new StringBuilder("geocaching.com").append(Formatter.SEPARATOR);
-                if (Login.isActualLoginStatus()) {
-                    userInfo.append(Login.getActualUserName());
-                    if (Login.getActualCachesFound() >= 0) {
-                        userInfo.append(" (").append(String.valueOf(Login.getActualCachesFound())).append(')');
+            // Get active connectors with login status
+            ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
+
+            // Update UI
+            infoArea.removeAllViews();
+            LayoutInflater inflater = getLayoutInflater();
+
+            for (ILogin conn : loginConns) {
+
+                TextView connectorInfo = (TextView) inflater.inflate(R.layout.main_activity_connectorstatus, null);
+                infoArea.addView(connectorInfo);
+
+                StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
+                if (conn.isLoggedIn()) {
+                    userInfo.append(conn.getUserName());
+                    if (conn.getCachesFound() >= 0) {
+                        userInfo.append(" (").append(String.valueOf(conn.getCachesFound())).append(')');
                     }
                     userInfo.append(Formatter.SEPARATOR);
                 }
-                userInfo.append(Login.getActualStatus());
+                userInfo.append(conn.getLoginStatusString());
 
-                userInfoViewGc.setText(userInfo.toString());
-                userInfoViewGc.setVisibility(View.VISIBLE);
+                connectorInfo.setText(userInfo);
             }
-            else {
-                userInfoViewGc.setVisibility(View.GONE);
-            }
-
-            if (Settings.isOCConnectorActive()) {
-                StringBuilder userInfo = new StringBuilder("opencaching.de").append(Formatter.SEPARATOR);
-                IConnector conn = ConnectorFactory.getConnector("OCXXXX");
-                if (conn instanceof OCApiLiveConnector) {
-                    OCApiLiveConnector ocapiConn = (OCApiLiveConnector) conn;
-                    if (ocapiConn.supportsPersonalization()) {
-                        userInfo.append(ocapiConn.getUserName());
-                        int count = ocapiConn.getCachesFound();
-                        if (count >= 0) {
-                            userInfo.append(" (").append(String.valueOf(count)).append(')');
-                        }
-                    } else {
-                        userInfo.append("Anonymous");
-                    }
-                }
-                userInfoViewOcDe.setText(userInfo.toString());
-                userInfoViewOcDe.setVisibility(View.VISIBLE);
-            }
-            else {
-                userInfoViewOcDe.setVisibility(View.GONE);
-            }
-
         }
     };
 
@@ -728,36 +710,11 @@ public class MainActivity extends AbstractActivity {
                 return;
             }
 
-            //TODO: Rework to be fully dynamic
-            if (Settings.isGCConnectorActive()) {
-                // login
-                final StatusCode status = Login.login();
+            ILogin[] conns = ConnectorFactory.getActiveLiveConnectors();
 
-                if (status == StatusCode.NO_ERROR) {
-                    app.firstRun = false;
-                    Login.detectGcCustomDate();
-                    updateUserInfoHandler.sendEmptyMessage(-1);
-                }
-
-                if (app.showLoginToast) {
-                    firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0, status));
-                    app.showLoginToast = false;
-
-                    // invoke settings activity to insert login details
-                    if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                        SettingsActivity.startActivity(MainActivity.this);
-                    }
-                }
-            }
-            if (Settings.isOCConnectorActive()) {
-                IConnector conn = ConnectorFactory.getConnector("OCXXXX");
-                if (conn instanceof OCApiLiveConnector) {
-                    OCApiLiveConnector ocapiConn = (OCApiLiveConnector) conn;
-                    if (ocapiConn.supportsPersonalization()) {
-                        ocapiConn.retrieveUserInfo();
-                    }
-                    updateUserInfoHandler.sendEmptyMessage(-1);
-                }
+            for (ILogin conn : conns) {
+                conn.login(firstLoginHandler, MainActivity.this);
+                updateUserInfoHandler.sendEmptyMessage(-1);
             }
         }
     }
