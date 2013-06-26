@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;

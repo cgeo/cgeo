@@ -8,6 +8,7 @@
     <string name="detail">Detail</string>
     <string name="search">Vyhledávání</string>
     <string name="settings">Nastavení</string>
+    <string name="settings_titlebar">c:geo Nastavení</string>
     <string name="helpers">Užitečné aplikace</string>
     <string name="about">O aplikaci</string>
     <string name="latitude">Zeměpisná šířka</string>
@@ -353,10 +354,10 @@
     <string name="about_contributors">Přispívající</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
-    <string name="settings_activate_geocachingcom">Aktivace</string>
+    <string name="settings_title_gc">Geocaching.com</string>
+    <string name="settings_activate_gc">Aktivace</string>
     <string name="init_oc">opencaching.de</string>
-    <string name="init_oc_activate">Aktivace opencaching.de na Aktivní mapě a ve vyhledávání</string>
+    <string name="settings_activate_oc">Aktivace opencaching.de na Aktivní mapě a ve vyhledávání</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Uživatelské jméno</string>
@@ -462,7 +463,7 @@
     <string name="init_debug">Generovat ladící informace</string>
     <string name="init_dbonsdcard_title">Umístění databáze</string>
     <string name="init_dbonsdcard_note">Databáze c:geo může být umístěna na SD kartě. Ušetříš tím část interní paměti, avšak za cenu případného snížení rychlosti aplikace. Bez SD karty aplikace nebude následně fungovat.</string>
-    <string name="init_dbonsdcard">Databáze na SD kartě</string>
+    <string name="init_dbonsdcard">Na SD kartě</string>
     <string name="init_dbmove_dbmove">Přesun databáze</string>
     <string name="init_dbmove_running">Přesouvání databáze</string>
     <string name="init_dbmove_success">Databáze úspěšně přesunuta.</string>
@@ -479,7 +480,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
-    <string name="init_sendToCgeo_name">Název tvého zařízení:</string>
+    <string name="init_sendToCgeo_name">Název tvého zařízení</string>
     <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožňuje stahovat keše přímo ze stránky Geocaching.com pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečti <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pokud chceš používat funkci send2cgeo, musíš se zaregistrovat. c:geo bude pracovat normálně i bez registrace.</string>
     <string name="init_sendToCgeo_register">Požádat o registraci</string>
     <string name="init_sendToCgeo_registering">Registrace tvého zařízení pro funkci Poslat do c:geo…</string>

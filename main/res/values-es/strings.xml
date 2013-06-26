@@ -8,6 +8,7 @@
     <string name="detail">Detalle</string>
     <string name="search">Buscar</string>
     <string name="settings">Ajustes</string>
+    <string name="settings_titlebar">c:geo Ajustes</string>
     <string name="helpers">¿Qué instalar?</string>
     <string name="about">Sobre c:geo</string>
     <string name="latitude">Latitud</string>
@@ -388,7 +389,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Enviar a c:geo</string>
-    <string name="init_sendToCgeo_name">Nombre de tu dispositivo:</string>
+    <string name="init_sendToCgeo_name">Nombre de tu dispositivo</string>
     <string name="init_sendToCgeo_description">Enviar a c:geo (send2cgeo)te permite recibir escondites automáticamente desde la web de geocaching usando un complemento especialpara Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. C:geo funciona sin tener que registrar tu dispositivo.</string>
     <string name="init_sendToCgeo_register">Solicitar registro</string>
     <string name="init_sendToCgeo_registering">Registrando "Enviar a c:geo"…</string>

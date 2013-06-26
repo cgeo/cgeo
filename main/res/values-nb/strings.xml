@@ -8,6 +8,7 @@
     <string name="detail">Detalj</string>
     <string name="search">Søk</string>
     <string name="settings">Instillinger</string>
+    <string name="settings_titlebar">c:geo Instillinger</string>
     <string name="about">Om c:geo</string>
 
     <!-- actionbar -->

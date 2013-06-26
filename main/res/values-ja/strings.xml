@@ -8,6 +8,7 @@
     <string name="detail">詳細</string>
     <string name="search">検索</string>
     <string name="settings">設定</string>
+    <string name="settings_titlebar">c:geo 設定</string>
     <string name="helpers">役に立つアプリ</string>
     <string name="about">c:geoについて</string>
     <string name="latitude">緯度</string>
@@ -454,7 +455,7 @@
     <string name="map_source_osm_cyclemap">OpenStreetMap:Cyclemap</string>
     <string name="map_source_osm_offline">オフライン用</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
-    <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
+    <string name="init_sendToCgeo_name">この端末のモデル番号</string>
     <string name="init_sendToCgeo_description"><b>Send 2 c:geo</b>はPCのブラウザ(FirefoxやChrome。InternetExplorerは非対応)で表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。 登録する前に<a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> (英語)をお読みください。簡単な登録とブラウザに拡張機能のインストールが必要です。この<b>Send 2 c:geo</b>機能を使用しないのなら登録は不要です。</string>
     <string name="init_sendToCgeo_register">登録を申請</string>
     <string name="init_sendToCgeo_registering">"Send to c:geo"にこの端末を登録しています…</string>

@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionOverlay;

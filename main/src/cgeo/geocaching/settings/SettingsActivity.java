@@ -1,5 +1,9 @@
-package cgeo.geocaching;
+package cgeo.geocaching.settings;
 
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.SelectMapfileActivity;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -515,7 +519,7 @@ public class SettingsActivity extends AbstractActivity {
 
             @Override
             public void onClick(View v) {
-                Settings.setLogOffline(!Settings.getLogOffline()); // TODO
+                Settings.setLogOffline(!Settings.getLogOffline());
                 logOffline.setChecked(Settings.getLogOffline());
             }
         });
@@ -561,12 +565,7 @@ public class SettingsActivity extends AbstractActivity {
         //Send2cgeo settings
         String webDeviceName = Settings.getWebDeviceName();
 
-        if (StringUtils.isNotBlank(webDeviceName)) {
-            ((EditText) findViewById(R.id.webDeviceName)).setText(webDeviceName);
-        } else {
-            String s = android.os.Build.MODEL;
-            ((EditText) findViewById(R.id.webDeviceName)).setText(s);
-        }
+        ((EditText) findViewById(R.id.webDeviceName)).setText(webDeviceName);
 
         Button webAuth = (Button) findViewById(R.id.sendToCgeo_register);
         webAuth.setOnClickListener(new WebAuthListener());

@@ -8,6 +8,7 @@
     <string name="detail">Detail</string>
     <string name="search">Vyhľadávanie</string>
     <string name="settings">Nastavenie</string>
+    <string name="settings_titlebar">c:geo Nastavenie</string>
     <string name="helpers">Pomocné aplikácie</string>
     <string name="about">O aplikácii</string>
     <string name="latitude">Zemepisná šírka</string>
@@ -433,7 +434,7 @@
     <string name="init_debug">Generovanie ladiacich informácií</string>
     <string name="init_dbonsdcard_title">Umiestnenie databázy</string>
     <string name="init_dbonsdcard_note">Databázu c:geo môžete umiestniť na externé úložisko. Ak to spravíte, ušetríte vnútornú pamäť, ale môžete stratiť časť z výkonu a c:geo nebude fungovať, keď vaša SD karta nebude dostupná.</string>
-    <string name="init_dbonsdcard">Databáza na externom úložisku</string>
+    <string name="init_dbonsdcard">Na externom úložisku</string>
     <string name="init_dbmove_dbmove">Presúvanie databázy</string>
     <string name="init_dbmove_running">Prebieha presúvanie databázy</string>
     <string name="init_dbmove_success">Databáza bola úspešne presunutá.</string>
@@ -450,7 +451,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyklomapa</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Poslať do c:geo</string>
-    <string name="init_sendToCgeo_name">Názov vášho zariadenia:</string>
+    <string name="init_sendToCgeo_name">Názov vášho zariadenia</string>
     <string name="init_sendToCgeo_description">Poslanie do c:geo umožní prijímanie skrýš priamo z geocaching webu použitím špeciálneho rozšírenia do Firefoxu či Chrome. Pred registráciou si prosím prečítajte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registrovať sa potrebujete iba ak budete používať send2cgeo. C:geo bude fungovať i bez registrovaného zariadenia.</string>
     <string name="init_sendToCgeo_register">Žiadosť o registráciu</string>
     <string name="init_sendToCgeo_registering">Registrácia zariadenia pre „Poslať do c:geo“…</string>

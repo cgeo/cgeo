@@ -1,7 +1,7 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.preference.Preference;

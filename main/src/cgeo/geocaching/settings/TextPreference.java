@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.R;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 public class TextPreference extends Preference {
 
     private String text;
+    private TextView summaryView;
+    private CharSequence summaryText;
 
     public TextPreference(Context context) {
         super(context);
@@ -50,9 +54,33 @@ public class TextPreference extends Preference {
         this.setSelectable(false);
 
         View v = super.onCreateView(parent);
-        if (v instanceof TextView) {
-            ((TextView) v).setText(this.text);
-        }
+
+        TextView text = (TextView) v.findViewById(R.id.textPreferenceText);
+        text.setText(this.text);
+
+        summaryView = (TextView) v.findViewById(R.id.textPreferenceSummary);
+        setSummary(null); // show saved summary text
+
         return v;
+    }
+
+    @Override
+    public void setSummary(CharSequence summaryText) {
+        // the layout hasn't been inflated yet, save the summaryText for later use
+        if (this.summaryView == null) {
+            this.summaryText = summaryText;
+            return;
+        }
+
+        // if summaryText is null, take it from the previous saved summary
+        if (summaryText == null) {
+            if (this.summaryText == null) {
+                return;
+            }
+            this.summaryView.setText(this.summaryText);
+        } else {
+            this.summaryView.setText(summaryText);
+        }
+        this.summaryView.setVisibility(View.VISIBLE);
     }
 }

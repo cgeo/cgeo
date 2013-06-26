@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider.Smiley;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;

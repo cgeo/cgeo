@@ -2,7 +2,7 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.StringUtils;

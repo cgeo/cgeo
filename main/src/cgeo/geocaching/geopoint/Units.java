@@ -1,6 +1,6 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 

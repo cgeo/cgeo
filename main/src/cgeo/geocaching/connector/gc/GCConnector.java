@@ -4,7 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;

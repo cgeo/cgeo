@@ -14,6 +14,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.settings.NewSettingsActivity;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -747,9 +749,9 @@ public class MainActivity extends AbstractActivity {
                     firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0, status));
                     app.showLoginToast = false;
 
-                    // invoke settings activity to insert login details
+                    // invoke settings activity to enter login details
                     if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                        SettingsActivity.startActivity(MainActivity.this);
+                        NewSettingsActivity.startWithServicesPage(MainActivity.this);
                     }
                 }
             }

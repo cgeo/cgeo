@@ -8,6 +8,7 @@
     <string name="detail">Detaljer</string>
     <string name="search">Sök</string>
     <string name="settings">Inställningar</string>
+    <string name="settings_titlebar">c:geo Inställningar</string>
     <string name="helpers">Bra program att installera</string>
     <string name="about">Om c:geo</string>
     <string name="latitude">Latitud</string>
@@ -471,7 +472,7 @@
     <string name="init_debug">Generera debug information</string>
     <string name="init_dbonsdcard_title">Databasplacering</string>
     <string name="init_dbonsdcard_note">Du kan placera c:geos databas på ditt minneskort. På detta sätt kan du spara internminne, men du kan också få något sämre prestanda och c:geo kommer inte fungera om ditt minneskort inte är tillgängligt (exempelvis när den är kopplad till en dator).</string>
-    <string name="init_dbonsdcard">Databas på minneskort</string>
+    <string name="init_dbonsdcard">På minneskort</string>
     <string name="init_dbmove_dbmove">Flyttar databasen</string>
     <string name="init_dbmove_running">Flyttar databasen</string>
     <string name="init_dbmove_success">Databasen har nu flyttats.</string>
@@ -488,7 +489,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
-    <string name="init_sendToCgeo_name">Namnet på din enhet:</string>
+    <string name="init_sendToCgeo_name">Namnet på din enhet</string>
     <string name="init_sendToCgeo_description">Skicka till c:geo (send2cgeo) gör det möjligt att ta emot cacher direkt från geocaching hemsidan genom att använda en speciell plugin till Firefox eller Chrome. Läs detta innan registrering: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du behöver bara registrera din enhet om du kommer att använda send2cgeo. C:geo fungerar även utan registrering.</string>
     <string name="init_sendToCgeo_register">Registrera din enhet</string>
     <string name="init_sendToCgeo_registering">Registrerar din enhet för "send2cgeo"…</string>

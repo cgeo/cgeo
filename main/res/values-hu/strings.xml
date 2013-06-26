@@ -8,6 +8,7 @@
     <string name="detail">Részletek</string>
     <string name="search">Keresés</string>
     <string name="settings">Beállítások</string>
+    <string name="settings_titlebar">c:geo Beállítások</string>
     <string name="helpers">Hasznos segédprogramok</string>
     <string name="about">A c:geo-ról</string>
     <string name="latitude">Szélesség</string>
@@ -426,7 +427,7 @@
     <string name="init_debug">Hibakeresési információ generálása</string>
     <string name="init_dbonsdcard_title">Adatbázis helye</string>
     <string name="init_dbonsdcard_note">Elmentheted az adatbázist a külső eszközön is. Ezzel belső memóriát takaríthatsz meg, de a teljesítmény csökkenhet és a c:geo nem fog tudni működni ha az SD kártya nem hozzáférhető.</string>
-    <string name="init_dbonsdcard">Az adatbázis a külső eszközön</string>
+    <string name="init_dbonsdcard">A külső eszközön</string>
     <string name="init_dbmove_dbmove">Adatbázis mozgatása</string>
     <string name="init_dbmove_running">Adatbázis mozgatása</string>
     <string name="init_dbmove_success">Az adatbázis mozgatása sikeresen lezajlott</string>
@@ -443,7 +444,7 @@
     <string name="map_source_osm_cyclemap">OSM: Biciklis térkép</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Küldés a c:geo-hoz</string>
-    <string name="init_sendToCgeo_name">Az eszközöd neve:</string>
+    <string name="init_sendToCgeo_name">Az eszközöd neve</string>
     <string name="init_sendToCgeo_description">A c:geo-hoz küldés segítségével közvetlenül a geocaching weboldalról tölthetsz le ládákat egy Firefox vagy Chrome modul segítségével. Regisztráció előtt olvasd el a leírást <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Csak akkor kell regisztrálnod, ha a c:geo-hoz küldést használni akarod. A C:geo a regisztráció nélkül is működik.</string>
     <string name="init_sendToCgeo_register">Regisztráció igénylése</string>
     <string name="init_sendToCgeo_registering">Az eszközöd regisztrációja a c:geo-hoz küldéshez…</string>

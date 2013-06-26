@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgeoapplication;

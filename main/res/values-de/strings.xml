@@ -8,6 +8,7 @@
     <string name="detail">Details</string>
     <string name="search">Suche</string>
     <string name="settings">Einstellungen</string>
+    <string name="settings_titlebar">c:geo Einstellungen</string>
     <string name="helpers">Nützliche Apps</string>
     <string name="about">Über c:geo</string>
     <string name="latitude">Breitengrad</string>
@@ -473,7 +474,7 @@
     <string name="init_debug">Debug-Log aktivieren</string>
     <string name="init_dbonsdcard_title">Datenspeicherung</string>
     <string name="init_dbonsdcard_note">Die Datenbank von c:geo kann auf eine externe Speicherkarte verschoben werden. Hiermit kann interner Speicher gespart werden, allerdings wird sich die Leistung etwas reduzieren und c:geo funktioniert nicht mehr ohne verfügbare Speicherkarte.</string>
-    <string name="init_dbonsdcard">Datenbank auf externer Karte</string>
+    <string name="init_dbonsdcard">Auf externe Karte</string>
     <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
     <string name="init_dbmove_running">Verschiebe Datenbank</string>
     <string name="init_dbmove_success">Die Datenbank wurde erfolgreich verschoben.</string>
@@ -490,7 +491,7 @@
     <string name="map_source_osm_cyclemap">OSM: Radfahrerkarte</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
-    <string name="init_sendToCgeo_name">Name des Endgerätes:</string>
+    <string name="init_sendToCgeo_name">Name des Endgerätes</string>
     <string name="init_sendToCgeo_description">Send to c:geo erlaubt es, mit einem speziellen Plugin für Firefox oder Chrome, Caches direkt von der Geocachingseite zu empfangen. Bitte dazu die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durchlesen.</string>
     <string name="init_sendToCgeo_register">Registrierung anfordern</string>
     <string name="init_sendToCgeo_registering">Das Gerät wird für "Send to c:geo" registriert…</string>

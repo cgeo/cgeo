@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;

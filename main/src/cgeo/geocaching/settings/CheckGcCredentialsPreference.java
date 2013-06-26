@@ -1,6 +1,6 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.Login;

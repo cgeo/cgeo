@@ -1,7 +1,7 @@
 package cgeo.geocaching.speech;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.IConversion;

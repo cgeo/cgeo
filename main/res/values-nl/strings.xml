@@ -8,6 +8,7 @@
     <string name="detail">Detail</string>
     <string name="search">Zoeken</string>
     <string name="settings">Instellingen</string>
+    <string name="settings_titlebar">c:geo Instellingen</string>
     <string name="helpers">Wat te installeren</string>
     <string name="about">Over c:geo</string>
     <string name="latitude">Breedtegraad</string>
@@ -445,7 +446,7 @@
     <string name="init_debug">Genereer debug informatie.</string>
     <string name="init_dbonsdcard_title">Database locatie</string>
     <string name="init_dbonsdcard_note">Je kan de c:geo database op een externe locatie opslaan. Dit zal intern geheugen besparen maar kan de applicatie iets trager maken en c:geo zal niet werken als het externe medium (zoals een (micro-)SD-kaart) verwijderd is.</string>
-    <string name="init_dbonsdcard">Database op externe locatie.</string>
+    <string name="init_dbonsdcard">Op externe locatie.</string>
     <string name="init_dbmove_dbmove">Verplaats database</string>
     <string name="init_dbmove_running">Verplaats database</string>
     <string name="init_dbmove_success">Database succesvol verplaatst.</string>
@@ -462,7 +463,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
-    <string name="init_sendToCgeo_name">Jouw apparaatnaam:</string>
+    <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
     <string name="init_sendToCgeo_description">Verstuur naar c:geo zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Firefox of Chrome). Lees het volgende voordat je registreert <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. C:geo werkt ook zonder het registreren van je apparaat.</string>
     <string name="init_sendToCgeo_register">Verstuur registratieverzoek</string>
     <string name="init_sendToCgeo_registering">Bezig met het registreren voor "Send to c:geo"…</string>

@@ -8,6 +8,7 @@
     <string name="detail">Detalhes</string>
     <string name="search">Pesquisar</string>
     <string name="settings">Definições</string>
+    <string name="settings_titlebar">c:geo Definições</string>
     <string name="helpers">Apps Úteis</string>
     <string name="about">Sobre c:geo</string>
     <string name="latitude">Latitude</string>
@@ -433,7 +434,7 @@
     <string name="init_debug">Gerar informação de depuração</string>
     <string name="init_dbonsdcard_title">Localização da base de dados</string>
     <string name="init_dbonsdcard_note">Pode armazenar a base de dados do c:geo no armazenamento externo. Se o fizer vai poupar memória interna, mas pode perder um pouco de performance e o c:geo pode não funcionar se o armazenamento externo não estiver disponível.</string>
-    <string name="init_dbonsdcard">base de dados no armazenamento externo</string>
+    <string name="init_dbonsdcard">No armazenamento externo</string>
     <string name="init_dbmove_dbmove">A mover a base de dados</string>
     <string name="init_dbmove_running">A mover a base de dados</string>
     <string name="init_dbmove_success">Base de dados movida com sucesso.</string>
@@ -450,7 +451,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
-    <string name="init_sendToCgeo_name">Nome do seu dispositivo:</string>
+    <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
     <string name="init_sendToCgeo_description">Enviar para o c: geo permite-lhe receber caches directamente do site Geocaching.com, utilizando um plugin especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Apenas necessita de registar, se pretender utilizar o send2cgeo. O c:geo irá funcionar mesmo sem este registo.</string>
     <string name="init_sendToCgeo_register">Solicitar registo</string>
     <string name="init_sendToCgeo_registering">Registando o seu dispositivo para "Enviar para o c:geo"…</string>

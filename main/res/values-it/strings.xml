@@ -8,6 +8,7 @@
     <string name="detail">Dettaglio</string>
     <string name="search">Cerca</string>
     <string name="settings">Settaggi</string>
+    <string name="settings_titlebar">c:geo Settaggi</string>
     <string name="helpers">Apps utili</string>
     <string name="about">Info c:geo</string>
     <string name="latitude">Latitudine</string>
@@ -473,7 +474,7 @@
     <string name="init_debug">Genera informazioni di debug</string>
     <string name="init_dbonsdcard_title">Posizione Database</string>
     <string name="init_dbonsdcard_note">Puoi decidere di salvare il database su memoria esterna. In questo caso risparmierai memoria interna ma potresti perdere un pochino di velocità e c:geo non funzionerà se la tua sdcard non sarà disponibile.</string>
-    <string name="init_dbonsdcard">Database su memoria esterna</string>
+    <string name="init_dbonsdcard">Su memoria esterna</string>
     <string name="init_dbmove_dbmove">Spostamento Database</string>
     <string name="init_dbmove_running">Spostamento Database</string>
     <string name="init_dbmove_success">Database spostato con successo.</string>
@@ -489,7 +490,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
-    <string name="init_sendToCgeo_name">Nome dispositivo:</string>
+    <string name="init_sendToCgeo_name">Nome dispositivo</string>
     <string name="init_sendToCgeo_description">\"Send to c:geo\" permette di ricevere cache direttamente dal sito geocaching.com tramite un plugin speciale per Firefox o Chrome. Prima della registrazione leggere <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. È necessario registrare questo dispositivo solo se intendi usare send2cgeo. C:geo funzionerà anche senza questa registrazione e senza send2cgeo.</string>
     <string name="init_sendToCgeo_register">Richiedi registrazione</string>
     <string name="init_sendToCgeo_registering">Registrazione in corso a \"Send to c:geo\"…</string>

@@ -1,6 +1,7 @@
 package cgeo.geocaching.speech;
 
 import cgeo.geocaching.DirectionProvider;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -37,8 +38,8 @@ public class SpeechService extends Service implements OnInitListener {
     private boolean initialized = false;
     protected float direction;
     protected Geopoint position;
-    protected boolean directionInitialized;
-    protected boolean positionInitialized;
+    protected boolean directionInitialized = !Settings.isUseCompass(); // don't wait for magnetometer, if it shall not be used
+    protected boolean positionInitialized = false;
 
     GeoDirHandler geoHandler = new GeoDirHandler() {
         @Override

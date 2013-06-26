@@ -131,15 +131,15 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/settings"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity 
             android:name=".settings.NewSettingsActivity"
-            android:label="@string/newsettings"
-            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:label="@string/settings_titlebar"
+            android:theme="@style/settings"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity

@@ -8,6 +8,7 @@
     <string name="detail">Szczegóły</string>
     <string name="search">Szukaj</string>
     <string name="settings">Ustawienia</string>
+    <string name="settings_titlebar">c:geo Ustawienia</string>
     <string name="helpers">Przydatne programy</string>
     <string name="about">O c:geo</string>
     <string name="latitude">Szerokość geograficzna</string>
@@ -463,7 +464,7 @@
     <string name="init_debug">Generuj informację o błędach</string>
     <string name="init_dbonsdcard_title">Położenie bazy danych</string>
     <string name="init_dbonsdcard_note">Możesz przechowywać bazę danych c:geo na zewnętrznym urządzeniu. Dzięki temu zaoszczędzisz miejsce w pamięci wewnętrznej, ale wydajność może zmniejszyć się trochę, a c:geo nie będzie mógł pracować jeśli Twoja karta SD będzie niedostępna.</string>
-    <string name="init_dbonsdcard">Baza danych na zewnętrznym urządzeniu</string>
+    <string name="init_dbonsdcard">Na zewnętrznym urządzeniu</string>
     <string name="init_dbmove_dbmove">Przenoszę bazę danych</string>
     <string name="init_dbmove_running">Przenoszę bazę danych</string>
     <string name="init_dbmove_success">Baza danych została przeniesiona.</string>
@@ -480,7 +481,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
-    <string name="init_sendToCgeo_name">Nazwa urządzenia:</string>
+    <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
     <string name="init_sendToCgeo_description"><b>Wyślij do c:geo</b> pozwala Tobie odbierać skrzynki bezpośrednio ze strony geocaching.com za pomocą specjalnego pluginu do przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest wymagana tylko jeśli będziesz używać send2cgeo. c:geo będzie normalnie działał również bez rejestracji urządzenia.</string>
     <string name="init_sendToCgeo_register">Poproś o rejestrację</string>
     <string name="init_sendToCgeo_registering">Rejestruję Twoje urządzenie do \"Wyślij do c:geo\"…</string>

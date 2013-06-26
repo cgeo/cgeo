@@ -5,7 +5,7 @@ import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;

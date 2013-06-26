@@ -1,7 +1,7 @@
 package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;

@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen 
     xmlns:android="http://schemas.android.com/apk/res/android" 
-    xmlns:cgeo="http://schemas.android.com/apk/res/cgeo.geocaching" >
+    xmlns:cgeo="http://schemas.android.com/apk/res/cgeo.geocaching"
+    android:key="fakekey_main_screen" >
 
     <PreferenceScreen
-        android:title="@string/settings_screen_services_title"
-        android:icon="@drawable/attribute_wirelessbeacon" >
+        android:title="@string/settings_title_services"
+        android:icon="?attr/settings_cloud"
+        android:key="fakekey_services_screen" >
 
         <PreferenceCategory
-            android:title="@string/settings_screen_gc_title" >
+            android:title="@string/settings_title_gc" >
 
             <cgeo.geocaching.settings.CheckBoxWithPopupPreference 
                 android:key="connectorGCActive" 
                 android:title="@string/settings_activate_gc"
-                cgeo:title="@string/settings_screen_gc_title"
+                cgeo:title="@string/settings_title_gc"
                 cgeo:text="@string/settings_gc_legal_note"
                 cgeo:url="@string/settings_gc_legal_note_url"
                 cgeo:urlButton="@string/settings_goto_url_button"
-                android:defaultValue="false" />
+                android:defaultValue="true" />
             <EditTextPreference
                 android:key="username"
                 android:title="@string/init_username"
@@ -34,7 +36,12 @@
             <cgeo.geocaching.settings.CheckGcCredentialsPreference 
                 android:title="@string/init_login"
                 android:dependency="connectorGCActive" />
-
+            <cgeo.geocaching.settings.InfoPreference 
+                android:title="@string/settings_info_facebook_login_title"
+                android:text="@string/settings_info_facebook_login"
+                cgeo:url="@string/settings_facebook_login_url"
+                cgeo:urlButton="@string/settings_goto_url_button" />
+            
         </PreferenceCategory>
 
         <PreferenceCategory
@@ -80,9 +87,26 @@
             <cgeo.geocaching.settings.AuthorizeTwitterPreference 
                 android:title="@string/init_twitter_authorize" 
                 android:dependency="twitter" />
-            
+
         </PreferenceCategory>
-        
+
+        <PreferenceCategory
+            android:title="@string/init_sendToCgeo" >
+
+            <cgeo.geocaching.settings.InfoPreference 
+                android:title="@string/settings_info_send2cgeo_title"
+                android:text="@string/init_sendToCgeo_description"
+                cgeo:url="@string/settings_send2cgeo_url"
+                cgeo:urlButton="@string/settings_goto_url_button" />
+            <EditTextPreference
+                android:key="webDeviceName"
+                android:title="@string/init_sendToCgeo_name"
+                android:dialogTitle="@string/init_sendToCgeo_name" />
+            <cgeo.geocaching.settings.RegisterSend2CgeoPreference
+                android:title="@string/init_sendToCgeo_register" />
+
+        </PreferenceCategory>
+
         <PreferenceCategory
             android:title="@string/settings_category_browser" >
 
@@ -93,13 +117,13 @@
                 android:defaultValue="false" />
                 
         </PreferenceCategory>
-        
+
     </PreferenceScreen>
-    
+
     <PreferenceScreen
-        android:title="@string/settings_screen_appearance_title"
-        android:icon="@drawable/attribute_scenic" >
-    
+        android:title="@string/settings_title_appearance"
+        android:icon="?attr/settings_eye" >
+
         <CheckBoxPreference 
             android:key="skin"
             android:title="@string/init_skin"
@@ -120,13 +144,13 @@
             android:title="@string/init_units"
             android:summary="@string/init_summary_units"
             android:defaultValue="false" />
-        
+
     </PreferenceScreen>
-    
+
     <PreferenceScreen
-        android:title="@string/settings_screen_cachedetails_title"
-        android:icon="@drawable/attribute_field_puzzle" >
-        
+        android:title="@string/settings_title_cachedetails"
+        android:icon="?attr/settings_details" >
+
         <CheckBoxPreference 
             android:key="autoloaddesc"
             android:title="@string/init_autoload"
@@ -172,12 +196,12 @@
             android:title="@string/init_plain_logs"
             android:summary="@string/init_summary_plain_logs"
             android:defaultValue="false" />
-        
+
     </PreferenceScreen>
-    
+
     <PreferenceScreen
-        android:title="@string/settings_screen_logging_title"
-        android:icon="@drawable/ic_menu_edit" >
+        android:title="@string/settings_title_logging"
+        android:icon="?attr/settings_pen" >
 
         <PreferenceCategory 
             android:title="@string/init_signature">
@@ -185,14 +209,13 @@
             <cgeo.geocaching.settings.LogSignaturePreference
                 android:key="signature"
                 android:title="@string/init_signature" />
-                
             <CheckBoxPreference 
                 android:key="sigautoinsert" 
                 android:title="@string/init_sigautoinsert"
                 android:defaultValue="true" />
-            
+
         </PreferenceCategory>
-        
+
         <PreferenceCategory 
             android:title="@string/init_signature">
 
@@ -206,14 +229,14 @@
                 android:title="@string/init_log_offline"
                 android:summary="@string/init_summary_log_offline"
                 android:defaultValue="false" />
-                
+
         </PreferenceCategory>
 
     </PreferenceScreen>
-    
+
     <PreferenceScreen
-        android:title="@string/settings_screen_offlinedata_title"
-        android:icon="@drawable/ic_menu_save" >
+        android:title="@string/settings_title_offlinedata"
+        android:icon="?attr/settings_sdcard" >
 
         <CheckBoxPreference 
             android:key="offlinemaps"
@@ -237,84 +260,174 @@
             android:defaultValue="false" />
 
     </PreferenceScreen>
-    
+
     <PreferenceScreen
-        android:title="@string/settings_screen_map_title"
-        android:icon="@drawable/ic_menu_mapmode" >
+        android:title="@string/settings_title_map"
+        android:icon="?attr/settings_map" >
+
+        <PreferenceCategory 
+            android:title="@string/settings_title_map_data" >
+
+            <ListPreference
+                android:key="mapsource"
+                android:title="@string/init_mapsource_select"
+                android:dialogTitle="@string/init_mapsource_select"
+                android:defaultValue="0" />
     
-        <CheckBoxPreference 
-            android:key="maptrail"
-            android:title="@string/init_maptrail"
-            android:summary="@string/init_summary_maptrail"
-            android:defaultValue="true" />
+            <cgeo.geocaching.settings.InfoPreference 
+                android:title="@string/settings_info_offline_maps_title"
+                android:text="@string/settings_info_offline_maps"
+                cgeo:url="@string/settings_offline_maps_url"
+                cgeo:urlButton="@string/settings_goto_url_button" />
+    
+            <Preference
+                android:key="mapDirectory"
+                android:title="@string/init_map_directory_description" />
+    
+            <cgeo.geocaching.settings.InfoPreference 
+                android:title="@string/settings_info_themes_title"
+                android:text="@string/settings_info_themes"
+                cgeo:url="@string/settings_themes_url"
+                cgeo:urlButton="@string/settings_goto_url_button" />
+    
+            <Preference
+                android:key="renderthemepath"
+                android:title="@string/init_rendertheme_folder" />
 
-        <Preference
-            android:title="@string/init_showwaypoints"
-            android:summary="@string/init_showwaypoint_description"
-            android:selectable="false" />
-        <cgeo.geocaching.settings.WpThresholdPreference
-            android:key="gcshowwaypointsthreshold"
-            android:layout="@layout/wp_threshold_preference" />
+        </PreferenceCategory>
 
-        <ListPreference
-            android:key="mapsource"
-            android:title="@string/init_mapsource_select"
-            android:dialogTitle="@string/init_mapsource_select"
-            android:defaultValue="0" />
+        <PreferenceCategory 
+            android:title="@string/settings_title_map_content" >
 
-        <cgeo.geocaching.settings.InfoPreference 
-            android:title="@string/settings_info_offline_maps_title"
-            android:text="@string/settings_info_offline_maps"
-            cgeo:url="@string/settings_offline_maps_url"
-            cgeo:urlButton="@string/settings_goto_url_button" />
+            <CheckBoxPreference 
+                android:key="maptrail"
+                android:title="@string/init_maptrail"
+                android:summary="@string/init_summary_maptrail"
+                android:defaultValue="true" />
+    
+            <Preference
+                android:title="@string/init_showwaypoints"
+                android:summary="@string/init_showwaypoint_description"
+                android:selectable="false" />
+            <cgeo.geocaching.settings.WpThresholdPreference
+                android:key="gcshowwaypointsthreshold"
+                android:layout="@layout/wp_threshold_preference" />
 
+        </PreferenceCategory>
 
-        <cgeo.geocaching.settings.InfoPreference 
-            android:title="@string/settings_info_themes_title"
-            android:text="@string/settings_info_themes"
-            cgeo:url="@string/settings_themes_url"
-            cgeo:urlButton="@string/settings_goto_url_button" />
+    </PreferenceScreen>
 
-        <Preference
-            android:key="renderthemepath"
-            android:title="@string/init_rendertheme_folder" />
+    <PreferenceScreen
+        android:title="@string/settings_title_miscellaneous"
+        android:icon="?attr/settings_nut" >
+
+        <PreferenceCategory 
+            android:title="@string/init_default_navigation_tool" > 
+
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_default_navigation_tool_description" />
+
+            <ListPreference
+                android:key="defaultNavigationTool"
+                android:title="@string/init_default_navigation_tool_select"
+                android:dialogTitle="@string/init_default_navigation_tool_select"
+                android:defaultValue="0" />
+
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_default_navigation_tool_2_description" />
+
+            <ListPreference
+                android:key="defaultNavigationTool2"
+                android:title="@string/init_default_navigation_tool_select"
+                android:dialogTitle="@string/init_default_navigation_tool_select"
+                android:defaultValue="0" />
+
+        </PreferenceCategory>
         
+        <PreferenceCategory
+            android:title="@string/settings_title_gpx" >
+
+            <Preference
+                android:key="gpxExportDir"
+                android:title="@string/init_gpx_exportdir" />
+            <Preference
+                android:key="gpxImportDir"
+                android:title="@string/init_gpx_importdir" />
+
+        </PreferenceCategory>
+    
+        <PreferenceCategory
+            android:title="@string/settings_title_basicmembers" >
+    
+            <CheckBoxPreference 
+                android:key="showcaptcha"
+                android:title="@string/init_captcha"
+                android:summary="@string/init_summary_captcha"
+                android:defaultValue="false" />
+            <CheckBoxPreference 
+                android:key="loaddirectionimg"
+                android:title="@string/init_loaddirectionimg"
+                android:summary="@string/init_summary_loaddirectionimg"
+                android:defaultValue="true" />
+    
+        </PreferenceCategory>
+
+        <PreferenceCategory 
+            android:title="@string/init_altitude" >
+
+            <cgeo.geocaching.settings.NumberPickerPreference
+                android:key="altcorrection"
+                android:dialogLayout="@layout/number_picker_preference"
+                android:dialogMessage="@string/init_altitude_description"
+                android:title="@string/init_altitude"
+                android:defaultValue="0" />
+        
+        </PreferenceCategory>
+
+        <PreferenceCategory 
+            android:title="@string/init_backup" >
+
+            <cgeo.geocaching.settings.TextPreference
+                android:key="fakekey_preference_backup_info"
+                android:layout="@layout/text_preference"
+                android:text="@string/init_backup_note" />
+            <Preference 
+                android:key="fakekey_preference_backup"
+                android:title="@string/init_backup_backup" />
+            <Preference 
+                android:key="fakekey_preference_restore"
+                android:title="@string/init_backup_restore" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory 
+            android:title="@string/init_dbonsdcard_title" >
+
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_dbonsdcard_note" />
+            <CheckBoxPreference 
+                android:key="dbonsdcard"
+                android:title="@string/init_dbonsdcard"
+                android:defaultValue="false" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory 
+            android:title="@string/init_debug_title" >
+
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_debug_note" />
+            <CheckBoxPreference 
+                android:key="debug"
+                android:title="@string/init_debug"
+                android:defaultValue="false" />
+
+        </PreferenceCategory>
+
     </PreferenceScreen>
 
-    <PreferenceScreen
-        android:title="@string/settings_screen_gpx_title"
-        android:icon="@drawable/attribute_letterbox" >
-
-        <Preference
-            android:key="gpxExportDir"
-            android:title="@string/init_gpx_exportdir" />
-
-        <Preference
-            android:key="gpxImportDir"
-            android:title="@string/init_gpx_importdir" />
-    
-    </PreferenceScreen>
-
-    <PreferenceScreen
-        android:title="@string/settings_screen_basicmembers_title"
-        android:icon="@drawable/attribute_frontyard" >
-
-        <CheckBoxPreference 
-            android:key="showcaptcha"
-            android:title="@string/init_captcha"
-            android:summary="@string/init_summary_captcha"
-            android:defaultValue="false" />
-        <CheckBoxPreference 
-            android:key="loaddirectionimg"
-            android:title="@string/init_loaddirectionimg"
-            android:summary="@string/init_summary_loaddirectionimg"
-            android:defaultValue="true" />
-    
-    </PreferenceScreen>
-    
-    <PreferenceScreen
-        android:title="@string/settings_screen_miscellaneous_title"
-        android:icon="@drawable/attribute_s_tool" >
-    </PreferenceScreen>
-    
 </PreferenceScreen>

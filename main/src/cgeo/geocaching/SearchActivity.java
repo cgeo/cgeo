@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.GeoDirHandler;

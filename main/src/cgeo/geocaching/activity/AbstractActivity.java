@@ -2,7 +2,7 @@ package cgeo.geocaching.activity;
 
 import butterknife.Views;
 
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;

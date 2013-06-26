@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;

@@ -2,31 +2,36 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.SelectMapfileActivity;
+import cgeo.geocaching.cgData;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
+import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
 
-import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -51,13 +56,11 @@ import java.util.List;
  * @author koem (initial author)
  */
 public class NewSettingsActivity extends PreferenceActivity {
-    /**
-     * Determines whether to always show the simplified settings UI, where
-     * settings are presented in a single list. When false, settings are shown
-     * as a master/detail two-pane view on tablets. When true, a single pane is
-     * shown on tablets.
-     */
-    private static final boolean ALWAYS_SIMPLE_PREFS = true;
+
+    private static final String INTENT_GOTO = "GOTO";
+    private static final int INTENT_GOTO_SERVICES = 1;
+    private static final String FAKEKEY_MAIN_SCREEN = "fakekey_main_screen";
+    private static final String FAKEKEY_SERVICES_SCREEN = "fakekey_services_screen";
 
     private EditText signatureText;
 
@@ -67,8 +70,10 @@ public class NewSettingsActivity extends PreferenceActivity {
      * the result code.
      */
     private enum DirChooserType {
-        GPX_IMPORT_DIR(1, Settings.KEY_GPX_IMPORT_DIR, Environment.getExternalStorageDirectory().getPath() + "/gpx"),
-        GPX_EXPORT_DIR(2, Settings.KEY_GPX_EXPORT_DIR, Environment.getExternalStorageDirectory().getPath() + "/gpx"),
+        GPX_IMPORT_DIR(1, Settings.KEY_GPX_IMPORT_DIR,
+                Environment.getExternalStorageDirectory().getPath() + "/gpx"),
+        GPX_EXPORT_DIR(2, Settings.KEY_GPX_EXPORT_DIR,
+                Environment.getExternalStorageDirectory().getPath() + "/gpx"),
         THEMES_DIR(3, Settings.KEY_RENDER_THEME_BASE_FOLDER, "");
         public final int requestCode;
         public final String key;
@@ -79,33 +84,56 @@ public class NewSettingsActivity extends PreferenceActivity {
             this.key = key;
             this.defaultValue = defaultValue;
         }
-
-        public DirChooserType getByKey(int requestCode) {
-            for (DirChooserType dct : values()) {
-                if (dct.requestCode == requestCode) {
-                    return dct;
-                }
-            }
-            return null;
-        }
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+    private final static int DIR_CHOOSER_MAPS_DIRECTORY_REQUEST = 4;
 
-        setupSimplePreferencesScreen();
+    @SuppressWarnings("deprecation")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        if (Settings.isLightSkin()) {
+            setTheme(R.style.settings_light);
+        } else {
+            setTheme(R.style.settings);
+        }
+
+        super.onCreate(savedInstanceState);
+
+        addPreferencesFromResource(R.xml.preferences);
+
+        initPreferences();
+
+        Intent intent = getIntent();
+        int gotoPage = intent.getIntExtra(INTENT_GOTO, 0);
+        if (gotoPage == INTENT_GOTO_SERVICES) {
+            // start with services screen
+            PreferenceScreen main = (PreferenceScreen) findPreference(FAKEKEY_MAIN_SCREEN);
+            int index = findPreference(FAKEKEY_SERVICES_SCREEN).getOrder();
+            main.onItemClick(null, null, index, 0);
+        }
     }
 
     private void initPreferences() {
         initMapSourcePreference();
+        initDirChoosers();
+        initDefaultNavigationPreferences();
+        initBackupButtons();
+        initDbLocationPreference();
+        initDebugPreference();
+        initBasicMemberPreferences();
+        initSend2CgeoPreferences();
 
-        bindSummarysToValues(Settings.KEY_USERNAME, Settings.KEY_PASSWORD,
+        for (String k : new String[] { Settings.KEY_USERNAME, Settings.KEY_PASSWORD,
                 Settings.KEY_GCVOTE_PASSWORD, Settings.KEY_SIGNATURE,
                 Settings.KEY_MAP_SOURCE, Settings.KEY_RENDER_THEME_BASE_FOLDER,
-                Settings.KEY_GPX_EXPORT_DIR, Settings.KEY_GPX_IMPORT_DIR);
-
-        initDirChoosers();
+                Settings.KEY_GPX_EXPORT_DIR, Settings.KEY_GPX_IMPORT_DIR,
+                Settings.KEY_MAP_DIRECTORY, Settings.KEY_DEFAULT_NAVIGATION_TOOL,
+                Settings.KEY_DEFAULT_NAVIGATION_TOOL_2, Settings.KEY_WEBDEVICE_NAME,
+                Settings.FAKEKEY_PREFERENCE_BACKUP_INFO, }) {
+            bindSummaryToStringValue(k);
+        }
+        bindSummaryToIntValue(Settings.KEY_ALTITUDE_CORRECTION);
     }
 
     // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
@@ -149,6 +177,7 @@ public class NewSettingsActivity extends PreferenceActivity {
     /**
      * fill the choice list for map sources
      */
+    @SuppressWarnings("deprecation")
     private void initMapSourcePreference() {
         ListPreference pref = (ListPreference) findPreference(Settings.KEY_MAP_SOURCE);
 
@@ -164,9 +193,32 @@ public class NewSettingsActivity extends PreferenceActivity {
     }
 
     /**
+     * fill the choice list for default navigation tools
+     */
+    @SuppressWarnings("deprecation")
+    private void initDefaultNavigationPreferences() {
+
+        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledDefaultNavigationApps();
+
+        CharSequence[] entries = new CharSequence[apps.size()];
+        CharSequence[] values = new CharSequence[apps.size()];
+        for (int i = 0; i < apps.size(); ++i) {
+            entries[i] = apps.get(i).toString();
+            values[i] = String.valueOf(apps.get(i).id);
+        }
+
+        ListPreference pref = (ListPreference) findPreference(Settings.KEY_DEFAULT_NAVIGATION_TOOL);
+        pref.setEntries(entries);
+        pref.setEntryValues(values);
+        pref = (ListPreference) findPreference(Settings.KEY_DEFAULT_NAVIGATION_TOOL_2);
+        pref.setEntries(entries);
+        pref.setEntryValues(values);
+    }
+
+    /**
      * fire up a dir chooser on click on the preference
      *
-     * @see onActivityResult() for processing of the selected directory
+     * @see #onActivityResult() for processing of the selected directory
      *
      * @param key
      *            key of the preference
@@ -174,6 +226,7 @@ public class NewSettingsActivity extends PreferenceActivity {
      *            default directory - in case the preference has never been
      *            set yet
      */
+    @SuppressWarnings("deprecation")
     private void initDirChoosers() {
         for (final DirChooserType dct : DirChooserType.values()) {
             final String dir = Settings.getString(dct.key, dct.defaultValue);
@@ -187,6 +240,17 @@ public class NewSettingsActivity extends PreferenceActivity {
                         }
                     });
         }
+
+        findPreference(Settings.KEY_MAP_DIRECTORY).setOnPreferenceClickListener(
+                new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent i = new Intent(NewSettingsActivity.this,
+                                SelectMapfileActivity.class);
+                        startActivityForResult(i, DIR_CHOOSER_MAPS_DIRECTORY_REQUEST);
+                        return false;
+                    }
+                });
     }
 
     private void startDirChooser(DirChooserType dct, String startDirectory) {
@@ -208,6 +272,7 @@ public class NewSettingsActivity extends PreferenceActivity {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private void setChosenDirectory(DirChooserType dct, Intent data) {
         final String directory = new File(data.getData().getPath()).getAbsolutePath();
         if (StringUtils.isNotBlank(directory)) {
@@ -215,11 +280,111 @@ public class NewSettingsActivity extends PreferenceActivity {
             if (p == null) {
                 return;
             }
-            Settings.setString(dct.key, directory);
+            Settings.putString(dct.key, directory);
             p.setSummary(directory);
         }
     }
 
+    @SuppressWarnings("deprecation")
+    public void initBackupButtons() {
+        Preference backup = findPreference(Settings.FAKEKEY_PREFERENCE_BACKUP);
+        backup.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(final Preference preference) {
+                final Context context = preference.getContext();
+                // avoid overwriting an existing backup with an empty database
+                // (can happen directly after reinstalling the app)
+                if (cgData.getAllCachesCount() == 0) {
+                    ActivityMixin.helpDialog(NewSettingsActivity.this,
+                            context.getString(R.string.init_backup),
+                            context.getString(R.string.init_backup_unnecessary));
+                    return false;
+                }
+
+                final ProgressDialog dialog = ProgressDialog.show(context,
+                        context.getString(R.string.init_backup),
+                        context.getString(R.string.init_backup_running), true, false);
+                new Thread() {
+                    @Override
+                    public void run() {
+                        final String backupFileName = cgData.backupDatabase();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                                ActivityMixin.helpDialog(NewSettingsActivity.this,
+                                        context.getString(R.string.init_backup_backup),
+                                        backupFileName != null
+                                                ? context.getString(R.string.init_backup_success)
+                                                        + "\n" + backupFileName
+                                                : context.getString(R.string.init_backup_failed));
+                                VALUE_CHANGE_LISTENER.onPreferenceChange(findPreference(
+                                        Settings.FAKEKEY_PREFERENCE_BACKUP_INFO), "");
+                            }
+                        });
+                    }
+                }.start();
+                return true;
+            }
+        });
+
+        Preference restore = findPreference(Settings.FAKEKEY_PREFERENCE_RESTORE);
+        restore.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(final Preference preference) {
+                ((cgeoapplication) NewSettingsActivity.this.getApplication())
+                        .restoreDatabase(NewSettingsActivity.this);
+                return true;
+            }
+        });
+    }
+
+    @SuppressWarnings("deprecation")
+    private void initDbLocationPreference() {
+        Preference p = findPreference(Settings.KEY_DB_ON_SDCARD);
+        p.setPersistent(false);
+        p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                boolean oldValue = Settings.isDbOnSDCard();
+                ((cgeoapplication) NewSettingsActivity.this.getApplication())
+                        .moveDatabase(NewSettingsActivity.this);
+                return oldValue != Settings.isDbOnSDCard();
+            }
+        });
+    }
+
+    @SuppressWarnings("deprecation")
+    private void initDebugPreference() {
+        Preference p = findPreference(Settings.KEY_DEBUG);
+        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Log.setDebug((Boolean) newValue);
+                return true;
+            }
+        });
+    }
+
+    @SuppressWarnings("deprecation")
+    private void initBasicMemberPreferences() {
+        findPreference(Settings.KEY_LOAD_DIRECTION_IMG).setEnabled(
+                !Settings.isPremiumMember());
+        findPreference(Settings.KEY_SHOW_CAPTCHA).setEnabled(
+                !Settings.isPremiumMember());
+    }
+
+    private static void initSend2CgeoPreferences() {
+        Settings.putString(Settings.KEY_WEBDEVICE_NAME, Settings.getWebDeviceName());
+    }
+
+    public static void startWithServicesPage(Context fromActivity) {
+        final Intent intent = new Intent(fromActivity, NewSettingsActivity.class);
+        intent.putExtra(INTENT_GOTO, INTENT_GOTO_SERVICES);
+        fromActivity.startActivity(intent);
+    }
+
+    @SuppressWarnings("deprecation")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -235,75 +400,20 @@ public class NewSettingsActivity extends PreferenceActivity {
         }
 
         switch (requestCode) {
-        //            case SELECT_MAPFILE_REQUEST:
-        //                if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
-        //                    final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
-        //                    Settings.setMapFile(mapFile);
-        //                    if (!Settings.isValidMapFile(Settings.getMapFile())) {
-        //                        showToast(res.getString(R.string.warn_invalid_mapfile));
-        //                    }
-        //                }
-        //                updateMapSourceMenu();
-        //                initMapDirectoryEdittext(true);
-        //                break;
+            case DIR_CHOOSER_MAPS_DIRECTORY_REQUEST:
+                if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
+                    final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
+                    Settings.setMapFile(mapFile);
+                    if (!Settings.isValidMapFile(Settings.getMapFile())) {
+                        ActivityMixin.showToast(this, R.string.warn_invalid_mapfile);
+                    }
+                }
+                initMapSourcePreference();
+                findPreference(Settings.KEY_MAP_DIRECTORY).setSummary(
+                        Settings.getMapFileDirectory());
+                break;
             default:
                 throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * Shows the simplified settings UI if the device configuration if the
-     * device configuration dictates that a simplified, single-pane UI should be
-     * shown.
-     */
-    private void setupSimplePreferencesScreen() {
-        if (!isSimplePreferences(this)) {
-            return;
-        }
-
-        // In the simplified UI, fragments are not used at all and we instead
-        // use the older PreferenceActivity APIs.
-
-        // Add 'general' preferences.
-        addPreferencesFromResource(R.xml.preferences);
-
-        initPreferences();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean onIsMultiPane() {
-        return isXLargeTablet(this) && !isSimplePreferences(this);
-    }
-
-    /**
-     * Helper method to determine if the device has an extra-large screen. For
-     * example, 10" tablets are extra-large.
-     */
-    private static boolean isXLargeTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-        & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
-    }
-
-    /**
-     * Determines whether the simplified settings UI should be shown. This is
-     * true if this is forced via {@link #ALWAYS_SIMPLE_PREFS}, or the device
-     * doesn't have newer APIs like {@link PreferenceFragment}, or the device
-     * doesn't have an extra-large screen. In these cases, a single-pane
-     * "simplified" settings UI should be shown.
-     */
-    private static boolean isSimplePreferences(Context context) {
-        return ALWAYS_SIMPLE_PREFS
-                || Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB
-                || !isXLargeTablet(context);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void onBuildHeaders(List<Header> target) {
-        if (!isSimplePreferences(this)) {
-            // loadHeadersFromResource(R.xml.pref_headers, target);
         }
     }
 
@@ -311,7 +421,7 @@ public class NewSettingsActivity extends PreferenceActivity {
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
-    private static Preference.OnPreferenceChangeListener bindSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+    private static Preference.OnPreferenceChangeListener VALUE_CHANGE_LISTENER = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
@@ -333,6 +443,17 @@ public class NewSettingsActivity extends PreferenceActivity {
                         index >= 0
                                 ? listPreference.getEntries()[index]
                                 : null);
+            } else if (Settings.FAKEKEY_PREFERENCE_BACKUP_INFO.equals(preference.getKey())) {
+                File lastBackupFile = cgData.getRestoreFile();
+                String text;
+                if (lastBackupFile != null) {
+                    text = preference.getContext().getString(R.string.init_backup_last) + " "
+                            + Formatter.formatTime(lastBackupFile.lastModified())
+                            + ", " + Formatter.formatDate(lastBackupFile.lastModified());
+                } else {
+                    text = preference.getContext().getString(R.string.init_backup_last_no);
+                }
+                preference.setSummary(text);
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -349,84 +470,55 @@ public class NewSettingsActivity extends PreferenceActivity {
      * immediately updated upon calling this method. The exact display format is
      * dependent on the type of preference.
      *
-     * @see #bindSummaryToValueListener
+     * @see #VALUE_CHANGE_LISTENER
      */
-    private static void bindSummaryToValue(Preference preference) {
+    private static void bindSummaryToValue(Preference preference, Object value) {
         // Set the listener to watch for value changes.
         if (preference == null) {
             return;
         }
-        preference.setOnPreferenceChangeListener(bindSummaryToValueListener);
+        preference.setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
 
         // Trigger the listener immediately with the preference's
         // current value.
-        bindSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
-    }
-
-    private void bindSummarysToValues(String... keys) {
-        for (String key : keys) {
-            bindSummaryToValue(findPreference(key));
-        }
+        VALUE_CHANGE_LISTENER.onPreferenceChange(preference, value);
     }
 
     /**
-     * This fragment shows general preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
+     * auto-care for the summary of the preference of string type with this key
+     *
+     * @param key
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class GeneralPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindSummaryToValue(findPreference("example_text"));
-            bindSummaryToValue(findPreference("example_list"));
+    @SuppressWarnings("deprecation")
+    private void bindSummaryToStringValue(String key) {
+        Preference p = findPreference(key);
+        if (p == null) {
+            return;
         }
+
+        String value = PreferenceManager
+                .getDefaultSharedPreferences(p.getContext())
+                .getString(p.getKey(), "");
+
+        bindSummaryToValue(p, value);
     }
 
     /**
-     * This fragment shows notification preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
+     * auto-care for the summary of the preference of int type with this key
+     *
+     * @param key
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class NotificationPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            // addPreferencesFromResource(R.xml.pref_notification);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindSummaryToValue(findPreference("notifications_new_message_ringtone"));
+    @SuppressWarnings("deprecation")
+    private void bindSummaryToIntValue(String key) {
+        Preference p = findPreference(key);
+        if (p == null) {
+            return;
         }
-    }
 
-    /**
-     * This fragment shows data and sync preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class DataSyncPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            // addPreferencesFromResource(R.xml.pref_data_sync);
+        int value = PreferenceManager
+                .getDefaultSharedPreferences(p.getContext())
+                .getInt(p.getKey(), 0);
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindSummaryToValue(findPreference("sync_frequency"));
-        }
+        bindSummaryToValue(p, value);
     }
 }
