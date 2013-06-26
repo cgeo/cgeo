@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech.Engine;
 import android.view.Menu;
@@ -94,6 +95,9 @@ public class CompassActivity extends AbstractActivity {
         setCacheInfo();
 
         Views.inject(this);
+
+        // make sure we can control the TTS volume
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
 
     @Override
