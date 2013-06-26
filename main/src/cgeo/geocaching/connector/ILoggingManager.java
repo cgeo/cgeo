@@ -11,10 +11,23 @@ import java.util.List;
 
 public interface ILoggingManager {
 
+    /**
+     * Post a log for a cache online
+     * 
+     * @param cache
+     * @param logType
+     * @param date
+     * @param log
+     * @param logPassword
+     *            optional, maybe null
+     * @param trackableLogs
+     * @return
+     */
     LogResult postLog(Geocache cache,
             LogType logType,
             Calendar date,
             String log,
+            String logPassword,
             List<TrackableLog> trackableLogs);
 
     ImageResult postLogImage(String logId,

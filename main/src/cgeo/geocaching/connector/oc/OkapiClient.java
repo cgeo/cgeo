@@ -93,6 +93,7 @@ final public class OkapiClient {
     private static final String CACHE_LOCATION = "location";
     private static final String CACHE_NAME = "name";
     private static final String CACHE_CODE = "code";
+    private static final String CACHE_REQ_PASSWORD = "req_passwd";
 
     private static final String LOG_TYPE = "type";
     private static final String LOG_COMMENT = "comment";
@@ -108,7 +109,7 @@ final public class OkapiClient {
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
     private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
-    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden|alt_wpts|attrnames";
+    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden|alt_wpts|attrnames|req_passwd";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched";
 
@@ -194,7 +195,7 @@ final public class OkapiClient {
         return true;
     }
 
-    public static LogResult postLog(final Geocache cache, LogType logType, Calendar date, String log, OCApiConnector connector) {
+    public static LogResult postLog(final Geocache cache, LogType logType, Calendar date, String log, String logPassword, OCApiConnector connector) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("logtype", logType.oc_type);
         params.add("comment", log);
@@ -202,6 +203,9 @@ final public class OkapiClient {
         params.add("when", logDateFormat.format(date.getTime()));
         if (logType.equals(LogType.NEEDS_MAINTENANCE)) {
             params.add("needs_maintenance", "true");
+        }
+        if (logPassword != null) {
+            params.add("password", logPassword);
         }
 
         final JSONObject data = request(connector, OkapiService.SERVICE_SUBMIT_LOG, params);
@@ -327,6 +331,7 @@ final public class OkapiClient {
             if (!response.isNull(CACHE_IS_WATCHED)) {
                 cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
             }
+            cache.setLogPasswordRequired(response.getBoolean(CACHE_REQ_PASSWORD));
 
             cache.setDetailedUpdatedNow();
             // save full detailed caches
