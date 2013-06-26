@@ -14,7 +14,7 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
-import cgeo.geocaching.connector.oc.OkapiClient.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -695,38 +695,6 @@ final public class OkapiClient {
         }
 
         return new UserInfo(name, finds, success ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
-    }
-
-    public static class UserInfo {
-
-        public enum UserInfoStatus {
-            NOT_RETRIEVED,
-            SUCCESSFUL,
-            FAILED,
-            NOT_SUPPORTED
-        }
-
-        private final String name;
-        private final int finds;
-        private final UserInfoStatus status;
-
-        UserInfo(String name, int finds, UserInfoStatus status) {
-            this.name = name;
-            this.finds = finds;
-            this.status = status;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getFinds() {
-            return finds;
-        }
-
-        public UserInfoStatus getStatus() {
-            return status;
-        }
     }
 
 }

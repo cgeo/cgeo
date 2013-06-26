@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
@@ -10,8 +9,7 @@ import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.connector.oc.OkapiClient.UserInfo;
-import cgeo.geocaching.connector.oc.OkapiClient.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CryptUtils;
@@ -131,18 +129,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public String getLoginStatusString() {
-        switch (userInfo.getStatus()) {
-            case NOT_RETRIEVED:
-                return cgeoapplication.getInstance().getString(R.string.init_login_popup_working);
-            case SUCCESSFUL:
-                return cgeoapplication.getInstance().getString(R.string.init_login_popup_ok);
-            case FAILED:
-                return cgeoapplication.getInstance().getString(R.string.init_login_popup_failed);
-            case NOT_SUPPORTED:
-                return cgeoapplication.getInstance().getString(R.string.init_login_popup_not_authorized);
-            default:
-                return "Error";
-        }
+        return cgeoapplication.getInstance().getString(userInfo.getStatus().resId);
     }
 
     @Override
