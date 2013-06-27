@@ -4,6 +4,7 @@ import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -27,7 +28,7 @@ public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final IConnector[] CONNECTORS = new IConnector[] {
             GCConnector.getInstance(),
-            new OCApiLiveConnector("Opencaching.de", "www.opencaching.de", "OC", R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret, ApiSupport.current),
+            new OCApiLiveConnector("opencaching.de", "www.opencaching.de", "OC", R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret, ApiSupport.current),
             new OCConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
             new OCApiConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq", ApiSupport.oldapi),
             new OCConnector("OpenCaching.ES", "www.opencachingspain.es", "OC"),
@@ -80,6 +81,16 @@ public final class ConnectorFactory {
 
     public static ISearchByCenter[] getSearchByCenterConnectors() {
         return searchByCenterConns;
+    }
+
+    public static ILogin[] getActiveLiveConnectors() {
+        final List<ILogin> liveConns = new ArrayList<ILogin>();
+        for (final IConnector conn : CONNECTORS) {
+            if (conn instanceof ILogin && conn.isActivated()) {
+                liveConns.add((ILogin) conn);
+            }
+        }
+        return liveConns.toArray(new ILogin[liveConns.size()]);
     }
 
     public static boolean canHandle(final String geocode) {
