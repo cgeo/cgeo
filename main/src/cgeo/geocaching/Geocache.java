@@ -281,8 +281,14 @@ public class Geocache implements ICache, IWaypoint {
         if (elevation == null) {
             elevation = other.elevation;
         }
-        if (personalNote == null) { // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
+        // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
+        if (personalNote == null) {
             personalNote = other.personalNote;
+        } else if (other.personalNote != null && !personalNote.equals(other.personalNote)) {
+            final PersonalNote myNote = new PersonalNote(this);
+            final PersonalNote otherNote = new PersonalNote(other);
+            final PersonalNote mergedNote = myNote.mergeWith(otherNote);
+            personalNote = mergedNote.toString();
         }
         if (StringUtils.isBlank(getShortDescription())) {
             shortdesc = other.getShortDescription();

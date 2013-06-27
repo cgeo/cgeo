@@ -9,7 +9,7 @@
         android:id="@+id/note"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionDone"
-        android:inputType="text" />
+        android:inputType="textMultiLine"
+        android:lines="8" />
 
 </LinearLayout>

@@ -1733,6 +1733,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     }
                 }
             });
+            final Button personalNoteUpload = (Button) view.findViewById(R.id.upload_personalnote);
+            if (cache.isOffline() && ConnectorFactory.getConnector(cache).supportsPersonalNote()) {
+                personalNoteUpload.setVisibility(View.VISIBLE);
+                personalNoteUpload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        uploadPersonalNote();
+                    }
+                });
+            } else {
+                personalNoteUpload.setVisibility(View.GONE);
+            }
 
             // cache hint and spoiler images
             final View hintBoxView = view.findViewById(R.id.hint_box);
@@ -1801,6 +1813,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
                 dialog.show(fm, "fragment_edit_note");
             }
+        }
+
+        Thread currentThread;
+
+        private void uploadPersonalNote() {
+            final SimpleHandler myHandler = new SimpleHandler();
+
+            Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
+            progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
+
+            if (currentThread != null) {
+                currentThread.interrupt();
+            }
+            currentThread = new UploadPersonalNoteThread(cache, myHandler);
+            currentThread.start();
         }
 
         private void setPersonalNote() {
@@ -2294,6 +2321,48 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 });
 
             }
+        }
+    }
+
+    public class SimpleHandler extends CancellableHandler {
+        public static final String SUCCESS_TEXT = "success_message";
+
+        @Override
+        public void handleRegularMessage(final Message msg) {
+            if (msg.getData() != null && msg.getData().getString(SUCCESS_TEXT) != null) {
+                showToast(msg.getData().getString(SUCCESS_TEXT));
+            }
+            progress.dismiss();
+            return;
+        }
+
+        @Override
+        public void handleCancel(final Object extra) {
+            showToast((String) extra);
+            progress.dismiss();
+        }
+    }
+
+    private class UploadPersonalNoteThread extends Thread {
+        private Geocache cache = null;
+        private CancellableHandler handler = null;
+
+        public UploadPersonalNoteThread(Geocache cache, CancellableHandler handler) {
+            this.cache = cache;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            IConnector con = ConnectorFactory.getConnector(cache);
+            if (con.supportsPersonalNote()) {
+                con.uploadPersonalNote(cache);
+            }
+            Message msg = Message.obtain();
+            Bundle bundle = new Bundle();
+            bundle.putString(SimpleHandler.SUCCESS_TEXT, res.getString(R.string.cache_personal_note_upload_done));
+            msg.setData(bundle);
+            handler.sendMessage(msg);
         }
     }
 
