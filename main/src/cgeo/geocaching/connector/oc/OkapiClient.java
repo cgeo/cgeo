@@ -95,6 +95,7 @@ final public class OkapiClient {
     private static final String CACHE_NAME = "name";
     private static final String CACHE_CODE = "code";
     private static final String CACHE_REQ_PASSWORD = "req_passwd";
+    private static final String CACHE_MY_NOTES = "my_notes";
 
     private static final String LOG_TYPE = "type";
     private static final String LOG_COMMENT = "comment";
@@ -112,7 +113,7 @@ final public class OkapiClient {
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden|alt_wpts|attrnames|req_passwd";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note";
-    private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched";
+    private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched|my_notes";
 
     private static final String METHOD_SEARCH_NEAREST = "services/caches/search/nearest";
     private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
@@ -331,6 +332,9 @@ final public class OkapiClient {
             cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)), false);
             if (!response.isNull(CACHE_IS_WATCHED)) {
                 cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
+            }
+            if (!response.isNull(CACHE_MY_NOTES)) {
+                cache.setPersonalNote(response.getString(CACHE_MY_NOTES));
             }
             cache.setLogPasswordRequired(response.getBoolean(CACHE_REQ_PASSWORD));
 
