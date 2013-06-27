@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.LogCacheActivity;
+import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
@@ -38,8 +38,8 @@ public class OkapiLoggingManager implements ILoggingManager {
     }
 
     @Override
-    public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, List<TrackableLog> trackableLogs) {
-        return OkapiClient.postLog(cache, logType, date, log, connector);
+    public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, String logPassword, List<TrackableLog> trackableLogs) {
+        return OkapiClient.postLog(cache, logType, date, log, logPassword, connector);
     }
 
     @Override

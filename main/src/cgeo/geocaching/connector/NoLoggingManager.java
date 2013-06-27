@@ -19,7 +19,7 @@ public class NoLoggingManager implements ILoggingManager {
     }
 
     @Override
-    public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, List<TrackableLog> trackableLogs) {
+    public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, String logPassword, List<TrackableLog> trackableLogs) {
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 

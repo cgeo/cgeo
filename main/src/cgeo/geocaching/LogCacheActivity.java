@@ -71,6 +71,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Button postButton = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
+    private LinearLayout logPasswordBox = null;
     private boolean tbChanged = false;
     private SparseArray<TrackableLog> actionButtons;
 
@@ -252,6 +253,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         postButton = (Button) findViewById(R.id.post);
         tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
         tweetCheck = (CheckBox) findViewById(R.id.tweet);
+        logPasswordBox = (LinearLayout) findViewById(R.id.log_password_box);
 
         // initialize with default values
         setDefaultValues();
@@ -302,6 +304,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         tweetCheck.setChecked(true);
         updateTweetBox(typeSelected);
+        updateLogPasswordBox(typeSelected);
 
         final Button imageButton = (Button) findViewById(R.id.image_btn);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -377,6 +380,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         final EditText logView = (EditText) findViewById(R.id.log);
         logView.setText(StringUtils.EMPTY);
+        final EditText logPasswordView = (EditText) findViewById(R.id.log_password);
+        logPasswordView.setText(StringUtils.EMPTY);
 
         updateImageButton();
 
@@ -491,6 +496,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
+    private void updateLogPasswordBox(LogType type) {
+        if (type == LogType.FOUND_IT && cache.isLogPasswordRequired()) {
+            logPasswordBox.setVisibility(View.VISIBLE);
+        } else {
+            logPasswordBox.setVisibility(View.GONE);
+        }
+    }
+
     private class DateListener implements View.OnClickListener {
 
         @Override
@@ -507,7 +520,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
                     R.string.log_saving :
                     R.string.log_saving_and_uploading);
-            new Poster(LogCacheActivity.this, message).execute(currentLogText());
+            new Poster(LogCacheActivity.this, message).execute(currentLogText(), currentLogPassword());
         }
     }
 
@@ -520,8 +533,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         @Override
         protected StatusCode doInBackgroundInternal(final String[] logTexts) {
             final String log = logTexts[0];
+            final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
             try {
-                final LogResult logResult = loggingManager.postLog(cache, typeSelected, date, log, trackables);
+                final LogResult logResult = loggingManager.postLog(cache, typeSelected, date, log, logPwd, trackables);
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     final LogEntry logNow = new LogEntry(date, typeSelected, log);
@@ -591,6 +605,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private String currentLogText() {
         return ((EditText) findViewById(R.id.log)).getText().toString();
+    }
+
+    private String currentLogPassword() {
+        return ((EditText) findViewById(R.id.log_password)).getText().toString();
     }
 
     @Override

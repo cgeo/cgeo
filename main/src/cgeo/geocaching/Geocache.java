@@ -135,6 +135,7 @@ public class Geocache implements ICache, IWaypoint {
     private String nameForSorting;
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
+    private boolean logPasswordRequired = false;
     private int zoomlevel = Tile.ZOOMLEVEL_MAX + 1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
@@ -1769,5 +1770,13 @@ public class Geocache implements ICache, IWaypoint {
 
     public int getMapMarkerId() {
         return getConnector().getCacheMapMarkerId(isDisabled() || isArchived());
+    }
+
+    public boolean isLogPasswordRequired() {
+        return logPasswordRequired;
+    }
+
+    public void setLogPasswordRequired(boolean required) {
+        logPasswordRequired = required;
     }
 }
