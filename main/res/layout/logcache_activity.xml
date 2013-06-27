@@ -58,6 +58,29 @@
                     android:singleLine="false" />
 
                 <LinearLayout
+                    android:id="@+id/log_password_box"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:padding="10dip"
+                        android:text="@string/log_password_title"
+                        android:textColor="?text_color"
+                        android:textSize="22sp" />
+                    <EditText
+                        android:id="@+id/log_password"
+                        style="@style/edittext_full"
+                        android:hint="@string/log_hint_log_password"
+                        android:inputType="text"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/tweet_box"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
