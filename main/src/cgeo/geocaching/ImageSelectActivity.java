@@ -5,6 +5,7 @@ import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 

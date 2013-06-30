@@ -1,6 +1,6 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Log;

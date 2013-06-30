@@ -30,7 +30,21 @@
     <attr name="close" format="integer" />
     <attr name="log_img_icon" format="integer" />
     <attr name="actionbar_compass" format="integer" />
+    <attr name="settings_cloud" format="integer" />
+    <attr name="settings_details" format="integer" />
+    <attr name="settings_eye" format="integer" />
+    <attr name="settings_map" format="integer" />
+    <attr name="settings_nut" format="integer" />
+    <attr name="settings_pen" format="integer" />
+    <attr name="settings_sdcard" format="integer" />
+    
 
+    <!-- attributes for custom made preferences -->
+    <attr name="title" format="string" />
+    <attr name="text" format="string" />
+    <attr name="url" format="string" />
+    <attr name="urlButton" format="string" />
+    
     <!-- others -->
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />

@@ -1,7 +1,7 @@
 package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
@@ -60,10 +60,7 @@ public final class Twitter {
     }
 
     public static void postTweetCache(String geocode) {
-        if (!Settings.isUseTwitter()) {
-            return;
-        }
-        if (!Settings.isTwitterLoginValid()) {
+        if (!Settings.isUseTwitter() || !Settings.isTwitterLoginValid()) {
             return;
         }
         final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
