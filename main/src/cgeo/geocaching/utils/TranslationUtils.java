@@ -35,7 +35,7 @@ public final class TranslationUtils {
     private static String buildTranslationURI(final String toLang, final String text) {
         String content = Network.encode(text);
         // the app works better without the "+", the website works better with "+", therefore assume using the app if installed
-        if (ProcessUtils.isInstalled(TRANSLATION_APP)) {
+        if (ProcessUtils.isLaunchable(TRANSLATION_APP)) {
             content = content.replace("+", "%20");
         }
         return translationWebsite + translationForceClassicMode + translationAutoSelect + translationFieldSeparator + toLang + translationFieldSeparator + content;

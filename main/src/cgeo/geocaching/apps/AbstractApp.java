@@ -28,7 +28,7 @@ public abstract class AbstractApp implements App {
 
     @Override
     public boolean isInstalled() {
-        if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isInstalled(packageName)) {
+        if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isLaunchable(packageName)) {
             return true;
         }
         return MainActivity.isIntentAvailable(intent);

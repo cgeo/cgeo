@@ -217,7 +217,7 @@
         </PreferenceCategory>
 
         <PreferenceCategory 
-            android:title="@string/init_signature">
+            android:title="@string/settings_category_logging_other">
 
             <CheckBoxPreference 
                 android:key="trackautovisit"
@@ -298,12 +298,6 @@
 
         <PreferenceCategory 
             android:title="@string/settings_title_map_content" >
-
-            <CheckBoxPreference 
-                android:key="maptrail"
-                android:title="@string/init_maptrail"
-                android:summary="@string/init_summary_maptrail"
-                android:defaultValue="true" />
     
             <Preference
                 android:title="@string/init_showwaypoints"
@@ -312,6 +306,12 @@
             <cgeo.geocaching.settings.WpThresholdPreference
                 android:key="gcshowwaypointsthreshold"
                 android:layout="@layout/wp_threshold_preference" />
+
+            <CheckBoxPreference 
+                android:key="maptrail"
+                android:title="@string/init_maptrail"
+                android:summary="@string/init_summary_maptrail"
+                android:defaultValue="true" />
 
         </PreferenceCategory>
 

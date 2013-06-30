@@ -136,6 +136,7 @@ public class Geocache implements ICache, IWaypoint {
     private String nameForSorting;
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
+    private boolean logPasswordRequired = false;
     private int zoomlevel = Tile.ZOOMLEVEL_MAX + 1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
@@ -281,8 +282,14 @@ public class Geocache implements ICache, IWaypoint {
         if (elevation == null) {
             elevation = other.elevation;
         }
-        if (personalNote == null) { // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
+        // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
+        if (personalNote == null) {
             personalNote = other.personalNote;
+        } else if (other.personalNote != null && !personalNote.equals(other.personalNote)) {
+            final PersonalNote myNote = new PersonalNote(this);
+            final PersonalNote otherNote = new PersonalNote(other);
+            final PersonalNote mergedNote = myNote.mergeWith(otherNote);
+            personalNote = mergedNote.toString();
         }
         if (StringUtils.isBlank(getShortDescription())) {
             shortdesc = other.getShortDescription();
@@ -1770,5 +1777,13 @@ public class Geocache implements ICache, IWaypoint {
 
     public int getMapMarkerId() {
         return getConnector().getCacheMapMarkerId(isDisabled() || isArchived());
+    }
+
+    public boolean isLogPasswordRequired() {
+        return logPasswordRequired;
+    }
+
+    public void setLogPasswordRequired(boolean required) {
+        logPasswordRequired = required;
     }
 }

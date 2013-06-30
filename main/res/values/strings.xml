@@ -128,6 +128,8 @@
     <string name="log_image_caption">Caption</string>
     <string name="log_image_description">Description</string>
     <string name="log_image_scale">Scaling</string>
+    <string name="log_password_title">Log Password:</string>
+    <string name="log_hint_log_password">Enter your log password</string>
 
     <string-array name="log_image_scales">
         <item>No scaling</item>
@@ -376,14 +378,15 @@
     <string name="settings_title_miscellaneous">More Settings</string>
 
     <string name="settings_category_browser">Browser</string>
-
+    <string name="settings_category_logging_other">Other Logging Options</string>
+    
     <string name="settings_active">active</string>
     <string name="settings_not_active">not active</string>
     <string name="settings_goto_url_button">more …</string>
 
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_activate_gc">Activate</string>
-    <string name="settings_gc_legal_note">To use the services of Geocaching.com, terms and conditions of the Groundspeak disclaimer have to be agreed.</string>
+    <string name="settings_gc_legal_note">To use the services of Geocaching.com terms and conditions of the Groundspeak disclaimer have to be agreed.</string>
     <string name="init_geocaching">Geocaching.com</string>
     <string name="init_gc_activate">Activate Geocaching.com on live-map and in searches</string>
     <string name="settings_info_facebook_login_title">Facebook Login</string>
@@ -404,6 +407,7 @@
     <string name="init_login_popup_ok">Login OK</string>
     <string name="init_login_popup_failed">Login failed</string>
     <string name="init_login_popup_failed_reason">Login failed:</string>
+    <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_twitter_authorize">Authorize c:geo</string>
     <string name="init_signature">Signature</string>
     <string name="init_signature_help_button">Help</string>
@@ -456,7 +460,7 @@
     <string name="init_summary_choose_list">Ask for list when storing caches</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show Direction to caches in the list</string>
-    <string name="init_altitude">Altitude Correction</string>
+    <string name="init_altitude">Altitude Correction (m)</string>
     <string name="init_altitude_description">If your GPS is calculating a wrong altitude, you can correct it with a positive or negative number. The correction always has to be given in meters.</string>
     <string name="init_clear">Clear Login</string>
     <string name="init_cleared">c:geo cleared login information.</string>
@@ -584,6 +588,10 @@
     <string name="cache_log_image_default_title">Photo</string>
     <string name="cache_personal_note">Personal note</string>
     <string name="cache_personal_note_edit">Edit</string>
+    <string name="cache_personal_note_upload">Upload</string>
+    <string name="cache_personal_note_uploading">Uploading personal note</string>
+    <string name="cache_personal_note_upload_done">Personal note uploaded</string>
+    <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
     <string name="cache_personal_note_unstored">Cache not stored</string>
     <string name="cache_personal_note_store">The cache will be stored first to enable personal notes.</string>
     <string name="cache_description">Description</string>

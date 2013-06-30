@@ -14,8 +14,26 @@ public final class ProcessUtils {
         // utility class
     }
 
+    /**
+     * Preferred method to detect the availability of an external app
+     * 
+     * @param packageName
+     * @return
+     */
+    public static boolean isLaunchable(final String packageName) {
+        return getLaunchIntent(packageName) != null;
+    }
+
+    /**
+     * Checks whether a launch intent is available or if the package is just installed
+     * This function is relatively costly, so if you know that the package in question has
+     * a launch intent, use isLaunchable() instead.
+     * 
+     * @param packageName
+     * @return
+     */
     public static boolean isInstalled(final String packageName) {
-        return (getLaunchIntent(packageName) != null) || hasPackageInstalled(packageName);
+        return isLaunchable(packageName) || hasPackageInstalled(packageName);
     }
 
     /**

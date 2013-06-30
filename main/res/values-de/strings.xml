@@ -8,7 +8,6 @@
     <string name="detail">Details</string>
     <string name="search">Suche</string>
     <string name="settings">Einstellungen</string>
-    <string name="settings_titlebar">c:geo Einstellungen</string>
     <string name="helpers">Nützliche Apps</string>
     <string name="about">Über c:geo</string>
     <string name="latitude">Breitengrad</string>
@@ -16,7 +15,8 @@
 
     <!-- actionbar -->
     <string name="action_bar_share_title">Link versenden</string>
-
+    <string name="settings_titlebar">c:geo Einstellungen</string>
+    
     <!-- caches -->
     <string name="all_types">Alle Cachetypen</string>
     <string name="traditional">Traditional-Cache</string>
@@ -128,7 +128,7 @@
     <string name="log_image_caption">Überschrift</string>
     <string name="log_image_description">Beschreibung</string>
     <string name="log_image_scale">Skalierung</string>
-
+    
     <string-array name="log_image_scales">
         <item>Keine Skalierung</item>
         <item>512 px</item>
@@ -362,15 +362,40 @@
     <string name="about_donation_more">Spenden für\nEntwicklung</string>
     <string name="about_contributors">Mitwirkende</string>
 
-    <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
+    <!-- settings -->
+    <string name="settings_title_services">Dienste</string>
+    <string name="settings_title_appearance">Erscheinungsbild</string>
+    <string name="settings_title_cachedetails">Cache-Details</string>
+    <string name="settings_title_offlinedata">Offline-Daten</string>
+    <string name="settings_title_logging">Loggen</string>
+    <string name="settings_title_map">Karte</string>
+    <string name="settings_title_map_data">Kartendaten</string>
+    <string name="settings_title_map_content">Karteninhalt</string>
+    <string name="settings_title_gpx">GPX</string>
+    <string name="settings_title_basicmembers">Basic Member</string>
+    <string name="settings_title_miscellaneous">Mehr Einstellungen</string>
+
+    <string name="settings_category_browser">Browser</string>
+    <string name="settings_category_logging_other">Andere Log-Optionen</string>
+    
+    <string name="settings_active">aktiv</string>
+    <string name="settings_not_active">nicht aktiv</string>
+    <string name="settings_goto_url_button">mehr …</string>
+    
+    <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_activate_gc">Aktivieren</string>
+    <string name="settings_gc_legal_note">Um die Dienste von geocaching.com nutzen zu können, müssen die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert werden.</string>
+    <string name="init_geocaching">Geocaching.com</string>
+    <string name="init_gc_activate">Aktiviere Geocaching.com für Live-Karte und Suche</string>
+    <string name="settings_info_facebook_login_title">Facebook-Login</string>
+    <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe …</string>
     <string name="init_oc">Opencaching.de</string>
     <string name="settings_activate_oc">Aktivieren</string>
-    <string name="init_oc_de_description">Autorisiere c:geo, auf opencaching.de zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+    <string name="init_oc_de_description">Autorisiere c:geo auf opencaching.de zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
     <string name="init_register_oc_de">c:geo autorisieren</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
+    <string name="settings_activate_twitter">Aktivieren</string>
     <string name="init_username">Benutzername</string>
     <string name="init_password">Passwort</string>
     <string name="init_passvote">Passwort</string>
@@ -380,6 +405,7 @@
     <string name="init_login_popup_ok">Login OK</string>
     <string name="init_login_popup_failed">Login fehlgeschlagen</string>
     <string name="init_login_popup_failed_reason">Login fehlgeschlagen:</string>
+    <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
     <string name="init_twitter_authorize">c:geo autorisieren</string>
     <string name="init_signature">Signatur</string>
     <string name="init_signature_help_button">Hilfe</string>
@@ -432,7 +458,7 @@
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
-    <string name="init_altitude">Höhenkorrektur</string>
+    <string name="init_altitude">Höhenkorrektur (m)</string>
     <string name="init_altitude_description">Falls das GPS eine falsche Höhe ermittelt, kann dies durch Angabe eines positiven oder negativen Wertes in Metern korrigiert werden.</string>
     <string name="init_clear">Login zurücksetzen</string>
     <string name="init_cleared">c:geo hat die Anmeldedaten gelöscht.</string>
@@ -451,6 +477,10 @@
     <string name="init_backup_last">Backup verfügbar von</string>
     <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
     <string name="init_mapsources">Kartenherkunft</string>
+    <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
+    <string name="settings_info_offline_maps">c:geo ermöglicht es, Offline-Karten zu verwenden. Du kannst Karten bei mapsforge herunterladen oder sogar eigene Karten aus OSM-Daten erstellen.</string>
+    <string name="settings_info_themes_title">Info zu Karten-Themes</string>
+    <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie dazu benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie z. B. Radwege oder Höhenlinien hervorzuheben.</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
     <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
@@ -483,7 +513,8 @@
     <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
     <string name="init_use_native_ua">Android Browser</string>
     <string name="init_summary_use_native_ua">Als Android Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
-
+    <string name="init_rendertheme_folder">Karten-Themes-Verzeichnis</string>
+    
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -491,6 +522,7 @@
     <string name="map_source_osm_cyclemap">OSM: Radfahrerkarte</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
+    <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
     <string name="init_sendToCgeo_name">Name des Endgerätes</string>
     <string name="init_sendToCgeo_description">Send to c:geo erlaubt es, mit einem speziellen Plugin für Firefox oder Chrome, Caches direkt von der Geocachingseite zu empfangen. Bitte dazu die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durchlesen.</string>
     <string name="init_sendToCgeo_register">Registrierung anfordern</string>
@@ -554,6 +586,10 @@
     <string name="cache_log_image_default_title">Bild</string>
     <string name="cache_personal_note">Persönliche Notiz</string>
     <string name="cache_personal_note_edit">Bearbeiten</string>
+    <string name="cache_personal_note_upload">Hochladen</string>
+    <string name="cache_personal_note_uploading">Persönliche Notizen werden gesendet</string>
+    <string name="cache_personal_note_upload_done">Persönliche Notizen wurden hochgeladen</string>
+    <string name="cache_personal_note_upload_cancelled">Hochladen der Notizen abgebrochen</string>
     <string name="cache_personal_note_unstored">Cache noch nicht gespeichert</string>
     <string name="cache_personal_note_store">Der Cache wird zunächst gespeichert, damit persönliche Notizen möglich sind.</string>
     <string name="cache_description">Beschreibung</string>
@@ -1095,7 +1131,6 @@
     <string name="attribute_geotour_no">Kein Teil einer GeoTour</string>
 
     <!-- next things -->
-    <string name="settings_gc_legal_note">Um die Dienste von geocaching.com nutzen zu können, müssen die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert werden.</string>
     <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
     <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

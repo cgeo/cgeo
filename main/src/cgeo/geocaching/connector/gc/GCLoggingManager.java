@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.TrackableLog;
-import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
@@ -80,7 +80,7 @@ public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCa
     }
 
     @Override
-    public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, List<TrackableLog> trackableLogs) {
+    public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, String logPassword, List<TrackableLog> trackableLogs) {
 
         try {
             final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(cache.getGeocode(), cache.getCacheId(), viewstates, logType,
