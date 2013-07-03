@@ -237,7 +237,7 @@ public abstract class GCParser {
 
             // favorite count
             try {
-                result = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true);
+                result = getNumberString(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true));
                 if (null != result) {
                     cache.setFavoritePoints(Integer.parseInt(result));
                 }
@@ -626,7 +626,7 @@ public abstract class GCParser {
 
                 while (matcherLog.find()) {
                     final String typeStr = matcherLog.group(1);
-                    final String countStr = matcherLog.group(2).replaceAll("[.,]", "");
+                    final String countStr = getNumberString(matcherLog.group(2));
 
                     if (StringUtils.isNotBlank(typeStr)
                             && LogType.UNKNOWN != LogType.getByIconName(typeStr)
@@ -734,6 +734,13 @@ public abstract class GCParser {
         cache.setDetailedUpdatedNow();
         searchResult.addAndPutInCache(cache);
         return searchResult;
+    }
+
+    private static String getNumberString(final String numberWithPunctuation) {
+        if (numberWithPunctuation == null) {
+            return null;
+        }
+        return numberWithPunctuation.replaceAll("[.,]", "");
     }
 
     public static SearchResult searchByNextPage(final SearchResult search, boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
