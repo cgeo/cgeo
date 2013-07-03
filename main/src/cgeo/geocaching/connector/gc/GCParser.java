@@ -120,6 +120,7 @@ public abstract class GCParser {
         final String[] rows = page.split("<tr class=");
         final int rows_count = rows.length;
 
+        int excludedCaches = 0;
         for (int z = 1; z < rows_count; z++) {
             final Geocache cache = new Geocache();
             final String row = rows[z];
@@ -157,6 +158,7 @@ public abstract class GCParser {
 
             if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
                 // skip disabled and archived caches
+                excludedCaches++;
                 continue;
             }
 
@@ -252,7 +254,7 @@ public abstract class GCParser {
         try {
             final String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (null != result) {
-                searchResult.setTotal(Integer.parseInt(result));
+                searchResult.setTotal(Integer.parseInt(result) - excludedCaches);
             }
         } catch (final NumberFormatException e) {
             Log.w("GCParser.parseSearch: Failed to parse cache count");

@@ -193,16 +193,21 @@ public class SearchResult implements Parcelable {
         result.geocodes.clear();
         final ArrayList<Geocache> cachesForVote = new ArrayList<Geocache>();
         final Set<Geocache> caches = cgData.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
+        int excluded = 0;
         for (Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
             final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
                     (excludeMine && (cache.isOwner() || cache.isFound())) ||
                     (!cacheType.contains(cache));
-            if (!excludeCache) {
+            if (excludeCache) {
+                excluded++;
+            } else {
                 result.addAndPutInCache(cache);
                 cachesForVote.add(cache);
             }
         }
+        // decrease maximum number of caches by filtered ones
+        result.setTotal(result.getTotal() - excluded);
         GCVote.loadRatings(cachesForVote);
         return result;
     }
