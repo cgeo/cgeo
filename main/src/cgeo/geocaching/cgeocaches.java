@@ -626,11 +626,13 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
             if (type == CacheListType.OFFLINE || type == CacheListType.HISTORY) { // only offline list
                 setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
-                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
                 setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
             } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
+            }
+            if (type == CacheListType.OFFLINE) {
+                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
             }
 
             MenuItem item = menu.findItem(MENU_DROP_LIST);
