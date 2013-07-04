@@ -759,8 +759,6 @@
     <string name="helper_locus_description">Aplicação simples e útil, que mostra mapas online e permite transferi-los directamente para o modo offline (apenas mapas raster). Também suporta a gravação de caminhos, gestão de PDI e muitas outras funções úteis.</string>
     <string name="helper_gpsstatus_title">Estado do GPS</string>
     <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
-    <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
-    <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Existem scripts Greasemonkey e websites que permitem mostrar um geo código com um código barras. Com esta aplicação o c:geo consegue ler o código barras directamente do ecrã do seu computador.</string>
 

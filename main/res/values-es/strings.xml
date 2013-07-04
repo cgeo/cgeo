@@ -620,8 +620,6 @@
     <string name="helper_locus_description">Sencilla aplicación que muestra mapas en línea y permite descargarlos para ser usados sin conexión (sólo mapas no vectoriales). También permite registrar el recorrido, gestionar puntos de interés y más funciones interesantes.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">Puedes usar el radar de esta aplicación con c:geo. Además ofrece un montón de información relacionada con el GPS.</string>
-    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
-    <string name="helper_bluetoothgps_description">Te permite usar un GPS externo para tener mejor señal, más precisa y ahorrar batería en tu dispositivo.</string>
 
     <!-- attributes (permissions -> allowed, not allowed) -->
     <string name="attribute_dogs_yes">Perros permitidos</string>

@@ -794,8 +794,6 @@
     <string name="helper_locus_description">Simpele bruikbare applicatie om online kaarten weer te geven en deze voor offline gebruik te downloaden (alleen rasterkarten). Ook ondersteuning voor track recording, poi afhandeling en vele andere handige functies.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
-    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
-    <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Er zijn Greasemonkey scripts en websites beschikbaar die een geocode als barcode weergeven. Met deze applicatie kan c:geo deze geocode direct van het computerscherm lezen.</string>
 

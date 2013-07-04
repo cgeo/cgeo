@@ -824,8 +824,6 @@
     <string name="helper_locus_description">Ett enkelt program för att visa Online kartor men som också medger nedladdning av raster kartor för användning i Offline läge. Stödjer även inspelning av väg (track recording), POI hantering och många andra användbara funktioner.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
-    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
-    <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få mer exakt position och även spara på enhetens batteri.</string>
     <string name="helper_barcode_title">Streckkodsläsare</string>
     <string name="helper_barcode_description">Det finns Greasemonkey-script och hemsidor som visar GC-koder som streckkoder/QR-koder. Med den här appen kan c:geo scanna in GC-koden direkt från skärmen på din dator.</string>
 
