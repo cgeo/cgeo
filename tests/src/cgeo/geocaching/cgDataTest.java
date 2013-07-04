@@ -134,11 +134,18 @@ public class cgDataTest extends CGeoTestCase {
 
     public static void testLoadCacheHistory() {
         int sumCaches = 0;
+        int allCaches = 0;
         for (CacheType cacheType : CacheType.values()) {
             SearchResult historyOfType = cgData.getHistoryOfCaches(false, cacheType);
             assertNotNull(historyOfType);
-            sumCaches += historyOfType.getCount();
+            if (cacheType != CacheType.ALL) {
+                sumCaches += historyOfType.getCount();
+            } else {
+                allCaches = historyOfType.getCount();
+            }
         }
+        // check that sum of types equals 'all'
+        assertEquals(sumCaches, allCaches);
         // check that two different routines behave the same
         assertEquals(cgData.getAllHistoryCachesCount(), sumCaches);
     }
