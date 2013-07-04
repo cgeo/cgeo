@@ -11,9 +11,9 @@ import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
@@ -358,7 +358,8 @@ public class EditWaypointActivity extends AbstractActivity {
             final String name = StringUtils.isNotEmpty(givenName) ? givenName : res.getString(R.string.waypoint) + " " + (wpCount + 1);
             final String noteText = note.getText().toString().trim();
             final Geopoint coordsToSave = coords;
-            final WaypointType type = wpTypes.get(waypointTypeSelector.getSelectedItemPosition());
+            final int selectedTypeIndex = waypointTypeSelector.getSelectedItemPosition();
+            final WaypointType type = selectedTypeIndex >= 0 ? wpTypes.get(selectedTypeIndex) : waypoint.getWaypointType();
             final boolean visited = visitedCheckBox.isChecked();
             final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_being_saved), true);
             final Handler finishHandler = new Handler() {
