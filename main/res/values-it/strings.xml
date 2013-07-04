@@ -505,7 +505,7 @@
 
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Un cache</item>
+        <item quantity="one">un cache</item>
         <item quantity="other">%1$d cache</item>
     </plurals>
 
@@ -549,7 +549,7 @@
     <string name="cache_waypoints">Waypoints</string>
 
     <plurals name="waypoints">
-        <item quantity="one">1 Waypoint</item>
+        <item quantity="one">un Waypoint</item>
         <item quantity="other">%d Waypoint</item>
     </plurals>
 
