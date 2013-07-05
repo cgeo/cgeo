@@ -458,18 +458,29 @@ public abstract class Login {
      * @return
      */
     public static String getRequestLogged(final String uri, final Parameters params) {
-        final String data = Network.getResponseData(Network.getRequest(uri, params));
+        final String data = Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
 
         if (getLoginStatus(data)) {
             return data;
         }
 
         if (login() == StatusCode.NO_ERROR) {
-            return Network.getResponseData(Network.getRequest(uri, params));
+            return Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
         }
 
         Log.w("Working as guest.");
         return data;
+    }
+
+    /**
+     * Unfortunately the cache details page contains user generated whitespace in the personal note, therefore we cannot
+     * remove the white space from cache details pages.
+     * 
+     * @param uri
+     * @return
+     */
+    private static boolean canRemoveWhitespace(final String uri) {
+        return !StringUtils.contains(uri, "cache_details");
     }
 
     /** Get user session & session token from the Live Map. Needed for following requests */

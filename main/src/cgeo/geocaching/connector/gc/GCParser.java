@@ -356,31 +356,40 @@ public abstract class GCParser {
         return searchResult;
     }
 
-    static SearchResult parseCacheFromText(final String page, final CancellableHandler handler) {
+    static SearchResult parseCacheFromText(final String pageIn, final CancellableHandler handler) {
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
-        if (StringUtils.isBlank(page)) {
+        if (StringUtils.isBlank(pageIn)) {
             Log.e("GCParser.parseCache: No page given");
             return null;
         }
 
         final SearchResult searchResult = new SearchResult();
 
-        if (page.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || page.contains(GCConstants.STRING_UNPUBLISHED_OWNER) || page.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
+        if (pageIn.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_OWNER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
             searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
             return searchResult;
         }
 
-        if (page.contains(GCConstants.STRING_PREMIUMONLY_1) || page.contains(GCConstants.STRING_PREMIUMONLY_2)) {
+        if (pageIn.contains(GCConstants.STRING_PREMIUMONLY_1) || pageIn.contains(GCConstants.STRING_PREMIUMONLY_2)) {
             searchResult.setError(StatusCode.PREMIUM_ONLY);
             return searchResult;
         }
 
-        final String cacheName = Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_NAME, true, "")).toString();
+        final String cacheName = Html.fromHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_NAME, true, "")).toString();
         if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
             searchResult.setError(StatusCode.UNKNOWN_ERROR);
             return searchResult;
         }
+
+        // first handle the content with line breaks, then trim everything for easier matching and reduced memory consumption in parsed fields
+        String personalNoteWithLineBreaks = "";
+        MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE, pageIn);
+        if (matcher.find()) {
+            personalNoteWithLineBreaks = matcher.group(1).trim();
+        }
+
+        final String page = TextUtils.replaceWhitespace(pageIn);
 
         final Geocache cache = new Geocache();
         cache.setDisabled(page.contains(GCConstants.STRING_DISABLED));
@@ -518,7 +527,7 @@ public abstract class GCParser {
         cache.checkFields();
 
         // cache personal note
-        cache.setPersonalNote(TextUtils.getMatch(page, GCConstants.PATTERN_PERSONALNOTE, true, cache.getPersonalNote()));
+        cache.setPersonalNote(personalNoteWithLineBreaks);
 
         // cache short description
         cache.setShortDescription(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
