@@ -745,6 +745,8 @@
     <string name="helper_locus_description">Egyszerűen kezelhető alkalmazás ami megmutatja az online térképeket amiket le is tud tölteni az offline módban való használatra (csak raszteres térképekel működik). Támogatja a nyomvonalrögzítést, útpont kezelés és sok egyéb hasznos funkciót.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">Ebben a programban található egy radar amit a c:geo-hoz is használhatsz. Sok egyéb GPS-el kapcsolatos információt is megmutat.</string>
+    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
+    <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább tart.</string>
     <string name="helper_barcode_title">Vonalkód olvasó</string>
     <string name="helper_barcode_description">Léteznek olyan Greasemonkey szkriptek és weboldalak amiknek segítségével egy geoláda megjeleníthető vonalkódként. Ezzel az appal a c:geo közvetlenül a számítógéped képernyőjéről tudja beolvasni ezt a geokódot.</string>
 

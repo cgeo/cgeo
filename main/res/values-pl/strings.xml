@@ -816,6 +816,8 @@
     <string name="helper_locus_description">Bardzo dobra aplikacja do oglądania map online, która pozwala na pobieranie ich bezpośrednio do trybu offline (tylko mapy rastrowe). Pozwala także na zapisywanie ścieżek, obsługę POI oraz ma wiele innych przydatnych funkcji.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
+    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
+    <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Istnieją skrypty i strony WWW, które umożliwiają wyświetlanie GC-kodu jako kodu kreskowego. Z tym programem c:geo może czytać te GC-kody bezpośrednio z ekranu Twojego komputera.</string>
 

@@ -755,6 +755,8 @@
   <string name="helper_locus_description">Application simple affichant des cartes en ligne et hors ligne. Permet d\'enregistrer son parcours, de gérer des POI et de nombreuses autres fonctions utiles.</string>
   <string name="helper_gpsstatus_title">Etat GPS</string>
   <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
+  <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
+  <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une meilleure réception, plus précis et économise la batterie.</string>
   <string name="helper_barcode_title">Lecteur de code barre</string>
   <string name="helper_barcode_description">Il existe des programmes et des sites web permettant d\'afficher un géo-code sous forme de code barre. Avec cette application, c:geo pourra lire les géo-codes affichés sous cette forme sur l\'écran de votre ordinateur.</string>
   <string name="helper_pocketquery_title">Pocket Query Creator</string>

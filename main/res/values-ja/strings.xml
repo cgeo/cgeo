@@ -786,6 +786,8 @@
     <string name="helper_locus_description">シンプルで役に立つ地図アプリ。オフライン用に地図を直接ダウンロード(画像データのみ)することができます。軌跡(GPSログ)を記録したり、POIを扱ったり、その他もたくさん便利な機能があります。</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。その他、GPSに関するたくさんの情報が得られます。</string>
+    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
+    <string name="helper_bluetoothgps_description">外部GPSデバイスを利用することができます。より正確な位置情報を得られ、アンドロイド端末のバッテリ消費が少なくなるかもしれません。</string>
     <string name="helper_barcode_title">QRコードスキャナー</string>
     <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます。</string>
 

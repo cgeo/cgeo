@@ -812,6 +812,8 @@
     <string name="helper_locus_description">Jednoduše použitelná aplikace zobrazující Online mapy a dovolující je přímo stahovat pro Offline použití (pouze rastrové mapy). Také podporuje záznam trasy, zpracování bodů zájmu a další užitečné funkce.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
+    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
+    <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Jsou zde skripty Greasemonkey a stránky, které ti umožní zobrazit geokód jako čárový kód. S touto aplikací může c:geo přečíst daný geokód přímo z tvého displeje.</string>
 

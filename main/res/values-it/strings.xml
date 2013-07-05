@@ -839,6 +839,8 @@
     <string name="helper_locus_description">Applicazione semplice da usare che mostra mappe online permettendo di scaricarle direttamente per l\'uso offline (solo mappe raster). Supporta inoltra la registrazione di traccia, gestione dei waypoints e altre utili funzioni.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
+    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
+    <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del dispositivo.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
     <string name="helper_pocketquery_title">Creatore di Pocket Query</string>
