@@ -105,19 +105,19 @@ public class TextFactoryTest extends AndroidTestCase {
         setLocale(Locale.ITALY, true);
         assertEquals("a ore una. 6 chilometri", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
         assertEquals("a ore 9. 1,6 chilometri", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
-        assertEquals("a ore 6. uno chilometro", TextFactory.getText(MY_POSITION, SOUTH_1020M, 0));
+        assertEquals("a ore 6. un chilometro", TextFactory.getText(MY_POSITION, SOUTH_1020M, 0));
         assertEquals("a ore 3. 120 metri", TextFactory.getText(MY_POSITION, EAST_123M, 0));
         assertEquals("a ore 11. 34 metri", TextFactory.getText(MY_POSITION, WEST_34M, 290));
-        assertEquals("a ore 9. uno metro", TextFactory.getText(MY_POSITION, EAST_1M, 180));
+        assertEquals("a ore 9. un metro", TextFactory.getText(MY_POSITION, EAST_1M, 180));
         assertEquals("a ore 12. 0 metri", TextFactory.getText(MY_POSITION, MY_POSITION, 0));
 
         setLocale(Locale.ITALY, false);
         assertEquals("a ore una. 4 miglia", TextFactory.getText(MY_POSITION, NORTH_6100M, 330));
-        assertEquals("a ore 9. uno miglio", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
+        assertEquals("a ore 9. un miglio", TextFactory.getText(MY_POSITION, WEST_1MILE, 0));
         assertEquals("a ore 6. 0,6 miglia", TextFactory.getText(MY_POSITION, SOUTH_1020M, 0));
         assertEquals("a ore 3. 400 piedi", TextFactory.getText(MY_POSITION, EAST_123M, 0));
         assertEquals("a ore 11. 111 piedi", TextFactory.getText(MY_POSITION, WEST_34M, 290));
-        assertEquals("a ore 9. uno piede", TextFactory.getText(MY_POSITION, EAST_1FT, 180));
+        assertEquals("a ore 9. un piede", TextFactory.getText(MY_POSITION, EAST_1FT, 180));
         assertEquals("a ore 12. 0 piedi", TextFactory.getText(MY_POSITION, MY_POSITION, 0));
     }
 

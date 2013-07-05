@@ -1082,7 +1082,7 @@
     <string name="tts_service">Bussola parlante</string>
     <string name="tts_start">Start voce</string>
     <string name="tts_stop">Stop voce</string>
-    <string name="tts_one_kilometer">uno chilometro</string>
+    <string name="tts_one_kilometer">un chilometro</string>
     <plurals name="tts_kilometers">
         <item quantity="one">un chilometro</item>
         <item quantity="other">%s chilometri</item>
