@@ -554,8 +554,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         } else {
             if (type == CacheListType.HISTORY) {
                 final SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_HISTORY, 0, res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
-                subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
                 subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
+                subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
                 subMenu.add(0, MENU_CLEAR_OFFLINE_LOGS, 0, res.getString(R.string.caches_clear_offlinelogs));
                 menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)).setIcon(R.drawable.ic_menu_set_as);
             } else {
