@@ -27,10 +27,7 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
 
         for (ISearchByCenter centerConn : ConnectorFactory.getSearchByCenterConnectors()) {
             if (centerConn.isActivated()) {
-                SearchResult temp = centerConn.searchByCenter(coords);
-                if (temp != null) {
-                    search.addGeocodes(temp.getGeocodes());
-                }
+                search.addSearchResult(centerConn.searchByCenter(coords));
             }
         }
 

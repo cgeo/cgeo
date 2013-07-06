@@ -337,7 +337,7 @@ public class GCMap {
                             Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
                         }
                         else {
-                            searchResult.addGeocodes(search.getGeocodes());
+                            searchResult.addSearchResult(search);
                         }
                         Tile.Cache.add(tile);
                     }
@@ -348,6 +348,11 @@ public class GCMap {
                     }
 
                 }
+            }
+
+            // Check for vanished found caches
+            if (tiles.iterator().next().getZoomlevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
+                searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance()));
             }
         }
 

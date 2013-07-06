@@ -37,6 +37,7 @@ public class Tile {
     public static final int TILE_SIZE = 256;
     public static final int ZOOMLEVEL_MAX = 18;
     public static final int ZOOMLEVEL_MIN = 0;
+    public static final int ZOOMLEVEL_MIN_PERSONALIZED = 12;
 
     static final int[] NUMBER_OF_TILES = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
     static final int[] NUMBER_OF_PIXELS = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
@@ -250,6 +251,10 @@ public class Tile {
 
     public boolean containsPoint(final ICoordinates point) {
         return viewPort.contains(point);
+    }
+
+    public Viewport getViewport() {
+        return viewPort;
     }
 
     /**

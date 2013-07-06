@@ -1,6 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.CGeoTestCase;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -148,5 +150,43 @@ public class cgDataTest extends CGeoTestCase {
         assertEquals(sumCaches, allCaches);
         // check that two different routines behave the same
         assertEquals(cgData.getAllHistoryCachesCount(), sumCaches);
+    }
+
+    public static void testCachedMissing() {
+
+        // Tile to test
+        final Tile tile = new Tile(new Geopoint("N49 44.0 E8 37.0"), 14);
+        final Set<Tile> tiles = new HashSet<Tile>();
+        tiles.add(tile);
+
+        // set up geocaches to fill into cacheCache
+        final Geocache main = new Geocache();
+        main.setGeocode("GC12345");
+        main.setCoords(new Geopoint("N49 44.0 E8 37.0"));
+        final Geocache inTile = new Geocache();
+        inTile.setGeocode("GC12346");
+        inTile.setCoords(new Geopoint("N49 44.001 E8 37.001"));
+        final Geocache outTile = new Geocache();
+        outTile.setGeocode("GC12347");
+        outTile.setCoords(new Geopoint(tile.getViewport().getLatitudeMin() - 0.1, tile.getViewport().getLongitudeMin() - 0.1));
+        final Geocache otherConnector = new Geocache();
+        otherConnector.setGeocode("OC0001");
+        otherConnector.setCoords(new Geopoint("N49 44.0 E8 37.0"));
+
+        // put in cache
+        cgData.saveCache(main, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(inTile, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(outTile, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(otherConnector, EnumSet.of(SaveFlag.SAVE_CACHE));
+
+        final SearchResult search = new SearchResult(main);
+
+        Set<String> filteredGeoCodes = cgData.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance());
+
+        assertTrue(filteredGeoCodes.contains(inTile.getGeocode()));
+        assertFalse(filteredGeoCodes.contains(otherConnector.getGeocode()));
+        assertFalse(filteredGeoCodes.contains(outTile.getGeocode()));
+        assertFalse(filteredGeoCodes.contains(main.getGeocode()));
+
     }
 }

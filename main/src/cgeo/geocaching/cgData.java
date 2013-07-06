@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -2973,6 +2975,37 @@ public class cgData {
             return true;
         }
         return false;
+    }
+
+    public static Set<String> getCachedMissingFromSearch(SearchResult searchResult, Set<Tile> tiles, IConnector connector) {
+
+        // get cached cgeocaches
+        final Set<String> cachedGeocodes = new HashSet<String>();
+        for (Tile tile : tiles) {
+            cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport(), CacheType.ALL));
+        }
+        // remove found in search result
+        cachedGeocodes.removeAll(searchResult.getGeocodes());
+
+        // check remaining against viewports
+        Set<String> missingFromSearch = new HashSet<String>();
+        for (String geocode : cachedGeocodes) {
+            if (connector.canHandle(geocode)) {
+                Geocache geocache = cacheCache.getCacheFromCache(geocode);
+                boolean bFound = false;
+                for (Tile tile : tiles) {
+                    if (tile.containsPoint(geocache)) {
+                        bFound = true;
+                        break;
+                    }
+                }
+                if (bFound) {
+                    missingFromSearch.add(geocode);
+                }
+            }
+        }
+
+        return missingFromSearch;
     }
 
 }

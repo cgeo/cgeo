@@ -17,6 +17,7 @@ import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -70,6 +71,7 @@ import android.widget.ViewSwitcher.ViewFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -1082,8 +1084,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
                 // live mode search result
                 if (isLiveEnabled) {
-                    SearchResult liveResult = new SearchResult(cgData.loadCachedInViewport(viewport, Settings.getCacheType()));
-                    searchResult.addGeocodes(liveResult.getGeocodes());
+                    searchResult.addSearchResult(cgData.loadCachedInViewport(viewport, Settings.getCacheType()));
                 }
 
                 downloaded = true;
@@ -1179,7 +1180,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     CGeoMap.filter(result);
                     // update the caches
-                    // new collection type needs to remove first
+                    // first remove filtered out
+                    final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
+                    Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
+                    caches.removeAll(cgData.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
+                    cgData.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+                    // new collection type needs to remove first to refresh
                     caches.removeAll(result);
                     caches.addAll(result);
                     lastSearchResult = searchResult;
