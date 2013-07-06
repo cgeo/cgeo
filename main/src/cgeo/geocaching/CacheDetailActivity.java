@@ -2409,10 +2409,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return new DescriptionViewCreator();
 
             case LOGS:
-                return new CacheLogsViewCreator(this, cache, true);
+                return new CacheLogsViewCreator(this, true);
 
             case LOGSFRIENDS:
-                return new CacheLogsViewCreator(this, cache, false);
+                return new CacheLogsViewCreator(this, false);
 
             case WAYPOINTS:
                 return new WaypointsViewCreator();
@@ -2469,6 +2469,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
         offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
         offlineRefresh.setClickable(true);
+    }
+
+    public Geocache getCache() {
+        return cache;
     }
 
 }
