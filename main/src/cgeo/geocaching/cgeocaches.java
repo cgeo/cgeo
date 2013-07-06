@@ -33,8 +33,6 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.ComparatorUserInterface;
-import cgeo.geocaching.sorting.EventDateComparator;
-import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -166,13 +164,12 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
      */
     private MenuItem navigationMenu;
 
+    // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
         try {
             setAdapter();
 
             updateTitle();
-
-            setDateComparatorForEventList();
 
             showFooterMoreCaches();
 
@@ -1625,32 +1622,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
     }
 
-    /**
-     * set date comparator for pure event lists
-     *
-     * TODO: move this method into the adapter
-     */
-    private void setDateComparatorForEventList() {
-        if (CollectionUtils.isNotEmpty(cacheList)) {
-            boolean eventsOnly = true;
-            for (final Geocache cache : cacheList) {
-                if (!cache.isEventCache()) {
-                    eventsOnly = false;
-                    break;
-                }
-            }
-            if (eventsOnly) {
-                adapter.setComparator(new EventDateComparator());
-            }
-            else if (type == CacheListType.HISTORY) {
-                adapter.setComparator(new VisitComparator());
-            }
-            else if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof EventDateComparator) {
-                adapter.setComparator(null);
-            }
-        }
-    }
-
     public static void startActivityNearest(final AbstractActivity context, final Geopoint coordsNow) {
         if (!isValidCoords(context, coordsNow)) {
             return;
@@ -1778,7 +1749,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 loader = new OwnerGeocacheListLoader(app, ownerName);
                 break;
             case MAP:
-                //TODO Build Nullloader
+                //TODO Build Null loader
                 title = res.getString(R.string.map_map);
                 search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
@@ -1812,6 +1783,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             cacheList.addAll(cachesFromSearchResult);
             search = searchIn;
             adapter.reFilter();
+            adapter.setInitialComparator();
             adapter.forceSort();
             adapter.notifyDataSetChanged();
             updateTitle();
@@ -1823,7 +1795,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     @Override
     public void onLoaderReset(Loader<SearchResult> arg0) {
-        //Not interessting
+        //Not interesting
     }
 }
 
