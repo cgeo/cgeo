@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import android.os.Handler;
 import android.test.AndroidTestCase;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class GeocacheTest extends AndroidTestCase {
 
     private static void assertWaypointsParsed(String note, int expectedWaypoints) {
         Geocache cache = new Geocache();
-        cache.setGeocode("Test");
+        cache.setGeocode("Test" + System.nanoTime());
         cache.setWaypoints(new ArrayList<Waypoint>(), false);
         for (int i = 0; i < 2; i++) {
             cache.setPersonalNote(note);
@@ -75,5 +76,6 @@ public class GeocacheTest extends AndroidTestCase {
             assertEquals(cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " 1", waypoint.getName());
             cache.store(StoredList.TEMPORARY_LIST_ID, null);
         }
+        cache.drop(new Handler());
     }
 }
