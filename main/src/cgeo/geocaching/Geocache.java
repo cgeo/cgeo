@@ -1138,7 +1138,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void setPersonalNote(String personalNote) {
-        this.personalNote = personalNote;
+        this.personalNote = StringUtils.trimToNull(personalNote);
     }
 
     public void setDisabled(boolean disabled) {
