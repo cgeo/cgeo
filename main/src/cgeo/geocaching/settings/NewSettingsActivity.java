@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -42,6 +43,7 @@ import android.widget.EditText;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -124,16 +126,15 @@ public class NewSettingsActivity extends PreferenceActivity {
         initBasicMemberPreferences();
         initSend2CgeoPreferences();
 
-        for (String k : new String[] { Settings.KEY_USERNAME, Settings.KEY_PASSWORD,
-                Settings.KEY_GCVOTE_PASSWORD, Settings.KEY_SIGNATURE,
-                Settings.KEY_MAP_SOURCE, Settings.KEY_RENDER_THEME_BASE_FOLDER,
-                Settings.KEY_GPX_EXPORT_DIR, Settings.KEY_GPX_IMPORT_DIR,
-                Settings.KEY_MAP_DIRECTORY, Settings.KEY_DEFAULT_NAVIGATION_TOOL,
-                Settings.KEY_DEFAULT_NAVIGATION_TOOL_2, Settings.KEY_WEBDEVICE_NAME,
-                Settings.FAKEKEY_PREFERENCE_BACKUP_INFO, }) {
-            bindSummaryToStringValue(k);
+        Map<String, ?> prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getAll();
+        for (String key : prefs.keySet()) {
+            Preference pref = findPreference(key);
+            if (pref instanceof EditTextPreference || pref instanceof EditPasswordPreference) {
+                bindSummaryToStringValue(pref);
+            } else if (pref instanceof NumberPickerPreference) {
+                bindSummaryToIntValue(pref);
+            }
         }
-        bindSummaryToIntValue(Settings.KEY_ALTITUDE_CORRECTION);
     }
 
     // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
@@ -490,17 +491,16 @@ public class NewSettingsActivity extends PreferenceActivity {
      * @param key
      */
     @SuppressWarnings("deprecation")
-    private void bindSummaryToStringValue(String key) {
-        Preference p = findPreference(key);
-        if (p == null) {
+    private void bindSummaryToStringValue(Preference pref) {
+        if (pref == null) {
             return;
         }
 
         String value = PreferenceManager
-                .getDefaultSharedPreferences(p.getContext())
-                .getString(p.getKey(), "");
+                .getDefaultSharedPreferences(pref.getContext())
+                .getString(pref.getKey(), "");
 
-        bindSummaryToValue(p, value);
+        bindSummaryToValue(pref, value);
     }
 
     /**
@@ -509,16 +509,15 @@ public class NewSettingsActivity extends PreferenceActivity {
      * @param key
      */
     @SuppressWarnings("deprecation")
-    private void bindSummaryToIntValue(String key) {
-        Preference p = findPreference(key);
-        if (p == null) {
+    private void bindSummaryToIntValue(Preference pref) {
+        if (pref == null) {
             return;
         }
 
         int value = PreferenceManager
-                .getDefaultSharedPreferences(p.getContext())
-                .getInt(p.getKey(), 0);
+                .getDefaultSharedPreferences(pref.getContext())
+                .getInt(pref.getKey(), 0);
 
-        bindSummaryToValue(p, value);
+        bindSummaryToValue(pref, value);
     }
 }
