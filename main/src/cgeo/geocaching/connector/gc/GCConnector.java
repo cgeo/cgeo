@@ -38,7 +38,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * Pocket queries downloaded from the website use a numeric prefix. The pocket query creator Android app adds a
      * verbatim "pocketquery" prefix.
      */
-    private static final Pattern gpxZipFilePattern = Pattern.compile("((\\d{7,})|(pocketquery))" + "(_.+)?" + "\\.zip", Pattern.CASE_INSENSITIVE);
+    private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("((\\d{7,})|(pocketquery))" + "(_.+)?" + "\\.zip", Pattern.CASE_INSENSITIVE);
 
     /**
      * Pattern for GC codes
@@ -171,7 +171,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isZippedGPXFile(final String fileName) {
-        return gpxZipFilePattern.matcher(fileName).matches();
+        return GPX_ZIP_FILE_PATTERN.matcher(fileName).matches();
     }
 
     @Override

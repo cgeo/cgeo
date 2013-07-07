@@ -12,7 +12,7 @@ public class OCConnector extends AbstractConnector {
     private final String host;
     private final String name;
     private final Pattern codePattern;
-    private static final Pattern gpxZipFilePattern = Pattern.compile("oc[a-z]{2,3}\\d{5,}\\.zip", Pattern.CASE_INSENSITIVE);
+    private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("oc[a-z]{2,3}\\d{5,}\\.zip", Pattern.CASE_INSENSITIVE);
 
     public OCConnector(final String name, final String host, final String prefix) {
         this.name = name;
@@ -45,7 +45,7 @@ public class OCConnector extends AbstractConnector {
 
     @Override
     public boolean isZippedGPXFile(String fileName) {
-        return gpxZipFilePattern.matcher(fileName).matches();
+        return GPX_ZIP_FILE_PATTERN.matcher(fileName).matches();
     }
 
     @Override

@@ -19,7 +19,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
         super("map");
     }
 
-    String mapFile;
+    private String mapFile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
