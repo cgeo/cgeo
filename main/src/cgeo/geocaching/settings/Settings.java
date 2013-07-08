@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
@@ -42,92 +43,6 @@ import java.util.Locale;
  */
 public final class Settings {
 
-    private static final String KEY_TEMP_TWITTER_TOKEN_SECRET = "temp-token-secret";
-    private static final String KEY_TEMP_TWITTER_TOKEN_PUBLIC = "temp-token-public";
-    private static final String KEY_HELP_SHOWN = "helper";
-    private static final String KEY_ANYLONGITUDE = "anylongitude";
-    private static final String KEY_ANYLATITUDE = "anylatitude";
-    private static final String KEY_USE_OFFLINEMAPS = "offlinemaps";
-    private static final String KEY_USE_OFFLINEWPMAPS = "offlinewpmaps";
-    private static final String KEY_WEB_DEVICE_CODE = "webDeviceCode";
-    static final String KEY_WEBDEVICE_NAME = "webDeviceName";
-    private static final String KEY_MAP_LIVE = "maplive";
-    static final String KEY_MAP_SOURCE = "mapsource";
-    private static final String KEY_USE_TWITTER = "twitter";
-    private static final String KEY_SHOW_ADDRESS = "showaddress";
-    static final String KEY_SHOW_CAPTCHA = "showcaptcha";
-    private static final String KEY_MAP_TRAIL = "maptrail";
-    private static final String KEY_LAST_MAP_ZOOM = "mapzoom";
-    private static final String KEY_LAST_MAP_LAT = "maplat";
-    private static final String KEY_LAST_MAP_LON = "maplon";
-    private static final String KEY_LIVE_LIST = "livelist";
-    private static final String KEY_IMPERIAL_UNITS = "units";
-    private static final String KEY_SKIN = "skin";
-    private static final String KEY_LAST_USED_LIST = "lastlist";
-    private static final String KEY_CACHE_TYPE = "cachetype";
-    private static final String KEY_TWITTER_TOKEN_SECRET = "tokensecret";
-    private static final String KEY_TWITTER_TOKEN_PUBLIC = "tokenpublic";
-    private static final String KEY_VERSION = "version";
-    private static final String KEY_LOAD_DESCRIPTION = "autoloaddesc";
-    private static final String KEY_RATING_WANTED = "ratingwanted";
-    private static final String KEY_ELEVATION_WANTED = "elevationwanted";
-    private static final String KEY_FRIENDLOGS_WANTED = "friendlogswanted";
-    static final String KEY_USE_ENGLISH = "useenglish";
-    private static final String KEY_USE_COMPASS = "usecompass";
-    private static final String KEY_AUTO_VISIT_TRACKABLES = "trackautovisit";
-    private static final String KEY_AUTO_INSERT_SIGNATURE = "sigautoinsert";
-    static final String KEY_ALTITUDE_CORRECTION = "altcorrection";
-    private static final String KEY_STORE_LOG_IMAGES = "logimages";
-    private static final String KEY_EXCLUDE_DISABLED = "excludedisabled";
-    private static final String KEY_EXCLUDE_OWN = "excludemine";
-    private static final String KEY_MAPFILE = "mfmapfile";
-    static final String KEY_SIGNATURE = "signature";
-    static final String KEY_GCVOTE_PASSWORD = "pass-vote";
-    static final String KEY_PASSWORD = "password";
-    static final String KEY_USERNAME = "username";
-    private static final String KEY_MEMBER_STATUS = "memberstatus";
-    private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
-    private static final String KEY_LOG_OFFLINE = "log_offline";
-    private static final String KEY_CHOOSE_LIST = "choose_list";
-    static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
-    private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
-    private static final String KEY_SHOW_WAYPOINTS_THRESHOLD = "gcshowwaypointsthreshold";
-    private static final String KEY_COOKIE_STORE = "cookiestore";
-    private static final String KEY_OPEN_LAST_DETAILS_PAGE = "opendetailslastpage";
-    private static final String KEY_LAST_DETAILS_PAGE = "lastdetailspage";
-    static final String KEY_DEFAULT_NAVIGATION_TOOL = "defaultNavigationTool";
-    static final String KEY_DEFAULT_NAVIGATION_TOOL_2 = "defaultNavigationTool2";
-    private static final String KEY_LIVE_MAP_STRATEGY = "livemapstrategy";
-    static final String KEY_DEBUG = "debug";
-    private static final String KEY_HIDE_LIVE_MAP_HINT = "hidelivemaphint";
-    private static final String KEY_LIVE_MAP_HINT_SHOW_COUNT = "livemaphintshowcount";
-    private static final String KEY_SETTINGS_VERSION = "settingsversion";
-    static final String KEY_DB_ON_SDCARD = "dbonsdcard";
-    private static final String KEY_LAST_TRACKABLE_ACTION = "trackableaction";
-    private static final String KEY_SHARE_AFTER_EXPORT = "shareafterexport";
-    public static final String KEY_RENDER_THEME_BASE_FOLDER = "renderthemepath";
-    static final String KEY_RENDER_THEME_FILE_PATH = "renderthemefile";
-    public static final String KEY_GPX_EXPORT_DIR = "gpxExportDir";
-    public static final String KEY_GPX_IMPORT_DIR = "gpxImportDir";
-    private static final String KEY_PLAIN_LOGS = "plainLogs";
-    private static final String KEY_NATIVE_UA = "nativeUa";
-    static final String KEY_MAP_DIRECTORY = "mapDirectory";
-    private static final String KEY_CONNECTOR_GC_ACTIVE = "connectorGCActive";
-    private static final String KEY_CONNECTOR_OC_ACTIVE = "connectorOCActive";
-    private static final String KEY_LOG_IMAGE_SCALE = "logImageScale";
-    private static final String KEY_OCDE_TOKEN_SECRET = "ocde_tokensecret";
-    private static final String KEY_OCDE_TOKEN_PUBLIC = "ocde_tokenpublic";
-    private static final String KEY_TEMP_OCDE_TOKEN_SECRET = "ocde-temp-token-secret";
-    private static final String KEY_TEMP_OCDE_TOKEN_PUBLIC = "ocde-temp-token-public";
-
-    /*
-     * fake keys are for finding preference objects only, because preferences
-     * don't have an id.
-     */
-    static final String FAKEKEY_PREFERENCE_BACKUP_INFO = "fakekey_preference_backup_info";
-    static final String FAKEKEY_PREFERENCE_BACKUP = "fakekey_preference_backup";
-    static final String FAKEKEY_PREFERENCE_RESTORE = "fakekey_preference_restore";
-
     public static final int SHOW_WP_THRESHOLD_DEFAULT = 5;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
@@ -160,7 +75,7 @@ public final class Settings {
             .getDefaultSharedPreferences(cgeoapplication.getInstance().getBaseContext());
     static {
         migrateSettings();
-        Log.setDebug(sharedPrefs.getBoolean(KEY_DEBUG, false));
+        Log.setDebug(sharedPrefs.getBoolean(getKey(R.string.pref_debug), false));
     }
 
     // maps
@@ -173,71 +88,71 @@ public final class Settings {
 
     private static void migrateSettings() {
         // migrate from non standard file location and integer based boolean types
-        int oldVersion = sharedPrefs.getInt(KEY_SETTINGS_VERSION, 0);
+        int oldVersion = getInt(R.string.pref_settingsversion, 0);
         if (oldVersion < 1) {
             final String oldPreferencesName = "cgeo.pref";
             final SharedPreferences old = cgeoapplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
             final Editor e = sharedPrefs.edit();
 
-            e.putString(KEY_TEMP_TWITTER_TOKEN_SECRET, old.getString(KEY_TEMP_TWITTER_TOKEN_SECRET, null));
-            e.putString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, old.getString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, null));
-            e.putBoolean(KEY_HELP_SHOWN, old.getInt(KEY_HELP_SHOWN, 0) != 0);
-            e.putFloat(KEY_ANYLONGITUDE, old.getFloat(KEY_ANYLONGITUDE, 0));
-            e.putFloat(KEY_ANYLATITUDE, old.getFloat(KEY_ANYLATITUDE, 0));
-            e.putBoolean(KEY_USE_OFFLINEMAPS, 0 != old.getInt(KEY_USE_OFFLINEMAPS, 1));
-            e.putBoolean(KEY_USE_OFFLINEWPMAPS, 0 != old.getInt(KEY_USE_OFFLINEWPMAPS, 0));
-            e.putString(KEY_WEB_DEVICE_CODE, old.getString(KEY_WEB_DEVICE_CODE, null));
-            e.putString(KEY_WEBDEVICE_NAME, old.getString(KEY_WEBDEVICE_NAME, null));
-            e.putBoolean(KEY_MAP_LIVE, old.getInt(KEY_MAP_LIVE, 1) != 0);
-            e.putInt(KEY_MAP_SOURCE, old.getInt(KEY_MAP_SOURCE, MAP_SOURCE_DEFAULT));
-            e.putBoolean(KEY_USE_TWITTER, 0 != old.getInt(KEY_USE_TWITTER, 0));
-            e.putBoolean(KEY_SHOW_ADDRESS, 0 != old.getInt(KEY_SHOW_ADDRESS, 1));
-            e.putBoolean(KEY_SHOW_CAPTCHA, old.getBoolean(KEY_SHOW_CAPTCHA, false));
-            e.putBoolean(KEY_MAP_TRAIL, old.getInt(KEY_MAP_TRAIL, 1) != 0);
-            e.putInt(KEY_LAST_MAP_ZOOM, old.getInt(KEY_LAST_MAP_ZOOM, 14));
-            e.putBoolean(KEY_LIVE_LIST, 0 != old.getInt(KEY_LIVE_LIST, 1));
-            e.putBoolean(KEY_IMPERIAL_UNITS, old.getInt(KEY_IMPERIAL_UNITS, unitsMetric) == unitsMetric);
-            e.putBoolean(KEY_SKIN, old.getInt(KEY_SKIN, 0) != 0);
-            e.putInt(KEY_LAST_USED_LIST, old.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID));
-            e.putString(KEY_CACHE_TYPE, old.getString(KEY_CACHE_TYPE, CacheType.ALL.id));
-            e.putString(KEY_TWITTER_TOKEN_SECRET, old.getString(KEY_TWITTER_TOKEN_SECRET, null));
-            e.putString(KEY_TWITTER_TOKEN_PUBLIC, old.getString(KEY_TWITTER_TOKEN_PUBLIC, null));
-            e.putInt(KEY_VERSION, old.getInt(KEY_VERSION, 0));
-            e.putBoolean(KEY_LOAD_DESCRIPTION, 0 != old.getInt(KEY_LOAD_DESCRIPTION, 1));
-            e.putBoolean(KEY_RATING_WANTED, old.getBoolean(KEY_RATING_WANTED, true));
-            e.putBoolean(KEY_ELEVATION_WANTED, old.getBoolean(KEY_ELEVATION_WANTED, false));
-            e.putBoolean(KEY_FRIENDLOGS_WANTED, old.getBoolean(KEY_FRIENDLOGS_WANTED, true));
-            e.putBoolean(KEY_USE_ENGLISH, old.getBoolean(KEY_USE_ENGLISH, false));
-            e.putBoolean(KEY_USE_COMPASS, 0 != old.getInt(KEY_USE_COMPASS, 1));
-            e.putBoolean(KEY_AUTO_VISIT_TRACKABLES, old.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false));
-            e.putBoolean(KEY_AUTO_INSERT_SIGNATURE, old.getBoolean(KEY_AUTO_INSERT_SIGNATURE, false));
-            e.putInt(KEY_ALTITUDE_CORRECTION, old.getInt(KEY_ALTITUDE_CORRECTION, 0));
-            e.putBoolean(KEY_STORE_LOG_IMAGES, old.getBoolean(KEY_STORE_LOG_IMAGES, false));
-            e.putBoolean(KEY_EXCLUDE_DISABLED, 0 != old.getInt(KEY_EXCLUDE_DISABLED, 0));
-            e.putBoolean(KEY_EXCLUDE_OWN, 0 != old.getInt(KEY_EXCLUDE_OWN, 0));
-            e.putString(KEY_MAPFILE, old.getString(KEY_MAPFILE, null));
-            e.putString(KEY_SIGNATURE, old.getString(KEY_SIGNATURE, null));
-            e.putString(KEY_GCVOTE_PASSWORD, old.getString(KEY_GCVOTE_PASSWORD, null));
-            e.putString(KEY_PASSWORD, old.getString(KEY_PASSWORD, null));
-            e.putString(KEY_USERNAME, old.getString(KEY_USERNAME, null));
-            e.putString(KEY_MEMBER_STATUS, old.getString(KEY_MEMBER_STATUS, ""));
-            e.putInt(KEY_COORD_INPUT_FORMAT, old.getInt(KEY_COORD_INPUT_FORMAT, 0));
-            e.putBoolean(KEY_LOG_OFFLINE, old.getBoolean(KEY_LOG_OFFLINE, false));
-            e.putBoolean(KEY_CHOOSE_LIST, old.getBoolean(KEY_CHOOSE_LIST, false));
-            e.putBoolean(KEY_LOAD_DIRECTION_IMG, old.getBoolean(KEY_LOAD_DIRECTION_IMG, true));
-            e.putString(KEY_GC_CUSTOM_DATE, old.getString(KEY_GC_CUSTOM_DATE, null));
-            e.putInt(KEY_SHOW_WAYPOINTS_THRESHOLD, old.getInt(KEY_SHOW_WAYPOINTS_THRESHOLD, 0));
-            e.putString(KEY_COOKIE_STORE, old.getString(KEY_COOKIE_STORE, null));
-            e.putBoolean(KEY_OPEN_LAST_DETAILS_PAGE, old.getBoolean(KEY_OPEN_LAST_DETAILS_PAGE, false));
-            e.putInt(KEY_LAST_DETAILS_PAGE, old.getInt(KEY_LAST_DETAILS_PAGE, 1));
-            e.putInt(KEY_DEFAULT_NAVIGATION_TOOL, old.getInt(KEY_DEFAULT_NAVIGATION_TOOL, NavigationAppsEnum.COMPASS.id));
-            e.putInt(KEY_DEFAULT_NAVIGATION_TOOL_2, old.getInt(KEY_DEFAULT_NAVIGATION_TOOL_2, NavigationAppsEnum.INTERNAL_MAP.id));
-            e.putInt(KEY_LIVE_MAP_STRATEGY, old.getInt(KEY_LIVE_MAP_STRATEGY, Strategy.AUTO.id));
-            e.putBoolean(KEY_DEBUG, old.getBoolean(KEY_DEBUG, false));
-            e.putBoolean(KEY_HIDE_LIVE_MAP_HINT, old.getInt(KEY_HIDE_LIVE_MAP_HINT, 0) != 0);
-            e.putInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, old.getInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, 0));
+            e.putString(getKey(R.string.pref_temp_twitter_token_secret), old.getString(getKey(R.string.pref_temp_twitter_token_secret), null));
+            e.putString(getKey(R.string.pref_temp_twitter_token_public), old.getString(getKey(R.string.pref_temp_twitter_token_public), null));
+            e.putBoolean(getKey(R.string.pref_help_shown), old.getInt(getKey(R.string.pref_help_shown), 0) != 0);
+            e.putFloat(getKey(R.string.pref_anylongitude), old.getFloat(getKey(R.string.pref_anylongitude), 0));
+            e.putFloat(getKey(R.string.pref_anylatitude), old.getFloat(getKey(R.string.pref_anylatitude), 0));
+            e.putBoolean(getKey(R.string.pref_offlinemaps), 0 != old.getInt(getKey(R.string.pref_offlinemaps), 1));
+            e.putBoolean(getKey(R.string.pref_offlinewpmaps), 0 != old.getInt(getKey(R.string.pref_offlinewpmaps), 0));
+            e.putString(getKey(R.string.pref_webDeviceCode), old.getString(getKey(R.string.pref_webDeviceCode), null));
+            e.putString(getKey(R.string.pref_webDeviceName), old.getString(getKey(R.string.pref_webDeviceName), null));
+            e.putBoolean(getKey(R.string.pref_maplive), old.getInt(getKey(R.string.pref_maplive), 1) != 0);
+            e.putInt(getKey(R.string.pref_mapsource), old.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT));
+            e.putBoolean(getKey(R.string.pref_twitter), 0 != old.getInt(getKey(R.string.pref_twitter), 0));
+            e.putBoolean(getKey(R.string.pref_showaddress), 0 != old.getInt(getKey(R.string.pref_showaddress), 1));
+            e.putBoolean(getKey(R.string.pref_showcaptcha), old.getBoolean(getKey(R.string.pref_showcaptcha), false));
+            e.putBoolean(getKey(R.string.pref_maptrail), old.getInt(getKey(R.string.pref_maptrail), 1) != 0);
+            e.putInt(getKey(R.string.pref_lastmapzoom), old.getInt(getKey(R.string.pref_lastmapzoom), 14));
+            e.putBoolean(getKey(R.string.pref_livelist), 0 != old.getInt(getKey(R.string.pref_livelist), 1));
+            e.putBoolean(getKey(R.string.pref_units), old.getInt(getKey(R.string.pref_units), unitsMetric) == unitsMetric);
+            e.putBoolean(getKey(R.string.pref_skin), old.getInt(getKey(R.string.pref_skin), 0) != 0);
+            e.putInt(getKey(R.string.pref_lastusedlist), old.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
+            e.putString(getKey(R.string.pref_cachetype), old.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
+            e.putString(getKey(R.string.pref_twitter_token_secret), old.getString(getKey(R.string.pref_twitter_token_secret), null));
+            e.putString(getKey(R.string.pref_twitter_token_public), old.getString(getKey(R.string.pref_twitter_token_public), null));
+            e.putInt(getKey(R.string.pref_version), old.getInt(getKey(R.string.pref_version), 0));
+            e.putBoolean(getKey(R.string.pref_autoloaddesc), 0 != old.getInt(getKey(R.string.pref_autoloaddesc), 1));
+            e.putBoolean(getKey(R.string.pref_ratingwanted), old.getBoolean(getKey(R.string.pref_ratingwanted), true));
+            e.putBoolean(getKey(R.string.pref_elevationwanted), old.getBoolean(getKey(R.string.pref_elevationwanted), false));
+            e.putBoolean(getKey(R.string.pref_friendlogswanted), old.getBoolean(getKey(R.string.pref_friendlogswanted), true));
+            e.putBoolean(getKey(R.string.pref_useenglish), old.getBoolean(getKey(R.string.pref_useenglish), false));
+            e.putBoolean(getKey(R.string.pref_usecompass), 0 != old.getInt(getKey(R.string.pref_usecompass), 1));
+            e.putBoolean(getKey(R.string.pref_trackautovisit), old.getBoolean(getKey(R.string.pref_trackautovisit), false));
+            e.putBoolean(getKey(R.string.pref_sigautoinsert), old.getBoolean(getKey(R.string.pref_sigautoinsert), false));
+            e.putInt(getKey(R.string.pref_altcorrection), old.getInt(getKey(R.string.pref_altcorrection), 0));
+            e.putBoolean(getKey(R.string.pref_logimages), old.getBoolean(getKey(R.string.pref_logimages), false));
+            e.putBoolean(getKey(R.string.pref_excludedisabled), 0 != old.getInt(getKey(R.string.pref_excludedisabled), 0));
+            e.putBoolean(getKey(R.string.pref_excludemine), 0 != old.getInt(getKey(R.string.pref_excludemine), 0));
+            e.putString(getKey(R.string.pref_mapfile), old.getString(getKey(R.string.pref_mapfile), null));
+            e.putString(getKey(R.string.pref_signature), old.getString(getKey(R.string.pref_signature), null));
+            e.putString(getKey(R.string.pref_pass_vote), old.getString(getKey(R.string.pref_pass_vote), null));
+            e.putString(getKey(R.string.pref_password), old.getString(getKey(R.string.pref_password), null));
+            e.putString(getKey(R.string.pref_username), old.getString(getKey(R.string.pref_username), null));
+            e.putString(getKey(R.string.pref_memberstatus), old.getString(getKey(R.string.pref_memberstatus), ""));
+            e.putInt(getKey(R.string.pref_coordinputformat), old.getInt(getKey(R.string.pref_coordinputformat), 0));
+            e.putBoolean(getKey(R.string.pref_log_offline), old.getBoolean(getKey(R.string.pref_log_offline), false));
+            e.putBoolean(getKey(R.string.pref_choose_list), old.getBoolean(getKey(R.string.pref_choose_list), false));
+            e.putBoolean(getKey(R.string.pref_loaddirectionimg), old.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
+            e.putString(getKey(R.string.pref_gccustomdate), old.getString(getKey(R.string.pref_gccustomdate), null));
+            e.putInt(getKey(R.string.pref_gcshowwaypointsthreshold), old.getInt(getKey(R.string.pref_gcshowwaypointsthreshold), 0));
+            e.putString(getKey(R.string.pref_cookiestore), old.getString(getKey(R.string.pref_cookiestore), null));
+            e.putBoolean(getKey(R.string.pref_opendetailslastpage), old.getBoolean(getKey(R.string.pref_opendetailslastpage), false));
+            e.putInt(getKey(R.string.pref_lastdetailspage), old.getInt(getKey(R.string.pref_lastdetailspage), 1));
+            e.putInt(getKey(R.string.pref_defaultNavigationTool), old.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id));
+            e.putInt(getKey(R.string.pref_defaultNavigationTool2), old.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id));
+            e.putInt(getKey(R.string.pref_livemapstrategy), old.getInt(getKey(R.string.pref_livemapstrategy), Strategy.AUTO.id));
+            e.putBoolean(getKey(R.string.pref_debug), old.getBoolean(getKey(R.string.pref_debug), false));
+            e.putBoolean(getKey(R.string.pref_hidelivemaphint), old.getInt(getKey(R.string.pref_hidelivemaphint), 0) != 0);
+            e.putInt(getKey(R.string.pref_livemaphintshowcount), old.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
 
-            e.putInt(KEY_SETTINGS_VERSION, 1); // mark migrated
+            e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
             e.commit();
         }
 
@@ -245,7 +160,7 @@ public final class Settings {
         if (oldVersion < 2) {
             final Editor e = sharedPrefs.edit();
 
-            e.putBoolean(KEY_IMPERIAL_UNITS, !isUseImperialUnits());
+            e.putBoolean(getKey(R.string.pref_units), !isUseImperialUnits());
 
             // show waypoints threshold now as a slider
             int wpThreshold = getWayPointsThreshold();
@@ -254,62 +169,82 @@ public final class Settings {
             } else if (wpThreshold > SHOW_WP_THRESHOLD_MAX) {
                 wpThreshold = SHOW_WP_THRESHOLD_MAX;
             }
-            e.putInt(KEY_SHOW_WAYPOINTS_THRESHOLD, wpThreshold);
+            e.putInt(getKey(R.string.pref_gcshowwaypointsthreshold), wpThreshold);
 
             // KEY_MAP_SOURCE must be string, because it is the key for a ListPreference now
-            int ms = sharedPrefs.getInt(KEY_MAP_SOURCE, MAP_SOURCE_DEFAULT);
-            e.remove(KEY_MAP_SOURCE);
-            e.putString(KEY_MAP_SOURCE, String.valueOf(ms));
+            int ms = sharedPrefs.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT);
+            e.remove(getKey(R.string.pref_mapsource));
+            e.putString(getKey(R.string.pref_mapsource), String.valueOf(ms));
 
             // navigation tool ids must be string, because ListPreference uses strings as keys
-            int dnt1 = sharedPrefs.getInt(KEY_DEFAULT_NAVIGATION_TOOL, NavigationAppsEnum.COMPASS.id);
-            int dnt2 = sharedPrefs.getInt(KEY_DEFAULT_NAVIGATION_TOOL_2, NavigationAppsEnum.INTERNAL_MAP.id);
-            e.remove(KEY_DEFAULT_NAVIGATION_TOOL);
-            e.remove(KEY_DEFAULT_NAVIGATION_TOOL_2);
-            e.putString(KEY_DEFAULT_NAVIGATION_TOOL, String.valueOf(dnt1));
-            e.putString(KEY_DEFAULT_NAVIGATION_TOOL_2, String.valueOf(dnt2));
+            int dnt1 = sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id);
+            int dnt2 = sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id);
+            e.remove(getKey(R.string.pref_defaultNavigationTool));
+            e.remove(getKey(R.string.pref_defaultNavigationTool2));
+            e.putString(getKey(R.string.pref_defaultNavigationTool), String.valueOf(dnt1));
+            e.putString(getKey(R.string.pref_defaultNavigationTool2), String.valueOf(dnt2));
 
             // defaults for gpx directories
-            e.putString(KEY_GPX_IMPORT_DIR, getGpxImportDir());
-            e.putString(KEY_GPX_EXPORT_DIR, getGpxExportDir());
+            e.putString(getKey(R.string.pref_gpxImportDir), getGpxImportDir());
+            e.putString(getKey(R.string.pref_gpxExportDir), getGpxExportDir());
 
-            e.putInt(KEY_SETTINGS_VERSION, 2); // mark migrated
+            e.putInt(getKey(R.string.pref_settingsversion), 2); // mark migrated
             e.commit();
         }
     }
 
-    static String getString(final String key, final String defaultValue) {
-        return sharedPrefs.getString(key, defaultValue);
+    private static String getKey(final int prefKeyId) {
+        return cgeoapplication.getInstance().getString(prefKeyId);
     }
 
-    static boolean putString(final String key, final String value) {
+    static String getString(final int prefKeyId, final String defaultValue) {
+        return sharedPrefs.getString(getKey(prefKeyId), defaultValue);
+    }
+
+    private static int getInt(final int prefKeyId, final int defaultValue) {
+        return sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
+    }
+
+    private static boolean getBoolean(final int prefKeyId, final boolean defaultValue) {
+        return sharedPrefs.getBoolean(getKey(prefKeyId), defaultValue);
+    }
+
+    private static float getFloat(final int prefKeyId, final float defaultValue) {
+        return sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
+    }
+
+    static boolean putString(final int prefKeyId, final String value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putString(key, value);
+        edit.putString(getKey(prefKeyId), value);
         return edit.commit();
     }
 
-    static boolean putBoolean(final String key, final boolean value) {
+    private static boolean putBoolean(final int prefKeyId, final boolean value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putBoolean(key, value);
+        edit.putBoolean(getKey(prefKeyId), value);
         return edit.commit();
     }
 
-    static boolean putInt(final String key, final int value) {
+    private static boolean putInt(final int prefKeyId, final int value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putInt(key, value);
+        edit.putInt(getKey(prefKeyId), value);
         return edit.commit();
     }
 
-    static boolean putFloat(final String key, final float value) {
+    private static boolean putFloat(final int prefKeyId, final float value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putFloat(key, value);
+        edit.putFloat(getKey(prefKeyId), value);
         return edit.commit();
     }
 
-    static boolean remove(final String key) {
+    private static boolean remove(final int prefKeyId) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.remove(key);
+        edit.remove(getKey(prefKeyId));
         return edit.commit();
+    }
+
+    private static boolean contains(final int prefKeyId) {
+        return sharedPrefs.contains(getKey(prefKeyId));
     }
 
     public static void setLanguage(boolean useEnglish) {
@@ -320,8 +255,8 @@ public final class Settings {
     }
 
     public static boolean isLogin() {
-        final String preUsername = sharedPrefs.getString(KEY_USERNAME, null);
-        final String prePassword = sharedPrefs.getString(KEY_PASSWORD, null);
+        final String preUsername = getString(R.string.pref_username, null);
+        final String prePassword = getString(R.string.pref_password, null);
 
         return !StringUtils.isBlank(preUsername) && !StringUtils.isBlank(prePassword);
     }
@@ -333,8 +268,8 @@ public final class Settings {
      */
     public static ImmutablePair<String, String> getGcLogin() {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            final String preUsername = sharedPrefs.getString(KEY_USERNAME, null);
-            final String prePassword = sharedPrefs.getString(KEY_PASSWORD, null);
+            final String preUsername = getString(R.string.pref_username, null);
+            final String prePassword = getString(R.string.pref_password, null);
 
             if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
                 return null;
@@ -347,7 +282,7 @@ public final class Settings {
     }
 
     public static String getUsername() {
-        return username != null ? username : sharedPrefs.getString(KEY_USERNAME, null);
+        return username != null ? username : getString(R.string.pref_username, null);
     }
 
     // TODO: remove with SettingsActivity
@@ -356,23 +291,23 @@ public final class Settings {
         Settings.password = password;
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             // erase username and password
-            boolean a = remove(KEY_USERNAME);
-            boolean b = remove(KEY_PASSWORD);
+            boolean a = remove(R.string.pref_username);
+            boolean b = remove(R.string.pref_password);
             return a && b;
         }
         // save username and password
-        boolean a = putString(KEY_USERNAME, username);
-        boolean b = putString(KEY_PASSWORD, password);
+        boolean a = putString(R.string.pref_username, username);
+        boolean b = putString(R.string.pref_password, password);
         return a && b;
     }
 
     public static boolean isGCConnectorActive() {
-        return sharedPrefs.getBoolean(KEY_CONNECTOR_GC_ACTIVE, true);
+        return getBoolean(R.string.pref_connectorGCActive, true);
     }
 
     // TODO: remove with SettingsActivity
     public static boolean setGCConnectorActive(final boolean isActive) {
-        return putBoolean(KEY_CONNECTOR_GC_ACTIVE, isActive);
+        return putBoolean(R.string.pref_connectorGCActive, isActive);
     }
 
     public static boolean isPremiumMember() {
@@ -385,57 +320,57 @@ public final class Settings {
     }
 
     public static String getMemberStatus() {
-        return sharedPrefs.getString(KEY_MEMBER_STATUS, "");
+        return getString(R.string.pref_memberstatus, "");
     }
 
     public static boolean setMemberStatus(final String memberStatus) {
         if (StringUtils.isBlank(memberStatus)) {
-            return remove(KEY_MEMBER_STATUS);
+            return remove(R.string.pref_memberstatus);
         }
-        return putString(KEY_MEMBER_STATUS, memberStatus);
+        return putString(R.string.pref_memberstatus, memberStatus);
     }
 
     public static boolean isOCConnectorActive() {
-        return sharedPrefs.getBoolean(KEY_CONNECTOR_OC_ACTIVE, false);
+        return getBoolean(R.string.pref_connectorOCActive, false);
     }
 
     public static boolean setOCConnectorActive(final boolean isActive) {
-        return putBoolean(KEY_CONNECTOR_OC_ACTIVE, isActive);
+        return putBoolean(R.string.pref_connectorOCActive, isActive);
     }
 
     public static String getOCDETokenPublic() {
-        return sharedPrefs.getString(KEY_OCDE_TOKEN_PUBLIC, "");
+        return getString(R.string.pref_ocde_tokenpublic, "");
     }
 
     public static String getOCDETokenSecret() {
-        return sharedPrefs.getString(KEY_OCDE_TOKEN_SECRET, "");
+        return getString(R.string.pref_ocde_tokensecret, "");
     }
 
     public static void setOCDETokens(final String tokenPublic,
             final String tokenSecret, boolean enableOcDe) {
-        putString(KEY_OCDE_TOKEN_PUBLIC, tokenPublic);
-        putString(KEY_OCDE_TOKEN_SECRET, tokenSecret);
+        putString(R.string.pref_ocde_tokenpublic, tokenPublic);
+        putString(R.string.pref_ocde_tokensecret, tokenSecret);
         if (tokenPublic != null) {
-            remove(KEY_TEMP_OCDE_TOKEN_PUBLIC);
-            remove(KEY_TEMP_OCDE_TOKEN_SECRET);
+            remove(R.string.pref_temp_ocde_token_public);
+            remove(R.string.pref_temp_ocde_token_secret);
         }
         setOCConnectorActive(enableOcDe);
     }
 
     public static void setOCDETempTokens(final String tokenPublic, final String tokenSecret) {
-        putString(KEY_TEMP_OCDE_TOKEN_PUBLIC, tokenPublic);
-        putString(KEY_TEMP_OCDE_TOKEN_SECRET, tokenSecret);
+        putString(R.string.pref_temp_ocde_token_public, tokenPublic);
+        putString(R.string.pref_temp_ocde_token_secret, tokenSecret);
     }
 
     public static ImmutablePair<String, String> getTempOCDEToken() {
-        String tokenPublic = sharedPrefs.getString(KEY_TEMP_OCDE_TOKEN_PUBLIC, null);
-        String tokenSecret = sharedPrefs.getString(KEY_TEMP_OCDE_TOKEN_SECRET, null);
+        String tokenPublic = getString(R.string.pref_temp_ocde_token_public, null);
+        String tokenSecret = getString(R.string.pref_temp_ocde_token_secret, null);
         return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
     }
 
     public static boolean isGCvoteLogin() {
-        final String preUsername = sharedPrefs.getString(KEY_USERNAME, null);
-        final String prePassword = sharedPrefs.getString(KEY_GCVOTE_PASSWORD, null);
+        final String preUsername = getString(R.string.pref_username, null);
+        final String prePassword = getString(R.string.pref_pass_vote, null);
 
         return !StringUtils.isBlank(preUsername) && !StringUtils.isBlank(prePassword);
     }
@@ -444,15 +379,15 @@ public final class Settings {
     public static boolean setGCvoteLogin(final String password) {
         if (StringUtils.isBlank(password)) {
             // erase password
-            return remove(KEY_GCVOTE_PASSWORD);
+            return remove(R.string.pref_pass_vote);
         }
         // save password
-        return putString(KEY_GCVOTE_PASSWORD, password);
+        return putString(R.string.pref_pass_vote, password);
     }
 
     public static ImmutablePair<String, String> getGCvoteLogin() {
-        final String username = sharedPrefs.getString(KEY_USERNAME, null);
-        final String password = sharedPrefs.getString(KEY_GCVOTE_PASSWORD, null);
+        final String username = getString(R.string.pref_username, null);
+        final String password = getString(R.string.pref_pass_vote, null);
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             return null;
@@ -465,27 +400,27 @@ public final class Settings {
     public static boolean setSignature(final String signature) {
         if (StringUtils.isBlank(signature)) {
             // erase signature
-            return remove(KEY_SIGNATURE);
+            return remove(R.string.pref_signature);
         }
         // save signature
-        return putString(KEY_SIGNATURE, signature);
+        return putString(R.string.pref_signature, signature);
     }
 
     public static String getSignature() {
-        return sharedPrefs.getString(KEY_SIGNATURE, null);
+        return getString(R.string.pref_signature, null);
     }
 
     public static boolean setCookieStore(final String cookies) {
         if (StringUtils.isBlank(cookies)) {
             // erase cookies
-            return remove(KEY_COOKIE_STORE);
+            return remove(R.string.pref_cookiestore);
         }
         // save cookies
-        return putString(KEY_COOKIE_STORE, cookies);
+        return putString(R.string.pref_cookiestore, cookies);
     }
 
     public static String getCookieStore() {
-        return sharedPrefs.getString(KEY_COOKIE_STORE, null);
+        return getString(R.string.pref_cookiestore, null);
     }
 
     /**
@@ -494,23 +429,23 @@ public final class Settings {
      */
     public static void setCacheType(final CacheType cacheType) {
         if (cacheType == null) {
-            remove(KEY_CACHE_TYPE);
+            remove(R.string.pref_cachetype);
         } else {
-            putString(KEY_CACHE_TYPE, cacheType.id);
+            putString(R.string.pref_cachetype, cacheType.id);
         }
     }
 
     public static int getLastList() {
-        return sharedPrefs.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID);
+        return getInt(R.string.pref_lastusedlist, StoredList.STANDARD_LIST_ID);
     }
 
     public static void saveLastList(final int listId) {
-        putInt(KEY_LAST_USED_LIST, listId);
+        putInt(R.string.pref_lastusedlist, listId);
     }
 
     public static void setWebNameCode(final String name, final String code) {
-        putString(KEY_WEBDEVICE_NAME, name);
-        putString(KEY_WEB_DEVICE_CODE, code);
+        putString(R.string.pref_webDeviceName, name);
+        putString(R.string.pref_webDeviceCode, code);
     }
 
     public static MapProvider getMapProvider() {
@@ -521,11 +456,11 @@ public final class Settings {
     }
 
     public static String getMapFile() {
-        return sharedPrefs.getString(KEY_MAPFILE, null);
+        return getString(R.string.pref_mapfile, null);
     }
 
     public static boolean setMapFile(final String mapFile) {
-        boolean result = putString(KEY_MAPFILE, mapFile);
+        boolean result = putString(R.string.pref_mapfile, mapFile);
         if (mapFile != null) {
             setMapFileDirectory(new File(mapFile).getParent());
         }
@@ -533,7 +468,7 @@ public final class Settings {
     }
 
     public static String getMapFileDirectory() {
-        final String mapDir = sharedPrefs.getString(KEY_MAP_DIRECTORY, null);
+        final String mapDir = getString(R.string.pref_mapDirectory, null);
         if (mapDir != null) {
             return mapDir;
         }
@@ -545,7 +480,7 @@ public final class Settings {
     }
 
     public static boolean setMapFileDirectory(final String mapFileDirectory) {
-        boolean result = putString(KEY_MAP_DIRECTORY, mapFileDirectory);
+        boolean result = putString(R.string.pref_mapDirectory, mapFileDirectory);
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
         return result;
     }
@@ -559,41 +494,41 @@ public final class Settings {
     }
 
     public static coordInputFormatEnum getCoordInputFormat() {
-        return coordInputFormatEnum.fromInt(sharedPrefs.getInt(KEY_COORD_INPUT_FORMAT, 0));
+        return coordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, 0));
     }
 
     public static void setCoordInputFormat(final coordInputFormatEnum format) {
-        putInt(KEY_COORD_INPUT_FORMAT, format.ordinal());
+        putInt(R.string.pref_coordinputformat, format.ordinal());
     }
 
     static void setLogOffline(final boolean offline) {
-        putBoolean(KEY_LOG_OFFLINE, offline);
+        putBoolean(R.string.pref_log_offline, offline);
     }
 
     public static boolean getLogOffline() {
-        return sharedPrefs.getBoolean(KEY_LOG_OFFLINE, false);
+        return getBoolean(R.string.pref_log_offline, false);
     }
 
     // TODO: remove with SettingsActivity
     static void setChooseList(final boolean choose) {
-        putBoolean(KEY_CHOOSE_LIST, choose);
+        putBoolean(R.string.pref_choose_list, choose);
     }
 
     public static boolean getChooseList() {
-        return sharedPrefs.getBoolean(KEY_CHOOSE_LIST, false);
+        return getBoolean(R.string.pref_choose_list, false);
     }
 
     // TODO: remove with SettingsActivity
     static void setLoadDirImg(final boolean value) {
-        putBoolean(KEY_LOAD_DIRECTION_IMG, value);
+        putBoolean(R.string.pref_loaddirectionimg, value);
     }
 
     public static boolean getLoadDirImg() {
-        return !isPremiumMember() && sharedPrefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
+        return !isPremiumMember() && getBoolean(R.string.pref_loaddirectionimg, true);
     }
 
     public static void setGcCustomDate(final String format) {
-        putString(KEY_GC_CUSTOM_DATE, format);
+        putString(R.string.pref_gccustomdate, format);
     }
 
     /**
@@ -601,106 +536,106 @@ public final class Settings {
      * @see Login#gcCustomDateFormats
      */
     public static String getGcCustomDate() {
-        return sharedPrefs.getString(KEY_GC_CUSTOM_DATE, null);
+        return getString(R.string.pref_gccustomdate, null);
     }
 
     public static boolean isExcludeMyCaches() {
-        return sharedPrefs.getBoolean(KEY_EXCLUDE_OWN, false);
+        return getBoolean(R.string.pref_excludemine, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setExcludeMine(final boolean exclude) {
-        putBoolean(KEY_EXCLUDE_OWN, exclude);
+        putBoolean(R.string.pref_excludemine, exclude);
     }
 
     public static void setUseEnglish(final boolean english) {
-        putBoolean(KEY_USE_ENGLISH, english);
+        putBoolean(R.string.pref_useenglish, english);
         setLanguage(english);
     }
 
     public static boolean isUseEnglish() {
-        return sharedPrefs.getBoolean(KEY_USE_ENGLISH, false);
+        return getBoolean(R.string.pref_useenglish, false);
     }
 
     public static boolean isShowAddress() {
-        return sharedPrefs.getBoolean(KEY_SHOW_ADDRESS, true);
+        return getBoolean(R.string.pref_showaddress, true);
     }
 
     // TODO: remove with SettingsActivity
     public static void setShowAddress(final boolean showAddress) {
-        putBoolean(KEY_SHOW_ADDRESS, showAddress);
+        putBoolean(R.string.pref_showaddress, showAddress);
     }
 
     public static boolean isShowCaptcha() {
-        return !isPremiumMember() && sharedPrefs.getBoolean(KEY_SHOW_CAPTCHA, false);
+        return !isPremiumMember() && getBoolean(R.string.pref_showcaptcha, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setShowCaptcha(final boolean showCaptcha) {
-        putBoolean(KEY_SHOW_CAPTCHA, showCaptcha);
+        putBoolean(R.string.pref_showcaptcha, showCaptcha);
     }
 
     public static boolean isExcludeDisabledCaches() {
-        return sharedPrefs.getBoolean(KEY_EXCLUDE_DISABLED, false);
+        return getBoolean(R.string.pref_excludedisabled, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setExcludeDisabledCaches(final boolean exclude) {
-        putBoolean(KEY_EXCLUDE_DISABLED, exclude);
+        putBoolean(R.string.pref_excludedisabled, exclude);
     }
 
     public static boolean isStoreOfflineMaps() {
-        return sharedPrefs.getBoolean(KEY_USE_OFFLINEMAPS, true);
+        return getBoolean(R.string.pref_offlinemaps, true);
     }
 
     // TODO: remove with SettingsActivity
     public static void setStoreOfflineMaps(final boolean offlineMaps) {
-        putBoolean(KEY_USE_OFFLINEMAPS, offlineMaps);
+        putBoolean(R.string.pref_offlinemaps, offlineMaps);
     }
 
     public static boolean isStoreOfflineWpMaps() {
-        return sharedPrefs.getBoolean(KEY_USE_OFFLINEWPMAPS, false);
+        return getBoolean(R.string.pref_offlinewpmaps, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setStoreOfflineWpMaps(final boolean offlineMaps) {
-        putBoolean(KEY_USE_OFFLINEWPMAPS, offlineMaps);
+        putBoolean(R.string.pref_offlinewpmaps, offlineMaps);
     }
 
     public static boolean isStoreLogImages() {
-        return sharedPrefs.getBoolean(KEY_STORE_LOG_IMAGES, false);
+        return getBoolean(R.string.pref_logimages, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setStoreLogImages(final boolean storeLogImages) {
-        putBoolean(KEY_STORE_LOG_IMAGES, storeLogImages);
+        putBoolean(R.string.pref_logimages, storeLogImages);
     }
 
     public static boolean isAutoLoadDescription() {
-        return sharedPrefs.getBoolean(KEY_LOAD_DESCRIPTION, true);
+        return getBoolean(R.string.pref_autoloaddesc, true);
     }
 
     // TODO: remove with SettingsActivity
     public static void setAutoLoadDesc(final boolean autoLoad) {
-        putBoolean(KEY_LOAD_DESCRIPTION, autoLoad);
+        putBoolean(R.string.pref_autoloaddesc, autoLoad);
     }
 
     public static boolean isRatingWanted() {
-        return sharedPrefs.getBoolean(KEY_RATING_WANTED, true);
+        return getBoolean(R.string.pref_ratingwanted, true);
     }
 
     // TODO: remove with SettingsActivity
     public static void setRatingWanted(final boolean ratingWanted) {
-        putBoolean(KEY_RATING_WANTED, ratingWanted);
+        putBoolean(R.string.pref_ratingwanted, ratingWanted);
     }
 
     public static boolean isElevationWanted() {
-        return sharedPrefs.getBoolean(KEY_ELEVATION_WANTED, false);
+        return getBoolean(R.string.pref_elevationwanted, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setElevationWanted(final boolean elevationWanted) {
-        putBoolean(KEY_ELEVATION_WANTED, elevationWanted);
+        putBoolean(R.string.pref_elevationwanted, elevationWanted);
     }
 
     public static boolean isFriendLogsWanted() {
@@ -708,83 +643,83 @@ public final class Settings {
             // don't show a friends log if the user is anonymous
             return false;
         }
-        return sharedPrefs.getBoolean(KEY_FRIENDLOGS_WANTED, true);
+        return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
     // TODO: remove with SettingsActivity
     public static void setFriendLogsWanted(final boolean friendLogsWanted) {
-        putBoolean(KEY_FRIENDLOGS_WANTED, friendLogsWanted);
+        putBoolean(R.string.pref_friendlogswanted, friendLogsWanted);
     }
 
     public static boolean isLiveList() {
-        return sharedPrefs.getBoolean(KEY_LIVE_LIST, true);
+        return getBoolean(R.string.pref_livelist, true);
     }
 
     // TODO: remove with SettingsActivity
     public static void setLiveList(final boolean liveList) {
-        putBoolean(KEY_LIVE_LIST, liveList);
+        putBoolean(R.string.pref_livelist, liveList);
     }
 
     public static boolean isTrackableAutoVisit() {
-        return sharedPrefs.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false);
+        return getBoolean(R.string.pref_trackautovisit, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setTrackableAutoVisit(final boolean autoVisit) {
-        putBoolean(KEY_AUTO_VISIT_TRACKABLES, autoVisit);
+        putBoolean(R.string.pref_trackautovisit, autoVisit);
     }
 
     public static boolean isAutoInsertSignature() {
-        return sharedPrefs.getBoolean(KEY_AUTO_INSERT_SIGNATURE, false);
+        return getBoolean(R.string.pref_sigautoinsert, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setAutoInsertSignature(final boolean autoInsert) {
-        putBoolean(KEY_AUTO_INSERT_SIGNATURE, autoInsert);
+        putBoolean(R.string.pref_sigautoinsert, autoInsert);
     }
 
     public static boolean isUseImperialUnits() {
-        return sharedPrefs.getBoolean(KEY_IMPERIAL_UNITS, false);
+        return getBoolean(R.string.pref_units, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setUseImperialUnits(final boolean imperial) {
-        putBoolean(KEY_IMPERIAL_UNITS, imperial);
+        putBoolean(R.string.pref_units, imperial);
     }
 
     public static boolean isLiveMap() {
-        return sharedPrefs.getBoolean(KEY_MAP_LIVE, true);
+        return getBoolean(R.string.pref_maplive, true);
     }
 
     public static void setLiveMap(final boolean live) {
-        putBoolean(KEY_MAP_LIVE, live);
+        putBoolean(R.string.pref_maplive, live);
     }
 
     public static boolean isMapTrail() {
-        return sharedPrefs.getBoolean(KEY_MAP_TRAIL, true);
+        return getBoolean(R.string.pref_maptrail, true);
     }
 
     public static void setMapTrail(final boolean showTrail) {
-        putBoolean(KEY_MAP_TRAIL, showTrail);
+        putBoolean(R.string.pref_maptrail, showTrail);
     }
 
     public static int getMapZoom() {
-        return sharedPrefs.getInt(KEY_LAST_MAP_ZOOM, 14);
+        return getInt(R.string.pref_lastmapzoom, 14);
     }
 
     public static void setMapZoom(final int mapZoomLevel) {
-        putInt(KEY_LAST_MAP_ZOOM, mapZoomLevel);
+        putInt(R.string.pref_lastmapzoom, mapZoomLevel);
     }
 
     public static GeoPointImpl getMapCenter() {
         return getMapProvider().getMapItemFactory()
-                .getGeoPointBase(new Geopoint(sharedPrefs.getInt(KEY_LAST_MAP_LAT, 0) / 1e6,
-                        sharedPrefs.getInt(KEY_LAST_MAP_LON, 0) / 1e6));
+                .getGeoPointBase(new Geopoint(getInt(R.string.pref_lastmaplat, 0) / 1e6,
+                        getInt(R.string.pref_lastmaplon, 0) / 1e6));
     }
 
     public static void setMapCenter(final GeoPointImpl mapViewCenter) {
-        putInt(KEY_LAST_MAP_LAT, mapViewCenter.getLatitudeE6());
-        putInt(KEY_LAST_MAP_LON, mapViewCenter.getLongitudeE6());
+        putInt(R.string.pref_lastmaplat, mapViewCenter.getLatitudeE6());
+        putInt(R.string.pref_lastmaplon, mapViewCenter.getLongitudeE6());
     }
 
     public static MapSource getMapSource() {
@@ -817,7 +752,7 @@ public final class Settings {
     private static int getConvertedMapId() {
         // what the heck is happening here?? hashCodes of Strings?
         // why not strings?
-        final int id = Integer.parseInt(sharedPrefs.getString(KEY_MAP_SOURCE,
+        final int id = Integer.parseInt(getString(R.string.pref_mapsource,
                 String.valueOf(MAP_SOURCE_DEFAULT)));
         switch (id) {
             case GOOGLEMAP_BASEID + MAP:
@@ -845,7 +780,7 @@ public final class Settings {
         if (!MapProviderFactory.isSameActivity(getMapSource(), newMapSource)) {
             mapProvider = null;
         }
-        putString(KEY_MAP_SOURCE, String.valueOf(newMapSource.getNumericalId()));
+        putString(R.string.pref_mapsource, String.valueOf(newMapSource.getNumericalId()));
         if (newMapSource instanceof OfflineMapSource) {
             setMapFile(((OfflineMapSource) newMapSource).getFileName());
         }
@@ -853,38 +788,38 @@ public final class Settings {
 
     public static void setAnyCoordinates(final Geopoint coords) {
         if (null != coords) {
-            putFloat(KEY_ANYLATITUDE, (float) coords.getLatitude());
-            putFloat(KEY_ANYLONGITUDE, (float) coords.getLongitude());
+            putFloat(R.string.pref_anylatitude, (float) coords.getLatitude());
+            putFloat(R.string.pref_anylatitude, (float) coords.getLongitude());
         } else {
-            remove(KEY_ANYLATITUDE);
-            remove(KEY_ANYLONGITUDE);
+            remove(R.string.pref_anylatitude);
+            remove(R.string.pref_anylongitude);
         }
     }
 
     public static Geopoint getAnyCoordinates() {
-        if (sharedPrefs.contains(KEY_ANYLATITUDE) && sharedPrefs.contains(KEY_ANYLONGITUDE)) {
-            float lat = sharedPrefs.getFloat(KEY_ANYLATITUDE, 0);
-            float lon = sharedPrefs.getFloat(KEY_ANYLONGITUDE, 0);
+        if (contains(R.string.pref_anylatitude) && contains(R.string.pref_anylongitude)) {
+            float lat = getFloat(R.string.pref_anylatitude, 0);
+            float lon = getFloat(R.string.pref_anylongitude, 0);
             return new Geopoint(lat, lon);
         }
         return null;
     }
 
     public static boolean isUseCompass() {
-        return sharedPrefs.getBoolean(KEY_USE_COMPASS, true);
+        return getBoolean(R.string.pref_usecompass, true);
     }
 
     public static void setUseCompass(final boolean useCompass) {
-        putBoolean(KEY_USE_COMPASS, useCompass);
+        putBoolean(R.string.pref_usecompass, useCompass);
     }
 
     public static boolean isLightSkin() {
-        return sharedPrefs.getBoolean(KEY_SKIN, false);
+        return getBoolean(R.string.pref_skin, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setLightSkin(final boolean lightSkin) {
-        putBoolean(KEY_SKIN, lightSkin);
+        putBoolean(R.string.pref_skin, lightSkin);
     }
 
     public static String getKeyConsumerPublic() {
@@ -896,20 +831,20 @@ public final class Settings {
     }
 
     public static int getAltitudeCorrection() {
-        return sharedPrefs.getInt(KEY_ALTITUDE_CORRECTION, 0);
+        return getInt(R.string.pref_altcorrection, 0);
     }
 
     // TODO: remove with SettingsActivity
     public static boolean setAltitudeCorrection(final int altitude) {
-        return putInt(KEY_ALTITUDE_CORRECTION, altitude);
+        return putInt(R.string.pref_altcorrection, altitude);
     }
 
     public static String getWebDeviceCode() {
-        return sharedPrefs.getString(KEY_WEB_DEVICE_CODE, null);
+        return getString(R.string.pref_webDeviceCode, null);
     }
 
     public static String getWebDeviceName() {
-        return sharedPrefs.getString(KEY_WEBDEVICE_NAME, android.os.Build.MODEL);
+        return getString(R.string.pref_webDeviceName, android.os.Build.MODEL);
     }
 
     /**
@@ -917,27 +852,27 @@ public final class Settings {
      *         Returns never null
      */
     public static CacheType getCacheType() {
-        return CacheType.getById(sharedPrefs.getString(KEY_CACHE_TYPE, CacheType.ALL.id));
+        return CacheType.getById(getString(R.string.pref_cachetype, CacheType.ALL.id));
     }
 
     /**
      * The Threshold for the showing of child waypoints
      */
     public static int getWayPointsThreshold() {
-        return sharedPrefs.getInt(KEY_SHOW_WAYPOINTS_THRESHOLD, SHOW_WP_THRESHOLD_DEFAULT);
+        return getInt(R.string.pref_gcshowwaypointsthreshold, SHOW_WP_THRESHOLD_DEFAULT);
     }
 
     // TODO: remove with SettingsActivity
     public static void setShowWaypointsThreshold(final int threshold) {
-        putInt(KEY_SHOW_WAYPOINTS_THRESHOLD, threshold);
+        putInt(R.string.pref_gcshowwaypointsthreshold, threshold);
     }
 
     public static boolean isUseTwitter() {
-        return sharedPrefs.getBoolean(KEY_USE_TWITTER, false);
+        return getBoolean(R.string.pref_twitter, false);
     }
 
     public static void setUseTwitter(final boolean useTwitter) {
-        putBoolean(KEY_USE_TWITTER, useTwitter);
+        putBoolean(R.string.pref_twitter, useTwitter);
     }
 
     public static boolean isTwitterLoginValid() {
@@ -946,90 +881,90 @@ public final class Settings {
     }
 
     public static String getTokenPublic() {
-        return sharedPrefs.getString(KEY_TWITTER_TOKEN_PUBLIC, null);
+        return getString(R.string.pref_twitter_token_public, null);
     }
 
     public static String getTokenSecret() {
-        return sharedPrefs.getString(KEY_TWITTER_TOKEN_SECRET, null);
+        return getString(R.string.pref_twitter_token_secret, null);
 
     }
 
     public static void setTwitterTokens(final String tokenPublic,
             final String tokenSecret, boolean enableTwitter) {
-        putString(KEY_TWITTER_TOKEN_PUBLIC, tokenPublic);
-        putString(KEY_TWITTER_TOKEN_SECRET, tokenSecret);
+        putString(R.string.pref_twitter_token_public, tokenPublic);
+        putString(R.string.pref_twitter_token_secret, tokenSecret);
         if (tokenPublic != null) {
-            remove(KEY_TEMP_TWITTER_TOKEN_PUBLIC);
-            remove(KEY_TEMP_TWITTER_TOKEN_SECRET);
+            remove(R.string.pref_temp_twitter_token_public);
+            remove(R.string.pref_temp_twitter_token_secret);
         }
         setUseTwitter(enableTwitter);
     }
 
     public static void setTwitterTempTokens(final String tokenPublic,
             final String tokenSecret) {
-        putString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, tokenPublic);
-        putString(KEY_TEMP_TWITTER_TOKEN_SECRET, tokenSecret);
+        putString(R.string.pref_temp_twitter_token_public, tokenPublic);
+        putString(R.string.pref_temp_twitter_token_secret, tokenSecret);
     }
 
     public static ImmutablePair<String, String> getTempToken() {
-        String tokenPublic = sharedPrefs.getString(KEY_TEMP_TWITTER_TOKEN_PUBLIC, null);
-        String tokenSecret = sharedPrefs.getString(KEY_TEMP_TWITTER_TOKEN_SECRET, null);
+        String tokenPublic = getString(R.string.pref_twitter_token_public, null);
+        String tokenSecret = getString(R.string.pref_temp_twitter_token_secret, null);
         return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
     }
 
     public static int getVersion() {
-        return sharedPrefs.getInt(KEY_VERSION, 0);
+        return getInt(R.string.pref_version, 0);
     }
 
     public static void setVersion(final int version) {
-        putInt(KEY_VERSION, version);
+        putInt(R.string.pref_version, version);
     }
 
     public static boolean isOpenLastDetailsPage() {
-        return sharedPrefs.getBoolean(KEY_OPEN_LAST_DETAILS_PAGE, false);
+        return getBoolean(R.string.pref_opendetailslastpage, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setOpenLastDetailsPage(final boolean openLastPage) {
-        putBoolean(KEY_OPEN_LAST_DETAILS_PAGE, openLastPage);
+        putBoolean(R.string.pref_opendetailslastpage, openLastPage);
     }
 
     public static int getLastDetailsPage() {
-        return sharedPrefs.getInt(KEY_LAST_DETAILS_PAGE, 1);
+        return getInt(R.string.pref_lastdetailspage, 1);
     }
 
     public static void setLastDetailsPage(final int index) {
-        putInt(KEY_LAST_DETAILS_PAGE, index);
+        putInt(R.string.pref_lastdetailspage, index);
     }
 
     public static int getDefaultNavigationTool() {
-        return Integer.parseInt(sharedPrefs.getString(
-                KEY_DEFAULT_NAVIGATION_TOOL,
+        return Integer.parseInt(getString(
+                R.string.pref_defaultNavigationTool,
                 String.valueOf(NavigationAppsEnum.COMPASS.id)));
     }
 
     public static void setDefaultNavigationTool(final int defaultNavigationTool) {
-        putString(KEY_DEFAULT_NAVIGATION_TOOL,
+        putString(R.string.pref_defaultNavigationTool,
                 String.valueOf(defaultNavigationTool));
     }
 
     public static int getDefaultNavigationTool2() {
-        return Integer.parseInt(sharedPrefs.getString(
-                KEY_DEFAULT_NAVIGATION_TOOL_2,
+        return Integer.parseInt(getString(
+                R.string.pref_defaultNavigationTool2,
                 String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id)));
     }
 
     public static void setDefaultNavigationTool2(final int defaultNavigationTool) {
-        putString(KEY_DEFAULT_NAVIGATION_TOOL_2,
+        putString(R.string.pref_defaultNavigationTool2,
                 String.valueOf(defaultNavigationTool));
     }
 
     public static Strategy getLiveMapStrategy() {
-        return Strategy.getById(sharedPrefs.getInt(KEY_LIVE_MAP_STRATEGY, Strategy.AUTO.id));
+        return Strategy.getById(getInt(R.string.pref_livemapstrategy, Strategy.AUTO.id));
     }
 
     public static void setLiveMapStrategy(final Strategy strategy) {
-        putInt(KEY_LIVE_MAP_STRATEGY, strategy.id);
+        putInt(R.string.pref_livemapstrategy, strategy.id);
     }
 
     public static boolean isDebug() {
@@ -1038,85 +973,85 @@ public final class Settings {
 
     // TODO: remove with SettingsActivity
     public static void setDebug(final boolean debug) {
-        putBoolean(KEY_DEBUG, debug);
+        putBoolean(R.string.pref_debug, debug);
         Log.setDebug(debug);
     }
 
     public static boolean getHideLiveMapHint() {
-        return sharedPrefs.getBoolean(KEY_HIDE_LIVE_MAP_HINT, false);
+        return getBoolean(R.string.pref_hidelivemaphint, false);
     }
 
     public static void setHideLiveHint(final boolean hide) {
-        putBoolean(KEY_HIDE_LIVE_MAP_HINT, hide);
+        putBoolean(R.string.pref_hidelivemaphint, hide);
     }
 
     public static int getLiveMapHintShowCount() {
-        return sharedPrefs.getInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, 0);
+        return getInt(R.string.pref_livemaphintshowcount, 0);
     }
 
     public static void setLiveMapHintShowCount(final int showCount) {
-        putInt(KEY_LIVE_MAP_HINT_SHOW_COUNT, showCount);
+        putInt(R.string.pref_livemaphintshowcount, showCount);
     }
 
     public static boolean isDbOnSDCard() {
-        return sharedPrefs.getBoolean(KEY_DB_ON_SDCARD, false);
+        return getBoolean(R.string.pref_dbonsdcard, false);
     }
 
     public static void setDbOnSDCard(final boolean dbOnSDCard) {
-        putBoolean(KEY_DB_ON_SDCARD, dbOnSDCard);
+        putBoolean(R.string.pref_dbonsdcard, dbOnSDCard);
     }
 
     public static String getGpxExportDir() {
-        return sharedPrefs.getString(KEY_GPX_EXPORT_DIR,
+        return getString(R.string.pref_gpxExportDir,
                 Environment.getExternalStorageDirectory().getPath() + "/gpx");
     }
 
     // TODO: remove with SettingsActivity
     public static void setGpxExportDir(final String gpxExportDir) {
-        putString(KEY_GPX_EXPORT_DIR, gpxExportDir);
+        putString(R.string.pref_gpxExportDir, gpxExportDir);
     }
 
     public static String getGpxImportDir() {
-        return sharedPrefs.getString(KEY_GPX_IMPORT_DIR,
+        return getString(R.string.pref_gpxImportDir,
                 Environment.getExternalStorageDirectory().getPath() + "/gpx");
     }
 
     // TODO: remove with SettingsActivity
     public static void setGpxImportDir(final String gpxImportDir) {
-        putString(KEY_GPX_IMPORT_DIR, gpxImportDir);
+        putString(R.string.pref_gpxImportDir, gpxImportDir);
     }
 
     public static boolean getShareAfterExport() {
-        return sharedPrefs.getBoolean(KEY_SHARE_AFTER_EXPORT, true);
+        return getBoolean(R.string.pref_shareafterexport, true);
     }
 
     public static void setShareAfterExport(final boolean shareAfterExport) {
-        putBoolean(KEY_SHARE_AFTER_EXPORT, shareAfterExport);
+        putBoolean(R.string.pref_shareafterexport, shareAfterExport);
     }
 
     public static int getTrackableAction() {
-        return sharedPrefs.getInt(KEY_LAST_TRACKABLE_ACTION, LogType.RETRIEVED_IT.id);
+        return getInt(R.string.pref_trackableaction, LogType.RETRIEVED_IT.id);
     }
 
     public static void setTrackableAction(final int trackableAction) {
-        putInt(KEY_LAST_TRACKABLE_ACTION, trackableAction);
+        putInt(R.string.pref_trackableaction, trackableAction);
     }
 
     public static String getCustomRenderThemeBaseFolder() {
-        return sharedPrefs.getString(KEY_RENDER_THEME_BASE_FOLDER, "");
+        return getString(R.string.pref_renderthemepath, "");
     }
 
     // TODO: remove with SettingsActivity
     public static boolean setCustomRenderThemeBaseFolder(final String folder) {
-        return putString(KEY_RENDER_THEME_BASE_FOLDER, folder);
+        return putString(R.string.pref_renderthemepath, folder);
     }
 
     public static String getCustomRenderThemeFilePath() {
-        return sharedPrefs.getString(KEY_RENDER_THEME_FILE_PATH, "");
+        return getString(R.string.pref_renderthemefile, "");
     }
 
     public static void setCustomRenderThemeFile(final String customRenderThemeFile) {
-        putString(KEY_RENDER_THEME_FILE_PATH, customRenderThemeFile);
+        putString(R.string.pref_renderthemefile, customRenderThemeFile);
     }
 
     public static File[] getMapThemeFiles() {
@@ -1149,21 +1084,21 @@ public final class Settings {
     }
 
     public static boolean getPlainLogs() {
-        return sharedPrefs.getBoolean(KEY_PLAIN_LOGS, false);
+        return getBoolean(R.string.pref_plainLogs, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setPlainLogs(final boolean plainLogs) {
-        putBoolean(KEY_PLAIN_LOGS, plainLogs);
+        putBoolean(R.string.pref_plainLogs, plainLogs);
     }
 
     public static boolean getUseNativeUa() {
-        return sharedPrefs.getBoolean(KEY_NATIVE_UA, false);
+        return getBoolean(R.string.pref_nativeUa, false);
     }
 
     // TODO: remove with SettingsActivity
     public static void setUseNativeUa(final boolean useNativeUa) {
-        putBoolean(KEY_NATIVE_UA, useNativeUa);
+        putBoolean(R.string.pref_nativeUa, useNativeUa);
     }
 
     public static String getCacheTwitterMessage() {
@@ -1177,10 +1112,10 @@ public final class Settings {
     }
 
     public static int getLogImageScale() {
-        return sharedPrefs.getInt(KEY_LOG_IMAGE_SCALE, -1);
+        return getInt(R.string.pref_logImageScale, -1);
     }
 
     public static void setLogImageScale(final int scale) {
-        putInt(KEY_LOG_IMAGE_SCALE, scale);
+        putInt(R.string.pref_logImageScale, scale);
     }
 }
