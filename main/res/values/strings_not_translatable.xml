@@ -24,11 +24,6 @@
         <item>@string/unit_mi</item>
     </string-array>
 
-    <string name="init_select_themefolder" translatable="false">…</string>
-    <string name="init_select_map_directory" translatable="false">…</string>
-    <string name="init_select_gpx_exportdir" translatable="false">…</string>
-    <string name="init_select_gpx_importdir" translatable="false">…</string>
-
     <!-- upload image scaling -->
     <integer-array name="log_image_scale_values">
         <item>-1</item>
