@@ -323,34 +323,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
         }
     }
 
-    public Double getElevation() {
-        try {
-            final String uri = "http://maps.googleapis.com/maps/api/elevation/json";
-            final Parameters params = new Parameters(
-                    "sensor", "false",
-                    "locations", format(Format.LAT_LON_DECDEGREE_COMMA));
-            final JSONObject response = Network.requestJSON(uri, params);
-
-            if (response == null) {
-                return null;
-            }
-
-            if (!StringUtils.equalsIgnoreCase(response.getString("status"), "OK")) {
-                return null;
-            }
-
-            if (response.has("results")) {
-                JSONArray results = response.getJSONArray("results");
-                JSONObject result = results.getJSONObject(0);
-                return result.getDouble("elevation");
-            }
-        } catch (Exception e) {
-            Log.w("Geopoint.getElevation", e);
-        }
-
-        return null;
-    }
-
     @Override
     public Geopoint getCoords() {
         return this;

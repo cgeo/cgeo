@@ -262,12 +262,7 @@ public class CompassActivity extends AbstractActivity {
                         navAccuracy.setText(null);
                     }
 
-                    if (geo.getAltitude() != 0.0f) {
-                        final String humanAlt = Units.getDistanceFromMeters((float) geo.getAltitude());
-                        navLocation.setText(geo.getCoords() + " | " + humanAlt);
-                    } else {
-                        navLocation.setText(geo.getCoords().toString());
-                    }
+                    navLocation.setText(geo.getCoords().toString());
 
                     updateDistanceInfo(geo);
                 } else {

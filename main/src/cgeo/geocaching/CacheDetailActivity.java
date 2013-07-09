@@ -160,24 +160,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return;
             }
 
-            try {
-                final StringBuilder dist = new StringBuilder();
-
-                if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
-                    dist.append(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
-                }
-
-                if (cache != null && cache.getElevation() != null) {
-                    if (geo.getAltitude() != 0.0) {
-                        final float diff = (float) (cache.getElevation() - geo.getAltitude());
-                        dist.append(' ').append(Units.getElevation(diff));
-                    }
-                }
-
-                cacheDistanceView.setText(dist.toString());
+            if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
+                cacheDistanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                 cacheDistanceView.bringToFront();
-            } catch (final Exception e) {
-                Log.w("Failed to update location.");
             }
         }
     };
