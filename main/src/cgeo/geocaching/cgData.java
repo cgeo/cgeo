@@ -61,18 +61,53 @@ public class cgData {
         DATABASE,
     }
 
-    /** The list of fields needed for mapping. */
-    private static final String[] CACHE_COLUMNS = new String[] {
-            //  0          1         2               3              4              5         6         7       8       9      10          11         12        13      14
-            "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "owner", "owner_real", "hidden", "hint", "size",
-            //    15          16           17          18        19         20          21              22            23
-            "difficulty", "direction", "distance", "terrain", "latlon", "location", "elevation", "personal_note", "shortdesc",
-            //    24             25       26       27         28          29         30         31         32
-            "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite",
-            //        33               34              35                36            37           38              39         40          41              42                   43
-            "inventoryunknown", "onWatchlist", "reliable_latlon", "coordsChanged", "latitude", "longitude", "finalDefined", "_id", "inventorycoins", "inventorytags", "logPasswordRequired"
-            // reason is replaced by listId in Geocache
-    };
+    // Columns and indices for the cache data
+    private static final String QUERY_CACHE_DATA =
+            "SELECT " +
+                    "cg_caches.updated,"            +    // 0
+                    "cg_caches.reason,"             +    // 1
+                    "cg_caches.detailed,"           +    // 2
+                    "cg_caches.detailedupdate,"     +    // 3
+                    "cg_caches.visiteddate,"        +    // 4
+                    "cg_caches.geocode,"            +    // 5
+                    "cg_caches.cacheid,"            +    // 6
+                    "cg_caches.guid,"               +    // 7
+                    "cg_caches.type,"               +    // 8
+                    "cg_caches.name,"               +    // 9
+                    "cg_caches.owner,"              +    // 10
+                    "cg_caches.owner_real,"         +    // 11
+                    "cg_caches.hidden,"             +    // 12
+                    "cg_caches.hint,"               +    // 13
+                    "cg_caches.size,"               +    // 14
+                    "cg_caches.difficulty,"         +    // 15
+                    "cg_caches.direction,"          +    // 16
+                    "cg_caches.distance,"           +    // 17
+                    "cg_caches.terrain,"            +    // 18
+                    "cg_caches.latlon,"             +    // 19
+                    "cg_caches.location,"           +    // 20
+                    "cg_caches.elevation,"          +    // 21
+                    "cg_caches.personal_note,"      +    // 22
+                    "cg_caches.shortdesc,"          +    // 23
+                    "cg_caches.favourite_cnt,"      +    // 24
+                    "cg_caches.rating,"             +    // 25
+                    "cg_caches.votes,"              +    // 26
+                    "cg_caches.myvote,"             +    // 27
+                    "cg_caches.disabled,"           +    // 28
+                    "cg_caches.archived,"           +    // 29
+                    "cg_caches.members,"            +    // 30
+                    "cg_caches.found,"              +    // 31
+                    "cg_caches.favourite,"          +    // 32
+                    "cg_caches.inventoryunknown,"   +    // 33
+                    "cg_caches.onWatchlist,"        +    // 34
+                    "cg_caches.reliable_latlon,"    +    // 35
+                    "cg_caches.coordsChanged,"      +    // 36
+                    "cg_caches.latitude,"           +    // 37
+                    "cg_caches.longitude,"          +    // 38
+                    "cg_caches.finalDefined,"       +    // 39
+                    "cg_caches._id,"                +    // 40
+                    "cg_caches.inventorycoins,"     +    // 41
+                    "cg_caches.inventorytags,"      +    // 42
+                    "cg_caches.logPasswordRequired";     // 43
 
     //TODO: remove "latlon" field from cache table
 
@@ -85,7 +120,6 @@ public class cgData {
     /**
      * holds the column indexes of the cache table to avoid lookups
      */
-    private static int[] cacheColumnIndex;
     private static CacheCache cacheCache = new CacheCache();
     private static SQLiteDatabase database = null;
     private static final int dbVersion = 68;
@@ -1491,10 +1525,7 @@ public class cgData {
         // do not log the entire collection of geo codes to the debug log. This can be more than 100 KB of text for large lists!
         init();
 
-        final StringBuilder query = new StringBuilder("SELECT ");
-        for (int i = 0; i < CACHE_COLUMNS.length; i++) {
-            query.append(i > 0 ? ", " : "").append(dbTableCaches).append('.').append(CACHE_COLUMNS[i]).append(' ');
-        }
+        final StringBuilder query = new StringBuilder(QUERY_CACHE_DATA);
         if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
             query.append(',').append(dbTableLogsOffline).append(".log");
         }
@@ -1591,72 +1622,64 @@ public class cgData {
     private static Geocache createCacheFromDatabaseContent(Cursor cursor) {
         Geocache cache = new Geocache();
 
-        if (cacheColumnIndex == null) {
-            final int[] local_cci = new int[CACHE_COLUMNS.length]; // use a local variable to avoid having the not yet fully initialized array be visible to other threads
-            for (int i = 0; i < CACHE_COLUMNS.length; i++) {
-                local_cci[i] = cursor.getColumnIndex(CACHE_COLUMNS[i]);
-            }
-            cacheColumnIndex = local_cci;
-        }
-
-        cache.setUpdated(cursor.getLong(cacheColumnIndex[0]));
-        cache.setListId(cursor.getInt(cacheColumnIndex[1]));
-        cache.setDetailed(cursor.getInt(cacheColumnIndex[2]) == 1);
-        cache.setDetailedUpdate(cursor.getLong(cacheColumnIndex[3]));
-        cache.setVisitedDate(cursor.getLong(cacheColumnIndex[4]));
-        cache.setGeocode(cursor.getString(cacheColumnIndex[5]));
-        cache.setCacheId(cursor.getString(cacheColumnIndex[6]));
-        cache.setGuid(cursor.getString(cacheColumnIndex[7]));
-        cache.setType(CacheType.getById(cursor.getString(cacheColumnIndex[8])));
-        cache.setName(cursor.getString(cacheColumnIndex[9]));
-        cache.setOwnerDisplayName(cursor.getString(cacheColumnIndex[10]));
-        cache.setOwnerUserId(cursor.getString(cacheColumnIndex[11]));
-        long dateValue = cursor.getLong(cacheColumnIndex[12]);
+        cache.setUpdated(cursor.getLong(0));
+        cache.setListId(cursor.getInt(1));
+        cache.setDetailed(cursor.getInt(2) == 1);
+        cache.setDetailedUpdate(cursor.getLong(3));
+        cache.setVisitedDate(cursor.getLong(4));
+        cache.setGeocode(cursor.getString(5));
+        cache.setCacheId(cursor.getString(6));
+        cache.setGuid(cursor.getString(7));
+        cache.setType(CacheType.getById(cursor.getString(8)));
+        cache.setName(cursor.getString(9));
+        cache.setOwnerDisplayName(cursor.getString(10));
+        cache.setOwnerUserId(cursor.getString(11));
+        long dateValue = cursor.getLong(12);
         if (dateValue != 0) {
             cache.setHidden(new Date(dateValue));
         }
         // do not set cache.hint
-        cache.setSize(CacheSize.getById(cursor.getString(cacheColumnIndex[14])));
-        cache.setDifficulty(cursor.getFloat(cacheColumnIndex[15]));
-        int index = cacheColumnIndex[16];
+        cache.setSize(CacheSize.getById(cursor.getString(14)));
+        cache.setDifficulty(cursor.getFloat(15));
+        int index = 16;
         if (cursor.isNull(index)) {
             cache.setDirection(null);
         } else {
             cache.setDirection(cursor.getFloat(index));
         }
-        index = cacheColumnIndex[17];
+        index = 17;
         if (cursor.isNull(index)) {
             cache.setDistance(null);
         } else {
             cache.setDistance(cursor.getFloat(index));
         }
-        cache.setTerrain(cursor.getFloat(cacheColumnIndex[18]));
+        cache.setTerrain(cursor.getFloat(18));
         // do not set cache.location
-        cache.setCoords(getCoords(cursor, cacheColumnIndex[37], cacheColumnIndex[38]));
-        index = cacheColumnIndex[21];
+        cache.setCoords(getCoords(cursor, 37, 38));
+        index = 21;
         if (cursor.isNull(index)) {
             cache.setElevation(null);
         } else {
             cache.setElevation(cursor.getDouble(index));
         }
-        cache.setPersonalNote(cursor.getString(cacheColumnIndex[22]));
+        cache.setPersonalNote(cursor.getString(22));
         // do not set cache.shortdesc
         // do not set cache.description
-        cache.setFavoritePoints(cursor.getInt(cacheColumnIndex[24]));
-        cache.setRating(cursor.getFloat(cacheColumnIndex[25]));
-        cache.setVotes(cursor.getInt(cacheColumnIndex[26]));
-        cache.setMyVote(cursor.getFloat(cacheColumnIndex[27]));
-        cache.setDisabled(cursor.getInt(cacheColumnIndex[28]) == 1);
-        cache.setArchived(cursor.getInt(cacheColumnIndex[29]) == 1);
-        cache.setPremiumMembersOnly(cursor.getInt(cacheColumnIndex[30]) == 1);
-        cache.setFound(cursor.getInt(cacheColumnIndex[31]) == 1);
-        cache.setFavorite(cursor.getInt(cacheColumnIndex[32]) == 1);
-        cache.setInventoryItems(cursor.getInt(cacheColumnIndex[33]));
-        cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[34]) == 1);
-        cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[35]) > 0);
-        cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[36]) > 0);
-        cache.setFinalDefined(cursor.getInt(cacheColumnIndex[39]) > 0);
-        cache.setLogPasswordRequired(cursor.getInt(cacheColumnIndex[43]) > 0);
+        cache.setFavoritePoints(cursor.getInt(24));
+        cache.setRating(cursor.getFloat(25));
+        cache.setVotes(cursor.getInt(26));
+        cache.setMyVote(cursor.getFloat(27));
+        cache.setDisabled(cursor.getInt(28) == 1);
+        cache.setArchived(cursor.getInt(29) == 1);
+        cache.setPremiumMembersOnly(cursor.getInt(30) == 1);
+        cache.setFound(cursor.getInt(31) == 1);
+        cache.setFavorite(cursor.getInt(32) == 1);
+        cache.setInventoryItems(cursor.getInt(33));
+        cache.setOnWatchlist(cursor.getInt(34) == 1);
+        cache.setReliableLatLon(cursor.getInt(35) > 0);
+        cache.setUserModifiedCoords(cursor.getInt(36) > 0);
+        cache.setFinalDefined(cursor.getInt(39) > 0);
+        cache.setLogPasswordRequired(cursor.getInt(43) > 0);
 
         Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
