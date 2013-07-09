@@ -182,7 +182,7 @@ public class cgData {
             + "inventoryunknown integer default 0, "
             + "onWatchlist integer default 0, "
             + "coordsChanged integer default 0, "
-            + "finalDefined integer default 0"
+            + "finalDefined integer default 0, "
             + "logPasswordRequired integer default 0"
             + "); ";
     private static final String dbCreateLists = ""
