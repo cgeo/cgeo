@@ -1094,6 +1094,7 @@
     <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nKlicken zum Installieren.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Deine Android-Version scheint älter als 2.1 zu sein. Zukünftige Versionen von c:geo sind für dein Gerät vermutlich nicht mehr verfügbar.</string>
 
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Sprechender Kompass</string>
