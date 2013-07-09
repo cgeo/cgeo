@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.files.AbstractFileListActivity;
 import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.FileSelectionListAdapter;
 
 import android.content.Context;

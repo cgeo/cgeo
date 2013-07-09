@@ -1,6 +1,11 @@
-package cgeo.geocaching;
+package cgeo.geocaching.settings;
 
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.SelectMapfileActivity;
+import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -206,7 +211,7 @@ public class SettingsActivity extends AbstractActivity {
     private boolean insertSignatureTemplate(final LogTemplate template) {
         EditText sig = (EditText) findViewById(R.id.signature);
         String insertText = "[" + template.getTemplateString() + "]";
-        insertAtPosition(sig, insertText, true);
+        ActivityMixin.insertAtPosition(sig, insertText, true);
         return true;
     }
 
@@ -222,7 +227,7 @@ public class SettingsActivity extends AbstractActivity {
                 Settings.setGCConnectorActive(gcCheck.isChecked());
             }
         });
-        final ImmutablePair<String, String> login = Settings.getLogin();
+        final ImmutablePair<String, String> login = Settings.getGcLogin();
         if (login != null) {
             ((EditText) findViewById(R.id.username)).setText(login.left);
             ((EditText) findViewById(R.id.password)).setText(login.right);
@@ -499,12 +504,12 @@ public class SettingsActivity extends AbstractActivity {
         });
 
         final CheckBox unitsButton = (CheckBox) findViewById(R.id.units);
-        unitsButton.setChecked(!Settings.isUseMetricUnits());
+        unitsButton.setChecked(Settings.isUseImperialUnits());
         unitsButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Settings.setUseMetricUnits(!unitsButton.isChecked());
+                Settings.setUseImperialUnits(unitsButton.isChecked());
             }
         });
 
@@ -555,17 +560,12 @@ public class SettingsActivity extends AbstractActivity {
 
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
-        altitudeEdit.setText(String.valueOf(Settings.getAltCorrection()));
+        altitudeEdit.setText(String.valueOf(Settings.getAltitudeCorrection()));
 
         //Send2cgeo settings
         String webDeviceName = Settings.getWebDeviceName();
 
-        if (StringUtils.isNotBlank(webDeviceName)) {
-            ((EditText) findViewById(R.id.webDeviceName)).setText(webDeviceName);
-        } else {
-            String s = android.os.Build.MODEL;
-            ((EditText) findViewById(R.id.webDeviceName)).setText(s);
-        }
+        ((EditText) findViewById(R.id.webDeviceName)).setText(webDeviceName);
 
         Button webAuth = (Button) findViewById(R.id.sendToCgeo_register);
         webAuth.setOnClickListener(new WebAuthListener());
@@ -751,7 +751,9 @@ public class SettingsActivity extends AbstractActivity {
             mapSourceNames.add(mapSource.getName());
         }
         Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSourceNames.toArray(new String[mapSourceNames.size()]));
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
+                android.R.layout.simple_spinner_item,
+                mapSourceNames.toArray(new String[mapSourceNames.size()]));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mapSourceSelector.setAdapter(adapter);
         final int index = MapProviderFactory.getMapSources().indexOf(Settings.getMapSource());
@@ -842,15 +844,15 @@ public class SettingsActivity extends AbstractActivity {
         int altitudeNewInt = parseNumber(altitudeNew, 0);
 
         TextView field = (TextView) findViewById(R.id.showwaypointsthreshold);
-        final int waypointThreshold = parseNumber(field.getText().toString(), 5);
+        Settings.setShowWaypointsThreshold(parseNumber(field.getText().toString(),
+                Settings.SHOW_WP_THRESHOLD_DEFAULT));
 
         final boolean status1 = Settings.setLogin(usernameNew, passwordNew);
         final boolean status2 = Settings.setGCvoteLogin(passvoteNew);
         final boolean status3 = Settings.setSignature(signatureNew);
-        final boolean status4 = Settings.setAltCorrection(altitudeNewInt);
+        final boolean status4 = Settings.setAltitudeCorrection(altitudeNewInt);
         final boolean status5 = Settings.setMapFileDirectory(mapDirectoryNew);
         final boolean status6 = Settings.setCustomRenderThemeBaseFolder(themesDirectoryNew);
-        Settings.setShowWaypointsThreshold(waypointThreshold);
 
         String importNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_importdir)).getText().toString());
         String exportNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_exportdir)).getText().toString());
@@ -904,7 +906,9 @@ public class SettingsActivity extends AbstractActivity {
                 return;
             }
 
-            loginDialog = ProgressDialog.show(SettingsActivity.this, res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_working), true);
+            loginDialog = ProgressDialog.show(SettingsActivity.this,
+                    res.getString(R.string.init_login_popup),
+                    res.getString(R.string.init_login_popup_working), true);
             loginDialog.setCancelable(false);
 
             Settings.setLogin(username, password);

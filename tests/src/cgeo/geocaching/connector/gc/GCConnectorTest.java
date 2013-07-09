@@ -1,12 +1,12 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {

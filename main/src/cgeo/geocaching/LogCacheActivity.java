@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
@@ -489,7 +490,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void updateTweetBox(LogType type) {
-        if (type == LogType.FOUND_IT && Settings.isUseTwitter()) {
+        if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);

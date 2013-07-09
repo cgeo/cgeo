@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.enumerations.CacheType;
 
 import android.graphics.Bitmap;

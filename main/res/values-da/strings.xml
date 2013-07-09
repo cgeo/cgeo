@@ -8,6 +8,7 @@
     <string name="detail">Detaljer</string>
     <string name="search">Søg</string>
     <string name="settings">Indstillinger</string>
+    <string name="settings_titlebar">c:geo Indstillinger</string>
     <string name="about">Om c:geo</string>
 
     <!-- actionbar -->
@@ -100,6 +101,7 @@
     <!-- standard menu -->
     <string name="menu_about">Om c:geo</string>
     <string name="menu_settings">Indstillinger</string>
+    <string name="menu_oldsettings">old Indstillinger</string>
     <string name="menu_filter">Filter</string>
 
     <!-- main screen -->
@@ -130,7 +132,7 @@
     <string name="about_donation_more">Donér\nudvikling</string>
 
     <!-- init -->
-    <string name="init_geocaching">Geocaching.com</string>
+    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Brugernavn</string>
@@ -138,17 +140,24 @@
     <string name="init_passvote">Password</string>
     <string name="init_login">Check login</string>
     <string name="init_twitter_authorize">Godkend c:geo</string>
-    <string name="init_twitter_publish">Offentliggør status når cache er fundet</string>
     <string name="init_signature">Signatur</string>
     <string name="init_other">Andre indstillinger</string>
     <string name="init_skin">Light skin (genstart af c:geo nødvendig)</string>
+    <string name="init_summary_skin">Light skin (genstart af c:geo nødvendig)</string>
     <string name="init_address">Vis adresse på hovedskærm</string>
+    <string name="init_summary_address">Vis adresse på hovedskærm</string>
     <string name="init_exclude">Udelad egne og fundne cacher</string>
+    <string name="init_summary_exclude">Udelad egne og fundne cacher</string>
     <string name="init_disabled">Udelad deaktiverede cacher</string>
+    <string name="init_summary_disabled">Udelad deaktiverede cacher</string>
     <string name="init_offline">Gem kort til offlinebrug</string>
+    <string name="init_summary_offline">Gem kort til offlinebrug</string>
     <string name="init_units">Benyt britiske afstandsmål</string>
+    <string name="init_summary_units">Benyt britiske afstandsmål</string>
     <string name="init_autoload">Auto-indlæs lang cachebeskrivelse</string>
+    <string name="init_summary_autoload">Auto-indlæs lang cachebeskrivelse</string>
     <string name="init_livelist">Vis retning til cacher i lister</string>
+    <string name="init_summary_livelist">Vis retning til cacher i lister</string>
     <string name="init_cleared">c:geo slettede login-informationer.</string>
 
     <!-- auth -->
@@ -281,7 +290,7 @@
     <string name="navigation">Navigation</string>
 
     <!-- next things -->
-    <string name="legal_note">For at benytte Geocaching.com, skal betingelserne i <a href="http://www.geocaching.com/about/termsofuse.aspx">"Groundspeak disclaimer"</a> accepteres.</string>
+    <string name="settings_gc_legal_note">For at benytte Geocaching.com, skal betingelserne i "Groundspeak disclaimer" accepteres.</string>
     <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
     <string name="website">Hjemmeside: <a href="http://cgeo.org/">cgeo.org</a></string>
     <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>

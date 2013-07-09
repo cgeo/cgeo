@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.settings.Settings;
 
 import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
