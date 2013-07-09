@@ -104,7 +104,6 @@
     <string name="err_auth_initialize">Beklager, c:geo klarte ikke å igangsette autoriserings-prosessen.</string>
     <string name="err_auth_process">Autoriserings-prosessen mislyktes.</string>
     <string name="err_cannot_log_visit">c:geo har ikke nok informasjon til å logge funn. Prøv å laste inn cachens detaljer først.</string>
-    <string name="err_init_cleared">Beklager, c:geo klarte ikke å fjerne innloggings-opplysningene.</string>
     <string name="err_download_fail">Beklager. c:geo klarte ikke å laste ned cachene p.g.a.</string>
     <string name="err_dwld_details_failed">Beklager, c:geo klarte ikke å laste ned cachens detaljer</string>
     <string name="err_load_descr_failed">Beklager, c:geo klarte ikke å åpne beskrivelsen.</string>
@@ -145,7 +144,6 @@
     <!-- standard menu -->
     <string name="menu_about">Om c:geo</string>
     <string name="menu_settings">Instillinger</string>
-    <string name="menu_oldsettings">old Instillinger</string>
     <string name="menu_filter">Filter</string>
 
     <!-- main screen -->
@@ -190,12 +188,10 @@
     <string name="about_contributors">Bidragsytere</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_gcvote">GCVote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Brukernavn</string>
     <string name="init_password">Passord</string>
-    <string name="init_passvote">Passord</string>
     <string name="init_login">Sjekk innloggings-opplysninger</string>
     <string name="init_login_popup">Logg inn</string>
     <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
@@ -204,7 +200,6 @@
     <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
     <string name="init_twitter_authorize">Autoriser c:geo</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_other">Andre instillinger</string>
     <string name="init_skin">Hvitt tema</string>
     <string name="init_summary_skin">Hvitt tema</string>
     <string name="init_address">Vis adressen i menyen</string>
@@ -221,8 +216,6 @@
     <string name="init_summary_autoload">Last full beskrivelse automatisk</string>
     <string name="init_livelist">Vis cachers retning i listen</string>
     <string name="init_summary_livelist">Vis cachers retning i listen</string>
-    <string name="init_clear">Ikke husk meg</string>
-    <string name="init_cleared">c:geo fjernet innloggings-opplysningene.</string>
 
     <!-- auth -->
     <string name="auth_twitter">Twitter</string>

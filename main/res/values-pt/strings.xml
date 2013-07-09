@@ -154,7 +154,6 @@
     <string name="err_auth_initialize">O c:geo falhou a iniciar o processo de autorização.</string>
     <string name="err_auth_process">Processo de autorização falhou.</string>
     <string name="err_cannot_log_visit">O c:geo não tem informação suficiente para registar a visita. Por favor, faça-o a partir dos detalhes completos da cache.</string>
-    <string name="err_init_cleared">O c:geo não consegue limpar os dados de login.</string>
     <string name="err_download_fail">O c:geo falhou o download das caches porque </string>
     <string name="err_dwld_details_failed">O c:geo falhou o download dos detalhes da cache.</string>
     <string name="err_load_descr_failed">O c:geo não consegue carregar a descrição.</string>
@@ -220,7 +219,6 @@
     <string name="menu_about">Sobre o c:geo</string>
     <string name="menu_helpers">Utilitários</string>
     <string name="menu_settings">Definições</string>
-    <string name="menu_oldsettings">old Definições</string>
     <string name="menu_history">Histórico</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -330,12 +328,10 @@
     <string name="about_contributors">Contribuidores</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Nome de utilizador</string>
     <string name="init_password">Password</string>
-    <string name="init_passvote">Password</string>
     <string name="init_login">Verificar login</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logging to Geocaching.com…</string>
@@ -344,8 +340,6 @@
     <string name="init_login_popup_failed_reason">Login falhado porque </string>
     <string name="init_twitter_authorize">Autorize o c:geo</string>
     <string name="init_signature">Assinatura</string>
-    <string name="init_signature_help_button">Ajuda</string>
-    <string name="init_signature_help_title">Dicas para assinaturas</string>
     <string name="init_signature_help_text">Escreva a sua assinatura, para adicionar ao texto de registo na cache.\nPode usar algumas palavras-chave: [DATE] , [TIME], [USER] &amp; [NUMBER].\nEstas serão expandidas quando a assinatura for inserida.</string>
     <string name="init_signature_template_button">Inserir modelo</string>
     <string name="init_signature_template_date">Data</string>
@@ -354,7 +348,6 @@
     <string name="init_signature_template_user">Utilizador</string>
     <string name="init_signature_template_number">Número</string>
     <string name="init_signature_template_owner">Dono</string>
-    <string name="init_details">Detalhes da cache</string>
     <string name="init_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_elevationwanted">Carregar dados de elevação de cache</string>
@@ -365,7 +358,6 @@
     <string name="init_summary_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
     <string name="init_autoload">Carregar automaticamente a descrição longa</string>
     <string name="init_summary_autoload">Carregar automaticamente a descrição longa</string>
-    <string name="init_other">Outras opções</string>
     <string name="init_skin">Tema leve (precisa reiniciar o c:geo)</string>
     <string name="init_summary_skin">Tema leve (precisa reiniciar o c:geo)</string>
     <string name="init_address">Mostrar endereços no ecrã principal</string>
@@ -394,8 +386,6 @@
     <string name="init_summary_livelist">Mostrar a direcção para a cache na lista</string>
     <string name="init_altitude">Correcção de altitude</string>
     <string name="init_altitude_description">Se o GPS estiver a dar uma altitude errada, pode corrigi-la com um número positivo ou negativo. A correcção é sempre em metros.</string>
-    <string name="init_clear">Limpar login</string>
-    <string name="init_cleared">O c:geo limpou a informação de login.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">A criar um backup da base de dados de caches…</string>
@@ -410,13 +400,10 @@
     <string name="init_restore_confirm">Base de dados vazia. Quer restaurar o backup?</string>
     <string name="init_backup_last">Disponível backup de</string>
     <string name="init_backup_last_no">Não existe nenhum ficheiro de backup.</string>
-    <string name="init_mapsources">Fontes de mapa</string>
     <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
     <string name="init_map_directory_description">Directório com os mapas offline</string>
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
-    <string name="init_gpx_exportdir_description">Aqui pode selecionar o directório para exportar os GPX.</string>
-    <string name="init_gpx_importdir_description">Aqui pode selecionar o directório para importar os GPX.</string>
     <string name="init_maptrail">Mostrar rasto no mapa</string>
     <string name="init_summary_maptrail">Mostrar rasto no mapa</string>
     <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
@@ -605,7 +592,6 @@
     <string name="cache_time_full_hours">o\'clock</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Gravar</string>
 
     <!-- file list base -->
     <string name="file_searching_in">A procurar ficheiros\nem</string>

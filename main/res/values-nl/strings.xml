@@ -158,7 +158,6 @@
     <string name="err_auth_initialize">Sorry, het is c:geo niet gelukt het autorisatie proces te initialiseren.</string>
     <string name="err_auth_process">Autorisatie proces mislukt.</string>
     <string name="err_cannot_log_visit">c:geo Heeft onvoldoende informatie om bezoek te loggen. Probeer het vanuit de volledige cache details.</string>
-    <string name="err_init_cleared">Sorry, c:geo kan de inlog informatie niet wissen.</string>
     <string name="err_download_fail">Sorry, c:geo heeft caches niet kunnen downloaden omdat </string>
     <string name="err_dwld_details_failed">Sorry, c:geo kon de cache details niet downloaden.</string>
     <string name="err_load_descr_failed">Sorry, c:geo kan de omschrijving niet laden.</string>
@@ -225,7 +224,6 @@
     <string name="menu_about">Over c:geo</string>
     <string name="menu_helpers">Hulpprogramma\'s</string>
     <string name="menu_settings">Instellingen</string>
-    <string name="menu_oldsettings">old Instellingen</string>
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -338,14 +336,11 @@
     <string name="about_contributors">Bijdragers</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_oc">opencaching.de</string>
-    <string name="init_oc_activate">Activeer opencaching.de op live-kaart en in zoekopdrachten.</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Gebruikersnaam</string>
     <string name="init_password">Wachtwoord</string>
-    <string name="init_passvote">Wachtwoord</string>
     <string name="init_login">Login controleren &amp; zet datum-formaat</string>
     <string name="init_login_popup">Inloggen</string>
     <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
@@ -354,8 +349,6 @@
     <string name="init_login_popup_failed_reason">Inloggen mislukt omdat </string>
     <string name="init_twitter_authorize">c:geo Autoriseren</string>
     <string name="init_signature">Handtekening</string>
-    <string name="init_signature_help_button">Help</string>
-    <string name="init_signature_help_title">Handtekening tips en truuks</string>
     <string name="init_signature_help_text">Maak een handtekening om te gebruiken in logs.\nSpeciale teksten die gebruikt kunnen worden zijn: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nDeze worden ingevuld op het moment dat de handtekening ingevoegd word.</string>
     <string name="init_signature_template_button">Voeg template toe</string>
     <string name="init_signature_template_date">Datum</string>
@@ -364,7 +357,6 @@
     <string name="init_signature_template_user">Gebruiker</string>
     <string name="init_signature_template_number">Nummer</string>
     <string name="init_signature_template_owner">Eigenaar</string>
-    <string name="init_details">Cache details</string>
     <string name="init_ratingwanted">Laad cachewaardering van GCvote.com</string>
     <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
     <string name="init_elevationwanted">Laad cache hoogte gegevens</string>
@@ -375,7 +367,6 @@
     <string name="init_summary_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
     <string name="init_autoload">Automatisch laden van lange omschrijving</string>
     <string name="init_summary_autoload">Automatisch laden van lange omschrijving</string>
-    <string name="init_other">Overige opties</string>
     <string name="init_skin">Lichte skin (c:geo herstarten)</string>
     <string name="init_summary_skin">Lichte skin (c:geo herstarten)</string>
     <string name="init_address">Toon adres in plaats van positie op hoofdscherm</string>
@@ -406,8 +397,6 @@
     <string name="init_summary_livelist">Toon afstand tot cache in lijst</string>
     <string name="init_altitude">Hoogte correctie</string>
     <string name="init_altitude_description">Als de GPS een verkeerde hoogte aangeeft, kan dit gecorrigeerd worden met een positief of negatief nummer. De correctie is in meters.</string>
-    <string name="init_clear">Login wissen</string>
-    <string name="init_cleared">c:geo Heeft inloginformatie gewist.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Backup aan het maken van de cache-database…</string>
@@ -422,13 +411,10 @@
     <string name="init_restore_confirm">De database is leeg, wil je een database-backup herstellen?</string>
     <string name="init_backup_last">Backup beschikbaar van</string>
     <string name="init_backup_last_no">Er is geen bestand met een backup.</string>
-    <string name="init_mapsources">Kaartbron</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_map_directory_description">Directory met offline kaarten</string>
     <string name="init_gpx_exportdir">GPX Export Directory</string>
     <string name="init_gpx_importdir">GPX Import Directory</string>
-    <string name="init_gpx_exportdir_description">Hier kan je de directory voor GPX exports selecteren.</string>
-    <string name="init_gpx_importdir_description">Hier kan je de directory voor GPX imports selecteren.</string>
     <string name="init_maptrail">Laat pad op kaart zien</string>
     <string name="init_summary_maptrail">Laat pad op kaart zien</string>
     <string name="init_share_after_export">Open deel-menu na GPX export.</string>
@@ -624,7 +610,6 @@
     <string name="cache_listed_on">Opgenomen in %s</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Opslaan</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Zoeken naar bestanden\nin</string>

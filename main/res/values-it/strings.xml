@@ -176,7 +176,6 @@
     <string name="err_auth_initialize">c:geo ha fallito l\'inizializzazione del processo di autorizzazione.</string>
     <string name="err_auth_process">Processo di autorizzazione fallito.</string>
     <string name="err_cannot_log_visit">c:geo non ha abbastanza informazioni per salvare il log. Per cortesia effettuarlo dalla pagina dei dettagli completi del cache.</string>
-    <string name="err_init_cleared">c:geo non può cancellare le informazioni di login.</string>
     <string name="err_download_fail">c:geo ha fallito il download dei cache perché </string>
     <string name="err_dwld_details_failed">c:geo ha fallito il download dei dettagli del cache.</string>
     <string name="err_load_descr_failed">c:geo non può caricare la descrizione.</string>
@@ -248,7 +247,6 @@
     <string name="menu_about">Info c:geo</string>
     <string name="menu_helpers">Programmi utili</string>
     <string name="menu_settings">Settaggi</string>
-    <string name="menu_oldsettings">old Settaggi</string>
     <string name="menu_history">Cronologia</string>
     <string name="menu_filter">Filtri</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -363,17 +361,13 @@
     <string name="about_contributors">Contributori</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
-    <string name="settings_activate_geocachingcom">Attiva</string>
     <string name="init_oc">opencaching.de</string>
-    <string name="init_oc_activate">Attiva opencaching.de su mappa live e nelle ricerche</string>
     <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
     <string name="init_register_oc_de">Autorizza c:geo</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Utente</string>
     <string name="init_password">Password</string>
-    <string name="init_passvote">Password</string>
     <string name="init_login">Verifica e salva login</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logging…</string>
@@ -382,8 +376,6 @@
     <string name="init_login_popup_failed_reason">Login fallito perché </string>
     <string name="init_twitter_authorize">Autorizza c:geo</string>
     <string name="init_signature">Firma</string>
-    <string name="init_signature_help_button">Aiuto</string>
-    <string name="init_signature_help_title">Suggerimento per la Firma</string>
     <string name="init_signature_help_text">Scrivi la tua firma da usare nei testi di log.\nStringhe speciali possono essere usate come: [DATE], [TIME], [DATETIME], [USER] e [NUMBER].\nSaranno espanse quando la firma viene inserita.</string>
     <string name="init_signature_template_button">Stringhe speciali</string>
     <string name="init_signature_template_date">Data</string>
@@ -392,7 +384,6 @@
     <string name="init_signature_template_user">Utente</string>
     <string name="init_signature_template_number">Numero cache</string>
     <string name="init_signature_template_owner">Proprietario</string>
-    <string name="init_details">Dettagli cache</string>
     <string name="init_ratingwanted">Carica il rating del cache da GCvote.com</string>
     <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
     <string name="init_elevationwanted">Carica dati altitudine cache</string>
@@ -403,7 +394,6 @@
     <string name="init_summary_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
     <string name="init_autoload">Carica automaticamente descrizione estesa</string>
     <string name="init_summary_autoload">Carica automaticamente descrizione estesa</string>
-    <string name="init_other">Altre opzioni</string>
     <string name="init_skin">Tema chiaro\n(richiede riavvio di c:geo)</string>
     <string name="init_summary_skin">Tema chiaro\n(richiede riavvio di c:geo)</string>
     <string name="init_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
@@ -434,8 +424,6 @@
     <string name="init_summary_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
     <string name="init_altitude">Correzione di altitudine</string>
     <string name="init_altitude_description">Se il GPS restituisce un\'errata altitudine, puoi correggerla inserendo un valore positivo o negativo, in metri.</string>
-    <string name="init_clear">Azzera login</string>
-    <string name="init_cleared">c:geo ha azzerato le informazioni di login.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creazione del backup del database dei cache in corso…</string>
@@ -450,13 +438,10 @@
     <string name="init_restore_confirm">Il database è vuoto. Vuoi ripristinare il backup?</string>
     <string name="init_backup_last">Disponibile Backup delle</string>
     <string name="init_backup_last_no">Non esiste il file con il backup.</string>
-    <string name="init_mapsources">Tipi di mappe</string>
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_gpx_exportdir">Cartella di export GPX</string>
     <string name="init_gpx_importdir">Cartella di import GPX</string>
-    <string name="init_gpx_exportdir_description">Qui puoi selezionare la cartella di esportazione GPX.</string>
-    <string name="init_gpx_importdir_description">Qui puoi selezionare la cartella di importazione GPX.</string>
     <string name="init_maptrail">Mostra la scia nella Mappa</string>
     <string name="init_summary_maptrail">Mostra la scia nella Mappa</string>
     <string name="init_share_after_export">Apri menu condividi dopo export GPX</string>
@@ -669,7 +654,6 @@
     <string name="cache_listed_on">Elencato su %s</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Salva</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Ricerca file\nin</string>

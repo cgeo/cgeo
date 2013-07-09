@@ -85,7 +85,6 @@
     <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
     <string name="err_auth_process">Godkendelse fejlede.</string>
     <string name="err_cannot_log_visit">c:geo har ikke nok informationer til at logge besøg. Log fra "Alle detaljer".</string>
-    <string name="err_init_cleared">Beklager, c:geo kan ikke slette login.</string>
     <string name="err_download_fail">Beklager, c:geo kan ikke hente cachen pga. </string>
     <string name="warn_save_nothing">Der er ikke noget at gemme.</string>
     <string name="warn_no_cache_coord">Der er ingen cache med disse koordinater.</string>
@@ -101,7 +100,6 @@
     <!-- standard menu -->
     <string name="menu_about">Om c:geo</string>
     <string name="menu_settings">Indstillinger</string>
-    <string name="menu_oldsettings">old Indstillinger</string>
     <string name="menu_filter">Filter</string>
 
     <!-- main screen -->
@@ -132,16 +130,13 @@
     <string name="about_donation_more">Donér\nudvikling</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Brugernavn</string>
     <string name="init_password">Password</string>
-    <string name="init_passvote">Password</string>
     <string name="init_login">Check login</string>
     <string name="init_twitter_authorize">Godkend c:geo</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_other">Andre indstillinger</string>
     <string name="init_skin">Light skin (genstart af c:geo nødvendig)</string>
     <string name="init_summary_skin">Light skin (genstart af c:geo nødvendig)</string>
     <string name="init_address">Vis adresse på hovedskærm</string>
@@ -158,7 +153,6 @@
     <string name="init_summary_autoload">Auto-indlæs lang cachebeskrivelse</string>
     <string name="init_livelist">Vis retning til cacher i lister</string>
     <string name="init_summary_livelist">Vis retning til cacher i lister</string>
-    <string name="init_cleared">c:geo slettede login-informationer.</string>
 
     <!-- auth -->
     <string name="auth_twitter">Twitter</string>

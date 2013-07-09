@@ -153,7 +153,6 @@
     <string name="err_auth_initialize">Sajnáljuk, a c:geo nem tudta elindítani az engedélyezési eljárást.</string>
     <string name="err_auth_process">Az engedélyezési eljárás sikertelen.</string>
     <string name="err_cannot_log_visit">A c:geo-nak nincs elég információja a láda logolásához. Kérlek logold a ládát a teljes láda leírásnál.</string>
-    <string name="err_init_cleared">Sajnáljuk, a c:geo nem tudja törölni a belépési adatokat.</string>
     <string name="err_download_fail">Sajnáljuk, a c:geo nem tudja letölteni a ládákat, mert </string>
     <string name="err_dwld_details_failed">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait.</string>
     <string name="err_load_descr_failed">Sajnáljuk, a c:geo nem tudja betölteni a leírást.</string>
@@ -219,7 +218,6 @@
     <string name="menu_about">A c:geo-ról</string>
     <string name="menu_helpers">Segédprogramok</string>
     <string name="menu_settings">Beállítások</string>
-    <string name="menu_oldsettings">old Beállítások</string>
     <string name="menu_history">Előzmények</string>
     <string name="menu_filter">Szűrő</string>
     <string name="menu_scan_geo">Geokód szkennelése</string>
@@ -323,12 +321,10 @@
     <string name="about_contributors">Hozzájárulók</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Felhasználónév</string>
     <string name="init_password">Jelszó</string>
-    <string name="init_passvote">Jelszó</string>
     <string name="init_login">Belépés &amp; dátumformátum beállítása</string>
     <string name="init_login_popup">Belépés</string>
     <string name="init_login_popup_working">Belépés a geocaching.com-ra…</string>
@@ -337,8 +333,6 @@
     <string name="init_login_popup_failed_reason">Belépés sikertelen, mert </string>
     <string name="init_twitter_authorize">Engedélyezés</string>
     <string name="init_signature">Aláírás</string>
-    <string name="init_signature_help_button">Súgó</string>
-    <string name="init_signature_help_title">Aláírás tippek és trükkök</string>
     <string name="init_signature_help_text">Add meg az aláírásod amit a bejegyzés szövegében szeretnél használni.\nHasználható speciális címkék: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nEzek az aláírás beillesztése után válnak láthatóvá.</string>
     <string name="init_signature_template_button">Sablon beillesztése</string>
     <string name="init_signature_template_date">Dátum</string>
@@ -347,7 +341,6 @@
     <string name="init_signature_template_user">Felhasználó</string>
     <string name="init_signature_template_number">Szám</string>
     <string name="init_signature_template_owner">Tulajdonos</string>
-    <string name="init_details">Geoláda részletek</string>
     <string name="init_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
     <string name="init_summary_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
     <string name="init_elevationwanted">A geoláda magassági adatainak betöltése</string>
@@ -358,7 +351,6 @@
     <string name="init_summary_openlastdetailspage">Az utoljára használt oldal részleteinek betöltése</string>
     <string name="init_autoload">Hosszú leírás automatikus betöltése</string>
     <string name="init_summary_autoload">Hosszú leírás automatikus betöltése</string>
-    <string name="init_other">Egyéb beállítások</string>
     <string name="init_skin">Világos felület\n(a c:geo újraindítását igényli)</string>
     <string name="init_summary_skin">Világos felület\n(a c:geo újraindítását igényli)</string>
     <string name="init_address">Cím mutatása a főablakban</string>
@@ -387,8 +379,6 @@
     <string name="init_summary_livelist">Mutassa a ládák irányát a listában</string>
     <string name="init_altitude">Magasság korrekció</string>
     <string name="init_altitude_description">Ha a GPS rossz magasságot mutat, módosíthatod pozitív vagy negatív irányban. A korrekció mindig méterben van.</string>
-    <string name="init_clear">Belépési adatok törlése</string>
-    <string name="init_cleared">a c:geo törölte a belépési adatokat.</string>
     <string name="init_backup">Biztonsági mentés</string>
     <string name="init_backup_backup">Biztonsági mentés</string>
     <string name="init_backup_running">A geoláda adatbázis biztonsági mentése…</string>
@@ -403,13 +393,10 @@
     <string name="init_restore_confirm">Az adatbázis üres. Szeretnéd visszaállítani a biztonsági mentést?</string>
     <string name="init_backup_last">Elérhető biztonsági mentés</string>
     <string name="init_backup_last_no">Nem találató fájl biztonsági mentéssel.</string>
-    <string name="init_mapsources">Térkép források</string>
     <string name="init_mapsource_select">Válassz térkép forrást</string>
     <string name="init_map_directory_description">Könyvtár az offline térképekhez</string>
     <string name="init_gpx_exportdir">GPX exportálási könyvtár</string>
     <string name="init_gpx_importdir">GPX importálási könyvtár</string>
-    <string name="init_gpx_exportdir_description">Itt választhatod ki a könyvtárat a GPX exportálásokhoz.</string>
-    <string name="init_gpx_importdir_description">Itt választhatod ki a könyvtárat a GPX importálásokhoz.</string>
     <string name="init_maptrail">A nyomvonal mutatása a térképen</string>
     <string name="init_summary_maptrail">A nyomvonal mutatása a térképen</string>
     <string name="init_share_after_export">A megosztás menü megnyitása a GPX exportálás után</string>
@@ -592,7 +579,6 @@
     <string name="cache_time_full_hours">óra</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Mentés</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Fájlok keresése\nitt</string>

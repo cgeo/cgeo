@@ -156,7 +156,6 @@
     <string name="err_auth_initialize">認証プロセスの初期化に失敗しました。</string>
     <string name="err_auth_process">認証プロセスに失敗しました。</string>
     <string name="err_cannot_log_visit">ログを書くことができません。キャッシュの詳細画面から書き込みしてみてください。</string>
-    <string name="err_init_cleared">ログイン情報を消去することができません。</string>
     <string name="err_download_fail">キャッシュ情報のダウンロードに失敗しました。</string>
     <string name="err_dwld_details_failed">キャッシュ情報の詳細をダウンロードすることができませんでした。</string>
     <string name="err_load_descr_failed">キャッシュの説明をロードすることができません。</string>
@@ -221,7 +220,6 @@
     <string name="menu_about">c:geoについて</string>
     <string name="menu_helpers">ユーティリティアプリ</string>
     <string name="menu_settings">設定</string>
-    <string name="menu_oldsettings">old 設定</string>
     <string name="menu_history">履歴</string>
     <string name="menu_filter">フィルター</string>
     <string name="menu_scan_geo">QRコードスキャン</string> <!-- It is more suitable "QRcode" than "Geocode" in Japanese, because "Geocode" is not commonly known. Issue #794 https://github.com/cgeo/cgeo/issues/794 -->
@@ -332,14 +330,11 @@
     <string name="about_contributors">貢献者</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_oc">opencaching.de</string>
-    <string name="init_oc_activate">オンライン地図や検索でopencaching.deも使用する</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">ユーザ名</string>
     <string name="init_password">パスワード</string>
-    <string name="init_passvote">パスワード</string>
     <string name="init_login">ログイン確認とログイン情報を保存</string>
     <string name="init_login_popup">ログイン</string>
     <string name="init_login_popup_working">ログイン中…</string>
@@ -348,8 +343,6 @@
     <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
     <string name="init_twitter_authorize">c:geoを認証</string>
     <string name="init_signature">署名</string>
-    <string name="init_signature_help_button">ヘルプ</string>
-    <string name="init_signature_help_title">署名のヒント</string>
     <string name="init_signature_help_text">ログ本文で使う署名を入力してください。\n特別な文字として、[DATE]、[TIME]、[DATETIME]、[USER]や[NUMBER]があります。\nこれらは署名の挿入時に、日付、時間、日時、ユーザ名や見つけたキャッシュ数+1に変換されます。</string>
     <string name="init_signature_template_button">テンプレートを挿入</string>
     <string name="init_signature_template_date">日付</string>
@@ -358,7 +351,6 @@
     <string name="init_signature_template_user">ユーザ名</string>
     <string name="init_signature_template_number">キャッシュ数</string>
     <string name="init_signature_template_owner">所有者</string>
-    <string name="init_details">キャッシュの詳細</string>
     <string name="init_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
     <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
     <string name="init_elevationwanted">キャッシュの標高値を取得</string> <!-- 正確に訳すと高度値 -->
@@ -369,7 +361,6 @@
     <string name="init_summary_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
     <string name="init_autoload">キャッシュの説明を自動的に全て表示</string>
     <string name="init_summary_autoload">キャッシュの説明を自動的に全て表示</string>
-    <string name="init_other">その他のオプション</string>
     <string name="init_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>
     <string name="init_summary_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>
     <string name="init_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
@@ -398,8 +389,6 @@
     <string name="init_summary_livelist">キャッシュの一覧で方向をアイコン表示</string>
     <string name="init_altitude">標高の修正</string>
     <string name="init_altitude_description">もし現在地の標高が正しくないなら修正できます。正または負のメートル単位で入力してください。</string>
-    <string name="init_clear">ログイン情報を消去</string>
-    <string name="init_cleared">ログイン情報を消去しました。</string>
     <string name="init_backup">バックアップ</string>
     <string name="init_backup_backup">バックアップ</string>
     <string name="init_backup_running">キャッシュのデータベースをバックアップ中…</string>
@@ -414,13 +403,10 @@
     <string name="init_restore_confirm">キャッシュのデータベースは空です。バックアップからリストアしますか?</string>
     <string name="init_backup_last">前回バックアップ日時:</string>
     <string name="init_backup_last_no">まだバックアップを取ったことがありません。</string>
-    <string name="init_mapsources">地図の設定</string>
     <string name="init_mapsource_select">地図の選択</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_gpx_exportdir">GPXエクスポートフォルダ</string>
     <string name="init_gpx_importdir">GPXインポートフォルダ</string>
-    <string name="init_gpx_exportdir_description">GPXファイルへエクスポートする際の保存先フォルダを選択できます。</string>
-    <string name="init_gpx_importdir_description">GPXファイルへインポートする際の保存先フォルダを選択できます。</string>
     <string name="init_maptrail">地図に軌跡を表示</string>
     <string name="init_summary_maptrail">地図に軌跡を表示</string>
     <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
@@ -611,7 +597,6 @@
 
 
     <!-- editor dialog -->
-    <string name="editor_save">保存</string>
 
     <!-- file list base -->
     <string name="file_searching_in">ファイルを検索中:\n</string>

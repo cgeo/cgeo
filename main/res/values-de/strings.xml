@@ -176,7 +176,6 @@
     <string name="err_auth_initialize">c:geo konnte die Autorisierung nicht initialisieren.</string>
     <string name="err_auth_process">Autorisierung fehlgeschlagen.</string>
     <string name="err_cannot_log_visit">c:geo hat nicht genügend Informationen um den Besuch zu loggen. Bitte über die Cache-Details versuchen.</string>
-    <string name="err_init_cleared">c:geo konnte die Anmeldedaten nicht entfernen.</string>
     <string name="err_download_fail">c:geo konnte keine Caches laden, weil </string>
     <string name="err_dwld_details_failed">Download der Cache-Details fehlgeschlagen.</string>
     <string name="err_load_descr_failed">Laden der Cachebeschreibung fehlgeschlagen.</string>
@@ -248,7 +247,6 @@
     <string name="menu_about">über c:geo</string>
     <string name="menu_helpers">Nützliche Apps</string>
     <string name="menu_settings">Einstellungen</string>
-    <string name="menu_oldsettings">old Einstellungen</string>
     <string name="menu_history">Verlauf</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
@@ -378,15 +376,11 @@
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
     
-    <string name="settings_active">aktiv</string>
-    <string name="settings_not_active">nicht aktiv</string>
     <string name="settings_goto_url_button">mehr …</string>
     
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_activate_gc">Aktivieren</string>
     <string name="settings_gc_legal_note">Um die Dienste von geocaching.com nutzen zu können, müssen die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert werden.</string>
-    <string name="init_geocaching">Geocaching.com</string>
-    <string name="init_gc_activate">Aktiviere Geocaching.com für Live-Karte und Suche</string>
     <string name="settings_info_facebook_login_title">Facebook-Login</string>
     <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe …</string>
     <string name="init_oc">Opencaching.de</string>
@@ -398,7 +392,6 @@
     <string name="settings_activate_twitter">Aktivieren</string>
     <string name="init_username">Benutzername</string>
     <string name="init_password">Passwort</string>
-    <string name="init_passvote">Passwort</string>
     <string name="init_login">Anmeldedaten überprüfen und speichern</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Anmeldung…</string>
@@ -408,8 +401,6 @@
     <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
     <string name="init_twitter_authorize">c:geo autorisieren</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_signature_help_button">Hilfe</string>
-    <string name="init_signature_help_title">Tipps und Tricks für die Signatur</string>
     <string name="init_signature_help_text">Verwendete Signatur für Logtexte.\nErlaubte Platzhalter sind: [DATE], [TIME], [DATETIME], [USER] &amp; [NUMBER]. Diese werden beim Einfügen der Signatur durch die entsprechenden Werte ersetzt.</string>
     <string name="init_signature_template_button">Platzhalter einfügen</string>
     <string name="init_signature_template_date">Datum</string>
@@ -418,7 +409,6 @@
     <string name="init_signature_template_user">Benutzer</string>
     <string name="init_signature_template_number">Nummer</string>
     <string name="init_signature_template_owner">Besitzer</string>
-    <string name="init_details">Cache Details</string>
     <string name="init_ratingwanted">GCvote-Bewertung</string>
     <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
     <string name="init_elevationwanted">Höhe des Caches</string>
@@ -429,7 +419,6 @@
     <string name="init_summary_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
     <string name="init_autoload">Ausführliche Beschreibung</string>
     <string name="init_summary_autoload">Ausführliche Beschreibung automatisch laden</string>
-    <string name="init_other">Weitere Optionen</string>
     <string name="init_skin">Helle Oberfläche</string>
     <string name="init_summary_skin">Helle Oberfläche (Neustart erforderlich)</string>
     <string name="init_address">Ort statt Koordinaten</string>
@@ -460,8 +449,6 @@
     <string name="init_summary_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
     <string name="init_altitude">Höhenkorrektur (m)</string>
     <string name="init_altitude_description">Falls das GPS eine falsche Höhe ermittelt, kann dies durch Angabe eines positiven oder negativen Wertes in Metern korrigiert werden.</string>
-    <string name="init_clear">Login zurücksetzen</string>
-    <string name="init_cleared">c:geo hat die Anmeldedaten gelöscht.</string>
     <string name="init_backup">Sicherung</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
@@ -476,7 +463,6 @@
     <string name="init_restore_confirm">Die Cache-Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Backup verfügbar von</string>
     <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
-    <string name="init_mapsources">Kartenherkunft</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo ermöglicht es, Offline-Karten zu verwenden. Du kannst Karten bei mapsforge herunterladen oder sogar eigene Karten aus OSM-Daten erstellen.</string>
     <string name="settings_info_themes_title">Info zu Karten-Themes</string>
@@ -485,8 +471,6 @@
     <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
     <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
     <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
-    <string name="init_gpx_exportdir_description">Hier kann das Verzeichnis für GPX-Exporte gewählt werden.</string>
-    <string name="init_gpx_importdir_description">Hier kann das Verzeichnis für GPX-Importe gewählt werden.</string>
     <string name="init_maptrail">Zeige Spur</string>
     <string name="init_summary_maptrail">Zeige Spur auf Karte</string>
     <string name="init_share_after_export">Weiterleiten nach dem Export</string>
@@ -709,7 +693,6 @@
     <string name="cache_listed_on">Geführt auf %s</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Speichern</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Suche nach Dateien\nin</string>

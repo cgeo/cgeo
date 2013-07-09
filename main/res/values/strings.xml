@@ -178,7 +178,6 @@
     <string name="err_auth_initialize">c:geo failed to initialize authorization process.</string>
     <string name="err_auth_process">Authorization process failed.</string>
     <string name="err_cannot_log_visit">c:geo is unable to log your visit. Please log your visit from full cache details screen.</string>
-    <string name="err_init_cleared">c:geo can\'t clear login information.</string>
     <string name="err_download_fail">c:geo failed to download caches.</string>
     <string name="err_dwld_details_failed">c:geo failed to download cache details.</string>
     <string name="err_load_descr_failed">c:geo can\'t load description.</string>
@@ -250,7 +249,6 @@
     <string name="menu_about">About c:geo</string>
     <string name="menu_helpers">Utility programs</string>
     <string name="menu_settings">Settings</string>
-    <string name="menu_oldsettings">old Settings</string>
     <string name="menu_history">History</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -380,15 +378,11 @@
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_logging_other">Other Logging Options</string>
     
-    <string name="settings_active">active</string>
-    <string name="settings_not_active">not active</string>
     <string name="settings_goto_url_button">more …</string>
 
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_activate_gc">Activate</string>
     <string name="settings_gc_legal_note">To use the services of Geocaching.com terms and conditions of the Groundspeak disclaimer have to be agreed.</string>
-    <string name="init_geocaching">Geocaching.com</string>
-    <string name="init_gc_activate">Activate Geocaching.com on live-map and in searches</string>
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">You can\'t make c:geo login to geocaching.com with your Facebook account. But there is a simple workaround …</string>
     <string name="init_oc">Opencaching.de</string>
@@ -400,7 +394,6 @@
     <string name="settings_activate_twitter">Activate</string>
     <string name="init_username">Username</string>
     <string name="init_password">Password</string>
-    <string name="init_passvote">Password</string>
     <string name="init_login">Check Login</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logging in…</string>
@@ -410,8 +403,6 @@
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_twitter_authorize">Authorize c:geo</string>
     <string name="init_signature">Signature</string>
-    <string name="init_signature_help_button">Help</string>
-    <string name="init_signature_help_title">Signature Tips and Tricks</string>
     <string name="init_signature_help_text">Enter your signature to use it in the log text.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
     <string name="init_signature_template_button">Insert Template</string>
     <string name="init_signature_template_date">Date</string>
@@ -420,7 +411,6 @@
     <string name="init_signature_template_user">User</string>
     <string name="init_signature_template_number">Number</string>
     <string name="init_signature_template_owner">Owner</string>
-    <string name="init_details">Cache Details</string>
     <string name="init_ratingwanted">GCvote Rating</string>
     <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
     <string name="init_elevationwanted">Elevation Data</string>
@@ -431,7 +421,6 @@
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>
     <string name="init_autoload">Long Description</string>
     <string name="init_summary_autoload">Auto-loading of long description</string>
-    <string name="init_other">Other Options</string>
     <string name="init_skin">Light Skin</string>
     <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <string name="init_address">Show Address</string>
@@ -462,8 +451,6 @@
     <string name="init_summary_livelist">Show Direction to caches in the list</string>
     <string name="init_altitude">Altitude Correction (m)</string>
     <string name="init_altitude_description">If your GPS is calculating a wrong altitude, you can correct it with a positive or negative number. The correction always has to be given in meters.</string>
-    <string name="init_clear">Clear Login</string>
-    <string name="init_cleared">c:geo cleared login information.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creating backup of cache database…</string>
@@ -478,7 +465,6 @@
     <string name="init_restore_confirm">Database is empty. Do you want to restore the database backup?</string>
     <string name="init_backup_last">Available backup from</string>
     <string name="init_backup_last_no">There is no file with a backup.</string>
-    <string name="init_mapsources">Map Sources</string>
     <string name="settings_info_offline_maps_title">Info on Offline Maps</string>
     <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can download maps from Mapsforge or even create your own maps from OSM data.</string>
     <string name="settings_info_themes_title">Info on Map Themes</string>
@@ -487,8 +473,6 @@
     <string name="init_map_directory_description">Directory with offline maps</string>
     <string name="init_gpx_exportdir">GPX Export Directory</string>
     <string name="init_gpx_importdir">GPX Import Directory</string>
-    <string name="init_gpx_exportdir_description">Here you can select the directory for GPX exports.</string>
-    <string name="init_gpx_importdir_description">Here you can select the directory for GPX imports.</string>
     <string name="init_maptrail">Show Trail</string>
     <string name="init_summary_maptrail">Show trail on Map</string>
     <string name="init_share_after_export">Open share menu after GPX export</string>
@@ -711,7 +695,6 @@
     <string name="cache_listed_on">Listed on %s</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Save</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Searching for files\nin</string>

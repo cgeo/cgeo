@@ -153,7 +153,6 @@
     <string name="err_auth_initialize">Prepáčte, c:geo nedokázalo zahájiť autorizáciu.</string>
     <string name="err_auth_process">Autorizácia zlyhala.</string>
     <string name="err_cannot_log_visit">c:geo nemá dostatok informácií pre zapísanie návštevy. Prosím urobte to z kompletného detailu skrýše.</string>
-    <string name="err_init_cleared">Prepáčte, c:geo nedokázalo zmazať prihlasovacie údaje.</string>
     <string name="err_download_fail">Prepáčte, c:geo nemôže načítať skrýšu, pretože</string>
     <string name="err_dwld_details_failed">c:geo nemôže stiahnuť detaily skrýše.</string>
     <string name="err_load_descr_failed">c:geo nemôže načítať popis.</string>
@@ -219,7 +218,6 @@
     <string name="menu_about">O aplikácii</string>
     <string name="menu_helpers">Pomocné programy</string>
     <string name="menu_settings">Nastavenia</string>
-    <string name="menu_oldsettings">old Nastavenia</string>
     <string name="menu_history">História</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Nasnímať geo kód</string>
@@ -330,12 +328,10 @@
     <string name="about_contributors">Prispievatelia</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">používateľské meno</string>
     <string name="init_password">heslo</string>
-    <string name="init_passvote">heslo</string>
     <string name="init_login">Kontrola prihlásenia a nastavenie formátu dátumu</string>
     <string name="init_login_popup">Prihlasovanie</string>
     <string name="init_login_popup_working">Prihlasovanie na Geocaching.com…</string>
@@ -344,8 +340,6 @@
     <string name="init_login_popup_failed_reason">Prihlásenie neúspešné: </string>
     <string name="init_twitter_authorize">Autorizovať c:geo</string>
     <string name="init_signature">Podpis</string>
-    <string name="init_signature_help_button">Pomocník</string>
-    <string name="init_signature_help_title">Tipy a triky pre podpis</string>
     <string name="init_signature_help_text">Zapíšte váš podpis, ktorý chcete použiť v texte záznamov.\nMôžete použiť špeciálne slová: [DATE] , [TIME], [DATETIME], [USER] a [NUMBER].\nTieto budú nahradené pri vložení podpisu.</string>
     <string name="init_signature_template_button">Vložiť šablónu</string>
     <string name="init_signature_template_date">Dátum</string>
@@ -354,7 +348,6 @@
     <string name="init_signature_template_user">Používateľ</string>
     <string name="init_signature_template_number">Číslo</string>
     <string name="init_signature_template_owner">Vlastník</string>
-    <string name="init_details">Detaily skrýše</string>
     <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
     <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
     <string name="init_elevationwanted">Načítať údaje o stúpaní skrýše</string>
@@ -365,7 +358,6 @@
     <string name="init_summary_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
     <string name="init_autoload">Automatické načítanie dlhého popisu</string>
     <string name="init_summary_autoload">Automatické načítanie dlhého popisu</string>
-    <string name="init_other">Ďalšie možnosti</string>
     <string name="init_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
     <string name="init_summary_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
     <string name="init_address">Adresa na úvodnej obrazovke</string>
@@ -394,8 +386,6 @@
     <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
     <string name="init_altitude">Oprava výšky</string>
     <string name="init_altitude_description">Keď vám GPS zobrazuje nesprávnu nadmorskú výšku, môžete ju opraviť zadaním kladného alebo záporného čísla. Oprava ja vždy v metroch.</string>
-    <string name="init_clear">Zmazať prihlasovacie údaje</string>
-    <string name="init_cleared">Prihlasovacie údaje zmazané.</string>
     <string name="init_backup">Záloha</string>
     <string name="init_backup_backup">Zálohovať</string>
     <string name="init_backup_running">Vytváranie zálohy databázy skrýš…</string>
@@ -410,13 +400,10 @@
     <string name="init_restore_confirm">Databáza je prázdna. Chcete ju obnoviť zo zálohy?</string>
     <string name="init_backup_last">Posledná dostupná záloha</string>
     <string name="init_backup_last_no">Neexistuje súbor zo zálohou.</string>
-    <string name="init_mapsources">Mapové zdroje</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
     <string name="init_gpx_exportdir">Priečinok pre GPX Export</string>
     <string name="init_gpx_importdir">Priečinok pre GPX Import</string>
-    <string name="init_gpx_exportdir_description">Tu si môžete vybrať priečinok pre GPX exporty.</string>
-    <string name="init_gpx_importdir_description">Tu si môžete vybrať priečinok pre GPX importy.</string>
     <string name="init_maptrail">Zobraziť stopu na mape</string>
     <string name="init_summary_maptrail">Zobraziť stopu na mape</string>
     <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
@@ -602,7 +589,6 @@
     <string name="cache_time_full_hours">hodín</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Uložiť</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Vyhľadávanie súborov\nv</string>

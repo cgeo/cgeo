@@ -167,7 +167,6 @@
     <string name="err_auth_initialize">c:geo nie może rozpocząć autoryzacji.</string>
     <string name="err_auth_process">Autoryzacja zakończona niepowodzeniem.</string>
     <string name="err_cannot_log_visit">c:geo nie może dodać wpisu wizyty. Proszę spróbuj przez szczegóły skrzynki.</string>
-    <string name="err_init_cleared">c:geo nie może usunąć danych logowania.</string>
     <string name="err_download_fail">c:geo nie może załadować skrzynek.</string>
     <string name="err_dwld_details_failed">c:geo nie może załadować szczegółów skrzynki.</string>
     <string name="err_load_descr_failed">c:geo nie może załadować opisu.</string>
@@ -239,7 +238,6 @@
     <string name="menu_about">O c:geo</string>
     <string name="menu_helpers">Przydatne programy</string>
     <string name="menu_settings">Ustawienia</string>
-    <string name="menu_oldsettings">old Ustawienia</string>
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>
@@ -355,15 +353,11 @@
     <string name="about_contributors">Współpracownicy</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
-    <string name="settings_activate_geocachingcom">Aktywuj</string>
     <string name="init_oc">opencaching.de</string>
-    <string name="init_oc_activate">Aktywuj opencaching.de na mapie Live i w wyszukiwaniu</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Nazwa użytkownika</string>
     <string name="init_password">Hasło</string>
-    <string name="init_passvote">Hasło</string>
     <string name="init_login">Sprawdź i zapisz nazwę użytkownika</string>
     <string name="init_login_popup">Nazwa użytkownika</string>
     <string name="init_login_popup_working">Logowanie…</string>
@@ -372,8 +366,6 @@
     <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
     <string name="init_twitter_authorize">Autoryzacja c:geo</string>
     <string name="init_signature">Podpis</string>
-    <string name="init_signature_help_button">Pomoc</string>
-    <string name="init_signature_help_title">Podpis - porady i wskazówki</string>
     <string name="init_signature_help_text">Wprowadź Twój podpis, który będzie używany przy wpisie do dziennika.\nWyrażenia specjalne, które mogą być użyte to: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nBędą one zastępowane w momencie wstawiania podpisu.</string>
     <string name="init_signature_template_button">Wstaw szablon</string>
     <string name="init_signature_template_date">Data</string>
@@ -382,7 +374,6 @@
     <string name="init_signature_template_user">Użytkownik</string>
     <string name="init_signature_template_number">Numer</string>
     <string name="init_signature_template_owner">Właściciel</string>
-    <string name="init_details">Szczegóły skrzynki</string>
     <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
     <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
     <string name="init_elevationwanted">Załaduj dane o ukształtowaniu terenu</string>
@@ -393,7 +384,6 @@
     <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
     <string name="init_autoload">Automatyczne ładowanie długich opisów</string>
     <string name="init_summary_autoload">Automatyczne ładowanie długich opisów</string>
-    <string name="init_other">Inne opcje</string>
     <string name="init_skin">Light skin\n(wymaga restartu)</string>
     <string name="init_summary_skin">Light skin\n(wymaga restartu)</string>
     <string name="init_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
@@ -424,8 +414,6 @@
     <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_altitude">Korekta wysokości</string>
     <string name="init_altitude_description">Jeśli GPS podaje Tobie złą wysokość, możesz skorygować ją liczbą dodatnią lub ujemną. Poprawka musi być zawsze wyrażona w metrach.</string>
-    <string name="init_clear">Usuń nazwę użytkownika</string>
-    <string name="init_cleared">c:geo usunął dane logowania.</string>
     <string name="init_backup">Kopia zapasowa</string>
     <string name="init_backup_backup">Wykonaj kopię zapasową</string>
     <string name="init_backup_running">Tworzę kopię zapasową bazy skrzynek…</string>
@@ -440,13 +428,10 @@
     <string name="init_restore_confirm">Baza danych jest pusta. Czy na pewno chcesz odzyskać bazę danych z kopii zapasowej?</string>
     <string name="init_backup_last">Kopia dostępna od</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
-    <string name="init_mapsources">Źródła mapy</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
     <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
     <string name="init_gpx_importdir">Katalog do importu plików GPX</string>
-    <string name="init_gpx_exportdir_description">Tutaj możesz wybrać katalog do eksportu plików GPX.</string>
-    <string name="init_gpx_importdir_description">Tutaj możesz wybrać katalog do importu plików GPX.</string>
     <string name="init_maptrail">Pokaż szlak na mapie</string>
     <string name="init_summary_maptrail">Pokaż szlak na mapie</string>
     <string name="init_share_after_export">Otwórz dzielone menu po eksporcie plików GPX</string>
@@ -646,7 +631,6 @@
     <string name="cache_listed_on">Zapisana w %s</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Zapisz</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Szukam plików\nw</string>

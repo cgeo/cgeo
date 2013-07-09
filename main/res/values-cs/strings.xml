@@ -166,7 +166,6 @@
     <string name="err_auth_initialize">c:geo nedokázalo zahájit autorizační proces.</string>
     <string name="err_auth_process">Autorizační proces selhal.</string>
     <string name="err_cannot_log_visit">c:geo nemůže zapsat log. Prosím, zaloguj svou návštěvu z obrazovky detailů keše.</string>
-    <string name="err_init_cleared">c:geo nemůže vymazat přihlašovací údaje.</string>
     <string name="err_download_fail">c:geo nedokázalo stáhnout keš.</string>
     <string name="err_dwld_details_failed">c:geo nedokázalo stáhnout detaily keše.</string>
     <string name="err_load_descr_failed">c:geo nemůže načíst popis.</string>
@@ -238,7 +237,6 @@
     <string name="menu_about">O programu</string>
     <string name="menu_helpers">Pomocné programy</string>
     <string name="menu_settings">Nastavení</string>
-    <string name="menu_oldsettings">old Nastavení</string>
     <string name="menu_history">Historie</string>
     <string name="menu_filter">Filtr</string>
     <string name="menu_scan_geo">Naskenovat geokód</string>
@@ -362,7 +360,6 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Uživatelské jméno</string>
     <string name="init_password">Heslo</string>
-    <string name="init_passvote">Heslo</string>
     <string name="init_login">Zkontrolovat a uložit</string>
     <string name="init_login_popup">Přihlášení</string>
     <string name="init_login_popup_working">Přihlašování…</string>
@@ -371,8 +368,6 @@
     <string name="init_login_popup_failed_reason">Přihlášení se nezdařilo, protože:</string>
     <string name="init_twitter_authorize">Autorizovat c:geo</string>
     <string name="init_signature">Podpis</string>
-    <string name="init_signature_help_button">Nápověda</string>
-    <string name="init_signature_help_title">Tipy a triky k podpisu</string>
     <string name="init_signature_help_text">Zadej podpis k použití při logování.\nSpeciální řetězce, které můžeš použít jsou: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nTyto řetězce budou nahrazeny při vkládání podpisu do Logu.</string>
     <string name="init_signature_template_button">Vložit šablonu</string>
     <string name="init_signature_template_date">Datum</string>
@@ -381,7 +376,6 @@
     <string name="init_signature_template_user">Uživatel</string>
     <string name="init_signature_template_number">Číslo nálezu</string>
     <string name="init_signature_template_owner">Vlastník</string>
-    <string name="init_details">Detaily keše</string>
     <string name="init_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
     <string name="init_elevationwanted">Načítat výšková data keše</string>
@@ -392,7 +386,6 @@
     <string name="init_summary_openlastdetailspage">Otevřít detaily na naposledy použité stránce</string>
     <string name="init_autoload">Automaticky načítat dlouhý popis</string>
     <string name="init_summary_autoload">Automaticky načítat dlouhý popis</string>
-    <string name="init_other">Další možnosti</string>
     <string name="init_skin">Používat světlý vzhled\n(Vyžaduje restart)</string>
     <string name="init_summary_skin">Používat světlý vzhled\n(Vyžaduje restart)</string>
     <string name="init_address">Zobrazovat adresu na hlavní obrazovce</string>
@@ -423,8 +416,6 @@
     <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
     <string name="init_altitude">Výšková korekce</string>
     <string name="init_altitude_description">Pokud Tvoje GPS špatně počítá výšku, můžeš ji korigovat zde. Stačí zadat kladné či záporné číslo v metrech.</string>
-    <string name="init_clear">Smazat přihlašovací údaje</string>
-    <string name="init_cleared">c:geo smazalo přihlašovací údaje.</string>
     <string name="init_backup">Záloha</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_running">Vytváření zálohy databáze keší…</string>
@@ -439,13 +430,10 @@
     <string name="init_restore_confirm">Databáze je prázdná, chceš ji obnovit ze zálohy?</string>
     <string name="init_backup_last">Dostupná záloha z</string>
     <string name="init_backup_last_no">Nenalezen žádný soubor se zálohou.</string>
-    <string name="init_mapsources">Mapové zdroje</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_gpx_exportdir">Složka pro GPX export</string>
     <string name="init_gpx_importdir">Složka pro GPX import</string>
-    <string name="init_gpx_exportdir_description">Zde můžeš vybrat složku pro GPX exporty.</string>
-    <string name="init_gpx_importdir_description">Zde můžeš vybrat složku pro GPX importy.</string>
     <string name="init_maptrail">Zobrazit trasu na mapě</string>
     <string name="init_summary_maptrail">Zobrazit trasu na mapě</string>
     <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
@@ -641,7 +629,6 @@
     <string name="cache_listed_on">Zveřejněno na %s</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Uložit</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Hledání souborů\nv</string>

@@ -176,7 +176,6 @@
     <string name="err_auth_initialize">Tyvärr misslyckades c:geo att starta inloggningsproceduren.</string>
     <string name="err_auth_process">Inloggningsproceduren misslyckades.</string>
     <string name="err_cannot_log_visit">c:geo har inte tillräckligt med information för att logga ditt besök. Vänligen försök igen från vyn med all information om cachen.</string>
-    <string name="err_init_cleared">Tyvärr kan c:geo inte rensa inloggningsinställningarna.</string>
     <string name="err_download_fail">Tyvärr misslyckades c:geo att ladda ner cacher.</string>
     <string name="err_dwld_details_failed">Tyvärr misslyckades c:geo att ladda detaljer.</string>
     <string name="err_load_descr_failed">Tyvärr kan c:geo inte ladda beskrivningen.</string>
@@ -248,7 +247,6 @@
     <string name="menu_about">Om c:geo</string>
     <string name="menu_helpers">Tilläggsprogram</string>
     <string name="menu_settings">Inställningar</string>
-    <string name="menu_oldsettings">old Inställningar</string>
     <string name="menu_history">Hittade cacher</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scanna geokod</string>
@@ -363,15 +361,11 @@
     <string name="about_contributors">Medarbetare</string>
 
     <!-- init -->
-    <string name="settings_screen_gc_title">Geocaching.com</string>
-    <string name="settings_activate_geocachingcom">Aktivera</string>
     <string name="init_oc">opencaching.de</string>
-    <string name="init_oc_activate">Aktivera opencaching.de i live-kartor och sökningar</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Användare</string>
     <string name="init_password">Lösenord</string>
-    <string name="init_passvote">Lösenord</string>
     <string name="init_login">Testa och spara inloggning</string>
     <string name="init_login_popup">Inloggning</string>
     <string name="init_login_popup_working">Testar inloggning mot gc.com…</string>
@@ -380,8 +374,6 @@
     <string name="init_login_popup_failed_reason">Inloggning misslyckades:</string>
     <string name="init_twitter_authorize">Inställningar för Twitter</string>
     <string name="init_signature">Signatur</string>
-    <string name="init_signature_help_button">Hjälp</string>
-    <string name="init_signature_help_title">Tips och tricks</string>
     <string name="init_signature_help_text">Skriv den signatur som du vill använda i dina loggtexter.\nDet finns några speciella texter som kan användas och som expanderas när signaturen läggs in: [DATE] , [TIME], [USER] &amp; [NUMBER].</string>
     <string name="init_signature_template_button">Infoga makro</string>
     <string name="init_signature_template_date">Datum</string>
@@ -390,7 +382,6 @@
     <string name="init_signature_template_user">Namn</string>
     <string name="init_signature_template_number">Nummer</string>
     <string name="init_signature_template_owner">Ägare</string>
-    <string name="init_details">Cacheinformation</string>
     <string name="init_ratingwanted">Ladda cache betyg från GCvote.com</string>
     <string name="init_summary_ratingwanted">Ladda cache betyg från GCvote.com</string>
     <string name="init_elevationwanted">Ladda höjddata för cacher</string>
@@ -401,7 +392,6 @@
     <string name="init_summary_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
     <string name="init_autoload">Ladda full beskrivning automatiskt</string>
     <string name="init_summary_autoload">Ladda full beskrivning automatiskt</string>
-    <string name="init_other">Övriga inställningar</string>
     <string name="init_skin">Vitt skal (kräver omstart av c:geo)</string>
     <string name="init_summary_skin">Vitt skal (kräver omstart av c:geo)</string>
     <string name="init_address">Visa adress istället för koordinater på startsidan</string>
@@ -432,8 +422,6 @@
     <string name="init_summary_livelist">Visa riktning till cacher i listan</string>
     <string name="init_altitude">Höjd justering</string>
     <string name="init_altitude_description">Det är möjligt att justera höjden över havet om din GPS visar fel. Detta görs med ett positivt eller negativt tal, angivet i meter.</string>
-    <string name="init_clear">Rensa inloggningsinfo</string>
-    <string name="init_cleared">c:geo har rensat inloggningsinformationen</string>
     <string name="init_backup">Säkerhetskopiering</string>
     <string name="init_backup_backup">Kopiera</string>
     <string name="init_backup_running">Skapar säkerhetskopia av databasen med cacher…</string>
@@ -448,13 +436,10 @@
     <string name="init_restore_confirm">Databasen är tom. Vill du återställa med säkerhetskopian du gjort tidigare?</string>
     <string name="init_backup_last">Tillgänglig kopia från</string>
     <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
-    <string name="init_mapsources">Kartkällor</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_map_directory_description">Katalog med offline kartor</string>
     <string name="init_gpx_exportdir">GPX-exportkatalog</string>
     <string name="init_gpx_importdir">GPX-importkatalog</string>
-    <string name="init_gpx_exportdir_description">Här kan du välja katalog för GPX-exporteringar.</string>
-    <string name="init_gpx_importdir_description">Här kan du välja katalog för GPX-importeringar.</string>
     <string name="init_maptrail">Visa spår på kartan</string>
     <string name="init_summary_maptrail">Visa spår på kartan</string>
     <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
@@ -654,7 +639,6 @@
     <string name="cache_listed_on">Listad på %s</string>
 
     <!-- editor dialog -->
-    <string name="editor_save">Spara</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Söker efter filer\ni</string>
