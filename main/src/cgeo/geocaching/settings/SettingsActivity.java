@@ -4,986 +4,391 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
-import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.connector.gc.Login;
-import cgeo.geocaching.connector.oc.OCAuthorizationActivity;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.network.Cookies;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
-import cgeo.geocaching.utils.RunnableWithArgument;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.openintents.intents.FileManagerIntents;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.os.Environment;
+import android.preference.EditTextPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-public class SettingsActivity extends AbstractActivity {
+/**
+ * A {@link PreferenceActivity} that presents a set of application settings. On
+ * handset devices, settings are presented as a single list. On tablets,
+ * settings are split by category, with category headers shown to the left of
+ * the list of settings.
+ * <p>
+ * See <a href="http://developer.android.com/design/patterns/settings.html"> Android Design: Settings</a> for design
+ * guidelines and the <a href="http://developer.android.com/guide/topics/ui/settings.html">Settings API Guide</a> for
+ * more information on developing a Settings UI.
+ *
+ * @author koem (initial author)
+ */
+public class SettingsActivity extends PreferenceActivity {
 
-    private final static int SELECT_MAPFILE_REQUEST = 1;
-    private final static int SELECT_GPX_EXPORT_REQUEST = 2;
-    private final static int SELECT_GPX_IMPORT_REQUEST = 3;
-    private final static int SELECT_THEMEFOLDER_REQUEST = 4;
+    private static final String INTENT_GOTO = "GOTO";
+    private static final int INTENT_GOTO_SERVICES = 1;
 
-    private ProgressDialog loginDialog = null;
-    private ProgressDialog webDialog = null;
-    private boolean enableTemplatesMenu = false;
-    private Handler logInHandler = new Handler() {
+    private EditText signatureText;
 
+    /**
+     * Enum for dir choosers. This is how we can retrieve information about the
+     * directory and preference key in onActivityResult() easily just by knowing
+     * the result code.
+     */
+    private enum DirChooserType {
+        GPX_IMPORT_DIR(1, R.string.pref_gpxImportDir,
+                Environment.getExternalStorageDirectory().getPath() + "/gpx"),
+        GPX_EXPORT_DIR(2, R.string.pref_gpxExportDir,
+                Environment.getExternalStorageDirectory().getPath() + "/gpx"),
+        THEMES_DIR(3, R.string.pref_renderthemepath, "");
+        public final int requestCode;
+        public final int keyId;
+        public final String defaultValue;
+
+        private DirChooserType(int requestCode, int keyId, String defaultValue) {
+            this.requestCode = requestCode;
+            this.keyId = keyId;
+            this.defaultValue = defaultValue;
+        }
+    }
+
+    private final static int DIR_CHOOSER_MAPS_DIRECTORY_REQUEST = 4;
+
+    @SuppressWarnings("deprecation")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        if (Settings.isLightSkin()) {
+            setTheme(R.style.settings_light);
+        } else {
+            setTheme(R.style.settings);
+        }
+
+        super.onCreate(savedInstanceState);
+
+        addPreferencesFromResource(R.xml.preferences);
+
+        initPreferences();
+
+        Intent intent = getIntent();
+        int gotoPage = intent.getIntExtra(INTENT_GOTO, 0);
+        if (gotoPage == INTENT_GOTO_SERVICES) {
+            // start with services screen
+            PreferenceScreen main = (PreferenceScreen) findPreference(getKey(R.string.pref_fakekey_main_screen));
+            int index = findPreference(getKey(R.string.pref_fakekey_services_screen)).getOrder();
+            main.onItemClick(null, null, index, 0);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private void initPreferences() {
+        initMapSourcePreference();
+        initDirChoosers();
+        initDefaultNavigationPreferences();
+        initBackupButtons();
+        initDbLocationPreference();
+        initDebugPreference();
+        initBasicMemberPreferences();
+        initSend2CgeoPreferences();
+
+        Map<String, ?> prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getAll();
+        for (String key : prefs.keySet()) {
+            Preference pref = findPreference(key);
+            if (pref instanceof EditTextPreference || pref instanceof EditPasswordPreference) {
+                bindSummaryToStringValue(pref);
+            } else if (pref instanceof NumberPickerPreference) {
+                bindSummaryToIntValue(pref);
+            }
+        }
+    }
+
+    private static String getKey(final int prefKeyId) {
+        return cgeoapplication.getInstance().getString(prefKeyId);
+    }
+
+    // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
+    OnMenuItemClickListener TEMPLATE_CLICK = new OnMenuItemClickListener() {
         @Override
-        public void handleMessage(Message msg) {
-            try {
-                if (loginDialog != null && loginDialog.isShowing()) {
-                    loginDialog.dismiss();
-                }
-
-                if (msg.obj == null || (msg.obj instanceof Drawable)) {
-                    helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_ok),
-                            (Drawable) msg.obj);
-                } else {
-                    helpDialog(res.getString(R.string.init_login_popup),
-                            res.getString(R.string.init_login_popup_failed_reason) + " " +
-                                    ((StatusCode) msg.obj).getErrorString(res) + ".");
-                }
-            } catch (Exception e) {
-                showToast(res.getString(R.string.err_login_failed));
-
-                Log.e("SettingsActivity.logInHandler", e);
+        public boolean onMenuItemClick(MenuItem item) {
+            LogTemplate template = LogTemplateProvider.getTemplate(item.getItemId());
+            if (template != null) {
+                insertSignatureTemplate(template);
+                return true;
             }
-
-            if (loginDialog != null && loginDialog.isShowing()) {
-                loginDialog.dismiss();
-            }
-
-            init();
+            return false;
         }
     };
 
-    private Handler webAuthHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            try {
-                if (webDialog != null && webDialog.isShowing()) {
-                    webDialog.dismiss();
-                }
-
-                if (msg.what > 0) {
-                    helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_ok).replace("####", String.valueOf(msg.what)));
-                } else {
-                    helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_fail));
-                }
-            } catch (Exception e) {
-                showToast(res.getString(R.string.init_sendToCgeo_register_fail));
-
-                Log.e("SettingsActivity.webHandler", e);
-            }
-
-            if (webDialog != null && webDialog.isShowing()) {
-                webDialog.dismiss();
-            }
-
-            init();
-        }
-    };
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.settings_activity);
-
-        init();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        init();
-    }
-
-    @Override
-    public void onPause() {
-        saveValues();
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        saveValues();
-        Compatibility.dataChanged(getPackageName());
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        saveValues();
-
-        super.onDestroy();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.settings_activity_options, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_clear) {
-            ((EditText) findViewById(R.id.username)).setText("");
-            ((EditText) findViewById(R.id.password)).setText("");
-            ((EditText) findViewById(R.id.passvote)).setText("");
-
-            if (saveValues()) {
-                showToast(res.getString(R.string.init_cleared));
-            } else {
-                showToast(res.getString(R.string.err_init_cleared));
-            }
-
-            finish();
-        }
-
-        return false;
+    // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
+    void setSignatureTextView(EditText view) {
+        this.signatureText = view;
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
             ContextMenuInfo menuInfo) {
-        if (enableTemplatesMenu) {
+        // context menu for signature templates
+        if (v.getId() == R.id.signature_templates) {
             menu.setHeaderTitle(R.string.init_signature_template_button);
-            for (LogTemplate template : LogTemplateProvider.getTemplates()) {
-                menu.add(0, template.getItemId(), 0, template.getResourceId());
+            ArrayList<LogTemplate> templates = LogTemplateProvider.getTemplates();
+            for (int i = 0; i < templates.size(); ++i) {
+                menu.add(0, templates.get(i).getItemId(), 0, templates.get(i).getResourceId());
+                menu.getItem(i).setOnMenuItemClickListener(TEMPLATE_CLICK);
             }
         }
+        super.onCreateContextMenu(menu, v, menuInfo);
     }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        LogTemplate template = LogTemplateProvider.getTemplate(item.getItemId());
-        if (template != null) {
-            return insertSignatureTemplate(template);
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    private boolean insertSignatureTemplate(final LogTemplate template) {
-        EditText sig = (EditText) findViewById(R.id.signature);
+    private void insertSignatureTemplate(final LogTemplate template) {
         String insertText = "[" + template.getTemplateString() + "]";
-        ActivityMixin.insertAtPosition(sig, insertText, true);
-        return true;
-    }
-
-    public void init() {
-
-        // geocaching.com settings
-        final CheckBox gcCheck = (CheckBox) findViewById(R.id.gc_option);
-        gcCheck.setChecked(Settings.isGCConnectorActive());
-        gcCheck.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setGCConnectorActive(gcCheck.isChecked());
-            }
-        });
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
-        if (login != null) {
-            ((EditText) findViewById(R.id.username)).setText(login.left);
-            ((EditText) findViewById(R.id.password)).setText(login.right);
-        }
-
-        Button logMeIn = (Button) findViewById(R.id.log_me_in);
-        logMeIn.setOnClickListener(new LoginListener());
-
-        TextView legalNote = (TextView) findViewById(R.id.legal_note);
-        legalNote.setClickable(true);
-        legalNote.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
-            }
-        });
-
-        // opencaching.de settings
-        final CheckBox ocCheck = (CheckBox) findViewById(R.id.oc_option);
-        ocCheck.setChecked(Settings.isOCConnectorActive());
-        ocCheck.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setOCConnectorActive(ocCheck.isChecked());
-            }
-        });
-
-        Button checkOCUser = (Button) findViewById(R.id.register_oc_de);
-        checkOCUser.setOnClickListener(new OCDEAuthorizeCgeoListener());
-
-        // gcvote settings
-        final ImmutablePair<String, String> gcvoteLogin = Settings.getGCvoteLogin();
-        if (null != gcvoteLogin && null != gcvoteLogin.right) {
-            ((EditText) findViewById(R.id.passvote)).setText(gcvoteLogin.right);
-        }
-
-        // Twitter settings
-        Button authorizeTwitter = (Button) findViewById(R.id.authorize_twitter);
-        authorizeTwitter.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Intent authIntent = new Intent(SettingsActivity.this, TwitterAuthorizationActivity.class);
-                startActivity(authIntent);
-            }
-        });
-
-        final CheckBox twitterButton = (CheckBox) findViewById(R.id.twitter_option);
-        twitterButton.setChecked(Settings.isUseTwitter() && Settings.isTwitterLoginValid());
-        twitterButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setUseTwitter(twitterButton.isChecked());
-                if (Settings.isUseTwitter() && !Settings.isTwitterLoginValid()) {
-                    Intent authIntent = new Intent(SettingsActivity.this, TwitterAuthorizationActivity.class);
-                    startActivity(authIntent);
-                }
-
-                twitterButton.setChecked(Settings.isUseTwitter());
-            }
-        });
-
-        // Signature settings
-        EditText sigEdit = (EditText) findViewById(R.id.signature);
-        if (sigEdit.getText().length() == 0) {
-            sigEdit.setText(Settings.getSignature());
-        }
-        Button sigBtn = (Button) findViewById(R.id.signature_help);
-        sigBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                helpDialog(res.getString(R.string.init_signature_help_title), res.getString(R.string.init_signature_help_text));
-            }
-        });
-        Button templates = (Button) findViewById(R.id.signature_template);
-        registerForContextMenu(templates);
-        templates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                enableTemplatesMenu = true;
-                openContextMenu(v);
-                enableTemplatesMenu = false;
-            }
-        });
-        final CheckBox autoinsertButton = (CheckBox) findViewById(R.id.sigautoinsert);
-        autoinsertButton.setChecked(Settings.isAutoInsertSignature());
-        autoinsertButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setAutoInsertSignature(autoinsertButton.isChecked());
-            }
-        });
-
-        // Cache details
-        final CheckBox autoloadButton = (CheckBox) findViewById(R.id.autoload);
-        autoloadButton.setChecked(Settings.isAutoLoadDescription());
-        autoloadButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setAutoLoadDesc(autoloadButton.isChecked());
-            }
-        });
-
-        final CheckBox ratingWantedButton = (CheckBox) findViewById(R.id.ratingwanted);
-        ratingWantedButton.setChecked(Settings.isRatingWanted());
-        ratingWantedButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setRatingWanted(ratingWantedButton.isChecked());
-            }
-        });
-
-        final CheckBox elevationWantedButton = (CheckBox) findViewById(R.id.elevationwanted);
-        elevationWantedButton.setChecked(Settings.isElevationWanted());
-        elevationWantedButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setElevationWanted(elevationWantedButton.isChecked());
-            }
-        });
-
-        final CheckBox friendLogsWantedButton = (CheckBox) findViewById(R.id.friendlogswanted);
-        friendLogsWantedButton.setChecked(Settings.isFriendLogsWanted());
-        friendLogsWantedButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setFriendLogsWanted(friendLogsWantedButton.isChecked());
-            }
-        });
-
-        final CheckBox openLastDetailsPageButton = (CheckBox) findViewById(R.id.openlastdetailspage);
-        openLastDetailsPageButton.setChecked(Settings.isOpenLastDetailsPage());
-        openLastDetailsPageButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setOpenLastDetailsPage(openLastDetailsPageButton.isChecked());
-            }
-        });
-
-        // Other settings
-        final CheckBox skinButton = (CheckBox) findViewById(R.id.skin);
-        skinButton.setChecked(Settings.isLightSkin());
-        skinButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setLightSkin(skinButton.isChecked());
-            }
-        });
-
-        final CheckBox addressButton = (CheckBox) findViewById(R.id.address);
-        addressButton.setChecked(Settings.isShowAddress());
-        addressButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setShowAddress(addressButton.isChecked());
-            }
-        });
-
-        final CheckBox captchaButton = (CheckBox) findViewById(R.id.captcha);
-        captchaButton.setEnabled(!Settings.isPremiumMember());
-        captchaButton.setChecked(Settings.isShowCaptcha());
-        captchaButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setShowCaptcha(captchaButton.isChecked());
-            }
-        });
-
-        final CheckBox dirImgButton = (CheckBox) findViewById(R.id.loaddirectionimg);
-        dirImgButton.setEnabled(!Settings.isPremiumMember());
-        dirImgButton.setChecked(Settings.getLoadDirImg());
-        dirImgButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setLoadDirImg(!Settings.getLoadDirImg());
-                dirImgButton.setChecked(Settings.getLoadDirImg());
-            }
-        });
-
-        final CheckBox useEnglishButton = (CheckBox) findViewById(R.id.useenglish);
-        useEnglishButton.setChecked(Settings.isUseEnglish());
-        useEnglishButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setUseEnglish(useEnglishButton.isChecked());
-            }
-        });
-
-        final CheckBox excludeButton = (CheckBox) findViewById(R.id.exclude);
-        excludeButton.setChecked(Settings.isExcludeMyCaches());
-        excludeButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setExcludeMine(excludeButton.isChecked());
-            }
-        });
-
-        final CheckBox disabledButton = (CheckBox) findViewById(R.id.disabled);
-        disabledButton.setChecked(Settings.isExcludeDisabledCaches());
-        disabledButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setExcludeDisabledCaches(disabledButton.isChecked());
-            }
-        });
-
-        TextView showWaypointsThreshold = (TextView) findViewById(R.id.showwaypointsthreshold);
-        showWaypointsThreshold.setText(String.valueOf(Settings.getWayPointsThreshold()));
-
-        final CheckBox autovisitButton = (CheckBox) findViewById(R.id.trackautovisit);
-        autovisitButton.setChecked(Settings.isTrackableAutoVisit());
-        autovisitButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setTrackableAutoVisit(autovisitButton.isChecked());
-            }
-        });
-
-        final CheckBox offlineButton = (CheckBox) findViewById(R.id.offline);
-        offlineButton.setChecked(Settings.isStoreOfflineMaps());
-        offlineButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setStoreOfflineMaps(offlineButton.isChecked());
-            }
-        });
-
-        final CheckBox offlineWpButton = (CheckBox) findViewById(R.id.offline_wp);
-        offlineWpButton.setChecked(Settings.isStoreOfflineWpMaps());
-        offlineWpButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setStoreOfflineWpMaps(offlineWpButton.isChecked());
-            }
-        });
-
-        final CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
-        saveLogImgButton.setChecked(Settings.isStoreLogImages());
-        saveLogImgButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setStoreLogImages(saveLogImgButton.isChecked());
-            }
-        });
-
-        final CheckBox livelistButton = (CheckBox) findViewById(R.id.livelist);
-        livelistButton.setChecked(Settings.isLiveList());
-        livelistButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setLiveList(livelistButton.isChecked());
-            }
-        });
-
-        final CheckBox unitsButton = (CheckBox) findViewById(R.id.units);
-        unitsButton.setChecked(Settings.isUseImperialUnits());
-        unitsButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setUseImperialUnits(unitsButton.isChecked());
-            }
-        });
-
-        final CheckBox logOffline = (CheckBox) findViewById(R.id.log_offline);
-        logOffline.setChecked(Settings.getLogOffline());
-        logOffline.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setLogOffline(!Settings.getLogOffline());
-                logOffline.setChecked(Settings.getLogOffline());
-            }
-        });
-
-        final CheckBox chooseList = (CheckBox) findViewById(R.id.choose_list);
-        chooseList.setChecked(Settings.getChooseList());
-        chooseList.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setChooseList(!Settings.getChooseList());
-                chooseList.setChecked(Settings.getChooseList());
-            }
-        });
-
-        final CheckBox plainLogs = (CheckBox) findViewById(R.id.plain_logs);
-        plainLogs.setChecked(Settings.getPlainLogs());
-        plainLogs.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setPlainLogs(!Settings.getPlainLogs());
-                plainLogs.setChecked(Settings.getPlainLogs());
-            }
-        });
-
-        // Workaround for cspire customers on mobile connections #1843
-        final CheckBox useNativeUserAgent = (CheckBox) findViewById(R.id.use_native_ua);
-        useNativeUserAgent.setChecked(Settings.getUseNativeUa());
-        useNativeUserAgent.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setUseNativeUa(!Settings.getUseNativeUa());
-                useNativeUserAgent.setChecked(Settings.getUseNativeUa());
-            }
-        });
-
-        // Altitude settings
-        EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
-        altitudeEdit.setText(String.valueOf(Settings.getAltitudeCorrection()));
-
-        //Send2cgeo settings
-        String webDeviceName = Settings.getWebDeviceName();
-
-        ((EditText) findViewById(R.id.webDeviceName)).setText(webDeviceName);
-
-        Button webAuth = (Button) findViewById(R.id.sendToCgeo_register);
-        webAuth.setOnClickListener(new WebAuthListener());
-
-        // Map source settings
-        updateMapSourceMenu();
-
-        Button selectMapDirectory = (Button) findViewById(R.id.select_map_directory);
-        selectMapDirectory.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent selectIntent = new Intent(SettingsActivity.this, SelectMapfileActivity.class);
-                startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
-            }
-        });
-
-        // Theme folder settings
-        initThemefolderEdittext(false);
-
-        Button selectThemefolder = (Button) findViewById(R.id.select_themefolder);
-        selectThemefolder.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                selectDirectory(Settings.getCustomRenderThemeBaseFolder(), SELECT_THEMEFOLDER_REQUEST);
-            }
-        });
-
-        // GPX Export directory
-        final EditText gpxExportDir = (EditText) findViewById(R.id.gpx_exportdir);
-        gpxExportDir.setText(Settings.getGpxExportDir());
-        Button selectGpxExportDir = (Button) findViewById(R.id.select_gpx_exportdir);
-        selectGpxExportDir.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                selectDirectory(Settings.getGpxExportDir(), SELECT_GPX_EXPORT_REQUEST);
-            }
-        });
-
-        // GPX Import directory
-        final EditText gpxImportDir = (EditText) findViewById(R.id.gpx_importdir);
-        gpxImportDir.setText(Settings.getGpxImportDir());
-        Button selectGpxImportDir = (Button) findViewById(R.id.select_gpx_importdir);
-        selectGpxImportDir.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                selectDirectory(Settings.getGpxImportDir(), SELECT_GPX_IMPORT_REQUEST);
-            }
-        });
-
-        // Display trail on map
-        final CheckBox trailButton = (CheckBox) findViewById(R.id.trail);
-        trailButton.setChecked(Settings.isMapTrail());
-        trailButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setMapTrail(trailButton.isChecked());
-            }
-        });
-
-        // Default navigation tool settings
-        Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
-        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledDefaultNavigationApps();
-        ArrayAdapter<NavigationAppsEnum> naviAdapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getView(position, convertView, parent);
-                textView.setText(getItem(position).app.getName());
-                return textView;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                textView.setText(getItem(position).app.getName());
-                return textView;
-            }
-        };
-        naviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        defaultNavigationToolSelector.setAdapter(naviAdapter);
-        int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        int ordinal = 0;
-        for (int i = 0; i < apps.size(); i++) {
-            if (apps.get(i).id == defaultNavigationTool) {
-                ordinal = i;
-                break;
-            }
-        }
-        defaultNavigationToolSelector.setSelection(ordinal);
-        defaultNavigationToolSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                NavigationAppsEnum item = (NavigationAppsEnum) parent.getItemAtPosition(position);
-                if (item != null) {
-                    Settings.setDefaultNavigationTool(item.id);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // noop
-            }
-        });
-
-        // 2nd Default navigation tool settings
-        Spinner defaultNavigationTool2Selector = (Spinner) findViewById(R.id.default_navigation_tool_2);
-        //        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps(this);
-        ArrayAdapter<NavigationAppsEnum> navi2Adapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getView(position, convertView, parent);
-                textView.setText(getItem(position).app.getName());
-                return textView;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                textView.setText(getItem(position).app.getName());
-                return textView;
-            }
-        };
-        navi2Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        defaultNavigationTool2Selector.setAdapter(navi2Adapter);
-        int defaultNavigationTool2 = Settings.getDefaultNavigationTool2();
-        int ordinal2 = 0;
-        for (int i = 0; i < apps.size(); i++) {
-            if (apps.get(i).id == defaultNavigationTool2) {
-                ordinal2 = i;
-                break;
-            }
-        }
-        defaultNavigationTool2Selector.setSelection(ordinal2);
-        defaultNavigationTool2Selector.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                NavigationAppsEnum item = (NavigationAppsEnum) parent.getItemAtPosition(position);
-                if (item != null) {
-                    Settings.setDefaultNavigationTool2(item.id);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // noop
-            }
-        });
-
-        refreshBackupLabel();
-
-        // Database location
-        refreshDbOnSDCardSetting();
-
-        final CheckBox dbOnSDCardButton = (CheckBox) findViewById(R.id.dbonsdcard);
-        dbOnSDCardButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                app.moveDatabase(SettingsActivity.this);
-            }
-        });
-
-        // Debug settings
-        final CheckBox debugButton = (CheckBox) findViewById(R.id.debug);
-        debugButton.setChecked(Settings.isDebug());
-        debugButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setDebug(!Settings.isDebug());
-                debugButton.setChecked(Settings.isDebug());
-            }
-        });
-    }
-
-    private void updateMapSourceMenu() {
-        Collection<String> mapSourceNames = new ArrayList<String>();
-        for (MapSource mapSource : MapProviderFactory.getMapSources()) {
-            mapSourceNames.add(mapSource.getName());
-        }
-        Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
-                android.R.layout.simple_spinner_item,
-                mapSourceNames.toArray(new String[mapSourceNames.size()]));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mapSourceSelector.setAdapter(adapter);
-        final int index = MapProviderFactory.getMapSources().indexOf(Settings.getMapSource());
-        mapSourceSelector.setSelection(index);
-        mapSourceSelector.setOnItemSelectedListener(new ChangeMapSourceListener());
-
-        initMapDirectoryEdittext(false);
-    }
-
-    private void initMapDirectoryEdittext(boolean setFocus) {
-        final EditText mapDirectoryEdit = (EditText) findViewById(R.id.map_directory);
-        mapDirectoryEdit.setText(Settings.getMapFileDirectory());
-        if (setFocus) {
-            mapDirectoryEdit.requestFocus();
-        }
-    }
-
-    private void initThemefolderEdittext(boolean setFocus) {
-        EditText themeFileEdit = (EditText) findViewById(R.id.themefolder);
-        themeFileEdit.setText(Settings.getCustomRenderThemeBaseFolder());
-        if (setFocus) {
-            themeFileEdit.requestFocus();
-        }
+        ActivityMixin.insertAtPosition(signatureText, insertText, true);
     }
 
     /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
+     * fill the choice list for map sources
      */
-    public void backup(View view) {
-        // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
-        if (cgData.getAllCachesCount() == 0) {
-            helpDialog(res.getString(R.string.init_backup), res.getString(R.string.init_backup_unnecessary));
-            return;
+    @SuppressWarnings("deprecation")
+    private void initMapSourcePreference() {
+        ListPreference pref = (ListPreference) findPreference(getKey(R.string.pref_mapsource));
+
+        List<MapSource> mapSources = MapProviderFactory.getMapSources();
+        CharSequence[] entries = new CharSequence[mapSources.size()];
+        CharSequence[] values = new CharSequence[mapSources.size()];
+        for (int i = 0; i < mapSources.size(); ++i) {
+            entries[i] = mapSources.get(i).getName();
+            values[i] = String.valueOf(mapSources.get(i).getNumericalId());
+        }
+        pref.setEntries(entries);
+        pref.setEntryValues(values);
+    }
+
+    /**
+     * fill the choice list for default navigation tools
+     */
+    @SuppressWarnings("deprecation")
+    private void initDefaultNavigationPreferences() {
+
+        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledDefaultNavigationApps();
+
+        CharSequence[] entries = new CharSequence[apps.size()];
+        CharSequence[] values = new CharSequence[apps.size()];
+        for (int i = 0; i < apps.size(); ++i) {
+            entries[i] = apps.get(i).toString();
+            values[i] = String.valueOf(apps.get(i).id);
         }
 
-        final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup), res.getString(R.string.init_backup_running), true, false);
-        new Thread() {
-            @Override
-            public void run() {
-                final String backupFileName = cgData.backupDatabase();
-                runOnUiThread(new Runnable() {
+        ListPreference pref = (ListPreference) findPreference(getKey(R.string.pref_defaultNavigationTool));
+        pref.setEntries(entries);
+        pref.setEntryValues(values);
+        pref = (ListPreference) findPreference(getKey(R.string.pref_defaultNavigationTool2));
+        pref.setEntries(entries);
+        pref.setEntryValues(values);
+    }
+
+    /**
+     * fire up a dir chooser on click on the preference
+     *
+     * @see #onActivityResult() for processing of the selected directory
+     *
+     * @param key
+     *            key of the preference
+     * @param defaultValue
+     *            default directory - in case the preference has never been
+     *            set yet
+     */
+    @SuppressWarnings("deprecation")
+    private void initDirChoosers() {
+        for (final DirChooserType dct : DirChooserType.values()) {
+            final String dir = Settings.getString(dct.keyId, dct.defaultValue);
+
+            findPreference(getKey(dct.keyId)).setOnPreferenceClickListener(
+                    new OnPreferenceClickListener() {
+                        @Override
+                        public boolean onPreferenceClick(Preference preference) {
+                            startDirChooser(dct, dir);
+                            return false;
+                        }
+                    });
+        }
+
+        findPreference(getKey(R.string.pref_mapDirectory)).setOnPreferenceClickListener(
+                new OnPreferenceClickListener() {
                     @Override
-                    public void run() {
-                        dialog.dismiss();
-                        helpDialog(res.getString(R.string.init_backup_backup),
-                                backupFileName != null ? res.getString(R.string.init_backup_success) + "\n" + backupFileName : res.getString(R.string.init_backup_failed));
-                        refreshBackupLabel();
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent i = new Intent(SettingsActivity.this,
+                                SelectMapfileActivity.class);
+                        startActivityForResult(i, DIR_CHOOSER_MAPS_DIRECTORY_REQUEST);
+                        return false;
                     }
                 });
-            }
-        }.start();
     }
 
-    private void refreshBackupLabel() {
-        TextView lastBackup = (TextView) findViewById(R.id.backup_last);
-        File lastBackupFile = cgData.getRestoreFile();
-        if (lastBackupFile != null) {
-            lastBackup.setText(res.getString(R.string.init_backup_last) + " " + Formatter.formatTime(lastBackupFile.lastModified()) + ", " + Formatter.formatDate(lastBackupFile.lastModified()));
-        } else {
-            lastBackup.setText(res.getString(R.string.init_backup_last_no));
-        }
-    }
-
-    private void refreshDbOnSDCardSetting() {
-        final CheckBox dbOnSDCardButton = (CheckBox) findViewById(R.id.dbonsdcard);
-        dbOnSDCardButton.setChecked(Settings.isDbOnSDCard());
-    }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void restore(View view) {
-        app.restoreDatabase(this);
-    }
-
-    public boolean saveValues() {
-        String usernameNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.username)).getText().toString());
-        String passwordNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.password)).getText().toString());
-        String passvoteNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.passvote)).getText().toString());
-        // don't trim signature, user may want to have whitespace at the beginning
-        String signatureNew = ((EditText) findViewById(R.id.signature)).getText().toString();
-        String mapDirectoryNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.map_directory)).getText().toString());
-        String themesDirectoryNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.themefolder)).getText().toString());
-
-        String altitudeNew = StringUtils.trimToNull(((EditText) findViewById(R.id.altitude)).getText().toString());
-        int altitudeNewInt = parseNumber(altitudeNew, 0);
-
-        TextView field = (TextView) findViewById(R.id.showwaypointsthreshold);
-        Settings.setShowWaypointsThreshold(parseNumber(field.getText().toString(),
-                Settings.SHOW_WP_THRESHOLD_DEFAULT));
-
-        final boolean status1 = Settings.setLogin(usernameNew, passwordNew);
-        final boolean status2 = Settings.setGCvoteLogin(passvoteNew);
-        final boolean status3 = Settings.setSignature(signatureNew);
-        final boolean status4 = Settings.setAltitudeCorrection(altitudeNewInt);
-        final boolean status5 = Settings.setMapFileDirectory(mapDirectoryNew);
-        final boolean status6 = Settings.setCustomRenderThemeBaseFolder(themesDirectoryNew);
-
-        String importNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_importdir)).getText().toString());
-        String exportNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.gpx_exportdir)).getText().toString());
-        Settings.setGpxImportDir(importNew);
-        Settings.setGpxExportDir(exportNew);
-
-        return status1 && status2 && status3 && status4 && status5 && status6;
-    }
-
-    /**
-     * Returns the integer value from the string
-     *
-     * @param field
-     *            the field to retrieve the integer value from
-     * @param defaultValue
-     *            the default value
-     * @return either the field content or the default value
-     */
-
-    static private int parseNumber(final String number, int defaultValue) {
+    private void startDirChooser(DirChooserType dct, String startDirectory) {
         try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            return defaultValue;
+            final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
+            if (StringUtils.isNotBlank(startDirectory)) {
+                dirChooser.setData(Uri.fromFile(new File(startDirectory)));
+            }
+            dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
+                    getString(R.string.simple_dir_chooser_title));
+            dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
+                    getString(android.R.string.ok));
+            startActivityForResult(dirChooser, dct.requestCode);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // OI file manager not available
+            final Intent dirChooser = new Intent(this, SimpleDirChooser.class);
+            dirChooser.putExtra(Intents.EXTRA_START_DIR, startDirectory);
+            startActivityForResult(dirChooser, dct.requestCode);
         }
     }
 
-    private static class ChangeMapSourceListener implements OnItemSelectedListener {
-
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
-                long arg3) {
-            Settings.setMapSource(MapProviderFactory.getMapSources().get(position));
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            arg0.setSelection(MapProviderFactory.getMapSources().indexOf(Settings.getMapSource()));
-        }
-    }
-
-    private class LoginListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            final String username = ((EditText) findViewById(R.id.username)).getText().toString();
-            final String password = ((EditText) findViewById(R.id.password)).getText().toString();
-
-            if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-                showToast(res.getString(R.string.err_missing_auth));
+    @SuppressWarnings("deprecation")
+    private void setChosenDirectory(DirChooserType dct, Intent data) {
+        final String directory = new File(data.getData().getPath()).getAbsolutePath();
+        if (StringUtils.isNotBlank(directory)) {
+            Preference p = findPreference(getKey(dct.keyId));
+            if (p == null) {
                 return;
             }
+            Settings.putString(dct.keyId, directory);
+            p.setSummary(directory);
+        }
+    }
 
-            loginDialog = ProgressDialog.show(SettingsActivity.this,
-                    res.getString(R.string.init_login_popup),
-                    res.getString(R.string.init_login_popup_working), true);
-            loginDialog.setCancelable(false);
-
-            Settings.setLogin(username, password);
-            Cookies.clearCookies();
-
-            (new Thread() {
-
-                @Override
-                public void run() {
-                    final StatusCode loginResult = Login.login();
-                    Object payload = loginResult;
-                    if (loginResult == StatusCode.NO_ERROR) {
-                        Login.detectGcCustomDate();
-                        payload = Login.downloadAvatarAndGetMemberStatus();
-                    }
-                    logInHandler.obtainMessage(0, payload).sendToTarget();
+    @SuppressWarnings("deprecation")
+    public void initBackupButtons() {
+        Preference backup = findPreference(getKey(R.string.pref_fakekey_preference_backup));
+        backup.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(final Preference preference) {
+                final Context context = preference.getContext();
+                // avoid overwriting an existing backup with an empty database
+                // (can happen directly after reinstalling the app)
+                if (cgData.getAllCachesCount() == 0) {
+                    ActivityMixin.helpDialog(SettingsActivity.this,
+                            context.getString(R.string.init_backup),
+                            context.getString(R.string.init_backup_unnecessary));
+                    return false;
                 }
-            }).start();
-        }
-    }
 
-    private class OCDEAuthorizeCgeoListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            Intent authIntent = new Intent(SettingsActivity.this, OCAuthorizationActivity.class);
-            startActivity(authIntent);
-        }
-    }
-
-    private class WebAuthListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            final String deviceName = ((EditText) findViewById(R.id.webDeviceName)).getText().toString();
-            final String deviceCode = Settings.getWebDeviceCode();
-
-            if (StringUtils.isBlank(deviceName)) {
-                showToast(res.getString(R.string.err_missing_device_name));
-                return;
+                final ProgressDialog dialog = ProgressDialog.show(context,
+                        context.getString(R.string.init_backup),
+                        context.getString(R.string.init_backup_running), true, false);
+                new Thread() {
+                    @Override
+                    public void run() {
+                        final String backupFileName = cgData.backupDatabase();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                                ActivityMixin.helpDialog(SettingsActivity.this,
+                                        context.getString(R.string.init_backup_backup),
+                                        backupFileName != null
+                                                ? context.getString(R.string.init_backup_success)
+                                                        + "\n" + backupFileName
+                                                : context.getString(R.string.init_backup_failed));
+                                VALUE_CHANGE_LISTENER.onPreferenceChange(findPreference(
+                                        getKey(R.string.pref_fakekey_preference_backup_info)), "");
+                            }
+                        });
+                    }
+                }.start();
+                return true;
             }
+        });
 
-            webDialog = ProgressDialog.show(SettingsActivity.this, res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_registering), true);
-            webDialog.setCancelable(false);
-
-            (new Thread() {
-
-                @Override
-                public void run() {
-                    int pin = 0;
-
-                    final String nam = StringUtils.defaultString(deviceName);
-                    final String cod = StringUtils.defaultString(deviceCode);
-
-                    final Parameters params = new Parameters("name", nam, "code", cod);
-                    HttpResponse response = Network.getRequest("http://send2.cgeo.org/auth.html", params);
-
-                    if (response != null && response.getStatusLine().getStatusCode() == 200) {
-                        //response was OK
-                        String[] strings = Network.getResponseData(response).split(",");
-                        try {
-                            pin = Integer.parseInt(strings[1].trim());
-                        } catch (Exception e) {
-                            Log.e("webDialog", e);
-                        }
-                        String code = strings[0];
-                        Settings.setWebNameCode(nam, code);
-                    }
-
-                    webAuthHandler.sendEmptyMessage(pin);
-                }
-            }).start();
-        }
+        Preference restore = findPreference(getKey(R.string.pref_fakekey_preference_restore));
+        restore.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(final Preference preference) {
+                ((cgeoapplication) SettingsActivity.this.getApplication())
+                        .restoreDatabase(SettingsActivity.this);
+                return true;
+            }
+        });
     }
 
+    @SuppressWarnings("deprecation")
+    private void initDbLocationPreference() {
+        Preference p = findPreference(getKey(R.string.pref_dbonsdcard));
+        p.setPersistent(false);
+        p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                boolean oldValue = Settings.isDbOnSDCard();
+                ((cgeoapplication) SettingsActivity.this.getApplication())
+                        .moveDatabase(SettingsActivity.this);
+                return oldValue != Settings.isDbOnSDCard();
+            }
+        });
+    }
+
+    @SuppressWarnings("deprecation")
+    private void initDebugPreference() {
+        Preference p = findPreference(getKey(R.string.pref_debug));
+        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Log.setDebug((Boolean) newValue);
+                return true;
+            }
+        });
+    }
+
+    @SuppressWarnings("deprecation")
+    private void initBasicMemberPreferences() {
+        findPreference(getKey(R.string.pref_loaddirectionimg)).setEnabled(
+                !Settings.isPremiumMember());
+        findPreference(getKey(R.string.pref_showcaptcha)).setEnabled(
+                !Settings.isPremiumMember());
+    }
+
+    private static void initSend2CgeoPreferences() {
+        Settings.putString(R.string.pref_webDeviceName, Settings.getWebDeviceName());
+    }
+
+    public static void startWithServicesPage(Context fromActivity) {
+        final Intent intent = new Intent(fromActivity, SettingsActivity.class);
+        intent.putExtra(INTENT_GOTO, INTENT_GOTO_SERVICES);
+        fromActivity.startActivity(intent);
+    }
+
+    @SuppressWarnings("deprecation")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -991,83 +396,129 @@ public class SettingsActivity extends AbstractActivity {
             return;
         }
 
+        for (DirChooserType dct : DirChooserType.values()) {
+            if (requestCode == dct.requestCode) {
+                setChosenDirectory(dct, data);
+                return;
+            }
+        }
+
         switch (requestCode) {
-            case SELECT_MAPFILE_REQUEST:
+            case DIR_CHOOSER_MAPS_DIRECTORY_REQUEST:
                 if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
                     final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
                     Settings.setMapFile(mapFile);
                     if (!Settings.isValidMapFile(Settings.getMapFile())) {
-                        showToast(res.getString(R.string.warn_invalid_mapfile));
+                        ActivityMixin.showToast(this, R.string.warn_invalid_mapfile);
                     }
                 }
-                updateMapSourceMenu();
-                initMapDirectoryEdittext(true);
-                break;
-            case SELECT_GPX_EXPORT_REQUEST:
-                checkDirectory(resultCode, data, R.id.gpx_exportdir, new RunnableWithArgument<String>() {
-
-                    @Override
-                    public void run(String directory) {
-                        Settings.setGpxExportDir(directory);
-                    }
-                });
-                break;
-            case SELECT_GPX_IMPORT_REQUEST:
-                checkDirectory(resultCode, data, R.id.gpx_importdir, new RunnableWithArgument<String>() {
-
-                    @Override
-                    public void run(String directory) {
-                        Settings.setGpxImportDir(directory);
-                    }
-                });
-                break;
-            case SELECT_THEMEFOLDER_REQUEST:
-                checkDirectory(resultCode, data, R.id.themefolder, new RunnableWithArgument<String>() {
-
-                    @Override
-                    public void run(String directory) {
-                        Settings.setCustomRenderThemeBaseFolder(directory);
-                    }
-                });
+                initMapSourcePreference();
+                findPreference(getKey(R.string.pref_mapDirectory)).setSummary(
+                        Settings.getMapFileDirectory());
                 break;
             default:
                 throw new IllegalArgumentException();
         }
     }
 
-    private void checkDirectory(int resultCode, Intent data, int textField, RunnableWithArgument<String> runnableSetDir) {
-        if (resultCode != RESULT_OK) {
+    /**
+     * A preference value change listener that updates the preference's summary
+     * to reflect its new value.
+     */
+    private static Preference.OnPreferenceChangeListener VALUE_CHANGE_LISTENER = new Preference.OnPreferenceChangeListener() {
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object value) {
+            String stringValue = value.toString();
+
+            if (preference instanceof EditPasswordPreference) {
+                if (StringUtils.isBlank((String) value)) {
+                    preference.setSummary("");
+                } else {
+                    preference.setSummary("\u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022");
+                }
+            } else if (preference instanceof ListPreference) {
+                // For list preferences, look up the correct display value in
+                // the preference's 'entries' list.
+                ListPreference listPreference = (ListPreference) preference;
+                int index = listPreference.findIndexOfValue(stringValue);
+
+                // Set the summary to reflect the new value.
+                preference.setSummary(
+                        index >= 0
+                                ? listPreference.getEntries()[index]
+                                : null);
+            } else if (getKey(R.string.pref_fakekey_preference_backup_info).equals(preference.getKey())) {
+                File lastBackupFile = cgData.getRestoreFile();
+                String text;
+                if (lastBackupFile != null) {
+                    text = preference.getContext().getString(R.string.init_backup_last) + " "
+                            + Formatter.formatTime(lastBackupFile.lastModified())
+                            + ", " + Formatter.formatDate(lastBackupFile.lastModified());
+                } else {
+                    text = preference.getContext().getString(R.string.init_backup_last_no);
+                }
+                preference.setSummary(text);
+            } else {
+                // For all other preferences, set the summary to the value's
+                // simple string representation.
+                preference.setSummary(stringValue);
+            }
+            return true;
+        }
+    };
+
+    /**
+     * Binds a preference's summary to its value. More specifically, when the
+     * preference's value is changed, its summary (line of text below the
+     * preference title) is updated to reflect the value. The summary is also
+     * immediately updated upon calling this method. The exact display format is
+     * dependent on the type of preference.
+     *
+     * @see #VALUE_CHANGE_LISTENER
+     */
+    private static void bindSummaryToValue(Preference preference, Object value) {
+        // Set the listener to watch for value changes.
+        if (preference == null) {
             return;
         }
-        final String directory = new File(data.getData().getPath()).getAbsolutePath();
-        if (StringUtils.isNotBlank(directory)) {
-            runnableSetDir.run(directory);
-            EditText directoryText = (EditText) findViewById(textField);
-            directoryText.setText(directory);
-            directoryText.requestFocus();
+        preference.setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+
+        // Trigger the listener immediately with the preference's
+        // current value.
+        VALUE_CHANGE_LISTENER.onPreferenceChange(preference, value);
+    }
+
+    /**
+     * auto-care for the summary of the preference of string type with this key
+     *
+     * @param key
+     */
+    private static void bindSummaryToStringValue(Preference pref) {
+        if (pref == null) {
+            return;
         }
+
+        String value = PreferenceManager
+                .getDefaultSharedPreferences(pref.getContext())
+                .getString(pref.getKey(), "");
+
+        bindSummaryToValue(pref, value);
     }
 
-    private void selectDirectory(String startDirectory, int directoryKind) {
-        try {
-            final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
-            if (StringUtils.isNotBlank(startDirectory)) {
-                dirChooser.setData(Uri.fromFile(new File(startDirectory)));
-            }
-            dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE, res.getString(R.string.simple_dir_chooser_title));
-            dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT, res.getString(android.R.string.ok));
-            startActivityForResult(dirChooser, directoryKind);
-        } catch (android.content.ActivityNotFoundException ex) {
-            // OI file manager not available
-            final Intent dirChooser = new Intent(this, SimpleDirChooser.class);
-            dirChooser.putExtra(Intents.EXTRA_START_DIR, startDirectory);
-            startActivityForResult(dirChooser, directoryKind);
+    /**
+     * auto-care for the summary of the preference of int type with this key
+     *
+     * @param key
+     */
+    private static void bindSummaryToIntValue(Preference pref) {
+        if (pref == null) {
+            return;
         }
-    }
 
-    public static void startActivity(Context fromActivity) {
-        final Intent initIntent = new Intent(fromActivity, SettingsActivity.class);
-        fromActivity.startActivity(initIntent);
-    }
+        int value = PreferenceManager
+                .getDefaultSharedPreferences(pref.getContext())
+                .getInt(pref.getKey(), 0);
 
+        bindSummaryToValue(pref, value);
+    }
 }

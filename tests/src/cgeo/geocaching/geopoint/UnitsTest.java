@@ -2,6 +2,7 @@ package cgeo.geocaching.geopoint;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.TestSettings;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,20 +23,20 @@ public class UnitsTest extends CGeoTestCase {
         assertEquals("?", Units.getDistanceFromKilometers(null));
         final boolean savedImperial = Settings.isUseImperialUnits();
         try {
-            Settings.setUseImperialUnits(false);
+            TestSettings.setUseImperialUnits(false);
             assertDistance("123 km", 122.782f);
             assertDistance("123 km", 123.456f);
             assertDistance("12.3 km", 12.3456f);
             assertDistance("1.23 km", 1.23456f);
             assertDistance("123 m", 0.123456f);
-            Settings.setUseImperialUnits(true);
+            TestSettings.setUseImperialUnits(true);
             assertDistance("76.7 mi", 123.456f);
             assertDistance("7.67 mi", 12.3456f);
             assertDistance("0.77 mi", 1.23456f);
             assertDistance("405 ft", 0.123456f);
             assertDistance("40.5 ft", 0.0123456f);
         } finally {
-            Settings.setUseImperialUnits(savedImperial);
+            TestSettings.setUseImperialUnits(savedImperial);
         }
     }
 
@@ -44,7 +45,7 @@ public class UnitsTest extends CGeoTestCase {
     public void testElevation() {
         final boolean savedImperial = Settings.isUseImperialUnits();
         try {
-            Settings.setUseImperialUnits(false);
+            TestSettings.setUseImperialUnits(false);
             assertElevation("↥ 123 m", 122.782f);
             assertElevation("↥ 123 m", 123.456f);
             assertElevation("↥ 12 m", 12.3456f);
@@ -57,11 +58,11 @@ public class UnitsTest extends CGeoTestCase {
             assertElevation("↧ 1 m", -1.23456f);
             assertElevation("↧ 2 m", -1.6f);
             assertElevation("↧ 0 m", -0.123456f);
-            Settings.setUseImperialUnits(true);
+            TestSettings.setUseImperialUnits(true);
             assertElevation("↥ 405 ft", 123.456f);
             assertElevation("↥ 41 ft", 12.3456f);
         } finally {
-            Settings.setUseImperialUnits(savedImperial);
+            TestSettings.setUseImperialUnits(savedImperial);
         }
     }
 
@@ -78,18 +79,18 @@ public class UnitsTest extends CGeoTestCase {
         assertEquals("?", Units.getDistanceFromKilometers(null));
         final boolean savedImperial = Settings.isUseImperialUnits();
         try {
-            Settings.setUseImperialUnits(false);
+            TestSettings.setUseImperialUnits(false);
             assertSpeed("123 km/h", 122.782f);
             assertSpeed("123 km/h", 123.456f);
             assertSpeed("12.3 km/h", 12.3456f);
             assertSpeed("1.23 km/h", 1.23456f);
             assertSpeed("123 m/h", 0.123456f);
-            Settings.setUseImperialUnits(true);
+            TestSettings.setUseImperialUnits(true);
             assertSpeed("76.7 mph", 123.456f);
             assertSpeed("7.67 mph", 12.3456f);
             assertSpeed("0.77 mph", 1.23456f);
         } finally {
-            Settings.setUseImperialUnits(savedImperial);
+            TestSettings.setUseImperialUnits(savedImperial);
         }
     }
 

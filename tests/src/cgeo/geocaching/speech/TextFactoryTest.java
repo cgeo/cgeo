@@ -3,6 +3,7 @@ package cgeo.geocaching.speech;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.TestSettings;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -152,6 +153,6 @@ public class TextFactoryTest extends AndroidTestCase {
         resources.updateConfiguration(config, resources.getDisplayMetrics());
 
         Locale.setDefault(locale2);
-        Settings.setUseImperialUnits(!metric);
+        TestSettings.setUseImperialUnits(!metric);
     }
 }

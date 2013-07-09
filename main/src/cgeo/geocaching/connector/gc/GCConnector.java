@@ -15,8 +15,8 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -309,7 +309,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
             // invoke settings activity to insert login details
             if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
-                SettingsActivity.startActivity(fromActivity);
+                SettingsActivity.startWithServicesPage(fromActivity);
             }
         }
         return status == StatusCode.NO_ERROR;

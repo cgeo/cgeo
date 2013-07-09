@@ -9,7 +9,7 @@ import android.util.AttributeSet;
  * <p>
  * Use it exactly as an EditTextPreference
  *
- * @see NewSettingsActivity - search for EditPasswordPreference
+ * @see SettingsActivity - search for EditPasswordPreference
  * @author koem
  */
 public class EditPasswordPreference extends EditTextPreference {

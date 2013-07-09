@@ -285,29 +285,8 @@ public final class Settings {
         return username != null ? username : getString(R.string.pref_username, null);
     }
 
-    // TODO: remove with SettingsActivity
-    public static boolean setLogin(final String username, final String password) {
-        Settings.username = username;
-        Settings.password = password;
-        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            // erase username and password
-            boolean a = remove(R.string.pref_username);
-            boolean b = remove(R.string.pref_password);
-            return a && b;
-        }
-        // save username and password
-        boolean a = putString(R.string.pref_username, username);
-        boolean b = putString(R.string.pref_password, password);
-        return a && b;
-    }
-
     public static boolean isGCConnectorActive() {
         return getBoolean(R.string.pref_connectorGCActive, true);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static boolean setGCConnectorActive(final boolean isActive) {
-        return putBoolean(R.string.pref_connectorGCActive, isActive);
     }
 
     public static boolean isPremiumMember() {
@@ -375,16 +354,6 @@ public final class Settings {
         return !StringUtils.isBlank(preUsername) && !StringUtils.isBlank(prePassword);
     }
 
-    // TODO: remove with SettingsActivity
-    public static boolean setGCvoteLogin(final String password) {
-        if (StringUtils.isBlank(password)) {
-            // erase password
-            return remove(R.string.pref_pass_vote);
-        }
-        // save password
-        return putString(R.string.pref_pass_vote, password);
-    }
-
     public static ImmutablePair<String, String> getGCvoteLogin() {
         final String username = getString(R.string.pref_username, null);
         final String password = getString(R.string.pref_pass_vote, null);
@@ -394,16 +363,6 @@ public final class Settings {
         }
 
         return new ImmutablePair<String, String>(username, password);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static boolean setSignature(final String signature) {
-        if (StringUtils.isBlank(signature)) {
-            // erase signature
-            return remove(R.string.pref_signature);
-        }
-        // save signature
-        return putString(R.string.pref_signature, signature);
     }
 
     public static String getSignature() {
@@ -509,18 +468,8 @@ public final class Settings {
         return getBoolean(R.string.pref_log_offline, false);
     }
 
-    // TODO: remove with SettingsActivity
-    static void setChooseList(final boolean choose) {
-        putBoolean(R.string.pref_choose_list, choose);
-    }
-
     public static boolean getChooseList() {
         return getBoolean(R.string.pref_choose_list, false);
-    }
-
-    // TODO: remove with SettingsActivity
-    static void setLoadDirImg(final boolean value) {
-        putBoolean(R.string.pref_loaddirectionimg, value);
     }
 
     public static boolean getLoadDirImg() {
@@ -543,11 +492,6 @@ public final class Settings {
         return getBoolean(R.string.pref_excludemine, false);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setExcludeMine(final boolean exclude) {
-        putBoolean(R.string.pref_excludemine, exclude);
-    }
-
     public static void setUseEnglish(final boolean english) {
         putBoolean(R.string.pref_useenglish, english);
         setLanguage(english);
@@ -561,81 +505,36 @@ public final class Settings {
         return getBoolean(R.string.pref_showaddress, true);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setShowAddress(final boolean showAddress) {
-        putBoolean(R.string.pref_showaddress, showAddress);
-    }
-
     public static boolean isShowCaptcha() {
         return !isPremiumMember() && getBoolean(R.string.pref_showcaptcha, false);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static void setShowCaptcha(final boolean showCaptcha) {
-        putBoolean(R.string.pref_showcaptcha, showCaptcha);
     }
 
     public static boolean isExcludeDisabledCaches() {
         return getBoolean(R.string.pref_excludedisabled, false);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setExcludeDisabledCaches(final boolean exclude) {
-        putBoolean(R.string.pref_excludedisabled, exclude);
-    }
-
     public static boolean isStoreOfflineMaps() {
         return getBoolean(R.string.pref_offlinemaps, true);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static void setStoreOfflineMaps(final boolean offlineMaps) {
-        putBoolean(R.string.pref_offlinemaps, offlineMaps);
     }
 
     public static boolean isStoreOfflineWpMaps() {
         return getBoolean(R.string.pref_offlinewpmaps, false);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setStoreOfflineWpMaps(final boolean offlineMaps) {
-        putBoolean(R.string.pref_offlinewpmaps, offlineMaps);
-    }
-
     public static boolean isStoreLogImages() {
         return getBoolean(R.string.pref_logimages, false);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static void setStoreLogImages(final boolean storeLogImages) {
-        putBoolean(R.string.pref_logimages, storeLogImages);
     }
 
     public static boolean isAutoLoadDescription() {
         return getBoolean(R.string.pref_autoloaddesc, true);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setAutoLoadDesc(final boolean autoLoad) {
-        putBoolean(R.string.pref_autoloaddesc, autoLoad);
-    }
-
     public static boolean isRatingWanted() {
         return getBoolean(R.string.pref_ratingwanted, true);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setRatingWanted(final boolean ratingWanted) {
-        putBoolean(R.string.pref_ratingwanted, ratingWanted);
-    }
-
     public static boolean isElevationWanted() {
         return getBoolean(R.string.pref_elevationwanted, false);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static void setElevationWanted(final boolean elevationWanted) {
-        putBoolean(R.string.pref_elevationwanted, elevationWanted);
     }
 
     public static boolean isFriendLogsWanted() {
@@ -646,45 +545,20 @@ public final class Settings {
         return getBoolean(R.string.pref_friendlogswanted, true);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setFriendLogsWanted(final boolean friendLogsWanted) {
-        putBoolean(R.string.pref_friendlogswanted, friendLogsWanted);
-    }
-
     public static boolean isLiveList() {
         return getBoolean(R.string.pref_livelist, true);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static void setLiveList(final boolean liveList) {
-        putBoolean(R.string.pref_livelist, liveList);
     }
 
     public static boolean isTrackableAutoVisit() {
         return getBoolean(R.string.pref_trackautovisit, false);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setTrackableAutoVisit(final boolean autoVisit) {
-        putBoolean(R.string.pref_trackautovisit, autoVisit);
-    }
-
     public static boolean isAutoInsertSignature() {
         return getBoolean(R.string.pref_sigautoinsert, false);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setAutoInsertSignature(final boolean autoInsert) {
-        putBoolean(R.string.pref_sigautoinsert, autoInsert);
-    }
-
     public static boolean isUseImperialUnits() {
         return getBoolean(R.string.pref_units, false);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static void setUseImperialUnits(final boolean imperial) {
-        putBoolean(R.string.pref_units, imperial);
     }
 
     public static boolean isLiveMap() {
@@ -817,11 +691,6 @@ public final class Settings {
         return getBoolean(R.string.pref_skin, false);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setLightSkin(final boolean lightSkin) {
-        putBoolean(R.string.pref_skin, lightSkin);
-    }
-
     public static String getKeyConsumerPublic() {
         return keyConsumerPublic;
     }
@@ -832,11 +701,6 @@ public final class Settings {
 
     public static int getAltitudeCorrection() {
         return getInt(R.string.pref_altcorrection, 0);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static boolean setAltitudeCorrection(final int altitude) {
-        return putInt(R.string.pref_altcorrection, altitude);
     }
 
     public static String getWebDeviceCode() {
@@ -862,7 +726,6 @@ public final class Settings {
         return getInt(R.string.pref_gcshowwaypointsthreshold, SHOW_WP_THRESHOLD_DEFAULT);
     }
 
-    // TODO: remove with SettingsActivity
     public static void setShowWaypointsThreshold(final int threshold) {
         putInt(R.string.pref_gcshowwaypointsthreshold, threshold);
     }
@@ -924,11 +787,6 @@ public final class Settings {
         return getBoolean(R.string.pref_opendetailslastpage, false);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setOpenLastDetailsPage(final boolean openLastPage) {
-        putBoolean(R.string.pref_opendetailslastpage, openLastPage);
-    }
-
     public static int getLastDetailsPage() {
         return getInt(R.string.pref_lastdetailspage, 1);
     }
@@ -971,12 +829,6 @@ public final class Settings {
         return Log.isDebug();
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setDebug(final boolean debug) {
-        putBoolean(R.string.pref_debug, debug);
-        Log.setDebug(debug);
-    }
-
     public static boolean getHideLiveMapHint() {
         return getBoolean(R.string.pref_hidelivemaphint, false);
     }
@@ -1006,19 +858,9 @@ public final class Settings {
                 Environment.getExternalStorageDirectory().getPath() + "/gpx");
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setGpxExportDir(final String gpxExportDir) {
-        putString(R.string.pref_gpxExportDir, gpxExportDir);
-    }
-
     public static String getGpxImportDir() {
         return getString(R.string.pref_gpxImportDir,
                 Environment.getExternalStorageDirectory().getPath() + "/gpx");
-    }
-
-    // TODO: remove with SettingsActivity
-    public static void setGpxImportDir(final String gpxImportDir) {
-        putString(R.string.pref_gpxImportDir, gpxImportDir);
     }
 
     public static boolean getShareAfterExport() {
@@ -1039,11 +881,6 @@ public final class Settings {
 
     public static String getCustomRenderThemeBaseFolder() {
         return getString(R.string.pref_renderthemepath, "");
-    }
-
-    // TODO: remove with SettingsActivity
-    public static boolean setCustomRenderThemeBaseFolder(final String folder) {
-        return putString(R.string.pref_renderthemepath, folder);
     }
 
     public static String getCustomRenderThemeFilePath() {
@@ -1087,18 +924,8 @@ public final class Settings {
         return getBoolean(R.string.pref_plainLogs, false);
     }
 
-    // TODO: remove with SettingsActivity
-    public static void setPlainLogs(final boolean plainLogs) {
-        putBoolean(R.string.pref_plainLogs, plainLogs);
-    }
-
     public static boolean getUseNativeUa() {
         return getBoolean(R.string.pref_nativeUa, false);
-    }
-
-    // TODO: remove with SettingsActivity
-    public static void setUseNativeUa(final boolean useNativeUa) {
-        putBoolean(R.string.pref_nativeUa, useNativeUa);
     }
 
     public static String getCacheTwitterMessage() {
@@ -1118,4 +945,41 @@ public final class Settings {
     public static void setLogImageScale(final int scale) {
         putInt(R.string.pref_logImageScale, scale);
     }
+
+    // Only for tests!
+    static void setExcludeDisabledCaches(final boolean exclude) {
+        putBoolean(R.string.pref_excludedisabled, exclude);
+    }
+
+    static void setExcludeMine(final boolean exclude) {
+        putBoolean(R.string.pref_excludemine, exclude);
+    }
+
+    static boolean setLogin(final String username, final String password) {
+        Settings.username = username;
+        Settings.password = password;
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+            // erase username and password
+            boolean a = remove(R.string.pref_username);
+            boolean b = remove(R.string.pref_password);
+            return a && b;
+        }
+        // save username and password
+        boolean a = putString(R.string.pref_username, username);
+        boolean b = putString(R.string.pref_password, password);
+        return a && b;
+    }
+
+    static void setStoreOfflineMaps(final boolean offlineMaps) {
+        putBoolean(R.string.pref_offlinemaps, offlineMaps);
+    }
+
+    static void setStoreOfflineWpMaps(final boolean offlineWpMaps) {
+        putBoolean(R.string.pref_offlinewpmaps, offlineWpMaps);
+    }
+
+    static void setUseImperialUnits(final boolean imperial) {
+        putBoolean(R.string.pref_units, imperial);
+    }
+
 }

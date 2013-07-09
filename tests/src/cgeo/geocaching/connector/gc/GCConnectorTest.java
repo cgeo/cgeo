@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
@@ -17,7 +18,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         final CacheType cacheType = Settings.getCacheType();
         try {
             // set up settings required for test
-            Settings.setExcludeMine(false);
+            TestSettings.setExcludeMine(false);
             Settings.setCacheType(CacheType.ALL);
             Login.login();
 
@@ -40,7 +41,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             }
         } finally {
             // restore user settings
-            Settings.setExcludeMine(excludeMine);
+            TestSettings.setExcludeMine(excludeMine);
             Settings.setCacheType(cacheType);
         }
     }

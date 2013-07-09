@@ -11,9 +11,8 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.settings.NewSettingsActivity;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -292,11 +291,8 @@ public class MainActivity extends AbstractActivity {
             case R.id.menu_helpers:
                 startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
-            case R.id.menu_oldsettings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
             case R.id.menu_settings:
-                startActivity(new Intent(this, NewSettingsActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case R.id.menu_history:
                 cgeocaches.startActivityHistory(this);

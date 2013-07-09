@@ -130,14 +130,8 @@
             android:label="@string/search_address_result"
             android:windowSoftInputMode="stateHidden" >
         </activity>
-        <activity
-            android:name=".settings.SettingsActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/settings"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
         <activity 
-            android:name=".settings.NewSettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:label="@string/settings_titlebar"
             android:theme="@style/settings"
             android:configChanges="keyboardHidden|orientation" >

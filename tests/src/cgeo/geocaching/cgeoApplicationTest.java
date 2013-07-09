@@ -14,6 +14,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
@@ -159,7 +160,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            Settings.setLogin(login.left, login.right);
+            TestSettings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
             Login.login();
         }
@@ -185,7 +186,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            Settings.setLogin(login.left, login.right);
+            TestSettings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
             Login.login();
         }
@@ -202,15 +203,15 @@ public class cgeoApplicationTest extends CGeoTestCase {
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
         try {
             // set up settings required for test
-            Settings.setExcludeMine(false);
-            Settings.setExcludeDisabledCaches(false);
+            TestSettings.setExcludeMine(false);
+            TestSettings.setExcludeDisabledCaches(false);
 
             runnable.run();
 
         } finally {
             // restore user settings
-            Settings.setExcludeMine(excludeMine);
-            Settings.setExcludeDisabledCaches(excludeDisabled);
+            TestSettings.setExcludeMine(excludeMine);
+            TestSettings.setExcludeDisabledCaches(excludeDisabled);
         }
     }
 
@@ -280,7 +281,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
                 try {
                     // set up settings required for test
-                    Settings.setExcludeMine(false);
+                    TestSettings.setExcludeMine(false);
                     Settings.setCacheType(CacheType.ALL);
 
                     final GC2CJPF mockedCache = new GC2CJPF();
@@ -369,7 +370,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            Settings.setLogin(login.left, login.right);
+            TestSettings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
             Login.login();
             Settings.setLiveMapStrategy(strategy);
@@ -412,7 +413,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         Login.logout();
         // Modify login data to avoid an automatic login again
-        Settings.setLogin("c:geo", "c:geo");
+        TestSettings.setLogin("c:geo", "c:geo");
         Settings.setMemberStatus("Basic member");
     }
 

@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 public class LogSignaturePreference extends DialogPreference {
 
-    private NewSettingsActivity settingsActivity;
+    private SettingsActivity settingsActivity;
     private EditText editText;
 
     public LogSignaturePreference(Context context, AttributeSet attrs) {
@@ -30,7 +30,7 @@ public class LogSignaturePreference extends DialogPreference {
 
     @Override
     protected void onBindDialogView(View view) {
-        settingsActivity = (NewSettingsActivity) this.getContext();
+        settingsActivity = (SettingsActivity) this.getContext();
 
         editText = (EditText) view.findViewById(R.id.signature_dialog_text);
         editText.setText(getPersistedString(""));

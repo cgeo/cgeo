@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 public class RegisterSend2CgeoPreference extends Preference {
 
     ProgressDialog progressDialog;
-    NewSettingsActivity activity;
+    SettingsActivity activity;
 
     public RegisterSend2CgeoPreference(Context context) {
         super(context);
@@ -67,7 +67,7 @@ public class RegisterSend2CgeoPreference extends Preference {
 
     @Override
     protected View onCreateView(ViewGroup parent) {
-        activity = (NewSettingsActivity) getContext();
+        activity = (SettingsActivity) getContext();
 
         setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
