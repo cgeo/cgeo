@@ -349,8 +349,6 @@
     <string name="init_signature_template_owner">Dono</string>
     <string name="init_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
-    <string name="init_elevationwanted">Carregar dados de elevação de cache</string>
-    <string name="init_summary_elevationwanted">Carregar dados de elevação de cache</string>
     <string name="init_friendlogswanted">Carregar página adicional de registos de amigos</string>
     <string name="init_summary_friendlogswanted">Carregar página adicional de registos de amigos</string>
     <string name="init_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
@@ -383,8 +381,8 @@
     <string name="init_summary_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
     <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
     <string name="init_summary_livelist">Mostrar a direcção para a cache na lista</string>
-    <string name="init_altitude">Correcção de altitude</string>
-    <string name="init_altitude_description">Se o GPS estiver a dar uma altitude errada, pode corrigi-la com um número positivo ou negativo. A correcção é sempre em metros.</string>
+    <string name="init_clear">Limpar login</string>
+    <string name="init_cleared">O c:geo limpou a informação de login.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">A criar um backup da base de dados de caches…</string>
@@ -514,7 +512,6 @@
     <string name="cache_dialog_loading_details_status_logs">A carregar os registo</string>
     <string name="cache_dialog_loading_details_status_waypoints">A processar os waypoints</string>
     <string name="cache_dialog_loading_details_status_gcvote">A carregar GCVote</string>
-    <string name="cache_dialog_loading_details_status_elevation">A carregar os dados de elevação</string>
     <string name="cache_dialog_loading_details_status_cache">A carregar dados</string>
     <string name="cache_dialog_loading_details_status_render">A renderizar a vista</string>
     <string name="cache_dialog_offline_save_title">Offline</string>

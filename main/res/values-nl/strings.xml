@@ -358,8 +358,6 @@
     <string name="init_signature_template_owner">Eigenaar</string>
     <string name="init_ratingwanted">Laad cachewaardering van GCvote.com</string>
     <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
-    <string name="init_elevationwanted">Laad cache hoogte gegevens</string>
-    <string name="init_summary_elevationwanted">Laad cache hoogte gegevens</string>
     <string name="init_friendlogswanted">Laad extra logbook pagina voor logs van vrienden</string>
     <string name="init_summary_friendlogswanted">Laad extra logbook pagina voor logs van vrienden</string>
     <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
@@ -394,8 +392,8 @@
     <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches.</string>
     <string name="init_livelist">Toon afstand tot cache in lijst</string>
     <string name="init_summary_livelist">Toon afstand tot cache in lijst</string>
-    <string name="init_altitude">Hoogte correctie</string>
-    <string name="init_altitude_description">Als de GPS een verkeerde hoogte aangeeft, kan dit gecorrigeerd worden met een positief of negatief nummer. De correctie is in meters.</string>
+    <string name="init_clear">Login wissen</string>
+    <string name="init_cleared">c:geo Heeft inloginformatie gewist.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Backup aan het maken van de cache-database…</string>
@@ -528,7 +526,6 @@
     <string name="cache_dialog_loading_details_status_logs">Laden logs</string>
     <string name="cache_dialog_loading_details_status_waypoints">Verwerken waypoints</string>
     <string name="cache_dialog_loading_details_status_gcvote">Laden GCVote</string>
-    <string name="cache_dialog_loading_details_status_elevation">Laden van hoogte gegevens</string>
     <string name="cache_dialog_loading_details_status_cache">Caching Gegevens</string>
     <string name="cache_dialog_loading_details_status_render">Weergave genereren</string>
     <string name="cache_dialog_offline_save_title">Offline</string>

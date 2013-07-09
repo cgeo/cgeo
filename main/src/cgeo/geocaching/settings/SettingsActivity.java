@@ -130,7 +130,6 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_fakekey_preference_backup_info, }) {
             bindSummaryToStringValue(this, getKey(k));
         }
-        bindSummaryToIntValue(this, getKey(R.string.pref_altcorrection));
     }
 
     private static String getKey(final int prefKeyId) {

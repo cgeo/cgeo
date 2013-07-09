@@ -117,13 +117,11 @@ public final class Settings {
             e.putInt(getKey(R.string.pref_version), old.getInt(getKey(R.string.pref_version), 0));
             e.putBoolean(getKey(R.string.pref_autoloaddesc), 0 != old.getInt(getKey(R.string.pref_autoloaddesc), 1));
             e.putBoolean(getKey(R.string.pref_ratingwanted), old.getBoolean(getKey(R.string.pref_ratingwanted), true));
-            e.putBoolean(getKey(R.string.pref_elevationwanted), old.getBoolean(getKey(R.string.pref_elevationwanted), false));
             e.putBoolean(getKey(R.string.pref_friendlogswanted), old.getBoolean(getKey(R.string.pref_friendlogswanted), true));
             e.putBoolean(getKey(R.string.pref_useenglish), old.getBoolean(getKey(R.string.pref_useenglish), false));
             e.putBoolean(getKey(R.string.pref_usecompass), 0 != old.getInt(getKey(R.string.pref_usecompass), 1));
             e.putBoolean(getKey(R.string.pref_trackautovisit), old.getBoolean(getKey(R.string.pref_trackautovisit), false));
             e.putBoolean(getKey(R.string.pref_sigautoinsert), old.getBoolean(getKey(R.string.pref_sigautoinsert), false));
-            e.putInt(getKey(R.string.pref_altcorrection), old.getInt(getKey(R.string.pref_altcorrection), 0));
             e.putBoolean(getKey(R.string.pref_logimages), old.getBoolean(getKey(R.string.pref_logimages), false));
             e.putBoolean(getKey(R.string.pref_excludedisabled), 0 != old.getInt(getKey(R.string.pref_excludedisabled), 0));
             e.putBoolean(getKey(R.string.pref_excludemine), 0 != old.getInt(getKey(R.string.pref_excludemine), 0));
@@ -527,10 +525,6 @@ public final class Settings {
         return getBoolean(R.string.pref_ratingwanted, true);
     }
 
-    public static boolean isElevationWanted() {
-        return getBoolean(R.string.pref_elevationwanted, false);
-    }
-
     public static boolean isFriendLogsWanted() {
         if (!isLogin()) {
             // don't show a friends log if the user is anonymous
@@ -691,10 +685,6 @@ public final class Settings {
 
     public static String getKeyConsumerSecret() {
         return keyConsumerSecret;
-    }
-
-    public static int getAltitudeCorrection() {
-        return getInt(R.string.pref_altcorrection, 0);
     }
 
     public static String getWebDeviceCode() {

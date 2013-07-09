@@ -352,8 +352,6 @@
     <string name="init_signature_template_owner">所有者</string>
     <string name="init_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
     <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
-    <string name="init_elevationwanted">キャッシュの標高値を取得</string> <!-- 正確に訳すと高度値 -->
-    <string name="init_summary_elevationwanted">キャッシュの標高値を取得</string> <!-- 正確に訳すと高度値 -->
     <string name="init_friendlogswanted">友達の書いたログを別ページに表示</string>
     <string name="init_summary_friendlogswanted">友達の書いたログを別ページに表示</string>
     <string name="init_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
@@ -386,8 +384,8 @@
     <string name="init_summary_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオンラインでの投稿をしない。このチェックを外してもオフライン用に保存することはできます。)</string>
     <string name="init_livelist">キャッシュの一覧で方向をアイコン表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向をアイコン表示</string>
-    <string name="init_altitude">標高の修正</string>
-    <string name="init_altitude_description">もし現在地の標高が正しくないなら修正できます。正または負のメートル単位で入力してください。</string>
+    <string name="init_clear">ログイン情報を消去</string>
+    <string name="init_cleared">ログイン情報を消去しました。</string>
     <string name="init_backup">バックアップ</string>
     <string name="init_backup_backup">バックアップ</string>
     <string name="init_backup_running">キャッシュのデータベースをバックアップ中…</string>
@@ -515,7 +513,6 @@
     <string name="cache_dialog_loading_details_status_logs">ログをロード中</string>
     <string name="cache_dialog_loading_details_status_waypoints">ウェイポイントを処理中</string>
     <string name="cache_dialog_loading_details_status_gcvote">GCVoteをロード中</string>
-    <string name="cache_dialog_loading_details_status_elevation">標高値をロード中</string> <!-- 正確に訳すと高度値 -->
     <string name="cache_dialog_loading_details_status_cache">データのキャッシュ中</string>
     <string name="cache_dialog_loading_details_status_render">表示の処理中</string>
     <string name="cache_dialog_offline_save_title">オフライン</string>

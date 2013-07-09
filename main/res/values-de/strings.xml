@@ -410,8 +410,6 @@
     <string name="init_signature_template_owner">Besitzer</string>
     <string name="init_ratingwanted">GCvote-Bewertung</string>
     <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
-    <string name="init_elevationwanted">Höhe des Caches</string>
-    <string name="init_summary_elevationwanted">Lade Höhe des Caches</string>
     <string name="init_friendlogswanted">Logs von Freunden</string>
     <string name="init_summary_friendlogswanted">Lade zusätzliche Logbuch-Seite für Logs von Freunden</string>
     <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
@@ -446,8 +444,8 @@
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
-    <string name="init_altitude">Höhenkorrektur (m)</string>
-    <string name="init_altitude_description">Falls das GPS eine falsche Höhe ermittelt, kann dies durch Angabe eines positiven oder negativen Wertes in Metern korrigiert werden.</string>
+    <string name="init_clear">Login zurücksetzen</string>
+    <string name="init_cleared">c:geo hat die Anmeldedaten gelöscht.</string>
     <string name="init_backup">Sicherung</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
@@ -608,7 +606,6 @@
     <string name="cache_dialog_loading_details_status_logs">Lade Logs</string>
     <string name="cache_dialog_loading_details_status_waypoints">Verarbeite Wegpunkte</string>
     <string name="cache_dialog_loading_details_status_gcvote">Lade GCVote</string>
-    <string name="cache_dialog_loading_details_status_elevation">Lade Höhe</string>
     <string name="cache_dialog_loading_details_status_cache">Zwischenspeichern</string>
     <string name="cache_dialog_loading_details_status_render">Erzeuge Darstellung</string>
     <string name="cache_dialog_offline_save_title">Offline-Verwendung</string>
