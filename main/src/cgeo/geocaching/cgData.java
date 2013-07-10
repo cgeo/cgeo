@@ -3001,7 +3001,7 @@ public class cgData {
         return false;
     }
 
-    public static Set<String> getCachedMissingFromSearch(SearchResult searchResult, Set<Tile> tiles, IConnector connector) {
+    public static Set<String> getCachedMissingFromSearch(final SearchResult searchResult, final Set<Tile> tiles, final IConnector connector, final int maxZoom) {
 
         // get cached cgeocaches
         final Set<String> cachedGeocodes = new HashSet<String>();
@@ -3016,15 +3016,17 @@ public class cgData {
         for (String geocode : cachedGeocodes) {
             if (connector.canHandle(geocode)) {
                 Geocache geocache = cacheCache.getCacheFromCache(geocode);
-                boolean bFound = false;
-                for (Tile tile : tiles) {
-                    if (tile.containsPoint(geocache)) {
-                        bFound = true;
-                        break;
+                if (geocache.getZoomLevel() <= maxZoom) {
+                    boolean bFound = false;
+                    for (Tile tile : tiles) {
+                        if (tile.containsPoint(geocache)) {
+                            bFound = true;
+                            break;
+                        }
                     }
-                }
-                if (bFound) {
-                    missingFromSearch.add(geocode);
+                    if (bFound) {
+                        missingFromSearch.add(geocode);
+                    }
                 }
             }
         }

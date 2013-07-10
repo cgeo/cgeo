@@ -163,27 +163,34 @@ public class cgDataTest extends CGeoTestCase {
         final Geocache main = new Geocache();
         main.setGeocode("GC12345");
         main.setCoords(new Geopoint("N49 44.0 E8 37.0"));
-        final Geocache inTile = new Geocache();
-        inTile.setGeocode("GC12346");
-        inTile.setCoords(new Geopoint("N49 44.001 E8 37.001"));
+        final Geocache inTileLowZoom = new Geocache();
+        inTileLowZoom.setGeocode("GC12346");
+        inTileLowZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"));
+        inTileLowZoom.setZoomlevel(Tile.ZOOMLEVEL_MIN_PERSONALIZED - 5);
         final Geocache outTile = new Geocache();
         outTile.setGeocode("GC12347");
         outTile.setCoords(new Geopoint(tile.getViewport().getLatitudeMin() - 0.1, tile.getViewport().getLongitudeMin() - 0.1));
         final Geocache otherConnector = new Geocache();
         otherConnector.setGeocode("OC0001");
         otherConnector.setCoords(new Geopoint("N49 44.0 E8 37.0"));
+        final Geocache inTileHighZoom = new Geocache();
+        inTileHighZoom.setGeocode("GC12348");
+        inTileHighZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"));
+        inTileHighZoom.setZoomlevel(Tile.ZOOMLEVEL_MIN_PERSONALIZED + 1);
 
         // put in cache
         cgData.saveCache(main, EnumSet.of(SaveFlag.SAVE_CACHE));
-        cgData.saveCache(inTile, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(inTileLowZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(inTileHighZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
         cgData.saveCache(outTile, EnumSet.of(SaveFlag.SAVE_CACHE));
         cgData.saveCache(otherConnector, EnumSet.of(SaveFlag.SAVE_CACHE));
 
         final SearchResult search = new SearchResult(main);
 
-        Set<String> filteredGeoCodes = cgData.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance());
+        Set<String> filteredGeoCodes = cgData.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
 
-        assertTrue(filteredGeoCodes.contains(inTile.getGeocode()));
+        assertTrue(filteredGeoCodes.contains(inTileLowZoom.getGeocode()));
+        assertFalse(filteredGeoCodes.contains(inTileHighZoom.getGeocode()));
         assertFalse(filteredGeoCodes.contains(otherConnector.getGeocode()));
         assertFalse(filteredGeoCodes.contains(outTile.getGeocode()));
         assertFalse(filteredGeoCodes.contains(main.getGeocode()));

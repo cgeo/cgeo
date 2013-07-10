@@ -352,7 +352,7 @@ public class GCMap {
 
             // Check for vanished found caches
             if (tiles.iterator().next().getZoomlevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
-                searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance()));
+                searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
             }
         }
 

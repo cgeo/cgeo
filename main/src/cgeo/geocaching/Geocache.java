@@ -1490,6 +1490,10 @@ public class Geocache implements ICache, IWaypoint {
         storeCache(this, null, newListId, false, handler);
     }
 
+    public int getZoomLevel() {
+        return this.zoomlevel;
+    }
+
     public void setZoomlevel(int zoomlevel) {
         this.zoomlevel = zoomlevel;
     }
