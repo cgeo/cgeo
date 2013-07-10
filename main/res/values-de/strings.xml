@@ -481,7 +481,7 @@
     <string name="init_default_navigation_tool">Standardnavigation</string>
     <string name="init_default_navigation_tool_description">Hier kann das bevorzugte Navigationswerkzeug festgelegt werden.</string>
     <string name="init_default_navigation_tool_select">Wähle Werkzeug</string>
-    <string name="init_default_navigation_tool_2_description">Hier kannst das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
+    <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
     <string name="init_debug_title">Fehlersuche</string>
     <string name="init_debug_note">c:geo kann bei Bedarf viele Debuginformationen speichern. Im Normalfall ist dies nicht notwendig, jedoch kann es den Entwicklern bei der Fehlersuche helfen. In diesem Fall wird der Benutzer gebeten diese Einstellung zu aktivieren und später das Log-File zuzusenden.</string>
     <string name="init_debug">Debug-Log aktivieren</string>
@@ -494,8 +494,8 @@
     <string name="init_dbmove_failed">Fehler beim Verschieben der Datenbank.</string>
     <string name="init_plain_logs">Logs ohne Farben</string>
     <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
-    <string name="init_use_native_ua">Android Browser</string>
-    <string name="init_summary_use_native_ua">Als Android Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
+    <string name="init_use_native_ua">Android-Browser</string>
+    <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
     <string name="init_rendertheme_folder">Karten-Themes-Verzeichnis</string>
     
     <!-- map sources -->
