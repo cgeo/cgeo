@@ -5,8 +5,7 @@
   <string name="cache">Cache</string>
   <string name="detail">Détails</string>
   <string name="search">Rechercher</string>
-  <string name="settings">Paramètres</string>
-    <string name="settings_titlebar">c:geo Paramètres</string>
+  <string name="settings_titlebar">c:geo Paramètres</string>
   <string name="helpers">Aide à l\'installation</string>
   <string name="about">À propos de c:geo</string>
   <string name="latitude">Latitude</string>
