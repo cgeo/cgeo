@@ -62,10 +62,12 @@ public class SettingsActivity extends PreferenceActivity {
     private static final String INTENT_GOTO = "GOTO";
     private static final int INTENT_GOTO_SERVICES = 1;
 
+    private static final int DIR_CHOOSER_MAPS_DIRECTORY_REQUEST = 4;
+
     private EditText signatureText;
 
     /**
-     * Enum for dir choosers. This is how we can retrieve information about the
+     * Enumeration for directory choosers. This is how we can retrieve information about the
      * directory and preference key in onActivityResult() easily just by knowing
      * the result code.
      */
@@ -79,18 +81,15 @@ public class SettingsActivity extends PreferenceActivity {
         public final int keyId;
         public final String defaultValue;
 
-        private DirChooserType(int requestCode, int keyId, String defaultValue) {
+        private DirChooserType(final int requestCode, final int keyId, final String defaultValue) {
             this.requestCode = requestCode;
             this.keyId = keyId;
             this.defaultValue = defaultValue;
         }
     }
 
-    private final static int DIR_CHOOSER_MAPS_DIRECTORY_REQUEST = 4;
-
-    @SuppressWarnings("deprecation")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
 
         if (Settings.isLightSkin()) {
             setTheme(R.style.settings_light);
@@ -100,7 +99,7 @@ public class SettingsActivity extends PreferenceActivity {
 
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.preferences);
+        SettingsActivity.addPreferencesFromResource(this, R.xml.preferences);
 
         initPreferences();
 
@@ -108,13 +107,12 @@ public class SettingsActivity extends PreferenceActivity {
         int gotoPage = intent.getIntExtra(INTENT_GOTO, 0);
         if (gotoPage == INTENT_GOTO_SERVICES) {
             // start with services screen
-            PreferenceScreen main = (PreferenceScreen) findPreference(getKey(R.string.pref_fakekey_main_screen));
-            int index = findPreference(getKey(R.string.pref_fakekey_services_screen)).getOrder();
+            PreferenceScreen main = (PreferenceScreen) SettingsActivity.findPreference(this, getKey(R.string.pref_fakekey_main_screen));
+            int index = SettingsActivity.findPreference(this, getKey(R.string.pref_fakekey_services_screen)).getOrder();
             main.onItemClick(null, null, index, 0);
         }
     }
 
-    @SuppressWarnings("deprecation")
     private void initPreferences() {
         initMapSourcePreference();
         initDirChoosers();
@@ -127,7 +125,7 @@ public class SettingsActivity extends PreferenceActivity {
 
         Map<String, ?> prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getAll();
         for (String key : prefs.keySet()) {
-            Preference pref = findPreference(key);
+            Preference pref = SettingsActivity.findPreference(this, key);
             if (pref instanceof EditTextPreference || pref instanceof EditPasswordPreference) {
                 bindSummaryToStringValue(pref);
             } else if (pref instanceof NumberPickerPreference) {
@@ -143,7 +141,7 @@ public class SettingsActivity extends PreferenceActivity {
     // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
     OnMenuItemClickListener TEMPLATE_CLICK = new OnMenuItemClickListener() {
         @Override
-        public boolean onMenuItemClick(MenuItem item) {
+        public boolean onMenuItemClick(final MenuItem item) {
             LogTemplate template = LogTemplateProvider.getTemplate(item.getItemId());
             if (template != null) {
                 insertSignatureTemplate(template);
@@ -154,13 +152,13 @@ public class SettingsActivity extends PreferenceActivity {
     };
 
     // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
-    void setSignatureTextView(EditText view) {
+    void setSignatureTextView(final EditText view) {
         this.signatureText = view;
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-            ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v,
+            final ContextMenuInfo menuInfo) {
         // context menu for signature templates
         if (v.getId() == R.id.signature_templates) {
             menu.setHeaderTitle(R.string.init_signature_template_button);
@@ -179,11 +177,10 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     /**
-     * fill the choice list for map sources
+     * Fill the choice list for map sources.
      */
-    @SuppressWarnings("deprecation")
     private void initMapSourcePreference() {
-        ListPreference pref = (ListPreference) findPreference(getKey(R.string.pref_mapsource));
+        ListPreference pref = (ListPreference) SettingsActivity.findPreference(this, getKey(R.string.pref_mapsource));
 
         List<MapSource> mapSources = MapProviderFactory.getMapSources();
         CharSequence[] entries = new CharSequence[mapSources.size()];
@@ -197,9 +194,8 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     /**
-     * fill the choice list for default navigation tools
+     * Fill the choice list for default navigation tools.
      */
-    @SuppressWarnings("deprecation")
     private void initDefaultNavigationPreferences() {
 
         final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledDefaultNavigationApps();
@@ -211,16 +207,16 @@ public class SettingsActivity extends PreferenceActivity {
             values[i] = String.valueOf(apps.get(i).id);
         }
 
-        ListPreference pref = (ListPreference) findPreference(getKey(R.string.pref_defaultNavigationTool));
+        ListPreference pref = (ListPreference) SettingsActivity.findPreference(this, getKey(R.string.pref_defaultNavigationTool));
         pref.setEntries(entries);
         pref.setEntryValues(values);
-        pref = (ListPreference) findPreference(getKey(R.string.pref_defaultNavigationTool2));
+        pref = (ListPreference) SettingsActivity.findPreference(this, getKey(R.string.pref_defaultNavigationTool2));
         pref.setEntries(entries);
         pref.setEntryValues(values);
     }
 
     /**
-     * fire up a dir chooser on click on the preference
+     * Fire up a directory chooser on click on the preference.
      *
      * @see #onActivityResult() for processing of the selected directory
      *
@@ -230,25 +226,24 @@ public class SettingsActivity extends PreferenceActivity {
      *            default directory - in case the preference has never been
      *            set yet
      */
-    @SuppressWarnings("deprecation")
     private void initDirChoosers() {
         for (final DirChooserType dct : DirChooserType.values()) {
             final String dir = Settings.getString(dct.keyId, dct.defaultValue);
 
-            findPreference(getKey(dct.keyId)).setOnPreferenceClickListener(
+            SettingsActivity.findPreference(this, getKey(dct.keyId)).setOnPreferenceClickListener(
                     new OnPreferenceClickListener() {
                         @Override
-                        public boolean onPreferenceClick(Preference preference) {
+                        public boolean onPreferenceClick(final Preference preference) {
                             startDirChooser(dct, dir);
                             return false;
                         }
                     });
         }
 
-        findPreference(getKey(R.string.pref_mapDirectory)).setOnPreferenceClickListener(
+        SettingsActivity.findPreference(this, getKey(R.string.pref_mapDirectory)).setOnPreferenceClickListener(
                 new OnPreferenceClickListener() {
                     @Override
-                    public boolean onPreferenceClick(Preference preference) {
+                    public boolean onPreferenceClick(final Preference preference) {
                         Intent i = new Intent(SettingsActivity.this,
                                 SelectMapfileActivity.class);
                         startActivityForResult(i, DIR_CHOOSER_MAPS_DIRECTORY_REQUEST);
@@ -257,7 +252,7 @@ public class SettingsActivity extends PreferenceActivity {
                 });
     }
 
-    private void startDirChooser(DirChooserType dct, String startDirectory) {
+    private void startDirChooser(final DirChooserType dct, final String startDirectory) {
         try {
             final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
             if (StringUtils.isNotBlank(startDirectory)) {
@@ -276,11 +271,10 @@ public class SettingsActivity extends PreferenceActivity {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    private void setChosenDirectory(DirChooserType dct, Intent data) {
+    private void setChosenDirectory(final DirChooserType dct, final Intent data) {
         final String directory = new File(data.getData().getPath()).getAbsolutePath();
         if (StringUtils.isNotBlank(directory)) {
-            Preference p = findPreference(getKey(dct.keyId));
+            Preference p = SettingsActivity.findPreference(this, getKey(dct.keyId));
             if (p == null) {
                 return;
             }
@@ -289,9 +283,8 @@ public class SettingsActivity extends PreferenceActivity {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public void initBackupButtons() {
-        Preference backup = findPreference(getKey(R.string.pref_fakekey_preference_backup));
+        Preference backup = SettingsActivity.findPreference(this, getKey(R.string.pref_fakekey_preference_backup));
         backup.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
@@ -322,8 +315,7 @@ public class SettingsActivity extends PreferenceActivity {
                                                 ? context.getString(R.string.init_backup_success)
                                                         + "\n" + backupFileName
                                                 : context.getString(R.string.init_backup_failed));
-                                VALUE_CHANGE_LISTENER.onPreferenceChange(findPreference(
-                                        getKey(R.string.pref_fakekey_preference_backup_info)), "");
+                                VALUE_CHANGE_LISTENER.onPreferenceChange(SettingsActivity.findPreference(SettingsActivity.this, getKey(R.string.pref_fakekey_preference_backup_info)), "");
                             }
                         });
                     }
@@ -332,7 +324,7 @@ public class SettingsActivity extends PreferenceActivity {
             }
         });
 
-        Preference restore = findPreference(getKey(R.string.pref_fakekey_preference_restore));
+        Preference restore = SettingsActivity.findPreference(this, getKey(R.string.pref_fakekey_preference_restore));
         restore.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
@@ -343,13 +335,12 @@ public class SettingsActivity extends PreferenceActivity {
         });
     }
 
-    @SuppressWarnings("deprecation")
     private void initDbLocationPreference() {
-        Preference p = findPreference(getKey(R.string.pref_dbonsdcard));
+        Preference p = SettingsActivity.findPreference(this, getKey(R.string.pref_dbonsdcard));
         p.setPersistent(false);
         p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference) {
+            public boolean onPreferenceClick(final Preference preference) {
                 boolean oldValue = Settings.isDbOnSDCard();
                 ((cgeoapplication) SettingsActivity.this.getApplication())
                         .moveDatabase(SettingsActivity.this);
@@ -358,23 +349,21 @@ public class SettingsActivity extends PreferenceActivity {
         });
     }
 
-    @SuppressWarnings("deprecation")
     private void initDebugPreference() {
-        Preference p = findPreference(getKey(R.string.pref_debug));
+        Preference p = SettingsActivity.findPreference(this, getKey(R.string.pref_debug));
         p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
                 Log.setDebug((Boolean) newValue);
                 return true;
             }
         });
     }
 
-    @SuppressWarnings("deprecation")
     private void initBasicMemberPreferences() {
-        findPreference(getKey(R.string.pref_loaddirectionimg)).setEnabled(
+        SettingsActivity.findPreference(this, getKey(R.string.pref_loaddirectionimg)).setEnabled(
                 !Settings.isPremiumMember());
-        findPreference(getKey(R.string.pref_showcaptcha)).setEnabled(
+        SettingsActivity.findPreference(this, getKey(R.string.pref_showcaptcha)).setEnabled(
                 !Settings.isPremiumMember());
     }
 
@@ -382,15 +371,14 @@ public class SettingsActivity extends PreferenceActivity {
         Settings.putString(R.string.pref_webDeviceName, Settings.getWebDeviceName());
     }
 
-    public static void startWithServicesPage(Context fromActivity) {
+    public static void startWithServicesPage(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, SettingsActivity.class);
         intent.putExtra(INTENT_GOTO, INTENT_GOTO_SERVICES);
         fromActivity.startActivity(intent);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
             return;
@@ -413,7 +401,7 @@ public class SettingsActivity extends PreferenceActivity {
                     }
                 }
                 initMapSourcePreference();
-                findPreference(getKey(R.string.pref_mapDirectory)).setSummary(
+                SettingsActivity.findPreference(this, getKey(R.string.pref_mapDirectory)).setSummary(
                         Settings.getMapFileDirectory());
                 break;
             default:
@@ -425,9 +413,9 @@ public class SettingsActivity extends PreferenceActivity {
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
-    private static Preference.OnPreferenceChangeListener VALUE_CHANGE_LISTENER = new Preference.OnPreferenceChangeListener() {
+    private static final Preference.OnPreferenceChangeListener VALUE_CHANGE_LISTENER = new Preference.OnPreferenceChangeListener() {
         @Override
-        public boolean onPreferenceChange(Preference preference, Object value) {
+        public boolean onPreferenceChange(final Preference preference, final Object value) {
             String stringValue = value.toString();
 
             if (preference instanceof EditPasswordPreference) {
@@ -476,7 +464,7 @@ public class SettingsActivity extends PreferenceActivity {
      *
      * @see #VALUE_CHANGE_LISTENER
      */
-    private static void bindSummaryToValue(Preference preference, Object value) {
+    private static void bindSummaryToValue(final Preference preference, final Object value) {
         // Set the listener to watch for value changes.
         if (preference == null) {
             return;
@@ -493,7 +481,7 @@ public class SettingsActivity extends PreferenceActivity {
      *
      * @param key
      */
-    private static void bindSummaryToStringValue(Preference pref) {
+    private static void bindSummaryToStringValue(final Preference pref) {
         if (pref == null) {
             return;
         }
@@ -510,7 +498,7 @@ public class SettingsActivity extends PreferenceActivity {
      *
      * @param key
      */
-    private static void bindSummaryToIntValue(Preference pref) {
+    private static void bindSummaryToIntValue(final Preference pref) {
         if (pref == null) {
             return;
         }
@@ -520,5 +508,15 @@ public class SettingsActivity extends PreferenceActivity {
                 .getInt(pref.getKey(), 0);
 
         bindSummaryToValue(pref, value);
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Preference findPreference(final PreferenceActivity preferenceActivity, final CharSequence key) {
+        return preferenceActivity.findPreference(key);
+    }
+
+    @SuppressWarnings("deprecation")
+    public static void addPreferencesFromResource(final PreferenceActivity preferenceActivity, final int preferencesResId) {
+        preferenceActivity.addPreferencesFromResource(preferencesResId);
     }
 }
