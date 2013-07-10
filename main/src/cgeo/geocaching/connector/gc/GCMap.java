@@ -356,18 +356,14 @@ public class GCMap {
             }
         }
 
-        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isPremiumMember()) {
             final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 //FIXME We don't have a RecaptchaReceiver!?
                 SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
-                    if (Settings.isPremiumMember()) {
-                        lastSearchViewport = cgData.getBounds(geocodes);
-                    } else {
-                        lastSearchViewport = new Viewport(center, center);
-                    }
+                    lastSearchViewport = cgData.getBounds(geocodes);
                     searchResult.addGeocodes(geocodes);
                 }
             }
