@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -43,7 +42,6 @@ import android.widget.EditText;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -123,15 +121,16 @@ public class SettingsActivity extends PreferenceActivity {
         initBasicMemberPreferences();
         initSend2CgeoPreferences();
 
-        Map<String, ?> prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getAll();
-        for (String key : prefs.keySet()) {
-            Preference pref = SettingsActivity.findPreference(this, key);
-            if (pref instanceof EditTextPreference || pref instanceof EditPasswordPreference) {
-                bindSummaryToStringValue(pref);
-            } else if (pref instanceof NumberPickerPreference) {
-                bindSummaryToIntValue(pref);
-            }
+        for (int k : new int[] { R.string.pref_username, R.string.pref_password,
+                R.string.pref_pass_vote, R.string.pref_signature,
+                R.string.pref_mapsource, R.string.pref_renderthemepath,
+                R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
+                R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
+                R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
+                R.string.pref_fakekey_preference_backup_info, }) {
+            bindSummaryToStringValue(this, getKey(k));
         }
+        bindSummaryToIntValue(this, getKey(R.string.pref_altcorrection));
     }
 
     private static String getKey(final int prefKeyId) {
@@ -481,7 +480,10 @@ public class SettingsActivity extends PreferenceActivity {
      *
      * @param key
      */
-    private static void bindSummaryToStringValue(final Preference pref) {
+    private static void bindSummaryToStringValue(final PreferenceActivity preferenceActivity, final String key) {
+
+        Preference pref = findPreference(preferenceActivity, key);
+
         if (pref == null) {
             return;
         }
@@ -498,7 +500,10 @@ public class SettingsActivity extends PreferenceActivity {
      *
      * @param key
      */
-    private static void bindSummaryToIntValue(final Preference pref) {
+    private static void bindSummaryToIntValue(final PreferenceActivity preferenceActivity, final String key) {
+
+        Preference pref = findPreference(preferenceActivity, key);
+
         if (pref == null) {
             return;
         }
