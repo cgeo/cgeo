@@ -227,13 +227,12 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private void initDirChoosers() {
         for (final DirChooserType dct : DirChooserType.values()) {
-            final String dir = Settings.getString(dct.keyId, dct.defaultValue);
 
             SettingsActivity.findPreference(this, getKey(dct.keyId)).setOnPreferenceClickListener(
                     new OnPreferenceClickListener() {
                         @Override
                         public boolean onPreferenceClick(final Preference preference) {
-                            startDirChooser(dct, dir);
+                            startDirChooser(dct);
                             return false;
                         }
                     });
@@ -251,7 +250,10 @@ public class SettingsActivity extends PreferenceActivity {
                 });
     }
 
-    private void startDirChooser(final DirChooserType dct, final String startDirectory) {
+    private void startDirChooser(final DirChooserType dct) {
+
+        final String startDirectory = Settings.getString(dct.keyId, dct.defaultValue);
+
         try {
             final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
             if (StringUtils.isNotBlank(startDirectory)) {
