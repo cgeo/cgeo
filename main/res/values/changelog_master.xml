@@ -2,5 +2,8 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+    <b>Next feature release</b>\n
+    <b>Bugfixing:</b>\n
+    · Various bug fixes
   </string>
 </resources>
