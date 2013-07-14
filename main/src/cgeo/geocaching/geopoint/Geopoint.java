@@ -2,14 +2,8 @@ package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.R;
-import cgeo.geocaching.geopoint.GeopointFormatter.Format;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import android.location.Location;
 import android.os.Parcel;
