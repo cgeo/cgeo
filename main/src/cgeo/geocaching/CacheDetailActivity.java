@@ -2320,7 +2320,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 showToast(msg.getData().getString(SUCCESS_TEXT));
             }
             progress.dismiss();
-            return;
         }
 
         @Override
