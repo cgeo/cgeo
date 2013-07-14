@@ -8,6 +8,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -109,6 +110,12 @@ public class SettingsActivity extends PreferenceActivity {
             int index = SettingsActivity.findPreference(this, getKey(R.string.pref_fakekey_services_screen)).getOrder();
             main.onItemClick(null, null, index, 0);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        Compatibility.dataChanged(getPackageName());
+        super.onPause();
     }
 
     private void initPreferences() {
