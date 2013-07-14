@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Version;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,9 +22,17 @@ public class AboutActivity extends AbstractActivity {
         setContentView(R.layout.about_activity);
         setTitle(res.getString(R.string.about));
 
+        final String changeLogMasterString = getString(R.string.changelog_master);
+        final TextView changeLogMaster = (TextView) findViewById(R.id.changelog_master);
+        if (StringUtils.isBlank(changeLogMasterString)) {
+            changeLogMaster.setVisibility(View.GONE);
+        } else {
+            changeLogMaster.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+
         ((TextView) findViewById(R.id.about_version_string)).setText(Version.getVersionName(this));
         ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
-        ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView) findViewById(R.id.changelog_release)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /**
