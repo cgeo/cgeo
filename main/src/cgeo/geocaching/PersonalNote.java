@@ -93,12 +93,12 @@ public class PersonalNote {
 
     @Override
     public final String toString() {
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder builder = new StringBuilder();
         if (cgeoNote != null) {
-            buffer.append(MERGED_PREFIX).append(cgeoNote).append("\n").append(SEPARATOR);
+            builder.append(MERGED_PREFIX).append(cgeoNote).append("\n").append(SEPARATOR);
         }
-        buffer.append(providerNote);
-        return buffer.toString();
+        builder.append(providerNote);
+        return builder.toString();
     }
 
     public final String getCgeoNote() {
