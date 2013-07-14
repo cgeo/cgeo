@@ -129,13 +129,6 @@ public interface IConnector {
     public boolean isReliableLatLon(boolean cacheHasReliableLatLon);
 
     /**
-     * Return required tokens for specific following actions
-     *
-     * @return
-     */
-    public String[] getTokens();
-
-    /**
      * extract a geocode from the given URL, if this connector can handle that URL somehow
      *
      * @param url
