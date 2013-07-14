@@ -409,8 +409,6 @@
     <string name="init_summary_choose_list">Zapytaj o wykaz podczas zapisywania skrzynek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
-    <string name="init_clear">Usuń nazwę użytkownika</string>
-    <string name="init_cleared">c:geo usunął dane logowania.</string>
     <string name="init_backup">Kopia zapasowa</string>
     <string name="init_backup_backup">Wykonaj kopię zapasową</string>
     <string name="init_backup_running">Tworzę kopię zapasową bazy skrzynek…</string>

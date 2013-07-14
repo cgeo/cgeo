@@ -417,8 +417,6 @@
     <string name="init_summary_choose_list">Fråga efter lista när cacher sparas</string>
     <string name="init_livelist">Visa riktning till cacher i listan</string>
     <string name="init_summary_livelist">Visa riktning till cacher i listan</string>
-    <string name="init_clear">Rensa inloggningsinfo</string>
-    <string name="init_cleared">c:geo har rensat inloggningsinformationen</string>
     <string name="init_backup">Säkerhetskopiering</string>
     <string name="init_backup_backup">Kopiera</string>
     <string name="init_backup_running">Skapar säkerhetskopia av databasen med cacher…</string>

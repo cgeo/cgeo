@@ -444,8 +444,6 @@
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
-    <string name="init_clear">Login zurücksetzen</string>
-    <string name="init_cleared">c:geo hat die Anmeldedaten gelöscht.</string>
     <string name="init_backup">Sicherung</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>

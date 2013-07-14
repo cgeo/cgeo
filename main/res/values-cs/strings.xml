@@ -411,8 +411,6 @@
     <string name="init_summary_choose_list">Ptát se na seznam pro uložení keše</string>
     <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
     <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
-    <string name="init_clear">Smazat přihlašovací údaje</string>
-    <string name="init_cleared">c:geo smazalo přihlašovací údaje.</string>
     <string name="init_backup">Záloha</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_running">Vytváření zálohy databáze keší…</string>

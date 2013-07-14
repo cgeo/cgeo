@@ -381,8 +381,6 @@
     <string name="init_summary_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
     <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
     <string name="init_summary_livelist">Mostrar a direcção para a cache na lista</string>
-    <string name="init_clear">Limpar login</string>
-    <string name="init_cleared">O c:geo limpou a informação de login.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">A criar um backup da base de dados de caches…</string>

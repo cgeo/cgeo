@@ -354,8 +354,6 @@
     <string name="init_summary_autoload">Autocargar descripción larga</string>
     <string name="init_livelist">Mostrar dirección a los escondites en su listado</string>
     <string name="init_summary_livelist">Mostrar dirección a los escondites en su listado</string>
-    <string name="init_clear">Borrar acceso</string>
-    <string name="init_cleared">c:geo ha borrado la información de acceso.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Copia de seguridad</string>
     <string name="init_backup_note">Esta opción copia/restaura la base de datos de escondites y puntos de referencia, no la configuración. Los datos de acceso y contraseña no se guardarán.</string>

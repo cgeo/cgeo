@@ -419,8 +419,6 @@
     <string name="init_summary_choose_list">Chiedi la lista quando salvi un cache</string>
     <string name="init_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
     <string name="init_summary_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
-    <string name="init_clear">Azzera login</string>
-    <string name="init_cleared">c:geo ha azzerato le informazioni di login.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creazione del backup del database dei cache in corso…</string>

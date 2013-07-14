@@ -446,8 +446,6 @@
     <string name="init_summary_choose_list">Ask for list when storing caches</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show Direction to caches in the list</string>
-    <string name="init_clear">Clear Login</string>
-    <string name="init_cleared">c:geo cleared login information.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creating backup of cache database…</string>

@@ -392,8 +392,6 @@
     <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches.</string>
     <string name="init_livelist">Toon afstand tot cache in lijst</string>
     <string name="init_summary_livelist">Toon afstand tot cache in lijst</string>
-    <string name="init_clear">Login wissen</string>
-    <string name="init_cleared">c:geo Heeft inloginformatie gewist.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Backup aan het maken van de cache-database…</string>

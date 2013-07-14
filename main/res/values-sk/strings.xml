@@ -381,8 +381,6 @@
     <string name="init_summary_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
     <string name="init_livelist">Zobrazovať smer v zozname skrýš</string>
     <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
-    <string name="init_clear">Zmazať prihlasovacie údaje</string>
-    <string name="init_cleared">Prihlasovacie údaje zmazané.</string>
     <string name="init_backup">Záloha</string>
     <string name="init_backup_backup">Zálohovať</string>
     <string name="init_backup_running">Vytváranie zálohy databázy skrýš…</string>

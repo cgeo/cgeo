@@ -384,8 +384,6 @@
     <string name="init_summary_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオンラインでの投稿をしない。このチェックを外してもオフライン用に保存することはできます。)</string>
     <string name="init_livelist">キャッシュの一覧で方向をアイコン表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向をアイコン表示</string>
-    <string name="init_clear">ログイン情報を消去</string>
-    <string name="init_cleared">ログイン情報を消去しました。</string>
     <string name="init_backup">バックアップ</string>
     <string name="init_backup_backup">バックアップ</string>
     <string name="init_backup_running">キャッシュのデータベースをバックアップ中…</string>

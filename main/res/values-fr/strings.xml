@@ -375,8 +375,6 @@
     <string name="init_summary_choose_list">Demander dans quelle liste sauver les caches.</string>
   <string name="init_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_summary_livelist">Afficher la direction des caches dans les listes</string>
-  <string name="init_clear">Effacer l\'identifiant</string>
-  <string name="init_cleared">c:geo a effacé votre identifiant.</string>
   <string name="init_backup">Sauvegarde</string>
   <string name="init_backup_backup">Sauvegarde</string>
   <string name="init_backup_running">Création de la copie de sauvegarde…</string>
