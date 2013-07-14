@@ -228,7 +228,7 @@
                 android:text="@string/changelog_master"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="12dip" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/changelog_release"
