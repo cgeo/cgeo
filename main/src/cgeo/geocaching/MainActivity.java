@@ -541,12 +541,7 @@ public class MainActivity extends AbstractActivity {
                             (new ObtainAddressThread()).start();
                         }
                     } else {
-                        if (geo.getAltitude() != 0.0) {
-                            final String humanAlt = Units.getDistanceFromKilometers((float) geo.getAltitude() / 1000);
-                            navLocation.setText(geo.getCoords() + " | " + humanAlt);
-                        } else {
-                            navLocation.setText(geo.getCoords().toString());
-                        }
+                        navLocation.setText(geo.getCoords().toString());
                     }
                 } else {
                     if (nearestView.isClickable()) {

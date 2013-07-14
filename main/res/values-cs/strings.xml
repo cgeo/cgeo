@@ -377,8 +377,6 @@
     <string name="init_signature_template_owner">Vlastník</string>
     <string name="init_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
-    <string name="init_elevationwanted">Načítat výšková data keše</string>
-    <string name="init_summary_elevationwanted">Načítat výšková data keše</string>
     <string name="init_friendlogswanted">Načítat doplňkový Logbook s logy od kámošů</string>
     <string name="init_summary_friendlogswanted">Načítat doplňkový Logbook s logy od kámošů</string>
     <string name="init_openlastdetailspage">Otevřít detaily na naposledy použité stránce</string>
@@ -413,8 +411,8 @@
     <string name="init_summary_choose_list">Ptát se na seznam pro uložení keše</string>
     <string name="init_livelist">Zobrazovat směr v seznamu keší</string>
     <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
-    <string name="init_altitude">Výšková korekce</string>
-    <string name="init_altitude_description">Pokud Tvoje GPS špatně počítá výšku, můžeš ji korigovat zde. Stačí zadat kladné či záporné číslo v metrech.</string>
+    <string name="init_clear">Smazat přihlašovací údaje</string>
+    <string name="init_cleared">c:geo smazalo přihlašovací údaje.</string>
     <string name="init_backup">Záloha</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_running">Vytváření zálohy databáze keší…</string>
@@ -547,7 +545,6 @@
     <string name="cache_dialog_loading_details_status_logs">Načítání logů</string>
     <string name="cache_dialog_loading_details_status_waypoints">Zpracovávání bodů trasy</string>
     <string name="cache_dialog_loading_details_status_gcvote">Načítání GCVote</string>
-    <string name="cache_dialog_loading_details_status_elevation">Načítání údajů o nadmořské výšce</string>
     <string name="cache_dialog_loading_details_status_cache">Ukládání do mezipaměti</string>
     <string name="cache_dialog_loading_details_status_render">Vykreslování pohledu</string>
     <string name="cache_dialog_offline_save_title">Offline</string>

@@ -86,29 +86,28 @@ public class cgData {
                     "cg_caches.terrain,"            +    // 18
                     "cg_caches.latlon,"             +    // 19
                     "cg_caches.location,"           +    // 20
-                    "cg_caches.elevation,"          +    // 21
-                    "cg_caches.personal_note,"      +    // 22
-                    "cg_caches.shortdesc,"          +    // 23
-                    "cg_caches.favourite_cnt,"      +    // 24
-                    "cg_caches.rating,"             +    // 25
-                    "cg_caches.votes,"              +    // 26
-                    "cg_caches.myvote,"             +    // 27
-                    "cg_caches.disabled,"           +    // 28
-                    "cg_caches.archived,"           +    // 29
-                    "cg_caches.members,"            +    // 30
-                    "cg_caches.found,"              +    // 31
-                    "cg_caches.favourite,"          +    // 32
-                    "cg_caches.inventoryunknown,"   +    // 33
-                    "cg_caches.onWatchlist,"        +    // 34
-                    "cg_caches.reliable_latlon,"    +    // 35
-                    "cg_caches.coordsChanged,"      +    // 36
-                    "cg_caches.latitude,"           +    // 37
-                    "cg_caches.longitude,"          +    // 38
-                    "cg_caches.finalDefined,"       +    // 39
-                    "cg_caches._id,"                +    // 40
-                    "cg_caches.inventorycoins,"     +    // 41
-                    "cg_caches.inventorytags,"      +    // 42
-                    "cg_caches.logPasswordRequired";     // 43
+                    "cg_caches.personal_note,"      +    // 21
+                    "cg_caches.shortdesc,"          +    // 22
+                    "cg_caches.favourite_cnt,"      +    // 23
+                    "cg_caches.rating,"             +    // 24
+                    "cg_caches.votes,"              +    // 25
+                    "cg_caches.myvote,"             +    // 26
+                    "cg_caches.disabled,"           +    // 27
+                    "cg_caches.archived,"           +    // 28
+                    "cg_caches.members,"            +    // 29
+                    "cg_caches.found,"              +    // 30
+                    "cg_caches.favourite,"          +    // 31
+                    "cg_caches.inventoryunknown,"   +    // 32
+                    "cg_caches.onWatchlist,"        +    // 33
+                    "cg_caches.reliable_latlon,"    +    // 34
+                    "cg_caches.coordsChanged,"      +    // 35
+                    "cg_caches.latitude,"           +    // 36
+                    "cg_caches.longitude,"          +    // 37
+                    "cg_caches.finalDefined,"       +    // 38
+                    "cg_caches._id,"                +    // 39
+                    "cg_caches.inventorycoins,"     +    // 40
+                    "cg_caches.inventorytags,"      +    // 41
+                    "cg_caches.logPasswordRequired";     // 42
 
     //TODO: remove "latlon" field from cache table
 
@@ -164,7 +163,6 @@ public class cgData {
             + "latitude double, "
             + "longitude double, "
             + "reliable_latlon integer, "
-            + "elevation double, "
             + "personal_note text, "
             + "shortdesc text, "
             + "description text, "
@@ -580,7 +578,6 @@ public class cgData {
                                     + "latitude double, "
                                     + "longitude double, "
                                     + "reliable_latlon integer, "
-                                    + "elevation double, "
                                     + "personal_note text, "
                                     + "shortdesc text, "
                                     + "description text, "
@@ -601,7 +598,7 @@ public class cgData {
 
                             db.execSQL(dbCreateCachesTemp);
                             db.execSQL("insert into " + dbTableCachesTemp + " select _id,updated,detailed,detailedupdate,visiteddate,geocode,reason,cacheid,guid,type,name,own,owner,owner_real," +
-                                    "hidden,hint,size,difficulty,terrain,latlon,location,direction,distance,latitude,longitude, 0,elevation," +
+                                    "hidden,hint,size,difficulty,terrain,latlon,location,direction,distance,latitude,longitude, 0," +
                                     "personal_note,shortdesc,description,favourite_cnt,rating,votes,myvote,disabled,archived,members,found,favourite,inventorycoins," +
                                     "inventorytags,inventoryunknown,onWatchlist from " + dbTableCaches);
                             db.execSQL("drop table " + dbTableCaches);
@@ -1082,7 +1079,6 @@ public class cgData {
         values.put("direction", cache.getDirection());
         putCoords(values, cache.getCoords());
         values.put("reliable_latlon", cache.isReliableLatLon() ? 1 : 0);
-        values.put("elevation", cache.getElevation());
         values.put("shortdesc", cache.getShortDescription());
         values.put("personal_note", cache.getPersonalNote());
         values.put("description", cache.getDescription());
@@ -1656,31 +1652,25 @@ public class cgData {
         }
         cache.setTerrain(cursor.getFloat(18));
         // do not set cache.location
-        cache.setCoords(getCoords(cursor, 37, 38));
-        index = 21;
-        if (cursor.isNull(index)) {
-            cache.setElevation(null);
-        } else {
-            cache.setElevation(cursor.getDouble(index));
-        }
-        cache.setPersonalNote(cursor.getString(22));
+        cache.setCoords(getCoords(cursor, 36, 37));
+        cache.setPersonalNote(cursor.getString(21));
         // do not set cache.shortdesc
         // do not set cache.description
-        cache.setFavoritePoints(cursor.getInt(24));
-        cache.setRating(cursor.getFloat(25));
-        cache.setVotes(cursor.getInt(26));
-        cache.setMyVote(cursor.getFloat(27));
-        cache.setDisabled(cursor.getInt(28) == 1);
-        cache.setArchived(cursor.getInt(29) == 1);
-        cache.setPremiumMembersOnly(cursor.getInt(30) == 1);
-        cache.setFound(cursor.getInt(31) == 1);
-        cache.setFavorite(cursor.getInt(32) == 1);
-        cache.setInventoryItems(cursor.getInt(33));
-        cache.setOnWatchlist(cursor.getInt(34) == 1);
-        cache.setReliableLatLon(cursor.getInt(35) > 0);
-        cache.setUserModifiedCoords(cursor.getInt(36) > 0);
-        cache.setFinalDefined(cursor.getInt(39) > 0);
-        cache.setLogPasswordRequired(cursor.getInt(43) > 0);
+        cache.setFavoritePoints(cursor.getInt(23));
+        cache.setRating(cursor.getFloat(24));
+        cache.setVotes(cursor.getInt(25));
+        cache.setMyVote(cursor.getFloat(26));
+        cache.setDisabled(cursor.getInt(27) == 1);
+        cache.setArchived(cursor.getInt(28) == 1);
+        cache.setPremiumMembersOnly(cursor.getInt(29) == 1);
+        cache.setFound(cursor.getInt(30) == 1);
+        cache.setFavorite(cursor.getInt(31) == 1);
+        cache.setInventoryItems(cursor.getInt(32));
+        cache.setOnWatchlist(cursor.getInt(33) == 1);
+        cache.setReliableLatLon(cursor.getInt(34) > 0);
+        cache.setUserModifiedCoords(cursor.getInt(35) > 0);
+        cache.setFinalDefined(cursor.getInt(38) > 0);
+        cache.setLogPasswordRequired(cursor.getInt(42) > 0);
 
         Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 

@@ -342,8 +342,6 @@
     <string name="init_signature_template_owner">Tulajdonos</string>
     <string name="init_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
     <string name="init_summary_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
-    <string name="init_elevationwanted">A geoláda magassági adatainak betöltése</string>
-    <string name="init_summary_elevationwanted">A geoláda magassági adatainak betöltése</string>
     <string name="init_friendlogswanted">További logbook oldal betöltése a barátok logjainak.</string>
     <string name="init_summary_friendlogswanted">További logbook oldal betöltése a barátok logjainak.</string>
     <string name="init_openlastdetailspage">Az utoljára használt oldal részleteinek betöltése</string>
@@ -376,8 +374,8 @@
     <string name="init_summary_log_offline">Offline logolás használata mindig (ne mutassa az online log ablakot logoláskor, ne küldje el a logot online)</string>
     <string name="init_livelist">Mutassa a ládák irányát a listában</string>
     <string name="init_summary_livelist">Mutassa a ládák irányát a listában</string>
-    <string name="init_altitude">Magasság korrekció</string>
-    <string name="init_altitude_description">Ha a GPS rossz magasságot mutat, módosíthatod pozitív vagy negatív irányban. A korrekció mindig méterben van.</string>
+    <string name="init_clear">Belépési adatok törlése</string>
+    <string name="init_cleared">a c:geo törölte a belépési adatokat.</string>
     <string name="init_backup">Biztonsági mentés</string>
     <string name="init_backup_backup">Biztonsági mentés</string>
     <string name="init_backup_running">A geoláda adatbázis biztonsági mentése…</string>
@@ -505,7 +503,6 @@
     <string name="cache_dialog_loading_details_status_logs">Logok betöltése</string>
     <string name="cache_dialog_loading_details_status_waypoints">Útpontok feldolgozása</string>
     <string name="cache_dialog_loading_details_status_gcvote">A GCVote betöltése</string>
-    <string name="cache_dialog_loading_details_status_elevation">Magassági adatok betöltése</string>
     <string name="cache_dialog_loading_details_status_cache">Láda adatai</string>
     <string name="cache_dialog_loading_details_status_render">Render nézet</string>
     <string name="cache_dialog_offline_save_title">Offline</string>

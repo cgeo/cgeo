@@ -86,7 +86,6 @@ public class Geocache implements ICache, IWaypoint {
     private String location = null;
     private Geopoint coords = null;
     private boolean reliableLatLon = false;
-    private Double elevation = null;
     private String personalNote = null;
     /**
      * lazy initialized
@@ -279,9 +278,6 @@ public class Geocache implements ICache, IWaypoint {
         if (coords == null) {
             coords = other.coords;
         }
-        if (elevation == null) {
-            elevation = other.elevation;
-        }
         // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
         if (personalNote == null) {
             personalNote = other.personalNote;
@@ -402,7 +398,6 @@ public class Geocache implements ICache, IWaypoint {
                 StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
                 (direction != null ? direction.equals(other.direction) : null == other.direction) &&
                 (distance != null ? distance.equals(other.distance) : null == other.distance) &&
-                (elevation != null ? elevation.equals(other.elevation) : null == other.elevation) &&
                 rating == other.rating &&
                 votes == other.votes &&
                 myVote == other.myVote &&
@@ -942,14 +937,6 @@ public class Geocache implements ICache, IWaypoint {
 
     public void setReliableLatLon(boolean reliableLatLon) {
         this.reliableLatLon = reliableLatLon;
-    }
-
-    public Double getElevation() {
-        return elevation;
-    }
-
-    public void setElevation(Double elevation) {
-        this.elevation = elevation;
     }
 
     public void setShortDescription(String shortdesc) {
