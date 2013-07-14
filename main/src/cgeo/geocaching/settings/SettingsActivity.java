@@ -79,7 +79,7 @@ public class SettingsActivity extends PreferenceActivity {
         public final int keyId;
         public final String defaultValue;
 
-        private DirChooserType(final int requestCode, final int keyId, final String defaultValue) {
+        DirChooserType(final int requestCode, final int keyId, final String defaultValue) {
             this.requestCode = requestCode;
             this.keyId = keyId;
             this.defaultValue = defaultValue;
