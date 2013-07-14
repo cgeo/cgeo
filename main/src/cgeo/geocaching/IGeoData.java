@@ -13,7 +13,6 @@ public interface IGeoData {
     public boolean isPseudoLocation();
 
     public Geopoint getCoords();
-    public double getAltitude();
     public float getBearing();
     public float getSpeed();
     public float getAccuracy();

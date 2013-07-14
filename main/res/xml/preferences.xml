@@ -162,11 +162,6 @@
             android:summary="@string/init_summary_ratingwanted"
             android:defaultValue="true" />
         <CheckBoxPreference 
-            android:key="@string/pref_elevationwanted"
-            android:title="@string/init_elevationwanted"
-            android:summary="@string/init_summary_elevationwanted"
-            android:defaultValue="false" />
-        <CheckBoxPreference 
             android:key="@string/pref_friendlogswanted"
             android:title="@string/init_friendlogswanted"
             android:summary="@string/init_summary_friendlogswanted"
@@ -372,18 +367,6 @@
                 android:summary="@string/init_summary_loaddirectionimg"
                 android:defaultValue="true" />
     
-        </PreferenceCategory>
-
-        <PreferenceCategory 
-            android:title="@string/init_altitude" >
-
-            <cgeo.geocaching.settings.NumberPickerPreference
-                android:key="@string/pref_altcorrection"
-                android:dialogLayout="@layout/number_picker_preference"
-                android:dialogMessage="@string/init_altitude_description"
-                android:title="@string/init_altitude"
-                android:defaultValue="0" />
-        
         </PreferenceCategory>
 
         <PreferenceCategory 

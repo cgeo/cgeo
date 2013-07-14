@@ -47,18 +47,6 @@ public class Units {
         return String.format(formatString + " %s", scaled.left, scaled.right);
     }
 
-    /**
-     * Get human readable elevation, depending on settings for metric units.
-     * Result is rounded to full meters/feet, as the sensors don't have that precision anyway.
-     *
-     * @param meters
-     * @return
-     */
-    public static String getElevation(float meters) {
-        final ImmutablePair<Double, String> scaled = scaleDistance(meters / 1000f);
-        return (meters >= 0 ? "↥ " : "↧ ") + String.format("%d %s", Math.abs(Math.round(scaled.left)), scaled.right);
-    }
-
     public static String getDistanceFromMeters(float meters) {
         return getDistanceFromKilometers(meters / 1000f);
     }

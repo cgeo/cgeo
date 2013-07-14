@@ -1756,16 +1756,6 @@ public abstract class GCParser {
             }
         }
 
-        if (Settings.isElevationWanted()) {
-            if (CancellableHandler.isCancelled(handler)) {
-                return;
-            }
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_elevation);
-            if (cache.getCoords() != null) {
-                cache.setElevation(cache.getCoords().getElevation());
-            }
-        }
-
         if (Settings.isRatingWanted()) {
             if (CancellableHandler.isCancelled(handler)) {
                 return;

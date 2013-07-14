@@ -341,8 +341,6 @@
   <string name="init_signature_template_owner">Propriétaire</string>
   <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
     <string name="init_summary_ratingwanted">Charger la note depuis GCvote.com</string>
-  <string name="init_elevationwanted">Charger l\'altitude de la cache</string>
-    <string name="init_summary_elevationwanted">Charger l\'altitude de la cache</string>
   <string name="init_friendlogswanted">Charger le carnet (amis)</string>
     <string name="init_summary_friendlogswanted">Charger le carnet (amis)</string>
   <string name="init_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
@@ -377,8 +375,8 @@
     <string name="init_summary_choose_list">Demander dans quelle liste sauver les caches.</string>
   <string name="init_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_summary_livelist">Afficher la direction des caches dans les listes</string>
-  <string name="init_altitude">Correction de l\'altitude</string>
-  <string name="init_altitude_description">Si le GPS indique une mauvaise altitude, vous pouvez la corriger avec une valeur en mètres, positive ou négative.</string>
+  <string name="init_clear">Effacer l\'identifiant</string>
+  <string name="init_cleared">c:geo a effacé votre identifiant.</string>
   <string name="init_backup">Sauvegarde</string>
   <string name="init_backup_backup">Sauvegarde</string>
   <string name="init_backup_running">Création de la copie de sauvegarde…</string>
@@ -509,7 +507,6 @@
   <string name="cache_dialog_loading_details_status_logs">Entrées du carnet</string>
   <string name="cache_dialog_loading_details_status_waypoints">Points intermédiaires</string>
   <string name="cache_dialog_loading_details_status_gcvote">Votes</string>
-  <string name="cache_dialog_loading_details_status_elevation">Altitude</string>
   <string name="cache_dialog_loading_details_status_cache">Sauvegarde des données</string>
   <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>

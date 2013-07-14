@@ -385,8 +385,6 @@
     <string name="init_signature_template_owner">Proprietario</string>
     <string name="init_ratingwanted">Carica il rating del cache da GCvote.com</string>
     <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
-    <string name="init_elevationwanted">Carica dati altitudine cache</string>
-    <string name="init_summary_elevationwanted">Carica dati altitudine cache</string>
     <string name="init_friendlogswanted">Carica logbook addizionale con i log dei miei amici</string>
     <string name="init_summary_friendlogswanted">Carica logbook addizionale con i log dei miei amici</string>
     <string name="init_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
@@ -421,8 +419,8 @@
     <string name="init_summary_choose_list">Chiedi la lista quando salvi un cache</string>
     <string name="init_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
     <string name="init_summary_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
-    <string name="init_altitude">Correzione di altitudine</string>
-    <string name="init_altitude_description">Se il GPS restituisce un\'errata altitudine, puoi correggerla inserendo un valore positivo o negativo, in metri.</string>
+    <string name="init_clear">Azzera login</string>
+    <string name="init_cleared">c:geo ha azzerato le informazioni di login.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creazione del backup del database dei cache in corso…</string>
@@ -570,7 +568,6 @@
     <string name="cache_dialog_loading_details_status_logs">Caricamento log</string>
     <string name="cache_dialog_loading_details_status_waypoints">Elaborazione waypoints</string>
     <string name="cache_dialog_loading_details_status_gcvote">Caricamento GCVote</string>
-    <string name="cache_dialog_loading_details_status_elevation">Caricamento dati di altitudine</string>
     <string name="cache_dialog_loading_details_status_cache">Salvataggio dati</string>
     <string name="cache_dialog_loading_details_status_render">Creazione pagina</string>
     <string name="cache_dialog_offline_save_title">Offline</string>

@@ -349,8 +349,6 @@
     <string name="init_signature_template_owner">Vlastník</string>
     <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
     <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
-    <string name="init_elevationwanted">Načítať údaje o stúpaní skrýše</string>
-    <string name="init_summary_elevationwanted">Načítať údaje o stúpaní skrýše</string>
     <string name="init_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
     <string name="init_summary_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
     <string name="init_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
@@ -383,8 +381,8 @@
     <string name="init_summary_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
     <string name="init_livelist">Zobrazovať smer v zozname skrýš</string>
     <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
-    <string name="init_altitude">Oprava výšky</string>
-    <string name="init_altitude_description">Keď vám GPS zobrazuje nesprávnu nadmorskú výšku, môžete ju opraviť zadaním kladného alebo záporného čísla. Oprava ja vždy v metroch.</string>
+    <string name="init_clear">Zmazať prihlasovacie údaje</string>
+    <string name="init_cleared">Prihlasovacie údaje zmazané.</string>
     <string name="init_backup">Záloha</string>
     <string name="init_backup_backup">Zálohovať</string>
     <string name="init_backup_running">Vytváranie zálohy databázy skrýš…</string>
@@ -515,7 +513,6 @@
     <string name="cache_dialog_loading_details_status_logs">Načítanie logov</string>
     <string name="cache_dialog_loading_details_status_waypoints">Spracovanie bodov trasy</string>
     <string name="cache_dialog_loading_details_status_gcvote">Načítanie GCVote</string>
-    <string name="cache_dialog_loading_details_status_elevation">Načítanie údajov o stúpaní</string>
     <string name="cache_dialog_loading_details_status_cache">Kešovanie údajov</string>
     <string name="cache_dialog_loading_details_status_render">Vykreslovanie pohľadu</string>
     <string name="cache_dialog_offline_save_title">Offline</string>

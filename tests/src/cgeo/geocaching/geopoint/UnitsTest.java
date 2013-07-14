@@ -42,39 +42,6 @@ public class UnitsTest extends CGeoTestCase {
 
     // Make method non-static so that Settings is initialized
     @SuppressWarnings("static-method")
-    public void testElevation() {
-        final boolean savedImperial = Settings.isUseImperialUnits();
-        try {
-            TestSettings.setUseImperialUnits(false);
-            assertElevation("↥ 123 m", 122.782f);
-            assertElevation("↥ 123 m", 123.456f);
-            assertElevation("↥ 12 m", 12.3456f);
-            assertElevation("↥ 1 m", 1.23456f);
-            assertElevation("↥ 2 m", 1.6f);
-            assertElevation("↥ 0 m", 0.123456f);
-            assertElevation("↧ 123 m", -122.782f);
-            assertElevation("↧ 123 m", -123.456f);
-            assertElevation("↧ 12 m", -12.3456f);
-            assertElevation("↧ 1 m", -1.23456f);
-            assertElevation("↧ 2 m", -1.6f);
-            assertElevation("↧ 0 m", -0.123456f);
-            TestSettings.setUseImperialUnits(true);
-            assertElevation("↥ 405 ft", 123.456f);
-            assertElevation("↥ 41 ft", 12.3456f);
-        } finally {
-            TestSettings.setUseImperialUnits(savedImperial);
-        }
-    }
-
-    private static void assertElevation(final String expected, final float meters) {
-        final String actual = Units.getElevation(meters);
-        if (!StringUtils.equals(expected, actual.replace(',', '.'))) {
-            fail("elevation " + actual + " does not match expected " + expected);
-        }
-    }
-
-    // Make method non-static so that Settings is initialized
-    @SuppressWarnings("static-method")
     public void testSpeed() {
         assertEquals("?", Units.getDistanceFromKilometers(null));
         final boolean savedImperial = Settings.isUseImperialUnits();

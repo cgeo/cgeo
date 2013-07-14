@@ -412,8 +412,6 @@
     <string name="init_signature_template_owner">Owner</string>
     <string name="init_ratingwanted">GCvote Rating</string>
     <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
-    <string name="init_elevationwanted">Elevation Data</string>
-    <string name="init_summary_elevationwanted">Load cache elevation data</string>
     <string name="init_friendlogswanted">Friend\'s Logs</string>
     <string name="init_summary_friendlogswanted">Load additional logbook page for logs from friends</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
@@ -448,8 +446,8 @@
     <string name="init_summary_choose_list">Ask for list when storing caches</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show Direction to caches in the list</string>
-    <string name="init_altitude">Altitude Correction (m)</string>
-    <string name="init_altitude_description">If your GPS is calculating a wrong altitude, you can correct it with a positive or negative number. The correction always has to be given in meters.</string>
+    <string name="init_clear">Clear Login</string>
+    <string name="init_cleared">c:geo cleared login information.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creating backup of cache database…</string>
@@ -610,7 +608,6 @@
     <string name="cache_dialog_loading_details_status_logs">Loading logs</string>
     <string name="cache_dialog_loading_details_status_waypoints">Processing waypoints</string>
     <string name="cache_dialog_loading_details_status_gcvote">Loading GCVote</string>
-    <string name="cache_dialog_loading_details_status_elevation">Loading elevation data</string>
     <string name="cache_dialog_loading_details_status_cache">Caching Data</string>
     <string name="cache_dialog_loading_details_status_render">Render view</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
