@@ -19,14 +19,14 @@ import java.util.List;
 
 public class OkapiLoggingManager implements ILoggingManager {
 
-    private final OCApiConnector connector;
+    private final OCApiLiveConnector connector;
     private final Geocache cache;
     private LogCacheActivity activity;
 
     private final static List<LogType> standardLogTypes = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE, LogType.NEEDS_MAINTENANCE);
     private final static List<LogType> eventLogTypes = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
 
-    public OkapiLoggingManager(Activity activity, OCApiConnector connector, Geocache cache) {
+    public OkapiLoggingManager(Activity activity, OCApiLiveConnector connector, Geocache cache) {
         this.connector = connector;
         this.cache = cache;
         this.activity = (LogCacheActivity) activity;
@@ -39,7 +39,9 @@ public class OkapiLoggingManager implements ILoggingManager {
 
     @Override
     public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, String logPassword, List<TrackableLog> trackableLogs) {
-        return OkapiClient.postLog(cache, logType, date, log, logPassword, connector);
+        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector);
+        connector.login(null, null);
+        return result;
     }
 
     @Override
