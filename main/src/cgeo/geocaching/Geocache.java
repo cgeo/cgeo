@@ -788,11 +788,6 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     @Override
-    public boolean isWatchlist() {
-        return onWatchlist;
-    }
-
-    @Override
     public Date getHiddenDate() {
         return hidden;
     }
@@ -979,6 +974,7 @@ public class Geocache implements ICache, IWaypoint {
         this.inventoryItems = inventoryItems;
     }
 
+    @Override
     public boolean isOnWatchlist() {
         return onWatchlist;
     }

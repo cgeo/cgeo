@@ -93,7 +93,7 @@ public interface ICache extends IBasicCache {
      * @return true if the cache is on the watchlist of the user
      *
      */
-    public boolean isWatchlist();
+    public boolean isOnWatchlist();
 
     /**
      * @return The date the cache has been hidden

@@ -129,7 +129,7 @@ public abstract class MockedCache implements ICache {
     }
 
     @Override
-    public boolean isWatchlist() {
+    public boolean isOnWatchlist() {
         return false;
     }
 

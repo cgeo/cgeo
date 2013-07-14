@@ -38,7 +38,7 @@ public abstract class Compare {
             assertEquals(expected.getLocation(), actual.getLocation());
             assertEquals(expected.isFound(), actual.isFound());
             assertEquals(expected.isFavorite(), actual.isFavorite());
-            assertEquals(expected.isWatchlist(), actual.isWatchlist());
+            assertEquals(expected.isOnWatchlist(), actual.isOnWatchlist());
 
             for (String attribute : expected.getAttributes()) {
                 assertTrue("Expected attribute '" + attribute + "' not found in " + actual.getGeocode(), actual.getAttributes().contains(attribute));

@@ -3,6 +3,8 @@
 # Suppress notes about classes from the general config, which we don't use at all. 
 -dontnote **.ILicensingService
 
+-printusage usage.txt
+
 -optimizationpasses 2
 -dontobfuscate
 -allowaccessmodification
