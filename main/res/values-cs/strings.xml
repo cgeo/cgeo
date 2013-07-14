@@ -359,7 +359,7 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Uživatelské jméno</string>
     <string name="init_password">Heslo</string>
-    <string name="init_login">Zkontrolovat a uložit</string>
+    <string name="init_login">Zkontrolovat</string>
     <string name="init_login_popup">Přihlášení</string>
     <string name="init_login_popup_working">Přihlašování…</string>
     <string name="init_login_popup_ok">Přihlášení bylo úspěšné</string>

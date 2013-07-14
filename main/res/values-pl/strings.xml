@@ -357,7 +357,7 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Nazwa użytkownika</string>
     <string name="init_password">Hasło</string>
-    <string name="init_login">Sprawdź i zapisz nazwę użytkownika</string>
+    <string name="init_login">Sprawdź nazwę użytkownika</string>
     <string name="init_login_popup">Nazwa użytkownika</string>
     <string name="init_login_popup_working">Logowanie…</string>
     <string name="init_login_popup_ok">Nazwa użytkownika OK</string>

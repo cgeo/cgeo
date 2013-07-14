@@ -133,7 +133,6 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Brugernavn</string>
     <string name="init_password">Password</string>
-    <string name="init_login">Check login</string>
     <string name="init_twitter_authorize">Godkend c:geo</string>
     <string name="init_signature">Signatur</string>
     <string name="init_skin">Light skin (genstart af c:geo nødvendig)</string>

@@ -365,7 +365,7 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Användare</string>
     <string name="init_password">Lösenord</string>
-    <string name="init_login">Testa och spara inloggning</string>
+    <string name="init_login">Testa inloggning</string>
     <string name="init_login_popup">Inloggning</string>
     <string name="init_login_popup_working">Testar inloggning mot gc.com…</string>
     <string name="init_login_popup_ok">Inloggning OK</string>

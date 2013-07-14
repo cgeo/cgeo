@@ -324,7 +324,7 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Felhasználónév</string>
     <string name="init_password">Jelszó</string>
-    <string name="init_login">Belépés &amp; dátumformátum beállítása</string>
+    <string name="init_login">Belépés</string>
     <string name="init_login_popup">Belépés</string>
     <string name="init_login_popup_working">Belépés a geocaching.com-ra…</string>
     <string name="init_login_popup_ok">Belépés ok.</string>
