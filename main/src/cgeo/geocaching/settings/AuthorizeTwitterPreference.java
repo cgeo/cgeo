@@ -31,7 +31,7 @@ public class AuthorizeTwitterPreference extends Preference {
             public boolean onPreferenceClick(Preference preference) {
                 Intent authIntent = new Intent(preference.getContext(),
                         TwitterAuthorizationActivity.class);
-                ((Activity) preference.getContext()).startActivity(authIntent);
+                preference.getContext().startActivity(authIntent);
 
                 return false; // no shared preference has to be changed
             }
