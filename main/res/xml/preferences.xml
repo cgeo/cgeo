@@ -195,6 +195,62 @@
     </PreferenceScreen>
 
     <PreferenceScreen
+        android:title="@string/settings_title_map"
+        android:icon="?attr/settings_map" >
+
+        <PreferenceCategory 
+            android:title="@string/settings_title_map_data" >
+
+            <ListPreference
+                android:key="@string/pref_mapsource"
+                android:title="@string/init_mapsource_select"
+                android:dialogTitle="@string/init_mapsource_select"
+                android:defaultValue="0" />
+    
+            <cgeo.geocaching.settings.InfoPreference 
+                android:title="@string/settings_info_offline_maps_title"
+                android:text="@string/settings_info_offline_maps"
+                cgeo:url="@string/settings_offline_maps_url"
+                cgeo:urlButton="@string/settings_goto_url_button" />
+    
+            <Preference
+                android:key="@string/pref_mapDirectory"
+                android:title="@string/init_map_directory_description" />
+    
+            <cgeo.geocaching.settings.InfoPreference 
+                android:title="@string/settings_info_themes_title"
+                android:text="@string/settings_info_themes"
+                cgeo:url="@string/settings_themes_url"
+                cgeo:urlButton="@string/settings_goto_url_button" />
+    
+            <Preference
+                android:key="@string/pref_renderthemepath"
+                android:title="@string/init_rendertheme_folder" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory 
+            android:title="@string/settings_title_map_content" >
+    
+            <Preference
+                android:title="@string/init_showwaypoints"
+                android:summary="@string/init_showwaypoint_description"
+                android:selectable="false" />
+            <cgeo.geocaching.settings.WpThresholdPreference
+                android:key="@string/pref_gcshowwaypointsthreshold"
+                android:layout="@layout/wp_threshold_preference" />
+
+            <CheckBoxPreference 
+                android:key="@string/pref_maptrail"
+                android:title="@string/init_maptrail"
+                android:summary="@string/init_summary_maptrail"
+                android:defaultValue="true" />
+
+        </PreferenceCategory>
+
+    </PreferenceScreen>
+
+    <PreferenceScreen
         android:title="@string/settings_title_logging"
         android:icon="?attr/settings_pen" >
 
@@ -253,62 +309,6 @@
             android:title="@string/init_choose_list"
             android:summary="@string/init_summary_choose_list"
             android:defaultValue="false" />
-
-    </PreferenceScreen>
-
-    <PreferenceScreen
-        android:title="@string/settings_title_map"
-        android:icon="?attr/settings_map" >
-
-        <PreferenceCategory 
-            android:title="@string/settings_title_map_data" >
-
-            <ListPreference
-                android:key="@string/pref_mapsource"
-                android:title="@string/init_mapsource_select"
-                android:dialogTitle="@string/init_mapsource_select"
-                android:defaultValue="0" />
-    
-            <cgeo.geocaching.settings.InfoPreference 
-                android:title="@string/settings_info_offline_maps_title"
-                android:text="@string/settings_info_offline_maps"
-                cgeo:url="@string/settings_offline_maps_url"
-                cgeo:urlButton="@string/settings_goto_url_button" />
-    
-            <Preference
-                android:key="@string/pref_mapDirectory"
-                android:title="@string/init_map_directory_description" />
-    
-            <cgeo.geocaching.settings.InfoPreference 
-                android:title="@string/settings_info_themes_title"
-                android:text="@string/settings_info_themes"
-                cgeo:url="@string/settings_themes_url"
-                cgeo:urlButton="@string/settings_goto_url_button" />
-    
-            <Preference
-                android:key="@string/pref_renderthemepath"
-                android:title="@string/init_rendertheme_folder" />
-
-        </PreferenceCategory>
-
-        <PreferenceCategory 
-            android:title="@string/settings_title_map_content" >
-    
-            <Preference
-                android:title="@string/init_showwaypoints"
-                android:summary="@string/init_showwaypoint_description"
-                android:selectable="false" />
-            <cgeo.geocaching.settings.WpThresholdPreference
-                android:key="@string/pref_gcshowwaypointsthreshold"
-                android:layout="@layout/wp_threshold_preference" />
-
-            <CheckBoxPreference 
-                android:key="@string/pref_maptrail"
-                android:title="@string/init_maptrail"
-                android:summary="@string/init_summary_maptrail"
-                android:defaultValue="true" />
-
-        </PreferenceCategory>
 
     </PreferenceScreen>
 
