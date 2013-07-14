@@ -110,10 +110,10 @@ public class SpeechService extends Service implements OnInitListener {
     private static float getDeltaForDistance(final float distance) {
         if (distance > 1.0) {
             return 0.2f;
-        } else if (distance > 0.05) {
+        }
+        if (distance > 0.05) {
             return distance / 5.0f;
         }
-
         return 0f;
     }
 
