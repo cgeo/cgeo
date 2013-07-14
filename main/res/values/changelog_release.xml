@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+   <b>Next bugfix release</b>\n
+    <b>Changes:</b>\n
+    · A warning message is shown if an android version less than 2.1 is used\n
+      c:geo will no longer support these devices starting with the next main release\n
+    \n
+    \n
     <b>2013.06.05</b>\n
     <b>Bugfixing:</b>\n
     · Adaption to changes on gc.com (Logging date could be wrong in some cases)\n
