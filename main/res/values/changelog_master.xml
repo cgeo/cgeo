@@ -3,7 +3,44 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release</b>\n
-    <b>Bugfixing:</b>\n
-    · Various bug fixes
+    <b>New Features:</b>\n
+    · Talking compass (select \"Start talking\" while compass is active)\n
+    · New menu structure for c:geo settings\n
+    · Implemenation of OKAPI interface for opencaching.de\n
+      Support of live map, nearby search and online logging\n
+    · Support uploading and merging of personal note to gc.com\n
+    · Improved input method for editing personal note\n
+    · Removed help function integration as it is no longer maintained by the author\n
+      You can still access it online. Link in \"About c:geo\"\n
+    · Added \"Pocket Query Creator\" to the list of useful apps\n
+    · Suport importing PQs created by \"Pocket Query Creator\"\n
+    · Detect if no internet connection is available when trying to download caches\n
+    · Added image scaling for log images to be uploaded\n
+    · Support hyperlinks in existing logbook entries\n
+    · New filter on nearby results to filter out stored caches\n
+    · Convert coordinates to different formats by clicking on them also for waypoints\n
+    \n
+    <b>Bugfixes:</b>\n
+    · Enable GPX import option also on virtual all caches list\n
+    · Support GeoTour attribute\n
+    · Support of Block Party cache type\n
+    · Support of GPS Adventure Exhibit cache type\n
+    · Circles on the map only for physical stages\n
+    · Cache archived status not correctly refreshed\n
+    · Bad title shown when invoking c:geo from email (import operation)\n
+    · Avoid crash when log images is too large\n
+    · Save cache before allowing to add or edit a personal note\n
+    · Automatically use log type \"Attended\" if the date of an event cache is in the past\n
+    · Use log type \"Note\" for event caches if they are already logged as \"Attended\"\n
+    · Avoid to accidently set the log type to \"Needs archived\" while loading the log page is still in progress\n
+    · Ignore hiding of owned caches when explicitly searching for owned caches\n
+    · Do not allow to select \"..\" as valid source directory for files\n
+    · Exclude inaccessible directories from selection list\n
+    · Do not show the short description of an oc.de cache if it is identical to the long description\n
+    · Sorting of lists by cache name did not respect country specific characters\n
+    · Avoid crash when deleting all caches including the list\n
+    · Logging progress message keeps showing when tapping on the screen\n
+    · Try to additionally detect the waypoint type when reading out coordinates from the personal note\n
+    · Show the image uploaded with a log in the logbook without the need to refresh the cache before\n
   </string>
 </resources>
