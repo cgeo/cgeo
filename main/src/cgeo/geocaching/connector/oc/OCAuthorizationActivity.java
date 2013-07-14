@@ -9,8 +9,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
-    private final int siteResId = R.string.auth_ocde;
-
     public OCAuthorizationActivity() {
         super("www.opencaching.de",
                 "/okapi/services/oauth/request_token",
@@ -38,7 +36,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
     @Override
     protected String getAuthTitle() {
-        return res.getString(siteResId);
+        return res.getString(R.string.auth_ocde);
     }
 
     @Override

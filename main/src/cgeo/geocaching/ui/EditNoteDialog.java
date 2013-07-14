@@ -20,7 +20,6 @@ public class EditNoteDialog extends DialogFragment {
     public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
 
     private EditText mEditText;
-    private String initialNote;
 
     public static EditNoteDialog newInstance(final String initialNote) {
         EditNoteDialog dialog = new EditNoteDialog();
@@ -37,7 +36,7 @@ public class EditNoteDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_edit_note, null);
         mEditText = (EditText) view.findViewById(R.id.note);
-        initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
+        String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             mEditText.setText(initialNote);
             initialNote = null;

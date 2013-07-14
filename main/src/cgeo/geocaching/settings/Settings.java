@@ -77,7 +77,6 @@ public final class Settings {
 
     // maps
     private static MapProvider mapProvider = null;
-    private static String cacheTwitterMessage = "I found [NAME] ([URL])";
 
     private Settings() {
         // this class is not to be instantiated;
@@ -914,7 +913,7 @@ public final class Settings {
 
     public static String getCacheTwitterMessage() {
         // TODO make customizable from UI
-        return cacheTwitterMessage;
+        return "I found [NAME] ([URL])";
     }
 
     public static String getTrackableTwitterMessage() {
