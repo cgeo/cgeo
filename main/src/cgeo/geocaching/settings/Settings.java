@@ -68,9 +68,6 @@ public final class Settings {
         }
     }
 
-    private static String username = null;
-    private static String password = null;
-
     private static final SharedPreferences sharedPrefs = PreferenceManager
             .getDefaultSharedPreferences(cgeoapplication.getInstance().getBaseContext());
     static {
@@ -267,22 +264,19 @@ public final class Settings {
      * @return a pair (login, password) or null if no valid information is stored
      */
     public static ImmutablePair<String, String> getGcLogin() {
+
+        final String username = getString(R.string.pref_username, null);
+        final String password = getString(R.string.pref_password, null);
+
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            final String preUsername = getString(R.string.pref_username, null);
-            final String prePassword = getString(R.string.pref_password, null);
-
-            if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
                 return null;
-            }
-
-            username = preUsername;
-            password = prePassword;
         }
+
         return new ImmutablePair<String, String>(username, password);
     }
 
     public static String getUsername() {
-        return username != null ? username : getString(R.string.pref_username, null);
+        return getString(R.string.pref_username, null);
     }
 
     public static boolean isGCConnectorActive() {
@@ -956,8 +950,7 @@ public final class Settings {
     }
 
     static boolean setLogin(final String username, final String password) {
-        Settings.username = username;
-        Settings.password = password;
+
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             // erase username and password
             boolean a = remove(R.string.pref_username);
