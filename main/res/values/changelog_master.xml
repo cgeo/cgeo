@@ -32,7 +32,7 @@
     · Save cache before allowing to add or edit a personal note\n
     · Automatically use log type \"Attended\" if the date of an event cache is in the past\n
     · Use log type \"Note\" for event caches if they are already logged as \"Attended\"\n
-    · Avoid to accidently set the log type to \"Needs archived\" while loading the log page is still in progress\n
+    · Avoid to accidentally set the log type to \"Needs archived\" while loading the log page is still in progress\n
     · Ignore hiding of owned caches when explicitly searching for owned caches\n
     · Do not allow to select \"..\" as valid source directory for files\n
     · Exclude inaccessible directories from selection list\n
