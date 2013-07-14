@@ -367,7 +367,7 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Utente</string>
     <string name="init_password">Password</string>
-    <string name="init_login">Verifica e salva login</string>
+    <string name="init_login">Verifica login</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logging…</string>
     <string name="init_login_popup_ok">Login OK.</string>

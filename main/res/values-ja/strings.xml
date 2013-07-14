@@ -334,7 +334,7 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">ユーザ名</string>
     <string name="init_password">パスワード</string>
-    <string name="init_login">ログイン確認とログイン情報を保存</string>
+    <string name="init_login">ログイン確認とログイ</string>
     <string name="init_login_popup">ログイン</string>
     <string name="init_login_popup_working">ログイン中…</string>
     <string name="init_login_popup_ok">ログイン完了</string>
