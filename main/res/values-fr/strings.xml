@@ -323,7 +323,7 @@
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Identifiant</string>
   <string name="init_password">Mot de passe</string>
-  <string name="init_login">Vérification de l\'identifiant &amp; du format de date</string>
+  <string name="init_login">Vérification de l\'identifiant</string>
   <string name="init_login_popup">Connexion</string>
   <string name="init_login_popup_working">Connexion…</string>
   <string name="init_login_popup_ok">Identifiants OK</string>

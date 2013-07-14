@@ -391,7 +391,7 @@
     <string name="settings_activate_twitter">Aktivieren</string>
     <string name="init_username">Benutzername</string>
     <string name="init_password">Passwort</string>
-    <string name="init_login">Anmeldedaten überprüfen und speichern</string>
+    <string name="init_login">Anmeldedaten überprüfen</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Anmeldung…</string>
     <string name="init_login_popup_ok">Login OK</string>

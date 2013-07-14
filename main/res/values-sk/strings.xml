@@ -331,7 +331,7 @@
     <string name="init_twitter">Twitter</string>
     <string name="init_username">používateľské meno</string>
     <string name="init_password">heslo</string>
-    <string name="init_login">Kontrola prihlásenia a nastavenie formátu dátumu</string>
+    <string name="init_login">Kontrola prihlásenia</string>
     <string name="init_login_popup">Prihlasovanie</string>
     <string name="init_login_popup_working">Prihlasovanie na Geocaching.com…</string>
     <string name="init_login_popup_ok">Prihlásenie úspešné</string>
