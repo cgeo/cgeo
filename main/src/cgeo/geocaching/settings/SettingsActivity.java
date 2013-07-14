@@ -213,17 +213,6 @@ public class SettingsActivity extends PreferenceActivity {
         pref.setEntryValues(values);
     }
 
-    /**
-     * Fire up a directory chooser on click on the preference.
-     *
-     * @see #onActivityResult() for processing of the selected directory
-     *
-     * @param key
-     *            key of the preference
-     * @param defaultValue
-     *            default directory - in case the preference has never been
-     *            set yet
-     */
     private void initDirChoosers() {
         for (final DirChooserType dct : DirChooserType.values()) {
 
@@ -249,6 +238,14 @@ public class SettingsActivity extends PreferenceActivity {
                 });
     }
 
+    /**
+     * Fire up a directory chooser on click on the preference.
+     *
+     * @see #onActivityResult() for processing of the selected directory
+     *
+     * @param dct
+     *            type of directory to be selected
+     */
     private void startDirChooser(final DirChooserType dct) {
 
         final String startDirectory = Settings.getString(dct.keyId, dct.defaultValue);
