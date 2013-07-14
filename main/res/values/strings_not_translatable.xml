@@ -33,9 +33,6 @@
         <item>1024</item>
     </integer-array>
     
-    <string name="button_plus">+</string>
-    <string name="button_minus">-</string>
-    
     <string name="settings_gc_legal_note_url" translatable="false">http://www.geocaching.com/about/termsofuse.aspx</string>
     <string name="settings_offline_maps_url" translatable="false">http://faq.cgeo.org/#3_12</string>
     <string name="settings_themes_url" translatable="false">http://faq.cgeo.org/#3_26</string>
