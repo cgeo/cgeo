@@ -2,7 +2,6 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.connector.oc.OCAuthorizationActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;

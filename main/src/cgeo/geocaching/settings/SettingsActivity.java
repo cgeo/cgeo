@@ -500,26 +500,6 @@ public class SettingsActivity extends PreferenceActivity {
         bindSummaryToValue(pref, value);
     }
 
-    /**
-     * auto-care for the summary of the preference of int type with this key
-     *
-     * @param key
-     */
-    private static void bindSummaryToIntValue(final PreferenceActivity preferenceActivity, final String key) {
-
-        Preference pref = findPreference(preferenceActivity, key);
-
-        if (pref == null) {
-            return;
-        }
-
-        int value = PreferenceManager
-                .getDefaultSharedPreferences(pref.getContext())
-                .getInt(pref.getKey(), 0);
-
-        bindSummaryToValue(pref, value);
-    }
-
     @SuppressWarnings("deprecation")
     public static Preference findPreference(final PreferenceActivity preferenceActivity, final CharSequence key) {
         return preferenceActivity.findPreference(key);
