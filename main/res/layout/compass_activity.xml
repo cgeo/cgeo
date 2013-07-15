@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
     android:orientation="vertical" >
 
+    <include layout="@layout/actionbar" />
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
     <LinearLayout
         android:id="@+id/info1"
         android:layout_width="fill_parent"
@@ -113,3 +119,4 @@
         android:padding="4dip" />
 
 </RelativeLayout>
+</LinearLayout>
