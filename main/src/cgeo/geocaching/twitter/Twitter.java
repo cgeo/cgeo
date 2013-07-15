@@ -70,7 +70,7 @@ public final class Twitter {
         }
     }
 
-    private static String getStatusMessage(Geocache cache) {
+    static String getStatusMessage(Geocache cache) {
         String name = cache.getName();
         if (name.length() > 100) {
             name = name.substring(0, 100) + '…';
@@ -79,7 +79,7 @@ public final class Twitter {
         return fillTemplate(Settings.getCacheTwitterMessage(), name, url);
     }
 
-    private static String getStatusMessage(Trackable trackable) {
+    static String getStatusMessage(Trackable trackable) {
         String name = trackable.getName();
         if (name.length() > 82) {
             name = name.substring(0, 81) + '…';
