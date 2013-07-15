@@ -19,6 +19,10 @@
     · Support hyperlinks in existing logbook entries\n
     · New filter on nearby results to filter out stored caches\n
     · Convert coordinates to different formats by clicking on them also for waypoints\n
+    · Use \"Today\" and \"Yesterday\" as date for logbook entries\n
+    · Support smilies also for trackable logs\n
+    · Starting Bike navigation for Google navigation added\n
+    · Support importing LOC files from waymarking.com\n
     \n
     <b>Bugfixes:</b>\n
     · Enable GPX import option also on virtual all caches list\n
@@ -42,5 +46,10 @@
     · Logging progress message keeps showing when tapping on the screen\n
     · Try to additionally detect the waypoint type when reading out coordinates from the personal note\n
     · Show the image uploaded with a log in the logbook without the need to refresh the cache before\n
+    · Improvements to GPX import and export\n
+    · Ask for list to save caches when importing GPX\n
+    · Show basic Geokrety information for OC-caches\n
+    · Improved the map source selection for offline maps\n
+    · Avoid crashes when using the QR-code scanner\n
   </string>
 </resources>
