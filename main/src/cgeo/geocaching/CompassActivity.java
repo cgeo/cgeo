@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
@@ -120,6 +121,20 @@ public class CompassActivity extends AbstractActivity {
         compassView.destroyDrawingCache();
         SpeechService.stopService(this);
         super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        setContentView(R.layout.compass_activity);
+        Views.inject(this);
+
+        setTitle();
+        setDestCoords();
+        setCacheInfo();
+
+        geoDirHandler.updateAll();
     }
 
     @Override

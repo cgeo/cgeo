@@ -321,6 +321,7 @@
         </activity>
         <activity
             android:name=".CompassActivity"
+            android:configChanges="orientation"
             android:label="@string/compass_title" >
         </activity>
         <activity
