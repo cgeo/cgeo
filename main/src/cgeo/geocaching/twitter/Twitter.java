@@ -35,8 +35,8 @@ public final class Twitter {
                         "display_coordinates", "true");
             }
 
-            OAuth.signOAuth("api.twitter.com", "/1/statuses/update.json", "POST", false, parameters, Settings.getTokenPublic(), Settings.getTokenSecret());
-            final HttpResponse httpResponse = Network.postRequest("http://api.twitter.com/1/statuses/update.json", parameters);
+            OAuth.signOAuth("api.twitter.com", "/1.1/statuses/update.json", "POST", false, parameters, Settings.getTokenPublic(), Settings.getTokenSecret());
+            final HttpResponse httpResponse = Network.postRequest("http://api.twitter.com/1.1/statuses/update.json", parameters);
             if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
                 Log.i("Tweet posted");
             } else {
