@@ -907,10 +907,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 NavigationAppFactory.showNavigationMenu(this, cache, null, null);
                 break;
             case MENU_CACHE_DETAILS:
-                final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-                cachesIntent.putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
-                cachesIntent.putExtra(Intents.EXTRA_NAME, cache.getName());
-                startActivity(cachesIntent);
+                CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
                 break;
             case MENU_DROP_CACHE:
                 cache.drop(new Handler() {

@@ -1,9 +1,9 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.files.LocalStorage;
-import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HeaderElement;
@@ -317,12 +317,13 @@ public abstract class Network {
             return null;
         }
 
-        final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
+        final String etag = LocalStorage.getSavedHeader(cacheFile, LocalStorage.HEADER_ETAG);
         if (etag != null) {
             return new Parameters("If-None-Match", etag);
+            //FIXME: This seems to be wrong. Shouldn't we check for both headers instead of returning after finding the first?
         }
 
-        final String lastModified = LocalStorage.getSavedHeader(cacheFile, "last-modified");
+        final String lastModified = LocalStorage.getSavedHeader(cacheFile, LocalStorage.HEADER_LAST_MODIFIED);
         if (lastModified != null) {
             return new Parameters("If-Modified-Since", lastModified);
         }
@@ -476,10 +477,10 @@ public abstract class Network {
 
     /**
      * Checks if the device has network connection.
-     * 
+     *
      * @param context
      *            context of the application, cannot be null
-     * 
+     *
      * @return <code>true</code> if the device is connected to the network.
      */
     public static boolean isNetworkConnected(Context context) {

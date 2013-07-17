@@ -31,6 +31,9 @@ import java.io.OutputStream;
  */
 public class LocalStorage {
 
+    public static final String HEADER_LAST_MODIFIED = "last-modified";
+    public static final String HEADER_ETAG = "etag";
+
     /** Name of the local private directory used to hold cached information */
     public final static String cache = ".cgeo";
 
@@ -177,8 +180,8 @@ public class LocalStorage {
 
         try {
             final boolean saved = saveToFile(response.getEntity().getContent(), targetFile);
-            saveHeader("etag", saved ? response : null, targetFile);
-            saveHeader("last-modified", saved ? response : null, targetFile);
+            saveHeader(HEADER_ETAG, saved ? response : null, targetFile);
+            saveHeader(HEADER_LAST_MODIFIED, saved ? response : null, targetFile);
             return saved;
         } catch (IOException e) {
             Log.e("LocalStorage.saveEntityToFile", e);

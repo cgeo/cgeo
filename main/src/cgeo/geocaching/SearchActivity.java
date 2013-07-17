@@ -127,9 +127,7 @@ public class SearchActivity extends AbstractActivity {
 
         final IConnector connector = ConnectorFactory.getConnector(geocode);
         if (connector instanceof ISearchByGeocode) {
-            final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-            cachesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
-            startActivity(cachesIntent);
+            CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
             return true;
         }
 

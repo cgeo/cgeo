@@ -89,7 +89,13 @@
                 <filter token="ocde.okapi.consumer.secret" value="${ocde.okapi.consumer.secret}"/>
             </filterset>
         </copy>
-    </target>
+        <copy file="./templates/ocpl_okapi.xml" todir="./res/values/" overwrite="true">
+            <filterset>
+                <filter token="ocpl.okapi.consumer.key" value="${ocpl.okapi.consumer.key}"/>
+                <filter token="ocpl.okapi.consumer.secret" value="${ocpl.okapi.consumer.secret}"/>
+            </filterset>
+        </copy>
+        </target>
 
 <!-- start of modifications for android annotations, see https://github.com/excilys/androidannotations/wiki/Building-Project-Ant -->
 	<property name="generated.dir" value="annotation_gen" />

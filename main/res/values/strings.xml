@@ -141,32 +141,32 @@
     <!-- translation -->
     <string name="translate_to_sys_lang">Translate to %s</string>
     <string name="translate_to_english">Translate to English</string>
-    <string name="translate_length_warning">Translate may fail with large amounts of text.</string>
+    <string name="translate_length_warning">Translation may fail with a large amount of text.</string>
 
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_start">Communication not started</string>
     <string name="err_parse">Failed Login page parsing</string>
-    <string name="err_server">Unable to contact Geocaching.com. The website may be down or your Internet connection not working.</string>
+    <string name="err_server">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_login">No Login information stored</string>
     <string name="err_login_failed">c:geo can\'t log in.</string>
-    <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check your Login settings or enable Internet connection.</string>
+    <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check Login settings or enable your internet connection.</string>
     <string name="err_unknown">Unknown error</string>
     <string name="err_comm">Unknown communication error</string>
     <string name="err_missing_auth">No username and/or password set.</string>
     <string name="err_wrong">Login information incorrect</string>
     <string name="err_maintenance">Geocaching.com is down for maintenance. c:geo works offline with Stored caches.</string>
-    <string name="err_license">You have not agreed to Geocaching.com license agreement, so c:geo can\'t load cache coordinates.</string>
-    <string name="err_unvalidated_account">You must validate your account on Geocaching.com web site first.</string>
+    <string name="err_license">You have not agreed to the Geocaching.com license agreement, so c:geo can\'t load cache coordinates.</string>
+    <string name="err_unvalidated_account">You must validate your account on the Geocaching.com website first.</string>
     <string name="err_unpublished">The requested cache is unpublished.</string>
     <string name="err_premium_only">This Cache is only available to Geocaching.com Premium Members.</string>
     <string name="err_detail_open">c:geo can\'t open geocache details.</string>
     <string name="err_detail_cache">c:geo can\'t display the geocache you want. Is it really a geocache?</string>
     <string name="err_detail_cache_find">c:geo can\'t find geocache</string>
     <string name="err_detail_cache_find_some">c:geo can\'t find that geocache.</string>
-    <string name="err_detail_cache_find_any">c:geo can\'t find any geocache.</string>
+    <string name="err_detail_cache_find_any">c:geo can\'t find any geocaches.</string>
     <string name="err_detail_cache_forgot">c:geo forgot which geocache you want.</string>
-    <string name="err_detail_google_maps_limit_reached">c:geo failed to download static maps. Maybe google maps limit is reached.</string>
+    <string name="err_detail_google_maps_limit_reached">c:geo failed to download static maps. Maybe the Google Maps API limit was reached.</string>
     <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
     <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
     <string name="err_detail_not_load_map_static">c:geo failed to load static maps.</string>
@@ -176,7 +176,7 @@
     <string name="err_application_no">c:geo can\'t find any suitable application.</string>
     <string name="err_auth_initialize">c:geo failed to initialize authorization process.</string>
     <string name="err_auth_process">Authorization process failed.</string>
-    <string name="err_cannot_log_visit">c:geo is unable to log your visit. Please log your visit from full cache details screen.</string>
+    <string name="err_cannot_log_visit">c:geo is unable to log your visit. Please log your visit from the full cache details screen.</string>
     <string name="err_download_fail">c:geo failed to download caches.</string>
     <string name="err_dwld_details_failed">c:geo failed to download cache details.</string>
     <string name="err_load_descr_failed">c:geo can\'t load description.</string>
@@ -185,19 +185,19 @@
     <string name="err_favorite_failed">Changing favorite status failed.</string>
     <string name="err_select_logimage_failed">Selecting an image for the log failed.</string>
     <string name="err_acquire_image_failed">Acquiring an image failed.</string>
-    <string name="err_tb_display">c:geo can\'t display trackable you want. Is it really a trackable?</string>
+    <string name="err_tb_display">c:geo can\'t display the trackable you want. Is it really a trackable?</string>
     <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
     <string name="err_tb_forgot_saw">c:geo forgot which trackable you saw.</string>
     <string name="err_tb_find">c:geo can\'t find trackable</string>
     <string name="err_tb_find_that">c:geo can\'t find that trackable.</string>
-    <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add waypoint.</string>
+    <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add a waypoint for.</string>
     <string name="err_waypoint_add_failed">c:geo failed to add your waypoint.</string>
     <string name="err_point_unknown_position">c:geo can\'t recognize where you are.</string>
     <string name="err_point_no_position_given_title">Info required</string>
-    <string name="err_point_no_position_given">Fill at least latitude or longitude or distance and bearing. You can also fill all four fields.</string>
+    <string name="err_point_no_position_given">Fill at least latitude and longitude or distance and bearing. You can also fill all four fields.</string>
     <string name="err_point_curr_position_unavailable">c:geo still doesn\'t have current coordinates. Please, wait a while…</string>
     <string name="err_point_bear_and_dist_title">Need some help?</string>
-    <string name="err_point_bear_and_dist">Fill both bearing and distance. Bearing is angle 0 to 360 degrees relative to north. Distance with or without units.</string>
+    <string name="err_point_bear_and_dist">Fill both bearing and distance. Bearing is angle 0 to 360 degrees relative to north. Distance doesn\'t require units.</string>
     <string name="err_point_location_error">c:geo can\'t get location of waypoint.</string>
     <string name="err_log_load_data">c:geo can\'t load data required to log visit.</string>
     <string name="err_log_load_data_again">c:geo can\'t load data required to log visit. Trying again.</string>
@@ -211,20 +211,20 @@
     <string name="err_parse_dist">c:geo can\'t parse distance.</string>
     <string name="err_parse_lat_lon">c:geo can\'t parse latitude or longitude.</string>
     <string name="warn_save_nothing">There is nothing to be saved.</string>
-    <string name="warn_no_cache_coord">There is no cache with coordinates.</string>
+    <string name="warn_no_cache_coord">There are no caches with coordinates.</string>
     <string name="warn_no_coordinates">No Coordinates given.</string>
     <string name="warn_no_keyword">No Keyword given.</string>
     <string name="warn_no_username">No Username given.</string>
     <string name="warn_search_help_title">Need some help?</string>
     <string name="warn_search_help_address">Enter an address or location name. For example use a postal address \"Radlicka 100, Prague, Czech Republic\", a city name \"Berlin\" or just a name of something like \"Yellowstone Park\".</string>
     <string name="warn_search_help_gccode">Enter the code for a geocache. For example \"GC1VCAZ\".</string>
-    <string name="warn_search_help_keyword">Enter all or part of a geocache name. For example \"Night Cache\".</string>
+    <string name="warn_search_help_keyword">Enter all or part of a geocache\'s name. For example \"Night Cache\".</string>
     <string name="warn_search_help_user">Enter a username from Geocaching.com.</string>
     <string name="warn_search_help_tb">Enter the code for a trackable. For example \"TB29QMZ\".</string>
-    <string name="warn_log_text_fill">Please fill in text for your log.</string>
+    <string name="warn_log_text_fill">Please input some text for your log.</string>
     <string name="warn_load_images">c:geo failed to load images.</string>
     <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge version 0.3.0 map file.\nOffline maps are not available.</string>
-    <string name="warn_deprecated_mapfile">You are using a deprecated version 0.2.4 map file.\nConsider switching to a version 0.3.0 map.\nWe will drop support for version 0.2.4 in the next release.</string>
+    <string name="warn_deprecated_mapfile">You are using a deprecated version of map file (0.2.4).\nConsider switching to a version 0.3.0 map.\nWe will drop support for version 0.2.4 in the next release.</string>
     <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
     <string name="warn_rendertheme_missing">Map theme not found.</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
@@ -258,10 +258,10 @@
     <string name="advanced_search_button">Search</string>
     <string name="stored_caches_button">Stored</string>
     <string name="any_button">Any destination</string>
-    <string name="unknown_scan">Didn\'t find any geocode in the scan result.</string>
+    <string name="unknown_scan">Didn\'t find any geocodes in the scan result.</string>
 
     <!-- caches -->
-    <string name="caches_no_cache">There is no cache</string>
+    <string name="caches_no_cache">No caches here</string>
     <string name="caches_more_caches">Load more caches</string>
     <string name="caches_more_caches_no">No more caches</string>
     <string name="caches_more_caches_loading">Loading caches…</string>
@@ -274,7 +274,7 @@
         <item quantity="other">minutes</item>
     </plurals>
 
-    <string name="caches_store_offline">Store for Offline</string>
+    <string name="caches_store_offline">Store Offline</string>
     <string name="caches_store_selected">Store Selected</string>
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>
@@ -301,7 +301,7 @@
     <string name="caches_nearby">Nearby</string>
     <string name="caches_manage">Manage</string>
     <string name="caches_drop_selected">Drop selected</string>
-    <string name="caches_drop_selected_ask">Do you want to remove selected caches from device?</string>
+    <string name="caches_drop_selected_ask">Do you want to remove the selected caches from your device?</string>
     <string name="caches_drop_all">Drop all</string>
     <string name="caches_drop_all_ask">Do you want to remove all caches from current list?</string>
     <string name="caches_drop_stored">Drop stored</string>
@@ -315,7 +315,7 @@
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Export to Locus</string>
     <string name="caches_recaptcha_title">reCAPTCHA</string>
-    <string name="caches_recaptcha_explanation">Please, write text from image. It\'s important to download coordinates of caches. It\'s optional and can be switched off in Settings.</string>
+    <string name="caches_recaptcha_explanation">Please enter the text you see in the image. This enables downloading of cache coordinates, which can be disabled in Settings.</string>
     <string name="caches_recaptcha_hint">Text from image</string>
     <string name="caches_recaptcha_continue">Continue</string>
     <string name="caches_filter">Filter</string>
@@ -344,12 +344,12 @@
     <string name="list_dialog_create">Create</string>
     <string name="list_dialog_cancel">Cancel</string>
     <string name="list_dialog_create_ok">A new list was created</string>
-    <string name="list_dialog_create_err">c:geo failed to create new list</string>
+    <string name="list_dialog_create_err">c:geo failed to create the new list</string>
     <string name="list_dialog_remove_title">Remove list</string>
-    <string name="list_dialog_remove_description">Do you want to remove the current list of caches? All caches remaining in the list will be moved to \"Stored\".</string>
+    <string name="list_dialog_remove_description">Do you want to remove the current list? All caches remaining in the list will be moved to \"Stored\".</string>
     <string name="list_dialog_remove">Remove</string>
     <string name="list_dialog_remove_ok">The list was removed</string>
-    <string name="list_dialog_remove_err">c:geo failed to remove current list</string>
+    <string name="list_dialog_remove_err">c:geo failed to remove the current list</string>
     <string name="list_dialog_rename_title">Rename list</string>
     <string name="list_dialog_rename">Rename</string>
 
@@ -381,7 +381,7 @@
 
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_activate_gc">Activate</string>
-    <string name="settings_gc_legal_note">To use the services of Geocaching.com terms and conditions of the Groundspeak disclaimer have to be agreed.</string>
+    <string name="settings_gc_legal_note">To use the services of geocaching.com, you must agree to the Groundspeak Terms of Use.</string>
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">You can\'t make c:geo login to geocaching.com with your Facebook account. But there is a simple workaround …</string>
     <string name="init_oc">Opencaching.de</string>
@@ -402,7 +402,7 @@
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_twitter_authorize">Authorize c:geo</string>
     <string name="init_signature">Signature</string>
-    <string name="init_signature_help_text">Enter your signature to use it in the log text.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
+    <string name="init_signature_help_text">Enter a signature to be appended to your logs.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
     <string name="init_signature_template_button">Insert Template</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Time</string>
@@ -412,22 +412,22 @@
     <string name="init_signature_template_owner">Owner</string>
     <string name="init_ratingwanted">GCvote Rating</string>
     <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
-    <string name="init_friendlogswanted">Friend\'s Logs</string>
-    <string name="init_summary_friendlogswanted">Load additional logbook page for logs from friends</string>
+    <string name="init_friendlogswanted">Show Friends\' Logs</string>
+    <string name="init_summary_friendlogswanted">Display additional logbook page for logs from friends</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>
     <string name="init_autoload">Long Description</string>
-    <string name="init_summary_autoload">Auto-loading of long description</string>
+    <string name="init_summary_autoload">Always load long description</string>
     <string name="init_skin">Light Skin</string>
     <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <string name="init_address">Show Address</string>
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
     <string name="init_captcha">Show CAPTCHA</string>
     <string name="init_summary_captcha">Show CAPTCHA if necessary (only Basic Member)</string>
-    <string name="init_useenglish">Use in English</string>
+    <string name="init_useenglish">Use English</string>
     <string name="init_summary_useenglish">Use English language for c:geo (Restart needed)</string>
     <string name="init_exclude">Exclude Own and Found</string>
-    <string name="init_summary_exclude">Exclude own and found caches</string>
+    <string name="init_summary_exclude">Exclude caches you own or have found</string>
     <string name="init_showwaypoints">Show Waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
     <string name="init_disabled">Exclude Disabled</string>
@@ -441,18 +441,18 @@
     <string name="init_units">Use Imperial Units</string>
     <string name="init_summary_units">Use Imperial Units instead of Metric Units</string>
     <string name="init_log_offline">Offline Logging</string>
-    <string name="init_summary_log_offline">Enable Offline Logging (Don\'t show online Log screen when logging, don\'t send the Log online)</string>
+    <string name="init_summary_log_offline">Enable Offline Logging (Wont\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>
-    <string name="init_summary_choose_list">Ask for list when storing caches</string>
+    <string name="init_summary_choose_list">Ask which list to store caches in</string>
     <string name="init_livelist">Show Direction</string>
-    <string name="init_summary_livelist">Show Direction to caches in the list</string>
+    <string name="init_summary_livelist">Show direction of caches in the list</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creating backup of cache database…</string>
-    <string name="init_backup_note">Please note, that this option will backup or restore the database containing caches and waypoints, but not your settings.\nYour Login data or passwords will never leave this application.</string>
+    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints, but not your settings.\nYour Login data and passwords will never leave this application.</string>
     <string name="init_backup_restore">Restore</string>
-    <string name="init_backup_success">Database of c:geo was successfully copied to the file</string>
-    <string name="init_backup_failed">Backup of database of c:geo failed.</string>
+    <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
+    <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
     <string name="init_backup_unnecessary">Database is empty, no backup necessary.</string>
     <string name="init_restore_success">Restoration completed.</string>
     <string name="init_restore_failed">Restoration failed.</string>
@@ -472,19 +472,19 @@
     <string name="init_summary_maptrail">Show trail on Map</string>
     <string name="init_share_after_export">Open share menu after GPX export</string>
     <string name="init_trackautovisit">Visit TBs</string>
-    <string name="init_summary_trackautovisit">Set trackables to \"Visited\" as a default</string>
+    <string name="init_summary_trackautovisit">Set trackables to \"Visited\" by default</string>
     <string name="init_sigautoinsert">Insert automatically</string>
     <string name="init_loaddirectionimg">Direction Image</string>
-    <string name="init_summary_loaddirectionimg">Load image for directional arrow if necessary (only Basic Member)</string>
+    <string name="init_summary_loaddirectionimg">Download directional arrow image if necessary (only required for Basic Members)</string>
     <string name="init_default_navigation_tool">Default Navigation</string>
     <string name="init_default_navigation_tool_description">Here you can select your preferred navigation tool.</string>
     <string name="init_default_navigation_tool_select">Select tool</string>
-    <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. It\'s activated by long clicking the navigation icon next to the title of the cache.</string>
+    <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. Activate it by long pressing the navigation icon next to the title of the cache.</string>
     <string name="init_debug_title">Debug information</string>
-    <string name="init_debug_note">c:geo can generate a lot of debugging information. While this information is generally not useful for c:geo users, developers may need to generate this information in order to analyze a bug. In this case, they will ask you to check the box below and send them the log file.</string>
+    <string name="init_debug_note">c:geo can generate a lot of debugging information. While this information is generally not useful for c:geo users, developers may need you to generate this information in order to analyze a bug. In this case, they will ask you to check the box below and send them the resulting log file.</string>
     <string name="init_debug">Generate debug information</string>
     <string name="init_dbonsdcard_title">Database location</string>
-    <string name="init_dbonsdcard_note">You may store the database of c:geo on the external storage medium. If you do so you will save internal memory, but you may loose a bit of performance and c:geo will not work if your sdcard is not available.</string>
+    <string name="init_dbonsdcard_note">You may store the database of c:geo on your external storage medium. Doing so will save internal memory, but you may lose a bit of performance and c:geo will not work if your SD card isn\'t available.</string>
     <string name="init_dbonsdcard">On external storage</string>
     <string name="init_dbmove_dbmove">Moving Database</string>
     <string name="init_dbmove_running">Moving Database</string>
@@ -493,7 +493,7 @@
     <string name="init_plain_logs">Plain Logs</string>
     <string name="init_summary_plain_logs">Display log entries without colors</string>
     <string name="init_use_native_ua">Android browser</string>
-    <string name="init_summary_use_native_ua">Identify as Android browser. Solves login problems of some network providers.</string>
+    <string name="init_summary_use_native_ua">Identify as Android browser. Solves login problems when using certain network providers.</string>
     <string name="init_rendertheme_folder">Map Themes Directory</string>
 
     <!-- map sources -->
@@ -505,12 +505,12 @@
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info on send2cgeo</string>
     <string name="init_sendToCgeo_name">Your device name</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to receive caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normal even without registering your device.</string>
+    <string name="init_sendToCgeo_description"><b>Send2c:geo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you want to use send2c:geo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Request Registration</string>
-    <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"…</string>
-    <string name="init_sendToCgeo_register_ok">Registration successful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
+    <string name="init_sendToCgeo_registering">Registering your device for Send2c:geo…</string>
+    <string name="init_sendToCgeo_register_ok">Registration successful. PIN code is ####. Use it on the c:geo website to connect this device to your browser.</string>
     <string name="init_sendToCgeo_register_fail">Registration failed.</string>
-    <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection or send2c:geo is down.</string>
+    <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection, or send2c:geo is down.</string>
     <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2c:geo expired. Please register in settings.</string>
 
     <!-- auth twitter -->
@@ -522,10 +522,10 @@
     <string name="auth_finish">Finish</string>
     <string name="auth_dialog_wait">Waiting for Twitter…</string>
     <string name="auth_dialog_pin_title">PIN code</string>
-    <string name="auth_dialog_pin_message">Please type in PIN code provided by the Twitter website. It is mandatory to complete the authorization.</string>
+    <string name="auth_dialog_pin_message">Please type in the PIN code provided by Twitter. It is required to complete authorization.</string>
     <string name="auth_dialog_completed">c:geo is now authorized to post on Twitter.</string>
-    <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
-    <string name="about_auth_2">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
+    <string name="about_auth_1">The following process will allow <b>c:geo</b> to access Twitter.</string>
+    <string name="about_auth_2">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Log in on this page and allow <b>c:geo</b> to access your account. After this, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
@@ -536,10 +536,10 @@
     <string name="auth_finish_oc">Finish</string>
     <string name="auth_dialog_wait_oc">Waiting for %s…</string>
     <string name="auth_dialog_pin_title_oc">PIN code</string>
-    <string name="auth_dialog_pin_message_oc">Please type in PIN code provided by the %s website. It is mandatory to complete the authorization.</string>
+    <string name="auth_dialog_pin_message_oc">Please type in PIN code provided by the %s website. It is required to complete authorization.</string>
     <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
-    <string name="about_auth_1_oc">The following process allows <b>c:geo</b> to access %s - if agreed.</string>
-    <string name="about_auth_2_oc">A click on the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Login on this page and allow <b>c:geo</b> to access your account. If this is accepted, %s will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
+    <string name="about_auth_1_oc">The following process allows <b>c:geo</b> to access %s.</string>
+    <string name="about_auth_2_oc">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. After this, %s will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
@@ -643,7 +643,7 @@
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Refresh</string>
     <string name="cache_menu_share">Share cache</string>
-    <string name="cache_menu_move_list">Move to other list</string>
+    <string name="cache_menu_move_list">Move to different list</string>
     <string name="cache_menu_gcc">GCC</string>
     <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps">OruxMaps</string>
@@ -665,7 +665,7 @@
     <string name="cache_difficulty">Difficulty</string>
     <string name="cache_terrain">Terrain</string>
     <string name="cache_rating">Rating</string>
-    <string name="cache_own_rating">Own Rating</string>
+    <string name="cache_own_rating">Your Rating</string>
     <string name="cache_rating_of">of</string>
     <string name="cache_favorite">Favorite</string>
     <string name="cache_owner">Owner</string>
@@ -780,7 +780,7 @@
     <string name="map_map">Map</string>
     <string name="map_live">Live map</string>
     <string name="map_view_map">Map view</string>
-    <string name="map_modes">Map modes</string>
+    <string name="map_modes">Map settings</string>
     <string name="map_trail_show">Show trail</string>
     <string name="map_trail_hide">Hide trail</string>
     <string name="map_circles_show">Show circles</string>
@@ -791,7 +791,7 @@
     <string name="map_live_disable">Disable live</string>
     <string name="map_static_title">Static maps</string>
     <string name="map_static_loading">Loading static maps…</string>
-    <string name="map_token_err">Since c:geo is able to download only partial data, coordinates of caches could be inaccurate.</string>
+    <string name="map_token_err">Since c:geo is only able to download partial data, coordinates of caches could be inaccurate.</string>
     <string name="map_as_list">Show as list</string>
     <string name="map_strategy">Strategy</string>
     <string name="map_strategy_title">Live Map strategy</string>
@@ -799,7 +799,7 @@
     <string name="map_strategy_fast">Fast</string>
     <string name="map_strategy_auto">Speed dependent</string>
     <string name="map_strategy_detailed">Detailed</string>
-    <string name="live_map_notification">On the new live map coordinates may not always be precise. Possibly imprecise coordinates are marked by an orange circle.\nOpening the cache details or saving the cache for offline use will always obtain precise coordinates.\n\nMore information on all changes can be found on the \"About c:geo\" page inside the app.</string>
+    <string name="live_map_notification">Coordinates on the live map may not always be precise. Possibly imprecise coordinates are marked by an orange circle.\nOpening the cache details or saving the cache for offline use will always obtain precise coordinates.\n\nMore information can be found on the \"About c:geo\" page inside the app.</string>
     <string name="live_map_note_dontshow">Do not show again</string>
 
     <!-- search -->
@@ -845,11 +845,11 @@
     <string name="trackable_spotted_in_cache">In</string>
     <string name="trackable_spotted_at_user">In the hands of</string>
     <string name="trackable_spotted_unknown_location">Unknown location</string>
-    <string name="trackable_spotted_owner">In the hands of the owner</string>
+    <string name="trackable_spotted_owner">In the hands of its owner</string>
     <string name="trackable_origin">Origin</string>
     <string name="trackable_unknown">Unknown</string>
     <string name="trackable_released">Released</string>
-    <string name="trackable_distance">Travelled</string>
+    <string name="trackable_distance">Traveled</string>
     <string name="trackable_touch">Touch</string>
     <string name="trackable_not_activated">Trackable not activated</string>
     
@@ -884,17 +884,17 @@
     <!-- helpers -->
     <string name="helper_calendar_title">c:geo calendar add-on</string>
     <string name="helper_calendar_missing">c:geo calendar add-on not installed.</string>
-    <string name="helper_calendar_description">Enables you to export event caches into the calendar on your device.</string>
+    <string name="helper_calendar_description">Enables you to export event caches to the calendar on your device.</string>
     <string name="helper_locus_title">Locus</string>
-    <string name="helper_locus_description">Simple usable application showing Online maps and allowing to download them directly into Offline mode (raster maps only). Also support track recording, POI handling and many other useful functions.</string>
+    <string name="helper_locus_description">Simple, usable application which shows online maps and allows you to download them directly into Offline mode (raster maps only). Also supports track recording, POI handling and many other useful functions.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
-    <string name="helper_gpsstatus_description">You can use radar from this application with c:geo. It also offers a lot of other GPS-related information.</string>
+    <string name="helper_gpsstatus_description">You can use the radar in this application in conjunction with c:geo. It also offers a lot of other GPS-related information.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
-    <string name="helper_bluetoothgps_description">Allows you to use an external GPS receiver to get more precise location and can spare battery of your device.</string>
+    <string name="helper_bluetoothgps_description">Allows you to use an external GPS receiver to get more precise location data, and can spare battery of your device.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
-    <string name="helper_barcode_description">There are Greasemonkey scripts and websites which allow to display a geocode as barcode. With this app c:geo can read that geocode directly from the screen of your computer.</string>
+    <string name="helper_barcode_description">There are Greasemonkey scripts and websites which enable display of geocodes as barcodes. With this app, c:geo can read such geocodes directly from the screen of your computer.</string>
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
-    <string name="helper_pocketquery_description">Allows easy creation and download of Pocket Queries centred on your current position or a point selected from a map. Requires a premium Geocaching.com account.</string>
+    <string name="helper_pocketquery_description">Allows easy creation and download of Pocket Queries centred on your current position or a point selected from a map. Requires a Premium Geocaching.com account.</string>
 
     <!-- add-ons -->
     <string name="addon_missing_title">Missing Add-On</string>
@@ -905,14 +905,14 @@
     <string name="export_exportedto">exported to</string>
     <string name="export_failed">Export failed</string>
     <string name="export_fieldnotes">Field Notes</string>
-    <string name="export_fieldnotes_info">Field Notes will be exported to /sdcard/field-notes with current date and time as file name.</string>
+    <string name="export_fieldnotes_info">Field Notes will be exported to /sdcard/field-notes with the current date and time as their file name.</string>
     <string name="export_fieldnotes_upload">Upload to geocaching.com</string>
     <string name="export_fieldnotes_uploading">Uploading…</string>
     <string name="export_fieldnotes_upload_success">Upload to geocaching.com successful</string>
     <string name="export_fieldnotes_onlynew">Only since last export</string>
     <string name="export_fieldnotes_creating">Creating Field Notes…</string>
     <string name="export_gpx">GPX</string>
-    <string name="export_gpx_info">The GPX file will be exported to %1$s with current date and time as file name.</string>
+    <string name="export_gpx_info">The GPX file will be exported to %1$s with the current date and time as its file name.</string>
     <string name="export_gpx_to">Send exported GPX to</string>
 
     <!-- GC attributes -->
@@ -979,13 +979,13 @@
     <string name="attribute_touristok_yes">Tourist friendly</string>
     <string name="attribute_touristok_no">Not tourist friendly</string>
     <string name="attribute_frontyard_yes">Private residence</string>
-    <string name="attribute_frontyard_no">No private residence</string>
+    <string name="attribute_frontyard_no">Not a private residence</string>
     <string name="attribute_teamwork_yes">Teamwork required</string>
     <string name="attribute_teamwork_no">No teamwork required</string>
     <string name="attribute_landf_yes">Lost and found tour</string>
-    <string name="attribute_landf_no">No lost and found tour</string>
+    <string name="attribute_landf_no">Not a lost and found tour</string>
     <string name="attribute_partnership_yes">Partnership cache</string>
-    <string name="attribute_partnership_no">No partnership cache</string>
+    <string name="attribute_partnership_no">Not a partnership cache</string>
     <string name="attribute_fee_yes">Access or parking fee required</string>
     <string name="attribute_fee_no">Access or parking fee not required</string>
     <string name="attribute_rappelling_yes">Climbing gear required</string>
@@ -1021,7 +1021,7 @@
     <string name="attribute_hunting_yes">Hunting</string>
     <string name="attribute_hunting_no">No hunting</string>
     <string name="attribute_danger_yes">Dangerous area</string>
-    <string name="attribute_danger_no">No dangerous area</string>
+    <string name="attribute_danger_no">Not a dangerous area</string>
     <string name="attribute_thorn_yes">Thorns</string>
     <string name="attribute_thorn_no">No thorns</string>
     <string name="attribute_wheelchair_yes">Wheelchair accessible</string>
@@ -1047,7 +1047,7 @@
     <string name="attribute_food_yes">Food nearby</string>
     <string name="attribute_food_no">No food nearby</string>
     <string name="attribute_oc_only_yes">Only loggable at Opencaching</string>
-    <string name="attribute_oc_only_no">Not only loggable at Opencaching</string>
+    <string name="attribute_oc_only_no">Not loggable only at Opencaching</string>
     <string name="attribute_link_only_yes">Hyperlink to another caching portal only</string>
     <string name="attribute_link_only_no">Not only a hyperlink to another caching portal</string>
     <string name="attribute_letterbox_yes">Letterbox (needs stamp)</string>
@@ -1059,7 +1059,7 @@
     <string name="attribute_swamp_yes">Swamp or marsh</string>
     <string name="attribute_swamp_no">No swamp or marsh</string>
     <string name="attribute_hills_yes">Hilly area</string>
-    <string name="attribute_hills_no">No hilly area</string>
+    <string name="attribute_hills_no">Not a hilly area</string>
     <string name="attribute_easy_climbing_yes">Lightweight climbing</string>
     <string name="attribute_easy_climbing_no">No lightweight climbing</string>
     <string name="attribute_poi_yes">Point of interest</string>
@@ -1098,8 +1098,8 @@
     <string name="attribute_investigation_no">No investigation</string>
     <string name="attribute_puzzle_yes">Puzzle / Mystery</string>
     <string name="attribute_puzzle_no">No puzzle / mystery</string>
-    <string name="attribute_arithmetic_yes">Arithmetical problem</string>
-    <string name="attribute_arithmetic_no">No arithmetical problem</string>
+    <string name="attribute_arithmetic_yes">Arithmetic problem</string>
+    <string name="attribute_arithmetic_no">No arithmetic problem</string>
     <string name="attribute_other_cache_yes">Other cache type</string>
     <string name="attribute_other_cache_no">No other cache type</string>
     <string name="attribute_ask_owner_yes">Ask owner for start conditions</string>
