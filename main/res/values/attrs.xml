@@ -37,6 +37,7 @@
     <attr name="settings_nut" format="integer" />
     <attr name="settings_pen" format="integer" />
     <attr name="settings_sdcard" format="integer" />
+    <attr name="settings_info_icon" format="integer" />
     
 
     <!-- attributes for custom made preferences -->
