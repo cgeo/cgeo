@@ -3,9 +3,9 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.connector.gc.Login;
-import cgeo.geocaching.network.Network;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.Formatter;
 
@@ -135,24 +135,32 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
-                Geocache cache = context.getCache();
+                final Geocache cache = context.getCache();
                 if (cache == null) {
                     return StringUtils.EMPTY;
                 }
-                int current = Login.getActualCachesFound();
+
+                int current = 0;
+                final IConnector connector = ConnectorFactory.getConnector(cache);
+                if (connector instanceof ILogin) {
+                    current = ((ILogin) connector).getCachesFound();
+                }
+
+                // try updating the login information, if the counter is zero
                 if (current == 0) {
                     if (context.isOffline()) {
                         return StringUtils.EMPTY;
                     }
-                    final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/"));
-                    current = parseFindCount(page);
+                    if (connector instanceof ILogin) {
+                        ((ILogin) connector).login(null, null);
+                        current = ((ILogin) connector).getCachesFound();
+                    }
                 }
 
-                String findCount = StringUtils.EMPTY;
                 if (current >= 0) {
-                    findCount = String.valueOf(current + 1);
+                    return String.valueOf(current + 1);
                 }
-                return findCount;
+                return StringUtils.EMPTY;
             }
         });
         templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {
@@ -191,18 +199,5 @@ public final class LogTemplateProvider {
             result = template.apply(result, context);
         }
         return result;
-    }
-
-    private static int parseFindCount(final String page) {
-        if (StringUtils.isBlank(page)) {
-            return -1;
-        }
-
-        try {
-            return Integer.parseInt(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", StringUtils.EMPTY));
-        } catch (NumberFormatException e) {
-            Log.e("parseFindCount", e);
-            return -1;
-        }
     }
 }
