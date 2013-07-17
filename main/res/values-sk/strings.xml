@@ -7,7 +7,7 @@
     <string name="cache">Skrýša</string>
     <string name="detail">Detail</string>
     <string name="search">Vyhľadávanie</string>
-    <string name="settings_titlebar">c:geo Nastavenie</string>
+    <string name="settings">Nastavenie</string>
     <string name="helpers">Pomocné aplikácie</string>
     <string name="about">O aplikácii</string>
     <string name="latitude">Zemepisná šírka</string>
@@ -152,6 +152,7 @@
     <string name="err_auth_initialize">Prepáčte, c:geo nedokázalo zahájiť autorizáciu.</string>
     <string name="err_auth_process">Autorizácia zlyhala.</string>
     <string name="err_cannot_log_visit">c:geo nemá dostatok informácií pre zapísanie návštevy. Prosím urobte to z kompletného detailu skrýše.</string>
+    <string name="err_init_cleared">Prepáčte, c:geo nedokázalo zmazať prihlasovacie údaje.</string>
     <string name="err_download_fail">Prepáčte, c:geo nemôže načítať skrýšu, pretože</string>
     <string name="err_dwld_details_failed">c:geo nemôže stiahnuť detaily skrýše.</string>
     <string name="err_load_descr_failed">c:geo nemôže načítať popis.</string>
@@ -327,18 +328,23 @@
     <string name="about_contributors">Prispievatelia</string>
 
     <!-- init -->
+    <string name="init_geocaching">Geocaching.com</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">používateľské meno</string>
     <string name="init_password">heslo</string>
-    <string name="init_login">Kontrola prihlásenia</string>
+    <string name="init_passvote">heslo</string>
+    <string name="init_login">Kontrola prihlásenia a nastavenie formátu dátumu</string>
     <string name="init_login_popup">Prihlasovanie</string>
     <string name="init_login_popup_working">Prihlasovanie na Geocaching.com…</string>
     <string name="init_login_popup_ok">Prihlásenie úspešné</string>
     <string name="init_login_popup_failed">Prihlásenie neúspešné</string>
     <string name="init_login_popup_failed_reason">Prihlásenie neúspešné: </string>
     <string name="init_twitter_authorize">Autorizovať c:geo</string>
+    <string name="init_twitter_publish">Nový status pri nájdení skrýše</string>
     <string name="init_signature">Podpis</string>
+    <string name="init_signature_help_button">Pomocník</string>
+    <string name="init_signature_help_title">Tipy a triky pre podpis</string>
     <string name="init_signature_help_text">Zapíšte váš podpis, ktorý chcete použiť v texte záznamov.\nMôžete použiť špeciálne slová: [DATE] , [TIME], [DATETIME], [USER] a [NUMBER].\nTieto budú nahradené pri vložení podpisu.</string>
     <string name="init_signature_template_button">Vložiť šablónu</string>
     <string name="init_signature_template_date">Dátum</string>
@@ -347,40 +353,31 @@
     <string name="init_signature_template_user">Používateľ</string>
     <string name="init_signature_template_number">Číslo</string>
     <string name="init_signature_template_owner">Vlastník</string>
+    <string name="init_details">Detaily skrýše</string>
     <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
-    <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
+    <string name="init_elevationwanted">Načítať údaje o stúpaní skrýše</string>
     <string name="init_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
-    <string name="init_summary_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
     <string name="init_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
-    <string name="init_summary_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
     <string name="init_autoload">Automatické načítanie dlhého popisu</string>
-    <string name="init_summary_autoload">Automatické načítanie dlhého popisu</string>
+    <string name="init_other">Ďalšie možnosti</string>
     <string name="init_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
-    <string name="init_summary_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
     <string name="init_address">Adresa na úvodnej obrazovke</string>
-    <string name="init_summary_address">Adresa na úvodnej obrazovke</string>
     <string name="init_captcha">Zobraziť CAPTCHA, ak je to potrebné</string>
-    <string name="init_summary_captcha">Zobraziť CAPTCHA, ak je to potrebné</string>
     <string name="init_useenglish">Používať angličtinu v c:geo\n(vyžaduje reštart)</string>
-    <string name="init_summary_useenglish">Používať angličtinu v c:geo\n(vyžaduje reštart)</string>
     <string name="init_exclude">Nezobrazovať vlastné a nájdené skrýše</string>
-    <string name="init_summary_exclude">Nezobrazovať vlastné a nájdené skrýše</string>
     <string name="init_showwaypoints">Body trasy na mape</string>
     <string name="init_showwaypoint_description">Úroveň, od ktorej zobraziť body trasy na mape.</string>
     <string name="init_disabled">Nezobrazovať zrušené skrýše</string>
-    <string name="init_summary_disabled">Nezobrazovať zrušené skrýše</string>
     <string name="init_offline">Ukladať mapy pre použitie offline</string>
-    <string name="init_summary_offline">Ukladať mapy pre použitie offline</string>
     <string name="init_offline_wp">Uložiť statické mapy bodov strás pre použitie offline</string>
-    <string name="init_summary_offline_wp">Uložiť statické mapy bodov strás pre použitie offline</string>
     <string name="init_save_log_img">Uložiť obrázky zo záznamov</string>
-    <string name="init_summary_save_log_img">Uložiť obrázky zo záznamov</string>
     <string name="init_units">Používať imperiálne jednotky vzdialenosti</string>
-    <string name="init_summary_units">Používať imperiálne jednotky vzdialenosti</string>
     <string name="init_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
-    <string name="init_summary_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
     <string name="init_livelist">Zobrazovať smer v zozname skrýš</string>
-    <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
+    <string name="init_altitude">Oprava výšky</string>
+    <string name="init_altitude_description">Keď vám GPS zobrazuje nesprávnu nadmorskú výšku, môžete ju opraviť zadaním kladného alebo záporného čísla. Oprava ja vždy v metroch.</string>
+    <string name="init_clear">Zmazať prihlasovacie údaje</string>
+    <string name="init_cleared">Prihlasovacie údaje zmazané.</string>
     <string name="init_backup">Záloha</string>
     <string name="init_backup_backup">Zálohovať</string>
     <string name="init_backup_running">Vytváranie zálohy databázy skrýš…</string>
@@ -395,18 +392,19 @@
     <string name="init_restore_confirm">Databáza je prázdna. Chcete ju obnoviť zo zálohy?</string>
     <string name="init_backup_last">Posledná dostupná záloha</string>
     <string name="init_backup_last_no">Neexistuje súbor zo zálohou.</string>
+    <string name="init_mapsources">Mapové zdroje</string>
+    <string name="init_mapsources_description">Tu môžete vybrať zdroje pre vaše mapy. Je to alternatíva ku Google mapám rôznych OpenStreetMap styles sú dostupné a dokonca offline mapové súbory (podrobnosti nájdete na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
     <string name="init_gpx_exportdir">Priečinok pre GPX Export</string>
     <string name="init_gpx_importdir">Priečinok pre GPX Import</string>
+    <string name="init_gpx_exportdir_description">Tu si môžete vybrať priečinok pre GPX exporty.</string>
+    <string name="init_gpx_importdir_description">Tu si môžete vybrať priečinok pre GPX importy.</string>
     <string name="init_maptrail">Zobraziť stopu na mape</string>
-    <string name="init_summary_maptrail">Zobraziť stopu na mape</string>
     <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
     <string name="init_trackautovisit">Nastaviť trasovateľné predmety automaticky na „navštívené“</string>
-    <string name="init_summary_trackautovisit">Nastaviť trasovateľné predmety automaticky na „navštívené“</string>
     <string name="init_sigautoinsert">Automaticky vložiť podpis</string>
     <string name="init_loaddirectionimg">Ak je to potrebné načítať obrázok zo smerom</string>
-    <string name="init_summary_loaddirectionimg">Ak je to potrebné načítať obrázok zo smerom</string>
     <string name="init_default_navigation_tool">Predvolená navigácia</string>
     <string name="init_default_navigation_tool_description">Môžete si vybrať preferovaný nástroj pre navigáciu.</string>
     <string name="init_default_navigation_tool_select">Vyberte nástroj</string>
@@ -416,15 +414,14 @@
     <string name="init_debug">Generovanie ladiacich informácií</string>
     <string name="init_dbonsdcard_title">Umiestnenie databázy</string>
     <string name="init_dbonsdcard_note">Databázu c:geo môžete umiestniť na externé úložisko. Ak to spravíte, ušetríte vnútornú pamäť, ale môžete stratiť časť z výkonu a c:geo nebude fungovať, keď vaša SD karta nebude dostupná.</string>
-    <string name="init_dbonsdcard">Na externom úložisku</string>
+    <string name="init_dbonsdcard">Databáza na externom úložisku</string>
     <string name="init_dbmove_dbmove">Presúvanie databázy</string>
     <string name="init_dbmove_running">Prebieha presúvanie databázy</string>
     <string name="init_dbmove_success">Databáza bola úspešne presunutá.</string>
     <string name="init_dbmove_failed">Presun databázy zlyhal.</string>
     <string name="init_plain_logs">Zobraziť záznamy logu bez farieb</string>
-    <string name="init_summary_plain_logs">Zobraziť záznamy logu bez farieb</string>
     <string name="init_use_native_ua">Ohlásiť sa ako prehliadač Android. Pomôže vyriešiť problémy pri niektorých poskytovateľov siete.</string>
-    <string name="init_summary_use_native_ua">Ohlásiť sa ako prehliadač Android. Pomôže vyriešiť problémy pri niektorých poskytovateľov siete.</string>
+    <string name="init_rendertheme_folder">Priečinok s vlastnými témami offline máp (voliteľné)</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
@@ -433,7 +430,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyklomapa</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Poslať do c:geo</string>
-    <string name="init_sendToCgeo_name">Názov vášho zariadenia</string>
+    <string name="init_sendToCgeo_name">Názov vášho zariadenia:</string>
     <string name="init_sendToCgeo_description">Poslanie do c:geo umožní prijímanie skrýš priamo z geocaching webu použitím špeciálneho rozšírenia do Firefoxu či Chrome. Pred registráciou si prosím prečítajte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registrovať sa potrebujete iba ak budete používať send2cgeo. C:geo bude fungovať i bez registrovaného zariadenia.</string>
     <string name="init_sendToCgeo_register">Žiadosť o registráciu</string>
     <string name="init_sendToCgeo_registering">Registrácia zariadenia pre „Poslať do c:geo“…</string>
@@ -511,6 +508,7 @@
     <string name="cache_dialog_loading_details_status_logs">Načítanie logov</string>
     <string name="cache_dialog_loading_details_status_waypoints">Spracovanie bodov trasy</string>
     <string name="cache_dialog_loading_details_status_gcvote">Načítanie GCVote</string>
+    <string name="cache_dialog_loading_details_status_elevation">Načítanie údajov o stúpaní</string>
     <string name="cache_dialog_loading_details_status_cache">Kešovanie údajov</string>
     <string name="cache_dialog_loading_details_status_render">Vykreslovanie pohľadu</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -583,6 +581,7 @@
     <string name="cache_time_full_hours">hodín</string>
 
     <!-- editor dialog -->
+    <string name="editor_save">Uložiť</string>
 
     <!-- file list base -->
     <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
@@ -927,7 +926,7 @@
     <string name="attribute_food_no">Bez občerstvenia neďaleko</string>
 
     <!-- next things -->
-    <string name="settings_gc_legal_note">Pred používaním služieb serveru Geocaching.com je potrebné súhlasiť s licenčnou dohodou Groundspeaku.</string>
+    <string name="legal_note">Pred používaním služieb serveru Geocaching.com je potrebné súhlasiť s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčnou dohodou Groundspeaku</a>.</string>
     <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
     <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

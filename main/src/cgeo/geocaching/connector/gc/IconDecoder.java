@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.enumerations.CacheType;
 
 import android.graphics.Bitmap;
@@ -21,7 +21,7 @@ public abstract class IconDecoder {
     private static final int CT_MEGAEVENT = 7;
     private static final int CT_CITO = 8;
     private static final int CT_WEBCAM = 9;
-    private static final int CT_WHERIGO = 10;
+    private static final int CT_WHEREIGO = 10;
     private static final int CT_VIRTUAL = 11;
     private static final int CT_LETTERBOX = 12;
 
@@ -116,7 +116,7 @@ public abstract class IconDecoder {
                 case CT_WEBCAM:
                     cache.setType(CacheType.WEBCAM);
                     return true;
-                case CT_WHERIGO:
+                case CT_WHEREIGO:
                     cache.setType(CacheType.WHERIGO);
                     return true;
                 case CT_VIRTUAL:
@@ -395,12 +395,12 @@ public abstract class IconDecoder {
                     if (g < 71) {
                         return CT_MYSTERY;
                     }
-                    return r < 153 ? CT_WHERIGO : CT_WEBCAM;
+                    return r < 153 ? CT_WHEREIGO : CT_WEBCAM;
                 }
                 if (b < 167) {
                     return r < 157 ? CT_TRADITIONAL : CT_WEBCAM;
                 }
-                return CT_WHERIGO;
+                return CT_WHEREIGO;
             }
             if (g < 199) {
                 if (r < 142) {
@@ -450,7 +450,7 @@ public abstract class IconDecoder {
             if (b < 252) {
                 if (r < 243) {
                     if (r < 225) {
-                        return CT_WHERIGO;
+                        return CT_WHEREIGO;
                     }
                     if (b < 232) {
                         if (g < 228) {
@@ -459,14 +459,14 @@ public abstract class IconDecoder {
                         return r < 231 ? CT_VIRTUAL : CT_TRADITIONAL;
                     }
                     if (r < 236) {
-                        return CT_WHERIGO;
+                        return CT_WHEREIGO;
                     }
-                    return r < 240 ? CT_WEBCAM : CT_WHERIGO;
+                    return r < 240 ? CT_WEBCAM : CT_WHEREIGO;
                 }
                 if (g < 247) {
                     return r < 245 ? CT_WEBCAM : CT_FOUND;
                 }
-                return CT_WHERIGO;
+                return CT_WHEREIGO;
             }
             return CT_LETTERBOX;
         }

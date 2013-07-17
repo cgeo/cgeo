@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
@@ -66,7 +66,7 @@ public abstract class Login {
     }
 
     private static StatusCode login(boolean retry) {
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
+        final ImmutablePair<String, String> login = Settings.getLogin();
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
@@ -458,29 +458,18 @@ public abstract class Login {
      * @return
      */
     public static String getRequestLogged(final String uri, final Parameters params) {
-        final String data = Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
+        final String data = Network.getResponseData(Network.getRequest(uri, params));
 
         if (getLoginStatus(data)) {
             return data;
         }
 
         if (login() == StatusCode.NO_ERROR) {
-            return Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
+            return Network.getResponseData(Network.getRequest(uri, params));
         }
 
         Log.w("Working as guest.");
         return data;
-    }
-
-    /**
-     * Unfortunately the cache details page contains user generated whitespace in the personal note, therefore we cannot
-     * remove the white space from cache details pages.
-     * 
-     * @param uri
-     * @return
-     */
-    private static boolean canRemoveWhitespace(final String uri) {
-        return !StringUtils.contains(uri, "cache_details");
     }
 
     /** Get user session & session token from the Live Map. Needed for following requests */

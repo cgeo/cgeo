@@ -5,6 +5,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
@@ -16,7 +17,6 @@ import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -30,7 +30,6 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -71,7 +70,6 @@ import android.widget.ViewSwitcher.ViewFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -1084,7 +1082,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
                 // live mode search result
                 if (isLiveEnabled) {
-                    searchResult.addSearchResult(cgData.loadCachedInViewport(viewport, Settings.getCacheType()));
+                    SearchResult liveResult = new SearchResult(cgData.loadCachedInViewport(viewport, Settings.getCacheType()));
+                    searchResult.addGeocodes(liveResult.getGeocodes());
                 }
 
                 downloaded = true;
@@ -1180,12 +1179,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     CGeoMap.filter(result);
                     // update the caches
-                    // first remove filtered out
-                    final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
-                    Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
-                    caches.removeAll(cgData.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
-                    cgData.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
-                    // new collection type needs to remove first to refresh
+                    // new collection type needs to remove first
                     caches.removeAll(result);
                     caches.addAll(result);
                     lastSearchResult = searchResult;

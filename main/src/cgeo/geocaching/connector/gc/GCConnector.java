@@ -4,6 +4,8 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.SettingsActivity;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
@@ -15,8 +17,6 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -38,7 +38,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * Pocket queries downloaded from the website use a numeric prefix. The pocket query creator Android app adds a
      * verbatim "pocketquery" prefix.
      */
-    private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("((\\d{7,})|(pocketquery))" + "(_.+)?" + "\\.zip", Pattern.CASE_INSENSITIVE);
+    private static final Pattern gpxZipFilePattern = Pattern.compile("((\\d{7,})|(pocketquery))" + "(_.+)?" + "\\.zip", Pattern.CASE_INSENSITIVE);
 
     /**
      * Pattern for GC codes
@@ -171,7 +171,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isZippedGPXFile(final String fileName) {
-        return GPX_ZIP_FILE_PATTERN.matcher(fileName).matches();
+        return gpxZipFilePattern.matcher(fileName).matches();
     }
 
     @Override
@@ -309,7 +309,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
             // invoke settings activity to insert login details
             if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
-                SettingsActivity.startWithServicesPage(fromActivity);
+                SettingsActivity.startActivity(fromActivity);
             }
         }
         return status == StatusCode.NO_ERROR;

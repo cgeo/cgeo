@@ -6,7 +6,7 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -14,7 +14,6 @@ import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
-import cgeo.geocaching.sorting.EventDateComparator;
 import cgeo.geocaching.sorting.InverseComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.utils.AngleUtils;
@@ -642,26 +641,5 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             return checked;
         }
         return list.size();
-    }
-
-    public void setInitialComparator() {
-        CacheComparator comparator = null; // a null comparator will automatically sort by distance
-        if (cacheListType == CacheListType.HISTORY) {
-            comparator = new VisitComparator();
-        } else {
-            if (CollectionUtils.isNotEmpty(list)) {
-                boolean eventsOnly = true;
-                for (final Geocache cache : list) {
-                    if (!cache.isEventCache()) {
-                        eventsOnly = false;
-                        break;
-                    }
-                }
-                if (eventsOnly) {
-                    comparator = new EventDateComparator();
-                }
-            }
-        }
-        setComparator(comparator);
     }
 }

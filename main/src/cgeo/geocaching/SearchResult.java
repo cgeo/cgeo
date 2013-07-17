@@ -24,7 +24,6 @@ import java.util.Set;
 public class SearchResult implements Parcelable {
 
     final private Set<String> geocodes;
-    final private Set<String> filteredGeocodes;
     private StatusCode error = null;
     private String url = "";
     public String[] viewstates = null;
@@ -56,7 +55,6 @@ public class SearchResult implements Parcelable {
      */
     public SearchResult(final SearchResult searchResult) {
         geocodes = new HashSet<String>(searchResult.geocodes);
-        filteredGeocodes = new HashSet<String>(searchResult.filteredGeocodes);
         error = searchResult.error;
         url = searchResult.url;
         viewstates = searchResult.viewstates;
@@ -72,7 +70,6 @@ public class SearchResult implements Parcelable {
     public SearchResult(final Collection<String> geocodes, final int total) {
         this.geocodes = new HashSet<String>(geocodes.size());
         this.geocodes.addAll(geocodes);
-        this.filteredGeocodes = new HashSet<String>();
         this.setTotal(total);
     }
 
@@ -89,9 +86,6 @@ public class SearchResult implements Parcelable {
         final ArrayList<String> list = new ArrayList<String>();
         in.readStringList(list);
         geocodes = new HashSet<String>(list);
-        final ArrayList<String> filteredList = new ArrayList<String>();
-        in.readStringList(filteredList);
-        filteredGeocodes = new HashSet<String>(filteredList);
         error = (StatusCode) in.readSerializable();
         url = in.readString();
         final int length = in.readInt();
@@ -127,7 +121,6 @@ public class SearchResult implements Parcelable {
     @Override
     public void writeToParcel(final Parcel out, final int flags) {
         out.writeStringArray(geocodes.toArray(new String[geocodes.size()]));
-        out.writeStringArray(filteredGeocodes.toArray(new String[filteredGeocodes.size()]));
         out.writeSerializable(error);
         out.writeString(url);
         if (viewstates == null) {
@@ -200,21 +193,16 @@ public class SearchResult implements Parcelable {
         result.geocodes.clear();
         final ArrayList<Geocache> cachesForVote = new ArrayList<Geocache>();
         final Set<Geocache> caches = cgData.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
-        int excluded = 0;
         for (Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
             final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
                     (excludeMine && (cache.isOwner() || cache.isFound())) ||
                     (!cacheType.contains(cache));
-            if (excludeCache) {
-                excluded++;
-            } else {
+            if (!excludeCache) {
                 result.addAndPutInCache(cache);
                 cachesForVote.add(cache);
             }
         }
-        // decrease maximum number of caches by filtered ones
-        result.setTotal(result.getTotal() - excluded);
         GCVote.loadRatings(cachesForVote);
         return result;
     }
@@ -257,21 +245,6 @@ public class SearchResult implements Parcelable {
             }
         }
         return false;
-    }
-
-    public void addFilteredGeocodes(Set<String> cachedMissingFromSearch) {
-        filteredGeocodes.addAll(cachedMissingFromSearch);
-    }
-
-    public Set<String> getFilteredGeocodes() {
-        return Collections.unmodifiableSet(filteredGeocodes);
-    }
-
-    public void addSearchResult(SearchResult other) {
-        if (other != null) {
-            addGeocodes(other.geocodes);
-            addFilteredGeocodes(other.filteredGeocodes);
-        }
     }
 
 }

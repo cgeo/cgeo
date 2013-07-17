@@ -22,8 +22,7 @@ public final class DistanceParser {
      * @throws NumberFormatException
      *             if the given number is invalid
      */
-    public static float parseDistance(String distanceText, final boolean metricUnit)
-            throws NumberFormatException {
+    public static float parseDistance(String distanceText, final boolean metricUnit) throws NumberFormatException {
         final MatcherWrapper matcher = new MatcherWrapper(pattern, distanceText);
 
         if (!matcher.find()) {

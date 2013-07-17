@@ -8,7 +8,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
@@ -260,12 +259,12 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private void initializeDistanceUnitSelector() {
         if (StringUtils.isBlank(distanceUnit)) {
-            if (Settings.isUseImperialUnits()) {
-                distanceUnitSelector.setSelection(2); // ft
-                distanceUnit = res.getStringArray(R.array.distance_units)[2];
-            } else {
+            if (Settings.isUseMetricUnits()) {
                 distanceUnitSelector.setSelection(0); // m
                 distanceUnit = res.getStringArray(R.array.distance_units)[0];
+            } else {
+                distanceUnitSelector.setSelection(2); // ft
+                distanceUnit = res.getStringArray(R.array.distance_units)[2];
             }
         }
 
@@ -520,8 +519,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
             double distance;
             try {
-                distance = DistanceParser.parseDistance(distanceText,
-                        !Settings.isUseImperialUnits());
+                distance = DistanceParser.parseDistance(distanceText, Settings.isUseMetricUnits());
             } catch (NumberFormatException e) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;

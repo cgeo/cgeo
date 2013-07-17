@@ -147,7 +147,10 @@ public final class ConnectorFactory {
         final SearchResult result = new SearchResult();
         for (final ISearchByViewPort vpconn : searchByViewPortConns) {
             if (vpconn.isActivated()) {
-                result.addSearchResult(vpconn.searchByViewport(viewport, tokens));
+                final SearchResult temp = vpconn.searchByViewport(viewport, tokens);
+                if (temp != null) {
+                    result.addGeocodes(temp.getGeocodes());
+                }
             }
         }
         return result;

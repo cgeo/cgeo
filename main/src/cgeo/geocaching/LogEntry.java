@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 

@@ -54,13 +54,13 @@ public abstract class GPXParser extends FileParser {
     /**
      * Attention: case sensitive geocode pattern to avoid matching normal words in the name or description of the cache.
      */
-    private static final Pattern PATTERN_GEOCODE = Pattern.compile("([A-Z][0-9A-Z]+)");
-    private static final Pattern PATTERN_GUID = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
-    private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile(".*" + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternGeocode = Pattern.compile("([A-Z][0-9A-Z]+)");
+    private static final Pattern patternGuid = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternUrlGeocode = Pattern.compile(".*" + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
     /**
      * supported groundspeak extensions of the GPX format
      */
-    private static final String[] GROUNDSPEAK_NAMESPACE = new String[] {
+    private static final String[] nsGCList = new String[] {
             "http://www.groundspeak.com/cache/1/1", // PQ 1.1
             "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
             "http://www.groundspeak.com/cache/1/0", // PQ 1.0
@@ -434,14 +434,14 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end(String url) {
-                final MatcherWrapper matcher = new MatcherWrapper(PATTERN_GUID, url);
+                final MatcherWrapper matcher = new MatcherWrapper(patternGuid, url);
                 if (matcher.matches()) {
                     final String guid = matcher.group(1);
                     if (StringUtils.isNotBlank(guid)) {
                         cache.setGuid(guid);
                     }
                 }
-                final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
+                final MatcherWrapper matcherCode = new MatcherWrapper(patternUrlGeocode, url);
                 if (matcherCode.matches()) {
                     final String geocode = matcherCode.group(1);
                     cache.setGeocode(geocode);
@@ -483,7 +483,7 @@ public abstract class GPXParser extends FileParser {
         }
 
         // 3 different versions of the GC schema
-        for (final String nsGC : GROUNDSPEAK_NAMESPACE) {
+        for (final String nsGC : nsGCList) {
             // waypoints.cache
             final Element gcCache = cacheParent.getChild(nsGC, "cache");
 
@@ -849,7 +849,7 @@ public abstract class GPXParser extends FileParser {
             return;
         }
         final String trimmed = input.trim();
-        final MatcherWrapper matcherGeocode = new MatcherWrapper(PATTERN_GEOCODE, trimmed);
+        final MatcherWrapper matcherGeocode = new MatcherWrapper(patternGeocode, trimmed);
         if (matcherGeocode.find()) {
             final String geocode = matcherGeocode.group(1);
             // a geocode should not be part of a word

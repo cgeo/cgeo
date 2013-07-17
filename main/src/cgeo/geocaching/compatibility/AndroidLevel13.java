@@ -23,4 +23,9 @@ public class AndroidLevel13 implements AndroidLevel13Interface {
         return dimensions;
     }
 
+    @Override
+    public int getDisplayHeight() {
+        return getDisplaySize().y;
+    }
+
 }

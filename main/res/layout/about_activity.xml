@@ -218,27 +218,14 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/changelog_master"
+                android:id="@+id/changelog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_margin="7dip"
                 android:linksClickable="true"
                 android:paddingLeft="3dip"
-                android:text="@string/changelog_master"
-                android:textColor="?text_color"
-                android:textColorLink="?text_color_link"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/changelog_release"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_margin="7dip"
-                android:linksClickable="true"
-                android:paddingLeft="3dip"
-                android:text="@string/changelog_release"
+                android:text="@string/changelog"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
                 android:textSize="12sp" />

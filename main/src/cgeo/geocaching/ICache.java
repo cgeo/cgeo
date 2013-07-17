@@ -3,8 +3,6 @@
  */
 package cgeo.geocaching;
 
-import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 
 import java.util.Date;
@@ -14,7 +12,7 @@ import java.util.Map;
 /**
  * Basic interface for caches
  */
-public interface ICache extends ILogable, ICoordinates {
+public interface ICache extends IBasicCache {
 
     /**
      * @return Displayed owner, might differ from the real owner
@@ -65,6 +63,7 @@ public interface ICache extends ILogable, ICoordinates {
     /**
      * @return Guid
      */
+    @Override
     public String getGuid();
 
     /**
@@ -94,7 +93,7 @@ public interface ICache extends ILogable, ICoordinates {
      * @return true if the cache is on the watchlist of the user
      *
      */
-    public boolean isOnWatchlist();
+    public boolean isWatchlist();
 
     /**
      * @return The date the cache has been hidden
@@ -130,35 +129,4 @@ public interface ICache extends ILogable, ICoordinates {
      * @return normalized, cached name which sort also correct for numerical parts in the name
      */
     public String getNameForSorting();
-
-    /**
-     * @return Tradi, multi etc.
-     */
-    CacheType getType();
-
-    /**
-     * @return Micro, small etc.
-     */
-    CacheSize getSize();
-
-    /**
-     * @return true if the user already found the cache
-     *
-     */
-    boolean isFound();
-
-    /**
-     * @return true if the cache is disabled, false else
-     */
-    boolean isDisabled();
-
-    /**
-     * @return Difficulty assessment
-     */
-    float getDifficulty();
-
-    /**
-     * @return Terrain assessment
-     */
-    float getTerrain();
 }

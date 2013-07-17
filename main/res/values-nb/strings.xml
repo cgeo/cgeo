@@ -7,7 +7,7 @@
     <string name="cache">Cache</string>
     <string name="detail">Detalj</string>
     <string name="search">Søk</string>
-    <string name="settings_titlebar">c:geo Instillinger</string>
+    <string name="settings">Instillinger</string>
     <string name="about">Om c:geo</string>
 
     <!-- actionbar -->
@@ -29,7 +29,7 @@
     <string name="lostfound">Lost &amp; found</string>
     <string name="ape">Prosjekt A.P.E. cache</string>
     <string name="gchq">Groundspeak hovedkvarter</string>
-    <string name="gps">GPS adventures exhibit</string>
+    <string name="gps">GPS cache</string>
 
     <!-- waypoints -->
     <string name="wp_final">Sluttpunkt</string>
@@ -103,6 +103,7 @@
     <string name="err_auth_initialize">Beklager, c:geo klarte ikke å igangsette autoriserings-prosessen.</string>
     <string name="err_auth_process">Autoriserings-prosessen mislyktes.</string>
     <string name="err_cannot_log_visit">c:geo har ikke nok informasjon til å logge funn. Prøv å laste inn cachens detaljer først.</string>
+    <string name="err_init_cleared">Beklager, c:geo klarte ikke å fjerne innloggings-opplysningene.</string>
     <string name="err_download_fail">Beklager. c:geo klarte ikke å laste ned cachene p.g.a.</string>
     <string name="err_dwld_details_failed">Beklager, c:geo klarte ikke å laste ned cachens detaljer</string>
     <string name="err_load_descr_failed">Beklager, c:geo klarte ikke å åpne beskrivelsen.</string>
@@ -187,10 +188,12 @@
     <string name="about_contributors">Bidragsytere</string>
 
     <!-- init -->
+    <string name="init_geocaching">Geocaching.com</string>
     <string name="init_gcvote">GCVote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Brukernavn</string>
     <string name="init_password">Passord</string>
+    <string name="init_passvote">Passord</string>
     <string name="init_login">Sjekk innloggings-opplysninger</string>
     <string name="init_login_popup">Logg inn</string>
     <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
@@ -198,23 +201,19 @@
     <string name="init_login_popup_failed">Innlogging mislyktes.</string>
     <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
     <string name="init_twitter_authorize">Autoriser c:geo</string>
+    <string name="init_twitter_publish">Del på Twitter når du finner cacher</string>
     <string name="init_signature">Signatur</string>
+    <string name="init_other">Andre instillinger</string>
     <string name="init_skin">Hvitt tema</string>
-    <string name="init_summary_skin">Hvitt tema</string>
     <string name="init_address">Vis adressen i menyen</string>
-    <string name="init_summary_address">Vis adressen i menyen</string>
     <string name="init_exclude">Ekskluder egne og funnede cacher fra kartet</string>
-    <string name="init_summary_exclude">Ekskluder egne og funnede cacher fra kartet</string>
     <string name="init_disabled">Ekskluder deaktiverte cacher</string>
-    <string name="init_summary_disabled">Ekskluder deaktiverte cacher</string>
     <string name="init_offline">Lagre kartet for offline-bruk (små deler)</string>
-    <string name="init_summary_offline">Lagre kartet for offline-bruk (små deler)</string>
     <string name="init_units">Bruk imperialistiske måleenheter</string>
-    <string name="init_summary_units">Bruk imperialistiske måleenheter</string>
     <string name="init_autoload">Last full beskrivelse automatisk</string>
-    <string name="init_summary_autoload">Last full beskrivelse automatisk</string>
     <string name="init_livelist">Vis cachers retning i listen</string>
-    <string name="init_summary_livelist">Vis cachers retning i listen</string>
+    <string name="init_clear">Ikke husk meg</string>
+    <string name="init_cleared">c:geo fjernet innloggings-opplysningene.</string>
 
     <!-- auth -->
     <string name="auth_twitter">Twitter</string>
@@ -385,7 +384,7 @@
     <string name="license_dismiss">Dismiss</string>
 
     <!-- next things -->
-    <string name="settings_gc_legal_note">For å bruke tjenestene til Geocaching.com, må brukeren samtykke i vilkårene og betingelsene til Groundspeak\'s ansvarsfraskrivelse.</string>
+    <string name="legal_note">For å bruke tjenestene til Geocaching.com, må brukeren samtykke i vilkårene og betingelsene til <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak\'s ansvarsfraskrivelse</a></string>
     <string name="support">e-post adresse: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
     <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>
     <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>

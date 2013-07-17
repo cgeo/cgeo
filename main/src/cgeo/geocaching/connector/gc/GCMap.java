@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -337,7 +337,7 @@ public class GCMap {
                             Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
                         }
                         else {
-                            searchResult.addSearchResult(search);
+                            searchResult.addGeocodes(search.getGeocodes());
                         }
                         Tile.Cache.add(tile);
                     }
@@ -349,21 +349,20 @@ public class GCMap {
 
                 }
             }
-
-            // Check for vanished found caches
-            if (tiles.iterator().next().getZoomlevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
-                searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
-            }
         }
 
-        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isPremiumMember()) {
+        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
             final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 //FIXME We don't have a RecaptchaReceiver!?
                 SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
-                    lastSearchViewport = cgData.getBounds(geocodes);
+                    if (Settings.isPremiumMember()) {
+                        lastSearchViewport = cgData.getBounds(geocodes);
+                    } else {
+                        lastSearchViewport = new Viewport(center, center);
+                    }
                     searchResult.addGeocodes(geocodes);
                 }
             }

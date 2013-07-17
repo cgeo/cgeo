@@ -3,7 +3,7 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;

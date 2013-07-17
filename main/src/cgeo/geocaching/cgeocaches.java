@@ -31,9 +31,10 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.ComparatorUserInterface;
+import cgeo.geocaching.sorting.EventDateComparator;
+import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -165,12 +166,13 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
      */
     private MenuItem navigationMenu;
 
-    // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
         try {
             setAdapter();
 
             updateTitle();
+
+            setDateComparatorForEventList();
 
             showFooterMoreCaches();
 
@@ -555,8 +557,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         } else {
             if (type == CacheListType.HISTORY) {
                 final SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_HISTORY, 0, res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
-                subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
                 subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
+                subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
                 subMenu.add(0, MENU_CLEAR_OFFLINE_LOGS, 0, res.getString(R.string.caches_clear_offlinelogs));
                 menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)).setIcon(R.drawable.ic_menu_set_as);
             } else {
@@ -624,13 +626,11 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
             if (type == CacheListType.OFFLINE || type == CacheListType.HISTORY) { // only offline list
                 setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
+                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
                 setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
             } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
-            }
-            if (type == CacheListType.OFFLINE) {
-                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
             }
 
             MenuItem item = menu.findItem(MENU_DROP_LIST);
@@ -907,10 +907,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 NavigationAppFactory.showNavigationMenu(this, cache, null, null);
                 break;
             case MENU_CACHE_DETAILS:
-                final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-                cachesIntent.putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
-                cachesIntent.putExtra(Intents.EXTRA_NAME, cache.getName());
-                startActivity(cachesIntent);
+                CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
                 break;
             case MENU_DROP_CACHE:
                 cache.drop(new Handler() {
@@ -1623,6 +1620,32 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
     }
 
+    /**
+     * set date comparator for pure event lists
+     *
+     * TODO: move this method into the adapter
+     */
+    private void setDateComparatorForEventList() {
+        if (CollectionUtils.isNotEmpty(cacheList)) {
+            boolean eventsOnly = true;
+            for (final Geocache cache : cacheList) {
+                if (!cache.isEventCache()) {
+                    eventsOnly = false;
+                    break;
+                }
+            }
+            if (eventsOnly) {
+                adapter.setComparator(new EventDateComparator());
+            }
+            else if (type == CacheListType.HISTORY) {
+                adapter.setComparator(new VisitComparator());
+            }
+            else if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof EventDateComparator) {
+                adapter.setComparator(null);
+            }
+        }
+    }
+
     public static void startActivityNearest(final AbstractActivity context, final Geopoint coordsNow) {
         if (!isValidCoords(context, coordsNow)) {
             return;
@@ -1750,7 +1773,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 loader = new OwnerGeocacheListLoader(app, ownerName);
                 break;
             case MAP:
-                //TODO Build Null loader
+                //TODO Build Nullloader
                 title = res.getString(R.string.map_map);
                 search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
@@ -1784,7 +1807,6 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             cacheList.addAll(cachesFromSearchResult);
             search = searchIn;
             adapter.reFilter();
-            adapter.setInitialComparator();
             adapter.forceSort();
             adapter.notifyDataSetChanged();
             updateTitle();
@@ -1796,7 +1818,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     @Override
     public void onLoaderReset(Loader<SearchResult> arg0) {
-        //Not interesting
+        //Not interessting
     }
 }
 

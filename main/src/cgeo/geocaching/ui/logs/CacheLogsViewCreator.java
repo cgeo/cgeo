@@ -23,35 +23,24 @@ import java.util.Map.Entry;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
     private final boolean allLogs;
+    private final Geocache cache;
     private final Resources res = cgeoapplication.getInstance().getResources();
 
-    public CacheLogsViewCreator(CacheDetailActivity cacheDetailActivity, boolean allLogs) {
+    public CacheLogsViewCreator(CacheDetailActivity cacheDetailActivity, final Geocache cache, boolean allLogs) {
         super(cacheDetailActivity);
+        this.cache = cache;
         this.allLogs = allLogs;
-    }
-
-    /**
-     * May return null!
-     *
-     * @return
-     */
-    private Geocache getCache() {
-        if (this.activity instanceof CacheDetailActivity) {
-            CacheDetailActivity details = (CacheDetailActivity) this.activity;
-            return details.getCache();
-        }
-        return null;
     }
 
     @Override
     protected List<LogEntry> getLogs() {
-        return allLogs ? getCache().getLogs() : getCache().getFriendsLogs();
+        return allLogs ? cache.getLogs() : cache.getFriendsLogs();
     }
 
     @Override
     protected void addHeaderView() {
         // adds the log counts
-        final Map<LogType, Integer> logCounts = getCache().getLogCounts();
+        final Map<LogType, Integer> logCounts = cache.getLogCounts();
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
@@ -96,17 +85,17 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected boolean isValid() {
-        return getCache() != null;
+        return cache != null;
     }
 
     @Override
     protected String getGeocode() {
-        return getCache().getGeocode();
+        return cache.getGeocode();
     }
 
     @Override
     protected UserActionsClickListener createUserActionsListener() {
-        return new UserActionsClickListener(getCache());
+        return new UserActionsClickListener(cache);
     }
 
 }

@@ -9,20 +9,16 @@ import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.ViewById;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 @EActivity
 public class AboutActivity extends AbstractActivity {
     @ViewById(R.id.about_version_string) protected TextView version;
     @ViewById(R.id.contributors) protected TextView contributors;
-    @ViewById(R.id.changelog_master) protected TextView changeLogMaster;
-    @ViewById(R.id.changelog_release) protected TextView changeLogRelease;
+    @ViewById(R.id.changelog) protected TextView changeLog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,13 +30,7 @@ public class AboutActivity extends AbstractActivity {
     void initializeViews() {
         version.setText(Version.getVersionName(this));
         contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-        changeLogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-        final String changeLogMasterString = getString(R.string.changelog_master);
-        if (StringUtils.isBlank(changeLogMasterString)) {
-            changeLogMaster.setVisibility(View.GONE);
-        } else {
-            changeLogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-        }
+        changeLog.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
     }
 
     @Click(R.id.donate)

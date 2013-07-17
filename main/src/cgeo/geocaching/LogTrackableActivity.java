@@ -9,7 +9,6 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
@@ -224,7 +223,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
 
-        if (Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
+        if (Settings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);

@@ -1,7 +1,7 @@
 package cgeo.geocaching.speech;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.IConversion;
@@ -24,17 +24,17 @@ public class TextFactory {
     private static String getDistance(Geopoint position, Geopoint target) {
         final float kilometers = position.distanceTo(target);
 
-        if (Settings.isUseImperialUnits()) {
-            return getDistance(kilometers / IConversion.MILES_TO_KILOMETER,
-                    (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET),
-                    3.0f, 0.2f, 300,
-                    R.plurals.tts_miles, R.string.tts_one_mile,
-                    R.plurals.tts_feet, R.string.tts_one_foot);
+        if (Settings.isUseMetricUnits()) {
+            return getDistance(kilometers, (int) (kilometers * 1000.0),
+                    5.0f, 1.0f, 50,
+                    R.plurals.tts_kilometers, R.string.tts_one_kilometer,
+                    R.plurals.tts_meters, R.string.tts_one_meter);
         }
-        return getDistance(kilometers, (int) (kilometers * 1000.0),
-                5.0f, 1.0f, 50,
-                R.plurals.tts_kilometers, R.string.tts_one_kilometer,
-                R.plurals.tts_meters, R.string.tts_one_meter);
+        return getDistance(kilometers / IConversion.MILES_TO_KILOMETER,
+                (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET),
+                3.0f, 0.2f, 300,
+                R.plurals.tts_miles, R.string.tts_one_mile,
+                R.plurals.tts_feet, R.string.tts_one_foot);
     }
 
     private static String getDistance(float farDistance, int nearDistance,

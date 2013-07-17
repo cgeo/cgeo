@@ -93,7 +93,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
+            ((ViewPager) container).removeView((View) object);
         }
 
         @Override
@@ -123,7 +123,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
                     // Result from getView() is maybe cached, but it should be valid because the
                     // creator should be informed about data-changes with notifyDataSetChanged()
                     view = creator.getView();
-                    container.addView(view, 0);
+                    ((ViewPager) container).addView(view, 0);
                 }
             } catch (Exception e) {
                 Log.e("ViewPagerAdapter.instantiateItem ", e);

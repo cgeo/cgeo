@@ -7,7 +7,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -17,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
@@ -121,20 +119,6 @@ public class CompassActivity extends AbstractActivity {
         compassView.destroyDrawingCache();
         SpeechService.stopService(this);
         super.onDestroy();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        setContentView(R.layout.compass_activity);
-        Views.inject(this);
-
-        setTitle();
-        setDestCoords();
-        setCacheInfo();
-
-        geoDirHandler.updateAll();
     }
 
     @Override
@@ -277,7 +261,12 @@ public class CompassActivity extends AbstractActivity {
                         navAccuracy.setText(null);
                     }
 
-                    navLocation.setText(geo.getCoords().toString());
+                    if (geo.getAltitude() != 0.0f) {
+                        final String humanAlt = Units.getDistanceFromMeters((float) geo.getAltitude());
+                        navLocation.setText(geo.getCoords() + " | " + humanAlt);
+                    } else {
+                        navLocation.setText(geo.getCoords().toString());
+                    }
 
                     updateDistanceInfo(geo);
                 } else {

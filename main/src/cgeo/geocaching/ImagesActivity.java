@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.ImagesList.ImageType;
 
@@ -58,8 +57,7 @@ public class ImagesActivity extends AbstractActivity {
             return;
         }
 
-        offline = cgData.isOffline(geocode, null) && (imgType == ImageType.SpoilerImages
-                || Settings.isStoreLogImages());
+        offline = cgData.isOffline(geocode, null) && (imgType == ImageType.SpoilerImages || Settings.isStoreLogImages());
     }
 
     @Override
