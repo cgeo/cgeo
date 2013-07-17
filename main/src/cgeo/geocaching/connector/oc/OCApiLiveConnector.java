@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ILoggingManager;

@@ -1,13 +1,11 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider.Smiley;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
@@ -86,6 +84,6 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
 
     protected void insertIntoLog(String newText, final boolean moveCursor) {
         final EditText log = (EditText) findViewById(R.id.log);
-        ActivityMixin.insertAtPosition(log, newText, moveCursor);
+        insertAtPosition(log, newText, moveCursor);
     }
 }

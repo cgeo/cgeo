@@ -3,7 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.enumerations.LogType;

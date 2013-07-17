@@ -1,13 +1,15 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.network.OAuthAuthorizationActivity;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
+
+    private final int siteResId = R.string.auth_ocde;
 
     public OCAuthorizationActivity() {
         super("www.opencaching.de",
@@ -36,7 +38,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
     @Override
     protected String getAuthTitle() {
-        return res.getString(R.string.auth_ocde);
+        return res.getString(siteResId);
     }
 
     @Override

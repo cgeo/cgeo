@@ -3,7 +3,6 @@ gen/
 /main/project/localization/*.missing
 /main/project/attributes/drawable-mdpi/
 /main/project/attributes/iconlist1res.html
-/main/project/settings/drawable-mdpi/
 /main/local.properties
 /main/private.properties
 /main/res/values/mapsapikey.xml

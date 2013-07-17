@@ -1,7 +1,7 @@
 package cgeo.geocaching.speech;
 
 import cgeo.geocaching.DirectionProvider;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -110,10 +110,10 @@ public class SpeechService extends Service implements OnInitListener {
     private static float getDeltaForDistance(final float distance) {
         if (distance > 1.0) {
             return 0.2f;
-        }
-        if (distance > 0.05) {
+        } else if (distance > 0.05) {
             return distance / 5.0f;
         }
+
         return 0f;
     }
 

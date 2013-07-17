@@ -4,6 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
@@ -27,7 +28,6 @@ import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -51,16 +51,16 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-final class OkapiClient {
+final public class OkapiClient {
 
     private static final char SEPARATOR = '|';
     private static final String SEPARATOR_STRING = Character.toString(SEPARATOR);
-    private static final SimpleDateFormat LOG_DATE_FORMAT;
+    private static final SimpleDateFormat logDateFormat;
+
     static {
-        LOG_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", Locale.US);
-        LOG_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+        logDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", Locale.US);
+        logDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
-    private static final SimpleDateFormat ISO8601DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());
 
     private static final String CACHE_ATTRNAMES = "attrnames";
     private static final String WPT_LOCATION = "location";
@@ -95,7 +95,6 @@ final class OkapiClient {
     private static final String CACHE_NAME = "name";
     private static final String CACHE_CODE = "code";
     private static final String CACHE_REQ_PASSWORD = "req_passwd";
-    private static final String CACHE_MY_NOTES = "my_notes";
 
     private static final String LOG_TYPE = "type";
     private static final String LOG_COMMENT = "comment";
@@ -113,7 +112,7 @@ final class OkapiClient {
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden|alt_wpts|attrnames|req_passwd";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note";
-    private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched|my_notes";
+    private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched";
 
     private static final String METHOD_SEARCH_NEAREST = "services/caches/search/nearest";
     private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
@@ -140,7 +139,7 @@ final class OkapiClient {
         return parseCache(data);
     }
 
-    public static List<Geocache> getCachesAround(final Geopoint center, final OCApiConnector connector) {
+    public static List<Geocache> getCachesAround(final Geopoint center, OCApiConnector connector) {
         final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
@@ -150,7 +149,7 @@ final class OkapiClient {
         return requestCaches(connector, params, valueMap);
     }
 
-    private static List<Geocache> requestCaches(final OCApiConnector connector, final Parameters params, final Map<String, String> valueMap) {
+    private static List<Geocache> requestCaches(OCApiConnector connector, final Parameters params, final Map<String, String> valueMap) {
         addFilterParams(valueMap, connector);
         params.add("search_params", new JSONObject(valueMap).toString());
         addRetrieveParams(params, connector);
@@ -165,7 +164,7 @@ final class OkapiClient {
     }
 
     // Assumes level 3 OAuth
-    public static List<Geocache> getCachesBBox(final Viewport viewport, final OCApiConnector connector) {
+    public static List<Geocache> getCachesBBox(final Viewport viewport, OCApiConnector connector) {
 
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
             return Collections.emptyList();
@@ -182,7 +181,7 @@ final class OkapiClient {
         return requestCaches(connector, params, valueMap);
     }
 
-    public static boolean setWatchState(final Geocache cache, final boolean watched, final OCApiConnector connector) {
+    public static boolean setWatchState(final Geocache cache, final boolean watched, OCApiConnector connector) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("watched", watched ? "true" : "false");
 
@@ -197,12 +196,12 @@ final class OkapiClient {
         return true;
     }
 
-    public static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final String logPassword, final OCApiConnector connector) {
+    public static LogResult postLog(final Geocache cache, LogType logType, Calendar date, String log, String logPassword, OCApiConnector connector) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("logtype", logType.oc_type);
         params.add("comment", log);
         params.add("comment_format", "plaintext");
-        params.add("when", LOG_DATE_FORMAT.format(date.getTime()));
+        params.add("when", logDateFormat.format(date.getTime()));
         if (logType.equals(LogType.NEEDS_MAINTENANCE)) {
             params.add("needs_maintenance", "true");
         }
@@ -333,9 +332,6 @@ final class OkapiClient {
             if (!response.isNull(CACHE_IS_WATCHED)) {
                 cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
             }
-            if (!response.isNull(CACHE_MY_NOTES)) {
-                cache.setPersonalNote(response.getString(CACHE_MY_NOTES));
-            }
             cache.setLogPasswordRequired(response.getBoolean(CACHE_REQ_PASSWORD));
 
             cache.setDetailedUpdatedNow();
@@ -367,7 +363,7 @@ final class OkapiClient {
         }
     }
 
-    private static String absoluteUrl(final String url, final String geocode) {
+    private static String absoluteUrl(String url, String geocode) {
         final Uri uri = Uri.parse(url);
 
         if (!uri.isAbsolute()) {
@@ -380,11 +376,11 @@ final class OkapiClient {
         return url;
     }
 
-    private static String parseUser(final JSONObject user) throws JSONException {
+    private static String parseUser(JSONObject user) throws JSONException {
         return user.getString(USER_USERNAME);
     }
 
-    private static List<LogEntry> parseLogs(final JSONArray logsJSON) {
+    private static List<LogEntry> parseLogs(JSONArray logsJSON) {
         List<LogEntry> result = null;
         for (int i = 0; i < logsJSON.length(); i++) {
             try {
@@ -405,7 +401,7 @@ final class OkapiClient {
         return result;
     }
 
-    private static List<Waypoint> parseWaypoints(final JSONArray wptsJson) {
+    private static List<Waypoint> parseWaypoints(JSONArray wptsJson) {
         List<Waypoint> result = null;
         for (int i = 0; i < wptsJson.length(); i++) {
             try {
@@ -429,7 +425,7 @@ final class OkapiClient {
         return result;
     }
 
-    private static LogType parseLogType(final String logType) {
+    private static LogType parseLogType(String logType) {
         if ("Found it".equalsIgnoreCase(logType)) {
             return LogType.FOUND_IT;
         }
@@ -439,7 +435,7 @@ final class OkapiClient {
         return LogType.NOTE;
     }
 
-    private static WaypointType parseWptType(final String wptType) {
+    private static WaypointType parseWptType(String wptType) {
         if ("parking".equalsIgnoreCase(wptType)) {
             return WaypointType.PARKING;
         }
@@ -465,6 +461,7 @@ final class OkapiClient {
     }
 
     private static Date parseDate(final String date) {
+        final SimpleDateFormat ISO8601DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());
         final String strippedDate = date.replaceAll("\\+0([0-9]){1}\\:00", "+0$100");
         try {
             return ISO8601DATEFORMAT.parse(strippedDate);
@@ -484,7 +481,7 @@ final class OkapiClient {
         return null;
     }
 
-    private static List<String> parseAttributes(final JSONArray nameList) {
+    private static List<String> parseAttributes(JSONArray nameList) {
 
         final List<String> result = new ArrayList<String>();
 
@@ -565,7 +562,7 @@ final class OkapiClient {
         return CacheType.UNKNOWN;
     }
 
-    private static String getCoreFields(final OCApiConnector connector) {
+    private static String getCoreFields(OCApiConnector connector) {
         if (connector == null) {
             Log.e("OkapiClient.getCoreFields called with invalid connector");
             return StringUtils.EMPTY;
@@ -578,7 +575,7 @@ final class OkapiClient {
         return SERVICE_CACHE_CORE_FIELDS;
     }
 
-    private static String getFullFields(final OCApiConnector connector) {
+    private static String getFullFields(OCApiConnector connector) {
         if (connector == null) {
             Log.e("OkapiClient.getFullFields called with invalid connector");
             return StringUtils.EMPTY;
@@ -629,7 +626,7 @@ final class OkapiClient {
         return "en";
     }
 
-    private static void addFilterParams(final Map<String, String> valueMap, final OCApiConnector connector) {
+    private static void addFilterParams(final Map<String, String> valueMap, OCApiConnector connector) {
         if (!Settings.isExcludeDisabledCaches()) {
             valueMap.put("status", "Available|Temporarily unavailable");
         }
@@ -642,13 +639,13 @@ final class OkapiClient {
         }
     }
 
-    private static void addRetrieveParams(final Parameters params, final OCApiConnector connector) {
+    private static void addRetrieveParams(final Parameters params, OCApiConnector connector) {
         params.add("retr_method", METHOD_RETRIEVE_CACHES);
         params.add("retr_params", "{\"fields\": \"" + getCoreFields(connector) + "\"}");
         params.add("wrap", "true");
     }
 
-    private static String getFilterFromType(final CacheType cacheType) {
+    private static String getFilterFromType(CacheType cacheType) {
         switch (cacheType) {
             case EVENT:
                 return "Event";
@@ -667,7 +664,7 @@ final class OkapiClient {
         }
     }
 
-    public static UserInfo getUserInfo(final OCApiLiveConnector connector) {
+    public static UserInfo getUserInfo(OCApiLiveConnector connector) {
         final Parameters params = new Parameters("fields", USER_INFO_FIELDS);
 
         final JSONObject data = request(connector, OkapiService.SERVICE_USER, params);
@@ -677,30 +674,32 @@ final class OkapiClient {
         }
 
         String name = StringUtils.EMPTY;
-        boolean successUserName = false;
+        int finds = 0;
+        boolean success = true;
 
         if (!data.isNull(USER_USERNAME)) {
             try {
                 name = data.getString(USER_USERNAME);
-                successUserName = true;
             } catch (final JSONException e) {
                 Log.e("OkapiClient.getUserInfo - name", e);
+                success = false;
             }
+        } else {
+            success = false;
         }
-
-        int finds = 0;
-        boolean successFinds = false;
 
         if (!data.isNull(USER_CACHES_FOUND)) {
             try {
                 finds = data.getInt(USER_CACHES_FOUND);
-                successFinds = true;
             } catch (final JSONException e) {
                 Log.e("OkapiClient.getUserInfo - finds", e);
+                success = false;
             }
+        } else {
+            success = false;
         }
 
-        return new UserInfo(name, finds, successUserName && successFinds ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
+        return new UserInfo(name, finds, success ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
     }
 
 }

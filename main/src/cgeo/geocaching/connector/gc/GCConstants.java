@@ -36,7 +36,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_LATLON = Pattern.compile("<span id=\"uxLatLon\"[^>]*>(.*?)</span>");
     public final static Pattern PATTERN_LATLON_ORIG = Pattern.compile("\\{\"isUserDefined\":true[^}]+?\"oldLatLngDisplay\":\"([^\"]+)\"\\}");
     public final static Pattern PATTERN_LOCATION = Pattern.compile(Pattern.quote("<span id=\"ctl00_ContentBody_Location\">In ") + "(?:<a href=[^>]*>)?(.*?)<");
-    public final static Pattern PATTERN_PERSONALNOTE = Pattern.compile("<p id=\"cache_note\"[^>]*>(.*?)</p>", Pattern.DOTALL);
+    public final static Pattern PATTERN_PERSONALNOTE = Pattern.compile("<p id=\"cache_note\"[^>]*>(.*?)</p>");
     public final static Pattern PATTERN_NAME = Pattern.compile("<span id=\"ctl00_ContentBody_CacheName\">(.*?)</span>");
     public final static Pattern PATTERN_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     public final static Pattern PATTERN_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_Localize[\\d]+\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
@@ -69,7 +69,7 @@ public final class GCConstants {
     public static final String MEMBER_STATUS_RENEW = "<a id=\"ctl00_hlRenew";
     public static final String MEMBER_STATUS_PM = "Premium Member";
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
-    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("<strong[^>]*>.*?([\\d,.]+) Caches Found", Pattern.DOTALL);
+    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("<strong[^>]*>.*?([\\d,.]+) Caches Found");
     public static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
     public static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
     public static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">");
@@ -122,9 +122,9 @@ public final class GCConstants {
     public final static Pattern PATTERN_SEARCH_DIFFICULTY_TERRAIN = Pattern.compile("<span class=\"small\">([0-5]([\\.,]5)?)/([0-5]([\\.,]5)?)</span><br />");
     public final static Pattern PATTERN_SEARCH_CONTAINER = Pattern.compile("<img src=\"/images/icons/container/([^\\.]+)\\.gif\"");
     public final static Pattern PATTERN_SEARCH_GEOCODE = Pattern.compile("\\|\\W*(GC[0-9A-Z]+)[^\\|]*\\|");
-    public final static Pattern PATTERN_SEARCH_ID = Pattern.compile("name=\"CID\"[^v]*value=\"(\\d+)\"");
-    public final static Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("favorite-rank\">([0-9,.]+)</span>");
-    public final static Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("<span>Total Records\\D*(\\d+)<");
+    public final static Pattern PATTERN_SEARCH_ID = Pattern.compile("name=\"CID\"[^v]*value=\"([0-9]+)\"");
+    public final static Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("<span id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxFavoritesValue\" title=\"[^\"]*\" class=\"favorite-rank\">([0-9]+)</span>");
+    public final static Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("<td class=\"PageBuilderWidget\"><span>Total Records[^<]*<b>(\\d+)<\\/b>");
     public final static Pattern PATTERN_SEARCH_RECAPTCHA = Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>");
     public final static Pattern PATTERN_SEARCH_RECAPTCHACHALLENGE = Pattern.compile("challenge : '([^']+)'");
 

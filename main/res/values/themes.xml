@@ -23,6 +23,9 @@
 
     <style name="dark" parent="cgeo">
 
+        <!-- system values -->
+
+
         <!-- own values: colors -->
         <item name="text_color">@color/text_dark</item>
         <item name="text_color_headline">@color/text_headline_dark</item>
@@ -51,6 +54,9 @@
     </style>
 
     <style name="light" parent="cgeo">
+
+        <!-- system values -->
+
 
         <!-- own values: colors -->
         <item name="android:windowBackground">@color/just_white</item>
@@ -91,6 +97,9 @@
     <!-- TODO: Popup probably doesn't need all these fields set. Should delete unnecessary ones. -->
     <style name="popup_dark" parent="cgeo_popup">
 
+        <!-- system values -->
+
+
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
         <item name="text_color">@color/text_dark</item>
@@ -125,6 +134,9 @@
     <!-- TODO: Popup probably doesn't need all these fields set. Should delete unnecessary ones. -->
     <style name="popup_light" parent="cgeo_popup">
 
+        <!-- system values -->
+
+
         <!-- own values: colors -->
         <item name="android:windowBackground">@color/just_white</item>
         <item name="text_color">@color/text_light</item>
@@ -152,25 +164,5 @@
         <!-- own values: other -->
         <item name="compass">1</item>
     </style>
-    
-    <style name="settings" parent="android:Theme">
-        <item name="settings_cloud">@drawable/settings_cloud_white</item>
-        <item name="settings_details">@drawable/settings_details_white</item>
-        <item name="settings_eye">@drawable/settings_eye_white</item>
-        <item name="settings_map">@drawable/settings_map_white</item>
-        <item name="settings_nut">@drawable/settings_nut_white</item>
-        <item name="settings_pen">@drawable/settings_pen_white</item>
-        <item name="settings_sdcard">@drawable/settings_sdcard_white</item>
-    </style>
 
-    <style name="settings.light" parent="android:Theme.Light">
-        <item name="settings_cloud">@drawable/settings_cloud_black</item>
-        <item name="settings_details">@drawable/settings_details_black</item>
-        <item name="settings_eye">@drawable/settings_eye_black</item>
-        <item name="settings_map">@drawable/settings_map_black</item>
-        <item name="settings_nut">@drawable/settings_nut_black</item>
-        <item name="settings_pen">@drawable/settings_pen_black</item>
-        <item name="settings_sdcard">@drawable/settings_sdcard_black</item>
-    </style>
-    
 </resources>

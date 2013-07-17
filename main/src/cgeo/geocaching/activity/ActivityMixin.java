@@ -2,7 +2,7 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +16,6 @@ import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,10 +79,6 @@ public final class ActivityMixin {
         return R.style.popup_dark;
     }
 
-    public static void showToast(final Activity activity, final int resId) {
-        ActivityMixin.showToast(activity, activity.getString(resId));
-    }
-
     public static void showToast(final Activity activity, final String text) {
         if (StringUtils.isNotBlank(text)) {
             Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
@@ -134,32 +129,5 @@ public final class ActivityMixin {
 
     public static void invalidateOptionsMenu(Activity activity) {
         Compatibility.invalidateOptionsMenu(activity);
-    }
-
-    /**
-     * insert text into the EditText at the current cursor position
-     * 
-     * @param editText
-     * @param insertText
-     * @param moveCursor
-     *            place the cursor after the inserted text
-     */
-    public static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
-        int selectionStart = editText.getSelectionStart();
-        int selectionEnd = editText.getSelectionEnd();
-        int start = Math.min(selectionStart, selectionEnd);
-        int end = Math.max(selectionStart, selectionEnd);
-
-        final String content = editText.getText().toString();
-        String completeText;
-        if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
-            completeText = " " + insertText;
-        } else {
-            completeText = insertText;
-        }
-
-        editText.getText().replace(start, end, completeText);
-        int newCursor = moveCursor ? start + completeText.length() : start;
-        editText.setSelection(newCursor, newCursor);
     }
 }

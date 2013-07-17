@@ -24,6 +24,11 @@
         <item>@string/unit_mi</item>
     </string-array>
 
+    <string name="init_select_themefolder" translatable="false">…</string>
+    <string name="init_select_map_directory" translatable="false">…</string>
+    <string name="init_select_gpx_exportdir" translatable="false">…</string>
+    <string name="init_select_gpx_importdir" translatable="false">…</string>
+
     <!-- upload image scaling -->
     <integer-array name="log_image_scale_values">
         <item>-1</item>
@@ -32,12 +37,6 @@
         <item>800</item>
         <item>1024</item>
     </integer-array>
-    
-    <string name="settings_gc_legal_note_url" translatable="false">http://www.geocaching.com/about/termsofuse.aspx</string>
-    <string name="settings_offline_maps_url" translatable="false">http://faq.cgeo.org/#3_12</string>
-    <string name="settings_themes_url" translatable="false">http://faq.cgeo.org/#3_26</string>
-    <string name="settings_send2cgeo_url" translatable="false">http://send2.cgeo.org/</string>
-    <string name="settings_facebook_login_url" translatable="false">http://faq.cgeo.org/#1_38</string>
 
     <!-- contributors -->
     <string name="contributors" translatable="false">\n
@@ -94,5 +93,85 @@
 
     <!-- cache menu -->
     <string name="cache_menu_sygic" translatable="false">Sygic</string>
+
+  <!-- changelog -->
+  <string name="changelog" translatable="false">\n
+    <b>2013.06.05</b>\n
+    <b>Bugfixing:</b>\n
+    · Adaption to changes on gc.com (Logging date could be wrong in some cases)\n
+    \n
+    \n
+    <b>2013.05.31</b>\n
+    <b>Bugfixing:</b>\n
+    · Adaption to changes on gc.com (cache and TB log not possible, cache attributes not shown)\n
+    · Pictures in logs are now loaded in standard resolution like on the website to improve performance\n
+    · Corrected missing information and performance issues on nearby search for basic members\n
+    \n
+    \n<b>2013.05.22</b>\n<b>Bugfixing:</b>\n
+    · Fixed and improved nearby search for basic members after gc.com changes\n
+    · Avoid inconsistency of logbook while pictures are loaded in the background\n
+    \n
+    \n<b>2013.05.18</b>\n<b>Bugfixing:</b>\n
+    · Correction for compatibility issue with tablet devices\n
+    \n
+    \n<b>2013.05.16</b>\n<b>Bugfixing:</b>\n
+    · Adaption to changes on gc.com (live map)\n
+    \n
+    \n<b>2013.05.13</b>\n<b>Bugfixing:</b>\n
+    · Twitter option was not shown on logging page\n
+    · Disable trail on map did only work after refresh of the map\n
+    · Stability improvements when selecting log pictures to be attached\n
+    · Remove accidentely appended spaces in searches\n
+    · Stability improvements for GPX import and export\n
+    · Do not duplicate waypoints retrieved from the personal note when updating a cache\n
+    · Fixed a possible crash when device is rotated while cache list is shown\n
+    · Fixed a possible crash in \"Any destination\" menu\n
+    · Ignore hide setting when searching for owned caches\n
+    \n
+    \n<b>2013.04.03</b>\n<b>New Features/Functions:</b>\n
+    · Support of attaching pictures to logs\n
+    · Support of opencaching.de online API in live map and nearby search\n
+    · Support for searching opencaching.nl caches\n
+    · Alphabetical sorting of OSM:Offline maps in map selection\n 
+    · Color markers also in trackable logbook\n
+    · Edit cache type filter by clicking on filter bar\n
+    · Inverse sorting of cache lists (hit the same menu again)\n
+    · View pager for trackable activity\n
+    · Menu item to delete past events\n
+    · Settings: Option to ask for list to store caches\n
+    · Change list in cache details\n
+    · Ability to select \"All\" list from main screen\n
+    · Default log type for event caches will be \"Attended\" if \"Will attend\" was logged before\n
+    · Improved and extended cache type detection on live map\n
+    · Waypoints can be marked as visited\n
+    · Possibility to delete offline logs in lists\n
+    · Support of language specific characters in log text equally to the website\n
+    \n<b>Bugfixing:</b>\n
+    · Final flag icon lost when updating cache with self defined final\n
+    · Bad selection in directory chooser\n
+    · Log type \"Retract Listing\" now parsed correctly\n
+    · Active cache detail page now remembered when rotating device\n
+    · Replaced the term \"GC-Code\" by \"Geocode\"\n
+    · Improvements for light theme\n
+    · Share function uses short URL again\n
+    · Offline log marker now shown after autosave of log\n
+    · GPX export no longer exports waypoints without coordinates\n
+    · Corrections for light scheme on Adnroid 2.x devices\n
+    · Avoid crash if logging page is opened while not connected correctly\n
+     \n<a href="https://github.com/cgeo/cgeo/issues?milestone=9&amp;state=closed">Detailed list of all changes</a>\n
+    \n<b>Known Limitations/Bugs:</b>\n
+    · Live map:\n
+      Approximated coords due to limitations on the GC-website\n
+      Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
+      In fast mode the cache type might be wrong in rare cases\n
+      On low zoom owned/found caches may not be hidden anymore\n
+    · Other:\n
+      Log images with huge size cause a long loading time\n
+      After uploading log images they are only shown in the logview after refreshing the cache\n
+      The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
+      On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
+      A huge amount of pictures on the image tab of a cache might cause a crash\n<b>Old releases</b>\n
+    · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
+    \n</string>
 
 </resources>

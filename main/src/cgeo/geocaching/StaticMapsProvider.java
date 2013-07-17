@@ -6,7 +6,6 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;

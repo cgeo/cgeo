@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.ox;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;

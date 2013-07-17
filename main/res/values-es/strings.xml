@@ -7,7 +7,7 @@
     <string name="cache">Escondite</string>
     <string name="detail">Detalle</string>
     <string name="search">Buscar</string>
-    <string name="settings_titlebar">c:geo Ajustes</string>
+    <string name="settings">Ajustes</string>
     <string name="helpers">¿Qué instalar?</string>
     <string name="about">Sobre c:geo</string>
     <string name="latitude">Latitud</string>
@@ -161,6 +161,7 @@
     <string name="err_auth_initialize">Lo siento, c:geo no ha podido iniciar el proceso de autorización.</string>
     <string name="err_auth_process">El proceso de autorización ha fallado.</string>
     <string name="err_cannot_log_visit">c:geo no tiene información suficiente para registrar la visita. Inténtalo de nuevo con más detalles sobre el escondite.</string>
+    <string name="err_init_cleared">Lo siento, c:geo no puede borrar la información registrada.</string>
     <string name="err_download_fail">Lo siento, c:geo no ha podido descargar escondites a causa de </string>
     <string name="err_dwld_details_failed">Lo siento, c:geo no ha podido descargar los detalles del escondite.</string>
     <string name="err_load_descr_failed">Lo siento, c:geo no ha podido cargar la descripción.</string>
@@ -314,10 +315,12 @@
     <string name="about_contributors">Colaboradores</string>
 
     <!-- init -->
+    <string name="init_geocaching">Geocaching.com</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Usuario</string>
     <string name="init_password">Contraseña</string>
+    <string name="init_passvote">Contraseña</string>
     <string name="init_login">Acceder</string>
     <string name="init_login_popup">Acceso</string>
     <string name="init_login_popup_working">Accediendo a Geocaching.com…</string>
@@ -325,35 +328,32 @@
     <string name="init_login_popup_failed">Error en el acceso.</string>
     <string name="init_login_popup_failed_reason">El acceso ha fallado debido a </string>
     <string name="init_twitter_authorize">Autorizar a c:geo</string>
+    <string name="init_twitter_publish">Publicar estado cuando se encuente un escondite</string>
     <string name="init_signature">Firma</string>
+    <string name="init_signature_help_button">Ayuda</string>
+    <string name="init_signature_help_title">Trucos para la firma</string>
     <string name="init_signature_help_text">Escribe la firma que quieres usar en los registros.\nLas palabras especiales que puedes usar son: [DATE], [TIME], [USER] y [NUMBER].\nSerán reemplazados por sus valores al insertar la firma.</string>
     <string name="init_signature_template_button">Insertar plantilla</string>
     <string name="init_signature_template_date">Fecha</string>
     <string name="init_signature_template_time">Hora</string>
     <string name="init_signature_template_user">Usuario</string>
     <string name="init_signature_template_number">Número</string>
+    <string name="init_other">Otras opciones</string>
     <string name="init_skin">Fondo blanco (necesita reiniciar c:geo)</string>
-    <string name="init_summary_skin">Fondo blanco (necesita reiniciar c:geo)</string>
     <string name="init_address">Mostrar dirección en lugar de posición en la pantalla principal</string>
-    <string name="init_summary_address">Mostrar dirección en lugar de posición en la pantalla principal</string>
     <string name="init_captcha">Mostrar CAPTCHA si es necesario</string>
-    <string name="init_summary_captcha">Mostrar CAPTCHA si es necesario</string>
     <string name="init_useenglish">Usar inglés interno (necesita reiniciar c:geo)</string>
-    <string name="init_summary_useenglish">Usar inglés interno (necesita reiniciar c:geo)</string>
     <string name="init_exclude">Excluir encontrados y propios</string>
-    <string name="init_summary_exclude">Excluir encontrados y propios</string>
     <string name="init_disabled">Excluir escondites desactivados</string>
-    <string name="init_summary_disabled">Excluir escondites desactivados</string>
     <string name="init_offline">Guardar mapas para usar sin conexión</string>
-    <string name="init_summary_offline">Guardar mapas para usar sin conexión</string>
     <string name="init_save_log_img">Guardar imágenes de los registros</string>
-    <string name="init_summary_save_log_img">Guardar imágenes de los registros</string>
     <string name="init_units">Usar millas/pies (unidades imperiales)</string>
-    <string name="init_summary_units">Usar millas/pies (unidades imperiales)</string>
     <string name="init_autoload">Autocargar descripción larga</string>
-    <string name="init_summary_autoload">Autocargar descripción larga</string>
     <string name="init_livelist">Mostrar dirección a los escondites en su listado</string>
-    <string name="init_summary_livelist">Mostrar dirección a los escondites en su listado</string>
+    <string name="init_altitude">Corrección de altitud</string>
+    <string name="init_altitude_description">Si el GPS te indica una altitud errónea, puedes corregirla con un valor positivo o negativo. La corrección es siempre en metros.</string>
+    <string name="init_clear">Borrar acceso</string>
+    <string name="init_cleared">c:geo ha borrado la información de acceso.</string>
     <string name="init_backup">Backup</string>
     <string name="init_backup_backup">Copia de seguridad</string>
     <string name="init_backup_note">Esta opción copia/restaura la base de datos de escondites y puntos de referencia, no la configuración. Los datos de acceso y contraseña no se guardarán.</string>
@@ -364,10 +364,11 @@
     <string name="init_restore_failed">Restauración errónea</string>
     <string name="init_backup_last">Copia guardada el</string>
     <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
+    <string name="init_mapsources">Proveedor de mapas</string>
+    <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de línea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string>
     <string name="init_mapsource_select">Elige proveedor de mapas</string>
     <string name="init_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
-    <string name="init_summary_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
-    <string name="init_sigautoinsert">Insertar automáticamente</string>
+    <string name="init_sigautoinsert">Insertar firma automáticamente</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
@@ -376,7 +377,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Enviar a c:geo</string>
-    <string name="init_sendToCgeo_name">Nombre de tu dispositivo</string>
+    <string name="init_sendToCgeo_name">Nombre de tu dispositivo:</string>
     <string name="init_sendToCgeo_description">Enviar a c:geo (send2cgeo)te permite recibir escondites automáticamente desde la web de geocaching usando un complemento especialpara Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. C:geo funciona sin tener que registrar tu dispositivo.</string>
     <string name="init_sendToCgeo_register">Solicitar registro</string>
     <string name="init_sendToCgeo_registering">Registrando "Enviar a c:geo"…</string>
@@ -763,7 +764,7 @@
     <string name="attribute_food_no">No hay comida cerca</string>
 
     <!-- next things -->
-    <string name="settings_gc_legal_note">Para utilizar los servicios de Geocaching.com, debes aceptar las condiciones de Groundspeak.</string>
+    <string name="legal_note">Para utilizar los servicios de Geocaching.com, debes aceptar las <a href="http://www.geocaching.com/about/termsofuse.aspx">condiciones de Groundspeak</a>.</string>
     <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
 
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

@@ -114,6 +114,11 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public String[] getTokens() {
+        return null;
+    }
+
+    @Override
     public String getGeocodeFromUrl(final String url) {
         final String urlPrefix = getCacheUrlPrefix();
         if (StringUtils.startsWith(url, urlPrefix)) {

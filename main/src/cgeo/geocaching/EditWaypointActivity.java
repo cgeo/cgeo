@@ -10,11 +10,10 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
@@ -234,7 +233,7 @@ public class EditWaypointActivity extends AbstractActivity {
     private void initializeDistanceUnitSelector() {
         distanceUnits = new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
-            distanceUnitSelector.setSelection(Settings.isUseImperialUnits() ? 2 : 0); //0:m, 2:ft
+            distanceUnitSelector.setSelection(Settings.isUseMetricUnits() ? 0 : 2); //0:m, 2:ft
         }
     }
 
@@ -345,8 +344,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
                 double distance;
                 try {
-                    distance = DistanceParser.parseDistance(distanceText,
-                            !Settings.isUseImperialUnits());
+                    distance = DistanceParser.parseDistance(distanceText, Settings.isUseMetricUnits());
                 } catch (NumberFormatException e) {
                     showToast(res.getString(R.string.err_parse_dist));
                     return;
@@ -360,8 +358,7 @@ public class EditWaypointActivity extends AbstractActivity {
             final String name = StringUtils.isNotEmpty(givenName) ? givenName : res.getString(R.string.waypoint) + " " + (wpCount + 1);
             final String noteText = note.getText().toString().trim();
             final Geopoint coordsToSave = coords;
-            final int selectedTypeIndex = waypointTypeSelector.getSelectedItemPosition();
-            final WaypointType type = selectedTypeIndex >= 0 ? wpTypes.get(selectedTypeIndex) : waypoint.getWaypointType();
+            final WaypointType type = wpTypes.get(waypointTypeSelector.getSelectedItemPosition());
             final boolean visited = visitedCheckBox.isChecked();
             final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_being_saved), true);
             final Handler finishHandler = new Handler() {

@@ -5,7 +5,6 @@ import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -284,6 +283,7 @@ public class ImageSelectActivity extends AbstractActivity {
             image = BitmapFactory.decodeFile(filePath);
         }
         final BitmapDrawable scaledImage = ImageUtils.scaleBitmapTo(image, maxXY, maxXY);
+        image = null;
         final String uploadFilename = getOutputImageFile().getPath();
         ImageUtils.storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
         return uploadFilename;

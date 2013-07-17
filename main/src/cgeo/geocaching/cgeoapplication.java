@@ -170,10 +170,6 @@ public class cgeoapplication extends Application {
         return dir;
     }
 
-    public Float currentDirection() {
-        return currentDirObject().getMemory();
-    }
-
     public StatusUpdater getStatusUpdater() {
         return statusUpdater;
     }

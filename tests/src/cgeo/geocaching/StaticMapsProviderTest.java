@@ -3,14 +3,12 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.TestSettings;
+
+import junit.framework.TestCase;
 
 import android.test.suitebuilder.annotation.Suppress;
 
 import java.io.File;
-
-import junit.framework.TestCase;
 
 @Suppress
 public class StaticMapsProviderTest extends TestCase {
@@ -22,8 +20,8 @@ public class StaticMapsProviderTest extends TestCase {
 
         boolean backupStore = Settings.isStoreOfflineMaps();
         boolean backupStoreWP = Settings.isStoreOfflineWpMaps();
-        TestSettings.setStoreOfflineMaps(true);
-        TestSettings.setStoreOfflineWpMaps(true);
+        Settings.setStoreOfflineMaps(true);
+        Settings.setStoreOfflineWpMaps(true);
         try {
             Geopoint gp = new Geopoint(lat + 0.25d, lon + 0.25d);
             Geocache cache = new Geocache();
@@ -67,8 +65,8 @@ public class StaticMapsProviderTest extends TestCase {
             trailhead.setCoords(new Geopoint(lat + 0.24d + 2, lon + 0.25d + 2));
             assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
         } finally {
-            TestSettings.setStoreOfflineWpMaps(backupStoreWP);
-            TestSettings.setStoreOfflineMaps(backupStore);
+            Settings.setStoreOfflineWpMaps(backupStoreWP);
+            Settings.setStoreOfflineMaps(backupStore);
             deleteCacheDirectory(geocode);
         }
     }

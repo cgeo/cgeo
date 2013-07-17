@@ -28,7 +28,7 @@ public enum CacheType {
     LOSTANDFOUND("lostfound", "Lost & Found", "3ea6533d-bb52-42fe-b2d2-79a3424d4728", R.string.lostfound, R.drawable.type_event), // icon missing
     PROJECT_APE("ape", "Project Ape Cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape, R.drawable.type_ape),
     GCHQ("gchq", "Groundspeak HQ", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.drawable.type_hq),
-    GPS_EXHIBIT("gps", "GPS Adventures Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.drawable.type_event), // icon missing
+    GPS_EXHIBIT("gps", "GPS Cache Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.drawable.type_traditional), // icon missing
     BLOCK_PARTY("block", "Groundspeak Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.drawable.type_event), // icon missing
     UNKNOWN("unknown", "unknown", "", R.string.unknown, R.drawable.type_unknown),
     /** No real cache type -> filter */

@@ -10,7 +10,6 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -127,9 +126,7 @@ public class SearchActivity extends AbstractActivity {
 
         final IConnector connector = ConnectorFactory.getConnector(geocode);
         if (connector instanceof ISearchByGeocode) {
-            final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-            cachesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
-            startActivity(cachesIntent);
+            CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
             return true;
         }
 
@@ -151,7 +148,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void init() {
-        Settings.getGcLogin();
+        Settings.getLogin();
 
         buttonLatitude.setOnClickListener(new FindByCoordsAction());
         buttonLongitude.setOnClickListener(new FindByCoordsAction());

@@ -5,7 +5,7 @@ import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
@@ -120,7 +120,6 @@ public abstract class GCParser {
         final String[] rows = page.split("<tr class=");
         final int rows_count = rows.length;
 
-        int excludedCaches = 0;
         for (int z = 1; z < rows_count; z++) {
             final Geocache cache = new Geocache();
             final String row = rows[z];
@@ -158,7 +157,6 @@ public abstract class GCParser {
 
             if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
                 // skip disabled and archived caches
-                excludedCaches++;
                 continue;
             }
 
@@ -178,8 +176,7 @@ public abstract class GCParser {
             // cache distance - estimated distance for basic members
             final String distance = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
             if (distance != null) {
-                cache.setDistance(DistanceParser.parseDistance(distance,
-                        !Settings.isUseImperialUnits()));
+                cache.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
             }
 
             // difficulty/terrain
@@ -240,7 +237,7 @@ public abstract class GCParser {
 
             // favorite count
             try {
-                result = getNumberString(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true));
+                result = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true);
                 if (null != result) {
                     cache.setFavoritePoints(Integer.parseInt(result));
                 }
@@ -255,7 +252,7 @@ public abstract class GCParser {
         try {
             final String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (null != result) {
-                searchResult.setTotal(Integer.parseInt(result) - excludedCaches);
+                searchResult.setTotal(Integer.parseInt(result));
             }
         } catch (final NumberFormatException e) {
             Log.w("GCParser.parseSearch: Failed to parse cache count");
@@ -357,40 +354,31 @@ public abstract class GCParser {
         return searchResult;
     }
 
-    static SearchResult parseCacheFromText(final String pageIn, final CancellableHandler handler) {
+    static SearchResult parseCacheFromText(final String page, final CancellableHandler handler) {
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
-        if (StringUtils.isBlank(pageIn)) {
+        if (StringUtils.isBlank(page)) {
             Log.e("GCParser.parseCache: No page given");
             return null;
         }
 
         final SearchResult searchResult = new SearchResult();
 
-        if (pageIn.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_OWNER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
+        if (page.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || page.contains(GCConstants.STRING_UNPUBLISHED_OWNER) || page.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
             searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
             return searchResult;
         }
 
-        if (pageIn.contains(GCConstants.STRING_PREMIUMONLY_1) || pageIn.contains(GCConstants.STRING_PREMIUMONLY_2)) {
+        if (page.contains(GCConstants.STRING_PREMIUMONLY_1) || page.contains(GCConstants.STRING_PREMIUMONLY_2)) {
             searchResult.setError(StatusCode.PREMIUM_ONLY);
             return searchResult;
         }
 
-        final String cacheName = Html.fromHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_NAME, true, "")).toString();
+        final String cacheName = Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_NAME, true, "")).toString();
         if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
             searchResult.setError(StatusCode.UNKNOWN_ERROR);
             return searchResult;
         }
-
-        // first handle the content with line breaks, then trim everything for easier matching and reduced memory consumption in parsed fields
-        String personalNoteWithLineBreaks = "";
-        MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_PERSONALNOTE, pageIn);
-        if (matcher.find()) {
-            personalNoteWithLineBreaks = matcher.group(1).trim();
-        }
-
-        final String page = TextUtils.replaceWhitespace(pageIn);
 
         final Geocache cache = new Geocache();
         cache.setDisabled(page.contains(GCConstants.STRING_DISABLED));
@@ -528,7 +516,7 @@ public abstract class GCParser {
         cache.checkFields();
 
         // cache personal note
-        cache.setPersonalNote(personalNoteWithLineBreaks);
+        cache.setPersonalNote(TextUtils.getMatch(page, GCConstants.PATTERN_PERSONALNOTE, true, cache.getPersonalNote()));
 
         // cache short description
         cache.setShortDescription(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
@@ -638,7 +626,7 @@ public abstract class GCParser {
 
                 while (matcherLog.find()) {
                     final String typeStr = matcherLog.group(1);
-                    final String countStr = getNumberString(matcherLog.group(2));
+                    final String countStr = matcherLog.group(2).replaceAll("[.,]", "");
 
                     if (StringUtils.isNotBlank(typeStr)
                             && LogType.UNKNOWN != LogType.getByIconName(typeStr)
@@ -746,13 +734,6 @@ public abstract class GCParser {
         cache.setDetailedUpdatedNow();
         searchResult.addAndPutInCache(cache);
         return searchResult;
-    }
-
-    private static String getNumberString(final String numberWithPunctuation) {
-        if (numberWithPunctuation == null) {
-            return null;
-        }
-        return numberWithPunctuation.replaceAll("[.,]", "");
     }
 
     public static SearchResult searchByNextPage(final SearchResult search, boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
@@ -881,7 +862,7 @@ public abstract class GCParser {
     }
 
     private static boolean isSearchForMyCaches(final String userName) {
-        if (userName.equalsIgnoreCase(Settings.getGcLogin().left)) {
+        if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
             Log.i("Overriding users choice because of self search, downloading all caches.");
             return true;
         }
@@ -1442,8 +1423,7 @@ public abstract class GCParser {
         final String distance = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
         if (null != distance) {
             try {
-                trackable.setDistance(DistanceParser.parseDistance(distance,
-                        !Settings.isUseImperialUnits()));
+                trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
             } catch (final NumberFormatException e) {
                 Log.e("GCParser.parseTrackable: Failed to parse distance", e);
             }
@@ -1753,6 +1733,16 @@ public abstract class GCParser {
                         cache.getLogs().add(log);
                     }
                 }
+            }
+        }
+
+        if (Settings.isElevationWanted()) {
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_elevation);
+            if (cache.getCoords() != null) {
+                cache.setElevation(cache.getCoords().getElevation());
             }
         }
 

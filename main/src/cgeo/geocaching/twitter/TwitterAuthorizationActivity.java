@@ -1,7 +1,7 @@
 package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.network.OAuthAuthorizationActivity;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;

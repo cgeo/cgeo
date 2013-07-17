@@ -1,7 +1,7 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.gc.GCParser;
@@ -27,7 +27,10 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
 
         for (ISearchByCenter centerConn : ConnectorFactory.getSearchByCenterConnectors()) {
             if (centerConn.isActivated()) {
-                search.addSearchResult(centerConn.searchByCenter(coords));
+                SearchResult temp = centerConn.searchByCenter(coords);
+                if (temp != null) {
+                    search.addGeocodes(temp.getGeocodes());
+                }
             }
         }
 

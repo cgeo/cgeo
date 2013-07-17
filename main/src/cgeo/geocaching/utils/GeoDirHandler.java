@@ -1,8 +1,8 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.IGeoData;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.settings.Settings;
 
 import android.os.Handler;
 import android.os.Message;
@@ -61,11 +61,6 @@ public abstract class GeoDirHandler extends Handler implements IObserver<Object>
     @Override
     final public void update(final Object o) {
         obtainMessage(OBSERVABLE, o).sendToTarget();
-    }
-
-    public void updateAll() {
-        update(app.currentGeo());
-        update(app.currentDirection());
     }
 
     /**

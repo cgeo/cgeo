@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
@@ -424,7 +423,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        final boolean voteAvailable = Settings.isGCvoteLogin() && (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED || typeSelected == LogType.WEBCAM_PHOTO_TAKEN) && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
+        final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == LogType.FOUND_IT && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
         return true;
@@ -490,7 +489,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void updateTweetBox(LogType type) {
-        if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
+        if (type == LogType.FOUND_IT && Settings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);

@@ -1,9 +1,9 @@
 package cgeo.geocaching.geopoint;
 
-import junit.framework.Assert;
-
 import android.os.Bundle;
 import android.test.AndroidTestCase;
+
+import junit.framework.Assert;
 
 public class GeopointTest extends AndroidTestCase {
 
@@ -228,6 +228,10 @@ public class GeopointTest extends AndroidTestCase {
         Assert.assertEquals(lonMin, gp.getLonMin());
         Assert.assertEquals(lonSec, gp.getLonSec());
         Assert.assertEquals(lonSecFrac, gp.getLonSecFrac());
+    }
+
+    public static void testElevation() {
+        assertEquals(125.663703918457, (new Geopoint(48.0, 2.0)).getElevation(), 0.1);
     }
 
     private static void assertParseException(Runnable runnable) {

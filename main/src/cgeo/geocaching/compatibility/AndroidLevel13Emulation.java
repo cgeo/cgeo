@@ -16,6 +16,11 @@ public class AndroidLevel13Emulation implements AndroidLevel13Interface {
     }
 
     @Override
+    public int getDisplayHeight() {
+        return getDisplay().getHeight();
+    }
+
+    @Override
     public Point getDisplaySize() {
         final Display display = getDisplay();
         return new Point(display.getWidth(), display.getHeight());

@@ -4,7 +4,7 @@ import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.Progress;

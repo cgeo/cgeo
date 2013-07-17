@@ -13,8 +13,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
@@ -132,7 +130,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByGeocodeNotLoggedIn() {
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
+        final ImmutablePair<String, String> login = Settings.getLogin();
         final String memberStatus = Settings.getMemberStatus();
 
         try {
@@ -160,7 +158,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            TestSettings.setLogin(login.left, login.right);
+            Settings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
             Login.login();
         }
@@ -171,7 +169,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchErrorOccured() {
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
+        final ImmutablePair<String, String> login = Settings.getLogin();
         final String memberStatus = Settings.getMemberStatus();
 
         try {
@@ -186,7 +184,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            TestSettings.setLogin(login.left, login.right);
+            Settings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
             Login.login();
         }
@@ -203,15 +201,15 @@ public class cgeoApplicationTest extends CGeoTestCase {
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
         try {
             // set up settings required for test
-            TestSettings.setExcludeMine(false);
-            TestSettings.setExcludeDisabledCaches(false);
+            Settings.setExcludeMine(false);
+            Settings.setExcludeDisabledCaches(false);
 
             runnable.run();
 
         } finally {
             // restore user settings
-            TestSettings.setExcludeMine(excludeMine);
-            TestSettings.setExcludeDisabledCaches(excludeDisabled);
+            Settings.setExcludeMine(excludeMine);
+            Settings.setExcludeDisabledCaches(excludeDisabled);
         }
     }
 
@@ -281,7 +279,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
                 try {
                     // set up settings required for test
-                    TestSettings.setExcludeMine(false);
+                    Settings.setExcludeMine(false);
                     Settings.setCacheType(CacheType.ALL);
 
                     final GC2CJPF mockedCache = new GC2CJPF();
@@ -327,7 +325,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     @MediumTest
     public static void testSearchByViewportNotLoggedIn() {
 
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
+        final ImmutablePair<String, String> login = Settings.getLogin();
         final String memberStatus = Settings.getMemberStatus();
         final Strategy strategy = Settings.getLiveMapStrategy();
         final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
@@ -370,7 +368,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         } finally {
             // restore user and password
-            TestSettings.setLogin(login.left, login.right);
+            Settings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
             Login.login();
             Settings.setLiveMapStrategy(strategy);
@@ -413,7 +411,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
         Login.logout();
         // Modify login data to avoid an automatic login again
-        TestSettings.setLogin("c:geo", "c:geo");
+        Settings.setLogin("c:geo", "c:geo");
         Settings.setMemberStatus("Basic member");
     }
 

@@ -34,7 +34,7 @@ public class PersonalNote {
         this.isOffline = cache.isOffline();
     }
 
-    public final PersonalNote mergeWith(final PersonalNote other) {
+    public PersonalNote mergeWith(final PersonalNote other) {
         if (StringUtils.isEmpty(cgeoNote) && StringUtils.isEmpty(other.cgeoNote)) {
             return mergeOnlyProviderNotes(other);
         }
@@ -92,20 +92,20 @@ public class PersonalNote {
     }
 
     @Override
-    public final String toString() {
-        final StringBuilder builder = new StringBuilder();
+    public String toString() {
+        final StringBuffer buffer = new StringBuffer();
         if (cgeoNote != null) {
-            builder.append(MERGED_PREFIX).append(cgeoNote).append("\n").append(SEPARATOR);
+            buffer.append(MERGED_PREFIX).append(cgeoNote).append("\n").append(SEPARATOR);
         }
-        builder.append(providerNote);
-        return builder.toString();
+        buffer.append(providerNote);
+        return buffer.toString();
     }
 
-    public final String getCgeoNote() {
+    public String getCgeoNote() {
         return cgeoNote;
     }
 
-    public final String getProviderNote() {
+    public String getProviderNote() {
         return providerNote;
     }
 

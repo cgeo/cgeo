@@ -11,8 +11,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -348,7 +346,7 @@ public class MainActivity extends AbstractActivity {
         initialized = true;
 
         Settings.setLanguage(Settings.isUseEnglish());
-        Settings.getGcLogin();
+        Settings.getLogin();
 
         if (app.firstRun) {
             (new FirstLoginThread()).start();
@@ -541,7 +539,12 @@ public class MainActivity extends AbstractActivity {
                             (new ObtainAddressThread()).start();
                         }
                     } else {
-                        navLocation.setText(geo.getCoords().toString());
+                        if (geo.getAltitude() != 0.0) {
+                            final String humanAlt = Units.getDistanceFromKilometers((float) geo.getAltitude() / 1000);
+                            navLocation.setText(geo.getCoords() + " | " + humanAlt);
+                        } else {
+                            navLocation.setText(geo.getCoords().toString());
+                        }
                     }
                 } else {
                     if (nearestView.isClickable()) {
