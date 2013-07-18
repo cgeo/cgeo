@@ -4,6 +4,7 @@ import butterknife.InjectView;
 import butterknife.Views;
 
 import cgeo.calendar.ICalendar;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -45,6 +46,8 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.RunnableWithArgument;
+import cgeo.geocaching.utils.SimpleCancellableHandler;
+import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
@@ -105,6 +108,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -149,6 +153,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private Geocache cache;
     private final Progress progress = new Progress();
+
     private SearchResult search;
 
     private EditNoteDialogListener editNoteDialogListener;
@@ -178,12 +183,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     // some views that must be available from everywhere // TODO: Reference can block GC?
     private TextView cacheDistanceView;
 
-    private final Handler cacheChangeNotificationHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            notifyDataSetChanged();
-        }
-    };
     protected ImagesList imagesList;
 
     @Override
@@ -278,7 +277,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        final LoadCacheHandler loadCacheHandler = new LoadCacheHandler();
+        final LoadCacheHandler loadCacheHandler = new LoadCacheHandler(this, progress);
 
         try {
             String title = res.getString(R.string.cache);
@@ -609,44 +608,56 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         return true;
     }
 
-    private class LoadCacheHandler extends CancellableHandler {
+    private final static class LoadCacheHandler extends SimpleCancellableHandler {
+
+        public LoadCacheHandler(CacheDetailActivity activity, Progress progress) {
+            super(activity, progress);
+        }
+
         @Override
         public void handleRegularMessage(final Message msg) {
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
+                CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+                if (activity == null) {
+                    return;
+                }
+                SearchResult search = activity.getSearch();
                 if (search == null) {
-                    showToast(res.getString(R.string.err_dwld_details_failed));
-
-                    progress.dismiss();
-                    finish();
+                    showToast(R.string.err_dwld_details_failed);
+                    dismissProgress();
+                    finishActivity();
                     return;
                 }
 
                 if (search.getError() != null) {
-                    showToast(res.getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(res) + ".");
-
-                    progress.dismiss();
-                    finish();
+                    activity.showToast(activity.getResources().getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(activity.getResources()) + ".");
+                    dismissProgress();
+                    finishActivity();
                     return;
                 }
 
-                updateStatusMsg(res.getString(R.string.cache_dialog_loading_details_status_render));
+                updateStatusMsg(activity.getResources().getString(R.string.cache_dialog_loading_details_status_render));
 
                 // Data loaded, we're ready to show it!
-                notifyDataSetChanged();
+                activity.notifyDataSetChanged();
             }
         }
 
         private void updateStatusMsg(final String msg) {
-            progress.setMessage(res.getString(R.string.cache_dialog_loading_details)
+            CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+            if (activity == null) {
+                return;
+            }
+            setProgressMessage(activity.getResources().getString(R.string.cache_dialog_loading_details)
                     + "\n\n"
                     + msg);
         }
 
         @Override
         public void handleCancel(final Object extra) {
-            finish();
+            finishActivity();
         }
 
     }
@@ -666,7 +677,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         // allow cache to notify CacheDetailActivity when it changes so it can be reloaded
-        cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
+        cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
         // action bar: title and icon
         if (StringUtils.isNotBlank(cache.getName())) {
@@ -1183,49 +1194,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return view;
         }
 
-        private class StoreCacheHandler extends CancellableHandler {
-            @Override
-            public void handleRegularMessage(Message msg) {
-                if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
-                    updateStatusMsg((String) msg.obj);
-                } else {
-                    storeThread = null;
-                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
-                }
-            }
-
-            private void updateStatusMsg(final String msg) {
-                progress.setMessage(res.getString(R.string.cache_dialog_offline_save_message)
-                        + "\n\n"
-                        + msg);
-            }
-        }
-
-        private class RefreshCacheHandler extends CancellableHandler {
-            @Override
-            public void handleRegularMessage(Message msg) {
-                if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
-                    updateStatusMsg((String) msg.obj);
-                } else {
-                    refreshThread = null;
-                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
-                }
-            }
-
-            private void updateStatusMsg(final String msg) {
-                progress.setMessage(res.getString(R.string.cache_dialog_refresh_message)
-                        + "\n\n"
-                        + msg);
-            }
-        }
-
-        private class DropCacheHandler extends Handler {
-            @Override
-            public void handleMessage(Message msg) {
-                CacheDetailActivity.this.notifyDataSetChanged();
-            }
-        }
-
         private class StoreCacheClickListener implements View.OnClickListener {
             @Override
             public void onClick(View arg0) {
@@ -1249,7 +1217,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             protected void storeCache(int listId) {
-                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler();
+                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
 
                 progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
 
@@ -1275,7 +1243,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
 
-                final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler();
+                final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(CacheDetailActivity.this, progress);
 
                 progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
@@ -1300,6 +1268,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 cache.store(listId, handler);
+                storeThread = null;
             }
         }
 
@@ -1313,7 +1282,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 cache.refresh(cache.getListId(), handler);
-
+                refreshThread = null;
                 handler.sendEmptyMessage(0);
             }
         }
@@ -1326,24 +1295,22 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
 
-                final DropCacheHandler dropCacheHandler = new DropCacheHandler();
-
                 progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-                new DropCacheThread(dropCacheHandler).start();
+                new DropCacheThread(new ChangeNotificationHandler(CacheDetailActivity.this, progress)).start();
             }
         }
 
         private class DropCacheThread extends Thread {
+            private Handler handler;
 
-            private Handler handler = null;
-
-            public DropCacheThread(Handler handlerIn) {
-                handler = handlerIn;
+            public DropCacheThread(Handler handler) {
+                super();
+                this.handler = handler;
             }
 
             @Override
             public void run() {
-                cache.drop(handler);
+                cache.drop(this.handler);
             }
         }
 
@@ -1375,7 +1342,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        new WatchlistAddThread(new WatchlistHandler()));
+                        new WatchlistAddThread(new WatchlistHandler(CacheDetailActivity.this, progress)));
             }
         }
 
@@ -1387,7 +1354,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        new WatchlistRemoveThread(new WatchlistHandler()));
+                        new WatchlistRemoveThread(new WatchlistHandler(CacheDetailActivity.this, progress)));
             }
         }
 
@@ -1401,6 +1368,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void run() {
+                watchlistThread = null;
                 handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).addToWatchlist(cache) ? 1 : -1);
             }
         }
@@ -1415,6 +1383,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void run() {
+                watchlistThread = null;
                 handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).removeFromWatchlist(cache) ? 1 : -1);
             }
         }
@@ -1429,6 +1398,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void run() {
+                watchlistThread = null;
                 handler.sendEmptyMessage(GCConnector.addToFavorites(cache) ? 1 : -1);
             }
         }
@@ -1443,19 +1413,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void run() {
+                watchlistThread = null;
                 handler.sendEmptyMessage(GCConnector.removeFromFavorites(cache) ? 1 : -1);
-            }
-        }
-
-        private class FavoriteUpdateHandler extends Handler {
-            @Override
-            public void handleMessage(Message msg) {
-                progress.dismiss();
-                if (msg.what == -1) {
-                    showToast(res.getString(R.string.err_favorite_failed));
-                } else {
-                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
-                }
             }
         }
 
@@ -1467,7 +1426,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        new FavoriteAddThread(new FavoriteUpdateHandler()));
+                        new FavoriteAddThread(new FavoriteUpdateHandler(CacheDetailActivity.this, progress)));
             }
         }
 
@@ -1479,7 +1438,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        new FavoriteRemoveThread(new FavoriteUpdateHandler()));
+                        new FavoriteRemoveThread(new FavoriteUpdateHandler(CacheDetailActivity.this, progress)));
             }
         }
 
@@ -1604,22 +1563,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             } else {
                 // hide box
                 box.setVisibility(View.GONE);
-            }
-        }
-
-        /**
-         * Handler, called when watchlist add or remove is done
-         */
-        private class WatchlistHandler extends Handler {
-            @Override
-            public void handleMessage(Message msg) {
-                watchlistThread = null;
-                progress.dismiss();
-                if (msg.what == -1) {
-                    showToast(res.getString(R.string.err_watchlist_failed));
-                } else {
-                    CacheDetailActivity.this.notifyDataSetChanged(); // reload cache details
-                }
             }
         }
 
@@ -1805,7 +1748,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         Thread currentThread;
 
         private void uploadPersonalNote() {
-            final SimpleHandler myHandler = new SimpleHandler();
+            final SimpleCancellableHandler myHandler = new SimpleCancellableHandler(CacheDetailActivity.this, progress);
 
             Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
             progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
@@ -2311,24 +2254,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    public class SimpleHandler extends CancellableHandler {
-        public static final String SUCCESS_TEXT = "success_message";
-
-        @Override
-        public void handleRegularMessage(final Message msg) {
-            if (msg.getData() != null && msg.getData().getString(SUCCESS_TEXT) != null) {
-                showToast(msg.getData().getString(SUCCESS_TEXT));
-            }
-            progress.dismiss();
-        }
-
-        @Override
-        public void handleCancel(final Object extra) {
-            showToast((String) extra);
-            progress.dismiss();
-        }
-    }
-
     private class UploadPersonalNoteThread extends Thread {
         private Geocache cache = null;
         private CancellableHandler handler = null;
@@ -2346,7 +2271,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
             Message msg = Message.obtain();
             Bundle bundle = new Bundle();
-            bundle.putString(SimpleHandler.SUCCESS_TEXT, res.getString(R.string.cache_personal_note_upload_done));
+            bundle.putString(SimpleCancellableHandler.SUCCESS_TEXT, res.getString(R.string.cache_personal_note_upload_done));
             msg.setData(bundle);
             handler.sendMessage(msg);
         }
@@ -2460,4 +2385,95 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         return cache;
     }
 
+    public SearchResult getSearch() {
+        return search;
+    }
+
+    private static final class StoreCacheHandler extends SimpleCancellableHandler {
+
+        public StoreCacheHandler(CacheDetailActivity activity, Progress progress) {
+            super(activity, progress);
+        }
+
+        @Override
+        public void handleRegularMessage(Message msg) {
+            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
+            } else {
+                notifyDatasetChanged(activityRef);
+            }
+        }
+    }
+
+    private static final class RefreshCacheHandler extends SimpleCancellableHandler {
+
+        public RefreshCacheHandler(CacheDetailActivity activity, Progress progress) {
+            super(activity, progress);
+        }
+
+        @Override
+        public void handleRegularMessage(Message msg) {
+            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                updateStatusMsg(R.string.cache_dialog_refresh_message, (String) msg.obj);
+            } else {
+                notifyDatasetChanged(activityRef);
+            }
+        }
+    }
+
+    private static final class ChangeNotificationHandler extends SimpleHandler {
+
+        public ChangeNotificationHandler(CacheDetailActivity activity, Progress progress) {
+            super(activity, progress);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            notifyDatasetChanged(activityRef);
+        }
+    }
+
+    private static final class FavoriteUpdateHandler extends SimpleHandler {
+
+        public FavoriteUpdateHandler(CacheDetailActivity activity, Progress progress) {
+            super(activity, progress);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == -1) {
+                dismissProgress();
+                showToast(R.string.err_favorite_failed);
+            } else {
+                notifyDatasetChanged(activityRef);
+            }
+        }
+    }
+
+    /**
+     * Handler, called when watchlist add or remove is done
+     */
+    private static final class WatchlistHandler extends SimpleHandler {
+
+        public WatchlistHandler(CacheDetailActivity activity, Progress progress) {
+            super(activity, progress);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == -1) {
+                dismissProgress();
+                showToast(R.string.err_watchlist_failed);
+            } else {
+                notifyDatasetChanged(activityRef);
+            }
+        }
+    }
+
+    private static void notifyDatasetChanged(WeakReference<AbstractActivity> activityRef) {
+        CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+        if (activity != null) {
+            activity.notifyDataSetChanged();
+        }
+    }
 }
