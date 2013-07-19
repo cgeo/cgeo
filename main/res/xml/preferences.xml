@@ -36,6 +36,21 @@
             <cgeo.geocaching.settings.CheckGcCredentialsPreference 
                 android:title="@string/init_login"
                 android:dependency="@string/pref_connectorGCActive" />
+            <PreferenceScreen
+                android:title="@string/settings_title_basicmembers"
+                android:key="@string/pref_fakekey_basicmembers_screen"
+                android:dependency="@string/pref_connectorGCActive" >
+                <CheckBoxPreference 
+                    android:key="@string/pref_showcaptcha"
+                    android:title="@string/init_captcha"
+                    android:summary="@string/init_summary_captcha"
+                    android:defaultValue="false" />
+                <CheckBoxPreference 
+                    android:key="@string/pref_loaddirectionimg"
+                    android:title="@string/init_loaddirectionimg"
+                    android:summary="@string/init_summary_loaddirectionimg"
+                    android:defaultValue="true" />
+            </PreferenceScreen>
             <cgeo.geocaching.settings.InfoPreference 
                 android:title="@string/settings_info_facebook_login_title"
                 android:text="@string/settings_info_facebook_login"
@@ -144,7 +159,7 @@
             android:title="@string/init_units"
             android:summary="@string/init_summary_units"
             android:defaultValue="false" />
-
+        
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -313,8 +328,8 @@
     </PreferenceScreen>
 
     <PreferenceScreen
-        android:title="@string/settings_title_miscellaneous"
-        android:icon="?attr/settings_nut" >
+        android:title="@string/settings_title_navigation"
+        android:icon="?attr/settings_arrow" >
 
         <PreferenceCategory 
             android:title="@string/init_default_navigation_tool" > 
@@ -341,6 +356,12 @@
 
         </PreferenceCategory>
         
+    </PreferenceScreen>
+
+    <PreferenceScreen
+        android:title="@string/settings_title_system"
+        android:icon="?attr/settings_nut" >
+        
         <PreferenceCategory
             android:title="@string/settings_title_gpx" >
 
@@ -351,22 +372,6 @@
                 android:key="@string/pref_gpxImportDir"
                 android:title="@string/init_gpx_importdir" />
 
-        </PreferenceCategory>
-    
-        <PreferenceCategory
-            android:title="@string/settings_title_basicmembers" >
-    
-            <CheckBoxPreference 
-                android:key="@string/pref_showcaptcha"
-                android:title="@string/init_captcha"
-                android:summary="@string/init_summary_captcha"
-                android:defaultValue="false" />
-            <CheckBoxPreference 
-                android:key="@string/pref_loaddirectionimg"
-                android:title="@string/init_loaddirectionimg"
-                android:summary="@string/init_summary_loaddirectionimg"
-                android:defaultValue="true" />
-    
         </PreferenceCategory>
 
         <PreferenceCategory 

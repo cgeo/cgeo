@@ -309,7 +309,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
             // invoke settings activity to insert login details
             if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
-                SettingsActivity.startWithServicesPage(fromActivity);
+                SettingsActivity.jumpToServicesPage(fromActivity);
             }
         }
         return status == StatusCode.NO_ERROR;

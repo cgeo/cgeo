@@ -38,7 +38,9 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -156,7 +158,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
     };
 
-    // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
+    // workaround, because OnContextItemSelected and onMenuItemSelected are never called
     void setSignatureTextView(final EditText view) {
         this.signatureText = view;
     }
@@ -364,18 +366,34 @@ public class SettingsActivity extends PreferenceActivity {
         });
     }
 
-    private void initBasicMemberPreferences() {
-        SettingsActivity.findPreference(this, getKey(R.string.pref_loaddirectionimg)).setEnabled(
-                !Settings.isPremiumMember());
-        SettingsActivity.findPreference(this, getKey(R.string.pref_showcaptcha)).setEnabled(
-                !Settings.isPremiumMember());
+    void initBasicMemberPreferences() {
+        SettingsActivity.findPreference(this, getKey(R.string.pref_fakekey_basicmembers_screen))
+                .setEnabled(!Settings.isPremiumMember());
+        SettingsActivity.findPreference(this, getKey(R.string.pref_loaddirectionimg))
+                .setEnabled(!Settings.isPremiumMember());
+        SettingsActivity.findPreference(this, getKey(R.string.pref_showcaptcha))
+                .setEnabled(!Settings.isPremiumMember());
+
+        redrawScreen(R.string.pref_fakekey_services_screen);
+    }
+
+    private void redrawScreen(int key) {
+        PreferenceScreen screen = (PreferenceScreen) SettingsActivity
+                .findPreference(this, getKey(key));
+        if (screen == null) {
+            return;
+        }
+        ListAdapter adapter = screen.getRootAdapter();
+        if (adapter instanceof BaseAdapter) {
+            ((BaseAdapter) adapter).notifyDataSetChanged();
+        }
     }
 
     private static void initSend2CgeoPreferences() {
         Settings.putString(R.string.pref_webDeviceName, Settings.getWebDeviceName());
     }
 
-    public static void startWithServicesPage(final Context fromActivity) {
+    public static void jumpToServicesPage(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, SettingsActivity.class);
         intent.putExtra(INTENT_GOTO, INTENT_GOTO_SERVICES);
         fromActivity.startActivity(intent);
