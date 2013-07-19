@@ -13,6 +13,7 @@ import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -681,6 +682,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 Settings.setExcludeMine(!Settings.isExcludeMyCaches());
                 markersInvalidated = true;
                 ActivityMixin.invalidateOptionsMenu(activity);
+                if (!Settings.isExcludeMyCaches()) {
+                    Tile.Cache.clear();
+                }
                 return true;
             case R.id.menu_theme_mode:
                 selectMapTheme();
