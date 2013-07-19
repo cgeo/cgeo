@@ -389,6 +389,7 @@
     <string name="settings_activate_oc">Activate</string>
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
     <string name="init_register_oc_de">Authorize c:geo</string>
+    <string name="init_reregister_oc_de">Authorize c:geo again</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
@@ -402,6 +403,7 @@
     <string name="init_login_popup_failed_reason">Login failed:</string>
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_twitter_authorize">Authorize c:geo</string>
+    <string name="init_twitter_reauthorize">Authorize c:geo again</string>
     <string name="init_signature">Signature</string>
     <string name="init_signature_help_text">Enter a signature to be appended to your logs.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
     <string name="init_signature_template_button">Insert Template</string>

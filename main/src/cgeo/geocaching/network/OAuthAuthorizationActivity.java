@@ -82,6 +82,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
                 pinEntryButton.setVisibility(View.GONE);
 
+                setResult(RESULT_OK);
                 finish();
             } else {
                 showToast(getErrAuthProcess());

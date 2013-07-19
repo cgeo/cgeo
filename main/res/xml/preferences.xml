@@ -71,7 +71,7 @@
                 android:text="@string/init_oc_de_description"
                 android:dependency="@string/pref_connectorOCActive" />
             <cgeo.geocaching.settings.AuthorizeOcDePreference 
-                android:title="@string/init_register_oc_de"
+                android:key="@string/pref_fakekey_ocde_authorization"
                 android:dependency="@string/pref_connectorOCActive" />
             
         </PreferenceCategory>
@@ -100,7 +100,7 @@
                 android:text="@string/about_twitter" 
                 android:dependency="@string/pref_twitter" />
             <cgeo.geocaching.settings.AuthorizeTwitterPreference 
-                android:title="@string/init_twitter_authorize" 
+                android:key="@string/pref_fakekey_twitter_authorization"
                 android:dependency="@string/pref_twitter" />
 
         </PreferenceCategory>
