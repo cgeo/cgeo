@@ -182,7 +182,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /** Live mode enabled for map. **/
     private boolean isLiveEnabled;
     // other things
-    private boolean liveChanged = false; // previous state for loadTimer
+    private boolean markersInvalidated = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
     private static Set<String> dirtyCaches = null;
@@ -571,6 +571,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 item.setTitle(res.getString(R.string.map_live_enable));
             }
 
+            item = menu.findItem(R.id.menu_mycaches_mode); // own & found caches
+            if (Settings.isExcludeMyCaches()) {
+                item.setTitle(res.getString(R.string.map_mycaches_show));
+            } else {
+                item.setTitle(res.getString(R.string.map_mycaches_hide));
+            }
+
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
             menu.findItem(R.id.menu_store_caches).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
@@ -622,7 +629,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 if (mapMode == MapMode.LIVE) {
                     Settings.setLiveMap(isLiveEnabled);
                 }
-                liveChanged = true;
+                markersInvalidated = true;
                 lastSearchResult = null;
                 searchIntent = null;
                 ActivityMixin.invalidateOptionsMenu(activity);
@@ -668,6 +675,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 overlayCaches.switchCircles();
                 mapView.repaintRequired(overlayCaches);
+                ActivityMixin.invalidateOptionsMenu(activity);
+                return true;
+            case R.id.menu_mycaches_mode:
+                Settings.setExcludeMine(!Settings.isExcludeMyCaches());
+                markersInvalidated = true;
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case R.id.menu_theme_mode:
@@ -1018,7 +1030,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                         // check if map moved or zoomed
                         //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                        final boolean moved = liveChanged || (isLiveEnabled && !downloaded) || (viewport == null) || zoomNow != zoom ||
+                        final boolean moved = markersInvalidated || (isLiveEnabled && !downloaded) || (viewport == null) || zoomNow != zoom ||
                                 (mapMoved(viewport, viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow)));
 
                         // update title on any change
@@ -1029,7 +1041,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                         // save new values
                         if (moved) {
-                            liveChanged = false;
+                            markersInvalidated = false;
 
                             long currentTime = System.currentTimeMillis();
 
