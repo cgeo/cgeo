@@ -319,8 +319,9 @@ public abstract class Network {
 
         final String etag = LocalStorage.getSavedHeader(cacheFile, LocalStorage.HEADER_ETAG);
         if (etag != null) {
+            // The ETag is a more robust check than a timestamp. If we have an ETag, it is enough
+            // to identify the right version of the resource.
             return new Parameters("If-None-Match", etag);
-            //FIXME: This seems to be wrong. Shouldn't we check for both headers instead of returning after finding the first?
         }
 
         final String lastModified = LocalStorage.getSavedHeader(cacheFile, LocalStorage.HEADER_LAST_MODIFIED);
