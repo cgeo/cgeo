@@ -15,4 +15,5 @@ public interface IFilter {
     public abstract boolean accepts(final Geocache cache);
 
     public void filter(final List<Geocache> list);
+    
 }

@@ -22,6 +22,7 @@ abstract class AbstractFilter implements IFilter {
         }
         list.removeAll(itemsToRemove);
     }
+    
 
     @Override
     public String getName() {

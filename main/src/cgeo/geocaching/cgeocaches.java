@@ -13,8 +13,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.ExportFactory;
 import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.filter.FilterUserInterface;
-import cgeo.geocaching.filter.IFilter;
+import cgeo.geocaching.filter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
@@ -109,6 +108,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     private static final int MENU_NAVIGATION = 69;
     private static final int MENU_STORE_CACHE = 73;
     private static final int MENU_FILTER = 74;
+    private static final int MENU_NEGATE_FILTER = 77;
     private static final int MENU_DELETE_EVENTS = 75;
     private static final int MENU_CLEAR_OFFLINE_LOGS = 76;
 
@@ -529,6 +529,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
+        menu.add(0, MENU_NEGATE_FILTER, 0, "Negate Filters").setIcon(R.drawable.ic_menu_filter);
 
         if (type != CacheListType.HISTORY) {
             menu.add(0, MENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(R.drawable.ic_menu_sort_alphabetically);
@@ -737,6 +738,13 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 return false;
             case MENU_FILTER:
                 showFilterMenu(null);
+                return true;
+            case MENU_NEGATE_FILTER:
+                if (filter != null) {
+                cacheList.clear();
+                cacheList.addAll(adapter.negateFilter(filter));
+                adapter.notifyDataSetChanged();
+                }
                 return true;
             case MENU_SORT:
                 final CacheComparator oldComparator = adapter.getCacheComparator();
