@@ -365,7 +365,6 @@
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_basicmembers">Użytkownicy Basic</string>
-    <string name="settings_title_miscellaneous">Więcej ustawień</string>
 
     <string name="settings_category_browser">Przeglądarka</string>
     <string name="settings_category_logging_other">Inne opcje logowania</string>
@@ -1159,9 +1158,6 @@
     </plurals>
     <string name="tts_one_oclock">pierwsza</string>
     <string name="tts_oclock">%s</string>
-
-    <!-- various -->
-    <string name="clipboard_copy_ok">Skopiowano do schowka</string>
 
     <plurals name="days_ago">
         <item quantity="one">wczoraj</item>
