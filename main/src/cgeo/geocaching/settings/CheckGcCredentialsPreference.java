@@ -1,6 +1,5 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.Login;
@@ -12,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
@@ -48,7 +46,7 @@ public class CheckGcCredentialsPreference extends Preference {
 
     private class GcLoginCheck implements OnPreferenceClickListener {
         private Resources res;
-        private Activity activity;
+        private SettingsActivity activity;
 
         private ProgressDialog loginDialog;
         @SuppressLint("HandlerLeak")
@@ -76,17 +74,19 @@ public class CheckGcCredentialsPreference extends Preference {
                 } catch (Exception e) {
                     ActivityMixin.showToast(activity, R.string.err_login_failed);
                     Log.e("SettingsActivity.logInHandler", e);
-                }
-
-                if (loginDialog != null && loginDialog.isShowing()) {
-                    loginDialog.dismiss();
+                } finally {
+                    if (loginDialog != null && loginDialog.isShowing()) {
+                        loginDialog.dismiss();
+                    }
+                    // enable/disable basic member preferences
+                    activity.initBasicMemberPreferences();
                 }
             }
         };
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            this.activity = (Activity) CheckGcCredentialsPreference.this.getContext();
+            this.activity = (SettingsActivity) CheckGcCredentialsPreference.this.getContext();
             this.res = activity.getResources();
 
             ImmutablePair<String, String> credentials = Settings.getGcLogin();

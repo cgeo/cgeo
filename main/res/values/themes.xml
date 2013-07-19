@@ -158,6 +158,7 @@
         <item name="settings_details">@drawable/settings_details_white</item>
         <item name="settings_eye">@drawable/settings_eye_white</item>
         <item name="settings_map">@drawable/settings_map_white</item>
+        <item name="settings_arrow">@drawable/settings_arrow_white</item>
         <item name="settings_nut">@drawable/settings_nut_white</item>
         <item name="settings_pen">@drawable/settings_pen_white</item>
         <item name="settings_sdcard">@drawable/settings_sdcard_white</item>
@@ -168,6 +169,7 @@
         <item name="settings_details">@drawable/settings_details_black</item>
         <item name="settings_eye">@drawable/settings_eye_black</item>
         <item name="settings_map">@drawable/settings_map_black</item>
+        <item name="settings_arrow">@drawable/settings_arrow_black</item>
         <item name="settings_nut">@drawable/settings_nut_black</item>
         <item name="settings_pen">@drawable/settings_pen_black</item>
         <item name="settings_sdcard">@drawable/settings_sdcard_black</item>
