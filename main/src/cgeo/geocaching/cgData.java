@@ -1102,7 +1102,6 @@ public class cgData {
         //try to update record else insert fresh..
         database.beginTransaction();
 
-        boolean result = false;
         try {
             saveAttributesWithoutTransaction(cache);
             saveOriginalWaypointsWithoutTransaction(cache);
@@ -1118,14 +1117,14 @@ public class cgData {
                 database.insert(dbTableCaches, null, values);
             }
             database.setTransactionSuccessful();
-            result = true;
+            return true;
         } catch (Exception e) {
             Log.e("SaveCache", e);
         } finally {
             database.endTransaction();
         }
 
-        return result;
+        return false;
     }
 
     private static void saveAttributesWithoutTransaction(final Geocache cache) {
@@ -1172,17 +1171,16 @@ public class cgData {
         init();
         database.beginTransaction();
 
-        boolean result = false;
         try {
             saveOriginalWaypointsWithoutTransaction(cache);
             database.setTransactionSuccessful();
-            result = true;
+            return true;
         } catch (Exception e) {
             Log.e("saveWaypoints", e);
         } finally {
             database.endTransaction();
         }
-        return result;
+        return false;
     }
 
     private static void saveOriginalWaypointsWithoutTransaction(final Geocache cache) {
@@ -1376,7 +1374,7 @@ public class cgData {
         }
     }
 
-    public static boolean saveTrackable(final Trackable trackable) {
+    public static void saveTrackable(final Trackable trackable) {
         init();
 
         database.beginTransaction();
@@ -1386,8 +1384,6 @@ public class cgData {
         } finally {
             database.endTransaction();
         }
-
-        return true;
     }
 
     private static void saveInventoryWithoutTransaction(final String geocode, final List<Trackable> trackables) {
@@ -1842,18 +1838,17 @@ public class cgData {
         init();
         database.beginTransaction();
 
-        boolean success = true;
         try {
             database.delete(dbTableSearchDestionationHistory, null, null);
             database.setTransactionSuccessful();
+            return true;
         } catch (Exception e) {
-            success = false;
             Log.e("Unable to clear searched destinations", e);
         } finally {
             database.endTransaction();
         }
 
-        return success;
+        return false;
     }
 
     public static List<LogEntry> loadLogs(String geocode) {
@@ -2693,18 +2688,17 @@ public class cgData {
         init();
 
         database.beginTransaction();
-        boolean result = false;
         try {
             database.delete(dbTableSearchDestionationHistory, "_id = " + destination.getId(), null);
             database.setTransactionSuccessful();
-            result = true;
+            return true;
         } catch (Exception e) {
             Log.e("Unable to remove searched destination", e);
         } finally {
             database.endTransaction();
         }
 
-        return result;
+        return false;
     }
 
     /**
@@ -3007,14 +3001,14 @@ public class cgData {
             if (connector.canHandle(geocode)) {
                 Geocache geocache = cacheCache.getCacheFromCache(geocode);
                 if (geocache.getZoomLevel() <= maxZoom) {
-                    boolean bFound = false;
+                    boolean found = false;
                     for (Tile tile : tiles) {
                         if (tile.containsPoint(geocache)) {
-                            bFound = true;
+                            found = true;
                             break;
                         }
                     }
-                    if (bFound) {
+                    if (found) {
                         missingFromSearch.add(geocode);
                     }
                 }
