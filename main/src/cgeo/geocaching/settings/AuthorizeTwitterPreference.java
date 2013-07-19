@@ -25,16 +25,21 @@ public class AuthorizeTwitterPreference extends Preference {
 
     @Override
     protected View onCreateView(ViewGroup parent) {
+        final SettingsActivity activity = (SettingsActivity) getContext();
+
         setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent authIntent = new Intent(preference.getContext(),
                         TwitterAuthorizationActivity.class);
-                preference.getContext().startActivity(authIntent);
+                activity.startActivityForResult(authIntent,
+                        SettingsActivity.OAUTH_TWITTER_REQUEST);
 
                 return false; // no shared preference has to be changed
             }
         });
+
+        activity.setTwitterAuthTitle();
         return super.onCreateView(parent);
     }
 }

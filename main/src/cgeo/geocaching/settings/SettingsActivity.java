@@ -64,6 +64,8 @@ public class SettingsActivity extends PreferenceActivity {
     private static final int INTENT_GOTO_SERVICES = 1;
 
     private static final int DIR_CHOOSER_MAPS_DIRECTORY_REQUEST = 4;
+    static final int OAUTH_OCDE_REQUEST = 5;
+    static final int OAUTH_TWITTER_REQUEST = 6;
 
     private EditText signatureText;
 
@@ -377,7 +379,7 @@ public class SettingsActivity extends PreferenceActivity {
         redrawScreen(R.string.pref_fakekey_services_screen);
     }
 
-    private void redrawScreen(int key) {
+    void redrawScreen(int key) {
         PreferenceScreen screen = (PreferenceScreen) SettingsActivity
                 .findPreference(this, getKey(key));
         if (screen == null) {
@@ -391,6 +393,20 @@ public class SettingsActivity extends PreferenceActivity {
 
     private static void initSend2CgeoPreferences() {
         Settings.putString(R.string.pref_webDeviceName, Settings.getWebDeviceName());
+    }
+
+    void setOCDEAuthTitle() {
+        SettingsActivity.findPreference(this, getKey(R.string.pref_fakekey_ocde_authorization))
+                .setTitle(getString(Settings.hasOCDEAuthorization()
+                        ? R.string.init_reregister_oc_de
+                        : R.string.init_register_oc_de));
+    }
+
+    void setTwitterAuthTitle() {
+        SettingsActivity.findPreference(this, getKey(R.string.pref_fakekey_twitter_authorization))
+                .setTitle(getString(Settings.hasTwitterAuthorization()
+                        ? R.string.init_twitter_reauthorize
+                        : R.string.init_twitter_authorize));
     }
 
     public static void jumpToServicesPage(final Context fromActivity) {
@@ -425,6 +441,14 @@ public class SettingsActivity extends PreferenceActivity {
                 initMapSourcePreference();
                 SettingsActivity.findPreference(this, getKey(R.string.pref_mapDirectory)).setSummary(
                         Settings.getMapFileDirectory());
+                break;
+            case OAUTH_OCDE_REQUEST:
+                setOCDEAuthTitle();
+                redrawScreen(R.string.pref_fakekey_services_screen);
+                break;
+            case OAUTH_TWITTER_REQUEST:
+                setTwitterAuthTitle();
+                redrawScreen(R.string.pref_fakekey_services_screen);
                 break;
             default:
                 throw new IllegalArgumentException();

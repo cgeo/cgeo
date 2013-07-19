@@ -25,16 +25,21 @@ public class AuthorizeOcDePreference extends Preference {
 
     @Override
     protected View onCreateView(ViewGroup parent) {
+        final SettingsActivity activity = (SettingsActivity) getContext();
+
         setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent authIntent = new Intent(preference.getContext(),
                         OCAuthorizationActivity.class);
-                preference.getContext().startActivity(authIntent);
+                activity.startActivityForResult(authIntent,
+                        SettingsActivity.OAUTH_OCDE_REQUEST);
 
                 return false; // no shared preference has to be changed
             }
         });
+
+        activity.setOCDEAuthTitle();
         return super.onCreateView(parent);
     }
 }

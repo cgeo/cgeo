@@ -316,6 +316,11 @@ public final class Settings {
         return getString(R.string.pref_ocde_tokensecret, "");
     }
 
+    public static boolean hasOCDEAuthorization() {
+        return StringUtils.isNotBlank(getOCDETokenPublic())
+                && StringUtils.isNotBlank(getOCDETokenSecret());
+    }
+
     public static void setOCDETokens(final String tokenPublic,
             final String tokenSecret, boolean enableOcDe) {
         putString(R.string.pref_ocde_tokenpublic, tokenPublic);
@@ -735,6 +740,11 @@ public final class Settings {
 
     }
 
+    public static boolean hasTwitterAuthorization() {
+        return StringUtils.isNotBlank(getTokenPublic())
+                && StringUtils.isNotBlank(getTokenSecret());
+    }
+
     public static void setTwitterTokens(final String tokenPublic,
             final String tokenSecret, boolean enableTwitter) {
         putString(R.string.pref_twitter_token_public, tokenPublic);
@@ -753,7 +763,7 @@ public final class Settings {
     }
 
     public static ImmutablePair<String, String> getTempToken() {
-        String tokenPublic = getString(R.string.pref_twitter_token_public, null);
+        String tokenPublic = getString(R.string.pref_temp_twitter_token_public, null);
         String tokenSecret = getString(R.string.pref_temp_twitter_token_secret, null);
         return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
     }
@@ -934,7 +944,7 @@ public final class Settings {
         putBoolean(R.string.pref_excludedisabled, exclude);
     }
 
-    static void setExcludeMine(final boolean exclude) {
+    public static void setExcludeMine(final boolean exclude) {
         putBoolean(R.string.pref_excludemine, exclude);
     }
 
