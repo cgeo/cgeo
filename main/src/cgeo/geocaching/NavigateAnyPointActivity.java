@@ -62,7 +62,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private int contextMenuItemPosition;
 
-    private String distanceUnit = "";
+    private String distanceUnit = StringUtils.EMPTY;
 
     protected static class ViewHolder extends AbstractViewHolder {
         @InjectView(R.id.simple_way_point_longitude) protected TextView longitude;

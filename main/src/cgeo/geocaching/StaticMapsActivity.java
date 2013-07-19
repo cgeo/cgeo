@@ -33,7 +33,7 @@ public class StaticMapsActivity extends AbstractActivity {
     private static final String EXTRAS_GEOCODE = "geocode";
 
     @Extra(EXTRAS_DOWNLOAD) boolean download = false;
-    @Extra(EXTRAS_WAYPOINT) Integer waypoint_id = null;
+    @Extra(EXTRAS_WAYPOINT) Integer waypointId = null;
     @Extra(EXTRAS_GEOCODE) String geocode = null;
 
     private final List<Bitmap> maps = new ArrayList<Bitmap>();
@@ -43,7 +43,7 @@ public class StaticMapsActivity extends AbstractActivity {
     private final Handler loadMapsHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (waitDialog != null) {
                 waitDialog.dismiss();
             }
@@ -92,7 +92,7 @@ public class StaticMapsActivity extends AbstractActivity {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.staticmaps_activity);
 
         if (geocode == null) {
@@ -107,12 +107,6 @@ public class StaticMapsActivity extends AbstractActivity {
         (new LoadMapsThread()).start();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
     private class LoadMapsThread extends Thread {
 
         @Override
@@ -120,11 +114,11 @@ public class StaticMapsActivity extends AbstractActivity {
             try {
                 // try downloading 2 times
                 for (int trials = 0; trials < 2; trials++) {
-                    for (int level = 1; level <= 5; level++) {
+                    for (int level = 1; level <= StaticMapsProvider.MAPS_LEVEL_MAX; level++) {
                         try {
-                            if (waypoint_id != null) {
+                            if (waypointId != null) {
                                 final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                                final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypoint_id), level);
+                                final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypointId), level);
                                 if (image != null) {
                                     maps.add(image);
                                 }
@@ -158,12 +152,12 @@ public class StaticMapsActivity extends AbstractActivity {
 
     private boolean downloadStaticMaps() {
         final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        if (waypoint_id == null) {
+        if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeCacheStaticMap(cache, true);
             return cache.hasStaticMap();
         }
-        final Waypoint waypoint = cache.getWaypointById(waypoint_id);
+        final Waypoint waypoint = cache.getWaypointById(waypointId);
         if (waypoint != null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             // refresh always removes old waypoint files
@@ -178,7 +172,7 @@ public class StaticMapsActivity extends AbstractActivity {
     public static void startActivity(final Context activity, final String geocode, final boolean download, final Waypoint waypoint) {
         StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
         if (waypoint != null) {
-            builder.waypoint_id(waypoint.getId());
+            builder.waypointId(waypoint.getId());
         }
         builder.start();
     }
