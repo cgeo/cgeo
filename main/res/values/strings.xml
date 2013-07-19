@@ -786,6 +786,8 @@
     <string name="map_trail_hide">Hide trail</string>
     <string name="map_circles_show">Show circles</string>
     <string name="map_circles_hide">Hide circles</string>
+    <string name="map_mycaches_show">Show own/found caches</string>
+    <string name="map_mycaches_hide">Hide own/found caches</string>
     <string name="map_theme_builtin">Default</string>
     <string name="map_theme_select">Select map theme</string>
     <string name="map_live_enable">Enable live</string>

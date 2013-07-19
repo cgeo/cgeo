@@ -324,6 +324,10 @@ public class Tile {
         public static void add(final Tile tile) {
             tileCache.put(tile.hashCode(), tile);
         }
+
+        public static void clear() {
+            tileCache.clear();
+        }
     }
 
 }

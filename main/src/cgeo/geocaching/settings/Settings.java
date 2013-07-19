@@ -934,7 +934,7 @@ public final class Settings {
         putBoolean(R.string.pref_excludedisabled, exclude);
     }
 
-    static void setExcludeMine(final boolean exclude) {
+    public static void setExcludeMine(final boolean exclude) {
         putBoolean(R.string.pref_excludemine, exclude);
     }
 
