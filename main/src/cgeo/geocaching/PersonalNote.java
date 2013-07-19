@@ -4,8 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 
 public class PersonalNote {
-    private static final String MERGED_PREFIX = "merged:\n";
-    private static final String SEPARATOR = "--\n";
+    private static final String SEPARATOR = "\n--\n";
     private String cgeoNote;
     private String providerNote;
     private boolean isOffline;
@@ -15,23 +14,18 @@ public class PersonalNote {
     }
 
     public PersonalNote(final Geocache cache) {
+        this.isOffline = cache.isOffline();
         final String personalNote = cache.getPersonalNote();
-        if (!StringUtils.startsWith(personalNote, MERGED_PREFIX)) {
-            this.providerNote = personalNote;
+        if (StringUtils.isEmpty(personalNote)) {
             return;
         }
         final String[] notes = StringUtils.splitByWholeSeparator(personalNote, SEPARATOR);
-        if (notes.length > 0) {
-            notes[0] = StringUtils.removeStart(notes[0], MERGED_PREFIX);
-            notes[0] = StringUtils.removeEnd(notes[0], "\n");
-        }
         if (notes.length > 1) {
             this.cgeoNote = notes[0];
             this.providerNote = notes[1];
         } else {
             this.providerNote = notes[0];
         }
-        this.isOffline = cache.isOffline();
     }
 
     public final PersonalNote mergeWith(final PersonalNote other) {
@@ -95,7 +89,7 @@ public class PersonalNote {
     public final String toString() {
         final StringBuilder builder = new StringBuilder();
         if (cgeoNote != null) {
-            builder.append(MERGED_PREFIX).append(cgeoNote).append("\n").append(SEPARATOR);
+            builder.append(cgeoNote).append(SEPARATOR);
         }
         builder.append(providerNote);
         return builder.toString();
