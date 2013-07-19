@@ -39,6 +39,11 @@
                 android:title="@string/map_circles_hide">
             </item>
             <item
+            	android:id="@+id/menu_mycaches_mode"
+            	android:icon="@android:drawable/ic_menu_myplaces"
+            	android:title="@string/map_mycaches_hide">
+            </item>
+            <item
                 android:id="@+id/menu_theme_mode"
                 android:icon="@drawable/ic_menu_preferences"
                 android:title="@string/map_theme_select">
