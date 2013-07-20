@@ -65,6 +65,7 @@
     · Ludovic Valente (localization FR)\n
     · marco-jacob (code, loc. DE)\n
     · MichielK (code, loc. NL)\n
+    · <a href="http://www.linkedin.com/in/mieczyslawtorchala">Mieczyslaw Torchala</a> (localization PL)\n
     · mucek4 (code, open source project leader)\n
     · ncorreia (code, localization PT)\n
     · Pascal (localization NL)\n
@@ -85,14 +86,13 @@
     · thiasB (code, loc. DE EN)\n
     · YraFyra (code, loc. SV)\n
     · zenobios (code, loc. DE EN)\n
-    · <a href="http://www.linkedin.com/in/mieczyslawtorchala">Mieczyslaw Torchala</a> (localization PL)\n
     \n
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons)\n
     · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
     · <a href="http://androidicons.com/">Android Icons</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
     · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n
-</string>
+	</string>
 
     <!-- cache menu -->
     <string name="cache_menu_sygic" translatable="false">Sygic</string>
