@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,8 +11,11 @@ import android.content.res.TypedArray;
 import android.net.Uri;
 import android.preference.Preference;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class InfoPreference extends Preference {
 
@@ -19,6 +23,8 @@ public class InfoPreference extends Preference {
     private String text;
     private String url;
     private String urlButton;
+
+    private LayoutInflater inflater;
 
     public InfoPreference(Context context) {
         super(context);
@@ -36,6 +42,8 @@ public class InfoPreference extends Preference {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
+        inflater = ((Activity) context).getLayoutInflater();
+
         setPersistent(false);
 
         if (attrs == null) {
@@ -85,7 +93,15 @@ public class InfoPreference extends Preference {
             }
         });
 
-        return super.onCreateView(parent);
+        // show an Info Icon
+        View v = super.onCreateView(parent);
+
+        ImageView i = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
+        LinearLayout l = (LinearLayout) v.findViewById(android.R.id.widget_frame);
+        l.setVisibility(View.VISIBLE);
+        l.addView(i);
+
+        return v;
     }
 
 }
