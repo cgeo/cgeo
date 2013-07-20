@@ -162,6 +162,7 @@
         <item name="settings_nut">@drawable/settings_nut_white</item>
         <item name="settings_pen">@drawable/settings_pen_white</item>
         <item name="settings_sdcard">@drawable/settings_sdcard_white</item>
+        <item name="settings_info_icon">@drawable/settings_info_icon_white</item>
     </style>
 
     <style name="settings.light" parent="android:Theme.Light">
@@ -173,6 +174,7 @@
         <item name="settings_nut">@drawable/settings_nut_black</item>
         <item name="settings_pen">@drawable/settings_pen_black</item>
         <item name="settings_sdcard">@drawable/settings_sdcard_black</item>
+        <item name="settings_info_icon">@drawable/settings_info_icon_black</item>
     </style>
     
 </resources>

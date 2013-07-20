@@ -93,17 +93,10 @@ public class SettingsActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-
-        if (Settings.isLightSkin()) {
-            setTheme(R.style.settings_light);
-        } else {
-            setTheme(R.style.settings);
-        }
-
+        setTheme(Settings.isLightSkin() ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
         SettingsActivity.addPreferencesFromResource(this, R.xml.preferences);
-
         initPreferences();
 
         Intent intent = getIntent();
