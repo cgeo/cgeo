@@ -1049,6 +1049,7 @@
     <string name="status_new_rc" tools:ignore="UnusedResources">Dostupný nový kandidát na vydání.\nKlepni pro instalaci.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Pravděpodobně používáš Android starší než 2.1. Budoucí verze c:geo nemusí být k dispozici pro tvoje zařízení.</string>
     <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
 
     <plurals name="days_ago">
