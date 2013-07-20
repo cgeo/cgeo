@@ -33,6 +33,7 @@
     <string name="ape">Projekt APE Cache</string>
     <string name="gchq">Groundspeak HQ</string>
     <string name="gps">GPS Adventures exhibit</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Nieznana</string>
 
     <!-- cache sizes -->
@@ -126,6 +127,8 @@
     <string name="log_image_caption">Podpis</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skalowanie obrazu</string>
+    <string name="log_password_title">Hasło do logu:</string>
+    <string name="log_hint_log_password">Wpisz hasło do logu</string>
 
     <!-- translation -->
     <string name="translate_to_sys_lang">Przetłumacz na %s</string>
@@ -350,11 +353,39 @@
     <string name="about_detail">Szczegóły</string>
     <string name="about_donation_more">Darowizna dla\nprogramisty</string>
     <string name="about_contributors">Współpracownicy</string>
+    
+    <!-- settings -->
+    <string name="settings_title_services">Usługi</string>
+    <string name="settings_title_appearance">Wygląd</string>
+    <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
+    <string name="settings_title_offlinedata">Dane offline</string>
+    <string name="settings_title_logging">Logowanie</string>
+    <string name="settings_title_map">Mapa</string>
+    <string name="settings_title_map_data">Dane mapy</string>
+    <string name="settings_title_map_content">Zawartość mapy</string>
+    <string name="settings_title_gpx">GPX</string>
+    <string name="settings_title_basicmembers">Użytkownicy Basic</string>
 
-    <!-- init -->
-    <string name="init_oc">opencaching.de</string>
+    <string name="settings_category_browser">Przeglądarka</string>
+    <string name="settings_category_logging_other">Inne opcje logowania</string>
+    
+    <string name="settings_goto_url_button">więcej …</string>
+
+    <string name="settings_title_gc">Geocaching.com</string>
+    <string name="settings_activate_gc">Aktywuj</string>
+    
+    
+    <string name="settings_gc_legal_note">Aby móc korzystać z usług serwisu Geocaching.com warunki korzystania Groundspeak muszą być zaakceptowane.</string>
+    <string name="settings_info_facebook_login_title">Facebook Login</string>
+    <string name="settings_info_facebook_login">Nie możesz zmusić c:geo aby zalogował się do geocaching.com przy pomocy Twojego konta Facebook. Jednakże istnieje proste rozwiązanie …</string>
+    
+    <string name="init_oc">Opencaching.de</string>  
+    <string name="settings_activate_oc">Aktywuj</string>
+    <string name="init_oc_de_description">Autoryzuj c:geo z opencaching.de aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+    <string name="init_register_oc_de">Autoryzuj c:geo</string>    
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
+    <string name="settings_activate_twitter">Aktywuj</string>
     <string name="init_username">Nazwa użytkownika</string>
     <string name="init_password">Hasło</string>
     <string name="init_login">Sprawdź nazwę użytkownika</string>
@@ -363,6 +394,7 @@
     <string name="init_login_popup_ok">Nazwa użytkownika OK</string>
     <string name="init_login_popup_failed">Logowanie nie powiodło się</string>
     <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
+    <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
     <string name="init_twitter_authorize">Autoryzacja c:geo</string>
     <string name="init_signature">Podpis</string>
     <string name="init_signature_help_text">Wprowadź Twój podpis, który będzie używany przy wpisie do dziennika.\nWyrażenia specjalne, które mogą być użyte to: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nBędą one zastępowane w momencie wstawiania podpisu.</string>
@@ -423,6 +455,12 @@
     <string name="init_restore_confirm">Baza danych jest pusta. Czy na pewno chcesz odzyskać bazę danych z kopii zapasowej?</string>
     <string name="init_backup_last">Kopia dostępna od</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
+    
+    <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
+    <string name="settings_info_offline_maps">c:geo wspiera mapy do użytku offline. Możesz pobrać mapy z Mapsforge lub nawet stworzyć własne w oparciu o OSM.</string>
+    <string name="settings_info_themes_title">Informacje na temat Map Themes</string>
+    <string name="settings_info_themes">c:geo wspiera motywy dla map offline. Mogą być używane by zmienić kolorystykę mapy (np. aby uzyskać tryb nocny) lub by zaznaczyć wybrane obiekty jak ścieżki rowerowe lub izolinie.</string>    
+    
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
     <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
@@ -453,6 +491,7 @@
     <string name="init_summary_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
     <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
     <string name="init_summary_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
+    <string name="init_rendertheme_folder">Katalog z motywami map</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
@@ -461,6 +500,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
+    <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
     <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
     <string name="init_sendToCgeo_description"><b>Wyślij do c:geo</b> pozwala Tobie odbierać skrzynki bezpośrednio ze strony geocaching.com za pomocą specjalnego pluginu do przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest wymagana tylko jeśli będziesz używać send2cgeo. c:geo będzie normalnie działał również bez rejestracji urządzenia.</string>
     <string name="init_sendToCgeo_register">Poproś o rejestrację</string>
@@ -481,6 +521,20 @@
     <string name="auth_dialog_pin_title">Kod PIN</string>
     <string name="auth_dialog_pin_message">Proszę wpisać kod PIN dostarczony przez stronę Twitter. To jest obowiązkowe do ukończenia autoryzacji.</string>
     <string name="auth_dialog_completed">c:geo jest teraz upoważniony do postu na Twitter.</string>
+
+    <!-- auth opencaching -->
+    <string name="auth_ocde">opencaching.de</string>
+    <string name="auth_authorize_oc">Autoryzuj c:geo</string>
+    <string name="auth_start_oc">Rozpocznij autoryzację</string>
+    <string name="auth_again_oc">Spróbuj ponownie</string>
+    <string name="auth_pin_hint_oc">PIN przypisany przez %s</string>
+    <string name="auth_finish_oc">Zakończ</string>
+    <string name="auth_dialog_wait_oc">Czekam na %s…</string>
+    <string name="auth_dialog_pin_title_oc">Kod PIN</string>
+    <string name="auth_dialog_pin_message_oc">Proszę wpisz kod PIN dostarczony przez stronę %s. Jest to konieczne by zakończyć autoryzację.</string>
+    <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
+    <string name="about_auth_1_oc">Następujący proces pozwolił <b>c:geo</b> aby uzyskać dostęp do %s - jeśli wyrażono zgodę.</string>
+    <string name="about_auth_2_oc">Kliknięcie na przycisk \"autoryzuj c:geo\" rozpocznie proces. Zostanie otwarta przeglądarka ze stroną %s. Zaloguj się i pozwól <b>c:geo</b> uzyskać dostęp do Twojego konta. Po zaakceptowaniu, %s pokaże kod numeryczny PIN. Ten kod PIN musi być wklejony do <b>c:geo</b> i potwierdzony. To wszystko.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
@@ -509,6 +563,14 @@
     <string name="cache_log_image_default_title">Zdjęcie</string>
     <string name="cache_personal_note">Notatka osobista</string>
     <string name="cache_personal_note_edit">Edytuj</string>
+    
+    <string name="cache_personal_note_upload">Wysyłanie</string>
+    <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
+    <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
+    <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
+    <string name="cache_personal_note_unstored">Skrzynka nie jest zapisana</string>
+    <string name="cache_personal_note_store">Skrzynka będzie najpierw zapisana aby umożliwić dodawanie notatek osobistych.</string>    
+        
     <string name="cache_description">Opis</string>
     <string name="cache_description_long">Długi opis</string>
     <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string>
@@ -562,6 +624,7 @@
     <string name="cache_menu_navigate">Nawiguj</string>
     <string name="cache_menu_navigation_drive">Nawigacja (jazda)</string>
     <string name="cache_menu_navigation_walk">Nawigacja (pieszo)</string>
+    <string name="cache_menu_navigation_bike">Nawigacja (rower)</string>
     <string name="cache_menu_maps_directions">Kierunki map Google</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Pokaż na mapie</string>
@@ -654,6 +717,7 @@
     <string name="gpx_import_canceled">Import pliku GPX został anulowany</string>
     <string name="gpx_import_delete_title">Usuń plik</string>
     <string name="gpx_import_delete_message">Czy na pewno chcesz usunąć %s?</string>
+    <string name="gpx_import_select_list_title">Importuj GPX do listy</string>
 
     <!-- map file select -->
     <string name="map_file_select_title">Wybierz plik z mapą</string>
@@ -720,7 +784,7 @@
     <string name="map_circles_show">Pokaż okręgi</string>
     <string name="map_circles_hide">Ukryj okręgi</string>
     <string name="map_theme_builtin">Domyślny</string>
-    <string name="map_theme_select">Wybierz temat mapy</string>
+    <string name="map_theme_select">Wybierz motyw mapy</string>
     <string name="map_live_enable">Włącz live</string>
     <string name="map_live_disable">Wyłącz live</string>
     <string name="map_static_title">Mapa statyczna</string>
@@ -785,6 +849,15 @@
     <string name="trackable_released">Wydany</string>
     <string name="trackable_distance">W podróży</string>
     <string name="trackable_touch">TB-Akcja</string>
+    <string name="trackable_not_activated">Przedmiot podróżny nie został zaktywowany</string>
+    
+    <string name="geokret_type_traditional">Tradycyjny</string>
+    <string name="geokret_type_book_or_media">Książka lub media elektroniczne</string>
+    <string name="geokret_type_human">Człowiek</string>
+    <string name="geokret_type_coin">Moneta</string>
+    <string name="geokret_type_post">List</string>
+
+
 
     <!-- user -->
     <string name="user_menu_title">O użytkowniku</string>
@@ -820,6 +893,8 @@
     <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Istnieją skrypty i strony WWW, które umożliwiają wyświetlanie GC-kodu jako kodu kreskowego. Z tym programem c:geo może czytać te GC-kody bezpośrednio z ekranu Twojego komputera.</string>
+    <string name="helper_pocketquery_title">Kreator Pocket Query</string>
+    <string name="helper_pocketquery_description">Pozwala na łatwe tworzenie i pobieranie Pocket Queries wyśrodkowanych w Twoim aktualnym położeniu lub wybranym punkcie mapy. Wymaga konta Premium w Geocaching.com.</string>
 
     <!-- add-ons -->
     <string name="addon_missing_title">Brakujący dodatek</string>
@@ -1031,9 +1106,10 @@
     <string name="attribute_ask_owner_no">Kontakt z założycielem przed rozpoczęciem poszukiwań nie jest konieczny</string>
     <string name="attribute_unknown_yes">Nieznany atrybut obecny</string>
     <string name="attribute_unknown_no">Nie ma żadnego nieznanego atrybutu</string>
+    <string name="attribute_geotour_yes">Część GeoTour</string>
+    <string name="attribute_geotour_no">Nie jest częścią GeoTour</string>    
 
     <!-- next things -->
-    <string name="settings_gc_legal_note">Aby móc korzystać z usług serwisu Geocaching.com warunki korzystania Groundspeak muszą być zaakceptowane.</string>
     <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
     <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1042,6 +1118,7 @@
     <string name="facebook">Facebook: <a href="">c:geo strona</a></string>
     <string name="twitter">Twitter: <a href="">@android_GC</a></string>
     <string name="nutshellmanual">Podręcznik: <a href="">c:geo skrócona instrukcja obsługi</a></string>
+    <string name="market">Android: <a href="">c:geo w Google Play</a></string>
     <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
     <string name="about_auth_1">Poniższy proces pozwala <b>c:geo</b> uzyskać dostęp do Twitter za Twoim pozwoleniem.</string>
     <string name="about_auth_2">Kliknięcie na \"Autoryzacja c:geo\" spowoduje rozpoczęcie procesu. Ten proces spowoduje otwarcie przeglądarki internetowej na stronie Twitter. Zaloguj się na tej stronie i pozwól <b>c:geo</b> uzyskać dostęp do Twojego konta. Jeśli zostanie zaakceptowany, Twitter wyświetli kod numeryczny PIN. Kod PIN musi zostać wklejony do <b>c:geo</b> i potwierdzony. To wszystko.</string>
@@ -1054,6 +1131,34 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map Live.\nWe are working on it, Pracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Wydaje się, że używasz wersji Androida starszej niż 2.1. Przyszłe aktualizacje c:geo mogą nie być dłużej dostępne dla twojego urządzenia.</string>
     <string name="clipboard_copy_ok">Skopiowano do schowka</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 2.1. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
+
+    <!-- text-to-speech for compass view -->
+    <string name="tts_service">Mówiący kompas</string>
+    <string name="tts_start">Zacznij mówić</string>
+    <string name="tts_stop">Przestań mówić</string>
+    <string name="tts_one_kilometer">jeden kilometr</string>
+    <plurals name="tts_kilometers">
+        <item quantity="one">%s kilometr</item>
+        <item quantity="other">%s kilometry</item>
+    </plurals>
+    <string name="tts_one_meter">jeden metr</string>
+    <plurals name="tts_meters">
+        <item quantity="one">%s metr</item>
+        <item quantity="other">%s metry</item>
+    </plurals>
+    <string name="tts_one_mile">jedna mila</string>
+    <plurals name="tts_miles">
+        <item quantity="one">%s mila</item>
+        <item quantity="other">%s mil</item>
+    </plurals>
+    <string name="tts_one_foot">jedna stopa</string>
+    <plurals name="tts_feet">
+        <item quantity="one">%s stopa</item>
+        <item quantity="other">%s stóp</item>
+    </plurals>
+    <string name="tts_one_oclock">pierwsza</string>
+    <string name="tts_oclock">%s</string>
 
     <plurals name="days_ago">
         <item quantity="one">wczoraj</item>
