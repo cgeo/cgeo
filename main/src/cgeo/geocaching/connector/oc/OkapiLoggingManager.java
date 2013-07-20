@@ -23,7 +23,7 @@ public class OkapiLoggingManager implements ILoggingManager {
     private final Geocache cache;
     private LogCacheActivity activity;
 
-    private final static List<LogType> standardLogTypes = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE, LogType.NEEDS_MAINTENANCE);
+    private final static List<LogType> standardLogTypes = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE);
     private final static List<LogType> eventLogTypes = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
 
     public OkapiLoggingManager(Activity activity, OCApiLiveConnector connector, Geocache cache) {
