@@ -957,6 +957,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Új kiadásra jelölt verzió található.\nKattints a telepítéshez.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">A c:geo a geocaching.com-on nemrégen történt változások miatt nem működik.\nDolgozunk a megoldáson. Nézz vissza hamarosan.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Az élő térkép a geocaching.com-on nemrégen történt változások miatt nem működik.\nDolgozunk a megoldáson. Nézz vissza hamarosan.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Úgy tűnik az Android 2.1-es verziójánál régebbit használsz. A c:geo jövőbeli frissítései lehet hogy nem lesznek elérhetők az eszközödre.</string>
 
   <string name="clipboard_copy_ok">Kimásolva a vágólapra</string>
   <plurals name="days_ago">

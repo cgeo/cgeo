@@ -978,6 +978,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione di Android precedente alla 2.1. Le future versioni di c:geo potrebbero non supportare il tuo dispositivo.</string>
 
   <string name="clipboard_copy_ok">Copiato nella clipboard</string>
   <plurals name="days_ago">
