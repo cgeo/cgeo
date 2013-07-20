@@ -240,6 +240,7 @@
 
     <plurals name="caches_eta_mins">
         <item quantity="one">minúta</item>
+        <!-- please add an entry for "few" -->
         <item quantity="other">minúty</item>
     </plurals>
 
@@ -457,6 +458,7 @@
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">jedna skrýša</item>
+        <!-- please add an entry for "few" -->
         <item quantity="other">%1$d skrýš</item>
     </plurals>
 

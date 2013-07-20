@@ -264,6 +264,7 @@
     <plurals name="caches_eta_mins">
         <item quantity="one">minuta</item>
         <item quantity="few">minut</item>
+        <!-- please add an entry for "many" -->
         <item quantity="other">minut</item>
     </plurals>
 
@@ -540,6 +541,7 @@
     <plurals name="cache_counts">
         <item quantity="one">Jedna skrzynka</item>
         <item quantity="few">%1$d skrzynki</item>
+        <!-- please add an entry for "many" -->
         <item quantity="other">%1$d skrzynek</item>
     </plurals>
 
@@ -591,6 +593,7 @@
     <plurals name="waypoints">
         <item quantity="one">Jeden punkt nawigacji</item>
         <item quantity="few">%d punkty nawigacji</item>
+        <!-- please add an entry for "many" -->
         <item quantity="other">%d punktów nawigacji</item>
     </plurals>
 
@@ -1139,21 +1142,25 @@
     <string name="tts_one_kilometer">jeden kilometr</string>
     <plurals name="tts_kilometers">
         <item quantity="one">%s kilometr</item>
+        <!-- please add an entry for "few" and "many" -->
         <item quantity="other">%s kilometry</item>
     </plurals>
     <string name="tts_one_meter">jeden metr</string>
     <plurals name="tts_meters">
         <item quantity="one">%s metr</item>
+        <!-- please add an entry for "few" and "many" -->
         <item quantity="other">%s metry</item>
     </plurals>
     <string name="tts_one_mile">jedna mila</string>
     <plurals name="tts_miles">
         <item quantity="one">%s mila</item>
+        <!-- please add an entry for "few" and "many" -->
         <item quantity="other">%s mil</item>
     </plurals>
     <string name="tts_one_foot">jedna stopa</string>
     <plurals name="tts_feet">
         <item quantity="one">%s stopa</item>
+        <!-- please add an entry for "few" and "many" -->
         <item quantity="other">%s stóp</item>
     </plurals>
     <string name="tts_one_oclock">pierwsza</string>
@@ -1162,6 +1169,7 @@
     <plurals name="days_ago">
         <item quantity="one">wczoraj</item>
         <item quantity="few">%d dni temu</item>
+        <!-- please add an entry for "many" -->
         <item quantity="other">%d dni temu</item>
     </plurals>
 

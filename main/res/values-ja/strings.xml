@@ -184,7 +184,7 @@
     <string name="err_missing_device_name">登録するにはこの端末のモデル番号を入力してください。</string>
     <string name="err_favorite_failed">お気に入りの変更に失敗しました。</string>
     <string name="err_select_logimage_failed">添付画像ファイルの選択に失敗しました。</string>
-    <string name="err_aquire_image_failed">画像ファイルの取得に失敗しました。</string>
+    <string name="err_acquire_image_failed">画像ファイルの取得に失敗しました。</string>
     <string name="err_tb_display">トラッカブルを表示することができません。本当にトラッカブルですか?</string>
     <string name="err_tb_details_open">トラッカブルの詳細を開くことができません。</string>
     <string name="err_tb_forgot_saw">c:geo forgot which trackable you saw.</string>
@@ -270,7 +270,7 @@
     <string name="caches_eta_ltm">1分以内</string>
 
     <plurals name="caches_eta_mins">
-        <item quantity="one">分</item>
+        <!-- <item quantity="one">分</item> -->
         <item quantity="other">分</item>
     </plurals>
 
@@ -546,7 +546,7 @@
 
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">1つのキャッシュ</item>
+        <!-- <item quantity="one">1つのキャッシュ</item> -->
         <item quantity="other">%1$d 個のキャッシュ</item>
     </plurals>
 
@@ -594,7 +594,7 @@
     <string name="cache_waypoints">ウェイポイント</string>
 
     <plurals name="waypoints">
-        <item quantity="one">1 ウェイポイント</item>
+        <!-- <item quantity="one">1 ウェイポイント</item>  -->
         <item quantity="other">%d ウェイポイント</item>
     </plurals>
 
@@ -621,10 +621,10 @@
     <string name="cache_dialog_watchlist_add_message">ウォッチリストに追加中…</string>
     <string name="cache_dialog_watchlist_remove_title">ウォッチリスト</string>
     <string name="cache_dialog_watchlist_remove_message">ウォッチリストから削除中…</string>
-    <string name="cache_dialog_favourite_add_title">お気に入り</string>
-    <string name="cache_dialog_favourite_add_message">お気に入りに追加中…</string>
-    <string name="cache_dialog_favourite_remove_title">お気に入り</string>
-    <string name="cache_dialog_favourite_remove_message">お気に入りから削除中…</string>
+    <string name="cache_dialog_favorite_add_title">お気に入り</string>
+    <string name="cache_dialog_favorite_add_message">お気に入りに追加中…</string>
+    <string name="cache_dialog_favorite_remove_title">お気に入り</string>
+    <string name="cache_dialog_favorite_remove_message">お気に入りから削除中…</string>
     <string name="cache_menu_navigate">ナビゲーション</string>
     <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
     <string name="cache_menu_navigation_walk">ナビゲーション(徒歩)</string>
@@ -1140,22 +1140,22 @@
     <string name="tts_stop">音声案内終了</string>
     <string name="tts_one_kilometer">1 km</string>
     <plurals name="tts_kilometers">
-        <item quantity="one">%s km</item>
+        <!-- <item quantity="one">%s km</item>  -->
         <item quantity="other">%s km</item>
     </plurals>
     <string name="tts_one_meter">1 m</string>
     <plurals name="tts_meters">
-        <item quantity="one">%s m</item>
+        <!-- <item quantity="one">%s m</item>  -->
         <item quantity="other">%s m</item>
     </plurals>
     <string name="tts_one_mile">1 マイル</string>
     <plurals name="tts_miles">
-        <item quantity="one">%s マイル</item>
+        <!-- <item quantity="one">%s マイル</item> -->
         <item quantity="other">%s マイル</item>
     </plurals>
     <string name="tts_one_foot">1 フィート</string>
     <plurals name="tts_feet">
-        <item quantity="one">%s フィート</item>
+        <!-- <item quantity="one">%s フィート</item> -->
         <item quantity="other">%s フィート</item>
     </plurals>
     <string name="tts_one_oclock">1 時</string>
@@ -1165,7 +1165,7 @@
     <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
 
     <plurals name="days_ago">
-        <item quantity="one">昨日</item>
+        <!-- <item quantity="one">昨日</item> -->
         <item quantity="other">%d日前</item>
     </plurals>
 

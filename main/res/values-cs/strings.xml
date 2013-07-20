@@ -487,6 +487,7 @@
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">Jedna keš</item>
+        <!-- please add an entry for "few" -->
         <item quantity="other">%1$d keší</item>
     </plurals>
 
@@ -529,6 +530,7 @@
 
     <plurals name="waypoints">
         <item quantity="one">1 bod trasy</item>
+        <!-- please add an entry for "few" -->
         <item quantity="other">%d bodů trasy</item>
     </plurals>
 
@@ -1054,6 +1056,7 @@
 
     <plurals name="days_ago">
         <item quantity="one">včera</item>
+        <!-- please add an entry for "few" -->
         <item quantity="other">před %d dny</item>
     </plurals>
 
