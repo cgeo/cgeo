@@ -480,6 +480,7 @@
     <string name="init_loaddirectionimg">Direction Image</string>
     <string name="init_summary_loaddirectionimg">Download directional arrow image if necessary (only required for Basic Members)</string>
     <string name="init_default_navigation_tool">Default Navigation</string>
+    <string name="init_secondary_navigation_tool">Secondary Navigation</string>
     <string name="init_default_navigation_tool_description">Here you can select your preferred navigation tool.</string>
     <string name="init_default_navigation_tool_select">Select tool</string>
     <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. Activate it by long pressing the navigation icon next to the title of the cache.</string>

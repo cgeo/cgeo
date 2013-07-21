@@ -478,6 +478,7 @@
     <string name="init_loaddirectionimg">Richtungs-Grafik</string>
     <string name="init_summary_loaddirectionimg">Richtungs-Grafik laden wenn nötig (nur Basic Member)</string>
     <string name="init_default_navigation_tool">Standardnavigation</string>
+    <string name="init_secondary_navigation_tool">Zweitnavigation</string>
     <string name="init_default_navigation_tool_description">Hier kann das bevorzugte Navigationswerkzeug festgelegt werden.</string>
     <string name="init_default_navigation_tool_select">Wähle Werkzeug</string>
     <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>

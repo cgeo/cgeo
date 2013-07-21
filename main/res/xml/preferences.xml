@@ -351,7 +351,11 @@
                 android:title="@string/init_default_navigation_tool_select"
                 android:dialogTitle="@string/init_default_navigation_tool_select"
                 android:defaultValue="0" />
-
+        </PreferenceCategory>
+            
+        <PreferenceCategory 
+            android:title="@string/init_secondary_navigation_tool" > 
+            
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"
                 android:text="@string/init_default_navigation_tool_2_description" />
