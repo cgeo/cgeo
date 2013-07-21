@@ -62,10 +62,10 @@ public class MainActivity extends AbstractActivity {
     @InjectView(R.id.any_button) protected ImageView any;
     @InjectView(R.id.filter_button) protected ImageView filter;
     @InjectView(R.id.nearest) protected ImageView nearestView;
-    @InjectView(R.id.nav_type) protected TextView navType ;
-    @InjectView(R.id.nav_accuracy) protected TextView navAccuracy ;
-    @InjectView(R.id.nav_location) protected TextView navLocation ;
-    @InjectView(R.id.offline_count) protected TextView countBubble ;
+    @InjectView(R.id.nav_type) protected TextView navType;
+    @InjectView(R.id.nav_accuracy) protected TextView navAccuracy;
+    @InjectView(R.id.nav_location) protected TextView navLocation;
+    @InjectView(R.id.offline_count) protected TextView countBubble;
     @InjectView(R.id.info_area) protected LinearLayout infoArea;
 
     private static final String SCAN_INTENT = "com.google.zxing.client.android.SCAN";
@@ -79,12 +79,12 @@ public class MainActivity extends AbstractActivity {
     private boolean addressObtaining = false;
     private boolean initialized = false;
 
-    final private UpdateLocation locationUpdater = new UpdateLocation();
+    private final UpdateLocation locationUpdater = new UpdateLocation();
 
     private Handler updateUserInfoHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
 
             // Get active connectors with login status
             ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
@@ -116,30 +116,29 @@ public class MainActivity extends AbstractActivity {
     private Handler obtainAddressHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             try {
                 if (CollectionUtils.isNotEmpty(addresses)) {
                     final Address address = addresses.get(0);
-                    final StringBuilder addText = new StringBuilder();
+                    final ArrayList<String> addressParts = new ArrayList<String>();
 
-                    if (address.getCountryName() != null) {
-                        addText.append(address.getCountryName());
+                    final String countryName = address.getCountryName();
+                    if (countryName != null) {
+                        addressParts.add(countryName);
                     }
-                    if (address.getLocality() != null) {
-                        if (addText.length() > 0) {
-                            addText.append(", ");
+                    final String locality = address.getLocality();
+                    if (locality != null) {
+                        addressParts.add(locality);
+                    } else {
+                        final String adminArea = address.getAdminArea();
+                        if (adminArea != null) {
+                            addressParts.add(adminArea);
                         }
-                        addText.append(address.getLocality());
-                    } else if (address.getAdminArea() != null) {
-                        if (addText.length() > 0) {
-                            addText.append(", ");
-                        }
-                        addText.append(address.getAdminArea());
                     }
 
                     addCoords = app.currentGeo().getCoords();
 
-                    navLocation.setText(addText.toString());
+                    navLocation.setText(StringUtils.join(addressParts, ", "));
                 }
             } catch (Exception e) {
                 // nothing
@@ -184,7 +183,7 @@ public class MainActivity extends AbstractActivity {
     private Handler firstLoginHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             try {
                 final StatusCode reason = (StatusCode) msg.obj;
 
@@ -198,7 +197,7 @@ public class MainActivity extends AbstractActivity {
     };
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
@@ -219,7 +218,7 @@ public class MainActivity extends AbstractActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         init();
@@ -257,20 +256,20 @@ public class MainActivity extends AbstractActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_options, menu);
         return true;
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_scan).setEnabled(ProcessUtils.isIntentAvailable(SCAN_INTENT));
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
             case R.id.menu_about:
@@ -300,7 +299,7 @@ public class MainActivity extends AbstractActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
             String scan = scanResult.getContents();
@@ -345,7 +344,7 @@ public class MainActivity extends AbstractActivity {
         findOnMap.setClickable(true);
         findOnMap.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 cgeoFindOnMap(v);
             }
         });
@@ -353,18 +352,18 @@ public class MainActivity extends AbstractActivity {
         findByOffline.setClickable(true);
         findByOffline.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 cgeoFindByOffline(v);
             }
         });
         findByOffline.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onLongClick(final View v) {
                 new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, new RunnableWithArgument<Integer>() {
 
                     @Override
-                    public void run(Integer selectedListId) {
+                    public void run(final Integer selectedListId) {
                         Settings.saveLastList(selectedListId);
                         cgeocaches.startActivityOffline(MainActivity.this);
                     }
@@ -377,7 +376,7 @@ public class MainActivity extends AbstractActivity {
         advanced.setClickable(true);
         advanced.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 cgeoSearch(v);
             }
         });
@@ -385,7 +384,7 @@ public class MainActivity extends AbstractActivity {
         any.setClickable(true);
         any.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 cgeoPoint(v);
             }
         });
@@ -393,14 +392,14 @@ public class MainActivity extends AbstractActivity {
         filter.setClickable(true);
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 selectGlobalTypeFilter();
             }
         });
         filter.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onLongClick(final View v) {
                 selectGlobalTypeFilter();
                 return true;
             }
@@ -430,7 +429,7 @@ public class MainActivity extends AbstractActivity {
         Collections.sort(sorted, new Comparator<CacheType>() {
 
             @Override
-            public int compare(CacheType left, CacheType right) {
+            public int compare(final CacheType left, final CacheType right) {
                 return left.getL10n().compareToIgnoreCase(right.getL10n());
             }
         });
@@ -452,7 +451,7 @@ public class MainActivity extends AbstractActivity {
         builder.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface dialog, int position) {
+            public void onClick(final DialogInterface dialog, final int position) {
                 CacheType cacheType = cacheTypes.get(position);
                 Settings.setCacheType(cacheType);
                 setFilterTitle();
@@ -477,7 +476,7 @@ public class MainActivity extends AbstractActivity {
                 .setCancelable(false)
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         dialog.dismiss();
                         cgData.resetNewlyCreatedDatabase();
                         app.restoreDatabase(MainActivity.this);
@@ -485,7 +484,7 @@ public class MainActivity extends AbstractActivity {
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
                         cgData.resetNewlyCreatedDatabase();
                     }
@@ -505,7 +504,7 @@ public class MainActivity extends AbstractActivity {
                         nearestView.setClickable(true);
                         nearestView.setOnClickListener(new OnClickListener() {
                             @Override
-                            public void onClick(View v) {
+                            public void onClick(final View v) {
                                 cgeoFindNearest(v);
                             }
                         });
@@ -552,7 +551,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoFindOnMap(View v) {
+    public void cgeoFindOnMap(final View v) {
         findOnMap.setPressed(true);
         CGeoMap.startActivityLiveMap(this);
     }
@@ -561,7 +560,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoFindNearest(View v) {
+    public void cgeoFindNearest(final View v) {
         if (app.currentGeo().getCoords() == null) {
             return;
         }
@@ -574,7 +573,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoFindByOffline(View v) {
+    public void cgeoFindByOffline(final View v) {
         findByOffline.setPressed(true);
         cgeocaches.startActivityOffline(this);
     }
@@ -583,7 +582,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoSearch(View v) {
+    public void cgeoSearch(final View v) {
         advanced.setPressed(true);
         startActivity(new Intent(this, SearchActivity.class));
     }
@@ -592,7 +591,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoPoint(View v) {
+    public void cgeoPoint(final View v) {
         any.setPressed(true);
         startActivity(new Intent(this, NavigateAnyPointActivity.class));
     }
@@ -601,7 +600,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoFilter(View v) {
+    public void cgeoFilter(final View v) {
         filter.setPressed(true);
         filter.performClick();
     }
@@ -610,7 +609,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoNavSettings(View v) {
+    public void cgeoNavSettings(final View v) {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     }
 
@@ -618,7 +617,7 @@ public class MainActivity extends AbstractActivity {
         private Handler countBubbleHandler = new Handler() {
 
             @Override
-            public void handleMessage(Message msg) {
+            public void handleMessage(final Message msg) {
                 try {
                     if (countBubbleCnt == 0) {
                         countBubble.setVisibility(View.GONE);
@@ -735,7 +734,7 @@ public class MainActivity extends AbstractActivity {
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void showAbout(View view) {
+    public void showAbout(final View view) {
         AboutActivity_.intent(this).start();
     }
 
@@ -743,7 +742,7 @@ public class MainActivity extends AbstractActivity {
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void goSearch(View view) {
+    public void goSearch(final View view) {
         onSearchRequested();
     }
 
