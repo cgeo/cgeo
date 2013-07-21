@@ -11,11 +11,12 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.Version;
 
@@ -30,8 +31,6 @@ import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
@@ -268,17 +267,9 @@ public class MainActivity extends AbstractActivity {
         super.onPrepareOptionsMenu(menu);
         MenuItem item = menu.findItem(R.id.menu_scan);
         if (item != null) {
-            item.setEnabled(isIntentAvailable(SCAN_INTENT));
+            item.setEnabled(ProcessUtils.isIntentAvailable(SCAN_INTENT));
         }
         return true;
-    }
-
-    public static boolean isIntentAvailable(String intent) {
-        final PackageManager packageManager = cgeoapplication.getInstance().getPackageManager();
-        final List<ResolveInfo> list = packageManager.queryIntentActivities(
-                new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
-
-        return CollectionUtils.isNotEmpty(list);
     }
 
     @Override

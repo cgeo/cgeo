@@ -2,9 +2,12 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.cgeoapplication;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 
 import java.util.List;
 
@@ -16,7 +19,7 @@ public final class ProcessUtils {
 
     /**
      * Preferred method to detect the availability of an external app
-     * 
+     *
      * @param packageName
      * @return
      */
@@ -28,7 +31,7 @@ public final class ProcessUtils {
      * Checks whether a launch intent is available or if the package is just installed
      * This function is relatively costly, so if you know that the package in question has
      * a launch intent, use isLaunchable() instead.
-     * 
+     *
      * @param packageName
      * @return
      */
@@ -64,5 +67,13 @@ public final class ProcessUtils {
         } catch (final Exception e) {
             return null;
         }
+    }
+
+    public static boolean isIntentAvailable(final String intent) {
+        final PackageManager packageManager = cgeoapplication.getInstance().getPackageManager();
+        final List<ResolveInfo> list = packageManager.queryIntentActivities(
+                new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
+
+        return CollectionUtils.isNotEmpty(list);
     }
 }

@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.ProcessUtils;
 
@@ -31,7 +30,7 @@ public abstract class AbstractApp implements App {
         if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isLaunchable(packageName)) {
             return true;
         }
-        return MainActivity.isIntentAvailable(intent);
+        return ProcessUtils.isIntentAvailable(intent);
     }
 
     protected Intent getLaunchIntent() {
