@@ -199,6 +199,10 @@ public final class Settings {
         return sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
     }
 
+    private static long getLong(final int prefKeyId, final long defaultValue) {
+        return sharedPrefs.getLong(getKey(prefKeyId), defaultValue);
+    }
+
     private static boolean getBoolean(final int prefKeyId, final boolean defaultValue) {
         return sharedPrefs.getBoolean(getKey(prefKeyId), defaultValue);
     }
@@ -222,6 +226,12 @@ public final class Settings {
     private static boolean putInt(final int prefKeyId, final int value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putInt(getKey(prefKeyId), value);
+        return edit.commit();
+    }
+
+    private static boolean putLong(final int prefKeyId, final long value) {
+        final SharedPreferences.Editor edit = sharedPrefs.edit();
+        edit.putLong(getKey(prefKeyId), value);
         return edit.commit();
     }
 
@@ -972,6 +982,14 @@ public final class Settings {
 
     static void setUseImperialUnits(final boolean imperial) {
         putBoolean(R.string.pref_units, imperial);
+    }
+
+    public static long getFieldnoteExportDate() {
+        return getLong(R.string.pref_fieldnoteExportDate, 0);
+    }
+
+    public static void setFieldnoteExportDate(final long date) {
+        putLong(R.string.pref_fieldnoteExportDate, date);
     }
 
 }

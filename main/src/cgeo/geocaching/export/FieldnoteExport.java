@@ -9,6 +9,8 @@ import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
@@ -79,12 +81,9 @@ class FieldnoteExport extends AbstractExport {
         final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);
         final CheckBox onlyNewOption = (CheckBox) layout.findViewById(R.id.onlynew);
 
-        uploadOption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onlyNewOption.setEnabled(uploadOption.isChecked());
-            }
-        });
+        if (Settings.getFieldnoteExportDate() > 0) {
+            onlyNewOption.setText(getString(R.string.export_fieldnotes_onlynew) + "\n(" + Formatter.formatShortDateTime(activity, Settings.getFieldnoteExportDate()) + ')');
+        }
 
         builder.setPositiveButton(R.string.export, new DialogInterface.OnClickListener() {
 
@@ -134,7 +133,10 @@ class FieldnoteExport extends AbstractExport {
                 int i = 0;
                 for (final Geocache cache : caches) {
                     if (cache.isLogOffline()) {
-                        appendFieldNote(fieldNoteBuffer, cache, cgData.loadLogOffline(cache.getGeocode()));
+                        final LogEntry log = cgData.loadLogOffline(cache.getGeocode());
+                        if (!onlyNew || onlyNew && log.date > Settings.getFieldnoteExportDate()) {
+                            appendFieldNote(fieldNoteBuffer, cache, log);
+                        }
                         publishProgress(++i);
                     }
                 }
@@ -195,10 +197,6 @@ class FieldnoteExport extends AbstractExport {
                         "__EVENTARGUMENT", "",
                         "ctl00$ContentBody$btnUpload", "Upload Field Note");
 
-                if (onlyNew) {
-                    uploadParams.put("ctl00$ContentBody$chkSuppressDate", "on");
-                }
-
                 Login.putViewstates(uploadParams, viewstates);
 
                 Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
@@ -216,9 +214,7 @@ class FieldnoteExport extends AbstractExport {
         protected void onPostExecuteInternal(Boolean result) {
             if (null != activity) {
                 if (result) {
-                    //                    if (onlyNew) {
-                    //                        // update last export time in settings when doing it ourself (currently we use the date check from gc.com)
-                    //                    }
+                    Settings.setFieldnoteExportDate(System.currentTimeMillis());
 
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
 
