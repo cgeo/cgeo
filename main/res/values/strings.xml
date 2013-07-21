@@ -46,11 +46,6 @@
     <string name="cache_size_notchosen">Not chosen</string>
     <string name="cache_size_unknown">Unknown</string>
 
-    <!-- cache distances -->
-    <string name="cache_distance_near">Near (&lt; 3 km)</string>
-    <string name="cache_distance_regular">Regular (3 to 5 km)</string>
-    <string name="cache_distance_far">Far (&gt; 5 km)</string>
-    
     <!-- waypoints -->
     <string name="wp_final">Final Location</string>
     <string name="wp_stage">Stage of a Multicache</string>
