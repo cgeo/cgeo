@@ -25,14 +25,18 @@
                 android:title="@string/init_username"
                 android:dialogTitle="@string/init_username"
                 android:hint="@string/init_username"
-                android:dependency="@string/pref_connectorGCActive" />
+                android:dependency="@string/pref_connectorGCActive"
+                android:singleLine="true"
+                android:imeOptions="actionDone" />
             <cgeo.geocaching.settings.EditPasswordPreference 
                 android:key="@string/pref_password"
                 android:title="@string/init_password"
                 android:dialogTitle="@string/init_password"
                 android:hint="@string/init_password"
                 android:inputType="textPassword"
-                android:dependency="@string/pref_connectorGCActive" />
+                android:dependency="@string/pref_connectorGCActive"
+                android:singleLine="true"
+                android:imeOptions="actionDone" />
             <cgeo.geocaching.settings.CheckGcCredentialsPreference 
                 android:title="@string/init_login"
                 android:dependency="@string/pref_connectorGCActive" />
@@ -84,7 +88,9 @@
                 android:title="@string/init_password"
                 android:dialogTitle="@string/init_password"
                 android:hint="@string/init_password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:imeOptions="actionDone" />
             
         </PreferenceCategory>
 
@@ -116,7 +122,9 @@
             <EditTextPreference
                 android:key="@string/pref_webDeviceName"
                 android:title="@string/init_sendToCgeo_name"
-                android:dialogTitle="@string/init_sendToCgeo_name" />
+                android:dialogTitle="@string/init_sendToCgeo_name"
+                android:singleLine="true"
+                android:imeOptions="actionDone" />
             <cgeo.geocaching.settings.RegisterSend2CgeoPreference
                 android:title="@string/init_sendToCgeo_register" />
 
