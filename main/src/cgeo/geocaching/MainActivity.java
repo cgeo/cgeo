@@ -265,10 +265,7 @@ public class MainActivity extends AbstractActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem item = menu.findItem(R.id.menu_scan);
-        if (item != null) {
-            item.setEnabled(ProcessUtils.isIntentAvailable(SCAN_INTENT));
-        }
+        menu.findItem(R.id.menu_scan).setEnabled(ProcessUtils.isIntentAvailable(SCAN_INTENT));
         return true;
     }
 
