@@ -372,7 +372,6 @@
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_basicmembers">Membros Básico</string>
-    <string name="settings_title_miscellaneous">Mais Definições</string>
 
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_logging_other">Outras Opções de Registo</string>
@@ -524,8 +523,8 @@
     <string name="auth_dialog_pin_title">Código PIN</string>
     <string name="auth_dialog_pin_message">Por favor insira o código PIN fornecido pelo site do Twitter. É imperativo para que se complete a autorização.</string>
     <string name="auth_dialog_completed">O c:geo está agora autorizado a publicar no Twitter.</string>
-	<string name="about_auth_1">O processo seguinte permite <b> c: geo </ b> aceder ao Twitter - se concordar.</string>
-    <string name="about_auth_2">Um clique sobre o botão \ "autorizar c: geo \"  irá iniciar o processo. Este processo irá abrir um navegador com uma página no Twitter. Entre nesta página e permita o <b> c: geo </ b> aceder à sua conta. Se isso for aceite, o Twitter vai mostrar um código PIN numérico. Este PIN deve ser colado em <b> c: geo </ b> e confirmado. É tudo.</string>
+	<string name="about_auth_1">O processo seguinte permite <b>c:geo</b> aceder ao Twitter - se concordar.</string>
+    <string name="about_auth_2">Um clique sobre o botão \"autorizar c:geo \" irá iniciar o processo. Este processo irá abrir um navegador com uma página no Twitter. Entre nesta página e permita o <b>c:geo</b> aceder à sua conta. Se isso for aceite, o Twitter vai mostrar um código PIN numérico. Este PIN deve ser colado em <b>c:geo</b> e confirmado. É tudo.</string>
 
 	<!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
@@ -538,8 +537,8 @@
     <string name="auth_dialog_pin_title_oc">Código PIN</string>
     <string name="auth_dialog_pin_message_oc">Por favor insira o código PIN fornecido pelo site %s. É imperativo para que se complete a autorização.</string>
     <string name="auth_dialog_completed_oc">c:geo está agora autorizado a interagir com %s.</string>
-    <string name="about_auth_1_oc">O processo seguinte permite <b> c: geo </ b> aceder ao Twitter - se concordar.</string>
-    <string name="about_auth_2_oc">Um clique sobre o botão \ "autorizar c: geo \"  irá iniciar o processo. Este processo irá abrir um navegador com uma página em %s. Entre nesta página e permita o <b> c: geo </ b> aceder à sua conta. Se isso for aceite, %s vai mostrar um código PIN numérico. Este PIN deve ser colado em <b> c: geo </ b> e confirmado. É tudo.</string>
+    <string name="about_auth_1_oc">O processo seguinte permite <b>c:geo</b> aceder ao Twitter - se concordar.</string>
+    <string name="about_auth_2_oc">Um clique sobre o botão \"autorizar c:geo \"  irá iniciar o processo. Este processo irá abrir um navegador com uma página em %s. Entre nesta página e permita o <b>c:geo</b> aceder à sua conta. Se isso for aceite, %s vai mostrar um código PIN numérico. Este PIN deve ser colado em <b>c:geo</b> e confirmado. É tudo.</string>
 	
     <!-- cache -->
     <plurals name="cache_counts">
@@ -1072,7 +1071,7 @@
     <string name="attribute_inside_no">Fora de locais fechados</string>
     <string name="attribute_in_water_yes">Na água</string>
     <string name="attribute_in_water_no">Fora da água</string>
-    <string name="attribute_no_gps_yes">Sem GPS (caixas de correio, bússola, ...)</string>
+    <string name="attribute_no_gps_yes">Sem GPS (caixas de correio, bússola, …)</string>
     <string name="attribute_no_gps_no">Com GPS</string>
     <string name="attribute_overnight_yes">Necessário pernoitar</string>
     <string name="attribute_overnight_no">Não necessário pernoitar</string>
@@ -1133,7 +1132,7 @@
     <string name="tts_service">Bússola que fala</string>
     <string name="tts_start">Comece a falar</string>
     <string name="tts_stop">Páre de falar</string>
-    <string name="tts_one_kilometer">um quilómetro</string>
+    <string name="tts_one_kilometer" tools:ignore="Typos">um quilómetro</string>
     <plurals name="tts_kilometers">
         <item quantity="one">%s quilómetro</item>
         <item quantity="other">%s quilómetro</item>
