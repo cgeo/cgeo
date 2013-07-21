@@ -8,12 +8,12 @@ import java.util.List;
 abstract class AbstractFilter implements IFilter {
     private final String name;
 
-    protected AbstractFilter(String name) {
+    protected AbstractFilter(final String name) {
         this.name = name;
     }
 
     @Override
-    public void filter(List<Geocache> list) {
+    public void filter(final List<Geocache> list) {
         final List<Geocache> itemsToRemove = new ArrayList<Geocache>();
         for (Geocache item : list) {
             if (!accepts(item)) {
@@ -30,7 +30,7 @@ abstract class AbstractFilter implements IFilter {
 
     /*
      * show name in array adapter
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

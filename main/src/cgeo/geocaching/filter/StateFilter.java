@@ -13,9 +13,9 @@ import java.util.List;
 
 abstract class StateFilter extends AbstractFilter {
 
-    final static Resources res = cgeoapplication.getInstance().getResources();
+    static final Resources res = cgeoapplication.getInstance().getResources();
 
-    protected StateFilter(String name) {
+    protected StateFilter(final String name) {
         super(name);
     }
 
@@ -26,7 +26,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isFound();
         }
 
@@ -38,7 +38,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isArchived();
         }
     }
@@ -49,7 +49,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isDisabled();
         }
     }
@@ -60,7 +60,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isPremiumMembersOnly();
         }
     }
@@ -71,7 +71,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return !cache.isPremiumMembersOnly();
         }
     }
@@ -82,7 +82,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isLogOffline();
         }
     }
@@ -93,7 +93,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isOffline();
         }
     }
@@ -104,7 +104,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return !cache.isOffline();
         }
     }
@@ -126,7 +126,7 @@ abstract class StateFilter extends AbstractFilter {
             Collections.sort(filters, new Comparator<StateFilter>() {
 
                 @Override
-                public int compare(StateFilter filter1, StateFilter filter2) {
+                public int compare(final StateFilter filter1, final StateFilter filter2) {
                     return filter1.getName().compareToIgnoreCase(filter2.getName());
                 }
             });

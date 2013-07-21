@@ -13,7 +13,7 @@ class TrackablesFilter extends AbstractFilter implements IFilterFactory {
     }
 
     @Override
-    public boolean accepts(Geocache cache) {
+    public boolean accepts(final Geocache cache) {
         return cache.hasTrackables();
     }
 

@@ -13,13 +13,13 @@ public class OriginFilter extends AbstractFilter {
 
     private final IConnector connector;
 
-    public OriginFilter(IConnector connector) {
+    public OriginFilter(final IConnector connector) {
         super(connector.getName());
         this.connector = connector;
     }
 
     @Override
-    public boolean accepts(Geocache cache) {
+    public final boolean accepts(final Geocache cache) {
         return ConnectorFactory.getConnector(cache) == connector;
     }
 
@@ -36,7 +36,7 @@ public class OriginFilter extends AbstractFilter {
             Collections.sort(filters, new Comparator<OriginFilter>() {
 
                 @Override
-                public int compare(OriginFilter lhs, OriginFilter rhs) {
+                public int compare(final OriginFilter lhs, final OriginFilter rhs) {
                     return lhs.getName().compareToIgnoreCase(rhs.getName());
                 }
             });

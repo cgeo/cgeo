@@ -1,9 +1,9 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
@@ -60,7 +60,7 @@ public final class FilterUserInterface {
         Collections.sort(registry, new Comparator<FactoryEntry>() {
 
             @Override
-            public int compare(FactoryEntry lhs, FactoryEntry rhs) {
+            public int compare(final FactoryEntry lhs, final FactoryEntry rhs) {
                 return lhs.name.compareToIgnoreCase(rhs.name);
             }
         });
@@ -69,7 +69,7 @@ public final class FilterUserInterface {
         register(R.string.caches_filter_clear, null);
     }
 
-    private void register(int resourceId, Class<? extends IFilterFactory> factoryClass) {
+    private void register(final int resourceId, final Class<? extends IFilterFactory> factoryClass) {
         registry.add(new FactoryEntry(res.getString(resourceId), factoryClass));
     }
 
@@ -81,7 +81,7 @@ public final class FilterUserInterface {
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int itemIndex) {
+            public void onClick(final DialogInterface dialog, final int itemIndex) {
                 FactoryEntry entry = adapter.getItem(itemIndex);
                 // reset?
                 if (entry.filterFactory == null) {
@@ -114,7 +114,7 @@ public final class FilterUserInterface {
         final ArrayAdapter<IFilter> adapter = new ArrayAdapter<IFilter>(activity, android.R.layout.select_dialog_item, filters);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
+            public void onClick(final DialogInterface dialog, final int item) {
                 runAfterwards.run(filters.get(item));
             }
         });

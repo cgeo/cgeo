@@ -9,13 +9,13 @@ import java.util.List;
 class SizeFilter extends AbstractFilter {
     private final CacheSize cacheSize;
 
-    public SizeFilter(CacheSize cacheSize) {
+    public SizeFilter(final CacheSize cacheSize) {
         super(cacheSize.id);
         this.cacheSize = cacheSize;
     }
 
     @Override
-    public boolean accepts(Geocache cache) {
+    public boolean accepts(final Geocache cache) {
         return cacheSize == cache.getSize();
     }
 
