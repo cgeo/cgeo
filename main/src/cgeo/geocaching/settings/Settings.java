@@ -267,8 +267,8 @@ public final class Settings {
 
     /**
      * Get login and password information.
-     *
-     * @return a pair (login, password) or null if no valid information is stored
+     * 
+     * @return a pair either with (login, password) or (empty, empty) if no valid information is stored
      */
     public static ImmutablePair<String, String> getGcLogin() {
 
@@ -276,7 +276,7 @@ public final class Settings {
         final String password = getString(R.string.pref_password, null);
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-                return null;
+            return new ImmutablePair<String, String>(StringUtils.EMPTY, StringUtils.EMPTY);
         }
 
         return new ImmutablePair<String, String>(username, password);

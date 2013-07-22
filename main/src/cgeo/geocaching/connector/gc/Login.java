@@ -1,13 +1,13 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
@@ -68,7 +68,7 @@ public abstract class Login {
     private static StatusCode login(boolean retry) {
         final ImmutablePair<String, String> login = Settings.getGcLogin();
 
-        if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
+        if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
             Log.e("Login.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
@@ -475,7 +475,7 @@ public abstract class Login {
     /**
      * Unfortunately the cache details page contains user generated whitespace in the personal note, therefore we cannot
      * remove the white space from cache details pages.
-     * 
+     *
      * @param uri
      * @return
      */

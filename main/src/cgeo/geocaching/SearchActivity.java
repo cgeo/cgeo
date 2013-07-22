@@ -149,7 +149,6 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void init() {
-        Settings.getGcLogin();
 
         buttonLatitude.setOnClickListener(new FindByCoordsAction());
         buttonLongitude.setOnClickListener(new FindByCoordsAction());

@@ -92,7 +92,7 @@ public class CheckGcCredentialsPreference extends Preference {
             ImmutablePair<String, String> credentials = Settings.getGcLogin();
 
             // check credentials for validity
-            if (credentials == null || StringUtils.isBlank(credentials.getLeft())
+            if (StringUtils.isBlank(credentials.getLeft())
                     || StringUtils.isBlank(credentials.getRight())) {
                 ActivityMixin.showToast(activity, R.string.err_missing_auth);
                 return false;

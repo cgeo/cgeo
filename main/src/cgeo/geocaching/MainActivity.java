@@ -335,7 +335,6 @@ public class MainActivity extends AbstractActivity {
         initialized = true;
 
         Settings.setLanguage(Settings.isUseEnglish());
-        Settings.getGcLogin();
 
         if (app.firstRun) {
             (new FirstLoginThread()).start();
