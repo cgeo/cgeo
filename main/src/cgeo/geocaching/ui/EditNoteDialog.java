@@ -20,13 +20,15 @@ public class EditNoteDialog extends DialogFragment {
     public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
 
     private EditText mEditText;
+    private EditNoteDialogListener listener;
 
-    public static EditNoteDialog newInstance(final String initialNote) {
+    public static EditNoteDialog newInstance(final String initialNote, EditNoteDialogListener listener) {
         EditNoteDialog dialog = new EditNoteDialog();
 
         Bundle arguments = new Bundle();
         arguments.putString(EditNoteDialog.ARGUMENT_INITIAL_NOTE, initialNote);
         dialog.setArguments(arguments);
+        dialog.listener = listener;
 
         return dialog;
     }
@@ -49,8 +51,7 @@ public class EditNoteDialog extends DialogFragment {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        final EditNoteDialogListener activity = (EditNoteDialogListener) getActivity();
-                        activity.onFinishEditNoteDialog(mEditText.getText().toString());
+                        listener.onFinishEditNoteDialog(mEditText.getText().toString());
                         dialog.dismiss();
                     }
                 });
