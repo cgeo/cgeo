@@ -10,7 +10,7 @@ import android.os.Message;
 import java.lang.ref.WeakReference;
 
 public class SimpleCancellableHandler extends CancellableHandler {
-    public static final String SUCCESS_TEXT = "success_message";
+    public static final String MESSAGE_TEXT = "message_text";
     protected final WeakReference<AbstractActivity> activityRef;
     protected final WeakReference<Progress> progressDialogRef;
 
@@ -22,13 +22,10 @@ public class SimpleCancellableHandler extends CancellableHandler {
     @Override
     public void handleRegularMessage(final Message msg) {
         AbstractActivity activity = activityRef.get();
-        if (activity != null && msg.getData() != null && msg.getData().getString(SUCCESS_TEXT) != null) {
-            activity.showToast(msg.getData().getString(SUCCESS_TEXT));
+        if (activity != null && msg.getData() != null && msg.getData().getString(MESSAGE_TEXT) != null) {
+            activity.showToast(msg.getData().getString(MESSAGE_TEXT));
         }
-        Progress progressDialog = progressDialogRef.get();
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
+        dismissProgress();
         return;
     }
 
@@ -38,10 +35,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
         if (activity != null) {
             activity.showToast((String) extra);
         }
-        Progress progressDialog = progressDialogRef.get();
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
+        dismissProgress();
     }
 
     public final void showToast(int resId) {
