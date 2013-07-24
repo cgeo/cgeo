@@ -141,6 +141,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
     private static final int CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES = 1241;
 
+    private static final int MESSAGE_FAILED = -1;
+    private static final int MESSAGE_SUCCEEDED = 1;
+
     private static final Pattern[] DARK_COLOR_PATTERNS = {
             Pattern.compile("((?<!bg)color)=\"#" + "(0[0-9]){3}" + "\"", Pattern.CASE_INSENSITIVE),
             Pattern.compile("((?<!bg)color)=\"" + "black" + "\"", Pattern.CASE_INSENSITIVE),
@@ -1310,7 +1313,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        new WatchlistAddThread(new WatchlistHandler(CacheDetailActivity.this, progress)));
+                        new WatchlistAddThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
             }
         }
 
@@ -1322,7 +1325,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        new WatchlistRemoveThread(new WatchlistHandler(CacheDetailActivity.this, progress)));
+                        new WatchlistRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
             }
         }
 
@@ -1337,7 +1340,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 watchlistThread = null;
-                handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).addToWatchlist(cache) ? 1 : -1);
+                Message msg;
+                if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
+                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
+                } else {
+                    msg = Message.obtain(handler, MESSAGE_FAILED);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_watchlist_failed));
+                    msg.setData(bundle);
+                }
+                handler.sendMessage(msg);
             }
         }
 
@@ -1352,7 +1364,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 watchlistThread = null;
-                handler.sendEmptyMessage(ConnectorFactory.getConnector(cache).removeFromWatchlist(cache) ? 1 : -1);
+                Message msg;
+                if (ConnectorFactory.getConnector(cache).removeFromWatchlist(cache)) {
+                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
+                } else {
+                    msg = Message.obtain(handler, MESSAGE_FAILED);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_watchlist_failed));
+                    msg.setData(bundle);
+                }
+                handler.sendMessage(msg);
             }
         }
 
@@ -1367,7 +1388,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 watchlistThread = null;
-                handler.sendEmptyMessage(GCConnector.addToFavorites(cache) ? 1 : -1);
+                Message msg;
+                if (GCConnector.addToFavorites(cache)) {
+                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
+                } else {
+                    msg = Message.obtain(handler, MESSAGE_FAILED);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_favorite_failed));
+                    msg.setData(bundle);
+                }
+                handler.sendMessage(msg);
             }
         }
 
@@ -1382,7 +1412,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 watchlistThread = null;
-                handler.sendEmptyMessage(GCConnector.removeFromFavorites(cache) ? 1 : -1);
+                Message msg;
+                if (GCConnector.removeFromFavorites(cache)) {
+                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
+                } else {
+                    msg = Message.obtain(handler, MESSAGE_FAILED);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_favorite_failed));
+                    msg.setData(bundle);
+                }
+                handler.sendMessage(msg);
             }
         }
 
@@ -1394,7 +1433,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        new FavoriteAddThread(new FavoriteUpdateHandler(CacheDetailActivity.this, progress)));
+                        new FavoriteAddThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
             }
         }
 
@@ -1406,7 +1445,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        new FavoriteRemoveThread(new FavoriteUpdateHandler(CacheDetailActivity.this, progress)));
+                        new FavoriteRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
             }
         }
 
@@ -2205,7 +2244,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
             Message msg = Message.obtain();
             Bundle bundle = new Bundle();
-            bundle.putString(SimpleCancellableHandler.SUCCESS_TEXT, res.getString(R.string.cache_personal_note_upload_done));
+            bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.cache_personal_note_upload_done));
             msg.setData(bundle);
             handler.sendMessage(msg);
         }
@@ -2367,37 +2406,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private static final class FavoriteUpdateHandler extends SimpleHandler {
+    private static final class SimpleUpdateHandler extends SimpleHandler {
 
-        public FavoriteUpdateHandler(CacheDetailActivity activity, Progress progress) {
+        public SimpleUpdateHandler(CacheDetailActivity activity, Progress progress) {
             super(activity, progress);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == -1) {
-                dismissProgress();
-                showToast(R.string.err_favorite_failed);
-            } else {
-                notifyDatasetChanged(activityRef);
-            }
-        }
-    }
-
-    /**
-     * Handler, called when watchlist add or remove is done
-     */
-    private static final class WatchlistHandler extends SimpleHandler {
-
-        public WatchlistHandler(CacheDetailActivity activity, Progress progress) {
-            super(activity, progress);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == -1) {
-                dismissProgress();
-                showToast(R.string.err_watchlist_failed);
+            if (msg.what == MESSAGE_FAILED) {
+                super.handleMessage(msg);
             } else {
                 notifyDatasetChanged(activityRef);
             }
@@ -2451,10 +2469,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
             } else {
-                Progress progress = progressDialogRef.get();
-                if (progress != null) {
-                    progress.dismiss();
-                }
+                dismissProgress();
                 CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
                 if (activity != null) {
                     editPersonalNote(activity.getCache(), activity);
