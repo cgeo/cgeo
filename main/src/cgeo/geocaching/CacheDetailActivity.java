@@ -121,8 +121,7 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page>
-        implements EditNoteDialogListener {
+public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> {
 
     private static final int MENU_FIELD_COPY = 1;
     private static final int MENU_FIELD_TRANSLATE = 2;
@@ -155,8 +154,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private final Progress progress = new Progress();
 
     private SearchResult search;
-
-    private EditNoteDialogListener editNoteDialogListener;
 
     private final GeoDirHandler locationUpdater = new GeoDirHandler() {
         @Override
@@ -1061,7 +1058,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private LinearLayout detailsList;
 
         // TODO Do we need this thread-references?
-        private StoreCacheThread storeThread;
         private RefreshCacheThread refreshThread;
         private Thread watchlistThread;
 
@@ -1208,26 +1204,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                             new RunnableWithArgument<Integer>() {
                                 @Override
                                 public void run(final Integer selectedListId) {
-                                    storeCache(selectedListId);
+                                    storeCache(selectedListId, new StoreCacheHandler(CacheDetailActivity.this, progress));
                                 }
                             }, true, StoredList.TEMPORARY_LIST_ID);
                 } else {
-                    storeCache(StoredList.TEMPORARY_LIST_ID);
+                    storeCache(StoredList.TEMPORARY_LIST_ID, new StoreCacheHandler(CacheDetailActivity.this, progress));
                 }
             }
 
-            protected void storeCache(int listId) {
-                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
-
-                progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-
-                if (storeThread != null) {
-                    storeThread.interrupt();
-                }
-
-                storeThread = new StoreCacheThread(listId, storeCacheHandler);
-                storeThread.start();
-            }
         }
 
         private class RefreshCacheClickListener implements View.OnClickListener {
@@ -1253,22 +1237,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 refreshThread = new RefreshCacheThread(refreshCacheHandler);
                 refreshThread.start();
-            }
-        }
-
-        private class StoreCacheThread extends Thread {
-            final private int listId;
-            final private CancellableHandler handler;
-
-            public StoreCacheThread(final int listId, final CancellableHandler handler) {
-                this.listId = listId;
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                cache.store(listId, handler);
-                storeThread = null;
             }
         }
 
@@ -1649,7 +1617,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // cache personal note
-            setPersonalNote();
+            setPersonalNote(personalNoteView, cache.getPersonalNote());
             personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             registerForContextMenu(personalNoteView);
             final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
@@ -1657,7 +1625,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public void onClick(View v) {
                     if (cache.isOffline()) {
-                        editPersonalNote();
+                        editPersonalNote(cache, CacheDetailActivity.this);
                     } else {
                         warnPersonalNoteNeedsStoring();
                     }
@@ -1727,24 +1695,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return view;
         }
 
-        private void editPersonalNote() {
-            if (cache.isOffline()) {
-                editNoteDialogListener = new EditNoteDialogListener() {
-                    @Override
-                    public void onFinishEditNoteDialog(final String note) {
-                        cache.setPersonalNote(note);
-                        cache.parseWaypointsFromNote();
-                        setPersonalNote();
-                        cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-                        CacheDetailActivity.this.notifyDataSetChanged();
-                    }
-                };
-                final FragmentManager fm = getSupportFragmentManager();
-                final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
-                dialog.show(fm, "fragment_edit_note");
-            }
-        }
-
         Thread currentThread;
 
         private void uploadPersonalNote() {
@@ -1758,16 +1708,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
             currentThread = new UploadPersonalNoteThread(cache, myHandler);
             currentThread.start();
-        }
-
-        private void setPersonalNote() {
-            final String personalNote = cache.getPersonalNote();
-            personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
-            if (StringUtils.isNotBlank(personalNote)) {
-                personalNoteView.setVisibility(View.VISIBLE);
-            } else {
-                personalNoteView.setVisibility(View.GONE);
-            }
         }
 
         private void loadLongDescription() {
@@ -1796,8 +1736,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                    cache.store(null);
-                    editPersonalNote();
+                    storeCache(StoredList.STANDARD_LIST_ID, new StoreCachePersonalNoteHandler(CacheDetailActivity.this, progress));
                 }
 
             });
@@ -1806,11 +1745,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             dialog.show();
         }
 
-    }
-
-    @Override
-    public void onFinishEditNoteDialog(final String note) {
-        editNoteDialogListener.onFinishEditNoteDialog(note);
     }
 
     /**
@@ -2389,7 +2323,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         return search;
     }
 
-    private static final class StoreCacheHandler extends SimpleCancellableHandler {
+    private static class StoreCacheHandler extends SimpleCancellableHandler {
 
         public StoreCacheHandler(CacheDetailActivity activity, Progress progress) {
             super(activity, progress);
@@ -2474,6 +2408,86 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
         if (activity != null) {
             activity.notifyDataSetChanged();
+        }
+    }
+
+    private StoreCacheThread storeThread;
+
+    private class StoreCacheThread extends Thread {
+        final private int listId;
+        final private CancellableHandler handler;
+
+        public StoreCacheThread(final int listId, final CancellableHandler handler) {
+            this.listId = listId;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            cache.store(listId, handler);
+            storeThread = null;
+        }
+    }
+
+    protected void storeCache(final int listId, final StoreCacheHandler storeCacheHandler) {
+        progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+
+        if (storeThread != null) {
+            storeThread.interrupt();
+        }
+
+        storeThread = new StoreCacheThread(listId, storeCacheHandler);
+        storeThread.start();
+    }
+
+    private static final class StoreCachePersonalNoteHandler extends StoreCacheHandler {
+
+        public StoreCachePersonalNoteHandler(CacheDetailActivity activity, Progress progress) {
+            super(activity, progress);
+        }
+
+        @Override
+        public void handleRegularMessage(Message msg) {
+            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
+            } else {
+                Progress progress = progressDialogRef.get();
+                if (progress != null) {
+                    progress.dismiss();
+                }
+                CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
+                if (activity != null) {
+                    editPersonalNote(activity.getCache(), activity);
+                }
+            }
+        }
+    }
+
+    public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
+        if (cache.isOffline()) {
+            EditNoteDialogListener editNoteDialogListener = new EditNoteDialogListener() {
+                @Override
+                public void onFinishEditNoteDialog(final String note) {
+                    cache.setPersonalNote(note);
+                    cache.parseWaypointsFromNote();
+                    TextView personalNoteView = (TextView) activity.findViewById(R.id.personalnote);
+                    setPersonalNote(personalNoteView, note);
+                    cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    activity.notifyDataSetChanged();
+                }
+            };
+            final FragmentManager fm = activity.getSupportFragmentManager();
+            final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), editNoteDialogListener);
+            dialog.show(fm, "fragment_edit_note");
+        }
+    }
+
+    private static void setPersonalNote(final TextView personalNoteView, final String personalNote) {
+        personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
+        if (StringUtils.isNotBlank(personalNote)) {
+            personalNoteView.setVisibility(View.VISIBLE);
+        } else {
+            personalNoteView.setVisibility(View.GONE);
         }
     }
 }
