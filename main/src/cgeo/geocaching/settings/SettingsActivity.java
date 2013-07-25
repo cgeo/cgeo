@@ -9,6 +9,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -124,6 +125,7 @@ public class SettingsActivity extends PreferenceActivity {
         initDebugPreference();
         initBasicMemberPreferences();
         initSend2CgeoPreferences();
+        initServicePreferences();
 
         for (int k : new int[] { R.string.pref_username, R.string.pref_password,
                 R.string.pref_pass_vote, R.string.pref_signature,
@@ -134,6 +136,11 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_fakekey_preference_backup_info, }) {
             bindSummaryToStringValue(k);
         }
+    }
+
+    private void initServicePreferences() {
+        getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
     }
 
     private static String getKey(final int prefKeyId) {
@@ -493,6 +500,17 @@ public class SettingsActivity extends PreferenceActivity {
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
+            // reset log-in if gc user or password is changed
+            if (isPreference(preference, R.string.pref_username) || isPreference(preference, R.string.pref_password)) {
+                if (Login.isActualLoginStatus()) {
+                    Login.logout();
+                }
+                cgeoapplication.getInstance().checkLogin = true;
+            }
+            // reset log-in status if connector activation was changed
+            if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
+                cgeoapplication.getInstance().checkLogin = true;
+            }
             return true;
         }
     };
@@ -545,5 +563,9 @@ public class SettingsActivity extends PreferenceActivity {
     @SuppressWarnings("deprecation")
     public static void addPreferencesFromResource(final PreferenceActivity preferenceActivity, final int preferencesResId) {
         preferenceActivity.addPreferencesFromResource(preferencesResId);
+    }
+
+    private static boolean isPreference(final Preference preference, int preferenceKeyId) {
+        return getKey(preferenceKeyId).equals(preference.getKey());
     }
 }

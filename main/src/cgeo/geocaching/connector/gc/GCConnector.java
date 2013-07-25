@@ -299,7 +299,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         final StatusCode status = Login.login();
 
         if (status == StatusCode.NO_ERROR) {
-            cgeoapplication.getInstance().firstRun = false;
+            cgeoapplication.getInstance().checkLogin = false;
             Login.detectGcCustomDate();
         }
 

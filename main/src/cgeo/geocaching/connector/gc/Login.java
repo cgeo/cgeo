@@ -69,7 +69,7 @@ public abstract class Login {
         final ImmutablePair<String, String> login = Settings.getGcLogin();
 
         if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
-            Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
+            clearLoginInfo();
             Log.e("Login.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
@@ -153,9 +153,23 @@ public abstract class Login {
             return StatusCode.MAINTENANCE;
         }
 
+        resetLoginStatus();
+
+        return StatusCode.NO_ERROR;
+    }
+
+    private static void resetLoginStatus() {
         Cookies.clearCookies();
         Settings.setCookieStore(null);
-        return StatusCode.NO_ERROR;
+
+        setActualLoginStatus(false);
+    }
+
+    private static void clearLoginInfo() {
+        resetLoginStatus();
+
+        setActualCachesFound(-1);
+        setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
     }
 
     static void setActualCachesFound(final int found) {

@@ -328,6 +328,11 @@ public class MainActivity extends AbstractActivity {
     }
 
     private void init() {
+
+        if (app.checkLogin) {
+            (new FirstLoginThread()).start();
+        }
+
         if (initialized) {
             return;
         }
@@ -335,10 +340,6 @@ public class MainActivity extends AbstractActivity {
         initialized = true;
 
         Settings.setLanguage(Settings.isUseEnglish());
-
-        if (app.firstRun) {
-            (new FirstLoginThread()).start();
-        }
 
         findOnMap.setClickable(true);
         findOnMap.setOnClickListener(new OnClickListener() {

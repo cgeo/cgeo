@@ -18,7 +18,7 @@ public class cgeoapplication extends Application {
 
     private volatile GeoDataProvider geo;
     private volatile DirectionProvider dir;
-    public boolean firstRun = true; // c:geo is just launched
+    public boolean checkLogin = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShown = false; // livemap hint has been shown
     final private StatusUpdater statusUpdater = new StatusUpdater();
