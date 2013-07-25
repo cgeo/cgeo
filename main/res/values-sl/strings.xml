@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="app_name_compass">c:geo kompas</string>
+    <string name="app_name">c:geo</string>
 
     <!-- basics -->
     <string name="cache">Zaklad</string>
     <string name="detail">Podrobnosti</string>
     <string name="search">Iskanje</string>
-    <string name="settings">Nastavitve</string>
     <string name="helpers">Uporabne aplikacije</string>
     <string name="about">O c:geo</string>
     <string name="latitude">Geog. širina</string>
@@ -30,7 +29,13 @@
     <string name="virtual">Virtualni zakladi</string>
     <string name="wherigo">Wherigo zakladi</string>
     <string name="unknown">Neznan tip zaklada</string>
-
+    <!-- Tujke -->
+	<string name="lostfound">Lost &amp; Found srečanje</string>
+	<string name="ape">Project APE zaklad</string>
+	<string name="gchq">Sedež podjetja Groundspeak</string>
+	<string name="gps">Razstava GPS Adventures</string>
+	<string name="block">Groundspeak Block Party</string>
+    
     <!-- cache sizes -->
     <string name="cache_size_micro">mikro</string>
     <string name="cache_size_small">majhen</string>
@@ -170,7 +175,6 @@
     <string name="err_auth_initialize">c:geo ni uspel začeti z avtorizacijskim postopkom.</string>
     <string name="err_auth_process">Avtorizacijski postopek ni uspel.</string>
     <string name="err_cannot_log_visit">c:geo ni uspel zabeležiti obiska. Osvežite podatke zaklada in poskusite ponovno.</string>
-    <string name="err_init_cleared">c:geo ni uspel izbrisati uporabniškega imena in gesla.</string>
     <string name="err_download_fail">c:geo ni uspel prenesti zakladov.</string>
     <string name="err_dwld_details_failed">c:geo ni uspel prenesti podatke zaklada.</string>
     <string name="err_load_descr_failed">c:geo ne more prikazati opisa.</string>
@@ -356,13 +360,10 @@
     <string name="about_contributors">Avtorji</string>
 
     <!-- init -->
-    <string name="init_gc_activate">Vklopi Geocaching.com na zemljevidu in v iskanjih</string>
-    <string name="init_oc_activate">Vklopi opencaching.de na zemljevidu in v iskanjih</string>
     <string name="init_oc_de_description">Poveži c:geo z opencaching.de za iskanje zakladov in dostop in filter najdenih zakladov.</string>
     <string name="init_register_oc_de">Poveži c:geo z opencaching.de</string>
     <string name="init_username">Uporabniško ime</string>
     <string name="init_password">Geslo</string>
-    <string name="init_passvote">Geslo</string>
     <string name="init_login">Preveri in shrani podatke</string>
     <string name="init_login_popup">Prijava</string>
     <string name="init_login_popup_working">Prijavljanje…</string>
@@ -370,10 +371,7 @@
     <string name="init_login_popup_failed">Prijava neuspešna</string>
     <string name="init_login_popup_failed_reason">Prijava neuspešna:</string>
     <string name="init_twitter_authorize">Poveži c:geo s Twitterjem</string>
-    <string name="init_twitter_publish">Objavi na Twitter ob najdbi zaklada</string>
     <string name="init_signature">Podpis</string>
-    <string name="init_signature_help_button">Pomoč</string>
-    <string name="init_signature_help_title">Pomoč in namigi pri podpisih</string>
     <string name="init_signature_help_text">Vnesite podpis, ki bo uporabljen b baših zapisih obiskov.\nPosebni nizi, ki jih lahko uporabite so: [DATE] - datum, [TIME] - ura, [DATETIME] - datum in ura, [USER] - uporabniško ime in [NUMBER] - število najdb.\nTi nizi bodo zamenjani s pravimi podatki ob vpisu.</string>
     <string name="init_signature_template_button">Vnesi predlogo</string>
     <string name="init_signature_template_date">Datum</string>
@@ -382,13 +380,10 @@
     <string name="init_signature_template_user">Uporabnik</string>
     <string name="init_signature_template_number">Število najdb</string>
     <string name="init_signature_template_owner">Uporabniško ime lastnika zaklada</string>
-    <string name="init_details">Podrobnosti zaklada</string>
     <string name="init_ratingwanted">Naloži glasove iz GCvote.com</string>
-    <string name="init_elevationwanted">Naloži podatke o nadmorski višini</string>
     <string name="init_friendlogswanted">Naloži tudi vpise mojih prijateljev</string>
     <string name="init_openlastdetailspage">Pri podrobnostih vedno odpri nazadnje odprto stran</string>
     <string name="init_autoload">Vedno pokaži celoten opis</string>
-    <string name="init_other">Druge možnosti</string>
     <string name="init_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>
     <string name="init_address">Pokaži naslov namesto koordinat pri podrobnostih</string>
     <string name="init_captcha">Pokaži CAPTCHA, če je potrebno (samo Basic Member)</string>
@@ -404,10 +399,6 @@
     <string name="init_log_offline">Vklopi način brez povezave pri zapisih\n(Ne pošlji zapisa na strežnik)</string>
     <string name="init_choose_list">Pri shranjevanju vprašaj za seznam</string>
     <string name="init_livelist">Pokaži tudi smeri do zakladov v seznamih</string>
-    <string name="init_altitude">Popravek nadmorske višine</string>
-    <string name="init_altitude_description">Če vam GPS pokaže napačno nadmorsko višino, jo lahko tukaj popravite s pozitivno ali negativno razdaljo v metrih.</string>
-    <string name="init_clear">Počisti prijavne podatke</string>
-    <string name="init_cleared">c:geo je izbrisal prijavne podatke.</string>
     <string name="init_backup">Varnostna kopija</string>
     <string name="init_backup_backup">Varnostna kopija</string>
     <string name="init_backup_running">Ustvarjanje varnostne kopije baze…</string>
@@ -422,14 +413,10 @@
     <string name="init_restore_confirm">Baza podatkov je prazna, ali ji želite obnoviti iz varnostne kopije?</string>
     <string name="init_backup_last">Varnostna kopija je na voljo iz</string>
     <string name="init_backup_last_no">Varnostna kopija ne obstaja.</string>
-    <string name="init_mapsources">Mapa z zemljevidi</string>
-    <string name="init_mapsources_description">Tukaj lahko nastavite mapo z zemljevidi. Kot alternativa Google Maps so na voljo različni OpenStreetMap zemljevidi. (Poglejte <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> za več informacij).\nPodprte so tudi različne teme zemljevidov.</string>
     <string name="init_mapsource_select">Izberi datoteko z zemljevidi</string>
     <string name="init_map_directory_description">Mapa z zemljevidi</string>
     <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
     <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
-    <string name="init_gpx_exportdir_description">Tukaj lahko nastavite mapo za izvoz GPX datotek.</string>
-    <string name="init_gpx_importdir_description">Tukaj lahko nastavite mapo za uvoz GPX datotek.</string>
     <string name="init_maptrail">Pokaži pot premikanja na zemljevidu</string>
     <string name="init_share_after_export">Po izvozu GPX datotek ponudi menu za deljenje</string>
     <string name="init_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
@@ -560,7 +547,6 @@
     <string name="cache_dialog_loading_details_status_logs">Nalaganje zapisov</string>
     <string name="cache_dialog_loading_details_status_waypoints">Obdelovanje dodatnih točk</string>
     <string name="cache_dialog_loading_details_status_gcvote">Nalaganje glasov GCVote</string>
-    <string name="cache_dialog_loading_details_status_elevation">Nalaganje podatkov o nadmorski višini</string>
     <string name="cache_dialog_loading_details_status_cache">Shranjevanje podatkov</string>
     <string name="cache_dialog_loading_details_status_render">Ustvarjanje pogleda</string>
     <string name="cache_dialog_offline_save_title">Brez povezave</string>
@@ -637,9 +623,6 @@
     <string name="cache_time_full_hours">h</string>
     <string name="cache_listed_on">Objavljen na %s</string>
 
-    <!-- editor dialog -->
-    <string name="editor_save">Shrani</string>
-
     <!-- file list base -->
     <string name="file_searching_in">Iščem datoteke\nv</string>
     <string name="file_searching_sdcard_in">Nobenih datotek ni v mapi:\n%1$s\n\nIščem datoteke po celotni SD kartici:\n</string>
@@ -665,7 +648,6 @@
     <string name="gpx_import_error_io">Datoteke ni bilo mogoče prebrati</string>
     <string name="gpx_import_error_parser">Datoteka ni v pravem formatu</string>
     <string name="gpx_import_error_unexpected">Neznana napaka</string>
-    <string name="gpx_import_confirm">Ali želite uvoziti GPX datoteko v c:geo?</string>
     <string name="gpx_import_canceled">Preklican GPX uvoz</string>
     <string name="gpx_import_delete_title">Izbriši datoteko</string>
     <string name="gpx_import_delete_message">Ali želite izbrisati %s?</string>
@@ -908,7 +890,7 @@
     <string name="attribute_abandonedbuilding_no">Ni opuščene zgradbe</string>
     <string name="attribute_hike_short_yes">Kratka hoja (manj kot 1 km)</string>
     <string name="attribute_hike_short_no">Ni kratka hoja</string>
-    <string name="attribute_hike_med_yes">Srednja hoja (1 - 10 km)</string>
+    <string name="attribute_hike_med_yes">Srednja hoja (1 – 10 km)</string>
     <string name="attribute_hike_med_no">Ni srednja hoja</string>
     <string name="attribute_hike_long_yes">Daljša hoja (več kot 10 km)</string>
     <string name="attribute_hike_long_no">Ni daljša hoja</string>
@@ -1048,7 +1030,6 @@
     <string name="attribute_geotour_no">Ni del GeoTour ogleda</string>
 
     <!-- next things -->
-    <string name="legal_note">Za uporabo storitev Geocaching.com morate sprejeti pogoje uporabe na <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeakovi spletni strani</a>.</string>
     <string name="quote">Za lažji geocaching in bolj lene zakladolovce.</string>
     <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1085,4 +1066,107 @@
         <item quantity="other">Pred %d dnevi</item>
     </plurals>
 
+    
+    <!-- fix missing -->
+    <string name="settings_titlebar">Nastavitve c:geo</string>
+	<string name="log_password_title">Geslo zapisa:</string>
+	<string name="log_hint_log_password">Vnesite geslo zapisa</string>
+	<string name="caches_filter_distance">Razdalja</string>
+	<string name="settings_title_services">Storitve</string>
+	<string name="settings_title_appearance">Izgled</string>
+	<string name="settings_title_cachedetails">Podrobnosti zaklada</string>
+	<string name="settings_title_offlinedata">Podatki brez povezave</string>
+	<string name="settings_title_logging">Zapisovanje</string>
+	<string name="settings_title_map">Zemljevid</string>
+	<string name="settings_title_map_data">Podatki zemljevida</string>
+	<string name="settings_title_map_content">Vsebina zemljevida</string>
+	<string name="settings_title_basicmembers">Članstvo Basic</string>
+	<string name="settings_title_navigation">Navigacija</string>
+	<string name="settings_title_system">Sistem</string>
+	<string name="settings_category_browser">Brskalnik</string>
+	<string name="settings_category_logging_other">Druge možnosti zapisa</string>
+	<string name="settings_goto_url_button">več …</string>
+	<string name="settings_activate_gc">Aktiviraj</string>
+	<string name="settings_gc_legal_note">Za uporabo storitev Geocaching.com se morate strinjati s pogoji uporabe podjetja Groundspeak.</string>
+	<string name="settings_info_facebook_login_title">Prijava s Facebookom</string>
+	<string name="settings_info_facebook_login">V c:geo se ne morete prijaviti s Facebook računom, obstaja pa druga enostavna rešitev…</string>
+	<string name="settings_activate_oc">Aktiviraj</string>
+	<string name="init_reregister_oc_de">Ponovno poveži c:geo</string>
+	<string name="settings_activate_twitter">Aktiviraj</string>
+	<string name="init_login_popup_not_authorized">Ni avtoriziran</string>
+	<string name="init_twitter_reauthorize">Ponovno poveži c:geo</string>
+	<string name="init_summary_ratingwanted">Naloži glasove iz GCvote.com</string>
+	<string name="init_summary_friendlogswanted">Naloži tudi posebno stran zapisov mojih prijateljev</string>
+	<string name="init_summary_openlastdetailspage">Pri podrobnostih zaklada vedno odpri zadnjo uporabljeno stran</string>
+	<string name="init_summary_autoload">Vedno naloži celoten opis</string>
+	<string name="init_summary_skin">Uporabi svetli izgled (potrebuje ponovni zagon)</string>
+	<string name="init_summary_address">Na glavnem zaslonu pokaži naslov namesto koordinat</string>
+	<string name="init_summary_captcha">Če je potrebno pokaži varnostno besedilo CAPTCHA (samo pri članstvu Basic)</string>
+	<string name="init_summary_useenglish">Uporabi angleščino za c:geo (potrebuje ponovni zagon)</string>
+	<string name="init_summary_exclude">Ne pokaži mojih ali najdenih zakladov</string>
+	<string name="init_summary_disabled">Ne pokaži onemogočenih zakladov</string>
+	<string name="init_summary_offline">Za delo brez povezave shrani tudi statične zemljevide zaklada</string>
+	<string name="init_summary_offline_wp">Za delo brez povezave shrani tudi statične zemljevide dodatnih točk</string>
+	<string name="init_summary_save_log_img">Shrani slike iz zapisov</string>
+	<string name="init_summary_units">Uporabi anglosaške merske enote namesto metričnih</string>
+	<string name="init_summary_log_offline">Vklopi način brez povezave pri zapisih\n(Ne pošlji zapisa na strežnik)</string>
+	<string name="init_summary_choose_list">Pri shranjevanju zaklada vprašaj za seznam</string>
+	<string name="init_summary_livelist">Pokaži tudi smeri do zakladov v seznamih</string>
+	<string name="settings_info_offline_maps_title">Informacije o zemljevidih brez povezave</string>
+	<string name="settings_info_offline_maps">c:geo omogoča prikaz zemljevidov brez povezave. Zemljevide lahko naložite iz spletne strani Mapsforge ali celo ustvarite svoje zemljevide iz podatkov Open Street Maps.</string>
+	<string name="settings_info_themes_title">Informacije o temah zemljevidov</string>
+	<string name="settings_info_themes">c:geo omogoča prikaz različnih tem zemljevidov brez povezave. Teme so uporabljene za spremembo barvnih shem (npr. temni nočni zemljevid) ali za poudarek objektov, kot na primer kolesarske poti ali plastnice na zemljevidu.</string>
+	<string name="init_summary_maptrail">Pokaži sled na zemljevidu</string>
+	<string name="init_summary_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
+	<string name="init_summary_loaddirectionimg">Naloži tudi sliko za smer (samo Basic Member)</string>
+	<string name="init_secondary_navigation_tool">Sekundarna navigacija</string>
+	<string name="init_summary_plain_logs">Ne pokaži barv pri zapisih</string>
+	<string name="init_summary_use_native_ua">c:geo naj se strežniku predstavi kot Android brskalnik. Ta možnost reši problem prijave pri nekaterih ponudnikih omrežja.</string>
+	<string name="settings_info_send2cgeo_title">Informacije o send2cgeo</string>
+	<string name="cache_personal_note_upload">Naloži</string>
+	<string name="cache_personal_note_uploading">Naloži zapis Personal Note</string>
+	<string name="cache_personal_note_upload_done">Zapis Personal Note je bil uspešno naložen</string>
+	<string name="cache_personal_note_upload_cancelled">Nalaganje zapisa Personal Note je bilo preklicano</string>
+	<string name="cache_menu_navigation_bike">Navigacija (kolo)</string>
+	<string name="gpx_import_select_list_title">Uvozi GPX datoteko v seznam</string>
+	<string name="map_mycaches_show">Pokaži lastne ali najdene zaklade</string>
+	<string name="map_mycaches_hide">Skrij lastne ali najdene zaklade</string>
+	<string name="trackable_not_activated">Sledljivček še ni aktiviran</string>
+	<string name="geokret_type_traditional">Tradicionalni</string>
+	<string name="geokret_type_book_or_media">Knjiga ali elektronski medij</string>
+	<string name="geokret_type_human">Človek</string>
+	<string name="geokret_type_coin">Kovanec</string>
+	<string name="geokret_type_post">Pošta</string>
+	<string name="status_closeout_warning" tools:ignore="UnusedResources">Izgleda da uporabljate android s starejšo različico od 2.1. Naslednje različice aplikacije c:geo morda ne bodo več podprte za vašo različico Androida.</string>
+
+	
+	<!-- does not translate to SLO -->
+	<!--  
+	<string name="tts_one_oclock">one o\'clock</string>
+	<string name="tts_oclock">%s o\'clock</string>
+	<string name="tts_one_kilometer">one kilometer</string>
+	<string name="tts_one_meter">one meter</string>
+	<string name="tts_one_mile">one mile</string>
+	<string name="tts_one_foot">one foot</string>
+	<string name="twitter">Twitter: <a href="">@android_GC</a></string>
+	<string name="helper_barcode_title">Barcode Scanner</string>
+	<string name="helper_pocketquery_title">Pocket Query Creator</string>
+	<string name="helper_locus_title">Locus</string>
+	<string name="helper_gpsstatus_title">GPS Status</string>
+	<string name="helper_bluetoothgps_title">Bluetooth GPS</string>
+    <string name="caches_map_locus">Locus</string>
+	<string name="caches_recaptcha_title">reCAPTCHA</string>
+    <string name="settings_title_gpx">GPX</string>
+    <string name="settings_title_gc">Geocaching.com</string>
+    <string name="init_oc">Opencaching.de</string>
+    <string name="init_gcvote">GCvote.com</string>
+	<string name="init_twitter">Twitter</string>
+	<string name="auth_twitter">Twitter</string>
+	<string name="auth_ocde">opencaching.de</string>
+	<string name="cache_menu_rmaps">Rmaps</string>
+	<string name="cache_menu_gcc">GCC</string>
+	<string name="cache_menu_whereyougo">WhereYouGo</string>
+	<string name="cache_menu_oruxmaps">OruxMaps</string>
+	<string name="cache_menu_cachebeacon">Cache Beacon</string>
+	-->
 </resources>
