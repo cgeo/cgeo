@@ -271,6 +271,9 @@ public class SearchResult implements Parcelable {
         if (other != null) {
             addGeocodes(other.geocodes);
             addFilteredGeocodes(other.filteredGeocodes);
+            if (StringUtils.isBlank(url)) {
+                url = other.url;
+            }
         }
     }
 

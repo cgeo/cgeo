@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -11,9 +10,11 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LiveMapStrategy.StrategyFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
@@ -286,10 +287,17 @@ public class GCMap {
         Log.d("GCMap.searchByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();
-        searchResult.setUrl(GCConstants.URL_LIVE_MAP + "?ll=" + viewport.getCenter().getLatitude() + "," + viewport.getCenter().getLongitude());
+
+        if (Settings.isDebug()) {
+            searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
+        }
 
         if (strategy.flags.contains(StrategyFlag.LOAD_TILES)) {
             final Set<Tile> tiles = Tile.getTilesForViewport(viewport);
+
+            if (Settings.isDebug()) {
+                searchResult.setUrl(new StringBuilder().append(tiles.iterator().next().getZoomlevel()).append(Formatter.SEPARATOR).append(searchResult.getUrl()).toString());
+            }
 
             for (Tile tile : tiles) {
 
