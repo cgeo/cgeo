@@ -12,6 +12,7 @@ gen/
 /tests/hs_err_pid*.log
 /cgeo-calendar/local.properties
 /cgeo-calendar/private.properties
+/crowdin/credentials
 .directory
 org.moreunit.prefs
 annotation_gen/

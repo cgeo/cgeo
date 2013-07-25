@@ -1,0 +1,87 @@
+#!/bin/bash
+
+#
+#
+# This script downloads all translations from crowdin,
+# and make a pull request on github if necessary
+#
+#
+
+# see: http://crowdin.net/page/api/export
+# see: http://crowdin.net/page/api/download
+
+. "`dirname $0`/globals"
+
+BRANCH=crowdin_translations
+GITHUB_PR_TITLE="crowdin: New translations"
+PR_EXISTS=0
+DDATE=`date +"%Y-%m-%d %H:%M:%S"`
+ZIPFILE=all.zip
+
+finish () {
+    debug "cleaning up"
+    # revert everything until last commit
+    _do git branch | grep -q "\* ${BRANCH}" && ( _do git checkout . ; _do git reset ; )
+    _do git checkout master || exit 1
+    [[ -f ${ZIPFILE} ]] && _do rm "${ZIPFILE}"
+}
+
+# update master
+_do git pull upstream master || die "couldn't git pull upstream master."
+
+# check for existing PR
+_do curl -i --get "https://api.github.com/repos/cgeo/cgeo/pulls" -o "${OUT}" \
+    || die "listing pull requests failed."
+grep -q "Status: 200 OK" "${OUT}" || ( cat "${OUT}" ; die "reading list of pull requests failed." ; )
+grep -qF "${GITHUB_PR_TITLE}" "${OUT}" && PR_EXISTS=1
+
+if [ $PR_EXISTS -eq 0 ]; then
+    debug "We don't have an open Pull Request on github."
+    # remove branch if exists
+    _do git checkout master || die "Couldn't git checkout master."
+    _do git branch -D "${BRANCH}"
+else
+    debug "We have an open Pull Request on github."
+fi
+
+# prepare branch
+if git branch | grep -q "${BRANCH}"; then
+    :
+else
+    _do git branch "${BRANCH}" || die "Couldn't create branch."
+fi
+_do git checkout "${BRANCH}" || die "Couldn't switch to branch."
+
+# package the language files (allowed every 30 min)
+debug "packaging language files."
+crowdin_surf "http://api.crowdin.net/api/project/cgeo/export?key=${CROWDIN_APIKEY}"
+
+# download and unpack translations
+[[ -f ${ZIPFILE} ]] && rm ${ZIPFILE}
+_do wget "http://api.crowdin.net/api/project/cgeo/download/all.zip?key=${CROWDIN_APIKEY}" -O ${ZIPFILE} \
+     || die "crowdin download failed."
+_do unzip -o ${ZIPFILE} || die "unzip of ${ZIPFILE} failed."
+
+# check for changes
+if [ -z "`git diff`" ]; then
+    debug "no changes, finishing."
+    finish
+    exit
+fi
+
+# upload changes to github
+AMEND=""
+[[ ! -z "`git log master..${BRANCH}`" ]] && AMEND="--amend"
+_do git commit -a "${AMEND}" -m \"${GITHUB_PR_TITLE}\" || die "commit failed."
+_do git push -f origin "${BRANCH}" || die "git push failed."
+
+# create pull request
+if [ $PR_EXISTS -eq 0 ]; then
+    _do curl -i -u "${GITHUB_USER}:${GITHUB_PASSWORD}" -d \'{\"title\":\"${GITHUB_PR_TITLE}\",\"body\":\"downloaded ${DDATE}\",\"head\":\"${GITHUB_USER}:${BRANCH}\",\"base\":\"master\"}\' "https://api.github.com/repos/cgeo/cgeo/pulls" -o "${OUT}" || die "creating the pull request failed."
+    grep -q "201 Created" "${OUT}" || die "pull request not created."
+fi
+
+# clean up
+# [[ -f "${OUT}" ]] && rm "${OUT}"
+finish
+

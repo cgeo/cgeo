@@ -1,0 +1,31 @@
+INSTALLATION
+
+- create a NEW local repo from the github repo
+  -> the scripts automatically run git pull, git push, git commit
+  -> DON'T DO ANY WORK ON THIS REPO!! It will be pushed automatically!
+  -> this repo can be a copy (cp -a) from an existing one
+- copy crowdin/credentials.template to crowdin/credentials
+- edit crowdin/credentials
+  -> find the API-KEY here http://crowdin.net/project/cgeo/settings#project-settings-api
+- prepare crowdin:
+  - run update manually
+  - upload language files to crowdin (values-*/strings.xml) via upload script. 
+    Maybe it is best to start with one language or two and upload more later.
+- create a cronjob to run crowdin/download every 60 mins or trigger it somehow
+- create a cronjob to run crowdin/update every 60 mins or trigger it somehow
+
+THE SCRIPTS
+
+Run all scripts from within a repo.
+
+- update: no arguments
+  -> this will upload the base language file values/strings.xml to crowdin
+
+- download: no arguments
+  -> this will download the language files from crowdin and create/update a 
+     pull request if necessary
+
+- upload: languages as arguments. e.g. upload cs da de es fr hu it ja nb nl pl pt sk sl sv
+  -> this will upload translations from actual branch of the repo to crowdin.
+     crowdin files will be overwritten, not merged. To merge it is best to 
+     download them first, merge, then upload.
