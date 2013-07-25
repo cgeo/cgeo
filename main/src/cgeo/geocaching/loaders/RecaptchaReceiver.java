@@ -8,7 +8,11 @@ public interface RecaptchaReceiver {
 
     public String getChallenge();
 
-    public void setChallenge(String challenge);
+    public void fetchChallenge();
+
+    public String getKey();
+
+    public void setKey(String key);
 
     public void notifyNeed();
 

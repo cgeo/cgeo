@@ -15,11 +15,13 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class SearchHandler extends Handler {
@@ -37,7 +39,7 @@ public class SearchHandler extends Handler {
                     imageView.setImageBitmap(img);
                 }
             } catch (Exception e) {
-                // nothing
+                Log.e("Error setting reCAPTCHA image", e);
             }
         }
     };
@@ -58,6 +60,20 @@ public class SearchHandler extends Handler {
 
                 imageView = (ImageView) view.findViewById(R.id.image);
 
+                ImageButton reloadButton = (ImageButton) view.findViewById(R.id.button_recaptcha_refresh);
+                reloadButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        recaptchaThread.fetchChallenge();
+                        try {
+                            (new GetCaptchaThread(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
+                        } catch (MalformedURLException e) {
+                            Log.e("Bad reCAPTCHA image url", e);
+                        }
+                    }
+                });
+
                 (new GetCaptchaThread(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
 
                 dlg.setTitle(res.getString(R.string.caches_recaptcha_title));
@@ -76,7 +92,7 @@ public class SearchHandler extends Handler {
                 dlg.create().show();
             }
         } catch (Exception e) {
-            // nothing
+            Log.e("Error in reCAPTCHA handler", e);
         }
     }
 
@@ -90,6 +106,7 @@ public class SearchHandler extends Handler {
         @Override
         public void run() {
             try {
+                Log.d("Getting reCAPTCHA image from: " + uri.toString());
                 HttpURLConnection connection = (HttpURLConnection) uri.openConnection();
                 connection.setDoInput(true);
                 connection.connect();

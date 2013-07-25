@@ -78,20 +78,15 @@ public abstract class GCParser {
         searchResult.viewstates = Login.getViewstates(page);
 
         // recaptcha
-        String recaptchaChallenge = null;
         if (showCaptcha) {
             final String recaptchaJsParam = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_RECAPTCHA, false, null);
 
             if (recaptchaJsParam != null) {
-                final Parameters params = new Parameters("k", recaptchaJsParam.trim());
-                final String recaptchaJs = Network.getResponseData(Network.getRequest("http://www.google.com/recaptcha/api/challenge", params));
+                thread.setKey(recaptchaJsParam.trim());
 
-                if (StringUtils.isNotBlank(recaptchaJs)) {
-                    recaptchaChallenge = TextUtils.getMatch(recaptchaJs, GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE, true, 1, null, true);
-                }
+                thread.fetchChallenge();
             }
-            if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
-                thread.setChallenge(recaptchaChallenge);
+            if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
                 thread.notifyNeed();
             }
         }
@@ -276,7 +271,7 @@ public abstract class GCParser {
         }
 
         String recaptchaText = null;
-        if (thread != null && recaptchaChallenge != null) {
+        if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
             if (thread.getText() == null) {
                 thread.waitForUser();
             }
@@ -284,7 +279,7 @@ public abstract class GCParser {
             recaptchaText = thread.getText();
         }
 
-        if (!cids.isEmpty() && (Settings.isPremiumMember() || showCaptcha) && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
+        if (!cids.isEmpty() && (Settings.isPremiumMember() || showCaptcha) && ((thread == null || StringUtils.isBlank(thread.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
 
             try {
@@ -305,8 +300,8 @@ public abstract class GCParser {
                     params.put("CID", cid);
                 }
 
-                if (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)) {
-                    params.put("recaptcha_challenge_field", recaptchaChallenge);
+                if (thread != null && StringUtils.isNotBlank(thread.getChallenge()) && StringUtils.isNotBlank(recaptchaText)) {
+                    params.put("recaptcha_challenge_field", thread.getChallenge());
                     params.put("recaptcha_response_field", recaptchaText);
                 }
                 params.put("ctl00$ContentBody$uxDownloadLoc", "Download Waypoints");

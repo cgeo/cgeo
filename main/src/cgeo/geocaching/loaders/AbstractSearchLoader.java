@@ -1,7 +1,13 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.os.Handler;
@@ -25,6 +31,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
 
     private Handler recaptchaHandler = null;
     private String recaptchaChallenge = null;
+    private String recaptchaKey = null;
     private String recaptchaText = null;
     private SearchResult search;
     private boolean loading;
@@ -90,8 +97,27 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
     @Override
-    public void setChallenge(String challenge) {
-        recaptchaChallenge = challenge;
+    public void setKey(String key) {
+        recaptchaKey = key;
+    }
+
+    @Override
+    public String getKey() {
+        return recaptchaKey;
+    }
+
+    @Override
+    public void fetchChallenge() {
+        recaptchaChallenge = null;
+
+        if (StringUtils.isNotEmpty(recaptchaKey)) {
+            final Parameters params = new Parameters("k", getKey());
+            final String recaptchaJs = Network.getResponseData(Network.getRequest("http://www.google.com/recaptcha/api/challenge", params));
+
+            if (StringUtils.isNotBlank(recaptchaJs)) {
+                recaptchaChallenge = TextUtils.getMatch(recaptchaJs, GCConstants.PATTERN_SEARCH_RECAPTCHACHALLENGE, true, 1, null, true);
+            }
+        }
     }
 
     @Override
