@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name_compass">c:geo kompas</string>
+
+    <!-- basics -->
+    <string name="cache">Zaklad</string>
+    <string name="detail">Podrobnosti</string>
+    <string name="search">Iskanje</string>
+    <string name="settings">Nastavitve</string>
+    <string name="helpers">Uporabne aplikacije</string>
+    <string name="about">O c:geo</string>
+    <string name="latitude">Geog. širina</string>
+    <string name="longitude">Geog. dolžina</string>
+
+    <!-- actionbar -->
+    <string name="action_bar_share_title">Deli povezavo do zaklada</string>
+
+    <!-- caches -->
+    <string name="all_types">Vsi tipi zakladov</string>
+    <string name="traditional">Tradicionalni zakladi</string>
+    <string name="multi">Multi zakladi</string>
+    <string name="mystery">Mystery zakladi</string>
+    <string name="letterbox">Letterbox Hybrid</string>
+    <string name="event">Srečanja</string>
+    <string name="mega">Mega-srečanja</string>
+    <string name="earth">Zemeljski zakladi</string>
+    <string name="cito">CITO dogodki</string>
+    <string name="webcam">Spletna kamera</string>
+    <string name="virtual">Virtualni zakladi</string>
+    <string name="wherigo">Wherigo zakladi</string>
+    <string name="unknown">Neznan tip zaklada</string>
+
+    <!-- cache sizes -->
+    <string name="cache_size_micro">mikro</string>
+    <string name="cache_size_small">majhen</string>
+    <string name="cache_size_regular">navaden</string>
+    <string name="cache_size_large">velik</string>
+    <string name="cache_size_other">drugo</string>
+    <string name="cache_size_virtual">virtualni</string>
+    <string name="cache_size_notchosen">ni izbrano</string>
+    <string name="cache_size_unknown">neznano</string>
+
+    <!-- waypoints -->
+    <string name="wp_final">Končna lokacija</string>
+    <string name="wp_stage">Vmesna stopnja</string>
+    <string name="wp_puzzle">Odgovor na vprašanje</string>
+    <string name="wp_pkg">Parkirišče</string>
+    <string name="wp_trailhead">Začetek poti</string>
+    <string name="wp_waypoint">Referenčna točka</string>
+    <string name="wp_original">Originalne koordinate</string>
+
+    <!-- logs -->
+    <string name="log_found">Najden</string>
+    <string name="log_dnf">Ni najden</string>
+    <string name="log_note">Komentar</string>
+    <string name="log_published">Objavljeno</string>
+    <string name="log_enabled">Omogočeno</string>
+    <string name="log_disabled">Onemogočeno</string>
+    <string name="log_attend">Bo udeležil</string>
+    <string name="log_attended">Udeležba</string>
+    <string name="log_retrieved">Vzel iz zaklada</string>
+    <string name="log_placed">Dal v zaklad</string>
+    <string name="log_grabbed">Vzel nekje</string>
+    <string name="log_movecollection">Premik v zbirko</string>
+    <string name="log_moveinventory">Premik v inventar</string>
+    <string name="log_maintained">Vzdrževanje</string>
+    <string name="log_maintenance_needed">Potrebuje vzdrževanje</string>
+    <string name="log_update">Spremenjene koordinate</string>
+    <string name="log_archived">Arhiviran</string>
+    <string name="log_unarchived">Vzet iz arhiva</string>
+    <string name="log_needs_archived">Potrebuje arhiviranje</string>
+    <string name="log_discovered">Odkrit</string>
+    <string name="log_reviewer">Zapis recenzenta</string>
+    <string name="log_retractlisting">Preklicana objava</string>
+    <string name="log_marked_missing">Označen kot izgubljen</string>
+    <string name="log_tb_nothing">Brez akcije</string>
+    <string name="log_tb_visit">Obisk</string>
+    <string name="log_tb_drop">Pusti v zakladu</string>
+    <string name="log_tb_changeall">Spremeni vse</string>
+    <string name="log_save">Shrani</string>
+    <string name="log_saving">Pošiljam…</string>
+    <string name="log_saving_and_uploading">Pošiljam zapis in nalagam sliko…</string>
+    <string name="log_clear">Počisti</string>
+    <string name="log_post">Pošlji</string>
+    <string name="log_post_rate">Pošlji in oceni</string>
+    <string name="log_post_no_rate">Pošlji in ne oceni</string>
+    <string name="log_post_not_possible">Nalagam stran…</string>
+    <string name="log_add">Dodaj</string>
+    <string name="log_rating">Ocena</string>
+    <string name="log_no_rating">Brez ocene</string>
+    <string name="log_stars_1">1 zvezdica</string>
+    <string name="log_stars_15">1.5 zvezdice</string>
+    <string name="log_stars_2">2 zvezdici</string>
+    <string name="log_stars_25">2.5 zvezdici</string>
+    <string name="log_stars_3">3 zvezdice</string>
+    <string name="log_stars_35">3.5 zvezdice</string>
+    <string name="log_stars_4">4 zvezdice</string>
+    <string name="log_stars_45">4.5 zvezdice</string>
+    <string name="log_stars_5">5 zvezdic</string>
+    <string name="log_stars_1_description">Zelo slabo</string>
+    <string name="log_stars_15_description">Slabo</string>
+    <string name="log_stars_2_description">Pod povprečjem</string>
+    <string name="log_stars_25_description">Ni slabo</string>
+    <string name="log_stars_3_description">Povprečno</string>
+    <string name="log_stars_35_description">Sploh ni slabo</string>
+    <string name="log_stars_4_description">Boljše od povprečja</string>
+    <string name="log_stars_45_description">Zelo dobro</string>
+    <string name="log_stars_5_description">Odlično</string>
+    <string name="log_webcam">Posneto s kamero</string>
+    <string name="log_new_log">Dodaj zapis</string>
+    <string name="log_new_log_text">Vsebina zapisa</string>
+    <string name="log_announcement">Obvestilo</string>
+    <string name="log_today">Danes</string>
+    <string name="log_yesterday">Včeraj</string>
+    <string name="log_smilies">Smeškoti</string>
+    <string name="log_image">Slika</string>
+    <string name="log_image_attach">Dodaj sliko</string>
+    <string name="log_image_edit">Uredi sliko</string>
+    <string name="log_image_stored">Obstoječa</string>
+    <string name="log_image_camera">Nova</string>
+    <string name="log_image_caption">Naslov</string>
+    <string name="log_image_description">Opis</string>
+    <string name="log_image_scale">Skaliranje</string>
+
+    <string-array name="log_image_scales">
+        <item>Brez skaliranja</item>
+        <item>512 px</item>
+        <item>640 px</item>
+        <item>800 px</item>
+        <item>1024 px</item>
+    </string-array>
+
+    <!-- translation -->
+    <string name="translate_to_sys_lang">Prevedi v: %s</string>
+    <string name="translate_to_english">Prevedi v: angleščino</string>
+    <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
+
+    <!-- errors, warnings, info toasts -->
+    <string name="err_none">OK</string>
+    <string name="err_start">Komunikacija se ni začela</string>
+    <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
+    <string name="err_server">Ni bilo mogoče vzpostaviti povezave z Geocaching.com. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
+    <string name="err_login">Prijavni podatki niso shranjeni</string>
+    <string name="err_login_failed">c:geo se ne more prijaviti.</string>
+    <string name="err_login_failed_toast">c:geo se ne more prijaviti. c:geo lahko deluje v načinu brez povezave s shranjenimi zakladi. Preverite vaše prijavne podatke in internetno povezavo.</string>
+    <string name="err_unknown">Neznana napaka</string>
+    <string name="err_comm">Neznana napaka v komunikaciji</string>
+    <string name="err_missing_auth">Uporabniško ime in geslo še ni nastavljeno.</string>
+    <string name="err_wrong">Napačno uporabniško ime ali geslo</string>
+    <string name="err_maintenance">Geocaching.com trenutno ni na voljo zaradi vzdrževanja. c:geo lahko deluje brez povezave s shranjenimi zakladi.</string>
+    <string name="err_license">Sprejeti morate pogoje uporabe Geocaching.com, da lahko naložite koordinate.</string>
+    <string name="err_unvalidated_account">Aktivirate morate svoj uporabniški račun na spletni strani Geocaching.com.</string>
+    <string name="err_unpublished">Zahtevan zaklad ni objavljen.</string>
+    <string name="err_premium_only">Zaklad je na voljo samo Premium uporabnikom.</string>
+    <string name="err_detail_open">c:geo ne more naložiti podatkov zaklada.</string>
+    <string name="err_detail_cache">c:geo ne more prikazati željenega zaklada. Ali je res zaklad?</string>
+    <string name="err_detail_cache_find">c:geo ni našel zaklada</string>
+    <string name="err_detail_cache_find_some">c:geo ni našel tega zaklada.</string>
+    <string name="err_detail_cache_find_any">c:geo ni našel nobenega zaklada.</string>
+    <string name="err_detail_cache_forgot">c:geo je pozabil kateri zaklad hočete.</string>
+    <string name="err_detail_google_maps_limit_reached">c:geo ni mogel naložiti statičnih zemljevidov. Verjetno je presežena omejitev Googlovih zemljevidov.</string>
+    <string name="err_detail_no_spoiler">c:geo ni našel spoiler slik za ta zaklad.</string>
+    <string name="err_detail_no_map_static">c:geo ni našel statičnih zemljevidov za ta zaklad.</string>
+    <string name="err_detail_not_load_map_static">c:geo ni mogel naložiti statičnih zemljevidov.</string>
+    <string name="err_detail_still_working">Še opravljam drugo nalogo.</string>
+    <string name="err_watchlist_still_managing">Še vedno upravljam vaš spisek nadzorov.</string>
+    <string name="err_watchlist_failed">Spreminjanje spiska nadzorov ni uspelo.</string>
+    <string name="err_application_no">c:geo ne najde primerne aplikacije.</string>
+    <string name="err_auth_initialize">c:geo ni uspel začeti z avtorizacijskim postopkom.</string>
+    <string name="err_auth_process">Avtorizacijski postopek ni uspel.</string>
+    <string name="err_cannot_log_visit">c:geo ni uspel zabeležiti obiska. Osvežite podatke zaklada in poskusite ponovno.</string>
+    <string name="err_init_cleared">c:geo ni uspel izbrisati uporabniškega imena in gesla.</string>
+    <string name="err_download_fail">c:geo ni uspel prenesti zakladov.</string>
+    <string name="err_dwld_details_failed">c:geo ni uspel prenesti podatke zaklada.</string>
+    <string name="err_load_descr_failed">c:geo ne more prikazati opisa.</string>
+    <string name="err_location_unknown">c:geo ne pozna lokacije zaklada.</string>
+    <string name="err_missing_device_name">Vnesite ime naprave pred registracijo.</string>
+    <string name="err_favorite_failed">Spreminjanje statusa favorita ni uspelo.</string>
+    <string name="err_select_logimage_failed">Ni uspelo izbrati slike za zapis.</string>
+    <string name="err_acquire_image_failed">Pridobivanje slike ni uspelo.</string>
+    <string name="err_tb_display">c:geo ne more prikazati željenega sledljivčka. Ali je res sledljivček?</string>
+    <string name="err_tb_details_open">c:geo ne more pokazati podatke sledljivčka.</string>
+    <string name="err_tb_forgot_saw">c:geo je pozabil kateri sledljivček hočete.</string>
+    <string name="err_tb_find">c:geo ni našel sledljivčka.</string>
+    <string name="err_tb_find_that">c:geo ni našel tega sledljivčka.</string>
+    <string name="err_waypoint_cache_unknown">c:geo ne ve h kateremu zakladu želite dodati točko.</string>
+    <string name="err_waypoint_add_failed">c:geo ni uspelo dodati točke.</string>
+    <string name="err_point_unknown_position">c:geo ne ve kje ste.</string>
+    <string name="err_point_no_position_given_title">Potrebne informacije</string>
+    <string name="err_point_no_position_given">Vnesite vsaj koordinate ali pa razdaljo in smer. Izpolnete lahko tudi vsa polja.</string>
+    <string name="err_point_curr_position_unavailable">c:geo še vedno nima trenutnih koordinat. Prosimo počakajte…</string>
+    <string name="err_point_bear_and_dist_title">Potrebujete pomoč?</string>
+    <string name="err_point_bear_and_dist">Vnesite smer in razdaljo. Smer je kot med 0 in 360 stopinjami od severa. Razdalja je lahko z ali brez enot.</string>
+    <string name="err_point_location_error">c:geo ne more dobiti lokacije točke.</string>
+    <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>
+    <string name="err_log_load_data_again">c:geo ne more naložiti podatkov za zapis obiska. Ponovni poskus…</string>
+    <string name="err_log_load_data_still">c:geo še vedno nalaga podatke za zapis obiska. Prosimo počakajte še trenutek.</string>
+    <string name="err_log_failed_server">c:geo ni mogel objaviti zapisa, ker se strežnik ne odziva.</string>
+    <string name="err_log_post_failed">Izgleda, kot da zapis ni bil objavljen. Preverite na Geocaching.com.</string>
+    <string name="err_logimage_post_failed">Izgleda, kot da slika ni bila naložena. Preverite na Geocaching.com.</string>
+    <string name="err_search_address_forgot">c:geo je pozabil naslov, ki ste ga hoteli najti.</string>
+    <string name="err_parse_lat">c:geo ni razumel geografske širine.</string>
+    <string name="err_parse_lon">c:geo ni razumel geografske dolžine.</string>
+    <string name="err_parse_dist">c:geo ni razumel razdalje.</string>
+    <string name="err_parse_lat_lon">c:geo ni razumel geografske širine in dolžine.</string>
+    <string name="warn_save_nothing">Nič ni za shraniti.</string>
+    <string name="warn_no_cache_coord">Ni nobenega zaklada s koordinatami.</string>
+    <string name="warn_no_coordinates">Koordinate niso podane.</string>
+    <string name="warn_no_keyword">Ni ključnih besed.</string>
+    <string name="warn_no_username">Ni uporabniškega imena.</string>
+    <string name="warn_search_help_title">Potrebujete pomoč?</string>
+    <string name="warn_search_help_address">Vnesite naslov ali ime lokacije. Primer: \"Tržaška 25, 1000 Ljubljana, Slovenija\", ali ime mesta, npr. \"Postojna\" ali samo na primer \"Triglavski narodni park \".</string>
+    <string name="warn_search_help_gccode">Vnesite naslov zaklada, na primer: \"GC38ZCK\".</string>
+    <string name="warn_search_help_keyword">Vnesite celotno ime ali del imena zaklada, na primer \"Križanka\".</string>
+    <string name="warn_search_help_user">Vnesite uporabniško ime iz Geocaching.com.</string>
+    <string name="warn_search_help_tb">Vnesite kodo sledljivčka, na primer: \"TB29QMZ\".</string>
+    <string name="warn_log_text_fill">Vnesite besedilo zapisa.</string>
+    <string name="warn_load_images">c:geo ni uspel naložiti slik.</string>
+    <string name="warn_invalid_mapfile">Izbrana datoteka ni veljaven mapsforge 0.3.0 zemljevid. Zemljevidi brez povezave niso na voljo.</string>
+    <string name="warn_deprecated_mapfile">Uporabljate različico zemljevidov 0.2.4. Prosimo uporabite različico 0.3.0. V naslednji izdaji bomo prekinili podporo za različico 0.2.4.</string>
+    <string name="warn_nonexistant_mapfile">Datoteka z zemljevidi ne obstaja.\nZemljevidi brez povezave niso na voljo.</string>
+    <string name="warn_rendertheme_missing">Tema zemljevidov ni na voljo.</string>
+    <string name="info_log_posted">c:geo je uspešno objavil zapis obiska.</string>
+    <string name="info_log_saved">c:geo je shranil zapis.</string>
+    <string name="info_log_cleared">Zapis je izbrisan.</string>
+    <string name="info_log_type_changed">Tip zapisa je spremenjen.</string>
+    <string name="info_select_logimage_cancelled">Izbira slike je bila preklicana.</string>
+    <string name="info_stored_image">Slika je bila shranjena v:</string>
+    <string name="info_storing_static_maps">Poskus shranjevanja statičnih zemljevidov</string>
+
+    <!-- location service -->
+    <string name="loc_last">Zadnja znana lokacija</string>
+    <string name="loc_net">Omrežje</string>
+    <string name="loc_gps">GPS</string>
+    <string name="loc_sat">Satelit</string>
+    <string name="loc_trying">Iščem lokacijo</string>
+    <string name="loc_no_addr">Neznan naslov</string>
+    <string name="loc_gps_disabled">GPS onemogočen</string>
+
+    <!-- standard menu -->
+    <string name="menu_about">O c:geo</string>
+    <string name="menu_helpers">Dodatni programi</string>
+    <string name="menu_settings">Nastavitve</string>
+    <string name="menu_history">Zgodovina</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_scan_geo">Skeniraj geo-kodo</string>
+
+    <!-- main screen -->
+    <string name="live_map_button">Zemljevid</string>
+    <string name="caches_nearby_button">Blizu</string>
+    <string name="advanced_search_button">Iskanje</string>
+    <string name="stored_caches_button">Shranjeni</string>
+    <string name="any_button">Destinacije</string>
+    <string name="unknown_scan">Iskanje žal ni obrodilo sadov.</string>
+
+    <!-- caches -->
+    <string name="caches_no_cache">Ni zakladov</string>
+    <string name="caches_more_caches">Naloži več zakladov</string>
+    <string name="caches_more_caches_no">Ni več zakladov</string>
+    <string name="caches_more_caches_loading">Nalagam zaklade…</string>
+    <string name="caches_more_caches_currently">trenutno</string>
+    <string name="caches_downloading">Nalagam zaklade…\nČas do konca: </string>
+    <string name="caches_eta_ltm">manj kot minuta</string>
+
+    <plurals name="caches_eta_mins">
+        <item quantity="one">minuta</item>
+        <item quantity="two">minuti</item>
+        <item quantity="few">minute</item>
+        <item quantity="other">minut</item>
+    </plurals>
+
+    <string name="caches_store_offline">Shrani</string>
+    <string name="caches_store_selected">Shrani izbrane</string>
+    <string name="caches_history">Zgodovina</string>
+    <string name="caches_on_map">Pokaži na zemljevidu</string>
+    <string name="caches_sort">Razvrsti</string>
+    <string name="caches_sort_title">Razvrsti po</string>
+    <string name="caches_sort_distance">Razdalja</string>
+    <string name="caches_sort_difficulty">Težavnost</string>
+    <string name="caches_sort_terrain">Teren</string>
+    <string name="caches_sort_size">Velikost</string>
+    <string name="caches_sort_favorites">Številu favoritov</string>
+    <string name="caches_sort_name">Imenu</string>
+    <string name="caches_sort_geocode">Geo kodi</string>
+    <string name="caches_sort_rating">Glasovih</string>
+    <string name="caches_sort_vote">Mojih glasovih</string>
+    <string name="caches_sort_inventory">Številu sledljivčkov</string>
+    <string name="caches_sort_date_hidden">Datum objave</string>
+    <string name="caches_sort_date_logged">Datum zapisa</string>
+    <string name="caches_sort_finds">Število najdb</string>
+    <string name="caches_sort_state">Država</string>
+    <string name="caches_sort_storage">Datum shranjevanja na napravo</string>
+    <string name="caches_select_mode">Način izbiranja</string>
+    <string name="caches_select_mode_exit">Izhod iz načina izbiranja</string>
+    <string name="caches_select_invert">Obrni izbor</string>
+    <string name="caches_nearby">Blizu</string>
+    <string name="caches_manage">Upravljaj</string>
+    <string name="caches_drop_selected">Izbriši izbrane</string>
+    <string name="caches_drop_selected_ask">Ali želite izbrisati izbrane zaklade?</string>
+    <string name="caches_drop_all">Izbriši vse</string>
+    <string name="caches_drop_all_ask">Ali želite izbrisati vse zaklade iz tega seznama?</string>
+    <string name="caches_drop_stored">Izbriši shranjene</string>
+    <string name="caches_drop_progress">Izbris zakladov</string>
+    <string name="caches_drop_all_and_list">Izbriši vse in odstrani seznam</string>
+    <string name="caches_delete_events">Izbriši pretekla srečanja</string>
+    <string name="caches_refresh_selected">Osveži izbrane</string>
+    <string name="caches_refresh_all">Osveži vse</string>
+    <string name="caches_move_selected">Premakni izbrane</string>
+    <string name="caches_move_all">Premakni vse</string>
+    <string name="caches_map_locus_export">Izvozi v Locus</string>
+    <string name="caches_recaptcha_explanation">Prepišite besedilo iz slike, če želite shraniti tudi koordinate. To okno lahko izklopite v nastavitvah.</string>
+    <string name="caches_recaptcha_hint">Besedilo iz slike</string>
+    <string name="caches_recaptcha_continue">Nadaljuj</string>
+    <string name="caches_filter">Filter</string>
+    <string name="caches_filter_title">Filtriraj po</string>
+    <string name="caches_filter_size">Velikosti</string>
+    <string name="caches_filter_type">Tipu</string>
+    <string name="caches_filter_track">S sledljivčki</string>
+    <string name="caches_filter_clear">Počisti filtre</string>
+    <string name="caches_filter_modified">S spremenjenimi koordinatami</string>
+    <string name="caches_filter_origin">Vir</string>
+    <string name="caches_removing_from_history">Brišem iz zgodovine…</string>
+    <string name="caches_clear_offlinelogs">Izbriši shranjene zapise</string>
+    <string name="caches_clear_offlinelogs_progress">Izbris shranjenih zapisov</string>
+
+    <!-- caches lists -->
+    <string name="list_menu">Seznam</string>
+    <string name="list_menu_create">Ustvari nov seznam</string>
+    <string name="list_menu_all_lists">Vsi zakladi</string>
+    <string name="list_menu_drop">Izbriši trenutni seznam</string>
+    <string name="list_menu_change">Spremeni seznam</string>
+    <string name="list_menu_rename">Preimenuj trenutni seznam</string>
+    <string name="list_title">Izberi seznam</string>
+    <string name="list_inbox">Shranjeni</string>
+    <string name="list_all_lists">Vsi zakladi</string>
+    <string name="list_dialog_create_title">Nov seznam</string>
+    <string name="list_dialog_create">Ustvari</string>
+    <string name="list_dialog_cancel">Prekliči</string>
+    <string name="list_dialog_create_ok">Nov seznam je bil ustvarjen</string>
+    <string name="list_dialog_create_err">c:geo ni mogel ustvariti novega seznama</string>
+    <string name="list_dialog_remove_title">Odstrani seznam</string>
+    <string name="list_dialog_remove_description">Ali želite odstraniti trenutni seznam zakladov? Vsi ostali zakladi bodo premaknjeni v seznam \"Shranjeni\".</string>
+    <string name="list_dialog_remove">Odstrani</string>
+    <string name="list_dialog_remove_ok">Seznam je bil odstranjen</string>
+    <string name="list_dialog_remove_err">c:geo ni mogel odstraniti seznama</string>
+    <string name="list_dialog_rename_title">Preimenuj seznam</string>
+    <string name="list_dialog_rename">Preimenuj</string>
+
+    <!-- about -->
+    <string name="about_version">Različica</string>
+    <string name="about_changelog">Zadnje spremembe</string>
+    <string name="about_donate">Prispevaj</string>
+    <string name="about_detail">Podrobnosti</string>
+    <string name="about_donation_more">Prispevaj\nrazvoju</string>
+    <string name="about_contributors">Avtorji</string>
+
+    <!-- init -->
+    <string name="init_gc_activate">Vklopi Geocaching.com na zemljevidu in v iskanjih</string>
+    <string name="init_oc_activate">Vklopi opencaching.de na zemljevidu in v iskanjih</string>
+    <string name="init_oc_de_description">Poveži c:geo z opencaching.de za iskanje zakladov in dostop in filter najdenih zakladov.</string>
+    <string name="init_register_oc_de">Poveži c:geo z opencaching.de</string>
+    <string name="init_username">Uporabniško ime</string>
+    <string name="init_password">Geslo</string>
+    <string name="init_passvote">Geslo</string>
+    <string name="init_login">Preveri in shrani podatke</string>
+    <string name="init_login_popup">Prijava</string>
+    <string name="init_login_popup_working">Prijavljanje…</string>
+    <string name="init_login_popup_ok">Prijava uspešna</string>
+    <string name="init_login_popup_failed">Prijava neuspešna</string>
+    <string name="init_login_popup_failed_reason">Prijava neuspešna:</string>
+    <string name="init_twitter_authorize">Poveži c:geo s Twitterjem</string>
+    <string name="init_twitter_publish">Objavi na Twitter ob najdbi zaklada</string>
+    <string name="init_signature">Podpis</string>
+    <string name="init_signature_help_button">Pomoč</string>
+    <string name="init_signature_help_title">Pomoč in namigi pri podpisih</string>
+    <string name="init_signature_help_text">Vnesite podpis, ki bo uporabljen b baših zapisih obiskov.\nPosebni nizi, ki jih lahko uporabite so: [DATE] - datum, [TIME] - ura, [DATETIME] - datum in ura, [USER] - uporabniško ime in [NUMBER] - število najdb.\nTi nizi bodo zamenjani s pravimi podatki ob vpisu.</string>
+    <string name="init_signature_template_button">Vnesi predlogo</string>
+    <string name="init_signature_template_date">Datum</string>
+    <string name="init_signature_template_time">Ura</string>
+    <string name="init_signature_template_datetime">Datum in ura</string>
+    <string name="init_signature_template_user">Uporabnik</string>
+    <string name="init_signature_template_number">Število najdb</string>
+    <string name="init_signature_template_owner">Uporabniško ime lastnika zaklada</string>
+    <string name="init_details">Podrobnosti zaklada</string>
+    <string name="init_ratingwanted">Naloži glasove iz GCvote.com</string>
+    <string name="init_elevationwanted">Naloži podatke o nadmorski višini</string>
+    <string name="init_friendlogswanted">Naloži tudi vpise mojih prijateljev</string>
+    <string name="init_openlastdetailspage">Pri podrobnostih vedno odpri nazadnje odprto stran</string>
+    <string name="init_autoload">Vedno pokaži celoten opis</string>
+    <string name="init_other">Druge možnosti</string>
+    <string name="init_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>
+    <string name="init_address">Pokaži naslov namesto koordinat pri podrobnostih</string>
+    <string name="init_captcha">Pokaži CAPTCHA, če je potrebno (samo Basic Member)</string>
+    <string name="init_useenglish">Uporabi angleški jezik v c:geo\n(potrebuje ponovni zagon aplikacije)</string>
+    <string name="init_exclude">Ne pokaži najdenih ali mojih zakladov</string>
+    <string name="init_showwaypoints">Pokaži dodatne točke na zemljevidu</string>
+    <string name="init_showwaypoint_description">Če je manj kot določeno število zakladov na zemljevidu, se pokažejo tudi dodatne točke.</string>
+    <string name="init_disabled">Ne pokaži onemogočenih zakladov</string>
+    <string name="init_offline">Shrani tudi statične zemljevide za delo brez povezave</string>
+    <string name="init_offline_wp">Shrani tudi statične zemljevide dodatnih točk</string>
+    <string name="init_save_log_img">Shrani slike iz zapisov</string>
+    <string name="init_units">Uporabi anglosaške merske enote namesto metričnih</string>
+    <string name="init_log_offline">Vklopi način brez povezave pri zapisih\n(Ne pošlji zapisa na strežnik)</string>
+    <string name="init_choose_list">Pri shranjevanju vprašaj za seznam</string>
+    <string name="init_livelist">Pokaži tudi smeri do zakladov v seznamih</string>
+    <string name="init_altitude">Popravek nadmorske višine</string>
+    <string name="init_altitude_description">Če vam GPS pokaže napačno nadmorsko višino, jo lahko tukaj popravite s pozitivno ali negativno razdaljo v metrih.</string>
+    <string name="init_clear">Počisti prijavne podatke</string>
+    <string name="init_cleared">c:geo je izbrisal prijavne podatke.</string>
+    <string name="init_backup">Varnostna kopija</string>
+    <string name="init_backup_backup">Varnostna kopija</string>
+    <string name="init_backup_running">Ustvarjanje varnostne kopije baze…</string>
+    <string name="init_backup_note">Ta možnost bo ustvarila varnostno kopijo samo zakladov in dodatnih točk, ne pa tudi nastavitev aplikacije.\nVaši gesla ali prijavni podatki ne bodo zapustili te aplikacije.</string>
+    <string name="init_backup_restore">Obnovi</string>
+    <string name="init_backup_success">Varnostna kopija je bila uspešno ustvarjena.</string>
+    <string name="init_backup_failed">Varnostne kopije ni bilo mogoče ustvariti.</string>
+    <string name="init_backup_unnecessary">Baza je prazna. Varnostna kopija ni potrebna.</string>
+    <string name="init_restore_success">Obnovitev iz varnostne kopije je uspela.</string>
+    <string name="init_restore_failed">Obnovitev ni uspela.</string>
+    <string name="init_restore_running">Obnavljam bazo podatkov iz varnostne kopije…</string>
+    <string name="init_restore_confirm">Baza podatkov je prazna, ali ji želite obnoviti iz varnostne kopije?</string>
+    <string name="init_backup_last">Varnostna kopija je na voljo iz</string>
+    <string name="init_backup_last_no">Varnostna kopija ne obstaja.</string>
+    <string name="init_mapsources">Mapa z zemljevidi</string>
+    <string name="init_mapsources_description">Tukaj lahko nastavite mapo z zemljevidi. Kot alternativa Google Maps so na voljo različni OpenStreetMap zemljevidi. (Poglejte <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> za več informacij).\nPodprte so tudi različne teme zemljevidov.</string>
+    <string name="init_mapsource_select">Izberi datoteko z zemljevidi</string>
+    <string name="init_map_directory_description">Mapa z zemljevidi</string>
+    <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
+    <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
+    <string name="init_gpx_exportdir_description">Tukaj lahko nastavite mapo za izvoz GPX datotek.</string>
+    <string name="init_gpx_importdir_description">Tukaj lahko nastavite mapo za uvoz GPX datotek.</string>
+    <string name="init_maptrail">Pokaži pot premikanja na zemljevidu</string>
+    <string name="init_share_after_export">Po izvozu GPX datotek ponudi menu za deljenje</string>
+    <string name="init_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
+    <string name="init_sigautoinsert">Samodejno vstavi podpis</string>
+    <string name="init_loaddirectionimg">Naloži tudi sliko za smer (samo Basic Member)</string>
+    <string name="init_default_navigation_tool">Privzeta navigacija</string>
+    <string name="init_default_navigation_tool_description">Tukaj lahko nastavite privzeto aplikacijo za navigacijo do zaklada.</string>
+    <string name="init_default_navigation_tool_select">Izberi aplikacijo</string>
+    <string name="init_default_navigation_tool_2_description">Tukaj lahko izberete sekundarno aplikacijo za navigacijo. Aktivirate jo lahko z dolgim klikom na ikono za navigacijo pri opisu zaklada.</string>
+    <string name="init_debug_title">Informacije za razhroščevanje</string>
+    <string name="init_debug_note">c:geo lahko generira veliko informacij za razhroščevanje, ki sicer niso uporabne za zakladolovce, pridejo pa prav razvijalcem aplikacije c:geo, ki s pomočjo teh informacij lažje najdejo napako in jo odpravijo. V primeru napake vas lahko prosijo za te informacije, ki jih pridobite če vklopite to možnost.</string>
+    <string name="init_debug">Ustvari poročilo za razhroščevanje</string>
+    <string name="init_dbonsdcard_title">Lokacija podatkovne baze</string>
+    <string name="init_dbonsdcard_note">Podatkovno bazo aplikacije c:geo lahko shranite tudi na zunanji pomnilniški medij. S tem načinom lahko sprostite veliko internega pomnilnika, vendar lahko zaradi tega c:geo deluje počasneje, če pa SD kartice ne bo na voljo pa c:geo sploh ne bo deloval.</string>
+    <string name="init_dbonsdcard">Baza na zunanjem pomnilniku</string>
+    <string name="init_dbmove_dbmove">Premikanje podatkovne baze</string>
+    <string name="init_dbmove_running">Premikanje podatkovne baze</string>
+    <string name="init_dbmove_success">Premikanje baze je uspelo.</string>
+    <string name="init_dbmove_failed">Premikanje baze ni uspelo</string>
+    <string name="init_plain_logs">Ne pokaži barv pri zapisih</string>
+    <string name="init_use_native_ua">c:geo naj se strežniku predstavi kot Android brskalnik. Ta možnost reši problem prijave pri nekaterih ponudnikih omrežja.</string>
+    <string name="init_rendertheme_folder">Mapa s temami zemljevidov (neobvezno)</string>
+
+    <!-- map sources -->
+    <string name="map_source_google_map">Google: Cestni zemljevid</string>
+    <string name="map_source_google_satellite">Google: Satelitska slika</string>
+    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+    <string name="map_source_osm_cyclemap">OSM: Kolesarski zemljevid</string>
+    <string name="map_source_osm_offline">Zemljevid brez povezave</string>
+    <string name="init_sendToCgeo">Pošlji v c:geo</string>
+    <string name="init_sendToCgeo_name">Ime naprave:</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> vam omogoča prenos zakladov direktno iz spletne strani Geocaching.com. Potrebujete še razširitev za brskalnik Firefox ali Chrome. Pred registracijo preberite<a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registracijo potrebujete samo če želite uporabljati možnost send2cgeo. c:geo bo normalno deloval tudi brez registracije naprave.</string>
+    <string name="init_sendToCgeo_register">Zahtevaj registracijo</string>
+    <string name="init_sendToCgeo_registering">Registriramo vašo napravo za "send2cgeo"…</string>
+    <string name="init_sendToCgeo_register_ok">Registracija je uspela. PIN koda je ####. Uporabite jo na spletni strani c:geo, da dodate kodo v vaš brskalnik.</string>
+    <string name="init_sendToCgeo_register_fail">Registration ni uspela.</string>
+    <string name="sendToCgeo_download_fail">c:geo ni uspel prenesti zakladov. Vaša povezava z internetom morda ne deluje, ali pa ne deluje spletna stran send2cgeo.</string>
+    <string name="sendToCgeo_no_registration">c:geo ni uspel prenesti zakladov. Registracija s send2cgeo je potekla. Prosimo ponovno registrirajte napravo v nastavitvah.</string>
+
+    <!-- auth twitter -->
+    <string name="auth_authorize">Poveži c:geo</string>
+    <string name="auth_start">Začni z avtorizacijo</string>
+    <string name="auth_again">Ponovno začni</string>
+    <string name="auth_pin_hint">PIN, ki ga dodeli Twitter</string>
+    <string name="auth_finish">Končaj</string>
+    <string name="auth_dialog_wait">Čakam na Twitter…</string>
+    <string name="auth_dialog_pin_title">PIN koda</string>
+    <string name="auth_dialog_pin_message">Vnesite PIN kodo, ki ste jo dobili na spletni strani Twitterja.</string>
+    <string name="auth_dialog_completed">c:geo je sedaj povezan s Twitterjem za objavo sporočil.</string>
+    <string name="about_auth_1">Sledeči postopek omogoča <b>c:geotu</b> povezavo s Twitterjem.</string>
+    <string name="about_auth_2">Klik na gumb \"Poveži c:geo\" bo začel s postopkom avtorizacije. Med postopkom se bo odprl brskalnik s Twitterjem. V brskalniku se prijavite v Twitter in dovolite aplikaciji <b>c:geo</b> da dostopa do vašega računa. Ko to potrdite, vam bo Twitter izpisal PIN kodo. To kodo prepišite v <b>c:geo</b> in potrdite.</string>
+
+    <!-- auth opencaching -->
+    <string name="auth_authorize_oc">Poveži c:geo</string>
+    <string name="auth_start_oc">Začni z avtorizacijo</string>
+    <string name="auth_again_oc">Ponovno začni</string>
+    <string name="auth_pin_hint_oc">PIN, ki ga dodeli %s</string>
+    <string name="auth_finish_oc">Končaj</string>
+    <string name="auth_dialog_wait_oc">Čakam na %s…</string>
+    <string name="auth_dialog_pin_title_oc">PIN koda</string>
+    <string name="auth_dialog_pin_message_oc">Vnesite PIN kodo, ki ste jo dobili na spletni strani %s.</string>
+    <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
+    <string name="about_auth_1_oc">Sledeči postopek omogoča <b>c:geotu</b> povezavo z %s.</string>
+    <string name="about_auth_2_oc">Klik na gumb \"Poveži c:geo\" bo začel s postopkom avtorizacije. Med postopkom se bo odprl brskalnik s stranjo %s. V brskalniku se prijavite na to stran in dovolite aplikaciji <b>c:geo</b> da dostopa do vašega računa. Ko to potrdite, vam bo %s izpisal PIN kodo. To kodo prepišite v <b>c:geo</b> in potrdite.</string>
+
+    <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d zaklad</item>
+        <item quantity="two">%1$d zaklada</item>
+        <item quantity="few">%1$d zakladi</item>
+        <item quantity="other">%1$d zakladov</item>
+    </plurals>
+
+    <string name="cache_offline">Brez povezave</string>
+    <string name="cache_offline_refresh">Osveži</string>
+    <string name="cache_offline_drop">Izbriši</string>
+    <string name="cache_offline_store">Shrani</string>
+    <string name="cache_offline_stored">Shranjeno na napravi</string>
+    <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>
+    <string name="cache_offline_time_about">o</string>
+    <string name="cache_offline_time_mins">minut nazaj</string>
+    <string name="cache_offline_time_mins_few">nekaj minut nazaj</string>
+    <string name="cache_offline_time_hour">eno uro nazaj</string>
+    <string name="cache_offline_time_hours">ur nazaj</string>
+    <string name="cache_offline_time_days">dni nazaj</string>
+    <string name="cache_premium">Premium</string>
+    <string name="cache_attributes">Atributi</string>
+    <string name="cache_inventory">Inventar</string>
+    <string name="cache_log_offline">Shranjen zapis</string>
+    <string name="cache_log_images_title">Slike</string>
+    <string name="cache_log_image_default_title">Slika</string>
+    <string name="cache_personal_note">Moja opomba</string>
+    <string name="cache_personal_note_edit">Uredi</string>
+    <string name="cache_personal_note_unstored">Zaklad ni shranjen</string>
+    <string name="cache_personal_note_store">Za vklop opomb bo zaklad najprej shranjen na napravo.</string>
+    <string name="cache_description">Opis</string>
+    <string name="cache_description_long">Daljši opis</string>
+    <string name="cache_description_table_note">Opis vsebuje oblikovanje s tabelami. Za pravilen prikaz opisa bo mogoče potrebno obiskati %s.</string>
+    <string name="cache_watchlist_on">Zaklad je na vašem spisku nadzorov.</string>
+    <string name="cache_watchlist_not_on">Zaklad ni na vašem spisku nadzorov.</string>
+    <string name="cache_watchlist_add">Dodaj na spisek nadzorov</string>
+    <string name="cache_watchlist_remove">Odstrani iz spiska nadzorov</string>
+    <string name="cache_favpoint_on">Zaklad je na vašem spisku priljubljenih.</string>
+    <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
+    <string name="cache_favpoint_add">Dodaj</string>
+    <string name="cache_favpoint_remove">Odstrani</string>
+    <string name="cache_list_text">Seznam:</string>
+    <string name="cache_list_change">Premakni</string>
+    <string name="cache_list_unknown">Ni v seznamu</string>
+    <string name="cache_images">Slike</string>
+    <string name="cache_waypoints">Dodatne točke</string>
+
+    <plurals name="waypoints">
+        <item quantity="one">%d dodatna točka</item>
+        <item quantity="two">%d dodatni točki</item>
+        <item quantity="few">%d dodatne točke</item>
+        <item quantity="other">%d dodatnih točk</item>
+    </plurals>
+
+    <string name="cache_waypoints_add">Dodaj točko</string>
+    <string name="cache_hint">Namig</string>
+    <string name="cache_logs">Dnevnik zapisov</string>
+    <string name="cache_logsfriends">Zapisi prijateljev</string>
+    <string name="cache_dialog_loading_details">Nalaganje podatkov zaklada…</string>
+    <string name="cache_dialog_loading_details_status_loadpage">Nalaganje strani</string>
+    <string name="cache_dialog_loading_details_status_details">Obdelujem podatke</string>
+    <string name="cache_dialog_loading_details_status_spoilers">Nalaganje spoiler slik</string>
+    <string name="cache_dialog_loading_details_status_logs">Nalaganje zapisov</string>
+    <string name="cache_dialog_loading_details_status_waypoints">Obdelovanje dodatnih točk</string>
+    <string name="cache_dialog_loading_details_status_gcvote">Nalaganje glasov GCVote</string>
+    <string name="cache_dialog_loading_details_status_elevation">Nalaganje podatkov o nadmorski višini</string>
+    <string name="cache_dialog_loading_details_status_cache">Shranjevanje podatkov</string>
+    <string name="cache_dialog_loading_details_status_render">Ustvarjanje pogleda</string>
+    <string name="cache_dialog_offline_save_title">Brez povezave</string>
+    <string name="cache_dialog_offline_save_message">Shranjevanje zaklada za delo brez povezave…</string>
+    <string name="cache_dialog_offline_drop_title">Brez povezave</string>
+    <string name="cache_dialog_offline_drop_message">Brisanje zaklada iz naprave…</string>
+    <string name="cache_dialog_refresh_title">Osveži</string>
+    <string name="cache_dialog_refresh_message">Ponovno nalaganje podatkov zaklada…</string>
+    <string name="cache_dialog_watchlist_add_title">Spisek nadzorov</string>
+    <string name="cache_dialog_watchlist_add_message">Dodajanje zaklada na spisek nadzorov…</string>
+    <string name="cache_dialog_watchlist_remove_title">Spisek nadzorov</string>
+    <string name="cache_dialog_watchlist_remove_message">Odstranjevanje zaklada s spiska nadzorov…</string>
+    <string name="cache_dialog_favorite_add_title">Priljubljeni</string>
+    <string name="cache_dialog_favorite_add_message">Dodajanje zaklada na spisek priljubljenih…</string>
+    <string name="cache_dialog_favorite_remove_title">Priljubljeni</string>
+    <string name="cache_dialog_favorite_remove_message">Odstranjevanje zaklada s spiska priljubljenih…</string>
+    <string name="cache_menu_navigate">Navigiraj</string>
+    <string name="cache_menu_navigation_drive">Navigiraj - vožnja</string>
+    <string name="cache_menu_navigation_walk">Navigiraj - hoja</string>
+    <string name="cache_menu_maps_directions">Google Maps usmerjanje</string>
+    <string name="cache_menu_radar">Radar</string>
+    <string name="cache_menu_map">Zemljevid</string>
+    <string name="cache_menu_map_static">Statični zemljevidi</string>
+    <string name="cache_menu_download_map_static">Prenesi statične zemljevide</string>
+    <string name="cache_menu_map_ext">Pokaži na drugem zemljevidu</string>
+    <string name="cache_menu_streetview">Pogled ulic</string>
+    <string name="cache_menu_browser">Odpri v brskalniku</string>
+    <string name="cache_menu_visit">Objavi zapis</string>
+    <string name="cache_menu_visit_offline">Shrani zapis</string>
+    <string name="cache_menu_spoilers">Spoiler slike</string>
+    <string name="cache_menu_around">Zakladi v bližini</string>
+    <string name="cache_menu_event">Dodaj na koledar</string>
+    <string name="cache_menu_details">Podrobnosti</string>
+    <string name="cache_menu_refresh">Osveži</string>
+    <string name="cache_menu_share">Deli povezavo</string>
+    <string name="cache_menu_move_list">Premakni v drug seznam</string>
+    <string name="cache_status">Status</string>
+    <string name="cache_status_offline_log">Shranjen zapis</string>
+    <string name="cache_status_found">Najden</string>
+    <string name="cache_status_archived">Arhiviran</string>
+    <string name="cache_status_disabled">Onemogočen</string>
+    <string name="cache_status_premium">Samo za Premium člane</string>
+    <string name="cache_status_not_premium">Za vse člane</string>
+    <string name="cache_status_stored">Shranjen</string>
+    <string name="cache_status_not_stored">Ni shranjen</string>
+    <string name="cache_geocode">Geo koda</string>
+    <string name="cache_name">Ime</string>
+    <string name="cache_type">Tip</string>
+    <string name="cache_size">Velikost</string>
+    <string name="cache_distance">Razdalja</string>
+    <string name="cache_difficulty">Težavnost</string>
+    <string name="cache_terrain">Teren</string>
+    <string name="cache_rating">Ocena</string>
+    <string name="cache_own_rating">Moja ocena</string>
+    <string name="cache_rating_of">od</string>
+    <string name="cache_favorite">Priljubljeni</string>
+    <string name="cache_owner">Lastnik</string>
+    <string name="cache_hidden">Skritih</string>
+    <string name="cache_event">Datum</string>
+    <string name="cache_location">Lokacija</string>
+    <string name="cache_coordinates">Koordinate</string>
+    <string name="cache_coordinates_original">Originalne koordiante</string>
+    <string name="cache_spoiler_images_title">Spoiler slike</string>
+    <string name="cache_images_title">Slike</string>
+    <string name="cache_log_types">Tipi zapisov</string>
+    <string name="cache_coordinates_no">Zaklad nima koordinat.</string>
+    <string name="cache_clear_history">Počisti zgodovino</string>
+    <string name="cache_remove_from_history">Odstrani iz zgodovine</string>
+    <string name="cache_license">Licenca</string>
+    <string name="cache_image">Slika</string>
+    <string name="cache_image_open_file">Odpri kot datoteko</string>
+    <string name="cache_image_open_browser">Odpri v brskalniku</string>
+    <string name="cache_share_field">deli</string>
+    <string name="cache_time_full_hours">h</string>
+    <string name="cache_listed_on">Objavljen na %s</string>
+
+    <!-- editor dialog -->
+    <string name="editor_save">Shrani</string>
+
+    <!-- file list base -->
+    <string name="file_searching_in">Iščem datoteke\nv</string>
+    <string name="file_searching_sdcard_in">Nobenih datotek ni v mapi:\n%1$s\n\nIščem datoteke po celotni SD kartici:\n</string>
+    <string name="file_list_no_files">c:geo ni našel primernih datotek.</string>
+    <string name="file_searching">Iskanje primernih datotek</string>
+    <string name="file_title_searching">Iskanje</string>
+
+    <!-- simple_dir_chooser -->
+    <string name="simple_dir_chooser_title">Izberi mapo</string>
+    <string name="simple_dir_chooser_current_path">Pot:</string>
+
+    <!-- gpx -->
+    <string name="gpx_import_loading_caches">Nalaganje zakladov iz .gpx datoteke</string>
+    <string name="gpx_import_loading_waypoints">Nalaganje dodatnih točk iz datoteke</string>
+    <string name="gpx_import_store_static_maps">Shranjevanje statičnih zemljevidov</string>
+    <string name="gpx_import_caches_imported">naloženih zakladov</string>
+    <string name="gpx_import_static_maps_skipped">prekinjeno nalaganje statičnih zemljevidov</string>
+    <string name="gpx_import_title_static_maps">Shrani statične zemljevide</string>
+    <string name="gpx_import_title_reading_file">Branje datoteke</string>
+    <string name="gpx_import_title">Uvozi GPX</string>
+    <string name="gpx_import_title_caches_imported">Rezultat</string>
+    <string name="gpx_import_title_caches_import_failed">Uvažanje spodletelo</string>
+    <string name="gpx_import_error_io">Datoteke ni bilo mogoče prebrati</string>
+    <string name="gpx_import_error_parser">Datoteka ni v pravem formatu</string>
+    <string name="gpx_import_error_unexpected">Neznana napaka</string>
+    <string name="gpx_import_confirm">Ali želite uvoziti GPX datoteko v c:geo?</string>
+    <string name="gpx_import_canceled">Preklican GPX uvoz</string>
+    <string name="gpx_import_delete_title">Izbriši datoteko</string>
+    <string name="gpx_import_delete_message">Ali želite izbrisati %s?</string>
+
+    <!-- map file select -->
+    <string name="map_file_select_title">Izbiranje datoteke z zemljevidi</string>
+
+    <!-- theme file select -->
+    <!-- import -->
+    <string name="web_import_title">Uvozi iz send2cgeo</string>
+    <string name="web_import_waiting">Čakanje na zaklade iz send2cgeo…</string>
+    <string name="web_downloading">Nalaganje</string>
+    <string name="web_downloaded">naložen</string>
+
+    <!-- popup -->
+    <string name="popup_more">Več informacij</string>
+
+    <!-- waypoint -->
+    <string name="waypoint">Dodatna točka</string>
+    <string name="waypoint_cache_coordinates">Koordinate zaklada</string>
+    <string name="waypoint_custom">Posebno</string>
+    <string name="waypoint_my_coordinates">Moje koordinate</string>
+    <string name="waypoint_bearing">Smer v stopinjah</string>
+    <string name="waypoint_distance">Razdalja</string>
+    <string name="waypoint_name">Ime</string>
+    <string name="waypoint_edit">Uredi</string>
+    <string name="waypoint_delete">Izbriši</string>
+    <string name="waypoint_edit_title">Uredi točko</string>
+    <string name="waypoint_add_title">Dodaj točko</string>
+    <string name="waypoint_note">Komentar</string>
+    <string name="waypoint_visited">Obiskano</string>
+    <string name="waypoint_save">Shrani</string>
+    <string name="waypoint_loading">Nalaganje točke…</string>
+    <string name="waypoint_do_not_touch_cache_coordinates">Koordinate zaklada se niso spremenile</string>
+    <string name="waypoint_set_as_cache_coords">Nastavi kot koordinate zaklada v c:geo</string>
+    <string name="waypoint_save_and_modify_on_website">Nastavi kot koordinate zaklada v c:geo in na spletni strani</string>
+    <string name="waypoint_reset_cache_coords">Ponastavi koordinate zaklada</string>
+    <string name="waypoint_coordinates_has_been_reset_on_website">Koordinate zaklada so bile nastavljene na spletni strani.</string>
+    <string name="waypoint_coordinates_being_reset_on_website">Ponastavljanje koordinat zaklada na spletni strani…</string>
+    <string name="waypoint_reset">Ponastavi</string>
+    <string name="waypoint_localy_reset_cache_coords">Ponastavi v c:geo</string>
+    <string name="waypoint_reset_local_and_remote_cache_coords">Ponastavi v c:geo in na spletni strani</string>
+    <string name="waypoint_being_saved">Shranjevanje točke…</string>
+    <string name="waypoint_coordinates_couldnt_be_modified_on_website">Spletna stran ne omogoča spreminjanja koordinat zaklada.</string>
+    <string name="waypoint_coordinates_upload_error">Pri shranjevanju koordinat na spletni strani je prišlo do napake.</string>
+    <string name="waypoint_coordinates_uploading_to_website">Nalaganje koordinat %s na spletno stran.</string>
+    <string name="waypoint_coordinates_has_been_modified_on_website">Koordinate na spletni strani so bile nastavljene na: %s.</string>
+    <string name="waypoint_done">Končano</string>
+    <string name="waypoint_duplicate">Kopiraj</string>
+    <string name="waypoint_copy_of">Kopija od</string>
+    <string name="search_history">Zgodovina</string>
+    <string name="search_history_empty">Ni prejšnjih destinacij</string>
+    <string name="search_remove_destination">Destinacija odstranjena</string>
+    <string name="search_clear_history">Počisti zgodovino</string>
+    <string name="search_history_cleared">Zgodovina izbrisana</string>
+    <string name="waypoint_coordinate_formats_plain">Osnovno</string>
+
+    <!-- visit -->
+    <string name="visit_tweet">Objavi na Twitter</string>
+
+    <!-- map -->
+    <string name="map_map">Zemljevid</string>
+    <string name="map_live">Zemljevid</string>
+    <string name="map_view_map">Pogled zemljevida</string>
+    <string name="map_modes">Možnosti</string>
+    <string name="map_trail_show">Pokaži sled</string>
+    <string name="map_trail_hide">Skrij sled</string>
+    <string name="map_circles_show">Pokaži kroge</string>
+    <string name="map_circles_hide">Skrij kroge</string>
+    <string name="map_theme_builtin">Privzeto</string>
+    <string name="map_theme_select">Izberi temo zemljevida</string>
+    <string name="map_live_enable">Vklopi podatke v živo</string>
+    <string name="map_live_disable">Izklopi podatke v živo</string>
+    <string name="map_static_title">Statični zemljevidi</string>
+    <string name="map_static_loading">Nalaganje statičnih zemljevidov…</string>
+    <string name="map_token_err">Ker je c:geo lahko prenesel samo del podatkov, so lahko koordinate nenatančne.</string>
+    <string name="map_as_list">Pokaži kot seznam</string>
+    <string name="map_strategy">Strategija</string>
+    <string name="map_strategy_title">Strategija nalaganja živih podatkov</string>
+    <string name="map_strategy_fastest">Najhitrejša</string>
+    <string name="map_strategy_fast">Hitra</string>
+    <string name="map_strategy_auto">Odvisna od moje hitrosti</string>
+    <string name="map_strategy_detailed">Podrobna</string>
+    <string name="live_map_notification">Na zemljevidu s podatki v živo koordinate niso nujno točne. Nenatančne koordinate so označene z oranžnim krogom.\nČe odprete podrobnosti zaklada se bodo vedno naložile natančne koordinate\n\nVeč informacij o teh spremembah lahko dobite na strani \"O c:geo\" v aplikaciji.</string>
+    <string name="live_map_note_dontshow">Ne pokaži tega ponovno</string>
+
+    <!-- search -->
+    <string name="search_bar_hint">Iskanje zakladov</string>
+    <string name="search_bar_desc">Zakladi (geo koda, ključne besede), Sledljivčki (TB koda)</string>
+    <string name="search_coordinates">Koordinate</string>
+    <string name="search_coordinates_button">Iskanje po koordinatah</string>
+    <string name="search_address">Naslov</string>
+    <string name="search_address_button">Iskanje po naslovu</string>
+    <string name="search_geo">Geo koda</string>
+    <string name="search_geo_button">Iskanje po geo kodi</string>
+    <string name="search_kw">Ključne besede</string>
+    <string name="search_kw_prefill">Ključna beseda</string>
+    <string name="search_kw_button">Iskanje po ključnih besedah</string>
+    <string name="search_fbu">Zakladi, ki jih je našel uporabnik</string>
+    <string name="search_fbu_prefill">Uporabniško ime</string>
+    <string name="search_fbu_button">Iskanje po uporabniškem imenu</string>
+    <string name="search_hbu">Iskanje po lastniku</string>
+    <string name="search_hbu_prefill">Lastnik</string>
+    <string name="search_hbu_button">Iskanje po imenu lastnika</string>
+    <string name="search_tb">Sledljivčki</string>
+    <string name="search_tb_hint">Koda sledljivčka</string>
+    <string name="search_tb_button">Iskanje sledljivčka</string>
+    <string name="search_destination">Destinacija</string>
+    <string name="search_direction_rel">Iz trenutnega položaja</string>
+    <string name="search_address_started">Iskanje mest</string>
+    <string name="search_address_result">Najdena mesta</string>
+    <string name="search_own_caches">Iskanje mojih zakladov</string>
+
+    <!-- trackable -->
+    <string name="trackable">Sledljivček</string>
+    <string name="trackable_details_loading">Nalaganje podatkov o sledljivčku…</string>
+    <string name="trackable_log_touch">Zapiši najdbo</string>
+    <string name="trackable_browser_open">Odpri v brskalniku</string>
+    <string name="trackable_goal">Cilj</string>
+    <string name="trackable_details">Podrobnosti</string>
+    <string name="trackable_image">Slika</string>
+    <string name="trackable_code">TB koda</string>
+    <string name="trackable_name">Ime</string>
+    <string name="trackable_type">Tip</string>
+    <string name="trackable_owner">Lastnik</string>
+    <string name="trackable_spotted">Lokacija</string>
+    <string name="trackable_spotted_in_cache">V zakladu</string>
+    <string name="trackable_spotted_at_user">V rokah</string>
+    <string name="trackable_spotted_unknown_location">Neznana lokacija</string>
+    <string name="trackable_spotted_owner">Pri lastniku</string>
+    <string name="trackable_origin">Vir</string>
+    <string name="trackable_unknown">Neznano</string>
+    <string name="trackable_released">Objavljen</string>
+    <string name="trackable_distance">Prepotovano</string>
+    <string name="trackable_touch">Dodaj zapis</string>
+
+    <!-- user -->
+    <string name="user_menu_title">Uporabnik</string>
+    <string name="user_menu_view_hidden">Skritih zakladov</string>
+    <string name="user_menu_view_found">Najdenih zakladov</string>
+    <string name="user_menu_open_browser">Odpri profil v brskalniku</string>
+    <string name="user_menu_send_message">Pošlji sporočilo</string>
+
+    <!-- navigation -->
+    <string name="navigation">Navigacija</string>
+    <string name="compass_title">Kompas</string>
+    <string name="use_gps">Uporabi samo GPS</string>
+    <string name="use_compass">Uporabi GPS in kompas</string>
+    <string name="destination_select">Izbira destinacije</string>
+    <string name="destination_set">Nastavi destinacijo</string>
+    <string name="navigation_direct_navigation">Direktna navigacija</string>
+    <string name="navigation_target">Cilj</string>
+
+    <!-- license -->
+    <string name="license">Licenca</string>
+    <string name="license_show">Pokaži licenco</string>
+    <string name="license_dismiss">Zapri</string>
+
+    <!-- helpers -->
+    <string name="helper_calendar_title">c:geo dodatek za koledar</string>
+    <string name="helper_calendar_missing">c:geo dodatek za koledar ni nameščen.</string>
+    <string name="helper_calendar_description">Dodatek vam omogoča izvoz srečanj na vaš koledar.</string>
+    <string name="helper_locus_description">Aplikacija Locus vam omogoča prikaz zemljevidov brez povezave in prenos zemljevidov direktno na napravo (samo rasterski zemljevidi). Omogoča tudi beleženje lokacije, uporavljanje s točkami zanimivosti in drugimi uporabnimi funkcionalnostmi.</string>
+    <string name="helper_gpsstatus_description">Aplikacija GPS Status vam omogoča prikaz radarja in uporabljate jo lahko z aplikacijo c:geo. Omogoča tudi prikaz veliko drugih informacij povezanih z GPS in njihovimi orodji.</string>
+    <string name="helper_bluetoothgps_description">Omogoča vam uporabo zunanjega GPS sprejemnika, ki ga povežete z vašo napravo preko Bluetooth. Na ta način lahko varčujete z baterijo in dobite bolj natančen sprejem.</string>
+    <string name="helper_barcode_description">Aplikacija omogoča skeniranje črtnih kod.</string>
+    <string name="helper_pocketquery_description">Aplikacija vam omogoča ustvarjanje PQ poizvedb na Geocaching.com S temi poizvedbami lahko enostavno prenesete zakladke na napravo. Deluje samo na Premium računih.</string>
+
+    <!-- add-ons -->
+    <string name="addon_missing_title">Manjkajoči dodatek</string>
+    <string name="addon_download_prompt">Prenesite iz Google Play.</string>
+
+    <!-- export -->
+    <string name="export">Izvozi</string>
+    <string name="export_exportedto">izvoženo v</string>
+    <string name="export_failed">Izvažanje ni uspelo</string>
+    <string name="export_fieldnotes">Field Notes zapisi</string>
+    <string name="export_fieldnotes_info">Field Notes zapisi bodo izvoženi v mapo /sdcard/field-notes. Ime datoteke bo trenutni datum in čas.</string>
+    <string name="export_fieldnotes_upload">Nalaganje na Geocaching.com</string>
+    <string name="export_fieldnotes_uploading">Nalaganje…</string>
+    <string name="export_fieldnotes_upload_success">Nalaganje na Geocaching.com uspešno</string>
+    <string name="export_fieldnotes_onlynew">Samo od zadnjega izvoza</string>
+    <string name="export_fieldnotes_creating">Ustvarjanje Field Notes zapisov…</string>
+    <string name="export_gpx">GPX</string>
+    <string name="export_gpx_info">Datoteka GPX bo shranjena v mapo %1$s. Ime datoteke bo trenutni datum in čas.</string>
+    <string name="export_gpx_to">Pošlji izvoženo GPX datoteko v</string>
+
+    <!-- GC attributes -->
+    <string name="attribute_dogs_yes">Dovoljen obisk s psom</string>
+    <string name="attribute_dogs_no">Psi niso dovoljeni</string>
+    <string name="attribute_bicycles_yes">Dovoljen obisk s kolesom</string>
+    <string name="attribute_bicycles_no">Kolesa niso dovoljena</string>
+    <string name="attribute_motorcycles_yes">Dovoljen obisk z motorjem</string>
+    <string name="attribute_motorcycles_no">Motorji niso dovoljeni</string>
+    <string name="attribute_quads_yes">Štirikolesniki dovoljeni</string>
+    <string name="attribute_quads_no">Štirikolesniki niso dovoljeni</string>
+    <string name="attribute_jeeps_yes">Terenska vozila dovoljena</string>
+    <string name="attribute_jeeps_no">Terenska vozila niso dovoljena</string>
+    <string name="attribute_snowmobiles_yes">Snežna vozila dovoljena</string>
+    <string name="attribute_snowmobiles_no">Snežna vozila niso dovoljena</string>
+    <string name="attribute_horses_yes">Dovoljen obisk s konji</string>
+    <string name="attribute_horses_no">Konji niso dovoljeni</string>
+    <string name="attribute_campfires_yes">Taborni ogenj dovoljen</string>
+    <string name="attribute_campfires_no">Taborni ogenj ni dovoljen</string>
+    <string name="attribute_rv_yes">Kamp vozila/tovornjaki dovoljeni</string>
+    <string name="attribute_rv_no">Kamp vozila/tovornjaki niso dovoljeni</string>
+    <string name="attribute_kids_yes">Priporočeno za otroke</string>
+    <string name="attribute_kids_no">Ni priporočeno za otroke</string>
+    <string name="attribute_onehour_yes">Vzame manj kot uro</string>
+    <string name="attribute_onehour_no">Vzame več kot uro</string>
+    <string name="attribute_scenic_yes">Lep razgled</string>
+    <string name="attribute_scenic_no">Ni lepega razgleda</string>
+    <string name="attribute_hiking_yes">Konkretna hoja</string>
+    <string name="attribute_hiking_no">Lažja hoja</string>
+    <string name="attribute_climbing_yes">Težje plezanje</string>
+    <string name="attribute_climbing_no">Ni težje plezanje</string>
+    <string name="attribute_wading_yes">Lahko zahteva hojo po vodi</string>
+    <string name="attribute_wading_no">Hoja po vodi ni potrebna</string>
+    <string name="attribute_swimming_yes">Lahko zahteva plavanje</string>
+    <string name="attribute_swimming_no">Plavanje ni potrebno</string>
+    <string name="attribute_available_yes">Dosegljivo v vseh časih</string>
+    <string name="attribute_available_no">Ni dosegljivo v vseh časih</string>
+    <string name="attribute_night_yes">Priporočeno ponoči</string>
+    <string name="attribute_night_no">Ni priporočeno ponoči</string>
+    <string name="attribute_winter_yes">Dosegljivo pozimi</string>
+    <string name="attribute_winter_no">Pozimi ni dosegljivo</string>
+    <string name="attribute_stealth_yes">Bodi neopazen</string>
+    <string name="attribute_stealth_no">Ni potrebe biti neopazen</string>
+    <string name="attribute_firstaid_yes">Potrebuje vzdrževanje</string>
+    <string name="attribute_firstaid_no">Ne potrebuje vzdrževanja</string>
+    <string name="attribute_cow_yes">Živinoreja v bližini</string>
+    <string name="attribute_cow_no">Ni živinoreje v bližini</string>
+    <string name="attribute_field_puzzle_yes">Uganka na terenu</string>
+    <string name="attribute_field_puzzle_no">Ni uganka na terenu</string>
+    <string name="attribute_nightcache_yes">Nočni zaklad</string>
+    <string name="attribute_nightcache_no">Ni nočni zaklad</string>
+    <string name="attribute_parkngrab_yes">Parkiraj in pograbi</string>
+    <string name="attribute_parkngrab_no">Ni parkiraj in pograbi</string>
+    <string name="attribute_abandonedbuilding_yes">Opuščena zgradba v bližini</string>
+    <string name="attribute_abandonedbuilding_no">Ni opuščene zgradbe</string>
+    <string name="attribute_hike_short_yes">Kratka hoja (manj kot 1 km)</string>
+    <string name="attribute_hike_short_no">Ni kratka hoja</string>
+    <string name="attribute_hike_med_yes">Srednja hoja (1 - 10 km)</string>
+    <string name="attribute_hike_med_no">Ni srednja hoja</string>
+    <string name="attribute_hike_long_yes">Daljša hoja (več kot 10 km)</string>
+    <string name="attribute_hike_long_no">Ni daljša hoja</string>
+    <string name="attribute_seasonal_yes">Sezonski dostop</string>
+    <string name="attribute_seasonal_no">Ni sezonski dostop</string>
+    <string name="attribute_touristok_yes">Primerno za turiste</string>
+    <string name="attribute_touristok_no">Ni primerno za turiste</string>
+    <string name="attribute_frontyard_yes">Privatna lastnina</string>
+    <string name="attribute_frontyard_no">Ni privatna lastnina</string>
+    <string name="attribute_teamwork_yes">Zahtevano timsko delo</string>
+    <string name="attribute_teamwork_no">Ni zahtevano timsko delo</string>
+    <string name="attribute_landf_yes">Tura Lost and found</string>
+    <string name="attribute_landf_no">Ni tura Lost and Found</string>
+    <string name="attribute_partnership_yes">Sponzoriran zaklad</string>
+    <string name="attribute_partnership_no">Ni sponzoriran zaklad</string>
+    <string name="attribute_fee_yes">Parkirnina ali vstopnina</string>
+    <string name="attribute_fee_no">Ni parkirnine ali vstopnine</string>
+    <string name="attribute_rappelling_yes">Potrebna plezalna oprema</string>
+    <string name="attribute_rappelling_no">Plezalna oprema ni potrebna</string>
+    <string name="attribute_boat_yes">Potreben čoln</string>
+    <string name="attribute_boat_no">Čoln ni potreben</string>
+    <string name="attribute_scuba_yes">Potrebna potapljaška oprema</string>
+    <string name="attribute_scuba_no">Potapljaška oprema ni potrebna</string>
+    <string name="attribute_flashlight_yes">Potrebna svetilka</string>
+    <string name="attribute_flashlight_no">Svetilka ni potrebna</string>
+    <string name="attribute_uv_yes">Potrebna UV lučka</string>
+    <string name="attribute_uv_no">UV lučka ni potrebna</string>
+    <string name="attribute_snowshoes_yes">Potrebna snežna obutev</string>
+    <string name="attribute_snowshoes_no">Snežna obutev ni potrebna</string>
+    <string name="attribute_skiis_yes">Potrebne smuči</string>
+    <string name="attribute_skiis_no">Smuči niso potrebne</string>
+    <string name="attribute_s_tool_yes">Potrebna posebna orodja</string>
+    <string name="attribute_s_tool_no">Posebna orodja niso potrebna</string>
+    <string name="attribute_wirelessbeacon_yes">Brezžični signal</string>
+    <string name="attribute_wirelessbeacon_no">Ni brezžični signal</string>
+    <string name="attribute_treeclimbing_yes">Potrebno plezanje po drevesih</string>
+    <string name="attribute_treeclimbing_no">Ni potrebno plezanje po drevesih</string>
+    <string name="attribute_poisonoak_yes">Strupene rastilne</string>
+    <string name="attribute_poisonoak_no">Ni strupenih rastlin</string>
+    <string name="attribute_dangerousanimals_yes">Nevarne živali</string>
+    <string name="attribute_dangerousanimals_no">Ni nevarnih živai</string>
+    <string name="attribute_ticks_yes">Klopi</string>
+    <string name="attribute_ticks_no">Ni klopov</string>
+    <string name="attribute_mine_yes">Zapuščeni rudniki</string>
+    <string name="attribute_mine_no">Ni zapuščenih rudnikov</string>
+    <string name="attribute_cliff_yes">Padajoče kamenje / prepad</string>
+    <string name="attribute_cliff_no">Ni prepadov ali padajočih kamnov</string>
+    <string name="attribute_hunting_yes">Lov</string>
+    <string name="attribute_hunting_no">Ni lova</string>
+    <string name="attribute_danger_yes">Nevarno območje</string>
+    <string name="attribute_danger_no">Ni nevarno območje</string>
+    <string name="attribute_thorn_yes">Trnje</string>
+    <string name="attribute_thorn_no">Ni trnja</string>
+    <string name="attribute_wheelchair_yes">Dostopno z invalidskim vozičkom</string>
+    <string name="attribute_wheelchair_no">Ni dostopno z invalidskim vozičkom</string>
+    <string name="attribute_parking_yes">Parkirišče na voljo</string>
+    <string name="attribute_parking_no">Ni parkirišč na voljo</string>
+    <string name="attribute_public_yes">Javni prevoz</string>
+    <string name="attribute_public_no">Ni javnega prevoza</string>
+    <string name="attribute_water_yes">Pitna voda blizu</string>
+    <string name="attribute_water_no">Pitne vode ni blizu</string>
+    <string name="attribute_restrooms_yes">Javne sanitarije blizu</string>
+    <string name="attribute_restrooms_no">Blizu ni javnih sanitarij</string>
+    <string name="attribute_phone_yes">Telefon blizu</string>
+    <string name="attribute_phone_no">Ni telefona blizu</string>
+    <string name="attribute_picnic_yes">Piknik mize blizu</string>
+    <string name="attribute_picnic_no">Piknik miz ni blizu</string>
+    <string name="attribute_camping_yes">Kampiranje je na voljo</string>
+    <string name="attribute_camping_no">Kampiranje ni na voljo</string>
+    <string name="attribute_stroller_yes">Dostopno z otroškim vozičkom</string>
+    <string name="attribute_stroller_no">Ni dostopno z otroškim vozičkom</string>
+    <string name="attribute_fuel_yes">Bencinska črpalka blizu</string>
+    <string name="attribute_fuel_no">Bencinskih črpalk ni blizu</string>
+    <string name="attribute_food_yes">Hrana blizu</string>
+    <string name="attribute_food_no">Hrane ni blizu</string>
+    <string name="attribute_oc_only_yes">Vpis samo na Opencaching</string>
+    <string name="attribute_oc_only_no">Vpis ni samo na Opencaching</string>
+    <string name="attribute_link_only_yes">Samo povezava na drugo spletno stran z zakladi</string>
+    <string name="attribute_link_only_no">Ni samo povezava na drugo spletno stran z zakladi</string>
+    <string name="attribute_letterbox_yes">Letterbox (potrebna štampiljka)</string>
+    <string name="attribute_letterbox_no">Ni letterbox (štampiljka ni potrebna)</string>
+    <string name="attribute_railway_yes">Aktivna železnica blizu</string>
+    <string name="attribute_railway_no">Ni aktivna železnica blizu</string>
+    <string name="attribute_syringe_yes">Prva pomoč na voljo</string>
+    <string name="attribute_syringe_no">Prva pomoč ni na voljo</string>
+    <string name="attribute_swamp_yes">Močvirje ali barje</string>
+    <string name="attribute_swamp_no">Ni močvirje ali barje</string>
+    <string name="attribute_hills_yes">Hribovito območje</string>
+    <string name="attribute_hills_no">Ni hribovito območje</string>
+    <string name="attribute_easy_climbing_yes">Enostavno plezanje</string>
+    <string name="attribute_easy_climbing_no">Ni enostavno plezanje</string>
+    <string name="attribute_poi_yes">Zanimivosti</string>
+    <string name="attribute_poi_no">Ni zanimivosti</string>
+    <string name="attribute_moving_target_yes">Premikajoča tarča</string>
+    <string name="attribute_moving_target_no">Ni premikajoča tarča</string>
+    <string name="attribute_webcam_yes">Spletna kamera</string>
+    <string name="attribute_webcam_no">Ni spletna kamera</string>
+    <string name="attribute_inside_yes">Znotraj zaprtega prostora (stavba, jame, itd.)</string>
+    <string name="attribute_inside_no">Ni znotraj zaprtega prostora</string>
+    <string name="attribute_in_water_yes">V vodi</string>
+    <string name="attribute_in_water_no">Ni v vodi</string>
+    <string name="attribute_no_gps_yes">Brez GPS (letterboxes, usmerjanje s kompasom…)</string>
+    <string name="attribute_no_gps_no">Z GPS</string>
+    <string name="attribute_overnight_yes">Potrebna prenočitev</string>
+    <string name="attribute_overnight_no">Prenočitev ni potrebna</string>
+    <string name="attribute_specific_times_yes">Na voljo samo ob določenih terminih</string>
+    <string name="attribute_specific_times_no">Na voljo ni samo ob določenih terminih</string>
+    <string name="attribute_day_yes">Samo podnevi</string>
+    <string name="attribute_day_no">Ni samo podnevi</string>
+    <string name="attribute_tide_yes">Plima</string>
+    <string name="attribute_tide_no">Ni plime</string>
+    <string name="attribute_all_seasons_yes">Vsi letni časi</string>
+    <string name="attribute_all_seasons_no">Ne vsi letni časi</string>
+    <string name="attribute_breeding_yes">Zaščiteno / živalsko območje</string>
+    <string name="attribute_breeding_no">Ni zaščiteno / živalsko območje</string>
+    <string name="attribute_snow_proof_yes">Skrivališče je odporno snegu</string>
+    <string name="attribute_snow_proof_no">Skrivališče ni odporno snegu</string>
+    <string name="attribute_compass_yes">Kompas</string>
+    <string name="attribute_compass_no">Ni kompasa</string>
+    <string name="attribute_cave_yes">Jamska oprema</string>
+    <string name="attribute_cave_no">Jamska oprema ni potrebna</string>
+    <string name="attribute_aircraft_yes">Letalo</string>
+    <string name="attribute_aircraft_no">Ni letalo</string>
+    <string name="attribute_investigation_yes">Preiskovanje</string>
+    <string name="attribute_investigation_no">Preiskovanje ni potrebno</string>
+    <string name="attribute_puzzle_yes">Uganka</string>
+    <string name="attribute_puzzle_no">Ni uganka</string>
+    <string name="attribute_arithmetic_yes">Aritmetični problem</string>
+    <string name="attribute_arithmetic_no">Ni aritmetični problem</string>
+    <string name="attribute_other_cache_yes">Drug tip zaklada</string>
+    <string name="attribute_other_cache_no">Ni drug tip zaklada</string>
+    <string name="attribute_ask_owner_yes">Vprašaj lastnika za začetne pogoje</string>
+    <string name="attribute_ask_owner_no">Ne vprašaj lastnika za začetne pogoje</string>
+    <string name="attribute_unknown_yes">Neznan atribut</string>
+    <string name="attribute_unknown_no">Ni neznan atribut</string>
+    <string name="attribute_geotour_yes">Del GeoTour ogleda</string>
+    <string name="attribute_geotour_no">Ni del GeoTour ogleda</string>
+
+    <!-- next things -->
+    <string name="legal_note">Za uporabo storitev Geocaching.com morate sprejeti pogoje uporabe na <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeakovi spletni strani</a>.</string>
+    <string name="quote">Za lažji geocaching in bolj lene zakladolovce.</string>
+    <string name="powered_by">carnero</string>
+    <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+    <string name="support">Podpora: <a href="">support@cgeo.org</a></string>
+    <string name="website">Spletna stran: <a href="">cgeo.org</a></string>
+    <string name="facebook">Facebook: <a href="">c:geo stran</a></string>
+    <string name="nutshellmanual">Priročnik: <a href="">c:geo na kratko</a></string>
+    <string name="market">Android: <a href="">c:geo na Google Play</a></string>
+    <string name="about_twitter">Naj <b>c:geo</b> objavi nov status na Twitter, ko objavite nov zapis pri zakladu?</string>
+
+    <!-- status (used via string based resource loading) -->
+    <string name="status_new_release" tools:ignore="UnusedResources">Na voljo je nova različica.\nKliknite za namestitev.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Na voljo je nova dnevna različica.\nKliknite za namestitev.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Na voljo je nova preizkusna različica.\nKliknite za namestitev.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Spremembe na spletni strani Geocaching.com so povzročile, da c:geo ne deluje popolno.\nŽe delamo na tem! Poskusite ponovno čez nekaj časa.</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Spremembe na spletni strani Geocaching.com so povzročile, da zemljevid zakladov ne deluje več.\nŽe delamo na tem! Poskusite ponovno čez nekaj časa.</string>
+
+    <!-- text-to-speech for compass view -->
+    <string name="tts_service">Glasovni kompas</string>
+    <string name="tts_start">Začni glasovno navigacijo</string>
+    <string name="tts_stop">Ustavi glasovno navigacijo</string>
+    <string name="tts_kilometers">%s km</string>
+    <string name="tts_meters">%s m</string>
+    <string name="tts_miles">%s mi</string>
+    <string name="tts_feet">%s ft</string>
+
+    <!-- various -->
+    <string name="clipboard_copy_ok">Skopirano v odložišče</string>
+
+    <plurals name="days_ago">
+        <item quantity="one">Pred %d dnevom</item>
+        <item quantity="two">Pred %d dnevoma</item>
+        <item quantity="few">Pred %d dnevi</item>
+        <item quantity="other">Pred %d dnevi</item>
+    </plurals>
+
+</resources>
