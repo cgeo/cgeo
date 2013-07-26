@@ -137,8 +137,8 @@ class FieldnoteExport extends AbstractExport {
                         if (!onlyNew || onlyNew && log.date > Settings.getFieldnoteExportDate()) {
                             appendFieldNote(fieldNoteBuffer, cache, log);
                         }
-                        publishProgress(++i);
                     }
+                    publishProgress(++i);
                 }
             } catch (final Exception e) {
                 Log.e("FieldnoteExport.ExportTask generation", e);
