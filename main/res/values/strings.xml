@@ -391,6 +391,11 @@
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
     <string name="init_register_oc_de">Authorize c:geo</string>
     <string name="init_reregister_oc_de">Authorize c:geo again</string>
+    <string name="init_oc_pl">Opencaching.pl</string>
+    <string name="settings_activate_oc_pl">Activate</string>
+    <string name="init_oc_pl_description">Authorize c:geo with opencaching.pl to search for caches and access/filter your found caches.</string>
+    <string name="init_register_oc_pl">Authorize c:geo</string>
+    <string name="init_reregister_oc_pl">Authorize c:geo again</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
@@ -534,6 +539,7 @@
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
+    <string name="auth_ocpl">opencaching.pl</string>
     <string name="auth_authorize_oc">Authorize c:geo</string>
     <string name="auth_start_oc">Start authorization</string>
     <string name="auth_again_oc">Start again</string>
