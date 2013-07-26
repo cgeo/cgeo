@@ -10,7 +10,6 @@ import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -136,7 +135,7 @@ public class Geocache implements ICache, IWaypoint {
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
-    private int zoomlevel = Tile.ZOOMLEVEL_MAX + 1;
+    private int zoomlevel = -1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
