@@ -4,5 +4,5 @@
   <string name="app_name">c:geo - agenda (add-on)</string>
   <string name="calendars">Calendriers</string>
   <string name="event_success">Cache évènement ajoutée à l\'agenda</string>
-  <string name="event_fail">Échec d\'ajout de la cache événement à l\'agenda</string>
+  <string name="event_fail">Échec de l\'ajout de la cache évènement à l\'agenda</string>
 </resources>
