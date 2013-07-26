@@ -137,7 +137,7 @@ public class Geocache implements ICache, IWaypoint {
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
-    private int zoomlevel = Tile.ZOOMLEVEL_MAX + 1;
+    private int zoomlevel = Tile.ZOOMLEVEL_MIN - 1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
