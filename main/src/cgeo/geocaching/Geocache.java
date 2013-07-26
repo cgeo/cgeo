@@ -32,6 +32,7 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
@@ -95,17 +96,17 @@ public class Geocache implements ICache, IWaypoint {
      * lazy initialized
      */
     private String description = null;
-    private boolean disabled = false;
-    private boolean archived = false;
-    private boolean premiumMembersOnly = false;
-    private boolean found = false;
-    private boolean favorite = false;
+    private Boolean disabled = null;
+    private Boolean archived = null;
+    private Boolean premiumMembersOnly = null;
+    private Boolean found = null;
+    private Boolean favorite = null;
+    private Boolean onWatchlist = null;
     private int favoritePoints = 0;
     private float rating = 0; // valid ratings are larger than zero
     private int votes = 0;
     private float myVote = 0; // valid ratings are larger than zero
     private int inventoryItems = 0;
-    private boolean onWatchlist = false;
     private final List<String> attributes = new LazyInitializedList<String>() {
         @Override
         public List<String> call() {
@@ -203,15 +204,27 @@ public class Geocache implements ICache, IWaypoint {
             // we want to keep the most recent one instead of getting information from the previously
             // stored data. This is the case for "archived" for example which has been taken out of this
             // list.
-            premiumMembersOnly = other.premiumMembersOnly;
+            if (other.premiumMembersOnly != null) {
+                premiumMembersOnly = other.premiumMembersOnly;
+            }
             reliableLatLon = other.reliableLatLon;
-            found = other.found;
-            disabled = other.disabled;
-            favorite = other.favorite;
-            onWatchlist = other.onWatchlist;
+            if (other.found != null) {
+                found = other.found;
+            }
+            if (other.disabled != null) {
+                disabled = other.disabled;
+            }
+            if (other.favorite != null) {
+                favorite = other.favorite;
+            }
+            if (other.archived != null) {
+                archived = other.archived;
+            }
+            if (other.onWatchlist != null) {
+                onWatchlist = other.onWatchlist;
+            }
             logOffline = other.logOffline;
             finalDefined = other.finalDefined;
-            archived = other.archived;
         }
 
         /*
@@ -374,14 +387,14 @@ public class Geocache implements ICache, IWaypoint {
                 StringUtils.equalsIgnoreCase(name, other.name) &&
                 cacheType == other.cacheType &&
                 size == other.size &&
-                found == other.found &&
-                premiumMembersOnly == other.premiumMembersOnly &&
+                ObjectUtils.equals(found, other.found) &&
+                ObjectUtils.equals(premiumMembersOnly, other.premiumMembersOnly) &&
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
                 (coords != null ? coords.equals(other.coords) : null == other.coords) &&
                 reliableLatLon == other.reliableLatLon &&
-                disabled == other.disabled &&
-                archived == other.archived &&
+                ObjectUtils.equals(disabled, other.disabled) &&
+                ObjectUtils.equals(archived, other.archived) &&
                 listId == other.listId &&
                 StringUtils.equalsIgnoreCase(ownerDisplayName, other.ownerDisplayName) &&
                 StringUtils.equalsIgnoreCase(ownerUserId, other.ownerUserId) &&
@@ -389,9 +402,9 @@ public class Geocache implements ICache, IWaypoint {
                 StringUtils.equalsIgnoreCase(personalNote, other.personalNote) &&
                 StringUtils.equalsIgnoreCase(getShortDescription(), other.getShortDescription()) &&
                 StringUtils.equalsIgnoreCase(getLocation(), other.getLocation()) &&
-                favorite == other.favorite &&
+                ObjectUtils.equals(favorite, other.favorite) &&
                 favoritePoints == other.favoritePoints &&
-                onWatchlist == other.onWatchlist &&
+                ObjectUtils.equals(onWatchlist, other.onWatchlist) &&
                 (hidden != null ? hidden.equals(other.hidden) : null == other.hidden) &&
                 StringUtils.equalsIgnoreCase(guid, other.guid) &&
                 StringUtils.equalsIgnoreCase(getHint(), other.getHint()) &&
@@ -610,21 +623,21 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public boolean isArchived() {
-        return archived;
+        return (archived != null && archived.booleanValue());
     }
 
     @Override
     public boolean isDisabled() {
-        return disabled;
+        return (disabled != null && disabled.booleanValue());
     }
 
     @Override
     public boolean isPremiumMembersOnly() {
-        return premiumMembersOnly;
+        return (premiumMembersOnly != null && premiumMembersOnly.booleanValue());
     }
 
     public void setPremiumMembersOnly(boolean members) {
-        this.premiumMembersOnly = members;
+        this.premiumMembersOnly = Boolean.valueOf(members);
     }
 
     @Override
@@ -775,16 +788,16 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public boolean isFound() {
-        return found;
+        return (found != null && found.booleanValue());
     }
 
     @Override
     public boolean isFavorite() {
-        return favorite;
+        return (favorite != null && favorite.booleanValue());
     }
 
     public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
+        this.favorite = Boolean.valueOf(favorite);
     }
 
     @Override
@@ -976,11 +989,11 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public boolean isOnWatchlist() {
-        return onWatchlist;
+        return (onWatchlist != null && onWatchlist.booleanValue());
     }
 
     public void setOnWatchlist(boolean onWatchlist) {
-        this.onWatchlist = onWatchlist;
+        this.onWatchlist = Boolean.valueOf(onWatchlist);
     }
 
     /**
@@ -1126,15 +1139,15 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
+        this.disabled = Boolean.valueOf(disabled);
     }
 
     public void setArchived(boolean archived) {
-        this.archived = archived;
+        this.archived = Boolean.valueOf(archived);
     }
 
     public void setFound(boolean found) {
-        this.found = found;
+        this.found = Boolean.valueOf(found);
     }
 
     public void setAttributes(List<String> attributes) {
