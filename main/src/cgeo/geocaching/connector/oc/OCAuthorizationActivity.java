@@ -1,42 +1,48 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.network.OAuthAuthorizationActivity;
+import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
-    public OCAuthorizationActivity() {
-        super("www.opencaching.de",
+    final IOCAuthParams authParams;
+
+    public OCAuthorizationActivity(IOCAuthParams authParams) {
+        super(authParams.getSite(),
                 "/okapi/services/oauth/request_token",
                 "/okapi/services/oauth/authorize",
                 "/okapi/services/oauth/access_token",
                 false,
-                cgeoapplication.getInstance().getResources().getString(R.string.oc_de_okapi_consumer_key),
-                cgeoapplication.getInstance().getResources().getString(R.string.oc_de_okapi_consumer_secret));
+                cgeoapplication.getInstance().getResources().getString(authParams.getCKResId()),
+                cgeoapplication.getInstance().getResources().getString(authParams.getCSResId()));
+        this.authParams = authParams;
     }
 
     @Override
-    protected ImmutablePair<String, String> getTempToken() {
-        return Settings.getTempOCDEToken();
+    protected ImmutablePair<String, String> getTempTokens() {
+        return Settings.getTokenPair(authParams.getTempTokenPublicPrefKey(), authParams.getTempTokenSecretPrefKey());
     }
 
     @Override
     protected void setTempTokens(String tokenPublic, String tokenSecret) {
-        Settings.setOCDETempTokens(tokenPublic, tokenSecret);
+        Settings.setTokens(authParams.getTempTokenPublicPrefKey(), tokenPublic, authParams.getTempTokenSecretPrefKey(), tokenSecret);
     }
 
     @Override
     protected void setTokens(String tokenPublic, String tokenSecret, boolean enable) {
-        Settings.setOCDETokens(tokenPublic, tokenSecret, enable);
+        Settings.setTokens(authParams.getTokenPublicPrefKey(), tokenPublic, authParams.getTokenSecretPrefKey(), tokenSecret);
+        if (tokenPublic != null) {
+            Settings.setTokens(authParams.getTempTokenPublicPrefKey(), null, authParams.getTempTokenSecretPrefKey(), null);
+        }
     }
 
     @Override
     protected String getAuthTitle() {
-        return res.getString(R.string.auth_ocde);
+        return res.getString(authParams.getAuthTitelResId());
     }
 
     @Override
@@ -103,5 +109,4 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     protected String getAuthFinish() {
         return res.getString(R.string.auth_finish_oc);
     }
-
 }

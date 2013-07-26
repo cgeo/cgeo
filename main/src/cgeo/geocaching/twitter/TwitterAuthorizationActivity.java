@@ -19,7 +19,7 @@ public class TwitterAuthorizationActivity extends OAuthAuthorizationActivity {
     }
 
     @Override
-    protected ImmutablePair<String, String> getTempToken() {
+    protected ImmutablePair<String, String> getTempTokens() {
         return Settings.getTempToken();
     }
 
