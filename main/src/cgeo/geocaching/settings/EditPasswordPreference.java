@@ -10,7 +10,6 @@ import android.util.AttributeSet;
  * Use it exactly as an EditTextPreference
  *
  * @see SettingsActivity - search for EditPasswordPreference
- * @author koem
  */
 public class EditPasswordPreference extends EditTextPreference {
 

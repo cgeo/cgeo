@@ -4,8 +4,6 @@ package cgeo.geocaching.settings;
 /**
  * provide write-access proxy to settings for testing purposes
  *
- * @author rschuman
- *
  */
 public class TestSettings {
 

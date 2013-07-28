@@ -57,7 +57,6 @@ import java.util.List;
  * guidelines and the <a href="http://developer.android.com/guide/topics/ui/settings.html">Settings API Guide</a> for
  * more information on developing a Settings UI.
  *
- * @author koem (initial author)
  */
 public class SettingsActivity extends PreferenceActivity {
 

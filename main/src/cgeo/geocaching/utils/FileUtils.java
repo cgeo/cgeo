@@ -12,8 +12,6 @@ import java.util.List;
 /**
  * Utility class for files
  *
- * @author rsudev
- *
  */
 public final class FileUtils {
 
