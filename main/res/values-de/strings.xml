@@ -788,6 +788,8 @@
     <string name="map_trail_hide">Spur ausblenden</string>
     <string name="map_circles_show">Kreise anzeigen</string>
     <string name="map_circles_hide">Kreise verbergen</string>
+    <string name="map_mycaches_show">Eigene/Gefundene anzeigen</string>
+    <string name="map_mycaches_hide">Eigene/Gefundene verbergen</string>
     <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Kartendarstellung wählen</string>
     <string name="map_live_enable">Aktualisierung einschalten</string>
