@@ -209,8 +209,7 @@ public class GCMap {
                 cache.setReliableLatLon(false);
                 cache.setGeocode(id);
                 cache.setName(nameCache.get(id));
-                cache.setZoomlevel(tile.getZoomlevel());
-                cache.setCoords(tile.getCoord(xy));
+                cache.setCoords(tile.getCoord(xy), tile.getZoomlevel());
                 if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
                     for (UTFGridPosition singlePos : singlePositions.get(id)) {
                         if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomlevel())) {

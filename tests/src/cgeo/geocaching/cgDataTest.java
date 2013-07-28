@@ -165,8 +165,7 @@ public class cgDataTest extends CGeoTestCase {
         main.setCoords(new Geopoint("N49 44.0 E8 37.0"));
         final Geocache inTileLowZoom = new Geocache();
         inTileLowZoom.setGeocode("GC12346");
-        inTileLowZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"));
-        inTileLowZoom.setZoomlevel(Tile.ZOOMLEVEL_MIN_PERSONALIZED - 5);
+        inTileLowZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 5);
         final Geocache outTile = new Geocache();
         outTile.setGeocode("GC12347");
         outTile.setCoords(new Geopoint(tile.getViewport().getLatitudeMin() - 0.1, tile.getViewport().getLongitudeMin() - 0.1));
@@ -175,8 +174,7 @@ public class cgDataTest extends CGeoTestCase {
         otherConnector.setCoords(new Geopoint("N49 44.0 E8 37.0"));
         final Geocache inTileHighZoom = new Geocache();
         inTileHighZoom.setGeocode("GC12348");
-        inTileHighZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"));
-        inTileHighZoom.setZoomlevel(Tile.ZOOMLEVEL_MIN_PERSONALIZED + 1);
+        inTileHighZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"), Tile.ZOOMLEVEL_MIN_PERSONALIZED + 1);
 
         // put in cache
         cgData.saveCache(main, EnumSet.of(SaveFlag.SAVE_CACHE));

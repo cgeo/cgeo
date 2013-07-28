@@ -119,8 +119,7 @@ public class GeocacheTest extends AndroidTestCase {
         Geocache livemap = new Geocache();
         livemap.setGeocode("GC12345");
         livemap.setType(CacheType.MULTI);
-        livemap.setCoords(new Geopoint(41.0, 9.0));
-        livemap.setZoomlevel(12);
+        livemap.setCoords(new Geopoint(41.0, 9.0), 12);
 
         livemap.gatherMissingFrom(stored);
 
@@ -137,14 +136,12 @@ public class GeocacheTest extends AndroidTestCase {
         Geocache livemapFirst = new Geocache();
         livemapFirst.setGeocode("GC12345");
         livemapFirst.setType(CacheType.TRADITIONAL);
-        livemapFirst.setCoords(new Geopoint(40.0, 8.0));
-        livemapFirst.setZoomlevel(11);
+        livemapFirst.setCoords(new Geopoint(40.0, 8.0), 11);
 
         Geocache livemapSecond = new Geocache();
         livemapSecond.setGeocode("GC12345");
         livemapSecond.setType(CacheType.MULTI);
-        livemapSecond.setCoords(new Geopoint(41.0, 9.0));
-        livemapSecond.setZoomlevel(12);
+        livemapSecond.setCoords(new Geopoint(41.0, 9.0), 12);
 
         livemapSecond.gatherMissingFrom(livemapFirst);
 
@@ -159,14 +156,12 @@ public class GeocacheTest extends AndroidTestCase {
         Geocache livemapFirst = new Geocache();
         livemapFirst.setGeocode("GC12345");
         livemapFirst.setType(CacheType.TRADITIONAL);
-        livemapFirst.setCoords(new Geopoint(40.0, 8.0));
-        livemapFirst.setZoomlevel(12);
+        livemapFirst.setCoords(new Geopoint(40.0, 8.0), 12);
 
         Geocache livemapSecond = new Geocache();
         livemapSecond.setGeocode("GC12345");
         livemapSecond.setType(CacheType.MULTI);
-        livemapSecond.setCoords(new Geopoint(41.0, 9.0));
-        livemapSecond.setZoomlevel(11);
+        livemapSecond.setCoords(new Geopoint(41.0, 9.0), 11);
 
         livemapSecond.gatherMissingFrom(livemapFirst);
 
@@ -180,9 +175,8 @@ public class GeocacheTest extends AndroidTestCase {
 
         Geocache livemap = new Geocache();
         livemap.setGeocode("GC12345");
-        livemap.setCoords(new Geopoint(40.0, 8.0));
+        livemap.setCoords(new Geopoint(40.0, 8.0), 12);
         livemap.setFound(true);
-        livemap.setZoomlevel(12);
 
         Geocache popup = new Geocache();
         popup.setGeocode("GC12345");
@@ -204,8 +198,7 @@ public class GeocacheTest extends AndroidTestCase {
 
         Geocache livemap = new Geocache();
         livemap.setGeocode("GC12345");
-        livemap.setCoords(new Geopoint(40.0, 8.0));
-        livemap.setZoomlevel(12);
+        livemap.setCoords(new Geopoint(40.0, 8.0), 12);
 
         livemap.gatherMissingFrom(bmsearched);
 

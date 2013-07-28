@@ -102,6 +102,7 @@ public class Geocache implements ICache, IWaypoint {
     private Boolean found = null;
     private Boolean favorite = null;
     private Boolean onWatchlist = null;
+    private Boolean logOffline = null;
     private int favoritePoints = 0;
     private float rating = 0; // valid ratings are larger than zero
     private int votes = 0;
@@ -128,7 +129,6 @@ public class Geocache implements ICache, IWaypoint {
     };
     private List<Trackable> inventory = null;
     private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
-    private boolean logOffline = false;
     private boolean userModifiedCoords = false;
     // temporary values
     private boolean statusChecked = false;
@@ -197,46 +197,37 @@ public class Geocache implements ICache, IWaypoint {
             detailed = other.detailed;
             detailedUpdate = other.detailedUpdate;
             coords = other.coords;
-            cacheType = other.cacheType;
+            // merge cache type only if really available from other
+            if (null != other.cacheType && CacheType.UNKNOWN != other.cacheType) {
+                cacheType = other.cacheType;
+            }
             zoomlevel = other.zoomlevel;
             // boolean values must be enumerated here. Other types are assigned outside this if-statement
-            // TODO: check whether a search or a live map systematically returns those, in which case
-            // we want to keep the most recent one instead of getting information from the previously
-            // stored data. This is the case for "archived" for example which has been taken out of this
-            // list.
-            if (other.premiumMembersOnly != null) {
-                premiumMembersOnly = other.premiumMembersOnly;
-            }
             reliableLatLon = other.reliableLatLon;
-            if (other.found != null) {
-                found = other.found;
-            }
-            if (other.disabled != null) {
-                disabled = other.disabled;
-            }
-            if (other.favorite != null) {
-                favorite = other.favorite;
-            }
-            if (other.archived != null) {
-                archived = other.archived;
-            }
-            if (other.onWatchlist != null) {
-                onWatchlist = other.onWatchlist;
-            }
-            logOffline = other.logOffline;
             finalDefined = other.finalDefined;
         }
 
-        /*
-         * No gathering for boolean members if other cache is not-detailed
-         * and does not have information with higher reliability (denoted by zoomlevel)
-         * - found
-         * - own
-         * - disabled
-         * - favorite
-         * - onWatchlist
-         * - logOffline
-         */
+        if (premiumMembersOnly == null) {
+            premiumMembersOnly = other.premiumMembersOnly;
+        }
+        if (found == null) {
+            found = other.found;
+        }
+        if (disabled == null) {
+            disabled = other.disabled;
+        }
+        if (favorite == null) {
+            favorite = other.favorite;
+        }
+        if (archived == null) {
+            archived = other.archived;
+        }
+        if (onWatchlist == null) {
+            onWatchlist = other.onWatchlist;
+        }
+        if (logOffline == null) {
+            logOffline = other.logOffline;
+        }
         if (visitedDate == 0) {
             visitedDate = other.visitedDate;
         }
@@ -421,7 +412,7 @@ public class Geocache implements ICache, IWaypoint {
                 logs == other.logs &&
                 inventory == other.inventory &&
                 logCounts == other.logCounts &&
-                logOffline == other.logOffline &&
+                ObjectUtils.equals(logOffline, other.logOffline) &&
                 finalDefined == other.finalDefined;
     }
 
@@ -496,7 +487,7 @@ public class Geocache implements ICache, IWaypoint {
         if (status) {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
             cgData.saveVisitDate(geocode);
-            logOffline = true;
+            logOffline = Boolean.TRUE;
 
             notifyChange();
         } else {
@@ -932,8 +923,25 @@ public class Geocache implements ICache, IWaypoint {
         return coords;
     }
 
+    /**
+     * Set reliable coordinates
+     *
+     * @param coords
+     */
     public void setCoords(Geopoint coords) {
         this.coords = coords;
+        this.zoomlevel = Tile.ZOOMLEVEL_MAX + 1;
+    }
+
+    /**
+     * Set unreliable coordinates from a certain map zoom level
+     *
+     * @param coords
+     * @param zoomlevel
+     */
+    public void setCoords(Geopoint coords, int zoomlevel) {
+        this.coords = coords;
+        this.zoomlevel = zoomlevel;
     }
 
     /**
@@ -1062,11 +1070,11 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public boolean isLogOffline() {
-        return logOffline;
+        return (logOffline != null && logOffline.booleanValue());
     }
 
     public void setLogOffline(boolean logOffline) {
-        this.logOffline = logOffline;
+        this.logOffline = Boolean.valueOf(logOffline);
     }
 
     public boolean isStatusChecked() {
@@ -1488,10 +1496,6 @@ public class Geocache implements ICache, IWaypoint {
 
     public int getZoomLevel() {
         return this.zoomlevel;
-    }
-
-    public void setZoomlevel(int zoomlevel) {
-        this.zoomlevel = zoomlevel;
     }
 
     @Override
