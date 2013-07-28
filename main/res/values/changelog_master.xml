@@ -10,6 +10,7 @@
       Support of live map, nearby search and online logging\n
     · Support uploading and merging of personal note to gc.com\n
     · Improved input method for editing personal note\n
+    · Toggle hiding of own or found caches directly from live map (map settings)\n
     · Removed help function integration as it is no longer maintained by the author\n
       You can still access it online. Link in \"About c:geo\"\n
     · Added \"Pocket Query Creator\" to the list of useful apps\n
@@ -23,8 +24,14 @@
     · Support smilies also for trackable logs\n
     · Starting Bike navigation for Google navigation added\n
     · Support importing LOC files from waymarking.com\n
+    · Added slovenian translation\n
+    · Support reloading the reCAPTCHA (basic members)\n
+    · Field note export \"since last export\" now uses the last export date from c:geo instead of the gc.com feature\n
+    · Show event date in search results\n
     \n
     <b>Bugfixes:</b>\n
+    · Improved filtering of found caches on live map\n
+    · Do not truncate the date in logbook entries\n
     · Enable GPX import option also on virtual all caches list\n
     · Support GeoTour attribute\n
     · Support of Block Party cache type\n
