@@ -1241,6 +1241,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 final List<Waypoint> waypointsToDisplay = new ArrayList<Waypoint>(waypoints);
                 final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
 
+                // used to reload cache information when a cache has null coords
+                Set<String> cachesToRefresh = new HashSet<String>();
+
                 if (!cachesToDisplay.isEmpty()) {
                     // Only show waypoints for single view or setting
                     // when less than showWaypointsthreshold Caches shown
@@ -1256,10 +1259,23 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                     for (Geocache cache : cachesToDisplay) {
 
-                        if (cache == null || cache.getCoords() == null) {
+                        if (cache == null || cache.getCoords() == null && Settings.isPremiumMember() && Settings.isShowCaptcha()) {
                             continue;
                         }
+                        else if (cache.getCoords() == null) {
+                            Log.w("Cache " + cache.getGeocode() + " has no coords, needs refresh");
+                            cachesToRefresh.add(cache.getGeocode());
+                            continue;
+                        }
+
                         itemsToDisplay.add(getCacheItem(cache));
+                    }
+
+                    // if some caches had null coordinates, remove them to force a refresh and reload map
+                    if (!cachesToRefresh.isEmpty()) {
+                        cgData.removeCaches(cachesToRefresh, EnumSet.of(LoadFlags.RemoveFlag.REMOVE_CACHE));
+                        markersInvalidated = true;
+                        Tile.Cache.clear();
                     }
 
                     overlayCaches.updateItems(itemsToDisplay);
