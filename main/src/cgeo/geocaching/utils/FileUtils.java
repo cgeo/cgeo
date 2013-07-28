@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.os.Handler;
 import android.os.Message;
@@ -64,5 +65,30 @@ public final class FileUtils {
         public abstract boolean isSelected(File file);
 
         public abstract boolean shouldEnd();
+    }
+
+    /**
+     * Create a unique non existing file named like the given file name. If a file with the given name already exists,
+     * add a number as suffix to the file name.<br>
+     * Example: For the file name "file.ext" this will return the first file of the list
+     * <ul>
+     * <li>file.ext</li>
+     * <li>file_2.ext</li>
+     * <li>file_3.ext</li>
+     * </ul>
+     * which does not yet exist.
+     */
+    public static File getUniqueNamedFile(final String baseNameAndPath) {
+        String extension = StringUtils.substringAfterLast(baseNameAndPath, ".");
+        String pathName = StringUtils.substringBeforeLast(baseNameAndPath, ".");
+        int number = 1;
+        while (new File(getNumberedFileName(pathName, extension, number)).exists()) {
+            number++;
+        }
+        return new File(getNumberedFileName(pathName, extension, number));
+    }
+
+    private static String getNumberedFileName(String pathName, String extension, int number) {
+        return pathName + (number > 1 ? "_" + Integer.toString(number) : "") + "." + extension;
     }
 }

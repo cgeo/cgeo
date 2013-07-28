@@ -1,11 +1,12 @@
 package cgeo.geocaching.export;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -106,6 +107,12 @@ class GpxExport extends AbstractExport {
             this.activity = activity;
         }
 
+        private File getExportFile() {
+            final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            final Date now = new Date();
+            return FileUtils.getUniqueNamedFile(Settings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(now) + ".gpx");
+        }
+
         @Override
         protected File doInBackgroundInternal(String[] geocodes) {
             // quick check for being able to write the GPX file
@@ -117,8 +124,7 @@ class GpxExport extends AbstractExport {
 
             setMessage(cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
 
-            final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-            final File exportFile = new File(Settings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(new Date()) + ".gpx");
+            final File exportFile = getExportFile();
             BufferedWriter writer = null;
             try {
                 final File exportLocation = new File(Settings.getGpxExportDir());
