@@ -834,12 +834,15 @@ public class Geocache implements ICache, IWaypoint {
     @Override
     public String getNameForSorting() {
         if (null == nameForSorting) {
-            final MatcherWrapper matcher = new MatcherWrapper(NUMBER_PATTERN, name);
-            if (matcher.find()) {
-                nameForSorting = name.replace(matcher.group(), StringUtils.leftPad(matcher.group(), 6, '0'));
-            }
-            else {
-                nameForSorting = name;
+            nameForSorting = name;
+            // pad each number part to a fixed size of 6 digits, so that numerical sorting becomes equivalent to string sorting
+            MatcherWrapper matcher = new MatcherWrapper(NUMBER_PATTERN, nameForSorting);
+            int start = 0;
+            while (matcher.find(start)) {
+                final String number = matcher.group();
+                nameForSorting = StringUtils.substring(nameForSorting, 0, matcher.start()) + StringUtils.leftPad(number, 6, '0') + StringUtils.substring(nameForSorting, matcher.start() + number.length());
+                start = matcher.start() + Math.max(6, number.length());
+                matcher = new MatcherWrapper(NUMBER_PATTERN, nameForSorting);
             }
         }
         return nameForSorting;

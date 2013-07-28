@@ -206,4 +206,10 @@ public class GeocacheTest extends AndroidTestCase {
         assertEquals("Latitude not merged correctly", 40.0, livemap.getCoords().getLatitude(), 0.1);
         assertEquals("Zoomlevel not merged correctly", 12, livemap.getZoomLevel());
     }
+
+    public static void testNameForSorting() {
+        Geocache cache = new Geocache();
+        cache.setName("GR8 01-01");
+        assertEquals("GR000008 000001-000001", cache.getNameForSorting());
+    }
 }
