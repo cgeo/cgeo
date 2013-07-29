@@ -1056,7 +1056,7 @@
     <item quantity="other">%d Waypoints</item>
   </plurals>
   <plurals name="tts_kilometers">
-    <item quantity="one">%s quilômetro</item>
+    <item quantity="one">%s quilômetros</item>
     <item quantity="other">%s quilômetros</item>
   </plurals>
   <plurals name="tts_meters">
