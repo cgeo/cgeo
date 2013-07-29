@@ -28,6 +28,7 @@
     · Support reloading the reCAPTCHA (basic members)\n
     · Field note export \"since last export\" now uses the last export date from c:geo instead of the gc.com feature\n
     · Show event date in search results\n
+    · Added filter for several distance ranges\n
     \n
     <b>Bugfixes:</b>\n
     · Improved filtering of found caches on live map\n
@@ -37,6 +38,7 @@
     · Support of Block Party cache type\n
     · Support of GPS Adventure Exhibit cache type\n
     · Circles on the map only for physical stages\n
+    · Overlay icons on map sized correctly on highres displays\m
     · Cache archived status not correctly refreshed\n
     · Bad title shown when invoking c:geo from email (import operation)\n
     · Avoid crash when log images is too large\n
@@ -58,5 +60,7 @@
     · Show basic Geokrety information for OC-caches\n
     · Improved the map source selection for offline maps\n
     · Avoid crashes when using the QR-code scanner\n
+    · List sorting kept when returning from cache details\n
+    · Corrected list sorting if cache name contains numbers\n
   </string>
 </resources>
