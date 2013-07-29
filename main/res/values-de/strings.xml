@@ -381,7 +381,7 @@
     
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_activate_gc">Aktivieren</string>
-    <string name="settings_gc_legal_note">Um die Dienste von geocaching.com nutzen zu können, müssen die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert werden.</string>
+    <string name="settings_gc_legal_note">Mit der Benutzung der Dienste von geocaching.com akzeptierst du die Groundspeak-Nutzungsbedingungen (englisch).</string>
     <string name="settings_info_facebook_login_title">Facebook-Login</string>
     <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe …</string>
     <string name="init_oc">Opencaching.de</string>
