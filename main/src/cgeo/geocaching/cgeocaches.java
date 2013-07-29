@@ -1481,8 +1481,8 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         currentLoader.reset();
         ((OfflineGeocacheListLoader) currentLoader).setListId(listId);
         ((OfflineGeocacheListLoader) currentLoader).setSearchCenter(coords);
+        adapter.setComparator(null); // delete current sorting
         currentLoader.startLoading();
-
 
         invalidateOptionsMenuCompatible();
     }

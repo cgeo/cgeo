@@ -6,12 +6,12 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.EventDateComparator;
@@ -645,6 +645,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     }
 
     public void setInitialComparator() {
+        // will be called repeatedly when coming back to the list, therefore check first for an already existing sorting
+        if (cacheComparator != null) {
+            return;
+        }
         CacheComparator comparator = null; // a null comparator will automatically sort by distance
         if (cacheListType == CacheListType.HISTORY) {
             comparator = new VisitComparator();
