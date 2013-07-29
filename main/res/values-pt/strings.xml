@@ -1029,7 +1029,7 @@
   <string name="tts_service">Bússola que fala</string>
   <string name="tts_start">Comece a falar</string>
   <string name="tts_stop">Páre de falar</string>
-  <string name="tts_one_kilometer">um quilómetro</string>
+  <string name="tts_one_kilometer">um quilômetro</string>
   <string name="tts_one_meter">um metro</string>
   <string name="tts_one_mile">uma milha</string>
   <string name="tts_one_foot">um pé</string>
@@ -1056,8 +1056,8 @@
     <item quantity="other">%d Waypoints</item>
   </plurals>
   <plurals name="tts_kilometers">
-    <item quantity="one">%s quilómetro</item>
-    <item quantity="other">%s quilómetro</item>
+    <item quantity="one">%s quilômetro</item>
+    <item quantity="other">%s quilômetros</item>
   </plurals>
   <plurals name="tts_meters">
     <item quantity="one">%s metro</item>
