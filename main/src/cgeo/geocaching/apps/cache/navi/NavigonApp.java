@@ -1,5 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
@@ -12,7 +13,7 @@ class NavigonApp extends AbstractPointNavigationApp {
     private static final String INTENT_EXTRA_KEY_LONGITUDE = "longitude";
 
     NavigonApp() {
-        super("Navigon", INTENT);
+        super(getString(R.string.cache_menu_navigon), INTENT);
     }
 
     @Override

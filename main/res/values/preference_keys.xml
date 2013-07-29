@@ -6,6 +6,7 @@
     <string name="pref_fakekey_basicmembers_screen">fakekey_basicmembers_screen</string>
     <string name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>
     <string name="pref_fakekey_twitter_authorization">fakekey_twitter_authorization</string>
+    <string name="pref_fakekey_navigation_menu_screen">fakekey_navigation_menu_screen</string>
     <string name="pref_connectorGCActive">connectorGCActive</string>
     <string name="pref_username">username</string>
     <string name="pref_password">password</string>
@@ -86,4 +87,23 @@
     <string name="pref_temp_ocde_token_secret">ocde-temp-token-secret</string>
     <string name="pref_temp_ocde_token_public">ocde-temp-token-public</string>
     <string name="pref_fieldnoteExportDate">fieldnoteExportDate</string>
+    <string name="pref_navigation_menu_compass">navigationCompass</string>
+    <string name="pref_navigation_menu_radar">navigationRadar</string>
+    <string name="pref_navigation_menu_internal_map">navigationInternalMap</string>
+    <string name="pref_navigation_menu_static_map">navigationStatic</string>
+    <string name="pref_navigation_menu_static_map_download">navigationStaticDownload</string>
+    <string name="pref_navigation_menu_locus">navigationLocus</string>
+    <string name="pref_navigation_menu_rmaps">navigationRmaps</string>
+    <string name="pref_navigation_menu_google_maps">navigationGoogleMaps</string>
+    <string name="pref_navigation_menu_google_navigation">navigationGoogleNav</string>
+    <string name="pref_navigation_menu_google_streetview">navigationStreetView</string>
+    <string name="pref_navigation_menu_oruxmaps">navigationOruxmaps</string>
+    <string name="pref_navigation_menu_navigon">navigationNavigon</string>
+    <string name="pref_navigation_menu_sygic">navigationSygic</string>
+    <string name="pref_navigation_menu_google_walk">navigationGoogleWalk</string>
+    <string name="pref_navigation_menu_google_bike">navigationGoogleBike</string>
+    <string name="pref_navigation_menu_google_maps_directions">navigationMapsDirections</string>
+    <string name="pref_navigation_menu_cache_beacon">navigationCacheBeacon</string>
+    <string name="pref_navigation_menu_gcc">navigationGcc</string>
+    <string name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
 </resources>

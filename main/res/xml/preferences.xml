@@ -367,7 +367,109 @@
                 android:defaultValue="0" />
 
         </PreferenceCategory>
-        
+
+        <PreferenceCategory 
+            android:title="@string/settings_title_navigation_menu" > 
+	        <PreferenceScreen
+	            android:title="@string/settings_title_navigation_menu"
+	            android:key="@string/pref_fakekey_navigation_menu_screen" >
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_compass"
+	                android:title="@string/compass_title" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_radar"
+	                android:title="@string/cache_menu_radar" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_internal_map"
+	                android:title="@string/cache_menu_map" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_static_map"
+	                android:title="@string/cache_menu_map_static" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_static_map_download"
+	                android:title="@string/cache_menu_download_map_static" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_locus"
+	                android:title="@string/caches_map_locus" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_rmaps"
+	                android:title="@string/cache_menu_rmaps" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_google_maps"
+	                android:title="@string/cache_menu_map_ext" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_google_navigation"
+	                android:title="@string/cache_menu_navigation_drive" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_google_streetview"
+	                android:title="@string/cache_menu_streetview" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_oruxmaps"
+	                android:title="@string/cache_menu_oruxmaps" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_navigon"
+	                android:title="@string/cache_menu_navigon" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_sygic"
+	                android:title="@string/cache_menu_sygic" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_google_walk"
+	                android:title="@string/cache_menu_navigation_walk" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_google_bike"
+	                android:title="@string/cache_menu_navigation_bike" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_google_maps_directions"
+	                android:title="@string/cache_menu_maps_directions" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_cache_beacon"
+	                android:title="@string/cache_menu_cachebeacon" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_gcc"
+	                android:title="@string/cache_menu_gcc" />
+	            <CheckBoxPreference
+	                android:defaultValue="true"
+	                android:enabled="false"
+	                android:key="@string/pref_navigation_menu_where_you_go"
+	                android:title="@string/cache_menu_whereyougo" />
+	        </PreferenceScreen>
+	     </PreferenceCategory>
     </PreferenceScreen>
 
     <PreferenceScreen

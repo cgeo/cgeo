@@ -375,7 +375,8 @@
     <string name="settings_title_basicmembers">Basic Members</string>
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_title_system">System</string>
-
+    <string name="settings_title_navigation_menu">Navigation Menu</string>
+    
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_logging_other">Other Logging Options</string>
     
@@ -653,6 +654,7 @@
     <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps">OruxMaps</string>
     <string name="cache_menu_cachebeacon">Cache Beacon</string>
+    <string name="cache_menu_navigon">Navigon</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>

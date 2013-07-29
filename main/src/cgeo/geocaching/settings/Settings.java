@@ -267,7 +267,7 @@ public final class Settings {
 
     /**
      * Get login and password information.
-     * 
+     *
      * @return a pair either with (login, password) or (empty, empty) if no valid information is stored
      */
     public static ImmutablePair<String, String> getGcLogin() {
@@ -990,6 +990,10 @@ public final class Settings {
 
     public static void setFieldnoteExportDate(final long date) {
         putLong(R.string.pref_fieldnoteExportDate, date);
+    }
+
+    public static boolean isUseNavigationApp(NavigationAppsEnum navApp) {
+        return getBoolean(navApp.preferenceKey, true);
     }
 
 }

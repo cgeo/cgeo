@@ -125,6 +125,7 @@ public class SettingsActivity extends PreferenceActivity {
         initBasicMemberPreferences();
         initSend2CgeoPreferences();
         initServicePreferences();
+        initNavigationMenuPreferences();
 
         for (int k : new int[] { R.string.pref_username, R.string.pref_password,
                 R.string.pref_pass_vote, R.string.pref_signature,
@@ -135,6 +136,17 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_fakekey_preference_backup_info, }) {
             bindSummaryToStringValue(k);
         }
+    }
+
+    private void initNavigationMenuPreferences() {
+        for (NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
+            if (appEnum.app.isInstalled()) {
+                getPreference(appEnum.preferenceKey).setEnabled(true);
+            }
+        }
+        getPreference(R.string.pref_fakekey_basicmembers_screen)
+                .setEnabled(!Settings.isPremiumMember());
+        redrawScreen(R.string.pref_fakekey_navigation_menu_screen);
     }
 
     private void initServicePreferences() {
