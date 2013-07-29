@@ -158,6 +158,11 @@
             android:summary="@string/init_summary_address"
             android:defaultValue="true" />
         <CheckBoxPreference 
+            android:key="@string/pref_plainLogs"
+            android:title="@string/init_plain_logs"
+            android:summary="@string/init_summary_plain_logs"
+            android:defaultValue="false" />
+        <CheckBoxPreference 
             android:key="@string/pref_useenglish"
             android:title="@string/init_useenglish"
             android:summary="@string/init_summary_useenglish"
@@ -208,11 +213,6 @@
             android:key="@string/pref_excludedisabled"
             android:title="@string/init_disabled"
             android:summary="@string/init_summary_disabled"
-            android:defaultValue="false" />
-        <CheckBoxPreference 
-            android:key="@string/pref_plainLogs"
-            android:title="@string/init_plain_logs"
-            android:summary="@string/init_summary_plain_logs"
             android:defaultValue="false" />
 
     </PreferenceScreen>
