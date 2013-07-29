@@ -488,7 +488,7 @@
     <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. Activate it by long pressing the navigation icon next to the title of the cache.</string>
     <string name="init_debug_title">Debug information</string>
     <string name="init_debug_note">c:geo can generate a lot of debugging information. While this information is generally not useful for c:geo users, developers may need you to generate this information in order to analyze a bug. In this case, they will ask you to check the box below and send them the resulting log file.</string>
-    <string name="init_debug">Generate debug information</string>
+    <string name="init_debug">Activate debug log</string>
     <string name="init_dbonsdcard_title">Database location</string>
     <string name="init_dbonsdcard_note">You may store the database of c:geo on your external storage medium. Doing so will save internal memory, but you may lose a bit of performance and c:geo will not work if your SD card isn\'t available.</string>
     <string name="init_dbonsdcard">On external storage</string>
