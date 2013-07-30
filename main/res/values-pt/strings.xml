@@ -441,7 +441,7 @@
   <string name="init_default_navigation_tool_2_description">Aqui define a sua segunda preferida ferramenta de navefação. É activada com clique longo no ícone ao lado do títula da cache.</string>
   <string name="init_debug_title">Informação de depuração</string>
   <string name="init_debug_note">O c:geo consegue gerar muita informação de depuração. Enquanto para os utilizadores esta informação não é muito importante, os desenvolvedores podem precisar para analisar um bug. Neste caso, eles pedem-lhe que marque a caixa de verificação abaixo e lhes envie o ficheiro de log.</string>
-  <string name="init_debug">Gerar informação de depuração</string>
+  <string name="init_debug">Activar depuração</string>
   <string name="init_dbonsdcard_title">Localização da base de dados</string>
   <string name="init_dbonsdcard_note">Pode armazenar a base de dados do c:geo no armazenamento externo. Se o fizer vai poupar memória interna, mas pode perder um pouco de performance e o c:geo pode não funcionar se o armazenamento externo não estiver disponível.</string>
   <string name="init_dbonsdcard">No armazenamento externo</string>
@@ -1056,7 +1056,7 @@
     <item quantity="other">%d Waypoints</item>
   </plurals>
   <plurals name="tts_kilometers">
-    <item quantity="one">%s quilômetro</item>
+    <item quantity="one">%s quilômetros</item>
     <item quantity="other">%s quilômetros</item>
   </plurals>
   <plurals name="tts_meters">

@@ -441,7 +441,7 @@
   <string name="init_default_navigation_tool_2_description">Vous pouvez choisir ici votre deuxième outil de navigation préféré. Il sera activé par un appui long sur l\'icône de navigation situé près du nom de la cache.</string>
   <string name="init_debug_title">Déverminage</string>
   <string name="init_debug_note">c:geo est capable de générer beaucoup d\'informations peu utiles pour des utilisateurs normaux. Cependant, en cas de problème, les développeurs en charge de c:geo peuvent avoir besoin de cette information pour pouvoir l\'identifier. Dans ce cas, ils vous demanderont d\'activer cette option et d\'envoyer les fichiers de journaux.</string>
-  <string name="init_debug">Générer les informations</string>
+  <string name="init_debug">Activer le débogage</string>
   <string name="init_dbonsdcard_title">Emplacement de la base</string>
   <string name="init_dbonsdcard_note">La base de données de c:geo peut être enregistrée sur un support externe. En choisissant cette option, vous récupérerez de l\'espace de stockage sur votre appareil au détriment de performances réduites. c:geo ne fonctionnera pas si votre carte SD est absente.</string>
   <string name="init_dbonsdcard">Base de données sur stockage externe</string>
