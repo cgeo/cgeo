@@ -20,8 +20,9 @@ update_file() {
 
 . "`dirname $0`/globals"
 
-_do git checkout master || die "git checkout master failed."
-_do git pull upstream master || die "git pull upstream master failed."
+echo You must be on an up-to-date master branch to execute this script.
+echo You have 5 seconds to abort with ctrl-c if this is not the case.
+sleep 5
 
 update_file main/res/values/strings.xml /cgeo/strings.xml
 update_file cgeo-calendar/res/values/strings.xml /cgeo-calendar/strings.xml
