@@ -373,6 +373,7 @@
     <string name="settings_title_basicmembers">Basic Member</string>
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_title_system">System</string>
+    <string name="settings_title_navigation_menu">Navigationsmenü</string>
 
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
