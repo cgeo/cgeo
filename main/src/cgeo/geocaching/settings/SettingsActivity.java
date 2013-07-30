@@ -506,20 +506,20 @@ public class SettingsActivity extends PreferenceActivity {
                     text = preference.getContext().getString(R.string.init_backup_last_no);
                 }
                 preference.setSummary(text);
+            }
+            else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
+                // reset log-in status if connector activation was changed
+                cgeoapplication.getInstance().checkLogin = true;
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
-            // reset log-in if gc user or password is changed
             if (isPreference(preference, R.string.pref_username) || isPreference(preference, R.string.pref_password)) {
+                // reset log-in if gc user or password is changed
                 if (Login.isActualLoginStatus()) {
                     Login.logout();
                 }
-                cgeoapplication.getInstance().checkLogin = true;
-            }
-            // reset log-in status if connector activation was changed
-            if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
                 cgeoapplication.getInstance().checkLogin = true;
             }
             return true;
