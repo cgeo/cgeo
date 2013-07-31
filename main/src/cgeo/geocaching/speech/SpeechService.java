@@ -1,8 +1,9 @@
 package cgeo.geocaching.speech;
 
 import cgeo.geocaching.DirectionProvider;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -44,16 +45,18 @@ public class SpeechService extends Service implements OnInitListener {
     GeoDirHandler geoHandler = new GeoDirHandler() {
         @Override
         protected void updateDirection(float newDirection) {
-            direction = DirectionProvider.getDirectionNow(startingActivity, newDirection);
-            directionInitialized = true;
-            updateCompass();
+            if (cgeoapplication.getInstance().currentGeo().getSpeed() <= 5) {
+                direction = DirectionProvider.getDirectionNow(startingActivity, newDirection);
+                directionInitialized = true;
+                updateCompass();
+            }
         }
 
         @Override
         protected void updateGeoData(cgeo.geocaching.IGeoData newGeo) {
             position = newGeo.getCoords();
             positionInitialized = true;
-            if (newGeo.getSpeed() > 5) {
+            if (!Settings.isUseCompass() || newGeo.getSpeed() > 5) {
                 direction = newGeo.getBearing();
                 directionInitialized = true;
             }
@@ -151,7 +154,11 @@ public class SpeechService extends Service implements OnInitListener {
 
         initialized = true;
 
-        geoHandler.startGeoAndDir();
+        if (Settings.isUseCompass()) {
+            geoHandler.startGeoAndDir();
+        } else {
+            geoHandler.startGeo();
+        }
     }
 
     @Override
