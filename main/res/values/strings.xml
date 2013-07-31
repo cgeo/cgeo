@@ -486,6 +486,7 @@
     <string name="init_default_navigation_tool_description">Here you can select your preferred navigation tool.</string>
     <string name="init_default_navigation_tool_select">Select tool</string>
     <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. Activate it by long pressing the navigation icon next to the title of the cache.</string>
+    <string name="init_navigation_menu_description">Here you can select which of the available navigation methods will be shown in the navigation menu for a cache or waypoint. Disabled tools are not installed on this device.</string>
     <string name="init_debug_title">Debug information</string>
     <string name="init_debug_note">c:geo can generate a lot of debugging information. While this information is generally not useful for c:geo users, developers may need you to generate this information in order to analyze a bug. In this case, they will ask you to check the box below and send them the resulting log file.</string>
     <string name="init_debug">Activate debug log</string>

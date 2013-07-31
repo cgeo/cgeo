@@ -370,7 +370,12 @@
 
         <PreferenceCategory 
             android:title="@string/settings_title_navigation_menu" > 
-	        <PreferenceScreen
+            
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_navigation_menu_description" />
+            
+            <PreferenceScreen
 	            android:title="@string/settings_title_navigation_menu"
 	            android:key="@string/pref_fakekey_navigation_menu_screen" >
 	            <CheckBoxPreference
