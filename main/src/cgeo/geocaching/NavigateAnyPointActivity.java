@@ -100,13 +100,13 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             return rowView;
         }
 
-        private void fillViewHolder(ViewHolder viewHolder, Destination loc) {
+        private static void fillViewHolder(ViewHolder viewHolder, Destination loc) {
             String lonString = loc.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE);
             String latString = loc.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE);
 
             viewHolder.longitude.setText(lonString);
             viewHolder.latitude.setText(latString);
-            viewHolder.date.setText(Formatter.formatShortDateTime(getContext(), loc.getDate()));
+            viewHolder.date.setText(Formatter.formatShortDateTime(loc.getDate()));
         }
 
         private LayoutInflater getInflater() {

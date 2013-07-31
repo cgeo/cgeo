@@ -99,13 +99,11 @@ public abstract class Formatter {
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. at 12:35".
      *
-     * @param context
-     *            a Context
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public static String formatShortDateTime(Context context, long date) {
+    public static String formatShortDateTime(long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
     }
 

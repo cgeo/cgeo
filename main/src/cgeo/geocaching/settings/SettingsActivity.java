@@ -480,9 +480,9 @@ public class SettingsActivity extends PreferenceActivity {
 
             if (preference instanceof EditPasswordPreference) {
                 if (StringUtils.isBlank((String) value)) {
-                    preference.setSummary("");
+                    preference.setSummary(StringUtils.EMPTY);
                 } else {
-                    preference.setSummary("\u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022 \u2022");
+                    preference.setSummary(StringUtils.repeat("\u2022 ", 10));
                 }
             } else if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
@@ -500,8 +500,7 @@ public class SettingsActivity extends PreferenceActivity {
                 String text;
                 if (lastBackupFile != null) {
                     text = preference.getContext().getString(R.string.init_backup_last) + " "
-                            + Formatter.formatTime(lastBackupFile.lastModified())
-                            + ", " + Formatter.formatDate(lastBackupFile.lastModified());
+                            + Formatter.formatShortDateTime(lastBackupFile.lastModified());
                 } else {
                     text = preference.getContext().getString(R.string.init_backup_last_no);
                 }
