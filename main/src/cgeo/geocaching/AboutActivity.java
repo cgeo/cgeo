@@ -22,8 +22,8 @@ public class AboutActivity extends AbstractActivity {
     @ViewById(R.id.about_version_string) protected TextView version;
     @ViewById(R.id.contributors) protected TextView contributors;
     @ViewById(R.id.changelog_master) protected TextView changeLogMaster;
-    @ViewById(R.id.changelog_release) protected TextView changeLogRelease;
 
+    @ViewById(R.id.changelog_release) protected TextView changeLogRelease;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO remove this after the theme has been fixed
@@ -79,5 +79,10 @@ public class AboutActivity extends AbstractActivity {
         final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName()));
         marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         startActivity(marketIntent);
+    }
+
+    @Click(R.id.license)
+    public void license() {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.apache.org/licenses/LICENSE-2.0.html")));
     }
 }

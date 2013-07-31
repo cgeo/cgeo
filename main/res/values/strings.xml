@@ -361,7 +361,9 @@
     <string name="about_detail">Details</string>
     <string name="about_donation_more">Donate\ndevelopment</string>
     <string name="about_contributors">Contributors</string>
-
+    <string name="about_license">License</string>
+    <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
+    
     <!-- settings -->
     <string name="settings_title_services">Services</string>
     <string name="settings_title_appearance">Appearance</string>
