@@ -3,7 +3,6 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectMapfileActivity;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -13,7 +12,7 @@ import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
@@ -21,7 +20,6 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -311,39 +309,13 @@ public class SettingsActivity extends PreferenceActivity {
         backup.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                final Context context = preference.getContext();
-                // avoid overwriting an existing backup with an empty database
-                // (can happen directly after reinstalling the app)
-                if (cgData.getAllCachesCount() == 0) {
-                    ActivityMixin.helpDialog(SettingsActivity.this,
-                            context.getString(R.string.init_backup),
-                            context.getString(R.string.init_backup_unnecessary));
-                    return false;
-                }
+                return DatabaseBackupUtils.createBackup(SettingsActivity.this, new Runnable() {
 
-                final ProgressDialog dialog = ProgressDialog.show(context,
-                        context.getString(R.string.init_backup),
-                        context.getString(R.string.init_backup_running), true, false);
-                new Thread() {
                     @Override
                     public void run() {
-                        final String backupFileName = cgData.backupDatabase();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialog.dismiss();
-                                ActivityMixin.helpDialog(SettingsActivity.this,
-                                        context.getString(R.string.init_backup_backup),
-                                        backupFileName != null
-                                                ? context.getString(R.string.init_backup_success)
-                                                        + "\n" + backupFileName
-                                                : context.getString(R.string.init_backup_failed));
-                                VALUE_CHANGE_LISTENER.onPreferenceChange(SettingsActivity.this.getPreference(R.string.pref_fakekey_preference_backup_info), "");
-                            }
-                        });
+                        VALUE_CHANGE_LISTENER.onPreferenceChange(SettingsActivity.this.getPreference(R.string.pref_fakekey_preference_backup_info), "");
                     }
-                }.start();
-                return true;
+                });
             }
         });
 
@@ -351,8 +323,7 @@ public class SettingsActivity extends PreferenceActivity {
         restore.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                ((cgeoapplication) SettingsActivity.this.getApplication())
-                        .restoreDatabase(SettingsActivity.this);
+                DatabaseBackupUtils.restoreDatabase(SettingsActivity.this);
                 return true;
             }
         });
@@ -496,11 +467,10 @@ public class SettingsActivity extends PreferenceActivity {
                                 ? listPreference.getEntries()[index]
                                 : null);
             } else if (getKey(R.string.pref_fakekey_preference_backup_info).equals(preference.getKey())) {
-                File lastBackupFile = cgData.getRestoreFile();
-                String text;
-                if (lastBackupFile != null) {
+                final String text;
+                if (DatabaseBackupUtils.hasBackup()) {
                     text = preference.getContext().getString(R.string.init_backup_last) + " "
-                            + Formatter.formatShortDateTime(lastBackupFile.lastModified());
+                            + DatabaseBackupUtils.getBackupDateTime();
                 } else {
                     text = preference.getContext().getString(R.string.init_backup_last_no);
                 }

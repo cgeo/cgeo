@@ -14,6 +14,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -462,12 +463,12 @@ public class MainActivity extends AbstractActivity {
         builder.create().show();
     }
 
-    void updateCacheCounter() {
+    public void updateCacheCounter() {
         (new CountBubbleUpdateThread()).start();
     }
 
     private void checkRestore() {
-        if (!cgData.isNewlyCreatedDatebase() || null == cgData.getRestoreFile()) {
+        if (!cgData.isNewlyCreatedDatebase() || null == DatabaseBackupUtils.getRestoreFile()) {
             return;
         }
         new AlertDialog.Builder(this)
@@ -479,7 +480,7 @@ public class MainActivity extends AbstractActivity {
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.dismiss();
                         cgData.resetNewlyCreatedDatabase();
-                        app.restoreDatabase(MainActivity.this);
+                        DatabaseBackupUtils.restoreDatabase(MainActivity.this);
                     }
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {

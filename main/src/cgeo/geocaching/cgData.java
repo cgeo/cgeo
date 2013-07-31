@@ -310,17 +310,17 @@ public class cgData {
         database = null;
     }
 
-    private static File getBackupFile() {
+    public static File getBackupFileInternal() {
         return new File(LocalStorage.getStorage(), "cgeo.sqlite");
     }
 
-    public static String backupDatabase() {
+    public static String backupDatabaseInternal() {
         if (!LocalStorage.isExternalStorageAvailable()) {
             Log.w("Database wasn't backed up: no external memory");
             return null;
         }
 
-        final File target = getBackupFile();
+        final File target = getBackupFileInternal();
         closeDb();
         final boolean backupDone = LocalStorage.copy(databasePath(), target);
         init();
@@ -370,18 +370,13 @@ public class cgData {
         return databasePath(Settings.isDbOnSDCard());
     }
 
-    public static File getRestoreFile() {
-        final File fileSourceFile = getBackupFile();
-        return fileSourceFile.exists() ? fileSourceFile : null;
-    }
-
-    public static boolean restoreDatabase() {
+    public static boolean restoreDatabaseInternal() {
         if (!LocalStorage.isExternalStorageAvailable()) {
             Log.w("Database wasn't restored: no external memory");
             return false;
         }
 
-        final File sourceFile = getBackupFile();
+        final File sourceFile = getBackupFileInternal();
         closeDb();
         final boolean restoreDone = LocalStorage.copy(sourceFile, databasePath());
         init();
