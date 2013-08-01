@@ -75,8 +75,11 @@ public final class Settings {
         Log.setDebug(sharedPrefs.getBoolean(getKey(R.string.pref_debug), false));
     }
 
-    // maps
-    private static MapProvider mapProvider = null;
+    /**
+     * Cache the mapsource locally. If that is an offline map source, each request would potentially access the
+     * underlying map file, leading to delays.
+     */
+    private static MapSource mapSource;
 
     private Settings() {
         // this class is not to be instantiated;
@@ -414,10 +417,7 @@ public final class Settings {
     }
 
     public static MapProvider getMapProvider() {
-        if (mapProvider == null) {
-            mapProvider = getMapSource().getMapProvider();
-        }
-        return mapProvider;
+        return getMapSource().getMapProvider();
     }
 
     public static String getMapFile() {
@@ -599,12 +599,15 @@ public final class Settings {
     }
 
     public static MapSource getMapSource() {
+        if (mapSource != null) {
+            return mapSource;
+        }
         final int id = getConvertedMapId();
-        final MapSource map = MapProviderFactory.getMapSource(id);
-        if (map != null) {
+        mapSource = MapProviderFactory.getMapSource(id);
+        if (mapSource != null) {
             // don't use offline maps if the map file is not valid
-            if ((!(map instanceof OfflineMapSource)) || (isValidMapFile())) {
-                return map;
+            if ((!(mapSource instanceof OfflineMapSource)) || (isValidMapFile())) {
+                return mapSource;
             }
         }
         // fallback to first available map
@@ -653,13 +656,12 @@ public final class Settings {
     }
 
     public static void setMapSource(final MapSource newMapSource) {
-        if (!MapProviderFactory.isSameActivity(getMapSource(), newMapSource)) {
-            mapProvider = null;
-        }
         putString(R.string.pref_mapsource, String.valueOf(newMapSource.getNumericalId()));
         if (newMapSource instanceof OfflineMapSource) {
             setMapFile(((OfflineMapSource) newMapSource).getFileName());
         }
+        // cache the value
+        mapSource = newMapSource;
     }
 
     public static void setAnyCoordinates(final Geopoint coords) {

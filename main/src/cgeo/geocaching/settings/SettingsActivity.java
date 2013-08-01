@@ -455,6 +455,15 @@ public class SettingsActivity extends PreferenceActivity {
                 } else {
                     preference.setSummary(StringUtils.repeat("\u2022 ", 10));
                 }
+            } else if (isPreference(preference, R.string.pref_mapsource)) {
+                // reset the cached map source
+                int mapSourceId = Integer.valueOf(stringValue);
+                final MapSource mapSource = MapProviderFactory.getMapSource(mapSourceId);
+                Settings.setMapSource(mapSource);
+                preference.setSummary(mapSource.getName());
+            } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
+                // reset log-in status if connector activation was changed
+                cgeoapplication.getInstance().checkLogin = true;
             } else if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
@@ -475,10 +484,6 @@ public class SettingsActivity extends PreferenceActivity {
                     text = preference.getContext().getString(R.string.init_backup_last_no);
                 }
                 preference.setSummary(text);
-            }
-            else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
-                // reset log-in status if connector activation was changed
-                cgeoapplication.getInstance().checkLogin = true;
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
