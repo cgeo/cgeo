@@ -396,6 +396,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         }
     };
     private AbstractSearchLoader currentLoader;
+    private String newListName = StringUtils.EMPTY;
 
     public cgeocaches() {
         super(true);
@@ -717,7 +718,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_CREATE_LIST:
-                new StoredList.UserInterface(this).promptForListCreation(null);
+                new StoredList.UserInterface(this).promptForListCreation(null, newListName);
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_DROP_LIST:
@@ -927,7 +928,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                         adapter.setSelectMode(false);
                         refreshCurrentList();
                     }
-                }, true, listId);
+                }, true, listId, newListName);
                 break;
             case MENU_STORE_CACHE:
             case MENU_REFRESH:
@@ -1082,7 +1083,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                         public void run(final Integer selectedListId) {
                             refreshStored(caches, selectedListId);
                         }
-                    }, true, StoredList.TEMPORARY_LIST_ID);
+                    }, true, StoredList.TEMPORARY_LIST_ID, newListName);
         } else {
             refreshStored(caches, this.listId);
         }
@@ -1719,13 +1720,13 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 break;
             case KEYWORD:
                 final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
-                title = keyword;
+                rememberTerm(keyword);
                 loader = new KeywordGeocacheListLoader(app, keyword);
                 break;
             case ADDRESS:
                 final String address = extras.getString(Intents.EXTRA_ADDRESS);
                 if (StringUtils.isNotBlank(address)) {
-                    title = address;
+                    rememberTerm(address);
                 } else {
                     title = coords.toString();
                 }
@@ -1738,12 +1739,12 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 break;
             case USERNAME:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);
-                title = username;
+                rememberTerm(username);
                 loader = new UsernameGeocacheListLoader(app, username);
                 break;
             case OWNER:
                 final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
-                title = ownerName;
+                rememberTerm(ownerName);
                 loader = new OwnerGeocacheListLoader(app, ownerName);
                 break;
             case MAP:
@@ -1769,6 +1770,13 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             loader.setRecaptchaHandler(new SearchHandler(this, res, loader));
         }
         return loader;
+    }
+
+    private void rememberTerm(String term) {
+        // set the title of the activity
+        title = term;
+        // and remember this term for potential use in list creation
+        newListName = term;
     }
 
     @Override

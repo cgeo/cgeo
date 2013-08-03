@@ -72,6 +72,10 @@ public final class StoredList {
         }
 
         public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
+            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListId, StringUtils.EMPTY);
+        }
+
+        public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final String newListName) {
             final List<StoredList> lists = getSortedLists();
 
             if (lists == null) {
@@ -106,7 +110,7 @@ public final class StoredList {
                         runAfterwards.run(StoredList.ALL_LIST_ID);
                     } else if (itemId >= lists.size()) {
                         // create new list on the fly
-                        promptForListCreation(runAfterwards);
+                        promptForListCreation(runAfterwards, newListName);
                     }
                     else {
                         if (runAfterwards != null) {
@@ -131,8 +135,8 @@ public final class StoredList {
             return lists;
         }
 
-        public void promptForListCreation(final RunnableWithArgument<Integer> runAfterwards) {
-            handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
+        public void promptForListCreation(final RunnableWithArgument<Integer> runAfterwards, String newListName) {
+            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
 
                 @Override
                 public void run(final String listName) {
