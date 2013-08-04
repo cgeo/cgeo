@@ -183,7 +183,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     public void init() {
         registerForContextMenu(typeButton);
-        typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,10 +190,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             }
         });
 
+        setType(typeSelected);
         dateButton.setOnClickListener(new DateListener());
         setDate(date);
 
-        tweetCheck.setChecked(true);
+        initTwitter();
 
         if (CollectionUtils.isEmpty(possibleLogTypes)) {
             possibleLogTypes = Trackable.getPossibleLogTypes();
@@ -223,7 +223,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     public void setType(LogType type) {
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
+    }
 
+    private void initTwitter() {
+        tweetCheck.setChecked(true);
         if (Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
