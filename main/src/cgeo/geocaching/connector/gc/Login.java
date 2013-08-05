@@ -30,20 +30,22 @@ import java.util.Map;
 
 public abstract class Login {
 
+    private static final String DEFAULT_CUSTOM_DATE_FORMAT = "MM/dd/yyyy";
+
     private final static String ENGLISH = "<a href=\"#\">English&#9660;</a>";
 
     // false = not logged in
     private static boolean actualLoginStatus = false;
-    private static String actualUserName = "";
+    private static String actualUserName = StringUtils.EMPTY;
     private static int actualCachesFound = -1;
-    private static String actualStatus = "";
+    private static String actualStatus = StringUtils.EMPTY;
 
-    private final static Map<String, SimpleDateFormat> gcCustomDateFormats;
+    private final static Map<String, SimpleDateFormat> GC_CUSTOM_DATE_FORMATS;
     public static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
 
     static {
         final String[] formats = new String[] {
-                "MM/dd/yyyy",
+                DEFAULT_CUSTOM_DATE_FORMAT,
                 "yyyy-MM-dd",
                 "yyyy/MM/dd",
                 "dd/MMM/yyyy",
@@ -58,7 +60,7 @@ public abstract class Login {
             map.put(format, new SimpleDateFormat(format, Locale.ENGLISH));
         }
 
-        gcCustomDateFormats = Collections.unmodifiableMap(map);
+        GC_CUSTOM_DATE_FORMATS = Collections.unmodifiableMap(map);
     }
 
     public static StatusCode login() {
@@ -321,14 +323,14 @@ public abstract class Login {
 
         final String trimmed = input.trim();
 
-        if (gcCustomDateFormats.containsKey(format)) {
+        if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
             try {
-                return gcCustomDateFormats.get(format).parse(trimmed);
+                return GC_CUSTOM_DATE_FORMATS.get(format).parse(trimmed);
             } catch (final ParseException e) {
             }
         }
 
-        for (final SimpleDateFormat sdf : gcCustomDateFormats.values()) {
+        for (final SimpleDateFormat sdf : GC_CUSTOM_DATE_FORMATS.values()) {
             try {
                 return sdf.parse(trimmed);
             } catch (final ParseException e) {
@@ -344,11 +346,11 @@ public abstract class Login {
 
     public static SimpleDateFormat getCustomGcDateFormat() {
         final String format = Settings.getGcCustomDate();
-        if (gcCustomDateFormats.containsKey(format)) {
-            return gcCustomDateFormats.get(format);
+        if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
+            return GC_CUSTOM_DATE_FORMATS.get(format);
         }
 
-        return gcCustomDateFormats.get("MM/dd/yyyy");
+        return GC_CUSTOM_DATE_FORMATS.get(DEFAULT_CUSTOM_DATE_FORMAT);
     }
 
     /**

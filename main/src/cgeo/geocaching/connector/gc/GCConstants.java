@@ -127,7 +127,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("<span>Total Records\\D*(\\d+)<");
     public final static Pattern PATTERN_SEARCH_RECAPTCHA = Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>");
     public final static Pattern PATTERN_SEARCH_RECAPTCHACHALLENGE = Pattern.compile("challenge : '([^']+)'");
-    public final static Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<span class=\"small\">([\\d-/]{6,10})</span>");
+    public final static Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td valign=\"top\"[^<]+<span class=\"small\">([^<]+)</span>");
 
     /**
      * Patterns for waypoints
