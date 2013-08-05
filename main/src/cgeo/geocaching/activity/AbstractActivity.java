@@ -2,16 +2,18 @@ package cgeo.geocaching.activity;
 
 import butterknife.Views;
 
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.settings.Settings;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
@@ -112,5 +114,9 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
 
         // initialize the action bar title with the activity title for single source
         ActivityMixin.setTitle(this, getTitle());
+    }
+
+    protected void hideKeyboard() {
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
     }
 }

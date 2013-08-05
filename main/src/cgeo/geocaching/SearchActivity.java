@@ -63,6 +63,7 @@ public class SearchActivity extends AbstractActivity {
         // search query
         final Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            hideKeyboard();
             final String query = intent.getStringExtra(SearchManager.QUERY);
             final boolean keywordSearch = intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH, true);
 
