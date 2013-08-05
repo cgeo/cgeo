@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -19,10 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.ArrayAdapter;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -172,7 +168,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
                     }
                     if (!loaded) {
                         changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, MSG_SEARCH_WHOLE_SD_CARD, Environment.getExternalStorageDirectory().getName()));
-                        listDirs(list, getStorages(), selector, changeWaitDialogHandler);
+                        listDirs(list, LocalStorage.getStorages(), selector, changeWaitDialogHandler);
                     }
                 } else {
                     Log.w("No external media mounted.");
@@ -200,49 +196,6 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
                 FileUtils.listDir(list, dir, selector, feedbackHandler);
             }
         }
-    }
-
-    /*
-     * Get all storages available on the device.
-     * Will include paths like /mnt/sdcard /mnt/usbdisk /mnt/ext_card /mnt/sdcard/ext_card
-     */
-    protected static List<File> getStorages() {
-
-        String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
-        List<File> storages = new ArrayList<File>();
-        storages.add(new File(extStorage));
-        File file = new File("/system/etc/vold.fstab");
-        if (file.canRead()) {
-            FileReader fr = null;
-            BufferedReader br = null;
-            try {
-                fr = new FileReader(file);
-                br = new BufferedReader(fr);
-                String s = br.readLine();
-                while (s != null) {
-                    if (s.startsWith("dev_mount")) {
-                        String[] tokens = StringUtils.split(s);
-                        if (tokens.length >= 3) {
-                            String path = tokens[2]; // mountpoint
-                            if (!extStorage.equals(path)) {
-                                File directory = new File(path);
-                                if (directory.exists() && directory.isDirectory()) {
-                                    storages.add(directory);
-                                }
-                            }
-                        }
-                    }
-                    s = br.readLine();
-                }
-            } catch (IOException e) {
-                Log.e("Could not get additional mount points for user content. " +
-                        "Proceeding with external storage only (" + extStorage + ")");
-            } finally {
-                IOUtils.closeQuietly(fr);
-                IOUtils.closeQuietly(br);
-            }
-        }
-        return storages;
     }
 
     /**

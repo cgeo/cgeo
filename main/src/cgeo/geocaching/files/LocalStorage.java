@@ -14,6 +14,7 @@ import android.os.Environment;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +25,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handle local storage issues on phone and SD card.
@@ -388,5 +391,48 @@ public class LocalStorage {
             }
         };
         return LocalStorage.getStorageDir(geocode).listFiles(filter);
+    }
+
+    /**
+     * Get all storages available on the device.
+     * Will include paths like /mnt/sdcard /mnt/usbdisk /mnt/ext_card /mnt/sdcard/ext_card
+     */
+    public static List<File> getStorages() {
+
+        String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+        List<File> storages = new ArrayList<File>();
+        storages.add(new File(extStorage));
+        File file = new File("/system/etc/vold.fstab");
+        if (file.canRead()) {
+            FileReader fr = null;
+            BufferedReader br = null;
+            try {
+                fr = new FileReader(file);
+                br = new BufferedReader(fr);
+                String s = br.readLine();
+                while (s != null) {
+                    if (s.startsWith("dev_mount")) {
+                        String[] tokens = StringUtils.split(s);
+                        if (tokens.length >= 3) {
+                            String path = tokens[2]; // mountpoint
+                            if (!extStorage.equals(path)) {
+                                File directory = new File(path);
+                                if (directory.exists() && directory.isDirectory()) {
+                                    storages.add(directory);
+                                }
+                            }
+                        }
+                    }
+                    s = br.readLine();
+                }
+            } catch (IOException e) {
+                Log.e("Could not get additional mount points for user content. " +
+                        "Proceeding with external storage only (" + extStorage + ")");
+            } finally {
+                IOUtils.closeQuietly(fr);
+                IOUtils.closeQuietly(br);
+            }
+        }
+        return storages;
     }
 }

@@ -47,7 +47,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     @Override
     protected List<File> getBaseFolders() {
         List<File> folders = new ArrayList<File>();
-        for (File dir : getStorages()) {
+        for (File dir : LocalStorage.getStorages()) {
             folders.add(new File(dir, "mfmaps"));
             folders.add(new File(new File(dir, "Locus"), "mapsVector"));
             folders.add(new File(dir, LocalStorage.cache));
