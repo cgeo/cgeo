@@ -51,15 +51,11 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         }
 
         private String getDefaultFolders() {
-            StringBuilder sb = new StringBuilder();
-            for (File f : getBaseFolders()) {
-                String fName = f.getPath();
-                if (sb.length() > 0) {
-                    sb.append('\n');
-                }
-                sb.append(fName);
+            final ArrayList<String> names = new ArrayList<String>();
+            for (File dir : getExistingBaseFolders()) {
+                names.add(dir.getPath());
             }
-            return sb.toString();
+            return StringUtils.join(names, '\n');
         }
     };
 
@@ -156,14 +152,11 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             try {
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     boolean loaded = false;
-                    for (final File dir : getBaseFolders())
-                    {
-                        if (dir.exists() && dir.isDirectory()) {
-                            FileUtils.listDir(list, dir,selector,changeWaitDialogHandler);
-                            if (!list.isEmpty()) {
-                                loaded = true;
-                                break;
-                            }
+                    for (final File dir : getExistingBaseFolders()) {
+                        FileUtils.listDir(list, dir, selector, changeWaitDialogHandler);
+                        if (!list.isEmpty()) {
+                            loaded = true;
+                            break;
                         }
                     }
                     if (!loaded) {
@@ -212,6 +205,16 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             }
         }
         return false;
+    }
+
+    protected List<File> getExistingBaseFolders() {
+        ArrayList<File> result = new ArrayList<File>();
+        for (final File dir : getBaseFolders()) {
+            if (dir.exists() && dir.isDirectory()) {
+                result.add(dir);
+            }
+        }
+        return result;
     }
 
     protected AbstractFileListActivity(final String extension) {
