@@ -260,7 +260,7 @@
                 android:summary="@string/init_showwaypoint_description"
                 android:selectable="false" />
             <cgeo.geocaching.settings.WpThresholdPreference
-                android:key="@string/pref_gcshowwaypointsthreshold"
+                android:key="@string/pref_showwaypointsthreshold"
                 android:layout="@layout/wp_threshold_preference" />
 
             <CheckBoxPreference 

@@ -37,7 +37,7 @@
     <string name="pref_mapsource">mapsource</string>
     <string name="pref_mapDirectory">mapDirectory</string>
     <string name="pref_renderthemepath">renderthemepath</string>
-    <string name="pref_gcshowwaypointsthreshold">gcshowwaypointsthreshold</string>
+    <string name="pref_showwaypointsthreshold">waypointsthreshold</string>
     <string name="pref_maptrail">maptrail</string>
     <string name="pref_defaultNavigationTool">defaultNavigationTool</string>
     <string name="pref_defaultNavigationTool2">defaultNavigationTool2</string>

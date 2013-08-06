@@ -43,7 +43,7 @@ import java.util.Locale;
  */
 public final class Settings {
 
-    public static final int SHOW_WP_THRESHOLD_DEFAULT = 5;
+    public static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
@@ -138,7 +138,7 @@ public final class Settings {
             e.putBoolean(getKey(R.string.pref_choose_list), old.getBoolean(getKey(R.string.pref_choose_list), false));
             e.putBoolean(getKey(R.string.pref_loaddirectionimg), old.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
             e.putString(getKey(R.string.pref_gccustomdate), old.getString(getKey(R.string.pref_gccustomdate), null));
-            e.putInt(getKey(R.string.pref_gcshowwaypointsthreshold), old.getInt(getKey(R.string.pref_gcshowwaypointsthreshold), 0));
+            e.putInt(getKey(R.string.pref_showwaypointsthreshold), old.getInt(getKey(R.string.pref_showwaypointsthreshold), SHOW_WP_THRESHOLD_DEFAULT));
             e.putString(getKey(R.string.pref_cookiestore), old.getString(getKey(R.string.pref_cookiestore), null));
             e.putBoolean(getKey(R.string.pref_opendetailslastpage), old.getBoolean(getKey(R.string.pref_opendetailslastpage), false));
             e.putInt(getKey(R.string.pref_lastdetailspage), old.getInt(getKey(R.string.pref_lastdetailspage), 1));
@@ -166,7 +166,7 @@ public final class Settings {
             } else if (wpThreshold > SHOW_WP_THRESHOLD_MAX) {
                 wpThreshold = SHOW_WP_THRESHOLD_MAX;
             }
-            e.putInt(getKey(R.string.pref_gcshowwaypointsthreshold), wpThreshold);
+            e.putInt(getKey(R.string.pref_showwaypointsthreshold), wpThreshold);
 
             // KEY_MAP_SOURCE must be string, because it is the key for a ListPreference now
             int ms = sharedPrefs.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT);
@@ -723,11 +723,11 @@ public final class Settings {
      * The Threshold for the showing of child waypoints
      */
     public static int getWayPointsThreshold() {
-        return getInt(R.string.pref_gcshowwaypointsthreshold, SHOW_WP_THRESHOLD_DEFAULT);
+        return getInt(R.string.pref_showwaypointsthreshold, SHOW_WP_THRESHOLD_DEFAULT);
     }
 
     public static void setShowWaypointsThreshold(final int threshold) {
-        putInt(R.string.pref_gcshowwaypointsthreshold, threshold);
+        putInt(R.string.pref_showwaypointsthreshold, threshold);
     }
 
     public static boolean isUseTwitter() {
