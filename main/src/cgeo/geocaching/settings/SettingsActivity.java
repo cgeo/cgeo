@@ -475,7 +475,7 @@ public class SettingsActivity extends PreferenceActivity {
                         index >= 0
                                 ? listPreference.getEntries()[index]
                                 : null);
-            } else if (getKey(R.string.pref_fakekey_preference_backup_info).equals(preference.getKey())) {
+            } else if (isPreference(preference, R.string.pref_fakekey_preference_backup_info)) {
                 final String text;
                 if (DatabaseBackupUtils.hasBackup()) {
                     text = preference.getContext().getString(R.string.init_backup_last) + " "
