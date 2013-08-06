@@ -489,7 +489,7 @@ public class SettingsActivity extends PreferenceActivity {
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
-            if (isPreference(preference, R.string.pref_username) || isPreference(preference, R.string.pref_password)) {
+            if ((isPreference(preference, R.string.pref_username) && Settings.getUsername() != stringValue) || (isPreference(preference, R.string.pref_password) && Settings.getGcLogin().getRight() != stringValue)) {
                 // reset log-in if gc user or password is changed
                 if (Login.isActualLoginStatus()) {
                     Login.logout();
