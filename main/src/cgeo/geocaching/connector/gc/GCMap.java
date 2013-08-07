@@ -209,10 +209,10 @@ public class GCMap {
                 cache.setReliableLatLon(false);
                 cache.setGeocode(id);
                 cache.setName(nameCache.get(id));
-                cache.setCoords(tile.getCoord(xy), tile.getZoomlevel());
+                cache.setCoords(tile.getCoord(xy), tile.getZoomLevel());
                 if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
                     for (UTFGridPosition singlePos : singlePositions.get(id)) {
-                        if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomlevel())) {
+                        if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomLevel())) {
                             break; // cache parsed
                         }
                     }
@@ -295,7 +295,7 @@ public class GCMap {
             final Set<Tile> tiles = Tile.getTilesForViewport(viewport);
 
             if (Settings.isDebug()) {
-                searchResult.setUrl(new StringBuilder().append(tiles.iterator().next().getZoomlevel()).append(Formatter.SEPARATOR).append(searchResult.getUrl()).toString());
+                searchResult.setUrl(new StringBuilder().append(tiles.iterator().next().getZoomLevel()).append(Formatter.SEPARATOR).append(searchResult.getUrl()).toString());
             }
 
             for (Tile tile : tiles) {
@@ -304,7 +304,7 @@ public class GCMap {
                     final Parameters params = new Parameters(
                             "x", String.valueOf(tile.getX()),
                             "y", String.valueOf(tile.getY()),
-                            "z", String.valueOf(tile.getZoomlevel()),
+                            "z", String.valueOf(tile.getZoomLevel()),
                             "ep", "1",
                             "app", "cgeo");
                     if (tokens != null) {
@@ -320,7 +320,7 @@ public class GCMap {
                     } else if (Settings.getCacheType() == CacheType.MYSTERY) {
                         params.put("ect", "9,5,3,6,453,13,1304,137,11,4,2,1858");
                     }
-                    if (tile.getZoomlevel() != 14) {
+                    if (tile.getZoomLevel() != 14) {
                         params.put("_", String.valueOf(System.currentTimeMillis()));
                     }
                     // TODO: other types t.b.d
@@ -358,7 +358,7 @@ public class GCMap {
             }
 
             // Check for vanished found caches
-            if (tiles.iterator().next().getZoomlevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
+            if (tiles.iterator().next().getZoomLevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
                 searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
             }
         }

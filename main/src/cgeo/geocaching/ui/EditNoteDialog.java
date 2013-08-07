@@ -41,7 +41,7 @@ public class EditNoteDialog extends DialogFragment {
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             mEditText.setText(initialNote);
-            initialNote = null;
+            getArguments().remove(ARGUMENT_INITIAL_NOTE);
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

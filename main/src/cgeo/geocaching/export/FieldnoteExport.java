@@ -134,7 +134,7 @@ class FieldnoteExport extends AbstractExport {
                 for (final Geocache cache : caches) {
                     if (cache.isLogOffline()) {
                         final LogEntry log = cgData.loadLogOffline(cache.getGeocode());
-                        if (!onlyNew || onlyNew && log.date > Settings.getFieldnoteExportDate()) {
+                        if (!onlyNew || log.date > Settings.getFieldnoteExportDate()) {
                             appendFieldNote(fieldNoteBuffer, cache, log);
                         }
                     }

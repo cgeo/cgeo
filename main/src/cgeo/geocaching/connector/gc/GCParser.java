@@ -529,9 +529,7 @@ public abstract class GCParser {
         if (result != null) {
             // replace linebreak and paragraph tags
             final String hint = GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
-            if (hint != null) {
-                cache.setHint(StringUtils.replace(hint, "</p>", "").trim());
-            }
+            cache.setHint(StringUtils.replace(hint, "</p>", "").trim());
         }
 
         cache.checkFields();
@@ -1717,7 +1715,7 @@ public abstract class GCParser {
                 try {
                     final Integer ctl = Integer.valueOf(trackableMatcher.group(3));
                     final Integer id = Integer.valueOf(trackableMatcher.group(5));
-                    if (trackCode != null && name != null && ctl != null && id != null) {
+                    if (trackCode != null && ctl != null && id != null) {
                         final TrackableLog entry = new TrackableLog(trackCode, name, id, ctl);
 
                         Log.i("Trackable in inventory (#" + entry.ctl + "/" + entry.id + "): " + entry.trackCode + " - " + entry.name);

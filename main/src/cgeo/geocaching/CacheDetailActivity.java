@@ -243,7 +243,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
             } else if (uriHost.contains("coord.info")) {
-                if (uriPath != null && uriPath.startsWith("/gc")) {
+                if (StringUtils.startsWith(uriPath, "/gc")) {
                     geocode = uriPath.substring(1).toUpperCase(Locale.US);
                 } else {
                     showToast(res.getString(R.string.err_detail_open));
@@ -251,7 +251,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
             } else if (uriHost.contains("opencaching.de")) {
-                if (uriPath != null && uriPath.startsWith("/oc")) {
+                if (StringUtils.startsWith(uriPath, "/oc")) {
                     geocode = uriPath.substring(1).toUpperCase(Locale.US);
                 } else {
                     geocode = uri.getQueryParameter("wp");

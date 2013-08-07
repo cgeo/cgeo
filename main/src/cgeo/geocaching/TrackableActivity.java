@@ -154,7 +154,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 }
             } else if (uriHost.contains("coord.info")) {
                 final String uriPath = uri.getPath().toLowerCase(Locale.US);
-                if (uriPath != null && uriPath.startsWith("/tb")) {
+                if (StringUtils.startsWith(uriPath, "/tb")) {
                     geocode = uriPath.substring(1).toUpperCase(Locale.US);
                     guid = null;
                     id = null;
