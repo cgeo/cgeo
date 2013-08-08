@@ -61,7 +61,21 @@
         description="Changes API key to debug">
     </target>
     
-    <!-- extension targets. Uncomment the ones where you want to do custom work
+	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
+		<classpath>
+		    <pathelement location="./compile-libs/findbugs-ant.jar"/>
+		</classpath>
+	</taskdef>
+
+	<target name="findbugs">
+		<mkdir dir="reports" />
+		<findbugs home="${findbugs.home}" output="xml" outputFile="reports/findbugs.xml">
+			<auxClasspath path="${android.jar}" />
+			<class location="${out.dir}" />
+		</findbugs>
+	</target>
+	
+	<!-- extension targets. Uncomment the ones where you want to do custom work
          in between standard targets -->
     <target name="-pre-build">
         <condition property="build.mode.release" else="false">
