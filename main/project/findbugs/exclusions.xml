@@ -11,4 +11,7 @@
 	        <Class name="~.*cgeo.*"/>
 	    </Not>
 	</Match>
+	<Match>
+	    <Class name="~.*kxml.*"/>
+	</Match>
 </FindBugsFilter>
