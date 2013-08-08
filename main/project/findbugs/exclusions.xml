@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- generated Android resources -->
+	<Match>
+		<Class name="~.*\.R\$.*"/>
+	</Match>
+	
+	<!-- third party code -->
+	<Match>
+	    <Not>
+	        <Class name="~.*cgeo.*"/>
+	    </Not>
+	</Match>
+</FindBugsFilter>
