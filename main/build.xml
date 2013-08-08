@@ -69,6 +69,12 @@
 
 	<target name="findbugs">
 		<mkdir dir="reports" />
+		<gettarget
+			androidJarFileOut="project.target.android.jar"
+		    androidAidlFileOut="project.target.framework.aidl"
+		    bootClassPathOut="project.target.class.path"
+		    targetApiOut="project.target.apilevel"
+		    minSdkVersionOut="project.minSdkVersion" />
 		<findbugs home="${findbugs.home}" output="xml" outputFile="reports/findbugs.xml">
 			<auxClasspath path="${project.target.android.jar}" />
 			<class location="${out.dir}" />
