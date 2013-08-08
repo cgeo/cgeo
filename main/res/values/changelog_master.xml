@@ -62,5 +62,6 @@
     · Avoid crashes when using the QR-code scanner\n
     · List sorting kept when returning from cache details\n
     · Corrected list sorting if cache name contains numbers\n
+    · Set the default \"waypoint shown on live map\" limit to 10 as many users did not recognize this feature\n
   </string>
 </resources>
