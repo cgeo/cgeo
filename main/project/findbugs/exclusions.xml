@@ -14,4 +14,17 @@
 	<Match>
 	    <Class name="~.*kxml.*"/>
 	</Match>
+	
+	<!-- irrelevant findings -->
+	<Match>
+	    <Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
+	</Match>
+	<Match>
+	    <Bug pattern="DM_STRING_CTOR" />
+	    <Or>
+	        <Class name="~.*MatcherWrapper"></Class>
+	        <Class name="~.*TextUtils"></Class>
+	    </Or>
+	</Match>
+		
 </FindBugsFilter>
