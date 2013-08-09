@@ -9,7 +9,7 @@
 // @include        http://www.geocaching.com/seek/nearest*
 // @icon           http://send2.cgeo.org/content/images/logo.png
 // @updateURL      http://send2.cgeo.org/send2cgeo.user.js
-// @version        0.28
+// @version        0.29
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button. The closure
