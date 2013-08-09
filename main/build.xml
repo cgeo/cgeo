@@ -75,7 +75,12 @@
 		    bootClassPathOut="project.target.class.path"
 		    targetApiOut="project.target.apilevel"
 		    minSdkVersionOut="project.minSdkVersion" />
-		<findbugs home="${findbugs.home}" output="xml" outputFile="reports/findbugs.xml" excludefilter="project/findbugs/exclusions.xml">
+		<findbugs 
+			home="${findbugs.home}" 
+			output="xml" 
+			outputFile="reports/findbugs.xml" 
+			excludefilter="project/findbugs/exclusions.xml"
+			effort="max">
 			<auxClasspath path="${project.target.android.jar}" />
 			<class location="${out.dir}" />
 		</findbugs>
