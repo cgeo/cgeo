@@ -34,7 +34,7 @@ s.textContent =  '(' + function() {
         // hide "please wait text" and show iframe
         $('#send2cgeo div').hide();
         // hide box after 3 seconds
-        $(this).show().parent().delay(3000).fadeOut();
+        $(this).css('display', 'block').parent().delay(3000).fadeOut();
       });
   };
 
