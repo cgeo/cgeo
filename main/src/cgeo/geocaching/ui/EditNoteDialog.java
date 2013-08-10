@@ -7,7 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.EditText;
 
@@ -35,8 +35,7 @@ public class EditNoteDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.fragment_edit_note, null);
+        View view = View.inflate(new ContextThemeWrapper(getActivity(), R.style.dark), R.layout.fragment_edit_note, null);
         mEditText = (EditText) view.findViewById(R.id.note);
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
