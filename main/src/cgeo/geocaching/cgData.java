@@ -2995,7 +2995,7 @@ public class cgData {
         for (String geocode : cachedGeocodes) {
             if (connector.canHandle(geocode)) {
                 Geocache geocache = cacheCache.getCacheFromCache(geocode);
-                if (geocache.getZoomLevel() <= maxZoom) {
+                if (geocache.getCoordZoomLevel() <= maxZoom) {
                     boolean found = false;
                     for (Tile tile : tiles) {
                         if (tile.containsPoint(geocache)) {

@@ -217,7 +217,7 @@ public class GCMap {
                         }
                     }
                 } else {
-                    cache.setType(CacheType.UNKNOWN);
+                    cache.setType(CacheType.UNKNOWN, tile.getZoomLevel());
                 }
 
                 boolean exclude = false;

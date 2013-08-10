@@ -118,7 +118,7 @@ public class GeocacheTest extends AndroidTestCase {
 
         Geocache livemap = new Geocache();
         livemap.setGeocode("GC12345");
-        livemap.setType(CacheType.MULTI);
+        livemap.setType(CacheType.MULTI, 12);
         livemap.setCoords(new Geopoint(41.0, 9.0), 12);
 
         livemap.gatherMissingFrom(stored);
@@ -128,7 +128,7 @@ public class GeocacheTest extends AndroidTestCase {
         assertEquals("Type not merged correctly", CacheType.TRADITIONAL, livemap.getType());
         assertEquals("Longitude not merged correctly", 8.0, livemap.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 40.0, livemap.getCoords().getLatitude(), 0.1);
-        assertEquals("Zoomlevel not merged correctly", stored.getZoomLevel(), livemap.getZoomLevel());
+        assertEquals("Zoomlevel not merged correctly", stored.getCoordZoomLevel(), livemap.getCoordZoomLevel());
     }
 
     public static void testMergeLivemapZoomin() {
@@ -148,19 +148,19 @@ public class GeocacheTest extends AndroidTestCase {
         assertEquals("Type not merged correctly", CacheType.MULTI, livemapSecond.getType());
         assertEquals("Longitude not merged correctly", 9.0, livemapSecond.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 41.0, livemapSecond.getCoords().getLatitude(), 0.1);
-        assertEquals("Zoomlevel not merged correctly", 12, livemapSecond.getZoomLevel());
+        assertEquals("Zoomlevel not merged correctly", 12, livemapSecond.getCoordZoomLevel());
     }
 
     public static void testMergeLivemapZoomout() {
 
         Geocache livemapFirst = new Geocache();
         livemapFirst.setGeocode("GC12345");
-        livemapFirst.setType(CacheType.TRADITIONAL);
+        livemapFirst.setType(CacheType.TRADITIONAL, 12);
         livemapFirst.setCoords(new Geopoint(40.0, 8.0), 12);
 
         Geocache livemapSecond = new Geocache();
         livemapSecond.setGeocode("GC12345");
-        livemapSecond.setType(CacheType.MULTI);
+        livemapSecond.setType(CacheType.MULTI, 11);
         livemapSecond.setCoords(new Geopoint(41.0, 9.0), 11);
 
         livemapSecond.gatherMissingFrom(livemapFirst);
@@ -168,7 +168,7 @@ public class GeocacheTest extends AndroidTestCase {
         assertEquals("Type not merged correctly", CacheType.TRADITIONAL, livemapSecond.getType());
         assertEquals("Longitude not merged correctly", 8.0, livemapSecond.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 40.0, livemapSecond.getCoords().getLatitude(), 0.1);
-        assertEquals("Zoomlevel not merged correctly", 12, livemapSecond.getZoomLevel());
+        assertEquals("Zoomlevel not merged correctly", 12, livemapSecond.getCoordZoomLevel());
     }
 
     public static void testMergePopupLivemap() {
@@ -188,7 +188,7 @@ public class GeocacheTest extends AndroidTestCase {
         assertEquals("Longitude not merged correctly", 8.0, popup.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 40.0, popup.getCoords().getLatitude(), 0.1);
         assertTrue("Found not merged correctly", popup.isFound());
-        assertEquals("Zoomlevel not merged correctly", 12, popup.getZoomLevel());
+        assertEquals("Zoomlevel not merged correctly", 12, popup.getCoordZoomLevel());
     }
 
     public static void testMergeLivemapBMSearched() {
@@ -204,7 +204,7 @@ public class GeocacheTest extends AndroidTestCase {
 
         assertEquals("Longitude not merged correctly", 8.0, livemap.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 40.0, livemap.getCoords().getLatitude(), 0.1);
-        assertEquals("Zoomlevel not merged correctly", 12, livemap.getZoomLevel());
+        assertEquals("Zoomlevel not merged correctly", 12, livemap.getCoordZoomLevel());
     }
 
     public static void testNameForSorting() {
