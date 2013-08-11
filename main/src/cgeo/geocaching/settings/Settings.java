@@ -53,14 +53,14 @@ public final class Settings {
     private final static String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
     private final static String keyConsumerSecret = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
-    public enum coordInputFormatEnum {
+    public enum CoordInputFormatEnum {
         Plain,
         Deg,
         Min,
         Sec;
 
-        public static coordInputFormatEnum fromInt(int id) {
-            final coordInputFormatEnum[] values = coordInputFormatEnum.values();
+        public static CoordInputFormatEnum fromInt(int id) {
+            final CoordInputFormatEnum[] values = CoordInputFormatEnum.values();
             if (id < 0 || id >= values.length) {
                 return Min;
             }
@@ -458,11 +458,11 @@ public final class Settings {
         return MapsforgeMapProvider.isValidMapFile(mapFileIn);
     }
 
-    public static coordInputFormatEnum getCoordInputFormat() {
-        return coordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, 0));
+    public static CoordInputFormatEnum getCoordInputFormat() {
+        return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, 0));
     }
 
-    public static void setCoordInputFormat(final coordInputFormatEnum format) {
+    public static void setCoordInputFormat(final CoordInputFormatEnum format) {
         putInt(R.string.pref_coordinputformat, format.ordinal());
     }
 

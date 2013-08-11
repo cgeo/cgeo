@@ -14,7 +14,7 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
-import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
+import cgeo.geocaching.maps.interfaces.OverlayImpl.OverlayType;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -109,14 +109,14 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     @Override
     public PositionOverlay createAddPositionOverlay(Activity activity) {
-        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, overlayType.PositionOverlay);
+        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, OverlayType.PositionOverlay);
         getOverlays().add(ovl);
         return (PositionOverlay) ovl.getBase();
     }
 
     @Override
     public ScaleOverlay createAddScaleOverlay(Activity activity) {
-        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, overlayType.ScaleOverlay);
+        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, OverlayType.ScaleOverlay);
         getOverlays().add(ovl);
         return (ScaleOverlay) ovl.getBase();
     }

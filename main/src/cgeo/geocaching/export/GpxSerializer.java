@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
 
+import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlSerializer;
 
@@ -56,7 +57,7 @@ public final class GpxSerializer {
         this.progressListener = progressListener;
         gpx.setOutput(writer);
 
-        gpx.startDocument("UTF-8", true);
+        gpx.startDocument(CharEncoding.UTF_8, true);
         gpx.setPrefix("", PREFIX_GPX);
         gpx.setPrefix("xsi", PREFIX_XSI);
         gpx.setPrefix("groundspeak", PREFIX_GROUNDSPEAK);

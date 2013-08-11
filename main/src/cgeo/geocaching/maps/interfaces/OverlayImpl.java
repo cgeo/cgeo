@@ -6,7 +6,7 @@ package cgeo.geocaching.maps.interfaces;
  */
 public interface OverlayImpl {
 
-    public enum overlayType {
+    public enum OverlayType {
         PositionOverlay,
         ScaleOverlay
     }

@@ -9,6 +9,8 @@ import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.CharEncoding;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -23,8 +25,9 @@ import android.widget.TextView;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,11 +133,11 @@ class GpxExport extends AbstractExport {
                 final File exportLocation = new File(Settings.getGpxExportDir());
                 exportLocation.mkdirs();
 
-                writer = new BufferedWriter(new FileWriter(exportFile));
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), CharEncoding.UTF_8));
                 new GpxSerializer().writeGPX(allGeocodes, writer, new GpxSerializer.ProgressListener() {
 
                     @Override
-                    public void publishProgress(int countExported) {
+                    public void publishProgress(final int countExported) {
                         ExportTask.this.publishProgress(countExported);
                     }
                 });

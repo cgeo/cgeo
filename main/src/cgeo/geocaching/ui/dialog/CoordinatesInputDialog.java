@@ -4,7 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.Settings.coordInputFormatEnum;
+import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -41,7 +41,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
 
     private CoordinateUpdate cuListener;
 
-    private coordInputFormatEnum currentFormat = null;
+    private CoordInputFormatEnum currentFormat = null;
 
     public CoordinatesInputDialog(final AbstractActivity context, final Geocache cache, final Geopoint gp, final IGeoData geo) {
         super(context, ActivityMixin.getDialogTheme());
@@ -272,7 +272,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
              * formatSec 2/3 2 2 3
              */
 
-            if (currentFormat == coordInputFormatEnum.Plain) {
+            if (currentFormat == CoordInputFormatEnum.Plain) {
                 return;
             }
 
@@ -325,7 +325,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
     }
 
     private boolean calc(final boolean signalError) {
-        if (currentFormat == coordInputFormatEnum.Plain) {
+        if (currentFormat == CoordInputFormatEnum.Plain) {
             try {
                 gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
             } catch (final Geopoint.ParseException e) {
@@ -375,10 +375,10 @@ public class CoordinatesInputDialog extends NoTitleDialog {
         if (editText == eLonDeg || editText == eLatSub || editText == eLonSub) {
             return 3;
         }
-        if ((editText == eLatMin || editText == eLonMin) && currentFormat == coordInputFormatEnum.Deg) {
+        if ((editText == eLatMin || editText == eLonMin) && currentFormat == CoordInputFormatEnum.Deg) {
             return 5;
         }
-        if ((editText == eLatSec || editText == eLonSec) && currentFormat == coordInputFormatEnum.Min) {
+        if ((editText == eLatSec || editText == eLonSec) && currentFormat == CoordInputFormatEnum.Min) {
             return 3;
         }
         return 2;
@@ -402,7 +402,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                 }
             }
 
-            currentFormat = coordInputFormatEnum.fromInt(pos);
+            currentFormat = CoordInputFormatEnum.fromInt(pos);
             Settings.setCoordInputFormat(currentFormat);
             updateGUI();
         }
