@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.settings.Settings;
 
 import android.graphics.Bitmap;
 
@@ -87,19 +87,19 @@ public abstract class IconDecoder {
         if (count > 1) { // 2 pixels need to detect same type and we say good to go
             switch (type) {
                 case CT_TRADITIONAL:
-                    cache.setType(CacheType.TRADITIONAL);
+                    cache.setType(CacheType.TRADITIONAL, zoomlevel);
                     return true;
                 case CT_MULTI:
-                    cache.setType(CacheType.MULTI);
+                    cache.setType(CacheType.MULTI, zoomlevel);
                     return true;
                 case CT_MYSTERY:
-                    cache.setType(CacheType.MYSTERY);
+                    cache.setType(CacheType.MYSTERY, zoomlevel);
                     return true;
                 case CT_EVENT:
-                    cache.setType(CacheType.EVENT);
+                    cache.setType(CacheType.EVENT, zoomlevel);
                     return true;
                 case CT_EARTH:
-                    cache.setType(CacheType.EARTH);
+                    cache.setType(CacheType.EARTH, zoomlevel);
                     return true;
                 case CT_FOUND:
                     cache.setFound(true);
@@ -108,22 +108,22 @@ public abstract class IconDecoder {
                     cache.setOwnerUserId(Settings.getUsername());
                     return true;
                 case CT_MEGAEVENT:
-                    cache.setType(CacheType.MEGA_EVENT);
+                    cache.setType(CacheType.MEGA_EVENT, zoomlevel);
                     return true;
                 case CT_CITO:
-                    cache.setType(CacheType.CITO);
+                    cache.setType(CacheType.CITO, zoomlevel);
                     return true;
                 case CT_WEBCAM:
-                    cache.setType(CacheType.WEBCAM);
+                    cache.setType(CacheType.WEBCAM, zoomlevel);
                     return true;
                 case CT_WHERIGO:
-                    cache.setType(CacheType.WHERIGO);
+                    cache.setType(CacheType.WHERIGO, zoomlevel);
                     return true;
                 case CT_VIRTUAL:
-                    cache.setType(CacheType.VIRTUAL);
+                    cache.setType(CacheType.VIRTUAL, zoomlevel);
                     return true;
                 case CT_LETTERBOX:
-                    cache.setType(CacheType.LETTERBOX);
+                    cache.setType(CacheType.LETTERBOX, zoomlevel);
                     return true;
             }
         }
