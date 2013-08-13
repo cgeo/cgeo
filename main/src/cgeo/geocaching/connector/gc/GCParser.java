@@ -1129,9 +1129,9 @@ public abstract class GCParser {
      * @return status code to indicate success or failure
      */
     public static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
-        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").build().toString();
+        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
-        final String page = Login.getRequestLogged(uri, new Parameters("LID=", logId));
+        final String page = Login.getRequestLogged(uri, null);
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.uploadLogImage: No data from server");
             return new ImmutablePair<StatusCode, String>(StatusCode.UNKNOWN_ERROR, null);
