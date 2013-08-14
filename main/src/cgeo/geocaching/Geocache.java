@@ -30,6 +30,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.UncertainProperty;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -67,7 +68,7 @@ public class Geocache implements ICache, IWaypoint {
     private String geocode = "";
     private String cacheId = "";
     private String guid = "";
-    private CacheType cacheType = CacheType.UNKNOWN;
+    private UncertainProperty<CacheType> cacheType = new UncertainProperty<CacheType>(CacheType.UNKNOWN, Tile.ZOOMLEVEL_MIN - 1);
     private String name = "";
     private String ownerDisplayName = "";
     private String ownerUserId = "";
@@ -85,7 +86,7 @@ public class Geocache implements ICache, IWaypoint {
      * lazy initialized
      */
     private String location = null;
-    private Geopoint coords = null;
+    private UncertainProperty<Geopoint> coords = new UncertainProperty<Geopoint>(null);
     private boolean reliableLatLon = false;
     private String personalNote = null;
     /**
@@ -137,7 +138,7 @@ public class Geocache implements ICache, IWaypoint {
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
-    private int zoomlevel = Tile.ZOOMLEVEL_MIN - 1;
+    // private int zoomlevel = Tile.ZOOMLEVEL_MIN - 1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -193,15 +194,9 @@ public class Geocache implements ICache, IWaypoint {
         updated = System.currentTimeMillis();
         // if parsed cache is not yet detailed and stored is, the information of
         // the parsed cache will be overwritten
-        if (!detailed && (other.detailed || zoomlevel < other.zoomlevel)) {
+        if (!detailed && other.detailed) {
             detailed = other.detailed;
             detailedUpdate = other.detailedUpdate;
-            coords = other.coords;
-            // merge cache type only if really available from other
-            if (null != other.cacheType && CacheType.UNKNOWN != other.cacheType) {
-                cacheType = other.cacheType;
-            }
-            zoomlevel = other.zoomlevel;
             // boolean values must be enumerated here. Other types are assigned outside this if-statement
             reliableLatLon = other.reliableLatLon;
             finalDefined = other.finalDefined;
@@ -243,8 +238,10 @@ public class Geocache implements ICache, IWaypoint {
         if (StringUtils.isBlank(guid)) {
             guid = other.guid;
         }
-        if (null == cacheType || CacheType.UNKNOWN == cacheType) {
+        if (null == cacheType) {
             cacheType = other.cacheType;
+        } else {
+            cacheType = cacheType.getMergedProperty(other.cacheType);
         }
         if (StringUtils.isBlank(name)) {
             name = other.name;
@@ -281,6 +278,8 @@ public class Geocache implements ICache, IWaypoint {
         }
         if (coords == null) {
             coords = other.coords;
+        } else {
+            coords = coords.getMergedProperty(other.coords);
         }
         // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
         if (personalNote == null) {
@@ -357,9 +356,6 @@ public class Geocache implements ICache, IWaypoint {
 
         if (!reliableLatLon) {
             reliableLatLon = other.reliableLatLon;
-        }
-        if (zoomlevel == -1) {
-            zoomlevel = other.zoomlevel;
         }
 
         return isEqualTo(other);
@@ -456,7 +452,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public boolean isEventCache() {
-        return cacheType.isEvent();
+        return cacheType.getValue().isEvent();
     }
 
     public void logVisit(final IAbstractActivity fromActivity) {
@@ -508,7 +504,7 @@ public class Geocache implements ICache, IWaypoint {
             if (isOwner()) {
                 logTypes.add(LogType.ANNOUNCEMENT);
             }
-        } else if (CacheType.WEBCAM == cacheType) {
+        } else if (CacheType.WEBCAM == cacheType.getValue()) {
             logTypes.add(LogType.WEBCAM_PHOTO_TAKEN);
         } else {
             logTypes.add(LogType.FOUND_IT);
@@ -849,7 +845,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public boolean isVirtual() {
-        return cacheType.isVirtual();
+        return cacheType.getValue().isVirtual();
     }
 
     public boolean showSize() {
@@ -923,7 +919,11 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public Geopoint getCoords() {
-        return coords;
+        return coords.getValue();
+    }
+
+    public int getCoordZoomLevel() {
+        return coords.getCertaintyLevel();
     }
 
     /**
@@ -932,8 +932,7 @@ public class Geocache implements ICache, IWaypoint {
      * @param coords
      */
     public void setCoords(Geopoint coords) {
-        this.coords = coords;
-        this.zoomlevel = Tile.ZOOMLEVEL_MAX + 1;
+        this.coords = new UncertainProperty<Geopoint>(coords);
     }
 
     /**
@@ -943,8 +942,7 @@ public class Geocache implements ICache, IWaypoint {
      * @param zoomlevel
      */
     public void setCoords(Geopoint coords, int zoomlevel) {
-        this.coords = coords;
-        this.zoomlevel = zoomlevel;
+        this.coords = new UncertainProperty<Geopoint>(coords, zoomlevel);
     }
 
     /**
@@ -1189,14 +1187,21 @@ public class Geocache implements ICache, IWaypoint {
      */
     @Override
     public CacheType getType() {
-        return cacheType;
+        return cacheType.getValue();
     }
 
     public void setType(CacheType cacheType) {
         if (cacheType == null || CacheType.ALL == cacheType) {
             throw new IllegalArgumentException("Illegal cache type");
         }
-        this.cacheType = cacheType;
+        this.cacheType = new UncertainProperty<CacheType>(cacheType);
+    }
+
+    public void setType(CacheType cacheType, final int zoomlevel) {
+        if (cacheType == null || CacheType.ALL == cacheType) {
+            throw new IllegalArgumentException("Illegal cache type");
+        }
+        this.cacheType = new UncertainProperty<CacheType>(cacheType, zoomlevel);
     }
 
     public boolean hasDifficulty() {
@@ -1495,10 +1500,6 @@ public class Geocache implements ICache, IWaypoint {
                 ? Math.max(getListId(), StoredList.STANDARD_LIST_ID)
                 : listId;
         storeCache(this, null, newListId, false, handler);
-    }
-
-    public int getZoomLevel() {
-        return this.zoomlevel;
     }
 
     @Override
