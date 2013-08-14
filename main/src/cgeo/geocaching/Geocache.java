@@ -238,11 +238,7 @@ public class Geocache implements ICache, IWaypoint {
         if (StringUtils.isBlank(guid)) {
             guid = other.guid;
         }
-        if (null == cacheType) {
-            cacheType = other.cacheType;
-        } else {
-            cacheType = cacheType.getMergedProperty(other.cacheType);
-        }
+        cacheType = UncertainProperty.getMergedProperty(cacheType, other.cacheType);
         if (StringUtils.isBlank(name)) {
             name = other.name;
         }
@@ -276,11 +272,7 @@ public class Geocache implements ICache, IWaypoint {
         if (StringUtils.isBlank(getLocation())) {
             location = other.getLocation();
         }
-        if (coords == null) {
-            coords = other.coords;
-        } else {
-            coords = coords.getMergedProperty(other.coords);
-        }
+        coords = UncertainProperty.getMergedProperty(coords, other.coords);
         // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
         if (personalNote == null) {
             personalNote = other.personalNote;
