@@ -25,8 +25,11 @@ public class UncertainProperty<T> {
     }
 
     public UncertainProperty<T> getMergedProperty(final UncertainProperty<T> other) {
-        if (other == null) {
+        if (null == other || null == other.value) {
             return this;
+        }
+        if (null == this.value) {
+            return other;
         }
         if (other.certaintyLevel > certaintyLevel) {
             return other;
