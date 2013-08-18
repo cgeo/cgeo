@@ -9,6 +9,8 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -122,6 +124,35 @@ public class cgDataTest extends CGeoTestCase {
             assertEquals(1, loadedCache.getInventory().size());
         } finally {
             cgData.removeCache(GEOCODE_CACHE, LoadFlags.REMOVE_ALL);
+        }
+    }
+
+    // Check that loading a cache by case insensitive geo code works correctly (see #3139)
+    public static void testGeocodeCaseInsensitive() {
+
+        final String GEOCODE_CACHE = "TEST";
+        final String upperCase = GEOCODE_CACHE;
+        final String lowerCase = StringUtils.lowerCase(upperCase);
+        assertFalse(upperCase.equals(lowerCase));
+
+        // create cache and trackable
+        final Geocache cache = new Geocache();
+        cache.setGeocode(upperCase);
+        cache.setDetailed(true);
+
+        try {
+            final Geocache oldCache = cgData.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertNull("Database contained old cache!", oldCache);
+
+            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            final Geocache cacheWithOriginalCode = cgData.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertNotNull("Cache was not saved correctly!", cacheWithOriginalCode);
+
+            final Geocache cacheLowerCase = cgData.loadCache(lowerCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertNotNull("Could not find cache by case insensitive geocode", cacheLowerCase);
+
+        } finally {
+            cgData.removeCache(upperCase, LoadFlags.REMOVE_ALL);
         }
     }
 

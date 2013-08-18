@@ -2743,8 +2743,6 @@ public class cgData {
 
     /**
      * checks if this is a newly created database
-     *
-     * @return
      */
     public static boolean isNewlyCreatedDatebase() {
         return newlyCreatedDatabase;
@@ -2757,6 +2755,10 @@ public class cgData {
         newlyCreatedDatabase = false;
     }
 
+    /**
+     * Creates the WHERE clause for matching multiple geocodes. This automatically converts all given codes to
+     * UPPERCASE.
+     */
     private static StringBuilder whereGeocodeIn(Set<String> geocodes) {
         final StringBuilder where = new StringBuilder();
 
@@ -2766,7 +2768,7 @@ public class cgData {
                 if (all.length() > 0) {
                     all.append(',');
                 }
-                all.append(DatabaseUtils.sqlEscapeString(geocode));
+                all.append(DatabaseUtils.sqlEscapeString(StringUtils.upperCase(geocode)));
             }
 
             where.append("geocode in (").append(all).append(')');
