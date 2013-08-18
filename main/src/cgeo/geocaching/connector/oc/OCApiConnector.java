@@ -27,11 +27,13 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
     private final String cK;
     private final ApiSupport apiSupport;
+    private final String licenseString;
 
-    public OCApiConnector(String name, String host, String prefix, String cK, ApiSupport apiSupport) {
+    public OCApiConnector(String name, String host, String prefix, String cK, String licenseString, ApiSupport apiSupport) {
         super(name, host, prefix);
         this.cK = cK;
         this.apiSupport = apiSupport;
+        this.licenseString = licenseString;
     }
 
     public void addAuthentication(final Parameters params) {
@@ -41,7 +43,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     @Override
     public String getLicenseText(final Geocache cache) {
         // NOT TO BE TRANSLATED
-        return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, CC-BY-NC-ND, alle Logeinträge © jeweiliger Autor";
+        return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, " + licenseString;
     }
 
     @Override
@@ -77,4 +79,13 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         return apiSupport;
     }
 
+    @SuppressWarnings("static-method")
+    public int getTokenPublicPrefKeyId() {
+        return 0;
+    }
+
+    @SuppressWarnings("static-method")
+    public int getTokenSecretPrefKeyId() {
+        return 0;
+    }
 }

@@ -5,12 +5,14 @@
     <string name="pref_fakekey_services_screen">fakekey_services_screen</string>
     <string name="pref_fakekey_basicmembers_screen">fakekey_basicmembers_screen</string>
     <string name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>
+    <string name="pref_fakekey_ocpl_authorization">fakekey_ocpl_authorization</string>
     <string name="pref_fakekey_twitter_authorization">fakekey_twitter_authorization</string>
     <string name="pref_fakekey_navigation_menu_screen">fakekey_navigation_menu_screen</string>
     <string name="pref_connectorGCActive">connectorGCActive</string>
     <string name="pref_username">username</string>
     <string name="pref_password">password</string>
     <string name="pref_connectorOCActive">connectorOCActive</string>
+    <string name="pref_connectorOCPLActive">connectorOCPLActive</string>
     <string name="pref_pass_vote">pass-vote</string>
     <string name="pref_twitter">twitter</string>
     <string name="pref_webDeviceName">webDeviceName</string>
@@ -106,4 +108,8 @@
     <string name="pref_navigation_menu_cache_beacon">navigationCacheBeacon</string>
     <string name="pref_navigation_menu_gcc">navigationGcc</string>
     <string name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
+    <string name="pref_ocpl_tokensecret">ocpl_tokensecret</string>
+    <string name="pref_ocpl_tokenpublic">ocpl_tokenpublic</string>
+    <string name="pref_temp_ocpl_token_secret">ocpl-temp-token-secret</string>
+    <string name="pref_temp_ocpl_token_public">ocpl-temp-token-public</string>
 </resources>

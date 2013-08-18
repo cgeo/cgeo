@@ -129,7 +129,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         auth = (TextView) findViewById(R.id.auth_2);
         auth.setText(getAboutAuth2());
 
-        ImmutablePair<String, String> tempToken = getTempToken();
+        ImmutablePair<String, String> tempToken = getTempTokens();
         OAtoken = tempToken.left;
         OAtokenSecret = tempToken.right;
 
@@ -289,7 +289,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
     }
 
-    protected abstract ImmutablePair<String, String> getTempToken();
+    protected abstract ImmutablePair<String, String> getTempTokens();
 
     protected abstract void setTempTokens(String tokenPublic, String tokenSecret);
 

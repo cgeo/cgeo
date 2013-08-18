@@ -31,6 +31,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -610,7 +611,8 @@ final class OkapiClient {
         params.add("langpref", getPreferredLanguage());
 
         if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            OAuth.signOAuth(host, service.methodName, "GET", false, params, Settings.getOCDETokenPublic(), Settings.getOCDETokenSecret(), connector.getCK(), connector.getCS());
+            ImmutablePair<String, String> tokens = Settings.getTokenPair(connector.getTokenPublicPrefKeyId(), connector.getTokenSecretPrefKeyId());
+            OAuth.signOAuth(host, service.methodName, "GET", false, params, tokens.left, tokens.right, connector.getCK(), connector.getCS());
         } else {
             connector.addAuthentication(params);
         }

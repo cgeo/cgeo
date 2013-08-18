@@ -313,47 +313,30 @@ public final class Settings {
         return putString(R.string.pref_memberstatus, memberStatus);
     }
 
-    public static boolean isOCConnectorActive() {
-        return getBoolean(R.string.pref_connectorOCActive, false);
+    public static ImmutablePair<String, String> getTokenPair(final int tokenPublicPrefKey, final int tokenSecretPrefKey) {
+        return new ImmutablePair<String, String>(getString(tokenPublicPrefKey, null), getString(tokenSecretPrefKey, null));
     }
 
-    public static boolean setOCConnectorActive(final boolean isActive) {
-        return putBoolean(R.string.pref_connectorOCActive, isActive);
-    }
-
-    public static String getOCDETokenPublic() {
-        return getString(R.string.pref_ocde_tokenpublic, "");
-    }
-
-    public static String getOCDETokenSecret() {
-        return getString(R.string.pref_ocde_tokensecret, "");
-    }
-
-    public static boolean hasOCDEAuthorization() {
-        return StringUtils.isNotBlank(getOCDETokenPublic())
-                && StringUtils.isNotBlank(getOCDETokenSecret());
-    }
-
-    public static void setOCDETokens(final String tokenPublic,
-            final String tokenSecret, boolean enableOcDe) {
-        putString(R.string.pref_ocde_tokenpublic, tokenPublic);
-        putString(R.string.pref_ocde_tokensecret, tokenSecret);
-        if (tokenPublic != null) {
-            remove(R.string.pref_temp_ocde_token_public);
-            remove(R.string.pref_temp_ocde_token_secret);
+    public static void setTokens(final int tokenPublicPrefKey, final String tokenPublic, final int tokenSecretPrefKey, final String tokenSecret) {
+        if (tokenPublic == null) {
+            remove(tokenPublicPrefKey);
+        } else {
+            putString(tokenPublicPrefKey, tokenPublic);
         }
-        setOCConnectorActive(enableOcDe);
+        if (tokenSecret == null) {
+            remove(tokenSecretPrefKey);
+        } else {
+            putString(tokenSecretPrefKey, tokenSecret);
+        }
     }
 
-    public static void setOCDETempTokens(final String tokenPublic, final String tokenSecret) {
-        putString(R.string.pref_temp_ocde_token_public, tokenPublic);
-        putString(R.string.pref_temp_ocde_token_secret, tokenSecret);
+    public static boolean isOCConnectorActive(int isActivePrefKeyId) {
+        return getBoolean(isActivePrefKeyId, false);
     }
 
-    public static ImmutablePair<String, String> getTempOCDEToken() {
-        String tokenPublic = getString(R.string.pref_temp_ocde_token_public, null);
-        String tokenSecret = getString(R.string.pref_temp_ocde_token_secret, null);
-        return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
+    public static boolean hasOCAuthorization(int tokenPublicPrefKeyId, int tokenSecretPrefKeyId) {
+        return StringUtils.isNotBlank(getString(tokenPublicPrefKeyId, ""))
+                && StringUtils.isNotBlank(getString(tokenSecretPrefKeyId, ""));
     }
 
     public static boolean isGCvoteLogin() {

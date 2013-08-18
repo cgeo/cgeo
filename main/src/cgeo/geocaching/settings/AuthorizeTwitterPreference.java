@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import android.content.Context;
@@ -33,7 +34,7 @@ public class AuthorizeTwitterPreference extends Preference {
                 Intent authIntent = new Intent(preference.getContext(),
                         TwitterAuthorizationActivity.class);
                 activity.startActivityForResult(authIntent,
-                        SettingsActivity.OAUTH_TWITTER_REQUEST);
+                        R.string.pref_fakekey_twitter_authorization);
 
                 return false; // no shared preference has to be changed
             }

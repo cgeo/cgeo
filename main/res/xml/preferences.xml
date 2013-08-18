@@ -74,10 +74,27 @@
                 android:layout="@layout/text_preference"
                 android:text="@string/init_oc_de_description"
                 android:dependency="@string/pref_connectorOCActive" />
-            <cgeo.geocaching.settings.AuthorizeOcDePreference 
+            <cgeo.geocaching.settings.AuthorizeOcPreference
                 android:key="@string/pref_fakekey_ocde_authorization"
                 android:dependency="@string/pref_connectorOCActive" />
             
+        </PreferenceCategory>
+
+        <PreferenceCategory
+            android:title="@string/init_oc_pl" >
+
+            <CheckBoxPreference
+                android:key="@string/pref_connectorOCPLActive"
+                android:title="@string/settings_activate_oc_pl"
+                android:defaultValue="false" />
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_oc_pl_description"
+                android:dependency="@string/pref_connectorOCPLActive" />
+            <cgeo.geocaching.settings.AuthorizeOcPreference
+                android:key="@string/pref_fakekey_ocpl_authorization"
+                android:dependency="@string/pref_connectorOCPLActive" />
+
         </PreferenceCategory>
 
         <PreferenceCategory

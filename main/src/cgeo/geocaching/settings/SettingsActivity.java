@@ -44,6 +44,7 @@ import android.widget.ListAdapter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -60,10 +61,6 @@ public class SettingsActivity extends PreferenceActivity {
 
     private static final String INTENT_GOTO = "GOTO";
     private static final int INTENT_GOTO_SERVICES = 1;
-
-    private static final int DIR_CHOOSER_MAPS_DIRECTORY_REQUEST = 4;
-    static final int OAUTH_OCDE_REQUEST = 5;
-    static final int OAUTH_TWITTER_REQUEST = 6;
 
     private EditText signatureText;
 
@@ -150,6 +147,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     private void initServicePreferences() {
         getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
     }
 
@@ -257,7 +255,7 @@ public class SettingsActivity extends PreferenceActivity {
                     public boolean onPreferenceClick(final Preference preference) {
                         Intent i = new Intent(SettingsActivity.this,
                                 SelectMapfileActivity.class);
-                        startActivityForResult(i, DIR_CHOOSER_MAPS_DIRECTORY_REQUEST);
+                        startActivityForResult(i, R.string.pref_mapDirectory);
                         return false;
                     }
                 });
@@ -381,11 +379,32 @@ public class SettingsActivity extends PreferenceActivity {
         Settings.putString(R.string.pref_webDeviceName, Settings.getWebDeviceName());
     }
 
+    public void setOcAuthTitle(int prefKeyId) {
+        //TODO: Generalize!
+        switch (prefKeyId) {
+            case R.string.pref_fakekey_ocde_authorization:
+                setOCDEAuthTitle();
+                break;
+            case R.string.pref_fakekey_ocpl_authorization:
+                setOCPLAuthTitle();
+                break;
+            default:
+                Log.e(String.format(Locale.ENGLISH, "Invalid key %d in SettingsActivity.setTitle()", prefKeyId));
+        }
+    }
+
     void setOCDEAuthTitle() {
         getPreference(R.string.pref_fakekey_ocde_authorization)
-                .setTitle(getString(Settings.hasOCDEAuthorization()
+                .setTitle(getString(Settings.hasOCAuthorization(R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret)
                         ? R.string.init_reregister_oc_de
                         : R.string.init_register_oc_de));
+    }
+
+    void setOCPLAuthTitle() {
+        getPreference(R.string.pref_fakekey_ocpl_authorization)
+                .setTitle(getString(Settings.hasOCAuthorization(R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret)
+                        ? R.string.init_reregister_oc_pl
+                        : R.string.init_register_oc_pl));
     }
 
     void setTwitterAuthTitle() {
@@ -416,7 +435,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
 
         switch (requestCode) {
-            case DIR_CHOOSER_MAPS_DIRECTORY_REQUEST:
+            case R.string.pref_mapDirectory:
                 if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
                     final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
                     Settings.setMapFile(mapFile);
@@ -428,11 +447,15 @@ public class SettingsActivity extends PreferenceActivity {
                 getPreference(R.string.pref_mapDirectory).setSummary(
                         Settings.getMapFileDirectory());
                 break;
-            case OAUTH_OCDE_REQUEST:
+            case R.string.pref_fakekey_ocde_authorization:
                 setOCDEAuthTitle();
                 redrawScreen(R.string.pref_fakekey_services_screen);
                 break;
-            case OAUTH_TWITTER_REQUEST:
+            case R.string.pref_fakekey_ocpl_authorization:
+                setOCPLAuthTitle();
+                redrawScreen(R.string.pref_fakekey_services_screen);
+                break;
+            case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
                 redrawScreen(R.string.pref_fakekey_services_screen);
                 break;
@@ -462,8 +485,8 @@ public class SettingsActivity extends PreferenceActivity {
                 final MapSource mapSource = MapProviderFactory.getMapSource(mapSourceId);
                 Settings.setMapSource(mapSource);
                 preference.setSummary(mapSource.getName());
-            } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
-                // reset log-in status if connector activation was changed
+            } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorOCPLActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
+                // // reset log-in status if connector activation was changed
                 cgeoapplication.getInstance().checkLogin = true;
             } else if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in

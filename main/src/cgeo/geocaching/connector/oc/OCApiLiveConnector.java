@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -12,6 +11,7 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,18 +22,24 @@ import android.os.Handler;
 
 public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin {
 
-    private String cS;
+    private final String cS;
+    private final int isActivePrefKeyId;
+    private final int tokenPublicPrefKeyId;
+    private final int tokenSecretPrefKeyId;
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
 
-    public OCApiLiveConnector(String name, String host, String prefix, int cKResId, int cSResId, ApiSupport apiSupport) {
-        super(name, host, prefix, CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cKResId)), apiSupport);
+    public OCApiLiveConnector(String name, String host, String prefix, String licenseString, int cKResId, int cSResId, int isActivePrefKeyId, int tokenPublicPrefKeyId, int tokenSecretPrefKeyId, ApiSupport apiSupport) {
+        super(name, host, prefix, CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cKResId)), licenseString, apiSupport);
 
         cS = CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cSResId));
+        this.isActivePrefKeyId = isActivePrefKeyId;
+        this.tokenPublicPrefKeyId = tokenPublicPrefKeyId;
+        this.tokenSecretPrefKeyId = tokenSecretPrefKeyId;
     }
 
     @Override
     public boolean isActivated() {
-        return Settings.isOCConnectorActive();
+        return Settings.isOCConnectorActive(isActivePrefKeyId);
     }
 
     @Override
@@ -49,8 +55,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public OAuthLevel getSupportedAuthLevel() {
-        // TODO the tokens must be available connector specific
-        if (StringUtils.isNotBlank(Settings.getOCDETokenPublic()) && StringUtils.isNotBlank(Settings.getOCDETokenSecret())) {
+
+        if (Settings.hasOCAuthorization(tokenPublicPrefKeyId, tokenSecretPrefKeyId)) {
             return OAuthLevel.Level3;
         }
         return OAuthLevel.Level1;
@@ -59,6 +65,16 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     @Override
     public String getCS() {
         return CryptUtils.rot13(cS);
+    }
+
+    @Override
+    public int getTokenPublicPrefKeyId() {
+        return tokenPublicPrefKeyId;
+    }
+
+    @Override
+    public int getTokenSecretPrefKeyId() {
+        return tokenSecretPrefKeyId;
     }
 
     @Override
