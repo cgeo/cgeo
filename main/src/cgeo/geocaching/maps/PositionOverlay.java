@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -9,6 +8,7 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
+import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -37,10 +37,7 @@ public class PositionOverlay implements GeneralOverlay {
     private int heightArrowHalf = 0;
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
-    private Location historyRecent = null;
-    private ArrayList<Location> history = new ArrayList<Location>();
-    private Point historyPointN = new Point();
-    private Point historyPointP = new Point();
+    private PositionHistory positionHistory = new PositionHistory();
     private Activity activity;
     private MapItemFactory mapItemFactory = null;
     private OverlayImpl ovlImpl = null;
@@ -139,67 +136,40 @@ public class PositionOverlay implements GeneralOverlay {
         accuracyCircle.setStyle(Style.FILL);
         canvas.drawCircle(center.x, center.y, radius, accuracyCircle);
 
-        if (coordinates.getAccuracy() < 50f && ((historyRecent != null && historyRecent.distanceTo(coordinates) > 5.0) || historyRecent == null)) {
-            if (historyRecent != null) {
-                history.add(historyRecent);
-            }
-            historyRecent = coordinates;
-
-            int toRemove = history.size() - 700;
-
-            if (toRemove > 0) {
-                for (int cnt = 0; cnt < toRemove; cnt++) {
-                    history.remove(cnt);
-                }
-            }
-        }
+        positionHistory.rememberTrailPosition(coordinates);
 
         if (Settings.isMapTrail()) {
-            int size = history.size();
+            int size = positionHistory.getHistory().size();
             if (size > 1) {
                 int alphaCnt = size - 201;
                 if (alphaCnt < 1) {
                     alphaCnt = 1;
                 }
 
+                Point pointNow = new Point();
+                Point pointPrevious = new Point();
+                Location prev = positionHistory.getHistory().get(0);
+                projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), pointPrevious);
+
                 for (int cnt = 1; cnt < size; cnt++) {
-                    Location prev = history.get(cnt - 1);
-                    Location now = history.get(cnt);
+                    Location now = positionHistory.getHistory().get(cnt);
+                    projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), pointNow);
 
-                    if (prev != null && now != null) {
-                        projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
-                        projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
-
-                        int alpha;
-                        if ((alphaCnt - cnt) > 0) {
-                            alpha = 255 / (alphaCnt - cnt);
-                        }
-                        else {
-                            alpha = 255;
-                        }
-
-                        historyLineShadow.setAlpha(alpha);
-                        historyLine.setAlpha(alpha);
-
-                        canvas.drawLine(historyPointP.x, historyPointP.y, historyPointN.x, historyPointN.y, historyLineShadow);
-                        canvas.drawLine(historyPointP.x, historyPointP.y, historyPointN.x, historyPointN.y, historyLine);
+                    int alpha;
+                    if ((alphaCnt - cnt) > 0) {
+                        alpha = 255 / (alphaCnt - cnt);
                     }
-                }
-            }
+                    else {
+                        alpha = 255;
+                    }
 
-            if (size > 0) {
-                Location prev = history.get(size - 1);
-                Location now = coordinates;
+                    historyLineShadow.setAlpha(alpha);
+                    historyLine.setAlpha(alpha);
 
-                if (prev != null && now != null) {
-                    projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
-                    projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
+                    canvas.drawLine(pointPrevious.x, pointPrevious.y, pointNow.x, pointNow.y, historyLineShadow);
+                    canvas.drawLine(pointPrevious.x, pointPrevious.y, pointNow.x, pointNow.y, historyLine);
 
-                    historyLineShadow.setAlpha(255);
-                    historyLine.setAlpha(255);
-
-                    canvas.drawLine(historyPointP.x, historyPointP.y, historyPointN.x, historyPointN.y, historyLineShadow);
-                    canvas.drawLine(historyPointP.x, historyPointP.y, historyPointN.x, historyPointN.y, historyLine);
+                    pointPrevious.set(pointNow.x, pointNow.y);
                 }
             }
         }
@@ -230,10 +200,10 @@ public class PositionOverlay implements GeneralOverlay {
     }
 
     public ArrayList<Location> getHistory() {
-        return history;
+        return positionHistory.getHistory();
     }
 
-    public void setHistory(ArrayList<Location> inHistory) {
-        history = inHistory;
+    public void setHistory(ArrayList<Location> history) {
+        positionHistory.setHistory(history);
     }
 }
