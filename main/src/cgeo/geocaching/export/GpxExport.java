@@ -131,7 +131,7 @@ class GpxExport extends AbstractExport {
             BufferedWriter writer = null;
             try {
                 final File exportLocation = new File(Settings.getGpxExportDir());
-                exportLocation.mkdirs();
+                FileUtils.mkdirs(exportLocation);
 
                 writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), CharEncoding.UTF_8));
                 new GpxSerializer().writeGPX(allGeocodes, writer, new GpxSerializer.ProgressListener() {

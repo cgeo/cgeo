@@ -504,7 +504,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
             final SearchResult newSearch = cgData.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
-            if (newSearch != null && newSearch.getTotal() != search.getTotal()) {
+            if (newSearch.getTotal() != search.getTotal()) {
                 refreshCurrentList();
             }
         }

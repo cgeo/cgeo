@@ -111,4 +111,18 @@ public final class FileUtils {
         }
         return success;
     }
+
+    /**
+     * Creates the directory named by the given file, creating any missing parent directories in the process.
+     *
+     * @return <code>true</code> if the directory was created, <code>false</code> on failure or if the directory already
+     *         existed.
+     */
+    public static boolean mkdirs(File file) {
+        final boolean success = file.mkdirs();
+        if (!success) {
+            Log.e("Could not make directories " + file.getAbsolutePath());
+        }
+        return success;
+    }
 }

@@ -407,7 +407,7 @@ public class cgData {
         public SQLiteDatabase openOrCreateDatabase(String name, int mode,
                 CursorFactory factory) {
             final File file = new File(name);
-            file.getParentFile().mkdirs();
+            FileUtils.mkdirs(file.getParentFile());
             return SQLiteDatabase.openOrCreateDatabase(file, factory);
         }
 

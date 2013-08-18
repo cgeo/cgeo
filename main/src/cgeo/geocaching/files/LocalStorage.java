@@ -167,7 +167,7 @@ public final class LocalStorage {
 
     private static File buildFile(final File base, final String fileName, final boolean isUrl, final boolean createDirs) {
         if (createDirs) {
-            base.mkdirs();
+            FileUtils.mkdirs(base);
         }
         return new File(base, isUrl ? CryptUtils.md5(fileName) + getExtension(fileName) : fileName);
     }
@@ -287,7 +287,7 @@ public final class LocalStorage {
      * @return true if the copy happened without error, false otherwise
      */
     public static boolean copy(final File source, final File destination) {
-        destination.getParentFile().mkdirs();
+        FileUtils.mkdirs(destination.getParentFile());
 
         InputStream input = null;
         OutputStream output = null;
@@ -296,9 +296,10 @@ public final class LocalStorage {
             output = new BufferedOutputStream(new FileOutputStream(destination));
         } catch (FileNotFoundException e) {
             Log.e("LocalStorage.copy: could not open file", e);
+            return false;
+        } finally {
             IOUtils.closeQuietly(input);
             IOUtils.closeQuietly(output);
-            return false;
         }
 
         boolean copyDone = copy(input, output);

@@ -6,6 +6,7 @@ import butterknife.Views;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -328,8 +329,7 @@ public class ImageSelectActivity extends AbstractActivity {
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.w("Failed to create directory");
+            if (!FileUtils.mkdirs(mediaStorageDir)) {
                 return null;
             }
         }

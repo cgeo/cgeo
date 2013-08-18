@@ -1179,33 +1179,29 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                     searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
-                    if (searchResult != null) {
-                        downloaded = true;
-                        if (searchResult.getError() == StatusCode.NOT_LOGGED_IN && Settings.isGCConnectorActive()) {
-                            Login.login();
-                            tokens = null;
-                        } else {
-                            break;
-                        }
+                    downloaded = true;
+                    if (searchResult.getError() == StatusCode.NOT_LOGGED_IN && Settings.isGCConnectorActive()) {
+                        Login.login();
+                        tokens = null;
+                    } else {
+                        break;
                     }
                     count++;
 
                 } while (count < 2);
 
-                if (searchResult != null) {
-                    Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-                    CGeoMap.filter(result);
-                    // update the caches
-                    // first remove filtered out
-                    final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
-                    Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
-                    caches.removeAll(cgData.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
-                    cgData.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
-                    // new collection type needs to remove first to refresh
-                    caches.removeAll(result);
-                    caches.addAll(result);
-                    lastSearchResult = searchResult;
-                }
+                Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                CGeoMap.filter(result);
+                // update the caches
+                // first remove filtered out
+                final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
+                Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
+                caches.removeAll(cgData.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
+                cgData.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+                // new collection type needs to remove first to refresh
+                caches.removeAll(result);
+                caches.addAll(result);
+                lastSearchResult = searchResult;
 
                 //render
                 displayExecutor.execute(new DisplayRunnable(viewport));

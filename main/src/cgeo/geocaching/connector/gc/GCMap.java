@@ -340,7 +340,7 @@ public class GCMap {
                         Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
                     } else {
                         final SearchResult search = GCMap.parseMapJSON(data, tile, bitmap, strategy);
-                        if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
+                        if (CollectionUtils.isEmpty(search.getGeocodes())) {
                             Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
                         }
                         else {

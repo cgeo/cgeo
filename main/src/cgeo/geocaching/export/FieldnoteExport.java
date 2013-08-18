@@ -12,6 +12,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -151,7 +152,7 @@ class FieldnoteExport extends AbstractExport {
                 return false;
             }
 
-            exportLocation.mkdirs();
+            FileUtils.mkdirs(exportLocation);
 
             final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
             exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");

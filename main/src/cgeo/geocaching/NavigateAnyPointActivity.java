@@ -490,6 +490,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             return null;
         }
 
+        // get base coordinates
         Geopoint coords;
         if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
             try {
@@ -507,8 +508,8 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             coords = app.currentGeo().getCoords();
         }
 
-        Geopoint result;
-        if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+        // apply projection
+        if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
             double bearing;
             try {
@@ -527,23 +528,14 @@ public class NavigateAnyPointActivity extends AbstractActivity {
                 return null;
             }
 
-            final Geopoint coordsDst = coords.project(bearing, distance);
-
-            if (coordsDst == null) {
-                showToast(res.getString(R.string.err_point_location_error));
-                return null;
-            }
-
-            result = coordsDst;
-        } else if (coords != null) {
-            result = coords;
-        } else {
-            return null;
+            coords = coords.project(bearing, distance);
         }
 
-        saveCoords(result);
+        if (coords != null) {
+            saveCoords(coords);
+        }
 
-        return result;
+        return coords;
     }
 
     private void saveCoords(final Geopoint coords) {

@@ -246,9 +246,7 @@ final class OkapiClient {
                 while (keys.hasNext()) {
                     final String key = keys.next();
                     final Geocache cache = parseSmallCache(cachesResponse.getJSONObject(key));
-                    if (cache != null) {
-                        caches.add(cache);
-                    }
+                    caches.add(cache);
                 }
                 return caches;
             }
