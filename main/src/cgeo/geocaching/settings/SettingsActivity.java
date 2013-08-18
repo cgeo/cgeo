@@ -134,6 +134,7 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_fakekey_preference_backup_info, }) {
             bindSummaryToStringValue(k);
         }
+        getPreference(R.string.pref_units).setDefaultValue(Settings.getImperialUnitsDefault());
     }
 
     private void initNavigationMenuPreferences() {

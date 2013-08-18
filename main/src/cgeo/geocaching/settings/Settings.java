@@ -135,7 +135,7 @@ public final class Settings {
             e.putString(getKey(R.string.pref_memberstatus), old.getString(getKey(R.string.pref_memberstatus), ""));
             e.putInt(getKey(R.string.pref_coordinputformat), old.getInt(getKey(R.string.pref_coordinputformat), 0));
             e.putBoolean(getKey(R.string.pref_log_offline), old.getBoolean(getKey(R.string.pref_log_offline), false));
-            e.putBoolean(getKey(R.string.pref_choose_list), old.getBoolean(getKey(R.string.pref_choose_list), false));
+            e.putBoolean(getKey(R.string.pref_choose_list), old.getBoolean(getKey(R.string.pref_choose_list), true));
             e.putBoolean(getKey(R.string.pref_loaddirectionimg), old.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
             e.putString(getKey(R.string.pref_gccustomdate), old.getString(getKey(R.string.pref_gccustomdate), null));
             e.putInt(getKey(R.string.pref_showwaypointsthreshold), old.getInt(getKey(R.string.pref_showwaypointsthreshold), SHOW_WP_THRESHOLD_DEFAULT));
@@ -560,7 +560,21 @@ public final class Settings {
     }
 
     public static boolean isUseImperialUnits() {
-        return getBoolean(R.string.pref_units, false);
+        return getBoolean(R.string.pref_units, getImperialUnitsDefault());
+    }
+
+    static boolean getImperialUnitsDefault() {
+        final String countryCode = Locale.getDefault().getCountry();
+        if ("US".equals(countryCode)) {
+            return true; // USA
+        }
+        if ("LR".equals(countryCode)) {
+            return true; // Liberia
+        }
+        if ("MM".equals(countryCode)) {
+            return true; // Burma
+        }
+        return false;
     }
 
     public static boolean isLiveMap() {

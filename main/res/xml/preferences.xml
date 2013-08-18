@@ -331,7 +331,7 @@
             android:key="@string/pref_choose_list"
             android:title="@string/init_choose_list"
             android:summary="@string/init_summary_choose_list"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
 
     </PreferenceScreen>
 
