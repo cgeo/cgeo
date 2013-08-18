@@ -545,6 +545,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
                     if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
                         cache.setFound(true);
+                        cache.setVisitedDate(new Date().getTime());
                     }
 
                     cgData.saveChangedCache(cache);
