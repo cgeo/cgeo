@@ -7,6 +7,7 @@ import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -82,7 +83,7 @@ public final class StaticMapsProvider {
             // Delete image if it has no contents
             final long fileSize = file.length();
             if (fileSize < MIN_MAP_IMAGE_BYTES) {
-                file.delete();
+                FileUtils.deleteIgnoringFailure(file);
             }
         }
     }
@@ -229,10 +230,9 @@ public final class StaticMapsProvider {
         int waypointId = waypoint.getId();
         int waypointMapHash = waypoint.getStaticMapsHashcode();
         for (int level = 1; level <= MAPS_LEVEL_MAX; level++) {
-            try {
-                StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + '_' + level, false).delete();
-            } catch (Exception e) {
-                Log.e("StaticMapsProvider.removeWpStaticMaps", e);
+            final File mapFile = StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + '_' + level, false);
+            if (!FileUtils.delete(mapFile)) {
+                Log.e("StaticMapsProvider.removeWpStaticMaps failed for " + mapFile.getAbsolutePath());
             }
         }
     }

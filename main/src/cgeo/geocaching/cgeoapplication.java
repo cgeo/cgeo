@@ -25,7 +25,11 @@ public class cgeoapplication extends Application {
     private static cgeoapplication instance;
 
     public cgeoapplication() {
-        instance = this;
+        setInstance(this);
+    }
+
+    private static void setInstance(final cgeoapplication application) {
+        instance = application;
     }
 
     public static cgeoapplication getInstance() {

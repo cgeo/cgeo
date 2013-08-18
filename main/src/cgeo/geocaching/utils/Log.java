@@ -8,26 +8,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-final public class Log {
+public final class Log {
 
     private static final String TAG = "cgeo";
 
     /**
-     * the debug flag is cached here so that we don't need to access the settings every time we have to evaluate it
+     * The debug flag is cached here so that we don't need to access the settings every time we have to evaluate it.
      */
     private static boolean isDebug = true;
     private static boolean first = true;
+
+    private Log() {
+        // utility class
+    }
 
     public static boolean isDebug() {
         return isDebug;
     }
 
     /**
-     * save a copy of the debug flag from the settings for performance reasons
-     * 
+     * Save a copy of the debug flag from the settings for performance reasons.
+     *
      * @param isDebug
      */
-    public static void setDebug(boolean isDebug) {
+    public static void setDebug(final boolean isDebug) {
         Log.isDebug = isDebug;
     }
 
@@ -95,11 +99,11 @@ final public class Log {
      *
      * @param msg the message to log, or to add to the log if other messages have been stored in the same run
      */
-    public synchronized static void logToFile(final String msg) {
+    public static synchronized void logToFile(final String msg) {
         final File file = new File(Environment.getExternalStorageDirectory(), "cgeo-debug.log");
         if (first) {
             first = false;
-            file.delete();
+            FileUtils.delete(file);
         }
         Writer writer = null;
         try {

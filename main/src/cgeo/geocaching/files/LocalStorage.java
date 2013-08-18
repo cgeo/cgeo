@@ -2,6 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -32,7 +33,7 @@ import java.util.List;
  * Handle local storage issues on phone and SD card.
  *
  */
-public class LocalStorage {
+public final class LocalStorage {
 
     public static final String HEADER_LAST_MODIFIED = "last-modified";
     public static final String HEADER_ETAG = "etag";
@@ -41,6 +42,10 @@ public class LocalStorage {
     public final static String cache = ".cgeo";
 
     private static File internalStorageBase;
+
+    private LocalStorage() {
+        // utility class
+    }
 
     /**
      * Return the primary storage cache root (external media if mounted, phone otherwise).
@@ -197,7 +202,7 @@ public class LocalStorage {
         final Header header = response != null ? response.getFirstHeader(name) : null;
         final File file = filenameForHeader(baseFile, name);
         if (header == null) {
-            file.delete();
+            FileUtils.deleteIgnoringFailure(file);
         } else {
             saveToFile(new ByteArrayInputStream(header.getValue().getBytes()), file);
         }
@@ -259,15 +264,15 @@ public class LocalStorage {
                 final boolean written = copy(inputStream, fos);
                 fos.close();
                 if (!written) {
-                    targetFile.delete();
+                    FileUtils.deleteIgnoringFailure(targetFile);
                 }
                 return written;
             } finally {
-                inputStream.close();
+                IOUtils.closeQuietly(inputStream);
             }
         } catch (IOException e) {
             Log.e("LocalStorage.saveToFile", e);
-            targetFile.delete();
+            FileUtils.deleteIgnoringFailure(targetFile);
         }
         return false;
     }
@@ -341,12 +346,12 @@ public class LocalStorage {
                 if (file.isDirectory()) {
                     deleteDirectory(file);
                 } else {
-                    file.delete();
+                    FileUtils.delete(file);
                 }
             }
         }
 
-        return path.delete();
+        return FileUtils.delete(path);
     }
 
     /**
@@ -364,7 +369,7 @@ public class LocalStorage {
         }
         for (final File file : filesToDelete) {
             try {
-                if (!file.delete()) {
+                if (!FileUtils.delete(file)) {
                     Log.w("LocalStorage.deleteFilesPrefix: Can't delete file " + file.getName());
                 }
             } catch (Exception e) {

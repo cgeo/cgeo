@@ -6,6 +6,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -146,9 +147,13 @@ public class HtmlImage implements Html.ImageGetter {
      */
     private static void makeFreshCopy(final File file) {
         final File tempFile = new File(file.getParentFile(), file.getName() + "-temp");
-        file.renameTo(tempFile);
-        LocalStorage.copy(tempFile, file);
-        tempFile.delete();
+        if (file.renameTo(tempFile)) {
+            LocalStorage.copy(tempFile, file);
+            FileUtils.deleteIgnoringFailure(tempFile);
+        }
+        else {
+            Log.e("Could not reset timestamp of file " + file.getAbsolutePath());
+        }
     }
 
     private Bitmap getTransparent1x1Image() {

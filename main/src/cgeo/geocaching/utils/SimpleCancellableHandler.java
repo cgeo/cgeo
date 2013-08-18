@@ -20,7 +20,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
     }
 
     @Override
-    public void handleRegularMessage(final Message msg) {
+    protected void handleRegularMessage(final Message msg) {
         AbstractActivity activity = activityRef.get();
         if (activity != null && msg.getData() != null && msg.getData().getString(MESSAGE_TEXT) != null) {
             activity.showToast(msg.getData().getString(MESSAGE_TEXT));
@@ -30,7 +30,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
     }
 
     @Override
-    public void handleCancel(final Object extra) {
+    protected void handleCancel(final Object extra) {
         AbstractActivity activity = activityRef.get();
         if (activity != null) {
             activity.showToast((String) extra);
@@ -38,7 +38,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
         dismissProgress();
     }
 
-    public final void showToast(int resId) {
+    protected final void showToast(int resId) {
         AbstractActivity activity = activityRef.get();
         if (activity != null) {
             Resources res = activity.getResources();
@@ -46,7 +46,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
         }
     }
 
-    public final void dismissProgress() {
+    protected final void dismissProgress() {
         Progress progressDialog = progressDialogRef.get();
         if (progressDialog != null) {
             progressDialog.dismiss();

@@ -151,9 +151,9 @@ class GpxExport extends AbstractExport {
                         // Ignore double error
                     }
                 }
-                // delete partial gpx file on error
+                // delete partial GPX file on error
                 if (exportFile.exists()) {
-                    exportFile.delete();
+                    FileUtils.deleteIgnoringFailure(exportFile);
                 }
 
                 return null;

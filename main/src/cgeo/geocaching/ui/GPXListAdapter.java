@@ -5,6 +5,7 @@ import butterknife.InjectView;
 import cgeo.geocaching.GpxFileListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -80,7 +81,7 @@ public class GPXListAdapter extends ArrayAdapter<File> {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                file.delete();
+                                FileUtils.deleteIgnoringFailure(file);
                                 GPXListAdapter.this.remove(file);
                             }
                         })

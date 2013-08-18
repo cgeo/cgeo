@@ -764,7 +764,7 @@ public abstract class GCParser {
 
     public static SearchResult searchByNextPage(final SearchResult search, boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (search == null) {
-            return search;
+            return null;
         }
         final String[] viewstates = search.getViewstates();
 

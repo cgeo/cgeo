@@ -14,6 +14,7 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -351,7 +352,9 @@ public class cgData {
             return false;
         }
 
-        source.delete();
+        if (!FileUtils.delete(source)) {
+            Log.e("Original database could not be deleted during move");
+        }
         Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
         Log.i("Database was moved to " + target);
         init();
@@ -773,7 +776,7 @@ public class cgData {
                 final File[] wrongFiles = dir.listFiles(filter);
                 if (wrongFiles != null) {
                     for (final File wrongFile : wrongFiles) {
-                        wrongFile.delete();
+                        FileUtils.deleteIgnoringFailure(wrongFile);
                     }
                 }
             }
@@ -823,7 +826,7 @@ public class cgData {
         for (final File file : LocalStorage.getStorageSec().listFiles()) {
             if (file.isDirectory()) {
                 // This will silently fail if the directory is not empty.
-                file.delete();
+                FileUtils.deleteIgnoringFailure(file);
             }
         }
     }

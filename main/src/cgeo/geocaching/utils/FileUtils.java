@@ -89,4 +89,26 @@ public final class FileUtils {
     private static String getNumberedFileName(String pathName, String extension, int number) {
         return pathName + (number > 1 ? "_" + Integer.toString(number) : "") + "." + extension;
     }
+
+    /**
+     * This usage of this method indicates that the return value of File.delete() can safely be ignored.
+     */
+    public static void deleteIgnoringFailure(final File file) {
+        if (!file.delete()) {
+            Log.i("Could not delete " + file.getAbsolutePath());
+        }
+    }
+
+    /**
+     * Deletes a file and logs deletion failures.
+     *
+     * @return <code> true</code> if this file was deleted, <code>false</code> otherwise.
+     */
+    public static boolean delete(final File file) {
+        final boolean success = file.delete();
+        if (!success) {
+            Log.e("Could not delete " + file.getAbsolutePath());
+        }
+        return success;
+    }
 }
