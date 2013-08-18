@@ -176,7 +176,6 @@
     <string name="err_point_curr_position_unavailable">c:geo heeft de huidige coördinaten nog niet. Even geduld a.u.b….</string>
     <string name="err_point_bear_and_dist_title">Hulp nodig?</string>
     <string name="err_point_bear_and_dist">Vul zowel richting als afstand. Richting is hoek van 0 to 360 graden t.o.v. het noorden. Afstand mag met of zonder eenheid.</string>
-    <string name="err_point_location_error">Sorry, c:geo kan locatie van de waypoint niet ophalen.</string>
     <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
     <string name="err_log_load_data_again">Sorry, c:geo kan data om bezoek te loggen niet laden. Bezig nogmaals te proberen.</string>
     <string name="err_log_load_data_still">c:geo is nog steeds bezig om data te laden om bezoek te loggen. Graag nog even geduld.</string>

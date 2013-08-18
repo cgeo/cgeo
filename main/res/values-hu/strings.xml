@@ -170,7 +170,6 @@
     <string name="err_point_curr_position_unavailable">A c:geo továbbra sem ismeri a jelenlegi koordinátákat. Kérlek várj egy ideig.</string>
     <string name="err_point_bear_and_dist_title">Segítségre van szükséged?</string>
     <string name="err_point_bear_and_dist">Tölsd ki az irányt és a távolságot is. Az irány az északkal bezárt szög 0 és 360 fok között. A távolság mértékegységgel és mértékegység nélkül is állhat.</string>
-    <string name="err_point_location_error">Sajnáljuk, a c:geo nem tudja megszerezni az útpont helyzetét.</string>
     <string name="err_log_load_data">Sajnáljuk, a c:geo nem tudja betölteni az adatokat amik a megtalálás bejelentéséhez szükségesek.</string>
     <string name="err_log_load_data_again">Sajnáljuk, a c:geo nem tudja betölteni az adatokat amik a megtalálás bejelentéséhez szükségesek. Újrapróbálkozás.</string>
     <string name="err_log_load_data_still">A c:geo még tölti az adatokat amik a megtalálás bejelentéséhez szükségesek. Kérlek várj egy kicsit tovább.</string>

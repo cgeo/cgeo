@@ -174,7 +174,6 @@
   <string name="err_point_curr_position_unavailable">O c:geo ainda não possui as coordenadas actuais. Por favor, aguarde um instante…</string>
   <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
   <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao norte. A distância pode ser introduzida com ou sem unidades.</string>
-  <string name="err_point_location_error">O c:geo não conseguiu obter a localização do ponto de referência.</string>
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>

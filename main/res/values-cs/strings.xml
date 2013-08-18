@@ -186,7 +186,6 @@
     <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuální souřadnice. Prosím, chvilku počkej…</string>
     <string name="err_point_bear_and_dist_title">Potřebuješ poradit?</string>
     <string name="err_point_bear_and_dist">Vyplň směr i vzdálenost. Směr je úhel 0 až 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
-    <string name="err_point_location_error">c:geo nemůže získat polohu tvého bodu trasy.</string>
     <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
     <string name="err_log_load_data_again">c:geo nemůže načíst data požadovaná k zalogování návštěvy. Zkouší to znovu.</string>
     <string name="err_log_load_data_still">c:geo stále načítá data požadovaná k odeslání Logu. Prosím, počkej ještě chvíli.</string>

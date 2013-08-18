@@ -196,7 +196,6 @@
     <string name="err_point_curr_position_unavailable">c:geo še vedno nima trenutnih koordinat. Prosimo počakajte…</string>
     <string name="err_point_bear_and_dist_title">Potrebujete pomoč?</string>
     <string name="err_point_bear_and_dist">Vnesite smer in razdaljo. Smer je kot med 0 in 360 stopinjami od severa. Razdalja je lahko z ali brez enot.</string>
-    <string name="err_point_location_error">c:geo ne more dobiti lokacije točke.</string>
     <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>
     <string name="err_log_load_data_again">c:geo ne more naložiti podatkov za zapis obiska. Ponovni poskus…</string>
     <string name="err_log_load_data_still">c:geo še vedno nalaga podatke za zapis obiska. Prosimo počakajte še trenutek.</string>

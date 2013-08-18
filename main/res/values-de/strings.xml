@@ -196,7 +196,6 @@
     <string name="err_point_curr_position_unavailable">c:geo hat noch keine aktuelle Koordinaten. Bitte einen Moment warten…</string>
     <string name="err_point_bear_and_dist_title">Hilfe benötigt?</string>
     <string name="err_point_bear_and_dist">Angaben zu Richtung und Entfernung sind notwendig. Richtung: 0 bis 360 Grad</string>
-    <string name="err_point_location_error">c:geo konnte den Ort des Wegpunkts nicht erkennen.</string>
     <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
     <string name="err_log_load_data_again">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen. Bitte erneut versuchen.</string>
     <string name="err_log_load_data_still">c:geo lädt gerade die benötigten Daten. Bitte kurz warten.</string>

@@ -190,7 +190,6 @@
     <string name="err_point_curr_position_unavailable">c:geo nadal nie zna aktualnych współrzędnych. Proszę chwilę poczekać…</string>
     <string name="err_point_bear_and_dist_title">Potrzebujesz pomocy?</string>
     <string name="err_point_bear_and_dist">Wypełnij zarówno namiar i odległość. Biorąc kąt od 0 do 360 stopni w stosunku do północy. Odległość z lub bez jednostki.</string>
-    <string name="err_point_location_error">c:geo nie może otrzymać lokalizacji punktu nawigacyjnego.</string>
     <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
     <string name="err_log_load_data_again">c:geo nie może załadować danych wymaganych do wpisania wizyty. Próbuję ponownie.</string>
     <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
