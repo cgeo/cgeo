@@ -54,7 +54,7 @@ public abstract class GPXParser extends FileParser {
     /**
      * Attention: case sensitive geocode pattern to avoid matching normal words in the name or description of the cache.
      */
-    private static final Pattern PATTERN_GEOCODE = Pattern.compile("([A-Z][0-9A-Z]+)");
+    private static final Pattern PATTERN_GEOCODE = Pattern.compile("([0-9A-Z]{2,})");
     private static final Pattern PATTERN_GUID = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile(".*" + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
     /**

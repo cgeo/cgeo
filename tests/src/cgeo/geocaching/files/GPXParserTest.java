@@ -295,6 +295,14 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheSize.UNKNOWN, waymark.getSize());
     }
 
+    /**
+     * This one uses geocodes where the first character is actually a digit, not a character
+     */
+    public void testGCTour() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.gctour_gpx);
+        assertEquals(54, caches.size());
+    }
+
     public void testOX() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.ox1ry0y_gpx);
         assertEquals(1, caches.size());
