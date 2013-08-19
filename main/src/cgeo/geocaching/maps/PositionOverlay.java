@@ -139,7 +139,11 @@ public class PositionOverlay implements GeneralOverlay {
         positionHistory.rememberTrailPosition(coordinates);
 
         if (Settings.isMapTrail()) {
-            int size = positionHistory.getHistory().size();
+            // always add current position to drawn history to have a closed connection
+            final ArrayList<Location> paintHistory = new ArrayList<Location>(positionHistory.getHistory());
+            paintHistory.add(coordinates);
+
+            int size = paintHistory.size();
             if (size > 1) {
                 int alphaCnt = size - 201;
                 if (alphaCnt < 1) {
@@ -148,11 +152,11 @@ public class PositionOverlay implements GeneralOverlay {
 
                 Point pointNow = new Point();
                 Point pointPrevious = new Point();
-                Location prev = positionHistory.getHistory().get(0);
+                Location prev = paintHistory.get(0);
                 projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), pointPrevious);
 
                 for (int cnt = 1; cnt < size; cnt++) {
-                    Location now = positionHistory.getHistory().get(cnt);
+                    Location now = paintHistory.get(cnt);
                     projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), pointNow);
 
                     int alpha;
