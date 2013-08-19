@@ -94,7 +94,8 @@ public final class FileUtils {
      * This usage of this method indicates that the return value of File.delete() can safely be ignored.
      */
     public static void deleteIgnoringFailure(final File file) {
-        if (!file.delete()) {
+        final boolean success = file.delete() || !file.exists();
+        if (!success) {
             Log.i("Could not delete " + file.getAbsolutePath());
         }
     }
@@ -105,7 +106,7 @@ public final class FileUtils {
      * @return <code> true</code> if this file was deleted, <code>false</code> otherwise.
      */
     public static boolean delete(final File file) {
-        final boolean success = file.delete();
+        final boolean success = file.delete() || !file.exists();
         if (!success) {
             Log.e("Could not delete " + file.getAbsolutePath());
         }
