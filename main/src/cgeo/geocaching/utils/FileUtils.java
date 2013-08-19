@@ -119,7 +119,7 @@ public final class FileUtils {
      *         existed.
      */
     public static boolean mkdirs(File file) {
-        final boolean success = file.mkdirs();
+        final boolean success = file.mkdirs() || file.isDirectory(); // mkdirs returns false on existing directories
         if (!success) {
             Log.e("Could not make directories " + file.getAbsolutePath());
         }
