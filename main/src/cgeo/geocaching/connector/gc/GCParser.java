@@ -1433,16 +1433,19 @@ public abstract class GCParser {
         }
 
         // released date - can be missing on the page
-        try {
-            final String releaseString = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null);
-            if (releaseString != null) {
+        final String releaseString = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null);
+        if (releaseString != null) {
+            try {
                 trackable.setReleased(dateTbIn1.parse(releaseString));
+            } catch (ParseException e) {
                 if (trackable.getReleased() == null) {
-                    trackable.setReleased(dateTbIn2.parse(releaseString));
+                    try {
+                        trackable.setReleased(dateTbIn2.parse(releaseString));
+                    } catch (ParseException e1) {
+                        Log.e("Could not parse trackable release " + releaseString);
+                    }
                 }
             }
-        } catch (final ParseException e1) {
-            trackable.setReleased(null);
         }
 
         // trackable distance
