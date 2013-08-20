@@ -63,5 +63,9 @@
     · List sorting kept when returning from cache details\n
     · Corrected list sorting if cache name contains numbers\n
     · Set the default \"waypoint shown on live map\" limit to 10 as many users did not recognize this feature\n
+    · Fixed GPX import problem if geocode starts with numbers\n
+    · Fixed missing information in listing if mobile network uses a performance proxy\n
+    · Avoid jumping trail on live map if there is no GPS fix\n
+    · Workaround for fluctuating distances (android bug) with some Android 4.2.1 devices\n
   </string>
 </resources>
