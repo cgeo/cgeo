@@ -19,19 +19,20 @@ import android.widget.TextView;
 
 @EActivity
 public class AboutActivity extends AbstractActivity {
+
     @ViewById(R.id.about_version_string) protected TextView version;
     @ViewById(R.id.contributors) protected TextView contributors;
     @ViewById(R.id.changelog_master) protected TextView changeLogMaster;
-
     @ViewById(R.id.changelog_release) protected TextView changeLogRelease;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         // TODO remove this after the theme has been fixed
         super.onCreate(savedInstanceState, R.layout.about_activity);
     }
 
     @AfterViews
-    void initializeViews() {
+    final void initializeViews() {
         version.setText(Version.getVersionName(this));
         contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
         changeLogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
@@ -44,45 +45,50 @@ public class AboutActivity extends AbstractActivity {
     }
 
     @Click(R.id.donate)
-    public void donate() {
+    final void donate() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FMLNN8GXZKJEE")));
     }
 
     @Click(R.id.support)
-    public void support() {
+    final void support() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:support@cgeo.org")));
     }
 
-
     @Click(R.id.website)
-    void webSite() {
+    final void webSite() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cgeo.org/")));
     }
 
     @Click(R.id.facebook)
-    public void facebook() {
+    final void facebook() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/pages/cgeo/297269860090")));
     }
 
     @Click(R.id.twitter)
-    public void twitter() {
+    final void twitter() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/android_gc")));
     }
 
     @Click(R.id.nutshellmanual)
-    public void nutshellmanual() {
+    final void nutshellmanual() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://manual.cgeo.org/")));
     }
 
     @Click(R.id.market)
-    public void market() {
+    final void market() {
         final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName()));
         marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         startActivity(marketIntent);
     }
 
     @Click(R.id.license)
-    public void license() {
+    final void license() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.apache.org/licenses/LICENSE-2.0.html")));
     }
+
+    @Click(R.id.faq)
+    final void faq() {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://faq.cgeo.org/")));
+    }
+
 }

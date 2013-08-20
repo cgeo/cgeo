@@ -1139,7 +1139,8 @@
     <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
     <string name="market">Android: <a href="">c:geo on Google Play</a></string>
     <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
-
+    <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
+    
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">New release available.\nClick to install.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">New nightly build available.\nClick to install.</string>
