@@ -4,13 +4,11 @@
 // @description Add button "Send to c:geo" to opencaching.de
 // @include http://www.opencaching.de/viewcache.php*
 // @icon http://send2.cgeo.org/content/images/logo.png
-// @version 0.1
+// @version 0.2
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button. The closure
-// look strange, but avoids having to escape the code. Almost everything
-// is put into that script element so that geocaching.com's jQuery may be
-// accessed.
+// look strange, but avoids having to escape the code.
 
 var s = document.createElement('script');
 s.type = 'text/javascript';
@@ -59,7 +57,7 @@ document.getElementsByTagName("head")[0].appendChild(s);
 	document.getElementsByTagName("body")[0].appendChild(b);
 	
   // Append to send2cgeo links/buttons /////////////////////////////////////////
-  var oc = document.getElementById('SendToGPS').parentNode.parentNode;
+  var oc = document.getElementsByClassName('exportbutton')[0].parentNode.parentNode;
 
   if(oc !== null) {
     
@@ -70,9 +68,9 @@ document.getElementsByTagName("head")[0].appendChild(s);
 			 + '<a class="send-to-gps" '
              + 'href="#" '
              + 'onclick="s2cgeo(\''+occode+'\'); return false;" >'
-             + '<input id="SendToGPS" type="button" value="An c:geo senden"'
+             + '<input class="exportbutton" type="button" value="An c:geo senden"'
 			 + 'name="SendToCgeo" /></a> '
-             + '<br><br>';
+             + '</p>';
 
-	oc.innerHTML = oc.innerHTML.replace('<br><br>', html);
+	oc.innerHTML = oc.innerHTML.replace('</p>', html);
   };
