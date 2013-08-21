@@ -96,7 +96,7 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".AboutActivity_"
+            android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/about"
             android:windowSoftInputMode="stateHidden" >

@@ -40,7 +40,7 @@
     <string name="settings_facebook_login_url" translatable="false">http://faq.cgeo.org/#1_38</string>
 
     <!-- contributors -->
-    <string name="contributors" translatable="false">\n
+    <string name="contributors" translatable="false">
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
     · 0xErnie (localization DE)\n

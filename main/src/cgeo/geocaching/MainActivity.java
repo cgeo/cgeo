@@ -736,7 +736,7 @@ public class MainActivity extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void showAbout(final View view) {
-        AboutActivity_.intent(this).start();
+        startActivity(new Intent(this, AboutActivity.class));
     }
 
     /**
