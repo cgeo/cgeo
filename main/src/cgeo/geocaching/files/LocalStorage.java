@@ -296,10 +296,9 @@ public final class LocalStorage {
             output = new BufferedOutputStream(new FileOutputStream(destination));
         } catch (FileNotFoundException e) {
             Log.e("LocalStorage.copy: could not open file", e);
-            return false;
-        } finally {
             IOUtils.closeQuietly(input);
             IOUtils.closeQuietly(output);
+            return false;
         }
 
         boolean copyDone = copy(input, output);
