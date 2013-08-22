@@ -238,7 +238,7 @@ public abstract class GCParser {
             cache.setPremiumMembersOnly(row.contains("/images/icons/16/premium_only.png"));
 
             // found it
-            cache.setFound(row.contains("/images/icons/16/found.png"));
+            cache.setFound(row.contains("/images/icons/16/found.png") || row.contains("uxUserLogDate\" class=\"Success\""));
 
             // id
             String result = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_ID, null);
