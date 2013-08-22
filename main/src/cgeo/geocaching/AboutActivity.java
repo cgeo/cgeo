@@ -127,7 +127,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     enum Page {
         VERSION(R.string.about_version),
         HELP(R.string.about_help),
-        CHANGELOG(R.string.about_changes),
+        CHANGELOG(R.string.about_changelog),
         CONTRIBUTORS(R.string.about_contributors),
         LICENSE(R.string.about_license);
 

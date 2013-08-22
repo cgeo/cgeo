@@ -356,7 +356,6 @@
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
     <string name="about_donate">寄付</string>
-    <string name="about_detail">詳細</string>
     <string name="about_donation_more">開発に\n寄付する</string>
     <string name="about_contributors">貢献者</string>
 
