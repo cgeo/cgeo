@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,16 +31,20 @@ public class MapProviderFactory {
 
     public static boolean isGoogleMapsInstalled() {
         // Check if API key is available
-        boolean googleMaps = StringUtils.isNotBlank(cgeoapplication.getInstance().getString(R.string.maps_api_key));
+        if (StringUtils.isBlank(cgeoapplication.getInstance().getString(R.string.maps_api_key))) {
+            Log.w("No Google API key available.");
+            return false;
+        }
 
         // Check if API is available
         try {
             Class.forName("com.google.android.maps.MapActivity");
         } catch (ClassNotFoundException e) {
-            googleMaps = false;
+            return false;
         }
 
-        return googleMaps;
+        // Assume that Google Maps is available and working
+        return true;
     }
 
     public static List<MapSource> getMapSources() {
