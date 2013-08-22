@@ -131,15 +131,15 @@ public abstract class GCParser {
 
                 while (matcherGuidAndDisabled.find()) {
                     if (matcherGuidAndDisabled.groupCount() > 0) {
-                        cache.setGuid(matcherGuidAndDisabled.group(1));
-                        if (matcherGuidAndDisabled.group(4) != null) {
-                            cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(4).trim()).toString());
+                        //cache.setGuid(matcherGuidAndDisabled.group(1));
+                        if (matcherGuidAndDisabled.group(2) != null) {
+                            cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(2).trim()).toString());
                         }
-                        if (matcherGuidAndDisabled.group(6) != null) {
-                            cache.setLocation(Html.fromHtml(matcherGuidAndDisabled.group(6).trim()).toString());
+                        if (matcherGuidAndDisabled.group(3) != null) {
+                            cache.setLocation(Html.fromHtml(matcherGuidAndDisabled.group(3).trim()).toString());
                         }
 
-                        final String attr = matcherGuidAndDisabled.group(2);
+                        final String attr = matcherGuidAndDisabled.group(1);
                         if (attr != null) {
                             cache.setDisabled(attr.contains("Strike"));
 
