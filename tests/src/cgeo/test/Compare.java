@@ -7,6 +7,9 @@ import static junit.framework.Assert.assertTrue;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.utils.CryptUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class Compare {
 
@@ -31,7 +34,7 @@ public abstract class Compare {
             assertTrue(actual.isReliableLatLon());
             assertEquals(expected.isOwner(), actual.isOwner());
             assertEquals(expected.getOwnerUserId(), actual.getOwnerUserId());
-            assertEquals(expected.getHint(), actual.getHint());
+            assertTrue(StringUtils.equals(expected.getHint(), actual.getHint()) || StringUtils.equals(expected.getHint(), CryptUtils.rot13(actual.getHint())));
             assertTrue(actual.getDescription().startsWith(expected.getDescription()));
             assertEquals(expected.getShortDescription(), actual.getShortDescription());
             assertEquals(expected.getCacheId(), actual.getCacheId());
