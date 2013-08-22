@@ -68,9 +68,9 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         final Geocache cache = parseCache(R.raw.own_cache);
         assertNotNull(cache);
         assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
-        assertEquals(1, cache.getSpoilers().size());
-        final Image spoiler = cache.getSpoilers().get(0);
-        assertEquals("http://img.geocaching.com/cache/large/3f9365c3-f55c-4e55-9992-ee0e5175712c.jpg", spoiler.getUrl());
+        assertEquals(2, cache.getSpoilers().size());
+        final Image spoiler = cache.getSpoilers().get(1);
+        assertEquals("http://img.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg", spoiler.getUrl());
         assertEquals("SPOILER", spoiler.getTitle());
         assertNull(spoiler.getDescription());
     }
