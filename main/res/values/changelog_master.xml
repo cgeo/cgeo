@@ -29,8 +29,10 @@
     · Field note export \"since last export\" now uses the last export date from c:geo instead of the gc.com feature\n
     · Show event date in search results\n
     · Added filter for several distance ranges\n
+    · Added a tab viewer for \"About c:geo\"\n
     \n
     <b>Bugfixes:</b>\n
+    · Adaption to changes on gc.com\n
     · Improved filtering of found caches on live map\n
     · Do not truncate the date in logbook entries\n
     · Enable GPX import option also on virtual all caches list\n
