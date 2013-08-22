@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.Version;
 
+import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -196,7 +197,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     private String getRawResourceString(final int resourceId) {
         final InputStream ins = res.openRawResource(resourceId);
-        final String result = new Scanner(ins).useDelimiter("\\A").next();
+        final String result = new Scanner(ins, CharEncoding.UTF_8).useDelimiter("\\A").next();
         try {
             ins.close();
         } catch (IOException e) {
