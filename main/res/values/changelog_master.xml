@@ -30,6 +30,7 @@
     · Show event date in search results\n
     · Added filter for several distance ranges\n
     · Added a tab viewer for \"About c:geo\"\n
+    · Enabled fast scrolling for cache lists\n
     \n
     <b>Bugfixes:</b>\n
     · Adaption to changes on gc.com\n
