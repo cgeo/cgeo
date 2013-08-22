@@ -291,24 +291,25 @@ public final class LocalStorage {
 
         InputStream input = null;
         OutputStream output = null;
+        boolean copyDone = false;
+
         try {
             input = new BufferedInputStream(new FileInputStream(source));
             output = new BufferedOutputStream(new FileOutputStream(destination));
-        } catch (FileNotFoundException e) {
-            Log.e("LocalStorage.copy: could not open file", e);
-            IOUtils.closeQuietly(input);
-            IOUtils.closeQuietly(output);
-            return false;
-        }
-
-        boolean copyDone = copy(input, output);
-
-        try {
+            copyDone = copy(input, output);
+            // close here already to catch any issue with closing
             input.close();
             output.close();
-        } catch (IOException e) {
-            Log.e("LocalStorage.copy: could not close file", e);
+        } catch (FileNotFoundException e) {
+            Log.e("LocalStorage.copy: could not copy file", e);
             return false;
+        } catch (IOException e) {
+            Log.e("LocalStorage.copy: could not copy file", e);
+            return false;
+        } finally {
+            // close here quietly to clean up in all situations
+            IOUtils.closeQuietly(input);
+            IOUtils.closeQuietly(output);
         }
 
         return copyDone;
