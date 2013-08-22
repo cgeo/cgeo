@@ -39,6 +39,7 @@
         android:cacheColorHint="?background_color"
         android:dividerHeight="1dip"
         android:padding="0dip"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:fastScrollEnabled="true" />
 
 </LinearLayout>
