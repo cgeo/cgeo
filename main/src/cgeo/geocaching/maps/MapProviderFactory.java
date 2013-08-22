@@ -1,11 +1,14 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.settings.Settings;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.view.Menu;
 import android.view.SubMenu;
@@ -26,12 +29,16 @@ public class MapProviderFactory {
     }
 
     public static boolean isGoogleMapsInstalled() {
-        boolean googleMaps = true;
+        // Check if API key is available
+        boolean googleMaps = StringUtils.isNotBlank(cgeoapplication.getInstance().getString(R.string.maps_api_key));
+
+        // Check if API is available
         try {
             Class.forName("com.google.android.maps.MapActivity");
         } catch (ClassNotFoundException e) {
             googleMaps = false;
         }
+
         return googleMaps;
     }
 
