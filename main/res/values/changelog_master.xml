@@ -6,7 +6,7 @@
     <b>New Features:</b>\n
     · Talking compass (select \"Start talking\" while compass is active)\n
     · New menu structure for c:geo settings\n
-    · Implemenation of OKAPI interface for opencaching.de\n
+    · Implementation of OKAPI interface for opencaching.de\n
       Support of live map, nearby search and online logging\n
     · Support uploading and merging of personal note to gc.com\n
     · Improved input method for editing personal note\n
@@ -60,9 +60,9 @@
     · Show the image uploaded with a log in the logbook without the need to refresh the cache before\n
     · Improvements to GPX import and export\n
     · Ask for list to save caches when importing GPX\n
-    · Show basic Geokrety information for OC-caches\n
+    · Show basic Geokrety information for OC caches\n
     · Improved the map source selection for offline maps\n
-    · Avoid crashes when using the QR-code scanner\n
+    · Avoid crashes when using the QR code scanner\n
     · List sorting kept when returning from cache details\n
     · Corrected list sorting if cache name contains numbers\n
     · Set the default \"waypoint shown on live map\" limit to 10 as many users did not recognize this feature\n
