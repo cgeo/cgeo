@@ -362,7 +362,6 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjälp</string>
-    <string name="about_changes">Förändringar</string>
     
     <!-- settings -->
     <string name="settings_title_services">Tjänster</string>
