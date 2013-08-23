@@ -427,14 +427,14 @@
     <string name="init_signature_template_owner">Uporabniško ime lastnika zaklada</string>
     <string name="init_ratingwanted">GCvote ocene</string>
     <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
-    <string name="init_friendlogswanted">Naloži vpise prijateljev</string>
+    <string name="init_friendlogswanted">Naloži zapise prijateljev</string>
     <string name="init_summary_friendlogswanted">Naloži tudi posebno stran zapisov mojih prijateljev</string>
     <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
     <string name="init_summary_openlastdetailspage">Pri podrobnostih zaklada vedno odpri zadnjo uporabljeno stran</string>
     <string name="init_autoload">Prikaži celoten opis</string>
     <string name="init_summary_autoload">Vedno naloži celoten opis zaklada</string>
-    <string name="init_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>
-    <string name="init_summary_skin">Svetli izgled</string>
+    <string name="init_skin">Svetli izgled</string>
+    <string name="init_summary_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>
     <string name="init_address">Pokaži naslov</string>
     <string name="init_summary_address">Na glavnem zaslonu pokaži naslov namesto koordinat</string>
     <string name="init_captcha">Pokaži CAPTCHA</string>
@@ -443,17 +443,17 @@
     <string name="init_summary_useenglish">Uporabi angleški jezik za c:geo (potrebuje ponovni zagon)</string>
     <string name="init_exclude">Ne pokaži najdenih ali mojih zakladov</string>
     <string name="init_summary_exclude">Ne pokaži mojih ali najdenih zakladov v iskanjih ali na zemljevidu</string>
-    <string name="init_showwaypoints">Pokaži dodatne točke na zemljevidu</string>
+    <string name="init_showwaypoints">Dodatne točke na zemljevidu</string>
     <string name="init_showwaypoint_description">Če je manj kot določeno število zakladov na zemljevidu, se pokažejo tudi dodatne točke.</string>
     <string name="init_disabled">Ne pokaži onemogočenih zakladov v iskanjih ali na zemljevidu</string>
     <string name="init_summary_disabled">Ne pokaži onemogočenih zakladov</string>
-    <string name="init_offline">Za delo brez povezave shrani tudi statične zemljevide zaklada</string>
-    <string name="init_summary_offline">Statični zemljevidi zaklada</string>
+    <string name="init_offline">Statični zemljevidi zaklada</string>
+    <string name="init_summary_offline">Za delo brez povezave shrani tudi statične zemljevide zaklada</string>
     <string name="init_offline_wp">Statični zemljevidi dodatnih točk</string>
     <string name="init_summary_offline_wp">Za delo brez povezave shrani tudi statične zemljevide dodatnih točk</string>
     <string name="init_save_log_img">Slike iz zapisov</string>
     <string name="init_summary_save_log_img">Za delo brez povezave shrani tudi slike iz zapisov</string>
-    <string name="init_units">Uporabi anglosaške merske enote</string>
+    <string name="init_units">Anglosaške merske enote</string>
     <string name="init_summary_units">Uporabi anglosaške merske enote namesto metričnih</string>
     <string name="init_log_offline">Zapisovanje brez povezave</string>
     <string name="init_summary_log_offline">Vklopi način brez povezave pri zapisih\n(Ne pošlji zapisa na strežnik)</string>
@@ -462,10 +462,10 @@
     <string name="init_livelist">Pokaži smeri</string>
     <string name="init_summary_livelist">Pokaži tudi smeri do zakladov v seznamih</string>
     <string name="init_backup">Varnostna kopija</string>
-    <string name="init_backup_backup">Varnostna kopija</string>
+    <string name="init_backup_backup">Ustvari varnostno kopijo</string>
     <string name="init_backup_running">Ustvarjanje varnostne kopije baze…</string>
     <string name="init_backup_note">Ta možnost bo ustvarila varnostno kopijo samo zakladov in dodatnih točk, ne pa tudi nastavitev aplikacije.\nVaši gesla ali prijavni podatki ne bodo zapustili te aplikacije.</string>
-    <string name="init_backup_restore">Obnovi</string>
+    <string name="init_backup_restore">Obnovi iz varnostne kopije</string>
     <string name="init_backup_success">Varnostna kopija je bila uspešno ustvarjena.</string>
     <string name="init_backup_failed">Varnostne kopije ni bilo mogoče ustvariti.</string>
     <string name="init_backup_unnecessary">Baza je prazna. Varnostna kopija ni potrebna.</string>
@@ -475,11 +475,11 @@
     <string name="init_restore_confirm">Baza podatkov je prazna, ali ji želite obnoviti iz varnostne kopije?</string>
     <string name="init_backup_last">Varnostna kopija je na voljo iz</string>
     <string name="init_backup_last_no">Varnostna kopija ne obstaja.</string>
-    <string name="settings_info_offline_maps_title">Informacije o zemljevidih brez povezave</string>
+    <string name="settings_info_offline_maps_title">Zemljevidi brez povezave</string>
     <string name="settings_info_offline_maps">c:geo omogoča prikaz zemljevidov brez povezave. Zemljevide lahko naložite iz spletne strani Mapsforge ali celo ustvarite svoje zemljevide iz podatkov Open Street Maps.</string>
-    <string name="settings_info_themes_title">Informacije o temah zemljevidov</string>
+    <string name="settings_info_themes_title">Teme zemljevidov</string>
     <string name="settings_info_themes">c:geo omogoča prikaz različnih tem zemljevidov brez povezave. Teme so uporabljene za spremembo barvnih shem (npr. temni nočni zemljevid) ali za poudarek objektov, kot na primer kolesarske poti ali plastnice na zemljevidu.</string>
-    <string name="init_mapsource_select">Izberi datoteko z zemljevidi</string>
+    <string name="init_mapsource_select">Izberi vir zemljevidov</string>
     <string name="init_map_directory_description">Mapa z zemljevidi</string>
     <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
     <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
@@ -499,7 +499,7 @@
     <string name="init_navigation_menu_description">Tukaj lahko izberete, katera navigacijska orodja bodo na voljo v navigacijskem meniju za zaklade ali dodatne točke. Onemogočena navigacijska orodja niso nameščena na vaši napravi.</string>
     <string name="init_debug_title">Informacije za razhroščevanje</string>
     <string name="init_debug_note">c:geo lahko generira veliko informacij za razhroščevanje, ki sicer niso uporabne za zakladolovce, pridejo pa prav razvijalcem aplikacije c:geo, ki s pomočjo teh informacij lažje najdejo napako in jo odpravijo. V primeru napake vas lahko prosijo za te informacije, ki jih pridobite če vklopite to možnost.</string>
-    <string name="init_debug">Ustvari poročilo za razhroščevanje</string>
+    <string name="init_debug">Poročilo za razhroščevanje</string>
     <string name="init_dbonsdcard_title">Lokacija podatkovne baze</string>
     <string name="init_dbonsdcard_note">Podatkovno bazo aplikacije c:geo lahko shranite tudi na zunanji pomnilniški medij. S tem načinom lahko sprostite veliko internega pomnilnika, vendar lahko zaradi tega c:geo deluje počasneje, če pa SD kartice ne bo na voljo pa c:geo sploh ne bo deloval.</string>
     <string name="init_dbonsdcard">Baza na zunanjem pomnilniku</string>
@@ -511,7 +511,7 @@
     <string name="init_summary_plain_logs">Ne pokaži barv pri zapisih</string>
     <string name="init_use_native_ua">Android brskalnik</string>
     <string name="init_summary_use_native_ua">c:geo naj se strežniku predstavi kot Android brskalnik. Ta možnost reši problem prijave pri nekaterih ponudnikih omrežja.</string>
-    <string name="init_rendertheme_folder">Mapa s temami zemljevidov (neobvezno)</string>
+    <string name="init_rendertheme_folder">Mapa s temami zemljevidov</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Cestni zemljevid</string>
